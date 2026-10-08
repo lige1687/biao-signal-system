@@ -1,0 +1,73 @@
+{
+  "task_id": "classic-factor-research/native-storage-preflight",
+  "mode": "bounded_engineering",
+  "created_at": "2026-10-08T18:40:20.826508+08:00",
+  "contract_sha256": "84456082cdab4f41c7a019d5b53380ea92704708968da9f3d979b88debff2ebd",
+  "checked_coordination_sha": "1a9188ec53942fb32f044f413acd526c10713df7",
+  "scope_registration_commit": "f51aeae67d1a5ea2a32a4223f7c41b2a7e481266",
+  "branch": "codex/native-storage-preflight-20261008",
+  "base_commit": "dbd86bccf9ffe9ea9617a484bf8b96825880fb7d",
+  "sources_before": {
+    "scripts/run_factor_lab.py": {
+      "bytes": 4889,
+      "sha256": "eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52"
+    },
+    "src/lei_signal/research/workflow.py": {
+      "bytes": 120321,
+      "sha256": "967d92adc77a18c42f16fda27c80eb5a136eadd72e4918515302003216a43cb6"
+    },
+    "src/lei_signal/research/question_contract.py": {
+      "bytes": 70696,
+      "sha256": "ed4a44fbb3fbf6c7b986bd2fb9261f98f15cf33b604f04b84e7ceb4e2fffcb97"
+    },
+    "configs/storage-policy.v1.json": {
+      "bytes": 546,
+      "sha256": "dbdcc8af8bd5f1d6be7ce5262e10d21177a4c4faae97d4a4d2aeda900877d4dd"
+    }
+  },
+  "strategy_sources_sha256": [
+    "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  ],
+  "workspace_preparation": {
+    "tracked_checkout_files": 21919,
+    "apparent_du": "1.9GiB",
+    "free_bytes_current": 5324976128,
+    "failure": "Full worktree checkout included historical tracked files instead of selecting narrow sparse paths. Apparent size is not allocated/free-space difference. Preserved, no cleanup or further full checkout."
+  },
+  "out_of_scope_write_failures": [
+    {
+      "path": "/tmp/lei-strategy-read-primary.txt",
+      "bytes": 65786,
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "reason": "Readonly strategy inspection command unnecessarily redirected content outside repository; violates repository-only write boundary. No upload; preserve pending explicit cleanup authorization."
+    },
+    {
+      "path": "/tmp/lei-strategy-read-implementation.txt",
+      "bytes": 36427,
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "reason": "Readonly strategy inspection command unnecessarily redirected content outside repository; violates repository-only write boundary. No upload; preserve pending explicit cleanup authorization."
+    }
+  ],
+  "executor": {
+    "requested_model": "gpt-6.1-sol",
+    "requested_reasoning_effort": "high",
+    "agent": "/root/storage_preflight_impl",
+    "actual_cost": "unknown"
+  },
+  "budget": {
+    "market_runs": 0,
+    "new_data_requests": 0,
+    "fits": 0,
+    "real_labels": 0,
+    "sealed_reruns": 0,
+    "paid_actions": 0,
+    "dependency_installs": 0
+  },
+  "limitations": [
+    "Preflight is admission check only, not runtime disk quota or protection against later unmount/free-space race",
+    "Old storage_guard four defects remain unaddressed",
+    "Old eight fingerprint failures remain unchanged",
+    "Real D–MAE research still blocked on originals/qualification/stage authorization"
+  ]
+}

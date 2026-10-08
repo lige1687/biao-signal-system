@@ -44,7 +44,18 @@ def _review_workflow_contract(path: str) -> int:
     return 0
 
 
-def main() -> int:
+def _storage_checker():
+    # Load the stdlib-only gate directly, before importing even lei_signal.
+    import importlib.util
+
+    path = Path(__file__).resolve().parents[1] / "src/lei_signal/research/storage_preflight.py"
+    spec = importlib.util.spec_from_file_location("_lei_storage_preflight", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.check_storage_plan
+
+
+def main(argv=None, *, root=None, storage_checker=None, workflow_executor=None) -> int:
     parser = argparse.ArgumentParser(description="factor_lab synthetic protocol runner")
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--protocol", help="不可变合成协议 JSON 路径")
@@ -63,7 +74,12 @@ def main() -> int:
     )
     parser.add_argument("--out", help="执行模式必填的输出目录（必须不存在）；声明审查禁止使用")
     parser.add_argument("--reuse-predictions", help="同预测依赖的已验收输出；只重汇总，不拟合")
-    args = parser.parse_args()
+    parser.add_argument(
+        "--storage-plan", help="显式绑定本次写入路径、设备身份与预计增长的 JSON 计划"
+    )
+    args = parser.parse_args(argv)
+    if args.storage_plan is not None and not (args.workflow_draft or args.workflow_contract):
+        parser.error("--storage-plan only supports --workflow-draft and --workflow-contract")
     if args.review_workflow_contract is not None:
         if args.out is not None or args.register_report or args.reuse_predictions is not None:
             parser.error(
@@ -77,6 +93,29 @@ def main() -> int:
             sys.dont_write_bytecode = previous
     if args.out is None:
         parser.error("execution modes require --out")
+    if args.workflow_draft and (args.register_report or args.reuse_predictions):
+        parser.error("draft mode does not publish or reuse final predictions")
+    if args.storage_plan is not None:
+        # Keep bytecode disabled through subsequent project imports/execution.
+        # Refusal returns here, outside the workflow failure-artifact chain.
+        sys.dont_write_bytecode = True
+        try:
+            checker = storage_checker or _storage_checker()
+            checker(
+                args.storage_plan,
+                mode="workflow-draft" if args.workflow_draft else "workflow-contract",
+                input_path=args.workflow_draft or args.workflow_contract,
+                output_dir=args.out,
+                register_report=args.register_report,
+                reuse_predictions=args.reuse_predictions,
+                root=Path(__file__).resolve().parents[1] if root is None else root,
+            )
+        except (OSError, ValueError, TypeError, KeyError) as exc:
+            print(f"storage preflight rejected: {exc}", file=sys.stderr)
+            return 3
+    # Test-only Python callback; there is deliberately no CLI import/execute hook.
+    if workflow_executor is not None and (args.workflow_draft or args.workflow_contract):
+        return workflow_executor(args)
     if args.attribution_protocol:
         if args.register_report or args.reuse_predictions:
             parser.error(

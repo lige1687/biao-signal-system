@@ -1,0 +1,108 @@
+{
+  "schema_version": "native-storage-preflight-acceptance/1.0",
+  "updated_at": "2026-10-08T18:55:59.370628+08:00",
+  "state": "engineering_checks_passed_with_two_legacy_cases_unverified; controller_review_pending",
+  "checked_coordination_sha": "7f871d54ef8c6b929bdbb30f9908e0681d168829",
+  "read_task_ids": [
+    "classic-factor-research",
+    "research-dispatch-controller",
+    "daily-trading-system-audit",
+    "theory-workflow-system-increment"
+  ],
+  "conflict_decision": "No same-file active writer found; CLI owner retains four declared source/test paths; daily resource modules and theory remain untouched. Record is not a lock.",
+  "branch": "codex/native-storage-preflight-20261008",
+  "base_commit": "dbd86bccf9ffe9ea9617a484bf8b96825880fb7d",
+  "code_sha256": {
+    "scripts/run_factor_lab.py": "36f8022ecfc51ae97f95b56e4a9494a43fb4142143cdb1304c272c19fa25a4f9",
+    "src/lei_signal/research/storage_preflight.py": "73ef39f8b28ef4b6202e0c4731dbf25746faeecd83617747deaa1f43730313d8",
+    "tests/unit/test_research_storage_preflight.py": "3890ccce292974e65fb29866eed2a36e193275a9e854bb605fe1c7abb311e59e",
+    "tests/integration/test_research_storage_preflight_cli.py": "6237fced3e3a8a90b9b907eff048f17adf01df40d25d04a6e238bb2cbc59648d"
+  },
+  "protected_sha256_after": {
+    "src/lei_signal/research/workflow.py": "967d92adc77a18c42f16fda27c80eb5a136eadd72e4918515302003216a43cb6",
+    "src/lei_signal/research/question_contract.py": "ed4a44fbb3fbf6c7b986bd2fb9261f98f15cf33b604f04b84e7ceb4e2fffcb97"
+  },
+  "checks": [
+    {
+      "name": "new_synthetic_tests_final",
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3.11 -m pytest -q -p no:cacheprovider --basetemp=docs/experiments/raw/native-research-storage-preflight-2026-10-08/pytest-root-verification tests/unit/test_research_storage_preflight.py tests/integration/test_research_storage_preflight_cli.py",
+      "exit_code": 0,
+      "result": "41 passed in 0.40s",
+      "evidence": "tests-final.log"
+    },
+    {
+      "name": "root_independent_checks",
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 docs/experiments/raw/native-research-storage-preflight-2026-10-08/independent-check.py",
+      "exit_code": 0,
+      "result": "6 checks passed",
+      "evidence": "independent-check-output.json"
+    },
+    {
+      "name": "legacy_readonly_review_combined",
+      "exit_code": 1,
+      "result": "84 passed, 2 failed in 0.47s; 41 new tests + 43 old passed; 2 old fail before CLI on missing fixture",
+      "evidence": "initial-failures.txt",
+      "unverified": [
+        "test_fresh_process_dynamic_validator_import_is_readonly[False]",
+        "test_fresh_process_dynamic_validator_import_is_readonly[True]"
+      ]
+    },
+    {
+      "name": "ruff_final",
+      "exit_code": 0,
+      "evidence": "style-final.log"
+    },
+    {
+      "name": "current_project_hygiene_rule",
+      "exit_code": 0,
+      "evidence": "hygiene-current-rules.log",
+      "rule_source_sha256": "a661696b29d685c25388441975be6316d33342c3bcc24040cff5c58a377634bb",
+      "source_delivery": "only local; loaded from original workspace read-only, REPO set to isolated worktree; no rule edit"
+    },
+    {
+      "name": "baseline_hygiene",
+      "exit_code": 1,
+      "result": "old rule rejects .git worktree pointer",
+      "evidence": "initial-failures.txt"
+    }
+  ],
+  "missing_dependencies": [
+    {
+      "path": "docs/experiments/raw/session-composition-information-2026-10-04/draft-main.json",
+      "exists_in_base": false,
+      "local_bytes": 19216,
+      "local_sha256": "e7e288da8827f57c85fe063b34ce547b45c604be27dcd19a19819c9d4f825aa1",
+      "delivery": "not copied or uploaded; outside scope"
+    },
+    {
+      "path": "src/lei_signal/research/session_composition_information.py",
+      "exists_in_base": false,
+      "delivery": "not copied; outside scope"
+    },
+    {
+      "path": "configs/storage-policy.v1.json",
+      "exists_in_base": false,
+      "verified_remote_source": "4830bdb8ed11f439d999bf2460d6c044abd00b92",
+      "sha256": "dbdcc8af8bd5f1d6be7ce5262e10d21177a4c4faae97d4a4d2aeda900877d4dd",
+      "delivery": "not included in this scope; external mode requires qualified integration"
+    }
+  ],
+  "budget": {
+    "market_runs": 0,
+    "new_data_requests": 0,
+    "fits": 0,
+    "real_labels": 0,
+    "sealed_reruns": 0,
+    "paid_actions": 0,
+    "dependency_installs": 0,
+    "actual_model_cost": "unknown"
+  },
+  "business_increment": "Reduces preventable write failures before opted-in execution; factor effect and financial return not measured.",
+  "running_work": "Implementation agent returned; no scientific jobs launched. Other repository tasks not terminated.",
+  "limitations": [
+    "Admission snapshot only, not runtime quota or race-proof",
+    "Only opted-in draft/contract modes; legacy unprotected",
+    "External real execution and new-machine/other-OS recovery unverified",
+    "Old cloud storage_guard defects and eight original fingerprint failures remain unchanged"
+  ]
+}

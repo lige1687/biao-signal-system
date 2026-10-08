@@ -1,0 +1,78 @@
+Initial test-first failures, preserved from actual tool output; no scientific run.
+
+Command:
+PYTHONDONTWRITEBYTECODE=1 python3.11 -m pytest -q -p no:cacheprovider tests/integration/test_research_storage_preflight_cli.py
+Tool chunk: 63e993. Exit code: 1. Result: 7 failed in 0.17s.
+The tool displayed a truncated 2044-token output (244 tokens omitted); this file
+preserves the failure reasons and summary available in the displayed output,
+not an invented complete log. No rerun was performed just for logging.
+
+test_refusal_subprocess_has_no_project_import_or_write:
+AssertionError: usage: run_factor_lab.py [-h] ...
+run_factor_lab.py: error: unrecognized arguments: --storage-plan .../plan.json
+assert 2 == 3
+
+test_preflight_precedes_injected_execution:
+TypeError: main() got an unexpected keyword argument 'root'
+
+test_legacy_workflow_without_plan_uses_execution_only:
+TypeError from missing injection seam in existing main (middle output truncated).
+
+test_unsupported_mode_rejects_plan_without_checking[--protocol]:
+TypeError: main() got an unexpected keyword argument 'storage_checker'
+test_unsupported_mode_rejects_plan_without_checking[--benchmark-protocol]:
+TypeError: main() got an unexpected keyword argument 'storage_checker'
+test_unsupported_mode_rejects_plan_without_checking[--attribution-protocol]:
+TypeError: main() got an unexpected keyword argument 'storage_checker'
+test_unsupported_mode_rejects_plan_without_checking[--review-workflow-contract]:
+TypeError: main() got an unexpected keyword argument 'storage_checker'
+
+Second initial command:
+PYTHONDONTWRITEBYTECODE=1 python3.11 -m pytest -q -p no:cacheprovider --basetemp=docs/experiments/raw/native-research-storage-preflight-2026-10-08/pytest-first tests/unit/test_research_storage_preflight.py
+Tool chunk: ca489e. Exit code: 2. Result: 1 error during collection in 0.17s.
+ImportError: cannot import name 'storage_preflight' from 'lei_signal.research'
+The readonly preflight module did not yet exist. This was a feature-absence
+collection error, distinguished from the earlier CLI assertion failures.
+
+First style check (after 41 behavioral tests passed):
+PYTHONDONTWRITEBYTECODE=1 python3.11 -m ruff check --no-cache scripts/run_factor_lab.py src/lei_signal/research/storage_preflight.py tests/unit/test_research_storage_preflight.py tests/integration/test_research_storage_preflight_cli.py
+Tool chunk: 861795. Exit code: 1. Found 37 style errors (2 import ordering,
+35 long lines). Displayed output was truncated from 5446 tokens (3246 tokens
+omitted). Formatter plus import-order fixer applied only to the four authorized
+code/test files. Subsequent style check passed (chunk d5367a).
+
+Legacy worktree hygiene check:
+PYTHONDONTWRITEBYTECODE=1 python3.11 scripts/check_repo_hygiene.py
+Tool chunk: d5367a. Exit code: 1.
+归置自检发现 1 处违规：
+[仓库根层] 多出文件: .git
+The managed worktree already contained this regular Git pointer file before
+implementation. The legacy checker at the isolated baseline rejected it; the
+checker was not modified and the file was not deleted. Controller will verify
+with the current canonical checker which already permits managed-worktree .git.
+
+Final related readonly regression command:
+PYTHONDONTWRITEBYTECODE=1 python3.11 -m pytest -q -p no:cacheprovider --basetemp=docs/experiments/raw/native-research-storage-preflight-2026-10-08/pytest-final tests/unit/test_research_storage_preflight.py tests/integration/test_research_storage_preflight_cli.py tests/integration/test_workflow_declaration_review_cli.py
+Tool chunk: 071df5. Pytest exit code: 1 (the later Ruff/diff commands returned 0,
+so the shell result's final exit 0 is not the pytest result).
+2 failed, 84 passed in 0.47s. All 41 new storage tests passed.
+The two failures were existing readonly-review cases before any CLI invocation:
+test_fresh_process_dynamic_validator_import_is_readonly[False]
+test_fresh_process_dynamic_validator_import_is_readonly[True]
+Both failed at tests/integration/test_workflow_declaration_review_cli.py:371:
+c = json.loads(DYNAMIC_FIXTURE.read_text(encoding="utf-8"))
+FileNotFoundError: [Errno 2] No such file or directory:
+/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/native-storage-preflight-20261008/docs/experiments/raw/session-composition-information-2026-10-04/draft-main.json
+The isolated baseline does not contain that research fixture. No original
+scientific experiment ran, no fixture was copied, and no tests were skipped or
+modified to hide the missing input. These two regression cases remain unverified.
+
+Final Ruff: All checks passed. Final git diff --check: no output/errors.
+
+Initial pre-constraint test temp root was outside the worktree:
+/private/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-136/
+The two concrete directories visible in the original tool output were
+test_refusal_subprocess_has_no0 and test_preflight_precedes_inject0.
+No cleanup/deletion of these paths was performed. Subsequent runs used unique
+task-owned basetemp directories pytest-first, pytest-pass1, pytest-pass2,
+pytest-pass3, pytest-final underneath this receipt's raw directory.

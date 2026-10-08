@@ -1,0 +1,75 @@
+{
+  "task_id": "classic-factor-research/native-storage-preflight",
+  "mission": "为现有研究CLI增加显式写入前路径、卷身份和累计预计空间检查；拒绝时不产生研究文件，保留旧调用兼容性。",
+  "authorization": "2026-10-07原八目标第8项及2026-10-08主Goal持续推进授权；仅工程保护，不增加科学运行许可。",
+  "owner": "01a0e6d5-4bcf-7bd3-82e4-4961c963d20e",
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "high",
+    "reason": "同卷预算累加、复用合同第二账本、拒绝零写入等涉及跨路径失效风险；独立模块与CLI最小接入。"
+  },
+  "read_only_paths": [
+    "AGENTS.md",
+    "docs/research",
+    "src/lei_signal/research",
+    "configs",
+    "docs/ops/work-progress/storage-management.md",
+    "docs/ops/codex-storage-management.md",
+    "tests"
+  ],
+  "write_paths": [
+    "scripts/run_factor_lab.py",
+    "src/lei_signal/research/storage_preflight.py",
+    "tests/unit/test_research_storage_preflight.py",
+    "tests/integration/test_research_storage_preflight_cli.py",
+    "docs/ops/work-progress/native-research-storage-preflight-2026-10-08.md",
+    "docs/experiments/raw/native-research-storage-preflight-2026-10-08/"
+  ],
+  "task_scope": [
+    "先核最新协调原CLI ownership及策略必读；唯一作者原CLI owner。隔离分支保留主脏区，与daily存储发现/音频实现无重叠。",
+    "新增显式--storage-plan，首期仅--workflow-draft/--workflow-contract及其reuse-predictions/register-report；其他三个模式带此参数明确拒绝，旧不带参数调用保持。root未来新派workflow须提供计划。",
+    "计划绑定mode、准确输入路径和SHA、绝对out、register布尔与reuse旧合同指纹。独立推导全部写入角色，不能由调用者省略当前family账本、reuse原family账本、报告及registry。",
+    "所有预计增长按同一device加总并保留明确reserve。禁止缺预算默认为0、按max_rows猜字节、套音频告警阈值作研究预算。",
+    "真实目录、绝对路径、最近现有祖先、盘身份及容量只读核验；拒绝symlink/specialfile/未知卷、已存在out及缺失外盘；不可回退/Volumes或根盘。外盘身份可只读使用storage-policy identity并用stdlib diskutil核验。",
+    "在研究模块导入及mkdir/lock/a+/ledger/registry等写入前完成拒绝。禁pyc须先于研究导入；审阅合同模式仍严格只读，不增加存储设备依赖。失败不得进入旧workflow异常写回链。",
+    "通过才调用原研究逻辑；不修改workflow.py/预算/冻结协议/定义/老8项失败，不接入或修复旧cloud storage_guard四缺陷。说明预检不能担保后续瞬间磁盘耗尽/拔盘/脱离进程。",
+    "只用新合成计划及注入执行器/子进程验证，不跑原真实或封存合成实验。当前CLI已lazy import，不重复实现旧文档所说缺口。"
+  ],
+  "expected_outputs": [
+    "最小代码与精确源清单、实际失败和测试回执",
+    "拒绝场景零研究写入、通过场景先检查后执行及旧CLI兼容证据",
+    "已核独立codex分支完整提交、逐文件远端读回及边界说明"
+  ],
+  "acceptance": [
+    "低容量/缺盘/错误UUID/未知卷/路径符号链接或特殊文件/输入或参数绑定不符均拒绝且无研究导入、回调、目录账本注册写入。",
+    "同盘多个角色单独均够但合计不够应拒绝；两盘其一不够应拒绝；reuse异family需两份账本保护；register报告与registry不能遗漏。",
+    "子进程不预设PYTHONDONTWRITEBYTECODE也不生成项目pyc；review-contract既有只读性质保留。",
+    "通过场景由新合成合同和注入执行器验证调用顺序；不触发拟合/标签/下载；目录归置及准确diff验收。"
+  ],
+  "source_baseline_sha256": {
+    "scripts/run_factor_lab.py": "eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52",
+    "src/lei_signal/research/workflow.py": "967d92adc77a18c42f16fda27c80eb5a136eadd72e4918515302003216a43cb6",
+    "src/lei_signal/research/question_contract.py": "ed4a44fbb3fbf6c7b986bd2fb9261f98f15cf33b604f04b84e7ceb4e2fffcb97",
+    "configs/storage-policy.v1.json": "dbdcc8af8bd5f1d6be7ce5262e10d21177a4c4faae97d4a4d2aeda900877d4dd"
+  },
+  "network_allowed": true,
+  "network_scope": "仅既有Git同步，无新来源取数或安装",
+  "budget": {
+    "market_runs": 0,
+    "new_data_requests": 0,
+    "fits": 0,
+    "labels": 0,
+    "sealed_reruns": 0,
+    "paid_actions": 0
+  },
+  "stop_conditions": [
+    "必要定义/身份信息缺失如实拒绝，不猜原件",
+    "磁盘不够先记录，不删文件",
+    "不交易/部署/强推/改仓外或daily owner文件"
+  ],
+  "controller_review": {
+    "required": true,
+    "independent_refusal_checks": true
+  },
+  "created_at": "2026-10-08T18:33:05.084534+08:00"
+}
