@@ -157,3 +157,10 @@
 - status: active；checked_coordination_sha: 3cd71ec066078435107b0ef20cf09d04a4f9da6b；checked_at: 2026-10-08T23:49:02.601647+08:00；已读COORDINATION1.1、自身、中控原八目标限缩、video v12独立媒体范围，保留他人源/环境，无重叠。
 - 用户当次可以继续检查哈；沿用闲置可恢复对象继续迁移及外盘保留授权，不扩大到用户资料/活动资源。五准确目标：~/.tabnine/4.4.321、4.4.322、4.5.28（三旧版本；.active实际4.10.0、新版保留，无相关进程/句柄）；~/Library/Application Support/Caches/quark-cloud-drive-updater/pending、adrive-desktop-updater/pending（两普通ZIP和各update-info，实际sha512匹配，应用bundle ID在/Applications/~/Applications与mdfind均无，无句柄）。只软件包，无源码/DB/用户唯一记录。
 - 准确源inode绑定，外盘第十批独立ZIP/完整SHA模式元数据/源稳定/无句柄后移除本机。当前Tabnine/.active及其他cache/config留。峰值按两份未压缩+元数据预算且外盘10GiB余量，停止错盘/源改变。新私有回执/自身进度/本记录唯一写者，0科研/新工具安装/运行进程更改。
+
+## 五准确程序包迁移验收 2026-10-08T23:52:44.100925+08:00
+- status: completed（本轮增量检查与迁移）；checked_coordination_sha: dcd8248b28f437f1f38ea9964b60c62b09f378a1；checked_at: 2026-10-08T23:52:44.100925+08:00；已读自身、中控范围限缩与video v12最新交付，不碰媒体或其他源码，无范围重叠。
+- 第十批235006，5 ZIP/18普通原文件内容SHA、模式与元数据、源稳定、无句柄、UUID和容量通过后移除5本机原inode，0失败/跳过。Tabnine .active=4.10.0及新版inode每阶段核一致，其他cache/config不动。实测净增430686208B约410.7MiB；恢复ZIP/SHA清单保留外盘，不假称当前free全部因本轮变化。checker9/9，Python控制器另直接独立审阅，零内置命令识别不当作删除动作覆盖。
+- 旧两更新包实际SHA512匹配，常用应用目录及Spotlight未发现owner，不声称全机器绝对卸载。泛查mubu metadata缺失已停止并排除，没删未知目录。其他新大目录Weapp组件/包、Foxit插件/语言/更新服务、Paradox现存launcher、CodeStream/浏览器/代理运行环境原位保留，无独有工作/运行环境清理。
+- 实际成果8a08c6dbcc972d66ab78f5c01e19f21e2bbffac9只自身进度单路径正常push/fetch逐字核。私有原件/指纹/恢复说明/storage-final在外盘，未Git。归置通过，0科学/实验改动、安装、通知恢复、应用停止、共享index/HEAD/main操作。
+- 当前内盤8344338432B约7.77GiB，外盘639331336192B且身份正确/4登记资源available。剩余是活动/唯一状态或退休用途未确认内容，不能按名义容量清。无必需后台清理、待移除原件或未核恢复包；后续候选需新证据/准确授权，不无限删除。
