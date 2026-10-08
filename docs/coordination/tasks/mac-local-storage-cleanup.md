@@ -201,3 +201,11 @@
 - status: active；checked_coordination_sha: 4539f3419845d39ab0e726bdf8bea8df06008263；已读自身、中控、video final-archive-start，无路径重叠，本任务唯一写者。用户答“继续迁移哈”，按已说明退出微信后迁移步骤执行正常退出，未强杀。WeChat进程已不在，旧目录lsof退出1且stdout/stderr均空。
 - 第十一批旧失败回执/log保留第二次-占用失败前缀，items=0且无ZIP，完整源不动后启动新复制。复用准确scope f9f4d246e7e3dad0d95cf681b56e8ce27dc95a6812740332d6733445a0e1cc89，完整归档约13万文件；课程仓库和祖先、新聊天DB保护，精确783非代码单元移除器已独立审阅。逐文件核验及fresh源稳定通过后才移除，不使用旧失败phase。
 - 外盘固定UUID/容量通过，内盘704204800B，外盘639006932992B；外盘近期反复断开，运行错误保留源，不回退内盘。0科研/媒体生成/其他进程停止。
+
+
+## 完整TAR已核，进入精确移除 2026-10-09T02:19:34.505545+08:00
+- status: active；checked_coordination_sha: 73786e7c49b470594494b7e6521e75448aa74775；已读自身、中控、video workflow-review-done，无微信源/外盘回执重叠，root唯一写者。
+- 用户继续授权后正常退出微信，无进程/句柄。45秒lsof超时失败保留，延长为180秒仍要求扫描完整且输出/错误全空；没有跳过句柄检查。第四次ditto ZIP四处Interrupted system call，结束返回1且归档无有效ZIP尾目录；0源移除，完整失败临时ZIP/原scope/代码/回执均保留。
+- 改系统pax TAR，scope只将目标格式更新，783精确移除单位和课程仓库/祖先/当前新资料inode边界不变。scope SHA57e28c957c192d6489fea7627a2e9ba0dd302947d179113003ba5168a200f9f7；新归档执行器8950d34bbc7738c007d5df3ad12641d5884b8a0a9426339773d3ccf21d6fb24e；移除器0ad53387ca75aef0aac2f3589dcb6fb65b3ac73f393df293bac905ef691606be。直接全语义审阅并重绑定审核hash，原件保护未弱化。真实小夹具解包内容/中文名/模式/xattrs/内部硬链接inode通过。
+- 第五次131488文件/136066条目完整读回，内容/type/mode/硬链接目标原inode及内容一致；136058 AppleDouble说明条目有效，源二次完整指纹一致、无句柄/外盘UUID再核通过。正式TAR23171741696B，SHA094eedc2d7d9655e7b2382012d618a4cc6520b1b04d44fe0a1bb98d4a6d54e54，迁移记录items1/failures0/state VERIFIED_COPY。恢复说明改为新空内盘目录解包且不覆盖新DB/课程代码，私人资料不Git。
+- 下一步精确移除器再次核归档与全源后，逐单元fresh SHA/原inode和已授权移除nlink计数，失败停并保留/恢复holding；不整根删、不动代码祖先、不读聊天正文。实测释放待实际完成，本记录不代表源已删。
