@@ -37,3 +37,14 @@
 - 本轮active范围仅 .agents/skills/code-explainer-video/SKILL.md、references/storage-and-packaging.md、references/preproduction-workflow.md及自身进度。用户要求“就你能放的都放到外盘里边呗”，新产物含小文稿/字幕/许可记录/可移植工程都默认外盘，本机仅必要运行内容和最小索引。
 - 不迁移删除旧资料、不移动运行环境/活动数据库，不改实验容量阈值；明确视频和实验入口适用范围。验证：Skill结构、引用和归置检查，审阅差异；不是渲染验收。
 - 基线工作区HEAD 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；成果尚未提交。
+
+## 视频Skill规则更新完成 2026-10-09T01:49:06.020103+08:00
+
+- checked_coordination_sha: 61344864bbbebbff78b8f3a8cd715ad55573b974；重读自身、trend-trading-video、research-dispatch-controller，原Skill范围释放，未见本次三路径并写。
+- completed仅本次Skill文档更新，scope_released=true；原视频未完成。修改入口、storage-and-packaging、preproduction-workflow三文件；新资料与媒体全程写外盘、本机最小例外，明确视频与实验入口适用范围，不改全局阈值、不绕过实际限制。
+- Skill quick_validate通过；归置检查通过；准确路径diff --check通过。不是媒体写盘/渲染验证。自身work-progress追加此阶段，现有原件/旧产物未动。
+- 三文件当前仅本地未提交/未推送；最新成果commit无，不冒称状态提交包含Skill内容。
+- 原视频恢复需要先核实际视频输出路径及工具限制，不能再仅用实验入口5GiB拒绝作为结论；包缺件保持待补，未新建声音/成片。
+- 本机文件SHA256 .agents/skills/code-explainer-video/SKILL.md: af515acd4a19819716ed7e1ff1aed3c300c8ea76d7360f93d29e634a8c0ab595
+- 本机文件SHA256 .agents/skills/code-explainer-video/references/storage-and-packaging.md: eba772151025c1badc6f1223d92f1d8c2ac72e7083fc220ab970f34dbfcfcec8
+- 本机文件SHA256 .agents/skills/code-explainer-video/references/preproduction-workflow.md: 7fe2196b26131a8ed36d4d5749fbbcd9a0661aa203b83f56cbd412384f3ecfb9
