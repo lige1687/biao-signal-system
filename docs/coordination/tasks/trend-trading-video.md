@@ -1,3 +1,13 @@
+## V9 plain-narration-done
+
+- task-id: trend-trading-video；2026-10-09T01:20:55.454183+08:00；checked_coordination_sha: a4f286fc7cb9954edea4e4adf06fb8ac88a0e133；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed本轮旁白文案和Skill增量，scope_released=true；成片/外盘访问原阻塞独立保留。用户要求去AI腔和说明，humanizer-zh已用于现有史料的口语改写。自身及中控已读，无重叠，本任务唯一写者。
+- 成果codex/trend-history-long-v14-20261009@84f06c7b4ba5115dfc3fdf208e876a5460bf228b，5份准确小文件远端逐字读回。Skill新增自然旁白要求与references/natural-narration.md；v14/narration/旁白稿-自然口语版.md按原章节重新讲述，制作/审核/来源说明不读成旁白，必要事实条件保留。旧准确屏幕稿和成片未变。
+- 验证：逐段对照原核实事实、名字日期数字，无新增直接师承/盈利承诺/伪造引语；可见文本无品牌检查、归置通过。未生成音频、未实测声音时长、不声称自然听感通过。稿件为候选稿；外盘01:18不可用，待稳定恢复后归档，此点写使用说明json。无新媒体/安装/删除。
+
+
+---
+
 ## V9 plain-narration-start
 
 - task-id: trend-trading-video；2026-10-09T01:18:29.959205+08:00；checked_coordination_sha: 1f15870494dab179cfd09d2caeb2df6fd5b29f00；已读 COORDINATION.md、自身与 research-dispatch-controller。
