@@ -134,8 +134,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "14c803d97b1c2b1467b559f29b23cf5f81ecd251",
-  "checked_at": "2026-10-08T13:39:57.293206+08:00",
+  "checked_coordination_sha": "2e649dbba909ad052b2796b7fb35a83f58c049ee",
+  "checked_at": "2026-10-08T13:40:28.324326+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -570,14 +570,14 @@
       "docs/experiments/registry.json",
       "docs/experiments/INDEX.md"
     ],
-    "checked_coordination_sha": "14c803d97b1c2b1467b559f29b23cf5f81ecd251",
-    "checked_at": "2026-10-08T13:39:57.293206+08:00",
+    "checked_coordination_sha": "2e649dbba909ad052b2796b7fb35a83f58c049ee",
+    "checked_at": "2026-10-08T13:40:28.324326+08:00",
     "read_task_ids": [
       "research-dispatch-controller",
       "daily-trading-system-audit",
       "research-evidence-catalog/report-library-integration-20261008"
     ],
-    "conflict_decision": "Only unrelated daily-audit record changed; original data and catalog owners unchanged and idle. Unique root raw/report and sole shared-registration window.",
+    "conflict_decision": "Intervening daily-trading acceptance changed only its own record, no shared research paths. Normal merge preserved both; no force push. New sources remain unstarted until scope readback.",
     "source_policy": {
       "inherited_membership_source_family_limit_bytes": 10485760,
       "previous_membership_http_bytes": 5933338,
@@ -589,7 +589,11 @@
     },
     "frontend_source": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/news-route.js",
     "new_route_evidence": "queryNews adds indexCode; params.searchInput uses searchKeyword; page sizes10/20/30/40. Previously acquired files only cover2021 anchor and exactknown adjustment dates.",
-    "free_bytes_before": 1556074496
+    "free_bytes_before": 1556074496,
+    "publication_failure": {
+      "kind": "non_fast_forward_push",
+      "resolved": "fetched own-unrelated daily record, normal merge and exact scope readback required"
+    }
   },
   "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
   "direct_execution_completed_units": [
@@ -1070,7 +1074,7 @@
     "daily-trading-system-audit",
     "research-evidence-catalog/report-library-integration-20261008"
   ],
-  "conflict_decision": "Only unrelated daily-audit record changed; original data and catalog owners unchanged and idle. Unique root raw/report and sole shared-registration window.",
+  "conflict_decision": "Intervening daily-trading acceptance changed only its own record, no shared research paths. Normal merge preserved both; no force push. New sources remain unstarted until scope readback.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -1084,14 +1088,14 @@
         "docs/experiments/registry.json",
         "docs/experiments/INDEX.md"
       ],
-      "checked_coordination_sha": "14c803d97b1c2b1467b559f29b23cf5f81ecd251",
-      "checked_at": "2026-10-08T13:39:57.293206+08:00",
+      "checked_coordination_sha": "2e649dbba909ad052b2796b7fb35a83f58c049ee",
+      "checked_at": "2026-10-08T13:40:28.324326+08:00",
       "read_task_ids": [
         "research-dispatch-controller",
         "daily-trading-system-audit",
         "research-evidence-catalog/report-library-integration-20261008"
       ],
-      "conflict_decision": "Only unrelated daily-audit record changed; original data and catalog owners unchanged and idle. Unique root raw/report and sole shared-registration window.",
+      "conflict_decision": "Intervening daily-trading acceptance changed only its own record, no shared research paths. Normal merge preserved both; no force push. New sources remain unstarted until scope readback.",
       "source_policy": {
         "inherited_membership_source_family_limit_bytes": 10485760,
         "previous_membership_http_bytes": 5933338,
