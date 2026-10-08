@@ -270,7 +270,7 @@
 
 - task-id: daily-trading-system-audit；唯一协调写者/root（01a11721-303e-7c83-9451-c82078c9ba23）。本批status: completed（Codex工程与必要演练完成，用户效果待看；真实个人条件与未来准点送达不冒称已验证）。
 - checked_coordination_sha: cbdbcb4978bbd54db8aff6ffd8a3b2d401c9bdb1；checked_at: 2026-10-08T16:32:05.491680+08:00；已读COORDINATION1.1、自身、research-dispatch-controller、douyin-vike-increment及trend-trading-video最新范围；最新fetch较cbdbcb49无变更。重叠决定：核心计划/成交/持仓及媒体/研究负责人范围保持只读，root只推自身32准确文件与后续4证据文件，不混入1365项共享脏区。旧HEAD18e64fa6及分支保持。
-- 用户授权“全落实并实测，日报必须说名字，所有流程走几笔”已逐项落实；存储最新授权允许自行调整磁盘并利用外接盘。两份权威策略SHA沿用已核一致，不改策略、阈值、生产库或桌面技术原文。
+- 用户授权“全落实并实测，日报必须说名字，所有流程走几笔”已逐项落实；存储最新授权允许自行调整磁盘并利用外接盘。两份权威策略SHA沿用已核一致，不改策略、阈值、真实持仓/计划/成交或桌面技术原文。
 - 成果：d35776ac95d68e3cc9ce4ee52e97d93b81411a73（codex/gpt-system-integration-20261008，普通push及fetch读回后核4证据文件），源码db2e9924d7bec628069375aaaebbefe9e00f0bc5（32准确路径SHA逐项回读一致）。不是main合并、部署或其他核心负责人增量发布；该成果分支单独不包含当前共享后端全部依赖。
 - 名称日报/查询：29/29持仓姓名齐全、8保存候选姓名齐全；价格与份额类别不替换。两时段JSON和Markdown配套，变化/原计划/成交优先，相同缺口按数量聚合，29明细可折叠，少量普通消息优先明确关联。实际16:15/16:16包、15:52截图及XLK10月7日完整日线读回；不是准点快照或所有基金有技术资料。
 - 原流程：自然语言名称解析→实际/假设与日期金额歧义检查→原讨论来源与草稿→完整内容确认卡→原计划/成交/持仓读回；确认事务及原规则版本/同产品完整时点检查；实际起始份额与平台份额/费用回执→对账卡→确认后仅一条持仓更新，后续NAV保留真实份额成本；新基金第一行NAV也核真实份额。priced不等于平台成交，金额不等于份额，缺依据仍待对账。
@@ -279,6 +279,17 @@
 - 4个原自动化ID/时间/ACTIVE/目的对话/通知偏好保持，改名称与正文读取指令并真实toml核验；11:35与14:40显式补音频，09:10/17:10和周复盘只读缓存。通知比较状态不重置，旧缺口不变新报警。
 - 真实名称版样例已送达独立“LeiSignal 日报与提醒”，turn=01a11a98-acee-74a1-b763-475fa579310f，final=msg_07e851276a95e9e4016ac7523d53bc8191bee48ab320eb2b9e已读取正文和截图链接，含两位博主理由条件/时间位置及数据日。初次snapshot interrupted后出现真实final，续完请求只回已交付说明，没有第二份整日报。14:40首次实际定时交付与16:16手工样例分别记录。
 - 验证：120项相关检查通过，1条依赖弃用提醒，8.59秒；Ruff/归置/diff检查全绿。隔离库走多买多卖、源问题草稿/确认、原条件触发/盘中拒绝/错对象、持仓关联、份额对账/费用缺项/资料改变/重复拒绝、新基金首次及后续NAV、MCP协议。真实业务库只读核29持仓、0交易、0计划、无新增codex_workflow_receipts，0券商订单。
-- 失败证据保留：磁盘三次满（含交付记录未写成功）、SDK返回类型、两只详情8秒超时、下载器无音频格式、初次Ruff175项格式/导入失败；对应修复重验。pip缓存首次Linux路径误查未迁移文件，macOS路径核无占用后按SHA/大小复制验真移出。累计闲置隧道、旧安装包、pip下载缓存515964725字节转外接盘，实测释放506675200字节；约7MB日报音频直接在外接盘。活跃代码/数据库/模型/SDK保留，无购买、权限扩大或其他配置改变。
+- 失败证据保留：磁盘三次满（含交付记录未写成功）、SDK返回类型、两只详情8秒超时、下载器无音频格式、初次Ruff175项格式/导入失败；对应修复重验。pip缓存首次Linux路径误查未迁移文件，macOS路径核无占用后按SHA/大小复制验真移出。累计闲置隧道、旧安装包、pip下载缓存505964725字节转外接盘，实测释放506675200字节；约7MB日报音频直接在外接盘。活跃代码/数据库/模型/SDK保留，无购买、权限扩大或其他配置改变。
 - 证据：docs/archive/handoffs-plans/2026-10-08-codex-daily-trading-integration-acceptance.md；原raw/implementation-acceptance-receipt.json、implementation-{final-tests,ruff-final,final-hygiene}.log、implementation-{sample-delivery,source-publication}-receipt.json；自身work-progress阶段互链。私人完整包、音频、转写、图与隔离库仅cache/已授权外接盘，不进Git。原研究报告登记/OKR/他人任务状态没写。
 - 数据依赖/实际限制：29只有28净值且数据日9月29/30，0已关联原计划、0同产品技术；不能给个人止盈止损安全/失效结论，不补“原买入理由”或胜率。下一次真实交易由用户给原话及准确卡确认；原有份额需平台依据，个人条件未知保持未知。3来源风控和未来准点/机器可用性分别报告，不伪称实时监控。scope_released: false（自身模块继续维护，其他人修改先协调）。
+
+
+## 运行期磁盘管理开工 2026-10-08T16:45:55.192610+08:00
+- status: active；checked_coordination_sha: c921bf177498e66366d9d128b5ab0fd519f45098；已读自身、COORDINATION1.1、最新所有tasks存储/磁盘范围检索，未找到相关登记负责人。旧storage-management/research/storage_guard只读复用，四缺陷版不采用、不重启原任务；原raw精确路径不移动。
+- 用户新授权着重运行磁盘管理与外接盘，并说继续；沿用此前允许自行调整磁盘、利用外接盘。可安全验真迁移闲置对象及本任务运行检查，不删研究历史、格式化分区、改备份设置、移动活动DB或重启他人服务。
+- 新精确路径：src/lei_signal/integrations/storage_health.py、tests/unit/test_storage_health.py、configs/storage-policy.v1.json、docs/ops/codex-storage-management.md；原briefing/notifications/gpt_context/gpt_mcp及相应测试/SKILL/ownprogress接入只读容量与外盘身份；原bilibili_content/test补写前空间/卷检查并保留原来源正文，renderer/test显示对应依据；安全证据原raw/implementation-storage-*。root唯一发布与旧文件写者；新4文件委派原助手后明确独占。
+- 私有实时资料在外接专用目录和本仓cache，无账户数据发布。验收固定UUID、容量、无错误挂载目录/内置回退，低空间阻止新的音频/ASR但已缓存信息可读；通知只新增状态/恢复，不改订单、用户确认或策略。不是全系统硬限制，不宣称既有研究入口受控。
+- 并行盘点已完成，原Sol和Luna全只读；内置132MiB→刚观测6GiB不是本轮新删除，原因未核，TimeMachine当地快照存在，不删快照/改设置。此前两次Git登记/源码临时写入因空间失败，尚未开新源文件，今空间可写后恢复本登记。
+
+- 普通push刚被拒，已fetch/read新增trend-trading-video范围（媒体新目录，与本任务无交叉），保留该记录并重新构建本单文件提交，不强推。2026-10-08T16:48:09.406479+08:00
+- 存储精确迁移候选：data/cache/douyin-vike-audio-2026-10-07（23音频）、douyin-vike-media-2026-10-07（3MP4）、video-models/whisper-small-mlx（2固定权重/配置），全为非执行常规文件。原douyin-vike-increment最新任务明确不再视频提取，lsof当前无打开文件，迁移保留逻辑路径为内置符号链接、每文件指纹与恢复清单，不动raw、venv、DB、会话与工作树；需外盘挂载，断盘明确未知，不落回内置。root负责迁移。
