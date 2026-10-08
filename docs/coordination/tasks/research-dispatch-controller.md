@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "b930a4558d6501c2c99ed0b78dc102fe950f8af5",
-  "checked_at": "2026-10-08T20:18:28.754037+08:00",
+  "checked_coordination_sha": "c33ee1ca6c3677f0650c6c99af931c8cc5ed187e",
+  "checked_at": "2026-10-08T20:35:16.753137+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -453,13 +453,31 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "scope_released": false,
       "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-repair-contract-v2.json",
       "source": "v2 accepted by independent three-counterexample checks. Frozen source and12v1 artifacts unchanged; 29raw files151094B. Root archives unique report. Full policy/real execution unaccepted.",
-      "phase": "v2_limited_accepted_report_publication",
+      "phase": "remote_archived_main_registration",
       "executor_status": "delivered",
       "controller_only_write_paths": [
-        "docs/experiments/weekly-portfolio-order-planning-2026-10-08.md",
-        "existing isolated codex/research-direct-20261008 registry/INDEX own entry only"
+        "docs/experiments/registry.json:weekly-portfolio-order-planning-2026-10-08.md only",
+        "docs/experiments/INDEX.md:corresponding one navigation line"
       ],
-      "main_shared_registration": "pending explicit video-owner release; not writing"
+      "main_shared_registration": "root solewriter accepted report exactone entry andINDEXline; video released",
+      "latest_commit": "edc5389854a36e87b080b340544478085211e048"
+    },
+    {
+      "task_id": "factor-fusion-risk-exit/order-ledger-adapter",
+      "owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
+      "executor": "/root/settlement_implementation_v1",
+      "status": "planned",
+      "phase": "contract_ready_not_dispatched",
+      "write_paths": [
+        "docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/"
+      ],
+      "scope_released": false,
+      "depends_on": [],
+      "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-implementation-contract.json",
+      "source": "OriginalGoal5 fixedorders to accepted datedledger; Astra/high approved single synthetic account singlebatch serial wholefills. No reservations/partialfills/recovery or new policy; original modules immutable.",
+      "validation": "410.50 to0.10; firstrefusal then205.30; sell200+174.82 then300buy leaves69.52; replay/identity/cash/calendar/action refusals; independent review before acceptance",
+      "model": "gpt-6.1-sol",
+      "reasoning_effort": "medium"
     }
   ],
   "final_acceptance": {
@@ -1126,7 +1144,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "remaining": "Guard covers integrated audio processing only, not other research/app writes or instant capacity loss. Remeasure space before larger jobs; user experience/future schedule reliability unverified. Research source gaps unchanged; no deletion/outside-repo authority borrowed."
     }
   ],
-  "shared_registration_scope_released": true,
+  "shared_registration_scope_released": false,
   "direct_next_actions": [
     "Dispatch exact39 synthetic dependency publication to originaltheoryowner; verify actualstart.",
     "Accept native preflight implementation when delivered with independent rejectionchecks.",
@@ -1135,9 +1153,9 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   "read_task_ids": [
     "research-dispatch-controller",
     "trend-trading-video",
-    "theory-workflow-system-increment"
+    "mac-local-storage-cleanup"
   ],
-  "conflict_decision": "Video owner has main registry/INDEX single-entry scope active. Root sent explicit coordination request, will not write main shared files before release. New root unique report and isolated branch safe; v2 source solewriter completed.",
+  "conflict_decision": "Video owner explicitly released main registry/INDEX at20:20:54; root claims exactly own accepted planning-report row/INDEX line, then releases promptly. Media/cleanup paths untouched. New adapter raw unique; frozen old modules read-only.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2261,3 +2279,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 三项v2修复独审通过：当前174.82只买100份/成本105.10/余69.72，不加旧200；原合法当前200加净卖款仍374.82/300份；不同资金/回执/冻结时刻身份不同且同输入稳定；原已知行动强制继承、覆盖不足拒绝。old12文件和v1三快照逐字不变。root核29raw/151094B及13金额。9作者组与13金额/17计划指纹有重叠，不累计为市场证据。
 - 接受只为原规范纯人工订单算术，未知原始订单预占包、真实输入、无整手待用户、跨行动unsupported保持。正式报告weekly-portfolio-order-planning-2026-10-08.md拟由root归档；原datedledger和封存结果不改不重跑。
 - 磁盘ENOSPC及未保存v2源已保留，后测容量约1GB、1358B真实写回及普通fetch恢复后才接续，未删除/迁移。自动化已准确保存恢复说明，规则与30分钟周期未改。
+
+## 单项主登记窗口与固定订单账本适配范围 2026-10-08T20:35:16.753137+08:00
+
+- checked_coordination_sha=c33ee1ca6c3677f0650c6c99af931c8cc5ed187e；已读本任务/video明确释放与新mac-cleanup；后者不碰仓内研究/登记。root仅登记已远端归档edc5389854a36e87b080b340544478085211e048中的纯规划报告一条，保留主表其他条目，完成即释放。
+- 新小范围order-ledger-adapter已Astra/high审定，可独立于未找到的原预占包接续：一个人工账户、单批串行、整笔成交或拒绝；稳定订单ID、相同费用/日历、账本当前可用款、拒绝原子性。Sol6.1/medium只写新raw，原spec/planner/ledger只读；合同ready，此刻未派发，不冒称运行。预占/部分成交/恢复/并发/未知无整手选择仍不实施，0市场或封存重跑。
