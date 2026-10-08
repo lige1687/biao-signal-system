@@ -1,3 +1,13 @@
+## V8 registry-window
+
+- task-id: trend-trading-video；2026-10-08T22:06:37.085709+08:00；checked_coordination_sha: 2187d8126d95755a2009bc6bd392d7569a48ad23；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active；中控22:03记录明确不占共享登记，21:18已释放，未发现同报告路径冲突。
+- 本轮短占registry/INDEX，仅新增docs/experiments/video-information-density-2026-10-08.md一条与INDEX一行；新增raw/video-information-density-2026-10-08/receipt.json记录媒体和教程证据位置。其他原条目和元数据不变，结案即释放。
+- 自有V8/skill范围不变。10秒实际小样与八张原生静帧已核；60秒4K渲染中，未当成完成。教程只看两段连续抽帧及已有转写，官方课程只读公开大纲，无完整听审或观众效果实验。
+
+
+---
+
 ## V8：匿名品牌要求与趋势交易编年史
 
 - task-id trend-trading-video；active；2026-10-08T21:38:35.281221+08:00；checked_coordination_sha: b4c6b6efc0ec2ec5cfa7654b7565e5aa485064b8；已读COORDINATION.md、本任务与research-dispatch-controller。冲突决定：自有视频/skill路径，报告单文件不重叠；registry/INDEX尚不写，登记前另核共享窗口。
