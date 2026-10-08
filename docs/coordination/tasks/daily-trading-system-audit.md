@@ -1,3 +1,14 @@
+# 后续AI直接使用存储入口开工 2026-10-08T18:06:09.765947+08:00
+
+- task-id daily-trading-system-audit；owner /root，唯一写者；status active；checked_coordination_sha 1c84c8d991786556e2b56bbc1c3e08710f483132；checked_at 2026-10-08T18:06:09.765947+08:00
+- 用户新增明确要求：存储管理后续AI也能访问、直接运用。复用此前已验真的4路径与现有storage工具，不重做ASR/大文件迁移、不扩大生产/研究权限。
+- 已读COORDINATION1.1、本任务、中控新增存储接收、lei-coordination-bootstrap、其他AGENTS引用范围；当前bootstrap已有协作块稳定，其他独立分支仅自身入口。新共享AGENTS只末尾追加唯一lei-storage-access标记块，原全部字节保留；不改既有协作/研究段，不整份发布原脏改。存储块root实现，独立新会话只读验收。
+- 新精确范围：configs/storage-resources.v1.json；现有storage_health.py/test_storage_health.py、gpt_context.py/test_gpt_context.py在storage/overview加入只读路径状态；AGENTS.md唯一新增存储块、lei-system-chat技能description与入口、codex-storage-management.md与自身progress；原raw/implementation-storage-ai-access-*安全证据。不改变视频写预检/阈值/确认交易或其他负责人入口。
+- AGENTS本机追加前SHA a2a8fd1dde803b603717ec1fa1b49c14d76ab0a4e28d1f7d99de7d9642fb12b1；发布时只在成果分支原AGENTS字节上加本块，既有本机56新增/5删除不混入。新路径清单可供同机其他工作树直接只读外盘；UUID不符或缺盘返回无可用read_path，不写软链或创建目录。
+- 验收：机器可读4资源logical/expected/read路径和当前状态、缺盘/错链接不冒称可用；原路径最小头部读取；独立无会话历史AI只读从AGENTS发现CLI并读模型配置/媒体；必要单测与归置；工作分支与协调读回。另一机器未接同盘不能声称共享盘可访问。
+
+---
+
 # Codex日常接入与运行存储：本轮工程交付 2026-10-08T17:25:56.397862+08:00
 
 - task-id: daily-trading-system-audit；owner: /root，thread-id=01a11721-303e-7c83-9451-c82078c9ba23，唯一写者；status: completed（本工程批，使用效果待用户反馈）
