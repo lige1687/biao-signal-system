@@ -227,3 +227,15 @@
 - 新对话01a11a05-c140-7d82-b8b6-68c83ee9e2ee真实就绪final读回msg_07e851276a95e9e4016ac72c894848819180e98dcd33e3fa49；不是定时日报回执。四原ID均ACTIVE、target改新对话；与迁移前逐字段比对name/rrule/status/notification_policy一致，原prompt保留后只追加目的地/旧送达排重说明。
 - 三个自身文档7f00a0009018ac7e8a053168991b7221f795254d已普通推并逐字核，归置通过、原HEAD不变；仅文档及已授权自动化目的地，原54项产品检查复用。私人配置/消息回执留cache，数据库和持仓不上传。
 - 流程和渠道偏好已改新对话；原比较起点/资料/失败不清空，旧送达核原讨论对话，之后核新提醒对话。原讨论对话不再接收此四定时提醒，其他任务和自动化不动。迁移后首次触发/送达待发生，不提前声称通过。
+
+
+## 全流程落实与实测开工 2026-10-08T14:59:26.519506+08:00
+
+- status: active；checked_coordination_sha: 458145226b0b7da2247a6026d4d28073cdba26b9；checked_at: 2026-10-08T14:59:26.519506+08:00；已读COORDINATION1.1、自身、research-dispatch-controller、theory-workflow-system-increment、investor-observation-map、dot-trade-state-accounting以及douyin-vike-increment准确文件范围。
+- 用户明确“全落实，并实测所有流程；日报产品必须说名字”。范围为Codex本机完整日常查询/计划草稿与确认流程适配、退出条件设计、已确认条件复核、成交记录与持仓对账、机会/场景/研究依据展示和日报。无手机网页接入、券商下单、策略阈值改变；真实写入仍逐笔由用户确认。
+- 原策略SHA已实核df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20、85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903；服务执行/复盘及叙事层。
+- 冲突决定：douyin-vike-increment所有计划/交易核心store、schema、API、web仅只读复用，不修改。新适配器放自身integrations命名空间，不直写/绕过既有确认约束、不另立账户权威库。研究registry/INDEX只读，不重跑因子市场实验。
+- 唯一写者/root保持协调与发布；并行三个独立助手，各max_agents=1/network=false，不修改协调/生产资料/他人文件。执行模型Sol/medium，日报名称修补Luna/low。
+- 精确文件分工：name_brief独占portfolio/briefing.py、portfolio/notifications.py、tests/unit/test_portfolio_briefing.py、tests/unit/test_portfolio_notifications.py及新portfolio/brief_render.py、tests/unit/test_brief_render.py；chat_transactions独占新integrations/chat_transactions.py、tests/integration/test_chat_transactions.py；daily_decisions独占新integrations/daily_decisions.py、tests/unit/test_daily_decisions.py。root独占gpt_context.py/gpt_mcp.py及相应tests、拟新增integrations/chat_workflow.py、tests/integration/test_chat_workflow.py、.agents/skills/lei-system-chat/SKILL.md、docs/ops/gpt-system-integration.md、portfolio-chat-briefing.md、system-notifications.md、自身work-progress、docs/archive/handoffs-plans/2026-10-08-codex-daily-trading-integration-acceptance.md和原raw下implementation-*。私人包/截图/隔离SQLite/合同/失败日志在本仓cache。
+- 验收：真实29持仓均名称优先且未知名不编造；两个时段简报实生成；隔离真实路由/业务层走至少买入、卖出、撤回/未成交、重复确认、计划确认/条件触发/盘中未知/错误产品以及对账缺失；系统实际只读接口回执、来源时点和异常可见；0真实测试交易/生产持仓改写。各项效果和未能在真实账户验证部分分别交付。
+- 成果仍现有codex/gpt-system-integration-20261008；先注册推送读回后写上述路径，root最终独立核验，不以助手测试通过替代真实链路。
