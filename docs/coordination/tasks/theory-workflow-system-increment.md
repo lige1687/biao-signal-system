@@ -155,3 +155,14 @@
 更新时间：2026-10-08T19:27:05.864610+08:00；checked_coordination_sha=9a37d0c40b63e62175be3a15e896a6137f547476；已读规则、中控、technical-factor-sequence及本任务。依据method9-publication-contract.json和原owner只读callback，准确9文件39458字节，可作为原用户Git交接授权下自有方法文字交付，原行情/原策略全文/混合包不随引用扩入。另25资料由原owner只读核定，不与本次原字节复制/小回执冲突。
 
 写范围：合同9准确路径，仅现有codex/theory-safe-publication-20261008树，及本任务现有发布manifest/dependency-check/README/readback/进度/协调。根源9只读，定义/preparation/tests/registry/INDEX不改；保留draft、原预算、用途与资格限制，不复制其依赖。验收是9SHA/大小原字节、缺件36减9准确27、正常Git推送后逐文件读回；39成果不重做，科研/测试/取数/安装/仓外写/删除0。当前基线67f523d08501c8be4498813ca38058d7658ed29b；完整准备仍未宣称可用。
+
+
+## 原owner核准9方法已交付：completed，完整准备仍缺27
+
+更新时间：2026-10-08T19:29:06.703357+08:00；checked_coordination_sha=115e4c0466abac69beca520c41bf39c6993aa6a0；已读本任务、规则、中控与technical owner核定范围，末次fetch无新增差异/冲突。原owner25元数据只读工作未等待或接管。
+
+准确成果3470f33ad772ed2d483c6185af4f4523f659c6b9，原codex/theory-safe-publication-20261008，9方法原件39458B＋4既有元数据共13准确文件；正常push/fetch后逐字一致。回执/进度后继4f6ff52a7d5a2a415159c88ad06a38e7a7e6cbac两文件亦fetch逐字核。root源9SHA重新读回不变，原draft/用途/资格/预算限制原字节保留；没有链接附件/行情/策略全文或混合包外传。
+
+原缺件36扣准确9为27，远端Git对象从历史75集合重查后精确27，与manifest/dependency-check新阶段相同。39和36旧索引是历史快照不重做/覆盖；新传播依据为原technicalowner精确9内容/权利核定＋中控有限Git合同，不追溯把过去未知状态改成已知。定义解析器/登记、preparation、测试、registry/INDEX与前成果67f523d0逐字相同；完整准备工具仍blocked，不能因为文档已交就称入口可运行。其余25元数据和2逐观察资料保持原负责人核定/许可条件，不在本合同自动扩入。
+
+核验：原9大小SHA/13远端字节/剩余集合/不变文件/归置/diff通过；只原raw发布manifest、dependency-check、README、remote-readback和自身进度/协调更新。0科研/测试重跑/拟合/标签/取数/安装/付费/删除/仓外写，没有新失败或后台任务。原失败历史保留。证据入口raw/theory-safe-publication-2026-10-08的method9阶段，合同和owner callback SHA可定位于manifest。本次有限交付释放，中控读取回执继续另25核定；无本合同必须剩余计算。
