@@ -1,0 +1,115 @@
+test_calendar_due_action_ledger_refusal_atomic (test_adapter.AdapterChecks.test_calendar_due_action_ledger_refusal_atomic) ... ERROR
+test_first_over_cap_second_budget_unchanged (test_adapter.AdapterChecks.test_first_over_cap_second_budget_unchanged) ... ERROR
+test_frozen_serial_order_no_reshuffling (test_adapter.AdapterChecks.test_frozen_serial_order_no_reshuffling) ... ERROR
+test_hidden_calendar_action_crossing_or_halt_refused (test_adapter.AdapterChecks.test_hidden_calendar_action_crossing_or_halt_refused) ... ERROR
+test_outside_cash_or_sellable_change_stops_batch (test_adapter.AdapterChecks.test_outside_cash_or_sellable_change_stops_batch) ... ERROR
+test_release_payment_distinct_no_fabricated_deposit_or_foreign_cash (test_adapter.AdapterChecks.test_release_payment_distinct_no_fabricated_deposit_or_foreign_cash) ... ERROR
+test_replay_success_and_reject_have_no_second_effect (test_adapter.AdapterChecks.test_replay_success_and_reject_have_no_second_effect) ... ERROR
+test_sell_then_explicit_release_then_later_buy (test_adapter.AdapterChecks.test_sell_then_explicit_release_then_later_buy) ... ERROR
+test_two_valid_buys_exact_fees (test_adapter.AdapterChecks.test_two_valid_buys_exact_fees) ... ERROR
+test_unknown_coverage_pending_branch_and_parallel_batch_unsupported (test_adapter.AdapterChecks.test_unknown_coverage_pending_branch_and_parallel_batch_unsupported) ... ERROR
+test_wrong_cost_plan_calendar_and_external_ledger_refused (test_adapter.AdapterChecks.test_wrong_cost_plan_calendar_and_external_ledger_refused) ... ERROR
+
+======================================================================
+ERROR: test_calendar_due_action_ledger_refusal_atomic (test_adapter.AdapterChecks.test_calendar_due_action_ledger_refusal_atomic)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 98, in test_calendar_due_action_ledger_refusal_atomic
+    c = calendar(sell=True)
+        ^^^^^^^^^^^^^^^^^^^
+TypeError: calendar() got an unexpected keyword argument 'sell'
+
+======================================================================
+ERROR: test_first_over_cap_second_budget_unchanged (test_adapter.AdapterChecks.test_first_over_cap_second_budget_unchanged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 28, in test_first_over_cap_second_budget_unchanged
+    a, d, p = make(calendar(first_price='2.001')); batch = a.begin(d, p)
+              ^^^^
+NameError: name 'make' is not defined
+
+======================================================================
+ERROR: test_frozen_serial_order_no_reshuffling (test_adapter.AdapterChecks.test_frozen_serial_order_no_reshuffling)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 149, in test_frozen_serial_order_no_reshuffling
+    a, d, p = make(); batch = a.begin(d, p); before = a.ledger.snapshot()
+              ^^^^
+NameError: name 'make' is not defined
+
+======================================================================
+ERROR: test_hidden_calendar_action_crossing_or_halt_refused (test_adapter.AdapterChecks.test_hidden_calendar_action_crossing_or_halt_refused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 107, in test_hidden_calendar_action_crossing_or_halt_refused
+    c = calendar(); c['actions']['crossing'] = {'symbol': 'A', 'split_at': FREEZE, 'multiplier': D(2)}
+                                                                           ^^^^^^
+NameError: name 'FREEZE' is not defined
+
+======================================================================
+ERROR: test_outside_cash_or_sellable_change_stops_batch (test_adapter.AdapterChecks.test_outside_cash_or_sellable_change_stops_batch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 87, in test_outside_cash_or_sellable_change_stops_batch
+    a, d, p = make(sell=sell); batch = a.begin(d, p)
+              ^^^^
+NameError: name 'make' is not defined
+
+======================================================================
+ERROR: test_release_payment_distinct_no_fabricated_deposit_or_foreign_cash (test_adapter.AdapterChecks.test_release_payment_distinct_no_fabricated_deposit_or_foreign_cash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 139, in test_release_payment_distinct_no_fabricated_deposit_or_foreign_cash
+    a, d, p = make()
+              ^^^^
+NameError: name 'make' is not defined
+
+======================================================================
+ERROR: test_replay_success_and_reject_have_no_second_effect (test_adapter.AdapterChecks.test_replay_success_and_reject_have_no_second_effect)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 57, in test_replay_success_and_reject_have_no_second_effect
+    a, d, p = make(); batch = a.begin(d, p); o = p.orders[0]
+              ^^^^
+NameError: name 'make' is not defined
+
+======================================================================
+ERROR: test_sell_then_explicit_release_then_later_buy (test_adapter.AdapterChecks.test_sell_then_explicit_release_then_later_buy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 38, in test_sell_then_explicit_release_then_later_buy
+    a, d, p = make(sell=True); batch = a.begin(d, p)
+              ^^^^
+NameError: name 'make' is not defined
+
+======================================================================
+ERROR: test_two_valid_buys_exact_fees (test_adapter.AdapterChecks.test_two_valid_buys_exact_fees)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 18, in test_two_valid_buys_exact_fees
+    a, d, p = make(); batch = a.begin(d, p)
+              ^^^^
+NameError: name 'make' is not defined
+
+======================================================================
+ERROR: test_unknown_coverage_pending_branch_and_parallel_batch_unsupported (test_adapter.AdapterChecks.test_unknown_coverage_pending_branch_and_parallel_batch_unsupported)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 117, in test_unknown_coverage_pending_branch_and_parallel_batch_unsupported
+    a, d, p = make(); batch = a.begin(d, p)
+              ^^^^
+NameError: name 'make' is not defined
+
+======================================================================
+ERROR: test_wrong_cost_plan_calendar_and_external_ledger_refused (test_adapter.AdapterChecks.test_wrong_cost_plan_calendar_and_external_ledger_refused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/test_adapter.py", line 71, in test_wrong_cost_plan_calendar_and_external_ledger_refused
+    a, d, p = make(); batch = a.begin(d, p); o = p.orders[0]; evidence = a.opening(o.symbol, OPEN)
+              ^^^^
+NameError: name 'make' is not defined
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.001s
+
+FAILED (errors=11)

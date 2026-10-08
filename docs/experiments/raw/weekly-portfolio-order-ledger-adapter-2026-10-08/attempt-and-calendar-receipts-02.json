@@ -1,0 +1,528 @@
+{
+  "test_calendar_due_action_ledger_refusal_atomic": {
+    "atomic_ledger_refusal": {
+      "account_name": "single-invented-account",
+      "order_id": "aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+      "event_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+      "status": "refused",
+      "reason": "required due action missing: unposted-known-before-decision",
+      "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"1000\", \"fees\": \"0\", \"free_cash\": \"200\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"350\", \"B\": \"100\"}, \"shares\": {\"A\": \"350\", \"B\": \"100\"}, \"units\": \"1000\"}",
+      "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"1000\", \"fees\": \"0\", \"free_cash\": \"200\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"350\", \"B\": \"100\"}, \"shares\": {\"A\": \"350\", \"B\": \"100\"}, \"units\": \"1000\"}",
+      "ledger_apply_count": 1,
+      "ledger_state_unchanged": true,
+      "quantity": "100",
+      "price": "1.8",
+      "opening_at": "2026-01-02T09:30:00+08:00"
+    }
+  },
+  "test_first_over_cap_second_budget_unchanged": {
+    "plan": {
+      "decision_hash": "800b032f8e00685cb8ddb474a909cb417a45ac7e235472199e236728d526dabc",
+      "plan_hash": "e7e9546358f2902daf093974cd25000dea5bdf7169c845af2c65a22868c408fc",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "A",
+          "205.250"
+        ],
+        [
+          "B",
+          "205.250"
+        ]
+      ],
+      "budgets": [
+        [
+          "A",
+          "205.250"
+        ],
+        [
+          "B",
+          "205.250"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "decision_hash": "800b032f8e00685cb8ddb474a909cb417a45ac7e235472199e236728d526dabc",
+          "plan_hash": "e7e9546358f2902daf093974cd25000dea5bdf7169c845af2c65a22868c408fc",
+          "symbol": "A",
+          "side": "buy",
+          "quantity": "100",
+          "reference": "2",
+          "budget": "205.250",
+          "cap": "2",
+          "frozen_at": "2026-01-02 08:00:00+08:00",
+          "opening_at": "2026-01-02 09:30:00+08:00"
+        },
+        {
+          "order_id": "5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "decision_hash": "800b032f8e00685cb8ddb474a909cb417a45ac7e235472199e236728d526dabc",
+          "plan_hash": "e7e9546358f2902daf093974cd25000dea5bdf7169c845af2c65a22868c408fc",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "100",
+          "reference": "2",
+          "budget": "205.250",
+          "cap": "2",
+          "frozen_at": "2026-01-02 08:00:00+08:00",
+          "opening_at": "2026-01-02 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.000",
+      "current_cash": {
+        "name": "cash-from-single-invented-account",
+        "source_id": "single-invented-account:42a3d210283ef4be7f41383b08ae8da13f5c9cfb926dc9953cf572eddca0748f",
+        "amount": "410.50",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "available_at": "2026-01-01 15:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-action-coverage",
+        "source_id": "synthetic-empty-covered-source",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": null,
+      "frozen_at": "2026-01-02 08:00:00+08:00",
+      "opening_at": "2026-01-02 09:30:00+08:00"
+    },
+    "attempts": [
+      {
+        "account_name": "single-invented-account",
+        "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "status": "refused",
+        "reason": "reject_no_resize",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "ledger_apply_count": 0,
+        "ledger_state_unchanged": true,
+        "quantity": "100",
+        "price": "2.001",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      },
+      {
+        "account_name": "single-invented-account",
+        "order_id": "5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+        "event_id": "frozen-order:5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+        "status": "filled",
+        "reason": "",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"B\": \"0\"}, \"shares\": {\"B\": \"100\"}, \"units\": \"1000\"}",
+        "ledger_apply_count": 1,
+        "ledger_state_unchanged": false,
+        "quantity": "100",
+        "price": "2",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      }
+    ]
+  },
+  "test_frozen_serial_order_no_reshuffling": {
+    "out_of_sequence": {
+      "account_name": "single-invented-account",
+      "order_id": "5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+      "event_id": "frozen-order:5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+      "status": "refused",
+      "reason": "frozen serial order sequence differs",
+      "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "ledger_apply_count": 0,
+      "ledger_state_unchanged": true,
+      "quantity": "100",
+      "price": "2",
+      "opening_at": "2026-01-02T09:30:00+08:00"
+    }
+  },
+  "test_hidden_calendar_action_crossing_or_halt_refused": {
+    "hidden_crossing": {
+      "account_name": "single-invented-account",
+      "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "status": "refused",
+      "reason": "company action crossing unsupported",
+      "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "ledger_apply_count": 0,
+      "ledger_state_unchanged": true,
+      "quantity": "100",
+      "price": "2",
+      "opening_at": "2026-01-02T09:30:00+08:00"
+    },
+    "halt": {
+      "account_name": "single-invented-account",
+      "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "status": "refused",
+      "reason": "reject_product_not_eligible",
+      "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "ledger_apply_count": 0,
+      "ledger_state_unchanged": true,
+      "quantity": "100",
+      "price": "2",
+      "opening_at": "2026-01-02T09:30:00+08:00"
+    }
+  },
+  "test_outside_cash_or_sellable_change_stops_batch": {
+    "outside_change_refusals": [
+      {
+        "account_name": "single-invented-account",
+        "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "status": "refused",
+        "reason": "outside ledger change; batch stopped",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"0\", \"fees\": \"0\", \"free_cash\": \"0\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"0\", \"fees\": \"0\", \"free_cash\": \"0\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "ledger_apply_count": 0,
+        "ledger_state_unchanged": true,
+        "quantity": "100",
+        "price": "2",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      },
+      {
+        "account_name": "single-invented-account",
+        "order_id": "aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+        "event_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+        "status": "refused",
+        "reason": "outside ledger change; batch stopped",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"400\", \"fees\": \"0\", \"free_cash\": \"200\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"50\", \"B\": \"100\"}, \"shares\": {\"A\": \"50\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"400\", \"fees\": \"0\", \"free_cash\": \"200\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"50\", \"B\": \"100\"}, \"shares\": {\"A\": \"50\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "ledger_apply_count": 0,
+        "ledger_state_unchanged": true,
+        "quantity": "100",
+        "price": "1.8",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      }
+    ]
+  },
+  "test_release_payment_distinct_no_fabricated_deposit_or_foreign_cash": {
+    "fabricated_deposit_refused": true,
+    "future_cash_clock_refused": true,
+    "foreign_cash_refused": true
+  },
+  "test_replay_success_and_reject_have_no_second_effect": {
+    "success": {
+      "account_name": "single-invented-account",
+      "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "status": "filled",
+      "reason": "",
+      "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\"}, \"shares\": {\"A\": \"100\"}, \"units\": \"1000\"}",
+      "ledger_apply_count": 1,
+      "ledger_state_unchanged": false,
+      "quantity": "100",
+      "price": "2",
+      "opening_at": "2026-01-02T09:30:00+08:00"
+    },
+    "success_replay": {
+      "account_name": "single-invented-account",
+      "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "status": "replay_ignored",
+      "reason": "filled",
+      "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\"}, \"shares\": {\"A\": \"100\"}, \"units\": \"1000\"}",
+      "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\"}, \"shares\": {\"A\": \"100\"}, \"units\": \"1000\"}",
+      "ledger_apply_count": 0,
+      "ledger_state_unchanged": true,
+      "quantity": "100",
+      "price": "2",
+      "opening_at": "2026-01-02T09:30:00+08:00"
+    },
+    "refusal": {
+      "account_name": "single-invented-account",
+      "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "status": "refused",
+      "reason": "reject_no_resize",
+      "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "ledger_apply_count": 0,
+      "ledger_state_unchanged": true,
+      "quantity": "100",
+      "price": "2.001",
+      "opening_at": "2026-01-02T09:30:00+08:00"
+    },
+    "refusal_replay": {
+      "account_name": "single-invented-account",
+      "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+      "status": "replay_ignored",
+      "reason": "refused",
+      "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+      "ledger_apply_count": 0,
+      "ledger_state_unchanged": true,
+      "quantity": "100",
+      "price": "2.001",
+      "opening_at": "2026-01-02T09:30:00+08:00"
+    }
+  },
+  "test_two_valid_buys_exact_fees": {
+    "plan": {
+      "decision_hash": "800b032f8e00685cb8ddb474a909cb417a45ac7e235472199e236728d526dabc",
+      "plan_hash": "e7e9546358f2902daf093974cd25000dea5bdf7169c845af2c65a22868c408fc",
+      "status": "ready",
+      "reason": "frozen budgets; residual not reallocated",
+      "ordering": [
+        [
+          "A",
+          "205.250"
+        ],
+        [
+          "B",
+          "205.250"
+        ]
+      ],
+      "budgets": [
+        [
+          "A",
+          "205.250"
+        ],
+        [
+          "B",
+          "205.250"
+        ]
+      ],
+      "orders": [
+        {
+          "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "decision_hash": "800b032f8e00685cb8ddb474a909cb417a45ac7e235472199e236728d526dabc",
+          "plan_hash": "e7e9546358f2902daf093974cd25000dea5bdf7169c845af2c65a22868c408fc",
+          "symbol": "A",
+          "side": "buy",
+          "quantity": "100",
+          "reference": "2",
+          "budget": "205.250",
+          "cap": "2",
+          "frozen_at": "2026-01-02 08:00:00+08:00",
+          "opening_at": "2026-01-02 09:30:00+08:00"
+        },
+        {
+          "order_id": "5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "decision_hash": "800b032f8e00685cb8ddb474a909cb417a45ac7e235472199e236728d526dabc",
+          "plan_hash": "e7e9546358f2902daf093974cd25000dea5bdf7169c845af2c65a22868c408fc",
+          "symbol": "B",
+          "side": "buy",
+          "quantity": "100",
+          "reference": "2",
+          "budget": "205.250",
+          "cap": "2",
+          "frozen_at": "2026-01-02 08:00:00+08:00",
+          "opening_at": "2026-01-02 09:30:00+08:00"
+        }
+      ],
+      "unallocated": "0.000",
+      "current_cash": {
+        "name": "cash-from-single-invented-account",
+        "source_id": "single-invented-account:42a3d210283ef4be7f41383b08ae8da13f5c9cfb926dc9953cf572eddca0748f",
+        "amount": "410.50",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "available_at": "2026-01-01 15:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-action-coverage",
+        "source_id": "synthetic-empty-covered-source",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": null,
+      "frozen_at": "2026-01-02 08:00:00+08:00",
+      "opening_at": "2026-01-02 09:30:00+08:00"
+    },
+    "attempts": [
+      {
+        "account_name": "single-invented-account",
+        "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "status": "filled",
+        "reason": "",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\"}, \"shares\": {\"A\": \"100\"}, \"units\": \"1000\"}",
+        "ledger_apply_count": 1,
+        "ledger_state_unchanged": false,
+        "quantity": "100",
+        "price": "2",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      },
+      {
+        "account_name": "single-invented-account",
+        "order_id": "5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+        "event_id": "frozen-order:5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+        "status": "filled",
+        "reason": "",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\"}, \"shares\": {\"A\": \"100\"}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"400.100\", \"fees\": \"10.400\", \"free_cash\": \"0.100\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\", \"B\": \"0\"}, \"shares\": {\"A\": \"100\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "ledger_apply_count": 1,
+        "ledger_state_unchanged": false,
+        "quantity": "100",
+        "price": "2",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      }
+    ]
+  },
+  "test_unknown_coverage_pending_branch_and_parallel_batch_unsupported": {
+    "unknown": {
+      "decision_hash": "800b032f8e00685cb8ddb474a909cb417a45ac7e235472199e236728d526dabc",
+      "plan_hash": "4c8ca9e5e817b47bcbb526ac9fa70bca1e1af179de5dacaf3ae87daf8c4255a9",
+      "status": "unsupported",
+      "reason": "unsupported_action_coverage_unknown",
+      "ordering": [
+        [
+          "A",
+          "205.250"
+        ],
+        [
+          "B",
+          "205.250"
+        ]
+      ],
+      "budgets": [],
+      "orders": [],
+      "unallocated": "410.50",
+      "current_cash": {
+        "name": "cash-from-single-invented-account",
+        "source_id": "single-invented-account:42a3d210283ef4be7f41383b08ae8da13f5c9cfb926dc9953cf572eddca0748f",
+        "amount": "410.50",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "available_at": "2026-01-01 15:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-action-coverage",
+        "source_id": "synthetic-empty-covered-source",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-02 08:00:00+08:00",
+        "events": []
+      },
+      "funding_receipt": null,
+      "frozen_at": "2026-01-02 08:00:00+08:00",
+      "opening_at": "2026-01-02 09:30:00+08:00"
+    },
+    "pending": {
+      "decision_hash": "857722913f570d62bdce2aaca857b4dca1e3d33f9df39736d389ed633e49f45a",
+      "plan_hash": "ba2a0831bbf96d5c529d6f45a2d4d695688398e630839fd2313ef2d533263493",
+      "status": "unsupported",
+      "reason": "triggered_no_sellable_whole_lot_pending_user",
+      "ordering": [
+        [
+          "B",
+          "20.0"
+        ],
+        [
+          "A",
+          "0"
+        ]
+      ],
+      "budgets": [],
+      "orders": [],
+      "unallocated": "0",
+      "current_cash": {
+        "name": "cash-from-small",
+        "source_id": "small:aaa7e37515083bc7dd0e5605b84c89318e642d7c98d3d6bcdf89979a7992851e",
+        "amount": "0",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "available_at": "2026-01-01 15:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "action_context": {
+        "name": "invented-action-coverage",
+        "source_id": "synthetic-empty-covered-source",
+        "known_at": "2026-01-01 15:00:00+08:00",
+        "covered_from": "2026-01-01 15:00:00+08:00",
+        "covered_through": "2026-01-07 09:30:00+08:00",
+        "events": []
+      },
+      "funding_receipt": null,
+      "frozen_at": "2026-01-02 08:00:00+08:00",
+      "opening_at": "2026-01-02 09:30:00+08:00"
+    },
+    "parallel_batch_refused": true
+  },
+  "test_wrong_cost_plan_calendar_and_external_ledger_refused": {
+    "refusals": [
+      {
+        "account_name": "single-invented-account",
+        "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "status": "refused",
+        "reason": "wrong decision, plan, or cost identity",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "ledger_apply_count": 0,
+        "ledger_state_unchanged": true,
+        "quantity": "100",
+        "price": "2",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      },
+      {
+        "account_name": "single-invented-account",
+        "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "status": "refused",
+        "reason": "wrong decision, plan, or cost identity",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "ledger_apply_count": 0,
+        "ledger_state_unchanged": true,
+        "quantity": "100",
+        "price": "2",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      },
+      {
+        "account_name": "single-invented-account",
+        "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "status": "refused",
+        "reason": "calendar evidence identity differs",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "ledger_apply_count": 0,
+        "ledger_state_unchanged": true,
+        "quantity": "100",
+        "price": "2",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      },
+      {
+        "account_name": "single-invented-account",
+        "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "status": "refused",
+        "reason": "foreign ledger or batch context",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "ledger_apply_count": 0,
+        "ledger_state_unchanged": true,
+        "quantity": "100",
+        "price": "2",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      },
+      {
+        "account_name": "single-invented-account",
+        "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "status": "refused",
+        "reason": "wrong order or opening identity; no resize",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+        "ledger_apply_count": 0,
+        "ledger_state_unchanged": true,
+        "quantity": "50",
+        "price": "2",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      }
+    ]
+  }
+}

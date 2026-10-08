@@ -1,0 +1,81 @@
+{
+  "mission": "只修复独审的订单重试身份与到账现金重复声明两类缺陷，原限定范围和费用/时点不变。",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "task_scope": [
+    "先保存已冻结v1四源码和原hash，保留原34文件/失败记录；使用v2新文件/回执或准确v1快照，不覆盖失败证据。",
+    "按独审review-v1先实际复现3绕过：换下一开盘追单、决策仅改名重开、374.82到账款标为不含卖款；保存实际输出和旧源绑定，不运行旧全套。",
+    "范围仅一个原决策的人工账户内存运行：第一次begin绑定原decision，后续不接受换名/新decision重置；attemptkey不因改opening清空。卖出后的不同方向后续买单应保持可用。",
+    "begin有funding_receipt时必须证明当前快照已包含同一回执且由同ledger明确释放；不含/漏receipt/未释放/错receipt均在调用账本前拒绝。不能依赖末端账本余额不足来掩盖预算重复计款。",
+    "不改已验planner/datedledger/spec四原件，不新建预占/部分成交/恢复/多批并发或新资金政策。",
+    "增加针对3反例的v2检查，并检正常第二单、合法卖后后续buy/replay等受影响路径；不要重复原已验金额全套。",
+    "结果给每个反例修复前后回执、关键正常路径数值、调用次数与状态相等；明确仅单原决策范围，原无整手分支待用户。"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs",
+    "docs/research",
+    "docs/ops/agent-workflow.md",
+    ".claude/skills/macd-reading/SKILL.md",
+    "docs/plan-sector-trend-page.md",
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-controller-acceptance-v2.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-scope-controller-review.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-independent-review-v1.json"
+  ],
+  "strategy_sources_read_only": [
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "expected_outputs": [
+    "v1冻结/3实际反例/有界v2源码与针对回归/源码指纹/失败保留/交付限制"
+  ],
+  "acceptance": [
+    "3原反例修复前真实复现、修复后在账本前拒绝，金额状态无误改",
+    "正常两笔共享预算末现金0.10、卖后后续buy69.52、replay无二次影响保持",
+    "固定4原源未改；未知分支不自动选择；不新增市场或旧测试重跑"
+  ],
+  "stop_conditions": [
+    "只写新raw，禁止Git提交/其他对话/代理/联网/安装/旧测试/旧源改动/仓外写/删除清理。Python不生成旧源pyc。",
+    "不得实现部分成交/多批并发预占/撤单/恢复或新的资金规则；无整手P1仍待用户，跨行动订单unsupported。",
+    "新文件前实测容量，使用直接文件工具不依赖外部临时文件；写后读回，ENOSPC先保留已有文件/失败并停止相应写入。",
+    "0真实数据/行情/拟合/标签/封存重跑/付费/交易/生产；真实市场原输入条件不变。"
+  ],
+  "controller_review": {
+    "required": true,
+    "reviewer": "/root/settlement_scope_review",
+    "focus": "three bypasscases andnecessary legalaffectedpaths"
+  },
+  "source_sha256": {
+    "spec": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+    "planner2": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+    "planner1_arithmetic": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+    "datedledger": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3"
+  },
+  "budget": {
+    "market_runs": 0,
+    "new_data_requests": 0,
+    "fits": 0,
+    "labels": 0,
+    "sealed_reruns": 0
+  },
+  "authority": "User active mainGoal; originalGoal5 spec integration, no new policy or engine; critical review confirms independent necessary slice.",
+  "frozen_v1_source_sha256": {
+    "order_ledger_adapter.py": "81be6d159af70090352f33af815b740a5c730234c1c7c80af5e022c3f6b3d61d",
+    "adapter_fixtures.py": "3262dd2b9476e04fd260e1f7da366d9bae4722cad792cf9949eceb29f75a7e28",
+    "test_adapter.py": "e45b32d4464d98372361421028951cb4b3f54a3b39eedccb8863a16cdea15c71",
+    "run_checks.py": "fd450c221f5b21a73c0a9081be7a4a6867a5a67225d03daa2a943c730e2f6384"
+  },
+  "review_receipt": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-independent-review-v1.json"
+}

@@ -1,0 +1,10 @@
+{
+  "command": "python3 -B -c targeted self-check",
+  "finding": "after both wrong-cost attempts refused, begin same frozen plan was accepted again",
+  "actual": {
+    "refusals": 2,
+    "fresh_batch_rejected_plan_allowed": true
+  },
+  "expected": "same original decision/opening/symbol/side may not be chased through fresh context",
+  "source": "failed-attempt3-source"
+}

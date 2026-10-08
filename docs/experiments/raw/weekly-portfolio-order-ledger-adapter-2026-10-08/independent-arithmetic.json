@@ -1,0 +1,131 @@
+{
+  "command": "python3 -B /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/independent_arithmetic.py",
+  "exit_code": 0,
+  "checks": [
+    {
+      "name": "buy1 cost",
+      "actual": "1026/5",
+      "expected": "1026/5",
+      "formula": "100*2 +max(.2,5)+.2=205.2"
+    },
+    {
+      "name": "two buys final cash",
+      "actual": "0.100",
+      "expected": "1/10",
+      "formula": "410.5-205.2-205.2=.1"
+    },
+    {
+      "name": "two buys fees once",
+      "actual": "10.400",
+      "expected": "52/5",
+      "formula": "2*(commission5+slippage.2)=10.4"
+    },
+    {
+      "name": "two buys assets",
+      "actual": "400.100",
+      "expected": "4001/10",
+      "formula": "initial410.5 minus totalfees10.4; 200 shares*2 +cash.1"
+    },
+    {
+      "name": "two buys A total",
+      "actual": "100",
+      "expected": "100",
+      "formula": "one100 purchase"
+    },
+    {
+      "name": "two buys A sellable",
+      "actual": "0",
+      "expected": "0",
+      "formula": "Jan8 release not yet reached"
+    },
+    {
+      "name": "over cap cash unchanged",
+      "actual": "410.50",
+      "expected": "410.50",
+      "formula": "no first order fee or principal charged"
+    },
+    {
+      "name": "second budget stays fixed",
+      "actual": "205.250",
+      "expected": "205.25",
+      "formula": "original second budget not enlarged after first rejection"
+    },
+    {
+      "name": "one valid second final cash",
+      "actual": "205.300",
+      "expected": "2053/10",
+      "formula": "410.5-205.2=205.3"
+    },
+    {
+      "name": "sale cash remains original",
+      "actual": "200",
+      "expected": "200",
+      "formula": "net sell proceeds initially restricted"
+    },
+    {
+      "name": "sale restricted net",
+      "actual": "174.8200",
+      "expected": "8741/50",
+      "formula": "100*1.8 -commission5 -.18 slippage=174.82"
+    },
+    {
+      "name": "sale fee",
+      "actual": "5.1800",
+      "expected": "259/50",
+      "formula": "5.18 charged once"
+    },
+    {
+      "name": "release cash",
+      "actual": "374.8200",
+      "expected": "18741/50",
+      "formula": "explicit release turns restricted into currentfree374.82"
+    },
+    {
+      "name": "release equity unchanged",
+      "actual": "924.8200",
+      "expected": "924.8200",
+      "formula": "same asset switches from restricted to free"
+    },
+    {
+      "name": "later buy cost",
+      "actual": "3053/10",
+      "expected": "3053/10",
+      "formula": "300*1+commission5+.3=305.3"
+    },
+    {
+      "name": "later final cash",
+      "actual": "69.5200",
+      "expected": "1738/25",
+      "formula": "69.52"
+    },
+    {
+      "name": "sell+buy fees",
+      "actual": "10.4800",
+      "expected": "262/25",
+      "formula": "10.48; no duplicate slippage"
+    },
+    {
+      "name": "later final B",
+      "actual": "400",
+      "expected": "400",
+      "formula": "old100+new300"
+    },
+    {
+      "name": "later B sellable",
+      "actual": "100",
+      "expected": "100",
+      "formula": "new300 remain locked until explicitJan8"
+    },
+    {
+      "name": "final marked assets",
+      "actual": "919.5200",
+      "expected": "22988/25",
+      "formula": "initial1000; A350 reprices2->1.8 loss70; totalfees10.48; assets919.52"
+    }
+  ],
+  "attempts": 23,
+  "refusal_or_replay_unchanged": 17,
+  "filled": 6,
+  "ledger_apply_calls": 7,
+  "planner_or_ledger_imported": false
+}

@@ -1,0 +1,46 @@
+{
+  "mission": "对单人工账户单批串行整笔订单接入账本进行独立实算与反例复核，验证原合同，不为绿色扩大范围。",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "task_scope": [
+    "读取原实施合同/已验模块与冻结新四源码，独立构造必要数值案例，不仅运行作者测试或复述通过。",
+    "只读新适配器及回执，0新旧完整suite重跑；可用Python -B内存独立探针无文件输出。",
+    "核固定plan/order身份/金额/日历/显式成本/同一账本当前资金、batch自身成功状态更新与外来状态拒绝。",
+    "独立验证410.50两单后0.10、首单越价拒绝第二后205.30、sell净174.82到时释放再buy后69.52及10.48费用；同开盘不能用卖款。",
+    "独立反例：重放成功与已拒绝尝试，换order/event/plan/context追单，错cost/calendar/cash snapshot，需处理行动、数量不足；每次拒绝比较账本真实前后，不偷做释放。",
+    "作者自查拒单后新context追单漏洞已保存/修复；审查attemptkey是否既不能绕过也不错误阻止同批独立合法订单，范围仍单账户内存，不宣称持久恢复。",
+    "明确代码缺陷、原合同输入限制与真实市场未验证的区别。只对原合同必要条件给accepted或具体有复现证据的修复要求。"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08",
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-implementation-contract.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-scope-controller-review.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "source_sha256": {
+    "order_ledger_adapter.py": "81be6d159af70090352f33af815b740a5c730234c1c7c80af5e022c3f6b3d61d",
+    "adapter_fixtures.py": "3262dd2b9476e04fd260e1f7da366d9bae4722cad792cf9949eceb29f75a7e28",
+    "test_adapter.py": "e45b32d4464d98372361421028951cb4b3f54a3b39eedccb8863a16cdea15c71",
+    "run_checks.py": "fd450c221f5b21a73c0a9081be7a4a6867a5a67225d03daa2a943c730e2f6384"
+  },
+  "expected_outputs": [
+    "返回独立关键数值、实际探针/复现方法、源码hash、发现与限度；root保存回执。"
+  ],
+  "stop_conditions": [
+    "无网络/行情/付费/原件写/旧suite重跑/仓外写/Git/新代理；仅内存，禁止pyc。",
+    "作者四源码已固定，若hash变化先报告；不自行修复，root串行给原执行者。",
+    "未知P1无整手用户分支/预占/部分成交/恢复/并发/跨行动订单不实现；不把本轮接受写成完整策略有效。"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true
+}

@@ -479,3 +479,10 @@ Git入口、已验收报告发布、人工接入＋独审返修均已有真实�
 - scope_released=true已在7ca0650ed5bd09685a2bdf2b0b51cb5c2ae9b895远端核实，并通知制作视频继续其单项登记。新mac-local-storage-cleanup只读核不触本范围，不借其仓外清理权。
 - Astra/high原合同独审认为单账户、单批串行整笔订单接入已验账本是必要且独立可做的范围；不需要先重造未知预占包。原spec/planner1/planner2/datedledger四SHA固定，新contract order-ledger-adapter-implementation-contract.json dry_run ready。已向原Sol6.1/medium followup，并核agent running；源码尚待交付，不能称执行层完成。
 - 精确写范围仅新raw/weekly-portfolio-order-ledger-adapter-2026-10-08，验收410.50→0.10、首单拒绝后205.30、卖后合法释放再买69.52与资金/身份/时点拒绝；旧模块不改不重跑。无整手P1仍待用户定义，预占/部分成交/恢复/并发不实施；0市场/真实标签/拟合/新取数。主Goal active，本轮实质进展，非全局阻塞。
+
+## 2026-10-08T20:55:33.641956+08:00 适配首版独审发现真实缺陷，已实际接续修复
+
+- 原Sol交新raw34文件242095B，12作者组及20保存金额复算通过，root核四新四旧指纹/20金额Fraction一致；这不等于验收。Astra只读独立探针三个现金路径成立，但发现两类3绕过：已拒绝两单改下一开盘仍成交（末200.30），同输入只改decision名字也能重开（末0.10）；已到账374.82快照标不含卖款，planner二加后预算400/限价1.315被begin接受。最后账本拒绝380.375成本，因此未真实超支；入口资金证明仍错。
+- 准确反例和原冻结四源见order-ledger-adapter-independent-review-v1.json；原失败01/02与作者自查重开漏洞快照全部保留。新repair-contract-v2 dry_run ready，同原决策绑定/去opening洗attempt/有funding时强制同账本已释放且快照含同回执；不改原planner/ledger/spec、资金规则或用户未知分支，不实现预占/部分成交/恢复。
+- 同范围已登记coordination/lei@6599115559a75fe0f4a864c97913b002b93dfb10并推后字节核，实际followup原Sol6.1/medium，待v2实际交付与针对独审。此阶段状态未通过，不归档为报告passed。上一七凭据449020f5a6895cb70883365ceb127a3f057b467a远端核实。
+- 已刷新原八目标已有review而未另建任务总表：2新增两root报告及62安全依赖发布、5日期账本/纯规划限定验收、8原CLI显式存储计划限定验收；科研原件仍缺。其他owner新增video登记634→635并已释放；其V7重做仅媒体/skill范围。另owner报告空间恢复，本线程未删除/迁移，仍实测不借其权限。

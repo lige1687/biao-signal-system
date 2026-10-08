@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-08T20:52:57.110071+08:00",
+  "reviewer": "/root/settlement_scope_review",
+  "model": "gpt-6-astra/high",
+  "status": "not_accepted_two_classes_three_bypass_cases",
+  "source_sha256": {
+    "order_ledger_adapter.py": "81be6d159af70090352f33af815b740a5c730234c1c7c80af5e022c3f6b3d61d",
+    "adapter_fixtures.py": "3262dd2b9476e04fd260e1f7da366d9bae4722cad792cf9949eceb29f75a7e28",
+    "test_adapter.py": "e45b32d4464d98372361421028951cb4b3f54a3b39eedccb8863a16cdea15c71",
+    "run_checks.py": "fd450c221f5b21a73c0a9081be7a4a6867a5a67225d03daa2a943c730e2f6384"
+  },
+  "method": "Independent readonly in-memory probes; not author/old test suite; source hashes unchanged beforeafter",
+  "findings": [
+    {
+      "id": "P1-once-attempt-decision-identity",
+      "locations": [
+        "order_ledger_adapter.py:127",
+        "order_ledger_adapter.py:147",
+        "order_ledger_adapter.py:203"
+      ],
+      "cases": [
+        {
+          "name": "next_open_chase",
+          "steps": "Both opens2.001 abovecap2.000 refuse. Same originaldecision/cashsnapshot, shiftplan to nextopen; begin accepts; both at1 fill.",
+          "actual_cash": "200.30",
+          "actual_fees": "10.20",
+          "expected": "No new weekly decision: must refuse retry"
+        },
+        {
+          "name": "decision_rename",
+          "steps": "Both originalorders refuse wrongcost, ledger nofills. public decision() sameinputs onlynamechanged thenbegin sameopen accepts both.",
+          "actual_cash": "0.10",
+          "expected": "Same original syntheticdecision cannot reset attemptedstatus by renaming"
+        }
+      ],
+      "minimal_fix": "For this single-original-decision account run, lock firstbatch originaldecision identity; reject name/reset. Attemptkey binds thatoriginal decision+side+symbol, notopening; preserve sell then distinctlaterbuy direction."
+    },
+    {
+      "id": "P2-released-cash-excluding-proceeds",
+      "locations": [
+        "order_ledger_adapter.py:110",
+        "order_ledger_adapter.py:155"
+      ],
+      "steps": "After sale174.82 explicitlyreleased, actualcash374.82. cash_snapshot(at=PAY) withoutsaleid says includes_sale_proceeds=False. Planner readdsnet, cappedbudget400/limit1.315; begin accepts.",
+      "actual": "open1.25 q300 cost380.375 > actual374.82; final ledger rejects atomically, no overspend",
+      "expected": "With funding_receipt, begin requires snapshotexplicitlyincludes same receipt and sameledger releasedstate before any Ledger.apply",
+      "minimal_fix": "Verify receipt inclusion/binding/release at adapterbegin; no oldplanner/ledger edits."
+    }
+  ],
+  "passed": {
+    "two_buys": {
+      "cash": "0.10",
+      "fees": "10.40"
+    },
+    "firstrefusal_secondbuy": {
+      "cash": "205.30"
+    },
+    "sell_release_laterbuy": {
+      "cash": "69.52",
+      "fees": "10.48"
+    },
+    "replay": "0 second ledgercalls",
+    "identity_errors": "wrongcost/priceproof/orderid/q/plan rejected beforeapply",
+    "outside_state": "stops nextadapter attempt preservinglegitimateoutsideevent",
+    "due_action": "ledgerrefusal leavesstateunchanged"
+  },
+  "bounds": "No actualoverspend observed; no realmarket/fullpolicy/reservation/partialfill/restart acceptance."
+}
