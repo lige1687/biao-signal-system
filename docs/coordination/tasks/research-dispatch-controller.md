@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "eec571d51f4bad98a8bca2050f01daa1a383d180",
-  "checked_at": "2026-10-08T18:13:53.827229+08:00",
+  "checked_coordination_sha": "f6d309fbbcb733ffeec8b5aaeaddd3da04416e2f",
+  "checked_at": "2026-10-08T18:22:04.410404+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -491,10 +491,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   },
   "checked_task_ids": [
     "research-dispatch-controller",
-    "daily-trading-system-audit",
     "theory-workflow-system-increment",
-    "lei-technical-reader-research",
-    "external-quant-resources"
+    "daily-trading-system-audit"
   ],
   "heartbeat_configuration": {
     "policy_version": "2026-10-08.v4-direct",
@@ -1115,12 +1113,10 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   ],
   "read_task_ids": [
     "research-dispatch-controller",
-    "daily-trading-system-audit",
     "theory-workflow-system-increment",
-    "lei-technical-reader-research",
-    "external-quant-resources"
+    "daily-trading-system-audit"
   ],
-  "conflict_decision": "Latest direct user authorization supersedes root-only mode. New first batch is two disjoint read-only eligibility audits; no owner/source/research scope takeover.",
+  "conflict_decision": "Original theory owner gets existing artifact publication under own scope; native storage audit read-only. Daily storage access active paths remain untouched. Root only own central records/new raw contracts.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -1849,7 +1845,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "goal_thread": "01a116c7-3700-7062-a6c6-53af00ef60a0",
     "max_parallel_executors": 2,
     "first_batch": {
-      "state": "registered_read_only_audits_not_dispatched",
+      "state": "both_audits_delivered_controller_reviewed",
       "purpose": "Newly authorized wider LeiSignal queue: separately determine research and engineering eligible work, not redo completed experiments.",
       "write_paths": [
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/",
@@ -1875,8 +1871,48 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
           "reasoning_effort": "low",
           "scope": "other explicitly authorized LeiSignal engineering tasks; ownership/dependencies/ready candidates only"
         }
-      ]
-    }
+      ],
+      "scope_commit": "f6d309fbbcb733ffeec8b5aaeaddd3da04416e2f",
+      "scope_file_readback_equal": true,
+      "contract_paths": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/research-readiness-contract.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/engineering-readiness-contract.json"
+      ],
+      "actual_agents": [
+        "/root/research_readiness_v5",
+        "/root/engineering_readiness_v5"
+      ],
+      "preflight": "v1 absolute-path validation failed before any spawn; preserved; v2 relative-path preflight ready; read-only helpers started and returned",
+      "research_result": "0 ready real factor runs; goal5settlement engineering coverage andgoal8native write preflight independent of D originals",
+      "engineering_result": "Initially0 ready; controller challenged unpublished accepted tools; helper verified existing authority/manifests, corrected to ready for original-owner exact publication",
+      "review_decision": "Execute original-owner safe publication; parallel exact native storage preflight scope audit; settlement next after existing coverage/owner check"
+    },
+    "automation": {
+      "state": "updated_readback_verified",
+      "prompt_sha256": "10a6667f9c8a4ddf1af66a84cf762c21d4ec33bae266368c714fc5cff3d8214c",
+      "status": "ACTIVE",
+      "rrule": "FREQ=MINUTELY;INTERVAL=30",
+      "target": "01a116c7-3700-7062-a6c6-53af00ef60a0"
+    },
+    "ready_queue": [
+      {
+        "id": "theory-workflow-system-increment/safe-publication",
+        "status": "ready_not_dispatched",
+        "owner": "01a11579-7f2c-7c21-88d1-e5b334b569b7",
+        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/theory-safe-publication-contract.json"
+      },
+      {
+        "id": "research-native-storage-preflight/scope",
+        "status": "ready_not_dispatched",
+        "owner": "/root/research_readiness_v5",
+        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/storage-preflight-scope-contract.json"
+      },
+      {
+        "id": "factor-fusion-risk-exit/settlement-coverage",
+        "status": "pending_scope_review",
+        "dependency": "existing simulation coverage and settlement semantics; not D raw features"
+      }
+    ]
   }
 }
 ```
@@ -1983,3 +2019,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 当前空间实测8432394240字节；本对话未删除或迁移任何内容。原负责人迁移释放量作为其证据保留，不算本中控清理成果。保护只覆盖显式接入的音频流程，其他研究写入仍逐次核空间。
 - 检查/派发/运行/交付/验收分开：已检查8目标；本轮0派发、0研究运行、0新取数；接收既有负责人的工程交付并完成上述有限核验。最新聊天快照仍inProgress，工程批在协调记录为completed；不拿聊天状态代替产物。
 - 后续判定：这批工程结果没有解除D—MAE六原件、股票历史成员/原价格尺度/用途及Qlib原输入缺口；原封存来源预算不重开。目前无新增齐备输入的必要研究单元。保留各项恢复条件，有新原件/具体来源或必要独立工作再执行；不重跑现金、日历或已验收报告。
+
+## 主Goal首批回调与实际接续 2026-10-08T18:22:04.410404+08:00
+
+两只读助手已返回。旧中控把独立模拟/写入保护也归入D缺件等待的判断过宽，现纠正。原始真实实验依赖不变；已验收理论工具仅本机、远端未交付是可继续事项，由原owner按已有清单隔离发布，不需重做研究。准确原生写入保护范围由只读审查先确定，避开活跃daily入口。此刻仅合同ready，派发/启动以随后回执为准。
