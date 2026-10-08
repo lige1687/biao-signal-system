@@ -1,3 +1,14 @@
+# 取消主动推送，改为用户点选查询：开工 2026-10-08T19:37:51.522053+08:00
+
+- task-id daily-trading-system-audit；owner root唯一写者；status active；checked_coordination_sha 05c04e2f8218d8d0cabee292dcbd57f736e6ee13；checked_at 2026-10-08T19:37:51.522053+08:00；已读COORDINATION1.1、自身、中控、classic-factor-research、theory-workflow-system-increment、trend-trading-video最新登记，另读theory新20行来源资格审查（仅其自身raw）。其他原生存储/研究/媒体范围不重叠。
+- 用户最新明确“算了，你别通知我了…我想问的时候…今日操作简报，市场基本面，消息面…接入系统或者加一些自己的搜索…总结”。覆盖上一条仅交易通知要求：不再主动发任何本四任务消息，改为人类问/点后才答。
+- 原3/4/5/6通过专用工具已暂停并静默偏好failed_runs_only；原ID、名称、日程、目标及历史流程保留，提示前置最新取消声明，待读回核验。未暂停其他owner自动化；没有发送新提醒消息。
+- 本批只写自己的技能、gpt-system-integration/portfolio-chat-briefing/system-notifications/codex-storage-management文档、ownprogress、原raw/on-demand-*。AGENTS仅新增唯一lei-chat-on-demand标记块，本机已有全部字节不改；发布源父AGENTS加本块，不混共享原脏改。
+- 验收：四任务实际PAUSED/静默读回、菜单与现有工具映射、现有on-demand视图可读取名称/来源日期/缺口、必要文档归置、准确源分支与协调读回。无新后端控制器、不改通知算法/交易规则、不跑市场实验/ASR/下载，不新增自动化或真实写单。使用web补证仅在用户随后请求具体分析时，正文须明确系统证据与搜索证据及时间，不能把外部观点写入技术条件。
+- 暂停来源是用户最新取消，不是权限阻塞；停止条件为本次暂停与按需入口全部可核，不要求用户再确认。
+
+---
+
 # 后续AI直接使用存储入口：本批完成 2026-10-08T18:24:30.533822+08:00
 
 - task-id daily-trading-system-audit；owner /root；status completed（仅本AI访问批，使用效果待用户）；checked_coordination_sha 0e4bbc013ee28ef55045eabf2b0a01caa0b1075b；checked_at 2026-10-08T18:24:30.533822+08:00（Asia/Shanghai）。
