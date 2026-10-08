@@ -1,3 +1,17 @@
+## V7 本轮制作与播放交付完成，观感待用户验收
+
+- task-id trend-trading-video；本轮制作 completed，主观观感待用户；owner本对话root；2026-10-08T21:31:41.506011+08:00；checked_coordination_sha: 4cee81719a37b4a579bdab75f6a1a4e7b4389f0d；已读 COORDINATION.md、本任务与 research-dispatch-controller；冲突决定：只有原自有媒体、skill与入口，未占registry/INDEX。
+- 成果 codex/trend-history-v7-20261008@ae6118495e326262f511b834c7f3e88ad2a2ca15，19个准确路径逐字远端读回。未合并/部署；完整源、混音脚本、时间表、许可来源、失败记录和验证已保存。媒体/依赖/缓存只在本机，远端不含视频。
+- 最终4K trend-history-v7-4k-final.mp4：3840×2160/30fps/1800帧，SHA 57e26d98d9c4a5068b2cebfbf3c01bd36df77f7080f8eb57172a3e2e845c6319。1080 trend-history-v7-1080-final.mp4：1920×1080/30fps/1800帧，SHA eb6ea216ab46013da2673bdd509bb271f1a88d0cc5380d9786afae6b635feadd。均60.011秒AAC；目录docs/ops/media/trend-trading-60s-20261008/v7/。
+- 验收：先实际10秒小样；两最终文件完整解码/ffprobe通过，八处实帧检查；三处可见裁切/重叠已修复。1080浏览器从0实播到60.011秒ended且无error；4K链接实播到14.939秒、3840×2160且无error。音乐−17.0LUFS、真峰−1.6dBFS；不冒称完整主观听审。TypeScript、1800帧时间表及仓库归置通过。
+- 内容仍为60秒无旁白趋势思想史，无真实行情。深色档案风、真实1923利弗莫尔照片、价格线拉远、通道突破、规则卡片展开；用户原参考仅有有限片段视觉证据，未确认原作者完整配乐/工具链。许可与改编说明在播放页。
+- 交付 http://127.0.0.1:8773/v7/，可直接播放、分段观看、下载4K/1080、对比V6；旧片保留。完整制作记录v7/production-notes.md；可编辑时间线8774服务本机运行。
+- 磁盘ENOSPC已因外部可用空间回升解除，本agent没有删除缓存/旧片，不再等待删除许可；失败保留。最终开头说明遮挡仅重做0—119帧再接回，其余镜头不重复制作。依赖高危告警原样记录，本地工具未部署。
+- 账号周额度40%→42%，显示变化2个百分点，单任务精确消耗未知；未付费媒体服务、未派子agent。缓存删除请求已向用户说明不再需要处理。
+- 原自有路径本轮写入结束，不启动后台无限优化；下一步由用户对新版观感反馈决定具体修改，技术检查不代表观感已获认可。
+
+---
+
 ## V7 导出恢复
 
 - task-id trend-trading-video；active；2026-10-08T21:16:43.639905+08:00；checked_coordination_sha: c750d58f1c11c74d45c2eec448752b6ff6c64375；已读本任务及此前 COORDINATION.md / research-dispatch-controller，原自有范围无冲突。
