@@ -425,3 +425,11 @@ Git入口、已验收报告发布、人工接入＋独审返修均已有真实�
 - 正式报告docs/experiments/weekly-portfolio-dated-execution-2026-10-08.md，一句话结论/ARCHIVE/证据与范围齐全；主登记632→633，独立成果分支211→212，各自原条目/metadata不变，INDEX仅1导航增量，链接/归置通过。注册范围ccb11c97e350a56eb80f1ae9ba6ba94d6d5898bc先推读回。
 - 36来源索引3c849c81/67f523d0已收并核准确36SHA，9方法候选可独立核，其他27按来源/传播条件恢复。本轮已发原technicalowner只读9方法核定，范围9efd5049177bcfa3677fb8edc0616a383247a4ea读回；发送不是验收，需核实际turn。
 - 本批小人工raw按settlement-publication-manifest.json准确发布，约0.33MB保留初版/失败；不上传主632项全登记、原策略全文或行情。本段是本地归档完成/远端发布待核，最终SHA由后续中控协调回执定位。
+
+## 主Goal本轮验收与下一批已启动 2026-10-08T19:28:36.627137+08:00
+
+- 账本60净文件（50人工raw共326978字节）在codex/research-direct-20261008@df36bfbab7ab1a3f621e812dd385eec71832d456逐文件远端读回；报告SHA382d4a4d624ad4893748509b4d6cdd3c46f773be26e45bc8d8d7ccda24bf7d60与单条登记一致。先前序列化格式变化通过正常后继恢复原indent1，净登记只增11行，原历史不改。
+- 原technicalowner核9准确自有方法均安全候选，39458字节，不能带引用行情/策略/数据包；回调method9-owner-callback.json。已发原theoryowner真正补9，turn01a11b43-d2ca-7d10-bad2-00366d547017/cursor:14，工具执行标记已核。另一原technicalowner只读核25计算/来源资料，turn01a11b43-d3bc-7552-a709-e179f5d65e2b/cursor:3，同样已核工具启动。两范围独立；本轮已完成资料不重做。
+- 最新协调范围9a37d0c40b63e62175be3a15e896a6137f547476已远端核。当前主Goal active，仍有上述2运行任务；9未发布前不宣称36已减到27。保留D六准确原件、真实完整价格/成员、Qlib原输入与2逐观察资料传播依赖。没有Goal阻塞或全部完成声明。
+
+- 接续凭据首次发布前diff检查发现新callback JSON末尾多空行，提交未执行；随后未设置失败即停的shell错误继续push，实际Everythingup-to-date，仅旧账本提交存在。没有把该次视为接续已发布，状态已纠正；原五新文件暂存保留，JSON正文不变，规范换行后仅准确路径正常重试。完整失败checkpoint-publication-failure.json，后继读回另核。
