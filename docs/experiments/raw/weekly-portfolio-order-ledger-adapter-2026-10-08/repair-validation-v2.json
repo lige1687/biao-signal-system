@@ -1,0 +1,99 @@
+{
+  "status": "targeted_repair_verified_pending_independent_acceptance",
+  "at": "2026-10-08T21:00:33.203347+08:00",
+  "checked_coordination_sha": "6599115559a75fe0f4a864c97913b002b93dfb10",
+  "coordination_note": "parent verified remote; this executor made zero network or Git calls",
+  "sources": {
+    "order_ledger_adapter_v2.py": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba",
+    "adapter_fixtures_v2.py": "fbf1104c7f5f22820c8aeb823bb9529c4bcbe304a7a41ddd1322fd6988076af1",
+    "targeted_repair_checks.py": "943bb347d54f163839abc3dcc2ec5bf02bf6bc38e68b9d41e87f5a9457026f87"
+  },
+  "original_34_files_unchanged": true,
+  "commands": [
+    {
+      "command": "cat order-ledger-adapter-repair-contract-v2.json order-ledger-adapter-review-v1.json",
+      "exit": 1,
+      "failure": "second filename absent; contract read; corrected independent review filename read successfully; no write attempted"
+    },
+    {
+      "command": "python3 -B docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/targeted_repair_checks.py 1",
+      "exit": 0,
+      "groups": 3,
+      "receipt": "review-reproductions-v1.json",
+      "result_bytes": 17949
+    },
+    {
+      "command": "python3 -B docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/targeted_repair_checks.py 2",
+      "exit": 0,
+      "groups": 6,
+      "note": "first targeted repair run before adding precreated name and receipt issuance checks"
+    },
+    {
+      "command": "python3 -B docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/targeted_repair_checks.py 2",
+      "exit": 0,
+      "groups": 8,
+      "receipt": "targeted-results-v2.json",
+      "result_bytes": 37116
+    }
+  ],
+  "independent_amount_checks": {
+    "two_buys": "410.50 - 2*(200+5+0.20) = 0.10",
+    "refused_first_then_second": "410.50 - (200+5+0.20) = 205.30",
+    "sale_net": "180 - 5 - 0.18 = 174.82",
+    "released_cash": "200 + 174.82 = 374.82",
+    "legal_later_buy": "374.82 - (300+5+0.30) = 69.52",
+    "bad_plan_atomic_ledger_refusal": "300*1.25 + 5 + 0.375 = 380.375 > 374.82; no overspend"
+  },
+  "bounds": [
+    "single original decision per in-memory artificial account",
+    "one serial whole-order batch; different later buy direction supported",
+    "no reservation, partial fills, cancellations, recovery or concurrent execution",
+    "no automatic policy recomputation, market data, actual account or trading",
+    "unknown no-whole-lot user branch and corporate-action crossing remain unsupported",
+    "spec/planner/dated ledger unchanged; old suites not rerun"
+  ],
+  "new_files_before_validation": {
+    "adapter_fixtures_v2.py": {
+      "bytes": 2357,
+      "sha256": "fbf1104c7f5f22820c8aeb823bb9529c4bcbe304a7a41ddd1322fd6988076af1"
+    },
+    "order_ledger_adapter_v2.py": {
+      "bytes": 15068,
+      "sha256": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba"
+    },
+    "review-reproductions-v1.json": {
+      "bytes": 17949,
+      "sha256": "abcce8ff89c6b5d010d209e6aa264b0e0df2ce674279eb9f61b706b2ddf53389"
+    },
+    "targeted-results-v2.json": {
+      "bytes": 37116,
+      "sha256": "f32d05b860c3e7622a954d30a0d8b1ca5e8d550faff86d8135a40f8cac49235e"
+    },
+    "targeted_repair_checks.py": {
+      "bytes": 8658,
+      "sha256": "943bb347d54f163839abc3dcc2ec5bf02bf6bc38e68b9d41e87f5a9457026f87"
+    },
+    "v1-existing-files-manifest.json": {
+      "bytes": 4734,
+      "sha256": "61392b690efeca793d0cd573d5a3342f525f939882c726a926c64c6cf0072818"
+    },
+    "v1-source/adapter_fixtures.py": {
+      "bytes": 2354,
+      "sha256": "3262dd2b9476e04fd260e1f7da366d9bae4722cad792cf9949eceb29f75a7e28"
+    },
+    "v1-source/order_ledger_adapter.py": {
+      "bytes": 13975,
+      "sha256": "81be6d159af70090352f33af815b740a5c730234c1c7c80af5e022c3f6b3d61d"
+    },
+    "v1-source/run_checks.py": {
+      "bytes": 1199,
+      "sha256": "fd450c221f5b21a73c0a9081be7a4a6867a5a67225d03daa2a943c730e2f6384"
+    },
+    "v1-source/test_adapter.py": {
+      "bytes": 11078,
+      "sha256": "e45b32d4464d98372361421028951cb4b3f54a3b39eedccb8863a16cdea15c71"
+    }
+  },
+  "new_bytes_before_validation": 114488,
+  "free_before_write": 165720064
+}

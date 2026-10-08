@@ -1,0 +1,888 @@
+{
+  "version": 2,
+  "free_before_write": 207712256,
+  "checks": {
+    "next_open_chase": {
+      "initial_refusals": [
+        {
+          "account_name": "single-invented-account",
+          "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "status": "refused",
+          "reason": "reject_no_resize",
+          "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "ledger_apply_count": 0,
+          "ledger_state_unchanged": true,
+          "quantity": "100",
+          "price": "2.001",
+          "opening_at": "2026-01-02T09:30:00+08:00"
+        },
+        {
+          "account_name": "single-invented-account",
+          "order_id": "5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "event_id": "frozen-order:5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "status": "refused",
+          "reason": "reject_no_resize",
+          "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "ledger_apply_count": 0,
+          "ledger_state_unchanged": true,
+          "quantity": "100",
+          "price": "2.001",
+          "opening_at": "2026-01-02T09:30:00+08:00"
+        }
+      ],
+      "guard": {
+        "reason": "re-attempt through fresh batch or new plan ID unsupported",
+        "ledger_apply_count": 0,
+        "state_unchanged": true,
+        "money": {
+          "at": "2026-01-07T09:30:00+08:00",
+          "free_cash": "410.50",
+          "restricted_cash": "0",
+          "receivable": "0",
+          "shares": {},
+          "sellable": {},
+          "equity": "410.50",
+          "units": "1000",
+          "fees": "0"
+        }
+      },
+      "subsequent_attempts": [],
+      "final": {
+        "at": "2026-01-07T09:30:00+08:00",
+        "free_cash": "410.50",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {},
+        "sellable": {},
+        "equity": "410.50",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    "decision_rename": {
+      "initial_refusals": [
+        {
+          "account_name": "single-invented-account",
+          "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "status": "refused",
+          "reason": "wrong decision, plan, or cost identity",
+          "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "ledger_apply_count": 0,
+          "ledger_state_unchanged": true,
+          "quantity": "100",
+          "price": "2",
+          "opening_at": "2026-01-02T09:30:00+08:00"
+        },
+        {
+          "account_name": "single-invented-account",
+          "order_id": "5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "event_id": "frozen-order:5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "status": "refused",
+          "reason": "wrong decision, plan, or cost identity",
+          "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "ledger_apply_count": 0,
+          "ledger_state_unchanged": true,
+          "quantity": "100",
+          "price": "2",
+          "opening_at": "2026-01-02T09:30:00+08:00"
+        }
+      ],
+      "guard": {
+        "reason": "original decision already bound; rename or reset unsupported",
+        "ledger_apply_count": 0,
+        "state_unchanged": true,
+        "money": {
+          "at": "2026-01-07T09:30:00+08:00",
+          "free_cash": "410.50",
+          "restricted_cash": "0",
+          "receivable": "0",
+          "shares": {},
+          "sellable": {},
+          "equity": "410.50",
+          "units": "1000",
+          "fees": "0"
+        }
+      },
+      "subsequent_attempts": [],
+      "final": {
+        "at": "2026-01-02T09:30:00+08:00",
+        "free_cash": "410.50",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {},
+        "sellable": {},
+        "equity": "410.50",
+        "units": "1000",
+        "fees": "0"
+      }
+    },
+    "cash_proceeds_omission": {
+      "sale": {
+        "account_name": "single-invented-account",
+        "order_id": "aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+        "event_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+        "status": "filled",
+        "reason": "",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"1000\", \"fees\": \"0\", \"free_cash\": \"200\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"350\", \"B\": \"100\"}, \"shares\": {\"A\": \"350\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"924.8200\", \"fees\": \"5.1800\", \"free_cash\": \"200\", \"receivable\": \"0\", \"restricted_cash\": \"174.8200\", \"sellable\": {\"A\": \"250\", \"B\": \"100\"}, \"shares\": {\"A\": \"250\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "ledger_apply_count": 1,
+        "ledger_state_unchanged": false,
+        "quantity": "100",
+        "price": "1.8",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      },
+      "release": [
+        {
+          "event": {
+            "kind": "advance",
+            "id": "explicit-release",
+            "at": "2026-01-06T10:00:00+08:00",
+            "phase": 3
+          },
+          "before": {
+            "cash": "200",
+            "lots": [
+              {
+                "symbol": "A",
+                "qty": "250",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              },
+              {
+                "symbol": "B",
+                "qty": "100",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              }
+            ],
+            "restricted": [
+              {
+                "amount": "174.8200",
+                "available_at": "2026-01-06T10:00:00+08:00",
+                "sold_at": "2026-01-02T09:30:00+08:00",
+                "sale_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589"
+              }
+            ],
+            "receivables": {},
+            "units": "1000",
+            "inflows": "0",
+            "fees": "5.1800",
+            "actions": "set()",
+            "ids": "{'frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589'}",
+            "last_at": "2026-01-02T09:30:00+08:00",
+            "last_phase": 3,
+            "prior_complete": {
+              "at": "2026-01-01T15:00:00+08:00",
+              "nav": "1"
+            },
+            "marks": {
+              "A": "1.8",
+              "B": "1"
+            }
+          },
+          "after": {
+            "cash": "374.8200",
+            "lots": [
+              {
+                "symbol": "A",
+                "qty": "250",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              },
+              {
+                "symbol": "B",
+                "qty": "100",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              }
+            ],
+            "restricted": [],
+            "receivables": {},
+            "units": "1000",
+            "inflows": "0",
+            "fees": "5.1800",
+            "actions": "set()",
+            "ids": "{'frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589', 'explicit-release'}",
+            "last_at": "2026-01-06T10:00:00+08:00",
+            "last_phase": 3,
+            "prior_complete": {
+              "at": "2026-01-01T15:00:00+08:00",
+              "nav": "1"
+            },
+            "marks": {
+              "A": "1.8",
+              "B": "1"
+            }
+          },
+          "money": {
+            "at": "2026-01-06T10:00:00+08:00",
+            "free_cash": "374.8200",
+            "restricted_cash": "0",
+            "receivable": "0",
+            "shares": {
+              "A": "250",
+              "B": "100"
+            },
+            "sellable": {
+              "A": "250",
+              "B": "100"
+            },
+            "equity": "924.8200",
+            "units": "1000",
+            "fees": "5.1800"
+          }
+        }
+      ],
+      "cash": {
+        "name": "cash-from-single-invented-account",
+        "source_id": "single-invented-account:987f2d1dbf0d64746392f5e9b70353fd1f83c979794e0c1f330d8e99fcbaa5ca",
+        "amount": "374.8200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": false,
+        "included_receipt_id": null
+      },
+      "plan": {
+        "decision_hash": "2e33a3467536da1053cb29b4f33fc8c8864a3a6de650a304e122746df10f7c94",
+        "plan_hash": "638e0ef21acd5a00072e934422e9079100ea990db407cbf02fb23b90836cc3ff",
+        "status": "ready",
+        "reason": "frozen budgets; residual not reallocated",
+        "ordering": [
+          [
+            "B",
+            "400.0"
+          ],
+          [
+            "A",
+            "0"
+          ]
+        ],
+        "budgets": [
+          [
+            "B",
+            "400.0"
+          ],
+          [
+            "A",
+            "0"
+          ]
+        ],
+        "orders": [
+          {
+            "order_id": "877e0fe2149b9edc7f1459ea3534ec30701a139412f0356f49653569f688f5c3",
+            "decision_hash": "2e33a3467536da1053cb29b4f33fc8c8864a3a6de650a304e122746df10f7c94",
+            "plan_hash": "638e0ef21acd5a00072e934422e9079100ea990db407cbf02fb23b90836cc3ff",
+            "symbol": "B",
+            "side": "buy",
+            "quantity": "300",
+            "reference": "1",
+            "budget": "400.0",
+            "cap": "1.315",
+            "frozen_at": "2026-01-07 08:00:00+08:00",
+            "opening_at": "2026-01-07 09:30:00+08:00"
+          }
+        ],
+        "unallocated": "149.6400",
+        "current_cash": {
+          "name": "cash-from-single-invented-account",
+          "source_id": "single-invented-account:987f2d1dbf0d64746392f5e9b70353fd1f83c979794e0c1f330d8e99fcbaa5ca",
+          "amount": "374.8200",
+          "known_at": "2026-01-06 10:00:00+08:00",
+          "available_at": "2026-01-06 10:00:00+08:00",
+          "includes_sale_proceeds": false,
+          "included_receipt_id": null
+        },
+        "action_context": {
+          "name": "invented-action-coverage",
+          "source_id": "synthetic-empty-covered-source",
+          "known_at": "2026-01-01 15:00:00+08:00",
+          "covered_from": "2026-01-01 15:00:00+08:00",
+          "covered_through": "2026-01-07 09:30:00+08:00",
+          "events": []
+        },
+        "funding_receipt": {
+          "order_id": "aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+          "status": "filled",
+          "quantity": "100",
+          "price": "1.8",
+          "sold_at": "2026-01-02 09:30:00+08:00",
+          "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+          "receipt_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589"
+        },
+        "frozen_at": "2026-01-07 08:00:00+08:00",
+        "opening_at": "2026-01-07 09:30:00+08:00"
+      },
+      "guard": {
+        "reason": "released funding receipt must be explicitly included in current cash",
+        "ledger_apply_count": 0,
+        "state_unchanged": true,
+        "money": {
+          "at": "2026-01-07T09:30:00+08:00",
+          "free_cash": "374.8200",
+          "restricted_cash": "0",
+          "receivable": "0",
+          "shares": {
+            "A": "250",
+            "B": "100"
+          },
+          "sellable": {
+            "A": "250",
+            "B": "100"
+          },
+          "equity": "924.8200",
+          "units": "1000",
+          "fees": "5.1800"
+        }
+      },
+      "attempt": null,
+      "final": {
+        "at": "2026-01-07T09:30:00+08:00",
+        "free_cash": "374.8200",
+        "restricted_cash": "0",
+        "receivable": "0",
+        "shares": {
+          "A": "250",
+          "B": "100"
+        },
+        "sellable": {
+          "A": "250",
+          "B": "100"
+        },
+        "equity": "924.8200",
+        "units": "1000",
+        "fees": "5.1800"
+      }
+    },
+    "precreated_name_cannot_reset": {
+      "guard": {
+        "reason": "single original decision binding differs",
+        "ledger_apply_count": 0,
+        "state_unchanged": true,
+        "money": {
+          "at": "2026-01-07T09:30:00+08:00",
+          "free_cash": "410.50",
+          "restricted_cash": "0",
+          "receivable": "0",
+          "shares": {},
+          "sellable": {},
+          "equity": "410.50",
+          "units": "1000",
+          "fees": "0"
+        }
+      },
+      "attempts": [
+        {
+          "account_name": "single-invented-account",
+          "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "status": "refused",
+          "reason": "wrong decision, plan, or cost identity",
+          "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "ledger_apply_count": 0,
+          "ledger_state_unchanged": true,
+          "quantity": "100",
+          "price": "2",
+          "opening_at": "2026-01-02T09:30:00+08:00"
+        },
+        {
+          "account_name": "single-invented-account",
+          "order_id": "5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "event_id": "frozen-order:5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "status": "refused",
+          "reason": "wrong decision, plan, or cost identity",
+          "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "ledger_apply_count": 0,
+          "ledger_state_unchanged": true,
+          "quantity": "100",
+          "price": "2",
+          "opening_at": "2026-01-02T09:30:00+08:00"
+        }
+      ]
+    },
+    "unreleased_foreign_funding": {
+      "refusals": [
+        {
+          "reason": "sale not yet available in this account",
+          "ledger_apply_count": 0,
+          "state_unchanged": true,
+          "money": {
+            "at": "2026-01-07T09:30:00+08:00",
+            "free_cash": "200",
+            "restricted_cash": "174.8200",
+            "receivable": "0",
+            "shares": {
+              "A": "250",
+              "B": "100"
+            },
+            "sellable": {
+              "A": "250",
+              "B": "100"
+            },
+            "equity": "924.8200",
+            "units": "1000",
+            "fees": "5.1800"
+          }
+        },
+        {
+          "reason": "sale not yet available in this account",
+          "ledger_apply_count": 0,
+          "state_unchanged": true,
+          "money": {
+            "at": "2026-01-07T09:30:00+08:00",
+            "free_cash": "200",
+            "restricted_cash": "174.8200",
+            "receivable": "0",
+            "shares": {
+              "A": "250",
+              "B": "100"
+            },
+            "sellable": {
+              "A": "250",
+              "B": "100"
+            },
+            "equity": "924.8200",
+            "units": "1000",
+            "fees": "5.1800"
+          }
+        },
+        {
+          "reason": "sale not yet available in this account",
+          "ledger_apply_count": 0,
+          "state_unchanged": true,
+          "money": {
+            "at": "2026-01-07T09:30:00+08:00",
+            "free_cash": "374.8200",
+            "restricted_cash": "0",
+            "receivable": "0",
+            "shares": {
+              "A": "250",
+              "B": "100"
+            },
+            "sellable": {
+              "A": "250",
+              "B": "100"
+            },
+            "equity": "924.8200",
+            "units": "1000",
+            "fees": "5.1800"
+          }
+        }
+      ],
+      "sale": {
+        "account_name": "single-invented-account",
+        "order_id": "aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+        "event_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+        "status": "filled",
+        "reason": "",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"1000\", \"fees\": \"0\", \"free_cash\": \"200\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"350\", \"B\": \"100\"}, \"shares\": {\"A\": \"350\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"924.8200\", \"fees\": \"5.1800\", \"free_cash\": \"200\", \"receivable\": \"0\", \"restricted_cash\": \"174.8200\", \"sellable\": {\"A\": \"250\", \"B\": \"100\"}, \"shares\": {\"A\": \"250\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "ledger_apply_count": 1,
+        "ledger_state_unchanged": false,
+        "quantity": "100",
+        "price": "1.8",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      },
+      "release": [
+        {
+          "event": {
+            "kind": "advance",
+            "id": "bound-release",
+            "at": "2026-01-06T10:00:00+08:00",
+            "phase": 3
+          },
+          "before": {
+            "cash": "200",
+            "lots": [
+              {
+                "symbol": "A",
+                "qty": "250",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              },
+              {
+                "symbol": "B",
+                "qty": "100",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              }
+            ],
+            "restricted": [
+              {
+                "amount": "174.8200",
+                "available_at": "2026-01-06T10:00:00+08:00",
+                "sold_at": "2026-01-02T09:30:00+08:00",
+                "sale_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589"
+              }
+            ],
+            "receivables": {},
+            "units": "1000",
+            "inflows": "0",
+            "fees": "5.1800",
+            "actions": "set()",
+            "ids": "{'frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589'}",
+            "last_at": "2026-01-02T09:30:00+08:00",
+            "last_phase": 3,
+            "prior_complete": {
+              "at": "2026-01-01T15:00:00+08:00",
+              "nav": "1"
+            },
+            "marks": {
+              "A": "1.8",
+              "B": "1"
+            }
+          },
+          "after": {
+            "cash": "374.8200",
+            "lots": [
+              {
+                "symbol": "A",
+                "qty": "250",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              },
+              {
+                "symbol": "B",
+                "qty": "100",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              }
+            ],
+            "restricted": [],
+            "receivables": {},
+            "units": "1000",
+            "inflows": "0",
+            "fees": "5.1800",
+            "actions": "set()",
+            "ids": "{'frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589', 'bound-release'}",
+            "last_at": "2026-01-06T10:00:00+08:00",
+            "last_phase": 3,
+            "prior_complete": {
+              "at": "2026-01-01T15:00:00+08:00",
+              "nav": "1"
+            },
+            "marks": {
+              "A": "1.8",
+              "B": "1"
+            }
+          },
+          "money": {
+            "at": "2026-01-06T10:00:00+08:00",
+            "free_cash": "374.8200",
+            "restricted_cash": "0",
+            "receivable": "0",
+            "shares": {
+              "A": "250",
+              "B": "100"
+            },
+            "sellable": {
+              "A": "250",
+              "B": "100"
+            },
+            "equity": "924.8200",
+            "units": "1000",
+            "fees": "5.1800"
+          }
+        }
+      ]
+    },
+    "legal_two_buys_replay": {
+      "attempts": [
+        {
+          "account_name": "single-invented-account",
+          "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "status": "filled",
+          "reason": "",
+          "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\"}, \"shares\": {\"A\": \"100\"}, \"units\": \"1000\"}",
+          "ledger_apply_count": 1,
+          "ledger_state_unchanged": false,
+          "quantity": "100",
+          "price": "2",
+          "opening_at": "2026-01-02T09:30:00+08:00"
+        },
+        {
+          "account_name": "single-invented-account",
+          "order_id": "5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "event_id": "frozen-order:5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "status": "filled",
+          "reason": "",
+          "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\"}, \"shares\": {\"A\": \"100\"}, \"units\": \"1000\"}",
+          "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"400.100\", \"fees\": \"10.400\", \"free_cash\": \"0.100\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\", \"B\": \"0\"}, \"shares\": {\"A\": \"100\", \"B\": \"100\"}, \"units\": \"1000\"}",
+          "ledger_apply_count": 1,
+          "ledger_state_unchanged": false,
+          "quantity": "100",
+          "price": "2",
+          "opening_at": "2026-01-02T09:30:00+08:00"
+        }
+      ],
+      "replay": {
+        "account_name": "single-invented-account",
+        "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "status": "replay_ignored",
+        "reason": "filled",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"400.100\", \"fees\": \"10.400\", \"free_cash\": \"0.100\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\", \"B\": \"0\"}, \"shares\": {\"A\": \"100\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"400.100\", \"fees\": \"10.400\", \"free_cash\": \"0.100\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"0\", \"B\": \"0\"}, \"shares\": {\"A\": \"100\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "ledger_apply_count": 0,
+        "ledger_state_unchanged": true,
+        "quantity": "100",
+        "price": "2",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      }
+    },
+    "legal_second_after_refusal": {
+      "attempts": [
+        {
+          "account_name": "single-invented-account",
+          "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+          "status": "refused",
+          "reason": "reject_no_resize",
+          "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "ledger_apply_count": 0,
+          "ledger_state_unchanged": true,
+          "quantity": "100",
+          "price": "2.001",
+          "opening_at": "2026-01-02T09:30:00+08:00"
+        },
+        {
+          "account_name": "single-invented-account",
+          "order_id": "5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "event_id": "frozen-order:5c2e1eccef5400a4b9b32ce5a7a653f025ef4b4b1935a77364f5bdd15aaa539b",
+          "status": "filled",
+          "reason": "",
+          "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"410.50\", \"fees\": \"0\", \"free_cash\": \"410.50\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {}, \"shares\": {}, \"units\": \"1000\"}",
+          "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"B\": \"0\"}, \"shares\": {\"B\": \"100\"}, \"units\": \"1000\"}",
+          "ledger_apply_count": 1,
+          "ledger_state_unchanged": false,
+          "quantity": "100",
+          "price": "2",
+          "opening_at": "2026-01-02T09:30:00+08:00"
+        }
+      ],
+      "replay": {
+        "account_name": "single-invented-account",
+        "order_id": "6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "event_id": "frozen-order:6e0d7e13e892eed320cdb30874524e18cc8856761ef50ad88891f37b9931d88e",
+        "status": "replay_ignored",
+        "reason": "refused",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"B\": \"0\"}, \"shares\": {\"B\": \"100\"}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"405.300\", \"fees\": \"5.200\", \"free_cash\": \"205.300\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"B\": \"0\"}, \"shares\": {\"B\": \"100\"}, \"units\": \"1000\"}",
+        "ledger_apply_count": 0,
+        "ledger_state_unchanged": true,
+        "quantity": "100",
+        "price": "2.001",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      }
+    },
+    "legal_sale_release_buy": {
+      "sale": {
+        "account_name": "single-invented-account",
+        "order_id": "aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+        "event_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+        "status": "filled",
+        "reason": "",
+        "before_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"1000\", \"fees\": \"0\", \"free_cash\": \"200\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"350\", \"B\": \"100\"}, \"shares\": {\"A\": \"350\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-02T09:30:00+08:00\", \"equity\": \"924.8200\", \"fees\": \"5.1800\", \"free_cash\": \"200\", \"receivable\": \"0\", \"restricted_cash\": \"174.8200\", \"sellable\": {\"A\": \"250\", \"B\": \"100\"}, \"shares\": {\"A\": \"250\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "ledger_apply_count": 1,
+        "ledger_state_unchanged": false,
+        "quantity": "100",
+        "price": "1.8",
+        "opening_at": "2026-01-02T09:30:00+08:00"
+      },
+      "release": [
+        {
+          "event": {
+            "kind": "advance",
+            "id": "legal-release",
+            "at": "2026-01-06T10:00:00+08:00",
+            "phase": 3
+          },
+          "before": {
+            "cash": "200",
+            "lots": [
+              {
+                "symbol": "A",
+                "qty": "250",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              },
+              {
+                "symbol": "B",
+                "qty": "100",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              }
+            ],
+            "restricted": [
+              {
+                "amount": "174.8200",
+                "available_at": "2026-01-06T10:00:00+08:00",
+                "sold_at": "2026-01-02T09:30:00+08:00",
+                "sale_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589"
+              }
+            ],
+            "receivables": {},
+            "units": "1000",
+            "inflows": "0",
+            "fees": "5.1800",
+            "actions": "set()",
+            "ids": "{'frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589'}",
+            "last_at": "2026-01-02T09:30:00+08:00",
+            "last_phase": 3,
+            "prior_complete": {
+              "at": "2026-01-01T15:00:00+08:00",
+              "nav": "1"
+            },
+            "marks": {
+              "A": "1.8",
+              "B": "1"
+            }
+          },
+          "after": {
+            "cash": "374.8200",
+            "lots": [
+              {
+                "symbol": "A",
+                "qty": "250",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              },
+              {
+                "symbol": "B",
+                "qty": "100",
+                "release_at": "2026-01-01T15:00:00+08:00"
+              }
+            ],
+            "restricted": [],
+            "receivables": {},
+            "units": "1000",
+            "inflows": "0",
+            "fees": "5.1800",
+            "actions": "set()",
+            "ids": "{'frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589', 'legal-release'}",
+            "last_at": "2026-01-06T10:00:00+08:00",
+            "last_phase": 3,
+            "prior_complete": {
+              "at": "2026-01-01T15:00:00+08:00",
+              "nav": "1"
+            },
+            "marks": {
+              "A": "1.8",
+              "B": "1"
+            }
+          },
+          "money": {
+            "at": "2026-01-06T10:00:00+08:00",
+            "free_cash": "374.8200",
+            "restricted_cash": "0",
+            "receivable": "0",
+            "shares": {
+              "A": "250",
+              "B": "100"
+            },
+            "sellable": {
+              "A": "250",
+              "B": "100"
+            },
+            "equity": "924.8200",
+            "units": "1000",
+            "fees": "5.1800"
+          }
+        }
+      ],
+      "snapshot": {
+        "name": "cash-from-single-invented-account",
+        "source_id": "single-invented-account:c4240924296dd3681f26921a44c28754fb47099cfa37b9dac313ac57b1225c08",
+        "amount": "374.8200",
+        "known_at": "2026-01-06 10:00:00+08:00",
+        "available_at": "2026-01-06 10:00:00+08:00",
+        "includes_sale_proceeds": true,
+        "included_receipt_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589"
+      },
+      "plan": {
+        "decision_hash": "2e33a3467536da1053cb29b4f33fc8c8864a3a6de650a304e122746df10f7c94",
+        "plan_hash": "855d41fc7efc244dda5c71ed5f5bc61fecf1f999c51877c9eea7a23bf2ca9eed",
+        "status": "ready",
+        "reason": "frozen budgets; residual not reallocated",
+        "ordering": [
+          [
+            "B",
+            "400.0"
+          ],
+          [
+            "A",
+            "0"
+          ]
+        ],
+        "budgets": [
+          [
+            "B",
+            "374.8200"
+          ],
+          [
+            "A",
+            "0"
+          ]
+        ],
+        "orders": [
+          {
+            "order_id": "653569de73d1738a6a05bc2b389434b6a12c28ebb019b44904f12e92ed0ab57e",
+            "decision_hash": "2e33a3467536da1053cb29b4f33fc8c8864a3a6de650a304e122746df10f7c94",
+            "plan_hash": "855d41fc7efc244dda5c71ed5f5bc61fecf1f999c51877c9eea7a23bf2ca9eed",
+            "symbol": "B",
+            "side": "buy",
+            "quantity": "300",
+            "reference": "1",
+            "budget": "374.8200",
+            "cap": "1.231",
+            "frozen_at": "2026-01-07 08:00:00+08:00",
+            "opening_at": "2026-01-07 09:30:00+08:00"
+          }
+        ],
+        "unallocated": "0.0000",
+        "current_cash": {
+          "name": "cash-from-single-invented-account",
+          "source_id": "single-invented-account:c4240924296dd3681f26921a44c28754fb47099cfa37b9dac313ac57b1225c08",
+          "amount": "374.8200",
+          "known_at": "2026-01-06 10:00:00+08:00",
+          "available_at": "2026-01-06 10:00:00+08:00",
+          "includes_sale_proceeds": true,
+          "included_receipt_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589"
+        },
+        "action_context": {
+          "name": "invented-action-coverage",
+          "source_id": "synthetic-empty-covered-source",
+          "known_at": "2026-01-01 15:00:00+08:00",
+          "covered_from": "2026-01-01 15:00:00+08:00",
+          "covered_through": "2026-01-07 09:30:00+08:00",
+          "events": []
+        },
+        "funding_receipt": {
+          "order_id": "aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589",
+          "status": "filled",
+          "quantity": "100",
+          "price": "1.8",
+          "sold_at": "2026-01-02 09:30:00+08:00",
+          "proceeds_available_at": "2026-01-06 10:00:00+08:00",
+          "receipt_id": "frozen-order:aa0cdd24c1eea200c21f1b47d715caa44859ec931bff7ecb033906ffb7708589"
+        },
+        "frozen_at": "2026-01-07 08:00:00+08:00",
+        "opening_at": "2026-01-07 09:30:00+08:00"
+      },
+      "buy": {
+        "account_name": "single-invented-account",
+        "order_id": "653569de73d1738a6a05bc2b389434b6a12c28ebb019b44904f12e92ed0ab57e",
+        "event_id": "frozen-order:653569de73d1738a6a05bc2b389434b6a12c28ebb019b44904f12e92ed0ab57e",
+        "status": "filled",
+        "reason": "",
+        "before_json": "{\"at\": \"2026-01-07T09:30:00+08:00\", \"equity\": \"924.8200\", \"fees\": \"5.1800\", \"free_cash\": \"374.8200\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"250\", \"B\": \"100\"}, \"shares\": {\"A\": \"250\", \"B\": \"100\"}, \"units\": \"1000\"}",
+        "after_json": "{\"at\": \"2026-01-07T09:30:00+08:00\", \"equity\": \"919.5200\", \"fees\": \"10.4800\", \"free_cash\": \"69.5200\", \"receivable\": \"0\", \"restricted_cash\": \"0\", \"sellable\": {\"A\": \"250\", \"B\": \"100\"}, \"shares\": {\"A\": \"250\", \"B\": \"400\"}, \"units\": \"1000\"}",
+        "ledger_apply_count": 1,
+        "ledger_state_unchanged": false,
+        "quantity": "300",
+        "price": "1",
+        "opening_at": "2026-01-07T09:30:00+08:00"
+      }
+    }
+  }
+}

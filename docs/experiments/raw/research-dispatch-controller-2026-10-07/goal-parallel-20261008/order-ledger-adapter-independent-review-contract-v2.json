@@ -1,0 +1,44 @@
+{
+  "mission": "只独立复核已发现3绕过的v2修复及必要受影响合法路径，不新增无理由审查或旧suite重跑。",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "task_scope": [
+    "核v2两源码hash、原34文件保留和实际v1反例；用原独立探针改新模块，重新试换下一开盘、decision改名、不含已释放卖款。",
+    "三反例必须在账本调用前拒绝且真实状态不变；不要把最终余额不足拒绝当上游通过。",
+    "检查同批正常第二买单/replay、首拒后另一固定预算单、成功卖出后同原决策不同方向的合法后续买单；金额0.10/205.30/69.52、相应费用保持。",
+    "本轮明确单原决策人工账户，新的周决策/多批次/并发尚不支持；不得把该限制当本合同失败或重造多周引擎。",
+    "给必要反例实际结果和有限accept/reject；0写文件/新旧suite/市场/网络。"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08",
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-implementation-contract.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-scope-controller-review.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-repair-contract-v2.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-independent-review-v1.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "source_sha256": {
+    "order_ledger_adapter_v2.py": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba",
+    "adapter_fixtures_v2.py": "fbf1104c7f5f22820c8aeb823bb9529c4bcbe304a7a41ddd1322fd6988076af1"
+  },
+  "expected_outputs": [
+    "原3绕过修后结果和关键合法路径实际数值；源码固定；结论与范围"
+  ],
+  "stop_conditions": [
+    "无网络/行情/付费/原件写/旧suite重跑/仓外写/Git/新代理；仅内存，禁止pyc。",
+    "作者四源码已固定，若hash变化先报告；不自行修复，root串行给原执行者。",
+    "未知P1无整手用户分支/预占/部分成交/恢复/并发/跨行动订单不实现；不把本轮接受写成完整策略有效。"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true
+}

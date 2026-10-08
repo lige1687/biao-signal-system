@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-08T21:03:05.066686+08:00",
+  "status": "accepted_bounded_engineering_not_archived",
+  "reviewer": "/root/settlement_scope_review",
+  "review_model": "gpt-6-astra/high",
+  "review_method": "Independent readonly memoryprobes; no author/old suite rerun; original34 files byte/SHA verified",
+  "source_sha256": {
+    "order_ledger_adapter_v2.py": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba",
+    "adapter_fixtures_v2.py": "fbf1104c7f5f22820c8aeb823bb9529c4bcbe304a7a41ddd1322fd6988076af1"
+  },
+  "closed_counterexamples": [
+    {
+      "name": "nextopenchase",
+      "result": "begin refuses",
+      "ledger_calls": 0,
+      "cash": "410.50",
+      "fullstate_unchanged": true
+    },
+    {
+      "name": "decision_rename",
+      "result": "newdecision refuses",
+      "ledger_calls": 0,
+      "cash": "410.50",
+      "fullstate_unchanged": true
+    },
+    {
+      "name": "released_proceeds_excluded",
+      "result": "begin refuses beforeledger",
+      "ledger_calls": 0,
+      "cash": "374.82",
+      "fullstate_unchanged": true
+    }
+  ],
+  "legal_paths": {
+    "two_buys": {
+      "cash": "0.10",
+      "fees": "10.40"
+    },
+    "firstrefusal_secondbuy": {
+      "cash": "205.30"
+    },
+    "sell_release_laterbuy": {
+      "cash": "69.52",
+      "fees": "10.48"
+    },
+    "replay": "0 second ledgercalls"
+  },
+  "scope": "Single original decision/synthetic account/serial fullorders only; no newweek/concurrency/partialfill/reservation/restart/crossaction/fullpolicy/market acceptance",
+  "original34_unchanged": true,
+  "failure_preservation": "v1 3bypasses + priorfixture/selfcheck failures retained",
+  "archive_status": "pending_space_recovery_and_scope_remote_sync",
+  "git_failure": {
+    "operation": "git add exact owncoord record",
+    "error": "index.lock write error Out of diskspace",
+    "head": "f928b75aa327da425a2f85d4ad2685a5945ee650",
+    "lock_exists_after": false,
+    "old_index_bytes": 3784007,
+    "free_bytes_after": 138031104,
+    "local_coord_file": "modified_unstaged_not_remote",
+    "no_commit_or_push": true
+  },
+  "last_verified_failure_checkpoint": "7f23610f60d2d421ec578a8c02b3abfc0db9bd40",
+  "last_verified_coordination": "6599115559a75fe0f4a864c97913b002b93dfb10",
+  "v2_raw": "docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08",
+  "v2_raw_files": 46,
+  "v2_raw_bytes": 362473,
+  "next": "Measure changedwritecondition, preservefiles/oldindex; fetch/read latest andpush ownscope normally before sharedreportregistration; then archivev2 exactfiles/readback; do notrerun acceptedcases ordeleteanything."
+}
