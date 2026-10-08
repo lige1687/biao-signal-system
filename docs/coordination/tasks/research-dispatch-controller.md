@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "613d88788b426b79612ad51a3afc3d997c1bd18d",
-  "checked_at": "2026-10-08T19:49:03.978373+08:00",
+  "checked_coordination_sha": "ac3ae972d99a65ebb409a93d83f0828587421871",
+  "checked_at": "2026-10-08T19:59:57.656499+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -444,14 +444,15 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "task_id": "factor-fusion-risk-exit/order-planning-pure",
       "owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
       "executor": "/root/settlement_implementation_v1",
-      "status": "planned",
+      "status": "active",
       "write_paths": [
         "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/"
       ],
       "depends_on": [],
       "scope_released": false,
-      "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-pure-implementation-contract.json",
-      "source": "Originalv0.2 pure allocation/lot/limit immutable decisions; integration with existing reservations excluded. Triggered-without-executable-sale awaits user. Zero market runs; datedledger frozen."
+      "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-repair-contract-v2.json",
+      "source": "15 authorchecks not accepted; independent review currentcash stale, planidentitycollision, lostactioncontext. Same writer/scope; preserve v1. Zero markets.",
+      "phase": "v1_delivered_review_failed_bounded_repair_ready"
     }
   ],
   "final_acceptance": {
@@ -1126,9 +1127,11 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   ],
   "read_task_ids": [
     "research-dispatch-controller",
-    "theory-workflow-system-increment"
+    "theory-workflow-system-increment",
+    "daily-trading-system-audit",
+    "trend-trading-video"
   ],
-  "conflict_decision": "Theory metadata14 publication delivered and exact remote acceptance pending. New pure order planning isolated newraw only; old ledger and reservation source remain read-only. No same-file writer.",
+  "conflict_decision": "No new remote change since scope; pure arithmetic exactnewraw solewriter; originalsources and otherownerpaths readonly. Review threefailures repaired sameoriginalcontract scope.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2039,6 +2042,14 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "classification": "progress",
       "evidence": "MainGoal activated;33 publication artifacts accepted; two actualoriginalowner implementation/publication turns started and verified.",
       "current_turn_progress": "39 additional synthetic inputs remote43file verification; locatedoriginal16check settlementprototype andactualspec; independent criticalreviewstarted."
+    },
+    "latest_goal_checkpoint": {
+      "at": "2026-10-08T19:59:57.656499+08:00",
+      "accepted": "metadata14 c3422d203aefc334e8af341c217085922b249147/afa6ea0bda5079413829254e685a7f4cfec499c2:14source/18phase/2receipt bytesverified;13 remain",
+      "root_evidence_commit": "32a10e41dbcae754b999a6f7d3a5620b5166216a",
+      "current": "pureplanning v1 reviewedfail3, v2 same-scope repairready",
+      "pending_user": "onlytriggered_no_sellable_whole_lot research scenario choice",
+      "original_reservation_package": "userclaimretained butexactoriginalinterfaceunlocated; no replacementengine"
     }
   }
 }
@@ -2230,3 +2241,10 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 原Astra独审确认P0/P1下单算术尚未实现，可在人工输入独立完成；spec SHA 695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a，旧已验账本不改不重跑。触发调节但无整手可卖的资金处理未定义，已向用户仅问该分支，未答不推定。
 - 新合同order-planning-pure-implementation-contract.json只授权新raw/weekly-portfolio-order-planning-2026-10-08纯预算/整手/限价/冻结时点，Sol6.1/medium唯一写者；预占/部分成交/撤单/恢复暂不实现，由原Luna助手只读定位已有接口。root保留独审与归档；此刻ready未派发，不冒称运行。
 - 跨公司行动旧订单明确unsupported；0真实行情/标签/拟合/封存重跑/安装/仓外写，原实验资金政策与预算不变。
+
+## 14资料验收及订单首版三项修复 2026-10-08T19:59:57.656499+08:00
+
+- checked_coordination_sha=ac3ae972d99a65ebb409a93d83f0828587421871；无新同文件冲突。14汇总精确发布c3422d20/回执afa6ea0b验收，18阶段文件/14根原字节/2后继一致，27减14=13，所有其他路径未变；root四凭据32a10e41dbcae754b999a6f7d3a5620b5166216a已远端核。
+- 纯规划Sol首版已交12小文件52110B、15作者检查；独立Astra内存复核费用与P0通过，但发现旧现金误作当前可用、不同回执订单ID相同、后续漏继承已知公司行动三项，整体不接受。准确反例与冻结三源码见order-planning-independent-review-v1.json。
+- 同范围repair-contract-v2：显式当前可分配现金快照、新plan_hash和强制行动覆盖继承；保留v1三源/所有失败回执，仍不实施预占/部分成交/恢复或真实市场。不修改原spec、旧账本或策略。唯一Sol原执行者，root复核；本登记推回后实际派修。
+- 原预占等历史交接声明保留；Luna限定报告定位只证研究模拟器+datedledger，不是全库不存在，原接口仍待准确包。触发无整手分支仍待用户，不阻塞这三项修复。磁盘仅约433MB实测，只有小文件/小Git操作，无清理授权。
