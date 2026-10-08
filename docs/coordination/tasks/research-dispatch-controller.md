@@ -1,10 +1,10 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新：2026-10-08T12:43:06.000736+08:00；checked_coordination_sha=0b41e0b5ff0a8218b89c195a15873e2d2dd42586。已读COORDINATION.md及research-dispatch-controller、risk-shape-information、report-library-integration-20261008；代码300114/302132的相关任务登记检索无命中，未发现同写任务。
-- **首次v4-direct心跳已实际产出：** 2026-10-08T04:33:16.952Z触发后，root完成海通2024年17条停牌占位核验，2份发行人来源、18项检查，发布748716dc7de72afc7ffa604fee6fd0a6223d8edc并读回10条文件。前三报告合计14份原件、60项检查；B01海通36条加重工17条，共53条占位已解释，非其他批次305条全量。
-- 命名纠正：第一次检索误加“润泽”未被用作事实；正式原件确认对象为中航电测/中航成飞。保留失败及原raw路径，尚未创建的报告路径改为avic，不移动既有证据。
-- **当前接续：** 直接核原方案中的300114→302132及2025-02-17生效假定，固定原代码只读。新增范围docs/experiments/raw/runze-security-identity-2026-10-08/及docs/experiments/avic-security-identity-qualification-2026-10-08.md；registry/INDEX继续root单写，只增该报告。计划约3次来源操作、5MiB上限、保留512MiB空闲；旧预算不重开。正式来源核完即收尾，不计算收益。
-- root不再派发，前三已完成单元不重跑；未接入研究引擎、未修主行情、未拟合/标签/交易。全部8目标未完，D—MAE六原件/原SHA/独审及阶段条件、原价快照和完整历史成员等依赖保持。403和automation-2暂停，不切主树或写仓外。
+- 更新：2026-10-08T12:48:30.130195+08:00；checked_coordination_sha=526a34677a8c35ac2aacd0a3ca6b86f2339154bd；已读COORDINATION.md及research-dispatch-controller、risk-shape-information、report-library-integration-20261008，相关owner无范围变化和冲突。
+- v4-direct首次心跳2026-10-08T04:33:16.952Z已实际完成两项增量：17条海通2024停牌占位（748716dc7de72afc7ffa604fee6fd0a6223d8edc）及300114/302132身份边界（909acdf0eac740593bdb54e66e2331ac14e4af53）；两阶段各10文件远端读回。四报告累计15份原件、76项本地检查，B01共53占位和1代码变更已有正式依据。中航任务初始runze命名错误、无关搜索及PDF渲染警告保留，不动原证据路径。
+- **继续直接执行：** 核原资格方案已列出的六个分红观测日：600837在2022-07-28、2023-07-28、2024-08-08、2024-10-18；601989在2024-08-01、2025-06-18。只补公告含义、登记/除息/派发日期、税前每股金额，不取新行情，不重建任何价格。root单写docs/experiments/raw/saved-dividend-events-2026-10-08/、docs/experiments/saved-dividend-events-qualification-2026-10-08.md与单项registry/INDEX增量；约9次来源操作估计、10MiB上限、至少512MiB空闲。
+- 此六件问题核完即收尾；不能由已知事件匹配推出全历史没有漏事件或原因子数值正确。原累计33次来源及封存失败/预算不重开。D—MAE、原价格快照、完整历史成员等各自依赖保持；全部八目标未完成。
+- 无对外派发、没有新agent；不切主树、不删、不交易、不付费、不部署/网络更改或仓外写入。403和automation-2继续暂停。
 
 ## 当前直接执行规则
 
@@ -134,8 +134,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "a51904547f94235bb9ee6785a247c16012e1709f",
-  "checked_at": "2026-10-08T12:44:48.053072+08:00",
+  "checked_coordination_sha": "526a34677a8c35ac2aacd0a3ca6b86f2339154bd",
+  "checked_at": "2026-10-08T12:48:30.130195+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -271,15 +271,15 @@
         "docs/ops/work-progress/research-dispatch-controller-2026-10-07.md",
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
         "docs/coordination/tasks/research-dispatch-controller.md",
-        "docs/experiments/raw/runze-security-identity-2026-10-08/",
-        "docs/experiments/avic-security-identity-qualification-2026-10-08.md",
+        "docs/experiments/raw/saved-dividend-events-2026-10-08/",
+        "docs/experiments/saved-dividend-events-qualification-2026-10-08.md",
         "docs/experiments/registry.json",
         "docs/experiments/INDEX.md"
       ],
       "depends_on": [],
       "scope_released": false,
       "source": "User latest instruction replaces dispatcher-only role with direct root execution. Root is sole writer of central record and new corporate-action qualification paths; no further delegation.",
-      "scope_note": "Root direct named code-change qualification, original frozen preparer read-only; shared registration single writer."
+      "scope_note": "Root qualifies only six already saved dividend-event dates, with no market reconstruction; registry/INDEX solewriter until publication."
     },
     {
       "task_id": "report-registration-20261007",
@@ -560,39 +560,49 @@
   },
   "current_execution_mode": "root_direct_no_delegation",
   "direct_execution_unit": {
-    "id": "runze-security-identity-qualification-20261008",
+    "id": "saved-six-dividend-events-qualification-20261008",
     "state": "scope_registered_before_source_work",
-    "question": "Qualify original preparer assumption300114 to302132 effective2025-02-17 and preserved holder identity using issuer/exchange original disclosure.",
-    "original_authority": "Original goal4 identity/permanent-security qualification; existing qualification-plan line64 and source-manifest explicit_code_rename_assumption_in_old_preparer.",
+    "question": "Identify official cash-dividend meaning, record/ex/payment dates and gross cash per share for exactly six already saved600837/601989 factor-event dates; no new factor-price reconstruction.",
+    "original_authority": "Original goal4 corporate-action source qualification; qualification-plan section2 lists six saved observations and section4 exact missing issuer actions.",
+    "targets": {
+      "600837": [
+        "2022-07-28",
+        "2023-07-28",
+        "2024-08-08",
+        "2024-10-18"
+      ],
+      "601989": [
+        "2024-08-01",
+        "2025-06-18"
+      ]
+    },
     "write_paths": [
-      "docs/experiments/raw/runze-security-identity-2026-10-08/",
-      "docs/experiments/avic-security-identity-qualification-2026-10-08.md",
+      "docs/experiments/raw/saved-dividend-events-2026-10-08/",
+      "docs/experiments/saved-dividend-events-qualification-2026-10-08.md",
       "docs/experiments/registry.json",
       "docs/experiments/INDEX.md"
     ],
     "source_policy": {
-      "planning_estimate_operations": 3,
-      "max_new_bytes": 5242880,
+      "planning_estimate_operations": 9,
+      "max_new_bytes": 10485760,
       "minimum_free_bytes": 536870912,
-      "previous_direct_operations": 30,
-      "stop": "Official code/effective/rights fields qualified or actual necessary-source access blocked; no redundant sources after answer",
-      "prior_closed_budgets": "unchanged",
+      "previous_direct_operations": 33,
+      "stop": "Exactly six known events source-qualified, or true inaccessible needed evidence; no extrapolation to full-history completeness",
+      "prior_closed_budgets": "unchanged; no new vendor/index/price requests",
       "fits": 0,
       "labels": 0,
       "price_repairs": 0
     },
-    "acceptance": "Official source bytes/hash, announcement and effective time, exact mapping and equity continuity, compare fixed preparer bytes; no inferred439-universe identity completeness.",
-    "checked_at": "2026-10-08T12:44:48.053072+08:00",
-    "checked_coordination_sha": "a51904547f94235bb9ee6785a247c16012e1709f",
+    "acceptance": "Original issuer implementation notices/hash, announced record/ex/payment dates, gross cash units, exact saved factor dates; no default1/zero, no inference that factor values themselves are validated or Sina-compatible.",
+    "checked_at": "2026-10-08T12:48:30.130195+08:00",
+    "checked_coordination_sha": "526a34677a8c35ac2aacd0a3ca6b86f2339154bd",
     "read_task_ids": [
       "research-dispatch-controller",
       "risk-shape-information",
       "report-library-integration-20261008"
     ],
-    "conflict_decision": "No task record mentions either code, latest related owners unchanged; no active overlap. Root retains temporary registry/INDEX window for next bounded report.",
-    "free_bytes_before": 2774487040,
-    "display_name": "中航电测至中航成飞代码身份资格",
-    "naming_correction": "Initial unverified runze search/name was wrong; exact codes300114/302132 unchanged. Existingraw path retained without rename, unused reportpath corrected before creation. Failure in request-ledger."
+    "conflict_decision": "Existing corporate-action missing fields explicit in original plan; related task owners unchanged. Unique raw/report paths and root-only shared registration; frozen saved factor files read-only.",
+    "free_bytes_before": 2809913344
   },
   "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
   "direct_execution_completed_units": [
@@ -722,27 +732,73 @@
       "source_operations_used": 3,
       "raw_response_bytes": 132478,
       "matched_placeholder_rows": 17
+    },
+    {
+      "id": "runze-security-identity-qualification-20261008",
+      "state": "completed_bounded_factual_qualification",
+      "question": "Qualify original preparer assumption300114 to302132 effective2025-02-17 and preserved holder identity using issuer/exchange original disclosure.",
+      "original_authority": "Original goal4 identity/permanent-security qualification; existing qualification-plan line64 and source-manifest explicit_code_rename_assumption_in_old_preparer.",
+      "write_paths": [
+        "docs/experiments/raw/runze-security-identity-2026-10-08/",
+        "docs/experiments/avic-security-identity-qualification-2026-10-08.md",
+        "docs/experiments/registry.json",
+        "docs/experiments/INDEX.md"
+      ],
+      "source_policy": {
+        "planning_estimate_operations": 3,
+        "max_new_bytes": 5242880,
+        "minimum_free_bytes": 536870912,
+        "previous_direct_operations": 30,
+        "stop": "Official code/effective/rights fields qualified or actual necessary-source access blocked; no redundant sources after answer",
+        "prior_closed_budgets": "unchanged",
+        "fits": 0,
+        "labels": 0,
+        "price_repairs": 0
+      },
+      "acceptance": "Official source bytes/hash, announcement and effective time, exact mapping and equity continuity, compare fixed preparer bytes; no inferred439-universe identity completeness.",
+      "checked_at": "2026-10-08T12:44:48.053072+08:00",
+      "checked_coordination_sha": "a51904547f94235bb9ee6785a247c16012e1709f",
+      "read_task_ids": [
+        "research-dispatch-controller",
+        "risk-shape-information",
+        "report-library-integration-20261008"
+      ],
+      "conflict_decision": "No task record mentions either code, latest related owners unchanged; no active overlap. Root retains temporary registry/INDEX window for next bounded report.",
+      "free_bytes_before": 2774487040,
+      "display_name": "中航电测至中航成飞代码身份资格",
+      "naming_correction": "Initial unverified runze search/name was wrong; exact codes300114/302132 unchanged. Existingraw path retained without rename, unused reportpath corrected before creation. Failure in request-ledger.",
+      "scope_correction_commit": "61852a386b0c0a34af98347ef1a4924e036a38de",
+      "scope_correction_remote_readback": "equal",
+      "accepted_at": "2026-10-08T12:48:30.130195+08:00",
+      "published_commit": "909acdf0eac740593bdb54e66e2331ac14e4af53",
+      "remote_readback_files": 10,
+      "source_documents": 1,
+      "checks": 16,
+      "source_operations_used": 3,
+      "raw_response_bytes": 370156,
+      "report": "docs/experiments/avic-security-identity-qualification-2026-10-08.md"
     }
   ],
   "direct_execution_summary": {
-    "reports": 3,
+    "reports": 4,
     "securities": 3,
-    "source_documents": 14,
-    "local_checks": 60,
+    "source_documents": 15,
+    "local_checks": 76,
     "officially_matched_2025_placeholders": 36,
-    "visible_source_operations": 30,
-    "raw_response_bytes": 1566580,
+    "visible_source_operations": 33,
+    "raw_response_bytes": 1936736,
     "labels": 0,
     "fits": 0,
     "price_repairs": 0,
     "source_originals": "local_only; hashes and factual summaries published",
     "publication_branch": "codex/research-direct-20261008",
-    "publication_tip": "748716dc7de72afc7ffa604fee6fd0a6223d8edc",
-    "main_registry_entries": 624,
-    "isolated_registry_entries": 203,
+    "publication_tip": "909acdf0eac740593bdb54e66e2331ac14e4af53",
+    "main_registry_entries": 625,
+    "isolated_registry_entries": 204,
     "primary_branch_unchanged": true,
     "free_bytes_after": 2815746048,
-    "officially_matched_2024_placeholders": 17
+    "officially_matched_2024_placeholders": 17,
+    "code_transitions_qualified": 1
   },
   "direct_remaining_goals": {
     "at": "2026-10-08T12:29:41.899191+08:00",
