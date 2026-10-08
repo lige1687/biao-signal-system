@@ -1,8 +1,27 @@
+# 交付状态（最新）
+
+- task-id: trend-trading-video；负责人/唯一写者: 本对话root
+- 状态: completed（制作与技术验收完成；表达效果待用户观看）；更新时间: 2026-10-08T13:54:59.481201+08:00
+- checked_coordination_sha: c0180fb9fde48347021b206c2da617808f52a33d
+- 已读task-id: trend-trading-video、research-dispatch-controller（最新状态）；冲突决定: 无本任务路径重叠。
+- 成果: docs/ops/media/trend-trading-60s-20261008/trend-trading-60s.mp4；60秒，1080×1920，30fps，中文旁白与字幕；文件SHA-256 908c777aae086f2decc2c21df00bbdd1e73451a481141f1862794e00806ab6da。
+- 验证: 1800帧完整解码通过；音轨存在；源指纹吻合；字幕全文一致；六场景检查；浏览器播放通过；归置检查通过。
+- 额度记录: 同周窗口24%→24%，显示变化0个百分点；全账号整数读数，不能精确归因或视作零消耗。准确边界见usage-record.json。无付费外部视频/配音调用。
+- 交付证据: docs/ops/media/trend-trading-60s-20261008/delivery.md、validation.json、usage-record.json、storyboard.jpg。
+- 成果提交: 未提交，全部视频/音频/源文件仅本机，远端不能复现；只推协调状态，不上传媒体或账户明细。
+- 未完成/边界: 小红书未发布；用户观感待验收；精确单任务额度消耗工具无法提供。
+- 下一动作: 用户观看后如提出具体修改，沿用本目录和本task-id修改，不自动扩大制作或发布。
+- scope_released: false（产物保留，本负责人维护）。
+
+---
+
+## 开始记录（保留）
+
 # 一分钟趋势交易定位视频
 
 - task-id: trend-trading-video
 - 负责人: 本对话 root；唯一写者
-- 状态: active；更新时间: 2026-10-08T13:44:47.644525+08:00
+- 开始时状态: active；更新时间: 2026-10-08T13:44:47.644525+08:00
 - checked_coordination_sha: 1b91c8593c791653b798573d070b4d5e34e1a7fa
 - 已读 task-id: research-dispatch-controller；已核所有任务文件名，无视频内容任务
 - 冲突决定: 仅新增独立媒体目录，不修改生产、策略、报告登记簿或其他任务。
