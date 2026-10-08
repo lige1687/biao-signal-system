@@ -1,0 +1,36 @@
+{
+  "id": "haitong-2024-suspension-qualification-20261008",
+  "state": "running_root_direct",
+  "question": "Qualify 17 existing 600837 B01 status0 rows dated 2024-09-06 through 2024-10-09 using issuer suspension and resumption disclosure.",
+  "original_authority": "Original goal4 trading availability and qualification-plan sections3/4/6; prior report explicitly leaves these17 rows unqualified.",
+  "write_paths": [
+    "docs/experiments/raw/haitong-2024-suspension-2026-10-08/",
+    "docs/experiments/haitong-2024-suspension-qualification-2026-10-08.md",
+    "docs/experiments/registry.json",
+    "docs/experiments/INDEX.md"
+  ],
+  "source_policy": {
+    "planning_estimate_operations": 4,
+    "max_new_bytes": 5242880,
+    "minimum_free_bytes": 536870912,
+    "stop": "Exact suspension and resumption fields sourced and fixed old rows checked, or actual inaccessible necessary evidence; estimate is not an invented hard quota.",
+    "previous_operations": 27,
+    "prior_closed_budgets": "Unchanged; no price or index-query reopening",
+    "fits": 0,
+    "labels": 0,
+    "price_repairs": 0
+  },
+  "acceptance": "Original source hashes, date and availability distinctions, fixed B01 SHA and 17-row match; preserve originals/no zero fills; registry and Git readback.",
+  "strategy_layer": "Historical trading availability data only; no signal or strategy change",
+  "checked_at": "2026-10-08T12:38:41.770757+08:00",
+  "checked_coordination_sha": "11ef654017de2dde5cf155647570dcf461cb469c",
+  "read_task_ids": [
+    "research-dispatch-controller",
+    "risk-shape-information",
+    "report-library-integration-20261008"
+  ],
+  "conflict_decision": "Only intervening daily-trading owner record changed. New raw/report paths unused; previous shared registration window released. Root is sole temporary registry/INDEX writer; no owner delegation.",
+  "started_at": "2026-10-08T12:39:32.956543+08:00",
+  "scope_commit": "0b41e0b5ff0a8218b89c195a15873e2d2dd42586",
+  "scope_remote_readback": "equal"
+}
