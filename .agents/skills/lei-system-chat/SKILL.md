@@ -24,7 +24,9 @@ PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view overview
 [系统接入说明](../../../../docs/ops/gpt-system-integration.md)。
 
 研究或系统进度先读`overview`内的系统待升级台账，再按需要核报告正文；报告数量
-不是完成进度，台账也不等于跨AI协调分支的当前任务状态。基本面可用固定`--section`
+不是完成进度，台账也不等于跨AI协调分支的当前任务状态。总览默认10条目标概要，
+可用`--query`按名称/编号/负责人查，`--limit`最多20；截短和无匹配必须说明。
+摘要省略了具体授权范围时，不能把granted当成执行许可。基本面可用固定`--section`
 选择利率/宏观及历史分区；只有observations应用市场筛选，其他分区以返回范围为准。
 
 只读取所需视图，不把整个账户、全部新闻或全部报告反复塞入聊天。保留返回的

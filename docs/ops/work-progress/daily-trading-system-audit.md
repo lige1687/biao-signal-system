@@ -1,6 +1,6 @@
 # 日常交易系统审查与持仓简报接续
 
-更新时间：2026-10-08T12:27:54.738174+08:00。唯一负责人：本机Codex聊天01a11721-303e-7c83-9451-c82078c9ba23。跨任务当前状态以coordination/lei的docs/coordination/tasks/daily-trading-system-audit.md为准。
+更新时间：2026-10-08T12:39:44.749924+08:00。唯一负责人：本机Codex聊天01a11721-303e-7c83-9451-c82078c9ba23。跨任务当前状态以coordination/lei的docs/coordination/tasks/daily-trading-system-audit.md为准。
 
 ## 目标与当前阶段
 
@@ -83,3 +83,13 @@
 最新范围登记54b5f794f7338279faa517e236aa02971c317d6d已推并逐字读回，checked_coordination_sha=cd2091de7252521e5e68026d3ecca6956e13167e，checked_at=2026-10-08T12:21:52.221617+08:00，已读自身和research-dispatch-controller/COORDINATION1.1；中控新增终止资格路径不重叠。原HEAD及共享脏区不变，准备独立成果分支codex/gpt-system-integration-20261008；源码远端状态以之后实际读回回执为准，不用协调提交代替。
 
 证据：原raw/gpt-integration-live-receipt.json、config-receipt、fundamentals-receipt、increment-receipt、final-tests.log及失败记录；私有返回/登录截图留data/cache/gpt-system-integration。source/API依赖和私有运行资料不会随成果分支自动迁移。总体goal active，登录只阻塞账户侧接入；不重启其他研究、不调规则、不改仓外配置。
+
+## 2026-10-08T12:39:44.749924+08:00：源码发布与总览收紧
+
+首批32文件已普通推到codex/gpt-system-integration-20261008@b2c3cacb073a92eeacf2e0a66c05d500800a7f03并逐字读回，原HEAD/脏工作区不切换。项目配置远端只含自身lei_system段，原未跟踪factorhub段仍本机且逐字未改；私有包、数据库、SDK/隧道二进制和他人API均不入Git。回执gpt-integration-source-publication.json。
+
+主控发现总览169571字节、目标长文占165440字节；修补默认10条概要、最大20并可按任务文字查，保留全台账计数/源日期/匹配与截短说明，不把省略授权范围当全范围许可。真实默认返回13211字节，减少92.21%；已用已知编号实查命中，源日期独立保留，不冒称模型费用已降低。新视图26项+旧日报22项=48项检查通过，Ruff通过；只重验变更使旧证据失效的接口/协议，未重跑金融研究。
+
+本次范围登记11ef654017de2dde5cf155647570dcf461cb469c已推读回，checked_coordination_sha=18cc758fc5c504abb0b0a4445f325ab18ceaeff5，checked_at=2026-10-08T12:35:33.102963+08:00，已读自身/中控/COORDINATION1.1。此前expected-base检查因共享ref更新在写前中止，重新fetch读中控终止事件范围后才登记，未覆盖他人。该修补和接续回执随同一成果分支的后续提交发布；准确最新提交由Git日志和协调最新记录定位，避免写自身SHA循环。
+
+账户登录仍停在ChatGPT登录页；仅账户侧所需登录和具体授权待用户输入，总体goal active，不标接入完成。完成后优先检验实际账户可用入口并做真实工具返回比较；读原计划不足时只列缺项。本机可立即查询，尚无手机通知送达、真实挂单或平台成交验收。

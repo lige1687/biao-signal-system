@@ -254,7 +254,15 @@ class SystemContext:
             errors["trade_ledger"] = "trade ledger unavailable in packet"
         return errors
 
-    def overview(self) -> dict[str, Any]:
+    def overview(self, query: str = "", limit: int = 10) -> dict[str, Any]:
+        if not isinstance(query, str) or len(query) > 160 or "\x00" in query:
+            return self._result(
+                "overview", errors={"query": "query must be at most 160 characters without NUL"}
+            )
+        if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 20:
+            return self._result(
+                "overview", errors={"limit": "limit must be an integer from 1 to 20"}
+            )
         data, errors, sources = self._collect(
             {
                 "workspace": "/api/portfolio/workspace",
@@ -278,34 +286,65 @@ class SystemContext:
             )
         research = data.get("research") or {}
         upgrades = data.get("upgrades") or {}
-        upgrade_items = upgrades.get("items") or []
-        if not isinstance(upgrade_items, list):
+        upgrades_available = "upgrades" in data
+        upgrade_items = upgrades.get("items") if upgrades_available else None
+        if upgrades_available and not isinstance(upgrade_items, list):
             errors["upgrades"] = "invalid upgrades items schema"
             sources["upgrades"]["available"] = False
             sources["upgrades"]["error"] = errors["upgrades"]
-            upgrade_items = []
-        upgrade_fields = (
-            "id",
-            "title",
-            "kind",
-            "status",
-            "owner",
-            "progress",
-            "evidence",
-            "links",
-            "next_action",
-            "updated_at",
-            "authorization",
-        )
+            upgrades_available = False
+            upgrade_items = None
+        upgrade_matches = []
+        status_counts = {}
+        if upgrades_available:
+            needle = query.casefold()
+            for item in upgrade_items:
+                if not isinstance(item, dict):
+                    continue
+                status = str(item.get("status") or "unknown")
+                status_counts[status] = status_counts.get(status, 0) + 1
+                searchable = " ".join(
+                    str(item.get(field) or "")
+                    for field in ("id", "title", "owner", "evidence", "next_action")
+                ).casefold()
+                if not needle or needle in searchable:
+                    upgrade_matches.append(item)
+
+        def compact_goal(item: dict) -> dict:
+            evidence = str(item.get("evidence") or "")
+            next_action = str(item.get("next_action") or "")
+            links = item.get("links") if isinstance(item.get("links"), list) else []
+            auth = item.get("authorization") if isinstance(item.get("authorization"), dict) else {}
+            return {
+                "id": item.get("id"),
+                "title": item.get("title"),
+                "kind": item.get("kind"),
+                "status": item.get("status"),
+                "owner": item.get("owner"),
+                "progress": item.get("progress"),
+                "evidence": evidence[:500],
+                "links": links[:5],
+                "next_action": next_action[:300],
+                "updated_at": item.get("updated_at"),
+                "authorization": {key: auth.get(key) for key in ("granted", "at")},
+                "authorization_scope_omitted": True,
+                "fields_truncated": {
+                    "evidence": len(evidence) > 500,
+                    "next_action": len(next_action) > 300,
+                },
+                "links_truncated": len(links) > 5,
+            }
+
         upgrade_summary = {
-            "generated_at": upgrades.get("generated_at"),
-            "total": len(upgrade_items),
-            "truncated": len(upgrade_items) > 100,
-            "items": [
-                {field: item.get(field) for field in upgrade_fields}
-                for item in upgrade_items[:100]
-                if isinstance(item, dict)
-            ],
+            "generated_at": upgrades.get("generated_at") if upgrades_available else None,
+            "total": len(upgrade_items) if upgrades_available else None,
+            "matched_total": len(upgrade_matches) if upgrades_available else None,
+            "returned": min(limit, len(upgrade_matches)) if upgrades_available else 0,
+            "truncated": len(upgrade_matches) > limit if upgrades_available else None,
+            "status_counts": status_counts if upgrades_available else None,
+            "query": query,
+            "limit": limit,
+            "items": [compact_goal(item) for item in upgrade_matches[:limit]],
         }
         summary = {
             "access_scope": "local_codex_tool_only",
@@ -345,6 +384,7 @@ class SystemContext:
                 "本机工具可读不等于手机或网页 ChatGPT 已直连。",
                 "每项资料日期独立于本次读取时间；旧持仓金额不是现值。",
                 "system_upgrades 是系统目标台账，不等于跨 AI 协调分支的当前任务状态。",
+                "目标摘要省略具体授权范围；granted=true 不能推断所有工作均已获准。",
                 "research_count 只是报告目录数量，不表示研究完成进度。",
             ],
             errors=errors,
@@ -837,7 +877,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     context = SystemContext()
     call = {
-        "overview": lambda: context.overview(),
+        "overview": lambda: context.overview(args.query, args.limit),
         "portfolio": lambda: context.portfolio(args.code),
         "fundamentals": lambda: context.fundamentals(args.market, args.section),
         "news": lambda: context.news(args.code, args.limit),

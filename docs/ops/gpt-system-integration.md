@@ -40,10 +40,17 @@
 `generated_at` 是查询时间，不替代具体数据日期。来源失败独立保留，部分资料仍可使用。
 不能把可读取接口、足够交易资料和收到通知合并成一个“已接通”状态。
 
+总览里的系统目标默认只展示10项；query按目标编号、名称、负责人和证据文字筛选，
+limit范围1至20。全台账状态计数/总数、匹配数、返回数与截断标识分别保留；
+query只影响目标条目，不筛其他总览信息。证据预览最多500字、下一动作300字、
+链接最多5条，截短处明确标注。授权范围省略时不能由granted推断具体执行许可。
+实际默认返回从169571降到13211字节，缩短92.21%；这不是已测模型费用节省。
+
 CLI 示例（仓库根目录运行）：
 
 ```sh
 PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view overview
+PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view overview --query 因子 --limit 5
 PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view portfolio --code 013403
 PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view fundamentals --section rates-history
 PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view research-search --query 宽基 --limit 5
@@ -162,8 +169,12 @@ PYTHONPATH = "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/gpt-system-int
 不接受用户自定义刷新或远端地址。首次初始化的目标台账GET可维护存储；本轮已核既有
 台账seed-ready、75项目标，只读取现有记录，未调用目标写接口。
 测试、兼容层失败、首次格式检查和zsh保留变量造成的包装命令失败均保留在同目录。
-新增连接25项检查通过；原日报/通知22项有效证据复用，共47项相关检查通过。
+新增连接26项检查通过；原日报/通知22项有效证据复用，共48项相关检查通过。
 最终静态检查、技能验证和归置检查通过；一条python_multipart弃用提醒仍保留。
 成果分支只提交本任务源码、测试、说明和安全回执；项目配置提交仅自身lei_system段，
 不会上传本机原有未跟踪factorhub配置。既有API源码依赖指纹另记在
 `gpt-integration-dependencies.json`，不把其他负责人的脏API改动混进本分支。
+首批源码已在`codex/gpt-system-integration-20261008`的
+`b2c3cacb073a92eeacf2e0a66c05d500800a7f03`普通推送并32文件逐字读回。
+总览限额修补的最新提交可由本分支Git日志定位，安全回执见
+`gpt-integration-source-publication.json`和`gpt-integration-output-receipt.json`。

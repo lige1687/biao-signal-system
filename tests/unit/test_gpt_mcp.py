@@ -91,6 +91,14 @@ def test_real_stdio_roundtrip_and_read_only_boundary() -> None:
                     for tool in tools if tool.name not in {"overview", "fundamentals"}
                 )
 
+                overview = _result_data(
+                    await session.call_tool("overview", {"query": "持仓", "limit": 3})
+                )
+                assert overview["data"] == {"query": "持仓", "limit": 3}
+                assert (await session.call_tool("overview", {"limit": 21})).isError
+                assert (await session.call_tool("overview", {"query": "x" * 161})).isError
+                assert (await session.call_tool("overview", {"query": "x\x00y"})).isError
+
                 portfolio = _result_data(
                     await session.call_tool("portfolio", {"fund_code": "510300"})
                 )

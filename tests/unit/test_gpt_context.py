@@ -213,11 +213,15 @@ def test_overview_bounds_upgrade_progress_and_keeps_ledger_date(tmp_path: Path) 
             "status": "in_progress",
             "owner": "owner",
             "progress": {"done": 1, "total": 2},
-            "evidence": "receipt",
-            "links": [],
-            "next_action": "verify",
+            "evidence": "receipt" * 120 if n == 0 else "receipt",
+            "links": [{"url": f"local-{i}"} for i in range(7)] if n == 0 else [],
+            "next_action": "verify" * 80 if n == 0 else "verify",
             "updated_at": "2026-10-08T09:00:00+08:00",
-            "authorization": {"granted": True},
+            "authorization": {
+                "granted": True,
+                "at": "2026-10-08T09:00:00+08:00",
+                "scope": "specific work only",
+            },
             "history": ["private history"],
         }
         for n in range(105)
@@ -231,11 +235,45 @@ def test_overview_bounds_upgrade_progress_and_keeps_ledger_date(tmp_path: Path) 
     result = SystemContext(tmp_path, fetch=fetch).overview()
     upgrades = result["data"]["system_upgrades"]
     assert upgrades["generated_at"] == "2026-10-08T11:30:00+08:00"
-    assert (upgrades["total"], upgrades["truncated"], len(upgrades["items"])) == (105, True, 100)
+    assert (upgrades["total"], upgrades["matched_total"], upgrades["returned"]) == (105, 105, 10)
+    assert (upgrades["truncated"], len(upgrades["items"])) == (True, 10)
+    assert upgrades["status_counts"] == {"in_progress": 105}
     assert upgrades["items"][0]["progress"] == {"done": 1, "total": 2}
     assert "history" not in upgrades["items"][0]
+    assert len(upgrades["items"][0]["evidence"]) == 500
+    assert len(upgrades["items"][0]["next_action"]) == 300
+    assert len(upgrades["items"][0]["links"]) == 5
+    assert upgrades["items"][0]["fields_truncated"] == {"evidence": True, "next_action": True}
+    assert upgrades["items"][0]["links_truncated"] is True
+    assert upgrades["items"][0]["authorization_scope_omitted"] is True
+    assert "scope" not in upgrades["items"][0]["authorization"]
+    assert upgrades["items"][1]["fields_truncated"] == {"evidence": False, "next_action": False}
     assert result["sources"]["upgrades"]["source_generated_at"] == upgrades["generated_at"]
     assert "跨 AI" in " ".join(result["limitations"])
+    assert "granted=true" in " ".join(result["limitations"])
+    filtered = SystemContext(tmp_path, fetch=fetch).overview(query="okr-104", limit=2)
+    filtered_upgrades = filtered["data"]["system_upgrades"]
+    assert (
+        filtered_upgrades["total"],
+        filtered_upgrades["matched_total"],
+        filtered_upgrades["returned"],
+        filtered_upgrades["truncated"],
+    ) == (105, 1, 1, False)
+    assert filtered_upgrades["items"][0]["id"] == "okr-104"
+    empty = SystemContext(tmp_path, fetch=fetch).overview(query="not present")
+    assert empty["data"]["system_upgrades"]["matched_total"] == 0
+    assert empty["sources"]["upgrades"]["available"] is True
+
+
+def test_overview_rejects_bad_query_and_limit_without_fetch(tmp_path: Path) -> None:
+    def no_fetch(_path: str):
+        raise AssertionError("invalid input must not call API")
+
+    context = SystemContext(tmp_path, fetch=no_fetch)
+    for query in ("x" * 161, "bad\x00query"):
+        assert context.overview(query=query)["available"] is False
+    for limit in (0, 21, True, "10"):
+        assert context.overview(limit=limit)["available"] is False
 
 
 def test_overview_keeps_upgrade_source_failure_separate(tmp_path: Path) -> None:
@@ -249,6 +287,8 @@ def test_overview_keeps_upgrade_source_failure_separate(tmp_path: Path) -> None:
     assert result["errors"]["upgrades"] == "goal database offline"
     assert result["sources"]["upgrades"]["available"] is False
     assert result["data"]["workspace"]["coverage"]["total"] == 1
+    assert result["data"]["system_upgrades"]["total"] is None
+    assert result["data"]["system_upgrades"]["matched_total"] is None
 
 
 def test_only_us_macro_uses_longer_timeout(tmp_path: Path) -> None:

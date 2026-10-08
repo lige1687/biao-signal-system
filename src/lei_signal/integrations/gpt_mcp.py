@@ -66,9 +66,18 @@ def create_server(context: Any = None, *, port: int = 8765) -> Any:
     )
 
     @server.tool(annotations=read_only_public, structured_output=True)
-    def overview() -> dict[str, Any]:
-        """Read the current LEI system overview and its data limitations."""
-        return context.overview()
+    def overview(query: str = "", limit: int = 10) -> dict[str, Any]:
+        """Read the LEI overview; query filters only system-upgrade goals.
+
+        Other overview sections are unchanged. The default returns ten short
+        goal evidence previews; use a specific query to find more relevant goals.
+        """
+        if not isinstance(query, str) or len(query) > 160 or "\x00" in query:
+            raise ValueError("query must be text of at most 160 characters")
+        return context.overview(
+            query=query,
+            limit=_bounded(limit, name="limit", minimum=1, maximum=20),
+        )
 
     @server.tool(annotations=read_only_local, structured_output=True)
     def portfolio(fund_code: str | None = None) -> dict[str, Any]:
