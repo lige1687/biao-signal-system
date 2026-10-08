@@ -1,10 +1,13 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新：2026-10-08T12:17:23.105302+08:00；root会话01a116c7-3700-7062-a6c6-53af00ef60a0按最新人类指令直接执行，不再派发。checked_coordination_sha=e3c5da9c02f1dd32f2dab42124155bc066bafda3；已读COORDINATION.md、本记录、risk-shape-information及report-library-integration-20261008，原目录owner已释放共享登记窗口；root独占本轮新增报告登记，无并写冲突。
-- 海通证券有界资格已完成：四份正式披露、14项本地核验、19条原停牌占位核对；报告和事实清单已在codex/research-direct-20261008@995b5079d58813770d7a37fd81e058d21c37e2e5推送并逐10文件读回一致。原网页和供应商数据仅本机；没有新增独立agent审查、修价或拟合。主登记621→622仅本地，成果分支200→201已发布，未上传完整主树登记。
-- 现在接续原清单另两只600705、601989终止事件，状态planned。本轮准确新增路径docs/experiments/raw/stock-terminal-actions-2026-10-08/、docs/experiments/stock-terminal-actions-qualification-2026-10-08.md；既有root进度/thread-state/中央记录及共享registry/INDEX单报告窗口沿用。只补官方停止交易与最终现金/换股事实，不重跑原试验、补全价格或猜成员。
-- 两只固定对象来源请求规划约12次，并非达到就放弃可得必要原件的自定停止预算；累计逐条记录、所得≤10MiB、至少512MiB空闲，依据事实齐备或真实缺件收尾。海通已用13次/213536字节，初始自定额度修订和第11次顺序错误留存；其他旧36次、B01—B05、三键4/6预算与失败不变。
-- 尚缺的D—MAE六原件、历史价格原版本/完整成员和Qlib原包保持各自依赖，不阻塞当前独立资料工作。定时leisignal已改v4-direct、ACTIVE/30分钟/原线程；原生配置读回验证，下一次自动触发尚待实际观察。
+- 更新：2026-10-08T12:30:59.575116+08:00；root会话01a116c7-3700-7062-a6c6-53af00ef60a0按最新人类指令直接推进，不再派发。checked_coordination_sha=54b5f794f7338279faa517e236aa02971c317d6d；已读COORDINATION.md、本记录、risk-shape-information及report-library-integration-20261008。最新增量只属独立日报owner，与本报告无同写冲突。
+- **已交付并核远端：** 三只原清单证券的2025年终止事件资料；12份交易所/发行人原件、42项本地来源/算术/旧记录核验、36条旧停牌占位解释。两份报告在codex/research-direct-20261008@6c781464a9d622dc73b817aa5d89267c2cc75fa8，前一阶段995b5079d58813770d7a37fd81e058d21c37e2e5；两阶段各10条准确文件读回一致。独立agent审查未新做，原件只本机，Git仅摘要/指纹/核数。报告和数据文件不代表研究引擎已支持公司合并。
+- 报告：docs/experiments/haitong-corporate-action-qualification-2026-10-08.md；docs/experiments/stock-terminal-actions-qualification-2026-10-08.md。主登记621→623仅本地，独立分支200→202已发布；旧条目逐字保留，未整表发布主树脏修改。本轮共享registry/INDEX窗口现已释放，两个已完成raw/report范围释放；root仍单写自己的状态、进度和中央摘要。
+- 具体新增：600837每股换0.62股601211，停牌/终止/新股上市分开；600705有效申报才适用3.54元现金选择，股份已交割和账户未来转款分开；601989每股换0.1339股600150，指定1,454,168,398股锁定六个月。未把退市或账户显示中断当权益归零。原价格修复、真实标签、拟合、交易均0。
+- 消耗/失败：两单元可见来源13+14=27次，原响应1,434,102字节；海通两PDF返回校验HTML、初始自定检查估计修订及第11次顺序错误、错误路径查找、登记缩进断言、第二PDF提取器缺失/对象警告均留回执，未删冻结失败。其他36次成员查询、B01—B05、三键4/6等旧批次保留且未重开。磁盘期末空闲约2.85GB；归置检查通过。
+- **当前运行状态：** 这两个有界问题已答完，无正在跑的本单元任务；七个原负责人只读快照均无新交付，没有任何新派发。八目标未整体完成。不能把本段解释成全部公共资料问题已穷尽。
+- 后续依赖分开：目标1/3/6真实流程仍需六份准确冻结原件和原SHA/独审/阶段授权；目标4仍缺原新浪调整快照/基准、完整官方历史成员，完整预热/分红/身份链须按实际研究消费者逐项限定；新价版本不能冒充旧价恢复。目标5研究需合格特征，账户使用另需实际约束；目标7需Qlib准确原输入/回执。两个新报告归档已完成，不再重派重核。更详细依赖及恢复条件见本文件机器区direct_remaining_goals。
+- 定时leisignal仍ACTIVE/30分钟/原线程，v4-direct原生提示已应用并读回，改为本对话直接执行；下一次自动v4触发还未观察，不能以本轮人工执行冒称定时运行已验证。403、automation-2保持暂停；不切主树、不删、不付费、不部署或写仓外数据库。
 
 ## 当前直接执行规则
 
@@ -134,8 +137,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "e3c5da9c02f1dd32f2dab42124155bc066bafda3",
-  "checked_at": "2026-10-08T12:17:23.105302+08:00",
+  "checked_coordination_sha": "54b5f794f7338279faa517e236aa02971c317d6d",
+  "checked_at": "2026-10-08T12:30:59.575116+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -270,17 +273,12 @@
       "write_paths": [
         "docs/ops/work-progress/research-dispatch-controller-2026-10-07.md",
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
-        "docs/coordination/tasks/research-dispatch-controller.md",
-        "docs/experiments/raw/haitong-corporate-action-2026-10-08/",
-        "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md",
-        "docs/experiments/registry.json",
-        "docs/experiments/INDEX.md",
-        "docs/experiments/raw/stock-terminal-actions-2026-10-08/",
-        "docs/experiments/stock-terminal-actions-qualification-2026-10-08.md"
+        "docs/coordination/tasks/research-dispatch-controller.md"
       ],
       "depends_on": [],
       "scope_released": false,
-      "source": "User latest instruction replaces dispatcher-only role with direct root execution. Root is sole writer of central record and new corporate-action qualification paths; no further delegation."
+      "source": "User latest instruction replaces dispatcher-only role with direct root execution. Root is sole writer of central record and new corporate-action qualification paths; no further delegation.",
+      "scope_note": "Root state/progress/central coordination only. Both completed direct factual reports/raw and shared registration window released. Any new substantive scope must be registered before edits."
     },
     {
       "task_id": "report-registration-20261007",
@@ -504,12 +502,12 @@
     "policy_sha256": "990099d2b1a53070b986c5d0c57b992ff32b38c432fec3cf645922e19bd479ca",
     "native_prompt_sha256": "ef1f0ff333b28ba66b967133102836016bc076802531ab6387b4ca30c3a64cfb",
     "state": "direct_execution_native_readback_verified",
-    "applied_verified_at": "2026-10-08T11:19:56.161075+08:00",
+    "applied_verified_at": null,
     "automation_id": "leisignal",
     "cadence_minutes": 30,
     "status": "ACTIVE",
     "target_thread_id": "01a116c7-3700-7062-a6c6-53af00ef60a0",
-    "future_scheduled_execution": "v4 direct prompt applied and read back; current user-triggered direct execution verified; later scheduled v4 execution not yet observed.",
+    "future_scheduled_execution": "Current direct human-triggered execution produced two qualified reports; subsequent native scheduled v4 execution has not yet been observed.",
     "source_fields": [
       "heartbeat_policy",
       "parallel_serial_dispatch_20261008",
@@ -533,11 +531,14 @@
       "correction_commit": "cdc367e5a6512bfa01ab507c475befeb6f20d307"
     },
     "latest_followup": {
-      "checked_at": "2026-10-08T12:17:23.105302+08:00",
+      "checked_at": "2026-10-08T12:30:59.575116+08:00",
       "mode": "root_direct_no_delegation",
-      "completed_unit": "haitong-corporate-action-qualification-20261008",
-      "completed_commit": "995b5079d58813770d7a37fd81e058d21c37e2e5",
-      "next_direct_unit": "remaining-terminal-actions-qualification-20261008"
+      "completed_units": 2,
+      "published_commit": "6c781464a9d622dc73b817aa5d89267c2cc75fa8",
+      "local_checks": 42,
+      "related_owner_snapshots": "7/7 unchanged completed",
+      "new_dispatches": 0,
+      "current_unit_running": false
     },
     "parallel_serial_rule": "Current user instruction: root executes directly; independent read-only tool calls may run in parallel, dependent validation/publication and shared registry writes are sequential. No new task dispatch.",
     "classic_acceptance": {
@@ -552,38 +553,12 @@
       "research_ready_count": 0,
       "eligible_running_tasks": 1,
       "acceptance_boundary": "Saved configuration verified; future timed execution and ready/stalled runtime scenarios not yet observed."
-    }
+    },
+    "former_v2_applied_verified_at": "2026-10-08T11:19:56.161075+08:00",
+    "current_native_configuration_evidence": "v4-direct native prompt applied and read back during this human direct-execution turn; exact tool completion timestamp was not separately retained; do not reuse earlier v2 timestamp as v4 proof."
   },
   "current_execution_mode": "root_direct_no_delegation",
-  "direct_execution_unit": {
-    "id": "remaining-terminal-actions-qualification-20261008",
-    "state": "planned_registered_before_sources",
-    "codes": [
-      "600705",
-      "601989"
-    ],
-    "question": "Qualify officially disclosed final trading/suspension/listing termination and cash or share consideration for the other two already named missing securities. No market panel repair, sample replacement or new backtest.",
-    "original_authority": "Original eight-goal request goal4 and existing qualification-plan sections4 and6; direct-execution user instruction.",
-    "write_paths": [
-      "docs/experiments/raw/stock-terminal-actions-2026-10-08/",
-      "docs/experiments/stock-terminal-actions-qualification-2026-10-08.md",
-      "docs/experiments/registry.json",
-      "docs/experiments/INDEX.md"
-    ],
-    "source_policy": {
-      "scope": "Two named 2025 terminal corporate actions only; existing reports reused; stop once event dates and terms are sourced and checked, or actual access/necessary evidence is unavailable. No fixed self-created request quota used as a reason to abandon accessible necessary facts.",
-      "planning_estimate_source_operations": 12,
-      "source_operations_used": 0,
-      "max_new_bytes": 10485760,
-      "minimum_free_bytes": 536870912,
-      "old_closed_budgets": "unchanged; none reused",
-      "fits": 0,
-      "labels": 0,
-      "paid": 0
-    },
-    "acceptance": "Issuer/exchange documents and original-byte hashes; publication/effective dates distinct; exact consideration terms; fixed old-row comparison only if needed; rights actually paid/issued distinguished from proposal; unclear fields remain unknown.",
-    "execution": "root only; independent read requests parallel, shared registration serial"
-  },
+  "direct_execution_unit": null,
   "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
   "direct_execution_completed_units": [
     {
@@ -630,7 +605,123 @@
       "published_commit": "995b5079d58813770d7a37fd81e058d21c37e2e5",
       "checks": 14,
       "report": "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md"
+    },
+    {
+      "id": "remaining-terminal-actions-qualification-20261008",
+      "state": "completed_bounded_factual_qualification",
+      "codes": [
+        "600705",
+        "601989"
+      ],
+      "question": "Qualify officially disclosed final trading/suspension/listing termination and cash or share consideration for the other two already named missing securities. No market panel repair, sample replacement or new backtest.",
+      "original_authority": "Original eight-goal request goal4 and existing qualification-plan sections4 and6; direct-execution user instruction.",
+      "write_paths": [
+        "docs/experiments/raw/stock-terminal-actions-2026-10-08/",
+        "docs/experiments/stock-terminal-actions-qualification-2026-10-08.md",
+        "docs/experiments/registry.json",
+        "docs/experiments/INDEX.md"
+      ],
+      "source_policy": {
+        "scope": "Two named 2025 terminal corporate actions only; existing reports reused; stop once event dates and terms are sourced and checked, or actual access/necessary evidence is unavailable. No fixed self-created request quota used as a reason to abandon accessible necessary facts.",
+        "planning_estimate_source_operations": 12,
+        "source_operations_used": 0,
+        "max_new_bytes": 10485760,
+        "minimum_free_bytes": 536870912,
+        "old_closed_budgets": "unchanged; none reused",
+        "fits": 0,
+        "labels": 0,
+        "paid": 0
+      },
+      "acceptance": "Issuer/exchange documents and original-byte hashes; publication/effective dates distinct; exact consideration terms; fixed old-row comparison only if needed; rights actually paid/issued distinguished from proposal; unclear fields remain unknown.",
+      "execution": "root only; independent read requests parallel, shared registration serial",
+      "status": "accepted_root_checked_not_independent_agent_review",
+      "accepted_at": "2026-10-08T12:29:41.899191+08:00",
+      "published_commit": "6c781464a9d622dc73b817aa5d89267c2cc75fa8",
+      "report": "docs/experiments/stock-terminal-actions-qualification-2026-10-08.md",
+      "source_documents": 8,
+      "checks": 28,
+      "source_operations_used": 14,
+      "raw_response_bytes": 1220566,
+      "vendor_placeholder_rows_matched": 17
     }
+  ],
+  "direct_execution_summary": {
+    "reports": 2,
+    "securities": 3,
+    "source_documents": 12,
+    "local_checks": 42,
+    "officially_matched_2025_placeholders": 36,
+    "visible_source_operations": 27,
+    "raw_response_bytes": 1434102,
+    "labels": 0,
+    "fits": 0,
+    "price_repairs": 0,
+    "source_originals": "local_only; hashes and factual summaries published",
+    "publication_branch": "codex/research-direct-20261008",
+    "publication_tip": "6c781464a9d622dc73b817aa5d89267c2cc75fa8",
+    "main_registry_entries": 623,
+    "isolated_registry_entries": 202,
+    "primary_branch_unchanged": true,
+    "free_bytes_after": 2815746048
+  },
+  "direct_remaining_goals": {
+    "at": "2026-10-08T12:29:41.899191+08:00",
+    "reviewer": "root direct evidence and seven existing owner snapshots",
+    "goals": [
+      {
+        "goal": 1,
+        "accepted": "synthetic implementation and independent arithmetic",
+        "remaining": "real consumption-chain impact needs original frozen D-MAE inputs"
+      },
+      {
+        "goal": 2,
+        "accepted": "16-item evidence catalog; four accepted reports integrated into Git; new three-key qualification report registered locally and in isolated Git branch; two direct corporate-action reports registered uniquely and remote verified at6c781464",
+        "remaining": "Original cloud-effect evidence remains item-specific; no pending registration for either direct report."
+      },
+      {
+        "goal": 3,
+        "accepted": "original design and synthetic implementation",
+        "remaining": "six exact original files in native-risk-d-mae-2026-10-07/MISSING-INPUTS.json; true X/V/Y still zero"
+      },
+      {
+        "goal": 4,
+        "accepted": "Fixed prior source checks preserved; now three named2025 terminal events qualified using12 official issuer/exchange documents,36 preserved placeholders explained; actual repairs0.",
+        "remaining": "Old Sina adjusted-price source snapshot/anchor, full official historical membership and whole-history warmup/dividend/identity coverage still not qualified. Core2025 terminal actions no longer missing. New research-price reconstruction needs its actual approved consumer/definition and explicit price-policy contract; do not assume restored old qfq.",
+        "scope_boundary": "This current bounded source question is answered. The wider goal is not globally exhausted: future wakeup must evaluate the exact next still-missing independently useful component against existing source plans and original budgets, without rerunning these reports or declaring all work blocked by D-MAE."
+      },
+      {
+        "goal": 5,
+        "accepted": "prior bounded evidence only; no full strategy improvement",
+        "remaining": "qualified features/data before new comparisons; user actual risk constraints before account-policy use"
+      },
+      {
+        "goal": 6,
+        "accepted": "adapter R1/R2 repair review and one pure-Git assembled synthetic restart/repeat-rejection test",
+        "remaining": "real data end-to-end depends on goal3 originals; no repeated accepted synthetic tests"
+      },
+      {
+        "goal": 7,
+        "accepted": "bounded external checks and independent workflow review",
+        "remaining": "Qlib new Ridge original inputs/receipt has no exact cloud file ID; no empty re-audit/install"
+      },
+      {
+        "goal": 8,
+        "accepted": "Measured disk before source collection and after completion; only4.6MB-scale local direct evidence, original raw files retained; no cleanup/outside writes.",
+        "remaining": "next substantial job must measure capacity; deletion/outside-repo mutation unapproved; paused403 unchanged"
+      }
+    ],
+    "status_refreshed_at": "2026-10-08T11:18:08.480749+08:00",
+    "supersedes": "2026-10-08T10:37:30.711992+08:00",
+    "current_real_experiment_readiness": "No new original input package reported by seven original-owner snapshots; D-MAE original six files, stage approvals and original SHA remain prerequisites. Public data qualification is a separate bounded stream, not claimed globally exhausted.",
+    "next_required_decision_boundary": "Before a new market run, original approved inputs and consumer/price/member policies must be bound. Existing independent source gaps can be qualified directly when scope is concrete, without sending new tasks."
+  },
+  "shared_registration_scope_released": true,
+  "direct_next_actions": [
+    "Continue in this chat only; no new messages/tasks to other chats or subagents. Both direct qualification units above are accepted and must not be rerun.",
+    "On next wakeup inspect relevant new input/callback evidence; do not retest unchanged frozen missing files or retry403. Apply original D-MAE contract SHA and six exact files, independent review and staged X/Y approvals before any actual labels.",
+    "For goal4, use the new three-security event sidecars. Evaluate the next specific remaining official action/warmup/identity qualification against original scope and already used source plans; original price restoration still needs original adjustment snapshot, and full CSI300 still needs official complete anchor/chain. Do not generalize these two external gaps into a claim that every independent qualification is blocked.",
+    "Any further market-price reconstruction must first bind the original approved consumer, definition/version, warmup and explicit price policy; do not silently replace the old frozen price panel or reopen sealed three-key/PPO/P26 runs.",
+    "Shared registry/INDEX window for these two reports is now released. Read latest coordination before any new scope, and preserve exact old source budgets/failures."
   ]
 }
 ```
