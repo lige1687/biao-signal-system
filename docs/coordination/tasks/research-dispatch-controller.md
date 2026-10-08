@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "c750d58f1c11c74d45c2eec448752b6ff6c64375",
-  "checked_at": "2026-10-08T21:18:24.978867+08:00",
+  "checked_coordination_sha": "2cb9e127d389dd5f896fc4aced6b25c4432bacaa",
+  "checked_at": "2026-10-08T21:19:19.383311+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1172,7 +1172,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "mac-local-storage-cleanup",
     "trend-trading-video"
   ],
-  "conflict_decision": "Root adapter archived; releasesregistry/INDEX now. Storage routing andvideoV7 originalowners currently inProgress independently. No rootactivewriter to theirpaths, no newduplicateworker.",
+  "conflict_decision": "Concurrentpush rejected; fetchedandreadvideo exportrecovery only; normalmerge preservesboth separateownerfiles, no force orhistoryrewrite. Root registry/INDEX released and adapter accepted; originalowners activeindependently.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2338,3 +2338,5 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - scope_released=true：root现在释放registry/INDEX和本项写入。两次ENOSPC保留；其后实际空间1.66GB→2.70GB、进度/复制/正常索引commit/push读回成功，不因曾失败永久停工，也不归因本线程清理。20→19预期文件数差系v1清单此前已推，第一次断言在commit前停止，准确11新raw+8其他才提交。
 - 原Goal5余项仍要求可靠特征和可复算完整策略对照；输入、原包、未知P1分支不齐，不新造多周/部分成交研究。已验适配/规划/账本不重跑。全部root研究子agent已completed。
 - 独立owner只读compact更新：storage01a1155d-b204-7232-a993-4c9e0567af59 turn01a11b93-9b09-7273-abac-e59c4a80f4a7 cursor97038648-8723-4658-99dd-c33457771744:3 inProgress，已报告新输出路由待验证；video01a11a02-7ff5-7563-9831-a36273f51532 turn01a11b8e-43f5-7862-8d22-898995d4e82c cursorb98f79ce-6e43-4628-96c2-94fa1475aa99:4 inProgress，已报告10秒小样成功/完整4K正导出。中控已发送实际空间变化事实提醒，不授权删除或改预算、不把它们的运行当成果、不声称由该提醒引起运行。两原owner路径独立，后续接真实回执再核。
+
+- 2026-10-08T21:19:19.383311+08:00 推送因video并发正常更新被拒，已fetch读取其恢复段（checked_coordination_sha=2cb9e127d389dd5f896fc4aced6b25c4432bacaa）；仅其自己的task文件，无冲突。普通merge保留双方历史，不force/rebase/reset；最新root范围释放与既有成果SHA不变。

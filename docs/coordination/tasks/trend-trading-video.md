@@ -1,3 +1,10 @@
+## V7 导出恢复
+
+- task-id trend-trading-video；active；2026-10-08T21:16:43.639905+08:00；checked_coordination_sha: c750d58f1c11c74d45c2eec448752b6ff6c64375；已读本任务及此前 COORDINATION.md / research-dispatch-controller，原自有范围无冲突。
+- 最后复查可用磁盘已回升约2.5GiB，原因未确认，本agent没有删除资料。缓存删除许可不再是继续前提；已启动10秒真实导出，随后完成全片，不扩大范围。
+
+---
+
 ## V7 动画已重做，成片导出受磁盘空间阻塞
 
 - task-id trend-trading-video；blocked；owner本对话root；2026-10-08T21:15:49.315359+08:00；checked_coordination_sha: 43949fe9393758e6a9cfeb49386b69be7a3d8508；已读 COORDINATION.md、本任务与 research-dispatch-controller。冲突决定：本轮无共享登记写入，既有自有媒体/skill范围保持。
