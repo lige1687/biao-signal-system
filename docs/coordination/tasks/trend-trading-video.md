@@ -1,3 +1,14 @@
+## V9 final-archive-done
+
+- task-id: trend-trading-video；2026-10-09T01:25:50.714039+08:00；checked_coordination_sha: f85037d52443dbb4a6b5d7386018fb072594586b；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed V14技术交付与本期归档，scope_released=true，长版审美待用户，未发布。01:22固定外盘恢复，成片SHA及先前归档持久化核验通过；17份归档小文件全部指纹读回，含2份新旁白候选稿/说明。自身与中控已读无重叠，本任务唯一写者。无新媒体生成、迁移、删除或安装。
+- 成果codex/trend-history-long-v14-20261009@2f7bc4683f74237d19fde484ce665ac975d08a3f，9份准确小记录远端读回。外盘精确包和索引位置见v14/archive-plan.json；归档指纹见package/04-文件清单.json及archive-write-receipt.json。媒体原result/trend-history-final.mp4保留，22,469,359字节，SHA2561361a69f93c7462e8805c4f793c0f8966d674743a0fc3c69a7fc0e05f027486c。
+- 影片240秒、1080p、30fps、8章26段。此前完整实际播放通过；本次恢复网页现代研究188秒跳转实际188.656947秒、paused=false/error=null，随后正常暂停。媒体检查0失败、17份外盘文档指纹一致、归置通过；预览8781保留。候选旁白仅文稿，未录音/入片，现有影片无旁白。无独立听审或跨设备色彩核验，审美仍待用户。
+- 历史断盘失败保留；当前原盘可访问，最终读回通过。不为已有媒体重渲染，不重复批准风格。外盘未来连接不能由本次检查保证。下一步由用户观看完整片并反馈；本轮范围无必需未完成项。
+
+
+---
+
 ## V9 final-archive-start
 
 - task-id: trend-trading-video；2026-10-09T01:22:40.472083+08:00；checked_coordination_sha: df5eb5d64effca5bec947a704ac1a1a547976417；已读 COORDINATION.md、自身与 research-dispatch-controller。
