@@ -87,3 +87,19 @@
 - 真实容量预检仍明确因内盘不足5GiB拒绝，阈值与fallback=false安排不降低。尚未验证真实拔盘竞态、系统硬配额、全部历史/第三方写入；不改已有冻结路径或正在运行实验。
 - 完整小回执/失败记录/测试临时文件在既有外盘第五批output-argument-repair：old-counterexample.json、parameter-acceptance.json、tests-verified.log、lint-verified.log、hygiene-final.log、source-publication-receipt.json；私人归档原件与DB未入Git。首次非快进/小文件写失败/2夹具类别期望错误/Ruff条件/他人共享SHA变化均保留且逐项解决，未忽略实际失败。
 - scope_released=true：本轮src/lei_signal/research/output_storage.py、两相关测试与docs/ops/research-output-storage.md限定修复范围释放；私有恢复证据和自己进度继续由本owner保留。当前没有必需后台过程、科研重跑或清理动作；中控可按准确188b06d0成果接回。
+
+## 用户继续清理：只读盘点与资料决策 2026-10-08T22:51:55.665721+08:00
+
+- status: active（只读诊断/准备决定清单）；checked_coordination_sha: 18b3b30aa6de8cbcfa8df8b90edf959869f2101f；checked_at: 2026-10-08T22:51:55.665721+08:00；已读COORDINATION1.1、自身、中控、daily及video最新外盘写入记录。唯一root维护自己的进度/以下私有小证据；不占已释放的实现源码、不碰其他owner媒体或登记。
+- 用户当次：“继续清理存储？”；复用已封存五批及默认外盘修复，不重做清理或研究。本轮先只读元数据/依赖/打开文件检查；没有新删除、移动、应用停止、工具安装或仓外配置修改。
+- 新准确记录范围：data/cache/mac-local-storage-cleanup/storage-review-20261008-2233/小盘点json、gate-table.md、decision-plan.md和检查日志（私有、不入Git）；自己的docs/ops/work-progress/mac-local-storage-cleanup.md及本协调记录。无其他共享文件修改。
+- 实际22:33 storage：内盘15032049664B约14.0GiB，外盘640268763136B且UUID正常，4登记资源可读。swap实测total1024MiB/used642.81MiB；前轮约9216MiB已降，解释一部分余量回升，不能把当前回升算本轮清理。没有本地TimeMachine快照。
+- 新浅层盘点：内盘主仓54.1GiB属于活动/冻结/独有工作，保留；Library/Caches约708MiB主要活动Codex；Chrome代码签名临时副本约1.31GiB且lsof实际589/4560持有，保留，不把名义量当可释放。
+- 三个待决定目录：Desktop/学业资料/01-毕业论文（38文件）、lajibiyelunwenjian（12）、学校相关资料（37），约124MiB名义量。含毕业原稿/答辩/九月改动资料；当前项目相关文本未找到引用且lsof无占用，但不能判断用户手动使用/唯一文稿价值。不把未占用当退休证明，不自动删除或扩大旧课程授权。
+- 其余技术学习目录含源码/node_modules、环境或Maven；量化项目/现有新内容项目不因为大就移动。现有冻结raw、数据库/环境/会话/工作树/活动日志、说明元数据都保留。
+- 下一步：零动作集的技能检查→询问三个准确学业目录是否迁至既有外盘；明确确认后再逐文件恢复清单/复制与内容读回/源稳定/无占用核验后移除本机副本。实际物理释放仍未知，不能承诺124MiB必然释放。未经决定不实施这个新范围。
+
+- 2026-10-08T22:56:56.728748+08:00 收尾检查：新18b3b30a包含中控修复正式接受及video/X报告正常登记，均不与本私有元数据/进度范围重叠。旧修复188b06d0及独审不重做；新增external-learning-x-review已读，其私有源码/报告范围不动。
+- 首次本轮登记push因上述他人新记录非快进拒绝；已fetch/read三变化记录且自己的记录未变，只重建自身准确增量，未强推。此前只准备自己独立的新私有小计划，无潜在共享冲突文件修改。
+- macos-cleaner零动作计划9检查通过，12目标全部保留/待决定；0 destructive commands，对空计划适用，不冒称删除命令受检。首次quote缺少引号的格式错误已原样保存并修正，未改检查器。
+- 已向用户询问3准确学业目录完整外盘归档、核验后移除本机副本的决定；尚未收到确认，不能执行依赖该确认的移动/删除。两盘身份已核，不外推至原先所有用户资料已批准退休。
