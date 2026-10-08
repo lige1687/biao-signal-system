@@ -1,0 +1,40 @@
+{
+  "mission": "判定原v0.2已定义固定订单能否必要且不重复地接入已验收日期账本；只读给明确范围或真实依赖。",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "task_scope": [
+    "复用原spec、已验纯planningv2与datedledgerv2，检查原预定attempt_open接口缺口。不是新资金政策或收益研究。",
+    "原交接预占/部分成交引擎原件尚未定位，不假定不存在也不重造。判断研究用整笔固定订单到Ledger.apply的适配是否可独立实现，依赖哪些真实接口；若必须原引擎就明确停止条件。",
+    "若必要且可执行，给最小输入/输出/费用/唯一事件id/时点/拒绝原子性/当前资金一致性/行动绑定合同，以及独立数字反例；已有Ledger和planner不改，原策略/真实市场/部分成交/撤单恢复不扩入。",
+    "若只是为了制造新任务或不能更接近原同资金政策比较，明确不建议实施并说明缺项；不得把源包缺失泛化为不能做任何原必要工作。"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-controller-acceptance-v2.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/prior-order-interface-location.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "expected_outputs": [
+    "原必要工作是否ready的证据；ready才给有边界单次适配合同与准确不能承诺的能力"
+  ],
+  "stop_conditions": [
+    "只读源码/回执，不执行旧测试/研究，不写文件/pyc，不联网/派子代理/发其他对话消息。",
+    "无可卖整手P1分支仍待用户；跨行动订单unsupported；不猜原引擎接口。"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "source_versions": {
+    "planning": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+    "ledger": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3"
+  },
+  "created_at": "2026-10-08T20:25:02.641260+08:00"
+}

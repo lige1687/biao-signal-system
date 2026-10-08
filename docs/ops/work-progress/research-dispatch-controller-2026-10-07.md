@@ -462,3 +462,20 @@ Git入口、已验收报告发布、人工接入＋独审返修均已有真实�
 三个v1缺陷已实证并保存，旧12文件及三源码保持；v2源码尚未保存时遇ENOSPC，原执行者停止。root的here-doc、Git FETCH_HEAD及直接小文件保存也失败，目标不存在，恢复点先通过原leisignal自动化工具保存并准确读回。后来可用容量从约137MB回升至1123262464B，原因未知，本对话未删除/迁移。root重新实际保存1358B故障凭据并核SHA，普通coordination fetch成功且62df1340无变化，才续接同Sol原v2合同。不得把容量读数本身当已恢复。
 
 故障回执goal-parallel-20261008/order-planning-storage-failure-20261008.json，三个旧反例不重跑。当前只做已登记的当前现金快照、计划身份和行动覆盖三修复，写后核验、失败保留；不借仓外目录或清理权限。主Goal仍active，八目标与原预算不变。
+
+## 纯下单规划独审接受、远端归档与串行登记协调 2026-10-08T20:27:20.373110+08:00
+
+原三缺陷均关闭；独审以当前174.82元只买100份/成本105.10/余69.72、原合法374.82/300份、不同回执不同完整身份、原行动强制继承和覆盖不足拒绝核验。root重核12首版产物及3快照、3新源码、13保存金额；29raw共151094B，旧研究不重跑。报告weekly-portfolio-order-planning-2026-10-08.md、准确证据及隔离登记在edc5389854a36e87b080b340544478085211e048共39文件逐字远端核。隔离登记212→213，老条目未变；主登记仍633且未写。
+
+新增video owner正在占用主registry/INDEX单项窗口，root已请求明确释放；原制作视频聊天turn01a11b67-ee5a-77a1-a4c6-7645db71db01/cursor:3实际active，不能把未响应当放弃。先交独立报告/隔离成果，主库单条整合待串行交接，不用整份633条覆盖隔离分支。
+
+独立必要性只读工作已实际接续原Astra：order-ledger-adapter-scope-review-contract.json，确认原attempt_open是否能复用两已验模块接到Ledger.apply，必须避免重造原预占/部分成交引擎。新写范围尚未授权实施。Luna只读补查两旧cash_engine无该完整生命周期；root66文件名及有限符号命中亦未定位，恢复包仍未知，不能推为不存在。
+
+主Goal active。无整手P1分支待用户、跨行动订单未支持、真实资料与其他七目标的独立依赖保留；不把本工程接受当整体收益或八目标完成。
+
+## 2026-10-08T20:38:38.750819+08:00 纯规划主登记闭合与固定订单账本实际接续
+
+- 已核video原owner在ff4cc9ed72599d016e411c2c283acea62fa8d663释放共用登记窗口；root scope b8c17c1cf26623e68f0c488fe1071fc13c8d59a6推回后仅写报告一条，主633→634，INDEX一行，原633条/元数据不变。回执goal-parallel-20261008/order-planning-main-registration.json。原远端报告/raw edc5389854a36e87b080b340544478085211e048不重复归档。主表不混入独立分支（独立213）。
+- scope_released=true已在7ca0650ed5bd09685a2bdf2b0b51cb5c2ae9b895远端核实，并通知制作视频继续其单项登记。新mac-local-storage-cleanup只读核不触本范围，不借其仓外清理权。
+- Astra/high原合同独审认为单账户、单批串行整笔订单接入已验账本是必要且独立可做的范围；不需要先重造未知预占包。原spec/planner1/planner2/datedledger四SHA固定，新contract order-ledger-adapter-implementation-contract.json dry_run ready。已向原Sol6.1/medium followup，并核agent running；源码尚待交付，不能称执行层完成。
+- 精确写范围仅新raw/weekly-portfolio-order-ledger-adapter-2026-10-08，验收410.50→0.10、首单拒绝后205.30、卖后合法释放再买69.52与资金/身份/时点拒绝；旧模块不改不重跑。无整手P1仍待用户定义，预占/部分成交/恢复/并发不实施；0市场/真实标签/拟合/新取数。主Goal active，本轮实质进展，非全局阻塞。

@@ -1,0 +1,78 @@
+{
+  "at": "2026-10-08T20:29:32.967326+08:00",
+  "reviewer": "/root/settlement_scope_review",
+  "decision": "ready_necessary_original_single_batch_full_order_adapter",
+  "reason": "Original attempt_open not yet connected; same synthetic account, serial calls, one frozen batch and whole fill/refuse can reuse accepted planner+ledger without building unknown reservation engine.",
+  "interface": "attempt_open(decision, plan, order, opening_evidence, ledger, batch_context) -> immutable attempt_receipt",
+  "constraints": [
+    "exact spec/planner2/planner1 arithmetic/datedledger source hashes",
+    "one named calendar supplies ledger and opening evidence; external arbitrary ledger unsupported",
+    "validate identities/status/time/fixed quantity/qualification/price/action coverage before exactly one ledger apply",
+    "explicit original commission/minimum/slippage; no defaultfees or double slippage",
+    "snapshot current cash from the same ledger after legitimate explicit release/payment events; do not fabricate deposits",
+    "batch expected ledgerstate updated after own success; outside changes stop batch",
+    "stable event ID from order ID; one attempt including rejects; no chasing with newID",
+    "no unused budget reallocation, no partial order/wholebatchrollback",
+    "release/payment distinct from order; refused attempt compares ledger after these explicit events"
+  ],
+  "examples": [
+    {
+      "case": "two valid buys",
+      "start_cash": "410.50",
+      "budgets": [
+        "205.25",
+        "205.25"
+      ],
+      "q": [
+        100,
+        100
+      ],
+      "open": [
+        "2",
+        "2"
+      ],
+      "cost_per_order": "205.20",
+      "cash_end": "0.10",
+      "fee_total": "10.40"
+    },
+    {
+      "case": "first beyondcap",
+      "firstopen": "2.001",
+      "firstcap": "2.000",
+      "cash_after_reject": "410.50",
+      "secondq": 100,
+      "secondopen": "2",
+      "cash_end": "205.30"
+    },
+    {
+      "case": "sell_then_later_buy",
+      "start_cash": "200",
+      "sellq": 100,
+      "sellprice": "1.8",
+      "sellfee": "5.18",
+      "net": "174.82",
+      "sameopen_free": "200",
+      "sameopen_restricted": "174.82",
+      "after_release_cash": "374.82",
+      "laterbuyq": 300,
+      "buyprice": "1",
+      "buyfee": "5.30",
+      "cash_end": "69.52",
+      "fees_total": "10.48"
+    }
+  ],
+  "additional_checks": [
+    "replay success has no second effect",
+    "wrong plan/cost/calendar identity refused",
+    "insufficient sellable/cash/due action ledger refusal atomic; noresize",
+    "crossing/unknown action and undefined no-whole-sale remainunsupported"
+  ],
+  "not_allowed": [
+    "multiple concurrent unfinished batches",
+    "reservation engine",
+    "partialfill",
+    "cancel remainder",
+    "restart recovery",
+    "real market or complete policy conclusion"
+  ]
+}

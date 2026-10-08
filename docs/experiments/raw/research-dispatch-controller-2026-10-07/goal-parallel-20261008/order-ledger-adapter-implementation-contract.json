@@ -1,0 +1,123 @@
+{
+  "mission": "把原v0.2固定整笔订单按相同费用与时点接入已验收日期账本，完成一个合成账户单批串行执行的可复核结果。",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "task_scope": [
+    "只在新raw目录实现小适配器及具名人工fixtures/回执，复用已验planner_v2和datedledger，旧模块与原spec不改不重跑。",
+    "exact spec/planner2/planner1 arithmetic/datedledger source hashes",
+    "one named calendar supplies ledger and opening evidence; external arbitrary ledger unsupported",
+    "validate identities/status/time/fixed quantity/qualification/price/action coverage before exactly one ledger apply",
+    "explicit original commission/minimum/slippage; no defaultfees or double slippage",
+    "snapshot current cash from the same ledger after legitimate explicit release/payment events; do not fabricate deposits",
+    "batch expected ledgerstate updated after own success; outside changes stop batch",
+    "stable event ID from order ID; one attempt including rejects; no chasing with newID",
+    "no unused budget reallocation, no partial order/wholebatchrollback",
+    "release/payment distinct from order; refused attempt compares ledger after these explicit events",
+    "按照review三个金额案例及拒绝/replay案例实际运行新检查，保存每步attempt前后现金/受限款/份额/费用和源指纹。",
+    "单次内存batch_context只做来源/预期状态/已尝试ID，不担任预占、持久化、撤单、部分成交或恢复。超出即拒绝并报告。",
+    "freeze snapshot源于该模拟ledger，允许的release/payment动作单列先执行；后续买单用已包含卖款的current cash，不用旧d.free或临时入金凑通过。"
+  ],
+  "read_only_paths": [
+    "AGENTS.md",
+    "configs",
+    "docs/research",
+    "docs/ops/agent-workflow.md",
+    ".claude/skills/macd-reading/SKILL.md",
+    "docs/plan-sector-trend-page.md",
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-planning-controller-acceptance-v2.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-scope-controller-review.json"
+  ],
+  "strategy_sources_read_only": [
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "expected_outputs": [
+    "新小适配器、具名合成输入、针对性检查及逐笔资金回执、实际失败与源码指纹、范围限制；root再独审/归档。"
+  ],
+  "acceptance": [
+    {
+      "case": "two valid buys",
+      "start_cash": "410.50",
+      "budgets": [
+        "205.25",
+        "205.25"
+      ],
+      "q": [
+        100,
+        100
+      ],
+      "open": [
+        "2",
+        "2"
+      ],
+      "cost_per_order": "205.20",
+      "cash_end": "0.10",
+      "fee_total": "10.40"
+    },
+    {
+      "case": "first beyondcap",
+      "firstopen": "2.001",
+      "firstcap": "2.000",
+      "cash_after_reject": "410.50",
+      "secondq": 100,
+      "secondopen": "2",
+      "cash_end": "205.30"
+    },
+    {
+      "case": "sell_then_later_buy",
+      "start_cash": "200",
+      "sellq": 100,
+      "sellprice": "1.8",
+      "sellfee": "5.18",
+      "net": "174.82",
+      "sameopen_free": "200",
+      "sameopen_restricted": "174.82",
+      "after_release_cash": "374.82",
+      "laterbuyq": 300,
+      "buyprice": "1",
+      "buyfee": "5.30",
+      "cash_end": "69.52",
+      "fees_total": "10.48"
+    },
+    "replay success has no second effect",
+    "wrong plan/cost/calendar identity refused",
+    "insufficient sellable/cash/due action ledger refusal atomic; noresize",
+    "crossing/unknown action and undefined no-whole-sale remainunsupported"
+  ],
+  "stop_conditions": [
+    "只写新raw，禁止Git提交/其他对话/代理/联网/安装/旧测试/旧源改动/仓外写/删除清理。Python不生成旧源pyc。",
+    "不得实现部分成交/多批并发预占/撤单/恢复或新的资金规则；无整手P1仍待用户，跨行动订单unsupported。",
+    "新文件前实测容量，使用直接文件工具不依赖外部临时文件；写后读回，ENOSPC先保留已有文件/失败并停止相应写入。",
+    "0真实数据/行情/拟合/标签/封存重跑/付费/交易/生产；真实市场原输入条件不变。"
+  ],
+  "controller_review": {
+    "required": true,
+    "reviewer": "/root/settlement_scope_review"
+  },
+  "source_sha256": {
+    "spec": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+    "planner2": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+    "planner1_arithmetic": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+    "datedledger": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3"
+  },
+  "budget": {
+    "market_runs": 0,
+    "new_data_requests": 0,
+    "fits": 0,
+    "labels": 0,
+    "sealed_reruns": 0
+  },
+  "authority": "User active mainGoal; originalGoal5 spec integration, no new policy or engine; critical review confirms independent necessary slice."
+}
