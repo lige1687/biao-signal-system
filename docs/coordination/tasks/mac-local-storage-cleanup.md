@@ -2,11 +2,11 @@
 
 - task-id: mac-local-storage-cleanup
 - owner: 01a1155d-b204-7232-a993-4c9e0567af59 / root
-- status: completed（参数缩写限定修复、原默认外盘规则及已封存第五批）
-- updated_at: 2026-10-08T22:32:27.908648+08:00
-- checked_coordination_sha: d255c92256af696f0d20f983232be993bb0fead7
-- checked_at: 2026-10-08T22:32:27.908648+08:00
-- read_task_ids: mac-local-storage-cleanup, research-dispatch-controller, classic-factor-research, daily-trading-system-audit, theory-workflow-system-increment, trend-trading-video
+- status: planned（新增三学业目录迁移待用户决定；本轮只读检查已完成）
+- updated_at: 2026-10-08T23:02:17.229573+08:00
+- checked_coordination_sha: 508f8ccb1d81648ba617e0dea0f4de32cc142621
+- checked_at: 2026-10-08T23:02:17.229573+08:00
+- read_task_ids: mac-local-storage-cleanup, research-dispatch-controller, daily-trading-system-audit, trend-trading-video, external-learning-x-review
 - rules: COORDINATION 1.1；用户既有清理授权；AGENTS 的 AI 使用存储资源；macos-cleaner 固定版本 d8d8528d25da61a68a1c91cc6f8c161068e52a13
 - source baseline: 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；共享脏工作区只读，不切换，不操作其索引。
 - work branch: codex/mac-local-storage-cleanup-20261008（进度小文档待发布）；此前三轮私有清单在外盘，未入 Git。
@@ -103,3 +103,13 @@
 - 首次本轮登记push因上述他人新记录非快进拒绝；已fetch/read三变化记录且自己的记录未变，只重建自身准确增量，未强推。此前只准备自己独立的新私有小计划，无潜在共享冲突文件修改。
 - macos-cleaner零动作计划9检查通过，12目标全部保留/待决定；0 destructive commands，对空计划适用，不冒称删除命令受检。首次quote缺少引号的格式错误已原样保存并修正，未改检查器。
 - 已向用户询问3准确学业目录完整外盘归档、核验后移除本机副本的决定；尚未收到确认，不能执行依赖该确认的移动/删除。两盘身份已核，不外推至原先所有用户资料已批准退休。
+
+## 本轮盘点交付，准确迁移决定待用户 2026-10-08T23:02:17.229573+08:00
+
+- checked_coordination_sha: 508f8ccb1d81648ba617e0dea0f4de32cc142621；checked_at: 2026-10-08T23:02:17.229573+08:00；已读自身/规则、中控已接受旧修复、daily、X评估和video V9 motion-start最新范围；与本数据缓存/唯一进度无重叠。原55及主Goal修复验收不重做，用户的新清理只在本线程处理。
+- 进度成果codex/mac-local-storage-cleanup-20261008@80d51cba8f7dee3216fb89a0f0cea507b57f590a，仅自己work-progress一文件11794B普通push/fetch逐字读回，SHA256 f9cff9970ca565622bc9b1ca4c72c13361d79b243312e6abdb05d52abdd57e88。原188b06d0代码没有变动，本轮无新源码/科学结果/私人原件进入Git。
+- 最新只读内盘free=9953251328B（约9.27GiB），外盘free=640158269440B；只作快照。本轮physical reclaimed=0，未把系统swap回落或自然释放计成清理。5GiB及10GiB容量规则不变。
+- 12目标分类及空action set技能9检查、归置/diff通过；0 destructive commands是明确无动作计划，不代替实际删除语义检查。首次引号格式错误/非快进失败及修正保留，未改规则或检查器。
+- 当前唯一缺失是用户是否仍需本机常用3准确学业目录：01-毕业论文、lajibiyelunwenjian、学校相关资料。87原文件/约124MiB名义量；用户已收到明确完整归档到外盘、核验后移除本机副本及断盘本机无正文的确认题，尚无答复；不把继续检查、未占用或等待时长当审批。
+- 已授权的独立只读工作完成，没有后台删除/迁移/监控任务。确认后只按这3目录或明确子集核实时身份/容量预算、源绑定/完整恢复清单、逐文件读回和源稳定/无占用，再移除；若用户保留，本批0新清理结案。没有从其他owner的431MB删除许可借权限。
+- 证据仅data/cache/mac-local-storage-cleanup/storage-review-20261008-2233/；私人文稿正文未读取/复制/上传，7 TCC不可读系统缓存保留unknown。现有数据库/冻结raw/会话/源码环境/所有工作树/活动日志/说明元数据不动。
