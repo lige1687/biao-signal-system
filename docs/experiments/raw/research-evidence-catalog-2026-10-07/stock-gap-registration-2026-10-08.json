@@ -1,6 +1,6 @@
 {
   "schema": "lei-stock-gap-pilot-report-registration/1.0",
-  "created_at": "2026-10-08T10:44:38+08:00",
+  "created_at": "2026-10-08T10:46:20+08:00",
   "task_id": "research-evidence-catalog/report-library-integration-20261008",
   "coordinator_owner_thread": "01a1074e-3d9d-70a2-a771-b079443ace18",
   "checked_coordination_sha": "60a10f7cd0463e8782ffb716c1e79ecb7a62defc",
@@ -167,7 +167,13 @@
     "registry_inverse_restores_before_sha256": true,
     "index_before_sha256": "c792d7007a48473c002f4a18c77f02123a9a3429f119135dcbf788d849effbe2",
     "index_after_sha256": "89b85d67e549e8ecee8ddc6d3805072f5e013f6366a9e628b9a2e6835f979cf1",
-    "index_inverse_restores_before_sha256": true
+    "index_inverse_restores_before_sha256": true,
+    "published_commit": "4e4c075f6308c788013ad9cc81d2f4ced1ce3bee",
+    "remote_ref": "origin/codex/research-report-library-integration-20261008",
+    "remote_ref_readback": "4e4c075f6308c788013ad9cc81d2f4ced1ce3bee",
+    "remote_report_and_raw_match": "21/21 exact source bytes",
+    "remote_registry_sha256": "1fb8f8533e35dcd0d503c269493d84caa53614e3f74eef849b7b26ea04ee06ed",
+    "remote_index_sha256": "89b85d67e549e8ecee8ddc6d3805072f5e013f6366a9e628b9a2e6835f979cf1"
   },
   "mechanical_failure_record": "The first guarded root edit wrote the single registry row, then stopped because the index assertion searched for the full docs/ path while the link contains only the report filename. No other file changed. The exact registry insertion was reversed in memory to prove the required baseline SHA, then the index line was added and both inverses were verified. A later read-only audit initially had a mistyped expected SHA and was corrected; no file was changed by that audit.",
   "limits": "The accepted report concludes original prices match, historical adjustment version and full constituent membership remain unproved, and no old price rows were repaired. No rerun, refetch, market fit, B02 large original, or whole-root 620-entry publication. The main working tree is intentionally not committed; only the independent codex branch will be pushed.",
@@ -184,5 +190,6 @@
     "existing_publication_registry_rows_preserved": true,
     "market_or_factor_reruns": 0,
     "b02_large_originals_copied": 0
-  }
+  },
+  "status": "completed_bounded_report_registration_and_remote_readback"
 }
