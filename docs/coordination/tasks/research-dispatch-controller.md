@@ -1,11 +1,36 @@
 # LEI 八目标研究调度｜当前快照
 
-- 更新时间：2026-10-08T11:00:00+08:00（Asia/Shanghai）
+- 更新时间：2026-10-08T11:20:17+08:00（Asia/Shanghai）
 - task-id：research-dispatch-controller；状态：active。研究调度：[中控对话](codex://threads/01a116c7-3700-7062-a6c6-53af00ef60a0)；本文件唯一Git写者：[协调对话](codex://threads/01a10051-4db1-7490-b40f-c13243767fc6)。原负责人文件仍由各自维护。
-- 最新读取协调分支：`9e55895a56f863d49c325a264975dc5c36cb3647`；已读 `COORDINATION.md`、本任务、`risk-shape-information`、`classic-factor-research`、`research-evidence-catalog/report-library-integration-20261008`。本次只更正本摘要当前文字和机器可读状态，不触及他人任务文件；资料三键试点已有限验收，报告库单报告登记已接受且目录负责人明确释放窗口。根工作区登记簿620→621及索引增量仍仅本地、未推送；独立成果分支登记簿199→200已推，不等同于发布完整根级登记簿。
+- 最新读取协调分支：`e0018e48ceb0d91f7407fc63328757c1dec70b7c`；已读 `COORDINATION.md`、本任务、`risk-shape-information`、`classic-factor-research`、`research-evidence-catalog/report-library-integration-20261008`。本次仅同步已应用的定时接续规则及回执，唯一写入路径是本中控任务文件；资料三键试点已有限验收，报告库单报告登记已接受且目录负责人明确释放窗口。根工作区登记簿620→621及索引增量仍仅本地、未推送；独立成果分支登记簿199→200已推，不等同于发布完整根级登记簿。
 - 原始目标：把八项LEI研究与工程成果做成可定位、可复算、可审查的接续链。当前验收按问题、输入、合同、合成检查、独审、真实效果与归档逐项看；不能用某一阶段的“交付”表示整条链已完成。适用规则为 `COORDINATION.md` 1.1 和各执行任务冻结规范。
-- 最新已推协调提交（编辑前）：`9e55895a56f863d49c325a264975dc5c36cb3647`；Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
-- 较上一版新增：修正上一版首屏和任务登记的过期“active／继续用剩余2次请求”叙述，使其与已验收回执一致。资料三键阶段在 `codex/stock-data-qualification-20261008@60a465b8b4064de567e24a96642d26ff5e841d30` 有限通过，4/6次请求、153482字节，主价格修复0；余2次是未用额度，不再用于本批。报告库四报告阶段提交 `19508745c7160bc07f5bbdefe9ba52ab39a5199e`，随后单报告登记最终提交 `3ceec29d9e5e2e4d14e94905e99c12531257524d`、回执SHA-256 `726ddfdb577311f24e87a72fc438a4605e7084e5625e467c47384cde3bde9e5c`，共20份来源文件、219071字节，负责人已释放写入窗口。旧复权依据及历史成员资格未证，六份D—MAE真实原件仍缺；原目录报告61处本机绝对路径及历史失败继续保留。
+- 最新已推协调提交（编辑前）：`e0018e48ceb0d91f7407fc63328757c1dec70b7c`；Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
+- 较上一版新增：定时接续规则已由中控应用并核保存配置；本次把完整规则和验收限制同步为Git恢复来源。保留30分钟、ACTIVE及原线程；未来定时执行尚未观察。上一阶段已完成修正上一版首屏和任务登记的过期“active／继续用剩余2次请求”叙述，使其与已验收回执一致。资料三键阶段在 `codex/stock-data-qualification-20261008@60a465b8b4064de567e24a96642d26ff5e841d30` 有限通过，4/6次请求、153482字节，主价格修复0；余2次是未用额度，不再用于本批。报告库四报告阶段提交 `19508745c7160bc07f5bbdefe9ba52ab39a5199e`，随后单报告登记最终提交 `3ceec29d9e5e2e4d14e94905e99c12531257524d`、回执SHA-256 `726ddfdb577311f24e87a72fc438a4605e7084e5625e467c47384cde3bde9e5c`，共20份来源文件、219071字节，负责人已释放写入窗口。旧复权依据及历史成员资格未证，六份D—MAE真实原件仍缺；原目录报告61处本机绝对路径及历史失败继续保留。
+
+## 当前定时接续规则（2026-10-08T11:20:17+08:00）
+
+- 本轮范围仅本文件，唯一写者为协调会话；已读取 `COORDINATION.md`、本任务、`risk-shape-information`、`classic-factor-research`、`research-evidence-catalog/report-library-integration-20261008`，`checked_coordination_sha=e0018e48ceb0d91f7407fc63328757c1dec70b7c`。他人最新状态已保留，没有同文件并写冲突。资料负责人首屏现已改为completed；八目标既有验收与外部依赖保持。本轮不新增研究预算或实验。
+- 来源为主仓 `docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json` 的三个指定字段：`heartbeat_policy`、`automation_configuration_revision_20261008`、`heartbeat_cycle`。完整JSON仍在原负责人工作区；下方是可从Git恢复的完整执行规则和必要回执，不是整个本地状态副本。
+- 规则版本 `2026-10-08.v2`，状态 `applied_verified`；完整instructions的UTF-8 SHA-256 `18018dfdc09f8a231f488888ebaed21dc2b55ca005f4af1cffb0d8585ee79a4c`。本次重新计算一致。中控保存原生提示SHA-256 `3446cd6c74aa14c5aa9bacc5599e11840d6e3d6d75d6cb00341c9dfadac8cf35`，本次也重新计算一致；应用及原生逐字读回时间 `2026-10-08T11:19:56.161075+08:00`，回执记载提示和保留字段均匹配。
+- 原生定时任务 `leisignal`，名称“LeiSignal 研究调度与回调续接”，保留每30分钟、`ACTIVE`、`heartbeat`及原线程 `01a116c7-3700-7062-a6c6-53af00ef60a0`；通知设置保留原默认，`automation-2`仍暂停。本协调会话仅核回执和文本指纹，没有再次修改原生定时配置。
+- 人工验收是六种指令场景审阅及一次8/8负责人短快照。回执时间 `2026-10-08T11:19:56.161075+08:00`，输入齐备且获准的新研究工作为0，运行任务停滞计数为0；原阶段已完成，剩余科研交付仍等指名原件或资格。运行中某owner不再导致提前结束全轮；有可执行必要工作须实际派发并核启动；新交付验收后接续；同一运行任务连续两次成功巡检无新工具/产物才诊断；无变化外部依赖不重复通知或提交。当前只有保存配置和人工状态核验通过，未来定时触发、实际派发及停滞诊断行为尚未观察，不能据此宣布全部研究完成。
+- 本次检查：三个指定字段可解析、规则及原生提示指纹一致、当前任务状态保留、单文件差异与JSON格式核查；科研测试、数据请求、拟合、标签均未运行。真实成本未知。下次恢复：先读以下完整规则，再读取原负责人JSON最新恢复字段与cursor，按实际输入及预算逐项判断。
+
+以下instructions按来源逐字保存（指纹不包含代码围栏）：
+
+```text
+继续本聊天已授权的LeiSignal八目标调度。你负责原对话的派发、回调验收和下一必要步骤，不包办实验，不以巡检次数或已发送消息充当成果。
+
+每次唤醒先按字段读取 /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json 的最新恢复位置、next_actions、累计预算/失败和已存cursor；只读进度文件的最新增量，再fetch并读coordination/lei当前摘要及本轮相关owner记录。历史阶段不是固定优先任务；已验收项不重派。用带cursor的wait_threads短快照核实际负责人；若返回未覆盖所有目标，不把遗漏项当空闲。实际输入变化再核对应缺件，不每轮重读全部历史、重复搜索或重跑检查。
+
+本次调度须有明确落点：有新交付，先核原合同/输入指纹、真实产物和关键数值，再验收或向原owner派有界修复；有已授权、输入齐备、预算内且未重复的必要工作，就先登记准确写入范围并核远端，再在原可打开对话实际派发并核启动。八目标逐项判断依赖，某一项缺件不能阻塞独立工作。全部已派任务空闲时必须核剩余交付，不能只写“下一步”。某owner运行中时，只跳过该owner的重复派发，保存其turn/cursor并核停滞计数，继续检查其他owner。完成全部相关owner检查、可执行工作派发、新交付验收与必要接续、两轮停滞诊断及heartbeat_cycle记录后，再结束本次巡检；执行留在原对话，中控不长时间轮询。遇到验收后的下一必要步骤，本轮实际派出并核启动再结束。
+
+在同一thread-state.json维护最近一次heartbeat_cycle回执：检查时间、协调SHA、任务状态/turn/cursor、实际动作或无动作原因、未完成项具体依赖和恢复条件、最近实质进展时间、连续无进展轮数及已通知的问题标识。检查、派发、运行、交付、验收分开。有可执行项却未派发或派发失败，当轮视为调度异常，查明并修复可解决原因，不能静默记“正常”。停滞计数仅适用于同一运行任务的成功巡检，已完成、明确外部依赖、未覆盖或工具读取失败不计作研究停滞；同一运行任务连续两次成功巡检都无新工具或产物进展，读一次近期失败/输出定位，不凭耗时宣布失败或重复开新任务；可解决就有界修复，否则一次性说明具体卡点。相同失败无新条件不原样重试。明确外部依赖且没有独立可执行项时允许安静等待，状态不变不重复问用户、不反复发通知或新增Git提交。只在成果、真实失败、首次关键阻塞或需用户决定时通知；若工具不可达或额度不足，保存可保存的恢复状态并说明，不能假称后台推进。
+
+只在实质状态改变时更新既有进度与Git协调；首屏、目标表、机器状态和owner记录须一致，完成项不得仍标active或继续消耗未用预算。Git只有远端读回SHA/文件一致才算同步。例行检查沿用当前模型；新委派按难度选可用模型，明确机械任务用Luna/low，跨文件Git及一般执行用Sol/low或medium，方法与关键风险再升级，实际成本未知要如实记录。
+
+原授权和预算不变：D—MAE必须沿用户交接指定SHA原合同，六份冻结原件及必要独审/阶段条件齐备才算真实标签；行情已找到不等于六原件齐备。不猜设计，不改冻结失败凑绿，不重跑已封存PPO/P26或已验收合成检查，不重开本批三键试点。403与automation-2保持暂停；不删除、交易、付费、部署、改网络或仓外内容，仓外目标数据库待确认。使用仓内隔离工作区、不切主工作区分支。全部八目标经验收收尾后才暂停本心跳。
+```
 
 ## 八项目标现在到哪一步
 
@@ -88,8 +113,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "9e55895a56f863d49c325a264975dc5c36cb3647",
-  "checked_at": "2026-10-08T11:00:00+08:00",
+  "checked_coordination_sha": "e0018e48ceb0d91f7407fc63328757c1dec70b7c",
+  "checked_at": "2026-10-08T11:20:17+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -439,7 +464,32 @@
     "risk-shape-information",
     "classic-factor-research",
     "research-evidence-catalog/report-library-integration-20261008"
-  ]
+  ],
+  "heartbeat_configuration": {
+    "policy_version": "2026-10-08.v2",
+    "policy_sha256": "18018dfdc09f8a231f488888ebaed21dc2b55ca005f4af1cffb0d8585ee79a4c",
+    "native_prompt_sha256": "3446cd6c74aa14c5aa9bacc5599e11840d6e3d6d75d6cb00341c9dfadac8cf35",
+    "state": "applied_verified",
+    "applied_verified_at": "2026-10-08T11:19:56.161075+08:00",
+    "automation_id": "leisignal",
+    "cadence_minutes": 30,
+    "status": "ACTIVE",
+    "target_thread_id": "01a116c7-3700-7062-a6c6-53af00ef60a0",
+    "manual_validation": {
+      "checked_at": "2026-10-08T11:19:56.161075+08:00",
+      "coverage": "8/8; omitted targets from compact batch were checked separately",
+      "research_ready_count": 0,
+      "eligible_running_tasks": 1,
+      "acceptance_boundary": "Saved configuration verified; future timed execution and ready/stalled runtime scenarios not yet observed."
+    },
+    "future_scheduled_execution": "not_yet_observed_after_update",
+    "source_fields": [
+      "heartbeat_policy",
+      "automation_configuration_revision_20261008",
+      "heartbeat_cycle"
+    ],
+    "actual_cost": "unknown"
+  }
 }
 ```
 
