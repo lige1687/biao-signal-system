@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "9efd5049177bcfa3677fb8edc0616a383247a4ea",
-  "checked_at": "2026-10-08T19:25:53.937743+08:00",
+  "checked_coordination_sha": "72d625429c107e1dd42e82df7b5d78a30a2b66f1",
+  "checked_at": "2026-10-08T19:34:31.576047+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1118,7 +1118,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "classic-factor-research",
     "daily-trading-system-audit"
   ],
-  "conflict_decision": "Originaltech9readonly callbackcompleted; new25readonlysourcequalification independent oftheory9copyinsolatedbranch. Rootledgerarchivepublished; no sharedregistrywriter now.",
+  "conflict_decision": "method9publicationcompletedverified; original25reviewreadonlycompleted; new14 exactsafeproperties publication atsameoriginaltheorybranch; rootread-only orderplanning audit touches no sharedengine/files.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2205,3 +2205,11 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 原technicalowner只读9已完成turn01a11b3c-698d-7a91-bcaa-a9dbdc8fc9bb/cursor:2：9份均自有方法文字，旧withheld不覆盖这9原件；39458字节/SHA再核。接受只限原字节、不包含链接原行情或策略全文，不解除科学用途限制。
 - 后继contract method9-publication-contract.json给原theoryowner在既有隔离安全分支补9准确原件及本阶段证据，原主树只读，definitions/registry/INDEX不改；将缺件36减9=27，需实际推回验收。
 - 并行contract metadata25-owner-qualification-contract.json给原technicalowner只读核另22计算元数据+3来源审核，写范围空；9不重审、2逐观察资料不放行。各文件权利/含真实逐行资料独立判断，不能推定命名metadata即可发布。当前2合同ready待派发。
+
+## 九方法远端验收与14资料发布／下单算术只读接续 2026-10-08T19:34:31.576047+08:00
+
+- checked_coordination_sha=72d625429c107e1dd42e82df7b5d78a30a2b66f1；9方法3470f33ad772ed2d483c6185af4f4523f659c6b9/回执4f6ff52a7d5a2a415159c88ad06a38e7a7e6cbac，13阶段文件及9原件逐字核，7关键定义/代码/登记文件不变，缺件确为27。中控回调JSON因去多余EOF空行字节变，语义未变，发布owner原绑定SHA与追加该空行精确一致，差异已记录不冒充相同。
+- 原technicalowner25核定完成turn01a11b43-d3bc-7552-a709-e179f5d65e2b/cursor:5：14自有安全汇总、11withheld，其中6原清单准确同SHA限制，5嵌入观察/日期/区段；另2逐观察源仍受限。中控25SHA核同，总453525bytes。
+- contract metadata14-publication-contract.json给原theoryowner在原隔离树补14准确34104bytes及自己阶段回执；不改definitions/registry/INDEX/源原件、不上传11+2或关联行情。完成后预期27减14=13，尚未派发不可称已降。
+- 独立必要范围仅只读：原Astra审查原v0.2政策规范的尚未实现下单预算/数量/限价及P0/P1顺序能否在人工情景按原定义完成。合同order-planning-scope-review-contract.json，write_paths空，先给明确范围/反例；不重跑已验收账本、不另造资金政策、不取真实行情、不改生产。原目标5最终仍需同资金/费用的完整策略对照，已验账本不能替代；本次判断独立工程可执行性。
+- 中控接续6凭据已发布108e4e7c06a006c33a8bebfeba8a2719b1b12709并远端核，含一次diff拒绝/未提交却后续push的恢复记录；该失败未算成功。
