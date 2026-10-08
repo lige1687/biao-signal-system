@@ -211,3 +211,11 @@
 - 验证：54项相关检查通过、Ruff/归置通过；无关持仓/成交/来源失败处理函数AST与父版一致（格式除外）；格式失败留blogger-window-lint-initial.log。automation-3/4工具更新prompt并读取真实toml验证，原时间、ACTIVE、target_thread_id不变，无重复任务/通知偏好改动。
 - 成果：9a1e4cf4a94af09a49eebe41f2a022e52a22faac的11个自身源码/测试/配置/文档及安全回执均逐字远端读回。完整私人包/自动化字段回执仍cache；0生产新闻库/交易/计划/持仓/规则写入、0main合并或重启。
 - 来源覆盖限2026年A股日历，仅服务视频叙事窗口，不用于港美股休市或技术信号；缺年历标未知。2026官方来源及策略实际SHA见blogger-window-receipt.json。当前Codex日报已按新口径配置，未来实际触发仍各自核交付，手机网页依用户选择暂缓。
+
+
+## 独立提醒对话迁移登记
+
+- checked_coordination_sha: c5e3732f5bfa34e500e72f81578f5e50c93a25ed；checked_at: 2026-10-08T13:42:52.438667+08:00；已读COORDINATION1.1、自身及research-dispatch-controller最新公告目录范围，无交叉；/root唯一协调写者，新提醒对话不维护代码或协调记录。前一次expected-base检查因其他owner推进共享ref在任何文档写入前退出，已fetch并读新范围。
+- 用户明确要求独立对话收提醒；已创建“LeiSignal 日报与提醒”（01a11a05-c140-7d82-b8b6-68c83ee9e2ee）并读到真实就绪final。automation-3/4/5/6工具迁移target后读真实toml全部ACTIVE，原ID/时间不变，无重复任务，通知偏好不变。
+- 本轮文件仅docs/ops/portfolio-chat-briefing.md、system-notifications.md、自身work-progress和本仓cache渠道/迁移回执；不改代码、交易/持仓/计划/生产库或其他任务。原比较起点与失败/送达证据保留；迁移前送达读旧对话，未来提醒读新对话。不将就绪消息或目标配置当下一次日报已送达。
+- 文档更新在原codex/gpt-system-integration-20261008分支发布，源文件逐字读回、原HEAD不变；迁移配置/消息已核，剩文档目的地与流程核查，不重跑54项未失效产品检查。
