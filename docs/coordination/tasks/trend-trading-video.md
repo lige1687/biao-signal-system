@@ -1,3 +1,18 @@
+## 第六版与代码科普skill实际交付
+
+- task-id: trend-trading-video；owner本对话root；本轮completed，主观观感待用户验收；2026-10-08T20:40:55.632744+08:00。checked_coordination_sha: dc78990b8e3b923b555d6a6d39bed7044c64d40b；已读COORDINATION.md、本任务和research-dispatch-controller；冲突决定：按中控明确释放后串行单项登记，当前全部完成。
+- 用户最新内容：只讲趋势流派发展，包括利弗莫尔；已取消真实行情案例，暂停旁白接入。新片60秒，原生3840×2160@30fps/1800帧，1080预览，H.264/AAC；纸张笔记、时间线、记录簿、原创示意人物和海龟，14原创音效事件，Chris Zabriskie Cylinder Six CC BY4.0署名及改编说明。
+- 本地成片docs/ops/media/trend-trading-60s-20261008/v6/trend-history-v6-4k-final.mp4，SHA a5010f99ccc47b177b8305938bfcee1cc009a78e939eb7d5839eff5db84aa87d；1080 SHA d18cd5c2215cdfaa6bb2392eb832ba9df84b439d2a67bd575b4b3bc321d80ed9。媒体仅本机、远端没有视频/原片/转写全文/权重。
+- 实际检查：两成片完整解码，4K浏览器实播至60.01秒ended/无error，1080开头实播至8.042秒/无error；最终页重载元数据及入口通过；8原生样式帧和成片38秒解码帧已查看。−15.9LUFS/−3.7dBFS，无削波。ffprobe缺失，以FFmpeg+浏览器替代，不冒称已听审全部参考片。
+- 学习4条教程：完整本地转写+58手动检查帧+顶层评论；MCP ASR缺依赖、vision未配置，复用本地MLX并人工看图。工具名用画面/官方源校正，转写幻觉与不完整评论边界保留。没有确认原作者完整prompt/skill/BGM；本skill模板为重新编写。
+- .agents/skills/code-explainer-video/格式通过；合法1800帧时间表接受，越界音效/重叠镜头/无效头部拒绝；实际10秒小样及60秒演练完成。docs/experiments/code-explainer-video-2026-10-08.md及raw回执已归档。
+- 独立成果codex/code-explainer-video-20261008@14a7463e8c40f0dc0560ff6a017dfea28932b4c3共16文件远端字节核对，基线317+1=318仅本项；主工作区registry634→635、INDEX只一行，原634条/元数据逐项不变且本地读回，未上传完整主表。报告SHA ed7236e57dbe33d1c969a106c1acb1292fa7138bb5cba3fffd33927850e1578a。目录归置及diff空白检查通过。
+- scope_released=true：registry.json与INDEX.md以及本轮共享写入窗口现在释放；无后台生成进程、无定时接续。旧V5两视频指纹未变，原缺失validation/usage收据已补回。未来内容迭代须以用户反馈开新范围，不重做封存。
+- 预算累计：11来源工具请求含失败和既有原著URL复核，复用模型/音乐，外部付费调用0；观测账号周额度38→39显示增1个百分点，共享显示非本任务精确用量。策略两权威源SHA与旧轮一致，未改策略、系统计算、生产或仓外内容。
+- 剩余：用户对剪辑/音乐/观感验收；参考声音未完整听审，不能称已复制原片声效。所有本轮必要文件、播放和归档检查已完成。
+
+---
+
 ## 共享登记单项恢复
 
 - 2026-10-08T20:38:13.912602+08:00；checked_coordination_sha: 7ca0650ed5bd09685a2bdf2b0b51cb5c2ae9b895；已读COORDINATION.md、自己的task-id trend-trading-video及research-dispatch-controller最新释放记录。冲突决定：中控纯规划已633→634并释放，本任务现在只写自己的报告单项与INDEX一行，旧条目保留。
