@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "c405d4a4d87541ade8e6039c0add3c69590743a6",
-  "checked_at": "2026-10-08T18:33:05.084534+08:00",
+  "checked_coordination_sha": "f51aeae67d1a5ea2a32a4223f7c41b2a7e481266",
+  "checked_at": "2026-10-08T18:38:59.140259+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1107,13 +1107,13 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   ],
   "shared_registration_scope_released": true,
   "direct_next_actions": [
-    "Storage/Git operational recovery verified; no stale low-space or local-HEAD-behind claim. Measure current capacity before next write-heavy job.",
-    "Cash/calendar and earlier9 reports accepted; do not rerun or re-register. Exact D-MAE originals/staged review, historical stock membership/price scale/use and Qlib original input/receipt remain distinct dependencies.",
-    "On concrete new authorized input/source/necessary independent work, execute within original budgets after scope check. Do not reopen completed source attempts simply because disk recovered; retain original calendar67/75 usage and all failures.",
-    "Daily-flow/storage engineering batch evidence verified within limited scope; original owner retains maintenance paths. No duplicate dispatch/source edits. Other research writers still check space explicitly."
+    "Accept native preflight implementation when original CLI owner delivers; use independent refusal checks only.",
+    "Receive exact75 dependency audit and proceed with safe original-owner handoff if authorized; do not bulk upload.",
+    "Inspect missing goal5 settlement cases without repeating completed cash/dividend work."
   ],
   "read_task_ids": [
     "research-dispatch-controller",
+    "classic-factor-research",
     "theory-workflow-system-increment",
     "daily-trading-system-audit"
   ],
@@ -1898,14 +1898,20 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "ready_queue": [
       {
         "id": "theory-workflow-system-increment/safe-publication",
-        "status": "running_original_owner",
+        "status": "publication_accepted_portability_partial",
         "owner": "01a11579-7f2c-7c21-88d1-e5b334b569b7",
         "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/theory-safe-publication-contract.json",
         "dispatch_at": "2026-10-08T18:25:20.275709+08:00",
         "turn_id": "01a11b0a-7273-7822-a842-2a26f2f8148f",
-        "cursor": "b2c09e5c-80bb-4dd0-ba1f-cd3d99aabb13:4",
+        "cursor": "b2c09e5c-80bb-4dd0-ba1f-cd3d99aabb13:6",
         "tool_execution_verified": true,
-        "note": "actual tool execution verified; preparation remote baseline lacks75 definition evidence references; owner preserving limitation"
+        "note": "actual tool execution verified; preparation remote baseline lacks75 definition evidence references; owner preserving limitation",
+        "delivery_claim": "owner reports33 files readback; controller acceptance pending",
+        "accepted_at": "2026-10-08T18:37:43.393638+08:00",
+        "published_commit": "d5da760b0dda01430ff98c08e8707648b32cb0ae",
+        "receipt_commit": "bad2a59ec8075f8a7d2f1d53b0a09898a78e53aa",
+        "controller_checked": "33 Gitfile hashes;22 accepted local bytes; registry482to486 exact4 additions and oldentries unchanged;75 local-only evidence dependencies remain",
+        "controller_receipt": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/theory-controller-publication-check.json"
       },
       {
         "id": "research-native-storage-preflight/scope",
@@ -1918,19 +1924,38 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       },
       {
         "id": "classic-factor-research/native-storage-preflight",
-        "status": "contract_ready_not_dispatched",
+        "status": "running_original_owner",
         "owner": "01a0e6d5-4bcf-7bd3-82e4-4961c963d20e",
         "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/storage-preflight-implementation-contract.json",
         "executor": {
           "model": "gpt-6.1-sol",
           "reasoning_effort": "high",
           "reason": "同卷预算累加、复用合同第二账本、拒绝零写入等涉及跨路径失效风险；独立模块与CLI最小接入。"
-        }
+        },
+        "turn_id": "01a11b13-8cea-7440-aa60-ba7656fb58eb",
+        "cursor": "a591b4fe-dbd5-4064-8886-86eb6cc1cc81:3",
+        "tool_execution_verified": true,
+        "scope_commit": "b1d7a706be47819e8807d916b22e08ea4e76337a",
+        "scope_remote_file_equal": true,
+        "dispatch_at": "2026-10-08T18:34:44.323529+08:00",
+        "owner_scope_commit": "f51aeae67d1a5ea2a32a4223f7c41b2a7e481266",
+        "reported_preparation_failure": "Owner reports full checkout 21919 files ~1.9GiB apparent;2 /tmp text copies outside repo created accidentally. Preserve failure; no cleanup authorized; root instructed no further outside writes and exact paths in receipt."
       },
       {
         "id": "factor-fusion-risk-exit/settlement-coverage",
         "status": "pending_scope_review",
         "dependency": "existing simulation coverage and settlement semantics; not D raw features"
+      },
+      {
+        "id": "theory-workflow-system-increment/dependency-publication-audit",
+        "status": "running_read_only_agent",
+        "owner": "/root/engineering_readiness_v5",
+        "executor": {
+          "model": "gpt-6-luna",
+          "reasoning_effort": "low"
+        },
+        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/preparation-dependency-audit-contract.json",
+        "reason": "publication delivered revealed75 local-only validation evidence files; determine safe necessary nextstep"
       }
     ],
     "latest_active_other_owner": {
@@ -1940,7 +1965,14 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "task": "daily-trading-system-audit",
       "scope": "AI storage-resource discovery, original owner active; no takeover"
     },
-    "last_updated": "2026-10-08T18:33:05.084534+08:00"
+    "last_updated": "2026-10-08T18:33:05.084534+08:00",
+    "future_workflow_dispatch_rule": "After implementation accepted, new root-dispatched workflow runs must provide explicit storage-plan with derived paths and actual output estimates; no new science budget.",
+    "progress_publication": {
+      "commit": "874c4ebf0dde9d838de619bcfc8cc5dfc91be37e",
+      "branch": "codex/research-direct-20261008",
+      "remote_files_equal": 12,
+      "verified_at": "2026-10-08T18:38:59.140259+08:00"
+    }
   }
 }
 ```
@@ -2059,3 +2091,11 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 研究CLI预检只读审查已交付，当前lazy imports已存在。下一实现明确交原CLI owner01a0e6d5-4bcf-7bd3-82e4-4961c963d20e；在其原对话本阶段未运行，合同ready。
 - 精确实现路径：scripts/run_factor_lab.py、新src/lei_signal/research/storage_preflight.py、tests/unit/test_research_storage_preflight.py、tests/integration/test_research_storage_preflight_cli.py，及该实现专属进度/raw；owner自行登记后改。首期显式--storage-plan保护draft/contract及reuse/register，保持旧调用，绝不改workflow.py/冻结预算/daily资源文件。
 - 验收含拒绝零写入、同卷增长累计、复用第二账本、报告登记、外盘身份与缺盘不回退。0市场/标签/封存重跑/安装。完整合同在本中控goal-parallel-20261008/storage-preflight-implementation-contract.json，现本地，工作分支发布另核。
+
+## 已验收工具发布与下一执行 2026-10-08T18:38:59.140259+08:00
+
+- checked_coordination_sha=f51aeae67d1a5ea2a32a4223f7c41b2a7e481266；已核classic预检新范围及theory发布回调；无同文件冲突。主Goal active。
+- 已验收理论工具准确发布d5da760b0dda01430ff98c08e8707648b32cb0ae/回执bad2a59ec8075f8a7d2f1d53b0a09898a78e53aa：中控独立核33文件，22原字节，登记482→486准确4条旧条目保留。准备工具跨设备仍受75本地证据依赖，不冒称完整可用。
+- 75路径全在本地但不在交付Git，5,472,329字节；已接续原Luna/low助手只读核原owner/来源/可安全发布子集，不批量上传、不重跑研究。
+- 原CLI owner已实际运行预检实现，登记f51aeae67d1a5ea2a32a4223f7c41b2a7e481266、turn01a11b13-8cea-7440-aa60-ba7656fb58eb。与只读依赖审查并行；收到代码后作必要独立拒绝检查。原owner两份仓外临时拷贝失误已要求保留失败并停止此类写入，不借清理授权。
+- 中控本轮合同/失败/验收/进度12文件在codex/research-direct-20261008@874c4ebf0dde9d838de619bcfc8cc5dfc91be37e，已远端逐字读回。完整运行state仅本地；本记录提供Git恢复摘要。旧11报告/科学预算保持，下一窗口核目标5未覆盖结算模拟。
