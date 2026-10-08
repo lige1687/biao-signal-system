@@ -1,0 +1,9 @@
+import {AbsoluteFill,Sequence,Html5Audio,staticFile,useCurrentFrame} from 'remotion';
+import {Intro,Dow8,Live8,Don8,System8,Turtle8,Paper8,End8} from './Scenes';
+import {T} from './content';
+import {C,p} from './Visual';
+const cuts=[90,330,600,870,1140,1410,1680];
+export const Chronicle=()=>{const f=useCurrentFrame();let active=-1;for(let i=0;i<6;i++)if(f>=cuts[i])active=i;return <AbsoluteFill style={{background:C.bg}}><Sequence from={0} durationInFrames={90} premountFor={30}><Intro/></Sequence><Sequence from={90} durationInFrames={240} premountFor={30}><Dow8/></Sequence><Sequence from={330} durationInFrames={270} premountFor={30}><Live8/></Sequence><Sequence from={600} durationInFrames={270} premountFor={30}><Don8/></Sequence><Sequence from={870} durationInFrames={270} premountFor={30}><System8/></Sequence><Sequence from={1140} durationInFrames={270} premountFor={30}><Turtle8/></Sequence><Sequence from={1410} durationInFrames={270} premountFor={30}><Paper8/></Sequence><Sequence from={1680} durationInFrames={120} premountFor={30}><End8/></Sequence>
+{f>=90&&f<1680?<div style={{position:'absolute',left:115,right:115,bottom:28,height:82,display:'flex',justifyContent:'space-between',borderTop:'1px solid #8b7c5d77',paddingTop:24,color:f>=1140&&f<1410?'#8b7347':C.dim,fontSize:25}}>{T.timeline.map((x,i)=><div key={x} style={{color:i===active?(f>=1140&&f<1410?'#322d21':C.gold):undefined,position:'relative'}}><div style={{position:'absolute',top:-29,left:'50%',height:i===active?10:5,width:i===active?10:5,borderRadius:'50%',background:i===active?C.gold:'#8b7c5d'}}/>{x}</div>)}</div>:null}
+{cuts.map(c=><div key={c} style={{position:'absolute',top:0,bottom:0,width:7,background:C.gold,opacity:f>=c&&f<c+14?.45:0,left:`${p(f,c,c+13)*100}%`}}/>)}
+<Html5Audio src={staticFile('soundtrack.m4a')}/></AbsoluteFill>};
