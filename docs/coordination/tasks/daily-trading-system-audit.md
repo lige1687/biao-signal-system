@@ -3,12 +3,12 @@
 ## 当前接入阶段
 
 - task-id: daily-trading-system-audit；owner: 本机Codex /root，thread-id=01a11721-303e-7c83-9451-c82078c9ba23，唯一协调写者
-- status: active；updated_at: 2026-10-08T13:36:32.267706+08:00；checked_coordination_sha: 14c803d97b1c2b1467b559f29b23cf5f81ecd251
-- 当前目标: 用户最新指定先在当前Codex聊天接收系统日报与关键提醒；ChatGPT手机/网页路线暂缓，不再以恢复该登录阻挡Codex提醒。沿用已建四项自动化，不新建重复任务，不改交易规则。
-- 当前成果: codex/gpt-system-integration-20261008@9a1e4cf4a94af09a49eebe41f2a022e52a22faac已普通推，本轮11路径逐字远端读回；原5be2684e7612c1a7fe90ea1854d3d899cabfccaf的39路径发布证据保留。上个交易日视频窗口及自动化口径已修；原主HEAD/其他脏改未动。
+- status: active；updated_at: 2026-10-08T13:46:35.826174+08:00；checked_coordination_sha: f077c6711c76cd2c91807ed630a34051da3bd0e8
+- 当前目标: 系统日报和关键提醒发独立Codex对话“LeiSignal 日报与提醒”(01a11a05-c140-7d82-b8b6-68c83ee9e2ee)；原对话留讨论操作，四原任务已迁移读回，手机网页路线暂缓。
+- 当前成果: codex/gpt-system-integration-20261008@7f00a0009018ac7e8a053168991b7221f795254d，本轮三文档远端逐字读回；提醒对话已就绪、四任务新目标已读回；此前9a1e4cf4a94af09a49eebe41f2a022e52a22faac博主日期修正和54项检查保留，主树未切换。
 - 已验收: 10只读工具真实本机MCP取数；stdio/loopback HTTP；项目Codex配置读回但当前会话未动态发现工具，CLI立即可用；54项相关检查通过；本轮Ruff/归置通过，原技能检查保留。总览目标默认10项可按文字查，实测169571→13211字节，日期/状态计数/截短明确。
 - 已交付: 09:10检查和11:35午间任务实际运行，午间final消息已核。14:40、手机送达和真实计划条件触发未发生验收，不称连续盯盘。
-- 当前依赖: Codex定时提醒无需ChatGPT网页登录；四任务ACTIVE且target_thread_id已读回本聊天。原计划/同产品技术资料缺项仍如实说明，不补造退出结论。手机网页真实调用未完成，按最新用户选择暂缓；原完整跨端goal的blocked是历史工具状态，不冒称全部接入完成。
+- 当前依赖: 四任务均ACTIVE且target_thread_id已读回提醒专用对话，实际就绪final已核，迁移后首次定时报告待发生。原计划/同产品资料缺项标未知；手机网页按用户选择暂缓，不要求登录。
 - 本机私有材料: data/cache/gpt-system-integration、portfolio-chat-briefing；不入Git。当前恢复点required-input-state.json，源代码及安全回执见成果分支，本机API/资料/依赖需分别移交。
 
 ## 原系统审查及接续历史
@@ -219,3 +219,11 @@
 - 用户明确要求独立对话收提醒；已创建“LeiSignal 日报与提醒”（01a11a05-c140-7d82-b8b6-68c83ee9e2ee）并读到真实就绪final。automation-3/4/5/6工具迁移target后读真实toml全部ACTIVE，原ID/时间不变，无重复任务，通知偏好不变。
 - 本轮文件仅docs/ops/portfolio-chat-briefing.md、system-notifications.md、自身work-progress和本仓cache渠道/迁移回执；不改代码、交易/持仓/计划/生产库或其他任务。原比较起点与失败/送达证据保留；迁移前送达读旧对话，未来提醒读新对话。不将就绪消息或目标配置当下一次日报已送达。
 - 文档更新在原codex/gpt-system-integration-20261008分支发布，源文件逐字读回、原HEAD不变；迁移配置/消息已核，剩文档目的地与流程核查，不重跑54项未失效产品检查。
+
+
+## 提醒迁移实际验收
+
+- checked_coordination_sha: f077c6711c76cd2c91807ed630a34051da3bd0e8；checked_at: 2026-10-08T13:46:35.826174+08:00；交付前按独立本仓ref重新fetch，已读新增trend-trading-video，仅media目录无重叠，保留其原记录；COORDINATION1.1、自身/中控沿用，/root唯一自身记录写者。两次共享ref防错检查在写入前退出，未覆盖他人。
+- 新对话01a11a05-c140-7d82-b8b6-68c83ee9e2ee真实就绪final读回msg_07e851276a95e9e4016ac72c894848819180e98dcd33e3fa49；不是定时日报回执。四原ID均ACTIVE、target改新对话；与迁移前逐字段比对name/rrule/status/notification_policy一致，原prompt保留后只追加目的地/旧送达排重说明。
+- 三个自身文档7f00a0009018ac7e8a053168991b7221f795254d已普通推并逐字核，归置通过、原HEAD不变；仅文档及已授权自动化目的地，原54项产品检查复用。私人配置/消息回执留cache，数据库和持仓不上传。
+- 流程和渠道偏好已改新对话；原比较起点/资料/失败不清空，旧送达核原讨论对话，之后核新提醒对话。原讨论对话不再接收此四定时提醒，其他任务和自动化不动。迁移后首次触发/送达待发生，不提前声称通过。
