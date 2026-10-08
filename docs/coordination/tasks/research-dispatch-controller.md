@@ -1,9 +1,12 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新：2026-10-08T13:05:38.615820+08:00；checked_coordination_sha=cd03ef10b5c241c2abc55b15654df29c6a53861a；已读相关任务，只有日常交易owner记录新增，范围无冲突。
-- 首次v4-direct定时唤醒已完成三项实际资料增量：17条2024海通停牌占位、300114→302132身份边界、六个既有分红日期。最新成果分支 `codex/research-direct-20261008@8e0e26c9f053faa7462f798dead579b746befc2d` 的12个文件逐字读回一致。累计五报告、21份发行人/交易所披露、132项本地核对；无独立agent复审，不代表收益改善。
-- 当前root直接核实新出现的单项完整性线索：中国重工2021年度分红是否在2022年实施，且落在旧B02请求区间却未返回。准确写入raw `china-heavy-dividend-coverage-2026-10-08/` 和同题报告，以及单项登记。估计3次来源操作、最多5MiB、至少512MiB余量；既有64次来源消耗和失败继承。反例证实或否定即停止本有界问题，不批量重取历史，不重开旧市场请求。
-- 已核六条分红不等于完整事件链；海通2024的实领金额与除息参考金额分别保存。全部八目标仍未完成，D—MAE六冻结原件、旧价格原始快照及官方历史成员等依赖不变。无派发、无新agent、不切主树、不删或仓外改动；403和automation-2暂停。
+- 更新：2026-10-08T13:13:23.017237+08:00；checked_coordination_sha=0ef924f61b495744f76ebe6f773b0b552e78e9ae；已读COORDINATION及research-dispatch-controller、risk-shape-information、report-library-integration-20261008，相关范围无变化和冲突。root仅写本记录，未改其他owner。
+- **本次真实定时执行已有四项交付**（触发2026-10-08T04:33:16.952Z）：2024海通停复牌17条占位、300114→302132身份边界、原六个分红日期与金额、601989在2022年的分红漏项反例。它们都是本对话root直接做，无派发或新agent。最新成果在 `codex/research-direct-20261008@4f2da90c4688d12116b4891d56b802a802c2908b`；各阶段10/10/12/11文件远端SHA及内容读回一致，原失败不改。
+- **重要新结论：** 中国重工2022-08-23每股税前0.003元分红落在B02原请求区间，却已缺于原始响应；本库标准化没有额外丢行。该返回不能当完整现金分红事件清单；不能进一步断言原因或每个累计因子数字都错。海通2024实际分红0.10/0.03与除息参考金额0.0992/0.02976也已分别保存。
+- 本轮110项本地核查；累计六报告152项、22份发行人/交易所披露、53条固定占位、1个代码变更、6个分红正向匹配、1个完整性反例。累计来源操作69次、原始响应6,542,983字节。模型实际费用未知，来源失败和估计超出保留。root自核不冒称独立agent审查；价格修复/模型训练/真实标签全0。
+- 六份报告均在本机627项/隔离分支206项登记簿分别唯一登记；不是把整个脏主登记簿发布。完整PDF/原文留本机，Git存事实、指纹、程序及回执。主分支未切，隔离成果区干净。
+- **本轮四个有界问题已经回答；八目标仍未完成。** 七原负责人最新compact快照均未变化，无新D—MAE六冻结原件。原价格快照、完整历史成员与真实消费定义等依赖保持。下一独立问题是原计划官方成员起点及两个2025变更的来源资格：须先查既有尝试再登记具体范围；尚未开始，不标运行，不笼统宣称该问题已穷尽。
+- 已释放上述raw/report与共享registry/INDEX写入窗口；root仅保留自己的进度、thread-state和本中控记录。无删、交易、付费、部署、网络/仓外改动；403和automation-2暂停。心跳继续启用，未来触发不等同于此刻存在后台实验。
 
 ## 当前直接执行规则
 
@@ -133,8 +136,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "cd03ef10b5c241c2abc55b15654df29c6a53861a",
-  "checked_at": "2026-10-08T13:05:38.615820+08:00",
+  "checked_coordination_sha": "0ef924f61b495744f76ebe6f773b0b552e78e9ae",
+  "checked_at": "2026-10-08T13:13:23.017237+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -269,16 +272,12 @@
       "write_paths": [
         "docs/ops/work-progress/research-dispatch-controller-2026-10-07.md",
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
-        "docs/coordination/tasks/research-dispatch-controller.md",
-        "docs/experiments/raw/china-heavy-dividend-coverage-2026-10-08/",
-        "docs/experiments/china-heavy-dividend-coverage-2026-10-08.md",
-        "docs/experiments/registry.json",
-        "docs/experiments/INDEX.md"
+        "docs/coordination/tasks/research-dispatch-controller.md"
       ],
       "depends_on": [],
       "scope_released": false,
-      "source": "User latest instruction replaces dispatcher-only role with direct root execution. Root is sole writer of central record and new corporate-action qualification paths; no further delegation.",
-      "scope_note": "Only one2022 dividend-completeness lead; six positive matches completed, no repeated collection. Shared registration root only."
+      "source": "User root-direct mode; four actual factual results this scheduled turn, seven old owner snapshots unchanged. No delegate/process running claim.",
+      "scope_note": "This scheduled cycle completed four units; six cumulative reports accepted. All raw/report and shared registration windows released; next independent membership question not started."
     },
     {
       "task_id": "report-registration-20261007",
@@ -867,11 +866,12 @@
     "risk-shape-information",
     "report-library-integration-20261008"
   ],
-  "conflict_decision": "Only daily trading owner update since scope; related owners unchanged, unique raw/report paths. Root sole registry/INDEX writer. No delegated work.",
+  "conflict_decision": "Latest remote relevant scopes unchanged; root completes four bounded units and releases shared registry/INDEX window. Only central runtime/progress/state remain root-owned. No other owner records edited.",
   "direct_execution": {
+    "mode": "root_direct_no_delegation",
     "current_unit": {
       "id": "china-heavy-2022-dividend-coverage-20261008",
-      "state": "scope_registered_not_started",
+      "state": "completed_counterexample_confirmed",
       "question": "Determine whether one observed lead, China Heavy2021 annual dividend implemented2022, is inside fixed B02 request window but missing from its preserved factor records. Stop after counterexample confirmed/refuted or exact issuer source unavailable; no general-history collection.",
       "original_authority": "Goal4 complete corporate-action qualification, saved dividend task new completeness lead, existing qualification-plan sections2/3. No new factor/vendor/price requests.",
       "write_paths": [
@@ -899,11 +899,148 @@
         "price_repairs": 0
       },
       "free_bytes_before": 2775785472,
-      "acceptance": "Official implementation source/hash, exact old request-window/raw response binding, no inferred provider cause or changed frozen input."
+      "acceptance": "Official implementation source/hash, exact old request-window/raw response binding, no inferred provider cause or changed frozen input.",
+      "scope_commit": "0ef924f61b495744f76ebe6f773b0b552e78e9ae",
+      "scope_remote_readback": "equal",
+      "started_at": "2026-10-08T13:05:57.515982+08:00",
+      "accepted_at": "2026-10-08T13:12:13.356603+08:00",
+      "published_commit": "4f2da90c4688d12116b4891d56b802a802c2908b",
+      "remote_readback_files": 11,
+      "source_documents": 1,
+      "checks": 20,
+      "source_operations_used": 5,
+      "raw_response_bytes": 843679,
+      "report": "docs/experiments/china-heavy-dividend-coverage-2026-10-08.md"
     },
-    "completed_reports": 5,
-    "latest_commit": "8e0e26c9f053faa7462f798dead579b746befc2d",
-    "mode": "root_direct_no_delegation"
+    "completed_reports": 6,
+    "current_unit_running": false,
+    "cumulative_direct_evidence": {
+      "reports": 6,
+      "securities": 4,
+      "source_documents": 22,
+      "local_checks": 152,
+      "officially_matched_2025_placeholders": 36,
+      "visible_source_operations": 69,
+      "raw_response_bytes": 6542983,
+      "labels": 0,
+      "fits": 0,
+      "price_repairs": 0,
+      "source_originals": "local_only; hashes and factual summaries published",
+      "publication_branch": "codex/research-direct-20261008",
+      "publication_tip": "4f2da90c4688d12116b4891d56b802a802c2908b",
+      "main_registry_entries": 627,
+      "isolated_registry_entries": 206,
+      "primary_branch_unchanged": true,
+      "free_bytes_after": 2786193408,
+      "officially_matched_2024_placeholders": 17,
+      "code_transitions_qualified": 1,
+      "saved_dividend_events_qualified": 6,
+      "dividend_coverage_counterexamples": 1,
+      "securities_note": "three missing price securities plus300114/302132 one continuing issuer; not full439-universe qualification"
+    },
+    "latest_eight_goal_review": {
+      "at": "2026-10-08T13:12:13.356603+08:00",
+      "reviewer": "root direct sources and latest7/7 read-only compact snapshots",
+      "goals": [
+        {
+          "goal": 1,
+          "accepted": "synthetic implementation and independent arithmetic",
+          "remaining": "real consumption-chain impact needs original frozen D-MAE inputs"
+        },
+        {
+          "goal": 2,
+          "accepted": "16-item catalog/four accepted reports previously integrated; all six new bounded factual reports uniquely registered in primary and isolated publication library, remote bytes verified",
+          "remaining": "No pending registration for six direct reports; full dirty primary registry is not published wholesale. Original missing cloud-effect evidence remains item-specific."
+        },
+        {
+          "goal": 3,
+          "accepted": "original design and synthetic implementation",
+          "remaining": "six exact original files in native-risk-d-mae-2026-10-07/MISSING-INPUTS.json; true X/V/Y still zero"
+        },
+        {
+          "goal": 4,
+          "accepted": "22 original issuer/exchange disclosures support three2025 terminal events,53 fixed B01 placeholders, one code transition, six saved dividend observations and one proven2022 missing-dividend counterexample. Frozen inputs unchanged; price repairs0.",
+          "remaining": "Old Sina original adjusted-price snapshot/anchor; approved consumer/definition/warmup and price policy; full official CSI300 start anchor/event chain; complete corporate-action input. Fixed601989 B02 response now demonstrably incomplete as dated dividend inventory, not merely unverified. No provider-cause or cumulative-factor error claim.",
+          "scope_boundary": "Four concrete bounded source questions completed during this heartbeat; no redundant rechecking. Wider goal remains open: official membership start and original12candidate transitions are separate next source qualifications, requiring prior-method and scope/budget check; not claimed externally blocked or exhausted."
+        },
+        {
+          "goal": 5,
+          "accepted": "prior bounded evidence only; no full strategy improvement",
+          "remaining": "qualified features/data before new comparisons; user actual risk constraints before account-policy use"
+        },
+        {
+          "goal": 6,
+          "accepted": "adapter R1/R2 repair review and one pure-Git assembled synthetic restart/repeat-rejection test",
+          "remaining": "real data end-to-end depends on goal3 originals; no repeated accepted synthetic tests"
+        },
+        {
+          "goal": 7,
+          "accepted": "bounded external checks and independent workflow review",
+          "remaining": "Qlib new Ridge original inputs/receipt has no exact cloud file ID; no empty re-audit/install"
+        },
+        {
+          "goal": 8,
+          "accepted": "Actual final disk free 2786193408 bytes. Direct responses cumulative6542983bytes, no deletion or outside writes.",
+          "remaining": "next substantial job must measure capacity; deletion/outside-repo mutation unapproved; paused403 unchanged"
+        }
+      ],
+      "status_refreshed_at": "2026-10-08T13:12:13.356603+08:00",
+      "supersedes": "2026-10-08T12:29:41.899191+08:00",
+      "current_real_experiment_readiness": "Latest seven original-owner compact snapshots unchanged and no new original input package. Frozen six originals and required stage conditions remain. Source qualification direct work is independent and has advanced.",
+      "next_required_decision_boundary": "Before market reconstruction bind actual authorized consumer/definition and price policy. Public official membership qualification is separately eligible for next bounded cycle after checking prior source attempts, with no dispatch."
+    },
+    "next_actions": [
+      "Continue root direct in this chat; no delegation. Six bounded direct reports accepted and remote verified; do not rerun them or the original sealed market tests.",
+      "Goal4 next distinct source question: original plan official CSI3002022-01-04 anchor and two specifically listed2025 candidate replacements. First inspect original qualification/gap-pilot attempts and existing official file inventory, reuse exact available originals, then scope/push before requesting only missing public official material. No claim today that full membership is exhausted or qualified.",
+      "The new 2022-08-23 counterexample invalidates use of fixed601989 B02 response as a complete dated dividend list. Keep response immutable. A later full action reconstruction needs its explicit complete-coverage contract, original cumulative budget and approved price consumer; do not silently patch factors.",
+      "D—MAE real work still requires ace132 original contract, exact six missing frozen files and staged review/approval conditions. Latest seven snapshots unchanged; do not repeat searches absent new evidence, retry403, or substitute market OHLCV for original features.",
+      "Six reports fully registered; release shared registry/INDEX writer window now. Every later shared edit first refreshes coordination and claims scope. Original price reconstruction, full-universe tests and external goal database remain separately gated."
+    ],
+    "latest_commit": "4f2da90c4688d12116b4891d56b802a802c2908b",
+    "completed_units": [
+      {
+        "id": "haitong-corporate-action-qualification-20261008",
+        "report": "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md",
+        "commit": "995b5079d58813770d7a37fd81e058d21c37e2e5",
+        "status": "completed_bounded_factual_qualification",
+        "checks": 14
+      },
+      {
+        "id": "remaining-terminal-actions-qualification-20261008",
+        "report": "docs/experiments/stock-terminal-actions-qualification-2026-10-08.md",
+        "commit": "6c781464a9d622dc73b817aa5d89267c2cc75fa8",
+        "status": "completed_bounded_factual_qualification",
+        "checks": 28
+      },
+      {
+        "id": "haitong-2024-suspension-qualification-20261008",
+        "report": null,
+        "commit": "748716dc7de72afc7ffa604fee6fd0a6223d8edc",
+        "status": "completed_bounded_factual_qualification",
+        "checks": 18
+      },
+      {
+        "id": "runze-security-identity-qualification-20261008",
+        "report": "docs/experiments/avic-security-identity-qualification-2026-10-08.md",
+        "commit": "909acdf0eac740593bdb54e66e2331ac14e4af53",
+        "status": "completed_bounded_factual_qualification",
+        "checks": 16
+      },
+      {
+        "id": "saved-six-dividend-events-qualification-20261008",
+        "report": "docs/experiments/saved-dividend-events-qualification-2026-10-08.md",
+        "commit": "8e0e26c9f053faa7462f798dead579b746befc2d",
+        "status": "completed_bounded_factual_qualification",
+        "checks": 56
+      },
+      {
+        "id": "china-heavy-2022-dividend-coverage-20261008",
+        "report": "docs/experiments/china-heavy-dividend-coverage-2026-10-08.md",
+        "commit": "4f2da90c4688d12116b4891d56b802a802c2908b",
+        "status": "completed_counterexample_confirmed",
+        "checks": 20
+      }
+    ]
   }
 }
 ```
