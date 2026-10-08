@@ -244,3 +244,13 @@
 ### 分工调整 2026-10-08T15:01:43.173611+08:00
 
 - checked_coordination_sha: 71bdd179268db2f921ba2d99030d34788538ef97；已读task-id沿用刚完成登记，无其他范围改变。daily_decisions首次spawn及向旧空闲助手followup均返回agent thread limit reached，未创建该助手，未发现该组件文件写入。失败留本仓implementation/delegation-failure.json。此组件准确两个新文件改由/root直接实现；name_brief Luna/low、chat_transactions Sol/medium继续原范围。无模型重置，无新增用户侧任务。
+
+
+## 确认流程、名称和存储增量 2026-10-08T15:39:22.356751+08:00
+
+- checked_coordination_sha: 6bc1e97c3f224a802a84947b0fd42b2719ecb5b6；checked_at: 2026-10-08T15:39:22.356751+08:00；已读自身及research-dispatch-controller最新增量（只有中控记录变化），COORDINATION1.1沿用；唯一协调写者/root。原计划/交易核心与其他owner范围保持只读。
+- 子代理chat_transactions已完成其两个原路径，后续严格校验由root接手；name_brief继续仅brief_render.py及test_brief_render.py。daily_decisions由root实现，线程限制失败原记录保留。
+- root新精确增量：configs/chat-product-identities.v1.json及对应gpt_context测试；仅存两只缺名ETF的官方公开身份来源，无报价或交易规则。原chat_workflow将用户确认依据/平台份额/幂等回执补充在原SQLite的codex_workflow_receipts，不另建计划/成交权威账；确认后调用现有domain，明确不自动下单。
+- .codex/config.toml仅自身lei_system配置增加--allow-confirmed-records；默认服务仍只读，启用后每笔写入仍完整卡人工确认；既有factorhub表不改。原四自动化仅修改名字优先及配套可读报告流程，原ID/日程/目的地/通知偏好保留。
+- 用户已授权自行调整磁盘空间和利用外接盘。已将两项未启用隧道文件复制至外接盘，SHA/大小逐项核对后移除原副本，实测释放47747072字节；私人迁移回执留本仓cache，不移动活跃数据库/代码/持仓和生产依赖。
+- 验收沿用全流程至少多笔隔离演练、真实只读取数、名字/时点/确认/重复保护；原计划未知或来源资料不足不判安全，不制造胜率。
