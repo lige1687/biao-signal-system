@@ -1,3 +1,16 @@
+# 指定参考风格第三版（最新）
+
+- task-id: trend-trading-video；owner: 本对话root；状态active；时间2026-10-08T16:45:04.419286+08:00
+- checked_coordination_sha: 54791e89ca8f49a23d883b86621ce61d55c624a3；已读task-id: trend-trading-video、research-dispatch-controller；无范围冲突。
+- 用户授权: 看指定视频7691894559067910566，模仿风格做，给prompt及工具。
+- 范围: docs/ops/media/trend-trading-60s-20261008/v3/；父index.html增加版本入口；只维护本协调记录。
+- 目标: 60秒1920×1080横屏暗金图形科普风格重制；基线v2；原片不动；现有配音占位，声音改善不计完成。
+- 来源边界: 已观察4、8、32、59秒附近画面；原片标题含Claude，未有作者完整工具链或原prompt，评论猜测不当证据。仿制原创图形与内容，不复制原视频素材。
+- 验收: 成片解码、画面抽查、浏览器播放；prompt可复用；准确列实际工具及未接入配音；无付费调用。
+- 当前成果: 尚无v3成片；本机文件未提交。开始账号显示28%，精确任务成本未知。
+
+---
+
 # 第二版交付（最新）
 
 - task-id: trend-trading-video；owner: 本对话root；状态: completed（技术制作完成，观感待用户验收）；更新时间: 2026-10-08T16:09:33.559690+08:00
