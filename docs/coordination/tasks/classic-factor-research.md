@@ -1,3 +1,17 @@
+# 当前：人工流程报告已进入远端隔离报告库；真实因子效果未测
+
+更新时间：2026-10-08T11:26:24+08:00（Asia/Shanghai）。task-id：`classic-factor-research`；负责人：`01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。状态 blocked，仅指真实研究缺输入与阶段许可；人工工程恢复、增量归档及本报告远端登记阶段 completed。
+
+本轮是过时状态修复，不是重新研究。`checked_coordination_sha=eb3369938bb259ccdf7468fc5fece105904b0416`；已读取 `COORDINATION.md`、`classic-factor-research`、`research-dispatch-controller`、`research-evidence-catalog/report-library-integration-20261008`。唯一写入路径为本任务记录；由本任务负责人修改，无同文件冲突，不修改其他owner文件或共享登记。使用已有仓内隔离树 `.codex/worktrees/native-coordination-20261008`，主工作区未切换。
+
+已实际读取远端报告库成果提交 `3ceec29d9e5e2e4d14e94905e99c12531257524d`（分支 `codex/research-report-library-integration-20261008`；前阶段四报告整合 `19508745c7160bc07f5bbdefe9ba52ab39a5199e`）。本报告 `docs/experiments/native-workflow-synthetic-recovery-2026-10-08.md` SHA256 为 `990e3ebaf59d8ac13a0bd60929a84715bff46b676839a06e0dcc50d7b4717c6c`，与已验收报告相同；该提交登记表实际为200条，本报告唯一登记且 report_sha256 匹配；INDEX 对该报告准确导航1行。**本报告已在远端隔离报告库登记，整合不再是待办。** 根级完整621项登记表尚未整表发布，不能将200项隔离库说成完整根级报告库。下方“仅本地／等待中控整合”段落保留为历史状态，已被本节替代。
+
+原人工恢复成果分支仍为 `codex/native-workflow-pure-git-recovery-20261008@fda8a4895b78d8e5a125cf8af405b11c736531b6`，此前单节点通过、失败回执与未验证边界保留。本轮仅核Git报告字节、登记和导航并修复状态；实验、测试、新资料获取、源码／报告／共享登记修改均0；不改旧8指纹失败。当前本任务没有运行中的研究进程、checkpoint或新计算预算；模型成本未知。
+
+下一步：等待中控提供准确六份冻结原件（`deduplicated-cases.json`、`label-protocol.json`、`native-early-events.json`、`x-panel-long.json`、`validated-input-binding.json`、`feature-contract.json`）、资料时点资格及分别批准的阶段任务，再按冻结定义继续真实研究。原件缺失与阶段许可阻塞不变；真实因子表现、资金效果与线上收益均未测量。其他AI无需重复本报告整合或人工恢复测试；不得据工程通过启动真实研究。
+
+---
+
 # 当前：人工流程增量已登记到本机报告库；真实因子效果仍未测
 
 更新时间 2026-10-08T01:54:58+08:00（Asia/Shanghai）；task-id `classic-factor-research`，负责人会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。状态 blocked：人工X→Y工程单节点与报告登记完成；真实因子效果仍因六份冻结原件、资料时间资格及分阶段预算/许可缺失未启动。本轮读规则与相关任务的协调基线 `d84a1e55087d381ab7c0c07201c9391c92f6a70a`（`COORDINATION.md`、本任务、中控摘要）；登记窗口只覆盖本报告一条记录，无其他任务写同一报告条目。
