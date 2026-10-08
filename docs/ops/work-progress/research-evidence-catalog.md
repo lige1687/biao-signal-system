@@ -8,6 +8,6 @@
 
 来源为 `codex/stock-data-qualification-20261008@60a465b8b4064de567e24a96642d26ff5e841d30`。报告SHA为 `1fd356715d44bc60dae99837730aa67a33fe225b0a01c05309f585284dad39c4`，连同19份raw共20份、219071字节，已逐份与来源Git对象核对一致。试点结论为原始价与B02一致，但旧前复权版本和历史成员资格未证，主表补价为0，因子效果未测。
 
-主工作区两份共享登记文件各加一条本地增量：registry 620→621、INDEX新增一条导航；反向移除本次内容后分别精确恢复写前SHA。主工作区改动未提交、未推送。独立成果分支 `codex/research-report-library-integration-20261008` 已提交并推送，当前发布提交 `4e4c075f6308c788013ad9cc81d2f4ced1ce3bee`；registry 199→200，原199条保持不变，INDEX新增一条。远端读取确认报告及19份raw共21份逐字等于来源，远端登记/索引SHA与回执一致。
+主工作区两份共享登记文件各加一条本地增量：registry 620→621、INDEX新增一条导航；反向移除本次内容后分别精确恢复写前SHA。主工作区改动未提交、未推送。独立成果分支 `codex/research-report-library-integration-20261008` 已提交并推送，报告、原始材料和登记的内容提交为 `4e4c075f6308c788013ad9cc81d2f4ced1ce3bee`；registry 199→200，原199条保持不变，INDEX新增一条。远端读取确认报告及19份raw共20份逐字等于来源，远端登记/索引SHA与回执一致。上轮文字将20份误计为21份，现仅修正回执与进度描述；最新成果提交由本任务协调记录索引。
 
 详细前后指纹、反向核验、来源清单和一次机械断言失败的修复经过见 `docs/experiments/raw/research-evidence-catalog-2026-10-07/stock-gap-registration-2026-10-08.json`。未运行市场拟合、行情重抓、B02大原件复制、全量测试或部署；旧调整版本与完整历史成员资格仍未证。

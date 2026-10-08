@@ -171,11 +171,11 @@
     "published_commit": "4e4c075f6308c788013ad9cc81d2f4ced1ce3bee",
     "remote_ref": "origin/codex/research-report-library-integration-20261008",
     "remote_ref_readback": "4e4c075f6308c788013ad9cc81d2f4ced1ce3bee",
-    "remote_report_and_raw_match": "21/21 exact source bytes",
+    "remote_report_and_raw_match": "20/20 exact source bytes",
     "remote_registry_sha256": "1fb8f8533e35dcd0d503c269493d84caa53614e3f74eef849b7b26ea04ee06ed",
     "remote_index_sha256": "89b85d67e549e8ecee8ddc6d3805072f5e013f6366a9e628b9a2e6835f979cf1"
   },
-  "mechanical_failure_record": "The first guarded root edit wrote the single registry row, then stopped because the index assertion searched for the full docs/ path while the link contains only the report filename. No other file changed. The exact registry insertion was reversed in memory to prove the required baseline SHA, then the index line was added and both inverses were verified. A later read-only audit initially had a mistyped expected SHA and was corrected; no file was changed by that audit.",
+  "mechanical_failure_record": "The first guarded root edit wrote the single registry row, then stopped because the index assertion searched for the full docs/ path while the link contains only the report filename. No other file changed. The exact registry insertion was reversed in memory to prove the required baseline SHA, then the index line was added and both inverses were verified. A later read-only audit initially had a mistyped expected SHA and was corrected; no file was changed by that audit. The final receipt mistakenly said 21/21 remote source files although its source.files list and file_count both contained 20 (one report plus 19 raw); this wording is corrected to 20/20 without changing source files or registration.",
   "limits": "The accepted report concludes original prices match, historical adjustment version and full constituent membership remain unproved, and no old price rows were repaired. No rerun, refetch, market fit, B02 large original, or whole-root 620-entry publication. The main working tree is intentionally not committed; only the independent codex branch will be pushed.",
   "verification": {
     "source_commit_is_remote_tip": true,
