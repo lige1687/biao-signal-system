@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "f928b75aa327da425a2f85d4ad2685a5945ee650",
-  "checked_at": "2026-10-08T21:04:59.476483+08:00",
+  "checked_coordination_sha": "c750d58f1c11c74d45c2eec448752b6ff6c64375",
+  "checked_at": "2026-10-08T21:18:24.978867+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -463,12 +463,12 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "task_id": "factor-fusion-risk-exit/order-ledger-adapter",
       "owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
       "executor": "/root/settlement_implementation_v1",
-      "status": "active",
-      "phase": "v2_limited_accepted_archive_scope",
+      "status": "completed",
+      "phase": "accepted_archived_remote_verified",
       "write_paths": [
         "docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/"
       ],
-      "scope_released": false,
+      "scope_released": true,
       "depends_on": [],
       "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-implementation-contract.json",
       "source": "OriginalGoal5 fixedorders to accepted datedledger; Astra/high approved single synthetic account singlebatch serial wholefills. No reservations/partialfills/recovery or new policy; original modules immutable.",
@@ -488,13 +488,13 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "failed_v1_remote_files": 40,
       "v2_source_sha256": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba",
       "acceptance": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-controller-acceptance-v2.json",
-      "controller_only_write_paths": [
-        "docs/experiments/weekly-portfolio-order-ledger-adapter-2026-10-08.md",
-        "docs/experiments/registry.json:exact own adapter report entry",
-        "docs/experiments/INDEX.md:own navigationline",
-        "own rootgoal receipts/progress",
-        "isolated codex/research-direct exact46raw archive"
-      ]
+      "controller_only_write_paths": [],
+      "publication_commit": "56c25f019a1e2059e349513d9a2856d035a32a52",
+      "remote_verified_changed_files": 19,
+      "remote_verified_raw_files": 46,
+      "readback": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-remote-readback.json",
+      "main_registry_count": 636,
+      "isolated_registry_count": 214
     }
   ],
   "final_acceptance": {
@@ -1161,7 +1161,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "remaining": "Guard covers integrated audio processing only, not other research/app writes or instant capacity loss. Remeasure space before larger jobs; user experience/future schedule reliability unverified. Research source gaps unchanged; no deletion/outside-repo authority borrowed."
     }
   ],
-  "shared_registration_scope_released": false,
+  "shared_registration_scope_released": true,
   "direct_next_actions": [
     "Dispatch exact39 synthetic dependency publication to originaltheoryowner; verify actualstart.",
     "Accept native preflight implementation when delivered with independent rejectionchecks.",
@@ -1172,7 +1172,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "mac-local-storage-cleanup",
     "trend-trading-video"
   ],
-  "conflict_decision": "Storage owner newrouting and videoV7 independent; neitherclaims registry/INDEX. Rootclaims only one acceptedadapterreport row/INDEXline; authorfinished frozenraw. Prior index ENOSPC retained; small acceptance file writeandfetch succeeded, capacitychanged; normalexactindexwrite retried once.",
+  "conflict_decision": "Root adapter archived; releasesregistry/INDEX now. Storage routing andvideoV7 originalowners currently inProgress independently. No rootactivewriter to theirpaths, no newduplicateworker.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2331,3 +2331,10 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 刚才git add自身协调记录因3.8MB索引Errno28失败，未commit/push、无残留lock；记录在acceptance，不删除锁/资料，不强推。其后容量从138031104变化到188989440/184197120B，小验收2605B实际写回和fetch成功，此次仅重试正常准确索引写；若失败则共享归档仍不开工。
 - 推回成功后root准确新增weekly-portfolio-order-ledger-adapter-2026-10-08.md、主/既有隔离registry各仅该报告一条及INDEX一行；原46raw共362473B只读复制，34旧版本已7f23610f40文件远端保存。root自己的验收/发布回执和work-progress随成果分支；不写其他登记/原源码/仓外/数据库。原13报告不重做，归档后共享窗口立即释放。
 - 只接受单原决策、单人工账户、串行整笔适配；新周/部分成交/预占/恢复/并发/跨行动/完整政策/真实市场未通过，仍不运行真实标签。
+
+## 适配归档远端闭合、共享窗口释放与独立任务接续 2026-10-08T21:18:24.978867+08:00
+
+- checked_coordination_sha=c750d58f1c11c74d45c2eec448752b6ff6c64375；成果56c25f019a1e2059e349513d9a2856d035a32a52的19净文件逐字远端相同，46raw指纹/字节数全核。主635→636/隔离213→214均只本报告一条；报告SHA079a45f377d513e0f903dfbc0c699188272e0329c923f1147c1cb597cdb59eaf，11链接有效，归置通过。此有限工程问题completed，原首版失败7f23610f等保留；root14报告不等于八目标全完成。
+- scope_released=true：root现在释放registry/INDEX和本项写入。两次ENOSPC保留；其后实际空间1.66GB→2.70GB、进度/复制/正常索引commit/push读回成功，不因曾失败永久停工，也不归因本线程清理。20→19预期文件数差系v1清单此前已推，第一次断言在commit前停止，准确11新raw+8其他才提交。
+- 原Goal5余项仍要求可靠特征和可复算完整策略对照；输入、原包、未知P1分支不齐，不新造多周/部分成交研究。已验适配/规划/账本不重跑。全部root研究子agent已completed。
+- 独立owner只读compact更新：storage01a1155d-b204-7232-a993-4c9e0567af59 turn01a11b93-9b09-7273-abac-e59c4a80f4a7 cursor97038648-8723-4658-99dd-c33457771744:3 inProgress，已报告新输出路由待验证；video01a11a02-7ff5-7563-9831-a36273f51532 turn01a11b8e-43f5-7862-8d22-898995d4e82c cursorb98f79ce-6e43-4628-96c2-94fa1475aa99:4 inProgress，已报告10秒小样成功/完整4K正导出。中控已发送实际空间变化事实提醒，不授权删除或改预算、不把它们的运行当成果、不声称由该提醒引起运行。两原owner路径独立，后续接真实回执再核。
