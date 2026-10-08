@@ -1,3 +1,14 @@
+## V9 archive-prepared
+
+- task-id: trend-trading-video；2026-10-09T00:55:34.576322+08:00；checked_coordination_sha: bc2985b56fd63c551193a6faf9b1a1ad5831fc3c；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- blocked外盘落档，规则与本机小文档准备完成；scope_released=true，本任务唯一写者，与自身及中控无重叠。外盘00:51实查未挂载，不声称外盘目录已创建或文件已归档；V14成片交付仍受阻。
+- 成果codex/trend-history-long-v14-20261009@e1490f734c3e15ab0d26f257296d11a6fdb44db7，10个准确文件已远端逐字读回。Skill新增外盘分层归档固定要求与references/storage-and-packaging.md；V14/package含定位/发布介绍、完整屏幕文稿、实际时间表、来源许可、清单和制作记录；archive-plan.json绑定拟落位置。
+- 验证：文稿26段heading/body/note与chapters.json逐项一致；时间表/来源与现有源逐字一致；用户可见文稿与简介无品牌检查通过；归置检查通过。没有新渲染、安装、删除或媒体内盘回退。未落外盘的小文件明确prepared_locally_external_drive_unavailable。
+- 目录组织为主题→稳定视频ID→版本；旧媒体原路径不改，交付包与视频库小索引引用它们，不重复复制大文件。固定盘恢复且预检通过后，将小包落到原result/交付包/趋势交易/20261009-趋势交易简史/v14，写视频库导航并补成片真实SHA，再核章节跳转；旧其他版本逐条检查再补档，不擅自迁移或删片。
+
+
+---
+
 ## V9 archive-start
 
 - task-id: trend-trading-video；2026-10-09T00:51:39.365440+08:00；checked_coordination_sha: a746321de62d1f6dde4d8654d557151db1fc829d；已读 COORDINATION.md、自身与 research-dispatch-controller。
