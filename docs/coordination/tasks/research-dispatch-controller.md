@@ -134,8 +134,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "a47a1fe0d07043ecfd1df7b49f2e5198620fd3ea",
-  "checked_at": "2026-10-08T16:57:43.420479+08:00",
+  "checked_coordination_sha": "008a26f1c82c3eab41cc57d60358980a4b5cab6e",
+  "checked_at": "2026-10-08T17:31:16.590672+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1100,8 +1100,8 @@
     },
     {
       "goal": 8,
-      "accepted": "Current measured free space exceeds6GB; normal Git fetch and index writes work; already-published coordination record safely fast-forwarded to latest clean worktree, no reset or duplicate commit. No controller cleanup or outside-repo writes.",
-      "remaining": "Recheck actual capacity before each larger job; recovery cause unverified and capacity may change. Separate daily-flow owner implementing bounded storage checks, not controller acceptance of full-system protection. Deletion/outside writes remain unapproved here."
+      "accepted": "Normal Git/write recovery verified. Existing daily-flow owner delivered bounded storage preflight; controller verified24 source hashes,2 evidence files,29holdings/2video failures in saved simulation and2 actual reminder final messages. No controller cleanup.",
+      "remaining": "Guard covers integrated audio processing only, not other research/app writes or instant capacity loss. Remeasure space before larger jobs; user experience/future schedule reliability unverified. Research source gaps unchanged; no deletion/outside-repo authority borrowed."
     }
   ],
   "shared_registration_scope_released": true,
@@ -1109,14 +1109,14 @@
     "Storage/Git operational recovery verified; no stale low-space or local-HEAD-behind claim. Measure current capacity before next write-heavy job.",
     "Cash/calendar and earlier9 reports accepted; do not rerun or re-register. Exact D-MAE originals/staged review, historical stock membership/price scale/use and Qlib original input/receipt remain distinct dependencies.",
     "On concrete new authorized input/source/necessary independent work, execute within original budgets after scope check. Do not reopen completed source attempts simply because disk recovered; retain original calendar67/75 usage and all failures.",
-    "Daily-flow/storage engineering remains with original active owner; read callbacks with latest cursor, do not duplicate implementation or take over cleanup permission."
+    "Daily-flow/storage engineering batch evidence verified within limited scope; original owner retains maintenance paths. No duplicate dispatch/source edits. Other research writers still check space explicitly."
   ],
   "read_task_ids": [
     "research-dispatch-controller",
     "daily-trading-system-audit",
     "trend-trading-video"
   ],
-  "conflict_decision": "Only own central record/progress/state updated for verified storage/Git recovery. Existing daily-flow/storage and video paths untouched; no new research/write scope or source attempt.",
+  "conflict_decision": "Root writes existing own central state/progress/coordination scope only; other owner paths read-only. No eligible new research from delivery; original budget/closed attempts unchanged.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -1254,20 +1254,20 @@
         },
         {
           "goal": 8,
-          "accepted": "Current measured free space exceeds6GB; normal Git fetch and index writes work; already-published coordination record safely fast-forwarded to latest clean worktree, no reset or duplicate commit. No controller cleanup or outside-repo writes.",
-          "remaining": "Recheck actual capacity before each larger job; recovery cause unverified and capacity may change. Separate daily-flow owner implementing bounded storage checks, not controller acceptance of full-system protection. Deletion/outside writes remain unapproved here."
+          "accepted": "Normal Git/write recovery verified. Existing daily-flow owner delivered bounded storage preflight; controller verified24 source hashes,2 evidence files,29holdings/2video failures in saved simulation and2 actual reminder final messages. No controller cleanup.",
+          "remaining": "Guard covers integrated audio processing only, not other research/app writes or instant capacity loss. Remeasure space before larger jobs; user experience/future schedule reliability unverified. Research source gaps unchanged; no deletion/outside-repo authority borrowed."
         }
       ],
-      "status_refreshed_at": "2026-10-08T16:57:43.420479+08:00",
+      "status_refreshed_at": "2026-10-08T17:31:16.590672+08:00",
       "supersedes": "2026-10-08T13:49:28.653456+08:00",
-      "current_real_experiment_readiness": "Storage/Git obstacle recovered; exact frozen research inputs/source/use contracts unchanged. Completed local units not restarted. Independent daily-flow/storage owner active, no overlap.",
+      "current_real_experiment_readiness": "Storage/Git recovered and bounded daily-flow storage delivery evidence accepted; frozen research input/source/use/review gaps unchanged. No new research run.",
       "next_required_decision_boundary": "Full dated historical member source/coverage; original price scale and actual consumer; exact6D-MAE originals and staged grants; exactQlib receipt. Do not repeatedly request unchanged missing inputs."
     },
     "next_actions": [
       "Storage/Git operational recovery verified; no stale low-space or local-HEAD-behind claim. Measure current capacity before next write-heavy job.",
       "Cash/calendar and earlier9 reports accepted; do not rerun or re-register. Exact D-MAE originals/staged review, historical stock membership/price scale/use and Qlib original input/receipt remain distinct dependencies.",
       "On concrete new authorized input/source/necessary independent work, execute within original budgets after scope check. Do not reopen completed source attempts simply because disk recovered; retain original calendar67/75 usage and all failures.",
-      "Daily-flow/storage engineering remains with original active owner; read callbacks with latest cursor, do not duplicate implementation or take over cleanup permission."
+      "Daily-flow/storage engineering batch evidence verified within limited scope; original owner retains maintenance paths. No duplicate dispatch/source edits. Other research writers still check space explicitly."
     ],
     "latest_commit": "c9d99bf4bb77e985f79aa7c97594c7835a7d1da6",
     "completed_units": [
@@ -1736,11 +1736,91 @@
       "new_downloads": 0,
       "branch_unchanged": "codex/factor-unit-research-20260915",
       "preserved_original_result_commit": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb"
+    },
+    "external_storage_delivery_review_20261008": {
+      "checked_at": "2026-10-08T17:31:16.590672+08:00",
+      "checked_coordination_sha": "008a26f1c82c3eab41cc57d60358980a4b5cab6e",
+      "task_id": "daily-trading-system-audit",
+      "owner_thread": "01a11721-303e-7c83-9451-c82078c9ba23",
+      "source_commit": "1888982404174f4b1eec25bb8bdb9ac42251c2f5",
+      "evidence_commit": "6edc851de664e18559bfd9316e1ffd8d6f374299",
+      "state": "limited_delivery_evidence_accepted_no_new_research",
+      "source_manifest_hashes_verified": 24,
+      "subsequent_evidence_paths_verified": 2,
+      "version_check_note": "All24 source blobs match size/hash. Local progress differs from source snapshot because evidence successor adds its delivery note; local latest equals evidence commit. Expected version delta, not failed source fingerprint.",
+      "verification_scope": "Fresh fetch;24 source hashes/sizes;2 successor files read back; saved offline packet independently counted29holdings and2preflight failures; two actual final messages read from reminder chat.",
+      "saved_test_log": "147 passed,1warning in8.04s; existing author log read, tests not rerun by controller",
+      "offline_packet_sha256": "9269f77c4f24c89122daced7a76c911430757483a55cc1d7251e6423d14b1442",
+      "actual_delivery_message_ids": [
+        "msg_07e851276a95e9e4016ac75e7970b88191bea07ecd2b1edfed",
+        "msg_07e851276a95e9e4016ac75fa5002081918f1bbb1e1af8da5d"
+      ],
+      "limits": [
+        "Actual hot-unplug not tested; saved isolated simulation checked",
+        "Guard covers explicitly integrated audio processing only; not all research writers",
+        "Migration bytes are original-owner evidence; controller did not repeat migration or claim own cleanup",
+        "User experience and future scheduled reliability not accepted by this readback",
+        "No new strategy evidence or real-label readiness"
+      ],
+      "owner_scope_released": false,
+      "owner_chat_observed_state": "inProgress at cursor3; coordination engineering batch completed; do not equate chat turn with engineering acceptance",
+      "owner_turn": "01a11aae-55bd-7f72-a086-4a0469f237f6",
+      "owner_cursor": "418df178-0b47-45dc-bddd-530916c27c09:3",
+      "controller_source_edits": 0,
+      "new_research_runs": 0,
+      "new_source_requests": 0,
+      "next_required_action": "No dependent controller implementation authorized/needed from completed engineering batch; reuse source/evidence. Resume research on recorded input/source/use/review prerequisites. No duplicate dispatch.",
+      "controller_progress_publication": {
+        "published_commit": "681f9c71e5f85e986d2dbe2ebafcbedc7b9ba6ab",
+        "remote_sha": "681f9c71e5f85e986d2dbe2ebafcbedc7b9ba6ab",
+        "file_sha256": "3b8b6790248efdcf7b1e7b8689f60d1a22654d15f66ec75c7544486759aa5077",
+        "file_readback_equal": true
+      }
     }
   },
   "final_coordination_publication_failure": {
     "kind": "non_fast_forward",
     "recovery": "Normal merge of latest unrelated daily owner; exact readback pending"
+  },
+  "external_storage_delivery_review_20261008": {
+    "checked_at": "2026-10-08T17:31:16.590672+08:00",
+    "checked_coordination_sha": "008a26f1c82c3eab41cc57d60358980a4b5cab6e",
+    "task_id": "daily-trading-system-audit",
+    "owner_thread": "01a11721-303e-7c83-9451-c82078c9ba23",
+    "source_commit": "1888982404174f4b1eec25bb8bdb9ac42251c2f5",
+    "evidence_commit": "6edc851de664e18559bfd9316e1ffd8d6f374299",
+    "state": "limited_delivery_evidence_accepted_no_new_research",
+    "source_manifest_hashes_verified": 24,
+    "subsequent_evidence_paths_verified": 2,
+    "version_check_note": "All24 source blobs match size/hash. Local progress differs from source snapshot because evidence successor adds its delivery note; local latest equals evidence commit. Expected version delta, not failed source fingerprint.",
+    "verification_scope": "Fresh fetch;24 source hashes/sizes;2 successor files read back; saved offline packet independently counted29holdings and2preflight failures; two actual final messages read from reminder chat.",
+    "saved_test_log": "147 passed,1warning in8.04s; existing author log read, tests not rerun by controller",
+    "offline_packet_sha256": "9269f77c4f24c89122daced7a76c911430757483a55cc1d7251e6423d14b1442",
+    "actual_delivery_message_ids": [
+      "msg_07e851276a95e9e4016ac75e7970b88191bea07ecd2b1edfed",
+      "msg_07e851276a95e9e4016ac75fa5002081918f1bbb1e1af8da5d"
+    ],
+    "limits": [
+      "Actual hot-unplug not tested; saved isolated simulation checked",
+      "Guard covers explicitly integrated audio processing only; not all research writers",
+      "Migration bytes are original-owner evidence; controller did not repeat migration or claim own cleanup",
+      "User experience and future scheduled reliability not accepted by this readback",
+      "No new strategy evidence or real-label readiness"
+    ],
+    "owner_scope_released": false,
+    "owner_chat_observed_state": "inProgress at cursor3; coordination engineering batch completed; do not equate chat turn with engineering acceptance",
+    "owner_turn": "01a11aae-55bd-7f72-a086-4a0469f237f6",
+    "owner_cursor": "418df178-0b47-45dc-bddd-530916c27c09:3",
+    "controller_source_edits": 0,
+    "new_research_runs": 0,
+    "new_source_requests": 0,
+    "next_required_action": "No dependent controller implementation authorized/needed from completed engineering batch; reuse source/evidence. Resume research on recorded input/source/use/review prerequisites. No duplicate dispatch.",
+    "controller_progress_publication": {
+      "published_commit": "681f9c71e5f85e986d2dbe2ebafcbedc7b9ba6ab",
+      "remote_sha": "681f9c71e5f85e986d2dbe2ebafcbedc7b9ba6ab",
+      "file_sha256": "3b8b6790248efdcf7b1e7b8689f60d1a22654d15f66ec75c7544486759aa5077",
+      "file_readback_equal": true
+    }
   }
 }
 ```
@@ -1837,3 +1917,13 @@
 
 
 </details>
+
+## 存储工程新交付核对：2026-10-08T17:31:16.590672+08:00
+
+- 本轮结果：已核对原日常流程负责人的存储检查成果。模拟外盘不可用时，两项视频处理明确停止，29只持仓的资料报告仍生成；提醒对话两条实际消息已读回。这是有限范围的工程接收，不增加11份研究报告数量，也不证明交易效果或所有研究写入都受保护。
+- 开工协调基线：008a26f1c82c3eab41cc57d60358980a4b5cab6e；已读research-dispatch-controller、daily-trading-system-audit、trend-trading-video。只更新本中控原有三类记录，原负责人模块保持只读、维护范围未释放。
+- 成果依据：codex/gpt-system-integration-20261008@1888982404174f4b1eec25bb8bdb9ac42251c2f5的24文件大小与SHA全部相符；后继6edc851de664e18559bfd9316e1ffd8d6f374299的2文件逐字相符。工作进度文件在后继追加交付说明，当前本地对应后继，不能按旧快照误判指纹失败。
+- 验收范围：从保存的演练资料包独立计数29只持仓、2条存储预检失败；原日志记录147项通过、1依赖提醒，本中控未重复运行。已读回“LeiSignal 日报与提醒”中的真实定时提醒及手动验收消息；不是只核提示词配置。实际拔盘与未来准点可靠性未验证。
+- 当前空间实测8432394240字节；本对话未删除或迁移任何内容。原负责人迁移释放量作为其证据保留，不算本中控清理成果。保护只覆盖显式接入的音频流程，其他研究写入仍逐次核空间。
+- 检查/派发/运行/交付/验收分开：已检查8目标；本轮0派发、0研究运行、0新取数；接收既有负责人的工程交付并完成上述有限核验。最新聊天快照仍inProgress，工程批在协调记录为completed；不拿聊天状态代替产物。
+- 后续判定：这批工程结果没有解除D—MAE六原件、股票历史成员/原价格尺度/用途及Qlib原输入缺口；原封存来源预算不重开。目前无新增齐备输入的必要研究单元。保留各项恢复条件，有新原件/具体来源或必要独立工作再执行；不重跑现金、日历或已验收报告。
