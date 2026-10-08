@@ -30,3 +30,7 @@
 - 发布依赖是daily已发表8bde94333264ed9649acfb05d975ed32a6019d06的configs/storage-policy.v1.json，SHA dbdcc8af8bd5f1d6be7ce5262e10d21177a4c4faae97d4a4d2aeda900877d4dd，与本机完全同字节；只复用blob，不重设其身份/规则或发布整项daily代码。
 - 目前未运行的历史固定输出脚本/第三方工具不作全局IO重写，所有后续AI先按本入口选新外盘目录；明确旧路径的小记录和冻结复现继续原安排。不是“所有旧进程已切换”，不能宣称新入口现在能跨过5GiB余量限制。
 - source publication pending；既有第四批提交4e23a898220cc99474892570afacfa413b12c860作本工作分支基础。测试/原始失败和恢复记录仅外盘，无改main/master、强推、部署、自动化或交易。
+
+## 发布与最终读回 2026-10-08T21:36:30.062971+08:00
+
+代码/项目规则8准确文件已普通推送并逐SHA/字节读回：codex/mac-local-storage-cleanup-20261008@428dd19607ecc75cbe9f59e5e2fe3018c53dd9fd；54,587B，含原daily已发布canonical policy原blob。共享主索引/HEAD/他人源码不改，AGENTS本机原前缀保留、发布仅自己的新增块。25相关检查、Ruff/归置、外盘小文件和容量拒绝回执已核；0实际科研。checked_coordination_sha=7ce0479abef4cbba6a8add48d23f8891010fd718，已读classic/daily/中控最终记录，本轮路径无新重叠。当前本机约1.42GiB，外盘约596GiB；不是5GiB余量已达标。该限定规则＋清理交付completed，外盘恢复清单保留，下一次新实验仍先预检和科学合同核对；不自动改旧进程/冻结路径。
