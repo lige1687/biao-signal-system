@@ -90,3 +90,18 @@
 - 回执: docs/experiments/raw/daily-trading-system-audit-2026-10-08/notifications-delivery-receipt.json、notifications-tests.log、notifications-weekly-source-check.json；观察和事件原件在本仓私有data/cache，非送达回执。
 - 边界: 0新市场计算/阈值/真实交易/持仓写入/生产库改动/重启/部署/外发/删除/仓外OKR；未接管他人或新增研究派发。代码/文档仍未提交未推成果分支，仅本地，协调同步不是源码发布。
 - 接续: 定时按SOP执行并核真实消息是否交付；最近运行失败可从保留事件恢复，不把观察状态当送达。用户具体条件未确认时保持未知；此配置不是连续盯盘。当前无待跑的本批必要检查。
+
+## 用户明确持续目标：完成系统接入 GPT
+
+- status: active；updated_at: 2026-10-08T11:50:27.988868+08:00；owner仍为本聊天01a11721-303e-7c83-9451-c82078c9ba23 /root，唯一协调写者。
+- checked_coordination_sha: 15a2fa795613f9e173b68208073a57cef68912b2；checked_at: 2026-10-08T11:50:27.988868+08:00；已读task-id: daily-trading-system-audit、research-dispatch-controller、douyin-vike-increment、market-observation、investor-observation-map，及全部20份任务的相关路径排重。
+- 用户原话: “那你持续推进啊所有任务哈，不要停止ok？目标是完成系统的接入哈”；本轮按系统GPT接入范围持续执行，不恢复其他研究任务。
+- 服务层: 两份权威策略的§5执行/复盘及背景解释层；SHA分别df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20、85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903，与确认值一致。无新技术规则、无阈值或胜率计算。
+- 精确新增/续写范围: src/lei_signal/integrations/__init__.py、gpt_context.py、gpt_mcp.py；tests/unit/test_gpt_context.py、test_gpt_mcp.py；.agents/skills/lei-system-chat/SKILL.md及references/mcp-requirements.txt；docs/ops/gpt-system-integration.md；自己的portfolio-chat-briefing.md、system-notifications.md、work-progress/daily-trading-system-audit.md；原raw/daily-trading-system-audit-2026-10-08/的gpt-integration-*证据。本仓data/cache/gpt-system-integration/及既有briefing缓存保存私人试跑与隔离SDK，不进Git。若实现需其他路径先同步范围。
+- 并行分工: /root/integration_scope_check独占gpt_context.py、test_gpt_context.py；/root/mcp_transport_design独占gpt_mcp.py、test_gpt_mcp.py；/root独占其余新路径/文档与验收。不改现有API、web、新闻、计划版本或其他AI源码，不改registry/INDEX。
+- 接入设计: 白名单GET和既有缓存，统一持仓/基本面/新闻/计划/成交/技术代理/研究查询，保留逐来源数据日期、失败及证据范围。真实SDK MCP stdio优先，隔离依赖只装仓内，不改全局配置。手机/网页先核现有Remote或私有Secure MCP Tunnel入口；任何凭证、账户授权、公网服务暴露或仓外改动须具体可审批准后才执行。
+- 验收: 固定反例及真实本机API；报告原字节SHA/目录白名单；不因缺源/未知计划造安全或操作结论；真实MCP initialize、list、call往返；非法URL/路径/参数和写操作不开放；日期/覆盖可见；现有定时交付与新连接分别验收，手机/网页需实际ChatGPT调用证明才称接通。
+- 当前事实更新: 今日09:10任务实际09:11触发、0新事件而安静；11:35任务实际11:36触发、11:39成包并已在本聊天发报告。旧SOP“首次未验证”已失效，将以实际回执更新。29只清单仍适用，0关联计划/0产品技术结果；该缺口不是新报警。
+- 基线HEAD: 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；既有脏文件保留。0下单/生产库/持仓/计划/规则/全局配置/外发/删除；本轮源文件提交发布另核准确路径，不把协调同步当代码发布。
+- 冲突决定: 最新协调无同名集成路径，market-observation本轮只读、investor-observation-map拥有其UI范围；本轮使用新集成命名空间并复用这些接口，不接管其任务。
+
