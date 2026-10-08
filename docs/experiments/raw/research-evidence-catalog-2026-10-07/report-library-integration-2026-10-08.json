@@ -47,17 +47,25 @@
       "relative_links": 0,
       "missing_relative_links": 0,
       "registry_entry_once": true,
-      "index_link_once": true
+      "index_link_once": true,
+      "absolute_local_links": 0
     },
     {
       "path": "docs/experiments/research-evidence-catalog-2026-10-07.md",
       "source_commit": "0d286582c0427cd3138e0539e8461a6fa1b95227",
       "sha256": "8e61d7ed4ca119bece1209d920479a0d5ed3d63aadcb6d45e12741f93e8fb601",
       "bytes": 36915,
-      "relative_links": 61,
+      "relative_links": 0,
       "missing_relative_links": 0,
       "registry_entry_once": true,
-      "index_link_once": true
+      "index_link_once": true,
+      "absolute_local_links": 61,
+      "absolute_link_scope": {
+        "repository_path_present_in_this_branch": 3,
+        "repository_path_absent_in_this_branch": 40,
+        "outside_repository_local_path": 18,
+        "portability": "Original report bytes preserved. Local absolute links require the source machine; they are not promised as remote browsable links."
+      }
     },
     {
       "path": "docs/experiments/native-workflow-integration-2026-10-07.md",
@@ -67,7 +75,8 @@
       "relative_links": 0,
       "missing_relative_links": 0,
       "registry_entry_once": true,
-      "index_link_once": true
+      "index_link_once": true,
+      "absolute_local_links": 0
     },
     {
       "path": "docs/experiments/native-workflow-synthetic-recovery-2026-10-08.md",
@@ -77,7 +86,8 @@
       "relative_links": 5,
       "missing_relative_links": 0,
       "registry_entry_once": true,
-      "index_link_once": true
+      "index_link_once": true,
+      "absolute_local_links": 0
     }
   ],
   "small_evidence": [
@@ -178,10 +188,12 @@
     "registry_entries_old_semantically_unchanged": 195,
     "registry_entries_added_once": 4,
     "index_lines_added_once": 4,
-    "relative_links_checked": 66,
+    "relative_links_checked": 5,
     "relative_links_missing": 0,
     "repo_hygiene": "Current isolated baseline lacks scripts/check_repo_hygiene.py. Running the root script read-only against this older isolated baseline reported 299 preexisting/root-scope violations; this integration adds only paths under docs/experiments and raw, so full hygiene is not claimed green.",
     "sensitive_pattern_scan": "No matches for selected key/token/private-key patterns in newly copied reports and small evidence.",
-    "research_tests": "not run; report registration only"
+    "research_tests": "not run; report registration only",
+    "absolute_local_links_in_original_catalog_report": 61,
+    "first_remote_readback": "First remote readback matched seven SHA-256 values and four registry/index entries; link check uncovered 61 preexisting absolute local paths and the receipt count was corrected. No report bytes or registry content changed."
   }
 }
