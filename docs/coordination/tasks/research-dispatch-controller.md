@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "f51aeae67d1a5ea2a32a4223f7c41b2a7e481266",
-  "checked_at": "2026-10-08T18:38:59.140259+08:00",
+  "checked_coordination_sha": "e7a4e7111e247bbcfc7977d8eb247372e37152e1",
+  "checked_at": "2026-10-08T18:41:13.082128+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1107,9 +1107,9 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   ],
   "shared_registration_scope_released": true,
   "direct_next_actions": [
-    "Accept native preflight implementation when original CLI owner delivers; use independent refusal checks only.",
-    "Receive exact75 dependency audit and proceed with safe original-owner handoff if authorized; do not bulk upload.",
-    "Inspect missing goal5 settlement cases without repeating completed cash/dividend work."
+    "Dispatch exact39 synthetic dependency publication to originaltheoryowner; verify actualstart.",
+    "Accept native preflight implementation when delivered with independent rejectionchecks.",
+    "Remaining36 originalowner source review andgoal5 settlement scope remain necessary, avoid duplicate/evidence invention."
   ],
   "read_task_ids": [
     "research-dispatch-controller",
@@ -1948,14 +1948,26 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       },
       {
         "id": "theory-workflow-system-increment/dependency-publication-audit",
-        "status": "running_read_only_agent",
+        "status": "delivered_controller_accepted",
         "owner": "/root/engineering_readiness_v5",
         "executor": {
           "model": "gpt-6-luna",
           "reasoning_effort": "low"
         },
         "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/preparation-dependency-audit-contract.json",
-        "reason": "publication delivered revealed75 local-only validation evidence files; determine safe necessary nextstep"
+        "reason": "publication delivered revealed75 local-only validation evidence files; determine safe necessary nextstep",
+        "result": "39candidate syntheticfiles110834bytes;36remaining requireoriginalowner provenance; no oldmethodcase or definition changes authorized"
+      },
+      {
+        "id": "theory-workflow-system-increment/synthetic-dependency-publication",
+        "status": "contract_ready_not_dispatched",
+        "owner": "01a11579-7f2c-7c21-88d1-e5b334b569b7",
+        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/synthetic-dependency-publication-contract.json",
+        "scope": "39 exact candidate synthetic evidencefiles; validate contentbeforepublish; preserve36remaining gaps",
+        "executor": {
+          "model": "gpt-6.1-sol",
+          "reasoning_effort": "medium"
+        }
       }
     ],
     "latest_active_other_owner": {
@@ -1972,6 +1984,12 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "branch": "codex/research-direct-20261008",
       "remote_files_equal": 12,
       "verified_at": "2026-10-08T18:38:59.140259+08:00"
+    },
+    "latest_coordination_publication": {
+      "commit": "e7a4e7111e247bbcfc7977d8eb247372e37152e1",
+      "remote_ref": "e7a4e7111e247bbcfc7977d8eb247372e37152e1",
+      "file_equal": true,
+      "verified_at": "2026-10-08T18:39:21.130112+08:00"
     }
   }
 }
@@ -2099,3 +2117,9 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 75路径全在本地但不在交付Git，5,472,329字节；已接续原Luna/low助手只读核原owner/来源/可安全发布子集，不批量上传、不重跑研究。
 - 原CLI owner已实际运行预检实现，登记f51aeae67d1a5ea2a32a4223f7c41b2a7e481266、turn01a11b13-8cea-7440-aa60-ba7656fb58eb。与只读依赖审查并行；收到代码后作必要独立拒绝检查。原owner两份仓外临时拷贝失误已要求保留失败并停止此类写入，不借清理授权。
 - 中控本轮合同/失败/验收/进度12文件在codex/research-direct-20261008@874c4ebf0dde9d838de619bcfc8cc5dfc91be37e，已远端逐字读回。完整运行state仅本地；本记录提供Git恢复摘要。旧11报告/科学预算保持，下一窗口核目标5未覆盖结算模拟。
+
+## 依赖只读回调与精确39件接续 2026-10-08T18:41:13.082128+08:00
+
+- 已核协调e7a4e7111e247bbcfc7977d8eb247372e37152e1；相关classic/theory/controller/daily范围与上轮无冲突。Luna只读审查已返回：39份B批合成验证候选110,834字节；其余36件涉及协议、来源或真实逐行资料，按原owner核，不能整批上传。
+- 中控实际逐路径构建39件准确大小/SHA合同：docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/synthetic-dependency-publication-contract.json。交原theory owner在独立成果分支逐文件复核内容并准确发布，保留原失败/待复核状态；任何不符者拒绝，不补造。只允许该39原字节及本任务新发布回执/进度，原根文件只读。
+- 不能按助手建议改旧method-case或definitions来绕过缺件；新合同明确禁止。补齐安全子集仍预期36件缺失，不能声称准备工具完整跨设备运行。此刻contract ready，尚未实际派发；CLI实现仍运行。
