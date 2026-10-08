@@ -135,7 +135,7 @@
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
   "checked_coordination_sha": "526a34677a8c35ac2aacd0a3ca6b86f2339154bd",
-  "checked_at": "2026-10-08T12:48:30.130195+08:00",
+  "checked_at": "2026-10-08T12:49:04.296354+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -594,7 +594,7 @@
       "price_repairs": 0
     },
     "acceptance": "Original issuer implementation notices/hash, announced record/ex/payment dates, gross cash units, exact saved factor dates; no default1/zero, no inference that factor values themselves are validated or Sina-compatible.",
-    "checked_at": "2026-10-08T12:48:30.130195+08:00",
+    "checked_at": "2026-10-08T12:49:04.296354+08:00",
     "checked_coordination_sha": "526a34677a8c35ac2aacd0a3ca6b86f2339154bd",
     "read_task_ids": [
       "research-dispatch-controller",
@@ -602,7 +602,11 @@
       "report-library-integration-20261008"
     ],
     "conflict_decision": "Existing corporate-action missing fields explicit in original plan; related task owners unchanged. Unique raw/report paths and root-only shared registration; frozen saved factor files read-only.",
-    "free_bytes_before": 2809913344
+    "free_bytes_before": 2809913344,
+    "publication_failure": {
+      "kind": "non_fast_forward_push",
+      "resolved": "Normal merge of intervening daily-trading-owner-only update; no force push, no shared research files written before scope readback."
+    }
   },
   "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
   "direct_execution_completed_units": [
