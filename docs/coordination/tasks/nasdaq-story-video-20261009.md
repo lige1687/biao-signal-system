@@ -1,0 +1,24 @@
+# 纳斯达克纪录短片制作接管
+
+- task-id: nasdaq-story-video-20261009
+- 负责人: 当前纳斯达克视频接管会话；唯一写者。与 trend-trading-video 旧片负责人分开。
+- 状态: blocked（媒体启动）；材料核对与本机小清单完成后保留恢复入口。
+- 更新时间: 2026-10-09T01:43:06.433069+08:00
+- checked_coordination_sha: 53cce33e34318a8a783a79c9a380f9f311d569df
+- 已读: COORDINATION.md；trend-trading-video 最新阶段；research-dispatch-controller 相关视频及存储阶段。
+- 冲突决定: 新主题独立路径，无旧视频/Skill/registry/INDEX写入，无生产或研究代码修改。
+- 工作区基础: 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；已有共享修改不暂存。
+- 成果分支: 尚未创建影片源码分支；本轮只有小型本机准备文件，未提交/未推送，不冒称远端可复现。
+- 本轮文件范围: docs/ops/media/nasdaq-story-20261009/；docs/ops/work-progress/nasdaq-story-video-20261009.md；本协调任务记录。
+- 目标: 按用户指定定稿和M01–M26，制作6–7分钟中文16:9与重新排版9:16视频、字幕音轨封面和许可/事实验收包。
+- 适用规范: code-explainer-video 当前Skill、用户本轮直接执行Prompt、存储管理及输出规则。本轮直接制作授权优先于旧主题分阶段审批；不改定稿、不克隆声音。
+- 已查材料: 桌面videos/nsda有00、01纯文本、02、04、05和正式稿docx；缺01正式md、03、06、07及data三CSV。docx与纯文本待逐字比较。
+- 已核事实: AP转载新闻支持2026-10-06 COMP 27599.79；Nasdaq官方支持1985–2024 14.25%及泡沫跌幅83%；官方历史报告第12页支持2002/2021排名。
+- 来源限制: SSGA网页已更新2026-10-07，不能验证2026-09-17历史榜；NDXLV PDF可访问但文字层不可读，F06待图像核对。新闻来源不等于媒体转载授权。
+- 实际存储: 固定外盘身份正确、约595GiB可用；内盘约1.1GiB。8GiB外盘结果/日志、2MiB本机小记录计划调用实际返回 insufficient internal capacity for metadata and 5 GiB reserve；未创建运行目录、无新媒体。
+- 可用能力: 已找到FFmpeg和既有Remotion依赖；尚未验证本期TTS服务和许可。未安装、未付费、未克隆、未删除。
+- 验收: 旁白保真、全部事实日期口径、素材权利、双画幅实帧可读、音文对齐、完整解码与播放；本轮仅材料清点/部分来源核对通过，其余未运行。
+- 待恢复: 补齐制作包和9月历史来源；内盘恢复5GiB以上加2MiB小记录余量后重做存储计划，再核普通配音与媒体授权、制作渲染。缺无关附件不要求用户重定主题。
+- 研究预算: 不适用；未启动回测/因子研究。无旧成果重跑。
+- 本地接续: docs/ops/work-progress/nasdaq-story-video-20261009.md 与 docs/ops/media/nasdaq-story-20261009/INTAKE.md。
+- 本记录提交以git log -- 本路径定位；成功推送后读回核验，不以本条文字冒充同步。
