@@ -1,3 +1,16 @@
+## V9 v12-delivered
+
+- task-id: trend-trading-video；2026-10-08T23:51:06.754782+08:00；checked_coordination_sha: 2da4d158d244cf96b23eb3ba1f66c57c538fee10；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed本轮Skill增量及15秒小样，观感待用户验收；scope_released=true。没有全片扩展、外部工具安装或新语音接入。原语雀发布仍等待目标知识库与可用访问，本轮未改其状态。
+- 成果codex/trend-continuity-v12-20261008@4a7a2e35b04d287b93519cfc9999dfd8629bf53c，15个准确文件远端逐字核验。新增v12/与Skill连续镜头/效率参考；与自身及中控无重叠，不碰registry/INDEX或系统。
+- 15.018秒1920×1080，450帧。纸带→同一曲线路径→圈点→利弗莫尔场景；无旁白、无品牌、概念行情。浏览器实际播放结束ended=true/error=null。类型、450帧时间表、公开文字、归置通过；响度−18.0 LUFS、真峰−4.2；媒体无失败，仅独立字幕轨提示。
+- 失败保留：65帧纸带倾斜而曲线未随动，已旋转同步修复并重验；关键帧216/405及导出六格已查。未独立听审或色彩管理跨设备核验；音乐/动效观感待用户。未测效率提升比例。
+- 外盘trend-trading-video-20261008T233813-2c1e8c4df8fe/result/trend-history-final.mp4，SHA256 b7cd63d687d7c1013f57b722847407a4929ffe957eeeae2bf17200073768697f，5232353字节。身份与路径见v12/storage-plan.json，证据validation.json；预览http://127.0.0.1:8779/。
+- 共享7天限额49%→50%，只记录显示变化1个百分点，无法归因单任务；无开通付费服务。下一步等用户确认本小样风格，再决定全片，不自行扩展。
+
+
+---
+
 ## V9 v12-start
 
 - task-id: trend-trading-video；2026-10-08T23:37:55.100291+08:00；checked_coordination_sha: ee2076f1fab074533df6956723354cc51020ef10；已读 COORDINATION.md、自身与 research-dispatch-controller。
