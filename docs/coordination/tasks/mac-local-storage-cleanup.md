@@ -2,8 +2,8 @@
 
 - task-id: mac-local-storage-cleanup
 - owner: 01a1155d-b204-7232-a993-4c9e0567af59 / root
-- status: planned（新增三学业目录迁移待用户决定；本轮只读检查已完成）
-- updated_at: 2026-10-08T23:02:17.229573+08:00
+- status: completed（本批旧微信迁移核验完成；只读巡查独立保留）
+- updated_at: 2026-10-09T02:37:06.446526+08:00
 - checked_coordination_sha: 508f8ccb1d81648ba617e0dea0f4de32cc142621
 - checked_at: 2026-10-08T23:02:17.229573+08:00
 - read_task_ids: mac-local-storage-cleanup, research-dispatch-controller, daily-trading-system-audit, trend-trading-video, external-learning-x-review
@@ -209,3 +209,16 @@
 - 改系统pax TAR，scope只将目标格式更新，783精确移除单位和课程仓库/祖先/当前新资料inode边界不变。scope SHA57e28c957c192d6489fea7627a2e9ba0dd302947d179113003ba5168a200f9f7；新归档执行器8950d34bbc7738c007d5df3ad12641d5884b8a0a9426339773d3ccf21d6fb24e；移除器0ad53387ca75aef0aac2f3589dcb6fb65b3ac73f393df293bac905ef691606be。直接全语义审阅并重绑定审核hash，原件保护未弱化。真实小夹具解包内容/中文名/模式/xattrs/内部硬链接inode通过。
 - 第五次131488文件/136066条目完整读回，内容/type/mode/硬链接目标原inode及内容一致；136058 AppleDouble说明条目有效，源二次完整指纹一致、无句柄/外盘UUID再核通过。正式TAR23171741696B，SHA094eedc2d7d9655e7b2382012d618a4cc6520b1b04d44fe0a1bb98d4a6d54e54，迁移记录items1/failures0/state VERIFIED_COPY。恢复说明改为新空内盘目录解包且不覆盖新DB/课程代码，私人资料不Git。
 - 下一步精确移除器再次核归档与全源后，逐单元fresh SHA/原inode和已授权移除nlink计数，失败停并保留/恢复holding；不整根删、不动代码祖先、不读聊天正文。实测释放待实际完成，本记录不代表源已删。
+
+
+## 旧微信迁移完成并恢复应用 2026-10-09T02:37:06.446526+08:00
+
+移除前后本机可用空间净增加14053318656B约13.09GiB，02:35容量24553074688B约22.87GiB。完整旧微信131488文件保留外盘，131410原副本已准确移除，课程代码78文件和全部祖先路径保留；当前微信新资料目录保持原inode，微信正常重新打开且进程已核。其他进程/虚拟内存仍影响容量，净增不当作全部独立归因。
+
+- checked_coordination_sha: dcf2c8db28852228eb74e616a8fb62c1765e50f8；已读COORDINATION1.1、自身、中控、video workflow-review-done，无本任务原路径/回执重叠，root唯一写者。用户“继续迁移哈”授权按已说明正常退出后迁移步骤执行；没有强杀、科研、安装或移动实验。
+- scope SHA57e28c957c192d6489fea7627a2e9ba0dd302947d179113003ba5168a200f9f7；最终TAR23171741696B，SHA094eedc2d7d9655e7b2382012d618a4cc6520b1b04d44fe0a1bb98d4a6d54e54。136066原目录/文件条目、136058 AppleDouble说明条目、完整内容/type/mode和内部硬链接原inode及目标内容核验，复制前后源完整指纹一致，设备/无句柄复查通过。真实小夹具解包中文、内容、模式、xattrs、硬链接inode通过；不冒称当前微信4.1.2已导入旧DB。
+- 失败历史：45秒lsof超时延长180秒且仍须完整空输出；ditto ZIP四个Interrupted system call返回1且缺有效尾目录，原件未删，改pax TAR重做；原failed ZIP/scope/代码/回执先保留。完整TAR和准确迁移验收后只移除自己生成的23595258664B无效临时ZIP，准确inode同盘rename/unlink留小回执，不删失败日志或元数据说明文件。
+- 精确783单元先726目录全部核移除，遇普通文件的目录扫描语法错误安全停止。实际lsof明确not a directory，并非占用；原回执STOPPED_AFTER_FAILURE保持历史。新接续只处理剩57准确普通文件，使用exact file lsof严格输出/错误全空。接续executor37eda3a428f4d8b6307d7d8910e10c491c34bbe902824c0b4e6fc3de630545b4，scope绑定独立审阅；核原726源/holding全不在、精确硬链接计数和所有剩原件稳定、归档完整后执行，不重复成功移除。最终接续VERIFIED_COMPLETE、57 REMOVED且0未解决错误，所有783源/holding不在。
+- 课程仓库完整内容/metadata仍与原清单一致，HEAD不变；初期“两处修改”指2个已跟踪文件，另7个未跟踪文件也都保留，最终完整清单78文件对照通过。当前xwechat_files/app_data与课程repo原inode读回一致。原仓库祖先保留，不软链接活动DB、不改微信设置；恢复必须先解包到有足够余量的内盘空目录，核内容后处理旧版兼容，不覆盖现有新资料或课程代码。
+- 恢复包/私有原件/manifest/接续回执/最终验收摘要只在已核盘个人资料归档第十一批003826，不Git；本机小恢复json已改完成状态，旧设备缺失/占用/失败均保留历史。归置通过，4注册外盘资源可读；每小时只读巡查规则不改，不无人值守删除、不恢复旧提醒。
+- 本批已授权范围验收完成，未启动后台复制/删除，也无未处理单元。源成果仅本进度文件准确发布；其他所有共享源码、索引/HEAD、活动实验与他人任务保持原安排。
