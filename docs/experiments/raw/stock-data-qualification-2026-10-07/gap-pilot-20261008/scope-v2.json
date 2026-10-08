@@ -1,0 +1,84 @@
+{
+  "schema": "stock-gap-pilot-scope/1.1",
+  "question": "Can the first three still-missing, normal-source formal stock price keys be restored on the same proven old adjusted-price scale?",
+  "mode": "bounded data qualification; no new factor experiment",
+  "decision_use": "whether to propose a precise main-price repair or retain the old missing-state boundary",
+  "checked_coordination_sha": "1d0637cd155be175021cbeb46653f38ea242a309",
+  "own_coordination_commit_remote_readback": "a19be55717bc3e6a6634bb7be50d2671b82850cd",
+  "task_id": "stock-data-qualification",
+  "stage": "gap-pilot-20261008",
+  "owner_thread": "01a101c1-ac35-70a3-8ecd-4a6179bb99ad",
+  "created_at_local": "2026-10-08T10:17:25.396363+08:00",
+  "write_paths": [
+    "docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/",
+    "docs/ops/work-progress/stock-universe-data-qualification.md"
+  ],
+  "selected_keys": [
+    {
+      "exchange": "XSHG",
+      "symbol": "600837",
+      "date": "2022-01-04"
+    },
+    {
+      "exchange": "XSHG",
+      "symbol": "600837",
+      "date": "2022-01-05"
+    },
+    {
+      "exchange": "XSHG",
+      "symbol": "600837",
+      "date": "2022-01-06"
+    }
+  ],
+  "selection_rule": "filter old 1,601 normal raw missing keys by formal dates and known official exclusions, then sort code/date; provisional member status separately marked because full official historical 300 anchor remains unavailable",
+  "strategy_sha256": {
+    "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "current_standards_sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71",
+  "existing_evidence": [
+    {
+      "path": "docs/experiments/raw/stock-universe-data-qualification-2026-10-05/read-only-source-manifest-v2.json",
+      "bytes": 229060,
+      "sha256": "e16ca16d715bb6f50da39c762e6de8d70b64f5e5d9cf951aebda94b292856780"
+    },
+    {
+      "path": "docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/daily_raw/daily-1-sh-600705.json",
+      "bytes": 16286,
+      "sha256": "a1b2ce5541a4237ba85c87442b3611702fa2c6ad77f2a3726d455fae80a7cc11"
+    },
+    {
+      "path": "docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/factor/factor-1-sh-600705.json",
+      "bytes": 403,
+      "sha256": "56ebe5b1ae198ad4a9b11a0eb01938ccf0b0034e135f35bf7f7af168b0853022"
+    },
+    {
+      "path": "docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/receipt.json",
+      "bytes": 27863,
+      "sha256": "fb6998084a4a65243885c98355793e70a090737d46fcbda1c820e93ce79540c6"
+    },
+    {
+      "path": "docs/experiments/raw/b04-targeted-gap-batch-2026-10-06/run01-review-01/acceptance.json",
+      "bytes": 49608,
+      "sha256": "d01154fe45c4079f2305d9350c5b6a44b0a4bfbdbf4c0a0de84fd78591572860"
+    },
+    {
+      "path": "docs/experiments/raw/b05-final-gap-batch-2026-10-06/run01-review-01/post-run-audit.json",
+      "bytes": 28943,
+      "sha256": "cc47d93606c3fa5068ac581e6ff1d6c54d73e64ca0ef8b8b8d1dd6a7c32c9e7b"
+    }
+  ],
+  "old_cumulative_provider_runs": "B01–B05 sealed receipts remain unchanged; B05 last34 closed, no reopening",
+  "new_source_request_cap": 6,
+  "new_received_bytes_cap": 20971520,
+  "minimum_free_bytes_before_write": 557842432,
+  "free_bytes_at_start": 4871065600,
+  "allowed": "read bounded existing originals; request only missing same-source/action evidence within cap; record raw response bytes/hash and small per-key table",
+  "forbidden": "PPO/P26 rerun, raw-to-qfq constant splice, main data/old report/registry/INDEX edits, production/account changes, paid source, login bypass, Library403 retry, writes outside repo",
+  "stop": "3 exact keys have explicit restoration verdict and remaining exact evidence gap, or real budget/access failure; no larger batch",
+  "requests_consumed": 2,
+  "new_received_bytes": 67789,
+  "status": "active_corrected_selection",
+  "supersedes": "scope.json selected-key selection; original scope preserved",
+  "selection_correction_sha256": "fe7cbfaec95a437319309141ce062b33005a357407de8cb1b1df0f9dd40cdc5a"
+}

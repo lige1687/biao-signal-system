@@ -1,0 +1,93 @@
+{
+  "schema": "stock-gap-pilot-source-requests/1.0",
+  "attempts": [
+    {
+      "kind": "qfq",
+      "url": "https://finance.sina.com.cn/realstock/company/sh600705/qfq.js",
+      "attempt_number": 1,
+      "requested_at_local": "2026-10-08T10:20:02.254968+08:00",
+      "anonymous": true,
+      "login_or_cookie_sent_by_script": false,
+      "redirect_followed": false,
+      "received_bytes": 1587,
+      "body_file": "sina-qfq-sh600705-response.bin",
+      "sha256": "3298e7e258ae02f165bec6b243a49a5ff3eac86afe6cc5753e0c91d13ff353fc",
+      "http_status": 200,
+      "safe_headers": {
+        "Content-Type": "application/x-javascript",
+        "Content-Length": "1587",
+        "Date": "Thu, 08 Oct 2026 02:19:22 GMT",
+        "ETag": "\"66cb84dc-633\"",
+        "Last-Modified": "Sun, 25 Aug 2024 19:24:12 GMT"
+      },
+      "result": "response_saved"
+    },
+    {
+      "kind": "history",
+      "url": "https://finance.sina.com.cn/realstock/company/sh600705/hisdata_klc2/klc_kl.js",
+      "attempt_number": 2,
+      "requested_at_local": "2026-10-08T10:20:24.713183+08:00",
+      "anonymous": true,
+      "login_or_cookie_sent_by_script": false,
+      "redirect_followed": false,
+      "received_bytes": 66202,
+      "body_file": "sina-history-sh600705-response.bin",
+      "sha256": "240c0a006965632d341f25e42ccc60dae68c11942313f8adfd328eedfa59e486",
+      "http_status": 200,
+      "safe_headers": {
+        "Content-Type": "application/x-javascript",
+        "Content-Length": "50927",
+        "Date": "Thu, 08 Oct 2026 02:20:25 GMT",
+        "ETag": "\"69701f0f-1029a\"",
+        "Last-Modified": "Wed, 21 Jan 2026 00:34:23 GMT"
+      },
+      "result": "response_saved"
+    },
+    {
+      "kind": "qfq-600837",
+      "url": "https://finance.sina.com.cn/realstock/company/sh600837/qfq.js",
+      "attempt_number": 3,
+      "requested_at_local": "2026-10-08T10:27:32.975871+08:00",
+      "anonymous": true,
+      "login_or_cookie_sent_by_script": false,
+      "redirect_followed": false,
+      "received_bytes": 1580,
+      "body_file": "sina-qfq-sh600837-response.bin",
+      "sha256": "65d181c8895fba49ad52cae1a0ec24881eb437ac2f02c2f8680ed755a7c28790",
+      "http_status": 200,
+      "safe_headers": {
+        "Content-Type": "application/x-javascript",
+        "Content-Length": "1580",
+        "Date": "Thu, 08 Oct 2026 02:26:54 GMT",
+        "ETag": "\"69716972-62c\"",
+        "Last-Modified": "Thu, 22 Jan 2026 00:04:02 GMT"
+      },
+      "result": "response_saved"
+    },
+    {
+      "kind": "history-600837",
+      "url": "https://finance.sina.com.cn/realstock/company/sh600837/hisdata_klc2/klc_kl.js",
+      "attempt_number": 4,
+      "requested_at_local": "2026-10-08T10:27:37.821394+08:00",
+      "anonymous": true,
+      "login_or_cookie_sent_by_script": false,
+      "redirect_followed": false,
+      "received_bytes": 84113,
+      "body_file": "sina-history-sh600837-response.bin",
+      "sha256": "cf5898dc39d9765af2399191a4fd94adb79cd3216f42b26942901945a88ffa2f",
+      "http_status": 200,
+      "safe_headers": {
+        "Content-Type": "application/x-javascript",
+        "Content-Length": "64726",
+        "Date": "Thu, 08 Oct 2026 02:27:38 GMT",
+        "ETag": "\"67a3226d-14891\"",
+        "Last-Modified": "Wed, 05 Feb 2025 08:33:49 GMT"
+      },
+      "result": "response_saved"
+    }
+  ],
+  "cumulative_requests_attempted": 4,
+  "cumulative_response_bytes": 153482,
+  "saved_payload_semantics": "requests.iter_content returns the application-decoded response body; stored byte count and SHA describe that body, not a captured network frame. The history Content-Length header (50927) differs from stored decoded body size (66202); no packet bytes or compression header were retained.",
+  "historical_time_boundary": "2026 retrieval and HTTP Date/Last-Modified headers are not evidence that these exact values were available through the original provider in 2022 or that the old cache used this snapshot."
+}

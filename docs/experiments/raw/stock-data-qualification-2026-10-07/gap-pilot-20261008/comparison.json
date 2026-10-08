@@ -1,0 +1,99 @@
+{
+  "schema": "stock-gap-pilot-current-provider-comparison/1.0",
+  "selected_dates": [
+    "2022-01-04",
+    "2022-01-05",
+    "2022-01-06"
+  ],
+  "same_source_compared_dates": [
+    {
+      "date": "2021-12-31",
+      "sina_raw_close": "3.97",
+      "baostock_raw_close": "3.9700",
+      "raw_sources_match": true,
+      "sina_current_factor_date": "2021-08-05",
+      "sina_current_qfq_factor": "1.0674811225892000",
+      "illustrative_current_sina_qfq_close": "3.72",
+      "old_main_original_qfq_close": null
+    },
+    {
+      "date": "2022-01-04",
+      "sina_raw_close": "4",
+      "baostock_raw_close": "4.0000",
+      "raw_sources_match": true,
+      "sina_current_factor_date": "2021-08-05",
+      "sina_current_qfq_factor": "1.0674811225892000",
+      "illustrative_current_sina_qfq_close": "3.75",
+      "old_main_original_qfq_close": null
+    },
+    {
+      "date": "2022-01-05",
+      "sina_raw_close": "3.95",
+      "baostock_raw_close": "3.9500",
+      "raw_sources_match": true,
+      "sina_current_factor_date": "2021-08-05",
+      "sina_current_qfq_factor": "1.0674811225892000",
+      "illustrative_current_sina_qfq_close": "3.70",
+      "old_main_original_qfq_close": null
+    },
+    {
+      "date": "2022-01-06",
+      "sina_raw_close": "3.96",
+      "baostock_raw_close": "3.9600",
+      "raw_sources_match": true,
+      "sina_current_factor_date": "2021-08-05",
+      "sina_current_qfq_factor": "1.0674811225892000",
+      "illustrative_current_sina_qfq_close": "3.71",
+      "old_main_original_qfq_close": null
+    },
+    {
+      "date": "2022-01-07",
+      "sina_raw_close": "3.97",
+      "baostock_raw_close": "3.9700",
+      "raw_sources_match": true,
+      "sina_current_factor_date": "2021-08-05",
+      "sina_current_qfq_factor": "1.0674811225892000",
+      "illustrative_current_sina_qfq_close": "3.72",
+      "old_main_original_qfq_close": null
+    }
+  ],
+  "all_five_sina_vs_saved_baostock_raw_closes_match": true,
+  "all_four_saved_preclose_neighbor_links_match": true,
+  "current_sina_factor_constant_across_window": true,
+  "factor_event_bracketing_window": {
+    "last_at_or_before": "2021-08-05",
+    "next_after": "2022-07-07"
+  },
+  "current_sina_total_factor_rows": 28,
+  "adjustment_method": "installed AKShare 1.18.49 joins dated Sina qfq factors, forward-fills, computes raw close / factor and rounds to 2 decimals",
+  "installed_akshare_version": "1.18.49",
+  "installed_source": {
+    "path": "/opt/homebrew/lib/python3.11/site-packages/akshare/stock/stock_zh_a_sina.py",
+    "bytes": 18375,
+    "sha256": "7b28b6dd61fc3fbdae0cc69f745289ca3869484d39f4c3072359d18655ac49e8"
+  },
+  "response_hashes": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/sina-qfq-sh600705-response.bin",
+      "bytes": 1587,
+      "sha256": "3298e7e258ae02f165bec6b243a49a5ff3eac86afe6cc5753e0c91d13ff353fc"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/sina-history-sh600705-response.bin",
+      "bytes": 66202,
+      "sha256": "240c0a006965632d341f25e42ccc60dae68c11942313f8adfd328eedfa59e486"
+    }
+  ],
+  "saved_baostock_source": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/daily_raw/daily-1-sh-600705.json",
+    "bytes": 16286,
+    "sha256": "a1b2ce5541a4237ba85c87442b3611702fa2c6ad77f2a3726d455fae80a7cc11"
+  },
+  "old_original_600705_qfq_column_present": false,
+  "old_original_sina_factor_snapshot_and_anchor_verified": false,
+  "historically_available_at_2022": null,
+  "official_corporate_action_or_adjustment_basis_verified": false,
+  "actual_price_repair_performed": false,
+  "new_requests": 2,
+  "new_received_bytes": 67789
+}
