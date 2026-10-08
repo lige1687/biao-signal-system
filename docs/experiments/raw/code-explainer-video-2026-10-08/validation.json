@@ -1,0 +1,85 @@
+{
+  "at": "2026-10-08T20:31:22.659973+08:00",
+  "duration_video": 60,
+  "fps": 30,
+  "frame_count": 1800,
+  "4k": [
+    3840,
+    2160
+  ],
+  "preview": [
+    1920,
+    1080
+  ],
+  "codec": "H.264 yuv420p + AAC",
+  "checks": {
+    "full_decode_4k": true,
+    "full_decode_1080": true,
+    "pilot_decode_300_frames": true,
+    "exported_frames_inspected": true,
+    "cue_plan": true,
+    "skill_format": true,
+    "skill_behavior": true,
+    "hygiene": true
+  },
+  "audio": {
+    "integrated_lufs": -15.9,
+    "true_peak_dbfs": -3.7,
+    "narration": false,
+    "music": "Cylinder Six / Chris Zabriskie / CC BY 4.0",
+    "edited_excerpt_seconds": [
+      20,
+      80
+    ],
+    "sfx": "original paper, pen, soft taps; 14 events"
+  },
+  "files": {
+    "pilot-10s.mp4": {
+      "bytes": 1051742,
+      "sha256": "0b18a0531eb9a70f25c5fee23e6d8f3e6ad720344923a10652b81936cd2a2f59"
+    },
+    "trend-history-v6-4k-final.mp4": {
+      "bytes": 5461373,
+      "sha256": "a5010f99ccc47b177b8305938bfcee1cc009a78e939eb7d5839eff5db84aa87d"
+    },
+    "trend-history-v6-1080.mp4": {
+      "bytes": 3829050,
+      "sha256": "d18cd5c2215cdfaa6bb2392eb832ba9df84b439d2a67bd575b4b3bc321d80ed9"
+    },
+    "render.py": {
+      "bytes": 16560,
+      "sha256": "eba647cd11c6bfef4642eef0945f3a45d0d8f1067fcdd1caf3144d2a611332c4"
+    },
+    "cue-plan.json": {
+      "bytes": 3117,
+      "sha256": "d843a2733e37d08dc26294cbd11425645cf19f9f36cb144de9c987d14121e29f"
+    }
+  },
+  "browser_playback": {
+    "4k": {
+      "start": 0.239224,
+      "intermediate": 51.45209,
+      "end": 60.01,
+      "ended": true,
+      "ready_state": 4,
+      "error": null
+    },
+    "1080": {
+      "width": 1920,
+      "height": 1080,
+      "duration": 60.01,
+      "start": 0.006902,
+      "observed": 8.041856,
+      "ready_state": 4,
+      "error": null
+    },
+    "extra_progress_control": "AX/browser automation did not move custom range consistently; redundant custom control removed, native video controls retained",
+    "page_recheck": "reload: 4K3840x2160,60.01s,error null, native video controls, marked deliverable"
+  },
+  "limits": [
+    "ffprobe absent; full FFmpeg decode and browser metadata used",
+    "sampled frames/transcription do not establish complete source audiovisual review",
+    "user subjective quality acceptance pending"
+  ],
+  "pilot_change": "Full version adds a 0.32s page edge transition at boundaries after pilot"
+}
