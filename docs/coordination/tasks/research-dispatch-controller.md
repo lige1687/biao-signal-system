@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "e2c225e807df38d97f3fc4ce526edadb1b9bce74",
-  "checked_at": "2026-10-08T20:53:51.220539+08:00",
+  "checked_coordination_sha": "f928b75aa327da425a2f85d4ad2685a5945ee650",
+  "checked_at": "2026-10-08T21:04:59.476483+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -464,7 +464,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
       "executor": "/root/settlement_implementation_v1",
       "status": "active",
-      "phase": "v1_not_accepted_v2_repair_ready",
+      "phase": "v2_limited_accepted_archive_scope",
       "write_paths": [
         "docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/"
       ],
@@ -475,15 +475,26 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "validation": "410.50 to0.10; firstrefusal then205.30; sell200+174.82 then300buy leaves69.52; replay/identity/cash/calendar/action refusals; independent review before acceptance",
       "model": "gpt-6.1-sol",
       "reasoning_effort": "medium",
-      "executor_status": "completed_waiting_bounded_repair_dispatch",
+      "executor_status": "completed_v2",
       "reviewer": "/root/settlement_scope_review",
-      "review_contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-independent-review-contract-v1.json",
+      "review_contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-independent-review-contract-v2.json",
       "review_write_paths": [],
       "source_sha256": "81be6d159af70090352f33af815b740a5c730234c1c7c80af5e022c3f6b3d61d",
-      "author_check": "tests04 twelvepassed, notcontrolleracceptance; fixture/loadformat/self-retryfailure preserved",
-      "review_status": "completed_two_classes_findings",
+      "author_check": "v2 targeted8 groups; old34 hashesunchanged; no oldsuite",
+      "review_status": "completed_limited_accepted",
       "review_receipt": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-independent-review-v1.json",
-      "repair_contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-repair-contract-v2.json"
+      "repair_contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-repair-contract-v2.json",
+      "failed_v1_checkpoint": "7f23610f60d2d421ec578a8c02b3abfc0db9bd40",
+      "failed_v1_remote_files": 40,
+      "v2_source_sha256": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba",
+      "acceptance": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/order-ledger-adapter-controller-acceptance-v2.json",
+      "controller_only_write_paths": [
+        "docs/experiments/weekly-portfolio-order-ledger-adapter-2026-10-08.md",
+        "docs/experiments/registry.json:exact own adapter report entry",
+        "docs/experiments/INDEX.md:own navigationline",
+        "own rootgoal receipts/progress",
+        "isolated codex/research-direct exact46raw archive"
+      ]
     }
   ],
   "final_acceptance": {
@@ -1150,7 +1161,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "remaining": "Guard covers integrated audio processing only, not other research/app writes or instant capacity loss. Remeasure space before larger jobs; user experience/future schedule reliability unverified. Research source gaps unchanged; no deletion/outside-repo authority borrowed."
     }
   ],
-  "shared_registration_scope_released": true,
+  "shared_registration_scope_released": false,
   "direct_next_actions": [
     "Dispatch exact39 synthetic dependency publication to originaltheoryowner; verify actualstart.",
     "Accept native preflight implementation when delivered with independent rejectionchecks.",
@@ -1158,9 +1169,10 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
   ],
   "read_task_ids": [
     "research-dispatch-controller",
+    "mac-local-storage-cleanup",
     "trend-trading-video"
   ],
-  "conflict_decision": "Video v7 only ownmedia/skill, no registry/INDEX; adapter sameunique raw repair by same Sol. Fourv1 sources andfailures immutable; review readonlyfinished.",
+  "conflict_decision": "Storage owner newrouting and videoV7 independent; neitherclaims registry/INDEX. Rootclaims only one acceptedadapterreport row/INDEXline; authorfinished frozenraw. Prior index ENOSPC retained; small acceptance file writeandfetch succeeded, capacitychanged; normalexactindexwrite retried once.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -2306,3 +2318,16 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 
 - checked_coordination_sha=e2c225e807df38d97f3fc4ce526edadb1b9bce74；video新V7仅媒体/skill，不占研究路径/登记。适配金额三路径独审通过，但整体不接受：原两单拒绝后换下一开盘可追单（余额200.30），决策只换名字可重开（余额0.10）；到账374.82快照能假称不含卖款，导致后续预算400/限价1.315，账本虽最终拒绝380.375成本，适配资金依据仍错。
 - repair-contract-v2 dry_run ready：同原Sol、同新raw，先保留冻结v1与3真实复现，限定单原决策内存锁及与方向/产品绑定的一次尝试，不因开盘/名字重置；有funding_receipt须同账本已释放且快照明确含同回执。原spec/planner/ledger四SHA不改，卖后不同方向合法后续买单保持。0预占/部分成交/恢复/市场/旧suite。此刻ready，推回后实际派修。
+
+## 失败版本远端留存、v2实际交付与针对独审 2026-10-08T21:01:46.776094+08:00
+
+- checked_coordination_sha=f928b75aa327da425a2f85d4ad2685a5945ee650；失败v1的34raw/242095B、34文件清单、四中控合同/回执和阶段进度，共40文件已在codex/research-direct-20261008@7f23610f60d2d421ec578a8c02b3abfc0db9bd40逐字远端读回，明确未通过，无registry新增或改绿。
+- 同原Sol已复现3旧绕过并交v2新源码adapter3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba，原34全hash不变；8针对组通过、三正常余额保持。Astra只读原3反例及受影响合法路径已实际followup；两新源固定root核同，作者已停止写，状态仍待独审，不重跑原全套。
+- mac-local-storage-cleanup新owner独立做后续输出路由/授权清理，原进程/冻结目录保留。仅compact只读watch：turn01a11b93-9b09-7273-abac-e59c4a80f4a7，cursor97038648-8723-4658-99dd-c33457771744:1，inProgress/实际tool完成标记。root不重复实现、不借其仓外权限；新路由未交付不称目标8完成。磁盘末报约166MB，仍实测/写回后判定，不擅删。
+
+## 适配v2独审有限接受与正式归档准确范围 2026-10-08T21:04:59.476483+08:00
+
+- checked_coordination_sha=f928b75aa327da425a2f85d4ad2685a5945ee650；Astra独立3原反例全部在ledger调用前拒绝、调用0次、原状态不变；合法两买0.10/10.40费用、首拒第二205.30、卖款明确释放再买69.52/10.48费用及重放0次保持。原34字节/hash不变，v2两源固定；中控接受凭据SHA2ca9fa7e4b22f4daa97c7adc863f4ec8c3c37e7c694b3ba5fa74176bd2e34697已本地实际写回。
+- 刚才git add自身协调记录因3.8MB索引Errno28失败，未commit/push、无残留lock；记录在acceptance，不删除锁/资料，不强推。其后容量从138031104变化到188989440/184197120B，小验收2605B实际写回和fetch成功，此次仅重试正常准确索引写；若失败则共享归档仍不开工。
+- 推回成功后root准确新增weekly-portfolio-order-ledger-adapter-2026-10-08.md、主/既有隔离registry各仅该报告一条及INDEX一行；原46raw共362473B只读复制，34旧版本已7f23610f40文件远端保存。root自己的验收/发布回执和work-progress随成果分支；不写其他登记/原源码/仓外/数据库。原13报告不重做，归档后共享窗口立即释放。
+- 只接受单原决策、单人工账户、串行整笔适配；新周/部分成交/预占/恢复/并发/跨行动/完整政策/真实市场未通过，仍不运行真实标签。
