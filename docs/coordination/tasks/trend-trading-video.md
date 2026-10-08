@@ -1,3 +1,19 @@
+## V8 completed
+
+- task-id: trend-trading-video；2026-10-08T22:16:18.781859+08:00；checked_coordination_sha: 2a3380bcd9b41a4dfa70964625bc1548a45c662e；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed：本次有界制作/方法研究完成，主观观感待用户验收；scope_released=true，释放本轮registry/INDEX与自身写入范围。冲突决定：中控最新仍不占本项，仅自身单报告登记。
+- 成果codex/trend-chronicle-v8-20261008@27203d2ad1ad4de8727130492f15e882c2ad9133，27个准确路径逐字远端读回；无合并/部署。媒体、素材、依赖仅本机，远端保存源码/时间表/许可/方法/验证。
+- 60秒/1800帧4K与1080均完整解码，实际八处最终帧和10秒连续小样检查。1080浏览器从0实播至60.011秒ended无error；4K实播38.186秒、3840×2160、readyState4无error。品牌文字检查与拒绝反例通过，画面未见品牌；无旁白，无真实行情。音量−17.1LUFS/真峰−1.7dBFS，不冒称完整主观听审。
+- 历史内容4站40秒→6站53秒，系统介绍8秒→0；道氏思想、利弗莫尔、唐奇安、机械执行、海龟实验、2012跨市场研究。新增史实绑定Seykota本人问答及AQR原论文；思想线索不称直接师承。
+- 用户所有后续视频不出现LEI/LeiSignal元素的规则已写入skill，含公开文字检查器和信息密度方法/自编prompt。教程仅检查两段12秒连续帧与已有转写，课程只读大纲；作者完整prompt/音色未确认，观众效果未测。
+- 报告docs/experiments/video-information-density-2026-10-08.md，SHA 5f5702f3595195c95cc9f14f3c89604ba8431c4027947b00109b496e3451dd6c；主registry636→637、隔离318→319仅本项，原条目及元数据不变，INDEX只一行，归置通过。
+- 本机v8/trend-chronicle-v8-4k.mp4 SHA 1ab4eb5db414e3249215a40e4e024c333f196642bceecb91a0a7db833ad1ddaa；1080 SHA f320bca40b13247d0188ceb45c7bb900db0fe7e27453eecfff74b1da7e188de8。交付http://127.0.0.1:8773/v8/，4K/1080下载、分段播放、可编辑时间线8775。旧片保留，v7入口指向新版。
+- 收尾记录写入两次因空间失败，未改成完成。用户明确许可仅删除v7/npm-cache，实际删除431MB下载缓存后恢复563MiB；视频/素材/源码/已装依赖均保留。失败、恢复、许可范围在制作记录。
+- 周额度43%→45%，账号共享显示变化2个百分点，单任务精确占用未知；无付费服务/子agent。当前版本供用户看观感，不自行启动无限优化或新增研究。
+
+
+---
+
 ## V8 registry-window
 
 - task-id: trend-trading-video；2026-10-08T22:06:37.085709+08:00；checked_coordination_sha: 2187d8126d95755a2009bc6bd392d7569a48ad23；已读 COORDINATION.md、自身与 research-dispatch-controller。
