@@ -2349,3 +2349,11 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - root 唯一允许新增小凭据为 docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/output-routing-controller-review.json，并更新自己的 thread-state/工作进度/本协调记录；其他文件无写权。发现真实缺陷再交原 owner 有界修复，不自行改其源码。
 - 实测内盘1568157696B，外盘身份与登记四资源可读；新入口要求的5GiB内盘余量不满足，不降低阈值、不启动新实验。检查/独审运行中，未标通过。
 - 视频 V7 原 owner 已完成交付；root 核两成片 SHA 及远端 ae6118495e326262f511b834c7f3e88ad2a2ca15 的验证/制作/播放页三文件一致，技术交付可定位，观感仍待用户，不重复渲染或通知。
+
+## Goal8 参数缩写绕过：原负责人有界修复 2026-10-08T21:57:13.903229+08:00
+
+- checked_coordination_sha: a383774bcfc4a66716e8f0620c61c31ab254c93b；已读本任务/mac-local-storage-cleanup/trend-trading-video；原owner已交付并释放本轮实现范围，无其他人占同路径。root不接管源码。
+- Astra独审固定428dd196完成：设备/容量/路径重放/仅停止本次模拟子进程等检查通过；发现完整参数名过滤可被缩写穿过。root只提取真实scripts/run_factor_evidence_reliability.py的_parse_args复核，--repo-root=/different拒绝，--repo-r=/different被启动器接受且真实解析器得到repo_root=/different。0真实研究/结果写入/进程信号，不声称已发生错盘写入。
+- 必需修复交回01a1155d-b204-7232-a993-4c9e0567af59：仅新output_storage.py及其两测试、必要精确说明/自己的进度和协调；不改10个冻结原CLI、旧合同、政策阈值、registry/INDEX或任何清理目标。原owner先核本记录并登记实际范围后动手。当前为待派发，不冒称运行。
+- 验收：实际登记入口对替代根目录、显式输出、只读模式的有关缩写和等号/分隔值均在建目录/子进程前拒绝；合法完整参数及既有输出路由保持；保留旧反例，针对回归及必要原25检查，无市场重跑，真实低空间不降低5GiB要求。不要为修补另造CLI平台或改变科研语义。
+- root只更新已有output-routing-controller-review.json、thread-state、自己的工作进度/协调。V7已按准确指纹核交付；V8已由原用户新要求接续，仍归videoowner，root不占其文件/登记。
