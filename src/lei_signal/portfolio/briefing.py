@@ -746,6 +746,9 @@ def main() -> int:
             }
         )
         packet = refreshed
+    from lei_signal.integrations.storage_health import collect_storage_health
+
+    packet["storage_health"] = collect_storage_health()
     args.output_dir.mkdir(parents=True, exist_ok=True)
     output = (
         args.output_dir

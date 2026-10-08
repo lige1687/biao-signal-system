@@ -24,6 +24,8 @@ from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_opener
 from zoneinfo import ZoneInfo
 
+from lei_signal.integrations.storage_health import collect_storage_health
+
 _MAX_HTTP_BYTES = 4 * 1024 * 1024
 _MAX_PACKET_BYTES = 8 * 1024 * 1024
 _FUND_CODE = re.compile(r"^[0-9]{6}$")
@@ -280,6 +282,30 @@ class SystemContext:
             errors["trade_ledger"] = "trade ledger unavailable in packet"
         return errors
 
+    def storage(self) -> dict[str, Any]:
+        """Read fixed local disk identities and capacity without calling the API."""
+        health = collect_storage_health(self.repo_root)
+        response = self._result(
+            "storage",
+            health,
+            sources={
+                "storage": {
+                    "retrieved_at": health.get("checked_at"),
+                    "available": health.get("severity") != "unknown",
+                    "scope": "本机固定存储策略与容量，只读检查",
+                }
+            },
+            limitations=[
+                "这是检查时的容量，不能保证之后仍有空间；未控制其他任务的写入。",
+                "只对本日报新增音频工作执行预检，不自动删除资料或修改交易记录。",
+            ],
+            errors={"storage": health.get("reasons")}
+            if health.get("severity") == "unknown"
+            else {},
+        )
+        response["available"] = health.get("severity") != "unknown"
+        return response
+
     def overview(self, query: str = "", limit: int = 10) -> dict[str, Any]:
         if not isinstance(query, str) or len(query) > 160 or "\x00" in query:
             return self._result(
@@ -401,6 +427,7 @@ class SystemContext:
             "system_upgrades": upgrade_summary,
             "briefing_packet_at": packet.get("generated_at") if packet else None,
             "briefing_slot": packet.get("slot") if packet else None,
+            "storage_health": collect_storage_health(self.repo_root),
         }
         response = self._result(
             "overview",
@@ -970,6 +997,7 @@ class SystemContext:
                 "trade_ledger",
                 "news_coverage",
                 "video_content_coverage",
+                "storage_health",
                 "blogger_window",
                 "source_status",
                 "user_stated_context",
@@ -1012,6 +1040,7 @@ def main(argv: list[str] | None = None) -> int:
         required=True,
         choices=(
             "overview",
+            "storage",
             "portfolio",
             "fundamentals",
             "news",
@@ -1045,6 +1074,7 @@ def main(argv: list[str] | None = None) -> int:
     context = SystemContext()
     call = {
         "overview": lambda: context.overview(args.query, args.limit),
+        "storage": context.storage,
         "portfolio": lambda: context.portfolio(args.code),
         "fundamentals": lambda: context.fundamentals(args.market, args.section),
         "news": lambda: context.news(args.code, args.limit),

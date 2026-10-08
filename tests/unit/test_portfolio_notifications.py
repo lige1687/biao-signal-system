@@ -141,6 +141,40 @@ class NotificationTests(unittest.TestCase):
         p["market_background"]["cn"]["data"]["items"][0]["quality_status"] = "missing"
         self.assertTrue(compare(p, old)[0]["should_notify"])
 
+    def test_storage_warns_once_and_ignores_free_bytes_until_status_changes(self):
+        p = packet()
+        _, old = compare(p)
+        p["storage_health"] = {
+            "checked_at": p["generated_at"],
+            "severity": "warning",
+            "internal": {"status": "warning", "capacity": {"free_bytes": 8 * 1024**3}},
+            "external": {"status": "ok", "capacity": {"free_bytes": 600 * 1024**3}},
+        }
+        report, warning = compare(p, old)
+        self.assertEqual([e["fact_key"] for e in report["events"]], ["storage:internal"])
+        p["storage_health"]["checked_at"] = "2026-10-08T17:10:00+08:00"
+        p["storage_health"]["internal"]["capacity"]["free_bytes"] = 6 * 1024**3
+        self.assertFalse(compare(p, warning)[0]["should_notify"])
+        p["storage_health"]["external"]["status"] = "unavailable"
+        report, unavailable = compare(p, warning)
+        self.assertEqual([e["fact_key"] for e in report["events"]], ["storage:external"])
+        self.assertFalse(compare(p, unavailable)[0]["should_notify"])
+        p["storage_health"]["external"]["status"] = "ok"
+        report, recovered = compare(p, unavailable)
+        self.assertEqual(report["events"][0]["after"]["value"], "ok")
+        p.pop("storage_health")
+        report, legacy = compare(p, recovered)
+        self.assertFalse(report["should_notify"])
+        self.assertEqual(
+            legacy["facts"]["storage:external"], recovered["facts"]["storage:external"]
+        )
+
+    def test_initial_storage_problem_is_baselined_with_other_known_facts(self):
+        p = packet()
+        p["storage_health"] = {"internal": {"status": "critical"}, "external": {"status": "ok"}}
+        report, _ = compare(p)
+        self.assertFalse(report["should_notify"])
+
     def test_notification_titles_use_display_names_and_unknown_is_explicit(self):
         p = packet()
         p["holdings"][0]["display_name"] = "代码对应基金"

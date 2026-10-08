@@ -47,6 +47,25 @@ def extract_facts(packet: dict) -> dict:
         }.get(name, "系统")
         add(f"source:{name}", "system", f"{label}资料读取状态变化", bool(source.get("ok")), source)
 
+    # Free bytes/time are evidence only. Warn on stable capacity/volume status
+    # transitions, not on every write. Absent old-packet fields are not recovery.
+    health = packet.get("storage_health") or {}
+    for name, label in (("internal", "内置盘"), ("external", "外接盘")):
+        disk = health.get(name) or {}
+        if disk.get("status"):
+            add(
+                f"storage:{name}",
+                "system",
+                f"{label}运行存储状态变化",
+                disk["status"],
+                {
+                    "checked_at": health.get("checked_at"),
+                    "reasons": health.get("reasons"),
+                    "disk": disk,
+                    "note": "容量检查不修改交易记录，不代表全系统写入已受控。",
+                },
+            )
+
     # Source-authored quality status only; a date gap alone is not an outage.
     for market, source in packet.get("market_background", {}).items():
         if not source.get("ok"):

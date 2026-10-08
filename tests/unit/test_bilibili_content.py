@@ -75,6 +75,7 @@ def _offline(monkeypatch, *, view=None, cdn="https://upos-sz-mirrorcos.bilivideo
     monkeypatch.setattr(video, "_download_audio", download)
     monkeypatch.setattr(video, "_run_asr", asr)
     monkeypatch.setattr(video, "_model_hash", lambda: "a" * 64)
+    monkeypatch.setattr(video, "preflight_video_storage", lambda *args, **kwargs: {"allowed": True})
     return calls
 
 
@@ -214,4 +215,67 @@ def test_unverifiable_target_date_returns_original_items_without_fetch(
     assert result["items"] == [original]
     assert result["results"] == []
     assert "target_date unavailable" in result["errors"][0]["reason"]
+    assert calls == {"fetch": 0, "download": 0, "asr": 0}
+
+
+@pytest.mark.parametrize("refresh", [False, True])
+def test_platform_body_preserves_basis_without_audio_work(tmp_path, monkeypatch, refresh):
+    calls = _offline(monkeypatch)
+    original = dict(
+        _item(), content="已有平台字幕原文", content_basis="已保存正文或字幕，仍需核范围"
+    )
+    result = video.collect_video_content([original], AUTHORS, DATE, tmp_path, refresh=refresh)
+    assert result["items"] == [original]
+    assert result["results"][0]["status"] == "source_text"
+    assert not result["errors"]
+    assert calls == {"fetch": 0, "download": 0, "asr": 0}
+    assert not tmp_path.exists() or not list(tmp_path.iterdir())
+
+
+def test_storage_rejection_precedes_network_and_directory_creation(tmp_path, monkeypatch):
+    calls = _offline(monkeypatch)
+
+    def reject(*args, **kwargs):
+        raise video.VideoStorageRejected(["外盘未挂载"], {"severity": "critical"})
+
+    monkeypatch.setattr(video, "preflight_video_storage", reject)
+    result = video.collect_video_content([_item()], AUTHORS, DATE, tmp_path, refresh=True)
+    assert "外盘未挂载" in result["errors"][0]["reason"]
+    assert calls == {"fetch": 0, "download": 0, "asr": 0}
+    assert not (tmp_path / BVID).exists()
+    assert not (tmp_path / "audio").exists()
+
+
+def test_cached_video_read_survives_new_work_storage_rejection(tmp_path, monkeypatch):
+    (tmp_path / "audio").mkdir()
+    calls = _offline(monkeypatch)
+    video.collect_video_content([_item()], AUTHORS, DATE, tmp_path, refresh=True)
+
+    def reject(*args, **kwargs):
+        raise video.VideoStorageRejected(["内置盘不足"], {"severity": "critical"})
+
+    monkeypatch.setattr(video, "preflight_video_storage", reject)
+    result = video.collect_video_content([_item()], AUTHORS, DATE, tmp_path, refresh=True)
+    assert result["results"][0]["status"] == "cached"
+    assert not result["errors"]
+    assert calls == {"fetch": 2, "download": 1, "asr": 1}
+
+
+def test_invalid_cache_backup_also_waits_for_storage_preflight(tmp_path, monkeypatch):
+    calls = _offline(monkeypatch)
+    directory = tmp_path / BVID
+    directory.mkdir()
+    path = directory / "receipt.json"
+    original = b'{"invalid":true}'
+    path.write_bytes(original)
+
+    def reject(*args, **kwargs):
+        raise video.VideoStorageRejected(["空间未知"], {"severity": "unknown"})
+
+    monkeypatch.setattr(video, "preflight_video_storage", reject)
+    result = video.collect_video_content([_item()], AUTHORS, DATE, tmp_path, refresh=True)
+    assert any("invalid existing cache" in row["reason"] for row in result["errors"])
+    assert any("空间未知" in row["reason"] for row in result["errors"])
+    assert path.read_bytes() == original
+    assert list(directory.iterdir()) == [path]
     assert calls == {"fetch": 0, "download": 0, "asr": 0}

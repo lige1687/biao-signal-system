@@ -233,6 +233,41 @@ def test_source_failure_is_visible_without_suppressing_other_sources(tmp_path: P
     assert result["sources"]["workspace"]["retrieved_at"]
 
 
+def test_storage_query_does_not_depend_on_market_api_and_keeps_unknown(tmp_path: Path) -> None:
+    def no_fetch(_path: str):
+        raise AssertionError("storage query must not call market/account API")
+
+    result = SystemContext(tmp_path, fetch=no_fetch).storage()
+    assert result["view"] == "storage"
+    assert result["available"] is False
+    assert result["data"]["severity"] == "unknown"
+    assert result["data"]["external"]["status"] == "unknown"
+    assert datetime.fromisoformat(result["data"]["checked_at"]).tzinfo is not None
+
+
+def test_storage_snapshot_is_present_in_overview_and_saved_brief(
+    tmp_path: Path, monkeypatch
+) -> None:
+    from lei_signal.integrations import gpt_context
+
+    health = {
+        "severity": "warning",
+        "checked_at": "2026-10-08T17:00:00+08:00",
+        "internal": {"status": "warning"},
+        "external": {"status": "ok"},
+    }
+    monkeypatch.setattr(gpt_context, "collect_storage_health", lambda root: health)
+    _packet(tmp_path)
+    p = next((tmp_path / "data/cache/portfolio-chat-briefing").glob("packet-*.json"))
+    packet_value = json.loads(p.read_text())
+    packet_value["storage_health"] = health
+    p.write_text(json.dumps(packet_value))
+    context = SystemContext(tmp_path, fetch=_fake)
+    assert context.overview()["data"]["storage_health"] == health
+    assert context.latest_brief()["data"]["storage_health"] == health
+    assert context.storage()["available"] is True
+
+
 def test_overview_bounds_upgrade_progress_and_keeps_ledger_date(tmp_path: Path) -> None:
     goals = [
         {

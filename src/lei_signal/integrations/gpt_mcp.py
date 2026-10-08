@@ -90,6 +90,11 @@ def create_server(
         )
 
     @server.tool(annotations=read_only_local, structured_output=True)
+    def storage() -> dict[str, Any]:
+        """Read fixed local volume identity and free space; never clean up or call the API."""
+        return context.storage()
+
+    @server.tool(annotations=read_only_local, structured_output=True)
     def portfolio(fund_code: str | None = None) -> dict[str, Any]:
         """Read the portfolio context, optionally for one fund identifier."""
         return context.portfolio(fund_code=_fund_code(fund_code))

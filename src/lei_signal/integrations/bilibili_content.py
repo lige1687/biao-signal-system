@@ -18,6 +18,8 @@ from urllib.parse import urlencode, urlsplit
 from urllib.request import HTTPRedirectHandler, HTTPSHandler, ProxyHandler, Request, build_opener
 from zoneinfo import ZoneInfo
 
+from lei_signal.integrations.storage_health import VideoStorageRejected, preflight_video_storage
+
 _VIDEO_URL = re.compile(r"https://www\.bilibili\.com/video/(BV[A-Za-z0-9]{10})/?\Z")
 _BVID = re.compile(r"BV[A-Za-z0-9]{10}\Z")
 _CDN_SUFFIXES = (".bilivideo.com", ".bilivideo.cn", ".akamaized.net")
@@ -94,6 +96,7 @@ def _fetch_json(url: str) -> dict:
 
 def _download_audio(url: str, destination: Path) -> str:
     _validate_cdn(url)
+    preflight_video_storage(destination.parent, _MODEL)
     request = Request(
         url, headers={"User-Agent": "Mozilla/5.0", "Referer": "https://www.bilibili.com/"}
     )
@@ -122,6 +125,7 @@ def _download_audio(url: str, destination: Path) -> str:
 
 
 def _run_asr(audio: Path, output_dir: Path, bvid: str) -> dict:
+    preflight_video_storage(audio.parent, _MODEL)
     binary = str(_ASR) if _ASR.is_file() else shutil.which("mlx_whisper")
     weights = _MODEL / "weights.npz"
     if not binary or not weights.is_file():
@@ -284,6 +288,9 @@ def _cached(path: Path, bvid: str, target_date: str, mids: set[int]) -> dict:
 
 
 def _fresh(item: dict, bvid: str, target_date: str, mids: set[int], directory: Path) -> dict:
+    # Check before metadata work or any mkdir; an absent external disk must not
+    # silently turn the logical audio link into a new internal directory.
+    preflight_video_storage(directory / "audio", _MODEL)
     view_url = "https://api.bilibili.com/x/web-interface/view?" + urlencode({"bvid": bvid})
     metadata = _qualified(_fetch_json(view_url), bvid, target_date, mids)
     play_url = "https://api.bilibili.com/x/player/playurl?" + urlencode(
@@ -365,6 +372,20 @@ def collect_video_content(
         url = item.get("url")
         try:
             bvid = _validate_url(url)
+            if (
+                isinstance(item.get("content"), str)
+                and item["content"].strip()
+                and not item.get("video_content")
+            ):
+                original = dict(item)
+                original["content_basis"] = item.get("content_basis") or (
+                    "来源已保存正文或字幕，完整范围尚未核实"
+                )
+                result["items"].append(original)
+                result["results"].append(
+                    {"bvid": bvid, "status": "source_text", "basis": original["content_basis"]}
+                )
+                continue
             receipt_path = directory / bvid / "receipt.json"
             receipt = None
             if receipt_path.is_file():
@@ -377,6 +398,10 @@ def collect_video_content(
                         "url": str(url)[:200],
                         "reason": f"invalid existing cache: {str(exc)[:250]}",
                     }
+                    result["errors"].append(evidence)
+                    # Keep the bad receipt unchanged if new writes are blocked.
+                    # Even the evidence backup must wait for storage approval.
+                    preflight_video_storage(directory / "audio", _MODEL)
                     try:
                         invalid_bytes = receipt_path.read_bytes()
                         invalid_sha = _sha_bytes(invalid_bytes)
@@ -390,7 +415,6 @@ def collect_video_content(
                             evidence["observed_audio_sha256"] = _sha_bytes(audio_path.read_bytes())
                     except OSError:
                         evidence["evidence_note"] = "invalid cache observed; backup unavailable"
-                    result["errors"].append(evidence)
             if receipt is not None:
                 status = "cached"
             elif refresh:
@@ -423,6 +447,7 @@ def collect_video_content(
             )
         except (
             VideoContentError,
+            VideoStorageRejected,
             OSError,
             ValueError,
             KeyError,
@@ -430,6 +455,10 @@ def collect_video_content(
         ) as exc:
             result["errors"].append({"url": str(url or "")[:200], "reason": str(exc)[:300]})
             original = dict(item)
-            original["content_basis"] = "仅标题简介/音频未读到；不能概括完整视频内容"
+            original["content_basis"] = (
+                item.get("content_basis") or "来源已保存正文或字幕，完整范围尚未核实"
+                if item.get("content")
+                else "仅标题简介/音频未读到；不能概括完整视频内容"
+            )
             result["items"].append(original)
     return result

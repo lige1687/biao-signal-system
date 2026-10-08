@@ -69,6 +69,7 @@ def test_real_stdio_roundtrip_and_read_only_boundary() -> None:
                 tools = (await session.list_tools()).tools
                 expected = {
                     "overview",
+                    "storage",
                     "portfolio",
                     "fundamentals",
                     "news",
@@ -103,6 +104,14 @@ def test_real_stdio_roundtrip_and_read_only_boundary() -> None:
                     tool.annotations.openWorldHint is False
                     for tool in tools
                     if tool.name not in {"overview", "fundamentals", "analysis"}
+                )
+                storage_result = _result_data(await session.call_tool("storage", {}))
+                assert storage_result["view"] == "storage"
+                assert (
+                    next(tool for tool in tools if tool.name == "storage").inputSchema.get(
+                        "properties", {}
+                    )
+                    == {}
                 )
 
                 overview = _result_data(
@@ -269,7 +278,7 @@ create_server(Context(), allow_confirmed_records=True,
             init = await session.initialize()
             assert init.serverInfo.name == "lei-system"
             tools = (await session.list_tools()).tools
-            assert len(tools) == 23
+            assert len(tools) == 24
             writes = {t.name for t in tools if not t.annotations.readOnlyHint}
             assert writes == {
                 "record_confirm",

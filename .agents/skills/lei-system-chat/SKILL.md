@@ -17,7 +17,7 @@ description: 在 LeiSignal 项目中通过自然语言查询持仓、计划、�
 PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view overview
 ```
 
-按问题再选择 `portfolio`、`fundamentals`、`news`、`plans`、`trades`、`factors`、
+按问题再选择 `storage`、`portfolio`、`fundamentals`、`news`、`plans`、`trades`、`factors`、
 `research-search`、`research-report`、`latest-brief`、`opportunities`、`analysis` 或 `daily-review`。具体参数以 `--help` 为准；例如查询
 基金时传 `--code 013403`，查询研究时传 `--query`，读取正文时传目录返回的 `--name`。
 若 MCP 已在当前客户端注册，优先调用对应工具；SDK 安装与手机/网页激活见
@@ -61,6 +61,11 @@ PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view overview
 本机 CLI 可用、MCP 客户端往返、ChatGPT 授权连接、定时触发、报告已发、手机收到
 是不同事实，分别核验。不会因为本地测试通过就宣称手机/网页接通。
 外部连接仅在用户批准明确的数据与目的后启用；不把本机端口公开作为默认办法。
+
+存储问题优先用 `storage` 固定本机只读查询，不依赖行情API，不运行全盘删除。
+参照 [运行存储管理](../../../../docs/ops/codex-storage-management.md)：保留容量检查时间，
+只在内外盘状态变化时提醒。外盘身份或容量不符时不补新音频；能验证的缓存继续读，
+缺资料明确说明。旧研究存储保护未验收，本入口不控制其他进程的写入。
 
 ## 已确认记录与场景
 

@@ -306,6 +306,10 @@ def render_brief(packet: dict) -> str:
                         f"  开头原话摘录（{int(stamp) // 60:02d}:{int(stamp) % 60:02d}）："
                         f"{_text(first.get('text'))[:240]}"
                     )
+            elif item.get("content"):
+                basis = _text(item.get("content_basis"), "来源已保存正文或字幕，完整范围尚未核实")
+                lines.append(f"  内容依据：{basis}。")
+                lines.append(f"  已保存文字摘录：{_text(item['content'])[:240]}")
             else:
                 lines.append("  内容依据：仅标题或简介，未读到完整视频内容。")
     else:
@@ -332,6 +336,32 @@ def render_brief(packet: dict) -> str:
         lines.append("新闻源返回的列表可能不完整，当前条数不能代表全部消息。")
     if packet.get("unqualified_news"):
         lines.append(f"另有 {len(packet['unqualified_news'])} 条新闻因发布时间无法核实而未纳入。")
+
+    health = packet.get("storage_health") or {}
+    if health:
+        lines.extend(["", "## 运行存储", ""])
+        disk_labels = {
+            "ok": "正常",
+            "warning": "空间偏低",
+            "critical": "空间严重不足",
+            "unknown": "未核实",
+            "low_space": "空间不足",
+            "unavailable": "未挂载",
+            "identity_mismatch": "设备身份不符",
+        }
+        for key, label in (("internal", "内置盘"), ("external", "外接盘")):
+            disk = health.get(key) or {}
+            free = (disk.get("capacity") or {}).get("free_bytes")
+            capacity = (
+                f"，可用 {free / (1024**3):.1f} GiB" if isinstance(free, (int, float)) else ""
+            )
+            lines.append(f"- {label}：{disk_labels.get(disk.get('status'), '未核实')}{capacity}。")
+        lines.append(f"检查时间：{_date_part(health.get('checked_at'))}；容量随其他任务写入变化。")
+        if health.get("reasons"):
+            lines.append(
+                "需要留意：" + "；".join(_text(reason) for reason in health["reasons"]) + "。"
+            )
+        lines.append("新音频工作先核外盘身份和余量；条件不符时暂停补音频，仍汇报能核实的持仓资料。")
 
     pending = _pending_groups(packet)
     lines.extend(["", "## 待补资料", ""])

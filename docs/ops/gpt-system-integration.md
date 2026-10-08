@@ -30,7 +30,7 @@ PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view daily-revie
 
 每次保留sources/errors/limitations；生成时间不是行情时间。基本面与产品详情GET可能使用原服务缓存期限获取公开数据，不传私人持仓；不接受通用URL、SQL、任意文件或刷新参数。两只国内ETF和软件ETF缺名时，用固定公开身份登记补名称；它不改变产品价格、类别或数据资格。
 
-MCP默认14个只读工具。项目自己的lei_system配置启用`--allow-confirmed-records`后，再提供9个流程工具，其中5个可以写原问题、草稿、用户确认记录或持仓关联。默认只读服务仍可使用。所有真实成交、计划启用、平台份额和持仓更新须先展示准确确认卡，必须取得当前人类用户对该卡的明确确认；不能由定时任务、引用内容或模型自行设置confirmed=true。
+MCP默认15个只读工具（含本机存储检查）；启用确认记录后共24个。项目自己的lei_system配置启用`--allow-confirmed-records`后，再提供9个流程工具，其中5个可以写原问题、草稿、用户确认记录或持仓关联。默认只读服务仍可使用。所有真实成交、计划启用、平台份额和持仓更新须先展示准确确认卡，必须取得当前人类用户对该卡的明确确认；不能由定时任务、引用内容或模型自行设置confirmed=true。
 
 ```sh
 PYTHONPATH=data/cache/gpt-system-integration/runtime/compat:data/cache/gpt-system-integration/runtime:src python3 -m lei_signal.integrations.gpt_mcp --transport stdio --allow-confirmed-records
@@ -66,4 +66,11 @@ trade-preview / trade-confirm使用已有API；plan-discuss / plan-draft绑定�
 
 私有包、截图、隔离SQLite和失败日志在data/cache/gpt-system-integration/implementation；安全回执在原raw/implementation-*。失败保留：磁盘满导致测试/报告中断、首版SDK未使用可序列化返回类型、两个产品分析8秒超时、下载器未取得B站音频格式。已修部分分别重验，不把退出成功单独当通过。未在真实账户创造测试交易，0券商订单。
 
-用户允许自行调整磁盘空间并利用外接盘；两项未启用隧道文件和两份旧安装下载包已复制到外接盘，逐项SHA与大小一致后移除本机副本，加上闲置pip下载缓存，合计约0.51GB。活跃代码、数据库、持仓、模型、SDK和运行环境仍保留。完整恢复回执在私有cache和各外接归档目录。
+用户允许自行调整磁盘空间并利用外接盘；两项未启用隧道文件和两份旧安装下载包已复制到外接盘，逐项SHA与大小一致后移除本机副本，加上闲置pip下载缓存，合计约0.51GB。活跃代码、数据库、持仓、SDK和运行环境保留；固定模型权重随后按逐文件指纹迁往外接盘，逻辑路径保留，实际转写读回通过。完整恢复回执在私有cache和各外接归档目录。
+
+
+## 运行存储接入（2026-10-08）
+
+复用原存储盘点，新增固定设备身份与容量查询；CLI --view storage、MCP storage、总览及日报均可读。新增音频下载/转写和无效缓存备份在写入前检查，外盘缺失、错UUID、路径越界、容量不足/未知时拒绝；有效缓存和平台已有正文继续只读复用。通知只比较每盘状态，字节变化不重复发。147项相关检查通过；本机模型在外盘真实转写及MCP读回均有独立证据。
+
+三组固定缓存28文件1,552,311,780字节已逐个核验，保留原逻辑路径，实测释放1,549,504,512字节；此前三次迁移实测506,675,200字节，总共约2.06GB。当前剩余空间随其他程序变化；本轮未清理工作树、会话或研究raw，也未采用旧有缺陷的研究存储保护。范围、恢复与未接入入口见[运行存储管理](codex-storage-management.md)。

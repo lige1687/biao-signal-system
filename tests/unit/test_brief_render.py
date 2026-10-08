@@ -91,6 +91,26 @@ class BriefRenderTests(unittest.TestCase):
             },
         }
 
+    def test_storage_and_platform_text_are_readable_with_their_own_basis(self):
+        p = self.sample()
+        p["storage_health"] = {
+            "checked_at": "2026-10-08T17:00:00+08:00",
+            "internal": {"status": "warning", "capacity": {"free_bytes": 8 * 1024**3}},
+            "external": {"status": "unavailable", "capacity": None},
+            "reasons": ["外盘未挂载"],
+        }
+        p["blogger_previous_trading_day"][0].update(
+            content="已有平台字幕原文", content_basis="已保存正文或字幕，仍需核范围"
+        )
+        report = render_brief(p)
+        self.assertIn("内置盘：空间偏低，可用 8.0 GiB", report)
+        self.assertIn("外接盘：未挂载", report)
+        self.assertIn("2026-10-08 17:00 +0800", report)
+        self.assertIn("仍汇报能核实的持仓资料", report)
+        self.assertIn("已有平台字幕原文", report)
+        self.assertIn("已保存正文或字幕，仍需核范围", report)
+        self.assertNotIn("内容依据：仅标题或简介", report)
+
     def test_noon_is_information_only_and_includes_names_and_actual_dates(self):
         report = render_brief(self.sample())
         self.assertIn("本次为信息汇总", report)

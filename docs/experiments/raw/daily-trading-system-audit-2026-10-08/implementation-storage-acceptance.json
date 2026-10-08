@@ -1,0 +1,160 @@
+{
+  "checked_at": "2026-10-08T17:18:53.108455+08:00",
+  "scope": "fixed local disk read-only health, bounded own Bilibili audio preflight and same original reminder workflows",
+  "coordination_checked_sha": "8c8c93eb880a5c52c4b8ff9c2ef5ce3a939eedce",
+  "read_task_ids": [
+    "daily-trading-system-audit",
+    "research-dispatch-controller",
+    "trend-trading-video",
+    "douyin-vike-increment"
+  ],
+  "scope_conflicts": "latest others only own controller/media records; no overlapping source changes",
+  "migration": {
+    "status": "completed",
+    "file_count": 28,
+    "copied_bytes": 1552311780,
+    "measured_free_change_bytes": 1549504512,
+    "prior_measured_free_change_bytes": 506675200,
+    "cumulative_measured_free_change_bytes": 2056179712,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "paths": [
+      {
+        "logical": "data/cache/douyin-vike-audio-2026-10-07",
+        "bytes": 739630001,
+        "file_count": 23,
+        "status": "linked_verified_original_removed"
+      },
+      {
+        "logical": "data/cache/douyin-vike-media-2026-10-07",
+        "bytes": 331373921,
+        "file_count": 3,
+        "status": "linked_verified_original_removed"
+      },
+      {
+        "logical": "data/cache/video-models/whisper-small-mlx",
+        "bytes": 481307858,
+        "file_count": 2,
+        "status": "linked_verified_original_removed"
+      }
+    ],
+    "full_manifest": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/migration-20261008T165506.json",
+    "failures_preserved": [
+      {
+        "status": "failed_preserved_evidence",
+        "error": "RuntimeError: destination inventory mismatch",
+        "cause": "AppleDouble files appeared on ExFAT; originals retained, exact macOS metadata creator unverified"
+      },
+      {
+        "status": "failed_preserved_evidence",
+        "error": "RuntimeError: whole inventory changed",
+        "cause": "AppleDouble also appeared after byte-stream copy; macOS metadata creator unverified, payload hashes unchanged"
+      }
+    ],
+    "generated_external_metadata_separately_accounted": true
+  },
+  "actual_model_asr": {
+    "elapsed_seconds": 32.082,
+    "text_characters": 1569,
+    "segment_count": 191,
+    "model_sha256": "55b6674c9b339702d486e2b1573839a66f8ec8f821ed2886993ef717a86b09f5",
+    "model_hash_matches_prior_receipt": true,
+    "recognition_accuracy_validated": false
+  },
+  "actual_mcp": {
+    "tool_count": 24,
+    "storage_tool_present": true,
+    "brief_holdings_count": 29,
+    "brief_storage_present": true,
+    "writes_called": 0
+  },
+  "offline_pipeline": {
+    "simulated": true,
+    "actually_unmounted": false,
+    "holdings_returned": 29,
+    "video_errors": 2,
+    "new_video_directory_created": false,
+    "information_only_report_generated": true,
+    "notification_baseline_written": false,
+    "first_failure": "missing isolated cached news; fixed by supplying actual saved source receipt, no weaker assertion"
+  },
+  "automations": [
+    {
+      "id": "automation-3",
+      "exact_prompt_readback": true,
+      "schedule_preserved": true,
+      "target_preserved": true,
+      "status_preserved": true,
+      "notification_policy_preserved": true
+    },
+    {
+      "id": "automation-4",
+      "exact_prompt_readback": true,
+      "schedule_preserved": true,
+      "target_preserved": true,
+      "status_preserved": true,
+      "notification_policy_preserved": true
+    },
+    {
+      "id": "automation-5",
+      "exact_prompt_readback": true,
+      "schedule_preserved": true,
+      "target_preserved": true,
+      "status_preserved": true,
+      "notification_policy_preserved": true
+    },
+    {
+      "id": "automation-6",
+      "exact_prompt_readback": true,
+      "schedule_preserved": true,
+      "target_preserved": true,
+      "status_preserved": true,
+      "notification_policy_preserved": true
+    }
+  ],
+  "verification": {
+    "related_tests": 147,
+    "warnings": 1,
+    "seconds": 8.04,
+    "ruff_passed": true,
+    "independent_backup_rejection_case_passed": true,
+    "hygiene_passed": true
+  },
+  "account_writes": 0,
+  "orders": 0,
+  "research_runs": 0,
+  "limits": [
+    "all other writers not controlled",
+    "actual hot-unplug not tested",
+    "read-copy-delete measures not identical to future free capacity",
+    "no adoption of known defective research/storage_guard",
+    "message configuration is not delivery"
+  ],
+  "actual_delivery": {
+    "checked_at": "2026-10-08T09:20:31.194Z",
+    "thread_id": "01a11a05-c140-7d82-b8b6-68c83ee9e2ee",
+    "thread_title": "LeiSignal 日报与提醒",
+    "delivery_readback_confirmed": true,
+    "events": [
+      {
+        "turn_id": "01a11acd-611e-7742-8435-88700689637a",
+        "status": "completed",
+        "finals": [
+          {
+            "message_id": "msg_07e851276a95e9e4016ac75fa5002081918f1bbb1e1af8da5d",
+            "text": "**存储接入的手动验收已完成。** 已核验迁移累计实测释放约2.06 GB；最近一次17:11:56检查内置盘余量约7.8 GiB，已在上一条提醒，其他容量变化原因未核实，不计为清理成果。\n\n原路径保留，外盘模型已通过实际音频转写；模拟检查失败时，新音频处理会暂停，仍能生成29只持仓的资料报告，本次没有真的拔盘。\n\n错盘、断盘或余量不足的检查已接入新增音频流程，其他研究写入尚未接入；这是一次手动实测，不是准点或持续监控。\n\n证据：[模型实测回执](/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/gpt-system-integration/implementation/storage-model-validation.json)、[故障模拟回执](/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/gpt-system-integration/implementation/storage-offline-flow-receipt.json)。"
+          }
+        ]
+      },
+      {
+        "turn_id": "01a11ac8-18f4-7b50-a207-5f601665585d",
+        "status": "completed",
+        "finals": [
+          {
+            "message_id": "msg_07e851276a95e9e4016ac75e7970b88191bea07ecd2b1edfed",
+            "text": "**17:11核查：内置盘剩余约7.8 GiB，低于系统15 GiB警告线。** 这可能影响后续资料缓存和视频音频处理，需要核对可释放的空间；本次未删除任何数据。\n\n依据：[本次检查记录](/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/portfolio-chat-briefing/notifications/events-20261008T171154886873-e9998264.json)，容量检查时间为北京时间10月8日17:11:56。"
+          }
+        ]
+      }
+    ]
+  }
+}
