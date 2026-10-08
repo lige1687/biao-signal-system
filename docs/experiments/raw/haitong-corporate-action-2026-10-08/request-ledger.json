@@ -1,0 +1,223 @@
+{
+  "source_operations_used": 13,
+  "source_operations_max": 13,
+  "counting": "Visible search queries count individually; one anonymous HTTP retrieval counts once. Search backend internal requests unknown.",
+  "operations": [
+    {
+      "id": 1,
+      "kind": "web_search",
+      "query": "site.sse.com.cn 海通证券 2025 终止上市 换股 0.62 3月14日",
+      "result": "official termination notice and official issuer PDF URLs found"
+    },
+    {
+      "id": 2,
+      "kind": "web_search",
+      "query": "海通证券 2025年2月6日 股票 停牌 sse.com.cn",
+      "result": "no usable original suspension notice; retained negative search"
+    },
+    {
+      "id": 3,
+      "kind": "web_search",
+      "query": "601211 2025-03-14 换股实施结果 static.sse.com.cn",
+      "result": "third-party index supplied candidate official PDF URLs; index not used as factual evidence"
+    },
+    {
+      "id": 4,
+      "kind": "anonymous_http",
+      "filename": "S1-termination.html",
+      "url": "https://www.sse.com.cn/disclosure/announcement/listing/stock/c/c_20250226_10773005.shtml",
+      "status": "completed_valid_html"
+    },
+    {
+      "id": 5,
+      "kind": "anonymous_http",
+      "filename": "S2-conversion-plan.pdf",
+      "url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2025-03-01/601211_20250301_WWHY.pdf",
+      "status": "completed_invalid_pdf_html_challenge"
+    },
+    {
+      "id": 6,
+      "kind": "anonymous_http",
+      "filename": "S3-conversion-result.pdf",
+      "url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2025-03-14/601211_20250314_HTR8.pdf",
+      "status": "completed_invalid_pdf_html_challenge"
+    },
+    {
+      "id": 7,
+      "kind": "web_open",
+      "url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2025-03-14/601211_20250314_HTR8.pdf",
+      "result": "Normal document parser returned text/html with zero lines; unusable, no bypass"
+    },
+    {
+      "id": 8,
+      "kind": "web_open",
+      "url": "https://paper.cnstock.com/html/2025-03/01/content_2032143.htm",
+      "result": "Issuer-authored prospective conversion notice read successfully; announcement 临2025-026; no raw HTML hash claimed"
+    },
+    {
+      "id": 9,
+      "kind": "web_search",
+      "query": "国泰君安 换股吸收合并 海通证券 A股换股实施结果 2025年3月14日",
+      "result": "Exact issuer result announcement 2025-028 located on China Securities Journal"
+    },
+    {
+      "id": 10,
+      "kind": "anonymous_http",
+      "url": "https://epaper.cs.com.cn/zgzqb/html/2025-03/14/nw.D110000zgzqb_20250314_2-A30.htm",
+      "filename": "S4-conversion-result.html",
+      "status": "completed_valid_issuer_html"
+    },
+    {
+      "id": 11,
+      "kind": "web_search",
+      "query": "site.paper.cnstock.com 海通证券 2025年2月6日起 连续停牌 2025-013",
+      "result": "Issuer announcement 临2025-018 found on China Securities Journal; last trading day and suspension start explicitly given"
+    },
+    {
+      "id": 12,
+      "kind": "anonymous_http",
+      "filename": "S5-suspension.html",
+      "url": "https://epaper.cs.com.cn/zgzqb/html/2025-02/05/nw.D110000zgzqb_20250205_2-B026.htm",
+      "status": "completed_valid_issuer_html"
+    },
+    {
+      "id": 13,
+      "kind": "anonymous_http",
+      "filename": "S6-conversion-plan.html",
+      "url": "https://paper.cnstock.com/html/2025-03/01/content_2032143.htm",
+      "status": "completed_valid_issuer_html"
+    }
+  ],
+  "raw_download_bytes": 213536,
+  "max_new_bytes": 10485760,
+  "results": [
+    {
+      "filename": "S1-termination.html",
+      "url": "https://www.sse.com.cn/disclosure/announcement/listing/stock/c/c_20250226_10773005.shtml",
+      "retrieved_at": "2026-10-08T12:02:47.765952+08:00",
+      "status": 200,
+      "final_url": "https://www.sse.com.cn/disclosure/announcement/listing/stock/c/c_20250226_10773005.shtml",
+      "content_type": "text/html",
+      "last_modified": null,
+      "bytes": 27783,
+      "sha256": "2da02df74d4409f597f1b7d7d88f09cbf6d863b1e54836be0c9628f5ea4ce45b"
+    },
+    {
+      "filename": "S2-conversion-plan.pdf",
+      "url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2025-03-01/601211_20250301_WWHY.pdf",
+      "retrieved_at": "2026-10-08T12:02:47.766297+08:00",
+      "status": 200,
+      "final_url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2025-03-01/601211_20250301_WWHY.pdf",
+      "content_type": "text/html; charset=utf-8",
+      "last_modified": null,
+      "bytes": 3872,
+      "sha256": "0f3fddbe8e6625da2a2a14c638ad670bdb31c2b40060f92566505ea54d8bc8df"
+    },
+    {
+      "filename": "S3-conversion-result.pdf",
+      "url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2025-03-14/601211_20250314_HTR8.pdf",
+      "retrieved_at": "2026-10-08T12:02:47.766377+08:00",
+      "status": 200,
+      "final_url": "https://static.sse.com.cn/disclosure/listedinfo/announcement/c/new/2025-03-14/601211_20250314_HTR8.pdf",
+      "content_type": "text/html; charset=utf-8",
+      "last_modified": null,
+      "bytes": 3872,
+      "sha256": "0f3fddbe8e6625da2a2a14c638ad670bdb31c2b40060f92566505ea54d8bc8df"
+    },
+    {
+      "filename": "S4-conversion-result.html",
+      "url": "https://epaper.cs.com.cn/zgzqb/html/2025-03/14/nw.D110000zgzqb_20250314_2-A30.htm",
+      "retrieved_at": "2026-10-08T12:08:44.593832+08:00",
+      "status": 200,
+      "final_url": "https://epaper.cs.com.cn/zgzqb/html/2025-03/14/nw.D110000zgzqb_20250314_2-A30.htm",
+      "content_type": "text/html",
+      "bytes": 78709,
+      "sha256": "b57b5d84263718e094113abc14503213e299c43f2ce2922602c37668c62e5b59",
+      "local_extraction_sha256": "d477ce32237c25c33435d575b945db83f275adda1444907d1e4be58a173b6c76",
+      "usable": true
+    },
+    {
+      "filename": "S5-suspension.html",
+      "url": "https://epaper.cs.com.cn/zgzqb/html/2025-02/05/nw.D110000zgzqb_20250205_2-B026.htm",
+      "retrieved_at": "2026-10-08T12:10:02.562332+08:00",
+      "status": 200,
+      "final_url": "https://epaper.cs.com.cn/zgzqb/html/2025-02/05/nw.D110000zgzqb_20250205_2-B026.htm",
+      "content_type": "text/html",
+      "bytes": 58603,
+      "sha256": "83d066097377d55e51137074fcc26ab3732e4be15e1fac9b5749c4528fcba8b4",
+      "local_extraction_sha256": "37c4d006da216347a5940e8166cf6d143f43c3ebf96727c7badc4d7be03ece5d",
+      "usable": true
+    },
+    {
+      "filename": "S6-conversion-plan.html",
+      "url": "https://paper.cnstock.com/html/2025-03/01/content_2032143.htm",
+      "retrieved_at": "2026-10-08T12:10:02.904829+08:00",
+      "status": 200,
+      "final_url": "https://paper.cnstock.com/html/2025-03/01/content_2032143.htm",
+      "content_type": "text/html;charset=UTF-8",
+      "bytes": 40697,
+      "sha256": "0058fe719d82019ed6d9589019f49fc1fd253ab3b7f5d1e75de3b9970ee088d6",
+      "local_extraction_sha256": "866af07254a4c821a1d6e0f303c3dbb586a618ba6e3169777f2a9269d449d9bf",
+      "usable": true
+    }
+  ],
+  "new_bytes_after_download": 363185,
+  "content_validation": [
+    {
+      "filename": "S1-termination.html",
+      "wire_gzip": false,
+      "decoded_bytes": 27783,
+      "decoded_sha256": "2da02df74d4409f597f1b7d7d88f09cbf6d863b1e54836be0c9628f5ea4ce45b",
+      "pdf_magic_valid": false,
+      "decoded_file": "S1-termination.html.decoded.txt"
+    },
+    {
+      "filename": "S2-conversion-plan.pdf",
+      "wire_gzip": true,
+      "decoded_bytes": 7373,
+      "decoded_sha256": "2cd7219526979cc4e00dbc3e2688dfc141e5564d1c3c7a602cef2dba9d0f1654",
+      "pdf_magic_valid": false,
+      "decoded_file": "S2-conversion-plan.pdf.decoded.txt"
+    },
+    {
+      "filename": "S3-conversion-result.pdf",
+      "wire_gzip": true,
+      "decoded_bytes": 7373,
+      "decoded_sha256": "2cd7219526979cc4e00dbc3e2688dfc141e5564d1c3c7a602cef2dba9d0f1654",
+      "pdf_magic_valid": false,
+      "decoded_file": "S3-conversion-result.pdf.decoded.txt"
+    }
+  ],
+  "failures": [
+    {
+      "stage": "pdf_parse",
+      "error": "PDF suffix and HTTP200 were insufficient; both official PDF URLs returned same gzip-encoded HTML, not PDF; parser rejected header; no retry yet"
+    }
+  ],
+  "budget_amendments": [
+    {
+      "at": "2026-10-08T12:04:40.882752+08:00",
+      "before_source_operations_max": 6,
+      "after_source_operations_max": 10,
+      "reason": "Six was controller-created, not an explicit human total budget. Two exact official PDF paths returned diagnosed JavaScript challenge HTML. User AGENTS forbids inventing stopping points and authorizes direct completion; bounded necessary verification can use issuer-authored public disclosure text. Preserve all six attempts; no change to closed historical-source/price-pilot budgets, size cap or no-bypass rule.",
+      "allowed_followup": "At most one official document parser attempt plus two issuer public disclosure acquisitions and one discovery lookup; no challenge script execution, cookie generation, Library403 retries or paid routes."
+    },
+    {
+      "at": "2026-10-08T12:09:37.465720+08:00",
+      "before_source_operations_max": 10,
+      "after_source_operations_max": 13,
+      "reason": "The controller-created estimate of ten did not answer the already authorized trading-cessation field. Operation 11 was performed before this amendment was written; this sequencing error is retained. One final acquisition of the newly located suspension notice and one raw acquisition of the already read conversion-plan notice complete the defined fields and original-byte provenance. No old sealed source budget reused, no permission bypass or paid request. Stop after these source acquisitions and validate."
+    }
+  ],
+  "execution_failures": [
+    {
+      "stage": "coordination_path_lookup",
+      "error": "Initial guessed research-evidence-catalog.md path nonexistent; resolved by git ls-tree to nested record; read actual owner release before shared edits."
+    },
+    {
+      "stage": "vendor_path_lookup",
+      "error": "Initial guessed raw/b02-targeted-gap-evidence directory nonexistent; read report links, used original B01 manifest and exact normalized source."
+    }
+  ],
+  "source_collection_state": "closed_defined_2025_event_fields_resolved"
+}

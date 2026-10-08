@@ -1,0 +1,87 @@
+{
+  "schema": "saved-evidence-verification/1.0",
+  "status": "passed_local_factual_checks",
+  "checks": [
+    {
+      "check": "S1-termination.html original hash",
+      "passed": true
+    },
+    {
+      "check": "S4-conversion-result.html original hash",
+      "passed": true
+    },
+    {
+      "check": "S5-suspension.html original hash",
+      "passed": true
+    },
+    {
+      "check": "S6-conversion-plan.html original hash",
+      "passed": true
+    },
+    {
+      "check": "S2-conversion-plan.pdf preserved failure",
+      "passed": true
+    },
+    {
+      "check": "S3-conversion-result.pdf preserved failure",
+      "passed": true
+    },
+    {
+      "check": "S1-termination.html source anchors",
+      "passed": true
+    },
+    {
+      "check": "S4-conversion-result.extracted.txt source anchors",
+      "passed": true
+    },
+    {
+      "check": "S5-suspension.html.extracted.txt source anchors",
+      "passed": true
+    },
+    {
+      "check": "S6-conversion-plan.html.extracted.txt source anchors",
+      "passed": true
+    },
+    {
+      "check": "reference ratio rounds to disclosed 0.62",
+      "passed": true
+    },
+    {
+      "check": "aggregate conversion arithmetic consistent within one integer share",
+      "passed": true
+    },
+    {
+      "check": "B01 exact frozen daily source",
+      "passed": true
+    },
+    {
+      "check": "2025 vendor placeholders match disclosed trading cessation",
+      "passed": true
+    }
+  ],
+  "missing_local_sources": [],
+  "conversion_arithmetic": {
+    "total_old_shares": "9654631180",
+    "continuous_new_share_entitlement": "5985871331.60",
+    "actual_new_shares": "5985871332",
+    "integer_total_difference": "0.40",
+    "100_old_shares_entitlement": "62.00",
+    "one_old_share_entitlement": "0.62",
+    "one_old_share_actual_allocation": "unknown; not deterministic account rounding",
+    "interpretation": "Aggregate consistency only, not proof of individual account allocation."
+  },
+  "vendor_crosscheck": {
+    "path": "docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/daily_raw/daily-2-sh-600837.json",
+    "sha256": "3595b420f1831cbd51a298482c18bd2c88d3c2fd413162ebb6e9887fc27c82ae",
+    "rows": 140,
+    "last_status1_date": "2025-02-05",
+    "post_suspension_rows": 19,
+    "pre_termination_placeholder_rows": 18,
+    "on_termination_placeholder_rows": 1,
+    "all_post_rows_status0_empty_volume_and_amount": true,
+    "earlier_status0_outside_this_unit": 17
+  },
+  "independent_agent_review": false,
+  "engine_integration": false,
+  "new_market_calculations": 0
+}

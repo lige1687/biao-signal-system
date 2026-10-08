@@ -1,0 +1,89 @@
+{
+  "schema": "corporate-action-qualified-facts/1.0",
+  "unit": "haitong-corporate-action-qualification-20261008",
+  "status": "qualified_public_disclosure_facts_only",
+  "old_security": {
+    "exchange": "SSE",
+    "code": "600837",
+    "name_at_event": "海通证券",
+    "share_class": "A"
+  },
+  "successor": {
+    "exchange": "SSE",
+    "code": "601211",
+    "name_at_event": "国泰君安",
+    "share_class": "A"
+  },
+  "events": [
+    {
+      "field": "last_trading_day",
+      "date": "2025-02-05",
+      "source": "S5-suspension.html"
+    },
+    {
+      "field": "continuous_suspension_start",
+      "date": "2025-02-06",
+      "time": "market_open",
+      "source": "S5-suspension.html"
+    },
+    {
+      "field": "conversion_record_date",
+      "date": "2025-03-03",
+      "time": "market_close",
+      "source": "S6-conversion-plan.html"
+    },
+    {
+      "field": "listing_termination_effective",
+      "date": "2025-03-04",
+      "source": "S1-termination.html"
+    },
+    {
+      "field": "registration_certificate_received",
+      "date": "2025-03-13",
+      "source": "S4-conversion-result.html"
+    },
+    {
+      "field": "new_conversion_shares_tradable_from",
+      "date": "2025-03-17",
+      "source": "S4-conversion-result.html"
+    }
+  ],
+  "conversion": {
+    "new_shares_per_old_share": "0.62",
+    "holder_old_shares": "9577556713",
+    "treasury_old_shares": "77074467",
+    "actual_new_conversion_A_shares": "5985871332",
+    "ratio_source": "S6-conversion-plan.html",
+    "actual_result_source": "S4-conversion-result.html",
+    "fractional_rule": "Integer shares; remaining units allocated by descending fractional remainder across holders; equal remainders exceeding available units resolved randomly. Individual account rounding is not inferable from quantity alone.",
+    "reference_prices": {
+      "old_CNY": "8.57",
+      "new_CNY": "13.83",
+      "meaning": "Ratio calculation references, not cash proceeds or execution prices."
+    }
+  },
+  "separate_financing": {
+    "new_A_shares": "626174076",
+    "lock_months": 60,
+    "not_part_of_conversion_shares": true
+  },
+  "accounting_limits": [
+    "No economic zero merely because old shares disappear from account display between termination and new share listing.",
+    "No price concatenation of old and successor codes without quantity/rights and price policies.",
+    "Cash election branch, actual elections, unclaimed dividends, pledges, freezes, fees and account-specific fractional allocation are not reconstructed here.",
+    "General listing date does not prove a particular account could sell all shares at a particular price."
+  ],
+  "unqualified": [
+    "Complete CSI300 historical membership",
+    "Old Sina adjusted-price snapshot and anchor",
+    "Full 600837 dividend/action/price history",
+    "Realized terminal cash or total-return label",
+    "Historical vendor availability timestamp",
+    "2024 earlier suspension cause; current unit covers 2025 terminal suspension only"
+  ],
+  "implementation_status": "Factual sidecar, not wired into research engine or production; no parser flag authorizes a merge event automatically.",
+  "new_fits": 0,
+  "new_labels": 0,
+  "price_repairs": 0,
+  "independent_agent_review": false
+}
