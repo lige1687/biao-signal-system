@@ -126,3 +126,10 @@
 验证：39原件SHA、43远端字节、剩余集合与不变文件检查通过，归置通过。diff --check发现一处原证据第35行已有尾空格，为保留准确SHA未修改，此失败位置保存在manifest。科学重算/原市场/排名测试/取数/拟合/标签/安装均0。另保留只读摘要相对路径找不到合同和过宽root状态输出失误；修正为准确根路径和限定清单，没有写原件/切root分支/删资料。证据仍为raw/theory-safe-publication-2026-10-08的manifest、dependency-check、remote-readback与README新阶段及自身进度。
 
 本轮限定39件交付范围释放，中控读取此回执接续。完整准备缺件未解除，不以completed发布状态冒充工具全部可用；没有必要剩余本合同计算或后台任务。
+
+
+## 剩余36项来源核查：active
+
+更新时间：2026-10-08T19:08:57.164392+08:00；checked_coordination_sha=3ed3fe52960ce3697a23b353f76dfb8be8e312cf；已读规则、中控、本任务与classic预检范围，无同文件冲突。合同remaining36-provenance-contract.json沿用户主Goal/Git交付授权；只查准确36原件、相关现有Git路径记录和来源/负责人回执，不重审39或重跑科研。
+
+写范围仅原成果树raw/theory-safe-publication-2026-10-08/remaining36-provenance.json及本任务既有进度/协调。36源不复制/上传/修改，定义/preparation/registry等不改，预算科研/测试/取数/拟合/标签/安装0。以36行负责人/实际来源/大小SHA、既有已发布同字节commit或明确用户传播依据为验收，分别给可恢复/待授权/缺资料和最小接续，不猜测元数据传播许可。原分支基线4d9e1ad0f17abc67f46b38efe1a0d4fd7c9a03dd，只发索引并远端读回，不宣称完整准备可用。
