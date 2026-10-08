@@ -82,3 +82,12 @@
 ## 本轮完成与登记释放
 
 更新时间：2026-10-08T01:31:12.825826+08:00。Alphalens结案补记：中控明确1条窗口后，fetch核98753df888943e37aa17fce35e64e69a63e70276，写前618/写后619，准确1报告1导航，原条目及字节可逆保留、读回通过，scope_released=true且已回调。verification与registration-receipt具备完整证据；10测试、真实CLI1次及独立6510结果格差0，功能/研究描述完成。其他项目未伪报整套接入。旧报告的本地主工作区扫描局限已在新报告纠正。新模块、恢复vendor与方法指引/报告仍本地，远端仅协调元数据。无本题后台任务、必要剩余市场计算或用户待决输入。失败与未持久保存的中间夹具日志说明保留，不把不完整日志补造成原件。
+
+
+## 已验收成果的隔离发布：active
+
+更新时间：2026-10-08T18:29:42.524915+08:00；checked_coordination_sha=fdcd65e62fa3f829fe0f00b22b26780ecea16308；已读COORDINATION、research-dispatch-controller及本任务。用户主Goal继续及原Git交接授权已核，合同为 theory-safe-publication-contract.json。无其他负责人发布本四件组的重叠；不接管其代码。
+
+拟在 codex/theory-safe-publication-20261008 独立稀疏工作区，以已发布技术基线2ab565017a7a4959af744430339e32a09ce12667继承定义解析器与原vendor。准确范围：preparation.py、ranking_diagnostics.py及对应两测试；已验收累计factor-validation-guide；principles-ai-execution、literature-tools-fit、research-preparation-learning、alphalens-ranking-use四份2026-10-08报告与最小安全回执；仅隔离分支四条registry/INDEX导航；本任务进度及发布指纹清单。原主工作区和共享登记表只读，原vendor四文件逐字核验、不改内容。
+
+验收：源文件与已验收本地字节相符、依赖继承可定位、必要合成单测与准备入口检查、归置、安全路径和正常推送后远端逐文件SHA读回。只检查发布造成的依赖差异；新行情/拟合/标签/封存重跑/安装均0。原真实6510行输入不上传；既有研究描述保留，不声称另一设备已具备该输入。旧指南回执与累计指南版本差异显式记录。失败记录保留；尚未发布成果。
