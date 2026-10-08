@@ -1,20 +1,20 @@
 # LEI 八目标研究调度｜当前快照
 
-- 更新时间：2026-10-08T10:31:00+08:00（Asia/Shanghai）
+- 更新时间：2026-10-08T11:00:00+08:00（Asia/Shanghai）
 - task-id：research-dispatch-controller；状态：active。研究调度：[中控对话](codex://threads/01a116c7-3700-7062-a6c6-53af00ef60a0)；本文件唯一Git写者：[协调对话](codex://threads/01a10051-4db1-7490-b40f-c13243767fc6)。原负责人文件仍由各自维护。
-- 最新读取协调分支：`962e63d6e554d24b694b02cb09558ed9d6be34a2`；已读 `COORDINATION.md`、`research-dispatch-controller`、`risk-shape-information`、`classic-factor-research`。本轮确认报告整合已验收，资料试点仍active。Alphalens 报告登记写前618、写后619；本次人工恢复报告登记写前619、写后620。两次按准确条目/导航核验；此前本机完整620项 `registry.json` / `INDEX.md` 状态仍未发布。此次报告整合是在独立旧基线分支形成199项版本（保留原195项并新增4项），不等同于发布620项根级登记。
+- 最新读取协调分支：`9e55895a56f863d49c325a264975dc5c36cb3647`；已读 `COORDINATION.md`、本任务、`risk-shape-information`、`classic-factor-research`、`research-evidence-catalog/report-library-integration-20261008`。本次只更正本摘要当前文字和机器可读状态，不触及他人任务文件；资料三键试点已有限验收，报告库单报告登记已接受且目录负责人明确释放窗口。根工作区登记簿620→621及索引增量仍仅本地、未推送；独立成果分支登记簿199→200已推，不等同于发布完整根级登记簿。
 - 原始目标：把八项LEI研究与工程成果做成可定位、可复算、可审查的接续链。当前验收按问题、输入、合同、合成检查、独审、真实效果与归档逐项看；不能用某一阶段的“交付”表示整条链已完成。适用规则为 `COORDINATION.md` 1.1 和各执行任务冻结规范。
-- 最新已推协调提交（编辑前）：`962e63d6e554d24b694b02cb09558ed9d6be34a2`；Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
-- 较上一版新增：报告库整合阶段已验收，成果分支 `codex/research-report-library-integration-20261008@19508745c7160bc07f5bbdefe9ba52ab39a5199e`；4份报告和15个小证据逐字匹配其来源提交，登记簿195→199且原195项语义不变，索引新增块可完整撤销还原，5个真实相对链接均存在。更正后的回执SHA-256为 `f34dda7c52266587d7933b491cfcd8ac70413079fbb38711d9ec6afdb1734c45`。目录原报告有61处本机绝对路径，只能视为原机引用，不能说远端可点击；不代表main已合并或根级620项登记全量同步。旧隔离基线的299项归置问题保留；本轮根工作区归置检查据最终回执通过。资料试点仍active：600705因官方调出记录排除，600837的2022-01-04至06仍仅为候选、历史成分资格未证实；原价与B02原始价相符，但历史复权依据不足；已用4/6次请求、153,482字节，不再换候选追求可补价。六份冻结研究原件仍缺，真实研究效果未测。
+- 最新已推协调提交（编辑前）：`9e55895a56f863d49c325a264975dc5c36cb3647`；Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
+- 较上一版新增：修正上一版首屏和任务登记的过期“active／继续用剩余2次请求”叙述，使其与已验收回执一致。资料三键阶段在 `codex/stock-data-qualification-20261008@60a465b8b4064de567e24a96642d26ff5e841d30` 有限通过，4/6次请求、153482字节，主价格修复0；余2次是未用额度，不再用于本批。报告库四报告阶段提交 `19508745c7160bc07f5bbdefe9ba52ab39a5199e`，随后单报告登记最终提交 `3ceec29d9e5e2e4d14e94905e99c12531257524d`、回执SHA-256 `726ddfdb577311f24e87a72fc438a4605e7084e5625e467c47384cde3bde9e5c`，共20份来源文件、219071字节，负责人已释放写入窗口。旧复权依据及历史成员资格未证，六份D—MAE真实原件仍缺；原目录报告61处本机绝对路径及历史失败继续保留。
 
 ## 八项目标现在到哪一步
 
 |目标|负责人／实际状态|接下来可验收的边界|
 |---|---|---|
 |1 核心计算|[技术对话](codex://threads/01a0e703-4c27-74e2-bf77-997e1879f967)：合成实现及小例已交，实际旧结果影响未核完|只沿D—MAE消费链核结构确认、时点、价格与缺口；真实输入齐备后才判定是否影响旧结果。|
-|2 旧研究结论|[目录对话](codex://threads/01a1074e-3d9d-70a2-a771-b079443ace18)：16项证据目录及合成独审有限接受；四报告登记整合已completed/accepted，远端成果 `codex/research-report-library-integration-20261008@19508745c7160bc07f5bbdefe9ba52ab39a5199e`，原报告字节和15项证据已核|分支内登记可读不等于main已合并；目录报告中的61处本机绝对路径不是远端可点击链接；不重跑封存实验。|
+|2 旧研究结论|[目录对话](codex://threads/01a1074e-3d9d-70a2-a771-b079443ace18)：16项证据目录及合成独审有限接受；四报告整合提交 `19508745c7160bc07f5bbdefe9ba52ab39a5199e` 已验收，单报告登记扩展在 `codex/research-report-library-integration-20261008@3ceec29d9e5e2e4d14e94905e99c12531257524d` 已接受，20份来源文件逐字一致，登记窗口释放|独立分支登记簿199→200；根工作区620→621仍仅本地，main未合并。目录报告61处本机绝对路径不能当远端链接；不重跑封存实验。|
 |3 D—MAE机会风险|技术线：合成实现阶段完成；真实X/Y均为0|原76案例、D值等六份原件仍缺；专用实现的人工边界已由目录对话独立核验，限定通过。案例、资格、阶段批准齐备后才可绑定真实输入和一次标签。|
-|4 个股资料资格|[数据对话](codex://threads/01a101c1-ac35-70a3-8ecd-4a6179bb99ad)：新gap pilot仍active；首选600705已由官方2021-12调出记录排除，600837同日期组三日仅是未证实成分资格的候选|仅核固定600837候选，不再换股；总预算上限仍6次请求/20MiB，已用4次/153,482字节。原始报价与B02相符，但旧复权快照及正式完整成分起点仍未证实，不补主价格。P26原输入及历史完整沪深300名单仍缺；不写主价格、冻结数据或共享registry/INDEX。|
+|4 个股资料资格|[数据对话](codex://threads/01a101c1-ac35-70a3-8ecd-4a6179bb99ad)：固定三键试点已 `completed`，中控仅有限接受资料资格；600705排除证据保留，600837三日原始价与B02一致但历史成员资格未证|本批封存，已用4/6次请求、153482/20971520字节；剩余2次不再花。旧复权快照/锚点、官方完整历史成分名单及P26原输入仍缺，价格修复0；只有这些输入或前提改变才重评，不能补主价格。|
 |5 融合、仓位与退出|中控保留依赖，尚未启动新计算|待可靠特征和合格数据，先做同风险的简单基线；真实风险约束尚未确认。|
 |6 原生研究流程|[流程对话](codex://threads/01a0e6d5-4bcf-7bd3-82e4-4961c963d20e)：R1/R2返修29项非作者复验通过；人工接入有界验收完成；49项依赖中30项同SHA远端可取、19项已按原字节快照；映射与交接资格核验完成。纯Git人工恢复节点现已通过并归档；真实数据/因子效果仍blocked，六份冻结原件缺。|恢复报告 [native-workflow-synthetic-recovery-2026-10-08.md](https://github.com/lige1687/biao-signal-system/blob/fda8a4895b78d8e5a125cf8af405b11c736531b6/docs/experiments/native-workflow-synthetic-recovery-2026-10-08.md) 位于 `codex/native-workflow-pure-git-recovery-20261008` @ `fda8a4895b78d8e5a125cf8af405b11c736531b6`，报告SHA-256 `990e3ebaf59d8ac13a0bd60929a84715bff46b676839a06e0dcc50d7b4717c6c`；最新README SHA-256 `497e589b3c2024205c5432a24acf30951cf49c23bdcc226c87d153826fea29da`。快照分支 `codex/native-workflow-baseline-20261008` @ `dbd86bccf9ffe9ea9617a484bf8b96825880fb7d` 已含原19项及准确CLI版本（4889字节，SHA-256 `eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52`）；原49项缺CLI及首轮失败均保留。纯Git恢复核49/49依赖和6/6实现指纹；通过manifest SHA-256 `d837ea5b3afd972e92312bbb4b9c1c9a6481c1a6aaf2d70037d2e97db69d42cc`，输出SHA-256 `009704c852a24f718c6210cf0200912bc521db4ade20943927bdee60c2449462`；现有Python 3.11.7、pytest 8.4.2下1项通过、3.40秒。该节点仅证明从多个Git来源装配并通过一个人工X→Y流程；不是恢复分支单独含全部源码，不证明108项旧环境全量同字节、洁净新机安装、真实因子/资金/线上效果。5项已跟踪源码静态版本差异仍只读核查，当前节点通过不构成推广验收。登记回执SHA-256 `2b25cae80f9351defd955e291d4fc4a80636f4b50f488af89b78ada1353d0c82`；报告已本机登记619→620且窗口释放，整份共享 `registry.json`/`INDEX.md` 尚未同步远端；10/7封存报告/登记未改。
 |7 外部增量／独审|[外部对话](codex://threads/01a0cd21-07e5-7163-8f4e-72a4d5ebc32e)：新原生流程接入的R1/R2局部返修复验已通过；仅人工流程边界验收；资料/目录先前有限审查保持|[资料报告](https://github.com/lige1687/biao-signal-system/blob/a6be33c2493e982451e5c5b3646c102553b43f6b/docs/experiments/stock-data-qualification-2026-10-07.md)、[目录报告](https://github.com/lige1687/biao-signal-system/blob/e869bdce98ac7289993b42ba50661a1a1bcf878d/docs/experiments/research-evidence-catalog-2026-10-07.md)与[旧纯算式独审](https://github.com/lige1687/biao-signal-system/blob/e869bdce98ac7289993b42ba50661a1a1bcf878d/docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/d-mae-synthetic/REVIEW.md)可远端读；[R1/R2复验报告](https://github.com/lige1687/biao-signal-system/blob/415b4776db77d655cdb64e1ad07b2151a29aa44e/docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/native-workflow/revision-b2f45151/REVIEW.md)已随独立审查分支发布；仍无真实效果或数据流程验收。|
@@ -27,7 +27,7 @@
 |`native-risk-d-mae`|技术对话；`docs/experiments/raw/native-risk-d-mae-2026-10-07/`及同题报告|[本机合成报告](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/native-risk-d-mae-2026-10-07/REPORT.md)已核存在；六份冻结原件缺，真实X/Y未做。共享研究入口只读。|
 |`stock-data-qualification`|数据对话；同名日期报告与raw目录|有界资料研究及三项本机登记已有限验收；安全成果分支 `codex/stock-data-qualification-20261008` @ `a6be33c2493e982451e5c5b3646c102553b43f6b` 已推8小文件并核报告SHA；[本机独审](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/stock-data/REVIEW.md)有限接受资料资格；最新效果原件和历史全池仍不合格。|
 |`research-evidence-catalog`|目录对话；同名日期报告与raw目录|目录研究已交且有限接受；安全成果分支 `codex/research-evidence-publication-20261008` @ `e869bdce98ac7289993b42ba50661a1a1bcf878d` 已推21文件并核目录报告SHA；原作者已用 `snapshot-clarification-2026-10-07.json` 说明动态中控进度旧指纹仅指建立目录时快照，未重算研究结论。|
-|`native-workflow-integration`|流程对话；R1/R2返修独立复验通过，人工流程有界验收完成；49项盘点完成（30项匹配、19项此前仅本机）；19项映射已发布，基线快照已验收，最小人工集成恢复核验进行中|首个代码commit `8a4a6f064341f39a2ed2420f102e88a451a04f1c` 已推，权限类型修复commit `f0c72d078a97b02ddf21595422747377fd6e09cd`、R1/R2局部修复commit `b2f45151128baa1fe387cda85862d71cb01e1206` 已读回；新模块/两测试与三共享入口补丁交付；初次163项、权限类型修复后169项均仅作者隔离自测。前审查发现的R1成员重复与R2累计预算超限由作者局部修复；非作者对相同代码提交完成29项独立检查、0失败，非作者复验报告现已安全发布至 `codex/native-workflow-review-20261008` @ `415b4776db77d655cdb64e1ad07b2151a29aa44e`，共17项审查自有报告、脚本和小型元数据。中控已接受人工流程边界，原负责人已按Luna/low完成49项远端同SHA盘点；清单、复核回执与本机原字节说明在代码工作分支 `codex/native-workflow-integration-20261007` @ `ba106251577952bc35f5f865a76cd49d1c274773`。30项在10个已核远端当前分支找到原SHA；其余19项虽未在这些远端tip找到，但原字节均仍在共享本机根工作树。三份共享入口原SHA与根树匹配，已准入补丁正向/反向检查通过。未扫描所有Git历史或全部分支；未获授权未上传他人材料。目录任务原owner `01a1074e-3d9d-70a2-a771-b079443ace18` 已完成19项负责人／来源元数据映射，中控核路径、SHA与依赖清单顺序一致：0项原作者确证、14项建议联系人、5项没有唯一联系人；映射文件尚待目录负责人发布。其映射文件已在 `codex/research-evidence-publication-20261008` @ `0d286582c0427cd3138e0539e8461a6fa1b95227` 发布并核字节。流程负责人交接资格已接受（SHA-256 `69bde6aac84e2af8350bae77d28da156f4d42525b772f26ed3432fba91ec6647`），基线快照 `codex/native-workflow-baseline-20261008` @ `ec565b87f794541bfa6518a8675dce941390e3e8` 已验收，19项原SHA/大小全部匹配，共972,036字节，含4个小型交付文件；manifest SHA-256 `f3b2c6f1a13b3d3af967b173220d88427928982bb940bc6177ce17769d276a84`。无下级派发、全历史扫描或市场计算。纯远端恢复仍未验证，真实X/V/Y为0。|
+|`native-workflow-integration`|流程对话；R1/R2返修独立复验通过，人工流程有界验收完成；49项盘点完成（30项匹配、19项原字节已快照）；19项映射已发布，基线快照与指定人工集成恢复单节点均已限定验收|首个代码commit `8a4a6f064341f39a2ed2420f102e88a451a04f1c` 已推，权限类型修复commit `f0c72d078a97b02ddf21595422747377fd6e09cd`、R1/R2局部修复commit `b2f45151128baa1fe387cda85862d71cb01e1206` 已读回；新模块/两测试与三共享入口补丁交付；初次163项、权限类型修复后169项均仅作者隔离自测。前审查发现的R1成员重复与R2累计预算超限由作者局部修复；非作者对相同代码提交完成29项独立检查、0失败，非作者复验报告现已安全发布至 `codex/native-workflow-review-20261008` @ `415b4776db77d655cdb64e1ad07b2151a29aa44e`，共17项审查自有报告、脚本和小型元数据。中控已接受人工流程边界，原负责人已按Luna/low完成49项远端同SHA盘点；清单、复核回执与本机原字节说明在代码工作分支 `codex/native-workflow-integration-20261007` @ `ba106251577952bc35f5f865a76cd49d1c274773`。30项在10个已核远端当前分支找到原SHA；其余19项虽未在这些远端tip找到，但原字节均仍在共享本机根工作树。三份共享入口原SHA与根树匹配，已准入补丁正向/反向检查通过。未扫描所有Git历史或全部分支；未获授权未上传他人材料。目录任务原owner `01a1074e-3d9d-70a2-a771-b079443ace18` 已完成19项负责人／来源元数据映射，中控核路径、SHA与依赖清单顺序一致：0项原作者确证、14项建议联系人、5项没有唯一联系人；映射文件尚待目录负责人发布。其映射文件已在 `codex/research-evidence-publication-20261008` @ `0d286582c0427cd3138e0539e8461a6fa1b95227` 发布并核字节。流程负责人交接资格已接受（SHA-256 `69bde6aac84e2af8350bae77d28da156f4d42525b772f26ed3432fba91ec6647`），基线快照 `codex/native-workflow-baseline-20261008` @ `ec565b87f794541bfa6518a8675dce941390e3e8` 已验收，19项原SHA/大小全部匹配，共972,036字节，含4个小型交付文件；manifest SHA-256 `f3b2c6f1a13b3d3af967b173220d88427928982bb940bc6177ce17769d276a84`。无下级派发、全历史扫描或市场计算。多Git来源装配的指定人工节点已通过；单分支自足与洁净新机恢复未验，真实X/V/Y为0。|
 |`report-registration-20261007`|资料原对话；两份全局登记文件已由资料原对话串行登记完成并释放窗口，回执沿用该负责人既有raw目录|目录快照补注和情绪线当前空闲已核；资料原对话turn `01a1170d-71b2-7323-ab61-cb0c4ab9a759` 已本机完成三项追加；中控已核回执及文件SHA，登记精确增量/回执现可从资料安全分支读，但 `registry.json` 和 `INDEX.md` 的本机三行/三条全局变更并未直接随该分支提交；D—MAE合成报告未登记。|
 |`stock-data-independent-review`|外部对话受权；`docs/experiments/raw/research-dispatch-controller-2026-10-07/independent-review/stock-data/`|本机 `REVIEW.md` 与 `independent-checks.json` 已读回；有限接受的只是资料资格。|
 |`catalog-independent-review`|外部对话受权；相邻 `independent-review/catalog/`|原回调误入旧计龄的失败保留；修复turn的本机 `catalog/REVIEW.md` 已读回，有限接受，动态来源快照说明已补且目录报告已远端可读；该外部目录独审回执是否另行推送未核。|
@@ -69,7 +69,7 @@
 
 初始登记从已完成的资料资格、目录编目与纯Git恢复结果继续，不重跑封存研究。原始两个会话起步时只做只读检查，均请求 Sol/medium（后端实际模型未独立核验）；初次协调范围成功同步前未进行冲突写入。此段记录的是当时预检状态，不是完成声明或排他锁；后续状态以本节更新回执为准。
 
-## 阶段回执更新（2026-10-08T10:31:00+08:00）
+## 历史阶段回执（2026-10-08T10:31:00+08:00；当时状态，当前以首屏及下方最终验收为准）
 
 - `research-evidence-catalog/report-library-integration-20261008` 已 `completed/accepted`。成果分支 `codex/research-report-library-integration-20261008`，准确提交 `19508745c7160bc07f5bbdefe9ba52ab39a5199e`。本次中控复核该提交内4份报告及15份小证据的SHA-256，均与各自来源提交一致；登记簿由195项增至199项、原195项逐项保持，新增恰为四份报告；索引四行及其分隔空行移除后逐字还原原文件；5个真实相对链接均有目标文件。最新整合回执 `docs/experiments/raw/research-evidence-catalog-2026-10-07/report-library-integration-2026-10-08.json` SHA-256 `f34dda7c52266587d7933b491cfcd8ac70413079fbb38711d9ec6afdb1734c45`。首轮读回发现目录原报告有61处本机绝对路径，已在修正回执中说明；报告正文保持来源字节，所以这些链接不能称为远端可点击。本成果只在独立成果分支，未合入main，也未发布根级620项全量登记。旧目标分支基线记录的299项归置问题保留；本轮根工作区归置检查据最终阶段回执为通过，不能据此声称旧隔离基线全绿。研究测试未运行（本阶段只验登记/链接/哈希），不构成科学结果。该阶段写入范围已释放。
 - `stock-data-qualification/gap-pilot-20261008` 仍为 `active`，当前只核固定候选600837的2022-01-04、05、06。先选的600705经官方公告确认于2021-12-10收市后调出沪深300，故排除；其原2次请求、67,789字节和 `selection-correction.json` 保留。600837三日原始报价与B02原始价相符，但旧复权快照和完整历史成分起点仍缺，故它仍只是候选、不能写成正式成分资格已证实或补回主价格。总上限仍6次请求/20MiB，已用4次/153,482字节、剩2次；不再更换候选寻求可补价，不重训、不拟合、不做标签/PPO/P26重跑。Qlib所需新运行包仍未找到且无包ID，不重复安装或派无目标的检查，也不因此阻塞本试点。当前阶段报告路径为 `docs/experiments/stock-gap-pilot-2026-10-08.md`，raw候选登记文件为 `docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/registry-candidate.json`；最终成果提交尚未核，本阶段的 `registry.json` / `INDEX.md` 保持只读并待既有串行登记。仅数据负责人更新自己的状态文件；中控等其最终回执后再改状态，不提前宣布完成。中控下一步：继续等待固定候选的最终证据与回执，收到后先核准确文件/提交及资格结论，再更新本中控状态；不代写数据负责人的任务记录。
@@ -88,21 +88,22 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "2f3ffbd0564fd3c8522cbd122264fe2185dc7f99",
-  "checked_at": "2026-10-08T10:56:00+08:00",
+  "checked_coordination_sha": "9e55895a56f863d49c325a264975dc5c36cb3647",
+  "checked_at": "2026-10-08T11:00:00+08:00",
   "snapshot_only": true,
   "assignments": [
     {
       "task_id": "native-risk-d-mae",
       "owner": "01a0e703-4c27-74e2-bf77-997e1879f967",
-      "status": "active",
+      "status": "blocked",
       "write_paths": [
         "docs/experiments/raw/native-risk-d-mae-2026-10-07/",
         "docs/experiments/native-risk-d-mae-2026-10-07.md"
       ],
       "depends_on": [],
       "scope_released": false,
-      "source": "technical turn 01a116f0-682c-7cf1-8cde-e4d146ccb61c completed synthetic implementation; six frozen originals and real X/Y remain missing; code report local only"
+      "source": "Synthetic implementation and small examples completed in technical turn 01a116f0-682c-7cf1-8cde-e4d146ccb61c; six frozen originals remain missing, true X/V/Y zero; code report local only. No real research process running.",
+      "phase": "synthetic_complete_real_input_blocked"
     },
     {
       "task_id": "stock-data-qualification",
@@ -219,7 +220,7 @@
       ],
       "depends_on": [],
       "scope_released": false,
-      "source": "controller own local progress and thread receipt; central Git summary is separately written by coordinator"
+      "source": "Controller heartbeats/status management remains active; this does not mean a research process is running. No new market computation is authorized by this status."
     },
     {
       "task_id": "report-registration-20261007",
@@ -253,7 +254,7 @@
     {
       "task_id": "stock-data-qualification/gap-pilot-20261008",
       "owner": "01a101c1-ac35-70a3-8ecd-4a6179bb99ad",
-      "status": "active",
+      "status": "completed",
       "write_paths": [
         "docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/",
         "docs/experiments/stock-gap-pilot-2026-10-08.md",
@@ -272,12 +273,11 @@
         "labels": 0,
         "PPO_P26_reruns": 0
       },
-      "source": "Latest owner update at coordination baseline 962e63d6e554d24b694b02cb09558ed9d6be34a2: 600705 officially excluded; 600837 raw prices match B02 but adjustment provenance and complete membership remain unproven. 4/6 requests and 153,482/20,971,520 bytes used; no main-price write or fit.",
-      "active_turn": "01a11948-12d4-72b0-a520-78c56f48c4d0",
+      "source": "Owner stage completed and controller accepted limited source qualification: fixed 600837 raw prices match B02 for three dates; old adjusted snapshot/anchor and complete historical membership unverified; 0 main-price repairs, 0 fits, 0 labels. Original 600705 exclusion and 2 requests retained.",
       "model_requested": "gpt-6-sol/medium",
       "actual_model_verified": false,
-      "phase": "fixed_candidate_qualification",
-      "conflicting_writes_allowed_after_coordination_sync": true,
+      "phase": "completed_limited_qualification_accepted",
+      "conflicting_writes_allowed_after_coordination_sync": false,
       "selected_candidate": {
         "symbol": "600837",
         "dates": [
@@ -301,7 +301,8 @@
         "new_data_bytes_used": 153482,
         "new_data_requests_max": 6,
         "new_data_bytes_max": 20971520,
-        "new_data_requests_remaining": 2
+        "new_data_requests_remaining": 2,
+        "remaining_requests_available_in_closed_stage": false
       },
       "raw_evidence": [
         "docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/selection-correction.json",
@@ -309,8 +310,16 @@
         "docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/registry-candidate.json"
       ],
       "qlib_package": "missing; no package id; do not reinstall or block this pilot",
-      "next_step": "Conclude qualification only for fixed 600837 dates using at most the remaining two requests and original total byte cap; no candidate substitution; await final owner receipt before completion.",
-      "preliminary_result": "600837 candidate prices for the fixed three dates match B02 raw prices; prior adjusted snapshot and complete historical membership start remain unverified, so do not restore main prices."
+      "next_step": "Stage closed. Re-evaluate only if the original adjusted snapshot/anchor, official complete historical membership, or other necessary qualified inputs actually arrive or premises change; register a new bounded scope before further requests.",
+      "preliminary_result": "600837 candidate prices for the fixed three dates match B02 raw prices; prior adjusted snapshot and complete historical membership start remain unverified, so do not restore main prices.",
+      "completed_turn": "01a11948-12d4-72b0-a520-78c56f48c4d0",
+      "branch": "codex/stock-data-qualification-20261008",
+      "result_commit": "60a465b8b4064de567e24a96642d26ff5e841d30",
+      "report_path": "docs/experiments/stock-gap-pilot-2026-10-08.md",
+      "report_sha256": "1fd356715d44bc60dae99837730aa67a33fe225b0a01c05309f585284dad39c4",
+      "receipt_path": "docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/receipt.json",
+      "receipt_sha256": "4c0e360e1e929f38dfba919aabdf54466b18787c563897cb5b44e647c544e1ba",
+      "result": "limited_qualification_pass; 0 main-price repairs; 0 fits; 0 labels; not factor validity or price restoration"
     },
     {
       "task_id": "research-evidence-catalog/report-library-integration-20261008",
@@ -338,12 +347,11 @@
         "tests": "registration/link/hash checks only",
         "whole_root_registry_publication": false
       },
-      "source": "Controller independently verified remote result commit, four report source-byte hashes, all 15 small evidence hashes, exact 195->199 registry delta, exact reversible INDEX insertion, five relative links and amended receipt. Original catalog absolute local paths are not remote-clickable; no main merge or root-wide 620-entry publication.",
-      "active_turn": "01a11948-1626-7862-ab4a-fe0c2848b2ba",
+      "source": "Four-report stage accepted at 19508745c7160bc07f5bbdefe9ba52ab39a5199e, 4 reports and 15 small evidence byte-matched, 195->199 registry. Later authorized single stock-gap registration accepted at final tip 3ceec29d9e5e2e4d14e94905e99c12531257524d; 20 source files/219071 bytes byte-matched, isolated registry 199->200. Owner coordination record marks completed and scope_released=true. Main/root registry 620->621 and INDEX addition remain local and unpublished; original catalog has 61 absolute local paths.",
       "model_requested": "gpt-6-sol/medium",
       "actual_model_verified": false,
       "phase": "completed_accepted",
-      "conflicting_writes_allowed_after_coordination_sync": true,
+      "conflicting_writes_allowed_after_coordination_sync": false,
       "branch": "codex/research-report-library-integration-20261008",
       "result_commit": "19508745c7160bc07f5bbdefe9ba52ab39a5199e",
       "receipt_path": "docs/experiments/raw/research-evidence-catalog-2026-10-07/report-library-integration-2026-10-08.json",
@@ -359,11 +367,27 @@
         "research_tests": "not run; registration/link/hash checks only",
         "merge_main": false,
         "root_620_entry_library_published": false
+      },
+      "completed_turn": "01a11948-1626-7862-ab4a-fe0c2848b2ba",
+      "registration_extension": {
+        "status": "completed_accepted",
+        "publication_commit": "4e4c075f6308c788013ad9cc81d2f4ced1ce3bee",
+        "final_tip": "3ceec29d9e5e2e4d14e94905e99c12531257524d",
+        "receipt_path": "docs/experiments/raw/research-evidence-catalog-2026-10-07/stock-gap-registration-2026-10-08.json",
+        "receipt_sha256": "726ddfdb577311f24e87a72fc438a4605e7084e5625e467c47384cde3bde9e5c",
+        "source_files": 20,
+        "source_bytes": 219071,
+        "source_commit": "60a465b8b4064de567e24a96642d26ff5e841d30",
+        "isolated_registry": "199 -> 200",
+        "root_registry": "620 -> 621; local only, uncommitted and unpublished",
+        "scope_released": true,
+        "model_requested": "gpt-6-luna/low",
+        "actual_model_verified": false
       }
     }
   ],
   "final_acceptance": {
-    "coordination_sha": "2f3ffbd0564fd3c8522cbd122264fe2185dc7f99",
+    "coordination_sha": "9e55895a56f863d49c325a264975dc5c36cb3647",
     "pilot": {
       "phase": "limited_qualification_pass",
       "branch": "codex/stock-data-qualification-20261008",
@@ -391,9 +415,21 @@
       "root_registry_and_index": "local only; uncommitted and unpublished"
     },
     "model_requests": [
-      {"scope": "pilot", "tier": "gpt-6-sol/medium", "actual_runtime_verified": false},
-      {"scope": "four-report integration", "tier": "gpt-6-sol/medium", "actual_runtime_verified": false},
-      {"scope": "single report registration", "tier": "gpt-6-luna/low", "actual_runtime_verified": false}
+      {
+        "scope": "pilot",
+        "tier": "gpt-6-sol/medium",
+        "actual_runtime_verified": false
+      },
+      {
+        "scope": "four-report integration",
+        "tier": "gpt-6-sol/medium",
+        "actual_runtime_verified": false
+      },
+      {
+        "scope": "single report registration",
+        "tier": "gpt-6-luna/low",
+        "actual_runtime_verified": false
+      }
     ],
     "main_merged": false,
     "research_effect_claimed": false
