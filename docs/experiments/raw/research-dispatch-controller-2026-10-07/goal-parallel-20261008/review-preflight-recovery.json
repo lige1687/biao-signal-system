@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-08T19:04:18.771919+08:00",
+  "failures": [
+    {
+      "action": "guessed prepare_delegation.py --help",
+      "result": "file absent, no dispatch"
+    },
+    {
+      "action": "actual dry_run.py",
+      "result": "network_disallowed because task_scope said no filesystem test writes/network; lexical false positive confirmed from script source"
+    }
+  ],
+  "correction": "No network permission changed; prohibition remains in stop_conditions/network_allowed=false. Positive scope wording adjusted before dispatch."
+}

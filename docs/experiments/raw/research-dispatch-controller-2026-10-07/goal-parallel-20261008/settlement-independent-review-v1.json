@@ -1,0 +1,51 @@
+{
+  "checked_at": "2026-10-08T19:09:10.547951+08:00",
+  "reviewer": "/root/settlement_scope_review",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "high",
+  "verdict": "changes_required_not_accepted",
+  "read_only_review": true,
+  "original16_tests_rerun": false,
+  "source4_hashes_unchanged": true,
+  "snapshot6_hashes_equal": true,
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "P1",
+      "issue": "Known due corporate action can be skipped beforetrade/close",
+      "repro": "100shares price2, bound08:00split2x/open09:30price1. Directsell100 accepted, equity100 vs correct200 inclremaining100shares.",
+      "required": "Refuse downstream event if anydue boundrequiredaction missing; explicitlyorder concurrentactions orrefuseambiguity."
+    },
+    {
+      "id": "R2",
+      "priority": "P1",
+      "issue": "Deposit can use stale prior NAV afterskippedknownclose",
+      "repro": "100shares2,1000units NAV.2Jan1; boundJan2close3omitted; Jan3deposit100 accepted1500units/equity400/NAV.2666667 vs correct1333.333333units/NAV.3.",
+      "required": "Require latest bound required completedclose beforedeposit; missingrefuses, neverinventprices."
+    },
+    {
+      "id": "R3",
+      "priority": "P1",
+      "issue": "Same-day buyrelease accepted without explicitmarketexception",
+      "repro": "Buy100at09:30for200, boundrelease15:00anotheropening permits sellsame day.",
+      "required": "Reject same-local-calendar-date release; thisstage no same-dayexceptionparameter."
+    },
+    {
+      "id": "R4",
+      "priority": "P2",
+      "issue": "Splitguard lackingdirect pre/postequity assertion",
+      "repro": "Group4two100lots plusreceivable10, equity390 before andafter2xsplit with1.9to.95mark. Later2price isseparateinput.",
+      "required": "Adddirect390to390assetassertion, preserve bothrelease_at."
+    }
+  ],
+  "independently_supported": [
+    "lotrelease100untilbounddate then200",
+    "free0 sale200 remainsrestricted sameopening buyreject",
+    "validmultiorders sameopeningallowed duplicateidreject",
+    "free100+restricted200 spends100 thenlater200 equity300",
+    "feesdeficit notpaidfromrestrictedcash",
+    "late/forbidden/missingopening/missingrelease refusalsatomic",
+    "validdeposit/dividend/pay keepsassetandunits1100"
+  ],
+  "limits": "NotfullP0/P1 or marketrulesqualification"
+}

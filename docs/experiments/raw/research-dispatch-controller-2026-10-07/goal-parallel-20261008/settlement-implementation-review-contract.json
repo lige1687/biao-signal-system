@@ -1,0 +1,39 @@
+{
+  "mission": "Independently review dated synthetic ledger against originalv0.2 and accepted scope. No code changes. Return actionable counterexamples or bounded acceptance.",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "task_scope": [
+    "Read frozen new source andoriginalsnapshot, verify source hashes against contract; no rerun original16.",
+    "Independently calculate key cash/share/time counterexamples through apply. Read-only Python -B via stdin allowed; output only to tool response.",
+    "Audit all7contract groups, especially calendar binding, phase/time ordering, atomic failure, restricted cash use, split/dividend/deposit. Do not infer market rules or claim fullP0/P1."
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-local-executor-contract-v2.json",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-scope-controller-review.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "expected_outputs": [
+    "Verdict with exact source hashes, independent numeric evidence and specific fixes if any; preserve unresolved market dependencies."
+  ],
+  "stop_conditions": [
+    "No writes including pyc/tmp; no Git/messages/children/install/realdata/research reruns.",
+    "If sources change report stale scope and stop review."
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "source_sha256": {
+    "dated_ledger.py": "819b8926ed7e4cc5f1697a40ec9e142a9138f9f4b22b80867d41cdbbf4e8f836",
+    "synthetic_fixtures.py": "d1551ffb263adec50457b19142cc04ab2d5d9ead8144b56b928c56c604bf54ac",
+    "test_dated_ledger.py": "84526cbef11982c565b9b39071399426057eee4c45a6a0960f044609b30dae04",
+    "run_checks.py": "60d7a63f7bca0daa9f6e070d3a44cb2ba6af6ce50bf7c262346c2f76747d34be"
+  }
+}

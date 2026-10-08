@@ -1,0 +1,74 @@
+{
+  "task_id": "weekly-portfolio-decision/dated-execution-continuation",
+  "mission": "把原v0.2共享账户规范中的份额解禁与卖款可用时序真正接入合成账本，完成独立核算可审查工程交付。",
+  "owner": "01a105b0-23e3-7598-9e99-c66e3a45301c",
+  "source_root": "/tmp/lei-weekly-portfolio-20261004/docs/experiments/raw/weekly-portfolio-decision-2026-10-04/continuation-20261004",
+  "source_sha256": {
+    "shared-account-spec.md": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+    "ledger_invariants.py": "d44b7ecae245c28c9021a22305281d038bb820cee3dc16af7e872ef782033e2c",
+    "test_ledger_invariants.py": "5a3d03fcb4806e6f8f77cee468b11f1f21628fb00b01bd912fe47c8d7e9dc236",
+    "engineering-review.md": "fb357c168c069c383a02fc9c777ef9b94583317b2c289d871686ba69ff5a83dc",
+    "tests-02.json": "4732684cccaa92c87119fff98c7c187d6bf00e629900e3d8346c4db5ff21b490",
+    "README.md": "d2a1f5faa93493d8b4d024aebaed1a3b571b240980fc83ca02f1692a85044285"
+  },
+  "authority": "用户原八目标5研究模拟与主Goal持续推进；只工程假设，不默认用户资金/风险或正式交易所规则。",
+  "write_paths": [
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/",
+    "docs/ops/work-progress/weekly-portfolio-dated-execution-2026-10-08.md"
+  ],
+  "read_only_paths": [
+    "original six source files listed bysource_sha256",
+    "AGENTS.md",
+    "configs/strategy-documents.v1.json",
+    "docs/research/current-standards.json",
+    "coordination/lei relevant taskrecords"
+  ],
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium",
+    "reason": "Astra/high已明确关键时点/资金范围，执行者只实现冻结行为与合成案例。"
+  },
+  "implementation": [
+    "原六文件不改；在仓内新raw续接目录保留准确小工程原件snapshot+manifest，复用已有Ledger费用、份额、单位净值与权益处理。不得写原/tmp或其他仓外，不复制全Library ZIP/行情/24成交原件。",
+    "注入具名合成日历/产品开盘与买卖资格、每批份额release_at、卖出proceeds_available_at、支付at、事件顺序。缺绑定明确拒绝，不从K线或自然日+1猜规则，无allowed=True默认放行。",
+    "统一受支持apply(event)或同等强制入口：单调时点、同日阶段、唯一ID、失败原子性、可追溯拒绝。合法同开盘多笔不同ID成交允许；重复推进开盘不得再次释放本次买入。不得留下公开无日期settle绕过路径。",
+    "买入按逐批份额锁定；卖出只能用到release_at的份额。卖款单列受限现金，买入需到账且严格晚于卖出开盘、当前是目标产品允许开盘。已有freecash不因另有受限卖款全部锁定。",
+    "总资产仅一次计算自由现金、受限卖款、应收及持仓；支付到时才转现金；拆分同时调整已释放/待释放批次份额但保留release_at，已登记分红权益不重算。卖费超卖款差额只能用当前可用现金，不能制造负受限卖款。",
+    "复用原事件大顺序：前完整日账、00:00入金、行动、已到时支付、合格成交、收盘估值。真实行动细顺序缺证不猜，本轮fixture显式固定；入金只用保存前一完整日净值。",
+    "支持本轮必要合成收盘/拆分单位换算与未知估值拒绝；不开发P0/P1完整生成器、价格求解器或市场撮合，不接生产或技术信息workflow。"
+  ],
+  "acceptance": [
+    "现有100可卖+当日买100，同开盘重复推进仍只能卖原100；周末/假日不提前释放；到显式release_at才释放。",
+    "0freecash卖得200，同开盘直接buy拒绝且账本不变；之后目标允许开盘且已到账才允许。开盘后到账不能倒回开盘，停牌/缺开盘/禁买拒绝不自动追单。",
+    "free100+restricted200，当下只可花100且费用不借受限款；释放后可用300但资产不跳升。",
+    "已释放100+待释放100在2倍拆分后各200、release_at不改、不重复放大；旧分红权益售后/拆后保留。",
+    "未到支付时应收不可花，到时现金转化资产/单位不变；入金同日沿旧完整日净值，保留原除息bug反例断言。",
+    "倒退/重复支付/同日错序/违规超卖/费用不足拒绝原子性；合法同一开盘多个事件不误阻止。",
+    "原16项结论按适用断言迁移兼容，不重跑旧目录；新输出包含明确每步自由/受限现金、可卖份额、资产及拒绝。独立核至少关键时点现金/拆分算术。"
+  ],
+  "expected_outputs": [
+    "新内核、合成夹具与必要测试、冻结原规范与实现差异、失败记录和独立核验回执",
+    "源fingerprints、实际commands/结果、工程限度，非收益报告",
+    "在独立codex分支发布准确安全工程文件并逐字远端读回；旧规范原件只读"
+  ],
+  "budget": {
+    "market_runs": 0,
+    "fits": 0,
+    "new_data_requests": 0,
+    "labels": 0,
+    "sealed_reruns": 0,
+    "installs": 0,
+    "paid_actions": 0
+  },
+  "network_scope": "Git only",
+  "controller_review": {
+    "required": true,
+    "independent_money_time_checks": true
+  },
+  "stop_conditions": [
+    "缺关键语义仅暂停相关案例，不能猜市场规则",
+    "不删除/交易/部署/强推/切主分支/改仓外",
+    "新写前实测存储、复用小范围树，不完整复制大项目"
+  ],
+  "created_at": "2026-10-08T18:53:26.704972+08:00"
+}

@@ -1,0 +1,48 @@
+{
+  "mission": "Review the exact necessary synthetic settlement engineering continuation under existing shared-account specv0.2; produce an implementable bounded contract, no implementation or tests in this audit.",
+  "workspace_root": "/tmp/lei-weekly-portfolio-20261004/docs/experiments/raw/weekly-portfolio-decision-2026-10-04/continuation-20261004",
+  "task_scope": [
+    "Read only six named original files, verify fingerprints; original16cases alreadyaccepted, do not rerun.",
+    "Determine minimum implementation making dated share release and proceeds reuse rules actually enforced as specified, including later eligible opening, blocked/nontrading sessions, locked/free cash and split/dividend interactions.",
+    "Separate original v0.2 conservative research assumptions from actual market rules; calendar is explicit synthetic fixture; no actual account defaults.",
+    "Give exact API/event sequencing, acceptance counterexamples, required current implementation reuse, file scope and unresolved genuine semantics; no replacement platform or full P0/P1 policy experiment."
+  ],
+  "read_only_paths": [
+    "shared-account-spec.md",
+    "ledger_invariants.py",
+    "test_ledger_invariants.py",
+    "engineering-review.md",
+    "tests-02.json",
+    "README.md"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Bounded original-spec-preserving implementation contract plus nonduplicate failure examples; distinguish immediate engineering from real-data blocked work"
+  ],
+  "stop_conditions": [
+    "No file writes, execution of source/tests, new data, messages to others or child agents",
+    "Do not treat manual settle() or standalone require_later_open() as integrated protection",
+    "No new parameters or user actualrisk assumptions"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "source_sha256": {
+    "shared-account-spec.md": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+    "ledger_invariants.py": "d44b7ecae245c28c9021a22305281d038bb820cee3dc16af7e872ef782033e2c",
+    "test_ledger_invariants.py": "5a3d03fcb4806e6f8f77cee468b11f1f21628fb00b01bd912fe47c8d7e9dc236",
+    "engineering-review.md": "fb357c168c069c383a02fc9c777ef9b94583317b2c289d871686ba69ff5a83dc",
+    "tests-02.json": "4732684cccaa92c87119fff98c7c187d6bf00e629900e3d8346c4db5ff21b490",
+    "README.md": "d2a1f5faa93493d8b4d024aebaed1a3b571b240980fc83ca02f1692a85044285"
+  },
+  "source_owner": "01a105b0-23e3-7598-9e99-c66e3a45301c",
+  "authority": "Original LeiSignal goal5 engineering simulation + latest mainGoal continuation; read-only audit only. Prior16checks provenance verified."
+}

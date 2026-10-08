@@ -1,0 +1,26 @@
+{
+  "reviewer": "/root/settlement_scope_review",
+  "model": "gpt-6-astra",
+  "reasoning_effort": "high",
+  "source6_hashes_equal": true,
+  "original16_receipt_hashes_equal": true,
+  "decision": "implementable synthetic dated execution layer under existingv0.2; no marketrun or fullpolicy claims",
+  "necessary_gaps": [
+    "settle() has no date; caller canreleaseimmediately",
+    "sell() makes proceedsfree immediately; buy bypasses independentrequire_later_open"
+  ],
+  "critical_requirements": [
+    "date/calendar/eligibility/binding checked inside ledger supportedentry, not optional helper",
+    "per-purchase lotrelease and restrictedproceeds; equity includes each once",
+    "mixedfreecash remainsavailable; P1 completeorder sequencing stilloutside",
+    "dividendpaytime and split pendinglots preserve source entitlements/time",
+    "eventorder/duplicates/atomic refusal; insufficientsalesfee usesonlyavailablecash"
+  ],
+  "unresolved_real_inputs": [
+    "actual productrelease algorithm",
+    "actual proceeds paymenttimes",
+    "same-day multipleaction ordering",
+    "valid marks for exdividend/halt"
+  ],
+  "no_writes_or_tests": true
+}
