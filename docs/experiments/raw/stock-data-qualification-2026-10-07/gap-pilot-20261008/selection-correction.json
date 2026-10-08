@@ -1,0 +1,41 @@
+{
+  "schema": "stock-gap-pilot-selection-correction/1.0",
+  "supersedes": "scope.json selected_keys only; original fetched responses and cost remain retained",
+  "original_selected": [
+    "2022-01-04",
+    "2022-01-05",
+    "2022-01-06"
+  ],
+  "original_symbol": "600705",
+  "official_event_path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/official-20211210-csi300-event.json",
+  "official_event_sha256": "cd3d8af1bd1e20f5917580ad97283692e411910e5feb8ecc26fcbca9b3de81d8",
+  "official_removed_entry": {
+    "code": "600705",
+    "name": "中航产融"
+  },
+  "official_effective_text": "2021年12月10日收市后生效",
+  "reason": "600705 candidate membership for 2022-01-04..14 conflicts with official removal effective after 2021-12-10 close; these dates are not qualified CSI300 research keys",
+  "original_new_requests_consumed": 2,
+  "original_response_bytes_retained": 67789,
+  "revised_selection_rule": "filter old 1,601 normal raw missing keys by formal dates and known official exclusions, then sort code/date; provisional member status separately marked because full official historical 300 anchor remains unavailable",
+  "revised_selected_keys": [
+    {
+      "exchange": "XSHG",
+      "symbol": "600837",
+      "date": "2022-01-04"
+    },
+    {
+      "exchange": "XSHG",
+      "symbol": "600837",
+      "date": "2022-01-05"
+    },
+    {
+      "exchange": "XSHG",
+      "symbol": "600837",
+      "date": "2022-01-06"
+    }
+  ],
+  "remaining_request_cap": 4,
+  "remaining_response_bytes_cap": 20903731,
+  "old_600705_diagnostic_not_used_to_repair": true
+}

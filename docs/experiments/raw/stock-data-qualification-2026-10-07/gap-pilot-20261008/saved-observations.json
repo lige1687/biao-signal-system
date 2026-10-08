@@ -1,0 +1,119 @@
+{
+  "scope": "saved observations only; no new request or adjusted price",
+  "selection_rule": "old formal CSI300 candidate dates with absent original close, positive normal raw provider observation, not repaired; sort by 6-digit code then date; first 3",
+  "selected_keys": [
+    {
+      "exchange": "XSHG",
+      "symbol": "600705",
+      "date": "2022-01-04",
+      "raw_close": "4.0000",
+      "raw_preclose": "3.9700",
+      "raw_adjustflag": "3",
+      "trade_status": "1",
+      "volume": "43658574",
+      "amount": "173972796.0200",
+      "main_old_qfq_column_present": false
+    },
+    {
+      "exchange": "XSHG",
+      "symbol": "600705",
+      "date": "2022-01-05",
+      "raw_close": "3.9500",
+      "raw_preclose": "4.0000",
+      "raw_adjustflag": "3",
+      "trade_status": "1",
+      "volume": "35179471",
+      "amount": "139774952.9600",
+      "main_old_qfq_column_present": false
+    },
+    {
+      "exchange": "XSHG",
+      "symbol": "600705",
+      "date": "2022-01-06",
+      "raw_close": "3.9600",
+      "raw_preclose": "3.9500",
+      "raw_adjustflag": "3",
+      "trade_status": "1",
+      "volume": "25514583",
+      "amount": "101050932.6800",
+      "main_old_qfq_column_present": false
+    }
+  ],
+  "same_source_adjacency": [
+    {
+      "previous_date": "2021-12-31",
+      "date": "2022-01-04",
+      "previous_close": "3.9700",
+      "reported_preclose": "3.9700",
+      "exact_string_match": true
+    },
+    {
+      "previous_date": "2022-01-04",
+      "date": "2022-01-05",
+      "previous_close": "4.0000",
+      "reported_preclose": "4.0000",
+      "exact_string_match": true
+    },
+    {
+      "previous_date": "2022-01-05",
+      "date": "2022-01-06",
+      "previous_close": "3.9500",
+      "reported_preclose": "3.9500",
+      "exact_string_match": true
+    },
+    {
+      "previous_date": "2022-01-06",
+      "date": "2022-01-07",
+      "previous_close": "3.9600",
+      "reported_preclose": "3.9600",
+      "exact_string_match": true
+    }
+  ],
+  "all_four_neighbor_links_match": true,
+  "saved_factor_query_rows": 0,
+  "saved_factor_window": [
+    "2021-12-01",
+    "2022-02-15"
+  ],
+  "old_candidate_membership_not_official_anchor": true,
+  "old_main_qfq_column_present": false,
+  "old_main_qfq_adjustment_anchor_known": false,
+  "source_receipts": [
+    {
+      "path": "docs/experiments/raw/stock-universe-data-qualification-2026-10-05/read-only-source-manifest-v2.json",
+      "bytes": 229060,
+      "sha256": "e16ca16d715bb6f50da39c762e6de8d70b64f5e5d9cf951aebda94b292856780"
+    },
+    {
+      "path": "docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/daily_raw/daily-1-sh-600705.json",
+      "bytes": 16286,
+      "sha256": "a1b2ce5541a4237ba85c87442b3611702fa2c6ad77f2a3726d455fae80a7cc11"
+    },
+    {
+      "path": "docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/normalized/factor/factor-1-sh-600705.json",
+      "bytes": 403,
+      "sha256": "56ebe5b1ae198ad4a9b11a0eb01938ccf0b0034e135f35bf7f7af168b0853022"
+    },
+    {
+      "path": "docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/raw/daily-1-sh-600705-wire.bin",
+      "bytes": 1676,
+      "sha256": "5257a113c3174595c8cc1757960198b3be92f6aa9603c21f49aa47fbc85b6005"
+    },
+    {
+      "path": "docs/experiments/raw/baostock-bounded-air-probe-2026-10-05/run-01/raw/factor-1-sh-600705-wire.bin",
+      "bytes": 193,
+      "sha256": "258deb620a13560824326a6e2a7dd8ba8a1174acacdc20c85cd9a7f24cbeed8c"
+    },
+    {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+      "bytes": 136179,
+      "sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30"
+    }
+  ],
+  "main_price_source": {
+    "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_full.parquet",
+    "bytes": 49432584,
+    "sha256": "5ad045c518d0bb4394d8c8cb946d207ad9b5b1454e5a776b1a3766c62b475b04"
+  },
+  "new_requests": 0
+}
