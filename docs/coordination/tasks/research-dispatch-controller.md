@@ -1,9 +1,9 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新2026-10-08T15:33:22.762193+08:00；checked_coordination_sha=cc27d1b3d99a435eaaca598537180ca3a2fef2ba，沿原五task-id核对，无范围冲突。
+- 更新2026-10-08T16:57:43.420479+08:00；checked_coordination_sha=a47a1fe0d07043ecfd1df7b49f2e5198620fd3ea；已读中控、日常流程和视频最新记录，无范围冲突。
 - 新完成两报告：原固定成交现金需求A_ALL约41.21万至49.90万元、A_SMA约39.904万至39.907万元；2026上半年日历181日一致，新增覆盖153日。独立计算路径复算相同，未声称外部人独审、收益改善或全历史合格。
 - 成果a9f438d67bf5c850a5ae49ce00d7ce646c7822bb的23文件已逐字远端读回；进度凭据c9d99bf4bb77e985f79aa7c97594c7835a7d1da6已远端核验。主登记632、隔离登记211，新增两项；累计11报告。
-- 磁盘Errno28失败保留，本轮恢复小文件写入并完成归档；空间仍低，新下载/大任务须另核容量。没有重跑主计算、旧实验、真实标签或拟合，来源操作仍112/8,511,710字节。
+- 2026-10-08T16:57:43.420479+08:00实测容量恢复至7612555264字节，普通fetch/索引/ff成功，仓内协调树已恢复干净；原因未核且本对话未清理。原Errno28失败保留。没有重跑主计算、旧实验、真实标签或拟合，来源操作仍112/8,511,710字节。
 - 共享registry/INDEX范围已释放；当前无真实研究进程运行。八整体目标仍待各自资料/合同，不用某一缺件阻塞独立项，也不重复封存研究。详见机器记录中八目标剩余项。
 
 ## 当前直接执行规则
@@ -134,8 +134,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "cc27d1b3d99a435eaaca598537180ca3a2fef2ba",
-  "checked_at": "2026-10-08T15:33:22.762193+08:00",
+  "checked_coordination_sha": "a47a1fe0d07043ecfd1df7b49f2e5198620fd3ea",
+  "checked_at": "2026-10-08T16:57:43.420479+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -491,10 +491,8 @@
   },
   "checked_task_ids": [
     "research-dispatch-controller",
-    "theory-workflow-system-increment",
-    "risk-shape-information",
-    "research-evidence-catalog/report-library-integration-20261008",
-    "daily-trading-system-audit"
+    "daily-trading-system-audit",
+    "trend-trading-video"
   ],
   "heartbeat_configuration": {
     "policy_version": "2026-10-08.v4-direct",
@@ -1102,24 +1100,23 @@
     },
     {
       "goal": 8,
-      "accepted": "Small-file writes recovered after Errno28; both raw result hashes unchanged; exact reports/archive published. No deletion or outside-repo mutation.",
-      "remaining": "Free space remains below512MiB; no new source downloads or large jobs until measured capacity recovers. Deletion/outside writes still unapproved."
+      "accepted": "Current measured free space exceeds6GB; normal Git fetch and index writes work; already-published coordination record safely fast-forwarded to latest clean worktree, no reset or duplicate commit. No controller cleanup or outside-repo writes.",
+      "remaining": "Recheck actual capacity before each larger job; recovery cause unverified and capacity may change. Separate daily-flow owner implementing bounded storage checks, not controller acceptance of full-system protection. Deletion/outside writes remain unapproved here."
     }
   ],
   "shared_registration_scope_released": true,
   "direct_next_actions": [
-    "Cash/calendar both completed and published; do not rerun main calculations or re-register.",
-    "On a real new input/source/decision, resume only its matching outstanding goal under original budgets and exact contract. New source acquisition requires storage guard; other independent authorized ready work still checked.",
-    "Unchanged external dependencies: exact six frozen D-MAE inputs and staged review; complete historical stock membership/price-scale/use contract; exact Qlib input/receipt. Preserve source failures and all sealed studies. No unchanged-status Git commits."
+    "Storage/Git operational recovery verified; no stale low-space or local-HEAD-behind claim. Measure current capacity before next write-heavy job.",
+    "Cash/calendar and earlier9 reports accepted; do not rerun or re-register. Exact D-MAE originals/staged review, historical stock membership/price scale/use and Qlib original input/receipt remain distinct dependencies.",
+    "On concrete new authorized input/source/necessary independent work, execute within original budgets after scope check. Do not reopen completed source attempts simply because disk recovered; retain original calendar67/75 usage and all failures.",
+    "Daily-flow/storage engineering remains with original active owner; read callbacks with latest cursor, do not duplicate implementation or take over cleanup permission."
   ],
   "read_task_ids": [
     "research-dispatch-controller",
-    "theory-workflow-system-increment",
-    "risk-shape-information",
-    "research-evidence-catalog/report-library-integration-20261008",
-    "daily-trading-system-audit"
+    "daily-trading-system-audit",
+    "trend-trading-video"
   ],
-  "conflict_decision": "Latest coordination unchanged since scope; root finished only scoped cash/calendar paths and own record/progress. Both reports registered and shared registry/INDEX released; other tasks untouched.",
+  "conflict_decision": "Only own central record/progress/state updated for verified storage/Git recovery. Existing daily-flow/storage and video paths untouched; no new research/write scope or source attempt.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -1189,11 +1186,11 @@
       "price_repairs": 0,
       "source_originals": "local_only; hashes and factual summaries published",
       "publication_branch": "codex/research-direct-20261008",
-      "publication_tip": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb",
+      "publication_tip": "c9d99bf4bb77e985f79aa7c97594c7835a7d1da6",
       "main_registry_entries": 632,
       "isolated_registry_entries": 211,
       "primary_branch_unchanged": true,
-      "free_bytes_after": 218656768,
+      "free_bytes_after": 7612555264,
       "officially_matched_2024_placeholders": 17,
       "code_transitions_qualified": 1,
       "saved_dividend_events_qualified": 6,
@@ -1257,19 +1254,20 @@
         },
         {
           "goal": 8,
-          "accepted": "Small-file writes recovered after Errno28; both raw result hashes unchanged; exact reports/archive published. No deletion or outside-repo mutation.",
-          "remaining": "Free space remains below512MiB; no new source downloads or large jobs until measured capacity recovers. Deletion/outside writes still unapproved."
+          "accepted": "Current measured free space exceeds6GB; normal Git fetch and index writes work; already-published coordination record safely fast-forwarded to latest clean worktree, no reset or duplicate commit. No controller cleanup or outside-repo writes.",
+          "remaining": "Recheck actual capacity before each larger job; recovery cause unverified and capacity may change. Separate daily-flow owner implementing bounded storage checks, not controller acceptance of full-system protection. Deletion/outside writes remain unapproved here."
         }
       ],
-      "status_refreshed_at": "2026-10-08T15:31:45.814395+08:00",
+      "status_refreshed_at": "2026-10-08T16:57:43.420479+08:00",
       "supersedes": "2026-10-08T13:49:28.653456+08:00",
-      "current_real_experiment_readiness": "Both local fixed questions completed and archived. No process running. No new exact D-MAE originals, stock history/price source or Qlib receipt supplied; other sealed studies not reopened.",
+      "current_real_experiment_readiness": "Storage/Git obstacle recovered; exact frozen research inputs/source/use contracts unchanged. Completed local units not restarted. Independent daily-flow/storage owner active, no overlap.",
       "next_required_decision_boundary": "Full dated historical member source/coverage; original price scale and actual consumer; exact6D-MAE originals and staged grants; exactQlib receipt. Do not repeatedly request unchanged missing inputs."
     },
     "next_actions": [
-      "Cash/calendar both completed and published; do not rerun main calculations or re-register.",
-      "On a real new input/source/decision, resume only its matching outstanding goal under original budgets and exact contract. New source acquisition requires storage guard; other independent authorized ready work still checked.",
-      "Unchanged external dependencies: exact six frozen D-MAE inputs and staged review; complete historical stock membership/price-scale/use contract; exact Qlib input/receipt. Preserve source failures and all sealed studies. No unchanged-status Git commits."
+      "Storage/Git operational recovery verified; no stale low-space or local-HEAD-behind claim. Measure current capacity before next write-heavy job.",
+      "Cash/calendar and earlier9 reports accepted; do not rerun or re-register. Exact D-MAE originals/staged review, historical stock membership/price scale/use and Qlib original input/receipt remain distinct dependencies.",
+      "On concrete new authorized input/source/necessary independent work, execute within original budgets after scope check. Do not reopen completed source attempts simply because disk recovered; retain original calendar67/75 usage and all failures.",
+      "Daily-flow/storage engineering remains with original active owner; read callbacks with latest cursor, do not duplicate implementation or take over cleanup permission."
     ],
     "latest_commit": "c9d99bf4bb77e985f79aa7c97594c7835a7d1da6",
     "completed_units": [
@@ -1725,7 +1723,20 @@
       }
     ],
     "result_commit": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb",
-    "progress_commit": "c9d99bf4bb77e985f79aa7c97594c7835a7d1da6"
+    "progress_commit": "c9d99bf4bb77e985f79aa7c97594c7835a7d1da6",
+    "storage_git_recovery": {
+      "checked_at": "2026-10-08T16:57:43.420479+08:00",
+      "checked_coordination_sha": "a47a1fe0d07043ecfd1df7b49f2e5198620fd3ea",
+      "state": "capacity_and_coordination_worktree_recovered",
+      "free_bytes": 7612555264,
+      "free_space_cause": "unverified; no deletion/migration by this controller",
+      "initial_ff_failure": "Unstaged own file was identical to remote already-published record; ordinary fast-forward first refused to overwrite local changes",
+      "safe_resolution": "Verified only own file changed and byte-identical to remote; staged that exact existing file, ordinary merge --ff-only succeeded; clean worktree and HEAD matched remote",
+      "new_research_runs": 0,
+      "new_downloads": 0,
+      "branch_unchanged": "codex/factor-unit-research-20260915",
+      "preserved_original_result_commit": "a9f438d67bf5c850a5ae49ce00d7ce646c7822bb"
+    }
   },
   "final_coordination_publication_failure": {
     "kind": "non_fast_forward",
