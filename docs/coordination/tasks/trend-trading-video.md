@@ -1,3 +1,12 @@
+## 共享登记单项恢复
+
+- 2026-10-08T20:38:13.912602+08:00；checked_coordination_sha: 7ca0650ed5bd09685a2bdf2b0b51cb5c2ae9b895；已读COORDINATION.md、自己的task-id trend-trading-video及research-dispatch-controller最新释放记录。冲突决定：中控纯规划已633→634并释放，本任务现在只写自己的报告单项与INDEX一行，旧条目保留。
+- 四教程学习、60秒流派发展史与skill已完成技术验收；独立成果eab40213b4d77d994e3f8a3b8761cc903b99acbd共13文件远端逐字核。主登记完成后立即释放；媒体和skill不交叉写。
+- 4K成片a5010f99ccc47b177b8305938bfcee1cc009a78e939eb7d5839eff5db84aa87d，1080 d18cd5c2215cdfaa6bb2392eb832ba9df84b439d2a67bd575b4b3bc321d80ed9；无旁白、无真实行情。账户周额度38→39显示增1个百分点，非单任务精确。
+- 原6+4次来源计划，收尾另复核既有原著URL1次，累计11；未新增付费或模型。文件/播放通过，主观效果待用户验收。
+
+---
+
 ## 共享登记窗口临时释放
 
 - 2026-10-08T20:20:54.153954+08:00；checked_coordination_sha: 6b37f4d6c4d90d4bc024860cd4a91ac70e337fcf；本任务本轮尚未修改registry.json和INDEX.md。
