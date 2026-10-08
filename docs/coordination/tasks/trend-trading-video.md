@@ -1,3 +1,15 @@
+## V9 full-delivered
+
+- task-id: trend-trading-video；2026-10-08T23:18:54.296726+08:00；checked_coordination_sha: 4e639cdf41e2de02d37182613dc932b7cf546275；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed本轮制作，完整成片观感待用户验收；scope_released=true。用户已确认V10样片，V11沿用其视觉扩展为完整60秒。
+- 成果codex/trend-film-v11-20261008@609cf2ae5edf0ca1dd4415ac3445790337eaf82d，准确路径远端逐字核验。只自有v11、v10阶段与skill参考更新，未触registry/INDEX。无其他任务重叠。
+- 60.01秒1920×1080、1800帧；完整解码/类型/时间表/匿名文字/归置通过。初次类型失败为拆出组件残留3个导入，修正后通过，未降低检查。12张抽帧+58.5秒结尾实查；实际浏览器从0播到60.01秒ended=true/error=null。−18.0 LUFS，真峰−5.0。
+- 文件外盘trend-trading-video-20261008T230944-b5fc6ddf18c1/result/trend-history-final.mp4；v11/storage-plan.json、validation.json有身份/路径/SHA/回执。页面http://127.0.0.1:8778/有章节和来源/许可。无旁白无品牌无真实行情；照片和音乐复用已核材料，无新下载/费用服务/删除。
+- 周额度48%→48%，账号共享7天限额整数显示，非视频费用或任务token账单，已向用户解释精确任务消耗未知。制作源已保存，小样和旧版保留。
+
+
+---
+
 ## V9 full-start
 
 - task-id: trend-trading-video；2026-10-08T23:09:23.327394+08:00；checked_coordination_sha: cbc020ba556c75533b441b8946214d93ded8ac2d；已读 COORDINATION.md、自身与 research-dispatch-controller。
