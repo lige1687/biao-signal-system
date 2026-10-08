@@ -1,3 +1,16 @@
+# 当前：写入前存储检查限定工程accepted；本轮四源码范围释放
+
+- task-id `classic-factor-research` / 子范围 `native-storage-preflight`；负责人01a0e6d5-4bcf-7bd3-82e4-4961c963d20e；updated_at 2026-10-08T19:08:55.859395+08:00（Asia/Shanghai）。本限定子阶段completed/accepted；整个经典真实研究仍blocked，不代表整个Goal8完成或任务交接。
+- checked_coordination_sha `3ed3fe52960ce3697a23b353f76dfb8be8e312cf`；已读COORDINATION1.1、classic-factor-research、research-dispatch-controller、daily-trading-system-audit、theory-workflow-system-increment；新增中控明确本批accepted，结算独审及theory36来源审查只改自身新raw，没有本范围冲突。
+- `scope_released=true` **仅适用于本轮四个实现路径**：scripts/run_factor_lab.py、src/lei_signal/research/storage_preflight.py、tests/unit/test_research_storage_preflight.py、tests/integration/test_research_storage_preflight_cli.py。不再占用这些文件同写；任何后继仍须协调明确唯一写者，释放不是许可或排他锁。自己旧证据/阶段记录仍由本任务维护，不自动释放其他历史声明。
+- 原代码及测试完整成果commit `3d3c172c5119ca9ec3f8c77b17116d416f86f86a` 不变；后继进度/阶段回执已普通推并fetch逐字核2文件完整commit **`6f8b57751ddeb5643260457b3cb1968244cde2a7`**，分支codex/native-storage-preflight-20261008。基础dbd86bccf9ffe9ea9617a484bf8b96825880fb7d。后继只改自己的进度和raw/stage-release.json，0代码改动/0测试重跑/0补附件。
+- [最新进度](https://github.com/lige1687/biao-signal-system/blob/6f8b57751ddeb5643260457b3cb1968244cde2a7/docs/ops/work-progress/native-research-storage-preflight-2026-10-08.md)、[阶段回执](https://github.com/lige1687/biao-signal-system/blob/6f8b57751ddeb5643260457b3cb1968244cde2a7/docs/experiments/raw/native-research-storage-preflight-2026-10-08/stage-release.json)。旧manifest/SHA256SUMS绑定原3d3c172c快照，新进度指纹单独在阶段回执；不改原证据指纹。
+- 中控独立6项验证后接受：7角色增长总119B+reserve101B，220允许/219拒绝；省reuse_lock拒绝、错输入SHA拒绝、实际CLI拒绝先于研究import/回调、新子进程无env禁pyc仍拒绝且无资料字节变化/pyc。中控任务自身最新远端记录已明确accepted；原验收JSON2133B，SHA84e8241473a62951221cfae4ed9f74a22a77fd90b8c29e963744d2b82d585e0d，本任务只读核本机原件，未代上传。截至原取源远端d7de1aad该JSON还未发布；中控负责后续准确发布。本任务成果原17文件已中控远端核，workflow/question_contract固定SHA未变。
+- 原41新检查及6本负责人检查不重复；旧84通过/2缺附件失败、分支旧归置器.git报错与当前本地主规则通过都保留，不修旧成绩。真实外盘、新机、拔盘/竞态未验证，无计划旧入口未保护，真实因子效果/资金收益未测量。
+- 当前正在做的代码/实验：无；本子阶段必要验收与状态同步已完成。下一步仅在准确原合同、输入资格、阶段许可具备时接续真实研究，新的研究调用另须storage-plan；六真实原件缺口保持。0行情/拟合/标签/封存重跑/安装/付费操作；没有本轮活跃实验或checkpoint，不终止别人的进程。
+
+---
+
 # 当前：研究写入前存储检查已发布，待中控独立验收；真实研究仍blocked
 
 - task-id `classic-factor-research`；子范围 `native-storage-preflight`；负责人01a0e6d5-4bcf-7bd3-82e4-4961c963d20e；updated_at 2026-10-08T18:58:08.132190+08:00（Asia/Shanghai）。状态 active（限定工程待独审，非科学研究运行）；scope_released=false。
