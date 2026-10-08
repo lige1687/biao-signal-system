@@ -1,0 +1,138 @@
+{
+  "status": "bounded_repair_required",
+  "at": "2026-10-08T21:53:01.290682+08:00",
+  "checked_coordination_sha": "a383774bcfc4a66716e8f0620c61c31ab254c93b",
+  "read_task_ids": [
+    "research-dispatch-controller",
+    "mac-local-storage-cleanup",
+    "trend-trading-video"
+  ],
+  "source_commit": "428dd19607ecc75cbe9f59e5e2fe3018c53dd9fd",
+  "owner": "01a1155d-b204-7232-a993-4c9e0567af59",
+  "owner_turn": "01a11b93-9b09-7273-abac-e59c4a80f4a7",
+  "owner_state": "completed",
+  "remote_files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 16873,
+      "sha256": "8de4a80858b3917f04c5e08848672119461fe4cbd1d5fbb4b9b8e64c5eab85ef"
+    },
+    {
+      "path": "configs/research-output-policy.v1.json",
+      "bytes": 1441,
+      "sha256": "0006daced0029e0ec87e1d69012c58d2b4d20e5b56f64a65a50406861fbb8d8c"
+    },
+    {
+      "path": "configs/storage-policy.v1.json",
+      "bytes": 546,
+      "sha256": "dbdcc8af8bd5f1d6be7ce5262e10d21177a4c4faae97d4a4d2aeda900877d4dd"
+    },
+    {
+      "path": "docs/ops/research-output-storage.md",
+      "bytes": 6829,
+      "sha256": "69526a0513270620789312b23b790558b62e93c291db31aa28cd91e2f582b8f3"
+    },
+    {
+      "path": "docs/ops/work-progress/mac-local-storage-cleanup.md",
+      "bytes": 5274,
+      "sha256": "43997afa06bc200d7dd210c68bccccd4fd2937b15190f7c6a65afaff70aa6b03"
+    },
+    {
+      "path": "src/lei_signal/research/output_storage.py",
+      "bytes": 12646,
+      "sha256": "87b9093afa614c22340443bd6f232af728d233ff2536d2d127539766fb6d094e"
+    },
+    {
+      "path": "tests/integration/test_research_output_routing_cli.py",
+      "bytes": 5153,
+      "sha256": "50e4e0a592054dfb65776964ae31597c5e3d56eab15c48dec268b0d66965e5d1"
+    },
+    {
+      "path": "tests/unit/test_research_output_storage.py",
+      "bytes": 5825,
+      "sha256": "e07a56d8fd5cb484433b9c4d86bedb777a48651f176ed59ad6d5f8ce67014abf"
+    }
+  ],
+  "local_check": "6 complete source/config/doc/test files equal; authorized AGENTS appended block equal; progress subsequently updated. No blanket claim all local files identical.",
+  "reviewer": "/root/settlement_scope_review",
+  "review_scope": "single immutable new output router and policies/tests; readonly in-memory critical checks; no research, disk writes or process stop by reviewer",
+  "storage": {
+    "checked_at": "2026-10-08T21:32:56.784288+08:00",
+    "internal_free_bytes": 1568157696,
+    "external_free_bytes": 640658702336,
+    "external_identity_ok": true,
+    "registered_resources_available": 4,
+    "new_research_start_allowed": false,
+    "reason": "less than required5GiB internal reserve"
+  },
+  "failures_preserved": [
+    "First coordination push rejected non-fast-forward; inspected only other-owner2 paths, normalmerge/push/fetch readback succeeded. No forcepush or historyrewrite.",
+    "Wrong guessed progress filename absent; resolved from authoritative owner coordination record.",
+    "Expected JSON fence not present in rootcoord; no modification on failed parse; used established append-stage format."
+  ],
+  "scope_boundaries": [
+    "No cleanup authority borrowed",
+    "No original10 CLI modifications in published8-path diff",
+    "No private archive verification or new market experiments",
+    "Not all Goal8 or eight goals accepted"
+  ],
+  "independent_review": {
+    "reviewer": "/root/settlement_scope_review",
+    "completed": true,
+    "fixed_module_sha256": "87b9093afa614c22340443bd6f232af728d233ff2536d2d127539766fb6d094e",
+    "verified": [
+      "UUID/mount/Internal/Writable refusals",
+      "same external/internal device refusal",
+      "internal reserve minus1byte refusal",
+      "saved plan samepath accepted and changed output refused",
+      "full output/root/readonly flags refused",
+      "disconnect targeted only fake own43210process group",
+      "plan-only0executorcalls ordinary1call"
+    ],
+    "not_verified": [
+      "real eject",
+      "actual child OS race",
+      "global quota",
+      "all legacy callers"
+    ],
+    "finding": "Only exact flag names filtered; abbreviation bypass independently reproduced; actual registered parser applicability now confirmed by root"
+  },
+  "actual_parser_counterexample": {
+    "fixed_router_commit": "428dd19607ecc75cbe9f59e5e2fe3018c53dd9fd",
+    "actual_entry": "scripts/run_factor_evidence_reliability.py",
+    "actual_entry_sha256": "4976b6e696281712c33fcf7c4c2b00e8a283986b6001c9709c3fc88e7460141b",
+    "method": "Only build command and AST-extracted actual argparse function; no CLI runner/import/execution or writes",
+    "results": [
+      {
+        "flag": "--repo-root=/different",
+        "wrapper": "refused",
+        "reason": "alternate repository root needs a separately checked storage plan"
+      },
+      {
+        "flag": "--repo-r=/different",
+        "wrapper": "accepted",
+        "actual_parser_repo_root": "/different",
+        "out": "/external/new/result"
+      }
+    ],
+    "conclusion": "Actual registered parser accepts abbreviation that bypasses launcher root-override refusal. No claim of actual wrong-disk write."
+  },
+  "repair_dispatch": {
+    "owner": "01a1155d-b204-7232-a993-4c9e0567af59",
+    "sent": true,
+    "at": "2026-10-08T21:59:10.772694+08:00",
+    "scope_commit": "08302dcd8c719be930f932fc67ee5a3a60164f6f",
+    "turn_id": "01a11bce-5fe2-71b1-a463-89d0d4104b9d",
+    "cursor": "97038648-8723-4658-99dd-c33457771744:11",
+    "turn_status": "inProgress",
+    "tool_execution_verified": false,
+    "write_scope": [
+      "src/lei_signal/research/output_storage.py",
+      "tests/unit/test_research_output_storage.py",
+      "tests/integration/test_research_output_routing_cli.py",
+      "necessary originalowner doc/progress/coordination"
+    ],
+    "acceptance": "actual registered parser abbreviations/equal/separate values refused before write/launch; valid full arguments unchanged; old10CLI bytes unchanged; exact commit readback",
+    "no_research_or_cleanup": true
+  }
+}
