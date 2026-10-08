@@ -30,13 +30,14 @@
     "path": "docs/experiments/INDEX.md",
     "before_sha256": "e47c71b4afd64bf72105ef35723f2b324815cb817fad3b274a940ca16d17f2e7",
     "after_sha256": "c792d7007a48473c002f4a18c77f02123a9a3429f119135dcbf788d849effbe2",
-    "old_bytes_preserved_after_removing_four_inserted_lines": true,
     "inserted_lines": [
       "- 2026-10-07：[个股资料资格与输入兼容性](stock-data-qualification-2026-10-07.md)：5,211只股票的保存价格包可供限定探索；1,944个旧缺价日期已分类但主价格未修复，P26原输入与沪深300历史完整名单仍待核。",
       "- 2026-10-07：[旧研究结论与修复影响目录](research-evidence-catalog-2026-10-07.md)：已有结论按原问题复用；5,211股/P26、B1及现金新交接的效果原件仍待核，不以旧结果替代。",
       "- 2026-10-07：[原生研究入口边界核验](native-workflow-integration-2026-10-07.md)：原入口的合同审查与中断恢复已核；D—MAE专用接入缺原输入、适配与分阶段授权，真实效果未测。",
       "- 2026-10-08：[D—MAE人工流程与Git恢复增量](native-workflow-synthetic-recovery-2026-10-08.md)：人工案例验证流程可分阶段保存和恢复；行情已找到但未用于真实计算，六份冻结研究原件仍缺，因子效果未测。"
-    ]
+    ],
+    "old_bytes_restored_after_removing_complete_inserted_block": true,
+    "complete_inserted_block_includes_separator_blank_line": true
   },
   "reports": [
     {
@@ -194,6 +195,108 @@
     "sensitive_pattern_scan": "No matches for selected key/token/private-key patterns in newly copied reports and small evidence.",
     "research_tests": "not run; report registration only",
     "absolute_local_links_in_original_catalog_report": 61,
-    "first_remote_readback": "First remote readback matched seven SHA-256 values and four registry/index entries; link check uncovered 61 preexisting absolute local paths and the receipt count was corrected. No report bytes or registry content changed."
+    "first_remote_readback": "First remote readback matched seven SHA-256 values and four registry/index entries; link check uncovered 61 preexisting absolute local paths and the receipt count was corrected. No report bytes or registry content changed.",
+    "catalog_absolute_link_provenance": {
+      "total_link_occurrences": 61,
+      "unique_repository_paths": 39,
+      "known_published_commit_exact_byte_sources": [
+        {
+          "path": "docs/experiments/a-top-lifecycle-consumer-audit-2026-09-08.md",
+          "source_commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "sha256": "5a5d6caf0c41dd0ab02d2976428bc00b008e9045f6af75ba7777c60da8caa13b"
+        },
+        {
+          "path": "docs/experiments/acd-repair-validation-2026-09-08.md",
+          "source_commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "sha256": "5f3f6a772fc9b754579e9a105dd7711ac09e2bf91e2036c7d508f3600974c2af"
+        },
+        {
+          "path": "docs/experiments/classic-benchmarks-dual20-2026-09-28.md",
+          "source_commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "sha256": "c14bfabe36334690a8688f26f8a577b26859822192b568462b651fc6ceb87e20"
+        },
+        {
+          "path": "docs/experiments/classic-benchmarks-dual20-final-2026-09-28.md",
+          "source_commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "sha256": "abce919f533ed8fdafec0df79af2e06ae9cc18317925ad7164fd151e5b1a0a8a"
+        },
+        {
+          "path": "docs/experiments/classic-benchmarks-dual20-r3-2026-09-28.md",
+          "source_commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "sha256": "beb3077ec1247158d57c3b7ecad99587b52b5d8efb4ee449221a1ce6b80e05d4"
+        },
+        {
+          "path": "docs/experiments/dual-ma-information-findings-2026-09-28.md",
+          "source_commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "sha256": "bde23a72d96c53e937333908989d0abfa336807b82ca9aad1464a3a1a4eb6e61"
+        },
+        {
+          "path": "docs/experiments/factor-breadth-dual-ma-findings-2026-09-24.md",
+          "source_commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "sha256": "22f0cfc5a43ecffb0c780fa615859e46c4584e931283020ef77b80eee60ec862"
+        },
+        {
+          "path": "docs/experiments/qlib-alpha158-controller-review-2026-09-13.md",
+          "source_commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "sha256": "6031807bacee7e43c1eed0b90642e778da364d3dab433fcac73b09e528cafef9"
+        },
+        {
+          "path": "docs/experiments/raw/research-evidence-catalog-2026-10-07/snapshot-clarification-2026-10-07.json",
+          "source_commit": "e869bdce98ac7289993b42ba50661a1a1bcf878d",
+          "sha256": "ae68fde21888a447a5c8893608199f6bbb4fa9f85ee765750dea08040c815202"
+        },
+        {
+          "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/readback.json",
+          "source_commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+          "sha256": "3e1eab81d020a99736a8530b2d8b15e11678461acd9dff965b4fab233aefa320"
+        },
+        {
+          "path": "docs/experiments/raw/stock-data-qualification-2026-10-07/scope.json",
+          "source_commit": "a6be33c2493e982451e5c5b3646c102553b43f6b",
+          "sha256": "0140fc907f120252f2db7d07a2e7c9b00677543f866964208bddfdf467134c91"
+        },
+        {
+          "path": "docs/experiments/research-workflow-engineering-2026-09-29.md",
+          "source_commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "sha256": "d8e0e65125ffb4be217b43a0bcd0e052a7071d2c5b4125bf08fe63a3912f97b1"
+        },
+        {
+          "path": "docs/experiments/research-workflow-engineering-final-2026-09-29.md",
+          "source_commit": "604445fdf9660828f4ba17db8b2bc192d33b4a9f",
+          "sha256": "b86ebf0825bbcc3f4a3fcc271938758cd01d022e7a40855b46120e0d4c3ab1f4"
+        }
+      ],
+      "repository_paths_without_exact_source_in_checked_commits": [
+        "data/local-integration/weekly-ppo-rankic-register-20261005/LeiSignal-周度PPO-RankIC补充与完整复核证据-2026-10-05.zip",
+        "docs/archive/handoffs-plans/classic-benchmarks-2026-09-28/protocol-final.json",
+        "docs/experiments/lei-cloud-research-consolidation-2026-10-05.md",
+        "docs/experiments/raw/classic-benchmarks-2026-09-28/pilot-final/manifest.json",
+        "docs/experiments/raw/dual-ma-correction-2026-09-28/controller-review.md",
+        "docs/experiments/raw/dual-ma-correction-2026-09-28/event-impact.json",
+        "docs/experiments/raw/dual-ma-correction-2026-09-28/started.json",
+        "docs/experiments/raw/dual-ma-correction-2026-09-28/summary-v1.0.1.json",
+        "docs/experiments/raw/dual-ma-resonance-d1-2026-09-23/protocol.json",
+        "docs/experiments/raw/stock-large-cloud-input-2026-10-07/export-verification.json",
+        "docs/experiments/raw/stock-large-cloud-input-2026-10-07/stock-5211-frozen-close-2020-2024-v1.zip",
+        "docs/experiments/raw/stock-ppo82-cloud-input-2026-10-07/export-verification.json",
+        "docs/experiments/raw/stock-ppo82-cloud-input-2026-10-07/stock-ppo82-frozen-close-2020-2024-v1.zip",
+        "docs/experiments/raw/strategy-factor-expansion-2026-10-05/external/REPORT.md",
+        "docs/experiments/raw/strategy-factor-expansion-2026-10-05/external/independent-checks.json",
+        "docs/experiments/raw/weekly-ppo-information-2026-10-05/registration-source.json",
+        "docs/experiments/raw/weekly-ppo-rankic-addendum-2026-10-05/registration-source.json",
+        "docs/experiments/raw/weekly-time-boundary-proposal-2026-10-06/references/cache-independent-audit/REPORT.md",
+        "docs/experiments/raw/weekly-time-boundary-proposal-v2-2026-10-06/audit-reference/REPORT.txt",
+        "docs/experiments/raw/workflow-declaration-review-cli-2026-10-07/README.md",
+        "docs/experiments/raw/workflow-declaration-review-cli-2026-10-07/independent-review.md",
+        "docs/experiments/raw/workflow-declaration-review-cli-2026-10-07/legacy-regression.txt",
+        "docs/experiments/raw/workflow-declaration-review-cli-2026-10-07/tests-final.txt",
+        "docs/experiments/weekly-ppo-information-2026-10-05.md",
+        "docs/experiments/weekly-ppo-rankic-addendum-2026-10-05.md",
+        "docs/ops/work-progress/stock-universe-data-qualification.md"
+      ],
+      "outside_repository_local_link_occurrences": 18,
+      "checked_scope": "Exact path and current local byte SHA compared with the finite previously recorded remote-tip commits plus the four accepted source commits; no global Git history scan. The original report retains local absolute URLs, which are not remote browse links."
+    },
+    "index_preservation": "Four lines plus their separator blank line form the inserted block. Removing that complete block restores the old INDEX bytes exactly; removing only four text lines leaves one blank line."
   }
 }
