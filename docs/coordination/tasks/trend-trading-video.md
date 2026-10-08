@@ -1,3 +1,17 @@
+## V9 v14-blocked
+
+- task-id: trend-trading-video；2026-10-09T00:50:09.648223+08:00；checked_coordination_sha: 89a2605cabdb380e19659215d8a664b6105184cf；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- blocked delivery：V14四分钟片已导出、核验并从头播完；收尾时批准外盘断开，最终SHA和章节跳转仍未完成。scope_released=true，无其他负责人重叠；唯一写者仍本视频任务。用户已被请求重新连接原盘。不以此标记交付完成。
+- 成果 codex/trend-history-long-v14-20261009@d2a3354f20474dbd1c3ec3dd5e957e35f1b21fdf：21个准确文件逐字远端核验。包括8章26段、来源映射、制作源、Skill长片方法和工作记录。不含大型视频/音乐，不改系统、registry、INDEX或语雀发布状态。
+- 通过：类型/7200帧时间表/公开文字/归置；13关键帧和成片联系表检查；240秒1920×1080@30fps，响度−18.0 LUFS，真峰−4.3dBTP，媒体0失败（无独立字幕轨提示）；浏览器ended=true/currentTime=240/error=null，文字展开收起正常。渲染771.636秒。未独立听审，跨设备色彩与审美待验收。
+- 未通过：点击利弗莫尔52秒后观察0.13秒，文件请求404；storage于2026-10-09 00:48 +08:00确认批准外盘未挂载，内盘约4.08GiB不足严重线。未重新渲染、未改存储位置、未清理。恢复盘后核身份和成片，再定位章节跳转是否需要HTTP Range支持。
+- 外部成片：/Volumes/win+mac通用/LeiSignal-新实验结果/trend-trading-video/trend-trading-video-20261009T001550-57f8ca4e8a7e/result/trend-history-final.mp4；当前不可读，SHA未知。绑定见v14/storage-plan.json；已取得技术观察见validation.json。预览8781原页面已标留存，但断盘时无法重载。
+- 共享7天额度50%→52%，跨V13与V14区间变化2个百分点，含其他并行任务，不是本任务精确消耗；未购买服务。来源5次工具请求，未再扩展。
+- 恢复条件：用户接回固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9的盘；读取storage核准后只做最终文件校验与预览跳转修复，更新原证据后交付，不重做已批准风格。
+
+
+---
+
 ## V9 v14-start
 
 - task-id: trend-trading-video；2026-10-09T00:13:20.815561+08:00；checked_coordination_sha: 7fb1eb96832ac6d21491733291b8fe655b351942；已读 COORDINATION.md、自身与 research-dispatch-controller。
