@@ -1,3 +1,15 @@
+## V9 style-start
+
+- task-id: trend-trading-video；2026-10-08T22:20:41.336781+08:00；checked_coordination_sha: fdb79b360bde07c33b379e113c6d6fc3dcc72c16；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active；用户新参考7693423690747336037，认为旧片效果一般，先要求十几秒小样；随后明确先给风格图，确认后再做十几秒，认可后才全片。严格按最新阶段交付，本轮只做三张风格图与素材预览，不渲染动画或全片。
+- 当前主观反馈覆盖V8待验收：结构计数和技术通过不能当观感达标。复用既有工程，主要视觉参考7691894559067910566，无品牌，无自有系统，无真实行情。
+- 本轮自有范围v9/（静态源、生成素材、来源/检查记录/页面）；现有code-explainer-video skill增加分阶段确认与新教程证据；新报告docs/experiments/video-style-approval-2026-10-08.md和raw/video-style-approval-2026-10-08/receipt.json。中控最新明确不占共享登记，本轮仅该新报告一条registry及INDEX一行，结案释放。
+- checked任务为trend-trading-video、research-dispatch-controller；COORDINATION1.1规则沿用，原V8已完成写入，无文件冲突。基线27203d2ad1ad4de8727130492f15e882c2ad9133。只使用内置图像生成和原生静帧渲染，不安装付费服务，不删任何其他文件；上次仅v7/npm-cache的清理许可已执行完，不扩大。
+- 新教程实际网页可播放，简介自述Codex+HyperFrames；普通用户评论含阶段prompt，尚不把评论当作者原文。风格片实际30秒截图已观察。研究限定本次两条指定链接，保存实际观察范围，不声称完整听审。周额度起点45%。
+
+
+---
+
 ## V8 completed
 
 - task-id: trend-trading-video；2026-10-08T22:16:18.781859+08:00；checked_coordination_sha: 2a3380bcd9b41a4dfa70964625bc1548a45c662e；已读 COORDINATION.md、自身与 research-dispatch-controller。
