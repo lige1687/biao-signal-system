@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "e7a4e7111e247bbcfc7977d8eb247372e37152e1",
-  "checked_at": "2026-10-08T18:41:13.082128+08:00",
+  "checked_coordination_sha": "7f871d54ef8c6b929bdbb30f9908e0681d168829",
+  "checked_at": "2026-10-08T18:53:26.704972+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1117,7 +1117,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "theory-workflow-system-increment",
     "daily-trading-system-audit"
   ],
-  "conflict_decision": "原CLI owner独占scripts/run_factor_lab.py及新storage_preflight；daily存储发现范围只读。理论安全发布在其隔离分支，与CLI无重叠。原冻结实验不动。",
+  "conflict_decision": "原周频账户owner负责新raw dated-execution目录及自己progress；无生产/shared文件写入。CLI owner独占原预检范围；theory39交付已完成。",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -1933,7 +1933,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
           "reason": "同卷预算累加、复用合同第二账本、拒绝零写入等涉及跨路径失效风险；独立模块与CLI最小接入。"
         },
         "turn_id": "01a11b13-8cea-7440-aa60-ba7656fb58eb",
-        "cursor": "a591b4fe-dbd5-4064-8886-86eb6cc1cc81:3",
+        "cursor": "a591b4fe-dbd5-4064-8886-86eb6cc1cc81:6",
         "tool_execution_verified": true,
         "scope_commit": "b1d7a706be47819e8807d916b22e08ea4e76337a",
         "scope_remote_file_equal": true,
@@ -1943,8 +1943,18 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       },
       {
         "id": "factor-fusion-risk-exit/settlement-coverage",
-        "status": "pending_scope_review",
-        "dependency": "existing simulation coverage and settlement semantics; not D raw features"
+        "status": "scope_review_accepted_implementation_ready",
+        "dependency": "existing simulation coverage and settlement semantics; not D raw features",
+        "owner": "01a105b0-23e3-7598-9e99-c66e3a45301c",
+        "review_agent": "/root/settlement_scope_review",
+        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-implementation-contract.json",
+        "scope": "Integrate existingv0.2 date/share settlement and later-open cash constraints; no actualmarket rules assumed",
+        "scope_review": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-scope-controller-review.json",
+        "executor": {
+          "model": "gpt-6.1-sol",
+          "reasoning_effort": "medium",
+          "reason": "Astra/high已明确关键时点/资金范围，执行者只实现冻结行为与合成案例。"
+        }
       },
       {
         "id": "theory-workflow-system-increment/dependency-publication-audit",
@@ -1960,14 +1970,23 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       },
       {
         "id": "theory-workflow-system-increment/synthetic-dependency-publication",
-        "status": "contract_ready_not_dispatched",
+        "status": "accepted_exact39_publication_portability_still_partial",
         "owner": "01a11579-7f2c-7c21-88d1-e5b334b569b7",
         "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/synthetic-dependency-publication-contract.json",
         "scope": "39 exact candidate synthetic evidencefiles; validate contentbeforepublish; preserve36remaining gaps",
         "executor": {
           "model": "gpt-6.1-sol",
           "reasoning_effort": "medium"
-        }
+        },
+        "dispatch_at": "2026-10-08T18:42:20.545249+08:00",
+        "scope_commit": "b99ea39141a45b5d8a8775e11b3ae41251de4f8d",
+        "scope_remote_file_equal": true,
+        "turn_id": "01a11b1a-e6f2-7d13-8617-a97344eca730",
+        "cursor": "b2c09e5c-80bb-4dd0-ba1f-cd3d99aabb13:9",
+        "tool_execution_verified": true,
+        "published_commit": "60934d6dbd39f233f01f12730bd27997d6474556",
+        "receipt_commit": "4d9e1ad0f17abc67f46b38efe1a0d4fd7c9a03dd",
+        "acceptance": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/synthetic39-controller-acceptance.json"
       }
     ],
     "latest_active_other_owner": {
@@ -1977,7 +1996,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "task": "daily-trading-system-audit",
       "scope": "AI storage-resource discovery, original owner active; no takeover"
     },
-    "last_updated": "2026-10-08T18:33:05.084534+08:00",
+    "last_updated": "2026-10-08T18:53:26.704972+08:00",
     "future_workflow_dispatch_rule": "After implementation accepted, new root-dispatched workflow runs must provide explicit storage-plan with derived paths and actual output estimates; no new science budget.",
     "progress_publication": {
       "commit": "874c4ebf0dde9d838de619bcfc8cc5dfc91be37e",
@@ -1990,6 +2009,16 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       "remote_ref": "e7a4e7111e247bbcfc7977d8eb247372e37152e1",
       "file_equal": true,
       "verified_at": "2026-10-08T18:39:21.130112+08:00"
+    },
+    "latest_followup_publication": {
+      "commit": "d7de1aadf28a8afd971830d17ea2da89efe67dc0",
+      "files_remote_equal": 3
+    },
+    "latest_check_at": "2026-10-08T18:43:08.952794+08:00",
+    "previous_goal_turn_classification": {
+      "classification": "progress",
+      "evidence": "MainGoal activated;33 publication artifacts accepted; two actualoriginalowner implementation/publication turns started and verified.",
+      "current_turn_progress": "39 additional synthetic inputs remote43file verification; locatedoriginal16check settlementprototype andactualspec; independent criticalreviewstarted."
     }
   }
 }
@@ -2123,3 +2152,10 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 已核协调e7a4e7111e247bbcfc7977d8eb247372e37152e1；相关classic/theory/controller/daily范围与上轮无冲突。Luna只读审查已返回：39份B批合成验证候选110,834字节；其余36件涉及协议、来源或真实逐行资料，按原owner核，不能整批上传。
 - 中控实际逐路径构建39件准确大小/SHA合同：docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/synthetic-dependency-publication-contract.json。交原theory owner在独立成果分支逐文件复核内容并准确发布，保留原失败/待复核状态；任何不符者拒绝，不补造。只允许该39原字节及本任务新发布回执/进度，原根文件只读。
 - 不能按助手建议改旧method-case或definitions来绕过缺件；新合同明确禁止。补齐安全子集仍预期36件缺失，不能声称准备工具完整跨设备运行。此刻contract ready，尚未实际派发；CLI实现仍运行。
+
+## 目标5原件定位、独审与实际接续范围 2026-10-08T18:53:26.704972+08:00
+
+- checked_coordination_sha=7f871d54ef8c6b929bdbb30f9908e0681d168829；已读中控/classic/theory/daily范围；原周频owner01a105b0-23e3-7598-9e99-c66e3a45301c当前idle。39合成依赖已由中控独立核43远端文件，接受60934d6d与回执4d9e1ad0，36缺件仍在。
+- 原周频/tmp准确六份工程文件找到，原16测试回执两代码SHA相符；此前weekly_accounts_r2仅持有研究，不作为旧完整订单引擎替代。Astra/high新只读审查六源通过，确认setttle无日期/卖款立即可用为未集成边界。
+- 续接合同 docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-implementation-contract.json，写范围仅新docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/和同名work-progress。独立codex稀疏树；原件不改、仓外不写、不重跑市场或旧16测试。合成日历明确release/到账，不能猜正式结算规则；不实现完整P0/P1。原owner须自己登记推送后实现，当前ready未派发。
+- 验收为账本入口强制日期与资金来源、同期开盘重复/混合现金/拆分批次/入金分红/原子拒绝及必要独立算术；不是策略收益或实际用户风险合格。其他实验仍原合同原预算。
