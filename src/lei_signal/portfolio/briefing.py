@@ -150,7 +150,43 @@ def _facts(item: dict) -> dict:
     }
 
 
-def _trade_changes(sources: dict, previous: dict | None) -> dict:
+def _usable_product_name(value, code) -> str | None:
+    if not isinstance(value, str):
+        return None
+    name = value.strip()
+    if not name or name == str(code or "").strip() or name in {"未知", "名称未知", "--"}:
+        return None
+    return name
+
+
+def _product_names(items: list[dict], sources: dict, previous: dict | None) -> dict[str, str]:
+    """Resolve names only from records carrying the exact same product code."""
+    names: dict[str, str] = {}
+
+    def remember(code, value, *, replace=False):
+        key = str(code or "").strip()
+        name = _usable_product_name(value, key)
+        if key and name and (replace or key not in names):
+            names[key] = name
+
+    # The current holding record is the primary identity source.
+    for item in items:
+        remember(item.get("code"), item.get("name"), replace=True)
+    # A name attached to that same holding's net asset value can fill a gap.
+    for item in items:
+        nav = item.get("nav") or {}
+        for field in ("fund_name", "product_name"):
+            remember(item.get("code"), nav.get(field))
+    # Preserve identity for a holding removed from the current snapshot.
+    for item in (previous or {}).get("holdings", []):
+        remember(item.get("code"), item.get("display_name") or item.get("name"))
+    # A transaction ledger may be the only record for a newly recorded trade.
+    for trade in (sources.get("trades", {}).get("data") or {}).get("trades") or []:
+        remember(trade.get("fund_code"), trade.get("fund_name"))
+    return names
+
+
+def _trade_changes(sources: dict, previous: dict | None, names: dict[str, str]) -> dict:
     source = sources.get("trades", {})
     old = (previous or {}).get("trade_ledger", {})
     comparable = bool(old.get("available"))
@@ -174,6 +210,7 @@ def _trade_changes(sources: dict, previous: dict | None) -> dict:
                 "created_at",
             )
         }
+        row["display_name"] = names.get(str(row.get("fund_code") or "").strip(), "名称未知")
         records.append(row)
         if comparable and row != before.get(row["trade_id"]):
             changes.append(
@@ -207,6 +244,7 @@ def build_packet(
     now = now.astimezone(SHANGHAI)
     workspace = sources.get("workspace", {}).get("data") or {}
     items = workspace.get("items") or []
+    names = _product_names(items, sources, previous)
     old = {x["holding_id"]: x for x in (previous or {}).get("holdings", [])}
     first = previous is None
     holdings, changes = [], []
@@ -225,6 +263,8 @@ def build_packet(
         row = {
             "holding_id": hid,
             "name": item.get("name"),
+            "display_name": _usable_product_name(item.get("name"), item.get("code"))
+            or names.get(str(item.get("code") or "").strip(), "名称未知"),
             "code": item.get("code"),
             "group_name": item.get("group_name"),
             "holding_as_of": item.get("holding_as_of"),
@@ -233,9 +273,29 @@ def build_packet(
         }
         holdings.append(row)
         if changed:
-            changes.append({"holding_id": hid, "name": item.get("name"), "fields": changed})
+            changes.append(
+                {
+                    "holding_id": hid,
+                    "name": item.get("name"),
+                    "code": item.get("code"),
+                    "display_name": row["display_name"],
+                    "fields": changed,
+                }
+            )
     current_ids = {x["holding_id"] for x in holdings}
-    removed = [hid for hid in old if hid not in current_ids] if workspace else []
+    removed = (
+        [
+            {
+                "holding_id": hid,
+                "code": old[hid].get("code"),
+                "display_name": names.get(str(old[hid].get("code") or "").strip(), "名称未知"),
+            }
+            for hid in old
+            if hid not in current_ids
+        ]
+        if workspace
+        else []
+    )
 
     news_data = sources.get("news", {}).get("data") or {}
     start = (now - timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
@@ -297,12 +357,24 @@ def build_packet(
                 and bool(item.get("technical"))
                 and not item.get("gaps")
                 and not meta.get("is_intraday_forming")
+                and not meta.get("cache_fallback_used")
+                and bool(meta.get("last_bar_date"))
+                and str(meta["last_bar_date"])[:10] <= now.date().isoformat()
+                and all(
+                    a.get("data_as_of")
+                    and a.get("actionable_from")
+                    and str(a["data_as_of"])[:10] <= now.date().isoformat()
+                    and str(a["actionable_from"])[:10] <= now.date().isoformat()
+                    for a in item.get("alerts", [])
+                )
                 and item.get("status") in {"action_required", "no_trigger"}
             )
             review.append(
                 {
                     "holding_id": item["holding_id"],
                     "name": item.get("name"),
+                    "display_name": _usable_product_name(item.get("name"), item.get("code"))
+                    or names.get(str(item.get("code") or "").strip(), "名称未知"),
                     "state": "按系统原计划逐项复核"
                     if qualified
                     else "原计划或可用行情不足，不能判定安全或失效",
@@ -337,7 +409,7 @@ def build_packet(
         "holdings": holdings,
         "changes": changes,
         "removed_since_previous": removed,
-        "trade_ledger": _trade_changes(sources, previous),
+        "trade_ledger": _trade_changes(sources, previous, names),
         "market_background": {key: sources.get(key, {}) for key in ("cn", "us")},
         "news": news,
         "blogger_previous_trading_day": blogger_previous,
@@ -584,6 +656,11 @@ def main() -> int:
         action="store_true",
         help="collect sources without model scoring, deletion or production writes",
     )
+    parser.add_argument(
+        "--refresh-video-content",
+        action="store_true",
+        help="read public target-day audio with existing local ASR; never upload audio",
+    )
     args = parser.parse_args()
     now = datetime.now(SHANGHAI)
     previous = None
@@ -629,6 +706,46 @@ def main() -> int:
             "retrieved_at": now.isoformat(),
         }
     packet = build_packet(sources, slot=args.slot, now=now, previous=previous, authors=authors)
+    from lei_signal.integrations.bilibili_content import collect_video_content
+
+    video = collect_video_content(
+        packet["blogger_previous_trading_day"],
+        authors,
+        (packet.get("blogger_window") or {}).get("date"),
+        args.output_dir / "video-content",
+        refresh=args.refresh_video_content,
+    )
+    packet["blogger_previous_trading_day"] = video["items"]
+    packet["blogger_yesterday"] = video["items"]
+    packet["video_content_coverage"] = {
+        "errors": video["errors"],
+        "results": [
+            {k: v for k, v in row.items() if k not in {"transcript_text", "segments"}}
+            for row in video["results"]
+        ],
+        "note": "平台字幕与本机转写分别标示；转写需校正，不把文字自动改为买卖条件。",
+    }
+    # Read account/market facts again after slow audio processing, preserving each source date.
+    if args.refresh_video_content:
+        now = datetime.now(SHANGHAI)
+        updated_sources = fetch_sources(args.base, now)
+        sources.update(
+            {k: v for k, v in updated_sources.items() if k not in {"news", "news_status"}}
+        )
+        refreshed = build_packet(
+            sources, slot=args.slot, now=now, previous=previous, authors=authors
+        )
+        refreshed.update(
+            {
+                k: packet[k]
+                for k in (
+                    "blogger_previous_trading_day",
+                    "blogger_yesterday",
+                    "video_content_coverage",
+                )
+            }
+        )
+        packet = refreshed
     args.output_dir.mkdir(parents=True, exist_ok=True)
     output = (
         args.output_dir
@@ -637,10 +754,15 @@ def main() -> int:
     with output.open("x") as stream:
         json.dump(packet, stream, ensure_ascii=False, indent=2)
         stream.write("\n")
+    from lei_signal.portfolio.brief_render import render_brief
+
+    report = output.with_suffix(".md")
+    report.write_text(render_brief(packet), encoding="utf-8")
     print(
         json.dumps(
             {
                 "packet": str(output.resolve()),
+                "report": str(report.resolve()),
                 "mode": packet["mode"],
                 "coverage": packet["coverage"],
                 "changes": len(packet["changes"]),

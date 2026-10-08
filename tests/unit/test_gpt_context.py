@@ -97,6 +97,35 @@ def _fake(path: str):
     return data[path]
 
 
+def test_named_saved_candidates_and_fixed_product_analysis(tmp_path):
+    root = Path(__file__).resolve().parents[2]
+
+    def fetch(path):
+        if path == "/api/watchlist":
+            return []
+        if path == "/api/opportunities/today":
+            return {
+                "scan_date": "2026-10-08",
+                "waiting": [
+                    {"symbol": "515880.SS", "display_name": "515880.SS"},
+                    {"symbol": "IGV", "display_name": None},
+                ],
+                "actionable": [],
+                "blocked": [],
+            }
+        if path == "/api/symbols/515880.SS/detail":
+            return {"symbol": "515880.SS", "meta": {"last_bar_date": "2026-09-30"}}
+        raise AssertionError(path)
+
+    context = SystemContext(root, fetch=fetch)
+    data = context.opportunities()["data"]
+    assert data["waiting"][0]["display_name"] == "国泰中证全指通信设备ETF"
+    assert data["waiting"][1]["display_name"] == "iShares软件行业ETF"
+    assert data["requires_detail_review"] is True
+    assert context.analysis("515880.SS")["data"]["meta"]["last_bar_date"] == "2026-09-30"
+    assert context.analysis("../secret")["available"] is False
+
+
 @pytest.mark.parametrize(
     "url",
     [
@@ -116,7 +145,7 @@ def test_rejects_nonlocal_or_decorated_base(url: str, tmp_path: Path) -> None:
 def test_allowlist_rejects_arbitrary_get_and_refresh(tmp_path: Path) -> None:
     context = SystemContext(tmp_path, fetch=_fake)
     for path in (
-        "/api/symbols/QQQ/detail",
+        "/api/symbols/QQQ/detail?refresh=true",
         "/api/factors/panel?refresh=true",
         "/api/experiments/../../secret",
         "http://example.com/",

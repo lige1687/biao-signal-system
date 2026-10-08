@@ -189,6 +189,47 @@ class PortfolioBriefingTests(unittest.TestCase):
         self.assertEqual(out["plan_review"][0]["system_alerts"], [])
         self.assertIsNone(out["user_stated_context"][0]["stop_condition"])
 
+    def test_product_names_are_resolved_only_from_same_code_records(self):
+        src = self.source()
+        item = src["workspace"]["data"]["items"][0]
+        item.update(code="123456", name=None, plan=None, gaps=[])
+        item["nav"]["fund_name"] = "同代码基金"
+        src["trades"] = {
+            "ok": True,
+            "data": {
+                "trades": [
+                    {
+                        "trade_id": "t1",
+                        "fund_code": "123456",
+                        "fund_name": "另一显示名",
+                        "price_status": "pending",
+                    },
+                    {
+                        "trade_id": "t2",
+                        "fund_code": "654321",
+                        "fund_name": "654321",
+                        "price_status": "pending",
+                    },
+                ]
+            },
+        }
+        out = build_packet(src, slot="1440", now=NOW)
+        self.assertEqual(out["holdings"][0]["display_name"], "同代码基金")
+        self.assertEqual(out["trade_ledger"]["records"][0]["display_name"], "同代码基金")
+        self.assertEqual(out["trade_ledger"]["records"][1]["display_name"], "名称未知")
+        self.assertEqual(out["plan_review"][0]["display_name"], "同代码基金")
+
+    def test_changes_and_removed_rows_include_product_name(self):
+        src = self.source()
+        src["workspace"]["data"]["items"][0]["code"] = "123456"
+        old = build_packet(src, slot="1135", now=NOW)
+        prev = deepcopy(old)
+        prev["holdings"][0]["holding_id"] = "removed"
+        src["workspace"]["data"]["items"][0]["nav"]["value"] = 1.3
+        out = build_packet(src, slot="1440", now=NOW, previous=prev)
+        self.assertEqual(out["changes"][0]["display_name"], "示例基金")
+        self.assertEqual(out["removed_since_previous"][0]["display_name"], "示例基金")
+
 
 if __name__ == "__main__":
     unittest.main()

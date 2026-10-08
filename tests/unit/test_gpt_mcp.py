@@ -15,7 +15,7 @@ from mcp import ClientSession
 from mcp.client.stdio import StdioServerParameters, stdio_client
 from mcp.client.streamable_http import streamable_http_client
 
-_SERVER = '''
+_SERVER = """
 import sys
 from lei_signal.integrations.gpt_mcp import create_server
 
@@ -40,7 +40,7 @@ class FakeContext:
 create_server(FakeContext(), port=int(sys.argv[2]) if len(sys.argv) > 2 else 8765).run(
     transport=sys.argv[1]
 )
-'''
+"""
 
 
 def _result_data(result) -> dict:
@@ -68,9 +68,20 @@ def test_real_stdio_roundtrip_and_read_only_boundary() -> None:
 
                 tools = (await session.list_tools()).tools
                 expected = {
-                    "overview", "portfolio", "fundamentals", "news", "plans",
-                    "trades", "factors", "research_search", "research_report",
+                    "overview",
+                    "portfolio",
+                    "fundamentals",
+                    "news",
+                    "plans",
+                    "trades",
+                    "factors",
+                    "research_search",
+                    "research_report",
                     "latest_brief",
+                    "opportunities",
+                    "analysis",
+                    "daily_review",
+                    "plan_scenario",
                 }
                 assert {tool.name for tool in tools} == expected
                 fundamentals_schema = next(
@@ -83,12 +94,15 @@ def test_real_stdio_roundtrip_and_read_only_boundary() -> None:
                     and tool.annotations.destructiveHint is False
                     for tool in tools
                 )
-                assert {
-                    tool.name for tool in tools if tool.annotations.openWorldHint is True
-                } == {"overview", "fundamentals"}
+                assert {tool.name for tool in tools if tool.annotations.openWorldHint is True} == {
+                    "overview",
+                    "fundamentals",
+                    "analysis",
+                }
                 assert all(
                     tool.annotations.openWorldHint is False
-                    for tool in tools if tool.name not in {"overview", "fundamentals"}
+                    for tool in tools
+                    if tool.name not in {"overview", "fundamentals", "analysis"}
                 )
 
                 overview = _result_data(
@@ -111,9 +125,11 @@ def test_real_stdio_roundtrip_and_read_only_boundary() -> None:
                     await session.call_tool("research_search", {"query": "ETF", "limit": 2})
                 )
                 assert search["data"] == {"query": "ETF", "limit": 2}
-                fundamentals = _result_data(await session.call_tool(
-                    "fundamentals", {"market": "us", "section": "rates-history"}
-                ))
+                fundamentals = _result_data(
+                    await session.call_tool(
+                        "fundamentals", {"market": "us", "section": "rates-history"}
+                    )
+                )
                 assert fundamentals["data"] == {"market": "us", "section": "rates-history"}
                 report_name = "docs/experiments/example-2026-10-08.md"
                 report = _result_data(
@@ -121,20 +137,18 @@ def test_real_stdio_roundtrip_and_read_only_boundary() -> None:
                 )
                 assert report["data"] == {"name": report_name, "max_chars": 12000}
                 brief = _result_data(await session.call_tool("latest_brief", {"slot": "1135"}))
-                assert brief["data"] == {
-                    "slot": "1135"
-                }
+                assert brief["data"] == {"slot": "1135"}
 
                 assert (await session.call_tool("portfolio", {"fund_code": "../secret"})).isError
                 assert (await session.call_tool("research_report", {"name": "/etc/passwd"})).isError
-                assert (await session.call_tool(
-                    "research_report", {"name": "docs/experiments/../private.md"}
-                )).isError
+                assert (
+                    await session.call_tool(
+                        "research_report", {"name": "docs/experiments/../private.md"}
+                    )
+                ).isError
                 assert (await session.call_tool("latest_brief", {"slot": "yesterday"})).isError
                 assert (await session.call_tool("news", {"limit": 1000})).isError
-                assert (await session.call_tool(
-                    "fundamentals", {"section": "refresh"}
-                )).isError
+                assert (await session.call_tool("fundamentals", {"section": "refresh"})).isError
                 assert (await session.call_tool("factors", {})).isError
                 assert (await session.call_tool("execute_trade", {})).isError
 
@@ -178,20 +192,25 @@ def test_loopback_http_roundtrip() -> None:
         asyncio.run(exercise())
 
         initialize = {
-            "jsonrpc": "2.0", "id": 1, "method": "initialize",
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "initialize",
             "params": {
-                "protocolVersion": "2025-06-18", "capabilities": {},
+                "protocolVersion": "2025-06-18",
+                "capabilities": {},
                 "clientInfo": {"name": "host-origin-probe", "version": "1"},
             },
         }
         headers = {"Accept": "application/json, text/event-stream"}
         with httpx.Client(trust_env=False) as client:
             bad_host = client.post(
-                f"http://127.0.0.1:{port}/mcp", json=initialize,
+                f"http://127.0.0.1:{port}/mcp",
+                json=initialize,
                 headers={**headers, "Host": "attacker.example"},
             )
             bad_origin = client.post(
-                f"http://127.0.0.1:{port}/mcp", json=initialize,
+                f"http://127.0.0.1:{port}/mcp",
+                json=initialize,
                 headers={**headers, "Origin": "http://attacker.example"},
             )
         assert bad_host.status_code == 421, (bad_host.status_code, bad_host.text)
@@ -215,3 +234,91 @@ def test_remote_bind_is_rejected(capsys) -> None:
     else:
         raise AssertionError("remote host was accepted")
     assert "remote binding is disabled" in capsys.readouterr().err
+
+
+def test_confirmed_record_protocol_uses_original_isolated_store(tmp_path) -> None:
+    """Official SDK, real local receipt/holding tables, no production paths."""
+    script = """
+import sys
+from lei_signal.integrations.gpt_mcp import create_server
+from lei_signal.integrations.chat_workflow import ConfirmedWorkflow
+from lei_signal.storage.sqlite_store import connect
+from lei_signal.portfolio.models import PortfolioGroup, PortfolioHolding
+from lei_signal.portfolio.store import upsert_group, upsert_holding
+with connect(sys.argv[1]) as conn:
+    upsert_group(conn, PortfolioGroup("cn", "测试分组", "cn", 1, "测试"))
+    upsert_holding(conn, PortfolioHolding("h1", "cn", "测试通信基金", "515880", 1000, 0))
+    conn.commit()
+class Context:
+    pass
+create_server(Context(), allow_confirmed_records=True,
+              workflow=ConfirmedWorkflow(sys.argv[1]), transactions=object()).run()
+"""
+    db = tmp_path / "protocol.db"
+
+    async def exercise():
+        repo = Path(__file__).resolve().parents[2]
+        env = os.environ.copy()
+        params = StdioServerParameters(
+            command=sys.executable, args=["-c", script, str(db)], env=env, cwd=str(repo)
+        )
+        async with (
+            stdio_client(params) as (read, write),
+            ClientSession(read, write) as session,
+        ):
+            init = await session.initialize()
+            assert init.serverInfo.name == "lei-system"
+            tools = (await session.list_tools()).tools
+            assert len(tools) == 23
+            writes = {t.name for t in tools if not t.annotations.readOnlyHint}
+            assert writes == {
+                "record_confirm",
+                "trade_record",
+                "plan_discussion",
+                "plan_draft",
+                "holding_plan_link",
+            }
+            card = _result_data(
+                await session.call_tool(
+                    "record_preview",
+                    {
+                        "kind": "holding_basis",
+                        "request_id": "protocol-basis-01",
+                        "original_message": "隔离测试实际份额",
+                        "conversation_ref": "isolated-test",
+                        "fields": {
+                            "holding_id": "h1",
+                            "code": "515880",
+                            "shares": 800,
+                            "cost": 900,
+                            "basis_date": "2026-09-30",
+                            "included_trade_ids": [],
+                            "evidence_ref": "测试平台记录",
+                        },
+                    },
+                )
+            )
+            assert (
+                await session.call_tool(
+                    "record_confirm", {"card": card, "confirmation": {"confirmed": False}}
+                )
+            ).isError
+            arguments = {
+                "card": card,
+                "confirmation": {
+                    "confirmed": True,
+                    "request_id": card["request_id"],
+                    "fingerprint": card["fingerprint"],
+                },
+            }
+            result = _result_data(await session.call_tool("record_confirm", arguments))
+            assert result["status"] == "basis_confirmed"
+            assert _result_data(await session.call_tool("record_confirm", arguments)) == result
+            assert (await session.call_tool("execute_trade", {})).isError
+
+    asyncio.run(exercise())
+    import sqlite3
+
+    with sqlite3.connect(db) as conn:
+        assert conn.execute("SELECT count(*) FROM codex_workflow_receipts").fetchone()[0] == 1
+        assert conn.execute("SELECT market_value FROM portfolio_holdings").fetchone()[0] == 1000

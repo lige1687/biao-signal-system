@@ -1,0 +1,178 @@
+{
+  "checked_at": "2026-10-08T16:25:37.672286+08:00",
+  "scope": "Codex local queries and human-confirmed records; no strategy changes or broker orders",
+  "related_tests": "120 passed, 1 dependency deprecation warning",
+  "flow_tests": [
+    "discussion to source-bound draft, confirmation, original condition review and holding link",
+    "fund buys/sells to actual shares, reconciliation and next NAV refresh",
+    "new fund first NAV uses actual shares and cost",
+    "changed/duplicate/mismatched requests and missing evidence rejected",
+    "official MCP SDK 14 readonly/23 enabled tools roundtrip"
+  ],
+  "real_reports": [
+    {
+      "slot": "1135",
+      "generated_at": "2026-10-08T16:15:46.456972+08:00",
+      "packet_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/portfolio-chat-briefing/packet-20261008T161546456972-1135-1adb3811.json",
+      "packet_sha256": "bb9f7c9959fd689df2b7b5a10669b2da328812cb45bd063ba034493460a1a086",
+      "report_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/portfolio-chat-briefing/packet-20261008T161546456972-1135-1adb3811.md",
+      "report_sha256": "ff2120881491d85a91e367675dd93be3e869f1ce4bca6a3c63e2f5b45db47db2",
+      "coverage": {
+        "total": 29,
+        "with_nav": 28,
+        "with_technical": 0,
+        "with_plan": 0,
+        "action_required": 0,
+        "waiting": 0,
+        "incomplete": 29,
+        "no_trigger": 0
+      },
+      "named_holdings": 29,
+      "video_cached": 2,
+      "failed_blogger_sources": 3
+    },
+    {
+      "slot": "1440",
+      "generated_at": "2026-10-08T16:16:03.669225+08:00",
+      "packet_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/portfolio-chat-briefing/packet-20261008T161603669225-1440-dbb7e5ba.json",
+      "packet_sha256": "b990d3108bc1d901f1a145d2fc3d79837b3852e41271c624b76657c6ec44a5f5",
+      "report_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/portfolio-chat-briefing/packet-20261008T161603669225-1440-dbb7e5ba.md",
+      "report_sha256": "f4cf33990aa0afee65c0cbabefe71853c941d7d63a929623c6d2968501c12aa3",
+      "coverage": {
+        "total": 29,
+        "with_nav": 28,
+        "with_technical": 0,
+        "with_plan": 0,
+        "action_required": 0,
+        "waiting": 0,
+        "incomplete": 29,
+        "no_trigger": 0
+      },
+      "named_holdings": 29,
+      "video_cached": 2,
+      "failed_blogger_sources": 3
+    }
+  ],
+  "video_content": {
+    "checked_at": "2026-10-08T16:20:27.022372+08:00",
+    "method": "public Bilibili audio, existing local MLX Whisper small model",
+    "uploaded_audio": false,
+    "errors": [],
+    "videos": [
+      {
+        "bvid": "BV1emaZ6ME4e",
+        "owner_mid": 697048631,
+        "published_at": "2026-09-30T16:46:02+08:00",
+        "duration_seconds": 313,
+        "coverage": {
+          "seconds": 310.76,
+          "duration_seconds": 313,
+          "fraction": 0.9928
+        },
+        "receipt_sha256": "c0f485ee3bf9da25e9ce8caf9a3656ed333703c635bed93bc169fe1648ca6e51",
+        "audio_sha256": "2ab73df25b6606a28bc91f376e9e7a34375c9637500ad1744a36f24efc3e96cc",
+        "model_sha256": "55b6674c9b339702d486e2b1573839a66f8ec8f821ed2886993ef717a86b09f5",
+        "transcript_sha256": "4efc47a77f49169f82efc605f0592b870868ea8beef90471eb5a5423a38c9b62",
+        "receipt_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/portfolio-chat-briefing/video-content/BV1emaZ6ME4e/receipt.json",
+        "status": "local ASR uncorrected, numbers and terms require audio/image confirmation"
+      },
+      {
+        "bvid": "BV1yxaZ6pEM2",
+        "owner_mid": 3461576996685827,
+        "published_at": "2026-09-30T16:17:58+08:00",
+        "duration_seconds": 582,
+        "coverage": {
+          "seconds": 560.56,
+          "duration_seconds": 582,
+          "fraction": 0.9632
+        },
+        "receipt_sha256": "4e93ade09a7a0a2fabb68c6a277d193b0986df271bc89ecf555f48ecb02d8c29",
+        "audio_sha256": "d3f0bdf1179243b3e93bb406b90b6e65123596edaef5cff83f9c34f3748f7ed4",
+        "model_sha256": "55b6674c9b339702d486e2b1573839a66f8ec8f821ed2886993ef717a86b09f5",
+        "transcript_sha256": "c6aa37589e6e2a874f61706e0122ddff2421f86ee287fc6a002bdca79b4db151",
+        "receipt_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/portfolio-chat-briefing/video-content/BV1yxaZ6pEM2/receipt.json",
+        "status": "local ASR uncorrected, numbers and terms require audio/image confirmation"
+      }
+    ]
+  },
+  "automation_readback": {
+    "checked_at": "2026-10-08T16:20:27.020522+08:00",
+    "rows": [
+      {
+        "id": "automation-3",
+        "name": "持仓午间简报",
+        "fields_preserved": true,
+        "prompt_sha256": "45906b76cf62393de86c3f95ce682d3dbd33df85f54fe191456f733e4d1e6bc4",
+        "name_first": true,
+        "video_refresh": true,
+        "target_thread_id": "01a11a05-c140-7d82-b8b6-68c83ee9e2ee"
+      },
+      {
+        "id": "automation-4",
+        "name": "持仓下午条件复核",
+        "fields_preserved": true,
+        "prompt_sha256": "f4e0910958d5bfed35842dcc1c9da7da1fab48eaecbd5a071ddece63388c2410",
+        "name_first": true,
+        "video_refresh": true,
+        "target_thread_id": "01a11a05-c140-7d82-b8b6-68c83ee9e2ee"
+      },
+      {
+        "id": "automation-5",
+        "name": "系统关键变化提醒",
+        "fields_preserved": true,
+        "prompt_sha256": "1bd943675fa79bee08078a11c7be7464f7369d55587ea4650a16d377a048f54b",
+        "name_first": true,
+        "video_refresh": false,
+        "target_thread_id": "01a11a05-c140-7d82-b8b6-68c83ee9e2ee"
+      },
+      {
+        "id": "automation-6",
+        "name": "一周成果与持仓复盘",
+        "fields_preserved": true,
+        "prompt_sha256": "72ef63a4091cacaefbeeb15218fc36f68742bd0df096f0539f8f0e0d42970550",
+        "name_first": true,
+        "video_refresh": false,
+        "target_thread_id": "01a11a05-c140-7d82-b8b6-68c83ee9e2ee"
+      }
+    ]
+  },
+  "private_data_not_uploaded": true,
+  "production_account_rows_after": {
+    "portfolio_holdings": {
+      "rows": 29,
+      "sha256": "6f0979d9ce33e46cf187498ba6ef24a2c9e36adaf3fa84c96db3635759a18198"
+    },
+    "portfolio_groups": {
+      "rows": 8,
+      "sha256": "ffe6919f50b0d618ab4f0e428e644d97ffbfed902ce3ffb8b2fa035a5a9815f8"
+    },
+    "trade_plans": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "fund_trades": {
+      "rows": 0,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "codex_workflow_receipts": {
+      "exists": false
+    }
+  },
+  "storage_migration": {
+    "receipts": [
+      "data/cache/gpt-system-integration/implementation/space-migration-receipt.json",
+      "data/cache/gpt-system-integration/implementation/space-migration-receipt-2.json",
+      "data/cache/gpt-system-integration/implementation/space-migration-receipt-3-fixed.json"
+    ],
+    "copied_bytes_total": 505964725,
+    "free_space_increase_measured": 506675200,
+    "active_code_database_models_untouched": true
+  },
+  "limitations": [
+    "0 plan links and 0 same-product technical results for 29 holdings",
+    "3 blogger list sources failed; 2 public videos locally transcribed, uncorrected",
+    "no personal original exit conditions or usable per-product win probabilities inferred",
+    "phone/web ChatGPT connection deferred; config is not dynamic tools reload",
+    "shared original APIs are other owner dependencies; this branch alone does not contain all local backend changes"
+  ]
+}

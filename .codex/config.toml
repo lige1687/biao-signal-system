@@ -1,7 +1,7 @@
-# Read-only LeiSignal evidence for this project; no trading or account writes.
+# LeiSignal evidence and human-confirmed local records; never broker orders.
 [mcp_servers.lei_system]
 command = "/opt/homebrew/bin/python3"
-args = ["-m", "lei_signal.integrations.gpt_mcp", "--transport", "stdio"]
+args = ["-m", "lei_signal.integrations.gpt_mcp", "--transport", "stdio", "--allow-confirmed-records"]
 startup_timeout_sec = 30
 tool_timeout_sec = 60
 

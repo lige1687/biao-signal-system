@@ -66,14 +66,38 @@ def _allowed_path(path: str) -> bool:
         "/api/factors/panel",
         "/api/experiments",
         "/api/upgrades",
+        "/api/watchlist",
+        "/api/opportunities/today",
         "/api/fundamentals/observations?market=cn",
         "/api/fundamentals/observations?market=us",
         *(path for path, _ in _FUNDAMENTAL_SECTIONS.values()),
-    }
+    } or bool(
+        re.fullmatch(
+            r"/api/symbols/(?:[0-9]{6}\.(?:SS|SZ)|[A-Z]{1,6}|\^[A-Z0-9]{1,12}|TH[0-9]{6}\.SECTOR)/(?:detail|buy-point-review)",
+            path,
+        )
+    )
 
 
 def _is_fund_code(value: str | None) -> bool:
     return value is not None and bool(_FUND_CODE.fullmatch(value))
+
+
+def product_identities(repo_root: Path | None = None) -> dict[str, dict]:
+    """Display identity only; never price or market-data qualification."""
+    root = repo_root or Path(__file__).resolve().parents[3]
+    try:
+        value = json.loads((root / "configs/chat-product-identities.v1.json").read_text())
+        return {
+            k: v
+            for k, v in value.get("products", {}).items()
+            if re.fullmatch(r"(?:[0-9]{6}\.(SS|SZ)|[A-Z]{1,6})", k)
+            and isinstance(v, dict)
+            and v.get("name")
+            and v.get("source_url")
+        }
+    except (OSError, ValueError, TypeError):
+        return {}
 
 
 class SystemContext:
@@ -104,7 +128,9 @@ class SystemContext:
                 raise ValueError("API response must be JSON object or array")
             return result
         request = Request(self.base_url + path, method="GET")
-        timeout = 30 if path == "/api/fundamentals/us-macro" else 8
+        timeout = (
+            45 if path.endswith("/detail") else 30 if path == "/api/fundamentals/us-macro" else 8
+        )
         try:
             with self._opener.open(request, timeout=timeout) as response:
                 if response.status != 200:
@@ -162,7 +188,7 @@ class SystemContext:
             if error:
                 errors[name] = error
             else:
-                expected_list = name == "plans"
+                expected_list = name in {"plans", "watchlist"}
                 if not isinstance(value, list if expected_list else dict):
                     errors[name] = "invalid API schema: expected " + (
                         "list" if expected_list else "object"
@@ -534,6 +560,7 @@ class SystemContext:
             },
             "news_coverage": packet.get("news_coverage"),
             "configured_authors": packet.get("configured_authors"),
+            "video_content_coverage": packet.get("video_content_coverage"),
             "unqualified_news": packet.get("unqualified_news"),
             "packet_generated_at": packet.get("generated_at"),
         }
@@ -625,6 +652,123 @@ class SystemContext:
             and (packet.get("trade_ledger") or {}).get("available") is True
         )
         return response
+
+    def opportunities(self) -> dict[str, Any]:
+        """Read the saved scan and fill display names from exact identities."""
+        from lei_signal.api.config import INDEX_OVERRIDES, OVERSEAS_NAME_CN
+        from lei_signal.api.labels import THS_INDUSTRY_NAMES
+
+        data, errors, sources = self._collect(
+            {
+                "opportunities": "/api/opportunities/today",
+                "watchlist": "/api/watchlist",
+            }
+        )
+        names = {**OVERSEAS_NAME_CN, **{s: x.display_name for s, x in INDEX_OVERRIDES.items()}}
+        names.update({f"TH{code}.SECTOR": name for code, name in THS_INDUSTRY_NAMES.items()})
+        identities = product_identities(self.repo_root)
+        names.update({symbol: row["name"] for symbol, row in identities.items()})
+        for item in data.get("watchlist", []):
+            name = item.get("display_name")
+            if name and name != item.get("symbol"):
+                names[item["symbol"]] = name
+        result = data.get("opportunities")
+        if result:
+            result = json.loads(json.dumps(result))
+            for group in ("actionable", "waiting", "blocked"):
+                for item in result.get(group, []):
+                    symbol = item.get("symbol", "")
+                    if not item.get("display_name") or item["display_name"] == symbol:
+                        item["display_name"] = names.get(symbol, "名称待核对")
+                        if symbol in identities:
+                            item["name_source"] = identities[symbol]
+            result["requires_detail_review"] = True
+        return self._result(
+            "opportunities",
+            result,
+            errors=errors,
+            sources=sources,
+            limitations=["保存的候选名单不是买入指令；扫描日期不等于行情日期。"],
+        )
+
+    def analysis(self, symbol: str) -> dict[str, Any]:
+        """The system's existing detailed product analysis, without forced refresh."""
+        path = f"/api/symbols/{symbol}/detail"
+        if not _allowed_path(path):
+            return self._result("analysis", errors={"symbol": "unsupported product identity"})
+        data, errors, sources = self._collect({"analysis": path})
+        return self._result(
+            "analysis",
+            data.get("analysis"),
+            errors=errors,
+            sources=sources,
+            limitations=[
+                "基本面/消息只解释背景；同日未完成日线不能当收盘确认。",
+                "指数、联接基金与场内ETF是不同产品，不借用价格执行。",
+            ],
+        )
+
+    def daily_review(self, slot: str = "1440") -> dict[str, Any]:
+        from lei_signal.integrations.daily_decisions import build_daily_decisions
+
+        if slot not in {"1135", "1440"}:
+            return self._result("daily_review", errors={"slot": "unsupported slot"})
+        portfolio, plans, opportunities, news = (
+            self.portfolio(),
+            self.plans(),
+            self.opportunities(),
+            self.news(),
+        )
+        decision = build_daily_decisions(
+            portfolio=portfolio, plans=plans, opportunities=opportunities, news=news, slot=slot
+        )
+        return self._result(
+            "daily_review",
+            decision,
+            errors=decision["source_errors"],
+            sources={
+                name: result["sources"]
+                for name, result in (
+                    ("portfolio", portfolio),
+                    ("plans", plans),
+                    ("opportunities", opportunities),
+                    ("news", news),
+                )
+            },
+        )
+
+    def plan_scenario(self, plan_id: str) -> dict[str, Any]:
+        """A conditional picture from an existing plan, without making up levels."""
+        from lei_signal.integrations.daily_decisions import plan_scenario, render_scenario_svg
+
+        if not re.fullmatch(r"[A-Za-z0-9_-]{1,128}", plan_id):
+            return self._result("plan_scenario", errors={"plan_id": "invalid plan identity"})
+        plans, portfolio = self.plans(), self.portfolio()
+        plan = next(
+            (x for x in (plans.get("data") or {}).get("plans", []) if x.get("plan_id") == plan_id),
+            None,
+        )
+        if plan is None:
+            return self._result("plan_scenario", errors={"plan": "saved plan not found"})
+        product = next(
+            (
+                h
+                for h in (portfolio.get("data") or {}).get("items", [])
+                if h.get("symbol") == plan.get("symbol")
+            ),
+            {"symbol": plan.get("symbol")},
+        )
+        identity = product_identities(self.repo_root).get(plan.get("symbol"))
+        if identity and not product.get("name"):
+            product = {**product, "display_name": identity["name"]}
+        scenario = plan_scenario(plan, product=product)
+        return self._result(
+            "plan_scenario",
+            {"scenario": scenario, "svg": render_scenario_svg(scenario)},
+            sources={"plans": plans["sources"], "portfolio": portfolio["sources"]},
+            errors={**plans["errors"], **portfolio["errors"]},
+            limitations=scenario["limitations"],
+        )
 
     def factors(self) -> dict[str, Any]:
         data, errors, sources = self._collect({"factors": "/api/factors/panel"})
@@ -825,6 +969,7 @@ class SystemContext:
                 "plan_review",
                 "trade_ledger",
                 "news_coverage",
+                "video_content_coverage",
                 "blogger_window",
                 "source_status",
                 "user_stated_context",
@@ -833,6 +978,9 @@ class SystemContext:
             )
         }
         result["holdings_count"] = len(packet.get("holdings", []))
+        from lei_signal.portfolio.brief_render import render_brief
+
+        result["report_markdown"] = render_brief(packet)
         result["news_count"] = len(packet.get("news", []))
         result["blogger_yesterday_count"] = len(packet.get("blogger_yesterday", []))
         result["blogger_previous_trading_day_count"] = len(
@@ -876,9 +1024,13 @@ def main(argv: list[str] | None = None) -> int:
             "research-search",
             "research-report",
             "latest-brief",
+            "opportunities",
+            "analysis",
+            "daily-review",
         ),
     )
     parser.add_argument("--code")
+    parser.add_argument("--symbol", default="")
     parser.add_argument("--market", default="cn", choices=("cn", "us"))
     parser.add_argument(
         "--section",
@@ -902,6 +1054,9 @@ def main(argv: list[str] | None = None) -> int:
         "research_search": lambda: context.research_search(args.query, args.limit),
         "research_report": lambda: context.research_report(args.name),
         "latest_brief": lambda: context.latest_brief(args.slot),
+        "opportunities": context.opportunities,
+        "analysis": lambda: context.analysis(args.symbol),
+        "daily_review": lambda: context.daily_review(args.slot or "1440"),
     }[args.view.replace("-", "_")]
     print(json.dumps(call(), ensure_ascii=False))
     return 0
