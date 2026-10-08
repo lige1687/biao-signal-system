@@ -134,8 +134,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "7f871d54ef8c6b929bdbb30f9908e0681d168829",
-  "checked_at": "2026-10-08T18:53:26.704972+08:00",
+  "checked_coordination_sha": "77f5fc67630ac46bdf080a6960a1bd099e233f38",
+  "checked_at": "2026-10-08T18:57:05.559988+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -1117,7 +1117,7 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
     "theory-workflow-system-increment",
     "daily-trading-system-audit"
   ],
-  "conflict_decision": "原周频账户owner负责新raw dated-execution目录及自己progress；无生产/shared文件写入。CLI owner独占原预检范围；theory39交付已完成。",
+  "conflict_decision": "原durableowner派发连接失败，compact实核旧turncompleted且新handle不存在；目标新raw路径尚不存在、原六文件不变。新任务由当前root子代理唯一写新raw，root负责progress/Git，原源与其他owner路径不改。",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
@@ -1943,18 +1943,27 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
       },
       {
         "id": "factor-fusion-risk-exit/settlement-coverage",
-        "status": "scope_review_accepted_implementation_ready",
+        "status": "new_local_contract_ready_after_transport_failure",
         "dependency": "existing simulation coverage and settlement semantics; not D raw features",
-        "owner": "01a105b0-23e3-7598-9e99-c66e3a45301c",
+        "owner": "/root/settlement_implementation_v1",
         "review_agent": "/root/settlement_scope_review",
-        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-implementation-contract.json",
+        "contract": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-local-executor-contract-v2.json",
         "scope": "Integrate existingv0.2 date/share settlement and later-open cash constraints; no actualmarket rules assumed",
         "scope_review": "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-scope-controller-review.json",
         "executor": {
           "model": "gpt-6.1-sol",
           "reasoning_effort": "medium",
           "reason": "Astra/high已明确关键时点/资金范围，执行者只实现冻结行为与合成案例。"
-        }
+        },
+        "attempt_at": "2026-10-08T18:55:04.332181+08:00",
+        "dispatch_error": "send_message_to_thread hostdurable returnednet::ERR_CONNECTION_CLOSED",
+        "scope_commit": "77f5fc67630ac46bdf080a6960a1bd099e233f38",
+        "action": "verify originalthread for newturn before retry or substitute",
+        "original_owner": "01a105b0-23e3-7598-9e99-c66e3a45301c",
+        "source6_unchanged": true,
+        "new_output_absent_before_dispatch": true,
+        "original_owner_last_turn": "01a105e5-3980-760b-8541-f4784cd54041",
+        "original_owner_cursor": "f088b7a3-8ea1-46c3-8d04-10415bc68794:1"
       },
       {
         "id": "theory-workflow-system-increment/dependency-publication-audit",
@@ -2159,3 +2168,8 @@ D—MAE必须用ace132原合同、六份准确冻结原件及阶段独审，不�
 - 原周频/tmp准确六份工程文件找到，原16测试回执两代码SHA相符；此前weekly_accounts_r2仅持有研究，不作为旧完整订单引擎替代。Astra/high新只读审查六源通过，确认setttle无日期/卖款立即可用为未集成边界。
 - 续接合同 docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/settlement-implementation-contract.json，写范围仅新docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/和同名work-progress。独立codex稀疏树；原件不改、仓外不写、不重跑市场或旧16测试。合成日历明确release/到账，不能猜正式结算规则；不实现完整P0/P1。原owner须自己登记推送后实现，当前ready未派发。
 - 验收为账本入口强制日期与资金来源、同期开盘重复/混合现金/拆分批次/入金分红/原子拒绝及必要独立算术；不是策略收益或实际用户风险合格。其他实验仍原合同原预算。
+
+## 目标5发送失败后的明确替代 2026-10-08T18:57:05.559988+08:00
+
+- 原durableowner发送返回net::ERR_CONNECTION_CLOSED；随后wait_threads核仍为10月4日旧turn completed/idle，无新turnhandle。新输出目录不存在、原六源SHA未变，失败保存，未把发送当运行。
+- checked_coordination_sha=77f5fc67630ac46bdf080a6960a1bd099e233f38；上一范围中classic/theory无新重叠。按用户主Goal及子代理授权，采用新合同settlement-local-executor-contract-v2.json，由本聊天/root/settlement_implementation_v1（Sol6.1/medium）只写docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/。root负责原progress与Git，不由助手提交/联网。独立review用原Astra/high助手。原v0.2/六源、旧16检查及市场预算不变；当前dry_run ready待实际spawn。
