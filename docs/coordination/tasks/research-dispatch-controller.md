@@ -1,10 +1,10 @@
 # LEI 八目标研究调度｜当前快照
 
-- 更新时间：2026-10-08T02:04:35+08:00（Asia/Shanghai）
+- 更新时间：2026-10-08T10:14:09+08:00（Asia/Shanghai）
 - task-id：research-dispatch-controller；状态：active。研究调度：[中控对话](codex://threads/01a116c7-3700-7062-a6c6-53af00ef60a0)；本文件唯一Git写者：[协调对话](codex://threads/01a10051-4db1-7490-b40f-c13243767fc6)。原负责人文件仍由各自维护。
-- 最新读取协调分支：`e180c762165c933db5148c394fd23001ceafe720`；相关登记窗口均已释放。Alphalens 报告登记写前618、写后619；本次人工恢复报告登记写前619、写后620。两次均按准确条目/导航核验，完整共享 `registry.json` 与 `INDEX.md` 仍仅本机修改，未发布为远端报告库状态。
+- 最新读取协调分支：`1d0637cd155be175021cbeb46653f38ea242a309`；已读 `COORDINATION.md`、`research-dispatch-controller`、`risk-shape-information`、`classic-factor-research`。本轮登记两项active/preflight；负责人仅做只读开工检查，尚无冲突范围写入。Alphalens 报告登记写前618、写后619；本次人工恢复报告登记写前619、写后620。两次均按准确条目/导航核验，完整共享 `registry.json` 与 `INDEX.md` 仍仅本机修改，未发布为远端报告库状态。
 - 原始目标：把八项LEI研究与工程成果做成可定位、可复算、可审查的接续链。当前验收按问题、输入、合同、合成检查、独审、真实效果与归档逐项看；不能用某一阶段的“交付”表示整条链已完成。适用规则为 `COORDINATION.md` 1.1 和各执行任务冻结规范。
-- 最新已推协调提交（编辑前）：`e180c762165c933db5148c394fd23001ceafe720`；Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
+- 最新已推协调提交（编辑前）：`1d0637cd155be175021cbeb46653f38ea242a309`；Git只存目标摘要和成果索引，不表示仓外系统待升级数据库已写入。工作分支研究成果以各负责人准确提交为准，尚未推送的原件明标仅本机。
 - 较上一版：人工流程的纯Git恢复节点已通过并归档，但结论仅限现有 Python 3.11.7 / pytest 8.4.2 的一次人工 X→Y 集成检查（1项通过、3.40秒）。首次失败保留；原49项依赖清单漏列已跟踪CLI，已按原冻结字节补齐。恢复分支从多个远端Git来源装配，不能说单分支包含全部源码，也未核108份原环境完整字节一致。另有5个已跟踪源码存在静态版本差异，当前节点不受影响但没有推广验收。真实因子/资金效果仍未测，六份冻结实体原件缺。报告已登记到本机报告库（619→620）并释放单条窗口；整份共享登记文件未发布到远端。磁盘最近实测约3.4 GiB，继续复用隔离检出，不安装、不大复制、不自行删除。
 
 ## 八项目标现在到哪一步
@@ -62,12 +62,19 @@
 - 本次最终恢复回调（2026-10-08T02:04:35+08:00）：协调基线 `e180c762165c933db5148c394fd23001ceafe720` 已fetch，保留经典、日常与理论三份他人任务更新。中控验收 `codex/native-workflow-pure-git-recovery-20261008@fda8a4895b78d8e5a125cf8af405b11c736531b6`：49/49依赖与6/6实现指纹核过，唯一人工集成节点1项通过（3.40秒），首败及CLI漏列均保留；结论只限多Git源组装的这条人工流程。登记本机619→620且窗口释放；全量共享登记文件仍未发布远端。恢复工程阶段完成，真实因子效果仍blocked；5项静态源码版本差异未推广验收，六份冻结原件缺。
 - 下次最小操作：本轮已授权的人工恢复验收完成，不重跑旧工程检查。若六份冻结实体原件后续到达，再按原合同核来源时间资格及独立许可/阶段预算，方可恢复真实研究；在此之前真实X/V/Y保持0、研究效果blocked。5项静态源码版本差异不因单节点通过而扩展验收。报告条目已登记于本机并释放窗口，但共享登记文件尚未发布远端；不得将本机登记说成远端报告库同步。
 
+## 本轮新增登记（2026-10-08T10:14:09+08:00）：两个独立 active/preflight 范围
+
+- `stock-data-qualification/gap-pilot-20261008`：原资料资格负责人会话 `01a101c1-ac35-70a3-8ecd-4a6179bb99ad`；状态 `active`（只读预检），会话turn `01a11948-12d4-72b0-a520-78c56f48c4d0`；用途是判断3个此前正常但现在缺价的固定键能否用调整口径兼容的来源补齐，还是必须继续标为未解决。以 `codex/stock-data-qualification-20261008@a6be33c2493e982451e5c5b3646c102553b43f6b` 的已接受资料资格为代码/证据基线，写入仅限 `docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/` 和负责人自己的 `docs/ops/work-progress/risk-shape-information.md`。验收限3键、最多6次新数据请求与20 MiB、0次拟合/标签/PPO/P26重跑；记录来源及调整口径证据，差异不明就如实保留未解决，不写冻结数据或主价格。适用 `COORDINATION.md` 1.1、原任务和当前研究/资料资格规范；不改变因子或交易含义。已知重叠限于资料负责人自己的raw与进度路径；共享登记簿、冻结数据、实现代码及其他人的记录只读。停止条件是固定3键已有如实资格结论；下一次交接先由原负责人按协调规则登记实际开工与检查结果。
+- `research-evidence-catalog/report-library-integration-20261008`：原目录负责人会话 `01a1074e-3d9d-70a2-a771-b079443ace18`；状态 `active`（只读预检），会话turn `01a11948-1626-7862-ab4a-fe0c2848b2ba`；目标是让中控已接受的4份报告正文及其登记在同一已有隔离Git工作区成果中可远端读取：`stock-data-qualification-2026-10-07.md`、`research-evidence-catalog-2026-10-07.md`、`native-workflow-integration-2026-10-07.md`、`native-workflow-synthetic-recovery-2026-10-08.md`。以现有报告证据及目录成果分支 `codex/research-evidence-publication-20261008@e869bdce98ac7289993b42ba50661a1a1bcf878d` 为已知基线；限4份报告，0新拟合，只做登记、链接、内容指纹核验，不发布或替换整份根级registry，不合main。验收为四份对应字节与登记引用均可从远端读取，并保存准确远端回执；适用 `COORDINATION.md` 1.1 与实验报告登记规范。只由目录负责人维护本任务，不改其他人的状态文件；共享registry/INDEX若需串行整合，仍须依其既有写者窗口办理。完成上述远端字节回执即停止；交接时报告精确分支与commit。
+
+这两项从已完成的资料资格、目录编目与纯Git恢复结果继续；不重跑封存研究。两位负责人已执行只读开工检查，均请求 Sol/medium（后端实际模型未独立核验）；在本协调范围同步成功前不得进行会产生冲突的修改。当前记录不表示任务完成、共享文件已写入或取得排他锁。
+
 ```lei-coordination-json
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "e180c762165c933db5148c394fd23001ceafe720",
-  "checked_at": "2026-10-08T02:04:35+08:00",
+  "checked_coordination_sha": "1d0637cd155be175021cbeb46653f38ea242a309",
+  "checked_at": "2026-10-08T10:14:09+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -227,7 +234,73 @@
       ],
       "scope_released": false,
       "source": "reviewer completed targeted recheck of b2f45151128baa1fe387cda85862d71cb01e1206; 29 checks, 0 failures; published on codex/native-workflow-review-20261008 at 415b4776db77d655cdb64e1ad07b2151a29aa44e; revision-b2f45151/REVIEW.md SHA-256 753c10352ebd0fdfdd3b1886992a19247366d7cda550065a802bd012f4875ca0, receipt SHA-256 cf3a3350936fb2d176d6caa8c12a82ad062568eb49f303db227d2e4327654ae8, controller verified remote report bytes; 17 review-owned files, no other-owned source; controller accepted manual workflow scope only; real inputs absent, X/Y zero; 49-item remote-tip inventory complete: 30 exact SHA matches on 10 checked tips; 19 absent from those tips but original bytes all remain available locally; inventory and verification from 66e632c19b902c94b473517e1d199b49180a3642, plus local-byte clarification in ba106251577952bc35f5f865a76cd49d1c274773; three shared-entry original SHAs match root bytes and admitted patch forward/reverse checks passed; catalog-task owner 01a1074e-3d9d-70a2-a771-b079443ace18 is mapping the 19 read-only; no lower-level dispatch or upload; pure remote recovery remains unverified"
+    },
+    {
+      "task_id": "stock-data-qualification/gap-pilot-20261008",
+      "owner": "01a101c1-ac35-70a3-8ecd-4a6179bb99ad",
+      "status": "active",
+      "write_paths": [
+        "docs/experiments/raw/stock-data-qualification-2026-10-07/gap-pilot-20261008/",
+        "docs/ops/work-progress/risk-shape-information.md"
+      ],
+      "depends_on": [
+        "stock-data-qualification"
+      ],
+      "scope_released": false,
+      "baseline": "codex/stock-data-qualification-20261008@a6be33c2493e982451e5c5b3646c102553b43f6b",
+      "limits": {
+        "keys": 3,
+        "new_data_requests_max": 6,
+        "new_data_bytes_max": 20971520,
+        "fits": 0,
+        "labels": 0,
+        "PPO_P26_reruns": 0
+      },
+      "source": "thread-state.json continuation_correction_20261008 plus controller readback: owner turn is active/inProgress and has performed read-only start checks; model request Sol/medium, backend model not independently verified; no conflicting edits before successful scope sync.",
+      "active_turn": "01a11948-12d4-72b0-a520-78c56f48c4d0",
+      "model_requested": "gpt-6-sol/medium",
+      "actual_model_verified": false,
+      "phase": "read_only_preflight",
+      "conflicting_writes_allowed_after_coordination_sync": true
+    },
+    {
+      "task_id": "research-evidence-catalog/report-library-integration-20261008",
+      "owner": "01a1074e-3d9d-70a2-a771-b079443ace18",
+      "status": "active",
+      "write_paths": [
+        "existing isolated worktree: four report files plus their exact report-library registrations; no whole-root registry publication"
+      ],
+      "depends_on": [
+        "stock-data-qualification",
+        "research-evidence-catalog",
+        "native-workflow-integration"
+      ],
+      "scope_released": false,
+      "baseline": "codex/research-evidence-publication-20261008@e869bdce98ac7289993b42ba50661a1a1bcf878d",
+      "reports": [
+        "stock-data-qualification-2026-10-07.md",
+        "research-evidence-catalog-2026-10-07.md",
+        "native-workflow-integration-2026-10-07.md",
+        "native-workflow-synthetic-recovery-2026-10-08.md"
+      ],
+      "limits": {
+        "reports": 4,
+        "new_fits": 0,
+        "tests": "registration/link/hash checks only",
+        "whole_root_registry_publication": false
+      },
+      "source": "thread-state.json continuation_correction_20261008 plus controller readback: owner turn is active/inProgress and has performed read-only start checks; model request Sol/medium, backend model not independently verified; no conflicting edits before successful scope sync.",
+      "active_turn": "01a11948-1626-7862-ab4a-fe0c2848b2ba",
+      "model_requested": "gpt-6-sol/medium",
+      "actual_model_verified": false,
+      "phase": "read_only_preflight",
+      "conflicting_writes_allowed_after_coordination_sync": true
     }
+  ],
+  "checked_task_ids": [
+    "research-dispatch-controller",
+    "risk-shape-information",
+    "classic-factor-research"
   ]
 }
 ```
