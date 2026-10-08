@@ -48,3 +48,11 @@
 - 本机文件SHA256 .agents/skills/code-explainer-video/SKILL.md: af515acd4a19819716ed7e1ff1aed3c300c8ea76d7360f93d29e634a8c0ab595
 - 本机文件SHA256 .agents/skills/code-explainer-video/references/storage-and-packaging.md: eba772151025c1badc6f1223d92f1d8c2ac72e7083fc220ab970f34dbfcfcec8
 - 本机文件SHA256 .agents/skills/code-explainer-video/references/preproduction-workflow.md: 7fe2196b26131a8ed36d4d5749fbbcd9a0661aa203b83f56cbd412384f3ecfb9
+
+## 静态图阶段与固定确认顺序 2026-10-09T01:50:51.255324+08:00
+
+- checked_coordination_sha: 2ab379925b5fb6f5d4f04527b9fbed20e1d5d828；已读COORDINATION、自身、trend-trading-video及research-dispatch-controller，Skill原owner释放，当前范围无并写。
+- 用户明确“先给我几个图…确定之后…十几秒的视频…确定之后再搞”，纠正此前把执行Prompt理解成跳过确认的错误。当前仅授权静态风格图；动态小样和全片均待本期具体版本确认。
+- 本轮active范围：Skill入口与preproduction-workflow；本期INTAKE/自身进度/最小外盘索引；已核固定外盘新目录 LeiSignal-新实验结果/视频库/指数科普/20261009-nasdaq-story/v01-static 下静态图片、可编辑图层及配套记录。
+- 制作三张自制排版风格图（开场、概念解释、历史风险），不生成走势图或历史照片、不做视频/音频。静态绘制普通文件直接外盘，不用实验入口、不启动低空间限制的视频/音频进程。预算外盘30MiB、本机小记录64KiB；设备/容量需新核并保存。
+- 检查：Skill结构/归置、原定稿不变、静图实际尺寸和打开查看、外盘读回SHA。确认仍待用户，不把检查通过当认可。
