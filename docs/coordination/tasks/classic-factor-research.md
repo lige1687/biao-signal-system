@@ -1,3 +1,18 @@
+# 当前：研究写入前存储检查已发布，待中控独立验收；真实研究仍blocked
+
+- task-id `classic-factor-research`；子范围 `native-storage-preflight`；负责人01a0e6d5-4bcf-7bd3-82e4-4961c963d20e；updated_at 2026-10-08T18:58:08.132190+08:00（Asia/Shanghai）。状态 active（限定工程待独审，非科学研究运行）；scope_released=false。
+- checked_coordination_sha `4bbc0e8cfb9a61097831ad8cf9e81ebfed3cb2c0`；本轮已读COORDINATION1.1、本任务、中控、daily、theory；并核7f871d54→77f5fc67→4bbc0e8c新增结算模拟仅新raw/theory安全发布。无本CLI四文件同写者；记录不是锁，不抢其他研究主题。
+- 独立成果分支 `codex/native-storage-preflight-20261008`，基础 `dbd86bccf9ffe9ea9617a484bf8b96825880fb7d`；已推并fetch逐文件读回完整commit **`3d3c172c5119ca9ec3f8c77b17116d416f86f86a`**，远端ref等于本地。17个安全小文件83,475B：15个manifest条目逐大小/SHA核对，另manifest与SHA256SUMS逐字相同。无分支CI配置；未合main/master、部署、付费或改权限。
+- 成果[入口](https://github.com/lige1687/biao-signal-system/blob/3d3c172c5119ca9ec3f8c77b17116d416f86f86a/docs/experiments/raw/native-research-storage-preflight-2026-10-08/README.md)、[验收回执](https://github.com/lige1687/biao-signal-system/blob/3d3c172c5119ca9ec3f8c77b17116d416f86f86a/docs/experiments/raw/native-research-storage-preflight-2026-10-08/acceptance.json)、[阶段进度](https://github.com/lige1687/biao-signal-system/blob/3d3c172c5119ca9ec3f8c77b17116d416f86f86a/docs/ops/work-progress/native-research-storage-preflight-2026-10-08.md)。
+- 已完成：显式--storage-plan绑定draft/contract、输入SHA、out、reuse/register；独立推导全部写角色、同device合计+reserve；缺盘/低容量/错身份/未知卷/链接或特殊路径拒绝，研究import/pyc/mkdir/账本锁/注册前返回。通过才接原执行链；旧无计划调用未被保护。workflow.py/question_contract.py与合同固定SHA相同，未写daily、storage_guard、全局登记或冻结资料。
+- 实际检查：最终41新人工测试退出0（0.40s）、6项主负责人独立核对退出0、Ruff/diff检查退出0；旧只读审查组合84通过、2失败（CLI执行前缺旧附件），不报全套通过。旧分支归置器仅.git指针退出1；本地主规则只读加载并指定本树后退出0，主规则源码仍仅本地，不冒称远端旧工具修复。完整失败见initial-failures.txt/preparation.json。
+- 仅本地/缺口：人工测试临时目录未上传；两策略仓外临时拷贝与首轮pytest仓外目录失误保留，没有正文外传或擅自删除。两旧动态审查依赖draft-main.json（19,216B，SHA e7e288da8827f57c85fe063b34ce547b45c604be27dcd19a19819c9d4f825aa1）及session_composition_information.py不在基线，未补造。外盘配置不在本成果范围；已核安全来源4830bdb8ed11f439d999bf2460d6c044abd00b92，配置SHA dbdcc8af8bd5f1d6be7ce5262e10d21177a4c4faae97d4a4d2aeda900877d4dd，真实外盘执行需先合格装配，不假定其他机器身份。
+- 正在做：交中控非作者核关键拒绝边界及发布版本；下一步仅根据该限定反馈修本四文件。其他AI暂避scripts/run_factor_lab.py、src/lei_signal/research/storage_preflight.py、tests/unit/test_research_storage_preflight.py、tests/integration/test_research_storage_preflight_cli.py同写；其余流程/结算/theory工作可独立继续。
+- 实现助手请求gpt-6.1-sol/high，返回完成；模型实际费用unknown；0行情/拟合/真实标签/封存重跑/付费操作/安装。没有本轮运行中科学任务或checkpoint；没有杀其他进程。预检仅开工快照，不是运行中限额，不抗后续拔盘/竞态，不修旧storage_guard四缺陷或八指纹失败。真实D—MAE六原件、资料资格和阶段授权仍blocked；真实因子效果/资金收益未测量。
+- 下一执行者先fetch协调与成果ref，核manifest/SHA，核新版本是否已修旧问题，再做必要限定人工复现；不重跑旧研究、不凭工程检查授予真实执行。原准备/失败/旧阶段全部保留于下文。
+
+---
+
 # 当前：研究CLI写入前存储检查工程 active；真实研究仍blocked
 
 更新时间 2026-10-08T18:36:12.717542+08:00（Asia/Shanghai）；task-id `classic-factor-research`，子范围 `native-storage-preflight`；唯一CLI owner为本会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。checked_coordination_sha=`1a9188ec53942fb32f044f413acd526c10713df7`。已读COORDINATION1.1、本任务、中控、daily-trading-system-audit、theory-workflow-system-increment；中控本轮明确调度独立工程，与daily存储发现/音频代码无重叠。其他AI仅避开以下精确文件同写；旧报告整合不重开。
