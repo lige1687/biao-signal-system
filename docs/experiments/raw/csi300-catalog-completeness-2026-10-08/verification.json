@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "passed": 24,
+  "total": 24,
+  "checks": [
+    {
+      "name": "indexed-page1:source_bytes",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-catalog-completeness-2026-10-08/originals/indexed-page1.json"
+    },
+    {
+      "name": "title-page1:source_bytes",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-catalog-completeness-2026-10-08/originals/title-page1.json"
+    },
+    {
+      "name": "indexed-page2:source_bytes",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-catalog-completeness-2026-10-08/originals/indexed-page2.json"
+    },
+    {
+      "name": "title-page2:source_bytes",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-catalog-completeness-2026-10-08/originals/title-page2.json"
+    },
+    {
+      "name": "title-page3:source_bytes",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-catalog-completeness-2026-10-08/originals/title-page3.json"
+    },
+    {
+      "name": "docs/experiments/raw/csi300-regular-transitions-2026-10-08/originals/notice-14796.json:unchanged",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-regular-transitions-2026-10-08/originals/notice-14796.json"
+    },
+    {
+      "name": "docs/experiments/raw/csi300-regular-transitions-2026-10-08/originals/notice-3006000.json:unchanged",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-regular-transitions-2026-10-08/originals/notice-3006000.json"
+    },
+    {
+      "name": "docs/experiments/raw/csi300-regular-transitions-2026-10-08/qualified-facts.json:unchanged",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-regular-transitions-2026-10-08/qualified-facts.json"
+    },
+    {
+      "name": "docs/experiments/raw/csi300-2025-transitions-2026-10-08/qualified-facts.json:unchanged",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-2025-transitions-2026-10-08/qualified-facts.json"
+    },
+    {
+      "name": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/news-route.js:unchanged",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/news-route.js"
+    },
+    {
+      "name": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/csindex-app.js:unchanged",
+      "passed": true,
+      "evidence": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/csindex-app.js"
+    },
+    {
+      "name": "indexed:page_coverage",
+      "passed": true,
+      "evidence": "all reported pages, stable total, no duplicate id"
+    },
+    {
+      "name": "indexed:date_window",
+      "passed": true,
+      "evidence": "publication-date coverage only, not effective-date completeness"
+    },
+    {
+      "name": "indexed:query_binding",
+      "passed": true,
+      "evidence": "indexCode"
+    },
+    {
+      "name": "title:page_coverage",
+      "passed": true,
+      "evidence": "all reported pages, stable total, no duplicate id"
+    },
+    {
+      "name": "title:date_window",
+      "passed": true,
+      "evidence": "publication-date coverage only, not effective-date completeness"
+    },
+    {
+      "name": "title:query_binding",
+      "passed": true,
+      "evidence": "searchInput"
+    },
+    {
+      "name": "known_notice_controls",
+      "passed": true,
+      "evidence": "9 regular +2 conditional formal notices; 2021 notice excluded by publication window"
+    },
+    {
+      "name": "14796:positive_control",
+      "passed": true,
+      "evidence": "saved formal source, not search-snippet assumption"
+    },
+    {
+      "name": "3006000:positive_control",
+      "passed": true,
+      "evidence": "saved formal source, not search-snippet assumption"
+    },
+    {
+      "name": "formal_union",
+      "passed": true,
+      "evidence": "no extra formal adjustment in these queries; not absence proof"
+    },
+    {
+      "name": "set_comparison",
+      "passed": true,
+      "evidence": "six keyword-only metadata records"
+    },
+    {
+      "name": "budget",
+      "passed": true,
+      "evidence": "same10MiB family"
+    },
+    {
+      "name": "conclusion_boundary",
+      "passed": true,
+      "evidence": "keep negative coverage finding; no source promotion"
+    }
+  ]
+}
