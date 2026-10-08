@@ -30,3 +30,10 @@
 - 归置检查通过；输入清单与镜头数读取断言通过。准备文件仅本地未提交，远端不可重建；协调提交不等于影片源码或媒体成果。
 - 尚缺03/06/07及data，9月日期证据未核；F06原PDF文字层抽取为空，仍待图像核对。不把入口可访问当数据通过。0新音轨/视频/封面/素材，0发布。
 - 等完整制作包与内盘5GiB加小记录余量恢复后重做存储预检，继续普通配音及渲染；无清理授权，不自行删资料。
+
+## 视频Skill外盘规则更新开始 2026-10-09T01:47:22.932696+08:00
+
+- checked_coordination_sha: b3e14b996afb90356eebdeb2536d13f5e632f270；已读COORDINATION、自身、trend-trading-video及research-dispatch-controller相关记录。原Skill负责人明确scope_released=true；本轮用户直接授权修改Skill，无并写证据。
+- 本轮active范围仅 .agents/skills/code-explainer-video/SKILL.md、references/storage-and-packaging.md、references/preproduction-workflow.md及自身进度。用户要求“就你能放的都放到外盘里边呗”，新产物含小文稿/字幕/许可记录/可移植工程都默认外盘，本机仅必要运行内容和最小索引。
+- 不迁移删除旧资料、不移动运行环境/活动数据库，不改实验容量阈值；明确视频和实验入口适用范围。验证：Skill结构、引用和归置检查，审阅差异；不是渲染验收。
+- 基线工作区HEAD 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；成果尚未提交。
