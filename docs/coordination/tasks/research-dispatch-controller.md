@@ -1,12 +1,10 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新：2026-10-08T13:13:23.017237+08:00；checked_coordination_sha=0ef924f61b495744f76ebe6f773b0b552e78e9ae；已读COORDINATION及research-dispatch-controller、risk-shape-information、report-library-integration-20261008，相关范围无变化和冲突。root仅写本记录，未改其他owner。
-- **本次真实定时执行已有四项交付**（触发2026-10-08T04:33:16.952Z）：2024海通停复牌17条占位、300114→302132身份边界、原六个分红日期与金额、601989在2022年的分红漏项反例。它们都是本对话root直接做，无派发或新agent。最新成果在 `codex/research-direct-20261008@4f2da90c4688d12116b4891d56b802a802c2908b`；各阶段10/10/12/11文件远端SHA及内容读回一致，原失败不改。
-- **重要新结论：** 中国重工2022-08-23每股税前0.003元分红落在B02原请求区间，却已缺于原始响应；本库标准化没有额外丢行。该返回不能当完整现金分红事件清单；不能进一步断言原因或每个累计因子数字都错。海通2024实际分红0.10/0.03与除息参考金额0.0992/0.02976也已分别保存。
-- 本轮110项本地核查；累计六报告152项、22份发行人/交易所披露、53条固定占位、1个代码变更、6个分红正向匹配、1个完整性反例。累计来源操作69次、原始响应6,542,983字节。模型实际费用未知，来源失败和估计超出保留。root自核不冒称独立agent审查；价格修复/模型训练/真实标签全0。
-- 六份报告均在本机627项/隔离分支206项登记簿分别唯一登记；不是把整个脏主登记簿发布。完整PDF/原文留本机，Git存事实、指纹、程序及回执。主分支未切，隔离成果区干净。
-- **本轮四个有界问题已经回答；八目标仍未完成。** 七原负责人最新compact快照均未变化，无新D—MAE六冻结原件。原价格快照、完整历史成员与真实消费定义等依赖保持。下一独立问题是原计划官方成员起点及两个2025变更的来源资格：须先查既有尝试再登记具体范围；尚未开始，不标运行，不笼统宣称该问题已穷尽。
-- 已释放上述raw/report与共享registry/INDEX写入窗口；root仅保留自己的进度、thread-state和本中控记录。无删、交易、付费、部署、网络/仓外改动；403和automation-2暂停。心跳继续启用，未来触发不等同于此刻存在后台实验。
+- 更新：2026-10-08T13:16:52.182099+08:00；checked_coordination_sha=0d3f1fd758d894f1caf0dec41142cbfc79347c06；实际已读COORDINATION、中控、risk-shape-information及research-evidence-catalog/report-library-integration-20261008。原范围无冲突，已释放登记窗口现由root认领本单元。
+- 六个直接资料单元已完成，成果分支4f2da90c4688d12116b4891d56b802a802c2908b；152项核对、22份正式披露、六报告。旧证据、失败及原预算不变。
+- **本轮新有界接续：** 原计划两处2025沪深300候选变更：600837→601058（候选03-10）、601989→601298（候选09-08）。只补正式公告、增删及准确生效日期并核旧表差异；不修成员表、不取行情、不做收益。原2022起点公开路线已有36次成功请求及3,996,739字节记录，不原样重复。继承该成员来源家族10MiB上限，剩6,489,021字节，估计6次新操作，写前至少512MiB。
+- root单写raw/csi300-2025-transitions-2026-10-08/、对应报告及registry/INDEX单项增量；先推送读回才开工。查找时两次猜协调记录路径不存在，已按git实际嵌套路径读到真实记录；不据不存在路径判owner空闲。
+- 八目标未全部完成；D—MAE六原件等依赖保持。无对外派发/子代理，403及automation-2暂停，不删、交易、付费、部署、网络/仓外改动或切主分支。
 
 ## 当前直接执行规则
 
@@ -136,8 +134,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "0ef924f61b495744f76ebe6f773b0b552e78e9ae",
-  "checked_at": "2026-10-08T13:13:23.017237+08:00",
+  "checked_coordination_sha": "0d3f1fd758d894f1caf0dec41142cbfc79347c06",
+  "checked_at": "2026-10-08T13:16:52.182099+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -272,12 +270,16 @@
       "write_paths": [
         "docs/ops/work-progress/research-dispatch-controller-2026-10-07.md",
         "docs/experiments/raw/research-dispatch-controller-2026-10-07/thread-state.json",
-        "docs/coordination/tasks/research-dispatch-controller.md"
+        "docs/coordination/tasks/research-dispatch-controller.md",
+        "docs/experiments/raw/csi300-2025-transitions-2026-10-08/",
+        "docs/experiments/csi300-2025-transitions-qualification-2026-10-08.md",
+        "docs/experiments/registry.json",
+        "docs/experiments/INDEX.md"
       ],
       "depends_on": [],
       "scope_released": false,
       "source": "User root-direct mode; four actual factual results this scheduled turn, seven old owner snapshots unchanged. No delegate/process running claim.",
-      "scope_note": "This scheduled cycle completed four units; six cumulative reports accepted. All raw/report and shared registration windows released; next independent membership question not started."
+      "scope_note": "Root qualifies only two original2025 CSI300 transitions; no fullpool repair, no new price data. Temporary registry/INDEX solewriter."
     },
     {
       "task_id": "report-registration-20261007",
@@ -864,53 +866,50 @@
   "read_task_ids": [
     "research-dispatch-controller",
     "risk-shape-information",
-    "report-library-integration-20261008"
+    "research-evidence-catalog/report-library-integration-20261008"
   ],
-  "conflict_decision": "Latest remote relevant scopes unchanged; root completes four bounded units and releases shared registry/INDEX window. Only central runtime/progress/state remain root-owned. No other owner records edited.",
+  "conflict_decision": "Original data owner gap-pilot completed; shared registration released. Two official2025 objects still unqualified, no related owner scope change. Root unique new paths and sole temporary registry/INDEX writer.",
   "direct_execution": {
     "mode": "root_direct_no_delegation",
     "current_unit": {
-      "id": "china-heavy-2022-dividend-coverage-20261008",
-      "state": "completed_counterexample_confirmed",
-      "question": "Determine whether one observed lead, China Heavy2021 annual dividend implemented2022, is inside fixed B02 request window but missing from its preserved factor records. Stop after counterexample confirmed/refuted or exact issuer source unavailable; no general-history collection.",
-      "original_authority": "Goal4 complete corporate-action qualification, saved dividend task new completeness lead, existing qualification-plan sections2/3. No new factor/vendor/price requests.",
+      "id": "csi300-2025-two-transitions-20261008",
+      "state": "scope_registered_not_started",
+      "question": "Qualify exact official removal/addition and effective dates for two already specified2025 CSI300 candidate transitions; compare saved candidate rows, preserve original membership. Reuse closed2022 anchor search without repeating it.",
+      "original_authority": "Eight-goal4 and existing csi300-official-member-binding object-mapping changes2025-03-10/2025-09-08; root direct instruction.",
       "write_paths": [
-        "docs/experiments/raw/china-heavy-dividend-coverage-2026-10-08/",
-        "docs/experiments/china-heavy-dividend-coverage-2026-10-08.md",
+        "docs/experiments/raw/csi300-2025-transitions-2026-10-08/",
+        "docs/experiments/csi300-2025-transitions-qualification-2026-10-08.md",
         "docs/experiments/registry.json",
         "docs/experiments/INDEX.md"
       ],
-      "checked_at": "2026-10-08T13:05:38.615820+08:00",
-      "checked_coordination_sha": "cd03ef10b5c241c2abc55b15654df29c6a53861a",
+      "checked_at": "2026-10-08T13:16:52.182099+08:00",
+      "checked_coordination_sha": "0d3f1fd758d894f1caf0dec41142cbfc79347c06",
       "read_task_ids": [
         "research-dispatch-controller",
         "risk-shape-information",
-        "report-library-integration-20261008"
+        "research-evidence-catalog/report-library-integration-20261008"
       ],
-      "conflict_decision": "Only daily trading owner update since scope; related owners unchanged, unique raw/report paths. Root sole registry/INDEX writer. No delegated work.",
+      "conflict_decision": "Original data owner gap-pilot completed; shared registration released. Two official2025 objects still unqualified, no related owner scope change. Root unique new paths and sole temporary registry/INDEX writer.",
       "source_policy": {
-        "planning_estimate_operations": 3,
-        "max_new_bytes": 5242880,
+        "inherited_membership_source_family_limit_bytes": 10485760,
+        "previous_membership_http_bytes": 3996739,
+        "remaining_family_bytes": 6489021,
+        "previous_membership_successful_http_requests": 36,
+        "previous_root_direct_operations": 69,
+        "planning_estimate_new_operations": 6,
         "minimum_free_bytes": 536870912,
-        "previous_direct_operations": 64,
-        "prior_closed_budgets": "unchanged",
         "fits": 0,
         "labels": 0,
-        "price_repairs": 0
+        "price_repairs": 0,
+        "membership_repairs": 0,
+        "stop": "Both specified objects official-qualified or exact necessary source inaccessible/remaining inherited byte limit reached; no full-period catalog expansion or anchor retry."
       },
-      "free_bytes_before": 2775785472,
-      "acceptance": "Official implementation source/hash, exact old request-window/raw response binding, no inferred provider cause or changed frozen input.",
-      "scope_commit": "0ef924f61b495744f76ebe6f773b0b552e78e9ae",
-      "scope_remote_readback": "equal",
-      "started_at": "2026-10-08T13:05:57.515982+08:00",
-      "accepted_at": "2026-10-08T13:12:13.356603+08:00",
-      "published_commit": "4f2da90c4688d12116b4891d56b802a802c2908b",
-      "remote_readback_files": 11,
-      "source_documents": 1,
-      "checks": 20,
-      "source_operations_used": 5,
-      "raw_response_bytes": 843679,
-      "report": "docs/experiments/china-heavy-dividend-coverage-2026-10-08.md"
+      "prior_acquisition_manifest": {
+        "path": "docs/experiments/raw/csi300-anchor-acquisition-2026-10-07/acquisition-manifest.json",
+        "sha256": "7e6038a6d9d79d0fb3417ee7a5926643353bb27e4b1ff4fa33d177f3625887b2"
+      },
+      "free_bytes_before": 2778419200,
+      "acceptance": "Issuer-index-authority primary bytes/hash; publication versus effective date; exact add/remove; frozen candidate rows hash and dated mismatch count; no retroactive overwrite or full-chain claim."
     },
     "completed_reports": 6,
     "current_unit_running": false,
