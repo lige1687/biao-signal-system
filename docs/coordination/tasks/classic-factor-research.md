@@ -1,3 +1,15 @@
+# 当前：研究CLI写入前存储检查工程 active；真实研究仍blocked
+
+更新时间 2026-10-08T18:36:12.717542+08:00（Asia/Shanghai）；task-id `classic-factor-research`，子范围 `native-storage-preflight`；唯一CLI owner为本会话 `01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。checked_coordination_sha=`1a9188ec53942fb32f044f413acd526c10713df7`。已读COORDINATION1.1、本任务、中控、daily-trading-system-audit、theory-workflow-system-increment；中控本轮明确调度独立工程，与daily存储发现/音频代码无重叠。其他AI仅避开以下精确文件同写；旧报告整合不重开。
+
+本轮合同 `docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/storage-preflight-implementation-contract.json`。独立分支 `codex/native-storage-preflight-20261008`，仓内工作树 `.codex/worktrees/native-storage-preflight-20261008`，基础完整commit `dbd86bccf9ffe9ea9617a484bf8b96825880fb7d`；新代码尚未实施或发布。精确写入范围：`scripts/run_factor_lab.py`、`src/lei_signal/research/storage_preflight.py`、`tests/unit/test_research_storage_preflight.py`、`tests/integration/test_research_storage_preflight_cli.py`、`docs/ops/work-progress/native-research-storage-preflight-2026-10-08.md`、`docs/experiments/raw/native-research-storage-preflight-2026-10-08/`。不写workflow.py、storage_guard、daily实现、冻结定义/预算/旧8指纹失败。
+
+基线CLI SHA eb38c3ce70a4331026ab1dc5d8f71eb5f2e1cbffda59ceac4abbaffb15820c52、workflow 967d92adc77a18c42f16fda27c80eb5a136eadd72e4918515302003216a43cb6、question_contract ed4a44fbb3fbf6c7b986bd2fb9261f98f15cf33b604f04b84e7ceb4e2fffcb97、storage-policy dbdcc8af8bd5f1d6be7ce5262e10d21177a4c4faae97d4a4d2aeda900877d4dd均与合同匹配。两策略源实际SHA分别df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20和85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903，与已确认版本一致。本改动服务研究执行基础层，不改变技术交易语义。
+
+准备完成：已测内盘约4.4GiB可用，允许小源码/测试/回执工作，开发本轮预计增长不超过100MiB并保留1GiB；这是工程准备估计，不是研究计划默认预算。原storage只读入口亦实际检查设备和空间。正在做显式--storage-plan设计与受限实现：全部写入角色、同卷预计增长加总和明确保留空间；拒绝在研究导入/pyc/目录/账本/锁/异常回写前；旧无参数调用及合同只读审查兼容。下一步新注入/子进程故障案例、最小旧兼容、归置、受保护源码指纹与远端逐文件核验，交中控独立验收。0行情/真实标签/拟合/封存重跑/安装/付费；真实六原件、时点资格、阶段授权阻塞保持。
+
+---
+
 # 当前：人工流程报告已进入远端隔离报告库；真实因子效果未测
 
 更新时间：2026-10-08T11:26:24+08:00（Asia/Shanghai）。task-id：`classic-factor-research`；负责人：`01a0e6d5-4bcf-7bd3-82e4-4961c963d20e`。状态 blocked，仅指真实研究缺输入与阶段许可；人工工程恢复、增量归档及本报告远端登记阶段 completed。
