@@ -1,3 +1,14 @@
+## V9 learning-publication-blocked
+
+- task-id: trend-trading-video；2026-10-08T23:32:13.485582+08:00；checked_coordination_sha: e9cc5da8e43596653d4037aadd3691947a2a231a；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- blocked仅语雀发布，正文与本项目skill增量已完成；scope_released=true。用户授权发布，但未有知识库URL，CLI返回YUQUE_TOKEN not set，浏览器IAB/Chrome/库存均超时。已通过异步问题请求目标链接，无云端创建，不伪报已发布。
+- 可复用文档xilo-learning/yuque-document.md，发布状态publication-state.json；成果codex/video-workflow-learning-20261008@a0f375661d1177dd0afe3aeb268036da2a2a1b71，三准确文件远端读回。
+- 两条X原帖403，Jina超时；读同原帖链接转载正文及作者关联GitHub README，非完整演示听审。正文区分来源摘要、本项目事实与原创候选，不宣称框架/模型优越性。未安装/付费/外部写入/改片，不占registry/INDEX；归置通过。
+- 恢复需知识库目标与可用API或浏览器访问；先核同标题/slug，再单文档发布和正文读回，避免重复创建。当前原任务无重叠，历史批准和完整片不改。
+
+
+---
+
 ## V9 learning-start
 
 - task-id: trend-trading-video；2026-10-08T23:25:02.483279+08:00；checked_coordination_sha: ea0c1504d2ec694c199e410dacdb7508f2c32fa4；已读 COORDINATION.md、自身与 research-dispatch-controller。
