@@ -1,0 +1,130 @@
+{
+  "research_id": "A01-guide-technical-20260929",
+  "factor_id": "A01",
+  "definition_version": "research_A01_signed_band@1.0.0",
+  "created_at": "2026-09-29T15:39:33.448900+08:00",
+  "question": "基础上升趋势的完整周/月决策母样本中，双均线距离是否对未来收益/风险有稳定且相对已有技术信息的增量？",
+  "strategy_layer": "A回调位置技术信息研究，非策略优化",
+  "authority": "用户本次A01授权+技术研究范围校正，桌面原文只读",
+  "scope": [
+    "六只固定国内宽基ETF",
+    "2022-01-01至2026-06-30",
+    "W主表/M适配",
+    "均线N20/60/120共同注册，N60/W主呈现但所有结果保留"
+  ],
+  "excluded": [
+    "width",
+    "AAII",
+    "NAAIM",
+    "PutCall",
+    "ModuleE",
+    "macro",
+    "sentiment_interactions",
+    "production",
+    "full_account_optimization"
+  ],
+  "inputs_manifest": "source-manifest.json",
+  "inputs_binding": "factor-ma-state-accounts-2026-09-24/inputs/manifest.json; source originals remain unchanged",
+  "features": {
+    "price_basis": "economic OHLC proxy = nominal OHLC * economic_index/nominal_close by exact same date; actions already represented; not twice adding dividends; not a fillable price",
+    "EMA": "existing seeded_ema alpha=2/(N+1), first N SMA seed on declared 252-row warmup+formal indexed official calendar, no reset/interpolate after internal missing, unknown preserved",
+    "SMA": "last N actual calendar rows min_periods=N",
+    "ATR": "main EMA20 of TR, seed SMA20 of first valid TR; legacy simple20 diagnostic frozen separately if affordable; zero/missing excludes",
+    "band": "lo=min(SMA_N,EMA_N),hi=max(...); C distance=(C-hi)/ATR if above; (C-lo)/ATR if below;0 inside",
+    "raw": "close/low vs SMA/EMA percent,ATR distance,band_width,pierce_depth",
+    "mother": "every fixed W/M decision with valid features and SMA60(t)>SMA60(t-5); no distance/first/RR/A-event prefilter; equality not up",
+    "states": {
+      "deep_below": "d<-1",
+      "light_below": "-1<=d<0",
+      "inside": "d==0",
+      "near_above": "0<d<=1",
+      "far_above": "d>1"
+    },
+    "events": "date+asset+N shared state cluster; new cluster on environment false→true or distance-state change; no claim statistical independence",
+    "weights": "each eligible ETF same total weight, within ETF each date equal; uncertainty resamples common whole time blocks across all ETF"
+  },
+  "labels": {
+    "horizons": [
+      5,
+      10,
+      20,
+      60,
+      120
+    ],
+    "primary": 20,
+    "secondary": 60,
+    "diagnostic": [
+      5,
+      10,
+      120
+    ],
+    "start": "decision after close; entry next calendar session nominal open transformed using economic daily scale; end=entry date inclusive hth session close; require every path quote and known consistent scale",
+    "metrics": [
+      "gross_return_pct",
+      "up_fraction",
+      "return_gt5_fraction",
+      "MAE_close_pct incl entry point",
+      "MDD_close_pct incl entry point",
+      "MFE_close_pct incl entry point",
+      "return_loss_gt5/10/15_fraction",
+      "MAE_loss_gt5/10/15_fraction",
+      "MFE_over_absMAE undefined if MAE0 reported missing"
+    ],
+    "cost_sensitivity": "0.10% and0.30% total roundtrip illustrative, not venue tariff or validated executable net account",
+    "price_limit": "next-open indicative market price; actual fill unavailable, no optimized stop or target"
+  },
+  "models": {
+    "targets": [
+      "return20",
+      "MAE20",
+      "up20",
+      "return60",
+      "MAE60",
+      "up60"
+    ],
+    "B0": "training weighted mean",
+    "F_only": "asset identity + signed distance + signed distance squared + inside dummy",
+    "B1": "asset dummies + past20return+past60return+20dayvol+SMA60 five-day slope/ATR+drawdown60+510300 past20price return+510300 SMA60 slope flag",
+    "B2": "B1 + six SMA/EMA one-day direction flags + SMA20>SMA60>SMA120 and EMA stack + c>EMA20 + c>lag20 + downside_key_wave(c<EMA20 &c<lag20) + c>previous20high and c<previous20low (all known)",
+    "B1_F": "B1+signed d+d²+inside",
+    "B2_F": "B2+signed d+d²+inside",
+    "method": "weighted ridge; train zscore only; fixed lambda=1 in sum-weight-normalized objective; no hyperparameter search; intercept unpenalized; probabilities weighted ridge clipped0,1, labeled simple probability approximation no calibration claim",
+    "common_rows": "each B0/F/B1/B1F/B2/B2F same eligible evaluation dates, no excluding bad model rows",
+    "folds": [
+      "train2022-23 label_end<2024-01-01 eval2024 label_end<2025-01-01",
+      "train2022-24 label_end<2025-01-01 eval2025 label_end<2026-01-01",
+      "train2022-25 label_end<2026-01-01 eval2026H1 label_end<=2026-06-30"
+    ],
+    "OOS": "purged forward retrospective time evaluation, all history previously seen; no sealed clean holdout, no evidenceC",
+    "fit_minimum": "20 train rows/at least2 evaluation assets,otherwise unestimated reason"
+  },
+  "uncertainty": {
+    "method": "2000 synchronized circular moving date-block draws resample full cross-section; maintain ETF equalweight; missing absent groups no zero fill and valid draw count",
+    "block": "primary60calendar sessions (approx13 W/3M observations); diagnostic120sessions; for h120 labels block120 minimum",
+    "confidence": 0.95,
+    "multitest": "six N*freq primary family, exploratory all; no significance promotion, no best N selection",
+    "minimum_relevant_effect": null,
+    "meaning": "no preagreed materiality criterion, not economic-pass claim"
+  },
+  "robustness": [
+    "all ETF/year results and leave-one-ETF headline recalculation",
+    "freeze percentage distance quadratic alternative for B2 20d only, count6 configs",
+    "freeze main ATR to simple20 sensitivity B2 20d only if needed count6",
+    "remove top1%abs return based train cutoff only diagnostic",
+    "technical near episodes daily→nextW/M price waiting/status persistence table, not simulated intra-day touch"
+  ],
+  "deployment": "audit strict existingA-minus-distance reconstruction before any market claim; A2 anchors other conditions; if no identifiable distance-independent candidate universe mark blocked and never call mother deploymentA",
+  "budget": {
+    "questions": 1,
+    "core_batches_max": 1,
+    "followup_batches_max": 3,
+    "market_runner_attempts_max": 4,
+    "external_requests_max": 0,
+    "paid": 0,
+    "asset_period_schedule_horizon_cells": 30,
+    "prediction_cells_N_freq_targets": 36,
+    "no_grid": true
+  },
+  "completion": "finish audited broad historical A01 info question with full tables; strict deployment gap and true new data verification separate blocked scopes, do not claim fullstrategy verified",
+  "outputs": "execution/ features,counts,rejections,group-results,predictions,models,all-results,ledger,manifest,run log; controller independent check/report/state"
+}

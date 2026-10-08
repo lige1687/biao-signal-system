@@ -130,3 +130,8 @@ Alphalens结案补记：中控明确1条窗口后，fetch核98753df888943e37aa17
 36原文件均在本地且准确SHA/大小与合同相符；七相关现有Gitref与准确路径的有限历史没有同字节已发布原件。分类：{'source_audit_publication_scope_missing': 3, 'local_computed_metadata_owner_clearance': 22, 'local_method_candidate_owner_scope_confirmation': 9, 'source_redistribution_evidence_missing': 2}。9份自有协议/方法决定可优先交原technical-factor-sequence负责人核安全发布范围，其余22份真实计算元数据、3份来源审核及2份逐观察资料分别有精确接续；6件已在原已发布manifest明确local only。0源复制/0测试/0科学运行；未把元数据默认为有传播许可，完整准备仍36缺件。只交remaining36-provenance.json索引，原件不上传。
 
 来源索引准确成果3c849c81a421432c86941b5306dcc55eb90e34a9已推并fetch读回两文件字节相同；索引78396字节，SHA b9840478d909b6bf2e5b105fe3107fc74ac2c50e55c37b6b7ee6ac6076a8c7e8。36根原文件写后重新核SHA不变。来源索引有界任务完成，36准备依赖仍未恢复；优先由原technical owner核9份自有方法候选，源资料未发布。
+
+
+## 9方法原字节交付
+
+依据原technical owner精确9项核定回执和中控method9-publication-contract，9源文件大小/SHA重新匹配，复制原字节39458B到现有隔离树。依赖集合36减9为27；草稿、用途、预算限制保留，链接原件不扩大复制。manifest记录合同/owner回执SHA及准确9文件。定义/preparation/测试/registry/INDEX不改，0研究/测试重跑，待普通推送及读回核验。
