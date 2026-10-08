@@ -1,13 +1,10 @@
 # LEI 八目标｜本对话直接执行
 
-- 更新：2026-10-08T12:10:56.931606+08:00；稳定task-id research-dispatch-controller。用户明确“就你这个对话直接开做，别分发”；当前root会话01a116c7-3700-7062-a6c6-53af00ef60a0单写本记录，不再派发。
-- checked_coordination_sha=b6d8625b4085dccd53a30820bc7534228b9425bd；已读COORDINATION.md、本记录、risk-shape-information、research-evidence-catalog/report-library-integration-20261008。后者明确scope_released=true。root现为本次单报告registry/INDEX登记唯一写者；保留其他条目和其他owner记录，不切主树分支。
-- 当前直接单元haitong-corporate-action-qualification-20261008：官方停牌、终止上市及换股结果已取得，状态active，正在核数与归档，尚未标验收完成。
-- 准确写入：docs/experiments/raw/haitong-corporate-action-2026-10-08/、docs/experiments/haitong-corporate-action-qualification-2026-10-08.md；新增唯一登记窗口docs/experiments/registry.json、docs/experiments/INDEX.md；root既有进度/thread-state沿用。没有价格、成员、实验或生产修改。
-- 本单元累计13次可见来源操作，原件响应213536字节。原6次、10次为root自行估计，已为同一事实问题调整到13；第11次早于修订落盘的时序错误如实保留。旧36次成员查询、B01—B05和封存三键4/6完全保留，不借其余量。新文件≤10MiB、最低空闲512MiB；拟合/标签/付费0。
-- 已核来源：交易所终止上市公告、发行人停牌公告、换股实施公告、实际发行结果公告。两份PDF地址实际返回校验HTML，失败保留；未绕过校验。原始公开网页只本地留证，不整篇上传报纸内容；Git发布事实提要/指纹/验证/报告。
-- 归档验收：停牌与终止上市分开、换股记录日与新股上市日分开，比例和实际发行总数复算；明确不等于完整历史成员或旧价修复。原六冻结原件等其他目标缺件保持，不能因此阻断本项。
-- 定时leisignal已改为本对话直接执行，ACTIVE/30分钟/原线程；规则2026-10-08.v4-direct。前版“全部只能等资料”范围过宽，已由本项实际补件纠正。
+- 更新：2026-10-08T12:17:23.105302+08:00；root会话01a116c7-3700-7062-a6c6-53af00ef60a0按最新人类指令直接执行，不再派发。checked_coordination_sha=e3c5da9c02f1dd32f2dab42124155bc066bafda3；已读COORDINATION.md、本记录、risk-shape-information及report-library-integration-20261008，原目录owner已释放共享登记窗口；root独占本轮新增报告登记，无并写冲突。
+- 海通证券有界资格已完成：四份正式披露、14项本地核验、19条原停牌占位核对；报告和事实清单已在codex/research-direct-20261008@995b5079d58813770d7a37fd81e058d21c37e2e5推送并逐10文件读回一致。原网页和供应商数据仅本机；没有新增独立agent审查、修价或拟合。主登记621→622仅本地，成果分支200→201已发布，未上传完整主树登记。
+- 现在接续原清单另两只600705、601989终止事件，状态planned。本轮准确新增路径docs/experiments/raw/stock-terminal-actions-2026-10-08/、docs/experiments/stock-terminal-actions-qualification-2026-10-08.md；既有root进度/thread-state/中央记录及共享registry/INDEX单报告窗口沿用。只补官方停止交易与最终现金/换股事实，不重跑原试验、补全价格或猜成员。
+- 两只固定对象来源请求规划约12次，并非达到就放弃可得必要原件的自定停止预算；累计逐条记录、所得≤10MiB、至少512MiB空闲，依据事实齐备或真实缺件收尾。海通已用13次/213536字节，初始自定额度修订和第11次顺序错误留存；其他旧36次、B01—B05、三键4/6预算与失败不变。
+- 尚缺的D—MAE六原件、历史价格原版本/完整成员和Qlib原包保持各自依赖，不阻塞当前独立资料工作。定时leisignal已改v4-direct、ACTIVE/30分钟/原线程；原生配置读回验证，下一次自动触发尚待实际观察。
 
 ## 当前直接执行规则
 
@@ -137,8 +134,8 @@
 {
   "schema_version": 1,
   "record_id": "research-dispatch-controller",
-  "checked_coordination_sha": "b6d8625b4085dccd53a30820bc7534228b9425bd",
-  "checked_at": "2026-10-08T12:10:56.931606+08:00",
+  "checked_coordination_sha": "e3c5da9c02f1dd32f2dab42124155bc066bafda3",
+  "checked_at": "2026-10-08T12:17:23.105302+08:00",
   "snapshot_only": true,
   "assignments": [
     {
@@ -277,7 +274,9 @@
         "docs/experiments/raw/haitong-corporate-action-2026-10-08/",
         "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md",
         "docs/experiments/registry.json",
-        "docs/experiments/INDEX.md"
+        "docs/experiments/INDEX.md",
+        "docs/experiments/raw/stock-terminal-actions-2026-10-08/",
+        "docs/experiments/stock-terminal-actions-qualification-2026-10-08.md"
       ],
       "depends_on": [],
       "scope_released": false,
@@ -534,10 +533,11 @@
       "correction_commit": "cdc367e5a6512bfa01ab507c475befeb6f20d307"
     },
     "latest_followup": {
-      "checked_at": "2026-10-08T12:10:56.931606+08:00",
+      "checked_at": "2026-10-08T12:17:23.105302+08:00",
       "mode": "root_direct_no_delegation",
-      "unit": "haitong-corporate-action-qualification-20261008",
-      "state": "active_sources_obtained_validation_and_registration"
+      "completed_unit": "haitong-corporate-action-qualification-20261008",
+      "completed_commit": "995b5079d58813770d7a37fd81e058d21c37e2e5",
+      "next_direct_unit": "remaining-terminal-actions-qualification-20261008"
     },
     "parallel_serial_rule": "Current user instruction: root executes directly; independent read-only tool calls may run in parallel, dependent validation/publication and shared registry writes are sequential. No new task dispatch.",
     "classic_acceptance": {
@@ -556,43 +556,82 @@
   },
   "current_execution_mode": "root_direct_no_delegation",
   "direct_execution_unit": {
-    "id": "haitong-corporate-action-qualification-20261008",
-    "state": "active_sources_obtained_validation_and_registration",
-    "question": "Resolve official trading cessation, listing termination and share-conversion/successor facts for 600837, independently of historical CSI300 membership and old price-scale repair.",
-    "original_authority": "Pasted original goal4: supplement identities, delisting/terminal value, corporate actions and trading availability by actual need. Original qualification-plan.md already names exactly this security and missing documents.",
-    "existing_gap_evidence": [
-      "docs/research/proposals/stock-price-scale-and-membership-2026-10-06/qualification-plan.md:63",
-      "docs/research/proposals/stock-price-scale-and-membership-2026-10-06/qualification-plan.md:65",
-      "docs/experiments/baostock-bounded-local-probe-2026-10-05.md:48"
+    "id": "remaining-terminal-actions-qualification-20261008",
+    "state": "planned_registered_before_sources",
+    "codes": [
+      "600705",
+      "601989"
     ],
-    "scope": "One existing missing security 600837, official 2025 action chain only; no new stock candidate, price repair, index membership inference, factor/label/strategy run.",
+    "question": "Qualify officially disclosed final trading/suspension/listing termination and cash or share consideration for the other two already named missing securities. No market panel repair, sample replacement or new backtest.",
+    "original_authority": "Original eight-goal request goal4 and existing qualification-plan sections4 and6; direct-execution user instruction.",
     "write_paths": [
-      "docs/experiments/raw/haitong-corporate-action-2026-10-08/",
-      "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md",
+      "docs/experiments/raw/stock-terminal-actions-2026-10-08/",
+      "docs/experiments/stock-terminal-actions-qualification-2026-10-08.md",
       "docs/experiments/registry.json",
       "docs/experiments/INDEX.md"
     ],
-    "budget": {
-      "public_source_requests_max": 13,
-      "public_source_requests_used": 13,
-      "new_bytes_max": 10485760,
+    "source_policy": {
+      "scope": "Two named 2025 terminal corporate actions only; existing reports reused; stop once event dates and terms are sourced and checked, or actual access/necessary evidence is unavailable. No fixed self-created request quota used as a reason to abandon accessible necessary facts.",
+      "planning_estimate_source_operations": 12,
+      "source_operations_used": 0,
+      "max_new_bytes": 10485760,
       "minimum_free_bytes": 536870912,
-      "fit_or_labels": 0,
-      "paid_requests": 0,
-      "carry_forward": "Prior 36 index-anchor requests, B01-B05 and closed gap-pilot 4/6 preserved; no reuse of closed unused quota. This is the previously named company-action question, not renewed anchor/price probing.",
-      "amendments_preserved_at": "docs/experiments/raw/haitong-corporate-action-2026-10-08/request-ledger.json",
-      "note": "Controller-created 6 and 10 operation estimates revised to 13 to complete the same factual question; operation11 occurred before amendment recording, explicitly retained. No old sealed budget reused."
+      "old_closed_budgets": "unchanged; none reused",
+      "fits": 0,
+      "labels": 0,
+      "paid": 0
     },
-    "acceptance": "Official issuer/exchange sources, document and effective dates separated, original bytes/hash, exact conversion terms/successor, admissible vs still missing fields, no made-up total return.",
-    "strategy_layer": "Historical instrument identity and corporate-action/trading availability data; no technical signal semantics changed.",
-    "strategy_sha256": {
-      "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
-      "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
-    },
-    "status": "active_sources_obtained_validation_and_registration",
-    "shared_registration": "Root sole writer for one new report only. Prior integration owner explicitly scope_released=true; preserve all existing entries and main working branch."
+    "acceptance": "Issuer/exchange documents and original-byte hashes; publication/effective dates distinct; exact consideration terms; fixed old-row comparison only if needed; rights actually paid/issued distinguished from proposal; unclear fields remain unknown.",
+    "execution": "root only; independent read requests parallel, shared registration serial"
   },
-  "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0"
+  "controller_owner": "01a116c7-3700-7062-a6c6-53af00ef60a0",
+  "direct_execution_completed_units": [
+    {
+      "id": "haitong-corporate-action-qualification-20261008",
+      "state": "completed_bounded_factual_qualification",
+      "question": "Resolve official trading cessation, listing termination and share-conversion/successor facts for 600837, independently of historical CSI300 membership and old price-scale repair.",
+      "original_authority": "Pasted original goal4: supplement identities, delisting/terminal value, corporate actions and trading availability by actual need. Original qualification-plan.md already names exactly this security and missing documents.",
+      "existing_gap_evidence": [
+        "docs/research/proposals/stock-price-scale-and-membership-2026-10-06/qualification-plan.md:63",
+        "docs/research/proposals/stock-price-scale-and-membership-2026-10-06/qualification-plan.md:65",
+        "docs/experiments/baostock-bounded-local-probe-2026-10-05.md:48"
+      ],
+      "scope": "One existing missing security 600837, official 2025 action chain only; no new stock candidate, price repair, index membership inference, factor/label/strategy run.",
+      "write_paths": [
+        "docs/experiments/raw/haitong-corporate-action-2026-10-08/",
+        "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md"
+      ],
+      "budget": {
+        "public_source_requests_max": 13,
+        "public_source_requests_used": 13,
+        "new_bytes_max": 10485760,
+        "minimum_free_bytes": 536870912,
+        "fit_or_labels": 0,
+        "paid_requests": 0,
+        "carry_forward": "Prior 36 index-anchor requests, B01-B05 and closed gap-pilot 4/6 preserved; no reuse of closed unused quota. This is the previously named company-action question, not renewed anchor/price probing.",
+        "amendment": {
+          "at": "2026-10-08T12:04:40.882752+08:00",
+          "before_source_operations_max": 6,
+          "after_source_operations_max": 10,
+          "reason": "Six was controller-created, not an explicit human total budget. Two exact official PDF paths returned diagnosed JavaScript challenge HTML. User AGENTS forbids inventing stopping points and authorizes direct completion; bounded necessary verification can use issuer-authored public disclosure text. Preserve all six attempts; no change to closed historical-source/price-pilot budgets, size cap or no-bypass rule.",
+          "allowed_followup": "At most one official document parser attempt plus two issuer public disclosure acquisitions and one discovery lookup; no challenge script execution, cookie generation, Library403 retries or paid routes."
+        },
+        "raw_response_bytes": 213536
+      },
+      "acceptance": "Official issuer/exchange sources, document and effective dates separated, original bytes/hash, exact conversion terms/successor, admissible vs still missing fields, no made-up total return.",
+      "strategy_layer": "Historical instrument identity and corporate-action/trading availability data; no technical signal semantics changed.",
+      "strategy_sha256": {
+        "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+        "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+      },
+      "status": "accepted_root_checked_not_independent_agent_review",
+      "started_at": "2026-10-08T12:02:18.903407+08:00",
+      "accepted_at": "2026-10-08T12:17:23.105302+08:00",
+      "published_commit": "995b5079d58813770d7a37fd81e058d21c37e2e5",
+      "checks": 14,
+      "report": "docs/experiments/haitong-corporate-action-qualification-2026-10-08.md"
+    }
+  ]
 }
 ```
 
