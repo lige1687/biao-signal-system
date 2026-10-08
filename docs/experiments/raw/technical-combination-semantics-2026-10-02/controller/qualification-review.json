@@ -1,0 +1,88 @@
+{
+  "accepted_for_one_effect_batch": true,
+  "real_future_values_seen": 0,
+  "qualification_sha256": "af332cde5bd8465011eae266eafdaa2bf149ad7aef3f95343ac0a893f5d18c8b",
+  "identity_comparison": {
+    "status": "full_identity_comparison_complete",
+    "rows_compared": 4340,
+    "row_mismatches": 0,
+    "coverage_mismatches": 0,
+    "real_equal_high_cases": 5,
+    "real_new_top_without_prior_cases": 218,
+    "real_old_top_broken_and_k_cases": 57,
+    "future_outcome_values": 0,
+    "fits": 0,
+    "network_requests": 0,
+    "new_adapter_read_or_imported": false,
+    "source_sha256": {
+      "docs/experiments/raw/technical-combination-semantics-2026-10-02/independent-identity/identities.json": "c153be5301da1e7957c4677dc7eaac54028155ef0bd5ea00aa59050f14192572",
+      "docs/experiments/raw/technical-combination-semantics-2026-10-02/independent-identity/direct_check.py": "169b9c16d4b8282b1cf7c124be7f39c6ee8422fdc9f8fe6842fc4380ad94d151",
+      "docs/experiments/raw/technical-combination-semantics-2026-10-02/independent-identity/compare_qualification.py": "48b2801a72e580454f3237d00dd3bc4d8c06d7af431c75edda3414b909fe6c9d",
+      "docs/experiments/raw/technical-combination-semantics-2026-10-02/independent-identity/comparison.json": "3a40a37cf57534ae5dff684394a7d230e90e90fc87e965cb301913610bb54381",
+      "docs/experiments/raw/technical-combination-semantics-2026-10-02/independent-identity/review.md": "efcdc6e381c33a157f4b8010bef73b812076ad10b0c11dfaa3f36bb18f81959f",
+      "docs/experiments/raw/technical-combination-semantics-2026-10-02/qualification/observations.json": "6fc0db9473aeb08371cd7c06ad07d0874bf3d7e89af8bf188be87ab1d9c4e181",
+      "docs/experiments/raw/technical-combination-semantics-2026-10-02/qualification/qualification.json": "af332cde5bd8465011eae266eafdaa2bf149ad7aef3f95343ac0a893f5d18c8b",
+      "docs/experiments/raw/technical-combination-semantics-2026-10-02/controller/definition-intent.json": "48bea685eb85f0856c8384b206c1822ae726f818a7fb0edfb38a2b1ed16765d8"
+    }
+  },
+  "reasons": {
+    "universe_fit": "四国内宽基ETF固定历史，4340安排日全部保留；2069上行背景日及四态均有支持；市场总体及未来独立验证不在此次可推断范围。",
+    "proxy_fidelity": "原文§4.3有顶部与均线转向位置的组合，但此处仅用昨日已有且今日未破坏的最新简单三根顶部和K01双跌破；极端时钟、严格包含构造、持续恶化和持仓退出均省略。",
+    "method_fit": "两个训练期983和1678条均有四态；B1同时含T、K与固定价格背景，B2只加乘积；ridge1固定而非优化。2026H1只有4条双跌破但无顶部的可评价日，限制组合分离。",
+    "conclusion_scope": "只回答未来20日收盘下探的固定模型表示增量；产品项并非新增数据，描述差额并非因果或账户退出效果；原文不变。"
+  },
+  "planned_fits": 4,
+  "budget_max": 12,
+  "fold_counts": [
+    {
+      "fold": {
+        "train_end": "2024-12-31",
+        "eval_start": "2025-01-01",
+        "eval_end": "2025-12-31"
+      },
+      "train": 983,
+      "train_states": {
+        "00": 460,
+        "10": 231,
+        "01": 63,
+        "11": 229
+      },
+      "train_has_all_four_states": true,
+      "evaluation": 611,
+      "evaluation_states": {
+        "00": 311,
+        "10": 174,
+        "01": 14,
+        "11": 112
+      }
+    },
+    {
+      "fold": {
+        "train_end": "2025-12-31",
+        "eval_start": "2026-01-01",
+        "eval_end": "2026-06-30"
+      },
+      "train": 1678,
+      "train_states": {
+        "00": 808,
+        "10": 431,
+        "01": 82,
+        "11": 357
+      },
+      "train_has_all_four_states": true,
+      "evaluation": 263,
+      "evaluation_states": {
+        "00": 120,
+        "10": 69,
+        "01": 4,
+        "11": 70
+      }
+    }
+  ],
+  "proxy_choices": [
+    "latest previous top survives today high, today new top enters next day",
+    "K uses existing research first-close EMA seed",
+    "SMA60 rising five sessions is simplified context"
+  ],
+  "no_extra_scientific_variant": true
+}

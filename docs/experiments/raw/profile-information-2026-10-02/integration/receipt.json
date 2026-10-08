@@ -1,0 +1,75 @@
+{
+  "schema_version": "p01-workflow-integration/1",
+  "date": "2026-10-02",
+  "contract": "docs/archive/handoffs-plans/technical-remaining-parallel-2026-10-01/profile-integration-contract-2026-10-02.json",
+  "state": "synthetic_checked_pending_controller_review",
+  "changed_paths": [
+    "src/lei_signal/research/workflow.py",
+    "src/lei_signal/research/workflow_inputs.py",
+    "src/lei_signal/research/question_contract.py",
+    "tests/unit/test_profile_information.py"
+  ],
+  "before_sha256_reference": {
+    "src/lei_signal/research/workflow.py": "f6809f912465066775f30bd1ddcff74fcd20e302103c60d235ec773f05162ad3",
+    "src/lei_signal/research/workflow_inputs.py": "71568be382ff0104d20a4614830532c52f185db1c4862e1e08a935174cfcc6e8",
+    "src/lei_signal/research/question_contract.py": "531d9fd25a287d076f6021eb4263c260a8ec8555578694ddb85c3341bbbac21a"
+  },
+  "before_reference_note": "Earlier K01 handoff hashes provide a prior auditable reference; an exact byte snapshot immediately before this P01 integration was not captured, so no exact pre-edit hash is asserted.",
+  "after_sha256": {
+    "src/lei_signal/research/workflow.py": "83f3959fe40974f29181a70f6710d56e12f5e192a304ac34092e5b9289262a39",
+    "src/lei_signal/research/workflow_inputs.py": "1ab7940902e837444b7f983483b0d34404244f120bd459ee642ed4febc48894b",
+    "src/lei_signal/research/question_contract.py": "09a62f30612912e9569c5405dc3a284038e1b623a697529f216e8044aea5a251",
+    "tests/unit/test_profile_information.py": "634822e2af79aa282f4b7f41c338c2f1def8305e1a02b0a2f835f76db4721ff9"
+  },
+  "bindings": {
+    "P01_feature_dependencies": [
+      "src/lei_signal/research/profile_information.py",
+      "src/lei_signal/features/volume_profile.py",
+      "src/lei_signal/research/volume_information.py",
+      "src/lei_signal/research/top_structure_information.py"
+    ],
+    "K01_cache_feature_and_label_adapter": "src/lei_signal/research/key_fluctuation_information.py",
+    "P01_cache_feature_and_label_adapter": "src/lei_signal/research/profile_information.py"
+  },
+  "synthetic_rehearsal": {
+    "data_mode": "synthetic",
+    "assets": 2,
+    "observations": 732,
+    "ready_252": 230,
+    "profile_known": 230,
+    "eligible_mature": 188,
+    "fits": 2,
+    "full120_source_and_no_break_flags": true,
+    "quantity_differs_from_price_only": true,
+    "real_market_data_used": false
+  },
+  "real_draft_gate": "P01 preparation has no real-label/effect authorization; use no-label qualification only",
+  "checks": {
+    "contract_shape": "passed",
+    "negative_mutations": [
+      "bins49",
+      "baseline_r1_only",
+      "end_offset20",
+      "wrong_source_adapter"
+    ],
+    "cache_mutation": "K01/P01 adapter changes invalidate feature and label keys; production profile change invalidates P01 feature key",
+    "unit": "70 passed",
+    "workflow_integration_regression": "59 passed",
+    "repository_hygiene": "passed"
+  },
+  "budget_used": {
+    "synthetic_batches": 1,
+    "real_fits": 0,
+    "future_target_runs": 0,
+    "network": 0,
+    "mechanical_repairs": 0
+  },
+  "not_done": [
+    "real-label computation",
+    "real fit",
+    "workflow-draft execution or freeze",
+    "definition registry edit",
+    "K01 numerical code edit"
+  ],
+  "controller_next": "Review diff and exact source/definition bindings, then separately authorize and run actual P01 draft and four real fits only if permitted."
+}

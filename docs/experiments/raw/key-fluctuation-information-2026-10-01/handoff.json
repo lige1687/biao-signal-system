@@ -1,0 +1,73 @@
+{
+  "schema_version": "k01-adapter-handoff/1",
+  "date": "2026-10-02",
+  "executor": "gpt-6-sol/medium (recovery record)",
+  "state": "adapter_prepared_pending_controller_review",
+  "scope": "research-only K price condition, source qualification and synthetic/no-label preparation",
+  "original_contract": "docs/archive/handoffs-plans/technical-remaining-parallel-2026-10-01/key-fluctuation-adapter-contract.json",
+  "recovery_contract": "docs/archive/handoffs-plans/technical-remaining-parallel-2026-10-01/key-fluctuation-recovery-contract-2026-10-02.json",
+  "before_state": {
+    "files": "four source files were untracked partial work at recovery; test and raw directory absent",
+    "sha256": "not captured by previous executor; no pre-recovery byte snapshot was available",
+    "preservation": "all partial code retained and extended; no reset or deletion"
+  },
+  "strategy_source_sha256": {
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "panel_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+  "source_manifest_path": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+  "qualification": {
+    "scheduled": 4340,
+    "assets": 4,
+    "dates": 1085,
+    "uptrend": 2069,
+    "K_true": 548,
+    "K_false": 1521,
+    "matched": 181,
+    "unmatched": 367,
+    "pairs": 361,
+    "distinct_controls": 195,
+    "matched_by_phase": {
+      "2022_2024": 111,
+      "2025": 47,
+      "2026H1": 23
+    },
+    "future_outcome_values_used": false,
+    "source_raw_response_field_differences": 0,
+    "source_economic_ohlc_max_absolute_difference": 6.661338147750939e-15
+  },
+  "budget_used": {
+    "qualification_batches": 1,
+    "synthetic_batches": 1,
+    "mechanical_repairs": 1,
+    "fits": 0,
+    "market_outcome_runs": 0,
+    "network": 0
+  },
+  "verification": {
+    "ordered_pairs_rebuilt_exactly": true,
+    "all_qualification_targets_null": true,
+    "pytest": "63 passed",
+    "hygiene": "passed",
+    "workflow_draft_executed": false,
+    "real_future_labels_computed": false
+  },
+  "changed_paths_sha256": {
+    "src/lei_signal/research/key_fluctuation_information.py": "f0c9f769ab608182813eb018ce97d5913cc3e6ff69841811b8757e5626ec1d9d",
+    "src/lei_signal/research/workflow.py": "f6809f912465066775f30bd1ddcff74fcd20e302103c60d235ec773f05162ad3",
+    "src/lei_signal/research/workflow_inputs.py": "71568be382ff0104d20a4614830532c52f185db1c4862e1e08a935174cfcc6e8",
+    "src/lei_signal/research/question_contract.py": "531d9fd25a287d076f6021eb4263c260a8ec8555578694ddb85c3341bbbac21a",
+    "tests/unit/test_key_fluctuation_information.py": "bc08b6beba46c9dfb868e31d0df1cc0b07f0ac800fa02593017a0e5a486bc91b",
+    "docs/experiments/raw/key-fluctuation-information-2026-10-01/definition-card.json": "511647c71c54578a6982c9c698415cee8282cfd28eb2472b59e7ba24f195376d",
+    "docs/experiments/raw/key-fluctuation-information-2026-10-01/workflow-draft.json": "73f07264b99b565330c72abdf1db63a1bed59cf6b6a79deb8133a4bacb1ed452",
+    "docs/experiments/raw/key-fluctuation-information-2026-10-01/qualification.json": "1d3d8ea0b1de2f7bf74721b06ebf26639de25364646830f268b2a82e3733bd14",
+    "docs/experiments/raw/key-fluctuation-information-2026-10-01/pairs.json": "1810cc933339a734c7e795823511cb6048f604bb6c75fb870c05f994e8b52df2",
+    "docs/experiments/raw/key-fluctuation-information-2026-10-01/match-support.json": "441c690c2a59e036267045da9b0a133ff61477e61dcaed42e9d39a8fb87c800b"
+  },
+  "pending_controller_actions": [
+    "Review definition-card draft and register exact ID/version before any workflow draft run.",
+    "Freeze a separate authorized real-label/effect run; current draft gate blocks it.",
+    "Independently verify scientific result, uncertainty and account-use boundary before any report or trading use."
+  ]
+}

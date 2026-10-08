@@ -1,0 +1,131 @@
+{
+  "outcome_values_used_for_design": false,
+  "data_sha256": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+  "source_quality": {
+    "request_satisfied": true,
+    "assets": [
+      "510300.SS",
+      "510050.SS",
+      "510500.SS",
+      "588000.SS"
+    ],
+    "raw_response_field_differences": 0,
+    "economic_ohlc_max_absolute_difference": 6.661338147750939e-15
+  },
+  "source_warnings": [
+    "逐行名义OHLC和行动重建已重新核对；V01量仅在源资格例程内核对，未进入T01特征。",
+    "行动历史到达时间及完整性仍未知；这些是回顾性经济价格观察。"
+  ],
+  "coverage": {
+    "observations": 4340,
+    "ready_252": 4340,
+    "trend_up": 2069,
+    "k_true": 548,
+    "k_false": 1521,
+    "eligible": 2069,
+    "price_reset_rows": 0,
+    "per_asset": {
+      "510300.SS": {
+        "observations": 1085,
+        "ready_252": 1085,
+        "trend_up": 529,
+        "k_true": 133,
+        "k_false": 396,
+        "eligible": 529
+      },
+      "510050.SS": {
+        "observations": 1085,
+        "ready_252": 1085,
+        "trend_up": 550,
+        "k_true": 140,
+        "k_false": 410,
+        "eligible": 550
+      },
+      "510500.SS": {
+        "observations": 1085,
+        "ready_252": 1085,
+        "trend_up": 526,
+        "k_true": 139,
+        "k_false": 387,
+        "eligible": 526
+      },
+      "588000.SS": {
+        "observations": 1085,
+        "ready_252": 1085,
+        "trend_up": 464,
+        "k_true": 136,
+        "k_false": 328,
+        "eligible": 464
+      }
+    },
+    "definition_ref": "research.key_fluctuation.dual_break20@1.0.0"
+  },
+  "counts": {
+    "assets": 4,
+    "observations": 4340,
+    "dates": 1085,
+    "episodes": null
+  },
+  "scientific_support": {
+    "phases": {
+      "early_2022_2024": {
+        "scheduled": 2904,
+        "trend_up": 1067,
+        "k_true": 313,
+        "k_false": 754,
+        "matched": 111,
+        "unmatched": 202
+      },
+      "eval_2025": {
+        "scheduled": 972,
+        "trend_up": 679,
+        "k_true": 148,
+        "k_false": 531,
+        "matched": 47,
+        "unmatched": 101
+      },
+      "eval_2026H1": {
+        "scheduled": 464,
+        "trend_up": 323,
+        "k_true": 87,
+        "k_false": 236,
+        "matched": 23,
+        "unmatched": 64
+      }
+    },
+    "folds": [
+      {
+        "fold": {
+          "train_end": "2024-12-31",
+          "eval_start": "2025-01-01",
+          "eval_end": "2025-12-31"
+        },
+        "train": 983,
+        "train_true": 292,
+        "train_false": 691,
+        "evaluation": 611,
+        "evaluation_true": 126,
+        "evaluation_false": 485
+      },
+      {
+        "fold": {
+          "train_end": "2025-12-31",
+          "eval_start": "2026-01-01",
+          "eval_end": "2026-06-30"
+        },
+        "train": 1678,
+        "train_true": 439,
+        "train_false": 1239,
+        "evaluation": 263,
+        "evaluation_true": 74,
+        "evaluation_false": 189
+      }
+    ],
+    "matched": 181,
+    "unmatched": 367,
+    "pairs": 361,
+    "distinct_controls": 195,
+    "model_feature_count": 9,
+    "note": "Present and past values only; date positions establish possible maturity without reading future prices."
+  }
+}

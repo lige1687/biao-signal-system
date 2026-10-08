@@ -157,5 +157,106 @@
       "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json"
     ],
     "preparation_portability": "still blocked; previous36/75 entries are historical snapshots"
+  },
+  "current_after_metadata14_publication": {
+    "published_count": 14,
+    "published_bytes": 34104,
+    "missing_count": 13,
+    "missing": [
+      "docs/experiments/raw/a01-guide-study-2026-09-29/audit/source-audit.json",
+      "docs/experiments/raw/a01-guide-study-2026-09-29/controller-check.json",
+      "docs/experiments/raw/a02-sma-maintenance-2026-09-29/controller-check.json",
+      "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/controller/qualification-review.json",
+      "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/qualification/qualification.json",
+      "docs/experiments/raw/pullback-depth-change-2026-10-02/qualification/qualification.json",
+      "docs/experiments/raw/semantic-mining-2026-10-02/controller/trend-qualification-review.json",
+      "docs/experiments/raw/semantic-mining-2026-10-02/trend-adapter/qualification.json",
+      "docs/experiments/raw/technical-combination-semantics-2026-10-02/qualification/qualification.json",
+      "docs/experiments/raw/volume-information-2026-09-30/execution/matches.csv",
+      "docs/experiments/raw/volume-information-2026-09-30/execution/qualification.json",
+      "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json",
+      "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json"
+    ],
+    "withheld_conditions": {
+      "docs/experiments/raw/a01-guide-study-2026-09-29/audit/source-audit.json": {
+        "sha256": "c59fec3d96fbebf67608121e3eff1bf43e9eeae08e9616c79bd6f2f51e8d822a",
+        "bytes": 38521,
+        "reason": "含按产品列出的真实比率变化日期等来源轨迹，超出纯聚合摘要。需明确覆盖这些逐日期来源衍生记录的传播范围。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/a01-guide-study-2026-09-29/controller-check.json": {
+        "sha256": "5839862cb79cb5ffce3882f8e26c66cbb61ed819aab414dba61feecf1623a1f2",
+        "bytes": 27647,
+        "reason": "检查名嵌入真实 ETF×日期×期限的缺标签记录；虽无报价值，仍有逐观察资格轨迹。需明确许可这一准确范围。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/a02-sma-maintenance-2026-09-29/controller-check.json": {
+        "sha256": "34c2ef7897042040749de045d49a2db9d7f645110fbd7b809738097510cdfc92",
+        "bytes": 262301,
+        "reason": "含真实 ETF×日期的 feature/path 核验及缺标签记录，不是纯聚合回执。需明确逐观察核验轨迹的传播范围。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/controller/qualification-review.json": {
+        "sha256": "3c328fbcc3b24c575292d43d9689474dba82702b999fb570762f00606ee18fa9",
+        "bytes": 3065,
+        "reason": "同 SHA 已在旧清单逐项列为 local only。即使内容主要为聚合审阅，本轮不能解除原限制；需准确文件的明确释放。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/ema-sma-sequence-information-2026-10-02/qualification/qualification.json": {
+        "sha256": "ac9871a9366cc00f766128b3a61f1d19f0d0d2ecc7c3199cca3b94c3f2447847",
+        "bytes": 4456,
+        "reason": "同 SHA 有旧准确 withheld 记录。恢复需明确释放该原件；不能凭本次内容检查推定放行。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/semantic-mining-2026-10-02/controller/trend-qualification-review.json": {
+        "sha256": "47172505344f56035d76a20784d927ff6104f9ae80e999d9610ed754de492479",
+        "bytes": 1488,
+        "reason": "同 SHA 有旧 withheld；另含真实资产×日期的算术核验项。需明确释放准确原件及该记录范围。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/semantic-mining-2026-10-02/trend-adapter/qualification.json": {
+        "sha256": "f910613427b1930025464d78f231c541fea7642525b565f67bcdff2682412ff0",
+        "bytes": 2921,
+        "reason": "同 SHA 已在旧清单逐项 withheld；内容为聚合也不自动解除。需明确释放该准确文件。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/technical-combination-semantics-2026-10-02/qualification/qualification.json": {
+        "sha256": "af332cde5bd8465011eae266eafdaa2bf149ad7aef3f95343ac0a893f5d18c8b",
+        "bytes": 25836,
+        "reason": "嵌入 130 个真实信号区段的资产、起止和持续长度，属于逐区段衍生记录。需明确许可这些明细；不能整体按聚合摘要发布。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/volume-information-2026-09-30/execution/qualification.json": {
+        "sha256": "dd5440c8033d0379c549002538d48e536531e1bf9a9374cdd7c9d389893ca6fe",
+        "bytes": 30201,
+        "reason": "除聚合表外嵌入 55 个真实未匹配事件 ID，整体不是纯摘要。需明确事件身份明细的传播范围。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json": {
+        "sha256": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+        "bytes": 9680,
+        "reason": "同 SHA 有旧准确 withheld，绑定 40 份来源及行动资料。需明确释放此清单；不连带授权源文件。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/volume-information-2026-09-30/source-recovery/qualification.json": {
+        "sha256": "9d150d608a5e8a88d11021b96f5e2ec5443dddf14c1a98b4ddc2fb4b01bee5f2",
+        "bytes": 13305,
+        "reason": "同 SHA 有旧准确 withheld；还含真实拆分跨期未知日期清单。需明确释放准确原件和来源衍生日期范围。",
+        "basis": "original owner per-file review + controller acceptance"
+      },
+      "docs/experiments/raw/pullback-depth-change-2026-10-02/qualification/qualification.json": {
+        "sha256": "56d87654c1550955727f32ab4d71d28f224c217c60859c214f1b876f90f4801c",
+        "bytes": 4833151,
+        "reason": "Original technical owner qualify provider-derived row redistribution or explicitly authorized private transport location for these exact bytes; do not upload to public Git.",
+        "basis": "original36 provenance; two row-rich sources excluded from owner25 qualification"
+      },
+      "docs/experiments/raw/volume-information-2026-09-30/execution/matches.csv": {
+        "sha256": "7f6bb3baad52460e53126472eb76a481dc991c20fdee301d72ebf71dd7a89884",
+        "bytes": 35361,
+        "reason": "Original technical owner qualify provider-derived row redistribution or explicitly authorized private transport location for these exact bytes; do not upload to public Git.",
+        "basis": "original36 provenance; two row-rich sources excluded from owner25 qualification"
+      }
+    },
+    "preparation_portability": "still blocked; 6 previous exactlocal-only +5 embedded observations/segments +2 other row-rich inputs remain; earlier counts retained as snapshots"
   }
 }
