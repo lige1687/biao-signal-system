@@ -1,0 +1,117 @@
+{
+  "checked_at": "2026-10-08T19:42:58.352536+08:00",
+  "task_id": "daily-trading-system-audit",
+  "user_latest_request": "取消主动通知，改为用户主动询问或点选后读系统并按需补公开搜索",
+  "registration": {
+    "parent": "05c04e2f8218d8d0cabee292dcbd57f736e6ee13",
+    "registration_commit": "12ae1269bbf74538cb684a98f5359d5bd01034d9",
+    "fetched_tip": "12ae1269bbf74538cb684a98f5359d5bd01034d9",
+    "checked_at": "2026-10-08T19:39:35.421390+08:00",
+    "readback_verified": true,
+    "local_agents_before_sha256": "8397c4797924c3fa64995391acccf6b2406b30e2e6bb9ece5a3a72637f3653dc",
+    "first_failure": {
+      "attempt_commit": "5c164ea4ea26bd9092ce379b7a7910f36e97444d",
+      "stale_parent": "e7d1bf8a529c289ba1be094a3906cbbdb4ccd248",
+      "cause": "Remote advanced with theory-only record during ordinary push; not force-pushed; latest own record matched before retry"
+    }
+  },
+  "automation_readback": {
+    "readback_verified": true,
+    "automations": [
+      {
+        "id": "automation-3",
+        "status": "PAUSED",
+        "notification_policy": "failed_runs_only",
+        "original_schedule_and_target_preserved": true,
+        "new_stop_instruction_readback": true
+      },
+      {
+        "id": "automation-4",
+        "status": "PAUSED",
+        "notification_policy": "failed_runs_only",
+        "original_schedule_and_target_preserved": true,
+        "new_stop_instruction_readback": true
+      },
+      {
+        "id": "automation-5",
+        "status": "PAUSED",
+        "notification_policy": "failed_runs_only",
+        "original_schedule_and_target_preserved": true,
+        "new_stop_instruction_readback": true
+      },
+      {
+        "id": "automation-6",
+        "status": "PAUSED",
+        "notification_policy": "failed_runs_only",
+        "original_schedule_and_target_preserved": true,
+        "new_stop_instruction_readback": true
+      }
+    ]
+  },
+  "actual_read_views": [
+    {
+      "view": "daily_review",
+      "generated_at": "2026-10-08T19:38:50.786350+08:00",
+      "available": true,
+      "rows": 29,
+      "source_keys": [
+        "portfolio",
+        "plans",
+        "opportunities",
+        "news"
+      ],
+      "error_keys": [
+        "news"
+      ],
+      "limits_preserved": true
+    },
+    {
+      "view": "fundamentals",
+      "generated_at": "2026-10-08T19:38:51.043380+08:00",
+      "available": true,
+      "rows": 3,
+      "source_keys": [
+        "observations"
+      ],
+      "error_keys": [],
+      "limits_preserved": true
+    },
+    {
+      "view": "news",
+      "generated_at": "2026-10-08T19:38:50.914143+08:00",
+      "available": true,
+      "rows": 5,
+      "source_keys": [
+        "briefing_packet"
+      ],
+      "error_keys": [
+        "news_receipt"
+      ],
+      "limits_preserved": true
+    }
+  ],
+  "ui_options": [
+    "今日操作简报",
+    "市场基本面",
+    "持仓消息面",
+    "单只基金分析",
+    "交易计划与持仓变化"
+  ],
+  "fresh_search_this_request": false,
+  "search_contract": "No concrete analysis topic requested now. Public original-source search only when relevant to later human-selected question; no private account upload. Distinguish source dates and technical rules.",
+  "docs_hygiene_passed": true,
+  "agents_proof": {
+    "original_prefix_preserved": true,
+    "before_sha256": "8397c4797924c3fa64995391acccf6b2406b30e2e6bb9ece5a3a72637f3653dc",
+    "before_bytes": 26955,
+    "block_sha256": "a6e1957df93bddcb3709d6acdc9d50ef9c6064ab40013ba3bc6ae028d435ee67",
+    "source_publication_rule": "Source branch parent AGENTS plus only new on-demand block"
+  },
+  "scope": "Existing query capabilities and docs/menu; no notification algorithm or transaction changes",
+  "scheduled_messages_sent": 0,
+  "new_automations": 0,
+  "downloads": 0,
+  "asr_runs": 0,
+  "real_orders": 0,
+  "test_note": "No new unit tests for low-impact documentation/pause change; verified actual automation files and three live read-only CLI paths. Earlier implementation tests retained."
+}
