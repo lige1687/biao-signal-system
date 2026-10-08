@@ -1,0 +1,43 @@
+{
+  "task_id": "theory-workflow-system-increment/dependency-publication-audit",
+  "mission": "查清准备工具75份本地依赖能否在既有授权下安全交付；只读定位与分类，不发布资料、不重做研究。",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "read_only_paths": [
+    "docs/experiments/raw/theory-safe-publication-2026-10-08",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/goal-parallel-20261008/theory-controller-publication-check.json",
+    "docs/coordination",
+    ".codex/worktrees/lei-coordination/docs/coordination/tasks",
+    "docs/experiments",
+    "docs/research",
+    "docs/ops/work-progress"
+  ],
+  "write_paths": [],
+  "task_scope": [
+    "使用delivery分支dependency-check.json准确75路径与root presence表；已核75/75本地存在、5472329字节、0在主HEAD或交付Git，不重复全仓扫描。",
+    "按研究主题合并定位原owner、来源/发布权限及需要实际内容而非仅存在的依赖机制。只读必要小段/字段，不运行这些脚本，不遍历私有DB。",
+    "重点区分不含行情或个人信息的验证摘要与完整市场/逐行/外部材料；可授权安全子集 vs 须原owner确认，不把整个75件一律等用户。",
+    "返回最小后继动作、准确原owner和文件分组；仅存在检查不能作为改为占位文件或放宽定义验证的理由。"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "network_allowed": false,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "max_agents": 1,
+  "expected_outputs": [
+    "简明可发布/需原owner核/不确定分类、证据路径、准确下一必要动作"
+  ],
+  "budget": {
+    "market_runs": 0,
+    "fits": 0,
+    "new_data_requests": 0
+  },
+  "stop_conditions": [
+    "不改文件/不新建子代理或用户聊天/不发消息/不取外部资料/不执行研究脚本/不上传75件"
+  ],
+  "controller_review": {
+    "required": true
+  }
+}

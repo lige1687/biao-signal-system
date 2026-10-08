@@ -1,0 +1,45 @@
+{
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "read_only_paths": [
+    "docs",
+    "AGENTS.md",
+    ".codex/worktrees/lei-coordination"
+  ],
+  "expected_outputs": [
+    "Return a concise candidate table: task-id, original-authority evidence, exact next action, inputs present/missing, owner/conflict, budget, acceptance and stop; no file writes.",
+    "Distinguish executable-now, active-other-owner, completed-do-not-repeat, external-input-blocked, and needs-user-decision. Cite precise file paths/sections."
+  ],
+  "stop_conditions": [
+    "No experiments, new source acquisition, installs, edits, Git mutation, messages or child agents.",
+    "Do not reopen sealed research, reset budgets, assume missing original inputs, or infer authorization from proposed TODOs.",
+    "Missing contract/input or ambiguity: report exact gap and continue independent inventory."
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "checked_coordination_sha": "f6d309fbbcb733ffeec8b5aaeaddd3da04416e2f",
+  "budget": {
+    "new_source_requests": 0,
+    "market_runs": 0,
+    "fits": 0,
+    "real_labels": 0,
+    "sealed_reruns": 0
+  },
+  "broader_parallel_batch_max_helpers": 2,
+  "mission": "Identify still-unfinished explicitly authorized LeiSignal engineering work outside blocked research inputs, with no overlap with active owners.",
+  "task_scope": [
+    "Read latest sections of engineering coordination records, follow relevant existing progress links, identify original authority and unaccepted required artifacts.",
+    "Do not take over daily-trading-system-audit or trend-trading-video; both active in current app snapshot. Media/social tasks outside LeiSignal research-engineering queue.",
+    "Prioritize pre-existing required implementation/integration/recovery work with local inputs. A planned proposal is not execution authority. Report no-ready honestly if all blocked/completed."
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "preflight_revision": "v2: same read-only repository boundary, relative-path schema repair; no agent had started"
+}

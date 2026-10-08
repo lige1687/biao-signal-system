@@ -1,0 +1,47 @@
+{
+  "mission": "Identify the exact smallest native research preflight integration needed to prevent known preflight-before-write gaps; return implementable scope and fresh meaningful checks",
+  "task_scope": [
+    "Read saved storage-management defect evidence and exact current native entrypoint write order; identify paths/volumes and already-covered checks.",
+    "Compare a minimal local preflight against the original complete cloud protection promise; keep original4defect candidate paused and do not claim equivalence.",
+    "Specify precise files/owner overlaps/dependencies and refusal behavior. No code edits or tests in this audit."
+  ],
+  "read_only_paths": [
+    "docs",
+    "scripts/run_factor_lab.py",
+    "src/lei_signal/research",
+    "src/lei_signal/integrations/storage_health.py",
+    "configs",
+    "tests/unit",
+    "tests/integration",
+    "AGENTS.md",
+    ".codex/worktrees/lei-coordination"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "expected_outputs": [
+    "Precise entrypoint/import/write-order table and source lines",
+    "Minimal implementable scope with acceptance/refusal cases; identify actual missing decision if any",
+    "Avoid edits to active daily storage owner paths; propose stable independent module or coordinate original CLI owner, not a duplicate platform"
+  ],
+  "budget": {
+    "market_runs": 0,
+    "new_data_requests": 0,
+    "fits": 0
+  },
+  "stop_conditions": [
+    "No edits/network/installs/experiments/source-message/child agents",
+    "No raw cleanup or cloud403 retry",
+    "No unrelated whole-repo re-audit"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab"
+}

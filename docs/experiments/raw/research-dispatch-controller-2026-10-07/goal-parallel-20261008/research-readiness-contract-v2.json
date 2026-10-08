@@ -1,0 +1,45 @@
+{
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "read_only_paths": [
+    "docs",
+    "AGENTS.md",
+    ".codex/worktrees/lei-coordination"
+  ],
+  "expected_outputs": [
+    "Return a concise candidate table: task-id, original-authority evidence, exact next action, inputs present/missing, owner/conflict, budget, acceptance and stop; no file writes.",
+    "Distinguish executable-now, active-other-owner, completed-do-not-repeat, external-input-blocked, and needs-user-decision. Cite precise file paths/sections."
+  ],
+  "stop_conditions": [
+    "No experiments, new source acquisition, installs, edits, Git mutation, messages or child agents.",
+    "Do not reopen sealed research, reset budgets, assume missing original inputs, or infer authorization from proposed TODOs.",
+    "Missing contract/input or ambiguity: report exact gap and continue independent inventory."
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "checked_coordination_sha": "f6d309fbbcb733ffeec8b5aaeaddd3da04416e2f",
+  "budget": {
+    "new_source_requests": 0,
+    "market_runs": 0,
+    "fits": 0,
+    "real_labels": 0,
+    "sealed_reruns": 0
+  },
+  "broader_parallel_batch_max_helpers": 2,
+  "mission": "Determine whether any original eight-goal research delivery is now executable from existing evidence, and identify any controller-imposed false blocker without reopening closed work.",
+  "task_scope": [
+    "Review original8 goal remaining entries in thread-state and latest relevant research coordination records.",
+    "Inspect only needed protocols/manifests/acceptance evidence to test dependencies; do not recompute accepted numerical studies.",
+    "If none executable, justify each remaining family with exact input/review/source/use dependency, and distinguish need-user-choice from unavailable data."
+  ],
+  "executor": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "medium"
+  },
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "preflight_revision": "v2: same read-only repository boundary, relative-path schema repair; no agent had started"
+}
