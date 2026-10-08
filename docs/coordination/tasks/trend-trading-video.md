@@ -1,3 +1,14 @@
+## V9 motion-delivered
+
+- task-id: trend-trading-video；2026-10-08T23:06:34.011076+08:00；checked_coordination_sha: dff98bb70e8abb81b3c398a77f020d95278a802d；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed制作阶段，动态小样主观待验收，scope_released=true。三张静态图用户已批准；未授权全片，不自动扩片。
+- 成果codex/trend-sample-v10-20261008@38f21851bc301d45d31676087b9f3cf39d53f4c3，准确路径远端逐字核对。V10 450帧/1920×1080，封装15.018秒，浏览器完整播放ended=true/error=null。实际六帧检查、TS、匿名文字、目录归置通过。
+- 外盘独立trend-trading-video-20261008T230027-7673d64dd0fb/result/trend-history-sample-final.mp4；V10/storage-plan.json与validation.json有设备/文件SHA/测量记录。初版音量偏低−23.4，保留失败后调整最终−18.0 LUFS/真峰−6.6；无旁白。音乐CC BY4.0已署名，原创合成音效配时间点。
+- 预览http://127.0.0.1:8777/；V9批准图未覆盖。skill参考和stage记录本次明确批准。未碰registry/INDEX，无冲突。周额度共享47%→47%，显示差0个百分点，不代表零消耗，精确单任务未知。
+
+
+---
+
 ## V9 motion-start
 
 - task-id: trend-trading-video；2026-10-08T22:59:52.482715+08:00；checked_coordination_sha: 4a2906bc086a3291ffc7f6b60a53b3c096dd03f6；已读 COORDINATION.md、自身与 research-dispatch-controller。
