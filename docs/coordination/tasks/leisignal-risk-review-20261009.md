@@ -1,3 +1,14 @@
+# B核心算术独审已交付，完整开跑审查尚待绑定（2026-10-09T20:27:00.117324+08:00）
+
+- checked_coordination_sha=2dd43d1aa8fa7fed68d659db66f5158604962294；checked_at=2026-10-09T20:27:00.117324+08:00；已读A/B/C及中控相关全文、COORDINATION1.1，三个唯一写者不变，C未写共享registry/INDEX/catalog。
+- B固定commit67970c2635d49ba552c27fb236e59bcd98e32160，核心SHA b9e06c8a4c7b9291c3658747189bd80ff4a3a3ee8274c96d6986bcec80815bb9：C独立六组人工检查通过；四现金例子期望在B交付前已固定，63日统计用独立日历/标准库复算；未重跑作者9组，未使用真实资料启动新账户。
+- C成果codex/leisignal-risk-review-20261009@fc9fb189d6ce390e65e26ebb87eda8969488c085，四文件远端完整SHA和逐字内容相同。书面review/core-code-review.md、core-synthetic-review-plan.json、core-synthetic-review-evidence.json、自己的work-progress。
+- 状态core_arithmetic_accepted_pending_full_driver_review；完整code_review_accepted、numeric_accepted均未签发。A闭包/年末状态、驱动一次保护、实际授权/外盘绑定不由核心算术通过替代。
+- 给B具体修正已实际发送到其原对话01a1208c-d559-72f0-ba6e-980a4337fa2c：attempt-ledger人工计数0/失败空与已保存两次回执不符，保留原失败补记准确2次及链接，不重跑或计入真实4路径。工具确认收信，不声称已修复；原用户职责中的“发现问题只给B具体修复项”授权该有界反馈，未向中控另发回信。
+- 全部实际市场预算仍0；没有运行许可、真实结果或正式归档。原2负结果及全部原预算不变。下一动作：A inputs_ready、B完整保护与准确commit到达后仅核新项/改动；B真实4路径批准须单独核其记录。当前相关依赖按A/B任务最新段，不用旧尚未登记描述否认已经登记的owner。
+
+---
+
 # 本轮接续B已发布核心实现的独立审查（2026-10-09T20:21:34.017926+08:00）
 
 - checked_coordination_sha=663521ec2018403f5a8a8a99eec928e9f820838a；checked_at=2026-10-09T20:21:34.017926+08:00；已读COORDINATION、A/B/C、中控最新相关记录，唯一写者/范围不变。C仅review/及自己进度；未占registry/INDEX/catalog。
