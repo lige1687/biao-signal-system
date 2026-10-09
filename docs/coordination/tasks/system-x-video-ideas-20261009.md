@@ -1,3 +1,17 @@
+# 第三选题来源纠正与学习入口核对
+
+- task-id: system-x-video-ideas-20261009；owner: 01a120a7-ed5a-7561-aea5-9f3db9d91ce6 /root；唯一写者；status: active。
+- checked_coordination_sha: bad3ecb5476c6adf696b71034d6a3f79d4344d7e；checked_at/updated_at: 2026-10-09T23:08:07.048723+08:00；已读COORDINATION1.1及本任务、dual-ma-video-copy-20261009、nasdaq-story-video-20261009、research-dispatch-controller当前相关段。
+- 用户新要求: 原帖没有对应研究内容，核对是否Meb研究文章，整理供学习。
+- 复用既有内容讨论授权，范围仍仅原帖核对、公开原始材料、目标来源证据补正；不制作视频、运行回测、改旧报告、共享代码、registry/INDEX或其他目标。
+- 文件/系统范围: 自身协调记录；既有docs/ops/media/video-ideas-20261009/system-queue-receipt.json；既有第三子目标okr-c4186d519ff1的evidence、links、next_action。
+- 已核: 重新打开X原帖，内容仅Lowenstein语录，没有论文外链。标题是AI延伸选题，不是Meb原研究题名；另找到2009年Meb同名读书笔记及Reinhart/Rogoff、Shiller原研究摘要。
+- 验收: 明确区分原帖/独立读书笔记/原研究；保留学习链接和实际阅读范围；目标及UI读回；两待办和旧目标不变。
+- 冲突决定: 其他视频及研究仍归原owner；不占原材料路径，不写库种子；原视频制作等待内容确认。
+- 下一动作: 补正系统目标来源，记录网页全文/研究摘要/全文403边界，交付学习顺序。
+
+---
+
 # 视频选题库落到系统与第三选题内容讨论
 
 - task-id: system-x-video-ideas-20261009；owner: 01a120a7-ed5a-7561-aea5-9f3db9d91ce6 /root；唯一写者；status: active。
