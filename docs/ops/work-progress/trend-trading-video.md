@@ -68,3 +68,10 @@ task-id trend-trading-video，基线2f7bc4683f74237d19fde484ce665ac975d08a3f，�
 - 用户进一步明确：理解分析文案，逐镜决定A/B、时长、前后衔接，全部写视觉编排表。已将其作为制作前步骤：对应原文/角色理由/开始结束时长及依据/构图动作/双向承接/素材声音；全片先编排，静帧与样例确认顺序不变。
 - A/B通用定义核Adobe原始资料；借鉴xilo的情境与知识分工，不机械AB轮换、不强加主持人或旁白。15秒文字例子明确是概念方案，未制片、未冒充人物史实。
 - ai_tools结果codex/video-production-kit-20261009@8c2d800d44863ba5fc1053da203a9a94bf3aaf9e；44文件/链接、两Skill结构通过。原项目只提交本次窄增量，保留当前其他任务内容。远端核验见aroll-result-receipt.json；下次实际影片仍须审美验收。
+
+## 两原文Prompt与推荐库详细接入
+
+- 2026-10-09T16:20:20.650551+08:00；本机root；checked_coordination_sha=cde78723c43223169c684646d9cc88118f6fcdff。已读COORDINATION、自身、中控和最新nasdaq/dual-ma差异；nasdaq已完成共享入口一句及motion案例窄插入并释放，本机保留它，本次远端仅提交自己的Prompt/库增量，不代提交其案例。
+- 用户要求详细理解两原推文所有Prompt和推荐库，已直接复读两原文、14项Prompt定位、8段项目化改写、七类技术路径取舍。七库核当前入口/默认分支SHA；实读shotcraft三卡及demo依赖、音效署名、xilo brief/craft、角色指南和MV分镜。新文件prompt-methods/library-catalog，入口、旧简版Prompt和便携新视频Prompt均接入。
+- 修正旧“先风格帧后分镜”冲突为导演编排先行；不替换默认声音与确认顺序。七库条目含具体用途/入口/许可/未运行状态；另爱给主页访问失败、Mixkit许可页可读，具体音源仍按需核。不整库下载或安装，不冒称案例已全部复现。
+- ai_tools/codex/video-production-kit-20261009@12aef172f22467a925235f5744619755113d3909；46文件校验及引用、两Skill结构、归置/Git差异检查通过。原项目与便携库对应新增参考一致；远端逐文件验收写prompt-library-result-receipt.json。无新影片待跑，效果待下次制作检验。
