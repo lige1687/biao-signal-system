@@ -1,3 +1,13 @@
+## V9 ai-tools-increment-start
+
+- task-id: trend-trading-video；2026-10-09T15:30:25.020447+08:00；checked_coordination_sha: b072571d1dcaa90a62aeac5faf0f5b2b178fd0a2；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户新授权研究uv、OBS及两篇推文中工具的具体增量；有帮助可安装并提交ai_tools。原视频包尚未提交，本轮继续同一codex/video-production-kit-20261009范围；新仓库video/文档/Prompt/Skill/工具记录，以及自身小接续记录为唯一写入范围，原项目Skill、registry与他人影片不改。
+- 已读自身、nasdaq-story-video-20261009、中控与COORDINATION；无新增共享冲突，本人唯一写者。六个资料来源预算，复用原两篇转载及作者库；uv官方安装、OBS官方安装/权限三页核验；不做因子/回测研究。
+- 验收：解释各工具相对现有Remotion/FFmpeg的具体新增能力及反例；仅补已授权有用途的uv与OBS，实际版本/路径/签名或短段检查，权限缺失如实标示；工具本体仍不入Git，默认无旁白/外盘/图及15秒确认保留。安装下载缓存日志外盘，运行环境本机例外；预算暂估外盘2GiB、本机2GiB（当前约20GiB可用），无删除/付费/账号变更。
+
+
+---
+
 ## V9 ai-tools-export-start
 
 - task-id: trend-trading-video；2026-10-09T15:16:18.331305+08:00；checked_coordination_sha: 4bfabc685514485217f5b9097050e517b4a8679b；已读 COORDINATION.md、自身与 research-dispatch-controller。
