@@ -1,3 +1,14 @@
+## V9 aroll-done
+
+- task-id: trend-trading-video；2026-10-09T16:11:00.647569+08:00；checked_coordination_sha: e5fcb2afa384129c98c3d182b0f37cc658e1d238；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed，scope_released=true：用户确认导演先理解分析整篇文稿，逐镜写A/B选择理由、起止时长、具体动作、双向衔接、素材和声音。已落Skill入口、动态导演、视觉编排表、便携模板和Prompt；无新影片。
+- 原项目codex/trend-history-long-v14-20261009@1481d02f12d4718b77343ebb75102661918d3d81，4准确文件远端读回一致；ai_tools/codex/video-production-kit-20261009@8c2d800d44863ba5fc1053da203a9a94bf3aaf9e，6准确文件远端读回一致。
+- 44文件指纹与引用、两Skill结构、Git差异、归置通过；未宣称艺术增量已测。无旁白按阅读/动作估时并样片校准，有旁白按实际音频；不机械AB轮换、不强加主持人；现有静帧→中间难点15秒→全片确认保留。
+- 交付前读自身、nasdaq-story-video-20261009、中控和COORDINATION；相对e5fcb2af无新增范围变化，无共享冲突，root唯一写者。进度与aroll-result-receipt.json已保存，当前无待执行视频。
+
+
+---
+
 ## V9 aroll-start
 
 - task-id: trend-trading-video；2026-10-09T16:07:33.258369+08:00；checked_coordination_sha: 9a290d92b5c5f37bcfe531b99a4f5dcab6f64965；已读 COORDINATION.md、自身与 research-dispatch-controller。
