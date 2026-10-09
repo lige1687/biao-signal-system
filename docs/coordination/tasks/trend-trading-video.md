@@ -1,3 +1,15 @@
+## V9 ai-tools-export-done
+
+- task-id: trend-trading-video；2026-10-09T15:44:48.917331+08:00；checked_coordination_sha: be06adaa358cb3e7e33adb482078909b777d8cf2；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed：ai_tools视频工具包与本轮工具增量比较已实际交付，scope_released=true；仓库GitHub设置读回private；成果codex/video-production-kit-20261009@025204fb9cb87b1e403721404d85629848e2d062，46文件远端逐字读回一致。本任务小回执ai-tools-export-receipt.json、GitHub截图外盘toolkit-validation-20261009/ai-tools-video-delivery.jpg。原项目共享Skill/影片不修改；本机最小记录未推成果分支，真正包与证据在ai_tools上述commit。
+- 新包含可移植Skill、两篇参考学习、分阶段确认、文稿/描述/分镜/素材模板、默认leyan原声及指纹、工具官方源/安装Prompt、外盘预检/文件检查/声音测量；不打包工具二进制、依赖、缓存或凭证。默认无旁白/无品牌/外盘/中间最容易出问题15秒保留。
+- 6资料源预算已用6：两转载、作者库、uv官方、OBS安装/权限；另2次安装GitHub版本元数据查询非文献研究。无新影片/因子实验。uv0.12.24安装及本机独立lock/sync/run通过；外盘Python环境受附属pth干扰启动失败，原文件保留，改本机运行环境、缓存/日志外盘。OBS32.2.2官方包SHA与Homebrew一致、签名/公证/CLI版本/运行进程通过；两次GUI读取超时，录屏/系统声/权限与10秒实录未验证，不声称艺术效果或效率改善已测。
+- 完整MP3解码、原/仓库SHA、43包内文件校验与引用、Skill结构、归置检查通过；真实外盘预检通过、无配置/错UUID/被改测试内容正确阻止；默认原声响度实测-9.63 LUFS/峰值+1.01 dBTP，新增只读分析器并保留源未变。官方CDN慢下载停止，仅终止本任务进程，改GitHub同指纹完成，无删除/付费。工具角色结论支持，画质/传播增量未评估。
+- 交付前已重新fetch读自身、nasdaq最新v08已完成且不改共享Skill、中控最新现金只读范围，无冲突，本人唯一写者；后续实录镜头按OBS工作流核权限/素材，影片制作仍待当期请求和阶段确认；无必要包任务残留。
+
+
+---
+
 ## V9 ai-tools-increment-start
 
 - task-id: trend-trading-video；2026-10-09T15:30:25.020447+08:00；checked_coordination_sha: b072571d1dcaa90a62aeac5faf0f5b2b178fd0a2；已读 COORDINATION.md、自身与 research-dispatch-controller。
