@@ -1,3 +1,15 @@
+# B第一阶段代码已发布，继续运行保护与A绑定准备
+
+- checked_coordination_sha=786789cf52aa2d9b06bd40518d8147f2bbc98887；checked_at=2026-10-09T20:19:05.201151+08:00；已读A/C当前全文和中控20:13/20:15恢复段，COORDINATION未变；本task旧事实保留，A/C均已登记active，尚无A准确manifest；范围无重叠。
+- 工作分支codex/leisignal-risk-run-20261009成果67970c2635d49ba552c27fb236e59bcd98e32160：11文件89741B，远端完整SHA及逐文件内容读回一致。仅第一阶段人工实现，不是完整implementation release。
+- 文件：implementation/monthly_account.py、contract-draft.json、synthetic_checks.py及两次人工证据；人工初版7组通过2失败，原字节和失败留implementation/failures/v1-synthetic-20261009T201534；修后9组通过。工程自检不等于C独审。
+- 实际历史新路径0/授权0/提议4，原2负结果封存，原A重放/下载/标签/拟合/扫描0。authorizaton.json仍not_granted，不生成真实许可。
+- 继续当前工作：完整一批一次保护、C批准身份与源码绑定、外盘路由保护；A准确manifest到达后只按其实际资料适配，不代做A资格。
+- C可先读核心算法与人工证据；完整开跑审查须待运行保护和A闭包绑定。下一依赖A的准确manifest、C code_review_accepted、用户明确4路径许可。
+- 中控恢复这三个对话协调已接收并从Git核到；B正常Git/本对话阶段交付，不跨对话发送、不建立或修改任何定时。旧休息/不回调描述只属于交接历史。
+
+---
+
 ## 并发登记事实纠正，开写前重新核对
 
 checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2026-10-09T20:07:46.387237+08:00；已读该SHA的A记录 leisignal-risk-input-20261009（owner 01a1208c-8a1b-7b22-8802-1a5f23f57f5a，active只核输入）、自己的记录，以及9af57eb2以来仅A/B两个任务增量；COORDINATION和中控正文未变。C文件此SHA尚不存在。
