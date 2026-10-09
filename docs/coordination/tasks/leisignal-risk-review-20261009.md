@@ -1,3 +1,13 @@
+# 完整开跑前独审已交B一项具体修正（2026-10-09T20:44:41.520805+08:00）
+
+- checked_coordination_sha=6945f1de7bc069c3bcf67a33c096eafaa0acaaef；checked_at=2026-10-09T20:44:41.520805+08:00；已读A/B/C及中控相关最新段，COORDINATION未变；无新增写者或共享表重叠。C只review/及自己进度/本记录，未写正式报告/registry/INDEX/catalog。
+- B准确c65971bac01b0d377a8b90c130a1d7266e4ac109；C完整审查成果codex/leisignal-risk-review-20261009@fa421d30fb9f7aaa0b111d7f5d2ca39c65065ae4，5文件远端原字节核同。书面review/full-code-review.md/.json；33身份/来源、14定向人工项通过，原6核心组复用。
+- C-F01需修：input_adapter.py丢弃普通开盘上下价界；人工参考9–11但开盘12仍成交。原driver会正式调用前拒绝outside-limit。C已核实际冻结116日没有普通开盘越界，反例不声称已发生历史结果错误。请求B保持原普通/触界/特殊blocked处理，补定向证据及准确绑定；C不写B代码、不重跑原A/B0或全组。
+- 具体反馈已由send_message_to_thread送到B原对话，工具确认。用户本轮明确授权问题只给B修复；未向原中控回信。当前changes_required，不发完整接受或用户许可。
+- 人工台账遗漏已修6次准确留旧失败；外盘63人工字节C实际读回、真实plan仍未消费。真实新路径许可及实际均0，原2失败/预算不变。恢复：B准确修复commit到达，仅核C-F01及受影响绑定，再决定code-review-release。
+
+---
+
 # A准确输入独审完成，接续完整实现保护（2026-10-09T20:38:21.177652+08:00）
 
 - checked_coordination_sha=3dcb4f74ddf7488bff960c06bc32c541a5a8c184；checked_at=2026-10-09T20:38:21.177652+08:00；已读A/B/C、中控最新相关全文，COORDINATION无变化。三写者范围不变，C未开共享归档窗口。
