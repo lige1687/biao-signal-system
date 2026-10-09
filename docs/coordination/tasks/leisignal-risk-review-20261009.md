@@ -1,3 +1,35 @@
+# 人类授权已解除旧阻塞，C接续真实结果和唯一归档（2026-10-10T00:09:11.043719+08:00）
+
+- checked_coordination_sha=646942f7476c3752197623143d63463dfbb12a5b；checked_at=2026-10-10T00:09:11.043719+08:00；已读COORDINATION、A/B/C、中控最新相关段；冲突决定三写者不变，A输入冻结，B唯一实际执行，C唯一独审归档。尚未占正式共享登记窗口，写共享表前再次fetch与准确登记。
+- 已从read_thread读取中控原聊天01a116c7-3700-7062-a6c6-53af00ef60a0的直接人类答复和要求收敛，核上下文是510300/2026H1/两参照×两费用4组各一次；不是仅相信代理声称已同意。中控准确授权469032c44dbb8b13f1bb5ec6831e12e537fe2e34可读。旧not_granted属于历史，今不再因此问用户或停工。
+- B实际原turn01a1216a-9ac9-71e1-88e3-972d125cd2db已确认inProgress、cursor f0098554-4d30-499c-a774-3d7783048f96:25，正在保存授权/核已有记录/核盘。C用紧凑wait接其准确实际交付，不运行其策略、不回滚旧失败或重置预算。
+- 复用C1e954fdc代码接受、B7164290d/修订4合同333d7a4f、A29337ec9/manifest9f1c326b；不重做准备或全套代码审查。原生Goal进入仍blocked，工具无resume接口，不虚称已切active；当前直接授权工作继续，实际全目标完成才调用complete。
+- 本轮仍仅review/自己的进度/本记录；将保存授权独核和真实数字证据。四路径到达后独核金额/订单/费用/63截止/日波动比与差额，不以B通过替代。然后唯一报告/自身registry key/INDEX行/catalog日期补注，精确提交与远端验收；负结果可结案，不追调参数。
+
+<!-- lei-coordination-json:start -->
+{
+  "task_id": "leisignal-risk-review-20261009",
+  "owner": "01a1208d-49ba-7972-9fa1-b47d7d5749b7",
+  "status": "active",
+  "stage": "authorized_resume_awaiting_B_actual_results",
+  "checked_coordination_sha": "646942f7476c3752197623143d63463dfbb12a5b",
+  "checked_at": "2026-10-10T00:09:11.043719+08:00",
+  "scope_released": false,
+  "shared_archive_window_open": false,
+  "write_paths": [
+    "docs/experiments/raw/monthly-risk-comparison-2026-10-09/review/",
+    "docs/experiments/monthly-risk-comparison-2026-10-09.md",
+    "docs/ops/work-progress/leisignal-risk-review-20261009.md",
+    "docs/coordination/tasks/leisignal-risk-review-20261009.md"
+  ],
+  "actual_C_strategy_runs": 0,
+  "accepted_code_commit": "1e954fdc511092c1769fcaa5a6779d36eb7e0641",
+  "native_goal_status_on_entry": "blocked; tool cannot resume, authorized task work continues; mark complete only at full end state"
+}
+<!-- lei-coordination-json:end -->
+
+---
+
 # C Goal已核实阻塞，停止授权缺口空转（2026-10-09T21:13:22.298987+08:00）
 
 - checked_coordination_sha=a257b0023f66f2474e0c56d5855b3cdee3a33580；checked_at=2026-10-09T21:13:22.298987+08:00；已读COORDINATION及A/B/C、中控最新相关段，写者范围不变。C只维护自己记录，正式共享归档未开。
