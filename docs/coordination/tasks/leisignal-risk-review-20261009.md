@@ -1,3 +1,39 @@
+# C Goal已核实阻塞，停止授权缺口空转（2026-10-09T21:13:22.298987+08:00）
+
+- checked_coordination_sha=a257b0023f66f2474e0c56d5855b3cdee3a33580；checked_at=2026-10-09T21:13:22.298987+08:00；已读COORDINATION及A/B/C、中控最新相关段，写者范围不变。C只维护自己记录，正式共享归档未开。
+- status=blocked / awaiting_actual_human_permission_and_results；已实际update_goal(blocked)成功，目标原文完整不缩小，不是complete、不是擅自paused。
+- 同一实际阻塞连续三Goal回合末仍在：完整代码接受1e954fdc、核数准备/B引用验证aba6903a、本次重新fetch与B真正授权/次数核读。authorization not_granted，四键为空、原话/来源/时间null；真正开始标记0，四路径各0。B最新chat也已报告Goal blocked，只同步记录，不是运行账户。
+- 受阻证据及本进度codex/leisignal-risk-review-20261009@c16fdea69c33305a58ac98940ab013947ac541fb两文件已远端SHA/原字节读回：review/blocked-audit.json逐项列验收已过/缺失/未运行、原用户权限来源、三回合与准确恢复；未写市场结论。
+- 必要独立准备已完成，没有权限内可替代路径：C不能代批/代运行B/借旧2次数/未有结果预写科学报告/重开其他七目标。原失败/预算/输入/代码接受都保留；报告/registry/INDEX/catalog和最终数值/归置仍未达，不能宣称整个Goal已完成。
+- 唯一恢复：B保存人类510300、2026上半年、63日、A_ALL/A_SMA×base/stress四键各一次批准，绑定已接受修订4合同333d7a4f；核固定外盘后B唯一执行，准确完整产物位置/大小/SHA/次数到达，再resume C数字独核和唯一正式归档。参数和[0.90,1.10]标准不改，预算不重置；已阻塞后的resume按新一轮阻塞审计。
+- 本批范围/唯一归档责任保留，未占全registry/INDEX/catalog锁；scope_released=false不授予其他写者改本成果。停止重复检查，没有新增定时器、监护、消息回调或其他项目/运营接管。此前active准备段与已验事实保留为历史。
+
+<!-- lei-coordination-json:start -->
+{
+  "task_id": "leisignal-risk-review-20261009",
+  "owner": "01a1208d-49ba-7972-9fa1-b47d7d5749b7",
+  "status": "blocked",
+  "stage": "awaiting_explicit_B_human_4_path_authorization_and_actual_results",
+  "checked_coordination_sha": "a257b0023f66f2474e0c56d5855b3cdee3a33580",
+  "checked_at": "2026-10-09T21:13:22.298987+08:00",
+  "result_commit": "c16fdea69c33305a58ac98940ab013947ac541fb",
+  "accepted_code_commit": "1e954fdc511092c1769fcaa5a6779d36eb7e0641",
+  "scope_released": false,
+  "shared_archive_window_open": false,
+  "write_paths": [
+    "docs/experiments/raw/monthly-risk-comparison-2026-10-09/review/",
+    "docs/experiments/monthly-risk-comparison-2026-10-09.md",
+    "docs/ops/work-progress/leisignal-risk-review-20261009.md",
+    "docs/coordination/tasks/leisignal-risk-review-20261009.md"
+  ],
+  "dependency_notes": "B must save real user approval for four exact revision 4 paths then execute once and publish actual result pointers; C cannot approve or simulate.",
+  "actual_new_paths": 0,
+  "native_goal_status": "blocked"
+}
+<!-- lei-coordination-json:end -->
+
+---
+
 # Goal接续完成可独立准备，唯一缺真实四路径人类批准（2026-10-09T21:08:09.397122+08:00）
 
 - checked_coordination_sha=69bc90f737ab6fcc36b6f8382fd0b270a6e41095；checked_at=2026-10-09T21:08:09.397122+08:00；已读A/B/C与中控最新相关段，COORDINATION无变，三写者不变；正式共享归档窗口未开启。
