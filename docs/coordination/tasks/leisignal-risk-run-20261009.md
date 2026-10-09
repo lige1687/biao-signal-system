@@ -1,3 +1,15 @@
+# C-F02限定16行补注已发布，交C直接定向复核归档
+
+- task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / execution_and_C_F02_addendum_delivered_pending_C_acceptance；updated_at 2026-10-10T00:24:16.569900+08:00。checked_coordination_sha=21e234741c682ec7470c77a69c90054c92261b29；checked_at=2026-10-10T00:24:16.569900+08:00；已读A冻结输入、本人当前交付、C真实核数/C-F02/独占归档窗口及中控相关段。B仍只implementation/本人进度，本次不写外盘原件、C或共享表；范围不扩。
+- 最新准确codex/leisignal-risk-run-20261009@1f8a8e5a1c456853b268bf50b8fa4a5ae06bbee0：本修复3文件41323B远端准确SHA及逐文件内容核同。实际结果原commit4283254d、四外盘SHA、6源码/合同333d7a4f、旧失败全部保留；此前职责收尾d8bfbc7b只为状态证据，不当成C正式验收。
+- C-F02小补注implementation/metadata-correction-C-F02-2026-10-10.json，SHAbc01e69bcb135e856dd182adf754ca96046659db51fff7a9974dd9a7839255eb。列四原result SHA与16个准确path/date/JSON pointer、原字段和mark=4.753更正；准确source quotes d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf中2025-12-31 close=4.753已核。休市日raw_close仍null，stale_prior_mark仍表示沿前值，并明确前值来源。
+- 四账户2026-01-01至01-04均units=0，现金/应收/份额/完整资产完全相同，units×mark差=0，16行资金差合计0元。因此不改收益、费用、成交、分红、日波动或相对原A金额差；四原件补注写前后SHA核同。C只复核补注和原件，不需要另跑账户或全套人工。
+- 真实仍4/4、各一次，新增账户调用0/路径0、无结果覆盖或源码/合同更改，人工8/旧两次耗尽和原失败保持。另两项浮点末位由C精度解释，不由B更改统计或10%标准。
+- C已报告5886项独核后资金/订单/费用/63时点和风险匹配失败一致，仍须接受本16行补注后唯一正式归档。B交付已完，不自我科学验收、报告/registry/INDEX/catalog仍由C。B原native Goal工具已为有界执行交付返回complete，此后C新发现必要补注立即处理，未借旧状态退出或声称整批已验收。
+- 最小下一动作：C取得最新准确commit和补注SHA，只核16行补注，再完成已登记的唯一正式报告/本条registry/INDEX/catalog必要补注及远端验收。B不追加任何实验、不重复催问或新建定时器。
+
+---
+
 # B四路径已真实执行各一次，完整结果交C独核
 
 - task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / executed_pending_C_numeric_review；updated_at 2026-10-10T00:15:28.207246+08:00。checked_coordination_sha=1358d7cf987750ac536ebff47977dda786bdcdc4；checked_at=2026-10-10T00:15:28.207246+08:00；已读A/B/C、中控最新相关段；写者/范围不变，A输入冻结、B唯一执行/implementation、C独核/唯一归档，不占共享表。
@@ -135,15 +147,15 @@ checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2
   "dependencies": [
     "leisignal-risk-input-20261009"
   ],
-  "dependency_notes": "人类已批准、B准确四路径各一次完成；C真实独核/唯一归档尚待，旧缺批准段仅历史。",
-  "stage": "executed_pending_C_numeric_review",
-  "result_commit": "4283254d23371691506851816ff4d7a17228ea4a",
-  "checked_coordination_sha": "1358d7cf987750ac536ebff47977dda786bdcdc4",
-  "checked_at": "2026-10-10T00:15:28.207246+08:00",
+  "dependency_notes": "C仅独核16行补注后正式归档；四路径原件与资金结果不改，不重跑。",
+  "stage": "C_F02_metadata_addendum_delivered_pending_C_acceptance",
+  "result_commit": "1f8a8e5a1c456853b268bf50b8fa4a5ae06bbee0",
+  "checked_coordination_sha": "21e234741c682ec7470c77a69c90054c92261b29",
+  "checked_at": "2026-10-10T00:24:16.569900+08:00",
   "C_release_commit": "1e954fdc511092c1769fcaa5a6779d36eb7e0641",
   "actual_path_attempts": 4,
   "authorized_paths": 4,
-  "native_goal_status": "blocked_tool_resume_unavailable",
+  "native_goal_status": "complete_for_B_execution_handoff",
   "consecutive_permission_blocker_turns": 3,
   "per_path_attempts": {
     "A_ALL-base": 1,
@@ -151,6 +163,8 @@ checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2
     "A_SMA-base": 1,
     "A_SMA-stress": 1
   },
-  "C_numeric_review": "pending"
+  "C_numeric_review": "funds_and_statistics_checked; metadata_addendum_pending_C",
+  "numeric_result_commit": "4283254d23371691506851816ff4d7a17228ea4a",
+  "additional_paths_after_C_F02": 0
 }
 <!-- lei-coordination-json:end -->
