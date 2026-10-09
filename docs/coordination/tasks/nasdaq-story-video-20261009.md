@@ -318,3 +318,8 @@
 - completed；scope_released=true；checked_coordination_sha: 61624a7fa2f06bdc6a0c9fc2881761a6e263e3a6；checked_at: 2026-10-09T18:55:32.844755+08:00；已读自身及dual-ma最新发布章节增量，沿用已读COORDINATION/trend/personal-quant/中控；无在写重叠，本轮只精确新增动态路由及相关参考，没有覆盖发布章节规则。
 - 用户确认的动作分镜→连续主体/镜头→光效声音→全片逐段对照已批样例已写入Skill与导演表。新增compound-motion黑金连续演化可选风格，五类模块/适用限制/来源时间段/未听审与非现成组件状态明确；不是所有影片默认或已达标承诺。原无配音/外盘/静帧→15秒→全片确认保留。
 - quick_validate、4文件引用链接、章节规则保留和归置均通过。没有新渲染/视频/安装/发布/更新旧交接ZIP。当前Skill原全为未跟踪他人成果，本轮不全量提交，仅本机小修改；远端只本协调索引，媒体仍外盘。文件SHA：SKILL.md=fafd08fdd49342c7f5fd0b3c7118c97c4a29069426eed2fbc2952194c95d5444；references/motion-direction.md=4cb8bb142ac0d7d9b36286487c10fe320e6d0d44fc1fedc9f11e252ba7a9e474；references/storyboard-template.md=5e2f0671c249f494e0815cfdce40c1771859c6922e288c7a5ba17ee27c6752dd；references/style-compound-motion.md=5bef47f482ee9c7969bc30dff8193fd42f2c7e5755d740c2a6f412eb45f543b4
+
+## v13连续动态15秒样例开始 2026-10-09T19:11:12.251998+08:00
+- active；scope_released=false；checked_coordination_sha: 755dccf651fef02b4d8bd75508a0ae9367daef6f；checked_at: 2026-10-09T19:11:12.251998+08:00；沿用已读COORDINATION1.1、trend/中控，已读自身与dual-ma最新释放，本轮无共享修改。root唯一写外盘v13-compound-motion-15s和自身小索引。
+- 用户明确“重新做15s一个样例”，本轮直接制作已选黑金连续演化方向动态小样；此具体授权覆盖本轮先另交静图等待，不扩全片。主题100→17→回到100需约488%，有来源的历史跌幅与明确比例示意，不造走势。无配音，原BGM，15秒1080p30fps，检查真实帧/数值/完整解码/实际播放。
+- 固定外盘UUID19:10通过，外盘593931796480B、内盘15558205440B；预计外盘新产物<500MiB、本机小记录<32KiB，复用既有环境，不装依赖。
