@@ -436,3 +436,11 @@
 - active；checked_coordination_sha: 32b3bfe310228515ad16fb5d81e07a1c1b09e8bb；checked_at: 2026-10-10T00:05:04.515307+08:00；沿用已读COORDINATION1.1及自身、中控/六图/system-x，新增cash-position/trend-perspective仅各自样例交付，不涉及本哔站范围；root唯一写者。
 - 用户本轮明确“我确认，好吧”，承接前次页面上传即同意两协议问题；动作时协议确认已取得，继续原授权上传/发布v21横版。Chrome原生界面已核仍正式上传页、未选文件；没有重复投稿。
 - 00:04固定外盘available/identity_ok，余592741269504B；来源与范围/预算沿用，外盘发布记录-哔站-20261009原目录保留。验收实际审核状态、作品ID/链接、元数据与横版播放；不把提交等同公开发布。无删除/付费/改Skill/规则，抖音横竖及小红书不动。
+
+## 哔站协议已确认；真实上传控件受阻 2026-10-10T00:17:40.742995+08:00
+- status: blocked；stage: browser_upload_control；scope_released: false。人类“我确认，好吧”已解除协议确认，现有发布授权保持，不再问协议。
+- checked_coordination_sha: f76af56d16b7c0d9a6e2dea48cc06fdd92d25bef；checked_at: 2026-10-10T00:17:40.742995+08:00；已读 cash-position、trend-perspective、risk-run/review、中控增量；两视频独立目录、研究三写者无本片发布重叠；COORDINATION1.1沿用。本owner唯一维护此发布记录。
+- 当前Chrome实际仍为初始上传页，未核上传/未提交/无BVID。精确v21来源沿用，MP4本地完整性1920×1080/122秒/原SHA已核；不重新渲染，不用竖版。
+- 实际失败：Chrome getTab约30秒nodeRepl.fetch失败；内置浏览器createBrowserTab40秒超时reset；原生坐标点击实际视频蓝钮noWindowsAvailable。AX可读/语义操作可用，但公开文件输入自定义文件/文本，切所有文件后选择MP4返回初始页，无视频上传进度。没有网站投稿成功证据，不再原样重试。
+- 外盘保存 上传受阻-当前页.png/txt、更新投稿状态.json及SHA256.json，全部字节/hash读回；标题/简介/五章文案已备，仍未填网页。固定UUID storage 2026-10-10T00:16:52.039806+08:00 available/identity_ok；外盘592699064320B。
+- 恢复条件：用户只接手点击Chrome蓝色上传视频、选择完整片-v21紧凑动态/聚焦核心波动-完整动态版-122秒-v21.mp4；可读实际上传表单后本owner继续填分区/标签/封面/AI声明/章节及投稿验收。或浏览器连接恢复后同样接续。无需再授权；抖音横/竖和XHS不动。
