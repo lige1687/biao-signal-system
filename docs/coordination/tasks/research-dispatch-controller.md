@@ -1,3 +1,12 @@
+# 本次R1纠错远端验收完成，释放共享登记
+
+- checked_coordination_sha=8cb6a5162c2ad749d8794314ea7cbc5814f12f38；checked_at=2026-10-09T19:20:31.724113+08:00；已读research-dispatch-controller及原合同/独审，本次其他增量仅无关任务文件名，无冲突。
+- codex/research-direct-20261008@1fcc5d81ba3047b3913c6ab1709ffe94577046bf 的57准确文件、514454B均远端SHA及内容读回一致；12账户和D1纠错已独立数值验收，报告、catalog替代关系、主registry646/隔离221齐，归置通过。47账户数据文件25,034,233B与D1 3,382,701B仅外盘，来源位置可恢复。
+- scope_released=true：registry/INDEX/catalog窗口释放，所有作者完成。12账户/1D1本次封存不重跑，旧120/旧132/原失败保留；实际无研究计算进程。不把已交付写成正在运行。
+- 唯一明确未达原最低验收的是Goal5风险相近的策略比较。已独审具体月度63日方法，提案在archive/handoffs-plans/research-dispatch-controller-2026-10-07/next-risk-comparison-2026-10-09.md；准确新增4账户路径待用户决定，真实0，原批准2路径已耗尽。其余原八目标有限结论按原证据保留，不重开封存研究或运营范围；定时保持删除，主Goal不虚标全部完成。
+
+---
+
 # 两项纠错已独核；目标5仅准备可审下一合同
 
 - checked_coordination_sha=432e022fba82394cd85c07d9db8ce2b048673541；checked_at=2026-10-09T19:17:31.562836+08:00；已读research-dispatch-controller及原风险对照合同/报告，本轮仅无关文件名变化，无冲突。12账户真实独审4f6e6fd6、D1独审8b10f377接受，0判断翻转；原成果归档路径沿已占范围，待精确提交读回。
