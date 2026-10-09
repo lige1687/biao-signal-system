@@ -1,3 +1,13 @@
+# 用户已明确授权，本B恢复四路径唯一执行
+
+- task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / authorized_execution_preflight；updated_at 2026-10-10T00:08:51.251188+08:00。checked_coordination_sha=469032c44dbb8b13f1bb5ec6831e12e537fe2e34；checked_at=2026-10-10T00:08:51.251188+08:00；已读A/B/C及中控最新段，COORDINATION既有规则沿用。唯一写者：B只implementation、绑定外盘结果和本人进度/本记录，A输入冻结、C独审/归档，范围不扩。
+- 已直接read_thread核中控01a116c7-3700-7062-a6c6-53af00ef60a0人类原话：精确四组各一次批准问题后，用户回答“操！这有啥不允许的？我不太懂啊，你这还要我来问我，这有啥不允许的？”并要求“我现在希望的就是你赶紧把任务收敛完，然后我们交给下一个AI去做。你这里做的太慢，流程不对。你这里做的反复的太多，卡了很久，并且我也不知道你到底在干什么。”原人类message01a12168-e0a9-7f00-8e07-3b05d1536ea9/01a12169-fc41-7dd0-b59d-a9c17009067a已读，非AI代批，不再询问口令。
+- 准确冻结修订4合同333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4、B7164290d、A29337ec9、C1e954fdc及全部旧失败/人工8保留。真实attempts不存在，同一plan目录不存在，实际0/4；开跑前核来源/源码/全部证据并重核固定外盘UUID与容量，四键各一次，失败不自动重跑。参数/10%标准不改，无旧实验重放。
+- 现有原生Goal工具仍显示blocked且无resume接口；这不撤销人类新授权，不重建Goal、不据旧状态空转。核盘与保存真实授权后立即执行，结果先Git交C，B不自我验收/最终共享登记。
+- 旧成果分支codex/leisignal-risk-run-20261009最新1a2e3e8457d67392f12f842f59c25d3b6abbd258；此次尚未生成真实成果commit。只接续当前任务，不建定时器、不发跨对话消息。此前缺批准状态全部为历史。
+
+---
+
 # B Goal已标为blocked：缺本合同四路径明确批准
 
 - task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status blocked / awaiting_explicit_human_4_path_authorization；updated_at 2026-10-09T21:10:56.649375+08:00。原生Goal工具已返回blocked，未标complete或paused。
@@ -103,7 +113,7 @@ checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2
 {
   "task_id": "leisignal-risk-run-20261009",
   "owner": "01a1208c-d559-72f0-ba6e-980a4337fa2c",
-  "status": "blocked",
+  "status": "active",
   "scope_released": false,
   "write_paths": [
     "docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/",
@@ -113,15 +123,15 @@ checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2
   "dependencies": [
     "leisignal-risk-input-20261009"
   ],
-  "dependency_notes": "A准确输入和C准确完整代码接受均已绑定；仅缺本合同四键各一次人类批准，实际结果仍未有。",
-  "stage": "awaiting_explicit_human_4_path_authorization",
+  "dependency_notes": "真实人类四键各一次已核；A/C准确齐备；重核同一外盘plan后B唯一执行。",
+  "stage": "authorized_execution_preflight",
   "result_commit": "1a2e3e8457d67392f12f842f59c25d3b6abbd258",
-  "checked_coordination_sha": "4d8abb6d06e9f254ae0c4231f9a3ec7c92100069",
-  "checked_at": "2026-10-09T21:10:56.649375+08:00",
+  "checked_coordination_sha": "469032c44dbb8b13f1bb5ec6831e12e537fe2e34",
+  "checked_at": "2026-10-10T00:08:51.251188+08:00",
   "C_release_commit": "1e954fdc511092c1769fcaa5a6779d36eb7e0641",
   "actual_path_attempts": 0,
-  "authorized_paths": 0,
-  "native_goal_status": "blocked",
+  "authorized_paths": 4,
+  "native_goal_status": "blocked_tool_resume_unavailable",
   "consecutive_permission_blocker_turns": 3
 }
 <!-- lei-coordination-json:end -->
