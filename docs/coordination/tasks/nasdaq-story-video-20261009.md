@@ -313,3 +313,8 @@
 - active；scope_released=false；checked_coordination_sha: e553481459525a110084e5718fc3bfc232ec9079；checked_at: 2026-10-09T18:53:10.377696+08:00；已读COORDINATION1.1、自身、trend-trading-video、dual-ma-video-copy-20261009、personal-quant-video-render-preview-rule、research-dispatch-controller。
 - 用户明确同意把参考片style作为可选项加入Skill及确认制作顺序。本轮root只写Skill入口动态风格路由、references/motion-direction.md、storyboard-template.md、新style-compound-motion.md及自身小进度。dual-ma当前发布章节规则属于独立Skill段落；不覆盖其发布增量，写前重读并检查未变，按准确段落插入。
 - 验收参考来源/观察范围、可选非默认、主体动作优先/后加光效、无旁白减字、全片与样例对照、原静帧→小样→全片确认不变，链接和Skill检查/归置通过。无新视频/下载/安装/交易研究，媒体诊断留既有外盘，不入Git。当前Skill既有未跟踪内容不全量提交冒领。
+
+## 动态流程与可选Style完成 2026-10-09T18:55:32.844755+08:00
+- completed；scope_released=true；checked_coordination_sha: 61624a7fa2f06bdc6a0c9fc2881761a6e263e3a6；checked_at: 2026-10-09T18:55:32.844755+08:00；已读自身及dual-ma最新发布章节增量，沿用已读COORDINATION/trend/personal-quant/中控；无在写重叠，本轮只精确新增动态路由及相关参考，没有覆盖发布章节规则。
+- 用户确认的动作分镜→连续主体/镜头→光效声音→全片逐段对照已批样例已写入Skill与导演表。新增compound-motion黑金连续演化可选风格，五类模块/适用限制/来源时间段/未听审与非现成组件状态明确；不是所有影片默认或已达标承诺。原无配音/外盘/静帧→15秒→全片确认保留。
+- quick_validate、4文件引用链接、章节规则保留和归置均通过。没有新渲染/视频/安装/发布/更新旧交接ZIP。当前Skill原全为未跟踪他人成果，本轮不全量提交，仅本机小修改；远端只本协调索引，媒体仍外盘。文件SHA：SKILL.md=fafd08fdd49342c7f5fd0b3c7118c97c4a29069426eed2fbc2952194c95d5444；references/motion-direction.md=4cb8bb142ac0d7d9b36286487c10fe320e6d0d44fc1fedc9f11e252ba7a9e474；references/storyboard-template.md=5e2f0671c249f494e0815cfdce40c1771859c6922e288c7a5ba17ee27c6752dd；references/style-compound-motion.md=5bef47f482ee9c7969bc30dff8193fd42f2c7e5755d740c2a6f412eb45f543b4
