@@ -1,5 +1,5 @@
 # 六图核重与少图讲解替换
-- task-id: douyin-six-chart-repost-20261009; owner: 01a12093-24f6-7a52-9d30-ee89f2a922e4; status: blocked.
+- task-id: douyin-six-chart-repost-20261009; owner: 01a12093-24f6-7a52-9d30-ee89f2a922e4; status: active.
 - checked_coordination_sha: 2cd35c23ef341890ac5d090246375d9bbb6dd116; checked_at: 2026-10-09T20:50:10.368424+08:00; 已读COORDINATION1.1、dual-ma-video-copy-20261009、research-dispatch-controller，六图原发布负责人 xhs运营抖音 当前idle且无六图协调记录。
 - 用户授权：检查是否重复，删除原六图帖重新发布并搭配少量讲解。原作品7694498612302105910仅有一条可见投稿，六个原JPG指纹各异；这不证明平台隐藏检测因果。
 - 唯一写者本会话；范围 data/cache/douyin-six-chart-repost-20261009/ 小图/文案/原帖证据/回执及 docs/ops/work-progress/douyin-six-chart-repost-20261009.md；不改系统、历史输入、原六图素材、共享registry/Skill。
@@ -23,3 +23,9 @@
 - 本阶段小进度实际提交codex/douyin-six-chart-repost-20261009@3c91f80ad27a4bbdc4af0df66e2bfa9e8e40173b；远端准确完整SHA与单文件内容已读回，缓存/账号资料未上传；归置新增文件后检查exit0。
 
 - 提交前增量checked_coordination_sha: 3c314397dcdeb97e0f2770e14b364b5461033ac1；checked_at: 2026-10-09T21:11:48.069699+08:00；已读risk-run自身权限阻塞增量，未涉及六图或本路径；其他负责人内容保留。
+
+## 用户确认后接续替换 2026-10-09T22:27:38.040311+08:00
+- checked_coordination_sha: 32fb4b41606d494e375b2beb3b4ecd2b1961abc3；checked_at: 2026-10-09T22:27:38.040311+08:00；沿用已读COORDINATION1.1、自身、dual-ma-video-copy-20261009及中控；新risk-review增量只涉及其自身权限阻塞，无本任务重叠。唯一写者本会话，范围不变。
+- 用户直接答“那你重新发吧”，承接已明示的指定原六图永久删除与指定单图发布确认，视为本次末步确认；不再重复询问。当前原确认弹窗及已上传单图/正式话题/声明仍在，新稿机器预检未见异常；接下来只删原7694498612302105910和投稿本单图一次。
+- 已推阶段成果3c91f80ad27a4bbdc4af0df66e2bfa9e8e40173b继续有效；未做新媒体制作、系统修改、共享登记或其他作品变动。
+
