@@ -1,0 +1,141 @@
+{
+  "schema": "structure-persistence-comparison-proposal/0.1",
+  "status": "pending_controller_review_no_execution_permission",
+  "family": "Goal3 full-structure persistence; preserves C03/simple_top3/invalidation/D prior history",
+  "question": "在相同顶部后观察机会中，两种持续下降解释是否对应更高的未来20段收盘下跌风险；相比同资产、同时期的已有20日均线方向背景，是否仍有可见差别？",
+  "definitions_file": "definitions.proposed.json",
+  "source_bindings_file": "source-bindings.json",
+  "permissions_now": {
+    "source_metadata_and_document_write": true,
+    "real_features": false,
+    "real_labels": false,
+    "effects": false,
+    "network": false,
+    "production": false,
+    "shared_registry": false
+  },
+  "scope": {
+    "universe": [
+      "510300.SS",
+      "510050.SS",
+      "510500.SS",
+      "588000.SS"
+    ],
+    "frequency": "daily",
+    "input_period": [
+      "2020-12-21",
+      "2026-06-30"
+    ],
+    "observation_period": [
+      "2022-01-04",
+      "2026-06-30"
+    ],
+    "warmup": 252,
+    "phase_ranges": {
+      "early_context": [
+        "2022-01-04",
+        "2024-12-31"
+      ],
+      "eval_2025": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "eval_2026H1": [
+        "2026-01-01",
+        "2026-06-30"
+      ]
+    },
+    "eligibility": "Common episode population from definitions; both candidates and baseline known. Process from segment start without resetting at evaluation/phase boundaries. Retain every scheduled row with distinct exclusion reason.",
+    "history_status": "All three phases are seen historical exploration. The last two are descriptive comparison periods, not untouched validation. Early phase may be displayed separately but is not combined into primary effect."
+  },
+  "target": {
+    "id": "research.local.close_downside20@0.1.0",
+    "formula": "Y(t)=100*max(0,1-min(C[t+1],...,C[t+21])/C[t+1])",
+    "unit": "percentage points",
+    "price": "economic close only; no intraday-low claim",
+    "start_offset": 1,
+    "end_offset": 21,
+    "returns_intervals": 20,
+    "maturity": "All 21 closes must exist and be qualified, and t through t+21 stay in the same phase and continuous source segment. No label borrowed across a phase boundary.",
+    "fixed_window": "Do not shorten future window at candidate break, original-high break or new-bottom event.",
+    "auxiliary": "On same matured rows, terminal 20-interval close return=100*(C[t+21]/C[t+1]-1), its positive fraction and median, solely context/counterexamples; not an extra primary horizon."
+  },
+  "method": {
+    "kind": "state_conditional_comparison",
+    "fits": 0,
+    "rationale": "Binary states are conditions, not calibrated forecasts or cross-sectional rankings. Compare actual fixed-window downside directly, then the same contrasts inside a pre-fixed existing-information background. No ridge/OLS or account simulation is needed.",
+    "B0": "All common matured post-top observations within each asset and phase, regardless of candidate state; show full population mean downside beside state 1 and state 0. B0 is an unconditional historical reference, not a fitted predictor.",
+    "B1": {
+      "stratum": [
+        "asset",
+        "phase",
+        "sma20_rising",
+        "ema20_rising"
+      ],
+      "sma20_rising": "1 iff C[t]>C[t-20], else 0 (flat explicitly included in non-rising). Exact SMA20 first difference sign; no price-above-MA substitution.",
+      "ema20_rising": "EMA20 seeded with arithmetic mean of first 20 qualified segment closes, alpha=2/21, then recurrence; 1 iff EMA[t]>EMA[t-1], else 0. Use same float64 convention as pinned seeded_ema.",
+      "missing": "Unavailable is null, not non-rising. Four rising/non-rising combinations; no searched cutoffs.",
+      "interpretation": "Only incremental conditional association relative to these two direction flags, asset and phase. Does not adjust for full price history, volatility, distance or episode age; report their absence, do not claim new raw information or causal effect."
+    },
+    "primary_effect": "For each candidate j in each B1 cell, delta_j=mean(Y|j=1)-mean(Y|j=0). Positive means the maintained downward state was followed by more downside.",
+    "common_support": "Freeze common cells using features and calendar maturity only: in each retained cell BOTH candidates have at least one mature row in each state. Same retained cells and same cell weights for both candidates. Do not require their state memberships to coincide. All excluded cells remain in raw and coverage tables; do not hide pending/broken/rebound rows.",
+    "weights": "Within each asset-phase, weight a retained cell by its total common matured row count divided by total count across retained cells, independent of candidate and Y. Average retained-cell deltas. Primary full-panel estimate requires each of 4 assets in each of the 2 evaluation phases to have at least one retained cell; then equal weight 4 assets within each phase, then equal weight the 2 phases. If not, primary full-panel B=insufficient; display only clearly labelled supported asset-phase descriptions, do not silently redefine primary weights.",
+    "raw_A": "For each candidate state report counts, unique dates, episodes, mean/median downside, positive terminal return fraction and terminal return mean/median; per asset-phase and overall population. Raw differences are not conditional increment.",
+    "no_selection": "Never rank candidates to keep winner; show both. No new target, parameter, pool, node or baseline search.",
+    "minimum_meaningful_effect": null,
+    "conclusion": "No preset practically meaningful threshold exists. Report magnitude and uncertainty; lack of clear difference does not prove universal ineffectiveness. Even conditional association does not establish a trade/exit/position rule."
+  },
+  "dependence": {
+    "unit": "ETF-day, with overlapping 20-interval windows and common market exposure. Counts are not independent sample size.",
+    "uncertainty": "If controller qualification review permits estimation, synchronous moving blocks of dates within each evaluation phase: length 60 primary, length 20 fixed sensitivity; 1000 resamples per length, seed 20261009. Use full scheduled phase calendar, uniformly choose all valid contiguous starts without wrap, concatenate sampled blocks to original phase date count then truncate; same draw across assets and both candidates. Never mix phases.",
+    "statistic": "Use original frozen common cell set and fixed original weights. If any required state/cell disappears in a draw, that draw is invalid for the joint pair. Report valid count. Require at least 900 valid paired draws for intervals, otherwise report interval insufficient.",
+    "interval": "For each candidate primary B contrast use percentile 1.25 and 98.75 across valid resamples (97.5 percent interval, a simple two-candidate family adjustment). Report 60 and 20 separately, no selecting favorable length. No interval for early context or exploratory subgroups.",
+    "limitations": "2026H1 only 116 saved sessions; long-block resamples have few distinct combinations. Dependence beyond block length, common trends, seen history and proxy selection are not corrected by these intervals. Controller may permit description only from feature-only support.",
+    "counterexamples": "Always disclose state 1 with Y=0 (no close downside), state 0 with high downside; list earliest 3 per candidate/category, where high downside uses above full-evaluation median computed only for this descriptive audit, not a decision threshold. Show all 4 assets, both periods, pending/active/broken/terminal composition, episode-age and progress-count distributions; no favorable subgroup selection."
+  },
+  "qualification_before_Y": {
+    "required": [
+      "All pinned binding hashes, unmodified source/authority, source/runtime dependency closure manifest; existing source qualification reuse versus fresh checks distinguished.",
+      "Synthetic prefix invariance, no future invalidation filtering, containment tail extension, equality, gap, frozen node deduplication, root timing, absorbing failure, simultaneous terminal flags, no same-day re-root, v2 pending/pass/fail/rebound examples, label endpoint/maturity, common support and fixed weights. Use hand-made data only at this stage.",
+      "Real feature-only qualification after separate controller release: raw/qualified/warmup/root/episode/state/maturity/common-cell counts, date ranges and unique episodes by asset-phase; disagreements between candidates; no future close values read for labels.",
+      "V2 number of progress nodes and genuine permitted-rebound active days; if zero report zero without revising definition.",
+      "Show state supports by distinct episodes and calendar spread; no generic row-count test pretends sufficiency. Controller records estimate / describe_only / qualification_only plus object/proxy/method/scope reasons before any Y."
+    ],
+    "minimal_missing": "No new download needed for this retrospective four-ETF question. Still required: new research adapter and synthetic evidence, exact 0-outcome qualification, controller release of the scientific support and dedicated entry, output plan + actual external device/capacity check; native registration only in separately authorized paths. Historical arrival/complete official daily calendar would be additional evidence only for a broader point-in-time/live claim, not silently required to run this limited retrospective question."
+  },
+  "engineering": {
+    "native_supported": false,
+    "reason": "Current feature-kind whitelist and old simple_top_invalidation evaluator bind other exact objects/targets. Do not relabel these as old supported kinds or claim workflow-contract has accepted them.",
+    "next": "Implement two research-only pure prefix state adapters in a separately authorized research-tool module; invoke pinned production strict detector/seeded_ema or exactly reproduce with independent synthetic equivalence. Do not import archive raw/run.py as formal implementation. Use a small explicitly frozen dedicated runner with permissions/hash guards, qualification stage and effect stage; no new platform. Parent owns path release and shared registration.",
+    "output": "Large tables/logs/results only through a newly verified external output plan; local small source/contract/index only. No fall back to internal disk or overwrite old outputs.",
+    "guard": "Hash-check all bound sources before importing dependency code, bind new code plus dependency closure before Y; feature-only runner cannot call labels; effects require separately written release bound to contract/qualification/code SHA."
+  },
+  "budget_proposal": {
+    "authorization": "Design proposal, not current release. Parent approval required; no automatic reset of any prior family budget.",
+    "core_batches": 1,
+    "candidate_definitions": 2,
+    "candidate_parameter_versions_each": 1,
+    "primary_risk_horizons": 1,
+    "predictive_fits": 0,
+    "new_account_paths": 0,
+    "source_downloads": 0,
+    "real_feature_builds_max": 1,
+    "real_label_builds_max": 1,
+    "effect_passes_max": 1,
+    "paired_resamples_per_block_length": 1000,
+    "block_lengths": [
+      60,
+      20
+    ],
+    "effect_reruns": 0,
+    "synthetic_tests": "Finite boundary suite above; any repair/re-run recorded separately, cannot restart or zero the research attempt count.",
+    "prior_history": "C03 first-bottom, simple_top3, simple_top3_invalidation and D remain prior attempted/seen family context with original frozen budgets; this contract does not claim an exact whole-family cumulative total. Parent must attach latest authoritative attempt ledger before releasing effects. Current preparation consumed 0 real features, 0 labels, 0 fits, 0 effects, 0 resamples."
+  },
+  "stop_conditions": [
+    "Source/code/authority drift or unregistered write/import path; invalid/duplicate OHLC or conflicting node identity.",
+    "Any causal prefix inconsistency, retrospective confirmation rewrite, dependence on future validity, unknown encoded as 0, or candidate-dependent denominator.",
+    "Definition/support insufficient: preserve qualification and close narrow result insufficient, do not switch proxy or extend horizon/pool.",
+    "No approved release, missing external plan/device/capacity, exhausted batch or need to repair effect code after Y: stop dependent stage, preserve partial/failure outputs and cumulative attempts.",
+    "Do not rerun sealed old research, cash paths, week diffusion, chips, D or production."
+  ]
+}

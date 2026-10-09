@@ -1,0 +1,39 @@
+{
+  "mission": "Independently verify saved real two-path outputs, calibration and critical ledger sums/metrics without importing or rerunning comparator or any account simulator. Exactly one saved-ledger verification batch.",
+  "task_scope": [
+    "Independently verify saved real two-path outputs, calibration and critical ledger sums/metrics without importing or rerunning comparator or any account simulator. Exactly one saved-ledger verification batch."
+  ],
+  "path_resolution_root": "/",
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/configs",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/approved-comparison-20261009",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/risk-comparable-cash-baseline-2026-10-09",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/structure-persistence-comparison-2026-10-09/definitions.proposed.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/structure-persistence-comparison-2026-10-09/research-contract.proposed.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/structure-persistence-comparison-2026-10-09/source-bindings.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/structure-persistence-comparison-2026-10-09/README.md",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/risk-comparable-cash-baseline-20261009/risk-comparable-cash-baseline-20261009-20261009T162536-982b6699dde3/result/result.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Independent stddev/calibration, lot/fee/dividend/daily wealth and actual risk ratio reconstruction from saved inputs and outputs",
+    "Key values, discrepancy limits, useful conclusion and material limitations"
+  ],
+  "stop_conditions": [
+    "No simulator/account rerun, new price, retuning, file writes or Git",
+    "Report any discrepancy before dependent archive"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

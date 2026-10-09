@@ -1,3 +1,4 @@
+- 2026-10-09：[沪深300ETF固定投入风险对照](cash-risk-comparability-2026-10-09.md)：两条新账户日波动约为原方法1.96—2.24倍，预先10%匹配标准未满足；不调比例重跑。
 # docs/experiments 总索引
 
 - 2026-10-08：[fixed-ledger-cash-requirement-2026-10-08](fixed-ledger-cash-requirement-2026-10-08.md)：固定旧成交共用现金，原参与组需约41.21万至49.90万元；同日买卖先后影响付款能力，不是本金建议或收益改善。

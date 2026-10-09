@@ -1,0 +1,54 @@
+{
+  "schema": "structure-persistence-research-proposals/0.1",
+  "registry_status": "local proposed IDs only; not registered, not production semantics",
+  "common": {
+    "source_rule": "strict_structure@2.0.0, exact source SHA in source-bindings.json; repaired sequential publication, not old final-merged-history implementation",
+    "time": "Each original daily close available at saved decision_at (16:00 Asia/Shanghai); use prefixes ending that date. Research as-of convention only, not certified historic vendor arrival.",
+    "containment": "If either closed high-low interval contains the other, replace only current merged tail by max(high), min(low), preserving first_date and updating completed_date; no recursive merge backwards. Equality counts as containment. Inside bar without changing envelope adds no new comparison. Earlier published node fields never change.",
+    "node_fields": [
+      "side",
+      "confirmed_date",
+      "reference_date",
+      "reference_price",
+      "trigger_price",
+      "final_price"
+    ],
+    "node_identity": "asset + continuous segment + side + confirmed_date + reference_date + exact frozen reference_price/trigger_price/final_price; detect duplicate/conflicting same-side same-day events, do not silently collapse distinct events",
+    "node_timing": "Use detect_strict_structures(prefix), only observed confirmations. Never use full-future invalidated_date or is_valid to select past roots. Freeze node fields at first publication.",
+    "episode_start": "While idle, first new confirmed strict top creates root at s. If a strict bottom confirms on the same date while idle, do not seed; retain same_day_seed_conflict. Root reference_price and identity are immutable. Root day retained in audit, excluded from effect population because no post-root persistence has yet been observed.",
+    "episode_population": "Every qualified scheduled asset-day t>s while that root exists, including candidate failures, short rebounds and the terminal day. Candidate failure never removes the day, re-roots or censors labels. Additional tops never reset root.",
+    "episode_end": "First later raw daily high strictly greater than frozen root reference_price OR first later strict bottom confirmation. Equality to root high alone does not invalidate. Record both flags if same date. Terminal date included with both candidates=0; no intraday ordering assumed. Do not seed a new root on the terminal day or retroactively reuse a top confirmed that day. Only a fresh later top may seed while idle.",
+    "unknown": "Missing/invalid OHLC, unqualified action or absent scheduled day ends continuity; unknown is null, never 0. Re-start indicators and structure on next segment; require 252 continuous bars. No filling or bridging.",
+    "simultaneous_order": [
+      "Read today OHLC and publish prefix events; preserve all event flags.",
+      "For an existing root evaluate both termination conditions together. If any, terminal states override candidate updates; both reasons survive.",
+      "Otherwise update both candidate state machines using only newly observed groups/nodes.",
+      "While idle apply seed rule; do not evaluate a new root as a post-root day."
+    ],
+    "reset": "Neither state restarts inside an episode. Root failure and new bottom are shared terminal events, not candidate-dependent sample filters."
+  },
+  "candidates": [
+    {
+      "id": "research.structure.post_top_bar_persistence",
+      "version": "0.1.0",
+      "name": "逐根去包含K线持续下降",
+      "status": "research_proxy",
+      "initial": "At root confirmation, state=active, comparison_count=0. Root day not evaluated. Root confirmation merged group is live seed; do not retrospectively require earlier groups to decline.",
+      "update": "For each appended noncontained group after seed, require high<immediately_previous_group.high AND low<immediately_previous_group.low. Any equality or rise fails immediately and permanently for this episode. If current post-seed tail is later extended by containment, re-evaluate against its preceding fixed group at that current date; failure latches now, never edits past states. Seed-tail containment updates the live seed for later comparisons, not frozen root node fields.",
+      "short_rebound": "Any observed violation between successive effective groups interrupts. Raw rebound wholly inside unchanged containment envelope is not a new effective group and does not interrupt.",
+      "value": "1 while active, 0 after broken or on terminal date; null only unknown/non-opportunity. Export comparison_count to distinguish no post-root comparison from actual continuation."
+    },
+    {
+      "id": "research.structure.post_top_node_persistence",
+      "version": "0.1.0",
+      "name": "允许短反弹的已确认构造继续下移",
+      "status": "explicit_research_approximation",
+      "initial": "pending, value=0; previous_node=root, progress_count=0. No assumption of continued progression merely from not breaking root high.",
+      "update": "At each later newly confirmed strict TOP node n, require n.reference_price<previous_node.reference_price AND n.final_price<previous_node.final_price. Strict pass sets active, increments progress_count and replaces previous_node with n. First failed/equal comparison sets broken permanently. pending stays 0 until the first passed comparison; active stays 1 between nodes.",
+      "what_is_a_peak_and_low": "The high is the frozen M1 reference_price of a confirmed top; the low is its frozen LL confirmation final_price. They are NOT alternating independently confirmed peak/trough pivots. A truly confirmed bottom terminates the shared episode. This avoids inventing lookahead pivots, rebound percentage or waiting duration.",
+      "short_rebound": "An intermediate higher raw/effective bar may leave active=1 only while no new bottom has confirmed, root high has not been exceeded and no newly confirmed top has failed the two strict comparisons. There is no rebound-size tuning, grace duration, future-pivot backdating, or later reactivation.",
+      "value": "1 only after at least one additional lower-high AND lower-confirmation-low top node, and no subsequent failure/termination; 0 pending, broken and terminal; null only unknown/non-opportunity. Export exact state and progress_count separately.",
+      "sparsity_rule": "If no qualifying progression or no shared contrasting support exists, record this proxy as redundant/sparse under this definition. Do not change nodes, endpoints or substitute simple_top3 after seeing real qualification/results."
+    }
+  ]
+}
