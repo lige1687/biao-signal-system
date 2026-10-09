@@ -1,3 +1,14 @@
+## V9 middle-sample-done
+
+- task-id: trend-trading-video；2026-10-09T11:21:52.697187+08:00；checked_coordination_sha: 0f78951455bb0b04c7f3cef5d184092b50f0a5a6；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed用户要求的Skill更新，scope_released=true。成果codex/trend-history-long-v14-20261009@ebe749d82da5cc5c931894149043675e0d0e3022，6份准确源码/小记录远端逐字读回；中断恢复后再次核远端完整SHA一致，未重复提交。
+- 入口、前置页、分阶段页统一：文稿与内容确认→可入片素材→正式风格图确认→中间最容易出问题的15秒确认→全片。记录样例全片位置、选择原因和验证项目，覆盖本片实际复杂解释/承接/图文可读/声音衔接；不机械取正中间或只选漂亮片头。默认leyan音乐与无配音/无品牌/外盘保留。
+- nasdaq已明确释放两共享文件后才合并，保留其当前无配音/实拍方向/外盘增量；上轮入口合并依赖已解决。交付前读取自身、nasdaq（最新仅本片v05无Skill修改）及中控，无重叠，本人唯一写者。
+- Skill结构、引用、准确差异及归置检查通过；文档规则不宣称程序自动筛选镜头。无新媒体/安装/删除/发布，用户以后各期图与样例确认仍按既定流程。
+
+
+---
+
 ## V9 middle-sample-start
 
 - task-id: trend-trading-video；2026-10-09T11:19:41.596156+08:00；checked_coordination_sha: 3aa8abb559aac1fb5988f4076f0a19904227e24b；已读 COORDINATION.md、自身与 research-dispatch-controller。
