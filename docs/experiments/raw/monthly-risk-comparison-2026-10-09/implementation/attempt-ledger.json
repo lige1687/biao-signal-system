@@ -22,7 +22,7 @@
   },
   "legacy_two_paths_consumed": 2,
   "legacy_budget_reusable": false,
-  "synthetic_runs": 7,
+  "synthetic_runs": 8,
   "failures": [
     {
       "kind": "synthetic_implementation",
@@ -37,10 +37,17 @@
       "name": "metrics_and_opportunity",
       "preserved": "failures/v1-synthetic-20261009T201534/",
       "repair": "期初12/31到1/2恢复是2自然日；手算期望更正"
+    },
+    {
+      "kind": "C_independent_code_review",
+      "id": "C-F01",
+      "C_review_commit": "fa421d30fb9f7aaa0b111d7f5d2ca39c65065ae4",
+      "preserved": "failures/C-F01-opening-reference/",
+      "repair": "准确原普通上下价界在任何账户调用前核验；触界和特殊原限制保留；16定向人工项通过，待C接受"
     }
   ],
   "synthetic_full_group_runs": 5,
-  "synthetic_targeted_runs": 2,
+  "synthetic_targeted_runs": 3,
   "synthetic_run_history": [
     {
       "path": "synthetic-evidence-20261009T201534660775.json",
@@ -93,18 +100,25 @@
       "passed": 4,
       "failed": [],
       "historical_path_attempts": 0
+    },
+    {
+      "path": "targeted-opening-reference-evidence.json",
+      "sha256": "2206035eaa36453d58018bc4c3b042e97645a0a8e0a7413a01cd757ccb885d3e",
+      "passed": 16,
+      "failed": [],
+      "historical_path_attempts": 0
     }
   ],
   "other_engineering_checks": {
     "driver_refusals": 4,
     "external_write_cases": 5,
-    "input_binding_consumption": 1,
+    "input_binding_consumption": 2,
     "additional_historical_paths": 0
   },
   "C_correction": {
     "review_commit": "fc9fb189d6ce390e65e26ebb87eda8969488c085",
     "request": "补记67970c26当时2次人工回执与失败",
-    "resolution": "历史2次全部保留；截至当前另3次扩展/修改自检及1次定向，累计6次（5完整组、1定向）；新历史账户仍0。"
+    "resolution": "原2次及2失败全保留；截至本版累计8人工调用（5完整组、3定向），真实0。C-F01定向修复待独审。"
   },
-  "updated_at": "2026-10-09T20:40:07.291534+08:00"
+  "updated_at": "2026-10-09T20:53:22.037389+08:00"
 }

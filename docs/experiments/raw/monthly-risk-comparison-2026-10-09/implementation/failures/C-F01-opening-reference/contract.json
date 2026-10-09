@@ -48,8 +48,7 @@
     "actions": "沿旧分红：登记日收盘后持有份额记录权益；除息日开盘前记应收；到账日收盘后转现金。跨期/非分红行动必须有A准确处理资料，未有则停止而非忽略",
     "marks": "官方非交易日延续前收盘估值；有持仓但无首个估值价停止；缺报价不当可成交价",
     "initial_state": "逐A逐费用绑定2025-12-31保存现金、份额与应收；提案预期现金起点、0份额和0应收，以Amanifest核同为准",
-    "ending_state": "期末持仓与应收保留，不虚构清仓",
-    "opening_reference_validation": "普通日只用本次名义开盘和A原参考下上界；缺失/非法或越界在任何路径调用前停止。触界必须沿原blocked；特殊除息未知/停牌保留原blocked/halt，不重建界，不用高低收盘补证。"
+    "ending_state": "期末持仓与应收保留，不虚构清仓"
   },
   "metrics": [
     "完整半年每日交易日波动与新/原A比值",
@@ -215,7 +214,7 @@
   },
   "independence": "B执行者仅工程自检，C独立代码及数值验收、最终共享登记",
   "status": "frozen_for_C_review",
-  "frozen_at": "2026-10-09T20:53:22.037389+08:00",
+  "frozen_at": "2026-10-09T20:40:07.276847+08:00",
   "A_git_reference": {
     "task_id": "leisignal-risk-input-20261009",
     "commit": "29337ec9e6560171c459019834638ce2c6993ef9",
@@ -230,8 +229,8 @@
   "code_sha256": {
     "monthly_account.py": "9792eae48a33d5e59cf481d530891a0f91ea89e5f3e0266757edc04a7ec739ca",
     "execution_guard.py": "118c77bd2422de1b8f557c23636ad337038ccad370f7fa1856ec7834220bb668",
-    "input_adapter.py": "37164cfe9b2d42d289799a3a8557ba847f69a6eb56afe2e5fbb6bc8434fac5d8",
-    "runner.py": "8ed4df4bda5ebecdf5fc9758d5fb3fe84133cca89c6b2b95aca71463f426492e",
+    "input_adapter.py": "b604fa939f9a822cacab34a908ed3e003b4dd50b7c64ac9d928e607773719741",
+    "runner.py": "9b391841e4818873d82b57e0744cb510c005998e801d071b74bc82bd036ac146",
     "synthetic_checks.py": "ff455c00f68ea63be91ce48e0fab72583cad2b6946ad28c6c88f1824caf85880",
     "bind_inputs.py": "87e9447d610efba82dc8ca9dfaba46a6f0f64391ca89166614c5a9c1bf9443af"
   },
@@ -299,8 +298,8 @@
     }
   ],
   "author_budget_owner": "B; exact human authorization remains not_granted; no run release from this binding",
-  "prepared_revision": 4,
-  "pre_review_revision_reason": "C-F01原开盘上下界适配丢失：保留0586d4e2旧源码/合同/回执与C反例，只修准确原参考校验及其外盘回执；16人工定向项和116冻结开盘消费通过，无真实比例/账户。次数摘要0586补充亦待C核。",
+  "prepared_revision": 3,
+  "pre_review_revision_reason": "真实调用前发现静态次数摘要可能不随实际标记更新；补每次批次/路径开始/完成/失败后从不可覆盖标记同步小摘要，保留前版。经济规则和次数上限不变。",
   "additional_engineering_evidence": [
     {
       "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/targeted-calendar-cutoff-evidence.json",
@@ -321,21 +320,6 @@
       "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/external-write-engineering-evidence.json",
       "sha256": "d68306ace6c9bd6879a4b9e00f7796f62dfad0b3be64e2886fd34fa437ebcb12",
       "bytes": 2077
-    },
-    {
-      "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/check_opening_reference.py",
-      "sha256": "745967724fccd45d8d0d0d2e04545524aa605ba84ad3d996ea1caf512ded5ca9",
-      "bytes": 5254
-    },
-    {
-      "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/targeted-opening-reference-evidence.json",
-      "sha256": "2206035eaa36453d58018bc4c3b042e97645a0a8e0a7413a01cd757ccb885d3e",
-      "bytes": 11295
-    },
-    {
-      "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/opening-source-consumption-receipt.json",
-      "sha256": "601dfde2c4c965e09af54c01f04cc1cdfe17633ba1afbc6f8404e5ca6c51a7c4",
-      "bytes": 33882
     }
   ]
 }

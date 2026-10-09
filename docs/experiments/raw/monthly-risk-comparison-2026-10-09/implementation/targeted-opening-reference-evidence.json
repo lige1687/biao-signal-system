@@ -1,0 +1,431 @@
+{
+  "dataset": "ARTIFICIAL_ONLY",
+  "scope": "C-F01 original opening-reference guard",
+  "generated_at": "2026-10-09T20:52:22.959906+08:00",
+  "checks": [
+    {
+      "name": "inside_original_bounds",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "10",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "reason": "ordinary_reference",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 1,
+      "opening_validation": [
+        {
+          "date": "2026-01-05",
+          "source_reason": "ordinary_reference",
+          "open": "10",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "source_restriction": null,
+          "effective_restriction": null,
+          "status": "inside_original_bounds"
+        }
+      ]
+    },
+    {
+      "name": "lower_touch_preserves_block",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "9",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "reason": "touch_limit",
+          "restriction": "blocked"
+        }
+      },
+      "downstream_boundary_reached": 1,
+      "opening_validation": [
+        {
+          "date": "2026-01-05",
+          "source_reason": "touch_limit",
+          "open": "9",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "source_restriction": "blocked",
+          "effective_restriction": "blocked",
+          "status": "touch_limit_blocked"
+        }
+      ]
+    },
+    {
+      "name": "upper_touch_preserves_block",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "11",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "reason": "touch_limit",
+          "restriction": "blocked"
+        }
+      },
+      "downstream_boundary_reached": 1,
+      "opening_validation": [
+        {
+          "date": "2026-01-05",
+          "source_reason": "touch_limit",
+          "open": "11",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "source_restriction": "blocked",
+          "effective_restriction": "blocked",
+          "status": "touch_limit_blocked"
+        }
+      ]
+    },
+    {
+      "name": "above_upper_rejected_before_path",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "12",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "reason": "ordinary_reference",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 0,
+      "rejection": "opening outside original bounds: 2026-01-05"
+    },
+    {
+      "name": "below_lower_rejected_before_path",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "8",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "reason": "ordinary_reference",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 0,
+      "rejection": "opening outside original bounds: 2026-01-05"
+    },
+    {
+      "name": "missing_lower_rejected",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "10",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": null,
+          "upper_limit": "11",
+          "reason": "ordinary_reference",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 0,
+      "rejection": "ordinary opening bounds missing/invalid: 2026-01-05"
+    },
+    {
+      "name": "nonfinite_upper_rejected",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "10",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "9",
+          "upper_limit": "NaN",
+          "reason": "ordinary_reference",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 0,
+      "rejection": "ordinary opening bounds missing/invalid: 2026-01-05"
+    },
+    {
+      "name": "equal_bounds_rejected",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "10",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "10",
+          "upper_limit": "10",
+          "reason": "ordinary_reference",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 0,
+      "rejection": "ordinary opening bounds invalid: 2026-01-05"
+    },
+    {
+      "name": "reversed_bounds_rejected",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "10",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "11",
+          "upper_limit": "9",
+          "reason": "ordinary_reference",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 0,
+      "rejection": "ordinary opening bounds invalid: 2026-01-05"
+    },
+    {
+      "name": "nonpositive_bound_rejected",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "10",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "0",
+          "upper_limit": "11",
+          "reason": "ordinary_reference",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 0,
+      "rejection": "ordinary opening bounds invalid: 2026-01-05"
+    },
+    {
+      "name": "touch_missing_source_block_rejected",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "9",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "reason": "ordinary_reference",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 0,
+      "rejection": "source touched-opening block missing: 2026-01-05"
+    },
+    {
+      "name": "original_abnormal_flag_rejected",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "10",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "reason": "abnormal_outside_limit",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 0,
+      "rejection": "original abnormal opening reference: 2026-01-05"
+    },
+    {
+      "name": "ex_reference_unknown_original_block",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "12",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": null,
+          "upper_limit": null,
+          "reason": "reference_unknown",
+          "restriction": "blocked"
+        }
+      },
+      "downstream_boundary_reached": 1,
+      "opening_validation": [
+        {
+          "date": "2026-01-05",
+          "source_reason": "reference_unknown",
+          "status": "original_special_block_preserved",
+          "source_restriction": "blocked",
+          "effective_restriction": "blocked",
+          "lower_limit": null,
+          "upper_limit": null
+        }
+      ]
+    },
+    {
+      "name": "halt_original_halt",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "12",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": null,
+          "upper_limit": null,
+          "reason": "known_halt",
+          "restriction": "halt"
+        }
+      },
+      "downstream_boundary_reached": 1,
+      "opening_validation": [
+        {
+          "date": "2026-01-05",
+          "source_reason": "known_halt",
+          "status": "original_special_block_preserved",
+          "source_restriction": "halt",
+          "effective_restriction": "halt",
+          "lower_limit": null,
+          "upper_limit": null
+        }
+      ]
+    },
+    {
+      "name": "unblocked_special_rejected",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": "10",
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "reason": "reference_unknown",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 0,
+      "rejection": "unblocked special opening reference: 2026-01-05"
+    },
+    {
+      "name": "missing_open_remains_wait",
+      "passed": true,
+      "input": {
+        "quote": {
+          "date": "2026-01-05",
+          "open": null,
+          "high": "10.5",
+          "low": "9.5",
+          "close": "10"
+        },
+        "reference": {
+          "date": "2026-01-05",
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "reason": "ordinary_reference",
+          "restriction": null
+        }
+      },
+      "downstream_boundary_reached": 1,
+      "opening_validation": [
+        {
+          "date": "2026-01-05",
+          "source_reason": "ordinary_reference",
+          "open": null,
+          "lower_limit": "9",
+          "upper_limit": "11",
+          "source_restriction": null,
+          "effective_restriction": null,
+          "status": "missing_open_wait"
+        }
+      ]
+    }
+  ],
+  "passed": 16,
+  "failed": [],
+  "historical_account_path_calls": 0,
+  "account_simulator_calls": 0,
+  "core_full_groups_rerun": 0,
+  "C_acceptance": false,
+  "check_code_sha256": "745967724fccd45d8d0d0d2e04545524aa605ba84ad3d996ea1caf512ded5ca9",
+  "adapter_sha256": "37164cfe9b2d42d289799a3a8557ba847f69a6eb56afe2e5fbb6bc8434fac5d8"
+}

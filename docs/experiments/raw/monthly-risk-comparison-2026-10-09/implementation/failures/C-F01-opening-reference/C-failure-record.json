@@ -1,0 +1,19 @@
+{
+  "review_commit": "fa421d30fb9f7aaa0b111d7f5d2ca39c65065ae4",
+  "review_path": "docs/experiments/raw/monthly-risk-comparison-2026-10-09/review/full-code-review.md",
+  "reviewed_commit": "c65971bac01b0d377a8b90c130a1d7266e4ac109",
+  "current_preserved_commit": "0586d4e2af7a96d372665a4eb4152cef28ee6a5c",
+  "issue_id": "C-F01",
+  "counterexample": {
+    "dataset": "ARTIFICIAL_ONLY",
+    "lower_limit": "9",
+    "upper_limit": "11",
+    "opening_price": "12",
+    "wrong_bought_units": "400",
+    "wrong_fee": "4.8"
+  },
+  "failure": "adapter discarded original limits and allowed an impossible open to reach account call",
+  "actual_history_scope": "C checked 116 stored quote dates without ordinary out-of-bound open; no real new account ran",
+  "allowed_repair": "validate exact saved original opening limits before any path call, preserve touch/special/halt blocking; no reconstruction of ex-day limit or use close/high/low",
+  "historical_paths": 0
+}

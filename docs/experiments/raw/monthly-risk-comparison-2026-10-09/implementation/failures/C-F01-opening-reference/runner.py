@@ -149,7 +149,6 @@ def execute():
     with ExternalRun(storage, plan) as output:
         output.write("run-log.json", {"started_at": now(), "release": release, "run_id": run_id}, run=True)
         pointers["monthly-targets"] = output.write("monthly-targets.json", schedule)
-        pointers["opening-validation"] = output.write("opening-validation.json", dataset["opening_validation"])
         claim_batch(HERE/"attempts", release, run_id)
         sync_ledger(HERE)
         for path_id in PATH_IDS:

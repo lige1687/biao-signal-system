@@ -20,55 +20,6 @@ def csv_rows(path):
         return list(csv.DictReader(f))
 
 
-def validate_open_references(quotes, reference):
-    """Retain original opening bounds BEFORE any new-account path call.
-
-    No bounds are regenerated. Ordinary outside/invalid bounds are source
-    errors, matching the original driver's abort. A touched bound blocks;
-    unknown special reference or known halt keeps its original block. Only
-    the nominal OPEN and saved lower/upper limits participate in this check.
-    """
-    quote_map, references = by_date(quotes), by_date(reference)
-    require(set(quote_map) == set(references), "opening reference date mismatch")
-    restrictions, evidence = {}, []
-    special = {"reference_unknown", "reference_unknown_no_prior_quote", "known_halt"}
-    ordinary = {"ordinary_reference", "touch_limit", "abnormal_outside_limit"}
-    for day, quote in quote_map.items():
-        row = references[day]
-        restriction, reason = row.get("restriction"), row.get("reason")
-        require(restriction in (None, "halt", "blocked"), "unhandled original restriction")
-        if reason in special or restriction == "halt":
-            require(restriction in ("halt", "blocked"), f"unblocked special opening reference: {day}")
-            restrictions[day] = restriction
-            evidence.append({"date": day, "source_reason": reason, "status": "original_special_block_preserved",
-                             "source_restriction": restriction, "effective_restriction": restriction,
-                             "lower_limit": row.get("lower_limit"), "upper_limit": row.get("upper_limit")})
-            continue
-        require(reason in ordinary, f"unknown ordinary opening reference: {day}")
-        try:
-            lower, upper = number(row.get("lower_limit")), number(row.get("upper_limit"))
-        except ValueError as exc:
-            raise ValueError(f"ordinary opening bounds missing/invalid: {day}") from exc
-        require(0 < lower < upper, f"ordinary opening bounds invalid: {day}")
-        op = number(quote["open"]) if quote.get("open") not in (None, "") else None
-        if op is not None:
-            require(op > 0, f"invalid nominal opening price: {day}")
-            require(lower <= op <= upper, f"opening outside original bounds: {day}")
-        require(reason != "abnormal_outside_limit", f"original abnormal opening reference: {day}")
-        if reason == "touch_limit":
-            require(restriction == "blocked", f"source touch-limit block missing: {day}")
-        touched = op is not None and op in (lower, upper)
-        if touched:
-            require(restriction == "blocked", f"source touched-opening block missing: {day}")
-        if restriction is not None or touched:
-            restrictions[day] = restriction
-        evidence.append({"date": day, "source_reason": reason, "open": str(op) if op is not None else None,
-                         "lower_limit": str(lower), "upper_limit": str(upper),
-                         "source_restriction": restriction, "effective_restriction": restrictions.get(day),
-                         "status": "touch_limit_blocked" if touched else "missing_open_wait" if op is None else "inside_original_bounds"})
-    return restrictions, evidence
-
-
 def load_bound_dataset(binding):
     require(binding.get("schema") == "monthly-risk-consumption-binding/1", "unknown input binding")
     require(binding.get("A_task_id") == "leisignal-risk-input-20261009", "wrong A input owner")
@@ -132,7 +83,8 @@ def load_bound_dataset(binding):
     require(isinstance(reference, list), "execution reference schema mismatch")
     reference = [row for row in reference if START <= row["date"] <= END]
     require(set(by_date(quotes)) == set(by_date(reference)) == period_trading, "quote/reference/calendar mismatch")
-    restrictions, opening_validation = validate_open_references(quotes, reference)
+    restrictions = {row["date"]: row["restriction"] for row in reference if row["restriction"] is not None}
+    require(all(v in ("halt", "blocked") for v in restrictions.values()), "unhandled original restriction")
     all_actions = json.loads(Path(files["mapped_actions"]["path"]).read_text())
     actions = []
     for event in all_actions:
@@ -147,7 +99,6 @@ def load_bound_dataset(binding):
     return {"accounts": accounts, "maps": maps, "ledgers": ledgers, "initial_states": initial,
             "trading_days": trading, "period_trading": period_trading,
             "quotes": quotes, "restrictions": restrictions, "actions": actions,
-            "opening_validation": opening_validation,
             "identity_checked": True, "A_qualification_not_replaced": True}
 
 
