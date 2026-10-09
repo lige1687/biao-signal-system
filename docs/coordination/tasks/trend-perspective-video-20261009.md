@@ -1,3 +1,18 @@
+# 最新状态：原片15秒样例v06已交付，待用户观感确认
+
+- task-id: trend-perspective-video-20261009；owner: 01a12111-3544-7250-822d-056b7379704b / root；唯一写者。
+- status: paused；stage: original_script_sample_awaiting_user；scope_released: false。按用户要求停在样例验收；不是技术阻塞，不扩片、不改Skill。
+- checked_coordination_sha: 45a03a8682d9cc81381eada51ffa0b61cd62761d；checked_at: 2026-10-10T00:19:14.071487+08:00；已读自身、cash-position-video-20261009两样例交付、dual-ma-video-copy-20261009上传阻塞、leisignal-risk-run/review-20261009和research-dispatch-controller接续，沿用已读COORDINATION1.1；均无本片独立目录/小记录重叠。
+- 用户纠正：本片仍为原始趋势交易文稿；双均线只提一句，引向另一视频。v04/v05方向不符，保留历史不算认可。
+- v06：取原文“上涨不会是一条直线—正常回调可以容纳—不能所有下跌都叫噪声”。真实科创50日线按完成日推进，最后仅另期双均线引用卡；不重讲双均线、不讲K线聚合、不增加交易规则。
+- 外盘：/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/趋势交易/20261009-trend-perspective/v06-original-script-sample。成片/trend-original-15s.mp4：SHA 7ada82a09073715b2eb5e10e01dcba58a2c359ad15d6c1b4ea85f1681796d556，2545833B；工程zip SHA b11ec7556e2181ba1240ccf8b538da54a89924de4390c94f13af12dcd04e03be，9615864B，28项内容核同。
+- 验证：450帧1920×1080/30fps；媒体解码0失败1可选字幕轨提醒，有屏幕字和SRT；0黑屏0静音，-15.6LUFS。实际转场帧已看，浏览器正常速度未静音0→15.019秒ended=true/error=null；未独立听审，观感待用户。
+- 可见预览：http://127.0.0.1:58751/preview.html，已打开；外盘需挂载、服务需运行。原双均线v21第45秒缩略图实际提取，原视频SHA重核吻合，仅只读引用。
+- 两份本机小索引已推codex/trend-perspective-video-20261009@1b4f1f36280c53e10cd60156cfdb8a5ea29a2fbe，远端完整SHA及文件字节读回一致；归置检查通过。没有大媒体入Git、发布、安装、付费、策略修改或Skill写入。
+- 下一步：用户看本样例；认可后才按其要求复盘Skill，整片后续依用户评价接续。
+
+---
+
 # 最新状态：回到原片回调/噪声段，15秒连续样例
 
 - task-id: trend-perspective-video-20261009；owner: 01a12111-3544-7250-822d-056b7379704b / root；唯一写者。
