@@ -1,3 +1,11 @@
+# 纠错合同已冻结：账户适配与D1保存描述独立准备
+
+- checked_coordination_sha=69f32df1e1de7147a3d5e6fd1c40f99ba1c1e066；checked_at=2026-10-09T18:54:18.632591+08:00；已读research-dispatch-controller及原D1/R2实际合同/源码，无重叠。新合同raw/dual-ma-consumer-correction-2026-10-09/contract.json SHA00ccc8185d98e8037bf15d42e5db374223aa3b88362fecc785692d23aef3579b，方法独审接受；仅12账户一次纠错，新增收益标签0，原1/10窗口缺失的附属高点回落字段最多1窗。原132预算不变，新纠错独立累计。
+- Sol唯一implementation/继续账户适配，root新增唯一 d1/ 子目录用于保存状态/事件/辅助描述的独立纠错入口与小测试；不修改Sol范围。root合同/许可/计划范围不变。两阶段真实执行均0，源/代码/输出保护独审先于放行。
+- 新外盘计划已实测：设备UUID正确，内盘13047844864B/外盘593976098816B；先用稀疏树缺配置导致plan拒绝一次已留failure，无运行/输出，随后采用主仓固定策略计划通过。账户预估64MiB、D1 8MiB、本机各2MiB，非硬配额。
+
+---
+
 # 原Goal1必要纠错准备：已定位12受影响账户，旧预算不转借
 
 - checked_coordination_sha=d2f0080e65fdd2dde8f183e6630e252c852b4fdb；checked_at=2026-10-09T18:48:34.826950+08:00；已读task-id=research-dispatch-controller、原R1目录和正式账户原合同；原合同明确纠错后真实复跑须新主控合同。沿用户八目标“指出哪些旧结论受修复影响，并完成必要重算”授权准备新纠错，原132和原数值批均封存，不冒用它们的次数。当前账户重算0。
