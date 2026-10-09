@@ -1,3 +1,13 @@
+## V9 aroll-start
+
+- task-id: trend-trading-video；2026-10-09T16:07:33.258369+08:00；checked_coordination_sha: 9a290d92b5c5f37bcfe531b99a4f5dcab6f64965；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户问A-roll/B-roll能否结合，沿用已授权视频Skill更新。root唯一写者，读COORDINATION、自身、nasdaq-story-video-20261009、中控，无共享Skill重叠。
+- 范围：原Skill入口、motion-direction与storyboard三文件；ai_tools对应三文件、镜头模板、Prompt及manifest；本人进度。原分支基线55c2f172bae92d06f6f55c86745a4be4e74b33c3，ai_tools基线d626209f4d0e4b29997fc449cbc6a46de1121135。
+- 验收：区分通用主叙事/补充镜头和作者特定人物/知识映射；按语义选情境、证据、解释，禁止固定AB轮换或强制主持人；提供概念示例，不编造人物言行；保留无旁白与确认顺序。文档/指纹/远端读回，不做新片或新安装。
+
+
+---
+
 ## V9 motion-language-done
 
 - task-id: trend-trading-video；2026-10-09T15:59:51.550902+08:00；checked_coordination_sha: 75c2c06083c5cacfd48043c2a15d13d9969fbc9d；已读 COORDINATION.md、自身与 research-dispatch-controller。
