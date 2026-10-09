@@ -1,0 +1,87 @@
+{
+  "mission": "Stage C implementation only: original close-MAE20 descriptive study on accepted X; no real Y or future-price reads before separately reviewed parent grant.",
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/native-risk-d-mae-2026-10-07/immutable-handoff",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/src/lei_signal/research/native_risk_d_mae_inputs.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/src/lei_signal/research/native_risk_d_mae_real_x.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/real-x-seal-20261009"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/src/lei_signal/research/native_risk_d_mae_real_y.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/tests/unit/test_native_risk_d_mae_real_y.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/real-y-evaluation-20261009",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T122325-87e142670e36/result"
+  ],
+  "one_writer_per_file": true,
+  "max_agents": 1,
+  "network_allowed": false,
+  "executor": {
+    "model": "gpt-6-sol",
+    "effort": "high"
+  },
+  "output_plan": {
+    "schema_version": 1,
+    "task_id": "research-dispatch-controller",
+    "run_id": "research-dispatch-controller-20261009T122325-87e142670e36",
+    "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T122325-87e142670e36",
+    "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T122325-87e142670e36/result",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "estimated_bytes": 20971520,
+    "internal_metadata_bytes": 1048576,
+    "external_reserve_bytes": 10737418240,
+    "internal_reserve_bytes": 5368709120,
+    "execution_authorized": false,
+    "quota_enforced": false
+  },
+  "design_sha256": "ace132ddb89de3e45951148d9673524fa9fe448f662f2576221d216bbe9717c6",
+  "accepted_source_sha256": {
+    "stage_a": "5404b52f1e9ca2dc103eff37cabf51e52656d2737a8244bbb11fc2aeb63decb7",
+    "stage_x": "1a716db72ee4ba760926fd5a7734e0deaa0cf4dd6a3d0f32543c8c0ce9e4c00b"
+  },
+  "sealed_x": {
+    "directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T121052-8c15af8c4cb6/result/real-x",
+    "x_sha256": "6ae79d580fa98ba81b8f071d73e9eac0e3127ea8e66275967fecb1f218aa989a",
+    "receipt_sha256": "41ad1a478bc9e4f92566453d87bbff7c77c55f4cdcb5a39e2bdd5a652cbedac8",
+    "grant_sha256": "9e4be95562ac5f7a338ce00380328ec32532ace695177a5b25713e3a7fb2bcce",
+    "membership_sha256": "476bb769ba1556e8fdf76d7300ae6001f5760750fbf1db9c36be0c0e14ef6418"
+  },
+  "later_real_inputs_do_not_read_during_implementation": {
+    "prices": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/six-etf-x-only-input-package-2026-10-06/raw-six-ohlcv.json",
+      "sha256": "4e350efea9403dccb4bc4f7fcc66e22ea6bf3d6e72b0c044b9f44d631c78415f",
+      "schema": "object bars=[{asset,date,open,high,low,close,volume}]; 8022 rows; six assets; filter after2026-06-26 before path selection; saved economic price not executable quotes"
+    },
+    "calendar": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+      "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+      "schema": "schema_version research-trading-calendar/1.1; days maps ISO day to {is_trading_day:bool,source_flag:str,source_month:str};2495 natural days through2026-06-30; select trading dates<=2026-06-26"
+    }
+  },
+  "requirements": [
+    "Original ace132 native_workflow_contract=false: retrospective descriptive study, do not fabricate quoted/action_known/arrival fields or inherit native real-data qualification. Old synthetic workflow unchanged.",
+    "Reuse accepted X exactly, no new X/V pass. Strict separate parent Y grant ties final code/design/executor-contract/plan/X receipt+grant+completed ledger/sources/membership. Exact integer permissions Y1,maxcases75,maxfuture_close_observations1575,fits0,searches0,extra_windows0,auto_retries0. Root supplies only after independent review.",
+    "One fixed local Y ledger in this task raw; exclusive start consumes pass and failures retained, no output-switch retry. Plan result/tests for artificial checks, result/real-y final. Fixed external device/capacity/path/no symlink, exclusive creation and readback as reviewed X patterns; plan-only is not grant.",
+    "Price/calendar exact SHA and strict JSON. Canonical windows solely retained calendar+X window_metadata: t+1..t+21 inclusive,21 closes/20 intervals,cutoff2026-06-26. Validate ALL75 full positive finite paths before computing/publishing ANY Y; missing/mismatch blocks fixed run,76th unknown retained; no fill/shrink/change. Reject duplicate asset/date; never old natural-month fields.",
+    "Y=max(0,100*(1-min(path)/path[0])). Mature counts51005015/51030017/51050012/5124005/51280026. 588000 case:ded0d0c43677a76957f4 remains unknown. No cutoff extension. Save all76 rows/84members/source/pricebasis/dates/unknownreason/all75 selected paths for independent verification.",
+    "Original tied-rank Pearson rho(D,Y),rho(V,Y),signed difference on same completecases perasset. n>=2 and nonzero rankvariance;n2 flag;constant/empty null notzero. Global equalasset means on original fixedcommoncomputable set. All33 fixed asset/lifecycle deletions reuse savedY once; same originalassetset,missing correlation null/no reweight. No p/CI/bootstrap/fits.",
+    "Output perassetN/groupN/distinct D/V/Y counts,MAE mean/median/zero count,signedrho/difference,exactcoverage and globalfixedassets. Difference is not conditionalincrement or trading performance. Arrivalunknown/currentvintage economic prices/SZSEcalendar unverified proxy for SSE limits persist.",
+    "May port pure reviewed math from git b2f45151128baa1fe387cda85862d71cb01e1206:src/lei_signal/research/native_risk_d_mae_workflow.py; no archived executable import or old1754 rerun. Only new realY adaptation and affected artificial edges.",
+    "Artificial tests:21-not20/offbyone,lows ignored,initialclose0/nonfinite/missinglastclose rejectallbeforeY,unknowncutoff preserved,ties/constants/n2,fixedassetdelete null/no reweight,grant/source/member/output/ledger types,readback bytechange,no retry afterfailedstart.",
+    "Result/receipt bind all sources/X/grant/code/membership; save/readback outputs then completion ledger locks hashes. Root postrun review necessary; no effect claim yet.",
+    "Standard library only; A/X code frozen. No realY or futureprice reads by executor. Return invocation/grant fields/SHA/logs/failures; no commit/push/install/delete/helpers. Stop scientific ambiguity."
+  ],
+  "budget_used_by_executor": {
+    "new_X": 0,
+    "new_V": 0,
+    "new_Y": 0,
+    "fits": 0,
+    "future_price_reads": 0
+  },
+  "expected_outputs": [
+    "source and relevant artificial tests",
+    "readme/verification/failure evidence",
+    "fixed root-only invocation ready for review"
+  ]
+}
