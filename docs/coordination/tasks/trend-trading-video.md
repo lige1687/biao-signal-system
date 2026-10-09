@@ -1,3 +1,14 @@
+## V9 default-flow-done
+
+- task-id: trend-trading-video；2026-10-09T11:17:16.789817+08:00；checked_coordination_sha: 5b391feae6963ec5196e9fd31ec6564234363184；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed本轮分阶段流程页/默认配乐清单更新，scope_released=true（仅本轮两参考页）；成果codex/trend-history-long-v14-20261009@d480aaa68e88a20826eaada93f6f2028e9b268f8，5份准确路径远端逐字读回。文稿→可入片素材→正式风格图确认→15秒动态样例确认→全片；默认leyan原声。素材清单和分镜AI补齐，不新增素材逐项审批。
+- 已补素材与文稿段落对应、实际素材完整排版、代表性解释段含转场/音乐音效、批准版本复用、正常速度听审及长片接缝要求。原无品牌/无配音/外盘要求保留；两篇转载本轮直接重读相关段落，不称X评论或全部演示已核，不保证效率提升。
+- Skill quick_validate、当地引用与目录归置、准确差异检查通过。无新媒体、安装、删除或发布。入口SKILL.md和preproduction-workflow.md仍由nasdaq-story-video-20261009的11:08 active范围占用，本轮无覆盖；最新分阶段页明确当前默认值优先，入口同义合并待该负责人释放，不能宣称所有旧入口文字已经一致。此依赖保留，不把另一负责人active当scope已释放。
+- 交付前已重新fetch并读自身/nasdaq最新范围，dual-ma与中控此前同轮已读，无两参考页并写；本人唯一写者。不为流程新规则重做已交付V15。
+
+
+---
+
 ## V9 default-flow-start
 
 - task-id: trend-trading-video；2026-10-09T11:14:41.168147+08:00；checked_coordination_sha: 6074c6d4d4a0b32ea616513c9cd0dcc681e56ebf；已读 COORDINATION.md、自身与 research-dispatch-controller。
