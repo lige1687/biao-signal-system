@@ -1,3 +1,15 @@
+# C代码已接受；B仅待真实四路径批准
+
+- task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / awaiting_explicit_human_4_path_authorization；updated_at 2026-10-09T21:03:46.519689+08:00。Goal保持active，未标本批研究完成。
+- checked_coordination_sha=9eac3fa5fd0f463e4908ac43f73b5005a5b440e9；checked_at=2026-10-09T21:03:46.519689+08:00；已读COORDINATION、A/B/C、中控最新相关段。A inputs冻结/B唯一implementation及执行/C唯一独审及最终登记，范围不变，无共享表写入。
+- B最新codex/leisignal-risk-run-20261009@3a1795c235343e562b3fef211686f2ce010025f0，5新增/更新文件22785B远端准确SHA及逐文件字节核同。算法准确成果7164290d3fd33be35eae6439c7044ab4e9dd4d3b不变；新增C-review-reference.json、release-readiness.json及本任务交接更新。
+- C准确1e954fdc511092c1769fcaa5a6779d36eb7e0641的review/code-review-release.json SHA33a8e3d3d8df37b29cc0663a6d6806bb7b9626f1dcc97ca5617f002e3daaed15远端原件核同。C独立11定向/31身份项接受，B核修订4合同333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4、准确A、六代码及主/附加人工证据全部对应，旧核心和失败复用保留。此为独立代码接受，不是实际数值验收/用户批准。
+- 未改冻结合同/代码/输入。本地入口再次核权威/代码/证据后唯一拒绝为 explicit user four-path authorization missing。authorization.json仍not_granted、真实attempts不存在、真实比例/路径0；人工累计8（5完整组+3定向），原两路径耗尽不可借，其余禁止预算均0。
+- 本B对话已提出本合同四键各一次真实批准问题，当前没有明确人类答复；不能据C/中控消息冒批。范围510300/2026上半年/63共同日/A_ALL、A_SMA×base、stress，各一次，参数/10%标准不改。尚无实际结果或最终共享登记。
+- 恢复：保存真实人类批准原话/对话/处理时间/本合同/四键，再核同一storage-plan固定外盘身份与容量；B唯一各一次执行，失败保留计次数不重跑，准确结果位置/大小/SHA/次数Git交C。C继续独立实际核数/唯一归档。缺人类决定之外没有B可继续的必要实现修复；不创建定时器/跨对话消息。
+
+---
+
 # C-F01修复已发布，待C定向复核
 
 - task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / implementation_ready_for_C_targeted_review；updated_at 2026-10-09T20:54:56.419664+08:00。
@@ -90,10 +102,13 @@ checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2
   "dependencies": [
     "leisignal-risk-input-20261009"
   ],
-  "dependency_notes": "A inputs准确冻结已交付；C定向代码接受和人类4路径许可为开跑阶段依赖，尚未有。",
-  "stage": "implementation_ready_for_C_targeted_review",
-  "result_commit": "7164290d3fd33be35eae6439c7044ab4e9dd4d3b",
-  "checked_coordination_sha": "bfe0d2c17dd0b181e19c335311dd5b06ff751425",
-  "checked_at": "2026-10-09T20:54:56.419664+08:00"
+  "dependency_notes": "A准确输入和C准确完整代码接受均已绑定；仅缺本合同四键各一次人类批准，实际结果仍未有。",
+  "stage": "awaiting_explicit_human_4_path_authorization",
+  "result_commit": "3a1795c235343e562b3fef211686f2ce010025f0",
+  "checked_coordination_sha": "9eac3fa5fd0f463e4908ac43f73b5005a5b440e9",
+  "checked_at": "2026-10-09T21:03:46.519689+08:00",
+  "C_release_commit": "1e954fdc511092c1769fcaa5a6779d36eb7e0641",
+  "actual_path_attempts": 0,
+  "authorized_paths": 0
 }
 <!-- lei-coordination-json:end -->
