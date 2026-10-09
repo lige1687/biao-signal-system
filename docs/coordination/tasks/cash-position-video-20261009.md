@@ -66,3 +66,13 @@
 - http://127.0.0.1:53022/preview/index.html 实际打开并markDeliverable，默认暂停；两场景切换可见，用户可拖Player时间轴查看不同帧，完整网页截图制作记录/live-code-preview-full.jpg保留。仅本机、服务运行/外盘可用时有效，不是公开上传。
 - 公开文字/内容前置/归置通过；原图2已有画面验收复用。图1不在改动范围。沙漏时间为概念，不定义买入；无新生图/安装/删除/新金融结论。
 - 未把代码能动当正式样例完成：跨场景转场、阅读节奏和配乐仍待按本期确认后的15秒阶段完成；static_approved=false，sample_approved=false，未渲染MP4/全片。
+
+## v03静态认可，15秒样例开始 2026-10-09T23:40:18.414082+08:00
+- status: active；stage: sample_production；scope_released: false；owner: root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c，唯一写者。
+- checked_coordination_sha: 6e619f13b640d4ec10069f67bcd69b84eff8fac3；checked_at: 2026-10-09T23:40:18.414082+08:00；已读自身、trend-perspective-video-20261009最新复盘/停点及此前nasdaq-story-video-20261009、trend-trading-video、personal-quant-video-render-preview-rule、dual-ma-video-copy-20261009、system-x-video-ideas-20261009、research-dispatch-controller和COORDINATION1.1。最新增量仅独立趋势片任务，无范围冲突。
+- 用户原话：“可以给我样例试看看了。”紧接v03实际代码帧与实时Player，认可当前场景方向并授权15秒动态样例，不授权全片。样例未获确认。
+- scope: 外盘视频库/投资心态/20261009-cash-position/v04-15s-sample 新目录；保留v01-v03；本机仅既有external-location.json与work-progress小索引。无共享Skill/系统/研究修改。
+- baseline: codex/cash-position-video-20261009@8b5bedd77288d2b2884aaa605454150caa8bf759；v03/project/scenes.tsx SHA256 8fa51d8e9fb111555f5b3a996945816ecf345a6936d78bdcba679994d9923cc9。
+- 预期结果：1920x1080/30fps/450帧实际MP4，用连续资金移动和同一纸张展开连接仓位决定与行动准备；原leyan音乐、原创轻音效、无旁白。中段复杂动作/主体承接/文字阅读为验收重点，完整解码与浏览器15秒正常播放另核。
+- storage: 2026-10-09T23:36:17+08:00 UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok=true，外盘593137369088B，本机15406342144B；预计新增外盘<600MiB，本机索引<128KiB，依赖不安装。音乐SHA已重核匹配。
+- next: 同源组件编排连续15秒、核转场帧、渲染混音并实际播放。用户审美待验收；本轮不发布或制作全片。
