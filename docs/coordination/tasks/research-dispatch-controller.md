@@ -1,3 +1,14 @@
+# 2026-10-09 原件恢复已完成并核验（本轮最新）
+
+- task-id research-dispatch-controller；owner 01a116c7-3700-7062-a6c6-53af00ef60a0；checked_coordination_sha: 08c1a133758c1521822c57b7e31ad50a395812ff；checked_at: 2026-10-09T11:45:45.798787+08:00。已读本任务、technical-factor-sequence、risk-shape-information与COORDINATION；仅自己记录和外盘唯一目录写入，无共享代码/登记簿冲突。
+- 用户所需D六冻结原件已从原官方Library取回，六SHA全部等于ace132合同；Qlib一次训练原包和14项原输入也补回，55包文件及99键预测保存证据经Sol/medium独核。D由Astra/high只读独审，原件恢复通过但真实适配尚需接续。
+- 成果codex/research-direct-20261008@120f320af15a5f553d00ca64ef85d6b4080e0204的四份小证据已逐字远端读回。入口docs/experiments/raw/research-dispatch-controller-2026-10-07/original-recovery-20261009/recovery-manifest.json；同目录两份独审。四个原ZIP共6463070字节，实际保存及解包在登记外盘；Browser默认Downloads小副本保留未删。
+- 状态：本次原件恢复/保存证据验收completed；不是八目标全部完成。D不再缺六原件；旧人工入口不得用artificial_only=true接真数据，后续做真实格式/外盘路径/身份适配，仍遵守原X/Y分别许可。Qlib历史1fit/2predict预算已经耗尽，不重跑。真实标签/新拟合0。
+- 原外盘文件名及107归档索引没命中后，改查可正常访问的官方资料库成功，未绕行旧403。原失败和缺件快照保留为历史，不再当当前阻塞。
+- leisignal已按用户要求删除且保持关闭；本轮按用户直接请求执行。仅原八目标，运营、内容、个人清理均不接管。旧13本机原件原本存在，仅公开传播受限，不是本地缺件。
+
+---
+
 # 2026-10-09 原件恢复（用户本轮授权，active）
 
 - task-id: research-dispatch-controller；owner: 01a116c7-3700-7062-a6c6-53af00ef60a0；checked_coordination_sha: e74120b276c4f65fef328d8b3fce12a39f115a00；checked_at: 2026-10-09T11:37:39.212749+08:00。
