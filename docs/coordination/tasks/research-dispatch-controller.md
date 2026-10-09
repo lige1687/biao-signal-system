@@ -1,3 +1,11 @@
+# 资金负结果归档远端核验；登记窗口释放
+
+- checked_coordination_sha=0c1f65fd42e09d07911c7a6dd3eb9a4ee8a3fdf5；checked_at=2026-10-09T16:54:24.094669+08:00；本次fetch无变化，沿已读本任务与相关研究共享范围。成果codex/research-direct-20261008@ac38847e79904e0560eba45c481847c7061974cd的36准确路径逐字远端一致，1082223B小源码/记录含继承的定义表；完整现金结果仍只在固定外盘。
+- cash-risk-comparability-2026-10-09.md已独审归档，主642/隔离217，各新增一条；其他原条目字节/INDEX原文保持，归置通过。scope_released=true：释放registry/INDEX和本次definitions写入，root不长期占共享表。两路径固定方法未达10%风险匹配标准，负结果结案，不宣称原Goal5或八目标全完成、不重调比例或重跑。
+- 当前唯一研究执行者Sol仅新structure_persistence_comparison.py及专属implementation；Astra现金独审completed可复用为下一实现独审。两结构定义及19源已核、registered draft不等于有效；真实结构特征/标签/结果仍0。下一步按固定预算代码→无Y资格→核心比较→独审归档。root仅自身合同/读回/state/进度与必要受控运行，不接管其他任务。
+
+---
+
 # 风险对照两路径真实完成并独审：归档单项窗口
 
 - checked_coordination_sha=f4794ab4946ba7de928f3eaaccd14f43df3c6900；checked_at=2026-10-09T16:51:14.994003+08:00；读自身/report-library-integration-20261008已释放，协调增量只核共享写入范围字段，不接收或验收运营成果。未发现registry/INDEX当前写者。root唯一单项归档，Astra只读结果审查completed，Sol仍仅两结构新模块实现。
