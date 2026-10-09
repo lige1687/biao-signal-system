@@ -1,3 +1,11 @@
+# 原八目标连续推进纠偏：其他机会特征与多周期准备并行
+
+- checked_coordination_sha=b2a78e2ba5874cd66611a67aba8b5f3d449273fd；checked_at=2026-10-09T17:52:24.881100+08:00；已读COORDINATION、本task、technical-factor-sequence、lei-technical-reader-research、theory-workflow-system-increment相关研究范围。原交接明确D后接结构/支撑压力/筹码/多周期，用户本轮再次要求继续因子与任务；两已结小问题停止不等于八目标授权结束。get_goal本轮实测active，不沿用旧blocked快照；定时仍删除。
+- 本轮两个具体并行准备问题：Sol核既有支撑压力/密集成交代理对象、旧实验/来源，选一个原Goal3已授权且未测的机会质量问题，并绑定可用输入；Astra核日→周当前缺口、现存日期及120周链能否安全限定回顾用途，给出最小可执行多周期合同或精确必要补件。两者均仅自身新小准备文件，不运行旧或新X/Y/拟合，不新取数、不改生产/策略/共享入口，预算历史不重置。root回调后必须实际接续有条件的实施或补件，不能再把准备当终点。
+- 唯一新增小记录范围：隔离工作树docs/experiments/raw/research-dispatch-controller-2026-10-07/remaining-opportunity-research-20261009/；Sol独占candidate-selection/，Astra独占weekly-input-readiness/，root只其父目录合同/验收及原state/进度/本task。已封存现金/两结构/PPO/P26不重算；registry/INDEX/definitions仍释放。原其他owner代码只读，若必要适配另登记准确新路径和新合同。大结果仍须固定外盘真实预检。
+
+---
+
 # 两结构描述比较独审归档远端闭合；共享窗口释放
 
 - checked_coordination_sha=22a2adb808af49dfd9a377b1b391f4be912ef8db；checked_at=2026-10-09T17:20:37.830177+08:00；沿本task与已读研究owner范围，增量仅无关文件名。成果codex/research-direct-20261008@e942c4223f5520607f0b9208d972d9d0ac1ea3d1共31准确路径398107B逐字远端核验。主registry643/隔离218仅一新项，原字节/INDEX保留，归置通过。scope_released=true：registry/INDEX/definitions全部释放；Sol/Astra completed，0运行研究进程。
