@@ -1,3 +1,12 @@
+# 原Goal1必要纠错准备：已定位12受影响账户，旧预算不转借
+
+- checked_coordination_sha=d2f0080e65fdd2dde8f183e6630e252c852b4fdb；checked_at=2026-10-09T18:48:34.826950+08:00；已读task-id=research-dispatch-controller、原R1目录和正式账户原合同；原合同明确纠错后真实复跑须新主控合同。沿用户八目标“指出哪些旧结论受修复影响，并完成必要重算”授权准备新纠错，原132和原数值批均封存，不冒用它们的次数。当前账户重算0。
+- 只读映射已证明6资产政策×2费用=12/132：510300 S20/D20，159915 S60/D60/S120，588000 S60。其他120复用；54/432配对、24/162政策判断、18/27跨产品支持依赖这些行，尚未预判纠错结果。D1 Q60移动起点已有同窗保存Y可复用，Q20主表及非重叠效果不重算，辅助状态描述需传播。
+- 唯一实现者Sol/medium新范围：隔离工作树 docs/experiments/raw/dual-ma-consumer-correction-2026-10-09/implementation/，只写独立旧版适配器、针对性人工检查、源绑定/准备回执；不改旧driver/core/原结果/生产/共享表。root写同新目录父级contract/release/attempt/外盘计划以及原trace记录；方法独审者只读。全部科学/账户真实执行在root核合同、来源闭包、外盘与一次许可后，不因准备开写而放行。
+- root后续原目录补注的对应registry仅该catalog键的SHA/摘要/证据阶段一起更新，其他条目保持；没有新增指标/阈值/资产/时期或用户风险偏好。
+
+---
+
 # 日周归档远端验收；接续R1准确消费者追溯
 
 - checked_coordination_sha=ac460972175ac1681becc5fa5eadd5271f3457d6；checked_at=2026-10-09T18:40:32.135211+08:00；已读task-id=research-dispatch-controller及沿原目录R1研究记录，最新无关文件名变化无路径冲突。日周成果codex/research-direct-20261008@35058fbf98a27754e35dc7ea35556a88187d2678的37文件远端SHA与内容读回一致，主registry645/隔离220，归置检查通过。scope_released=true：registry/INDEX/definitions释放。
