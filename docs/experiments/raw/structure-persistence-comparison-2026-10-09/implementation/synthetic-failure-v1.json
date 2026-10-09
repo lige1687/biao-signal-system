@@ -1,0 +1,8 @@
+{
+  "attempt": 1,
+  "status": "failed",
+  "command": "PYTHONDONTWRITEBYTECODE=1 python3 synthetic_checks.py",
+  "source_sha256": "fb048f0fa1f212450e8c72e11dc7be09da456ce2dd65352c0b510f7b11605402",
+  "failure": "check_target_and_support expected downside_pct == 20.0; actual contract formula denominator C[t+1]=99, minimum C[t+21]=79, so 100*(1-79/99)=20.202020... . The synthetic expected value was wrong; implementation formula unchanged.",
+  "scope": "hand-made synthetic only; no historical panel read"
+}

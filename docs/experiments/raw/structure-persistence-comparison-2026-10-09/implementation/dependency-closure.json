@@ -1,0 +1,81 @@
+{
+  "schema": "structure-persistence-dependency-closure/1",
+  "scope": "local Python imports in pinned detector/indicator modules; source-bindings.json covers primary files and rules",
+  "python": "3.11.7",
+  "packages": {
+    "pandas": "2.3.3",
+    "numpy": "2.1.1",
+    "PyYAML": "6.0.3"
+  },
+  "files": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/domain/__init__.py",
+      "sha256": "6607ab27da936dd7ce98fdf35bc5d0821936c682a5138ebd7bb48fd9b5d683e5",
+      "bytes": 901
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/domain/canonical.py",
+      "sha256": "3e406f77dfa3f03c7ff4d2fe1989dd117a47e448d137d5ccce76d61864ee06a9",
+      "bytes": 6941
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/domain/types.py",
+      "sha256": "88ea22c7100068d8be9e50a342e024fb18aadc7139409aeae71f3bc1719dffd9",
+      "bytes": 8142
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/events/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/events/log.py",
+      "sha256": "b71c4c09405ee67f4d16a1c0d22dbd098ffb5078433184a9e7eb39a006e961fa",
+      "bytes": 5630
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/features/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/rules/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+      "sha256": "aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95",
+      "bytes": 13049
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "role": "package_import"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/storage-policy.v1.json",
+      "sha256": "dbdcc8af8bd5f1d6be7ce5262e10d21177a4c4faae97d4a4d2aeda900877d4dd",
+      "bytes": 546,
+      "role": "output_storage_policy"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/research-output-policy.v1.json",
+      "sha256": "0006daced0029e0ec87e1d69012c58d2b4d20e5b56f64a65a50406861fbb8d8c",
+      "bytes": 1441,
+      "role": "output_storage_policy"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/storage-resources.v1.json",
+      "sha256": "3dbf4794a52bda23386035dc5ff4f5bc6cc0f5dfffe52ab04eb3bb19ecf7c174",
+      "bytes": 1936,
+      "role": "resource_authority_not_direct_import"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "status": "blocked_before_real_execution",
+  "reviewer": "/root/original_cash_package_review",
+  "reviewed_module_sha256": "59523945e28f850e1c9e8a46dd134fc56beb84e97b7fe9da124868f0f9be4fec",
+  "counterexample": "root at bar250, lower top at251, bar252 should carry same episode and active candidates; code skipped all state transitions before252",
+  "contract": "Process from segment start, limit evaluation eligibility separately",
+  "dependency_gaps": [
+    "research/__init__.py",
+    "configs/storage-policy.v1.json",
+    "configs/research-output-policy.v1.json",
+    "configs/storage-resources.v1.json as resource authority"
+  ],
+  "real_features": 0,
+  "real_labels": 0,
+  "real_effects": 0,
+  "repair_owner": "/root/b1_saved_evidence_review",
+  "additional_guard_failure": "build_effect validates mode after attaching targets/effect table; must reject missing/invalid mode and estimate panel path before any Y",
+  "warmup_reproduction": {
+    "bars": 253,
+    "day0": "2024-01-01",
+    "high": "i<248:200; else199-(i-248)",
+    "low": "high-2",
+    "open_close": "(high+low)/2",
+    "nodes": [
+      {
+        "index": 249,
+        "reference_index": 247,
+        "reference_price": 200,
+        "trigger": 197,
+        "final": 196
+      },
+      {
+        "index": 250,
+        "reference_index": 248,
+        "reference_price": 199,
+        "trigger": 196,
+        "final": 195
+      }
+    ],
+    "ema": "first19 null then199",
+    "warmup": 252,
+    "expected_first_eligible": "same root249, both values1"
+  }
+}
