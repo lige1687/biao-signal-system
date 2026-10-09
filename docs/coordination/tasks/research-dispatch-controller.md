@@ -1,3 +1,12 @@
+# 两结构一次真实描述比较完成：独审与单项归档窗口
+
+- checked_coordination_sha=b9bc2b1a7b12d041b14baa47a8219c22e43f5517；checked_at=2026-10-09T17:14:39.374198+08:00；自身及原研究owner范围沿读，新增仅无关文件名。Sol已冻结停止；Astra仅保存结果独立复算。修复三项定向核验通过后，root实际1feature、1label、1effect，0拟合/下载/重抽，原失败保留。
+- 资格58d26564真实5348行；评价597ETF日/265日/75段，21共同格528行，仅7/8资产时期支持。科创50H1逐根状态成熟行0；看Y前决定describe_only，完整主比较insufficient。标签2333含早期1736只作背景、评价597；effects78bd2cb4、target ab078200在固定外盘，独审未完不冒称验收。
+- root唯一新归档范围：主/隔离docs/experiments/structure-persistence-comparison-2026-10-09.md；主/隔离新raw/structure-persistence-comparison-2026-10-09小设计/源码/失败/attempt/位置镜像（大5MB表均外盘）；主/隔离registry仅该报告一key及INDEX一行，其他原字节保留。原source模块仅隔离研究工具路径，主生产源码不改；definitions不更新以免执行绑定漂移。独审通过才标completed，窗口完成立即释放。root自己的approved-comparison/进度/state继续。
+- 不追加候选/期限/参数/资金路径，不为资料缺口删除资产，不推广生产。此次现金负结果与结构有限描述均不代表原八目标全完成；定时保持删除。
+
+---
+
 # 真实运行前阻断修复：预热内结构状态
 
 - checked_coordination_sha=fcf0b0f4212cde6cefd9987c7ea5a375f84fc99a；checked_at=2026-10-09T17:06:02.223975+08:00；已读本任务，增量仅范围核对。Astra合成发现252根前跳过状态推进，与冻结设计不符；feature/label/effect仍0，保留反例。
