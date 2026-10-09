@@ -1,3 +1,13 @@
+## V9 default-flow-start
+
+- task-id: trend-trading-video；2026-10-09T11:14:41.168147+08:00；checked_coordination_sha: 6074c6d4d4a0b32ea616513c9cd0dcc681e56ebf；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户再次确认每期默认流程为文稿/内容探讨→可入片素材→正式风格图确认→15秒样片确认→完整片；leyan原声改为默认。仅更新 references/staged-workflow.md、references/music-candidates.md、自身最小记录/进度。成果基线4a8151cd9a053b1eab0a81c40a4514ca4d7bc035，成果分支沿用codex/trend-history-long-v14-20261009。
+- 已读自身、nasdaq-story-video-20261009、dual-ma-video-copy-20261009、中控及规则。nasdaq当前active声明入口与preproduction-workflow.md，本轮不写这两文件；两参考页原负责人已释放且当前无并写，本人唯一写者。用staged-workflow最新用户确认说明作为默认流程权威，旧入口差异记录待其负责人释放后合并，不覆盖其他任务增量。
+- 验收：已有内容/确认不重问；实际素材与文稿对应、三类实际画面、代表性15秒含解释/转场/默认音乐音效；无配音/无品牌/外盘保留。来源复用昨天复查并核转载，不当作者原prompt；不制作新视频/不读取媒体/不发布。
+
+
+---
+
 ## V9 music-swap-done
 
 - task-id: trend-trading-video；2026-10-09T11:03:37.317703+08:00；checked_coordination_sha: da81e4d5b5219f62fe81da7c1cb4089a94a27188；已读 COORDINATION.md、自身与 research-dispatch-controller。
