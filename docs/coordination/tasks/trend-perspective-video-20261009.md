@@ -1,3 +1,16 @@
+# 最新状态：追加原片“入场与持有”15秒样例
+
+- task-id: trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；active / entry-holding-sample；scope_released false。
+- checked_coordination_sha: 4f3263125d88acf8c471172241e71503577af685；checked_at: 2026-10-10T00:34:30.313627+08:00；已读COORDINATION1.1、自身、此前cash-position与dual-ma最新独立范围、risk-run/review本轮补注与research-dispatch-controller；新增只涉及独立研究归档，无媒体或Skill重叠。
+- 用户原话：“以及我们这个其他片段呢？搞一个样例看看呢？”本次只做原稿“加速时不追入，与已经持有是否退出要分别判断”，15秒；v06未获明确审美认可，不推断全片批准。
+- 基线codex/trend-perspective-video-20261009@1b4f1f36280c53e10cd60156cfdb8a5ea29a2fbe。写入新外盘视频库/趋势交易/20261009-trend-perspective/v07-entry-holding-sample；本机仍仅自己的原定位索引、工作进度、此协调记录；旧版本只读。
+- 复用原真实科创50OHLC、已确认炭黑哑金K线风格、Remotion环境及原指定音乐；同一价格先推进再分成两个同步视角，分别提出入场/退出条件问题，不给买卖指令、不重讲双均线。
+- 验收：450帧1080p30fps、同数据同截止日期、无未来K线/合成影线，至少连续分屏转场、可读短句；原数据/实际实帧/正常播放/解码/工程包核验。用户观感独立待确认。
+- storage 00:33固定UUID核可用：外盘592698146816B、本机12794830848B；预计外盘新增<250MiB、本机小记录<128KiB，沿原环境，不安装/购买/发布/改Skill或交易规则。
+- 下一步交付这段15秒和工程；其他制作边界保持。
+
+---
+
 # 最新状态：原片15秒样例v06已交付，待用户观感确认
 
 - task-id: trend-perspective-video-20261009；owner: 01a12111-3544-7250-822d-056b7379704b / root；唯一写者。
