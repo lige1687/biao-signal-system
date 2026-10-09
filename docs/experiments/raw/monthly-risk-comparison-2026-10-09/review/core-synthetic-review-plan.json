@@ -1,0 +1,51 @@
+{
+  "reviewer": "01a1208d-49ba-7972-9fa1-b47d7d5749b7",
+  "task_id": "leisignal-risk-review-20261009",
+  "prepared_at": "2026-10-09T20:22:05.507779+08:00",
+  "B_commit": "67970c2635d49ba552c27fb236e59bcd98e32160",
+  "B_source_path": "docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/monthly_account.py",
+  "B_source_sha256": "b9e06c8a4c7b9291c3658747189bd80ff4a3a3ee8274c96d6986bcec80815bb9",
+  "scope": "core functions only; no historical IO, no B tests rerun, no driver release",
+  "cases": [
+    {
+      "id": "four_predeclared_cash_examples",
+      "expectation_source": "C preparation-evidence.json written before B delivery"
+    },
+    {
+      "id": "artificial_63_prior_dates_prefix_and_independent_stdev",
+      "expected_A_ALL_ratio": 0.3,
+      "expected_A_SMA_ratio": 0.6,
+      "expected_observations": 63,
+      "first_period": "2026-01",
+      "future_values": "unreadable",
+      "independent_expectation": "statistics.stdev on separately computed returns"
+    },
+    {
+      "id": "nontrading_previous_natural_denominator_and_missing",
+      "expected": "Monday uses Sunday wealth, deleting Sunday is rejected"
+    },
+    {
+      "id": "monthly_sell_and_retained_income_without_daily_rebalance",
+      "input": "cash10000 fee0.001, Jan ratio0.8, Feb0.2, constant price10",
+      "expected": "Jan+800 fee8; Feb-700 fee7; terminal cash8985 units100 wealth9985"
+    },
+    {
+      "id": "same_day_dividend_not_fundable_at_open",
+      "input": "cash10000 fee0; Jan ratio0.5 buys500 at10; recordJan30; ex/payFeb2 perunit1; Feb1.0 open9",
+      "expected": "Feb preopen cash5000 receivable500, target1100, can buy500 rather than600; afterpay cash1000 units1000 wealth10000; no nextday refill"
+    },
+    {
+      "id": "metrics_independent_hand_values",
+      "input": "initial100; Jan1wealth100 trading, Jan2wealth90 trading, Jan3wealth100 nontrading, Jan4wealth110 nontrading",
+      "expected": "trading sigma0.1/sqrt(2), maxdrop-0.1, worstday-0.1, longest2days, recovered at end"
+    }
+  ],
+  "real_budget_used": {
+    "new_paths": 0,
+    "original_A_replays": 0,
+    "new_signals_or_labels": 0,
+    "downloads": 0,
+    "fits": 0,
+    "parameter_scans": 0
+  }
+}

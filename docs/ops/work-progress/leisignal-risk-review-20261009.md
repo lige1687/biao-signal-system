@@ -38,3 +38,11 @@ task-id：leisignal-risk-review-20261009；负责人/会话：01a1208d-49ba-7972
 - 方法预审、绑定凭据、归置失败记录与本进度4文件、61207字节在codex/leisignal-risk-review-20261009@f6aceec0d0dcead4d65bcaba0be6a4e2f321ba7e，准确远端ref与四文件逐字相同；回执review/preparation-publication-receipt.json。
 - 交付前重新fetch coordination，checked_coordination_sha=7cdac9c962b908e1be8bc3f6bd77a0ce5a833580；已读A/B/C全文及中控最新恢复段。A/B仍准备、尚无manifest/实现交付，不能进行代码或真实数值验收；没有共享写入重叠。
 - 当前状态method_prepared / awaiting_A_B。恢复先读两task的准确成果引用，然后按method-preflight逐项审查；Goal保持active，未标完成或擅自暂停。
+
+## 2026-10-09T20:25:04.298587+08:00 B第一阶段核心独立审查
+
+- 本轮checked_coordination_sha=663521ec2018403f5a8a8a99eec928e9f820838a，核读A/B/C及中控相关记录；范围注册9170fcdc74b674efdfaeabea9794817430ae30f2远端逐字核同。
+- 固定B成果67970c2635d49ba552c27fb236e59bcd98e32160的核心源码SHA b9e06c8a4c7b9291c3658747189bd80ff4a3a3ee8274c96d6986bcec80815bb9；C独立六组人工检查通过，金额、分红、月度次数、63共同日/自然日分母和统计均核实。未重跑作者9组或真实账户。
+- 状态core_arithmetic_accepted_pending_full_driver_review，非完整code_review_accepted；numeric未验。核心文件没有C修改。
+- 具体给B整理：人工一次账本synthetic_runs=0/failures空与两次实际回执不符，补记准确2次及初版失败链接，不重跑、不改真实预算。完整驱动须另核官方月末/63来源、A版本/年末状态、许可/4键一次保护和外盘；跨期/非分红分支以A实际覆盖裁定。
+- 书面复核和证据：review/core-code-review.md、core-synthetic-review-plan.json、core-synthetic-review-evidence.json。全部实际历史预算仍0；无完整运行许可或正式归档。
