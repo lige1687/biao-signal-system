@@ -1,3 +1,17 @@
+# 方法预审准备已交付，尚待A/B依赖（2026-10-09T20:18:04.271539+08:00）
+
+- task-id: leisignal-risk-review-20261009；owner: 01a1208d-49ba-7972-9fa1-b47d7d5749b7；status: active / method_prepared / awaiting_A_B。
+- checked_coordination_sha: 7cb3d9a0dd044ab09698ffe47eaa700dbccde936；checked_at: 2026-10-09T20:18:04.271539+08:00；已读COORDINATION1.1、research-dispatch-controller最新恢复统一调度段、A/B/C任务全文；冲突决定：三个唯一写者不变，C仍不占registry/INDEX/catalog窗口。原中控现恢复三对话协调是用户在其对话确认的新安排，旧休息段保留为历史，不据调度取得额外科研或发送权限。
+- 成果分支codex/leisignal-risk-review-20261009；方法准备提交f6aceec0d0dcead4d65bcaba0be6a4e2f321ba7e，4文件61207字节全部远端ref和内容核同；最新准备回执/接续进度提交cd7b26b2a17cf461136b7c6c1cd29efd04388a81，两文件亦远端核同。
+- 可直接阅读：docs/experiments/raw/monthly-risk-comparison-2026-10-09/review/method-preflight.md；preparation-evidence.json；preparation-publication-receipt.json；docs/ops/work-progress/leisignal-risk-review-20261009.md。方法预审仅接受有边界问题/固定标准及独立核数方式，不是implementation accepted或真实执行release。
+- 已固定：63共同有效交易日/前一自然日完整资产/基础费计算两档共用比例/月末截止/次月首次允许开盘/分红付款日收盘可用/整手含费现金限制/跨月替代/一次保护/两费共同匹配/其他风险与历史局限；四个独立手算期望保存。
+- 实际预算仍全部0：新路径、原A重放、信号/标签、下载、拟合、扫描。4条真实额外路径依然待B保存用户明确许可；未发运行批准，不借旧2额度。
+- 检查失败保留：部分发布基线不含现行checker，直接调用退出2；只读使用主仓原checker检查此完整旧树退出1，有298项旧基线问题，本批新增路径违规0；主仓实际检查退出0。review/hygiene-preparation-check.json保存全部旧违规/源码身份/适配说明。不能声称独立分支全绿；不通过删除或改白名单弱化标准。正式归档须核真实交付位置及限制。
+- 输入/代码/实值仍未验：最新A/B记录尚无inputs_ready或implementation_ready_for_review成果。阻止后续核心验收的是未到交付和真实许可，不是准备复杂度。恢复只需A/B准确manifest、代码commit/合成证据/一次保护，C据固定检查只向B给具体修复；真实结果到后独核保存动作，不跑另套策略。
+- 本轮准备已完成，最终研究/归档仍未完成；Goal active。无后台循环或定时器，不承诺退出回合后自动读Git；必要依赖到来时接续原Goal和累计0预算，不重建任务。
+
+---
+
 # 月度风险对照：C 独立验收与唯一归档整合
 
 - task-id: leisignal-risk-review-20261009；owner/session: 01a1208d-49ba-7972-9fa1-b47d7d5749b7；本机Mac，Asia/Shanghai。
