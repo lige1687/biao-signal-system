@@ -2,8 +2,8 @@
 
 - task-id: mac-local-storage-cleanup
 - owner: 01a1155d-b204-7232-a993-4c9e0567af59 / root
-- status: completed（本批旧微信迁移核验完成；只读巡查独立保留）
-- updated_at: 2026-10-09T02:37:06.446526+08:00
+- status: completed（清理最终审查完成；用户要求的存储定时巡查已暂停）
+- updated_at: 2026-10-09T10:36:14.898576+08:00
 - checked_coordination_sha: 508f8ccb1d81648ba617e0dea0f4de32cc142621
 - checked_at: 2026-10-08T23:02:17.229573+08:00
 - read_task_ids: mac-local-storage-cleanup, research-dispatch-controller, daily-trading-system-audit, trend-trading-video, external-learning-x-review
@@ -222,3 +222,19 @@
 - 课程仓库完整内容/metadata仍与原清单一致，HEAD不变；初期“两处修改”指2个已跟踪文件，另7个未跟踪文件也都保留，最终完整清单78文件对照通过。当前xwechat_files/app_data与课程repo原inode读回一致。原仓库祖先保留，不软链接活动DB、不改微信设置；恢复必须先解包到有足够余量的内盘空目录，核内容后处理旧版兼容，不覆盖现有新资料或课程代码。
 - 恢复包/私有原件/manifest/接续回执/最终验收摘要只在已核盘个人资料归档第十一批003826，不Git；本机小恢复json已改完成状态，旧设备缺失/占用/失败均保留历史。归置通过，4注册外盘资源可读；每小时只读巡查规则不改，不无人值守删除、不恢复旧提醒。
 - 本批已授权范围验收完成，未启动后台复制/删除，也无未处理单元。源成果仅本进度文件准确发布；其他所有共享源码、索引/HEAD、活动实验与他人任务保持原安排。
+
+
+## 定时巡查关闭与最后审查 2026-10-09T10:36:14.898576+08:00
+
+用户要求“定时任务可以关了哈，然后最后审查一下哈”。本聊天automation-7已通过应用工具暂停，持久化状态PAUSED读回；没有改其他自动化。最终只读审查完成，无新增删除、迁移、科研或应用停止。
+
+- checked_coordination_sha: 2e30ca2d1e24f14ed0de4a9189a5c47fa62aef67；checked_at: 2026-10-09T10:36:14.898576+08:00；已读COORDINATION1.1、自身及research-dispatch-controller；唯一root只写自身进度和任务记录，不触及其他源码、配置、registry/INDEX或冻结raw。
+- 十一批正式完成回执复用；所有登记归档目标仍在，历史失败和恢复说明保留。第三批MIGRATION_COMPLETE_SPACE_RECLAIM_PENDING是归档完成但当时物理容量未增加的历史记录，不追加清理系统快照。第八/九批是用户明确丢弃缓存和旧日志的记录，没有伪称存在恢复副本。
+- 第十一批归档尺寸23171741696B与完成记录一致；复用先前完整内容核验，本次不重复扫描大型TAR。783源路径及全部holding不在，当前微信两资料目录与课程代码目录inode一致；78保留文件逐个SHA/大小与原完整清单一致，Git HEAD一致。当前版微信导入旧记录未验证，恢复先读外盘说明、不覆盖当前资料。
+- 本机可用14646534144B约14.6GB，仍低于15GiB建议值；外盘615715700736B约615.7GB，固定UUID/4项资源路径正常。容量会变化，不以本次值重算累计释放量。
+- 后续大结果默认外盘规则与已登记10入口维持原验收；旧进程和第三方程序未宣称全部重定向。Marvis安装包未获明确批准，原位保留。活动数据库、环境、会话、工作树、冻结raw、当前日志和系统快照仍保护。
+- 私有证据data/cache/mac-local-storage-cleanup/final-storage-review-20261009.json，continuous-storage-latest.json记录PAUSED；不将私有清单提交Git。清理阶段completed，存储巡查按用户要求paused；无需自动继续，未来只在用户主动要求时接续。
+
+- 交付前协调增量复查：checked_coordination_sha: bbb54e93dce933083eeda55a2ea22dc613780c81；checked_at: 2026-10-09T10:37:03.484001+08:00；已读trend-trading-video最新增量，仅该owner记录更新，自身记录与上次基线逐字相同。初次普通推送因远端前进被拒，未强推；保留新基线后重建自身单文件提交。进度成果7c37c1fc33180f19ab993988b8cc1a40c69938bf已远端逐字核验，归置检查通过。
+
+- 最新交付复查checked_coordination_sha: ab8e0675da29652be57aa8b53a631f3f4bc8b16a；checked_at: 2026-10-09T10:37:53.313838+08:00；已读trend-trading-video和dual-ma-video-copy-20261009增量，两项只更新原owner文稿/音乐范围，没有本存储任务重叠。第二次非快进同样未强推；基于已核新树保留其他owner全部记录。自身迁移进程0、PAUSED及最终审查通过状态读回。
