@@ -1,3 +1,13 @@
+# 2026-10-09 真实X已独验，Y实现范围登记
+
+- checked_coordination_sha=b843f7b7b7849b15981242c5c3ca0b9b2e8ae800；checked_at=2026-10-09T12:25:26.983528+08:00；已读COORDINATION、本任务和classic-factor-research，内容与已核版本未变，范围外仅文件名核避重。原研究负责人释放范围，无同文件写者。
+- B实现/独审/父级X许可已在codex/research-direct-20261008@86463bd1发布并十文件逐字读回。X于12:20完成一次，成果SHA6ae79d580fa98ba81b8f071d73e9eac0e3127ea8e66275967fecb1f218aa989a，回执41ad1a478bc9e4f92566453d87bbff7c77c55f4cdcb5a39e2bdd5a652cbedac8，账本started/completed双SHA。Astra独立复核76项V最大差8.22e-16个百分点，原D及76/84/33成员不变。X1/V1已用，不重跑；Y0。
+- 新范围仅src/lei_signal/research/native_risk_d_mae_real_y.py、tests/unit/test_native_risk_d_mae_real_y.py及自身raw/real-y-evaluation-20261009；外盘research-dispatch-controller-20261009T122325-87e142670e36/result（tests/real-y分开）。原Sol唯一实现写者，root合同/许可/账本/验收；A/X源码冻结，不占registry/INDEX。
+- 合同SHA2cabfc4f614921fa4cc80161e2ebabebd36c1eb74944ef20c1ba32fde59183a3；严格ace132原描述研究（native_workflow_contract=false）。75完整21收盘路径、76th未知、33组删除和固定共同资产集合，人工实现先审查，执行者不读真实未来价或运行Y。独审后root另签原预算内一次Y许可；失败不重试，无新增预算/拟合/取数。
+- 当前planned，实际派发与交付/验收分别记；定时关闭，不称八目标完成。协调并发前进造成两次保守断言退出及一次未改文件的旧HEAD推送拒绝，均保留；只普通ff，不强推、不覆盖他人内容。
+
+---
+
 # 2026-10-09 原件适配 A 已验收，X 封存实现范围登记
 
 - checked_coordination_sha=da370f5b39b9aac24ed559cb1f614472613dea8b；checked_at=2026-10-09T12:11:44.594369+08:00。已读 COORDINATION、本任务、classic-factor-research；自前次仅范围外记录改变，未读取其内容。原研究负责人已释放范围，当前仅本任务新文件写者，无共享文件冲突。
