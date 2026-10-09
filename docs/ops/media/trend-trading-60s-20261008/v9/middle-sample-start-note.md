@@ -1,0 +1,3 @@
+- active：用户明确“要选就选中间最有可能出问题的样例”，更新15秒样例选段规则，并合并上轮已确认的默认顺序/配乐到入口与前置页。成果基线d480aaa68e88a20826eaada93f6f2028e9b268f8，沿用codex/trend-history-long-v14-20261009。
+- 已读自身、nasdaq-story-video-20261009最新11:18记录、中控和COORDINATION既有规则。nasdaq已scope_released=true允许核现有内容后合并；保留其无配音/实拍材料方向/外盘增量，不改其主题文件。本人唯一写者，无并写；范围仅Skill入口、references/preproduction-workflow.md、references/staged-workflow.md、自身小回执/进度，配乐页无需再改。
+- 验收默认先定内容→可入片素材→实际风格图确认→中间高风险15秒确认→完整片，默认leyan原声/无配音/无品牌/外盘不漂移；分镜中记录选择位置/容易出问题的地方/样例验证项。检查Skill、引用、准确差异与目录归置，不制作新媒体，不运行无关研究。
