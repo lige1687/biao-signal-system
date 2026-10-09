@@ -1,3 +1,16 @@
+# 用户确认三个对话，恢复统一调度（2026-10-09T20:13:54.460057+08:00）
+
+- checked_coordination_sha=1d9c47a9d25d6e6f3ede892e54e77aad50efbf31；checked_at=2026-10-09T20:13:54.460057+08:00；已读COORDINATION及research-dispatch-controller、leisignal-risk-input-20261009、leisignal-risk-run-20261009、leisignal-risk-review-20261009。只核原八目标相关范围。
+- 用户明确要求统一调度并截图确认三个对话。root 01a116c7-3700-7062-a6c6-53af00ef60a0 恢复跨对话协调，替代此前休息/不接续安排；不改变执行范围或预算，不恢复定时器。
+- A 准备月度风险对照输入：01a1208c-8a1b-7b22-8802-1a5f23f57f5a，实测inProgress，cursor 46331a9d-e28b-4203-8bd8-71f369c45490:1；唯一inputs写者，来源与63共同日核验中。
+- B 准备月度风险对照执行：01a1208c-d559-72f0-ba6e-980a4337fa2c，实测inProgress，cursor f0098554-4d30-499c-a774-3d7783048f96:1；唯一implementation及实际运行写者，正在实现/人工演练，真实运行0。
+- C 独立验收月度风险对照：01a1208d-49ba-7972-9fa1-b47d7d5749b7，实测inProgress，cursor 3289f9d3-f535-4319-aecc-717a89ce4f08:1；唯一review及后续归档整合写者。初次本地Git异常已由其记录并重新登记，未把错误提交推入远端；不重复替其修复。
+- 三个对话均实际收到调度补充（send_message工具成功），不冒称已交付或已验收。通过wait_threads取原对话回执，root传递准确commit与依赖；消息和Git记录本身不保证退出回合后自动唤醒。
+- 顺序：A输入→B绑定→C开跑前审查→B满足真实授权后运行→C结果独审/归档。当前输入准备、人工演练、方法预审可并行；四新增真实路径仍待明确批准，旧2路径预算封存不借用。
+- root仅写本协调记录及自身恢复状态，不占A/B/C目录或registry/INDEX/catalog。scope_released=true对执行及归档路径；冲突决定为沿用三个唯一写者，不重复派发。
+
+---
+
 # 三对话交接文件已远端验收，原中控按用户要求移交休息
 
 - checked_coordination_sha=95e7d278a30fbfd249e3f20c8fdb0f80e8448a1d；checked_at=2026-10-09T19:30:23.196470+08:00；已读COORDINATION及本task，相关范围无变化。共用交接与进度2文件 `codex/research-direct-20261008@a2f977455b5395f5a02de901d4b50075a615f8dd` 远端SHA及内容读回一致，归置检查通过。
