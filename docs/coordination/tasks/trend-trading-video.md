@@ -1,3 +1,14 @@
+## V9 compact-done
+
+- task-id: trend-trading-video；2026-10-09T16:47:28.491881+08:00；checked_coordination_sha: add21e63417e2bc902053a188ed775dbc6d829ec；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed，scope_released=true；root唯一写者。紧凑节奏偏好加入入口/导演表/新视频Prompt，T2原文复读增量与无新增部分写tight-pacing.md，三种制作输入、模板复用防重复、声音提前校准和修改失效检查接入全流程。
+- 原成果codex/trend-history-long-v14-20261009@a8f319ed4a2bccbd24a7cbd5a4560eb3ef7b6aaa，5文件远端逐字一致；ai_tools/codex/video-production-kit-20261009@35fca025f6b63f9fb73d145d264d2bf9ef3b8ad9，7文件远端逐字一致；47包文件指纹/引用、两Skill结构、归置与diff通过。三份对应参考相同。保留其他任务本机内容，不代提交。
+- 交付前复读自身与中控，相关nasdaq v11/dual-ma全片范围仍只独立媒体，无共享Skill冲突；本进度与compact-result-receipt.json保存证据。无新片、安装、付费、媒体写入；审美/留存/效率增量未测，不以规则更新冒充效果通过。
+- 后续按用户具体影片调用，既有图→难点15秒→全片、无旁白/默认音乐/无品牌保持，不自动扩片。
+
+
+---
+
 ## V9 compact-start
 
 - task-id: trend-trading-video；2026-10-09T16:43:49.257905+08:00；checked_coordination_sha: a7264c95d62195ca23afdb056416a5f419b0e748；已读 COORDINATION.md、自身与 research-dispatch-controller。
