@@ -1,0 +1,47 @@
+{
+  "task_id": "leisignal-risk-run-20261009",
+  "thread_id": "01a1208c-d559-72f0-ba6e-980a4337fa2c",
+  "checked_at": "2026-10-09T21:08:32.441802+08:00",
+  "checked_coordination_sha": "69bc90f737ab6fcc36b6f8382fd0b270a6e41095",
+  "read_task_ids": [
+    "leisignal-risk-input-20261009",
+    "leisignal-risk-run-20261009",
+    "leisignal-risk-review-20261009",
+    "research-dispatch-controller"
+  ],
+  "conflict_decision": "Original A/B/C scopes unchanged; no shared registration or input changes",
+  "native_goal_status": "blocked",
+  "blocking_condition": "explicit_human_approval_for_exact_four_paths_missing",
+  "consecutive_goal_turns": 3,
+  "turns": [
+    {
+      "id": "01a1208c-f198-7772-a1a3-9de58c951be9",
+      "classification": "progress",
+      "same_permission_blocker_at_end": true
+    },
+    {
+      "id": "01a120c3-cf5d-7003-8990-5bd9a41ea9e9",
+      "classification": "no_progress",
+      "same_permission_blocker_reverified": true
+    },
+    {
+      "id": "01a120c5-ad94-7d70-9f5d-b6d25f992c0f",
+      "classification": "no_progress",
+      "same_permission_blocker_reverified": true
+    }
+  ],
+  "authoritative_observations": {
+    "authorization_status": "not_granted",
+    "actual_paths_attempted": 0,
+    "actual_path_start_markers": [],
+    "C_code_review": "accepted_bound_to_exact_contract",
+    "coordinator_record": "also_waiting_explicit_human_four_path_approval",
+    "human_approval_in_B_thread": "none_received",
+    "contract_sha256": "333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4"
+  },
+  "why_no_safe_alternative": "All B implementation and necessary C-requested repairs are accepted. User role instruction 4 forbids historical execution without new four-path approval; C/coordination/automatic continuation cannot grant it. Old two paths are exhausted. Repeating preparation or changing parameters would not satisfy the goal.",
+  "resume_condition": "Real human approval for the frozen revision 4 exact four IDs, each once; save quote/thread/receipt time/contract, recheck same fixed external storage plan, run each path once and deliver result receipts by Git to C.",
+  "research_complete": false,
+  "scientific_result_reviewed": false,
+  "legacy_budget_reused": false
+}
