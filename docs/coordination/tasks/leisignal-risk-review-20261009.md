@@ -1,3 +1,12 @@
+# 定向修复接续及实际产物独立核数准备（2026-10-09T20:52:25.175739+08:00）
+
+- checked_coordination_sha=8c76cc67b1bc2b98aaff28bd4b2e3eb30aa412ee；checked_at=2026-10-09T20:52:25.175739+08:00；已读A/B/C及中控最新相关记录，COORDINATION无变化。唯一写者范围不变，正式共享表未开启。
+- C-F01已实际交B，B确认在修；C等待准确发布版本只定向复核，不读未冻结文件冒充验收。另审已发布0586d4e2的attempt-ledger与不可覆盖标记联动新增差异，原核心/其他保护复用。
+- 新增本review目录内audit_saved_results.py，仅供未来真实产物只读核数，及其自己的进度记录；不导入B账户/metrics或原策略，不生成账户/新月比例结果，不写外盘。依据已固定算式核保存资金、原成交、月目标和风险统计，不是另一策略。真实输入在B授权执行并发布完整位置回执后才使用。
+- 原code review changes_required保留；真实4路径授权/实际仍0。完整接受需修复commit、绑定和定向证据；最终报告/registry/INDEX/catalog仍等待真实验收。
+
+---
+
 # 完整开跑前独审已交B一项具体修正（2026-10-09T20:44:41.520805+08:00）
 
 - checked_coordination_sha=6945f1de7bc069c3bcf67a33c096eafaa0acaaef；checked_at=2026-10-09T20:44:41.520805+08:00；已读A/B/C及中控相关最新段，COORDINATION未变；无新增写者或共享表重叠。C只review/及自己进度/本记录，未写正式报告/registry/INDEX/catalog。
