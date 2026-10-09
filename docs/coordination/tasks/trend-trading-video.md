@@ -1,3 +1,12 @@
+## V9 music-library-done
+
+- task-id: trend-trading-video；2026-10-09T10:36:47.981263+08:00；checked_coordination_sha: ffb54fe2d17079a0ba43b2d676bc48cf6e589f21；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed用户要求的Skill备选音乐登记，scope_released=true；本人唯一写者，交付前自身及中控已读无重叠。成果codex/trend-history-long-v14-20261009@5db34c2c705dc3d05d86a93e684721182043415b，5份准确小文件远端逐字读回。
+- Skill入口新增references/music-candidates.md，记录leyan原声候选ID、实际外盘音频路径/盘内相对路径、固定UUID、SHA、来源与使用说明；标为备选且纯BGM/跨平台许可未确认，使用前核盘/试听，不自动替换影片。原文件4,015,471字节及SHA一致，入口引用可读、归置与diff检查通过。无新媒体、复制、删除、安装或发布。已向用户交付准确MP3路径。
+
+
+---
+
 ## V9 music-library-start
 
 - task-id: trend-trading-video；2026-10-09T10:35:15.493606+08:00；checked_coordination_sha: 2e30ca2d1e24f14ed0de4a9189a5c47fa62aef67；已读 COORDINATION.md、自身与 research-dispatch-controller。
