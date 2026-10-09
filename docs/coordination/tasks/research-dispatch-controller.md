@@ -1,3 +1,12 @@
+# 用户要求移交为三个可打开对话：目前仅准备prompts，尚未派发
+
+- checked_coordination_sha=99d2517e04cc0770f34bba63e7c1d4e5295e9c60；checked_at=2026-10-09T19:26:53.007683+08:00；已读COORDINATION及research-dispatch-controller，其他新增仅无关任务文件名，无冲突。用户明确要本对话给prompt并休息；不创建/启动新对话，不假称分发完成。
+- root本轮唯一新增文件：主与隔离 docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/three-chat-handoff-2026-10-09.md；自己的进度/state仅记录移交。研究执行0，旧成果不重审、不重算。
+- 拟分角色：leisignal-risk-input-20261009（只准备本次准确输入），leisignal-risk-run-20261009（只实现与执行），leisignal-risk-review-20261009（独审及唯一归档整合）。三者尚无新owner/对话ID，状态planned；到各自新对话开工时须读最新coordination、注册具体owner和写入范围并推送读回，不将本规划当已占锁。
+- 原八目标已验成果继承；剩余Goal5方案仍为4新路径待用户批准，提示词移交不等于批准，原2路径封存。大结果外盘、共享registry/INDEX最终仅review角色在后续精确登记窗口写；root停止原中控后不承担自动回调，已取消定时不恢复。
+
+---
+
 # 本次R1纠错远端验收完成，释放共享登记
 
 - checked_coordination_sha=8cb6a5162c2ad749d8794314ea7cbc5814f12f38；checked_at=2026-10-09T19:20:31.724113+08:00；已读research-dispatch-controller及原合同/独审，本次其他增量仅无关任务文件名，无冲突。
