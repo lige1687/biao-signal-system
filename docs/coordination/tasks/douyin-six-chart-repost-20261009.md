@@ -1,5 +1,5 @@
 # 六图核重与少图讲解替换
-- task-id: douyin-six-chart-repost-20261009; owner: 01a12093-24f6-7a52-9d30-ee89f2a922e4; status: active.
+- task-id: douyin-six-chart-repost-20261009; owner: 01a12093-24f6-7a52-9d30-ee89f2a922e4; status: blocked.
 - checked_coordination_sha: 2cd35c23ef341890ac5d090246375d9bbb6dd116; checked_at: 2026-10-09T20:50:10.368424+08:00; 已读COORDINATION1.1、dual-ma-video-copy-20261009、research-dispatch-controller，六图原发布负责人 xhs运营抖音 当前idle且无六图协调记录。
 - 用户授权：检查是否重复，删除原六图帖重新发布并搭配少量讲解。原作品7694498612302105910仅有一条可见投稿，六个原JPG指纹各异；这不证明平台隐藏检测因果。
 - 唯一写者本会话；范围 data/cache/douyin-six-chart-repost-20261009/ 小图/文案/原帖证据/回执及 docs/ops/work-progress/douyin-six-chart-repost-20261009.md；不改系统、历史输入、原六图素材、共享registry/Skill。
@@ -28,4 +28,11 @@
 - checked_coordination_sha: 32fb4b41606d494e375b2beb3b4ecd2b1961abc3；checked_at: 2026-10-09T22:27:38.040311+08:00；沿用已读COORDINATION1.1、自身、dual-ma-video-copy-20261009及中控；新risk-review增量只涉及其自身权限阻塞，无本任务重叠。唯一写者本会话，范围不变。
 - 用户直接答“那你重新发吧”，承接已明示的指定原六图永久删除与指定单图发布确认，视为本次末步确认；不再重复询问。当前原确认弹窗及已上传单图/正式话题/声明仍在，新稿机器预检未见异常；接下来只删原7694498612302105910和投稿本单图一次。
 - 已推阶段成果3c91f80ad27a4bbdc4af0df66e2bfa9e8e40173b继续有效；未做新媒体制作、系统修改、共享登记或其他作品变动。
+
+## 指定原帖删除完成，单图投稿等待本人短信 2026-10-09T22:31:13.729016+08:00
+- checked_coordination_sha: 758fd7721bace5b3203ef478a36f94663b435ef0；checked_at: 2026-10-09T22:31:13.729016+08:00；此前读取COORDINATION1.1、自身、双均线、中控与risk-review增量；提交前最新fetch无新增，唯一写者/范围不变。
+- 用户明确“那你重新发吧”后，原7694498612302105910只删一次且已移出完整列表，其他已发布作品保留；原图/数据/通知保存。删除回执data/cache/douyin-six-chart-repost-20261009/original-removed.jpg仅本地。
+- 新单图先把一张半年图看清楚只点一次发布；平台进入正在发布后触发本人短信，目前没有新ID或已发布/最终审核回执。获得验证码一次且50s倒计时读回；已向用户询问当前码/本人原页验证，未复用旧码、未反复取码或二次投稿。原页1731523466标handoff保留。blocked仅本次短信缺失；用户回复后同页核状态再完成一次验证。
+- 机器预检和上传已通过，不能替代最终审核/资格或后续流量；无新推荐结论。未建立监控、未新增财经分析/交易或其他作品变动。
+- 阶段进度codex/douyin-six-chart-repost-20261009@6d113fc72cbd59e24f5a60982c5ace103dc51a7d已核远端完整SHA和准确单文件正文；归置exit0。私人缓存/截图/统计/手机号及验证码不入Git，原失败保留。
 
