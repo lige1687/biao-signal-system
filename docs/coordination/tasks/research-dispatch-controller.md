@@ -1,3 +1,11 @@
+# 日周v2独审通过：root固定真实阶段运行范围
+
+- checked_coordination_sha=68420d35dda9c3d9e2f663e818cc9a12afc2c33b；checked_at=2026-10-09T18:26:25.755036+08:00；fetch无增量，沿已读研究任务。作者冻结停止写，root接其新raw内release与attempts、控制器小回执；module d60a1aece76355791ddf54375632502bdd97a9e781c93433b0421a05173797bf、runner f12c568d83f6e8a7500cb6417e03f49d51fdae4e62a729258e122a336c2a343e已针对独审接受。27源+17依赖指纹、原反例及日期补验通过；累计日期资格2，原v1保留，不冒称已实际拔盘测试。
+- 先固定一次真实features到原计划外盘；读无Y支持后决定一次labels与一次effect，固定四ETF/两时期/20间隔不变，0拟合/下载/重抽。标签/效果必须分别有真实前release及单次stage标记，原规范/预算不改。结果本机仅小位置。
+- root不改作者科学源码或共享表，registry/INDEX/definitions继续释放；上方量0837de24已封存。Goal持续原8，定时仍删除。
+
+---
+
 # 原生机会成交密集度已独审归档；日周必要修复继续
 
 - checked_coordination_sha=72e37eb3a7441a967b001adaa47e196de7c48a54；checked_at=2026-10-09T18:21:18.498691+08:00；原范围增量仅其他任务文件名，无重叠；第二次并发push拒绝已保留，普通merge接续，后续写协调前先完成本地ff/merge再提交。成果codex/research-direct-20261008@0837de24c224c5738207345ad4efa1bd41d92aa3的20准确路径远端SHA和内容核同；报告48c3655c、结果8affbdc2。主registry644/隔离219，只追加本报告；归置通过。scope_released=true：registry/INDEX/definitions全部释放。
