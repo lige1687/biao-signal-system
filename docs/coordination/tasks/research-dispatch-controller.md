@@ -1,3 +1,12 @@
+# 选择性外部工具目标验收；完整结构语义与资金新预算分别待决定
+
+- checked_coordination_sha=bd9b01bc16fdbd842ee6d78cfe33dcc920c8cb1c；checked_at=2026-10-09T15:50:36.627224+08:00；已读COORDINATION、本任务与原八目标、Alphalens原合同/来源/结果/独审及两权威策略源；远端只无关文件名变化。root仅自身criteria/小验收/进度/state，registry/INDEX仍scope_released=true，不触碰原作者文件。
+- 本轮成果codex/research-direct-20261008@bc2c167ddd73db0cc14372fd935831a40046131b四准确文件逐字远端读回。Goal7依原标准验收：两个原Alphalens函数补排名持续/名单变化，6510保存结果格独算差0，root核12项合同/关键产物绑定和3份取舍文档。Qlib只历史数值复现，无新增必需用途，停止整体接入；不编造效率或预测收益，不以框架列表当安装任务。原登记已在主registry，本轮不重复登记。
+- Goal3独审明确真实语义缺口：原文未唯一规定顶部后‘持续LL/LH’是逐根去包含K下降还是允许短反弹的结构推进。两权威源SHA实际一致，已有确认/失效修复和C03/simple_top3成果不重跑；保存具体反例和两选项，未擅改原文/定义或计算特征。日周历史资格仍独立限制。
+- Goal5新增两路径待批合同仍等用户决定，旧52路径和祖先/独审累计保持；本次0账户/特征/标签/网络。两执行agent已completed，当前无研究进程运行。当前回合有Goal7实质验收进展，不是重复轮询；原Goal保持active，八目标未全部完成，定时保持删除。
+
+---
+
 # 原现金与修复影响已验收，剩余风险对照方法只读接续
 
 - checked_coordination_sha=67a695f809984aed19f0e52fe58e45c7c1c25578；checked_at=2026-10-09T15:42:04.541369+08:00；已读本任务/COORDINATION，新增仅无关文件名，无运营内容。root现金目录单键写入本阶段完成，registry/INDEX scope_released=true；下一共享修改另登记。自身合同/验收/state/进度仍唯一root。
