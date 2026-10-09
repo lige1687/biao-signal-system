@@ -1,3 +1,13 @@
+# 2026-10-09 D原合同结案验收；旧证据目录必要接续
+
+- checked_coordination_sha=7fc1b8404ff745f3a144f81633598363898d38c0；checked_at=2026-10-09T12:44:07.041427+08:00；已读COORDINATION、自身及research-evidence-catalog/report-library-integration-20261008（completed/scope_released），相关原目录已封存，没有活跃同文件写者。root唯一记录写者；新改范围只限下述准确增量。
+- D实际独审通过：独立核75路径/1575位置/690不同资产日期，标签误差≤1.42e-14个百分点，全部基准+33删除统计差≤1.29e-14。正式报告/单次账本/验收/登记8文件在codex/research-direct-20261008@66cbfe9f357436903498aeba34921ec95d8d0c8f逐字远端核。D原描述问题completed，X1/Y1封存，不重算；不是交易有效或八目标全完成。
+- 当前目录报告QLIB-ENGINEERING仍写新Ridge待原件，与本轮已验收14输入/55文件/99预测不符，属于目标2/7必要事实更新。root只在docs/experiments/research-evidence-catalog-2026-10-07.md顶部追加日期补充，不改旧正文；自身raw/original-recovery-20261009新增catalog-current-evidence.json；原目录catalog.json/source-index/SHA256SUMS作为10月7快照不改，用补充映射定位最新状态；registry仅旧目录报告原键更新正文SHA/阶段，INDEX不再追加条目。主与隔离树保留全部无关内容。
+- 同时Sol只读判定目标6原合同接入缺口，0文件写/0X/Y/0拟合；回执仅root在自身raw保存，不给原生入口预先写权。验收只看原目标必要内容，不新造平台。
+- 本次登记窗口继续由root串行使用，上项D的共享内容已完成；旧失败保留，无外部运营读写、无计时任务恢复。完成本次目录增量后释放。
+
+---
+
 # 2026-10-09 D—MAE真实Y已运行，正式归档范围登记
 
 - checked_coordination_sha=cc88a20bdf00a3435a98a046d7feda7345faa1dc；checked_at=2026-10-09T12:39:37.283983+08:00；已读COORDINATION、本任务、classic-factor-research，其他任务仅共享登记路径声明核避重，不接运营回调。已有旧登记记录不覆盖本次新报告；写前精确增量核验，root串行唯一写者。
