@@ -1,3 +1,18 @@
+# 最新状态：按用户新要求重做20秒真实双均线样例
+
+- task-id: trend-perspective-video-20261009；owner: 01a12111-3544-7250-822d-056b7379704b / root；唯一写者。
+- status: active；stage: real_dual_ma_sample；scope_released: false。
+- checked_coordination_sha: bf0384cb0fef78376bacb7c24caf7f2efa7a44e6；checked_at: 2026-10-09T23:36:15.245714+08:00；已读COORDINATION1.1、自身、dual-ma-video-copy-20261009、cash-position-video-20261009、research-dispatch-controller；独立版本无冲突。
+- 用户最新授权：先参考之前双均线工程，做十几秒至20秒新样例；用户看效果后才考虑复盘到Skill。当前仅样例，禁止扩片或先改Skill。
+- 内容：复用原科创50真实日线和同周期SMA20/EMA20；连续推进、回落但双线向上、EMA先转下到双线转下。只呈现已完成交易日，不伪造日内价格，不把方向当自动买卖。
+- 范围：新外盘视频库/趋势交易/20261009-trend-perspective/v04-dual-ma-sample；只读原双均线视频文稿-20261009原工程/数据；仅自身本机位置索引/工作进度/此协调文件。
+- 基线：成果分支codex/trend-perspective-video-20261009@26f5fe1f80d505bc3523f3c132b4cc5a15375e4f；v03否定记录保留。
+- 存储：23:35固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9核验通过；外盘593137369088B，本机15417303040B。预计外盘<350MiB、本机小索引<128KiB，复用依赖不安装。
+- 验收：20秒1080p横版、真实OHLC和双均线复算、连续主体和运镜、手机可读、配乐无旁白、完整播放/解码/实际帧检查与复用工程；审美仍待用户。无发布/策略修改/收益实验/付费。
+- 下一步：从真实工程数据搭建重编样例，检查后交付，等待本次观感确认。
+
+---
+
 # 最新状态：全片被用户否定，当前只复盘
 
 - task-id: trend-perspective-video-20261009；owner: 01a12111-3544-7250-822d-056b7379704b / root。
