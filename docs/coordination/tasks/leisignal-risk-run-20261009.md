@@ -1,3 +1,11 @@
+## 并发登记事实纠正，开写前重新核对
+
+checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2026-10-09T20:07:46.387237+08:00；已读该SHA的A记录 leisignal-risk-input-20261009（owner 01a1208c-8a1b-7b22-8802-1a5f23f57f5a，active只核输入）、自己的记录，以及9af57eb2以来仅A/B两个任务增量；COORDINATION和中控正文未变。C文件此SHA尚不存在。
+
+首次登记期间共享远端引用由另一工作区fetch推进到58f74e60，首次记录将A文件写为不存在的说法失效；保留旧记录并以本段纠正，不用未经阅读的SHA冒充核验。当前A inputs/B implementation没有重叠，A manifest仍未交付，B仅准备人工演练。远端本段读回核同后开写。
+
+---
+
 # 月度风险对照：B 实现与唯一执行
 
 - task-id：leisignal-risk-run-20261009；状态 active / preparing_only；负责人 B，会话 01a1208c-d559-72f0-ba6e-980a4337fa2c，本机 Mac。
