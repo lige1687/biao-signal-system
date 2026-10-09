@@ -51,3 +51,15 @@ v04已完成实际15秒/1920×1080/30fps资金盘→同一计划纸展开，指�
 checked_coordination_sha=e39851c21c8cd0f48fd9445999da0e2dafab3a35；checked_at=2026-10-10T00:12:27.184604+08:00；已读自身、trend-perspective最新原稿v06、dual-ma哔站原owner授权、research-dispatch-controller与risk-run/review新研究授权及原COORDINATION1.1；研究写各自implementation/review，影片独立，无重叠。root唯一写者。首次协调推送竞争被拒，核最新后成功32b3bfe310228515ad16fb5d81e07a1c1b09e8bb才开始外盘；无权限扩大。
 
 当前stage=two_logic_samples_awaiting_user；v04 approved；v05 A/B待本次评价；完整片未制作、未发布、无策略/系统/Skill改动。下一步按用户评价修A/B或获准后组织全片；不把样例交付当完整片完成。仅这两份小记录提交自己的codex分支，外盘媒体不在Git。
+
+## 2026-10-10 v06 A重做：实际OPUS样片对照、K线与资金连续解释
+
+用户确认原内容正确，指出旧A抽象节点不直观，要求K线、规则、风险及止盈止损/涨跌应对，并授权Skill增量和重做A。随后提供sample_16x9_72-87s.mp4（SHA0b0116f2822f5dbb4e462dc6547cc0658411c677c68db4de3c8378c3ea377bdc），已1秒/局部0.25秒抽帧、正常播放15.019秒；对比得到数量变化具象化、旧物件成为新参照、主体让位和亮度引导等具体增量。抖音7691258097721922203网页/API/浏览器未成功，不混称已读，不是模型对照实验。
+
+新A当前成片：/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/投资心态/20261009-cash-position/v06-kline-logic/成片/A-规则风险与应对-15秒-v3.mp4；1515330字节，SHAb0856ed18b99a31ec6ab704ffc3caa43cfd82fe7d782ade4a106fd414408759d。15秒450帧1080p30fps、H264/AAC；同一16条SPY真实日K，假设规则区间/预案先出现，止损距离与投入60→30/账户损失约0.94→0.47联动，代表币实际返回现金，单一历史让出未来假设分叉，触及预案后才减仓/退出。价格规则/比例仅教学假设，不是本系统规则、推荐参数或预测。资金图标示意仓位，非精确余额。
+
+验收：原OHLC16条逐值核同；Decimal独立核算；导出关键过渡帧、450帧全解码；最终v3浏览器1倍未静音0.149→15秒ended；互动超出范围/投入60%/30%/100%/0%五种状态实际核对。均值-17.6dBFS峰值-7.3；没有独立主观听审，观感待用户。前两次修订保留，包括两卡构图、虚线不真正揭示、币经过文字区问题与修复证据。116项非缓存文件43355683字节逐项SHA读回，工程包38768字节SHA5905b4aade7f8c2fcaaebadd8fc95ceb09c1407cefe656686ee683001db6e303。
+
+Skill本地只加一条路由及本轮新增references/decision-motion.md；原入口全部内容保留，附真实参考时间位置、作品/模型归因边界、条件/输入/动作联动、历史与假设区分及检查方法。旧入口含其他任务未跟踪成果，不整体冒领提交；本轮新参考随本分支，入口补丁保存外盘制作记录。两小索引加新参考为准确3文件提交范围。Skill结构/窄差异、前置/时间表/公开文字/归置通过。
+
+checked_coordination_sha=3641020dbb984de112de7486b2baf5e98c3a03de；checked_at=2026-10-10T01:11:39.506180+08:00；已读自身与COORDINATION、trend/nasdaq/personal-quant共享Skill旧维护已完成释放，最新trend-perspective参考对照仅其独立v08、research-dispatch-controller只任务读回；无重叠。固定外盘最终身份通过、余592496689152字节；新普通文件/缓存/参考外盘，依赖不安装。root唯一写本轮范围，无他人系统/研究/发布修改。当前kline_A_revision_awaiting_user；v04原认可保留，本轮A仍待观感，不制作全片。
