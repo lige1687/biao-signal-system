@@ -56,3 +56,13 @@
 - 范围：外盘投资心态/20261009-cash-position/v03-code-only、自身两小记录和协调文件。不覆盖v01/v02，不删除素材，不修改Skill。
 - 交付：同一Remotion工程的真实静帧、帧号与直接工程入口；增加开始/中间/后段静帧核对。用户本轮未明确跳过静态确认，不先渲染MP4/全片。
 - 外盘23:24固定UUID身份通过，余593194647552B，本机15377051648B。预计外盘<180MiB，本机索引<128KiB，复用运行环境，无生图/安装/付费/发布/研究。
+
+## v03真实代码工程交付 2026-10-09T23:33:00.684239+08:00
+- status: paused；stage: code_only_static_preview_awaiting_user；scope_released: false。已完成本轮工程实帧澄清与修订，未完成正式15秒样片/全片。
+- checked_coordination_sha: 778b59a12d4f462ca55c29cf2bb335c5d6f969f0；checked_at: 2026-10-09T23:33:00.684239+08:00；已读trend-perspective独立全片复盘，其他已读任务与COORDINATION沿用，无共享路径冲突，root唯一写者。
+- 成果: codex/cash-position-video-20261009@8b5bedd77288d2b2884aaa605454150caa8bf759；2小索引准确远端SHA与正文读回，媒体和代码仅固定外盘。
+- 外盘: 视频库/投资心态/20261009-cash-position/v03-code-only；23项非缓存文件10245706字节，大小/SHA逐项核同。source scenes.tsx SHA256 8fa51d8e9fb111555f5b3a996945816ecf345a6936d78bdcba679994d9923cc9。
+- 图2/3所有可见对象均原创SVG，无Img/image/位图路径引用；实际浏览器DOM位图元素0。静帧入口与实时Player都导入唯一scenes.tsx，4PNG（各主帧及45帧）1920×1080实际导出，查看当前图3/实时页并修底座贴近字幕。
+- http://127.0.0.1:53022/preview/index.html 实际打开并markDeliverable，默认暂停；两场景切换可见，用户可拖Player时间轴查看不同帧，完整网页截图制作记录/live-code-preview-full.jpg保留。仅本机、服务运行/外盘可用时有效，不是公开上传。
+- 公开文字/内容前置/归置通过；原图2已有画面验收复用。图1不在改动范围。沙漏时间为概念，不定义买入；无新生图/安装/删除/新金融结论。
+- 未把代码能动当正式样例完成：跨场景转场、阅读节奏和配乐仍待按本期确认后的15秒阶段完成；static_approved=false，sample_approved=false，未渲染MP4/全片。
