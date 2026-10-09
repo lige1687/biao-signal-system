@@ -59,3 +59,10 @@ task-id：leisignal-risk-review-20261009；负责人/会话：01a1208d-49ba-7972
 - B准确c65971bac01b0d377a8b90c130a1d7266e4ac109，合同c027fca8；33身份核查和14定向人工项通过，C-F01越界开盘检查缺失反例失败留review/full-code-review.json/.md。真实资料没有发现普通日越界，不虚称已发生结果错误；原实现会正式调用前拒绝这类资料。C不给完整accepted，具体修复交B，不改B代码。
 - 新增自然月末/损益贡献已定向核、人工6次账本已准确补记。O_EXCL人工文件仅review/synthetic-one-time目录，真实次数0；不污染B许可/账本。
 - 当前恢复：B补原开盘价界/保留特殊blocked，更新准确代码合同和人工定向证据；C仅审该差异及绑定。共享正式归档未写，真实授权与实际仍0。
+
+## 2026-10-09T20:59:48.671065+08:00 修复定向接受与完整代码接口交付
+
+- checked_coordination_sha=b4b90777cba9dc94e821f8942b9cfea092cb5bfd，已读四任务最新相关记录，写者范围无重叠。B准确7164290d修订4合同333d7a4f：C-F01及次数摘要新增11定向项、31身份核验通过，原失败和证据保留，旧核心/输入/完整保护通过复用。
+- 交付review/correction-code-review.json/.md及code-review-release.json：完整code_review_accepted，绑定准确6代码/A/主人工/附加证据。不是人类4路径批准或科学数值验收。B实际attempts不存在、authorization not_granted；新真实账户0，原两失败不借用。
+- review/audit_saved_results.py准备，只读保存产物独立核数；语法检查通过，真实未调用。无需为等待跑另一策略或旧实验。
+- Goal仍active，正式报告/registry/INDEX/catalog未写；恢复需要B保存真实四键各一次授权并实际执行，交完整位置/SHA/次数。C届时仅执行必要保存结果复核，随后开精确共享归档窗口、归置与远端读回。

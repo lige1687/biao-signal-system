@@ -1,0 +1,59 @@
+{
+  "schema": "C-monthly-risk-code-review-release/1",
+  "task_id": "leisignal-risk-review-20261009",
+  "reviewer_session": "01a1208d-49ba-7972-9fa1-b47d7d5749b7",
+  "decision": "accepted",
+  "status": "code_review_accepted",
+  "reviewed_at": "2026-10-09T20:59:48.671065+08:00",
+  "checked_coordination_sha": "b4b90777cba9dc94e821f8942b9cfea092cb5bfd",
+  "read_task_ids": [
+    "leisignal-risk-input-20261009",
+    "leisignal-risk-run-20261009",
+    "leisignal-risk-review-20261009",
+    "research-dispatch-controller"
+  ],
+  "conflict_decision": "A inputs frozen, B implementation/execution only, C review/archive only; shared registry/INDEX/catalog window not open.",
+  "B_result_commit": "7164290d3fd33be35eae6439c7044ab4e9dd4d3b",
+  "contract_sha256": "333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4",
+  "input_manifest_sha256": "9f1c326b46e7afc22d2ad6454e9f754e64540442e120412326ce270a50799baf",
+  "A_result_commit": "29337ec9e6560171c459019834638ce2c6993ef9",
+  "code_sha256": {
+    "monthly_account.py": "9792eae48a33d5e59cf481d530891a0f91ea89e5f3e0266757edc04a7ec739ca",
+    "execution_guard.py": "118c77bd2422de1b8f557c23636ad337038ccad370f7fa1856ec7834220bb668",
+    "input_adapter.py": "37164cfe9b2d42d289799a3a8557ba847f69a6eb56afe2e5fbb6bc8434fac5d8",
+    "runner.py": "8ed4df4bda5ebecdf5fc9758d5fb3fe84133cca89c6b2b95aca71463f426492e",
+    "synthetic_checks.py": "ff455c00f68ea63be91ce48e0fab72583cad2b6946ad28c6c88f1824caf85880",
+    "bind_inputs.py": "87e9447d610efba82dc8ca9dfaba46a6f0f64391ca89166614c5a9c1bf9443af"
+  },
+  "synthetic_evidence_sha256": "87a5143c90f91f79624daefe7b37555c18370eb917266dd3e476e492d6b78636",
+  "additional_engineering_evidence_sha256": {
+    "targeted-calendar-cutoff-evidence.json": "20efcfdb59bb3f6466d36bf1d1005399bba0dbc0e5f5cdcf1cc4eb1983f0d779",
+    "targeted-attempt-summary-evidence.json": "adbc8b8822ceb6bf68b03ca0bf0622079538b9a79ad88e7ec145f07b080a402e",
+    "driver-refusal-evidence-20261009T202505.json": "0ef7f275dbac2e5ef25c89692f3b61eaee4ffa1cfe9a17d375a642e621d1357e",
+    "external-write-engineering-evidence.json": "d68306ace6c9bd6879a4b9e00f7796f62dfad0b3be64e2886fd34fa437ebcb12",
+    "check_opening_reference.py": "745967724fccd45d8d0d0d2e04545524aa605ba84ad3d996ea1caf512ded5ca9",
+    "targeted-opening-reference-evidence.json": "2206035eaa36453d58018bc4c3b042e97645a0a8e0a7413a01cd757ccb885d3e",
+    "opening-source-consumption-receipt.json": "601dfde2c4c965e09af54c01f04cc1cdfe17633ba1afbc6f8404e5ca6c51a7c4"
+  },
+  "reuse_evidence": {
+    "core_C_commit": "fc9fb189d6ce390e65e26ebb87eda8969488c085",
+    "input_C_commit": "116c306a8356705081ebc8a2fcbf2d7d52b9da06",
+    "full_C_failure_commit": "fa421d30fb9f7aaa0b111d7f5d2ca39c65065ae4",
+    "targeted_correction_review": "correction-code-review.json"
+  },
+  "resolved": [
+    "synthetic_attempt_history_omission",
+    "C-F01"
+  ],
+  "human_four_path_authorization_granted_by_C": false,
+  "user_authorization_state_at_review": "not_granted",
+  "actual_new_paths_at_review": 0,
+  "scientific_result_reviewed": false,
+  "constraints": [
+    "B must save real human approval for exact 4 path IDs and this contract before execution.",
+    "Each path once, failed attempt remains consumed, legacy two paths cannot be borrowed.",
+    "Recheck exact fixed external plan/device/capacity at run, no internal fallback or overwrite.",
+    "All bound source/code/evidence hashes unchanged; otherwise this acceptance does not apply.",
+    "C numeric readback and final archive still required; this is not trading/production adoption."
+  ]
+}
