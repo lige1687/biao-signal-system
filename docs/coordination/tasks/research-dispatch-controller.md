@@ -1,3 +1,12 @@
+# 2026-10-09 D—MAE真实资料适配阶段A（planned）
+
+- 用户最新要求继续适配、分发与验收；task-id research-dispatch-controller；owner 01a116c7-3700-7062-a6c6-53af00ef60a0。checked_coordination_sha=8f42664ddbc8490a430311a9637224ca2479bc48；checked_at=2026-10-09T11:59:48.708214+08:00；本轮读本记录、classic-factor-research及COORDINATION；原workflow负责人最新turn completed、scope释放已读，未有同写者。
+- 采用既有research-direct工作树，基线120f320af15a5f553d00ca64ef85d6b4080e0204。不接管原workflow目录，不改旧native入口/冻结证据；新增src/lei_signal/research/native_risk_d_mae_inputs.py、tests/unit/test_native_risk_d_mae_inputs.py、自身raw/real-input-adaptation-20261009。唯一执行写者待派Sol/high，复杂真实资料身份映射所以不用低思考。
+- 冻结合同executor-contract.json SHA256 75b793eced87772fbd4c74fc1567996cdd282eede509b06aee8c57a1cd0c2a31，路径docs/experiments/raw/research-dispatch-controller-2026-10-07/real-input-adaptation-20261009。只做六原件严格读取、76案例/84别名/33组及长表/原D一致性核对；不重新去重、不派生V、不读未来价格、不生成Y。字段/时点冲突保留并拒绝。
+- 外盘路径采用本轮output-plan，原数据只读，新审计明细/测试临时产物外盘；小源码与证据本机。相关新人工边界验证和一次真实身份只读检查，0下载/0fit/0X/V/Y；待中控核与独审后再给下一阶段。定时保持删除。
+
+---
+
 # 2026-10-09 原件恢复已完成并核验（本轮最新）
 
 - task-id research-dispatch-controller；owner 01a116c7-3700-7062-a6c6-53af00ef60a0；checked_coordination_sha: 08c1a133758c1521822c57b7e31ad50a395812ff；checked_at: 2026-10-09T11:45:45.798787+08:00。已读本任务、technical-factor-sequence、risk-shape-information与COORDINATION；仅自己记录和外盘唯一目录写入，无共享代码/登记簿冲突。
