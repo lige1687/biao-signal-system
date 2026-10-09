@@ -1,3 +1,10 @@
+# 日周候选唯一研究定义登记窗口
+
+- checked_coordination_sha=358452984eb0fe9193d1f4074e7e380a193fc58e；checked_at=2026-10-09T18:07:23.799791+08:00；已读本task/先前相关研究owner；本轮协调无新增重叠。root仅在主与隔离 docs/research/definitions.v1.json 追加 research.multitimeframe.daily_stage3_at_completed_week@0.1.0，采用已核2c0c49bf合同，不改原对象、原策略文本或生产规则。其他原字节保留，新增后保存原准备SHA到执行SHA的单项amendment，并立即释放definitions。registry/INDEX仍未占用。
+- 两Sol继续各自固定脚本范围，真实X/Y/effect仍待root放行；定义登记不算实现/有效性。root原state/进度/remaining-opportunity记录继续。
+
+---
+
 # 原生机会成交密集度资格通过：固定方法实现与分组范围
 
 - checked_coordination_sha=945045b9b26ede7ed9f530388fc012d8c3a4a3bb；checked_at=2026-10-09T18:05:17.911516+08:00；自身及前述研究owner范围已读，本次增量无共享冲突。Sol一次资格：76身份保留，45匹配/31范围外；45中1原未成熟，0新X/Y/效果。原33段/84别名不改。
