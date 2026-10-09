@@ -214,7 +214,7 @@
   },
   "independence": "B执行者仅工程自检，C独立代码及数值验收、最终共享登记",
   "status": "frozen_for_C_review",
-  "frozen_at": "2026-10-09T20:40:07.276847+08:00",
+  "frozen_at": "2026-10-09T20:31:54.799473+08:00",
   "A_git_reference": {
     "task_id": "leisignal-risk-input-20261009",
     "commit": "29337ec9e6560171c459019834638ce2c6993ef9",
@@ -228,9 +228,9 @@
   },
   "code_sha256": {
     "monthly_account.py": "9792eae48a33d5e59cf481d530891a0f91ea89e5f3e0266757edc04a7ec739ca",
-    "execution_guard.py": "118c77bd2422de1b8f557c23636ad337038ccad370f7fa1856ec7834220bb668",
+    "execution_guard.py": "a2956c8c0457dba55927f419a7057a6c5c5d9dc7705da9bb28f11b81a3f27f2e",
     "input_adapter.py": "b604fa939f9a822cacab34a908ed3e003b4dd50b7c64ac9d928e607773719741",
-    "runner.py": "9b391841e4818873d82b57e0744cb510c005998e801d071b74bc82bd036ac146",
+    "runner.py": "e247c0a43ed486c7746697b3678224d74370eab309154a0f9eb48df8b6419dc0",
     "synthetic_checks.py": "ff455c00f68ea63be91ce48e0fab72583cad2b6946ad28c6c88f1824caf85880",
     "bind_inputs.py": "87e9447d610efba82dc8ca9dfaba46a6f0f64391ca89166614c5a9c1bf9443af"
   },
@@ -298,28 +298,6 @@
     }
   ],
   "author_budget_owner": "B; exact human authorization remains not_granted; no run release from this binding",
-  "prepared_revision": 3,
-  "pre_review_revision_reason": "真实调用前发现静态次数摘要可能不随实际标记更新；补每次批次/路径开始/完成/失败后从不可覆盖标记同步小摘要，保留前版。经济规则和次数上限不变。",
-  "additional_engineering_evidence": [
-    {
-      "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/targeted-calendar-cutoff-evidence.json",
-      "sha256": "20efcfdb59bb3f6466d36bf1d1005399bba0dbc0e5f5cdcf1cc4eb1983f0d779",
-      "bytes": 405
-    },
-    {
-      "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/targeted-attempt-summary-evidence.json",
-      "sha256": "adbc8b8822ceb6bf68b03ca0bf0622079538b9a79ad88e7ec145f07b080a402e",
-      "bytes": 583
-    },
-    {
-      "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/driver-refusal-evidence-20261009T202505.json",
-      "sha256": "0ef7f275dbac2e5ef25c89692f3b61eaee4ffa1cfe9a17d375a642e621d1357e",
-      "bytes": 1285
-    },
-    {
-      "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/external-write-engineering-evidence.json",
-      "sha256": "d68306ace6c9bd6879a4b9e00f7796f62dfad0b3be64e2886fd34fa437ebcb12",
-      "bytes": 2077
-    }
-  ]
+  "prepared_revision": 2,
+  "pre_review_revision_reason": "A口径同时记录自然月末截止和最后交易日；订单决策时点用自然月末end_of_day而非休市日close。未改变63日/比例/开盘执行，不存在历史运行。原C核心验收SHA继续保留。"
 }

@@ -18,7 +18,7 @@ import subprocess
 import traceback
 
 from execution_guard import (TASK, PATH_IDS, sha256, require, verify_file, now,
-                             validate_release, actual_attempts, claim_batch, claim_path, append_record, sync_ledger)
+                             validate_release, actual_attempts, claim_batch, claim_path, append_record)
 from input_adapter import load_bound_dataset, saved_period_fee
 from monthly_account import monthly_targets, simulate_monthly, metrics, number, opportunity_description
 
@@ -64,8 +64,6 @@ def load_execution_release():
     code = {name: sha256(HERE/name) for name in CODE_FILES}
     require(code == contract["code_sha256"], "frozen implementation drift")
     verify_file(contract["synthetic_evidence"])
-    for item in contract.get("additional_engineering_evidence", []):
-        verify_file(item)
     auth = read_json(HERE/"authorization.json")
     reference = read_json(HERE/"C-review-reference.json")
     review = git_artifact(reference, "leisignal-risk-review-20261009")
@@ -150,14 +148,12 @@ def execute():
         output.write("run-log.json", {"started_at": now(), "release": release, "run_id": run_id}, run=True)
         pointers["monthly-targets"] = output.write("monthly-targets.json", schedule)
         claim_batch(HERE/"attempts", release, run_id)
-        sync_ledger(HERE)
         for path_id in PATH_IDS:
             output.check()
             reference, fee_name = path_id.split("-")
             initial = number(dataset["initial_states"][path_id]["wealth"])
             fee = number(contract["scope"]["fees"][fee_name])
             claim_path(HERE/"attempts", path_id, release, run_id)
-            sync_ledger(HERE)
             try:
                 account = simulate_monthly(cash=initial, fee=fee, targets=schedule[reference],
                                            quotes=dataset["quotes"], trading_days=dataset["period_trading"],
@@ -182,12 +178,10 @@ def execute():
                 outcomes[path_id] = {k: v for k, v in outcome.items() if k not in ("account", "opportunity_description")}
                 append_record(HERE/"attempts", path_id+"-finished.json",
                               {"status": "executed_pending_C_review", "finished_at": now(), **pointers[path_id]})
-                sync_ledger(HERE)
             except BaseException:
                 failure = {"path_id": path_id, "status": "attempt_failed_no_rerun", "failed_at": now(),
                            "failure": traceback.format_exc(), "counts_as_attempt": True}
                 append_record(HERE/"attempts", path_id+"-failed.json", failure)
-                sync_ledger(HERE)
                 if storage._still_mounted(plan):
                     output.write(path_id+"-failure.json", failure, run=True)
                 raise

@@ -107,38 +107,3 @@ def actual_attempts(directory):
         if (directory/(path_id+"-started.json")).is_file():
             started.append(path_id)
     return started, (directory/"batch-started.json").exists()
-
-
-def sync_ledger(here):
-    """Refresh the small summary from immutable attempt markers, preserving old.
-
-    The O_EXCL batch/path markers remain authority even if a crash interrupts
-    this summary write. A failed attempt is never hidden by its missing output.
-    """
-    here = Path(here)
-    marker_dir = here/"attempts"
-    old = json.loads((here/"attempt-ledger.json").read_text())
-    started, batch_started = actual_attempts(marker_dir)
-    updated = {**old, "historical_paths_attempted": len(started),
-               "batch_started": batch_started, "actual_count_authority": "attempts/*-started.json",
-               "updated_at": now(), "per_path": {}}
-    for path_id in PATH_IDS:
-        state = "not_started"
-        if path_id in started:
-            state = "started"
-        if (marker_dir/(path_id+"-finished.json")).exists():
-            state = "executed_pending_C_review"
-        if (marker_dir/(path_id+"-failed.json")).exists():
-            state = "attempt_failed_no_rerun"
-        updated["per_path"][path_id] = {"attempts": int(path_id in started), "status": state}
-    stamp = datetime.now(ZoneInfo("Asia/Shanghai")).strftime("%Y%m%dT%H%M%S%f")
-    append_record(marker_dir, "budget-before-"+stamp+".json", old)
-    temporary = here/("attempt-ledger-"+stamp+".json.tmp")
-    fd = os.open(temporary, os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW, 0o600)
-    with os.fdopen(fd, "w") as f:
-        json.dump(updated, f, ensure_ascii=False, indent=2)
-        f.write("\n")
-        f.flush()
-        os.fsync(f.fileno())
-    os.replace(temporary, here/"attempt-ledger.json")
-    return updated
