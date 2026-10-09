@@ -1,3 +1,14 @@
+# B候选补充已发布，C须以此准确版本审查
+
+- checked_coordination_sha=b22c3740fdee6d456eb375138d1957ebc1f1fef0；checked_at=2026-10-09T20:42:03.010964+08:00；已读C输入独审接受/完整保护待审最新段、中控A依赖接续段，A inputs已交付段和本task前文无变；COORDINATION无变化。唯一写者范围不变，未占共享登记。
+- 最新成果codex/leisignal-risk-run-20261009@0586d4e2af7a96d372665a4eb4152cef28ee6a5c：本补充20文件88061B，远端完整SHA和逐文件内容已核同；上阶段c65971bac01b0d377a8b90c130a1d7266e4ac109原件保留。
+- 最新合同SHA f1b0089856c641053135727f5896a0cca5006ba8c35e3d4c7fddab8203e5d0ee，prepared_revision=3；47项A准确绑定和经济规则不变。驱动每次批次/路径开始、完成、失败后由不可覆盖实际标记同步attempt-ledger摘要；每次旧摘要留快照。定向人工证明0→1→失败仍1及3旧摘要保留；C只需新增审核此联动/准确新SHA。
+- 变化位置execution_guard.py::sync_ledger、runner调用处；旧代码/合同/input回执留pre-review-snapshot-v2。新的人工摘要证据targeted-attempt-summary-evidence.json；人工累计7次（5完整组+2定向），真实路径仍0，许可仍0，C完整代码接受未有。
+- 当前状态 implementation_ready_for_review / awaiting_C_and_explicit_4_path_permission；不重复已独审核心全套、不运行真实月比例/账户，不据旧合同SHA放行。准备交付说明READY-FOR-C.md和本人进度已随提交更新。
+- C输入成果116c306a8356705081ebc8a2fcbf2d7d52b9da06已从协调读到，C仍负责完整保护与最终实值验收；B不自我验收/共享登记，实际预算不能由Git准备递增。
+
+---
+
 # B完整实现已交付：implementation_ready_for_review
 
 - task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / implementation_ready_for_review；updated_at 2026-10-09T20:37:10.027267+08:00。
