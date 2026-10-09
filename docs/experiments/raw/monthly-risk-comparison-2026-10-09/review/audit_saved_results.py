@@ -158,6 +158,9 @@ def audit(binding, location):
         ref, fee_name = key.split("-")
         fee = D(".001" if fee_name == "base" else ".002")
         initial = D(binding["initial_states"][key]["wealth"])
+        a.near(account["initial_cash"], initial, key+":initial cash")
+        a.near(account["fee_rate"], fee, key+":fixed fee rate")
+        a.check(account["terminal_liquidation"] is False, key+":no terminal liquidation")
         rows, fills, orders = account["daily"], account["fills"], account["orders"]
         a.check([r["date"] for r in rows] == natural, key+":complete natural days")
         by_day = {r["date"]: r for r in rows}
@@ -191,6 +194,10 @@ def audit(binding, location):
             a.near(adj["units_delta"], delta, key+":"+month+":actual cash-capped delta")
             a.check(sum(f["order_id"] == month for f in fills) == int(delta != 0),
                     key+":"+month+":single fill or executable zero")
+            for f in (f for f in fills if f["order_id"] == month):
+                a.near(f["units_delta"], delta, key+":"+month+":fill equals cash-capped order")
+                a.check(f["date"] == when and f["phase"] == "open",
+                        key+":"+month+":actual fill at approved open")
         fill_map = {d: [f for f in fills if f["date"] == d] for d in natural}
         buy = sell = total_fee = paid = booked = unit_change = D(0)
         for row in rows:
@@ -223,6 +230,11 @@ def audit(binding, location):
             a.check(min(c, receivable, q) >= 0 and value > 0, key+":"+day+":nonnegative balances")
             if day in trading:
                 a.near(mark, quotes[day]["close"], key+":"+day+":close mark")
+            else:
+                yesterday = str(dt.date.fromisoformat(day)-dt.timedelta(days=1))
+                previous_mark = by_day[yesterday]["mark"] if yesterday in by_day else quotes["2025-12-31"]["close"]
+                a.near(mark, previous_mark, key+":"+day+":nontrading carried mark")
+                a.check(not fill_map[day], key+":"+day+":no nontrading fills")
         for event in actions:
             ledger = [x for x in account["action_ledger"] if x["event_id"] == event["event_id"]]
             amount = D(by_day[event["record_date"]]["units"])*D(event["cash_per_unit"])
@@ -259,6 +271,8 @@ def audit(binding, location):
         before = initial
         bbefore = D(old["B0-"+fee_name]["2025-12-31"]["wealth"])
         diagnostic = data["opportunity_description"]
+        a.check([x["date"] for x in diagnostic["daily"]] == natural,
+                key+":complete dated opportunity description")
         for row, observed in zip(rows, diagnostic["daily"]):
             bv = D(old["B0-"+fee_name][row["date"]]["wealth"])
             br = bv/bbefore-1

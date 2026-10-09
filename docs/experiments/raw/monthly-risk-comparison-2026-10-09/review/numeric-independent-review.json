@@ -1,0 +1,355 @@
+{
+  "schema": "C-independent-saved-result-audit/1",
+  "checked_at": "2026-10-10T00:17:31.732899+08:00",
+  "decision": "changes_required",
+  "checks": 5886,
+  "failures": [
+    {
+      "where": "A_ALL-base:2026-01-01:nontrading carried mark",
+      "observed": "0",
+      "expected": "4.753"
+    },
+    {
+      "where": "A_ALL-stress:2026-01-01:nontrading carried mark",
+      "observed": "0",
+      "expected": "4.753"
+    },
+    {
+      "where": "A_ALL-stress:volatility ratio",
+      "observed": "1.5319345691882624",
+      "expected": "1.5319345691882627"
+    },
+    {
+      "where": "A_SMA-base:2026-01-01:nontrading carried mark",
+      "observed": "0",
+      "expected": "4.753"
+    },
+    {
+      "where": "A_SMA-stress:2026-01-01:nontrading carried mark",
+      "observed": "0",
+      "expected": "4.753"
+    },
+    {
+      "where": "A_SMA-stress:volatility ratio",
+      "observed": "1.6072807178277886",
+      "expected": "1.6072807178277888"
+    }
+  ],
+  "maximum_numeric_error": "4.753",
+  "result_identities": [
+    {
+      "key": "monthly-targets",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/monthly-targets.json",
+      "bytes": 357871,
+      "sha256": "de465b222201ece2d9de1c78554abee7f412d9e40f35bfbc9d8aa188a2727200",
+      "device": 16777238
+    },
+    {
+      "key": "opening-validation",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/opening-validation.json",
+      "bytes": 30250,
+      "sha256": "32afbc3194fad746ff1b31b7d06461c3d96d5b3776a308a00a58be1c24c79dd0",
+      "device": 16777238
+    },
+    {
+      "key": "A_ALL-base",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-base.json",
+      "bytes": 202870,
+      "sha256": "4a698e5b902335f1ddee58875b5c803b77d47d10cd3ea49e011f3e314ce1ac54",
+      "device": 16777238
+    },
+    {
+      "key": "A_ALL-stress",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-stress.json",
+      "bytes": 202904,
+      "sha256": "0cd9f649419ae721ef78690980e61e14bf7e5144bd5ada860efafb3f40b9ce52",
+      "device": 16777238
+    },
+    {
+      "key": "A_SMA-base",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-base.json",
+      "bytes": 202849,
+      "sha256": "36e870579f940d821f48e039f77687ee69a11ef919122786e9646f20f807012c",
+      "device": 16777238
+    },
+    {
+      "key": "A_SMA-stress",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-stress.json",
+      "bytes": 202884,
+      "sha256": "baaa83cd8db1c7a6a44a56818e7c181c2c9e662779e6f08f3282e4a57e7367e7",
+      "device": 16777238
+    },
+    {
+      "key": "summary",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/summary.json",
+      "bytes": 7467,
+      "sha256": "7b0c717594ef4a29b784b10b6ecc79b75e041c2fe65784a913c02baf654b715d",
+      "device": 16777238
+    },
+    {
+      "key": "execution-log",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/execution-log.json",
+      "bytes": 2495,
+      "sha256": "ba2ae6417d5483e419ab4ecb949c57ce718e3dc4956cc60b135dea6da6110339",
+      "device": 16777238
+    }
+  ],
+  "independent_monthly_targets": {
+    "A_ALL": [
+      {
+        "month": "2026-01",
+        "weight": 0.8387394069532572,
+        "cutoff": "2025-12-31",
+        "sigma_a": 0.007263003700351832,
+        "sigma_b0": 0.008659428232584043
+      },
+      {
+        "month": "2026-02",
+        "weight": 0.6155209433089776,
+        "cutoff": "2026-01-31",
+        "sigma_a": 0.004395916212609022,
+        "sigma_b0": 0.007141781706040784
+      },
+      {
+        "month": "2026-03",
+        "weight": 0.6009511445021158,
+        "cutoff": "2026-02-28",
+        "sigma_a": 0.004646237896519939,
+        "sigma_b0": 0.007731473579885296
+      },
+      {
+        "month": "2026-04",
+        "weight": 0.5546436222516754,
+        "cutoff": "2026-03-31",
+        "sigma_a": 0.004681302745569284,
+        "sigma_b0": 0.008440199360022738
+      },
+      {
+        "month": "2026-05",
+        "weight": 0.4538891892108547,
+        "cutoff": "2026-04-30",
+        "sigma_a": 0.004348208705724879,
+        "sigma_b0": 0.009579890442609582
+      },
+      {
+        "month": "2026-06",
+        "weight": 0.07842815776459783,
+        "cutoff": "2026-05-31",
+        "sigma_a": 0.0007484879052362031,
+        "sigma_b0": 0.009543611970113974
+      }
+    ],
+    "A_SMA": [
+      {
+        "month": "2026-01",
+        "weight": 0.8387394069532572,
+        "cutoff": "2025-12-31",
+        "sigma_a": 0.007263003700351832,
+        "sigma_b0": 0.008659428232584043
+      },
+      {
+        "month": "2026-02",
+        "weight": 0.6155209433089776,
+        "cutoff": "2026-01-31",
+        "sigma_a": 0.004395916212609022,
+        "sigma_b0": 0.007141781706040784
+      },
+      {
+        "month": "2026-03",
+        "weight": 0.5250084867502122,
+        "cutoff": "2026-02-28",
+        "sigma_a": 0.004059089244524825,
+        "sigma_b0": 0.007731473579885296
+      },
+      {
+        "month": "2026-04",
+        "weight": 0.48662816634638545,
+        "cutoff": "2026-03-31",
+        "sigma_a": 0.004107238738165801,
+        "sigma_b0": 0.008440199360022738
+      },
+      {
+        "month": "2026-05",
+        "weight": 0.38716999307196254,
+        "cutoff": "2026-04-30",
+        "sigma_a": 0.0037090461162953116,
+        "sigma_b0": 0.009579890442609582
+      },
+      {
+        "month": "2026-06",
+        "weight": 0.07840755636273603,
+        "cutoff": "2026-05-31",
+        "sigma_a": 0.0007482912934507936,
+        "sigma_b0": 0.009543611970113974
+      }
+    ]
+  },
+  "paths": {
+    "A_ALL-base": {
+      "new": {
+        "trading_day_volatility": 0.005327589884022943,
+        "trading_observations": 116,
+        "natural_observations": 181,
+        "initial_wealth": "110542.384400",
+        "end_wealth": "113856.977400",
+        "net_change": "3314.593000",
+        "net_change_ratio": "0.029984815489469394872216996",
+        "max_drawdown": "-0.0513683727567324915621726657",
+        "worst_day": "-0.0189611082746934095020649165",
+        "longest_underwater_calendar_days": 120,
+        "unrecovered_at_end": true,
+        "average_invested_pct_natural_days": "50.84298931915913845059980952"
+      },
+      "saved_A": {
+        "trading_day_volatility": 0.0034668446203634886,
+        "trading_observations": 116,
+        "natural_observations": 181,
+        "initial_wealth": "110542.384400",
+        "end_wealth": "104353.854800",
+        "net_change": "-6188.529600",
+        "net_change_ratio": "-0.0559833192814682944363917665",
+        "max_drawdown": "-0.0567678572708623426436602176",
+        "worst_day": "-0.0229149090720666922945495831",
+        "longest_underwater_calendar_days": 175,
+        "unrecovered_at_end": true,
+        "average_invested_pct_natural_days": "25.16124013181013856377490084"
+      },
+      "new_fees": "176.707000",
+      "saved_A_fees": "846.929600",
+      "new_trades": 6,
+      "saved_A_trades": 8,
+      "volatility_ratio": 1.5367258897989955,
+      "end_wealth_minus_saved_A": "9503.122600",
+      "matched": false,
+      "profit_contributions": "3314.593000",
+      "up_day_diagnostic": "29215.71068262691539212167274",
+      "down_day_diagnostic": "23842.31127281200441042455043"
+    },
+    "A_ALL-stress": {
+      "new": {
+        "trading_day_volatility": 0.00532514262728431,
+        "trading_observations": 116,
+        "natural_observations": 181,
+        "initial_wealth": "110113.941800",
+        "end_wealth": "113234.662200",
+        "net_change": "3120.720400",
+        "net_change_ratio": "0.028340829044774056031477024",
+        "max_drawdown": "-0.0515919213191293454052032108",
+        "worst_day": "-0.0189199412309458242399331327",
+        "longest_underwater_calendar_days": 120,
+        "unrecovered_at_end": true,
+        "average_invested_pct_natural_days": "50.94058580358020545433858696"
+      },
+      "saved_A": {
+        "trading_day_volatility": 0.0034760901244665966,
+        "trading_observations": 116,
+        "natural_observations": 181,
+        "initial_wealth": "110113.941800",
+        "end_wealth": "103123.561400",
+        "net_change": "-6990.380400",
+        "net_change_ratio": "-0.0634831546825980577147952032",
+        "max_drawdown": "-0.0634831546825980577147952032",
+        "worst_day": "-0.0229243880887357803154694754",
+        "longest_underwater_calendar_days": 175,
+        "unrecovered_at_end": true,
+        "average_invested_pct_natural_days": "25.16898045993221091425433249"
+      },
+      "new_fees": "353.379600",
+      "saved_A_fees": "1680.680400",
+      "new_trades": 6,
+      "saved_A_trades": 8,
+      "volatility_ratio": 1.5319345691882627,
+      "end_wealth_minus_saved_A": "10111.100800",
+      "matched": false,
+      "profit_contributions": "3120.720400",
+      "up_day_diagnostic": "29192.76886291354734396451105",
+      "down_day_diagnostic": "23660.33184969511001881639959"
+    },
+    "A_SMA-base": {
+      "new": {
+        "trading_day_volatility": 0.004905004126030269,
+        "trading_observations": 116,
+        "natural_observations": 181,
+        "initial_wealth": "110542.384400",
+        "end_wealth": "113525.709000",
+        "net_change": "2983.324600",
+        "net_change_ratio": "0.026988060879931589389526503",
+        "max_drawdown": "-0.0472405697384270762719630747",
+        "worst_day": "-0.0165267601955620735760500647",
+        "longest_underwater_calendar_days": 120,
+        "unrecovered_at_end": true,
+        "average_invested_pct_natural_days": "47.29318205878035117488239995"
+      },
+      "saved_A": {
+        "trading_day_volatility": 0.0030354277282661083,
+        "trading_observations": 116,
+        "natural_observations": 181,
+        "initial_wealth": "110542.384400",
+        "end_wealth": "105785.716800",
+        "net_change": "-4756.667600",
+        "net_change_ratio": "-0.0430302605269296145198764140",
+        "max_drawdown": "-0.0430302605269296145198764140",
+        "worst_day": "-0.0229149090720666922945495831",
+        "longest_underwater_calendar_days": 175,
+        "unrecovered_at_end": true,
+        "average_invested_pct_natural_days": "16.88105134966822478035202580"
+      },
+      "new_fees": "176.375400",
+      "saved_A_fees": "426.267600",
+      "new_trades": 6,
+      "saved_A_trades": 4,
+      "volatility_ratio": 1.615918600319335,
+      "end_wealth_minus_saved_A": "7739.992200",
+      "matched": false,
+      "profit_contributions": "2983.324600",
+      "up_day_diagnostic": "31330.69252873509309737092049",
+      "down_day_diagnostic": "25613.81052691045165195852576"
+    },
+    "A_SMA-stress": {
+      "new": {
+        "trading_day_volatility": 0.004898053007296021,
+        "trading_observations": 116,
+        "natural_observations": 181,
+        "initial_wealth": "110113.941800",
+        "end_wealth": "112893.140800",
+        "net_change": "2779.199000",
+        "net_change_ratio": "0.025239301713927018821880010",
+        "max_drawdown": "-0.0475200880699895849212731603",
+        "worst_day": "-0.0164750273648938491363304056",
+        "longest_underwater_calendar_days": 121,
+        "unrecovered_at_end": true,
+        "average_invested_pct_natural_days": "47.30268475279412780919531578"
+      },
+      "saved_A": {
+        "trading_day_volatility": 0.0030474160194714785,
+        "trading_observations": 116,
+        "natural_observations": 181,
+        "initial_wealth": "110113.941800",
+        "end_wealth": "104959.573000",
+        "net_change": "-5154.368800",
+        "net_change_ratio": "-0.0468094113764620494223375445",
+        "max_drawdown": "-0.0468094113764620494223375445",
+        "worst_day": "-0.0229243880887357803154694754",
+        "longest_underwater_calendar_days": 175,
+        "unrecovered_at_end": true,
+        "average_invested_pct_natural_days": "16.88260049710049642107607550"
+      },
+      "new_fees": "353.701000",
+      "saved_A_fees": "846.868800",
+      "new_trades": 6,
+      "saved_A_trades": 4,
+      "volatility_ratio": 1.6072807178277888,
+      "end_wealth_minus_saved_A": "7933.567800",
+      "matched": false,
+      "profit_contributions": "2779.199000",
+      "up_day_diagnostic": "31388.94743597560862207942471",
+      "down_day_diagnostic": "25501.89629511817521517491678"
+    }
+  },
+  "both_fees_matched": {
+    "A_ALL": false,
+    "A_SMA": false
+  },
+  "new_account_executions_by_C": 0,
+  "original_A_or_B0_replays": 0
+}

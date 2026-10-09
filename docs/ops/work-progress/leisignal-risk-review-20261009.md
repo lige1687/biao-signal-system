@@ -1,3 +1,16 @@
+# 本轮真实四路径独验与本机归档完成，正在精确发布（2026-10-10T00:34:00.232401+08:00）
+
+- 本轮直接读人类原话，确认四组授权，无需再问；原2026-10-09 blocked是历史事实，不删除。A29337ec9输入、B7164290d冻结代码、C1e954fdc代码接受复用。
+- checked_coordination_sha=4f3263125d88acf8c471172241e71503577af685；已读COORDINATION及A/B/C、中控相关记录；共享窗口21e234741c682ec7470c77a69c90054c92261b29推送读回后才写，唯一归档者C。精确范围仍report key、INDEX一行、catalog日期补注及该旧key的必要SHA字段。
+- B真实结果4283254d23371691506851816ff4d7a17228ea4a，四键各一次；C5886独算5880直接过，6差异原样存numeric-independent-review.json。C-F02由B1f8a8e5a1c456853b268bf50b8fa4a5ae06bbee0仅补16零持仓估值字段，119身份/预算/定向检查通过；两浮点末位用60位独立算式定位，六位报告数字一致，不改10%标准。资金最大差0，原外盘未改，账户重放0。
+- 结论：四日波动比1.536726、1.531935、1.615919、1.607281；两参照两费用均失配。本固定问题负向完成，不能据期末多7739.99—10111.10元证明相近风险新增收益。目标5此问题已回答，风险相近贡献证据仍缺；其余八目标原限定结论和缺口保持，不重开研究。
+- 正式报告20588B、registry本条/INDEX一行/catalog必要补注已在C独立树和主仓准确写入。主仓647→648、隔离221→222；除本key/catalog SHA字段外，原登记字节可还原且其他entry全保持，catalog旧正文完整保存。证据registration-scope-receipt.json。
+- 实际主仓归置退出0；隔离旧基线只读实际checker仍退出1/原298继承问题、新任务路径0违规，未改白名单或清理旧文件。报告库读取两树均category组合与仓位/verdict falsified/pending false、全文读回一致；指定文件名无ARCHIVE使旧UI文件名flag仍false，正式ARCHIVE小节与registry archive_status已写，不擅改UI。完整证据archive-verification.json/final-hygiene-check.json，第一次验证调用误用name/path字段已定位保留。
+- 固定盘UUID/设备16777238和10结果1210879B真实读回；B27远端文件准确绑定核同；首次发布probe拿旧commit比正追加的交接文档失败已按准确1f8a版本解决，保留失败。原24/25本机输入异机恢复、历史可得/真实成交限制仍在。
+- 累计真实本批4/4，原2/2独立保留；人工8及原失败不重置；C原A/B0/新账户执行0、下载/新标签/拟合/扫描0。当前最后步骤只有C本次准确提交推送、逐文件远端读回与自己的最终协调记录，未合main/生产。
+
+---
+
 # 月度风险对照：独立验收与归档接续
 
 task-id：leisignal-risk-review-20261009；负责人/会话：01a1208d-49ba-7972-9fa1-b47d7d5749b7；本机Mac，Asia/Shanghai。唯一跨任务当前摘要是 coordination/lei 的 docs/coordination/tasks/leisignal-risk-review-20261009.md；本文保留本工作分支阶段证据。
