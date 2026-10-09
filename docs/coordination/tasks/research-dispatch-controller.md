@@ -1,3 +1,12 @@
+# 两项回调已接收，逐键修复影响及日周资格继续并行
+
+- checked_coordination_sha=6ac4663f3512c666648fb3d9fcff48c91dfd2637；checked_at=2026-10-09T15:34:08.043727+08:00；已读COORDINATION和research-dispatch-controller；新增仅无关任务文件名，未读取其内容。root沿原范围唯一维护现金旧目录顶部/registry原单键、自身来源验收/state/工作进度；两agent均只读，不占共享写入。
+- Sol回调：原现金逐日前缀仍消费旧结构算法；510300事件103/入场43/底部30/EMA13与纠错摘要四计数相同，但未获逐键同一证明。旧冻结金额核对成立，修正对七个账户窗口的影响未判定。root已实际核run_accounts/causal-events SHA吻合。后续Sol已实际running，只定位已保存新99事件及逐键差异/来源，不跑旧研究。
+- Astra回调：完整结构逐日确认修复及真实周K生成已有验收，旧“未实现”说法过时；旧T05是日线持续时间，不能作为日周扩散停止依据。root已实际核strict_structure/weekly_context源码SHA吻合。后续Astra已实际running，仅复用已验收2026H1日历等价性与原六ETF覆盖，辨明日周资格最小余项，不重跑日历/标签。
+- 两项回调属于有边界的证据审查，不等于原八目标全部验收。原预算、冻结失败保持；0新策略实验。定时保持删除，原生Goal实测active。现金当前目录等阶段成果仍仅本地，尚未冒称远端发布；接回调后归档精确范围再核远端。
+
+---
+
 # 原现金已定位核验，旧目录单项接续与八目标准确验收
 
 - checked_coordination_sha=616e924bfa12defa9daf23aed99279f55294028c；checked_at=2026-10-09T15:28:04.048015+08:00；已读COORDINATION、本任务、旧目录CASH-SINGLE-ETF和准确原现金正式报告；远端新增仅不相关文件名。上轮registry/INDEX已释放，本轮root唯一声明旧目录报告顶部补充及registry原目录单键SHA/说明，自身current-evidence/state/进度/来源验收；不新增报告、不改INDEX、原资金结果/旧代码只读。
