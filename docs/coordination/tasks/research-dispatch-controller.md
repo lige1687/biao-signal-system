@@ -1,3 +1,12 @@
+# 用户批准两种结构与两条风险对照：恢复实际执行
+
+- checked_coordination_sha=88fff05a91fca2b294cacd42db24d1670d914607；checked_at=2026-10-09T16:24:45.690961+08:00；已读COORDINATION、本task、technical-factor-sequence、dot-trade-state-accounting、lei-technical-reader-research相关当前范围。新协调增量仅无关文件名，未监督运营。两新问题不重复封存颜色、C03/simple_top3或旧账户；未发现同题执行者。
+- 用户本回合批准：去包含后逐根高低点降低、允许短反弹按结构推进两种都试，倾向前者；明确批准新增1批2条资金对照及实际日波动0.90—1.10。原提案04bb7257保留。原52资金路径/所有封存历史不重置。原生Goal实测blocked且工具无恢复接口，本回合实际执行依最新人类授权，不假称原生自动续跑恢复；已删除定时不重建。
+- root唯一新写自身raw/research-dispatch-controller-2026-10-07/approved-comparison-20261009、已有state/进度/本协调；在codex/research-direct-20261008（基础b7c0fba72011eb98ebc30ddd7ebcd96e723db3f1）准备新合同与验收。Sol唯一写新raw/risk-comparable-cash-baseline-2026-10-09；Astra唯一写新raw/structure-persistence-comparison-2026-10-09。目前只授权现金精确输入绑定/新隔离算法/合成验证与结构两定义/来源/有限研究设计；正式市场执行先冻结与独审。共享生产源码、definitions、workflow、registry/INDEX本阶段不写，scope_released=true。
+- 大结果/日志仅固定已验外盘的新路径计划，计划生成前核设备/容量，不覆盖旧目录。当前两agent待派发，不冒称运行；外部取数/真实新账户/特征/标签均0。验收须分别核来源、时间、现金、两定义公平比较及效用限制，阴性也结案。必要后续在原授权内接续。
+
+---
+
 # 原八目标受阻待具体决定，原生Goal已blocked
 
 - checked_coordination_sha=e1ed49715a2bcbed2b2f2165e6926a3c61ccad3e；checked_at=2026-10-09T15:54:54.428012+08:00；本任务原内容实核未变，COORDINATION规则及原八目标依赖沿已核证据。连续三轮相同真实阻塞，update_goal实际返回blocked；不是全部完成，不是用户主动暂停。原定时已删除，不恢复、不虚称后台运行。
