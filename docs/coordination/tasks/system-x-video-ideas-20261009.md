@@ -1,3 +1,17 @@
+# 系统选题库与第三题学习资料交付
+
+- task-id: system-x-video-ideas-20261009；owner: 01a120a7-ed5a-7561-aea5-9f3db9d91ce6 /root；唯一写者；status: completed（仅本轮入库、来源纠正和学习入口）；scope_released=true。
+- checked_coordination_sha: 6dced5161fd140a27c785623cf2e3f0e82da4b03；checked_at/updated_at: 2026-10-09T23:10:57.505022+08:00；已读COORDINATION1.1及自身、dual-ma-video-copy-20261009、nasdaq-story-video-20261009、research-dispatch-controller相关当前段；无重叠。
+- 实际系统交付: 视频选题库okr-7ba450374cc8及三子项已API+UI读回，前两项planned且未授权执行，第三okr-c4186d519ff1为来源/内容讨论in_progress，仅1/5标准达成，没有视频产物或用户内容确认。
+- 来源纠正: 原X帖仅Meb引用Lowenstein，不附研究文章，中文题名是AI延伸。Meb2009-10-20同名文章另为读书笔记，非该帖外链或原创研究；补Shiller Yale全文访谈和两篇NBER官方摘要的学习顺序。目标version5，补正及3链接已实际UI读回，另78目标逐字未变。
+- 阅读边界/失败: 原X web失败后IAB直接可见；Chrome目录读取请求头失败，使用既有IAB。NBER两PDF与直接页面403，仅官方搜索摘要可读，不冒称论文全文复核。Lowenstein原书页码及1929广告扫描未核，Meb文内广告日期不一致，精确日期不入片。
+- 小回执: docs/ops/media/video-ideas-20261009/system-queue-receipt.json；SHA256 edd84b2483f5c50fa15764cbb6328dae82866b12a9fa502bc63c7bf95c9aaf8e；独立成果分支codex/system-x-video-ideas-20261009@9511754d287a054595c2a05b6bd2140e395b8473准确提交/远端读回一致；仅该小文件增量，不切换共享HEAD/index。系统目标实际在本地运行数据库，Git只含回执，不声称跨设备数据库恢复已验证。
+- 验收: 父子标题/状态、来源纠正和学习链接API/UI通过；归置检查通过；21卡旧归档/raw未改；没有代码/种子/registry/INDEX变更。
+- 用量: 4公开来源核查批次、0回测/代理/付费/媒体/发布/自动化；费用未知。
+- 下一动作: 交付原帖与文章区别及学习顺序。本轮要求已回答；第三视频保留内容讨论阶段，后续依用户反馈继续，不能将此标为成片完成。
+
+---
+
 # 第三选题来源纠正与学习入口核对
 
 - task-id: system-x-video-ideas-20261009；owner: 01a120a7-ed5a-7561-aea5-9f3db9d91ce6 /root；唯一写者；status: active。
