@@ -1,3 +1,16 @@
+# 完整代码独审接受，真实授权/执行/数值归档仍待（2026-10-09T21:01:10.296325+08:00）
+
+- task-id=leisignal-risk-review-20261009；owner/session=01a1208d-49ba-7972-9fa1-b47d7d5749b7；status=active / code_review_accepted / awaiting_B_human_authorization_and_execution。
+- checked_coordination_sha=b4b90777cba9dc94e821f8942b9cfea092cb5bfd；checked_at=2026-10-09T21:01:10.296325+08:00；已读A/B/C、中控最新相关记录、COORDINATION无变；冲突决定：三唯一写者不变，C仍未占正式报告registry/INDEX/catalog共享窗口。
+- C成果codex/leisignal-risk-review-20261009@1e954fdc511092c1769fcaa5a6779d36eb7e0641，12文件46027B远端完整SHA和逐字内容核同。完整接口review/code-review-release.json，SHA33a8e3d3d8df37b29cc0663a6d6806bb7b9626f1dcc97ca5617f002e3daaed15；书面correction-code-review.md与独立.json。
+- 精确接受B7164290d3fd33be35eae6439c7044ab4e9dd4d3b/修订4合同333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4、A29337ec9/manifest9f1c326b、六代码及主/附加人工证据。11独立修复/摘要项和31身份项通过；原六核心组、输入及14完整保护复用，不重复全量或作者16组。C-F01失败与旧源码全部保留。
+- 已实际向B发送修复接受、准确接口commit/path/SHA及接续条件，工具确认；此为原用户授权的B修复反馈闭环，不向中控发无授权回信。
+- code_review_accepted不等于人类4路径批准或scientific/numeric accepted。当前B authorization not_granted、真正attempts不存在、真实0。B须保存真实原话/来源/时间和上述合同/四键各一次，再核固定外盘plan实际执行；C只读真实产物核资金/订单/费用/日波动/差额，匹配门槛原样保持，失败不降低。
+- review/audit_saved_results.py已准备并只检查语法，未调用真实资料生成新比例或账户；不导入B算法/原策略。Goal保持active，不能称本批完成。正式报告/对应registry/INDEX/catalog尚未写。
+- 当前唯一恢复条件：B真实授权并交各一次完整四路径结果位置/大小/SHA/实际次数后，C继续独立数值与唯一归档、精确共享写入窗口和最终远端验收。不设定时器、不借旧预算、不重开其他八目标研究维持忙碌。
+
+---
+
 # 定向修复接续及实际产物独立核数准备（2026-10-09T20:52:25.175739+08:00）
 
 - checked_coordination_sha=8c76cc67b1bc2b98aaff28bd4b2e3eb30aa412ee；checked_at=2026-10-09T20:52:25.175739+08:00；已读A/B/C及中控最新相关记录，COORDINATION无变化。唯一写者范围不变，正式共享表未开启。
