@@ -1,0 +1,59 @@
+{
+  "at": "2026-10-09T15:22:11.178324+08:00",
+  "library_id": "libfile_4ae59de13ef881918b5cdd4e2f867302",
+  "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/cash-composition-source/cash-composition-source-20261009T152133-8428400021e1/result/LeiSignal-策略组合风控接口与合成测试-2026-10-06.zip",
+  "sha256": "a96cf69d57fc5bda0fe5b6043f8e44c52febb5277e18c8313d8a4009bbed4e6b",
+  "bytes": 35300,
+  "browser_staging_retained": "/Users/yongbiaoli/Desktop/LeiSignal-策略组合风控接口与合成测试-2026-10-06.zip",
+  "members": [
+    "strategy_composition_v1/INDEPENDENT_REVIEW.md",
+    "strategy_composition_v1/INTERFACE_CONTRACT.json",
+    "strategy_composition_v1/README.md",
+    "strategy_composition_v1/REVIEW_AND_REPAIRS.md",
+    "strategy_composition_v1/REVIEW_SUMMARY.txt",
+    "strategy_composition_v1/SOURCE_BINDINGS.json",
+    "strategy_composition_v1/SYNTHETIC_EXAMPLES.json",
+    "strategy_composition_v1/USER_RISK_CONFIG_UNSET.json",
+    "strategy_composition_v1/VALIDATION.json",
+    "strategy_composition_v1/composition.py",
+    "strategy_composition_v1/run_validation.py",
+    "strategy_composition_v1/synthetic-attempt-01.log",
+    "strategy_composition_v1/synthetic-attempt-02.log",
+    "strategy_composition_v1/synthetic-final.log",
+    "strategy_composition_v1/test_composition.py",
+    "strategy_composition_v1/PACKAGE_MANIFEST.json"
+  ],
+  "source_hits": [
+    {
+      "member": "strategy_composition_v1/INTERFACE_CONTRACT.json",
+      "lines": [
+        "    \"existing_entrypoint\": \"account_core.simulate_one\","
+      ]
+    },
+    {
+      "member": "strategy_composition_v1/README.md",
+      "lines": [
+        "已验收的 account_core.simulate_one 是单标的整段现金回放，A_ALL/A_SMA 的入口是全仓/空仓状态。它目前没有本包 LedgerBackendContract 所列的增量接口。不能把 30% 权重压成 True；不能把 8 个独立全仓账户相加，当作共享资金组合。"
+      ]
+    },
+    {
+      "member": "strategy_composition_v1/REVIEW_AND_REPAIRS.md",
+      "lines": [
+        "继续保留的接入限制：累计部分成交、共享风险预留、不可修改凭据核对、实际名义价映射、公司行动、应收款、并发快照冲突和交易日历仍由未来适配器承担。没有重写或调用原单标的现金回放引擎。"
+      ]
+    },
+    {
+      "member": "strategy_composition_v1/SOURCE_BINDINGS.json",
+      "lines": [
+        "    \"library_file_id\": \"libfile_81fa8894839c8191bdef817f2d6c02de\",",
+        "    \"library_file_id\": \"libfile_413d46eac94c81919b8c695e3bb259a3\",",
+        "    \"library_file_id\": \"libfile_60a446d11c408191b3caaf6261313773\",",
+        "        \"source_relative_path\": \"source-snapshot/docs/experiments/raw/factor-module-a-increment-2026-09-27/account_core.py\",",
+        "    \"library_file_id\": \"libfile_a24cf3a6e4408191951a126ac2e8822d\",",
+        "    \"library_file_id\": \"libfile_0f1f3589b60881918b452973d3eca859\",",
+        "    \"library_file_id\": \"libfile_b9852a13f85481918af7ebb1ee9a266d\","
+      ]
+    }
+  ],
+  "code_executed": false
+}

@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-09T15:23:15.503287+08:00",
+  "mission": "Verify recovered exact local CASH-SINGLE-ETF saved evidence and original correction dependency; no backtest",
+  "executor": "b1_saved_evidence_review",
+  "model": "gpt-6-sol",
+  "reasoning_effort": "medium",
+  "read_paths": [
+    "docs/experiments/factor-module-a-money-findings-2026-09-27.md",
+    "docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-base*",
+    "docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-base*",
+    "exact protocol/source/review dependencies referenced by report"
+  ],
+  "write_paths": [],
+  "allowed_computation": "saved daily/trades arithmetic only",
+  "prohibited": [
+    "old account_core execution",
+    "new labels/features",
+    "new backtest",
+    "rerun sealed fixed-ledger capital experiment",
+    "network",
+    "delegation"
+  ],
+  "source_clue": {
+    "original_composition_library": "libfile_4ae59de13ef881918b5cdd4e2f867302",
+    "accepted_cash_code_library": "libfile_60a446d11c408191b3caaf6261313773",
+    "account_core_sha": "7a6cc652bd52aab00f59880f28bb1e159d2799da3b38ac0d6c04ee01955ca933",
+    "adapter_sha": "90c864a0d41d703c1fbea6cc91b92e308fa1648657f64a11a06d2f1feab545b1"
+  },
+  "requirements": [
+    "exact original input/code identity",
+    "independently sum 510300 saved terminal cash/drawdown/roundtrips",
+    "fees and exposure/costs available from original rows",
+    "actual old A3 correction dependency, unknown if not bound",
+    "distinguish saved historical cash result vs synthetic cash interface"
+  ]
+}

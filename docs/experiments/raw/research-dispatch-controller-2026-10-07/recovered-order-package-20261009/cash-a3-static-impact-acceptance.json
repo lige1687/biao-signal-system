@@ -1,0 +1,123 @@
+{
+  "at": "2026-10-09T15:36:16.614869+08:00",
+  "status": "accepted_static_exclusion_for_original_510300_cash_windows",
+  "reviewer": "b1_saved_evidence_review / Sol medium; root independent JSON comparison",
+  "package": {
+    "path": "data/local-integration/LeiSignal-510300严格结构与A3缓存重建-复现证据-2026-10-06.zip",
+    "bytes": 1028866,
+    "sha256": "e2b8e224b961eb86d91ca395b6ae7e9c37166c9ef071f3b686547c2ecb4a9d96",
+    "manifest_members_checked": 63,
+    "member_sha256": {
+      "PACKAGE-MANIFEST.json": "01414c6f6c71fa3225391e8b2b4081b1a921785f382251e10c8500605478c3a4",
+      "comparison/old-510300-a3-events.json": "8a0c96ef600240202f103b7c4d49b40bfb748aea99d0b34423cfcbbd4b14e84f",
+      "cache/a3-events.json": "645e9aa93170fc518969b40483732a2acff93a9e00d15f4d20cf96f2ef7cb0c0"
+    }
+  },
+  "old_events_exact_ordered_equal_cash_source": true,
+  "counts": {
+    "old": 103,
+    "new": 99,
+    "removed": 5,
+    "added": 1,
+    "changed": 4
+  },
+  "selected_windows": [
+    {
+      "event_id": "first_ma_pullback:550ab89db843ac9f5730831d",
+      "date": "2025-08-05",
+      "same_complete_event": true
+    },
+    {
+      "event_id": "first_ma_pullback:ef24f157725e1052dcf507ed",
+      "date": "2025-10-22",
+      "same_complete_event": true
+    },
+    {
+      "event_id": "first_ma_pullback:62bfd23ef2640fe35411fcce",
+      "date": "2026-01-06",
+      "same_complete_event": true
+    },
+    {
+      "event_id": "first_ma_pullback:43498c8ee5a795fd1db57ad2",
+      "date": "2026-02-04",
+      "same_complete_event": true
+    },
+    {
+      "event_id": "first_ma_pullback:1b021beb927d2e8e2539653e",
+      "date": "2026-02-09",
+      "same_complete_event": true
+    },
+    {
+      "event_id": "first_ma_pullback:0d5a4bc3b2ea968f4aa5d393",
+      "date": "2026-03-11",
+      "same_complete_event": true
+    },
+    {
+      "event_id": "first_ma_pullback:19c430deb8ae05aeabed2ca7",
+      "date": "2026-06-30",
+      "same_complete_event": true
+    }
+  ],
+  "changed_early_candidates_saved_busy": [
+    {
+      "event_id": "first_ma_pullback:60ffc67c8ccf030b0d05da63",
+      "date": "2025-09-23",
+      "saved_reason": "busy_common_window"
+    },
+    {
+      "event_id": "first_ma_pullback:8d2dde3d528924afe3b864b0",
+      "date": "2025-09-25",
+      "saved_reason": "busy_common_window"
+    },
+    {
+      "event_id": "first_ma_pullback:4a874d89f157f55724f29d08",
+      "date": "2025-08-21",
+      "saved_reason": "busy_common_window"
+    },
+    {
+      "event_id": "first_ma_pullback:7673c42fc10febd4224908d5",
+      "date": "2025-08-11",
+      "saved_reason": "busy_common_window"
+    }
+  ],
+  "first_window": {
+    "event_id": "first_ma_pullback:550ab89db843ac9f5730831d",
+    "date": "2025-08-05",
+    "sub_rule": "first_ma_pullback_confirmed",
+    "research_proxy": true,
+    "ma_period": 20,
+    "is_first_touch": false,
+    "touch_date": "2025-08-04",
+    "entry_variant": "early",
+    "close": 0.8930503565168852,
+    "a3_source": "ema20_reclaim",
+    "a3_structure_id": null,
+    "stop_price": 0.8789596743437764,
+    "entry_ref_close": 0.8930503565168852,
+    "ma_value": 0.8853325055993414,
+    "atr20": 0.009222991967853079,
+    "clock_type": 2,
+    "weekly_bull_env": true,
+    "lifecycle_id": "first_ma_pullback:510300.SS:2025-07-30",
+    "sma_accept": true,
+    "exit_signal_date": "2025-10-17",
+    "exit_open_date": "2025-10-20",
+    "exit_reason": "A6_black"
+  },
+  "added_early_candidates": 0,
+  "source_hashes": {
+    "run_accounts.py": "c88835730cefbdcc54e630e21f924a0caaf8e178266ced9ca650df4cff0a3940",
+    "adapter.py": "90c864a0d41d703c1fbea6cc91b92e308fa1648657f64a11a06d2f1feab545b1",
+    "causal-events.json": "86da4f912e2497cf66942e0778619925b96accc39024812c56066ccba962419a",
+    "common-windows.json": "d9bedf7960297cd5163af481514d9f8e3284b514862504d69f9c89f1b6346403",
+    "rejections.json": "560839818642ea79f83fd98de2d7b19e130b0b0365a17d629946ca48972f0f37"
+  },
+  "reason": "All seven selected full events remain identical; affected early candidates were already rejected while first window active; no added early candidate. Frozen windows consumes price/selected stop for exits, not rejected events.",
+  "limits": [
+    "Original frozen rows, actions, fees and account code only",
+    "No detector or account reexecution",
+    "Does not assert all repaired native code has same financial result",
+    "Latest continuation remains separately accepted original version"
+  ],
+  "new_market_runs": 0
+}
