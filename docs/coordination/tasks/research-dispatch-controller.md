@@ -1,3 +1,11 @@
+# R1纠错实际执行及归档窗口
+
+- checked_coordination_sha=8501ba4195d42f67a59d1ffd96556e490517bd6c；checked_at=2026-10-09T19:08:03.868761+08:00；已读task-id=research-dispatch-controller与原D1/R2合同；本轮远端增量仅无关任务文件名，无范围冲突。
+- D1代码583fe2a4/源锁55fe1216经独立反例审阅接受，一次真实保存描述传播已完成，外盘f1770207（3382701字节）待数值独审；0新增收益标签，仅1已冻结窗口附属风险值。账户v2 c62157c0经修复等待定向独审，真实账户仍0，不把许可准备记完成。
+- root新增准确归档范围：主与隔离 docs/experiments/dual-ma-consumer-correction-2026-10-09.md、registry只该新key及原catalog key、INDEX仅对应新行；原catalog仅追加日期补注，保留旧正文。root镜像新raw内小代码/合同/失败/核验/位置记录，结果大文件仅外盘；state/既有进度更新真实状态。Sol冻结账户代码后仅写implementation/d1-independent-numeric-review.json独立只读核验；另一独审只读账户。真实账户须独审接受后12准确键各一次。无其他定义/生产/策略/共享路径变更。
+
+---
+
 # 纠错合同已冻结：账户适配与D1保存描述独立准备
 
 - checked_coordination_sha=69f32df1e1de7147a3d5e6fd1c40f99ba1c1e066；checked_at=2026-10-09T18:54:18.632591+08:00；已读research-dispatch-controller及原D1/R2实际合同/源码，无重叠。新合同raw/dual-ma-consumer-correction-2026-10-09/contract.json SHA00ccc8185d98e8037bf15d42e5db374223aa3b88362fecc785692d23aef3579b，方法独审接受；仅12账户一次纠错，新增收益标签0，原1/10窗口缺失的附属高点回落字段最多1窗。原132预算不变，新纠错独立累计。
