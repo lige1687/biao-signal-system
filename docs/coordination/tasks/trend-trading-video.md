@@ -1,3 +1,13 @@
+## V9 prompt-library-start
+
+- task-id: trend-trading-video；2026-10-09T16:12:57.316375+08:00；checked_coordination_sha: 835d345b1cc4ee203204c879e021100d33ba6711；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户要求逐项核对两原推文Prompt、详细方法和推荐素材库并沉淀。root唯一写者；复用已读COORDINATION、自身、nasdaq-story-video-20261009和中控，最新无变化，无Skill冲突。
+- 范围：原code-explainer-video入口、prompts-and-cues及新增prompt-methods/library-catalog参考；ai_tools对应文件、reference-learning、01新视频Prompt和manifest，本人进度与小回执。基线原分支1481d02f12d4718b77343ebb75102661918d3d81，ai_tools@8c2d800d44863ba5fc1053da203a9a94bf3aaf9e。
+- 核验：原推文Prompt定位、改写可复用Prompt、具体素材库入口/用途/限制与选取方法；区分作者建议、当前源核验、未运行效果；发现旧Prompt顺序冲突则修正。只学方法与必要目录/许可，不整库下载、不执行外部脚本、不制作新影片；保留用户现有确认和默认。格式/路径/指纹/远端读回通过才交付。
+
+
+---
+
 ## V9 aroll-done
 
 - task-id: trend-trading-video；2026-10-09T16:11:00.647569+08:00；checked_coordination_sha: e5fcb2afa384129c98c3d182b0f37cc658e1d238；已读 COORDINATION.md、自身与 research-dispatch-controller。
