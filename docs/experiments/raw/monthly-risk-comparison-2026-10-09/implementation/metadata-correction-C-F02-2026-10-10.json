@@ -1,0 +1,580 @@
+{
+  "schema": "monthly-risk-metadata-addendum/1",
+  "issue_id": "C-F02",
+  "status": "submitted_for_C_targeted_review",
+  "created_at": "2026-10-10T00:22:29.628763+08:00",
+  "B_result_commit": "4283254d23371691506851816ff4d7a17228ea4a",
+  "contract_sha256": "333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4",
+  "scope": "Only 16 initial nontrading zero-holding mark fields; no account re-execution or original output mutation",
+  "source_quotes": {
+    "id": "original_nominal_quotes",
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv",
+    "sha256": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+    "bytes": 148819
+  },
+  "source_quote_row": {
+    "date": "2025-12-31",
+    "open": "4.777",
+    "close": "4.753",
+    "high": "4.789",
+    "low": "4.742",
+    "volume": "6668292.0"
+  },
+  "original_results": [
+    {
+      "path_id": "A_ALL-base",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-base.json",
+      "bytes": 202870,
+      "sha256": "4a698e5b902335f1ddee58875b5c803b77d47d10cd3ea49e011f3e314ce1ac54",
+      "device": 16777238
+    },
+    {
+      "path_id": "A_ALL-stress",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-stress.json",
+      "bytes": 202904,
+      "sha256": "0cd9f649419ae721ef78690980e61e14bf7e5144bd5ada860efafb3f40b9ce52",
+      "device": 16777238
+    },
+    {
+      "path_id": "A_SMA-base",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-base.json",
+      "bytes": 202849,
+      "sha256": "36e870579f940d821f48e039f77687ee69a11ef919122786e9646f20f807012c",
+      "device": 16777238
+    },
+    {
+      "path_id": "A_SMA-stress",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-stress.json",
+      "bytes": 202884,
+      "sha256": "baaa83cd8db1c7a6a44a56818e7c181c2c9e662779e6f08f3282e4a57e7367e7",
+      "device": 16777238
+    }
+  ],
+  "correction_count": 16,
+  "corrections": [
+    {
+      "path_id": "A_ALL-base",
+      "original_result_sha256": "4a698e5b902335f1ddee58875b5c803b77d47d10cd3ea49e011f3e314ce1ac54",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-base.json",
+      "date": "2026-01-01",
+      "json_pointer": "/account/daily/0",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110542.384400",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110542.384400"
+      },
+      "wealth_before_cny": "110542.384400",
+      "wealth_after_cny": "110542.384400",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_ALL-base",
+      "original_result_sha256": "4a698e5b902335f1ddee58875b5c803b77d47d10cd3ea49e011f3e314ce1ac54",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-base.json",
+      "date": "2026-01-02",
+      "json_pointer": "/account/daily/1",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110542.384400",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110542.384400"
+      },
+      "wealth_before_cny": "110542.384400",
+      "wealth_after_cny": "110542.384400",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_ALL-base",
+      "original_result_sha256": "4a698e5b902335f1ddee58875b5c803b77d47d10cd3ea49e011f3e314ce1ac54",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-base.json",
+      "date": "2026-01-03",
+      "json_pointer": "/account/daily/2",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110542.384400",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110542.384400"
+      },
+      "wealth_before_cny": "110542.384400",
+      "wealth_after_cny": "110542.384400",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_ALL-base",
+      "original_result_sha256": "4a698e5b902335f1ddee58875b5c803b77d47d10cd3ea49e011f3e314ce1ac54",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-base.json",
+      "date": "2026-01-04",
+      "json_pointer": "/account/daily/3",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110542.384400",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110542.384400"
+      },
+      "wealth_before_cny": "110542.384400",
+      "wealth_after_cny": "110542.384400",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_ALL-stress",
+      "original_result_sha256": "0cd9f649419ae721ef78690980e61e14bf7e5144bd5ada860efafb3f40b9ce52",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-stress.json",
+      "date": "2026-01-01",
+      "json_pointer": "/account/daily/0",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110113.941800",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110113.941800"
+      },
+      "wealth_before_cny": "110113.941800",
+      "wealth_after_cny": "110113.941800",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_ALL-stress",
+      "original_result_sha256": "0cd9f649419ae721ef78690980e61e14bf7e5144bd5ada860efafb3f40b9ce52",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-stress.json",
+      "date": "2026-01-02",
+      "json_pointer": "/account/daily/1",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110113.941800",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110113.941800"
+      },
+      "wealth_before_cny": "110113.941800",
+      "wealth_after_cny": "110113.941800",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_ALL-stress",
+      "original_result_sha256": "0cd9f649419ae721ef78690980e61e14bf7e5144bd5ada860efafb3f40b9ce52",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-stress.json",
+      "date": "2026-01-03",
+      "json_pointer": "/account/daily/2",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110113.941800",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110113.941800"
+      },
+      "wealth_before_cny": "110113.941800",
+      "wealth_after_cny": "110113.941800",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_ALL-stress",
+      "original_result_sha256": "0cd9f649419ae721ef78690980e61e14bf7e5144bd5ada860efafb3f40b9ce52",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_ALL-stress.json",
+      "date": "2026-01-04",
+      "json_pointer": "/account/daily/3",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110113.941800",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110113.941800"
+      },
+      "wealth_before_cny": "110113.941800",
+      "wealth_after_cny": "110113.941800",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_SMA-base",
+      "original_result_sha256": "36e870579f940d821f48e039f77687ee69a11ef919122786e9646f20f807012c",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-base.json",
+      "date": "2026-01-01",
+      "json_pointer": "/account/daily/0",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110542.384400",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110542.384400"
+      },
+      "wealth_before_cny": "110542.384400",
+      "wealth_after_cny": "110542.384400",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_SMA-base",
+      "original_result_sha256": "36e870579f940d821f48e039f77687ee69a11ef919122786e9646f20f807012c",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-base.json",
+      "date": "2026-01-02",
+      "json_pointer": "/account/daily/1",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110542.384400",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110542.384400"
+      },
+      "wealth_before_cny": "110542.384400",
+      "wealth_after_cny": "110542.384400",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_SMA-base",
+      "original_result_sha256": "36e870579f940d821f48e039f77687ee69a11ef919122786e9646f20f807012c",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-base.json",
+      "date": "2026-01-03",
+      "json_pointer": "/account/daily/2",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110542.384400",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110542.384400"
+      },
+      "wealth_before_cny": "110542.384400",
+      "wealth_after_cny": "110542.384400",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_SMA-base",
+      "original_result_sha256": "36e870579f940d821f48e039f77687ee69a11ef919122786e9646f20f807012c",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-base.json",
+      "date": "2026-01-04",
+      "json_pointer": "/account/daily/3",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110542.384400",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110542.384400"
+      },
+      "wealth_before_cny": "110542.384400",
+      "wealth_after_cny": "110542.384400",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_SMA-stress",
+      "original_result_sha256": "baaa83cd8db1c7a6a44a56818e7c181c2c9e662779e6f08f3282e4a57e7367e7",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-stress.json",
+      "date": "2026-01-01",
+      "json_pointer": "/account/daily/0",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110113.941800",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110113.941800"
+      },
+      "wealth_before_cny": "110113.941800",
+      "wealth_after_cny": "110113.941800",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_SMA-stress",
+      "original_result_sha256": "baaa83cd8db1c7a6a44a56818e7c181c2c9e662779e6f08f3282e4a57e7367e7",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-stress.json",
+      "date": "2026-01-02",
+      "json_pointer": "/account/daily/1",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110113.941800",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110113.941800"
+      },
+      "wealth_before_cny": "110113.941800",
+      "wealth_after_cny": "110113.941800",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_SMA-stress",
+      "original_result_sha256": "baaa83cd8db1c7a6a44a56818e7c181c2c9e662779e6f08f3282e4a57e7367e7",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-stress.json",
+      "date": "2026-01-03",
+      "json_pointer": "/account/daily/2",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110113.941800",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110113.941800"
+      },
+      "wealth_before_cny": "110113.941800",
+      "wealth_after_cny": "110113.941800",
+      "wealth_delta_cny": "0.000000"
+    },
+    {
+      "path_id": "A_SMA-stress",
+      "original_result_sha256": "baaa83cd8db1c7a6a44a56818e7c181c2c9e662779e6f08f3282e4a57e7367e7",
+      "original_result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result/A_SMA-stress.json",
+      "date": "2026-01-04",
+      "json_pointer": "/account/daily/3",
+      "original_fields": {
+        "raw_close": null,
+        "mark": "0",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "corrected_fields": {
+        "raw_close": null,
+        "mark": "4.753",
+        "mark_basis": "stale_prior_mark",
+        "stale_mark": true,
+        "is_trading_day": false
+      },
+      "prior_mark_source_date": "2025-12-31",
+      "prior_mark_source_close": "4.753",
+      "unchanged_money": {
+        "cash": "110113.941800",
+        "receivable": "0",
+        "units": "0",
+        "wealth": "110113.941800"
+      },
+      "wealth_before_cny": "110113.941800",
+      "wealth_after_cny": "110113.941800",
+      "wealth_delta_cny": "0.000000"
+    }
+  ],
+  "interpretation": "Original raw_close=null remains correct for each holiday. Replace only mark=0 with the prior actual nominal close4.753; mark_basis=stale_prior_mark and stale_mark=true are then supported by2025-12-31 source. Treat this immutable addendum together with the original results; do not replace their bytes.",
+  "financial_effect_proof": "cash+receivable+units*mark with units=0 is identical for all16 rows. Cash/receivable/units/wealth and all later rows remain unchanged, so no daily return, fee, order, dividend, volatility, amount difference or risk-match result changes.",
+  "wealth_delta_cny_total": "0.000000",
+  "actual_path_attempts_before": 4,
+  "actual_path_attempts_after": 4,
+  "additional_account_calls": 0,
+  "additional_paths": 0,
+  "source_code_modified": false,
+  "contract_modified": false,
+  "original_results_overwritten": false,
+  "C_numeric_self_acceptance_by_B": false,
+  "other_numeric_corrections": null
+}
