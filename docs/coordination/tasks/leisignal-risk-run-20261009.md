@@ -1,3 +1,14 @@
+# B Goal已标为blocked：缺本合同四路径明确批准
+
+- task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status blocked / awaiting_explicit_human_4_path_authorization；updated_at 2026-10-09T21:10:56.649375+08:00。原生Goal工具已返回blocked，未标complete或paused。
+- checked_coordination_sha=4d8abb6d06e9f254ae0c4231f9a3ec7c92100069；checked_at=2026-10-09T21:10:56.649375+08:00；已读COORDINATION、A/B/C和中控当前相关段。相对69bc90f7只有C新增人工独立核数准备及B引用远端读回段，已读取；代码接受/权限/写者/范围无变化。A冻结/B唯一implementation执行/C唯一独审归档，不写共享表，scope不释放。
+- B最新codex/leisignal-risk-run-20261009@1a2e3e8457d67392f12f842f59c25d3b6abbd258，本次2文件12065B远端完整SHA及逐文件内容已核同；仅goal-blocked-audit.json及自己的work-progress。完整实现7164290d、合同333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4、C 1e954fdc接受和3a1795c2引用均保留且未改。
+- 原触发回合和两次自动Goal续行连续三轮核同一批准缺失，达到阻塞阈值。上一轮为no_progress；本轮authorization仍not_granted、实际启动标记不存在、C接受对应有效，中控亦等待人类批准；自动续行/C/中控消息不能代批。确实没有其他本职责内必需实现修复可推进，重复检查/改参数/借旧次数均不合法。
+- 实际历史路径0/4、比例0，人工累计8、旧两次耗尽，失败原件保留；研究和C实际数值验收未完成。不创建定时器，不重复催问或进行额外研究。
+- 恢复条件：用户批准本修订4合同准确四键各一次，B保存原话/来源/处理时间/合同，重核同一storage-plan固定外盘身份/容量后唯一各一次执行，结果位置/大小/SHA/真实次数Git交C，失败计次数不自动重跑。准确连续回合审计与停止依据见implementation/goal-blocked-audit.json。
+
+---
+
 # C代码已接受；B仅待真实四路径批准
 
 - task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / awaiting_explicit_human_4_path_authorization；updated_at 2026-10-09T21:03:46.519689+08:00。Goal保持active，未标本批研究完成。
@@ -92,7 +103,7 @@ checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2
 {
   "task_id": "leisignal-risk-run-20261009",
   "owner": "01a1208c-d559-72f0-ba6e-980a4337fa2c",
-  "status": "active",
+  "status": "blocked",
   "scope_released": false,
   "write_paths": [
     "docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/",
@@ -104,11 +115,13 @@ checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2
   ],
   "dependency_notes": "A准确输入和C准确完整代码接受均已绑定；仅缺本合同四键各一次人类批准，实际结果仍未有。",
   "stage": "awaiting_explicit_human_4_path_authorization",
-  "result_commit": "3a1795c235343e562b3fef211686f2ce010025f0",
-  "checked_coordination_sha": "9eac3fa5fd0f463e4908ac43f73b5005a5b440e9",
-  "checked_at": "2026-10-09T21:03:46.519689+08:00",
+  "result_commit": "1a2e3e8457d67392f12f842f59c25d3b6abbd258",
+  "checked_coordination_sha": "4d8abb6d06e9f254ae0c4231f9a3ec7c92100069",
+  "checked_at": "2026-10-09T21:10:56.649375+08:00",
   "C_release_commit": "1e954fdc511092c1769fcaa5a6779d36eb7e0641",
   "actual_path_attempts": 0,
-  "authorized_paths": 0
+  "authorized_paths": 0,
+  "native_goal_status": "blocked",
+  "consecutive_permission_blocker_turns": 3
 }
 <!-- lei-coordination-json:end -->
