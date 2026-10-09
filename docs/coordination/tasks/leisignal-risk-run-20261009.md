@@ -1,3 +1,20 @@
+# B完整实现已交付：implementation_ready_for_review
+
+- task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / implementation_ready_for_review；updated_at 2026-10-09T20:37:10.027267+08:00。
+- checked_coordination_sha=d5473d20b9e2ea9ed822d1de4b8b707f9d3d01dd；checked_at=2026-10-09T20:37:10.027267+08:00；已读A inputs_ready全文、C核心已验/输入独审最新段、中控准确A接续段；COORDINATION与本task前段未变。冲突决定：A inputs冻结只读、B唯一implementation/执行、C唯一review/后续归档；不占共享registry/INDEX/catalog。
+- 成果分支codex/leisignal-risk-run-20261009@c65971bac01b0d377a8b90c130a1d7266e4ac109：本阶段30文件217872B，远端完整SHA及每文件内容已核同。第一阶段67970c2635d49ba552c27fb236e59bcd98e32160保留。
+- 核心入口：docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/READY-FOR-C.md、contract.json、consumption-binding.json、monthly_account.py、input_adapter.py、execution_guard.py、runner.py、bind_inputs.py及人工/拒绝/外盘/失败/账本证据；自己的work-progress同task文件。
+- A准确绑定29337ec9e6560171c459019834638ce2c6993ef9；manifest SHA9f1c326b46e7afc22d2ad6454e9f754e64540442e120412326ce270a50799baf。47原件大小/SHA消费前核同，181自然日/116交易日、1分红/1限制、现金起点与0份/0应收一致；完整回顾资格及24/25异机恢复未核限制保留。B未调用A验证器、未下载或替其资料研究。
+- B冻结合同SHA c027fca87df31cd2125709d6f2330869e8b1cd119f0292788eb2b7a1e3ec30d1；6实际代码SHA、A Git/本机身份、全来源闭包/角色、人工证据、四键零真实累计预算和既有规范已绑定。月度比例直接从冻结来源生成，禁止外部手填目标/参数选项。
+- C第一阶段fc9fb189d6ce390e65e26ebb87eda8969488c085核心接受保留；其台账问题已补正，截止累计6人工调用（5完整组+1定向）、初版2失败保留。本阶段核心增加损益贡献核对、自然月末截止/最后交易观察日与休市日时点标签，完整C接受未有，不能借旧C接受放行新链。
+- 四拒绝CLI例与五外盘工程例有真实回执；实际63字节人工外盘文件读回一致，模拟掉盘不是实拔。真实计划目录仍不存在，拟16MiB外结果日志/1MiB内小记录；运行前重核固定UUID/容量/同一计划，不覆盖或回退。
+- 归置：主仓退出0；独立旧基线298继承问题输出保留，新增任务无根层违规，未删资料/改白名单。发布首次diff检查多余空行失败已留publication-format-failure.json，修后通过，无此前错误提交/运行。
+- 真实预算：authorized=0 / proposed=4 / attempted=0；原两路径已耗尽封存；原A重放/新信号标签/下载/拟合/扫描0。authorization.json not_granted；无C code_review_accepted或数字验收，未称研究完成。
+- 下一依赖：C核本准确commit的新保护/输入/变化部分并发完整代码接受/具体修复；用户批准本冻结合同的额外4路径。B随后唯一各一次执行，保存完整路径、月目标/日账/订单/分红/费用/统计/外盘SHA与次数，交C numeric_review。正常修复不逐步问继续，不重跑旧研究或重置次数。
+- 通过Git交C与中控，不发送跨对话消息、不创建定时器；原中控已恢复三对话调度，不将旧休息段当当前事实。
+
+---
+
 # B第一阶段代码已发布，继续运行保护与A绑定准备
 
 - checked_coordination_sha=786789cf52aa2d9b06bd40518d8147f2bbc98887；checked_at=2026-10-09T20:19:05.201151+08:00；已读A/C当前全文和中控20:13/20:15恢复段，COORDINATION未变；本task旧事实保留，A/C均已登记active，尚无A准确manifest；范围无重叠。
