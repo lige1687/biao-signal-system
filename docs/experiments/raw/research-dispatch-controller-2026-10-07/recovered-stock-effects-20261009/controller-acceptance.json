@@ -1,0 +1,111 @@
+{
+  "at": "2026-10-09T15:12:24.952229+08:00",
+  "original_zip": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-large-cloud-input-2026-10-07/stock-5211-frozen-close-2020-2024-v1.zip",
+  "sha256": "43ebf06bfe66c79c2fb332fa287db33d49a60f23c4c3da0e4bb39ea9d23fe192",
+  "bytes": 16619603,
+  "members": {
+    "README.md": {
+      "bytes": 1971,
+      "mode": "0o444",
+      "sha256": "34ae0236378f1db64f433dcce7ea678777bd7188e1718cdb27bdc72184de4d2b"
+    },
+    "calendar-source.json": {
+      "bytes": 296252,
+      "mode": "0o444",
+      "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1"
+    },
+    "calendar.json": {
+      "bytes": 22836,
+      "mode": "0o444",
+      "sha256": "fd07bb5e42f2eb7c0aeee7cbb1d84bf73f7f2147e4e0743d0cfa03753a6d57ac"
+    },
+    "close.parquet": {
+      "bytes": 14137323,
+      "mode": "0o444",
+      "sha256": "ecd33847c39bd4768db7d9827e6d20f18dc375d1edc1d053de614eb8e9b0c963"
+    },
+    "daily-input-status.parquet": {
+      "bytes": 1178403,
+      "mode": "0o444",
+      "sha256": "9e8dd6525a781b8b8e66955ad751724ce2ea590cd08574f8867bc3c8263eac42"
+    },
+    "export_readonly.py": {
+      "bytes": 21274,
+      "mode": "0o444",
+      "sha256": "8541bdacc1a79f3e8b92203da42205c0e265fa992c4e77b79388233ce591eca9"
+    },
+    "field-definitions.json": {
+      "bytes": 2309,
+      "mode": "0o444",
+      "sha256": "2a1f2a147c6e79839f10db21538a08897cfe12c2e9d54fe324395624d029606b"
+    },
+    "manifest.json": {
+      "bytes": 18729,
+      "mode": "0o444",
+      "sha256": "01d562a656889f320384ba3176a9636a816ce3b0f72f9882bae6bc46d71b7d79"
+    },
+    "per-code-missing-summary.json": {
+      "bytes": 772331,
+      "mode": "0o444",
+      "sha256": "82cc62b2776fce590c1a6f8b897c31763516a05ba5f397c64ac404b8c305348b"
+    },
+    "pool.json": {
+      "bytes": 79844,
+      "mode": "0o444",
+      "sha256": "5c5d14d848718bc96b0ed63ae282930173e869cfbefb20412fbcd5d42ff30cc8"
+    },
+    "qualification-provenance.json": {
+      "bytes": 37487,
+      "mode": "0o444",
+      "sha256": "b0ab9e130bd21b269a4f93d65a0fc889990cc000b4354a8716a83bfdd6b2c6c0"
+    },
+    "verify_input.py": {
+      "bytes": 5388,
+      "mode": "0o444",
+      "sha256": "1bd577caeb04877587545efab8571eef8d82884b921798fd9b981ca63e8d3ffc"
+    },
+    "weekly-availability-summary.json": {
+      "bytes": 32556,
+      "mode": "0o444",
+      "sha256": "521353883f523f41784f829e9d2af586a720c8c923cbba92bcc5d2f352e146db"
+    },
+    "weekly-evaluation-status.parquet": {
+      "bytes": 1206267,
+      "mode": "0o444",
+      "sha256": "2dd33e92adc79c74787f5cb6b6f7e094a532aaa4754dbb0b33cf68a80f02cc76"
+    }
+  },
+  "members_verified": 14,
+  "effect_packages": [
+    {
+      "file": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-stock-original-effects/research-stock-original-effects-20261009T145332-76a120ba11b8/result/stock-5211-ppo-rankic-audited-results-v1.zip",
+      "sha256": "1ca9892f73d0e5b7a455027869cbb47c395125ae80c488f561abf2b1a6bdb255",
+      "library_id": "libfile_c83a1f03c3848191bdf05bf1346c0517",
+      "bytes": 19018349
+    },
+    {
+      "file": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-stock-original-effects/research-stock-original-effects-20261009T145332-76a120ba11b8/result/stock-5211-P26-conditional-diagnostic-audited-results-v1.zip",
+      "sha256": "fb5cdfdff7c48618428c0813435d424fc61099c389a740faa291768723efb651",
+      "library_id": "libfile_8bcd654441588191acc07430522f4f6c",
+      "bytes": 43858265
+    }
+  ],
+  "review_status": "accepted_saved_descriptive_evidence_only",
+  "reviewer": "b1_saved_evidence_review / gpt-6-sol medium",
+  "controller_weekly_arithmetic": "controller-weekly-arithmetic.json",
+  "historical_P26_Y_attempts": 2,
+  "historical_P26_Y_successful": 1,
+  "new_market_runs": 0,
+  "private_parent_authorization_text": "not included; phase grants and referenced fingerprint only",
+  "transcription_corrections": [
+    "initial reviewer only checked results ZIPs and noted source bytes unverified; exact local original supplied and 14 members verified",
+    "reviewer close.parquet SHA in prose omitted a character; programmatic value in this receipt is authoritative"
+  ],
+  "limitations": [
+    "fixed current 5211 code cache not unbiased historical universe",
+    "retrospective adjusted price and availability not established",
+    "overlapping future windows descriptive only",
+    "P26 coarse grouping leaves baseline imbalance",
+    "saved receipts do not independently observe historical external process counts"
+  ]
+}

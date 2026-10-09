@@ -15,6 +15,17 @@
   "任务书"
  ],
  "entries": {
+    "docs/experiments/weekly-portfolio-whole-buy-recovery-2026-10-09.md": {
+      "category": "方法论与验证",
+      "verdict": "passed",
+      "oneLiner": "固定人工整笔买单可在新进程恢复且不重复扣款；导入前来源检查经独审修复，仅限单写者已提交边界，未验证完整策略或真实交易。",
+      "report_sha256": "ad791c029b6f9ceda13dabc074aeb0b8817cec8a17216493f648842951dfa735",
+      "archive_status": "completed_bounded_synthetic_whole_buy_recovery",
+      "raw_directory": "docs/experiments/raw/weekly-portfolio-whole-buy-recovery-2026-10-09",
+      "market_fits": 0,
+      "backtests": 0,
+      "production_changes": 0
+    },
     "docs/experiments/native-risk-d-mae20-real-ARCHIVE-2026-10-09.md": {"category": "方法论与验证", "verdict": "mixed", "oneLiner": "75个ETF案例完成原合同计算：风险距离关联弱且方向不一，与波动指标差异对两个案例敏感；独立增量和交易价值未证明。", "report_sha256": "721e72475df5252b94fbf261079f3b7b58a7547fb44ccf615d749989dfd97925", "raw_directory": "docs/experiments/raw/research-dispatch-controller-2026-10-07/real-y-evaluation-20261009", "archive_status": "accepted_bounded_descriptive_study", "real_X_passes": 1, "real_Y_passes": 1, "fits": 0, "production_changes": 0},
   "docs/experiments/csi300-catalog-completeness-qualification-2026-10-08.md": {
    "category": "数据与质量",
@@ -933,7 +944,18 @@
    "backtests": 0,
    "production_changes": 0
   },
-  "docs/experiments/research-evidence-catalog-2026-10-07.md": {"category": "方法论与验证", "verdict": "mixed", "oneLiner": "旧结论按原问题复用；B1保存结果及现金原包已核，现金适配与剩余个股资格仍分项待完成。", "report_sha256": "8f82087ab37bfbabd0fa662129daa6a02d195da28c01b4963c7af8b1fb3c0b3c", "archive_status": "completed_bounded_evidence_catalog; remaining_qualifications_separate", "evidence_stage": "old_snapshot_preserved; qlib_D_B1_cash_sources_verified_20261009", "raw_directory": "docs/experiments/raw/research-evidence-catalog-2026-10-07", "market_fits": 0, "backtests": 0, "production_changes": 0},
+  "docs/experiments/research-evidence-catalog-2026-10-07.md": {
+  "category": "方法论与验证",
+  "verdict": "mixed",
+  "oneLiner": "旧结论按原范围复用；5211/P26、B1和现金原件已核，有限整笔恢复已验收，完整历史资格与策略效果仍分项限定。",
+  "report_sha256": "741b9337e71036cd390ba186eb88e92d376f8a196a8fc928f6041104befe9da3",
+  "archive_status": "completed_bounded_evidence_catalog; remaining_qualifications_separate",
+  "evidence_stage": "old_snapshot_preserved; qlib_D_B1_cash_PPO_P26_sources_verified_20261009",
+  "raw_directory": "docs/experiments/raw/research-evidence-catalog-2026-10-07",
+  "market_fits": 0,
+  "backtests": 0,
+  "production_changes": 0
+},
   "docs/experiments/native-workflow-integration-2026-10-07.md": {
    "category": "方法论与验证",
    "verdict": "mixed",

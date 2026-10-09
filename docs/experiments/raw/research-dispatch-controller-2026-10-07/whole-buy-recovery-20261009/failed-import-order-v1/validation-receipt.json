@@ -1,0 +1,53 @@
+{
+  "eight_groups": [
+    "after_fault",
+    "before_fault",
+    "corruption",
+    "duplicate",
+    "normal_path",
+    "refusal_path",
+    "request_identity",
+    "unsupported"
+  ],
+  "limitations": [
+    "single writer and committed replace boundary only",
+    "synthetic fixed P0 whole orders only",
+    "no original partial-fill engine or P1, market, production, concurrent, power-loss, or hostile-edit qualification"
+  ],
+  "new_files_sha256": {
+    "README.md": "ff3b2ea93b80602cd2161ff424ce47e89c4d5a3a83ccb306c908614654122822",
+    "frozen-fixtures.json": "bffa2c3217fd07cbbbff4f3ec42d5cfd0c54ffc63084e9e455da3bbb6fd84ab8",
+    "run_recovery_checks.py": "9b79d492c95355466c3eab5b7c47e0c9b1f842f7b29be19534b56165c835a7af",
+    "test_whole_buy_recovery.py": "5d28e777a0605b7a415dae594b05a410e76100d9d7a9afa6ebb77517b02c023d",
+    "whole_buy_recovery.py": "832e766f3f15e0ed81c048faab20cce3a508c5a7931d592f1b5cea1ddbe90a05"
+  },
+  "output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery/goal5-whole-buy-recovery-20261009T143837-bb7de28bb76b/result",
+  "passed_log": "logs/validation-passed-v3.json",
+  "passed_log_sha256": "c28472b50880f47e63282ab1ae1b5d1011e66e4c3ad5afe2491f48af7413c3a7",
+  "processes": {
+    "refusal": {
+      "final_cash": "205.30",
+      "first_cash": "410.50",
+      "first_pid": 98034,
+      "full_runtime_equal_across_restart": true,
+      "new_order_apply_count": 1,
+      "recovery_replay_apply_count": 0,
+      "second_pid": 98063
+    },
+    "success": {
+      "final_cash": "0.10",
+      "first_cash": "205.30",
+      "first_pid": 97980,
+      "full_runtime_equal_across_restart": true,
+      "new_order_apply_count": 1,
+      "recovery_replay_apply_count": 1,
+      "second_pid": 97995
+    }
+  },
+  "retained_failure_log": "logs/validation-failed-v1.json",
+  "retained_failure_log_sha256": "ed8abe2e982e81d5f777a63cd6ec19ad04321564d9ac03512a1134637b41cdb6",
+  "run_id": "goal5-whole-buy-recovery-20261009T143837-bb7de28bb76b",
+  "schema": "whole-buy-recovery-validation-receipt/1",
+  "source_manifest_sha256": "6833c6f01e3fc9b3a3eb93d44971034c53b040efc597965ec13e98c8dfeae3f5",
+  "status": "passed_bounded_synthetic_engineering"
+}

@@ -1,0 +1,28 @@
+{
+  "status": "not_accepted_requires_import_order_repair",
+  "frozen_author_files": {
+    "validation-receipt.json": "3879191aaf20e64d40b0a4dbb11c59b48e2b752c5bc12544290b18a55cb79643",
+    "source-manifest.json": "6833c6f01e3fc9b3a3eb93d44971034c53b040efc597965ec13e98c8dfeae3f5",
+    "whole_buy_recovery.py": "832e766f3f15e0ed81c048faab20cce3a508c5a7931d592f1b5cea1ddbe90a05",
+    "frozen-fixtures.json": "bffa2c3217fd07cbbbff4f3ec42d5cfd0c54ffc63084e9e455da3bbb6fd84ab8",
+    "README.md": "ff3b2ea93b80602cd2161ff424ce47e89c4d5a3a83ccb306c908614654122822",
+    "run_recovery_checks.py": "9b79d492c95355466c3eab5b7c47e0c9b1f842f7b29be19534b56165c835a7af",
+    "test_whole_buy_recovery.py": "5d28e777a0605b7a415dae594b05a410e76100d9d7a9afa6ebb77517b02c023d"
+  },
+  "independent_evidence_root": "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result",
+  "independent_evidence_sha256": {
+    "independent-review-results.json": "abbe8ce15b0cd707e05b0e35a6e7e1af44a4a082c6cbd9712a12f470900d1891",
+    "source-drift-import-reproduction.json": "348dbeb054bc6f22fde6808887c15a7435b7d45e39ff49ee5e8aec834e6f9c05",
+    "independent_probes.py": "6251af74cb7af8d9d4476795180c209a096611783ccd32974bca5e356f9335e1"
+  },
+  "passed": [
+    "independent successful and refused order process restart",
+    "8 request content conflicts",
+    "second-order pre-replace/post-replace failures",
+    "full runtime and receipt tampering after recomputed digest rejected",
+    "amount conservation"
+  ],
+  "mandatory_fix": "verify all frozen source bytes before first old module import; retain per-operation checks",
+  "first_format_failure_source_snapshot": "missing; log and state present, old SHA0c6785b9fba25234ea4fc3563b595cdb73484f35032144ccf66dd14811755663; never reconstruct and pretend original",
+  "source_writes_by_reviewer": 0
+}

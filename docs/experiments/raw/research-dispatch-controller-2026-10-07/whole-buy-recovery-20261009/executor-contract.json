@@ -1,0 +1,59 @@
+{
+  "mission": "Add bounded committed-boundary recovery for existing single original P0 whole-buy synthetic adapter",
+  "task_scope": [
+    "Implement only implementation-brief.md, no original research rerun"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py",
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/order_planning_v2.py",
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/order_planning.py",
+    "docs/experiments/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/order_ledger_adapter_v2.py",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/whole-buy-recovery-20261009/implementation-brief.md",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/whole-buy-recovery-20261009/output-plan.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/weekly-portfolio-whole-buy-recovery-2026-10-09"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "seven new files, versioned failures",
+    "eight targeted groups and two actual process recovery traces",
+    "source hashes unchanged, external result receipt and limits"
+  ],
+  "stop_conditions": [
+    "source hash drift",
+    "requires changed strategy/old source",
+    "external storage identity failure",
+    "out of scope execution"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true,
+    "reviewer": "original_cash_package_review",
+    "model": "gpt-6-astra"
+  },
+  "source_sha256": {
+    "weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+    "weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+    "weekly-portfolio-order-planning-2026-10-08/order_planning_v2.py": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+    "weekly-portfolio-order-planning-2026-10-08/order_planning.py": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+    "weekly-portfolio-order-ledger-adapter-2026-10-08/order_ledger_adapter_v2.py": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba"
+  },
+  "output_plan": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/whole-buy-recovery-20261009/output-plan.json",
+  "implementation_brief": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/whole-buy-recovery-20261009/implementation-brief.md",
+  "positive_policy": "P0_only",
+  "original_market_budget_consumption": 0,
+  "execution_authorized": "bounded_synthetic_engineering_only",
+  "repository_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008",
+  "external_write_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery/goal5-whole-buy-recovery-20261009T143837-bb7de28bb76b"
+  ],
+  "preflight_failure_preserved": "First dry_run rejected all absolute paths; helper supports repository-relative paths only. Repository paths now relative; exact external scope separately checked by root output_storage plan, not claimed covered by helper."
+}

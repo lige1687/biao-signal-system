@@ -1,0 +1,51 @@
+{
+  "drift_marker_executed": false,
+  "failed_import_order_snapshot": "docs/experiments/raw/research-dispatch-controller-2026-10-07/whole-buy-recovery-20261009/failed-import-order-v1",
+  "first_display_failure_source_snapshot": "missing; do not reconstruct as contemporaneous source",
+  "limitations": [
+    "single writer and committed replace boundary only",
+    "synthetic fixed P0 whole orders only",
+    "no original partial-fill engine or P1, market, production, concurrent, power-loss, or hostile-edit qualification"
+  ],
+  "new_files_sha256": {
+    "README.md": "af0893c14d829f823a46e7f3a4ace9bcb1eeb561891547a50251aa0277e8c626",
+    "frozen-fixtures.json": "bffa2c3217fd07cbbbff4f3ec42d5cfd0c54ffc63084e9e455da3bbb6fd84ab8",
+    "run_recovery_checks.py": "9b79d492c95355466c3eab5b7c47e0c9b1f842f7b29be19534b56165c835a7af",
+    "test_whole_buy_recovery.py": "5d28e777a0605b7a415dae594b05a410e76100d9d7a9afa6ebb77517b02c023d",
+    "whole_buy_recovery.py": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f"
+  },
+  "normal_cash_path": [
+    "205.30",
+    "0.10"
+  ],
+  "normal_fees": "10.40",
+  "normal_full_runtime_equal_across_restart": true,
+  "normal_process_pids": [
+    567,
+    591
+  ],
+  "original_five_source_sha256": {
+    "dated_ledger.py": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+    "order_ledger_adapter_v2.py": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba",
+    "order_planning.py": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+    "order_planning_v2.py": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+    "shared-account-spec.md": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a"
+  },
+  "prior_author_validation": {
+    "output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery/goal5-whole-buy-recovery-20261009T143837-bb7de28bb76b/result",
+    "passed_log": "logs/validation-passed-v3.json",
+    "passed_log_sha256": "c28472b50880f47e63282ab1ae1b5d1011e66e4c3ad5afe2491f48af7413c3a7",
+    "retained_failure_log": "logs/validation-failed-v1.json",
+    "retained_failure_log_sha256": "ed8abe2e982e81d5f777a63cd6ec19ad04321564d9ac03512a1134637b41cdb6",
+    "status": "historical_prior_to_import_order_fix"
+  },
+  "repair_evidence": {
+    "normal-two-process-control.json": "050218cd63adef8f7e47944b83e2a5bd5786d6f4d2cad07971460ce7a8ddf82e",
+    "source-drift-before-import.json": "1368b938f3f404d3c1005b73fffee426344540c181a56f56f8030833d1f72614"
+  },
+  "repair_output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-repair/goal5-whole-buy-recovery-repair-20261009T145826-0be50058fa7e/result",
+  "repair_output_plan_run_id": "goal5-whole-buy-recovery-repair-20261009T145826-0be50058fa7e",
+  "schema": "whole-buy-recovery-validation-receipt/2",
+  "source_manifest_sha256": "3236223250d0ca6cdc519d16cb833f978bd175890e9f5fbd85a4457ff32f2e11",
+  "status": "targeted_import_order_repair_passed_pending_independent_review"
+}

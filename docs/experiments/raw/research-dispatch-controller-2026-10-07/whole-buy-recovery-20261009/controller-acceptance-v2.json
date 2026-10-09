@@ -1,0 +1,415 @@
+{
+  "at": "2026-10-09T15:08:37.927231+08:00",
+  "status": "accepted_bounded_synthetic_whole_buy_recovery",
+  "checked_coordination_sha": "dc3aa1cf187a76bd570c18e2313f7ff27d418c46",
+  "source_files": {
+    "validation-receipt.json": "b7fdcdc68f96e034e527076d026812857b521c678b395cf89d1d47ec06cb2082",
+    "source-manifest.json": "3236223250d0ca6cdc519d16cb833f978bd175890e9f5fbd85a4457ff32f2e11",
+    "whole_buy_recovery.py": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f",
+    "frozen-fixtures.json": "bffa2c3217fd07cbbbff4f3ec42d5cfd0c54ffc63084e9e455da3bbb6fd84ab8",
+    "README.md": "af0893c14d829f823a46e7f3a4ace9bcb1eeb561891547a50251aa0277e8c626",
+    "run_recovery_checks.py": "9b79d492c95355466c3eab5b7c47e0c9b1f842f7b29be19534b56165c835a7af",
+    "test_whole_buy_recovery.py": "5d28e777a0605b7a415dae594b05a410e76100d9d7a9afa6ebb77517b02c023d"
+  },
+  "independent_result": {
+    "drift": {
+      "adapter_v2": {
+        "marker_executed": false,
+        "old_modules_loaded": [],
+        "rejected_before_old_import": true
+      },
+      "ledger": {
+        "marker_executed": false,
+        "old_modules_loaded": [],
+        "rejected_before_old_import": true
+      },
+      "planner_v1": {
+        "marker_executed": false,
+        "old_modules_loaded": [],
+        "rejected_before_old_import": true
+      },
+      "planner_v2": {
+        "marker_executed": false,
+        "old_modules_loaded": [],
+        "rejected_before_old_import": true
+      },
+      "spec": {
+        "marker_executed": false,
+        "old_modules_loaded": [],
+        "rejected_before_old_import": true
+      }
+    },
+    "first_display_failure_source_snapshot": "missing, preserved limitation; not reconstructed",
+    "fixture_sha256": "bffa2c3217fd07cbbbff4f3ec42d5cfd0c54ffc63084e9e455da3bbb6fd84ab8",
+    "new_wrapper_sha256": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f",
+    "normal": {
+      "cash": [
+        "205.30",
+        "0.10"
+      ],
+      "fees": "10.40",
+      "full_runtime_equal_across_restart": true,
+      "full_saved_state_hash_equal": true,
+      "new_apply_count": 1,
+      "pids": [
+        2405,
+        2426
+      ],
+      "replay_apply_count": 1
+    },
+    "old_five_sources_unchanged": true,
+    "prior_seven_file_snapshot_exact": true,
+    "scope": "targeted import-order repair recheck only",
+    "status": "PASS_TARGETED_REPAIR"
+  },
+  "external_evidence": {
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/preflight.json": {
+      "sha256": "039b66b9eadf3150bc3f04ca176da436bf4e3c02a527976123da42285c0cf59f",
+      "bytes": 1284
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/._preflight.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/repair_independent_probes.py": {
+      "sha256": "4e27bab7c72e0c653c07721c700fb09bd54b5ef1088d3e5c95b12e39e590e2fc",
+      "bytes": 4936
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/._repair_independent_probes.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/normal-first.json": {
+      "sha256": "14c6504e44ac18476ed838f3c67bb821f2167ca1d3a51362bd2fad2a7ad012d6",
+      "bytes": 13374
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/._normal-first.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/normal-second.json": {
+      "sha256": "ea1627426e073ee19f4883306845025a9109fa2b861219ba8f0421bd6d7326c5",
+      "bytes": 29287
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/._normal-second.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/repair-independent-results.json": {
+      "sha256": "ce9d2406c3085fb8c0801999f1c7204c058ad4d2dd32e02dcddec89440d60467",
+      "bytes": 1394
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/._repair-independent-results.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/process.json": {
+      "sha256": "eab5e7140e8ec5fc7734c5391cf6c626e74144d6f3863587a31267aa3ededbb0",
+      "bytes": 152
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/._process.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/whole_buy_recovery.py": {
+      "sha256": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f",
+      "bytes": 15568
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/._whole_buy_recovery.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/frozen-fixtures.json": {
+      "sha256": "bffa2c3217fd07cbbbff4f3ec42d5cfd0c54ffc63084e9e455da3bbb6fd84ab8",
+      "bytes": 1022
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/._frozen-fixtures.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py": {
+      "sha256": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+      "bytes": 14348
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-dated-execution-2026-10-08/._dated_ledger.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-order-planning-2026-10-08/order_planning_v2.py": {
+      "sha256": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+      "bytes": 9177
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-order-planning-2026-10-08/._order_planning_v2.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-order-planning-2026-10-08/order_planning.py": {
+      "sha256": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+      "bytes": 10137
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-order-planning-2026-10-08/._order_planning.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/order_ledger_adapter_v2.py": {
+      "sha256": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba",
+      "bytes": 15068
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/spec/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/._order_ledger_adapter_v2.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/process.json": {
+      "sha256": "eab5e7140e8ec5fc7734c5391cf6c626e74144d6f3863587a31267aa3ededbb0",
+      "bytes": 152
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/._process.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/whole_buy_recovery.py": {
+      "sha256": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f",
+      "bytes": 15568
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/._whole_buy_recovery.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/frozen-fixtures.json": {
+      "sha256": "bffa2c3217fd07cbbbff4f3ec42d5cfd0c54ffc63084e9e455da3bbb6fd84ab8",
+      "bytes": 1022
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/._frozen-fixtures.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py": {
+      "sha256": "1815a9c4b97197c31fe509aac638c475da31d41fef76c7c7d3415793251b9561",
+      "bytes": 14404
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-dated-execution-2026-10-08/._dated_ledger.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-order-planning-2026-10-08/order_planning_v2.py": {
+      "sha256": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+      "bytes": 9177
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-order-planning-2026-10-08/._order_planning_v2.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-order-planning-2026-10-08/order_planning.py": {
+      "sha256": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+      "bytes": 10137
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-order-planning-2026-10-08/._order_planning.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/order_ledger_adapter_v2.py": {
+      "sha256": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba",
+      "bytes": 15068
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/ledger/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/._order_ledger_adapter_v2.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/process.json": {
+      "sha256": "eab5e7140e8ec5fc7734c5391cf6c626e74144d6f3863587a31267aa3ededbb0",
+      "bytes": 152
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/._process.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/whole_buy_recovery.py": {
+      "sha256": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f",
+      "bytes": 15568
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/._whole_buy_recovery.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/frozen-fixtures.json": {
+      "sha256": "bffa2c3217fd07cbbbff4f3ec42d5cfd0c54ffc63084e9e455da3bbb6fd84ab8",
+      "bytes": 1022
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/._frozen-fixtures.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py": {
+      "sha256": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+      "bytes": 14348
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-dated-execution-2026-10-08/._dated_ledger.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-order-planning-2026-10-08/order_planning_v2.py": {
+      "sha256": "49b38af186bef31196aba58b46fe20e6cea9c248a4cbaeee9fb14907fe41872d",
+      "bytes": 9233
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-order-planning-2026-10-08/._order_planning_v2.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-order-planning-2026-10-08/order_planning.py": {
+      "sha256": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+      "bytes": 10137
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-order-planning-2026-10-08/._order_planning.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/order_ledger_adapter_v2.py": {
+      "sha256": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba",
+      "bytes": 15068
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v2/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/._order_ledger_adapter_v2.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/process.json": {
+      "sha256": "eab5e7140e8ec5fc7734c5391cf6c626e74144d6f3863587a31267aa3ededbb0",
+      "bytes": 152
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/._process.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/whole_buy_recovery.py": {
+      "sha256": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f",
+      "bytes": 15568
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/._whole_buy_recovery.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/frozen-fixtures.json": {
+      "sha256": "bffa2c3217fd07cbbbff4f3ec42d5cfd0c54ffc63084e9e455da3bbb6fd84ab8",
+      "bytes": 1022
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/._frozen-fixtures.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py": {
+      "sha256": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+      "bytes": 14348
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-dated-execution-2026-10-08/._dated_ledger.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-order-planning-2026-10-08/order_planning_v2.py": {
+      "sha256": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+      "bytes": 9177
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-order-planning-2026-10-08/._order_planning_v2.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-order-planning-2026-10-08/order_planning.py": {
+      "sha256": "54900b6c9d9381cb0b174dd5186390d8a9cbe35ea37a47680879bba5f322e14c",
+      "bytes": 10193
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-order-planning-2026-10-08/._order_planning.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/order_ledger_adapter_v2.py": {
+      "sha256": "3bfb632f40a234e76813937a2e900377eec148d8c520acf06eb6b8601bb1e8ba",
+      "bytes": 15068
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/planner_v1/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/._order_ledger_adapter_v2.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/process.json": {
+      "sha256": "eab5e7140e8ec5fc7734c5391cf6c626e74144d6f3863587a31267aa3ededbb0",
+      "bytes": 152
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/._process.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/whole_buy_recovery.py": {
+      "sha256": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f",
+      "bytes": 15568
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/._whole_buy_recovery.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/frozen-fixtures.json": {
+      "sha256": "bffa2c3217fd07cbbbff4f3ec42d5cfd0c54ffc63084e9e455da3bbb6fd84ab8",
+      "bytes": 1022
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/._frozen-fixtures.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py": {
+      "sha256": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+      "bytes": 14348
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-dated-execution-2026-10-08/._dated_ledger.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-order-planning-2026-10-08/order_planning_v2.py": {
+      "sha256": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+      "bytes": 9177
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-order-planning-2026-10-08/._order_planning_v2.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-order-planning-2026-10-08/order_planning.py": {
+      "sha256": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+      "bytes": 10137
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-order-planning-2026-10-08/._order_planning.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/order_ledger_adapter_v2.py": {
+      "sha256": "6f8a39427c94aeff8811c67782947a172c519c0168ef0dfd0e0534b96d3daa2e",
+      "bytes": 15124
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/drift/adapter_v2/raw/weekly-portfolio-order-ledger-adapter-2026-10-08/._order_ledger_adapter_v2.py": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/process_success_v100/normal/._state.json": {
+      "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+      "bytes": 4096
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/goal5-whole-buy-recovery-review/goal5-whole-buy-recovery-review-20261009T145158-25f68c0ce828/result/repair-v2/process_success_v100/normal/state.json": {
+      "sha256": "7cfdd16dc43c133dada5245ec09209bd74d8876a54a1440c2844537ee8343994",
+      "bytes": 16215
+    }
+  },
+  "prior_independent_review": "independent-review-v1.json",
+  "original_failures_preserved": [
+    "display_precision_assertion_first_source_snapshot_missing",
+    "import_before_hash_check_snapshot_preserved"
+  ],
+  "scope": "one frozen synthetic P0 decision, serial full buys, committed persistence boundaries",
+  "not_accepted": [
+    "P1",
+    "partial fills",
+    "sales",
+    "reservations",
+    "corporate actions",
+    "concurrency",
+    "power loss guarantees",
+    "market effectiveness",
+    "Goal5 overall"
+  ],
+  "market_runs": 0,
+  "original_budget_reset": false,
+  "remote_publication": "pending"
+}

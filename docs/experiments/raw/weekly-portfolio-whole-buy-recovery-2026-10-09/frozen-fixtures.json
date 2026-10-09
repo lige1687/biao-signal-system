@@ -1,0 +1,22 @@
+{
+  "schema": "whole-buy-synthetic-fixtures/1",
+  "name": "single-invented-account",
+  "decision_name": "invented-original-weekly-decision",
+  "known_at": "2026-01-01T15:00:00+08:00",
+  "decision_at": "2026-01-01T16:00:00+08:00",
+  "frozen_at": "2026-01-02T08:00:00+08:00",
+  "opening_at": "2026-01-02T09:30:00+08:00",
+  "release_at": "2026-01-05T09:30:00+08:00",
+  "cash": "410.50",
+  "units": "1000",
+  "references": {"A": "2", "B": "2"},
+  "costs": {"commission": ".001", "minimum": "5", "slippage": ".001", "name": "invented-commission-floor5-and-slippage"},
+  "calendar_name": "invented-one-account-calendar-Jan2026",
+  "action_source": "synthetic-empty-covered-source",
+  "action_coverage_name": "invented-action-coverage",
+  "profiles": {
+    "normal": {"A": "2", "B": "2"},
+    "first_rejected": {"A": "2.001", "B": "2"}
+  },
+  "expected": {"orders": 2, "quantity_each": "100", "cash_after_first": "205.30", "cash_after_second": "0.10", "fees_after_second": "10.40", "cash_after_rejected_then_second": "205.30"}
+}
