@@ -75,3 +75,5 @@ task-id trend-trading-video，基线2f7bc4683f74237d19fde484ce665ac975d08a3f，�
 - 用户要求详细理解两原推文所有Prompt和推荐库，已直接复读两原文、14项Prompt定位、8段项目化改写、七类技术路径取舍。七库核当前入口/默认分支SHA；实读shotcraft三卡及demo依赖、音效署名、xilo brief/craft、角色指南和MV分镜。新文件prompt-methods/library-catalog，入口、旧简版Prompt和便携新视频Prompt均接入。
 - 修正旧“先风格帧后分镜”冲突为导演编排先行；不替换默认声音与确认顺序。七库条目含具体用途/入口/许可/未运行状态；另爱给主页访问失败、Mixkit许可页可读，具体音源仍按需核。不整库下载或安装，不冒称案例已全部复现。
 - ai_tools/codex/video-production-kit-20261009@12aef172f22467a925235f5744619755113d3909；46文件校验及引用、两Skill结构、归置/Git差异检查通过。原项目与便携库对应新增参考一致；远端逐文件验收写prompt-library-result-receipt.json。无新影片待跑，效果待下次制作检验。
+
+最终交叉核对曾失败：新参考两份一致，但原项目旧prompts-and-cues仍残留“开头小样”，便携版已是中间难点。已修原项目这一句并重验三份参考内容完全一致；这次失败与修复保留，不当作首次检查通过。
