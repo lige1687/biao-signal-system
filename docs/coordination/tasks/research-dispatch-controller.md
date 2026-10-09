@@ -1,3 +1,11 @@
+# 日周归档远端验收；接续R1准确消费者追溯
+
+- checked_coordination_sha=ac460972175ac1681becc5fa5eadd5271f3457d6；checked_at=2026-10-09T18:40:32.135211+08:00；已读task-id=research-dispatch-controller及沿原目录R1研究记录，最新无关文件名变化无路径冲突。日周成果codex/research-direct-20261008@35058fbf98a27754e35dc7ea35556a88187d2678的37文件远端SHA与内容读回一致，主registry645/隔离220，归置检查通过。scope_released=true：registry/INDEX/definitions释放。
+- 原Goal1尚有旧目录R1明示的严格等号传播未闭合。原独审者已实际只读追溯四日期×Q60/非重叠辅助/账户保存消费者，零新X/Y/账户运行。已修Q20/七比较/七现金窗口不重跑；不能只凭旧提示就重算账户。
+- root新增准确写入范围：主与隔离 docs/experiments/raw/research-dispatch-controller-2026-10-07/dual-ma-consumer-trace-20261009/ 仅小追溯/来源/独审证据；主与隔离 docs/experiments/research-evidence-catalog-2026-10-07.md 仅追加最新两题与R1处置补注，保留旧全文原字节；如登记存在报告SHA则仅该catalog键的SHA更新。自己的state/进度照旧。大结果只外盘，不新增账户/标签/参数。准备完成后按实际受影响项限定纠错，非全仓审计。
+
+---
+
 # 日周真实比较独审接受：单报告归档窗口
 
 - checked_coordination_sha=acf37a8bba7577da901a868a1d8726eb54d18f6c；checked_at=2026-10-09T18:36:25.757525+08:00；已读task-id=research-dispatch-controller及其原研究交接；最新增量只有无关任务文件名，无重叠，不读取运营内容。root唯一写者，Sol源码冻结，独审只读结束。
