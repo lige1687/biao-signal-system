@@ -323,3 +323,9 @@
 - active；scope_released=false；checked_coordination_sha: 755dccf651fef02b4d8bd75508a0ae9367daef6f；checked_at: 2026-10-09T19:11:12.251998+08:00；沿用已读COORDINATION1.1、trend/中控，已读自身与dual-ma最新释放，本轮无共享修改。root唯一写外盘v13-compound-motion-15s和自身小索引。
 - 用户明确“重新做15s一个样例”，本轮直接制作已选黑金连续演化方向动态小样；此具体授权覆盖本轮先另交静图等待，不扩全片。主题100→17→回到100需约488%，有来源的历史跌幅与明确比例示意，不造走势。无配音，原BGM，15秒1080p30fps，检查真实帧/数值/完整解码/实际播放。
 - 固定外盘UUID19:10通过，外盘593931796480B、内盘15558205440B；预计外盘新产物<500MiB、本机小记录<32KiB，复用既有环境，不装依赖。
+
+## v13连续动态15秒交付 2026-10-09T19:19:41.156743+08:00
+- completed本轮样例；scope_released=true；stage=sample_awaiting_user_review；checked_coordination_sha: bbd5f0e927c3c233cb54ef75e619b93334caa772；checked_at: 2026-10-09T19:19:41.156743+08:00；已读自身与dual-ma当前任务，沿用COORDINATION/trend/中控，无其他文件重叠。
+- 最终nasdaq_compound_motion_15s_v2.mp4，15秒1920×1080/30fps450帧H264+AAC，5300742B，SHA256 e86c297564f3de1cdf96e6878b97b9446f20e114bdbcbd13b2be99857861ab15；外盘目录/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/指数科普/20261009-nasdaq-story/v13-compound-motion-15s。原BGM首15秒原速+原创合成动作声，无旁白。原创100单位损失至17、重排后回本所需488%，明确比例示意非真实价格过程。
+- 初版过渡整数百分比与剩余数值舍入不一致、叠字，v2定点修复；最终完整解码/媒体参数/关键过渡实帧/450帧时间表/样例资料/实际浏览器1倍未静音无中间跳转至15秒ended=true,error=null通过。混音均值-17.1dB峰值-6.3dB，未宣称完整主观听审。全部43个非缓存文件SHA读回。浏览器127.0.0.1:49712/preview.html保留。
+- 普通产物/缓存/日志外盘，小索引本机；未改Skill/旧完整片，未安装/删除/发布。音乐公开许可未知，当前私人样例；主观观感待用户，不自动扩片。源码未提交，远端仅协调索引。
