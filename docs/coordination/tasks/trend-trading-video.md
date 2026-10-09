@@ -1,3 +1,14 @@
+## V9 ai-tools-export-start
+
+- task-id: trend-trading-video；2026-10-09T15:16:18.331305+08:00；checked_coordination_sha: 4bfabc685514485217f5b9097050e517b4a8679b；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户授权把视频Skill/配乐/模板/所需材料放到lige1687/ai_tools的video目录，并要求工具只写获取Prompt由agent自行拉。用户随后明确仓库改私有；GitHub二次验证由用户完成，15:15页面实际显示currently private。新仓库远端空，无已存在HEAD，本地新克隆/Users/yongbiaoli/Desktop/ai_tools，计划成果分支codex/video-production-kit-20261009。
+- 复用趋势视频Skill快照ebe749d82da5cc5c931894149043675e0d0e3022，只读提取并做可移植适配，不改原Skill/其他视频。本轮唯一写者；已读自身、nasdaq最新独立v08范围、中控与既有规则，无重叠。修改范围新仓库video/（提示词、流程Skill、模板、工具清单、检查器、默认原声及来源指纹），本任务小位置/协调回执；工具/安装环境/缓存不复制。
+- 核固定外盘15:11available身份/容量通过，音频按原候选SHA只读取得；仓内约4MB MP3是用户此次明确要求的私有仓库副本，不迁移/删除外盘原件，不上传其他媒体/账号凭证/数据库。新渲染/音频生成不执行。原声私人参考不等于公开传播许可。
+- 验收私有状态、完整目录/可执行Prompt、无原仓库专用依赖或失效本机链接、素材/声音/分阶段确认默认完整、校验器可运行、音频原/目标SHA一致、远端commit/文件逐字读回；只安装方案不宣称已在全新机安装或制作成片。
+
+
+---
+
 ## V9 middle-sample-done
 
 - task-id: trend-trading-video；2026-10-09T11:21:52.697187+08:00；checked_coordination_sha: 0f78951455bb0b04c7f3cef5d184092b50f0a5a6；已读 COORDINATION.md、自身与 research-dispatch-controller。
