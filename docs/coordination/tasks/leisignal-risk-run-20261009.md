@@ -1,3 +1,15 @@
+# B四路径已真实执行各一次，完整结果交C独核
+
+- task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / executed_pending_C_numeric_review；updated_at 2026-10-10T00:15:28.207246+08:00。checked_coordination_sha=1358d7cf987750ac536ebff47977dda786bdcdc4；checked_at=2026-10-10T00:15:28.207246+08:00；已读A/B/C、中控最新相关段；写者/范围不变，A输入冻结、B唯一执行/implementation、C独核/唯一归档，不占共享表。
+- 准确成果codex/leisignal-risk-run-20261009@4283254d23371691506851816ff4d7a17228ea4a：本次26文件84680B远端完整SHA及每文件字节已核同。冻结修订4合同333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4、6源码、A29337ec9/manifest9f1c326b、C1e954fdc接受全部未改。
+- 人类批准已从中控原聊天实际read_thread核原question/两条message，准确原话/来源/时间依据/四键保存authorization.json。真实前源/码/人工指纹、0旧标记/同一目录不存在、固定UUID/设备/容量全部核；原native Goal blocked无resume API，不影响真实授权执行，也未重建Goal。
+- 唯一--execute退出0，工具测得0.280秒；A_ALL-base/stress、A_SMA-base/stress四键各attempt=1、各finished，batch=1，真实4/4，失败0、重复0。原两次不可借，人工8与全部失败留存；原A/B0重放/下载/新标签/拟合/扫描0。
+- 完整交C入口implementation/B-RESULT-HANDOFF-2026-10-10.md、execution-delivery-2026-10-10.json（SHA 06cc50b2c8007cd18213d9566cb3e4c7c1efbe1390668279bfd6642e22e6955a）、attempts/result-location.json和attempt-ledger.json。外盘目录 /Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0；10文件1210879B全部SHA/大小/实际设备16777238核同。各文件准确SHA/绝对位置在delivery清单；没有大结果入Git。
+- 程序输出日常波动比1.5367258898/1.5319345692/1.6159186003/1.6072807178，两参照两档都不在0.90—1.10，风险匹配均false。新收益2.9985%/2.8341%/2.6988%/2.5239%，原收益分别-5.5983%/-6.3483%/-4.3030%/-4.6809%；相对原A期末多9503.1226/10111.1008/7739.9922/7933.5678元。只交执行者数值待C独算，不据多赚作相近风险结论，不调窗口/参数追求通过。
+- C最小接续：取得上述准确commit和delivery位置，运行自己的只读真实核数，核63时点/现金应收分红/订单费用/统计差额/四次预算；程序负结果保留。C数字接受、正式报告/registry/INDEX/catalog和最终归档仍未完成。B不自行验收或最终登记、不自动重跑、不扩新研究。
+
+---
+
 # 用户已明确授权，本B恢复四路径唯一执行
 
 - task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / authorized_execution_preflight；updated_at 2026-10-10T00:08:51.251188+08:00。checked_coordination_sha=469032c44dbb8b13f1bb5ec6831e12e537fe2e34；checked_at=2026-10-10T00:08:51.251188+08:00；已读A/B/C及中控最新段，COORDINATION既有规则沿用。唯一写者：B只implementation、绑定外盘结果和本人进度/本记录，A输入冻结、C独审/归档，范围不扩。
@@ -123,15 +135,22 @@ checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2
   "dependencies": [
     "leisignal-risk-input-20261009"
   ],
-  "dependency_notes": "真实人类四键各一次已核；A/C准确齐备；重核同一外盘plan后B唯一执行。",
-  "stage": "authorized_execution_preflight",
-  "result_commit": "1a2e3e8457d67392f12f842f59c25d3b6abbd258",
-  "checked_coordination_sha": "469032c44dbb8b13f1bb5ec6831e12e537fe2e34",
-  "checked_at": "2026-10-10T00:08:51.251188+08:00",
+  "dependency_notes": "人类已批准、B准确四路径各一次完成；C真实独核/唯一归档尚待，旧缺批准段仅历史。",
+  "stage": "executed_pending_C_numeric_review",
+  "result_commit": "4283254d23371691506851816ff4d7a17228ea4a",
+  "checked_coordination_sha": "1358d7cf987750ac536ebff47977dda786bdcdc4",
+  "checked_at": "2026-10-10T00:15:28.207246+08:00",
   "C_release_commit": "1e954fdc511092c1769fcaa5a6779d36eb7e0641",
-  "actual_path_attempts": 0,
+  "actual_path_attempts": 4,
   "authorized_paths": 4,
   "native_goal_status": "blocked_tool_resume_unavailable",
-  "consecutive_permission_blocker_turns": 3
+  "consecutive_permission_blocker_turns": 3,
+  "per_path_attempts": {
+    "A_ALL-base": 1,
+    "A_ALL-stress": 1,
+    "A_SMA-base": 1,
+    "A_SMA-stress": 1
+  },
+  "C_numeric_review": "pending"
 }
 <!-- lei-coordination-json:end -->
