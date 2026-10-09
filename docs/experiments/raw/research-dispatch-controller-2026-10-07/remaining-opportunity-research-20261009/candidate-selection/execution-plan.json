@@ -1,0 +1,27 @@
+{
+  "schema": "goal3-saved-join-qualification-plan/1",
+  "purpose": "One qualification pass for 76 frozen case identities against saved P01 feature and same-day 252 OHLC/120 volume histories; no Y read, no effect, no feature recomputation",
+  "script": "candidate-selection/qualify_saved_join.py",
+  "script_sha256": "0db8d0410a86a94105ac90e7ed37b8f6c3821f96a0f8958224f1bfc08d79c697",
+  "manifest_sha256": "bde584bcceb6b4e5b0d7a5348b53865a58605a134275d617a9e70ef6c930a269",
+  "inputs": {
+    "case": "7540cbe16abec5e6c5dbe9569ab0879d2160d2f4a86c640556f3550aba633bb7",
+    "feature_csv": "51bb32a6c36b34608752bb3d8b475643e4a8532e7ae2f677b315f4692ef9c23f",
+    "qualification": "162f8fbf9e0026ce8b6a4ec3bb30a76ba19eaddb05328a8c7992f07a9619f56a",
+    "profile_panel": "382d82ff21cb43758bca8e596026284ba2821038a79e1b4c331135119524679b",
+    "native_price": "4e350efea9403dccb4bc4f7fcc66e22ea6bf3d6e72b0c044b9f44d631c78415f",
+    "native_calendar": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+    "profile_source_manifest": "a0c3b15bc56ac34c4538ac9b11e505a83c0f8bed97175459d7eccb74c2b11c94",
+    "definition": "d6012cf556e01d737e1b286308e628b2c73081a618d329617b0f8d4e59610890",
+    "feature_adapter": "4b5104d5bf3a789173e84d67e78d9c8cfce6a930205fe44b114e5a299d1854d9",
+    "feature_proxy": "f74272ebcbbf961601fa7b2bc945013afc37e55a5a50d0049630875c87a7cf9d"
+  },
+  "output": "candidate-selection/qualification-receipt.json",
+  "output_max_bytes": 100000,
+  "external_device_uuid_at_plan": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+  "new_real_features": 0,
+  "new_real_labels": 0,
+  "effect_computations": 0,
+  "fits": 0,
+  "runs_allowed": 1
+}

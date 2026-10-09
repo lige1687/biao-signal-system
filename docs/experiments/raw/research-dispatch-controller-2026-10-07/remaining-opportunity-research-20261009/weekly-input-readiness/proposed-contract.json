@@ -1,0 +1,130 @@
+{
+  "schema": "daily-weekly-opportunity-proposal/1.0",
+  "status": "ready_for_bounded_implementation_and_qualification_review_not_released_execution",
+  "created_at": "2026-10-09T18:01:46.258466+08:00",
+  "question": "在完整周结束时，日线已经满足现有趋势前三步，是否比只看周线自身状态更能区分随后约一个月的价格机会与下行风险？",
+  "definition": {
+    "proposed_id": "research.multitimeframe.daily_stage3_at_completed_week",
+    "proposed_version": "0.1.0",
+    "registered": false,
+    "kind": "research-only state proxy, not a complete transmission or trading strategy",
+    "existing_object": "trend_stage@2.0.0",
+    "authority": "体系§4.6；实现§5、§6",
+    "formula": "For each frequency, c1=C>EMA20; c2=EMA20[t]-EMA20[t-1]>0 AND C>C[t-20]; c3=SMA20>SMA60. D3=c1 AND c2 AND c3. Existing cumulative stage may retreat. Equality is false. X=int(D3) on the last actual trading session of the completed week. No historical ordered-crossing claim.",
+    "weekly_background": "B1 category min(weekly trend_stage,4), categories 0..4. Category4 additionally requires EMA20>EMA60>EMA120 AND SMA20>SMA60>SMA120; stage5 bias is not a separate category. Store all six daily/weekly averages and steps; no period shortening.",
+    "weekly_long_direction_context": "Report weekly SMA120 change and EMA120 change sign (-/0/+), including disagreement; these are predeclared descriptive context, not a searched additional candidate or alternate primary baseline.",
+    "warmup": "Need 121 consecutive valid traded-week bars (120 for levels plus one for 120-week direction); and 121 consecutive valid daily sessions. First period EMA seed is mean of first p closes, thereafter alpha=2/(p+1). Never treat missing/prewarmup state as stage0. All-closed weeks have no bar and do not count as an observed week."
+  },
+  "universe": {
+    "fixed_assets": [
+      "510300.SS",
+      "510050.SS",
+      "510500.SS",
+      "588000.SS"
+    ],
+    "selection": "Reuse already studied fixed domestic broad ETF panel; retrospective surviving selected sample, not all historical ETFs or new unseen market validation.",
+    "input_start": "2020-12-21",
+    "input_end": "2026-06-30",
+    "eval_phases": {
+      "eval_2025": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "eval_2026H1": [
+        "2026-01-01",
+        "2026-06-30"
+      ]
+    },
+    "pre2025": "Only warmup, no additional results or candidate screening.",
+    "source_series": "Saved reconstructed economic OHLC, not nominal executable trade prices or account returns."
+  },
+  "clock": {
+    "timezone": "Asia/Shanghai",
+    "observation": "Sunday 23:59:59 of each natural Monday-Sunday week containing >=1 saved-calendar open session; only week_end<=observation may contribute.",
+    "daily_sample": "Last valid actual session of that completed week, not later daily rows. Retain price_session_date and observation_at separately.",
+    "calendar": "Exact saved SZSE flags, table-backed CoveredCalendar with explicit natural-date coverage; no default WeekdayCalendar, missing-date fallback or future-quote completion.",
+    "weekly_aggregation": "Reuse aggregate_weekly with CoveredCalendar and explicit as_of=Sunday/complete_bar=True; verify each declared open date equals actual sorted unique quoted dates per asset, aggregate open first/high max/low min/close last/volume sum. Volume is unused, and its units/510500 split do not become a qualified volume factor.",
+    "conservative_completion": "Even where production marks holiday week available at its final session close, this research waits until Sunday; it does not claim the historical closure schedule was known before week end.",
+    "boundary": "Complete calendar source ends2026-06-30; last usable closed week ends2026-06-28. Do not consume June29-30 partial week or infer July holidays.",
+    "gaps": "Unknown calendar date/duplicate/nonfinite or absent declared-session price stops this asset input qualification; do not silently discard gap or manufacture closure. Record exact dates; any later resumption requires explicit complete segment and full121-week rewarm, never shortened periods."
+  },
+  "qualification": {
+    "mode": "retrospective_saved_calendar_proxy",
+    "accepted_saved_evidence": "82 SZSE monthly responses cover all2495 natural dates2019-09-01..2026-06-30; prior receipt binds original response hashes and merged flags.2026H1 SSE annual-notice equivalence has181 dates/116 sessions/zero mismatches.",
+    "not_claimed": [
+      "SSE official correspondence before2026",
+      "historic vendor arrival or revision timestamps",
+      "complete contemporary action availability",
+      "unseen holdout",
+      "complete 15m/60m/day/week transmission or three-level resonance",
+      "production/trading permission"
+    ],
+    "stage0_no_X_no_Y": "Hash inputs and receipts; date-only inventory of per-asset expected vs saved sessions per complete week, full natural coverage, all-closed weeks, missing/duplicate/nonfinite fields, first possible121-week qualification date and phases. Verify labels future dates only, never future values. Temporal span is sufficient in principle, but exact121-week chain has NOT been newly computed in preparation.",
+    "stage1_feature_only": "Only after stage0 passes and source/code bindings plus synthetic timing checks are independently accepted. One feature/support pass, no future outcome values. Preserve all scheduled rows and explicit reasons. Count both X states per asset-phase-B1, weekly-direction context, distinct review dates, state runs, common cross-ETF dates, label-mature eligible dates, and pairwise window overlaps from dates.",
+    "support_admission": "Primary descriptive conditional contrast requires both X states at >=2 distinct review dates in every nonempty B1 category within each asset-phase. Empty category weight0. This is arithmetic support only, not an independent-sample/sufficiency threshold. No support => that full group is not estimable; do not merge categories, trim assets, change phase/window, or substitute daily rows. Parent reviews support before sole label release."
+  },
+  "fixed_target": {
+    "version": "future_economic_close20_after_week_review/0.1.0",
+    "window": "Let s1 be first saved-calendar session strictly after Sunday observation; s21 is twentieth session after s1. Use exactly21 closes s1..s21,20 return intervals. Observation, s1 and s21 must lie in same named eval phase. All target session prices qualified.",
+    "primary": "R20_pct=100*(C[s21]/C[s1]-1), larger means higher subsequent economic price change.",
+    "auxiliary": [
+      "positive20=R20_pct>0",
+      "MAE20_pct=100*max(0,1-min(C[s1:s21 inclusive])/C[s1])"
+    ],
+    "meaning": "Fixed measurement horizon for state comparison, not prescribed holding/exit time, execution price, return forecast or net account performance.",
+    "maturity": "No target endpoint across phase boundary/source end. Save excluded rows and exact endpoint dates; no forward-fill."
+  },
+  "comparison": {
+    "method": "Predeclared describe_only, no fitted models or probability/significance claims.",
+    "B0": "All mature qualified weekly observations and X=true/false raw summaries on identical rows.",
+    "B1": "Within each asset-phase and weekly stage0..4, compare X1 vs X0. Delta_s=mean(Y|X1,s)-mean(Y|X0,s). Weight p_s=N_s/N_asset_phase from entire mature common population, not only surviving states. Conditional delta=sum p_s*Delta_s iff all nonempty categories supported.",
+    "primary_weighting": "Show each of8 asset-phase results, then equal asset weight1/4 separately per phase only if all4 full group contrasts available. No pooled two-phase winner.",
+    "missing_support": "Keep all raw cells and explicitly unsupported full comparisons; supported-cell descriptions may appear separately with original coverage fractions and no renormalized claim of full-panel increment.",
+    "required_tables": [
+      "B0 all/true/false counts, proportions, distinct dates/runs, mean/median R20, positive rate and mean/median MAE20",
+      "B1 cells, exact weights, per-asset-phase contrast and missing reasons",
+      "weekly long-direction context counts/results; no new selection",
+      "all true-state R20<=0 counterexamples and false-state R20>0 missed cases; full counts plus first5 chronologically perassetphase"
+    ],
+    "dependency": "Same-date correlated ETFs and overlapping20-session targets are not independent. Report dates/windows/runs; do not manufacture effective N.0 resamples/interval estimates under this finite descriptive proposal.",
+    "decision": "Only scoped seen-history associations or insufficient support. No stable advantage/pass threshold: no empirically justified minimum economic effect or independent uncertainty estimate exists. Increment is only relative to coarse existing weekly-stage information, not all raw prices/all existing factors. Daily state is deterministic of saved prices; no claim of new primitive information."
+  },
+  "budget_proposal": {
+    "status": "Await controller freezing/release; this preparation authorizes none of these real passes",
+    "stage0_saved_date_qualification": 1,
+    "real_feature_support_passes": 1,
+    "real_label_materializations": 1,
+    "real_descriptive_effect_passes": 1,
+    "candidates": 1,
+    "parameter_variants": 0,
+    "horizons": 1,
+    "real_fits": 0,
+    "resamples": 0,
+    "new_network_requests": 0,
+    "restart_old_experiments": false,
+    "old_budget_preserved": "T05 one feature-only qualification consumed;0Y/0fits; proposed4fits never launched and not transferable. Original SSE source rounds67/75 requests sealed; new daily-weekly budget does not reset or reopen them. Preparation newX=0,newY=0,newstatistics=0."
+  },
+  "implementation": {
+    "future_research_module_proposal": "src/lei_signal/research/daily_weekly_opportunity.py",
+    "future_runner_proposal": "docs/experiments/raw/daily-weekly-opportunity-2026-10-09/guarded_runner.py",
+    "these_paths_not_authorized_by_preparation": "Controller must allocate writer and exact paths before code changes.",
+    "reuse": [
+      "lei_signal.data.calendar.CoveredCalendar",
+      "lei_signal.data.point_in_time.aggregate_weekly",
+      "lei_signal.features.indicators.seeded_ema",
+      "lei_signal.rules.trend_stage.trend_stage_series"
+    ],
+    "minimal_adapter": "Close-only sixSMA/EMA, lag20, slopes and existing stage input frame; do not invoke unrelated MACD/volume or old archived research runners. Calendar adapter reads exact day flags; keep source identities and conservative Sunday clock.",
+    "tests": [
+      "Saturday/Sunday/holiday-short week and June partial-tail; no next-week daily leakage",
+      "missing one open day, absent whole open week, closed week, unknown natural day, duplicates/nonfinite => explicit reject",
+      "119/120/121 completed weeks, correct EMA seed and exact equality; no short-window fallback or missing-as0",
+      "prefix invariance after appending future prices and gap stop; no real data in synthetic suite",
+      "stage0/1 must not open future target values; invalid mode rejects before label computation",
+      "single common denominator, unsupported category no silent removal; fixed weights/target maturity with hand-calculated synthetic examples",
+      "source hash verification before local imports, complete dependency/config closure, registered external-drive identity/capacity anchored output, once-only attempt/release receipt"
+    ],
+    "workflow": "Use applicable existing workflow checks for binding and qualification; if state-descriptive method is unsupported by native model entry, bind a dedicated research-only runner and explicit method review. Do not disguise method as ridge to pass schema. External real results follow registered output storage with no local fallback."
+  },
+  "next_action": "Controller accept or adjust before outcomes; assign minimal adapter and stage0 input qualification. If stage0 passes, review synthetic/source protections, release one X-only support pass; then support review releases exactly one fixed label/descriptive batch. No extra data needed merely to begin this conditional retrospective qualification."
+}

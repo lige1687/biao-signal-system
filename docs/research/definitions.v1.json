@@ -15187,6 +15187,89 @@
       },
       "research_owner": "research-dispatch-controller",
       "research_status": "IN_SCOPE"
+    },
+    {
+      "id": "research.multitimeframe.daily_stage3_at_completed_week",
+      "version": "0.1.0",
+      "name": "完整周结束时的日线前三步状态",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "complete_multitimeframe_transmission",
+        "holding_entry_or_exit"
+      ],
+      "scope": "原Goal3四宽基ETF2025与2026H1已见历史周频状态比较；仅日线辅助周线，不代表完整三周期共振",
+      "spec_anchor": [
+        "桌面LEI技术交易体系§4.6",
+        "桌面LEI技术实现§5、§6"
+      ],
+      "spec_layer": "multitimeframe_opportunity_information",
+      "definition": {
+        "formula": "For each frequency, c1=C>EMA20; c2=EMA20[t]-EMA20[t-1]>0 AND C>C[t-20]; c3=SMA20>SMA60. D3=c1 AND c2 AND c3. Existing cumulative stage may retreat. Equality is false. X=int(D3) on the last actual trading session of the completed week. No historical ordered-crossing claim.",
+        "parameters": {
+          "periods": [
+            20,
+            60,
+            120
+          ],
+          "warmup": "Need 121 consecutive valid traded-week bars (120 for levels plus one for 120-week direction); and 121 consecutive valid daily sessions. First period EMA seed is mean of first p closes, thereafter alpha=2/(p+1). Never treat missing/prewarmup state as stage0. All-closed weeks have no bar and do not count as an observed week.",
+          "weekly_baseline": "B1 category min(weekly trend_stage,4), categories 0..4. Category4 additionally requires EMA20>EMA60>EMA120 AND SMA20>SMA60>SMA120; stage5 bias is not a separate category. Store all six daily/weekly averages and steps; no period shortening.",
+          "equality": "false"
+        },
+        "unit": "boolean0/1 or null",
+        "direction": "正向状态的历史关联另按合同，不预设收益效果",
+        "nan_policy": "unknown不填0，缺预期交易日停止本资产资格，恢复需重新完整121周",
+        "endpoints": "完整自然周周日，日线最多读本周最后交易日"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "open",
+          "high",
+          "low",
+          "close",
+          "calendar",
+          "action_known"
+        ],
+        "price_basis": "保存经济OHLC、历史到达未知",
+        "frequency": "daily and completed_week",
+        "sources": "docs/experiments/raw/volume-information-2026-09-30/execution/source-manifest.json"
+      },
+      "dependencies": [
+        "trend_stage@2.0.0"
+      ],
+      "lifecycle": {
+        "state": "draft",
+        "basis": [
+          "原用户八目标Goal3已有多周期研究授权",
+          "docs/experiments/raw/research-dispatch-controller-2026-10-07/remaining-opportunity-research-20261009/weekly-input-readiness/proposed-contract.json"
+        ],
+        "verification_scope": "仅研究定义；实现资格效果分别核"
+      },
+      "origin": "已有趋势阶段的研究时间适配，不改生产",
+      "time": {
+        "observation_time": "Sunday 23:59:59 of each natural Monday-Sunday week containing >=1 saved-calendar open session; only week_end<=observation may contribute.",
+        "available_at": "研究约定完整周结束，历史到达未知",
+        "decision_at": "周日23:59:59 Asia/Shanghai",
+        "execution_at": "无交易",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-09研究登记"
+      },
+      "status": {
+        "definition_clarity": "fixed_research_proxy",
+        "data_qualification": "pending_qualification",
+        "implementation": "in_progress",
+        "effectiveness": "not_evaluated",
+        "production": "not_authorized"
+      },
+      "research_owner": "research-dispatch-controller",
+      "research_status": "IN_SCOPE"
     }
   ],
   "models": [],
