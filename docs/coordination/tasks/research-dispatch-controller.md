@@ -1,3 +1,12 @@
+# 恢复外壳独审失败，原作者有界修复v2
+
+- checked_coordination_sha=6a77108c938ff6c3a873d4444843cabb3f00c9d0；checked_at=2026-10-09T14:58:50.691879+08:00；已读本任务，原作者停止写、独审结束，唯一修复写者仍Sol/medium。Astra独立金额/8身份冲突/第二单保存前后故障/完整状态修改均通过，但真实隔离副本重现先输出INDEPENDENT_DRIFTED_ADAPTER_EXECUTED再SHA拒绝；导入前核来源不合格，当前不接受。
+- root已逐字保存当前7源/回执于自身raw/whole-buy-recovery-20261009/failed-import-order-v1并固定清单；独审原回执abbe8ce15b0cd707e05b0e35a6e7e1af44a4a082c6cbd9712a12f470900d1891及复现348dbeb054bc6f22fde6808887c15a7435b7d45e39ff49ee5e8aec834e6f9c05实际核同。初次显示失败只有日志/state、旧源码快照未存，明确缺失、不倒造。
+- repair-contract-v2只改新外壳导入前五旧源字节核验，保持逐次检查；旧源/策略全部不改。针对漂移隔离副本新进程不得执行标记、一条正常新进程恢复控制；无需再跑旧套件或全8组。作者只新目录及repair-output-plan-v2精确外盘目录，root只自身合同/状态/进度/本协调；源码停写再由Astra针对验收。
+- PPO/P26两准确原效果包已外盘读回，61MiB范围内：SHA1ca9892f73d0e5b7a455027869cbb47c395125ae80c488f561abf2b1a6bdb255及fb5cdfdff7c48618428c0813435d424fc61099c389a740faa291768723efb651。新Sol只读子线程派发遭agent thread limit拒绝，无新agent；尚未独审、未称运行。先复用原Sol完成当前必要修复，随后再接保存证据，不临时改模型或增加定时器。两旧实验0重跑。
+
+---
+
 # 原5211 PPO/P26保存效果原包恢复（不运行实验）
 
 - checked_coordination_sha=501b57cc688b2db1eb9243299216e0a54a5291b8；checked_at=2026-10-09T14:53:56.960602+08:00；已读本任务与旧目录STOCK-PPO-5211、STOCK-P26-5211准确来源和预算。root只有来源定位/恢复写者，现金新外壳Astra独审独立路径无冲突。原目录尚未接受这两个效果包；主桌面/Downloads/旧资格根三准确位置无同名包，旧外盘查找未给出它们的恢复回执。
