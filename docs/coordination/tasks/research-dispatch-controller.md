@@ -1,3 +1,13 @@
+# 2026-10-09 原件适配 A 已验收，X 封存实现范围登记
+
+- checked_coordination_sha=da370f5b39b9aac24ed559cb1f614472613dea8b；checked_at=2026-10-09T12:11:44.594369+08:00。已读 COORDINATION、本任务、classic-factor-research；自前次仅范围外记录改变，未读取其内容。原研究负责人已释放范围，当前仅本任务新文件写者，无共享文件冲突。
+- A阶段成果codex/research-direct-20261008@bcf7b2169b53a5d5152847178e4045fa091a8879，10个准确文件已远端SHA和逐字读回。Sol/high实现、Astra/high独审；76/84/336/33和75日期成熟/1未知一致。13人工检查及12独立内存检查分别通过；原首次排序失败与两项分支基线归置缺件保留。真实X/V/Y=0。
+- 下一阶段仅实现与人工检查：新增src/lei_signal/research/native_risk_d_mae_real_x.py、tests/unit/test_native_risk_d_mae_real_x.py、自身raw/real-x-seal-20261009；外盘新目录research-dispatch-controller-20261009T121052-8c15af8c4cb6/result。沿用同一Sol写者，root仅写合同/许可/验收/账本；A文件冻结不改。合同SHA256=c1d1689c8657707ad63f1127d9cab0250cf8a6d33cc3e2eec544c4ed03e3c7d2。
+- 必须经A公开原件入口，新增一次真实X封存单独绑定代码/原件/成员/外盘/唯一账本许可；本次只派实现不运行真实X。独审完成后root另写父级执行许可；原合同允许一趟X和后续单独一趟Y，不重置预算。不读未来价格、不实现Y、不改旧native入口、不碰registry/INDEX或生产。
+- 定时保持删除，不宣称八目标完成。此登记状态 planned，实际派发/交付/验收另记。
+
+---
+
 # 2026-10-09 D—MAE真实资料适配阶段A（planned）
 
 - 用户最新要求继续适配、分发与验收；task-id research-dispatch-controller；owner 01a116c7-3700-7062-a6c6-53af00ef60a0。checked_coordination_sha=8f42664ddbc8490a430311a9637224ca2479bc48；checked_at=2026-10-09T11:59:48.708214+08:00；本轮读本记录、classic-factor-research及COORDINATION；原workflow负责人最新turn completed、scope释放已读，未有同写者。
