@@ -32,3 +32,9 @@ task-id：leisignal-risk-review-20261009；负责人/会话：01a1208d-49ba-7972
 - checked_coordination_sha=02e45b5606af1c25fd3d2195cd0371a123941f52，checked_at=2026-10-09T20:15:56.374409+08:00；已读中控最新恢复统一调度段及A/B/C相关记录。原中控根据用户在其对话确认恢复三任务协调，预算及职责不变；C不依赖它提供科研授权，也不向其发送无用户授权的回信。此前“中控休息”是已被接续的历史状态，保留不覆盖。
 - 归置检查器未随部分基线发布，首次直接调用退出2。只读加载主仓现行检查器，在本独立树按原白名单运行退出1、298项旧基线问题；本批新增路径问题0。主仓现行归置检查退出0。全部差异及错误保存在review/hygiene-preparation-check.json；不能宣称整条成果分支全绿，也不擅自删改旧文件来凑通过。正式归档前仍须准确核验实际交付位置和此限制。
 - 本阶段只准备小型独审文档和凭据，不写共享登记，不调用市场或账户算法。当前准备可交付；代码/实值验收仍等A/B。
+
+## 2026-10-09T20:17:05.996342+08:00 准备成果已远端验真
+
+- 方法预审、绑定凭据、归置失败记录与本进度4文件、61207字节在codex/leisignal-risk-review-20261009@f6aceec0d0dcead4d65bcaba0be6a4e2f321ba7e，准确远端ref与四文件逐字相同；回执review/preparation-publication-receipt.json。
+- 交付前重新fetch coordination，checked_coordination_sha=7cdac9c962b908e1be8bc3f6bd77a0ce5a833580；已读A/B/C全文及中控最新恢复段。A/B仍准备、尚无manifest/实现交付，不能进行代码或真实数值验收；没有共享写入重叠。
+- 当前状态method_prepared / awaiting_A_B。恢复先读两task的准确成果引用，然后按method-preflight逐项审查；Goal保持active，未标完成或擅自暂停。
