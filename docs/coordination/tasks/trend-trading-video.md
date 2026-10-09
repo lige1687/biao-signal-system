@@ -1,3 +1,14 @@
+## V9 music-swap-done
+
+- task-id: trend-trading-video；2026-10-09T11:03:37.317703+08:00；checked_coordination_sha: da81e4d5b5219f62fe81da7c1cb4089a94a27188；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed本轮指定配乐替换，scope_released=true；本人唯一写者，交付前已读自身/中控，无重叠。成果codex/trend-history-long-v14-20261009@4a8151cd9a053b1eab0a81c40a4514ca4d7bc035，7份准确源码/小索引远端逐字读回；不开新主题，不改共享Skill。
+- V15新片240秒、1080p、30fps；原视频流指纹完全一致，原独立音效按原时间表保留，新leyan音乐以8秒交叉淡化循环补足，未叠旧音乐。全片解码通过，媒体检查0失败、1条可选字幕轨提示；响度-18.1 LUFS，峰值-6.7dBTP。
+- 初始8782通用预览服务器不支持Range，章节跳转失败，保留失败记录；自身8783服务器正确206并比对16字节，浏览器正常速度跳124秒通过，8倍速完整播完240秒无错误。交付已恢复正常速度/暂停在0秒，预览http://127.0.0.1:8783/。完整实时听审未运行，审美待用户。
+- 固定外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9预检通过；新媒体/文稿/定位描述/来源/制作日志均落视频库/趋势交易/20261009-趋势交易简史/v15-leyan配乐，文件清单19项逐份SHA读回通过。准确路径v15/storage-plan.json、validation.json；原V14保留。纯BGM及独立曲目许可未确认，不宣称已核；无新旁白、安装、删除或发布。相关归置检查通过。
+
+
+---
+
 ## V9 music-swap-start
 
 - task-id: trend-trading-video；2026-10-09T10:53:01.622121+08:00；checked_coordination_sha: d48f8b111714a4a8ae40e672afe5d56fbfcde1d1；已读 COORDINATION.md、自身与 research-dispatch-controller。
