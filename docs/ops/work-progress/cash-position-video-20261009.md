@@ -17,3 +17,14 @@
 checked_coordination_sha=b5c4c0d46eb96ceec5af9e4ad16214740c06f147；checked_at=2026-10-09T22:58:01.147371+08:00；已读nasdaq-story-video-20261009、trend-perspective-video-20261009、personal-quant-video-render-preview-rule、trend-trading-video、dual-ma-video-copy-20261009、research-dispatch-controller及COORDINATION1.1；本轮远端无新增，独立文件无冲突，root唯一写者。
 
 工作成果仅这两个小索引记录拟提交 codex/cash-position-video-20261009；媒体和源码仅外盘，Git不含媒体，不代表另一设备已收到。实际提交以协调记录与Git路径历史为准。没有策略/系统/研究/技能改动。
+
+## 2026-10-09T23:12:31.811882+08:00 v02后两图场景修订
+
+用户反馈原图2/3不够生动，要求增加有用素材和动态能力。已改为资金盘/20枚连续资金币/纸便条，以及AI沙漏/计划本/应对便签；图1原样引用。实际导出CashAllocationV2帧159、CashPreparedV2帧234。两图已经查看，初版图2币遮挡标签已定点修复、失败帧保留。450帧资金阶段计算总数始终20；PNG/公开文案/content/时间表/归置通过。
+
+本版外盘：/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/投资心态/20261009-cash-position/v02-scene-revision
+22项非缓存文件，共6287335字节，SHA与字节数逐项读回。已存新动作设计和已实现/尚待动态实现的区别，未把静帧称作动作观感通过。只有生成沙漏工具的1,683,932字节原件先存Codex默认位置；已复制到外盘核同，原件未删。外盘23:11:47身份与容量再核通过。
+
+stage=static_revision_awaiting_user，未获本期具体静态认可，未渲染动态/全片/声音。下一步待这版反馈，再用同一主体完成15秒中段动作、跨场景接点与声音；不把两张图推拉当视频。
+
+checked_coordination_sha=5f2449959bce12f3975f45a4687dee517e1d387e；checked_at=2026-10-09T23:12:31.811882+08:00；已读自身及system-x-video-ideas新增，其他已读任务无范围变动；独立目录不冲突，root唯一写者。
