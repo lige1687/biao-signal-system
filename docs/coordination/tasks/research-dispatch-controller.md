@@ -1,6 +1,6 @@
 # 上方成交密集度保存效果真实完成；单报告归档窗口
 
-- checked_coordination_sha=86bbfb783419b2cff4754e53695a7428b4470103；checked_at=2026-10-09T18:17:27.152942+08:00；fetch无增量，自身/相关研究范围沿读。代码初版失败保留；root修复db65f453经独审c453ad接受后一次真实效果完成，外盘8affbdc2共117554B已读回。0新X/Y/拟合/下载；旧D/P01不重跑。数值独审进行中，尚不称效果验收。
+- checked_coordination_sha=c337ba5316717acc3a10676eaf562c6508346d7b；checked_at=2026-10-09T18:17:27.152942+08:00；fetch增量仅无关文件名；首次push正常并发拒绝，保留并普通merge后重推。自身/相关研究范围沿读。代码初版失败保留；root修复db65f453经独审c453ad接受后一次真实效果完成，外盘8affbdc2共117554B已读回。0新X/Y/拟合/下载；旧D/P01不重跑。数值独审进行中，尚不称效果验收。
 - root唯一归档新范围：主与隔离 docs/experiments/native-overhead-risk-2026-10-09.md、主对应controller remaining-opportunity/candidate-selection及父合同/回执的小文件镜像；主与隔离registry仅该报告一key、INDEX一行。原字节/条目保持，大117KB真实表仍外盘。独审接受才标completed，完成即释放。definitions不改。
 - 日周仍独审阻断真实X：写盘锚定/依赖闭包待合并修复，0X/Y，原已验日期资格保留，不重跑。原8目标持续、定时保持删除。
 
