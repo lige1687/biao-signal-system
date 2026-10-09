@@ -1,3 +1,12 @@
+# 本轮接续B已发布核心实现的独立审查（2026-10-09T20:21:34.017926+08:00）
+
+- checked_coordination_sha=663521ec2018403f5a8a8a99eec928e9f820838a；checked_at=2026-10-09T20:21:34.017926+08:00；已读COORDINATION、A/B/C、中控最新相关记录，唯一写者/范围不变。C仅review/及自己进度；未占registry/INDEX/catalog。
+- B实际交付核心阶段codex/leisignal-risk-run-20261009@67970c2635d49ba552c27fb236e59bcd98e32160（11文件、作者修后9组合成证据）；完整一次执行保护/输入绑定仍准备中。允许先审核心，不据此批准开跑。
+- 本轮核该准确commit的源码、合同、失败与修后证据，使用独立手算期望与人工资料检查资金/时点/统计；不重跑作者全套9组，不调用真实资料或历史路径。A manifest仍待交，B真实许可仍0；真实预算不变。
+- 预计仅新增review/core-synthetic-review-plan.json、core-synthetic-review-evidence.json、core-code-review.md并更新自己的work-progress；若发现问题具体交回B，C不改monthly_account.py。全部仍在已授权范围。
+
+---
+
 # 方法预审准备已交付，尚待A/B依赖（2026-10-09T20:18:04.271539+08:00）
 
 - task-id: leisignal-risk-review-20261009；owner: 01a1208d-49ba-7972-9fa1-b47d7d5749b7；status: active / method_prepared / awaiting_A_B。
