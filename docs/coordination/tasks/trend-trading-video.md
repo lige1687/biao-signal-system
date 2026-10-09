@@ -1,3 +1,13 @@
+## V9 reference-music-start
+
+- task-id: trend-trading-video；2026-10-09T10:30:32.148446+08:00；checked_coordination_sha: 887d682827718c387a0d5c65dbfbf892059170c1；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户给出参考视频7691894559067910566，授权查音乐下载/制作使用路径。只做原声音频定位、取得与结构/开头语音核查，交付参考音频和使用结论，不替换旧成片、不安装、不发布。
+- 本轮唯一写者，已读自身、中控及原协调规则；无重叠。基线4bea4f02836e77ecd28f9556b4b05f2ac485679f，沿用codex/trend-history-long-v14-20261009。预计仅新reference-audio小位置索引、v9本轮回执、自有work-progress，普通媒体/日志/临时/说明写已核外盘新目录。
+- 已确认公开详情music_id7691894827352410921，标题@leyan创作的原声，125秒，非独立曲名。只从此原声公共play_url取音频，最多10MB；外盘10:30核固定UUID通过，内盘约14.7GiB，预期本机小记录小于30KB，无媒体内盘回退。验收下载实际文件、完整解码、SHA和说明；如含旁白不可冒充纯BGM，语音检测不推断完整听感。
+
+
+---
+
 ## V9 workflow-review-done
 
 - task-id: trend-trading-video；2026-10-09T01:39:02.777129+08:00；checked_coordination_sha: da1b0c24874f847e4bc4743fbee43cb46dbb0b54；已读 COORDINATION.md、自身与 research-dispatch-controller。
