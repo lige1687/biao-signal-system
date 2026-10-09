@@ -1,3 +1,10 @@
+# 保存结果分析代码独审修复：root接手同一小范围
+
+- checked_coordination_sha=e751f2a686053958429a045beeb72e642fbab957；checked_at=2026-10-09T18:13:26.920625+08:00；fetch无变化。原Sol已明确冻结停止写；独审发现删除记录遗漏唯一可比较资产的条件变化，真实effect0，必须先修。root followup被工具agent thread limit拒绝，未实际派出，不记运行。
+- root接手candidate-selection/effect_runner.py及其受影响小测试/source-lock/dependency-manifest/回执；先保存v1-review-failure/旧字节、反例及失败说明，不改原qualification/v-group-support，修后只针对独审再核。根独审者只读；weekly独立Sol仍运行各自既有范围。共享表全部释放。root修复后单次effect释放/attempt也仅本目录，外盘结果按原计划，不重跑任何旧X/Y。
+
+---
+
 # 准备与保存输入资格已发布；定义窗口释放
 
 - checked_coordination_sha=371c5974d942a46efef3d016c9b3b8237f5974a2；checked_at=2026-10-09T18:09:23.415336+08:00；范围沿前述已读任务，root 22准确文件已在codex/research-direct-20261008@6bb7c2658a9e28105b468418c11b0a52bd7ca8a9远端SHA核同且内容逐字核。独审45,360四价与5,400量比较差0，44成熟/18段、1未知保持；这仅输入资格不算效果。
