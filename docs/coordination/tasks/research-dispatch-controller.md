@@ -1,3 +1,16 @@
+# 原八目标已写系统TODO及专门分支，原中控收敛移交（2026-10-10T01:10:41.769868+08:00）
+
+- task-id=research-dispatch-controller；owner=01a116c7-3700-7062-a6c6-53af00ef60a0；status=completed / todo_handoff_published；scope_released=true。checked_coordination_sha=3641020dbb984de112de7486b2baf5e98c3a03de；checked_at=2026-10-10T01:10:41.769868+08:00；已读COORDINATION及本任务、三leisignal-risk任务相关最新段，与登记3641020d范围无变化；没有接管其他研究或运营。
+- 用户本轮要求记录系统todo及项目MD已实际完成：POST真实/api/upgrades给D-evidence v2→3、D-tracking v2→3、okr-ff1e0a86fbac v125→126、K-data-boundary v11→12、K-risk-attribution v13→14、okr-4f4157e2957e v53→54各追加一次note，精确内容和旧历史读回，原负责人/status/授权/完成标准/下一步不变。没有改initial.json或用Git冒充数据库写入。
+- 唯一新增具体待办okr-57eb3f28e526「核验原八目标冻结输入的独立备份与异机恢复」，planned，四验收项未完成；原25来源里24不在Git，独立副本及异机恢复仍待核。只此研究存储缺口，不一般清理。80条是当次API快照，不作为未来恢复计数。
+- 专门成果分支codex/research-todo-20261010@d2c142bc460e047b69a003107f1d4958f0695dcb，5个准确小文件168865B，远端完整SHA与每文件字节读回一致。入口docs/okr/RESEARCH_TODO.md及docs/okr/README.md；原three-chat-handoff/work-progress只补有效最新段，历史保留。API请求/版本/保护字段/验证回执在docs/experiments/raw/research-dispatch-controller-2026-10-07/todo-handoff-20261010.json。
+- 主仓TODO与README和成果分支字节一致；自己的主仓旧handoff/progress只追加最新事实，保留该checkout既有历史，没有整文件覆盖成别的分支。主分支codex/factor-unit-research-20260915未切换，未合main。主仓归置退出0，5个本轮导航核对通过，准确暂存diff检查通过，隔离跟踪工作树干净。
+- 一次二次读回断言失败已定位：GET派生progress由子目标计数生成，新增目标令D-evidence total13→14；父记录version仍3，反向还原这一唯一预期派生计数即与原全部字段哈希一致，持久字段未变。失败和解释在回执保留，没有回写进度凑通过。
+- 本轮研究/取数/策略运行0、新chat/agent0、新定时/恢复0。原A/B/C批次完整验收不变；原四组日波动不满足10%标准的负结论及全部预算保留；系统更大目标未冒称全完成。leisignal监控此前已删除，本轮没有恢复；下一负责人尚未指定，不虚称后台推进。
+- 最小接手：先读项目TODO、系统原ID和最新协调，再登记一项具体工作。优先已有来源恢复/资料资格，原授权内可执行事项不重复问继续；已耗尽研究不重新校准追正结果。原中控到此结束本次记录与移交，不再轮询三个已完对话。
+
+---
+
 # 原八目标交接写入系统待办及项目文档（2026-10-10T01:04:09.753324+08:00）
 
 - task-id=research-dispatch-controller；owner=01a116c7-3700-7062-a6c6-53af00ef60a0；status=active / handoff_todo_registration；本轮只记录与移交，不新开研究、对话或定时器。
