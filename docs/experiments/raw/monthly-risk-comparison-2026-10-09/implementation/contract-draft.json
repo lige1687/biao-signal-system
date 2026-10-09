@@ -1,0 +1,216 @@
+{
+  "schema": "monthly-risk-comparison/1",
+  "task_id": "leisignal-risk-run-20261009",
+  "owner_session": "01a1208c-d559-72f0-ba6e-980a4337fa2c",
+  "created_at": "2026-10-09T20:10:07.662085+08:00",
+  "question": "月度过去63共同交易日风险比例能否在510300的2026上半年提供与原A日波动相差不超过10%的对照？",
+  "decision_use": "供C判断风险相近下的收益差是否可解释，不变更生产或用户真实仓位",
+  "mode": "experiment_once_pending_authorization",
+  "delivery_mode": "final_only",
+  "strategy_layer": "完整账户风险执行研究；复用原信号与原A/B0日账，不新增因子对象",
+  "scope": {
+    "symbol": "510300.SS",
+    "start": "2026-01-01",
+    "end": "2026-06-30",
+    "reference_accounts": [
+      "A_ALL",
+      "A_SMA"
+    ],
+    "fees": {
+      "base": "0.001",
+      "stress": "0.002"
+    },
+    "path_ids": [
+      "A_ALL-base",
+      "A_ALL-stress",
+      "A_SMA-base",
+      "A_SMA-stress"
+    ],
+    "rolling_trading_days": 63,
+    "stdev_ddof": 1,
+    "risk_tolerance": [
+      "0.90",
+      "1.10"
+    ],
+    "history_status": "already_observed_exploration"
+  },
+  "rules": {
+    "returns": "当日完整资产/前一自然日完整资产-1；仅共同官方交易日用于标准差，须有完整前一天账目",
+    "cutoff": "Jan..Jun每月使用上一月最后官方交易日及之前最近63日；只使用基础费原A与基础费原B0，同一A比例用于两费用",
+    "weight": "min(1,sample_stdev(A)/sample_stdev(B0))；A为0→0；B0为0/不足/不一致停止",
+    "month_end": "上一月最后官方交易日收盘后目标可知；不是月末自然日缺少资料时猜测",
+    "opening_wealth": "现金+已确认应收+原持有份额×本次允许开盘价；费用扣除前计算目标",
+    "target_units": "floor(weight*opening_wealth/open/100)*100",
+    "affordable_buy": "min(目标增加份额,floor(cash/[open*(1+fee)]/100)*100)；应收不能付款",
+    "sell": "不超过现有份额；目标向下整手后一次差额卖出",
+    "execution": "下一月首次允许交易的开盘一次调整；缺开盘/halt/blocked/不可成交保留待执行；下一月开始旧待执行目标被新目标替代",
+    "no_intra_month_retry": "首次可执行开盘即完成当月调整，即使不足整手/现金限额或目标已满足；之后不反复补足",
+    "actions": "沿旧分红：登记日收盘后持有份额记录权益；除息日开盘前记应收；到账日收盘后转现金。跨期/非分红行动必须有A准确处理资料，未有则停止而非忽略",
+    "marks": "官方非交易日延续前收盘估值；有持仓但无首个估值价停止；缺报价不当可成交价",
+    "initial_state": "逐A逐费用绑定2025-12-31保存现金、份额与应收；提案预期现金起点、0份额和0应收，以Amanifest核同为准",
+    "ending_state": "期末持仓与应收保留，不虚构清仓"
+  },
+  "metrics": [
+    "完整半年每日交易日波动与新/原A比值",
+    "期末资产及原A金额差",
+    "期内最大跌幅（含期初资金）",
+    "最差自然日变化",
+    "费用",
+    "成交次数",
+    "原B0上涨日，同一日初新账户资金按原B0保存当日变化计算减去新账户实际变化的金额；允许负值；每日起点变化，因此不能加到期末差额，亦非新增账户路径。另列原B0下跌日的相应少亏金额。",
+    "未回到高点持续天数",
+    "逐日资金/份额/应收对账"
+  ],
+  "acceptance": "同一A两档费用的新/原A日波动比都在0.90—1.10才由C解释日波动相近下的收益差；风险其他维度另列",
+  "budget": {
+    "proposed_paths": 4,
+    "authorized_paths": 0,
+    "actual_path_attempts": 0,
+    "old_two_paths_consumed": 2,
+    "original_A_replays": 0,
+    "new_signals_or_labels": 0,
+    "downloads": 0,
+    "predictive_fits": 0,
+    "parameter_scans": 0
+  },
+  "sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/current-standards.json",
+      "sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71",
+      "bytes": 1209,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/experiment-backtest-principles.md",
+      "sha256": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+      "bytes": 23327,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/ai-execution-contract.md",
+      "sha256": "f70a929f15d9d59f99f78a609a8658ce468f2c4025f05dba5380198f0bf23d22",
+      "bytes": 6129,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/research-question-method-standard.md",
+      "sha256": "4326abd2dd3cf5a4a8edf9cdfed132677f394bb42c2d8d308db20852cb52c25b",
+      "bytes": 22491,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definition-standard.md",
+      "sha256": "938e04d7beb96a46069bbb6eb6c03d2331e86bfa771623fdfe21794b4e98fcbd",
+      "bytes": 16412,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/strategy-documents.v1.json",
+      "sha256": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b",
+      "bytes": 806,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/rules.v1.yaml",
+      "sha256": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+      "bytes": 36540,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.claude/skills/macd-reading/SKILL.md",
+      "sha256": "4a75dea4cb8f0ad2d1cb450c1d4237d87cc5c5b7f50f3eacda10880164c731ab",
+      "bytes": 5902,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/plan-sector-trend-page.md",
+      "sha256": "921a483e16081fa975216a6f498a6af8654508df65be4feed64d8d593c24b23d",
+      "bytes": 26061,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/codex-storage-management.md",
+      "sha256": "bce0adb1e59135d6a3f0fb3b877885611dccb8a1d62baf6e1970f1028e92c5d1",
+      "bytes": 11359,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/research-output-storage.md",
+      "sha256": "1b12e385874e13e17a58cd60083210fd4f9b12cb462bf88b7d16f11f39f2cb5a",
+      "bytes": 7180,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+      "sha256": "aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95",
+      "bytes": 13049,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/storage-policy.v1.json",
+      "sha256": "dbdcc8af8bd5f1d6be7ce5262e10d21177a4c4faae97d4a4d2aeda900877d4dd",
+      "bytes": 546,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/research-output-policy.v1.json",
+      "sha256": "0006daced0029e0ec87e1d69012c58d2b4d20e5b56f64a65a50406861fbb8d8c",
+      "bytes": 1441,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "bytes": 65786,
+      "role": "read_only_authority"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "bytes": 36427,
+      "role": "read_only_authority"
+    }
+  ],
+  "inputs": {
+    "status": "awaiting_A_exact_manifest",
+    "path": null,
+    "sha256": null,
+    "result_commit": null
+  },
+  "review": {
+    "status": "awaiting_C_independent_code_review",
+    "role": "C",
+    "owner_task_id": "leisignal-risk-review-20261009"
+  },
+  "allowed_writes": [
+    "docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/",
+    "docs/ops/work-progress/leisignal-risk-run-20261009.md",
+    "docs/coordination/tasks/leisignal-risk-run-20261009.md",
+    "fixed_external_new_directory_from_verified_plan"
+  ],
+  "protected": [
+    "A_inputs",
+    "C_review",
+    "old_frozen_artifacts",
+    "production_rules",
+    "registry.json",
+    "INDEX.md",
+    "catalog",
+    "main/master"
+  ],
+  "stop": [
+    "authorization_missing",
+    "A_manifest_missing_or_mismatch",
+    "C_review_missing_or_rejected",
+    "source_or_code_drift",
+    "invalid_cutoff_or_returns",
+    "negative_cash_or_unreconciled_account",
+    "wrong_disk_or_capacity",
+    "one_time_attempt_already_started"
+  ],
+  "output_location": {
+    "local": "implementation小合同/代码/人工证据/失败/账本/位置索引",
+    "external": "真实运行前重新核盘并绑定唯一plan；大结果/日志/临时普通文件不回退内盘"
+  },
+  "independence": "B执行者仅工程自检，C独立代码及数值验收、最终共享登记"
+}

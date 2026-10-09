@@ -1,0 +1,16 @@
+{
+  "historical_paths": 0,
+  "evidence": "synthetic-evidence-20261009T201534660775.json",
+  "bugs": [
+    {
+      "file": "monthly_account.py",
+      "cause": "无持仓的首日将不存在的估值写成持久0；后续买入后缺收盘时错误使用0估值，而非停止。",
+      "repair": "仅本日展示0；持久mark保持None，持仓且缺首个估值时停止。"
+    },
+    {
+      "file": "synthetic_checks.py",
+      "cause": "人工例子从期初12/31高点到1/2恢复为2自然日，旧期望1日错误。",
+      "repair": "手算期望改为2，保留原测试与失败。"
+    }
+  ]
+}

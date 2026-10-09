@@ -1,0 +1,167 @@
+{
+  "schema": "monthly-risk-synthetic/1",
+  "dataset": "ARTIFICIAL_ONLY",
+  "acceptance_by_C": false,
+  "historical_paths_attempted": 0,
+  "generated_at": "2026-10-09T20:16:19.984840+08:00",
+  "checks": [
+    {
+      "name": "sixty_three_and_prefix",
+      "status": "passed",
+      "evidence": {
+        "first_cutoff": "2025-12-31",
+        "first_window": [
+          "2025-10-06",
+          "2025-10-07",
+          "2025-10-08",
+          "2025-10-09",
+          "2025-10-10",
+          "2025-10-13",
+          "2025-10-14",
+          "2025-10-15",
+          "2025-10-16",
+          "2025-10-17",
+          "2025-10-20",
+          "2025-10-21",
+          "2025-10-22",
+          "2025-10-23",
+          "2025-10-24",
+          "2025-10-27",
+          "2025-10-28",
+          "2025-10-29",
+          "2025-10-30",
+          "2025-10-31",
+          "2025-11-03",
+          "2025-11-04",
+          "2025-11-05",
+          "2025-11-06",
+          "2025-11-07",
+          "2025-11-10",
+          "2025-11-11",
+          "2025-11-12",
+          "2025-11-13",
+          "2025-11-14",
+          "2025-11-17",
+          "2025-11-18",
+          "2025-11-19",
+          "2025-11-20",
+          "2025-11-21",
+          "2025-11-24",
+          "2025-11-25",
+          "2025-11-26",
+          "2025-11-27",
+          "2025-11-28",
+          "2025-12-01",
+          "2025-12-02",
+          "2025-12-03",
+          "2025-12-04",
+          "2025-12-05",
+          "2025-12-08",
+          "2025-12-09",
+          "2025-12-10",
+          "2025-12-11",
+          "2025-12-12",
+          "2025-12-15",
+          "2025-12-16",
+          "2025-12-17",
+          "2025-12-18",
+          "2025-12-19",
+          "2025-12-22",
+          "2025-12-23",
+          "2025-12-24",
+          "2025-12-25",
+          "2025-12-26",
+          "2025-12-29",
+          "2025-12-30",
+          "2025-12-31"
+        ],
+        "expected_weights": [
+          0.5,
+          0.25
+        ]
+      }
+    },
+    {
+      "name": "natural_denominator_and_missing",
+      "status": "passed",
+      "evidence": {
+        "monday": "2025-10-06",
+        "actual_denominator_date": "2025-10-05",
+        "expected_return": "-0.0890909090909090909090909088",
+        "missing_denominator_rejected": true
+      }
+    },
+    {
+      "name": "zero_and_cap",
+      "status": "passed",
+      "evidence": {
+        "A_zero": 0,
+        "cap": 1,
+        "sample_ddof_1_hand_result": 1
+      }
+    },
+    {
+      "name": "hand_adjustments",
+      "status": "passed",
+      "evidence": {
+        "buy_500_cash_after": "4995",
+        "sell_500_cash_after": "4995",
+        "receivable_5000_cash_100_bought": 0,
+        "full_target_1000_affordable_900_cash": "982"
+      }
+    },
+    {
+      "name": "delayed_and_one_open",
+      "status": "passed",
+      "evidence": {
+        "allowed_open": "2026-01-06",
+        "fills": 1,
+        "no_lot_not_retried": true
+      }
+    },
+    {
+      "name": "cross_month_supersession_and_sell",
+      "status": "passed",
+      "evidence": {
+        "expired_target": ".8",
+        "replacement_target": ".2",
+        "replacement_buy": 200,
+        "executed_case_feb_sell": 700,
+        "ending_cash": "8985"
+      }
+    },
+    {
+      "name": "dividends_and_pay_phase",
+      "status": "passed",
+      "evidence": {
+        "ex_and_pay_same_day_open_cash": 0,
+        "receivable_in_wealth": 5000,
+        "not_reinvested_next_day": true,
+        "final_wealth": "10000",
+        "all_bridges": "0"
+      }
+    },
+    {
+      "name": "strict_invalid_cases",
+      "status": "passed",
+      "evidence": {
+        "unknown_restriction": "rejected",
+        "future_target": "rejected",
+        "nan": "rejected",
+        "held_without_mark": "rejected",
+        "duplicate": "rejected"
+      }
+    },
+    {
+      "name": "metrics_and_opportunity",
+      "status": "passed",
+      "evidence": {
+        "max_drawdown": "-.1",
+        "expected_sample_sigma": 0.22784551838233194,
+        "b0_up_gap": "22.22222222222222222222222220",
+        "no_additional_account": true
+      }
+    }
+  ],
+  "engineering_checks_passed": true
+}
