@@ -1,0 +1,53 @@
+{
+  "status": "B_engineering_evidence_not_C_acceptance",
+  "generated_at": "2026-10-09T20:30:36.738526+08:00",
+  "plan": {
+    "schema_version": 1,
+    "task_id": "leisignal-risk-run-20261009-synthetic-io",
+    "run_id": "leisignal-risk-run-20261009-synthetic-io-20261009T203036-6e5ca5e9d4be",
+    "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009-synthetic-io/leisignal-risk-run-20261009-synthetic-io-20261009T203036-6e5ca5e9d4be",
+    "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009-synthetic-io/leisignal-risk-run-20261009-synthetic-io-20261009T203036-6e5ca5e9d4be/result",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "estimated_bytes": 1048576,
+    "internal_metadata_bytes": 65536,
+    "external_reserve_bytes": 10737418240,
+    "internal_reserve_bytes": 5368709120,
+    "execution_authorized": false,
+    "quota_enforced": false
+  },
+  "checks": [
+    {
+      "case": "actual_external_descriptor_write_and_byte_readback",
+      "status": "passed",
+      "pointer": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009-synthetic-io/leisignal-risk-run-20261009-synthetic-io-20261009T203036-6e5ca5e9d4be/result/ARTIFICIAL-only.json",
+        "bytes": 63,
+        "sha256": "e47be09f2ce4cff582a35048a0ee33455c4289c8ab533db14870eafcbdca618d",
+        "device": 16777238
+      }
+    },
+    {
+      "case": "existing_output_refused",
+      "status": "passed"
+    },
+    {
+      "case": "parent_route_refused",
+      "status": "passed"
+    },
+    {
+      "case": "simulated_loss_before_write_refused",
+      "status": "passed",
+      "reason": "external disk lost; no internal fallback"
+    },
+    {
+      "case": "wrong_device_refused_before_directory",
+      "status": "passed",
+      "reason": "external disk lost; no internal fallback"
+    }
+  ],
+  "actual_unmount_tested": false,
+  "historical_paths": 0,
+  "real_run_plan_still_unused": true
+}

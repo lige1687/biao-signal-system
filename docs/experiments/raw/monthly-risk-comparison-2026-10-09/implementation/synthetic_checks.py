@@ -7,6 +7,8 @@ from __future__ import annotations
 import json
 import math
 import traceback
+import copy
+import uuid
 from datetime import date, timedelta, datetime
 from decimal import Decimal as D
 from pathlib import Path
@@ -14,6 +16,8 @@ from zoneinfo import ZoneInfo
 
 from monthly_account import (adjustment, dates, monthly_targets, simulate_monthly,
                              sample_stdev, metrics, opportunity_description)
+from execution_guard import (TASK, PATH_IDS, B_OWNER, C_TASK, C_OWNER, validate_release,
+                             claim_batch, claim_path, actual_attempts)
 
 
 def must_fail(fn, phrase):
@@ -237,10 +241,64 @@ def metrics_and_opportunity():
             "b0_up_gap": desc["b0_up_days_gap_cny"], "no_additional_account": True}
 
 
+def release_and_once_protection():
+    # These artificial documents are passed ONLY to pure validation functions.
+    # They are never written to the real authorization.json or passed to runner.
+    contract = {"task_id": TASK, "owner_session": B_OWNER, "status": "frozen_for_C_review",
+                "scope": {"symbol": "510300.SS", "start": "2026-01-01", "end": "2026-06-30",
+                          "reference_accounts": ["A_ALL", "A_SMA"],
+                          "fees": {"base": "0.001", "stress": "0.002"}, "path_ids": PATH_IDS,
+                          "rolling_trading_days": 63, "stdev_ddof": 1,
+                          "risk_tolerance": ["0.90", "1.10"], "history_status": "already_observed_exploration"},
+                "budget": {"proposed_paths": 4, "original_A_replays": 0, "new_signals_or_labels": 0,
+                           "downloads": 0, "predictive_fits": 0, "parameter_scans": 0},
+                "inputs": {"sha256": "ARTIFICIAL_INPUT_HASH"},
+                "synthetic_evidence": {"sha256": "ARTIFICIAL_SYNTHETIC_HASH"}}
+    auth = {"task_id": TASK, "status": "approved", "authorized_path_ids": PATH_IDS,
+            "contract_sha256": "ARTIFICIAL_CONTRACT_HASH", "user_quote": "ARTIFICIAL_NOT_AUTHORIZATION",
+            "source_thread": "ARTIFICIAL", "authorized_at": "ARTIFICIAL"}
+    code = {"monthly_account.py": "ARTIFICIAL_CODE_HASH"}
+    review = {"decision": "accepted", "task_id": C_TASK, "reviewer_session": C_OWNER,
+              "contract_sha256": "ARTIFICIAL_CONTRACT_HASH", "input_manifest_sha256": "ARTIFICIAL_INPUT_HASH",
+              "synthetic_evidence_sha256": "ARTIFICIAL_SYNTHETIC_HASH", "code_sha256": code}
+    def check(c=contract, a=auth, r=review, hashes=code, attempted=(), started=False):
+        return validate_release(c, "ARTIFICIAL_CONTRACT_HASH", a, r, hashes,
+                                "ARTIFICIAL_INPUT_HASH", attempted, started)
+    release = {**check(), "dataset": "ARTIFICIAL_ONLY_NOT_RUN_PERMISSION"}
+    must_fail(lambda: check(a={**auth, "status": "not_granted"}), "authorization missing")
+    must_fail(lambda: check(a={**auth, "authorized_path_ids": PATH_IDS[:2]}), "exact four")
+    must_fail(lambda: check(r={**review, "decision": "method_prepared"}), "C code acceptance")
+    must_fail(lambda: check(r={**review, "reviewer_session": B_OWNER}), "C code acceptance")
+    must_fail(lambda: check(hashes={"monthly_account.py": "DRIFT"}), "code binding")
+    wrong = copy.deepcopy(contract)
+    wrong["scope"]["rolling_trading_days"] = 20
+    must_fail(lambda: check(c=wrong), "scope/parameters changed")
+    must_fail(lambda: check(attempted=[PATH_IDS[0]]), "already consumed")
+    must_fail(lambda: check(started=True), "already consumed")
+    folder = Path(__file__).parent/"synthetic-attempts"/("ARTIFICIAL-"+uuid.uuid4().hex)
+    folder.mkdir(parents=True)
+    claim_batch(folder, release, "ARTIFICIAL")
+    claim_path(folder, PATH_IDS[0], release, "ARTIFICIAL")
+    ids, started = actual_attempts(folder)
+    assert ids == PATH_IDS[:1] and started
+    for fn in (lambda: claim_batch(folder, release, "ARTIFICIAL"),
+               lambda: claim_path(folder, PATH_IDS[0], release, "ARTIFICIAL")):
+        try:
+            fn()
+        except FileExistsError:
+            pass
+        else:
+            raise AssertionError("duplicate atomic claim was accepted")
+    return {"missing_permission_C_and_drift_rejected": True, "old_two_path_permission_rejected": True,
+            "repeat_batch_and_path_claims_rejected": True,
+            "artificial_claims_path": str(folder), "historical_paths": 0}
+
+
 def main():
     tests = [sixty_three_and_prefix, natural_denominator_and_missing, zero_and_cap,
              hand_adjustments, delayed_and_one_open, cross_month_supersession_and_sell,
-             dividends_and_pay_phase, strict_invalid_cases, metrics_and_opportunity]
+             dividends_and_pay_phase, strict_invalid_cases, metrics_and_opportunity,
+             release_and_once_protection]
     report = {"schema": "monthly-risk-synthetic/1", "dataset": "ARTIFICIAL_ONLY",
               "acceptance_by_C": False, "historical_paths_attempted": 0,
               "generated_at": datetime.now(ZoneInfo("Asia/Shanghai")).isoformat(), "checks": []}

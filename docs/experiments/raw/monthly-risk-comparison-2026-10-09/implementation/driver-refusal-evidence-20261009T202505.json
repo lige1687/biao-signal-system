@@ -1,0 +1,44 @@
+{
+  "dataset": "NO_MARKET_COMPUTATION",
+  "checks": [
+    {
+      "args": [
+        "--execute"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "{\"status\": \"refused_or_failed\", \"reason\": \"A-bound frozen contract missing; preparation only\", \"started_path_ids\": []}\n",
+      "historical_path_attempts": 0
+    },
+    {
+      "args": [
+        "--preflight"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "{\"status\": \"refused_or_failed\", \"reason\": \"A-bound frozen contract missing; preparation only\", \"started_path_ids\": []}\n",
+      "historical_path_attempts": 0
+    },
+    {
+      "args": [
+        "--execute",
+        "--out",
+        "/tmp/forbidden"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "usage: runner.py [-h] (--plan-only | --preflight | --execute)\nrunner.py: error: unrecognized arguments: --out /tmp/forbidden\n",
+      "historical_path_attempts": 0
+    },
+    {
+      "args": [
+        "--exec"
+      ],
+      "exit_code": 2,
+      "stdout": "",
+      "stderr": "usage: runner.py [-h] (--plan-only | --preflight | --execute)\nrunner.py: error: one of the arguments --plan-only --preflight --execute is required\n",
+      "historical_path_attempts": 0
+    }
+  ],
+  "C_acceptance": false
+}

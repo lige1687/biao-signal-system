@@ -206,8 +206,7 @@ def simulate_monthly(*, cash, fee, targets, quotes, trading_days, restrictions,
             if pending is not None:
                 pending.update(status="superseded", superseded_at=day, replacement_month=month)
             target = target_map[month]
-            pending = {"order_id": month, "month": month,
-                       "decision_at": target.get("available_at", target["cutoff"]+" end_of_day"),
+            pending = {"order_id": month, "month": month, "decision_at": target["cutoff"]+" close",
                        "available_from": month+"-01", "weight": target["weight"], "status": "pending"}
             orders.append(pending)
             current_month = month

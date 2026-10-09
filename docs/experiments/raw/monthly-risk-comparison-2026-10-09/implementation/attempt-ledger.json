@@ -22,6 +22,82 @@
   },
   "legacy_two_paths_consumed": 2,
   "legacy_budget_reusable": false,
-  "synthetic_runs": 0,
-  "failures": []
+  "synthetic_runs": 6,
+  "failures": [
+    {
+      "kind": "synthetic_implementation",
+      "first_evidence": "synthetic-evidence-20261009T201534660775.json",
+      "name": "strict_invalid_cases",
+      "preserved": "failures/v1-synthetic-20261009T201534/",
+      "repair": "不持久化没有来源的0估值；持仓无首价拒绝"
+    },
+    {
+      "kind": "synthetic_expected_value",
+      "first_evidence": "synthetic-evidence-20261009T201534660775.json",
+      "name": "metrics_and_opportunity",
+      "preserved": "failures/v1-synthetic-20261009T201534/",
+      "repair": "期初12/31到1/2恢复是2自然日；手算期望更正"
+    }
+  ],
+  "synthetic_full_group_runs": 5,
+  "synthetic_targeted_runs": 1,
+  "synthetic_run_history": [
+    {
+      "path": "synthetic-evidence-20261009T201534660775.json",
+      "sha256": "7083586c9dbfafeb3d9de540c9ec0676fd7e67aa568d62a48dbceff51e413d77",
+      "passed": 7,
+      "failed": [
+        "strict_invalid_cases",
+        "metrics_and_opportunity"
+      ],
+      "historical_path_attempts": 0
+    },
+    {
+      "path": "synthetic-evidence-20261009T201620014036.json",
+      "sha256": "9bb8292a21e409ffb9a69997d35ddd4ca196f0f955411dac4ea3458d62c1297a",
+      "passed": 9,
+      "failed": [],
+      "historical_path_attempts": 0
+    },
+    {
+      "path": "synthetic-evidence-20261009T202130212317.json",
+      "sha256": "0bb422dda44b15d3dcf6d6025c5ec9417a3fd30cef675ddea443c2f775a5c255",
+      "passed": 10,
+      "failed": [],
+      "historical_path_attempts": 0
+    },
+    {
+      "path": "synthetic-evidence-20261009T202504748226.json",
+      "sha256": "75178dc1eafcc1f206734d45c490f0a6129e56a7cb9f6f15c33f75ca77a231c2",
+      "passed": 10,
+      "failed": [],
+      "historical_path_attempts": 0
+    },
+    {
+      "path": "synthetic-evidence-20261009T202751921089.json",
+      "sha256": "87a5143c90f91f79624daefe7b37555c18370eb917266dd3e476e492d6b78636",
+      "passed": 10,
+      "failed": [],
+      "historical_path_attempts": 0
+    },
+    {
+      "path": "targeted-calendar-cutoff-evidence.json",
+      "sha256": "20efcfdb59bb3f6466d36bf1d1005399bba0dbc0e5f5cdcf1cc4eb1983f0d779",
+      "passed": 1,
+      "failed": [],
+      "historical_path_attempts": 0
+    }
+  ],
+  "other_engineering_checks": {
+    "driver_refusals": 4,
+    "external_write_cases": 5,
+    "input_binding_consumption": 1,
+    "additional_historical_paths": 0
+  },
+  "C_correction": {
+    "review_commit": "fc9fb189d6ce390e65e26ebb87eda8969488c085",
+    "request": "补记67970c26当时2次人工回执与失败",
+    "resolution": "历史2次全部保留；截至当前另3次扩展/修改自检及1次定向，累计6次（5完整组、1定向）；新历史账户仍0。"
+  },
+  "updated_at": "2026-10-09T20:31:54.801371+08:00"
 }
