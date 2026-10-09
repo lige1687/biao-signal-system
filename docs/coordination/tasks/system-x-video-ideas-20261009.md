@@ -1,3 +1,17 @@
+# 视频选题库落到系统与第三选题内容讨论
+
+- task-id: system-x-video-ideas-20261009；owner: 01a120a7-ed5a-7561-aea5-9f3db9d91ce6 /root；唯一写者；status: active。
+- updated_at/checked_at: 2026-10-09T23:01:54.833049+08:00；checked_coordination_sha: 4de750b2ca9478c1168c96d85d3ef5d00cca7c89；已读COORDINATION1.1及自身、dual-ma-video-copy-20261009、nasdaq-story-video-20261009、research-dispatch-controller。
+- 用户明确: 第三条“每轮行情有人觉得这次不一样”先看；前两条“漂亮收益图/过去调得完美”列todo放系统，设专门位置。
+- 授权范围: 通过既有/api/upgrades建或复用“视频选题库”方向与三个准确子项；前两项只排待办，不运行研究/回测。第三项只补来源/中文角度/屏幕文稿讨论，未进入静图、小样、成片或发布。用户明确系统写入授权，仅这四条；不动旧目标、种子、UI/API/DB结构。
+- 查重: 75条实时目标按视频/选题/相关标题检查，无同目标；旧文献整理条目不复用为视频待办。现有方向/子项UI可直接提供专门位置，不新建生产页面。
+- 文件范围: 本记录；必要本机小读回回执docs/ops/media/video-ideas-20261009/system-queue-receipt.json。文稿复用系统目标evidence和本轮写作块，不改已归档21卡报告/raw。
+- 验收: 列表读回四项/父子关系/两个planned且未授权、第三内容讨论范围与当前进展；原75项不变；浏览器可见专门方向及子项；来源明确原帖观点/新解释，不把故事判断当交易规则。
+- 冲突决定: 原视频/每日学习/研究目标仍归原负责人。本任务新目标唯一写者，不占registry/INDEX或共享代码。
+- 下一动作: API写入并读回，保存原帖与Yale作者访谈依据，交付第三条内容初稿；0视频生成。
+
+---
+
 # 本轮21条视频选题交付
 
 - task-id: system-x-video-ideas-20261009；owner: 01a120a7-ed5a-7561-aea5-9f3db9d91ce6 /root；唯一写者。
