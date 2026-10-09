@@ -37,3 +37,7 @@ task-id trend-trading-video，基线2f7bc4683f74237d19fde484ce665ac975d08a3f，�
 ## 2026-10-09 leyan参考原声定位与下载
 
 用户指定视频7691894559067910566。对应music_id7691894827352410921，@leyan创作的原声；网页标题和公开详情一致，没有独立匹配歌曲。已取得平台原声MP3并全部写核验外盘，125.47秒、4,015,471字节、完整解码通过，6份文件SHA读回。位置reference-audio/leyan-20261009.json。12秒ASR得到可疑音乐误识别，不把它当旁白或纯BGM证据；真实听感和纯音乐状态待试听。手机同款添加/发布未实测，现有V14未改。首次隔离venv缺numpy，复用已用Homebrew Python3.11/vendor成功，无安装/下载模型。开工reference-music-start.json；不发布、不做跨平台音乐许可保证。
+
+## 2026-10-09 Skill备选音乐登记
+
+用户要求将原声作为备选配乐并提供路径。Skill新增references/music-candidates.md及入口，保留外盘UUID、绝对/相对路径、指纹、来源、试听与使用状态。既有MP3大小/SHA读回一致，无复制/改媒体。基线acd42ff640e9849c8e12ac7371bac94524507a96，开工music-library-start.json；本次只登记，不称已入片或纯BGM确认。

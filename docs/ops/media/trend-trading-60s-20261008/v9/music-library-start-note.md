@@ -1,0 +1,1 @@
+- active：用户明确要求将leyan原声写入现有视频Skill为备选剪辑音乐并输出路径。范围仅Skill入口、references/music-candidates.md、自有进度及小回执，原MP3不改不复制。基线acd42ff640e9849c8e12ac7371bac94524507a96，沿用codex/trend-history-long-v14-20261009；本人唯一写者，自身及中控已读无重叠。验收入口链接可读、目录/文件/SHA一致、保留纯BGM待确认及使用前storage核盘说明。10:35固定外盘身份通过，无新媒体或安装。
