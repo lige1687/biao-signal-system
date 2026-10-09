@@ -99,3 +99,13 @@
 - 文件：77项非缓存交付文件32982898B大小/SHA逐件读回；工程zip210797B、SHA2a88c90f55793ebb9f74e89fc7e6bec352ec051cf433020ad927d9ac06a5b0ab，内容核同。文稿/分镜/许可/定位/源码/失败与验证完整，所有普通输出外盘，复用依赖不安装。
 - 存储2026-10-10T00:09:22+08:00固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok，外盘592724361216B；两份本机小记录正常。preproduction sample A/B、cue结构、公开文字、归置通过。
 - 确认边界：v04已获用户“可以，这段样例不错”；v05这两段尚未认可，完整片尚未授权/制作，没有发布、策略、系统、研究或Skill改动。下一步依据用户评价接续本片。
+
+## v06 A片段重做与Skill定点增量开始 2026-10-10T00:48:08.488606+08:00
+- status: active；stage: kline_logic_revision；scope_released: false；owner root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c。
+- checked_coordination_sha: cbcbe55e627416190211be1556d7821fd8309ee3；checked_at: 2026-10-10T00:48:08.488606+08:00；已读自身、COORDINATION1.1、trend-trading-video最新compact-done、nasdaq-story-video-20261009、personal-quant-video-render-preview-rule、trend-perspective-video-20261009、dual-ma-video-copy-20261009、research-dispatch-controller。共享Skill旧维护已完成释放；其他影片仅独立媒体，无在写重叠，root唯一写本轮范围。
+- 用户认可内容方向，指出v05A规则/风险节点不直观，要求结合K线、机会质量、交易纪律、可承受风险及预设止盈止损/涨跌应对；对照OPUS5.5及抖音7691258097721922203，有依据则补Skill并重做A。授权本次样例修订，不扩全片；沿用已确认视觉与无旁白/音乐，不重问静态批准。
+- scope: 固定外盘视频库/投资心态/20261009-cash-position/v06-kline-logic；本机既有两小索引；.agents/skills/code-explainer-video/SKILL.md只加入口路由、新references/decision-motion.md。备份原Skill至本外盘，保留他人已有内容；不更新仓外Skill副本。协调仅本文件。
+- baseline: 成果60a9acef02e609a27b323c5c039f4769b95855d3与v05A真实源码/MP4；新的实际K线只读复用已存公开行情，价格规则为教学假设，非策略规范/推荐；不做策略研究、买卖/发布/安装/删除。
+- 验收: 旧A具体问题及参考实际可见证据；K线同一主体、条件/风险/行动可见联系、假设与历史分清；实际渲染/转场关键帧/解码/正常播放、互动输入联动同一计算；Skill引用与格式、归置、源及媒体指纹。审美待用户，不称模型对照实验。
+- storage: 2026-10-10T00:44:05+08:00固定UUID身份通过，外盘592617013248B、本机16481374208B；预计新增普通产物/日志/缓存<700MiB外盘，本机小记录<200KiB。依赖沿用，授权外盘原版本不覆盖。
+- 参考获取: 网页读取失败，抖音只读API返回douyin_api_forbidden，非空内容；浏览器两次超时，未宣称看过。继续检查已存公开材料/可用浏览器，未取得参考也可先完成用户已明确的独立A修订。
