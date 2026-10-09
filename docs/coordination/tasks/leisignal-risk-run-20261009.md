@@ -1,3 +1,16 @@
+# C-F01修复已发布，待C定向复核
+
+- task-id leisignal-risk-run-20261009；owner 01a1208c-d559-72f0-ba6e-980a4337fa2c；status active / implementation_ready_for_C_targeted_review；updated_at 2026-10-09T20:54:56.419664+08:00。
+- checked_coordination_sha=bfe0d2c17dd0b181e19c335311dd5b06ff751425；checked_at=2026-10-09T20:54:56.419664+08:00；已读COORDINATION、A/B/C及中控最新相关段。A准确冻结输入只读、B唯一implementation/执行、C唯一review/最终归档，范围无变化、不占共享表。
+- 本次成果codex/leisignal-risk-run-20261009@7164290d3fd33be35eae6439c7044ab4e9dd4d3b；15文件146855B远端完整SHA及每文件原字节已核同。基线a2f977455b5395f5a02de901d4b50075a615f8dd；0586及旧版仍保留。
+- C审查fa421d30fb9f7aaa0b111d7f5d2ca39c65065ae4的C-F01已修：input_adapter在任何账户路径调用前校验原普通界与名义开盘；缺界/非法/越界停止、触界必须沿原blocked，特殊除息未知/停牌沿原blocked/halt。只用原界/开盘，不重建除息界或使用高低收盘。runner保存外盘opening-validation回执；经济参数/预算不变。
+- 16人工定向项通过，拒绝在模拟路径边界前发生且账户模拟调用0；A原47项及116开盘重新消费兼容，01-19原blocked保留，未计算历史比例/账户。旧0586代码/合同/回执及C反例保存在implementation/failures/C-F01-opening-reference/。定向检查脚本/证据/输入消费回执已冻结为附加证据。
+- 最新合同prepared_revision=4，SHA333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4；A准确29337ec9/manifest9f1c326b完整不变。人工累计8（5完整组、3定向），真实attempted=0/proposed=4/authorized=0；原两次已耗不可借，全部失败原件保留。
+- C只需定向审C-F01及受影响绑定，并核0586的次数摘要联动增量；不重跑已接受核心、原A/B0或旧路径。READY-FOR-C及自己的work-progress记录完整最小交接。C完整code_review_accepted未有，人类4路径许可未有，B不自我验收或称研究完成。
+- 下一依赖：C准确代码接受记录；人类批准本合同额外四键各一次。齐备才由B唯一执行同一核盘plan，结果先交C独立验收；失败不自动重跑。当前执行目录/实际attempts不存在。无定时器、无跨对话发送，以Git交接。
+
+---
+
 # B候选补充已发布，C须以此准确版本审查
 
 - checked_coordination_sha=b22c3740fdee6d456eb375138d1957ebc1f1fef0；checked_at=2026-10-09T20:42:03.010964+08:00；已读C输入独审接受/完整保护待审最新段、中控A依赖接续段，A inputs已交付段和本task前文无变；COORDINATION无变化。唯一写者范围不变，未占共享登记。
@@ -74,7 +87,13 @@ checked_coordination_sha=22762d6f031c98fd2ac03c89aa25ea499064d9f1；checked_at=2
     "docs/ops/work-progress/leisignal-risk-run-20261009.md",
     "docs/coordination/tasks/leisignal-risk-run-20261009.md"
   ],
-  "dependencies": [],
-  "dependency_notes": "A/C尚未登记；依赖其未来准确交付，不将未知状态写成ready。"
+  "dependencies": [
+    "leisignal-risk-input-20261009"
+  ],
+  "dependency_notes": "A inputs准确冻结已交付；C定向代码接受和人类4路径许可为开跑阶段依赖，尚未有。",
+  "stage": "implementation_ready_for_C_targeted_review",
+  "result_commit": "7164290d3fd33be35eae6439c7044ab4e9dd4d3b",
+  "checked_coordination_sha": "bfe0d2c17dd0b181e19c335311dd5b06ff751425",
+  "checked_at": "2026-10-09T20:54:56.419664+08:00"
 }
 <!-- lei-coordination-json:end -->
