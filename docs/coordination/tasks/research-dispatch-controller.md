@@ -1,3 +1,11 @@
+# 三对话交接文件已远端验收，原中控按用户要求移交休息
+
+- checked_coordination_sha=95e7d278a30fbfd249e3f20c8fdb0f80e8448a1d；checked_at=2026-10-09T19:30:23.196470+08:00；已读COORDINATION及本task，相关范围无变化。共用交接与进度2文件 `codex/research-direct-20261008@a2f977455b5395f5a02de901d4b50075a615f8dd` 远端SHA及内容读回一致，归置检查通过。
+- 文件：docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/three-chat-handoff-2026-10-09.md。A输入/B实现运行/C独立核验及唯一归档职责、写入范围、依赖和原8目标继承边界均已固定。本轮仅交付prompts，三角色未创建未派发，不能据本记录认为已有人运行。
+- 原中控不再承担主动接续或后台回调；原Goal依用户休息要求转暂停，定时保持已删除。新owner各自在自己的task-id登记后接手，不共写本task。scope_released=true：本轮交接文档已交付，registry/INDEX/原catalog均未占用；新4路径仍待明确批准，未计任何新研究次数。
+
+---
+
 # 用户要求移交为三个可打开对话：目前仅准备prompts，尚未派发
 
 - checked_coordination_sha=99d2517e04cc0770f34bba63e7c1d4e5295e9c60；checked_at=2026-10-09T19:26:53.007683+08:00；已读COORDINATION及research-dispatch-controller，其他新增仅无关任务文件名，无冲突。用户明确要本对话给prompt并休息；不创建/启动新对话，不假称分发完成。
