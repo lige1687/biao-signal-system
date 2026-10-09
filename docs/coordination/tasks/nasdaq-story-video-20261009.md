@@ -241,3 +241,9 @@
 - active；checked_coordination_sha: a106e6347904f0c172d37cd4c29fb759d2064341；checked_at: 2026-10-09T16:12:13.109898+08:00；已读COORDINATION1.1、自身、trend-trading-video最新aroll-done（completed/scope_released）、research-dispatch-controller blocked，相关共享编辑已释放，无冲突。root唯一写者。
 - 用户明确“这个主体不错，可以做到skill里边，作为经验哈”。只将v09已认可主体连续动作、少字、图表先让位再上统计及真实数据边界补入项目Skill入口和references/motion-direction.md；复用既有动态导演章节，不另造模板。不将主题认可解释为授权扩片、全主题黑金或已具公开许可。
 - 范围仅.agents/skills/code-explainer-video/SKILL.md与references/motion-direction.md及自身小进度；其他Skill内容、ai_tools、外盘旧包和媒体不改。使用skill-creator窄修改指导；检查引用、保留既有规则、差异和归置。
+
+## v09认可经验写入Skill完成 2026-10-09T16:14:13.962219+08:00
+- completed；scope_released=true；checked_coordination_sha: 1bdec50fe8443c56acb69eeba184db167f90b262；checked_at: 2026-10-09T16:14:13.962219+08:00；已读COORDINATION、自身、中控blocked、trend-trading-video原aroll-done及新prompt-library-start；最新增量仅dual-ma独立片记录。原固定SHA断言因其他任务fetch推进引用而停止，未写入；核自身不变后接续。
+- 用户认可“这个主体不错，可以做到skill里边，作为经验哈”已写项目Skill。实际仅SKILL.md入口一句与references/motion-direction.md案例段：同一真实行情推进→拉远→后续→测量；坐标同步，真实报价，图先让位再上统计，少字和阅读停留，无配音篇幅重估，黑金可选而非统一模板。保存获认可v09 v2的准确SHA和外盘相对位置。
+- 新prompt-library任务亦触及入口但只改Prompt/素材库，本轮插入段已完成且读回完整，不再写入口；其他既有内容保留。quick_validate和归置通过，入口与案例引用可达。认可主体不等于授权全片或公开传播。
+- 本次Skill改动仅本机可用，未提交成果分支/同步ai_tools；协调仅状态。无新媒体、外盘写入、安装、删除或扩片。
