@@ -1,0 +1,102 @@
+{
+  "schema": "native-risk-d-mae-real-x-implementation-verification/1",
+  "checked_at": "2026-10-09T12:18:22.942772+08:00",
+  "status": "implementation_ready_for_final_independent_review_no_real_X",
+  "base_commit": "bcf7b2169b53a5d5152847178e4045fa091a8879",
+  "coordination_sha_from_controller": "d846022bba7434f406163d762314f89d89871e63",
+  "strategy_source_sha256": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "files": {
+    "source": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/src/lei_signal/research/native_risk_d_mae_real_x.py",
+      "bytes": 19101,
+      "sha256": "1a716db72ee4ba760926fd5a7734e0deaa0cf4dd6a3d0f32543c8c0ce9e4c00b"
+    },
+    "tests": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/tests/unit/test_native_risk_d_mae_real_x.py",
+      "bytes": 6510,
+      "sha256": "06e7c56eb92a7dd363238ff866cc9bac4f48e3bd74dcde993cc5264f928f1372"
+    },
+    "readme": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/real-x-seal-20261009/README.md",
+      "bytes": 3853,
+      "sha256": "c8be65124ecf1fad9963a92c2b449213a89defd0aaab607fa09d3a8d22f46869"
+    },
+    "stage_a_source": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/src/lei_signal/research/native_risk_d_mae_inputs.py",
+      "bytes": 17763,
+      "sha256": "5404b52f1e9ca2dc103eff37cabf51e52656d2737a8244bbb11fc2aeb63decb7"
+    },
+    "design_contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/native-risk-d-mae-2026-10-07/immutable-handoff/PROPOSED-CONTRACT.json",
+      "bytes": 8360,
+      "sha256": "ace132ddb89de3e45951148d9673524fa9fe448f662f2576221d216bbe9717c6"
+    },
+    "executor_contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/real-x-seal-20261009/executor-contract.json",
+      "bytes": 5030,
+      "sha256": "c1d1689c8657707ad63f1127d9cab0250cf8a6d33cc3e2eec544c4ed03e3c7d2"
+    },
+    "output_plan": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/real-x-seal-20261009/output-plan.json",
+      "bytes": 806,
+      "sha256": "91d788d14f38a75350d2bafb6b9154fd6b9f4a9d3fef1128dab590e72fb21dc8"
+    },
+    "first_failed_test_log": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T121052-8c15af8c4cb6/result/tests/pytest1.log",
+      "bytes": 2714,
+      "sha256": "e0dc3b3b31d28fdaa748ad1f38009b3300bb45d12f9fa6535a69890f01949f67"
+    },
+    "final_test_log": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T121052-8c15af8c4cb6/result/tests/pytest2.log",
+      "bytes": 99,
+      "sha256": "8a18ad9607fdeb0b1bd9ff943c5a11c74d305bd9448277e4337ea680b94fe727"
+    }
+  },
+  "test_result": "22 artificial tests passed; final log on approved external result/tests; Ruff check and format check passed",
+  "device_readback": {
+    "mount": "/Volumes/win+mac通用",
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "device": 16777238,
+    "capacity_precheck": "external 612260904960 bytes free, internal 22236168192 bytes free at precheck; must recheck at execution"
+  },
+  "one_shot_state": {
+    "grant_exists": false,
+    "ledger_exists": false,
+    "real_x_directory_exists": false,
+    "test_directory_exists": true
+  },
+  "budget_used": {
+    "real_X_passes": 0,
+    "V_passes": 0,
+    "real_Y_passes": 0,
+    "fits": 0,
+    "future_price_reads": 0,
+    "external_requests": 0
+  },
+  "failure_history": [
+    {
+      "stage": "first artificial test run",
+      "detail": "1 of 22 failed because test grant input_sha256 referenced the same mutable dictionary as artificial identity. Test now deep-copies the dictionary. Final 22 pass; first failed log retained externally."
+    },
+    {
+      "stage": "independent first-pass code review",
+      "detail": "R1 numeric permissions could accept bool or float through Python equality; fixed with exact int type checks. R2 added source/grant/member bindings in X payload, readback of both output files and both hashes in completed ledger."
+    },
+    {
+      "stage": "repository hygiene",
+      "detail": "Checker still reports two files absent from current branch baseline (git ls-tree HEAD): configs/newsfeed.json and docs/research/definitions.v1.json. No new file in prohibited root layers; no unrelated file changed."
+    }
+  ],
+  "next_stage": {
+    "independent_review": "pending final source/test/record binding",
+    "parent_grant": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/real-x-seal-20261009/real-x-grant.json",
+    "ledger": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/real-x-seal-20261009/real-x-attempt.jsonl",
+    "output_plan_root": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T121052-8c15af8c4cb6/result",
+    "real_output": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T121052-8c15af8c4cb6/result/real-x",
+    "invocation": "PYTHONDONTWRITEBYTECODE=1 TMPDIR='/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T121052-8c15af8c4cb6/result/tests' python3 -B '/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/src/lei_signal/research/native_risk_d_mae_real_x.py'",
+    "condition": "Parent creates a distinct exact grant after independent review; only then may root execute one real X pass. Separate later Y grant required."
+  }
+}
