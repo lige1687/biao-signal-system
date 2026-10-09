@@ -1,0 +1,1014 @@
+{
+  "schema": "monthly-risk-input-manifest/1",
+  "task_id": "leisignal-risk-input-20261009",
+  "owner_session": "01a1208c-8a1b-7b22-8802-1a5f23f57f5a",
+  "status": "inputs_ready_with_retrospective_limits",
+  "created_at": "2026-10-09T20:12:27.707588+08:00",
+  "base_commit": "a2f977455b5395f5a02de901d4b50075a615f8dd",
+  "work_branch": "codex/leisignal-risk-input-20261009",
+  "scope": {
+    "symbol": "510300.SS",
+    "evaluation_window": [
+      "2026-01-01",
+      "2026-06-30"
+    ],
+    "required_saved_asset_span": [
+      "2025-09-25",
+      "2026-06-30"
+    ],
+    "mode": "report_only_input_qualification",
+    "ratio_window": 63,
+    "first_cutoff": "2025-12-31",
+    "new_methods_computed": false
+  },
+  "storage": {
+    "read_only_source_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+    "required_external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "entry": "PYTHONPATH=src python3 -m lei_signal.integrations.gpt_context --view storage",
+    "registered_migrated_input_resources_used": [],
+    "note": "All 25 prior bound input paths currently resolve to original local files, not migrated resources. Prior saved comparator result was created directly on the fixed external volume and is bound by its original result-location; no backup/migration is inferred from its name. No large file copied or newly written."
+  },
+  "monthly_cutoffs": [
+    [
+      "2025-12-31",
+      "2026-01"
+    ],
+    [
+      "2026-01-31",
+      "2026-02"
+    ],
+    [
+      "2026-02-28",
+      "2026-03"
+    ],
+    [
+      "2026-03-31",
+      "2026-04"
+    ],
+    [
+      "2026-04-30",
+      "2026-05"
+    ],
+    [
+      "2026-05-31",
+      "2026-06"
+    ]
+  ],
+  "cutoff_semantics": "Calendar month end after close; select latest 63 official calendar days no later than cutoff, require every selected date in all three base-fee saved accounts and the immediately preceding natural date. Do not remove missing dates then reach farther back. 2026-06-30 is terminal valuation, no July target or period extension.",
+  "initial_new_comparison_cash": {
+    "base": "110542.384400",
+    "stress": "110113.941800"
+  },
+  "initial_new_comparison_units": "0",
+  "initial_new_comparison_receivable": "0",
+  "initial_state_warning": "These are original A yearend states. B0 has 19800 units and a different wealth; its yearend account is only a risk reference, not the new comparator initial cash.",
+  "fee_rates": {
+    "base": "0.001",
+    "stress": "0.002"
+  },
+  "risk_standard_deviation": "Original sample standard deviation (n-1); calculation and zero-variance guard belong to B. A does not calculate any returns, volatility or target ratio.",
+  "artifacts": [
+    {
+      "id": "approved_proposal",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/recovered-order-package-20261009/risk-comparable-baseline-proposal.md",
+      "relative_original_path": "docs/experiments/raw/research-dispatch-controller-2026-10-07/recovered-order-package-20261009/risk-comparable-baseline-proposal.md",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/recovered-order-package-20261009/risk-comparable-baseline-proposal.md",
+      "sha256": "30c9f92569e21597e00c273a71b3909c59ecdab7e6b7442e2929de8045a9387a",
+      "bytes": 4543,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": true,
+        "commit": "a2f977455b5395f5a02de901d4b50075a615f8dd",
+        "relative_path": "docs/experiments/raw/research-dispatch-controller-2026-10-07/recovered-order-package-20261009/risk-comparable-baseline-proposal.md"
+      },
+      "recovery_scope": "Git exact byte recovery"
+    },
+    {
+      "id": "original_module_protocol",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/archive/handoffs-plans/factor-system-increment-2026-09-27/module-protocol.json",
+      "relative_original_path": "docs/archive/handoffs-plans/factor-system-increment-2026-09-27/module-protocol.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/archive/handoffs-plans/factor-system-increment-2026-09-27/module-protocol.json",
+      "sha256": "6c8ec371eb480c1dd3bf8617e2c30198b49b84b0e14549c24c8eda445353344a",
+      "bytes": 6214,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_b0_release",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/release-manifest.json",
+      "sha256": "f05b06f008b2d81fb22ab1993d728d132f6527b224fdf1924d513a6bca6c596d",
+      "bytes": 105743,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_b0_accounts",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/accounts.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/accounts.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/accounts.json",
+      "sha256": "a7603b8d4342ba55afc513832506d0d00a73301b997b14d1807afe42392eb2d4",
+      "bytes": 651344,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_b0_core",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/implementation-r2-2026-09-27/account_runner.py",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/implementation-r2-2026-09-27/account_runner.py",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/implementation-r2-2026-09-27/account_runner.py",
+      "sha256": "8f3ee25f81e71d27eeae425a4c57a358c47de9382cca41cb3693a3a4fdbe7e06",
+      "bytes": 28467,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_b0_driver",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/driver.py",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/driver.py",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/driver.py",
+      "sha256": "59fe682e65304c06523fc0373405498d5ed07523309b565a8482519e577b1690",
+      "bytes": 13396,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_b0_base_daily",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-base-daily.csv",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-base-daily.csv",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-base-daily.csv",
+      "sha256": "dc7d0915a336503977fbf08ea249e7a2c7f9fdebb3548831fa4467c8ee0c6eee",
+      "bytes": 731888,
+      "access": "existing_files_read_only",
+      "category": "daily_account",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_b0_stress_daily",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-stress-daily.csv",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-stress-daily.csv",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-stress-daily.csv",
+      "sha256": "506afc1d8a417e485fa0087b964aa0672c2c1f4ff0d58af81553f8a29c8cb1fb",
+      "bytes": 733526,
+      "access": "existing_files_read_only",
+      "category": "daily_account",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_b0_base_ledger",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-base-ledger.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-base-ledger.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-base-ledger.json",
+      "sha256": "69dcde14d3cc7125389202f76ef6b48e8f9cd63d10656ac3c39acaa36e0d2287",
+      "bytes": 6981,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_b0_stress_ledger",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-stress-ledger.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-stress-ledger.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-B0-stress-ledger.json",
+      "sha256": "f150c7aeda808a36819647ce549ca863980b12e9ce5c17c104309ec1593bfc60",
+      "bytes": 6983,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_input_manifest",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/manifest.json",
+      "sha256": "bbd2299cc228e0f5fcf07abbca7a384ad700d298428e07d49c6c0036aacfa2e9",
+      "bytes": 18087,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_input_calendar_manifest",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/calendar.json",
+      "sha256": "730dcb8f1bbb502ce215ba42a2d95efc42c6465962b0f96da90ef18bfeb72370",
+      "bytes": 2547,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_input_actions",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/actions.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/actions.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/actions.json",
+      "sha256": "7c9e098ac2f80aba4c3f7ef4d7fe1c1efbeda8bcac52bc0ec3034e9a9e02bb59",
+      "bytes": 19092,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_input_restrictions",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/restrictions.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/restrictions.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/restrictions.json",
+      "sha256": "f3df3961e977eec0a5c4782a662c87aea7e169d987fd756f26df9fb465e10ce1",
+      "bytes": 8347,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_input_gaps",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/gaps.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/gaps.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/inputs/gaps.json",
+      "sha256": "392bb1717e1ae940f91fbe15e9718352a5ce658493e7cd44a631543433db8662",
+      "bytes": 3097,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_510300_mapped_actions",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-mapped-actions.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-mapped-actions.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-mapped-actions.json",
+      "sha256": "8e8d0cee2ffc2ff3132e8b56b892146c0ec77aff7bc00c198c6150bd06935207",
+      "bytes": 1113,
+      "access": "existing_files_read_only",
+      "category": "consumed_market_input",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_510300_execution_reference",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-execution-reference.json",
+      "relative_original_path": "docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-execution-reference.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/510300.SS-execution-reference.json",
+      "sha256": "3c59e5b0ed614744a123099bf614b276fc412f3ec1f986bd3417c578033e3597",
+      "bytes": 272426,
+      "access": "existing_files_read_only",
+      "category": "consumed_market_input",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_nominal_quotes",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv",
+      "relative_original_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native/sh510300-nominal.csv",
+      "sha256": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+      "bytes": 148819,
+      "access": "existing_files_read_only",
+      "category": "consumed_market_input",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_calendar",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+      "relative_original_path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+      "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+      "bytes": 296252,
+      "access": "existing_files_read_only",
+      "category": "consumed_market_input",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_a_amended_release",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/amended-release-manifest.json",
+      "relative_original_path": "docs/experiments/raw/factor-module-a-increment-2026-09-27/amended-release-manifest.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/amended-release-manifest.json",
+      "sha256": "8fbed083b9830d40e650bfcfcb92a03f33da58049b8b95c8ed8c699ae8b72a67",
+      "bytes": 10467,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_a_core",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/account_core.py",
+      "relative_original_path": "docs/experiments/raw/factor-module-a-increment-2026-09-27/account_core.py",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/account_core.py",
+      "sha256": "7a6cc652bd52aab00f59880f28bb1e159d2799da3b38ac0d6c04ee01955ca933",
+      "bytes": 28484,
+      "access": "existing_files_read_only",
+      "category": "provenance_or_saved_settlement",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_a_all_base_daily",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-base-daily.csv",
+      "relative_original_path": "docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-base-daily.csv",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-base-daily.csv",
+      "sha256": "bd0c29d106ffaead31a142c55fe4f03ccfa99b30ce81a69f2d3513fde67ea9fa",
+      "bytes": 655305,
+      "access": "existing_files_read_only",
+      "category": "daily_account",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_a_all_stress_daily",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-stress-daily.csv",
+      "relative_original_path": "docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-stress-daily.csv",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-stress-daily.csv",
+      "sha256": "0c1f2b887f21ef9d0a1fd710ca610470e16c394251eafc49895d035feb317e8e",
+      "bytes": 655426,
+      "access": "existing_files_read_only",
+      "category": "daily_account",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_a_sma_base_daily",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-base-daily.csv",
+      "relative_original_path": "docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-base-daily.csv",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-base-daily.csv",
+      "sha256": "b9033598b13e624a5a32e55b6fffa12a0001f9f46600f0db08874fdcc23bd0e7",
+      "bytes": 654790,
+      "access": "existing_files_read_only",
+      "category": "daily_account",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_a_sma_stress_daily",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-stress-daily.csv",
+      "relative_original_path": "docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-stress-daily.csv",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-stress-daily.csv",
+      "sha256": "865afae58a777294a82f18d8dfff53b83a832de9a401fcdf633221e4ab631798",
+      "bytes": 655040,
+      "access": "existing_files_read_only",
+      "category": "daily_account",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "prior_cash_source_manifest",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-comparable-cash-baseline-2026-10-09/source-manifest.json",
+      "relative_original_path": "docs/experiments/raw/risk-comparable-cash-baseline-2026-10-09/source-manifest.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/risk-comparable-cash-baseline-2026-10-09/source-manifest.json",
+      "sha256": "4b86df1620db8835d0db460b80b63e9ea7c2ea245ee5a0d89f239c3837066ed4",
+      "bytes": 7561,
+      "access": "existing_files_read_only",
+      "category": "reused_binding",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": true,
+        "commit": "a2f977455b5395f5a02de901d4b50075a615f8dd",
+        "relative_path": "docs/experiments/raw/risk-comparable-cash-baseline-2026-10-09/source-manifest.json"
+      },
+      "recovery_scope": "Git exact byte recovery"
+    },
+    {
+      "id": "original_prior_price_provenance",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/factor-ma-baselines-2026-09-24/inputs/source-manifest.json",
+      "relative_original_path": "docs/research/proposals/factor-ma-baselines-2026-09-24/inputs/source-manifest.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/proposals/factor-ma-baselines-2026-09-24/inputs/source-manifest.json",
+      "sha256": "a8b4eb1952b316c6229a6f125f6d5621c19d725d9c2c3ad0c11d4a5ac78f7d98",
+      "bytes": 7386,
+      "access": "existing_files_read_only",
+      "category": "provenance",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "action_report_2025-06-18",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf",
+      "relative_original_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf",
+      "sha256": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+      "bytes": 2653500,
+      "access": "existing_files_read_only",
+      "category": "retained_action_source",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "action_report_2026-01-19",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf",
+      "relative_original_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf",
+      "sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+      "bytes": 2323200,
+      "access": "existing_files_read_only",
+      "category": "retained_action_source",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "original_action_coverage",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/coverage.json",
+      "relative_original_path": "docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/coverage.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23/coverage.json",
+      "sha256": "1095d2fb96fcdf6bd1c5ef6a18e87b857093fb886a8a376ac9b18f943a4faa8b",
+      "bytes": 41999,
+      "access": "existing_files_read_only",
+      "category": "provenance",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "rule_source_sse-2013-generic-limit",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/sse-2013-limit.html",
+      "relative_original_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/sse-2013-limit.html",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/sse-2013-limit.html",
+      "sha256": "b57fe5e3f066518bed5bec88a4726b1733b9fb1f15268c977d196bcdb707c886",
+      "bytes": 30664,
+      "access": "existing_files_read_only",
+      "category": "retained_rule_source",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "rule_source_sse-2023-rule",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-account-input-supplement-2026-09-24/sources/sse-2023-trading-rule.docx",
+      "relative_original_path": "docs/experiments/raw/factor-ma-account-input-supplement-2026-09-24/sources/sse-2023-trading-rule.docx",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-account-input-supplement-2026-09-24/sources/sse-2023-trading-rule.docx",
+      "sha256": "7aa2319f6dcf597be1e86b3b69d7c2ad0e6acb2a5d0cc6be48a01af602fded40",
+      "bytes": 51948,
+      "access": "existing_files_read_only",
+      "category": "retained_rule_source",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact local original available; independent backup location not certified by this run"
+    },
+    {
+      "id": "prior_cash-source-binding-readback",
+      "read_path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-input-20261009/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/approved-comparison-20261009/cash-source-binding-readback.json",
+      "relative_original_path": "docs/experiments/raw/research-dispatch-controller-2026-10-07/approved-comparison-20261009/cash-source-binding-readback.json",
+      "resolved_path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-input-20261009/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/approved-comparison-20261009/cash-source-binding-readback.json",
+      "sha256": "89fad4d2ffb0d0ec4fa5689e1d26f9b355677ab9c7a3d54de3be9b34f2b1a557",
+      "bytes": 4767,
+      "access": "existing_files_read_only",
+      "category": "reused_acceptance",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": true,
+        "commit": "a2f977455b5395f5a02de901d4b50075a615f8dd",
+        "relative_path": "docs/experiments/raw/research-dispatch-controller-2026-10-07/approved-comparison-20261009/cash-source-binding-readback.json"
+      },
+      "recovery_scope": "Git exact byte recovery"
+    },
+    {
+      "id": "prior_cash-final-controller-acceptance",
+      "read_path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-input-20261009/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/approved-comparison-20261009/cash-final-controller-acceptance.json",
+      "relative_original_path": "docs/experiments/raw/research-dispatch-controller-2026-10-07/approved-comparison-20261009/cash-final-controller-acceptance.json",
+      "resolved_path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-input-20261009/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/approved-comparison-20261009/cash-final-controller-acceptance.json",
+      "sha256": "b4b1ae23f71729772cd6fea6347511ea29fb8a11d3ec24718ecdd4cfc71d87be",
+      "bytes": 950,
+      "access": "existing_files_read_only",
+      "category": "reused_acceptance",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": true,
+        "commit": "a2f977455b5395f5a02de901d4b50075a615f8dd",
+        "relative_path": "docs/experiments/raw/research-dispatch-controller-2026-10-07/approved-comparison-20261009/cash-final-controller-acceptance.json"
+      },
+      "recovery_scope": "Git exact byte recovery"
+    },
+    {
+      "id": "prior_A_correction_reuse",
+      "read_path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-input-20261009/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/recovered-order-package-20261009/cash-historical-correction-reuse.json",
+      "relative_original_path": "docs/experiments/raw/research-dispatch-controller-2026-10-07/recovered-order-package-20261009/cash-historical-correction-reuse.json",
+      "resolved_path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-input-20261009/lei-signal-lab/docs/experiments/raw/research-dispatch-controller-2026-10-07/recovered-order-package-20261009/cash-historical-correction-reuse.json",
+      "sha256": "34f66f296a726ad30625bfa53c9fee8cfa0c4d6c98312d1f5c3839bec32e1d8a",
+      "bytes": 1423,
+      "access": "existing_files_read_only",
+      "category": "reused_acceptance",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": true,
+        "commit": "a2f977455b5395f5a02de901d4b50075a615f8dd",
+        "relative_path": "docs/experiments/raw/research-dispatch-controller-2026-10-07/recovered-order-package-20261009/cash-historical-correction-reuse.json"
+      },
+      "recovery_scope": "Git exact byte recovery"
+    },
+    {
+      "id": "three_chat_handoff",
+      "read_path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-input-20261009/lei-signal-lab/docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/three-chat-handoff-2026-10-09.md",
+      "relative_original_path": "docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/three-chat-handoff-2026-10-09.md",
+      "resolved_path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-input-20261009/lei-signal-lab/docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/three-chat-handoff-2026-10-09.md",
+      "sha256": "5d6ecf4307deb61bc538e7d2bb288956b2bbdd01bd340fec4e618d79d48d13d0",
+      "bytes": 9833,
+      "access": "existing_files_read_only",
+      "category": "authority_scope",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": true,
+        "commit": "a2f977455b5395f5a02de901d4b50075a615f8dd",
+        "relative_path": "docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/three-chat-handoff-2026-10-09.md"
+      },
+      "recovery_scope": "Git exact byte recovery"
+    },
+    {
+      "id": "monthly_method_proposal",
+      "read_path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-input-20261009/lei-signal-lab/docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/next-risk-comparison-2026-10-09.md",
+      "relative_original_path": "docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/next-risk-comparison-2026-10-09.md",
+      "resolved_path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-input-20261009/lei-signal-lab/docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/next-risk-comparison-2026-10-09.md",
+      "sha256": "e2ee9b3cb2edc379ada18f56b154ff2ca58995ac75c827fb5db2586f210a1760",
+      "bytes": 4506,
+      "access": "existing_files_read_only",
+      "category": "authority_scope",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": true,
+        "commit": "a2f977455b5395f5a02de901d4b50075a615f8dd",
+        "relative_path": "docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/next-risk-comparison-2026-10-09.md"
+      },
+      "recovery_scope": "Git exact byte recovery"
+    },
+    {
+      "id": "prior_fixed_comparison_saved_result",
+      "read_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/risk-comparable-cash-baseline-20261009/risk-comparable-cash-baseline-20261009-20261009T162536-982b6699dde3/result/result.json",
+      "relative_original_path": null,
+      "resolved_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/risk-comparable-cash-baseline-20261009/risk-comparable-cash-baseline-20261009-20261009T162536-982b6699dde3/result/result.json",
+      "sha256": "4fc8dd533077a4d0c156f22c6e1043d442bc89e7bb526b18bd060441975953df",
+      "bytes": 202327,
+      "access": "existing_files_read_only",
+      "category": "accepted_external_original_result",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Originally created on fixed external volume; this is the prior comparator result, not a backup of the six original daily ledgers"
+    },
+    {
+      "id": "accepted_A_correction_artifacts_manifest",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/structure-a3-correction-replay-2026-10-06/fund-artifacts-manifest.json",
+      "relative_original_path": "docs/experiments/raw/structure-a3-correction-replay-2026-10-06/fund-artifacts-manifest.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/structure-a3-correction-replay-2026-10-06/fund-artifacts-manifest.json",
+      "sha256": "499598cb05c798184c2d6a457b2463a416572e9cefaa8053e365da5f35f079e4",
+      "bytes": 2274,
+      "access": "existing_files_read_only",
+      "category": "saved_A_transaction_or_correction_identity",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact current local original; correction counterpart proves JSON equality but not same byte representation"
+    },
+    {
+      "id": "original_a_all_base_ledger",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-base-ledger.json",
+      "relative_original_path": "docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-base-ledger.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-base-ledger.json",
+      "sha256": "b9a69c658cb125e3e278cb796769ca0d2063474956f0fc7a537de371fbd5d4d6",
+      "bytes": 9659,
+      "access": "existing_files_read_only",
+      "category": "saved_A_transaction_or_correction_identity",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact current local original; correction counterpart proves JSON equality but not same byte representation"
+    },
+    {
+      "id": "accepted_correction_a_all_base_ledger",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_ALL-base-ledger.json",
+      "relative_original_path": "docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_ALL-base-ledger.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_ALL-base-ledger.json",
+      "sha256": "9c0ca90bcd09b3874d1e15022dc8694d353a52dc8e29153b34dfe2829b3065ba",
+      "bytes": 9660,
+      "access": "existing_files_read_only",
+      "category": "saved_A_transaction_or_correction_identity",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact current local original; correction counterpart proves JSON equality but not same byte representation"
+    },
+    {
+      "id": "original_a_all_stress_ledger",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-stress-ledger.json",
+      "relative_original_path": "docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-stress-ledger.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_ALL-stress-ledger.json",
+      "sha256": "4eb4e32b37ea2b038d791cb7b710ac918cf599f577b06773796432ccef78c562",
+      "bytes": 9663,
+      "access": "existing_files_read_only",
+      "category": "saved_A_transaction_or_correction_identity",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact current local original; correction counterpart proves JSON equality but not same byte representation"
+    },
+    {
+      "id": "accepted_correction_a_all_stress_ledger",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_ALL-stress-ledger.json",
+      "relative_original_path": "docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_ALL-stress-ledger.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_ALL-stress-ledger.json",
+      "sha256": "4177ce4b6052476b9c7d77e90585027979ac98f43c3af160d70e986fe52c4d97",
+      "bytes": 9664,
+      "access": "existing_files_read_only",
+      "category": "saved_A_transaction_or_correction_identity",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact current local original; correction counterpart proves JSON equality but not same byte representation"
+    },
+    {
+      "id": "original_a_sma_base_ledger",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-base-ledger.json",
+      "relative_original_path": "docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-base-ledger.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-base-ledger.json",
+      "sha256": "2bcda5d4629a4b80bccd135557e209cf4cc87f5e70803cf70050fd204a786828",
+      "bytes": 8655,
+      "access": "existing_files_read_only",
+      "category": "saved_A_transaction_or_correction_identity",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact current local original; correction counterpart proves JSON equality but not same byte representation"
+    },
+    {
+      "id": "accepted_correction_a_sma_base_ledger",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_SMA-base-ledger.json",
+      "relative_original_path": "docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_SMA-base-ledger.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_SMA-base-ledger.json",
+      "sha256": "66bc1154450197c53201051833b69a7efc11c819ff9e816d3619b0a93edce830",
+      "bytes": 8656,
+      "access": "existing_files_read_only",
+      "category": "saved_A_transaction_or_correction_identity",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact current local original; correction counterpart proves JSON equality but not same byte representation"
+    },
+    {
+      "id": "original_a_sma_stress_ledger",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-stress-ledger.json",
+      "relative_original_path": "docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-stress-ledger.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-module-a-increment-2026-09-27/510300.SS-A_SMA-stress-ledger.json",
+      "sha256": "db91efe291bcd5391efb52e41a574379caff9b16f6d80deb19a660e3166c3366",
+      "bytes": 8659,
+      "access": "existing_files_read_only",
+      "category": "saved_A_transaction_or_correction_identity",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact current local original; correction counterpart proves JSON equality but not same byte representation"
+    },
+    {
+      "id": "accepted_correction_a_sma_stress_ledger",
+      "read_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_SMA-stress-ledger.json",
+      "relative_original_path": "docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_SMA-stress-ledger.json",
+      "resolved_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/structure-a3-correction-replay-2026-10-06/accounts/510300.SS-A_SMA-stress-ledger.json",
+      "sha256": "26274b46c11a49b095c2bb05f7512fcc24cbf03a6ba5b3f375e9437f877a96e6",
+      "bytes": 8660,
+      "access": "existing_files_read_only",
+      "category": "saved_A_transaction_or_correction_identity",
+      "migrated": false,
+      "storage_resource_id": null,
+      "git_recovery": {
+        "available_at_base": false,
+        "commit": null,
+        "relative_path": null
+      },
+      "recovery_scope": "Exact current local original; correction counterpart proves JSON equality but not same byte representation"
+    }
+  ],
+  "qualification_limits": [
+    {
+      "id": "original_market_arrival_unknown",
+      "status": "retained_limit",
+      "effect": "Original data vendor identity/acquisition and historical available_at not independently established; only already observed retrospective research supported."
+    },
+    {
+      "id": "sse_calendar_not_independently_official",
+      "status": "retained_limit",
+      "effect": "Frozen calendar is SZSE official; SSE quote dates agree in relevant period but this is not independent SSE publication or historical announcement proof."
+    },
+    {
+      "id": "special_ex_dividend_limit_reference",
+      "status": "retained_limit_handled_by_original_block",
+      "effect": "2026-01-19 official ex-dividend opening reference is unknown; original saved reference blocks trading, next quote candidate 2026-01-20 is not a fill receipt."
+    },
+    {
+      "id": "dividend_cash_phase",
+      "status": "retained_research_assumption",
+      "effect": "2026-01-27 transfer to cash is day end; actual broker arrival intraday is unknown. Receivable wealth cannot fund buys before booked payment."
+    },
+    {
+      "id": "real_opening_fill",
+      "status": "not_certified",
+      "effect": "No auction book, actual fills, full halt inventory, slippage or capacity proof. Empty known halt list is no identified halt, not uninterrupted tradability."
+    },
+    {
+      "id": "cross_device_recovery",
+      "status": "not_certified_for_local_originals",
+      "effect": "24 of the original 25 bound files are absent from result Git baseline; current exact local files are usable. A verified independent backup/resource registration for them is not established. Do not infer Git fetch restores data or use an unrelated same-named external file."
+    }
+  ],
+  "blocking_missing_inputs": [],
+  "do_not_execute": [
+    "new_ratio_calculation",
+    "account_execution",
+    "sealed_experiment_replay",
+    "signal_or_label_regeneration",
+    "download",
+    "input_replacement",
+    "production_changes"
+  ],
+  "budget_actual": {
+    "new_account_paths": 0,
+    "old_replays": 0,
+    "new_signal_or_return_labels": 0,
+    "downloads": 0,
+    "prediction_fits": 0,
+    "parameter_scans": 0
+  },
+  "closure": {
+    "mode": "report_only",
+    "decision_use": "B binds exact original usable inputs and preserves source limits before implementation/review; no execution authorization inferred.",
+    "execution": "completed",
+    "evidence": "supported_with_retrospective_limits",
+    "completion_reason": "mode_boundary"
+  },
+  "supporting_files": {
+    "field_guide": "FIELDS.md",
+    "qualification": "QUALIFICATION.md",
+    "content_receipt": "qualification-checks-final.json",
+    "read_only_checker": "verify_inputs.py",
+    "hygiene_receipt": "hygiene-check.json"
+  },
+  "prior_validation_receipt": "qualification-checks.json (38 bindings/68 checks before addition of four saved A transaction ledgers and their accepted correction identities; retained, superseded only for final source list)",
+  "content_qualified_at": "2026-10-09T20:19:51.414789+08:00",
+  "checked_coordination_sha": "663521ec2018403f5a8a8a99eec928e9f820838a",
+  "checked_at": "2026-10-09T20:21:34.252940+08:00",
+  "read_task_ids": [
+    "research-dispatch-controller",
+    "leisignal-risk-input-20261009",
+    "leisignal-risk-run-20261009",
+    "leisignal-risk-review-20261009"
+  ],
+  "conflict_decision": "A inputs only; B implementation/execution and C review/archive have distinct writers. Coordinator resumed dependency routing, no change to this input scope or real execution budget.",
+  "validation_history": [
+    {
+      "receipt": "qualification-checks.json",
+      "artifacts": 38,
+      "checks": 68,
+      "reason": "Initial input qualification before A transaction ledger binding"
+    },
+    {
+      "receipt": "qualification-checks-v2.json",
+      "artifacts": 47,
+      "checks": 85,
+      "reason": "Added original saved A transaction ledgers and exact accepted correction identity"
+    },
+    {
+      "receipt": "qualification-checks-final.json",
+      "artifacts": 47,
+      "checks": 86,
+      "reason": "Added actual external original file device check; final unchanged data qualification"
+    }
+  ],
+  "validator_sha256": "ebef983d3dfb5a98e934fb78333f92ef4e1ed515b15bee578eac2c5d0850f4f4"
+}
