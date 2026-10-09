@@ -1,3 +1,11 @@
+# 两结构描述比较独审归档远端闭合；共享窗口释放
+
+- checked_coordination_sha=22a2adb808af49dfd9a377b1b391f4be912ef8db；checked_at=2026-10-09T17:20:37.830177+08:00；沿本task与已读研究owner范围，增量仅无关文件名。成果codex/research-direct-20261008@e942c4223f5520607f0b9208d972d9d0ac1ea3d1共31准确路径398107B逐字远端核验。主registry643/隔离218仅一新项，原字节/INDEX保留，归置通过。scope_released=true：registry/INDEX/definitions全部释放；Sol/Astra completed，0运行研究进程。
+- 1feature/1label/1effect按固定两解释完成。实际597评价ETF日/265日/75段，21背景格528行，7/8资产时期支持；完整主比较insufficient。2333标签含1736早期背景未加主检验；独审全标签最大差3.02e-14个百分点、汇总1.60e-14、条件差额9.77e-15。0拟合/重抽/下载/账户/重跑；大结果仅固定外盘。
+- 逐根/允许反弹两解释跨资产时期方向不一，无稳定胜者、无生产退出或仓位建议。与cash-risk-comparability固定风险失配负结果同时结案；仅关闭本次已批准两问题，不冒称原八目标全完。预热/依赖/模式晚验及原所有失败预算保留；本次不再加候选/期限/比例寻找正结果。原定时已删除不重建，后续只接原八目标的具体必要新证据/授权范围。
+
+---
+
 # 两结构一次真实描述比较完成：独审与单项归档窗口
 
 - checked_coordination_sha=b9bc2b1a7b12d041b14baa47a8219c22e43f5517；checked_at=2026-10-09T17:14:39.374198+08:00；自身及原研究owner范围沿读，新增仅无关文件名。Sol已冻结停止；Astra仅保存结果独立复算。修复三项定向核验通过后，root实际1feature、1label、1effect，0拟合/下载/重抽，原失败保留。
