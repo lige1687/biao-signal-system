@@ -33,3 +33,7 @@ V14导出与完整播放已完成：240秒、1080p、30fps，检查0失败；13�
 ## 2026-10-09 两篇文章与Skill前置流程复查
 
 task-id trend-trading-video，基线2f7bc4683f74237d19fde484ce665ac975d08a3f，成果分支沿用codex/trend-history-long-v14-20261009；开工协调workflow-review-start.json（远端读回成功）。重新读两篇转载、作者实际Skill与两处候选例库；X原帖403如实记录。已补最小输入、文稿与镜头交接、声音分支、索引和分镜模板，以及只读缺件检查。10项结构/失效检查均符合预期；V14内容齐全，独立分镜表尚缺，有声自动化未接入。旧成片不重做。报告xilo-learning/workflow-review-20261009.md，核验workflow-check-results.json。此次只交付文档工作流和检查器，不宣称全链路已自动运行。
+
+## 2026-10-09 leyan参考原声定位与下载
+
+用户指定视频7691894559067910566。对应music_id7691894827352410921，@leyan创作的原声；网页标题和公开详情一致，没有独立匹配歌曲。已取得平台原声MP3并全部写核验外盘，125.47秒、4,015,471字节、完整解码通过，6份文件SHA读回。位置reference-audio/leyan-20261009.json。12秒ASR得到可疑音乐误识别，不把它当旁白或纯BGM证据；真实听感和纯音乐状态待试听。手机同款添加/发布未实测，现有V14未改。首次隔离venv缺numpy，复用已用Homebrew Python3.11/vendor成功，无安装/下载模型。开工reference-music-start.json；不发布、不做跨平台音乐许可保证。
