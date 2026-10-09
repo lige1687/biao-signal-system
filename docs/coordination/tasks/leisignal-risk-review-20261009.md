@@ -1,3 +1,48 @@
+# C真实核数已完成，限定补注修复与唯一归档窗口（2026-10-10T00:20:48.249385+08:00）
+
+- checked_coordination_sha=be1701f3988ad7e82ad9209c6c79b46f6b0b1207；checked_at=2026-10-10T00:20:48.249385+08:00；已读COORDINATION及leisignal-risk-input-20261009, leisignal-risk-run-20261009, leisignal-risk-review-20261009, research-dispatch-controller, risk-shape-information, theory-workflow-system-increment。B4283254d四路径真实交付已读；6冻结源码未变、47来源身份、月末63日、181日资金/订单/费用/分红/风险与差额独立算式已核。首次5886检查保留6差异：4个期初零持仓估值字段与2个浮点末位。C-F02已明确交B仅16行元数据补注，不重跑账户、不覆盖原件；浮点末位由C独立高精度定向解释，不修改10%科学标准。
+- 唯一共享写者核对：A冻结输入；Bimplementation与真实执行，不占registry/INDEX/catalog；中控仅其交接和记录；risk-shape-information/theory-workflow-system-increment旧登记已released。C是本批唯一归档整合人。
+- 本次正式共享范围仅：本报告registry准确key、INDEX §1一行、原catalog最上方2026-10-10必要补注；catalog原登记字段只更新因补注失效的report_sha256，其他值全部保持。各checkout自己当前条目不互相覆盖，不改其他entry/旧正文/冻结raw/生产。完成时验diff与读回。此登记发布核同后才写共享表。
+- 两参照两档费用日波动均超1.10，负结果保留；可描述金额但不能解释为相近风险多赚。真实4/4耗尽、旧2/2不借，C账户执行0。目标5限定问题可负向结案，八目标其他边界只复用旧结论不重开。
+
+<!-- lei-coordination-json:start -->
+{
+  "task_id": "leisignal-risk-review-20261009",
+  "owner": "01a1208d-49ba-7972-9fa1-b47d7d5749b7",
+  "status": "active",
+  "stage": "numeric_audit_targeted_metadata_fix_and_exclusive_archive",
+  "checked_coordination_sha": "be1701f3988ad7e82ad9209c6c79b46f6b0b1207",
+  "checked_at": "2026-10-10T00:20:48.249385+08:00",
+  "read_task_ids": [
+    "leisignal-risk-input-20261009",
+    "leisignal-risk-run-20261009",
+    "leisignal-risk-review-20261009",
+    "research-dispatch-controller",
+    "risk-shape-information",
+    "theory-workflow-system-increment"
+  ],
+  "scope_released": false,
+  "shared_archive_window_open": true,
+  "write_paths": [
+    "docs/experiments/raw/monthly-risk-comparison-2026-10-09/review/",
+    "docs/experiments/monthly-risk-comparison-2026-10-09.md",
+    "docs/experiments/registry.json#entries[docs/experiments/monthly-risk-comparison-2026-10-09.md]",
+    "docs/experiments/INDEX.md#one_monthly_risk_row",
+    "docs/experiments/research-evidence-catalog-2026-10-07.md#2026-10-10_monthly_risk_addendum",
+    "docs/experiments/registry.json#entries[docs/experiments/research-evidence-catalog-2026-10-07.md].report_sha256_only",
+    "docs/ops/work-progress/leisignal-risk-review-20261009.md",
+    "docs/coordination/tasks/leisignal-risk-review-20261009.md"
+  ],
+  "B_result_commit": "4283254d23371691506851816ff4d7a17228ea4a",
+  "actual_new_paths_by_B": 4,
+  "actual_C_strategy_runs": 0,
+  "conflict_decision": "A冻结/B不写共享表/root仅自身交接；另两旧登记明确released。C只本条登记、INDEX一行、catalog日期补注与必要catalog条report_sha256，不写其他条目。主仓和隔离树分开精确更新，未占全部registry。",
+  "finding": "C-F02_zero_position_initial_nontrading_mark_metadata; targeted_B_addendum_only; no_rerun"
+}
+<!-- lei-coordination-json:end -->
+
+---
+
 # 人类授权已解除旧阻塞，C接续真实结果和唯一归档（2026-10-10T00:09:11.043719+08:00）
 
 - checked_coordination_sha=646942f7476c3752197623143d63463dfbb12a5b；checked_at=2026-10-10T00:09:11.043719+08:00；已读COORDINATION、A/B/C、中控最新相关段；冲突决定三写者不变，A输入冻结，B唯一实际执行，C唯一独审归档。尚未占正式共享登记窗口，写共享表前再次fetch与准确登记。
