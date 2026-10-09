@@ -326,3 +326,9 @@
 - active；checked_coordination_sha: 1f2d214cf3b3dfa9b9cb21f1d6b9ab03aa36f971；已读COORDINATION、自身、trend-trading-video、nasdaq-story-video-20261009、research-dispatch-controller，无本片发布冲突。root唯一写者。
 - 用户明确批准完整版并要求发布小红书/抖音，加vibe知识大赏，最新要求继续发送。范围：该122秒v21、原批准文案及正式话题；外盘发布记录-v21-20261009及本记录，不改Skill/生产/其他帖子。
 - 已核视频18095693B/SHA e05858dcfe82aab9d1b1fca676efd50078ce291af862b188ce51769fccf20b9d，固定外盘身份正确；实查XHS lige7与抖音lige登录。验收上传正确文件、正式话题、发布后作品状态/原作读回，截图及回执外盘保存。
+
+## 双平台发布阶段 2026-10-09T18:43:38.194739+08:00
+- blocked仅抖音本人短信验证；小红书已发布。checked_coordination_sha: d99bf4f34d3296bd4579236460eeba7ef2c10e0a；已读自身本轮记录及此前COORDINATION/trend/nasdaq/中控，无共享改动，root唯一写者。
+- 小红书lige7，note-id 6ac8c4d5000000001c01e87e，18:41提交后审核中，随后已发布列表有02:02本片。发布后update页5个data-topic ID持久读回：vibe知识大赏、双均线、科创50、趋势分析、投资学习。公开未登录页提示暂不可浏览，不能称已核公众播放。未更改已提交内容。
+- 抖音lige已上传正确v21、5正式候选、标题正文和封面并点发布；触发本人短信验证，已请求验证码并留handoff窗口。无验证码，不能继续必要验证，也不称已发布。用户问题已异步提出；恢复条件本人完成或给此次码，再核内容管理/原作，避免重复上传。
+- 外盘发布记录-v21-20261009含已发布截图、提交话题读回、等待验证截图及状态；既有成片封存包未改，未装软件/付费/删除/策略改动。
