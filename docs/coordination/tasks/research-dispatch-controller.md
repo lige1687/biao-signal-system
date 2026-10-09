@@ -1,3 +1,11 @@
+# 沿准确上游引用恢复原组合资料
+
+- checked_coordination_sha=f0181e225217683c77e9d6c6bd2fe7bd8ec8d309；checked_at=2026-10-09T15:21:33.264044+08:00；已读本任务当前来源链与COORDINATION，远端无变化。上轮为progress：恢复工程及原PPO/P26效果41文件已归档验收；八目标完成标准Astra只读审查本轮工具仍running，不重复派发。
+- 单事件原包a2cd9549e219273839446fbd62c1c0509eb2d3fdac2f3f2268c05a0b13b212da是合成接口，非旧单ETF历史收益；SOURCE_BINDINGS明确引用libfile_4ae59de13ef881918b5cdd4e2f867302，页面显示LeiSignal-策略组合风控接口与合成测试-2026-10-06.zip。root仅恢复这一准确上游原件并只读来源/合同，不执行任何包内程序。
+- root唯一新写/Volumes/win+mac通用/LeiSignal-新实验结果/cash-composition-source/cash-composition-source-20261009T152133-8428400021e1/result原ZIP，计划10MiB外盘/11MiB本机浏览器暂存预算已实测；小位置/指纹放自身raw/recovered-order-package-20261009，及state/work-progress、本任务。registry/INDEX保持释放。不猜缺失cash结果、不重跑旧实验/标签、不改主分支、不删除。找到原源再按实际需要接续。
+
+---
+
 # 单事件原包仅来源定位范围
 
 - checked_coordination_sha=f6735dc1340d821a983012f4d25bfbdce9df4e0b；checked_at=2026-10-09T15:18:05.976206+08:00；已读COORDINATION、本任务，旧现金目录CASH-SINGLE-ETF精确产品/合同尚缺。资料库现金搜索3项、回放搜索无匹配；前两合成包已核不重复下载。唯一新候选libfile_584bab85a68881918d8bfc2405e21114显示LeiSignal-单事件只读映射与共享现金合成接口-2026-10-06.zip，可下载但尚未读内容。
