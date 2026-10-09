@@ -1,3 +1,12 @@
+# 风险对照两路径真实完成并独审：归档单项窗口
+
+- checked_coordination_sha=f4794ab4946ba7de928f3eaaccd14f43df3c6900；checked_at=2026-10-09T16:51:14.994003+08:00；读自身/report-library-integration-20261008已释放，协调增量只核共享写入范围字段，不接收或验收运营成果。未发现registry/INDEX当前写者。root唯一单项归档，Astra只读结果审查completed，Sol仍仅两结构新模块实现。
+- 真实新增现金恰1批2路径，0旧账户重放；外盘result.json202327B SHA4fc8dd533077a4d0c156f22c6e1043d442bc89e7bb526b18bd060441975953df，唯一attempt/release已保存。Astra独算362新日账/724保存A日账金额最大差0，风险浮点差2.22e-16，243日校准w0.6268576158965562。base/stress末115643.1092/115145.7914；风险比1.9575—2.2358，全部超过1.10，预定风险匹配失败；此负结果接受，不调比例重跑，不称Goal5整体完成。
+- root范围新增主/隔离docs/experiments/cash-risk-comparability-2026-10-09.md、原新raw/risk-comparable-cash-baseline-2026-10-09四小源/说明及位置、registry只上述报告一key、INDEX一行；已有own approved-comparison合同/失败驱动/独审/小位置及state/进度更新。大结果只外盘，不把行情/完整结果上传Git。其他表项原字节保持，完成即释放登记。
+- 定义主173/隔离173的新增仅两draft对象已核，原171字节保持；隔离HEAD原无该表，发布时明确为继承既有表的依赖快照，不宣称173个新研究。准备阶段原source绑定保留，执行明确amendment，不忽略漂移。现金初版未执行驱动失败留存，v2设备锚定/失败捕获已独审。原预算/旧失败不改，原定时仍删除。
+
+---
+
 # 两新结构对象单项定义登记范围
 
 - checked_coordination_sha=38d10eef5583eb6590bb6c8ad034be7f6b323e81；checked_at=2026-10-09T16:45:15.309226+08:00；沿本轮已读研究owner/规则，新增仅无关文件名，未读运营内容。Sol唯一新模块/implementation写者不变，Astra只读现金独审；root不并改其代码。
