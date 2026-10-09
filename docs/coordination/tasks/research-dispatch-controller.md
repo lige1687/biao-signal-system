@@ -1,3 +1,10 @@
+# 真实运行前阻断修复：预热内结构状态
+
+- checked_coordination_sha=fcf0b0f4212cde6cefd9987c7ea5a375f84fc99a；checked_at=2026-10-09T17:06:02.223975+08:00；已读本任务，增量仅范围核对。Astra合成发现252根前跳过状态推进，与冻结设计不符；feature/label/effect仍0，保留反例。
+- Sol唯一重开原新模块及implementation的有界修复：状态从段起推进、评价资格仍252根；补research包初始化及三存储配置指纹，保留初版源/失败/定向回归。其他语义/阈值/输出与设计不改。root不并改作者文件，attempt两路径仍未创建；Astra只读复核后才放行。registry/INDEX/definitions仍释放。
+
+---
+
 # 两结构实现冻结：独审与根受控运行范围
 
 - checked_coordination_sha=8d7a7ea5b43291842eaaf63016f0fbc42a19fc3b；checked_at=2026-10-09T17:05:27.724780+08:00；已读本task与原相关研究owner，最新增量仅无关文件名；自身946632c3内容已逐字远端核。Sol完成并停止，模块59523945/runner b43db4d2冻结，真实feature/target/effect仍0。Astra仅只读独审已实际接续；无新的并写或同题执行者。
