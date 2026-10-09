@@ -28,3 +28,12 @@ checked_coordination_sha=b5c4c0d46eb96ceec5af9e4ad16214740c06f147；checked_at=2
 stage=static_revision_awaiting_user，未获本期具体静态认可，未渲染动态/全片/声音。下一步待这版反馈，再用同一主体完成15秒中段动作、跨场景接点与声音；不把两张图推拉当视频。
 
 checked_coordination_sha=5f2449959bce12f3975f45a4687dee517e1d387e；checked_at=2026-10-09T23:12:31.811882+08:00；已读自身及system-x-video-ideas新增，其他已读任务无范围变动；独立目录不冲突，root唯一写者。
+
+## 2026-10-09T23:31:46.529665+08:00 v03代码实帧及实时工程
+
+用户强调实际代码渲染，v02混用沙漏素材/单独展示造成混淆已澄清。图2/3当前全代码SVG，移除全部位图引用；图1范围不变。相同scenes.tsx用于静帧和实时Player，已开http://127.0.0.1:53022/preview/index.html 默认暂停且保留标签页；实际切换图2/3，浏览器DOM图片元素为0，页面截图随包。
+
+位置：/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/投资心态/20261009-cash-position/v03-code-only
+4张1920×1080导出帧，场景159/234及各45帧；图3底座初版贴近字幕已修复，旧帧保留。代码引用审计、实际PNG/浏览器查看、公开文案/归置通过；23项非缓存文件10245706字节SHA/大小读回。所有本轮普通文件与缓存直接外盘，无新生图/安装。
+
+静态和正式样例未获用户确认；实时预览是同一工程帧状态，不代表跨场景/声音15秒样片已完成。下一步按用户反馈接续。checked_coordination_sha=778b59a12d4f462ca55c29cf2bb335c5d6f969f0；checked_at=2026-10-09T23:31:46.529665+08:00；补读trend-perspective独立全片进度，无路径冲突，root唯一写者。
