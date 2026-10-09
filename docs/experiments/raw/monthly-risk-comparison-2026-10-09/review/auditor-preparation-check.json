@@ -1,0 +1,105 @@
+{
+  "schema": "C-auditor-preparation-check/1",
+  "task_id": "leisignal-risk-review-20261009",
+  "checked_at": "2026-10-09T21:05:12.662038+08:00",
+  "checked_coordination_sha": "9eac3fa5fd0f463e4908ac43f73b5005a5b440e9",
+  "previous_goal_turn_classification": "progress: exact full corrected code acceptance published and read back; no numeric/archival completion claimed",
+  "B_C_reference_current_local": {
+    "task_id": "leisignal-risk-review-20261009",
+    "commit": "1e954fdc511092c1769fcaa5a6779d36eb7e0641",
+    "path": "docs/experiments/raw/monthly-risk-comparison-2026-10-09/review/code-review-release.json",
+    "sha256": "33a8e3d3d8df37b29cc0663a6d6806bb7b9626f1dcc97ca5617f002e3daaed15",
+    "received_at": "2026-10-09T21:02:06.640899+08:00",
+    "binding_verified_by_B": true,
+    "scientific_result_acceptance": false,
+    "user_authorization": false
+  },
+  "C_git_reference_bytes_sha_verified": true,
+  "B_remote_code_commit_checked": "7164290d3fd33be35eae6439c7044ab4e9dd4d3b",
+  "B_C_reference_publication_not_yet_verified": true,
+  "actual_B_authorization": {
+    "schema": "monthly-risk-authorization/1",
+    "status": "not_granted",
+    "task_id": "leisignal-risk-run-20261009",
+    "authorized_path_ids": [],
+    "user_quote": null,
+    "source_thread": null,
+    "authorized_at": null,
+    "contract_sha256": null
+  },
+  "actual_started_paths": [],
+  "blocking_acceptance_items": [
+    "real four-path human authorization in B",
+    "four real saved results",
+    "independent numeric acceptance",
+    "formal report and exact registry/INDEX/catalog addendum",
+    "final hygiene/exact commit/remote readback"
+  ],
+  "blocker_origin": "User instruction: 新增4条路径的批准由B保存真实用户授权，你核其范围，不替用户批准。",
+  "C_auditor_sha256": "3d6f3e9f8f7f0d478e0a10b87f72392dccf9f50110223b85f8645a398d4c6659",
+  "artificial_metrics_check": {
+    "passed": true,
+    "rows": [
+      {
+        "date": "2026-01-01",
+        "wealth": "100",
+        "cash": "100",
+        "receivable": "0",
+        "units": "0",
+        "mark": "0"
+      },
+      {
+        "date": "2026-01-02",
+        "wealth": "90",
+        "cash": "90",
+        "receivable": "0",
+        "units": "0",
+        "mark": "0"
+      },
+      {
+        "date": "2026-01-03",
+        "wealth": "100",
+        "cash": "100",
+        "receivable": "0",
+        "units": "0",
+        "mark": "0"
+      },
+      {
+        "date": "2026-01-04",
+        "wealth": "110",
+        "cash": "110",
+        "receivable": "0",
+        "units": "0",
+        "mark": "0"
+      }
+    ],
+    "selected_trading_dates": [
+      "2026-01-01",
+      "2026-01-02"
+    ],
+    "hand_expected": {
+      "daily_sample_sd": ".1/sqrt(2)",
+      "max_drawdown": "-.1",
+      "worst_natural_day": "-.1",
+      "recovery_calendar_days": 2,
+      "end_wealth": "110"
+    },
+    "actual": {
+      "trading_day_volatility": 0.07071067811865475,
+      "trading_observations": 2,
+      "natural_observations": 4,
+      "initial_wealth": "100",
+      "end_wealth": "110",
+      "net_change": "10",
+      "net_change_ratio": "0.1",
+      "max_drawdown": "-0.1",
+      "worst_day": "-0.1",
+      "longest_underwater_calendar_days": 2,
+      "unrecovered_at_end": false,
+      "average_invested_pct_natural_days": "0"
+    }
+  },
+  "C_saved_result_audit_ran": false,
+  "C_strategy_or_account_replays": 0,
+  "recovery": "B must save actual human authorization for accepted revision 4 contract/exact four keys, then execute once and publish complete result pointers. No timers, alternate strategy, old replay or invented permission."
+}

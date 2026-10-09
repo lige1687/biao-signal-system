@@ -66,3 +66,10 @@ task-id：leisignal-risk-review-20261009；负责人/会话：01a1208d-49ba-7972
 - 交付review/correction-code-review.json/.md及code-review-release.json：完整code_review_accepted，绑定准确6代码/A/主人工/附加证据。不是人类4路径批准或科学数值验收。B实际attempts不存在、authorization not_granted；新真实账户0，原两失败不借用。
 - review/audit_saved_results.py准备，只读保存产物独立核数；语法检查通过，真实未调用。无需为等待跑另一策略或旧实验。
 - Goal仍active，正式报告/registry/INDEX/catalog未写；恢复需要B保存真实四键各一次授权并实际执行，交完整位置/SHA/次数。C届时仅执行必要保存结果复核，随后开精确共享归档窗口、归置与远端读回。
+
+## 2026-10-09T21:05:12.662038+08:00 Goal接续核当前依赖与独立核数程序
+
+- 前一Goal回合属于progress：完整修复代码接受1e954fdc及协调9eac3fa5均已实际发布读回。本回合重新fetch核B远端仍7164290d，协调9eac3fa5；B当前回合inProgress，最新实际只在保存C引用，不能将对话active当真实账户进程。
+- B本机C-review-reference确已保存，C独立从其准确commit/path读Git字节，SHA与C原件核同；B该引用的远端发布尚未验证。authorization仍not_granted、批准四键为空、真实开始标记0。唯一实际阻塞来自本任务要求的真实人类批准，不由C代批或借旧预算。
+- C新核数程序做一次固定保存人工资产100/90/100/110的统计手算核对：两个交易日标准差.1/√2、最大及最差日跌10%、恢复2自然日、终值110均通过。仅新C计算器检查，不重跑原六核心、B组或真实账户；真实产物audit仍未调用。证据review/auditor-preparation-check.json。
+- 仍未达成：真实四路径、数字独审、正式报告/registry/INDEX/catalog、最终归置与提交远端验收。当前不能完成Goal；授权和真实产物到达后按原准确接续，不为等待重开八目标其他研究或建定时器。
