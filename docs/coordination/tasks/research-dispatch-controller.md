@@ -1,3 +1,11 @@
+# 原5211 PPO/P26保存效果原包恢复（不运行实验）
+
+- checked_coordination_sha=501b57cc688b2db1eb9243299216e0a54a5291b8；checked_at=2026-10-09T14:53:56.960602+08:00；已读本任务与旧目录STOCK-PPO-5211、STOCK-P26-5211准确来源和预算。root只有来源定位/恢复写者，现金新外壳Astra独审独立路径无冲突。原目录尚未接受这两个效果包；主桌面/Downloads/旧资格根三准确位置无同名包，旧外盘查找未给出它们的恢复回执。
+- 原资料库实际打开libfile_c83a1f03c3848191bdf05bf1346c0517并显示stock-5211-ppo-rankic-audited-results-v1.zip和下载按钮；列表亦有stock-5211-P26-conditional-diagnostic-audited-results-v1.zip，须核其libfile_8bcd654441588191acc07430522f4f6c。只这两份原效果包，不取新行情、不重试403接口、不运行PPO/P26或改变封存预算。
+- root唯一写自己的raw/recovered-stock-effects-20261009位置/来源小记录与状态进度本协调；耐久ZIP只写新外盘research-stock-original-effects-20261009T145332-76a120ba11b8/result，固定设备容量实测计划128MiB；浏览器默认暂存可能本机，预计128MiB并保留，不能宣称浏览器直接外盘。不写旧源/报告/registry/INDEX，不假称下载等于验收。
+
+---
+
 # 单P0整笔恢复外壳已交付，非作者独审范围
 
 - checked_coordination_sha=2a957fe856e145ee4a73da330695ced1707cc65f；checked_at=2026-10-09T14:52:20.930152+08:00；已读本任务与既有COORDINATION，新增仅不相关文件名，原实现路径无重叠。Sol已停止写，新七文件source-manifest6833c6f01e3fc9b3a3eb93d44971034c53b040efc597965ec13e98c8dfeae3f5/core832e766f3f15e0ed81c048faab20cce3a508c5a7931d592f1b5cea1ddbe90a05固定root核同。
