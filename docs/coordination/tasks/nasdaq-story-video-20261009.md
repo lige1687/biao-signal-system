@@ -308,3 +308,8 @@
 - completed本次交接整理；scope_released=true；checked_coordination_sha: 242ae6edded2a92751113c00959df5caf906990e；checked_at: 2026-10-09T18:34:57.532669+08:00；已读自身与COORDINATION1.1，本轮无共享源码/Skill修改或跨任务重叠。
 - 用户追加“不用当前成片”，已排除当前双画幅完整片和旧ZIP。新外盘目录 /Volumes/win+mac通用/LeiSignal-新实验结果/视频库/指数科普/20261009-nasdaq-story/opus55-handoff-20261009；1125文件，ZIP 274693852B，SHA256 bba7cb17bc278fcc3852f601141c0a6db28011d45687cf4cdf3d98da8ef6d63d；复制及ZIP成员逐项SHA读回，无当前全片通过。包含执行Prompt、用户最新偏好、文稿分镜、素材原件/原BGM、数据事实、工程、四条短样例和Skill参考快照。
 - 工程保留原可编辑基线，绝对环境路径需适配；未验证跨机器重建，不生成新全片/发送给Opus/发布/安装/删除。音乐和数据公开许可仍待补，原始00—07附件不齐明确披露。外盘仅本地，远端只此小协调索引；用户自行给Opus附件及Prompt即可。
+
+## 动态流程及可选Style沉淀开始 2026-10-09T18:53:10.377696+08:00
+- active；scope_released=false；checked_coordination_sha: e553481459525a110084e5718fc3bfc232ec9079；checked_at: 2026-10-09T18:53:10.377696+08:00；已读COORDINATION1.1、自身、trend-trading-video、dual-ma-video-copy-20261009、personal-quant-video-render-preview-rule、research-dispatch-controller。
+- 用户明确同意把参考片style作为可选项加入Skill及确认制作顺序。本轮root只写Skill入口动态风格路由、references/motion-direction.md、storyboard-template.md、新style-compound-motion.md及自身小进度。dual-ma当前发布章节规则属于独立Skill段落；不覆盖其发布增量，写前重读并检查未变，按准确段落插入。
+- 验收参考来源/观察范围、可选非默认、主体动作优先/后加光效、无旁白减字、全片与样例对照、原静帧→小样→全片确认不变，链接和Skill检查/归置通过。无新视频/下载/安装/交易研究，媒体诊断留既有外盘，不入Git。当前Skill既有未跟踪内容不全量提交冒领。
