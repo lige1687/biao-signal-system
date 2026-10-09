@@ -1,3 +1,11 @@
+# 单事件原包仅来源定位范围
+
+- checked_coordination_sha=f6735dc1340d821a983012f4d25bfbdce9df4e0b；checked_at=2026-10-09T15:18:05.976206+08:00；已读COORDINATION、本任务，旧现金目录CASH-SINGLE-ETF精确产品/合同尚缺。资料库现金搜索3项、回放搜索无匹配；前两合成包已核不重复下载。唯一新候选libfile_584bab85a68881918d8bfc2405e21114显示LeiSignal-单事件只读映射与共享现金合成接口-2026-10-06.zip，可下载但尚未读内容。
+- root只恢复此候选并只读核其是否含原104353.85/105785.72现金回放引用与准确原源，不执行包代码，不运行行情或实验，不以名字相似当同一研究。耐久新ZIP仅写/Volumes/win+mac通用/LeiSignal-新实验结果/single-event-cash-source/single-event-cash-source-20261009T151741-28a2dee04db0/result，实测固定设备计划10MiB，浏览器本机暂存11MiB预算保留不删除；不是新科研预算。
+- root小来源/指纹/恢复计划只写自身raw/recovered-order-package-20261009及state/work-progress、本协调。registry/INDEX保持scope_released=true，不写其他成果。找到准确原合同才决定下一项，不猜产品/版本或新造资金策略。
+
+---
+
 # 恢复工程与原PPO/P26效果归档远端验收；共享范围释放
 
 - checked_coordination_sha=4a6763ef2a8f4fcb798f39a605d1e473f349670a；checked_at=2026-10-09T15:15:52.157343+08:00；已读COORDINATION、本任务及已释放报告登记owner。本次远端差异仅按不相关文件名检查，不读其对话或运营内容。root本轮唯一写入完成，registry/INDEX scope_released=true；两研究agent均completed。
