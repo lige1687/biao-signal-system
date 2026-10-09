@@ -77,3 +77,10 @@ task-id trend-trading-video，基线2f7bc4683f74237d19fde484ce665ac975d08a3f，�
 - ai_tools/codex/video-production-kit-20261009@12aef172f22467a925235f5744619755113d3909；46文件校验及引用、两Skill结构、归置/Git差异检查通过。原项目与便携库对应新增参考一致；远端逐文件验收写prompt-library-result-receipt.json。无新影片待跑，效果待下次制作检验。
 
 最终交叉核对曾失败：新参考两份一致，但原项目旧prompts-and-cues仍残留“开头小样”，便携版已是中间难点。已修原项目这一句并重验三份参考内容完全一致；这次失败与修复保留，不当作首次检查通过。
+
+## 紧凑节奏偏好与T2复查
+
+- 2026-10-09T16:46:50.889975+08:00；checked_coordination_sha=add21e63417e2bc902053a188ed775dbc6d829ec；已读COORDINATION、自身、nasdaq v11、dual-ma完整片与中控最新状态。后二视频独立媒体写入，不写Skill，无冲突；root唯一写者。
+- 原T2全文§02—04及六Prompt复读，对照已有方法，新增紧凑偏好贯穿文稿/表/样例/全片；三种制作输入与A/B职责分开、模板复用与同类重复检查、声音样例提前校准、改动按镜头检查失效。记录在references/tight-pacing.md；原文中已覆盖方法不重复宣称新增。
+- ai_tools成果 35fca025f6b63f9fb73d145d264d2bf9ef3b8ad9，7准确文件；47包文件指纹和引用、两Skill结构、归置和diff检查通过。保留无配音/默认配乐/无品牌/静帧后难点15秒后全片；无安装、新影片、付费或媒体写入。紧凑是导演偏好，不是自动倍速设置，观感增量本轮未测。
+- 原项目仅提交自己四Skill文件和本进度，入口窄插入，保留其他任务本机内容且不代提交；远端回执compact-result-receipt.json。
