@@ -1,3 +1,12 @@
+# 原股票效果保存证据已核，接续旧目录两键
+
+- checked_coordination_sha=9d0093c545917fdc2c4100a561c71483a4469b32；checked_at=2026-10-09T15:11:03.722454+08:00；已读COORDINATION与本任务，原报告库登记owner释放已核，新增仅不相关文件名，不读取运营回调。原恢复源码已非作者针对验收，root正式报告和单键登记本地完成，待精确发布。
+- Sol只读核PPO77/P26103成员，root独算保存周汇总吻合；原价ZIP本机实际43ebf06bfe66c79c2fb332fa287db33d49a60f23c4c3da0e4bb39ea9d23fe192、14成员逐项绑定，解除旧效果原件缺口。P26父级私有授权正文只有指纹，不能声称已见；原阶段授权和一次失败/一次成功共2标签尝试保持。无实验重跑。
+- root唯一新增写入：主/隔离docs/experiments/research-evidence-catalog-2026-10-07.md顶部日期补充、registry仅该旧键当前说明/SHA、自身raw/original-recovery-20261009/catalog-current-evidence.json及recovered-stock-effects-20261009验收小记录。旧目录正文与raw冻结不动，不新增PPO/P26实验；INDEX本阶段不新增。与本root恢复工程单键登记串行，不占其他文件。
+- 保存效果只作固定5211缓存2022—2024描述；不升级为完整历史成员、可交易收益或稳定新信息。PPO总体相对20日涨幅排序差-0.004019，P26高减低-0.170114百分点，年度反例与粗组残差保留。发布后SHA/内容核一致才释放范围。
+
+---
+
 # 恢复修复复验与原股票效果并行；归档范围准备
 
 - checked_coordination_sha=c179c73a8eca2ff847d71550c7b282054fe7438e；checked_at=2026-10-09T15:06:47.694229+08:00；已读COORDINATION、本任务和research-evidence-catalog/report-library-integration-20261008（completed且scope_released）。新增仅无关任务文件名，未读运营回调。原作者Sol已停写；root实核新wrapper dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f，待独审。
