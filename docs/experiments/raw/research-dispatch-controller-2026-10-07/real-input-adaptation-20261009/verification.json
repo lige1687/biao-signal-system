@@ -1,0 +1,102 @@
+{
+  "schema": "native-risk-d-mae-stage-a-verification/1",
+  "checked_at": "2026-10-09T12:07:31.956685+08:00",
+  "status": "identity_qualified_only_no_real_X_V_Y",
+  "base_commit": "120f320af15a5f553d00ca64ef85d6b4080e0204",
+  "coordination_sha_from_controller": "9b51c75847da60e0e09a9e800ba5c6bc661ff2bc",
+  "strategy_layer": "Frozen research input identity for original invalidation-distance D; no strategy rule change.",
+  "strategy_source_sha256": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "device": {
+    "mount": "/Volumes/win+mac通用",
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "st_dev": 16777238,
+    "checked": true
+  },
+  "source_original_sha256": {
+    "deduplicated-cases.json": "7540cbe16abec5e6c5dbe9569ab0879d2160d2f4a86c640556f3550aba633bb7",
+    "label-protocol.json": "64168b19fdca54768e8d4af5589be6df764b007dec81b620404b07b6317dd3c1",
+    "native-early-events.json": "f12dec8224bb33efd7541f1a6be298e6d7e02fe5797d16c7d4b00ef9b5f2bef3",
+    "x-panel-long.json": "1693b33c4d6ea947920304ae17843a6d507c7095bff068165deb2c744d7b8895",
+    "validated-input-binding.json": "28beb9c4a5ec869de72d5e1c7df8271868be02cbd51ab0026537cc3414562d91",
+    "feature-contract.json": "c88785ee47baedc37d77f54a789df1e84e930c0c47b4f0f7760ebc3f7df6c8c6"
+  },
+  "window_metadata_sha256": "e985cdca6b03dd5a0f646f6553b07cb2d11e071807ce6dd4e680901ed52b6ceb",
+  "files": {
+    "source": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/src/lei_signal/research/native_risk_d_mae_inputs.py",
+      "bytes": 17763,
+      "sha256": "5404b52f1e9ca2dc103eff37cabf51e52656d2737a8244bbb11fc2aeb63decb7"
+    },
+    "tests": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/tests/unit/test_native_risk_d_mae_inputs.py",
+      "bytes": 9586,
+      "sha256": "fcb1570251c5e8d099fe8ebc485b2ff2974fe9660c2ee3f4ac4ec19da6c66448"
+    },
+    "readme": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/research-direct-20261008/docs/experiments/raw/research-dispatch-controller-2026-10-07/real-input-adaptation-20261009/README.md",
+      "bytes": 2688,
+      "sha256": "052680f3ec5dcb710eeb07567e92164d471cf0ba7d625b2328b53021b21a2911"
+    },
+    "identity_audit": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T115926-f2da2ae92c73/result/identity-audit.json",
+      "bytes": 94809,
+      "sha256": "830ed56b7c06ea53142966ff1699bd8c6e0c38e000769b2570c0152a1a538083"
+    }
+  },
+  "checks": {
+    "artificial_mutation_tests": "13 passed; final run 2026-10-09; PYTHONDONTWRITEBYTECODE=1; temporary directory on approved external result",
+    "ruff": "passed after formatting/import repair",
+    "real_identity": "saved external audit equals result from final source; 76 cases, 84 events, 336 long rows, 33 groups, 75 mature, 1 unknown",
+    "repo_hygiene": "not green: checker run against this worktree reports two pre-existing branch-baseline omissions: configs/newsfeed.json and docs/research/definitions.v1.json are not in git ls-tree HEAD; no task file in prohibited root layer",
+    "old_native_full_suite": "not run by contract"
+  },
+  "failure_history": [
+    {
+      "stage": "first test collection",
+      "failure": "Sparse worktree has no lei_signal package __init__; PYTHONPATH resolved parent checkout. Test changed to direct import of new file; final 13 tests pass."
+    },
+    {
+      "stage": "first original identity audit",
+      "failure": "case:3127bc9f56ebea7d4573 / first_ma_pullback:068f8de0242905c06de73443: positional member_event_ids/member_ma_periods zip gave 60 while original event evidence.ma_period is 120. Original list member_ma_periods=[60,120]; representative case.ma=120; first alias is MA120. A=0.9791151623232146, C=0.9529805345395634, ATR=0.015105192605907874, D=1.7301750772399624 match event and D long row. Fixed by event-ID mapping plus period multiset and representative check; originals unchanged. Revalidated and saved complete audit."
+    },
+    {
+      "stage": "first lint",
+      "failure": "14 import/format/test-style findings; corrected, final Ruff passed."
+    },
+    {
+      "stage": "repository hygiene",
+      "failure": "2 checker-required files absent from current branch baseline (git ls-tree HEAD): configs/newsfeed.json and docs/research/definitions.v1.json. Not modified in task scope."
+    }
+  ],
+  "budget_used": {
+    "new_real_X": 0,
+    "new_V": 0,
+    "new_Y": 0,
+    "fits": 0,
+    "future_price_reads": 0,
+    "external_requests": 0
+  },
+  "next_stage_interface": {
+    "entry": "load_original_identity() -> dict; fixed real path and SHA; no caller overrides",
+    "case_fields": [
+      "case_id",
+      "asset",
+      "signal_date",
+      "lifecycle",
+      "event_ids",
+      "event_ma_period",
+      "A",
+      "C",
+      "ATR20_SMA",
+      "D_frozen",
+      "price_basis_id",
+      "source_sha256",
+      "calendar_id",
+      "window_metadata"
+    ],
+    "separate_authorization_required": "Real X binding and later Y label stage; existing native workflow remains synthetic-only."
+  }
+}
