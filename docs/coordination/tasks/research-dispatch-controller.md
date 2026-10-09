@@ -1,3 +1,15 @@
+# 原八目标交接写入系统待办及项目文档（2026-10-10T01:04:09.753324+08:00）
+
+- task-id=research-dispatch-controller；owner=01a116c7-3700-7062-a6c6-53af00ef60a0；status=active / handoff_todo_registration；本轮只记录与移交，不新开研究、对话或定时器。
+- checked_coordination_sha=b9289d3a5791f478a6460b2c3128ca7f8848d060；checked_at=2026-10-10T01:04:09.753324+08:00；已读COORDINATION、本任务及leisignal-risk-input-20261009、leisignal-risk-run-20261009、leisignal-risk-review-20261009最新交付；仅查douyin-vike-increment已有K-risk-attribution追加记录以避免覆盖，未监控其任务。
+- 用户本轮明确要求将原目标记入系统todo、专门分支及项目级MD；本次授权仅相应API目标进展和小文档写入。原三对话批次仍已独验归档，监控仍删除。
+- 工作分支拟codex/research-todo-20261010，基线24c9650b8e0a5fd573b4f3941db28d0f4e4b3208；复用自身隔离checkout，不切主工作区。准确写入docs/okr/RESEARCH_TODO.md、docs/okr/README.md、docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/three-chat-handoff-2026-10-09.md、docs/ops/work-progress/research-dispatch-controller-2026-10-07.md及自身raw/todo-handoff-20261010.json。主仓同路径只同步本轮新增内容，不覆盖无关编辑。
+- 系统待升级API唯一本轮写者root：只给D-evidence、D-tracking、okr-ff1e0a86fbac、K-data-boundary、K-risk-attribution、okr-4f4157e2957e追加本轮note；保留owner/status/authorization/milestones/next_action及旧历史。不占已有任务，不回填完成。已查79条，无原25冻结来源独立备份/异机恢复具体任务，仅新增此一个准确待办，关联原目标8；不接一般磁盘清理。
+- 冲突决定：报告/registry/INDEX/冻结输入/实现/他人协调文件均只读；目标版本现场核对，409或未知写入结果先读回而非盲重试。新TODO为交接快照，系统SQLite仍进度权威、协调仍当前写者权威，不另立实时账本。
+- 验收：六原条note精确读回且保护字段不变、新TODO唯一且未误标已完成，八目标文档可导航到现有目标/证据，必要归置通过，准确小文件Git远端SHA及内容读回；本次尚未宣称已写系统或交付。
+
+---
+
 # 三对话本批已验收归档，监控已删除，最终交接完成（2026-10-10T00:46:28.783082+08:00）
 
 - task-id=research-dispatch-controller；owner=01a116c7-3700-7062-a6c6-53af00ef60a0；status=completed / three_chat_batch_archived_negative_result；本状态只关闭月度四组批次，不宣称原八目标全部完成。checked_coordination_sha=f39df0e96f859b38ade86f57afb716a631bf8773；checked_at=2026-10-10T00:46:28.783082+08:00；已读A/B/C及本记录，相关记录与e57141e7无变化，无范围冲突。
