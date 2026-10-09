@@ -1,3 +1,12 @@
+# 单P0整笔恢复外壳已交付，非作者独审范围
+
+- checked_coordination_sha=2a957fe856e145ee4a73da330695ced1707cc65f；checked_at=2026-10-09T14:52:20.930152+08:00；已读本任务与既有COORDINATION，新增仅不相关文件名，原实现路径无重叠。Sol已停止写，新七文件source-manifest6833c6f01e3fc9b3a3eb93d44971034c53b040efc597965ec13e98c8dfeae3f5/core832e766f3f15e0ed81c048faab20cce3a508c5a7931d592f1b5cea1ddbe90a05固定root核同。
+- 作者新8组及2新进程路径v3通过，正常末现金0.10/费用10.40，首拒绝后末205.30；恢复重建与本次新增apply分别记。v1显示精度断言失败保留，v2通过后v3仅补测试外盘直写设备核查。作者通过不等于验收，root不重跑原旧套件。
+- Astra/high original_cash_package_review非作者：源码/作者结果全部只读，仅可新写独立外盘plan绑定goal5-whole-buy-recovery-review目录；root在自身raw/whole-buy-recovery-20261009保存合同与回执。独立关键金额、请求冲突、拒单重启、完整状态与保存前后故障，不泛跑作者全套。源码修复须另交原作者保留失败，不同写。
+- B1/现金旧原件归档31a4c0ef48a0b8059d765bab26b6364ef2d0a9ab的12路径已远端逐字核，registry窗口释放。新恢复工程未验收/未归档，P1/部分成交/真实市场不支持；研究重跑0，全部旧预算不变。
+
+---
+
 # Goal5 单原始P0整笔买单恢复实现范围（ready）
 
 - checked_coordination_sha=dec3f31ee3300568fab8ebb1036d29c6c86d3c0f；checked_at=2026-10-09T14:40:23.198937+08:00；已读COORDINATION、本任务及research-evidence-catalog/report-library-integration-20261008已释放记录；只root写自身记录。旧目录更新与登记已完成，registry/INDEX此刻scope_released=true；B1/现金证据成果31a4c0ef待最终读回，不先标远端验收。
