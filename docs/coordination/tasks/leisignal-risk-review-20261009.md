@@ -1,3 +1,11 @@
+# 接续A准确输入的独立资格核验（2026-10-09T20:34:29.570304+08:00）
+
+- checked_coordination_sha=7db9d6fb170775f3146a4996f854d01c0b385b79；checked_at=2026-10-09T20:34:29.570304+08:00；已读COORDINATION、A/B/C和中控最新相关记录。冲突决定：A输入冻结、B唯一implementation、C唯一review/及自己的进度，范围不变；未开启registry/INDEX/catalog共享写入。
+- A交付commit29337ec9e6560171c459019834638ce2c6993ef9，manifest SHA9f1c326b46e7afc22d2ad6454e9f754e64540442e120412326ce270a50799baf；独立核其47绑定原件、必要六个月截止/前一自然日、年末资金、分红限制及纠错沿用范围。不运行A验证器、不重放账户、不计算另一策略。
+- 本阶段新增范围仍仅review/input-independent-review.json与input-independent-review.md及自己的work-progress。核心已验算部分不重复，B完整driver尚未交付；真实4路径许可0、实际0。下一动作：核盘读取原结果位置及准确原件，保留真实历史资料时点和异机恢复限制，等待B完整实现发布。
+
+---
+
 # B核心算术独审已交付，完整开跑审查尚待绑定（2026-10-09T20:27:00.117324+08:00）
 
 - checked_coordination_sha=2dd43d1aa8fa7fed68d659db66f5158604962294；checked_at=2026-10-09T20:27:00.117324+08:00；已读A/B/C及中控相关全文、COORDINATION1.1，三个唯一写者不变，C未写共享registry/INDEX/catalog。
