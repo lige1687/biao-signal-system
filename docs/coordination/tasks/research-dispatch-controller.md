@@ -1,3 +1,15 @@
+# 2026-10-09 原件恢复（用户本轮授权，active）
+
+- task-id: research-dispatch-controller；owner: 01a116c7-3700-7062-a6c6-53af00ef60a0；checked_coordination_sha: e74120b276c4f65fef328d8b3fce12a39f115a00；checked_at: 2026-10-09T11:37:39.212749+08:00。
+- 已读 COORDINATION.md、research-dispatch-controller、technical-factor-sequence、risk-shape-information；只恢复原八目标所缺原件，不接管原研究实现，未发现同文件写入冲突。
+- 用户明确要求核外盘迁移、没有则补原件。leisignal定时已删除，不恢复；原生Goal状态不冒充自动运行。本轮按用户直接指令执行。
+- 已核外盘固定UUID；78761个可遍历文件名及107归档的580576个成员名未命中六准确文件/Qlib回执，无扫描错误。不代表字节重命名/嵌套压缩包全部排除。
+- 已在官方登录页面查到 libfile_edf1c944a1108191add900a98a52819f，名称与原六ETF冻结X包一致；仅原附件读取下载，不重试旧403流程。
+- 写范围：自身thread-state、work-progress、其raw目录下original-recovery-20261009小证据；大包/解包仅登记外盘LeiSignal-新实验结果/research-dispatch-controller新唯一目录。冻结原件原位只读，registry/INDEX/源代码/其他owner文件不写。
+- 验收：按ace132原合同核六文件逐一SHA；不执行包内程序，不运行新标签/拟合，不改合同或重置研究预算。原始附件身份、下载结果、指纹不符/缺失均保存；找到不等于研究已完成。
+
+---
+
 # LEI 原八目标中控（当前有效范围）
 
 - task-id: research-dispatch-controller；owner: 01a116c7-3700-7062-a6c6-53af00ef60a0。
