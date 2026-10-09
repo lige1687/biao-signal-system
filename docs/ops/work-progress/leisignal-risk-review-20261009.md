@@ -46,3 +46,10 @@ task-id：leisignal-risk-review-20261009；负责人/会话：01a1208d-49ba-7972
 - 状态core_arithmetic_accepted_pending_full_driver_review，非完整code_review_accepted；numeric未验。核心文件没有C修改。
 - 具体给B整理：人工一次账本synthetic_runs=0/failures空与两次实际回执不符，补记准确2次及初版失败链接，不重跑、不改真实预算。完整驱动须另核官方月末/63来源、A版本/年末状态、许可/4键一次保护和外盘；跨期/非分红分支以A实际覆盖裁定。
 - 书面复核和证据：review/core-code-review.md、core-synthetic-review-plan.json、core-synthetic-review-evidence.json。全部实际历史预算仍0；无完整运行许可或正式归档。
+
+## 2026-10-09T20:36:17.695529+08:00 A输入独立核验完成
+
+- 登记coordination d5473d20b9e2ea9ed822d1de4b8b707f9d3d01dd已远端逐字核同；开工核读7db9d6fb170775f3146a4996f854d01c0b385b79，三个唯一写者及范围不变。
+- A准确29337ec9/manifest9f1c326b：8远端交付文件、47原件、25旧绑定、六63日窗口、193必要日期×6资产恒等式、6年末状态、4纠错成交账内容及日账版本全部通过；未重跑A验证器或策略、未计算真实新比例。细节见review/input-independent-review.json与.md。
+- 输入接受仅限已见历史；原行情到达/真实竞价成交/独立SSE日历/异机恢复限制保留。外盘20:34:42固定UUID及容量再核可用，后续B实际运行仍须再核。
+- B快照cursor f0098554-4d30-499c-a774-3d7783048f96:9，正在整理完整包；不能提前code_review_accepted。接续只审完整driver和新增保护，已经验过的核心不重复全量审。
