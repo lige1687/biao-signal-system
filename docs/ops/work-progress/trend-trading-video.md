@@ -41,3 +41,7 @@ task-id trend-trading-video，基线2f7bc4683f74237d19fde484ce665ac975d08a3f，�
 ## 2026-10-09 Skill备选音乐登记
 
 用户要求将原声作为备选配乐并提供路径。Skill新增references/music-candidates.md及入口，保留外盘UUID、绝对/相对路径、指纹、来源、试听与使用状态。既有MP3大小/SHA读回一致，无复制/改媒体。基线acd42ff640e9849c8e12ac7371bac94524507a96，开工music-library-start.json；本次只登记，不称已入片或纯BGM确认。
+
+## 2026-10-09 V15指定配乐替换完成
+
+用户要求换成leyan原声，复用V14画面和独立sfx；新增v15小源码/索引，全部新媒体/配套稿/日志/临时写外盘。基线5db34c2c705dc3d05d86a93e684721182043415b，开工music-swap-start.json；8秒交叉淡化，240秒/1080p/30fps/AAC双声道，整体-18.1 LUFS、-6.7dBTP；媒体0失败、1条独立字幕轨可选提示。原/新视频流SHA一致、全片解码通过。通用8782预览章节跳转失败，修为自身8783 Range服务器，206数据比对及实际124秒跳转通过，8倍速完整播完240秒。归档清单逐份SHA读回，准确位置v15/storage-plan.json及validation.json；原片保留。无新旁白/安装/发布，纯BGM与独立实时听感未确认，用户观感待验。
