@@ -236,3 +236,8 @@
 - 最终/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/指数科普/20261009-nasdaq-story/v09-black-gold-motion/nasdaq_black_gold_15s_v2.mp4，13463717B，SHA256 ec15ab2106d6b4e1376c9b9136d9e947927af3eca290939849400733f21d8060，15秒1080p30fps450帧/H264与AAC。实际完整解码通过，抽帧检查主要变化与结尾，播放器1倍速未静音从头至15秒ended=true/error=null；主观听感及审美待用户。
 - 修复：首轮标签修正主动中断、次轮本地端口无响应保留日志，独立端口成功；真实抽帧发现结尾统计文字过早叠图，重渲312—449帧再合成，实帧345/378/425已复验。旧输出不删；不声称无损恢复。71交付及证据文件36324491B逐件SHA与大小读回；字幕式屏幕稿/分镜/工程/音乐/来源/复盘/DELIVERY.md均外盘。
 - 预览127.0.0.1:58815/preview.html已实际播放保留。未重制完整片/竖版；用户本次直接指定15秒，未加新的静帧确认，也未把本轮技术通过当用户认可。无新安装、付费、删除、发布。源码/媒体仅固定外盘；Git只协调记录，远端不可复现媒体。
+
+## v09认可经验写入Skill开始 2026-10-09T16:12:13.109898+08:00
+- active；checked_coordination_sha: a106e6347904f0c172d37cd4c29fb759d2064341；checked_at: 2026-10-09T16:12:13.109898+08:00；已读COORDINATION1.1、自身、trend-trading-video最新aroll-done（completed/scope_released）、research-dispatch-controller blocked，相关共享编辑已释放，无冲突。root唯一写者。
+- 用户明确“这个主体不错，可以做到skill里边，作为经验哈”。只将v09已认可主体连续动作、少字、图表先让位再上统计及真实数据边界补入项目Skill入口和references/motion-direction.md；复用既有动态导演章节，不另造模板。不将主题认可解释为授权扩片、全主题黑金或已具公开许可。
+- 范围仅.agents/skills/code-explainer-video/SKILL.md与references/motion-direction.md及自身小进度；其他Skill内容、ai_tools、外盘旧包和媒体不改。使用skill-creator窄修改指导；检查引用、保留既有规则、差异和归置。
