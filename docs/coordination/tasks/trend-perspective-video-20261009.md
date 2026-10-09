@@ -1,3 +1,16 @@
+# 最新状态：全片被用户否定，当前只复盘
+
+- task-id: trend-perspective-video-20261009；owner: 01a12111-3544-7250-822d-056b7379704b / root。
+- status: paused；stage: full_rejected_review_only；scope_released: false。当前暂停制作因为用户要求先总结问题，未启动重制或修改Skill；不是技术阻塞。
+- checked_coordination_sha: a1cf648e01c495361adba3d8d922b2e6a4ddf41b；checked_at: 2026-10-09T23:28:32.646087+08:00；已读自身、cash-position-video-20261009最新v03、system-x-video-ideas-20261009和前次相关媒体任务/COORDINATION1.1；独立文件无冲突。
+- v03已有134秒实际MP4（full-v2只删误导性辅助短线），0媒体检查失败，但用户明确否定动态/节奏/真实案例，不能标成片通过。完整zip未交付。
+- 诊断：主要执行问题。已有Skill明写连续主体、紧凑节奏、逐段对照样例及弱段返工；执行仍以固定标题/行情/字幕为主体，动画落定后长停；合成样例扩到全片、未选核真实案例。正常播放和技术指标不能证明导演效果。Skill次要问题是冗长分散、混入其他片的本期限制。
+- 用户范围：只复盘为什么失败，区分Skill与执行；不擅自启动另一轮渲染/数据采购/Skill维护。
+- 本机两份小记录已推到codex/trend-perspective-video-20261009@26f5fe1f80d505bc3523f3c132b4cc5a15375e4f，远端SHA读回一致。外盘仍为此前登记v03-full；旧版保留。
+- 下一步：向用户交付具体问题与责任归因；重制应回到真实案例和动作分镜，待后续具体要求。
+
+---
+
 # 同一段行情，你看到的是趋势，还是波动？
 
 - task-id: trend-perspective-video-20261009
