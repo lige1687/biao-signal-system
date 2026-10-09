@@ -54,3 +54,7 @@
 C完整审查 `fa421d30fb9f7aaa0b111d7f5d2ca39c65065ae4` 的C-F01已实现修复，尚待C独立接受。只改input_adapter原开盘界核验与runner保存opening-validation.json；旧0586源码/合同/回执及反例留failures/C-F01-opening-reference。16定向人工项通过，实际116原开盘消费核同并保留01-19原blocked，不计算月度比例或新账户。所有普通缺界/非法界/越界在实际路径调用前停止，不用当日高低收盘或重建官方除息界。
 
 冻结修订4合同SHA `333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4`。C只需核本修复及受影响指纹，并一并核0586的次数摘要同步；旧核心通过复用，无需重跑完整组或原A/B0。`check_opening_reference.py`、`targeted-opening-reference-evidence.json`、`opening-source-consumption-receipt.json`已纳入附加冻结证据。人工累计8次、真实0、额外4路径许可0。
+
+## 当前执行依赖更新
+
+C完整代码独审已接受：准确成果 `1e954fdc511092c1769fcaa5a6779d36eb7e0641`，`review/code-review-release.json` SHA `33a8e3d3d8df37b29cc0663a6d6806bb7b9626f1dcc97ca5617f002e3daaed15`。B已核合同、输入、六源码和全人工证据对应，并保存 `C-review-reference.json`。当前唯一许可缺件是人类批准本修订4合同的四键各一次；真实路径0，完整入口会拒绝缺失批准。此次接受不是科学数值验收，真实结果仍先交C。`release-readiness.json`保存准确当前核验和恢复条件。
