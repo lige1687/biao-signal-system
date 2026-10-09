@@ -38,3 +38,18 @@
 - 验收: 15秒1920x1080/30fps/450帧，实际转场/逐根K线/钟针/缩放同一数据/可读字幕；形成中K线只用已经出现的价格，整段数据保持；无提前未来图/真实信号。完整解码、关键帧、正常速度播放、工程与源数据指纹。
 - 存储: 2026-10-09T22:39:14+08:00固定UUID核验通过，外盘593508302848B、本机17258766336B；预估本轮新普通媒体/缓存<500MiB，全部外盘；本机索引<128KiB、依赖不变。
 - 音乐沿原指定leyan源私下预览，无新增旁白，公开音乐权利仍未确认，不发布。仅本期15秒及可复用工程，无实验/策略变更/付费/安装/清理/其他任务修改。
+
+## 样例交付、用户确认与全片开工 2026-10-09T22:58:02.650640+08:00
+
+- status: active；stage: full_production；scope_released: false。
+- checked_coordination_sha: b5c4c0d46eb96ceec5af9e4ad16214740c06f147
+- checked_at: 2026-10-09T22:58:02.650640+08:00
+- 已读task-id: trend-perspective-video-20261009、cash-position-video-20261009、nasdaq-story-video-20261009、trend-trading-video、dual-ma-video-copy-20261009、personal-quant-video-render-preview-rule、research-dispatch-controller；COORDINATION 1.1。
+- 冲突决定：新增现金仓位任务写独立目录；其他媒体与技能维护范围独立。本任务只写自己的v03完整片新目录及已有两份小索引，不改共享Skill、系统、registry或他片。
+- 样例成果commit: 9765512d1c979098c900a441641b63959a0e5b0f（codex/trend-perspective-video-20261009，远端读回一致）。15秒K线样例、实际帧、工程包与数据/播放/媒体检查均交付；MP4 SHA256 40aa9a3fb4f2e0ec900079a3d0341007b925878c10955bc996e7dfeabb709008。
+- 用户本轮确认：“可以，样例不错。然后就是接下来就是你的视频组织和结构能不能让观众接受吧，以及你的分镜是吧？然后去可以去产生完整的视频了现在。”样例认可，授权全片。
+- 全片范围：已核外盘 /Volumes/win+mac通用/LeiSignal-新实验结果/视频库/趋势交易/20261009-trend-perspective/v03-full；原v01/v02保留。预计约134秒，先周期再阶段再回调/变化，分镜构图变化；无旁白、沿用指定音乐、可复用工程与SRT。合成OHLC严格从同一底层数据聚合，教学条件先说明，全部持续示意标识。
+- 本机范围：docs/ops/media/trend-perspective-20261009/external-location.json；docs/ops/work-progress/trend-perspective-video-20261009.md。
+- 存储2026-10-09T22:54:27+08:00：固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok=true；外盘593364516864B，本机15772680192B。预计外盘新增含缓存<1GiB，本机小记录<128KiB，复用依赖，不安装。
+- 验收：字幕阅读时间、逐根K线/聚合/当时信息、关键帧、全片正常播放与整段扫描、完整包指纹；技术通过不代替用户审美。最终不发布。
+- 下一步：完成分镜与实际全片，读回导出视频及源工程，再交用户验收。
