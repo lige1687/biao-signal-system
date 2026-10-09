@@ -1,3 +1,11 @@
+# 两新结构对象单项定义登记范围
+
+- checked_coordination_sha=38d10eef5583eb6590bb6c8ad034be7f6b323e81；checked_at=2026-10-09T16:45:15.309226+08:00；沿本轮已读研究owner/规则，新增仅无关文件名，未读运营内容。Sol唯一新模块/implementation写者不变，Astra只读现金独审；root不并改其代码。
+- root唯一追加主仓与隔离工作树docs/research/definitions.v1.json的两准确对象research.structure.post_top_bar_persistence@0.1.0和research.structure.post_top_node_persistence@0.1.0（只研究draft状态、不改旧对象/版本/生产语义），定义严格采用已核d65a45c8；仅此两key，其他条目字节保持。原source-bindings整文件登记SHA为准备时快照，新增定义后另存准确执行绑定，不改原快照或让漂移静默通过。
+- 此动作服务研究工具可复算身份，不声称实现或效果已验收，不新增第三候选。registry/INDEX仍scope_released=true；桌面原文/策略阈值/旧raw/原规范不改。真实特征/标签/资金仍0，核心预算保持。
+
+---
+
 # 两准备回调接受：结构最小实现与现金独审并行
 
 - checked_coordination_sha=89ce4a7b1fb3392eec7be075d4ea62cc0fd68b2f；checked_at=2026-10-09T16:40:56.032973+08:00；已读自身及相关研究owner，增量仅无关文件名，无本题冲突。原0f6818832df372e9f83296b7c8455c28859a58f1十准备文件远端逐字核。真实新账户/特征/标签仍0。
