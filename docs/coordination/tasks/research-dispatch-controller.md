@@ -1,3 +1,13 @@
+# 2026-10-09 D—MAE真实Y已运行，正式归档范围登记
+
+- checked_coordination_sha=cc88a20bdf00a3435a98a046d7feda7345faa1dc；checked_at=2026-10-09T12:39:37.283983+08:00；已读COORDINATION、本任务、classic-factor-research，其他任务仅共享登记路径声明核避重，不接运营回调。已有旧登记记录不覆盖本次新报告；写前精确增量核验，root串行唯一写者。
+- StageC实现已推codex/research-direct-20261008@92fe82efe4309cc9de897448fbb8be6fb3a901b7，八文件逐字远端读回。真实一次Y计算exit0，75完整案例/1575收盘点，76th未知；结果77907ae74e401c4b81f4b446e5536f3e6bbebaa2ce10a88556bdd996f2fad2b2、回执2f65d97427ed3298dea27cc1b8a3a5c35882d376cf54e10b6f156e51faf272da。Astra正在只读独立postrun验收，尚未冒称接受。
+- 原X1/Y1预算均已消耗，0fit/0新增取数，不重跑。实现者已停写，三阶段源码及原六文件冻结；不改变源价、合同或未知案例。
+- root新增正式报告docs/experiments/native-risk-d-mae20-real-ARCHIVE-2026-10-09.md；自身raw/real-y-evaluation-20261009的独审/验收/位置小凭据；主仓与research-direct隔离树registry.json仅此报告一个键，INDEX.md仅一条导航，保留其他条目及原字节。自己的状态/进度同步。主树代码和其他owner文件不写。大结果留原已核外盘唯一目录。
+- 此范围active，完成条件为postrun独审、数字/限制报告、登记、归置及准确Git路径远端读回；不得把描述关联差当独立增量或交易有效性。原八目标非全部完成，定时保持删除。
+
+---
+
 # 2026-10-09 真实X已独验，Y实现范围登记
 
 - checked_coordination_sha=b843f7b7b7849b15981242c5c3ca0b9b2e8ae800；checked_at=2026-10-09T12:25:26.983528+08:00；已读COORDINATION、本任务和classic-factor-research，内容与已核版本未变，范围外仅文件名核避重。原研究负责人释放范围，无同文件写者。
