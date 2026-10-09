@@ -1,3 +1,12 @@
+# 日周真实比较独审接受：单报告归档窗口
+
+- checked_coordination_sha=acf37a8bba7577da901a868a1d8726eb54d18f6c；checked_at=2026-10-09T18:36:25.757525+08:00；已读task-id=research-dispatch-controller及其原研究交接；最新增量只有无关任务文件名，无重叠，不读取运营内容。root唯一写者，Sol源码冻结，独审只读结束。
+- 三阶段各一次：features 2fe551aa、labels 9bb15866、effect 86c2bb59；276真实周、5796价格引用独算差2.40e-14百分点；8完整增量及2四资产差均null保留，13局部格5正8负，非稳定新增作用。日期资格累计2，v1失败留存。
+- root准确新增写入范围：主与隔离 docs/experiments/daily-weekly-opportunity-2026-10-09.md、registry仅该key、INDEX仅一行；主镜像 docs/experiments/raw/daily-weekly-opportunity-2026-10-09 的小源码/合同/失败/回执（排除缓存）及controller remaining-opportunity内weekly相关小记录。原代码只在隔离分支，外盘三大结果不入Git。独审验收写root既有范围。definitions不改。完成即释放共享表。
+- 原八目标接续核对由既有审阅者只读进行；不重复本批数值，不重跑旧实验，不恢复已删除定时。
+
+---
+
 # 日周v2独审通过：root固定真实阶段运行范围
 
 - checked_coordination_sha=68420d35dda9c3d9e2f663e818cc9a12afc2c33b；checked_at=2026-10-09T18:26:25.755036+08:00；fetch无增量，沿已读研究任务。作者冻结停止写，root接其新raw内release与attempts、控制器小回执；module d60a1aece76355791ddf54375632502bdd97a9e781c93433b0421a05173797bf、runner f12c568d83f6e8a7500cb6417e03f49d51fdae4e62a729258e122a336c2a343e已针对独审接受。27源+17依赖指纹、原反例及日期补验通过；累计日期资格2，原v1保留，不冒称已实际拔盘测试。
