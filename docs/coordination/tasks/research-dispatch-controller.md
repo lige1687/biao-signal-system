@@ -1,3 +1,12 @@
+# 两准备回调接受：结构最小实现与现金独审并行
+
+- checked_coordination_sha=89ce4a7b1fb3392eec7be075d4ea62cc0fd68b2f；checked_at=2026-10-09T16:40:56.032973+08:00；已读自身及相关研究owner，增量仅无关文件名，无本题冲突。原0f6818832df372e9f83296b7c8455c28859a58f1十准备文件远端逐字核。真实新账户/特征/标签仍0。
+- 现金Sol交新隔离comparator f2be70d04eaeaf0985861799449b3c6da28f6dfdec4557673a1e51fc49587d10、manifest4b86df16等四文件，已停写；root25来源/116日期/分红及独立合成金额通过，Astra下一合同仅只读关键独审，禁止真实账户。两条执行仍等独审，原预算不变。
+- 结构Astra交两定义d65a45c8与核心合同c498d3c5（四宽基/共同机会/固定20间隔风险/0拟合/两候选各1版），主控接受为研究代理、非桌面语义改写。未知原始到达与历史来源资格不升级。专用方法当前native不支持，如实最小独立冻结入口，不冒充旧kind。
+- 新唯一Sol写者扩至隔离工作树src/lei_signal/research/structure_persistence_comparison.py及新raw/structure-persistence-comparison-2026-10-09的实现/合成/资格入口；已交四设计文件只读。root批准先实现与合成，审核后唯一一次真实无结果资格；之后按支持再冻结唯一核心标签/比较。已有strict_structure、workflow、definitions与生产全部只读；registry/INDEX仍释放。root只自身合同/小验收/进度/state与现金一次执行驱动，外盘大结果走已保存固定设备计划，不覆盖旧目录、不回退内盘。
+
+---
+
 # 用户批准两种结构与两条风险对照：恢复实际执行
 
 - checked_coordination_sha=88fff05a91fca2b294cacd42db24d1670d914607；checked_at=2026-10-09T16:24:45.690961+08:00；已读COORDINATION、本task、technical-factor-sequence、dot-trade-state-accounting、lei-technical-reader-research相关当前范围。新协调增量仅无关文件名，未监督运营。两新问题不重复封存颜色、C03/simple_top3或旧账户；未发现同题执行者。
