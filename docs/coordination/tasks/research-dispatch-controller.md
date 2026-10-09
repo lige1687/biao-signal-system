@@ -1,6 +1,6 @@
 # 原生机会成交密集度已独审归档；日周必要修复继续
 
-- checked_coordination_sha=a2b8b197a52abe127b3bc915392d385bddec41de；checked_at=2026-10-09T18:21:18.498691+08:00；原范围增量无重叠。成果codex/research-direct-20261008@0837de24c224c5738207345ad4efa1bd41d92aa3的20准确路径远端SHA和内容核同；报告48c3655c、结果8affbdc2。主registry644/隔离219，只追加本报告；归置通过。scope_released=true：registry/INDEX/definitions全部释放。
+- checked_coordination_sha=72e37eb3a7441a967b001adaa47e196de7c48a54；checked_at=2026-10-09T18:21:18.498691+08:00；原范围增量仅其他任务文件名，无重叠；第二次并发push拒绝已保留，普通merge接续，后续写协调前先完成本地ff/merge再提交。成果codex/research-direct-20261008@0837de24c224c5738207345ad4efa1bd41d92aa3的20准确路径远端SHA和内容核同；报告48c3655c、结果8affbdc2。主registry644/隔离219，只追加本报告；归置通过。scope_released=true：registry/INDEX/definitions全部释放。
 - 有限结论：44成熟/34日期/18段，原始关系跨ETF不同，510050条件均值-.3，但删除其自身6段有5次支持不足，未确认独立增量。1真实保存效果0新X/Y/拟合/下载；独立1840数值/267null差5.56e-17，初版失败与原所有预算留存，不重跑此题。
 - 日周作者同原独占范围已实际修复独审7项缺口。原date资格1次保留并允许一次必要修复补验，累计技术日期资格2次不能抹掉旧失败；真实X/Y/effect仍0。修后原Astra定向独审再root释放一次特征/一次标签/一次描述。无定义/阈值/时期/窗口变更，不借负结果扩大实验。
 
