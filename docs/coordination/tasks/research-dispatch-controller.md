@@ -1,3 +1,13 @@
+# 四组执行与独审已实际接续，交接单已发布（2026-10-10T00:10:02.950102+08:00）
+
+- task-id=research-dispatch-controller；owner=01a116c7-3700-7062-a6c6-53af00ef60a0；status=active / converging_B_to_C_handoff。checked_coordination_sha=e39851c21c8cd0f48fd9445999da0e2dafab3a35；checked_at=2026-10-10T00:10:02.950102+08:00；已读A/B/C及本记录相关变化，B/C已各直接核人类原话确认许可，旧pending已失效。
+- root实际向B和C发送接续；B工具active/turn01a1216a-9ac9-71e1-88e3-972d125cd2db，C工具active/turn01a1216b-5f2d-7b60-9661-13b0cfdac227。C已获明确指令用compact等待B结果并直接独核归档，root不重复派同一交付。运行回合不等于真实计算完成。
+- 既有交接单与进度2文件发布codex/research-direct-20261008@5471ae50b6ee7f6bfa44d57b517cb06414b28436，远端完整SHA和逐字内容核同。交接docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/three-chat-handoff-2026-10-09.md最新页；复用旧入口，原历史保留。一次普通add因稀疏路径被拒，未暂存未提交；明确两路径add --sparse后正常提交，未改稀疏配置/删除/强推。
+- 已更新并读回leisignal仅三chat心跳：四组已授权、不再重复询问；用户要求尽快收敛并交下一AI，C仍唯一最终整合人。若新协调者明确接手，删除root监控避免双派；此前只接已有B→C，不造新目标。
+- 范围不变：root仅本记录/自身小状态与既有交接进度，A冻结；B唯一四键一次、C唯一独核归档。当前未核真实四键全部完成，报告仍待C；主分支/原冻结/旧预算保持。
+
+---
+
 # 用户已确认接续四组历史模拟，恢复B执行（2026-10-10T00:05:49.604651+08:00）
 
 - task-id=research-dispatch-controller；owner=01a116c7-3700-7062-a6c6-53af00ef60a0；status=active / dispatching_authorized_four_paths。checked_coordination_sha=0812cbb393c3a1db1d0c1257a7199154fed7f9e4；checked_at=2026-10-10T00:05:49.604651+08:00；已读COORDINATION及leisignal-risk-input-20261009、leisignal-risk-run-20261009、leisignal-risk-review-20261009、本记录。三chat本轮核A完成、B/C空闲，无重复执行。
