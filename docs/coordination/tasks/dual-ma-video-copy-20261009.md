@@ -22,3 +22,11 @@
 - 外盘文稿: /Volumes/win+mac通用/个人资料归档/双均线视频文稿-20261009/双均线-Pro简版动效稿-v3.md；6172 bytes；SHA-256 6d25ecc308725d30d637b5768d0bc3346689c57daf8137b6519213cc8cf83fff，文件读回一致。外盘身份及容量检查通过。
 - 旧稿保留。视频未制作/发布，配音时长与观感未验收。
 
+## 静态风格候选开始 2026-10-09T11:04:29.929321+08:00
+
+- active；checked_coordination_sha: b8b8497a0ad62d1091d8b6da5eb585a7183cbfba；已读COORDINATION.md、本任务、trend-trading-video、nasdaq-story-video-20261009、research-dispatch-controller。
+- 用户指定leyan-original-sound.mp3用于本双均线片配乐，并要求先交几张风格图。音频SHA核对一致7f1f2812b93a165895418d14dfe586312c1750383774bc227d0f5181ee2fcd9e。
+- 唯一写者本会话；范围仅外盘个人资料归档/双均线视频文稿-20261009/风格图-v1新图与制作记录，及本任务协调文件；不写其他视频或共享Skill。冲突决定无重叠。当前HEAD 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；工作分支 codex/factor-unit-research-20260915。
+- 拟交3种图像生成风格候选，16:9；曲线仅视觉概念，正式动画精确绘制。内置图像工具不可配置生成位置，预计本机工具生成缓存<30MiB，生成后立即复制外盘；最终交付与文档外盘。
+- 验收三张实际图片查看、文字/品牌检查、外盘读回指纹、指定音乐记录；不生成动态/成片，风格待用户选择。
+
