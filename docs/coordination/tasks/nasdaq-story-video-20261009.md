@@ -143,3 +143,14 @@
 - 初版音乐WAV实测仅101秒，已中止自己的初版导出并保留失败文件；改四独立输入与显式48k重采样后精确380秒、无截幅，前后与三处连接窗口有信号；实际-16.0 LUFS/-5.2dBFS峰。两版目前重新导出中，未标全片完成。
 - 准备检查、时间覆盖、无品牌与归置通过；发现的竖版孤字/格子注脚间距/横版进度线压署名已修正。最终完整解码、实际导出帧及播放待完成。
 - 原声发布许可仍未核；无配音、安装、付费、删除、发布。工程与媒体仅外盘，Git状态不代表媒体远端交付。
+
+
+## v06完整双画幅交付 2026-10-09T12:16:45.262982+08:00
+
+- task-id: nasdaq-story-video-20261009；status: completed（授权的完整文件交付）；scope_released=true。checked_coordination_sha: e058c5735314b9f58b1397b0a699ad9cbd53974b；checked_at: 2026-10-09T12:16:45.262982+08:00。已读COORDINATION1.1、自身、trend-trading-video最新middle-sample-done及research-dispatch-controller当前范围；后续至本基线相关三文件无差异。仅本片外盘v06与自身小记录，root唯一写者，无共享Skill或研究代码重叠。
+- 用户“可以，完整视频给我哈”授权全片；v05风格与无旁白保持。外盘视频库/指数科普/20261009-nasdaq-story/v06-full已实际导出380秒/30fps/11400帧H264+AAC双48k两片。横版1920×1080，863026978字节，SHA256 f154dd3bbae29afe555306be75139bdfe3f27e2bdadab96917259c0989d59cfc；竖版1080×1920，860081522字节，SHA256 4b42d5f9648a009c61a35e05532f566ce2e830431aa774589bead4965eabfbf4。竖版独立文字/统计卡/格子排版，非成片硬裁。
+- 最终两文件完整音视频解码返回0、各11400帧；各抽40帧覆盖39镜头并查看，实际浏览器从头正常速度无跳转到380秒，均ended=true/error=null。横版未静音，竖版静音避免双轨。主观听感不冒称已验收。证据checks/validated-*.json、browser-playback-complete.json、actual-contact-*.jpg和VALIDATION.md。
+- 380秒混音、78条SRT、两比例PNG/SVG可编辑封面、可重建project/、CREDITS、LICENSE_LEDGER、FINAL_FACT_CHECK、DELIVERY齐备；350个正式及证据文件共2039215644字节，files.json逐份SHA重新读回通过。tmp失败/中止片、AppleDouble和运行预览日志不作交付；未删除。原始10视觉素材SHA与7项重建输入指纹不变；归置通过。
+- 事实统计已核Nasdaq原PDF页图并把含股息再投资口径入片；COMP/NDX与两个样本独立。9月权重原CSV缺失，不以现时10月表冒充，仅2002/2021排名12秒。原初版101秒音乐问题已修正并重渲染全片；不抹去失败。
+- 指定原声跨平台发布权利未确认，因此不称全版权可发布；审美等用户评价。TTS由用户取消不算缺件；无克隆/假行情/买卖阈值/系统已有效承诺。无需安装付费，未上传发布。
+- 成果与大文件仅固定外盘，Git本次仅协调状态；项目源码未提交成果分支，远端不可据此重建媒体。本机仅docs/ops/media/nasdaq-story-20261009/external-location.json与自身work-progress位置记录。当前交付无需继续生成；若用户提出修改，核盘和manifest后开新版本保留本片。
