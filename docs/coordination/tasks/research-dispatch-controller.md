@@ -1,3 +1,13 @@
+# 三对话接续监控已建立（2026-10-09T20:15:57.846362+08:00）
+
+- checked_coordination_sha=02e45b5606af1c25fd3d2195cd0371a123941f52；checked_at=2026-10-09T20:15:57.846362+08:00；沿用上轮已读COORDINATION、三个leisignal-risk任务及本task，本轮fetch无增量。用户最新明确要求连接回调并持续盯这三个。
+- 本回合compact snapshot三者均inProgress；不重派。root实际建立仅这三个对话的10分钟heartbeat，工具自动分配id=leisignal（旧任务原已不存在；这是本次新配置，不恢复旧全局提示）。本地配置ACTIVE/频率/三ID已读回；原生Goal实测null，不声称Goal恢复。
+- 活跃回合wait_threads接完成/需关注事件；回合外心跳兜底，非即时webhook。新交付核commit/来源/关键结果后实际发送依赖接续，保存cursor和已处理阶段，避免重复。已运行只核进展，不催重开；两次无阶段变化先区分运行工具进展与真正失败。
+- A输入/B实现与唯一执行/C独审与唯一归档维持；root仅自身记录，四真实路径许可仍待批准。输入准备与人工演练不受此阻塞；无变化安静、不重复Git状态提交。三个交付验收归档且本批无后续必要工作则删除此监控。
+- 紧凑恢复位置：本地thread-state.json的three_chat_callback_20261009；检查、派发、运行、交付、验收分别记录，不将配置建成当科研完成。未修改其他自动化。
+
+---
+
 # 用户确认三个对话，恢复统一调度（2026-10-09T20:13:54.460057+08:00）
 
 - checked_coordination_sha=1d9c47a9d25d6e6f3ede892e54e77aad50efbf31；checked_at=2026-10-09T20:13:54.460057+08:00；已读COORDINATION及research-dispatch-controller、leisignal-risk-input-20261009、leisignal-risk-run-20261009、leisignal-risk-review-20261009。只核原八目标相关范围。
