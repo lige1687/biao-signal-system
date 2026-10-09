@@ -1,10 +1,29 @@
 {
   "schema": "monthly-risk-authorization/1",
-  "status": "not_granted",
+  "status": "approved",
   "task_id": "leisignal-risk-run-20261009",
-  "authorized_path_ids": [],
-  "user_quote": null,
-  "source_thread": null,
-  "authorized_at": null,
-  "contract_sha256": null
+  "authorized_path_ids": [
+    "A_ALL-base",
+    "A_ALL-stress",
+    "A_SMA-base",
+    "A_SMA-stress"
+  ],
+  "user_quote": "操！这有啥不允许的？我不太懂啊，你这还要我来问我，这有啥不允许的？",
+  "user_followup_quote": "我现在希望的就是你赶紧把任务收敛完，然后我们交给下一个AI去做。你这里做的太慢，流程不对。你这里做的反复的太多，卡了很久，并且我也不知道你到底在干什么。",
+  "approval_question": "批准这4组历史模拟各运行一次吗？就是沪深300ETF、2026上半年、两种参照×两档费用。",
+  "source_thread": "01a116c7-3700-7062-a6c6-53af00ef60a0",
+  "source_turn_id": "01a12168-de0f-7883-bb4d-40ed588e0f7e",
+  "source_message_ids": [
+    "01a12168-e0a9-7f00-8e07-3b05d1536ea9",
+    "01a12169-fc41-7dd0-b59d-a9c17009067a"
+  ],
+  "approval_question_turn_id": "01a12167-c5a6-72d1-9c28-864f4b399582",
+  "authorized_at": "2026-10-10T00:04:43+08:00",
+  "authorized_at_basis": "source response turn start timestamp returned by read_thread",
+  "received_and_verified_at": "2026-10-10T00:09:58.757146+08:00",
+  "human_source_read_back": true,
+  "contract_sha256": "333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4",
+  "maximum_attempts_per_path": 1,
+  "prior_two_paths_not_borrowable": true,
+  "interpretation": "Direct human response to the exact four-path approval question, with immediate instruction to finish and hand off; no token phrase required."
 }
