@@ -1,3 +1,17 @@
+# 最新状态：原片另一段“入场与持有”15秒样例交付
+
+- task-id trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；paused / entry_holding_sample_awaiting_user；scope_released false。用户要求样例验收点，无技术阻塞。
+- checked_coordination_sha: e57141e7b0f0b5480be68579aa198b4b3fb80d31；checked_at: 2026-10-10T00:45:11.641265+08:00；已读COORDINATION1.1及本人、现金/双均线独立范围、risk-run/review与中控，最新C独立研究归档不涉及本片。仅本机原两小索引和独立外盘版本，无重叠。
+- 用户要求“其他片段…搞一个样例看看”；v07对应原文“加速时不追入，与已持有是否退出，需要分别判断”，没有改本片主题或重讲双均线。此要求不推断v06观感认可/全片或Skill授权。
+- 工作分支codex/trend-perspective-video-20261009@9aa2b1bff20b30ec65d1c182d2fbade48d03a23a，已正常推送并核远端SHA及两份准确文件内容。
+- 外盘视频库/趋势交易/20261009-trend-perspective/v07-entry-holding-sample；成片/entry-holding-15s-v2.mp4，1507404B，SHAbc24572dac7cfeb861b2bcda04f509451ce55363badda3fc8c8cb587ed25e735；工程包6921113B，SHA52585c0d6ce33c61ac3889f70582f4fd69b736c4a9ec1fcae7e3d25132e4e941，29项逐字读回一致。
+- 真实科创50日线21行与原源逐值核同，逐完成日揭示；单图连续分为两个同日同价视角，依次看入场/退出条件，末句“不追入≠要退出”，无买卖指令/私人持仓。
+- 450帧1080p30fps、15.019秒容器；0媒体失败/1可选内嵌字幕轨提醒，屏幕文字和SRT均有；0黑屏0静音，-15.6LUFS，末句静止3秒供阅读。实际MP4关键转场帧查看、正常速度未静音播放到ended=true,error=null；无独立听审，用户观感待确认。
+- 首次时间表字段/近景轴越界已修，旧版保留不交付；归置/前置/时间表/品牌检查通过。http://127.0.0.1:58752/preview.html已打开并保留，外盘和本地服务需可用。
+- 不改Skill、不扩片、不发布；下一步依据用户对此段及v06的评价接续原片。
+
+---
+
 # 最新状态：追加原片“入场与持有”15秒样例
 
 - task-id: trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；active / entry-holding-sample；scope_released false。
