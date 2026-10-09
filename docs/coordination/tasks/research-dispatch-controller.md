@@ -1,3 +1,13 @@
+# 用户已确认接续四组历史模拟，恢复B执行（2026-10-10T00:05:49.604651+08:00）
+
+- task-id=research-dispatch-controller；owner=01a116c7-3700-7062-a6c6-53af00ef60a0；status=active / dispatching_authorized_four_paths。checked_coordination_sha=0812cbb393c3a1db1d0c1257a7199154fed7f9e4；checked_at=2026-10-10T00:05:49.604651+08:00；已读COORDINATION及leisignal-risk-input-20261009、leisignal-risk-run-20261009、leisignal-risk-review-20261009、本记录。三chat本轮核A完成、B/C空闲，无重复执行。
+- 人类授权来源：本中控聊天2026-10-10，本轮用户直接回应“批准这4组历史模拟各运行一次吗？就是沪深300ETF、2026上半年、两种参照×两档费用”的明确问题：“操！这有啥不允许的？我不太懂啊，你这还要我来问我，这有啥不允许的？”结合其紧邻的“我看3个都做完了呀，怎么还不推进？”和持续执行要求，构成本次明确继续批准。无需口令或再问一次；不是定时器/C/其他AI代批。
+- 准确范围：510300、2026上半年、63共同日、A_ALL/A_SMA乘base/stress四键各一次；合同SHA333d7a4f43c80ba19db31e6ac5f74b6e3beb02925c0dd2267a73d0d784aa66a4，B代码7164290d3fd33be35eae6439c7044ab4e9dd4d3b，A29337ec9e6560171c459019834638ce2c6993ef9，C代码独审1e954fdc511092c1769fcaa5a6779d36eb7e0641。10%可比标准不改。旧2路径耗尽/人工8次/全部失败保留；此次最多4次不重置不重复。
+- 冲突决定：A inputs冻结只读；B唯一implementation及已登记外盘执行；C唯一review及后续正式归档；root仅自己的本记录、work-progress及thread-state。无主分支/他人路径/registry写入。
+- 下一动作：实际发送B原话与准确绑定，核真实启动；B交付后root核指纹及关键数值再交C独审归档。当前登记阶段还未宣称已派发/真实计算或验收完成。移除旧心跳“许可仍待批准”的过时提示，保持仅三chat的监控范围。
+
+---
+
 # 完整代码接受已核，当前仅待四条历史模拟授权（2026-10-09T21:06:44.531689+08:00）
 
 - checked_coordination_sha=2a7b3db2b0a331e91152b64904df711d74f7eee2；checked_at=2026-10-09T21:06:44.531689+08:00；已读A/B/C及本task最新段。写者、范围和预算不变，root仅本记录与自身恢复状态。
