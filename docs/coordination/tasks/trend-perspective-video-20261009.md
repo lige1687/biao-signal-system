@@ -1,3 +1,16 @@
+# 最新状态：修正v07收盘连接线，并追加观察跨度15秒样例
+
+- task-id trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；active / line_fix_and_horizon_sample；scope_released false。
+- checked_coordination_sha: 3d3e44028b137f84b980725c1e560561abfa73d2；checked_at: 2026-10-10T00:55:09.271264+08:00；已读本人、COORDINATION1.1、cash-position-video-20261009新Skill范围及research-dispatch-controller收尾，双均线既有范围沿用；本任务不写Skill，与现金片无冲突。
+- 用户要求：当前15秒均线看着奇怪，要改；再给原片另一段样例。已核v07金线实际为无标注收盘价连线，不是均线。当前段无需均线，去掉连线及光晕，不伪造平滑均线；两视角原语义保留。
+- 新样例对应原稿“判断趋势之前先问准备参与多长；主要按周/月决策”。同一截至日期真实日K线由几天拉远到几周/一两个月；不重讲K线聚合或双均线，无未来价格、信号、收益检验。
+- 写入范围独立外盘视频库/趋势交易/20261009-trend-perspective/v08-line-fix-and-horizon-sample；仅自己的两份本机小索引和此记录。基线codex/trend-perspective-video-20261009@9aa2b1bff20b30ec65d1c182d2fbade48d03a23a；旧版保留。
+- 验收两段各15秒1080p30fps450帧；现片仅必要画线修正；新段有连续视野变化和原句解释；实源逐值核、实际转场帧、解码与完整播放、可复用源码/工程包。观感待用户，不推断其他段获批。
+- storage 00:53固定UUID身份可用，外盘592562618368B、本机15345152000B；预计外盘新增<300MiB，本机<128KiB，原环境/音乐/字体复用，无安装/购买/发布/Skill修改。
+- 下一步交付修订片和另一段样例，保留本期逐段用户验收。
+
+---
+
 # 最新状态：原片另一段“入场与持有”15秒样例交付
 
 - task-id trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；paused / entry_holding_sample_awaiting_user；scope_released false。用户要求样例验收点，无技术阻塞。
