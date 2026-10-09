@@ -1,3 +1,13 @@
+## V9 compact-start
+
+- task-id: trend-trading-video；2026-10-09T16:43:49.257905+08:00；checked_coordination_sha: a7264c95d62195ca23afdb056416a5f419b0e748；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active；root唯一写者。用户要求新增紧凑节奏长期偏好，复读第二篇原推文并补全Skill流程。已读nasdaq最新v11和dual-ma全片阶段，二者只写独立媒体，不写共享Skill，无冲突。
+- 基线原成果baf892e586d863bc24b5e96e250fea1c8213dc4b；ai_tools 12aef172f22467a925235f5744619755113d3909。范围：两处Skill入口、新增tight-pacing参考、prompt-methods、storyboard-template；ai_tools对应模板/新视频Prompt/manifest；本人进度与回执。保留其他任务本机Skill变更，不代提交。
+- 有界复核：原T2一次直接全文读取对照既有方法；只纳入缺失决策，不重做素材库调查、不生成影片、不安装。验收偏好可被入口/导演表/样例/全片调用、默认与两确认点不变、格式引用/指纹/准确路径远端读回。审美改善本轮未测。
+
+
+---
+
 ## V9 prompt-library-done
 
 - task-id: trend-trading-video；2026-10-09T16:21:53.751661+08:00；checked_coordination_sha: e97fb35008cd2ecc4f8a8c695831f9907a66a4bb；已读 COORDINATION.md、自身与 research-dispatch-controller。
