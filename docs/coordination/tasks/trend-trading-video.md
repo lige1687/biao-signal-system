@@ -1,3 +1,14 @@
+## V9 reference-music-done
+
+- task-id: trend-trading-video；2026-10-09T10:34:06.703405+08:00；checked_coordination_sha: a2379382b4a6f697b4ccb5ad1048e4db796b95ba；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed本轮参考原声定位/下载/使用说明，scope_released=true；本人唯一写者，自身及中控读回无重叠。成果codex/trend-history-long-v14-20261009@acd42ff640e9849c8e12ac7371bac94524507a96，4份准确小文件远端逐字核验。
+- 指定视频对应@leyan创作的原声，music_id7691894827352410921；音乐页标题独立核对一致，视频列表服务异常，无手机添加/发布实测。已取得公开原声MP3，125.47秒、4,015,471字节，完整解码0失败，SHA2567f1f2812b93a165895418d14dfe586312c1750383774bc227d0f5181ee2fcd9e。
+- 媒体/短段/日志/说明均在已核固定外盘，目录与6份文件SHA读回通过；位置reference-audio/leyan-20261009.json。初次隔离venv缺numpy，复用现有Homebrew Python3.11/vendor后开头12秒ASR成功，但输出为可疑音乐误识别，不能证实有无旁白；纯BGM状态及主观听感未验。没有独立曲名/匹配歌曲/跨平台许可，不把原声当已验证纯音乐或授权素材。
+- 归置通过；无安装/模型下载/删除/重渲染/发布，不改旧V14。可试听原声，抖音同款由原声入口选用；用于240秒影片前需核音乐结构、循环衔接及无旧音乐版本，尚未执行。
+
+
+---
+
 ## V9 reference-music-start
 
 - task-id: trend-trading-video；2026-10-09T10:30:32.148446+08:00；checked_coordination_sha: 887d682827718c387a0d5c65dbfbf892059170c1；已读 COORDINATION.md、自身与 research-dispatch-controller。
