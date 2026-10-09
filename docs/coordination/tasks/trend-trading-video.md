@@ -1,3 +1,13 @@
+## V9 motion-language-start
+
+- task-id: trend-trading-video；2026-10-09T15:51:59.784031+08:00；checked_coordination_sha: 947dcb4a8767187610c2bbdf361e6640646dd841；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户确认“不能都统一模板，看久了审美疲劳”，要求重新看推文和别人视频、沉淀Skill。本轮复查原X正文/案例、可见画面与实现，不新制视频。唯一写者root，已读COORDINATION、自身、nasdaq v09独立15秒范围、中控，不修改其影片。
+- 范围：原项目code-explainer-video入口、references/continuity-and-efficiency.md与storyboard-template.md及一份新动态导演参考；私有ai_tools/video对应Skill、模板、启动Prompt、学习记录与清单。本任务小进度/回执；原影片与他人文件只读。原项目成果仍codex/trend-history-long-v14-20261009，原基线ebe749d82da5cc5c931894149043675e0d0e3022；ai_tools基线025204fb9cb87b1e403721404d85629848e2d062。
+- 验收：原文/作者说明/实际看到的画面分开；统一视觉语言但不统一版式，主体有效动作、镜头动机、动作节奏、声音落点与整片视觉变化进入分镜；中间难点15秒须验证连续解释，保留无旁白/无品牌/默认音乐/外盘/先图后样例确认。普通文档检查不等于审美已改善；两处Skill同义、链接/格式/指纹、准确Git路径及远端读回通过后交付。
+
+
+---
+
 ## V9 ai-tools-export-done
 
 - task-id: trend-trading-video；2026-10-09T15:44:48.917331+08:00；checked_coordination_sha: be06adaa358cb3e7e33adb482078909b777d8cf2；已读 COORDINATION.md、自身与 research-dispatch-controller。
