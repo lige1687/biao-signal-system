@@ -1,3 +1,10 @@
+# 准备与保存输入资格已发布；定义窗口释放
+
+- checked_coordination_sha=371c5974d942a46efef3d016c9b3b8237f5974a2；checked_at=2026-10-09T18:09:23.415336+08:00；范围沿前述已读任务，root 22准确文件已在codex/research-direct-20261008@6bb7c2658a9e28105b468418c11b0a52bd7ca8a9远端SHA核同且内容逐字核。独审45,360四价与5,400量比较差0，44成熟/18段、1未知保持；这仅输入资格不算效果。
+- definitions由173到174只新增日周代理原一ID，旧对象原字节保留；新SHA b6a0b500b7c2ccbfb2418ba9a39105595485b03ff7fb85a65aa7c507497fcc12。scope_released=true：definitions/registry/INDEX全部释放。两Sol仅各自已登记实现范围，root外盘计划/源码审查后才真实计算，未把准备发布写成科学完成。
+
+---
+
 # 日周候选唯一研究定义登记窗口
 
 - checked_coordination_sha=358452984eb0fe9193d1f4074e7e380a193fc58e；checked_at=2026-10-09T18:07:23.799791+08:00；已读本task/先前相关研究owner；本轮协调无新增重叠。root仅在主与隔离 docs/research/definitions.v1.json 追加 research.multitimeframe.daily_stage3_at_completed_week@0.1.0，采用已核2c0c49bf合同，不改原对象、原策略文本或生产规则。其他原字节保留，新增后保存原准备SHA到执行SHA的单项amendment，并立即释放definitions。registry/INDEX仍未占用。
