@@ -1,8 +1,8 @@
 {
   "schema": "research-evidence-catalog-current-update/1",
-  "as_of": "2026-10-09T12:44:45.675652+08:00",
+  "as_of": "2026-10-09T14:37:47.721007+08:00",
   "base_report_sha256": "8e61d7ed4ca119bece1209d920479a0d5ed3d63aadcb6d45e12741f93e8fb601",
-  "report_sha256": "40625d5dbc4e063873979c96c280924a92304f38a97119cd3132d93796279431",
+  "report_sha256": "8f82087ab37bfbabd0fa662129daa6a02d195da28c01b4963c7af8b1fb3c0b3c",
   "old_raw_fingerprints": {
     "repo-hygiene.log": "be8c549ee15f0b9987ff354acaf63d35548b45fc39fb0eb889a8b8841dfc975c",
     "baseline-owner-map.json": "41a080718783470a242ecaee5e9f7e4ce94ae991018b33380be77e9a14a69fb9",
@@ -44,10 +44,24 @@
     "WORKFLOW-ENGINEERING": {
       "native_workflow_contract": false,
       "old_eight_fingerprint_failures_retained": true
+    },
+    "B1-SPACE-11": {
+      "status": "accepted_saved_original_result",
+      "review": "docs/experiments/raw/research-dispatch-controller-2026-10-07/recovered-b1-review-20261009/controller-acceptance.json",
+      "labels_checked": 22,
+      "pairs": 11,
+      "new_runs": 0
+    },
+    "GOAL5-CASH-SYNTHETIC": {
+      "status": "original_package_and_saved_evidence_accepted; direct_interface_incompatible",
+      "review": "docs/experiments/raw/research-dispatch-controller-2026-10-07/recovered-order-package-20261009/independent-review.md",
+      "real_policy_inputs_ready": false
     }
   },
   "new_market_calculations": 0,
   "failures_preserved": [
-    "first updater changed main registry then stopped on isolated compact object formatting; second guard refused already-updated main; readback confirmed main success, isolated only then patched"
+    "first updater changed main registry then stopped on isolated compact object formatting; second guard refused already-updated main; readback confirmed main success, isolated only then patched",
+    "scope push rejected concurrent unrelated task update; filename-only review and normal merge/push then exact readback passed",
+    "cash audit first assumed 11 original trajectory rows; correct 9 original rows versus 11 application prefixes then version-aligned pass"
   ]
 }

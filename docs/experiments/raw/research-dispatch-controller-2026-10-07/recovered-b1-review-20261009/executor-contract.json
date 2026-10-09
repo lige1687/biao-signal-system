@@ -1,0 +1,38 @@
+{
+  "mission": "Verify recovered original B1-SPACE-11 saved evidence; no experiment rerun",
+  "task_scope": [
+    "read exact B1 archive in memory",
+    "verify manifest sources available, membership, contract, release, one-run ledger and saved 11-pair arithmetic",
+    "explain superseding source state and remaining limits, original budget no reset"
+  ],
+  "read_only_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T113744-76e813edcc31/result/LeiSignal-B1空间条件风险-11对探索检验-2026-10-06.zip",
+    "docs/experiments/raw/research-dispatch-controller-2026-10-07/original-recovery-20261009/recovery-manifest.json",
+    "docs/experiments/raw/research-evidence-catalog-2026-10-07/catalog.json"
+  ],
+  "archive_sha256": "b682f9f3c2881e648cff2556c1ed9e67ff9bb6a94c6cdec17a56a3ceabf75cab",
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "written callback with exact member source/hash bindings, counts and results independently recomputed from saved labels",
+    "pass/fail and limits; cannot call code tests or labels",
+    "legacy budget and further required qualified inputs"
+  ],
+  "stop_conditions": [
+    "source or hash mismatch",
+    "need new labels/market data/package code execution",
+    "unresolved original semantics"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "coordination_sha": "dac69ddadaf04d57b83aeb301c667929f4a56fbb",
+  "real_X_Y_fits": 0
+}
