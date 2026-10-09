@@ -1,0 +1,585 @@
+{
+  "status": "accepted",
+  "scope": "independent postrun verification; no simulate_one or producer summary function called",
+  "source_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/dual-ma-consumer-correction-20261009-account/dual-ma-consumer-correction-20261009-account-20261009T185319-573f6964cea0/result",
+  "source_manifest_sha256": "35119a7200a84e93445c7a2062d05a2e24884aca1887ec6e51fba5313914f317",
+  "output_manifest_sha256": "3a800d46c91415cec65003e840708afad75d23b8d745006b13eb46c21e15c837",
+  "output_accounts_sha256": "4a78a12b0a85d72453809f7b6a09057532e51802b366298c08f128259e816d20",
+  "contract_sha256": "00ccc8185d98e8037bf15d42e5db374223aa3b88362fecc785692d23aef3579b",
+  "release_sha256": "662f3918fb14fbc44adb44cc39948f89e5536863f4b658e57e1c2cda764b6817",
+  "checks": {
+    "artifact": 47,
+    "account_identity": 1,
+    "corrected_identity": 1,
+    "untouched_account": 120,
+    "release_binding": 1,
+    "contract_binding": 1,
+    "plan_binding": 1,
+    "cohort_identity": 1,
+    "cohort_digest": 1,
+    "cohort_row": 132,
+    "quote_sha": 3,
+    "only_dividends": 3,
+    "daily_count": 12,
+    "first_change": 12,
+    "identical_prefix": 12,
+    "dividend_ledger": 12,
+    "daily_bridge": 98520,
+    "nonnegative": 19704,
+    "calendar": 19704,
+    "daily_quote": 13020,
+    "fill_quote": 760,
+    "fill_fee": 760,
+    "fill_next_day": 760,
+    "buy_lot": 386,
+    "sell_all": 374,
+    "full_mdd": 12,
+    "annualized": 12,
+    "exposure": 12,
+    "trade_frequency": 12,
+    "terminal": 12,
+    "net_liquidation": 12,
+    "annual_boundaries": 240,
+    "annual_profit": 60,
+    "annual_return": 60,
+    "annual_mdd": 60,
+    "annual_trades": 60,
+    "pair_return": 864,
+    "pair_risk": 864,
+    "pair_fee": 864,
+    "pair_terminal": 864,
+    "pair_return_decision": 864,
+    "pair_risk_decision": 864,
+    "pair_decision": 432,
+    "untouched_pair": 378,
+    "dominance": 162,
+    "retention_decision": 162,
+    "untouched_retention": 138,
+    "support_decision": 27,
+    "untouched_support": 9,
+    "untouched_annual": 116,
+    "unaffected_annual_numbers": 120,
+    "annual_retention_label": 132,
+    "unaffected_counts": 1
+  },
+  "failures": [],
+  "corrected_accounts": [
+    {
+      "key": [
+        "159915.SZ",
+        "D60",
+        "base"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 374,
+      "first_different_day": "2023-01-10",
+      "max_bridge_error_cny": "0",
+      "fills_old": 63,
+      "fills_corrected": 65,
+      "local_fills_old": [],
+      "local_fills_corrected": [
+        {
+          "date": "2023-01-10",
+          "decision_at": "2023-01-09",
+          "units_delta": "-39800",
+          "price": "2.365",
+          "fee": "94.127000"
+        },
+        {
+          "date": "2023-01-11",
+          "decision_at": "2023-01-10",
+          "units_delta": "39100",
+          "price": "2.401",
+          "fee": "93.879100"
+        }
+      ],
+      "ending_old": "162532.670700",
+      "ending_corrected": "159867.206700",
+      "ending_delta_cny": "-2665.464000",
+      "annualized_delta_pp": -0.40903318695009183,
+      "mdd_delta_pp": -0.0032919960315105357,
+      "fee_delta_cny": "93.664000",
+      "saved_state_orders_checked": 65
+    },
+    {
+      "key": [
+        "159915.SZ",
+        "D60",
+        "stress"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 374,
+      "first_different_day": "2023-01-10",
+      "max_bridge_error_cny": "0",
+      "fills_old": 63,
+      "fills_corrected": 65,
+      "local_fills_old": [],
+      "local_fills_corrected": [
+        {
+          "date": "2023-01-10",
+          "decision_at": "2023-01-09",
+          "units_delta": "-39500",
+          "price": "2.365",
+          "fee": "186.835000"
+        },
+        {
+          "date": "2023-01-11",
+          "decision_at": "2023-01-10",
+          "units_delta": "38700",
+          "price": "2.401",
+          "fee": "185.837400"
+        }
+      ],
+      "ending_old": "152622.300200",
+      "ending_corrected": "149841.411000",
+      "ending_delta_cny": "-2780.889200",
+      "annualized_delta_pp": -0.44846253760293386,
+      "mdd_delta_pp": 0.017368215549808497,
+      "fee_delta_cny": "170.089200",
+      "saved_state_orders_checked": 65
+    },
+    {
+      "key": [
+        "159915.SZ",
+        "S120",
+        "base"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 471,
+      "first_different_day": "2023-04-17",
+      "max_bridge_error_cny": "0",
+      "fills_old": 13,
+      "fills_corrected": 13,
+      "local_fills_old": [
+        {
+          "date": "2023-04-17",
+          "decision_at": "2023-04-14",
+          "units_delta": "42300",
+          "price": "2.354",
+          "fee": "99.574200"
+        }
+      ],
+      "local_fills_corrected": [
+        {
+          "date": "2023-04-18",
+          "decision_at": "2023-04-17",
+          "units_delta": "42100",
+          "price": "2.362",
+          "fee": "99.440200"
+        }
+      ],
+      "ending_old": "203649.524900",
+      "ending_corrected": "202981.038300",
+      "ending_delta_cny": "-668.486600",
+      "annualized_delta_pp": -0.08564263607686584,
+      "mdd_delta_pp": -0.014277185077510524,
+      "fee_delta_cny": "-4.113400",
+      "saved_state_orders_checked": 13
+    },
+    {
+      "key": [
+        "159915.SZ",
+        "S120",
+        "stress"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 471,
+      "first_different_day": "2023-04-17",
+      "max_bridge_error_cny": "0",
+      "fills_old": 13,
+      "fills_corrected": 13,
+      "local_fills_old": [
+        {
+          "date": "2023-04-17",
+          "decision_at": "2023-04-14",
+          "units_delta": "42100",
+          "price": "2.354",
+          "fee": "198.206800"
+        }
+      ],
+      "local_fills_corrected": [
+        {
+          "date": "2023-04-18",
+          "decision_at": "2023-04-17",
+          "units_delta": "41900",
+          "price": "2.362",
+          "fee": "197.935600"
+        }
+      ],
+      "ending_old": "201062.732200",
+      "ending_corrected": "200399.962200",
+      "ending_delta_cny": "-662.770000",
+      "annualized_delta_pp": -0.08575893139679636,
+      "mdd_delta_pp": -0.014858284877188765,
+      "fee_delta_cny": "-8.230000",
+      "saved_state_orders_checked": 13
+    },
+    {
+      "key": [
+        "159915.SZ",
+        "S60",
+        "base"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 374,
+      "first_different_day": "2023-01-10",
+      "max_bridge_error_cny": "0",
+      "fills_old": 65,
+      "fills_corrected": 67,
+      "local_fills_old": [],
+      "local_fills_corrected": [
+        {
+          "date": "2023-01-10",
+          "decision_at": "2023-01-09",
+          "units_delta": "-40400",
+          "price": "2.365",
+          "fee": "95.546000"
+        },
+        {
+          "date": "2023-01-11",
+          "decision_at": "2023-01-10",
+          "units_delta": "39700",
+          "price": "2.401",
+          "fee": "95.319700"
+        }
+      ],
+      "ending_old": "159935.671300",
+      "ending_corrected": "157272.632100",
+      "ending_delta_cny": "-2663.039200",
+      "annualized_delta_pp": -0.4138524487253168,
+      "mdd_delta_pp": -0.002805174507543029,
+      "fee_delta_cny": "90.439200",
+      "saved_state_orders_checked": 67
+    },
+    {
+      "key": [
+        "159915.SZ",
+        "S60",
+        "stress"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 374,
+      "first_different_day": "2023-01-10",
+      "max_bridge_error_cny": "0",
+      "fills_old": 65,
+      "fills_corrected": 67,
+      "local_fills_old": [],
+      "local_fills_corrected": [
+        {
+          "date": "2023-01-10",
+          "decision_at": "2023-01-09",
+          "units_delta": "-40100",
+          "price": "2.365",
+          "fee": "189.673000"
+        },
+        {
+          "date": "2023-01-11",
+          "decision_at": "2023-01-10",
+          "units_delta": "39300",
+          "price": "2.401",
+          "fee": "188.718600"
+        }
+      ],
+      "ending_old": "149886.979000",
+      "ending_corrected": "147132.848000",
+      "ending_delta_cny": "-2754.131000",
+      "annualized_delta_pp": -0.4504643970895792,
+      "mdd_delta_pp": 0.011186000146235386,
+      "fee_delta_cny": "165.231000",
+      "saved_state_orders_checked": 67
+    },
+    {
+      "key": [
+        "510300.SS",
+        "D20",
+        "base"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 1245,
+      "first_different_day": "2025-05-30",
+      "max_bridge_error_cny": "0",
+      "fills_old": 101,
+      "fills_corrected": 99,
+      "local_fills_old": [
+        {
+          "date": "2025-05-30",
+          "decision_at": "2025-05-29",
+          "units_delta": "26100",
+          "price": "3.959",
+          "fee": "103.329900"
+        },
+        {
+          "date": "2025-06-03",
+          "decision_at": "2025-05-30",
+          "units_delta": "-26100",
+          "price": "3.946",
+          "fee": "102.990600"
+        }
+      ],
+      "local_fills_corrected": [],
+      "ending_old": "108016.956200",
+      "ending_corrected": "108553.780200",
+      "ending_delta_cny": "536.824000",
+      "annualized_delta_pp": 0.11224567297503096,
+      "mdd_delta_pp": -0.4356014849803138,
+      "fee_delta_cny": "-182.224000",
+      "saved_state_orders_checked": 99
+    },
+    {
+      "key": [
+        "510300.SS",
+        "D20",
+        "stress"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 1245,
+      "first_different_day": "2025-05-30",
+      "max_bridge_error_cny": "0",
+      "fills_old": 101,
+      "fills_corrected": 99,
+      "local_fills_old": [
+        {
+          "date": "2025-05-30",
+          "decision_at": "2025-05-29",
+          "units_delta": "24500",
+          "price": "3.959",
+          "fee": "193.991000"
+        },
+        {
+          "date": "2025-06-03",
+          "decision_at": "2025-05-30",
+          "units_delta": "-24500",
+          "price": "3.946",
+          "fee": "193.354000"
+        }
+      ],
+      "local_fills_corrected": [],
+      "ending_old": "97708.282600",
+      "ending_corrected": "98393.751000",
+      "ending_delta_cny": "685.468400",
+      "annualized_delta_pp": 0.15482896774635657,
+      "mdd_delta_pp": -0.5872504597600816,
+      "fee_delta_cny": "-328.868400",
+      "saved_state_orders_checked": 99
+    },
+    {
+      "key": [
+        "510300.SS",
+        "S20",
+        "base"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 1245,
+      "first_different_day": "2025-05-30",
+      "max_bridge_error_cny": "0",
+      "fills_old": 105,
+      "fills_corrected": 103,
+      "local_fills_old": [
+        {
+          "date": "2025-05-30",
+          "decision_at": "2025-05-29",
+          "units_delta": "24500",
+          "price": "3.959",
+          "fee": "96.995500"
+        },
+        {
+          "date": "2025-06-03",
+          "decision_at": "2025-05-30",
+          "units_delta": "-24500",
+          "price": "3.946",
+          "fee": "96.677000"
+        }
+      ],
+      "local_fills_corrected": [],
+      "ending_old": "101695.460500",
+      "ending_corrected": "102198.827500",
+      "ending_delta_cny": "503.367000",
+      "annualized_delta_pp": 0.11030376218894578,
+      "mdd_delta_pp": -0.009267918658213858,
+      "fee_delta_cny": "-168.767000",
+      "saved_state_orders_checked": 103
+    },
+    {
+      "key": [
+        "510300.SS",
+        "S20",
+        "stress"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 1245,
+      "first_different_day": "2025-05-30",
+      "max_bridge_error_cny": "0",
+      "fills_old": 105,
+      "fills_corrected": 103,
+      "local_fills_old": [
+        {
+          "date": "2025-05-30",
+          "decision_at": "2025-05-29",
+          "units_delta": "23000",
+          "price": "3.959",
+          "fee": "182.114000"
+        },
+        {
+          "date": "2025-06-03",
+          "decision_at": "2025-05-30",
+          "units_delta": "-23000",
+          "price": "3.946",
+          "fee": "181.516000"
+        }
+      ],
+      "local_fills_corrected": [],
+      "ending_old": "91587.158600",
+      "ending_corrected": "92245.960400",
+      "ending_delta_cny": "658.801800",
+      "annualized_delta_pp": 0.15647198903110393,
+      "mdd_delta_pp": 0.0,
+      "fee_delta_cny": "-317.001800",
+      "saved_state_orders_checked": 103
+    },
+    {
+      "key": [
+        "588000.SS",
+        "S60",
+        "base"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 856,
+      "first_different_day": "2024-05-06",
+      "max_bridge_error_cny": "0",
+      "fills_old": 31,
+      "fills_corrected": 33,
+      "local_fills_old": [
+        {
+          "date": "2024-04-30",
+          "decision_at": "2024-04-29",
+          "units_delta": "121800",
+          "price": "0.81",
+          "fee": "98.65800"
+        }
+      ],
+      "local_fills_corrected": [
+        {
+          "date": "2024-04-30",
+          "decision_at": "2024-04-29",
+          "units_delta": "121800",
+          "price": "0.81",
+          "fee": "98.65800"
+        },
+        {
+          "date": "2024-05-06",
+          "decision_at": "2024-04-30",
+          "units_delta": "-121800",
+          "price": "0.817",
+          "fee": "99.510600"
+        },
+        {
+          "date": "2024-05-07",
+          "decision_at": "2024-05-06",
+          "units_delta": "122300",
+          "price": "0.812",
+          "fee": "99.307600"
+        }
+      ],
+      "ending_old": "188308.130900",
+      "ending_corrected": "189069.380400",
+      "ending_delta_cny": "761.249500",
+      "annualized_delta_pp": 0.10335607651585832,
+      "mdd_delta_pp": 0.0075412153601206455,
+      "fee_delta_cny": "207.250500",
+      "saved_state_orders_checked": 33
+    },
+    {
+      "key": [
+        "588000.SS",
+        "S60",
+        "stress"
+      ],
+      "daily_rows": 1642,
+      "identical_prefix_rows": 856,
+      "first_different_day": "2024-05-06",
+      "max_bridge_error_cny": "0",
+      "fills_old": 31,
+      "fills_corrected": 33,
+      "local_fills_old": [
+        {
+          "date": "2024-04-30",
+          "decision_at": "2024-04-29",
+          "units_delta": "120300",
+          "price": "0.81",
+          "fee": "194.88600"
+        }
+      ],
+      "local_fills_corrected": [
+        {
+          "date": "2024-04-30",
+          "decision_at": "2024-04-29",
+          "units_delta": "120300",
+          "price": "0.81",
+          "fee": "194.88600"
+        },
+        {
+          "date": "2024-05-06",
+          "decision_at": "2024-04-30",
+          "units_delta": "-120300",
+          "price": "0.817",
+          "fee": "196.570200"
+        },
+        {
+          "date": "2024-05-07",
+          "decision_at": "2024-05-06",
+          "units_delta": "120500",
+          "price": "0.812",
+          "fee": "195.692000"
+        }
+      ],
+      "ending_old": "182504.841800",
+      "ending_corrected": "182910.324400",
+      "ending_delta_cny": "405.482600",
+      "annualized_delta_pp": 0.05644929704071622,
+      "mdd_delta_pp": -0.010802772448176512,
+      "fee_delta_cny": "400.817400",
+      "saved_state_orders_checked": 33
+    }
+  ],
+  "unaffected_counts": {
+    "pairs": 378,
+    "retention": 138,
+    "support": 9,
+    "annual": 116
+  },
+  "dependency_counts": {
+    "pairs": 54,
+    "retention": 24,
+    "support": 18
+  },
+  "pair_eligibility_changes": [],
+  "retention_changes": [],
+  "support_changes": [],
+  "method": [
+    "All 47 artifact byte lengths and SHA read back",
+    "Independent Decimal reconstruction from SAVED fills and source dividends, not a strategy simulation; source nominal open/close crosscheck; next-session execution, whole-lot buy/full sell",
+    "All 12 daily paths and 60 annual sections; old/new daily equality before first predicted divergence",
+    "Independent saved-account pair arithmetic and frozen decision thresholds; no producer summary imports",
+    "120 original account values unchanged; unaffected downstream equality modulo unordered reason-list order"
+  ],
+  "new_account_runs": 0,
+  "new_labels": 0,
+  "new_features": 0,
+  "fits": 0,
+  "storage_identity_checked_at": "2026-10-09T19:09:41+08:00",
+  "saved_state_order_trace": {
+    "accounts": 12,
+    "orders": 760,
+    "failures": [],
+    "method": "Read corrected saved boolean cells and prior known state; use saved end-of-day units to identify target-change orders; compare saved order identities. No account simulator or indicator called."
+  },
+  "retention_record_differences": {
+    "raw_unequal": 30,
+    "after_reason_order_normalization": 24,
+    "order_only": 6,
+    "retained_true_old": 55,
+    "retained_true_corrected": 55,
+    "bool_changes": 0
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "at": "2026-10-09T18:50:00.554890+08:00",
+  "status": "trace_complete_correction_pending",
+  "author": "/root/d_mae_recovered_review",
+  "method": "read-only exact saved table intersections, adjacent-state and ordered event-identity tracing; no account or labels run",
+  "boundaries": [
+    {
+      "symbol": "510300.SS",
+      "date": "2025-05-29",
+      "period": 20,
+      "E": true,
+      "D_changed": true,
+      "affected_policies": [
+        "S20",
+        "D20"
+      ],
+      "old_neighborhood": [
+        false,
+        true,
+        false
+      ],
+      "new_neighborhood": [
+        false,
+        false,
+        false
+      ],
+      "D1": "delete Q20 start and one-day episode; remove next-day exit; propagate 2025/all descriptions only; primary Q20 already corrected; nonoverlap IDs unchanged",
+      "account_order_effect": "old 2025-05-30 buy and 2025-06-03 sell disappear"
+    },
+    {
+      "symbol": "159915.SZ",
+      "date": "2023-01-09",
+      "period": 60,
+      "E": true,
+      "D_changed": true,
+      "affected_policies": [
+        "S60",
+        "D60"
+      ],
+      "old_neighborhood": [
+        true,
+        true,
+        true
+      ],
+      "new_neighborhood": [
+        true,
+        false,
+        true
+      ],
+      "D1": "Q60 and Q20_Q60 each one true day removed; new Jan09 exit Jan10 start; split original episodes; 2023/all auxiliary affected",
+      "account_order_effect": "Jan10 exit and Jan11 reentry"
+    },
+    {
+      "symbol": "159915.SZ",
+      "date": "2023-04-14",
+      "period": 120,
+      "E": false,
+      "D_changed": false,
+      "affected_policies": [
+        "S120"
+      ],
+      "old_neighborhood": [
+        false,
+        true,
+        true
+      ],
+      "new_neighborhood": [
+        false,
+        false,
+        true
+      ],
+      "D1": "no effect because E120 false",
+      "account_order_effect": "old Apr17 buy shifts Apr18"
+    },
+    {
+      "symbol": "588000.SS",
+      "date": "2024-04-30",
+      "period": 60,
+      "E": false,
+      "D_changed": false,
+      "affected_policies": [
+        "S60"
+      ],
+      "old_neighborhood": [
+        true,
+        true,
+        true
+      ],
+      "new_neighborhood": [
+        true,
+        false,
+        true
+      ],
+      "D1": "no effect because E60 false",
+      "account_order_effect": "Apr30 morning buy remains from previous-day decision; May06 exit May07 reentry"
+    }
+  ],
+  "mapping_counts": {
+    "boundary_policy_fee": 88,
+    "affected": 12,
+    "consumed_masked": 4,
+    "not_consumed": 72,
+    "unique_affected_accounts": 12,
+    "unchanged_accounts_under_this_correction": 120
+  },
+  "dependent_outputs": {
+    "paired": [
+      54,
+      432
+    ],
+    "retention": [
+      24,
+      162
+    ],
+    "six_product_support": [
+      18,
+      27
+    ],
+    "annual_numeric_accounts": 12,
+    "additional_annual_retention_accounts": 4
+  },
+  "nonoverlap": {
+    "all_retained": 24,
+    "all_H_true": 8,
+    "all_H_false": 16,
+    "year2025_retained": 7,
+    "year2025_H_true": 2,
+    "year2025_H_false": 5,
+    "identities_before_after_equal": true,
+    "reason": "May29 excluded by retained May08 future window May09-Jun10; next retained Jun11; no other Q20 identity/H differences",
+    "effect_recomputation_needed": false
+  },
+  "existing_shifted_event_label": {
+    "symbol": "159915.SZ",
+    "event_date": "2023-01-10",
+    "start": "2023-01-11",
+    "end": "2023-02-16",
+    "intervals": 21,
+    "source": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/dual-ma-information-2026-09-28/observations.json",
+      "sha256": "963e42e4a37285a841f01a069513cbc203f4f454a38b937620844a45203114bb"
+    },
+    "reuse_requires_same_source_and_target_binding": true,
+    "unverified_extra_event_fields": [
+      "peak_drawdown"
+    ]
+  },
+  "sources": {
+    "D1 episodes": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/dual-ma-resonance-d1-2026-09-23/formal/episodes.csv",
+      "sha256": "456d2b4ac2b3553ebb394b6e73f871567d9fbc6d24349fd414ccdf600449813e"
+    },
+    "old accounts": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-27/accounts.json",
+      "sha256": "a7603b8d4342ba55afc513832506d0d00a73301b997b14d1807afe42392eb2d4"
+    },
+    "core": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-state-accounts-2026-09-24/implementation-r2-2026-09-27/account_runner.py",
+      "sha256": "8f3ee25f81e71d27eeae425a4c57a358c47de9382cca41cb3693a3a4fdbe7e06"
+    },
+    "old labels": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/dual-ma-information-2026-09-28/observations.json",
+      "sha256": "963e42e4a37285a841f01a069513cbc203f4f454a38b937620844a45203114bb"
+    },
+    "pairs": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-account-postprocess-r2-2026-09-27/paired-comparisons.json",
+      "sha256": "15cd8e279f9f5fb8026d2f37957825b4d266d076c3cb3c65327cd687e916b25d"
+    },
+    "retention": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-account-postprocess-r2-2026-09-27/policy-retention.json",
+      "sha256": "c4472ffe852b711ba6fd475b9c495d51db26e5853a6424daca9741f7e1805b42"
+    },
+    "support": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-ma-account-postprocess-r2-2026-09-27/six-product-support.json",
+      "sha256": "d79c0fe45349905aa01c27cb850f2754e80824af27e0870332989417cc97b70d"
+    }
+  },
+  "runs": {
+    "new_X": 0,
+    "new_Y": 0,
+    "account_paths": 0,
+    "old_seven_comparisons": 0,
+    "old_Q20_effect": 0,
+    "nonoverlap_effect": 0
+  },
+  "next": "separate bounded correction release; never subtract one trade from final cash or claim all consumers already corrected"
+}

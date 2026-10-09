@@ -1,0 +1,188 @@
+{
+  "review": "independent_numeric_read_only",
+  "status": "accepted_within_fixed_D1_scope",
+  "real_runs_by_reviewer": 0,
+  "receipt": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/dual-ma-consumer-correction-20261009-d1/dual-ma-consumer-correction-20261009-d1-20261009T185319-ebcade2e07c8/result/d1-correction.json",
+    "sha256": "f17702070f29f6809ae9513ad3253afa0ae2be4b9ceec7a0896eae55c760ac38",
+    "bytes": 3382701
+  },
+  "source_lock": {
+    "files": 36,
+    "mismatches": 0
+  },
+  "daily": {
+    "old_rows": 2170,
+    "new_rows": 2170,
+    "removed_keys": [],
+    "added_keys": [],
+    "changed_rows": [
+      {
+        "key": [
+          "159915.SZ",
+          "2023-01-09"
+        ],
+        "fields": [
+          "cell",
+          "Q60",
+          "exit_Q60",
+          "Q20_Q60",
+          "exit_Q20_Q60"
+        ]
+      },
+      {
+        "key": [
+          "159915.SZ",
+          "2023-01-10"
+        ],
+        "fields": [
+          "start_Q60",
+          "start_Q20_Q60"
+        ]
+      },
+      {
+        "key": [
+          "510300.SS",
+          "2025-05-29"
+        ],
+        "fields": [
+          "cell",
+          "Q20",
+          "start_Q20"
+        ]
+      },
+      {
+        "key": [
+          "510300.SS",
+          "2025-05-30"
+        ],
+        "fields": [
+          "exit_Q20"
+        ]
+      }
+    ],
+    "unchanged_common_rows": 2166
+  },
+  "events": {
+    "old_rows": 442,
+    "new_rows": 443,
+    "removed_keys": [
+      [
+        "510300.SS",
+        "2025-05-29",
+        "Q20"
+      ]
+    ],
+    "added_keys": [
+      [
+        "159915.SZ",
+        "2023-01-10",
+        "Q20_Q60"
+      ],
+      [
+        "159915.SZ",
+        "2023-01-10",
+        "Q60"
+      ]
+    ],
+    "changed_rows": [],
+    "unchanged_common_rows": 441
+  },
+  "episodes": {
+    "old_rows": 442,
+    "new_rows": 443,
+    "removed_keys": [
+      [
+        "510300.SS",
+        "2025",
+        "Q20",
+        "2025-05-29"
+      ]
+    ],
+    "added_keys": [
+      [
+        "159915.SZ",
+        "2023",
+        "Q20_Q60",
+        "2023-01-10"
+      ],
+      [
+        "159915.SZ",
+        "2023",
+        "Q60",
+        "2023-01-10"
+      ]
+    ],
+    "changed_rows": [
+      {
+        "key": [
+          "159915.SZ",
+          "2023",
+          "Q20_Q60",
+          "2023-01-06"
+        ],
+        "fields": [
+          "end",
+          "rows",
+          "calendar_days"
+        ]
+      },
+      {
+        "key": [
+          "159915.SZ",
+          "2023",
+          "Q60",
+          "2023-01-05"
+        ],
+        "fields": [
+          "end",
+          "rows",
+          "calendar_days"
+        ]
+      }
+    ],
+    "unchanged_common_rows": 439
+  },
+  "summary_direct_numeric_checks": 824,
+  "summary_unchanged_periods_exact": 8,
+  "nonoverlap": {
+    "groups": 12,
+    "chosen_id_sequences_equal_old": 12,
+    "retained_count_sum_including_all_duplicate": 96,
+    "summary_blocks_equal_old": 12
+  },
+  "auxiliary_risk": {
+    "symbol": "159915.SZ",
+    "window": [
+      "2023-01-11",
+      "2023-02-16"
+    ],
+    "closes": 22,
+    "independent_peak_to_later_close_drawdown": 0.03981080015766658,
+    "saved_minus_independent": 0.0,
+    "peak_and_trough_dates": [
+      "2023-02-01",
+      "2023-02-16"
+    ],
+    "reused_return_pct": 2.611625947767471,
+    "reused_mae_pct": 0,
+    "new_event_conditions": [
+      "Q60",
+      "Q20_Q60"
+    ]
+  },
+  "old_Q20_primary_reference": {
+    "control_dates": 32,
+    "joint_dates": 14,
+    "control_mean_pct": 1.9980641227819746,
+    "joint_mean_pct": -1.7817153995156907,
+    "difference_pp": -3.779779522297665
+  },
+  "old_Q20_primary_reused_exact": true,
+  "new_return_labels": 0,
+  "old_seven_comparisons_rerun": false,
+  "old_accounts_run": 0,
+  "limitations": [
+    "Only the two D1 symbols and declared fixed windows were numerically checked; this does not evaluate trading effectiveness."
+  ]
+}
