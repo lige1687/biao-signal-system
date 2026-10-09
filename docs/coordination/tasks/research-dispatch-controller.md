@@ -1,3 +1,13 @@
+# Goal5 单原始P0整笔买单恢复实现范围（ready）
+
+- checked_coordination_sha=dec3f31ee3300568fab8ebb1036d29c6c86d3c0f；checked_at=2026-10-09T14:40:23.198937+08:00；已读COORDINATION、本任务及research-evidence-catalog/report-library-integration-20261008已释放记录；只root写自身记录。旧目录更新与登记已完成，registry/INDEX此刻scope_released=true；B1/现金证据成果31a4c0ef待最终读回，不先标远端验收。
+- Astra只读审定：原TEST现金模块不接入日期账本；允许给既有整笔适配新增一个原始P0纯买入决策的已提交边界恢复外壳，无策略选择变化。日期账本唯一资金权威，原费用/数量/预算/限价/拒单不追单保持。P1本轮全部拒绝，卖出/预占/部分成交/新周/行动/并发/真实市场均不进入。
+- Sol/medium唯一实现者复用已completed的b1_saved_evidence_review，实际派发须本登记推回后；写隔离树新docs/experiments/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/，以及已绑定外盘goal5-whole-buy-recovery-20261009T143837-bb7de28bb76b/result及运行目录。root只写raw/research-dispatch-controller-2026-10-07/whole-buy-recovery-20261009合同/验收、自身状态进度协调。旧五源码/规范SHA冻结不改，作者不提交不写共享表。
+- 合同executor-contract.json与implementation-brief.md规定8类针对检查及2条实际新进程恢复；人工重建apply调用与新增订单调用分开报告。0市场/拟合/旧套件重跑。原预算保持。外盘新计划20MiB结果/2MiB本地小记录，身份容量实际通过，尚未启动。
+- 本地合同检查首次因绝对路径格式失败保留；改仓内路径为相对形式，外盘精确边界在external_write_paths由root独立核，不声称通用checker保护外盘。后续源码交付后非作者关键资金/身份/故障独审，不把启动当完成。
+
+---
+
 # 2026-10-09 B1与原现金包独核后的目录接续范围
 
 - checked_coordination_sha=1333c4fa7b533bfbcb013141f32dd5b7a92291ef；checked_at=2026-10-09T14:34:57.870662+08:00；已读COORDINATION、自身最新范围与上次已核目录/报告库释放记录；本次增量只有不相关任务文件名变化，未读取运营回调。同名旧任务路径此次不存在，保留事实，不用猜测不存在代表全局空闲。目录和本任务小记录唯一写者root，助手只读。
