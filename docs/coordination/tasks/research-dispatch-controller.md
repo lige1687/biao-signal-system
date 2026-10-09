@@ -1,3 +1,11 @@
+# 原生机会成交密集度资格通过：固定方法实现与分组范围
+
+- checked_coordination_sha=945045b9b26ede7ed9f530388fc012d8c3a4a3bb；checked_at=2026-10-09T18:05:17.911516+08:00；自身及前述研究owner范围已读，本次增量无共享冲突。Sol一次资格：76身份保留，45匹配/31范围外；45中1原未成熟，0新X/Y/效果。原33段/84别名不改。
+- root接受独立方法审阅，冻结remaining-opportunity-research-20261009/native-overhead-contract.json：同原45资格按原日历成熟性筛，不看Y；保存V三等频并列不拆，至少4案例/2段支持底线，三组不全则条件统计null；1保存分组+1效果，0新X/Y/拟合/下载。原P01卡及D原合同/预算不改，此为原Goal3新用途合同。
+- 原Sol仍独占candidate-selection/，允许新增最小保存结果分析脚本/合成检查及一次无Y分组资格小回执；真实效果另由root独审后指纹释放，运行结果/日志只固定外盘。root仅父目录合同/释放/验收与原state/进度。weekly Sol仍独占前述模块与raw。共享definitions/registry/INDEX继续释放。
+
+---
+
 # 原八目标：日周研究进入最小实现，成交密集度执行保存输入资格
 
 - checked_coordination_sha=54fa0516c4007a829d2acc47671a767b8647d47f；checked_at=2026-10-09T18:03:04.945958+08:00；已读本task及先前相关研究owner范围，增量仅无关文件名，无同路径冲突。root接受日周合同2c0c49bf807f4b7aee3dca404a9fea7943561716bd6af95e831ff69ec38d37ba，研究用途为有限历史代理，不宣称完整三周期共振。旧T05与67/75预算封存。
