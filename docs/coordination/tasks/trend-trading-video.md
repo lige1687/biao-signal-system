@@ -1,3 +1,13 @@
+## V9 music-swap-start
+
+- task-id: trend-trading-video；2026-10-09T10:53:01.622121+08:00；checked_coordination_sha: d48f8b111714a4a8ae40e672afe5d56fbfcde1d1；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active：用户明确要求将趋势交易既有四分钟片配乐替换为leyan候选。沿用V14已批准画面/内容，范围为新版音频与成片、外盘版本交付包/预览、自有最小索引及work-progress，不改原片或共享Skill。基线5db34c2c705dc3d05d86a93e684721182043415b，沿用codex/trend-history-long-v14-20261009；本人唯一写者，自身及中控已读无重叠。
+- 新媒体、文稿复制归档、说明、工具日志与临时文件全部在已核固定外盘新v15目录，预计150MB，本机索引/代码不超过30KB。保留原画面视频流，重建独立sfx+新音乐，按实测时长交叉淡化衔接至240秒，不叠旧音乐。用户此次直接授权音频替换，复用原静图/样片批准；纯BGM及独立许可仍不冒称已核。
+- 验收原输入指纹、实测参数、输出完整解码、音量/峰值、视频流与原片逐字节指纹相同、同一时间表音效保留、新配乐来源及混音计划、实际浏览器播放与章节跳转、外盘归档SHA读回。既有画面审美不重跑无关检查。
+
+
+---
+
 ## V9 music-library-done
 
 - task-id: trend-trading-video；2026-10-09T10:36:47.981263+08:00；checked_coordination_sha: ffb54fe2d17079a0ba43b2d676bc48cf6e589f21；已读 COORDINATION.md、自身与 research-dispatch-controller。
