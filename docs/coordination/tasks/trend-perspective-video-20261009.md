@@ -1,3 +1,19 @@
+# 最新状态：15秒观察周期样例已交付，等待本次观感确认
+
+- task-id: trend-perspective-video-20261009；owner: 01a12111-3544-7250-822d-056b7379704b / root；唯一写者。
+- status: paused；stage: sample_awaiting_user_review；scope_released: false。停在用户要求的样例确认点，非技术阻塞；未扩片、未改Skill。
+- checked_coordination_sha: f7834e4de69beb7767ff5bd6a4a16360854f1ed5；checked_at: 2026-10-09T23:56:56.946216+08:00；已读自身、双均线原owner最新哔站上传/确认范围、现金仓位独立样例及COORDINATION1.1；无共享文件重叠。
+- 用户纠正已落实：双均线仅在本片关键波动/过滤噪声处引向另期。v04错误方向保留历史，本次有效样例是v05观察周期。
+- 成果分支codex/trend-perspective-video-20261009@73a183054949ebbc1cccf579d4c2aaafb592ffec，仅两份小索引，远端SHA准确读回。媒体/源码仅已核外盘。
+- v05：同一科创50真实日线日回落→五日合成周K→周上涨→再展开同周；37日→8周OHLC独立重算一致，截止2026-06-26，日-1.65%、周+6.32%、共同末值2032.28。
+- 外盘：视频库/趋势交易/20261009-trend-perspective/v05-timeframe-sample。最终timeframe-real-15s-v2.mp4 SHA a86ce23c6276966248b2012b4f94884f3653b061fd4b1530cb78b477c529b670；1920×1080/30fps/450帧，容器15.019s。修复中段日期挤叠，旧版失败保留。
+- 工程包SHA 0db662333a67441bf56781d90f2f04f756c9e3796b609d208e7c4cc2c1f0dde6，7673605B，28项逐字读回一致。
+- 检查：前置/字幕阅读时间表/品牌/归置通过，整段解码媒体0失败1可选字幕轨提醒；有屏幕文字及SRT。0黑屏0静音，-15.6LUFS，最长静止1.9s；浏览器rate1到15.019s ended=true,error=null，seek正常。未独立听审，不把技术结果当审美认可。
+- 可见预览：http://127.0.0.1:58750/preview.html。外盘要挂载、服务要运行。
+- 下一步：用户评价本版逻辑与动态；认可后才按其要求复盘到Skill。新全片当前不启动，不发布。
+
+---
+
 # 最新状态：回到本期观察周期逻辑，15秒真实聚合样例
 
 - task-id: trend-perspective-video-20261009；owner: 01a12111-3544-7250-822d-056b7379704b / root；唯一写者。
