@@ -1,3 +1,11 @@
+# 两结构实现冻结：独审与根受控运行范围
+
+- checked_coordination_sha=8d7a7ea5b43291842eaaf63016f0fbc42a19fc3b；checked_at=2026-10-09T17:05:27.724780+08:00；已读本task与原相关研究owner，最新增量仅无关文件名；自身946632c3内容已逐字远端核。Sol完成并停止，模块59523945/runner b43db4d2冻结，真实feature/target/effect仍0。Astra仅只读独审已实际接续；无新的并写或同题执行者。
+- root受控运行唯一写专属implementation/feature_qualification-attempt.json和effect-attempt.json；模块/设计不改。先独审放行，再固定外盘计划一次feature，读取无结果支持后冻结一次effect/label；1批2定义各1版、1期限、0拟合/下载、不重试研究。结果/日志只固定设备新目录，不回退本机。root自身approved-comparison合同/验收/state/进度继续；registry/INDEX/definitions仍释放。
+- 现金两路径已ac38847e独审归档，不重跑调比例。结构若实际支持不足如实记录，不新造替代定义或扩大预算；生产/桌面/旧raw/已封存D等不改。
+
+---
+
 # 资金负结果归档远端核验；登记窗口释放
 
 - checked_coordination_sha=0c1f65fd42e09d07911c7a6dd3eb9a4ee8a3fdf5；checked_at=2026-10-09T16:54:24.094669+08:00；本次fetch无变化，沿已读本任务与相关研究共享范围。成果codex/research-direct-20261008@ac38847e79904e0560eba45c481847c7061974cd的36准确路径逐字远端一致，1082223B小源码/记录含继承的定义表；完整现金结果仍只在固定外盘。
