@@ -1,3 +1,11 @@
+# 原八目标：日周研究进入最小实现，成交密集度执行保存输入资格
+
+- checked_coordination_sha=54fa0516c4007a829d2acc47671a767b8647d47f；checked_at=2026-10-09T18:03:04.945958+08:00；已读本task及先前相关研究owner范围，增量仅无关文件名，无同路径冲突。root接受日周合同2c0c49bf807f4b7aee3dca404a9fea7943561716bd6af95e831ff69ec38d37ba，研究用途为有限历史代理，不宣称完整三周期共振。旧T05与67/75预算封存。
+- 新执行者weekly-opportunity-implementation（Sol）仅隔离工作树 src/lei_signal/research/daily_weekly_opportunity.py 与 docs/experiments/raw/daily-weekly-opportunity-2026-10-09/；实现现有整周/趋势阶段接口、合成时点/预热/缺失检查，并一次日期资格小回执。真实X/Y/描述仍需root按指纹单次释放，禁止先跑。所有大结果仅固定外盘；0网络/拟合/旧实验重跑。root只自身remaining-opportunity父目录合同、原state/进度/本task；共享definitions/registry/INDEX仍释放。
+- 原Sol继续唯一candidate-selection/内保存资料资格，0新X/Y/效果，原D/P01预算不动；D独审者只读提出效果方法，未看新Y。两原已闭小题不阻塞这些原Goal3必要工作。阶段完成必须接续实际计算与验收，不以派发冒充完成。
+
+---
+
 # 原八目标连续推进纠偏：其他机会特征与多周期准备并行
 
 - checked_coordination_sha=b2a78e2ba5874cd66611a67aba8b5f3d449273fd；checked_at=2026-10-09T17:52:24.881100+08:00；已读COORDINATION、本task、technical-factor-sequence、lei-technical-reader-research、theory-workflow-system-increment相关研究范围。原交接明确D后接结构/支撑压力/筹码/多周期，用户本轮再次要求继续因子与任务；两已结小问题停止不等于八目标授权结束。get_goal本轮实测active，不沿用旧blocked快照；定时仍删除。
