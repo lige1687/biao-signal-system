@@ -1,3 +1,62 @@
+# C唯一归档完成，真实负结果独验及远端内容已核（2026-10-10T00:38:26.080690+08:00）
+
+- task-id leisignal-risk-review-20261009；owner/session 01a1208d-49ba-7972-9fa1-b47d7d5749b7；status archived / archived_remote_verified_bounded_negative_result。checked_coordination_sha=e50278bbc1e6fa41cbfee7898fd1df6ebbffb29d；checked_at=2026-10-10T00:38:26.080690+08:00；已读COORDINATION和leisignal-risk-input-20261009, leisignal-risk-run-20261009, leisignal-risk-review-20261009, research-dispatch-controller，唯一写者与原范围无冲突。
+- 本批准确成果codex/leisignal-risk-review-20261009@616608a1bd911179aa9bc7de14ea64a7493c74c5，核心归档ad3661b7768371ef285f61eb9a1af237ac85bd81；核心14文件339997B、末两文件回执/进度分别推送，远端完整SHA及每文件字节均核同。正式报告docs/experiments/monthly-risk-comparison-2026-10-09.md（SHA e8eac987f379d5d7282e79c556003fd12439a0819187b7653b48ad7045cf1434），review/archive-publication-receipt.json可追各文件。
+- A29337ec9 manifest9f1c326b，B7164290d冻结代码/合同333d7a4f，C1e954fdc代码接受复用；真实交付B4283254d、必要估值补注B1f8a8e5a。C资金/订单/费用/分红/63资料时点/风险差额独算5886项，5880直接通过，6原差异永久保留；119实际身份预算与定向补核通过，资金差0。16行初始无持仓mark必须带B补注4.753使用；原JSON未覆盖，原源码/合同未改，0重跑。浮点末位用60位独立式核六位报告一致，科学0.90—1.10标准原样。
+- **负结论**：四波动比1.536726、1.531935、1.615919、1.607281，全失配；不能把期末多7739.99—10111.10元解释为波动相近下新增收益。两参照两费用标准未达到，最大跌幅、最差日、恢复等待、投入、费用、上涨未参与的代价另列；已见半年一个ETF/历史到达/实际成交限制仍在。
+- 唯一正式归档已完成：本报告registry key、INDEX §1一行、原catalog2026-10-10补注及必要原条report_sha256。主仓647→648/隔离221→222是当次快照，不强制覆盖其他登记；删本新增片段并恢复catalogSHA可逐字还原原登记，其他entry/INDEX/旧正文保留。主仓报告及C自身review/progress字节读回，未复制A/B算法。共享窗口现在释放，冻结成果不因scope_released授予任意重写。
+- 验收证据：review/numeric-independent-review.json（首审6旗保留）、run-identity-budget-review.json（119通过）、registration-scope-receipt.json、archive-verification.json、final-hygiene-check.json、archive-publication-receipt.json；自己的work-progress完整历史。主仓归置退出0、隔离旧基线298继承问题及缺checker不冒称全绿，新增路径0违规；报告库两树全文/分类/结论读回通过，指定无ARCHIVE文件名导致旧UI文件名flag false已明确，不改UI/生产。
+- 实际固定外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9、设备16777238，10文件1210879B大小/指纹/设备独核。外盘目录/准确原件在报告及B delivery，原24/25本机来源异机恢复仍未证。真实4/4、旧2/2不可借、B人工8与失败保留；C账户/原实验重放/新标签/下载/拟合/扫描0。
+- 原八目标本批对照已写报告§8：新增目标2这批归档、目标5固定问题负回答、目标6这一有界真实链闭环、目标8新外盘原件验收。目标5风险相近的收益贡献仍缺；其余稳定增量、完整个股资格、共享CLI失败/旧输入异机恢复边界保持，不能称八目标全部完成。
+- 本批无剩余必做项，停止固定问题，不因负结果改窗口/比例再跑；不接运营/其他研究/中控，不创建定时器、不合main、不删除/强推。下一AI只需读正式报告、三精确成果及B补注；新问题另定范围与预算。原生Goal在此记录远端核同后作完成记账，旧blocked历史保留。
+
+<!-- lei-coordination-json:start -->
+{
+  "task_id": "leisignal-risk-review-20261009",
+  "owner": "01a1208d-49ba-7972-9fa1-b47d7d5749b7",
+  "status": "archived",
+  "stage": "archived_remote_verified_bounded_negative_result",
+  "checked_coordination_sha": "e50278bbc1e6fa41cbfee7898fd1df6ebbffb29d",
+  "checked_at": "2026-10-10T00:38:26.080690+08:00",
+  "read_task_ids": [
+    "leisignal-risk-input-20261009",
+    "leisignal-risk-run-20261009",
+    "leisignal-risk-review-20261009",
+    "research-dispatch-controller"
+  ],
+  "result_commit": "616608a1bd911179aa9bc7de14ea64a7493c74c5",
+  "core_archive_commit": "ad3661b7768371ef285f61eb9a1af237ac85bd81",
+  "scope_released": true,
+  "shared_archive_window_open": false,
+  "immutable_research_scope_retained": true,
+  "write_paths": [
+    "docs/experiments/raw/monthly-risk-comparison-2026-10-09/review/",
+    "docs/experiments/monthly-risk-comparison-2026-10-09.md",
+    "docs/experiments/registry.json#entries[docs/experiments/monthly-risk-comparison-2026-10-09.md]",
+    "docs/experiments/INDEX.md#one_monthly_risk_row",
+    "docs/experiments/research-evidence-catalog-2026-10-07.md#2026-10-10_monthly_risk_addendum",
+    "docs/experiments/registry.json#catalog_entry_report_sha256_only",
+    "docs/ops/work-progress/leisignal-risk-review-20261009.md",
+    "docs/coordination/tasks/leisignal-risk-review-20261009.md"
+  ],
+  "B_result_commit": "4283254d23371691506851816ff4d7a17228ea4a",
+  "required_B_metadata_addendum_commit": "1f8a8e5a1c456853b268bf50b8fa4a5ae06bbee0",
+  "numeric_decision": "numeric_accepted_with_required_metadata_addendum",
+  "risk_matching": {
+    "A_ALL": false,
+    "A_SMA": false
+  },
+  "actual_new_paths_by_B": 4,
+  "actual_C_strategy_runs": 0,
+  "other_research_reopened": false,
+  "goals_1_to_8_all_claimed_complete": false,
+  "remaining_within_batch_work": "none; native Goal accounting closes immediately after this own-record remote readback",
+  "new_foreign_owner_or_timer": false
+}
+<!-- lei-coordination-json:end -->
+
+---
+
 # C真实核数已完成，限定补注修复与唯一归档窗口（2026-10-10T00:20:48.249385+08:00）
 
 - checked_coordination_sha=be1701f3988ad7e82ad9209c6c79b46f6b0b1207；checked_at=2026-10-10T00:20:48.249385+08:00；已读COORDINATION及leisignal-risk-input-20261009, leisignal-risk-run-20261009, leisignal-risk-review-20261009, research-dispatch-controller, risk-shape-information, theory-workflow-system-increment。B4283254d四路径真实交付已读；6冻结源码未变、47来源身份、月末63日、181日资金/订单/费用/分红/风险与差额独立算式已核。首次5886检查保留6差异：4个期初零持仓估值字段与2个浮点末位。C-F02已明确交B仅16行元数据补注，不重跑账户、不覆盖原件；浮点末位由C独立高精度定向解释，不修改10%科学标准。
