@@ -1,5 +1,5 @@
 # 六图核重与少图讲解替换
-- task-id: douyin-six-chart-repost-20261009; owner: 01a12093-24f6-7a52-9d30-ee89f2a922e4; status: active.
+- task-id: douyin-six-chart-repost-20261009; owner: 01a12093-24f6-7a52-9d30-ee89f2a922e4; status: blocked.
 - checked_coordination_sha: 2cd35c23ef341890ac5d090246375d9bbb6dd116; checked_at: 2026-10-09T20:50:10.368424+08:00; 已读COORDINATION1.1、dual-ma-video-copy-20261009、research-dispatch-controller，六图原发布负责人 xhs运营抖音 当前idle且无六图协调记录。
 - 用户授权：检查是否重复，删除原六图帖重新发布并搭配少量讲解。原作品7694498612302105910仅有一条可见投稿，六个原JPG指纹各异；这不证明平台隐藏检测因果。
 - 唯一写者本会话；范围 data/cache/douyin-six-chart-repost-20261009/ 小图/文案/原帖证据/回执及 docs/ops/work-progress/douyin-six-chart-repost-20261009.md；不改系统、历史输入、原六图素材、共享registry/Skill。
@@ -11,3 +11,15 @@
 - 当前未删除、未上传新稿、未发布；下一步准备可检查图文与保留原证据，再到永久删除末步确认。生产/交易及其他作品修改未授权。
 
 - 接续核查 2026-10-09T20:52:35.529409+08:00: 首次登记push被并发增量拒绝，原本地3d2b0d46保留；已读上述增量及双均线最新范围，其他仅风险等任务自身记录，无本任务文件重叠。重新以准确远端base仅添加自身文件，未强推。
+
+## 单图准备通过，删除末步待用户确认 2026-10-09T21:10:25.125606+08:00
+- checked_coordination_sha: 4d8abb6d06e9f254ae0c4231f9a3ec7c92100069；checked_at: 2026-10-09T21:10:25.125606+08:00；已读COORDINATION1.1、自身、dual-ma-video-copy-20261009与research-dispatch-controller。唯一写者本会话；无共享文件重叠；双均线横版已由原owner完成，未操作六图。
+- 1张1080×1440JPG、122条原数据、实际半年轴、三句说明和200余字正文已完成；JPG170719B，SHA256 a7a1c886737d9865d3d9331a0bfece278ae320ff64c0657341993717df224aaf；本地 data/cache/douyin-six-chart-repost-20261009/，不上传私人统计或截图到Git。
+- 自动选PNG/JPG两次停0%保留失败证据，原生macOS文件选择后真实上传成功；已添加1张，封面/手机预览可见，正式话题学习记录/AI声明已设，机器预检作品未见异常（非审核成功）。
+- 原帖删除确认已打开，未按最终确定；新稿未按发布。浏览器永久删除动作时确认已向用户请求，blocked仅此等待，不把预授权代替末步确认。用户不答不删；确认后只替换一次并读回新ID/审核/图文话题。
+- 可见核重未发现二次原六图投稿；原六张指纹不同，但平台隐藏相似判断未知。手机可读性与解释缺失实证更明确；减少图数不能消除资格要求或保证推荐。另一owner21:02发横版，加上新稿图数/正文/排版/时间变化，不能单独归因重复。
+- docs/ops/work-progress/douyin-six-chart-repost-20261009.md 保存阶段证据，本阶段成果尚未提交推送；归置此前通过，当前无生产修改/账号删改/发帖。
+
+- 本阶段小进度实际提交codex/douyin-six-chart-repost-20261009@3c91f80ad27a4bbdc4af0df66e2bfa9e8e40173b；远端准确完整SHA与单文件内容已读回，缓存/账号资料未上传；归置新增文件后检查exit0。
+
+- 提交前增量checked_coordination_sha: 3c314397dcdeb97e0f2770e14b364b5461033ac1；checked_at: 2026-10-09T21:11:48.069699+08:00；已读risk-run自身权限阻塞增量，未涉及六图或本路径；其他负责人内容保留。
