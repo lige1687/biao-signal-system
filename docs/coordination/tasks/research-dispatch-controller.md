@@ -1,3 +1,11 @@
+# 两项纠错已独核；目标5仅准备可审下一合同
+
+- checked_coordination_sha=432e022fba82394cd85c07d9db8ce2b048673541；checked_at=2026-10-09T19:17:31.562836+08:00；已读research-dispatch-controller及原风险对照合同/报告，本轮仅无关文件名变化，无冲突。12账户真实独审4f6e6fd6、D1独审8b10f377接受，0判断翻转；原成果归档路径沿已占范围，待精确提交读回。
+- 原风险对照两路径已耗尽，10%标准未达。独审建议单独检验每月根据过去63共同日更新比例；两个原A参照×两费，共4额外路径。这里只准备方法与准确待批预算，0新账户/标签/扫描，不借原预算。
+- root新增唯一小文件范围：主与隔离 docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/next-risk-comparison-2026-10-09.md；写可审的输入、执行规则、验收、停止条件和额外4路径请求。不是研究结果不进registry。真实风险偏好不作模拟的虚构阻塞，生产/交易未授权。
+
+---
+
 # R1纠错实际执行及归档窗口
 
 - checked_coordination_sha=8501ba4195d42f67a59d1ffd96556e490517bd6c；checked_at=2026-10-09T19:08:03.868761+08:00；已读task-id=research-dispatch-controller与原D1/R2合同；本轮远端增量仅无关任务文件名，无范围冲突。
