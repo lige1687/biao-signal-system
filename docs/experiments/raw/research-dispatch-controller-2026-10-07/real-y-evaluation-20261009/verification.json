@@ -1,0 +1,49 @@
+{
+  "schema": "native-risk-d-mae-stage-c-verification/1",
+  "status": "implementation_and_artificial_checks_only",
+  "scope": "one fixed real-Y entry; no real Y execution or real future-price reading",
+  "source_sha256": "37e1bf791dd0b4bd77019f5c4a649ec426cfbb0a427dd5a23c7f75b7088e3040",
+  "test_sha256": "26c63564fd0db03d2f41062fae8e70a89c24ff5d342b9d21daa4cbe372edbb40",
+  "readme_sha256": "ca80063f3dcf565bf5c148a191a0c8fa87a1756912a7fcbd45835db14efcf64d",
+  "executor_contract_sha256": "2cabfc4f614921fa4cc80161e2ebabebd36c1eb74944ef20c1ba32fde59183a3",
+  "output_plan_sha256": "1f814e526bda5559299b93f8a672cf014e402e7d96fd840fa41fb5a2e938bd98",
+  "unchanged_stage_a_sha256": "5404b52f1e9ca2dc103eff37cabf51e52656d2737a8244bbb11fc2aeb63decb7",
+  "unchanged_stage_x_sha256": "1a716db72ee4ba760926fd5a7734e0deaa0cf4dd6a3d0f32543c8c0ce9e4c00b",
+  "fixed_accepted_x_sha256": "6ae79d580fa98ba81b8f071d73e9eac0e3127ea8e66275967fecb1f218aa989a",
+  "fixed_x_receipt_sha256": "41ad1a478bc9e4f92566453d87bbff7c77c55f4cdcb5a39e2bdd5a652cbedac8",
+  "fixed_x_membership_sha256": "476bb769ba1556e8fdf76d7300ae6001f5760750fbf1db9c36be0c0e14ef6418",
+  "storage": {
+    "mount": "/Volumes/win+mac通用",
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "device_checked": 16777238,
+    "test_directory_device_checked": 16777238,
+    "external_available_kib_at_final_check": 587726336,
+    "internal_available_kib_at_final_check": 21426376
+  },
+  "checks": {
+    "artificial_unit_tests": "26 passed in 0.26s",
+    "test_log": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T122325-87e142670e36/result/tests/pytest-final2.log",
+    "test_log_sha256": "251e9a2c95ee9153fa08b2da8a77c93c75d6cdbbe246980eaf42bdd0c7652c97",
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "no_grant": true,
+    "no_y_ledger": true,
+    "no_real_y_output": true,
+    "old_native_tests_or_1754_cases_rerun": false
+  },
+  "budget_used_by_executor": {
+    "new_X": 0,
+    "new_V": 0,
+    "new_Y": 0,
+    "fits": 0,
+    "real_future_price_reads": 0
+  },
+  "retained_failure": {
+    "check": "check_repo_hygiene.py",
+    "result": "failed: current branch baseline does not contain configs/newsfeed.json and docs/research/definitions.v1.json, although the checker expects both tracked",
+    "git_ls_tree_head_for_both_paths": "empty",
+    "stage_c_changes_involved": false,
+    "resolution_owner": "parent coordination and branch baseline"
+  },
+  "next_boundary": "independent review of final files; parent may then create a matching Y grant and execute the fixed entry exactly once"
+}
