@@ -1,3 +1,15 @@
+## V9 prompt-library-done
+
+- task-id: trend-trading-video；2026-10-09T16:21:53.751661+08:00；checked_coordination_sha: e97fb35008cd2ecc4f8a8c695831f9907a66a4bb；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed，scope_released=true：逐项复读两原推文的Prompt和方法，原文索引14项、按阶段改写8段；七库入口/commit/用途/许可状态、三张具体镜头卡及依赖、声音候选和七类技术路线已接入Skill。root唯一写者，本轮无新片/安装/整库下载。
+- ai_tools/codex/video-production-kit-20261009@12aef172f22467a925235f5744619755113d3909，7文件远端逐字一致，工作区干净；原项目codex/trend-history-long-v14-20261009@baf892e586d863bc24b5e96e250fea1c8213dc4b，初始5文件及后续2文件远端核验。保留nasdaq已完成的本机入口/案例，不代提交其变更。
+- 46包文件指纹/引用、两Skill结构、归置和Git差异通过；三份对应参考内容一致。交叉核对曾发现原项目旧Prompt仍写开头小样，已修为中间难点15秒并保留失败/修复记录；另旧先出图后编排顺序已改。
+- 七库均为读文档/目录/部分卡的核验，未宣称安装和效果实测。爱给主页访问失败，具体媒体和音效许可未全核；目录保留已核/待核边界。原推文全文及长Prompt未整篇复制，以原文定位和项目原创指令沉淀。
+- 已读COORDINATION、自身、中控及最新nasdaq/dual-ma更新，无继续共享编辑冲突；本人进度和prompt-library-result-receipt.json保留，下一步按用户具体视频任务调用，不自行扩片。
+
+
+---
+
 ## V9 prompt-library-start
 
 - task-id: trend-trading-video；2026-10-09T16:12:57.316375+08:00；checked_coordination_sha: 835d345b1cc4ee203204c879e021100d33ba6711；已读 COORDINATION.md、自身与 research-dispatch-controller。
