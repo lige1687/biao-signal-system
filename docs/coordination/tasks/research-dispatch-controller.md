@@ -2,7 +2,7 @@
 
 - checked_coordination_sha=95e7d278a30fbfd249e3f20c8fdb0f80e8448a1d；checked_at=2026-10-09T19:30:23.196470+08:00；已读COORDINATION及本task，相关范围无变化。共用交接与进度2文件 `codex/research-direct-20261008@a2f977455b5395f5a02de901d4b50075a615f8dd` 远端SHA及内容读回一致，归置检查通过。
 - 文件：docs/archive/handoffs-plans/research-dispatch-controller-2026-10-07/three-chat-handoff-2026-10-09.md。A输入/B实现运行/C独立核验及唯一归档职责、写入范围、依赖和原8目标继承边界均已固定。本轮仅交付prompts，三角色未创建未派发，不能据本记录认为已有人运行。
-- 原中控不再承担主动接续或后台回调；原Goal依用户休息要求转暂停，定时保持已删除。新owner各自在自己的task-id登记后接手，不共写本task。scope_released=true：本轮交接文档已交付，registry/INDEX/原catalog均未占用；新4路径仍待明确批准，未计任何新研究次数。
+- 原中控不再承担主动接续或后台回调；按用户休息要求停止本中控；实际调用暂停时工具返回本对话已无Goal，未能执行暂停，不能声称已暂停或重建Goal；定时保持已删除。新owner各自在自己的task-id登记后接手，不共写本task。scope_released=true：本轮交接文档已交付，registry/INDEX/原catalog均未占用；新4路径仍待明确批准，未计任何新研究次数。
 
 ---
 
