@@ -1,3 +1,12 @@
+# 恢复修复复验与原股票效果并行；归档范围准备
+
+- checked_coordination_sha=c179c73a8eca2ff847d71550c7b282054fe7438e；checked_at=2026-10-09T15:06:47.694229+08:00；已读COORDINATION、本任务和research-evidence-catalog/report-library-integration-20261008（completed且scope_released）。新增仅无关任务文件名，未读运营回调。原作者Sol已停写；root实核新wrapper dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f，待独审。
+- Astra original_cash_package_review已实际接续且工具确认为running，仅原独审外盘目录下repair-v2做导入前漂移拒绝与正常跨进程控制。Sol b1_saved_evidence_review复用接原PPO/P26保存效果只读核数；新agent线程限制失败保留，不称其运行。旧全套/市场研究0重跑，原预算不变。
+- root唯一归档写者：主/隔离docs/experiments/weekly-portfolio-whole-buy-recovery-2026-10-09.md、新raw/weekly-portfolio-whole-buy-recovery-2026-10-09七文件准确镜像；自身raw/whole-buy-recovery-20261009及recovered-stock-effects-20261009、状态/进度。验收通过后registry仅新增上述报告单键，INDEX仅一行；保留其他条目和字节，发布仅独立工作分支。股票旧目录报告此次尚不改，待验收后另登记旧键更新。
+- 当前不称修复完成；合成测试不是收益验证。首次登记准备因本地HEAD落后安全断言失败，未改文件/未提交；随后误推旧HEAD被正常拒绝保留，fetch检查仅无关文件名并正常ff恢复，无强推。范围推送读回后才改共享登记。不删除、不恢复定时、不监控八目标之外对话。
+
+---
+
 # 恢复外壳独审失败，原作者有界修复v2
 
 - checked_coordination_sha=6a77108c938ff6c3a873d4444843cabb3f00c9d0；checked_at=2026-10-09T14:58:50.691879+08:00；已读本任务，原作者停止写、独审结束，唯一修复写者仍Sol/medium。Astra独立金额/8身份冲突/第二单保存前后故障/完整状态修改均通过，但真实隔离副本重现先输出INDEPENDENT_DRIFTED_ADAPTER_EXECUTED再SHA拒绝；导入前核来源不合格，当前不接受。
