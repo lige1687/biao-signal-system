@@ -1,0 +1,319 @@
+{
+  "task_id": "leisignal-risk-review-20261009",
+  "B_commit": "c65971bac01b0d377a8b90c130a1d7266e4ac109",
+  "contract_sha256": "c027fca87df31cd2125709d6f2330869e8b1cd119f0292788eb2b7a1e3ec30d1",
+  "code_sha256_actual": {
+    "monthly_account.py": "9792eae48a33d5e59cf481d530891a0f91ea89e5f3e0266757edc04a7ec739ca",
+    "execution_guard.py": "a2956c8c0457dba55927f419a7057a6c5c5d9dc7705da9bb28f11b81a3f27f2e",
+    "input_adapter.py": "b604fa939f9a822cacab34a908ed3e003b4dd50b7c64ac9d928e607773719741",
+    "runner.py": "e247c0a43ed486c7746697b3678224d74370eab309154a0f9eb48df8b6419dc0",
+    "synthetic_checks.py": "ff455c00f68ea63be91ce48e0fab72583cad2b6946ad28c6c88f1824caf85880",
+    "bind_inputs.py": "87e9447d610efba82dc8ca9dfaba46a6f0f64391ca89166614c5a9c1bf9443af"
+  },
+  "reviewed_at": "2026-10-09T20:41:12.888116+08:00",
+  "scope": "targeted core diff; source/driver/protection audit; artificial checks only",
+  "checks": [
+    {
+      "name": "new_profit_contribution_and_nontrading_monthend_label",
+      "passed": true,
+      "independent_profit": "893.900",
+      "fees": "6.100",
+      "bridge": {
+        "sell_notional": "1100",
+        "buy_notional": "5000",
+        "ending_market_value": "4800",
+        "recognized_dividends": "0",
+        "fees": "6.100",
+        "sum_contributions": "893.900",
+        "end_minus_initial_wealth": "893.900",
+        "residual": "0"
+      }
+    },
+    {
+      "name": "legacy_two_path_permission",
+      "rejected": true,
+      "reason": "permission not for exact four paths"
+    },
+    {
+      "name": "not_granted",
+      "rejected": true,
+      "reason": "explicit user four-path authorization missing"
+    },
+    {
+      "name": "missing_human_provenance",
+      "rejected": true,
+      "reason": "human authorization provenance missing"
+    },
+    {
+      "name": "C_core_only",
+      "rejected": true,
+      "reason": "independent C code acceptance missing"
+    },
+    {
+      "name": "B_self_review",
+      "rejected": true,
+      "reason": "independent C code acceptance missing"
+    },
+    {
+      "name": "changed_contract",
+      "rejected": true,
+      "reason": "C contract binding mismatch"
+    },
+    {
+      "name": "changed_source",
+      "rejected": true,
+      "reason": "C A input binding mismatch"
+    },
+    {
+      "name": "changed_code",
+      "rejected": true,
+      "reason": "C code binding mismatch"
+    },
+    {
+      "name": "changed_synthetic",
+      "rejected": true,
+      "reason": "C synthetic evidence mismatch"
+    },
+    {
+      "name": "path_already_started",
+      "rejected": true,
+      "reason": "one-time batch already consumed; no rerun"
+    },
+    {
+      "name": "batch_already_started",
+      "rejected": true,
+      "reason": "one-time batch already consumed; no rerun"
+    },
+    {
+      "name": "batch_exclusive",
+      "rejected": true,
+      "reason": "O_EXCL FileExistsError"
+    },
+    {
+      "name": "path_exclusive",
+      "rejected": true,
+      "reason": "O_EXCL FileExistsError"
+    },
+    {
+      "name": "ordinary_open_outside_frozen_bounds",
+      "expected": "refuse invalid outside-limit input before account invocation, following original driver; do not silently fill",
+      "actual_fills": [
+        {
+          "date": "2026-01-05",
+          "phase": "open",
+          "order_id": "2026-01",
+          "decision_at": "2025-12-31 end_of_day",
+          "opening_wealth": "10000",
+          "target_units": "400",
+          "requested_delta": "400",
+          "cash_affordable_buy_units": "800",
+          "units_delta": "400",
+          "notional": "4800",
+          "fee": "4.800",
+          "cash_before": "10000",
+          "cash_after": "5195.200",
+          "receivable_before": "0",
+          "units_before": "0",
+          "units_after": "400",
+          "price": "12",
+          "fee_rate": "0.001",
+          "weight": "0.5"
+        }
+      ],
+      "original_reference": {
+        "date": "2026-01-05",
+        "restriction": null,
+        "lower_limit": "9",
+        "upper_limit": "11"
+      },
+      "adapter_transformation": "only non-null restriction retained; bounds discarded",
+      "passed": false
+    }
+  ],
+  "synthetic_marker_directory": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-review-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/review/synthetic-one-time-20261009T204112",
+  "actual_historical_paths": 0,
+  "decision": "changes_required",
+  "blocking_findings": [
+    {
+      "id": "C-F01",
+      "file": "input_adapter.py",
+      "line": 86,
+      "reason": "Frozen lower_limit/upper_limit are discarded; outside-limit nominal open can execute.",
+      "fix": "Validate opening against exact saved ordinary lower/upper limits before any path invocation; outside -> reject whole source input as original driver.py:67-70/155, boundary touch -> retain original blocked handling; special unknown/halt remains blocked. No high/low/close certification or reconstructed ex reference.",
+      "actual_frozen_H1_effect": "No outside-limit ordinary opening seen in C readback; finding is missing preserved source/admissibility check, not observed result corruption."
+    }
+  ],
+  "binding_and_provenance_checks": [
+    {
+      "id": "monthly_account.py",
+      "bytes": 19926,
+      "pass_check": true
+    },
+    {
+      "id": "execution_guard.py",
+      "bytes": 5160,
+      "pass_check": true
+    },
+    {
+      "id": "input_adapter.py",
+      "bytes": 6697,
+      "pass_check": true
+    },
+    {
+      "id": "runner.py",
+      "bytes": 12718,
+      "pass_check": true
+    },
+    {
+      "id": "synthetic_checks.py",
+      "bytes": 18294,
+      "pass_check": true
+    },
+    {
+      "id": "bind_inputs.py",
+      "bytes": 6473,
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/current-standards.json",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/experiment-backtest-principles.md",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/ai-execution-contract.md",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/research-question-method-standard.md",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definition-standard.md",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/strategy-documents.v1.json",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/rules.v1.yaml",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.claude/skills/macd-reading/SKILL.md",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/plan-sector-trend-page.md",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/codex-storage-management.md",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/research-output-storage.md",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/storage-policy.v1.json",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/research-output-policy.v1.json",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/consumption-binding.json",
+      "pass_check": true
+    },
+    {
+      "path": "/Users/yongbiaoli/.codex/worktrees/leisignal-risk-run-20261009/lei-signal-lab/docs/experiments/raw/monthly-risk-comparison-2026-10-09/implementation/synthetic-evidence-20261009T202751921089.json",
+      "pass_check": true
+    },
+    {
+      "id": "A_entire_source_closure",
+      "pass_check": true
+    },
+    {
+      "id": "synthetic-evidence-20261009T201534660775.json",
+      "pass_check": true
+    },
+    {
+      "id": "synthetic-evidence-20261009T201620014036.json",
+      "pass_check": true
+    },
+    {
+      "id": "synthetic-evidence-20261009T202130212317.json",
+      "pass_check": true
+    },
+    {
+      "id": "synthetic-evidence-20261009T202504748226.json",
+      "pass_check": true
+    },
+    {
+      "id": "synthetic-evidence-20261009T202751921089.json",
+      "pass_check": true
+    },
+    {
+      "id": "targeted-calendar-cutoff-evidence.json",
+      "pass_check": true
+    },
+    {
+      "id": "actual_artificial_external_readback",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009-synthetic-io/leisignal-risk-run-20261009-synthetic-io-20261009T203036-6e5ca5e9d4be/result/ARTIFICIAL-only.json",
+      "bytes": 63,
+      "actual_device": 16777238,
+      "pass_check": true
+    },
+    {
+      "id": "real_saved_plan_unused",
+      "plan": {
+        "schema_version": 1,
+        "task_id": "leisignal-risk-run-20261009",
+        "run_id": "leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0",
+        "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0",
+        "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/leisignal-risk-run-20261009/leisignal-risk-run-20261009-20261009T202505-6832b1bf3ba0/result",
+        "external_mount": "/Volumes/win+mac通用",
+        "external_device": 16777238,
+        "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+        "estimated_bytes": 16777216,
+        "internal_metadata_bytes": 1048576,
+        "external_reserve_bytes": 10737418240,
+        "internal_reserve_bytes": 5368709120,
+        "execution_authorized": false,
+        "quota_enforced": false
+      },
+      "pass_check": true
+    }
+  ],
+  "synthetic_ledger_correction": {
+    "resolved": true,
+    "cumulative": 6,
+    "full": 5,
+    "targeted": 1,
+    "old_two_failure_links_preserved": true
+  },
+  "old_fee_crosscheck": {
+    "A_ALL-base": "846.929600",
+    "A_ALL-stress": "1680.680400",
+    "A_SMA-base": "426.267600",
+    "A_SMA-stress": "846.868800",
+    "method": "independent sum of H1 original fills = cumulative daily fee end minus 2025-12-31 cumulative fee"
+  }
+}
