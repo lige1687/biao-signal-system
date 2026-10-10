@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "completed",
-  "checked_coordination_sha": "8857b12a44aed05da833073a6a674decbc9cdfec",
-  "checked_at": "2026-10-11T01:29:02.478844+08:00",
+  "checked_coordination_sha": "4b1c27b1c54777ec6aa980e807f2ab5f9c224b50",
+  "checked_at": "2026-10-11T01:30:19.461195+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -100,10 +100,10 @@
     "D-evidence",
     "D-tracking"
   ],
-  "latest_result_commit": "3bd31105c7fb94e96fb29649ccbd9334d2d26ed9",
+  "latest_result_commit": "c58558fd20dcff4bb4000f624e57194a8da36321",
   "scope_amendment": "Exact new core contract bound accepted engine/runner/input/preflight/18source+extra importedpolicy dependency. New unique externalcore-plan because artificialresult directory alreadyexists. OnepairedP0/P1 initial2paths, mechanicalconditionalrepair max4total, variants/source0. Strict qualification remainsfalse. New isolatedAccount not olddatedledger source reuse.",
-  "updated_at": "2026-10-11T01:29:02.478844+08:00",
-  "conflict_decision": "已读8857b12a44aed05da833073a6a674decbc9cdfec完整原相关12任务及新增trend-perspective最新范围；自9daa仅现金视频Skill/独立外盘影片和趋势视频独立样例增量，不写研究报告/registry/INDEX/catalog/原目标API，完全不重叠。root唯一共享研究写者，所有本任务子代理完成释放；主HEAD/index保持，未写他人任务/main或扩大删除范围。",
+  "updated_at": "2026-10-11T01:30:19.461195+08:00",
+  "conflict_decision": "从已完整人工读过8857相关13task及rules至本任务完成4b1c27b1，只有本任务写入；后续若只有cash-position视频增量由同规则读取并保留其独立范围。研究9报告/原5目标notes范围不与视频、Skill或他人工作重叠；仅更新自己的协调task成果引用，其他记录/主HEAD/index不动。",
   "current_work": "本批有界工作completed并释放：用户定义、起步3新例、10案整链、同条件核心一对、root全钱/日账及Astra关键独核、9份报告/原5目标note、19输入准确取得及2最小新副本/新结果8文件恢复、准确成果推送和实际读回完成，无待跑或待修。整个原八目标不标完成。",
   "paused_questions": [
     "稳定新增收益、未来适用、真实历史成交/到账/到达和官方日历资格仍未证；只有具体新问题或新证据才接续，旧月度4/4固定2/2/A03来源20与D封存，不重置或追正。",
@@ -230,3 +230,7 @@ Astra独审bb6c7de8337cf83ce1b6c7ae9a5aa658b782bc7258344585f9ab97abd913be1a接�
 ## 2026-10-11T01:29:02.478844+08:00 完整有界资金比较、原目标追加与最小恢复全部读回，释放本批范围
 
 最终成果3bd31105c7fb94e96fb29649ccbd9334d2d26ed9同原codex分支，348自有文件远端逐字节相同，主HEAD/index保持；此前科学提交0eb29be68b1f52bc6ffa7842291a1436327cc385由5原目标note引用，K-risk22/K-data19/目标8v18/D-evidence9/D-tracking10仅history/updated/version变化实际读回。每账户600次/15万元，P1少2827.8342、波动比0.997697，581/600回简单方法，固定日线近似阴性；最大跌幅2015—2019早于唯一2025卖出。两个当前报告API全文SHA/分类/mixed/pendingfalse相符。科学实际1对2路径0修复/0变体/0来源；人工3启动10distinct/20case执行及原2启动计划的有因超出留，所有失败和旧预算原文保持。19源准确本机，成果核查b221仅8/19、6JSON固定coord9daa、3CSV旧已验副本，余2准确原件每套150015B新副本/PID95276恢复三路径相同；8新产物5960032B/PID91586已验，不重复旧25/42/20/180/9/源8，不声称异机坏盘恢复。两独审MD末尾空行首次diff失败原字节/manifest留，修格式不弱化检查不重跑。01:26内盘13747724288B、固定外盘567893557248B，UUID/资源身份合格、大结果日志恢复外盘，小源码报告索引本机，无本轮新增迁移删除。无新chat/心跳/定时器/主动通知/无限Goal/交易/部署，当前本有界工作结案并释放，不说有人后台继续。当前文档历史由最新JSON/段落取代，原8方向的未证条件仍按原系统条目和具体问题推进。
+
+## 2026-10-11T01:30:19.461195+08:00 最终回执准确补交完成，仅更新同任务成果引用
+
+最终成果c58558fd20dcff4bb4000f624e57194a8da36321同原codex分支已普通推并实际352自有文件逐字节读回，主HEAD/index保持；含完整报告/19输入位置/8产物及2原件恢复、5原API note实际读回、协调completed与范围释放回执、最终小进度。只是实际元数据补交，无新科学路径、参数、来源、原目标API再次写入或删除迁移。此前科学0eb29be与阶段3bd311均保留；本任务status completed/scope_released true保持，原八目标整个条目和未证边界保持；最后协调引用由远端唯一task和Git路径历史定位，不为提交自身SHA无限循环。
