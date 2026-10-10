@@ -63,3 +63,20 @@ checked_coordination_sha=e39851c21c8cd0f48fd9445999da0e2dafab3a35；checked_at=2
 Skill本地只加一条路由及本轮新增references/decision-motion.md；原入口全部内容保留，附真实参考时间位置、作品/模型归因边界、条件/输入/动作联动、历史与假设区分及检查方法。旧入口含其他任务未跟踪成果，不整体冒领提交；本轮新参考随本分支，入口补丁保存外盘制作记录。两小索引加新参考为准确3文件提交范围。Skill结构/窄差异、前置/时间表/公开文字/归置通过。
 
 checked_coordination_sha=3641020dbb984de112de7486b2baf5e98c3a03de；checked_at=2026-10-10T01:11:39.506180+08:00；已读自身与COORDINATION、trend/nasdaq/personal-quant共享Skill旧维护已完成释放，最新trend-perspective参考对照仅其独立v08、research-dispatch-controller只任务读回；无重叠。固定外盘最终身份通过、余592496689152字节；新普通文件/缓存/参考外盘，依赖不安装。root唯一写本轮范围，无他人系统/研究/发布修改。当前kline_A_revision_awaiting_user；v04原认可保留，本轮A仍待观感，不制作全片。
+
+
+## Opus开工包准备交付 2026-10-10T12:34:41.579083+08:00
+
+用户调用opus-video-prep“看看准备一下哈”。沿用主线和已确认内容，Codex只备料与机械核查；本轮不写新文稿/分镜/主题视觉，不调用Opus/制作全片/发布。原v04批准、v06待批保持。
+
+位置：/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/投资心态/20261009-cash-position/v07-opus-prep-20261010。入口BRIEF、CONTENT_OUTLINE、READY、START_OPUS；原用户内容原样附上，旧Codex稿标非完整定稿。123交付文件43924584B逐项指纹读回；ZIP36428116B，SHA9bf18124762a83274cb61442a1f8dcbf6ef25c87da5445b12e6d8007039675b9，124成员逐件核同，无node_modules/cache/说明文件。媒体/依赖/迁移副本只外盘。
+
+已核：真实16OHLC原值、CSV与Decimal算术；S01/S02/S03原始网页；同SHA125.466秒leyan原声每秒能量/候选节拍/段落、整合响度-9.6LUFS、真峰+1.0dBTP。拍点是候选非听审。两条Pexels实拍与旧手机照片、作者/许可/真实规格及每秒联系表已备，未绑定镜头，正常速度可用区间待Opus审阅。参考样片与已认可v04/待认可v06各自标状态，不复用参考音画。
+
+通用工程：Remotion4.0.534/React19.2.3/TS5.9.3，356项锁版本核同，Node22.22.1和既有Chrome154；严格类型检查通过，中文/英文/等宽字体实际图可读、60帧中性渲染和完整解码通过。另一个外盘父目录实体复制重建，资源/字体像素一致、typecheck和短渲染通过；不是跨OS或完整片重建。事实/SRT/封面/联系表脚本实际运行。
+
+总包partial但可以文稿/视觉开工：旧原始抓取时间未恢复，不冒称复制时间是取得时间；音乐/实拍正常速度听看、公开许可/平台规格待确认。失败记录保留：最初unused imports、ffprobe不在PATH、动态库路径缺失均定位修复，重核受影响项通过。无新安装/升级/付费/删除。
+
+checked_coordination_sha=5238c8a60c4c54c3ecaf017c0829fd466a9cc0b0；checked_at=2026-10-10T12:34:41.579083+08:00；已读自身/COORDINATION1.1、trend V9 opus-prep-done及其他影片/中控；最新trend-perspective仅自身独立Opus准备，路径无重叠；root唯一写者。预计逻辑普通文件<2GiB，依赖副本/迁移各实体外盘；exFAT实际分配可能明显大于逻辑字节，未删除以回收。固定盘12:33身份通过，余569562759168B级；本轮归置exit0。
+
+下一步：用户把START_OPUS交给Opus，从本包内容大纲与通用工程创作；正常听看与缺口如实处理，先样例确认再扩片。本轮开工准备完成，完整视频未完成。
