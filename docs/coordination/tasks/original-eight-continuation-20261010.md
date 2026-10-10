@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "045034d6289ecdee3d79f125125b786f4b5cda8e",
-  "checked_at": "2026-10-11T01:37:34.204603+08:00",
+  "checked_coordination_sha": "77e792419dc80c9b52c6f515de1c3533d5f0b7c6",
+  "checked_at": "2026-10-11T01:48:42.545494+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -60,7 +60,9 @@
     "docs/experiments/weekly-portfolio-zero-sale-cash-2026-10-11.md",
     "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/startup-approved-20261011/",
     "docs/experiments/raw/weekly-two-etf-complete-account-2026-10-11/",
-    "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md"
+    "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md",
+    "docs/experiments/original-eight-open-work-review-2026-10-11.md",
+    "docs/okr/RESEARCH_TODO.md"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -92,20 +94,21 @@
     "weekly-two-etf-complete-account-20261011",
     "original-eight-open-work-resume-20261011"
   ],
-  "shared_write_owner": "root only nine own dated report registrations/INDEX lines/catalog prefix and five original goal evidence notes; no unrelated owner or task modified",
+  "shared_write_owner": "root only ten own dated report registrations/INDEX lines/catalog prefix/current RESEARCH_TODO supplement and original goal bounded evidence; K-data original audit criteria only may advance to review. No unrelated owner, criterion, authorization or task modified",
   "goal_ids": [
     "okr-ff1e0a86fbac",
     "K-data-boundary",
     "K-risk-attribution",
     "okr-57eb3f28e526",
+    "okr-4f4157e2957e",
     "D-evidence",
     "D-tracking"
   ],
   "latest_result_commit": "c58558fd20dcff4bb4000f624e57194a8da36321",
-  "scope_amendment": "用户再次明确持续剩下的八目标任务并允许子Agent并行；本轮先用实际系统8原条目及最新协调映射到未完成验收，只读原相关证据，不重跑封存研究。后续必要实际执行须另冻独立问题/输入/累计预算，不默认无限续跑或把八目标全部派给一个AI。",
-  "updated_at": "2026-10-11T01:37:34.204603+08:00",
-  "conflict_decision": "实际fetch并读045034d6289ecdee3d79f125125b786f4b5cda8e COORDINATION1.1、原本任务、中控、technical/risk-shape/theory-workflow/classic/external/frozen-recovery现状态与原API。其他owner不接管，原研究证据只读；三子Agent独占本控制raw下三个新readiness文件，root唯一共享研究登记及原条目写者，无生产模块/视频/其他任务改动。",
-  "current_work": "根负责人核八目标原验收与实际API/新原结果；3子Agent分别因子与资金剩余必要问题、资料与恢复可执行缺口、原生工具与外部方法剩余具体入口，仅独立新小readiness记录，根统一接纳并衔接必要执行。",
+  "scope_amendment": "继续原八目标用户授权；根新增一个有界剩余工作复核报告及原RESEARCH_TODO当前补注、10份本任务报告登记/索引。共享API仅原条目证据/下一步，K-data在完整联合审计证据实际通过时更新原三标准、启动/提交review，原owner/目的/标准/授权保持，不接受或改其他业务范围。",
+  "updated_at": "2026-10-11T01:48:42.545494+08:00",
+  "conflict_decision": "已实际fetch/read69265a5d8779d7aaad00a6148ca8e065df408c8e，最新仅trend-perspective-video15秒样片交付差异，独立媒体范围无重叠。其余13原已读任务未变。frozen-input原RESEARCH_TODO范围已释放，根只追加自己当前补注，历史中控/原恢复文字不覆盖；报告登记/catalog只自有项。",
+  "current_work": "两路只读审计已交付，Astra因子/资金标准审阅即将交付。根串行对原K-data三项审计完成标准绑定原首轮/06/07/当前资格与恢复证据，完整列分钟日线、复权/成员/产品/跨市场与四条件限制；准确原条目提交审计待验收。统一8目标导航只标实际状态，不新建目标或重跑。",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -236,3 +239,7 @@ Astra独审bb6c7de8337cf83ce1b6c7ae9a5aa658b782bc7258344585f9ab97abd913be1a接�
 ## 2026-10-11T01:37:34.204603+08:00 按用户持续八目标要求恢复，三路有界并行核剩余工作
 
 用户原话“持续推进剩下的任务啊，不是有8个目标吗？”和“能并行做的可以派子Agent去并行做哈，主要是一个效率问题。”本轮已有授权内恢复稳定task原分支，先核未完成里程碑与已完成证据差额，不反复确认。actualgoal8条语义快照保存在本控制raw/eight-goal-resume-20261011/goal-snapshot.json，完整旧history仍API权威，避免复制巨大递归历史。三路各0市场/0新公共来源/0生产/0删除，保留月度4/4固定2/2A03和所有源累计；具体必要剩余执行另冻结合同继续，不只列计划退出。新小记录本机，必要大结果固定盘预检，异机未验不阻塞本机。准备时1MiB守卫失败与依赖phase文件缺失均保存，无API或coord写入；下一操作只在本次准备成功后执行。
+
+## 2026-10-11T01:48:42.545494+08:00 三路核查接纳，串行交付原数据边界审计及八目标实际导航
+
+两Sol只读已交付，各只写单一新JSON，0源/0测试/0拟合/0市场；理论剩13件本机逐一与发布manifestSHA同，跨设备传播许可未解不能误当本机不可用。Astra补充判定K-data三项是审计完成标准而非补齐所有历史资料；根用原首轮/06/07+当前原资料与ETF假设联合审计，不能单用DATA_USES把整个原目标勾完。K-risk相近风险权重例与完整止损/退出增量分开，0.997697不得自动标原全部标准完成。后续只有真实独立问题/合格输入/原额度明确才能跑，不为了持续而重启封存；本轮必要文档/实际API验收与导航连续执行。
