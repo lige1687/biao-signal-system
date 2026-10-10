@@ -1,3 +1,17 @@
+# 本机25来源恢复已交付；腾空间的准确退役动作待人类确认
+
+- task-id frozen-input-recovery-20261010；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status blocked / awaiting_exact_checkout_retirement_approval；updated_at 2026-10-10T14:57:18.054928+08:00；checked_coordination_sha 0cec2b6a91c7ca26db40cbed91d4e323f5a2fd07；checked_at 2026-10-10T14:57:18.054928+08:00；已读及冲突核对：[{"task_id": "frozen-input-recovery-20261010", "sha256": "85797ec7d28a73a2e43dd4163f1c06a69b1b9bf4949cc8f99901f15fc28889f5"}, {"task_id": "research-dispatch-controller", "sha256": "4bf6fccba42fbd996aeb8e63031819b8fa56fe0afed20c9d9cb1851cce5e6b3c"}, {"task_id": "mac-local-storage-cleanup", "sha256": "28d19a10912c52208ad94cfd252cec425693fb32a2ee59ab445b3e2b590701d6"}, {"task_id": "daily-trading-system-audit", "sha256": "ed4ac107a9019e39fd5ade71a09feffb88e8ea67a8b42981763fbd38154d14e1"}, {"task_id": "cash-position-video-20261009", "sha256": "95bec466e4234b6adb43ed45fd522a0156f7eba947696e394e198f3430d048f4"}]。新增视频Skill工作已交付释放，范围不同；root仅维护本任务/两原API，未覆盖他人。
+- 当前完成部分：25主路径完整、23已核外盘副本+2准确远端Git版本实际重建外盘25来源5,718,377字节；25/25二次读回及Sol独核通过、14JSON/7CSV实读、原件保持，恢复清单27,327字节SHA2e67940c2d01b91442be0ef7d7dae945ed8db41d1e398abdc114fab369521fa2。当前本机恢复完成，不要求用户换电脑，不将另一设备作为当前执行前提；原异机验收false保留、全Goal不标完成。
+- 最新成果codex/frozen-input-recovery-20261010@6efb1b34c5989b430f7997ec027c34a97612e37d，包含实际恢复/独核/磁盘盘点/最新容量/准确工作树退役方案/API回执/阶段进度。普通推送完整SHA、准确新增文件和原目录前缀均读回，主branch/HEAD/index不动，不合main/master。35个主要成果小文件早一版446,570字节；新5文件准确补注已另推并读回，Git不含25大文件。
+- 磁盘管理实况：14:52内盘15,947,931,648字节（14.85GiB），低于15GiB建议余量；外盘569,446,236,160字节且固定UUID合格。本次恢复和普通临时文件全部外盘，本机小回执约0.13MB，当前任务5GiB最低条件满足；全盘近0.88GB下降限定检查仍不能归因，不删活动SQLite或大Git包/环境/会话。
+- 准确可操作腾空间方案已准备：仅/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination，du1,967,536KiB（约1.88GiB），21895跟踪路径；tracked/untracked/ignored全空，HEAD23dabe49f62b9a759d11bb87281d82902cccb61c已在现场远端coordination历史、无独有提交，无lock/prunable，抽查无打开文件/相关进程。该旧协调checkout仍登记且原负责人曾明确保留工作树；需要人类对这一个准确目录作退役决定。方案coordination-worktree-retirement-plan.json及scope完整可重建指纹已发布，不临时扩清其他路径。
+- 已在本聊天请求“批准这一个目录退役并移除/保留继续外盘”的明确答复。用户AGENTS要求删除数据之前先确认，尚未收到则不执行移除；原副本/本机恢复授权不重复问。收到后先重新核最新协调/准确HEAD/status/占用，新增准确移除范围登记，正常git worktree remove不force，仅这一目录；主仓和远端提交保留，可按原HEAD重建，实际df前后读回再说腾空间，不把du当释放量。
+- 两原API实际：恢复okr-57eb3f28e526 v9→11准当前本机准确恢复scope/start、v11→13追加成功证据及next_action；四标准不改/异机false/in_progress保持。原磁盘okr-1a9c771b2a06 v6→7→8仅note，owner/paused/授权/标准/旧保护包待审内容保留。没有同题新目标/自动化/主控外任务代改。
+- 失败与保护保留：gh不存在的准备失败在恢复文件写前停止，读空现场复用同外盘目录用准确HTTP版本完成；共享协调新增视频任务触发固定SHA保护写前退出，读新范围无冲突后换新基线，未覆盖/重复API写。本机还原不伪装异机、25不伪装47/完整环境；研究预算/原负结果不动。
+- 当前未执行：工作树移除0、腾空间0、异机0、新市场/账户/调参/付费/生产/新chat/定时器0。当前有依据的阻塞仅准确退休/删除许可，不因恢复/磁盘管理自动获得所有旧目录清理权。无后台/自动继续，当前共享写入已释放，未来批准后沿本task-id核实际状态再执行。
+
+---
+
 # 本机恢复通过；原恢复与磁盘条目的准确同步窗口
 
 - task-id frozen-input-recovery-20261010；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；checked_coordination_sha 7522ea4c6e908c94d02c0e3e6b5819cede834e32；checked_at 2026-10-10T14:50:14.209428+08:00。已重读自身/原中控/mac/daily范围，新增cash-position-video的motion-skill范围为独立影片/Skill/外盘目录，互不重叠。先前固定SHA保护在写前停止，核实际新记录后使用新基线，未覆盖/重复写。
@@ -64,15 +78,16 @@
 {
   "task_id": "frozen-input-recovery-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "stage": "local_restore_from_backups_and_disk_management_audit",
-  "checked_coordination_sha": "06920552ceef4b7629cb43b445b898f33bc5b323",
-  "checked_at": "2026-10-10T14:38:17.611880+08:00",
+  "status": "blocked",
+  "stage": "local_restore_delivered_awaiting_exact_checkout_retirement_approval",
+  "checked_coordination_sha": "0cec2b6a91c7ca26db40cbed91d4e323f5a2fd07",
+  "checked_at": "2026-10-10T14:57:18.054928+08:00",
   "read_task_ids": [
     "frozen-input-recovery-20261010",
     "research-dispatch-controller",
     "mac-local-storage-cleanup",
-    "daily-trading-system-audit"
+    "daily-trading-system-audit",
+    "cash-position-video-20261009"
   ],
   "work_branch": "codex/frozen-input-recovery-20261010",
   "base_commit": "6b06a04b46bdd35cc62777fd60d135d457291ec3",
@@ -80,13 +95,17 @@
     "docs/experiments/raw/frozen-input-recovery-2026-10-10/",
     "docs/ops/work-progress/frozen-input-recovery-20261010.md"
   ],
-  "scope_released": false,
-  "latest_result_commit": "a56da8698f78a02a39d9130cfc8cb9b278dc4b01",
+  "scope_released": true,
+  "latest_result_commit": "6efb1b34c5989b430f7997ec027c34a97612e37d",
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T143725-a9a1b039127e"
   ],
-  "blocker": null,
-  "other_machine_recovery_verified": false
+  "blocker": "Human confirmation to retire/remove exactly .codex/worktrees/lei-coordination not received; local25-source recovery is complete, other-machine testing is not a blocker for current local recovery",
+  "other_machine_recovery_verified": false,
+  "proposed_retirement_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination"
+  ],
+  "deletion_executed": false
 }
 <!-- lei-coordination-json:end -->
 
