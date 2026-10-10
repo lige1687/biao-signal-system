@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "44b33259cf4f9062990dc764e3f92e74abbadc22",
-  "checked_at": "2026-10-10T19:13:21.657505+08:00",
+  "checked_coordination_sha": "52169ef74f48739d14da65658ffdb27da13909b1",
+  "checked_at": "2026-10-10T19:14:32.456616+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -52,7 +52,9 @@
     "docs/experiments/raw/two-etf-2015-calendar-source-2026-10-10/",
     "docs/experiments/two-etf-2015-calendar-source-2026-10-10.md",
     "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/",
-    "docs/experiments/szse-remaining-calendar-2016-2019-2026-10-10.md"
+    "docs/experiments/szse-remaining-calendar-2016-2019-2026-10-10.md",
+    "docs/experiments/raw/szse-jan2017-missing-date-source-2026-10-10/",
+    "docs/experiments/szse-jan2017-missing-date-source-2026-10-10.md"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -61,7 +63,8 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-full-actions-20261010/etf-pair-full-actions-20261010-20261010T182754-75a8d7ac33c6",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/result/recovery-v1/"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/result/recovery-v1/",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-jan2017-missing-date-source-20261010/szse-jan2017-missing-date-source-20261010-20261010T191337-32051338898d"
   ],
   "scope_released": false,
   "question_ids": [
@@ -72,7 +75,8 @@
     "etf-pair-full-actions-20261010",
     "two-etf-2015-exchange-calendar-source-20261010",
     "szse-remaining-calendar-201601-201908-20261010",
-    "reused-and-remaining-calendar-recovery-20261010"
+    "reused-and-remaining-calendar-recovery-20261010",
+    "szse-jan2017-missing-date-source-20261010"
   ],
   "shared_write_owner": "root only own D/cross-week/ETF-H1/full-action report registrations and dated catalog note; March original reused",
   "goal_ids": [
@@ -81,10 +85,10 @@
     "K-risk-attribution"
   ],
   "latest_result_commit": "52fa584722b850a54b420e5d2dbbc48a1d8b0d93",
-  "scope_amendment": "New independent earliest missing year2015 official source question, planned dates/day flags only; fixed entire account candidate unchanged, no old budget borrowing or study reset.",
-  "updated_at": "2026-10-10T19:13:21.657505+08:00",
-  "conflict_decision": "Fresh related records read; only other cash-position-video stage changed, its archived video/media paths disjoint. Astra owns only44 independent-review.json; recovery Sol owns rootraw calendar-recovery subrecords/script and exclusive recovery-v1 external subtree. Root only shared writer. Remaining source Sol read-only Jan1 local readiness, no public actions until new scope registered.",
-  "current_work": "44 monthly source actions finished;43 complete months1308dates876scheduled,2017-01 missingJan1 and30observed notqualified. Zero-network independent review and necessary exact source backups/backup-only process restoration executing. Jan1 nextsource local readiness only. 2015 limited source answer archived52fa...,contract excess4>2 remainsnotpassed.",
+  "scope_amendment": "New genuinely observed one-date source gap after44month original source inspection. Exact SZSE2017Jan1 planned closure official notice only, max4publicactions/two semanticlocators/two exactsource fetch+redirect+open; originalmonthlyunknownandfailedmonth untouched, no oldbudgetborrow.",
+  "updated_at": "2026-10-10T19:14:32.456616+08:00",
+  "conflict_decision": "Allrelated coordination records freshly read. Jan1 newraw/report and exclusive fixedexternalrun disjoint from Astra44independent-review and Solrecovery-v1/sourcefiles. Root onlysharedwriter; Solsource executor ownJan1 ledger/manifest/report only. No oldsources/strategy changes.",
+  "current_work": "44sources independently reviewed43complete1308dates876opens; full44incomplete Jan1 gap. Recovery Sol copies/restores necessary exact reused+new originals. Source Sol can execute new one-date planned closure question after frozenexactcontract, preserving field types and alloldfailures.",
   "paused_questions": [
     {
       "id": "etf-pair-full-actions-20261010",
@@ -150,3 +154,7 @@
 ## 2026-10-10T19:13:21.657505+08:00 44月来源执行完成，独核与必要恢复副本接续
 
 44/48 HTTP同月一次，保留13次暂停和内容缺日后原账本续读31独立月份，不补零、不重试Jan2017、不放宽完整月标准。43月字段待独核，44月完整仍未证。2015来源及20文件恢复已经独核并归档52fa584722b850a54b420e5d2dbbc48a1d8b0d93；23/26及同题4>2执行失败保留。目标8按既有存储授权补精确两旧名义CSV、82旧月份原响应、44新月份原响应与必要固定绑定/响应头的恢复缺口；原旧merged已有准确外盘恢复件直接复用。新副本/新进程仅读备份恢复走当前固定外盘32MiB运行下独立recovery-v1，不覆盖不挪原件，不宣称异机/坏盘恢复。预算0联网0账户0新价0删除；精确合同reused-and-remaining-calendar-recovery-contract.json。原5103002017年报18/18额外+2与P1不足整百新钱去向两个决定继续待回复，其他工作并行。
+
+## 2026-10-10T19:14:32.456616+08:00 准确缺日的独立最小官方来源问题开工登记
+
+先只读复查本地相关原件没有2017元旦/年度通知或覆盖Jan1的当时周末规则。Astra独核44body及1339候选通过限定来源事实，执行44/48合规，整月2017-01仍不合格。新问题只核深交所官方公告是否规定2017-01-01计划休市；预计最多4公共动作，定位同一公告总2次，不因查询换名重置；发现原件后最多2次取正文/打开/重定向合计。原44月合同禁其他取源保持，旧月原响应不改，计划依据不填jybz、不变实际状态。新外盘16MiB、小记录512KiB，先设备容量预检；原2015违规、年报18/18及P1未定义决定均保留。问题设计jan2017-source-question-design.json，输入local-readiness与44独核SHA准确绑定。
