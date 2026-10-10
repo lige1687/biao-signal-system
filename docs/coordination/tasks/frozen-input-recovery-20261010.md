@@ -1,3 +1,17 @@
+# 本轮25来源本机恢复和已批准三份协调副本清理已交付
+
+- task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status completed（本轮有界恢复/清理）；scope_released=true；updated_at 2026-10-10T17:35:13.322201+08:00；checked_coordination_sha 989cc24f151dfa223b26df915894c329e1c03fd1；checked_at 2026-10-10T17:35:13.322201+08:00。原规则与当前相关6task已读：[{"task_id": "frozen-input-recovery-20261010", "sha256": "2f6c53b2f62ff1277dfbc92d3fd3db9806dea26d9585355d5cbe62d979d4f1ad"}, {"task_id": "research-dispatch-controller", "sha256": "4bf6fccba42fbd996aeb8e63031819b8fa56fe0afed20c9d9cb1851cce5e6b3c"}, {"task_id": "mac-local-storage-cleanup", "sha256": "28d19a10912c52208ad94cfd252cec425693fb32a2ee59ab445b3e2b590701d6"}, {"task_id": "daily-trading-system-audit", "sha256": "ed4ac107a9019e39fd5ade71a09feffb88e8ea67a8b42981763fbd38154d14e1"}, {"task_id": "theory-workflow-system-increment", "sha256": "e68cdd8607191f220091c7c04541c740fc7a6dcfa38fcf76cf34c20bb3a43e2f"}, {"task_id": "risk-shape-information", "sha256": "a543163bd6ba3037c2bed05706ee38a4360e71368158cee02084a17e49f6663d"}]。本轮前后新tip没有其他任务变化，原owner与范围不改；root唯一实际删除/记录/API写者，两Sol只读独核。
+- 最终小成果codex/frozen-input-recovery-20261010@12d718a40a3c3510c0448ea7eea4e6f5bc3287bf，12条实际执行/独核/容量/授权小文件主交付61ecae9a409e71e7435bc4661b0b7799e4ce1694，4条API/发布回执与当前说明后继均普通推送并完整commit及逐文件字节读回。归置exit0，准确diffcheck通过；主HEAD/branch/index未动，不合main/master。入口docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md和本任务work-progress。
+- 人类“确认移除哈，这方面你不需要跟我确认了，你直接开整就完事了”加“继续哈”已实际兑现：正常Git移除 /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination, /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/theory-ai-principles-coordination, /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/stock-gap-coordination-20261008 及各自准确元数据，3/3精确路径/注册/元数据不存在、无force，原3commit/tree由远端coordination历史可重建。其他worktree注册项保持；risk-shape-coordination当前映射不够明确继续保留，不借此清理独有资料/原冻结路径/活动DB/环境/会话/系统快照。后续符合资格同类协调副本清理沿用授权，不反复索问；必须先核可重建、已退役、无独有内容和当前使用。
+- 名义du合计6,042,841,088B不当释放量。第一执行窗口free净-3,465,216B、后两份合并窗口净-2,306,048B，未测得明确净容量增加；现场4份移除前APFS本地快照可能保留旧块，物理独占/共享分配/同时系统写入未量化，不改备份设置或删除快照追数字。17:30:11+08 storage实测内盘19,732,561,920B约18.38GiB、外盘569,385,418,752B、固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9合格，当前空间满足本任务与15GiB建议余量。真实回执worktree-retirement-summary.json和两execution，容量推断限度及Apple来源已存。
+- 之前25准确来源由23外盘副本+2准确远端Git版本实际重建到全新外盘目录5,718,377B、25/25二次读回及Sol独核，14JSON/7CSV实读；本轮原25metadata大小/inode/mtime25/25无变，无重复全量哈希或市场计算。恢复清单SHA2e67940c2d01b91442be0ef7d7dae945ed8db41d1e398abdc114fab369521fa2保持，原件/备份/恢复大文件不进Git。当前本机恢复完成，不要求换电脑；原异机验收false和整个恢复Goal in_progress保持，不冒充全部目标达成。
+- 系统原磁盘okr-1a9c771b2a06 v8→9只有note，实际API读回原owner/paused/授权/完成标准/旧history和保护包事项保持；当前许可与3实际清理已写，回执worktree-retirement-system-readback.json。本轮不更改他人原状态、接入旧存储模块或恢复通知/自动化。当前scope所有可执行必要动作已完成释放，不存在待批准的本轮动作或运行中的后台任务。
+- 原八目标1/2/6/7没有新的必做研究；目标4按既定用途缺件表复用，目标3/5相近风险收益贡献仍未证明，旧A03/固定2/2/月度4/4已耗尽，不改参数追正、不重启封存。新接续必须是准确独立问题/合格输入/真实许可和剩余次数，原异机只待未来设备可用的单项验收，不阻塞当前完成的本机恢复。当前本任务共享写入和临时目录清理范围释放；后继先读本记录/原API与真实文件状态。
+
+以下保留本轮批准前和各阶段记录，被本段最新实际状态取代；失败、原预算和恢复证据未改。
+
+---
+
 # 已移除首份协调副本，登记另两份同类准确退休范围
 
 - task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；updated_at 2026-10-10T17:29:10.234484+08:00；checked_coordination_sha 2c2b3949bb01e796ca559cc47ed714b34a3abe83；checked_at 2026-10-10T17:29:10.234484+08:00。已读原规则、自身、mac存储、daily、原中控及 theory-workflow-system-increment / risk-shape-information 最新负责人记录。两个原有界交付已结案并释放，代码/报告实际资料在主工作区或成果分支，不在这两份协调checkout；没有新同写范围，root唯一删除和小回执/API写者。
@@ -98,15 +112,15 @@
 {
   "task_id": "frozen-input-recovery-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "stage": "authorized_three_checkout_retirement_and_readback",
-  "checked_coordination_sha": "2c2b3949bb01e796ca559cc47ed714b34a3abe83",
-  "checked_at": "2026-10-10T17:29:10.234484+08:00",
+  "status": "completed",
+  "stage": "authorized_bounded_restore_and_retired_coordination_cleanup_delivered",
+  "checked_coordination_sha": "989cc24f151dfa223b26df915894c329e1c03fd1",
+  "checked_at": "2026-10-10T17:35:13.322201+08:00",
   "read_task_ids": [
     "frozen-input-recovery-20261010",
+    "research-dispatch-controller",
     "mac-local-storage-cleanup",
     "daily-trading-system-audit",
-    "research-dispatch-controller",
     "theory-workflow-system-increment",
     "risk-shape-information"
   ],
@@ -122,22 +136,25 @@
     "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/stock-gap-coordination-20261008",
     "/Users/yongbiaoli/Desktop/lei-signal-lab/.git/worktrees/stock-gap-coordination-20261008"
   ],
-  "scope_released": false,
-  "latest_result_commit": "6efb1b34c5989b430f7997ec027c34a97612e37d",
+  "scope_released": true,
+  "latest_result_commit": "12d718a40a3c3510c0448ea7eea4e6f5bc3287bf",
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T143725-a9a1b039127e"
   ],
   "blocker": null,
   "other_machine_recovery_verified": false,
-  "proposed_retirement_paths": [
-    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/theory-ai-principles-coordination",
-    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/stock-gap-coordination-20261008"
-  ],
+  "proposed_retirement_paths": [],
   "deletion_executed": true,
   "human_retirement_approval_received": true,
   "removed_paths": [
-    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination"
-  ]
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/theory-ai-principles-coordination",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/stock-gap-coordination-20261008"
+  ],
+  "removed_checkout_count": 3,
+  "actual_free_capacity_gain_confirmed": false,
+  "same_category_qualified_housekeeping_authorized": true,
+  "retained_ambiguous_checkout": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/risk-shape-coordination"
 }
 <!-- lei-coordination-json:end -->
 
