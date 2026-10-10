@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "05b2ade34274d6ed650645f2dadc615d31c43808",
-  "checked_at": "2026-10-10T18:28:34.952663+08:00",
+  "checked_coordination_sha": "268058d0abfacaf8d83f0bf41b9d382c62d452f7",
+  "checked_at": "2026-10-10T18:52:04.174620+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -70,8 +70,21 @@
     "K-data-boundary",
     "K-risk-attribution"
   ],
-  "latest_result_commit": null,
-  "scope_amendment": "Versioned exact two-ETF2015-2026H1 cash/split evidence completion: reuse accepted reports and old2018/19 independent source review; only six missing annual reports new public sourcing, no market or original qualification overwrite."
+  "latest_result_commit": "cee45fb1064cdee32663cbb17b8570fdb6691d79",
+  "scope_amendment": "Versioned exact two-ETF2015-2026H1 cash/split evidence completion: reuse accepted reports and old2018/19 independent source review; only six missing annual reports new public sourcing, no market or original qualification overwrite.",
+  "updated_at": "2026-10-10T18:52:04.174620+08:00",
+  "conflict_decision": "Fresh thirteen related records read; only reviewed cash-position-video own skill/reference/render paths since prior scope, disjoint from research paths. Root only own shared registry/INDEX/catalog/API writer. Original owners and budgets preserved.",
+  "current_work": "Minimum independent pre-2019 official-calendar source question design, zero network until exact frozen contract and scope pushed; source2017 paused and future P1 definition pending user.",
+  "paused_questions": [
+    {
+      "id": "etf-pair-full-actions-20261010",
+      "reason": "18/18 source requests exhausted,5/6 reports obtained,only5103002017 full-year absent; max+2 statutory exact-source proposal pending human, no old budget reuse"
+    },
+    {
+      "id": "future-complete-two-etf-P1-account",
+      "reason": "No whole market account run yet; original P1 no full hundred-unit lot sell branch leaves new deposit allocation unspecified; human choice pending and qualified inputs incomplete"
+    }
+  ]
 }
 <!-- lei-coordination-json:end -->
 ## 2026-10-10T18:00:52.344200+08:00 范围收窄与正在执行
@@ -100,3 +113,11 @@
 - 下一独立必要来源问题针对共享资金候选2015—2026H1：固定六份未回答年报（5103002015/16/17全年现金和折算；1599152015/17/19折算）。优先旧原件/已观察官方目录精确附件；最多新公共请求18、PDF6份/64MiB、同操作至多2尝试；旧21/26、2018/19的PDF2/2、H1 14/18各保留、不借或重置。不是选择看过收益最好的日期，不搜索参数。新请求失败计数，未取得保留unknown，不把资料资格都要求成全个股库。
 - Sol唯一写新raw执行记录与源候选/报告草稿、该外盘源码/原件；Astra仅写新raw独核小记录并审判2018局部限制；root版本化资格/资金定义与共享归档/API/Git。输出预检256MiB外盘/1MiB小记录绑定，全部普通日志/原件/临时外盘，旧冻结价格/行动/qualification不覆盖、不移、不删。
 - 验收：准确代码名称/完整年期/分红逐事件、折算专栏/指纹、跨年资格矩阵和剩余真实日历/开盘/到时信息缺口；历史文件和后发布报告不得当当时已到达。源缺字段不能猜零；新下载仍不使市场ready，P1无整百可卖时新钱去向的决定仍待用户，相关完整账户尚未执行。0行情新路径、0真实账户、0核心/特征/标签/拟合、旧固定2/2/月度4/4/A03保持。
+
+## 2026-10-10T18:52:04.174620+08:00 阶段2逐年行动证据与恢复归档，日历独立输入继续
+
+- 交付准确codex/original-eight-continuation-20261010@cee45fb1064cdee32663cbb17b8570fdb6691d79，99自有文件远端逐字节核验、主HEAD/index未动；共享registry/INDEX/catalog从成果分支原基线仅加本任务四报告，没有整包冒领脏工作区其他条目。四报告运行API均pending=false读回，来源补证条目mixed/paused，非全年合格。
+- 新逐年行动表支持两ETF24期间中的23个，仅5103002017未知；五新年报已独核，2016原文金额冲突/2018整份页数疑点保留。42必要原件/接纳/绑定文件各95,222,698字节固定外盘备份并换进程仅读副本恢复42/42，独核100外盘普通文件相符，总201,276,400字节；不同机器/不同盘未验，不冒称。原件/冻结资格/旧失败不改不删。
+- 18/18新源请求用尽，最多追加2次仅待用户决定，旧H1/21-26/2018-19及旧市场预算不借。资料年度矩阵和恢复为实际工作，不代表相近风险收益成立；原固定2/2/月度4/4/A03仍封存。
+- 零网络日历复用证据支持2019-09..2026-06的1652官方开市日；510300报价日全吻合，159915仅差既证停牌的2021-02-08，次日10:30复牌仍禁止09:30普通成交。更早56个月与上交所历史独立日历/例外及全期开盘资格仍未知。正在设计只针对最早缺年2015的独立来源问题，核旧失败和正式年级原件路径，冻结/推范围之前不联网。该必要输入工作不依赖两个待选决定，继续执行，不以阶段归档结束八目标。
+- 阶段1原六目标API note实际读回见phase1-goal-readback.json；阶段2继续只追加实际新成果/未证项，不修改原owner/status/标准。所有模型分工/真实调用沿旧记录，本轮未新建chat/定时器/无限Goal。
