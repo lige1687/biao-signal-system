@@ -84,3 +84,11 @@ task-id trend-trading-video，基线2f7bc4683f74237d19fde484ce665ac975d08a3f，�
 - 原T2全文§02—04及六Prompt复读，对照已有方法，新增紧凑偏好贯穿文稿/表/样例/全片；三种制作输入与A/B职责分开、模板复用与同类重复检查、声音样例提前校准、改动按镜头检查失效。记录在references/tight-pacing.md；原文中已覆盖方法不重复宣称新增。
 - ai_tools成果 35fca025f6b63f9fb73d145d264d2bf9ef3b8ad9，7准确文件；47包文件指纹和引用、两Skill结构、归置和diff检查通过。保留无配音/默认配乐/无品牌/静帧后难点15秒后全片；无安装、新影片、付费或媒体写入。紧凑是导演偏好，不是自动倍速设置，观感增量本轮未测。
 - 原项目仅提交自己四Skill文件和本进度，入口窄插入，保留其他任务本机内容且不代提交；远端回执compact-result-receipt.json。
+
+## 独立Opus开工包Skill
+
+- 2026-10-10T12:11:31.184828+08:00；checked_coordination_sha=9894c6d3f0f97f102015b92760e240bbb6566c1e，已读COORDINATION、自身、中控及nasdaq/dual-ma相关范围，无新独立Skill冲突。root唯一写者。用户要求创建Skill，后补Codex与用户负责内容讨论和大致结构。
+- 新opus-video-prep七文件：入口、中文UI名、BRIEF/CONTENT_OUTLINE模板、包格式和四JSON示例、数据/声音/工程方法、开工/成片后验收。Codex做内容大纲与准备，不做文稿分镜/逐镜选材/主题图表动效；不自动调用Opus。
+- ai_tools@7a5d850f3b8b354908fa48a50654e0979e6102a5，12准确文件；README/AGENTS/bootstrap/03启动Prompt按任务分流。55包文件指纹引用、两Skill结构、4JSON样例解析、引用与双份一致、归置及diff通过。
+- 原code-explainer-video未修改，保留他人变更。无实际媒体/工程读取、安装、测量、渲染或发布；本轮只交Skill与模板，不称视频开工包已就绪或token已节省。原始scratch分析与工程未被假称已核。
+- 远端逐字回执opus-prep-result-receipt.json；后续用opus-video-prep按具体选题讨论内容和备料。
