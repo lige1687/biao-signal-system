@@ -10,3 +10,8 @@
 - `storage-check.json`：本轮固定设备只读检查快照。
 
 本地检查通过不代表另一台设备恢复成功；目标完整验收仍以系统原四项标准为准。
+
+- `artifact-verification.json`：10项实际约束核对。
+- `system-goal-readback.json` / `system-goal-publication-readback.json`：原目标更新的实际API读回。
+- `publication-readback.json`：预检成果首次准确发布回执。
+- `verification-failures.json`：发布前计数错误及修复记录。
