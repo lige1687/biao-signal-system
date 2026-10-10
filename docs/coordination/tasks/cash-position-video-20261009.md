@@ -251,3 +251,11 @@
 - 验收：content文件、屏幕/镜头ID、7段0..118连续时间、7落点动作区间与半帧舍入、Decimal算术、文稿品牌/含义检查、两新参考相对链接/Skill元数据、窄补丁反向检查、精确5文件差异、归置通过。新稿用户审美、正常速度全片合声未验证，不把文档完成当新片达标。
 - 用户持续学习已创建本聊天heartbeat automation-8；创建回执ACTIVE，随后实际读取为PAUSED（每三天10:00），保留暂停未自启，不能宣称后台运行。其他已暂停系统自动化未改。来源和失败范围、确切指纹见小索引指向的证据。
 - 19:07固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok通过；资料、媒体与日志仅固定外盘，小索引/Skill本机。后续实际制作复用已批v10方法并验证新接点/声音；旧抖音提交未确认的历史接续保持独立。
+
+
+## 15秒真实音画卡点样例开始 2026-10-10T19:24:12.199084+08:00
+- status=active；scope_released=false；owner=root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c。checked_coordination_sha=19db6a89b2da13da0f8becffd52f42fa04c92d73；checked_at=2026-10-10T19:24:12.199084+08:00。已读自身、COORDINATION1.1及original-eight新增独立日历/账户定义范围；原其他视频独立、共享Skill释放，无重叠。
+- 用户“那你搞一个15s我看看”“继续哈”；复用明确认可的v10风格和真实价格，按新music-motion-sync方法实际渲染15秒，让量尺完成、资金让位、投入减至30%与音效事件共享时间。用户本次已授权样例，不重问旧静态方向。不扩完整片或发布，不动暂停automation-8。
+- 唯一新外盘目录：固定盘视频库/投资心态/20261009-cash-position/v12-beat-sync-sample-20261010；预估新普通文件/缓存<500MiB。旧v10/v11仅读。19:23固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok=true，外盘568535285760B。依赖复用，不安装/删除。
+- 本机仅docs/ops/media/cash-position-20261009/beat-sync-sample-20261010.json和自己的work-progress；成果基线codex/cash-position-video-20261009@58bc828dc506550efb4789e4f962be258d93912c；本轮不改共享Skill/策略/系统/原发布稿。
+- 验收：15秒450帧1080p30fps实际导出、同源事件驱动画面及自制音效、默认原声同SHA、关键落点/中途/文字读性/金额算术、完整解码与合成音频峰值、正常速度浏览器播完/可跳转/用户看真实MP4。音乐强拍未听审不能冒称确认；技术对齐和最终主观爽感分开。
