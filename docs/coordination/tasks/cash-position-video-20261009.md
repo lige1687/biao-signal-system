@@ -199,3 +199,11 @@
 - 写入范围：.agents/skills/code-explainer-video/SKILL.md; .agents/skills/code-explainer-video/references/motion-direction.md; .agents/skills/code-explainer-video/references/style-compound-motion.md; .agents/skills/opus-video-prep/SKILL.md; .agents/skills/opus-video-prep/templates/BRIEF.md；自身work-progress及本次精确补丁/小回执；协调仅本文件。未跟踪共享Skill不整包冒领，只保存本次精确补丁。
 - 基线成果codex/cash-position-video-20261009@2dc889ff0d8a7abf78353cc3c8a3810a05daeffd；验收：风格与物件/模型职责区分、可执行动作与运镜标准、前后文无冲突、Skill结构/本地链接/准确diff/归置。
 - 抖音发布仍未确认；本轮转为用户最新明确Skill修改，不将其写成已发布或已取消。
+
+
+## 风格学习与本地导演澄清完成 2026-10-10T17:53:02.872508+08:00
+- status: completed（本轮Skill维护）；scope_released: true（五份共享Skill文本全部释放，现金抖音未确认发布的接续仍单独保留）；owner root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c。
+- checked_coordination_sha: 9211eb59adbd5f4dc5981d8b0ba731d4eddcc009；checked_at: 2026-10-10T17:53:02.872508+08:00；交付前fetch最新与开工已读记录无其他增量；已读自身、trend-trading-video、personal-quant、nasdaq、trend-perspective、dual-ma、system-x、中控及COORDINATION1.1，root唯一写者，无共享冲突。
+- 已更新本地code-explainer-video的入口/motion-direction/style-compound-motion及opus-video-prep入口/BRIEF，共5文件。动态风格的可迁移部分为注意交接、动作轻重/搭接、节奏/空间、镜头与声音表现；载体按内容重选，不硬套100方块。用户可由本地收敛载体、分镜和运镜，参考模型不等于制作移交。明确委托Opus的纯备料模式保留；用户已确认本地方案可带版本/可改范围交接。
+- 已推成果codex/cash-position-video-20261009@584a4bd03702af0d25c25c57b2cedd8da1abe3cd：精确补丁style-transfer-skill-20261010.patch、五文件改前后SHA回执style-transfer-skill-20261010.json、本人work-progress，3准确文件远端逐字读回一致。共享未跟踪历史未整包冒领提交；本次补丁已同步，不称整套Skill已远端同步；ai_tools副本未修改。
+- 验收：两Skill quick_validate、相对引用、准确diff、零上下文补丁反向校验、最后归置检查均通过；保留原静帧→15秒→全片与事实/权限/发布边界。无新媒体/渲染/安装/模型切换/代理/研究/策略或已交包修改，不声称效果已达到参考。用户本轮要求的维护完成。
