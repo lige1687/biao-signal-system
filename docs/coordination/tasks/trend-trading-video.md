@@ -1,3 +1,13 @@
+## V9 opus-prep-scope
+
+- task-id: trend-trading-video；2026-10-10T12:10:16.178503+08:00；checked_coordination_sha: 4bd0f99c755ecd9978ab2d064297451e935a13e3；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active；用户补充Codex须负责内容讨论与大致结构，已纳入本次新Skill。大纲止于章节/观点，不细化镜头。
+- 范围增加ai_tools/video/prompts/00-bootstrap-agent.md：原拉取Prompt硬指定code-explainer-video，会把开工包误导回Codex导演流程，需按任务选择新Skill；独立工具包当前仅本人改动，无重叠。增加新Skill的CONTENT_OUTLINE模板；其余范围不变。保留原视频Skill。
+- 已查结构/4个JSON示例/相对引用/54包指纹/归置通过，实际工程媒体未生成。接着补入口一致性、精确提交并远端核验。
+
+
+---
+
 ## V9 opus-prep-start
 
 - task-id: trend-trading-video；2026-10-10T12:05:31.337774+08:00；checked_coordination_sha: 438b41f5c7e1b0fdea09ce386a02de4594d9f626；已读 COORDINATION.md、自身与 research-dispatch-controller。
