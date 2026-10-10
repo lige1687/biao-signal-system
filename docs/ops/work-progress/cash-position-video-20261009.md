@@ -80,3 +80,18 @@ checked_coordination_sha=3641020dbb984de112de7486b2baf5e98c3a03de；checked_at=2
 checked_coordination_sha=5238c8a60c4c54c3ecaf017c0829fd466a9cc0b0；checked_at=2026-10-10T12:34:41.579083+08:00；已读自身/COORDINATION1.1、trend V9 opus-prep-done及其他影片/中控；最新trend-perspective仅自身独立Opus准备，路径无重叠；root唯一写者。预计逻辑普通文件<2GiB，依赖副本/迁移各实体外盘；exFAT实际分配可能明显大于逻辑字节，未删除以回收。固定盘12:33身份通过，余569562759168B级；本轮归置exit0。
 
 下一步：用户把START_OPUS交给Opus，从本包内容大纲与通用工程创作；正常听看与缺口如实处理，先样例确认再扩片。本轮开工准备完成，完整视频未完成。
+
+
+## 动态编排Skill增量完成 2026-10-10T14:50:11.661457+08:00
+
+用户最新肯定v06“已经不错了”，要求进一步理解OPUS参考的动态设计，沉淀可复用方法。本轮不是新影片制作，完整片/发布仍未批准；已交Opus包保持原始版本。
+
+重核参考与v06最终MP4/本人源码指纹，实际复看既有逐帧及转场图、新解码10/12/12.8/13.4秒单帧，核源码两路共用时序和统一缓动。关键结论：差距在整段注意交接、动作搭接与轻重安排，而不只是对象种类。参考约9—10秒以数字退出、单元收拢与曲线接入完成空间/明暗/时间共同变化；本版已有连续K线与因果动作，继续改善并行双分支的注意分配与运动手感。
+
+实际更新三份本地Skill：主入口一条路由、motion-direction合并动作原则并新增六项编排选择/中间过程检查、decision-motion保留证据及更新用户反馈。没有把方块/金色/固定缓动或秒数变成通用模板；未改opus-video-prep或提前锁本期分镜。验证Skill结构、本地引用、入口窄差异、原确认/无旁白/分工保留、精确补丁反向检查和归置通过。文档通过不表示新观感已获验证。
+
+证据：/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/投资心态/20261009-cash-position/v08-motion-skill-review-20261010/动态编排复盘.md；本机索引docs/ops/media/cash-position-20261009/motion-skill-review.json。首次fps联系表时间偏移风险、第二张select/tile裁切异常均保留不采用，改用独立原视频帧验证。浏览器入口被工具URL策略拒绝，未绕过；本轮复用上一轮完整播放回执，不宣称新增完整观看/听审。
+
+checked_coordination_sha=7522ea4c6e908c94d02c0e3e6b5819cede834e32；checked_at=2026-10-10T14:50:11.661457+08:00；本轮fetch无新增。已读自身、trend-trading、trend-perspective、nasdaq、personal-quant、system-x、dual-ma、中控及COORDINATION1.1。root唯一写者，无其他在写共享范围冲突。固定外盘身份14:40已核，普通证据/备份全外盘；没有新依赖、媒体下载、模型调用/新代理、收益研究或删除。
+
+当前共享Skill含他人未跟踪历史，本轮仅将自己原decision-motion、两文件精确补丁、自己的索引和本记录入成果分支；不声称整个Skill包已同步。下一次制作按新动作编排方法执行，原样例确认节点保持；本轮Skill维护完成，共享范围可释放。
