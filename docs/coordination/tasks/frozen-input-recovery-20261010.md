@@ -1,3 +1,16 @@
+# 23副本已独验；本轮新增恢复证据与失效接续提示的准确同步窗口
+
+- task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status active / backup_verified_readiness_documentation；updated_at 2026-10-10T13:30:28.483307+08:00。
+- checked_coordination_sha 85ea7531f38cbe28ea73eb10ac7d10f0f5103f84；checked_at 2026-10-10T13:30:28.483307+08:00；已读本任务/原中控/C归档/report-library/risk-shape/technical-factor最新范围；本批C共享目录已释放，report-library成果结案不占新条目，技术/量价原件与原负责人不动。root唯一串行补本轮证据写者。
+- 已完成23外盘副本5,417,582字节，实际两次读回和Sol独立逐字节/设备/集合验收23/23通过；原件未改。外盘恢复清单25,016字节SHA ebc63f6f70c222940216af898dd1ca078e1331de6963269bc530c155cae9f16f。仍无另机验收，已问目标设备及接盘情况；其他必要仓内工作继续。
+- 必要新增小范围：自身raw写原八目标用途/预算核对记录；docs/experiments/research-evidence-catalog-2026-10-07.md仅最前新增目标8恢复回执导航，保留旧全文；docs/okr/RESEARCH_TODO.md仅前置本轮接续补注，保留原交接快照。原目标2要求有新增成果时补索引，故本次对应这唯一新恢复成果，不重做旧报告/registry/INDEX。
+- 共享修改前SHA：{"docs/experiments/research-evidence-catalog-2026-10-07.md": "25a66fc46dfac6d05831bd4ee77256a1497c2eb969cd0e636de157a16e718249", "docs/okr/RESEARCH_TODO.md": "226375f68cdc96fa05e6fbe9359de876599a6995bd405908dcdbdcf461c4f78f"}。唯一写者root；任一文件写前与SHA不同则重新读回/整合，不整文件用别分支覆盖。
+- 系统准确写入：目标8按已准范围更新实际milestone1/2/4状态，3异机保持false；其他原条目追加本轮证据note且原owner/status/授权/完成标准保持。okr-ff1e0a86fbac只把已过时的“A03下一优先”改为A03已结案/4次已用，保留旧history和其他候选责任；K-risk-attribution固定问题旧next_action以已完2/2和4/4替代，不把整个目标完成。不得借用重置预算。
+- 依据：A03报告2026-09-30已archive，19触碰/18成熟/6后期预测，真实4运行/家族上限4；目标4原最低验收accepted_exploratory_minimum，PPO/P26保存效果包10/9已核。用途矩阵只列已有证据的可用/限观察/缺原件，不发新请求、不修价、不拟合。
+- 构成后续执行的权限没有扩大：无新市场实验/账户/下载/重跑/策略修改/生产，外盘写仍准确23副本及必要清单。大目标仍按各原负责人维护，不为用户“所有任务”接管其他任务。
+
+---
+
 # 用户批准23准确外盘副本，原八目标必要待办接续
 
 - task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status active / authorized_exact_backup_and_original_eight_readiness；updated_at 2026-10-10T13:24:45.767441+08:00。
