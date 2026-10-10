@@ -13,9 +13,9 @@
 {
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "blocked",
-  "checked_coordination_sha": "9cfe1c52ac095755cb1a33ec5ce22f74b25d1080",
-  "checked_at": "2026-10-10T19:34:13.538722+08:00",
+  "status": "active",
+  "checked_coordination_sha": "86449361b02a517317fef59e90574857a4ad22ea",
+  "checked_at": "2026-10-11T00:13:12.504560+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -54,7 +54,9 @@
     "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/",
     "docs/experiments/szse-remaining-calendar-2016-2019-2026-10-10.md",
     "docs/experiments/raw/szse-jan2017-missing-date-source-2026-10-10/",
-    "docs/experiments/szse-jan2017-missing-date-source-2026-10-10.md"
+    "docs/experiments/szse-jan2017-missing-date-source-2026-10-10.md",
+    "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/",
+    "docs/experiments/weekly-portfolio-zero-sale-cash-2026-10-11.md"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -66,7 +68,7 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/result/recovery-v1/",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-jan2017-missing-date-source-20261010/szse-jan2017-missing-date-source-20261010-20261010T191337-32051338898d"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "question_ids": [
     "native-d-conditional-risk-20261010",
     "csi300-march-event-binding-20261010",
@@ -76,7 +78,8 @@
     "two-etf-2015-exchange-calendar-source-20261010",
     "szse-remaining-calendar-201601-201908-20261010",
     "reused-and-remaining-calendar-recovery-20261010",
-    "szse-jan2017-missing-date-source-20261010"
+    "szse-jan2017-missing-date-source-20261010",
+    "weekly-portfolio-zero-sale-cash-20261011"
   ],
   "shared_write_owner": "root only own D/cross-week/ETF-H1/full-action report registrations and dated catalog note; March original reused",
   "goal_ids": [
@@ -85,20 +88,11 @@
     "K-risk-attribution"
   ],
   "latest_result_commit": "4a213931f2a3837798d1a33037c3d5d1d433f393",
-  "scope_amendment": "New genuinely observed one-date source gap after44month original source inspection. Exact SZSE2017Jan1 planned closure official notice only, max4publicactions/two semanticlocators/two exactsource fetch+redirect+open; originalmonthlyunknownandfailedmonth untouched, no oldbudgetborrow.",
-  "updated_at": "2026-10-10T19:34:13.538722+08:00",
-  "conflict_decision": "All related records+COORDINATION fresh read; all own agent source/implementation/review/recovery/mapping scopes finished and released. No other writer to own task. Root only original API notes/readback and exact shared insertions; changes disjoint. Current bounded write scope released, future continuation must fresh fetch and register exact affected scope again.",
-  "current_work": "本轮有限科学/来源/工程/恢复/复用问题均已回答或到达保留证据边界；最终协调回执与进度准确成果版本4a213931f2a3837798d1a33037c3d5d1d433f393已推并逐文件读回，主HEAD/index保持。当前blocked、scope_released=true；无执行者或后台源/市场/定时任务。只有明确必要决定和合格输入/独立合同后才恢复对应依赖。",
-  "paused_questions": [
-    {
-      "id": "etf-pair-full-actions-20261010",
-      "reason": "18/18 originalsourcerequests,5/6exactannualsobtained,24periodmatrix23supported; exactlast5103002017statutoryattachmentlink67 requires proposed+2 cumulative20, humananswerstillabsent; do not reset/bypass."
-    },
-    {
-      "id": "future-complete-two-etf-P1-account",
-      "reason": "Originalspecdoesnotresolvezerohundredunit sellablequantity branch newcash; humanchoicepending. Applicablecalendar/securityexecutionandexplicitcash-clock/finalaccountcontract also notqualified; no market run."
-    }
-  ]
+  "scope_amendment": "Resume same full-actions source question, cumulative18->20 only exact observed last2017attachment; separate finite zero-sale P1 synthetic engineering per direct human cash-nextweek choice. Root only report/shared/API and contracts; remaining_goal_readiness Sol source new subfiles only, recovery_evidence_review Sol new P1 raw only, next_research_design Astra limited reviews/rootreview paths only. No market until complete qualified input and new full-account contract.",
+  "updated_at": "2026-10-11T00:13:12.504560+08:00",
+  "conflict_decision": "Fresh coordination and all12relatedtasks read; no change since86449361, no competing writer to this task/new zero-sale path. Prior source agent scopes released, reassign exact resumed source subfiles to single Sol. Root sole shared/API writer; other active task records disjoint. Main dirty checkout preserved.",
+  "current_work": "记录用户明确+2源额度和新钱留现金决定，先定点完成5103002017原报告；并行实施所选P1零卖出分支有限人工测试。Astra复核完整账户最小输入及可冻结的共同保守执行假设；不联网、不运行市场。",
+  "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
 ## 2026-10-10T18:00:52.344200+08:00 范围收窄与正在执行
@@ -170,3 +164,7 @@
 ## 2026-10-10T19:34:13.538722+08:00 本批必要工作已交付，完整研究等待确切恢复条件
 
 准确阶段4回执分支codex/original-eight-continuation-20261010@02faea8b91159081ecd0bff4c1badc78b2abf3df已推192自有文件远端逐字节相同；七有界报告registry/INDEX/catalog与实际API分类/一段结论齐备。五原系统条目note追加v17/v16/v19/v7/v7实际读回，原owner/status/标准/授权保持。原D核心1/1有限线索、月度4/4及固定2/2阴性不重跑。43月1308日/876开市限定接纳，Jan2017缺日与元旦原文3/4有界未证保留；2015来源365日接纳与同义4>2执行失败分开。180+9必要文件实际不同进程仅读副本恢复，root另读逐组SHA/大小/stat相同；同盘不是异机或坏盘。事件映射v1时序措辞错误与旧独审保留，新fd3eb.../80be266...限定接受12事件/4周一，周一是入金锚点；共同保守现金研究时序可另冻假设，不要求历史每笔银行回执、不假填实际available。四已存规则SHA根实际核，2006版周规则条件性事实不能证明2017适用性，不改变Jan1未证。已验数量/限价工程复用，不新造求解器或全历史公告任务。19:29固定外盘568,477,614,080B、内盘12,945,735,680B，新大资料仍外盘，不新增删/迁原件。当前有限问题已回答或达保留证据边界，无待跑/待修子任务；只因上述必需决定/输入未合格而阻塞完整账户。没有后台/新chat/定时器/无限Goal，原八目标整体未标完成。恢复先读本任务、系统原条目和准确commit，必要决定到位后仅接受影响来源/定义，按新用途资格及正式合同推进，不重做绿证据。
+
+## 2026-10-11T00:13:12.504560+08:00 两项必要决定已由用户给定，恢复准确来源及P1新钱分支
+
+2026-10-11用户原话“追加吧， 你觉得合适就加， 那留现金等下周吧”。仅追加原年报题2个公共动作累计20，原18失败/5PDF保留，经理失败URL不第三次重试；同目标原记录恢复。P1触发调仓却无可卖整百份时新钱留现金到下一预定周决策，不改权威策略原文/原冻结规范，另留用户决定附件与新有限实现。固定外盘身份现场核通过，内盘16,323,919,872B、外盘568,457,691,136B，所有大文件仍外盘。科学真实账户仍待完整合格输入和独立合同，不重置月度4/4、固定2/2/A03或重跑D。
