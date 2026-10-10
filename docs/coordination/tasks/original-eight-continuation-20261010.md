@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "7f1b2c090a624da102c772ffad5d0d5e3801e6ab",
-  "checked_at": "2026-10-10T18:04:50.395157+08:00",
+  "checked_coordination_sha": "926331196d4e2390448663235f1b2d97fd394cf1",
+  "checked_at": "2026-10-10T18:15:11.253926+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -44,26 +44,30 @@
     "docs/experiments/INDEX.md",
     "docs/experiments/research-evidence-catalog-2026-10-07.md",
     "docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/",
-    "docs/experiments/weekly-portfolio-cross-week-fixed-orders-2026-10-10.md"
+    "docs/experiments/weekly-portfolio-cross-week-fixed-orders-2026-10-10.md",
+    "docs/experiments/raw/etf-pair-h1-action-qualification-2026-10-10/",
+    "docs/experiments/etf-pair-h1-action-qualification-2026-10-10.md"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-h1-actions-20261010/etf-pair-h1-actions-20261010-20261010T181507-6c6339a1765d"
   ],
   "scope_released": false,
   "question_ids": [
     "native-d-conditional-risk-20261010",
     "csi300-march-event-binding-20261010",
-    "weekly-cross-week-fixed-orders-20261010"
+    "weekly-cross-week-fixed-orders-20261010",
+    "etf-pair-h1-actions-20261010"
   ],
-  "shared_write_owner": "root only D and cross-week synthetic report registry/INDEX plus catalog dated note; existing March report reuse only",
+  "shared_write_owner": "root only own D/cross-week/ETF-H1-source report registrations and dated catalog note; March original reused",
   "goal_ids": [
     "okr-ff1e0a86fbac",
     "K-data-boundary",
     "K-risk-attribution"
   ],
   "latest_result_commit": null,
-  "scope_amendment": "Add necessary cross-week explicit fixed-orders single-cash engineering, one synthetic question/main case/required counterexamples, zero markets/real accounts; existing single-decision recovery excludes this scope."
+  "scope_amendment": "Add minimal company-action qualification for original 510300/159915 pair on2026H1 only; not2015fullqualification, no market account/recalibration."
 }
 <!-- lei-coordination-json:end -->
 ## 2026-10-10T18:00:52.344200+08:00 范围收窄与正在执行
@@ -78,3 +82,9 @@
 - D真实资格与唯一核心1/1已完成，原76/75/未知不变，新标签/特征/账户0；root独立平均秩后扣除V再算关联，与全部主/删除结果差最大1.67e-16，等待结论复核/归档。
 - Goal5经实际旧报告/source审查仍缺跨周。一个人工610.50现金例，第一周两固定100份×2单、每单205.20；第二周午夜250仅入一次，按前一完整日净值发行记账单位，再同两单。期末现金39.70/份额各200/费用20.80/总资产839.70，连续与真实不同进程恢复、重复身份、错序/越限/现金不足/保存替换前后故障核必要反例。所有排序明确为测试输入，不推断全局优先、P1无整手、真实用户资金配置；不调用P0自动分配器/改策略。
 - 一个新工程问题/主例和必要反例，市场请求/真实账户/标签/拟合0。原固定2/2与月度4/4保持封存，不靠工程通过宣称相近风险收益。16MiB外盘结果预算、1MiB本机小记录；固定设备plan已绑定，执行前再核容量，恢复文件/隔离副本/普通日志外盘。
+## 2026-10-10T18:15:11.253926+08:00 原两ETF最小资料缺口接续
+
+- 最新协调 926331196d4e2390448663235f1b2d97fd394cf1 实际读取，无新增他人任务差异，相关read_task_ids/唯一写者不重叠判断保持。
+- 已保存2015—2026H1两ETF报价/已知行动锁指纹吻合，但官方全部行动/日历/开盘资格并未合格，后续12独立周投入仍同限制；510300单产品2026H1旧月度输入不能代替159915或全期间。
+- 将下一必要来源问题收窄到同原510300/159915的2026H1官方报告明确是否分红/折算与保存actions是否一致。仅为后续共同资金输入资格，不宣称完整市场开跑ready，不重跑/校准旧半年或取全股票池。当前已2个筹备精准搜索（不同基金结果不能绑定），后续全部公共请求累计最多18次/32MiB，失败也计，同操作至多2尝试；旧25原件、36中证目录、三键4/6预算不借。只官方管理人/交易所/法定披露原件可绑定，媒体发现不能凑完整资格；报告出版日晚于行情窗口时不得写当时已知。
+- Sol只准确新raw与新报告草稿/固定外盘原件、请求ledger、资格与未确认项，root唯一共享登记。先查旧已存正式原件可复用才下载；没有来源不用猜URL/填零。新存储32MiB外盘、1MiB本机小记录，计划实际固定身份合格，执行前再核。0市场路径/新标签/拟合/策略规则。
