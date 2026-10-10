@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "86449361b02a517317fef59e90574857a4ad22ea",
-  "checked_at": "2026-10-11T00:13:12.504560+08:00",
+  "checked_coordination_sha": "0b256baf08ad91032fd5cae5935387aedd362523",
+  "checked_at": "2026-10-11T00:13:56.292858+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -66,7 +66,9 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/result/recovery-v1/",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-jan2017-missing-date-source-20261010/szse-jan2017-missing-date-source-20261010-20261010T191337-32051338898d"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-jan2017-missing-date-source-20261010/szse-jan2017-missing-date-source-20261010-20261010T191337-32051338898d",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-zero-sale-cash-20261011/weekly-portfolio-zero-sale-cash-20261011-20261011T001324-2c8c0fb78769",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-full-actions-20261010/etf-pair-full-actions-20261010-20261010T182754-75a8d7ac33c6/resume-20261011/"
   ],
   "scope_released": false,
   "question_ids": [
@@ -89,7 +91,7 @@
   ],
   "latest_result_commit": "4a213931f2a3837798d1a33037c3d5d1d433f393",
   "scope_amendment": "Resume same full-actions source question, cumulative18->20 only exact observed last2017attachment; separate finite zero-sale P1 synthetic engineering per direct human cash-nextweek choice. Root only report/shared/API and contracts; remaining_goal_readiness Sol source new subfiles only, recovery_evidence_review Sol new P1 raw only, next_research_design Astra limited reviews/rootreview paths only. No market until complete qualified input and new full-account contract.",
-  "updated_at": "2026-10-11T00:13:12.504560+08:00",
+  "updated_at": "2026-10-11T00:13:56.292858+08:00",
   "conflict_decision": "Fresh coordination and all12relatedtasks read; no change since86449361, no competing writer to this task/new zero-sale path. Prior source agent scopes released, reassign exact resumed source subfiles to single Sol. Root sole shared/API writer; other active task records disjoint. Main dirty checkout preserved.",
   "current_work": "记录用户明确+2源额度和新钱留现金决定，先定点完成5103002017原报告；并行实施所选P1零卖出分支有限人工测试。Astra复核完整账户最小输入及可冻结的共同保守执行假设；不联网、不运行市场。",
   "paused_questions": []
@@ -168,3 +170,7 @@
 ## 2026-10-11T00:13:12.504560+08:00 两项必要决定已由用户给定，恢复准确来源及P1新钱分支
 
 2026-10-11用户原话“追加吧， 你觉得合适就加， 那留现金等下周吧”。仅追加原年报题2个公共动作累计20，原18失败/5PDF保留，经理失败URL不第三次重试；同目标原记录恢复。P1触发调仓却无可卖整百份时新钱留现金到下一预定周决策，不改权威策略原文/原冻结规范，另留用户决定附件与新有限实现。固定外盘身份现场核通过，内盘16,323,919,872B、外盘568,457,691,136B，所有大文件仍外盘。科学真实账户仍待完整合格输入和独立合同，不重置月度4/4、固定2/2/A03或重跑D。
+
+## 2026-10-11T00:13:56.292858+08:00 准确合同和新P1外盘输出路径已绑定
+
+来源/实现/独核合同已冻结于本raw，原源18->20、人选现金到下周；新P1计划8MiB外盘/512KiB本机小记录已通过，但尚未执行。三既有代理按原模型Sol/Sol/Astra接不同准确文件，root唯一共享写者。
