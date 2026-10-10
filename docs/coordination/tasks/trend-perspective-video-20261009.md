@@ -1,3 +1,16 @@
+# 最新状态：按opus-video-prep准备接手包
+
+- task-id trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；active / opus_preproduction_package；scope_released false。
+- checked_coordination_sha: b992fb163faf09ac283fd21a69819ec1e6a8ec2e；checked_at: 2026-10-10T12:18:52.496589+08:00；已读COORDINATION1.1、自身、cash-position局部Skill已释放/自身媒体、nasdaq已批方法、中控结案，最新双均线/趋势简史仅独立发布与技能资料；本轮无共享Skill、研究登记或他人文件写入。
+- 用户明确调用opus-video-prep并说“看看准备一下哈”；本轮是开工准备，Codex归一要求/原稿/章节观点/事实/音频/候选素材/通用底座，具体文稿/分镜/视觉与样例交Opus，不自动调用或安装Opus。
+- 上轮v08在模型切换中断，仅entry.tsx去收盘连线和少量复制源，未写horizon.tsx、未渲染两段，不宣称均线问题已交付修正。作为WIP证据附入，不继续创作。
+- 写入范围独立外盘视频库/趋势交易/20261009-trend-perspective/v09-opus-prep；本机仍仅本人两小索引/工作进度和此记录。基线codex/trend-perspective-video-20261009@9aa2b1bff20b30ec65d1c182d2fbade48d03a23a；原版本不覆盖。
+- 预计外盘普通产物/缓存/依赖副本/迁移重建<1GiB，本机小记录<128KiB；12:17storage固定UUID身份可用，外盘592505077760B、本机27639414784B。使用既有运行环境，不升级、付费或修改系统权限。
+- 验收：原稿原样、BRIEF与内容大纲章级不锁镜头，事实输入/指纹/源/公式核同，音频实际能量/响度/真峰及候选拍点状态；候选按需，不预绑镜头；实际tsc、中性短渲染及三字体、新父目录重建；manifest逐文件读回，READY真实缺项/公开许可边界。
+- 禁止扩全片、发布、改Skill或生产交易；无子代理。准备包后交最短Opus启动指令和未决项，审美仍由用户。
+
+---
+
 # 最新状态：修正v07收盘连接线，并追加观察跨度15秒样例
 
 - task-id trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；active / line_fix_and_horizon_sample；scope_released false。
