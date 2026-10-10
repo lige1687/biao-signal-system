@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "09d5c28150c981325e62188d2d8779535a63e0f8",
-  "checked_at": "2026-10-10T19:02:53.295713+08:00",
+  "checked_coordination_sha": "44b33259cf4f9062990dc764e3f92e74abbadc22",
+  "checked_at": "2026-10-10T19:13:21.657505+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -60,7 +60,8 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-h1-actions-20261010/etf-pair-h1-actions-20261010-20261010T181507-6c6339a1765d",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-full-actions-20261010/etf-pair-full-actions-20261010-20261010T182754-75a8d7ac33c6",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/result/recovery-v1/"
   ],
   "scope_released": false,
   "question_ids": [
@@ -70,7 +71,8 @@
     "etf-pair-h1-actions-20261010",
     "etf-pair-full-actions-20261010",
     "two-etf-2015-exchange-calendar-source-20261010",
-    "szse-remaining-calendar-201601-201908-20261010"
+    "szse-remaining-calendar-201601-201908-20261010",
+    "reused-and-remaining-calendar-recovery-20261010"
   ],
   "shared_write_owner": "root only own D/cross-week/ETF-H1/full-action report registrations and dated catalog note; March original reused",
   "goal_ids": [
@@ -78,11 +80,11 @@
     "K-data-boundary",
     "K-risk-attribution"
   ],
-  "latest_result_commit": "2758b249e4156ee19d77b6ddcc9a7260835cc822",
+  "latest_result_commit": "52fa584722b850a54b420e5d2dbbc48a1d8b0d93",
   "scope_amendment": "New independent earliest missing year2015 official source question, planned dates/day flags only; fixed entire account candidate unchanged, no old budget borrowing or study reset.",
-  "updated_at": "2026-10-10T19:02:53.295713+08:00",
-  "conflict_decision": "Fresh related owner records; exact newremaining44 calendar raw/report/external path disjoint, oldsource/qualificationdirs read-only. Root only shared writer. Sol owns newsource executor/ledger only; Astra current2015independent review released, sourcefield and contractdeviation kept separate.",
-  "current_work": "Complete exactly44 remaining SZSEmonthly originals2016-01..2019-08 after accepted2015 source type; zero networksearch/SSE or market run. Root archives2015 partial source answer and preserves failed contract.",
+  "updated_at": "2026-10-10T19:13:21.657505+08:00",
+  "conflict_decision": "Fresh related records read; only other cash-position-video stage changed, its archived video/media paths disjoint. Astra owns only44 independent-review.json; recovery Sol owns rootraw calendar-recovery subrecords/script and exclusive recovery-v1 external subtree. Root only shared writer. Remaining source Sol read-only Jan1 local readiness, no public actions until new scope registered.",
+  "current_work": "44 monthly source actions finished;43 complete months1308dates876scheduled,2017-01 missingJan1 and30observed notqualified. Zero-network independent review and necessary exact source backups/backup-only process restoration executing. Jan1 nextsource local readiness only. 2015 limited source answer archived52fa...,contract excess4>2 remainsnotpassed.",
   "paused_questions": [
     {
       "id": "etf-pair-full-actions-20261010",
@@ -144,3 +146,7 @@
 - 15源型/结构前提的独审2d02159ef75b2d19505c715d67e03463c4af000326570edf19b1f9f775563b1e支持下一必要问题：剩余SZSE2016-01..2019-08固定44个月/1339自然日。2015和2019-09后不重复，不取新行情/账户，不换资金候选窗口；上交所另源及个股开盘保持未证。设计remaining44-calendar-question-design.json按原输入缺口选月，非收益选择。
 - 独立新累计48HTTP最多（44初次+4真实失败/重定向余量）、可计量响应4MiB/单256KiB，每月canonical语义固定YYYY-MM只能2次、不能换nonce/scheme/标签扩额；连续两源可用性失败停该路径并诊断，不让44月逐个盲失败。禁止全部网络搜索/网页打开/猜URL/旧失败sql/公告定位；重定向只已观察官方目标、同月且入总账。旧日历94、新2015 23及年报18/18等旧累计/失败不变、不借余数。
 - fresh32MiB固定外盘/1MiB本机元数据plan，Sol/medium仅新raw/reportdraft/sourcebody/log该run；root冻结先登记后派，Astra独审/主控日期接纳。验证每月准确年/日集合/0-1标志及源SHA后才合并，缺月/缺日不填weekday或零。若44齐备仅接受其回溯日值，若源题有限负答案则如实结案/预算中断paused；不把资料日期齐当完整策略输入。2015报告源事实受限/执行失败独立阶段归档仍由root继续完成，并只准确路径普通推分支/API读回。
+
+## 2026-10-10T19:13:21.657505+08:00 44月来源执行完成，独核与必要恢复副本接续
+
+44/48 HTTP同月一次，保留13次暂停和内容缺日后原账本续读31独立月份，不补零、不重试Jan2017、不放宽完整月标准。43月字段待独核，44月完整仍未证。2015来源及20文件恢复已经独核并归档52fa584722b850a54b420e5d2dbbc48a1d8b0d93；23/26及同题4>2执行失败保留。目标8按既有存储授权补精确两旧名义CSV、82旧月份原响应、44新月份原响应与必要固定绑定/响应头的恢复缺口；原旧merged已有准确外盘恢复件直接复用。新副本/新进程仅读备份恢复走当前固定外盘32MiB运行下独立recovery-v1，不覆盖不挪原件，不宣称异机/坏盘恢复。预算0联网0账户0新价0删除；精确合同reused-and-remaining-calendar-recovery-contract.json。原5103002017年报18/18额外+2与P1不足整百新钱去向两个决定继续待回复，其他工作并行。
