@@ -1,0 +1,30 @@
+{
+  "received_at": "2026-10-10T13:29:35.147122+08:00",
+  "reviewer": "/root/recovery_evidence_review",
+  "model": "gpt-6-sol",
+  "method": "Independent read-only re-read of actual 23 source and backup byte arrays, device numbers, sizes and hashes; compare external recovery-manifest membership with frozen A first25 minus remote two",
+  "source_file_count": 23,
+  "backup_file_count": 23,
+  "passed_files": 23,
+  "failed_files": 0,
+  "source_total_bytes": 5417582,
+  "exact_byte_equality": true,
+  "source_device": 16777232,
+  "target_device": 16777238,
+  "fixed_external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+  "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T121047-6ba6691d855d/result/recovery-manifest.json",
+  "manifest_bytes": 25016,
+  "manifest_sha256": "ebc63f6f70c222940216af898dd1ca078e1331de6963269bc530c155cae9f16f",
+  "manifest_membership_exact": true,
+  "plan_authorization_source_audit_A_manifest_bindings_verified": true,
+  "other_machine_recovery_verified": false,
+  "failures_preserved": [
+    {
+      "phase": "reviewer_script_preflight",
+      "error": "nullable remote_git_recovery entry was not null-handled; first script exited before file checks",
+      "repair": "Handle null entries explicitly, then actual full 23-source comparison passed",
+      "files_modified": 0
+    }
+  ],
+  "new_market_computations": 0
+}
