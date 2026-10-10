@@ -157,3 +157,15 @@
 - 验收：观察参考与v06真实运动/中间帧、核本人源码，区分观察/推断/候选方法；补足时序编排/注意交接/动作质感的可执行指导，合并已有语义动作规则，不强制题材/方块/特效数量。检查Skill格式、本地引用、原有确认/无旁白/Opus职责不变、准确diff和归置。
 - storage: 2026-10-10T14:40:01.245515+08:00固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok=true；外盘569483460608B。预计本轮小诊断/抽帧<80MiB外盘，Skill/小记录<128KiB本机；复用已有抽帧，无安装/收益实验/新影片/代理/模型切换/发布/删除。
 - 下一步：看片与源码定位缺口，按skill-creator合并窄增量，验证后释放共享范围。技术文档更新不冒充新效果已实测达到参考。
+
+
+## 动态编排Skill增量交付 2026-10-10T14:52:23.574094+08:00
+- status: completed（本轮Skill维护）；stage: motion_design_skill_increment_delivered；scope_released: true；root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c唯一写者。
+- checked_coordination_sha: d81ac5741b07a7f35d4fbe95e131c30047d1e4fe；checked_at: 2026-10-10T14:52:23.574094+08:00；已读自身、COORDINATION1.1及本轮既读trend-trading、trend-perspective、nasdaq、personal-quant、system-x、dual-ma、中控；新增frozen-input-recovery-20261010只独立恢复/磁盘小记录/API，不占视频Skill，已读最新范围，无冲突。
+- 用户当前反馈v06“已经不错了”，并要求继续总结动态设计差距，不能只谈方块。已对照参考转场实帧、本人最终MP4原帧及源码；本轮无新片，非模型基准测试。
+- 实际本地三文件已更新：主SKILL既有路由、references/motion-direction.md将语义动作规则合并并补注意交接/同步错开/前后搭接/对象换作用/动作轻重/空间留白，references/decision-motion.md增加具体比较与最新反馈。保留无旁白、实际工程样例、原确认顺序和Opus创作分工，不预制本期新镜头、不修改已交开工包。
+- 已推成果codex/cash-position-video-20261009@571e03341880a29e85dfdf5dceea399007e5257b；准确4文件远端SHA及逐文件字节读回通过。原SKILL与motion-direction含他人未跟踪历史，只将本次精确零上下文补丁入库，整包Skill未声称远端同步；decision-motion为本人已跟踪源直接更新。两小记录加补丁均在自己的既有目录。
+- 证据：固定外盘视频库/投资心态/20261009-cash-position/v08-motion-skill-review-20261010/动态编排复盘.md；本机motion-skill-review.json记三文件改前/后SHA；before/after、精确diff、源片SHA及检查回执已读回。
+- 验收：Skill结构、本地引用、入口除路由外逐行一致、原流程/职责保留、精确补丁反向检查、准确暂存差异与归置通过。首次补丁空白检查指出空上下文单空格，保留失败并改零上下文后通过，不跳过检查。
+- 观察限制/失败：首次fps联系表标签与采样偏移、第二次select/tile部分格裁切，均保留且不作为精确证据，改独立10/12/12.8/13.4秒帧逐张查看；本轮浏览器入口被URL策略拒绝，未绕过。复用前轮完整播放回执，本轮没有新增完整播放/独立听审或新效果对照，不宣称文档使成片达到参考水平。
+- 资源：14:40已核固定UUID身份/容量，普通证据和备份直接外盘；没有安装/付费/新模型或代理/金融研究/策略系统改动/发布/删除。后续按新方法制作时再用实际连续小样验观感，当前维护范围释放。
