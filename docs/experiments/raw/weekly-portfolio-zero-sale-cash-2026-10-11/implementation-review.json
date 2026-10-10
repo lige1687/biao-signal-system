@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "status": "four_original_paths_plus_one_three_week_startup_counterexample_executed",
+  "scope": "P1 zero-eligible-sale cash deferral only; no market, live account, or strategy-return claim",
+  "accepted_scenario_count": 5,
+  "failed_scenario_count": 0,
+  "attempts": [
+    {
+      "batch": 1,
+      "status": "python_parse_failed",
+      "preserved": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-zero-sale-cash-20261011/weekly-portfolio-zero-sale-cash-20261011-20261011T001324-2c8c0fb78769/result/attempt-1-failure.json",
+        "bytes": 308,
+        "sha256": "518ea115786362871d25e3d52c5004c43f8f75afc0f4471e3a32a50762911255",
+        "device": 16777238
+      }
+    },
+    {
+      "batch": 2,
+      "status": "passed",
+      "preserved": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-zero-sale-cash-20261011/weekly-portfolio-zero-sale-cash-20261011-20261011T001324-2c8c0fb78769/result/synthetic-ledger-replay.json",
+        "bytes": 3771,
+        "sha256": "05153ab58a5ed133f5b1593b6d91d8bb7a5ff9aa9090eebf56420a201dea3bed",
+        "device": 16777238
+      }
+    }
+  ],
+  "code": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/policy_zero_sale.py",
+      "bytes": 3549,
+      "sha256": "dc7ab5d846120b850590e0c51bc02bfc9afdae1ee41badf9a61462a447914db6",
+      "device": 16777232
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/run_synthetic_checks.py",
+      "bytes": 13832,
+      "sha256": "dca429d07ec8ac7f9e30f34e7a994ecc9d6461ff5a3feb5ab30ff8fbfccea95c",
+      "device": 16777232
+    }
+  ],
+  "policy": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/policy-decision-amendment.json",
+    "bytes": 1252,
+    "sha256": "e09831a9b166bef09f10df9de6c0f1caa7c19c90feaa233bad21dcb8cefcd417",
+    "device": 16777232
+  },
+  "report_draft": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/report-draft.md",
+    "bytes": 3320,
+    "sha256": "7cad961879d3081771b66ca6cdff32e269624227ad8874ee1dc812d47baec189",
+    "device": 16777232
+  },
+  "external_device": 16777238,
+  "external_total_new_bytes": 7546,
+  "local_total_new_bytes_excluding_this_record": 20956,
+  "limits": [
+    "artificial inputs only",
+    "no historical market replay",
+    "full shared-account specification remains unqualified as a whole",
+    "not same as acceptance or trading authorization",
+    "zero-start cash deadlock is now shown by one separate three-week dated-ledger replay; policy remains unresolved"
+  ],
+  "known_counterexample": {
+    "kind": "actual_dated_ledger_replay_plus_source_inference",
+    "source": "frozen order_planning.py plan_p1/values and new policy_zero_sale.py",
+    "opening_holdings": {
+      "A": "0",
+      "B": "0"
+    },
+    "weekly_inflow": "250",
+    "trace": [
+      {
+        "week": 1,
+        "cash": "250",
+        "weight_A": "0",
+        "weight_B": "0",
+        "triggered": true,
+        "sellable_whole_lots": "0",
+        "action": "defer_all_cash"
+      },
+      {
+        "week": 2,
+        "cash": "500",
+        "weight_A": "0",
+        "weight_B": "0",
+        "triggered": true,
+        "sellable_whole_lots": "0",
+        "action": "defer_all_cash"
+      },
+      {
+        "week": 3,
+        "cash": "750",
+        "weight_A": "0",
+        "weight_B": "0",
+        "triggered": true,
+        "sellable_whole_lots": "0",
+        "action": "defer_all_cash"
+      }
+    ],
+    "implication": "zero-start P1 never initiates a purchase without an additional authorized policy definition",
+    "executed_ledger_replay": true,
+    "actual_receipt_sha256": "0ea8646f4834c18658c02e58945693c973d893482916c3fff2d9707db10a7dc7"
+  },
+  "prior_review_sha256_before_startup_execution": "46e4c61b0e5ab2f04b2828e433a58ab76020a0fa32f9a36d76854e5cc7ed79d0",
+  "additional_controller_batch": {
+    "scenario_count": 1,
+    "week_count": 3,
+    "result": "cash retained 250,500,750; no holdings, orders, fees",
+    "location_record": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/startup-counterexample-location.json",
+      "bytes": 2099,
+      "sha256": "300faf0f679f5bf024408dfc0ad09eedd29a510a3e375df87e31346529f8b666",
+      "device": 16777232
+    },
+    "runner": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/run_startup_counterexample.py",
+      "bytes": 7494,
+      "sha256": "bf0bf5835b7492863d7ed0d8e70d8699d9a4aa4104dadf6b755906171e96748d",
+      "device": 16777232
+    }
+  },
+  "external_ordinary_file_count": 3,
+  "original_accepted_scenario_count": 4,
+  "additional_accepted_scenario_count": 1,
+  "metadata_correction": {
+    "previous_review_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/implementation-review-before-final-metadata-20261011.json",
+    "previous_review_sha256": "cc9cf5f488ec24a47983aec6d4d3b9a86e7f56204c0a8d84a342b603db73442c",
+    "note": "Current report binding independently read back; value happened to match the previous record. External byte sum excludes AppleDouble metadata."
+  }
+}

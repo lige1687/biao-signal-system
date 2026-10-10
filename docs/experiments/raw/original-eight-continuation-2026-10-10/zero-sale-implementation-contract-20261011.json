@@ -1,0 +1,79 @@
+{
+  "parent_task": "original-eight-continuation-20261010",
+  "registered_coordination_commit": "0b256baf08ad91032fd5cae5935387aedd362523",
+  "frozen_at": "2026-10-11T00:13:51.198615+08:00",
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "controller_review": {
+    "required": true
+  },
+  "forbidden": [
+    "market computation before qualification and independent full-account contract",
+    "strategy authority edits",
+    "old frozen source or ledger overwrite",
+    "shared registry/API/Git writes by agent",
+    "source downloads outside approved target",
+    "old budgets reset or borrow"
+  ],
+  "mission": "Implement and verify chosen zero-sale P1 cash-nextweek branch using finite artificial account values",
+  "task_scope": [
+    "artificial local account values only; original shared-account-spec and human choice attachment",
+    "isolated new research policy planner/adapter, reuse accepted quantity/price cap arithmetic if needed",
+    "adjustment triggered and aggregate eligible sale rounds0: no buys and newmoney remainscash until next scheduled week; do not fall back P0",
+    "document forced-unlocked0 vs insufficientlot and exact100 boundary, no-trigger P0, failed-sell cash-retention, next-week deposit onlyonce",
+    "meaningful manual scenario replay through saved dated ledger to show cash/holdings/income not consumed or double counted"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/",
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/",
+    "docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/human-approval-20261011.json",
+    "configs/strategy-documents.v1.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/"
+  ],
+  "external_write_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-zero-sale-cash-20261011/weekly-portfolio-zero-sale-cash-20261011-20261011T001324-2c8c0fb78769"
+  ],
+  "network_allowed": false,
+  "output_plan": {
+    "schema_version": 1,
+    "task_id": "weekly-portfolio-zero-sale-cash-20261011",
+    "run_id": "weekly-portfolio-zero-sale-cash-20261011-20261011T001324-2c8c0fb78769",
+    "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-zero-sale-cash-20261011/weekly-portfolio-zero-sale-cash-20261011-20261011T001324-2c8c0fb78769",
+    "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-zero-sale-cash-20261011/weekly-portfolio-zero-sale-cash-20261011-20261011T001324-2c8c0fb78769/result",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "estimated_bytes": 8388608,
+    "internal_metadata_bytes": 524288,
+    "external_reserve_bytes": 10737418240,
+    "internal_reserve_bytes": 5368709120,
+    "execution_authorized": false,
+    "quota_enforced": false
+  },
+  "budgets": {
+    "market_runs": 0,
+    "synthetic_core_batches_max": 1,
+    "purposeful_synthetic_repair_batches_max": 1,
+    "manual_scenarios_target_max": 8,
+    "paid_or_external_calls": 0
+  },
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "expected_outputs": [
+    "policy-decision-amendment.json",
+    "isolated implementation and meaningful scenario checks",
+    "synthetic result receipts and code SHA, preserved failures",
+    "report draft plainChinese and limits"
+  ],
+  "stop_conditions": [
+    "essential new policy meaning ambiguous",
+    "old spec/source SHA changes",
+    "fixed external unavailable"
+  ]
+}

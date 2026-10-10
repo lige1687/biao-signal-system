@@ -31,6 +31,7 @@ def main():
     final_calendar = "--calendar-final" in sys.argv[2:]
     final_remaining_calendar = "--remaining-calendar-final" in sys.argv[2:]
     final_calendar_gap = "--calendar-gap-final" in sys.argv[2:]
+    final_zero_sale = "--zero-sale-final" in sys.argv[2:]
     assert git("rev-parse", "HEAD", text=True).strip() == MAIN_HEAD
     assert digest((ROOT / ".git/index").read_bytes()) == MAIN_INDEX
     base = git("rev-parse", BRANCH, text=True).strip()
@@ -43,6 +44,8 @@ def main():
         registrations.append("remaining44-calendar")
     if final_calendar_gap:
         registrations.append("jan2017-calendar-gap")
+    if final_zero_sale:
+        registrations.append("zero-sale")
     entries = [json.loads((CONTROL / f"{name}-registration-entry.json").read_text())
                for name in registrations]
     paths = {"src/lei_signal/research/native_d_conditional_risk.py",
@@ -74,6 +77,8 @@ def main():
         gap_contract = "docs/experiments/raw/szse-jan2017-missing-date-source-2026-10-10/executor-contract.json"
         if (ROOT / gap_contract).exists():
             paths.add(gap_contract)
+    if final_zero_sale:
+        directories.append("weekly-portfolio-zero-sale-cash-2026-10-11")
     for directory in directories:
         for p in (ROOT / "docs/experiments/raw" / directory).rglob("*"):
             if p.is_file() and not any(s in {"__pycache__", ".pytest_cache"}
@@ -128,6 +133,13 @@ def main():
         line_keys.append("remaining44_calendar_index_line")
     if final_calendar_gap:
         line_keys.append("jan2017_calendar_gap_index_line")
+    if final_zero_sale:
+        line_keys.append("zero_sale_index_line")
+    for key in line_keys:
+        previous = inserts.get("previous_own_lines", {}).get(key)
+        if previous is not None and previous != inserts[key] and previous in index:
+            assert index.count(previous) == 1
+            index = index.replace(previous, inserts[key], 1)
     lines = "".join(inserts[k] for k in line_keys if inserts[k] not in index)
     anchor = "## 1. 任务编号总账（任务书 → 执行归档）"
     pos = index.index("\n", index.index(anchor)) + 1

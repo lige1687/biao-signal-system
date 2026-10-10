@@ -1,0 +1,8 @@
+{
+  "error": "initial API list readback still 60-second cached prior registry; failed pending=false assertion after actual registry/INDEX/catalog writes",
+  "registry_two_entries_written": true,
+  "index_own_lines_written": true,
+  "followup": "read uncached single report endpoint then wait through independent archival, no repeated insert or service restart",
+  "catalog_written": true,
+  "cause_source": "src/lei_signal/api/experiment_reports.py::_SCAN_TTL_SECONDS=60.0"
+}
