@@ -1,3 +1,15 @@
+# 最新状态：发布用户下载的新成片至小红书、抖音、哔站
+
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b，唯一写者；active / final_video_publish；scope_released false。
+- checked_coordination_sha: c64fdecf37d4db6207364980add7933832d6522b；checked_at: 2026-10-10T15:01:09.412590+08:00；已读自身和cash-position最新Skill已释放/独立目录，nasdaq/dual-ma既有发布界限，COORDINATION1.1沿用；本片用独立浏览器投稿标签和独立v10记录，不操作其他影片/稿件/Skill。
+- 用户原话“下载里边有存的对应的视频了应该，做好的视频，你看着发布一下吧到xhs抖音”，后补“哔站也发哈”。明确授权本期成片三平台上传/提交，不重复请求批准。
+- 已定位Downloads/trend_perspective_16x9_v1.mp4（另cash_position不是本次）；13422603B，SHA3883109370e04aff22c277ada8d3ecb0bf90cea8a888ecc80ba7e55861256eee，125.483秒1080p30fps H264/AAC；实际抽帧确认原片主题/章节、真实案例标识和另期双均线仅引用。用户提供新成片，不能把旧v03/v07当发布文件。
+- 范围：独立外盘视频库/趋势交易/20261009-trend-perspective/v10-publication-20261010（预检/发布文案/回执）、本机仅本人位置索引和进度，此协调记录；原下载文件只读保留。基线codex/trend-perspective-video-20261009@eba7a06cefd9de1f79af5954d226bffd805c116c。
+- storage 14:57固定UUID身份可用，外盘569445974016B；不重渲成片、不升级/安装/删除/付费。仅上传文件与平台适配标题说明和正式话题候选；公开金融含义沿原范围，无收益承诺/私人持仓。数据/音乐独立许可仍未补证明，不把上传成功当许可核验。
+- 验收：同文件指纹/完整解码与规格；各平台提交结果、审核/发布状态分别记录，回打开原作品读回标题/正文/正式话题；保存界面证据。登录验证码等确需人处理时只暂停对应平台，继续其他平台；不自动代删/改旧稿。
+
+---
+
 # 最新状态：Opus开工包已备，工程可用，案例/公开权限部分未齐
 
 - task-id trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；prepared / opus_package_prepared_partial；scope_released true（本轮备料结束，未启动Opus创作）。
