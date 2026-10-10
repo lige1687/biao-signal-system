@@ -1,3 +1,45 @@
+# 用户批准23准确外盘副本，原八目标必要待办接续
+
+- task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status active / authorized_exact_backup_and_original_eight_readiness；updated_at 2026-10-10T13:24:45.767441+08:00。
+- checked_coordination_sha c0d8911f5aacf7411465de4ddb50ed7322dd95c4；checked_at 2026-10-10T13:24:45.767441+08:00；COORDINATION及原中控/本任务/A/B/C/mac存储/daily/数据资格相关最新段已读；旧中控已交接、源只读，本题无重叠。root唯一外盘23副本、小回执及系统原目标记录写者。
+- 人类直接授权原话：“允许哈， 然后你持续推进所有任务哈”；承接本聊天23份5,417,582字节准确新副本确认。记录authorization-20261010.json；旧pending复制许可已满足，不再询问。另机目标身份/路径未明，不将广义继续解释成无限权限。
+- 准确新增外盘写入范围：/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T121047-6ba6691d855d；复用原backup-plan唯一路径，23源路径/大小/SHA不改。只新建副本及必要恢复清单，源仍原位；目标已存在则先核真实状态，不覆盖、不删，不盲重试。容量6MiB/本机1MiB、固定卷及设备重新预检；外盘不合格则停新增，不回退内盘。
+- 继续原八目标：目标4由既有Sol只读复核最小用途/资料缺口；目标3/5由Sol只读核未用必要预算和已有封存结论；root作范围/输入/方法/最终验收。两只读分工不写共享表或源，不派同套八目标重复研究。目标1/2/6/7仅有具体新问题才做，没有新问题不制造待办。
+- 工作分支codex/frozen-input-recovery-20261010；上次成果6b06a04b46bdd35cc62777fd60d135d457291ec3；只写既有自身raw/progress、准确新外盘目录。系统okr-57eb3f28e526实际记准确授权/start/进展；其他原条目如有本轮必要进展仅追加note，保留原owner/授权/完成标准，不抢任务。共享registry/INDEX若需正式归档先另登记串行范围；目前只读。
+- 验收：23副本逐份源读前后未变、目标大小/SHA读回；25来源由23外盘+2准确远端定位；异机独立核目标设备后才能验，不用本机冒充。归置和小成果准确远端SHA/内容核同；原四组及旧两组耗尽保留，新实验/重放/下载/调参/原件改写=0。
+- 下一动作：系统实际登记准确23副本授权；使用同一原计划逐项复制，第二次读回；随后收敛原八目标仍有必做的资料边界与预算事项。
+
+<!-- lei-coordination-json:start -->
+{
+  "task_id": "frozen-input-recovery-20261010",
+  "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
+  "status": "active",
+  "stage": "authorized_exact_backup_and_original_eight_readiness",
+  "checked_coordination_sha": "c0d8911f5aacf7411465de4ddb50ed7322dd95c4",
+  "checked_at": "2026-10-10T13:24:45.767441+08:00",
+  "read_task_ids": [
+    "research-dispatch-controller",
+    "frozen-input-recovery-20261010",
+    "leisignal-risk-input-20261009",
+    "leisignal-risk-run-20261009",
+    "leisignal-risk-review-20261009",
+    "mac-local-storage-cleanup",
+    "daily-trading-system-audit",
+    "risk-shape-information"
+  ],
+  "work_branch": "codex/frozen-input-recovery-20261010",
+  "base_commit": "6b06a04b46bdd35cc62777fd60d135d457291ec3",
+  "write_paths": [
+    "docs/experiments/raw/frozen-input-recovery-2026-10-10/",
+    "docs/ops/work-progress/frozen-input-recovery-20261010.md",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T121047-6ba6691d855d"
+  ],
+  "scope_released": false
+}
+<!-- lei-coordination-json:end -->
+
+---
+
 # 只读预检已发布；外盘副本等待明确确认，异机仍未验收
 
 - task-id: frozen-input-recovery-20261010；owner/session: 01a123fc-553b-7b81-9952-36e1acb11dcc；status: blocked / awaiting_external_copy_approval_and_target_device；updated_at: 2026-10-10T12:15:27.261128+08:00。本状态表示准确缺少许可/目标设备，不是用户要求暂停，也不代表后台继续。
@@ -27,7 +69,7 @@
 - 当前检查：本机25原件大小/指纹只读核同；独立副本、远端准确定位正在核；异机未运行；归置、成果发布尚未运行。
 - 下一动作：保存逐项准确副本/缺口回执，准备只补缺且不覆盖的恢复计划；未获具体仓外许可前不复制资料。
 
-<!-- lei-coordination-json:start -->
+<!-- historical-coordination-json:start -->
 {
   "task_id": "frozen-input-recovery-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
@@ -52,4 +94,4 @@
   "external_write_paths": [],
   "scope_released": false
 }
-<!-- lei-coordination-json:end -->
+<!-- historical-coordination-json:end -->
