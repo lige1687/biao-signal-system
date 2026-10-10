@@ -116,3 +116,10 @@ checked_coordination_sha=4cb6ce3cec032b292d81086fdeb0c6b47563abb3；checked_at=2
 
 ## 正文普通活动名补充 2026-10-10T16:15:55.175212+08:00
 用户澄清要“不带#的文字”，三站正文均加“vibe知识大赏，用动画聊聊现金、仓位与风险。”，XHS/DY原正式话题保留。XHS原编辑页重新打开全文和6章/AI声明读回，修改仍审核中；Bili原公开页全文读回通过；DY只改原待验证稿，重新发布仍本人SMS验证，未成功提交。初次误解为#话题已纠正；Bili内容编辑fill导致片段串位，原稿已通过清空后完整粘贴修复，最终公开页无异常残片、普通活动名单独一段。证据xiaohongshu-plain-vibe-readback.jpg/bilibili-plain-vibe-readback.jpg。storage16:14固定UUID身份通过外盘569395642368B。checked_coordination_sha=cf49c139ff838191f10795ed3cb3b44bae6737fb；已读新增trend-perspective仅其自己的同类话题修改，无冲突。未改媒体/正式标签/其他稿件，不清理或扩大权限。
+
+
+## 2026-10-10 风格学习澄清（2026-10-10T17:52:23.692903+08:00）
+
+用户明确主要学习Opus动态风格，不硬套100现金/100方块；载体、分镜、运镜由本地设计收敛。已定向更新code-explainer-video入口、motion-direction、style-compound-motion以及opus-video-prep入口/BRIEF，共5文件。将注意交接、动作起落/轻重、节奏/空间层次、运镜动机和视听关系作为可迁移方法；具体物件按内容选，实际小样验效果。参考来源与制作分工分开，明确委托Opus时仍保留其纯备料流程；本地导演任务不套用该限制。
+
+验证：两Skill结构、本地引用、精确零上下文补丁反向校验、归置检查通过。无新片/重新渲染，本轮不宣称动态质量已经达到参考。五文件原有未跟踪共享历史未整包入库，本次补丁和前后SHA位于`docs/ops/media/cash-position-20261009/style-transfer-skill-20261010.patch`与`docs/ops/media/cash-position-20261009/style-transfer-skill-20261010.json`。ai_tools副本未改。旧媒体/已交包保留。现金片抖音发布仍未确认，本次维护不冒称发布完成。协调入口仍为coordination/lei:docs/coordination/tasks/cash-position-video-20261009.md。
