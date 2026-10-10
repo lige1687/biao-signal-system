@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "52169ef74f48739d14da65658ffdb27da13909b1",
-  "checked_at": "2026-10-10T19:14:32.456616+08:00",
+  "checked_coordination_sha": "cdcd2b5048fb6bf7893a8591fbd516d879c2d756",
+  "checked_at": "2026-10-10T19:22:12.672161+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -86,9 +86,9 @@
   ],
   "latest_result_commit": "52fa584722b850a54b420e5d2dbbc48a1d8b0d93",
   "scope_amendment": "New genuinely observed one-date source gap after44month original source inspection. Exact SZSE2017Jan1 planned closure official notice only, max4publicactions/two semanticlocators/two exactsource fetch+redirect+open; originalmonthlyunknownandfailedmonth untouched, no oldbudgetborrow.",
-  "updated_at": "2026-10-10T19:14:32.456616+08:00",
-  "conflict_decision": "Allrelated coordination records freshly read. Jan1 newraw/report and exclusive fixedexternalrun disjoint from Astra44independent-review and Solrecovery-v1/sourcefiles. Root onlysharedwriter; Solsource executor ownJan1 ledger/manifest/report only. No oldsources/strategy changes.",
-  "current_work": "44sources independently reviewed43complete1308dates876opens; full44incomplete Jan1 gap. Recovery Sol copies/restores necessary exact reused+new originals. Source Sol can execute new one-date planned closure question after frozenexactcontract, preserving field types and alloldfailures.",
+  "updated_at": "2026-10-10T19:22:12.672161+08:00",
+  "conflict_decision": "Fresh12related task files+COORDINATION read. Since last ownregistration only cash-position-video prep/music/story/media stage changed, paths disjoint. Allcalendar source/review/recovery agent scopes released. Source Sol owns only rootraw accepted-event-execution-dependency-map.json read-only source mapping; root only shared/API/Git writer. No existing old/sourcecode changes.",
+  "current_work": "Seven bounded reports ready: source43 complete month limited result andJan1 boundednotproved, recovery180+9rootactualtriplet checks accepted. Root exact archive/API publication; Sol maps accepted event evidence to actually affected payment/opening/policy steps without new data or experiment. Existing quantity/cap solver SHA reuse, do not reopen.",
   "paused_questions": [
     {
       "id": "etf-pair-full-actions-20261010",
@@ -158,3 +158,7 @@
 ## 2026-10-10T19:14:32.456616+08:00 准确缺日的独立最小官方来源问题开工登记
 
 先只读复查本地相关原件没有2017元旦/年度通知或覆盖Jan1的当时周末规则。Astra独核44body及1339候选通过限定来源事实，执行44/48合规，整月2017-01仍不合格。新问题只核深交所官方公告是否规定2017-01-01计划休市；预计最多4公共动作，定位同一公告总2次，不因查询换名重置；发现原件后最多2次取正文/打开/重定向合计。原44月合同禁其他取源保持，旧月原响应不改，计划依据不填jybz、不变实际状态。新外盘16MiB、小记录512KiB，先设备容量预检；原2015违规、年报18/18及P1未定义决定均保留。问题设计jan2017-source-question-design.json，输入local-readiness与44独核SHA准确绑定。
+
+## 2026-10-10T19:22:12.672161+08:00 来源与恢复完成，后续仅接纳事件执行依赖映射
+
+44来源：43月1308日876开市，Jan2017 30观察未通过整月/Jan1未知，44月完整未证；执行合规44/48与2015同义4>2旧执行失败分别保留。180必要旧/新源文件每套1,655,018B、两个真实PID17876/18277、事先代码SHA328b8012...核相同，root另读180组原/副本/恢复相同。Jan1有界未证3/4/定位2/2无准确剩余取件入口，独核后9文件57,778B仅失败证据恢复，root实际读回9/9，原件stat均保持；不当source字段通过。两新报告registry mixed/API pending=false真实读回，第六/七尚未phase4推送。已读旧求解器两源码/金额证据，q/0.001限价及越限拒绝已经10/8验收，不建重复题。继续原授权零网络静态依赖映射：仅已接纳事件/准确支付日期与政策会花现金步骤，先定位实际缺失时点及是否有跨批竞争，不增加第三个用户决定、不请求全股票/十余年公告。P1关键分支与原年报+2提案仍待回复；原owner/status/预算及主工作区保持。
