@@ -321,3 +321,9 @@
 - Skill准确范围：.agents/skills/code-explainer-video/references/story-argument.md补金融主线核验与示例不冒收益、animatic-and-shot-library.md更新本片认可范围；本机docs/ops/media/cash-position-20261009/full-remake-skill-20261011.patch/.json、full-remake-20261011.json和本人work-progress。已有未跟踪Skill只准确补丁，新生成索引全文。
 - 视频范围：已核外盘v15-full-remake-20261011独立工程、内容/分镜/音乐/粗剪/成片/核验/预览，沿用v13/v14原组件并修接缝，旧源不改。预期约120秒，最终依阅读检查；新增盈亏比与胜率只教学算例，不交易回测或策略推荐。01:15固定UUID身份通过，外盘568233164800B；预计新工程媒体<=2GiB、内盘小记录<200KiB，所有普通产物外盘。
 - 验收：Skill精确差异/结构/引用/前后SHA/归置先通过；再全文因果/算术/来源/全片带乐粗剪、最终按实际时长完整帧数/解码/移动与桌面连续播放/转场帧/混音落点/完整交付。技术与主观接受分开。不安装/删除/发布/改策略/他人/自动化。基线成果a0cbbddc0e00bb843537f2f5f1581269e29dccac。
+
+
+## Skill先完成、全片粗剪进行 2026-10-11T01:21:34.466821+08:00
+- active；scope_released=false；checked_coordination_sha=9daa0b833f184750bb3ddc8d330ea0c180ce955a；checked_at=2026-10-11T01:21:34.466821+08:00；沿已读COORDINATION/本人/original-eight01:08无重叠范围。root唯一写者。
+- 01:17 Skill完成结构/路由/引用/数值反例/准确补丁校验；成果8166266a5f64aa7c9af7109a4b07bd29a4c980ba三准确文件已普通推送逐字读回。之后才建立外盘v15工程。用户先Skill再片的顺序已执行。
+- 完整120秒主线与8段时间表/公开文稿/配套来源已写；素材沿真实OHLC与既有音乐，无新增无关实拍。实际带音乐低帧率全片粗剪已导出并正在正常连续播放，不称正式片已完成。检查通过后精修图形与动作。新盈亏算例明确相同风险单位、未计费用/非实测；610半仓例只演示动作，不当大盈亏比证明。
