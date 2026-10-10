@@ -1,3 +1,16 @@
+# 最新状态：小红书与哔站已公开，抖音等待本人短信验证
+
+- task-id trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；status awaiting_user_sms；stage publication_partial；scope_released false（仅本人抖音原稿继续）。
+- checked_coordination_sha: 4cb6ce3cec032b292d81086fdeb0c6b47563abb3；checked_at: 2026-10-10T15:12:58.665517+08:00；已读COORDINATION1.1、自身及新增双均线独立Bili投稿BV1ehpv6EEgz/范围校核。与本片BV1ehpv6EEUq、XHS原作和独立标签不冲突；现金/纳指独立范围沿用，不操作他人作品。
+- 用户明确授权Downloads/trend_perspective_16x9_v1.mp4发XHS/抖音，追加哔站。13422603B，SHA3883109370e04aff22c277ada8d3ecb0bf90cea8a888ecc80ba7e55861256eee；125.483秒1080p30fps H264/AAC，完整解码exit0；-12.14LUFS/-1.42dBTP，未改原文件。
+- 小红书已公开：https://www.xiaohongshu.com/explore/6ac9e40c000000001203d224 ，原作实际播放/正文/AI声明/趋势交易和投资学习链接读回；保存后原编辑页正式topic-ID610ac9b9000000000100536b及5d7c455e0000000002001d8d核同。
+- 哔站已审核通过且1080p转码完成：https://www.bilibili.com/video/BV1ehpv6EEUq/ ，原编辑页及公开页标题/完整正文/财经、趋势交易、K线、投资学习四标签/AI声明读回，双比例封面已存。公开视频页在本浏览器停1秒缓冲，未声称全片网络播放通过。仅一次投稿，不重复提交。
+- 抖音上传完成、正文标题/候选趋势交易与金融知识/AI声明/双封面已设置。点击发布要求本人短信验证，已获取验证码并向人类请求本次码或本人在原页完成；没有答复，尚未提交，没有作品ID。原标签1731524081标handoff，不重传、不建重复稿。封面截图提示是非阻断建议，无付费AI。
+- 证据和同SHA备份在固定UUID外盘视频库/趋势交易/20261009-trend-perspective/v10-publication-20261010，publication-receipts.json及原作截图/读回；源工程未提供，数据/音乐独立公开许可未知，不能宣称核验通过。Git仅两份本人小索引，成果codex/trend-perspective-video-20261009@9540add7af17be648a56056f8316deafa30af578已正常推送及远端SHA/文件字节核同；归置检查exit0。
+- 恢复：人类提供本次抖音验证码或本人完成验证后，从原投稿页接续核提交/审核/原作。未启动监控/通知、未改Skill/策略/别片，未安装/删除/付费；此轮不能标三平台全完成。
+
+---
+
 # 最新状态：发布用户下载的新成片至小红书、抖音、哔站
 
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b，唯一写者；active / final_video_publish；scope_released false。
