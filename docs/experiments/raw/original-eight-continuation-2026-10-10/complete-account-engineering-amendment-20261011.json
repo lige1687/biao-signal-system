@@ -1,0 +1,16 @@
+{
+  "parent_contract": "docs/experiments/raw/original-eight-continuation-2026-10-10/complete-account-engineering-contract-20261011.json",
+  "parent_contract_sha256": "606ea6eddab51050751383de8ee3093f4fd02f066e0a8d9bfe9be060be9c0fab",
+  "question_id": "weekly-two-etf-complete-account-20261011",
+  "reason": "Independent Astra review: original-decision ex crossing and terminal settlement state need precise event semantics; inherited operation burden and cashflow metrics retained.",
+  "historical_execution_authorized": false,
+  "changes": {
+    "pending_plan_across_ex": "Cancel each unexecuted plan/phase if original_decision_at < ex_at <= candidate_opening_at, even when ex occurs before phase freeze. Monday00:01 decision,08:00 ex,08:05freeze is cancelled. Preserve completed fills and entitlements/cash; wait freshweeklydecision.",
+    "terminal_lock": "6/30 buys and sales retain terminal locked shares/restricted cash with no next certified model day. If old ledger requires a release clock beyond end, it is a non-executable placeholder only, not an observed tradingday; never price/execute/value events after window. Equity includes these assets at6/30 close. Same method for buy unlock and sale cash.",
+    "opening_limit_boundary": "Inherit qualification side-specific strict bounds: buy at upper limit rejected, sell at lower limit rejected. Opposite bound not itself a refusal; still conditional research full-fill, no order-depth proof.",
+    "inherited_metrics": "Retain original shared-account-spec cashflow-weighted annualized return using dated deposits/terminalwealth, longest unrecovered unitNAV drawdown duration, distinct actual operation dates and operations between weekly decisions, order counts/rejections and annual attribution reconciliation.",
+    "artificial_checks": "Use the existing ex-cross lifecycle case to assert decision-before-ex-before-freeze explicitly; include lastday buy+sale locked terminalstate in existing expiry/terminal check. Preserve 10 cases and all existing required ledger assertions; no marketrun or method variants."
+  },
+  "budget_change": false,
+  "old_evidence_immutable": true
+}

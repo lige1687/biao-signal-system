@@ -1,0 +1,89 @@
+{
+  "parent_task": "original-eight-continuation-20261010",
+  "mode": "resume",
+  "mission": "Implement approved no-required-sale P0 buy branch in isolated policy v2 and prove startup/account effects via3 meaningful artificial scenarios",
+  "registered_coordination_commit": "994119267836eda5fd1c1ec45acc1f23e05f9cbd",
+  "frozen_at": "2026-10-11T00:47:58.214986+08:00",
+  "task_scope": [
+    "Artificial local account values only",
+    "New isolated adapter imports original planner/dated ledger; preserve oldpolicy and oldthreeweek counterexample bytes",
+    "Compute required excess independently from old unsupported zero-sale reason. If no held asset exceeds target value (including zero holdings and both underweight), use original plan_p0 buy rules",
+    "If genuine excess requiredsale exists but old legal wholelot plan0, defer cash nextscheduledweek; other ready/await_sale/failedseller unchanged",
+    "Three new scenarios: zero-holding3scheduledweeks with deposits each once actually buys; both positiveholdings under target uses P0; trueoverweight but<100legal sale retainscash. Repeatedweek/deposit protection included",
+    "Whole100buy/selllegal restrictions remain. No arbitrary/fractional sells, no authority or oldspec overwrite, no marketdata or networks",
+    "Save code hashes, exact result receipt, cumulative attempts and old/new branch differences"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/policy_zero_sale.py",
+    "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/run_startup_counterexample.py",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/",
+    "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/startup-approved-human-and-quantity-rules-20261011.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/startup-approved-20261011/"
+  ],
+  "external_write_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-startup-approved-20261011/weekly-portfolio-startup-approved-20261011-20261011T004758-eb42d2dc65e1"
+  ],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "controller_review": {
+    "required": true
+  },
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "budgets": {
+    "new_meaningful_synthetic_batch_max": 1,
+    "new_manual_scenarios_max": 3,
+    "prior_manual_scenarios": 5,
+    "cumulative_manual_scenarios_max": 8,
+    "market_runs": 0,
+    "source_requests": 0,
+    "paid": 0,
+    "mechanical_repair_authority": "record cause/partialoutputs before one needed repair, do not repeat accepted oldcases"
+  },
+  "output_plan": {
+    "schema_version": 1,
+    "task_id": "weekly-portfolio-startup-approved-20261011",
+    "run_id": "weekly-portfolio-startup-approved-20261011-20261011T004758-eb42d2dc65e1",
+    "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-startup-approved-20261011/weekly-portfolio-startup-approved-20261011-20261011T004758-eb42d2dc65e1",
+    "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-startup-approved-20261011/weekly-portfolio-startup-approved-20261011-20261011T004758-eb42d2dc65e1/result",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "estimated_bytes": 8388608,
+    "internal_metadata_bytes": 786432,
+    "external_reserve_bytes": 10737418240,
+    "internal_reserve_bytes": 5368709120,
+    "execution_authorized": false,
+    "quota_enforced": false
+  },
+  "input_hashes": {
+    "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/policy_zero_sale.py": "dc7ab5d846120b850590e0c51bc02bfc9afdae1ee41badf9a61462a447914db6",
+    "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/run_startup_counterexample.py": "bf0bf5835b7492863d7ed0d8e70d8699d9a4aa4104dadf6b755906171e96748d",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a"
+  },
+  "expected_outputs": [
+    "new isolated policy code and artificial runner",
+    "exact artificial result and code fingerprint on fixed externalrun, small result-location.json/implementation-review.json",
+    "plain-language delta and oldcounterexample historicalonly"
+  ],
+  "stop_conditions": [
+    "old frozen input hash drift",
+    "fixed external identity/capacity failure",
+    "essential undefined policy other than approved nosell buy",
+    "write/scope overlap or requestedscope expansion"
+  ],
+  "forbidden": [
+    "realmarket/account/trade/deploy",
+    "old source/oldresults changes",
+    "arbitrary/noninteger ETF orders",
+    "sharedreport/registry/API/Git by executor",
+    "new OTC instruments or tuning"
+  ]
+}

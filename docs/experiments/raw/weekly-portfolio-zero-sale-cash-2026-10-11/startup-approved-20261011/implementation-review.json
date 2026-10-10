@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "status": "bounded_artificial_engineering_passed_controller_review_pending",
+  "plain_language": "如果账户里没有任何超过目标而需要卖出的持仓，按原有买入规则把新钱买成整百份；如果确实需要卖出，但按原交易单位连100份都卖不出，现金仍等到下一次预定周决策。",
+  "strategy_layer": "shared cash allocation and weekly ETF holding adjustment; no strategy authority changed",
+  "fixed_buy_sell_quantity": "Purchases remain multiples of 100; required P1 sales remain rounded down to multiples of 100 and limited by released holdings. No arbitrary smaller sale or tail liquidation is generated.",
+  "new_branch_difference": "The old policy deferred every triggered zero-whole-lot sale, including no holdings or both holdings under target. The new adapter checks actual positive excess against the half-target before choosing original P0 buys or deferral.",
+  "actual_accounts": {
+    "zero_start_three_weeks": {
+      "weekly_external_deposits": "250, 250, 250; each once",
+      "weekly_buy_orders": "A100+B100 each week, all at artificial price 1",
+      "cash_after_each_week": "39.800, 79.600, 119.400",
+      "shares_after_each_week": "A/B 100/100, 200/200, 300/300",
+      "total_fees": "30.600",
+      "final_equity": "719.400"
+    },
+    "both_positive_holdings_below_target": {
+      "initial_shares": "A100/B100",
+      "new_orders": "A100+B100",
+      "final_cash": "39.800",
+      "final_shares": "A200/B200"
+    },
+    "true_excess_below_100_legal_sale": {
+      "required_A_sale_before_whole_lot_rounding": "13.75 shares",
+      "new_orders": 0,
+      "final_cash": "250",
+      "final_shares": "A100/B10000"
+    }
+  },
+  "checks": [
+    "Each week deposited once; repeat deposit and repeat decision rejected at policy guards without changing account money state, so these rejected attempts do not appear in dated-ledger audit counts",
+    "Original P0 planning and opening-order validation used for all new purchases",
+    "Dated ledger applied each purchase and verified cash, holdings, fees and account value",
+    "Genuine excess below a legal whole sale retained cash without any order",
+    "Original historical five cases were reused without rerun or overwrite"
+  ],
+  "limits": "All prices, calendar permissions and fees are artificial. This is not a qualified historical ETF comparison, actual execution proof, or trading authorization.",
+  "mechanical_failure": "First attempt stopped in disk identity preflight because plist fields use integer 0/1; recorded before repair, then second attempt passed.",
+  "result_index": "result-location.json"
+}

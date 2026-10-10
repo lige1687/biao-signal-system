@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-11T00:49:46.552298+08:00",
+  "stage": "approved narrow no_required_sale buy implementation running; full account contract readonly review",
+  "coordination": "994119267836eda5fd1c1ec45acc1f23e05f9cbd",
+  "source_readback_mode": "SSE original HTML read through web, SZSE primary indexedtext read; directopens timedout twice, no failedresult upgraded to originalpage acceptance",
+  "official_rules": [
+    {
+      "exchange": "SSE",
+      "date": "2014-06-27",
+      "reference": "上证函〔2014〕301号",
+      "url": "https://www.sse.com.cn/lawandrules/guide/stock/jyglywznylc/tz/c/c_20230209_5716007.shtml",
+      "findings": "whole100holding=>sell100multiple; remainder allonce separateorjoined;500cannot201+299;299 can100+199or99+200;99mustsellall; fractional arbitrary selling not permitted"
+    },
+    {
+      "exchange": "SZSE",
+      "date": "2014-07-25",
+      "reference": "深证会〔2014〕72号",
+      "url": "https://www.szse.cn/lawrules/rule/trade/current/t20150914_565054.html",
+      "findings_from_primary_indexed_text": "whole100holding=>sell100multiples; oddremainderallonce separateorjoined, notsplit"
+    }
+  ],
+  "lookup_budget": {
+    "queries": 2,
+    "direct_opens": 3,
+    "open_success": 1,
+    "open_failures": 2,
+    "same_exact_szse_open_attempts": 2,
+    "no_further_retry": true,
+    "internal_web_HTTP_request_count": "unavailable"
+  },
+  "old_rule_boundaries_preserved": true,
+  "qualified_fixed_run_scope": "from0,buy100lots,noholderfold=holdingsalways100multiple, oddremainderstateunreachable; no blanket proof fullfund redemption",
+  "source_paths_local_review": [
+    {
+      "path": "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md",
+      "line": 36,
+      "meaning": "buy100lots/sell unlocked+clear remainder, P1targetexcessdown100distinctline48"
+    }
+  ]
+}

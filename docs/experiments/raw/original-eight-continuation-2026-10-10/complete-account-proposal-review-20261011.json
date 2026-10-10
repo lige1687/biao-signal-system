@@ -1,0 +1,110 @@
+{
+  "reviewer": "Astra high /root/full_account_contract_readiness",
+  "actual_read_only": true,
+  "no_network_or_market_or_writes": true,
+  "original_coordination_ref": "3ea8163956d28b4d80d8f27b9646d1b7da738f5c, not freshfetch claimed",
+  "judgment": "new limited complete-account contract possible, oldstrictfalse unchanged",
+  "important_gaps": [
+    "oldvalidator onlybuy",
+    "oldActionContext rejects all crossactions",
+    "no automaticweekly schedule",
+    "dividendeligible_shares external input needsactual account record snapshot"
+  ],
+  "no_tail_branch_needed": "zero start/buy100/nosplit means allheld100multiples, do not generalize full oddremainder support",
+  "methods": {
+    "label": "limited_daily_price_account_simulation",
+    "strict_historical_qualification_ready": false,
+    "old_qualifications_unchanged": true,
+    "window": [
+      "2015-01-01",
+      "2026-06-30"
+    ],
+    "symbols": [
+      "sh510300",
+      "sz159915"
+    ],
+    "initial_cash": "0",
+    "initial_shares": {
+      "sh510300": "0",
+      "sz159915": "0"
+    },
+    "deposits": {
+      "schedule": "every calendar Monday00:00 including holidays, first2015-01-05 last2026-06-29; prior complete NAV unit issuance, firstNAV1",
+      "shared_account_amount_CNY": "250",
+      "expected_weekly_events": 600,
+      "no_double_deposit": true
+    },
+    "targets": {
+      "sh510300": "0.5",
+      "sz159915": "0.5"
+    },
+    "rebalance_trigger_abs_weight_deviation": "0.05",
+    "value_denominator_includes": [
+      "free_cash",
+      "restricted_cash",
+      "dividend_receivable",
+      "held_shares_times_known_reference"
+    ],
+    "weekly_decision": "Monday00:01 once, lastavailable prior completeweek close/currentactualaccount after deposit. Price/order quantities fixed before opening; no current opening price in decisions.",
+    "P0": "Reuse original shortfall descending/code tie allocation; divide actual freecash by fixed shortfalls, fixed orderbudget/quantity100multiple inclfees; orderunused budget remainscash, not addedto otheropeningorder",
+    "P1": "No abs trigger=>P0; trigger but no positiveexcess=>P0(userconfirmed); positiveexcess requiresaleqty=min(excess/reference,unlockedshares) floordown100; allsale0=>cashnextweek; saleattemptsfail=>terminateweekplan,nopursuit,nofallback; ifactualsaledone, actualcash only after release thenfreeze laterbuys originaldecision reference/shortfallordering, not addnetproceeds twice",
+    "trade_quantity": "buy100multiple; target P1selling floordown100 and <=unlocked/targetexcess; allholdingsalways100multiple fromzero/nosplit proof. Generalallowed odd-remainder sets not claimed implemented.",
+    "cost": {
+      "commission_rate": "0.001",
+      "commission_min_CNY": "5",
+      "slippage_cash_rate": "0.001",
+      "applies_to": "both sides, zeroorders0cost, no interest",
+      "label": "fixed artificial research cost scenario; not actualbroker fees",
+      "slippage_charged_exactly_once": true
+    },
+    "model_clock": "sorted union of the two saved quote date sets inwindow(2790dates); native warmup beforewindow for firstreferences; model dates not officialcalendarcertification",
+    "valuation": "mark at previousknown nominalclose until actual16:00 close arrival; no future/day high/low/volume used in decisions/openeligibility",
+    "eligibility": "Current saved opening only plus prior known close minus announced exday dividend for ordinarylegalprice bands; use dated existing 2020-08-24 sz15991520percent regime otherwise10percent; fixed sz1599152021-02-08+09 noopens. Unknown missingquotedate/exception=>stop, known missingFeb08carrymark+age only. No volume absolute/liquidity certification.",
+    "opening_execution": "first model09:30 candidate each frozen phase, missing/blocked/cap violation=>entire orderreject,no resizing/reallocation/pursuit. Passing order at storedopeningprice wholequantity. Bothbuy andsell actualqualification, sells never invokeoldunsupported validator blindly.",
+    "limit_prices": "Buycap reuse accepted0.001budget/price cap; sellquantity frozen, limit set before candidateopen at legal lowerprice from lastknown reference; bound identity and legalbandprice tick. No currentday high/low/close qualification.",
+    "shares_unlock": "next modeltradingday08:00, never same-day resale",
+    "sale_cash_available": "sell proceeds netfees restricted till next modelday08:00; laterbuy orders freeze08:05, earliestthat09:30, actualcashsnapshotno second credit",
+    "expiry": "all previousweek pending phases/orders expire just before nextMonday00:00; cash entersfreshweek. Ifnextcandidateopening跨新周 canceloldplan; terminalunexecuted kept as pending/expired state, no terminalfakefill",
+    "actions": {
+      "filter": "actualoldnotices onlythese2symbols inwindow; cash12, no holderconversion/split expected; annualv2 only completenesscrosscheck not originalPIT",
+      "information_known": "announcement_date23:59 researchassumption, actual arrivalunknown unchanged",
+      "record": "16:00recorddate actualaccountheld shares snapshot defines cash entitlement, subsequent sellskeepentitlement",
+      "ex_date": "08:00addreceivable=recordshares*perunit cash, simultaneouslyreduce stale mark perunit to avoid oldprice+receivable doublecount before same-dayclose",
+      "pay": "next modelday strictly AFTER announcedpay_date08:00 convertreceivable to freecash, evenifpay Mondaynotmidnight; no new incomecredit",
+      "pending_plan_across_ex": "cancel unexecutedplan phase when exeffect crossesfreeze/open, preserve completedfills and cashreceipts, wait nextweeklydecision; paymentalone doesn'tinflate frozenbuybudget",
+      "cash_release_overlap": "Mondaydeposit00:00+weeklydecision00:01 before08:00releases, no midnightcashfiction"
+    },
+    "end": "2026-06-30 EOD nominalclose equity inclfree/restricted/receivable, no forcedliquidation; show dated cash/holdings/rejected/cancelled/pendingcounts",
+    "output_metrics": [
+      "contributions",
+      "terminal_equity",
+      "profit_vs_contributed_cash",
+      "cash/holdings/receivables",
+      "cashflow-neutral unitNAV performance",
+      "time-weighted return",
+      "unitNAV maxdrawdown",
+      "dailyunitNAV annualvolatility",
+      "actualP1/P0risk ratio, no matchedrisk returnclaim ifdifferent",
+      "fees total/ordercount/turnover",
+      "dividendentitlements paid/restricted",
+      "yearbreakdowns and paired differences; no selection"
+    ],
+    "uncertainty": "one observed common markethistory/two deterministic policies, no repeatedoutcome selection or confidence claims; results conditionalcost/clock/settlement and dailyfill. No causaluniquealpha or actualtradeproof."
+  },
+  "core_budget": {
+    "historical_paired_core_batches_max": 1,
+    "initial_policy_path_attempts_max": 2,
+    "conditional_mechanical_paired_repair_batches_max": 1,
+    "total_historical_policy_path_attempts_ceiling": 4,
+    "successful_policy_paths_target": 2,
+    "scientific_parameter_variants": 0,
+    "external_requests": 0,
+    "artificial_lifecycle_cases_max": 10,
+    "artificial_core_batches_max": 1,
+    "diagnosed_artificial_repair_batches_max": 1,
+    "artificial_failures_counted": true,
+    "engineering_controller_can_amend_only_needed_local_checks_with_cause": true,
+    "sealed_monthly4_fixed2_A03_and_prior_artificial8_preserved": true,
+    "core_execution_authorized_at_this_engineering_stage": false
+  }
+}

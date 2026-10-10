@@ -1,0 +1,9 @@
+{
+  "attempt": 1,
+  "status": "preflight_failed_before_any_scenario_or_result",
+  "cause": "macOS diskutil -plist reports Internal and WritableVolume as integer 0/1, while preflight used Python identity comparisons to bool and a missing ReadOnlyVolume key",
+  "source_log": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-startup-approved-20261011/weekly-portfolio-startup-approved-20261011-20261011T004758-eb42d2dc65e1/stderr.log",
+  "accepted_scenarios": 0,
+  "result_file_created": false,
+  "repair": "Check documented Internal=0 and WritableVolume=1 fields after UUID and fixed device checks; retain the failed stderr evidence"
+}
