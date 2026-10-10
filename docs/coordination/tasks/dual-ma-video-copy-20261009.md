@@ -464,3 +464,10 @@
 - active；checked_coordination_sha: 6fc6804f56a829cb1f1b8d282e56d957b87e067e；checked_at: 2026-10-10T14:59:26.094607+08:00；已读自身/COORDINATION1.1、cash-position Skill完成/独立包、trend-perspective独立包、frozen-input恢复独立存储范围；与本Bili稿件及外盘发布记录无重叠，root唯一写者。
 - 人类“点了哈”承接开启允许访问文件网址，旧扩展连接失效、新Chrome4现可用；已接原保留标签1731524038，仍初始上传页未上传未提交。不触碰本人扩展设置，不再问协议/发布。
 - 原scope/source/验收不变：只已批v21横版与本Bili稿件/外盘证据/本协调记录。storage 2026-10-10T14:59:01+08固定UUID身份正确外盘569440600064B；预算证据<50MiB、本机小记录<64KiB。其他作品/媒体原件不动，不安装删除付费或改Skill。
+
+## 哔站横版已提交，等待平台审核 2026-10-10T15:08:19.009208+08:00
+- status: submitted_review_pending；checked_coordination_sha: eabd8f52e846bd1bcf72e7ba20a480fd3df4158b；checked_at: 2026-10-10T15:08:19.009208+08:00；最新fetch无新增量，沿用已读COORDINATION1.1、自身/cash-position/trend-perspective/frozen-input相关范围，无冲突，root唯一写者。
+- 真实控件上传已批v21横版成功，保存4:3及16:9双封面、标题简介/知识分区/完整10标签、含AI生成内容声明。五个原生章节已保存且播放器默认展示开启，页面读回已配置章节。
+- 只点击一次立即投稿，网站成功回执；稿件管理时间2026-10-10 15:07:17，BVID BV1ehpv6EEgz，转码完成、审核中，已通过0。公开播放未验，不称已公开发布。原URL https://www.bilibili.com/video/BV1ehpv6EEgz/ 。
+- 外盘发布记录包含提交成功/审核进度/稿件管理截图、实际DOM读回、双封面与章节核对；投稿状态.json保留原失败状态，SHA256.json全部读回通过。归置自检exit0。其他抖音横竖/XHS不动；不删除/付费/安装/改Skill或规则。
+- 剩余验收：平台审核通过后公开页横版播放、元数据与章节核验；外部审核等待，无自行启动监控或通知。
