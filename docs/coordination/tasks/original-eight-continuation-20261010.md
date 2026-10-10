@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "e7f058b3e97338c2f9d38e08b5876f36029513b5",
-  "checked_at": "2026-10-10T18:00:52.344200+08:00",
+  "checked_coordination_sha": "7f1b2c090a624da102c772ffad5d0d5e3801e6ab",
+  "checked_at": "2026-10-10T18:04:50.395157+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -42,23 +42,28 @@
     "docs/ops/work-progress/original-eight-continuation-20261010.md",
     "docs/experiments/registry.json",
     "docs/experiments/INDEX.md",
-    "docs/experiments/research-evidence-catalog-2026-10-07.md"
+    "docs/experiments/research-evidence-catalog-2026-10-07.md",
+    "docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/",
+    "docs/experiments/weekly-portfolio-cross-week-fixed-orders-2026-10-10.md"
   ],
   "external_write_paths": [
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff"
   ],
   "scope_released": false,
   "question_ids": [
     "native-d-conditional-risk-20261010",
-    "csi300-march-event-binding-20261010"
+    "csi300-march-event-binding-20261010",
+    "weekly-cross-week-fixed-orders-20261010"
   ],
-  "shared_write_owner": "root only new D report registration and dated catalog note; existing March report reused, no duplicate",
+  "shared_write_owner": "root only D and cross-week synthetic report registry/INDEX plus catalog dated note; existing March report reuse only",
   "goal_ids": [
     "okr-ff1e0a86fbac",
-    "K-data-boundary"
+    "K-data-boundary",
+    "K-risk-attribution"
   ],
   "latest_result_commit": null,
-  "scope_amendment": "March event answered in 2026-10-08 report; exact original hashes independently read back. Zero new public requests; only new reuse receipt and current catalog navigation. Goal5 next-question inspection read-only, no account granted/start."
+  "scope_amendment": "Add necessary cross-week explicit fixed-orders single-cash engineering, one synthetic question/main case/required counterexamples, zero markets/real accounts; existing single-decision recovery excludes this scope."
 }
 <!-- lei-coordination-json:end -->
 ## 2026-10-10T18:00:52.344200+08:00 范围收窄与正在执行
@@ -67,3 +72,9 @@
 - 单事件在10/8正式报告及原件中已经回答；主控另核三原件和报告SHA与独审回执一致，原候选3/4至3/7共四保存交易日不符。本轮新源0/6、0/8MiB，不生成同题报告、不创建成员外盘目录。旧10/6快照未来指引由本次目录补注指向10/8现成果，原件与冻结候选不改。以上最新收窄取代首段旧“两新报告”计划。
 - D合成首版通过7项；Astra独审发现真实stdout列表与账本依赖cwd两个工程问题，真实Y未读、核心0/1，Sol按同一科学合同修必要入口/测试，失败和旧源码SHA留痕，修后审阅才启动。
 - Goal5查旧半ATR机会2309、后续8/2/12账户无半ATR且不覆盖完整策略；尚无直接合格的完整账户合同。此刻仅只读核下一个必要定义/输入，固定2/2与月度4/4不重启、不借预算。
+## 2026-10-10T18:04:50.395157+08:00 目标5必要跨周资金执行接续
+
+- 最新协调 7f1b2c090a624da102c772ffad5d0d5e3801e6ab 已读，与上次tip无他人变更，原相关task-id/不重叠决定保持。新增只本raw研究脚本/测试/小合同与一份报告，root共享登记写，Sol实现独占新raw源码，Astra设计/资金审阅；不会清空旧adapter原决策锁或修改冻结源。
+- D真实资格与唯一核心1/1已完成，原76/75/未知不变，新标签/特征/账户0；root独立平均秩后扣除V再算关联，与全部主/删除结果差最大1.67e-16，等待结论复核/归档。
+- Goal5经实际旧报告/source审查仍缺跨周。一个人工610.50现金例，第一周两固定100份×2单、每单205.20；第二周午夜250仅入一次，按前一完整日净值发行记账单位，再同两单。期末现金39.70/份额各200/费用20.80/总资产839.70，连续与真实不同进程恢复、重复身份、错序/越限/现金不足/保存替换前后故障核必要反例。所有排序明确为测试输入，不推断全局优先、P1无整手、真实用户资金配置；不调用P0自动分配器/改策略。
+- 一个新工程问题/主例和必要反例，市场请求/真实账户/标签/拟合0。原固定2/2与月度4/4保持封存，不靠工程通过宣称相近风险收益。16MiB外盘结果预算、1MiB本机小记录；固定设备plan已绑定，执行前再核容量，恢复文件/隔离副本/普通日志外盘。
