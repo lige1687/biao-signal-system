@@ -275,3 +275,9 @@
 - 用户“卡点我没看到啊？”说明v12主观目标未通过，保留技术回执但不称卡点已达标。只修15秒样例：减少绵软动作，增加可看清的停顿—短运动—落点；投入60→50→40→30分三次对应原创节奏重音，数学随实际投入变化，原音乐保留。不是把局部环形装饰和时间对齐当成功。
 - 新生产仅外盘v13-beat-contrast-20261011，预计<500MiB；旧v12只读用于对照。小记录仅docs/ops/media/cash-position-20261009/beat-contrast-20261011.json及本人work-progress；基线成果8808bbd7d064961624ab877fafbbfd4461da8669。不改共享Skill/全片/发布/策略/自动化。
 - 00:16固定外盘UUID身份通过，外盘568455462912B，内盘15398764544B。验收真实15秒/450帧/音轨、关键落点前中后、完整播放、算术、峰值；音效事件可确认，原乐曲强拍与主观效果不冒称听审通过。
+
+
+## 三教程流程吸收范围追加 2026-10-11T00:18:36.795525+08:00
+- active；scope_released=false；root唯一写者。checked_coordination_sha=8c5583314404388fcbffb8b82894e2610279ed1c；checked_at=2026-10-11T00:18:36.795525+08:00；本轮已读自身/COORDINATION/原其他视频独立范围及original-eight最新来源工作，新增共享范围不重叠。用户明确追加核Greg/Remotion官方PR/Sabrina教程，更新Skill结构并出新版。
+- 增加.agents/skills/code-explainer-video/references/preproduction-workflow.md一处路由/粗剪阶段、music-motion-sync.md补本次失败边界、新references/animatic-and-shot-library.md；共享已有文本只精确补丁入成果，新增全文本人所有。小索引/进度沿原范围，新增beat-contrast-skill-20261011.patch。不改其他Skill/实例全库；本片新旧认可状态分开。
+- 验收：逐源真实阅读范围/采用与不采用；整片粗剪方法、实例条目的输入/阅读停留/镜头参数/认可状态、连续手机审片；本次实际15秒动作与原创节奏音效示范。原完整片未获此次重做授权，不以新15秒替代整片节奏验收；不新增审批关卡或安装外部源码。
