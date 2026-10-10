@@ -1,3 +1,14 @@
+# 用户批准退役旧协调工作区，继续有界磁盘管理
+
+- task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；updated_at 2026-10-10T17:25:09.570535+08:00；checked_coordination_sha 97de64f23e8e31b802442131b6ef3969e563cf07；checked_at 2026-10-10T17:25:09.570535+08:00；实际已读：[{"task_id": "frozen-input-recovery-20261010", "sha256": "4df97c5d3b466264747882e2ada303151e37ac3c539a0a3fefe143cb4ef8f693"}, {"task_id": "mac-local-storage-cleanup", "sha256": "28d19a10912c52208ad94cfd252cec425693fb32a2ee59ab445b3e2b590701d6"}, {"task_id": "daily-trading-system-audit", "sha256": "ed4ac107a9019e39fd5ade71a09feffb88e8ea67a8b42981763fbd38154d14e1"}, {"task_id": "research-dispatch-controller", "sha256": "4bf6fccba42fbd996aeb8e63031819b8fa56fe0afed20c9d9cb1851cce5e6b3c"}]。本任务旧状态字节与原6fc6804一致；旧中控/mac存储范围已释放，daily已结案；无同路径使用或新重叠。root唯一删除/小回执/API写者。
+- 人类直接批准“确认移除哈，这方面你不需要跟我确认了，你直接开整就完事了”，随后“继续哈”。承接已准备准确方案；不重复申请此许可。中断后实核该目录仍存在/注册、未产生执行回执，因此尚未执行，接着完成，不盲重复。
+- 当前准确移除范围：/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination以及Git正常remove自动处理的该worktree元数据，不包含主仓/index/其他worktrees。旧方案HEAD23dabe49f62b9a759d11bb87281d82902cccb61c、tree16c8dcb5f27b0dcd2caeadaf269e2a60692cbcd8、21895路径；本次再核tracked/untracked/ignored全空、远端祖先可达、无锁/占用/相关后台进程通过。只执行正常git worktree remove，不force、不手工rm扩范围。
+- 验收：保存真实df/容量前后、worktree注册表前后、路径/元数据缺失、主branch/HEAD/index未动、原准确commit仍可重建。现场before内盘约19.78GB，外盘固定UUID身份合格约569.39GB；不把历史du当释放量，不归因此前空间波动。
+- 同类继续授权按合理准确范围：Sol只读最多3个其他临时协调worktree，须有原owner明确completed/scope_released、无当前使用、无独有修改/ignored/untracked、准确远端commit可重建才列可执行候选。root实施前另登记准确路径；任何缺件/重叠保持，不将授权扩大到活动工作树、.biao恢复副本、DB/运行环境/会话/冻结原件或任意缓存。
+- 小证据仍本raw/progress，系统原磁盘条目okr-1a9c771b2a06只追加准确许可/实际空间成果，保留owner/paused/授权/标准及旧保护包事项。原恢复okr-57eb3f28e526本机25已验、异机false/其他原八目标和实验预算不动，无新chat/自动化/部署/交易/付费/强推。
+
+---
+
 # 本机25来源恢复已交付；腾空间的准确退役动作待人类确认
 
 - task-id frozen-input-recovery-20261010；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status blocked / awaiting_exact_checkout_retirement_approval；updated_at 2026-10-10T14:57:18.054928+08:00；checked_coordination_sha 0cec2b6a91c7ca26db40cbed91d4e323f5a2fd07；checked_at 2026-10-10T14:57:18.054928+08:00；已读及冲突核对：[{"task_id": "frozen-input-recovery-20261010", "sha256": "85797ec7d28a73a2e43dd4163f1c06a69b1b9bf4949cc8f99901f15fc28889f5"}, {"task_id": "research-dispatch-controller", "sha256": "4bf6fccba42fbd996aeb8e63031819b8fa56fe0afed20c9d9cb1851cce5e6b3c"}, {"task_id": "mac-local-storage-cleanup", "sha256": "28d19a10912c52208ad94cfd252cec425693fb32a2ee59ab445b3e2b590701d6"}, {"task_id": "daily-trading-system-audit", "sha256": "ed4ac107a9019e39fd5ade71a09feffb88e8ea67a8b42981763fbd38154d14e1"}, {"task_id": "cash-position-video-20261009", "sha256": "95bec466e4234b6adb43ed45fd522a0156f7eba947696e394e198f3430d048f4"}]。新增视频Skill工作已交付释放，范围不同；root仅维护本任务/两原API，未覆盖他人。
@@ -78,34 +89,36 @@
 {
   "task_id": "frozen-input-recovery-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "blocked",
-  "stage": "local_restore_delivered_awaiting_exact_checkout_retirement_approval",
-  "checked_coordination_sha": "0cec2b6a91c7ca26db40cbed91d4e323f5a2fd07",
-  "checked_at": "2026-10-10T14:57:18.054928+08:00",
+  "status": "active",
+  "stage": "authorized_exact_retirement_and_bounded_similar_worktree_review",
+  "checked_coordination_sha": "97de64f23e8e31b802442131b6ef3969e563cf07",
+  "checked_at": "2026-10-10T17:25:09.570535+08:00",
   "read_task_ids": [
     "frozen-input-recovery-20261010",
-    "research-dispatch-controller",
     "mac-local-storage-cleanup",
     "daily-trading-system-audit",
-    "cash-position-video-20261009"
+    "research-dispatch-controller"
   ],
   "work_branch": "codex/frozen-input-recovery-20261010",
   "base_commit": "6b06a04b46bdd35cc62777fd60d135d457291ec3",
   "write_paths": [
     "docs/experiments/raw/frozen-input-recovery-2026-10-10/",
-    "docs/ops/work-progress/frozen-input-recovery-20261010.md"
+    "docs/ops/work-progress/frozen-input-recovery-20261010.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.git/worktrees/lei-coordination"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "latest_result_commit": "6efb1b34c5989b430f7997ec027c34a97612e37d",
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T143725-a9a1b039127e"
   ],
-  "blocker": "Human confirmation to retire/remove exactly .codex/worktrees/lei-coordination not received; local25-source recovery is complete, other-machine testing is not a blocker for current local recovery",
+  "blocker": null,
   "other_machine_recovery_verified": false,
   "proposed_retirement_paths": [
     "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination"
   ],
-  "deletion_executed": false
+  "deletion_executed": false,
+  "human_retirement_approval_received": true
 }
 <!-- lei-coordination-json:end -->
 
