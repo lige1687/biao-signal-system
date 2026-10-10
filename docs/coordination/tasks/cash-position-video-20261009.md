@@ -121,3 +121,14 @@
 - 117项非缓存文件43406620B逐项SHA读回；源工程zip38768B SHA5905b4aade7f8c2fcaaebadd8fc95ceb09c1407cefe656686ee683001db6e303（含代码/文稿/数据，不含参考片/音乐/最终MP4）。初始两卡、虚线offset误作生长、币经过文字区等失败与修复留存，未删除或覆盖旧交付。
 - 预览 http://127.0.0.1:53026/v06-kline-logic/preview/index.html 已打开并保留：新版/旧A对照、按段暂停、价格/投入与图形反馈。v05与v04保持原件；A本次未获审美确认。无全片、发布、安装、付费、策略/研究/他人数据修改。
 - 最终存储固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok=true，外盘592496689152B。普通输出/参考/缓存直接外盘；前置/时间表/公开文案/Skill格式、原文保留及归置检查通过。下一步按用户本次A观感反馈接续。
+
+
+## Opus开工准备开始 2026-10-10T12:17:44.248358+08:00
+- status: active；stage: opus_preparation；scope_released: false；owner root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c。
+- checked_coordination_sha: f5a0d450d0e417106c98bde967b6f55d818e5c41；checked_at: 2026-10-10T12:17:44.248358+08:00；已读COORDINATION1.1、自身、trend-trading-video V9 opus-prep-done、nasdaq-story-video-20261009、personal-quant-video-render-preview-rule、trend-perspective-video-20261009、dual-ma-video-copy-20261009、research-dispatch-controller。其他任务仅各自影片/发布/已结束Skill，不与新独立包重叠；root唯一写者。
+- 用户明确调用opus-video-prep“看看准备一下哈”；本轮开工准备非成片收尾。Codex只整理已确认内容大纲、事实、音频测量、候选素材、通用可渲染工程和验证；文稿/分镜/主题视觉留Opus。不调用模型或改变设置，不制作本片风格帧/样片/全片，不发布。
+- 范围：固定外盘投资心态/20261009-cash-position/v07-opus-prep-20261010；旧v01—v06只读；本机仅docs/ops/media/cash-position-20261009/opus-prep-location.json及自身work-progress，协调仅本文件。不改共享Skill/系统/策略/registry。
+- 基线：成果分支codex/cash-position-video-20261009@bb30ef5a9b6038521b4ae6defc88f4f7f79346a8，v04已认可/v05—v06待认可；旧稿和96秒估算非用户定稿或片长上限。
+- 存储：2026-10-10T12:16:44.296936+08固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9身份正确，外盘592505077760B、本机27649314816B。预计普通媒体/缓存/依赖副本/重建<2GiB外盘，本机记录/控制<200KiB；复用已有依赖，不升级/新安装/删除。
+- 验收：BRIEF/CONTENT_OUTLINE/READY真实状态，原稿与审批区分；原数据与计算指纹、源音乐实测节拍/每秒能量/LUFS/真峰、素材来源许可/联系表；通用源码/锁文件、实际typecheck/中性短渲染/字体图及新父目录重建，manifest与ZIP逐项读回。缺项如实partial，无收益实验。
+- 下一步：核既有资料，准备独立包，完成能独立完成的检查后交用户与Opus入口。
