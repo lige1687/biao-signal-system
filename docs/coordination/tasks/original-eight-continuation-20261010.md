@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "926331196d4e2390448663235f1b2d97fd394cf1",
-  "checked_at": "2026-10-10T18:15:11.253926+08:00",
+  "checked_coordination_sha": "05b2ade34274d6ed650645f2dadc615d31c43808",
+  "checked_at": "2026-10-10T18:28:34.952663+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -46,28 +46,32 @@
     "docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/",
     "docs/experiments/weekly-portfolio-cross-week-fixed-orders-2026-10-10.md",
     "docs/experiments/raw/etf-pair-h1-action-qualification-2026-10-10/",
-    "docs/experiments/etf-pair-h1-action-qualification-2026-10-10.md"
+    "docs/experiments/etf-pair-h1-action-qualification-2026-10-10.md",
+    "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/",
+    "docs/experiments/etf-pair-action-coverage-completion-2026-10-10.md"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-h1-actions-20261010/etf-pair-h1-actions-20261010-20261010T181507-6c6339a1765d"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-h1-actions-20261010/etf-pair-h1-actions-20261010-20261010T181507-6c6339a1765d",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-full-actions-20261010/etf-pair-full-actions-20261010-20261010T182754-75a8d7ac33c6"
   ],
   "scope_released": false,
   "question_ids": [
     "native-d-conditional-risk-20261010",
     "csi300-march-event-binding-20261010",
     "weekly-cross-week-fixed-orders-20261010",
-    "etf-pair-h1-actions-20261010"
+    "etf-pair-h1-actions-20261010",
+    "etf-pair-full-actions-20261010"
   ],
-  "shared_write_owner": "root only own D/cross-week/ETF-H1-source report registrations and dated catalog note; March original reused",
+  "shared_write_owner": "root only own D/cross-week/ETF-H1/full-action report registrations and dated catalog note; March original reused",
   "goal_ids": [
     "okr-ff1e0a86fbac",
     "K-data-boundary",
     "K-risk-attribution"
   ],
   "latest_result_commit": null,
-  "scope_amendment": "Add minimal company-action qualification for original 510300/159915 pair on2026H1 only; not2015fullqualification, no market account/recalibration."
+  "scope_amendment": "Versioned exact two-ETF2015-2026H1 cash/split evidence completion: reuse accepted reports and old2018/19 independent source review; only six missing annual reports new public sourcing, no market or original qualification overwrite."
 }
 <!-- lei-coordination-json:end -->
 ## 2026-10-10T18:00:52.344200+08:00 范围收窄与正在执行
@@ -88,3 +92,11 @@
 - 已保存2015—2026H1两ETF报价/已知行动锁指纹吻合，但官方全部行动/日历/开盘资格并未合格，后续12独立周投入仍同限制；510300单产品2026H1旧月度输入不能代替159915或全期间。
 - 将下一必要来源问题收窄到同原510300/159915的2026H1官方报告明确是否分红/折算与保存actions是否一致。仅为后续共同资金输入资格，不宣称完整市场开跑ready，不重跑/校准旧半年或取全股票池。当前已2个筹备精准搜索（不同基金结果不能绑定），后续全部公共请求累计最多18次/32MiB，失败也计，同操作至多2尝试；旧25原件、36中证目录、三键4/6预算不借。只官方管理人/交易所/法定披露原件可绑定，媒体发现不能凑完整资格；报告出版日晚于行情窗口时不得写当时已知。
 - Sol只准确新raw与新报告草稿/固定外盘原件、请求ledger、资格与未确认项，root唯一共享登记。先查旧已存正式原件可复用才下载；没有来源不用猜URL/填零。新存储32MiB外盘、1MiB本机小记录，计划实际固定身份合格，执行前再核。0市场路径/新标签/拟合/策略规则。
+
+## 2026-10-10T18:28:34.952663+08:00 原两ETF逐年公司行动缺口接续
+
+- 再读协调 05b2ade34274d6ed650645f2dadc615d31c43808、COORDINATION1.1，原read_task_ids及冲突决定保持；自上次仅本任务增加，无其他负责人变化。具体新目录、报告和外盘目录无已登记重叠，原来源目录只读，root唯一共享写者。
+- H1两产品原件已独核相符，必要六文件准确外盘复制并仅从副本恢复6/6；14/18来源请求封存不延伸。9/23已接受的5103002020—H1及1599152021/23/24证据复用；9/24的5103002018/19有独立源审，主控只作限定接纳与版本绑定，不再重复同表审阅。2018文件74物理/印76页限制保留，不能宣称整份无缺页。
+- 下一独立必要来源问题针对共享资金候选2015—2026H1：固定六份未回答年报（5103002015/16/17全年现金和折算；1599152015/17/19折算）。优先旧原件/已观察官方目录精确附件；最多新公共请求18、PDF6份/64MiB、同操作至多2尝试；旧21/26、2018/19的PDF2/2、H1 14/18各保留、不借或重置。不是选择看过收益最好的日期，不搜索参数。新请求失败计数，未取得保留unknown，不把资料资格都要求成全个股库。
+- Sol唯一写新raw执行记录与源候选/报告草稿、该外盘源码/原件；Astra仅写新raw独核小记录并审判2018局部限制；root版本化资格/资金定义与共享归档/API/Git。输出预检256MiB外盘/1MiB小记录绑定，全部普通日志/原件/临时外盘，旧冻结价格/行动/qualification不覆盖、不移、不删。
+- 验收：准确代码名称/完整年期/分红逐事件、折算专栏/指纹、跨年资格矩阵和剩余真实日历/开盘/到时信息缺口；历史文件和后发布报告不得当当时已到达。源缺字段不能猜零；新下载仍不使市场ready，P1无整百可卖时新钱去向的决定仍待用户，相关完整账户尚未执行。0行情新路径、0真实账户、0核心/特征/标签/拟合、旧固定2/2/月度4/4/A03保持。
