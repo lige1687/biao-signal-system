@@ -13,9 +13,9 @@
 {
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "4b1c27b1c54777ec6aa980e807f2ab5f9c224b50",
-  "checked_at": "2026-10-11T01:30:19.461195+08:00",
+  "status": "active",
+  "checked_coordination_sha": "045034d6289ecdee3d79f125125b786f4b5cda8e",
+  "checked_at": "2026-10-11T01:37:34.204603+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -77,7 +77,7 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-startup-approved-20261011/weekly-portfolio-startup-approved-20261011-20261011T004758-eb42d2dc65e1",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-complete-account-20261011/weekly-two-etf-complete-account-20261011-20261011T005441-039d9543f167"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "question_ids": [
     "native-d-conditional-risk-20261010",
     "csi300-march-event-binding-20261010",
@@ -89,7 +89,8 @@
     "reused-and-remaining-calendar-recovery-20261010",
     "szse-jan2017-missing-date-source-20261010",
     "weekly-portfolio-zero-sale-cash-20261011",
-    "weekly-two-etf-complete-account-20261011"
+    "weekly-two-etf-complete-account-20261011",
+    "original-eight-open-work-resume-20261011"
   ],
   "shared_write_owner": "root only nine own dated report registrations/INDEX lines/catalog prefix and five original goal evidence notes; no unrelated owner or task modified",
   "goal_ids": [
@@ -101,14 +102,11 @@
     "D-tracking"
   ],
   "latest_result_commit": "c58558fd20dcff4bb4000f624e57194a8da36321",
-  "scope_amendment": "Exact new core contract bound accepted engine/runner/input/preflight/18source+extra importedpolicy dependency. New unique externalcore-plan because artificialresult directory alreadyexists. OnepairedP0/P1 initial2paths, mechanicalconditionalrepair max4total, variants/source0. Strict qualification remainsfalse. New isolatedAccount not olddatedledger source reuse.",
-  "updated_at": "2026-10-11T01:30:19.461195+08:00",
-  "conflict_decision": "从已完整人工读过8857相关13task及rules至本任务完成4b1c27b1，只有本任务写入；后续若只有cash-position视频增量由同规则读取并保留其独立范围。研究9报告/原5目标notes范围不与视频、Skill或他人工作重叠；仅更新自己的协调task成果引用，其他记录/主HEAD/index不动。",
-  "current_work": "本批有界工作completed并释放：用户定义、起步3新例、10案整链、同条件核心一对、root全钱/日账及Astra关键独核、9份报告/原5目标note、19输入准确取得及2最小新副本/新结果8文件恢复、准确成果推送和实际读回完成，无待跑或待修。整个原八目标不标完成。",
-  "paused_questions": [
-    "稳定新增收益、未来适用、真实历史成交/到账/到达和官方日历资格仍未证；只有具体新问题或新证据才接续，旧月度4/4固定2/2/A03来源20与D封存，不重置或追正。",
-    "异机或独立物理盘故障恢复仍未证；不需为本机已验任务更换电脑。原对象仍场内510300/159915，可选渠道问题未答不当转换成场外。"
-  ]
+  "scope_amendment": "用户再次明确持续剩下的八目标任务并允许子Agent并行；本轮先用实际系统8原条目及最新协调映射到未完成验收，只读原相关证据，不重跑封存研究。后续必要实际执行须另冻独立问题/输入/累计预算，不默认无限续跑或把八目标全部派给一个AI。",
+  "updated_at": "2026-10-11T01:37:34.204603+08:00",
+  "conflict_decision": "实际fetch并读045034d6289ecdee3d79f125125b786f4b5cda8e COORDINATION1.1、原本任务、中控、technical/risk-shape/theory-workflow/classic/external/frozen-recovery现状态与原API。其他owner不接管，原研究证据只读；三子Agent独占本控制raw下三个新readiness文件，root唯一共享研究登记及原条目写者，无生产模块/视频/其他任务改动。",
+  "current_work": "根负责人核八目标原验收与实际API/新原结果；3子Agent分别因子与资金剩余必要问题、资料与恢复可执行缺口、原生工具与外部方法剩余具体入口，仅独立新小readiness记录，根统一接纳并衔接必要执行。",
+  "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
 ## 2026-10-10T18:00:52.344200+08:00 范围收窄与正在执行
@@ -234,3 +232,7 @@ Astra独审bb6c7de8337cf83ce1b6c7ae9a5aa658b782bc7258344585f9ab97abd913be1a接�
 ## 2026-10-11T01:30:19.461195+08:00 最终回执准确补交完成，仅更新同任务成果引用
 
 最终成果c58558fd20dcff4bb4000f624e57194a8da36321同原codex分支已普通推并实际352自有文件逐字节读回，主HEAD/index保持；含完整报告/19输入位置/8产物及2原件恢复、5原API note实际读回、协调completed与范围释放回执、最终小进度。只是实际元数据补交，无新科学路径、参数、来源、原目标API再次写入或删除迁移。此前科学0eb29be与阶段3bd311均保留；本任务status completed/scope_released true保持，原八目标整个条目和未证边界保持；最后协调引用由远端唯一task和Git路径历史定位，不为提交自身SHA无限循环。
+
+## 2026-10-11T01:37:34.204603+08:00 按用户持续八目标要求恢复，三路有界并行核剩余工作
+
+用户原话“持续推进剩下的任务啊，不是有8个目标吗？”和“能并行做的可以派子Agent去并行做哈，主要是一个效率问题。”本轮已有授权内恢复稳定task原分支，先核未完成里程碑与已完成证据差额，不反复确认。actualgoal8条语义快照保存在本控制raw/eight-goal-resume-20261011/goal-snapshot.json，完整旧history仍API权威，避免复制巨大递归历史。三路各0市场/0新公共来源/0生产/0删除，保留月度4/4固定2/2A03和所有源累计；具体必要剩余执行另冻结合同继续，不只列计划退出。新小记录本机，必要大结果固定盘预检，异机未验不阻塞本机。准备时1MiB守卫失败与依赖phase文件缺失均保存，无API或coord写入；下一操作只在本次准备成功后执行。
