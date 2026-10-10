@@ -1,0 +1,9 @@
+{
+  "operation": "scoped_git_publication",
+  "attempt": 1,
+  "result": "failed_before_staging_commit_or_push",
+  "error": "AssertionError: expected file_count=9, actual=8",
+  "reason": "Incorrect administrative file-count assumption; source hashes and 10 artifact checks were unaffected",
+  "resolution": "Validate an explicit expected filename set instead of a guessed count; include this failure receipt in publication",
+  "source_or_external_files_changed": false
+}

@@ -1,0 +1,183 @@
+{
+  "checked_at": "2026-10-10T12:12:44.077655+08:00",
+  "goal_id": "okr-57eb3f28e526",
+  "api": "http://127.0.0.1:8000/api/upgrades",
+  "before": {
+    "title": "核验原八目标冻结输入的独立备份与异机恢复",
+    "purpose": "只处理原八目标所需冻结输入的可恢复性：月度风险对照A清单中的25个原来源已在本机核同，但其中24个不在Git，独立备份与另一台机器恢复尚未证实。新结果外盘已核验不代替原输入备份。本条补原目标8的确切缺口，不接一般磁盘清理，不迁移或改写原冻结路径、活动数据库、环境、会话，不删除资料。",
+    "parent_id": "D-evidence",
+    "priority": "high",
+    "owner": "待下一位研究负责人接手",
+    "target_date": null,
+    "next_action": "先读项目docs/okr/RESEARCH_TODO.md，再从A的inputs/manifest.json准确定位25个来源和指纹；核固定外盘身份及已有迁移/备份清单，优先复用已有副本。逐项写明已验证、缺失和不可恢复原因。仅对未证明项按已授权存储规则补必要副本及恢复核对，不重下载替代原件、不运行策略或重置实验预算。",
+    "evidence": "A输入提交29337ec9e6560171c459019834638ce2c6993ef9；清单SHA256 9f1c326b46e7afc22d2ad6454e9f754e64540442e120412326ce270a50799baf。C最终提交616608a1bd911179aa9bc7de14ea64a7493c74c5，正式报告第8节明确原24/25本机来源异机恢复未证。本批外盘10结果文件已核，不能替代此验收。用户2026-10-10要求把原目标记系统todo并交下一AI；此条只登记，尚未启动、未完成。",
+    "milestones": [
+      {
+        "id": "locate_frozen_sources",
+        "title": "从原manifest列全25来源的原路径、内容指纹、用途和现有副本位置，保留原件",
+        "done": false
+      },
+      {
+        "id": "verify_independent_copies",
+        "title": "核固定设备与独立副本内容；缺件具体列出，不把目录存在当恢复成功",
+        "done": false
+      },
+      {
+        "id": "verify_other_machine_recovery",
+        "title": "在可用的目标设备按清单只读恢复并核对必要输入；没有目标设备时明确未验证",
+        "done": false
+      },
+      {
+        "id": "publish_recovery_receipt",
+        "title": "保存恢复步骤、逐项核验凭据及剩余限制；Git只存小索引，不放大数据",
+        "done": false
+      }
+    ],
+    "links": [
+      {
+        "label": "原八目标项目待办",
+        "url": "https://github.com/lige1687/biao-signal-system/blob/codex/research-todo-20261010/docs/okr/RESEARCH_TODO.md"
+      },
+      {
+        "label": "已验月度风险报告及第8节边界",
+        "url": "https://github.com/lige1687/biao-signal-system/blob/616608a1bd911179aa9bc7de14ea64a7493c74c5/docs/experiments/monthly-risk-comparison-2026-10-09.md"
+      }
+    ],
+    "kind": "concrete",
+    "id": "okr-57eb3f28e526",
+    "version": 1,
+    "status": "planned",
+    "created_at": "2026-10-09T17:06:06+00:00",
+    "updated_at": "2026-10-09T17:06:06+00:00",
+    "authorization": {
+      "granted": false,
+      "scope": "",
+      "at": null
+    },
+    "history": [
+      {
+        "at": "2026-10-09T17:06:06+00:00",
+        "action": "created",
+        "note": "目标已登记，登记不会启动执行。"
+      }
+    ],
+    "progress": {
+      "done": 0,
+      "total": 4
+    }
+  },
+  "patch_request": {
+    "version": 1,
+    "owner": "Codex 来源恢复预检 / 01a123fc-553b-7b81-9952-36e1acb11dcc",
+    "evidence": "A输入提交29337ec9e6560171c459019834638ce2c6993ef9；清单SHA256 9f1c326b46e7afc22d2ad6454e9f754e64540442e120412326ce270a50799baf。C最终提交616608a1bd911179aa9bc7de14ea64a7493c74c5，正式报告第8节明确原24/25本机来源异机恢复未证。本批外盘10结果文件已核，不能替代此验收。用户2026-10-10要求把原目标记系统todo并交下一AI；此条只登记，尚未启动、未完成。\n\n[目标8只读预检 2026-10-10] 当前Codex接手此一项来源恢复预检，task-id=frozen-input-recovery-20261010。A原25份共5,718,377字节已实核大小/内容一致、源读前后未变；原A基线24项不在Git的记录保留。本轮现有其他分支日历同指纹可核，准确远端恢复来源2份（方案文档与日历）；本机Git同指纹对象18份不都算独立备份。余23份共5,417,582字节没有已核独立副本位置；仅准备准确外盘复制计划，目录未创建、复制0。第二台目标设备/访问尚未确认，异机恢复0。仓内回执与方案docs/experiments/raw/frozen-input-recovery-2026-10-10/；来源清单SHA 727dbe2b3f539641894277d20e51ba2035a97bda26401f37ef636e4e87d44994。工作分支codex/frozen-input-recovery-20261010；本次小成果尚待远端发布。按用户AGENTS仓外修改先确认的明确要求，已提交23准确文件新副本的确认问题；未把授权设true或勾完成标准。10项产物核对通过，仓库归置退出0；市场/账户重放/下载/调参/冻结源改写/新chat/定时器/Goal均0，原月度4/4与旧2/2保持封存。",
+    "next_action": "按已保存backup-plan.json等待23份准确仓外副本创建的确认；获准后重新核固定设备、源指纹与唯一新目录，再复制逐份读回。另机目标设备可用时才核来源恢复，未核保持未完成。原月度和固定投入实验不重跑。"
+  },
+  "note_request": {
+    "version": 2,
+    "action": "note",
+    "note": "[目标8只读预检 2026-10-10] 当前Codex接手此一项来源恢复预检，task-id=frozen-input-recovery-20261010。A原25份共5,718,377字节已实核大小/内容一致、源读前后未变；原A基线24项不在Git的记录保留。本轮现有其他分支日历同指纹可核，准确远端恢复来源2份（方案文档与日历）；本机Git同指纹对象18份不都算独立备份。余23份共5,417,582字节没有已核独立副本位置；仅准备准确外盘复制计划，目录未创建、复制0。第二台目标设备/访问尚未确认，异机恢复0。仓内回执与方案docs/experiments/raw/frozen-input-recovery-2026-10-10/；来源清单SHA 727dbe2b3f539641894277d20e51ba2035a97bda26401f37ef636e4e87d44994。工作分支codex/frozen-input-recovery-20261010；本次小成果尚待远端发布。按用户AGENTS仓外修改先确认的明确要求，已提交23准确文件新副本的确认问题；未把授权设true或勾完成标准。10项产物核对通过，仓库归置退出0；市场/账户重放/下载/调参/冻结源改写/新chat/定时器/Goal均0，原月度4/4与旧2/2保持封存。"
+  },
+  "after_readback": {
+    "title": "核验原八目标冻结输入的独立备份与异机恢复",
+    "purpose": "只处理原八目标所需冻结输入的可恢复性：月度风险对照A清单中的25个原来源已在本机核同，但其中24个不在Git，独立备份与另一台机器恢复尚未证实。新结果外盘已核验不代替原输入备份。本条补原目标8的确切缺口，不接一般磁盘清理，不迁移或改写原冻结路径、活动数据库、环境、会话，不删除资料。",
+    "parent_id": "D-evidence",
+    "priority": "high",
+    "owner": "Codex 来源恢复预检 / 01a123fc-553b-7b81-9952-36e1acb11dcc",
+    "target_date": null,
+    "next_action": "按已保存backup-plan.json等待23份准确仓外副本创建的确认；获准后重新核固定设备、源指纹与唯一新目录，再复制逐份读回。另机目标设备可用时才核来源恢复，未核保持未完成。原月度和固定投入实验不重跑。",
+    "evidence": "A输入提交29337ec9e6560171c459019834638ce2c6993ef9；清单SHA256 9f1c326b46e7afc22d2ad6454e9f754e64540442e120412326ce270a50799baf。C最终提交616608a1bd911179aa9bc7de14ea64a7493c74c5，正式报告第8节明确原24/25本机来源异机恢复未证。本批外盘10结果文件已核，不能替代此验收。用户2026-10-10要求把原目标记系统todo并交下一AI；此条只登记，尚未启动、未完成。\n\n[目标8只读预检 2026-10-10] 当前Codex接手此一项来源恢复预检，task-id=frozen-input-recovery-20261010。A原25份共5,718,377字节已实核大小/内容一致、源读前后未变；原A基线24项不在Git的记录保留。本轮现有其他分支日历同指纹可核，准确远端恢复来源2份（方案文档与日历）；本机Git同指纹对象18份不都算独立备份。余23份共5,417,582字节没有已核独立副本位置；仅准备准确外盘复制计划，目录未创建、复制0。第二台目标设备/访问尚未确认，异机恢复0。仓内回执与方案docs/experiments/raw/frozen-input-recovery-2026-10-10/；来源清单SHA 727dbe2b3f539641894277d20e51ba2035a97bda26401f37ef636e4e87d44994。工作分支codex/frozen-input-recovery-20261010；本次小成果尚待远端发布。按用户AGENTS仓外修改先确认的明确要求，已提交23准确文件新副本的确认问题；未把授权设true或勾完成标准。10项产物核对通过，仓库归置退出0；市场/账户重放/下载/调参/冻结源改写/新chat/定时器/Goal均0，原月度4/4与旧2/2保持封存。",
+    "milestones": [
+      {
+        "id": "locate_frozen_sources",
+        "title": "从原manifest列全25来源的原路径、内容指纹、用途和现有副本位置，保留原件",
+        "done": false
+      },
+      {
+        "id": "verify_independent_copies",
+        "title": "核固定设备与独立副本内容；缺件具体列出，不把目录存在当恢复成功",
+        "done": false
+      },
+      {
+        "id": "verify_other_machine_recovery",
+        "title": "在可用的目标设备按清单只读恢复并核对必要输入；没有目标设备时明确未验证",
+        "done": false
+      },
+      {
+        "id": "publish_recovery_receipt",
+        "title": "保存恢复步骤、逐项核验凭据及剩余限制；Git只存小索引，不放大数据",
+        "done": false
+      }
+    ],
+    "links": [
+      {
+        "label": "原八目标项目待办",
+        "url": "https://github.com/lige1687/biao-signal-system/blob/codex/research-todo-20261010/docs/okr/RESEARCH_TODO.md"
+      },
+      {
+        "label": "已验月度风险报告及第8节边界",
+        "url": "https://github.com/lige1687/biao-signal-system/blob/616608a1bd911179aa9bc7de14ea64a7493c74c5/docs/experiments/monthly-risk-comparison-2026-10-09.md"
+      }
+    ],
+    "kind": "concrete",
+    "id": "okr-57eb3f28e526",
+    "version": 3,
+    "status": "planned",
+    "created_at": "2026-10-09T17:06:06+00:00",
+    "updated_at": "2026-10-10T04:12:43+00:00",
+    "authorization": {
+      "granted": false,
+      "scope": "",
+      "at": null
+    },
+    "history": [
+      {
+        "at": "2026-10-09T17:06:06+00:00",
+        "action": "created",
+        "note": "目标已登记，登记不会启动执行。"
+      },
+      {
+        "at": "2026-10-10T04:12:42+00:00",
+        "action": "edited",
+        "note": "进展已更新。",
+        "before": {
+          "owner": "待下一位研究负责人接手",
+          "next_action": "先读项目docs/okr/RESEARCH_TODO.md，再从A的inputs/manifest.json准确定位25个来源和指纹；核固定外盘身份及已有迁移/备份清单，优先复用已有副本。逐项写明已验证、缺失和不可恢复原因。仅对未证明项按已授权存储规则补必要副本及恢复核对，不重下载替代原件、不运行策略或重置实验预算。",
+          "evidence": "A输入提交29337ec9e6560171c459019834638ce2c6993ef9；清单SHA256 9f1c326b46e7afc22d2ad6454e9f754e64540442e120412326ce270a50799baf。C最终提交616608a1bd911179aa9bc7de14ea64a7493c74c5，正式报告第8节明确原24/25本机来源异机恢复未证。本批外盘10结果文件已核，不能替代此验收。用户2026-10-10要求把原目标记系统todo并交下一AI；此条只登记，尚未启动、未完成。"
+        },
+        "after": {
+          "owner": "Codex 来源恢复预检 / 01a123fc-553b-7b81-9952-36e1acb11dcc",
+          "next_action": "按已保存backup-plan.json等待23份准确仓外副本创建的确认；获准后重新核固定设备、源指纹与唯一新目录，再复制逐份读回。另机目标设备可用时才核来源恢复，未核保持未完成。原月度和固定投入实验不重跑。",
+          "evidence": "A输入提交29337ec9e6560171c459019834638ce2c6993ef9；清单SHA256 9f1c326b46e7afc22d2ad6454e9f754e64540442e120412326ce270a50799baf。C最终提交616608a1bd911179aa9bc7de14ea64a7493c74c5，正式报告第8节明确原24/25本机来源异机恢复未证。本批外盘10结果文件已核，不能替代此验收。用户2026-10-10要求把原目标记系统todo并交下一AI；此条只登记，尚未启动、未完成。\n\n[目标8只读预检 2026-10-10] 当前Codex接手此一项来源恢复预检，task-id=frozen-input-recovery-20261010。A原25份共5,718,377字节已实核大小/内容一致、源读前后未变；原A基线24项不在Git的记录保留。本轮现有其他分支日历同指纹可核，准确远端恢复来源2份（方案文档与日历）；本机Git同指纹对象18份不都算独立备份。余23份共5,417,582字节没有已核独立副本位置；仅准备准确外盘复制计划，目录未创建、复制0。第二台目标设备/访问尚未确认，异机恢复0。仓内回执与方案docs/experiments/raw/frozen-input-recovery-2026-10-10/；来源清单SHA 727dbe2b3f539641894277d20e51ba2035a97bda26401f37ef636e4e87d44994。工作分支codex/frozen-input-recovery-20261010；本次小成果尚待远端发布。按用户AGENTS仓外修改先确认的明确要求，已提交23准确文件新副本的确认问题；未把授权设true或勾完成标准。10项产物核对通过，仓库归置退出0；市场/账户重放/下载/调参/冻结源改写/新chat/定时器/Goal均0，原月度4/4与旧2/2保持封存。"
+        }
+      },
+      {
+        "at": "2026-10-10T04:12:43+00:00",
+        "action": "note",
+        "note": "[目标8只读预检 2026-10-10] 当前Codex接手此一项来源恢复预检，task-id=frozen-input-recovery-20261010。A原25份共5,718,377字节已实核大小/内容一致、源读前后未变；原A基线24项不在Git的记录保留。本轮现有其他分支日历同指纹可核，准确远端恢复来源2份（方案文档与日历）；本机Git同指纹对象18份不都算独立备份。余23份共5,417,582字节没有已核独立副本位置；仅准备准确外盘复制计划，目录未创建、复制0。第二台目标设备/访问尚未确认，异机恢复0。仓内回执与方案docs/experiments/raw/frozen-input-recovery-2026-10-10/；来源清单SHA 727dbe2b3f539641894277d20e51ba2035a97bda26401f37ef636e4e87d44994。工作分支codex/frozen-input-recovery-20261010；本次小成果尚待远端发布。按用户AGENTS仓外修改先确认的明确要求，已提交23准确文件新副本的确认问题；未把授权设true或勾完成标准。10项产物核对通过，仓库归置退出0；市场/账户重放/下载/调参/冻结源改写/新chat/定时器/Goal均0，原月度4/4与旧2/2保持封存。",
+        "from_status": "planned",
+        "to_status": "planned",
+        "scope": ""
+      }
+    ],
+    "progress": {
+      "done": 0,
+      "total": 4
+    }
+  },
+  "protected_fields_unchanged": [
+    "title",
+    "purpose",
+    "parent_id",
+    "priority",
+    "target_date",
+    "kind",
+    "status",
+    "authorization",
+    "milestones",
+    "links"
+  ],
+  "original_history_preserved": true,
+  "authorization_preserved_false": true,
+  "status_preserved_planned": true,
+  "remote_artifacts_not_claimed_yet": true
+}
