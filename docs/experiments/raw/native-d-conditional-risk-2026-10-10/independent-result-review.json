@@ -1,0 +1,403 @@
+{
+  "schema": "native-d-conditional-risk-independent-review/1",
+  "at": "2026-10-10T18:05:51.096506+08:00",
+  "decision": "accepted_saved_conditional_description",
+  "execution": "completed",
+  "evidence": "inconclusive_for_stable_increment",
+  "completion_reason": "question_answered_with_evidence_boundary",
+  "scope": "Independent arithmetic of existing sealed results only; no research CLI, new labels, fitted forecast or account simulation",
+  "method": "Fraction exact ranks by pairwise counts; exact rational demeaned residuals against ranked V; residual Pearson. No author helper imported; no numpy/scipy used. All five main assets and all 33 deletion sets checked.",
+  "input_x_sha256": "6ae79d580fa98ba81b8f071d73e9eac0e3127ea8e66275967fecb1f218aa989a",
+  "input_y_sha256": "77907ae74e401c4b81f4b446e5536f3e6bbebaa2ce10a88556bdd996f2fad2b2",
+  "contract_sha256": "9e57a2b2c5eab1667981269a8f07f29fdc6817aa4de608553bce0a8daefb1481",
+  "result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0/result/conditional-risk-result.json",
+  "result_sha256": "5b456a8c18ea4c7a97a8b487dc09514912af0bb5a2f8c830707714bed1eefb42",
+  "result_device": 16777238,
+  "ledger_sha256": "0b691f1aeae15695c47dbdebe364ea09f4e18f2d6e919e3e4323d061db9ea993",
+  "core_start_count": 1,
+  "core_complete_count": 1,
+  "all_76_case_source_result_equal": true,
+  "original_unknown_preserved": true,
+  "mature_case_count": 75,
+  "source_episode_count": 33,
+  "max_abs_numeric_difference": 2.220446049250313e-16,
+  "performance_and_condition_table": [
+    {
+      "asset": "510050.SS",
+      "cases": 15,
+      "episodes": 6,
+      "signal_dates": 15,
+      "Y_mean_pct": 2.4999782305891625,
+      "Y_median_pct": 2.7961043041156097,
+      "rho_DY": 0.35714285714285715,
+      "rho_DV": 0.225,
+      "rho_VY": 0.6928571428571428,
+      "partial_DY_given_V": 0.2864419544357521
+    },
+    {
+      "asset": "510300.SS",
+      "cases": 17,
+      "episodes": 6,
+      "signal_dates": 17,
+      "Y_mean_pct": 1.5007281555591265,
+      "Y_median_pct": 0.5842891149101748,
+      "rho_DY": 0.13528609438143244,
+      "rho_DV": -0.15931372549019607,
+      "rho_VY": 0.2830986789833679,
+      "partial_DY_given_V": 0.19051513944964404
+    },
+    {
+      "asset": "510500.SS",
+      "cases": 12,
+      "episodes": 6,
+      "signal_dates": 12,
+      "Y_mean_pct": 7.559660551876453,
+      "Y_median_pct": 7.552438823438806,
+      "rho_DY": -0.24475524475524477,
+      "rho_DV": -0.4405594405594406,
+      "rho_VY": 0.16083916083916083,
+      "partial_DY_given_V": -0.19626302194379022
+    },
+    {
+      "asset": "512400.SS",
+      "cases": 5,
+      "episodes": 2,
+      "signal_dates": 5,
+      "Y_mean_pct": 9.527252191430051,
+      "Y_median_pct": 0.45977011494253706,
+      "rho_DY": -0.15389675281277312,
+      "rho_DV": -0.6,
+      "rho_VY": 0.6668859288553503,
+      "partial_DY_given_V": 0.4130570344929085
+    },
+    {
+      "asset": "512800.SS",
+      "cases": 26,
+      "episodes": 12,
+      "signal_dates": 26,
+      "Y_mean_pct": 2.1766197786821784,
+      "Y_median_pct": 1.7398027105877123,
+      "rho_DY": 0.18237816766986656,
+      "rho_DV": -0.040683760683760686,
+      "rho_VY": 0.24396929371222298,
+      "partial_DY_given_V": 0.19845997500752327
+    }
+  ],
+  "fixed_five_asset_mean": 0.17844221628840753,
+  "deletion_summary": {
+    "total": 33,
+    "valid": 31,
+    "null": 2,
+    "positive_valid": 31,
+    "valid_range": [
+      0.07782964321126856,
+      0.2334848249531485
+    ],
+    "null_details": [
+      {
+        "removed_asset": "512400.SS",
+        "removed_lifecycle": "first_ma_pullback:512400.SS:2025-08-01",
+        "removed_n": 3,
+        "remaining_removed_asset_mature_n": 2,
+        "mean": null,
+        "reasons": {
+          "512400.SS": "fewer_than_four_complete_cases"
+        }
+      },
+      {
+        "removed_asset": "512400.SS",
+        "removed_lifecycle": "first_ma_pullback:512400.SS:2026-01-07",
+        "removed_n": 2,
+        "remaining_removed_asset_mature_n": 3,
+        "mean": null,
+        "reasons": {
+          "512400.SS": "fewer_than_four_complete_cases"
+        }
+      }
+    ]
+  },
+  "deletions": [
+    {
+      "removed_asset": "510050.SS",
+      "removed_lifecycle": "first_ma_pullback:510050.SS:2025-07-11",
+      "removed_n": 4,
+      "remaining_removed_asset_mature_n": 11,
+      "mean": 0.1545874059330081,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510050.SS",
+      "removed_lifecycle": "first_ma_pullback:510050.SS:2025-09-24",
+      "removed_n": 5,
+      "remaining_removed_asset_mature_n": 10,
+      "mean": 0.16737779235308745,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510050.SS",
+      "removed_lifecycle": "first_ma_pullback:510050.SS:2025-12-05",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 14,
+      "mean": 0.17659545900065743,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510050.SS",
+      "removed_lifecycle": "first_ma_pullback:510050.SS:2025-12-31",
+      "removed_n": 2,
+      "remaining_removed_asset_mature_n": 13,
+      "mean": 0.09586623855705713,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510050.SS",
+      "removed_lifecycle": "first_ma_pullback:510050.SS:2026-02-03",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 14,
+      "mean": 0.18171652352941328,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510050.SS",
+      "removed_lifecycle": "first_ma_pullback:510050.SS:2026-02-06",
+      "removed_n": 2,
+      "remaining_removed_asset_mature_n": 13,
+      "mean": 0.2334848249531485,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510300.SS",
+      "removed_lifecycle": "first_ma_pullback:510300.SS:2025-07-30",
+      "removed_n": 10,
+      "remaining_removed_asset_mature_n": 7,
+      "mean": 0.1400139851464462,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510300.SS",
+      "removed_lifecycle": "first_ma_pullback:510300.SS:2025-10-20",
+      "removed_n": 2,
+      "remaining_removed_asset_mature_n": 15,
+      "mean": 0.19725739486026106,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510300.SS",
+      "removed_lifecycle": "first_ma_pullback:510300.SS:2026-01-05",
+      "removed_n": 2,
+      "remaining_removed_asset_mature_n": 15,
+      "mean": 0.1700984889515666,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510300.SS",
+      "removed_lifecycle": "first_ma_pullback:510300.SS:2026-02-03",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 16,
+      "mean": 0.18088468685779982,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510300.SS",
+      "removed_lifecycle": "first_ma_pullback:510300.SS:2026-02-06",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 16,
+      "mean": 0.17138950000213388,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510300.SS",
+      "removed_lifecycle": "first_ma_pullback:510300.SS:2026-03-10",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 16,
+      "mean": 0.19151296425150036,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510500.SS",
+      "removed_lifecycle": "first_ma_pullback:510500.SS:2025-08-08",
+      "removed_n": 2,
+      "remaining_removed_asset_mature_n": 10,
+      "mean": 0.07782964321126856,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510500.SS",
+      "removed_lifecycle": "first_ma_pullback:510500.SS:2025-10-23",
+      "removed_n": 3,
+      "remaining_removed_asset_mature_n": 9,
+      "mean": 0.18308889486990546,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510500.SS",
+      "removed_lifecycle": "first_ma_pullback:510500.SS:2025-11-05",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 11,
+      "mean": 0.1798416664678729,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510500.SS",
+      "removed_lifecycle": "first_ma_pullback:510500.SS:2025-12-30",
+      "removed_n": 4,
+      "remaining_removed_asset_mature_n": 8,
+      "mean": 0.17490566174720068,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510500.SS",
+      "removed_lifecycle": "first_ma_pullback:510500.SS:2026-03-10",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 11,
+      "mean": 0.21785335854709068,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "510500.SS",
+      "removed_lifecycle": "first_ma_pullback:510500.SS:2026-05-07",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 11,
+      "mean": 0.1830480068038494,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512400.SS",
+      "removed_lifecycle": "first_ma_pullback:512400.SS:2025-08-01",
+      "removed_n": 3,
+      "remaining_removed_asset_mature_n": 2,
+      "mean": null,
+      "reasons": {
+        "512400.SS": "fewer_than_four_complete_cases"
+      }
+    },
+    {
+      "removed_asset": "512400.SS",
+      "removed_lifecycle": "first_ma_pullback:512400.SS:2026-01-07",
+      "removed_n": 2,
+      "remaining_removed_asset_mature_n": 3,
+      "mean": null,
+      "reasons": {
+        "512400.SS": "fewer_than_four_complete_cases"
+      }
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2024-06-26",
+      "removed_n": 3,
+      "remaining_removed_asset_mature_n": 23,
+      "mean": 0.1673051519168328,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2024-07-31",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 25,
+      "mean": 0.1759742093304814,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2024-08-15",
+      "removed_n": 2,
+      "remaining_removed_asset_mature_n": 24,
+      "mean": 0.14162947273696305,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2024-10-11",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 25,
+      "mean": 0.18081358037843706,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2024-11-27",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 25,
+      "mean": 0.17275642019663,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2024-12-03",
+      "removed_n": 3,
+      "remaining_removed_asset_mature_n": 23,
+      "mean": 0.16238046943924192,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2025-01-23",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 25,
+      "mean": 0.17809208889887554,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2025-02-26",
+      "removed_n": 2,
+      "remaining_removed_asset_mature_n": 24,
+      "mean": 0.18591457603045825,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2025-03-05",
+      "removed_n": 4,
+      "remaining_removed_asset_mature_n": 22,
+      "mean": 0.22035589289445712,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2025-04-14",
+      "removed_n": 3,
+      "remaining_removed_asset_mature_n": 23,
+      "mean": 0.1622262249249438,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2025-05-07",
+      "removed_n": 4,
+      "remaining_removed_asset_mature_n": 22,
+      "mean": 0.22365703524836159,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "512800.SS",
+      "removed_lifecycle": "first_ma_pullback:512800.SS:2025-08-05",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 25,
+      "mean": 0.18423712741327242,
+      "reasons": {}
+    },
+    {
+      "removed_asset": "588000.SS",
+      "removed_lifecycle": "first_ma_pullback:588000.SS:2026-06-15",
+      "removed_n": 1,
+      "remaining_removed_asset_mature_n": 0,
+      "mean": 0.17844221628840753,
+      "reasons": {}
+    }
+  ],
+  "plain_conclusion": "扣除当时波动程度的线性排序关系后，这75个旧案例出现了偏正的条件联系，但五只ETF方向并不一致，而且有色ETF仅两段走势，删掉任一段都不足以完成原五ETF比较。因此只能说找到有限历史线索，尚不能确认稳定新增风险信息，更不能据此调整仓位或止损。",
+  "interpretation_limits": [
+    "0.178 is an association coefficient, not a probability, accuracy, return or forecast improvement.",
+    "Marginal and conditional correlations differ in conditioning; their difference is not a performance increment.",
+    "31 positive computable deletions reuse the same history and are not independent confirmations.",
+    "Two unavailable 512400 deletions must remain in the headline denominator 33; they cannot be omitted or reweighted.",
+    "512400 sign reversal only concerns the fixed linear rank expression and small retained sample.",
+    "No confidence interval, new-history validation, tradable execution or comparable-risk account advantage established."
+  ],
+  "closeout": "Close this frozen descriptive question after root report/registry/readback. No core statistical pending item; do not change bins, models, assets or thresholds to turn the evidence green.",
+  "review_market_cli_runs": 0,
+  "review_new_labels": 0,
+  "review_new_prediction_fits": 0,
+  "review_account_runs": 0
+}

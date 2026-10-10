@@ -15,6 +15,49 @@
   "任务书"
  ],
  "entries": {
+    "docs/experiments/etf-pair-h1-action-qualification-2026-10-10.md": {
+      "category": "数据与质量",
+      "verdict": "passed",
+      "oneLiner": "沪深300和创业板两ETF2026上半年分红、份额折算已有正式原件事后覆盖，旧行动一致；不代表当时可知、全历史或开盘交易资料合格。",
+      "report_sha256": "bfc53418bdcbb7a1c172cb6e9d437fc0bbd3b4baa9787d687986e7d2b3ff5cde",
+      "raw_directory": "docs/experiments/raw/etf-pair-h1-action-qualification-2026-10-10",
+      "archive_status": "completed_bounded_retrospective_company_action_sources",
+      "public_requests": 14,
+      "public_request_limit": 18,
+      "new_network_source_bytes": 0,
+      "reused_source_files_restored": 6,
+      "market_runs": 0,
+      "complete_market_qualification": false
+    },
+    "docs/experiments/weekly-portfolio-cross-week-fixed-orders-2026-10-10.md": {
+      "category": "方法论与验证",
+      "verdict": "passed",
+      "oneLiner": "同一人工账户两周固定买单与250元入金可在新进程恢复，资金和费用不重复；保存前后故障及来源变动反例独核通过，仅限人工执行工程。",
+      "report_sha256": "4ec165314f711accd616f299777cec4ab33d4993f000c31023495cc4e7c1b7cf",
+      "raw_directory": "docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10",
+      "archive_status": "completed_bounded_cross_week_synthetic_fixed_orders_recovery",
+      "synthetic_main_fixtures": 1,
+      "engineering_versions": 2,
+      "new_account_paths": 0,
+      "market_requests": 0,
+      "production_changes": 0,
+      "matched_risk_return_claim": false
+    },
+    "docs/experiments/native-d-conditional-risk-2026-10-10.md": {
+      "category": "方法论与验证",
+      "verdict": "mixed",
+      "oneLiner": "扣除波动的线性排序关系后，75个旧ETF机会五产品平均联系0.1784；31次删除可算且为正、2次不足，尚未确认稳定新增风险信息或收益贡献。",
+      "report_sha256": "22eac092a858da03c7e1ff1036e7fff7f65f757adcc2301fc27f124a25bc2e93",
+      "raw_directory": "docs/experiments/raw/native-d-conditional-risk-2026-10-10",
+      "archive_status": "completed_bounded_saved_result_conditional_description",
+      "scientific_configurations": 1,
+      "core_analysis_starts": 1,
+      "new_features": 0,
+      "new_labels": 0,
+      "new_prediction_fits": 0,
+      "new_account_paths": 0,
+      "production_changes": 0
+    },
     "docs/experiments/dual-ma-consumer-correction-2026-10-09.md": {"category": "方法论与验证", "verdict": "mixed", "oneLiner": "四日期修正影响12/132账户，终值改变量−2780.89至+761.25元，既有保留判断未翻转；账户及事件连带传播已独核，120原账户复用。", "report_sha256": "9737ea7a6bb6040cfe526b64dc565fc87b79f48ecdaacceed67c75c4dfd51318", "archive_status": "completed_bounded_correction", "raw_directory": "docs/experiments/raw/dual-ma-consumer-correction-2026-10-09", "real_account_paths": 12, "new_return_labels": 0, "new_auxiliary_risk_windows": 1, "old132_replays": 0, "fits": 0, "production_changes": 0},
     "docs/experiments/weekly-portfolio-whole-buy-recovery-2026-10-09.md": {
       "category": "方法论与验证",

@@ -1,0 +1,68 @@
+{
+  "schema": "etf-pair-h1-source-backup-independent-review/1",
+  "question_id": "etf-pair-h1-actions-20261010",
+  "reviewed_at": "2026-10-10T18:30:36+08:00",
+  "status": "accepted_exact_six_files_on_this_machine",
+  "scope": "Independent read-only checks of the six listed local originals, six fixed-external backup files, and six fixed-external restored files; no new source download or market/account calculation.",
+  "input_sha256": {
+    "source-backup-manifest.json": "d3df2fc892e5e2bd43be7fbbdbdec385e7620fbab27391caf11d2aa0766c5f7e",
+    "source-restore-readback.json": "c89f81d3ed8f1feae1ab633dac3b3f2ba635517ccab2c3bb4b33d721f775f5f3",
+    "result-location.json": "2aff4444e75b4ebd4f3ad821ad643e247e767b4057fc6c8eab9034728025c928",
+    "independent-review.json": "92243cab6a9d3c235fa16bfb8cc8b83f2fe6aab3ce4d34a32e4bc09a2e21798a",
+    "backup-preflight-failure.json": "5cc390418bf08b076dcbbc357fd6baab2bcc0973a777c164b27947667dd1e835"
+  },
+  "fixed_external_device": {
+    "mount": "/Volumes/win+mac通用",
+    "diskutil_volume_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "diskutil_mount_point_matches": true,
+    "diskutil_internal": false,
+    "diskutil_writable": true,
+    "diskutil_filesystem": "exfat",
+    "actual_mount_device": 16777238,
+    "actual_run_and_output_device": 16777238,
+    "all_backup_and_restore_file_devices": 16777238,
+    "all_local_original_file_devices": 16777232
+  },
+  "set_acceptance": {
+    "manifest_entries": 6,
+    "unique_logical_paths": 6,
+    "backup_payload_ordinary_files": 6,
+    "restore_payload_ordinary_files": 6,
+    "backup_extra_payload_files": 0,
+    "restore_extra_payload_files": 0,
+    "backup_manifest_is_separate_metadata_file": true,
+    "three_way_size_and_sha256_passed": 6,
+    "three_way_size_and_sha256_failed": 0,
+    "total_original_bytes": 4223747,
+    "total_backup_bytes": 4223747,
+    "total_restored_bytes": 4223747,
+    "source_original_paths_currently_readable": 6,
+    "external_backup_manifest_sha256": "d3df2fc892e5e2bd43be7fbbdbdec385e7620fbab27391caf11d2aa0766c5f7e",
+    "restore_receipt_manifest_sha256_matches": true,
+    "result_location_binds_all_12_backup_and_restore_files": true,
+    "manifest_only_exact_six_not_entire_old_directories": true
+  },
+  "files": [
+    {"logical_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fifth/159915/2026h.pdf", "bytes": 1734050, "sha256": "e3f41a6b11174cfd57aea4706f6f8d928a48bf25a97bbcb2e44292f7c779b093", "source_backup_restore_passed": true},
+    {"logical_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2026-01-12.pdf", "bytes": 139671, "sha256": "c8ff747d02fa90db72320458c38249f73720b932d61b7e088f033583aab63992", "source_backup_restore_passed": true},
+    {"logical_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf", "bytes": 2323200, "sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5", "source_backup_restore_passed": true},
+    {"logical_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-manifest.json", "bytes": 15076, "sha256": "cabd0eb7481dc005fa4cab0ca51ff12b63d5264e95f04904396bee1813fba495", "source_backup_restore_passed": true},
+    {"logical_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/actions.json", "bytes": 8633, "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789", "source_backup_restore_passed": true},
+    {"logical_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fifth/159915/manifest.json", "bytes": 3117, "sha256": "2a7ad8667d0dc4520494f2dcc68871aa054b944972e4c6b988329f023f6b24f6", "source_backup_restore_passed": true}
+  ],
+  "report_archive_review": {
+    "path": "docs/experiments/etf-pair-h1-action-qualification-2026-10-10.md",
+    "sha256_at_review": "bfc53418bdcbb7a1c172cb6e9d437fc0bbd3b4baa9787d687986e7d2b3ff5cde",
+    "archive_section": "## ARCHIVE：来源验收与可恢复性",
+    "material_scope_overstatement_found": false,
+    "reason": "ARCHIVE limits the claim to six exact files, a same-machine restore from the fixed external disk, and no other-machine verification; it does not claim entire prior directories were backed up.",
+    "preflight_failure_consistent_with_receipt": true,
+    "preflight_detail": "backup-preflight-failure.json records out_exists=false, out_device=null and an assertion at the fixed guard before copies; the report says result was not yet created and the attempt wrote no backup payload. This is internally consistent, though this reviewer did not observe that earlier attempt live.",
+    "process_claim_limit": "The file hashes prove current three-way byte equality. This reviewer did not independently observe the copy/restore process, a second PID, or pre-copy inode/mtime values; those process/history assertions rest on the controller receipts."
+  },
+  "limits": [
+    "This is current-machine fixed-external backup and readback of exactly six named files, not an off-machine restore or loss-of-disk disaster recovery.",
+    "The source manifests may reference other historical files outside the six-file copy set; those files were not inspected or backed up by this review.",
+    "No independent conclusion is made about PDF content, market data, a user's usable-cash time, or report availability during 2026 H1."
+  ]
+}

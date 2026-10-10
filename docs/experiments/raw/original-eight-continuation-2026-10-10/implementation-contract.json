@@ -1,0 +1,41 @@
+{
+  "mission": "在保存ETF机会中，扣除同ETF波动V的线性排序关系后，失效距离D是否仍与后续固定收盘不利幅度有稳定联系？",
+  "task_scope": [
+    "implement fixed saved-result conditional association and meaningful synthetic checks; no real Y values or analysis start"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/original-eight-continuation-2026-10-10/d-contract.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/original-eight-continuation-2026-10-10/d-output-plan.json",
+    "docs/experiments/raw/native-risk-d-mae-2026-10-07/immutable-handoff/PROPOSED-CONTRACT.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T121052-8c15af8c4cb6/result/real-x/x-rows.json"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/native_d_conditional_risk.py",
+    "tests/unit/test_native_d_conditional_risk.py",
+    "docs/experiments/raw/native-d-conditional-risk-2026-10-10/implementation-review.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "expected_outputs": [
+    "--qualify/--analyze entry, exact-source/identity and one-start ledger, external output only",
+    "ties/degenerate/confounding/fixed-weight/group/identity/one-shot synthetic checks",
+    "no real analysis start or Y value inspection"
+  ],
+  "stop_conditions": [
+    "input hash/identity changed",
+    "unknown filled or membership changed",
+    "core already started",
+    "external plan identity mismatch",
+    "qualified insufficient cells preserve null, do not change method or assets"
+  ],
+  "analysis_contract": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/original-eight-continuation-2026-10-10/d-contract.json"
+}

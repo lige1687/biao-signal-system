@@ -1,0 +1,263 @@
+{
+  "schema": "cross-week-fixed-orders-independent-review/1",
+  "reviewed_at": "2026-10-10T18:15:37.953524+08:00",
+  "question_id": "weekly-cross-week-fixed-orders-20261010",
+  "status": "accepted_for_bounded_synthetic_engineering_closure",
+  "plain_language_conclusion": "在这一个人工排序、数量和价格事先固定的两周例子里，跨进程保存恢复仍只使用一份现金；250 元只入账一次，每笔买单和费用只记一次。保存前失败和保存后回应丢失，换进程恢复后都与连续执行完全一致。这个缺口可以结案，但不代表完整策略、真实交易或相近风险下收益已经验证。",
+  "reviewed_source_sha256": {
+    "cross_week_fixed_orders.py": "ecb9a5f6eda5616e9a62103b07df21dfa235cebf73b6683e9446d97789946964",
+    "test_cross_week_fixed_orders.py": "5cfb9c5249974efaac3f5886d9982d942f323a1dfafe750dda960da71b0be3d7",
+    "run_synthetic_checks.py": "72f0bdea21251ffdc53520cc8a5421c4377556779f6bb0c4f2a4d311e2201c12",
+    "executor-contract.json": "a2fce982ca9eac47818b02f02b39a40b8d1a0e66088b446798cd4152ee71749f",
+    "frozen-fixtures.json": "ab47bafa69afd7dd5d61fdf842bd2d5f92da3458d0b175c391e59b5bab436c04",
+    "source-manifest.json": "ebe3e22787a4a7fe0ff301d127d535ec3986cb49da47fe99ffd5f910b3357a10",
+    "implementation-review.json": "b243e496c805590b7811e3452825ab6a44816f4d25dd50cc71be9d3ad09250f8"
+  },
+  "original_source_sha256_verified": {
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+    "docs/experiments/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/whole_buy_recovery.py": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f"
+  },
+  "source_version": {
+    "v1_preserved": true,
+    "v1_money_evidence_reused_only_after_all_non_version_fields_equal_v2": true,
+    "v1_defects": "No per-operation source verification; no actual wrapper SHA bound in state. Fixed before accepted v2.",
+    "accepted_wrapper_sha256": "ecb9a5f6eda5616e9a62103b07df21dfa235cebf73b6683e9446d97789946964",
+    "accepted_full_state_sha256": "4f81e1834374689afe1feb262b88d49f40db4c5ad24faa9e25342bcbc22152cf"
+  },
+  "independent_arithmetic": {
+    "method": "No executor or frozen Ledger functions imported; independent Decimal formula plus hand-built chronological events and full snapshots/audit at every step.",
+    "fee_each_order": "5.20",
+    "cash_week1": "200.10",
+    "assets_week1": "600.10",
+    "fees_week1": "10.40",
+    "cash_after_deposit": "450.10",
+    "deposit_amount": "250",
+    "deposit_count": 1,
+    "new_units": "254.3326112314614230961506416",
+    "units_final": "864.8326112314614230961506416",
+    "unit_nav_before_deposit": "0.9829647829647829647829647830",
+    "unit_nav_after_deposit": "0.9829647829647829647829647829",
+    "unit_nav_absolute_difference": "1E-28",
+    "cash_final": "39.70",
+    "assets_final": "839.70",
+    "fees_final": "20.80",
+    "positions_final": {
+      "TEST_A": 200,
+      "TEST_B": 200
+    },
+    "conservation": "cash + holdings at flat prices + fees = 610.50 + actual deposits at all 10 steps",
+    "all_ledger_snapshot_fields_and_audit_fields_checked_steps": 10
+  },
+  "actual_process_evidence": {
+    "author_v2_pids": [
+      99624,
+      99625,
+      99626
+    ],
+    "continuous_and_split_full_state_bytes_equal": true,
+    "independent_worker_processes": 20,
+    "fault_recovery": [
+      {
+        "distinct_pids": [
+          99789,
+          99790,
+          99791
+        ],
+        "fault": "pre_replace",
+        "full_state_equals_author_v2": true,
+        "saved_cursor": 8,
+        "stale_temp_files": [
+          "state.next.99790"
+        ]
+      },
+      {
+        "distinct_pids": [
+          99792,
+          99794,
+          99795
+        ],
+        "fault": "post_replace",
+        "full_state_equals_author_v2": true,
+        "saved_cursor": 9,
+        "stale_temp_files": []
+      }
+    ]
+  },
+  "independent_counterexamples": [
+    {
+      "name": "pre_replace-prepare",
+      "pid": 99789,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "pre_replace-fail",
+      "pid": 99790,
+      "returncode": 17,
+      "expected_returncode": 17
+    },
+    {
+      "name": "pre_replace-recover",
+      "pid": 99791,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "post_replace-prepare",
+      "pid": 99792,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "post_replace-fail",
+      "pid": 99794,
+      "returncode": 17,
+      "expected_returncode": 17
+    },
+    {
+      "name": "post_replace-recover",
+      "pid": 99795,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "identity-duplicates",
+      "pid": 99797,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "wrongorder-prepare",
+      "pid": 99798,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "wrongorder-refuse",
+      "pid": 99803,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "terminal-cash",
+      "pid": 99805,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "terminal-cash-restore",
+      "pid": 99809,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "terminal-limit",
+      "pid": 99810,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "terminal-limit-restore",
+      "pid": 99812,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "terminal-permission",
+      "pid": 99813,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "terminal-permission-restore",
+      "pid": 99814,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "bad-state",
+      "pid": 99815,
+      "returncode": 1,
+      "expected_returncode": 1
+    },
+    {
+      "name": "source-before-import",
+      "pid": 99816,
+      "returncode": 1,
+      "expected_returncode": 1
+    },
+    {
+      "name": "source-live-operation",
+      "pid": 99817,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "executor-version-prepare",
+      "pid": 99818,
+      "returncode": 0,
+      "expected_returncode": 0
+    },
+    {
+      "name": "executor-version-restore",
+      "pid": 99819,
+      "returncode": 1,
+      "expected_returncode": 1
+    }
+  ],
+  "critical_interpretations": [
+    "Recovery reconstructs a fresh in-memory frozen Ledger from saved events and compares every reconstructed result/state before accepting a new event. This is rebuilding prior state; it does not submit economic events to an external account.",
+    "The only economic cash authority is dated_ledger.Ledger. Wrapper order checks do not maintain an alternative cash balance; funds use the actual post-deposit ledger.",
+    "Pre-replace fault leaves saved cursor 8 and an intentionally retained temporary file; the new process applies the missing first week2 order once. Post-replace fault leaves cursor 9; re-submitting the saved identity returns its existing receipt.",
+    "Insufficient cash, over-limit opening and forbidden opening were terminal refusals, retained over a different process. No smaller quantity, renamed retry or replacement date was accepted.",
+    "The current fixed CLI and injected failures were checked under single-writer scope. Engine helpers are research code, not a secured general account service."
+  ],
+  "preserved_review_failure": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff/independent-review/full-state-arithmetic-initial-failure.json",
+    "reason": "Independent verifier initially converted all initial marks to Decimal; frozen Ledger keeps untraded marks as strings, converts buy marks and resets close marks to input strings. Corrected verifier after reading exact old Ledger lines; failure preserved.",
+    "producer_defect": false
+  },
+  "artifacts": {
+    "preflight.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff/independent-review/preflight.json",
+      "sha256": "78e24686227f063ff737370f779cdb16efc47c379039073876e51ef17222bc5c"
+    },
+    "independent_checks.py": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff/independent-review/independent_checks.py",
+      "sha256": "5a865635533253645877daa0bc2fbf4b3deafd893dbfd8da7bba43ca8da96791"
+    },
+    "independent-checks.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff/independent-review/independent-checks.json",
+      "sha256": "096a88f26cdcaad1457256cd1220c8c9620810d1207a0a2e2d71a5a09937a894"
+    },
+    "full_state_arithmetic.py": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff/independent-review/full_state_arithmetic.py",
+      "sha256": "2948becba77e700a14c5611fc6345066bde3d2523ab074fa37a709c4a89f1f11"
+    },
+    "independent-full-state-arithmetic.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff/independent-review/independent-full-state-arithmetic.json",
+      "sha256": "72b8b89185548705ee60f37092caeb2b1115c7d4e1fec5116ebab178ef69f704"
+    },
+    "full-state-arithmetic-initial-failure.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff/independent-review/full-state-arithmetic-initial-failure.json",
+      "sha256": "c50dd3439a0b3907e4e245c5a6aca095c77f6d37ab9f9ee3a611b6fb3cc2921d"
+    }
+  },
+  "limits": [
+    "One frozen artificial fixture with necessity-only failure variants; fixed manual ordering is not a user allocation or competing-order policy.",
+    "No real market/account, performance, position sizing, exits or matched-risk return claim.",
+    "No concurrent writers, partial fills, sells, corporate actions, arbitrary input-calendar coverage or actual hardware power-cut testing.",
+    "Ordinary engine write fsync/replace semantics and injected Python failures tested, not crash-proof guarantees for every external filesystem/device."
+  ],
+  "budget": {
+    "new_engineering_question": 1,
+    "new_main_fixed_fixture": 1,
+    "market_requests": 0,
+    "real_account_runs": 0,
+    "old_fixed_still": "2/2 exhausted",
+    "old_monthly_still": "4/4 exhausted",
+    "old_budgets_reset": false
+  },
+  "closure_decision": "This precise cross-week fixed-order recovery question has been answered. Parent may close after report/registry/current-state readback; broader Goal5 matched-risk returns remain unproven without generating another automatic research loop."
+}

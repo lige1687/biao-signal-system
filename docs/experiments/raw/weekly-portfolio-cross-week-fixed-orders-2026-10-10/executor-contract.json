@@ -1,0 +1,101 @@
+{
+  "schema": "cross-week-fixed-orders-contract/1",
+  "question_id": "weekly-cross-week-fixed-orders-20261010",
+  "goal_id": "K-risk-attribution",
+  "question": "同一人工账户跨两个周批次执行事先固定买单，保存重启后能否仍只使用一份现金、每项操作只记一次？",
+  "scope": "仅执行工程；不运行P0分配器、不称完整P0/LEI策略、不做市场/风险匹配收益研究",
+  "frozen_at": "2026-10-10T18:06:03.790030+08:00",
+  "fixture_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/frozen-fixtures.json",
+  "fixture_sha256": "ab47bafa69afd7dd5d61fdf842bd2d5f92da3458d0b175c391e59b5bab436c04",
+  "source_sha256": {
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+    "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+    "docs/experiments/raw/weekly-portfolio-whole-buy-recovery-2026-10-09/whole_buy_recovery.py": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f"
+  },
+  "source_import_rule": "only dated_ledger.Ledger reused as cash authority; verify all selected original hashes before first import and operations, no mutation of old sources; do not clear old single-decision locks",
+  "output_plan": {
+    "schema_version": 1,
+    "task_id": "weekly-cross-week-fixed-orders-20261010",
+    "run_id": "weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff",
+    "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff",
+    "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff/result",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "estimated_bytes": 16777216,
+    "internal_metadata_bytes": 1048576,
+    "external_reserve_bytes": 10737418240,
+    "internal_reserve_bytes": 5368709120,
+    "execution_authorized": false,
+    "quota_enforced": false
+  },
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/cross_week_fixed_orders.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/test_cross_week_fixed_orders.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/run_synthetic_checks.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/implementation-review.json"
+  ],
+  "root_owned_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/frozen-fixtures.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/executor-contract.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/source-manifest.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/weekly-portfolio-cross-week-fixed-orders-2026-10-10.md"
+  ],
+  "budget": {
+    "engineering_questions": 1,
+    "main_fixed_fixture": 1,
+    "necessary_counterexamples": [
+      "repeat first/second week orders and deposit",
+      "premature second week/missing closes/deposit/skipped cursor/old date",
+      "insufficient cash/overlimit/not permitted terminal rejection without resizing or chasing",
+      "quantity/fee/limit/batch/snapshot/identity drift rejected before ledger change",
+      "single-writer pre-replace failure/post-replace response loss with restart",
+      "source drift before first import/bad or foreign checkpoint/reconstruction mismatch"
+    ],
+    "market_requests": 0,
+    "real_market_account_runs": 0,
+    "new_features": 0,
+    "labels": 0,
+    "prediction_fits": 0,
+    "old_monthly_used": 4,
+    "old_monthly_limit": 4,
+    "old_fixed_used": 2,
+    "old_fixed_limit": 2,
+    "old_budgets_reset": false
+  },
+  "acceptance": [
+    "continuous new process vs first-week process saved/exited then different new process second week; full Decimal ledger/state/event/cursor/deposit/unit-price/fees/refusals equal; actual PID and file SHA",
+    "week2 deposit uses stored Jan9 complete unit NAV only and is NAV-neutral, idempotent250 only once",
+    "at each step cash >=0 and cash+positions+fees=610.50+actual_deposits at flat artificial price",
+    "period1 200.10 cash,600.10 assets,10.40fees; final39.70cash,A/B200 each,20.80fees,839.70assets",
+    "snapshots from single actual Ledger after deposit not self-reported request; whole fixed orders accept/refuse; no resizing or same-open budget reallocation",
+    "replay rebuilding existing history distinguished from applying new economic events; same identity changed request conflicts",
+    "state stores frozen input and source version, reconstruction independently compared before continue, fail safe without auto-init/overwrite"
+  ],
+  "forbidden": [
+    "real prices/signals/accounts",
+    "automatic policy generation",
+    "P1 no-sale-lot/new money decision",
+    "global competing-order preference",
+    "sell/partialfill/corporateaction/concurrent writers/production",
+    "modifying frozen cash engines or TEST risk values into user settings",
+    "new shared registry/API/Git writes by executor"
+  ],
+  "authorization": {
+    "human": "按着目标去做啊；允许持续原八目标",
+    "scope": "新独立必要工程问题，0市场额度，不借/重跑原账户实验",
+    "at": "2026-10-10T18:06:03.790030+08:00"
+  },
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true,
+    "reviewer": "gpt-6-astra/high plus root independent arithmetic/actual process"
+  },
+  "strategy_sha256": [
+    "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  ]
+}

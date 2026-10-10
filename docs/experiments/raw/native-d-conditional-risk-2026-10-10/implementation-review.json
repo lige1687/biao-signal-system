@@ -1,0 +1,75 @@
+{
+  "schema": "native-d-conditional-risk-implementation-review/1",
+  "question_id": "native-d-conditional-risk-20261010",
+  "status": "synthetic_implementation_ready_for_controller_review",
+  "strategy_layer": "Saved opportunity invalidation-distance D research proxy; no live rule, signal, or trade change",
+  "strategy_document_sha256": {
+    "LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "implementation": {
+    "path": "src/lei_signal/research/native_d_conditional_risk.py",
+    "sha256": "2a942b1cbceaab6927cc727c217a4638a813942eb517af3c46e8d803c978cb81",
+    "bytes": 18491,
+    "entry": "python3 -m lei_signal.research.native_d_conditional_risk --contract <frozen d-contract.json> --qualify|--analyze",
+    "qualify_behavior": "Check fixed external route, X and Y byte hashes, parse and validate X only; Y values are not parsed or summarized; write qualification.json only to pre-routed output.",
+    "analyze_behavior": "Require qualification and unchanged hashes; create exclusive persistent core-start ledger before parsing Y; apply within-ETF average-tied ranks and frozen partial-rank formula; preserve all five ETF at weight 1/5 or return aggregate null; remove each of 33 frozen ETF-lifecycle groups once without changing fixed weights; retain 76th unknown.",
+    "attempt_ledger": "docs/experiments/raw/native-d-conditional-risk-2026-10-10/attempt-ledger.json",
+    "ledger_binding": "Exact contract location must be this checkout's frozen d-contract.json; contract ledger field must match the fixed repository-relative path, resolved from module checkout rather than process cwd.",
+    "cli_stdout": "Only stage, passed, numeric case count and fixed output path; no per-case results or D/V/Y values.",
+    "output_requires_pre_routed_plan": true
+  },
+  "tests": {
+    "path": "tests/unit/test_native_d_conditional_risk.py",
+    "sha256": "ba197f567aaef23e960618c7f5a1b8418198212566a79b0e38fab70d835ffd36",
+    "bytes": 10766,
+    "synthetic_cases": 9,
+    "result": "9 passed in 0.16s",
+    "covers": [
+      "exact ties get average ranks",
+      "conditional formula differs from marginal D-Y relationship when V confounds",
+      "constant column and zero partial denominator return null",
+      "at least four complete cases and two source episodes",
+      "all five ETF keep exact one-fifth weight; ineligible group deletion makes aggregate null",
+      "33 frozen episode deletions and preserved unknown",
+      "case identity/membership drift rejected",
+      "qualification does not parse Y; exclusive core-start permits one analysis start",
+      "different working directories and copied or altered contract paths cannot redirect the ledger",
+      "analyze CLI stdout contains no case identifier or per-case D/V/Y"
+    ]
+  },
+  "verification": {
+    "ruff": "All checks passed",
+    "repo_hygiene": "passed",
+    "real_x_read_only_validation": "76 cases, 84 aliases, 33 source episodes; no real Y parse",
+    "real_qualify_run": false,
+    "real_analyze_run": false,
+    "real_y_values_read": false,
+    "prediction_fits": 0,
+    "new_feature_or_label_runs": 0,
+    "network_requests": 0,
+    "main_head_preserved": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+    "main_index_sha256_preserved": "e93cdb1d84cd2a8a793acb5f35b36521003dd72efa23333102a0fc9d64343970"
+  },
+  "preserved_failure": {
+    "action": "python3 scripts/dry_run.py --contract <implementation-contract.json>",
+    "result": "exit 2; scripts/dry_run.py does not exist in this repository",
+    "effect": "No dispatch or scientific run; contract, exact write paths, dirty worktree and owner were checked directly."
+  },
+  "controller_review_corrections": [
+    {
+      "finding": "Original analyze CLI would print the 76-case result list because result.get('cases') selected the populated list.",
+      "correction": "Select numeric case_count for analyze, with a synthetic stdout test using identifiable case and D/V/Y sentinels."
+    },
+    {
+      "finding": "Original relative attempt_ledger was resolved from the process working directory, allowing a second core start after a cwd change.",
+      "correction": "Bind both stages to the exact ledger under the module's repository root and reject contract or ledger path drift; synthetic cross-cwd and copied-contract checks pass."
+    }
+  ],
+  "controller_next": "Independently review exact source/test diff, route the already saved d-output-plan.json to its fixed external output, then run --qualify and only after acceptance run --analyze once. Preserve ledger and any failures; no parameter or asset changes.",
+  "limitations": [
+    "This is algebraic conditional historical association, not a prediction fit or causal result.",
+    "The actual Y and result have not been inspected by the implementation agent.",
+    "Real source consistency, scientific result and final report require controller acceptance."
+  ]
+}

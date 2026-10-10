@@ -1,0 +1,112 @@
+{
+  "schema": "etf-pair-h1-action-source-contract/1",
+  "question_id": "etf-pair-h1-actions-20261010",
+  "goal_id": "K-data-boundary",
+  "question": "仅原510300/159915在2026-01-01—2026-06-30，官方正式报告能否核定分红/份额折算并与已保存actions一致？",
+  "decision_use": "缩小共享资金研究的具体公司行动缺口，单一维度资格不替代正式开盘/日历/资料当时到达资格",
+  "fixed_products": [
+    {
+      "code": "510300",
+      "manager": "华泰柏瑞基金",
+      "fund": "华泰柏瑞沪深300交易型开放式指数证券投资基金"
+    },
+    {
+      "code": "159915",
+      "manager": "易方达基金",
+      "fund": "易方达创业板交易型开放式指数证券投资基金"
+    }
+  ],
+  "fixed_period": [
+    "2026-01-01",
+    "2026-06-30"
+  ],
+  "source_rules": [
+    "read existing saved official originals and later qualifications before requesting new copies",
+    "only exact fund/code/period official manager or exchange/statutory-disclosure originals accepted; other ETFs/feeder funds/media cannot substitute",
+    "saved semiannual report can verify retrospective coverage; publication after Jun30 does not establish information arrived then",
+    "absence of identified distributions/quarterly reports alone cannot establish absence of all actions; full report statements/coverage must support exact scope",
+    "save actual raw bytes/SHA/URL and relevant pages/sections/date/response ledger externally; do not overwrite frozen actions/bars",
+    "split/units changes must distinguish subscriptions/redemptions vs conversion, splits, fund-level distributions; no dividends inferred from total equity numbers"
+  ],
+  "budget": {
+    "total_public_source_requests_limit": 18,
+    "already_used_planning_search_queries": 2,
+    "raw_download_byte_limit": 33554432,
+    "raw_download_bytes_so_far": 0,
+    "max_same_operation_failed_attempts": 2,
+    "search_open_download_failure_each_counts": true,
+    "old_source_budgets_reset_or_borrowed": false,
+    "market_runs": 0,
+    "new_labels": 0,
+    "prediction_fits": 0,
+    "real_accounts": 0
+  },
+  "planning_discovery": {
+    "before_contract": true,
+    "queries": [
+      {
+        "q": "site.efunds.com.cn 易方达创业板交易型开放式指数证券投资基金 2026 年 中期报告",
+        "count": 1,
+        "result": "manager results mostly other funds plus old2025 exact report; none accepted as2026 original"
+      },
+      {
+        "q": "site.huatai-pb.com 沪深300 2026 中期报告 510300",
+        "count": 1,
+        "result": "no exact original accepted"
+      }
+    ],
+    "full_tool_transport_bytes_unknown": true,
+    "saved_raw_original_bytes": 0,
+    "outcome_data_read": false
+  },
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/etf-pair-h1-action-qualification-2026-10-10",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/etf-pair-h1-action-qualification-2026-10-10.md",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-h1-actions-20261010/etf-pair-h1-actions-20261010-20261010T181507-6c6339a1765d"
+  ],
+  "shared_writes_forbidden": [
+    "registry/INDEX/catalog",
+    "API",
+    "Git",
+    "frozen source/prices/actions"
+  ],
+  "output_plan": {
+    "schema_version": 1,
+    "task_id": "etf-pair-h1-actions-20261010",
+    "run_id": "etf-pair-h1-actions-20261010-20261010T181507-6c6339a1765d",
+    "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-h1-actions-20261010/etf-pair-h1-actions-20261010-20261010T181507-6c6339a1765d",
+    "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-h1-actions-20261010/etf-pair-h1-actions-20261010-20261010T181507-6c6339a1765d/result",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "estimated_bytes": 33554432,
+    "internal_metadata_bytes": 1048576,
+    "external_reserve_bytes": 10737418240,
+    "internal_reserve_bytes": 5368709120,
+    "execution_authorized": false,
+    "quota_enforced": false
+  },
+  "expected_outputs": [
+    "exact original identity and relevant source statements/actual SHA/raw path/official URL/publication date",
+    "per-product separate dividend/split qualifications and saved actions comparison",
+    "clear gaps and later publication limitation, no full-period or all-trading ready claim",
+    "complete request/failure budget ledger, prior budgets unchanged",
+    "small dated report with plain conclusion or evidence insufficient; no duplicate report if existing exact full answer"
+  ],
+  "authorization": {
+    "human": "允许持续所有原八目标；按着目标去做啊",
+    "scope": "本轮必要公开资料资格，精确两ETF/2026H1，官方原件定向查缺，不产生交易/改变策略",
+    "at": "2026-10-10T18:16:00.016787+08:00"
+  },
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "stop_conditions": [
+    "exact original unable to qualify preserve unknown rather than zero",
+    "request/raw-byte maximum or same operation failure twice",
+    "wrong/no disk identity or disk floor",
+    "new required permission or private paid access"
+  ],
+  "root_only_final_acceptance": true
+}

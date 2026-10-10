@@ -1,0 +1,194 @@
+{
+  "schema": "two-etf-action-completion-independent-reuse-review/1",
+  "question_id": "etf-pair-full-actions-20261010",
+  "reviewed_at": "2026-10-10T18:30:51.307585+08:00",
+  "status": "2018_2019_specific_fields_acceptable_for_new_fixed_candidate",
+  "plain_language_conclusion": "可以把2018、2019两年的已核分红整表和份额拆分栏用于这次固定两ETF的历史输入候选。现存原件指纹没有变化，旧独审确实读过全年目标表；2018总页数疑点未观察到损坏这些字段，但整份PDF是否完整仍未知。此次不是宣布所有历史资料或交易条件合格。",
+  "purpose_transfer_reason": [
+    "New candidate starts2015, but the reused2018/2019 reports and directly reviewed tables each cover their own complete calendar year; fund identity and event semantics are unchanged.",
+    "The prior2018-09-17 account/prewarm scope does not truncate the full-year source table actually reviewed: review explicitly recorded Jan2018 event and complete annual table total. Reuse only these annual source facts; no transfer of old trading authorization or outcome result.",
+    "9/24 review was controller_pending_not_qualified. This new review recommends explicit field-level acceptance; it does not relabel that prior pending record as historically accepted.",
+    "9/23 10:15 acceptance applies to5103002020-2026H1 and stated other reports, not retroactively to2018/19. Reuse its limitations on preserved process failures and later-source historical reconstruction."
+  ],
+  "accepted_years": [
+    {
+      "year": 2018,
+      "path": "docs/experiments/raw/factor-510300-action-gap-2026-09-24/510300-2018-annual.pdf",
+      "sha256": "47fd45c36dff8605f0e6e8fd4d92cb528d9fc4ea054078cfe4654e243cb8341d",
+      "physical_pages": 74,
+      "fund_code_page": 6,
+      "fund_code": "510300",
+      "cash_table_page": 42,
+      "split_change_page": 68,
+      "accepted_fields": [
+        "report_period_cash_distribution_event_table_and_total",
+        "holder_split_change_period_row"
+      ],
+      "field_source_review_reused": "docs/experiments/raw/factor-510300-action-review-2026-09-24/coverage-review.json",
+      "field_source_review_sha256": "06cb2f2e413f0ae564b71ab235cb97c680f6b3126445c082fd462623823ba153",
+      "acceptance_kind": "explicit new bounded retrospective field acceptance; old records unchanged",
+      "whole_pdf_completeness": "unknown due unresolved74/76 discrepancy"
+    },
+    {
+      "year": 2019,
+      "path": "docs/experiments/raw/factor-510300-action-gap-2026-09-24/510300-2019-annual.pdf",
+      "sha256": "445fffc19760d284b5190e56f6697db952852944bfdd530e4a89f695ab178dc2",
+      "physical_pages": 79,
+      "fund_code_page": 6,
+      "fund_code": "510300",
+      "cash_table_page": 45,
+      "split_change_page": 72,
+      "accepted_fields": [
+        "report_period_cash_distribution_event_table_and_total",
+        "holder_split_change_period_row"
+      ],
+      "field_source_review_reused": "docs/experiments/raw/factor-510300-action-review-2026-09-24/coverage-review.json",
+      "field_source_review_sha256": "06cb2f2e413f0ae564b71ab235cb97c680f6b3126445c082fd462623823ba153",
+      "acceptance_kind": "explicit new bounded retrospective field acceptance; old records unchanged",
+      "whole_pdf_completeness": "no page-count discrepancy identified in reused review"
+    }
+  ],
+  "event_reconciliation": [
+    {
+      "event_key": "sh510300|cash_dividend|2018-01-23",
+      "record_date": "2018-01-22",
+      "ex_date": "2018-01-23",
+      "pay_date": "2018-01-26",
+      "cash_per_unit": "0.046",
+      "matches_saved_event": true
+    },
+    {
+      "event_key": "sh510300|cash_dividend|2019-01-16",
+      "record_date": "2019-01-15",
+      "ex_date": "2019-01-16",
+      "pay_date": "2019-01-21",
+      "cash_per_unit": "0.059",
+      "matches_saved_event": true
+    },
+    {
+      "event_key": "sh510300|cash_dividend|2019-12-11",
+      "record_date": "2019-12-10",
+      "ex_date": "2019-12-11",
+      "pay_date": "2019-12-16",
+      "cash_per_unit": "0.062",
+      "matches_saved_event": true
+    }
+  ],
+  "unchanged_dependency_checks": [
+    {
+      "path": "docs/experiments/factor-etf-input-review-2026-09-23.md",
+      "sha256": "0d15b4311d3ee066640a12a6bac4f0dff912ff1d636b16e9e0ab3221548e272e",
+      "bytes": 20131,
+      "matches_frozen": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-510300-action-review-2026-09-24/coverage-review.json",
+      "sha256": "06cb2f2e413f0ae564b71ab235cb97c680f6b3126445c082fd462623823ba153",
+      "bytes": 8684,
+      "matches_frozen": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-510300-action-review-2026-09-24/review.md",
+      "sha256": "86f77a22fcf23b6f023581d12818ffabe1ec8f7df37e8aa58ce420743e215a98",
+      "bytes": 8042,
+      "matches_frozen": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-510300-action-gap-2026-09-24/510300-2018-annual.pdf",
+      "sha256": "47fd45c36dff8605f0e6e8fd4d92cb528d9fc4ea054078cfe4654e243cb8341d",
+      "bytes": 899086,
+      "matches_frozen": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-510300-action-gap-2026-09-24/510300-2019-annual.pdf",
+      "sha256": "445fffc19760d284b5190e56f6697db952852944bfdd530e4a89f695ab178dc2",
+      "bytes": 1027168,
+      "matches_frozen": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-manifest.json",
+      "sha256": "cabd0eb7481dc005fa4cab0ca51ff12b63d5264e95f04904396bee1813fba495",
+      "bytes": 15076,
+      "matches_frozen": true
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/08-510300-periodic-index-page2.json",
+      "sha256": "861f4175d56eeff69ef48203aff052e45c056484fc41a75aa5ef6e5364561898",
+      "bytes": 17650,
+      "matches_frozen": true
+    },
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/actions.json",
+      "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789",
+      "bytes": 8633,
+      "matches_frozen": true
+    },
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/action-coverage.json",
+      "sha256": "86582d0fc21a5d166a96feed180fface54f6584155d5c9900027f55a49931e9e",
+      "bytes": 2850,
+      "matches_frozen": true
+    },
+    {
+      "path": "docs/experiments/raw/etf-pair-h1-action-qualification-2026-10-10/independent-review.json",
+      "sha256": "92243cab6a9d3c235fa16bfb8cc8b83f2fe6aab3ce4d34a32e4bc09a2e21798a",
+      "bytes": 5128,
+      "matches_frozen": true
+    },
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2018-01-17.pdf",
+      "sha256": "12c531bc50c01080611ce9981fa19df56dfcf88a3e06f7e767da48776f00cacb",
+      "matches_saved_prior_notice": true
+    },
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2019-01-10.pdf",
+      "sha256": "c0076714ac5397251951123dab38188015da059ebe1fdf1157acba9c965f6a60",
+      "matches_saved_prior_notice": true
+    },
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2019-12-05.pdf",
+      "sha256": "26a0a0ec53d8b733708a23b5cbe5067aabb00dd677c68d6ccc605baeb546d1fb",
+      "matches_saved_prior_notice": true
+    }
+  ],
+  "prior_source_ledger": {
+    "path": "docs/experiments/raw/factor-510300-action-gap-2026-09-24/sources.json",
+    "sha256": "190631da050d1c0de0a70e41ea4ae822d67b9bc5a99736d7b05948f87ad2f22e"
+  },
+  "2018_unresolved_limit": {
+    "physical_pages": 74,
+    "printed_total": 76,
+    "whole_pdf_completeness": "unknown",
+    "missing_page_identity": "unknown",
+    "reused_evidence": "Prior independent reviewer inspected original images at42 cash and68 split, saw complete table totals, continuous observed footers and final§13/signature at74. Current bytes match that reviewed original exactly; no full repeat performed.",
+    "affected_accepted_fields_observed": [],
+    "not_inferred": [
+      "missing pages were blank",
+      "pagination error explains discrepancy with certainty",
+      "all disclosures throughoutPDF are complete"
+    ]
+  },
+  "provenance_reference_correction": {
+    "old_record": "9/24 sources.json local_official_index_reused_without_new_request maps2019 to07 page1",
+    "actual_verified_location": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/08-510300-periodic-index-page2.json",
+    "actual_location_sha256": "861f4175d56eeff69ef48203aff052e45c056484fc41a75aa5ef6e5364561898",
+    "2018_content_id": "037f1847d5cd7af8e063260212ace593",
+    "2019_content_id": "037f1847d5e77af8e063260212ace593",
+    "decision": "Both exact year title/ID/official attachment URLs occur on page2; old page1 reference is inaccurate. Correct new citation only; not an original-PDF or cash-field defect."
+  },
+  "not_accepted": [
+    "Unreviewed2015-2017 source fields; these await the six precise new targets.",
+    "Contemporaneous report arrival or real-time known-no-event assertions.",
+    "Actual usable-cash receipt time or executable opening/complete trading calendar.",
+    "Whole2018PDF completeness or whole-request-history integrity.",
+    "New returns/account core run, oldsourcebudget reset or old actions/coverage mutation."
+  ],
+  "workflow": {
+    "network_requests": 0,
+    "market_runs": 0,
+    "whole_prior_table_review_repeated": false,
+    "actual_original_pdf_bytes_rehashed": true,
+    "old_source_and_reviews_modified": false,
+    "awaiting_new_six_pdf_increment_only": true
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "question_id": "csi300-march-event-binding-20261010",
+  "reviewed_at": "2026-10-10T17:56:51+08:00",
+  "execution": "completed_by_reuse_of_prior_closed_evidence",
+  "evidence": "supported_for_named_march_event_only",
+  "completion_reason": "question_answered_before_new_source_request",
+  "prior_report": {
+    "path": "docs/experiments/csi300-2025-transitions-qualification-2026-10-08.md",
+    "sha256": "20ef3c774d0cad7388e92764028dac3f442541395eeecbd6386572aa4cb9681b",
+    "already_registered": true,
+    "live_experiments_api_item_present": true,
+    "live_experiments_api_pending": false
+  },
+  "read_back_originals": [
+    {
+      "role": "official_index_notice",
+      "path": "docs/experiments/raw/csi300-2025-transitions-2026-10-08/originals/notice-15546.json",
+      "url": "https://www.csindex.com.cn/csindex-home/announcement/queryAnnouncementById?id=15546",
+      "bytes": 1701,
+      "sha256": "292034c49fde3de7806e956345014a0027b642f9756c49362da1c995cd0b1b92",
+      "published_date": "2025-02-06",
+      "published_time": null,
+      "publisher": "中证指数有限公司",
+      "effective_condition": "自海通证券退市日起"
+    },
+    {
+      "role": "official_index_adjustment_attachment",
+      "path": "docs/experiments/raw/csi300-2025-transitions-2026-10-08/originals/notice-15546-adjustments.xlsx",
+      "url": "https://oss-ch.csindex.com.cn/notice/20250206175421-%E6%8C%87%E6%95%B0%E6%A0%B7%E6%9C%AC%E8%B0%83%E6%95%B4%E5%90%8D%E5%8D%95.xlsx",
+      "bytes": 17548,
+      "sha256": "e7b797f2b203dc8d9bdc93605b4b5def237785980230b0dc3895cb1abf3bb3c1",
+      "exact_000300_row": ["000300", "沪深300", "600837", "海通证券", "601058", "赛轮轮胎"]
+    },
+    {
+      "role": "exchange_delisting_date_for_index_condition",
+      "path": "docs/experiments/raw/haitong-corporate-action-2026-10-08/S1-termination.html",
+      "url": "https://www.sse.com.cn/disclosure/announcement/listing/stock/c/c_20250226_10773005.shtml",
+      "sha256": "2da02df74d4409f597f1b7d7d88f09cbf6d863b1e54836be0c9628f5ea4ce45b",
+      "published_date": "2025-02-26",
+      "termination_date": "2025-03-04"
+    }
+  ],
+  "candidate_comparison": {
+    "frozen_path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+    "frozen_sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30",
+    "official_effective_date": "2025-03-04",
+    "candidate_transition_date": "2025-03-10",
+    "saved_mismatch_dates": ["2025-03-04", "2025-03-05", "2025-03-06", "2025-03-07"],
+    "saved_mismatch_date_count": 4,
+    "two_member_status_errors_per_date": 2,
+    "total_member_status_errors": 8,
+    "baseline_2025_03_03_errors": 0,
+    "boundary_2025_03_10_errors": 0
+  },
+  "validation": {
+    "existing_read_only_verifier": "docs/experiments/raw/csi300-2025-transitions-2026-10-08/verify_saved_evidence.py",
+    "result": "passed",
+    "checks_passed": 29,
+    "checks_total": 29,
+    "independent_local_readback": "notice metadata, exact XLSX 000300 row, exchange termination sentence, four dated candidate rows and source SHA-256 checked",
+    "old_report_scope": "two named 2025 transitions; its five dated mismatches and ten status errors include March plus September"
+  },
+  "new_budget": {
+    "source_requests_used": 0,
+    "source_requests_limit": 6,
+    "response_bytes_used": 0,
+    "response_bytes_limit": 8388608,
+    "external_fetches": 0,
+    "prior_official_and_three_key_budgets_unchanged": true
+  },
+  "limitations": [
+    "The notice fixes an index adjustment conditional on delisting; exchange original fixes that delisting date. No earliest intraday publication time or historical vendor arrival time is established.",
+    "Only the named pair and dates are bound; no full 300-member historical starting list, complete change chain, adjusted-price repair, factor fit, or trading result is established.",
+    "The 2026-10-06 binding-result.md is a valid old snapshot but its forward-looking two-2025-events instruction is superseded by the 2026-10-08 report."
+  ],
+  "archive_and_surface": {
+    "registry_and_index": "already_include_prior_report",
+    "live_experiments_api": "prior_report_visible_pending_false",
+    "research_evidence_catalog_2026_10_07": "prior_report_not_listed_in_checked_catalog_json_source_index_or_markdown",
+    "new_formal_report": "not_created_to_avoid_duplicate_closed_research"
+  },
+  "mutations": {
+    "new_external_results": 0,
+    "old_originals": 0,
+    "frozen_candidate": 0,
+    "main_membership": 0,
+    "prices": 0,
+    "shared_registry_or_api": 0
+  }
+}

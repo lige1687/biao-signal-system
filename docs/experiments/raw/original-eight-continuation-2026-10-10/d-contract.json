@@ -1,0 +1,107 @@
+{
+  "schema": "saved-result-conditional-association/1.0",
+  "question_id": "native-d-conditional-risk-20261010",
+  "parent_family": "native-risk-d-mae20",
+  "question": "在保存ETF机会中，扣除同ETF波动V的线性排序关系后，失效距离D是否仍与后续固定收盘不利幅度有稳定联系？",
+  "decision_use": "补目标3尚未检验的有限条件描述；不是预测或仓位依据",
+  "mode": "research",
+  "analysis_mode": "describe_only",
+  "input": {
+    "x_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T121052-8c15af8c4cb6/result/real-x/x-rows.json",
+    "x_sha256": "6ae79d580fa98ba81b8f071d73e9eac0e3127ea8e66275967fecb1f218aa989a",
+    "y_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/research-dispatch-controller/research-dispatch-controller-20261009T122325-87e142670e36/result/real-y/y-result.json",
+    "y_sha256": "77907ae74e401c4b81f4b446e5536f3e6bbebaa2ce10a88556bdd996f2fad2b2"
+  },
+  "old_contract": "docs/experiments/raw/native-risk-d-mae-2026-10-07/immutable-handoff/PROPOSED-CONTRACT.json",
+  "fixed_symbols": [
+    "510050.SS",
+    "510300.SS",
+    "510500.SS",
+    "512400.SS",
+    "512800.SS"
+  ],
+  "identity_expected": {
+    "cases": 76,
+    "aliases": 84,
+    "groups": 33,
+    "mature_cases": 75,
+    "unknown_cases": 1
+  },
+  "definition": "local_contract.opportunity.invalidation_distance; variant module_a_event_c_touch_min__signal_close__runtime_tr_sma20; old D=(A-C)/ATR20_SMA; V=100*ATR20_SMA/A; saved Y21closes/20intervals",
+  "method": {
+    "ranking": "within each ETF average ranks for exact ties",
+    "partial_rank_correlation": "(r_DY-r_DV*r_VY)/sqrt((1-r_DV**2)*(1-r_VY**2))",
+    "direction": "two-sided; no winner threshold",
+    "eligibility": {
+      "min_complete_cases": 4,
+      "min_source_episodes": 2,
+      "all_D_V_Y_nonconstant": true,
+      "positive_partial_denominator": true
+    },
+    "aggregation": "each of fixed five ETF 1/5; any ineligible ETF -> aggregate null; no adaptive reweight",
+    "checks": "all33 old ETF-episode leave-one-out, same fixed eligibility and weights; original unknown preserved",
+    "inference": "conditional historical association only; no causal/independent raw information/prediction/future net return claim"
+  },
+  "budget": {
+    "new_question_configurations": 1,
+    "core_analysis_max_starts": 1,
+    "qualification_without_y_values": 1,
+    "source_requests": 0,
+    "new_feature_runs": 0,
+    "new_label_runs": 0,
+    "new_prediction_fits": 0,
+    "account_runs": 0,
+    "old_D_X_used": 1,
+    "old_D_Y_used": 1,
+    "old_monthly_used": 4,
+    "old_monthly_limit": 4,
+    "old_fixed_used": 2,
+    "old_fixed_limit": 2,
+    "old_A03_used": 4,
+    "old_budgets_reset": false
+  },
+  "strategy_sha256": [
+    "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  ],
+  "source_qualification": "Saved adjusted economic-price, historical arrival time unknown, Shenzhen calendar proxy limitations; previously seen history only; not actual-trading-qualified",
+  "frozen_before_new_statistic": true,
+  "output_plan": {
+    "schema_version": 1,
+    "task_id": "native-d-conditional-risk-20261010",
+    "run_id": "native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
+    "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
+    "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0/result",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "estimated_bytes": 4194304,
+    "internal_metadata_bytes": 1048576,
+    "external_reserve_bytes": 10737418240,
+    "internal_reserve_bytes": 5368709120,
+    "execution_authorized": false,
+    "quota_enforced": false
+  },
+  "allowed_output": "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0/result",
+  "attempt_ledger": "docs/experiments/raw/native-d-conditional-risk-2026-10-10/attempt-ledger.json",
+  "stop_conditions": [
+    "input hash/identity changed",
+    "unknown filled or membership changed",
+    "core already started",
+    "external plan identity mismatch",
+    "qualified insufficient cells preserve null, do not change method or assets"
+  ],
+  "controller_reasons": {
+    "universe_fit": "固定原五可计算ETF和所有76机会，避免挑选新的有利对象；588000未成熟继续未知。",
+    "proxy_fidelity": "复用原失效位距离D和ATR20_SMA研究代理，不改现行EMA策略语义；原入场/退出条件未完整表达。",
+    "method_fit": "旧研究明说未扣除V。本次只测线性排序条件联系，75例共享日期，33旧走势段删除查敏感性，不硬套预测器。",
+    "scope_limit": "只补尚未回答的条件判断，原账户半年/因子参数/周期不重调，旧计数原样继承，新资料独立性不提升。"
+  },
+  "authorization": {
+    "human_latest": "那你持续推进啊？我擦嘞，按着目标去做啊",
+    "prior": "允许哈，然后你持续推进所有任务哈",
+    "at": "2026-10-10T17:51:27.736651+08:00",
+    "scope": "原八目标内，主控自主设计有界必要检验；既有策略/资料/交易权限保持"
+  },
+  "controller_owner": "01a123fc-553b-7b81-9952-36e1acb11dcc"
+}

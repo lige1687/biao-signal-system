@@ -1,0 +1,96 @@
+{
+  "schema": "etf-pair-h1-action-review/1",
+  "period": [
+    "2026-01-01",
+    "2026-06-30"
+  ],
+  "status": "supported_retrospective_company_action_for_both_products",
+  "new_requests": 12,
+  "cumulative_requests": 14,
+  "new_raw_bytes": 0,
+  "source_review": [
+    {
+      "symbol": "sz159915",
+      "product": "易方达创业板交易型开放式指数证券投资基金",
+      "official_pdf": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fifth/159915/2026h.pdf",
+      "official_url": "https://cdn.efunds.com.cn/owch/data/bulletin/20260831/易方达创业板交易型开放式指数证券投资基金2026年中期报告.pdf",
+      "sha256": "e3f41a6b11174cfd57aea4706f6f8d928a48bf25a97bbcb2e44292f7c779b093",
+      "official_pages_1_based": {
+        "identity": 5,
+        "cash": 29,
+        "split": 48
+      },
+      "report_sent": "2026-08-31",
+      "dividend": "official report says none in report period",
+      "share_split": "official share change table shows dash; subscriptions/redemptions separately accounted",
+      "saved_actions_h1_count": 0,
+      "comparison": "matches saved actions; post-period retrospective only",
+      "qualified_retrospective": true,
+      "known_by_2026_06_30": false
+    },
+    {
+      "symbol": "sh510300",
+      "product": "华泰柏瑞沪深300交易型开放式指数证券投资基金",
+      "official_pdf": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2026-01-12.pdf",
+      "official_url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2026-01-12/510300_20260112_VTCZ.pdf",
+      "sha256": "c8ff747d02fa90db72320458c38249f73720b932d61b7e088f033583aab63992",
+      "official_pages_1_based": {
+        "identity_and_dividend": 2
+      },
+      "announcement_date": "2026-01-12",
+      "distribution_cny_per_10_shares": "1.2300",
+      "ex_date": "2026-01-19",
+      "record_date": "2026-01-16",
+      "pay_date": "2026-01-27",
+      "saved_actions_h1_count": 1,
+      "comparison": "complete H1 official report one event matches saved actions and prior notice; no H1 split reported",
+      "qualified_retrospective": true,
+      "unverified": "Post-June-30 report does not establish information available by June 30; trading calendar/open qualification outside scope",
+      "regulator_pdf_locator": "https://eid.csrc.gov.cn/fund/disclose/instance_show_pdf_id.do?instanceid=1570923",
+      "regulator_open_failure": "timeout",
+      "regulator_download_failure": "TLS alert",
+      "official_half_pdf": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf",
+      "official_half_url": "https://www.huatai-pb.com/upload/pdf/1787926200985-154-1kz36weu05hur.pdf",
+      "official_half_sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+      "official_half_bytes": 2323200,
+      "official_half_pages_1_based": {
+        "cover": 1,
+        "identity": 5,
+        "accounting_split": 24,
+        "distribution": 32,
+        "share_change_split": 60
+      },
+      "official_half_report_sent": "2026-08-29",
+      "cash_coverage": "§6.4.11 lists exactly one H1 distribution: 1.2300 CNY per 10 units, record 2026-01-16, ex 2026-01-19",
+      "split_coverage": "§6.4.7.10 accounting split adjustment dash; §9 fund share split-change dash; subscriptions/redemptions separately shown",
+      "source_manifest_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-manifest.json",
+      "source_manifest_sha256": "cabd0eb7481dc005fa4cab0ca51ff12b63d5264e95f04904396bee1813fba495",
+      "source_manifest_entry": {
+        "path": "sources/15-510300-2026-half.pdf",
+        "sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+        "logged_sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+        "logged_hash_matches_current": true,
+        "first_logged_request_sequence": 16,
+        "official_url": "https://www.huatai-pb.com/upload/pdf/1787926200985-154-1kz36weu05hur.pdf"
+      },
+      "saved_pdf_git_tracked": false,
+      "source_manifest_git_tracked": false,
+      "saved_pdf_live_sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+      "saved_pdf_readable_at": "2026-10-10T10:24:16.132949+00:00",
+      "old_regulator_attempts_preserved": true
+    }
+  ],
+  "saved_actions_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/actions.json",
+  "saved_actions_sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789",
+  "scope_limitations": [
+    "Does not qualify full 2015-2026 H1 window",
+    "Does not qualify exchange calendar/open execution",
+    "Official semiannual reports issued after 2026-06-30 do not prove point-in-time availability at June 30"
+  ],
+  "offline_reuse_discovery": {
+    "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-manifest.json",
+    "source_file": "sources/15-510300-2026-half.pdf",
+    "new_public_requests": 0,
+    "at": "2026-10-10T10:23:27.450550+00:00"
+  }
+}

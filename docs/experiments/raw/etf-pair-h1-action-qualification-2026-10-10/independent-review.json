@@ -1,0 +1,94 @@
+{
+  "schema": "etf-pair-h1-independent-review/1",
+  "question_id": "etf-pair-h1-actions-20261010",
+  "reviewed_at": "2026-10-10T18:24:35.004252+08:00",
+  "status": "accepted_bounded_retrospective_qualification",
+  "conclusion": "三份已保存正式原件与旧来源指纹一致，支持两只准确ETF在2026年上半年的现金分配及基金拆分/份额折算事后覆盖：159915均无；510300仅一笔每份0.123元分红，未列拆分/折算。旧actions无需改动。",
+  "qualification": [
+    {
+      "symbol": "sz159915",
+      "period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "identity_pages": [
+        1,
+        2,
+        5
+      ],
+      "cash_basis": "physical p29 section6.4.11 explicitly says no distribution during report period",
+      "split_basis": "physical p48 section9 split-change dash, subscriptions and redemptions separately shown; share arithmetic closes exactly",
+      "cash_events": 0,
+      "split_events": 0,
+      "report_sent": "2026-08-31",
+      "retrospective_coverage": true,
+      "report_available_by_june30": false
+    },
+    {
+      "symbol": "sh510300",
+      "period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "identity_pages": [
+        1,
+        2,
+        5
+      ],
+      "cash_basis": "H1 report physical p32 section6.4.11 contains one row and matching total; exact amount/record/ex dates independently match Jan12 notice p2 and oldactions",
+      "split_basis": "H1 report p24 section6.4.7.10 split/conversion adjustments dash and p60 section9 split change dash; subscription/redemption arithmetic closes exactly",
+      "cash_events": 1,
+      "cash_per_unit": "0.1230",
+      "record_date": "2026-01-16",
+      "ex_date": "2026-01-19",
+      "scheduled_pay_date": "2026-01-27",
+      "split_events": 0,
+      "report_sent": "2026-08-29",
+      "retrospective_coverage": true,
+      "report_available_by_june30": false
+    }
+  ],
+  "point_in_time_limits": [
+    "H1 reports were sent Aug29/Aug31 after June30; no claim that reports were accessible by the period end.",
+    "Jan12 cash notice establishes its dated public announcement and scheduled events; archived retrieval is later, not proof of original pipeline arrival timestamp.",
+    "Jan27 is the announced payment date for designated trading holders. Notice p3 has conditional receipt rules for non-designated holders; individual actual usable-cash timing is not proved."
+  ],
+  "acceptable_scope": [
+    "Cash distribution and disclosed fund split/conversion coverage for exact510300/159915 and exact2026H1",
+    "Compare official later reports to old actions without changing bars/actions or recalculating returns"
+  ],
+  "unacceptable_scope": [
+    "All2015-2026 company-action completeness",
+    "Contemporaneous pipeline arrival/whole market trading calendar/executable opening/individual account cash receipt",
+    "Risk-adjusted investment outcomes or complete shared-account market readiness",
+    "Treating ordinary subscriptions/redemptions as holder-unit split events",
+    "Describing these formal unaudited interim financial statements as audited reports"
+  ],
+  "url_review": "All three official URLs matched prior saved provenance/manifest entries bound to the same byte SHA; zero live availability requests in this independent review.",
+  "budget_review": {
+    "request_ledger_sha256": "d3de1ae681e32d3cf07a5d53a03849ba1539ebbba7db66cd1dc9f19d26b79992",
+    "requests_recorded": 14,
+    "total_limit": 18,
+    "independent_network_requests": 0,
+    "new_source_download_bytes": 0,
+    "old_budgets_unchanged": true
+  },
+  "evidence": {
+    "path": "docs/experiments/raw/etf-pair-h1-action-qualification-2026-10-10/independent-source-evidence.json",
+    "sha256": "4cff9c6bb29d9983f0bf68a6aaf49d27cf71a0c04750300c4a18bd6b2108cda9"
+  },
+  "source_review_sha256": "7d7dc773ad60d3ed0cc0722cf6f100443c73f9ed69f9f86d4f09bc8e4c2db0ad",
+  "report_draft_review": {
+    "path": "docs/experiments/etf-pair-h1-action-qualification-2026-10-10.md",
+    "sha256": "a0b3b14d9d9e75f236808edf6c67a0028c465f86ed62536275bfd787c87b1582",
+    "stale_missing_half_report_claim": false,
+    "required_change_if_stale": "Replace current missing510300report and onlysingleevent claims with qualifiedH1 retrospective coverage; retain failed fetches as historical process evidence, add saved official halfreport URL/SHA/pages, and preserve all non-company-action limitations.",
+    "parent_notified": true,
+    "final_readback_sha256": "a0b3b14d9d9e75f236808edf6c67a0028c465f86ed62536275bfd787c87b1582",
+    "critical_conclusion_limits_original_urls_accepted": true,
+    "reconciled_missing_source_claim": true,
+    "remaining_archive_condition": "510300 existing half-report and manifest are local input dependencies; parent must preserve bytes/provenance for cross-device reproducibility as draft states. Independent review does not claim archival/Git delivery complete.",
+    "readback_at": "2026-10-10T18:24:52.242949+08:00"
+  },
+  "closure": "The narrow source question is answered. Source evidence acceptance does not itself update registry/API or permit market runs."
+}

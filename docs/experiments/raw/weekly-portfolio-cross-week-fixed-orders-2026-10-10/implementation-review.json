@@ -1,0 +1,64 @@
+{
+  "schema": "cross-week-fixed-orders-implementation-review/1",
+  "question_id": "weekly-cross-week-fixed-orders-20261010",
+  "status": "v2_synthetic_execution_ready_for_controller_and_astra_review",
+  "plain_language_conclusion": "一份人工账户从第一周保存并重启到第二周，固定买单只扣同一份现金；250 元只到账一次，后续买单和费用也各记一次。这个结果只验证合成执行账，不证明真实交易或完整策略。",
+  "scope": "One artificial fixed-order two-week account; no allocation planner, old adapter lock reset, market/account/production action, or strategy performance inference.",
+  "frozen_inputs": {
+    "contract": "docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/executor-contract.json",
+    "fixture_sha256": "ab47bafa69afd7dd5d61fdf842bd2d5f92da3458d0b175c391e59b5bab436c04",
+    "source_manifest": "docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/source-manifest.json",
+    "dated_ledger_sha256": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3",
+    "shared_account_spec_sha256": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+    "whole_buy_recovery_sha256": "dce414635d4dc9f53e61366c1542da318aabb191ac525ce5110688c900f2038f"
+  },
+  "new_sources": {
+    "cross_week_fixed_orders.py": {"sha256": "ecb9a5f6eda5616e9a62103b07df21dfa235cebf73b6683e9446d97789946964", "bytes": 16981},
+    "test_cross_week_fixed_orders.py": {"sha256": "5cfb9c5249974efaac3f5886d9982d942f323a1dfafe750dda960da71b0be3d7", "bytes": 9024},
+    "run_synthetic_checks.py": {"sha256": "72f0bdea21251ffdc53520cc8a5421c4377556779f6bb0c4f2a4d311e2201c12", "bytes": 7769}
+  },
+  "execution": {
+    "fixed_run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff",
+    "device": 16777238,
+    "v1_preservation_manifest_sha256": "071a0caf3622cb1f523277bcb71d44a92ed54a61cfdd8a792e3210592f3e67f9",
+    "v1_state_sha256": "16e4087c007787992d9b3ea96b6a8435350494a463625622143ba56c83cac6c2",
+    "v2_receipt_path": "result/v2/process-acceptance.json",
+    "v2_receipt_sha256": "5982d89196d218af8ae2beea683cff70f624454fcafe0fada543ad378c468ee4",
+    "v2_full_state_sha256": "4f81e1834374689afe1feb262b88d49f40db4c5ad24faa9e25342bcbc22152cf",
+    "v2_continuous_and_split_state_bytes_equal": true,
+    "v2_actual_processes": [
+      {"stage": "continuous_all", "pid": 99624, "cursor": 10},
+      {"stage": "split_week1", "pid": 99625, "cursor": 7},
+      {"stage": "split_week2", "pid": 99626, "cursor": 10}
+    ],
+    "v2_synthetic_tests": "20 passed in 0.72s",
+    "v2_main_week1": {"cash": "200.10", "assets": "600.10", "fees": "10.40", "five_complete_daily_closes": true},
+    "v2_deposit": {"amount": "250", "count": 1, "prior_complete_day": "2026-01-09", "cash_after": "450.10", "nav_neutral": true},
+    "v2_final": {"cash": "39.70", "positions": {"TEST_A": 200, "TEST_B": 200}, "fees": "20.80", "assets": "839.70", "total_external_funds": "860.50"},
+    "money_conservation_each_step": true,
+    "real_market_requests": 0,
+    "real_account_operations": 0
+  },
+  "version_and_recovery_guards": {
+    "original_sources": "Verify all three selected original source SHA and fixture before old Ledger import, before each economic operation, and before rebuilding each saved event.",
+    "wrapper": "Save actual cross_week_fixed_orders.py SHA in checkpoint; reject changed executor before Ledger call on continued or restored work.",
+    "replay": "Rebuild a new Ledger from the saved frozen input and events; compare each event result, full Decimal state, audit, cursor and final state before continuing.",
+    "faults": "Synthetic failures before and after atomic state replacement are preserved; restart distinguishes unapplied event from committed event, with no second economic application."
+  },
+  "preserved_failures": [
+    {"stage": "v1 first pytest", "result": "15 passed, 1 failed: test compared Decimal string trailing zeros instead of amounts", "log": "logs/pytest.log", "repair": "numeric Decimal comparison; original log retained"},
+    {"stage": "v1 first process driver", "result": "AttributeError: 'CompletedProcess' object has no attribute 'pid' after continuous process completed", "evidence": "continuous-all.log and original continuous state", "repair": "read back completed state, use Popen.pid for subsequent new processes; no directory or state overwrite"},
+    {"stage": "independent controller review", "result": "Original wrapper rechecked source only before import and did not bind wrapper SHA in checkpoint", "repair": "preserved v1 state/log/source snapshot, added per-operation and reconstruction source guard plus wrapper version binding, then ran isolated v2"}
+  ],
+  "verification": {
+    "ruff": "passed",
+    "repo_hygiene": "passed",
+    "main_head_unchanged": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+    "main_index_sha256_unchanged": "e93cdb1d84cd2a8a793acb5f35b36521003dd72efa23333102a0fc9d64343970"
+  },
+  "limitations": [
+    "The preserved v1 source snapshot was taken after v1 processes ran but before version-binding repair; exact new-wrapper bytes at initial v1 process start were not independently hashed at that time. V2 binds the exact executable wrapper SHA.",
+    "Artificial flat prices, fixed orders and costs do not establish real market execution, account suitability, P0 allocation, or complete LEI strategy behavior.",
+    "Single-writer recovery and synthetic injected failures do not verify concurrent writers, sell orders, partial fills or corporate actions."
+  ]
+}
