@@ -1,3 +1,21 @@
+# 已按批准清理三份闲置协调副本 2026-10-10T17:31:35.639318+08:00
+
+## 一句话结论（大白话）
+
+三份已经结案、没有独有改动且可按原版本重建的协调工作区已移除；主工作区、25份原研究资料及外盘恢复文件保留。当前内盘可用约19.7GB、外盘约569GB，满足本轮空间要求。移除窗口没有测到明显空间增加，不能把三个目录合计约6.04GB当作释放量。现场有四份移除前的系统本地备份快照，可能保留旧数据块，具体占用未测定。
+
+用户“确认移除哈，这方面你不需要跟我确认了，你直接开整就完事了”已批准这项及符合条件的同类闲置可重建协调副本清理；历史待批准段由本段实际执行取代。本轮唯一执行者root；两名Sol只读独核，不重复询问同类已获授权事项，也不把此授权扩到独有研究资料、活动数据库、环境、会话或系统备份删除。
+
+实际移除：`.codex/worktrees/lei-coordination`、`.codex/worktrees/theory-ai-principles-coordination`、`.codex/worktrees/stock-gap-coordination-20261008`。正常Git移除全部exit0、未强制；精确目录、注册和元数据均缺失，准确commit/tree仍由远端协调历史可重建。另一个`risk-shape-coordination`使用映射不够明确，继续保留。原25来源大小、文件身份与修改时间25/25未变，主分支/HEAD/索引指纹保持，不重新运行封存研究。
+
+第一窗口可用量19,756,167,168→19,752,701,952字节；另两份合并窗口19,737,264,128→19,734,958,080字节。两次净变化均为下降，包含同时发生的系统写入；不能据此量化清理的独占物理收益。17:30:11+08存储读回内盘19,732,561,920字节、外盘569,385,418,752字节，固定外盘身份合格。系统快照通常随时间或用盘需要由系统回收，参见[Apple原始说明](https://support.apple.com/en-ie/102154)；本轮未操作快照或更改备份设置。当前空间已满足任务要求，不为追求释放数字继续扩大清理范围。
+
+实际回执：worktree-retirement-execution.json、additional-worktree-retirement-execution.json；逐项计划/登记：additional-worktree-retirement-plan.json、additional-worktree-scope-readback.json；独核/容量：worktree-retirement-independent-review.json、worktree-retirement-capacity-review.json、worktree-retirement-storage-after.json及worktree-retirement-summary.json。
+
+25来源本机实际恢复已完成，当前工作无需换电脑；原异机测试继续如实未验收。原八目标已封存问题和研究次数不重启。以下旧方案、待批准和早期容量快照保留作历史证据，不作为最新执行状态。
+
+---
+
 ## 14:52磁盘补注
 
 本机可用空间最新15.95GB，已低于15GiB建议余量，但仍足够当前小记录任务；25来源本机恢复已验证完成。已核一份约1.88GiB的旧协调工作区，准确提交和全部路径均可由远端版本重建，现无未提交/未跟踪/忽略文件。只拟退役这一个目录，不处理其他含独有资料的研究工作区。

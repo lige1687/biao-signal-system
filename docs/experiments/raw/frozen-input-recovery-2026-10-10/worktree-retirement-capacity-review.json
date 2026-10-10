@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-10-10T17:30:31.437305+08:00",
+  "data_volume": {
+    "FilesystemType": "apfs",
+    "DeviceIdentifier": "disk3s5",
+    "APFSContainerReference": "disk3",
+    "APFSContainerFree": 19729141760,
+    "Internal": true,
+    "MountPoint": "/System/Volumes/Data"
+  },
+  "snapshot_command": [
+    "diskutil",
+    "apfs",
+    "listSnapshots",
+    "/System/Volumes/Data"
+  ],
+  "snapshot_command_exit_code": 0,
+  "snapshots_output": "Snapshots for disk3s5 (4 found)\n|\n+-- 4B26B9E1-5D85-441C-9B08-85A4B9E6CBCA\n|   Name:        com.apple.TimeMachine.2026-10-10-125327.local\n|   XID:         14790308\n|   Purgeable:   Yes\n|   NOTE:        This snapshot limits the minimum size of APFS Container disk3\n|\n+-- BE079D99-EF74-43C1-9C1C-683BBC24CA96\n|   Name:        com.apple.TimeMachine.2026-10-10-144206.local\n|   XID:         14798409\n|   Purgeable:   Yes\n|\n+-- 48E4EDCE-5FCA-458D-AC52-8FC08C5002C2\n|   Name:        com.apple.TimeMachine.2026-10-10-154231.local\n|   XID:         14803444\n|   Purgeable:   Yes\n|\n+-- B22EDC88-5265-4982-A601-0475FAF42EC9\n    Name:        com.apple.TimeMachine.2026-10-10-164319.local\n    XID:         14807344\n    Purgeable:   Yes\n",
+  "count": 4,
+  "all_snapshot_names_precede_retirement": true,
+  "snapshot_deleted_or_settings_changed": false,
+  "capacity_interpretation": "Local snapshots are observed and may preserve deleted file blocks; per-snapshot unique block retention, clone sharing and concurrent writes not measured. Cannot quantify physical space gained or assign the entire delta.",
+  "independent_review": {
+    "agent": "recovery_evidence_review",
+    "model": "gpt-6-sol",
+    "reasoning": "medium",
+    "removal_three_absence": "first exact checkout verified independently; other two audit separately in progress",
+    "first_exact_commit_remote_reachable": true,
+    "first_main_head_branch_index_unchanged": true,
+    "reviewed_execution_receipt": "worktree-retirement-execution.json",
+    "observed_first_net_free_delta_bytes": -3465216
+  }
+}

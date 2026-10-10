@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-10-10T17:31:35.639318+08:00",
+  "reviewers": [
+    {
+      "agent": "recovery_evidence_review",
+      "model": "gpt-6-sol",
+      "reasoning": "medium",
+      "question": "First exact checkout removed/reconstructible and main workspace safe; capacity evidence",
+      "exact_checkout_registration_metadata_absent": true,
+      "exact_commit_tree_remote_reachable": true,
+      "main_head_branch_index_matches_receipt": true,
+      "apfs_and_four_predeletion_local_snapshots_observed": true,
+      "no_measured_nominal_size_reclamation_claim": true
+    },
+    {
+      "agent": "remaining_goal_readiness",
+      "model": "gpt-6-sol",
+      "reasoning": "medium",
+      "question": "Two additional exact clean retired coordination checkouts removal and 25 original metadata",
+      "exact_checkout_registration_metadata_absent": true,
+      "exact_commit_trees_match_and_remote_reachable": true,
+      "retained_risk_shape_checkout_registered": true,
+      "main_head_branch_index_matches_receipt": true,
+      "original_metadata_checked": 25,
+      "original_metadata_changed": 0,
+      "checked_original_fields": [
+        "size",
+        "inode",
+        "mtime_ns"
+      ],
+      "content_hashes_rerun": false,
+      "prior_source_content_verdict_reused_only": true
+    }
+  ],
+  "side_effects_by_reviewers": false,
+  "root_receipts": [
+    "worktree-retirement-execution.json",
+    "additional-worktree-retirement-execution.json"
+  ],
+  "limits": "No per-snapshot exclusive allocation/clone sharing attribution; unchanged original metadata is not a new whole-source content hash claim."
+}
