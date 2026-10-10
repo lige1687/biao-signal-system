@@ -207,3 +207,11 @@
 - 已更新本地code-explainer-video的入口/motion-direction/style-compound-motion及opus-video-prep入口/BRIEF，共5文件。动态风格的可迁移部分为注意交接、动作轻重/搭接、节奏/空间、镜头与声音表现；载体按内容重选，不硬套100方块。用户可由本地收敛载体、分镜和运镜，参考模型不等于制作移交。明确委托Opus的纯备料模式保留；用户已确认本地方案可带版本/可改范围交接。
 - 已推成果codex/cash-position-video-20261009@584a4bd03702af0d25c25c57b2cedd8da1abe3cd：精确补丁style-transfer-skill-20261010.patch、五文件改前后SHA回执style-transfer-skill-20261010.json、本人work-progress，3准确文件远端逐字读回一致。共享未跟踪历史未整包冒领提交；本次补丁已同步，不称整套Skill已远端同步；ai_tools副本未修改。
 - 验收：两Skill quick_validate、相对引用、准确diff、零上下文补丁反向校验、最后归置检查均通过；保留原静帧→15秒→全片与事实/权限/发布边界。无新媒体/渲染/安装/模型切换/代理/研究/策略或已交包修改，不声称效果已达到参考。用户本轮要求的维护完成。
+
+
+## 公开动效方法研究与15秒实测开始 2026-10-10T18:38:09.557039+08:00
+- status: active；scope_released: false；owner root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c 唯一写者。checked_coordination_sha: d03bf853b386b9871f256cffd0052282b9772184；checked_at: 2026-10-10T18:38:09.557039+08:00。已读COORDINATION1.1、本任务、trend-trading-video、research-dispatch-controller及新增original-eight-continuation-20261010；沿用此前读过的nasdaq、trend-perspective、personal-quant、dual-ma、system-x释放/独立范围，无本次路径冲突。
+- 用户授权搜索Opus5.5/Astra6相关制作文章和Skill、沉淀增量并真实渲染15秒；学习风格而非100方块，Codex本地导演。复用已认可v06，不扩全片、不发布、不装新技能/依赖、不切换模型账号，不冒称模型基准。
+- 基线成果584a4bd03702af0d25c25c57b2cedd8da1abe3cd，工作分支codex/cash-position-video-20261009。共享修改限定.agents/skills/code-explainer-video/SKILL.md一个路由和新references/motion-transfer-field-test.md；自身docs/ops/work-progress/cash-position-video-20261009.md及docs/ops/media/cash-position-20261009/motion-research-trial-20261010.json、motion-research-skill-20261010.patch。旧Skill未跟踪历史仅精确补丁入库，新参考全文本人所有。
+- 大结果/工程/资料/日志唯一新外盘目录 /Volumes/win+mac通用/LeiSignal-新实验结果/视频库/投资心态/20261009-cash-position/v10-motion-style-trial-20261010；旧v06/v07/v08只读。18:34 storage固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok=true，外盘569242681344B；预计新增<1GiB外盘、小记录<128KiB本机。
+- 验收：原作者公开源码证据/来源与候选对照、去除已有重复规则；新15秒1080p30fps从真实K线量止损距离再缩仓，关键数来自既核输入/教学假设；正常速度与转场中途/终态/缩小尺寸检查，完整解码/时长/帧数/音频/数据算术/可复现工程；Skill结构链接/准确补丁/归置。主观观感留用户验收，缺陷和未检保持。旧三站发布状态独立保留。
