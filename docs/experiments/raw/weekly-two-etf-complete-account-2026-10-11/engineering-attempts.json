@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "artificial_lifecycle_batch_attempts": [
+    {
+      "attempt": 1,
+      "status": "failed_before_cases",
+      "cases_executed": 0,
+      "cause": "Runner's copied engineering-contract SHA omitted the 9be substring. Live contract SHA is 606ea6eddab51050751383de8ee3093f4fd02f066e0a8d9bfe9be060be9c0fab and source bytes were unchanged.",
+      "stderr": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-complete-account-20261011/weekly-two-etf-complete-account-20261011-20261011T005441-039d9543f167/lifecycle-stderr-attempt1.log",
+      "result_created": false
+    },
+    {
+      "attempt": 2,
+      "status": "passed_before_frozen_amendment",
+      "cases_executed": 10,
+      "result": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-complete-account-20261011/weekly-two-etf-complete-account-20261011-20261011T005441-039d9543f167/result/artificial-lifecycle.json",
+      "sha256": "68f829dd71701916608a569bb2fe58c4b89b5aae783470eddd4a1ef11e199993",
+      "reason_for_one_amended_repair_batch": "Frozen controller amendment 019c7ee0434c707ab006f83120ecbf4d00d43fbf48e2e03ceea0fa9cd66e97c7 requires side-specific exact price-limit refusal, decision-to-ex timing, final-window lock, and inherited account burden metrics. Preserve the original accepted result while checking these boundaries."
+    },
+    {
+      "attempt": 3,
+      "status": "passed_amended_targeted_repair",
+      "cases_executed": 10,
+      "unique_cases": 10,
+      "result": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-complete-account-20261011/weekly-two-etf-complete-account-20261011-20261011T005441-039d9543f167/result/artificial-lifecycle-amended.json",
+      "sha256": "eaf37f8cff2f43face1334ff4a5bed5b8bc75d94a603be7f3908cd76f7c220bf",
+      "reason": "Frozen amendment required targeted boundary correction of the existing ten-case engineering checks; this is an additional actual launch, not a reset of the original batch count."
+    }
+  ],
+  "artificial_launches_total_including_failed_preflight": 3,
+  "completed_artificial_batches": 2,
+  "unique_artificial_cases": 10,
+  "case_executions_across_completed_batches": 20,
+  "source_structure_preflight_launches": 1,
+  "historical_policy_path_attempts": 0,
+  "prior_artificial_scenarios_reused_without_rerun": 8
+}

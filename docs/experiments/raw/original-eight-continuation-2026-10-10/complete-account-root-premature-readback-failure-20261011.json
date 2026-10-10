@@ -1,0 +1,9 @@
+{
+  "phase": "core independent readback",
+  "cause": "Controller attempted readback after core result and attempts existed but before executor delivered core-result-location.json and stopped writing",
+  "error": "FileNotFoundError core-result-location.json",
+  "money_replay_started": false,
+  "source_or_result_mutation": false,
+  "additional_historical_paths": 0,
+  "repair": "Wait for complete frozen executor delivery, then inspect actual locator shape before independent readback"
+}

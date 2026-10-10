@@ -1,0 +1,284 @@
+{
+  "schema": "complete_account_core_independent_review.v1",
+  "reviewed_at": "2026-10-10T17:13:50.670Z",
+  "status": "accepted_conditional_paired_core_no_additional_policy_run",
+  "plain_language_conclusion": "在这套固定费用、日线成交和到账时间假设下，维持各半的方法期末少2827.83元，最大跌幅只少0.1532个百分点。全期实际只有一次卖出调节，绝大多数周仍按简单补低规则；未显示增加调整能带来更高收益，不能据此宣称稳定改善或真实可成交。",
+  "review_contract_sha256": "ea6b8a053f330942b75106bdf878a79eaaf0c3e73a4f154170cda1192678214f",
+  "core_contract_sha256": "9a19eb623bbb1dccd7cd3060322317a44dbd6931cb791c718a6210edddd360be",
+  "result": {
+    "sha256": "8508ce310f49ed195c3a37ba50e59e332ce22bdc195075ad19999e094be6dec3",
+    "bytes": 5903484,
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-core-account-20261011/weekly-two-etf-core-account-20261011-20261011T010700-a4081c5d8c11/result/paired-core-account.json",
+    "actual_readback": true
+  },
+  "code_verified": {
+    "engine": "2b54d6a4c1751d4f307a0777111e9553570b518c4773ea885c0ade49308ee387",
+    "runner": "12e7506e5a59448934df4867eef19e0817ad7db176d134c716d326cc3cdd1f65",
+    "root_independent_helper": "aeb61abe76825674f715120d652d99a9b4cf08de84830cd6e330e16072f9040d",
+    "actions": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789"
+  },
+  "audit_method": "Reused root full Fraction reconstruction after reading its source/result. Independently recalculated all order fees, all24 policy-specific record/ex/payment triplets,600-deposit identity perpolicy, sole-sale original target/quantity/cash/limit, cashflow-rate residuals, daily wealth/unit based risk/drawdown dates, terminal components and attribution differences. No author functions imported/run, no policy decisions regenerated.",
+  "performance": [
+    {
+      "metric": "contributions_CNY",
+      "P0": 150000,
+      "P1": 150000,
+      "difference": 0
+    },
+    {
+      "metric": "deposits",
+      "P0": 600,
+      "P1": 600,
+      "difference": 0
+    },
+    {
+      "metric": "terminal_equity_CNY",
+      "P0": "265896.0262",
+      "P1": "263068.1920",
+      "difference": "-2827.8342"
+    },
+    {
+      "metric": "profit_excluding_deposits_CNY",
+      "P0": "115896.0262",
+      "P1": "113068.1920",
+      "difference": "-2827.8342"
+    },
+    {
+      "metric": "dated_contribution_annualized_return_percent",
+      "P0": 9.60300282544152,
+      "P1": 9.428921715148919,
+      "difference_percentage_points": -0.174081110292601
+    },
+    {
+      "metric": "unit_nav_total_return_percent",
+      "P0": 109.71243730758573,
+      "P1": 108.21241355700333,
+      "difference_percentage_points": -1.5000237505824
+    },
+    {
+      "metric": "largest_unit_nav_decline_percent",
+      "P0": 56.83809498659353,
+      "P1": 56.68485741396152,
+      "difference_percentage_points": -0.15323757263201454
+    },
+    {
+      "metric": "annualized_daily_unit_nav_volatility_percent",
+      "P0": 26.35568786782464,
+      "P1": 26.29500030022049,
+      "difference_percentage_points": -0.06068756760415
+    },
+    {
+      "metric": "fees_CNY",
+      "P0": "2406.5738",
+      "P1": "2442.5080",
+      "difference": "35.9342"
+    },
+    {
+      "metric": "operation_dates",
+      "P0": 426,
+      "P1": 428,
+      "difference": 2
+    },
+    {
+      "metric": "buy_orders",
+      "P0": 450,
+      "P1": 451,
+      "difference": 1
+    },
+    {
+      "metric": "sell_orders",
+      "P0": 0,
+      "P1": 1,
+      "difference": 1
+    },
+    {
+      "metric": "extra_dates_between_weekly_decisions",
+      "P0": 0,
+      "P1": 1,
+      "difference": 1
+    },
+    {
+      "metric": "rejected_orders",
+      "P0": 4,
+      "P1": 3,
+      "difference": -1
+    }
+  ],
+  "independent_money_evidence": {
+    "sole_sale": {
+      "day": "2025-09-08",
+      "symbol": "sz159915",
+      "previous_day": "2025-09-05",
+      "previous_freecash": "400.2576",
+      "after_deposit_freecash": "650.2576",
+      "decision_total": "192571.4576",
+      "target_each": "96285.7288",
+      "original_sell_excess": "9109.4712",
+      "original_reference": "2.944",
+      "quantity": "3000",
+      "actual_open": "2.946",
+      "gross": "8838",
+      "fee": "17.676",
+      "restricted_net": "8820.324",
+      "no_same_day_buy": true,
+      "release_day": "2025-09-09",
+      "cash_after_release": "9470.5816",
+      "original_sh510300_shortfall": "9759.7288",
+      "original_reference_buy": "4.554",
+      "frozen_buy_quantity": "2000",
+      "frozen_buy_cap_independent": "4.725",
+      "actual_buy_open": "4.545",
+      "buy_gross": "9090",
+      "buy_fee": "18.18",
+      "final_freecash": "362.4016",
+      "identity": "650.2576+8820.324-9090-18.18=362.4016",
+      "same_original_decision": true
+    },
+    "all_fee_checks": {
+      "P0_orders": 450,
+      "P1_orders": 452,
+      "formula": "max(q*p*0.001,5)+q*p*0.001",
+      "all_equal": true
+    },
+    "dividends": {
+      "events_each": 12,
+      "all_recordshares_equal_record_close_shares": true,
+      "all_receivables_equal_recordshares_times_notice_cash": true,
+      "all_ex_marks_subtract_same_perunit_cash": true,
+      "all_payments_first_model_day_strictly_after_notice_pay_date": true,
+      "P0_total": "9231",
+      "P1_total": "9452.4",
+      "payment_monday_example": {
+        "announced_pay": "2025-06-27",
+        "released": "2025-06-30",
+        "amount_each": "1584",
+        "P0_previous_cash": "4.7174",
+        "P0_after_monday_deposit_and_08_payment": "1838.7174",
+        "P1_previous_cash": "60.3730",
+        "P1_after_monday_deposit_and_08_payment": "1894.3730",
+        "no_that_day_buy": true
+      },
+      "last_event": {
+        "record_date": "2026-01-16",
+        "ex_date": "2026-01-19",
+        "announced_pay": "2026-01-27",
+        "released": "2026-01-28",
+        "per_share": ".123",
+        "P0_entitled_shares": 20000,
+        "P1_entitled_shares": 21800,
+        "P0_amount": "2460",
+        "P1_amount": "2681.4"
+      }
+    },
+    "terminal": {
+      "P0": "21800*5.019+35800*4.364+250.6262=265896.0262",
+      "P1": "23700*5.019+33000*4.364+105.892=263068.192",
+      "receivable_and_restricted_both_zero": true,
+      "delta_components": "1900*5.019-2800*4.364+(105.892-250.6262)=-2827.8342"
+    },
+    "attribution": {
+      "basis": "FIFO purchase-price basis, fees shown separately; accounting convention, not a causal decomposition",
+      "P0": {
+        "realized_price_gain": "0",
+        "unrealized_price_gain": "109071.6",
+        "dividends": "9231",
+        "fees": "2406.5738",
+        "profit": "115896.0262"
+      },
+      "P1": {
+        "realized_price_gain": "2239.7",
+        "unrealized_price_gain": "103818.6",
+        "dividends": "9452.4",
+        "fees": "2442.508",
+        "profit": "113068.192"
+      },
+      "delta_identity": "2239.7-5253+221.4-35.9342=-2827.8342",
+      "equal": true
+    }
+  },
+  "independent_metric_checks": {
+    "wealth_divided_by_units_daily": 2790,
+    "cashflow_annualized_return_residual_CNY": {
+      "P0": -1.1641532182693481e-10,
+      "P1": -2.3283064365386963e-10
+    },
+    "daily_volatility_recalculated": {
+      "P0": 0.2635568786782464,
+      "P1": 0.2629500030022049
+    },
+    "drawdown": {
+      "peak_date_both": "2015-06-12",
+      "trough_date_both": "2019-01-03",
+      "P0": 0.5683809498659353,
+      "P1": 0.5668485741396152
+    },
+    "longest_unrecovered": {
+      "P0_days": 2051,
+      "P0_last_below_old_peak": "2021-01-22",
+      "P1_days": 2050,
+      "P1_last_below_old_peak": "2021-01-21",
+      "common_peak": "2015-06-12"
+    }
+  },
+  "incremental_evidence": {
+    "P1_weekly_statuses": {
+      "normal_p0_when_no_adjustment_trigger": 551,
+      "buy_when_no_sale_required": 30,
+      "no_candidate_this_week": 12,
+      "unsupported_ex_cross": 4,
+      "defer_cash_to_next_scheduled_week": 2,
+      "await_actual_sale_then_later_buy": 1
+    },
+    "same_allocation_rule_weeks": 581,
+    "scheduled_weeks": 600,
+    "same_rule_share": "581/600=96.8333%",
+    "delayed_weeks": [
+      "2015-07-20",
+      "2015-09-14"
+    ],
+    "sole_sale": "2025-09-08",
+    "pre_sale_common_holdings": "2025-09-05 both19000/35800 shares; P1 cash higher47.5475",
+    "interpretation": "Most weekly decisions use the baseline allocation rule, but this is not proof the full paths are identical: two2015deferrals altered cash/NAV before the2025sale. Only one realized sale is insufficient for a stable repeated rebalancing-effect claim.",
+    "critical_timing_limit": "Both maximum drawdowns occurred2015-06-12..2019-01-03, before the only2025sale. Do not attribute the0.1532percentage-point drawdown difference to that sale.",
+    "not_estimated": [
+      "causal effect of sale isolated from2015deferrals",
+      "other fee/payment-time assumptions",
+      "stable out-of-history improvement",
+      "exact matched-risk returns"
+    ]
+  },
+  "attempts": {
+    "historical_paired_batches": 1,
+    "historical_policy_paths": 2,
+    "runner_launches": 1,
+    "mechanical_repairs": 0,
+    "parameters_changed": 0,
+    "reviewer_author_reruns": 0,
+    "reviewer_additional_policy_paths": 0,
+    "network": 0,
+    "root_two_metadata_lookup_failures": "Root reports failures occurred before independent money reconstruction; not market reruns. No claim that those readback errors changed the2policy-path count.",
+    "stdout_sha256": "b1305848659e1a2868702f1d9a1453226499ac86e025a371e940af0ece120e79",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "exit_code_file_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "exit_code": 0,
+    "logs_read_verified": true
+  },
+  "storage": {
+    "checked_at": "2026-10-11T01:11:18.339688+08:00",
+    "identity_ok": true,
+    "external_free_bytes": 568249942016,
+    "read_only_exact_authorized_path": true
+  },
+  "strict_historical_qualification_ready": false,
+  "scientific_judgment": "Within the single fixed scenario, candidate ends with less wealth, nearly the same large drawdown/volatility, slightly more fees/operation. This answers the conditional comparison without tuning or consuming mechanical-repair budget. It neither proves universal inferiority nor supports stable added benefit.",
+  "necessary_additional_policy_test": false,
+  "reason_no_rerun": "Exact bounded comparison answered; any cash-time/cost robustness is untested and must not be implied. Current conclusion is explicitly conditional, so no need to create another parameter path.",
+  "required_corrections": [],
+  "disclosures": [
+    "Initial strategy/cost/clock scope and old sealed budgets remain unchanged.",
+    "Daily stored opening full fills and settlement times are model assumptions, not actual broker/exchange receipts.",
+    "Two deterministic paths share one already observed history; do not present as two independent scientific samples.",
+    "Original strict calendar/arrival/intraday eligibility remains false.",
+    "Four ex-crossing unsupported weeks belong to plan outcomes even though cancelled_phases metric is0; do not interpret0 as no company-action restriction."
+  ]
+}

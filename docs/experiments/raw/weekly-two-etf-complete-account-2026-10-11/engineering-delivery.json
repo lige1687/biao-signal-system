@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "task_id": "weekly-two-etf-complete-account-20261011",
+  "status": "engineering_artificial_passed_controller_review_pending",
+  "contract_sha256": "606ea6eddab51050751383de8ee3093f4fd02f066e0a8d9bfe9be060be9c0fab",
+  "amendment_sha256": "019c7ee0434c707ab006f83120ecbf4d00d43fbf48e2e03ceea0fa9cd66e97c7",
+  "code": {
+    "engine.py": "2b54d6a4c1751d4f307a0777111e9553570b518c4773ea885c0ade49308ee387",
+    "run_account.py": "12e7506e5a59448934df4867eef19e0817ad7db176d134c716d326cc3cdd1f65",
+    "run_lifecycle_checks.py": "c5bac881862d13cce26d9afa10735cd041a3b3d581503c7478509e59b4e579b8"
+  },
+  "input_preflight_sha256": "e56fb17ebba1ea875776a51271d051e4164d869e38806efaee7a992bac51f06e",
+  "result_location": "docs/experiments/raw/weekly-two-etf-complete-account-2026-10-11/result-location.json",
+  "attempts_record": "docs/experiments/raw/weekly-two-etf-complete-account-2026-10-11/engineering-attempts.json",
+  "actual_counts": {
+    "artificial_launches_including_failed_sha_preflight": 3,
+    "completed_artificial_batches": 2,
+    "unique_artificial_cases": 10,
+    "case_executions_across_completed_batches": 20,
+    "source_structure_preflight_launches": 1,
+    "historical_policy_paths_executed": 0,
+    "scientific_parameter_variants": 0,
+    "external_requests": 0
+  },
+  "artificial_result": "All ten named account-lifecycle cases passed in the original batch and in the amendment-triggered targeted repair batch; the first actual launch failed before executing cases because of a copied contract fingerprint typo, with its stderr retained.",
+  "input_gate_result": "Eighteen protected source fingerprints matched. Native quote dates, 600 deposits, 12 cash actions, the known missing quote and two blocked openings were checked. This is structural qualification only.",
+  "remaining_boundary": "Independent controller review and a separate exact core execution contract are required before any real historical P0/P1 account path. No historical return, ETF execution eligibility, or strategy performance has been computed.",
+  "code_risk_for_review": "The historical core path is deliberately unexecuted; review its adapter, dividend timing, cash release, operation counting, year attribution and metrics before enabling the frozen paired run."
+}

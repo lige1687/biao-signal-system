@@ -1,0 +1,175 @@
+{
+  "schema": "complete_account_engineering_independent_review.v1",
+  "reviewed_at": "2026-10-11T01:07:30.907575+08:00",
+  "status": "ready_for_core_contract",
+  "plain_language_conclusion": "已保存人工账户的关键现金、持仓、费用和分红时序经独立核算相符，未发现阻止冻结新核心合同的资金缺陷。这里只接受明确条件下的工程流程；尚未运行历史账户，也未证明哪项政策更好。",
+  "review_contract_sha256": "d3328348f7f409bad767351448ce9bc2a60a18e5084a46a16a173cb5c4edf5be",
+  "engineering_contract_sha256": "606ea6eddab51050751383de8ee3093f4fd02f066e0a8d9bfe9be060be9c0fab",
+  "amendment_sha256": "019c7ee0434c707ab006f83120ecbf4d00d43fbf48e2e03ceea0fa9cd66e97c7",
+  "source_sha_verified": {
+    "engine.py": "2b54d6a4c1751d4f307a0777111e9553570b518c4773ea885c0ade49308ee387",
+    "run_account.py": "12e7506e5a59448934df4867eef19e0817ad7db176d134c716d326cc3cdd1f65",
+    "run_lifecycle_checks.py": "c5bac881862d13cce26d9afa10735cd041a3b3d581503c7478509e59b4e579b8",
+    "engineering-delivery.json": "61bd165e1403c83cb959a0e8b42e724a99d6a6e2b7110f9e2aa0fceed222d0df",
+    "result-location.json": "7211d88c4fcd4d608d65e7ccb53bfb8171f8f59dde64b0060651bfb5905da737"
+  },
+  "saved_results_verified": [
+    {
+      "kind": "original_ten",
+      "sha256": "68f829dd71701916608a569bb2fe58c4b89b5aae783470eddd4a1ef11e199993",
+      "bytes": 16023
+    },
+    {
+      "kind": "amended_ten",
+      "sha256": "eaf37f8cff2f43face1334ff4a5bed5b8bc75d94a603be7f3908cd76f7c220bf",
+      "bytes": 18132
+    },
+    {
+      "kind": "first_failed_preflight_stderr",
+      "sha256": "d5def95e3bf330b2a7abf74faa03f1d8e5778745cac05bc95adcd3330edcbc8d",
+      "observed_error": "ValueError: engineering contract drift"
+    }
+  ],
+  "independent_method": "只读代码及保存结果，不导入/重跑作者函数；关键金额用独立Fraction公式核算。原/追加两人工结果指纹真实读取一致；复用已独验数量/买入限价算法。",
+  "money_checks": [
+    {
+      "case": 1,
+      "calculation": "3*250=750; insufficient100-share buy at10; no fee",
+      "observed": "cash750/shares0/fees0",
+      "verdict": "matched"
+    },
+    {
+      "case": 2,
+      "calculation": "6*(100*1+5+0.001*100)=630.6; cash750-630.6=119.4; shares300each; equity719.4",
+      "independent_units": "776.810811901215984129115102173690752858407861430257769714963",
+      "saved_units": "776.8108119012159841291151022",
+      "verdict": "matched to saved Decimal precision"
+    },
+    {
+      "case": 3,
+      "calculation": "total100*100+10000*.7+250=17250; target8625; excess1375/price100=13.75 shares =>0 whole100",
+      "observed": "cash250; originalshares100/10000; fee0",
+      "verdict": "matched"
+    },
+    {
+      "case": 4,
+      "calculation": "original equity1350/half675; A excess325/2=162.5=>sell100. Gross181, fee5+.181=5.181, net175.819. Next cash425.819; original B shortfall575; buy400 costs405.4; residual20.419. Equity400*2+500+20.419=1320.419. Loss vs1350 is19 execution-price shortfall +10.581 totalfees",
+      "observed": "cash20.419/fees10.581/shares400,500/equity1320.419",
+      "verdict": "matched"
+    },
+    {
+      "case": 5,
+      "calculation": "opening1.8 equals lowerlimit for prior2; failedsell zero fees/no following buy",
+      "observed": "cash250/holdings500,100/equity1350",
+      "verdict": "matched"
+    },
+    {
+      "case": 6,
+      "calculation": "record100*.1=10 receivable; beforeclose exmark1->.9 offsets receivable; two250 deposits+paid10 =>cash510, holdings200 at finalclose1=>equity710. Finalclose rebound to1 explains10 profit; pay itself produces no new income",
+      "observed": "record/ex/pay once; cash510/receivable0/equity710",
+      "verdict": "matched"
+    },
+    {
+      "case": 7,
+      "calculation": "crossweek deposits500+175.819 sale net=>cash675.819, stocks900=>1575.819. Terminal-sale variant cash250+restricted175.819+stocks900=>1325.819",
+      "verdict": "matched"
+    },
+    {
+      "case": 8,
+      "calculation": "sale leaves400 A atrecord=>40 receivable; cash425.819+holdings900+receivable40=1365.819; laterbuy cancelled, originalsale preserved",
+      "verdict": "matched"
+    },
+    {
+      "case": 9,
+      "calculation": "two250deposits, allspecifiedordersrejected, cash500/fee0; known missing mark age1",
+      "verdict": "matched"
+    },
+    {
+      "case": 10,
+      "calculation": "seed200+deposit250=450units; afterA rises1->2 equity550 givesNAV11/9. Nextdeposit250 adds2250/11units; total7200/11=654.54545..., equity800; NAV remains11/9",
+      "observed": "units654.5454545454545454545454546/equity800",
+      "verdict": "matched"
+    }
+  ],
+  "code_findings": [
+    {
+      "topic": "separate_account_implementation",
+      "location": "engine.py:61-275",
+      "judgment": "Uses a new Account implementation, not old dated_ledger import. Only planner arithmetic and policy branch code actually reused. Independent money checks above validate named boundaries; do not claim inheritance of all old ledger tests."
+    },
+    {
+      "topic": "original_decision_and_no_future_open",
+      "location": "engine.py:303-344,413-430",
+      "judgment": "Decisions use previous marks, original gaps/order identity retained for later_buys; current opening read only by _attempt; released cash snapshot includes receipt once. known action schedule uses announcement_date<Monday, equivalent to stipulated prior-date23:59 assumption."
+    },
+    {
+      "topic": "clock_and_actions",
+      "location": "engine.py:432-468",
+      "judgment": "Monday deposit/decision precedes ex/pay/release; ex cancels pending phase before attempt; known same-day ex is already rejected by ActionContext. Record follows close after actual trades. Side-specific limit refusal and actual next-model release respected."
+    },
+    {
+      "topic": "terminal",
+      "location": "engine.py:21,392-409",
+      "judgment": "POST_WINDOW_LOCK preserves terminal locked shares/restricted cash without post-window execution or prices. Saved cancellation day9999-12-31 is a sentinel label, not an observed event; report should render as period-end pending phase, not a future real cancellation."
+    },
+    {
+      "topic": "historical_data_adapter",
+      "location": "run_account.py:54-138,166-189",
+      "judgment": "Protected quotes are nominal, window-only open/close loaded, warmup solely previousmark,2790 union/modelclock,12cashactions and one known missingquote structurally bound. Actual policy paths remain unexecuted; unknown fullhistorical opening status not upgraded."
+    },
+    {
+      "topic": "metrics",
+      "location": "run_account.py:209-282",
+      "judgment": "Unit NAV strips deposits; cashflow annualization solves dated contributions vs terminal equity; annual account-profit differences telescope. Order-date burden and drawdown duration implemented. Separate dividend/realized/unrealized/fee decomposition must be reconstructed from actual core events by controller before final delivery; existing summary alone does not fulfill that accounting table."
+    }
+  ],
+  "core_contract_requirements_not_new_scientific_questions": [
+    {
+      "requirement": "Bind transitive imported file and verify before launch",
+      "path": "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/policy_zero_sale.py",
+      "sha256": "dc7ab5d846120b850590e0c51bc02bfc9afdae1ee41badf9a61462a447914db6",
+      "reason": "policy_startup_approved.py imports PolicyDecision/deposit_week_once; file absent from18protected-input table. Read necessary dependency, observed plain dataclass/helper, not a policy variant."
+    },
+    {
+      "requirement": "New unique external core output and live identity/capacity preflight",
+      "reason": "run_account.py:164 rejects existing target; artificial output must remain immutable. Root already plans a separate unique core run."
+    },
+    {
+      "requirement": "Record historical paired attempt before invocation and retain stdout/stderr failure receipt",
+      "reason": "run_account.py:180-194 computes both policy paths before writing combined result. Output absence does not imply zero attempts. Root can conservatively charge2paths per authorized paired invocation, preserve failed attempt and invoke at most explicit mechanical repair allowance; no output-existence budget reset."
+    },
+    {
+      "requirement": "Controller independent accounting table after core",
+      "reason": "Reconstruct from events with consistent cost-basis convention: dividends+realized price gain+unrealized price gain-fees=terminal wealth-total deposits; no new policy execution needed."
+    }
+  ],
+  "attempts": {
+    "artificial_launches": 3,
+    "completed_artificial_batches": 2,
+    "unique_cases": 10,
+    "case_executions": 20,
+    "first_failure_preserved": true,
+    "original_two_batch_plan_exceeded": true,
+    "additional_amended_check_authorization": "complete-account-amendment-attempt-accounting-20261011.json; do not relabel as within original2",
+    "historical_paths": 0,
+    "author_reruns_by_reviewer": 0,
+    "independent_arithmetic_only": true,
+    "network_calls": 0
+  },
+  "storage_readback": {
+    "checked_at": "2026-10-11T01:05:25.034371+08:00",
+    "external_available": true,
+    "identity_ok": true,
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "free_bytes": 568257544192,
+    "scope": "Read only exact root-authorized existing run; no external writes"
+  },
+  "limitations": [
+    "Historical core not executed and not authorized by this review.",
+    "Limited daily fill/fee/cash-clock scenario remains conditional; not actual trade proof or strategy validity.",
+    "Saved artificial evidence contains final money and plan summaries rather than every before/after intermediate snapshot; intermediate assertions inspected in frozen source, key amounts independently reconstructed.",
+    "No general oddlot support, arbitrary concurrent batches or production use accepted."
+  ],
+  "required_code_repairs": [],
+  "core_permission": "May now freeze the exact independent core contract within registered1paired/2initial-path scope; root retains authorization and attempt ledger. This review is not itself an executable core permit."
+}
