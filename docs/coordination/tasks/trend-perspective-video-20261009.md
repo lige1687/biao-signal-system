@@ -1,3 +1,11 @@
+# 本期发布文案补话题开工 2026-10-10T16:12:58.290402+08:00
+
+- owner root / 01a12111-3544-7250-822d-056b7379704b，task-id trend-perspective-video-20261009唯一写者；active topic_metadata_update；checked_coordination_sha 5586aec5d9f94b181f99d586e3c951185b905159，已读自身、现金三站独立原稿和既有双均线/纳指范围，无冲突。
+- 用户“标签都选好了是吧，比如vibe知识大赏等，可以也放到文案里边哈这个vibe知识大赏”授权只本期三平台既有原稿加vibe知识大赏文案/正式候选话题；小红书6ac9e40c000000001203d224、Bili BV1ehpv6EEUq、抖音1731524081原待SMS草稿，不改其他影片/重传/删稿/Skill。
+- 范围本人两小记录、v10外盘话题补充回执、本人协调文件；基线9540add7af17be648a56056f8316deafa30af578。外盘固定UUID16:12预检available/identity_ok，569395642368B，新截图<10MiB外盘，本机<64KiB。验收候选绑定/保存后原稿读回，无法绑定时准确记录纯正文标签；抖音短信仍待人类，不绕过/重复请求。
+
+---
+
 # 最新状态：小红书与哔站已公开，抖音等待本人短信验证
 
 - task-id trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；status awaiting_user_sms；stage publication_partial；scope_released false（仅本人抖音原稿继续）。
