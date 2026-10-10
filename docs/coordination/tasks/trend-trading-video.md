@@ -1,3 +1,14 @@
+## V9 opus-prep-done
+
+- task-id: trend-trading-video；2026-10-10T12:12:00.569472+08:00；checked_coordination_sha: 9894c6d3f0f97f102015b92760e240bbb6566c1e；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed，scope_released=true；root唯一写者。本次独立opus-video-prep七文件，已按用户补充包含Codex与用户的内容讨论/大致结构，Opus写具体文稿/分镜/主题视觉。五类开工准备与成片机械验收，目录、四JSON格式、任务/大纲模板、最短交接指令齐备。
+- 原项目成果codex/trend-history-long-v14-20261009@3758df8c56560f27799982309eb9d2ec64ffe49d，8准确文件远端读回一致；ai_tools/codex/video-production-kit-20261009@7a5d850f3b8b354908fa48a50654e0979e6102a5，12准确文件远端读回一致。55包指纹/引用、两Skill结构、四JSON样例、相对引用/双份一致/归置/diff通过。
+- 原视频Skill及其他任务未改；入口分流避免开工包误用Codex导演流程。无实际制作包、数据/音频测量、工程提取/安装/渲染/Opus调用，均明确未运行。旧资料未删。进度与opus-prep-result-receipt.json保存。
+- 交付前自身/中控读回无新增冲突，新Skill独立范围释放；后续按具体选题调用，不自动制作新片或调用模型。
+
+
+---
+
 ## V9 opus-prep-scope
 
 - task-id: trend-trading-video；2026-10-10T12:10:16.178503+08:00；checked_coordination_sha: 4bd0f99c755ecd9978ab2d064297451e935a13e3；已读 COORDINATION.md、自身与 research-dispatch-controller。
