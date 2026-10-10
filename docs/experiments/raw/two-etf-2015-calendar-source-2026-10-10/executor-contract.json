@@ -1,0 +1,280 @@
+{
+  "schema": "two-etf2015-calendar-source-contract/1",
+  "question_id": "two-etf-2015-exchange-calendar-source-20261010",
+  "parent_task_id": "original-eight-continuation-20261010",
+  "registered_coordination_commit": "46b47ec32addbe953f9b3a94bab5dacfbae55315",
+  "frozen_at": "2026-10-10T18:53:30.076729+08:00",
+  "question": "For the earliest missing year2015 only, what exact planned closure/opening dates and retrospective daily trading flags can be qualified separately for SZSE and SSE from primary year-level records, adjustments, or the observed SZSE monthly API, without treating weekday rules or price observations as official daily evidence?",
+  "design_path": "docs/experiments/raw/original-eight-continuation-2026-10-10/calendar-source-question-design.json",
+  "design_sha256": "a56d530cc94923948f1b6ebe48808e552cc8374f6ce747d3190de36f7e63fb60",
+  "products": [
+    "sh510300",
+    "sz159915"
+  ],
+  "account_candidate_window": [
+    "2015-01-01",
+    "2026-06-30"
+  ],
+  "source_year": 2015,
+  "source_window": [
+    "2015-01-01",
+    "2015-12-31"
+  ],
+  "budgets": {
+    "total_public_actions_max": 26,
+    "cumulative_accounting": "Every query, page open, HTTP request, redirect, failed attempt, source-script retrieval, and retry counts before dispatch. One immutable cumulative ledger for all phases; no fresh allowance on switching route.",
+    "allocation_rationale": {
+      "year_level_locator_original_rule_adjustment_actions_max": 10,
+      "optional_szse_monthly_actions_max": 12,
+      "failure_or_redirect_contingency_actions_max": 4
+    },
+    "saved_raw_response_bytes_max": 33554432,
+    "per_response_bytes_max": 4194304,
+    "internal_small_metadata_bytes_max": 1048576,
+    "transport_bytes_note": "HTTP response bytes should be counted while streaming and stopped at the cap; save received partial data/failure honestly. If a search/open tool does not expose transport bytes, label that transport total unknown.32MiB bounds measurable saved raw response bytes, not an invented all-network total.",
+    "same_semantic_operation_attempts_max": 2,
+    "same_operation_definition": "Same source+method+calendar target/meaning; changing timeout, scheme, headers, nonce or query spelling does not create a new operation. A retry needs a specific transient/fixable reason, not just unused budget.",
+    "budget_old": {
+      "calendar_round2_used": 27,
+      "calendar_completion_used": 67,
+      "prior_combined_calendar_requests": 94,
+      "etf_six_report_used": 18,
+      "etf_h1_used": 14,
+      "all_old_limits_and_failures_preserved": true
+    },
+    "market_runs": 0,
+    "account_runs": 0,
+    "return_computations": 0,
+    "new_prices_or_actions": 0,
+    "can_start_now": true,
+    "requires": "Registration46b47ec3 and fresh external plan recheck completed; this frozen contract is the only source allowance, no research/market expansion."
+  },
+  "allowed_sequence": [
+    {
+      "step": 1,
+      "action": "Reuse the fixed old accepted calendar and failure records; establish the new ledger/output plan. Do not re-download accepted2019-2026 months or2026 notices."
+    },
+    {
+      "step": 2,
+      "action": "Target year-level2015 sources first within the10-action group. Save actual originals and classify coverage. Only follow observed URLs; stop source discovery when the exact needed body is saved, avoiding duplicate originals."
+    },
+    {
+      "step": 3,
+      "action": "Check annual source completeness/adjustments and weekly-rule provenance. If a genuine full2015 official daily file suffices for SZSE, do not fetch monthly duplicates. If only partial annual notice is obtained, preserve it as planned-date evidence without filling unknown days."
+    },
+    {
+      "step": 4,
+      "action": "Only if SZSE2015 daily flags remain needed, request fixed twelve months2015-01..2015-12 sequentially at the observed monthList endpoint. Validate each body before proceeding; no automatic56-month job. Wrong-year/current-month/empty payload is failure. Two consecutive failures of the same endpoint/target availability class stop that route for diagnosis; do not consume one blind failure for every remaining month."
+    },
+    {
+      "step": 5,
+      "action": "Independently compare2015 official day fields and SSE planned terms, retaining differences. Compare ETF saved quote dates only after source qualification; quotes are diagnostics, never a substitute for exchange source."
+    },
+    {
+      "step": 6,
+      "action": "Write date-field/source matrix, exact accepted and unknown intervals, failure ledger and cumulative budget. If required source acquisition remains unfinished at26, mark paused_budget, keep partial evidence, and prohibit market run. If the bounded source question has been answered with a clear source limitation, state that exact limitation without pretending full calendar completion."
+    }
+  ],
+  "source_routes": [
+    {
+      "publisher": "SZSE",
+      "route_type": "observed successful historical monthly endpoint",
+      "url_template": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month={YYYY-MM}&random=0.1",
+      "known_fields": {
+        "jyrq": "calendar date",
+        "jybz": "official1/0 trading-day flag"
+      },
+      "actual_historical_success_interval": [
+        "2019-09",
+        "2026-06"
+      ],
+      "not_known": "2015 support and original publication/revision time are not established."
+    },
+    {
+      "publisher": "SSE",
+      "route_type": "saved primary closed-day listing and actual annual notice class",
+      "saved_listing": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/sse_closed_page.html",
+      "observed_channel": "closed_8317",
+      "observed_path": "/disclosure/dealinstruc/closed/",
+      "observed_exact_annual_example": "http://www.sse.com.cn/disclosure/announcement/general/c/c_20251222_10802507.shtml",
+      "restriction": "2026 example is evidence of official source type, not a2015 attachment URL. Never fabricate a2015 c_ date or identifier."
+    },
+    {
+      "publisher": "SZSE",
+      "route_type": "saved calendar HTML showing actual UI source references",
+      "saved_page": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_cal_page.html",
+      "observed_script_paths": [
+        "/modules/tradeCalendar/js/tradeCanledar_new.js",
+        "/modules/tradeCalendar/js/stopResTrading_new.js"
+      ],
+      "restriction": "No year-level API or year-export link observed in saved HTML. Do not claim one exists or guess query flags to create one."
+    }
+  ],
+  "excluded_dead_ends": [
+    {
+      "source": "query.sse.com.cn/commonQuery.do",
+      "observed_failed_sql_ids": [
+        "COMMON_SSE_JYRL_L",
+        "COMMON_SSE_ZQPZ_YSSP_MCJS_SSRL_L"
+      ],
+      "saved_failures": [
+        "calendar-raw/sse_try1.json",
+        "calendar-raw/sse_try2.json",
+        "calendar-raw/sse_try3.json"
+      ],
+      "failure": "result:null or SOA service is null",
+      "decision": "No retries of these speculative SQL endpoints; a newly observed current official implementation/changed premise would require root to revise this route, not silent trial-and-error."
+    },
+    {
+      "source": "Old SZSE publication-search and notice probes",
+      "saved_files": [
+        "publication-probe/szse_search.json",
+        "publication-probe/szse_notice.json"
+      ],
+      "failure": "HTTP500 maintenance content, not calendar data",
+      "decision": "Do not replay the failed opaque API calls. New domain-restricted discovery of exact2015 official documents is a distinct route; identify actual URL before fetching."
+    },
+    {
+      "source": "Sina klc_td_sh encoded calendar",
+      "failure": "Opaque encoded series, not accepted official exchange source; reverse engineering was out of scope",
+      "decision": "Do not use or reverse-engineer as fallback."
+    },
+    {
+      "source": "Old whitespace-batched month request",
+      "failure": "One malformed month argument",
+      "decision": "Never repeat malformed batch; explicit single valid2015 month requests only."
+    }
+  ],
+  "acceptance_layers": [
+    {
+      "layer": "A official planned-date facts",
+      "can_accept": "Exact closed ranges/resumption dates and issuer/document date stated by an authentic2015 exchange notice, with separately recorded later amendments.",
+      "cannot_accept": "Unmentioned365 days are all known; all updates were absent; a proposed schedule proves actual security trading."
+    },
+    {
+      "layer": "B retrospective exchange daily flags",
+      "can_accept": "Exact2015 calendar dates with official per-day flags from complete-date source bodies; dates must be unique, valid, within requested period and cover365 natural days for full-year status. Unknown/omitted/conflicting days prevent full-year qualification.",
+      "cannot_accept": "Weekdays generated by software, quote-date union, HTTP200, a currentmonth returned for historical query, or SSE equivalence inferred from SZSE alone."
+    },
+    {
+      "layer": "C bounded cross-exchange comparison",
+      "can_accept": "Explicit per-date agreement/conflict for common independently supported2015 fields. SSE annual rules may support a planned comparison if ordinary-week and exceptional-date assumptions are fully disclosed.",
+      "cannot_accept": "Matching planned date sets certify historical operational equivalence or lack of all unexpected closures; missing SSE original filled from SZSE."
+    },
+    {
+      "layer": "D security opening eligibility",
+      "status": "not examined/not qualified",
+      "reason": "Official exchange date flag does not prove exactETF09:30 permission, no suspension, special reference price, sufficient liquidity or a fill. Existing1599152021 restrictions and limit-boundary exclusions remain unchanged."
+    }
+  ],
+  "checks": [
+    "2014 publication dated notice may govern2015: keep publication and covered year separate; conversely2015 publication for2016 must not fill2015.",
+    "Weekend public-sector make-up workday is not inferred exchange open. Only official exchange rules/flags decide.",
+    "A partial-holiday annual notice or failed amendment search cannot fill all other dates with1.",
+    "Historical query returning present-month data, duplicate date,missing date,invalid jybz, or noncalendar maintenanceHTML fails qualification.",
+    "Source-byte SHA changed after binding is rejected before deriving a new calendar.",
+    "Every quoted daily flag retains original file/date/field trace; source deletion changes that date to unknown rather than silently regenerating a weekday.",
+    "Compare complete2015 official natural-date set and quote sets; explain scheduled-without-quote using exactsecurity restrictions only if already supported. Do not fill prices or run an account."
+  ],
+  "input_manifest": [
+    {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/calendar-opening-readiness.json",
+      "sha256": "1f92570f506525327e64ebf523770aa9bf5b537351c810ac291f9761035febf2",
+      "bytes": 9533
+    },
+    {
+      "path": "docs/experiments/research-calendar-completion-2026-09-10.md",
+      "sha256": "6f5fd1df74084dd56fac16d359c6a1daadeb79739db6a33f8c05855af54f1753",
+      "bytes": 15788
+    },
+    {
+      "path": "docs/experiments/research-data-provenance-round2-2026-09-10.md",
+      "sha256": "4ac9f8666ea5cf4e2f9a0050137b8d42c195d69c528e8807896a391f38d5d32b",
+      "bytes": 22147
+    },
+    {
+      "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+      "sha256": "f1c3bd5f93bd84b20b587a2cc5292e89370b8f2a4fa3962498da950bcea35201",
+      "bytes": 79500
+    },
+    {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+      "sha256": "0004e6376e84add586f65d9b102b43fa8a58fb5b4b79029959f0969836ec1948",
+      "bytes": 217108
+    },
+    {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining/calendar.json",
+      "sha256": "7e7abaf64d1bf6fabdb619b1a100dc15eaffe1b39fb191335ba3ed9ca0cf1a49",
+      "bytes": 3849
+    },
+    {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+      "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+      "bytes": 296252
+    },
+    {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json",
+      "sha256": "657ef122c62aefcf8d580e5e20e85beac8b1a0979c399f3529ae30d6b245ef02",
+      "bytes": 3815
+    },
+    {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/sse_closed_page.html",
+      "sha256": "51ac590f84bd825f6fe70793b90a63470bf59053f4dfd5ad94cb7cdb67da5b43",
+      "bytes": 30824
+    },
+    {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_cal_page.html",
+      "sha256": "c172b73cf8301d68b194464a6efca3a719f04274d9b22d6df680c69460eddad9",
+      "bytes": 8406
+    },
+    {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_search.json",
+      "sha256": "909a526f37ede9aad5fb563a8735ddde67db27e48ec4e0ff5871074118e4b710",
+      "bytes": 2226
+    },
+    {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_notice.json",
+      "sha256": "909a526f37ede9aad5fb563a8735ddde67db27e48ec4e0ff5871074118e4b710",
+      "bytes": 2226
+    },
+    {
+      "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-raw/sse_try1.json",
+      "sha256": "b43bd2be0bc432ac351ace29231a3190f70424259575f7f1a4fe4828bec59174",
+      "bytes": 505
+    },
+    {
+      "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-raw/sse_try2.json",
+      "sha256": "6ad33a568aa3ec69cc665d0253e351e80794611ebe8e9630134b072c638901c0",
+      "bytes": 490
+    },
+    {
+      "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-raw/sse_try3.json",
+      "sha256": "c7ca90e77299123c723098e157feda6e74d401b56799d3aedcf1d84d8926da27",
+      "bytes": 115
+    }
+  ],
+  "output_plan": {
+    "schema_version": 1,
+    "task_id": "two-etf-2015-exchange-calendar-source-20261010",
+    "run_id": "two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13",
+    "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13",
+    "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/result",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "estimated_bytes": 134217728,
+    "internal_metadata_bytes": 1048576,
+    "external_reserve_bytes": 10737418240,
+    "internal_reserve_bytes": 5368709120,
+    "execution_authorized": false,
+    "quota_enforced": false
+  },
+  "network_executor": "remaining_goal_readiness gpt-6-sol/medium",
+  "network_reviewer_requests": 0,
+  "shared_writer": "root only",
+  "strategy_source_sha256": {
+    "technical": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "status": "frozen_not_started"
+}

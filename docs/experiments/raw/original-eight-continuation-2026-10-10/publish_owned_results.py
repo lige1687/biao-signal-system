@@ -28,12 +28,15 @@ def digest(data):
 def main():
     phase = sys.argv[1]
     final_source = "--source-final" in sys.argv[2:]
+    final_calendar = "--calendar-final" in sys.argv[2:]
     assert git("rev-parse", "HEAD", text=True).strip() == MAIN_HEAD
     assert digest((ROOT / ".git/index").read_bytes()) == MAIN_INDEX
     base = git("rev-parse", BRANCH, text=True).strip()
     registrations = ["D", "cross-week", "etf-h1"]
     if final_source:
         registrations.append("etf-full-actions")
+    if final_calendar:
+        registrations.append("calendar2015")
     entries = [json.loads((CONTROL / f"{name}-registration-entry.json").read_text())
                for name in registrations]
     paths = {"src/lei_signal/research/native_d_conditional_risk.py",
@@ -47,6 +50,12 @@ def main():
                    "original-eight-continuation-2026-10-10"]
     if final_source:
         directories.append("etf-pair-action-coverage-completion-2026-10-10")
+    if final_calendar:
+        directories.append("two-etf-2015-calendar-source-2026-10-10")
+    else:
+        calendar_contract = "docs/experiments/raw/two-etf-2015-calendar-source-2026-10-10/executor-contract.json"
+        if (ROOT / calendar_contract).exists():
+            paths.add(calendar_contract)
     for directory in directories:
         for p in (ROOT / "docs/experiments/raw" / directory).rglob("*"):
             if p.is_file() and not any(s in {"__pycache__", ".pytest_cache"}
@@ -95,6 +104,8 @@ def main():
     line_keys = ["D_index_line", "cross_week_index_line", "etf_h1_index_line"]
     if final_source:
         line_keys.append("etf_full_actions_index_line")
+    if final_calendar:
+        line_keys.append("calendar2015_index_line")
     lines = "".join(inserts[k] for k in line_keys if inserts[k] not in index)
     anchor = "## 1. 任务编号总账（任务书 → 执行归档）"
     pos = index.index("\n", index.index(anchor)) + 1
