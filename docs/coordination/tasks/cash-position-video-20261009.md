@@ -215,3 +215,13 @@
 - 基线成果584a4bd03702af0d25c25c57b2cedd8da1abe3cd，工作分支codex/cash-position-video-20261009。共享修改限定.agents/skills/code-explainer-video/SKILL.md一个路由和新references/motion-transfer-field-test.md；自身docs/ops/work-progress/cash-position-video-20261009.md及docs/ops/media/cash-position-20261009/motion-research-trial-20261010.json、motion-research-skill-20261010.patch。旧Skill未跟踪历史仅精确补丁入库，新参考全文本人所有。
 - 大结果/工程/资料/日志唯一新外盘目录 /Volumes/win+mac通用/LeiSignal-新实验结果/视频库/投资心态/20261009-cash-position/v10-motion-style-trial-20261010；旧v06/v07/v08只读。18:34 storage固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok=true，外盘569242681344B；预计新增<1GiB外盘、小记录<128KiB本机。
 - 验收：原作者公开源码证据/来源与候选对照、去除已有重复规则；新15秒1080p30fps从真实K线量止损距离再缩仓，关键数来自既核输入/教学假设；正常速度与转场中途/终态/缩小尺寸检查，完整解码/时长/帧数/音频/数据算术/可复现工程；Skill结构链接/准确补丁/归置。主观观感留用户验收，缺陷和未检保持。旧三站发布状态独立保留。
+
+
+## 公开动效方法与15秒实测完成 2026-10-10T18:51:58.819416+08:00
+- status: completed（本轮方法沉淀与样例交付）；scope_released: true（两份视频Skill及本轮工程全部释放，旧抖音接续仍未确认）；owner root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c。checked_coordination_sha: f194021a6ef10b81f6b2c2dca0c3991d17f7c691；checked_at: 2026-10-10T18:51:58.819416+08:00；开工后至交付fetch无他人增量，已读自身、COORDINATION1.1、trend-trading-video、research-dispatch-controller、original-eight-continuation-20261010及原相关独立视频范围，无冲突。
+- 成果codex/cash-position-video-20261009@747cbad14199e08c99de083fddb3bfc0334ea667，准确4文件远端逐字读回通过：新references/motion-transfer-field-test.md、主入口精确补丁motion-research-skill-20261010.patch、motion-research-trial-20261010.json、自身work-progress。主Skill本地生效，未跟踪共享历史不整包冒领，补丁已推，不宣称整套Skill全量远端同步。
+- 原作者Barty-Bart/JakeB-5/klsoen六份公开文本快照有SHA；采用锚点/文字分时/运动轻重/中途帧检查，有Codex示例但没有可核实Astra6专属模仿方法；未安装第三方脚本、未实际调用模型基准、未照搬100方块、未引入其审批/自评分流程。
+- 实际15秒工程/素材/输出/证据全在固定外盘视频库/投资心态/20261009-cash-position/v10-motion-style-trial-20261010。最终out/先量风险再定投入-15秒-v3.mp4：1967789B，SHA86039eea2ba9ed2b7ecdaa52cf72256a5a7e080032f314639150944c4b1f5834。15.00秒450帧1080p30fps/H264/AAC，完整解码通过；旧真实SPY输入同SHA，教学止损距离精算1.563307338292%，投入60%→30%，损失估算0.94%→0.47%，非保证最大损失。
+- 两轮转场重叠缺陷保留且修正，最终11关键帧/390宽联系表核；关键标签加大，次级来源说明需更大播放；声音同旧leyan42—57秒，峰值-8.5dBFS/均值-17.6dBFS，未独立听审。完整播放和三按钮1.8/4.6/8.3秒实际通过，预览http://127.0.0.1:53028/preview/index.html已保留。最初HTTP缺Range导致不能seek，定位修复后0..15可跳转，不以初次能播放冒称交互通过。
+- 验收：Skill结构/相对引用/时间表/Decimal算术/精确补丁反向校验/准确路径差异/归置全通过，原草稿和失败保留。未做同帧乱序像素检验/独立听审/模型性能比较；主观效果待用户，单段不代表机会筛选与涨跌预案全片通过。18:46固定UUID身份容量通过，无新依赖/付费/权限/策略/全片/发布/删除/他人文件修改。
+- 后续由用户看这一真实样例决定视觉方向；现金原完整片三站发布状态独立，未把本轮完成替代旧抖音未确认状态。
