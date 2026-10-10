@@ -1,0 +1,33 @@
+{
+  "task_id": "frozen-input-recovery-20261010",
+  "prepared_at": "2026-10-10T14:54:08.168328+08:00",
+  "proposed_retirement_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination",
+  "du_kib": 1967536,
+  "estimated_directory_allocated_bytes": 2014756864,
+  "head": "23dabe49f62b9a759d11bb87281d82902cccb61c",
+  "tree": "16c8dcb5f27b0dcd2caeadaf269e2a60692cbcd8",
+  "remote_ref": "coordination/lei",
+  "remote_tip": "0cec2b6a91c7ca26db40cbed91d4e323f5a2fd07",
+  "head_ancestor_verified": true,
+  "tracked_untracked_and_ignored_status_empty": true,
+  "tracked_paths_count": 21895,
+  "tracked_file_list_sha256": "dc1079683e223274cf29b3bcede65d9a0d5f80ee9e1b60e7f612ca9bfb4e993a",
+  "operation_if_authorized": [
+    "Re-read latest coordination and recheck exact worktree HEAD/status/ignored files/locks and open processes",
+    "Save exact retirement receipt and retain common Git repository and remote commits",
+    "git worktree remove exact proposed_retirement_path without --force",
+    "Read back registered worktree list/path absence and actual df before/after; never claim nominal du as actual freed bytes"
+  ],
+  "reconstruction": [
+    "git worktree add --detach /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination 23dabe49f62b9a759d11bb87281d82902cccb61c"
+  ],
+  "human_confirmation_required": true,
+  "human_confirmation_received": false,
+  "source_current_use_retirement_requires_human_decision": true,
+  "overwrite_or_force_allowed": false,
+  "other_paths_allowed": [],
+  "delete_executed": false,
+  "main_checkout_branch_index_untouched": true,
+  "original_fixed_research_paths_untouched": true,
+  "notes": "Clean historical coordination checkout; no unique files or commit found. Previous owner preserved worktrees generally; explicit retirement of this exact checkout requires user decision. Remote committed version provides reconstruction; no large copy to internal drive."
+}

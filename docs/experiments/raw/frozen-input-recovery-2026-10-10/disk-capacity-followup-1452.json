@@ -1,0 +1,111 @@
+{
+  "view": "storage",
+  "available": true,
+  "generated_at": "2026-10-10T14:52:27.410238+08:00",
+  "data": {
+    "schema_version": 1,
+    "checked_at": "2026-10-10T14:52:27.407781+08:00",
+    "severity": "warning",
+    "status": "attention",
+    "reasons": [
+      "内置盘剩余空间低于 15 GiB 警告线"
+    ],
+    "internal": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+      "status": "warning",
+      "capacity": {
+        "total_bytes": 245107195904,
+        "used_bytes": 229159264256,
+        "free_bytes": 15947931648
+      }
+    },
+    "external": {
+      "mount_point": "/Volumes/win+mac通用",
+      "expected_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+      "available": true,
+      "identity_ok": true,
+      "status": "ok",
+      "capacity": {
+        "total_bytes": 699702312960,
+        "used_bytes": 130256076800,
+        "free_bytes": 569446236160
+      },
+      "reasons": [],
+      "device_node": "/dev/disk4s3"
+    },
+    "resource_registry": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/storage-resources.v1.json",
+    "access_guide": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/codex-storage-management.md",
+    "resources_status": "ok",
+    "resource_errors": [],
+    "resources": [
+      {
+        "id": "douyin-audio-20261007",
+        "name": "已保存的公开视频音频",
+        "logical_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/douyin-vike-audio-2026-10-07",
+        "external_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/verified-static-cache-20261008T165506/douyin-vike-audio-2026-10-07",
+        "role": "static_input",
+        "recovery_manifest": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/migration-20261008T165506.json",
+        "available": true,
+        "read_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/verified-static-cache-20261008T165506/douyin-vike-audio-2026-10-07",
+        "access": "existing_files_read_only",
+        "logical_mapping_state": "linked",
+        "reason": "原路径可读",
+        "integrity": "本次只核设备与路径；内容指纹需另按恢复清单核对"
+      },
+      {
+        "id": "douyin-media-20261007",
+        "name": "已保存的公开视频文件",
+        "logical_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/douyin-vike-media-2026-10-07",
+        "external_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/verified-static-cache-20261008T165506/douyin-vike-media-2026-10-07",
+        "role": "static_input",
+        "recovery_manifest": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/migration-20261008T165506.json",
+        "available": true,
+        "read_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/verified-static-cache-20261008T165506/douyin-vike-media-2026-10-07",
+        "access": "existing_files_read_only",
+        "logical_mapping_state": "linked",
+        "reason": "原路径可读",
+        "integrity": "本次只核设备与路径；内容指纹需另按恢复清单核对"
+      },
+      {
+        "id": "whisper-small-mlx",
+        "name": "本机语音转写模型",
+        "logical_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/video-models/whisper-small-mlx",
+        "external_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/verified-static-cache-20261008T165506/whisper-small-mlx",
+        "role": "static_input",
+        "recovery_manifest": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/migration-20261008T165506.json",
+        "available": true,
+        "read_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-运行存储管理-20261008/verified-static-cache-20261008T165506/whisper-small-mlx",
+        "access": "existing_files_read_only",
+        "logical_mapping_state": "linked",
+        "reason": "原路径可读",
+        "integrity": "本次只核设备与路径；内容指纹需另按恢复清单核对"
+      },
+      {
+        "id": "portfolio-blogger-audio",
+        "name": "持仓日报的博主音频缓存",
+        "logical_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/data/cache/portfolio-chat-briefing/video-content/audio",
+        "external_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-B站日报音频-20261008",
+        "role": "existing_audio_cache",
+        "available": true,
+        "read_path": "/Volumes/win+mac通用/个人资料归档/LeiSignal-B站日报音频-20261008",
+        "access": "existing_files_read_only",
+        "logical_mapping_state": "linked",
+        "reason": "原路径可读",
+        "integrity": "本次只核设备与路径；内容指纹需另按恢复清单核对"
+      }
+    ]
+  },
+  "sources": {
+    "storage": {
+      "retrieved_at": "2026-10-10T14:52:27.407781+08:00",
+      "available": true,
+      "scope": "本机固定存储策略、容量与已登记资源路径，只读检查"
+    }
+  },
+  "limitations": [
+    "这是检查时的容量，不能保证之后仍有空间；未控制其他任务的写入。",
+    "只对本日报新增音频工作执行预检，不自动删除资料或修改交易记录。",
+    "resources[].read_path 仅在本次核对设备和目录后可用；不授权迁移或新写入。"
+  ],
+  "errors": {}
+}
