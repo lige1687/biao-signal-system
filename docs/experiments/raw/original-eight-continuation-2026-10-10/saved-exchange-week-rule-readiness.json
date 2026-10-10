@@ -1,0 +1,92 @@
+{
+  "schema": "saved-exchange-week-rule-readiness.v1",
+  "checked_at": "2026-10-10T19:28:03.109528+08:00",
+  "scope": "Only four already saved official rule/FAQ files bound by new-rule-sources.json; no network, no market or account run, no old source modification.",
+  "source_manifest_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/new-rule-sources.json",
+  "source_manifest_sha256": "395d381b23e7196838b38111a581c38b0a48466a30d42813c03f9bf1f313a167",
+  "sources": [
+    {
+      "name": "szse-2006-rules.html",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/szse-2006-rules.html",
+      "url": "https://investor.szse.cn/disclosure/notice/t20060515_499577.html",
+      "sha256": "64fbd0069d3d2c9c10bee2ce3eed98ac8109bb5a2a320b8339cf8bf4e89e90ef",
+      "bytes": 124385,
+      "retrieved_at_utc": "2026-09-08T06:20:06.638058+00:00",
+      "title": "关于发布《深圳证券交易所交易规则》的通知",
+      "relevant_passages_limited": [
+        "2.2.1 下列证券可以在本所市场挂牌交易：…基金",
+        "2.3.1 本所交易日为每周一至周五。国家法定假日和本所公告的休市日，本所市场休市。",
+        "发布通知：2006-05-15；自2006年7月1日起施行；11.6 修改时亦同。"
+      ],
+      "typed_facts": [
+        "2.2.1 explicitly lists funds as exchange-traded security category",
+        "2.3.1 states exchange trading days are Monday through Friday; statutory holidays and exchange-announced closures are closed",
+        "Notice page says publication 2006-05-15 and rule effective 2006-07-01; 11.6 says amendments also require approval"
+      ],
+      "2017_applicability": "2006 rule version effective from 2006-07-01; this saved page alone does not establish that clause 2.3.1 remained unmodified and applicable on 2017-01-01"
+    },
+    {
+      "name": "szse-2014-sell-lots.html",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/szse-2014-sell-lots.html",
+      "url": "https://www.szse.cn/lawrules/rule/trade/current/t20150914_565054.html",
+      "sha256": "9bf20e75707c6f69ed4778627bb6b5fd1ad67f460e05e3e86f1053c380733e34",
+      "bytes": 21673,
+      "retrieved_at_utc": "2026-09-08T06:20:06.806046+00:00",
+      "title": "关于严格执行证券竞价交易卖出申报数量有关规定的通知",
+      "relevant_passages_limited": [
+        "时间：2014-07-25；深证会〔2014〕72号",
+        "卖出申报数量应当符合《交易规则》第3.3.8条及第3.3.9条。"
+      ],
+      "typed_facts": [
+        "2014-07-25 official notice concerns 100-share/unit sell-order quantities and cites Trading Rules 3.3.8/3.3.9",
+        "No Monday-Friday or weekend-closure clause in this notice; citation of other clauses cannot bridge 2006 rule version to 2017"
+      ],
+      "2017_applicability": "2014 notice only; no proof of 2017 version of 2.3.1"
+    },
+    {
+      "name": "sse-2013-limit.html",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/sse-2013-limit.html",
+      "url": "https://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20150912_3988628.shtml",
+      "sha256": "b57fe5e3f066518bed5bec88a4726b1733b9fb1f15268c977d196bcdb707c886",
+      "bytes": 30664,
+      "retrieved_at_utc": "2026-09-08T06:20:06.296183+00:00",
+      "title": "关于修订《上海证券交易所交易规则》若干条款的通知 | 上海证券交易所",
+      "relevant_passages_limited": [
+        "第3.4.13条修订价格涨跌幅相关内容",
+        "上述修订自2013年1月1日起生效。"
+      ],
+      "typed_facts": [
+        "SSE notice dated 2012-12-16 and signed 2012-12-14 amends price-limit/other clauses effective 2013-01-01",
+        "Does not state ordinary trading weekdays or a full opening calendar"
+      ],
+      "2017_applicability": "Only the listed amendment effective 2013-01-01; no complete 2017 trading-week version binding"
+    },
+    {
+      "name": "sse-etf-faq.html",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/sse-etf-faq.html",
+      "url": "https://www.sse.com.cn/assortment/fund/etf/question/",
+      "sha256": "57b56429ea6613c725a35a289063bcab43aedf964f9ce9dff151c1ac856aa97f",
+      "bytes": 36637,
+      "retrieved_at_utc": "2026-09-08T06:20:06.295980+00:00",
+      "title": "ETF相关常见问题  | 上海证券交易所",
+      "relevant_passages_limited": [
+        "股票ETF实施T+1交易。",
+        "ETF买卖最低为1手，即100份基金份额。"
+      ],
+      "typed_facts": [
+        "SSE ETF FAQ says equity ETFs use T+1 and minimum trade 100 units",
+        "No publication/effective timestamp found in saved FAQ body and no Monday-Friday calendar rule"
+      ],
+      "2017_applicability": "FAQ saved 2026-09-08; its body does not establish historical 2017 applicability or exchange opening weekdays"
+    }
+  ],
+  "specific_date": "2017-01-01",
+  "specific_weekday": "Sunday",
+  "typed_reusable_source_fact": "Under the expressly saved SZSE 2006 Trading Rules version effective 2006-07-01, clause 2.3.1 defines exchange trading days as Monday through Friday and lists statutory/exchange-announced closures; funds are an eligible product class under 2.2.1. Therefore Sunday is outside that version’s ordinary planned trading week.",
+  "2017_version_applicability": "not_proven_by_these_four_saved_files",
+  "reason": "The 2006 notice fixes its initial effective date, not an uninterrupted 2017 version. The 2014 SZSE sell-lots notice cites different order-size clauses and says nothing about clause 2.3.1 or 2017. No saved 2017-effective amendment chain was reviewed or supplied in this bounded task.",
+  "sse_limited_finding": "The saved SSE 2012/2013 amendment is about price limits and the saved undated ETF FAQ is about T+1/100 units; neither states ordinary Monday-Friday trading days or proves a complete 2017 SSE calendar. Do not promote them to planned opening calendar evidence.",
+  "jan2017_effect": "May add a typed, historical-version-conditional ordinary-week-rule fact only. Does not qualify 2017-01-01 planned closure under a proven 2017-effective version, does not recover the missing retrospective SZSE jybz, and does not change original January notice question bounded-unproven result or 43/44 months status.",
+  "no_new_budget_or_source": true,
+  "do_not_infer": "2017 Sunday jybz=0, all 2017 exceptions absent, SSE 2017 applicability, or either ETF 09:30 tradability"
+}
