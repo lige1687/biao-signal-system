@@ -1,3 +1,18 @@
+# 最新状态：Opus开工包已备，工程可用，案例/公开权限部分未齐
+
+- task-id trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；prepared / opus_package_prepared_partial；scope_released true（本轮备料结束，未启动Opus创作）。
+- checked_coordination_sha: 20f5d818d60b676412ae439c211a8409d5d058b9；checked_at: 2026-10-10T12:37:40.422579+08:00；已读COORDINATION1.1、自身、cash-position、nasdaq、dual-ma、trend-trading、中控已定范围；最新cash-position仅独立开工包交付/Skill不写，无重叠。只写本人小索引/进度和独立外盘，无子代理。前一次最终记录在写前遇到他任务提交，校核新增后从最新基线接续，未覆盖他人文件。
+- 用户调用opus-video-prep“看看准备一下哈”；归一原稿与章级内容大纲，事实/音乐/已有材料与通用底座。没有新写文稿分镜或主题动画，未调用/安装Opus，未扩片/发布/付费/改Skill或策略。
+- 工作分支codex/trend-perspective-video-20261009@eba7a06cefd9de1f79af5954d226bffd805c116c已正常推送并核远端SHA和两份准确文件字节。媒体/数据/依赖不入Git。
+- 包：固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9外盘视频库/趋势交易/20261009-trend-perspective/v09-opus-prep；入口BRIEF/CONTENT_OUTLINE/READY/START_OPUS。原稿原样，科创50日OHLC499行逐值核同。原leyan同SHA实测125.466秒，节拍候选/每秒能量/-9.63LUFS/+1.01dBTP，拍号/首强拍未听审；不是成片混音。三已有样例45帧逐秒联系表，批准状态分列，无实拍需求不填无关素材。
+- 实际tsc、60帧2秒中性渲染/解码、三字体工程实图通过；新外盘父目录独立复制依赖/资源后重建通过，字体PNG和中性MP4SHA一致；仅本机macOS arm64路径迁移，不声称全片或跨系统重建。FFprobe动态库首轮失败保留，按工具所在目录加载后二轮通过。
+- 源ZIP 25122093B，SHA 743acc2350893500ae587afd40943878fdcfe416665d1020654eb6179246e0f4；manifest SHA d7c5f2213bb263f1122d64e281f959c4cdb1be694eb21eee12ea564993a4777b。125交付文件/126ZIP成员逐件读回一致，源ZIP不含node_modules，实际project/已备依赖。归置自检退出0。
+- 整体partial：原稿纳指日内无对应真实资料（包内仅科创50日线），需补正确资料/权限或由用户确认换例；行情/音乐公开再传播权未知；配乐听审待Opus。其余章可先开工。
+- 已批v01/v02可沿用，v03全片被否定，v06/v07未获完整审美批准；v07金线实际为无标注收盘价连线，问题已定位。v08仅未渲染WIP，不宣称修订片已交。Opus按START_OPUS修该处、交原片另一段15秒给用户确认，再扩片；双均线仅简短引另期。
+- 存储12:31身份正常，外盘569565904896B、本机23284080640B。依赖逻辑282815414B一份，exFAT实际分配约5.13GiB一份，含重建约10.26GiB；无删除旧资料。机械就绪不代替用户审美认可。
+
+---
+
 # 最新状态：按opus-video-prep准备接手包
 
 - task-id trend-perspective-video-20261009；owner 01a12111-3544-7250-822d-056b7379704b / root唯一写者；active / opus_preproduction_package；scope_released false。
