@@ -297,3 +297,10 @@
 - 用户要求“所有流程收敛到制作视频Skill，统一一个入口方便调用”。本轮仅入口与内部调度，不生成新视频、不把v13待观感反馈改成认可。主入口code-explainer-video识别新制作/继续修改/参考学习/明确Opus备料/交付验收/已授权发布；保留原阶段与授权。
 - 准确范围：.agents/skills/code-explainer-video/SKILL.md、其新增agents/openai.yaml、.agents/skills/opus-video-prep/SKILL.md兼容路由；本人work-progress、docs/ops/media/cash-position-20261009/unified-video-entry-20261011.json与对应.patch。两旧Skill未跟踪历史仅准确补丁入成果，元数据新文件全文。基线成果769fd3983f33f153beb4535ac511287c73d3683c。
 - 验收：统一调用例句、各阶段可达、内部分派不要求用户再选Skill、无循环调用、原无旁白/外盘/确认/事实/发布边界保持；元数据/本地链接/精确补丁/归置。只新增小文本，不读写新媒体/改仓外配置/删旧Skill/模型或自动化。
+
+
+## 另一关键段15秒追加范围 2026-10-11T00:47:51.884137+08:00
+- active；scope_released=false；root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c唯一写者。checked_coordination_sha=994119267836eda5fd1c1ec45acc1f23e05f9cbd；checked_at=2026-10-11T00:47:51.884137+08:00；已读COORDINATION1.1、自身、original-eight00:47独立ETF数量规则范围，与视频无重叠。
+- 用户追加按当前动态方向做另一关键15秒，强调冲击感/卡点。主线为参与前写清涨跌应对；沿用已认可风格及真实历史K线，未来仅明确假设路径。仅样例，不扩全片或发布。
+- 原统一Skill范围保持；新增外盘v14-response-plan-sample-20261011独立工程/音乐/媒体/预览/证据，及本机docs/ops/media/cash-position-20261009/response-plan-sample-20261011.json、原本人进度。基线成果769fd3983f33f153beb4535ac511287c73d3683c；旧样例/共享工程不改。
+- 验收：15秒实片、真实历史与假设明确、动作有因果及阅读停留、音效共用落点、完整解码/实际播放/手机尺寸、外盘指纹。统一入口结构/引用/窄补丁/归置继续核；主观爽感交用户，不把技术通过当认可。固定盘00:44身份通过，预计新增<500MiB，内盘小文本<100KiB；不安装/删资料/改策略或自动化。
