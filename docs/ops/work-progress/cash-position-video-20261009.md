@@ -110,3 +110,5 @@ checked_coordination_sha=7522ea4c6e908c94d02c0e3e6b5819cede834e32；checked_at=2
 checked_coordination_sha=4cb6ce3cec032b292d81086fdeb0c6b47563abb3；checked_at=2026-10-10T15:13:03.246788+08:00；已读COORDINATION1.1、自身及最新dual-ma/trend-perspective增量、原nasdaq，独立稿件/标签/路径无重叠，root唯一写者。不操作他人稿件/Skill/系统/策略/删除/安装/付费/权限。
 
 当前partial：抖音仅本人验证阻塞，XHS审核等待；下一步用户完成验证后先核提交实际状态，再继续原发布及原笔记读回，避免重复。
+
+补充读回 2026-10-10T15:15:31.251651+08:00：小红书原编辑页延迟打开成功，note-id6ac9e4fa0000000001009684。未修改原稿，完整正文/三个话题token/AI声明、六个原生章节00:00、00:20、00:36、01:03、01:10、01:26和总结逐项核同，保存后读回通过，更新上一段待读回状态。公开原笔记返回300031“当前笔记暂时无法浏览”，继续标审核中。新增xiaohongshu-chapters-readback.jpg；退出编辑返回管理页。抖音本人验证仍未完成。
