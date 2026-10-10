@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "e18e77e61af0760d60c2b99060f2b00d92543f50",
-  "checked_at": "2026-10-11T00:15:46.963139+08:00",
+  "checked_coordination_sha": "346721ad59ecd5dcbedfdfb51262d1a1bc410c58",
+  "checked_at": "2026-10-11T00:20:21.463333+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -90,10 +90,10 @@
     "K-risk-attribution"
   ],
   "latest_result_commit": "4a213931f2a3837798d1a33037c3d5d1d433f393",
-  "scope_amendment": "same2017exactsource human reasonable additional discretion: old18 cumulative21 maximum, extra1 only listing reopen if oldref cannot recovered; original20proposal+parentcontract preserved, sameop2 and PDF6/64MiB unchanged. P1 and reviews unchanged.",
-  "updated_at": "2026-10-11T00:15:46.963139+08:00",
+  "scope_amendment": "Source actual20 and sixPDF acquired; no extra listing operation. P1 original4 artificial checks accepted only local branch, firstsyntax failure preserved. New one bounded counterexample scenario three weekly deposits from zero, unchanged implemented policy/source hashes, market0, source0, one additional controller verification batch under original continuation authority.",
+  "updated_at": "2026-10-11T00:20:21.463333+08:00",
   "conflict_decision": "Fresh coordination and all12relatedtasks read; no change since86449361, no competing writer to this task/new zero-sale path. Prior source agent scopes released, reassign exact resumed source subfiles to single Sol. Root sole shared/API writer; other active task records disjoint. Main dirty checkout preserved.",
-  "current_work": "记录用户明确+2源额度和新钱留现金决定，先定点完成5103002017原报告；并行实施所选P1零卖出分支有限人工测试。Astra复核完整账户最小输入及可冻结的共同保守执行假设；不联网、不运行市场。",
+  "current_work": "源独核及新增8文件恢复并回原报告；新P1从零起步人工三周账本反例必须实际执行并独核。完整市场比较先不启动，因为静态推导显示该分支可能永不建仓；不静默改首次买入规则。",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -178,3 +178,7 @@
 ## 2026-10-11T00:15:46.963139+08:00 定点来源恢复缺旧浏览引用，登记必要一次原列表读取差额
 
 来源执行者已核原18账本，尚未新增公共动作；旧账只留URL/link67没有web ref_id，可先零网络查已存记录。若不可恢复，取准确已观察年报的最短完整链条需列表重开1+准确附件1+原件GET1=3。依据用户“你觉得合适就加”，root仅增该必要定位开销1，累计21，不设无限源额度、不再搜索、不第三次重试经理源，不重置原失败；额度不是必须耗满。新带父SHA的增量合同 annual-source-resume-amendment-20261011.json，原20合同保留。
+
+## 2026-10-11T00:20:21.463333+08:00 已取最后原件，执行关键从零建仓反例
+
+用户给定的零整手留现金分支已隔离实现，四人工场景通过但未覆盖从零起步。Astra对原含现金分母/双向权重偏离条件发现：首周0持仓入250，两只均低配50个百分点，触发调整却无超额可卖；留现金则次周重复。主控登记一条必要人工反例三周250/500/750，固定代码SHA和策略含义，不改首周P0/分母/阈值，不跑历史收益。原核心/修复用量及第一次语法失败保留，合计人工场景仍<=8。本轮源已按原2定点成功累计20，不使用条件性额外1；2017指定字段独审中，原件恢复8份每套1,537,272B，root初读把restore输入stat误作原stat，已对接backup清单核三路径内容及两级stat全部相同，错误回执保留、未重复制。
