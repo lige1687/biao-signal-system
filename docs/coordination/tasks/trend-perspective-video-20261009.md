@@ -1,3 +1,14 @@
+# 正文普通文字补充已保存 2026-10-10T16:16:54.037946+08:00
+
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b唯一写者；topic_text_update_completed，抖音发布仍awaiting_user_sms；scope_released false仅原抖音稿接续。
+- checked_coordination_sha f7c3cfc4d3fde574f1a5f1df1029aa72524e4cf1；checked_at 2026-10-10T16:16:54.037946+08:00；已读自身/COORDINATION1.1、现金普通正文补充独立三原稿，双均线/纳指范围沿用，无冲突。
+- 人类纠正“我是说文案里边也带上不带#的文字，懂吗”：只加独立普通文本vibe知识大赏，不新增同名正式话题或假称绑定，原标签保持。XHS6ac9e40c000000001203d224保存重开确认p文本与两topic-ID；Bili BV1ehpv6EEUq修改提交成功后同ID重开确认正文末行与四原标签；D原1731524081取消过期SMS后补普通首行，暂存离开/继续编辑读回正确本期标题与两原mention，未公开，原稿保留handoff，不重传。
+- XHS修改后重新审核，不把历史公开状态当新改稿过审；Bili已保存元数据，未重新声称审核通过。Bili首轮fill串位在提交前发现，清空同简介后填写并核原正文与新增行一致，再提交；失败保留记录，无错文案提交。
+- 固定UUID16:12存储身份可用；外盘v10/plain-vibe-receipt.json及3站readback截图，本机仍两本人小记录。成果codex/trend-perspective-video-20261009@46c93622c27db661b85b8e754d8b25585d8db326已正常推送且SHA/准确文件字节读回，归置exit0。无视频/封面/别稿/Skill/规则/安装/删除/付费改动。
+- 本次文字补充验收完成；后续只在本人短信验证可用后继续原抖音发布，不启动监控/通知。
+
+---
+
 # 本期发布文案补话题开工 2026-10-10T16:12:58.290402+08:00
 
 - owner root / 01a12111-3544-7250-822d-056b7379704b，task-id trend-perspective-video-20261009唯一写者；active topic_metadata_update；checked_coordination_sha 5586aec5d9f94b181f99d586e3c951185b905159，已读自身、现金三站独立原稿和既有双均线/纳指范围，无冲突。
