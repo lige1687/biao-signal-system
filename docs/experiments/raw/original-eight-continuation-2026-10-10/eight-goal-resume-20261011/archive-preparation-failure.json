@@ -12,5 +12,11 @@
     "error": "list row identifier is name, first adhoc probe used path and raised KeyError after actual report fulltext/classification passed",
     "effects": "read-only; no API write or file rewrite",
     "resolution": "reuse prior verified list-name lookup in read_report_api.py"
+  },
+  "report_list_timeout": {
+    "error": "Actual fulltext and classification passed, list read socket timed out after 45 seconds",
+    "diagnosis": "List performs a full report scan with 60-second cache, existing backend PID1462 still running. No restart or production change.",
+    "recovery": "Adaptive read timeout 120 seconds with tools yielding promptly; await actual response, no repeated mutations",
+    "actual_recovery": "Fulltext/category/verdict/oneLiner and list pending=false actually passed after longer read allowance; existing library has 663 report markdown files/11,823,513 bytes. No backend restart or production code change."
   }
 }

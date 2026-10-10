@@ -13,7 +13,7 @@ actual_sha = hashlib.sha256(report["markdown"].encode()).hexdigest()
 assert actual_sha == entry["entry"]["report_sha256"]
 for field in ["category", "verdict", "oneLiner"]:
     assert report[field] == entry["entry"][field]
-with opener.open("http://127.0.0.1:8000/api/experiments", timeout=45) as response:
+with opener.open("http://127.0.0.1:8000/api/experiments", timeout=120) as response:
     listing = json.load(response)
 row = next(x for x in listing["items"] if x["name"] == entry["report"])
 assert row["pending"] is False
