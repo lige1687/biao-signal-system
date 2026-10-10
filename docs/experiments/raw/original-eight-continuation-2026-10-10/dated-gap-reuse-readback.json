@@ -1,0 +1,115 @@
+{
+  "schema": "dated_gap_reuse_readback.v1",
+  "scope": "Read-only reuse of the single already answered two-ETF nominal quote date difference, 2015-01-01..2026-06-30; no new source, experiment, market run or account result.",
+  "candidate_window": [
+    "2015-01-01",
+    "2026-06-30"
+  ],
+  "quote_inputs": {
+    "sh510300": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sh510300-nominal.csv",
+      "sha256": "bca4b942cbb9706bda4e54b6f14209929258b17895bdca342332cd0a731d5fdc",
+      "window_rows": 2790,
+      "first_quote_date": "2015-01-05",
+      "last_quote_date": "2026-06-30"
+    },
+    "sz159915": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sz159915-nominal.csv",
+      "sha256": "4495f6087ab14fdae7bcf0af545e3bd6ae6a9807f6ae97205e1f0c174f52c849",
+      "window_rows": 2789,
+      "first_quote_date": "2015-01-05",
+      "last_quote_date": "2026-06-30"
+    }
+  },
+  "source_lock": {
+    "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/source-lock.json",
+    "sha256": "db15f6ded63736c5cbb88bd7f2b174f4fb572013636a91e3bf4316e9966da24b",
+    "original_nominal_source_sha256": {
+      "sh510300": "5136735349a87a55c58ed916f4f657f0eb7435222ae0e6112c765e760c617dcd",
+      "sz159915": "e7deeb79a650af9648c3b45b8211829346a530b14e02365dd58c68ac7a9a72bd"
+    }
+  },
+  "date_set_difference": {
+    "sh510300_only": [
+      "2021-02-08"
+    ],
+    "sz159915_only": [],
+    "interpretation": "Only sz159915 lacks a nominal daily quote on 2021-02-08 relative to sh510300; 2021-02-09 is present but ordinary 09:30 fill is not eligible."
+  },
+  "reused_evidence": {
+    "official_resume_notice": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/other/159915-resume.pdf",
+      "sha256": "1db2b2798c4221ede7e7eb456469af2c5f8a6134bd1420722c9b9a3dfe5795dd",
+      "physical_page": 2,
+      "announcement_date": "2021-02-09",
+      "observed_statement": "sz159915 suspended from market open on 2021-02-08 and resumed at 10:30 on 2021-02-09; the PDF text is retrospective to the 2/8 suspension."
+    },
+    "coverage_audit": {
+      "path": "docs/experiments/raw/universe-scope-correction-2026-09-29/coverage-audit/audit.md",
+      "sha256": "042688ae5c36189e10f69d849c9bb8cfdb157c5e9c851481aaf16fa94da05b5c",
+      "section": "2. 两处缺价有真实停牌依据",
+      "finding": "159915 2021-02-08 missing in nominal and economic quote CSVs, product suspension rather than exchange-calendar mismatch; 2/5 and 2/9 surrounding quotes."
+    },
+    "price_data_checks": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/price-data-checks.json",
+      "sha256": "f63b3484d674ad4b3c4baf5cb631653059ab93b0f9ed3376efefce0c58227844",
+      "missing_vs_observed_union_sz159915": [
+        "2021-02-08"
+      ],
+      "formal_exchange_calendar_complete": false,
+      "formal_intraday_suspension_coverage_complete": false
+    },
+    "dated_restrictions": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/dated-restrictions.json",
+      "sha256": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7",
+      "sz159915_rows": [
+        {
+          "symbol": "sz159915",
+          "date": "2021-02-08",
+          "reason": "official suspension",
+          "open_buy_allowed": false,
+          "open_sell_allowed": false,
+          "close_mark_allowed": false,
+          "source": "sources/fourth/other/159915-resume.pdf",
+          "pdf_page": 2,
+          "known_notice_precision": "final confirmation dated 2021-02-09; actual suspension is directly observable on 2021-02-08"
+        },
+        {
+          "symbol": "sz159915",
+          "date": "2021-02-09",
+          "reason": "resumes at 10:30 Asia/Shanghai, no 09:30 fill",
+          "open_buy_allowed": false,
+          "open_sell_allowed": false,
+          "close_mark_allowed": true,
+          "source": "sources/fourth/other/159915-resume.pdf",
+          "pdf_page": 2
+        }
+      ]
+    },
+    "open_price_checks": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/open-price-checks.csv",
+      "sha256": "2ceb88811bd7141c9e867f3b5d422c6f90384c7f04c67ba842385ca5e29e1072",
+      "sz159915_2021_02_09_row": {
+        "symbol": "sz159915",
+        "session_date": "2021-02-09",
+        "prior_quote_date": "2021-02-05",
+        "reference_close": "3.084",
+        "reference_status": "ordinary_session_research_reference",
+        "open": "3.171",
+        "limit_down": "2.467",
+        "limit_up": "3.701",
+        "open_buy_permitted_by_price_and_exception": "False",
+        "open_sell_permitted_by_price_and_exception": "False",
+        "known_at": "current open observation; never current high low close"
+      }
+    }
+  },
+  "bounded_application": "On 2021-02-08 reject sz159915 open trading and permit prior-close valuation only with the documented suspension reason and price age under shared-account-spec. On 2021-02-09 retain observed daily close for valuation but do not infer a normal 09:30 fill from its daily open. Do not synthesize the missing 2/8 price.",
+  "unverified": [
+    "Full independent applicable exchange session calendar remains unproved.",
+    "Full historical intraday suspension and ordinary opening-tradability coverage remains unproved.",
+    "A daily quote on other dates does not itself establish executable opening liquidity or fills.",
+    "Historical actual source-arrival timing remains separate from retrospective notice and quote checks."
+  ],
+  "old_failure_preservation": "No existing failure, frozen quote, restriction, source lock or account artifact was modified."
+}

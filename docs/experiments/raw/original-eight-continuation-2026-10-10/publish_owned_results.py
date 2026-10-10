@@ -58,7 +58,14 @@ def main():
                      "independent-reuse-review.json"]:
             paths.add("docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/" + name)
     content = {p: (ROOT / p).read_bytes() for p in sorted(paths)}
-    assert all(len(b) < 1024**2 and b"\x00" not in b for b in content.values())
+    public_review_figure = "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/independent-510300-2016-p38-table.png"
+    for path, data in content.items():
+        if path == public_review_figure:
+            assert len(data) == 67294
+            assert digest(data) == "fd6da19213e5f4c9ba2b9cf36d40f1a95a2f5a3aff43b323a222ff836edf989f"
+            assert data.startswith(b"\x89PNG\r\n\x1a\n")
+        else:
+            assert len(data) < 1024**2 and b"\x00" not in data
     registry_path = "docs/experiments/registry.json"
     registry = git("show", base + ":" + registry_path, text=True)
     original = json.loads(registry)

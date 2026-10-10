@@ -1,0 +1,169 @@
+{
+  "schema": "calendar_opening_readiness.v1",
+  "scope": {
+    "symbols": [
+      "sh510300",
+      "sz159915"
+    ],
+    "candidate_window": [
+      "2015-01-01",
+      "2026-06-30"
+    ],
+    "purpose": "Fixed two-ETF shared-cash P0/P1 comparison; input qualification only, no orders, returns, account or market run.",
+    "network_requests": 0,
+    "market_or_account_runs": 0
+  },
+  "spec": {
+    "path": "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md",
+    "sha256": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+    "bytes": 11129
+  },
+  "existing_inputs": {
+    "calendar_szse": {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+      "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+      "bytes": 296252
+    },
+    "calendar_coverage_report": {
+      "path": "docs/experiments/research-calendar-completion-2026-09-10.md",
+      "sha256": "6f5fd1df74084dd56fac16d359c6a1daadeb79739db6a33f8c05855af54f1753",
+      "bytes": 15788
+    },
+    "calendar_raw_rebuild_check": {
+      "path": "docs/experiments/raw/factor-six-etf-input-assembly-2026-09-23/calendar-check.json",
+      "sha256": "fdbfd657033d038be71a3ac3f6a8b33f3d1783b6857919d3ef7c71b7cbbb7fed",
+      "bytes": 34127
+    },
+    "sse_2026_h1_comparison": {
+      "path": "docs/experiments/raw/sse-calendar-2026-h1-equivalence-2026-10-08/result.json",
+      "sha256": "a9f1d80f45f2b0928780a33c4ff8b3fab32d5f17f4175fd0b2d8a303e7e0a2bd",
+      "bytes": 953
+    },
+    "sse_2026_h1_notice": {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/sse_2026_annual_notice.html",
+      "sha256": "4e260b815ce1309175ed994e6490a4ccd51b998a5f92bcdc41cec00fc6823dc7",
+      "bytes": 29251
+    },
+    "price_data_checks": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/price-data-checks.json",
+      "sha256": "f63b3484d674ad4b3c4baf5cb631653059ab93b0f9ed3376efefce0c58227844",
+      "bytes": 4726
+    },
+    "observed_sessions": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/observed-sessions.csv",
+      "sha256": "efb55461c737e226df166636e1a5532880b5fb2a1cd4c950e09fb694b059814f",
+      "bytes": 948977
+    },
+    "open_price_checks": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/open-price-checks.csv",
+      "sha256": "2ceb88811bd7141c9e867f3b5d422c6f90384c7f04c67ba842385ca5e29e1072",
+      "bytes": 1749323
+    },
+    "dated_restrictions": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/dated-restrictions.json",
+      "sha256": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7",
+      "bytes": 1466
+    },
+    "price_limit_regimes": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/price-limit-regimes.json",
+      "sha256": "e674d7748f2c26f604432d5e529f4849f9ca799319ce8b738d619c64c8924617",
+      "bytes": 1573
+    },
+    "sz159915_resume_notice": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/other/159915-resume.pdf",
+      "sha256": "1db2b2798c4221ede7e7eb456469af2c5f8a6134bd1420722c9b9a3dfe5795dd",
+      "bytes": 3162832
+    }
+  },
+  "direct_existing_evidence_check": {
+    "official_szse_calendar_interval": [
+      "2019-09-01",
+      "2026-06-30"
+    ],
+    "official_szse_natural_days": 2495,
+    "official_szse_scheduled_trading_days": 1652,
+    "price_date_comparison": {
+      "sh510300": {
+        "source": {
+          "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sh510300-nominal.csv",
+          "sha256": "bca4b942cbb9706bda4e54b6f14209929258b17895bdca342332cd0a731d5fdc",
+          "bytes": 441513
+        },
+        "full_candidate_quote_days": 2790,
+        "official_calendar_overlap_quote_days": 1652,
+        "official_trading_dates_without_quote": [],
+        "quotes_on_official_nontrading_dates": []
+      },
+      "sz159915": {
+        "source": {
+          "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sz159915-nominal.csv",
+          "sha256": "4495f6087ab14fdae7bcf0af545e3bd6ae6a9807f6ae97205e1f0c174f52c849",
+          "bytes": 441410
+        },
+        "full_candidate_quote_days": 2789,
+        "official_calendar_overlap_quote_days": 1651,
+        "official_trading_dates_without_quote": [
+          "2021-02-08"
+        ],
+        "quotes_on_official_nontrading_dates": []
+      }
+    },
+    "calendar_vs_quote_interpretation": "510300 has all 1652 scheduled dates; 159915 lacks only 2021-02-08, documented product suspension. No quote appears on a saved official nontrading date. This proves retrospective date coverage for the overlap, not all historical SSE dates or security-level opening permission.",
+    "sse_2026_h1_limited_equivalence": "Saved SSE annual planned closure notice agrees with SZSE flags for 181 natural dates / 116 scheduled trading dates in 2026H1; no pre-2026 SSE completion or systematic exceptional-closure scan.",
+    "opening_static_checks": {
+      "sh510300": {
+        "rows": 2790,
+        "buy_rejected_by_saved_price_and_static_exception_check": [
+          "2024-10-08"
+        ],
+        "sell_rejected_by_saved_price_and_static_exception_check": []
+      },
+      "sz159915": {
+        "rows": 2789,
+        "buy_rejected_by_saved_price_and_static_exception_check": [
+          "2021-02-09",
+          "2024-10-08"
+        ],
+        "sell_rejected_by_saved_price_and_static_exception_check": [
+          "2015-07-08",
+          "2021-02-09"
+        ]
+      }
+    },
+    "exception_detail": [
+      "2021-02-08: 159915 official suspension from market open; no quote or normal open, saved dated restriction disallows buy/sell/close mark.",
+      "2021-02-09: 159915 resumed at 10:30; a daily quote exists but saved restriction and open-price check reject ordinary 09:30 buy/sell, close mark allowed.",
+      "2024-10-08: both products have observed opens exactly at saved ordinary upper price limit; saved check rejects buy for both and permits sell; this is a conservative research price-boundary result, not an order-book fill assertion."
+    ],
+    "old_checks_remain": {
+      "formal_exchange_calendar_complete": false,
+      "formal_intraday_suspension_coverage_complete": false
+    }
+  },
+  "minimal_unproven_requirements": [
+    {
+      "id": "calendar_2015_01_to_2019_08",
+      "missing": "56 calendar months before the saved official SZSE interval, 2015-01-01..2019-08-31. Observed ETF quote union is not an exchange calendar and cannot reveal a scheduled session missing for both.",
+      "minimum_source": "Actual SZSE official month/day trading flags or an equivalently exact official historical schedule covering this interval, with original bytes and provenance.",
+      "action": "Bind exact full natural-day range, compare both ETF quote sets, classify every scheduled-without-quote date via existing or exact official product restriction, and reject any quote on closed days."
+    },
+    {
+      "id": "sse_independent_pre_2026",
+      "missing": "SSE applicability for sh510300 throughout 2015-01-01..2025-12-31 is not independently established; saved SSE annual notice only gives limited 2026H1 planned schedule agreement with SZSE.",
+      "minimum_source": "Accurate SSE official historical annual/calendar records for candidate years and any relevant exceptional session changes, bound by year and original identity; do not infer universal equivalence from 2026H1.",
+      "action": "Compare SSE scheduled dates to the corresponding SZSE dates and sh510300 quote/restriction rows, preserving differences and availability times."
+    },
+    {
+      "id": "security_opening_status",
+      "missing": "For all potential planned 09:30 openings, no complete product-specific suspension/resumption and special opening-reference/status history is bound; a daily OHLC open and ordinary static price limit do not establish executable orders, available liquidity or actual fill.",
+      "minimum_source": "Exchange or issuer official dated security-specific suspension/resumption and special trading-reference evidence for exact ETF/date, or a verified historical security-status feed with provenance; a future account execution contract must also state fill/limit-order approximation.",
+      "action": "First reuse known 159915 2021-02-08/09 and 2024-10-08 exclusions; then bind the exact planned-open eligibility method and reject unknown/blocked days rather than assume tradability. This is input qualification, not permission to run account."
+    }
+  ],
+  "decision_and_authorization": {
+    "local_reuse_now_completed": "Independent read-only 2019-09..2026H1 date-set comparison and saved opening exception inventory completed here; no source request or account run needed.",
+    "independent_necessary_work_without_two_pending_user_choices": "Yes: the official early-calendar and historical opening-status input questions are independent of the two pending user choices. They require a separately frozen bounded source contract before network acquisition; this assignment explicitly permits 0 network, so no new source was requested. Existing 18/18 six-report source budget remains exhausted and is not reset or borrowed.",
+    "market_ready": false,
+    "old_failures_and_frozen_evidence": "Preserved without edits."
+  }
+}
