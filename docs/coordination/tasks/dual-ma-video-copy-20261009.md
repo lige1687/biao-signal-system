@@ -471,3 +471,5 @@
 - 只点击一次立即投稿，网站成功回执；稿件管理时间2026-10-10 15:07:17，BVID BV1ehpv6EEgz，转码完成、审核中，已通过0。公开播放未验，不称已公开发布。原URL https://www.bilibili.com/video/BV1ehpv6EEgz/ 。
 - 外盘发布记录包含提交成功/审核进度/稿件管理截图、实际DOM读回、双封面与章节核对；投稿状态.json保留原失败状态，SHA256.json全部读回通过。归置自检exit0。其他抖音横竖/XHS不动；不删除/付费/安装/改Skill或规则。
 - 剩余验收：平台审核通过后公开页横版播放、元数据与章节核验；外部审核等待，无自行启动监控或通知。
+
+- 协调增量补充核对：本次fetch由b5fcd307推进至eabd8f52，前节“无新增量”表述更正。已逐行读cash-position与trend-perspective的新三平台发布范围：各用独立成片/记录/浏览器标签，不操作本稿；本Bili页1731524038及BV1ehpv6EEgz独占，无冲突。checked_coordination_sha: c68c161783d2d4ccae611c88a399bb200447570e；checked_at: 2026-10-10T15:08:52.549389+08:00。
