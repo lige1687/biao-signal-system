@@ -1,3 +1,13 @@
+# 本机恢复通过；原恢复与磁盘条目的准确同步窗口
+
+- task-id frozen-input-recovery-20261010；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；checked_coordination_sha 7522ea4c6e908c94d02c0e3e6b5819cede834e32；checked_at 2026-10-10T14:50:14.209428+08:00。已重读自身/原中控/mac/daily范围，新增cash-position-video的motion-skill范围为独立影片/Skill/外盘目录，互不重叠。先前固定SHA保护在写前停止，核实际新记录后使用新基线，未覆盖/重复写。
+- 本机25来源重建、第二次完整读回和Sol独核25/25通过；原25主路径完好不覆盖。准确小成果a65d1e96ec3c974c9c1f458a0083f1a8c1750f8e已推/内容读回，恢复清单SHA2e67940c2d01b91442be0ef7d7dae945ed8db41d1e398abdc114fab369521fa2。
+- root唯一串行API写者：okr-57eb3f28e526仅追加本机实际恢复证据/链接及next_action不再把另一电脑作为当前工作的前提；四标准原文、异机false、整体in_progress/原owner/授权保持。okr-1a9c771b2a06是原磁盘条目，只追加本轮实测容量/大目录/近期空间变化/外盘恢复note，owner/paused/授权/旧完成标准及保护包待审任务不动，不另建同题目标。
+- 磁盘盘点及大数据外盘执行完成；约124KB新增小记录。最近内盘约15.21GiB，当前小记录任务可完成；约0.88GB下降原因未知。旧大工作树有独有内容/恢复依赖，1.88GiB干净coordination树仍未核退役，仅记录精确候选，不移除。不碰活动库/环境/会话/大Git包，不改配置/自动化/研究预算。
+- 本轮尾项：发布两原条目实际API回执及最终准确分支/协调记录。当前本机恢复已完成；异机只如实未测试，不要求用户当前换电脑，不重复申请已有授权。
+
+---
+
 # 用户要求直接在本机恢复，并核本机磁盘管理
 
 - task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；updated_at 2026-10-10T14:38:17.611880+08:00；checked_coordination_sha 06920552ceef4b7629cb43b445b898f33bc5b323；checked_at 2026-10-10T14:38:17.611880+08:00；已读原规则/相关任务：[{"id": "frozen-input-recovery-20261010", "sha256": "740f153b22391921d70c1328c57fd58d26f4573220d6bb67e10f9b1ce79d8038"}, {"id": "research-dispatch-controller", "sha256": "4bf6fccba42fbd996aeb8e63031819b8fa56fe0afed20c9d9cb1851cce5e6b3c"}, {"id": "mac-local-storage-cleanup", "sha256": "28d19a10912c52208ad94cfd252cec425693fb32a2ee59ab445b3e2b590701d6"}, {"id": "daily-trading-system-audit", "sha256": "ed4ac107a9019e39fd5ade71a09feffb88e8ea67a8b42981763fbd38154d14e1"}]。mac存储与daily已结案，其旧实际资料/配置不改；root唯一恢复与小记录写者，Sol只读盘点。
