@@ -1,0 +1,37 @@
+--- a/.agents/skills/code-explainer-video/SKILL.md
++++ b/.agents/skills/code-explainer-video/SKILL.md
+@@ -3 +3 @@
+-description: 从参考教程拆解视觉语言、分镜和声音，制作可复现的代码科普视频；适用于知识讲解、历史发展与概念动画，以及需要具体prompt和制作流程的请求。
++description: 科普视频制作的统一入口；用户说做视频、继续改片、学习动态风格、卡点、准备Opus交接或验收发布时，按已确认阶段组织文稿、素材、分镜、粗剪、实际样片、成片与交付。
+@@ -6 +6 @@
+-# 代码科普视频
++# 视频制作（统一入口）
+@@ -8,0 +9,20 @@
++
++## 只调用这一个Skill
++
++用户只需说“用我们的制作视频Skill做……”，或调用 `$code-explainer-video`。本入口负责识别阶段、读取必要参考和按需使用专门工具；不要再让用户分别点文稿、动态、音乐、Opus准备或验收Skill。统一的是调用入口和当前制作状态，不是把所有长教程一起加载，也不是自动扩大制作/发布权限。
++
++先从当前请求及既有制作索引读取：本期核心观点、已认可版本、当前阶段、待修问题、已有素材/工程、声音选择和本次交付物。能查到的自行查，已有确认直接继承；“继续”接最近未完成项，不从选题重启。明确要求只改Skill、只研究教程或只交15秒时，完成该范围。
++
++| 当前请求 | 本入口内部读取和执行 | 本轮应交付 |
++|---|---|---|
++| 从主题开始，或重审内容 | [前置流程](references/preproduction-workflow.md) → [核心观点与增量](references/story-argument.md)；自然文稿按需用humanizer-zh，用户不用再调用 | 内容主线、可用素材、当前阶段实际产物 |
++| 分镜、构图、运镜与冲击感 | [动态导演](references/motion-direction.md)、[规则在画面发生](references/decision-motion.md)、[镜头实例](references/animatic-and-shot-library.md) | 对应已定文稿的真实场景；按批准阶段交图或样片 |
++| 配乐、音效、卡点、节奏 | [紧凑节奏](references/tight-pacing.md)、[音画落点](references/music-motion-sync.md)、[指定音乐](references/music-candidates.md) | 同源时间表驱动的真实合声片段；主观效果单列 |
++| 修改已有片段或扩片 | [连续镜头与复用](references/continuity-and-efficiency.md)、[粗剪与连续审片](references/animatic-and-shot-library.md) | 从已认可工程增量制作；全片获准后先粗剪再精修 |
++| 学教程或参考Opus风格 | [Prompt索引](references/prompt-methods.md)、[方法实测](references/motion-transfer-field-test.md)；只查当前缺口的原文/源码 | 来源与采用边界、有证据的Skill增量；要求实测时才产样片 |
++| 明确交给Opus准备或收尾 | 内部读[Opus备料模块](../opus-video-prep/SKILL.md)，只执行其中本次准备/收尾模式 | 可定位交接包或技术验收；不因参考风格自动移交创作 |
++| 导出、归档或已授权平台发布 | [存储与交付](references/storage-and-packaging.md)、本页“可读与声音核验”“发布时默认添加可跳转章节” | 实际MP4、来源/章节/指纹和逐平台真实回执；未授权不发布 |
++
++通用执行始终遵守下文用户约定：无旁白、无自有品牌、指定音乐、真实素材/数据、已核外盘、内容→素材→真实风格图→15秒→完整片。工具或内部模块缺失时先用现有可行路径，确实阻塞才说明；不要求用户换入口。调用专门模块只继承相关模式，不让模块反向重启本入口或加载全部无关参考。具体执行方式与验收仍由当前阶段决定。
++
++可直接说：**“用 $code-explainer-video 做这期视频，沿用已确认内容和风格，先给关键段15秒；重点看动态、冲击感和音画卡点。”**
+--- a/.agents/skills/opus-video-prep/SKILL.md
++++ b/.agents/skills/opus-video-prep/SKILL.md
+@@ -3 +3 @@
+-description: 用户明确让Codex备料给Opus5.5时，整理内容大纲、已算事实、音乐、候选素材和可渲染工程，并做成片技术验收；只参考Opus动态风格且由本地设计制作时使用code-explainer-video。
++description: 视频统一入口code-explainer-video的Opus备料与技术收尾模块，兼容旧的opus-video-prep调用；只在用户明确交给Opus制作或验收其成片时采用。
+@@ -6,0 +7,2 @@
++
++统一用户入口是[视频制作](../code-explainer-video/SKILL.md)。用户无需另点本Skill；旧调用仍兼容。由主入口进入时直接执行下面的准备/收尾模式，不反向加载主入口形成循环。用户只要求参考动态风格或本地制作时，由统一入口继续本地制作。

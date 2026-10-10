@@ -1,0 +1,28 @@
+{
+  "entry": "code-explainer-video",
+  "display_name": "视频制作（统一入口）",
+  "entry_scope": "new production/continue/references/Opus prep/QA/authorized publishing",
+  "sources": [
+    {
+      "path": ".agents/skills/code-explainer-video/SKILL.md",
+      "before_sha256": "66f18d5f7fb844e4978e97382e06ee38419b540ab60fccf1fd5b1592ff50ba10",
+      "after_sha256": "621428bda59c0882f2f09a3d37bf26b70f2a6fbb192b45c5f76682ef5d9c05d2"
+    },
+    {
+      "path": ".agents/skills/opus-video-prep/SKILL.md",
+      "before_sha256": "6b76e2e8706f2a97acaf5407c236b98a479cce90a4878cdbada7ad1228cf5e0d",
+      "after_sha256": "29c685c93d20dd72ee0d7f0c7702f21a97586f0071513e5e1f5e95f489169b38"
+    }
+  ],
+  "new_ui_metadata": ".agents/skills/code-explainer-video/agents/openai.yaml",
+  "existing_approvals_preserved": true,
+  "old_opus_entry": "compatibility module, no recursive root invocation",
+  "permission_boundary": "single entry is not automatic publication or full-film approval",
+  "validation": {
+    "skill_structure": "passed both",
+    "local_markdown_links": "passed",
+    "reverse_patch": "passed",
+    "routing_review": "7 request routes checked; shared state preserved; Opus no recursive root reentry",
+    "runtime_limits": "instruction routing checked; not automated full-film or publishing test"
+  }
+}
