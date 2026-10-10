@@ -281,3 +281,12 @@
 - active；scope_released=false；root唯一写者。checked_coordination_sha=8c5583314404388fcbffb8b82894e2610279ed1c；checked_at=2026-10-11T00:18:36.795525+08:00；本轮已读自身/COORDINATION/原其他视频独立范围及original-eight最新来源工作，新增共享范围不重叠。用户明确追加核Greg/Remotion官方PR/Sabrina教程，更新Skill结构并出新版。
 - 增加.agents/skills/code-explainer-video/references/preproduction-workflow.md一处路由/粗剪阶段、music-motion-sync.md补本次失败边界、新references/animatic-and-shot-library.md；共享已有文本只精确补丁入成果，新增全文本人所有。小索引/进度沿原范围，新增beat-contrast-skill-20261011.patch。不改其他Skill/实例全库；本片新旧认可状态分开。
 - 验收：逐源真实阅读范围/采用与不采用；整片粗剪方法、实例条目的输入/阅读停留/镜头参数/认可状态、连续手机审片；本次实际15秒动作与原创节奏音效示范。原完整片未获此次重做授权，不以新15秒替代整片节奏验收；不新增审批关卡或安装外部源码。
+
+
+## 三教程与卡点感修正交付 2026-10-11T00:28:23.074508+08:00
+- status=completed（本轮流程维护和15秒制作）；scope_released=true；root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c唯一写者。checked_coordination_sha=7ec6daad1bf768612527e217bf1c7ee879ea7d51；checked_at=2026-10-11T00:28:23.074508+08:00；已读自身、COORDINATION1.1及original-eight00:20独立来源/P1人工反例增量，无路径重叠；交付fetch无新变化。
+- 用户否定v12“卡点我没看到啊？”，所以旧技术检查不构成主观通过。追加三教程已读Greg相关文稿、Remotion固定提交两源码相关镜头/光标时段、Sabrina分场/时间戳/复用/字体；X与YouTube打开失败，未完整看视频/执行外部代码。
+- 成果codex/cash-position-video-20261009@769fd3983f33f153beb4535ac511287c73d3683c四准确文件远端逐字读回：新references/animatic-and-shot-library.md、两旧参考的beat-contrast-skill-20261011.patch、小JSON索引和本人进度。新增整片授权后精修前粗剪、按关系保存认可/失败/候选镜头、镜头时间独立、手机连续审片；不加审批/恢复旁白/照抄固定动画。旧共享未跟踪历史仅窄补丁，不冒称整套Skill全量同步。
+- 新外盘v13-beat-contrast-20261011最终out/风险与投入-15秒-节奏对照新版-v3.mp4，3096506B，SHA558810bccafba50d4ca0eeae8cb23c8228306e51a05e77d63dd514b857df5b1b。15s450帧1080p30H264/AAC48kHz双声道；三次7帧加速缩仓至50/40/30%，帧272/288/304落音效重音，数值0.78/0.63/0.47%正确，聚焦—停留—回总览独立。原BGM42—57秒，局部让位，均值-17.9dBFS峰值-8.4dBFS，编码后主事件相对混音偏移0ms；未独立听审、不冒称原音乐强拍已确认或用户爽感通过。
+- 实际渲染手机预检后加大标签，再修量尺字距，前版/失败留痕。完整解码/规格/实际关键帧/真实输入SHA/Decimal、Skill元数据引用/精确补丁反向/归置通过；v2手机390宽完整15s，v3仅量尺横位置调整、最终大画面完整15s。预览53030提供新/旧v12和手机尺寸；切换短暂AX不可播提示后实际error=null ready4/正确源/seek通过，最终新版已保留。
+- 普通工程与资料全固定已核外盘，00:16身份/容量通过。无整片粗剪/新全片/发布/安装/删除/策略/他人文件/自动化恢复。用户认可前不晋级声音实例，不扩全片；本轮只交15秒真实改进样例及流程增量。
