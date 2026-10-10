@@ -123,3 +123,16 @@ checked_coordination_sha=4cb6ce3cec032b292d81086fdeb0c6b47563abb3；checked_at=2
 用户明确主要学习Opus动态风格，不硬套100现金/100方块；载体、分镜、运镜由本地设计收敛。已定向更新code-explainer-video入口、motion-direction、style-compound-motion以及opus-video-prep入口/BRIEF，共5文件。将注意交接、动作起落/轻重、节奏/空间层次、运镜动机和视听关系作为可迁移方法；具体物件按内容选，实际小样验效果。参考来源与制作分工分开，明确委托Opus时仍保留其纯备料流程；本地导演任务不套用该限制。
 
 验证：两Skill结构、本地引用、精确零上下文补丁反向校验、归置检查通过。无新片/重新渲染，本轮不宣称动态质量已经达到参考。五文件原有未跟踪共享历史未整包入库，本次补丁和前后SHA位于`docs/ops/media/cash-position-20261009/style-transfer-skill-20261010.patch`与`docs/ops/media/cash-position-20261009/style-transfer-skill-20261010.json`。ai_tools副本未改。旧媒体/已交包保留。现金片抖音发布仍未确认，本次维护不冒称发布完成。协调入口仍为coordination/lei:docs/coordination/tasks/cash-position-video-20261009.md。
+
+
+## 公开动效方法增量与15秒实测交付 2026-10-10T18:50:36.718557+08:00
+
+用户授权公开搜索Opus5.5/Astra6制作风格与Skill、沉淀后本地真实渲染15秒。采用code-explainer-video与research-closure的来源/边界记录，沿用视频素材工作流，不触发收益实验或替换原交易规范。原作者Barty-Bart、JakeB-5、klsoen共6份公开文件已实际读取并保存SHA；找到了有Codex例子的通用Skill，没有找到可验证的Astra6专门模仿教程。未安装/执行外部源码，未调用或比较模型，未复刻100方块。
+
+本地Skill主入口加单路由，新references/motion-transfer-field-test.md记录来源/已有重复/采用与不采用及实际缺陷。增量为锚点与标签分时、形状边缘轻重、真实数值无过冲、转场中途及实际播放检查。结果以用户观感为准，不以自评8分宣布接近Opus。
+
+工程与媒体：固定外盘视频库/投资心态/20261009-cash-position/v10-motion-style-trial-20261010。最终out/先量风险再定投入-15秒-v3.mp4，1967789B，SHA86039eea2ba9ed2b7ecdaa52cf72256a5a7e080032f314639150944c4b1f5834，15.00秒/450帧/1920×1080/30fps/H264/AAC。复用既核SPY日K、599.3699951171875历史收盘，590止损为教学假设，价差1.563307338292%，投入60%→30%，损失估算0.94%→0.47%，非保证最大亏损。输入同SHA，音乐原leyan42—57秒同SHA。
+
+已验：共享450帧时间表、Decimal算术、实际最终视频完整解码、11个关键/中途/终态与390宽联系表，Skill结构/本地链接/精确零上下文补丁反向校验/归置。音频均值-17.6dBFS/峰值-8.5dBFS；未独立听审。主数字可读，23px来源说明需更大播放。前两轮标签碰撞保留并修复；默认本地HTTP服务能播但seekable[0,0]，新增自己目录内Range服务后[0,15]，实际三个按钮1.8/4.6/8.3秒跳转及最终v3从头播放到15.0秒通过。预览http://127.0.0.1:53028/preview/index.html已打开保留。无新增全片/发布，不把单一关系样例当全片通过。
+
+checked_coordination_sha=f194021a6ef10b81f6b2c2dca0c3991d17f7c691；已读COORDINATION1.1、本任务、trend-trading、中控、新original-eight及此前相关独立视频范围，开工登记f194021a6ef10b81f6b2c2dca0c3991d17f7c691后fetch未见他人增量；root唯一写者无重叠。18:46固定UUID核验通过，外盘568931123200B可用，全部普通工程/快照/缓存/日志外盘，小回执本机。只提交自身新参考、主Skill准确补丁、小JSON和本进度；共享Skill未跟踪历史不整包入库。完整原片抖音发布仍未确认，与本轮效果实验分开。
