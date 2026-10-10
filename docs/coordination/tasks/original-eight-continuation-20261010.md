@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "3ea8163956d28b4d80d8f27b9646d1b7da738f5c",
-  "checked_at": "2026-10-11T00:47:12.778108+08:00",
+  "checked_coordination_sha": "0032e8d4dd9c0700b4e0a4eb51381b0d0f4f91ef",
+  "checked_at": "2026-10-11T00:53:28.740808+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -57,7 +57,9 @@
     "docs/experiments/szse-jan2017-missing-date-source-2026-10-10.md",
     "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/",
     "docs/experiments/weekly-portfolio-zero-sale-cash-2026-10-11.md",
-    "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/startup-approved-20261011/"
+    "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/startup-approved-20261011/",
+    "docs/experiments/raw/weekly-two-etf-complete-account-2026-10-11/",
+    "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -82,7 +84,8 @@
     "szse-remaining-calendar-201601-201908-20261010",
     "reused-and-remaining-calendar-recovery-20261010",
     "szse-jan2017-missing-date-source-20261010",
-    "weekly-portfolio-zero-sale-cash-20261011"
+    "weekly-portfolio-zero-sale-cash-20261011",
+    "weekly-two-etf-complete-account-20261011"
   ],
   "shared_write_owner": "root only own D/cross-week/ETF-H1/full-action report registrations and dated catalog note; March original reused",
   "goal_ids": [
@@ -91,13 +94,13 @@
     "K-risk-attribution"
   ],
   "latest_result_commit": "ca035465e49b06f13e8d4bca587baad0e5f8ac7a",
-  "scope_amendment": "User confirmed startup/no required sell uses original P0 buy policy. Quantity arbitrary-selling inquiry checked officialSSE/SZSE2014 notices: whole100 holdings sell100multiples, allodd remainder may be sold once, not split. New isolated3 artificial scenarios under controller one meaningful user-driven implementation amendment; cumulative old5+new3<=8, old core/repair/counterexample preserved, no market run yet. Astra read-only full-account precise contract readiness, no variant/source/method scope silently widened.",
-  "updated_at": "2026-10-11T00:47:12.778108+08:00",
-  "conflict_decision": "Fresh 3ea8163956d28b4d80d8f27b9646d1b7da738f5c COORDINATION and own12related tasks checked before scope reacquisition; only own startup-approved new subdir to Sol, root sole report/shared/API writer, Astra read-only new contract review. Other tasks including cash-video disjoint, preserve main dirty HEAD/index and old source/implementation freezes.",
-  "current_work": "无超配需卖时按原买入的新分支正在准备准确合同；独立官方数量规则核，场内ETF不能任意零碎拆卖，尾数一次性规则如实记录。旧起步反例保留，新人工验证后继续独立完整账户用途合同审阅。",
+  "scope_amendment": "User-approved no-required-sale P0 branch new3 artificial cases accepted, cumulative8 old/new. New independent weekly shared250/zero initial/50:50 P0vsP1 wholewindow2015-01..2026-06 limited dailyprice account simulation. One pairedcore2paths plus one conditional diagnosed mechanical pairedrepair (actualpathattemptsmax4); artificial lifecycle max10cases, one batch plusone repair. No newqueries, parameter variants, production, or sealed budgets borrowed. Freeze exact method/input before core.",
+  "updated_at": "2026-10-11T00:53:28.740808+08:00",
+  "conflict_decision": "Fresh 0032e8d4dd9c0700b4e0a4eb51381b0d0f4f91ef rules/current12tasks read; own new full-account raw soleSol, root shared/report/API/Git solewriter, Astra only own independent-review aftercontract. Cash-video unrelated, preserve dirtyHEAD/index and all oldfiles.",
+  "current_work": "用户给定的新起步分支实际买入并Fraction独核；正在冻结新的完整日线近似合同，实现与人工验收先于市场核心。",
   "paused_questions": [
-    "完整严格历史输入仍有边界，新用途合格日线近似需准确独立合同，不自动整库取源或跨到场外基金。",
-    "独立另一盘/异机恢复未证，本机既验恢复直接复用。"
+    "旧严格历史日历/实际开盘/当时到达/真实到账资格仍未证，本新有限日线研究不得将strictfalse改ready。",
+    "独立另一盘/异机恢复未证，不阻止已验本机工作。"
   ]
 }
 <!-- lei-coordination-json:end -->
@@ -198,3 +201,8 @@
 ## 2026-10-11T00:47:12.778108+08:00 用户确认无须卖出时买入，核场内ETF合法卖份后继续
 
 用户原话“第一个问题是的，第二个问题，100份感觉也不用吧，就能卖多少卖多少？基金这一块”。第一项确认已消除无须卖出时买入定义阻塞，记录后独立新子目录实现，不覆盖dc7ab旧宽义留现金版本与旧三周反例。第二项是数量规则询问，root查官方SSE2014上证函301原页与SZSE2014深证会72搜索原文；500整百不能拆20，99尾数可一次卖全，非任意份额拆卖。原研究510300/159915是场内ETF；不给它静默换成场外赎回。默认遵合法规则，保留原P1目标缺口向下整百，量为0留现金；零碎例外确实可合法卖但不能为卖尾数过量改变目标。无新市场账户/交易/权威文档变化。本轮待准备3个人工场景：首周至3周正常买入、双低配无须卖、确有超配但合法卖量0仍留现金；历史5场景/语法失败/额外反例完整留痕。
+
+## 2026-10-11T00:53:28.740808+08:00 起步分支已核，登记独立完整两ETF共享账户有限日线比较
+
+用户确认无须卖时按原买入；3新人工实际通过并根独算，三周各100→200→300，现金39.80/79.60/119.40，费用30.60。双低配买入，真超额应减13.75但合法整百0留250。旧5不重跑合8，预检bool0/1失败留后修。场内数量依法，用户渠道可选未答已明确沿原ETF继续。
+Astra只读定位真实工程缺口：旧v2只验买单、拒跨行动、未自动周调度。因此新整链必须有限实现，不能拼旧绿色结果称完整。按既有持续研究授权登记独立问题，绑定2015-01..2026-06、两标的、每周共享250、各半偏离5个百分点，不调参追正、不缩窗。显式模型日期并集时钟、保守现金时间、单周订单到期、除息应收与真实名义开盘的研究近似，来源就地复用。人工整链及独审先过才能一对核心；旧月度4/4、固定2/2/A03/source20全部保持。
