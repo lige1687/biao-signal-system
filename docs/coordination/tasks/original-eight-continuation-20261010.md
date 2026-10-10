@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "34a50519ef64e1ed7b6ef7b6ce0c66bb880cf87a",
-  "checked_at": "2026-10-11T01:04:22.625099+08:00",
+  "checked_coordination_sha": "f81633f648f543017a401aa409d1486e3662cf45",
+  "checked_at": "2026-10-11T01:08:21.931187+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -71,7 +71,8 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/result/recovery-v1/",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-jan2017-missing-date-source-20261010/szse-jan2017-missing-date-source-20261010-20261010T191337-32051338898d",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-zero-sale-cash-20261011/weekly-portfolio-zero-sale-cash-20261011-20261011T001324-2c8c0fb78769",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-full-actions-20261010/etf-pair-full-actions-20261010-20261010T182754-75a8d7ac33c6/resume-20261011/"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-full-actions-20261010/etf-pair-full-actions-20261010-20261010T182754-75a8d7ac33c6/resume-20261011/",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-core-account-20261011/weekly-two-etf-core-account-20261011-20261011T010700-a4081c5d8c11"
   ],
   "scope_released": false,
   "question_ids": [
@@ -94,10 +95,10 @@
     "K-risk-attribution"
   ],
   "latest_result_commit": "b2214ccb525c3f3a65c71fc5bed587ff6d0e8266",
-  "scope_amendment": "Root exact startup archive b2214ccb286files readback accepted; original contract+amendment unchanged. Artificial attempt1 SHA typo0case/attempt2 original10passed/attempt3 necessary frozen-amendment checks explicitly authorized under engineering_controller_can_amend_only_needed_local_checks_with_cause. This exceeds original two-start engineering plan; never labelwithin2/reset counts. Same10distinctcases, marketbudget/no variants unchanged.",
-  "updated_at": "2026-10-11T01:04:22.625099+08:00",
-  "conflict_decision": "Fresh34a50519 no relevant task changes; same sole writers/raw paths. API only own K-risk note v21 and D-tracking v9 readback; persistent fields preserved. MainHEAD/index unchanged.",
-  "current_work": "人工原批通过，追加说明对应的必要定向工程核验仍在执行；市场核心尚未授权。起步成果分支/API已核。",
+  "scope_amendment": "Exact new core contract bound accepted engine/runner/input/preflight/18source+extra importedpolicy dependency. New unique externalcore-plan because artificialresult directory alreadyexists. OnepairedP0/P1 initial2paths, mechanicalconditionalrepair max4total, variants/source0. Strict qualification remainsfalse. New isolatedAccount not olddatedledger source reuse.",
+  "updated_at": "2026-10-11T01:08:21.931187+08:00",
+  "conflict_decision": "Fresh f81633f648f543017a401aa409d1486e3662cf45 relevant rules/tasks unchanged. Same solewriters; root core-contract/report/shared, Sol only core-attempt/location/delivery+externalrun, Astra next independent results only. No overlap/main index touched.",
+  "current_work": "工程独审ready_for_core_contract及root14项准确金额核通过；正式冻结同条件一对市场核心，仍未有运行收益。",
   "paused_questions": [
     "旧严格历史日历/实际开盘/当时到达/真实到账资格仍未证，本新有限日线研究不得将strictfalse改ready。",
     "独立另一盘/异机恢复未证，不阻止已验本机工作。"
@@ -215,3 +216,7 @@ Astra只读合同审阅完成，未需用户新决定。旧合同606ea6不覆盖
 
 起步准确归档b2214ccb525c3f3a65c71fc5bed587ff6d0e8266，远端286文件逐字节相同，主HEAD/index不变；K-risk-attribution v21/D-tracking v9仅note实际读回原字段保持，首次定义不再blocked。发布第一次仅新helperEOF多空行导致diffcheck失败，未commit/push/API写，修正并保留失败；无重跑研究。
 工程累计如实保存：一次SHA拷贝遗漏预检失败计入，原10案下一批通过；因独审冻结追加019c7e必要边界还需定向验证，按原工程负责人有因追加本机检查条款单独记录第三次启动，不称原两次内、不重置计数。历史一对/最多必要机械修复4路径预算不变，0参数/0来源/0历史账户。当前固定盘568.26GB、本机13.80GB，新结果日志固定外盘，本轮无迁移删除。
+
+## 2026-10-11T01:08:21.931187+08:00 人工资金独核通过，完整账户一对核心正式冻结
+
+Astra独审bb6c7de8337cf83ce1b6c7ae9a5aa658b782bc7258344585f9ab97abd913be1a接受工程资金/时点，root另核18源/两实际外盘结果/SHA/设备及14准确金额。核心绑定传递policy_zero_sale SHA dc7ab...额外开跑前实际核，不冒称旧runner已硬检查新依赖。新唯一外盘预检计划供一对核心，不覆盖已人工result；同源/同窗/同费/同资金，0参数或source。执行前记P0/P1两尝试、完整stdout/stderr，失败先保留/定位，不凭文件不存在重置次数。新Account明确隔离实现非旧dated_ledger直接复用；完后root独立逐笔资金/收益归因、Astra关键独核，再报告归档，未做交易/生产采用。
