@@ -32,6 +32,9 @@ def main():
     block, tail = rest.split(end, 1)
     record = json.loads(block)
     assert record["owner"] == OWNER
+    if "read_task_ids" in change:
+        assert len(change["read_task_ids"]) == len(set(change["read_task_ids"]))
+        record["read_task_ids"] = change["read_task_ids"]
     baseline = change["reviewed_baseline"]
     changed = git("diff", "--name-only", baseline, base, text=True).splitlines()
     assert set(changed) <= {"docs/coordination/tasks/cash-position-video-20261009.md"}, changed
@@ -51,7 +54,7 @@ def main():
         for value in change.get(key, []):
             if value not in record[key]:
                 record[key].append(value)
-    for key in ["scope_amendment", "current_work", "paused_questions", "scope_released"]:
+    for key in ["scope_amendment", "current_work", "paused_questions", "scope_released", "goal_ids", "shared_write_owner"]:
         if key in change:
             record[key] = change[key]
     body = first + start + "\n" + json.dumps(record, ensure_ascii=False, indent=2) + "\n" + end + tail
