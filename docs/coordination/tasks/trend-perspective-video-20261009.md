@@ -1,3 +1,13 @@
+# 最新Skill 15秒样例开始 2026-10-11T01:23:07.420002+08:00
+- task-id: trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b唯一写者；status active；scope_released false。
+- checked_coordination_sha: 0d567317b0b5f8f5295aa3764085f6b80b4468b9；checked_at: 2026-10-11T01:23:07.420002+08:00；已读COORDINATION1.1、自身、cash-position-video-20261009最新v15/Skill、nasdaq-story-video-20261009、trend-trading-video、personal-quant-video-render-preview-rule、research-dispatch-controller。现金负责人正在改共享Skill，本轮只读取其最新版不写Skill；独立样例无重叠。
+- 用户要求最新Skill制作15s，沿本期已批黑金/K线风格，原视频观察周期段，同一真实日K从局部回撤拉远到更长区间；先悬念、拉远揭示、落定阅读，默认音乐和原创动作音效，无旁白。此次明确样例授权不重开静图批准，不扩片、不发布。
+- 写入仅外盘视频库/趋势交易/20261009-trend-perspective/v11-horizon-motion-20261011、新工程和QA，以及自身已有external-location.json/work-progress与此任务。v09工程/data/font/music只读复用；基线成果46c93622c27db661b85b8e754d8b25585d8db326。
+- 存储01:22固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok，外盘568182439936B；预估新增外盘<700MiB、本机小索引<128KiB；不安装/删除/搬移。
+- 验收15秒450帧1080p30，真实同一OHLC/日期/坐标同步、音画共用事件、中文与手机正常播放、完整解码/媒体和源包指纹；听感和审美单列待用户，不以帧数或卡点算式冒称通过。既有抖音短信仍待用户，本次不操作旧发布。
+
+---
+
 # 正文普通文字补充已保存 2026-10-10T16:16:54.037946+08:00
 
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b唯一写者；topic_text_update_completed，抖音发布仍awaiting_user_sms；scope_released false仅原抖音稿接续。
