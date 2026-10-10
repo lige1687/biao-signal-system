@@ -1,3 +1,13 @@
+## V9 opus-prep-start
+
+- task-id: trend-trading-video；2026-10-10T12:05:31.337774+08:00；checked_coordination_sha: 438b41f5c7e1b0fdea09ce386a02de4594d9f626；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active；root唯一写者。用户要求独立“准备视频交给Opus5.5剪辑”Skill，按用户转述Opus五项准备/成片后机械收尾，明确不写文稿分镜、不选定每镜素材、不预制主题图表动效。
+- 范围新.agents/skills/opus-video-prep/；ai_tools/video/skills/opus-video-prep/、README、AGENTS、prompts/03-prepare-for-opus.md与manifest；本人进度/小回执。原code-explainer-video只读，不覆盖其他任务增量。基线原成果a8f319ed4a2bccbd24a7cbd5a4560eb3ef7b6aaa；ai_tools35fca025f6b63f9fb73d145d264d2bf9ef3b8ad9。
+- 已读COORDINATION、自身、中控、nasdaq最新样片/Skill释放、dual-ma发布阶段及任务文件名；新独立Skill无重叠。验收入口、目录与结构样例、数据算法/音乐置信/许可/可移植工程/机械收尾、分工边界；Skill结构/JSON引用/包指纹/归置/准确远端读回。仅创建Skill与模板，不实际准备某视频包、读媒体/测量/安装/调用Opus，不作完成这些工作的宣称。
+
+
+---
+
 ## V9 compact-done
 
 - task-id: trend-trading-video；2026-10-09T16:47:28.491881+08:00；checked_coordination_sha: add21e63417e2bc902053a188ed775dbc6d829ec；已读 COORDINATION.md、自身与 research-dispatch-controller。
