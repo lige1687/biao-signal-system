@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "0b256baf08ad91032fd5cae5935387aedd362523",
-  "checked_at": "2026-10-11T00:13:56.292858+08:00",
+  "checked_coordination_sha": "e18e77e61af0760d60c2b99060f2b00d92543f50",
+  "checked_at": "2026-10-11T00:15:46.963139+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -90,8 +90,8 @@
     "K-risk-attribution"
   ],
   "latest_result_commit": "4a213931f2a3837798d1a33037c3d5d1d433f393",
-  "scope_amendment": "Resume same full-actions source question, cumulative18->20 only exact observed last2017attachment; separate finite zero-sale P1 synthetic engineering per direct human cash-nextweek choice. Root only report/shared/API and contracts; remaining_goal_readiness Sol source new subfiles only, recovery_evidence_review Sol new P1 raw only, next_research_design Astra limited reviews/rootreview paths only. No market until complete qualified input and new full-account contract.",
-  "updated_at": "2026-10-11T00:13:56.292858+08:00",
+  "scope_amendment": "same2017exactsource human reasonable additional discretion: old18 cumulative21 maximum, extra1 only listing reopen if oldref cannot recovered; original20proposal+parentcontract preserved, sameop2 and PDF6/64MiB unchanged. P1 and reviews unchanged.",
+  "updated_at": "2026-10-11T00:15:46.963139+08:00",
   "conflict_decision": "Fresh coordination and all12relatedtasks read; no change since86449361, no competing writer to this task/new zero-sale path. Prior source agent scopes released, reassign exact resumed source subfiles to single Sol. Root sole shared/API writer; other active task records disjoint. Main dirty checkout preserved.",
   "current_work": "记录用户明确+2源额度和新钱留现金决定，先定点完成5103002017原报告；并行实施所选P1零卖出分支有限人工测试。Astra复核完整账户最小输入及可冻结的共同保守执行假设；不联网、不运行市场。",
   "paused_questions": []
@@ -174,3 +174,7 @@
 ## 2026-10-11T00:13:56.292858+08:00 准确合同和新P1外盘输出路径已绑定
 
 来源/实现/独核合同已冻结于本raw，原源18->20、人选现金到下周；新P1计划8MiB外盘/512KiB本机小记录已通过，但尚未执行。三既有代理按原模型Sol/Sol/Astra接不同准确文件，root唯一共享写者。
+
+## 2026-10-11T00:15:46.963139+08:00 定点来源恢复缺旧浏览引用，登记必要一次原列表读取差额
+
+来源执行者已核原18账本，尚未新增公共动作；旧账只留URL/link67没有web ref_id，可先零网络查已存记录。若不可恢复，取准确已观察年报的最短完整链条需列表重开1+准确附件1+原件GET1=3。依据用户“你觉得合适就加”，root仅增该必要定位开销1，累计21，不设无限源额度、不再搜索、不第三次重试经理源，不重置原失败；额度不是必须耗满。新带父SHA的增量合同 annual-source-resume-amendment-20261011.json，原20合同保留。
