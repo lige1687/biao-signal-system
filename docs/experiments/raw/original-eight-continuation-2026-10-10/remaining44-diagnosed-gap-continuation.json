@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-10T19:07:09.029291+08:00",
+  "question_id": "szse-remaining-calendar-201601-201908-20261010",
+  "contract_sha256": "54ab90ab5652ce5c498d16bffb21d2dc7f6c4bd4f9dc60827392a52565774c55",
+  "observed_failure": {
+    "request_n": 13,
+    "month": "2017-01",
+    "http_status": 200,
+    "bytes": 1293,
+    "sha256": "ecb169288a2a9c6a21eadd90d3047243dd28498436568f2d0499b756edf7eae3",
+    "missing_date": "2017-01-01",
+    "recorded_status": "failed_validation"
+  },
+  "diagnosis": "Nonempty correctmonth official source omits one naturaldate, likely actual source-content gap; no transient/fixable evidence for retry. Leave missingdateunknown and fullmonthnotpassed.",
+  "continuation": "After diagnosis, acquire next originally fixed independentmonth2017-02 and other fixedmonths within same ledger/caps. No different source/search or same-month retry. Any two consecutive monthcoverage/sourceavailability failures stop route.",
+  "full_interval_acceptance_unchanged": "1339 dates and44completevalidmonthlysources required for fullinterval; sourcegapmeansnotcomplete even if latermonths qualify. No validator/test weakened or failure removed.",
+  "scope_or_budget_expanded": false,
+  "old_script_failure_snapshot_required": true
+}

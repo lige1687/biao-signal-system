@@ -29,6 +29,7 @@ def main():
     phase = sys.argv[1]
     final_source = "--source-final" in sys.argv[2:]
     final_calendar = "--calendar-final" in sys.argv[2:]
+    final_remaining_calendar = "--remaining-calendar-final" in sys.argv[2:]
     assert git("rev-parse", "HEAD", text=True).strip() == MAIN_HEAD
     assert digest((ROOT / ".git/index").read_bytes()) == MAIN_INDEX
     base = git("rev-parse", BRANCH, text=True).strip()
@@ -37,6 +38,8 @@ def main():
         registrations.append("etf-full-actions")
     if final_calendar:
         registrations.append("calendar2015")
+    if final_remaining_calendar:
+        registrations.append("remaining44-calendar")
     entries = [json.loads((CONTROL / f"{name}-registration-entry.json").read_text())
                for name in registrations]
     paths = {"src/lei_signal/research/native_d_conditional_risk.py",
@@ -56,6 +59,12 @@ def main():
         calendar_contract = "docs/experiments/raw/two-etf-2015-calendar-source-2026-10-10/executor-contract.json"
         if (ROOT / calendar_contract).exists():
             paths.add(calendar_contract)
+    if final_remaining_calendar:
+        directories.append("szse-remaining-calendar-2016-2019-2026-10-10")
+    else:
+        remaining_contract = "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/executor-contract.json"
+        if (ROOT / remaining_contract).exists():
+            paths.add(remaining_contract)
     for directory in directories:
         for p in (ROOT / "docs/experiments/raw" / directory).rglob("*"):
             if p.is_file() and not any(s in {"__pycache__", ".pytest_cache"}
@@ -106,6 +115,8 @@ def main():
         line_keys.append("etf_full_actions_index_line")
     if final_calendar:
         line_keys.append("calendar2015_index_line")
+    if final_remaining_calendar:
+        line_keys.append("remaining44_calendar_index_line")
     lines = "".join(inserts[k] for k in line_keys if inserts[k] not in index)
     anchor = "## 1. 任务编号总账（任务书 → 执行归档）"
     pos = index.index("\n", index.index(anchor)) + 1

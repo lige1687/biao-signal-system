@@ -1,0 +1,94 @@
+{
+  "schema": "two_etf_2015_calendar_source_review.v1",
+  "contract_sha256": "2bcfca51a2c00ddc803af53602eb27e568ae7d6af4b8956ecee510727842faab",
+  "status": "source_question_answered_with_contract_deviation_not_execution_passed",
+  "public_actions_used": 23,
+  "public_actions_limit": 26,
+  "measurable_raw_bytes": 93075,
+  "measurable_raw_limit": 33554432,
+  "unmeasured_web_search_transport_bytes": "unknown",
+  "sources_saved": 15,
+  "src_sha256_verified": true,
+  "annual_SSE_2014_12_24": {
+    "request_n": 3,
+    "url": "https://www.sse.com.cn/disclosure/dealinstruc/closed/list/c/c_20160104_3979217.shtml",
+    "sha256": "30bafe4c4a5385ac228602383cd687a270957a2e63d861c1f775279d4f1122f0",
+    "document_date": "2014-12-24",
+    "notice_id": "上证公告〔2014〕15号"
+  },
+  "annual_SZSE_2014_12_24": {
+    "request_n": 4,
+    "url": "https://www.szse.cn/disclosure/notice/general/t20141224_501340.html",
+    "sha256": "8f95a1d652e393542f49b39f408e3e0dd7db5f32ee4b43a08db089776966d114",
+    "document_date": "2014-12-24",
+    "notice_id": "深证会〔2014〕150号 from later official notice; 2014 annual original text does not show this identifier in parsed body"
+  },
+  "SSE_2015_07_21_extra_notice": {
+    "request_n": 8,
+    "url": "https://www.sse.com.cn/disclosure/dealinstruc/closed/list/c/c_20160104_3979337.shtml",
+    "sha256": "7f673a2e1cd3fa6905045598f23200649f6e8b9bc78b3b78a653d3c0d5d23070",
+    "document_date": "2015-07-21",
+    "notice_id": "上证公告〔2015〕22号"
+  },
+  "SZSE_2015_full_365_daily_flags": true,
+  "SZSE_2015_trading_days": 244,
+  "SSE_observed_plan_trading_days": 244,
+  "planned_vs_retrospective_mismatch_count": 0,
+  "SZSE_2015_sept3_4_source": "retrospective 2015-09 official monthList 0 flags; exact independently dated SZSE amendment original not retrieved",
+  "SSE_2015_actual_daily_flags": "not acquired",
+  "ETF_quote_date_diagnostic": {
+    "sh510300": {
+      "quote_rows": 244,
+      "official_scheduled_without_quote": [],
+      "quote_on_official_closed_day": [],
+      "input_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sh510300-nominal.csv",
+      "input_sha256": "bca4b942cbb9706bda4e54b6f14209929258b17895bdca342332cd0a731d5fdc"
+    },
+    "sz159915": {
+      "quote_rows": 244,
+      "official_scheduled_without_quote": [],
+      "quote_on_official_closed_day": [],
+      "input_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sz159915-nominal.csv",
+      "input_sha256": "4495f6087ab14fdae7bcf0af545e3bd6ae6a9807f6ae97205e1f0c174f52c849"
+    }
+  },
+  "same_semantic_failure_limit_deviation": {
+    "canonical_semantic_operation": "szse_2015_09_03_extraordinary_closure_exact_official_notice_discovery",
+    "definition": "Locate the exact SZSE primary 2015 September 3 extraordinary closure notice by public search; query wording and broad/precise operation labels do not create a fresh allowance.",
+    "all_same_semantic_action_ids": [
+      5,
+      7,
+      22,
+      23
+    ],
+    "original_operations_preserved": {
+      "5": "szse-2015-sept3-adjustment-discovery",
+      "7": "szse-2015-sept3-precise-discovery",
+      "22": "szse-2015-adjustment-discovery",
+      "23": "szse-2015-sept3-final-precise-discovery"
+    },
+    "all_four_outcomes": "No exact SZSE original located in actions 5, 7, 22, or 23; source absence is not inferred.",
+    "contract_attempt_cap": 2,
+    "observed_same_semantic_attempts": 4,
+    "excess_attempts": 2,
+    "total_public_actions": 23,
+    "global_public_action_cap": 26,
+    "within_global_cap": true,
+    "execution_acceptance": "not_passed_due_same_semantic_operation_cap_breached",
+    "network_stopped_at_utc": "2026-10-10T10:56:45.126608+00:00",
+    "no_further_network": true
+  },
+  "old_budget_untouched": {
+    "calendar_round2_used": 27,
+    "calendar_completion_used": 67,
+    "prior_combined_calendar_requests": 94,
+    "etf_six_report_used": 18,
+    "etf_h1_used": 14,
+    "all_old_limits_and_failures_preserved": true
+  },
+  "market_runs": 0,
+  "account_runs": 0,
+  "conclusion_strength": "Full 2015 SZSE retrospective calendar; SSE observed planned-date pattern agrees 365/365, not proven SSE operational daily status or ETF opening ability.",
+  "contract_execution_acceptance": "not_passed_due_same_semantic_operation_cap_breached",
+  "network_stopped_at_utc": "2026-10-10T10:56:45.126608+00:00"
+}

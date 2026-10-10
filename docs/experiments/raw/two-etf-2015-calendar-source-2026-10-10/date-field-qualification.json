@@ -1,0 +1,4572 @@
+{
+  "schema": "two_etf_2015_date_field_candidate.v1",
+  "scope": "2015 only; retrospective SZSE daily flags plus SSE observed planned notices, not security opening qualification",
+  "calendar_days": 365,
+  "szse_retrospective_trading_days": 244,
+  "sse_planned_open_days_from_observed_notices_and_explicit_weekend_rule": 244,
+  "matched_dates": 365,
+  "differing_dates": [],
+  "sse_weekend_rule_assumption": "Saturday/Sunday closed; annual notice separately names certain weekends and says relevant Mondays resume. A separate full daily operational SSE source was not acquired.",
+  "sse_annual_closed_ranges": [
+    [
+      "2015-01-01",
+      "2015-01-03"
+    ],
+    [
+      "2015-02-18",
+      "2015-02-24"
+    ],
+    [
+      "2015-04-05",
+      "2015-04-06"
+    ],
+    [
+      "2015-05-01",
+      "2015-05-03"
+    ],
+    [
+      "2015-06-20",
+      "2015-06-22"
+    ],
+    [
+      "2015-09-27",
+      "2015-09-27"
+    ],
+    [
+      "2015-10-01",
+      "2015-10-07"
+    ]
+  ],
+  "sse_2015_07_21_extra_closed_ranges": [
+    [
+      "2015-09-03",
+      "2015-09-05"
+    ]
+  ],
+  "annual_notice_sources": {
+    "SSE": {
+      "request_n": 3,
+      "url": "https://www.sse.com.cn/disclosure/dealinstruc/closed/list/c/c_20160104_3979217.shtml",
+      "sha256": "30bafe4c4a5385ac228602383cd687a270957a2e63d861c1f775279d4f1122f0",
+      "document_date": "2014-12-24",
+      "notice_id": "上证公告〔2014〕15号"
+    },
+    "SZSE": {
+      "request_n": 4,
+      "url": "https://www.szse.cn/disclosure/notice/general/t20141224_501340.html",
+      "sha256": "8f95a1d652e393542f49b39f408e3e0dd7db5f32ee4b43a08db089776966d114",
+      "document_date": "2014-12-24",
+      "notice_id": "深证会〔2014〕150号 from later official notice; 2014 annual original text does not show this identifier in parsed body"
+    }
+  },
+  "sse_extra_notice": {
+    "request_n": 8,
+    "url": "https://www.sse.com.cn/disclosure/dealinstruc/closed/list/c/c_20160104_3979337.shtml",
+    "sha256": "7f673a2e1cd3fa6905045598f23200649f6e8b9bc78b3b78a653d3c0d5d23070",
+    "document_date": "2015-07-21",
+    "notice_id": "上证公告〔2015〕22号"
+  },
+  "szse_months": [
+    {
+      "month": "2015-01",
+      "request_n": 9,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/09-szse-2015-01.json",
+      "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+      "natural_days": 31,
+      "trading_days": 20
+    },
+    {
+      "month": "2015-02",
+      "request_n": 10,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/10-szse-2015-02.json",
+      "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+      "natural_days": 28,
+      "trading_days": 15
+    },
+    {
+      "month": "2015-03",
+      "request_n": 11,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/11-szse-2015-03.json",
+      "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+      "natural_days": 31,
+      "trading_days": 22
+    },
+    {
+      "month": "2015-04",
+      "request_n": 12,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/12-szse-2015-04.json",
+      "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+      "natural_days": 30,
+      "trading_days": 21
+    },
+    {
+      "month": "2015-05",
+      "request_n": 13,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/13-szse-2015-05.json",
+      "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+      "natural_days": 31,
+      "trading_days": 20
+    },
+    {
+      "month": "2015-06",
+      "request_n": 14,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/14-szse-2015-06.json",
+      "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+      "natural_days": 30,
+      "trading_days": 21
+    },
+    {
+      "month": "2015-07",
+      "request_n": 15,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/15-szse-2015-07.json",
+      "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+      "natural_days": 31,
+      "trading_days": 23
+    },
+    {
+      "month": "2015-08",
+      "request_n": 16,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/16-szse-2015-08.json",
+      "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+      "natural_days": 31,
+      "trading_days": 21
+    },
+    {
+      "month": "2015-09",
+      "request_n": 17,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/17-szse-2015-09.json",
+      "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+      "natural_days": 30,
+      "trading_days": 20
+    },
+    {
+      "month": "2015-10",
+      "request_n": 18,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/18-szse-2015-10.json",
+      "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+      "natural_days": 31,
+      "trading_days": 17
+    },
+    {
+      "month": "2015-11",
+      "request_n": 19,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/19-szse-2015-11.json",
+      "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+      "natural_days": 30,
+      "trading_days": 21
+    },
+    {
+      "month": "2015-12",
+      "request_n": 20,
+      "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/20-szse-2015-12.json",
+      "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+      "natural_days": 31,
+      "trading_days": 23
+    }
+  ],
+  "quote_date_diagnostic_only": {
+    "sh510300": {
+      "quote_rows": 244,
+      "official_scheduled_without_quote": [],
+      "quote_on_official_closed_day": [],
+      "input_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sh510300-nominal.csv",
+      "input_sha256": "bca4b942cbb9706bda4e54b6f14209929258b17895bdca342332cd0a731d5fdc"
+    },
+    "sz159915": {
+      "quote_rows": 244,
+      "official_scheduled_without_quote": [],
+      "quote_on_official_closed_day": [],
+      "input_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sz159915-nominal.csv",
+      "input_sha256": "4495f6087ab14fdae7bcf0af545e3bd6ae6a9807f6ae97205e1f0c174f52c849"
+    }
+  },
+  "rows": [
+    {
+      "date": "2015-01-01",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-02",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-03",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-04",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-05",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-06",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-07",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-08",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-09",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-10",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-11",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-12",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-13",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-14",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-15",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-16",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-17",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-18",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-19",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-20",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-21",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-22",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-23",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-24",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-25",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-26",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-27",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-28",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-29",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-30",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-01-31",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 9,
+        "source_sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "source_field": "data[30].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-01",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-02",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-03",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-04",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-05",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-06",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-07",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-08",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-09",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-10",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-11",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-12",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-13",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-14",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-15",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-16",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-17",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-18",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-19",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-20",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-21",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-22",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-23",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-24",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-25",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-26",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-27",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-02-28",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 10,
+        "source_sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-01",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-02",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-03",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-04",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-05",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-06",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-07",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-08",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-09",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-10",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-11",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-12",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-13",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-14",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-15",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-16",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-17",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-18",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-19",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-20",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-21",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-22",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-23",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-24",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-25",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-26",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-27",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-28",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-29",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-30",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-03-31",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 11,
+        "source_sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "source_field": "data[30].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-01",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-02",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-03",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-04",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-05",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-06",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-07",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-08",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-09",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-10",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-11",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-12",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-13",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-14",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-15",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-16",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-17",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-18",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-19",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-20",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-21",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-22",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-23",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-24",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-25",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-26",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-27",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-28",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-29",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-04-30",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 12,
+        "source_sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-01",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-02",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-03",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-04",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-05",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-06",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-07",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-08",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-09",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-10",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-11",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-12",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-13",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-14",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-15",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-16",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-17",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-18",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-19",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-20",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-21",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-22",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-23",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-24",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-25",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-26",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-27",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-28",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-29",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-30",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-05-31",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 13,
+        "source_sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "source_field": "data[30].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-01",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-02",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-03",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-04",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-05",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-06",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-07",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-08",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-09",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-10",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-11",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-12",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-13",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-14",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-15",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-16",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-17",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-18",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-19",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-20",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-21",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-22",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-23",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-24",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-25",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-26",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-27",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-28",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-29",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-06-30",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 14,
+        "source_sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-01",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-02",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-03",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-04",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-05",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-06",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-07",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-08",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-09",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-10",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-11",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-12",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-13",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-14",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-15",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-16",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-17",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-18",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-19",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-20",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-21",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-22",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-23",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-24",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-25",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-26",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-27",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-28",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-29",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-30",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-07-31",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 15,
+        "source_sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "source_field": "data[30].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-01",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-02",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-03",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-04",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-05",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-06",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-07",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-08",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-09",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-10",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-11",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-12",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-13",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-14",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-15",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-16",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-17",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-18",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-19",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-20",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-21",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-22",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-23",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-24",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-25",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-26",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-27",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-28",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-29",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-30",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-08-31",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 16,
+        "source_sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "source_field": "data[30].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-01",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-02",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-03",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24; supplemental SSE notice 2015-07-21 for Sep3-5",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-04",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24; supplemental SSE notice 2015-07-21 for Sep3-5",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-05",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24; supplemental SSE notice 2015-07-21 for Sep3-5",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-06",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-07",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-08",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-09",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-10",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-11",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-12",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-13",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-14",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-15",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-16",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-17",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-18",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-19",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-20",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-21",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-22",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-23",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-24",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-25",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-26",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-27",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-28",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-29",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-09-30",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 17,
+        "source_sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-01",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-02",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-03",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-04",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-05",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-06",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-07",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-08",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-09",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-10",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-11",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-12",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-13",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-14",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-15",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-16",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-17",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-18",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-19",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-20",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-21",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-22",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-23",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-24",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-25",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-26",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-27",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-28",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-29",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-30",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-10-31",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 18,
+        "source_sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "source_field": "data[30].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-01",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-02",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-03",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-04",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-05",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-06",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-07",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-08",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-09",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-10",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-11",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-12",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-13",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-14",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-15",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-16",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-17",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-18",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-19",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-20",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-21",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-22",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-23",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-24",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-25",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-26",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-27",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-28",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-29",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-11-30",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 19,
+        "source_sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-01",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[0].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-02",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[1].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-03",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[2].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-04",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[3].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-05",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[4].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-06",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[5].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-07",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[6].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-08",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[7].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-09",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[8].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-10",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[9].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-11",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[10].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-12",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[11].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-13",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[12].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-14",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[13].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-15",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[14].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-16",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[15].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-17",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[16].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-18",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[17].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-19",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[18].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-20",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[19].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-21",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[20].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-22",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[21].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-23",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[22].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-24",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[23].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-25",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[24].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-26",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[25].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-27",
+      "szse_retrospective_trading_flag": false,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[26].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": false,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-28",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[27].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-29",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[28].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-30",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[29].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    },
+    {
+      "date": "2015-12-31",
+      "szse_retrospective_trading_flag": true,
+      "szse_trace": {
+        "source_request_n": 20,
+        "source_sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "source_field": "data[30].jybz"
+      },
+      "sse_planned_open_under_explicit_weekend_rule": true,
+      "sse_rule_basis": "weekend assumption plus annual notice 2014-12-24",
+      "sse_actual_daily_status_qualified": false
+    }
+  ],
+  "limitations": [
+    "SZSE monthList responses were fetched now; these retrospective flags do not prove the 2015 source arrival/publication or revision state.",
+    "SSE has official 2015 planned annual/extra notices, but no independent authoritative daily actual-status source; 365/365 agreement is planned-SSE versus retrospective-SZSE, not operational cross-exchange certification.",
+    "Exact SZSE 2015-07-21 extraordinary closure original was not recovered; its retrospective Sep3/4 flag is present in SZSE 2015-09 response.",
+    "No exhaustive official amendment register or later exceptional-closure search is proven; no-encountered is not none.",
+    "Exchange-open date does not prove either ETF eligible at 09:30 or a fill."
+  ]
+}

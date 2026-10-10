@@ -1,0 +1,527 @@
+{
+  "schema": "two_etf_2015_calendar_independent_review.v1",
+  "reviewed_at": "2026-10-10T19:01:41.546809+08:00",
+  "reviewer": "Astra /root/next_research_design",
+  "question_id": "two-etf-2015-exchange-calendar-source-20261010",
+  "scope": "2015年已存原件和逐日字段的一次独立复核；零联网、零市场/账户/收益运行。",
+  "method": "直接读取15个原响应并重算SHA和字节；检查响应头/原清单/请求账本身份；独立阅读三份正文；标准库按自然月生成预期日期核12月；从原jybz字符串重新映射并逐行核365个字段和来源位置；从已读公告手工转录日期，独立日历计算；直接读旧CSV session_date列，未导入或执行作者程序。",
+  "input_hashes": {
+    "executor-contract.json": "2bcfca51a2c00ddc803af53602eb27e568ae7d6af4b8956ecee510727842faab",
+    "source-manifest.json": "2a1eaec31be9008c99711fb91c9ba4b0fda32dc02db71e0b84aa55f3ea7e9626",
+    "source-review.json": "97f1a538473c9267e10c3208f39d590943dc913801fb85d92fc9c4ec3c9cb2bb",
+    "request-ledger.json": "d99f3eedf3bbe06eecad2814ecc510d32481a24db3c6282e3389a53b116321c8",
+    "date-field-qualification.json": "38c8ee2cad3ccfec0a84789b1971245263a68e3cb1c73bf2841ebfb65fa7ba17"
+  },
+  "storage_precheck_reused_this_review": {
+    "checked_at": "2026-10-10T18:58:42+08:00",
+    "available": true,
+    "volume_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "device": 16777238,
+    "external_free_bytes": 568686936064,
+    "external_write_bytes": 0
+  },
+  "source_bytes": {
+    "count": 15,
+    "total": 93075,
+    "all_sha_size_identity_checks_passed": true,
+    "sources": [
+      {
+        "n": 3,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/03-sse-2015-annual.html",
+        "url": "https://www.sse.com.cn/disclosure/dealinstruc/closed/list/c/c_20160104_3979217.shtml",
+        "bytes": 29031,
+        "sha256": "30bafe4c4a5385ac228602383cd687a270957a2e63d861c1f775279d4f1122f0",
+        "headers_sha256": "63971141aae54249627240225a8392f6144f37d2843638b09989fdf76c668d2f",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 4,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/04-szse-2015-annual.html",
+        "url": "https://www.szse.cn/disclosure/notice/general/t20141224_501340.html",
+        "bytes": 20257,
+        "sha256": "8f95a1d652e393542f49b39f408e3e0dd7db5f32ee4b43a08db089776966d114",
+        "headers_sha256": "b8df3a2c0acab0dcb3665ebf0a0200787b7359d5e2689404bfa40e325a0e76c0",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 8,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/08-sse-2015-sept3-adjustment.html",
+        "url": "https://www.sse.com.cn/disclosure/dealinstruc/closed/list/c/c_20160104_3979337.shtml",
+        "bytes": 28061,
+        "sha256": "7f673a2e1cd3fa6905045598f23200649f6e8b9bc78b3b78a653d3c0d5d23070",
+        "headers_sha256": "708a6f876ed1f3f411767960ca227c9b9702a6af0d213d7ec76ac75a34e17f61",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 9,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/09-szse-2015-01.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-01&random=0.1",
+        "bytes": 1335,
+        "sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "headers_sha256": "e790e9532a71e3efd3e87266aa8d58a1986fd7b291b970930d99af36911228d6",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 10,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/10-szse-2015-02.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-02&random=0.1",
+        "bytes": 1209,
+        "sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "headers_sha256": "86287ec9e16029e87ec1271360ce977880ac08fb461047d32cbafba9c5ad53e8",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 11,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/11-szse-2015-03.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-03&random=0.1",
+        "bytes": 1335,
+        "sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "headers_sha256": "1b2f0950d567d07458d45883058646d74f3dfc2755834bde7a9eee41ac98eb05",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 12,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/12-szse-2015-04.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-04&random=0.1",
+        "bytes": 1293,
+        "sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "headers_sha256": "270b2b36e80ab76708ff320bcbffb2cdc9ec3f3cea398b4c6db3e0aaa0f33e05",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 13,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/13-szse-2015-05.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-05&random=0.1",
+        "bytes": 1335,
+        "sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "headers_sha256": "f29e789d371b8a1b8dca7b842852d97c742cc3cdd331ba80a3d4d5f79b9be446",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 14,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/14-szse-2015-06.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-06&random=0.1",
+        "bytes": 1293,
+        "sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "headers_sha256": "71f04bcdec98db3795179ecc8cb88e31fb7e9dc45f051dbdd474f59c17bcb1c5",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 15,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/15-szse-2015-07.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-07&random=0.1",
+        "bytes": 1335,
+        "sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "headers_sha256": "3bd7eac219902fa5f0d457085f2e40cc46ee2615b77d1e7470f6751a14538fd0",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 16,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/16-szse-2015-08.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-08&random=0.1",
+        "bytes": 1335,
+        "sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "headers_sha256": "6ae221724ba82cf96f4fd894340a332e135bbe2c82aec5ec1f9d59216e61fa09",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 17,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/17-szse-2015-09.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-09&random=0.1",
+        "bytes": 1293,
+        "sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "headers_sha256": "465e00b3914f9ff8b57bfe4f580f4d8f1e2280e3c318226d29faae8cb31fded2",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 18,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/18-szse-2015-10.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-10&random=0.1",
+        "bytes": 1335,
+        "sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "headers_sha256": "46132f27e8862f93539e617cbed3b91ec1aa9f0f6d853ab1cb7107af9a80dc01",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 19,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/19-szse-2015-11.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-11&random=0.1",
+        "bytes": 1293,
+        "sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "headers_sha256": "579d5fa37f6e6b79f817935690e1694cf1f7e3b06cbaa1cb86d896c150171220",
+        "manifest_and_ledger_and_headers_match": true
+      },
+      {
+        "n": 20,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/20-szse-2015-12.json",
+        "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2015-12&random=0.1",
+        "bytes": 1335,
+        "sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "headers_sha256": "71c5f1c44a89b39d38fdb5e2462cc65425ff8648012c75dac5cc3a984a8753b3",
+        "manifest_and_ledger_and_headers_match": true
+      }
+    ],
+    "provenance_limit": "独核已存响应与头/账本相互一致，不冒称独审现场重新请求或独立见证了网络传输。"
+  },
+  "notice_facts": [
+    {
+      "n": 3,
+      "exchange": "SSE",
+      "title": "关于上海证券交易所2015年全年休市安排的通知",
+      "body_publication_date": "2014-12-24",
+      "document_number": "上证公告〔2014〕15号",
+      "source_year": 2015,
+      "explicit_closed_ranges": [
+        [
+          "01-01",
+          "01-03"
+        ],
+        [
+          "02-18",
+          "02-24"
+        ],
+        [
+          "04-05",
+          "04-06"
+        ],
+        [
+          "05-01",
+          "05-03"
+        ],
+        [
+          "06-20",
+          "06-22"
+        ],
+        [
+          "09-27",
+          "09-27"
+        ],
+        [
+          "10-01",
+          "10-07"
+        ]
+      ],
+      "additional_explicit_weekend_dates": [
+        "2015-01-04",
+        "2015-02-15",
+        "2015-02-28",
+        "2015-04-04",
+        "2015-09-26",
+        "2015-10-10"
+      ],
+      "resume_from_dates": [
+        "2015-01-05",
+        "2015-02-25",
+        "2015-04-07",
+        "2015-05-04",
+        "2015-06-23",
+        "2015-09-28",
+        "2015-10-08"
+      ]
+    },
+    {
+      "n": 4,
+      "exchange": "SZSE",
+      "title": "关于2015年部分节假日休市安排的通知",
+      "body_publication_date": "2014-12-24",
+      "source_year": 2015,
+      "directly_seen_document_number": null,
+      "document_number_caution": "正文引用证监办发〔2014〕94号，不等于直接显示深证会〔2014〕150号。",
+      "explicit_closed_ranges": [
+        [
+          "01-01",
+          "01-03"
+        ],
+        [
+          "02-18",
+          "02-24"
+        ],
+        [
+          "04-05",
+          "04-06"
+        ],
+        [
+          "05-01",
+          "05-01"
+        ],
+        [
+          "06-20",
+          "06-22"
+        ],
+        [
+          "09-27",
+          "09-27"
+        ],
+        [
+          "10-01",
+          "10-07"
+        ]
+      ],
+      "additional_explicit_weekend_dates": [
+        "2015-01-04",
+        "2015-02-15",
+        "2015-02-28",
+        "2015-10-10"
+      ],
+      "resume_from_dates": [
+        "2015-01-05",
+        "2015-02-25",
+        "2015-04-07",
+        "2015-05-04",
+        "2015-06-23",
+        "2015-09-28",
+        "2015-10-08"
+      ]
+    },
+    {
+      "n": 8,
+      "exchange": "SSE",
+      "title": "关于中国人民抗日战争暨世界反法西斯战争胜利70周年纪念日休市安排的公告",
+      "body_publication_date": "2015-07-21",
+      "source_year": 2015,
+      "document_number": "上证公告〔2015〕22号",
+      "explicit_closed_ranges": [
+        [
+          "09-03",
+          "09-05"
+        ]
+      ],
+      "additional_explicit_weekend_dates": [
+        "2015-09-06"
+      ],
+      "resume_from_dates": [
+        "2015-09-07"
+      ]
+    }
+  ],
+  "publication_time_limits": "SSE URL含20160104不当作正文发布日期；正文分别为2014-12-24及2015-07-21。当前取回网页及月数据不能证明当年系统到达、修订版本或日内发布时间。",
+  "szse_daily": {
+    "calendar_days": 365,
+    "unique_dates": 365,
+    "open": 244,
+    "closed": 121,
+    "raw_mapping": {
+      "1": true,
+      "0": false
+    },
+    "no_other_values": true,
+    "months": [
+      {
+        "month": "2015-01",
+        "natural_days": 31,
+        "open_days": 20,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-02",
+        "natural_days": 28,
+        "open_days": 15,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-03",
+        "natural_days": 31,
+        "open_days": 22,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-04",
+        "natural_days": 30,
+        "open_days": 21,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-05",
+        "natural_days": 31,
+        "open_days": 20,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-06",
+        "natural_days": 30,
+        "open_days": 21,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-07",
+        "natural_days": 31,
+        "open_days": 23,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-08",
+        "natural_days": 31,
+        "open_days": 21,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-09",
+        "natural_days": 30,
+        "open_days": 20,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-10",
+        "natural_days": 31,
+        "open_days": 17,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-11",
+        "natural_days": 30,
+        "open_days": 21,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      },
+      {
+        "month": "2015-12",
+        "natural_days": 31,
+        "open_days": 23,
+        "unique_complete_natural_dates": true,
+        "raw_jybz_values": [
+          "0",
+          "1"
+        ]
+      }
+    ],
+    "all_365_saved_rows_and_source_offsets_match": true,
+    "classification": "qualified_retrospective_exchange_trading_flag_only",
+    "actual_intraday_status_or_security_open_eligibility": "unknown"
+  },
+  "sse_comparison": {
+    "basis": "三份原件中仅SSE年度及追加公告的明确日期，加上全周六周日休市的显式假设；不是已取得官方全年逐日表。",
+    "full_year_weekend_rule_original_obtained": false,
+    "planned_open_under_assumption": 244,
+    "matched_dates_vs_szse": 365,
+    "mismatched_dates": [],
+    "annual_notice_only_plus_weekend_assumption_open": 246,
+    "annual_only_counterexample_dates": [
+      "2015-09-03",
+      "2015-09-04"
+    ],
+    "actual_daily_status_qualified_count": 0,
+    "qualified_fields": "SSE两公告明确列出的计划休市范围、另列周末及恢复日期可受限接受。未提及日期不因计算填成官方已知状态。"
+  },
+  "quote_date_diagnostics": [
+    {
+      "symbol": "sh510300",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sh510300-nominal.csv",
+      "sha256": "bca4b942cbb9706bda4e54b6f14209929258b17895bdca342332cd0a731d5fdc",
+      "date_column": "session_date",
+      "rows_2015": 244,
+      "unique_dates": 244,
+      "missing_vs_szse": [],
+      "extra_vs_szse": [],
+      "missing_vs_sse_assumption_plan": [],
+      "extra_vs_sse_assumption_plan": []
+    },
+    {
+      "symbol": "sz159915",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sz159915-nominal.csv",
+      "sha256": "4495f6087ab14fdae7bcf0af545e3bd6ae6a9807f6ae97205e1f0c174f52c849",
+      "date_column": "session_date",
+      "rows_2015": 244,
+      "unique_dates": 244,
+      "missing_vs_szse": [],
+      "extra_vs_szse": [],
+      "missing_vs_sse_assumption_plan": [],
+      "extra_vs_sse_assumption_plan": []
+    }
+  ],
+  "execution_audit": {
+    "actual_recorded_public_actions": 23,
+    "cap": 26,
+    "within_global_cap": true,
+    "same_semantic_operation": "szse_2015_09_03_extraordinary_closure_exact_official_notice_discovery",
+    "action_ids": [
+      5,
+      7,
+      22,
+      23
+    ],
+    "attempts": 4,
+    "attempt_cap": 2,
+    "excess": 2,
+    "all_four_outcomes": "未定位精确SZSE原公告",
+    "execution_acceptance": "not_passed",
+    "saved_raw_bytes": 93075,
+    "saved_raw_bytes_cap": 33554432,
+    "all_responses_below_4MiB": true,
+    "all_network_transport_bytes": "unknown",
+    "no_new_reviewer_public_actions": true,
+    "old_budgets_unchanged": true,
+    "rule": "不同措辞/operation标识不重置同义次数；不删失败、不修改阈值，不利用全局余额豁免。"
+  },
+  "qualification_decision": {
+    "source_fact_acceptance": "limited_accepted_after_independent_review",
+    "reason": "已获得15原响应均在请求20及以前保存，超限为随后22/23查同一精确SZSE公告；独核字节、正文、逐日完整性、原值映射和日期计算均成立。超额搜索未提供被接受的新原件，也未用于推断未找到即不存在。可保留这些可核来源事实，但事实成立不消除合同执行违约。",
+    "qualified": [
+      "SZSE2015全年365个回溯jybz字段及日期来源；244开市/121非开市。",
+      "三份公告明确写出的计划休市和恢复日期、正文发布日期和可见文号。",
+      "两只旧ETF日线2015日期各244且与回溯标志/带假设候选集合相同，仅为日期诊断。"
+    ],
+    "not_qualified": [
+      "SSE2015全年每一天实际开市状态。",
+      "把周末假设及未列日期视为官方全年逐日计划原件。",
+      "SZSE九三调整精确原公告及独立公告时点。",
+      "已取得所有后续调整/更正、当年可知及当时系统到达。",
+      "两只ETF09:30交易资格、停牌/延迟开市、可成交性或实际成交价格。",
+      "其他年份、完整2015至2026H1账户输入与收益研究。"
+    ]
+  },
+  "report_feedback": {
+    "current_draft_conclusion": "核心结论及执行not_passed可接受；主控可把待独核来源改为上述受限已核事实。",
+    "required_wording_boundary": "JSON字段含explicit_weekend_rule或official_scheduled的旧名字不能当成来源强度；报告及下游消费必须保留这是weekend assumption且仅日期诊断的标记。不能把244候选计划日写为已核SSE全年实际日历。",
+    "no_report_edit_by_reviewer": true
+  },
+  "reviewer_check_failure_preserved": {
+    "first_local_check": "KeyError: date，出现在读取旧CSV的独审脚本；误假定日期列名。",
+    "correction": "只读实际CSV header确认session_date，改独审计算后所有相同关键检查及价格集合检查通过。原数据/作者产物/合同未修改。",
+    "failure_did_not_run_network_or_market": true
+  },
+  "plain_language_conclusion": "已核实深交所2015年的365天回溯标志和三份公告，244个交易日期与两只ETF旧日线吻合。上交所全年结果仍含周末假设，ETF开盘能否交易也未证明。同一公告查找超限，执行验收仍不通过；原件事实只按上述范围接纳。",
+  "release": "独立复核完成并释放；后续登记和报告由root负责。"
+}

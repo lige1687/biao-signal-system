@@ -1,0 +1,686 @@
+{
+  "schema": "two-etf-2015-calendar-source-backup-independent-recheck/1",
+  "checked_at": "2026-10-10T19:00:01.798805+08:00",
+  "status": "accepted_same_machine_same_external_device_path_restore",
+  "source_manifest_sha256": "2a1eaec31be9008c99711fb91c9ba4b0fda32dc02db71e0b84aa55f3ea7e9626",
+  "backup_manifest_sha256": "7ace6016d7f171849e047008219528ef092718bdfe70349e0739a50bb1e2ae34",
+  "restore_readback_sha256": "c70c9c9df053f35bc688ee1d65f5d6b59fe5dc695d3b96822f574fda3d3379b8",
+  "result_location_sha256": "af8d25ecf7664a5b5ea46a31e98d12b9c7d57690ff3e3cfad4b6ce35934048dc",
+  "execution_code_sha256": "a114bdd9099ee356732fd4b3b2805941f3783224671994ff4f569ac53f247ab2",
+  "execution_code_sha_recorded_in_both_processes": true,
+  "backup_pid": 13035,
+  "restore_pid": 13106,
+  "fixed_external": {
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "st_dev": 16777238,
+    "matches_plan": true
+  },
+  "scope": {
+    "original_responses": 15,
+    "binding_files": 5,
+    "files_per_set": 20,
+    "bytes_per_set": 330194,
+    "three_set_total_bytes": 990582,
+    "result_ordinary_file_count": 70,
+    "result_ordinary_bytes": 762005
+  },
+  "checks": {
+    "triplets_passed": 20,
+    "triplets_total": 20,
+    "source_manifest_exact_15_set": true,
+    "binding_exact_5_set": true,
+    "different_process_ids": true,
+    "result_location_exact_file_set": true,
+    "result_location_files_hashed": 70,
+    "restore_branch_source_review": "In archive_source_restore.py restore(), src is constructed exclusively from row[backup_path] before copy_exact; original_path is not read in that branch."
+  },
+  "per_file": [
+    {
+      "role": "original_response",
+      "logical_path": "03-sse-2015-annual.html",
+      "original": {
+        "sha256": "30bafe4c4a5385ac228602383cd687a270957a2e63d861c1f775279d4f1122f0",
+        "bytes": 29031,
+        "st_dev": 16777238,
+        "inode": 18446744073709201173,
+        "mtime_ns": 1791629664120000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "30bafe4c4a5385ac228602383cd687a270957a2e63d861c1f775279d4f1122f0",
+        "bytes": 29031,
+        "st_dev": 16777238,
+        "inode": 18446744073709195598,
+        "mtime_ns": 1791629975410000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "30bafe4c4a5385ac228602383cd687a270957a2e63d861c1f775279d4f1122f0",
+        "bytes": 29031,
+        "st_dev": 16777238,
+        "inode": 18446744073709195535,
+        "mtime_ns": 1791629980340000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "04-szse-2015-annual.html",
+      "original": {
+        "sha256": "8f95a1d652e393542f49b39f408e3e0dd7db5f32ee4b43a08db089776966d114",
+        "bytes": 20257,
+        "st_dev": 16777238,
+        "inode": 18446744073709201167,
+        "mtime_ns": 1791629664880000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "8f95a1d652e393542f49b39f408e3e0dd7db5f32ee4b43a08db089776966d114",
+        "bytes": 20257,
+        "st_dev": 16777238,
+        "inode": 18446744073709195595,
+        "mtime_ns": 1791629975570000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "8f95a1d652e393542f49b39f408e3e0dd7db5f32ee4b43a08db089776966d114",
+        "bytes": 20257,
+        "st_dev": 16777238,
+        "inode": 18446744073709195532,
+        "mtime_ns": 1791629980490000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "08-sse-2015-sept3-adjustment.html",
+      "original": {
+        "sha256": "7f673a2e1cd3fa6905045598f23200649f6e8b9bc78b3b78a653d3c0d5d23070",
+        "bytes": 28061,
+        "st_dev": 16777238,
+        "inode": 18446744073709201146,
+        "mtime_ns": 1791629695740000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "7f673a2e1cd3fa6905045598f23200649f6e8b9bc78b3b78a653d3c0d5d23070",
+        "bytes": 28061,
+        "st_dev": 16777238,
+        "inode": 18446744073709195592,
+        "mtime_ns": 1791629975740000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "7f673a2e1cd3fa6905045598f23200649f6e8b9bc78b3b78a653d3c0d5d23070",
+        "bytes": 28061,
+        "st_dev": 16777238,
+        "inode": 18446744073709195529,
+        "mtime_ns": 1791629980650000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "09-szse-2015-01.json",
+      "original": {
+        "sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709201140,
+        "mtime_ns": 1791629695980000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195589,
+        "mtime_ns": 1791629975900000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "bc4ec505738aef2757bea1624440ce356cd11209c018dca1f47b6a0dbc4acaa4",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195526,
+        "mtime_ns": 1791629980800000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "10-szse-2015-02.json",
+      "original": {
+        "sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "bytes": 1209,
+        "st_dev": 16777238,
+        "inode": 18446744073709201134,
+        "mtime_ns": 1791629710240000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "bytes": 1209,
+        "st_dev": 16777238,
+        "inode": 18446744073709195586,
+        "mtime_ns": 1791629976060000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "4543555648d44c7e8abaa20263e9c60e23123900c15f243ea0a981553227082e",
+        "bytes": 1209,
+        "st_dev": 16777238,
+        "inode": 18446744073709195523,
+        "mtime_ns": 1791629980960000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "11-szse-2015-03.json",
+      "original": {
+        "sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709201128,
+        "mtime_ns": 1791629710420000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195583,
+        "mtime_ns": 1791629976210000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "cc500213c799015874f1e26a2acc4c8ef3d398db0bae0efd3b84e70de1367c4f",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195520,
+        "mtime_ns": 1791629981120000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "12-szse-2015-04.json",
+      "original": {
+        "sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709201122,
+        "mtime_ns": 1791629710590000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709195580,
+        "mtime_ns": 1791629976430000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "36299c3bc0b7783b088d1ae9ebc85edcc71c21b613dec9af34354ee86d52f2c8",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709195517,
+        "mtime_ns": 1791629981270000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "13-szse-2015-05.json",
+      "original": {
+        "sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709201116,
+        "mtime_ns": 1791629710760000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195577,
+        "mtime_ns": 1791629976600000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "8f07b5e2e9a386d18ebc27a073ac9a7ba21eae290f4579c115178f6f08ba74c8",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195514,
+        "mtime_ns": 1791629981440000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "14-szse-2015-06.json",
+      "original": {
+        "sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709201110,
+        "mtime_ns": 1791629710930000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709195574,
+        "mtime_ns": 1791629976750000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "9fcfe5d6af860c20bc793f9eea3f474c49b098b7f6c23b83d43b6fbff8e114dc",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709195511,
+        "mtime_ns": 1791629981600000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "15-szse-2015-07.json",
+      "original": {
+        "sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709201104,
+        "mtime_ns": 1791629711100000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195571,
+        "mtime_ns": 1791629976910000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "42d4b1e86ab84ddf6cf2959704eebfff48c2e9d320605280b7f333bebf4e4eab",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195508,
+        "mtime_ns": 1791629981760000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "16-szse-2015-08.json",
+      "original": {
+        "sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709201098,
+        "mtime_ns": 1791629711280000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195568,
+        "mtime_ns": 1791629977060000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "85682075afedf69439b97f4ac720dca40c6f5e4e1351b0d1f4fc497b5d612505",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195505,
+        "mtime_ns": 1791629981920000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "17-szse-2015-09.json",
+      "original": {
+        "sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709201092,
+        "mtime_ns": 1791629711480000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709195565,
+        "mtime_ns": 1791629977230000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "aa91e64db1ef130e2077f929593858f26827fedadc5360cb6f2d17c5975ae40d",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709195502,
+        "mtime_ns": 1791629982080000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "18-szse-2015-10.json",
+      "original": {
+        "sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709201086,
+        "mtime_ns": 1791629711660000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195562,
+        "mtime_ns": 1791629977390000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "f7a847d9ce7abbc3a351d6de2edcf8229fa56131bf15170d6f8ae70dc3b6ab00",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195499,
+        "mtime_ns": 1791629982240000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "19-szse-2015-11.json",
+      "original": {
+        "sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709201080,
+        "mtime_ns": 1791629711820000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709195559,
+        "mtime_ns": 1791629977540000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "1ae6023660e28d1214f6cb1ce7ecaab03b0346bc7300a7624ec49eb2d61cc98a",
+        "bytes": 1293,
+        "st_dev": 16777238,
+        "inode": 18446744073709195496,
+        "mtime_ns": 1791629982410000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "original_response",
+      "logical_path": "20-szse-2015-12.json",
+      "original": {
+        "sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709201074,
+        "mtime_ns": 1791629711990000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195556,
+        "mtime_ns": 1791629977700000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "86082ee6b5a0344dc3d1c5ca62f0a3e1a7b1852ba1fc44cdf159386e25810ded",
+        "bytes": 1335,
+        "st_dev": 16777238,
+        "inode": 18446744073709195493,
+        "mtime_ns": 1791629982570000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "stage_binding",
+      "logical_path": "executor-contract.json",
+      "original": {
+        "sha256": "2bcfca51a2c00ddc803af53602eb27e568ae7d6af4b8956ecee510727842faab",
+        "bytes": 15571,
+        "st_dev": 16777232,
+        "inode": 97989767,
+        "mtime_ns": 1791629610077390500,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "2bcfca51a2c00ddc803af53602eb27e568ae7d6af4b8956ecee510727842faab",
+        "bytes": 15571,
+        "st_dev": 16777238,
+        "inode": 18446744073709195552,
+        "mtime_ns": 1791629977860000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "2bcfca51a2c00ddc803af53602eb27e568ae7d6af4b8956ecee510727842faab",
+        "bytes": 15571,
+        "st_dev": 16777238,
+        "inode": 18446744073709195489,
+        "mtime_ns": 1791629982730000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "stage_binding",
+      "logical_path": "request-ledger.json",
+      "original": {
+        "sha256": "d99f3eedf3bbe06eecad2814ecc510d32481a24db3c6282e3389a53b116321c8",
+        "bytes": 24951,
+        "st_dev": 16777232,
+        "inode": 97989801,
+        "mtime_ns": 1791629857008988828,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "d99f3eedf3bbe06eecad2814ecc510d32481a24db3c6282e3389a53b116321c8",
+        "bytes": 24951,
+        "st_dev": 16777238,
+        "inode": 18446744073709195549,
+        "mtime_ns": 1791629978020000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "d99f3eedf3bbe06eecad2814ecc510d32481a24db3c6282e3389a53b116321c8",
+        "bytes": 24951,
+        "st_dev": 16777238,
+        "inode": 18446744073709195486,
+        "mtime_ns": 1791629982900000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "stage_binding",
+      "logical_path": "source-review.json",
+      "original": {
+        "sha256": "97f1a538473c9267e10c3208f39d590943dc913801fb85d92fc9c4ec3c9cb2bb",
+        "bytes": 4389,
+        "st_dev": 16777232,
+        "inode": 97991962,
+        "mtime_ns": 1791629857009427793,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "97f1a538473c9267e10c3208f39d590943dc913801fb85d92fc9c4ec3c9cb2bb",
+        "bytes": 4389,
+        "st_dev": 16777238,
+        "inode": 18446744073709195546,
+        "mtime_ns": 1791629978170000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "97f1a538473c9267e10c3208f39d590943dc913801fb85d92fc9c4ec3c9cb2bb",
+        "bytes": 4389,
+        "st_dev": 16777238,
+        "inode": 18446744073709195483,
+        "mtime_ns": 1791629983070000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "stage_binding",
+      "logical_path": "date-field-qualification.json",
+      "original": {
+        "sha256": "38c8ee2cad3ccfec0a84789b1971245263a68e3cb1c73bf2841ebfb65fa7ba17",
+        "bytes": 180102,
+        "st_dev": 16777232,
+        "inode": 97991961,
+        "mtime_ns": 1791629797896130626,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "38c8ee2cad3ccfec0a84789b1971245263a68e3cb1c73bf2841ebfb65fa7ba17",
+        "bytes": 180102,
+        "st_dev": 16777238,
+        "inode": 18446744073709195543,
+        "mtime_ns": 1791629978320000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "38c8ee2cad3ccfec0a84789b1971245263a68e3cb1c73bf2841ebfb65fa7ba17",
+        "bytes": 180102,
+        "st_dev": 16777238,
+        "inode": 18446744073709195480,
+        "mtime_ns": 1791629983240000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    },
+    {
+      "role": "stage_binding",
+      "logical_path": "source-manifest.json",
+      "original": {
+        "sha256": "2a1eaec31be9008c99711fb91c9ba4b0fda32dc02db71e0b84aa55f3ea7e9626",
+        "bytes": 12106,
+        "st_dev": 16777232,
+        "inode": 97989802,
+        "mtime_ns": 1791629711998361969,
+        "matches_record": true,
+        "symlink": false
+      },
+      "backup": {
+        "sha256": "2a1eaec31be9008c99711fb91c9ba4b0fda32dc02db71e0b84aa55f3ea7e9626",
+        "bytes": 12106,
+        "st_dev": 16777238,
+        "inode": 18446744073709195540,
+        "mtime_ns": 1791629978480000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "restored": {
+        "sha256": "2a1eaec31be9008c99711fb91c9ba4b0fda32dc02db71e0b84aa55f3ea7e9626",
+        "bytes": 12106,
+        "st_dev": 16777238,
+        "inode": 18446744073709195477,
+        "mtime_ns": 1791629983400000000,
+        "matches_record": true,
+        "symlink": false
+      },
+      "original_inode_mtime_unchanged": true
+    }
+  ],
+  "limitations": [
+    "All 15 original responses, their backups and restores are on the same physical external device. This proves a path-level copy/restore while the device is healthy, not resilience to that disk failing.",
+    "The five binding originals are on the internal device; their two copies are on the same fixed external device.",
+    "No other-machine restore or system-level file-open trace was performed; distinct PIDs and code SHA are recorded process evidence, not a forensic trace.",
+    "This check makes no trading calendar or market-readiness conclusion and does not repair the recorded request-limit deviation."
+  ],
+  "failures": []
+}
