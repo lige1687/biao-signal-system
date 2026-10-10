@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "53c0224e0aa2d27cec1cbcfe30ea81fb477ee5b0",
-  "checked_at": "2026-10-11T01:53:46.873972+08:00",
+  "checked_coordination_sha": "0d219bb7234f96d680f2f68c60d82b683d31e68c",
+  "checked_at": "2026-10-11T02:02:10.809424+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -77,7 +77,8 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-full-actions-20261010/etf-pair-full-actions-20261010-20261010T182754-75a8d7ac33c6/resume-20261011/",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-core-account-20261011/weekly-two-etf-core-account-20261011-20261011T010700-a4081c5d8c11",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-startup-approved-20261011/weekly-portfolio-startup-approved-20261011-20261011T004758-eb42d2dc65e1",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-complete-account-20261011/weekly-two-etf-complete-account-20261011-20261011T005441-039d9543f167"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-complete-account-20261011/weekly-two-etf-complete-account-20261011-20261011T005441-039d9543f167",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/eight-goal-idle-input-recovery-20261011/eight-goal-idle-input-recovery-20261011-20261011T020139-697075e68738/recovery-proof"
   ],
   "scope_released": false,
   "question_ids": [
@@ -95,7 +96,9 @@
     "original-eight-open-work-resume-20261011",
     "b4-local-source-delta-20261011",
     "account-idle-report-completion-20261011",
-    "K-data-original-audit-completion-20261011"
+    "K-data-original-audit-completion-20261011",
+    "new-idle-account-input-recovery-20261011",
+    "b4-510300-exact-evidence-reuse-20261011"
   ],
   "shared_write_owner": "root only ten own dated report registrations/INDEX lines/catalog prefix/current RESEARCH_TODO supplement and original goal bounded evidence; K-data original audit criteria only may advance to review. No unrelated owner, criterion, authorization or task modified",
   "goal_ids": [
@@ -109,9 +112,9 @@
   ],
   "latest_result_commit": "c58558fd20dcff4bb4000f624e57194a8da36321",
   "scope_amendment": "继续原八目标用户授权；根新增一个有界剩余工作复核报告及原RESEARCH_TODO当前补注、10份本任务报告登记/索引。共享API仅原条目证据/下一步，K-data在完整联合审计证据实际通过时更新原三标准、启动/提交review，原owner/目的/标准/授权保持，不接受或改其他业务范围。",
-  "updated_at": "2026-10-11T01:53:46.873972+08:00",
-  "conflict_decision": "已实际fetch/read53c0224e0aa2d27cec1cbcfe30ea81fb477ee5b0；前次13任务与COORDINATION1.1无增量，三个子任务只写本控制raw新不重叠文件；原B4/R2及A模块owner资料只读，旧作者程序和所有原资金路径不重跑。共享报告/系统/导航由root独占。",
-  "current_work": "三新限定合同已预检查ready，根登记后派发Sol核原B4最后实际残余是否已有本机补证，Sol一次只描述已验12原基础费与2新ETF保存日账的空仓时长，Astra核根K-data联合6主题是否符合原标准。不是新实验/账户重跑。根串行提交原K-data待验收及必要K-risk报告性标准进展，其他标准保留。",
+  "updated_at": "2026-10-11T02:02:10.809424+08:00",
+  "conflict_decision": "实际fetch/read0d219bb7234f96d680f2f68c60d82b683d31e68c，13已读任务及规则无增量。仅两新小结果/窄脚本和已核外盘新独立目录；原续算12CSV及B4行动源/最新证据表都只读，原当前报告/root API由root独占，其他owner输入/源码不改。",
+  "current_work": "根已接纳K-data三审计标准Astra独核，正在实际API更新原条目；K-risk m3补准确日账空仓时间并推进报告性标准，m2不勾。另两Sol独立核新必要12输入的非覆盖外盘副本/另进程恢复，以及旧B4的510300窗口复用最新已核行动证据，原R2仍不运行。",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -250,3 +253,7 @@ Astra独审bb6c7de8337cf83ce1b6c7ae9a5aa658b782bc7258344585f9ab97abd913be1a接�
 ## 2026-10-11T01:53:46.873972+08:00 并行执行准确剩余资料核对和空仓时间报告补齐
 
 Astra已定位原B4精确合同，旧5740同值并不解决未复权与登记定义冲突。根进一步读最终CONTROLLER-FINAL-BLOCKED：后续已取得515300正式事前公告但实施未证、3零事件产品仅两类别区间合格、5只缺18份年度文件及6非目标全覆盖缺口；最早九项处置不是当前全部阻塞。必要下一步按这些精确残余核已有本机原件，不新联网/下载、不用未放行R21+1次数、不缩范围。K-risk m3字面空仓时长先找保存值，必要一次描述现成日账，0账户重跑/0拟合/0参数；不是新收益问题。Astra独核六主题审计限资料资格说明、不放宽缺口。三新合同均ready后才派发；依旧并行只有3子执行，不建用户chat、通知或无限Goal。
+
+## 2026-10-11T02:02:10.809424+08:00 准确补新使用12日账恢复证据并复用510300已有覆盖
+
+本次m3实际使用的12份续算日账7803991B不在本任务已核25/42/19输入恢复清单；仅补其12准确原件的外盘副本与独立进程backup-only恢复，预计15607982B，不移/覆盖/删原资料或重复其他已验备份，大小/hash/stat/设备双核。另B4原6非目标中的510300是否已有连续两类原件，可直接复用刚核24期间表中2019..2026H1部分；旧本地来源审计只覆盖旧batch1/2，不应忽略当前任务已有证据。准确只查510300、不外推5产品，0源/0真实R2/0测试。两合同preflight ready，注册推回后才派发。K-data实际提交审计待验收、K-risk m3报告进度属于既有原三标准，不改owner/目的/标准/授权，不自动accept或称所有业务资料合格。
