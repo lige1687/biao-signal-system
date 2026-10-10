@@ -1,0 +1,176 @@
+{
+  "schema": "original-eight-controller-criterion-review/1",
+  "at": "2026-10-11T01:50:43.217816+08:00",
+  "scope": "Joint documentation audit of original K-data-boundary standards only; not historical input qualification or new trading performance.",
+  "coordination_sha": "53c0224e0aa2d27cec1cbcfe30ea81fb477ee5b0",
+  "sources": [
+    {
+      "path": "docs/experiments/research-first-round-ARCHIVE-2026-09-08.md",
+      "bytes": 21196,
+      "sha256": "8025f7db5959ded19667642036b5d5eebb6bdf0e0f283e5c21f95faa0fc934b0"
+    },
+    {
+      "path": "docs/experiments/research-unified-progress-2026-09-08.md",
+      "bytes": 12703,
+      "sha256": "f199aa9798471a8b4c4f220095ad7543b4cc17e5a0840ae32b937b0cfff7eae2"
+    },
+    {
+      "path": "docs/experiments/dca-instrument-measurement-review-2026-09-08.md",
+      "bytes": 6704,
+      "sha256": "9d9ec335c751372dc847a3783e6b1ab806963fc53646cec09f592cf16c633bd9"
+    },
+    {
+      "path": "docs/experiments/sentiment-combination-feasibility-review-2026-09-08.md",
+      "bytes": 4585,
+      "sha256": "d6c42a73d1185d0fa0754f4a288f68e6a50a57c976ab50304ec61823fca84836"
+    },
+    {
+      "path": "docs/experiments/stock-data-qualification-2026-10-07.md",
+      "bytes": 10022,
+      "sha256": "e1f4a927df508e936734daccd778ae1f77d2088864b98ebcebe56da428b92c6c"
+    },
+    {
+      "path": "docs/experiments/stock-gap-pilot-2026-10-08.md",
+      "bytes": 6475,
+      "sha256": "1fd356715d44bc60dae99837730aa67a33fe225b0a01c05309f585284dad39c4"
+    },
+    {
+      "path": "docs/experiments/raw/frozen-input-recovery-2026-10-10/DATA_USES.md",
+      "bytes": 4686,
+      "sha256": "d5db9c09e9bbcb678d49315f1adb6e254c2218c329a084b5a4b539e64db197e9"
+    },
+    {
+      "path": "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md",
+      "bytes": 19456,
+      "sha256": "2f7113a5dba470628462b47f715de52b8b0dc5399902cd5fc7ff8ea2bea1b755"
+    },
+    {
+      "path": "docs/experiments/etf-pair-action-coverage-completion-2026-10-10.md",
+      "bytes": 14717,
+      "sha256": "9114caffee502c41761940bbd7f5a139948c7c916c1cb150301e9558baea51ef"
+    },
+    {
+      "path": "docs/experiments/two-etf-2015-calendar-source-2026-10-10.md",
+      "bytes": 8879,
+      "sha256": "04d78c380cbdb77524b7353fb75a3792c0f03b9bb0940d2535b5b04509f2ebcb"
+    },
+    {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/data-recovery-readiness.json",
+      "bytes": 10418,
+      "sha256": "45e12fa232ea7d1002dd265b350dd8f7eb22d0c70ec3db55f7a587890a8b85a8"
+    },
+    {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/workflow-method-readiness.json",
+      "bytes": 10757,
+      "sha256": "304571460840be9af56f4ea33e7057a6b3398071badca0db781e2deab1ee4bd0"
+    }
+  ],
+  "data_boundary_subjects": [
+    {
+      "subject": "历史股票/板块成员",
+      "limits": "探索价格表及28个调整公告不能证明2022-01-04完整300成员；当前或不完整成员不能冒充当时产品池。",
+      "affected_use": "5211/PPO/P26保存探索可复用，完整历史成员及成分变化下的预测或交易用途仍不合格。",
+      "existing_fix": "1944缺价键已分类，原保存包已恢复；600837原价三日可核。",
+      "missing": "完整官方起点名单或前一次完整名单加期间全部变更；按指定用途核原件。",
+      "evidence": [
+        "docs/experiments/stock-data-qualification-2026-10-07.md",
+        "docs/experiments/stock-gap-pilot-2026-10-08.md",
+        "docs/experiments/raw/frozen-input-recovery-2026-10-10/DATA_USES.md"
+      ]
+    },
+    {
+      "subject": "价格调整与现金分红",
+      "limits": "当前调整系数不是旧抓取版本；回溯价格不等于含分红现金的账户收益。年报事后字段不等于当时到达资料。",
+      "affected_use": "不能把600837当前调整价补入旧表或把保存价格探索叫真实财富；两ETF公司行动覆盖仅限定字段事后核对。",
+      "existing_fix": "600837旧表实际修复0；两ETF24期间分红/折算指定字段已补齐，2016年报金额冲突保留。",
+      "missing": "旧抓取方法、当时系数/基准、行动公告对应；历史供应商到达及实际分红到账仍未知。",
+      "evidence": [
+        "docs/experiments/stock-gap-pilot-2026-10-08.md",
+        "docs/experiments/etf-pair-action-coverage-completion-2026-10-10.md",
+        "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md"
+      ]
+    },
+    {
+      "subject": "研究指数与可买基金",
+      "limits": "000300/399006指数不同于510300/159915基金；纳斯达克综合指数不同于513100跟踪的纳斯达克100；QQQ币种/市场不同。",
+      "affected_use": "原四资产代理成绩不能直接视为可买基金收益或2008年原组合检验。",
+      "existing_fix": "06产品/历史/计量区分已保存；当前两ETF选择真实基金名义价格但限固定产品。",
+      "missing": "06同产品四资产研究的币种、分红、复权、时区、统一估值及隔离原因仍未全部核实；不启用隔离源。",
+      "evidence": [
+        "docs/experiments/dca-instrument-measurement-review-2026-09-08.md",
+        "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md"
+      ]
+    },
+    {
+      "subject": "分钟资料与日线成交近似",
+      "limits": "已有开高低收日线没有逐笔报价、队列、深度或部分成交顺序；次日09:30按开盘整单成交是研究假设。",
+      "affected_use": "能够核对条件性日线账户，不证明真实盘中触发、成交或完整技术入场/退出。",
+      "existing_fix": "新账户明确冻结决定后开盘、侧向涨跌幅拒单、锁定份额与卖款、跨除息取消；未伪造分钟证据。",
+      "missing": "只在确定需要盘中或真实执行判断时，取得相应分钟/交易条件证据；不能把所有分钟全历史作为日线审计前置。",
+      "evidence": [
+        "docs/experiments/research-first-round-ARCHIVE-2026-09-08.md",
+        "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md"
+      ]
+    },
+    {
+      "subject": "交易日历与跨市场时钟",
+      "limits": "ETF报价日并集不是完整官方实际日历；2015临时休市证明年度安排不等于全部实际开市。中国开盘时同日美国开盘尚未发生。",
+      "affected_use": "原同日跨市场开盘不能用于当时可实施比较；两ETF账户只覆盖模型报价日，未证明全部历史可成交。",
+      "existing_fix": "原06已说明先后问题；2015官方来源和后续日期差异留痕，原合同超限记录未改；新两ETF决策不读随后开盘定数量。",
+      "missing": "06各产品可知汇率/估值与下一可交易时点；全部特殊日历、具体证券开盘资格、实际到账仍未知。",
+      "evidence": [
+        "docs/experiments/dca-instrument-measurement-review-2026-09-08.md",
+        "docs/experiments/two-etf-2015-calendar-source-2026-10-10.md",
+        "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md"
+      ]
+    },
+    {
+      "subject": "完整四个情绪条件与来源到达",
+      "limits": "旧指定窗口只覆盖简化条件，64行日期/状态不是完整四条件，也不是收益交易；下载时间不能替代历史公布/供应商到达。",
+      "affected_use": "07可行性审计可复用；不能称完整四条件4/4有效或用其硬过滤技术信号。",
+      "existing_fix": "窗口/状态重叠审计已完成且失败结论保留，未新增收益筛选。",
+      "missing": "按该独立用途需全市场三票、当时板块成员、资金流、宽度逐日原值及发布时间；缺关键项停止组合有效性判断。",
+      "evidence": [
+        "docs/experiments/sentiment-combination-feasibility-review-2026-09-08.md",
+        "docs/experiments/research-unified-progress-2026-09-08.md"
+      ]
+    }
+  ],
+  "original_criteria": [
+    {
+      "id": "m1",
+      "title": "列出数据限制与受影响的规则或报告",
+      "controller_verdict": "met_for_audit_only",
+      "proof": "All six rows identify limits and affected uses; precise original reports retained."
+    },
+    {
+      "id": "m2",
+      "title": "确认已有修复与仍欠缺部分",
+      "controller_verdict": "met_for_audit_only",
+      "proof": "All six rows separate completed reconciliation/recovery from remaining source or execution gaps; price repair0 and strict false retained."
+    },
+    {
+      "id": "m3",
+      "title": "分别提出可用、仅观察、需补数据的处理建议",
+      "controller_verdict": "met_for_audit_only",
+      "proof": "Saved exploration and fixed daily approximation usable only as specified, modern adjustments/candidate memberships observation, qualified prediction/true execution and original four-product/complete-condition claims require exact missing inputs."
+    }
+  ],
+  "unchanged_scope": [
+    "title",
+    "purpose",
+    "owner",
+    "authorization",
+    "milestone id/title",
+    "other goal criteria",
+    "original frozen failures and budgets"
+  ],
+  "budget_used": {
+    "new_scientific_runs": 0,
+    "new_source_requests": 0,
+    "mechanical_test_reruns": 0,
+    "copies": 0,
+    "fits": 0
+  },
+  "status": "controller_audit_complete_awaiting_independent_criterion_review"
+}

@@ -33,6 +33,7 @@ def main():
     final_calendar_gap = "--calendar-gap-final" in sys.argv[2:]
     final_zero_sale = "--zero-sale-final" in sys.argv[2:]
     final_complete_account = "--complete-account-final" in sys.argv[2:]
+    final_eight_review = "--eight-goal-review-final" in sys.argv[2:]
     assert git("rev-parse", "HEAD", text=True).strip() == MAIN_HEAD
     assert digest((ROOT / ".git/index").read_bytes()) == MAIN_INDEX
     base = git("rev-parse", BRANCH, text=True).strip()
@@ -49,6 +50,8 @@ def main():
         registrations.append("zero-sale")
     if final_complete_account:
         registrations.append("complete-account")
+    if final_eight_review:
+        registrations.append("eight-goal-review")
     entries = [json.loads((CONTROL / f"{name}-registration-entry.json").read_text())
                for name in registrations]
     paths = {"src/lei_signal/research/native_d_conditional_risk.py",
@@ -56,6 +59,8 @@ def main():
              "docs/ops/work-progress/original-eight-continuation-20261010.md",
              "docs/experiments/raw/stock-data-qualification-2026-10-07/march-event-binding-20261010/reuse-review.json"}
     paths.update(entry["report"] for entry in entries)
+    if final_eight_review:
+        paths.add("docs/okr/RESEARCH_TODO.md")
     directories = ["native-d-conditional-risk-2026-10-10",
                    "weekly-portfolio-cross-week-fixed-orders-2026-10-10",
                    "etf-pair-h1-action-qualification-2026-10-10",
@@ -142,6 +147,8 @@ def main():
         line_keys.append("zero_sale_index_line")
     if final_complete_account:
         line_keys.append("complete_account_index_line")
+    if final_eight_review:
+        line_keys.append("eight_goal_review_index_line")
     for key in line_keys:
         previous = inserts.get("previous_own_lines", {}).get(key)
         if previous is not None and previous != inserts[key] and previous in index:

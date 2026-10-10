@@ -1,0 +1,16 @@
+{
+  "stage": "root archive preparation before any report/shared mutation",
+  "error": "accepted event table contains mixed explicit events and references; generic events-only assertion failed",
+  "effects": "No report, registry, navigation, API or coordination mutation before this assertion",
+  "resolution": "Use SHA-bound accepted candidate records for explicit event_ids; retain direct annual event entries. Compare date, record date, scheduled pay date and per-unit amount.",
+  "second_check": {
+    "error": "Strict Decimal(str(old binary float)) equality exposed 2024 representation 0.06899999999999999 versus original decimal 0.0690",
+    "effects": "Only validation, no report/shared mutation",
+    "resolution": "Compare authoritative decimal with old binary float allowing at most one floating point representation step (math.ulp), record representation explicitly; no financially different amount accepted"
+  },
+  "report_api_first_probe": {
+    "error": "list row identifier is name, first adhoc probe used path and raised KeyError after actual report fulltext/classification passed",
+    "effects": "read-only; no API write or file rewrite",
+    "resolution": "reuse prior verified list-name lookup in read_report_api.py"
+  }
+}

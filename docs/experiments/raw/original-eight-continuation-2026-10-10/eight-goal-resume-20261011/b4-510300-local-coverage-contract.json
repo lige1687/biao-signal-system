@@ -1,0 +1,50 @@
+{
+  "mission": "在旧B4原输入放行差额中准确复用本任务刚接受的510300事后行动覆盖证据。仅2019-09-02至2026-06-30窗口两类现金分红和份额折算，读qualified-action-evidence.v2逐期间/原accepted source身份及原B4 normalized-actions引用，核同已知事件金额日期，证明现材料确支持哪些覆盖、是否有冲突。不得把现在取到年度原件当historicalavailable_at，不外推其他5产品/其他行动类型/实际到账，不生成价格或因子。新只读补注只纠正最新local-source readiness中的510300范围，原旧文件保留。",
+  "task_scope": [
+    "bounded use-specific delta for one existing original B4 product"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/qualified-action-evidence.v2-20261011.json",
+    "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/controller-source-acceptance.json",
+    "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/independent-result-review.json",
+    "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/resume-20261011/",
+    "docs/experiments/etf-pair-action-coverage-completion-2026-10-10.md",
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/manifest-draft.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/b4-local-source-readiness.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/b4-510300-local-coverage-delta.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "coordination_sha": "0d219bb7234f96d680f2f68c60d82b683d31e68c",
+  "read_task_ids": [
+    "frozen-input-recovery-20261010",
+    "risk-shape-information",
+    "research-dispatch-controller"
+  ],
+  "expected_outputs": [
+    "Exact original product/period/category old-new evidence delta and R2 still blocked if others missing"
+  ],
+  "stop_conditions": [
+    "No new source, price/true factor or account computation",
+    "No old contract/result edits or shared-state writes"
+  ],
+  "budget": {
+    "new_scientific_runs": 0,
+    "source_requests": 0,
+    "tests": 0,
+    "maximum_new_local_bytes": 65536
+  },
+  "user_authority": "2026-10-11 direct user: continue remaining eight goals; parallelize independent subagents for efficiency.",
+  "referenced_evidence_read_policy": "Only the directly referenced existing reports/manifests/contracts may be read. No writes outside exact output; do not scan whole library."
+}

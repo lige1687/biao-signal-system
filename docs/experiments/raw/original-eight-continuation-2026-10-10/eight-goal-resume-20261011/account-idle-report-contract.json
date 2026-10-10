@@ -1,0 +1,56 @@
+{
+  "mission": "完成原K-risk m3中空仓时间的精确报告差额。只从已验保存日账定位已有空仓/等待统计；缺保存值时一次描述性读取12个原六ETF基础费用账户截至2026-09-25逐日CSV以及新两ETF日账，按quantity或shares全0计模型报价日空仓，列首末日/分母/总空仓日/最长连续段及按日期自然日等待的准确含义。如涨跌/手续费/汇总值无需重算，直接引用已验report。小函数留原始字段定义与适用限制，账户重跑/新路径/拟合/源码author重执行0，不能借用机械修复科学次数。只写新的JSON和窄描述脚本；旧报告由根独占改写。",
+  "task_scope": [
+    "bounded local evidence completion for original goal criteria"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/",
+    "docs/experiments/raw/factor-module-a-continuation-independent-2026-09-27/",
+    "docs/experiments/factor-module-a-money-findings-2026-09-27.md",
+    "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/complete-account-core-root-independent-readback-20261011.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/complete-account-core-contract-20261011.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/factor-money-readiness.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/account-idle-report.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/describe_saved_idle_days.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "coordination_sha": "53c0224e0aa2d27cec1cbcfe30ea81fb477ee5b0",
+  "read_task_ids": [
+    "frozen-input-recovery-20261010",
+    "risk-shape-information",
+    "research-dispatch-controller"
+  ],
+  "expected_outputs": [
+    "Exact scope/readback/source identity, retained limits, zero new market or source runs"
+  ],
+  "stop_conditions": [
+    "No change to existing frozen contracts/results or other owner files",
+    "No shared API/Git/registration writes",
+    "No new policy/account simulation or source request"
+  ],
+  "budget": {
+    "new_scientific_runs": 0,
+    "new_source_requests": 0,
+    "mechanical_test_reruns": 0,
+    "maximum_new_local_bytes": 98304,
+    "saved_account_descriptor_passes": 1
+  },
+  "user_authority": "2026-10-11 direct user: continue remaining eight goals; parallelize independent subagents for efficiency.",
+  "referenced_evidence_read_policy": "Only the directly referenced existing reports/manifests/contracts may be read. No writes outside exact output; do not scan whole library.",
+  "external_read_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-core-account-20261011/weekly-two-etf-core-account-20261011-20261011T010700-a4081c5d8c11/result/paired-core-account.json"
+  ]
+}

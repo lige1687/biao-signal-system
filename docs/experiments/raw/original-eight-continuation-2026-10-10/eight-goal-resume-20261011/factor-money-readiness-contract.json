@@ -1,0 +1,60 @@
+{
+  "mission": "核目标3/5是否有真正尚未回答且原授权内可执行的必要独立问题，及旧完成标准哪些已具备证据。不能把不稳定效果改成参数扫、重复D/A03/旧半年，不能擅自勾旧B4。最多选择两个具体必要问题，给不重复理由、精确输入资格、现负责人、是否实际预算可执行、验收与资料不足；若无需新科学检验则明确哪些仅应按已有证据提交验收，不为了继续造题。",
+  "task_scope": [
+    "bounded evidence and remaining-work audit only",
+    "current original goal IDs: okr-ff1e0a86fbac,K-risk-attribution"
+  ],
+  "read_only_paths": [
+    "docs/okr/RESEARCH_TODO.md",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/goal-snapshot.json",
+    "docs/research/current-standards.json",
+    "docs/experiments/research-evidence-catalog-2026-10-07.md",
+    "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md",
+    "docs/experiments/raw/frozen-input-recovery-2026-10-10/",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/complete-account-core-contract-20261011.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/complete-account-engineering-contract-20261011.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/complete-account-engineering-amendment-20261011.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/complete-account-core-root-independent-readback-20261011.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/complete-account-core-independent-review-20261011.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/complete-account-input-recovery-readiness-20261011.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/complete-account-minimum-input-recovery-readback-20261011.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/factor-money-readiness.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "coordination_sha": "d4a59bd1c50fe4e3ab6d12430d7f361983c9fd8d",
+  "read_task_ids": [
+    "technical-factor-sequence",
+    "research-dispatch-controller",
+    "original-eight-continuation-20261010"
+  ],
+  "expected_outputs": [
+    "one concise JSON with goal criterion/evidence/remaining necessary action/whether executable/owner/exact input/budget/protected boundary",
+    "actual source paths and commits, no generic whole-library work"
+  ],
+  "stop_conditions": [
+    "no change to existing frozen contracts or results",
+    "no new statistic/model/policy path or external source request",
+    "no shared registry/index/goal API/coordination/Git writes",
+    "ambiguous core semantics reported for root, independent audit continues"
+  ],
+  "budget": {
+    "new_scientific_runs": 0,
+    "new_source_requests": 0,
+    "mechanical_test_reruns": 0,
+    "maximum_new_local_bytes": 65536
+  },
+  "user_authority": "2026-10-11 direct user: continue remaining eight goals; parallelize independent subagents for efficiency.",
+  "referenced_evidence_read_policy": "Only the directly referenced existing reports/manifests/contracts may be read. No writes outside exact output; do not scan whole library."
+}

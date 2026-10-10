@@ -1,0 +1,673 @@
+{
+  "schema": "b4-510300-local-coverage-delta/1",
+  "checked_at": "2026-10-11T02:06:24.594633+08:00",
+  "scope": {
+    "product": "510300",
+    "original_B4_price_window": [
+      "2019-09-02",
+      "2026-06-30"
+    ],
+    "categories": [
+      "cash_dividend",
+      "split_or_share_conversion"
+    ],
+    "new_source_requests": 0,
+    "new_scientific_runs": 0
+  },
+  "inputs": [
+    {
+      "path": "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/qualified-action-evidence.v2-20261011.json",
+      "sha256": "6b7ddce65944648a6416d04a1e93ce082910554eeb9dd576df744ad132b71312",
+      "bytes": 47769
+    },
+    {
+      "path": "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/manifest-draft.json",
+      "sha256": "05e8d9023185416e1cfed2c291836f2d30654205d230337a470a5c4bfdc7b51f",
+      "bytes": 11917
+    },
+    {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+      "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81",
+      "bytes": 24603
+    },
+    {
+      "path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/candidate-actions.json",
+      "sha256": "3dde6627f4c8faad3fd2b067acded123714b2632feb2cd321e29406204d9f61f",
+      "bytes": 5586
+    },
+    {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/b4-local-source-readiness.json",
+      "sha256": "ef4e16f8033fdf0a0f755c5ba5b5bb2e7ba8bbcb0fa0a7aec791dc094b55c68a",
+      "bytes": 14158
+    },
+    {
+      "path": "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/controller-reuse-acceptance.json",
+      "sha256": "2b5411a99d1dfe915dc5fb6fd7648633f28ffea806cd0334849ea293fffae35e",
+      "bytes": 879
+    },
+    {
+      "path": "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/independent-result-review.json",
+      "sha256": "bab34a6ea69e3a51c027c520ef2aecee360bac6828bbee7fe2b69e176543ccc5",
+      "bytes": 13949
+    },
+    {
+      "path": "docs/experiments/raw/etf-pair-h1-action-qualification-2026-10-10/independent-review.json",
+      "sha256": "92243cab6a9d3c235fa16bfb8cc8b83f2fe6aab3ce4d34a32e4bc09a2e21798a",
+      "bytes": 5128
+    },
+    {
+      "path": "docs/experiments/factor-etf-input-review-2026-09-23.md",
+      "sha256": "0d15b4311d3ee066640a12a6bac4f0dff912ff1d636b16e9e0ab3221548e272e",
+      "bytes": 20131
+    }
+  ],
+  "period_coverage": [
+    {
+      "period": "2019",
+      "source_period": [
+        "2019-01-01",
+        "2019-12-31"
+      ],
+      "b4_window_intersection": [
+        "2019-09-02",
+        "2019-12-31"
+      ],
+      "cash_status": "supported_events",
+      "source_period_cash_event_count": 2,
+      "b4_window_cash_event_count": 1,
+      "split_status": "supported_zero",
+      "split_event_count": 0,
+      "cash_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-510300-action-gap-2026-09-24/510300-2019-annual.pdf",
+          "source_sha256": "445fffc19760d284b5190e56f6697db952852944bfdd530e4a89f695ab178dc2",
+          "physical_pages": [
+            45
+          ],
+          "source_coverage_period": [
+            "2019-01-01",
+            "2019-12-31"
+          ],
+          "accepted_evidence": "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/controller-reuse-acceptance.json"
+        }
+      ],
+      "split_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-510300-action-gap-2026-09-24/510300-2019-annual.pdf",
+          "source_sha256": "445fffc19760d284b5190e56f6697db952852944bfdd530e4a89f695ab178dc2",
+          "physical_pages": [
+            72
+          ],
+          "source_coverage_period": [
+            "2019-01-01",
+            "2019-12-31"
+          ],
+          "accepted_evidence": "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/controller-reuse-acceptance.json"
+        }
+      ],
+      "market_ready": false
+    },
+    {
+      "period": "2020",
+      "source_period": [
+        "2020-01-01",
+        "2020-12-31"
+      ],
+      "b4_window_intersection": [
+        "2020-01-01",
+        "2020-12-31"
+      ],
+      "cash_status": "supported_zero",
+      "source_period_cash_event_count": 0,
+      "b4_window_cash_event_count": 0,
+      "split_status": "supported_zero",
+      "split_event_count": 0,
+      "cash_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/09-510300-2020-annual.pdf",
+          "source_sha256": "738ff05fda78df5bf77903d3ff6f1dc75489bda0e3926dc7192d995af69ccf5b",
+          "physical_pages": [
+            49
+          ],
+          "source_coverage_period": [
+            "2020-01-01",
+            "2020-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "split_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/09-510300-2020-annual.pdf",
+          "source_sha256": "738ff05fda78df5bf77903d3ff6f1dc75489bda0e3926dc7192d995af69ccf5b",
+          "physical_pages": [
+            37,
+            156
+          ],
+          "source_coverage_period": [
+            "2020-01-01",
+            "2020-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "market_ready": false
+    },
+    {
+      "period": "2021",
+      "source_period": [
+        "2021-01-01",
+        "2021-12-31"
+      ],
+      "b4_window_intersection": [
+        "2021-01-01",
+        "2021-12-31"
+      ],
+      "cash_status": "supported_events",
+      "source_period_cash_event_count": 1,
+      "b4_window_cash_event_count": 1,
+      "split_status": "supported_zero",
+      "split_event_count": 0,
+      "cash_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/10-510300-2021-annual.pdf",
+          "source_sha256": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889",
+          "physical_pages": [
+            71
+          ],
+          "source_coverage_period": [
+            "2021-01-01",
+            "2021-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "split_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/10-510300-2021-annual.pdf",
+          "source_sha256": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889",
+          "physical_pages": [
+            31,
+            113
+          ],
+          "source_coverage_period": [
+            "2021-01-01",
+            "2021-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "market_ready": false
+    },
+    {
+      "period": "2022",
+      "source_period": [
+        "2022-01-01",
+        "2022-12-31"
+      ],
+      "b4_window_intersection": [
+        "2022-01-01",
+        "2022-12-31"
+      ],
+      "cash_status": "supported_events",
+      "source_period_cash_event_count": 1,
+      "b4_window_cash_event_count": 1,
+      "split_status": "supported_zero",
+      "split_event_count": 0,
+      "cash_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/11-510300-2022-annual.pdf",
+          "source_sha256": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5",
+          "physical_pages": [
+            161
+          ],
+          "source_coverage_period": [
+            "2022-01-01",
+            "2022-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "split_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/11-510300-2022-annual.pdf",
+          "source_sha256": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5",
+          "physical_pages": [
+            36,
+            193
+          ],
+          "source_coverage_period": [
+            "2022-01-01",
+            "2022-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "market_ready": false
+    },
+    {
+      "period": "2023",
+      "source_period": [
+        "2023-01-01",
+        "2023-12-31"
+      ],
+      "b4_window_intersection": [
+        "2023-01-01",
+        "2023-12-31"
+      ],
+      "cash_status": "supported_events",
+      "source_period_cash_event_count": 1,
+      "b4_window_cash_event_count": 1,
+      "split_status": "supported_zero",
+      "split_event_count": 0,
+      "cash_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/12-510300-2023-annual.pdf",
+          "source_sha256": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7",
+          "physical_pages": [
+            52
+          ],
+          "source_coverage_period": [
+            "2023-01-01",
+            "2023-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "split_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/12-510300-2023-annual.pdf",
+          "source_sha256": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7",
+          "physical_pages": [
+            39,
+            101
+          ],
+          "source_coverage_period": [
+            "2023-01-01",
+            "2023-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "market_ready": false
+    },
+    {
+      "period": "2024",
+      "source_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "b4_window_intersection": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "cash_status": "supported_events",
+      "source_period_cash_event_count": 1,
+      "b4_window_cash_event_count": 1,
+      "split_status": "supported_zero",
+      "split_event_count": 0,
+      "cash_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/13-510300-2024-annual.pdf",
+          "source_sha256": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b",
+          "physical_pages": [
+            44
+          ],
+          "source_coverage_period": [
+            "2024-01-01",
+            "2024-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "split_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/13-510300-2024-annual.pdf",
+          "source_sha256": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b",
+          "physical_pages": [
+            33,
+            72
+          ],
+          "source_coverage_period": [
+            "2024-01-01",
+            "2024-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "market_ready": false
+    },
+    {
+      "period": "2025",
+      "source_period": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "b4_window_intersection": [
+        "2025-01-01",
+        "2025-12-31"
+      ],
+      "cash_status": "supported_events",
+      "source_period_cash_event_count": 1,
+      "b4_window_cash_event_count": 1,
+      "split_status": "supported_zero",
+      "split_event_count": 0,
+      "cash_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf",
+          "source_sha256": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+          "physical_pages": [
+            45,
+            46
+          ],
+          "source_coverage_period": [
+            "2025-01-01",
+            "2025-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "split_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf",
+          "source_sha256": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+          "physical_pages": [
+            35,
+            76
+          ],
+          "source_coverage_period": [
+            "2025-01-01",
+            "2025-12-31"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md"
+          ]
+        }
+      ],
+      "market_ready": false
+    },
+    {
+      "period": "2026H1",
+      "source_period": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "b4_window_intersection": [
+        "2026-01-01",
+        "2026-06-30"
+      ],
+      "cash_status": "supported_events",
+      "source_period_cash_event_count": 1,
+      "b4_window_cash_event_count": 1,
+      "split_status": "supported_zero",
+      "split_event_count": 0,
+      "cash_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf",
+          "source_sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+          "physical_pages": [
+            32
+          ],
+          "source_coverage_period": [
+            "2026-01-01",
+            "2026-06-30"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md",
+            "docs/experiments/raw/etf-pair-h1-action-qualification-2026-10-10/independent-review.json"
+          ]
+        }
+      ],
+      "split_sources": [
+        {
+          "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf",
+          "source_sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+          "physical_pages": [
+            24,
+            60
+          ],
+          "source_coverage_period": [
+            "2026-01-01",
+            "2026-06-30"
+          ],
+          "accepted_evidence": [
+            "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+            "docs/experiments/factor-etf-input-review-2026-09-23.md",
+            "docs/experiments/raw/etf-pair-h1-action-qualification-2026-10-10/independent-review.json"
+          ]
+        }
+      ],
+      "market_ready": false
+    }
+  ],
+  "period_count": 8,
+  "old_normalized_cash_event_count_in_window": 7,
+  "event_comparison": [
+    {
+      "old_event_id": "510300-cash_dividend-2019-12-11",
+      "ex_date": "2019-12-11",
+      "record_date": "2019-12-10",
+      "scheduled_pay_date": "2019-12-16",
+      "cash_per_unit_CNY": "0.062",
+      "old_normalized_raw_float": 0.062,
+      "amount_and_dates_match": true,
+      "new_amount_record": "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/qualified-action-evidence.v2-20261011.json#rows[510300,2019].cash.events",
+      "accepted_official_period_source": {
+        "source_path": "docs/experiments/raw/factor-510300-action-gap-2026-09-24/510300-2019-annual.pdf",
+        "source_sha256": "445fffc19760d284b5190e56f6697db952852944bfdd530e4a89f695ab178dc2",
+        "physical_pages": [
+          45
+        ],
+        "source_coverage_period": [
+          "2019-01-01",
+          "2019-12-31"
+        ],
+        "accepted_evidence": "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/controller-reuse-acceptance.json"
+      }
+    },
+    {
+      "old_event_id": "510300-cash_dividend-2021-01-18",
+      "ex_date": "2021-01-18",
+      "record_date": "2021-01-15",
+      "scheduled_pay_date": "2021-01-21",
+      "cash_per_unit_CNY": "0.072",
+      "old_normalized_raw_float": 0.072,
+      "amount_and_dates_match": true,
+      "new_amount_record": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/candidate-actions.json#510300-cash-2021-01-18",
+      "accepted_official_period_source": {
+        "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/10-510300-2021-annual.pdf",
+        "source_sha256": "35a8647d9dd401c65030eafb67e0b65f1c40b3f75d8270c12d1436c00b204889",
+        "physical_pages": [
+          71
+        ],
+        "source_coverage_period": [
+          "2021-01-01",
+          "2021-12-31"
+        ],
+        "accepted_evidence": [
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+          "docs/experiments/factor-etf-input-review-2026-09-23.md"
+        ]
+      }
+    },
+    {
+      "old_event_id": "510300-cash_dividend-2022-01-19",
+      "ex_date": "2022-01-19",
+      "record_date": "2022-01-18",
+      "scheduled_pay_date": "2022-01-24",
+      "cash_per_unit_CNY": "0.075",
+      "old_normalized_raw_float": 0.075,
+      "amount_and_dates_match": true,
+      "new_amount_record": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/candidate-actions.json#510300-cash-2022-01-19",
+      "accepted_official_period_source": {
+        "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/11-510300-2022-annual.pdf",
+        "source_sha256": "0bc9c86850dc6f131c6dad12925135a21fe80bead53dbbd046bb0f811678d0e5",
+        "physical_pages": [
+          161
+        ],
+        "source_coverage_period": [
+          "2022-01-01",
+          "2022-12-31"
+        ],
+        "accepted_evidence": [
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+          "docs/experiments/factor-etf-input-review-2026-09-23.md"
+        ]
+      }
+    },
+    {
+      "old_event_id": "510300-cash_dividend-2023-01-16",
+      "ex_date": "2023-01-16",
+      "record_date": "2023-01-13",
+      "scheduled_pay_date": "2023-01-19",
+      "cash_per_unit_CNY": "0.064",
+      "old_normalized_raw_float": 0.064,
+      "amount_and_dates_match": true,
+      "new_amount_record": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/candidate-actions.json#510300-cash-2023-01-16",
+      "accepted_official_period_source": {
+        "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/12-510300-2023-annual.pdf",
+        "source_sha256": "a2a2cb594905a00fc6d092b17ddf841a1f7195dfde3698d4aa8bdc7b6a9f86e7",
+        "physical_pages": [
+          52
+        ],
+        "source_coverage_period": [
+          "2023-01-01",
+          "2023-12-31"
+        ],
+        "accepted_evidence": [
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+          "docs/experiments/factor-etf-input-review-2026-09-23.md"
+        ]
+      }
+    },
+    {
+      "old_event_id": "510300-cash_dividend-2024-01-18",
+      "ex_date": "2024-01-18",
+      "record_date": "2024-01-17",
+      "scheduled_pay_date": "2024-01-23",
+      "cash_per_unit_CNY": "0.069",
+      "old_normalized_raw_float": 0.06899999999999999,
+      "amount_and_dates_match": true,
+      "new_amount_record": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/candidate-actions.json#510300-cash-2024-01-18",
+      "accepted_official_period_source": {
+        "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/13-510300-2024-annual.pdf",
+        "source_sha256": "77041d9520683ee3e2eb2111811b068af9b70526715dcffed57f2bf170fbff0b",
+        "physical_pages": [
+          44
+        ],
+        "source_coverage_period": [
+          "2024-01-01",
+          "2024-12-31"
+        ],
+        "accepted_evidence": [
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+          "docs/experiments/factor-etf-input-review-2026-09-23.md"
+        ]
+      }
+    },
+    {
+      "old_event_id": "510300-cash_dividend-2025-06-18",
+      "ex_date": "2025-06-18",
+      "record_date": "2025-06-17",
+      "scheduled_pay_date": "2025-06-27",
+      "cash_per_unit_CNY": "0.088",
+      "old_normalized_raw_float": 0.088,
+      "amount_and_dates_match": true,
+      "new_amount_record": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/candidate-actions.json#510300-cash-2025-06-18",
+      "accepted_official_period_source": {
+        "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/14-510300-2025-annual.pdf",
+        "source_sha256": "4e5632ab0b46865f679d15d7ecdf036076517f48285c9a2d03cdecf5697acabe",
+        "physical_pages": [
+          45,
+          46
+        ],
+        "source_coverage_period": [
+          "2025-01-01",
+          "2025-12-31"
+        ],
+        "accepted_evidence": [
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+          "docs/experiments/factor-etf-input-review-2026-09-23.md"
+        ]
+      }
+    },
+    {
+      "old_event_id": "510300-cash_dividend-2026-01-19",
+      "ex_date": "2026-01-19",
+      "record_date": "2026-01-16",
+      "scheduled_pay_date": "2026-01-27",
+      "cash_per_unit_CNY": "0.123",
+      "old_normalized_raw_float": 0.123,
+      "amount_and_dates_match": true,
+      "new_amount_record": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/candidate-actions.json#510300-cash-2026-01-19",
+      "accepted_official_period_source": {
+        "source_path": "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/sources/15-510300-2026-half.pdf",
+        "source_sha256": "b77ce47ece834f968b085c6823c72ffaa635f82d80793cc6c2ebafce301221c5",
+        "physical_pages": [
+          32
+        ],
+        "source_coverage_period": [
+          "2026-01-01",
+          "2026-06-30"
+        ],
+        "accepted_evidence": [
+          "docs/experiments/raw/factor-etf-two-fund-reports-2026-09-23/source-records.json",
+          "docs/experiments/factor-etf-input-review-2026-09-23.md",
+          "docs/experiments/raw/etf-pair-h1-action-qualification-2026-10-10/independent-review.json"
+        ]
+      }
+    }
+  ],
+  "event_amount_date_match_count": 7,
+  "out_of_window_cash_event": {
+    "event_id": "510300-cash_dividend-2019-01-16",
+    "ex_date": "2019-01-16",
+    "cash_per_unit_CNY": 0.059,
+    "excluded_from_B4_window": true
+  },
+  "count_discrepancy": "Earlier G1/assignment shorthand says 8 in-window, but exact frozen B4 manifest events_in_scope and its SHA-bound normalized-actions enumerate seven 510300 cash events inside 2019-09-02..2026-06-30. Eight is the total including pre-window 2019-01-16. No eighth in-window event was invented.",
+  "conclusion": {
+    "current_retrospective_cash_coverage_for_510300_B4_window": "supported",
+    "current_retrospective_split_or_conversion_coverage_for_510300_B4_window": "supported_zero",
+    "old_normalized_events": "7 of 7 in-window cash dates, record dates, scheduled pay dates, and per-unit amounts align with accepted current-period material; 2019-01-16 excluded as pre-window",
+    "scope_limit": "Current official annual/interim report evidence does not prove historical source arrival by each trade date, actual cash receipt, adjusted price validity, or factor performance.",
+    "prior_readiness": "This addendum supersedes only its earlier 510300 cash/split continuous-coverage residual; the prior file remains unchanged.",
+    "remaining_B4": "Other five old non-target products, 15 missing annual zero-event periods, 515300 implementation fact, and source-budget accounting are not established by this 510300 addendum. R2 remains blocked."
+  },
+  "old_readiness_sha256_before_and_after": "ef4e16f8033fdf0a0f755c5ba5b5bb2e7ba8bbcb0fa0a7aec791dc094b55c68a"
+}

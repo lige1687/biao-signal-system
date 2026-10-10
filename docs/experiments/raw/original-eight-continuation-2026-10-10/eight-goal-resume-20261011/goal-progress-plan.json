@@ -1,0 +1,217 @@
+{
+  "at": "2026-10-11T02:04:30.499937+08:00",
+  "root_evidence_accepted": true,
+  "independent_data_audit_accepted": true,
+  "independent_review_sha256": "1099e86153e8604030edab3bb67877d88f2e577f8659efe6676af4e241acce41",
+  "report": "docs/experiments/original-eight-open-work-review-2026-10-11.md",
+  "steps": [
+    {
+      "goal_id": "K-data-boundary",
+      "method": "POST",
+      "payload": {
+        "action": "start",
+        "note": "按用户持续八目标授权，接纳既有联合资料审计并登记实际结果，不重复原研究。",
+        "scope": "原八目标续接：只记录原K-data三项资料审计完成并提交待验收，以及K-risk原m3报告性进度；不变owner/目的/原标准/授权，不自动接受，不表示资料或策略全面有效。"
+      },
+      "target_fields": {
+        "status": "in_progress"
+      },
+      "skip_if_status_in": [
+        "in_progress",
+        "review"
+      ]
+    },
+    {
+      "goal_id": "K-data-boundary",
+      "method": "PATCH",
+      "payload": {
+        "milestones": [
+          {
+            "id": "m1",
+            "title": "列出数据限制与受影响的规则或报告",
+            "done": true
+          },
+          {
+            "id": "m2",
+            "title": "确认已有修复与仍欠缺部分",
+            "done": true
+          },
+          {
+            "id": "m3",
+            "title": "分别提出可用、仅观察、需补数据的处理建议",
+            "done": true
+          }
+        ],
+        "evidence": "本轮06A/07A已交；不能把全部市场数据审计标完成。\n2026-10-11联合审计：原首轮/06产品与跨市场/07四条件、股票来源及两ETF近似/行动覆盖已逐主题核到13份准确来源；六主题明确限制、受影响用途、已有修复与欠缺、可用/观察/需补资料。原板块当前成分回溯、次级别日线代理非真实60分钟、成交量非实际成本均保留。三个原标准只完成资料边界审计，未把历史成员/旧调整版本/分钟/跨市场/完整四条件/实际到达成交到账改成合格。根逐标准证据与Astra独核accepted；详见docs/experiments/original-eight-open-work-review-2026-10-11.md和raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/controller-criterion-review.json及controller-criterion-independent-review.json。",
+        "links": [
+          {
+            "label": "12篇论文对照报告",
+            "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+          },
+          {
+            "label": "三路研究首轮报告与独立复核",
+            "url": "/library?report=docs%2Fexperiments%2Fresearch-first-round-ARCHIVE-2026-09-08.md"
+          },
+          {
+            "label": "新版任务统一研究总览与后续清单",
+            "url": "/library?report=docs%2Fexperiments%2Fresearch-unified-progress-2026-09-08.md"
+          },
+          {
+            "label": "八目标当前复核与数据边界审计",
+            "url": "/library?report=docs%2Fexperiments%2Foriginal-eight-open-work-review-2026-10-11.md"
+          }
+        ],
+        "next_action": "三项资料边界审计已提交待验收；资料缺口保留，具体用途通过后才开展对应计算。原后续：复用06产品和07完整条件缺口；先核当时来源与可交易时点，不擅自补值或启用隔离数据。"
+      },
+      "target_fields": {
+        "milestones": [
+          {
+            "id": "m1",
+            "title": "列出数据限制与受影响的规则或报告",
+            "done": true
+          },
+          {
+            "id": "m2",
+            "title": "确认已有修复与仍欠缺部分",
+            "done": true
+          },
+          {
+            "id": "m3",
+            "title": "分别提出可用、仅观察、需补数据的处理建议",
+            "done": true
+          }
+        ],
+        "evidence": "本轮06A/07A已交；不能把全部市场数据审计标完成。\n2026-10-11联合审计：原首轮/06产品与跨市场/07四条件、股票来源及两ETF近似/行动覆盖已逐主题核到13份准确来源；六主题明确限制、受影响用途、已有修复与欠缺、可用/观察/需补资料。原板块当前成分回溯、次级别日线代理非真实60分钟、成交量非实际成本均保留。三个原标准只完成资料边界审计，未把历史成员/旧调整版本/分钟/跨市场/完整四条件/实际到达成交到账改成合格。根逐标准证据与Astra独核accepted；详见docs/experiments/original-eight-open-work-review-2026-10-11.md和raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/controller-criterion-review.json及controller-criterion-independent-review.json。",
+        "links": [
+          {
+            "label": "12篇论文对照报告",
+            "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+          },
+          {
+            "label": "三路研究首轮报告与独立复核",
+            "url": "/library?report=docs%2Fexperiments%2Fresearch-first-round-ARCHIVE-2026-09-08.md"
+          },
+          {
+            "label": "新版任务统一研究总览与后续清单",
+            "url": "/library?report=docs%2Fexperiments%2Fresearch-unified-progress-2026-09-08.md"
+          },
+          {
+            "label": "八目标当前复核与数据边界审计",
+            "url": "/library?report=docs%2Fexperiments%2Foriginal-eight-open-work-review-2026-10-11.md"
+          }
+        ],
+        "next_action": "三项资料边界审计已提交待验收；资料缺口保留，具体用途通过后才开展对应计算。原后续：复用06产品和07完整条件缺口；先核当时来源与可交易时点，不擅自补值或启用隔离数据。"
+      }
+    },
+    {
+      "goal_id": "K-data-boundary",
+      "method": "POST",
+      "payload": {
+        "action": "submit_review",
+        "note": "六主题/13来源的资料边界审计及Astra独核通过，原三条审计标准已满足，提交待验收；实际资料和后续业务资格缺口均保留。",
+        "scope": "原八目标续接：只记录原K-data三项资料审计完成并提交待验收，以及K-risk原m3报告性进度；不变owner/目的/原标准/授权，不自动接受，不表示资料或策略全面有效。"
+      },
+      "target_fields": {
+        "status": "review"
+      }
+    },
+    {
+      "goal_id": "K-risk-attribution",
+      "method": "PATCH",
+      "payload": {
+        "milestones": [
+          {
+            "id": "m1",
+            "title": "查已有止损和仓位研究覆盖",
+            "done": true
+          },
+          {
+            "id": "m2",
+            "title": "建立同成本、可比风险承担的简单对照",
+            "done": false
+          },
+          {
+            "id": "m3",
+            "title": "报告收益、跌幅、空仓时间和执行成本",
+            "done": true
+          }
+        ],
+        "evidence": "既有止损与仓位研究覆盖已核对；0.5ATR固定机会比较同时展示相同资金及计划风险、现金与费用；完整共享资金及真实成本对照仍未完成。\n2026-10-11原m3报告性标准补齐：复用原A模块收益/跌幅/费用报告，并从保存日账一次描述12原六ETF基础费账户及新P0/P1准确零持仓天数/最长段。旧报价日分母1147，新2790，初始现金段及非报价日区别明确；不以平均仓位当空仓时间，原收益未重算、账户重跑0。原两ETF近似例波动比0.997697仍少2827.83元，不能替代技术触发/止损退出的同风险增量，因此m2保持false；旧固定2/2、月度4/4及原失败保持。根另核588000确认组全1147天零持仓与510300原组1053/1147相符。详见docs/experiments/original-eight-open-work-review-2026-10-11.md和raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/account-idle-report.json。",
+        "links": [
+          {
+            "label": "12篇论文对照报告",
+            "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+          },
+          {
+            "label": "研究负责人任务审阅与原文出处",
+            "url": "/library?report=docs%2Fexperiments%2Fresearch-lead-task-review-2026-09-08.md"
+          },
+          {
+            "label": "三路研究首轮报告与独立复核",
+            "url": "/library?report=docs%2Fexperiments%2Fresearch-first-round-ARCHIVE-2026-09-08.md"
+          },
+          {
+            "label": "新版任务统一研究总览与后续清单",
+            "url": "/library?report=docs%2Fexperiments%2Fresearch-unified-progress-2026-09-08.md"
+          },
+          {
+            "label": "第六批研究与独立复核",
+            "url": "/library?report=docs/experiments/atr-buffer-opportunity-study-2026-09-08.md"
+          },
+          {
+            "label": "当前空仓时间与有界资金证据",
+            "url": "/library?report=docs%2Fexperiments%2Foriginal-eight-open-work-review-2026-10-11.md"
+          }
+        ],
+        "next_action": "原八目标5的固定投入两组2/2及月度四组4/4已经结案、次数耗尽；现金/费用核对一致，但实际波动超0.90—1.10标准，风险相近的收益贡献仍未证明，不再执行旧提示中的同题完整资金重跑。只在出现独立必要新问题时，先核旧证据为何不足、合格输入、简单对照和该问题实际剩余次数再接续；本目标其他原授权工作及负责人保留。 本轮m3报告差额已补，m2技术触发/止损退出的相近风险增量仍未证明；新两ETF比例调整例不替代原问题。"
+      },
+      "target_fields": {
+        "milestones": [
+          {
+            "id": "m1",
+            "title": "查已有止损和仓位研究覆盖",
+            "done": true
+          },
+          {
+            "id": "m2",
+            "title": "建立同成本、可比风险承担的简单对照",
+            "done": false
+          },
+          {
+            "id": "m3",
+            "title": "报告收益、跌幅、空仓时间和执行成本",
+            "done": true
+          }
+        ],
+        "evidence": "既有止损与仓位研究覆盖已核对；0.5ATR固定机会比较同时展示相同资金及计划风险、现金与费用；完整共享资金及真实成本对照仍未完成。\n2026-10-11原m3报告性标准补齐：复用原A模块收益/跌幅/费用报告，并从保存日账一次描述12原六ETF基础费账户及新P0/P1准确零持仓天数/最长段。旧报价日分母1147，新2790，初始现金段及非报价日区别明确；不以平均仓位当空仓时间，原收益未重算、账户重跑0。原两ETF近似例波动比0.997697仍少2827.83元，不能替代技术触发/止损退出的同风险增量，因此m2保持false；旧固定2/2、月度4/4及原失败保持。根另核588000确认组全1147天零持仓与510300原组1053/1147相符。详见docs/experiments/original-eight-open-work-review-2026-10-11.md和raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/account-idle-report.json。",
+        "links": [
+          {
+            "label": "12篇论文对照报告",
+            "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+          },
+          {
+            "label": "研究负责人任务审阅与原文出处",
+            "url": "/library?report=docs%2Fexperiments%2Fresearch-lead-task-review-2026-09-08.md"
+          },
+          {
+            "label": "三路研究首轮报告与独立复核",
+            "url": "/library?report=docs%2Fexperiments%2Fresearch-first-round-ARCHIVE-2026-09-08.md"
+          },
+          {
+            "label": "新版任务统一研究总览与后续清单",
+            "url": "/library?report=docs%2Fexperiments%2Fresearch-unified-progress-2026-09-08.md"
+          },
+          {
+            "label": "第六批研究与独立复核",
+            "url": "/library?report=docs/experiments/atr-buffer-opportunity-study-2026-09-08.md"
+          },
+          {
+            "label": "当前空仓时间与有界资金证据",
+            "url": "/library?report=docs%2Fexperiments%2Foriginal-eight-open-work-review-2026-10-11.md"
+          }
+        ],
+        "next_action": "原八目标5的固定投入两组2/2及月度四组4/4已经结案、次数耗尽；现金/费用核对一致，但实际波动超0.90—1.10标准，风险相近的收益贡献仍未证明，不再执行旧提示中的同题完整资金重跑。只在出现独立必要新问题时，先核旧证据为何不足、合格输入、简单对照和该问题实际剩余次数再接续；本目标其他原授权工作及负责人保留。 本轮m3报告差额已补，m2技术触发/止损退出的相近风险增量仍未证明；新两ETF比例调整例不替代原问题。"
+      }
+    }
+  ]
+}

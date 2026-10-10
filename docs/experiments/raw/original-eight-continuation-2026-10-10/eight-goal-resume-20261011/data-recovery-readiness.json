@@ -1,0 +1,186 @@
+{
+  "schema": "eight-goal-data-recovery-readiness/1",
+  "checked_at": "2026-10-11T01:41:25.432005+08:00",
+  "scope": "Existing source/evidence coverage and device identity only; no new experiment, source request, copy, remote login, deletion or shared-state write.",
+  "coordination_sha_from_frozen_contract": "d4a59bd1c50fe4e3ab6d12430d7f361983c9fd8d",
+  "contract": {
+    "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/data-recovery-readiness-contract.json",
+    "sha256": "85bfb8563846050330aa5403397e2424008953ff000220354f0aa588158e70f6",
+    "bytes": 3469
+  },
+  "goal_snapshot": {
+    "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/goal-snapshot.json",
+    "sha256": "e835c09a74194bbd70ce9668e613bb522d0c8e7bbc60a77daff15c243c5f30ad",
+    "bytes": 36030
+  },
+  "goal4": {
+    "id": "K-data-boundary",
+    "snapshot_version": 19,
+    "authoritative_status": "approved",
+    "owner": "研究负责人",
+    "milestones_in_snapshot": {
+      "m1": false,
+      "m2": false,
+      "m3": false
+    },
+    "criterion_audit": [
+      {
+        "id": "m1",
+        "criterion": "列出数据限制与受影响的规则或报告",
+        "existing_coverage": "documented",
+        "evidence": [
+          {
+            "path": "docs/experiments/raw/frozen-input-recovery-2026-10-10/DATA_USES.md",
+            "sha256": "d5db9c09e9bbcb678d49315f1adb6e254c2218c329a084b5a4b539e64db197e9",
+            "bytes": 4686
+          },
+          {
+            "path": "docs/experiments/stock-data-qualification-2026-10-07.md",
+            "sha256": "e1f4a927df508e936734daccd778ae1f77d2088864b98ebcebe56da428b92c6c",
+            "bytes": 10022
+          }
+        ],
+        "specific_facts": "DATA_USES separates saved 5211-price/PPO/P26 descriptive exploration from whole historical CSI300 membership, old 600837 adjusted-price repair, trading qualification and ETF-specific work; stock report maps unavailable fields and affected claims.",
+        "minimum_remaining": "For this documentation criterion, no new data. Original owner/controller must assess and record acceptance; it does not qualify the still-missing historical inputs."
+      },
+      {
+        "id": "m2",
+        "criterion": "确认已有修复与仍欠缺部分",
+        "existing_coverage": "documented_with_later_recovery_correction",
+        "evidence": [
+          {
+            "path": "docs/experiments/raw/frozen-input-recovery-2026-10-10/DATA_USES.md",
+            "sha256": "d5db9c09e9bbcb678d49315f1adb6e254c2218c329a084b5a4b539e64db197e9",
+            "bytes": 4686
+          },
+          {
+            "path": "docs/experiments/stock-data-qualification-2026-10-07.md",
+            "sha256": "e1f4a927df508e936734daccd778ae1f77d2088864b98ebcebe56da428b92c6c",
+            "bytes": 10022
+          },
+          {
+            "path": "docs/experiments/stock-gap-pilot-2026-10-08.md",
+            "sha256": "1fd356715d44bc60dae99837730aa67a33fe225b0a01c05309f585284dad39c4",
+            "bytes": 6475
+          }
+        ],
+        "specific_facts": "1944 missing-price keys were classified, but main old price repair remains 0; 600837 raw quotes agree at three fixed dates, current adjusted values do not reproduce old scale. DATA_USES updates the 10/7 missing-PPO/P26 artifact note: saved effect packages were later recovered, descriptive-only.",
+        "minimum_remaining": "No rerun of saved PPO/P26 or three-key pilot. Any old-price repair needs old fetch recipe, historical factor snapshot/basis and matching corporate-action source; historical whole-index use needs the official complete 300-member list at 2022-01-04 or 2021-12-13 plus all intervening changes."
+      },
+      {
+        "id": "m3",
+        "criterion": "分别提出可用、仅观察、需补数据的处理建议",
+        "existing_coverage": "documented_by_explicit_use",
+        "evidence": [
+          {
+            "path": "docs/experiments/raw/frozen-input-recovery-2026-10-10/DATA_USES.md",
+            "sha256": "d5db9c09e9bbcb678d49315f1adb6e254c2218c329a084b5a4b539e64db197e9",
+            "bytes": 4686
+          },
+          {
+            "path": "docs/experiments/stock-data-qualification-2026-10-07.md",
+            "sha256": "e1f4a927df508e936734daccd778ae1f77d2088864b98ebcebe56da428b92c6c",
+            "bytes": 10022
+          },
+          {
+            "path": "docs/experiments/stock-gap-pilot-2026-10-08.md",
+            "sha256": "1fd356715d44bc60dae99837730aa67a33fe225b0a01c05309f585284dad39c4",
+            "bytes": 6475
+          }
+        ],
+        "specific_facts": "Saved frozen-price exploration is usable with stated limits; 600837 current adjustment, candidate membership and missing-price classifications are observation only; whole-index and trade/wealth claims need purpose-specific source qualification. ETF full-account work uses its own inputs rather than a general stock-library prerequisite.",
+        "minimum_remaining": "No generic whole-library source request. For a specifically chosen product/date and real-trade use, obtain contemporaneous source arrival/permissions, complete eligible membership, adjusted price plus dividend/exit chain, halt/limit/execution and fee evidence before advancing that use."
+      }
+    ],
+    "conclusion": "All three documentation subjects are covered in existing material, while API snapshot still marks m1-m3 false. Evidence coverage is not formal owner acceptance or historical market readiness.",
+    "can_continue_locally_now": "Controller can review these exact documents and reconcile milestone notes without new research; saved descriptive scope can be reused. New historical membership, old-price reconstruction or real execution conclusions cannot be completed from current sources alone.",
+    "protected_boundary": "No new source request, old price-table write, saved PPO/P26 rerun, live trading or shared API mutation by this audit."
+  },
+  "goal8": {
+    "id": "okr-57eb3f28e526",
+    "snapshot_version": 18,
+    "authoritative_status": "in_progress",
+    "owner": "Codex 原来源恢复 / 01a123fc-553b-7b81-9952-36e1acb11dcc",
+    "milestones_in_snapshot": {
+      "locate_frozen_sources": true,
+      "verify_independent_copies": true,
+      "verify_other_machine_recovery": false,
+      "publish_recovery_receipt": true
+    },
+    "frozen_manifest_scope": "A input manifest first 25 sources only; not the other 22 supporting files or runtime environment",
+    "physical_devices": {
+      "original_25": {
+        "count": 25,
+        "bytes": 5718377,
+        "actual_stat_device": 16777232,
+        "mount_device": "/dev/disk3s5",
+        "volume": "/System/Volumes/Data",
+        "location": "Internal",
+        "current_path_exists_size_inode_mtime_equal_source_audit": 25
+      },
+      "existing_backup_23": {
+        "count": 23,
+        "bytes": 5417582,
+        "actual_stat_device": 16777238,
+        "mount_device": "/dev/disk4s3",
+        "volume_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+        "location": "External USB",
+        "current_path_exists_and_size_equal": 23,
+        "prior_two_full_content_readbacks_verified": true
+      },
+      "other_2": {
+        "count": 2,
+        "kind": "exact_remote_Git_HTTP_versions",
+        "status": "used as exact sources for local restore; no separate physical copy claimed in original 23-backup set"
+      },
+      "local_restored_25": {
+        "count": 25,
+        "bytes": 5718377,
+        "actual_stat_device": 16777238,
+        "same_physical_external_disk_as_backup_23": true,
+        "current_path_exists_and_size_equal": 25,
+        "prior_independent_full_content_review_passed": 25
+      }
+    },
+    "evidence": [
+      {
+        "path": "docs/experiments/raw/frozen-input-recovery-2026-10-10/source-audit.json",
+        "sha256": "727dbe2b3f539641894277d20e51ba2035a97bda26401f37ef636e4e87d44994",
+        "bytes": 39664
+      },
+      {
+        "path": "docs/experiments/raw/frozen-input-recovery-2026-10-10/backup-execution.json",
+        "sha256": "2b47e488cd52e72152174f9811b3f0c5392bd151302a23ec22703974dd82a130",
+        "bytes": 21121
+      },
+      {
+        "path": "docs/experiments/raw/frozen-input-recovery-2026-10-10/local-restore-execution.json",
+        "sha256": "4988275c13aeca7a008011304cd8c752723048b141691821389a84397bfe3cb4",
+        "bytes": 27658
+      },
+      {
+        "path": "docs/experiments/raw/frozen-input-recovery-2026-10-10/local-restore-independent-review.json",
+        "sha256": "bfa4e75793a7f753c23b8164e9b9dc9a7e73f17f5f159c54c5d8b5e7cf7f58be",
+        "bytes": 1390
+      },
+      {
+        "path": "docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md",
+        "sha256": "18c27f533647bf97a3d6ee8b4ccd63d3bb91454426c079df4834d3f9d1697e51",
+        "bytes": 12406
+      }
+    ],
+    "remaining_criterion": "Read and verify all exact 25 source bytes on a genuinely separate target computer; record that host identity, external volume UUID and mount, source mappings, per-file size/SHA and failures. Existing local restore does not satisfy this.",
+    "other_machine_access_from_scoped_records": "No identified target computer, confirmed connection method or evidence that this external disk is available on that computer in the scoped recovery records. A generic possibility of another host would not prove the drive or source access.",
+    "can_continue_locally_now": "No remaining untested local backup/restore step for these original 25. Preserve verified originals, backup and local restore; do not duplicate them. Other original goals may proceed independently.",
+    "blocked_condition_for_other_machine_only": "A target computer with authorized access to the fixed external disk and exact two Git versions, plus a recorded target-device identity/connection; no remote login or cross-machine action was authorized for this audit.",
+    "physical_limit": "Original internal disk and external USB disk are distinct physical devices. Backup and local restored paths share one external physical disk, so local restored copies do not prove recovery from damage to that disk or recovery on another computer."
+  },
+  "budget_used_this_audit": {
+    "new_scientific_runs": 0,
+    "new_source_requests": 0,
+    "mechanical_test_reruns": 0,
+    "network_or_remote_logins": 0,
+    "copies": 0
+  },
+  "status": "bounded_readiness_audit_complete"
+}

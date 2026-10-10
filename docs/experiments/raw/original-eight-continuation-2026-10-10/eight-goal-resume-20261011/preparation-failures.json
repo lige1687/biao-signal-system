@@ -1,0 +1,11 @@
+{
+  "stage": "readiness snapshot preparation before coordinator activation or delegation",
+  "errors": [
+    "Selected complete goal histories exceeded 1 MiB small-record guard; no snapshot was written.",
+    "Dependent coordinator updater was called after failed preparation and saw missing new phase file; no mutation occurred."
+  ],
+  "actual_new_scientific_runs": 0,
+  "actual_goal_writes": 0,
+  "actual_coordination_writes": 0,
+  "correction": "Store current semantic goal fields plus latest note, omit nested prior history; keep API as authority. Inspect success before dependent actions."
+}

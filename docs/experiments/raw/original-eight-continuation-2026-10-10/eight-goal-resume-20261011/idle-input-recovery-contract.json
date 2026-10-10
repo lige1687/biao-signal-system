@@ -1,0 +1,128 @@
+{
+  "mission": "为本次m3空仓描述实际12项输入补可恢复性证据。原25/42/当前19的已核清单没有这些续算12CSV，不重做旧备份。先核实际原件stat/SHA与input_csvs一致，按准确固定盘计划只复制到新backup，再另独立进程仅读backup恢复到新restored并逐项SHA核同，源stat前后不变；不移动删除原件、不把原料加入Git、不换设备。保存准确两进程PID/设备/路径/文件SHA及失败，明确同盘恢复非异机。",
+  "task_scope": [
+    "bounded backup and restoration proof for twelve exact newly used saved-account inputs"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/159915.SZ-A_ALL-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/159915.SZ-A_SMA-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-A_ALL-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-A_SMA-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-A_ALL-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-A_SMA-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-A_ALL-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-A_SMA-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/512100.SS-A_ALL-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/512100.SS-A_SMA-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-A_ALL-base-daily.csv",
+    "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-A_SMA-base-daily.csv",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/account-idle-report.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/idle-input-recovery-storage-plan.json",
+    "docs/ops/research-output-storage.md",
+    "docs/ops/codex-storage-management.md"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/idle-input-recovery-readback.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/backup_saved_idle_inputs.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "coordination_sha": "0d219bb7234f96d680f2f68c60d82b683d31e68c",
+  "read_task_ids": [
+    "frozen-input-recovery-20261010",
+    "risk-shape-information",
+    "research-dispatch-controller"
+  ],
+  "expected_outputs": [
+    "12 exact input backups and backup-only separate-process restores on fixed device; small source-location receipt and source script"
+  ],
+  "stop_conditions": [
+    "No original source changes, deletion, overwrite or move",
+    "Device or source identity mismatch stops new writes",
+    "No source request, account replay, stats or shared-state changes"
+  ],
+  "budget": {
+    "scientific_runs": 0,
+    "source_requests": 0,
+    "account_replays": 0,
+    "tests": 0,
+    "new_csv_copy_bytes": 15607982,
+    "maximum_new_local_bytes": 98304
+  },
+  "user_authority": "2026-10-11 direct user: continue remaining eight goals; parallelize independent subagents for efficiency.",
+  "referenced_evidence_read_policy": "Only the directly referenced existing reports/manifests/contracts may be read. No writes outside exact output; do not scan whole library.",
+  "input_csvs": [
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/159915.SZ-A_ALL-base-daily.csv",
+      "bytes": 628472,
+      "sha256": "ae12ed331f3eabccfee3583441b601aca6053a192a509248eea39f0f34d46ee4"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/159915.SZ-A_SMA-base-daily.csv",
+      "bytes": 628342,
+      "sha256": "e356ad45e5597db4c6267feec036d96577a68939b8269d65c40855763140e48b"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-A_ALL-base-daily.csv",
+      "bytes": 667402,
+      "sha256": "cd3535505ed55388c3a4ed987a3e8d34ad9f65bd407332926fd363ca58ed343a"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510050.SS-A_SMA-base-daily.csv",
+      "bytes": 667179,
+      "sha256": "df1010be2ed8b1815068b705459eb87c0df7330043af91076cfd1efd15ac6278"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-A_ALL-base-daily.csv",
+      "bytes": 692867,
+      "sha256": "8037409b64b8dee3de758045c6c8357dfa395a7e8e32e2d364b4756ad447ac71"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510300.SS-A_SMA-base-daily.csv",
+      "bytes": 692352,
+      "sha256": "dbfec1ff6365735b135392c9aadc0ff9f75bf2bdb60bf4772edb118650ebba0f"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-A_ALL-base-daily.csv",
+      "bytes": 651825,
+      "sha256": "fa0ca80904c4a1474bfa85718ce16cb9e45db3926990a9e32d07bac336559e3a"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/510500.SS-A_SMA-base-daily.csv",
+      "bytes": 651543,
+      "sha256": "875cc846fe787a9b007c1e06457944c90cb803f1ee0e124f87a5c6dc0285d291"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/512100.SS-A_ALL-base-daily.csv",
+      "bytes": 646784,
+      "sha256": "1b7c2ea307f01b31b99db81e0adeb613edc3e17f82f284455422df4034cfc927"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/512100.SS-A_SMA-base-daily.csv",
+      "bytes": 645134,
+      "sha256": "b89bf92c8780d20a6586300bd236696e0535cff2559152f5f264364ab5f0cc8f"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-A_ALL-base-daily.csv",
+      "bytes": 618766,
+      "sha256": "a284336f093b0fb60f6312f040407579142dd02ddb0f411426ed1ccb6449a713"
+    },
+    {
+      "path": "docs/experiments/raw/factor-module-a-continuation-2026-09-27/588000.SS-A_SMA-base-daily.csv",
+      "bytes": 613325,
+      "sha256": "234e67756c5fa3a74ee8aa8020de4e5c952979cd75bc5eac6c43578d082dc80f"
+    }
+  ],
+  "external_write_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/eight-goal-idle-input-recovery-20261011/eight-goal-idle-input-recovery-20261011-20261011T020139-697075e68738/recovery-proof"
+  ]
+}
