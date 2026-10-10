@@ -132,3 +132,17 @@
 - 存储：2026-10-10T12:16:44.296936+08固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9身份正确，外盘592505077760B、本机27649314816B。预计普通媒体/缓存/依赖副本/重建<2GiB外盘，本机记录/控制<200KiB；复用已有依赖，不升级/新安装/删除。
 - 验收：BRIEF/CONTENT_OUTLINE/READY真实状态，原稿与审批区分；原数据与计算指纹、源音乐实测节拍/每秒能量/LUFS/真峰、素材来源许可/联系表；通用源码/锁文件、实际typecheck/中性短渲染/字体图及新父目录重建，manifest与ZIP逐项读回。缺项如实partial，无收益实验。
 - 下一步：核既有资料，准备独立包，完成能独立完成的检查后交用户与Opus入口。
+
+
+## Opus开工准备交付 2026-10-10T12:36:17.011467+08:00
+- status: completed（本轮开工准备）；stage: opus_preparation_delivered_partial；scope_released: true。完整片仍待Opus创作和用户确认，不把准备完成当成片完成。root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c唯一写者。
+- checked_coordination_sha: 5238c8a60c4c54c3ecaf017c0829fd466a9cc0b0；checked_at: 2026-10-10T12:36:17.011467+08:00；已读自身/COORDINATION1.1及既读trend V9、nasdaq、personal-quant、dual-ma、中控，新增trend-perspective仅独立v09-opus-prep；最后fetch无新增范围。无路径重叠，不修改共享Skill或系统。
+- 成果分支codex/cash-position-video-20261009@fecc4a46d5d6ed033fefd3d798b271b3ab80a965，准确两小文件（opus-prep-location.json、自身work-progress）远端SHA/内容读回一致。工程/媒体/依赖仅固定外盘，Git不含。
+- 外盘：/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/投资心态/20261009-cash-position/v07-opus-prep-20261010；BRIEF、CONTENT_OUTLINE、READY、START_OPUS和INDEX为入口。用户原话保留，旧Codex稿标历史非完整定稿；本轮没有新写文稿/分镜/主题视觉，没有调用/安装/切换Opus或制作全片/发布。
+- 交付123文件43924584B逐项SHA读回；manifest SHAffbc45492fd12e739707ec83ce0fd80f32baae5ad448e4f9c82a6e5cbce836b4。ZIP36428116B，SHA9bf18124762a83274cb61442a1f8dcbf6ef25c87da5445b12e6d8007039675b9，124成员逐项核同。ZIP排除node_modules/缓存/PCM/迁移副本/说明文件；完整本机目录已有依赖。
+- 已核：16条SPY日OHLC与原响应逐值、CSV/Decimal/30与70元基本算术，三条Investor.gov原始网页；125.466秒原leyan同SHA、每秒能量/候选拍点与能量分段、整合响度-9.6LUFS、真峰+1.0dBTP。检测候选不冒充听审BPM/拍号/首强拍或干净配乐。
+- 候选实拍F01手机记事本10.08秒、F02手写清单14.72秒，实际1920x1080/25fps，作者/来源/Pexels许可/规格/指纹及全部每秒带时码联系表已查看；旧P01照片可选。未预绑镜头，正常速度可用区间仍待审。用户OPUS参考/已批v04/待批v06明确区别，不搬用参考音画。
+- 通用底座严格类型检查、真实三字体和60帧中性短渲染完整解码通过；356项锁版本匹配。新外盘父目录实体副本typecheck/render通过，资源物理独立、字体像素一致；只验证macOS arm64路径迁移，不称跨OS/从全新联网安装或全片重建。事实/SRT/封面/联系表脚本实际执行通过。
+- READY总包partial：旧Yahoo精确抓取时间未恢复，音乐/实拍正常速度听看、正式发布规格和公开许可未齐；均不阻止已授权私人文稿/风格与样例开工。失败（unused imports、ffprobe缺入口/动态库路径）及定点修复回执保留，归置通过。不删旧片、不新安装/升级/付费/改权限，不把工具依赖可用当商业许可。
+- 固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9于12:33新增前后已核，外盘约569GB可用；逻辑新文件预算<2GiB，exFAT多小文件实际分配更大，未删除或迁移旧内容。外盘运行副本逻辑依赖470615127B一份，迁移副本另列，不随ZIP。
+- 最短接续：把START_OPUS.txt交给Opus，读BRIEF/大纲/READY/INDEX，写具体文稿和视觉，先实际风格帧→中间难点15秒→经用户确认扩片。v04认可不自动认可v06或新全片；公开发布仍独立核验。
