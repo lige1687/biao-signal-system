@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "984531197ec20953368dd90849b5f4aceced23d4",
-  "checked_at": "2026-10-10T18:53:03.073827+08:00",
+  "checked_coordination_sha": "09d5c28150c981325e62188d2d8779535a63e0f8",
+  "checked_at": "2026-10-10T19:02:53.295713+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -50,14 +50,17 @@
     "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/",
     "docs/experiments/etf-pair-action-coverage-completion-2026-10-10.md",
     "docs/experiments/raw/two-etf-2015-calendar-source-2026-10-10/",
-    "docs/experiments/two-etf-2015-calendar-source-2026-10-10.md"
+    "docs/experiments/two-etf-2015-calendar-source-2026-10-10.md",
+    "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/",
+    "docs/experiments/szse-remaining-calendar-2016-2019-2026-10-10.md"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-cross-week-fixed-orders-20261010/weekly-cross-week-fixed-orders-20261010-20261010T180446-28068e4197ff",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-h1-actions-20261010/etf-pair-h1-actions-20261010-20261010T181507-6c6339a1765d",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-full-actions-20261010/etf-pair-full-actions-20261010-20261010T182754-75a8d7ac33c6",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0"
   ],
   "scope_released": false,
   "question_ids": [
@@ -66,7 +69,8 @@
     "weekly-cross-week-fixed-orders-20261010",
     "etf-pair-h1-actions-20261010",
     "etf-pair-full-actions-20261010",
-    "two-etf-2015-exchange-calendar-source-20261010"
+    "two-etf-2015-exchange-calendar-source-20261010",
+    "szse-remaining-calendar-201601-201908-20261010"
   ],
   "shared_write_owner": "root only own D/cross-week/ETF-H1/full-action report registrations and dated catalog note; March original reused",
   "goal_ids": [
@@ -74,11 +78,11 @@
     "K-data-boundary",
     "K-risk-attribution"
   ],
-  "latest_result_commit": "cee45fb1064cdee32663cbb17b8570fdb6691d79",
+  "latest_result_commit": "2758b249e4156ee19d77b6ddcc9a7260835cc822",
   "scope_amendment": "New independent earliest missing year2015 official source question, planned dates/day flags only; fixed entire account candidate unchanged, no old budget borrowing or study reset.",
-  "updated_at": "2026-10-10T18:53:03.073827+08:00",
-  "conflict_decision": "Exact new2015 source raw/report/run disjoint from all related task records, old calendar/source dirs read only. Root only shared writer; Sol owns new source execution ledger/manifest, Astra only design/independent review. Video own directory disjoint.",
-  "current_work": "Two-exchange2015 calendar source acquisition and exact date-field qualification after immutable executor contract.",
+  "updated_at": "2026-10-10T19:02:53.295713+08:00",
+  "conflict_decision": "Fresh related owner records; exact newremaining44 calendar raw/report/external path disjoint, oldsource/qualificationdirs read-only. Root only shared writer. Sol owns newsource executor/ledger only; Astra current2015independent review released, sourcefield and contractdeviation kept separate.",
+  "current_work": "Complete exactly44 remaining SZSEmonthly originals2016-01..2019-08 after accepted2015 source type; zero networksearch/SSE or market run. Root archives2015 partial source answer and preserves failed contract.",
   "paused_questions": [
     {
       "id": "etf-pair-full-actions-20261010",
@@ -133,3 +137,10 @@
 - 独立新累计26公共动作（定位/搜索/打开/HTTP/重定向/失败全计），同语义动作最多2、可计量保存原响应32MiB/单响应4MiB；设计联网0，冻结与推范围之后才允许取源。旧日历27/67合94、年报18/18、H1及全部市场预算保持，不借额度、不重置。若得到同年的有限或负向来源答案也保留，不凭未见调整推全年实际无例外。
 - 固定新外盘128MiB/小记录1MiB计划已核设备与容量；大原件、临时与日志只此run，不回退本机。Sol/medium只此新raw报告草稿和该run、源ledger，Astra/high限定独审文件，root合同/日期接纳与共有登记/API/Git唯一写者。2016—2019先前日历、SSE更后年份、完整ETF开盘资格/当时到达和资金定义均不因本题变合格。
 - 验收按明确日期、全年逐日和同年跨所对应分层；365唯一有效日期/jybz/请求年份/源指纹先核，再比较保存报价日期作诊断。未知/冲突/缺日直接保留；零收益/账户/新价格/标签/拟合。新共享报告登记仅一个，不改冻结calendar.json/原证据/生产。
+
+## 2026-10-10T19:02:53.295713+08:00 2015源事实受限接纳，固定剩余44月独立取源登记
+
+- 2015题已取得15准确原响应，12月365逐日值244开市；Astra独核sourcefields/mapping/指纹及旧价格日期吻合。年度上交所计划加后来九三公告及周末假设与SZSE日值吻合，但实际上海逐日与周末规则原件、资料当时到达/ETF09:30资格未证。取源搜索n5/7/22/23同义4次>2，合同执行not_passed原文保留，总23/26不豁免；已联网停止，不用余3凑。超限搜索未贡献新原件（接纳原件在20前取得）。20必要原响应/绑定文件每套330,194字节已备份/不同PID仅读副本恢复并主控实际SHA核，不称异机异盘。
+- 15源型/结构前提的独审2d02159ef75b2d19505c715d67e03463c4af000326570edf19b1f9f775563b1e支持下一必要问题：剩余SZSE2016-01..2019-08固定44个月/1339自然日。2015和2019-09后不重复，不取新行情/账户，不换资金候选窗口；上交所另源及个股开盘保持未证。设计remaining44-calendar-question-design.json按原输入缺口选月，非收益选择。
+- 独立新累计48HTTP最多（44初次+4真实失败/重定向余量）、可计量响应4MiB/单256KiB，每月canonical语义固定YYYY-MM只能2次、不能换nonce/scheme/标签扩额；连续两源可用性失败停该路径并诊断，不让44月逐个盲失败。禁止全部网络搜索/网页打开/猜URL/旧失败sql/公告定位；重定向只已观察官方目标、同月且入总账。旧日历94、新2015 23及年报18/18等旧累计/失败不变、不借余数。
+- fresh32MiB固定外盘/1MiB本机元数据plan，Sol/medium仅新raw/reportdraft/sourcebody/log该run；root冻结先登记后派，Astra独审/主控日期接纳。验证每月准确年/日集合/0-1标志及源SHA后才合并，缺月/缺日不填weekday或零。若44齐备仅接受其回溯日值，若源题有限负答案则如实结案/预算中断paused；不把资料日期齐当完整策略输入。2015报告源事实受限/执行失败独立阶段归档仍由root继续完成，并只准确路径普通推分支/API读回。
