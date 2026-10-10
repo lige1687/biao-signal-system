@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "fee5ba6d092ec400015f27333b86bad0a30d6bf2",
-  "checked_at": "2026-10-11T01:00:02.420570+08:00",
+  "checked_coordination_sha": "34a50519ef64e1ed7b6ef7b6ce0c66bb880cf87a",
+  "checked_at": "2026-10-11T01:04:22.625099+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -93,11 +93,11 @@
     "K-data-boundary",
     "K-risk-attribution"
   ],
-  "latest_result_commit": "ca035465e49b06f13e8d4bca587baad0e5f8ac7a",
-  "scope_amendment": "Original engineering contract606ea6 remains immutable. New precisely bound amendment: ex cancellation from original decision, end6/30 locked asset placeholder non-executable; inherit side-specific limit rejection, dated deposit annualization, unrecovered duration and operation burden. Same10 artificialcases/no extra historicalpaths/no variants/no source.",
-  "updated_at": "2026-10-11T01:00:02.420570+08:00",
-  "conflict_decision": "Fetched/read latest fee5ba6d092ec400015f27333b86bad0a30d6bf2; only unrelated cash-video changed after ownfcb8. Keep same exact writer paths. Sol engineering, root controller/shared, Astra independent semantics. No mainHEAD/index changes.",
-  "current_work": "完整账户工程中；独审要求已绑定不改旧合同，人工检查先行，尚未批准市场账户运行。",
+  "latest_result_commit": "b2214ccb525c3f3a65c71fc5bed587ff6d0e8266",
+  "scope_amendment": "Root exact startup archive b2214ccb286files readback accepted; original contract+amendment unchanged. Artificial attempt1 SHA typo0case/attempt2 original10passed/attempt3 necessary frozen-amendment checks explicitly authorized under engineering_controller_can_amend_only_needed_local_checks_with_cause. This exceeds original two-start engineering plan; never labelwithin2/reset counts. Same10distinctcases, marketbudget/no variants unchanged.",
+  "updated_at": "2026-10-11T01:04:22.625099+08:00",
+  "conflict_decision": "Fresh34a50519 no relevant task changes; same sole writers/raw paths. API only own K-risk note v21 and D-tracking v9 readback; persistent fields preserved. MainHEAD/index unchanged.",
+  "current_work": "人工原批通过，追加说明对应的必要定向工程核验仍在执行；市场核心尚未授权。起步成果分支/API已核。",
   "paused_questions": [
     "旧严格历史日历/实际开盘/当时到达/真实到账资格仍未证，本新有限日线研究不得将strictfalse改ready。",
     "独立另一盘/异机恢复未证，不阻止已验本机工作。"
@@ -210,3 +210,8 @@ Astra只读定位真实工程缺口：旧v2只验买单、拒跨行动、未自�
 ## 2026-10-11T01:00:02.420570+08:00 完整资金工程独审补清除息跨决定与末端锁定
 
 Astra只读合同审阅完成，未需用户新决定。旧合同606ea6不覆盖，追加准确条件：原决策至候选开盘间除息取消；末日买入与卖出保留锁定状态，窗外时钟仅未释放占位、无执行/估值/窗外价格。涨停买入/跌停卖出拒绝沿旧输入规则；原规范资金年化、最长未恢复、实际操作日和周中额外操作均保留。嵌入原10人工案，不增研究变体或预算。Sol已收到，市场核心仍待代码及人工账本独核后另冻合同。
+
+## 2026-10-11T01:04:22.625099+08:00 起步归档读回与准确工程启动次数
+
+起步准确归档b2214ccb525c3f3a65c71fc5bed587ff6d0e8266，远端286文件逐字节相同，主HEAD/index不变；K-risk-attribution v21/D-tracking v9仅note实际读回原字段保持，首次定义不再blocked。发布第一次仅新helperEOF多空行导致diffcheck失败，未commit/push/API写，修正并保留失败；无重跑研究。
+工程累计如实保存：一次SHA拷贝遗漏预检失败计入，原10案下一批通过；因独审冻结追加019c7e必要边界还需定向验证，按原工程负责人有因追加本机检查条款单独记录第三次启动，不称原两次内、不重置计数。历史一对/最多必要机械修复4路径预算不变，0参数/0来源/0历史账户。当前固定盘568.26GB、本机13.80GB，新结果日志固定外盘，本轮无迁移删除。
