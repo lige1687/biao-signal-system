@@ -1,0 +1,127 @@
+{
+  "schema": "jan2017-missing-date-local-readiness.v1",
+  "checked_at": "2026-10-10T19:13:05.682168+08:00",
+  "scope": "Read-only targeted local search for existing official SZSE source proving 2017-01-01 closure; no network, monthList retry, account or market run.",
+  "finding": "No saved exact 2017 annual or New Year SZSE official closure notice or official all-weekend-rule original was found in the bounded relevant calendar source/raw/manifests and formal calendar reports. Therefore 2017-01-01 remains unknown in the 44-month contract.",
+  "saved_failure": {
+    "request_n": 13,
+    "month": "2017-01",
+    "status": "failed_validation",
+    "source_url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2017-01&random=0.1",
+    "body_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/13-szse-2017-01.json",
+    "body_sha256": "ecb169288a2a9c6a21eadd90d3047243dd28498436568f2d0499b756edf7eae3",
+    "http_status": 200,
+    "observed_dates": "2017-01-02..2017-01-31, 30 distinct records",
+    "missing_date": "2017-01-01",
+    "jybz_for_missing_date": null,
+    "unchanged": true
+  },
+  "existing_official_2017_01_01_original": null,
+  "existing_official_2017_notice_url": null,
+  "existing_official_all_weekends_rule_text_for_2017": null,
+  "nearby_but_insufficient_saved_sources": [
+    {
+      "kind": "SZSE 2015 annual notice",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/two-etf-2015-exchange-calendar-source-20261010/two-etf-2015-exchange-calendar-source-20261010-20261010T185259-084798f00c13/04-szse-2015-annual.html",
+      "url": "https://www.szse.cn/disclosure/notice/general/t20141224_501340.html",
+      "sha256": "8f95a1d652e393542f49b39f408e3e0dd7db5f32ee4b43a08db089776966d114",
+      "read_scope": "2014-12-24 notice governs 2015 only, not 2017-01-01"
+    },
+    {
+      "kind": "SZSE official calendar page saved UI source",
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_cal_page.html",
+      "original_url": "not recorded in this saved file",
+      "sha256": "c172b73cf8301d68b194464a6efca3a719f04274d9b22d6df680c69460eddad9",
+      "read_scope": "HTML script references /modules/tradeCalendar/js/tradeCanledar_new.js and /modules/tradeCalendar/js/stopResTrading_new.js; no 2017 annual/New Year text or Jan1 daily flag found"
+    },
+    {
+      "kind": "old official SZSE publication search response",
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_search.json",
+      "original_url": "not recorded in response body",
+      "sha256": "909a526f37ede9aad5fb563a8735ddde67db27e48ec4e0ff5871074118e4b710",
+      "read_scope": "HTTP 50x maintenance HTML, not a successful 2017 notice; no retry authorized in this read-only check"
+    },
+    {
+      "kind": "old official SZSE notice probe response",
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_notice.json",
+      "original_url": "not recorded in response body",
+      "sha256": "909a526f37ede9aad5fb563a8735ddde67db27e48ec4e0ff5871074118e4b710",
+      "read_scope": "same HTTP 50x maintenance HTML, not a successful notice"
+    }
+  ],
+  "observed_official_entry_classes_not_verified_2017_urls": [
+    {
+      "type": "SZSE general notice page",
+      "observed_exact_example_url": "https://www.szse.cn/disclosure/notice/general/t20141224_501340.html",
+      "caveat": "2015 example only; cannot guess 2017 notice URL from it"
+    },
+    {
+      "type": "SZSE trade calendar web UI",
+      "saved_page": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_cal_page.html",
+      "observed_script_paths": [
+        "/modules/tradeCalendar/js/tradeCanledar_new.js",
+        "/modules/tradeCalendar/js/stopResTrading_new.js"
+      ],
+      "caveat": "saved UI is not the missing date source"
+    },
+    {
+      "type": "SZSE monthList",
+      "observed_exact_url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2017-01&random=0.1",
+      "caveat": "already requested once and missing Jan1; no same-endpoint retry"
+    }
+  ],
+  "formal_prior_calendar_report": {
+    "path": "docs/experiments/research-calendar-completion-2026-09-10.md",
+    "read_scope": "states retrospective official calendar was 2019-09..2026-06 and publication evidence only SSE 2026; does not supply 2017 SZSE notice"
+  },
+  "searched_bounded_paths": [
+    "docs/experiments/raw/research-calendar-completion-2026-09-10",
+    "docs/experiments/raw/two-etf-2015-calendar-source-2026-10-10",
+    "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10"
+  ],
+  "no_weekday_imputation": true,
+  "next_question_if_new_contract": "Locate a genuine SZSE 2017 annual/New Year official notice with exact text that covers 2017-01-01, or an independent official day-level record including that date; keep original missing monthList body/failed_validation untouched. Any fresh public source action requires a new frozen budget and scope.",
+  "readback_sha256": {
+    "2017_01_month_body": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/13-szse-2017-01.json",
+      "sha256": "ecb169288a2a9c6a21eadd90d3047243dd28498436568f2d0499b756edf7eae3"
+    },
+    "2017_01_month_header": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/13-szse-2017-01.headers.json",
+      "sha256": "128daaa115a97e24e14a4753c2ac66be8e6dcf4ea4679c20ebc8f708825684c0"
+    },
+    "remaining44_ledger": {
+      "path": "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/request-ledger.json",
+      "sha256": "439946018c8c300a9693c0c475252f988601f08f15b6b9bde7a6812852008b2a"
+    },
+    "remaining44_manifest": {
+      "path": "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/source-manifest.json",
+      "sha256": "17d3988a0039f8b28f2cef512b01415c3626857bdbbbc1561ea9a11fc94a571d"
+    },
+    "remaining44_report": {
+      "path": "docs/experiments/szse-remaining-calendar-2016-2019-2026-10-10.md",
+      "sha256": "c82aa2a500238267ecac4a2a6bde562bc44e6a448068fec69fffa96fcafda3a5"
+    },
+    "prior_publication_evidence": {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json",
+      "sha256": "657ef122c62aefcf8d580e5e20e85beac8b1a0979c399f3529ae30d6b245ef02"
+    },
+    "prior_szse_search_failure": {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_search.json",
+      "sha256": "909a526f37ede9aad5fb563a8735ddde67db27e48ec4e0ff5871074118e4b710"
+    },
+    "prior_szse_notice_failure": {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_notice.json",
+      "sha256": "909a526f37ede9aad5fb563a8735ddde67db27e48ec4e0ff5871074118e4b710"
+    },
+    "prior_szse_calendar_page": {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-probe/szse_cal_page.html",
+      "sha256": "c172b73cf8301d68b194464a6efca3a719f04274d9b22d6df680c69460eddad9"
+    },
+    "2015_szse_annual_source_manifest": {
+      "path": "docs/experiments/raw/two-etf-2015-calendar-source-2026-10-10/source-manifest.json",
+      "sha256": "2a1eaec31be9008c99711fb91c9ba4b0fda32dc02db71e0b84aa55f3ea7e9626"
+    }
+  }
+}

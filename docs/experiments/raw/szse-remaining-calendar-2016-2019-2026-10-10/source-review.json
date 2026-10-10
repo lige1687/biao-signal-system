@@ -1,0 +1,67 @@
+{
+  "schema": "szse-remaining44-source-review.v1",
+  "contract_sha256": "54ab90ab5652ce5c498d16bffb21d2dc7f6c4bd4f9dc60827392a52565774c55",
+  "status": "partial_source_coverage_43_of_44_months",
+  "actual_http_actions": 44,
+  "http_limit": 48,
+  "raw_response_bytes": 57648,
+  "raw_limit": 4194304,
+  "source_responses_saved": 44,
+  "source_sha256_readback_ok": true,
+  "qualified_months": 43,
+  "qualified_natural_dates": 1308,
+  "qualified_trading_days": 876,
+  "failed_request_n": 13,
+  "failed_month": "2017-01",
+  "failed_body_sha256": "ecb169288a2a9c6a21eadd90d3047243dd28498436568f2d0499b756edf7eae3",
+  "failed_exact_missing_dates": [
+    "2017-01-01"
+  ],
+  "failed_observed_dates_count": 30,
+  "failure_class": "HTTP200 source body omitted 2017-01-01; content gap, no justified same-month retry",
+  "same_month_attempts": 1,
+  "same_month_limit": 2,
+  "retry_used": false,
+  "historical_stop_reason_preserved": "month 2017-01 failed; diagnose before any retry",
+  "root_diagnosis_resume_event": {
+    "at_utc": "2026-10-10T11:07:06.591640+00:00",
+    "authority": "root confirmed independent fixed months may continue after 2017-01 diagnosed content gap",
+    "failed_request_n": 13,
+    "missing_date": "2017-01-01",
+    "failed_month_remains_unqualified": true,
+    "historical_stop_reason_preserved": "month 2017-01 failed; diagnose before any retry",
+    "next_independent_month": "2017-02",
+    "prior_program": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/acquire_months.py",
+    "prior_program_sha256": "1779445c25f04a06d870b203e2224ac6ba20c49a143e8550dbe6f469c04baa4d"
+  },
+  "later_independent_months_qualified": 31,
+  "full_44_months_qualified": false,
+  "full_1339_days_qualified": false,
+  "unknown_not_filled_by_weekday": true,
+  "no_market_or_account_runs": true,
+  "prior_request_counts_untouched": {
+    "old_calendar": 94,
+    "2015_separate": 23
+  },
+  "quote_date_diagnostic_only": {
+    "sh510300": {
+      "input_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sh510300-nominal.csv",
+      "input_sha256": "bca4b942cbb9706bda4e54b6f14209929258b17895bdca342332cd0a731d5fdc",
+      "qualified_month_trade_dates": 876,
+      "quote_dates_in_qualified_months": 876,
+      "official_trade_without_quote": [],
+      "quote_without_official_trade": []
+    },
+    "sz159915": {
+      "input_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sz159915-nominal.csv",
+      "input_sha256": "4495f6087ab14fdae7bcf0af545e3bd6ae6a9807f6ae97205e1f0c174f52c849",
+      "qualified_month_trade_dates": 876,
+      "quote_dates_in_qualified_months": 876,
+      "official_trade_without_quote": [],
+      "quote_without_official_trade": []
+    }
+  },
+  "remaining_source_gap": "2017-01-01 exact official daily flag; other 30 January observed but not full-month-qualified",
+  "external_run": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0",
+  "conclusion_strength": "43 exact full-month retrospective source bodies, not full 44-month interval or point-in-time availability"
+}

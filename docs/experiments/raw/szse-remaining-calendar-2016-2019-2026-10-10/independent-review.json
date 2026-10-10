@@ -1,0 +1,901 @@
+{
+  "schema": "szse_remaining44_independent_review.v1",
+  "reviewed_at": "2026-10-10T19:13:23.795625+08:00",
+  "reviewer": "Astra /root/next_research_design",
+  "question_id": "szse-remaining-calendar-201601-201908-20261010",
+  "scope": "零联网；只读原44响应、账本、代码、报告；仅对已有两ETF日期列做诊断，没有价格数值、账户或收益计算。",
+  "storage_preflight": {
+    "at": "2026-10-10T19:12:06.903993+08:00",
+    "external_identity_ok": true,
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "free_bytes": 568651808768,
+    "external_writes": 0
+  },
+  "input_sha256": {
+    "executor-contract.json": "54ab90ab5652ce5c498d16bffb21d2dc7f6c4bd4f9dc60827392a52565774c55",
+    "source-manifest.json": "17d3988a0039f8b28f2cef512b01415c3626857bdbbbc1561ea9a11fc94a571d",
+    "request-ledger.json": "439946018c8c300a9693c0c475252f988601f08f15b6b9bde7a6812852008b2a",
+    "date-field-candidate.json": "94c84e5a48b2da0298e16383ff8ea403ff3f8513d49d68fce488aff5d090af8f",
+    "source-review.json": "d1bf01f4e94a054387a9408773d2a43a83b6bef655198819051232c30d74a945",
+    "acquire_months.py": "1779445c25f04a06d870b203e2224ac6ba20c49a143e8550dbe6f469c04baa4d",
+    "resume_independent_months.py": "66d9f7947cb96d3dcbc27e2401cfb6a3de409f58bc0d2a51de243e956f2352e4"
+  },
+  "method": "未导入或执行取源程序。独立读每个原字节并核SHA/大小/URL/状态/响应头，逐月按calendar.monthrange生成自然日集合并检验原字段、日期和去重；逐一重新构造1339行并与候选完全比较；仅用CSV session_date与43月开市日期作集合比较。",
+  "all_44_sources_verified": [
+    {
+      "n": 1,
+      "month": "2016-01",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/01-szse-2016-01.json",
+      "sha256": "70f2162f07e62477ceae00df1002b89a7442c22dd160aa4ecbac815a3de006dc",
+      "bytes": 1335,
+      "headers_sha256": "93e502a7aba85145fe8432cc2ae75386baf663511483837c927dd68b85ea8182",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 2,
+      "month": "2016-02",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/02-szse-2016-02.json",
+      "sha256": "3d99850177343f2758be8993e766c16d6d01838f9a0cc7ebfbf8e982c56bb12c",
+      "bytes": 1251,
+      "headers_sha256": "fde042abc6c0815e7aa0c12527164b76dd1407cc95006767d7bd6bd6b06126a1",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 3,
+      "month": "2016-03",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/03-szse-2016-03.json",
+      "sha256": "c515ca8304128631221713832ef491a96d9c03f1f5784123d770d1c6a53f9eca",
+      "bytes": 1335,
+      "headers_sha256": "1a9b848a2cca8ab13ecb2d1bad0ac5cfd2d6cecea15376cc28915a08607c3af0",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 4,
+      "month": "2016-04",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/04-szse-2016-04.json",
+      "sha256": "c8fc971cc53ba75f46f838794d9e3cf65c9684a188e820d2c55ea40190411784",
+      "bytes": 1293,
+      "headers_sha256": "2c064036743fe3ef53cd6699bcc06cfda1ae1824b46a8127fd26edb49e324209",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 5,
+      "month": "2016-05",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/05-szse-2016-05.json",
+      "sha256": "ee68614e7ef201e089aa797869482f69796eb39de176ee457d5a02e75d9e6cdc",
+      "bytes": 1335,
+      "headers_sha256": "bcc2e274725013f5412498777f67f193e74992a87c56c366986a761229055689",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 6,
+      "month": "2016-06",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/06-szse-2016-06.json",
+      "sha256": "79994e6b17bd097b9d0a2233d411306d4560a69b3827d8f9c59fd32cae0cd248",
+      "bytes": 1293,
+      "headers_sha256": "4cf5b1615102ded5c81ae43dcfff81fe2212dd1657218b0465de41b038248369",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 7,
+      "month": "2016-07",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/07-szse-2016-07.json",
+      "sha256": "d11f3834aefef4e5267993205522ebb6e71e94816e2bdc49404a680f849d0395",
+      "bytes": 1335,
+      "headers_sha256": "20cd34e9f6dbe57177d6f9cfc195224470566348ca6c8a3ca397b39352354cdf",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 8,
+      "month": "2016-08",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/08-szse-2016-08.json",
+      "sha256": "971f3757a5f8c6804f776a7b5f4db8321829bf13c7be2c0f4a187607414ac7c9",
+      "bytes": 1335,
+      "headers_sha256": "6f136f143832e0a21b9d46c96c8e2835ae52f68e43dfa7b378bee175ecdd34ff",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 9,
+      "month": "2016-09",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/09-szse-2016-09.json",
+      "sha256": "48cfe7acf3ec80dbda24fd1ffb3d7b966ecd0aab733a0b325fe4ec04edc77f49",
+      "bytes": 1293,
+      "headers_sha256": "d9bdee40f40ebc8e1193718026375176e93dabaa3941f2c515a4e59538f4d7ca",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 10,
+      "month": "2016-10",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/10-szse-2016-10.json",
+      "sha256": "45a1dc7ea309d4221cdc90d9b11cb4b97bbc70afb84d686045652bd282b18ed2",
+      "bytes": 1335,
+      "headers_sha256": "919656478c415fef95503545111d41bb9449f9fed2a0c7812933fbee01168279",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 11,
+      "month": "2016-11",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/11-szse-2016-11.json",
+      "sha256": "bf7c2c07700d736169b3cbb7fbf93f2e48b14fadb13c38eab2fda9ad1bc63f47",
+      "bytes": 1293,
+      "headers_sha256": "de98eaf08da24aa3663f8c615fe4ef6afd3134868a1f78ba76499c36ba1eeea5",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 12,
+      "month": "2016-12",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/12-szse-2016-12.json",
+      "sha256": "3da7efb0ce38f7503114fbd56dbe485293b4e1e981d4ac613ac1ebcb9dc8b6ae",
+      "bytes": 1335,
+      "headers_sha256": "4125aabe25e361b917018a7274cc01d9450a134bef201be05cd9dab2c20d2d09",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 13,
+      "month": "2017-01",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/13-szse-2017-01.json",
+      "sha256": "ecb169288a2a9c6a21eadd90d3047243dd28498436568f2d0499b756edf7eae3",
+      "bytes": 1293,
+      "headers_sha256": "128daaa115a97e24e14a4753c2ac66be8e6dcf4ea4679c20ebc8f708825684c0",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 14,
+      "month": "2017-02",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/14-szse-2017-02.json",
+      "sha256": "0ae073bbffbf2a5bb2172cc2970ec360e20d39ebe3c8e03cec7d0fc0fc002e4c",
+      "bytes": 1209,
+      "headers_sha256": "ca0cfff8dcbced15dfd5f6b9f40217ff01a9241c48a1117a190f46b8b2f4d3ab",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 15,
+      "month": "2017-03",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/15-szse-2017-03.json",
+      "sha256": "6635dbaf0509a46197849fcfe7f75d1a32593a71d937bea6e963ba4d3ad594d6",
+      "bytes": 1335,
+      "headers_sha256": "fc70fb2359df450f35ec33d1189ed5df6ff3bf95943275d82b7508ca1f317606",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 16,
+      "month": "2017-04",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/16-szse-2017-04.json",
+      "sha256": "e003e2224756e04a99a260d4b77b7daf75fead0f06126ab653e12bd20477dfc9",
+      "bytes": 1293,
+      "headers_sha256": "30a276ebf551da7060f6853f4aa5fe59508d4d3e92e454ba9123872a8ecd95e8",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 17,
+      "month": "2017-05",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/17-szse-2017-05.json",
+      "sha256": "f47e73f4e94ac7e59722d02501fa54081b08cfe4f2901829552a4c8fa5746304",
+      "bytes": 1335,
+      "headers_sha256": "0c7bcb298c79005e74bc5eaf126b5ba415490ba22f95ef451e306f05325027d5",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 18,
+      "month": "2017-06",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/18-szse-2017-06.json",
+      "sha256": "ead33f16db0fd9780fafc9f7e1be1a729ccdf305150ebcf30d3f0b3ce9dce829",
+      "bytes": 1293,
+      "headers_sha256": "6b4756212d1d596db18ef4d9025c1e2c5b2cb4c89a7c04d177939b2b5279c9a9",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 19,
+      "month": "2017-07",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/19-szse-2017-07.json",
+      "sha256": "325546c01c658d5665b1f79f68289c206358d54d18f17f6e5ad90e38700d607b",
+      "bytes": 1335,
+      "headers_sha256": "48c66f6d59d3cdd7248a280565cd09efeb5fba8f7e841a4610518520069b5d93",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 20,
+      "month": "2017-08",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/20-szse-2017-08.json",
+      "sha256": "77f661907eca6193177208622af6f9596edefd93d6cf75d198a94aa4165a6d3b",
+      "bytes": 1335,
+      "headers_sha256": "1665e8d6cdf52f813df9885f82d54029434ab9d932a1bc0d75b7c97bdf58ccc3",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 21,
+      "month": "2017-09",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/21-szse-2017-09.json",
+      "sha256": "4d02a23fab5b7e84b638e269419263b34f1e9d0190bf5580c9e7633cfae3634b",
+      "bytes": 1293,
+      "headers_sha256": "3985daec5b465288df8c370d40efc60539831e0ed35657ec7f6bc6e55b070be3",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 22,
+      "month": "2017-10",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/22-szse-2017-10.json",
+      "sha256": "0bee7dd7e197d0904e2ae8974b10ff9b47961e8844aab54ffed14750b630b644",
+      "bytes": 1335,
+      "headers_sha256": "62baffbea3117c9d84f0aa6de21b2c858e972767ac0772e8a72f8584d65f7ee4",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 23,
+      "month": "2017-11",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/23-szse-2017-11.json",
+      "sha256": "c5f9fd233532a4080a9e7cf7c8d76b0116f4d40459d78be5002dcf7eaf96c074",
+      "bytes": 1293,
+      "headers_sha256": "4a3d4acff560882986443a2d672fef93d3d68d133ffe91eabce97a71511e99fe",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 24,
+      "month": "2017-12",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/24-szse-2017-12.json",
+      "sha256": "9e4a43361bcd33f41e7393c42821ea92aaa5b84b479a56ad7bd42d479b352d27",
+      "bytes": 1335,
+      "headers_sha256": "13de0f68adef8637b03789dc109c515c4c5e03fd9a47efa426ca157b9c650e62",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 25,
+      "month": "2018-01",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/25-szse-2018-01.json",
+      "sha256": "a67efaf00c12ac5df9a7e8be23afd31acc2ec0965796458912019de2c3403d6e",
+      "bytes": 1335,
+      "headers_sha256": "7aafc8ead5bb242884ffedb74d3b4430a6f035e151b3466e179ee5be7dc070b8",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 26,
+      "month": "2018-02",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/26-szse-2018-02.json",
+      "sha256": "031723c493130dea40ea7bfa181969d555a59e9fe5f371dab56e63703e972340",
+      "bytes": 1209,
+      "headers_sha256": "0db809f6d9e7fae2e2184fe0f08d28d78dd05a5bbcdf80f5a72f4ee748757081",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 27,
+      "month": "2018-03",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/27-szse-2018-03.json",
+      "sha256": "37cf41405774e6ea736159cd4a96a298fb82744c6cecf9dca717d88be0942ac1",
+      "bytes": 1335,
+      "headers_sha256": "f82bb31b271643df01d2ffa757212f24fe3f85f57496ff04d48c8b65d6d6b759",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 28,
+      "month": "2018-04",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/28-szse-2018-04.json",
+      "sha256": "3df39efc0fffea6be229877e3b1c7a80f3f740f24c759725aaa7f9e722f40650",
+      "bytes": 1293,
+      "headers_sha256": "e2080898f45aa1fc617a5730743ba5c6b2566bee6aa3641f321c969316aa0675",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 29,
+      "month": "2018-05",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/29-szse-2018-05.json",
+      "sha256": "90b3fc69657b639132cbb22679f9907837ec3729e69fc0c2c0860ee313626bd5",
+      "bytes": 1335,
+      "headers_sha256": "37f982105d9b03be5e27c38592d477e44637b5514689685aafddf8e42ef22208",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 30,
+      "month": "2018-06",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/30-szse-2018-06.json",
+      "sha256": "d88a73a73e83cc83c6cc33fc5985323fc9d06f61ee47b308758b284b4d11eaea",
+      "bytes": 1293,
+      "headers_sha256": "e916300574f0ee96c37a3ac335347ab39655c182a04b6e6763b720eee0c01dd5",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 31,
+      "month": "2018-07",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/31-szse-2018-07.json",
+      "sha256": "d3604a04ad571c1c20fc841f0c1061be09d9d51e154ce623fa15c982134b1f9c",
+      "bytes": 1335,
+      "headers_sha256": "a65cf0b6e7fb60cdb94cc44017d3b88887ea7b9dfaf196c22db1d1af404c4a97",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 32,
+      "month": "2018-08",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/32-szse-2018-08.json",
+      "sha256": "0797697637b3f8d24595636763eda7abf5719a2ad2d9926019a62170f0d72f14",
+      "bytes": 1335,
+      "headers_sha256": "c2f487195243cce3cb4addf1975f4859bb86ccac167fa19211039c910bcc67d8",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 33,
+      "month": "2018-09",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/33-szse-2018-09.json",
+      "sha256": "7401f74219f49838e668f08ee1869e93a012fece95cdabcf18195b91c326d326",
+      "bytes": 1293,
+      "headers_sha256": "bdd5f08fa3ce00e7f614fe5b03f6d322febe25517f7cfd1f1f5360189092e020",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 34,
+      "month": "2018-10",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/34-szse-2018-10.json",
+      "sha256": "457e63bc5b02831fcfa845e8277647659ffde109960d12dc4f3695faabd7e398",
+      "bytes": 1335,
+      "headers_sha256": "a3600402c73403b69cd86164f9ca1cdf705f9d57221dd25eecc5579422fb16c5",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 35,
+      "month": "2018-11",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/35-szse-2018-11.json",
+      "sha256": "f390703028312ab6ca9063deff10ccc7aedefd938a347dd97ae9a22ceb07f2fc",
+      "bytes": 1293,
+      "headers_sha256": "30ac02139bb27e88cf2cb0d6b53466d2b07b4a6f6ae2eaabbc76852793123b84",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 36,
+      "month": "2018-12",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/36-szse-2018-12.json",
+      "sha256": "9d3df0e8760c01999bfadc92f185977da931a8fc6a2c69079eb6bd196f19dfc8",
+      "bytes": 1335,
+      "headers_sha256": "194c230b245cb0b0528e63a3e1824cbf6c0b5cf5d0ec80012cc40fb7f7d97f5f",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 37,
+      "month": "2019-01",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/37-szse-2019-01.json",
+      "sha256": "363705189605d01cf1636cc436874983a9de32fbcd43473ad0af6fee24a70208",
+      "bytes": 1335,
+      "headers_sha256": "b50a0c6549738c88d8208e1b8a8aec020bd8f04c2934bc5c63d0d717e0e0e62e",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 38,
+      "month": "2019-02",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/38-szse-2019-02.json",
+      "sha256": "f9f94deb860b74c7cf3aaf09ab6914603b8a5667067896697e8e9cc4c775b36a",
+      "bytes": 1209,
+      "headers_sha256": "95ceb7371bbc6f7652cf5693ee761cb964175a1b352ce9839027057d526e3c1d",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 39,
+      "month": "2019-03",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/39-szse-2019-03.json",
+      "sha256": "746e449f928588e0e4b995195bb42901a75cc984604affbde892fa81282e43b0",
+      "bytes": 1335,
+      "headers_sha256": "2f508efc029d6797cad6d27ce4f5e888c166ed12a5dc629bf57ddc68f3d09374",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 40,
+      "month": "2019-04",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/40-szse-2019-04.json",
+      "sha256": "12ce110e1926fff80076b009c8ff04db27aceb977388cce4ecad1ab61910f5a2",
+      "bytes": 1293,
+      "headers_sha256": "b5d3ec8c5b1155c87a4362345614cf889fbd05ccfa85e678984210b917441913",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 41,
+      "month": "2019-05",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/41-szse-2019-05.json",
+      "sha256": "593e42d01ceff5435e1eeb58c4bf1871144299dfcbf87720a7b8e1c7ea6e6e5d",
+      "bytes": 1335,
+      "headers_sha256": "aa1503b4f4ed5f5cc94fd3eb518bc5beac08a92d17b17b2b829255d3e7e74ab6",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 42,
+      "month": "2019-06",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/42-szse-2019-06.json",
+      "sha256": "655f93c1c912a20973feef29626bca51e9f410620dd2c4ec1ad287207a8605e0",
+      "bytes": 1293,
+      "headers_sha256": "814f4ff5514bb7bf2add18d6a79709bb98a3b89b15fe86a4e4d79cc334eaab4c",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 43,
+      "month": "2019-07",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/43-szse-2019-07.json",
+      "sha256": "0ab8b4cd9ee15e37cd9304f59ba6fdb2745767a12956008d9970c1f3db7311ea",
+      "bytes": 1335,
+      "headers_sha256": "1982c440c52ea25801e01142d6e2b8c2a5b25275c3145dc785724b20c1e20ac9",
+      "all_source_bindings_match": true
+    },
+    {
+      "n": 44,
+      "month": "2019-08",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/44-szse-2019-08.json",
+      "sha256": "fa0df63ec914f59b5a806482e5ba3ed18d40b7fea28babc969223972ed15e9f9",
+      "bytes": 1335,
+      "headers_sha256": "9fd9f396ec908fab1a0c5864bf4c337da15395a1562bbe652666905e4d58fcf4",
+      "all_source_bindings_match": true
+    }
+  ],
+  "independent_months": [
+    {
+      "month": "2016-01",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 20,
+      "qualified": true
+    },
+    {
+      "month": "2016-02",
+      "natural_days_expected": 29,
+      "natural_days_observed": 29,
+      "missing_dates": [],
+      "open_observed": 16,
+      "qualified": true
+    },
+    {
+      "month": "2016-03",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 23,
+      "qualified": true
+    },
+    {
+      "month": "2016-04",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 20,
+      "qualified": true
+    },
+    {
+      "month": "2016-05",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 21,
+      "qualified": true
+    },
+    {
+      "month": "2016-06",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 20,
+      "qualified": true
+    },
+    {
+      "month": "2016-07",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 21,
+      "qualified": true
+    },
+    {
+      "month": "2016-08",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 23,
+      "qualified": true
+    },
+    {
+      "month": "2016-09",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 20,
+      "qualified": true
+    },
+    {
+      "month": "2016-10",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 16,
+      "qualified": true
+    },
+    {
+      "month": "2016-11",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    },
+    {
+      "month": "2016-12",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    },
+    {
+      "month": "2017-01",
+      "natural_days_expected": 31,
+      "natural_days_observed": 30,
+      "missing_dates": [
+        "2017-01-01"
+      ],
+      "open_observed": 18,
+      "qualified": false
+    },
+    {
+      "month": "2017-02",
+      "natural_days_expected": 28,
+      "natural_days_observed": 28,
+      "missing_dates": [],
+      "open_observed": 18,
+      "qualified": true
+    },
+    {
+      "month": "2017-03",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 23,
+      "qualified": true
+    },
+    {
+      "month": "2017-04",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 18,
+      "qualified": true
+    },
+    {
+      "month": "2017-05",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 20,
+      "qualified": true
+    },
+    {
+      "month": "2017-06",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    },
+    {
+      "month": "2017-07",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 21,
+      "qualified": true
+    },
+    {
+      "month": "2017-08",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 23,
+      "qualified": true
+    },
+    {
+      "month": "2017-09",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 21,
+      "qualified": true
+    },
+    {
+      "month": "2017-10",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 17,
+      "qualified": true
+    },
+    {
+      "month": "2017-11",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    },
+    {
+      "month": "2017-12",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 21,
+      "qualified": true
+    },
+    {
+      "month": "2018-01",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    },
+    {
+      "month": "2018-02",
+      "natural_days_expected": 28,
+      "natural_days_observed": 28,
+      "missing_dates": [],
+      "open_observed": 15,
+      "qualified": true
+    },
+    {
+      "month": "2018-03",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    },
+    {
+      "month": "2018-04",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 18,
+      "qualified": true
+    },
+    {
+      "month": "2018-05",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    },
+    {
+      "month": "2018-06",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 20,
+      "qualified": true
+    },
+    {
+      "month": "2018-07",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    },
+    {
+      "month": "2018-08",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 23,
+      "qualified": true
+    },
+    {
+      "month": "2018-09",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 19,
+      "qualified": true
+    },
+    {
+      "month": "2018-10",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 18,
+      "qualified": true
+    },
+    {
+      "month": "2018-11",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    },
+    {
+      "month": "2018-12",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 20,
+      "qualified": true
+    },
+    {
+      "month": "2019-01",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    },
+    {
+      "month": "2019-02",
+      "natural_days_expected": 28,
+      "natural_days_observed": 28,
+      "missing_dates": [],
+      "open_observed": 15,
+      "qualified": true
+    },
+    {
+      "month": "2019-03",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 21,
+      "qualified": true
+    },
+    {
+      "month": "2019-04",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 21,
+      "qualified": true
+    },
+    {
+      "month": "2019-05",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 20,
+      "qualified": true
+    },
+    {
+      "month": "2019-06",
+      "natural_days_expected": 30,
+      "natural_days_observed": 30,
+      "missing_dates": [],
+      "open_observed": 19,
+      "qualified": true
+    },
+    {
+      "month": "2019-07",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 23,
+      "qualified": true
+    },
+    {
+      "month": "2019-08",
+      "natural_days_expected": 31,
+      "natural_days_observed": 31,
+      "missing_dates": [],
+      "open_observed": 22,
+      "qualified": true
+    }
+  ],
+  "source_result": {
+    "fixed_months": 44,
+    "expected_natural_dates": 1339,
+    "qualified_months": 43,
+    "qualified_natural_dates": 1308,
+    "qualified_trading_days": 876,
+    "qualified_nontrading_days": 432,
+    "observed_unqualified_january_days": 30,
+    "january_observed_open_days": 18,
+    "unknown_dates": [
+      "2017-01-01"
+    ],
+    "full_interval_qualified": false,
+    "all_1339_candidate_rows_match": true,
+    "raw_mapping": "只接受原jybz字符串0或1，缺值保留null；没有星期推算或补值。",
+    "january_status": "HTTP200原件缺2017-01-01，整月未通过。其30个原值是观察，不在本合同合格1308日中。"
+  },
+  "old_quote_date_diagnostics": [
+    {
+      "symbol": "sh510300",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sh510300-nominal.csv",
+      "sha256": "bca4b942cbb9706bda4e54b6f14209929258b17895bdca342332cd0a731d5fdc",
+      "column": "session_date",
+      "qualified_month_quote_dates": 876,
+      "missing": [],
+      "extra": [],
+      "no_price_values_computed": true
+    },
+    {
+      "symbol": "sz159915",
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sz159915-nominal.csv",
+      "sha256": "4495f6087ab14fdae7bcf0af545e3bd6ae6a9807f6ae97205e1f0c174f52c849",
+      "column": "session_date",
+      "qualified_month_quote_dates": 876,
+      "missing": [],
+      "extra": [],
+      "no_price_values_computed": true
+    }
+  ],
+  "execution_audit": {
+    "acceptance": "passed_for_observed_bounded_execution_with_partial_source_result",
+    "public_http_actions": 44,
+    "cap": 48,
+    "per_month_attempts": 1,
+    "per_month_cap": 2,
+    "redirects": 0,
+    "search_or_page_open_recorded": 0,
+    "content_retry": 0,
+    "response_body_bytes": 57648,
+    "response_body_bytes_cap": 4194304,
+    "largest_response_bytes": 1335,
+    "per_response_cap": 262144,
+    "two_consecutive_failure_threshold_triggered": false,
+    "failed_requests": [
+      13
+    ],
+    "original_stop_reason_preserved": "month 2017-01 failed; diagnose before any retry",
+    "first_phase_requests": 13,
+    "later_original_independent_months": 31,
+    "old_program_sha256_unchanged": "1779445c25f04a06d870b203e2224ac6ba20c49a143e8550dbe6f469c04baa4d",
+    "resume_program_sha256": "66d9f7947cb96d3dcbc27e2401cfb6a3de409f58bc0d2a51de243e956f2352e4",
+    "diagnosis_record": {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/remaining44-diagnosed-gap-continuation.json",
+      "sha256": "99d32907d2942b1e5180fa03e5fa63080c426c84ce56755d321c7c4c7ee27194"
+    },
+    "logs": [
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/acquisition.log",
+        "sha256": "311434cfe959c20ebfe6ad293525fe7d9c2cba426319a55d1bb609e71fc24db4",
+        "rows": 13,
+        "first_request": 1,
+        "last_request": 13
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0/resume-acquisition.log",
+        "sha256": "542d49314a73b838128b653fa159896fb43dd1c06b53022ff96221be5e76cb92",
+        "rows": 31,
+        "first_request": 14,
+        "last_request": 44
+      }
+    ],
+    "reason": "第13次内容缺日后先停止、留下诊断；获准接续的是原合同中其他固定月份，同账本累计。resume仅替换请求保留入口，不改validate_month；完整集合、每月2次、总48次和连续失败规则仍保留，未重试缺月。",
+    "limits": "本结论核已存代码/账本/原响应/运行日志，不冒称独审现场见证网络，亦不证明包装器适合任意未来重跑。请求网络传输总成本未完整计量。",
+    "prior_budgets_unchanged": {
+      "prior_calendar": 94,
+      "prior_2015_source_question": 23
+    }
+  },
+  "qualification": {
+    "accepted": "43个完整月的1308个SZSE回溯日历字段。",
+    "not_accepted": [
+      "44个月全期来源合格",
+      "2017-01按完整月接纳",
+      "缺日以周末或有无ETF行情填补",
+      "SSE实际开市状态",
+      "证券09:30资格及真实可成交性",
+      "当时到达时间/修订历史"
+    ],
+    "conclusion": "本轮请求与接续符合现有合同，来源完成度仍是43/44；执行合规不把来源缺失变成通过。"
+  },
+  "next_minimal_question_design_only": {
+    "question": "能否从准确的SZSE官方2017年度或元旦休市公告，直接确认2017-01-01计划休市及公告正文日期，为该缺日补充独立且明确标型的计划依据？",
+    "necessity": "当前唯一未观察自然日；有准确来源才可把缺日从无证据细分为有计划依据，避免周末猜测。",
+    "reuse_first": "先查已有准确官方公告locator/字节；若已有直接证据不再请求。不得重试monthList2017-01。",
+    "new_source_route": "只定位并读取SZSE官方2017年度或元旦安排原文，不猜文件地址、不泛搜全年交易日。",
+    "suggested_frozen_budget_if_new_source_needed": {
+      "total_public_actions_max": 4,
+      "canonical_exact_notice_discovery_attempts_max": 2,
+      "raw_original_reads_and_redirects_count_in_total": true,
+      "saved_response_bytes_max": 1048576,
+      "per_response_bytes_max": 524288,
+      "no_market_price_account": true,
+      "no_old_budget_borrowing": true
+    },
+    "acceptance": "原文必须明确覆盖2017-01-01、明确SZSE交易范围、正文发布日期、休市/恢复日期及准确URL/SHA；搜索摘要或第三方转述不够。",
+    "composition_boundary": "公告只能新增planned_closed字段，不可伪填原jybz；2017-01原30条仍按本合同observed_unqualified_month。若后续另立逐日多源组合合同，可评估30个实见值与1个计划值的混合来源候选，但必须保留异质来源/时点及原月失败，不能命名为44个完整月或1339个已证实际回溯标志。若下游确需缺日实际回溯状态，必须另有该日准确官方日值或原件修订证据；仅公告不够。",
+    "stop": "无准确官方原文则保留unknown；不因周日、价格无记录或其他月份完整而放宽。"
+  },
+  "report_feedback": "草稿当前数值及边界可接受；主控可写已独核43月与执行合规，同时保留全期未合格/暂停恢复条件。",
+  "reviewer_written_files": [
+    "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/independent-review.json"
+  ],
+  "release": "完成并释放。"
+}

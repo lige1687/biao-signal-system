@@ -1,0 +1,111 @@
+{
+  "schema": "calendar-gap-recovery-independent-readback/1",
+  "checked_at": "2026-10-10T19:19:15.652953+08:00",
+  "status": "accepted_same_device_path_restore_of_unqualified_source_evidence",
+  "fixed_device": {
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "st_dev": 16777238,
+    "matches_plan": true
+  },
+  "source_review_sha256": "fdcda77d4da25550ec68939f1fd0ec973934dee5deb1c867ad5891157ad573f9",
+  "backup_manifest_sha256": "19a8b173882b1979d0e50e5e6d5ae0392600f7271aa1ec07d17a61245312eebc",
+  "restore_receipt_sha256": "8757ae4022d3aafab66aa3980dc010b178a0da4702d30380dac427ce9bec7df9",
+  "result_location_sha256": "5b9446969ebb18472e71a3a7250a2497b071d184d022fb8f8f778f219b37a044",
+  "code_sha256": "1d6efccda40ddfc154982535ff561f82c416bff1614389835f00f9c2744b0b1a",
+  "backup_pid": 19377,
+  "restore_pid": 19403,
+  "counts": {
+    "roles": {
+      "saved_response": 3,
+      "response_header": 1,
+      "binding": 5
+    },
+    "files_per_set": 9,
+    "bytes_per_set": 57778,
+    "three_sets_bytes": 173334,
+    "run_ordinary_file_count": 23,
+    "run_ordinary_bytes": 163424,
+    "run_limit_bytes": 16777216
+  },
+  "checks": {
+    "triplets_passed": 9,
+    "triplets_total": 9,
+    "original_metadata_unchanged": true,
+    "distinct_process_ids": true,
+    "same_code_snapshot_sha": true,
+    "restore_code_uses_backup_only": "restore() reads local backup manifest and each item[backup_path] as copy_exact source; it does not read source-manifest originals.",
+    "run_file_set_sha_bytes_device_passed": true
+  },
+  "per_file_flags": [
+    {
+      "role": "saved_response",
+      "logical_path": "01-search-response.json",
+      "original_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "saved_response",
+      "logical_path": "02-search-response.json",
+      "original_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "saved_response",
+      "logical_path": "03-2017-september-official-reference.html",
+      "original_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "response_header",
+      "logical_path": "03-2017-september-official-reference.headers.json",
+      "original_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding",
+      "logical_path": "executor-contract.json",
+      "original_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding",
+      "logical_path": "source-manifest.json",
+      "original_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding",
+      "logical_path": "request-ledger.json",
+      "original_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding",
+      "logical_path": "source-review.json",
+      "original_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding",
+      "logical_path": "independent-review.json",
+      "original_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    }
+  ],
+  "source_conclusion_boundary": [
+    "Three saved responses preserve search failure and a later official reference; no exact Jan 1 original notice was located.",
+    "3/4 source outcome does not establish planned or jybz fields for 2017-01-01; those remain unknown.",
+    "A healthy same external disk can restore these paths; disk-loss and other-machine recovery were not tested.",
+    "No public request, market calculation, source qualification change, deletion or overwrite occurred."
+  ],
+  "failures": []
+}

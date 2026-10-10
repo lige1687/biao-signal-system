@@ -1,0 +1,2254 @@
+{
+  "schema": "calendar-reused-input-recovery-readiness/1",
+  "checked_at": "2026-10-10T19:10:50.031765+08:00",
+  "scope": "Exact two nominal CSVs, exact old merged calendar, and its 82 recorded monthly response bodies; no network, new data, market test, or large copy.",
+  "device": {
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "external_st_dev": 16777238,
+    "fixed_device_verified": true
+  },
+  "exact_reused_inputs": [
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sh510300-nominal.csv",
+      "bytes": 441513,
+      "sha256": "bca4b942cbb9706bda4e54b6f14209929258b17895bdca342332cd0a731d5fdc",
+      "current_original_sha_size_verified": true,
+      "A_25_scope": false,
+      "recovery": {
+        "kind": "exact_local_Git_blob_with_verified_LF_to_CRLF_reconstruction",
+        "git": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sh510300-nominal.csv",
+          "blob_oid": "c5693e1603cbc6f8b5bc38a4bf9884c312b8ae4b",
+          "blob_bytes": 438239,
+          "local_object_present": true
+        },
+        "git_blob_sha256": "27973ab5b899a19637626899946641f9faed719f416fd51b45e7acd8f0c29f60",
+        "reconstructed_sha256": "bca4b942cbb9706bda4e54b6f14209929258b17895bdca342332cd0a731d5fdc",
+        "normalization": "replace each LF with CRLF; exact worktree bytes verified",
+        "remote_commit_previously_verified_for_merged_calendar_only": true,
+        "this_path_live_remote_readback": false,
+        "scoped_external_copy_verified": false
+      }
+    },
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sz159915-nominal.csv",
+      "bytes": 441410,
+      "sha256": "4495f6087ab14fdae7bcf0af545e3bd6ae6a9807f6ae97205e1f0c174f52c849",
+      "current_original_sha_size_verified": true,
+      "A_25_scope": false,
+      "recovery": {
+        "kind": "exact_local_Git_blob_with_verified_LF_to_CRLF_reconstruction",
+        "git": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sz159915-nominal.csv",
+          "blob_oid": "790b8d162d60addb84d79e0cb0db49ddf28d41ff",
+          "blob_bytes": 438137,
+          "local_object_present": true
+        },
+        "git_blob_sha256": "d81364f471aad97e3c6b3963d221683cf7ead5778582ed333a02b6f48f2e8f31",
+        "reconstructed_sha256": "4495f6087ab14fdae7bcf0af545e3bd6ae6a9807f6ae97205e1f0c174f52c849",
+        "normalization": "replace each LF with CRLF; exact worktree bytes verified",
+        "remote_commit_previously_verified_for_merged_calendar_only": true,
+        "this_path_live_remote_readback": false,
+        "scoped_external_copy_verified": false
+      }
+    },
+    {
+      "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+      "bytes": 296252,
+      "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+      "current_original_sha_size_verified": true,
+      "A_25_scope": true,
+      "recovery": {
+        "kind": "exact_external_restored_copy_and_previously_verified_remote_Git_version",
+        "external_restored_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T143725-a9a1b039127e/result/restored-sources/docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+        "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+        "external_st_dev": 16777238,
+        "external_copy_sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+        "remote_commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+        "evidence": [
+          "docs/experiments/raw/frozen-input-recovery-2026-10-10/source-audit.json",
+          "docs/experiments/raw/frozen-input-recovery-2026-10-10/local-restore-execution.json"
+        ],
+        "other_machine_verified": false
+      }
+    }
+  ],
+  "merged_calendar_monthly_provenance": {
+    "period": "2019-09..2026-06",
+    "month_count": 82,
+    "component_calendars": [
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "sha256": "f1c3bd5f93bd84b20b587a2cc5292e89370b8f2a4fa3962498da950bcea35201",
+        "months": 22
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "sha256": "0004e6376e84add586f65d9b102b43fa8a58fb5b4b79029959f0969836ec1948",
+        "months": 60
+      }
+    ],
+    "monthly_bodies": [
+      {
+        "month": "2019-09",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2019-09.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "4c8f26c4661618c96aaa41b592129c9f40e83d886cb40b308cb96f974f0e9c23",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2019-09.json",
+          "blob_oid": "67ea15bf08012ab4a468beef6557b2881aa43201",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2019-10",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2019-10.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "244064e528e726025cdf2e4bb4634395a2af1f2e2fb28a4539e6051f4ff85120",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2019-10.json",
+          "blob_oid": "20e72ae58c4eda8cfde09fd7a2e6ea20934ec886",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-01",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2020-01.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "e1388676d56e45e58a214d8593a36576ad5e9195b75917afc66d43a729487186",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2020-01.json",
+          "blob_oid": "195a6972a526dc1f16bcfc435cd6810cde52224a",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-02",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2020-02.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "c1486b336630a5be5656d42c444505977e6ccec8a947d39410bec63ade986c27",
+        "recorded_body_bytes": 1251,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2020-02.json",
+          "blob_oid": "d10f6b3a1d4aa319e80cc0e33b5c3425ff45ff55",
+          "blob_bytes": 1251,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-10",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2020-10.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "c9d3582ea736486f9a881007686c4866916d5c1bd1dadd48d36236b7787fe1c4",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2020-10.json",
+          "blob_oid": "22a53efbad0c102c5fa01a56a1b2c393dca58cd4",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-02",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2021-02.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "08f80bee267642bc12947d58a054008982cb4b7cf9e194c8ccfee6ce7205800f",
+        "recorded_body_bytes": 1209,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2021-02.json",
+          "blob_oid": "f89fdc2db2991f0299c775e19f1d691fcb09c3b1",
+          "blob_bytes": 1209,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-09",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2021-09.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "aeaebe804534006ef06e00e272b642e009489a98820ebd7721a46abbbc482da9",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2021-09.json",
+          "blob_oid": "2c9c838135409a05601104a289b7beec0bb40f74",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-10",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2021-10.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "ebf560edd78c2792da131f8ec0d3aca823cdc1d5e2212eeeced91405a5a8c8cb",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2021-10.json",
+          "blob_oid": "a8a8b73e39bfbe6a67749ef6c69ffbc6965a0ad1",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-01",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2022-01.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "d18a82679f81e744a2e1bddbbb6737ced1ba2090e94448e60edc79acb802f391",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2022-01.json",
+          "blob_oid": "557ccb59938ee9453d1cadba57b8aba2b2fab6d1",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-04",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2022-04.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "3eda94b0597bf5479c4214d3283441cadaa22ca37fb3dbc3860b73ef2e219eed",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2022-04.json",
+          "blob_oid": "f973b0b5f85508f4f47114f0748b0f75f46cd41a",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-10",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2022-10.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "d7eef0c9060ef01dfb530a258c8932120d639bdc1eccd42b7842ef5a90da8c7c",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2022-10.json",
+          "blob_oid": "d5fde555f7603c2447e87d0c657d14e65c2ec2f0",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-01",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2023-01.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "d3739f68ebe7123f326abebf51c9ecc53b73ec2d75598e0837885e3f492b6da2",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2023-01.json",
+          "blob_oid": "7446268e7210c083fa67a7a0893ac7045265e3f5",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-09",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2023-09.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "7ee6a30c1ee5015a1d058b545b52dd636c97694d2372154ca394dd28dc35dbf4",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2023-09.json",
+          "blob_oid": "eedb4ad35c792a724374165565cb536d64ab8773",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-10",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2023-10.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "fae6176ee2f915616d937bf35bbb64871b23c3bc690f39aeae448ad93f37dcb4",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2023-10.json",
+          "blob_oid": "422831b031af15d70dd110802d0adee3271fee62",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-02",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2024-02.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "4e09ec9acabc36f0efd45b58ce5279f00f4356c35cddedfe8a9490fe753ad458",
+        "recorded_body_bytes": 1251,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2024-02.json",
+          "blob_oid": "c3c7027292e3e162f1a2a48a2e65e58b60e533d8",
+          "blob_bytes": 1251,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-10",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2024-10.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "81931775463a35cd3f0a3afed5fa8581eb685f612826085237d27917d54fd532",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2024-10.json",
+          "blob_oid": "45348e14be5c493ec1647d41626c51b848dd6836",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-01",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2025-01.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "8715190be638cf1402a23be947ac2d48a746dd173b81ccd1366964afd4f9ed2c",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2025-01.json",
+          "blob_oid": "feca8985cd255ef7cf697975c14dc87a813d12cb",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-02",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2025-02.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "c98d3d25e88a417b74ba9d4c6dea8265ebf37bbd8cffc7131ba8db8373dd5dd8",
+        "recorded_body_bytes": 1209,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2025-02.json",
+          "blob_oid": "eee9e5822f7f52ec13bb6ae84b05d341ea5eaaf8",
+          "blob_bytes": 1209,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-10",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2025-10.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "fe89276f6ad730daab7300e886ce25b95afb1b7e1554e6b965fec91cdcf6687b",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2025-10.json",
+          "blob_oid": "b0fbcd30242217ce6dff585979ddacf50f7dd594",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2026-01",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2026-01.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "4bc0fc30d3575737bb6da529cc5b4046d03a469129c61b46e1bc012d969dd6d7",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2026-01.json",
+          "blob_oid": "a42dd9a738f9fe1cd44683a9d60b638a905305c8",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2026-02",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2026-02.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "12eb97683c4237253dbe841c525a36e8e42c15d4ad593c8830eb5c77d9e9e1e5",
+        "recorded_body_bytes": 1209,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2026-02.json",
+          "blob_oid": "7cd88d4575580c9a9aebf3de6fbfb14b3e5435c4",
+          "blob_bytes": 1209,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2026-06",
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2026-06.json",
+        "component_calendar": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "recorded_body_sha256": "5f7315c9497a4d2dc14435276a50ebbceb8467ee86d530b6a2e337f1cda25d54",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2026-06.json",
+          "blob_oid": "925fbdaf8f7fde2aa02e60bcf22ba404190e42ec",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2019-11",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2019-11.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "73cd876df59caae8847a027f0cd6be88253e282a67a0e8f9db4bfd8853e945d9",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2019-11.json",
+          "blob_oid": "8da615b42aa1f5fece0201902c6c169599c43dfc",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2019-12",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2019-12.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "af32db29063806ceaa5bdde7e9a9207680e7a927f41bcde9eed3a38ec7a11fd1",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2019-12.json",
+          "blob_oid": "a981d8f988d42430cd58032331bb60b0f7b30090",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-03",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-03.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "343010425fcb5d5d1957e7cd216f4e780d656121f7e79ce28810fc2db851662e",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-03.json",
+          "blob_oid": "bc33479ce5f11274ecd861e671ac689ad6885279",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-04",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-04.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "26c15f3e240d643e961b00e7cce21d13619ae819cf91d71fb74dac5bdfc5c2c4",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-04.json",
+          "blob_oid": "6cf85a5890782bab370792519bb3dabddfd71827",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-05",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-05.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "72f4c320d9bb3e84268e7e5c0e265bf022ef3c4b3fce544d6536085e4719fb5e",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-05.json",
+          "blob_oid": "c49cbed63b7b7a8733f0744968f2046da722f299",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-06",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-06.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "760ba1a5c4d62b69b2d92f05f784e427b86fbc6da47064dab65e0feef5eb0824",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-06.json",
+          "blob_oid": "b3ddaac0e250ba59341fb5504249ad2755ec691f",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-07",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-07.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "208529e063163b22a916acc19c66889c4540ef002f2f54a64e4bb4e7dfdf5a3d",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-07.json",
+          "blob_oid": "27818a62644dbc3beb6a29ef6b643d86bf9fa403",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-08",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-08.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "38b3c08b34708dd880530b663c24618278325e08f0864e77784559007df8932a",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-08.json",
+          "blob_oid": "7edfd1e1904a6b0f17228a671cac70fb0e67c1b2",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-09",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-09.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "e6e649d49b90b50791b054bd282c58064df632150f7fad84311d431521df7ff0",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-09.json",
+          "blob_oid": "8b969e16757cee9282487c3240819b0ba4855c4a",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-11",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-11.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "2a5fb428670c46a6d894dc9345dd11b20ca260d0080a95e26d147cabb01a23a4",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-11.json",
+          "blob_oid": "c74da138c8a112135d6ad5c55ad8fc90c653ddee",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2020-12",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-12.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "5a6c17f9761f80c6d837200202d65cab8a08100613e45a12f65190ee3e600bd4",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-12.json",
+          "blob_oid": "fe60882f65c1417057405ed9d1187e83987c1207",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-01",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-01.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "26209c80a5077d55b39e2c515abb7f5b8ea34f3dc5e041600b99264ebec2b917",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-01.json",
+          "blob_oid": "61cc8958a8cfc7ed5a7b5853c2c684c2705386a9",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-03",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-03.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "acc7877be7acd4e0a600a1269993b0eef3ebd4bbb6ebd8c8df94f67142012ada",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-03.json",
+          "blob_oid": "3177bc05ec00412018570edace0b1bb621da737d",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-04",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-04.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "1e21c3d73d34324060e4e43d142f462115159c950faac040a72b321066caf98c",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-04.json",
+          "blob_oid": "b7d0e744f8b488d339d5152cb8b15d2566688fc0",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-05",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-05.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "d53a8cfc58f0ced36ed7361e2e0a094b8c57778d5bd91115e4148c8399633998",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-05.json",
+          "blob_oid": "228329c5c8e079e20c3dd98a876dfa2786bb4795",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-06",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-06.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "5bf42c465e3c443bba9607974337b16de7f0984b91e455e9e50d1ca75af9c6eb",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-06.json",
+          "blob_oid": "2bf80f0dd1f76ffd71ee6f6a3ad4bfa5bb951de4",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-07",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-07.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "cb84f24c98e30758bccdee0cbb8c2871feccb29b00878aba299f1a9d23f60482",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-07.json",
+          "blob_oid": "f6e64e06e7fe21790e9f8a82d68d5c16eae8f9da",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-08",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-08.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "acc063d2a1a26ccc8936e9eb64cb30c3bc8a20ae35aeb2ab5baca6940600eeef",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-08.json",
+          "blob_oid": "4889c71f064bb571b48a1403c0ef211a7b984c99",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-11",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-11.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "b8073c69cdf04d38ceb800a7105060b335e24578f5ecc6ed1a8a5bdc5274c2e7",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-11.json",
+          "blob_oid": "fd6c7318669788c23f381c2c97be81c539ac0af6",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2021-12",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-12.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "abb25fec5757e382ff5c0a5790527fa5fca4956b9c4d2af6cf17bc687d6dd491",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-12.json",
+          "blob_oid": "2a0aef8eb0047a5d08fe72f180beadc8968cbdb0",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-02",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-02.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "49ae2bb7c3291a8181371a04db9fd80be597626be4e0e6191089957c2832a106",
+        "recorded_body_bytes": 1209,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-02.json",
+          "blob_oid": "c4c445e7cf92a1801e1bfcfec3d55fd3a44fefe1",
+          "blob_bytes": 1209,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-03",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-03.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "2fcf13ec55e8c065e55991c0d3c8ea92c648bc53c930ebe2f2b09f0a52dbb4bc",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-03.json",
+          "blob_oid": "b03e569ce5c6a99fe08a5c829c1673da981b784d",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-05",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-05.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "f6201b39e5b8d45389996a5db3ef441aa245890f1c92290cd0e990a6a5f98e7f",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-05.json",
+          "blob_oid": "4a862bfd31258e9691b2c8a62d2909bbda3e39a7",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-06",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-06.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "824df41143d8d14b7334e258ed142e35122203bb8144c241b78a9cedaf979e86",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-06.json",
+          "blob_oid": "590e38d8bdbf86645d30cc64d1f0ceb2c256bf0f",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-07",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-07.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "5638e15fb61c48a8c5fac390c609abd63c6e62175f2faed79d89236a667d9cb5",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-07.json",
+          "blob_oid": "df5851dd60b2c39c68e32ce4fb1c9a1675b94267",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-08",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-08.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "1526d313e4bff43449f96d620e9ad8dfc10e390bd4b83a10957fadc42d1a0bab",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-08.json",
+          "blob_oid": "97f112a9ce97a409a6f43b748e892c4f28e54b43",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-09",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-09.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "80a76645ca97129a26eaaf7c59c42a0ff6689c2d7499fb50268bab5a9eeb2050",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-09.json",
+          "blob_oid": "94dcafe611d54aa3080d87f8e9bfb32490088980",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-11",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-11.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "d4514cb5d678ee4c192c083d1755f4aacd8a966e70313a31949d0d6ac1ed19bf",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-11.json",
+          "blob_oid": "3c0a53337cd0a951443f500bc018cac7fb8fd165",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2022-12",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-12.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "48cb0c901f0fc61e1edd5f095aa8147315716a700138f5c912875f55a4aab8ee",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-12.json",
+          "blob_oid": "9be3a3179a9d4496e99276012a7f230d7cd40dce",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-02",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-02.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "3510871f9d15b1a683d3a94ea28b1e51dcb3b7223b27f3250495d32047d57cdb",
+        "recorded_body_bytes": 1209,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-02.json",
+          "blob_oid": "33faa2bfc44b2100a5b5d217a86b1c88578aa66d",
+          "blob_bytes": 1209,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-03",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-03.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "10cbdf81f4c3a043da35a2814c069ddc003fe1b8905563ea06fcc53012728349",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-03.json",
+          "blob_oid": "cc979d9424a5c9670c98d1ab5049497e7333827b",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-04",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-04.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "6b7b70d4476f593092b480f0496168a0a5545ef10668a26a2279a0cedf6d39f2",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-04.json",
+          "blob_oid": "e0604bb72ed0eaa0a33504cb2695fb74ef7b0817",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-05",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-05.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "27574d6970dc9aa00b983ce4695fe622d031fa599ac4f09c170c2fd9e6172203",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-05.json",
+          "blob_oid": "0083f9ba1e04003060adf2721f7a5976fa4bc0e6",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-06",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-06.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "2d2c3035016931dea40f7ee67cadb41709797e291005bcd2e2e29cefc623fa10",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-06.json",
+          "blob_oid": "d97678cefce2f49ec4e4adf4f0395d867530c345",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-07",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-07.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "f54bfaa5763f35890165e9cac19d89a796877c161dc08c6679c47410e6a88f8f",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-07.json",
+          "blob_oid": "b5006cec34e25755dd5201db63f75669e1e7191a",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-08",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-08.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "f7a6733b6d8b896659889ad5647836fc17950a92222050477090f6ff57a6a63c",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-08.json",
+          "blob_oid": "108515d9ae5e88fbabfc25d65809be15e056c8ff",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-11",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-11.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "ee8f6079bf16cfbc3aae39554672ddb3557cd0f55d8b2f1d5466c8fb8e079f82",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-11.json",
+          "blob_oid": "77f1d6200ba9ff9c63d172ae52426221abada97f",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2023-12",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-12.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "b99940defe43b371bbb06265a0aebf7266469c5f19a20cd2670b112bf056d4aa",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-12.json",
+          "blob_oid": "8ee0dec97183b893d0fdc6884c10349d8833f04b",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-01",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-01.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "319509f1c09755b480f0c4555965046083d431b88062cb47728bbe1c7426015f",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-01.json",
+          "blob_oid": "d0dd6afcaecf5c931d48036c2582eb8a4952403c",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-03",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-03.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "3f00d5fa03f49f9439d8421a25a4b65b210168e1194420f147ef586e5410e532",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-03.json",
+          "blob_oid": "02407cb36ea3fe77f6bb186c3681fbaf57ed98de",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-04",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-04.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "bdf0de40a244b1bc0661d1b73e7ac55c2189a06dd23e412179e4e520f01224ca",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-04.json",
+          "blob_oid": "e8b6750d713411c7c39ce0ab1836c7e08a984f9b",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-05",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-05.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "15058854f291ac80d04dc919fe40b9d3436143631fc4d88848b079edc44acdc4",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-05.json",
+          "blob_oid": "6e99c0889c094cd15843daf0bdde904d96de6b3c",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-06",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-06.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "c13db5d324afc6a9bc96587bc2d4d8031f281c7b7511c2f5df93e29d23de8257",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-06.json",
+          "blob_oid": "bfc13fd461a479e4a45afeb3a5ae65bc0f2bc43f",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-07",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-07.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "23229eb8eec8443706a16d832a0026511ddec555c37a11fcbb2d270fd5e98b4a",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-07.json",
+          "blob_oid": "c91e46bde03d22a8e79a35ae2ed9b9fc72018b6c",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-08",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-08.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "b02702172d6ebbb7140b04ec0fa7b9f44963795f6aaf34c878015fae865f5781",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-08.json",
+          "blob_oid": "e3530b345028ce53a1ab882b1e8cf2de4eae1db5",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-09",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-09.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "dcc5cef5ddb75f9b51e2ebbdf466b97120dcf13e8e301b8d81dab7034f42e464",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-09.json",
+          "blob_oid": "92733645836388e83536ae4ecc307b48eabcacb5",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-11",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-11.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "d14a6c75686e286de6cf62653cddd041feefbd2b3c689e67c7763d71cf190c79",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-11.json",
+          "blob_oid": "a5e49f47cffa8a59d79d1d60d1ce901fc42a18ce",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2024-12",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-12.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "6a5d4059960841949df228ebcb79c9ae6f7a60d8b4eb901e76417b60facb15e9",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-12.json",
+          "blob_oid": "12f2cd5a5751005d93d46339b062241153408249",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-03",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-03.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "18e7c0195124cd4c64dbabc3fa3bae07bce11daffcb5a060edf1aa96587daaca",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-03.json",
+          "blob_oid": "3b36ab368707afaf293eb72e990194d43f3b6509",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-04",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-04.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "31ae208673ba9b43ceb8f554db4aec02ee19f92f9c4577fbfed0d686227bebde",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-04.json",
+          "blob_oid": "1a34e1d05828b5a47b243ccc6ada09cff0b6220e",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-05",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-05.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "f59da05f4b43b078d1ea91d0b2591686457470aea773c1d63f34b343aafc59b8",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-05.json",
+          "blob_oid": "e12da0d4488929be120496d806d32dfc0b2611db",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-06",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-06.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "f9c63ea8d8c5c3f2263bd5bb6692b06c9e8f05de85ffc6e145464e447ebdd9bf",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-06.json",
+          "blob_oid": "1355fce540fe0b9a4411f92b90b6ddd88c8fca56",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-07",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-07.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "3fbba25a412ff6ab7676779f1ff1f4d522cd99aa3adc4c1cb416e9c05c5a00a8",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-07.json",
+          "blob_oid": "d9b11208664f708bb191a3f6fa87509e37a664a1",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-08",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-08.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "42fa7ece56b62e9162b68dc3e350b94849b9f99207588c3f63dc2f5ac01d8b71",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-08.json",
+          "blob_oid": "4fcefdebfbd99250eeb8d9b7e3a9e7254a4b803b",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-09",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-09.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "1e52596fb8c2a7795dc35ca390e14c0b79a7b3c8316f0d7811ee9232ccb320bd",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-09.json",
+          "blob_oid": "6858c485844b0a7e4d83549446633ca7c1591d0f",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-11",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-11.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "a9cfaccc7b53979061f1a9b3baf5ca8e23be6801a0fb5d46f1b9254d82133ff4",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-11.json",
+          "blob_oid": "ed41afde8fbe7021b2703fa65c757ee717c988bf",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2025-12",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-12.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "ae6c79c83b1a09fe34f12f7189f5fcc2bf842d9ab5f1cae795345b655942ab1a",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-12.json",
+          "blob_oid": "538ebd1419d44bb72fa6a20d5e14210e481cf3a8",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2026-03",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-03.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "8bf24b4a15975f3cd8346e279fa84cf7c72767878d9194df9ae0b904cfd2dd6d",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-03.json",
+          "blob_oid": "66c651980600b4c4e1d209d6f490f74a2decd548",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2026-04",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-04.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "10e3bfaae22e98fa41eeb2fb224822b115b5f79e5bb2ba3ad4d420835dcea0f8",
+        "recorded_body_bytes": 1293,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-04.json",
+          "blob_oid": "7233e7857aaf6e782fba97a8ea08851f14a2d1d0",
+          "blob_bytes": 1293,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      },
+      {
+        "month": "2026-05",
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-05.json",
+        "component_calendar": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "recorded_body_sha256": "e5be116c816df091cb18d1ef3a4c80a72b463c8c4b90918b2e3c979904924f2d",
+        "recorded_body_bytes": 1335,
+        "current_original_exists": true,
+        "current_original_size_match": true,
+        "current_original_sha_not_reread": true,
+        "Git_version": {
+          "commit": "1d431137a1ecaf051430a65133675fd5447a30c0",
+          "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-05.json",
+          "blob_oid": "adea676d1250e1c711d4590963293c10401b1018",
+          "blob_bytes": 1335,
+          "local_object_present": true
+        },
+        "Git_blob_size_matches_recorded": true,
+        "Git_blob_content_SHA256_not_rechecked": true,
+        "verified_external_copy_in_scoped_A_or_2015_archives": false
+      }
+    ],
+    "recorded_body_total_bytes": 107496,
+    "Git_path_and_blob_size_count": 82,
+    "exact_body_SHA256_Git_match_rechecked_count": 0,
+    "verified_external_month_body_backup_count": 0
+  },
+  "recovery_decision": {
+    "merged_calendar": "Reuse exact A external restored copy; no new copy needed.",
+    "two_nominal_CSVs": "Exact local Git blob reconstruction is byte-verified, including line ending conversion. No separate external or live remote readback for these paths was shown.",
+    "82_month_bodies": "All exact paths, source-recorded SHA-256 and sizes are located. Local Git objects at the previously verified commit have matching path and size. Exact Git-body-to-source SHA-256 and independent external copies remain unverified in this metadata-only pass.",
+    "precise_external_copy_gap_if_raw_bodies_must_be_independently_preserved": [
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2019-09.json",
+        "sha256": "4c8f26c4661618c96aaa41b592129c9f40e83d886cb40b308cb96f974f0e9c23",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2019-10.json",
+        "sha256": "244064e528e726025cdf2e4bb4634395a2af1f2e2fb28a4539e6051f4ff85120",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2020-01.json",
+        "sha256": "e1388676d56e45e58a214d8593a36576ad5e9195b75917afc66d43a729487186",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2020-02.json",
+        "sha256": "c1486b336630a5be5656d42c444505977e6ccec8a947d39410bec63ade986c27",
+        "bytes": 1251,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2020-10.json",
+        "sha256": "c9d3582ea736486f9a881007686c4866916d5c1bd1dadd48d36236b7787fe1c4",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2021-02.json",
+        "sha256": "08f80bee267642bc12947d58a054008982cb4b7cf9e194c8ccfee6ce7205800f",
+        "bytes": 1209,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2021-09.json",
+        "sha256": "aeaebe804534006ef06e00e272b642e009489a98820ebd7721a46abbbc482da9",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2021-10.json",
+        "sha256": "ebf560edd78c2792da131f8ec0d3aca823cdc1d5e2212eeeced91405a5a8c8cb",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2022-01.json",
+        "sha256": "d18a82679f81e744a2e1bddbbb6737ced1ba2090e94448e60edc79acb802f391",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2022-04.json",
+        "sha256": "3eda94b0597bf5479c4214d3283441cadaa22ca37fb3dbc3860b73ef2e219eed",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2022-10.json",
+        "sha256": "d7eef0c9060ef01dfb530a258c8932120d639bdc1eccd42b7842ef5a90da8c7c",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2023-01.json",
+        "sha256": "d3739f68ebe7123f326abebf51c9ecc53b73ec2d75598e0837885e3f492b6da2",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2023-09.json",
+        "sha256": "7ee6a30c1ee5015a1d058b545b52dd636c97694d2372154ca394dd28dc35dbf4",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2023-10.json",
+        "sha256": "fae6176ee2f915616d937bf35bbb64871b23c3bc690f39aeae448ad93f37dcb4",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2024-02.json",
+        "sha256": "4e09ec9acabc36f0efd45b58ce5279f00f4356c35cddedfe8a9490fe753ad458",
+        "bytes": 1251,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2024-10.json",
+        "sha256": "81931775463a35cd3f0a3afed5fa8581eb685f612826085237d27917d54fd532",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2025-01.json",
+        "sha256": "8715190be638cf1402a23be947ac2d48a746dd173b81ccd1366964afd4f9ed2c",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2025-02.json",
+        "sha256": "c98d3d25e88a417b74ba9d4c6dea8265ebf37bbd8cffc7131ba8db8373dd5dd8",
+        "bytes": 1209,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2025-10.json",
+        "sha256": "fe89276f6ad730daab7300e886ce25b95afb1b7e1554e6b965fec91cdcf6687b",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2026-01.json",
+        "sha256": "4bc0fc30d3575737bb6da529cc5b4046d03a469129c61b46e1bc012d969dd6d7",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2026-02.json",
+        "sha256": "12eb97683c4237253dbe841c525a36e8e42c15d4ad593c8830eb5c77d9e9e1e5",
+        "bytes": 1209,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/raw/szse-2026-06.json",
+        "sha256": "5f7315c9497a4d2dc14435276a50ebbceb8467ee86d530b6a2e337f1cda25d54",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2019-11.json",
+        "sha256": "73cd876df59caae8847a027f0cd6be88253e282a67a0e8f9db4bfd8853e945d9",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2019-12.json",
+        "sha256": "af32db29063806ceaa5bdde7e9a9207680e7a927f41bcde9eed3a38ec7a11fd1",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-03.json",
+        "sha256": "343010425fcb5d5d1957e7cd216f4e780d656121f7e79ce28810fc2db851662e",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-04.json",
+        "sha256": "26c15f3e240d643e961b00e7cce21d13619ae819cf91d71fb74dac5bdfc5c2c4",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-05.json",
+        "sha256": "72f4c320d9bb3e84268e7e5c0e265bf022ef3c4b3fce544d6536085e4719fb5e",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-06.json",
+        "sha256": "760ba1a5c4d62b69b2d92f05f784e427b86fbc6da47064dab65e0feef5eb0824",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-07.json",
+        "sha256": "208529e063163b22a916acc19c66889c4540ef002f2f54a64e4bb4e7dfdf5a3d",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-08.json",
+        "sha256": "38b3c08b34708dd880530b663c24618278325e08f0864e77784559007df8932a",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-09.json",
+        "sha256": "e6e649d49b90b50791b054bd282c58064df632150f7fad84311d431521df7ff0",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-11.json",
+        "sha256": "2a5fb428670c46a6d894dc9345dd11b20ca260d0080a95e26d147cabb01a23a4",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2020-12.json",
+        "sha256": "5a6c17f9761f80c6d837200202d65cab8a08100613e45a12f65190ee3e600bd4",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-01.json",
+        "sha256": "26209c80a5077d55b39e2c515abb7f5b8ea34f3dc5e041600b99264ebec2b917",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-03.json",
+        "sha256": "acc7877be7acd4e0a600a1269993b0eef3ebd4bbb6ebd8c8df94f67142012ada",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-04.json",
+        "sha256": "1e21c3d73d34324060e4e43d142f462115159c950faac040a72b321066caf98c",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-05.json",
+        "sha256": "d53a8cfc58f0ced36ed7361e2e0a094b8c57778d5bd91115e4148c8399633998",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-06.json",
+        "sha256": "5bf42c465e3c443bba9607974337b16de7f0984b91e455e9e50d1ca75af9c6eb",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-07.json",
+        "sha256": "cb84f24c98e30758bccdee0cbb8c2871feccb29b00878aba299f1a9d23f60482",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-08.json",
+        "sha256": "acc063d2a1a26ccc8936e9eb64cb30c3bc8a20ae35aeb2ab5baca6940600eeef",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-11.json",
+        "sha256": "b8073c69cdf04d38ceb800a7105060b335e24578f5ecc6ed1a8a5bdc5274c2e7",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2021-12.json",
+        "sha256": "abb25fec5757e382ff5c0a5790527fa5fca4956b9c4d2af6cf17bc687d6dd491",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-02.json",
+        "sha256": "49ae2bb7c3291a8181371a04db9fd80be597626be4e0e6191089957c2832a106",
+        "bytes": 1209,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-03.json",
+        "sha256": "2fcf13ec55e8c065e55991c0d3c8ea92c648bc53c930ebe2f2b09f0a52dbb4bc",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-05.json",
+        "sha256": "f6201b39e5b8d45389996a5db3ef441aa245890f1c92290cd0e990a6a5f98e7f",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-06.json",
+        "sha256": "824df41143d8d14b7334e258ed142e35122203bb8144c241b78a9cedaf979e86",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-07.json",
+        "sha256": "5638e15fb61c48a8c5fac390c609abd63c6e62175f2faed79d89236a667d9cb5",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-08.json",
+        "sha256": "1526d313e4bff43449f96d620e9ad8dfc10e390bd4b83a10957fadc42d1a0bab",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-09.json",
+        "sha256": "80a76645ca97129a26eaaf7c59c42a0ff6689c2d7499fb50268bab5a9eeb2050",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-11.json",
+        "sha256": "d4514cb5d678ee4c192c083d1755f4aacd8a966e70313a31949d0d6ac1ed19bf",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2022-12.json",
+        "sha256": "48cb0c901f0fc61e1edd5f095aa8147315716a700138f5c912875f55a4aab8ee",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-02.json",
+        "sha256": "3510871f9d15b1a683d3a94ea28b1e51dcb3b7223b27f3250495d32047d57cdb",
+        "bytes": 1209,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-03.json",
+        "sha256": "10cbdf81f4c3a043da35a2814c069ddc003fe1b8905563ea06fcc53012728349",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-04.json",
+        "sha256": "6b7b70d4476f593092b480f0496168a0a5545ef10668a26a2279a0cedf6d39f2",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-05.json",
+        "sha256": "27574d6970dc9aa00b983ce4695fe622d031fa599ac4f09c170c2fd9e6172203",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-06.json",
+        "sha256": "2d2c3035016931dea40f7ee67cadb41709797e291005bcd2e2e29cefc623fa10",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-07.json",
+        "sha256": "f54bfaa5763f35890165e9cac19d89a796877c161dc08c6679c47410e6a88f8f",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-08.json",
+        "sha256": "f7a6733b6d8b896659889ad5647836fc17950a92222050477090f6ff57a6a63c",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-11.json",
+        "sha256": "ee8f6079bf16cfbc3aae39554672ddb3557cd0f55d8b2f1d5466c8fb8e079f82",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2023-12.json",
+        "sha256": "b99940defe43b371bbb06265a0aebf7266469c5f19a20cd2670b112bf056d4aa",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-01.json",
+        "sha256": "319509f1c09755b480f0c4555965046083d431b88062cb47728bbe1c7426015f",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-03.json",
+        "sha256": "3f00d5fa03f49f9439d8421a25a4b65b210168e1194420f147ef586e5410e532",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-04.json",
+        "sha256": "bdf0de40a244b1bc0661d1b73e7ac55c2189a06dd23e412179e4e520f01224ca",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-05.json",
+        "sha256": "15058854f291ac80d04dc919fe40b9d3436143631fc4d88848b079edc44acdc4",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-06.json",
+        "sha256": "c13db5d324afc6a9bc96587bc2d4d8031f281c7b7511c2f5df93e29d23de8257",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-07.json",
+        "sha256": "23229eb8eec8443706a16d832a0026511ddec555c37a11fcbb2d270fd5e98b4a",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-08.json",
+        "sha256": "b02702172d6ebbb7140b04ec0fa7b9f44963795f6aaf34c878015fae865f5781",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-09.json",
+        "sha256": "dcc5cef5ddb75f9b51e2ebbdf466b97120dcf13e8e301b8d81dab7034f42e464",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-11.json",
+        "sha256": "d14a6c75686e286de6cf62653cddd041feefbd2b3c689e67c7763d71cf190c79",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2024-12.json",
+        "sha256": "6a5d4059960841949df228ebcb79c9ae6f7a60d8b4eb901e76417b60facb15e9",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-03.json",
+        "sha256": "18e7c0195124cd4c64dbabc3fa3bae07bce11daffcb5a060edf1aa96587daaca",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-04.json",
+        "sha256": "31ae208673ba9b43ceb8f554db4aec02ee19f92f9c4577fbfed0d686227bebde",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-05.json",
+        "sha256": "f59da05f4b43b078d1ea91d0b2591686457470aea773c1d63f34b343aafc59b8",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-06.json",
+        "sha256": "f9c63ea8d8c5c3f2263bd5bb6692b06c9e8f05de85ffc6e145464e447ebdd9bf",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-07.json",
+        "sha256": "3fbba25a412ff6ab7676779f1ff1f4d522cd99aa3adc4c1cb416e9c05c5a00a8",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-08.json",
+        "sha256": "42fa7ece56b62e9162b68dc3e350b94849b9f99207588c3f63dc2f5ac01d8b71",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-09.json",
+        "sha256": "1e52596fb8c2a7795dc35ca390e14c0b79a7b3c8316f0d7811ee9232ccb320bd",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-11.json",
+        "sha256": "a9cfaccc7b53979061f1a9b3baf5ca8e23be6801a0fb5d46f1b9254d82133ff4",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2025-12.json",
+        "sha256": "ae6c79c83b1a09fe34f12f7189f5fcc2bf842d9ab5f1cae795345b655942ab1a",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-03.json",
+        "sha256": "8bf24b4a15975f3cd8346e279fa84cf7c72767878d9194df9ae0b904cfd2dd6d",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-04.json",
+        "sha256": "10e3bfaae22e98fa41eeb2fb224822b115b5f79e5bb2ba3ad4d420835dcea0f8",
+        "bytes": 1293,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/raw/szse-2026-05.json",
+        "sha256": "e5be116c816df091cb18d1ef3a4c80a72b463c8c4b90918b2e3c979904924f2d",
+        "bytes": 1335,
+        "reason": "No verified external copy in scoped receipts; Git path/object and byte count exist, but exact body SHA-256 was not reread in this metadata-only check."
+      }
+    ],
+    "gap_count": 82,
+    "gap_recorded_bytes": 107496,
+    "additional_nominal_CSV_bytes_if_separate_external_redundancy_required": 882923
+  },
+  "prior_scope_boundaries": {
+    "A_25_includes_merged_calendar": true,
+    "A_25_includes_two_nominal_CSVs": false,
+    "A_25_includes_82_month_bodies": false,
+    "new_2015_archive_is_only_15_own_bodies_plus_5_bindings": true
+  },
+  "limitations": [
+    "The local Git object for each monthly response is a recoverability candidate, not an independently byte-confirmed external backup of that exact response in this check.",
+    "Previously checked remote commit for the merged calendar does not prove live remote availability or byte identity of every other path now.",
+    "No old response body was parsed or hashed in this pass; monthly current-file checks use existence and size only.",
+    "Recovery readiness does not change source qualification, research interval, or market readiness."
+  ]
+}

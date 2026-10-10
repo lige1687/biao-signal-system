@@ -1,0 +1,392 @@
+{
+  "schema": "full_account_recovery_boundary_review.v1",
+  "reviewed_at": "2026-10-10T19:19:17.262116+08:00",
+  "reviewer": "Astra /root/next_research_design",
+  "scope": "只读目标5未来两ETF P0/P1完整资金研究恢复条件；零联网、零实验、零价格/收益/账户运行，不改冻结规范或旧合同。",
+  "plain_language_conclusion": "恢复还不能判ready，主要卡在510300的2017全年行动证据、P1一处分支定义、可实际用于两ETF的日期与开盘资格，以及把已验工程串成完整流程。已有43月和2015来源、行动字段与跨周恢复成果可以复用；不能把尚未证明历史所有情况变成无穷取源清单。",
+  "input_bindings": [
+    {
+      "path": "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md",
+      "sha256": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a"
+    },
+    {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/calendar-opening-readiness.json",
+      "sha256": "1f92570f506525327e64ebf523770aa9bf5b537351c810ac291f9761035febf2"
+    },
+    {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/dated-gap-reuse-readback.json",
+      "sha256": "66a3fab87730eed09c1b513769bad28a750295869767c4b402fbb2a405e8b5f1"
+    },
+    {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/additional-source-request-proposal.json",
+      "sha256": "31847ffcb189cb085c448c43a4a777dd0661e9078c5d1012746a2766082fab50"
+    },
+    {
+      "path": "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/qualified-action-evidence.v1.json",
+      "sha256": "07cde9ce9f11cbced00c7c28b9f231981148f7e9fd3cb3350507b71798f8c1bc"
+    },
+    {
+      "path": "docs/experiments/raw/two-etf-2015-calendar-source-2026-10-10/independent-review.json",
+      "sha256": "2d02159ef75b2d19505c715d67e03463c4af000326570edf19b1f9f775563b1e"
+    },
+    {
+      "path": "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/independent-review.json",
+      "sha256": "43bf7546935ef931fdee8d8a25cb88360ca7c8a5b0e90e23c3f6d935d910e27f"
+    },
+    {
+      "path": "docs/experiments/raw/szse-jan2017-missing-date-source-2026-10-10/independent-review.json",
+      "sha256": "fdcda77d4da25550ec68939f1fd0ec973934dee5deb1c867ad5891157ad573f9"
+    },
+    {
+      "path": "docs/experiments/weekly-portfolio-order-planning-2026-10-08.md",
+      "sha256": "a1de1eeac5771ebe8610df631d2fea508eae607e2a7fffd9e56fe79cf329fc3a"
+    },
+    {
+      "path": "docs/experiments/weekly-portfolio-order-ledger-adapter-2026-10-08.md",
+      "sha256": "079a45f377d513e0f903dfbc0c699188272e0329c923f1147c1cb597cdb59eaf"
+    },
+    {
+      "path": "docs/experiments/weekly-portfolio-whole-buy-recovery-2026-10-09.md",
+      "sha256": "ad791c029b6f9ceda13dabc074aeb0b8817cec8a17216493f648842951dfa735"
+    },
+    {
+      "path": "docs/experiments/weekly-portfolio-cross-week-fixed-orders-2026-10-10.md",
+      "sha256": "4ec165314f711accd616f299777cec4ab33d4993f000c31023495cc4e7c1b7cf"
+    },
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/actions.json",
+      "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789"
+    }
+  ],
+  "review_style": "复用本日已独核来源和封存工程结论，只核必要当前文件/指纹和定义；不重新核整批PDF、44月原件或旧合成实验。",
+  "authority_and_fixed_scope": {
+    "spec_sha256": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a",
+    "products": [
+      "sh510300",
+      "sz159915"
+    ],
+    "candidate_window": [
+      "2015-01-01",
+      "2026-06-30"
+    ],
+    "scenario": "每周一00:00共享250元、初始0、50/50目标；P0用新钱补不足，P1偏差达到固定5个百分点才调节旧持仓。研究情景不是用户资金承诺。",
+    "not_permitted": [
+      "改变原策略或借本审阅改P0/P1语义",
+      "缩短窗口规避缺口、看收益择期",
+      "重开月度4/4、固定2/2或A03预算",
+      "把工程通过当收益证明",
+      "真实账户/交易"
+    ],
+    "market_ready": false
+  },
+  "source_status": {
+    "corporate_actions": {
+      "rows": [
+        {
+          "symbol": "510300",
+          "period": "2015",
+          "cash": "supported_events",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "510300",
+          "period": "2016",
+          "cash": "supported_events",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "510300",
+          "period": "2017",
+          "cash": "unknown",
+          "holder_split": "unknown"
+        },
+        {
+          "symbol": "510300",
+          "period": "2018",
+          "cash": "supported_events",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "510300",
+          "period": "2019",
+          "cash": "supported_events",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "510300",
+          "period": "2020",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "510300",
+          "period": "2021",
+          "cash": "supported_events",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "510300",
+          "period": "2022",
+          "cash": "supported_events",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "510300",
+          "period": "2023",
+          "cash": "supported_events",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "510300",
+          "period": "2024",
+          "cash": "supported_events",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "510300",
+          "period": "2025",
+          "cash": "supported_events",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "510300",
+          "period": "2026H1",
+          "cash": "supported_events",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2015",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2016",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2017",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2018",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2019",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2020",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2021",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2022",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2023",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2024",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2025",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        },
+        {
+          "symbol": "159915",
+          "period": "2026H1",
+          "cash": "supported_zero",
+          "holder_split": "supported_zero"
+        }
+      ],
+      "coverage_accepted": "23/24产品年期现金分配/持有人份额折算字段已受限支持；唯一全年缺口5103002017。",
+      "remaining_gap": "5103002017已有单笔0.055公告不能证明全年仅这一笔或无份额折算；缺准确全年原件。",
+      "retained_limits": [
+        "5103002016每份0.051由分配明细/总额及专项公告支持，但年度叙述0.35/10冲突原因未知。",
+        "5103002018目标分配和拆分栏已接纳，74实页/印76的整PDF完整性未知不自动推翻已核目标字段。",
+        "事后年报可核覆盖与没有遗漏，不作为当年决策已知的实时输入。"
+      ],
+      "account_event_times": "旧actions有公告/登记/除息/计划支付日期，未给全部支付实际到账时刻。需在真正会花这笔现金的执行顺序上绑定资格；不能一律按支付日00:00可花。"
+    },
+    "calendar": {
+      "szse_2015": "365个自然日回溯字段已受限接纳；原来源题同语义查询4/2执行not_passed保留。",
+      "szse_2016_201908": "43完整月1308日876开市已独核；2017-01的30日为原始观察，Jan1unknown；月度44题全期未合格。",
+      "szse_201909_202606": "原已存82月2495自然日1652开市可复用，不重跑已核内容。",
+      "jan1_followup": "新准确公告题已独核有界未证：3/4动作，定位2/2用尽；9月官方正文仅引用年度文号，无Jan1正文或链接。没有获准可继续的目标，不再同义重搜。",
+      "sse": "2015年度+九三追加明确日期、2026H1计划比较可复用；尚未有适用于510300全候选期的独立日历资格依据。SZSE吻合和有日线都不能自动替代SSE适用性。"
+    },
+    "prices_and_known_exceptions": {
+      "nominal_prices": "旧两ETF名义开收盘路径与缺价检查已有，不需要新价格下载。",
+      "known_dates": [
+        "159915 2021-02-08缺报价有已存停牌原文；禁止交易，停牌估值只按原规范明确原因与年龄。",
+        "159915 2021-02-09有日线但10:30恢复，不能用其open作09:30成交。",
+        "两ETF2024-10-08价格触及已存涨停边界，原保守检查拒买；1599152015-07-08拒卖边界复用。"
+      ],
+      "limit": "这些已知例外不等于全历史开盘状态或真实流动性已完整证明，也不是再核它们的理由。"
+    }
+  },
+  "necessary_acceptance_items": [
+    {
+      "id": "two_product_identity_rules",
+      "need": "准确产品/价格单位、整百买入、可卖解禁、价位和适用交易规则。",
+      "current": "已有身份与工程规则可复用，正式运行须绑定适用版本；不需要全股票身份或宽度成员库。"
+    },
+    {
+      "id": "applicable_calendar",
+      "need": "固定候选窗口两产品适用的交易日期依据，支持下一允许开盘、每日估值及解禁；有冲突/缺日必须可定位。",
+      "current": "来源有明确增量，但Jan2017原月与SSE全期适用性未闭合。",
+      "minimum_change": "准确的缺日官方依据或当时有效的交易周规则可改变planned字段；准确的SSE日历/适用规则加明确例外可改变适用性。必须按证明类型接受，不能生成actual字段。无需自动逐条扫描十余年通知。"
+    },
+    {
+      "id": "actions_and_cash_clock",
+      "need": "全年行动覆盖、每一相关事件的登记/生效/支付日期、数量单位和可用现金时点。",
+      "current": "现金/折算覆盖只缺5103002017；日期级已存公告与事后年报职责分开。",
+      "minimum_change": "先取得缺2017年原件的明确预算增量授权；真实到账若无证据不能提前花，未来合同须以证据或明确保守研究时序处理，不能把推定到账伪称实际到账。"
+    },
+    {
+      "id": "defined_policy",
+      "need": "P1达到调节条件但没有可卖整手时，新钱如何处理。",
+      "current": "已有报告明确未支持、待用户定义；不能默认推荐项。",
+      "minimum_change": "一次明确该分支的用户决定；无需再问已固定250/50%/5个百分点。"
+    },
+    {
+      "id": "opening_and_fill_method",
+      "need": "只对这两ETF、固定期间和政策会执行的开盘定义资格/拒绝/成交近似，证明输入满足该研究方法。",
+      "current": "日线不够直接证明09:30与真实成交；已知停复牌/边界须保留。",
+      "minimum_change": "先固定有限的证券状态证据覆盖与研究成交近似，识别具体缺失日期/事件；需要时只取准确缺口。真实逐笔撮合/任意订单真实成交并非历史政策比较的自动前置，但不得声称已证明。"
+    },
+    {
+      "id": "complete_engineering_path",
+      "need": "把固定政策、现金、行动、开盘拒绝、卖款后续到账、每日估值和保存恢复连接起来，并独立核一份现金/单位净值/事件一次性。",
+      "current": "旧日期账本、单决策买卖适配、整笔买单恢复和两周固定买单恢复已验；完整P0/P1自动跨周流程仍未验。",
+      "minimum_change": "只补会被最终固定流程真实触发且现有验收没覆盖的环节。多批争款排序仅在实际存在跨周未终结决策时是必要语义；原单周产品不足/代码平局排序已定义，不重问。部分成交/并发不是采用串行整笔研究近似时的自动前置。"
+    },
+    {
+      "id": "costs_and_result_contract",
+      "need": "双方同产品、资金、日程、成本情景、期末处理、操作负担与单位净值口径，正式执行前另行冻结账户运行合同。",
+      "current": "真实佣金未知不阻止显式相同成本情景；没有私人偏好不阻止客观收益/风险交换报告。",
+      "minimum_change": "方法负责人事前明确费用分项和研究成交假设，不搜参数或自造多赚多少才值得阈值。不因准备完成而直接运行。"
+    }
+  ],
+  "two_pending_decisions": {
+    "A_source_budget": {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/additional-source-request-proposal.json",
+      "existing_used_limit": "18/18",
+      "proposed_increment": 2,
+      "status": "proposal_only_pending_human_approval",
+      "target": "已观察法定披露列表link67的5103002017准确年报附件；2请求提案未获准前不能执行，也不另名重开同题。"
+    },
+    "B_P1_branch": {
+      "path": "docs/experiments/weekly-portfolio-order-planning-2026-10-08.md",
+      "branch": "已触发调整但没有任何可卖整百份时的新钱处理",
+      "status": "unresolved_policy_definition",
+      "why_material": "改变现金等待与下一买入，直接影响P1与P0的公平对照。"
+    },
+    "not_a_third_automatic_user_question": "同日跨批全局优先是条件性工程问题；先确定旧决策生命周期与是否实际竞争，不能从未覆盖清单直接变成待用户决策。"
+  },
+  "planned_vs_retrospective": {
+    "planned": "官方公告/当时有效交易周规则支持未来计划安排，只能依其日期与范围使用；未见后续调整不能用文字断言绝无调整。",
+    "retrospective": "官方当前历史jybz证明保存来源的日历标志，不能证明当时供应商到达、证券全天不断交易或下单必成交。",
+    "composition": "可在新明确合同中并列这些不同强度字段及冲突状态；不能填原raw或改旧完整月阈值。原44题仍43/44。",
+    "avoid_unnecessary_absolute_requirement": "完整适用日历并不自动等于为每一自然日找实际开市证明、为每一历史价格找今天系统当年的接收日志。先说明实际研究使用哪一类型、时间粒度及其理由，只在时点能改变决策/可花现金/执行资格的地方提出准确验收。新的方法界定不 retroactively 使旧合同通过。"
+  },
+  "not_infinite_todos": [
+    "没有证据的所有可能异常，不是独立研究问题；须给具体对象/日期/会改变的验收。",
+    "不自动发SSE十余年每条通知扫描；优先准确适用规则或历史日历记录，已有差异才定向例外。",
+    "不把全股票PIT、宽度成员、其他ETF、宏观或新因子资料作为本两政策前置。",
+    "不再复核已接受全部年报字段、2018完整PDF疑点、已知停牌或43绿月份，除非有新矛盾。",
+    "不要求证明任意价量真实成交；历史研究只能在冻结近似内比较，真实交易另行授权。",
+    "不要求用户先给实际财富/每周投入/风险偏好才做固定情景的客观比较；采用建议则另需这些信息。"
+  ],
+  "authorized_independent_work_now": {
+    "completed_here": "恢复条件按字段/用途/真实阻塞收敛；最新Jan1有界未证独核已完成。",
+    "can_progress_without_pending_choices": "在正式运行准备中，对已存事件日期和政策执行依赖做只读映射，定位真正缺少的支付时点/证券状态；不得由笼统unknown直接生成全历史取源任务。现有已做的calendar-opening-readiness和dated-gap复用，不另做同内容清单。",
+    "current_assignment_boundary": "本轮只读门槛审阅已到边界；没有获准新源码写域/实验合同，不能趁等待新增工程实验。",
+    "no_market_execution_ready": "旧来源缺口和P1分支使全候选期完整比较仍不能执行。其他来源事实可独立封存复用，不能声称目标5完成。"
+  },
+  "closure_and_recovery": {
+    "this_review": "completed_bounded_readonly_review",
+    "goal5": "not_ready_for_full_account_comparison",
+    "actual_blockers": [
+      "5103002017全年现金/折算来源与原题额度",
+      "P1无可卖整手的新钱定义",
+      "两产品适用日历/开盘资格的有限、可核、完整用途覆盖尚未绑定",
+      "完整政策执行链及正式运行合同未验收"
+    ],
+    "do_not_keep_running_without_premise": "Jan1定位已到方法额度边界；既有阴性收益题已封存；没有具体新来源或定义变化不循环。",
+    "recover_when": "必要决定/准确新来源/适用资格合同到位后，仅推进被解除的依赖项；不重跑已完成证据。"
+  },
+  "release": "完成并释放；仅写本文件，报告、共享登记与API由root处理。",
+  "proposed_quantity_and_cap_solver_reuse_review": {
+    "decision": "already_implemented_and_accepted_do_not_register_duplicate_new_solver_question",
+    "current_sha_bindings": {
+      "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/order_planning.py": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a",
+      "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/order_planning_v2.py": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958",
+      "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/source-sha256.json": "988598473d626d2e279c6e0edcd9061f455327ee35ed234b4757fb6a1b2b816d",
+      "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/source-v2-sha256.json": "efbcd15c01833de82ec0e3ee3f066d88bbec751d68ec73e84329aded10765328",
+      "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/test_order_planning.py": "00be16b38514a8ddf895d70e85be4191cbfa7c905d82ad51a944ad60a9c04ece",
+      "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/independent-arithmetic.json": "e59982027cf3d67173c3174a1a3d02136753055475facf8b2945e391dfd778d7",
+      "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/independent-arithmetic-v2.json": "0c3ae6a574533e7314f827aca75cabca3d4f5ddc71a01a81a7b99513f7e65ade"
+    },
+    "exact_existing_functions": {
+      "order_planning.py::affordable_quantity": "用Fraction同时满足比例佣金段和最低佣金段，取较小上界再向下取整百；不是按浮点除法近似。",
+      "order_planning.py::price_cap": "固定q，两个费用段上界较小者向下取0.001；q非整百/零或无正价位拒绝。",
+      "order_planning_v2.py": "直接复用上面已审纯数量/限价函数；v1后续现金分配缺陷由v2修复，不代表需弃用已核纯算术。",
+      "order_planning_v2.py::validate_opening_order": "固定数量与计划身份，资格缺失或开盘越限拒绝；不按已知开盘缩量。"
+    },
+    "reused_fixed_cases": [
+      {
+        "case": "最低佣金边界",
+        "given": "p=2,c=.001,M=5,s=.001",
+        "evidence": "B205为q0；B205.2为q100；q0费用0。"
+      },
+      {
+        "case": "固定数量限价",
+        "given": "B205.25,q100",
+        "evidence": "cap2.000；2.001成本205.3001，拒绝且不缩量。"
+      },
+      {
+        "case": "比例佣金分支",
+        "given": "B500,p2,c.01,M1,s.005",
+        "evidence": "q200参考成本406；cap2.463成本499.989，下一tick2.464成本500.192。"
+      },
+      {
+        "case": "修复后的实际现金",
+        "given": "当前现金174.82或374.82，参考1",
+        "evidence": "分别q100或q300；v2保存13项精确金额/下一tick核算。"
+      }
+    ],
+    "minimum_tick_coverage_note": "代码已明确无正0.001价位拒绝；现已读旧保存测试未见单独命名的最低一档case。缺这一测试名称不等于求解器未实现或出现具体缺陷，不据此重开实现题或批量重跑。若未来接入确实触发该边界，只核该受影响接口。",
+    "currency_rounding_and_fee_identity": "旧实现属于具名研究成本情景，不含真实佣金或币种收费取整。继续保持未知，不补一个未经授权的实际收费规则。",
+    "authorized_next_work_judgment": "根所提新solver不是必要新增工作，按复用优先否决；真正未验是整体政策执行依赖，须先定位准确未答验收再冻结有限新题，不为持续运行造重复实验。",
+    "new_experiments_or_runs": 0
+  }
+}

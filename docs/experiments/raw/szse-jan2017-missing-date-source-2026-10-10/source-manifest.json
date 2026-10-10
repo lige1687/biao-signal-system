@@ -1,0 +1,41 @@
+{
+  "schema": "szse-jan2017-source-manifest.v1",
+  "contract_sha256": "e93df82535af698aca243d2c0928a5c95895738236d646c7a054595127820fda",
+  "external_run": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-jan2017-missing-date-source-20261010/szse-jan2017-missing-date-source-20261010-20261010T191337-32051338898d",
+  "sources": [
+    {
+      "action_n": 1,
+      "group": "locate-szse-2017-jan1-notice",
+      "kind": "web_search",
+      "url_or_query": "site:szse.cn 2017年 元旦 休市安排 深圳证券交易所 2016 12",
+      "status": "no_exact_2017_original_but_2017_later_notice_references_annual",
+      "raw_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-jan2017-missing-date-source-20261010/szse-jan2017-missing-date-source-20261010-20261010T191337-32051338898d/01-search-response.json",
+      "headers_path": null,
+      "raw_sha256": "22fb5740bc9bd0180750ae7885d429c2427b0438258a3d6b1140daca9354cc92",
+      "raw_bytes": 20127
+    },
+    {
+      "action_n": 2,
+      "group": "locate-szse-2017-jan1-notice",
+      "kind": "web_search",
+      "url_or_query": "site:szse.cn/disclosure/notice/general/ \"关于2017年部分节假日休市安排的通知\" \"元旦\"",
+      "status": "no_exact_2017_original",
+      "raw_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-jan2017-missing-date-source-20261010/szse-jan2017-missing-date-source-20261010-20261010T191337-32051338898d/02-search-response.json",
+      "headers_path": null,
+      "raw_sha256": "c33209957813855110505714626ab98b996d48b84cb95681292f0bcef3038ba9",
+      "raw_bytes": 2163
+    },
+    {
+      "action_n": 3,
+      "group": "exact-official-notice-original",
+      "kind": "http_get",
+      "url_or_query": "https://www.szse.cn/disclosure/notice/general/t20170921_502167.html",
+      "status": "saved_reference_page",
+      "raw_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-jan2017-missing-date-source-20261010/szse-jan2017-missing-date-source-20261010-20261010T191337-32051338898d/03-2017-september-official-reference.html",
+      "headers_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-jan2017-missing-date-source-20261010/szse-jan2017-missing-date-source-20261010-20261010T191337-32051338898d/03-2017-september-official-reference.headers.json",
+      "raw_sha256": "2bb203f9985ca9a3eff04ef7098cae4d2cd9ded775089fa0ce5f77c4dd567895",
+      "raw_bytes": 16195
+    }
+  ],
+  "body_bytes_total": 16195
+}

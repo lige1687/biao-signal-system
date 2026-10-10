@@ -1,0 +1,542 @@
+{
+  "schema": "accepted-event-execution-dependency-map.v1",
+  "created_at": "2026-10-10T19:22:18.847422+08:00",
+  "scope": "Read-only static map of accepted two-ETF cash events to frozen shared-account and dated-order definitions; zero network, market, prices, account, return computation or old-file modifications.",
+  "plain_language_conclusion": "已验分红公告给了计划支付日，但没有钱实际到账的时刻。若登记日有持仓，账本先列应收；原带日期实现须有可花时点依据才能释放。未来独立研究也可事前固定双方相同的保守到账时序，但必须写明这是研究假设，不能冒充历史实际到账或倒填旧输入资格。周一00:00是250元入金锚点，通常的组合决策在最近完整周末收盘后；仅有计划支付日不能把分红算入该周可花现金。旧跨周测试没有证明同日两个未完成真实决策争用现金。",
+  "input_sha256": {
+    "boundary": {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/full-account-recovery-boundary-review.json",
+      "sha256": "9c43379763a07af9c909bec6ddd440a724eaf1a33b8256ce3fd5397d9b851f40"
+    },
+    "qualification": {
+      "path": "docs/experiments/raw/etf-pair-action-coverage-completion-2026-10-10/qualified-action-evidence.v1.json",
+      "sha256": "07cde9ce9f11cbced00c7c28b9f231981148f7e9fd3cb3350507b71798f8c1bc"
+    },
+    "actions": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/actions.json",
+      "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789"
+    },
+    "spec": {
+      "path": "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md",
+      "sha256": "695ce8a18e34d3520c53f793b1f347a05e146fea345474b5d72224ba93c30a5a"
+    },
+    "dated_ledger": {
+      "path": "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py",
+      "sha256": "20f6547deea6d19c6416daa6048ee18a7111ff6bf4c7b21bbae90a7b379e62d3"
+    },
+    "order_v1": {
+      "path": "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/order_planning.py",
+      "sha256": "645cac7faa6fc25bd95e0c25b63621d4e233b501a6d0b946895ff685b584a75a"
+    },
+    "order_v2": {
+      "path": "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/order_planning_v2.py",
+      "sha256": "a9ab958fa737fc53e7a08905da9ffd82b40687354f2b8be2d508db121a13b958"
+    },
+    "cross_week_report": {
+      "path": "docs/experiments/weekly-portfolio-cross-week-fixed-orders-2026-10-10.md",
+      "sha256": "4ec165314f711accd616f299777cec4ab33d4993f000c31023495cc4e7c1b7cf"
+    },
+    "cross_week_engine": {
+      "path": "docs/experiments/raw/weekly-portfolio-cross-week-fixed-orders-2026-10-10/cross_week_fixed_orders.py",
+      "sha256": "ecb9a5f6eda5616e9a62103b07df21dfa235cebf73b6683e9446d97789946964"
+    },
+    "dated_gap_readback": {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/dated-gap-reuse-readback.json",
+      "sha256": "66a3fab87730eed09c1b513769bad28a750295869767c4b402fbb2a405e8b5f1"
+    },
+    "price_limit_regimes": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/price-limit-regimes.json",
+      "sha256": "e674d7748f2c26f604432d5e529f4849f9ca799319ce8b738d619c64c8924617"
+    },
+    "dated_restrictions": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/dated-restrictions.json",
+      "sha256": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7"
+    },
+    "rule_source_manifest": {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/new-rule-sources.json",
+      "sha256": "395d381b23e7196838b38111a581c38b0a48466a30d42813c03f9bf1f313a167"
+    }
+  },
+  "accepted_action_scope": {
+    "event_rows_total": 12,
+    "qualified_period_event_rows": 11,
+    "single_2017_notice_event_rows_without_full_year_coverage": 1,
+    "510300_2017_full_year_cash_and_split_status": "unknown",
+    "159915_cash_and_holder_split_periods": "supported_zero in the 24-row accepted period matrix",
+    "no_share_conversion_event_in_two_products_accepted_scope": true,
+    "action_amounts_not_recomputed": true
+  },
+  "event_dependencies": [
+    {
+      "event_id": "510300-cash-2015-01-20",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2015",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2015-01-14",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2015-01-19",
+      "effective_date": "2015-01-20",
+      "scheduled_pay_date": "2015-01-23",
+      "pay_weekday": "Friday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2015-01-14.pdf",
+      "official_notice_source_sha256_from_locked_actions": "63ef71da610b4d8b2cc97f8b099e5019e1a17515a576dad7cf7e0aac6677c713",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2015-01-19T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2015-01-26T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2016-01-20",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2016",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2016-01-14",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2016-01-19",
+      "effective_date": "2016-01-20",
+      "scheduled_pay_date": "2016-01-25",
+      "pay_weekday": "Monday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2016-01-14.pdf",
+      "official_notice_source_sha256_from_locked_actions": "747eb0956d72e57c67d52323ea0a0b72b04c244c3ab4b994c53c389b8e7c5992",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2016-01-25T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2016-02-01T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2017-01-23",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2017",
+      "annual_cash_coverage_status": "unknown",
+      "announcement_date": "2017-01-17",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2017-01-20",
+      "effective_date": "2017-01-23",
+      "scheduled_pay_date": "2017-01-26",
+      "pay_weekday": "Thursday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2017-01-17.pdf",
+      "official_notice_source_sha256_from_locked_actions": "a43612267be7e68a6a110013ba7b14faeae48657932b7dca713db8a44ea46b6b",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "2017 individual event notice is observed, but 510300 2017 annual cash/split coverage remains unknown",
+      "same_week_monday_0000_deposit_anchor": "2017-01-23T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2017-01-30T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2018-01-23",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2018",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2018-01-17",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2018-01-22",
+      "effective_date": "2018-01-23",
+      "scheduled_pay_date": "2018-01-26",
+      "pay_weekday": "Friday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2018-01-17.pdf",
+      "official_notice_source_sha256_from_locked_actions": "12c531bc50c01080611ce9981fa19df56dfcf88a3e06f7e767da48776f00cacb",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2018-01-22T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2018-01-29T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2019-01-16",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2019",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2019-01-10",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2019-01-15",
+      "effective_date": "2019-01-16",
+      "scheduled_pay_date": "2019-01-21",
+      "pay_weekday": "Monday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2019-01-10.pdf",
+      "official_notice_source_sha256_from_locked_actions": "c0076714ac5397251951123dab38188015da059ebe1fdf1157acba9c965f6a60",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2019-01-21T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2019-01-28T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2019-12-11",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2019",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2019-12-05",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2019-12-10",
+      "effective_date": "2019-12-11",
+      "scheduled_pay_date": "2019-12-16",
+      "pay_weekday": "Monday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2019-12-05.pdf",
+      "official_notice_source_sha256_from_locked_actions": "26a0a0ec53d8b733708a23b5cbe5067aabb00dd677c68d6ccc605baeb546d1fb",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2019-12-16T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2019-12-23T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2021-01-18",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2021",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2021-01-11",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2021-01-15",
+      "effective_date": "2021-01-18",
+      "scheduled_pay_date": "2021-01-21",
+      "pay_weekday": "Thursday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2021-01-11.pdf",
+      "official_notice_source_sha256_from_locked_actions": "1992271ca55dc3c7f88cf528f8f0f757fc48143b2a805159d2b3efdfb9143fc2",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2021-01-18T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2021-01-25T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2022-01-19",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2022",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2022-01-12",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2022-01-18",
+      "effective_date": "2022-01-19",
+      "scheduled_pay_date": "2022-01-24",
+      "pay_weekday": "Monday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2022-01-12.pdf",
+      "official_notice_source_sha256_from_locked_actions": "141928ae19f0a12f1c735321424367bcd542063cbf8e143c0c97ec1659de49f3",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2022-01-24T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2022-01-31T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2023-01-16",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2023",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2023-01-09",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2023-01-13",
+      "effective_date": "2023-01-16",
+      "scheduled_pay_date": "2023-01-19",
+      "pay_weekday": "Thursday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2023-01-09.pdf",
+      "official_notice_source_sha256_from_locked_actions": "68f2227ae25acec3b831d50d042b87f12696dc0df1514ef9dacb36e018d571d7",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2023-01-16T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2023-01-23T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2024-01-18",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2024",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2024-01-11",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2024-01-17",
+      "effective_date": "2024-01-18",
+      "scheduled_pay_date": "2024-01-23",
+      "pay_weekday": "Tuesday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2024-01-11.pdf",
+      "official_notice_source_sha256_from_locked_actions": "165ddaec9b36480ff4cbc738227043db7b7acc4f80ac31bedaa0e4f5c4001f4b",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2024-01-22T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2024-01-29T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2025-06-18",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2025",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2025-06-11",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2025-06-17",
+      "effective_date": "2025-06-18",
+      "scheduled_pay_date": "2025-06-27",
+      "pay_weekday": "Friday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2025-06-11.pdf",
+      "official_notice_source_sha256_from_locked_actions": "cc7d6cb4bc5c887d874db2b1a0c2d6b2fdc0c7902dcfe79d2b61564b9e2b31fc",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2025-06-23T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2025-06-30T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    },
+    {
+      "event_id": "510300-cash-2026-01-19",
+      "symbol": "sh510300",
+      "kind": "cash_dividend",
+      "period": "2026H1",
+      "annual_cash_coverage_status": "supported_events",
+      "announcement_date": "2026-01-12",
+      "announcement_exact_clock": "unknown",
+      "historical_source_arrival_clock": "unknown",
+      "record_date": "2026-01-16",
+      "effective_date": "2026-01-19",
+      "scheduled_pay_date": "2026-01-27",
+      "pay_weekday": "Tuesday",
+      "official_notice_source_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/fourth/510300/2026-01-12.pdf",
+      "official_notice_source_sha256_from_locked_actions": "c8ff747d02fa90db72320458c38249f73720b932d61b7e088f033583aab63992",
+      "actual_credit_timestamp": "unknown",
+      "planned_pay_date_is_not_credit_timestamp": true,
+      "later_decision_cash_condition": "Next Monday date is only a deposit/week anchor, not necessarily decision_at. Original dated implementation needs a bound pay_at and current_cash known_at/available_at before the actual order freeze. A future contract may freeze the same conservative cash-availability timing for both policies as an explicit scenario, without claiming actual historical credit or retroactively qualifying old inputs.",
+      "holder_entitlement_condition": "cash amount exists only for shares held on record date; not calculated here",
+      "account_effect_if_entitled": "Record receivable at the qualified effective event. The old dated ledger releases it only at its bound aware pay_at; actual credit is unknown. A future separate contract may bind a conservative research pay_at assumption, explicitly labeled as such, without filling an actual receipt timestamp.",
+      "planning_effect": "P0/P1 budget or P1 later-buy current_cash may include this dividend only when the cash clock bound by the applicable implementation/contract is no later than that actual decision or order freeze; planned pay date alone does not establish that clock.",
+      "source_scope_note": "accepted event field and period coverage are retrospective, not proof of source arrival at a historical decision",
+      "same_week_monday_0000_deposit_anchor": "2026-01-26T00:00:00+08:00",
+      "next_week_monday_0000_deposit_anchor": "2026-02-02T00:00:00+08:00",
+      "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only": true
+    }
+  ],
+  "pay_date_shape_summary": {
+    "monday_pay_events": [
+      "510300-cash-2016-01-20",
+      "510300-cash-2019-01-16",
+      "510300-cash-2019-12-11",
+      "510300-cash-2022-01-19"
+    ],
+    "other_weekday_pay_events": [
+      "510300-cash-2015-01-20",
+      "510300-cash-2017-01-23",
+      "510300-cash-2018-01-23",
+      "510300-cash-2021-01-18",
+      "510300-cash-2023-01-16",
+      "510300-cash-2024-01-18",
+      "510300-cash-2025-06-18",
+      "510300-cash-2026-01-19"
+    ],
+    "same_week_decision_relation": "The listed Monday00:00 values are weekly 250-yuan deposit anchors, not universal decision_at. Regular planning uses the most recent completed weekend close; Monday deposit itself can also trigger a new-money arrangement. Pay date alone cannot prove dividend cash available at either relevant decision/freeze.",
+    "later_monday_relation": "Next Monday is a calendar/deposit anchor only; it is neither necessarily the next decision nor proof that dividend cash is available. Actual decision/freeze time must be bound by the future run."
+  },
+  "frozen_spec_and_implementation_links": [
+    {
+      "path": "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/source-baseline/shared-account-spec.md",
+      "read_scope": "lines32-40,46-54: weekly 250 deposit at Monday00:00; normal planning after latest completed weekend close, with Monday deposit able to trigger new-money arrangement; receivable is asset not free cash; record/effective/pay sequence; P0 residual next scheduled decision; P1 sale proceeds only after available."
+    },
+    {
+      "path": "docs/experiments/raw/weekly-portfolio-dated-execution-2026-10-08/dated_ledger.py",
+      "read_scope": "PHASE pay=2, buy/sell=3; apply bound aware clock; dividend creates receivable, pay_at releases once; no actual pay timestamp supplied by actions.json."
+    },
+    {
+      "path": "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/order_planning_v2.py",
+      "read_scope": "CashSnapshot known_at/available_at <= freeze, initial <= decision; ActionContext known_at <= original decision and crossing events unsupported; later_buys requires explicit actual sale receipt and current cash."
+    },
+    {
+      "path": "docs/experiments/raw/weekly-portfolio-order-planning-2026-10-08/order_planning.py",
+      "read_scope": "one fixed opening/order; failed or partial sale no chase; `later_buys` follows original decision and actual sale proceeds; triggered_no_sellable_whole_lot remains user choice."
+    },
+    {
+      "path": "docs/experiments/weekly-portfolio-cross-week-fixed-orders-2026-10-10.md",
+      "read_scope": "two fixed manually ordered buy batches on one shared cash ledger and complete first week; no automatic P0/P1 lifecycle or same-day pending batch competition."
+    }
+  ],
+  "specific_execution_questions": [
+    {
+      "id": "dividend_credit_clock",
+      "affected_event_ids": [
+        "510300-cash-2015-01-20",
+        "510300-cash-2016-01-20",
+        "510300-cash-2017-01-23",
+        "510300-cash-2018-01-23",
+        "510300-cash-2019-01-16",
+        "510300-cash-2019-12-11",
+        "510300-cash-2021-01-18",
+        "510300-cash-2022-01-19",
+        "510300-cash-2023-01-16",
+        "510300-cash-2024-01-18",
+        "510300-cash-2025-06-18",
+        "510300-cash-2026-01-19"
+      ],
+      "exact_unknown": "Scheduled pay date exists; actual free-cash credit timestamp does not. Dated ledger requires aware pay_at and source/declared scenario clock.",
+      "when_material": "Only if record-date shares exist and a later decision or order freeze might use the distribution. Four scheduled Monday payment dates coincide with deposit anchors, not necessarily decision times; other dates can affect later frozen orders if still live.",
+      "minimum_resolution": "Original dated implementation needs an aware pay_at with evidence appropriate to the claim. A future independent research contract may instead pre-freeze one conservative availability rule for both P0/P1 and label it an assumption, never historical actual credit; do not retroactively qualify old inputs or modify old event dates."
+    },
+    {
+      "id": "company_action_crossing_original_decision",
+      "affected_operation": "P1 sale then later buy; P0/P1 fixed opening when a dividend record/effective/pay clock falls after decision",
+      "existing_behavior": "order_planning_v2 ActionContext rejects any event clock crossing decision-to-opening; later_buys inherits original action coverage and does not silently refresh target/price.",
+      "when_material": "Only a generated decision/opening span that actually crosses a named event; event dates alone do not prove an order exists.",
+      "minimum_resolution": "In formal research contract, define supported action-to-order transition/expiry or reject that exact opening and wait next weekly decision; do not silently use a post-decision dividend in old immutable budgets."
+    },
+    {
+      "id": "security_opening_status",
+      "affected_operation": "buy/sell on a planned 09:30 open and daily valuation",
+      "known_exact_exception": "159915 official suspension on 2021-02-08 and 10:30 resumption on 2021-02-09, source in dated_gap_readback; known limit-boundary refusals already recorded.",
+      "why_not_event_specific_new_source_now": "None of the 12 accepted 510300 scheduled pay dates coincides with the named 159915 February 2021 restriction dates or named 2015-07-08/2024-10-08 boundary dates. This does not establish all other openings.",
+      "minimum_resolution": "Bind exact planned opening dates and two-product status/price-limit evidence in future run contract, and only investigate a named uncovered opening if generated orders require it; no blanket all-stock notice scan."
+    },
+    {
+      "id": "unended_decision_competition",
+      "affected_operation": "two weekly decision batches that could both retain live orders or sale-funded later buys on the same opening",
+      "existing_behavior": "cross-week accepted engineering fixture has two frozen buy batches with previous week completed before next; fixed order is whole fill or terminal refusal, no chase. P1 later_buys may schedule a future opening but full automatic P0/P1 lifecycle/expiry across weeks is unimplemented.",
+      "currently_proven_real_competition": false,
+      "minimum_resolution_if_triggered": "After the final policy generates a concrete overlapping opening with two live decisions, specify lifecycle and a deterministic global cash reservation/priority and verify it; do not treat this conditional engineering branch as a third current user decision."
+    }
+  ],
+  "reused_product_rule_and_status_sources": {
+    "rule_catalog_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/sources/new-rule-sources.json",
+    "rule_catalog_sha256": "395d381b23e7196838b38111a581c38b0a48466a30d42813c03f9bf1f313a167",
+    "price_limit_regimes_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/price-limit-regimes.json",
+    "price_limit_regimes_sha256": "e674d7748f2c26f604432d5e529f4849f9ca799319ce8b738d619c64c8924617",
+    "official_rule_sources": {
+      "szse-20200824-20pct.pdf": {
+        "url": "https://docs.static.szse.cn/www/aboutus/trends/conference/W020200821767425488573.pdf",
+        "sha256": "ff0a569fede5cb1d4cb09d7aa878c8970fe8c0c74c083beb2b4dfdbe6d71b095"
+      },
+      "sse-etf-faq.html": {
+        "url": "https://www.sse.com.cn/assortment/fund/etf/question/",
+        "sha256": "57b56429ea6613c725a35a289063bcab43aedf964f9ce9dff151c1ac856aa97f"
+      },
+      "sse-2013-limit.html": {
+        "url": "https://www.sse.com.cn/aboutus/mediacenter/hotandd/c/c_20150912_3988628.shtml",
+        "sha256": "b57fe5e3f066518bed5bec88a4726b1733b9fb1f15268c977d196bcdb707c886"
+      },
+      "szse-2006-rules.html": {
+        "url": "https://investor.szse.cn/disclosure/notice/t20060515_499577.html",
+        "sha256": "64fbd0069d3d2c9c10bee2ce3eed98ac8109bb5a2a320b8339cf8bf4e89e90ef"
+      },
+      "szse-2014-sell-lots.html": {
+        "url": "https://www.szse.cn/lawrules/rule/trade/current/t20150914_565054.html",
+        "sha256": "9bf20e75707c6f69ed4778627bb6b5fd1ad67f460e05e3e86f1053c380733e34"
+      }
+    },
+    "dated_restrictions_path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/dated-restrictions.json",
+    "dated_restrictions_sha256": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7",
+    "dated_gap_readback_path": "docs/experiments/raw/original-eight-continuation-2026-10-10/dated-gap-reuse-readback.json",
+    "dated_gap_readback_sha256": "66a3fab87730eed09c1b513769bad28a750295869767c4b402fbb2a405e8b5f1",
+    "limits": "Old ordinary-session price-limit regimes carry explicit special-reference caveat; saved exception rows are not complete historical 09:30 status. No new source requested."
+  },
+  "actual_new_source_or_budget": "none in this read-only task",
+  "not_resolved_by_this_map": [
+    "510300 2017 annual action coverage",
+    "P1 no-sellable-whole-lot user definition",
+    "complete SSE calendar/applicability and product opening coverage",
+    "complete full-policy execution and outcome"
+  ],
+  "no_new_user_question_inferred": true,
+  "no_market_ready_claim": true,
+  "correction_after_independent_review": {
+    "preserved_v1_path": "docs/experiments/raw/original-eight-continuation-2026-10-10/accepted-event-execution-dependency-map-v1-before-review.json",
+    "preserved_v1_sha256": "a16d766119e3322d20aac86934a5c849412d553467eaf27baac46ae9c871f061",
+    "changes": [
+      {
+        "topic": "decision_vs_deposit_clock",
+        "old_fields": [
+          "same_week_monday_0000",
+          "earliest_later_regular_weekly_decision_calendar_candidate",
+          "same_week_decision_cannot_use_payment_from_date_only"
+        ],
+        "new_fields": [
+          "same_week_monday_0000_deposit_anchor",
+          "next_week_monday_0000_deposit_anchor",
+          "week_monday_deposit_anchor_cannot_count_dividend_from_pay_date_only"
+        ],
+        "reason": "Spec makes Monday00:00 the contribution clock; ordinary decision is after latest complete weekend close and Monday contribution may trigger new-money arrangement. Neither Monday anchor is a universal decision time."
+      },
+      {
+        "topic": "cash_availability_evidence_vs_research_assumption",
+        "old_overstatement": "Only exact actual credit evidence could ever make payment usable.",
+        "corrected": "Old dated implementation requires a bound aware pay_at/available cash evidence for actual-historical claim. Future separate research may freeze a symmetric conservative availability scenario, explicitly as assumption, without filling actual credit or retroactively upgrading old inputs."
+      }
+    ],
+    "unchanged": [
+      "12 event dates and locked source SHA fields",
+      "four Monday scheduled pay dates",
+      "all actual_credit_timestamp unknown",
+      "zero new prices, market, account, network and source requests",
+      "2017 full-year action coverage unknown"
+    ]
+  }
+}

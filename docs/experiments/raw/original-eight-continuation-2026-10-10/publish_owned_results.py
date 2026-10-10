@@ -30,6 +30,7 @@ def main():
     final_source = "--source-final" in sys.argv[2:]
     final_calendar = "--calendar-final" in sys.argv[2:]
     final_remaining_calendar = "--remaining-calendar-final" in sys.argv[2:]
+    final_calendar_gap = "--calendar-gap-final" in sys.argv[2:]
     assert git("rev-parse", "HEAD", text=True).strip() == MAIN_HEAD
     assert digest((ROOT / ".git/index").read_bytes()) == MAIN_INDEX
     base = git("rev-parse", BRANCH, text=True).strip()
@@ -40,6 +41,8 @@ def main():
         registrations.append("calendar2015")
     if final_remaining_calendar:
         registrations.append("remaining44-calendar")
+    if final_calendar_gap:
+        registrations.append("jan2017-calendar-gap")
     entries = [json.loads((CONTROL / f"{name}-registration-entry.json").read_text())
                for name in registrations]
     paths = {"src/lei_signal/research/native_d_conditional_risk.py",
@@ -65,6 +68,12 @@ def main():
         remaining_contract = "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/executor-contract.json"
         if (ROOT / remaining_contract).exists():
             paths.add(remaining_contract)
+    if final_calendar_gap:
+        directories.append("szse-jan2017-missing-date-source-2026-10-10")
+    else:
+        gap_contract = "docs/experiments/raw/szse-jan2017-missing-date-source-2026-10-10/executor-contract.json"
+        if (ROOT / gap_contract).exists():
+            paths.add(gap_contract)
     for directory in directories:
         for p in (ROOT / "docs/experiments/raw" / directory).rglob("*"):
             if p.is_file() and not any(s in {"__pycache__", ".pytest_cache"}
@@ -117,6 +126,8 @@ def main():
         line_keys.append("calendar2015_index_line")
     if final_remaining_calendar:
         line_keys.append("remaining44_calendar_index_line")
+    if final_calendar_gap:
+        line_keys.append("jan2017_calendar_gap_index_line")
     lines = "".join(inserts[k] for k in line_keys if inserts[k] not in index)
     anchor = "## 1. 任务编号总账（任务书 → 执行归档）"
     pos = index.index("\n", index.index(anchor)) + 1

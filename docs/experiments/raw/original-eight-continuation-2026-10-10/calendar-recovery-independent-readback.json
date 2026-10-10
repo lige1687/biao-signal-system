@@ -1,0 +1,1335 @@
+{
+  "schema": "calendar-recovery-independent-readback/1",
+  "checked_at": "2026-10-10T19:16:48.604177+08:00",
+  "status": "accepted_same_device_path_restore",
+  "device": {
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "st_dev": 16777238,
+    "matches_fixed": true
+  },
+  "source_manifest_sha256": "3083891cab2ec0725dea7c8eced81f2a8fc11e3ef37e941c8f8cbdebbfe51fc2",
+  "restore_receipt_sha256": "3eef2c116c2a831b164e9a478b7d50c925158a4b86498c8a24c3c5fd0ca6a440",
+  "result_location_sha256": "76e61fd986035393a94536c7f0d59e136c7674e00b05566c5392fc0f10a770ba",
+  "code_sha256": "328b801244917725a097a8f874ea70d9c3178c8845fed62b14533b2ce769e6d0",
+  "backup_pid": 17876,
+  "restore_pid": 18277,
+  "scope": {
+    "file_roles": {
+      "nominal_csv": 2,
+      "old_month_body": 82,
+      "new_month_body": 44,
+      "new_month_header": 44,
+      "binding_new": 6,
+      "binding_root": 2
+    },
+    "files_per_set": 180,
+    "bytes_per_set": 1655018,
+    "three_sets_bytes": 4965054,
+    "run_ordinary_files": 451,
+    "run_ordinary_bytes": 3413040,
+    "run_limit_bytes": 33554432,
+    "component_calendars_bound_by_verified_path_not_copied": [
+      {
+        "path": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+        "sha256": "f1c3bd5f93bd84b20b587a2cc5292e89370b8f2a4fa3962498da950bcea35201",
+        "bytes": 79500,
+        "binding_mode": "verified_original_path_only_no_copy"
+      },
+      {
+        "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-szse-remaining-02/calendar.json",
+        "sha256": "0004e6376e84add586f65d9b102b43fa8a58fb5b4b79029959f0969836ec1948",
+        "bytes": 217108,
+        "binding_mode": "verified_original_path_only_no_copy"
+      }
+    ],
+    "old_merged_calendar_reused_from_prior_A_restore_not_copied": true
+  },
+  "checks": {
+    "triplet_SHA_size_passed": 180,
+    "triplets_total": 180,
+    "original_source_metadata_preserved": true,
+    "backup_only_restore_code_path": "restore() constructs src solely from item[backup_path] and copy_exact(src,dst); it never calls backup_inputs().",
+    "different_real_process_ids": true,
+    "same_runtime_code_snapshot": true,
+    "run_file_set_and_SHA_size_device_exact": true,
+    "run_within_32MiB": true
+  },
+  "late_acceptance_reference": {
+    "path": "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/controller-source-acceptance.json",
+    "sha256": "0040f2a76e53d4cc1bb4cc3130333b8ce2cf0e82c6c12456e374fccf5f3ec9d2",
+    "bytes": 1700,
+    "not_in_earlier_180_file_backup": true,
+    "reason": "Created by root after backup and restore completed; exact reference recorded without retroactively altering frozen process receipts."
+  },
+  "per_file_checks": [
+    {
+      "role": "nominal_csv",
+      "logical_path": "sh510300-nominal.csv",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "nominal_csv",
+      "logical_path": "sz159915-nominal.csv",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2019-09.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2019-10.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-10.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-09.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-10.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-10.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-09.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-10.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-10.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-10.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2026-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2026-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2026-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2019-11.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2019-12.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-07.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-08.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-09.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-11.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2020-12.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-07.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-08.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-11.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2021-12.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-07.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-08.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-09.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-11.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2022-12.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-07.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-08.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-11.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2023-12.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-07.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-08.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-09.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-11.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2024-12.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-07.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-08.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-09.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-11.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2025-12.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2026-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2026-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "old_month_body",
+      "logical_path": "szse-2026-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "01-szse-2016-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "01-szse-2016-01.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "02-szse-2016-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "02-szse-2016-02.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "03-szse-2016-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "03-szse-2016-03.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "04-szse-2016-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "04-szse-2016-04.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "05-szse-2016-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "05-szse-2016-05.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "06-szse-2016-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "06-szse-2016-06.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "07-szse-2016-07.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "07-szse-2016-07.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "08-szse-2016-08.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "08-szse-2016-08.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "09-szse-2016-09.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "09-szse-2016-09.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "10-szse-2016-10.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "10-szse-2016-10.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "11-szse-2016-11.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "11-szse-2016-11.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "12-szse-2016-12.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "12-szse-2016-12.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "13-szse-2017-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "13-szse-2017-01.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "14-szse-2017-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "14-szse-2017-02.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "15-szse-2017-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "15-szse-2017-03.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "16-szse-2017-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "16-szse-2017-04.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "17-szse-2017-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "17-szse-2017-05.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "18-szse-2017-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "18-szse-2017-06.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "19-szse-2017-07.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "19-szse-2017-07.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "20-szse-2017-08.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "20-szse-2017-08.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "21-szse-2017-09.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "21-szse-2017-09.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "22-szse-2017-10.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "22-szse-2017-10.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "23-szse-2017-11.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "23-szse-2017-11.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "24-szse-2017-12.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "24-szse-2017-12.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "25-szse-2018-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "25-szse-2018-01.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "26-szse-2018-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "26-szse-2018-02.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "27-szse-2018-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "27-szse-2018-03.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "28-szse-2018-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "28-szse-2018-04.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "29-szse-2018-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "29-szse-2018-05.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "30-szse-2018-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "30-szse-2018-06.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "31-szse-2018-07.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "31-szse-2018-07.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "32-szse-2018-08.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "32-szse-2018-08.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "33-szse-2018-09.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "33-szse-2018-09.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "34-szse-2018-10.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "34-szse-2018-10.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "35-szse-2018-11.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "35-szse-2018-11.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "36-szse-2018-12.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "36-szse-2018-12.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "37-szse-2019-01.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "37-szse-2019-01.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "38-szse-2019-02.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "38-szse-2019-02.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "39-szse-2019-03.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "39-szse-2019-03.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "40-szse-2019-04.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "40-szse-2019-04.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "41-szse-2019-05.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "41-szse-2019-05.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "42-szse-2019-06.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "42-szse-2019-06.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "43-szse-2019-07.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "43-szse-2019-07.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_body",
+      "logical_path": "44-szse-2019-08.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "new_month_header",
+      "logical_path": "44-szse-2019-08.headers.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding_new",
+      "logical_path": "executor-contract.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding_new",
+      "logical_path": "source-manifest.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding_new",
+      "logical_path": "request-ledger.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding_new",
+      "logical_path": "date-field-candidate.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding_new",
+      "logical_path": "source-review.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding_new",
+      "logical_path": "independent-review.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding_root",
+      "logical_path": "calendar-reused-input-recovery-readiness.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    },
+    {
+      "role": "binding_root",
+      "logical_path": "reused-and-remaining-calendar-recovery-contract.json",
+      "source_ok": true,
+      "backup_ok": true,
+      "restored_ok": true
+    }
+  ],
+  "limitations": [
+    "All backed-up old and new monthly sources and the two CSV backups/restores are on the same fixed external disk; disk failure or another-machine recovery is not verified.",
+    "The original 2017-01 response is preserved as a failed-validation source, not promoted to a qualified month.",
+    "The pre-existing merged calendar is reused via its separately verified A restored copy; this run did not copy it.",
+    "No network, market/account run, original delete, or old-source qualification change occurred.",
+    "Recorded process PIDs and code SHA are not an OS-level file-open trace."
+  ],
+  "failures": [],
+  "per_file_detail_reference": "calendar-recovery-backup-manifest.json and calendar-recovery-restore-readback.json retain exact source, backup, restored paths, SHA-256 and bytes; compact independent pass flags correspond by role and logical_path."
+}

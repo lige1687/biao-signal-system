@@ -1,0 +1,31 @@
+{
+  "schema": "reused-and-remaining-calendar-recovery/1",
+  "question_id": "reused-and-remaining-calendar-recovery-20261010",
+  "parent_task_id": "original-eight-continuation-20261010",
+  "frozen_at": "2026-10-10T19:13:02.210875+08:00",
+  "purpose": "Only necessary recovery gaps for exact two old nominal CSVs,82 old month response bodies and44 new month response bodies plus response headers and fixed binding files. Existing merged calendar recovery reused; no original move/delete/overwrite.",
+  "input_readiness": "docs/experiments/raw/original-eight-continuation-2026-10-10/calendar-reused-input-recovery-readiness.json",
+  "new_source_manifest": "docs/experiments/raw/szse-remaining-calendar-2016-2019-2026-10-10/source-manifest.json",
+  "external_run": "/Volumes/win+mac通用/LeiSignal-新实验结果/szse-remaining-calendar-201601-201908-20261010/szse-remaining-calendar-201601-201908-20261010-20261010T190249-6339a9c3b1e0",
+  "external_subdirectories": [
+    "result/recovery-v1/backup",
+    "result/recovery-v1/restored",
+    "result/recovery-v1/code"
+  ],
+  "external_original_run_total_max_bytes": 33554432,
+  "local_metadata_max_bytes": 524288,
+  "source_body_qualification_not_changed": true,
+  "copy_check": "exclusive new directories/files; record original dev/inode/size/mtime/SHA before and after; source SHA must match original ledger and reused monthly recorded hash; no Git normalization of original bytes",
+  "restore_check": "separate real PID reading backup only; executable snapshot hash recorded before each subprocess; unique restore path, no original source read in restore program; exact file count/hash/bytes read back",
+  "budgets": {
+    "network": 0,
+    "new_prices": 0,
+    "market_account_runs": 0,
+    "original_deletes": 0,
+    "automatic_overwrites": 0
+  },
+  "acceptance": "Every missing necessary original and fixed final binding uniquely copied and hash verified, separate-process backup-only restore hash equality; actual code/PID provenance retained. Same external device path recovery only, no disk-failure or other-machine proof.",
+  "owner": "/root/recovery_evidence_review gpt-6-sol medium",
+  "shared_writer": "root only",
+  "status": "frozen_pending_coordination_registration"
+}
