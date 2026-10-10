@@ -51,7 +51,7 @@ def main():
         for value in change.get(key, []):
             if value not in record[key]:
                 record[key].append(value)
-    for key in ["scope_amendment", "current_work", "paused_questions"]:
+    for key in ["scope_amendment", "current_work", "paused_questions", "scope_released"]:
         if key in change:
             record[key] = change[key]
     body = first + start + "\n" + json.dumps(record, ensure_ascii=False, indent=2) + "\n" + end + tail
