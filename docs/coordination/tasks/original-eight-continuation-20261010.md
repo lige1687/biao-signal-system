@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "b51e3b459ebc5baaa0a0cfa156a8f3c2a4a08902",
-  "checked_at": "2026-10-10T17:54:16.925154+08:00",
+  "checked_coordination_sha": "e7f058b3e97338c2f9d38e08b5876f36029513b5",
+  "checked_at": "2026-10-10T18:00:52.344200+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -38,7 +38,6 @@
     "docs/experiments/raw/native-d-conditional-risk-2026-10-10/",
     "docs/experiments/native-d-conditional-risk-2026-10-10.md",
     "docs/experiments/raw/stock-data-qualification-2026-10-07/march-event-binding-20261010/",
-    "docs/experiments/csi300-march-event-binding-2026-10-10.md",
     "docs/experiments/raw/original-eight-continuation-2026-10-10/",
     "docs/ops/work-progress/original-eight-continuation-20261010.md",
     "docs/experiments/registry.json",
@@ -46,19 +45,25 @@
     "docs/experiments/research-evidence-catalog-2026-10-07.md"
   ],
   "external_write_paths": [
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/csi300-march-membership-20261010/csi300-march-membership-20261010-20261010T175128-af86bbcca7b9"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0"
   ],
   "scope_released": false,
   "question_ids": [
     "native-d-conditional-risk-20261010",
     "csi300-march-event-binding-20261010"
   ],
-  "shared_write_owner": "root only exact two report registrations/one catalog note; all other contents preserve",
+  "shared_write_owner": "root only new D report registration and dated catalog note; existing March report reused, no duplicate",
   "goal_ids": [
     "okr-ff1e0a86fbac",
     "K-data-boundary"
   ],
-  "latest_result_commit": null
+  "latest_result_commit": null,
+  "scope_amendment": "March event answered in 2026-10-08 report; exact original hashes independently read back. Zero new public requests; only new reuse receipt and current catalog navigation. Goal5 next-question inspection read-only, no account granted/start."
 }
 <!-- lei-coordination-json:end -->
+## 2026-10-10T18:00:52.344200+08:00 范围收窄与正在执行
+
+- 本轮读回协调tip e7f058b3e97338c2f9d38e08b5876f36029513b5；其后没有新他人记录变更。原相关task-id与冲突决定继续，唯一root共享写者保持。
+- 单事件在10/8正式报告及原件中已经回答；主控另核三原件和报告SHA与独审回执一致，原候选3/4至3/7共四保存交易日不符。本轮新源0/6、0/8MiB，不生成同题报告、不创建成员外盘目录。旧10/6快照未来指引由本次目录补注指向10/8现成果，原件与冻结候选不改。以上最新收窄取代首段旧“两新报告”计划。
+- D合成首版通过7项；Astra独审发现真实stdout列表与账本依赖cwd两个工程问题，真实Y未读、核心0/1，Sol按同一科学合同修必要入口/测试，失败和旧源码SHA留痕，修后审阅才启动。
+- Goal5查旧半ATR机会2309、后续8/2/12账户无半ATR且不覆盖完整策略；尚无直接合格的完整账户合同。此刻仅只读核下一个必要定义/输入，固定2/2与月度4/4不重启、不借预算。
