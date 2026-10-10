@@ -13,9 +13,9 @@
 {
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "346721ad59ecd5dcbedfdfb51262d1a1bc410c58",
-  "checked_at": "2026-10-11T00:20:21.463333+08:00",
+  "status": "blocked",
+  "checked_coordination_sha": "33a388bc1300a44ef8eb21304331717f73b95ca1",
+  "checked_at": "2026-10-11T00:31:25.379992+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -70,7 +70,7 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-zero-sale-cash-20261011/weekly-portfolio-zero-sale-cash-20261011-20261011T001324-2c8c0fb78769",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-full-actions-20261010/etf-pair-full-actions-20261010-20261010T182754-75a8d7ac33c6/resume-20261011/"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "question_ids": [
     "native-d-conditional-risk-20261010",
     "csi300-march-event-binding-20261010",
@@ -89,12 +89,16 @@
     "K-data-boundary",
     "K-risk-attribution"
   ],
-  "latest_result_commit": "4a213931f2a3837798d1a33037c3d5d1d433f393",
-  "scope_amendment": "Source actual20 and sixPDF acquired; no extra listing operation. P1 original4 artificial checks accepted only local branch, firstsyntax failure preserved. New one bounded counterexample scenario three weekly deposits from zero, unchanged implemented policy/source hashes, market0, source0, one additional controller verification batch under original continuation authority.",
-  "updated_at": "2026-10-11T00:20:21.463333+08:00",
-  "conflict_decision": "Fresh coordination and all12relatedtasks read; no change since86449361, no competing writer to this task/new zero-sale path. Prior source agent scopes released, reassign exact resumed source subfiles to single Sol. Root sole shared/API writer; other active task records disjoint. Main dirty checkout preserved.",
-  "current_work": "源独核及新增8文件恢复并回原报告；新P1从零起步人工三周账本反例必须实际执行并独核。完整市场比较先不启动，因为静态推导显示该分支可能永不建仓；不静默改首次买入规则。",
-  "paused_questions": []
+  "latest_result_commit": "206d960703f81749c528125f492c1c2c4b314e65",
+  "scope_amendment": "Annual source resumed exact2 used, cumulative20/sixPDF/optional listing1 unused. New P1 unchanged zero-sale implementation 4 old synthetic cases plus one3week actual startup counterexample; total5<=8, one core/one syntax repair plus one purposeful local verification batch. All accepted bounded work complete; no active market or source work.",
+  "updated_at": "2026-10-11T00:31:25.379992+08:00",
+  "conflict_decision": "Fresh coordination 33a388bc1300a44ef8eb21304331717f73b95ca1 and COORDINATION/current12 related task records read. Since7ec6 only independent cash-video record changed, new v13 sample/Skill references do not overlap own raw/report/API/progress paths. Old monthly implementation record active flag is stale compared to completed review/controller/results; do not take its files or rerun. Root sole shared writer, three child exact scopes completed and released. Main dirty HEAD/index retained.",
+  "current_work": "当前有界源/执行/独审/必要恢复已交付，八份报告归档且API已读回。没有运行中子任务；仅补最终交付回执。不推进完整P0/P1历史资金比较，等待新发现的无超配需卖情形如何建仓定义。",
+  "paused_questions": [
+    "完整历史比较：全现金或两基金均低配且没有超配持仓需要卖出时，按原补低买入还是同样留现金；三周反例已实核，建议前者，仅实际需卖但不足100份时等下周。",
+    "新独立完整账户运行前须冻结用途准确合同：允许的有条件日线成交与共同保守现金可用假设明说；严格历史实际到达/成交仍未证，不自动全库取源。",
+    "独立其他磁盘/异机恢复仍未验，不要求换电脑才能继续本机已授权核对。"
+  ]
 }
 <!-- lei-coordination-json:end -->
 ## 2026-10-10T18:00:52.344200+08:00 范围收窄与正在执行
@@ -182,3 +186,7 @@
 ## 2026-10-11T00:20:21.463333+08:00 已取最后原件，执行关键从零建仓反例
 
 用户给定的零整手留现金分支已隔离实现，四人工场景通过但未覆盖从零起步。Astra对原含现金分母/双向权重偏离条件发现：首周0持仓入250，两只均低配50个百分点，触发调整却无超额可卖；留现金则次周重复。主控登记一条必要人工反例三周250/500/750，固定代码SHA和策略含义，不改首周P0/分母/阈值，不跑历史收益。原核心/修复用量及第一次语法失败保留，合计人工场景仍<=8。本轮源已按原2定点成功累计20，不使用条件性额外1；2017指定字段独审中，原件恢复8份每套1,537,272B，root初读把restore输入stat误作原stat，已对接backup清单核三路径内容及两级stat全部相同，错误回执保留、未重复制。
+
+## 2026-10-11T00:31:25.379992+08:00 批准两项均实际完成归档，仅新起步定义待决定
+
+用户2026-10-11两项决定已执行：最后年报定点2动作实际取得，指定字段24/24；新增8源/绑定每套1,537,272B副本/不同进程恢复/根三路径SHA相同。三子代理全部完成释放。新P1留现金分支四人工场景与独算通过，首次语法失败留；追加一必要三周从零起步反例现金250→500→750、0单/持仓/费用，经Astra独算。当前旧触发含现金且双向偏离，在没有超配需卖时也调仓，宽泛留现金无法首次建仓。必要新定义已异步给出两选项，不冒答、不静默改源/阈值/分母、不运行无意义全期。API原5条仅note已实际读回K-data-boundary18/目标8v17/K-risk20/D-evidence8/D-tracking8，owner/status/标准等全保留；两报告API pending=false/分类/mixed/全文SHA相同，初列表60秒缓存失败已解释保留。成果206d960703f81749c528125f492c1c2c4b314e65远端245自有文件逐字节相同、主HEAD/index不变；原失败与封存预算/异机未证/相近风险收益未证均留。当前本机少量记录可继续、外盘身份健康，大结果外盘；本轮未新增删除或迁移、无后台心跳/定时器/新chat。恢复按原稳定任务最新原API及coord读取，不把全部目标有效或已完成。
