@@ -13,9 +13,9 @@
 {
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "blocked",
-  "checked_coordination_sha": "a8acdc13967e7f8a7614192cd162f6ea4446c7ab",
-  "checked_at": "2026-10-11T00:33:24.842819+08:00",
+  "status": "active",
+  "checked_coordination_sha": "3ea8163956d28b4d80d8f27b9646d1b7da738f5c",
+  "checked_at": "2026-10-11T00:47:12.778108+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -56,7 +56,8 @@
     "docs/experiments/raw/szse-jan2017-missing-date-source-2026-10-10/",
     "docs/experiments/szse-jan2017-missing-date-source-2026-10-10.md",
     "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/",
-    "docs/experiments/weekly-portfolio-zero-sale-cash-2026-10-11.md"
+    "docs/experiments/weekly-portfolio-zero-sale-cash-2026-10-11.md",
+    "docs/experiments/raw/weekly-portfolio-zero-sale-cash-2026-10-11/startup-approved-20261011/"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -70,7 +71,7 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-zero-sale-cash-20261011/weekly-portfolio-zero-sale-cash-20261011-20261011T001324-2c8c0fb78769",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-pair-full-actions-20261010/etf-pair-full-actions-20261010-20261010T182754-75a8d7ac33c6/resume-20261011/"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "question_ids": [
     "native-d-conditional-risk-20261010",
     "csi300-march-event-binding-20261010",
@@ -90,14 +91,13 @@
     "K-risk-attribution"
   ],
   "latest_result_commit": "ca035465e49b06f13e8d4bca587baad0e5f8ac7a",
-  "scope_amendment": "Annual source resumed exact2 used, cumulative20/sixPDF/optional listing1 unused. New P1 unchanged zero-sale implementation 4 old synthetic cases plus one3week actual startup counterexample; total5<=8, one core/one syntax repair plus one purposeful local verification batch. All accepted bounded work complete; no active market or source work.",
-  "updated_at": "2026-10-11T00:33:24.842819+08:00",
-  "conflict_decision": "Fresh owner record/coordination rules/current related task paths will be read from latest actual baseline; since own a8acdc only independent cash-video changes are allowed and do not overlap. Source/P1/independent scopes all released, root only this coordination record. No market/source work, main dirty HEAD/index preserved.",
-  "current_work": "有界本批成果及报告/原系统/独审/副本恢复全部已读回。当前唯一新定义阻塞待用户回答，无后台任务；此写入仅更新准确最新成果commit。",
+  "scope_amendment": "User confirmed startup/no required sell uses original P0 buy policy. Quantity arbitrary-selling inquiry checked officialSSE/SZSE2014 notices: whole100 holdings sell100multiples, allodd remainder may be sold once, not split. New isolated3 artificial scenarios under controller one meaningful user-driven implementation amendment; cumulative old5+new3<=8, old core/repair/counterexample preserved, no market run yet. Astra read-only full-account precise contract readiness, no variant/source/method scope silently widened.",
+  "updated_at": "2026-10-11T00:47:12.778108+08:00",
+  "conflict_decision": "Fresh 3ea8163956d28b4d80d8f27b9646d1b7da738f5c COORDINATION and own12related tasks checked before scope reacquisition; only own startup-approved new subdir to Sol, root sole report/shared/API writer, Astra read-only new contract review. Other tasks including cash-video disjoint, preserve main dirty HEAD/index and old source/implementation freezes.",
+  "current_work": "无超配需卖时按原买入的新分支正在准备准确合同；独立官方数量规则核，场内ETF不能任意零碎拆卖，尾数一次性规则如实记录。旧起步反例保留，新人工验证后继续独立完整账户用途合同审阅。",
   "paused_questions": [
-    "完整历史比较：全现金或两基金均低配且没有超配持仓需要卖出时，按原补低买入还是同样留现金；三周反例已实核，建议前者，仅实际需卖但不足100份时等下周。",
-    "新独立完整账户运行前须冻结用途准确合同：允许的有条件日线成交与共同保守现金可用假设明说；严格历史实际到达/成交仍未证，不自动全库取源。",
-    "独立其他磁盘/异机恢复仍未验，不要求换电脑才能继续本机已授权核对。"
+    "完整严格历史输入仍有边界，新用途合格日线近似需准确独立合同，不自动整库取源或跨到场外基金。",
+    "独立另一盘/异机恢复未证，本机既验恢复直接复用。"
   ]
 }
 <!-- lei-coordination-json:end -->
@@ -194,3 +194,7 @@
 ## 2026-10-11T00:33:24.842819+08:00 最后准确归档与恢复位置已读回，更新当前成果引用
 
 最终成果ca035465e49b06f13e8d4bca587baad0e5f8ac7a准确推同一codex成果分支，远端256自有文件逐字节相同、主HEAD/index保持。来源/5人工场景/独审/报告库/5原API note和最终状态已归档，8新增文件同盘恢复已核。批准两项已执行；无超配需卖时如何买入仍是必要新增用户定义，三周起步反例250→500→750零持仓已存，不默认预选为批准。当前blocked、scope_released=true，三子代理完成；无后台/新chat/定时器/Goal/市场或取源。仅这个远端唯一任务记录更新准确版本，实际提交自身由git log路径定位，不为自引用无限补交。
+
+## 2026-10-11T00:47:12.778108+08:00 用户确认无须卖出时买入，核场内ETF合法卖份后继续
+
+用户原话“第一个问题是的，第二个问题，100份感觉也不用吧，就能卖多少卖多少？基金这一块”。第一项确认已消除无须卖出时买入定义阻塞，记录后独立新子目录实现，不覆盖dc7ab旧宽义留现金版本与旧三周反例。第二项是数量规则询问，root查官方SSE2014上证函301原页与SZSE2014深证会72搜索原文；500整百不能拆20，99尾数可一次卖全，非任意份额拆卖。原研究510300/159915是场内ETF；不给它静默换成场外赎回。默认遵合法规则，保留原P1目标缺口向下整百，量为0留现金；零碎例外确实可合法卖但不能为卖尾数过量改变目标。无新市场账户/交易/权威文档变化。本轮待准备3个人工场景：首周至3周正常买入、双低配无须卖、确有超配但合法卖量0仍留现金；历史5场景/语法失败/额外反例完整留痕。
