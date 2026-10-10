@@ -1,3 +1,15 @@
+# 用户要求直接在本机恢复，并核本机磁盘管理
+
+- task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；updated_at 2026-10-10T14:38:17.611880+08:00；checked_coordination_sha 06920552ceef4b7629cb43b445b898f33bc5b323；checked_at 2026-10-10T14:38:17.611880+08:00；已读原规则/相关任务：[{"id": "frozen-input-recovery-20261010", "sha256": "740f153b22391921d70c1328c57fd58d26f4573220d6bb67e10f9b1ce79d8038"}, {"id": "research-dispatch-controller", "sha256": "4bf6fccba42fbd996aeb8e63031819b8fa56fe0afed20c9d9cb1851cce5e6b3c"}, {"id": "mac-local-storage-cleanup", "sha256": "28d19a10912c52208ad94cfd252cec425693fb32a2ee59ab445b3e2b590701d6"}, {"id": "daily-trading-system-audit", "sha256": "ed4ac107a9019e39fd5ade71a09feffb88e8ea67a8b42981763fbd38154d14e1"}]。mac存储与daily已结案，其旧实际资料/配置不改；root唯一恢复与小记录写者，Sol只读盘点。
+- 用户直接说明“为啥要换电脑？你直接做不行吗”，追加“该恢复的恢复哈，然后本机磁盘可能不够，需要你做到磁盘管理哈”。本轮采用当前电脑进行真实备份来源恢复，不要求当前工作换机器；原异机验收仍未测试，不把本机伪装另一台。
+- 原25来源现有主路径只读核有无缺失/损坏；若完好不覆盖。不从本机原件喂恢复演练，23份从固定外盘已核副本、2份从准确Git远端版本读取，恢复到plan_output绑定全新外盘目录 /Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T143725-a9a1b039127e/result。25文件5,718,377字节，预留8MiB外盘/1MiB本机小记录；fixedUUID身份/容量再核，不把恢复数据塞回内盘，不重跑市场模型。
+- 只写既有自身raw/progress与上述准确新外盘目录（包含必要清单与普通文件），原来源/旧备份/运行环境/活动数据库/共享目录/他人任务不动。不删除、不覆盖、没有仓外配置更改，外盘新恢复目录是用户本轮实际恢复指令内必要产物。
+- 磁盘管理：先实时容量及项目/工作树/已知下载缓存限定盘点，复用旧归档/恢复记录，核确实闲置/依赖/占用与负责人后形成准确可操作候选。只读盘点不转成删除权限；本轮若需实质迁移再登记准确对象和路径，删除本机原资料仍按AGENTS先问确认。禁止自动清环境/数据库/会话/冻结原件。
+- 分工：remaining_goal_readiness/Sol仅读相关协调与目录尺寸、已有副本、候选资格，不写任何文件；root核设备/25实际源路径、恢复执行及最终读回，recovery_evidence_review/Sol后续只读核恢复目录25份。不派多份八目标研究。新市场实验/调参/交易/部署/付费/自动化=0。
+- API仅更新原恢复目标准确本轮范围和实际结果；原四完成标准文字保持，异机项false。磁盘相关原条目先查重，不创建同题目标；旧原八目标负结果及预算不动。
+
+---
+
 # 本机必要接续已交付；唯一待目标设备的异机来源核验
 
 - task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status blocked / awaiting_other_machine_target；updated_at 2026-10-10T13:40:42.079680+08:00。这里指具体输入缺失，不表示用户要求暂停；没有后台进程或自动继续。
@@ -42,36 +54,28 @@
 {
   "task_id": "frozen-input-recovery-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "blocked",
-  "stage": "local_evidence_delivered_awaiting_other_machine_target",
-  "checked_coordination_sha": "d0024cdf1a5f20dc45711b60797ce04aadf9dc82",
-  "checked_at": "2026-10-10T13:40:42.079680+08:00",
+  "status": "active",
+  "stage": "local_restore_from_backups_and_disk_management_audit",
+  "checked_coordination_sha": "06920552ceef4b7629cb43b445b898f33bc5b323",
+  "checked_at": "2026-10-10T14:38:17.611880+08:00",
   "read_task_ids": [
-    "research-dispatch-controller",
     "frozen-input-recovery-20261010",
-    "leisignal-risk-input-20261009",
-    "leisignal-risk-run-20261009",
-    "leisignal-risk-review-20261009",
+    "research-dispatch-controller",
     "mac-local-storage-cleanup",
-    "daily-trading-system-audit",
-    "risk-shape-information",
-    "technical-factor-sequence",
-    "report-library-integration-20261008"
+    "daily-trading-system-audit"
   ],
   "work_branch": "codex/frozen-input-recovery-20261010",
   "base_commit": "6b06a04b46bdd35cc62777fd60d135d457291ec3",
   "write_paths": [
     "docs/experiments/raw/frozen-input-recovery-2026-10-10/",
-    "docs/ops/work-progress/frozen-input-recovery-20261010.md",
-    "docs/experiments/research-evidence-catalog-2026-10-07.md",
-    "docs/okr/RESEARCH_TODO.md"
+    "docs/ops/work-progress/frozen-input-recovery-20261010.md"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "latest_result_commit": "a56da8698f78a02a39d9130cfc8cb9b278dc4b01",
   "external_write_paths": [
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T121047-6ba6691d855d"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T143725-a9a1b039127e"
   ],
-  "blocker": "Target other computer identity and actual access to fixed external volume / exact remote inputs missing; read-only recovery not attempted on second device",
+  "blocker": null,
   "other_machine_recovery_verified": false
 }
 <!-- lei-coordination-json:end -->
