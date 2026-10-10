@@ -1,0 +1,544 @@
+{
+  "checked_at": "2026-10-10T13:38:27.055739+08:00",
+  "published_commit": "ad2cbb08947a796cab617a0c0ed51b44b0b15113",
+  "receipts": [
+    {
+      "id": "okr-57eb3f28e526",
+      "before_version": 7,
+      "after_version": 9,
+      "patch": {
+        "links": [
+          {
+            "label": "原八目标项目待办",
+            "url": "https://github.com/lige1687/biao-signal-system/blob/codex/research-todo-20261010/docs/okr/RESEARCH_TODO.md"
+          },
+          {
+            "label": "已验月度风险报告及第8节边界",
+            "url": "https://github.com/lige1687/biao-signal-system/blob/616608a1bd911179aa9bc7de14ea64a7493c74c5/docs/experiments/monthly-risk-comparison-2026-10-09.md"
+          },
+          {
+            "label": "目标8逐项来源核验及准确恢复方案",
+            "url": "https://github.com/lige1687/biao-signal-system/blob/86763952a80f16c8cf49eef6bf9139347b28a753/docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md"
+          },
+          {
+            "label": "23副本实际恢复回执（异机仍未验）",
+            "url": "https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md"
+          },
+          {
+            "label": "逐份复制及二次读回",
+            "url": "https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/backup-execution.json"
+          },
+          {
+            "label": "独立逐字节核验",
+            "url": "https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/backup-independent-review.json"
+          }
+        ],
+        "owner": "Codex 原来源恢复 / 01a123fc-553b-7b81-9952-36e1acb11dcc",
+        "milestones": [
+          {
+            "id": "locate_frozen_sources",
+            "title": "从原manifest列全25来源的原路径、内容指纹、用途和现有副本位置，保留原件",
+            "done": true
+          },
+          {
+            "id": "verify_independent_copies",
+            "title": "核固定设备与独立副本内容；缺件具体列出，不把目录存在当恢复成功",
+            "done": true
+          },
+          {
+            "id": "verify_other_machine_recovery",
+            "title": "在可用的目标设备按清单只读恢复并核对必要输入；没有目标设备时明确未验证",
+            "done": false
+          },
+          {
+            "id": "publish_recovery_receipt",
+            "title": "保存恢复步骤、逐项核验凭据及剩余限制；Git只存小索引，不放大数据",
+            "done": true
+          }
+        ],
+        "evidence": "A输入提交29337ec9e6560171c459019834638ce2c6993ef9；清单SHA256 9f1c326b46e7afc22d2ad6454e9f754e64540442e120412326ce270a50799baf。C最终提交616608a1bd911179aa9bc7de14ea64a7493c74c5，正式报告第8节明确原24/25本机来源异机恢复未证。本批外盘10结果文件已核，不能替代此验收。用户2026-10-10要求把原目标记系统todo并交下一AI；此条只登记，尚未启动、未完成。\n\n[目标8只读预检 2026-10-10] 当前Codex接手此一项来源恢复预检，task-id=frozen-input-recovery-20261010。A原25份共5,718,377字节已实核大小/内容一致、源读前后未变；原A基线24项不在Git的记录保留。本轮现有其他分支日历同指纹可核，准确远端恢复来源2份（方案文档与日历）；本机Git同指纹对象18份不都算独立备份。余23份共5,417,582字节没有已核独立副本位置；仅准备准确外盘复制计划，目录未创建、复制0。第二台目标设备/访问尚未确认，异机恢复0。仓内回执与方案docs/experiments/raw/frozen-input-recovery-2026-10-10/；来源清单SHA 727dbe2b3f539641894277d20e51ba2035a97bda26401f37ef636e4e87d44994。工作分支codex/frozen-input-recovery-20261010；本次小成果尚待远端发布。按用户AGENTS仓外修改先确认的明确要求，已提交23准确文件新副本的确认问题；未把授权设true或勾完成标准。10项产物核对通过，仓库归置退出0；市场/账户重放/下载/调参/冻结源改写/新chat/定时器/Goal均0，原月度4/4与旧2/2保持封存。\n\n[目标8预检成果已发布] codex/frozen-input-recovery-20261010@86763952a80f16c8cf49eef6bf9139347b28a753，9个准确小文件86,434字节，远端完整SHA与逐文件内容读回一致。准确恢复方案：https://github.com/lige1687/biao-signal-system/blob/86763952a80f16c8cf49eef6bf9139347b28a753/docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md。上述“尚待发布”已被本回执取代。25本机原件已核，独立来源远端2份、未证明23份/5,417,582字节；外盘复制计划已准备但目录未建、复制0，等待仓外新副本确认，异机仍未验。唯一一次发布前文件数断言失败已定位为行政计数9对实际8的错误，在staging/commit/push前退出；准确文件集合核对后发布通过，原件/源核验和市场预算均不受影响，失败在verification-failures.json保留。原状态planned、授权false、四完成标准未勾保持；无后台监控/自动接续。\n\n2026-10-10用户已批准23准确外盘副本，5,417,582字节实际复制并两次完整读回、独立逐字节核同23/23，原件未改。另2份复用准确远端Git，共25份独立恢复位置已可查。外盘清单25,016字节SHA ebc63f6f70c222940216af898dd1ca078e1331de6963269bc530c155cae9f16f。来源定位、独立副本核验、小恢复回执三项完成；另一台电脑尚未指定或实际读取，该项false，目标保持in_progress。只覆盖A前25来源，不宣称其他22材料/环境或整个实验异机复现。",
+        "next_action": "本机23份准确副本已获准并核同，不需再申请或复制；待用户提供另一台目标电脑及该固定外盘/准确远端来源的实际可读路径，在目标电脑重新核设备身份及25来源内容。该项未核保持未验收；其他原八目标已有封存结论和预算保留，不重跑。"
+      },
+      "note": "2026-10-10用户批准23准确副本，5,417,582字节实际复制并两次完整读回、独立逐字节核同23/23，原件未改。另2份准确远端Git共25份独立恢复位置可查。恢复清单SHA ebc63f6f70c222940216af898dd1ca078e1331de6963269bc530c155cae9f16f。原完成标准1/2/4达到，3另一台电脑未指定/未读保持false，整体in_progress；不宣称其他22材料、环境或全实验复现。成果：https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md",
+      "readback_note_exact": true,
+      "prior_history_preserved": true,
+      "protected_fields_sha256_before": {
+        "title": "3eaf9b1dfbb2ade9d7a4890c2985d16a9f8926c4e00ee8680913d3aa09fcd8c4",
+        "purpose": "bb93d1ce6bf8a8d151d9a7e8e47240b71c4aca4d2ca098a98fbefbd87b52d275",
+        "parent_id": "bbe1dafd08ec242056e375fdb2734651ba221702c3fcd4170dd2aa303149be1a",
+        "priority": "b57c4299afe3cda154124bdb96ceaf618a9d8d9cd8d2c8f6580ff26faa5fe5ca",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "a4cfd986e8805814fdbe7d7cddc93ab036d7454039ef39d917add438bc89e632",
+        "status": "de2bc7968076346e1ae2e62d3fd6385361b3855025678cd2732d9132eb9965cb",
+        "created_at": "7a045133090453d6bd2bf65183159490ff859d0ce3da48c56f98c3575fb6119f",
+        "authorization": "40d05b72cc1783778d542e3fd707a35c6475c122bcbda107a85300855ea190f6"
+      },
+      "protected_fields_sha256_after": {
+        "title": "3eaf9b1dfbb2ade9d7a4890c2985d16a9f8926c4e00ee8680913d3aa09fcd8c4",
+        "purpose": "bb93d1ce6bf8a8d151d9a7e8e47240b71c4aca4d2ca098a98fbefbd87b52d275",
+        "parent_id": "bbe1dafd08ec242056e375fdb2734651ba221702c3fcd4170dd2aa303149be1a",
+        "priority": "b57c4299afe3cda154124bdb96ceaf618a9d8d9cd8d2c8f6580ff26faa5fe5ca",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "a4cfd986e8805814fdbe7d7cddc93ab036d7454039ef39d917add438bc89e632",
+        "status": "de2bc7968076346e1ae2e62d3fd6385361b3855025678cd2732d9132eb9965cb",
+        "created_at": "7a045133090453d6bd2bf65183159490ff859d0ce3da48c56f98c3575fb6119f",
+        "authorization": "40d05b72cc1783778d542e3fd707a35c6475c122bcbda107a85300855ea190f6"
+      },
+      "all_protected_fields_preserved": true,
+      "status": "in_progress",
+      "owner": "Codex 原来源恢复 / 01a123fc-553b-7b81-9952-36e1acb11dcc",
+      "milestones": [
+        {
+          "id": "locate_frozen_sources",
+          "title": "从原manifest列全25来源的原路径、内容指纹、用途和现有副本位置，保留原件",
+          "done": true
+        },
+        {
+          "id": "verify_independent_copies",
+          "title": "核固定设备与独立副本内容；缺件具体列出，不把目录存在当恢复成功",
+          "done": true
+        },
+        {
+          "id": "verify_other_machine_recovery",
+          "title": "在可用的目标设备按清单只读恢复并核对必要输入；没有目标设备时明确未验证",
+          "done": false
+        },
+        {
+          "id": "publish_recovery_receipt",
+          "title": "保存恢复步骤、逐项核验凭据及剩余限制；Git只存小索引，不放大数据",
+          "done": true
+        }
+      ],
+      "progress": {
+        "done": 3,
+        "total": 4
+      }
+    },
+    {
+      "id": "D-evidence",
+      "before_version": 3,
+      "after_version": 4,
+      "patch": {},
+      "note": "2026-10-10原八目标接续：只给目标8补23份已批准独立外盘副本和两份准确远端来源的恢复证据；本机23/23独核通过、异机仍未验。新增导航及逐项回执已发布，旧结论和失败正文保留，目标1/6无新的必须重做事项，不把局部恢复当整个方向完成。https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md",
+      "readback_note_exact": true,
+      "prior_history_preserved": true,
+      "protected_fields_sha256_before": {
+        "title": "8add7437b2be1bcce421cba80845d084c38d7797a7c35e744de1468e829fc057",
+        "purpose": "1993e764f86ce63f2a4a7ea6bd54b6a61190c31a3e72cd64ae89361c24f09102",
+        "parent_id": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "priority": "b57c4299afe3cda154124bdb96ceaf618a9d8d9cd8d2c8f6580ff26faa5fe5ca",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "2168fb4664e9523a7a11f5c4018c1bc25e3603a471eb6def84a79422f2de7270",
+        "status": "05ad072baae0b1e93afd052919622063b32b852dd55c9495c77a16487b1fa639",
+        "created_at": "a6fbca480d3a15a42a265dc4e0d00d5e932a30b3c395568f6546f5fcd3e768ad",
+        "authorization": "3d7245d2a96fec7284a5db6ba845cce6458693189f629139f128e9185c295361",
+        "owner": "3501b9d48264e153265a9a0207338fd2db409859def71c5ac170020a751ca9a8",
+        "milestones": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "evidence": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "links": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "next_action": "77756bbe2814928badcb143d85ad3b05fa3d20db2835f6b310bb466999247689"
+      },
+      "protected_fields_sha256_after": {
+        "title": "8add7437b2be1bcce421cba80845d084c38d7797a7c35e744de1468e829fc057",
+        "purpose": "1993e764f86ce63f2a4a7ea6bd54b6a61190c31a3e72cd64ae89361c24f09102",
+        "parent_id": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "priority": "b57c4299afe3cda154124bdb96ceaf618a9d8d9cd8d2c8f6580ff26faa5fe5ca",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "2168fb4664e9523a7a11f5c4018c1bc25e3603a471eb6def84a79422f2de7270",
+        "status": "05ad072baae0b1e93afd052919622063b32b852dd55c9495c77a16487b1fa639",
+        "created_at": "a6fbca480d3a15a42a265dc4e0d00d5e932a30b3c395568f6546f5fcd3e768ad",
+        "authorization": "3d7245d2a96fec7284a5db6ba845cce6458693189f629139f128e9185c295361",
+        "owner": "3501b9d48264e153265a9a0207338fd2db409859def71c5ac170020a751ca9a8",
+        "milestones": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "evidence": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "links": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "next_action": "77756bbe2814928badcb143d85ad3b05fa3d20db2835f6b310bb466999247689"
+      },
+      "all_protected_fields_preserved": true,
+      "status": "planned",
+      "owner": "用户与 Codex",
+      "milestones": [],
+      "progress": {
+        "done": 0,
+        "total": 14
+      }
+    },
+    {
+      "id": "D-tracking",
+      "before_version": 3,
+      "after_version": 4,
+      "patch": {},
+      "note": "2026-10-10本聊天已按用户“允许哈， 然后你持续推进所有任务哈”接续原八目标内必要工作；准确负责人/范围登记frozen-input-recovery-20261010，不接管其他负责人。本轮23副本已核同，资料用途与真实预算已复用核对；原六条只追加本轮note、两处失效next_action定向修正，原目标8三项实际完成/异机未验。无新chat、定时器或后台继续。https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/original-eight-readiness.json",
+      "readback_note_exact": true,
+      "prior_history_preserved": true,
+      "protected_fields_sha256_before": {
+        "title": "2b6f4bbb31a13c17c942b5250ab1938acb0cb0edd6ee4a05b6d75f581564f550",
+        "purpose": "e97421245c0ce16890fb8e02f0f205aa6a539fcb39fa7e4fbf2406bb50f099ec",
+        "parent_id": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "priority": "b57c4299afe3cda154124bdb96ceaf618a9d8d9cd8d2c8f6580ff26faa5fe5ca",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "2168fb4664e9523a7a11f5c4018c1bc25e3603a471eb6def84a79422f2de7270",
+        "status": "05ad072baae0b1e93afd052919622063b32b852dd55c9495c77a16487b1fa639",
+        "created_at": "a6fbca480d3a15a42a265dc4e0d00d5e932a30b3c395568f6546f5fcd3e768ad",
+        "authorization": "3d7245d2a96fec7284a5db6ba845cce6458693189f629139f128e9185c295361",
+        "owner": "3501b9d48264e153265a9a0207338fd2db409859def71c5ac170020a751ca9a8",
+        "milestones": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "evidence": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "links": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "next_action": "e58d8086694d644a91d9b0b8827b78591f9edd5c28ccfd6560e2c8ac822cd6e5"
+      },
+      "protected_fields_sha256_after": {
+        "title": "2b6f4bbb31a13c17c942b5250ab1938acb0cb0edd6ee4a05b6d75f581564f550",
+        "purpose": "e97421245c0ce16890fb8e02f0f205aa6a539fcb39fa7e4fbf2406bb50f099ec",
+        "parent_id": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "priority": "b57c4299afe3cda154124bdb96ceaf618a9d8d9cd8d2c8f6580ff26faa5fe5ca",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "2168fb4664e9523a7a11f5c4018c1bc25e3603a471eb6def84a79422f2de7270",
+        "status": "05ad072baae0b1e93afd052919622063b32b852dd55c9495c77a16487b1fa639",
+        "created_at": "a6fbca480d3a15a42a265dc4e0d00d5e932a30b3c395568f6546f5fcd3e768ad",
+        "authorization": "3d7245d2a96fec7284a5db6ba845cce6458693189f629139f128e9185c295361",
+        "owner": "3501b9d48264e153265a9a0207338fd2db409859def71c5ac170020a751ca9a8",
+        "milestones": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "evidence": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+        "links": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "next_action": "e58d8086694d644a91d9b0b8827b78591f9edd5c28ccfd6560e2c8ac822cd6e5"
+      },
+      "all_protected_fields_preserved": true,
+      "status": "planned",
+      "owner": "用户与 Codex",
+      "milestones": [],
+      "progress": {
+        "done": 0,
+        "total": 2
+      }
+    },
+    {
+      "id": "K-data-boundary",
+      "before_version": 12,
+      "after_version": 13,
+      "patch": {},
+      "note": "2026-10-10原目标4用途收敛：原最低条件accepted_exploratory_minimum已经通过；PPO/P26保存效果包10/9已恢复核验，不继续追旧缺包。DATA_USES按保存探索、2022历史CSI300全成员、旧600837价格修复、P26自身输入、实际交易及ETF各列可用/限观察/最小缺件；已有36来源请求和旧4/6有限核价记录复用，不再搜、不猜原件、不下载、不重跑。此进展只覆盖原八目标4，保留本大目标原负责人/授权/其他工作和三完成标准状态。https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/DATA_USES.md",
+      "readback_note_exact": true,
+      "prior_history_preserved": true,
+      "protected_fields_sha256_before": {
+        "title": "b2d147f340ef830eb5c23a3c69d914cfa8a4c723f968d0e2d7fc413d7d0e4f3f",
+        "purpose": "47a681305b512727f22b40056bd3915516bf4d74a02a1dc16f33693462d8cd6d",
+        "parent_id": "bbe1dafd08ec242056e375fdb2734651ba221702c3fcd4170dd2aa303149be1a",
+        "priority": "60d4c90eee5e731df8d3ef2891de541d2e755ff8ee9db358e26bdec49f6e0db9",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "a4cfd986e8805814fdbe7d7cddc93ab036d7454039ef39d917add438bc89e632",
+        "status": "70ab47ec8fbd75027e36d5fae28639b51de6e7265220723cc99156dca295fcc5",
+        "created_at": "ef009424d283cb965f2b2f963a28aebc9ad7771042ce30377ffd17154512797c",
+        "authorization": "24d3ddffd7c276ebeac392e723501e0226a566c7417432a93c0d40e2a9b06fec",
+        "owner": "7fb91089415afc66969be0387d13c12dd7042f3775f43bc9ba6a200d878a20d1",
+        "milestones": "80c351003e2f878c063f061be3cfa838e956f56c7be524f343857c7df7629f50",
+        "evidence": "0af8549eb110d1aa9da68ccab31d534660644b96c65aa10f9eaab814b1dfec02",
+        "links": "6e2b6407d52f08ef72b4d8a2fcf5201d25ad2a3305bba3e44d4ca8c39a367c0a",
+        "next_action": "fdbb05bbf7963fa3c23b6c2a4129d69a57fb6fda3686f6e3a64cc2e81d8f5ccf"
+      },
+      "protected_fields_sha256_after": {
+        "title": "b2d147f340ef830eb5c23a3c69d914cfa8a4c723f968d0e2d7fc413d7d0e4f3f",
+        "purpose": "47a681305b512727f22b40056bd3915516bf4d74a02a1dc16f33693462d8cd6d",
+        "parent_id": "bbe1dafd08ec242056e375fdb2734651ba221702c3fcd4170dd2aa303149be1a",
+        "priority": "60d4c90eee5e731df8d3ef2891de541d2e755ff8ee9db358e26bdec49f6e0db9",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "a4cfd986e8805814fdbe7d7cddc93ab036d7454039ef39d917add438bc89e632",
+        "status": "70ab47ec8fbd75027e36d5fae28639b51de6e7265220723cc99156dca295fcc5",
+        "created_at": "ef009424d283cb965f2b2f963a28aebc9ad7771042ce30377ffd17154512797c",
+        "authorization": "24d3ddffd7c276ebeac392e723501e0226a566c7417432a93c0d40e2a9b06fec",
+        "owner": "7fb91089415afc66969be0387d13c12dd7042f3775f43bc9ba6a200d878a20d1",
+        "milestones": "80c351003e2f878c063f061be3cfa838e956f56c7be524f343857c7df7629f50",
+        "evidence": "0af8549eb110d1aa9da68ccab31d534660644b96c65aa10f9eaab814b1dfec02",
+        "links": "6e2b6407d52f08ef72b4d8a2fcf5201d25ad2a3305bba3e44d4ca8c39a367c0a",
+        "next_action": "fdbb05bbf7963fa3c23b6c2a4129d69a57fb6fda3686f6e3a64cc2e81d8f5ccf"
+      },
+      "all_protected_fields_preserved": true,
+      "status": "approved",
+      "owner": "研究负责人",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "列出数据限制与受影响的规则或报告",
+          "done": false
+        },
+        {
+          "id": "m2",
+          "title": "确认已有修复与仍欠缺部分",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "分别提出可用、仅观察、需补数据的处理建议",
+          "done": false
+        }
+      ],
+      "progress": {
+        "done": 0,
+        "total": 3
+      }
+    },
+    {
+      "id": "okr-ff1e0a86fbac",
+      "before_version": 126,
+      "after_version": 128,
+      "patch": {
+        "next_action": "复用A01/A02及A03封存结果；A03已于2026-09-30结案、真实4次已用，不再作为下一优先待运行。原八目标3的D/B1等既有有限或负向证据保留，稳定新增帮助未确认；仅接旧证据不能回答、输入合格且具体合同与剩余次数明确的独立必要问题，不再扫描本题参数。原股票池/next-open缺口及其他候选责任仍按原记录，不继续调距离阈值。"
+      },
+      "note": "2026-10-10原目标3接续核对发现旧next_action仍把A03写待运行，已按2026-09-30封存报告更正：A03实际4次已用（含1次检查重试），家族上限4，19触碰/18成熟、后期6次触碰预测证据不足。D/B1、持续结构、上方成交及276成熟周旧有限/负向结果复用，稳定新增帮助未确认。本轮新实验0，不重置/借用额度；本大目标其余任务和原负责人保留。https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/original-eight-readiness.json",
+      "readback_note_exact": true,
+      "prior_history_preserved": true,
+      "protected_fields_sha256_before": {
+        "title": "cda27040c53c38aca3dd329d5c50ba0a4f490d84cfaef94087b248e05878ae31",
+        "purpose": "5debf1d0dc89974af5235e4c0a41b3906b7cd3542fae7a625a5b1e6ded761b1c",
+        "parent_id": "b328e4f21664188ab06af5e5418346d7d32397a077f1c8a1a9eb16c9666735da",
+        "priority": "60d4c90eee5e731df8d3ef2891de541d2e755ff8ee9db358e26bdec49f6e0db9",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "a4cfd986e8805814fdbe7d7cddc93ab036d7454039ef39d917add438bc89e632",
+        "status": "de2bc7968076346e1ae2e62d3fd6385361b3855025678cd2732d9132eb9965cb",
+        "created_at": "9b82af8dbd3edd4aa8c2efb0450f8c64fac542d65cd9b6a52cd8ef77df0d235b",
+        "authorization": "eb57af93a48cef8563cbe979007b71ddab1feefafb81b661a5f68f60fcfdf2a1",
+        "owner": "f3448984f9a43d762f96c9c6156ff82a261f9e2a7b56da12cd4712e4b480c481",
+        "milestones": "a63e52766793503cbdfaf7c6964f41f7ab80351673a564d67716d7c4891087c0",
+        "evidence": "6b4afce3c623fc3ff60aa522bcc362cd5ca7bac60fcb04093b0cce72321b77c4",
+        "links": "9703eac0a80411abd366bfd9b9b67196fcb4be05e55755fc9db73d85ac5762de"
+      },
+      "protected_fields_sha256_after": {
+        "title": "cda27040c53c38aca3dd329d5c50ba0a4f490d84cfaef94087b248e05878ae31",
+        "purpose": "5debf1d0dc89974af5235e4c0a41b3906b7cd3542fae7a625a5b1e6ded761b1c",
+        "parent_id": "b328e4f21664188ab06af5e5418346d7d32397a077f1c8a1a9eb16c9666735da",
+        "priority": "60d4c90eee5e731df8d3ef2891de541d2e755ff8ee9db358e26bdec49f6e0db9",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "a4cfd986e8805814fdbe7d7cddc93ab036d7454039ef39d917add438bc89e632",
+        "status": "de2bc7968076346e1ae2e62d3fd6385361b3855025678cd2732d9132eb9965cb",
+        "created_at": "9b82af8dbd3edd4aa8c2efb0450f8c64fac542d65cd9b6a52cd8ef77df0d235b",
+        "authorization": "eb57af93a48cef8563cbe979007b71ddab1feefafb81b661a5f68f60fcfdf2a1",
+        "owner": "f3448984f9a43d762f96c9c6156ff82a261f9e2a7b56da12cd4712e4b480c481",
+        "milestones": "a63e52766793503cbdfaf7c6964f41f7ab80351673a564d67716d7c4891087c0",
+        "evidence": "6b4afce3c623fc3ff60aa522bcc362cd5ca7bac60fcb04093b0cce72321b77c4",
+        "links": "9703eac0a80411abd366bfd9b9b67196fcb4be05e55755fc9db73d85ac5762de"
+      },
+      "all_protected_fields_preserved": true,
+      "status": "in_progress",
+      "owner": "Codex主控/ZCode执行（GPT 6 Pro 规划授权链）",
+      "milestones": [
+        {
+          "id": "b1-candidate-pool",
+          "title": "B1 问题驱动候选池（4通过+2拒绝）",
+          "done": true
+        },
+        {
+          "id": "b2-single-candidate-evidence",
+          "title": "单候选定义与合成证据链验证完成并入库（exists，v1.3.1）",
+          "done": true
+        },
+        {
+          "id": "b3-four-candidates-implemented",
+          "title": "四项已准入候选的计算验证与定义入库完成",
+          "done": true
+        },
+        {
+          "id": "b4-real-descriptive-readings",
+          "title": "冻结真实输入的描述型因子读数与独立复算完成",
+          "done": false
+        },
+        {
+          "id": "b5-existing-factor-readiness-audit",
+          "title": "首批既有因子验证就绪度审计完成",
+          "done": true
+        },
+        {
+          "id": "b6-three-card-evidence-audit",
+          "title": "首批未就绪因子（NOT_READY）验证补全审计完成",
+          "done": true
+        },
+        {
+          "id": "b7-heterogeneous-evidence-audit",
+          "title": "异构验证缺口首批补全审计完成",
+          "done": true
+        },
+        {
+          "id": "b8-registered-bridge-audit",
+          "title": "三张既有卡的完整合成计算与正式编号接线复核完成",
+          "done": true
+        },
+        {
+          "id": "b9-missing-policy-proposal",
+          "title": "两张既有卡缺价规则新版本提案及合成兼容性复核完成（不发布）",
+          "done": true
+        },
+        {
+          "id": "b10-v2-synthetic-verification",
+          "title": "两项明确缺价规则的新版本登记、研究计算接入及独立合成验证完成",
+          "done": true
+        },
+        {
+          "id": "b12-b200-distance200-evidence",
+          "title": "B200宽度与200期均线距离的精确入口、独立合成计算证据及逐卡审计完成",
+          "done": true
+        },
+        {
+          "id": "b13-trend-backbone-evidence",
+          "title": "50/200期趋势基础六卡的精确研究入口、独立合成计算证据及逐卡审计完成",
+          "done": true
+        },
+        {
+          "id": "b14-rv-rank-recovered200-evidence",
+          "title": "自身波动历史位置与站回200期均线两卡的精确入口、独立人工计算证据及逐卡审计完成",
+          "done": true
+        }
+      ],
+      "progress": {
+        "done": 12,
+        "total": 13
+      }
+    },
+    {
+      "id": "K-risk-attribution",
+      "before_version": 14,
+      "after_version": 16,
+      "patch": {
+        "next_action": "原八目标5的固定投入两组2/2及月度四组4/4已经结案、次数耗尽；现金/费用核对一致，但实际波动超0.90—1.10标准，风险相近的收益贡献仍未证明，不再执行旧提示中的同题完整资金重跑。只在出现独立必要新问题时，先核旧证据为何不足、合格输入、简单对照和该问题实际剩余次数再接续；本目标其他原授权工作及负责人保留。"
+      },
+      "note": "2026-10-10原目标5接续核对：固定投入旧2/2、月度四组4/4均结案并耗尽。四组实际波动仍为原方法1.5319—1.6159倍，全部未达到0.90—1.10；较高期末金额不能算风险相近的收益帮助，现金核对误差0。B初始16行零持仓估值补注金额影响0必须配用。只纠正旧“先开展完整资金比较”提示，不改变失败、原负责人、授权、完成标准或本目标其他事项。https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/original-eight-readiness.json",
+      "readback_note_exact": true,
+      "prior_history_preserved": true,
+      "protected_fields_sha256_before": {
+        "title": "63f4595a46c495bc8a48d4e2e435901bcd45d2aea677dcb8cb0c1fb37292869b",
+        "purpose": "d111880ea590b713886e6ffa19d3023f74b41cab98b35aab46edd40af9acb464",
+        "parent_id": "d72c69efafe67794567b52be90c24d40130461a97e4257351e97dcea61f057eb",
+        "priority": "60d4c90eee5e731df8d3ef2891de541d2e755ff8ee9db358e26bdec49f6e0db9",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "a4cfd986e8805814fdbe7d7cddc93ab036d7454039ef39d917add438bc89e632",
+        "status": "de2bc7968076346e1ae2e62d3fd6385361b3855025678cd2732d9132eb9965cb",
+        "created_at": "ef009424d283cb965f2b2f963a28aebc9ad7771042ce30377ffd17154512797c",
+        "authorization": "24d3ddffd7c276ebeac392e723501e0226a566c7417432a93c0d40e2a9b06fec",
+        "owner": "7fb91089415afc66969be0387d13c12dd7042f3775f43bc9ba6a200d878a20d1",
+        "milestones": "848f1a1287881a2ec8d2c10edf96f1220a96883bc968230fa04d8e80e1e2bc43",
+        "evidence": "5a9f4381513cf15325892225bd8f56ad2a5198d6ca1ff6e60d77b4a4c5f54242",
+        "links": "5bb1a1744a8cc903bb0fda6be7fa58b505cb009e224ea9103084149d8a0e7cf5"
+      },
+      "protected_fields_sha256_after": {
+        "title": "63f4595a46c495bc8a48d4e2e435901bcd45d2aea677dcb8cb0c1fb37292869b",
+        "purpose": "d111880ea590b713886e6ffa19d3023f74b41cab98b35aab46edd40af9acb464",
+        "parent_id": "d72c69efafe67794567b52be90c24d40130461a97e4257351e97dcea61f057eb",
+        "priority": "60d4c90eee5e731df8d3ef2891de541d2e755ff8ee9db358e26bdec49f6e0db9",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "a4cfd986e8805814fdbe7d7cddc93ab036d7454039ef39d917add438bc89e632",
+        "status": "de2bc7968076346e1ae2e62d3fd6385361b3855025678cd2732d9132eb9965cb",
+        "created_at": "ef009424d283cb965f2b2f963a28aebc9ad7771042ce30377ffd17154512797c",
+        "authorization": "24d3ddffd7c276ebeac392e723501e0226a566c7417432a93c0d40e2a9b06fec",
+        "owner": "7fb91089415afc66969be0387d13c12dd7042f3775f43bc9ba6a200d878a20d1",
+        "milestones": "848f1a1287881a2ec8d2c10edf96f1220a96883bc968230fa04d8e80e1e2bc43",
+        "evidence": "5a9f4381513cf15325892225bd8f56ad2a5198d6ca1ff6e60d77b4a4c5f54242",
+        "links": "5bb1a1744a8cc903bb0fda6be7fa58b505cb009e224ea9103084149d8a0e7cf5"
+      },
+      "all_protected_fields_preserved": true,
+      "status": "in_progress",
+      "owner": "研究负责人",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "查已有止损和仓位研究覆盖",
+          "done": true
+        },
+        {
+          "id": "m2",
+          "title": "建立同成本、可比风险承担的简单对照",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "报告收益、跌幅、空仓时间和执行成本",
+          "done": false
+        }
+      ],
+      "progress": {
+        "done": 1,
+        "total": 3
+      }
+    },
+    {
+      "id": "okr-4f4157e2957e",
+      "before_version": 54,
+      "after_version": 55,
+      "patch": {},
+      "note": "2026-10-10原八目标7复用现有证据：Alphalens限定诊断已实际使用、Qlib旧计算一致性已核，工程一致仍不证明收益增量。本轮没有新增明确方法缺口，不扩大搜索或安装平台，不重做封存研究；本目标原负责人、授权、四完成标准与其他任务保留。https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/original-eight-readiness.json",
+      "readback_note_exact": true,
+      "prior_history_preserved": true,
+      "protected_fields_sha256_before": {
+        "title": "6a39de1d7baed5d9058c58d2aba77bc02b09c5978dad773ed2513f85f0f68eb7",
+        "purpose": "7ce65bb0b64e145d3c1eb07036920590d7ec5d1b586350297c91a71680f52319",
+        "parent_id": "b328e4f21664188ab06af5e5418346d7d32397a077f1c8a1a9eb16c9666735da",
+        "priority": "60d4c90eee5e731df8d3ef2891de541d2e755ff8ee9db358e26bdec49f6e0db9",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "a4cfd986e8805814fdbe7d7cddc93ab036d7454039ef39d917add438bc89e632",
+        "status": "de2bc7968076346e1ae2e62d3fd6385361b3855025678cd2732d9132eb9965cb",
+        "created_at": "285dfd4bda3dbe4bf9e19e0d5223389d17d7fe1dd98ee1a8532721eeb1e5bf25",
+        "authorization": "37acf0ef57e2ec606baa41a89fd4c21aaa9f26e6fefaffeb5c11db48dd347039",
+        "owner": "ff12aeefdaa26b2f8950293f28278306ff95bb3edfaff6473dde58aff7260a45",
+        "milestones": "a47183d0e81165b4aaa341983f8a43438c9f2385c77dd02538c44bde64486d95",
+        "evidence": "9dce3c61309bd9749685f2647c0fe30850f9b9d19b78a83ad32405355b54bcde",
+        "links": "8531c36ad2761b203ebb3adeb48619a34522b1ca7ce780bed2fcf78ec55e0453",
+        "next_action": "e0cdfa34bc80656b92bf66b0d9d27260f4fbe0528314450f65e0b6bb38cbbdf0"
+      },
+      "protected_fields_sha256_after": {
+        "title": "6a39de1d7baed5d9058c58d2aba77bc02b09c5978dad773ed2513f85f0f68eb7",
+        "purpose": "7ce65bb0b64e145d3c1eb07036920590d7ec5d1b586350297c91a71680f52319",
+        "parent_id": "b328e4f21664188ab06af5e5418346d7d32397a077f1c8a1a9eb16c9666735da",
+        "priority": "60d4c90eee5e731df8d3ef2891de541d2e755ff8ee9db358e26bdec49f6e0db9",
+        "target_date": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "kind": "a4cfd986e8805814fdbe7d7cddc93ab036d7454039ef39d917add438bc89e632",
+        "status": "de2bc7968076346e1ae2e62d3fd6385361b3855025678cd2732d9132eb9965cb",
+        "created_at": "285dfd4bda3dbe4bf9e19e0d5223389d17d7fe1dd98ee1a8532721eeb1e5bf25",
+        "authorization": "37acf0ef57e2ec606baa41a89fd4c21aaa9f26e6fefaffeb5c11db48dd347039",
+        "owner": "ff12aeefdaa26b2f8950293f28278306ff95bb3edfaff6473dde58aff7260a45",
+        "milestones": "a47183d0e81165b4aaa341983f8a43438c9f2385c77dd02538c44bde64486d95",
+        "evidence": "9dce3c61309bd9749685f2647c0fe30850f9b9d19b78a83ad32405355b54bcde",
+        "links": "8531c36ad2761b203ebb3adeb48619a34522b1ca7ce780bed2fcf78ec55e0453",
+        "next_action": "e0cdfa34bc80656b92bf66b0d9d27260f4fbe0528314450f65e0b6bb38cbbdf0"
+      },
+      "all_protected_fields_preserved": true,
+      "status": "in_progress",
+      "owner": "待逐项安排执行 Agent；原主控复核",
+      "milestones": [
+        {
+          "id": "data",
+          "title": "数据基础：明确历史成员、分红拆分或退出数据的实际缺口，形成小范围供应商核验结论与采用/不采用依据",
+          "done": false
+        },
+        {
+          "id": "returns",
+          "title": "收益解释：明确适配资产与频率，仅在有需求时核验基础收益或外部因子序列；记录适用和不可用范围",
+          "done": false
+        },
+        {
+          "id": "execution",
+          "title": "执行条件：对折溢价、价差和流动性候选明确时间语义与资料资格，决定是否值得单独接入",
+          "done": false
+        },
+        {
+          "id": "methods",
+          "title": "候选方法：根据 v0 证据逐项决定风险调整动量、趋势形态及后置模型是否立项；无增量可停止",
+          "done": false
+        }
+      ],
+      "progress": {
+        "done": 0,
+        "total": 4
+      }
+    }
+  ],
+  "failures_and_recovery": [
+    {
+      "phase": "api_patch_readback_comparison",
+      "goal_id": "okr-57eb3f28e526",
+      "patch_written_version": 8,
+      "reason": "GET list adds derived progress, PATCH response omits it; whole-object assertion failed after successful write",
+      "recovery": "Read actual v8 and history; confirmed all intended fields, no repeat PATCH; compare response fields only before continuing note",
+      "data_lost": false,
+      "duplicated_write": false
+    }
+  ],
+  "other_machine_recovery_verified": false,
+  "new_market_computations": 0
+}
