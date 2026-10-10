@@ -1,3 +1,12 @@
+# 已移除首份协调副本，登记另两份同类准确退休范围
+
+- task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；updated_at 2026-10-10T17:29:10.234484+08:00；checked_coordination_sha 2c2b3949bb01e796ca559cc47ed714b34a3abe83；checked_at 2026-10-10T17:29:10.234484+08:00。已读原规则、自身、mac存储、daily、原中控及 theory-workflow-system-increment / risk-shape-information 最新负责人记录。两个原有界交付已结案并释放，代码/报告实际资料在主工作区或成果分支，不在这两份协调checkout；没有新同写范围，root唯一删除和小回执/API写者。
+- 人类“确认移除哈，这方面你不需要跟我确认了，你直接开整就完事了”持续授权同类闲置可重建协调副本清理。首份 lei-coordination 已正常Git移除、精确目录/注册/元数据缺失、准确远端commit仍可读、主branch/HEAD/index保持；回执 worktree-retirement-execution.json。实测内盘free19756167168→19752701952字节，净-3465216字节，未声称释放名义2GB。现场四份删除前TimeMachine快照可保留旧块，具体独占物理回收量未知；不删快照或改配置。
+- 本次新增准确可移除目录只有 /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/theory-ai-principles-coordination 与 /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/stock-gap-coordination-20261008，以及Git正常remove各自的准确元数据路径。head分别 05c04e2f8218d8d0cabee292dcbd57f736e6ee13 / e0018e48ceb0d91f7407fc63328757c1dec70b7c；tracked/untracked/ignored全部干净、detached无锁、lsof无打开文件、进程参数无使用、最新远端祖先可达，原owner有限交付释放；逐项计划 additional-worktree-retirement-plan.json。普通Git remove逐个执行，不force、不手工递归删除；执行前再核状态，后核注册/路径/commit/其他工作树及主索引、容量真实读回。
+- 第三个 risk-shape-coordination 的准确当前使用映射不够明确，保留；含独有内容的研究树、.biao副本、环境/活动库/会话/冻结源路径保留。系统原磁盘项只追加本轮实际授权与结果，原恢复异机项false/全目标in_progress和原八目标负结果/预算保持。不会用“目录du减少”代替“实际空间释放”，也不恢复无人值守清理或通知。
+
+---
+
 # 用户批准退役旧协调工作区，继续有界磁盘管理
 
 - task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；updated_at 2026-10-10T17:25:09.570535+08:00；checked_coordination_sha 97de64f23e8e31b802442131b6ef3969e563cf07；checked_at 2026-10-10T17:25:09.570535+08:00；实际已读：[{"task_id": "frozen-input-recovery-20261010", "sha256": "4df97c5d3b466264747882e2ada303151e37ac3c539a0a3fefe143cb4ef8f693"}, {"task_id": "mac-local-storage-cleanup", "sha256": "28d19a10912c52208ad94cfd252cec425693fb32a2ee59ab445b3e2b590701d6"}, {"task_id": "daily-trading-system-audit", "sha256": "ed4ac107a9019e39fd5ade71a09feffb88e8ea67a8b42981763fbd38154d14e1"}, {"task_id": "research-dispatch-controller", "sha256": "4bf6fccba42fbd996aeb8e63031819b8fa56fe0afed20c9d9cb1851cce5e6b3c"}]。本任务旧状态字节与原6fc6804一致；旧中控/mac存储范围已释放，daily已结案；无同路径使用或新重叠。root唯一删除/小回执/API写者。
@@ -90,14 +99,16 @@
   "task_id": "frozen-input-recovery-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "stage": "authorized_exact_retirement_and_bounded_similar_worktree_review",
-  "checked_coordination_sha": "97de64f23e8e31b802442131b6ef3969e563cf07",
-  "checked_at": "2026-10-10T17:25:09.570535+08:00",
+  "stage": "authorized_three_checkout_retirement_and_readback",
+  "checked_coordination_sha": "2c2b3949bb01e796ca559cc47ed714b34a3abe83",
+  "checked_at": "2026-10-10T17:29:10.234484+08:00",
   "read_task_ids": [
     "frozen-input-recovery-20261010",
     "mac-local-storage-cleanup",
     "daily-trading-system-audit",
-    "research-dispatch-controller"
+    "research-dispatch-controller",
+    "theory-workflow-system-increment",
+    "risk-shape-information"
   ],
   "work_branch": "codex/frozen-input-recovery-20261010",
   "base_commit": "6b06a04b46bdd35cc62777fd60d135d457291ec3",
@@ -105,7 +116,11 @@
     "docs/experiments/raw/frozen-input-recovery-2026-10-10/",
     "docs/ops/work-progress/frozen-input-recovery-20261010.md",
     "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination",
-    "/Users/yongbiaoli/Desktop/lei-signal-lab/.git/worktrees/lei-coordination"
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.git/worktrees/lei-coordination",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/theory-ai-principles-coordination",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.git/worktrees/theory-ai-principles-coordination",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/stock-gap-coordination-20261008",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.git/worktrees/stock-gap-coordination-20261008"
   ],
   "scope_released": false,
   "latest_result_commit": "6efb1b34c5989b430f7997ec027c34a97612e37d",
@@ -115,10 +130,14 @@
   "blocker": null,
   "other_machine_recovery_verified": false,
   "proposed_retirement_paths": [
-    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination"
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/theory-ai-principles-coordination",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/stock-gap-coordination-20261008"
   ],
-  "deletion_executed": false,
-  "human_retirement_approval_received": true
+  "deletion_executed": true,
+  "human_retirement_approval_received": true,
+  "removed_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination"
+  ]
 }
 <!-- lei-coordination-json:end -->
 
