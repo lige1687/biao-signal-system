@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "0032e8d4dd9c0700b4e0a4eb51381b0d0f4f91ef",
-  "checked_at": "2026-10-11T00:53:28.740808+08:00",
+  "checked_coordination_sha": "fee5ba6d092ec400015f27333b86bad0a30d6bf2",
+  "checked_at": "2026-10-11T01:00:02.420570+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -94,10 +94,10 @@
     "K-risk-attribution"
   ],
   "latest_result_commit": "ca035465e49b06f13e8d4bca587baad0e5f8ac7a",
-  "scope_amendment": "User-approved no-required-sale P0 branch new3 artificial cases accepted, cumulative8 old/new. New independent weekly shared250/zero initial/50:50 P0vsP1 wholewindow2015-01..2026-06 limited dailyprice account simulation. One pairedcore2paths plus one conditional diagnosed mechanical pairedrepair (actualpathattemptsmax4); artificial lifecycle max10cases, one batch plusone repair. No newqueries, parameter variants, production, or sealed budgets borrowed. Freeze exact method/input before core.",
-  "updated_at": "2026-10-11T00:53:28.740808+08:00",
-  "conflict_decision": "Fresh 0032e8d4dd9c0700b4e0a4eb51381b0d0f4f91ef rules/current12tasks read; own new full-account raw soleSol, root shared/report/API/Git solewriter, Astra only own independent-review aftercontract. Cash-video unrelated, preserve dirtyHEAD/index and all oldfiles.",
-  "current_work": "用户给定的新起步分支实际买入并Fraction独核；正在冻结新的完整日线近似合同，实现与人工验收先于市场核心。",
+  "scope_amendment": "Original engineering contract606ea6 remains immutable. New precisely bound amendment: ex cancellation from original decision, end6/30 locked asset placeholder non-executable; inherit side-specific limit rejection, dated deposit annualization, unrecovered duration and operation burden. Same10 artificialcases/no extra historicalpaths/no variants/no source.",
+  "updated_at": "2026-10-11T01:00:02.420570+08:00",
+  "conflict_decision": "Fetched/read latest fee5ba6d092ec400015f27333b86bad0a30d6bf2; only unrelated cash-video changed after ownfcb8. Keep same exact writer paths. Sol engineering, root controller/shared, Astra independent semantics. No mainHEAD/index changes.",
+  "current_work": "完整账户工程中；独审要求已绑定不改旧合同，人工检查先行，尚未批准市场账户运行。",
   "paused_questions": [
     "旧严格历史日历/实际开盘/当时到达/真实到账资格仍未证，本新有限日线研究不得将strictfalse改ready。",
     "独立另一盘/异机恢复未证，不阻止已验本机工作。"
@@ -206,3 +206,7 @@
 
 用户确认无须卖时按原买入；3新人工实际通过并根独算，三周各100→200→300，现金39.80/79.60/119.40，费用30.60。双低配买入，真超额应减13.75但合法整百0留250。旧5不重跑合8，预检bool0/1失败留后修。场内数量依法，用户渠道可选未答已明确沿原ETF继续。
 Astra只读定位真实工程缺口：旧v2只验买单、拒跨行动、未自动周调度。因此新整链必须有限实现，不能拼旧绿色结果称完整。按既有持续研究授权登记独立问题，绑定2015-01..2026-06、两标的、每周共享250、各半偏离5个百分点，不调参追正、不缩窗。显式模型日期并集时钟、保守现金时间、单周订单到期、除息应收与真实名义开盘的研究近似，来源就地复用。人工整链及独审先过才能一对核心；旧月度4/4、固定2/2/A03/source20全部保持。
+
+## 2026-10-11T01:00:02.420570+08:00 完整资金工程独审补清除息跨决定与末端锁定
+
+Astra只读合同审阅完成，未需用户新决定。旧合同606ea6不覆盖，追加准确条件：原决策至候选开盘间除息取消；末日买入与卖出保留锁定状态，窗外时钟仅未释放占位、无执行/估值/窗外价格。涨停买入/跌停卖出拒绝沿旧输入规则；原规范资金年化、最长未恢复、实际操作日和周中额外操作均保留。嵌入原10人工案，不增研究变体或预算。Sol已收到，市场核心仍待代码及人工账本独核后另冻合同。
