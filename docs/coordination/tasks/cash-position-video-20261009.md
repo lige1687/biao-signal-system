@@ -233,3 +233,10 @@
 - 基线成果747cbad14199e08c99de083fddb3bfc0334ea667。范围：.agents/skills/code-explainer-video/references/preproduction-workflow.md局部路由、新references/story-argument.md；自身work-progress和docs/ops/media/cash-position-20261009/narrative-review-20261010.json、narrative-skill-20261010.patch。媒体/完整文稿分镜/OCR/审核仅新外盘v11-narrative-audit-20261010，旧v07大纲、v09已发完整片、v10认可样例只读。
 - 复用已有125.483秒成片和既核行情/事实；核原片屏幕文案与标题承诺/因果顺序/重复收束/教学规则边界，缺完整字幕时明确抽帧/OCR范围，不冒称原片完整听审。文稿无旁白，以自然短句+动作解释；具体屏幕稿与分镜一一对应，估时标草案，保留用户原观点。
 - 验收：实证问题定位、唯一核心与段间递进、每段新增认识、删重复而非堆信息、已批15秒放回全文的衔接、来源与风险含义、自然语言、相关Skill去重和格式/引用/补丁/归置。storage18:46固定UUID通过，预计新增<120MiB外盘、小记录<128KiB本机；不新装/删除/改策略/原发布稿/全片渲染。
+
+
+## 音乐与动态节奏范围补充 2026-10-10T19:07:48.749235+08:00
+- active；scope_released=false；root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c唯一写者。checked_coordination_sha=3efaaed65f10a21e3138e9ffee0e295b6636bce1；checked_at=2026-10-10T19:07:48.749235+08:00；已读本任务、COORDINATION1.1及original-eight至19:02剩余日历范围；其他既读视频共享范围已释放，无重叠。
+- 用户追加“特效和音乐能卡点”“搜索相关内容咨询”“主旨是让视频看得爽”。继续原全文审核，加入专业原始来源的节奏/音画编排方法、本曲候选事件与镜头落点；不以满屏特效或逐拍切镜取代理解。
+- 新增共享范围仅.agents/skills/code-explainer-video/references/music-motion-sync.md，由story-argument链接；不改他人音乐、旧成片或motion-direction。原注册的preproduction路由、新story-argument、本人索引/补丁/进度维持。全部完整资料与分析写原v11外盘。
+- 复用v07已测125.466秒指定音源和候选瞬态，不重复下载；自动检测不冒称听审确认的鼓点/BPM。公开搜索读作者/官方资料，不安装插件或下载参考媒体。验收新增：来源/采用边界、音源零点/片内时间/帧号/动作主落点映射、阅读停留与起落强弱安排；完整合声观感留实际制作验。19:07固定盘身份通过、外盘568651677696B。
