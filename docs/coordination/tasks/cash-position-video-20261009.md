@@ -190,3 +190,12 @@
 - checked_coordination_sha: cf49c139ff838191f10795ed3cb3b44bae6737fb；checked_at: 2026-10-10T16:15:55.175212+08:00；已读自身、COORDINATION1.1及新增trend-perspective独立话题修改，现金原稿范围不冲突，root唯一写者。用户明确要正文“不带#的文字”，只本现金三站原文加“vibe知识大赏，用动画聊聊现金、仓位与风险。”；正式XHS/DY候选话题保留。
 - XHS note6ac9e4fa0000000001009684修改保存后原编辑页全文/三话题/6章读回，仍审核中；Bili BV1Vhpv6EE2p保存后公开页普通句子完整读回；DY1731524092原待SMS稿已插入，仍要求本人验证，未提交。没有重传、新稿、改媒体或他人作品。
 - 初次误解为#标签后已按澄清修正；Bili编辑器fill串位的异常原文已修复，最终公开页全文与预期核同。两张plain-vibe-readback截图外盘v09；固定UUID16:14身份容量通过。成果codex/cash-position-video-20261009@2dc889ff0d8a7abf78353cc3c8a3810a05daeffd两小文件远端SHA/字节读回通过。scope仅抖音本人验证继续保留，不标三站发布全部完成。
+
+
+## 风格学习与本地导演范围澄清 2026-10-10T17:50:29.807845+08:00
+- status: active（本轮Skill维护）；scope_released: false；owner root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c唯一写者。
+- checked_coordination_sha: e2bef4cfbc798b07a278eb85edc5e59c9f4a4686；checked_at: 2026-10-10T17:50:29.807845+08:00；已读COORDINATION1.1、自身、trend-trading-video最新V9已释放、personal-quant-video-render-preview-rule已释放，以及nasdaq、trend-perspective、dual-ma、system-x、中控的相关范围；现有其他影片独立，无共享Skill正在写的冲突。
+- 用户明确：不硬套Opus5.5的方块或100个现金对应100个方块，主要学习动态风格；载体、分镜、运镜可由本地收敛。仅定向修改下列5份Skill文本，保留原确认/事实/发布边界；不重新制作样例、不改既交Opus包、不代改ai_tools副本。
+- 写入范围：.agents/skills/code-explainer-video/SKILL.md; .agents/skills/code-explainer-video/references/motion-direction.md; .agents/skills/code-explainer-video/references/style-compound-motion.md; .agents/skills/opus-video-prep/SKILL.md; .agents/skills/opus-video-prep/templates/BRIEF.md；自身work-progress及本次精确补丁/小回执；协调仅本文件。未跟踪共享Skill不整包冒领，只保存本次精确补丁。
+- 基线成果codex/cash-position-video-20261009@2dc889ff0d8a7abf78353cc3c8a3810a05daeffd；验收：风格与物件/模型职责区分、可执行动作与运镜标准、前后文无冲突、Skill结构/本地链接/准确diff/归置。
+- 抖音发布仍未确认；本轮转为用户最新明确Skill修改，不将其写成已发布或已取消。
