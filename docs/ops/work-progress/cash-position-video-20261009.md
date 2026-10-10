@@ -190,3 +190,7 @@ checked_coordination_sha=7ec6daad1bf768612527e217bf1c7ee879ea7d51；checked_at=2
 checked_coordination_sha=fcb8f3baecb2ed217e545c4c25004997726323ca；checked_at=2026-10-11T00:53:51.648989+08:00；已读COORDINATION1.1、自身及original-eight00:47独立ETF规则任务；root唯一写者无重叠，范围登记0032e8d4dd9c0700b4e0a4eb51381b0d0f4f91ef成功后制作，交付fetch无新增。固定盘00:44 UUID/available通过，全部媒体工程/音效/日志外盘，本机仅小文本。无安装/删除/改策略/全片/发布/他人任务/自动化恢复。
 
 追加最终播放：1228CSS宽大画面也1倍不静音连续播至15秒，ended=true/error=null；6.4秒减仓按钮实点与画面读回通过。
+
+
+## 先完成Skill，再做完整片 2026-10-11T01:17:10+08:00
+用户认可当前样例并授权完整重做，追加“先做skill再做视频”。01:17已先完成两参考增量：story-argument补入场/退出/潜在收益风险/实际胜率平均盈亏/账户投入/现金主线，3亏1赢反例与部分止盈不等于整笔盈利；animatic实例更新v13/v14本片认可及适用限制。统一入口原路由可达，无需新Skill。元数据/链接/精确补丁前后SHA/归置与算术关系通过，精确补丁及JSON保留。此刻未开始视频工程/粗剪/正式渲染，下一步按同规则执行已授权完整片。checked_coordination_sha=f5288c5c325bdab1d9f3493388bed86e97809ba4；读取自身/COORDINATION1.1/original-eight01:08，无重叠，开工登记9daa0b833f184750bb3ddc8d330ea0c180ce955a已推读回。
