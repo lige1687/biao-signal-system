@@ -146,3 +146,14 @@
 - READY总包partial：旧Yahoo精确抓取时间未恢复，音乐/实拍正常速度听看、正式发布规格和公开许可未齐；均不阻止已授权私人文稿/风格与样例开工。失败（unused imports、ffprobe缺入口/动态库路径）及定点修复回执保留，归置通过。不删旧片、不新安装/升级/付费/改权限，不把工具依赖可用当商业许可。
 - 固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9于12:33新增前后已核，外盘约569GB可用；逻辑新文件预算<2GiB，exFAT多小文件实际分配更大，未删除或迁移旧内容。外盘运行副本逻辑依赖470615127B一份，迁移副本另列，不随ZIP。
 - 最短接续：把START_OPUS.txt交给Opus，读BRIEF/大纲/READY/INDEX，写具体文稿和视觉，先实际风格帧→中间难点15秒→经用户确认扩片。v04认可不自动认可v06或新全片；公开发布仍独立核验。
+
+
+## 动态编排复盘与Skill增量开始 2026-10-10T14:43:49.920314+08:00
+- status: active；stage: motion_design_skill_increment；scope_released: false；owner root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c 唯一写者。
+- checked_coordination_sha: 5843cb5fcb0029ae275b4259d88f68de16347ac2；checked_at: 2026-10-10T14:43:49.920314+08:00。已读COORDINATION1.1、自身、trend-trading-video、trend-perspective-video-20261009、nasdaq-story-video-20261009、personal-quant-video-render-preview-rule、system-x-video-ideas-20261009、dual-ma-video-copy-20261009、research-dispatch-controller最新适用段。共享Skill范围已由相关owner释放；其他当前范围为各自影片/发布/准备，不重叠。
+- 用户最新要求：继续对照OPUS参考与最新A，重点总结动态设计能力而非只看方块，沉淀到Skill。原话“你最新的版本我感觉已经不错了”记录为对当前样例的正面反馈，不扩大为全片制作/发布批准。
+- 范围：.agents/skills/code-explainer-video/SKILL.md局部路由、references/motion-direction.md动作编排增量、references/decision-motion.md案例反馈与引用；自身work-progress和docs/ops/media/cash-position-20261009/motion-skill-review.json。若主入口已足够则不为凑改动而改。媒体/诊断/原文备份仅外盘v08-motion-skill-review-20261010，旧v01—v07只读，不改已交Opus包。不改opus-video-prep分工或他人文件。
+- 基线：codex/cash-position-video-20261009@fecc4a46d5d6ed033fefd3d798b271b3ab80a965；实际本机共享Skill存在其他任务未跟踪内容，保存改前指纹/小补丁，不整包冒领他人成果。
+- 验收：观察参考与v06真实运动/中间帧、核本人源码，区分观察/推断/候选方法；补足时序编排/注意交接/动作质感的可执行指导，合并已有语义动作规则，不强制题材/方块/特效数量。检查Skill格式、本地引用、原有确认/无旁白/Opus职责不变、准确diff和归置。
+- storage: 2026-10-10T14:40:01.245515+08:00固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok=true；外盘569483460608B。预计本轮小诊断/抽帧<80MiB外盘，Skill/小记录<128KiB本机；复用已有抽帧，无安装/收益实验/新影片/代理/模型切换/发布/删除。
+- 下一步：看片与源码定位缺口，按skill-creator合并窄增量，验证后释放共享范围。技术文档更新不冒充新效果已实测达到参考。
