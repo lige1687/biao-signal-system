@@ -1,3 +1,19 @@
+# 本机必要接续已交付；唯一待目标设备的异机来源核验
+
+- task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status blocked / awaiting_other_machine_target；updated_at 2026-10-10T13:40:42.079680+08:00。这里指具体输入缺失，不表示用户要求暂停；没有后台进程或自动继续。
+- checked_coordination_sha d0024cdf1a5f20dc45711b60797ce04aadf9dc82；checked_at 2026-10-10T13:40:42.079680+08:00；COORDINATION及10个相关任务已重新只读核对，文件内容仍同已登记窗口；原中控/C/report-library共享范围已释放，本轮没有新增重叠。实际已读及SHA：[{"task_id": "research-dispatch-controller", "path": "docs/coordination/tasks/research-dispatch-controller.md", "sha256": "4bf6fccba42fbd996aeb8e63031819b8fa56fe0afed20c9d9cb1851cce5e6b3c"}, {"task_id": "frozen-input-recovery-20261010", "path": "docs/coordination/tasks/frozen-input-recovery-20261010.md", "sha256": "6d7524b49e27b2d2fc95a214b6c24e1bc08d7e594ab796ea984b35229a2d75c0"}, {"task_id": "leisignal-risk-input-20261009", "path": "docs/coordination/tasks/leisignal-risk-input-20261009.md", "sha256": "4197b847fdc52438644a8c951db4c3571a97b61658bf9d75ac98ab1fee4d4bf9"}, {"task_id": "leisignal-risk-run-20261009", "path": "docs/coordination/tasks/leisignal-risk-run-20261009.md", "sha256": "c2ef32624c97c1006d4141a63681de32d3da6912f81b58b45a4660a3bbc98b6e"}, {"task_id": "leisignal-risk-review-20261009", "path": "docs/coordination/tasks/leisignal-risk-review-20261009.md", "sha256": "b97f0a1afc063e29ea1a001f314f485e83179941d37b9066155a7939db6fea1c"}, {"task_id": "mac-local-storage-cleanup", "path": "docs/coordination/tasks/mac-local-storage-cleanup.md", "sha256": "28d19a10912c52208ad94cfd252cec425693fb32a2ee59ab445b3e2b590701d6"}, {"task_id": "daily-trading-system-audit", "path": "docs/coordination/tasks/daily-trading-system-audit.md", "sha256": "ed4ac107a9019e39fd5ade71a09feffb88e8ea67a8b42981763fbd38154d14e1"}, {"task_id": "risk-shape-information", "path": "docs/coordination/tasks/risk-shape-information.md", "sha256": "a543163bd6ba3037c2bed05706ee38a4360e71368158cee02084a17e49f6663d"}, {"task_id": "technical-factor-sequence", "path": "docs/coordination/tasks/technical-factor-sequence.md", "sha256": "971444862b502acdbebac903d300d0adc10a384730139d1dea37d98f6f90dc03"}, {"task_id": "report-library-integration-20261008", "path": "docs/coordination/tasks/research-evidence-catalog/report-library-integration-20261008.md", "sha256": "b249612db4356738fbc2f12ae96e7e9a19aaca5759768bd8d7d2e2a41a4933dc"}]。
+- 本轮人类批准23副本已实际执行：固定外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9/设备16777238，23份5,417,582字节两次读回加Sol独立逐字节23/23通过；原设备16777232的源路径/内容未改。两份准确远端Git复用，25来源都有独立位置可查；没有把同盘Git或本机读回冒充异机成功。
+- 外盘恢复清单位于/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T121047-6ba6691d855d/result/recovery-manifest.json，25,016字节SHA ebc63f6f70c222940216af898dd1ca078e1331de6963269bc530c155cae9f16f。范围仅A原25来源，其他22支持材料和运行环境不声称已恢复。
+- 准确成果 codex/frozen-input-recovery-20261010@a56da8698f78a02a39d9130cfc8cb9b278dc4b01，24个相关小文件299,754字节；普通推送远端完整SHA及全文件内容/共享补注读回核同。RECOVERY、backup-execution/independent-review、DATA_USES、original-eight-readiness、original-goals-update-readback和work-progress齐全；主HEAD/branch/index不动，不合main/master。两个共享目录本机与成果分支旧正文不同，分别原文前加相同新增段，移除后各自原SHA不变，不夹带他人本机目录增量。
+- 原目标4按用途已收敛：保存股票价格/PPO/P26探索最低验收已经通过，10/9保存包已核；完整历史成员、旧600837价修复和真实交易资格保留具体原件缺口。没有任何新取数或价格修复，不重跑PPO/P26，不把个股全历史当ETF统一前提。
+- 原目标3/5按原报告核预算：A03已9/30封存、真实4次耗尽；月度4/4、旧固定2/2均耗尽。既有四组波动1.5319—1.6159倍、风险相近收益贡献未证不改。仅修两处失效next_action；其他负责人/问题/授权/标准保留。1/2/6/7无新的必做研究，目标2只补本轮新增恢复导航。
+- 真实API七原条目读回：okr-57eb3f28e526 v7→9、四标准原文保持，1/2/4 done=true、3=false，整体in_progress/3of4；D-evidence3→4、D-tracking3→4、K-data-boundary12→13、okr-ff1e0a86fbac126→128、K-risk-attribution14→16、okr-4f4157e2957e54→55。六条仅note+两处指定next_action，全部保护字段和旧history核同。不得说全部大目标完成。
+- 验证通过：设备/源和副本内容/准确集合、独立核验、主仓归置exit0、Git准确路径/diff与远端字节、API乐观版本和保护字段。失败保留：早期行政文件数错误，独核脚本空值处理和一只读执行者误判A03后更正；本轮API PATCH成功后GET额外progress字段使整对象比较失败，先读真实v8不重复PATCH，再按字段比较后note完成。没有复制失败、资料丢失或科研重跑。
+- 实际新增市场/账户/标签/下载/调参/原件改写/新chat/自动化/无限Goal=0。23副本许可已满足，不重复询问。shared scope本轮已释放；未来异机新增操作需先核新协调并登记准确目标设备/路径，不抢其他task。
+- 剩余的唯一必需验收与恢复条件：用户提供另一台目标电脑及固定外盘/准确远端来源实际访问，已在本聊天询问；没有确认目标和可读路径，因此本会话无可执行异机检查入口。届时在该设备只读重核身份、25来源大小/指纹，保存实际设备回执再推进原目标8最后一项；只核来源，不跑市场实验。本机其他必要工作不依赖此输入且均已交付。
+
+---
+
 # 23副本已独验；本轮新增恢复证据与失效接续提示的准确同步窗口
 
 - task-id frozen-input-recovery-20261010；owner/session 01a123fc-553b-7b81-9952-36e1acb11dcc；status active / backup_verified_readiness_documentation；updated_at 2026-10-10T13:30:28.483307+08:00。
@@ -26,10 +42,10 @@
 {
   "task_id": "frozen-input-recovery-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "stage": "authorized_exact_backup_and_original_eight_readiness",
-  "checked_coordination_sha": "c0d8911f5aacf7411465de4ddb50ed7322dd95c4",
-  "checked_at": "2026-10-10T13:24:45.767441+08:00",
+  "status": "blocked",
+  "stage": "local_evidence_delivered_awaiting_other_machine_target",
+  "checked_coordination_sha": "d0024cdf1a5f20dc45711b60797ce04aadf9dc82",
+  "checked_at": "2026-10-10T13:40:42.079680+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -38,16 +54,25 @@
     "leisignal-risk-review-20261009",
     "mac-local-storage-cleanup",
     "daily-trading-system-audit",
-    "risk-shape-information"
+    "risk-shape-information",
+    "technical-factor-sequence",
+    "report-library-integration-20261008"
   ],
   "work_branch": "codex/frozen-input-recovery-20261010",
   "base_commit": "6b06a04b46bdd35cc62777fd60d135d457291ec3",
   "write_paths": [
     "docs/experiments/raw/frozen-input-recovery-2026-10-10/",
     "docs/ops/work-progress/frozen-input-recovery-20261010.md",
+    "docs/experiments/research-evidence-catalog-2026-10-07.md",
+    "docs/okr/RESEARCH_TODO.md"
+  ],
+  "scope_released": true,
+  "latest_result_commit": "a56da8698f78a02a39d9130cfc8cb9b278dc4b01",
+  "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T121047-6ba6691d855d"
   ],
-  "scope_released": false
+  "blocker": "Target other computer identity and actual access to fixed external volume / exact remote inputs missing; read-only recovery not attempted on second device",
+  "other_machine_recovery_verified": false
 }
 <!-- lei-coordination-json:end -->
 
