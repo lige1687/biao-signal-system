@@ -1,0 +1,87 @@
+{
+  "checked_at": "2026-10-10T14:44:17.008278+08:00",
+  "reviewer": "/root/remaining_goal_readiness",
+  "model": "gpt-6-sol",
+  "scope": "Read-only project and known runtimes/worktrees/cache footprint plus targeted clean coordination worktree; no deletion/migration/config changes",
+  "capacity_snapshot": {
+    "at": "2026-10-10T14:37:00+08:00",
+    "internal_free_bytes": 17247432704,
+    "external_free_bytes": 569483460608
+  },
+  "directory_rounded_GiB": {
+    "repository": 55,
+    ".codex/worktrees": 21,
+    "scripts/agents": 9.4,
+    ".biao": 8.9,
+    "docs/experiments/raw": 5.5,
+    "user_codex_worktrees": 6.1,
+    "active_codex_runtimes": 1.5
+  },
+  "protection_decisions": [
+    "Frozen raw, active runtimes/databases/sessions are not cleanup candidates",
+    "Five scripts/agents worktrees have distinct unsaved states; news-agent sample had27 tracked modifications",
+    "Four remote-astra recovery/acceptance copies contain distinct states and deliberate deletions; old report says not cleanup-ready"
+  ],
+  "targeted_candidate": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lei-coordination",
+    "du_kib": 1967536,
+    "head": "23dabe49f62b9a759d11bb87281d82902cccb61c",
+    "registered": true,
+    "detached": true,
+    "locked": false,
+    "prunable": false,
+    "tracked_status_clean": true,
+    "untracked_and_ignored_empty": true,
+    "head_is_ancestor_of_live_remote_coordination": true,
+    "remote_checked_commit": "5843cb5fcb0029ae275b4259d88f68de16347ac2",
+    "unique_commits_found": false,
+    "lsof_sample_open_files": 0,
+    "related_processes_sample": 0,
+    "eligible_for_immediate_deletion": false,
+    "why": "Exact checkout still registered and previous owner explicitly preserved worktrees; retirement/current-use confirmation not recorded",
+    "recoverable_proposal_if_retired": "Record HEAD/current clean state and confirmed owner release; then Git-managed worktree removal only with human deletion confirmation; can recreate same path with detached checkout at exact head",
+    "free_gain_not_guaranteed": "APFS clones/snapshots may retain blocks; du allocation is not promised capacity release"
+  },
+  "original_mac_storage_scope": "completed; worktrees/raw/DB/env/sessions deliberately preserved",
+  "files_modified_by_reviewer": 0,
+  "deleted_by_root": 0,
+  "current_recovery_disk_decision": "25 reconstructed inputs are on verified external drive; newest capacity sample about15.21GiB internal, above15GiB advisory but close. Current bounded task only small receipts and5GiB minimum, so it fits. No claim of capacity reclaimed; do not delete protected objects to chase15GiB.",
+  "first_priority": "Keep new large data and temporary restore files on fixed external storage; exact authorizations retained; no unattended disk cleanup",
+  "recent_capacity_followup": {
+    "at": "2026-10-10T14:47:07.336192+08:00",
+    "reviewer": "/root/remaining_goal_readiness",
+    "read_only_scan": "Selected repo .git/worktrees/agents/biao/cache plus user Codex/runtime paths; recent30min >50MiB ordinary files, no external symlink following",
+    "new_over_50MiB_files_found": 0,
+    "known_new_file": {
+      "path": "~/.codex/cache/remote_plugin_catalog/2064913a4048a7a6.json",
+      "bytes": 33465995,
+      "born": "around2026-10-10T14:44+08:00"
+    },
+    "active_files": [
+      "~/.codex/thread_history_1.sqlite approx1.594GB",
+      "~/.codex/logs_2.sqlite approx454MB",
+      "active session JSONL approx76.4MB"
+    ],
+    "active_file_growth_not_quantified": true,
+    "old_git_pack_timestamps_touched": "Seven72–581MB packs old birth dates Sep13–Oct8, updatedmtime around14:39; not evidence of fresh1.55GB allocation",
+    "no_git_fetch_or_pack_process_at_inspection": true,
+    "latest_df_data_free_kib": 15951444,
+    "capacity_drop_cause": "UNKNOWN; bounded scan cannot quantify active database growth or outside-scope system/app activity",
+    "no_active_db_or_old_pack_cleanup": true
+  },
+  "local_small_files_growth_before_final_publication": {
+    "nominal_bytes": 123850,
+    "method": "Sum new files plus positive changed-file growth versus prior task commit; excludes Git internals, Codex live logs and system changes",
+    "baseline_commit": "a56da8698f78a02a39d9130cfc8cb9b278dc4b01",
+    "new_paths": [
+      "docs/experiments/raw/frozen-input-recovery-2026-10-10/local-restore-storage-preflight.json",
+      "docs/experiments/raw/frozen-input-recovery-2026-10-10/local-restore-independent-review.json",
+      "docs/experiments/raw/frozen-input-recovery-2026-10-10/local-restore-storage-after.json",
+      "docs/experiments/raw/frozen-input-recovery-2026-10-10/local-restore-route-plan.json",
+      "docs/experiments/raw/frozen-input-recovery-2026-10-10/local-restore-authorization-readback.json",
+      "docs/experiments/raw/frozen-input-recovery-2026-10-10/local-original-state.json",
+      "docs/experiments/raw/frozen-input-recovery-2026-10-10/disk-management-audit.json",
+      "docs/experiments/raw/frozen-input-recovery-2026-10-10/local-restore-execution.json"
+    ]
+  }
+}

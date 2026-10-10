@@ -1,3 +1,15 @@
+## 最新：本机直接恢复已验证
+
+25份原件完好；已从备份/准确远端版本重建25份到外盘新目录，25/25独核通过。当前本机恢复完成，异机未测试保留为原范围限制。新数据走外盘，本机只存小回执；disk-management-audit记录磁盘状态及工作区保护。
+
+- local-original-state.json：恢复前25主路径实际完整性。
+- local-restore-route-plan.json、local-restore-storage-preflight.json、local-restore-storage-after.json：固定设备、8MiB外盘/1MiB内盘计划及真实容量快照。
+- local-restore-authorization-readback.json：用户直接恢复指令及原目标实际scope/start读回，旧完成标准保持。
+- local-restore-execution.json、local-restore-independent-review.json：25份实际重建、可读性及逐项独核，包含工具缺失的准备失败和修复。
+- disk-management-audit.json：只读尺寸/依赖/占用/原负责人范围及准确候选；未删除资料。
+
+---
+
 # 原八目标：冻结来源恢复与必要接续
 
 23份外盘副本已按批准范围补齐，逐份两次读回及独立检查均通过；连同2份准确远端Git来源，25份均有独立恢复位置。另一台电脑恢复仍未验收。原八目标已有结论、失败和预算保留，本轮不重跑市场研究。
