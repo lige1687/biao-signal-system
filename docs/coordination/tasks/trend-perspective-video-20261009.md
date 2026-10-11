@@ -1,3 +1,11 @@
+# 小红书新版已提交，抖音窗口受并发切换干扰 2026-10-11T23:47:59.595075+08:00
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status blocked（Chrome前台反复切换）；scope_released false。checked_coordination_sha 60e6add4f0f43324b03d5fe5fb5590e86ddaa98f；checked_at 2026-10-11T23:47:59.595075+08:00。已读COORDINATION1.1、自身、cash-position-video-20261009、research-dispatch-controller；只写自身外盘v16与本协调记录，未改他片或Skill。共用Chrome无法可靠并行输入，已请用户暂停其他浏览器操作并保持抖音前台。
+- 小红书准确v15视频120秒已提交，成功页和管理页2026-10-11 23:12审核中读回；实际frame-1240封面保存，八个手动章节与总结保存后重新打开逐项核验。简介Astra生成、普通vibe知识大赏与真实话题趋势交易/投资学习、AI声明已核。回执v16/checks/xhs-submitted-20261011.png与publication-receipt-20261011.json。尚未核公开播放、原稿未删除。
+- 抖音管理页已恢复，旧趋势片02:05、2026-10-10 16:38已发布现场可见。准确v15文件选择后上传页切换停滞，刷新后实际发布表单恢复；标题输入读回，简介粘贴未生效，AI声明弹窗打开后窗口被切回另一小红书新上传页，未提交。用户解锁Mac后继续；扩展nameSession仍30秒超时，不盲重试。前台恢复后先核现有视频/标题再补简介、真实话题、封面、章节和声明，不重复上传。
+- B站既有新版BV1A4pn6REHf已通过并公开播放，原BV1ehpv6EEUq仍在；三平台替换未完成，全部原稿未删除。媒体成果分支c743614c6381dee1a34551e450d362fc05e0fc9d保持。未改策略/实验/安装/付费/账户权限；外盘23:44固定存储入口通过，当前平台小回执只在外盘。
+
+---
+
 # 新版B站已公开，小红书上传后控制再受阻 2026-10-11T22:44:29.951154+08:00
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status blocked（Chrome操作通道不稳定）；scope_released false。checked_coordination_sha cbf1641f26dae64c8d89d200dd11efd7c22722b9；checked_at 2026-10-11T22:44:29.951154+08:00。已读COORDINATION1.1、自身、cash-position-video-20261009、research-dispatch-controller最新相关范围；只写自身外盘v16和本协调记录，不改他片，前台共享浏览器不可并行可靠操作。
 - B站准确v15云草稿3975617完成真实封面frame-1240.png并发布：BV1A4pn6REHf，2026-10-11 22:33:08，管理页已通过、120秒；公开页实际播放和标题/简介Astra生成及普通vibe文字读回。原BV1ehpv6EEUq仍在，未删除。
