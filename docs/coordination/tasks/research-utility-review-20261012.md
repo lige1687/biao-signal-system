@@ -1,3 +1,14 @@
+# 人类已确认切换，继续运行与Web独立验收
+
+- task-id: research-utility-review-20261012；owner: 本用户会话 root；status: active；scope_released: false；updated_at: 2026-10-12T01:08:11.535861+08:00。
+- checked_coordination_sha: 2cc583a4535a465b0c1091c765b97017b9925993；checked_at: 2026-10-12T01:08:11.535861+08:00；已读COORDINATION及本任务、investor-workspace-simplification-20261012、本轮中控沿用原已读状态；与实现者范围无冲突。
+- 人类对准确卡直接答复“切换到已验证的 DeepSeek（推荐）”。授权本应用切换至api.deepseek.com、保留旧配置、应用已验证接口修复、短暂重载本地后台；不购买额度，本次仅公开问题验收、不外发持仓。用户另要求实际验证Web Agent使用顺序与效果。
+- 已将人类原话/完整范围发给原实现者，仍由其唯一改本应用连接配置及代码/服务；root独立浏览器检查并只写自己的小验收记录。原方案准备就绪，不再重复询问已授权动作。
+- 验收：首页进入→公开问题→真实模型文字/无备用回答→刷新读回会话；已有同基金资料/计划/合成成交复盘证据继续有效。真实原计划未知不编造，真实交易0。
+- 当前等待实现者执行最小接入，随后复验并打开可直接看的结果；上一阶段模型阻塞已获得恢复授权，成功仍需实际运行证据。
+
+---
+
 # 实际页面独验通过，日常AI等待服务商决定
 
 - task-id: research-utility-review-20261012；owner: 本用户会话 root；status: blocked；scope_released: false；updated_at: 2026-10-12T01:03:10.990823+08:00。本轮使用闭环尚未全通过，不冒称完成。
