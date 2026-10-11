@@ -354,3 +354,8 @@
 - 原生Chrome核旧抖音7694957494266826034已发布，原稿编辑无视频替换入口；旧哔站BV1Vhpv6EE2p公开正常并定位原稿编辑链接。小红书最新作品未核；三个新版未上传/提交，旧作品均未修改或私密。
 - Chrome扩展2次连接超时；原生窗口后续连续全黑、发布页无正文，刷新/Escape未恢复，外盘保留黑屏证据。已向用户请求唤醒解锁Mac并保持Chrome打开；无法安全完成文件选择与发布验收，不盲点、安装或绕过。恢复后沿已明确授权继续三平台替换，不重复确认。
 - 固定外盘09:41身份available通过，未删资料、未改Skill/策略/他人任务/自动化。暂停是实际浏览器访问阻塞，不是发布完成。
+
+
+## 用户恢复Chrome并要求Astra署名，接续发布 2026-10-11T09:58:50.056927+08:00
+- active；stage replacement_publication；scope_released false；root唯一写者。checked_coordination_sha=9cf1c13bdba6a08065f88039ee7e37dc01cd26a4；checked_at=2026-10-11T09:58:50.056927+08:00；已读自身、original-eight09:50独立P1、trend-perspective09:55三Skill完成，无视频平台/本片范围冲突。
+- 用户明确Chrome已打开要求执行，文案加“使用 Astra 6 辅助制作”，沿原三平台替换授权与v15准确120秒原文件；写范围v16/本人replacement-publication小回执/进度及本协调文件不变。不改Skill/其他作品/永久删除。原生Chrome画面已恢复但上传导航尚未加载，扩展仍超时，继续受支持原生操作。
