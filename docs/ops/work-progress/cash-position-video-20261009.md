@@ -216,3 +216,7 @@ checked_coordination_sha=69265a5d8779d7aaad00a6148ca8e065df408c8e；checked_at=2
 Chrome扩展连接两次超时，改受支持原生Chrome读到上述资料后，发布页不再加载且连续截图全黑；刷新、Escape未恢复。已请求用户唤醒解锁Mac并保持Chrome打开。恢复前无法安全选文件和核发布状态，不重复盲点，不安装/改认证/永久删稿。恢复后继续原授权，不再重复批准。
 
 checked_coordination_sha=55f2f0e51a58f70e5d0ad60cac1fd5d60c77153d；checked_at=2026-10-11T09:48:58.501343+08:00；已读自身/COORDINATION1.1沿已读、original-eight09:39、trend-perspective09:44独立v13样例，无共享路径或平台作品重叠。范围仅本人v16/小回执/本进度与协调；外盘09:41固定UUID available/identity通过。当前发布未完成，暂停条件是浏览器控制恢复，不是创意待批准。
+
+
+## Chrome已打开，但发布控制仍失效 2026-10-11T10:00:22.391477+08:00
+用户确认Chrome已打开并要求执行，增加文案“使用 Astra 6 辅助制作。”已保存读回；原授权继续。扩展标签读取再次30秒超时，原生旧抖音作品可读，但导航上传后正文消失、连续黑屏；刷新、前置窗口和哔站替换页检查未恢复。请求用户手动打开抖音已知上传页帮助恢复控制，不再归因为未打开Chrome。新版三个平台仍未上传/提交，旧稿未改。checked_coordination_sha=d6d66bb1d0ffa4c1cf1b615f51ad3b35b791f4a0，已读original-eight09:50及trend-perspective09:58独立样例，无重叠；09:59固定盘身份available通过。暂停等待实际上传页可操作，非发布完成。
