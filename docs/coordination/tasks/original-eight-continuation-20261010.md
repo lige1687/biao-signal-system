@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "a648a392009764fa19c6f1041e0b860f376f4d64",
-  "checked_at": "2026-10-11T22:55:30.641707+08:00",
+  "checked_coordination_sha": "9f582ab9f9eaedd403ecfae13a84639e1e9a626b",
+  "checked_at": "2026-10-11T23:05:38.793375+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -71,7 +71,10 @@
     "docs/experiments/research-evidence-catalog-2026-10-07.md (only owned prefix)",
     "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/",
     "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-remaining-source-qualification-20261011/",
-    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/"
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/2019-detail-binding-amendment.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/collect_2019_detail.py",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/2019-detail-delivery.json"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -92,7 +95,8 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-e1-official-source-20261011/b4-e1-official-source-20261011-20261011T223841-0489602bf81d",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-515300-history-20261011/b4-515300-history-20261011-20261011T225524-8a998a51dc12"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-515300-history-20261011/b4-515300-history-20261011-20261011T225524-8a998a51dc12",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-515300-history-20261011/b4-515300-history-20261011-20261011T225524-8a998a51dc12/2019-detail"
   ],
   "scope_released": false,
   "question_ids": [
@@ -134,10 +138,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "a6590648a9ad6f7b5afbaa030b8394c84a1c3a57",
-  "scope_amendment": "Human continuousprogress andnecessaryaddition authority: newdistinctsourcequestion5153002019-2026H1 cash/splitfields. Atmost1normalprimaryperiodiclistquery plus7missingannual/H1PDF,8directrequests. PreserveallE1/P1/Sept actualcosts andold7records; no strategy/science.",
-  "updated_at": "2026-10-11T22:55:30.641707+08:00",
+  "scope_amendment": "Only actual2019ad_id427893 onobservedofficialnoticedetails query interface, atmostdetail+oneexplicitPDF2requests. Old7actual preserved, old8cap recorded new9cap. No guessedPDF orunboundedJS/search.",
+  "updated_at": "2026-10-11T23:05:38.793375+08:00",
   "conflict_decision": "Actual read latest coordination and all thirteen related tasks; reviewed cash22:31 network repair and trend22:26 browser blockage. Neither shares our evidence files. Avoid global proxy/browser modifications and technical-factor-sequence C/hourly, risk-shape D3 owner scopes. Own root exclusively shared records.",
-  "current_work": "Root acceptsE1 andcoverage/recovery/archive. Sol mayexecuteonlynew515300-history privateleaf/externalroute afterfrozencontract+ready. Do notreuseunspentoldE1/P1balance. Otherfunds/originalR2remainclosed.",
+  "current_work": "Root accepts6reports/recovery andminimal2019detail. Sol separatelyvalidates9existingPDFoffline; LunaE1recoverydeliveredrootpending.",
   "paused_questions": [
     "博时沪深300ETF515130的2021—2024四全文未核，其中三入口缺失；实际403停止，合法正常官方访问或准确新原件可恢复对应问题",
     "其他份额调整渠道、供应商历史到达、E1实施/更正去重及完整14产品输入资格仍未证明，R2/科学未放行",
@@ -352,3 +356,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T22:55:30.641707+08:00 E1实施已核，继续515300原期间两字段完整性
 
 嘉实2025年报68页：p14已实施，p39三次日期金额与冻结记录一致，p9年度总额独核。下一项是此基金原2019-09-19..2026-06-30整段现金/拆分栏，已核2025不再取；固定新增2019—2024年报和2026中报共7份、一个本基金定期报告列表查询，最多8次直连，无自动重试/翻页。其余基金及B4真实计算不放行；发现与旧7事件冲突立即保留并报，不改旧表。本批旧2搜索+11直连及P1账41保持，独立新增源预算不冒充旧余额。外盘128MiB plan-only已绑定，小记录1MiB。
+
+## 2026-10-11T23:05:38.793375+08:00 515300六新报告已得，核2019准确公告详情
+
+新7直接请求取得6PDF，2019年条目id427893附件空。官方已保存fundAnn页真实示例为noticedetails.shtml?adId=197835，按该实际查询参数仅换为目录原id427893核公告，最多再2请求（详情+其中精确PDF），累计上限9不倒填原8。另四基金先复用实际9份旧原件，准确缺项待核。无原正式科研次数。
