@@ -119,3 +119,10 @@ checked_coordination_sha: f7c3cfc4d3fde574f1a5f1df1029aa72524e4cf1；checked_at:
 外盘/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/趋势交易/20261009-trend-perspective/v13-beat-driven-20261011；MP4 SHA 204e3e3530ace8aeb1f9480184cee3aac8e632f7213c39f3603eef9690808a10，工程ZIP SHA 5d2b9df05a1e9064a5ed743a7910aca45c075ada4ac5308b2e5ba1ae7f38527e；ZIP逐项读回同源，manifest存档。
 用户实际预览后“对，就这种卡点以及节奏紧凑……要放在Skill里边最优先的位置”，认可动态与节奏方向并授权Skill更新；已置顶code-explainer-video并合并tight-pacing/music-motion-sync稀疏卡点表述。强弱接力、短句稳定阅读、正常速度手机观感为默认，28点/15秒/音乐配色不固化。不扩片、不发布、不改memory/策略。
 checked_coordination_sha: e916cef4bc8b011e4aed122ce1f5e972dfabb462；范围更新7144ca8cd710b308927623299840f6960b8ea1ae已推核同；已读自身/现金发布阻塞不改Skill/original-eight独立P1，无冲突。所有权root；本次仅三Skill文件和两原索引。
+
+
+## 另一关键15秒v14交付 2026-10-11T10:05:19.653842+08:00
+用户明确要求另一关键15秒，本版选择价值判断衔接段：真实行情→图表让位→基本面/估值/宏观图标描线及落定→价格走势+价值判断→后续问题。保留v13认可的节奏、声音和黑金风格，不重复时钟主镜。本例没有估值，无新金融定量结论或真实买卖信号。humanizer-zh短句审阅保留意义。
+外盘/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/趋势交易/20261009-trend-perspective/v14-value-context-20261011；视频SHA 35cc3f7b55e76222befca951294e822e14e417e775825a0a7e229936bc110341，1279145B；源ZIP SHA 565401a965d3f59f9655a0eee7080e52f0fd7de29417fb1513cd4ac6d0a40d8b，27223469B；51个成员逐字读回，manifest归档。450帧15秒1080p30，容器15.019秒。20条真实OHLC与原CSV逐值一致；前置/时间表/公共文字/完整解码通过。605与390CSS宽正常1倍不静音完整播放ended=true、error=null。主句可见，日期/来源小字需放大；新样例主观审美和独立听审未通过，等待用户本段评价。
+首遍cues沿用旧scene引用失败，按同源event重建通过；初版图标静止间隙偏长，继续拆描线动作后重渲染，原片保留。可选tsc入口不在既有依赖中，未安装；实际打包渲染正常。
+checked_coordination_sha 09219aa44d52b8c083cb2e81e49144f1f8b5ab66；已读自身与现金10:00独立发布阻塞、original-eight独立P1沿既有，无路径冲突。写范围仅独立v14、本人两原索引/协调；Skill只读，未扩片、发布、安装、删除或改策略。本次源和媒体可继续复用，跨设备一键重建未验证。
