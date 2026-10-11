@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "84d06ed1f5ea4db31a12ac11f95f419730859d3e",
-  "checked_at": "2026-10-11T09:39:03.066112+08:00",
+  "checked_coordination_sha": "3ce4437fde7dde7271dd70dd0fabeced1d1ae66f",
+  "checked_at": "2026-10-11T09:50:00.093308+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -63,7 +63,12 @@
     "docs/experiments/weekly-two-etf-complete-account-2026-10-11.md",
     "docs/experiments/original-eight-open-work-review-2026-10-11.md",
     "docs/okr/RESEARCH_TODO.md",
-    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-local-access-preparation-20261011/"
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-local-access-preparation-20261011/",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-official-discovery-20261011/",
+    "docs/experiments/b4-source-access-preparation-2026-10-11.md",
+    "docs/experiments/registry.json (only own b4-source-access-preparation report entry)",
+    "docs/experiments/INDEX.md (only own new report row)",
+    "docs/experiments/research-evidence-catalog-2026-10-07.md (only owned prefix)"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -80,7 +85,8 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-portfolio-startup-approved-20261011/weekly-portfolio-startup-approved-20261011-20261011T004758-eb42d2dc65e1",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-complete-account-20261011/weekly-two-etf-complete-account-20261011-20261011T005441-039d9543f167",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/eight-goal-idle-input-recovery-20261011/eight-goal-idle-input-recovery-20261011-20261011T020139-697075e68738/recovery-proof",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011"
   ],
   "scope_released": false,
   "question_ids": [
@@ -102,9 +108,11 @@
     "new-idle-account-input-recovery-20261011",
     "b4-510300-exact-evidence-reuse-20261011",
     "b4-missing-access-guards-20261011",
-    "b4-saved-official-discovery-proof-20261011"
+    "b4-saved-official-discovery-proof-20261011",
+    "p1-real-official-discovery-prerequisite-20261011",
+    "b4-new-essential-source-recovery-20261011"
   ],
-  "shared_write_owner": "root only new B4 preparation records and owned progress; no shared registry/API change before acceptance",
+  "shared_write_owner": "root only own new report/registry entry/INDEX row/catalog prefix/progress and original goal evidence notes; agents distinct new leaf paths",
   "goal_ids": [
     "okr-ff1e0a86fbac",
     "K-data-boundary",
@@ -115,10 +123,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "79aed39a144454ba05cba5551d8754c52c791f66",
-  "scope_amendment": "Only the exact old blocked P1 prerequisite: saved official discovery/pagination evidence and missing offline visit-limit/replay guards. Original old manifests/adapter/ledger/targets/tests remain read only; root writes new small prep records/scripts and progress. Zero network, true science, real R2, account reruns or old-suite reruns. No general platform or factor variant.",
-  "updated_at": "2026-10-11T09:39:03.066112+08:00",
-  "conflict_decision": "实际fetch84d06ed1f5ea4db31a12ac11f95f419730859d3e，自本任务上次结案无其他任务变更；13相关任务与规则实际字节指纹已核。两子Agent写不同新叶文件，旧B4与所有其他owner文件只读，主HEAD/index不动。",
-  "current_work": "准备两Sol独立本机合同：精确访问限额/重放检查，保存官网字节所能证明的十五年度发现路径；root独占协调及当前进度。能力判断不是旧闭案重复计算，原已接受收益/资金/恢复全部复用。",
+  "scope_amendment": "New explicit human-authorized P1 official discovery prerequisite. Five exact intra-P1 query-slot transfers in a NEW targets version, aggregate10/26/44 and original resource/hop target caps unchanged; preserve old blocked plan. Old source files read only. Root accepts/archives report and appends evidence notes only to own original goals, no acceptance/production/science/R2/E1/other9 histories.",
+  "updated_at": "2026-10-11T09:50:00.093308+08:00",
+  "conflict_decision": "已实际读237389d1..3ce4437f远端两视频差异：现金原作品替换发布当前浏览器阻塞，趋势v13样片活动；二者只在各自媒体/小索引/协调文件，与本P1资料源和恢复范围无重叠，保留其owner/status。十三相关任务将由helper实际字节读回；root独占本任务新报告/API/登记。",
+  "current_work": "两项本机结果已经root独立核对；根冻结新P1累计真实访问合同，Sol从已存官方准确入口补真实结果/分页/报告链接，另一Sol只补六真实依赖HTML和新守卫原始日志最小副本/恢复；独立文件不重叠，root唯一共享写者。",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -269,3 +277,7 @@ Astra已定位原B4精确合同，旧5740同值并不解决未复权与登记定
 ## 2026-10-11T09:39:03.066112+08:00 用户再次要求持续，补旧B4来源访问两个具体本机准备缺口
 
 用户再次要求无卡点就持续，本轮继续具体已有阻塞的本机必要准备：旧Gate0B未核exact10 hop、P1 44和总52下一跳前拒绝与完整目标重放，原4测试不覆盖；另保存官网真实bytes是否可提供全年公告/分页证明尚需具体抽取。各0新源/0真R2/0模型账户，地方检验固定1次加最多1有因客观修正，旧21/4/46不重跑/不改，真实预算不增。两问题不依赖异机与缺PDF，可独立执行。策略文档实际SHA保持确认值，改动只服务资料取得的研究验收层，不改道路/路牌/触发/失效/规则。当前盘身份合格，内盘17309761536B健康、外盘567656448000B，新普通日志/临时夹具4MiB外盘、小文档记录512KiB内盘，不将空间变动当本任务清理。先成功协调推读回和dry-run ready再派发。
+
+## 2026-10-11T09:50:00.093308+08:00 按最新人类授权接续P1真实官方查找补证及最小输入恢复
+
+当前人类明确持续原八目标并允许自主必要追加、独立并行；旧Pro暂停作为当时结论保留，不当永久禁令。Astra/high对必要公开官网补证和五个P1内部槽转移分别独立判断可在新授权下执行，无需重复问继续。修订只有515130-2022→518850-2021、515130-2024→518850-2022、515170-2023→518850-2023、516220-2023→588000-2022、516220-2024→588000-2023，each1；保留原targets不改，各资源/逐跳cap不增，无E1转移。公告/翻页仍search记账，真实每跳包括失败/重定向/重试共用原剩余P1额度，不能另开免费预检。只先取得准确发现事实，完整取件/R2另待实际资料和余额root复核，不弱化14标的/五因子/82天/科学条件。root已人工另数target11/P1第45/总53拒绝日志、16目标52跳全配对，六保存源实际SHA/行证据相同；旧测试不重跑。未联网/未改生产，目前这一实质下一动作正冻结准备。
