@@ -11,3 +11,13 @@
 
 ## v02素材修订 2026-10-12T00:34:43.913670+08:00
 用户反馈纸/字偏干，实际补3类素材：原创AI祖孙递盒情境、Odean原论文标题页局部、巴菲特2015照片及1989信中12词节选。新版三张工程实帧与组合预览已导出打开，文字/来源年份检查通过，静帧审美未确认，15秒未渲染。checks/manifest.json保存全部SHA；assets.json含出处/许可/尺寸/用途。原v01保留；只改自身定位与记录。下载403依站方UA提示修复为200，未绕过权限。生成服务的原图保留本机工具目录，采用副本在外盘。下一步v02确认后进入音乐/SFX的15秒。checked_coordination_sha a30e133ba24b08eb2ee9d3c4be3c7331e137fab0。
+
+## 完整片交付 2026-10-12T00:52:41.397523+08:00
+
+用户认可v02并直接要求完整片及素材Skill增量。本期105秒1080×1920/30fps成片、AAC音乐/51项原创音效与19文件工程包完成。v01/v02保留。用户整片观感待验收，未发布、未新录旁白。
+
+关键帧、全解码、实际播放器1x从0至105秒ended、同源时间表/公开文字/前置材料/仓库归置检查通过。ffprobe缺失，使用ffmpeg媒体信息与浏览器元数据替代，失败记录保留；独立听审未确认。ZIP逐项SHA匹配。视频SHA 13fb161b3485e040b590b4662cb3bca099f91b035041b585b378da3cdf5267a0。详细证据见外盘checks/validation.json及manifest.json。
+
+Skill实际文件新增两段主动选取/生成叙事素材要求；差异核对只有4行插入。该Skill原本未跟踪，未将他人既有全部内容混入提交；本分支只保存准确asset-requirement.patch供接手应用。当前Skill SHA 961c5be70c3a170bdeb9d2ec0906cf533ac2e324b5b10e4c8a8d752ebaaf757c。
+
+checked_coordination_sha 0e0ae4d6a1f00c5595495428eaa005bc2e111158；已读COORDINATION、自身及本次新增investor-workspace-simplification-20261012、research-utility-review-20261012、trend-perspective-video-20261009相关范围，与视频/Skill修改无冲突。root唯一写者，无子代理；费用未知。外盘身份容量核验通过，Git仅小记录/补丁，媒体工程在固定外盘。下一步仅按用户对完整片反馈做具体修订，无自动发布。
