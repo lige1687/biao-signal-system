@@ -225,3 +225,8 @@ checked_coordination_sha=55f2f0e51a58f70e5d0ad60cac1fd5d60c77153d；checked_at=2
 ## 抖音用户提交、其余发布连接阻塞 2026-10-11T10:19:57.240761+08:00
 用户自行完成抖音新版投稿，后台实际显示02:00/10月11日10:14/审核中；旧现金行未见并有删除成功提示，不冒称精确ID删除核验。小红书lige7旧02:05/10月10日15:10已核；投稿导航正文消失，B站原稿编辑页黑屏。扩展侧栏加载后getTab仍30秒失败。小红书和B站新版未上传/提交，本轮未删除任何旧稿。用户已授权两平台新版投稿，正文Astra6和普通vibe沿用；删除旧稿为当次新增范围，永久删除最后动作另需当时确认。
 checked_coordination_sha=e2fe0f3d5571b4403c80446238b2c20194b3b320；已读自身、COORDINATION1.1、中控、original-eight本轮增量及此前trend-perspective，无冲突。固定外盘10:15可用身份正确；最终视频14622456B/hash bf467c5c90e858600b139e0c2ccaea29328b889177bb2c97c38785e8e3aa8d62读回同。当前暂停恢复Chrome网页控制连接，不是发布完成。
+
+
+## 现有VPN实测失败，发布上传仍受阻 2026-10-11T21:50:06.964794+08:00
+用户已授权AI开启增强代理并继续。Shadowrocket已配置VPN可启动，但两种现有路由测试均出现HTTPS TLS失败；已停止测试连接、恢复配置模式，ClashX原系统代理未改。Chrome扩展仍30秒fetch失败。原生Chrome现可进入lige7新版上传页；最终v3 SHA读回同，文件窗选中准确v3，实际截图/AX打开按钮disabled，网页未收到文件。路径输入/双击/AX打开/Raise均未完成上传。小红书、B站新稿仍未上传提交，旧稿未删；旧XHS编辑未提交。
+新增官方Clash Verge Rev安装、现有ClashX配置导入与TUN测试已提出具体范围确认，尚未执行。待确认原因是项目仓外修改规则及网络权限范围，原发布授权继续。checked_coordination_sha=db73c4d0dfa90c60ff8292caf8de2ba13ef7b59a；已读自身/COORDINATION1.1/中控/original-eight/trend-perspective，未重叠；协调记录普通推送读回 6c5abbbf3d893554088ae5edb567da7a00ebed95。固定盘21:45可用身份通过。

@@ -1,8 +1,8 @@
 {
   "task_id": "cash-position-video-20261009",
-  "checked_at": "2026-10-11T10:19:57.240761+08:00",
-  "checked_coordination_sha": "e2fe0f3d5571b4403c80446238b2c20194b3b320",
-  "status": "paused_browser_connection",
+  "checked_at": "2026-10-11T21:50:06.964794+08:00",
+  "checked_coordination_sha": "db73c4d0dfa90c60ff8292caf8de2ba13ef7b59a",
+  "status": "paused_connection_repair_approval",
   "authorization": "用户要求发布新版代替旧视频；三平台沿用已授权范围",
   "source": "/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/投资心态/20261009-cash-position/v15-full-remake-20261011/out/现金也是一种仓位-完整版-v3.mp4",
   "sha256": "bf467c5c90e858600b139e0c2ccaea29328b889177bb2c97c38785e8e3aa8d62",
@@ -41,8 +41,18 @@
       "old_modified": false
     }
   },
-  "blocking": "用户已发布抖音；原生读到02:00、10月11日10:14审核中，旧现金行缺失且删除成功提示。小红书旧02:05作品发布于10月10日15:10可读，新版未上传；投稿入口URL变化但正文消失。B站原稿编辑页无正文且截图全黑。扩展侧栏恢复可读后getTab仍30秒失败。已请求用户恢复Chrome控制连接；不能可靠上传、配置、提交或删旧。",
-  "next": "恢复Chrome网页控制后在当前上传表单核对标题正文、正式话题、AI声明、封面章节，再提交并核对；然后B站和小红书替换。",
+  "blocking": "Chrome扩展30秒fetch失败；现有VPN连接后HTTPS失败，测试VPN已断开并恢复配置模式。原生XHS上传页可读，但v3已选中后系统打开按钮disabled，网页未收到文件；没有新增投稿或删旧。已请求确认官方客户端安装、现有配置导入与TUN测试。",
+  "next": "收到新增网络修复范围确认后再安装；恢复上传控制后完成XHS与B站原授权投稿，再逐项核旧稿删除。",
   "attribution": "使用 Astra 6 辅助制作。",
-  "deletion_request": "用户今天要求删除对应旧稿；本轮未执行删除。B站/小红书永久删除最终动作须按工具规定当时确认。"
+  "deletion_request": "用户今天要求删除对应旧稿；本轮未执行删除。B站/小红书永久删除最终动作须按工具规定当时确认。",
+  "network_repair": {
+    "vpn_trial": "connected_but_https_failed",
+    "trial_vpn_current": "stopped",
+    "shadowrocket_mode": "配置",
+    "shadowrocket_selected_node": "Hongkong 021",
+    "clashx_system_proxy": "unchanged",
+    "new_client_installed": false,
+    "approval_pending": true,
+    "coordination_commit": "6c5abbbf3d893554088ae5edb567da7a00ebed95"
+  }
 }
