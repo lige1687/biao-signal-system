@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "ca7492423f5927cd796aaaad40ad9d9fee54ee5c",
-  "checked_at": "2026-10-11T10:39:37.116535+08:00",
+  "checked_coordination_sha": "e926d2238385611f70e22b51ce38757fa729553f",
+  "checked_at": "2026-10-11T21:40:44.772117+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -127,10 +127,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "0bb60b542eb62ac9d2e08e6c276c00d5c1c3172f",
-  "scope_amendment": "One exact publicly referenced Guotai common.js read only under existing5162202023 unusedresource/hop and unchanged global29/26/44. No script execution/report query is authorized inthis binding stage. Existing corpus preserved; Bosera403/E1/full14/Gate1B/R2 stayclosed. Root revisits concrete savedpage script reference rather than treating firstsearch_index missingimplementation as permanentblock.",
-  "updated_at": "2026-10-11T10:39:37.116535+08:00",
+  "scope_amendment": "Guotai common.js actualtext binds initialanonymousPOST exact officialfts.search_report API/body. OneboundPOSTquery/1hop,0resources, explicit unused2024hop→2023hop transfer; global29/26/44unchanged/current15q18resources33hop. No automaticretries, redirectnextrequest, HASHCASHchallenge solve, JS execution/auth/privatepath orPDF inthisstage.",
+  "updated_at": "2026-10-11T21:40:44.772117+08:00",
   "conflict_decision": "root已fetch实际最新ca749..remote无增量，十三相关任务及COORDINATION实际hash/bytes核回，源资料/报告范围仍无媒体或其他任务冲突；复用已读语义。唯一writerroot。",
-  "current_work": "八完整PDF两类事后零事件根40页及Astra44页已独核；具体更名反例保留。190必要材料逐三路径内容/stat恢复全部通过。savedGuotaiHTML explicitly references common.js likely transport provider; exactone-resource bindingstage necessary before finalsourcegap conclusion. Rootsharedreport/APIarchive stillpending; no scientists/background.",
+  "current_work": "8annuals/190recovery alreadyindependentlyaccepted. Onecommon resource actual200383225B/old32prefixexact. Rootactualread397/541–582 bindsPOSTpath/body/emptyheaders andchallenge auto-retrybranch suppressed. Singleexactquery canreduceoriginalmissing516220years; awaitingtruefirstreply; sourcepartialnotfull14/R2release.",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -301,3 +301,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T10:39:37.116535+08:00 八年字段/190必要恢复已独核，核官网明确公共脚本的缺失请求实现
 
 同源新明确线索，只核https://e.gtfund.com/Public/static/etrade/1/dist/js/common.js?v=hy187一次资源/一次跳，对targetP1-516220-2023既有空余资源2/hop1计费；不猜cochin地址，不读注释掉的cochin_async脚本，不执行JS，不发reportquery。若实现明确root另绑定可用请求合同，否则准确停止。已用15q17resources32hops不归零，全球余额14/9/12。
+
+## 2026-10-11T21:40:44.772117+08:00 公共脚本真实核出准确请求；仅一次官方报告查询
+
+新guotai-bound-query-targets只转P1-516220-2024一个unusedhop给2023，旧targets保留；同一真实ledger累计33续加1queryhop。首次请求keyword516220/page1/perPage10全部官网实际披露，不猜接口或参数。403/401/CHALLENGE/异常redirect保留停止，不自动重试或计算hashcash。实际响应解释root续核，科学次数0。
