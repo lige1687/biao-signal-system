@@ -1,3 +1,13 @@
+# 本轮收敛为先完成视频Skill  2026-10-12T01:10:07.922152+08:00
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status active；scope_released false。checked_coordination_sha 36262377f52b72bfe25f004251044faaa6ef562d；checked_at 2026-10-12T01:10:07.922152+08:00。已读COORDINATION1.1、自身、value-investor-satire-20261012、ai-sycophancy-video-20261012、research-utility-review-20261012最新范围；此前cash/nasdaq/dual-ma/history及中控沿已核。其他owner的素材段完整保留，新影片不接管，registry仅本人报告一键。
+- 用户确认“没有财经专业认证”；并明确本轮“目前就是先把…不应该出现在视频里边的内容…在视频制作Skill里边去收敛一下，去完成一下”。据此本轮完成内容审查Skill与必要留证；暂不进入视频重做、样片或发布，不把这句话记成新稿批准。后续重制应覆盖文稿、分镜、图表、字幕、声音和剪辑，不是只换词。
+- 实际已完成：官方规则核对；6条抖音/5主题，8份本地成片版本/102关键帧与全文稿及配文审查；现有Skill新增财经发布小节+两处路由、新参考；五主题内容修订候选已备，但尚未获确认/未生成新视频。专业财经发布资格不因改稿解决。
+- 准确范围仍为入口对应小节/两路由、新reference、本人报告/registry一键/INDEX一行/自身进度、独立外盘v17及原v16发布实际状态留证。审查来源和推测分开，不以免责声明/删名/谐音/换分区/反复重发绕审核。无策略变更、安装、删除或提交平台。
+- 检查已通过：Skill结构、本地引用、原创作优先级及他人素材段未变、登记其他键未变、归置。审阅页5主题54镜头/8张原片联系图实际打开，未见横向溢出。账号无财经认证据用户明确答复；准确处罚通知/ID、小红书完整盘点和完整音轨听审尚未取得，不宣称全部已确认违规。
+- 下一步：更新本轮用户答复与范围、保存准确成果分支并核远端，交付已落地Skill；不再索取视频制作确认。
+
+---
+
 # 全部已发布视频风险审查与重制准备 2026-10-12T00:48:03.382003+08:00
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status active；scope_released false；checked_coordination_sha 79ceec0ab8ded6d944218af5ebc1bfecf5451473；checked_at 2026-10-12T00:48:03.382003+08:00。已读COORDINATION1.1、自身、cash-position-video-20261009、nasdaq-story-video-20261009、dual-ma-video-copy-20261009、trend-trading-video、personal-quant-video-render-preview-rule、value-investor-satire-20261012、research-dispatch-controller、research-utility-review-20261012与investor-workspace-simplification-20261012相关范围。
 - 用户报告平台通知涉嫌高风险投资，并明确“已经发的视频里边，你可以都看看…足够的资料后沉淀到skill里边，然后把我们原来的视频都重新做一遍”。本轮先官方规则/账号与全部旧视频内容审查，补Skill，再制作原主题修订方案和可审查版本；停止原三平台继续发布。资质与违规通知准确作品尚未核，不能把风险分析冒称平台处罚原因。
