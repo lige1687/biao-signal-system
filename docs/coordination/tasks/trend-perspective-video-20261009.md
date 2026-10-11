@@ -1,3 +1,11 @@
+# 桌面控制异常待恢复 2026-10-12T00:07:55.065320+08:00
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status blocked；scope_released false；checked_coordination_sha 37a4eb5b07c80283a3d53fc19ddf47870d7bc299；checked_at 2026-10-12T00:07:55.065320+08:00。沿用已读COORDINATION1.1与自身、cash-position-video-20261009、research-dispatch-controller，只写自身回执和本记录。
+- 用户要求继续全部完成。本轮Chrome任务管理器仅筛选GPU进程并结束任务，PID64796→69750自动重启实际读回。此后Chrome窗口与活动监视器操作timeoutReached，浏览器nameSession30秒nodeRepl.fetch失败，访达只读快照仍可取；根因未确认，不宣称仅Chrome故障。未安装、改设置、清缓存、停止其他任务或修改权限。
+- 当前必要恢复条件：用户退出重开Codex，恢复浏览器/桌面控制连接；已合并提出这一请求，不需再授权发布。抖音草稿含测试正文，先恢复现有准确v15并替换正式配文、封面、章节再提交；本轮未发布、未删除。小红书审核中/B站公开为上轮核验，当前未重新验证。GPU恢复不能冒充发布完成。
+- 新证据外盘v16/browser-diagnosis-20261012.json与progress.md已读回；00:07固定UUID外盘身份空间可用。最近媒体成果commit仍c743614c6381dee1a34551e450d362fc05e0fc9d。重开后先核画面输入保存，再完成已授权发布。
+
+---
+
 # 竞争浏览器任务已暂停，抖音控制通道仍故障 2026-10-11T23:56:33.794506+08:00
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status blocked（Chrome控制与页面渲染）；scope_released false。checked_coordination_sha 9e91e7e12b0ba84f2654dd7d00a87ab59062fc0a；checked_at 2026-10-11T23:56:33.794506+08:00；已读COORDINATION1.1、自身、cash-position-video-20261009、research-dispatch-controller。只写自身v16回执与本任务记录，不改他片。
 - 用户“你去停呗？”明确授权后，已向现金片线程01a12122-f90f-7e52-81dc-a20f9df3fa4c发送停止浏览器操作的消息；对方明确确认暂停Chrome/CUA，保留现金片草稿。竞争问题已确认并停止，不宣称所有浏览器故障已修复。
