@@ -230,3 +230,11 @@ checked_coordination_sha=e2fe0f3d5571b4403c80446238b2c20194b3b320；已读自身
 ## 现有VPN实测失败，发布上传仍受阻 2026-10-11T21:50:06.964794+08:00
 用户已授权AI开启增强代理并继续。Shadowrocket已配置VPN可启动，但两种现有路由测试均出现HTTPS TLS失败；已停止测试连接、恢复配置模式，ClashX原系统代理未改。Chrome扩展仍30秒fetch失败。原生Chrome现可进入lige7新版上传页；最终v3 SHA读回同，文件窗选中准确v3，实际截图/AX打开按钮disabled，网页未收到文件。路径输入/双击/AX打开/Raise均未完成上传。小红书、B站新稿仍未上传提交，旧稿未删；旧XHS编辑未提交。
 新增官方Clash Verge Rev安装、现有ClashX配置导入与TUN测试已提出具体范围确认，尚未执行。待确认原因是项目仓外修改规则及网络权限范围，原发布授权继续。checked_coordination_sha=db73c4d0dfa90c60ff8292caf8de2ba13ef7b59a；已读自身/COORDINATION1.1/中控/original-eight/trend-perspective，未重叠；协调记录普通推送读回 6c5abbbf3d893554088ae5edb567da7a00ebed95。固定盘21:45可用身份通过。
+
+
+## 回到既有ClashX，客户端已按用户要求卸载 2026-10-11T22:31:59.388518+08:00
+- checked_coordination_sha=326b39065c9493c6a8135ad45a1ef12d35163fff；checked_at=2026-10-11T22:31:59.388518+08:00；已读COORDINATION1.1、自身、中控、original-eight22:17完成及trend-perspective独立范围，无文件冲突；仅本人记录/v16。
+- Homebrew官方Clash Verge Rev2.5.8实际安装成功，本地配置按官方PrfItem结构导入，原源SHA不变；TUN提示需管理员服务，提出具体确认时用户纠正“就用clashx不行吗”并“删了”。已brew uninstall成功，/Applications/Clash Verge.app不存在；未安装系统服务/开启TUN。原ClashX rule/7890保持，现有配置未改；应用设置和外盘安装缓存留存，未宣称残留全部清除。
+- 发现macOS文件选择服务22:24与Chrome22:23实际崩溃记录；文件服务故障线程含IMK输入事件，原因尚未确定，不将它归因网络或模型。原生XHS新上传页最新黑屏；未投稿或删除旧稿。
+- 对工具同款Node24.21.0临时指定现有ClashX7890，chatgpt.com403/github.com200，可收到响应；真实Chrome listTabs仍30秒fetch失败，未声称已修复。最小三个环境变量修复计划保存在v16/network-repair/clashx-proxy-repair-plan.json，尚未写仓外config。按用户仓外修改约束已发具体确认，等待仅该配置范围；发布权限无需再问。
+- paused；scope_released=false；小红书/B站new_upload=false/new_submission=false，旧稿未删；新版v3不重做。
