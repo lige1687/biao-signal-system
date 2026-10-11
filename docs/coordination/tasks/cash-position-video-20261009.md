@@ -346,3 +346,11 @@
 - 范围外盘v16-replacement-publication-20261011发布证据/封面/回执，原v15媒体只读；本机docs/ops/media/cash-position-20261009/replacement-publication-20261011.json及本人work-progress、协调仅本文件。基线成果af082a14e66ac4a852f073a1e4e75cc63783d0ef；不改Skill/策略/他人平台作品。
 - 09:41固定UUID/available/identity_ok通过，外盘567655661568B；预计新普通记录封面<50MiB直接外盘，本机小索引<150KiB。浏览器扩展连接失败，已通过受支持cua原生Chrome读到原现金稿02:05、10月10日16:45已发布，纠正旧回执SMS未完成状态，尚未修改。
 - 验收准确账户/原稿、120秒新版上传/提交、正文话题与章节读回、真实审核/公开状态与旧稿替代回执；平台不支持的入口明确记录。验证码/登录等实际必要人类动作时交接；不自行绕过，不把上传当发布。
+
+
+## 替换发布受浏览器阻塞 2026-10-11T09:49:27.951828+08:00
+- paused；stage=replacement_publication_browser_unavailable；scope_released=false，仅保留本人独立记录与目标作品；owner root不变。checked_coordination_sha=55f2f0e51a58f70e5d0ad60cac1fd5d60c77153d；checked_at=2026-10-11T09:49:27.951828+08:00；已读自身、COORDINATION1.1沿既有、original-eight09:39、trend-perspective09:44独立v13样片，无重叠。
+- 成果codex/cash-position-video-20261009@43e861022833e38a804e2a7c641f4e18ca00509a已正常推送，远端SHA及两准确文件逐字读回。v16外盘发布正文普通vibe文字/8章已备；最终v15 120秒14622456B SHA bf467c5c90e858600b139e0c2ccaea29328b889177bb2c97c38785e8e3aa8d62核同。
+- 原生Chrome核旧抖音7694957494266826034已发布，原稿编辑无视频替换入口；旧哔站BV1Vhpv6EE2p公开正常并定位原稿编辑链接。小红书最新作品未核；三个新版未上传/提交，旧作品均未修改或私密。
+- Chrome扩展2次连接超时；原生窗口后续连续全黑、发布页无正文，刷新/Escape未恢复，外盘保留黑屏证据。已向用户请求唤醒解锁Mac并保持Chrome打开；无法安全完成文件选择与发布验收，不盲点、安装或绕过。恢复后沿已明确授权继续三平台替换，不重复确认。
+- 固定外盘09:41身份available通过，未删资料、未改Skill/策略/他人任务/自动化。暂停是实际浏览器访问阻塞，不是发布完成。
