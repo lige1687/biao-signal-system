@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "394ceabb82268d6732fed2c3f62534ed3b5bd666",
-  "checked_at": "2026-10-11T22:43:56.649515+08:00",
+  "checked_coordination_sha": "26077818ee21e22bc073051bb9396bce0c5bbff8",
+  "checked_at": "2026-10-11T22:49:03.461763+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -131,10 +131,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "a6590648a9ad6f7b5afbaa030b8394c84a1c3a57",
-  "scope_amendment": "Two exactwebqueries foundnoannual. Four actualprimaryJS200 nowprove publicmodule resolution and serviceconfig; nextsmallrequiredchain isfundindex module -> exactfund disclosure module -> read-onlylisting -> oneexactannualPDF. Human explicitly allowsnecessaryadditions; preserve2web+4direct used, noreset.",
-  "updated_at": "2026-10-11T22:43:56.649515+08:00",
+  "scope_amendment": "Actual10th response yields exact5153002025annual primaryPDF. Add exactlyonePDF GET to finish alreadyrequired outcome; all2search+10direct costs preserved. No further discovery/query permitted.",
+  "updated_at": "2026-10-11T22:49:03.461763+08:00",
   "conflict_decision": "Actual read latest coordination and all thirteen related tasks; reviewed cash22:31 network repair and trend22:26 browser blockage. Neither shares our evidence files. Avoid global proxy/browser modifications and technical-factor-sequence C/hourly, risk-shape D3 owner scopes. Own root exclusively shared records.",
-  "current_work": "Root only sourcecontinuation fromactual4JS withlimited sixadditionaldirectrequests, tenoverall; atmostonepublic515300reportlisting andone2025annual original. Sol localchecksfinished.",
+  "current_work": "Root exactonePDFGET11 only; officialquery1 acceptedtitle/product1510/date2026-03-30; then independentPDFidentity/implementationfields, recoveryandarchive.",
   "paused_questions": [
     "博时沪深300ETF515130的2021—2024四全文未核，其中三入口缺失；实际403停止，合法正常官方访问或准确新原件可恢复对应问题",
     "其他份额调整渠道、供应商历史到达、E1实施/更正去重及完整14产品输入资格仍未证明，R2/科学未放行",
@@ -341,3 +341,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T22:43:56.649515+08:00 E1官网公开加载链定向补足，保留全部累计次数
 
 2次定向搜索未返回目标年报；4次官网JS均200，已证真实模块路径组合与配置。按用户允许必要追加，为已定位公开基金公告链明确增加6资源、直连跳数上限8→10，最多一官方报告列表查询；不是重置旧预算。新的amendment绑定旧contract和当前ledger指纹，只读网站源码不执行，不接任何账户/交易接口、不改代理，不重试任何403。仍是唯一515300年报问题，科学0。
+
+## 2026-10-11T22:49:03.461763+08:00 嘉实目标年报原链接已定位，仅补一份原件
+
+实际官网POST741015 product_id1510 keyword2025返回17条/2页，首页第1条是准确2025年报，原链接已绑定。只增加1个资源和1跳取这份PDF（11/11）；不翻第二页，不重复已核分红公告，不做不存在更正的保证。2搜索、10直连已记账不重置。此前普通JS里captcha参数触发自写探测误判，已据200/applicationjavascript/源码对应方法只读纠正并保留原错误记录，未遇到或解决实际验证码。
