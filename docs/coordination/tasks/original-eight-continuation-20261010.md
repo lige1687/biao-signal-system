@@ -13,9 +13,9 @@
 {
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "bfedcf5e52b3a38dddc91f8a912fb53a598cbcd7",
-  "checked_at": "2026-10-11T22:17:37.522882+08:00",
+  "status": "active",
+  "checked_coordination_sha": "cb021a074315924db34e842a26f16497e6248e5c",
+  "checked_at": "2026-10-11T22:34:29.155689+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -69,7 +69,8 @@
     "docs/experiments/registry.json (only own b4-source-access-preparation report entry)",
     "docs/experiments/INDEX.md (only own new report row)",
     "docs/experiments/research-evidence-catalog-2026-10-07.md (only owned prefix)",
-    "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/"
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-remaining-source-qualification-20261011/"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -90,7 +91,7 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "question_ids": [
     "native-d-conditional-risk-20261010",
     "csi300-march-event-binding-20261010",
@@ -114,7 +115,9 @@
     "p1-real-official-discovery-prerequisite-20261011",
     "b4-new-essential-source-recovery-20261011",
     "p1-remaining-official-paths-addition-20261011",
-    "p1-eight-annual-retrospective-action-fields-20261011"
+    "p1-eight-annual-retrospective-action-fields-20261011",
+    "b4-e1-implementation-source-20261011",
+    "b4-two-action-coverage-composition-20261011"
   ],
   "shared_write_owner": "root only own new report/registry entry/INDEX row/catalog prefix/progress and original goal evidence notes; agents distinct new leaf paths",
   "goal_ids": [
@@ -126,11 +129,11 @@
     "D-evidence",
     "D-tracking"
   ],
-  "latest_result_commit": "06d875805c98ff47cf24d678af4e16de29ce3d86",
-  "scope_amendment": "All latestsource/recovery exactfiles archived, sharedwrite scope released afterboundedcompletion. No formalR2, newparameter, production/trade, newchat, automation, or deletion authorized byclosure. Original budgets/failures preserved: total20q21res41hop outof29/26/44; sourcebalance9/5/3 notnewpermission.",
-  "updated_at": "2026-10-11T22:17:37.522882+08:00",
-  "conflict_decision": "本轮交付前实际fetch远端bfedcf5e52b3a38dddc91f8a912fb53a598cbcd7，与最后登记无增量；十三相关任务及COORDINATION按本次helper逐项读取记指纹。各媒体发布和其他研究范围未触碰，root唯一共享写者，现释放本轮范围。",
-  "current_work": "Bounded source-and-recovery question complete; no executingchild or ongoingHTTP/science. 11completeannual PDFs cash/split-table evidence independentlyaccepted, 266minimum files actualsame-device backup/restore accepted; reportAPI and ownbranchreadback/5originalgoalnotes verified. This is not entireeightgoals completion or scientificstrategyproof.",
+  "latest_result_commit": "a6590648a9ad6f7b5afbaa030b8394c84a1c3a57",
+  "scope_amendment": "User持续推进剩下的哈 resumes only necessary bounded source qualification. Initial local-only E1 route/readiness and cash/split-only coverage composition, old all budgets and failures intact; later online only after exact route/budget contract. No science, strategy edits, trades, new chats, automation, deletion, or network settings.",
+  "updated_at": "2026-10-11T22:34:29.155689+08:00",
+  "conflict_decision": "Actual read latest coordination and all thirteen related tasks; reviewed cash22:31 network repair and trend22:26 browser blockage. Neither shares our evidence files. Avoid global proxy/browser modifications and technical-factor-sequence C/hourly, risk-shape D3 owner scopes. Own root exclusively shared records.",
+  "current_work": "Root verifies original criterion and exact sources; Sol agents local-only E1 minimal official route, and original14 coverage increment composition with per-input hashes. Root shared sole writer; other owners technical C/D untouched.",
   "paused_questions": [
     "博时沪深300ETF515130的2021—2024四全文未核，其中三入口缺失；实际403停止，合法正常官方访问或准确新原件可恢复对应问题",
     "其他份额调整渠道、供应商历史到达、E1实施/更正去重及完整14产品输入资格仍未证明，R2/科学未放行",
@@ -325,3 +328,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T22:17:37.522882+08:00 本轮十一年报指定字段与266文件恢复、报告和五目标登记结案
 
 根实际再提国泰三原PDF17页、旧2025p9及完整ledger41对账，39次200/1次403/1次TLS失败，old38prefix保持。原11年度仅现金及拆分栏，其他权益未排除，不改旧表或研究资格。新增76恢复run31350/backup31356/restore31358全部三路径内容/stat独核，加旧190累计266文件30241157B/套，两套60482314B固定外盘；无需换电脑做本机核对，异机验收仍未证明。报告SHAebd32ad6d8d299d6fd796848b72d405629f0a295824fa78de41e108722cb479c，报告API正文/列表实际吻合、归置通过。根自己误写515130名称已据旧年报改成博时沪深300ETF，保留中间提交和纠错记录，无源请求重跑。成果06d875805c98ff47cf24d678af4e16de29ce3d86已推/603文件远端核同，主HEAD18e64fa6/indexe93cdb1d保持。五原goal只note并actualreadback：factor132/K-data23/recovery20/D-evidence11/D-tracking12，其他字段与历史前缀不变。completed仅本有界问题和归档登记完成，不将整个原八目标、策略有效或异机恢复标完成；没有后台继续。
+
+## 2026-10-11T22:34:29.155689+08:00 接续E1实施来源与原14基金现金和拆分证据覆盖
+
+本轮延续用户持续推进授权。先并行两项零网络核对：515300实施/更正证据最小官方来源；旧14基金仅现金分红和拆分两个原合同类别的覆盖拼接。新取得十一年报不得因其他无关类别未证而被自动判无效，亦不得把两字段当全部企业行动或历史到达资格。保留原件/历史失败/累计源账本41hop20q21res和R2尚未放行。旧恢复266文件复用，固定盘身份已核，内盘18.94GB外盘565.68GB；不删除。必要联网由root明确冻结来源及差额后执行，不调用已403博时同路，不全库重验。
