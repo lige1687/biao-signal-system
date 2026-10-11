@@ -381,3 +381,9 @@
 - 成果1522454a6e3dd4532f57f4d74fb7003bb7502b69两准确小记录推送逐字读回。用户已提交抖音，02:00/10月11日10:14审核中；旧现金行无且删除成功提示，精确删除ID未独立核。不代替用户重投抖音。
 - 小红书旧稿身份和02:05时间已核；新版小红书/B站未上传提交，旧稿本轮未删除。原生投稿URL变化但正文丢失，B站黑屏；扩展侧栏加载后getTab仍30秒失败。请求用户恢复Chrome控制连接，许可已明确，不重复求发布确认。
 - 用户新增删除对应旧稿范围；平台永久删除最后动作按工具规定当时确认，不涉及其他视频/本机资料。恢复后直接沿v15最终hash和v16预备文案、正式话题、封面章节执行。
+
+## 连接修复实测与新安装待确认 2026-10-11T21:50:06.964794+08:00
+- paused；stage replacement_publication_connection_repair；scope_released=false；root唯一写者。checked_coordination_sha=db73c4d0dfa90c60ff8292caf8de2ba13ef7b59a；checked_at=2026-10-11T21:50:06.964794+08:00；已读COORDINATION1.1、自身、中控、original-eight最新有界查询与trend-perspective独立全片范围，无本片路径重叠。
+- 用户明确让AI开启增强代理并继续；现有Shadowrocket VPN两次已连接，但原节点与现有Hongkong021代理模式均无法建立公开HTTPS连接（TLS失败）。已停止测试VPN并恢复配置路由，ClashX原系统代理保持。新增代理应用/配置导入/TUN尚未执行，已向用户明确征求仅该新增范围的确认；不声称已修复。
+- Chrome扩展listTabs最新30秒nodeRepl.fetch失败；原生AX局部可操作，lige7已进入新版上传页。最终v3 SHA读回同；系统文件窗已选中v3，截图和AX均显示打开按钮disabled，网页读回未选择文件。路径输入、原生双击、AX打开、窗口Raise未产生上传，不能将成功工具返回当上传完成。小红书B站新版未上传/提交，旧稿未删除；旧XHS未提交本轮编辑。
+- 精确范围仍为v16外盘证据/回执、本人replacement-publication索引与work-progress、本协调记录。21:45固定UUID available/identity_ok通过。恢复条件：可用控制连接或文件上传路径；待确认后才增加官方客户端安装与网络路由范围。
