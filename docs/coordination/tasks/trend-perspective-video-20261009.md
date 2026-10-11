@@ -1,3 +1,14 @@
+# 财经视频Skill已完成（用户本轮限定范围） 2026-10-12T01:13:57.438485+08:00
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status completed（本轮Skill修订及审查记录）；stage finance_skill_ready；scope_released=true（Skill与报告本轮写入释放，原视频/发布权不移交）。checked_coordination_sha c219fa81609636cf5c6b61e78e60f54a5dfe2549；checked_at 2026-10-12T01:13:57.438485+08:00。已读COORDINATION1.1、本人，以及value-investor/ai-sycophancy/research-utility最新相关范围；先前cash/nasdaq/dual/history/中控已核，最新任务差异无本Skill同段修改。无子代理。
+- 用户已答复无抖音财经专业认证，并将当前范围限定为先收敛视频制作Skill。现有Skill增加财经发布小节/内容及发布两路由、新references/finance-publication-review.md。要求账号资格与内容分别核，审文稿+分镜+图表+字幕+音轨+封面配文的完整含义；不以历史/免责声明/匿名标的/换分区绕过；后续重做连图表和剪辑一起修。原卡点第一创作标准及他人素材段逐字未改。
+- 成果分支 codex/trend-perspective-video-20261009@4779b4c936b98f6cde20e9d4f46ffdc07df57328，远端SHA已核同，6个准确路径，仅本任务增量。共享Skill入口只提交相对c743614c的本轮增量，未混交其他owner未跟踪改动；本机完整Skill含他人素材增量且保留。新reference与报告远端逐字读回。主脏工作区未切换/暂存。
+- 实际证据：报告docs/experiments/finance-video-publishing-review-2026-10-12.md含一句话结论、来源与限制，registry仅新增自身键/INDEX一行，其他键不变。8个本地成片指纹、102关键帧/全文稿配文审查、5主题54段候选重制稿、官方规则页、8个手工反例和final-validation.json在固定外盘v17-finance-review-20261012。审阅页http://127.0.0.1:64985/review.html，真实浏览器5主题及8图已载入，无横向溢出；该页是审查/候选稿，不是新视频。
+- 检查：Skill quick_validate、引用、差异范围、原优先级/素材段保留、登记与归置通过；文字规则不冒称自动语义审核。源始终保留；无新视频、平台提交、申诉、删除、依赖安装、付费或策略改动。ffprobe初始路径/动态库失败后复用已有compositor工作目录完成检查，无全局安装；首次._元数据读取失败已排除说明文件，未删除。
+- 发布实况已纠正v16回执：B站新版BV1A4pn6REHf保留、旧BV1ehpv6EEUq已删除；抖音准确v15上传但未提交且仍有试验描述，不得发布；XHS本轮未重新验证。平台提示对应准确作品、XHS完整盘点、全部音轨听审及另外两平台账号资质未完成；不作处罚归因/全部可发保证。
+- 后续：按用户新的重制指令接续，不自动开拍/发片，不重复询问已回答的无财经认证状态。已备五稿未获批准，旧视频视觉认可不替代实质改稿认可；本轮Skill完成不冒充所有视频重制完成。
+
+---
+
 # 本轮收敛为先完成视频Skill  2026-10-12T01:10:07.922152+08:00
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status active；scope_released false。checked_coordination_sha 36262377f52b72bfe25f004251044faaa6ef562d；checked_at 2026-10-12T01:10:07.922152+08:00。已读COORDINATION1.1、自身、value-investor-satire-20261012、ai-sycophancy-video-20261012、research-utility-review-20261012最新范围；此前cash/nasdaq/dual-ma/history及中控沿已核。其他owner的素材段完整保留，新影片不接管，registry仅本人报告一键。
 - 用户确认“没有财经专业认证”；并明确本轮“目前就是先把…不应该出现在视频里边的内容…在视频制作Skill里边去收敛一下，去完成一下”。据此本轮完成内容审查Skill与必要留证；暂不进入视频重做、样片或发布，不把这句话记成新稿批准。后续重制应覆盖文稿、分镜、图表、字幕、声音和剪辑，不是只换词。
