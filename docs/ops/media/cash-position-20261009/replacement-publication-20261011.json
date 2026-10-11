@@ -1,8 +1,8 @@
 {
   "task_id": "cash-position-video-20261009",
-  "checked_at": "2026-10-11T23:06:30.329725+08:00",
-  "checked_coordination_sha": "dda87accac5241997477732f8ce7323cabefea35",
-  "status": "paused_control_service_restart_required",
+  "checked_at": "2026-10-11T23:50:42.445147+08:00",
+  "checked_coordination_sha": "2e22391660fea43f70bcfa8313988ca47006d4ec",
+  "status": "paused_user_requested_browser_exclusive_trend",
   "authorization": "用户要求发布新版代替旧视频；三平台沿用已授权范围",
   "source": "/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/投资心态/20261009-cash-position/v15-full-remake-20261011/out/现金也是一种仓位-完整版-v3.mp4",
   "sha256": "bf467c5c90e858600b139e0c2ccaea29328b889177bb2c97c38785e8e3aa8d62",
@@ -41,8 +41,8 @@
       "old_modified": false
     }
   },
-  "blocking": "配置三个代理变量已写好并读回；JS内核reset不等于MCP服务重启，Chrome listTabs仍30秒fetch失败；原生Chrome getApp超时，IAB创建也30秒超时并重置。控制工具明确拒绝操作com.openai.codex，无法自主重启当前应用。",
-  "next": "用户重开当前Codex应用并回本对话继续后，先核工具采用现有ClashX变量，再真实listTabs/getTab/上传。原发布权限与具体配置许可保留，不再安装客户端或重复请求许可。",
+  "blocking": "用户在趋势片对话要求停止其他正在操作Chrome的任务；已实际读该人类回复核实。现金片立即停止所有Chrome/CUA/浏览器操作，保留本片产物与原发布许可，等待用户重新分配浏览器。",
+  "next": "趋势片独占Chrome完成其发布；用户再次安排现金片后先核当前tab/文件窗/上传实际状态，避免重复上传，沿准确v3和v16文案继续小红书/B站。",
   "attribution": "使用 Astra 6 辅助制作。",
   "deletion_request": "用户今天要求删除对应旧稿；本轮未执行删除。B站/小红书永久删除最终动作须按工具规定当时确认。",
   "network_repair": {
@@ -58,9 +58,23 @@
     "approval_scope": "仅node_repl配置指向现有ClashX并重载工具",
     "clashx_test": "bundled Node v24.21.0 HTTPS_PROXY+NODE_USE_ENV_PROXY=1: chatgpt.com403/github.com200，无认证，非Chrome控制通过",
     "file_panel_crash": "com.apple.appkit.xpc.openAndSavePanelService-2026-10-11-222419.ips EXC_BREAKPOINT/SIGTRAP；原因未定，非网络结论",
-    "config_applied": true,
+    "config_applied": false,
     "config_sha256": "d08c95d90b633760cd747bab8f09964eafde7568ccbf66782a9249e8017bc95b",
     "runtime_control_verified": false,
-    "runtime_reload": "JS kernel reset performed; MCP service restart not performed; current app UI control prohibited"
+    "runtime_reload": "JS kernel reset performed; MCP service restart not performed; current app UI control prohibited",
+    "config_before_restart_written": true,
+    "config_after_restart": "app regenerated node_repl env: three proxy variables absent; sampled helper env also absent",
+    "native_control": "Chrome AX readable; lige7 manager authenticated; old cash02:05 dated10-10 remains; cash new upload form visible; file picker opened but no upload success before requested pause"
+  },
+  "browser_pause": {
+    "requested_by": "human in trend video thread",
+    "source_thread_id": "01a12111-3544-7250-822d-056b7379704b",
+    "source_title": "制作趋势交易科普视频样例",
+    "readback_verified": true,
+    "human_answer": "你去停呗？",
+    "scope": "all Chrome/CUA/browser actions only",
+    "cash_task_cancelled": false,
+    "last_cash_ui": "new upload page, file picker Open disabled; no selected v3 upload receipt",
+    "resume_requires": "user reallocates browser to cash video"
   }
 }
