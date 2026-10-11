@@ -1,3 +1,12 @@
+# 新版B站已公开，小红书上传后控制再受阻 2026-10-11T22:44:29.951154+08:00
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status blocked（Chrome操作通道不稳定）；scope_released false。checked_coordination_sha cbf1641f26dae64c8d89d200dd11efd7c22722b9；checked_at 2026-10-11T22:44:29.951154+08:00。已读COORDINATION1.1、自身、cash-position-video-20261009、research-dispatch-controller最新相关范围；只写自身外盘v16和本协调记录，不改他片，前台共享浏览器不可并行可靠操作。
+- B站准确v15云草稿3975617完成真实封面frame-1240.png并发布：BV1A4pn6REHf，2026-10-11 22:33:08，管理页已通过、120秒；公开页实际播放和标题/简介Astra生成及普通vibe文字读回。原BV1ehpv6EEUq仍在，未删除。
+- 小红书准确trend-full-120s.mp4上传、标题与说明、实际候选趋势交易/投资学习话题、笔记含AI合成内容已填；章节尚未保存，封面未完成、未发布。抖音未上传，管理标签切入后只显示Chrome栏、页面内容未取得。
+- 连接诊断：Chrome扩展会话调用30秒超时，原生坐标noWindowsAvailable；AX值与截图不同步且操作延迟，不能把输入或按钮执行当已保存。已请求用户把XHS前置并取消章节退出提示，不刷新上传页。后续先核实际当前值，再完成XHS与抖音；原稿永久删除仍在具体动作时确认。
+- 新实际回执：独立外盘v16-platform-replacement-20261011/publication-receipt-20261011.json与progress.md；存储22:43固定UUID/身份可用，外盘565670445056B。不重传B站、不重做视频、不改Skill/策略。成果分支既有c743614c6381dee1a34551e450d362fc05e0fc9d仍指v15制作；本轮平台回执仅外盘。三平台替换未完成。
+
+---
+
 # 发布控制修复：B站云端草稿已核，尚未提交 2026-10-11T22:26:12.154042+08:00
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status blocked（浏览器控制访问故障），scope_released false。checked_coordination_sha 5425616d9fafccd5aa240a5a33ad15a1a7b79384；checked_at 2026-10-11T22:26:12.154042+08:00。已读COORDINATION1.1、自身和cash-position独立媒体范围沿前轮、original-eight本轮研究记录；自身文件远端无新增他人写入，平台原生窗口有干扰，未修改他片。
 - 用户要求“解决一下问题”。独立Chrome窗口上传准确v15 MP4，B站云端草稿3975617新页面独立读回，重启Chrome后再次重开核同：视频上传完成，标题准确、知识分区、含AI生成内容、财经/趋势交易/K线/投资学习四标签，简介Astra生成与普通vibe文字。封面实际frame-1240.png上传尝试，未保存；未提交/未公开。
