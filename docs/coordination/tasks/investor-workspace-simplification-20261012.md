@@ -1,3 +1,15 @@
+## 合并处理全局助手实际独验失败 2026-10-12T01:25:38.323649+08:00
+
+checked_coordination_sha 82f129d3f9baf960f0bbfd16351a0e7ab39fd30c；最新仅既有视频与独验自身记录，无同块写者。独验确认冷启动失败保留、暖态原请求重试一条用户消息/一条真实回答；不得把grounded数值检查当日期或对象来源已通过。
+
+新增有界范围：顶部AgentConsole的global/准确symbol会话指针及未发送草稿恢复（不在localStorage放完整消息），由Sol唯一实现上述3个web文件；复用真实共享API列表过滤portfolio:及历史409守卫，不根据隔离旧后端误扩接口。刷新恢复、切标的隔离、显式新会话清指针和失败原因准确是验收。
+
+另Sol唯一修改llm.py的讨论材料标签/表达约束及独立新测试：global市场参考材料不能叫当前标的技术材料，无具体基金/持仓时不能把全市场日期当基金日期；概念提问按用户条数/长度答，用自然中文，不补写缺失事实。非global既有策略判断不改；本轮不新增数据库/改信号。暖态答案的两日期无法从已保存问题快照核来源，失败保留，最终用公开问答实际核内容。
+
+预热候选20相关测试已通过，仍待真实冷启动；root等上述相互独立小改完成后一次合并应用后台并重载，仅独验聊天发一次公开问题和刷新，避免重复模型成本。
+
+---
+
 ## 实际冷启动失败与最小调度修复 2026-10-12T01:20:44.624982+08:00
 
 checked_coordination_sha 01b0c3f3b4a84c5c49287773d8fd87c3cb8c88d2；新增差异仅视频任务自身发布/开头修订。已查本轮后台preheat/services当前无其他写者；旧douyin-vike范围已释放。沿用用户修完闭环授权，修复本次真实问题，不改策略、事件语义或预热范围。
@@ -93,8 +105,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "01b0c3f3b4a84c5c49287773d8fd87c3cb8c88d2",
-  "checked_at": "2026-10-12T01:20:44.624982+08:00",
+  "checked_coordination_sha": "82f129d3f9baf960f0bbfd16351a0e7ab39fd30c",
+  "checked_at": "2026-10-12T01:25:38.323649+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -147,7 +159,12 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "src/lei_signal/api/services.py::AnalysisService.get_many",
     "tests/unit/test_api_preheat.py",
     "tests/unit/test_api_service_stale_while_revalidate.py",
-    "web/src/components/AgentConsole.tsx::failed output label"
+    "web/src/components/AgentConsole.tsx::failed output label",
+    "web/src/components/AgentConsole.tsx::scope-bound session/draft restore",
+    "web/src/components/agentConsoleState.ts",
+    "web/src/components/agentConsoleState.test.mjs",
+    "src/lei_signal/plans/llm.py::discussion prompt and context label",
+    "tests/unit/test_discussion_context_scope.py"
   ],
   "scope_released": false,
   "local_result_commit": "30174a5d",
