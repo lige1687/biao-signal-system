@@ -1,3 +1,17 @@
+# 继续：独立验收实际使用路径
+
+- task-id: research-utility-review-20261012；owner: 本用户会话 root；status: active；scope_released: false；updated_at: 2026-10-12T00:43:18.790427+08:00。
+- 用户要求按投入顺序完成闭环、直接看端到端效果，并已明确允许向“更新LeiSignal原八目标交接”协调问题及验收。该聊天/任务 investor-workspace-simplification-20261012 是唯一UI实现者，本轮只做独立只读验收和准确问题回传，不另开同题开发。
+- checked_coordination_sha: 75d5faf775e0cfeafb14dbfe9dc83c4f2d4e1ec4；checked_at: 2026-10-12T00:43:18.790427+08:00；已读 COORDINATION.md、research-dispatch-controller、investor-workspace-simplification-20261012 与本任务；差异仅其他任务自身记录，无本轮证据路径冲突。
+- 基线：主仓18e64fa632dba5dbad0e5fcae09b4ccc75f119a9保留脏状态；预览5188来自实现者隔离工作树，8000后端来自主仓，不把两者误认为同一提交。
+- write_paths: docs/archive/handoffs-plans/research-utility-review-20261012/；仅本机小验收记录和截图，包含私有界面，不推送。自身协调文件独写并推后核验。本轮不改他人代码、运行DB、账户、策略、预算和自动化。
+- 验收目标：今日重点→同一基金依据→Agent草稿/答复边界→原计划与真实成交确认→复盘返回；实数据、合成测试、未验证项分别记录。实际转账/下单不在范围，缺失理由不补造。
+- 当前：真实产品022184名称、持仓快照与净值日期、缺计划/缺技术状态核同，Agent草稿带同一基金；尚未发送模型或落库。旧历史建议可能过度泛化，已给实现者核是否进入新链路，不能仅凭旧字段断言新Agent答复错误。
+- 分工：复用 Sol/medium decision_delivery 只读核代码，root浏览器/API交叉验收；0新训练/回测，真实token费用未知。分析结案保持有效，新增用户使用验收不冒称盈利改善。
+- 下一步：完成可独立核的流程，等实现者修复后复验，打开用户实际可用页面并明确还缺的真实输入。
+
+---
+
 # 因子研究操作价值复盘已交付
 
 - task-id: research-utility-review-20261012；owner: 本用户会话 root；status: completed；scope_released: true；updated_at: 2026-10-12T00:19:33.181320+08:00。
