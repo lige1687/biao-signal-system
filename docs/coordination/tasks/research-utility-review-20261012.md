@@ -1,3 +1,16 @@
+# 有界Web独立验收完成，实际决策与收益边界保留
+
+- task-id: research-utility-review-20261012；status: completed；scope_released: true；updated_at: 2026-10-12T02:16:31.118656+08:00；checked_coordination_sha: 1b7ac1c319de768549fcd16677367673ef44c913；checked_at: 2026-10-12T02:16:31.118656+08:00。已读COORDINATION、本任务、investor-workspace-simplification-20261012当前范围及中控既有边界；最新增量仅实现者本记录，无路径冲突。仅关闭本独验，不替其他负责人关闭其归档或研究目标。
+- 实际5188首页/同基金资料/原计划未知/成交入口已读回；同基金计划关联、合成成交和复盘独验复用；没有写真实计划/成交。所有模型验收仅公开概念问题，没有外发私人持仓。
+- 真实DeepSeek问答及刷新恢复通过。统一共享AnalysisService实际重计算限制后，29标的预热308.9秒完成，成功问答与该预热重叠、无新lock_failed。点击至服务保存答案33.016秒，第二次日期澄清26.470秒；仍数十秒，不能称流畅或受控性能提升。
+- 日期澄清末答正确区分行情对应日/系统取得材料时间/资料整理生成时间，三者不能互换；3条均不超过60字，无虚构日期或内部字段。两轮同global会话各一条问题/答案，刷新完整恢复。先前错误正文/三次失败/无效候选保留；历史错误不被删除或回填。
+- 实现者本地代码commit e5908f475665d7a90e804a675757b82cdbed1680，工作树/前端仍仅本地，未声称远端可复现。root独核共享llm.py/services.py/sqlite_store.py与该树指纹一致；归置检查通过。实际采用/回退记录归实现者原任务，root无代码改动。
+- 本地独验证据docs/archive/handoffs-plans/research-utility-review-20261012/independent-acceptance.json，SHA256=0fde3ed4e94afb9dad665989219f8eac6b15b78b463b1b6b1bffdf3d8f12258d；正确末答全图web-agent-date-corrected-restored.jpg，可读局部web-agent-correct-answer-closeup.png。含本地私人界面，均不推送；本次只发布不含持仓数据的协调摘要。
+- 效果边界：操作衔接与本次问答可用；启动时未缓存图表可能排队，所有未来答案未被保证。真实产品资料/原计划缺口仍在，不能推导买卖判断或收益改善。真实交易写入0、新研究拟合/回测0、实际token费用未知。前次意外页面重载原因unknown保留，不再无理由扩大核查。
+- 已将最后结果回传原实现者，后者负责其既有归档/原目标准确追加；不另派同题开发、不恢复主动通知、不继续重复模型验收。下一动作是用户直接查看本地页面与已保留的正确答案；新的具体使用问题另据事实定位。
+
+---
+
 # 真实Web连续反例保留，定位到历史状态写入
 
 - task-id: research-utility-review-20261012；status: active；scope_released: false；updated_at: 2026-10-12T02:00:26.358987+08:00；checked_coordination_sha: 6218d665398b3d6b716de91da90dc95010040ded；checked_at: 2026-10-12T02:00:26.358987+08:00。已读COORDINATION、本任务、investor-workspace-simplification-20261012最新范围，中控范围沿本轮已读且未变；新增差异仅实现者与视频自身记录。root只独验/自有记录，不与实现者写代码。
