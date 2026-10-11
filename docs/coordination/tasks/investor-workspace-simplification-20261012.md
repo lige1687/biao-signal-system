@@ -1,3 +1,19 @@
+# 本轮界面与实际问答闭环已验收，保留使用与资料限制
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status completed；scope_released true；updated_at 2026-10-12T02:18:12.285402+08:00。只关闭本轮已授权实现/验收/归档，不代表整体八目标、策略有效或用户体验已认可。
+- checked_coordination_sha 481ac5e30a0e1e32995e403bfd121cffbc7f312e；checked_at 2026-10-12T02:18:12.285402+08:00；已读COORDINATION1.1、自身、research-utility-review-20261012最新结案、中控既有边界。前次以来新增仅独验自己记录，已释放范围；无其他当前同块写者。root唯一写自己的交付/协调，历史已读任务及决策保留下方。
+- 本地成果分支 codex/investor-workspace-simplification-20261012，最终归档 7852da8483d931c8df83a28f497b91a11a6657b3，最终源码 e5908f475665d7a90e804a675757b82cdbed1680；前序 a5c99cae/17ddcb82/21f7e8fc。仅本地、远端不可复现；不推包含其他人历史脏改的基线快照，不合main，不切主工作区。
+- 今日重点/看盘/持仓复盘三入口、同基金提问与返回、确认卡到复盘、因子独立资料入口已实测。真实来源日期及旧19.1%因子展示正确，公式/研究结论不改。完整记账在独立合成内存服务验证；真实计划/成交仍各0。
+- 用户明确批准现有DeepSeek接入后，原8000后台已应用协议/讨论材料范围/日期解释修复、重复事件无效写入避免及共享实际重算限额；原.env三键与每次源变更均私有备份，5173原前端不变。5188为独立新前端预览，主仓189个原web文件逐字不变、HEAD18e64fa6不变。实际app原并行数8（不是构造默认4）；有效修复覆盖同一服务的页面与预热，不是只限制预热。
+- PID16808全29标的预热308.9秒完成，期间公开问题成功保存，点击至保存33.016秒、独验完整可见38.603秒，刷新恢复；这段无新lock_failed。最终日期纠正后PID18417问题119/答案120，点击至保存26.470秒、完整可见32.976秒，再刷新两轮问答均在；无备用答复、无重复，定义正确、无虚构日期。仍数十秒，只算有界实际验收，不是受控性能结论或未来答案保证。
+- 无效预热专属候选已回退；生命周期批量SQL候选未采用；原Ark失败、写锁失败、错误日期原文及原因未知的页面重载全部留档。历史回放/独立宽度不在限额内，冷态未缓存图表仍可排队。未知原计划和产品资料缺口保留，未补造交易依据。
+- 证据 docs/archive/handoffs-plans/investor-workspace-simplification-20261012/acceptance.json、runtime-date-answer-review.json、goal-receipts.json；进度 docs/ops/work-progress/investor-workspace-simplification-20261012.md。独验receipt本地主仓docs/archive/handoffs-plans/research-utility-review-20261012/independent-acceptance.json，SHA2560fde3ed4e94afb9dad665989219f8eac6b15b78b463b1b6b1bffdf3d8f12258d。截图/私有备份不上传。
+- 前端构建/身份/流/详情/因子/窄屏通过，3会话检查；后台31原讨论、28存储、20服务检查分别通过，末次提示修改14相关检查通过（有重叠不相加）。独立源/浏览器检查无剩余阻断；共享及隔离现行归置、diff检查通过。基线Ruff等旧失败未弱化，失败见回执。
+- 三原目标仅追加note并API读回：okr-4c2ea452d3cc v18、okr-a4fed76c71c3 v11、okr-266b531f965d v8；owner/status/milestones/authorization保持。无新研究/取数/通知/交易/安装/删除。token费用未知。
+- 下一动作是用户查看 http://127.0.0.1:5188/today 与已保留正确答复。当前没有本轮必须待跑或待修任务；不再重复模型验收。新的具体使用问题按原条目接续，不能因八目标尚有未证明处重跑封存研究。
+
+---
+
 ## 持续CPU反例与统一计算并发限制 2026-10-12T02:04:31.948774+08:00
 
 checked_coordination_sha 5595a9c16883e52c4e53dcf9731eebf41d1d933e；新独验记录已读，仍仅只读验收和自有文档，无同块写者。生命周期多行/批量候选在有界持续CPU对照中三者均达5秒干扰上限，且改变冲突前缀事务状态，全部不应用；不扩大SQL候选。工程stage1/stage2和原异常证据分别保存，不算策略实验。
@@ -124,22 +140,13 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "5595a9c16883e52c4e53dcf9731eebf41d1d933e",
-  "checked_at": "2026-10-12T02:04:31.948774+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "481ac5e30a0e1e32995e403bfd121cffbc7f312e",
+  "checked_at": "2026-10-12T02:18:12.285402+08:00",
   "read_task_ids": [
-    "daily-trading-system-audit",
-    "investor-observation-map",
-    "market-observation",
-    "technical-factor-sequence",
-    "classic-factor-research",
-    "original-eight-continuation-20261010",
-    "research-dispatch-controller",
+    "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
-    "douyin-vike-increment",
-    "ai-sycophancy-video-20261012",
-    "trend-perspective-video-20261009",
-    "value-investor-satire-20261012"
+    "research-dispatch-controller"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
@@ -191,8 +198,10 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "src/lei_signal/api/services.py::AnalysisService shared actual-analysis concurrency bound",
     "tests/unit/test_api_service_stale_while_revalidate.py::cross-batch scheduling checks"
   ],
-  "scope_released": false,
-  "local_result_commit": "30174a5d",
-  "remote_result_commit": null
+  "scope_released": true,
+  "local_result_commit": "7852da8483d931c8df83a28f497b91a11a6657b3",
+  "remote_result_commit": null,
+  "updated_at": "2026-10-12T02:18:12.285402+08:00",
+  "conflict_decision": "Latest change since prior checked baseline is independent acceptance only; reviewer has released scope, no concurrent source writer; current closure edits only own records."
 }
 <!-- lei-coordination-json:end -->
