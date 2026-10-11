@@ -1,3 +1,5 @@
+- 2026-10-12：[已发布财经视频审查与重制稿](finance-video-publishing-review-2026-10-12.md)：定位现金/双均线等组合表达风险，补账号资质与内容审查；五主题新稿待确认，未重发。
+
 # docs/experiments 总索引
 
 - 2026-09-23：[开发任务路由改为GPT-6系列](jev-gpt6-skill-routing-2026-09-23.md)：项目级路由与编排Skill改用GPT-6 Luna、Sol、Astra；32项离线检查通过，真实任务效果继续观察。

@@ -137,3 +137,11 @@ checked_coordination_sha 09219aa44d52b8c083cb2e81e49144f1f8b5ab66；已读自身
 外盘/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/趋势交易/20261009-trend-perspective/v15-full-film-20261011；成片SHA 4624b97144a5f37caaa7f5fb1428e8b92586d45c0ebdfd60e7fbade8bb09e65b，9795440B；源ZIP SHA 26a213780983e155aaba4b4f9fa84b08cc7d7859c386a2d72413ab1b619cec2f，40111787B，64成员逐字读回。3600帧120秒1080p30，H264/AAC，完整解码0。127日K与源CSV一致、27同源周K独立重算一致、部分周明示；前置/时间表/公共文字/归置检查通过。低清粗剪全播后修正主体静止和读时，最终390CSS宽1倍不静音播放到120秒ended=true/error=null，实际关键帧检查完成；主句可见，来源小字需放大，独立听审和全片审美仍待用户，技术通过不当用户认可。
 60—72秒最后标注偏晚仅重渲该段，提前后留2.17秒；102秒声音落点已同帧。首遍拼接平均帧率30.008问题已明确时间戳修成30/1并复验；旧媒体与失败均保留。源码完整重建无需旧片。未安装、删除、发布、改Skill或策略。
 checked_coordination_sha: e926d2238385611f70e22b51ce38757fa729553f；checked_at: 2026-10-11T10:42:53.294403+08:00；已读自身、cash-position独立平台替换、original-eight独立P1资料增量及COORDINATION1.1，无写入冲突。仅本人两原索引和独立外盘；媒体与工程不入Git。下一步等待用户整片观感反馈。
+
+
+## 财经内容审查与Skill收敛 2026-10-12T01:11:55.738951+08:00
+最新用户范围：先完成视频Skill；抖音无财经专业认证据用户明确答复。此前“全部重做”需求保留为后续，当前没有批准五份新文稿，也未渲染新片/重发。重做将覆盖文稿、分镜、图表、字幕、声音与剪辑，不能只换词。
+已核抖音官方财经公约全文、网信办通知、证监局提示、B站认证原文；XHS普通笔记财经细则未完整核。6条视频/5主题、8份本地成片SHA和102关键帧/完整文稿与配文审查，未冒称完整听审或准确处罚归因。现金的SPY价位和仓位、双均线股票+系统色+后续涨跌、纳斯达克长期看好及配置是具体整改点；历史片不是同等已确认违规。
+实际更新code-explainer-video入口财经小节和2处路由、新references/finance-publication-review.md；原卡点第一创作标准和其他owner素材段逐字保留。Skill结构、引用、8个手工反例、registry其他键未变、归置通过；文字规则不是自动语义审核。报告docs/experiments/finance-video-publishing-review-2026-10-12.md已登记。
+外盘v17-finance-review-20261012位于原20261009-trend-perspective；媒体版本/指纹、来源、102帧联系图、5主题候选完整稿/JSON、审阅页review.html与检查留证。http://127.0.0.1:64985/review.html实际5主题54段及8图载入，无横向溢出。v16回执纠正B站旧BV1ehpv6EEUq已删除；新BV1A4pn6REHf保留，抖音v15上传未提交且有测试文案不可发布，XHS沿前次审核中本轮未复核。
+checked_coordination_sha c219fa81609636cf5c6b61e78e60f54a5dfe2549；checked_at 2026-10-12T01:11:55.738951+08:00；相关own/value-investor/ai-sycophancy/research-utility及前轮cash/nasdaq/dual/history已核，无同段冲突。当前主共享脏区不切换/不混提交，只保存本人增量；固定UUID外盘已核，未删旧资料、改策略、安装或付费。下一步交付Skill，不再要求本轮新片确认。

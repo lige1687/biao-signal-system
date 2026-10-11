@@ -27,17 +27,25 @@ description: 科普视频制作的统一入口；用户说做视频、继续改�
 
 | 当前请求 | 本入口内部读取和执行 | 本轮应交付 |
 |---|---|---|
-| 从主题开始，或重审内容 | [前置流程](references/preproduction-workflow.md) → [核心观点与增量](references/story-argument.md)；自然文稿按需用humanizer-zh，用户不用再调用 | 内容主线、可用素材、当前阶段实际产物 |
+| 从主题开始，或重审内容 | [前置流程](references/preproduction-workflow.md) → [核心观点与增量](references/story-argument.md)；涉及财经先读[财经内容审查](references/finance-publication-review.md)；自然文稿按需用humanizer-zh，用户不用再调用 | 内容主线、可用素材、当前阶段实际产物 |
 | 分镜、构图、运镜与冲击感 | [动态导演](references/motion-direction.md)、[规则在画面发生](references/decision-motion.md)、[镜头实例](references/animatic-and-shot-library.md) | 对应已定文稿的真实场景；按批准阶段交图或样片 |
 | 配乐、音效、卡点、节奏 | [紧凑节奏](references/tight-pacing.md)、[音画落点](references/music-motion-sync.md)、[指定音乐](references/music-candidates.md) | 同源时间表驱动的真实合声片段；主观效果单列 |
 | 修改已有片段或扩片 | [连续镜头与复用](references/continuity-and-efficiency.md)、[粗剪与连续审片](references/animatic-and-shot-library.md) | 从已认可工程增量制作；全片获准后先粗剪再精修 |
 | 学教程或参考Opus风格 | [Prompt索引](references/prompt-methods.md)、[方法实测](references/motion-transfer-field-test.md)；只查当前缺口的原文/源码 | 来源与采用边界、有证据的Skill增量；要求实测时才产样片 |
 | 明确交给Opus准备或收尾 | 内部读[Opus备料模块](../opus-video-prep/SKILL.md)，只执行其中本次准备/收尾模式 | 可定位交接包或技术验收；不因参考风格自动移交创作 |
-| 导出、归档或已授权平台发布 | [存储与交付](references/storage-and-packaging.md)、本页“可读与声音核验”“发布时默认添加可跳转章节” | 实际MP4、来源/章节/指纹和逐平台真实回执；未授权不发布 |
+| 导出、归档或已授权平台发布 | [存储与交付](references/storage-and-packaging.md)、本页“可读与声音核验”“发布时默认添加可跳转章节”；财经片按[财经内容审查](references/finance-publication-review.md)复核账号、成片与配文 | 实际MP4、来源/章节/指纹和逐平台真实回执；未授权不发布 |
 
 通用执行始终遵守下文用户约定：无旁白、无自有品牌、指定音乐、真实素材/数据、已核外盘、内容→素材→真实风格图→15秒→完整片。工具或内部模块缺失时先用现有可行路径，确实阻塞才说明；不要求用户换入口。调用专门模块只继承相关模式，不让模块反向重启本入口或加载全部无关参考。具体执行方式与验收仍由当前阶段决定。
 
 可直接说：**“用 $code-explainer-video 做这期视频，沿用已确认内容和风格，先给关键段15秒；重点看动态、冲击感和音画卡点。”**
+
+## 财经片先核发布边界，再定讲法（2026-10-12）
+
+涉及股票、基金、指数、交易方法或投资观点，写稿前和发布前均读[财经内容审查](references/finance-publication-review.md)。先核目标平台当时的规则、账号专业资质及适用范围；实名、蓝V、AI声明、已发成功或一句“仅供学习”不能替代这些条件。抖音现行财经公约对未经平台资质认证的专业财经内容有明确限制，不能只删股票名称就判为可发。
+
+把成片、声音、字幕、封面、标题、简介、话题和引流入口合起来看：观众是否会据此判断买什么、何时交易、投入多少，或误信某种方法的收益与安全性。历史行情、教学假设、人物故事也要查。发现问题要改实质内容、图表和论证，不能靠谐音、遮代码、改分区、加免责句或反复重发试探审核。紧凑节奏与卡点继续保留，不用收益刺激、暴富暗示或恐惧追涨制造爽点。
+
+收到风险通知，先保存通知与准确作品版本，分清平台原话、内容事实、我们的推测；暂缓相关新发布，继续内部审查和重制准备。账号资质未核、通知未解决不宣称可以发布或保证过审。实质改稿仍复用原来的内容、实帧、15秒和全片确认顺序；不新增一套审批，不擅自申诉、删帖或重发。审查结果写入该片已有制作记录；本条是工作要求，**不是程序已实现的自动拦截**。
 
 ## 开工入口：把资料接到制作
 
