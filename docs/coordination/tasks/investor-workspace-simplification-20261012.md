@@ -1,3 +1,13 @@
+## 实际冷启动失败与最小调度修复 2026-10-12T01:20:44.624982+08:00
+
+checked_coordination_sha 01b0c3f3b4a84c5c49287773d8fd87c3cb8c88d2；新增差异仅视频任务自身发布/开头修订。已查本轮后台preheat/services当前无其他写者；旧douyin-vike范围已释放。沿用用户修完闭环授权，修复本次真实问题，不改策略、事件语义或预热范围。
+
+提供商切换已核：私有备份成功，三个连接键与协议补丁应用，仅后台重载，新PID98957，health200，5173仍PID1455。冷启动公开问题两次在SQLite身份登记/保存等待44–45秒失败，已观察同进程write_events持写锁超80秒；未到模型，不能归因为DeepSeek错误。全量29标的预热307.2秒后完成，独验原请求重试已出现真实正文，内容日期另做只读核对。
+
+不应用‘改事件批量写入’候选：合成测量有回退，证据不足，事件表/事务不改。准确最小候选仅预热调用限制为逐个标的，普通页面批量并发保持；get_many新增可选并发限制，保留原结果/异常/缓存语义。Sol唯一写这两个源与两个相关测试，root应用前核指纹、备份、必要回归；实际冷启动模型/等待与预热耗时重验，不靠合成小样本声明生产已修复。root另只改AgentConsole失败时错误归因标签，准备阶段失败不再说LLM不可用。
+
+---
+
 ## 人类已授权切换，执行最小接入 2026-10-12T01:08:57.195543+08:00
 
 checked_coordination_sha ab2e8b4e4bb25a8f0b3831d8f00b048703af9abb；已读最新research-utility-review人类决定记录及视频两任务独立媒体范围，无同块冲突。前一次登记因协调SHA更新主动中止，未写共享文件。
@@ -83,8 +93,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "ab2e8b4e4bb25a8f0b3831d8f00b048703af9abb",
-  "checked_at": "2026-10-12T01:08:57.195543+08:00",
+  "checked_coordination_sha": "01b0c3f3b4a84c5c49287773d8fd87c3cb8c88d2",
+  "checked_at": "2026-10-12T01:20:44.624982+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -132,7 +142,12 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/src/pages/AgentWorkspacePage.tsx",
     ".env (local private: ANTHROPIC_AUTH_TOKEN, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL only)",
     "src/lei_signal/plans/llm.py (shared runtime minimal protocol patch)",
-    "com.lei.backend (reload only)"
+    "com.lei.backend (reload only)",
+    "src/lei_signal/api/preheat.py",
+    "src/lei_signal/api/services.py::AnalysisService.get_many",
+    "tests/unit/test_api_preheat.py",
+    "tests/unit/test_api_service_stale_while_revalidate.py",
+    "web/src/components/AgentConsole.tsx::failed output label"
   ],
   "scope_released": false,
   "local_result_commit": "30174a5d",
