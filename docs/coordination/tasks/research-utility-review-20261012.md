@@ -1,3 +1,17 @@
+# 实际页面独验通过，日常AI等待服务商决定
+
+- task-id: research-utility-review-20261012；owner: 本用户会话 root；status: blocked；scope_released: false；updated_at: 2026-10-12T01:03:10.990823+08:00。本轮使用闭环尚未全通过，不冒称完成。
+- checked_coordination_sha: de56d5bd4815a1d2f560b7ec64a0b527d56784a1；checked_at: 2026-10-12T01:03:10.990823+08:00；已读COORDINATION、本任务、research-dispatch-controller及investor-workspace-simplification-20261012最新范围；实现者独写代码，root只自有验收资料和本记录，无同块写入。
+- 已独验：真实5188今日重点到同基金、净值/持仓日期、缺技术/原计划未知、Agent草稿、成交页；5189本地合成回答/已关联计划、新问题资料更新、刷新会话、单笔/周复盘、返回原基金。截图及independent-acceptance.json在主仓docs/archive/handoffs-plans/research-utility-review-20261012/，仅本机；未向远端推私有截图/数据。
+- 用户已说明原计划没有记录；保留未知，不再要求找回不存在的历史。通用提示已在真实页面读回；没有新建/启用真实计划或成交。
+- 隔离模型协议404已由实现者修复并一次HTTP200答复核验；root及Sol独读范围/日期/代码，未重复实际模型调用。该结果不等于运行8000成功。
+- 真实8000公开问题已由实现者实测：外层HTTP200、无模型正文、备用材料；对应服务日志HTTP400/InvalidSubscription。日常Ark订阅无效或过期，不能靠重启/协议补丁解决；不重复失败请求。相关日志账号标识不复制或上传。
+- 唯一必要决定已向人类提出：保留Ark并恢复订阅，或把本应用切换至已验证的现有DeepSeek接口、保留旧配置并短暂重载8000。明确不购买/续订；切换后以公开问题验收，不外发真实持仓。人类未回答前不修改连接设置或重载。原实现者已准备最小补丁、仓内私有备份和逐字回退方案。
+- 当前前端与证据仅本地工作分支，主仓代码/账户/生产模型配置未改；原研究0新增训练/回测，token实际总量未知。仓库归置检查通过。
+- 恢复：获得服务商决定后由原实现者登记最小接入范围并执行，root再独验运行页面；不把此审批扩大到真实交易或新研究。
+
+---
+
 # 继续：独立验收实际使用路径
 
 - task-id: research-utility-review-20261012；owner: 本用户会话 root；status: active；scope_released: false；updated_at: 2026-10-12T00:43:18.790427+08:00。
