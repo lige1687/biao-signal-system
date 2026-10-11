@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "9f582ab9f9eaedd403ecfae13a84639e1e9a626b",
-  "checked_at": "2026-10-11T23:05:38.793375+08:00",
+  "checked_coordination_sha": "8f5c55cb1df026fc7eebed46161a6842c172f61f",
+  "checked_at": "2026-10-11T23:07:29.342313+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -74,7 +74,10 @@
     "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/",
     "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/2019-detail-binding-amendment.json",
     "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/collect_2019_detail.py",
-    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/2019-detail-delivery.json"
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/2019-detail-delivery.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/2019-detail-api-binding-amendment.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/2019-detail-api-delivery.json",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/collect_2019_detail_api.py"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -96,7 +99,8 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-e1-official-source-20261011/b4-e1-official-source-20261011-20261011T223841-0489602bf81d",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-515300-history-20261011/b4-515300-history-20261011-20261011T225524-8a998a51dc12",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-515300-history-20261011/b4-515300-history-20261011-20261011T225524-8a998a51dc12/2019-detail"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-515300-history-20261011/b4-515300-history-20261011-20261011T225524-8a998a51dc12/2019-detail",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-515300-history-20261011/b4-515300-history-20261011-20261011T225524-8a998a51dc12/2019-detail-api"
   ],
   "scope_released": false,
   "question_ids": [
@@ -138,10 +142,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "a6590648a9ad6f7b5afbaa030b8394c84a1c3a57",
-  "scope_amendment": "Only actual2019ad_id427893 onobservedofficialnoticedetails query interface, atmostdetail+oneexplicitPDF2requests. Old7actual preserved, old8cap recorded new9cap. No guessedPDF orunboundedJS/search.",
-  "updated_at": "2026-10-11T23:05:38.793375+08:00",
+  "scope_amendment": "OneactualpublicqueryAnnouncementDetails funcNo741021 ad_id427893 andonlyexplicitPDF, twoadditionaldirectcalls, phaseceiling10. Prior8 preserved; nopagination/search/JSexecution.",
+  "updated_at": "2026-10-11T23:07:29.342313+08:00",
   "conflict_decision": "Actual read latest coordination and all thirteen related tasks; reviewed cash22:31 network repair and trend22:26 browser blockage. Neither shares our evidence files. Avoid global proxy/browser modifications and technical-factor-sequence C/hourly, risk-shape D3 owner scopes. Own root exclusively shared records.",
-  "current_work": "Root accepts6reports/recovery andminimal2019detail. Sol separatelyvalidates9existingPDFoffline; LunaE1recoverydeliveredrootpending.",
+  "current_work": "Root exact2019publicdetail API plus accepted E1 recovery and archived9PDFreuse. Otherfund newnetwork closed pendinglocalreadiness.",
   "paused_questions": [
     "博时沪深300ETF515130的2021—2024四全文未核，其中三入口缺失；实际403停止，合法正常官方访问或准确新原件可恢复对应问题",
     "其他份额调整渠道、供应商历史到达、E1实施/更正去重及完整14产品输入资格仍未证明，R2/科学未放行",
@@ -360,3 +364,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T23:05:38.793375+08:00 515300六新报告已得，核2019准确公告详情
 
 新7直接请求取得6PDF，2019年条目id427893附件空。官方已保存fundAnn页真实示例为noticedetails.shtml?adId=197835，按该实际查询参数仅换为目录原id427893核公告，最多再2请求（详情+其中精确PDF），累计上限9不倒填原8。另四基金先复用实际9份旧原件，准确缺项待核。无原正式科研次数。
+
+## 2026-10-11T23:07:29.342313+08:00 2019公告模板与实际公共详情方法核定
+
+2019详情页HTTP200仅模板，1次已保存，没有PDF未判完整。已保存wsService.js545—559行直接给出公共queryAnnouncementDetails(741021,ad_id)，仅对目录实际427893调用一次，若返回准确PDF再1次；累计当前原窗口来源上限10（已用8），原E1/P1累计不变。无需再取或执行任何JS，缺精确原文便保存未核。本次仅该记录与新2019-detail-api子目录。
