@@ -1,3 +1,11 @@
+## 解析与实际答复验收增量 2026-10-12T00:42:55.176953+08:00
+
+新增准确范围 PortfolioAgent.tsx：复用已有流解析器，修复CRLF/末帧丢失，不改服务端上下文/判定。共享8000后端只读诊断已确定详情同步市场环境与多组历史回测造成等待（events0.18s，market-context首次5.71s/再次0.24s，详情12s首次超时/后次2.93s）；本轮前端提供可恢复等待及独立因子入口，不声称已提速后端。持仓tab隔离和成交成功跳转已修、build/SSR通过。
+
+同目录agent-acceptance.py/json独立临时SQLite，复用共享当前router对合成甲基金最多1次真实模型答复，既有配置/预算不变，不外发私人账户。loop-fixture-server.mjs只绑定127.0.0.1:9191，全部合成资料/内存写入，独立5189前端用来浏览器验证成功/失败/刷新，不代理生产。源码SHA和真实模型/合成UI证据分别记录，不把演练当真实交易。研究价值复盘负责人消息要求独立读现有记录验收，不让其重复修改web；只核同对象/来源日期/缺计划不推测与真实答复。
+
+---
+
 # 继续修复实际使用闭环 2026-10-12T00:39:27.093314+08:00
 
 用户要求“继续做你的闭环”。原任务恢复active，root唯一协调写者。基础为自身本地58f59572adec26477a5df29080da8b6d233f0efb。先核未验收点：详情长时间加载、Agent上下文、成功确认到成交复盘。仍服务展示/计划核对/复盘层，两权威策略实际SHA与登记一致。
@@ -45,8 +53,8 @@
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "c0b401b207bc7a48194dfd7147f52f81f1aec317",
-  "checked_at": "2026-10-12T00:39:27.093314+08:00",
+  "checked_coordination_sha": "af1cd724091a1ad4260baa8e6358772052ff0305",
+  "checked_at": "2026-10-12T00:42:55.176953+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -85,7 +93,8 @@
     "web/src/api/detailRequest.test.mjs",
     "web/src/components/copilot/CopilotCards.tsx",
     "web/src/components/DetailLoadState.tsx",
-    "web/run-investor-loop-regression.mjs"
+    "web/run-investor-loop-regression.mjs",
+    "web/src/components/portfolio/PortfolioAgent.tsx"
   ],
   "scope_released": false,
   "local_result_commit": "58f59572adec26477a5df29080da8b6d233f0efb",
