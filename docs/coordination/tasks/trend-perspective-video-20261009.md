@@ -1,3 +1,11 @@
+# 用户拒绝重开，替代工具待明确选择 2026-10-12T00:14:00.534281+08:00
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status blocked（控制通道不可用，替代工具待指定）；scope_released false。checked_coordination_sha 8e471e4abea12424086b2df0b56ccf4ad876ffbf；checked_at 2026-10-12T00:14:00.534281+08:00；COORDINATION1.1、自身本轮读回，cash-position-video-20261009与research-dispatch-controller沿用前轮已读范围，只写自身外盘v16/本协调记录，无其他范围变更。
+- 用户“每次都让我重开，我不重开”是新的限制，已接受，不再要求重开，也不把重开称为必然解决方法。CUA会话重建仍Chrome getApp超时；独立内置浏览器打开抖音管理页40秒超时。不能归咎于用户或把错误根因冒称已确定。
+- 找到已安装/opt/homebrew/bin/bb-browser，已读其SKILL与实际help；daemon status显示未运行。未操作替代浏览器，因为当前电脑控制工具要求其他UI技术须用户明确指定；已合并提出只确认换工具，发布授权仍保持。待用户选择后尝试bb-browser连接并核现有稿，不安装、不扩大账户权限。
+- 准确v15 MP49795440B、SHA4624b97144a5f37caaa7f5fb1428e8b92586d45c0ebdfd60e7fbade8bb09e65b、封面/章节存在本轮核通过，00:13固定外盘UUID身份可用。本轮没有发布或删除；上轮小红书审核中、B站已公开、抖音未提交仍为未刷新状态。证据v16/alternative-browser-preflight-20261012.json及progress.md，仅外盘；成果commit仍c743614c6381dee1a34551e450d362fc05e0fc9d。
+
+---
+
 # 桌面控制异常待恢复 2026-10-12T00:07:55.065320+08:00
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status blocked；scope_released false；checked_coordination_sha 37a4eb5b07c80283a3d53fc19ddf47870d7bc299；checked_at 2026-10-12T00:07:55.065320+08:00。沿用已读COORDINATION1.1与自身、cash-position-video-20261009、research-dispatch-controller，只写自身回执和本记录。
 - 用户要求继续全部完成。本轮Chrome任务管理器仅筛选GPU进程并结束任务，PID64796→69750自动重启实际读回。此后Chrome窗口与活动监视器操作timeoutReached，浏览器nameSession30秒nodeRepl.fetch失败，访达只读快照仍可取；根因未确认，不宣称仅Chrome故障。未安装、改设置、清缓存、停止其他任务或修改权限。
