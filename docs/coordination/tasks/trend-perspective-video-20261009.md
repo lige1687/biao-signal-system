@@ -1,3 +1,14 @@
+# 全部已发布视频风险审查与重制准备 2026-10-12T00:48:03.382003+08:00
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status active；scope_released false；checked_coordination_sha 79ceec0ab8ded6d944218af5ebc1bfecf5451473；checked_at 2026-10-12T00:48:03.382003+08:00。已读COORDINATION1.1、自身、cash-position-video-20261009、nasdaq-story-video-20261009、dual-ma-video-copy-20261009、trend-trading-video、personal-quant-video-render-preview-rule、value-investor-satire-20261012、research-dispatch-controller、research-utility-review-20261012与investor-workspace-simplification-20261012相关范围。
+- 用户报告平台通知涉嫌高风险投资，并明确“已经发的视频里边，你可以都看看…足够的资料后沉淀到skill里边，然后把我们原来的视频都重新做一遍”。本轮先官方规则/账号与全部旧视频内容审查，补Skill，再制作原主题修订方案和可审查版本；停止原三平台继续发布。资质与违规通知准确作品尚未核，不能把风险分析冒称平台处罚原因。
+- 范围：只读各片原工程/公开成片与平台账号相关页面；新增自己的外盘v17-finance-review-20261012/（位于原20261009-trend-perspective目录），不覆盖他片。Skill仅SKILL.md新增金融内容发布边界/两处路由，以及新references/finance-publication-review.md；不改value-investor owner正在维护的“素材按需使用”段。各片重制先沿原已确认视觉、保留旧媒体，实质内容改写仍须用户确认后扩片。
+- 研究为report_only定性规则/内容核查，无交易、收益实验、拟合或数据拉取。报告docs/experiments/finance-video-publishing-review-2026-10-12.md；registry仅新增该路径一键、INDEX仅本报告导航；research-utility只登记自身报告，条目级无重叠，写前后核其他键不变。自己的阶段进度及协调记录。禁止接管其他电影当前制作。
+- 已核官方2025-12-16抖音财经公约原站正文、2023中央网信办通知、2026北京证监局风险提示；网页抓取一次超时后用已获准bb-browser正常打开原文。将区分资质、投资建议与一般知识，不以谐音/删名称/免责句绕审核。
+- 发布阶段补记：B站旧BV1ehpv6EEUq已通过官方验证删除，管理页剩3稿，保留新版BV1A4pn6REHf及现金/双均线；抖音准确v15上传成功但未提交，表单仍有话题输入试验内容，不能发布；XHS新版沿上轮审核中，此轮未核公开/未删旧。
+- 验收：六个抖音视频（五主题，双均线横竖两版）逐条源版本/字幕/实际画面/简介核对；平台规则事实与我们推断分开；Skill引用/行为案例/归置；真实静帧与后续确认状态；不承诺通过审核。00:47固定外盘可用约526GiB，媒体与制作材料只外盘；本机小报告/Skill/登记，复用依赖。
+
+---
+
 # bb-browser已接通，抖音账号已登录 2026-10-12T00:35:07.387465+08:00
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status active；scope_released false。checked_coordination_sha ee7bdb9d85feca7403a25d94e54d99bc3cc2196b；checked_at 2026-10-12T00:35:07.387465+08:00；已读COORDINATION1.1、自身、cash-position-video-20261009最近暂停记录、research-dispatch-controller。现金片浏览器任务仍暂停，本人唯一继续平台操作，无共享媒体/Skill范围变化。
 - 用户明确选择“改用bb-browser继续”。已安装CLI daemon启动连接成功；独立浏览器保留原Chrome，未抽取/复制凭证。抖音官方二维码刷新后用户扫码，当前UI核lige账号登录成功；此前CUA故障不冒称全部修复。B站已登录，XHS独立浏览器尚待登录。
