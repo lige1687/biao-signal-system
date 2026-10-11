@@ -1,3 +1,11 @@
+# 发布控制修复：B站云端草稿已核，尚未提交 2026-10-11T22:26:12.154042+08:00
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status blocked（浏览器控制访问故障），scope_released false。checked_coordination_sha 5425616d9fafccd5aa240a5a33ad15a1a7b79384；checked_at 2026-10-11T22:26:12.154042+08:00。已读COORDINATION1.1、自身和cash-position独立媒体范围沿前轮、original-eight本轮研究记录；自身文件远端无新增他人写入，平台原生窗口有干扰，未修改他片。
+- 用户要求“解决一下问题”。独立Chrome窗口上传准确v15 MP4，B站云端草稿3975617新页面独立读回，重启Chrome后再次重开核同：视频上传完成，标题准确、知识分区、含AI生成内容、财经/趋势交易/K线/投资学习四标签，简介Astra生成与普通vibe文字。封面实际frame-1240.png上传尝试，未保存；未提交/未公开。
+- 重启既有ChatGPT扩展回到启用状态，不扩权限。随后Chrome进程实际退出并显示未正确关闭，启动原用户1、恢复既有页面。扩展网页控制仍超时，原生坐标noWindowsAvailable/前台变化，不能可靠完成封面提交删除。小红书/抖音新版本轮未上传；所有旧稿未删除。
+- 实际证据独立外盘v16-platform-replacement-20261011/browser-repair-receipt.json与progress.md；云端恢复入口https://member.bilibili.com/platform/upload/video/frame?type=draft&draftId=3975617。不再重传B站视频、不覆盖其他草稿。恢复条件是Codex/Chrome控制通道稳定；随后完成封面并发布读回，旧稿永久删除按行动时确认。未宣称任务完成。
+
+---
+
 # 三平台替换接续：实际浏览器控制受阻 2026-10-11T21:46:24.888791+08:00
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status active，等待浏览器可独立操作；scope_released false。checked_coordination_sha d4d8473738ab0641a2f2fda657ba549c022fbd61；checked_at 2026-10-11T21:46:24.888791+08:00。已读COORDINATION1.1、自身、cash-position-video-20261009最新平台范围、original-eight-continuation-20261010最新研究范围。文件与作品无重叠；原生Chrome前台在现金视频编辑/文件选择中，独立扩展连接连续超时，存在前台输入互相干扰风险。已请求用户暂时暂停其他Chrome操作，未修改现金稿。
 - 用户明确授权三平台删除旧趋势片并发布v15，正文Astra生成及普通vibe知识大赏；永久删除最终动作按工具政策当时确认。小红书旧6ac9e40c000000001203d224、B站旧BV1ehpv6EEUq；抖音原状态未提交验证码，不删除其他视频。
