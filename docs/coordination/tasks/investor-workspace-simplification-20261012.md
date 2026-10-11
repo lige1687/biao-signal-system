@@ -14,13 +14,16 @@
 
 已建立本地隔离web基线bcf9befd77a136e437ce526430493d3f79849af9（原187小前端文件快照，仅本地，不冒称本轮原创，不上传他人脏改）；主工作区保持。初始build通过，Sol完成URL身份贯穿和因子折叠。新增必要范围：WorkspacePage/DetailPage仅在已有技术摘要后插入FactorContextPanel，不改图表/信号/原研究；todayLogic仅读取日期及摘要文案。三个独立子范围互斥，root整合/独立检查。验收发现旧核对日/未来因子日/比例单位问题正在修复，失败保留。其他任务新增仅自身运营状态，无相同UI块冲突。
 
+
+独核补注：已读research-utility-review-20261012最新结案，仅报告/登记、不重叠。后端realized_vol明确返回比例，旧因子表rv20_ann直接加百分号会缩小100倍；本次只修FactorPanelPage标的表该单位展示，同目录研究结论不改。回归使用合成资料，不写真实成交。
+
 <!-- lei-coordination-json:start -->
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "88fa038cf928a22a70b19ebf0209729abca3fec7",
-  "checked_at": "2026-10-12T00:21:37.954608+08:00",
+  "checked_coordination_sha": "f322e2958b7e4cd0ac3c00925063e78c0c3f21d3",
+  "checked_at": "2026-10-12T00:24:27.813712+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -28,7 +31,8 @@
     "technical-factor-sequence",
     "classic-factor-research",
     "original-eight-continuation-20261010",
-    "research-dispatch-controller"
+    "research-dispatch-controller",
+    "research-utility-review-20261012"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
@@ -47,7 +51,8 @@
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
     "web/src/pages/WorkspacePage.tsx",
     "web/src/pages/DetailPage.tsx",
-    "web/src/pages/todayLogic.ts"
+    "web/src/pages/todayLogic.ts",
+    "web/src/pages/FactorPanelPage.tsx"
   ],
   "scope_released": false
 }
