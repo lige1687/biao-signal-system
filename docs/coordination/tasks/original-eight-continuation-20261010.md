@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "8c472d8292754f668713eb47516cef3ea4e542a3",
-  "checked_at": "2026-10-11T22:38:49.372515+08:00",
+  "checked_coordination_sha": "394ceabb82268d6732fed2c3f62534ed3b5bd666",
+  "checked_at": "2026-10-11T22:43:56.649515+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -131,10 +131,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "a6590648a9ad6f7b5afbaa030b8394c84a1c3a57",
-  "scope_amendment": "Reuse oldbatch2 E1 conditional2q4res8hop allocation aftercurrenthuman scope binding, no P1 transfer. Oldbatch1 E1search4/4 and earlier R1Eoverlimit preserved. Search-provider ownbackendtransport hops unavailable; record query tool calls as separate discovery metric, do not claim strict oldGate1B allhops passed. DirectHTTPrequests fullyloggedbeforeI/O and redirectnotfollowed.",
-  "updated_at": "2026-10-11T22:38:49.372515+08:00",
+  "scope_amendment": "Two exactwebqueries foundnoannual. Four actualprimaryJS200 nowprove publicmodule resolution and serviceconfig; nextsmallrequiredchain isfundindex module -> exactfund disclosure module -> read-onlylisting -> oneexactannualPDF. Human explicitly allowsnecessaryadditions; preserve2web+4direct used, noreset.",
+  "updated_at": "2026-10-11T22:43:56.649515+08:00",
   "conflict_decision": "Actual read latest coordination and all thirteen related tasks; reviewed cash22:31 network repair and trend22:26 browser blockage. Neither shares our evidence files. Avoid global proxy/browser modifications and technical-factor-sequence C/hourly, risk-shape D3 owner scopes. Own root exclusively shared records.",
-  "current_work": "Two local Sol checks; rootonly bounded E1websearch discovery plus exact managerdirectHTTP. Firstquery explicitlyfrozen; onlinecontrollercontract binds8maxdirecthops/4resources/2querytools and96MiB includingnecessaryrecovery. All failurescounted, oldledgerunchanged.",
+  "current_work": "Root only sourcecontinuation fromactual4JS withlimited sixadditionaldirectrequests, tenoverall; atmostonepublic515300reportlisting andone2025annual original. Sol localchecksfinished.",
   "paused_questions": [
     "博时沪深300ETF515130的2021—2024四全文未核，其中三入口缺失；实际403停止，合法正常官方访问或准确新原件可恢复对应问题",
     "其他份额调整渠道、供应商历史到达、E1实施/更正去重及完整14产品输入资格仍未证明，R2/科学未放行",
@@ -337,3 +337,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T22:38:49.372515+08:00 E1最小官方定位与年报取证绑定
 
 用户持续推进和必要追加授权下，先取515300自身2025年报，不为已见结果调参。旧批2 E1预留2查询/4资源/8直连请求未用，本轮明确绑定；搜索工具内部传输不可见，作为独立定位指标，不冒充旧Gate1B逐跳验收。原P1总账41跳20查询21资源保持，博时403原路不重试。根唯一联网写者，两Sol仍仅本地。外盘已plan-only绑定，报告归档复用原条目。
+
+## 2026-10-11T22:43:56.649515+08:00 E1官网公开加载链定向补足，保留全部累计次数
+
+2次定向搜索未返回目标年报；4次官网JS均200，已证真实模块路径组合与配置。按用户允许必要追加，为已定位公开基金公告链明确增加6资源、直连跳数上限8→10，最多一官方报告列表查询；不是重置旧预算。新的amendment绑定旧contract和当前ledger指纹，只读网站源码不执行，不接任何账户/交易接口、不改代理，不重试任何403。仍是唯一515300年报问题，科学0。
