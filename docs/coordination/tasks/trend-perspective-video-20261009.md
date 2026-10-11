@@ -1,3 +1,12 @@
+# bb-browser已接通，抖音账号已登录 2026-10-12T00:35:07.387465+08:00
+- task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status active；scope_released false。checked_coordination_sha ee7bdb9d85feca7403a25d94e54d99bc3cc2196b；checked_at 2026-10-12T00:35:07.387465+08:00；已读COORDINATION1.1、自身、cash-position-video-20261009最近暂停记录、research-dispatch-controller。现金片浏览器任务仍暂停，本人唯一继续平台操作，无共享媒体/Skill范围变化。
+- 用户明确选择“改用bb-browser继续”。已安装CLI daemon启动连接成功；独立浏览器保留原Chrome，未抽取/复制凭证。抖音官方二维码刷新后用户扫码，当前UI核lige账号登录成功；此前CUA故障不冒称全部修复。B站已登录，XHS独立浏览器尚待登录。
+- 范围仍仅本片三平台准确新版/旧版替换与本人v16外盘回执、本协调记录；不会触及现金片/双均线其他投稿。B站新版BV1A4pn6REHf已通过及公开文案本轮读回；旧BV1ehpv6EEUq删除验证弹窗已定位，尚未删除。XHS新版沿上轮审核中，抖音本轮未提交。
+- 验收：准确v15文件SHA4624b97144a5f37caaa7f5fb1428e8b92586d45c0ebdfd60e7fbade8bb09e65b、实际封面、章节、正式配文/Astra生成/普通vibe文字、平台话题与声明保存和发布后状态/ID；删除准确旧稿且保留他片。下一步抖音先核已有稿避免重复投稿，完成正式表单；XHS登录与旧稿验证接续。
+- 成果commit仍c743614c6381dee1a34551e450d362fc05e0fc9d；媒体/平台回执仅固定外盘v16，Git不含媒体或登录资料。00:34存储入口固定UUID可用，外盘565282340864B。无科研、安装、付费、账户权限或Skill变更。
+
+---
+
 # 用户拒绝重开，替代工具待明确选择 2026-10-12T00:14:00.534281+08:00
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status blocked（控制通道不可用，替代工具待指定）；scope_released false。checked_coordination_sha 8e471e4abea12424086b2df0b56ccf4ad876ffbf；checked_at 2026-10-12T00:14:00.534281+08:00；COORDINATION1.1、自身本轮读回，cash-position-video-20261009与research-dispatch-controller沿用前轮已读范围，只写自身外盘v16/本协调记录，无其他范围变更。
 - 用户“每次都让我重开，我不重开”是新的限制，已接受，不再要求重开，也不把重开称为必然解决方法。CUA会话重建仍Chrome getApp超时；独立内置浏览器打开抖音管理页40秒超时。不能归咎于用户或把错误根因冒称已确定。
