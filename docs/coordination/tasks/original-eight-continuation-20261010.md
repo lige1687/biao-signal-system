@@ -13,9 +13,9 @@
 {
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "b99d1911933ed8c62d92c9f28740d1147f5304fb",
-  "checked_at": "2026-10-11T22:03:52.639170+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "bfedcf5e52b3a38dddc91f8a912fb53a598cbcd7",
+  "checked_at": "2026-10-11T22:17:37.522882+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -90,7 +90,7 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "question_ids": [
     "native-d-conditional-risk-20261010",
     "csi300-march-event-binding-20261010",
@@ -126,12 +126,16 @@
     "D-evidence",
     "D-tracking"
   ],
-  "latest_result_commit": "0bb60b542eb62ac9d2e08e6c276c00d5c1c3172f",
-  "scope_amendment": "Source3queriesreturnedexactannualtitles/code516220/PDF URLs. Narrowst.gtfund.comonlyexact3URLs, atmost3GET/noquery/noautoretry/noLocationfollow. Explicitunused3P1hop+1resource transfer innewtargets, global29/26/44 andactual38/20/18preserved. NewPDF/text/logs inexisting128MiBqualifiedfieldroute guotai-pdf-fields, metadata inownedraw. Finalminimumnewsourcebackupcanreadbothfixedroutes/exactfiles only.",
-  "updated_at": "2026-10-11T22:03:52.639170+08:00",
-  "conflict_decision": "已实际读db73c4d0至6c5abbbf3d893554088ae5edb567da7a00ebed95的现金视频网络修复和发布回执增量，仅该任务媒体/浏览器；本任务只既有资料、有限HTTP来源及研究归档。未改网络全局设置、不占Chrome。十三相关任务读取由本次helper记录。",
-  "current_work": "Root actualverified22newsourcefiles,threeuniqueexacttitlecodeURL/timehits,old35prefix and38paircount. Solnext3exactPDFs/cashdistribution/shareadjustment retrospectivefields; rootindependentpageextraction thenonefinalrecovery/report/API. Alloldfailuresremain; Bosera403/full14/E1/R2notreleased.",
-  "paused_questions": []
+  "latest_result_commit": "06d875805c98ff47cf24d678af4e16de29ce3d86",
+  "scope_amendment": "All latestsource/recovery exactfiles archived, sharedwrite scope released afterboundedcompletion. No formalR2, newparameter, production/trade, newchat, automation, or deletion authorized byclosure. Original budgets/failures preserved: total20q21res41hop outof29/26/44; sourcebalance9/5/3 notnewpermission.",
+  "updated_at": "2026-10-11T22:17:37.522882+08:00",
+  "conflict_decision": "本轮交付前实际fetch远端bfedcf5e52b3a38dddc91f8a912fb53a598cbcd7，与最后登记无增量；十三相关任务及COORDINATION按本次helper逐项读取记指纹。各媒体发布和其他研究范围未触碰，root唯一共享写者，现释放本轮范围。",
+  "current_work": "Bounded source-and-recovery question complete; no executingchild or ongoingHTTP/science. 11completeannual PDFs cash/split-table evidence independentlyaccepted, 266minimum files actualsame-device backup/restore accepted; reportAPI and ownbranchreadback/5originalgoalnotes verified. This is not entireeightgoals completion or scientificstrategyproof.",
+  "paused_questions": [
+    "博时沪深300ETF515130的2021—2024四全文未核，其中三入口缺失；实际403停止，合法正常官方访问或准确新原件可恢复对应问题",
+    "其他份额调整渠道、供应商历史到达、E1实施/更正去重及完整14产品输入资格仍未证明，R2/科学未放行",
+    "原同盘恢复不证明另一设备或盘损坏后的恢复，不作为当前本机工作的前置"
+  ]
 }
 <!-- lei-coordination-json:end -->
 ## 2026-10-10T18:00:52.344200+08:00 范围收窄与正在执行
@@ -317,3 +321,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T22:03:52.639170+08:00 三份已找到国泰准确年报取件与原两类字段核验
 
 按原全名三个年度均有唯一准确基金报告命中，不需要猜附件/换关键词。请求元资料有可见UTC时点，2023年报条目2024-03-28T16:00Z换算中国日期为03-29；不把元资料当供应商历史到达。原2023/24现金零已有旧2025报告覆盖，仅本次各年原文交叉核；新缺项为2022现金与三个拆分年。大文件仍固定外盘。
+
+## 2026-10-11T22:17:37.522882+08:00 本轮十一年报指定字段与266文件恢复、报告和五目标登记结案
+
+根实际再提国泰三原PDF17页、旧2025p9及完整ledger41对账，39次200/1次403/1次TLS失败，old38prefix保持。原11年度仅现金及拆分栏，其他权益未排除，不改旧表或研究资格。新增76恢复run31350/backup31356/restore31358全部三路径内容/stat独核，加旧190累计266文件30241157B/套，两套60482314B固定外盘；无需换电脑做本机核对，异机验收仍未证明。报告SHAebd32ad6d8d299d6fd796848b72d405629f0a295824fa78de41e108722cb479c，报告API正文/列表实际吻合、归置通过。根自己误写515130名称已据旧年报改成博时沪深300ETF，保留中间提交和纠错记录，无源请求重跑。成果06d875805c98ff47cf24d678af4e16de29ce3d86已推/603文件远端核同，主HEAD18e64fa6/indexe93cdb1d保持。五原goal只note并actualreadback：factor132/K-data23/recovery20/D-evidence11/D-tracking12，其他字段与历史前缀不变。completed仅本有界问题和归档登记完成，不将整个原八目标、策略有效或异机恢复标完成；没有后台继续。
