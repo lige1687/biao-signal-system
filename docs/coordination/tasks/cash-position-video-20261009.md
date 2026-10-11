@@ -387,3 +387,10 @@
 - 用户明确让AI开启增强代理并继续；现有Shadowrocket VPN两次已连接，但原节点与现有Hongkong021代理模式均无法建立公开HTTPS连接（TLS失败）。已停止测试VPN并恢复配置路由，ClashX原系统代理保持。新增代理应用/配置导入/TUN尚未执行，已向用户明确征求仅该新增范围的确认；不声称已修复。
 - Chrome扩展listTabs最新30秒nodeRepl.fetch失败；原生AX局部可操作，lige7已进入新版上传页。最终v3 SHA读回同；系统文件窗已选中v3，截图和AX均显示打开按钮disabled，网页读回未选择文件。路径输入、原生双击、AX打开、窗口Raise未产生上传，不能将成功工具返回当上传完成。小红书B站新版未上传/提交，旧稿未删除；旧XHS未提交本轮编辑。
 - 精确范围仍为v16外盘证据/回执、本人replacement-publication索引与work-progress、本协调记录。21:45固定UUID available/identity_ok通过。恢复条件：可用控制连接或文件上传路径；待确认后才增加官方客户端安装与网络路由范围。
+
+
+## 已授权官方代理客户端修复 2026-10-11T22:20:55.147340+08:00
+- active；scope_released=false；root / 01a12122-f90f-7e52-81dc-a20f9df3fa4c唯一写者。checked_coordination_sha=0efaf2c9f012fde993ce2d6caeab99a790aaa3dc；checked_at=2026-10-11T22:20:55.147340+08:00；已读COORDINATION1.1、自身、中控、original-eight22:17完成增量及trend-perspective独立视频，无文件冲突。
+- 用户在明确询问官方Clash Verge Rev安装、复用ClashX配置与TUN测试后回复“继续？”，按该具体待续动作授权继续。原发布授权保持，不改他稿。
+- 新增范围仅官方Homebrew cask应用安装/本地现有代理配置导入/TUN测试与必要可恢复切换；原ClashX配置与应用保留，不弱化TLS/系统安全，不获取密码。下载/缓存/日志写v16/network-repair；预计外盘<600MiB，应用内盘<600MiB。22:17固定设备身份与容量通过，内盘14GB外盘566GB。
+- 验收为实际HTTPS可达、CUA Chrome真实listTabs/getTab/页面读取及准确v3上传投稿，不把安装/连接状态当修复成功。写记录仍限本人v16回执、replacement-publication索引、work-progress及本协调。小红书/B站未提交，旧稿未删。
