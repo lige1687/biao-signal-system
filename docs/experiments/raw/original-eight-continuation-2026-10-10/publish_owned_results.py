@@ -34,6 +34,7 @@ def main():
     final_zero_sale = "--zero-sale-final" in sys.argv[2:]
     final_complete_account = "--complete-account-final" in sys.argv[2:]
     final_eight_review = "--eight-goal-review-final" in sys.argv[2:]
+    final_b4_source_preparation = "--b4-source-preparation-final" in sys.argv[2:]
     assert git("rev-parse", "HEAD", text=True).strip() == MAIN_HEAD
     assert digest((ROOT / ".git/index").read_bytes()) == MAIN_INDEX
     base = git("rev-parse", BRANCH, text=True).strip()
@@ -52,6 +53,8 @@ def main():
         registrations.append("complete-account")
     if final_eight_review:
         registrations.append("eight-goal-review")
+    if final_b4_source_preparation:
+        registrations.append("b4-source-preparation")
     entries = [json.loads((CONTROL / f"{name}-registration-entry.json").read_text())
                for name in registrations]
     paths = {"src/lei_signal/research/native_d_conditional_risk.py",
@@ -149,6 +152,8 @@ def main():
         line_keys.append("complete_account_index_line")
     if final_eight_review:
         line_keys.append("eight_goal_review_index_line")
+    if final_b4_source_preparation:
+        line_keys.append("b4_source_preparation_index_line")
     for key in line_keys:
         previous = inserts.get("previous_own_lines", {}).get(key)
         if previous is not None and previous != inserts[key] and previous in index:

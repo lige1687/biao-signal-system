@@ -1,0 +1,233 @@
+{
+  "execution_attempts": [
+    {
+      "attempt": 1,
+      "status": "failed_before_guard_cases",
+      "cause": "Preflight directory check did not exclude exFAT AppleDouble ._ metadata generated for the external stdout/stderr logs; no stub transport or guard case ran.",
+      "stderr": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/checker-stderr.log",
+      "stderr_sha256": "59551ceb7e6b6af7ffa25a8c30f6c3d9c871fb2b3ab7689467e9df303524aab1",
+      "exit_code": 1
+    },
+    {
+      "attempt": 2,
+      "status": "passed_after_purposeful_local_checker_repair",
+      "cause": "The only repair excluded ._ metadata names from the new guard directory preflight; frozen adapter, ledger and targets were untouched.",
+      "stdout": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/checker-stdout-repair.log",
+      "stdout_sha256": "6d897083cc30e2d7332d149b7369821ec3e3026394072188133a7f16ca14bdbc",
+      "stderr": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/checker-stderr-repair.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    }
+  ],
+  "cases": {
+    "P1_next_after_44": {
+      "attempted_next_hop": 45,
+      "fixture_only_first_target_cap": 4,
+      "ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/p1-fortyfive.jsonl",
+      "original_P1_sum": 44,
+      "original_first_target_cap": 3,
+      "refusal": "BudgetExceeded: P1 aggregate HTTP attempt cap reached",
+      "stub_calls_before_after": [
+        44,
+        44
+      ]
+    },
+    "all_original_targets_replay": {
+      "E1_URL_note": "Synthetic Bosera allowlist URL solely exercises replay; no E1 official source claimed.",
+      "all_target_counts": {
+        "E1-515300-2025-12-15": {
+          "candidate_resources": 1,
+          "evidence_attempts": 8,
+          "search_queries": 0
+        },
+        "P1-515130-2021": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-515130-2022": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-515130-2023": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-515130-2024": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-515170-2022": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-515170-2023": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-515170-2024": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-516220-2022": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-516220-2023": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-516220-2024": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-518850-2021": {
+          "candidate_resources": 1,
+          "evidence_attempts": 5,
+          "search_queries": 0
+        },
+        "P1-518850-2022": {
+          "candidate_resources": 1,
+          "evidence_attempts": 3,
+          "search_queries": 0
+        },
+        "P1-518850-2023": {
+          "candidate_resources": 1,
+          "evidence_attempts": 2,
+          "search_queries": 0
+        },
+        "P1-588000-2022": {
+          "candidate_resources": 1,
+          "evidence_attempts": 2,
+          "search_queries": 0
+        },
+        "P1-588000-2023": {
+          "candidate_resources": 1,
+          "evidence_attempts": 2,
+          "search_queries": 0
+        }
+      },
+      "ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/all-original-targets.jsonl",
+      "original_caps_unchanged": true,
+      "original_target_count": 16,
+      "stub_calls": 52,
+      "totals": {
+        "batch": 52,
+        "groups": {
+          "E1": 8,
+          "P1": 44
+        }
+      },
+      "unresolved_reservations": 0
+    },
+    "batch_next_after_52": {
+      "E1_URL_note": "Synthetic Bosera allowlist URL solely exercises budget counting; E1 official discovery remains unproved.",
+      "attempted_next_hop": 53,
+      "fixture_only_E1_target_and_group_cap": 9,
+      "ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/batch-fiftythree.jsonl",
+      "original_E1_group_cap": 8,
+      "original_batch_cap": 52,
+      "refusal": "BudgetExceeded: batch HTTP attempt cap reached",
+      "stub_calls_before_after": [
+        52,
+        52
+      ]
+    },
+    "mixed_counters": {
+      "counts": {
+        "candidate_resources": 1,
+        "evidence_attempts": 4,
+        "search_queries": 1
+      },
+      "fixture_only_target_hop_cap": 4,
+      "ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/mixed.jsonl",
+      "original_target_hop_cap": 3,
+      "resource_and_valid_retry": "one resource, two further HTTP hops",
+      "search_301_then_200": "one query, two HTTP hops",
+      "stub_calls": 4
+    },
+    "path_and_redirect": [
+      {
+        "case": "initial_sibling",
+        "error": "LedgerValidationError: e.gtfund.com is limited to evidenced Etrade/Search and Etrade/Jijin paths",
+        "ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/initial_sibling.jsonl",
+        "stub_calls": 0
+      },
+      {
+        "case": "initial_other",
+        "error": "LedgerValidationError: e.gtfund.com is limited to evidenced Etrade/Search and Etrade/Jijin paths",
+        "ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/initial_other.jsonl",
+        "stub_calls": 0
+      },
+      {
+        "case": "initial_credential",
+        "error": "LedgerValidationError: URL has a credential-like query parameter",
+        "ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/initial_credential.jsonl",
+        "stub_calls": 0
+      },
+      {
+        "case": "redirect_sibling",
+        "error": "LedgerValidationError: e.gtfund.com is limited to evidenced Etrade/Search and Etrade/Jijin paths",
+        "ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/redirect_sibling.jsonl",
+        "stub_calls": 1
+      },
+      {
+        "case": "redirect_host",
+        "error": "LedgerValidationError: URL must be HTTPS, credential-free, and on the approved official host allowlist",
+        "ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/redirect_host.jsonl",
+        "stub_calls": 1
+      }
+    ],
+    "target_ten": {
+      "attempted_next_hop": 11,
+      "fixture_only_target_hop_cap": 10,
+      "ledger": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard/target-ten.jsonl",
+      "original_target_hop_cap": 5,
+      "refusal": "BudgetExceeded: P1-518850-2021 evidence_attempts cap reached",
+      "stub_calls_before_after": [
+        10,
+        10
+      ]
+    }
+  },
+  "external_device": 16777238,
+  "external_guard": "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571/guard",
+  "limits": "Synthetic E1 URL and cap-expanded fixtures prove mechanics only; original targets/budgets are unchanged. The frozen ledger records path-wrapper validation errors as failed outcomes with body=None after reservation, while credential/host validation raises; every invalid path is stopped before the inner stub. Discovery coverage incomplete, Gate1B/R2 still blocked.",
+  "network_requests": 0,
+  "old_suite_reruns": 0,
+  "original_payload_caps": {
+    "E1": [
+      2,
+      4,
+      8
+    ],
+    "P1": [
+      10,
+      26,
+      44
+    ],
+    "batch_hops": 52
+  },
+  "original_source_sha256": {
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch1/access_log.py": "0f10fba51bcf5c3ab39ae9b91b36e5c580ffc02f90f6393ca4d947c468047f78",
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch2/CONTROLLER-GATE0B-REVIEW-2026-09-20.md": "de12d5516c782b0344b8015eea563d61721d2bcc9fc7aad44d13a2458404d2b9",
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch2/gate0b_request_ledger_adapter.py": "b004bdf26acc20e8fd3e74f728534d1d3024f9839950a89e1cd7b280c9f60289",
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch2/targets.json": "0602473b556f3994cc4205a0558a63c100df6357fa80717dfbf0a194553d5cda",
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch2/test_gate0b_request_ledger_adapter.py": "a38067c193a51f2c1c6e843569e1a2f9723a878a24a8c21454bd0074ef1651fe"
+  },
+  "original_sources_unchanged": true,
+  "pid": 27721,
+  "schema_version": 1,
+  "scientific_runs": 0,
+  "status": "passed_offline_local_guards_only",
+  "stub_transport_calls_total": 164
+}

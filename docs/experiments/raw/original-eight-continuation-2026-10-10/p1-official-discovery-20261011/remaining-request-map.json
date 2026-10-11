@@ -1,0 +1,53 @@
+{
+  "requests": [
+    {
+      "target_id": "P1-518850-2022",
+      "query_id": "Q07-page3",
+      "url": "https://www.chinaamc.com/product/publishGgList.do?fundcode=518850&pageIndex=3",
+      "method": "GET",
+      "covered_periods": [
+        "P1-518850-2021",
+        "P1-518850-2022",
+        "P1-518850-2023"
+      ],
+      "basis": "Actual page2 explicitly exposes nextPage3; same-code complete archive scope from frozen initialQ07 includes all3 years, charge unused 2022 query slot; source qualification stillfalse"
+    },
+    {
+      "target_id": "P1-588000-2023",
+      "query_id": "Q09-page3",
+      "url": "https://www.chinaamc.com/product/publishGgList.do?fundcode=588000&pageIndex=3",
+      "method": "GET",
+      "covered_periods": [
+        "P1-588000-2022",
+        "P1-588000-2023"
+      ],
+      "basis": "Actual page2 explicitly exposes nextPage3; same-code archive original initialQ09 sharedbothyears, charge unused2023 slot, not transfer a cap"
+    },
+    {
+      "target_id": "P1-515130-2023",
+      "query_id": "Q02-exact-form",
+      "url": "https://www.bosera.com/column/infoList.json",
+      "method": "POST",
+      "form_fields": {
+        "pageNo": "1",
+        "classid": "0002000200030005",
+        "fundCode": "515130"
+      },
+      "covered_periods": [
+        "P1-515130-2021",
+        "P1-515130-2022",
+        "P1-515130-2023",
+        "P1-515130-2024"
+      ],
+      "basis": "Actual initial official announcement HTML form id=form gives exact action/method/three hidden fields; no guessed date filters/page size/endpoints. Probe exactform page1only; stops if otherpage needed withoutavailable queries."
+    }
+  ],
+  "before_real_totals": {
+    "queries": 6,
+    "resources": 0,
+    "hops": 6
+  },
+  "same_code_shared_scope_predeclared": true,
+  "no_second_query_reallocation": true,
+  "other_unspent_518850_2023_slot_not_needed_without_new_factual_reason": true
+}

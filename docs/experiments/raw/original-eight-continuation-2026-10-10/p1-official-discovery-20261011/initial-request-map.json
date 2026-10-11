@@ -1,0 +1,62 @@
+{
+  "requests": [
+    {
+      "target_id": "P1-515130-2021",
+      "query_id": "Q01",
+      "url": "https://www.bosera.com/column/index.do?classid=0002000200030005&fundCode=515130",
+      "covered_periods": [
+        "P1-515130-2021",
+        "P1-515130-2022",
+        "P1-515130-2023",
+        "P1-515130-2024"
+      ],
+      "source_basis": "saved official product exact announcement href; no guessed parameters"
+    },
+    {
+      "target_id": "P1-515170-2022",
+      "query_id": "Q03",
+      "url": "https://www.chinaamc.com/fund/515170/jijingonggao.shtml?source=click",
+      "covered_periods": [
+        "P1-515170-2022",
+        "P1-515170-2023",
+        "P1-515170-2024"
+      ],
+      "source_basis": "saved official product exact announcement href"
+    },
+    {
+      "target_id": "P1-516220-2022",
+      "query_id": "Q05",
+      "url": "https://e.gtfund.com/Etrade/Search/index?word=516220&type=reportList",
+      "covered_periods": [
+        "P1-516220-2022",
+        "P1-516220-2023",
+        "P1-516220-2024"
+      ],
+      "source_basis": "saved actual official reportList form template, exact fixed code"
+    },
+    {
+      "target_id": "P1-518850-2021",
+      "query_id": "Q07",
+      "url": "https://www.chinaamc.com/product/publishGgList.do?fundcode=518850&pageIndex=2",
+      "covered_periods": [
+        "P1-518850-2021",
+        "P1-518850-2022",
+        "P1-518850-2023"
+      ],
+      "source_basis": "saved fund-specific form and thisPage(2); actual saved page4 GET proves parameter rendering; cannot assume terminal"
+    },
+    {
+      "target_id": "P1-588000-2022",
+      "query_id": "Q09",
+      "url": "https://www.chinaamc.com/product/publishGgList.do?fundcode=588000&pageIndex=2",
+      "covered_periods": [
+        "P1-588000-2022",
+        "P1-588000-2023"
+      ],
+      "source_basis": "saved specific form thisPage(2), pageIndex actual saved GET; years only intended until actual response"
+    }
+  ],
+  "logical_role": "search for every archive entry/navigation/pagination; no role relabel",
+  "shared_result_eligibility": "actual same code official result bounds or exact same-code annual link, never intended map alone",
+  "continuation": "At most remaining fixed five query slots, actual exposed links/forms only. No repeated same response or speculative endpoints. Need stable target/year charge before each call; target caps and global all-stage ceilings unchanged."
+}

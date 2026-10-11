@@ -1,0 +1,88 @@
+{
+  "schema": "b4-local-prerequisite-controller-acceptance/1",
+  "checked_at": "2026-10-11T09:46:33.177678+08:00",
+  "guard_result_sha256": "cb3e993dc59c6c6f98356d40cd28c5f1ab3fde03e95ba7a64bd2bb905e987a3d",
+  "saved_source_result_sha256": "14d0673d47cac2c86696bd066c446ca84e216a8b86f65135d23dfa2a8b394c2d",
+  "checks": [
+    {
+      "case": "target_ten",
+      "reservations": 10,
+      "paired_outcomes": 10,
+      "refusals": 1,
+      "ledger_sha256": "eea70c9f1c04cf34039f0bd698782446d763654c826e03d9eea9dc8c5e8f8631",
+      "independent_manual_record_count": true
+    },
+    {
+      "case": "P1_next_after_44",
+      "reservations": 44,
+      "paired_outcomes": 44,
+      "refusals": 1,
+      "ledger_sha256": "3f4077ed9e353e4c227ff7c9a722f5b9ecd0cc2300307c6a249df582f6dc6cfc",
+      "independent_manual_record_count": true
+    },
+    {
+      "case": "batch_next_after_52",
+      "reservations": 52,
+      "paired_outcomes": 52,
+      "refusals": 1,
+      "ledger_sha256": "5956d27313a45f32f3f51a7189268a0711ee0f10532823edccef570a787427a7",
+      "independent_manual_record_count": true
+    },
+    {
+      "case": "all_original_targets_replay",
+      "manual_reservations": {
+        "E1-515300-2025-12-15": 8,
+        "P1-515130-2021": 3,
+        "P1-515130-2022": 3,
+        "P1-515130-2023": 3,
+        "P1-515130-2024": 3,
+        "P1-515170-2022": 3,
+        "P1-515170-2023": 3,
+        "P1-515170-2024": 3,
+        "P1-516220-2022": 3,
+        "P1-516220-2023": 3,
+        "P1-516220-2024": 3,
+        "P1-518850-2021": 5,
+        "P1-518850-2022": 3,
+        "P1-518850-2023": 2,
+        "P1-588000-2022": 2,
+        "P1-588000-2023": 2
+      },
+      "matched_16_original_caps": true,
+      "ledger_sha256": "12e7d8432209fedd422473799653d2dfc4b08cdd2c7938495300d2dcb9bf7338"
+    }
+  ],
+  "actual_saved_sources_independently_read": {
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch1/gate1-collection/raw/P1-515130-Bosera-detail-03.bin": {
+      "sha256": "7723f49aed35eda5573d622bd409736ac49607cc4b6e4f80d9e032f1b7fd7403",
+      "bytes": 33754
+    },
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch1/gate1-collection/raw/P1-515170-ChinaAMC-detail-02.bin": {
+      "sha256": "5948197aa993643a9e2a29b4ec4369120ea1f0d8ac838c5e8a23cfcf3e8df264",
+      "bytes": 50670
+    },
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch1/gate1-collection/raw/P1-516220-Guotai-home-01.bin": {
+      "sha256": "3ea979fe598d578faee95e23e5f41ec413b806346c009f88ef92bd6b4bf28f59",
+      "bytes": 57562
+    },
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch1/gate1-collection/raw/P1-518850-ChinaAMC-list-03.bin": {
+      "sha256": "a9a8989b116d47c0bb51df57ec008355310d888eaef2169e248f7c74290c229d",
+      "bytes": 22443
+    },
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch1/gate1-collection/raw/P1-588000-ChinaAMC-list-01.bin": {
+      "sha256": "aa9d08cde54e37095ff87f7c0930a832a350c4c24e6e31a2d10a8ef02aacf649",
+      "bytes": 22872
+    },
+    "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-evidence-recovery-batch1/gate1-collection/raw/P1-588000-ChinaAMC-list-page4-02.bin": {
+      "sha256": "32aa218c6312eb12dd16e78c2e4905a92aae84b1ba7fd56982c4225214cf8ae9",
+      "bytes": 22839
+    }
+  },
+  "saved_discovery_target_count": 15,
+  "complete_local_discovery_count": 0,
+  "frozen_source_hashes_equal": true,
+  "new_root_transport_or_source_calls": 0,
+  "scientific_runs": 0,
+  "old_suite_reruns": 0,
+  "acceptance": "offline guards accepted; saved-byte insufficiency accepted as precise negative evidence; Gate1B/R2 not released"
+}
