@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "6c5abbbf3d893554088ae5edb567da7a00ebed95",
-  "checked_at": "2026-10-11T21:56:48.563745+08:00",
+  "checked_coordination_sha": "b99d1911933ed8c62d92c9f28740d1147f5304fb",
+  "checked_at": "2026-10-11T22:03:52.639170+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -127,10 +127,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "0bb60b542eb62ac9d2e08e6c276c00d5c1c3172f",
-  "scope_amendment": "After actual HTTP200 codekeyword zero hits, use original saved516220AR2021 PDF name for fixed2022/2023/2024 title queries, at most3queries, no guessedURLs/variants/pagination. Reconcile previously authorized8annual target allocations into new explicit targets before I/O, preserve global29queries26resources44hops/actual35hops17q18res and alloldcontracts. ExactreportPDFs only subsequently bound fromactualresponses withinremaining8resources9hops. New source artifact exactminimumset backup/restore onfixedexternaldevice, no old190recopy or deletions.",
-  "updated_at": "2026-10-11T21:56:48.563745+08:00",
+  "scope_amendment": "Source3queriesreturnedexactannualtitles/code516220/PDF URLs. Narrowst.gtfund.comonlyexact3URLs, atmost3GET/noquery/noautoretry/noLocationfollow. Explicitunused3P1hop+1resource transfer innewtargets, global29/26/44 andactual38/20/18preserved. NewPDF/text/logs inexisting128MiBqualifiedfieldroute guotai-pdf-fields, metadata inownedraw. Finalminimumnewsourcebackupcanreadbothfixedroutes/exactfiles only.",
+  "updated_at": "2026-10-11T22:03:52.639170+08:00",
   "conflict_decision": "已实际读db73c4d0至6c5abbbf3d893554088ae5edb567da7a00ebed95的现金视频网络修复和发布回执增量，仅该任务媒体/浏览器；本任务只既有资料、有限HTTP来源及研究归档。未改网络全局设置、不占Chrome。十三相关任务读取由本次helper记录。",
-  "current_work": "Read originalPDF identity, bind exactnew3payloads, reuse actualcurlmethod/defaultTLS/currentproxy, noauth/JS/challenges/automaticretry. Root independently accepts all35existing visits. Sol assigned queryprep/then frozenexecution, Luna distinctnewrecoveryrunner only. Sharedregistry/API/progress rootonly.",
+  "current_work": "Root actualverified22newsourcefiles,threeuniqueexacttitlecodeURL/timehits,old35prefix and38paircount. Solnext3exactPDFs/cashdistribution/shareadjustment retrospectivefields; rootindependentpageextraction thenonefinalrecovery/report/API. Alloldfailuresremain; Bosera403/full14/E1/R2notreleased.",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -313,3 +313,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T21:56:48.563745+08:00 已有正式基金名称下的三年度必要查询及新增资料恢复
 
 用户再次明确继续。正常curl已返回HTTP200空代码关键词结果；改用已保存年报正式基金名称回答原来三个年度资料缺口是必要来源核对，不增加科学实验/参数。旧失败和35次访问全保留；三年每年最多一个准确名称年度关键词，真实响应绑定下一文件，否则如实保留缺口。另用Luna只准备新增资料恢复脚本，root等待源访问停止后冻结最小集合，不动原资料。
+
+## 2026-10-11T22:03:52.639170+08:00 三份已找到国泰准确年报取件与原两类字段核验
+
+按原全名三个年度均有唯一准确基金报告命中，不需要猜附件/换关键词。请求元资料有可见UTC时点，2023年报条目2024-03-28T16:00Z换算中国日期为03-29；不把元资料当供应商历史到达。原2023/24现金零已有旧2025报告覆盖，仅本次各年原文交叉核；新缺项为2022现金与三个拆分年。大文件仍固定外盘。
