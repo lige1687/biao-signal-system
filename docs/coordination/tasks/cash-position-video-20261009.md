@@ -404,3 +404,9 @@
 - paused；scope_released=false；小红书/B站new_upload=false/new_submission=false，旧稿未删；新版v3不重做。
 
 - 成果 ffbb42cb8c1d99be51ae52b032d6629913a8d252 两准确小文件远端读回相同。
+
+
+## 现有ClashX控制进程配置修复已授权 2026-10-11T23:01:22.514486+08:00
+- active；scope_released=false；root唯一写者。checked_coordination_sha=bc950c3b93486445de1eb4a75cf2af803369027c；checked_at=2026-10-11T23:01:22.514486+08:00；已读自身、COORDINATION1.1及中控原范围、original-eight22:55和trend-perspective独立任务，无文件冲突。
+- 用户收到仅node_repl代理环境变量配置确认后明确“那你继续发布啊”，按具体待续修复授权执行。只增现有ClashX HTTP_PROXY/HTTPS_PROXY和NODE_USE_ENV_PROXY，不安装软件、不开TUN、不改ClashX；保留原config其他字段并核读回。
+- 范围新增仓外~/.codex/config.toml中mcp_servers.node_repl.env三个字段与控制工具安全重载；不重启整台电脑/Chrome或Codex活跃其他任务。v16、本人的索引/进度/本协调继续。验收是真实Chrome页面控制和v3上传提交；未验证不叫修复或发布。
