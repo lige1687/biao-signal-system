@@ -369,3 +369,9 @@
 ## 用户手动打开上传页，继续实际发布 2026-10-11T10:06:31.681459+08:00
 - active；stage replacement_publication；scope_released=false；root唯一写者。checked_coordination_sha=aad404297f3be3d25460d6341e8b4e46036c06e2；checked_at=2026-10-11T10:06:31.681459+08:00；fetch自09219aa4无增量，相关task-id original-eight/trend-perspective及COORDINATION1.1沿本轮实际已读，无重叠。
 - 用户“开了兄弟”，原生Chrome现在实际出现“上传视频/选择文件”控件。沿原v15最终120秒与三平台替换授权、Astra6署名、vibe普通文字与正式话题/章节要求继续。范围v16、本人回执/进度/本协调不变，旧他稿不碰，不永久删除。
+
+## 用户已发抖音，接续小红书B站及旧稿删除 2026-10-11T10:16:10.724866+08:00
+- active；stage replacement_publication；scope_released=false；root唯一写者。checked_coordination_sha=d54588b0ea042880a8bf010c19b7f5b87db5c48c；checked_at=2026-10-11T10:16:10.724866+08:00；已读自身/COORDINATION1.1/中控摘要、original-eight本轮增量与此前trend-perspective范围，无平台或记录冲突。
+- 用户明确“抖音我发了，小红书和B站你发一下吧。今天把原来的删一下”。原生已见新版02:00/10月11日10:14审核中，旧抖音现金行消失且删除成功提示，用户可能已自行删除，需再次核不重复操作。其余仅发布本现金v3；旧B站BV1Vhpv6EE2p与旧小红书6ac9e4fa0000000001009684逐项核身份，永久删除最终动作须按工具政策当时确认。
+- 写范围：既有v16外盘回执/证据；本人replacement-publication索引与work-progress、本协调记录。既有最终源120秒/hash不变；不动Skill/策略/他片/自动化。10:15 storage固定UUID available/identity通过，预计外盘普通截图与回执<50MiB、本机小记录<150KiB，不安装迁移删除本机资料。
+- 验收：新版准确文件/正文Astra6及普通vibe文字/正式话题/封面章节、提交后重新打开状态；删除旧稿独立回执，提交不冒充公开。
