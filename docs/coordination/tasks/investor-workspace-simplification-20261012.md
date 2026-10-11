@@ -1,3 +1,13 @@
+## 冷启动反例保留，撤回无效候选 2026-10-12T01:37:37.172036+08:00
+
+checked_coordination_sha 543c6dc64119e4c59d6f6899d598a36213281349；已读自身/独验最新记录，旧douyin-vike-increment存储范围已释放，本轮全任务精确路径检索无其他当前写者。实际PID7576第二次冷启动：prepared后append_user等待55423ms失败，write_events持锁54413ms；网页191秒才显示错误，无模型正文。预热专属串行无法覆盖页面get_many，已逐字恢复共享preheat/services源，下一次必要重载采用回退；不把它记为改进。
+
+新增唯一Sol候选范围只到sqlite_store.py::write_events及一份新单测；先保存共享当前文件基线，实际库只读、禁止复制5GB活动库。核已存在事件ID的重复写入成本，候选利用主键在写锁前查询已有ID，对缺项仍原INSERT OR IGNORE、保留计数/单commit/不覆盖历史/并发竞争处理；任何异常/并发语义差异须明示，不符合则不采用。先有相关数据量与行为证据、独审，再共享应用；不改事件内容、策略、研究运行、表结构、交易或快照定义。已有候选失败保存patch及结果后隔离回退。
+
+root另改准确前端等待文案：prepared只是资料就绪，只有模型阶段/正文才说正在生成；不为本轮新建通用线程平台。当前实际问答仍未通过，原请求不重复发送。
+
+---
+
 ## 合并处理全局助手实际独验失败 2026-10-12T01:25:38.323649+08:00
 
 checked_coordination_sha 82f129d3f9baf960f0bbfd16351a0e7ab39fd30c；最新仅既有视频与独验自身记录，无同块写者。独验确认冷启动失败保留、暖态原请求重试一条用户消息/一条真实回答；不得把grounded数值检查当日期或对象来源已通过。
@@ -105,8 +115,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "82f129d3f9baf960f0bbfd16351a0e7ab39fd30c",
-  "checked_at": "2026-10-12T01:25:38.323649+08:00",
+  "checked_coordination_sha": "543c6dc64119e4c59d6f6899d598a36213281349",
+  "checked_at": "2026-10-12T01:37:37.172036+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -164,7 +174,10 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/src/components/agentConsoleState.ts",
     "web/src/components/agentConsoleState.test.mjs",
     "src/lei_signal/plans/llm.py::discussion prompt and context label",
-    "tests/unit/test_discussion_context_scope.py"
+    "tests/unit/test_discussion_context_scope.py",
+    "src/lei_signal/storage/sqlite_store.py::write_events (candidate only; source baseline preserved first)",
+    "tests/unit/test_event_write_replay.py",
+    "web/src/components/AgentConsole.tsx::prepared waiting label"
   ],
   "scope_released": false,
   "local_result_commit": "30174a5d",
