@@ -1,3 +1,15 @@
+## 人类已授权切换，执行最小接入 2026-10-12T01:08:57.195543+08:00
+
+checked_coordination_sha ab2e8b4e4bb25a8f0b3831d8f00b048703af9abb；已读最新research-utility-review人类决定记录及视频两任务独立媒体范围，无同块冲突。前一次登记因协调SHA更新主动中止，未写共享文件。
+
+人类在01a12bbb-44f2-7c22-a0a9-defd4f1640bc直接回答“切换到已验证的 DeepSeek（推荐）”，本root已read_thread核原话。准确范围：本应用切换api.deepseek.com已有配置、保留旧配置、协议修复、只重载com.lei.backend、不购买；之后所选页面资料由DeepSeek处理，本次公开概念验收不外发持仓。唯一写者本root；独验聊天仅读页面/自有记录。
+
+新增共享范围只含.env三个ANTHROPIC连接键、llm.py最小补丁及该服务重载。先在被Git忽略的仓内唯一目录0700/文件0600备份旧.env和源码并核SHA；其他键/共享web/交易数据/其他服务不动。失败逐字恢复，不上传私有备份。预期原源码SHA72c66c98a43edf93bba94185263ddb8012b2a7af13f62581d9ffbfe68bd6e8d0，变更前复核。
+
+UI源码a5c99cae、交接30174a5d已本地保存，原三个目标note读回17/10/7。应用端到端仍未完成，接入后实际8000模型文字/grounded/无fallback和Web由独立聊天核验。0新研究、0真实计划/成交。
+
+---
+
 ## 必要失败恢复与未知计划文案 2026-10-12T00:52:20.103771+08:00
 
 checked_coordination_sha 6050eb75595a073fddb2652734c798f921a9cabd；最新其他变更仅trend视频的自身状态，与本范围不交叉。独审发现3个api.detail消费者未传取消信号，SymbolKlinePanel错误后仍骨架。新增仅这3文件的请求取消/禁自动重复重试/错误重试展示；Sol唯一写者，root继续自己PortfolioToday/PortfolioAgent/PortfolioPage/todayLogic与CopilotCards原块。台账失败补重试。
@@ -71,8 +83,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "6050eb75595a073fddb2652734c798f921a9cabd",
-  "checked_at": "2026-10-12T00:52:20.103771+08:00",
+  "checked_coordination_sha": "ab2e8b4e4bb25a8f0b3831d8f00b048703af9abb",
+  "checked_at": "2026-10-12T01:08:57.195543+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -117,10 +129,13 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "tests/unit/test_llm_protocol_routing.py",
     "web/src/components/SymbolKlinePanel.tsx",
     "web/src/components/portfolio/PortfolioTechnicalDetail.tsx",
-    "web/src/pages/AgentWorkspacePage.tsx"
+    "web/src/pages/AgentWorkspacePage.tsx",
+    ".env (local private: ANTHROPIC_AUTH_TOKEN, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL only)",
+    "src/lei_signal/plans/llm.py (shared runtime minimal protocol patch)",
+    "com.lei.backend (reload only)"
   ],
   "scope_released": false,
-  "local_result_commit": "58f59572adec26477a5df29080da8b6d233f0efb",
+  "local_result_commit": "30174a5d",
   "remote_result_commit": null
 }
 <!-- lei-coordination-json:end -->
