@@ -394,3 +394,13 @@
 - 用户在明确询问官方Clash Verge Rev安装、复用ClashX配置与TUN测试后回复“继续？”，按该具体待续动作授权继续。原发布授权保持，不改他稿。
 - 新增范围仅官方Homebrew cask应用安装/本地现有代理配置导入/TUN测试与必要可恢复切换；原ClashX配置与应用保留，不弱化TLS/系统安全，不获取密码。下载/缓存/日志写v16/network-repair；预计外盘<600MiB，应用内盘<600MiB。22:17固定设备身份与容量通过，内盘14GB外盘566GB。
 - 验收为实际HTTPS可达、CUA Chrome真实listTabs/getTab/页面读取及准确v3上传投稿，不把安装/连接状态当修复成功。写记录仍限本人v16回执、replacement-publication索引、work-progress及本协调。小红书/B站未提交，旧稿未删。
+
+
+## 回到既有ClashX，客户端已按用户要求卸载 2026-10-11T22:31:59.388518+08:00
+- checked_coordination_sha=326b39065c9493c6a8135ad45a1ef12d35163fff；checked_at=2026-10-11T22:31:59.388518+08:00；已读COORDINATION1.1、自身、中控、original-eight22:17完成及trend-perspective独立范围，无文件冲突；仅本人记录/v16。
+- Homebrew官方Clash Verge Rev2.5.8实际安装成功，本地配置按官方PrfItem结构导入，原源SHA不变；TUN提示需管理员服务，提出具体确认时用户纠正“就用clashx不行吗”并“删了”。已brew uninstall成功，/Applications/Clash Verge.app不存在；未安装系统服务/开启TUN。原ClashX rule/7890保持，现有配置未改；应用设置和外盘安装缓存留存，未宣称残留全部清除。
+- 发现macOS文件选择服务22:24与Chrome22:23实际崩溃记录；文件服务故障线程含IMK输入事件，原因尚未确定，不将它归因网络或模型。原生XHS新上传页最新黑屏；未投稿或删除旧稿。
+- 对工具同款Node24.21.0临时指定现有ClashX7890，chatgpt.com403/github.com200，可收到响应；真实Chrome listTabs仍30秒fetch失败，未声称已修复。最小三个环境变量修复计划保存在v16/network-repair/clashx-proxy-repair-plan.json，尚未写仓外config。按用户仓外修改约束已发具体确认，等待仅该配置范围；发布权限无需再问。
+- paused；scope_released=false；小红书/B站new_upload=false/new_submission=false，旧稿未删；新版v3不重做。
+
+- 成果 ffbb42cb8c1d99be51ae52b032d6629913a8d252 两准确小文件远端读回相同。
