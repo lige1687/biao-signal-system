@@ -1,3 +1,13 @@
+# 继续修复实际使用闭环 2026-10-12T00:39:27.093314+08:00
+
+用户要求“继续做你的闭环”。原任务恢复active，root唯一协调写者。基础为自身本地58f59572adec26477a5df29080da8b6d233f0efb。先核未验收点：详情长时间加载、Agent上下文、成功确认到成交复盘。仍服务展示/计划核对/复盘层，两权威策略实际SHA与登记一致。
+
+- checked_coordination_sha: c0b401b207bc7a48194dfd7147f52f81f1aec317；已读COORDINATION1.1、自身/中控/daily-trading-system-audit/douyin-vike-increment/investor-observation-map及最新视频三任务变更。重叠决定：后台接入与交易核心原owner代码先只读；douyin后续范围已释放，无当前同块写者。本轮仅隔离web必要展示/跳转/请求处理和相关回归，后端若需改另行登记准确文件；不改共享主树或重启服务。
+- Sol/medium两名助手分别只读诊断详情慢链和Agent闭环；root改动、隔离验证、共享登记。首次已确认成交成功链接缺tab=trades；详情原因未确定，不把超时提示当提速。
+- 验收：失败可恢复、同产品上下文不串、确认成功到正确记录并刷新；实际只读页面和隔离合成流程分别注明。0真实交易/计划写入、0外发私人账户、0科研实验、0安装/部署/删除。研究原任务仍暂停。
+
+---
+
 # 当前交付：界面闭环可试用，效果待用户验收
 
 2026-10-12T00:32:47.564747+08:00；root完成本轮有界UI实现/检查，scope_released=true。协调最新差异仅他任务自身状态，新增research-utility-review已全文读相关结案段且其明确避让本web范围，无并发同块冲突。
@@ -34,9 +44,9 @@
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "c9208af3bf44a362ca0d088e345962ba48f13022",
-  "checked_at": "2026-10-12T00:32:47.564747+08:00",
+  "status": "active",
+  "checked_coordination_sha": "c0b401b207bc7a48194dfd7147f52f81f1aec317",
+  "checked_at": "2026-10-12T00:39:27.093314+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -45,7 +55,11 @@
     "classic-factor-research",
     "original-eight-continuation-20261010",
     "research-dispatch-controller",
-    "research-utility-review-20261012"
+    "research-utility-review-20261012",
+    "douyin-vike-increment",
+    "ai-sycophancy-video-20261012",
+    "trend-perspective-video-20261009",
+    "value-investor-satire-20261012"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
@@ -65,9 +79,15 @@
     "web/src/pages/WorkspacePage.tsx",
     "web/src/pages/DetailPage.tsx",
     "web/src/pages/todayLogic.ts",
-    "web/src/pages/FactorPanelPage.tsx"
+    "web/src/pages/FactorPanelPage.tsx",
+    "web/src/api/client.ts",
+    "web/src/api/detailRequest.ts",
+    "web/src/api/detailRequest.test.mjs",
+    "web/src/components/copilot/CopilotCards.tsx",
+    "web/src/components/DetailLoadState.tsx",
+    "web/run-investor-loop-regression.mjs"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": "58f59572adec26477a5df29080da8b6d233f0efb",
   "remote_result_commit": null
 }
