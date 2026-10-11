@@ -13,9 +13,9 @@
 {
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "50740b49365d34a7b0dfe76e9557eb0de6d8edea",
-  "checked_at": "2026-10-11T23:11:29.122741+08:00",
+  "status": "paused",
+  "checked_coordination_sha": "d7c1192c99d1b5ae1dbd705a74e6c9577b2cb70e",
+  "checked_at": "2026-10-11T23:45:26.911091+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -145,14 +145,14 @@
     "D-tracking"
   ],
   "latest_result_commit": "a6590648a9ad6f7b5afbaa030b8394c84a1c3a57",
-  "scope_amendment": "Oneexplicitmanualretry sameexactofficialPDF aftercurl18partial (HTTP200nochallenge), newphasecap11prior10preserved. Noautomaticretry/accessbypass.",
-  "updated_at": "2026-10-11T23:11:29.122741+08:00",
+  "scope_amendment": "No new research orsource access; user explicitly changed current work to discussing core usability pain points and priority features.",
+  "updated_at": "2026-10-11T23:45:26.911091+08:00",
   "conflict_decision": "Read latest cash23:06 config/connection limitation and trend22:26. Neither shares evidencefiles; originalClashX7890 unchanged. No globalnetwork/browser/config changes in this task. Root sole sharedwriter; factor C/hourly and risk D3 remain outside.",
-  "current_work": "Root manualone2019transfer then source/recovery acceptance; Astraindependentnarrowcashdatecolumnreview. Local9PDFreuse delivered.",
+  "current_work": "Research paused peruserdiscussion pivot. No active childagents currently. Existingunpublishedsourceevidence retained; no implementation launched.",
   "paused_questions": [
-    "博时沪深300ETF515130的2021—2024四全文未核，其中三入口缺失；实际403停止，合法正常官方访问或准确新原件可恢复对应问题",
-    "其他份额调整渠道、供应商历史到达、E1实施/更正去重及完整14产品输入资格仍未证明，R2/科学未放行",
-    "原同盘恢复不证明另一设备或盘损坏后的恢复，不作为当前本机工作的前置"
+    "Current newsource phase final acceptance/recovery/report/API/publication unfinished dueuserdiscussion pivot",
+    "2023/24 datecolumn independentreview files absent; nineoldPDFfield correction absent",
+    "Remaining full14 inputqualification and strategyincrement unproven"
   ]
 }
 <!-- lei-coordination-json:end -->
@@ -375,3 +375,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T23:11:29.122741+08:00 2019准确PDF断流后仅一次有界补取
 
 详情API实际给出AttachDownLoad.jsp?id=427892，精确附件GET收到HTTP200/application/pdf但curl18断流，仅264124B、无EOF且PdfReader失败。不是访问拒绝或验证页面。原失败与10次耗用保留；基于必要追加授权只允许相同URL/现有代理/证书一次人工新目录取件，累计11上限，任何再次失败立即保留缺件，不自动续传/改host/绕过。日期栏场内场外差异独立Astra窄审正在进行，不预判笔误。
+
+## 2026-10-11T23:45:26.911091+08:00 用户转为使用痛点讨论，保存研究暂停点
+
+用户要求先务实讨论使用者核心痛点和重点功能，因此暂停研究续跑，不把中断当完成。嘉实2019准确附件唯一人工重试成功830561B/SHA1ace4d5a.../60页，原断流失败保留；历史当前累计11直接请求。E1新增57文件同盘恢复根三路径已核。新增历史最终根接受/恢复/报告API/成果提交仍未完成；日期栏独审与9旧PDF引文修正文件尚不存在，不能冒称通过。原件保留原路径，主工作区不切换，当前无执行子Agent。恢复需先读工作进度及真实产物，不重做已有取件。
