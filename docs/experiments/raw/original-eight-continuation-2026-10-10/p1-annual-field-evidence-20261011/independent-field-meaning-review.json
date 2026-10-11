@@ -1,0 +1,719 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-11T10:38:34.996397+08:00",
+  "reviewer": {
+    "agent": "/root/full_account_contract_readiness",
+    "role": "independent_source_meaning_review",
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "one_sentence_conclusion": "八份年报原文支持所列八个基金年度没有基金利润分配、没有报告中的基金拆分变动；这补的是两项事后事实证据，不能证明所有基金事项齐全、历史当时已拿到资料或钱款已经到账。",
+  "verdict": "ACCEPT_BOUNDED_EIGHT_ANNUAL_TWO_FIELD_MEANING_SUBJECT_TO_ROOT_PDF_AND_LEDGER_ACCEPTANCE",
+  "contract": {
+    "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/independent-field-review-contract-v2.json",
+    "sha256": "3bc367b7a962278f85a6431523d168bbed8efd3336fc43e27dcd69f377032fbc",
+    "prior_path": "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/independent-field-review-contract.json",
+    "prior_sha256": "219a12cbbf8da624ab8eefbb8645284fc731fad684df89c74b5aaf42f492efbf",
+    "coordination_sha": "ca7492423f5927cd796aaaad40ad9d9fee54ee5c",
+    "root_is_only_shared_writer": true
+  },
+  "review_scope": {
+    "saved_original_text_pages_actually_read": 44,
+    "original_identity_period_field_pages": 40,
+    "supplemental_588000_2022_pages": 4,
+    "all_page_hash_bindings_checked": true,
+    "whole_annuals_read": false,
+    "pdf_byte_reextraction_repeated": false,
+    "ledger_reconstruction_repeated": false,
+    "network_requests": 0,
+    "scientific_runs": 0,
+    "old_test_runs": 0,
+    "only_output": "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/independent-field-meaning-review.json"
+  },
+  "source_bindings": [
+    {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/pdf-field-delivery.json",
+      "sha256": "d142d5ab38ba202a2ab7f2600f12ecb15f9c04af33f7e8efae220aa567583d9e",
+      "matches_contract": true
+    },
+    {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/pdf-execution-receipt.json",
+      "sha256": "6acbee7efffe6f6f6ed7c0b3521a2d86e664a2960bff5783d64275eb7f03c2ca",
+      "matches_contract": true
+    },
+    {
+      "path": "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/original-action-comparison-input.json",
+      "sha256": "3f5a4f0095455d1ddf3b0a06351fe6b47b42a35ecac7b5afec4123ea101ff4a4",
+      "matches_contract": true
+    }
+  ],
+  "records": [
+    {
+      "target_id": "P1-515170-2022",
+      "fund_name": "华夏中证细分食品饮料产业主题交易型开放式指数证券投资基金",
+      "symbol": "515170",
+      "reporting_period": [
+        "2022-01-01",
+        "2022-12-31"
+      ],
+      "identity_and_period": "PASS: 封面、重要提示报告期、基金主代码及交易代码一致；不是联接基金或所持股票的分红。",
+      "cash_distribution_verdict": "SUPPORTED_RETROSPECTIVE_ZERO: 第4.8节明确本基金本报告期未进行利润分配。",
+      "share_adjustment_verdict": "SUPPORTED_RETROSPECTIVE_ZERO_IN_ORIGINAL_SPLIT_FIELD: 开放式基金份额变动表的本报告期基金拆分变动份额为横线；申购、赎回另列。",
+      "visible_article_date_from_delivery": "2023-03-30",
+      "cover_send_date_matches_visible_article_date": true,
+      "article_itself_independently_read_in_this_review": false,
+      "historical_source_arrival_date": null,
+      "actual_account_cash_payment_date": null,
+      "conflict_in_read_pages": false,
+      "evidence": [
+        {
+          "role": "annual_period",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2022/page-0002.txt",
+          "sha256": "fcfe95465885d5a6faf2b79d81d04c94a0b0b7d0d2cfe43ce1d72102376c498b",
+          "matches_delivery": true,
+          "physical_page_1_based": 2,
+          "printed_page": 1,
+          "quote": "本报告期自 2022 年 1 月 1 日起至 12 月 31 日止。"
+        },
+        {
+          "role": "cover",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2022/page-0001.txt",
+          "sha256": "3214b53299ffa4227365141d1199ae45ae830f32a7e1908c00090e60cd001002",
+          "matches_delivery": true,
+          "physical_page_1_based": 1,
+          "printed_page": null,
+          "quote": "华夏中证细分食品饮料产业主题交易型开放式 指数证券投资基金 2022 年年度报告 2022 年 12 月 31 日 基金管理人：华夏基金管理有限公司 基金托管人：中国银行股份有限公司 送出日期：二〇二三年三月三十日"
+        },
+        {
+          "role": "fund_code",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2022/page-0004.txt",
+          "sha256": "9758d41b6ce0b3a41014a7a9e2817805454104332604a995691cc95f49580b41",
+          "matches_delivery": true,
+          "physical_page_1_based": 4,
+          "printed_page": 3,
+          "quote": "券投资基金 基金简称 华夏中证细分食品饮料产业主题 ETF 场内简称 食品饮料（扩位证券简称：食品饮料 ETF） 基金主代码 515170 交易代码 515170 基金运作方式 交易型开放式 基金合同生效日 2020 年 12 月 30 日 基金"
+        },
+        {
+          "role": "cash_distribution",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2022/page-0014.txt",
+          "sha256": "92780c4f103143fb92765869e352297d9bccc622a107b531ecfd3c8045c35cba",
+          "matches_delivery": true,
+          "physical_page_1_based": 14,
+          "printed_page": 13,
+          "quote": "本基金本报告期未进行利润分配，符合相关法规及基金合同的规定。"
+        },
+        {
+          "role": "share_adjustment",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2022/page-0065.txt",
+          "sha256": "12296574ff1905a7525efa1e933a814d347106b892690c3a3b81f4117ce76f67",
+          "matches_delivery": true,
+          "physical_page_1_based": 65,
+          "printed_page": 64,
+          "quote": "本报告期基金拆分变动份额 -"
+        }
+      ]
+    },
+    {
+      "target_id": "P1-515170-2023",
+      "fund_name": "华夏中证细分食品饮料产业主题交易型开放式指数证券投资基金",
+      "symbol": "515170",
+      "reporting_period": [
+        "2023-01-01",
+        "2023-12-31"
+      ],
+      "identity_and_period": "PASS: 封面、重要提示报告期、基金主代码及交易代码一致；不是联接基金或所持股票的分红。",
+      "cash_distribution_verdict": "SUPPORTED_RETROSPECTIVE_ZERO: 第4.8节明确本基金本报告期未进行利润分配。",
+      "share_adjustment_verdict": "SUPPORTED_RETROSPECTIVE_ZERO_IN_ORIGINAL_SPLIT_FIELD: 开放式基金份额变动表的本报告期基金拆分变动份额为横线；申购、赎回另列。",
+      "visible_article_date_from_delivery": "2024-03-28",
+      "cover_send_date_matches_visible_article_date": true,
+      "article_itself_independently_read_in_this_review": false,
+      "historical_source_arrival_date": null,
+      "actual_account_cash_payment_date": null,
+      "conflict_in_read_pages": false,
+      "evidence": [
+        {
+          "role": "annual_period",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2023/page-0002.txt",
+          "sha256": "ce5e98dd5fa037a05642ee96b9059ee1bebf2278fc716bfa5198d77462f69e97",
+          "matches_delivery": true,
+          "physical_page_1_based": 2,
+          "printed_page": 1,
+          "quote": "本报告期自 2023 年 1 月 1 日起至 12 月 31 日止。"
+        },
+        {
+          "role": "cover",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2023/page-0001.txt",
+          "sha256": "4582140a404e9bb9d45d912d178d27971e4a1a37dbbb9670161b2d1d24b9a4ef",
+          "matches_delivery": true,
+          "physical_page_1_based": 1,
+          "printed_page": null,
+          "quote": "华夏中证细分食品饮料产业主题交易型开放式 指数证券投资基金 2023 年年度报告 2023 年 12 月 31 日 基金管理人：华夏基金管理有限公司 基金托管人：中国银行股份有限公司 送出日期：二〇二四年三月二十八日"
+        },
+        {
+          "role": "fund_code",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2023/page-0004.txt",
+          "sha256": "4fb26cb86f5efc131d8f3ad438f05eb64a4f4f856ce9c228710eb5e0d4ef5840",
+          "matches_delivery": true,
+          "physical_page_1_based": 4,
+          "printed_page": 3,
+          "quote": "券投资基金 基金简称 华夏中证细分食品饮料产业主题 ETF 场内简称 食品饮料（扩位证券简称：食品饮料 ETF） 基金主代码 515170 交易代码 515170 基金运作方式 交易型开放式 基金合同生效日 2020 年 12 月 30 日 基金"
+        },
+        {
+          "role": "cash_distribution",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2023/page-0014.txt",
+          "sha256": "5d4ad75d39a5c4ba79fdde0d7fdba5efadd39a08d8061476c494678200c8362c",
+          "matches_delivery": true,
+          "physical_page_1_based": 14,
+          "printed_page": 13,
+          "quote": "本基金本报告期未进行利润分配，符合相关法规及基金合同的规定。"
+        },
+        {
+          "role": "share_adjustment",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2023/page-0062.txt",
+          "sha256": "3558abff5c736dd29309adbe9c8ac7c739ce94c89462233209ea2fc5161a5baa",
+          "matches_delivery": true,
+          "physical_page_1_based": 62,
+          "printed_page": 61,
+          "quote": "本报告期基金拆分变动份额 -"
+        }
+      ]
+    },
+    {
+      "target_id": "P1-515170-2024",
+      "fund_name": "华夏中证细分食品饮料产业主题交易型开放式指数证券投资基金",
+      "symbol": "515170",
+      "reporting_period": [
+        "2024-01-01",
+        "2024-12-31"
+      ],
+      "identity_and_period": "PASS: 封面、重要提示报告期、基金主代码及交易代码一致；不是联接基金或所持股票的分红。",
+      "cash_distribution_verdict": "SUPPORTED_RETROSPECTIVE_ZERO: 第4.8节明确本基金本报告期未进行利润分配。",
+      "share_adjustment_verdict": "SUPPORTED_RETROSPECTIVE_ZERO_IN_ORIGINAL_SPLIT_FIELD: 开放式基金份额变动表的本报告期基金拆分变动份额为横线；申购、赎回另列。",
+      "visible_article_date_from_delivery": "2025-03-31",
+      "cover_send_date_matches_visible_article_date": true,
+      "article_itself_independently_read_in_this_review": false,
+      "historical_source_arrival_date": null,
+      "actual_account_cash_payment_date": null,
+      "conflict_in_read_pages": false,
+      "evidence": [
+        {
+          "role": "annual_period",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2024/page-0002.txt",
+          "sha256": "aefe9f0cded336c324ce61a790d12580882d3f104bf2c69b44de13a7449093d9",
+          "matches_delivery": true,
+          "physical_page_1_based": 2,
+          "printed_page": 1,
+          "quote": "本报告期自 2024 年 1 月 1 日起至 12 月 31 日止。"
+        },
+        {
+          "role": "cover",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2024/page-0001.txt",
+          "sha256": "03851169d47685639fccec029f2a7d417e077e2aadd12e122983d5feeba39bdb",
+          "matches_delivery": true,
+          "physical_page_1_based": 1,
+          "printed_page": null,
+          "quote": "华夏中证细分食品饮料产业主题交易型开放式 指数证券投资基金 2024 年年度报告 2024 年 12 月 31 日 基金管理人：华夏基金管理有限公司 基金托管人：中国银行股份有限公司 送出日期：二〇二五年三月三十一日"
+        },
+        {
+          "role": "fund_code",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2024/page-0004.txt",
+          "sha256": "358e2c392e5ffc2e7ecaabafa3c41a001cdf3dd5d26dc5dcd3cc594b422f1a0e",
+          "matches_delivery": true,
+          "physical_page_1_based": 4,
+          "printed_page": 3,
+          "quote": "券投资基金 基金简称 华夏中证细分食品饮料产业主题 ETF 场内简称 食品饮料（扩位证券简称：食品饮料 ETF） 基金主代码 515170 交易代码 515170 基金运作方式 交易型开放式 基金合同生效日 2020 年 12 月 30 日 基金"
+        },
+        {
+          "role": "cash_distribution",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2024/page-0014.txt",
+          "sha256": "70394b6b7a241c179fb5acbe2325aa00d46e74f76a27933059183e5f318162c1",
+          "matches_delivery": true,
+          "physical_page_1_based": 14,
+          "printed_page": 13,
+          "quote": "本基金本报告期未进行利润分配，符合相关法规及基金合同的规定。"
+        },
+        {
+          "role": "share_adjustment",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-515170-2024/page-0054.txt",
+          "sha256": "cb4aae8cade08de5e51e30dfe760ef5843d49697605d99575158c5808917ce39",
+          "matches_delivery": true,
+          "physical_page_1_based": 54,
+          "printed_page": 53,
+          "quote": "本报告期基金拆分变动份额 -"
+        }
+      ]
+    },
+    {
+      "target_id": "P1-518850-2021",
+      "fund_name": "华夏黄金交易型开放式证券投资基金",
+      "symbol": "518850",
+      "reporting_period": [
+        "2021-01-01",
+        "2021-12-31"
+      ],
+      "identity_and_period": "PASS: 封面、重要提示报告期、基金主代码及交易代码一致；不是联接基金或所持股票的分红。",
+      "cash_distribution_verdict": "SUPPORTED_RETROSPECTIVE_ZERO: 第4.8节明确本基金本报告期未进行利润分配。",
+      "share_adjustment_verdict": "SUPPORTED_RETROSPECTIVE_ZERO_IN_ORIGINAL_SPLIT_FIELD: 开放式基金份额变动表的本报告期基金拆分变动份额为横线；申购、赎回另列。",
+      "visible_article_date_from_delivery": "2022-03-30",
+      "cover_send_date_matches_visible_article_date": true,
+      "article_itself_independently_read_in_this_review": false,
+      "historical_source_arrival_date": null,
+      "actual_account_cash_payment_date": null,
+      "conflict_in_read_pages": false,
+      "evidence": [
+        {
+          "role": "annual_period",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2021/page-0002.txt",
+          "sha256": "3410ccbdc017d57b81c08974155711b30da90c975177dad92ed06692e1d3e480",
+          "matches_delivery": true,
+          "physical_page_1_based": 2,
+          "printed_page": 1,
+          "quote": "本报告期自 2021 年 1 月 1 日起至 12 月 31 日止。"
+        },
+        {
+          "role": "cover",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2021/page-0001.txt",
+          "sha256": "9b0457558eeeba60059e5730f40200cfe7d4f46ec4efa88d2bdf1fa27a94f8f1",
+          "matches_delivery": true,
+          "physical_page_1_based": 1,
+          "printed_page": null,
+          "quote": "华夏黄金交易型开放式证券投资基金 2021 年年度报告 2021 年 12 月 31 日 基金管理人：华夏基金管理有限公司 基金托管人：中国建设银行股份有限公司 送出日期：二〇二二年三月三十日"
+        },
+        {
+          "role": "fund_code",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2021/page-0004.txt",
+          "sha256": "8db7bcac90a91bdb9e838694582169cec0a6f5f2ed5ce3cf4040506534038448",
+          "matches_delivery": true,
+          "physical_page_1_based": 4,
+          "printed_page": 3,
+          "quote": "型开放式证券投资基金 基金简称 华夏黄金 ETF 场内简称 黄金 9999（扩位证券简称：黄金 ETF9999） 基金主代码 518850 交易代码 518850 基金运作方式 交易型开放式 基金合同生效日 2020 年 4 月 13 日 基金管"
+        },
+        {
+          "role": "cash_distribution",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2021/page-0012.txt",
+          "sha256": "2b4b907108b82b4331de01d51f13709fb043b353ee581bb8c6eeb512da1959d2",
+          "matches_delivery": true,
+          "physical_page_1_based": 12,
+          "printed_page": 11,
+          "quote": "本基金本报告期未进行利润分配，符合相关法规及基金合同的规定。"
+        },
+        {
+          "role": "share_adjustment",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2021/page-0043.txt",
+          "sha256": "6072f54720829737eaee9fc38cfc3f56c849a922e3fdf8218e6502aceb6d0cb4",
+          "matches_delivery": true,
+          "physical_page_1_based": 43,
+          "printed_page": 42,
+          "quote": "本报告期基金拆分变动份额 -"
+        }
+      ]
+    },
+    {
+      "target_id": "P1-518850-2022",
+      "fund_name": "华夏黄金交易型开放式证券投资基金",
+      "symbol": "518850",
+      "reporting_period": [
+        "2022-01-01",
+        "2022-12-31"
+      ],
+      "identity_and_period": "PASS: 封面、重要提示报告期、基金主代码及交易代码一致；不是联接基金或所持股票的分红。",
+      "cash_distribution_verdict": "SUPPORTED_RETROSPECTIVE_ZERO: 第4.8节明确本基金本报告期未进行利润分配。",
+      "share_adjustment_verdict": "SUPPORTED_RETROSPECTIVE_ZERO_IN_ORIGINAL_SPLIT_FIELD: 开放式基金份额变动表的本报告期基金拆分变动份额为横线；申购、赎回另列。",
+      "visible_article_date_from_delivery": "2023-03-30",
+      "cover_send_date_matches_visible_article_date": true,
+      "article_itself_independently_read_in_this_review": false,
+      "historical_source_arrival_date": null,
+      "actual_account_cash_payment_date": null,
+      "conflict_in_read_pages": false,
+      "evidence": [
+        {
+          "role": "annual_period",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2022/page-0002.txt",
+          "sha256": "cc4de51540d43ea93b34abc5fb112a7a0207eda945952369776a54675df827f2",
+          "matches_delivery": true,
+          "physical_page_1_based": 2,
+          "printed_page": 1,
+          "quote": "本报告期自 2022 年 1 月 1 日起至 12 月 31 日止。"
+        },
+        {
+          "role": "cover",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2022/page-0001.txt",
+          "sha256": "00f11231d254fd4a9ca3af3b8d142e5d66d768a2ca5bc117efd2f06982f1d6d5",
+          "matches_delivery": true,
+          "physical_page_1_based": 1,
+          "printed_page": null,
+          "quote": "华夏黄金交易型开放式证券投资基金 2022 年年度报告 2022 年 12 月 31 日 基金管理人：华夏基金管理有限公司 基金托管人：中国建设银行股份有限公司 送出日期：二〇二三年三月三十日"
+        },
+        {
+          "role": "fund_code",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2022/page-0004.txt",
+          "sha256": "7168e0804bf71f2ccb93e825a6d7e96d912bbc071968534fe563be7ae018554f",
+          "matches_delivery": true,
+          "physical_page_1_based": 4,
+          "printed_page": 3,
+          "quote": "型开放式证券投资基金 基金简称 华夏黄金 ETF 场内简称 黄金 9999（扩位证券简称：黄金 ETF9999） 基金主代码 518850 交易代码 518850 基金运作方式 交易型开放式 基金合同生效日 2020 年 4 月 13 日 基金管"
+        },
+        {
+          "role": "cash_distribution",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2022/page-0013.txt",
+          "sha256": "05934c9afcdff45ed9ae6b356b914592f3ea87314e0156e46f24603c72fd374d",
+          "matches_delivery": true,
+          "physical_page_1_based": 13,
+          "printed_page": 12,
+          "quote": "本基金本报告期未进行利润分配，符合相关法规及基金合同的规定。"
+        },
+        {
+          "role": "share_adjustment",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2022/page-0045.txt",
+          "sha256": "1c42d9866e45ebb4069d90aa74f09a8fafc6fe87d7d3d5242d55df27ab54b359",
+          "matches_delivery": true,
+          "physical_page_1_based": 45,
+          "printed_page": 44,
+          "quote": "本报告期基金拆分变动份额 -"
+        }
+      ]
+    },
+    {
+      "target_id": "P1-518850-2023",
+      "fund_name": "华夏黄金交易型开放式证券投资基金",
+      "symbol": "518850",
+      "reporting_period": [
+        "2023-01-01",
+        "2023-12-31"
+      ],
+      "identity_and_period": "PASS: 封面、重要提示报告期、基金主代码及交易代码一致；不是联接基金或所持股票的分红。",
+      "cash_distribution_verdict": "SUPPORTED_RETROSPECTIVE_ZERO: 第4.8节明确本基金本报告期未进行利润分配。",
+      "share_adjustment_verdict": "SUPPORTED_RETROSPECTIVE_ZERO_IN_ORIGINAL_SPLIT_FIELD: 开放式基金份额变动表的本报告期基金拆分变动份额为横线；申购、赎回另列。",
+      "visible_article_date_from_delivery": "2024-03-28",
+      "cover_send_date_matches_visible_article_date": true,
+      "article_itself_independently_read_in_this_review": false,
+      "historical_source_arrival_date": null,
+      "actual_account_cash_payment_date": null,
+      "conflict_in_read_pages": false,
+      "evidence": [
+        {
+          "role": "annual_period",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2023/page-0002.txt",
+          "sha256": "3a809cb90c46bf7a1d865021a85c7e884e30877dc5e0041ded06cd9543ab3ccf",
+          "matches_delivery": true,
+          "physical_page_1_based": 2,
+          "printed_page": 1,
+          "quote": "本报告期自 2023 年 1 月 1 日起至 12 月 31 日止。"
+        },
+        {
+          "role": "cover",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2023/page-0001.txt",
+          "sha256": "ce5a386a131a265fb389dbdf9d2b51546941a7817cbcfc910e2e15b2f5ce2d4f",
+          "matches_delivery": true,
+          "physical_page_1_based": 1,
+          "printed_page": null,
+          "quote": "华夏黄金交易型开放式证券投资基金 2023 年年度报告 2023 年 12 月 31 日 基金管理人：华夏基金管理有限公司 基金托管人：中国建设银行股份有限公司 送出日期：二〇二四年三月二十八日"
+        },
+        {
+          "role": "fund_code",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2023/page-0004.txt",
+          "sha256": "eee41343f1ea0613e023d7d100e8224e4f797e0faa3e35ce23b030998c4b0830",
+          "matches_delivery": true,
+          "physical_page_1_based": 4,
+          "printed_page": 3,
+          "quote": "易型开放式证券投资基金 基金简称 华夏黄金 ETF 场内简称 黄金 9999（扩位证券简称：黄金 ETF 华夏） 基金主代码 518850 交易代码 518850 基金运作方式 交易型开放式 基金合同生效日 2020 年 4 月 13 日 基金管"
+        },
+        {
+          "role": "cash_distribution",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2023/page-0015.txt",
+          "sha256": "98652e25aa8b5b6aaa680714aa58dca2d40bc39965863681efe13b1947ab2f0e",
+          "matches_delivery": true,
+          "physical_page_1_based": 15,
+          "printed_page": 14,
+          "quote": "本基金本报告期未进行利润分配，符合相关法规及基金合同的规定。"
+        },
+        {
+          "role": "share_adjustment",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2023/page-0045.txt",
+          "sha256": "6dd8cf0cb0063e20a713a12461de49f75175d8b5000af2acddf3d8472c5a1b8b",
+          "matches_delivery": true,
+          "physical_page_1_based": 45,
+          "printed_page": 44,
+          "quote": "本报告期基金拆分变动份额 -"
+        }
+      ]
+    },
+    {
+      "target_id": "P1-588000-2022",
+      "fund_name": "华夏上证科创板50成份交易型开放式指数证券投资基金",
+      "symbol": "588000",
+      "reporting_period": [
+        "2022-01-01",
+        "2022-12-31"
+      ],
+      "identity_and_period": "PASS: 封面、重要提示报告期、基金主代码及交易代码一致；不是联接基金或所持股票的分红。",
+      "cash_distribution_verdict": "SUPPORTED_RETROSPECTIVE_ZERO: 第4.8节明确本基金本报告期未进行利润分配。",
+      "share_adjustment_verdict": "SUPPORTED_RETROSPECTIVE_ZERO_IN_ORIGINAL_SPLIT_FIELD: 开放式基金份额变动表的本报告期基金拆分变动份额为横线；申购、赎回另列。",
+      "visible_article_date_from_delivery": "2023-03-30",
+      "cover_send_date_matches_visible_article_date": true,
+      "article_itself_independently_read_in_this_review": false,
+      "historical_source_arrival_date": null,
+      "actual_account_cash_payment_date": null,
+      "conflict_in_read_pages": false,
+      "evidence": [
+        {
+          "role": "annual_period",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2022/page-0002.txt",
+          "sha256": "3865cfb00c0f02e07ea751f429a0e73947522e56cf4ab723ef28323169f3a34d",
+          "matches_delivery": true,
+          "physical_page_1_based": 2,
+          "printed_page": 1,
+          "quote": "本报告期自 2022 年 1 月 1 日起至 12 月 31 日止。"
+        },
+        {
+          "role": "cover",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2022/page-0001.txt",
+          "sha256": "668bb8f16ed5df14c7fe0c0afbc42022338f20eb433c9848baa59dead5df33ad",
+          "matches_delivery": true,
+          "physical_page_1_based": 1,
+          "printed_page": null,
+          "quote": "华夏上证科创板 50 成份交易型开放式指数证券 投资基金 2022 年年度报告 2022 年 12 月 31 日 基金管理人：华夏基金管理有限公司 基金托管人：招商银行股份有限公司 送出日期：二〇二三年三月三十日"
+        },
+        {
+          "role": "fund_code",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2022/page-0004.txt",
+          "sha256": "38c1eba76e632d819ea4657392e7d69416d6ecdba6843481905a6382c92a6868",
+          "matches_delivery": true,
+          "physical_page_1_based": 4,
+          "printed_page": 3,
+          "quote": "券投资基金 基金简称 华夏上证科创板 50 成份 ETF 场内简称 科创 50（扩位证券简称：科创 50ETF） 基金主代码 588000 交易代码 588000 基金运作方式 交易型开放式 基金合同生效日 2020 年 9 月 28 日 基金管"
+        },
+        {
+          "role": "cash_distribution",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2022/page-0015.txt",
+          "sha256": "02b285e644a4efd68d5ff205f9d10d32cec94b2452bbb3474b0f6a4eda43ce1b",
+          "matches_delivery": true,
+          "physical_page_1_based": 15,
+          "printed_page": 14,
+          "quote": "本基金本报告期未进行利润分配，符合相关法规及基金合同的规定。"
+        },
+        {
+          "role": "share_adjustment",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2022/page-0585.txt",
+          "sha256": "afa4fdf5a6794c5ec52d949d20b3bd3345e2fa923488daae34e5c96d9bdae0ab",
+          "matches_delivery": true,
+          "physical_page_1_based": 585,
+          "printed_page": 584,
+          "quote": "本报告期基金拆分变动份额 -"
+        }
+      ]
+    },
+    {
+      "target_id": "P1-588000-2023",
+      "fund_name": "华夏上证科创板50成份交易型开放式指数证券投资基金",
+      "symbol": "588000",
+      "reporting_period": [
+        "2023-01-01",
+        "2023-12-31"
+      ],
+      "identity_and_period": "PASS: 封面、重要提示报告期、基金主代码及交易代码一致；不是联接基金或所持股票的分红。",
+      "cash_distribution_verdict": "SUPPORTED_RETROSPECTIVE_ZERO: 第4.8节明确本基金本报告期未进行利润分配。",
+      "share_adjustment_verdict": "SUPPORTED_RETROSPECTIVE_ZERO_IN_ORIGINAL_SPLIT_FIELD: 开放式基金份额变动表的本报告期基金拆分变动份额为横线；申购、赎回另列。",
+      "visible_article_date_from_delivery": "2024-03-28",
+      "cover_send_date_matches_visible_article_date": true,
+      "article_itself_independently_read_in_this_review": false,
+      "historical_source_arrival_date": null,
+      "actual_account_cash_payment_date": null,
+      "conflict_in_read_pages": false,
+      "evidence": [
+        {
+          "role": "annual_period",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2023/page-0002.txt",
+          "sha256": "571d3d632d0c9e90555951eade474d35df7ebced9e22ae97c235c72f14efc601",
+          "matches_delivery": true,
+          "physical_page_1_based": 2,
+          "printed_page": 1,
+          "quote": "本报告期自 2023 年 1 月 1 日起至 12 月 31 日止。"
+        },
+        {
+          "role": "cover",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2023/page-0001.txt",
+          "sha256": "3cc1845082fa3bc766c6d25029d28492af1000a955fa9e313efd7d52d95e0c33",
+          "matches_delivery": true,
+          "physical_page_1_based": 1,
+          "printed_page": null,
+          "quote": "华夏上证科创板 50 成份交易型开放式指数证券 投资基金 2023 年年度报告 2023 年 12 月 31 日 基金管理人：华夏基金管理有限公司 基金托管人：招商银行股份有限公司 送出日期：二〇二四年三月二十八日"
+        },
+        {
+          "role": "fund_code",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2023/page-0004.txt",
+          "sha256": "15b235468d53cff6828852562390ac4b596b11a2495cb862bf451ff24d771486",
+          "matches_delivery": true,
+          "physical_page_1_based": 4,
+          "printed_page": 3,
+          "quote": "券投资基金 基金简称 华夏上证科创板 50 成份 ETF 场内简称 科创 50（扩位证券简称：科创 50ETF） 基金主代码 588000 交易代码 588000 基金运作方式 交易型开放式 基金合同生效日 2020 年 9 月 28 日 基金管"
+        },
+        {
+          "role": "cash_distribution",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2023/page-0017.txt",
+          "sha256": "cfea10636b4f06c8b62e4e01a011dfa024d3b95de1863800b3ff7ef5cb3e05bf",
+          "matches_delivery": true,
+          "physical_page_1_based": 17,
+          "printed_page": 16,
+          "quote": "本基金本报告期未进行利润分配，符合相关法规及基金合同的规定。"
+        },
+        {
+          "role": "share_adjustment",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2023/page-0065.txt",
+          "sha256": "5b968ab6f2910c87c1c71c6fc1183fe11511f03b6e3356308fc750308bc84e38",
+          "matches_delivery": true,
+          "physical_page_1_based": 65,
+          "printed_page": 64,
+          "quote": "本报告期基金拆分变动份额 -"
+        }
+      ]
+    }
+  ],
+  "field_meaning": {
+    "cash_distribution": {
+      "source_statement": "本基金本报告期未进行利润分配，符合相关法规及基金合同的规定。",
+      "assessment": "八份均为管理人针对本基金本年度的直接否定陈述，不靠旧事件表为空、没有搜到公告或托管人笼统合规意见推断。可支持原cash_distribution类事后零事件及这一类分配金额为零。",
+      "not_supported": [
+        "不代表基金没有从所持股票收到股息或没有利息、证券出借等收入。",
+        "不代表投资者账户没有银行流水，也不核定跨年度应收、迟到现金或客户实际到账；不能把annual_cash_amount=0称作账户现金核验。",
+        "不代表报告期以后不会分红。"
+      ]
+    },
+    "share_adjustment": {
+      "source_statement": "本报告期基金拆分变动份额 -",
+      "assessment": "在完整命名的年度基金份额变动表中，这一行横线可按该报告字段口径解释为本年度无基金拆分变动，足以支持原share_adjustment中拆分/折算这一限定用途；不是任意空白单元格。8份原文均将申购、赎回单列，所以份额总量变化不构成拆分反例。",
+      "derived_count_caveat": "annual_event_count=0是此限定字段的事后解释，不是年报直接提供逐笔事件数；保留原横线及表名，不能把它扩成所有形式的基金重组、合并、转型或全部权益事项的逐笔完整性证明。",
+      "not_supported": [
+        "份额申购赎回金额不是拆分比例。",
+        "不能把表中前后出现的联接基金持有份额或所持证券交易事项当作本ETF拆分。",
+        "不给split_date或split_ratio补造日期、1或其他值；保持null。"
+      ]
+    }
+  },
+  "actual_counterexamples_and_context": [
+    {
+      "target_id": "P1-518850-2023",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-518850-2023/page-0004.txt",
+      "sha256": "eee41343f1ea0613e023d7d100e8224e4f797e0faa3e35ce23b030998c4b0830",
+      "physical_page": 4,
+      "quote": "自2023年9月25日起，本基金扩位证券简称由“黄金ETF9999”变更为“黄金ETF华夏”。",
+      "finding": "这是真实名称事项，既不否定当年无利润分配/拆分字段，又直接反驳“当年没有任何基金事项”的扩大表述。代码518850和基金合同生效日保持相同，名称变化不是取错基金。"
+    },
+    {
+      "target_ids": [
+        "P1-515170-2022",
+        "P1-515170-2023",
+        "P1-515170-2024",
+        "P1-518850-2021",
+        "P1-518850-2022",
+        "P1-518850-2023",
+        "P1-588000-2022",
+        "P1-588000-2023"
+      ],
+      "finding": "八张份额表有申购和赎回及不同期末份额；份额总额变化不能自动算份额拆分。科创2022页585的期末50,785,168,177份与其页4基金简介相同，支持该表确属本基金。"
+    },
+    {
+      "target_ids": [
+        "P1-515170-2022",
+        "P1-518850-2022"
+      ],
+      "finding": "份额表前的持有人信息出现联接基金名称，是本ETF持有人，而非年报主体。封面、主代码、重复页眉与第10节共同限定主体。"
+    }
+  ],
+  "588000_2022_589_page_review": {
+    "verdict": "IDENTITY_AND_LONG_ANNUAL_STRUCTURE_CONSISTENT_NO_WRONG_PDF_SIGNAL_IN_READ_PAGES",
+    "reported_pdf_pages": 589,
+    "reported_pdf_sha256": "b8afc76a145c8c3f56d0b7fff156b24020644942bf22ab8ca70984d13adf11ae",
+    "reported_metadata_is_not_independent_full_pdf_verification": true,
+    "evidence": [
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2022/page-0003.txt",
+        "sha256": "860e4656d788604aaa9cc0a1ebae8ffccf41f2d40ccc930a2437208eba7ad250",
+        "matches_v2_contract": true
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2022/page-0060.txt",
+        "sha256": "8137a605d5ca1d95ef93b2e8d19b3208018d8e1df126b75d1a40b6aa7606d182",
+        "matches_v2_contract": true
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2022/page-0580.txt",
+        "sha256": "728e8c9b3141f14673337d2f9b5f1c761c8ad5145337ef410eb2ea00a9ce7f9f",
+        "matches_v2_contract": true
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886/pdf-fields/P1-588000-2022/page-0589.txt",
+        "sha256": "97c900a4423e85422186cc1fc6e4a066426c06bcaee2fc7cf833708d4d6b8c1a",
+        "matches_v2_contract": true
+      }
+    ],
+    "observations": [
+      "封面是华夏上证科创板50成份交易型开放式指数证券投资基金2022年年度报告；页4主代码/交易代码588000，页2明确2022全年。",
+      "物理页3目录明确：报表附注从印刷页21起，投资组合报告到印刷页577才开始；开放式基金份额变动在印刷页584，备查文件在588。目录本身解释了长篇年度报告的结构，而非把589页当错文件。",
+      "物理页60/印刷59确有证券名称、交易编号、日期、数量和数值的长明细续表，页眉仍是同基金同年度。该页没有表头，独立审阅只认定其为报表附注中的证券明细；主控称其证券出借表，具体表名不靠这张无表头续页独证。",
+      "物理页580/印刷579为金山办公、澜起科技等证券的持仓明细续表，与目录的投资组合章节位置相符；它不是本基金分红或拆分事件清单。",
+      "物理页585/印刷584确含第10节本基金份额变动及拆分横线，与目录定位完全一致。物理页589/印刷588为第13节备查文件、管理人署名和2023-03-30日期，符合完整报告末页结构。",
+      "因此，已读证据支持589页是同一完整年报中篇幅很长的附注加后续章节，不支持“589页全是某一种表”或“已逐页读完589页”的说法。"
+    ]
+  },
+  "time_and_payment_boundaries": [
+    "各重要提示的报告期为指定年度1月1日至12月31日；所有封面送出日都在次年3月，不能把事后年报证明回填为报告期内每日已知信息。",
+    "本次独读的封面送出日期与delivery列出的文章可见发布日期相同；文章原HTML日期及原下载到达时刻由主控另验。本审阅未新读文章或网络。",
+    "送出日期、网页可见日期、本次2026年取得/保存日期、历史供应商到达日期、现金到账日期是不同字段。historical_source_arrival_date保持null；本次收取文件不能补证当年系统已经知道。",
+    "该年度无分配支持不生成分红事件；record_date/ex_date/payment_date/actual_cash_payment_date维持null，不能用年末、送出日或下载日代填，也不能把null解释为已验证实际到账。",
+    "不能因年报无分配就推导所有年度的卖出价、复权价格、到账时钟或完整历史交易输入合格。"
+  ],
+  "comparison_to_old_actions": {
+    "basis": "只读original-action-comparison-input.json的绑定快照；未更改或重新载入旧行动表。",
+    "original_eight_target_year_event_rows_empty": true,
+    "original_empty_rows_alone_prove_zero": false,
+    "new_contribution": "原空表现在获得这八个特定年度两字段的独立原文事后支持；不倒填旧表原本有证据，不改旧ready状态。"
+  },
+  "conflicts_and_required_changes": {
+    "material_conflict_in_read_evidence": false,
+    "executor_file_rewrite_required": false,
+    "final_report_required_boundaries": [
+      "将零事件标明为八年度、两类、年报口径下事后支持。",
+      "声明拆分横线是原文，事件数零是限定解释，不是完整逐笔所有权益事件覆盖。",
+      "纳入518850于2023年更名的具体范围反例。",
+      "说明589页长附注结构及本审阅实际阅读范围，不声称全页独核。",
+      "保留历史到达、实际到账未知，完整14产品、Gate1B、R2及科学运行仍不放行。"
+    ],
+    "new_network_or_science_needed_for_this_meaning_verdict": false
+  },
+  "acceptance_boundary": {
+    "target_years_supported": 8,
+    "cash_distribution_supported": 8,
+    "share_adjustment_original_split_field_supported": 8,
+    "full_14_products_qualified": false,
+    "historical_asof_availability_proven": false,
+    "all_corporate_action_classes_complete": false,
+    "Gate1B_released": false,
+    "R2_released": false,
+    "science_authorized_by_this_review": false,
+    "trading_authorized": false,
+    "remaining_root_task": "主控完成其独立PDF字节/正文再提取/账本核验与归档后可接受本次有界事后字段补证；本文件只接受含义，不包办主控验收。"
+  },
+  "budget_note": {
+    "this_review": {
+      "source_requests": 0,
+      "scientific_runs": 0,
+      "old_suite_runs": 0
+    },
+    "cumulative_from_bound_delivery_not_reaudited_here": {
+      "E1_requests": 0,
+      "P1_hops_remaining": 12,
+      "P1_hops_used": 32,
+      "P1_queries_remaining": 14,
+      "P1_queries_used": 15,
+      "P1_resources_remaining": 9,
+      "P1_resources_used": 17
+    },
+    "reset_or_increment_authorized": false
+  },
+  "output_release": {
+    "write_complete_for_parent_review": true,
+    "only_own_new_file_written": true,
+    "old_and_other_agent_files_unchanged_by_reviewer": true
+  }
+}

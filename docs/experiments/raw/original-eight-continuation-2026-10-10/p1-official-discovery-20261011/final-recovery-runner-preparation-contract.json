@@ -1,0 +1,34 @@
+{
+  "mission": "Prepare a mechanical final-source recovery runner only, no execution or external writes yet. Adapt existing accepted runner for later frozen exact new-file manifest, dynamic count/bytes from contract. Separate backup and restore PIDs, restore reads only backup; xb exclusive paths, frozen source before/after stat+SHA, fixed UUID/dev and 10GiB reserve, no source deletion/move/network. Root supplies final new source contract later.",
+  "task_scope": [
+    "Recovery code preparation only"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/recover_field_artifacts.py"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-official-discovery-20261011/recover_final_source_artifacts.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Single reviewed compileable runner with --contract required; final contract format documented in short code docstring; no execution"
+  ],
+  "stop_conditions": [
+    "No network or source writes",
+    "No changes to prior artifacts or shared report/registry",
+    "Do not execute recovery until root dispatches immutable input contract"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "input_sha256": {
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/recover_field_artifacts.py": "eaab4a4f4a469c051d472edd5e5b5ffb82706f8fcdc412936ed66c69e2d04c6f"
+  }
+}

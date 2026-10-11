@@ -1,0 +1,67 @@
+{
+  "R2_or_science_released": false,
+  "binding": {
+    "body_json": {
+      "api": "fts.search_report",
+      "params": {
+        "keyword": "516220",
+        "page": 1,
+        "perPage": 10
+      }
+    },
+    "body_json_compact": "{\"api\":\"fts.search_report\",\"params\":{\"page\":1,\"perPage\":10,\"keyword\":\"516220\"}}",
+    "body_sha256": "022c2a0afc39d5c3fac8aec6de05c66018e0c483585590f3c8df9f25f6f0693e",
+    "content_type": "application/json; charset=utf-8",
+    "initial_custom_headers": {},
+    "initial_report_request_method": "POST",
+    "initial_report_request_url": "https://e.gtfund.com/Etrade/Public/cochin/fts.search_report",
+    "source_excerpts": {
+      "common_data": "JSON.stringify({api: api, params: params})",
+      "common_method_path": "type: 'post'; url: '/Etrade/Public/cochin/' + api",
+      "initial_page": "getNewsData(1)",
+      "report_params": "cochin(fts.search_report, {page: page, perPage: 10, keyword: word})",
+      "saved_keyword": "search-inline value=516220"
+    },
+    "source_line_references": {
+      "common_content_type": 558,
+      "common_data": 541,
+      "common_global_export": 397,
+      "common_hashcash_challenge": 571,
+      "common_hashcash_retry": 578,
+      "common_request_method": 556,
+      "common_request_path": 557,
+      "saved_HTML_keyword": 309,
+      "search_index_initial_page": 150,
+      "search_index_report_call": 509
+    },
+    "source_paths_sha256": {
+      "common_js": "232511f6265a20976da903d7e0a7935f349e569b90a45937c9a68982c8f18044",
+      "search_HTML": "c2b8a7ee434e4f088651685f14c87cb5eb9c1bb60cae22651c1063d4ac3d2d02",
+      "search_index_js": "2048790cd4e22bbb1c909da98e9451d04e14b9394d5a98275b54d69df619ad8a"
+    }
+  },
+  "bound_report_request_sent": false,
+  "contract_path": "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-official-discovery-20261011/guotai-common-contract.json",
+  "contract_sha256": "e8823059cb1aa2ca1e7c9e08500ea267d4bf407f0c09809f9698e27d7d49f6a2",
+  "created_utc": "2026-10-11T02:42:37.732593+00:00",
+  "cumulative_ledger_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011/p1-official-discovery-20261011-20261011T095051-e3d7b02eeda9/access-ledger.jsonl",
+  "cumulative_ledger_sha256": "5bd776152798fef080a01849c9880386c0a5e54fd03a7b186eefabf70e8fb79f",
+  "hashcash_or_auth_outcome_unknown": "Initial cochin request uses empty custom headers. The same code includes a HASHCASH_CHALLENGE branch that computes x-cochin-hashcash and retries; this contract forbids following it. No report or login request was sent.",
+  "official_common_js_url": "https://e.gtfund.com/Public/static/etrade/1/dist/js/common.js?v=hy187",
+  "old32_prefix_preserved": true,
+  "remaining_budget": {
+    "P1_http_hops_remaining": 11,
+    "P1_http_hops_used": 33,
+    "P1_queries_remaining": 14,
+    "P1_queries_used": 15,
+    "P1_resources_remaining": 8,
+    "P1_resources_used": 18
+  },
+  "schema_version": 1,
+  "source_bytes": 383225,
+  "source_http_status": 200,
+  "source_line_count": 9916,
+  "source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011/p1-official-discovery-20261011-20261011T095051-e3d7b02eeda9/guotai-common-binding/response-001.bin",
+  "source_sha256": "232511f6265a20976da903d7e0a7935f349e569b90a45937c9a68982c8f18044",
+  "status": "exact_common_js_saved_and_report_transport_bound_no_report_request"
+}

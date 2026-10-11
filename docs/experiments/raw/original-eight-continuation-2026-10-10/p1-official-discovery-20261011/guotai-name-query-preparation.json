@@ -1,0 +1,419 @@
+{
+  "cap_provenance": {
+    "accepted_annual_field_targets_path": "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/annual-field-targets.json",
+    "accepted_annual_field_targets_sha256": "8e63067f0ec66b1944aaf7662c8bbd416322339cd27d0dd3cab088911485d492",
+    "issue": "Later Guotai query target table reverted parts of accepted eight-annual resource/hop redistribution; some historical reservations exceed its per-target caps. Annual-field target table fits all historical reservations except the later separately authorized Guotai 2023 requests.",
+    "later_query_targets_path": "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-official-discovery-20261011/guotai-client-retry-targets.json",
+    "later_query_targets_sha256": "719115008646a1dd6ece6874b8be3303cddbb61d0d7d3664a5da4be3d09c63e4",
+    "later_vs_annual_different_targets": {
+      "P1-515130-2021": {
+        "annual": {
+          "candidate_resources": 1,
+          "http_hops": 5,
+          "search_queries": 5
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 7,
+          "search_queries": 5
+        }
+      },
+      "P1-515130-2022": {
+        "annual": {
+          "candidate_resources": 1,
+          "http_hops": 0,
+          "search_queries": 4
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 4,
+          "search_queries": 4
+        }
+      },
+      "P1-515130-2023": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 1,
+          "search_queries": 5
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 5,
+          "search_queries": 5
+        }
+      },
+      "P1-515130-2024": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 4,
+          "search_queries": 3
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 3,
+          "search_queries": 3
+        }
+      },
+      "P1-515170-2022": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 5,
+          "search_queries": 2
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 3,
+          "search_queries": 2
+        }
+      },
+      "P1-515170-2023": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 4,
+          "search_queries": 1
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 1,
+          "search_queries": 1
+        }
+      },
+      "P1-515170-2024": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 4,
+          "search_queries": 1
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 1,
+          "search_queries": 1
+        }
+      },
+      "P1-516220-2022": {
+        "annual": {
+          "candidate_resources": 1,
+          "http_hops": 2,
+          "search_queries": 2
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 2,
+          "search_queries": 1
+        }
+      },
+      "P1-516220-2023": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 0,
+          "search_queries": 1
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 3,
+          "search_queries": 2
+        }
+      },
+      "P1-516220-2024": {
+        "annual": {
+          "candidate_resources": 1,
+          "http_hops": 0,
+          "search_queries": 0
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 1,
+          "search_queries": 0
+        }
+      },
+      "P1-518850-2021": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 4,
+          "search_queries": 1
+        },
+        "latest": {
+          "candidate_resources": 2,
+          "http_hops": 5,
+          "search_queries": 1
+        }
+      },
+      "P1-518850-2022": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 4,
+          "search_queries": 1
+        },
+        "latest": {
+          "candidate_resources": 1,
+          "http_hops": 3,
+          "search_queries": 1
+        }
+      },
+      "P1-518850-2023": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 3,
+          "search_queries": 1
+        },
+        "latest": {
+          "candidate_resources": 1,
+          "http_hops": 2,
+          "search_queries": 1
+        }
+      },
+      "P1-588000-2022": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 4,
+          "search_queries": 1
+        },
+        "latest": {
+          "candidate_resources": 1,
+          "http_hops": 2,
+          "search_queries": 1
+        }
+      },
+      "P1-588000-2023": {
+        "annual": {
+          "candidate_resources": 2,
+          "http_hops": 4,
+          "search_queries": 1
+        },
+        "latest": {
+          "candidate_resources": 1,
+          "http_hops": 2,
+          "search_queries": 1
+        }
+      }
+    }
+  },
+  "created_utc": "2026-10-11T13:58:26.971547+00:00",
+  "execution_boundary": "Offline preparation only. New contract and coordination authorization are required before any network request. Then at most one request per exact year, sequential, stop on challenge/403/redirect/transport failure; no title variants or pagination.",
+  "ledger_api_notes": {
+    "adapter": "gate0b_request_ledger_adapter.py exposes batch1_caps and RequestLedger",
+    "is_retry": "False for all three new title queries; retry_of_attempt_id=None because their request bodies differ from the prior query.",
+    "run_call": "RequestLedger.run(target_id, role=\"search\", url, source_family, evidence_role, query_id=new_id, document_identity=...)",
+    "transport": "run_exact_guotai_client_retry.py ExactCurl is a one-curl fixed-proxy verified-TLS transport but hardcodes prior body/query; a new bounded adapter must bind each proposed body and fsync method/body SHA before transport."
+  },
+  "ledger_before": {
+    "global_used": {
+      "candidate_resources": 18,
+      "http_hops": 35,
+      "search_queries": 17
+    },
+    "outcomes": 35,
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011/p1-official-discovery-20261011-20261011T095051-e3d7b02eeda9/access-ledger.jsonl",
+    "reservations": 35,
+    "sha256": "d4f509eed0943c317f9c594e0de9977541edd4c2893966271ea4bd277098c5fa",
+    "target_used": {
+      "candidate_resources": 1,
+      "http_hops": 3,
+      "search_queries": 2
+    }
+  },
+  "no_ledger_writes_this_preparation": true,
+  "no_network_calls_this_preparation": true,
+  "proposed_budget": {
+    "all_35_historical_reservations_fit": true,
+    "all_target_caps_after": {
+      "E1-515300-2025-12-15": {
+        "candidate_resources": 4,
+        "http_hops": 8,
+        "search_queries": 2
+      },
+      "P1-515130-2021": {
+        "candidate_resources": 1,
+        "http_hops": 5,
+        "search_queries": 5
+      },
+      "P1-515130-2022": {
+        "candidate_resources": 1,
+        "http_hops": 0,
+        "search_queries": 3
+      },
+      "P1-515130-2023": {
+        "candidate_resources": 2,
+        "http_hops": 1,
+        "search_queries": 5
+      },
+      "P1-515130-2024": {
+        "candidate_resources": 2,
+        "http_hops": 2,
+        "search_queries": 0
+      },
+      "P1-515170-2022": {
+        "candidate_resources": 2,
+        "http_hops": 4,
+        "search_queries": 2
+      },
+      "P1-515170-2023": {
+        "candidate_resources": 2,
+        "http_hops": 3,
+        "search_queries": 1
+      },
+      "P1-515170-2024": {
+        "candidate_resources": 2,
+        "http_hops": 3,
+        "search_queries": 1
+      },
+      "P1-516220-2022": {
+        "candidate_resources": 1,
+        "http_hops": 2,
+        "search_queries": 2
+      },
+      "P1-516220-2023": {
+        "candidate_resources": 2,
+        "http_hops": 6,
+        "search_queries": 5
+      },
+      "P1-516220-2024": {
+        "candidate_resources": 1,
+        "http_hops": 0,
+        "search_queries": 0
+      },
+      "P1-518850-2021": {
+        "candidate_resources": 2,
+        "http_hops": 3,
+        "search_queries": 1
+      },
+      "P1-518850-2022": {
+        "candidate_resources": 2,
+        "http_hops": 4,
+        "search_queries": 1
+      },
+      "P1-518850-2023": {
+        "candidate_resources": 2,
+        "http_hops": 3,
+        "search_queries": 1
+      },
+      "P1-588000-2022": {
+        "candidate_resources": 2,
+        "http_hops": 4,
+        "search_queries": 1
+      },
+      "P1-588000-2023": {
+        "candidate_resources": 2,
+        "http_hops": 4,
+        "search_queries": 1
+      }
+    },
+    "basis": "accepted annual-field target caps plus explicit intra-P1 transfers; prior target files unchanged",
+    "global_p1_caps_after": {
+      "candidate_resources": 26,
+      "http_hops": 44,
+      "search_queries": 29
+    },
+    "target_2023_cap_after": {
+      "candidate_resources": 2,
+      "http_hops": 6,
+      "search_queries": 5
+    },
+    "target_2023_cap_before": {
+      "candidate_resources": 2,
+      "http_hops": 0,
+      "search_queries": 1
+    },
+    "target_2023_remaining_exactly_three_queries_and_hops": true,
+    "target_2023_used_before_new_requests": {
+      "candidate_resources": 1,
+      "http_hops": 3,
+      "search_queries": 2
+    },
+    "transfers": [
+      {
+        "amount": 3,
+        "from": "P1-515130-2024",
+        "metric": "search_queries",
+        "to": "P1-516220-2023"
+      },
+      {
+        "amount": 1,
+        "from": "P1-515130-2022",
+        "metric": "search_queries",
+        "to": "P1-516220-2023"
+      },
+      {
+        "amount": 2,
+        "from": "P1-515130-2024",
+        "metric": "http_hops",
+        "to": "P1-516220-2023"
+      },
+      {
+        "amount": 1,
+        "from": "P1-515170-2022",
+        "metric": "http_hops",
+        "to": "P1-516220-2023"
+      },
+      {
+        "amount": 1,
+        "from": "P1-515170-2023",
+        "metric": "http_hops",
+        "to": "P1-516220-2023"
+      },
+      {
+        "amount": 1,
+        "from": "P1-515170-2024",
+        "metric": "http_hops",
+        "to": "P1-516220-2023"
+      },
+      {
+        "amount": 1,
+        "from": "P1-518850-2021",
+        "metric": "http_hops",
+        "to": "P1-516220-2023"
+      }
+    ]
+  },
+  "proposed_requests": [
+    {
+      "body_json_compact": "{\"api\":\"fts.search_report\",\"params\":{\"page\":1,\"perPage\":10,\"keyword\":\"国泰中证细分化工产业主题交易型开放式指数证券投资基金2022年年度报告\"}}",
+      "body_sha256": "bcbd355ec49fd05e1449ec6ba03289115a98c78fa5d6aec46387b1090c893aeb",
+      "content_type": "application/json; charset=utf-8",
+      "keyword": "国泰中证细分化工产业主题交易型开放式指数证券投资基金2022年年度报告",
+      "method": "POST",
+      "query_id": "GUOTAI-ANNUAL-TITLE-2022-Q01",
+      "status": "proposed_not_sent",
+      "target_id": "P1-516220-2023",
+      "url": "https://e.gtfund.com/Etrade/Public/cochin/fts.search_report",
+      "year": 2022
+    },
+    {
+      "body_json_compact": "{\"api\":\"fts.search_report\",\"params\":{\"page\":1,\"perPage\":10,\"keyword\":\"国泰中证细分化工产业主题交易型开放式指数证券投资基金2023年年度报告\"}}",
+      "body_sha256": "c887e4111b0240c63b2b7774dc8ae19f8fa6dc4020a256920f6b2af41f748e4b",
+      "content_type": "application/json; charset=utf-8",
+      "keyword": "国泰中证细分化工产业主题交易型开放式指数证券投资基金2023年年度报告",
+      "method": "POST",
+      "query_id": "GUOTAI-ANNUAL-TITLE-2023-Q01",
+      "status": "proposed_not_sent",
+      "target_id": "P1-516220-2023",
+      "url": "https://e.gtfund.com/Etrade/Public/cochin/fts.search_report",
+      "year": 2023
+    },
+    {
+      "body_json_compact": "{\"api\":\"fts.search_report\",\"params\":{\"page\":1,\"perPage\":10,\"keyword\":\"国泰中证细分化工产业主题交易型开放式指数证券投资基金2024年年度报告\"}}",
+      "body_sha256": "aee6067a7eab26192b0e083515322bbdc6f7c79e6a56900d325ddedbab998df3",
+      "content_type": "application/json; charset=utf-8",
+      "keyword": "国泰中证细分化工产业主题交易型开放式指数证券投资基金2024年年度报告",
+      "method": "POST",
+      "query_id": "GUOTAI-ANNUAL-TITLE-2024-Q01",
+      "status": "proposed_not_sent",
+      "target_id": "P1-516220-2023",
+      "url": "https://e.gtfund.com/Etrade/Public/cochin/fts.search_report",
+      "year": 2024
+    }
+  ],
+  "schema_version": 1,
+  "source_name_evidence": {
+    "page_1_header": "国泰中证细分化工产业主题交易型开放式指数证券投资基金 2021 年年度报告",
+    "page_5_fund_name": "基金名称 国泰中证细分化工产业主题交易型开放式指数证券投资基金",
+    "page_5_main_code": "基金主代码 516220",
+    "page_5_trading_code": "交易代码 516220",
+    "pdf_pages": 69,
+    "pdf_path": "docs/experiments/raw/factor-b4-price-basis-recovery-2026-09-20/source-qualification-supplement/evidence/516220_AR2021.pdf",
+    "pdf_sha256": "7f17d5cb9e6005c57b1873cdfe4ffb88ec5d8fa8b7a544459287d354b76ecbcf",
+    "verified_fund_name": "国泰中证细分化工产业主题交易型开放式指数证券投资基金",
+    "year_title_inference": "Three annual-title strings are finite candidate searches based on verified 2021 naming; the 2021 PDF does not prove those later titles exist."
+  },
+  "status": "offline_prepared_no_network_no_ledger_write"
+}

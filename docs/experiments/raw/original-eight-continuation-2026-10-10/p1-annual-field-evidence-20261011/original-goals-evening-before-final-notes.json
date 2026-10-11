@@ -1,0 +1,533 @@
+{
+  "at": "2026-10-11T22:01:54.411328+08:00",
+  "goals": [
+    {
+      "title": "让每个系统结论都有可靠依据",
+      "purpose": "把目录摘要、实验原文、配置和数据来源对齐，分清预先约定的检验与后来追加的比较。",
+      "parent_id": null,
+      "priority": "high",
+      "owner": "用户与 Codex",
+      "target_date": null,
+      "next_action": "先复核已发现的目录与原文差异，再核对完整试验记录。",
+      "evidence": "",
+      "milestones": [],
+      "links": [],
+      "kind": "directional",
+      "id": "D-evidence",
+      "version": 10,
+      "status": "planned",
+      "created_at": "2026-09-07T16:31:51+00:00",
+      "updated_at": "2026-10-10T18:17:03+00:00",
+      "authorization": {
+        "granted": false,
+        "scope": "",
+        "at": null
+      },
+      "progress": {
+        "done": 0,
+        "total": 14
+      },
+      "history_entries": 10,
+      "history_sha256": "f8ececc820f11b2c75919bebf289c11ac8f38290531b01bb438ed1d812711145"
+    },
+    {
+      "title": "让所有升级目标和进度长期可追踪",
+      "purpose": "方向、具体工作、授权、证据与验收都留在一个可持续更新的台账里。",
+      "parent_id": null,
+      "priority": "high",
+      "owner": "用户与 Codex",
+      "target_date": null,
+      "next_action": "本轮建设完成后由用户验收；后续每次推进前后对照本台账。",
+      "evidence": "",
+      "milestones": [],
+      "links": [],
+      "kind": "directional",
+      "id": "D-tracking",
+      "version": 11,
+      "status": "planned",
+      "created_at": "2026-09-07T16:31:51+00:00",
+      "updated_at": "2026-10-10T18:17:03+00:00",
+      "authorization": {
+        "granted": false,
+        "scope": "",
+        "at": null
+      },
+      "progress": {
+        "done": 0,
+        "total": 2
+      },
+      "history_entries": 11,
+      "history_sha256": "43792ead46b6ba34afad912ad3b3fdba9efc3bf1a3e6b78e02d764e499544a4f"
+    },
+    {
+      "title": "核验原八目标冻结输入的独立备份与异机恢复",
+      "purpose": "只处理原八目标所需冻结输入的可恢复性：月度风险对照A清单中的25个原来源已在本机核同，但其中24个不在Git，独立备份与另一台机器恢复尚未证实。新结果外盘已核验不代替原输入备份。本条补原目标8的确切缺口，不接一般磁盘清理，不迁移或改写原冻结路径、活动数据库、环境、会话，不删除资料。",
+      "parent_id": "D-evidence",
+      "priority": "high",
+      "owner": "Codex 原来源恢复 / 01a123fc-553b-7b81-9952-36e1acb11dcc",
+      "target_date": null,
+      "next_action": "本机25来源直接恢复已完成且独核25/25通过，原资料完好；后续复用外盘恢复清单和小回执，不重复覆盖/复制。原异机验收仍未测试，在目标设备实际可用时才检查；不将另一电脑作为当前本机工作的前提。新大数据和恢复临时文件继续先核固定设备/容量后写外盘，本机只小记录；旧实验和预算保留。",
+      "evidence": "A输入提交29337ec9e6560171c459019834638ce2c6993ef9；清单SHA256 9f1c326b46e7afc22d2ad6454e9f754e64540442e120412326ce270a50799baf。C最终提交616608a1bd911179aa9bc7de14ea64a7493c74c5，正式报告第8节明确原24/25本机来源异机恢复未证。本批外盘10结果文件已核，不能替代此验收。用户2026-10-10要求把原目标记系统todo并交下一AI；此条只登记，尚未启动、未完成。\n\n[目标8只读预检 2026-10-10] 当前Codex接手此一项来源恢复预检，task-id=frozen-input-recovery-20261010。A原25份共5,718,377字节已实核大小/内容一致、源读前后未变；原A基线24项不在Git的记录保留。本轮现有其他分支日历同指纹可核，准确远端恢复来源2份（方案文档与日历）；本机Git同指纹对象18份不都算独立备份。余23份共5,417,582字节没有已核独立副本位置；仅准备准确外盘复制计划，目录未创建、复制0。第二台目标设备/访问尚未确认，异机恢复0。仓内回执与方案docs/experiments/raw/frozen-input-recovery-2026-10-10/；来源清单SHA 727dbe2b3f539641894277d20e51ba2035a97bda26401f37ef636e4e87d44994。工作分支codex/frozen-input-recovery-20261010；本次小成果尚待远端发布。按用户AGENTS仓外修改先确认的明确要求，已提交23准确文件新副本的确认问题；未把授权设true或勾完成标准。10项产物核对通过，仓库归置退出0；市场/账户重放/下载/调参/冻结源改写/新chat/定时器/Goal均0，原月度4/4与旧2/2保持封存。\n\n[目标8预检成果已发布] codex/frozen-input-recovery-20261010@86763952a80f16c8cf49eef6bf9139347b28a753，9个准确小文件86,434字节，远端完整SHA与逐文件内容读回一致。准确恢复方案：https://github.com/lige1687/biao-signal-system/blob/86763952a80f16c8cf49eef6bf9139347b28a753/docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md。上述“尚待发布”已被本回执取代。25本机原件已核，独立来源远端2份、未证明23份/5,417,582字节；外盘复制计划已准备但目录未建、复制0，等待仓外新副本确认，异机仍未验。唯一一次发布前文件数断言失败已定位为行政计数9对实际8的错误，在staging/commit/push前退出；准确文件集合核对后发布通过，原件/源核验和市场预算均不受影响，失败在verification-failures.json保留。原状态planned、授权false、四完成标准未勾保持；无后台监控/自动接续。\n\n2026-10-10用户已批准23准确外盘副本，5,417,582字节实际复制并两次完整读回、独立逐字节核同23/23，原件未改。另2份复用准确远端Git，共25份独立恢复位置已可查。外盘清单25,016字节SHA ebc63f6f70c222940216af898dd1ca078e1331de6963269bc530c155cae9f16f。来源定位、独立副本核验、小恢复回执三项完成；另一台电脑尚未指定或实际读取，该项false，目标保持in_progress。只覆盖A前25来源，不宣称其他22材料/环境或整个实验异机复现。\n\n用户要求直接在本机恢复并核磁盘后，25主路径完整且SHA核同，不需覆盖；从23外盘副本+2准确公开Git版本实际重建25来源5,718,377字节到外盘新目录，25/25二次读回和独核通过，14JSON/7CSV可读。执行恢复内容不读本机原件或Git对象。恢复清单SHA2e67940c2d01b91442be0ef7d7dae945ed8db41d1e398abdc114fab369521fa2。当前本机所需恢复已完成，不再以缺另一电脑阻塞当前工作；原异机项仍false、四标准文字及整体in_progress保持，不宣称47资料/环境全恢复。https://github.com/lige1687/biao-signal-system/blob/a65d1e96ec3c974c9c1f458a0083f1a8c1750f8e/docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md",
+      "milestones": [
+        {
+          "id": "locate_frozen_sources",
+          "title": "从原manifest列全25来源的原路径、内容指纹、用途和现有副本位置，保留原件",
+          "done": true
+        },
+        {
+          "id": "verify_independent_copies",
+          "title": "核固定设备与独立副本内容；缺件具体列出，不把目录存在当恢复成功",
+          "done": true
+        },
+        {
+          "id": "verify_other_machine_recovery",
+          "title": "在可用的目标设备按清单只读恢复并核对必要输入；没有目标设备时明确未验证",
+          "done": false
+        },
+        {
+          "id": "publish_recovery_receipt",
+          "title": "保存恢复步骤、逐项核验凭据及剩余限制；Git只存小索引，不放大数据",
+          "done": true
+        }
+      ],
+      "links": [
+        {
+          "label": "原八目标项目待办",
+          "url": "https://github.com/lige1687/biao-signal-system/blob/codex/research-todo-20261010/docs/okr/RESEARCH_TODO.md"
+        },
+        {
+          "label": "已验月度风险报告及第8节边界",
+          "url": "https://github.com/lige1687/biao-signal-system/blob/616608a1bd911179aa9bc7de14ea64a7493c74c5/docs/experiments/monthly-risk-comparison-2026-10-09.md"
+        },
+        {
+          "label": "目标8逐项来源核验及准确恢复方案",
+          "url": "https://github.com/lige1687/biao-signal-system/blob/86763952a80f16c8cf49eef6bf9139347b28a753/docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md"
+        },
+        {
+          "label": "23副本实际恢复回执（异机仍未验）",
+          "url": "https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md"
+        },
+        {
+          "label": "逐份复制及二次读回",
+          "url": "https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/backup-execution.json"
+        },
+        {
+          "label": "独立逐字节核验",
+          "url": "https://github.com/lige1687/biao-signal-system/blob/ad2cbb08947a796cab617a0c0ed51b44b0b15113/docs/experiments/raw/frozen-input-recovery-2026-10-10/backup-independent-review.json"
+        },
+        {
+          "label": "本机25来源实际恢复与磁盘管理",
+          "url": "https://github.com/lige1687/biao-signal-system/blob/a65d1e96ec3c974c9c1f458a0083f1a8c1750f8e/docs/experiments/raw/frozen-input-recovery-2026-10-10/RECOVERY.md"
+        },
+        {
+          "label": "本机25恢复独立核验",
+          "url": "https://github.com/lige1687/biao-signal-system/blob/a65d1e96ec3c974c9c1f458a0083f1a8c1750f8e/docs/experiments/raw/frozen-input-recovery-2026-10-10/local-restore-independent-review.json"
+        }
+      ],
+      "kind": "concrete",
+      "id": "okr-57eb3f28e526",
+      "version": 19,
+      "status": "in_progress",
+      "created_at": "2026-10-09T17:06:06+00:00",
+      "updated_at": "2026-10-10T18:17:03+00:00",
+      "authorization": {
+        "granted": true,
+        "scope": "仅按backup-plan.json已绑定23个准确源/目标路径，在固定UUID外盘唯一新目录复制5,417,582字节并逐项源/副本核验，保存必要恢复清单和仓内小回执。原件不移动、不覆盖、不删除，不扩大到活动库、配置、环境、会话或其他设备写入；原八目标按已有范围继续，不重置市场实验预算。 用户2026-10-10追加“该恢复的恢复…本机磁盘可能不够…磁盘管理”：允许在当前电脑从已核23外盘副本及2个准确Git远端版本恢复25来源到新外盘目录 /Volumes/win+mac通用/LeiSignal-新实验结果/frozen-input-recovery-20261010/frozen-input-recovery-20261010-20261010T143725-a9a1b039127e/result；8MiB外盘/1MiB仓内小记录。当前原件25份完好，不覆盖；只做来源恢复/内容检查和只读磁盘盘点，不删资料、不迁运行环境/活动库/会话，不修改配置，不重跑市场实验。",
+        "at": "2026-10-10T06:40:22+00:00"
+      },
+      "progress": {
+        "done": 3,
+        "total": 4
+      },
+      "history_entries": 19,
+      "history_sha256": "3bdefe6fa7828b224e87726f2cf8aeb1198238fef322340bbb68387e44016615"
+    },
+    {
+      "title": "核对数据代理与真实可交易条件",
+      "purpose": "优先检查板块历史成分、价格复权、真实分钟数据与日线代理的区别，说明影响哪些结论。",
+      "parent_id": "D-evidence",
+      "priority": "medium",
+      "owner": "研究负责人",
+      "target_date": null,
+      "next_action": "三项资料边界审计已提交待验收；资料缺口保留，具体用途通过后才开展对应计算。原后续：复用06产品和07完整条件缺口；先核当时来源与可交易时点，不擅自补值或启用隔离数据。",
+      "evidence": "本轮06A/07A已交；不能把全部市场数据审计标完成。\n2026-10-11联合审计：原首轮/06产品与跨市场/07四条件、股票来源及两ETF近似/行动覆盖已逐主题核到13份准确来源；六主题明确限制、受影响用途、已有修复与欠缺、可用/观察/需补资料。原板块当前成分回溯、次级别日线代理非真实60分钟、成交量非实际成本均保留。三个原标准只完成资料边界审计，未把历史成员/旧调整版本/分钟/跨市场/完整四条件/实际到达成交到账改成合格。根逐标准证据与Astra独核accepted；详见docs/experiments/original-eight-open-work-review-2026-10-11.md和raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/controller-criterion-review.json及controller-criterion-independent-review.json。",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "列出数据限制与受影响的规则或报告",
+          "done": true
+        },
+        {
+          "id": "m2",
+          "title": "确认已有修复与仍欠缺部分",
+          "done": true
+        },
+        {
+          "id": "m3",
+          "title": "分别提出可用、仅观察、需补数据的处理建议",
+          "done": true
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        },
+        {
+          "label": "三路研究首轮报告与独立复核",
+          "url": "/library?report=docs%2Fexperiments%2Fresearch-first-round-ARCHIVE-2026-09-08.md"
+        },
+        {
+          "label": "新版任务统一研究总览与后续清单",
+          "url": "/library?report=docs%2Fexperiments%2Fresearch-unified-progress-2026-09-08.md"
+        },
+        {
+          "label": "八目标当前复核与数据边界审计",
+          "url": "/library?report=docs%2Fexperiments%2Foriginal-eight-open-work-review-2026-10-11.md"
+        }
+      ],
+      "kind": "concrete",
+      "id": "K-data-boundary",
+      "version": 22,
+      "status": "review",
+      "created_at": "2026-09-07T16:31:52+00:00",
+      "updated_at": "2026-10-10T18:05:01+00:00",
+      "authorization": {
+        "granted": true,
+        "scope": "用户提供新版研究任务书并说“可以继续做吧”。按§2统一负责05—08及ATR等研究，允许事先固定方法后用本地资源执行有限实验，无需逐步确认。当前执行已冻结E01，统筹05—08/ATR依赖，复用已有材料；不改生产、真实账本，不收费调用、不买数据、不大规模搜索。 本具体目标仅限本地审计、固定有限方案与依赖准备，禁止大规模搜索、生产修改、收费调用。",
+        "at": "2026-09-08T02:47:44+00:00"
+      },
+      "progress": {
+        "done": 3,
+        "total": 3
+      },
+      "history_entries": 22,
+      "history_sha256": "fd67a7218dcc50948dd342060509a8a4ef65a6c7cfd791a37acd1db93e74a444"
+    },
+    {
+      "title": "分清风险改善与少参与市场的代价",
+      "purpose": "止损和仓位调整要同时看少亏、少赚、持有时间与再次参与；尊重已被否定的方向。",
+      "parent_id": "D-increment",
+      "priority": "medium",
+      "owner": "研究负责人",
+      "target_date": null,
+      "next_action": "原八目标5的固定投入两组2/2及月度四组4/4已经结案、次数耗尽；现金/费用核对一致，但实际波动超0.90—1.10标准，风险相近的收益贡献仍未证明，不再执行旧提示中的同题完整资金重跑。只在出现独立必要新问题时，先核旧证据为何不足、合格输入、简单对照和该问题实际剩余次数再接续；本目标其他原授权工作及负责人保留。 本轮m3报告差额已补，m2技术触发/止损退出的相近风险增量仍未证明；新两ETF比例调整例不替代原问题。",
+      "evidence": "既有止损与仓位研究覆盖已核对；0.5ATR固定机会比较同时展示相同资金及计划风险、现金与费用；完整共享资金及真实成本对照仍未完成。\n2026-10-11原m3报告性标准补齐：复用原A模块收益/跌幅/费用报告，并从保存日账一次描述12原六ETF基础费账户及新P0/P1准确零持仓天数/最长段。旧报价日分母1147，新2790，初始现金段及非报价日区别明确；不以平均仓位当空仓时间，原收益未重算、账户重跑0。原两ETF近似例波动比0.997697仍少2827.83元，不能替代技术触发/止损退出的同风险增量，因此m2保持false；旧固定2/2、月度4/4及原失败保持。根另核588000确认组全1147天零持仓与510300原组1053/1147相符。详见docs/experiments/original-eight-open-work-review-2026-10-11.md和raw/original-eight-continuation-2026-10-10/eight-goal-resume-20261011/account-idle-report.json。",
+      "milestones": [
+        {
+          "id": "m1",
+          "title": "查已有止损和仓位研究覆盖",
+          "done": true
+        },
+        {
+          "id": "m2",
+          "title": "建立同成本、可比风险承担的简单对照",
+          "done": false
+        },
+        {
+          "id": "m3",
+          "title": "报告收益、跌幅、空仓时间和执行成本",
+          "done": true
+        }
+      ],
+      "links": [
+        {
+          "label": "12篇论文对照报告",
+          "url": "/library?report=docs%2Fexperiments%2Flei-academic-literature-ARCHIVE-2026-09-08.md"
+        },
+        {
+          "label": "研究负责人任务审阅与原文出处",
+          "url": "/library?report=docs%2Fexperiments%2Fresearch-lead-task-review-2026-09-08.md"
+        },
+        {
+          "label": "三路研究首轮报告与独立复核",
+          "url": "/library?report=docs%2Fexperiments%2Fresearch-first-round-ARCHIVE-2026-09-08.md"
+        },
+        {
+          "label": "新版任务统一研究总览与后续清单",
+          "url": "/library?report=docs%2Fexperiments%2Fresearch-unified-progress-2026-09-08.md"
+        },
+        {
+          "label": "第六批研究与独立复核",
+          "url": "/library?report=docs/experiments/atr-buffer-opportunity-study-2026-09-08.md"
+        },
+        {
+          "label": "当前空仓时间与有界资金证据",
+          "url": "/library?report=docs%2Fexperiments%2Foriginal-eight-open-work-review-2026-10-11.md"
+        }
+      ],
+      "kind": "concrete",
+      "id": "K-risk-attribution",
+      "version": 23,
+      "status": "in_progress",
+      "created_at": "2026-09-07T16:31:52+00:00",
+      "updated_at": "2026-10-10T18:05:02+00:00",
+      "authorization": {
+        "granted": true,
+        "scope": "用户提供新版研究任务书并说“可以继续做吧”。按§2统一负责05—08及ATR等研究，允许事先固定方法后用本地资源执行有限实验，无需逐步确认。当前执行已冻结E01，统筹05—08/ATR依赖，复用已有材料；不改生产、真实账本，不收费调用、不买数据、不大规模搜索。 本具体目标仅限本地审计、固定有限方案与依赖准备，禁止大规模搜索、生产修改、收费调用。",
+        "at": "2026-09-08T02:47:44+00:00"
+      },
+      "progress": {
+        "done": 2,
+        "total": 3
+      },
+      "history_entries": 23,
+      "history_sha256": "ff4c00edbfa9a01f69446804b92cd3ec356fc5175efbc7a2c864088462e8c868"
+    },
+    {
+      "title": "因子库后续：外部资源适配与分批接入",
+      "purpose": "把外部因子建议作为 v0 后续候选，统一接口和验收，不统一用途。先核对 v0 验收及具体缺口，再逐批申请范围；登记不授权研究、采购或生产采用。四类待办详见关联文档；不要求全部接入，不以新增因子数量或历史收益为完成标准。与 K-data-boundary、K-recent、K-newmodules 协作复用已有证据，避免重复立项。",
+      "parent_id": "okr-cd1a0bd5532c",
+      "priority": "medium",
+      "owner": "待逐项安排执行 Agent；原主控复核",
+      "target_date": null,
+      "next_action": "本任务停止双均线扩展；外部框架评估成果保留。EMA120乖离新研究见okr-11408705ad69，未影响另一任务。",
+      "evidence": "2026-09-09 用户要求：加入后续待办和显示文档，OKR关联计划，执行时同步更新OKR。本次授权仅为登记与关联；外部建议尚未接入，无新增市场数据、因子或账户路径。本条完成标准为各类候选的有证据取舍，不强制建设全部候选。\n2026-09-15用户认可外部因子可用于基准、风险与归因，不要求全部参与交易。已关联新的主控方向与B0计划；只补充待办方向，原四项完成标准不变，不新增采购、联网、安装、接入或运行权限。\n2026-09-16：因子库方向探索提案经主控三轮复核（v1.0→v1.2）文档收尾通过：外部工具证据按工具分项列示（Qlib数学/依赖行为核对、FactorHub历史只读接口调用，均不宣称已接入本地消费者），两份后续接入草案仍是未授权草案；外围另有外部流派融合三轮设计文档（registry登记watch、零回测）作并行候选，与本目标的外部资源适配分属不同线、不混计。四项完成标准不变。\n2026-09-16修订（依主控复核）：上段“优先评估候选”表述收窄——Alphalens-reloaded为按需评估候选，是否优先由用户决定，主控未定顺序。\n2026-09-22用户再次明确先评估可用性、避免重复建设。本轮有限公开复核完成：Sol/medium 1次、8个URL请求，主控5个不同URL/6次open；现有因子快照API两项人工隔离测试通过。FactorHub现成包装候选，但ETF输入未证；主分支Key全局槽和回测工具须隔离，未安装/认证调用。按能力分项验收，不等一家供应商全链齐备。报告docs/experiments/factor-reuse-refresh-2026-09-22.md。原四项完成标准不变、不勾选；没有真实预测、资金或生产研究。\n2026-09-24三框架评估完成：RD-Agent固定提交核到可扩展步骤，默认股票模型评价需替换成本地ETF研究程序；本地统一CLI仍限人工数据，真实账户衔接已有均线计划。当前环境未安装框架，QuantaAlpha/AlphaAgent许可文本仍有待确认。来源及接口证据见rd-agent-adoption-review-2026-09-24.md；未实跑，不计省工/省钱或有效因子。\n2026-09-27用户授权制定计划并委派实际试跑，Sol/medium完成真实上游LoopBase调用既有均线计算；主控独立65行算术及新进程四场景复核一致，记录步骤只读132账户并保存其中11条。确认保存点恢复，但step_n语义与资源清理存在限制；未跑RDLoop/fin_factor/LLM、未新增市场实验。阶段材料已齐备交用户查阅，原四项完成标准不变。报告rdagent-pilot-controller-review-2026-09-27.md。\n2026-09-27追加模型参与试跑：真实LoopBase内两次GLM-5.3请求被拒绝，第二次明确code1113余额不足或无可用资源包。原提案两轮解释/自评在首失败后修订为最后一次解释重试，总上限不变；无回答、无质量结论、无新市场结果。主控独立核请求账、响应、来源与输入。详见rdagent-model-feedback-review-2026-09-27.md，整体完成标准不勾选。\n2026-09-28用户指定直接用GPT。全新GPT-6-sol/medium仅读固定132账户摘要完成解释，主控独立核720差额无不一致；核心结论与已有证据一致，无新因子。未提供研究状态导致部分下一步建议与已做年度研究重叠，不直接采纳；本轮是Codex GPT通道，未接GPT API或原生fin_factor。报告gpt-factor-readout-review-2026-09-28.md。\n2026-09-28 GPT继续探索完成：只读中证1000六账户，四比较完整差额解释。相对简单单线基础费用全期多8993元，其中5103元差额在2025-04-07形成；相对指数单线稳定空仓组净有利7451元，但买卖日净不利4976元，2026上半年相对增值落后6162元。主控独立核分组/年度/反例一致；仅描述差额位置，不作因果、新市场或生产结论。报告dual60-holding-difference-review-2026-09-28.md。\n2026-09-28研究信息增量对照结案：直接GPT与指定假设/反证流程各完成2项离线分析；5张信息卡独立复核后合并3类，共同1类、各独有1类，均有证据且改变下一步研究。新增持仓段对应、同日历风险比较及成交前后金额解释。单题一次且B/复核者复用旧上下文，不证明稳定方法优势，更不归功于RD-Agent软件；无新行情回测或生产改变。阶段报告research-information-gain-review-2026-09-28.md已交用户查阅，原完成标准不变。\n2026-09-28扩大GPT信息研究结案：三名Sol/medium各一正式批次、各一主比较/一辅助检查。95回调同年差27.44点与同子集旧分层27.69接近，生命周期等权差降至2.63点；六ETF E60总体3162机会、3063有效终点，新增S60同ETF年20段均值差-1.64点；宽度Q20不成立原-1.055点在可比年份中为+0.774点，主要来自覆盖变化。主控独立核关键分母/差值/全部均线有效标签，三类有限新增信息已存accepted-information。没有稳定有效性、真实盈利或RD-Agent软件贡献结论，无账户/生产变更。报告factor-information-expansion-2026-09-28.md交用户查阅，原完成标准不变。\n2026-09-28 QuantaAlpha评估完成交用户查阅：两位Sol/medium分别核最新论文与固定源码，主控核89文件指纹并真实调用两类上游记录组件，3条已有证据保存重读成功；人工资料验证同名同公式覆盖、改名重复及实验级指标附着。论文v3有有限作者证据，ETF与超过现有GPT的信息增量未证。部分检查配置未接入执行，默认评价需替换。无安装、外部模型API、新行情回测或生产变更。报告quantaalpha-assessment-2026-09-28.md；原四项完成标准保留。\n2026-09-28中等验证实际完成：两组Sol/medium各8候选、4阶段，95回调与3162个E60机会固定评价；真实上游mutation/crossover各2份GPT回答解析后进入同一本地评价。16版本合并11种本批分组，共有5种、各独有3种，不把分组数当发现数。两组均有短期背景局部事实与共同对照不足，未证软件更优；回调重复触碰53条仅1条X假，后续类型融合无足够对照。已独立核16候选；桥传输顺序修复、旧上下文限制、原A11标签日历复核范围均留痕。不安装、不调用外部模型API、不新增行情/账户/生产。报告quantaalpha-medium-validation-2026-09-28.md交用户查阅；原四项完成标准不变。\n2026-09-28 前置检查阶段完成待验收：16提案实际重放，11次新计算/5次复用；主控完整结果16份一致，4项共同对照保留、12项描述不足明确；10项边界测试与归置自检通过。限定研究模块和离线入口，未接全部自动流程，未证明新因子或框架优越。报告：docs/experiments/candidate-preflight-validation-2026-09-28.md。\n2026-09-28 用户“下一步是啥？继续吧”授权后续限定研究：两组短长状态8候选、4条件对照，并检查既有4线索的年份/ETF集中程度；沿用已交付前置检查，无生产或新增数据。\n2026-09-28 后续限定研究完成待验收：8组合的4个指定主/辅助对照均无共同资格，实际0次新完整评价、8次辅助描述。旧S20背景差+4.31点，去掉2025年后仅剩中证5002022年−7.25点；其余3条仅单一年份。主控独立核算一致。报告：docs/experiments/ma-context-information-next-2026-09-28.md\n2026-09-28 用户明确本任务停止双均线（另一任务负责），转乖离/均线回归；另登记okr-11408705ad69。旧报告保留。",
+      "milestones": [
+        {
+          "id": "data",
+          "title": "数据基础：明确历史成员、分红拆分或退出数据的实际缺口，形成小范围供应商核验结论与采用/不采用依据",
+          "done": false
+        },
+        {
+          "id": "returns",
+          "title": "收益解释：明确适配资产与频率，仅在有需求时核验基础收益或外部因子序列；记录适用和不可用范围",
+          "done": false
+        },
+        {
+          "id": "execution",
+          "title": "执行条件：对折溢价、价差和流动性候选明确时间语义与资料资格，决定是否值得单独接入",
+          "done": false
+        },
+        {
+          "id": "methods",
+          "title": "候选方法：根据 v0 证据逐项决定风险调整动量、趋势形态及后置模型是否立项；无增量可停止",
+          "done": false
+        }
+      ],
+      "links": [
+        {
+          "label": "后续待办与执行同步规则",
+          "url": "/library?report=docs%2Fexperiments%2Ffactor-library-external-backlog-2026-09-09.md"
+        },
+        {
+          "label": "v0 执行计划入口（本次不改范围）",
+          "url": "/library?report=docs%2Fexperiments%2Ffactor-library-v0-task-2026-09-09.md"
+        },
+        {
+          "label": "复用已有数据核验目标",
+          "url": "/upgrades?goal=K-data-boundary"
+        },
+        {
+          "label": "复用已有新模块提案目标",
+          "url": "/upgrades?goal=K-newmodules"
+        },
+        {
+          "label": "自有因子体系目标与首轮执行计划",
+          "url": "/library?report=docs%2Fexperiments%2Ffactor-research-workbench-mandate-2026-09-14.md"
+        },
+        {
+          "label": "自有因子与信号研究方向",
+          "url": "/upgrades?goal=okr-cd1a0bd5532c"
+        },
+        {
+          "label": "A阶段主控复核与B0长任务入口",
+          "url": "/library?report=docs%2Fexperiments%2Ffactor-unit-readiness-controller-review-2026-09-15.md"
+        },
+        {
+          "label": "因子库方向探索主控复核（v1.2收尾）",
+          "url": "/library?report=docs%2Fexperiments%2Ffactor-library-direction-controller-review-2026-09-16.md"
+        },
+        {
+          "label": "因子库建设进度总览（2026-09-16）",
+          "url": "/library?report=docs%2Fexperiments%2Ffactor-library-progress-2026-09-16.md"
+        },
+        {
+          "label": "2026-09-22外部复用与现有接口复核",
+          "url": "/library?report=docs%2Fexperiments%2Ffactor-reuse-refresh-2026-09-22.md"
+        },
+        {
+          "label": "RD-Agent等自动研究框架接入评估",
+          "url": "/library?report=docs%2Fexperiments%2Frd-agent-adoption-review-2026-09-24.md"
+        },
+        {
+          "label": "RD-Agent小范围真实试跑与主控复核",
+          "url": "/library?report=docs%2Fexperiments%2Frdagent-pilot-controller-review-2026-09-27.md"
+        },
+        {
+          "label": "RD-Agent真实模型请求受阻记录",
+          "url": "/library?report=docs%2Fexperiments%2Frdagent-model-feedback-review-2026-09-27.md"
+        },
+        {
+          "label": "GPT直接研究解释与复核",
+          "url": "/library?report=docs%2Fexperiments%2Fgpt-factor-readout-review-2026-09-28.md"
+        },
+        {
+          "label": "GPT继续探索：双60差额形成位置",
+          "url": "/library?report=docs%2Fexperiments%2Fdual60-holding-difference-review-2026-09-28.md"
+        },
+        {
+          "label": "GPT研究信息增量对照与复核",
+          "url": "/library?report=docs%2Fexperiments%2Fresearch-information-gain-review-2026-09-28.md"
+        },
+        {
+          "label": "扩大GPT研究：三类因子信息与主控复核",
+          "url": "/library?report=docs%2Fexperiments%2Ffactor-information-expansion-2026-09-28.md"
+        },
+        {
+          "label": "QuantaAlpha有效性与实际组件接入评估",
+          "url": "/library?report=docs%2Fexperiments%2Fquantaalpha-assessment-2026-09-28.md"
+        },
+        {
+          "label": "QuantaAlpha中等验证：16候选与研究信息",
+          "url": "/library?report=docs%2Fexperiments%2Fquantaalpha-medium-validation-2026-09-28.md"
+        },
+        {
+          "label": "因子研究前置检查验证",
+          "url": "/library?report=docs%2Fexperiments%2Fcandidate-preflight-validation-2026-09-28.md"
+        },
+        {
+          "label": "短长期道路组合的信息增量",
+          "url": "/library?report=docs%2Fexperiments%2Fma-context-information-next-2026-09-28.md"
+        }
+      ],
+      "kind": "concrete",
+      "id": "okr-4f4157e2957e",
+      "version": 56,
+      "status": "in_progress",
+      "created_at": "2026-09-09T13:02:04+00:00",
+      "updated_at": "2026-10-10T18:17:03+00:00",
+      "authorization": {
+        "granted": true,
+        "scope": "实现研究提案前去重、互补与可比资料检查，重放旧16候选核是否误拦；无新市场/模型候选、API、资金生产。",
+        "at": "2026-09-28T06:18:50+00:00"
+      },
+      "progress": {
+        "done": 0,
+        "total": 4
+      },
+      "history_entries": 56,
+      "history_sha256": "fcb206b849f1b12c210007fc97c84400c06e3c9c78464cc03efcc14a02060129"
+    },
+    {
+      "title": "问题驱动的因子覆盖扩充（2026-09-19 四方向）",
+      "purpose": "按 trading-spec 四层找缺口，第一批 4-8 个候选问题走 factor-admission 全流程；验收=4 通过候选+2 拒绝案例。不评价收益。",
+      "parent_id": "okr-cd1a0bd5532c",
+      "priority": "medium",
+      "owner": "Codex主控/ZCode执行（GPT 6 Pro 规划授权链）",
+      "target_date": null,
+      "next_action": "复用A01/A02及A03封存结果；A03已于2026-09-30结案、真实4次已用，不再作为下一优先待运行。原八目标3的D/B1等既有有限或负向证据保留，稳定新增帮助未确认；仅接旧证据不能回答、输入合格且具体合同与剩余次数明确的独立必要问题，不再扫描本题参数。原股票池/next-open缺口及其他候选责任仍按原记录，不继续调距离阈值。",
+      "evidence": "来源：用户 2026-09-19 原话「可以啊，okr先推进吧，下一阶段开始做4个方向好吧，我认可了，开整」；GPT 第0轮规划 APPROVE_FOUR_DIRECTION_PLANNING。登记即启动授权（用户已明确），完成另计。\nGPT DECISION 2026-09-19（用户委托原话「继续吧好吧，不用我带你头，pro去讨论和决定，不偏离我们的目标就行」）：ACCEPTED_WITH_DEFINED_SCOPE。 验收范围与不含声明见 GPT 第3轮决定块（留档于 gpt-exchange 或任务记录）。子线不整体标完成，后续批次继续。\nGPT REVIEW_AND_CLOSURE_DECISION 2026-09-20（用户委托代验）：单候选定义与合成证据链验证完成；实际合并与自检通过后记『已入库』（definitions v1.3.1，82卡/76 exists/6 verified，校验器规则零修改，合并记录 factor-b2-2026-09-19/registry-merge-record.json）。不构成真实数据验证或生产授权。\nB2 落账补充：definitions v1.3.1 已合并（82卡/76 exists/6 verified，合并记录 factor-b2-2026-09-19/registry-merge-record.json）。B3/B4 启动授权见本条 authorization.scope。\nB5首批既有因子验证就绪度审计（2026-09-20）：以definitions v1.3.2哈希1646754f…773d冻结80张exists卡，80/80逐项普查；按冻结四条件及factor_id顺序实际选10张，不凑12张；逐卡结论2张ready、8张not_ready并有具体缺口。审计执行期间未自动修改生命周期。主控独立复核与6 Pro第24轮PASS，归档docs/experiments/factor-verification-readiness-2026-09-20.md。该完成勾选只指审计，绝不表示十张因子均已验证或具真实市场效果。\nB6三卡验证补全审计（2026-09-20）：冻结mixed.rv20@1.0.0、trend.distance50@1.0.0、breadth.csi300.b50.common@1.0.0；三张均逐卡审查且各有ready_for_verified结论，执行方在审计阶段未自动改登记表。主控重新跑285行独立合成比对、64项相关测试、三份标准证据档案及哈希，6 Pro第27轮Gate1 PASS；归档docs/experiments/factor-verification-completion-b6-2026-09-20.md。此完成勾选只代表三卡审计完成，不等于真实行情有效或B4解锁。 B7三卡异构证据审计已完成：bias只有合成直接函数验证候选，cost-basis与pullback因正式编号接线缺口保留exists；见docs/experiments/factor-verification-completion-b7-2026-09-20.md及主控复核。网页Pro档位不可用，生命周期合并待6 Pro裁决，B4/R2仍暂停。\nB8（2026-09-21，用户授权当前主控决定）三卡审计完成：bias原始合成close→实际EMA→最终比例1215行独立核对通过，仅该卡升为合成范围verified；两张B3-a正式编号接线及1058行数值复算一致，但缺价定义存在歧义，继续exists。84项测试与22项指纹复核通过；登记v1.3.6，86卡/74 exists/12 verified。报告docs/experiments/factor-b8-registered-bridge-and-bias-2026-09-21.md；该勾选只表示审计完成，B3/B4未完成项不变。\nB9（2026-09-21）缺价规则版本化提案审计完成：Sol/medium执行、主控独立验收；8组人工输入，2606行/62边界及前缀/缩放一致，84相关测试通过，19冻结指纹与55保护脏文件一致。首轮1项手算预期错误及勘误均保留。两张建议2.0.0仅为草案，实际调用仍1.0.0；登记v1.3.6及86卡/74 exists/12 verified不变。证据docs/experiments/factor-b9-missing-policy-controller-review-2026-09-21.md。无真实研究或生产权限。\nB10（2026-09-21，主控独立接收）：两个2.0.0精确入口实际2606行、62边界、前缀/缩放各2606与独立算法一致；主控闭式EMA2606行，107测试通过。仅新两卡合成verified，登记1.4.1（86对象88版本，14verified），旧86卡不变。首次回放脚本/资格标注缺陷及短暂编辑后恢复的过程偏差留档，采用增量replay/corrected记录。报告docs/experiments/factor-b10-v2-controller-review-2026-09-21.md。B3/B4仍未完成，无真实资料/预测/生产授权。\nB11主控接收（2026-09-21）：按当前用户授权接受cost/pullback@2.0.0及ma_cluster/swing@1.0.0完成原B3“计算验证与定义入库”，不是旧两v1通过。118测试、B10重演2606行、B3-b实际独立520行与12+13旧观察重演一致；登记及56保护文件不变。报告docs/experiments/factor-b11-four-candidate-closure-2026-09-21.md。只勾B3，不新增审计里程碑，B4仍未完成。\nB12主控接收（2026-09-21）：breadth.csi300.b200.common@1.0.0与trend.distance200@1.0.0正式入口实跑；执行方标准库独立重算1510行、主控另造数据615行均无差异，64项相关测试通过。登记v1.4.2（86对象88版本，72 exists/16 verified），仅两卡升级为人工数据计算范围verified。首次生命周期补丁误命中两张相似旧卡，被测试抓住后已恢复并按精确编号更正，失败经过保留在报告。归档docs/experiments/factor-b12-b200-distance200-controller-review-2026-09-21.md。无真实行情/真实成员链、预测、收益、生产或交易授权；B4仍未完成。\nB13主控接收（2026-09-21）：50/200期均线、严格站上和本次上穿六张精确卡接入统一研究入口；执行方每卡1911行、六卡11466行标准库独立复算零差异，主控另造人工价格生成7452行输出并核关键边界，91项相关测试、仓库归置和差异检查通过。登记v1.4.3（86对象88版本，66 exists/22 verified），仅六卡升级为人工数据计算范围verified。首次生命周期补丁误把SMA50证据贴到相邻经济价格卡，被精确集合测试抓住，已恢复并按精确编号更正；失败经过写入归档。报告docs/experiments/factor-b13-trend-backbone-controller-review-2026-09-21.md。无真实行情、target/IC/收益差、生产交易部署或commit；上穿不是独立买点，B4/R2继续暂停。\nB14逐卡审计收口（2026-09-21）：trend.recovered200@1.0.0执行方4840行零差异，主控另一套人工价格边界也通过，登记v1.4.4并仅该卡升人工计算verified；mixed.rv_percentile@1.0.0执行方冻结手算与标准库复算因近似浮点是否算并列而1508行分叉，保留not_ready和原失败证据，登记仍exists。主控稳定零波动并列夹具和非并列路径通过，但定义未写近似相等容差，故不擅自升级。98项相关测试、六份冻结CSV升级后复核、仓库归置和差异检查通过。报告docs/experiments/factor-b14-rv-rank-recovered200-controller-review-2026-09-21.md。当前停在用户/其他高思考模型裁决点：精确相等、容差/四舍五入新版本，或继续搁置。无真实行情、预测、收益、生产交易或commit。\nB14关键裁决（2026-09-21）：用户授权交内部gpt-6-astra/xhigh只读复核，主控独立复算。mixed.rv_percentile@1.0.0继续exists，保留精确相等行为，不给v1加容差、不立即建v2。固定实现RV20后536个排名零差异，但价格整体乘1.1时506/536个排名改变、最大约44.5个百分点，而RV20最大只变约1.78e-15；乘7恰好稳定。冻结首值另有手算计数错误，真正首次分叉在raw303。完整裁决docs/archive/handoffs-plans/2026-09-21-factor-b14-rv-tie-astra-decision.md；复算docs/experiments/raw/factor-b14-controller-2026-09-21/astra-tie-decision-verification.json。未改定义登记、实现或生命周期；无真实行情、预测、收益、生产交易权限。\n2026-09-22完整动量排序复用核验：现有monthly_decisions E10 ranked可复用，未新增排序引擎；Sol/medium 1次、返修0，8项新永久人工测试通过，主控不同输入9项断言通过。调用前仍须核唯一记录、分数/累计报价数来源与完整月末，未开放任意Agent输入。报告docs/experiments/factor-momentum-rank-reuse-2026-09-22.md。未改定义/源码/卡状态/完成勾选，B4/R2及真实研究权限不变。\n2026-09-22候选探索：主控核六类，形成高点位置draft-2、动量路径连续性和下跌波动三项草案；同基准超额不改变统一端点排序，旧数据全部就绪与IC属描述表述需限定。Agent调用暂缓。Sol/medium派发因agent thread limit reached未启动，无执行者成果；无真实行情/预测/账户运行，未改正式卡或资格，未勾里程碑。报告docs/experiments/factor-candidate-exploration-2026-09-22.md。\n2026-09-22高点位置准备：旧宽基子池三产品仅两个跟踪对象，选前三全选不能检验选择增量；接回9月8日已定六宽基，核六个价格文件存在/指纹而非合格。科创50结合补件后现金分红/拆分只剩2022/2023缺口，不重报四年全缺。提出两选法+六只平均分配、两成本最多六账户的待审范围，未开跑。报告docs/experiments/factor-high52-preflight-2026-09-22.md；未改定义/资格/源码/里程碑。\n2026-09-22用户明确纠正研究范围：IC、未来收益和策略收益差就是因子研究主攻内容。已更新新阶段授权，旧B4/R2记录保留。新入口factor-core-start-2026-09-22.md记录标准流程及页面局限：/factors快照9月4日/旧评级8月27日，/research仍为早期静态展示。本轮未运行新统计或回测；原S0委派无确认产物且工具报线程数限制，不能声称在跑。\n2026-09-22用户在总体架构评估后明确：可以的，制定计划并分发任务吧！采用共用研究流程＋ETF/个股适配；主控只计划、委派和审阅，Sol medium执行。B0-D六ETF输入实际解析、B0-C共用合同分别已通过followup_task派发；UI独立任务已create_thread提交，clientThreadId=client-new-thread:4b8c2a94-7beb-4ba8-a36b-e0a2049f47ca，等待初始化，尚无页面交付。合同及记录：docs/archive/handoffs-plans/factor-b-route-2026-09-22/。真实统计批次B1尚未派发，不把准备或任务创建当效果成果；不改完成标准或勾选。\n2026-09-29 用户明确Universe/A01规范与计划修正已落地：规范7入口、路线、唯一登记卡及下一轮合同更新；原A01证据和桌面原文保持。旧六ETF实际后来评价四资产，不能外推个股。个股采用历史沪深300普通股成员，预先承诺核心验证，不以ETF正结果为前提；指数辅助分支单列。新增市场尚未计算，个股历史OHLC/成员资格/缺列证券终止事件、指数官方来源身份及创业板OHLC仍受阻；本地指数资格1/4，旧覆盖3/3分别累计，没有重置市场预算。A02完整研究已完成：已有技术信息后20日收益/过程下跌预测误差仅改善0.273%/0.099%，范围含反向且产品年份不稳，结论证据不足，不升级过滤；一次市场运行，独立3058+4核查通过。两份报告及合同已登记；不勾完成标准，不自动验收大目标，无生产、交易、付费或原文修改。\n2026-09-29 按用户研究工具定点纠正，旧A01/A02封存及技术原文不改。A02存量217共同记录独立核算：B2F20日收益/过程下跌预测平方误差比B0多14.50%/11.58%，上涨比固定50%多27.79%；相对B2微小变化不等于完整方法有效，仍证据不足不升级过滤。固定ETF与年份共同支持描述覆盖304/354，全期两状态收益差0.029个百分点，最低各5条变反向；这是事后描述不是新验证。正式2022—2026H1成员439个，旧25缺列仅3代码真正影响；保留缺口与成员低频探测限制。免费6次来源预算内实际取得300/创业板各1338日OHLC，只供应商价格代理数值资格，正式股池/原严格指数效果资格未完成。停牌/漏报/行动及端点/路径资格分开审，实报价时钟不静默替换60交易所日；无新因子/模型拟合/付费/生产。活动登记测试已改结构约束，真实历史快照固定验，42项通过。报告、当前路线v0.5、具体取数方案与合同补充已落地；不自动验收里程碑或大目标。\ndocs/experiments/research-workflow-engineering-final-2026-09-29.md｜2026-09-29 按用户研究流程工程化指令完成新Factor Lab执行/发布分支接入，218项相关测试，连续无增量与风险事件更差两种人工案例完整登记；错凭据正式回调0。拒绝尝试成本、演练和执行沿用原家族预算，机械重试不增加科学配置；保留初版与修订证据。根独立复算164人工标签和主评分，B50严格0.25，旧封存274项及两技术原文一致。仅工程专项待用户验收；未新开真实因子、情绪、市场取数或生产。真实A01适配、开盘及完整行动/到达证据、旧runner迁移仍属边界。\ndocs/experiments/a01-index-position-effects-2026-09-29.md｜2026-09-29实际A01两指数价格研究完成：197上行周机会，20日成熟189次；较晚共同122条/66日期，均线距离加入完整技术信息后收益/最深收盘下跌/上涨概率平方误差增加6.53%/9.15%/4.35%，完整方法也逊于简单均值；逐年/对象、完整五组及独立原close核算已归档。仅限定供应商价格与固定方法，不把原next-open或股票池改READY，不改原文或生产。停止扫距离阈值，下一重点A03首次与后续回调的因果定义和效果；A03尚未运行。整体目标与里程碑未自动验收。",
+      "milestones": [
+        {
+          "id": "b1-candidate-pool",
+          "title": "B1 问题驱动候选池（4通过+2拒绝）",
+          "done": true
+        },
+        {
+          "id": "b2-single-candidate-evidence",
+          "title": "单候选定义与合成证据链验证完成并入库（exists，v1.3.1）",
+          "done": true
+        },
+        {
+          "id": "b3-four-candidates-implemented",
+          "title": "四项已准入候选的计算验证与定义入库完成",
+          "done": true
+        },
+        {
+          "id": "b4-real-descriptive-readings",
+          "title": "冻结真实输入的描述型因子读数与独立复算完成",
+          "done": false
+        },
+        {
+          "id": "b5-existing-factor-readiness-audit",
+          "title": "首批既有因子验证就绪度审计完成",
+          "done": true
+        },
+        {
+          "id": "b6-three-card-evidence-audit",
+          "title": "首批未就绪因子（NOT_READY）验证补全审计完成",
+          "done": true
+        },
+        {
+          "id": "b7-heterogeneous-evidence-audit",
+          "title": "异构验证缺口首批补全审计完成",
+          "done": true
+        },
+        {
+          "id": "b8-registered-bridge-audit",
+          "title": "三张既有卡的完整合成计算与正式编号接线复核完成",
+          "done": true
+        },
+        {
+          "id": "b9-missing-policy-proposal",
+          "title": "两张既有卡缺价规则新版本提案及合成兼容性复核完成（不发布）",
+          "done": true
+        },
+        {
+          "id": "b10-v2-synthetic-verification",
+          "title": "两项明确缺价规则的新版本登记、研究计算接入及独立合成验证完成",
+          "done": true
+        },
+        {
+          "id": "b12-b200-distance200-evidence",
+          "title": "B200宽度与200期均线距离的精确入口、独立合成计算证据及逐卡审计完成",
+          "done": true
+        },
+        {
+          "id": "b13-trend-backbone-evidence",
+          "title": "50/200期趋势基础六卡的精确研究入口、独立合成计算证据及逐卡审计完成",
+          "done": true
+        },
+        {
+          "id": "b14-rv-rank-recovered200-evidence",
+          "title": "自身波动历史位置与站回200期均线两卡的精确入口、独立人工计算证据及逐卡审计完成",
+          "done": true
+        }
+      ],
+      "links": [
+        {
+          "label": "B 子合同",
+          "url": "/library?report=docs%2Fresearch%2Fproposals%2Ffactor-next-phase-4dir-2026-09-19%2Ffactor-coverage-contract.md"
+        },
+        {
+          "label": "核心因子研究：当前入口",
+          "url": "/library?report=docs%2Fexperiments%2Ffactor-core-start-2026-09-22.md"
+        },
+        {
+          "label": "A01均线距离完整技术信息研究（2026-09-29）",
+          "url": "/library?report=docs%2Fexperiments%2Fa01-guide-technical-findings-2026-09-29.md"
+        },
+        {
+          "label": "技术因子范围与A01下一轮合同修正（2026-09-29）",
+          "url": "/library?report=docs%2Fexperiments%2Funiverse-research-scope-correction-2026-09-29.md"
+        },
+        {
+          "label": "A02回调期间均线方向保持（2026-09-29）",
+          "url": "/library?report=docs%2Fexperiments%2Fa02-sma-maintenance-findings-2026-09-29.md"
+        },
+        {
+          "label": "A02简单基准与A01资料路径勘误（2026-09-29）",
+          "url": "/library?report=docs%2Fexperiments%2Fresearch-tools-correction-2026-09-29.md"
+        }
+      ],
+      "kind": "concrete",
+      "id": "okr-ff1e0a86fbac",
+      "version": 131,
+      "status": "in_progress",
+      "created_at": "2026-09-19T02:27:53+00:00",
+      "updated_at": "2026-10-10T18:17:03+00:00",
+      "authorization": {
+        "granted": true,
+        "scope": "当前新研究范围：宽基与ETF优先，动量、趋势、风险管理先行，反转及其他候选后续。允许为明确问题开展真实资料核查、离线因子读数、未来结果/IC/Rank IC/分组表现、按时间与标的稳定性、含成本完整策略及组合对照和书面复核。每个实际批次由主控事前固定对象/公式/产品池/时期/目标端点/对照/费用/执行规则/预算，不看结果调参，不把未验证资料伪装为合格；数据问题只阻断受影响用途。此前target/IC/收益差禁令不再作为本新研究阶段的全线限制；旧B4/R2及旧协议不追溯改写。允许更新本条与父方向的进展/证据，不改里程碑完成标准、不自动验收。仍无真实交易、生产部署、commit、付费采购或凭据授权；Agent/前端并行改动不碰。基本面参与选品或仓位的体系扩展、重大范围变化及实际资金取舍不确定时问用户。\n2026-09-22补充：批准B路线共用研究流程与ETF/个股适配设计，ETF仍优先；个股纳入未来范围，本轮只做结构和人工边界例子，不自动开启真实个股择股研究。首轮委派六ETF本地输入核查、最小共用契约和独立工作区专业页面预览；具体边界见factor-b-route-2026-09-22三份冻结合同。不得自动合并、修改生产策略或以页面评级代替研究；后续真实实验由主控按既有授权另冻具体协议。\n2026-09-23补充：用户明确扩大系统策略相关因子研究并授权多路GPT-6委派，计划明确的执行优先Luna。当前新增优先为波动风险、回调位置、趋势强弱，随后量能/突破/结构逐包核输入与协议；允许普通实现和离线研究，不需要每次派发再问。重大体系方向、费用、外部权限或真实资金取舍仍问用户；不自动放开个股实盘、基本面参与决策、生产、提交、付费或改资格。每一真实批次仍由主控事前冻结。",
+        "at": "2026-09-23T09:51:59+00:00"
+      },
+      "progress": {
+        "done": 12,
+        "total": 13
+      },
+      "history_entries": 131,
+      "history_sha256": "e2106693eccd93773834e7c31d85bc750497f9e68592f66aacf886fe8773a78c"
+    }
+  ]
+}

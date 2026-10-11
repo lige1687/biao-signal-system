@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-11T10:43:22.528288+08:00",
+  "delivery_sha256": "f5b3faad16ac3148808c3c2471fe804a6f30712ce88ebebea5ca2445dd4868f7",
+  "old32_prefix_equal": true,
+  "requests": 33,
+  "queries": 15,
+  "resources": 18,
+  "exact_source_bytes_and_lines_verified": true,
+  "first_anonymous_POST_fully_bound": {
+    "body_json": {
+      "api": "fts.search_report",
+      "params": {
+        "keyword": "516220",
+        "page": 1,
+        "perPage": 10
+      }
+    },
+    "body_json_compact": "{\"api\":\"fts.search_report\",\"params\":{\"page\":1,\"perPage\":10,\"keyword\":\"516220\"}}",
+    "body_sha256": "022c2a0afc39d5c3fac8aec6de05c66018e0c483585590f3c8df9f25f6f0693e",
+    "content_type": "application/json; charset=utf-8",
+    "initial_custom_headers": {},
+    "initial_report_request_method": "POST",
+    "initial_report_request_url": "https://e.gtfund.com/Etrade/Public/cochin/fts.search_report",
+    "source_excerpts": {
+      "common_data": "JSON.stringify({api: api, params: params})",
+      "common_method_path": "type: 'post'; url: '/Etrade/Public/cochin/' + api",
+      "initial_page": "getNewsData(1)",
+      "report_params": "cochin(fts.search_report, {page: page, perPage: 10, keyword: word})",
+      "saved_keyword": "search-inline value=516220"
+    },
+    "source_line_references": {
+      "common_content_type": 558,
+      "common_data": 541,
+      "common_global_export": 397,
+      "common_hashcash_challenge": 571,
+      "common_hashcash_retry": 578,
+      "common_request_method": 556,
+      "common_request_path": 557,
+      "saved_HTML_keyword": 309,
+      "search_index_initial_page": 150,
+      "search_index_report_call": 509
+    },
+    "source_paths_sha256": {
+      "common_js": "232511f6265a20976da903d7e0a7935f349e569b90a45937c9a68982c8f18044",
+      "search_HTML": "c2b8a7ee434e4f088651685f14c87cb5eb9c1bb60cae22651c1063d4ac3d2d02",
+      "search_index_js": "2048790cd4e22bbb1c909da98e9451d04e14b9394d5a98275b54d69df619ad8a"
+    }
+  },
+  "challenge_requires_stop_no_computation_or_retry": true,
+  "actual_report_request_sent": false,
+  "scope_decision": "Exact anonymous first POST can be bound next under sameglobalcaps; newtarget hop transfer explicitrequired before execute; full14/R2/notreleased"
+}

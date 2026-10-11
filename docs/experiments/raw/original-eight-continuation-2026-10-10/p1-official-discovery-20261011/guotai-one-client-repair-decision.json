@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-11T21:46:51.220782+08:00",
+  "prior_failure": "URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1006)>",
+  "prior_opener_uses_system_proxy": true,
+  "system_proxies": {
+    "http": "http://127.0.0.1:7890",
+    "https": "http://127.0.0.1:7890"
+  },
+  "python_tls": "OpenSSL 3.6.1 27 Jan 2026",
+  "alternative_client": "curl 8.7.1 (x86_64-apple-darwin24.0) libcurl/8.7.1 (SecureTransport) LibreSSL/3.3.6 zlib/1.2.12 nghttp2/1.64.0",
+  "decision": "One explicitly counted request with different installed default TLS client can distinguish PythonTLS compatibility from actual upstream failure; same exactanonymousURL/body/proxy, no insecureflag/ciphers/downgrade and no challenge solving. Stop after thisone iffailure persists. This is source transport repair not strategy rerun.",
+  "global_caps_unchanged": {
+    "queries": 29,
+    "resources": 26,
+    "hops": 44
+  },
+  "old34_ledger_sha256": "652779c6e0994cce24820fe6ada8aeb4ef644bd9a735b831f178dcc0f70c2f1c"
+}
