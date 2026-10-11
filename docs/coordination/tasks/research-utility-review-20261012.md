@@ -1,3 +1,14 @@
+# 因子研究操作价值复盘已交付
+
+- task-id: research-utility-review-20261012；owner: 本用户会话 root；status: completed；scope_released: true；updated_at: 2026-10-12T00:19:33.181320+08:00。
+- checked_coordination_sha: 72d3f17aa020b49abdc71329305fc9bd15483621；checked_at: 2026-10-12T00:19:33.181320+08:00。开工已读任务见下段，交付前新增读 investor-workspace-simplification-20261012 完整登记：仅web及自有过程路径，与本报告/唯一新登记键无冲突；直接复用其已有工作，不再派同题开发。
+- 交付：docs/experiments/research-utility-pain-points-2026-10-12.md，docs/experiments/raw/research-utility-review-2026-10-12/review-receipt.json；registry仅新键、INDEX仅新导航，写前659旧项逐值保持，导航旧字节保持；仅本地主工作区，未提交/未发布，私有接口摘要不上传。主HEAD/分支保持，不声称用旧commit复现本地报告。
+- 验收：根复核6组核心证据及当前接口；报告/登记指纹一致、相对链接存在、唯一登记、旧内容保留、归置检查通过。两个只读助手完成，模型 gpt-6-sol/medium，无文件修改；root本轮新拟合0/回测0/生产与真实记录修改0，真实token费用未知。
+- 问题已回答：新增研究信息不稳定、资料与计划接入仍缺、工程交付与用户受益分离；保留窄正例，不推导全部研究无用或真实收益为0。不改其他任务/预算/通知/策略；建议供现有负责人验收参考。
+- 同步：本记录为唯一上传内容，推后读回才称同步；实际成果仅本地。必要分析及归档完成，其他任务按各自负责人和权限继续。
+
+---
+
 # 因子研究投入与实际操作帮助复盘
 
 - task-id: research-utility-review-20261012；owner: 本用户会话 root；status: active；updated_at: 2026-10-12T00:15:22.452499+08:00；scope_released: false。
