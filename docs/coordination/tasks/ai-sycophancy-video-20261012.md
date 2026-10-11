@@ -40,3 +40,17 @@
 - 存储：2026-10-12T00:32:29+08:00固定UUID核验通过，外盘565335687168B，本机13778509824B；预计外盘普通文件<1GiB、本机小索引<128KiB，依赖只读复用，无安装、删除、付费、科研实验或策略更改。
 
 - 协调并发重试：首次普通推送因他人更新远端被拒；重新fetch并核本任务无他人变化后合并到最新树。checked_coordination_sha: 8b175fe7422f0b526baf6a2091011627c6208acf；复核时间: 2026-10-12T00:35:57.910551+08:00。仅新隔离制作目录已准备，未进行共享索引修改。
+
+## 完整片交付 2026-10-12T00:58:33.147345+08:00
+
+- status: completed（本轮整片制作交付）；stage: full_awaiting_user_review；scope_released: true。
+- checked_coordination_sha: 18c6273e9b3ecf061cda1be8ace62a5559dbc7a8；checked_at: 2026-10-12T00:58:33.147345+08:00；已读COORDINATION、本任务和research-dispatch-controller；此前已核trend-perspective-video-20261009。冲突决定：仅自己的既定路径，其他任务保持不动。
+- 完成120秒整片，1920×1080、30fps、3600帧、AAC双声道，无旁白。26—36秒新增经典预训练/后训练流程及官方论文题名素材；36—51秒复用已认可样例。完整片观感仍待用户审阅。
+- 外盘目录：/Volumes/win+mac通用/LeiSignal-新实验结果/视频库/AI与投资/20261012-ai-sycophancy/v02-full。
+- out/ai-investment-full.mp4：9120708B；SHA256 584e5d6f21b234ce4282a7cfbe6bf8ca14f1378515caa038cb9baffcac263aca。
+- ai-investment-full-source.zip：39891315B；SHA256 16496b6de9bab221d9ee4674972d201306ee3ff9c6d9bf598e2db6568032e333；来源、屏幕文稿、分镜、声音方案、工程及字体授权均在外盘。
+- 检查：完整解码3600帧；实际浏览器1倍播放120秒到结尾，无媒体错误，3600帧提交、播放器5帧未展示。9段章节、海报和下载链接返回200；关键接缝和文字视觉检查通过；仓库归置通过。未声称独立主观听审，跨机器依赖运行未验证。
+- 本机已有external-location.json已指向v02；work-progress/ai-sycophancy-video-20261012.md已更新。两者仅本地未提交，工程媒体仅外盘；未声明Git源码同步或远端可复现。此协调记录不替代媒体本身。
+- preview.html：http://127.0.0.1:8877/preview.html；已请求应用打开，返回queued。v01保留。
+- 实际增量：新增约10秒AI知识并完成其余整片；107个音效锚点，配乐连贯。无需研究实验；无策略变更、依赖安装、发布或新付费操作。后续仅按用户整片反馈修改。
+
