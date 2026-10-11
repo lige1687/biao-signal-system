@@ -51,3 +51,8 @@
 - 验收：全部关键帧、最终导出关键帧、全解码、1x浏览器0→105秒ended、时间表/公开文字/归置检查通过；checks/validation.json与manifest.json留证。ffprobe未安装，已用ffmpeg与浏览器元数据替代；原失败保留。独立听审未确认，未夸称主观已通过。
 - Skill实际文件在素材段新增主动选择/生成叙事素材两段，差异仅4行插入；原文件是既有未跟踪工作，因此只推准确asset-requirement.patch，不混提交整份他人旧Skill。实际Skill SHA961c5be70c3a170bdeb9d2ec0906cf533ac2e324b5b10e4c8a8d752ebaaf757c。
 - 原v01/v02保留；未删除/新安装/改策略/写平台。实际费用未知。下一步依用户对完整片的具体反馈修订；无自动发布。
+
+## 开头与笑点返修 2026-10-12T01:11:46.933523+08:00
+status active；scope_released=false；checked_coordination_sha 8cab292752d1557a1f8c51c86adbd6f320739ae3；checked_at 2026-10-12T01:11:46.933523+08:00。已读COORDINATION、自身、中控、ai-sycophancy、investor-workspace、research-utility、trend-perspective相关范围，均无本片路径冲突；root唯一写者。
+用户否定大脸泛问句开头与家族办公室笑点。本轮只在自身新外盘v04-opening建立15秒修订开头；改为买前“涨5%就走”与亏后“不能只看眼前”的自我辩解，朋友一句追问引出“因为觉得明天会涨”。无真人素材、无买卖建议，虚构对话；无新配音，沿已选音乐与原创短音效。原105秒失败观感保留，不覆盖，不把新样片当整片改完。
+允许路径：本片v04-opening、自身docs/ops/media索引及进度；不改共享Skill/他片/策略或平台。固定外盘身份可用，预计新文件<200MiB。验收15秒实片、关键帧、全解码与播放；新文稿/观感待用户，不宣称幽默已成立。
