@@ -1,3 +1,13 @@
+# 真实Web连续反例保留，定位到历史状态写入
+
+- task-id: research-utility-review-20261012；status: active；scope_released: false；updated_at: 2026-10-12T02:00:26.358987+08:00；checked_coordination_sha: 6218d665398b3d6b716de91da90dc95010040ded；checked_at: 2026-10-12T02:00:26.358987+08:00。已读COORDINATION、本任务、investor-workspace-simplification-20261012最新范围，中控范围沿本轮已读且未变；新增差异仅实现者与视频自身记录。root只独验/自有记录，不与实现者写代码。
+- 两次后续冷启动验收均未到模型：预热限并发候选无法覆盖页面写入，已由实现者回退；事件重复写入优化后，新的持锁来源变为write_event_lifecycles。保留55.4秒登记等待及21.6秒持锁的实现者配对日志，不宣称整体修好。
+- 页面曾提前显示AI正在生成，实际还在存问题；原失败已留图，准确等待文案已补但完整流程仍待验。第三请求中页面出现重载，root未刷新/导航、实现者未改web且无对应HMR日志，原因unknown，不猜测。失败问题未落库，经GET原session messages读回[]；未用本地文字重造服务器历史。
+- 当前实现者在小库核历史状态批写的并发耗时与异常/身份冲突语义，尚未应用。root等待具体修复依据后再发唯一公开验收问题，不重复碰运气；不需要人类决定。
+- 本地证据继续在docs/archive/handoffs-plans/research-utility-review-20261012/independent-acceptance.json及对应jpg/txt；不推私有资料。真实计划/成交写入0、外发持仓0、新训练/回测0。原路径/合成复盘证据复用，待实际答复及刷新恢复后才关闭本次Web验收。
+
+---
+
 # Web独验发现真实阻塞，继续修复后验收
 
 - task-id: research-utility-review-20261012；status: active；scope_released: false；updated_at: 2026-10-12T01:21:25.844784+08:00。
