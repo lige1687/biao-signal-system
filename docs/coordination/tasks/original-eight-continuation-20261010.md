@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "26077818ee21e22bc073051bb9396bce0c5bbff8",
-  "checked_at": "2026-10-11T22:49:03.461763+08:00",
+  "checked_coordination_sha": "a648a392009764fa19c6f1041e0b860f376f4d64",
+  "checked_at": "2026-10-11T22:55:30.641707+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -70,7 +70,8 @@
     "docs/experiments/INDEX.md (only own new report row)",
     "docs/experiments/research-evidence-catalog-2026-10-07.md (only owned prefix)",
     "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/",
-    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-remaining-source-qualification-20261011/"
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-remaining-source-qualification-20261011/",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/b4-515300-history-20261011/"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -90,7 +91,8 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-e1-official-source-20261011/b4-e1-official-source-20261011-20261011T223841-0489602bf81d"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-e1-official-source-20261011/b4-e1-official-source-20261011-20261011T223841-0489602bf81d",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-515300-history-20261011/b4-515300-history-20261011-20261011T225524-8a998a51dc12"
   ],
   "scope_released": false,
   "question_ids": [
@@ -118,7 +120,8 @@
     "p1-remaining-official-paths-addition-20261011",
     "p1-eight-annual-retrospective-action-fields-20261011",
     "b4-e1-implementation-source-20261011",
-    "b4-two-action-coverage-composition-20261011"
+    "b4-two-action-coverage-composition-20261011",
+    "b4-515300-fixed-window-action-history-20261011"
   ],
   "shared_write_owner": "root only own new report/registry entry/INDEX row/catalog prefix/progress and original goal evidence notes; agents distinct new leaf paths",
   "goal_ids": [
@@ -131,10 +134,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "a6590648a9ad6f7b5afbaa030b8394c84a1c3a57",
-  "scope_amendment": "Actual10th response yields exact5153002025annual primaryPDF. Add exactlyonePDF GET to finish alreadyrequired outcome; all2search+10direct costs preserved. No further discovery/query permitted.",
-  "updated_at": "2026-10-11T22:49:03.461763+08:00",
+  "scope_amendment": "Human continuousprogress andnecessaryaddition authority: newdistinctsourcequestion5153002019-2026H1 cash/splitfields. Atmost1normalprimaryperiodiclistquery plus7missingannual/H1PDF,8directrequests. PreserveallE1/P1/Sept actualcosts andold7records; no strategy/science.",
+  "updated_at": "2026-10-11T22:55:30.641707+08:00",
   "conflict_decision": "Actual read latest coordination and all thirteen related tasks; reviewed cash22:31 network repair and trend22:26 browser blockage. Neither shares our evidence files. Avoid global proxy/browser modifications and technical-factor-sequence C/hourly, risk-shape D3 owner scopes. Own root exclusively shared records.",
-  "current_work": "Root exactonePDFGET11 only; officialquery1 acceptedtitle/product1510/date2026-03-30; then independentPDFidentity/implementationfields, recoveryandarchive.",
+  "current_work": "Root acceptsE1 andcoverage/recovery/archive. Sol mayexecuteonlynew515300-history privateleaf/externalroute afterfrozencontract+ready. Do notreuseunspentoldE1/P1balance. Otherfunds/originalR2remainclosed.",
   "paused_questions": [
     "博时沪深300ETF515130的2021—2024四全文未核，其中三入口缺失；实际403停止，合法正常官方访问或准确新原件可恢复对应问题",
     "其他份额调整渠道、供应商历史到达、E1实施/更正去重及完整14产品输入资格仍未证明，R2/科学未放行",
@@ -345,3 +348,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T22:49:03.461763+08:00 嘉实目标年报原链接已定位，仅补一份原件
 
 实际官网POST741015 product_id1510 keyword2025返回17条/2页，首页第1条是准确2025年报，原链接已绑定。只增加1个资源和1跳取这份PDF（11/11）；不翻第二页，不重复已核分红公告，不做不存在更正的保证。2搜索、10直连已记账不重置。此前普通JS里captcha参数触发自写探测误判，已据200/applicationjavascript/源码对应方法只读纠正并保留原错误记录，未遇到或解决实际验证码。
+
+## 2026-10-11T22:55:30.641707+08:00 E1实施已核，继续515300原期间两字段完整性
+
+嘉实2025年报68页：p14已实施，p39三次日期金额与冻结记录一致，p9年度总额独核。下一项是此基金原2019-09-19..2026-06-30整段现金/拆分栏，已核2025不再取；固定新增2019—2024年报和2026中报共7份、一个本基金定期报告列表查询，最多8次直连，无自动重试/翻页。其余基金及B4真实计算不放行；发现与旧7事件冲突立即保留并报，不改旧表。本批旧2搜索+11直连及P1账41保持，独立新增源预算不冒充旧余额。外盘128MiB plan-only已绑定，小记录1MiB。
