@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "d4e2a832f40e1ec400ba7b5f39f3a4b7d86ea292",
-  "checked_at": "2026-10-11T10:22:22.254003+08:00",
+  "checked_coordination_sha": "4dc64cb548df827cffe5409e7f0ebe77326a4ab6",
+  "checked_at": "2026-10-11T10:26:41.534069+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -128,9 +128,9 @@
   ],
   "latest_result_commit": "0bb60b542eb62ac9d2e08e6c276c00d5c1c3172f",
   "scope_amendment": "Current human authorized necessary eight exact ChinaAMC annual article/PDF field scope, explicit NEWtargets within unchanged29queries/26resources/44hops; wholefieldstage0query/16resources/24hops, eachyear2resources/3hops. Bosera/Guotai/E1 remainstopped. Rootfirstbindsactualarticle stage thenexactPDF stage, source qualifiedretrospectiveperclass only, full14/Gate1B/R2/science remainclosed.",
-  "updated_at": "2026-10-11T10:22:22.254003+08:00",
+  "updated_at": "2026-10-11T10:26:41.534069+08:00",
   "conflict_decision": "已实际读d54588b0..d4e2a832f40e1ec400ba7b5f39f3a4b7d86ea292两视频最新差异：现金原抖音用户已提交，其他两平台控制连接阻塞；趋势人类授权v15完整片制作，只独立媒体/索引/协调，不改Skill/策略。与本年度资料/恢复/报告/API无重叠，owner/status保持。十三task由helper实际fetch/bytes核回，root唯一共享writer。",
-  "current_work": "累计15queries/1resource/16hops，9/15文章准确根已核；Bosera真实403停，Guotai缺cochin transport停。旧额不重置，新独立30准确源恢复另Sol运行，activeledger排除。根登记8华夏年度指定字段原件阶段，firstonlyarticle合同ready后followup原Sol，实际PDF绑定后再续，不等待缺六年也不放行科研。",
+  "current_work": "八article实际8/8 HTTP200，根逐字核标题/年度/href/可见时间，累计15q/9resources/24hop与16前缀保持。已冻8准确附件URL，其中195sh前缀按原文保留，仅URL边界空白删除后编码一次无猜路径，PDF内部身份待真读。准备执行8PDF、每年剩2hop/1res，wholefield预算不增；原归档和94必要恢复已有验，根unique共享。",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -293,3 +293,7 @@ Astra已定位原B4精确合同，旧5740同值并不解决未复权与登记定
 ## 2026-10-11T10:22:22.254003+08:00 实际来源遇两具体卡点，独立继续华夏八年度原件字段补证
 
 Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事后原文支持，减少真实B4缺口，不须等full14资料合格；Bosera2024虽找到链接，403后的同产品取件保持停。八年度5151702022–24/5188502021–23/5880002022–23，准确文章URL冻结；全阶段最多8article+8PDF16resources/24hops、queries0，各年2resources/3hops，原全球29/26/44不增。新per-target资源/hop在P1内明确调配，E1不动；日期/金额/单位/年度合计/折算比例需原文页号，普通申赎不证明split，publication/arrival/payment区分。只先取精确articles生成实际附件绑定，再root冻结PDF下一阶段，不猜网址/扩大域名、不改旧行动表/策略/科学。
+
+## 2026-10-11T10:26:41.534069+08:00 八文章实际核回后续精确八PDF与两类事后字段
+
+原八年字段scope无扩项。实际8article全部200无redirect，准确候选附件URL根从原文核回，publication采用可见时间并保留CMS注释差异。新PDF字段合同明确每年最多1PDF资源和2请求hop，全阶段8article+8PDF最多16resources/24hop；当前全P1已15q/9res/24hop，global29/26/44保持，至少余4hop不自动用。PDF原文核基金代码/完整年报/年度，两原字段分别supported/partial/unknown并页证；普通申赎不是split，无金额日期就unknown。Bosera403与Guotai映射缺口保持，不下载其report。原行动表097043b2准确Gitblob可恢复，8年原events0不能自证无事件；不改表、不跑价格派生/科研/Gate1B/R2。
