@@ -1,3 +1,11 @@
+## 必要失败恢复与未知计划文案 2026-10-12T00:52:20.103771+08:00
+
+checked_coordination_sha 6050eb75595a073fddb2652734c798f921a9cabd；最新其他变更仅trend视频的自身状态，与本范围不交叉。独审发现3个api.detail消费者未传取消信号，SymbolKlinePanel错误后仍骨架。新增仅这3文件的请求取消/禁自动重复重试/错误重试展示；Sol唯一写者，root继续自己PortfolioToday/PortfolioAgent/PortfolioPage/todayLogic与CopilotCards原块。台账失败补重试。
+
+用户已在独立验收聊天明确没记录原计划；不针对具体基金硬编码，通用文案改为未记录就保留未知、先解释现有事实，新观察与历史计划分开，不反复要求找回不存在材料。真实答复隔离修复已HTTP200/grounded=true，无fallback，原模型名不变，26相关测试通过；报告agent-acceptance-fixed.json，不等于运行8000已采用。准备最小补丁/备份回退/实际服务重载影响，由独立验收聊天统一协调最终采用。
+
+---
+
 ## 已定位404，隔离修复协议识别 2026-10-12T00:47:56.393042+08:00
 
 checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新research-utility-review独立验收范围，其仅读页面/自有报告、不碰web/后端。同路径全任务检索未发现llm.py当前写者；daily-trading-system-audit仍只读。唯一新增源码范围 src/lei_signal/plans/llm.py::_infer_style 及新 tests/unit/test_llm_protocol_routing.py。先将共享当前该源码逐字留作本地隔离基线，保持共享主树不变，不把完整旧文件冒充本轮原创。
@@ -63,8 +71,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "f2144bd1b9171155a9b524eac4919f13c817dc50",
-  "checked_at": "2026-10-12T00:47:56.393042+08:00",
+  "checked_coordination_sha": "6050eb75595a073fddb2652734c798f921a9cabd",
+  "checked_at": "2026-10-12T00:52:20.103771+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -106,7 +114,10 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/run-investor-loop-regression.mjs",
     "web/src/components/portfolio/PortfolioAgent.tsx",
     "src/lei_signal/plans/llm.py",
-    "tests/unit/test_llm_protocol_routing.py"
+    "tests/unit/test_llm_protocol_routing.py",
+    "web/src/components/SymbolKlinePanel.tsx",
+    "web/src/components/portfolio/PortfolioTechnicalDetail.tsx",
+    "web/src/pages/AgentWorkspacePage.tsx"
   ],
   "scope_released": false,
   "local_result_commit": "58f59572adec26477a5df29080da8b6d233f0efb",
