@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "c15e7a9a92c2e9844de2c72c5756d862212734f3",
-  "checked_at": "2026-10-11T10:14:13.498753+08:00",
+  "checked_coordination_sha": "d4e2a832f40e1ec400ba7b5f39f3a4b7d86ea292",
+  "checked_at": "2026-10-11T10:22:22.254003+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -68,7 +68,8 @@
     "docs/experiments/b4-source-access-preparation-2026-10-11.md",
     "docs/experiments/registry.json (only own b4-source-access-preparation report entry)",
     "docs/experiments/INDEX.md (only own new report row)",
-    "docs/experiments/research-evidence-catalog-2026-10-07.md (only owned prefix)"
+    "docs/experiments/research-evidence-catalog-2026-10-07.md (only owned prefix)",
+    "docs/experiments/raw/original-eight-continuation-2026-10-10/p1-annual-field-evidence-20261011/"
   ],
   "external_write_paths": [
     "/Volumes/win+mac通用/LeiSignal-新实验结果/native-d-conditional-risk-20261010/native-d-conditional-risk-20261010-20261010T175127-a5183ba1e0a0",
@@ -86,7 +87,8 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/weekly-two-etf-complete-account-20261011/weekly-two-etf-complete-account-20261011-20261011T005441-039d9543f167",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/eight-goal-idle-input-recovery-20261011/eight-goal-idle-input-recovery-20261011-20261011T020139-697075e68738/recovery-proof",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886"
   ],
   "scope_released": false,
   "question_ids": [
@@ -111,7 +113,8 @@
     "b4-saved-official-discovery-proof-20261011",
     "p1-real-official-discovery-prerequisite-20261011",
     "b4-new-essential-source-recovery-20261011",
-    "p1-remaining-official-paths-addition-20261011"
+    "p1-remaining-official-paths-addition-20261011",
+    "p1-eight-annual-retrospective-action-fields-20261011"
   ],
   "shared_write_owner": "root only own new report/registry entry/INDEX row/catalog prefix/progress and original goal evidence notes; agents distinct new leaf paths",
   "goal_ids": [
@@ -124,10 +127,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "0bb60b542eb62ac9d2e08e6c276c00d5c1c3172f",
-  "scope_amendment": "One new finite necessary source stage: +19query slots old10 retained cumulative29; original HTTP44/resource26 globalcaps unchanged, per-target hop redistribution explicit new immutabletargets; stage19q/22h/1resource. ExactGuotai linked JS exception only, no broadstatic/login/PDF/science/R2/E1. Original9realqueries/hops/0resources retain appendonly ledger and snapshot. Root alone archives/notes, Sol onlynew leafs.",
-  "updated_at": "2026-10-11T10:14:13.498753+08:00",
-  "conflict_decision": "已实际读e916cef4..c15e7a9a两独立视频增量，现金浏览器恢复进入原替换发布，趋势v13Skill认可及v14独立样片交付；与P1来源/恢复/报告/API无重叠。其owner/status保持；13任务helper将实际读取字节。",
-  "current_work": "原9真实查询/6准确年报文章、64必要材料恢复及报告API实际读回已通过，成果0bb60b54真实推读回479项。根正在冻结新有限追加目录查询并dry-run，通过后实际followup原Sol；非后台/非无期限。",
+  "scope_amendment": "Current human authorized necessary eight exact ChinaAMC annual article/PDF field scope, explicit NEWtargets within unchanged29queries/26resources/44hops; wholefieldstage0query/16resources/24hops, eachyear2resources/3hops. Bosera/Guotai/E1 remainstopped. Rootfirstbindsactualarticle stage thenexactPDF stage, source qualifiedretrospectiveperclass only, full14/Gate1B/R2/science remainclosed.",
+  "updated_at": "2026-10-11T10:22:22.254003+08:00",
+  "conflict_decision": "已实际读d54588b0..d4e2a832f40e1ec400ba7b5f39f3a4b7d86ea292两视频最新差异：现金原抖音用户已提交，其他两平台控制连接阻塞；趋势人类授权v15完整片制作，只独立媒体/索引/协调，不改Skill/策略。与本年度资料/恢复/报告/API无重叠，owner/status保持。十三task由helper实际fetch/bytes核回，root唯一共享writer。",
+  "current_work": "累计15queries/1resource/16hops，9/15文章准确根已核；Bosera真实403停，Guotai缺cochin transport停。旧额不重置，新独立30准确源恢复另Sol运行，activeledger排除。根登记8华夏年度指定字段原件阶段，firstonlyarticle合同ready后followup原Sol，实际PDF绑定后再续，不等待缺六年也不放行科研。",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -286,3 +289,7 @@ Astra已定位原B4精确合同，旧5740同值并不解决未复权与登记定
 ## 2026-10-11T10:14:13.498753+08:00 按现有人类自主追加授权登记一次剩余官方路径查找
 
 当前人类明确允许自主必要追加且无卡点继续，Astra/high实际判断一次明确来源追加可直接执行。515130当前16页231条真实事实支持顺序page2..16最多15query/17hop，515170实际POSTiframe支持后两页最多2query/3hop；国泰模板明确精确JS源可只读一次resource1/hop1，再仅完全披露报告请求执行最多1query/hop1，否则停。合计新query19、累计29，原hop44/resource26保持，E1不转。新每target分配及共享年度图明列，旧targets/失败/9累计/科学生命不改。无参数或旧科学重跑，根unique共享；仅新增真实外部事实和必要恢复。
+
+## 2026-10-11T10:22:22.254003+08:00 实际来源遇两具体卡点，独立继续华夏八年度原件字段补证
+
+Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事后原文支持，减少真实B4缺口，不须等full14资料合格；Bosera2024虽找到链接，403后的同产品取件保持停。八年度5151702022–24/5188502021–23/5880002022–23，准确文章URL冻结；全阶段最多8article+8PDF16resources/24hops、queries0，各年2resources/3hops，原全球29/26/44不增。新per-target资源/hop在P1内明确调配，E1不动；日期/金额/单位/年度合计/折算比例需原文页号，普通申赎不证明split，publication/arrival/payment区分。只先取精确articles生成实际附件绑定，再root冻结PDF下一阶段，不猜网址/扩大域名、不改旧行动表/策略/科学。
