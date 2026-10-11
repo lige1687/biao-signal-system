@@ -15,3 +15,15 @@
 - 存储: 固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9已核；外盘565519450112B，本机15617929216B；预计新增外盘<500MiB，本机小索引<128KiB，现有依赖复用不安装。
 - 来源: OpenAI 2025-05-02 expanding-on-sycophancy；配乐leyan用户指定私下样例，跨平台权利未确认。
 - 当前: 制作中；尚无成片或通过回执；不调用子代理。
+
+## 15秒样例交付 2026-10-12T00:19:57.776103+08:00
+
+- status: completed（本轮15秒交付）；stage: sample_awaiting_user_review；scope_released: true。
+- checked_coordination_sha: 50e1853fd81e0dd75866a832fe5aa5342f10679f；checked_at: 2026-10-12T00:19:57.776103+08:00。已复核本任务、此前已读research-dispatch-controller/trend-perspective-video-20261009及COORDINATION；仍为隔离新目录，无共享改动。
+- 成果：外盘视频库/AI与投资/20261012-ai-sycophancy/v01-sample/out/ai-sycophancy-15s.mp4；2453802B；SHA256 1b90a937da2f106610e0c32e1f6076317e95ffb7d4c338f12e2dde2a8845eebd。视频450帧、30fps、1920x1080、15秒；AAC封装总长15.019秒。
+- 源工程包：ai-sycophancy-source.zip；SHA256 8c6cb4f4cb4a19e393660dadbdc98a4cd01ccf23add7053cffce0a8b7876ea26；18694118B。逐项文件清单及来源/文稿/声音表在同目录；全部内容已实际读回。
+- 本机最小索引：docs/ops/media/ai-sycophancy-20261012/external-location.json，仅本地未提交；源码和媒体仅外盘，不能声称Git远端可复现。
+- 验证：完整音画解码、450帧、关键帧170/290/440视觉检查；实际浏览器1倍播放到结尾，无媒体错误，450帧提交、播放器报告4帧未展示；不是编码缺帧。音轨峰值低于0dBFS，28个轻重锚点、纸张/回滚/检查提示音。主观听感仍待用户，未冒称独立听审。
+- 失败留痕：首次构建缺函数闭合括号，修复后静帧与视频成功；ffprobe不在PATH，改用实际FFmpeg解码计帧；CUA两次超时，改用独立浏览器验证实际播放。原失败记录保留。
+- 用户播放页：preview.html，当前本机http://127.0.0.1:8876/preview.html；open_in_codex queued，不冒称界面已打开。仓库归置检查通过。
+- 下一步仅等待本样例观感反馈，从同源工程修改；未授权整片、发布或改技能。
