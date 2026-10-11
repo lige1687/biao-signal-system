@@ -1,3 +1,13 @@
+## 已定位404，隔离修复协议识别 2026-10-12T00:47:56.393042+08:00
+
+checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新research-utility-review独立验收范围，其仅读页面/自有报告、不碰web/后端。同路径全任务检索未发现llm.py当前写者；daily-trading-system-audit仍只读。唯一新增源码范围 src/lei_signal/plans/llm.py::_infer_style 及新 tests/unit/test_llm_protocol_routing.py。先将共享当前该源码逐字留作本地隔离基线，保持共享主树不变，不把完整旧文件冒充本轮原创。
+
+真实模型首次外部POST404，已保存failure；只读/models200，现有/anthropic误判OpenAI导致请求/anthropic/chat/completions。只修同一服务协议/路径识别，模型名/凭据/优先级/仓外设置不改；修复后允许一次同合成资料实际复验。端到端演练与真实模型验收分别存原目录，原失败不覆盖。前端CRLF失败已真实复现并修复，模拟计划关联/成交100元/复盘已读回，无真实账本写入。
+
+运行版本：5188为隔离web+共享原8000；5189为同前端+9191合成服务。后端修复在隔离树，未宣称8000采用或重启。用户原计划未知保持，后续新计划需要用户明确决定，本轮不补造。
+
+---
+
 ## 解析与实际答复验收增量 2026-10-12T00:42:55.176953+08:00
 
 新增准确范围 PortfolioAgent.tsx：复用已有流解析器，修复CRLF/末帧丢失，不改服务端上下文/判定。共享8000后端只读诊断已确定详情同步市场环境与多组历史回测造成等待（events0.18s，market-context首次5.71s/再次0.24s，详情12s首次超时/后次2.93s）；本轮前端提供可恢复等待及独立因子入口，不声称已提速后端。持仓tab隔离和成交成功跳转已修、build/SSR通过。
@@ -53,8 +63,8 @@
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "af1cd724091a1ad4260baa8e6358772052ff0305",
-  "checked_at": "2026-10-12T00:42:55.176953+08:00",
+  "checked_coordination_sha": "f2144bd1b9171155a9b524eac4919f13c817dc50",
+  "checked_at": "2026-10-12T00:47:56.393042+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -94,7 +104,9 @@
     "web/src/components/copilot/CopilotCards.tsx",
     "web/src/components/DetailLoadState.tsx",
     "web/run-investor-loop-regression.mjs",
-    "web/src/components/portfolio/PortfolioAgent.tsx"
+    "web/src/components/portfolio/PortfolioAgent.tsx",
+    "src/lei_signal/plans/llm.py",
+    "tests/unit/test_llm_protocol_routing.py"
   ],
   "scope_released": false,
   "local_result_commit": "58f59572adec26477a5df29080da8b6d233f0efb",
