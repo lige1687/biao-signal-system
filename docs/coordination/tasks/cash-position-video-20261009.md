@@ -364,3 +364,8 @@
 ## Chrome已打开，发布控制仍阻塞 2026-10-11T10:00:22.391477+08:00
 - paused；stage replacement_publication_browser_unavailable；scope_released=false独立范围；checked_coordination_sha=d6d66bb1d0ffa4c1cf1b615f51ad3b35b791f4a0；checked_at=2026-10-11T10:00:22.391477+08:00；已读自身/COORDINATION1.1沿已读、original-eight09:50、trend-perspective09:58独立样例，无交叉。
 - 用户指定“使用 Astra 6 辅助制作”已加到外盘待发布正文并读回；结果cb9ba968cb48f1a7da940f0da3d89af3c291ef90两文件正常推送读回。Chrome原生旧作品可读，但上传导航/刷新后无正文黑屏；扩展仍30秒超时，前置窗口及B站页不恢复。请用户手动打开抖音已知上传页后接续，不再要求其重复开Chrome。新版未上传/提交，旧三稿未修改。09:59存储固定UUID available/identity通过，不安装/删除/绕过。
+
+
+## 用户手动打开上传页，继续实际发布 2026-10-11T10:06:31.681459+08:00
+- active；stage replacement_publication；scope_released=false；root唯一写者。checked_coordination_sha=aad404297f3be3d25460d6341e8b4e46036c06e2；checked_at=2026-10-11T10:06:31.681459+08:00；fetch自09219aa4无增量，相关task-id original-eight/trend-perspective及COORDINATION1.1沿本轮实际已读，无重叠。
+- 用户“开了兄弟”，原生Chrome现在实际出现“上传视频/选择文件”控件。沿原v15最终120秒与三平台替换授权、Astra6署名、vibe普通文字与正式话题/章节要求继续。范围v16、本人回执/进度/本协调不变，旧他稿不碰，不永久删除。
