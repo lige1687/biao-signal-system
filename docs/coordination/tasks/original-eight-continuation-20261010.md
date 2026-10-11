@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "cb021a074315924db34e842a26f16497e6248e5c",
-  "checked_at": "2026-10-11T22:34:29.155689+08:00",
+  "checked_coordination_sha": "8c472d8292754f668713eb47516cef3ea4e542a3",
+  "checked_at": "2026-10-11T22:38:49.372515+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -89,7 +89,8 @@
     "/Volumes/win+mac通用/LeiSignal-新实验结果/eight-goal-idle-input-recovery-20261011/eight-goal-idle-input-recovery-20261011-20261011T020139-697075e68738/recovery-proof",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-local-access-preparation-20261011/b4-local-access-preparation-20261011-20261011T093856-7047ec513571",
     "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-official-discovery-20261011",
-    "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886"
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/p1-annual-field-evidence-20261011/p1-annual-field-evidence-20261011-20261011T102136-d7e8f5633886",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/b4-e1-official-source-20261011/b4-e1-official-source-20261011-20261011T223841-0489602bf81d"
   ],
   "scope_released": false,
   "question_ids": [
@@ -130,10 +131,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "a6590648a9ad6f7b5afbaa030b8394c84a1c3a57",
-  "scope_amendment": "User持续推进剩下的哈 resumes only necessary bounded source qualification. Initial local-only E1 route/readiness and cash/split-only coverage composition, old all budgets and failures intact; later online only after exact route/budget contract. No science, strategy edits, trades, new chats, automation, deletion, or network settings.",
-  "updated_at": "2026-10-11T22:34:29.155689+08:00",
+  "scope_amendment": "Reuse oldbatch2 E1 conditional2q4res8hop allocation aftercurrenthuman scope binding, no P1 transfer. Oldbatch1 E1search4/4 and earlier R1Eoverlimit preserved. Search-provider ownbackendtransport hops unavailable; record query tool calls as separate discovery metric, do not claim strict oldGate1B allhops passed. DirectHTTPrequests fullyloggedbeforeI/O and redirectnotfollowed.",
+  "updated_at": "2026-10-11T22:38:49.372515+08:00",
   "conflict_decision": "Actual read latest coordination and all thirteen related tasks; reviewed cash22:31 network repair and trend22:26 browser blockage. Neither shares our evidence files. Avoid global proxy/browser modifications and technical-factor-sequence C/hourly, risk-shape D3 owner scopes. Own root exclusively shared records.",
-  "current_work": "Root verifies original criterion and exact sources; Sol agents local-only E1 minimal official route, and original14 coverage increment composition with per-input hashes. Root shared sole writer; other owners technical C/D untouched.",
+  "current_work": "Two local Sol checks; rootonly bounded E1websearch discovery plus exact managerdirectHTTP. Firstquery explicitlyfrozen; onlinecontrollercontract binds8maxdirecthops/4resources/2querytools and96MiB includingnecessaryrecovery. All failurescounted, oldledgerunchanged.",
   "paused_questions": [
     "博时沪深300ETF515130的2021—2024四全文未核，其中三入口缺失；实际403停止，合法正常官方访问或准确新原件可恢复对应问题",
     "其他份额调整渠道、供应商历史到达、E1实施/更正去重及完整14产品输入资格仍未证明，R2/科学未放行",
@@ -332,3 +333,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T22:34:29.155689+08:00 接续E1实施来源与原14基金现金和拆分证据覆盖
 
 本轮延续用户持续推进授权。先并行两项零网络核对：515300实施/更正证据最小官方来源；旧14基金仅现金分红和拆分两个原合同类别的覆盖拼接。新取得十一年报不得因其他无关类别未证而被自动判无效，亦不得把两字段当全部企业行动或历史到达资格。保留原件/历史失败/累计源账本41hop20q21res和R2尚未放行。旧恢复266文件复用，固定盘身份已核，内盘18.94GB外盘565.68GB；不删除。必要联网由root明确冻结来源及差额后执行，不调用已403博时同路，不全库重验。
+
+## 2026-10-11T22:38:49.372515+08:00 E1最小官方定位与年报取证绑定
+
+用户持续推进和必要追加授权下，先取515300自身2025年报，不为已见结果调参。旧批2 E1预留2查询/4资源/8直连请求未用，本轮明确绑定；搜索工具内部传输不可见，作为独立定位指标，不冒充旧Gate1B逐跳验收。原P1总账41跳20查询21资源保持，博时403原路不重试。根唯一联网写者，两Sol仍仅本地。外盘已plan-only绑定，报告归档复用原条目。
