@@ -1,3 +1,16 @@
+# 当前交付：界面闭环可试用，效果待用户验收
+
+2026-10-12T00:32:47.564747+08:00；root完成本轮有界UI实现/检查，scope_released=true。协调最新差异仅他任务自身状态，新增research-utility-review已全文读相关结案段且其明确避让本web范围，无并发同块冲突。
+
+- 本地成果 codex/investor-workspace-simplification-20261012 @ 58f59572adec26477a5df29080da8b6d233f0efb；工作树 /Users/yongbiaoli/.codex/worktrees/investor-workspace-20261012/lei-signal-lab。代码仅本地，未推送；基线包含共享web既有未提交状态的本地快照，不能把它混作本轮原创或远端可复现。主树187前端源指纹及HEAD保持。
+- 实现：三个常用入口、今日重点、基金身份经URL延续、Agent草稿/原确认卡/复盘入口；因子在持仓/看盘/详情参考区及原档案。日期/精确身份/旧快照提示；旧因子表比例单位修正，无公式修改。
+- 验收：build、日期与身份回归、3项因子测试、既有因子/持仓映射/确认卡SSR、现行归置器两树、diff；真实桌面/390px点摘要、同基金Agent草稿、金额缺失确认卡禁用、复盘返回、刷新、档案/旧表19.1%实际读回。独审三个问题已修复，初次尾空格/旧归置器失败均在本地记录。无账户/计划/成交写入和真实模型答案调用。
+- 未验证：原单标的技术详情接口加载慢，5秒直接读取超时，不冒称该页完整运行验收；新组件接线编译通过。资料依然29只/28净值/0技术/0原计划，不冒称研究或真实决策闭环。
+- 证据：工作树 docs/archive/handoffs-plans/investor-workspace-simplification-20261012/acceptance.json、plan-and-validation.md、goal-receipts.json；截图 .codex/investor-ui-qa，仅本机。三个原系统目标note追加均API读回，原owner/status/milestones/authorization保留。
+- 预览 http://127.0.0.1:5188/today 复用8000；已启动前端进程仅用于本次预览，未新增定时器。原研究任务继续暂停。下一步为用户看效果后的具体改进，真实资料资格及策略有效不在此次已完成范围。
+
+---
+
 # 获取信息界面做减法：日常闭环与因子位置
 
 更新时间 2026-10-12T00:15:27.999665+08:00。用户明确授权“你先修完闭环 给我看看效果”及“看看因子的位置”。本轮服务策略的展示、理解、计划核对与复盘层；Python信号/策略文档/真实交易记录不改。
@@ -21,9 +34,9 @@
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "f322e2958b7e4cd0ac3c00925063e78c0c3f21d3",
-  "checked_at": "2026-10-12T00:24:27.813712+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "c9208af3bf44a362ca0d088e345962ba48f13022",
+  "checked_at": "2026-10-12T00:32:47.564747+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -54,6 +67,8 @@
     "web/src/pages/todayLogic.ts",
     "web/src/pages/FactorPanelPage.tsx"
   ],
-  "scope_released": false
+  "scope_released": true,
+  "local_result_commit": "58f59572adec26477a5df29080da8b6d233f0efb",
+  "remote_result_commit": null
 }
 <!-- lei-coordination-json:end -->
