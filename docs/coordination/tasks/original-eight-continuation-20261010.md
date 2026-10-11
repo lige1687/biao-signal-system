@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "e926d2238385611f70e22b51ce38757fa729553f",
-  "checked_at": "2026-10-11T21:40:44.772117+08:00",
+  "checked_coordination_sha": "2c05ccc7aca3a46268d93e9ea97d0744ad2e6f5e",
+  "checked_at": "2026-10-11T21:47:31.223915+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -127,10 +127,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "0bb60b542eb62ac9d2e08e6c276c00d5c1c3172f",
-  "scope_amendment": "Guotai common.js actualtext binds initialanonymousPOST exact officialfts.search_report API/body. OneboundPOSTquery/1hop,0resources, explicit unused2024hop→2023hop transfer; global29/26/44unchanged/current15q18resources33hop. No automaticretries, redirectnextrequest, HASHCASHchallenge solve, JS execution/auth/privatepath orPDF inthisstage.",
-  "updated_at": "2026-10-11T21:40:44.772117+08:00",
-  "conflict_decision": "root已fetch实际最新ca749..remote无增量，十三相关任务及COORDINATION实际hash/bytes核回，源资料/报告范围仍无媒体或其他任务冲突；复用已读语义。唯一writerroot。",
-  "current_work": "8annuals/190recovery alreadyindependentlyaccepted. Onecommon resource actual200383225B/old32prefixexact. Rootactualread397/541–582 bindsPOSTpath/body/emptyheaders andchallenge auto-retrybranch suppressed. Singleexactquery canreduceoriginalmissing516220years; awaitingtruefirstreply; sourcepartialnotfull14/R2release.",
+  "scope_amendment": "One explicit repair retry of sameanonymousPOST withinstalledsystemcurl defaultverifiedTLS versusPythonOpenSSL3.6.1 handshakeEOF; actualexistingproxy7890 preserved. NewqueryIDandretry_of_attempt_id charged. WithinGuotai oneunusedquery+hop transfer to2023; global29/26/44unchanged. Noautoretry/challenge solving/JS/auth/redirectnextrequest/TLSweakening.",
+  "updated_at": "2026-10-11T21:47:31.223915+08:00",
+  "conflict_decision": "已实际读d4d84737至2c05ccc7aca3a46268d93e9ea97d0744ad2e6f5e唯一趋势视频任务增量：v15完整片交付及三平台替换接续，独立媒体/发布回执和Chrome输入范围；本任务只官网源、HTTP客户端、研究报告及API，无文件、浏览器或策略重叠。首次helper因该增量拒写，未弱化检查；root核当前十三任务后重登记。",
+  "current_work": "FirstPOSTfailedbeforeHTTP; rootcount34pairs/16q18resources, old33prefixpreserved/nohiddenrequests. ExactURL/bodyfullybound. Onefinite standardTLSclientcomparison necessary; ifsamefailure persists stop thissource transport and preserveunknown, no further client/header variants. Existing8year/190recover accepted; finalarchivepending.",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -305,3 +305,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T21:40:44.772117+08:00 公共脚本真实核出准确请求；仅一次官方报告查询
 
 新guotai-bound-query-targets只转P1-516220-2024一个unusedhop给2023，旧targets保留；同一真实ledger累计33续加1queryhop。首次请求keyword516220/page1/perPage10全部官网实际披露，不猜接口或参数。403/401/CHALLENGE/异常redirect保留停止，不自动重试或计算hashcash。实际响应解释root续核，科学次数0。
+
+## 2026-10-11T21:47:31.223915+08:00 一次明确计数的国泰正常TLS客户端修复
+
+原Python默认opener确实使用当前系统7890代理，不能误报为忽略代理。失败为HTTP前TLS EOF，未收到403/挑战。新一计数查询使用已装curl8.7.1不同正常TLS实现同proxy/URL/body/证书验证，不降安全选项；失败仍保留与计费，之后不继续方法变体。原34不可覆盖，singleexactsource only。
