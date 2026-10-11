@@ -1,3 +1,14 @@
+# Web独验发现真实阻塞，继续修复后验收
+
+- task-id: research-utility-review-20261012；status: active；scope_released: false；updated_at: 2026-10-12T01:21:25.844784+08:00。
+- checked_coordination_sha: a9b7309d55cbe45fb13a699003d5caa12e2cad08；checked_at: 2026-10-12T01:21:25.844784+08:00；已读COORDINATION、本任务、research-dispatch-controller、investor-workspace-simplification-20261012最新准确调度范围；其他增量为视频各自文件。实现者唯一改UI/后台，root只自有验收记录和协调，无同块冲突。
+- 公开概念问题首次在数据库准备阶段失败，重启预热结束后沿原请求重试获得真实模型正文。暖态17/30秒观察仍在生成，43秒观察已完成；这是含检查间隔的时间，非精确模型耗时。冷启动不能算通过。
+- 新发现并已交实现者：实际答复含未显示来源的具体日期与内部字段词；全局顶部助手刷新重开后会话全空。单基金刷新通过不覆盖这个入口。Sol只读已定位AgentConsole仅页面内存、首次effect清空；复用既有会话恢复机制即可，不重做后端表。
+- 本地独验证据复用docs/archive/handoffs-plans/research-utility-review-20261012/independent-acceptance.json及新增web-agent-warm-answer截图/可见文字。私有材料仅本机，不推送。原Ark失败、首次数据库失败均保留；真实计划/成交写入0、外发持仓0、新研究0。
+- 继续由实现者最小修复数据库争用、全局会话恢复和必要回答来源约束；root在修复后复验实际页面并给用户直接可见结果。本轮尚未完成，不把模型接通等同可靠回答或投资增益。
+
+---
+
 # 人类已确认切换，继续运行与Web独立验收
 
 - task-id: research-utility-review-20261012；owner: 本用户会话 root；status: active；scope_released: false；updated_at: 2026-10-12T01:08:11.535861+08:00。
