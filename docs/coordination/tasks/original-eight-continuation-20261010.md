@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "3ce4437fde7dde7271dd70dd0fabeced1d1ae66f",
-  "checked_at": "2026-10-11T09:50:00.093308+08:00",
+  "checked_coordination_sha": "c15e7a9a92c2e9844de2c72c5756d862212734f3",
+  "checked_at": "2026-10-11T10:14:13.498753+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -110,7 +110,8 @@
     "b4-missing-access-guards-20261011",
     "b4-saved-official-discovery-proof-20261011",
     "p1-real-official-discovery-prerequisite-20261011",
-    "b4-new-essential-source-recovery-20261011"
+    "b4-new-essential-source-recovery-20261011",
+    "p1-remaining-official-paths-addition-20261011"
   ],
   "shared_write_owner": "root only own new report/registry entry/INDEX row/catalog prefix/progress and original goal evidence notes; agents distinct new leaf paths",
   "goal_ids": [
@@ -122,11 +123,11 @@
     "D-evidence",
     "D-tracking"
   ],
-  "latest_result_commit": "79aed39a144454ba05cba5551d8754c52c791f66",
-  "scope_amendment": "New explicit human-authorized P1 official discovery prerequisite. Five exact intra-P1 query-slot transfers in a NEW targets version, aggregate10/26/44 and original resource/hop target caps unchanged; preserve old blocked plan. Old source files read only. Root accepts/archives report and appends evidence notes only to own original goals, no acceptance/production/science/R2/E1/other9 histories.",
-  "updated_at": "2026-10-11T09:50:00.093308+08:00",
-  "conflict_decision": "已实际读237389d1..3ce4437f远端两视频差异：现金原作品替换发布当前浏览器阻塞，趋势v13样片活动；二者只在各自媒体/小索引/协调文件，与本P1资料源和恢复范围无重叠，保留其owner/status。十三相关任务将由helper实际字节读回；root独占本任务新报告/API/登记。",
-  "current_work": "两项本机结果已经root独立核对；根冻结新P1累计真实访问合同，Sol从已存官方准确入口补真实结果/分页/报告链接，另一Sol只补六真实依赖HTML和新守卫原始日志最小副本/恢复；独立文件不重叠，root唯一共享写者。",
+  "latest_result_commit": "0bb60b542eb62ac9d2e08e6c276c00d5c1c3172f",
+  "scope_amendment": "One new finite necessary source stage: +19query slots old10 retained cumulative29; original HTTP44/resource26 globalcaps unchanged, per-target hop redistribution explicit new immutabletargets; stage19q/22h/1resource. ExactGuotai linked JS exception only, no broadstatic/login/PDF/science/R2/E1. Original9realqueries/hops/0resources retain appendonly ledger and snapshot. Root alone archives/notes, Sol onlynew leafs.",
+  "updated_at": "2026-10-11T10:14:13.498753+08:00",
+  "conflict_decision": "已实际读e916cef4..c15e7a9a两独立视频增量，现金浏览器恢复进入原替换发布，趋势v13Skill认可及v14独立样片交付；与P1来源/恢复/报告/API无重叠。其owner/status保持；13任务helper将实际读取字节。",
+  "current_work": "原9真实查询/6准确年报文章、64必要材料恢复及报告API实际读回已通过，成果0bb60b54真实推读回479项。根正在冻结新有限追加目录查询并dry-run，通过后实际followup原Sol；非后台/非无期限。",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -281,3 +282,7 @@ Astra已定位原B4精确合同，旧5740同值并不解决未复权与登记定
 ## 2026-10-11T09:50:00.093308+08:00 按最新人类授权接续P1真实官方查找补证及最小输入恢复
 
 当前人类明确持续原八目标并允许自主必要追加、独立并行；旧Pro暂停作为当时结论保留，不当永久禁令。Astra/high对必要公开官网补证和五个P1内部槽转移分别独立判断可在新授权下执行，无需重复问继续。修订只有515130-2022→518850-2021、515130-2024→518850-2022、515170-2023→518850-2023、516220-2023→588000-2022、516220-2024→588000-2023，each1；保留原targets不改，各资源/逐跳cap不增，无E1转移。公告/翻页仍search记账，真实每跳包括失败/重定向/重试共用原剩余P1额度，不能另开免费预检。只先取得准确发现事实，完整取件/R2另待实际资料和余额root复核，不弱化14标的/五因子/82天/科学条件。root已人工另数target11/P1第45/总53拒绝日志、16目标52跳全配对，六保存源实际SHA/行证据相同；旧测试不重跑。未联网/未改生产，目前这一实质下一动作正冻结准备。
+
+## 2026-10-11T10:14:13.498753+08:00 按现有人类自主追加授权登记一次剩余官方路径查找
+
+当前人类明确允许自主必要追加且无卡点继续，Astra/high实际判断一次明确来源追加可直接执行。515130当前16页231条真实事实支持顺序page2..16最多15query/17hop，515170实际POSTiframe支持后两页最多2query/3hop；国泰模板明确精确JS源可只读一次resource1/hop1，再仅完全披露报告请求执行最多1query/hop1，否则停。合计新query19、累计29，原hop44/resource26保持，E1不转。新每target分配及共享年度图明列，旧targets/失败/9累计/科学生命不改。无参数或旧科学重跑，根unique共享；仅新增真实外部事实和必要恢复。
