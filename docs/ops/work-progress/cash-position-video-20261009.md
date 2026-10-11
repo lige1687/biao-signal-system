@@ -238,3 +238,11 @@ checked_coordination_sha=e2fe0f3d5571b4403c80446238b2c20194b3b320；已读自身
 - 发现macOS文件选择服务22:24与Chrome22:23实际崩溃记录；文件服务故障线程含IMK输入事件，原因尚未确定，不将它归因网络或模型。原生XHS新上传页最新黑屏；未投稿或删除旧稿。
 - 对工具同款Node24.21.0临时指定现有ClashX7890，chatgpt.com403/github.com200，可收到响应；真实Chrome listTabs仍30秒fetch失败，未声称已修复。最小三个环境变量修复计划保存在v16/network-repair/clashx-proxy-repair-plan.json，尚未写仓外config。按用户仓外修改约束已发具体确认，等待仅该配置范围；发布权限无需再问。
 - paused；scope_released=false；小红书/B站new_upload=false/new_submission=false，旧稿未删；新版v3不重做。
+
+
+## 现有代理配置已写好，控制服务重启受工具限制 2026-10-11T23:06:30.329725+08:00
+- checked_coordination_sha=dda87accac5241997477732f8ce7323cabefea35；checked_at=2026-10-11T23:06:30.329725+08:00；已读自身、COORDINATION1.1、中控既有范围、original-eight23:05及trend-perspective独立任务，无共享文件冲突；root唯一写者，scope_released=false，paused。
+- 用户“那你继续发布啊”承接具体配置确认。~/.codex/config.toml只增加HTTP_PROXY/HTTPS_PROXY=http://127.0.0.1:7890和NODE_USE_ENV_PROXY=1，其余TOML结构逐项相同；已读回，SHAd08c95d90b633760cd747bab8f09964eafde7568ccbf66782a9249e8017bc95b；原文件安全备份config.toml.cash-video-before-proxy-20261011留本机，不上传凭证或全配置。ClashX原配置保持；新客户端已卸载，不重装。
+- CUA js_reset实际完成，但Chrome真实listTabs仍30秒nodeRepl.fetch失败；原生getApp Chrome5秒超时；IAB新页30秒超时，未知是否产生标签，恢复先盘点，不盲重建。不能把写配置或JS内核重置当工具服务重启、连接恢复或发布。
+- CUA getApp(com.openai.codex)明确返回安全原因不允许控制当前应用；codex mcp --help仅list/get/add/remove/login/logout，无重启入口。未改工具实现/绕过应用控制限制/强杀其他进程或重启活跃任务。需要用户重开当前应用使工具重新读取环境变量；恢复后先实测，无需重复发布许可。
+- 小红书/B站新版未上传提交，旧稿未删；抖音沿原用户提交回执，不重投。v15最终媒体/文案/章节沿用；23:01固定外盘身份/容量通过；归置通过。
