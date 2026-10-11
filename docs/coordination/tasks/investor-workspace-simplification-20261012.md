@@ -1,3 +1,13 @@
+## 持续CPU反例与统一计算并发限制 2026-10-12T02:04:31.948774+08:00
+
+checked_coordination_sha 5595a9c16883e52c4e53dcf9731eebf41d1d933e；新独验记录已读，仍仅只读验收和自有文档，无同块写者。生命周期多行/批量候选在有界持续CPU对照中三者均达5秒干扰上限，且改变冲突前缀事务状态，全部不应用；不扩大SQL候选。工程stage1/stage2和原异常证据分别保存，不算策略实验。
+
+前次只限预热的候选失败因页面get_many还有独立4线程。新增唯一Sol范围：同一AnalysisService实例中所有实际_run共用一个限额，默认每次只进行一个重计算；缓存读取和原TTL/每标的锁/结果/异常/事件生命周期/研究含义不改。原get_many仍收齐所有结果，多批次/预热/页面不能各自越过上限。仅services.py调度wrapper与原服务测试；不造通用任务平台，不改app/模型/SQL事务、不移动数据库。核共享服务单例及旁路后实施，跨批并发/缓存/异常释放测试、独审、一次真实冷启动问答与刷新为验收；可能延长冷态图表排队必须记录实际结果。
+
+当前实际应用闭环仍未通过；最新锁在生命周期表，上一事件层重复写优化保留其有界行为证据，不声称整库已提速。
+
+---
+
 ## 冷启动反例保留，撤回无效候选 2026-10-12T01:37:37.172036+08:00
 
 checked_coordination_sha 543c6dc64119e4c59d6f6899d598a36213281349；已读自身/独验最新记录，旧douyin-vike-increment存储范围已释放，本轮全任务精确路径检索无其他当前写者。实际PID7576第二次冷启动：prepared后append_user等待55423ms失败，write_events持锁54413ms；网页191秒才显示错误，无模型正文。预热专属串行无法覆盖页面get_many，已逐字恢复共享preheat/services源，下一次必要重载采用回退；不把它记为改进。
@@ -115,8 +125,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "543c6dc64119e4c59d6f6899d598a36213281349",
-  "checked_at": "2026-10-12T01:37:37.172036+08:00",
+  "checked_coordination_sha": "5595a9c16883e52c4e53dcf9731eebf41d1d933e",
+  "checked_at": "2026-10-12T02:04:31.948774+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -177,7 +187,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "tests/unit/test_discussion_context_scope.py",
     "src/lei_signal/storage/sqlite_store.py::write_events (candidate only; source baseline preserved first)",
     "tests/unit/test_event_write_replay.py",
-    "web/src/components/AgentConsole.tsx::prepared waiting label"
+    "web/src/components/AgentConsole.tsx::prepared waiting label",
+    "src/lei_signal/api/services.py::AnalysisService shared actual-analysis concurrency bound",
+    "tests/unit/test_api_service_stale_while_revalidate.py::cross-batch scheduling checks"
   ],
   "scope_released": false,
   "local_result_commit": "30174a5d",
