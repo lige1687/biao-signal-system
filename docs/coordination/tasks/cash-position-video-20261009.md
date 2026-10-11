@@ -359,3 +359,8 @@
 ## 用户恢复Chrome并要求Astra署名，接续发布 2026-10-11T09:58:50.056927+08:00
 - active；stage replacement_publication；scope_released false；root唯一写者。checked_coordination_sha=9cf1c13bdba6a08065f88039ee7e37dc01cd26a4；checked_at=2026-10-11T09:58:50.056927+08:00；已读自身、original-eight09:50独立P1、trend-perspective09:55三Skill完成，无视频平台/本片范围冲突。
 - 用户明确Chrome已打开要求执行，文案加“使用 Astra 6 辅助制作”，沿原三平台替换授权与v15准确120秒原文件；写范围v16/本人replacement-publication小回执/进度及本协调文件不变。不改Skill/其他作品/永久删除。原生Chrome画面已恢复但上传导航尚未加载，扩展仍超时，继续受支持原生操作。
+
+
+## Chrome已打开，发布控制仍阻塞 2026-10-11T10:00:22.391477+08:00
+- paused；stage replacement_publication_browser_unavailable；scope_released=false独立范围；checked_coordination_sha=d6d66bb1d0ffa4c1cf1b615f51ad3b35b791f4a0；checked_at=2026-10-11T10:00:22.391477+08:00；已读自身/COORDINATION1.1沿已读、original-eight09:50、trend-perspective09:58独立样例，无交叉。
+- 用户指定“使用 Astra 6 辅助制作”已加到外盘待发布正文并读回；结果cb9ba968cb48f1a7da940f0da3d89af3c291ef90两文件正常推送读回。Chrome原生旧作品可读，但上传导航/刷新后无正文黑屏；扩展仍30秒超时，前置窗口及B站页不恢复。请用户手动打开抖音已知上传页后接续，不再要求其重复开Chrome。新版未上传/提交，旧三稿未修改。09:59存储固定UUID available/identity通过，不安装/删除/绕过。
