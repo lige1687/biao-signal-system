@@ -14,8 +14,8 @@
   "task_id": "original-eight-continuation-20261010",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "2c05ccc7aca3a46268d93e9ea97d0744ad2e6f5e",
-  "checked_at": "2026-10-11T21:47:31.223915+08:00",
+  "checked_coordination_sha": "6c5abbbf3d893554088ae5edb567da7a00ebed95",
+  "checked_at": "2026-10-11T21:56:48.563745+08:00",
   "read_task_ids": [
     "research-dispatch-controller",
     "frozen-input-recovery-20261010",
@@ -127,10 +127,10 @@
     "D-tracking"
   ],
   "latest_result_commit": "0bb60b542eb62ac9d2e08e6c276c00d5c1c3172f",
-  "scope_amendment": "One explicit repair retry of sameanonymousPOST withinstalledsystemcurl defaultverifiedTLS versusPythonOpenSSL3.6.1 handshakeEOF; actualexistingproxy7890 preserved. NewqueryIDandretry_of_attempt_id charged. WithinGuotai oneunusedquery+hop transfer to2023; global29/26/44unchanged. Noautoretry/challenge solving/JS/auth/redirectnextrequest/TLSweakening.",
-  "updated_at": "2026-10-11T21:47:31.223915+08:00",
-  "conflict_decision": "已实际读d4d84737至2c05ccc7aca3a46268d93e9ea97d0744ad2e6f5e唯一趋势视频任务增量：v15完整片交付及三平台替换接续，独立媒体/发布回执和Chrome输入范围；本任务只官网源、HTTP客户端、研究报告及API，无文件、浏览器或策略重叠。首次helper因该增量拒写，未弱化检查；root核当前十三任务后重登记。",
-  "current_work": "FirstPOSTfailedbeforeHTTP; rootcount34pairs/16q18resources, old33prefixpreserved/nohiddenrequests. ExactURL/bodyfullybound. Onefinite standardTLSclientcomparison necessary; ifsamefailure persists stop thissource transport and preserveunknown, no further client/header variants. Existing8year/190recover accepted; finalarchivepending.",
+  "scope_amendment": "After actual HTTP200 codekeyword zero hits, use original saved516220AR2021 PDF name for fixed2022/2023/2024 title queries, at most3queries, no guessedURLs/variants/pagination. Reconcile previously authorized8annual target allocations into new explicit targets before I/O, preserve global29queries26resources44hops/actual35hops17q18res and alloldcontracts. ExactreportPDFs only subsequently bound fromactualresponses withinremaining8resources9hops. New source artifact exactminimumset backup/restore onfixedexternaldevice, no old190recopy or deletions.",
+  "updated_at": "2026-10-11T21:56:48.563745+08:00",
+  "conflict_decision": "已实际读db73c4d0至6c5abbbf3d893554088ae5edb567da7a00ebed95的现金视频网络修复和发布回执增量，仅该任务媒体/浏览器；本任务只既有资料、有限HTTP来源及研究归档。未改网络全局设置、不占Chrome。十三相关任务读取由本次helper记录。",
+  "current_work": "Read originalPDF identity, bind exactnew3payloads, reuse actualcurlmethod/defaultTLS/currentproxy, noauth/JS/challenges/automaticretry. Root independently accepts all35existing visits. Sol assigned queryprep/then frozenexecution, Luna distinctnewrecoveryrunner only. Sharedregistry/API/progress rootonly.",
   "paused_questions": []
 }
 <!-- lei-coordination-json:end -->
@@ -309,3 +309,7 @@ Astra实际独审：本阶段能把已有8华夏文章推进成两类行动事�
 ## 2026-10-11T21:47:31.223915+08:00 一次明确计数的国泰正常TLS客户端修复
 
 原Python默认opener确实使用当前系统7890代理，不能误报为忽略代理。失败为HTTP前TLS EOF，未收到403/挑战。新一计数查询使用已装curl8.7.1不同正常TLS实现同proxy/URL/body/证书验证，不降安全选项；失败仍保留与计费，之后不继续方法变体。原34不可覆盖，singleexactsource only。
+
+## 2026-10-11T21:56:48.563745+08:00 已有正式基金名称下的三年度必要查询及新增资料恢复
+
+用户再次明确继续。正常curl已返回HTTP200空代码关键词结果；改用已保存年报正式基金名称回答原来三个年度资料缺口是必要来源核对，不增加科学实验/参数。旧失败和35次访问全保留；三年每年最多一个准确名称年度关键词，真实响应绑定下一文件，否则如实保留缺口。另用Luna只准备新增资料恢复脚本，root等待源访问停止后冻结最小集合，不动原资料。
