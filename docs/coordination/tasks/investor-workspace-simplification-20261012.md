@@ -10,13 +10,17 @@
 - 系统原条目：okr-4c2ea452d3cc、okr-a4fed76c71c3、okr-266b531f965d已只读定位，复用相应原条目，最终由root追加准确进展；不改原负责人/完成标准。
 - 下一步：隔离复用当前web→有界实现→实际读回操作路径→留本机预览与准确成果/验收记录。
 
+## 实际实现与范围补注 2026-10-12T00:21:37.954608+08:00
+
+已建立本地隔离web基线bcf9befd77a136e437ce526430493d3f79849af9（原187小前端文件快照，仅本地，不冒称本轮原创，不上传他人脏改）；主工作区保持。初始build通过，Sol完成URL身份贯穿和因子折叠。新增必要范围：WorkspacePage/DetailPage仅在已有技术摘要后插入FactorContextPanel，不改图表/信号/原研究；todayLogic仅读取日期及摘要文案。三个独立子范围互斥，root整合/独立检查。验收发现旧核对日/未来因子日/比例单位问题正在修复，失败保留。其他任务新增仅自身运营状态，无相同UI块冲突。
+
 <!-- lei-coordination-json:start -->
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "4f13b4b38b9482a780ba9e68c22172b4f859d765",
-  "checked_at": "2026-10-12T00:15:27.999665+08:00",
+  "checked_coordination_sha": "88fa038cf928a22a70b19ebf0209729abca3fec7",
+  "checked_at": "2026-10-12T00:21:37.954608+08:00",
   "read_task_ids": [
     "daily-trading-system-audit",
     "investor-observation-map",
@@ -40,7 +44,10 @@
     "web/src/components/portfolio/portfolioWorkspace.css",
     "web/run-investor-workspace-regression.mjs",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
+    "web/src/pages/WorkspacePage.tsx",
+    "web/src/pages/DetailPage.tsx",
+    "web/src/pages/todayLogic.ts"
   ],
   "scope_released": false
 }
