@@ -1,3 +1,13 @@
+# 范围补充：登记表局部不合格不得阻断全部历史查询
+
+- status active；scope_released false；task-id research-utility-review-20261012；checked_coordination_sha c5c0fe3b0957bf248396700e192c70dbae70c22f；checked_at 2026-10-12T12:32:38.355861+08:00。本轮已读相关task同前，远端无新提交；全任务文本检索factor_access.py/factor_readonly.py无显式同文件写者。另一聊天仅重开持仓/观察列表/Agent表达，不改本消费层，已明确互相避让。
+- 实际新阻断：权威登记新增research.structure.post_top_bar_persistence@0.1.0未通过现行格式校验，使Agent全部因子查询和Web构建都失败。保留原始记录，不修其研究含义、不把不合格对象作为合格来源。
+- 新增root唯一写范围：src/lei_signal/research/factor_access.py及新description_registry.py、tests/unit/test_factor_description_registry.py；仅读取解释层按对象和依赖完整验证，重复身份/全局schema不放行，失败对象明确列出且不得绑定，研究执行的definitions.py全量严格校验保持。必要部署仅这些新源和因子配置到现本地8000，同另一owner协调一次后台重载。
+- 新增Sol Web唯一路径 FactorResearchPage.tsx：为已有证据的精确对象复用原Agent草稿按钮，手动发送；不自动调用模型、不替用户发送持仓。新增对象格式诊断可见，非静默略过。
+- 验收追加：无关不合格对象不阻断合格查询；被请求对象或其任一依赖不合格则拒绝；重复ID/循环/全局schema仍拒绝；旧研究验证器仍拒绝原坏总表。本次改动不赋予任何效果或交易资格。当前为定位后必要修复，尚未宣称通过。
+
+---
+
 # 因子训练证据接入接续：18项已有结果同源可查
 
 - task-id: research-utility-review-20261012；owner: 本用户会话 root；status: active；scope_released: false；updated_at: 2026-10-12T12:29:08.558221+08:00；checked_coordination_sha: 0b929f06d2c65e736a624146b751ee28dee3f3fa；checked_at: 2026-10-12T12:29:08.558221+08:00。
