@@ -1,3 +1,17 @@
+## V9 history-review-done
+
+- task-id: trend-trading-video；2026-10-12T12:59:12.915618+08:00；checked_coordination_sha: 373369591e2ae018da595d5e35662e4ba4075533；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- completed（本轮内容大纲修订）；stage=content_outline_awaiting_user_review；root原会话01a11a02-7ff5-7563-9831-a36273f51532唯一写者。视频制作与发布未完成，原片/工程归属不移交。已读最新trend-perspective派发完成段、自身、中控；373369591e2ae018da595d5e35662e4ba4075533相对上次仅nasdaq/research-utility独立记录变化，无范围冲突，不接他人工作。
+- 已实际交付固定外盘 /Volumes/win+mac通用/LeiSignal-新实验结果/trend-trading-video/视频库/趋势交易/20261009-趋势交易简史/v16-content-review-20261012/ ：5份文档（八章内容大纲、原26段及片头前后对照、10组画面重制、8项事实来源、标题简介片尾/中段15秒验证）与4张原片定位帧、清单。完整大纲01-内容结构-待确认.md；逐项02-逐项删改与画面重制清单.md；均待用户内容确认，不是新视频或最终分镜。
+- 原成果codex/trend-history-long-v14-20261009@08a712145b49937be576929b0343eceb6d97d6e4，4准确路径远端读回一致。索引docs/ops/media/trend-trading-60s-20261008/v16-content-review-20261012-location.json引用外盘review-manifest.json；正文/帧留外盘没有上传Git，同盘接续。进度只将本轮新增段叠到分支，保留本机先前独有工具包历史，没有混入本提交。
+- 通过：原v15实际SHA e45e7880c5a8dc5179eb286df1c8a1b029050c427d7eb7bf3971564a8659da40与记录一致；四帧解码/查看；26段全映射、11产物指纹及索引指纹、相对链接、原6输入不变、归置、准确Git差异/远端。移除等待再行动、突破进出、投入多少、绿勾和全上涨概念线的编辑要求已逐项落地，旧视觉源码尚未改。
+- 边界：史料书目只支持作者/书/年份；Seykota源为Coyle摘编；PDF失败或像素未核部分不用于新断言；未复算收益。用户已明确无抖音财经专业认证，未判原片已被处罚、不保证可发；默认音乐公开许可/纯净度仍未核。无共享Skill/registry/其他片修改、无新渲染、完整听审、Opus调用、发布/删除/申诉/付费/安装。
+- 失败已留：第一次开工推送非快进，fetch确认自身未改后重试读回通过；Markdown扫描误读._说明文件，排除不删除后通过；首次成果检查发现本机旧进度和分支差异，未提交即停止，后按准确本轮段落提交并读回。成果小回执history-review-result-receipt.json。
+- 下一步由用户确认八章内容主线；制作方再写成片文稿/导演编排，实际风格帧→中段难点15秒→整片逐阶段确认。没有自动渲染/发布队列，不向派发者另发消息；本对话最终交付供其读取。
+
+
+---
+
 ## V9 history-review-start
 
 - task-id: trend-trading-video；2026-10-12T12:49:40.795806+08:00；checked_coordination_sha: f4af06395670c2c27e12f456d55d518adf7af545；已读 COORDINATION.md、自身与 research-dispatch-controller。
