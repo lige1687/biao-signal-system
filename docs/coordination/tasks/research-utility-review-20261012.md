@@ -1,3 +1,15 @@
+# 单只ETF历史观察到Agent有界闭环完成
+
+- task-id research-utility-review-20261012；status completed（仅本轮有界接入与验收）；scope_released true；owner root；checked_coordination_sha 148ab735f642896e582bf499ca8b5aae98c77172；checked_at 2026-10-12T20:49:59.450643+08:00。已读本任务、investor-workspace-simplification-20261012、research-dispatch-controller及原因子负责人范围，最新增量仅独立视频，无同路径冲突。
+- 精确本地成果commit f567ed4f688a60d0caf12d0650dfbd3818f2a06d，分支codex/factor-evidence-integration-20261012，工作树/运行仍同上。22准确路径；既有factor_readonly.py原未在本分支追踪，本轮保留其原完整基线并增加通用用途解释，未覆盖其他任务。代码未推远端、未合main；全量运行依赖远端可复现未声明。
+- 结果：沪深300ETF510300.SS、range_mean20@1.0.0、2026-06-30回溯观察0.01809099161819631（1.8091%），正式函数与独立算术相同，20完整对/253行，输入/协议/定义/计算时刻/源指纹绑定。只此一个batches从空变一行，其他20条绑定保留；不声称当时可得或当前值。
+- 实际Web会话sess_88171d75d873：相同问题129/130无值，131/132已提供值及原研究结论，133/134拒绝把旧值当现在。刷新6消息文字完全一致，公开问题未外发私人账户。5188原预览恢复、8000保留原参数环境重载71770→70413，健康200。5个准确消费文件/依赖指纹读回一致。
+- 验收：新增12项、相关21项通过；真实篡改来源/定义/授权/坏依赖拒绝；原严格研究仍被3缺件定义阻断。首次19pass/2fail、稀疏测试收集失败与预览离线失败已保留/解释，未删失败。归置和源码diff检查通过。0拟合/回测/新下载/真实交易，本轮3次确定性因子问答无聊天模型调用，总token成本未知。
+- 归档：docs/experiments/factor-observation-agent-2026-10-12.md已登记registry/INDEX；小证据同名raw/acceptance.json、指纹、前后回复、刷新文本、公开截图/消息仅本地。原work-progress已更新。原两目标仅note，版本133→134和9→10读回，状态/字段/授权保持，未代用户接受。
+- 边界与余项：原预测仍未胜过简单方法，当前缓存至10月9日但未证明经济价资格；普通问题自动选因子、当前因子资格、真实判断/收益改善未完成。回答仍偏长和引用链接文字显示，用户实际效果待验收。已完成当前承诺的单案例查证与消费闭环，未把全系统缺口标完成；没有继续运行的研究任务。
+
+---
+
 # 真实观察包完成，补齐受影响的原验收断言
 
 - task-id research-utility-review-20261012；status active；scope_released false；checked_coordination_sha d070b1564eb92f667f4c23481276e565c81c218b；checked_at 2026-10-12T20:41:48.320437+08:00。已读任务同上；最新增量仅独立视频，无冲突。
