@@ -1,3 +1,11 @@
+# 最新基金成分进入持仓解释 2026-10-12T12:40:46.265727+08:00
+
+用户追加要求全部持有基金依据最新披露成分判断行业，示例易方达信息产业；另一个对话专注因子、不再向其派任务。复用原持仓/Agent任务，root负责使用闭环与公开披露，Sol只读核源和有界实现。当前29条账户快照为2026-09-04，24只缓存Q2、一只旧且日期冲突、4只缺；Agent尚未收到成分，不能声称最新持仓已分析。
+
+新增准确范围见JSON：以公开产品代码读取最新可得来源，保留报告截止日/核对时间/覆盖/未知部分；成分与行业只解释背景，前十不归一化成完整配置，联接/FOF不伪造穿透，不按名称猜分类。实际持仓、交易、原计划和策略规则不写；不刷新删除旧表。共享源只经指纹备份后采用，由root最后一次重载。验收同产品/日期/部分覆盖/缺失/跨基金隔离及原快捷入口、真实合成答案与刷新。另一因子任务已报告其后端就绪，独立工作留其owner。
+
+---
+
 # 接续持仓条件、自选观察与直接回答 2026-10-12T12:31:32.893654+08:00
 
 用户明确问已有持仓卖出/买入机会、自选观察列表如何使用，并要求后续Agent不说“不是而是”、直接结论、结构化或卡片化由本负责人选择。本轮服务策略的展示、条件解释与观察层；两桌面权威源SHA均与登记一致。结论只复述已有确定性条件，缺资料直接说明无法判断，不改买卖规则/原计划/资金或研究结论。
@@ -153,11 +161,12 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "aa52d6a5dc730c9e6142a333fc8fdba78f5aaabe",
-  "checked_at": "2026-10-12T12:31:32.893654+08:00",
+  "checked_coordination_sha": "9e5c65bba9ea72a625ba1312e3641223b1545cb6",
+  "checked_at": "2026-10-12T12:40:46.265727+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
+    "daily-trading-system-audit",
     "research-dispatch-controller"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
@@ -169,7 +178,6 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/src/components/AgentConsole.tsx",
     "web/src/components/agentConsoleState.ts",
     "web/src/components/agentConsoleState.test.mjs",
-    "web/src/App.tsx (console comment only)",
     "web/src/components/WatchlistSidebar.tsx (observation instructions only)",
     "src/lei_signal/plans/llm.py (expression prompt only; shared runtime after backup)",
     "tests/unit/test_discussion_context_scope.py",
@@ -178,12 +186,20 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/ops/agent-answer-style.md",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
-    "com.lei.backend (one necessary reload after prompt checks)"
+    "com.lei.backend (one necessary reload after prompt checks)",
+    "src/lei_signal/portfolio/disclosure_context.py (new public read-only evidence)",
+    "src/lei_signal/api/portfolio_workspace.py (disclosure attachment only)",
+    "src/lei_signal/copilot/portfolio_context.py (disclosure whitelist only)",
+    "configs/fund-disclosures.v1.json (public evidence only)",
+    "tests/unit/test_fund_disclosure_context.py",
+    "web/src/api/types.ts (disclosure DTO only)",
+    "web/src/components/portfolio/FundDisclosure.tsx (new)",
+    "web/src/pages/PortfolioPage.css (disclosure style only)"
   ],
   "scope_released": false,
   "local_result_commit": "7852da8483d931c8df83a28f497b91a11a6657b3",
   "remote_result_commit": null,
-  "updated_at": "2026-10-12T12:31:32.893654+08:00",
-  "conflict_decision": "Latest change since prior checked baseline is independent acceptance only; reviewer has released scope, no concurrent source writer; current closure edits only own records."
+  "updated_at": "2026-10-12T12:40:46.265727+08:00",
+  "conflict_decision": "Read latest factor consumer scope and original portfolio owner completed status; no overlap. Root owns disclosure display and selected Agent evidence; factor task independent, no further delegation to it."
 }
 <!-- lei-coordination-json:end -->
