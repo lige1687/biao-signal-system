@@ -145,3 +145,11 @@ checked_coordination_sha: e926d2238385611f70e22b51ce38757fa729553f；checked_at:
 实际更新code-explainer-video入口财经小节和2处路由、新references/finance-publication-review.md；原卡点第一创作标准和其他owner素材段逐字保留。Skill结构、引用、8个手工反例、registry其他键未变、归置通过；文字规则不是自动语义审核。报告docs/experiments/finance-video-publishing-review-2026-10-12.md已登记。
 外盘v17-finance-review-20261012位于原20261009-trend-perspective；媒体版本/指纹、来源、102帧联系图、5主题候选完整稿/JSON、审阅页review.html与检查留证。http://127.0.0.1:64985/review.html实际5主题54段及8图载入，无横向溢出。v16回执纠正B站旧BV1ehpv6EEUq已删除；新BV1A4pn6REHf保留，抖音v15上传未提交且有测试文案不可发布，XHS沿前次审核中本轮未复核。
 checked_coordination_sha c219fa81609636cf5c6b61e78e60f54a5dfe2549；checked_at 2026-10-12T01:11:55.738951+08:00；相关own/value-investor/ai-sycophancy/research-utility及前轮cash/nasdaq/dual/history已核，无同段冲突。当前主共享脏区不切换/不混提交，只保存本人增量；固定UUID外盘已核，未删旧资料、改策略、安装或付费。下一步交付Skill，不再要求本轮新片确认。
+
+
+## 原制作对话接续与跨视频引导修订 2026-10-12T12:50:10.852589+08:00
+用户明确授权派发到原来制作各片的Codex对话，并要求撤掉“我们参与哪段趋势”“真正要看什么”类操作指导，补充“看双均线视频能过滤噪音、关注关键”的引导风险。已向现金、双均线、纳指、简史4个原对话逐条发送准确版本与修改要求，工具回执成功且首次状态均active；不是新建任务。现金/双均线已正确接续；纳指/简史出现沿旧轮需求回复/制作的偏移，已补发纠正，纳指另有其自述人类新样例需求，已明确以该对话最新人类授权为准且仍保留旧片完整内容修订交付。实际后续结果按原owner状态记录，不把发送当修改完成。
+已补Skill入口一句与finance-publication-review跨视频引导章节/3组修订例/2反例：第一人称不免责；审片尾与被推荐内容；未改好的旧片不挂链接；不机械禁“看/关注/学习”，不换词保留方法效果承诺。保持原第一创作优先级及其他owner素材段。
+本片内容v2已实际写入原v17/revised-scripts/trend-v2.md与.json；旧5稿逐一指纹不变。本次删除参与区选择、入场退出教程及双均线方法效果引导；同源聚合、钟面/尺度、平均与滞后、价值估计不同假设仍保留。review.html已指向v2，其他4稿标明仅原候选，未用派发冒称原owner已完成。旧review备份在evidence。新版正文/图表尚未渲染，内容仍待确认；约120秒只是暂定阅读时长。
+验证：Skill结构/本地链接/第一创作段保留/4个手工语义反例/归置通过。原本64985只读预览服务已停，首次HTTP拒绝连接，重开相同目录后HTTP字节与文件一致；不是浏览器控制已修复。新脚本JSON可读，派发4成功回执及验证存v17/evidence与checks。规则仍是人工流程，不声称自动财经审核。
+checked_coordination_sha: 802e58491a0fd942654a564f3c7d8da601773572；checked_at: 2026-10-12T12:50:10.852589+08:00；已读COORDINATION1.1、自身、cash/dual/nasdaq/history/中控及ai-sycophancy最新范围；本人只改此3路径及自己v17，原owner各写本片目录，无共写。固定UUID外盘12:42核可用；无新媒体、发布、删除、申诉、策略修改、安装或付费。共享脏工作区不切换，只将入口相对自身成果基线的本次小段提交，保留其他owner内容。
