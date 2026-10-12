@@ -1,3 +1,15 @@
+## V9 history-review-start
+
+- task-id: trend-trading-video；2026-10-12T12:49:40.795806+08:00；checked_coordination_sha: f4af06395670c2c27e12f456d55d518adf7af545；已读 COORDINATION.md、自身与 research-dispatch-controller。
+- active；root唯一写者，接续原task trend-trading-video。根据用户授权由趋势片原对话派发内部实质修订；主题为已发4分钟趋势交易简史v15（非通用Skill更新）。
+- 范围：已核外盘trend-trading-video/视频库/趋势交易/20261009-趋势交易简史/v16-content-review-20261012新目录；本人docs/ops/media/trend-trading-60s-20261008/v16-content-review-20261012-location.json与work-progress及协调/小回执。不写共享Skill、registry、其他影片或旧源。
+- 基线原成果分支3758df8c56560f27799982309eb9d2ec64ffe49d；旧v15 MP4指纹待实际复核，原v14源及source-map只读。已读COORDINATION、本人、中控、trend-perspective最新派发及审查报告/Skill；其root维护共享Skill，本人不碰，无范围冲突。
+- 验收本轮完整内容大纲、逐项前后对照、事实源及删改清单、必须重制镜头/图表/片尾、关键15秒验证目标、未确认项。保持章节观点层，不替Opus定死新分镜；内容待确认，不预渲染，不调用Opus、不发布/删帖/申诉/付费/安装。不能断言本片已被处罚或保证过审。
+- storage于2026-10-12T12:45:04+08固定UUID available/identity_ok=true，外盘564710473728B，内盘14738804736B；本轮外盘小文档预计<2MiB，本机小索引<128KiB。原件与其他候选只读。定向核原历史来源，不重做平台全网调研；没有收益实验。
+
+
+---
+
 ## V9 opus-prep-done
 
 - task-id: trend-trading-video；2026-10-10T12:12:00.569472+08:00；checked_coordination_sha: 9894c6d3f0f97f102015b92760e240bbb6566c1e；已读 COORDINATION.md、自身与 research-dispatch-controller。
