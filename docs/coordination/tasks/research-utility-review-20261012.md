@@ -1,3 +1,12 @@
+# 页面增量验收与必要说明补齐
+
+- status active；task-id research-utility-review-20261012；checked_coordination_sha 98a7902218a1b8cc099963e8fd461e88fce6c88d；checked_at 2026-10-12T12:40:20.969266+08:00；已读任务仍同上，最新fetch无其他增量，无同路径冲突。
+- 主控独核18行差额，新增解释5/绑定4/Web适配3检查通过；旧因子85pass/22fail/11error及旧Web生成检查11pass/4error均因原严格总表3坏定义，保留不弱化。Web构建通过，模型检查31/32，一项真实失败是新增18缺少白话阅读说明。页面已读70版本/6实验，原四保留。
+- 新增唯一Sol准确文件 web/src/pages/factor-research/reading-guidance.json，补18准确定义的观察/含义/限制，不改测试以跳过覆盖；已登记生成器分类修正把价格6从量能分开。FactorResearchOverview.tsx仅增加已存在definition_errors的醒目说明与价格分类标签，不涉及持仓或Agent通用UI。root最后精确同步/回验，不重做泛化界面。
+- 两组接入是新增18项历史证据，本次0重训。当前报告待最终实际提问/刷新回执；另一聊天自行负责共同后台重载，不向本任务派UI工作，双方各自范围保持。
+
+---
+
 协调并发回执：首次普通push被拒，未执行源修改。fetch最新c5c0fe3b0957bf248396700e192c70dbae70c22f，2026-10-12T12:33:03.832168+08:00已读investor-workspace本轮增量，仅持仓/自选/表达，无本文件或因子接入重叠；普通merge保留其全部字节，重推后核验。
 
 # 范围补充：登记表局部不合格不得阻断全部历史查询
