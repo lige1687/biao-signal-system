@@ -103,3 +103,11 @@
 - 外盘v02-full/release/metadata.json、release-status.md、bilibili-public-readback.json、xiaohongshu-submission-readback.json和实际截图为回执；本机原索引/原work-progress已更新，仅本地未提交，源码媒体仍仅外盘。
 - 失败更正：小红书document.hidden=true导致动画停在0、封面保存和章节关闭未完成；不能把请求200叫作保存。保留原页并准备备用，后临时浏览器焦点会话恢复原页并发布；备用3f3d关闭、未公开。封面不是永久平台故障；没有重发已提交作品。编辑器文本重复/章节随时间排序错误在提交前修正并核0/26/36/57/81/102秒，最终一处Astra制作。浏览器临时焦点进程已结束，不留监控。
 - 仓库归置通过。下一步：用户本人完成抖音短信验证后，先核是否已提交，再完成同一作品；不重发B站/XHS、不设自动化。当前已授权可执行项完成，唯一必需剩余为平台本人验证。
+
+## 抖音提交成功 2026-10-12T20:28:37.979206+08:00
+- 新账号离歌旧业（1026525346）；作品7695756934254742819，2026-10-12 20:27提交，02:00，管理页审核中。验证码仅用于本人验证，不写入文件。
+- 管理页已读回标题、Astra制作、科普视频与vibe知识大赏；重开编辑页读回AI声明。发布前6章保存，发布后编辑页无章节控件，未冒称完成跳转复验。
+- 仅提交本片一次，不重发B站/XHS，不修改旧作品。三平台已提交；B站此前公开通过，XHS及抖音最后核对审核中。无自动监控。
+- checked_coordination_sha: 0597641cc58dc3e5ad85dc6ad4642e9bae677e8a；checked_at: 2026-10-12T20:28:37.979206+08:00；已读COORDINATION1.1、本任务及research-dispatch-controller，原独立范围不变，无冲突。
+- status: completed（授权三平台投稿）；stage: three_platforms_submitted；scope_released: true。平台审核与公开状态分列，不声称三平台全公开。
+- 外盘release/douyin-submission-readback.json及metadata.json为实际回执；本机索引和原进度仅本地未提交。源码媒体不进Git。
