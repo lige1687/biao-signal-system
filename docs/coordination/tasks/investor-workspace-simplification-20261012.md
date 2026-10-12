@@ -1,3 +1,15 @@
+# 接续持仓条件、自选观察与直接回答 2026-10-12T12:31:32.893654+08:00
+
+用户明确问已有持仓卖出/买入机会、自选观察列表如何使用，并要求后续Agent不说“不是而是”、直接结论、结构化或卡片化由本负责人选择。本轮服务策略的展示、条件解释与观察层；两桌面权威源SHA均与登记一致。结论只复述已有确定性条件，缺资料直接说明无法判断，不改买卖规则/原计划/资金或研究结论。
+
+checked_coordination_sha aa52d6a5dc730c9e6142a333fc8fdba78f5aaabe；已读COORDINATION1.1、自身、research-utility-review-20261012新因子接入及中控既有边界。与因子接入负责人已获准消息确认，避免其configs/factor-access、生成脚本、catalog、display-bindings和因子页面；共用5188但不同文件。root负责持仓快捷问题、统一输出规范、Skill/AGENTS和LLM表达；Sol只读发现工作台/?symbol没有传入Agent作用范围，拟唯一实施WorkspacePage/AgentConsole/state helper及测试，限定如下JSON，不重复研究。
+
+最终效果：已有自选增删/分组直接复用；当前标的有“问买入条件”和“继续观察”入口，点击预填不自动发；图/Agent/请求同产品，换产品及离开页面会话不串。持仓提供退出/持有依据/再次入场三种快捷提问。首句直接回答，随后最多三项依据、既有触发条件、日期与关键缺口；用户简单追问缩短，不机械重贴卡片；资料不足不装作确定。现有确认和数据权限保持。
+
+验收：同产品/切换/刷新/草稿、无自动发送、默认观察不冒充持仓；相关回归及构建，浏览器实际入口；公开或合成输入的一次真实输出检查（不发送真实私人持仓），共有源备份与指纹读回后仅必要后台重载。原待办只追加note，结果仍本机codex分支，用户体验待验。无新研究/交易/通知/安装/删除。当前不是整体八目标接管。
+
+---
+
 # 本轮界面与实际问答闭环已验收，保留使用与资料限制
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status completed；scope_released true；updated_at 2026-10-12T02:18:12.285402+08:00。只关闭本轮已授权实现/验收/归档，不代表整体八目标、策略有效或用户体验已认可。
@@ -140,9 +152,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "481ac5e30a0e1e32995e403bfd121cffbc7f312e",
-  "checked_at": "2026-10-12T02:18:12.285402+08:00",
+  "status": "active",
+  "checked_coordination_sha": "aa52d6a5dc730c9e6142a333fc8fdba78f5aaabe",
+  "checked_at": "2026-10-12T12:31:32.893654+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -151,57 +163,27 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
   "write_paths": [
-    "web/src/App.tsx",
-    "web/src/components/TopNav.tsx",
-    "web/src/components/TodaySignalBanner.tsx",
-    "web/src/components/portfolio/PortfolioToday.tsx",
-    "web/src/pages/PortfolioPage.tsx",
-    "web/src/components/factors/",
-    "web/src/pages/TodayPage.tsx",
-    "web/src/pages/today.css",
-    "web/src/components/portfolio/portfolioWorkspace.css",
-    "web/run-investor-workspace-regression.mjs",
-    "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
-    "web/src/pages/WorkspacePage.tsx",
-    "web/src/pages/DetailPage.tsx",
-    "web/src/pages/todayLogic.ts",
-    "web/src/pages/FactorPanelPage.tsx",
-    "web/src/api/client.ts",
-    "web/src/api/detailRequest.ts",
-    "web/src/api/detailRequest.test.mjs",
-    "web/src/components/copilot/CopilotCards.tsx",
-    "web/src/components/DetailLoadState.tsx",
-    "web/run-investor-loop-regression.mjs",
     "web/src/components/portfolio/PortfolioAgent.tsx",
-    "src/lei_signal/plans/llm.py",
-    "tests/unit/test_llm_protocol_routing.py",
-    "web/src/components/SymbolKlinePanel.tsx",
-    "web/src/components/portfolio/PortfolioTechnicalDetail.tsx",
-    "web/src/pages/AgentWorkspacePage.tsx",
-    ".env (local private: ANTHROPIC_AUTH_TOKEN, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL only)",
-    "src/lei_signal/plans/llm.py (shared runtime minimal protocol patch)",
-    "com.lei.backend (reload only)",
-    "src/lei_signal/api/preheat.py",
-    "src/lei_signal/api/services.py::AnalysisService.get_many",
-    "tests/unit/test_api_preheat.py",
-    "tests/unit/test_api_service_stale_while_revalidate.py",
-    "web/src/components/AgentConsole.tsx::failed output label",
-    "web/src/components/AgentConsole.tsx::scope-bound session/draft restore",
+    "web/src/pages/PortfolioPage.tsx",
+    "web/src/pages/WorkspacePage.tsx",
+    "web/src/components/AgentConsole.tsx",
     "web/src/components/agentConsoleState.ts",
     "web/src/components/agentConsoleState.test.mjs",
-    "src/lei_signal/plans/llm.py::discussion prompt and context label",
+    "web/src/App.tsx (console comment only)",
+    "web/src/components/WatchlistSidebar.tsx (observation instructions only)",
+    "src/lei_signal/plans/llm.py (expression prompt only; shared runtime after backup)",
     "tests/unit/test_discussion_context_scope.py",
-    "src/lei_signal/storage/sqlite_store.py::write_events (candidate only; source baseline preserved first)",
-    "tests/unit/test_event_write_replay.py",
-    "web/src/components/AgentConsole.tsx::prepared waiting label",
-    "src/lei_signal/api/services.py::AnalysisService shared actual-analysis concurrency bound",
-    "tests/unit/test_api_service_stale_while_revalidate.py::cross-batch scheduling checks"
+    ".agents/skills/lei-system-chat/SKILL.md (output guidance only)",
+    "AGENTS.md (append user output preference only)",
+    "docs/ops/agent-answer-style.md",
+    "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
+    "com.lei.backend (one necessary reload after prompt checks)"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": "7852da8483d931c8df83a28f497b91a11a6657b3",
   "remote_result_commit": null,
-  "updated_at": "2026-10-12T02:18:12.285402+08:00",
+  "updated_at": "2026-10-12T12:31:32.893654+08:00",
   "conflict_decision": "Latest change since prior checked baseline is independent acceptance only; reviewer has released scope, no concurrent source writer; current closure edits only own records."
 }
 <!-- lei-coordination-json:end -->
