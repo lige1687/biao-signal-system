@@ -1,3 +1,16 @@
+# 因子训练证据接入接续：18项已有结果同源可查
+
+- task-id: research-utility-review-20261012；owner: 本用户会话 root；status: active；scope_released: false；updated_at: 2026-10-12T12:29:08.558221+08:00；checked_coordination_sha: 0b929f06d2c65e736a624146b751ee28dee3f3fa；checked_at: 2026-10-12T12:29:08.558221+08:00。
+- 用户原话：主要是因子训练和接入这一块的痛点，你去继续解决。限定交付：价格6项、成交路径12项的既有训练结果，经原指纹与准确定义核对后进入Agent与Web，展示强简单对照、历史范围、下一次训练所缺条件；原144真实拟合不重跑，不修改其科学结论/定义/策略或生产信号。
+- 已读 COORDINATION1.1；research-dispatch-controller、technical-factor-sequence、classic-factor-research、risk-shape-information、original-eight-continuation-20261010、investor-workspace-simplification-20261012及本任务最新范围。原研究保持原owner；Web owner释放本阶段路径，已通过获准聊天告知接续。本轮只做证据消费层，未发现同块写者；未登记任务状态未知。
+- 基线主仓18e64fa632dba5dbad0e5fcae09b4ccc75f119a9保留脏文件；前端7852da8483d931c8df83a28f497b91a11a6657b3。工作分支拟codex/factor-evidence-integration-20261012，仓内隔离工作树，仅本任务准确路径。本轮共享运行更新限定 configs/factor-access.v1.json 和5188预览下述web准确路径，保存写前哈希并检测并发，非全树覆盖。
+- write_paths: configs/factor-access.v1.json；web/scripts/build_factor_research.py及其同目录测试/新窄适配器；web/src/pages/factor-research/display-bindings.json、catalog.generated.json、FactorResearchOverview.tsx、StudyConclusion.tsx、model.ts及对应样式/测试（仅确需项）；tests/unit/test_factor_training_evidence.py；docs/ops/work-progress/research-utility-review-20261012.md；docs/experiments/factor-evidence-integration-2026-10-12.md及同名小raw；registry/INDEX仅本报告新条。自身协调文件。若目标API有准确既有项，仅追加本次证据note、状态待人类验收，不改其他字段。
+- 唯一分工：Sol factor_outcomes负责配置与对应测试；Sol decision_delivery负责Web适配和相关测试；root独核数字/来源、运行入口、浏览器路径、归档和串行同步。两只读诊断已完成，实施尚未开始；实际Token费用未知。
+- 验收：18准确对象能查历史结论且不能借当今日数值；源指纹漂移停止解释；网页两批表与Agent同源、简单对照数一致、原4项保留；详情原报告可打开、刷新可恢复。必要相关测试、构建与归置；不以通过称收益提升。报告性能与增量表复用原件，纯接入工程不新增拟合/标签/行情/大结果，旧预算不动。不会接入PPO未登记身份、双均线语义不等对象或旧五因子不合格材料。
+- 本轮服务策略原文hash已核与用户确认一致。本改动服务于研究证据解释层，不产生买卖触发或评分；原计划和真实交易0写入。当前无资料/权限阻塞，先登记核验再实施。
+
+---
+
 # 有界Web独立验收完成，实际决策与收益边界保留
 
 - task-id: research-utility-review-20261012；status: completed；scope_released: true；updated_at: 2026-10-12T02:16:31.118656+08:00；checked_coordination_sha: 1b7ac1c319de768549fcd16677367673ef44c913；checked_at: 2026-10-12T02:16:31.118656+08:00。已读COORDINATION、本任务、investor-workspace-simplification-20261012当前范围及中控既有边界；最新增量仅实现者本记录，无路径冲突。仅关闭本独验，不替其他负责人关闭其归档或研究目标。
