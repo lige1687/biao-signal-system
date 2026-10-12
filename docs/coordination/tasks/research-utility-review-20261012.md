@@ -1,3 +1,14 @@
+# 单只ETF因子观察与用途问答接续
+
+- task-id research-utility-review-20261012；status active；scope_released false；owner root；checked_coordination_sha 9a4786a4323241aa6d6ee004f11c6bf473e11740；checked_at 2026-10-12T20:33:04.564166+08:00。已读 COORDINATION1.1、本任务、investor-workspace-simplification-20261012、research-dispatch-controller、technical-factor-sequence、classic-factor-research、risk-shape-information、original-eight-continuation-20261010；最新变更仅独立视频任务，不冲突。
+- 用户授权：在解释因子到Agent缺口后，用户“那你继续做哈”。本轮最终效果：以沪深300ETF510300.SS、range_mean20@1.0.0及固定日期，比较接入前后同一用途问题，读数、来源日期、既有增量结论和不能用于什么同屏可查。0新增拟合、0回测、0下载；不改规则、定义或持仓/自选通用UI。最新通用缓存到2026-10-09但无经济价资格；已有冻结输入仅至2026-06-30，历史到达未知，不能冒充当前行情。不得靠合成metadata升级资格。
+- 基线：代码独立分支codex/factor-evidence-integration-20261012，HEAD9e82c48f7a513698f472380418bab0661dda3eb4；主仓18e64fa632dba5dbad0e5fcae09b4ccc75f119a9保留其他脏改。此前成果仅本地，远端不能完整复现。此前18项证据已接，本轮补具体观察包消费和用途问答。适用规范复用current-standards.json与原定义/输入冻结指纹，原144拟合不重跑。
+- 唯一写者：root配置/观察包/报告/同步；Sol只读诊断已完成，将承担factor_readonly.py与新局部测试；root独核计算及端到端。写路径限src/lei_signal/copilot/factor_readonly.py、src/lei_signal/research/factor_access.py、configs/factor-access.v1.json、tests/unit/test_factor_observation_delivery.py、tests/integration/test_factor_observation_delivery.py；新小运行依赖docs/research/factor-observations/510300-range-mean20-20261012/；报告docs/experiments/factor-observation-agent-2026-10-12.md及同名小raw、registry/INDEX仅新条、原work-progress及自身协调文件。正式结果包为Agent运行依赖保留本机；普通新研究输出按已核外盘策略，本轮不产大结果。共享运行只同步本人准确路径并验指纹，必要重载8000不改其他服务配置。
+- 验收：独立重算一条历史值与20完整日线对；已保存同问题接入前后回复，新增资料不变成交易结论；错产品/错日期/当前请求/来源漂移拒绝且无重算；真实Web提问保存并刷新恢复；相关测试及归置。未知历史到达时间保留；没证明操作或收益提高就如实报告。实际token成本未知。
+- 当前无同路径活动owner；通用UI任务已释放且不接管其任务。下一步注册读回后实施有界观察接入，保存负例和报告，用户效果待验收。
+
+---
+
 # 18项因子旧训练接入完成，实际使用已核
 
 - task-id research-utility-review-20261012；status completed（限定历史证据接入与独立验收）；scope_released true；owner 本用户会话root；updated_at 2026-10-12T12:57:00.991239+08:00；checked_coordination_sha 2a60a4f03771e8ab420896434ce187e8a8e6d2bf；checked_at 2026-10-12T12:57:00.991239+08:00。
