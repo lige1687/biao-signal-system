@@ -1,3 +1,15 @@
+# 原制作对话内容修订派发与引导语补充 2026-10-12T12:43:16.302805+08:00
+- task-id: trend-perspective-video-20261009；owner: 01a12111-3544-7250-822d-056b7379704b / root；status: active；scope_released: false；stage: original_owner_revision_dispatch。
+- checked_coordination_sha: df6f0f62f16719108db02b3404f2822337cb2863；checked_at: 2026-10-12T12:43:16.302805+08:00；已读COORDINATION1.1、本人、cash-position-video-20261009、nasdaq-story-video-20261009、dual-ma-video-copy-20261009、trend-trading-video、research-dispatch-controller及最新ai-sycophancy-video-20261012增量。其他影片各归原owner，本轮仅原对话消息及本人文件，无其他影片/发布写入冲突。
+- 用户明确授权派发到原视频Codex对话修改内容，补充删除“我们参与哪段趋势”“真正要看什么”的操作指导，以及“看双均线视频过滤噪音/关注关键”的方法效果引导。解释计算/历史/局限可保留，不把所有教学字眼判违规；不换词规避审核，不保证过审。
+- 基线成果codex/trend-perspective-video-20261009@4779b4c936b98f6cde20e9d4f46ffdc07df57328。写入范围：本人协调/工作进度；.agents/skills/code-explainer-video/references/finance-publication-review.md补充跨视频引导规则及入口财经段一句引用；本人外盘v17审查目录的派发回执、trend候选修订（其他候选只读），原件保留。
+- 派发目标：现金01a12122-f90f-7e52-81dc-a20f9df3fa4c、纳指01a11c99-4704-7df0-9f03-b2789c8d0816、双均线01a11c60-70d6-7463-9173-1678fe2482bb、历史01a11a02-7ff5-7563-9831-a36273f51532；均已读取原对话核主题/现有工程。当前还未发送，不能写已派发。
+- 验收：逐条实际消息发送/接续状态、准确任务与成片版本、内容稿及受影响镜头修改要求；Skill引用/差异/手工反例/归置；本片中性候选稿留证。内容与样例确认仍按既有顺序，旧审美确认不当新内容认可。用户明确无抖音财经专业认证；不发布、删除、申诉、调用付费服务或代改交易规则。
+- 存储：12:42+08固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available/identity_ok=true；本机15873093632B、外盘564710473728B；本轮小文档/回执新增预计外盘<2MiB，本机<128KiB，不启动渲染。
+- 下一步：给4个原owner发各片具体修订任务，保留其唯一写者；本片由此对话落实内容修订，汇总真实接续状态。
+
+---
+
 # 财经视频Skill已完成（用户本轮限定范围） 2026-10-12T01:13:57.438485+08:00
 - task-id trend-perspective-video-20261009；owner root / 01a12111-3544-7250-822d-056b7379704b；status completed（本轮Skill修订及审查记录）；stage finance_skill_ready；scope_released=true（Skill与报告本轮写入释放，原视频/发布权不移交）。checked_coordination_sha c219fa81609636cf5c6b61e78e60f54a5dfe2549；checked_at 2026-10-12T01:13:57.438485+08:00。已读COORDINATION1.1、本人，以及value-investor/ai-sycophancy/research-utility最新相关范围；先前cash/nasdaq/dual/history/中控已核，最新任务差异无本Skill同段修改。无子代理。
 - 用户已答复无抖音财经专业认证，并将当前范围限定为先收敛视频制作Skill。现有Skill增加财经发布小节/内容及发布两路由、新references/finance-publication-review.md。要求账号资格与内容分别核，审文稿+分镜+图表+字幕+音轨+封面配文的完整含义；不以历史/免责声明/匿名标的/换分区绕过；后续重做连图表和剪辑一起修。原卡点第一创作标准及他人素材段逐字未改。
