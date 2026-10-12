@@ -111,3 +111,9 @@
 - checked_coordination_sha: 0597641cc58dc3e5ad85dc6ad4642e9bae677e8a；checked_at: 2026-10-12T20:28:37.979206+08:00；已读COORDINATION1.1、本任务及research-dispatch-controller，原独立范围不变，无冲突。
 - status: completed（授权三平台投稿）；stage: three_platforms_submitted；scope_released: true。平台审核与公开状态分列，不声称三平台全公开。
 - 外盘release/douyin-submission-readback.json及metadata.json为实际回执；本机索引和原进度仅本地未提交。源码媒体不进Git。
+
+## 抖音按用户要求删除 2026-10-12T20:36:44.057115+08:00
+- 用户明确要求先删除，已删除本片7695756934254742819；刷新管理页目标标题不再出现，作品4→3。未动其他作品、B站、小红书及原视频。
+- 文案存在多余星号，话题仅vibe知识大赏，未做好完整标签配置；之前笼统称文案已核对不代表达到用户效果要求。
+- 不重发。原提交回执保留作为历史，metadata及本机索引标deleted。
+- checked_coordination_sha: 56d9ac290ff5c936428bf67898933bd0bb1a3f40；checked_at: 2026-10-12T20:36:44.057115+08:00；已读本任务，沿用COORDINATION1.1，root仅维护原独立发布记录，无冲突。status: completed（删除要求完成）；scope_released: true。原媒体与本机索引未提交Git。
