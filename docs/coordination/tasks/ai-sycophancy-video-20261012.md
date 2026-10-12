@@ -117,3 +117,8 @@
 - 文案存在多余星号，话题仅vibe知识大赏，未做好完整标签配置；之前笼统称文案已核对不代表达到用户效果要求。
 - 不重发。原提交回执保留作为历史，metadata及本机索引标deleted。
 - checked_coordination_sha: 56d9ac290ff5c936428bf67898933bd0bb1a3f40；checked_at: 2026-10-12T20:36:44.057115+08:00；已读本任务，沿用COORDINATION1.1，root仅维护原独立发布记录，无冲突。status: completed（删除要求完成）；scope_released: true。原媒体与本机索引未提交Git。
+
+## 抖音新版文案重发 2026-10-12T20:42:14.039113+08:00
+- checked_coordination_sha: b54ce7d3ce915f72393e5d93d512ff4869a701d1；checked_at: 2026-10-12T20:42:14.039113+08:00；已读本任务最新删除记录，沿用COORDINATION1.1；root唯一写者，本片独立路径无重叠。
+- 用户明确重新发布，改Astra辅助制作、科普视频、合适标题并添加vibe知识大赏及相关话题。status: active；scope_released: false。
+- scope: 原外盘release、本机原索引和进度、本任务协调文件；仅抖音新投稿，旧删除作品不恢复，其他平台不动。验收：页面实际无星号、5相关标签候选选择、AI声明、封面/章节、提交后读回。原片指纹及账号不变。
