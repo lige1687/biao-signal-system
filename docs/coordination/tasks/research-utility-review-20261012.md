@@ -1,3 +1,11 @@
+# 真实观察包完成，补齐受影响的原验收断言
+
+- task-id research-utility-review-20261012；status active；scope_released false；checked_coordination_sha d070b1564eb92f667f4c23481276e565c81c218b；checked_at 2026-10-12T20:41:48.320437+08:00。已读任务同上；最新增量仅独立视频，无冲突。
+- 新增准确路径 tests/unit/test_factor_training_evidence.py：原测试要求18全部无结果包，现已接1条真实回溯包，改为校验只此一条、仍不提供当前值；保留原3绑定和全部18历史结论断言。root唯一写者。首次相关回归19pass/2fail，一项旧行为预期已变，一项主仓尚未部署新读取源；保留失败，不删测试。稀疏树同名测试需importlib收集，未改测试语义。
+- 当前1.8090991618%与独立算术一致，253完整日线/20对；新增12项测试通过，真实包及4种实际篡改拒绝通过。Web5188原进程已退出，已恢复同一原owner预览目录；无持仓改动。接入前真实Web已保存unavailable，准备精确同步及必要后台重载后核对接入后/刷新。
+
+---
+
 # 单只ETF因子观察与用途问答接续
 
 - task-id research-utility-review-20261012；status active；scope_released false；owner root；checked_coordination_sha 9a4786a4323241aa6d6ee004f11c6bf473e11740；checked_at 2026-10-12T20:33:04.564166+08:00。已读 COORDINATION1.1、本任务、investor-workspace-simplification-20261012、research-dispatch-controller、technical-factor-sequence、classic-factor-research、risk-shape-information、original-eight-continuation-20261010；最新变更仅独立视频任务，不冲突。
