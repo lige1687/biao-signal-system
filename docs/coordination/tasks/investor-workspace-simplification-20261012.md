@@ -1,3 +1,5 @@
+补注 2026-10-12T12:43:31.385505+08:00：实际类型位置为components/portfolio/portfolioWorkspace.ts；今日持仓PortfolioToday只加披露卡，沿用PortfolioPage样式。原路径不存在未修改；其他最新任务仍仅自身因子/媒体范围无冲突。
+
 # 最新基金成分进入持仓解释 2026-10-12T12:40:46.265727+08:00
 
 用户追加要求全部持有基金依据最新披露成分判断行业，示例易方达信息产业；另一个对话专注因子、不再向其派任务。复用原持仓/Agent任务，root负责使用闭环与公开披露，Sol只读核源和有界实现。当前29条账户快照为2026-09-04，24只缓存Q2、一只旧且日期冲突、4只缺；Agent尚未收到成分，不能声称最新持仓已分析。
@@ -161,8 +163,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "9e5c65bba9ea72a625ba1312e3641223b1545cb6",
-  "checked_at": "2026-10-12T12:40:46.265727+08:00",
+  "checked_coordination_sha": "3daaad6c6ceab23e3c059aceb6723e9480206dd9",
+  "checked_at": "2026-10-12T12:43:31.385505+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -192,14 +194,15 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "src/lei_signal/copilot/portfolio_context.py (disclosure whitelist only)",
     "configs/fund-disclosures.v1.json (public evidence only)",
     "tests/unit/test_fund_disclosure_context.py",
-    "web/src/api/types.ts (disclosure DTO only)",
     "web/src/components/portfolio/FundDisclosure.tsx (new)",
-    "web/src/pages/PortfolioPage.css (disclosure style only)"
+    "web/src/pages/PortfolioPage.css (disclosure style only)",
+    "web/src/components/portfolio/portfolioWorkspace.ts (disclosure DTO)",
+    "web/src/components/portfolio/PortfolioToday.tsx (disclosure card only)"
   ],
   "scope_released": false,
   "local_result_commit": "7852da8483d931c8df83a28f497b91a11a6657b3",
   "remote_result_commit": null,
-  "updated_at": "2026-10-12T12:40:46.265727+08:00",
+  "updated_at": "2026-10-12T12:43:31.385505+08:00",
   "conflict_decision": "Read latest factor consumer scope and original portfolio owner completed status; no overlap. Root owns disclosure display and selected Agent evidence; factor task independent, no further delegation to it."
 }
 <!-- lei-coordination-json:end -->
