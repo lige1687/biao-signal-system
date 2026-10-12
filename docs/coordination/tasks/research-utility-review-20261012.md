@@ -1,3 +1,5 @@
+协调并发回执：首次普通push被拒，未执行源修改。fetch最新c5c0fe3b0957bf248396700e192c70dbae70c22f，2026-10-12T12:33:03.832168+08:00已读investor-workspace本轮增量，仅持仓/自选/表达，无本文件或因子接入重叠；普通merge保留其全部字节，重推后核验。
+
 # 范围补充：登记表局部不合格不得阻断全部历史查询
 
 - status active；scope_released false；task-id research-utility-review-20261012；checked_coordination_sha c5c0fe3b0957bf248396700e192c70dbae70c22f；checked_at 2026-10-12T12:32:38.355861+08:00。本轮已读相关task同前，远端无新提交；全任务文本检索factor_access.py/factor_readonly.py无显式同文件写者。另一聊天仅重开持仓/观察列表/Agent表达，不改本消费层，已明确互相避让。
