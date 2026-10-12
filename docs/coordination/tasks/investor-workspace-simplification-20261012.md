@@ -1,3 +1,17 @@
+# 持仓、自选与基金实际方向接入已完成，效果待用户验收
+
+- task-id investor-workspace-simplification-20261012；status completed（仅本轮实现、必要验证和归档）；scope_released true；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；updated_at 2026-10-12T13:10:22.577264+08:00。
+- checked_coordination_sha 2a9d2590f0cd013053a62614f3c74f0346377a99；checked_at 2026-10-12T13:10:22.577264+08:00；已读本任务、原持仓owner已释放、研究中控既有边界、因子任务最新结案及独立媒体变更。后续改动仍仅其准确文件，无同块写冲突。因子对话专注原研究，不再向其派持仓、自选和通用Agent任务。
+- 本地源码b575d4e1d5d3d1bf64bea19e563764741b118ebc、最终记录56fe0efbc0cabbb4d833aed7dc577ce6673bb147，分支codex/investor-workspace-simplification-20261012。29准确路径；隔离树复用共享未跟踪的两个已有持仓模块基线，本轮只加披露读取和说明。未推源码、未合main；本地基线不宣称可从远端独立复现。其他factor页面脏改完整保留且未混入本次提交。
+- 持仓三类条件快捷问法、全持仓行业/重复公司问题、现有ETF/指数自选问题入口已接通。URL与Agent标的一致，按钮只预填、切换和刷新隔离。直接回答规范写入AGENTS、项目Skill、说明与3类模型提示词。
+- 持仓解释按准确产品代码读取公开披露和有出处的公司业务。24份历史直接股票表、4份联接/FOF最新报告与目标已定位但明细未读全、1份账户代码未绑定（公共C类019165已查到）；日期、全基金分母、覆盖和未知明确。旧日期冲突表不再使用，原件失败留档。017175已查到8月转型，6月底股票明确标作转型前；没有把旧表当今日配置。账户记录仍有历史日期，实际买卖条件及完整实时配置未补齐。
+- 19项披露/持仓、31项讨论/协议、4项范围检查通过，build和最终类型检查通过，现行归置器两树通过。两次合成账户真实模型问答通过，最后一次准确解释43.49%覆盖和56.51%未知，56.773秒，无备用说明。真实账户计划/成交写入0，新研究0，未改策略阈值/权威文档。
+- 8000实际后台PID71770健康200，8份共享接入源与本地逐字一致；公共来源最后增量按请求读入，无二次重载。5188浏览器已见实际基金卡片、联接目标、转型提示、准确快捷草稿，未发送真实私人账户内容。图表冷启动仍有超时，旧失败和相关原因边界留档，未宣称全站性能解决。
+- 证据：docs/archive/handoffs-plans/investor-workspace-simplification-20261012/holdings-watchlist-validation.md、holdings-watchlist-acceptance.json、fund-disclosure-source-supplement.json、两份真实模型验收和answer-style-adoption.json；进度为docs/ops/work-progress/investor-workspace-simplification-20261012.md。大原件、截图、备份和账户数据未入Git。
+- 原系统目标仅note并实际读回：okr-4c2ea452d3cc版本19、okr-a4fed76c71c3版本12；owner/status/milestones/authorization保持。后续来源补注保留于本轮验收。用户界面效果待验收，本阶段无必须待跑项、无后台研究或新通知。
+
+---
+
 补注 2026-10-12T12:43:31.385505+08:00：实际类型位置为components/portfolio/portfolioWorkspace.ts；今日持仓PortfolioToday只加披露卡，沿用PortfolioPage样式。原路径不存在未修改；其他最新任务仍仅自身因子/媒体范围无冲突。
 
 # 最新基金成分进入持仓解释 2026-10-12T12:40:46.265727+08:00
@@ -159,17 +173,24 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 独核补注：已读research-utility-review-20261012最新结案，仅报告/登记、不重叠。后端realized_vol明确返回比例，旧因子表rv20_ann直接加百分号会缩小100倍；本次只修FactorPanelPage标的表该单位展示，同目录研究结论不改。回归使用合成资料，不写真实成交。
 
 <!-- lei-coordination-json:start -->
+```json
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "3daaad6c6ceab23e3c059aceb6723e9480206dd9",
-  "checked_at": "2026-10-12T12:43:31.385505+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "2a9d2590f0cd013053a62614f3c74f0346377a99",
+  "checked_at": "2026-10-12T13:10:22.577264+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
     "daily-trading-system-audit",
-    "research-dispatch-controller"
+    "research-dispatch-controller",
+    "ai-sycophancy-video-20261012",
+    "cash-position-video-20261009",
+    "dual-ma-video-copy-20261009",
+    "nasdaq-story-video-20261009",
+    "trend-perspective-video-20261009",
+    "trend-trading-video"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
@@ -199,10 +220,11 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/src/components/portfolio/portfolioWorkspace.ts (disclosure DTO)",
     "web/src/components/portfolio/PortfolioToday.tsx (disclosure card only)"
   ],
-  "scope_released": false,
-  "local_result_commit": "7852da8483d931c8df83a28f497b91a11a6657b3",
+  "scope_released": true,
+  "local_result_commit": "56fe0efbc0cabbb4d833aed7dc577ce6673bb147",
   "remote_result_commit": null,
-  "updated_at": "2026-10-12T12:43:31.385505+08:00",
-  "conflict_decision": "Read latest factor consumer scope and original portfolio owner completed status; no overlap. Root owns disclosure display and selected Agent evidence; factor task independent, no further delegation to it."
+  "updated_at": "2026-10-12T13:10:22.577264+08:00",
+  "conflict_decision": "Checked latest factor task completion and independent media updates; no same-file conflict. Root releases only this bounded portfolio/watchlist/evidence scope. Other chat remains factor-only, no further assignments."
 }
+```
 <!-- lei-coordination-json:end -->
