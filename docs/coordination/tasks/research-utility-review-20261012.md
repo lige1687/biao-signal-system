@@ -1,3 +1,18 @@
+# 18项因子旧训练接入完成，实际使用已核
+
+- task-id research-utility-review-20261012；status completed（限定历史证据接入与独立验收）；scope_released true；owner 本用户会话root；updated_at 2026-10-12T12:57:00.991239+08:00；checked_coordination_sha 2a60a4f03771e8ab420896434ce187e8a8e6d2bf；checked_at 2026-10-12T12:57:00.991239+08:00。
+- 本轮先前已读COORDINATION1.1、research-dispatch-controller、technical-factor-sequence、classic-factor-research、risk-shape-information、original-eight-continuation-20261010与本任务。收尾重读investor-workspace-simplification-20261012最新范围/共同重载回执，媒体任务增量仅核独立路径；自上次登记无因子文件重叠。原持仓/自选/通用Agent UI均留原owner，不接其新派发，不更改其他研究/预算/通知/策略。
+- 本机准确成果commit 9e82c48f7a513698f472380418bab0661dda3eb4，分支codex/factor-evidence-integration-20261012，仓内独立树 .codex/worktrees/factor-evidence-integration-20261012；28准确路径。代码未推远端，运行依赖主仓未全量提交来源；不称可由该commit独立跨设备复现。仅本协调摘要上传，无私人持仓、目标DB导出、会话全文、截图或配置备份。
+- Agent绑定3→21，Web50对象/52版本/4实验→68对象/70版本/6实验；原3绑定/4实验保留，18@1.0.0精确版本、原报告/汇总指纹、两种对照、样本/日期/不确定性可见。价格6与成交12有完整白话指南。18项均未胜过各自简单均值，原144次训练不重做，本轮0新训练/回测/下载/交易，实际token费用未知。
+- 修复三个不完整登记拖垮全部查询：解释层逐对象依赖严格检查，171可读，3仍拒绝；重复身份/循环/全局schema不放行。原登记与研究全量验证器不改，三缺件对象仍由原研究负责人恢复准确来源版本。本修复不授予研究或生产资格。
+- 实际5188详情→原报告→精确草稿→手动发送完成。首次18417旧进程保存索引不可用失败；原owner已完成共同重载PID71770且health200。同一因子随后保存原信息15.499/加入15.425/简单方法14.058及范围限制；追问当前值返回尚未接入、executed=false。两次查询均原factor_readonly直读路径，未调用模型。刷新后6条问答逐字恢复（含初次失败），未新增重复消息。
+- 验证：主控独立重算18差额；新消费13检查、Web32检查、类型与构建、来源目录--check及主仓归置通过。初次Web31/32缺指南失败已修复且日志保留。旧API/Agent85pass/22fail/11error、旧生成11pass/4error均原严格坏资料fixture，未删改或弱化；不能宣称全研究流程健康。源码diff检查通过，原始失败日志的两处空白行按原样保留。
+- 报告docs/experiments/factor-evidence-integration-2026-10-12.md已登记registry/INDEX；小证据同名raw/acceptance.json、deployed-source-fingerprints.json与检查日志。工作进度docs/ops/work-progress/research-utility-review-20261012.md。主仓/5188准确文件指纹已对齐，仅本人路径同步。
+- 两原系统目标仅追加备注并读回：okr-ff1e0a86fbac 132→133仍in_progress，okr-266b531f965d 8→9仍review；旧字段/里程碑/授权/历史不变，不代用户确认。首次读后校验把列表派生progress当写接口字段而失败，已核实际成功且未重复写。
+- 边界：解决旧结果可查与查询连带故障，未证明收益增加；未接当前值，三坏定义仍阻原执行。Agent正文偏长、内链为文字，详情原报告可正常打开；这些可用性余项已如实归档。用户实际效果待确认，本阶段无后台研究继续。归档和必要回归已完成，释放本任务写范围；后续新资料/新问题另按原合同推进。
+
+---
+
 # 页面增量验收与必要说明补齐
 
 - status active；task-id research-utility-review-20261012；checked_coordination_sha 98a7902218a1b8cc099963e8fd461e88fce6c88d；checked_at 2026-10-12T12:40:20.969266+08:00；已读任务仍同上，最新fetch无其他增量，无同路径冲突。
