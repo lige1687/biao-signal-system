@@ -1,3 +1,14 @@
+# 双均线继续：第二条线改变了哪些参与决定
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；updated_at 2026-10-13T20:12:37.584920+08:00；checked_coordination_sha 7716890a101bad125570851b8966b6299ded297d；checked_at 2026-10-13T20:12:37.584920+08:00。已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、classic-factor-research、dual-ma-video-copy-20261009及最新investor-workspace-simplification-20261012和treasury-yield-video-20261013；现有均线132账户封存，技术owner保留原策略/共享研究入口，本轮只对旧保存证据做有界新诊断，无重复执行或同文件写者。
+- 用户明确“这个方向也可以，以及我们的双均线研究也可以这样做去看看探索一下”。沿体系§2.2同周期SMA+EMA，不偷换20/60交叉；用途为趋势参与/退出近似政策里第二条确认的帮助及代价，不声称完整A/B/C/D。原文两hash本轮核同。
+- 目标：复用旧20/60/120六ETF两费用132账户，先核已有信息研究和逐日账；固定20为主要问题、60/120仅旧尺度探索。若旧账可支持，补一轮事后金额解释：同日期D相对S/E每日净金额差、费用差、共同已知状态分组及年度/单ETF反例；不新增入场规则、未来标签、策略资金模拟或训练，不把解释分组称因果贡献。已有同用途结果则复用，不为正结果新调参。
+- 允许写入：隔离树codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be的docs/experiments/dual-ma-decision-increment-2026-10-13.md、同名raw小协议/脚本/验证/索引、docs/research/proposals/research-utility-dual-ma-20261013/；本任务原work-progress、registry/INDEX仅新报告、原目标note、自身协调。独立新结果/日志按已登记外盘plan_output，当前设备available且UUID匹配；不移动旧raw、不改生产/共享源码/其他负责人/真实账户。
+- 方法冻结与分工：先一Sol/medium只读已保存结果、实际字段/资格与查重；一Astra/high只读审状态时间与资金归因方案；root冻结唯一可执行分析，再由单写Sol/medium或root实施。每助手独立合同write_paths明确、network_allowed=false、max_agents=1；原完整A小时阻塞不扩大到这条日线已存证据问题。
+- 预算：0市场重跑/拟合/行情下载/付费；最多1次核心保存账诊断，必要纠错单独记录，不扩大问题/参数/期数；原132及其他封存预算不重置。源算术核对与真实报告Web读回不算市场实验。token费用未知。验收含基准/候选/差额/费用/参与次数与缺失/日期依赖、年度及产品反例、原累计金额核同、书面方法复核和研究归档；没有科学效果就明确无稳定增量。
+
+---
+
 # 策略证据与专业设计已交付，完整A效果仍缺输入
 
 - task-id research-utility-review-20261012；owner root；status blocked（完整原文A市场效果）；本阶段证据重核/研究设计 completed；scope_released true（仅释放本轮文档/核验写范围，不改变原技术owner）；updated_at 2026-10-13T11:58:03.648489+08:00；checked_coordination_sha 7b643acf40fb9df21f3298978921edd7dfa832a2；checked_at 2026-10-13T11:58:03.648489+08:00。已读COORDINATION、自身、technical-factor-sequence、中控及本轮最新investor-workspace-simplification-20261012后台调度修复/一次冷启动、portfolio-trends-20261013独立Web、treasury-yield-video-20261013结案范围；无本轮报告/单登记项冲突，不碰共享源码/服务或他人任务。
