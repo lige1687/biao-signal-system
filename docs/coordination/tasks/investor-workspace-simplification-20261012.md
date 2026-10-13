@@ -1,3 +1,16 @@
+# 首次图表及普通入口修复已验收，范围释放 2026-10-13T12:20:21.024610+08:00
+
+- task-id investor-workspace-simplification-20261012；本有界工程修复completed，scope_released=true；用户效果待试用，整体目标仍进行中。checked_coordination_sha=0a8eb1fd175ec37e84dc372a1a6ca74fca067400，已读原自身/因子/日常/中控及portfolio-trends、treasury-yield-video记录；最终fetch无新差异，无重叠写者。只维护本任务。
+- 本地源码16453fc7886f2bd1a2b87eb2820b90aeb6d67cb8（21准确路径），最终运行/进度aacb101e0b5934ee98215376042016524a7a1d4e；codex/investor-workspace-simplification-20261012。仅本地，未推源码、未合main；原共享未提交基线不冒称远端可复现，其他因子/Agent脏改未混入。
+- 当前详情优先于互动批量/后台，真实分析上限1；取得执行位后再锁单产品。后台只复用本轮之后开始的成功且有效的同一前台结果。原SQL、分析、TTL、提供商、手动强刷及规则保持。根审3项边界修正后53相关后端检查通过，原9环境依赖失败和旧顺序失败保留。
+- 两源备份/准确应用后仅一次受管重载；38941/runs5唯一8000，真实沪深300图表14.516秒出现，完整29产品338.9秒结束，末次health/5188均200，两个运行源指纹仍匹配，新ERROR/端口冲突0。只证明当前图表可先使用；整个后台仍约5.6分钟，不能抢断当前单个分析，不保证固定延迟。
+- 普通入口先取得分组/成员/本地名称，清单只提供身份导航，价格/信号/日期保持空；自动选服务器大盘组首项。GET-only延迟10秒演练：默认身份0.360秒、带名称图表1.593秒，准备项点击和正式卡替换保持对象，error级日志0。根审Hook顺序和键盘错误过滤已修，5清单测试/类型/build/现行归置通过。此演练与真实冷启动分开记录。
+- 实际5188 ETF分组/图表/准确符号提问草稿通过，只预填未发送；最终沪深300页截图本机。临时40745/40746及8/9页全部退出，保留实际6页。科创50已有事件身份保存冲突未修，图表可见不代表入库成功；通信ETF提供商名称仅代码仍名称待核实。没有为通过覆盖历史资料。
+- 证据：docs/archive/handoffs-plans/investor-workspace-simplification-20261012/cold-load-priority-20261013.md及cold-load-*JSON；docs/ops/work-progress同任务。root独核，2 Sol只读、1 Sol实现、1 Luna界面助手已停止，实际费用未知；未向另一因子用户对话派新任务。
+- 原okr-4c2ea452d3cc仅note v20→21已实际读回，owner/status/milestones/authorization/next_action与原历史保持。0新研究/真实计划/成交/通知/删除/模型答案，研究封存及预算保持。无本轮必需待跑项，无后台研究；下一接续按具体新问题登记，不重跑已通过项。
+
+---
+
 # 补齐普通看盘入口及清单首屏 2026-10-13T12:00:28.894501+08:00
 
 38941真实重启、当前000300图表14.516秒显示，资料日期2026-10-13且已按原方式保存，读取提示/错误0，单只接口0.858秒，持仓0.028秒。整批后台当时未完成，表明当前图表已可先显示。实际首屏仍显示自选准备且无名清单；源码确认裸/路径selected取完整cards才出现，没有URL时图表查询不会提前启动。这是本次冷态闭环必需修复。
@@ -265,9 +278,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "3f07d8222735b9087a02139d9b484003477317a7",
-  "checked_at": "2026-10-13T12:00:28.894501+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "0a8eb1fd175ec37e84dc372a1a6ca74fca067400",
+  "checked_at": "2026-10-13T12:20:21.024610+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -292,11 +305,11 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/src/utils/watchlistNavigation.ts",
     "web/src/utils/watchlistNavigation.test.mjs"
   ],
-  "scope_released": false,
-  "local_result_commit": "52b5083e870f2fb4a240d349b9346f7d022be239",
+  "scope_released": true,
+  "local_result_commit": "aacb101e0b5934ee98215376042016524a7a1d4e",
   "remote_result_commit": null,
-  "updated_at": "2026-10-13T12:00:28.894501+08:00",
-  "conflict_decision": "Actual cold graph 14.516s before full preparation. Found bare / selected waits all cards; raw group membership already available but empty sidebar misleading. Existing portfolio-trends changes only other six Web paths, factor scopes released. Root controlled GET-only delayed local proxy; Luna sole 4-file frontend writer, existing factor/loading keys preserved. No extra backend reload."
+  "updated_at": "2026-10-13T12:20:21.024610+08:00",
+  "conflict_decision": "Final fetch unchanged since registered scope; own 8 source/test paths and exact small records only. 16453fc7 source, aacb101e final records local only. Actual frontend/backend accepted; no further reload or delegated factor work. This bounded repair released; original goal stays in_progress v21 and preserved persistence/data gaps need a separate precise intake."
 }
 ```
 <!-- lei-coordination-json:end -->
