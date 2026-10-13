@@ -1,3 +1,11 @@
+# 真实产品问答通过与最后读取入口加载
+
+- task-id research-utility-review-20261012；status active；scope_released false；checked_coordination_sha 386ce995e6ee9901fd1ad4b6d0c33bd5a621d5ed；checked_at 2026-10-13T10:49:29.470785+08:00。已读自身、investor-workspace-simplification-20261012最终结案与服务释放、中控原范围；无同块活动写者。原owner已明确交回原任务所需服务操作，唯一root串行使用现有launchd一次kickstart加载agent.py最后识别修复，不Popen、不改plist/环境。
+- 最新16项resolve→chat及单元通过，完整前端build通过。真实科创/创业/QDII三产品、模糊份额澄清、当前值拒绝已保存；修复临时矛盾提示后sess_21ed96306c5d五轮10消息，抽屉刷新文字逐字相同，五详情默认收起且原报告可打开。因子值98.9691%/4.5858%仍明确2026-06-30历史；不代表投资收益。
+- 接下来只加载已核8路径最后入口修复（产品研究依据与前置解析一致），核唯一PID/health与工作台实际同会话；不用原完整预热/行情性能验收替代或扩大本因子目标。两前端精确同步保留他人两处key修复，失败截图/哈希阻止回执保存。源/报告仍同原范围。
+
+---
+
 # 历史观察核对通过，进入产品短答部署与Web验收
 
 - task-id research-utility-review-20261012；status active；scope_released false；checked_coordination_sha ec36483f2241e7602088846aa899b42baf516475；checked_at 2026-10-13T10:31:50.961107+08:00。已读自身、investor-workspace-simplification-20261012本轮后台修复、research-dispatch-controller未变范围；仅运行管理并行，无准确源冲突。8000重载由原owner串行，本任务不启动备用实例。
