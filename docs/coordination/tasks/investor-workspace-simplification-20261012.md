@@ -1,3 +1,15 @@
+# 调度修复实现合同 2026-10-13T11:39:09.250466+08:00
+
+已核主仓/隔离services与preheat逐字一致；当前热态510300仍15秒超时，000300 6.396秒，原基线回执cold-load-baseline-20261013.json。只读两Sol诊断一致：后台先持标的锁再等全局门，单只详情不能提高已排队同产品的优先权；此前SQL批量候选不等价，不采用。
+
+唯一实现Sol/medium合同：mission=当前详情优先于互动批量和后台预热，仍只允许一个真实分析；task_scope=短状态Condition优先等待，不持symbol锁等全局位，同产品经拿位后重新核缓存；read_only_paths=compose/pipeline.py、storage/*、api/app.py、routes及两策略源；write_paths=services.py/preheat.py/上述3单测，仅隔离树；network_allowed=false,max_agents=1,one_writer_per_file=true,preserve_dirty_worktree=true,controller_review required。禁止改SQLite语句/事务、analyze参数/结果/数据日期、TTL、提供商、规则、其他源或进程；保留_run_unlimited原字节。先形成确定性失败证据，再实施与相关测试。异常/范围歧义或额外模块需要回报。
+
+方案：Condition等待票据，单只get优先级高、互动get_many中、preheat get_many(background=True)低；取得全局执行位后才进每标的锁，重新核缓存。已有条目在同标的排队/刷新时仍立即返回。后台批次记录统一开始时间，若前台之后已刷新该symbol，后台这一轮复用，不重新强刷；普通手动refresh=True仍每次强刷。同级按到达顺序、异常finally释放，实际计算上限保持1。
+
+必需反例：后台先排队持同产品意图→前台越过其他低级项并只算一次；互动批量不压住详情；未派发的后台symbol前台算完后不重复；已有过期缓存排队时秒回；两独立批次不并发；手动强刷语义保留；异常不锁死；后台三个刷新范围实际带低优先标记。旧失败不得删除。真实冷启动最多一次同范围必要验收，等完整后台完成、日志/日期/网页读回再交付；模拟和生产分别报告，不保证全批CPU减少。
+
+---
+
 # 接续核心痛点：缩短首次看图等待 2026-10-13T11:34:19.933706+08:00
 
 用户明确“你继续推进我们目前核心的痛点问题”。最终效果：打开正在查看的ETF/指数时，不必排在所有后台自选计算后；保留同一产品、实际资料日期与原信号结果。先复用已有447.2/364.4/308.9秒冷态证据及前次SQL候选失败记录，不重跑封存市场研究。
@@ -236,8 +248,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "3bda282d9b95cc6bfb7ba7a382c91a7e95d20481",
-  "checked_at": "2026-10-13T11:34:19.933706+08:00",
+  "checked_coordination_sha": "d9c2d21909ef58f28c1876f11b485ed4c9fd2e2c",
+  "checked_at": "2026-10-13T11:39:09.250466+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -248,13 +260,19 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
   "write_paths": [
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
+    "src/lei_signal/api/services.py (priority waiting only; analysis/persistence unchanged)",
+    "src/lei_signal/api/preheat.py (tag existing get_many as background only)",
+    "tests/unit/test_api_service_priority.py",
+    "tests/unit/test_api_service_stale_while_revalidate.py (affected assertions only)",
+    "tests/unit/test_api_preheat.py (background tag acceptance)",
+    "com.lei.backend (one final managed reload after exact source acceptance)"
   ],
   "scope_released": false,
   "local_result_commit": "52b5083e870f2fb4a240d349b9346f7d022be239",
   "remote_result_commit": null,
-  "updated_at": "2026-10-13T11:34:19.933706+08:00",
-  "conflict_decision": "Factor owner completed and released at 549dd881. This phase readonly cold-load root cause investigation only; no source/database/process changes yet. Two Sol readonly helpers with disjoint question scopes, no network or subprocess mutation. Implementation source scope registered separately after diagnosis."
+  "updated_at": "2026-10-13T11:39:09.250466+08:00",
+  "conflict_decision": "Readonly diagnoses confirm per-symbol lock acquired before global gate causes cold detail queue; SQL batch earlier semantic failure preserved. Factor scopes released; no overlapping active writer. Sole Sol implementation in own tree services/preheat/tests; root only docs, independent checks and exact apply/reload. No database/strategy changes."
 }
 ```
 <!-- lei-coordination-json:end -->
