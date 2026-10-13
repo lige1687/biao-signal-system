@@ -1,3 +1,15 @@
+# 创业板、科创50与QDII真实询问和简明因子卡
+
+- task-id research-utility-review-20261012；status active；scope_released false；owner root；checked_coordination_sha 6d353929f4f5c42eb7576e1a13350bfa2cffe586；checked_at 2026-10-13T10:21:30.272743+08:00。已读COORDINATION、本任务、investor-workspace-simplification-20261012（范围已释放）、research-dispatch-controller及原因子范围；最新增量仅独立视频，无同路径活动写者。
+- 用户2026-10-13明确要求继续创业板/科创50基金/易方达全球成长的真实询问因子接入，且不要一长串文字。最终效果：自然名称及准确产品不串用，ETF按各自已有合格历史材料给短回答，QDII缺专属因子时明确缺口；详细资料默认折叠，保存刷新一致。名称不唯一先给具体选择，不拿同名指数或ETF替代基金。
+- 基线：本机分支codex/factor-evidence-integration-20261012@f567ed4f688a60d0caf12d0650dfbd3818f2a06d；复用隔离树。当前主仓/5188消费文件须写前逐字核、差异保存基线，不改其他持仓/自选通用流程。源码仍仅本地，未声称远端可复现。
+- 写范围：src/lei_signal/copilot/factor_readonly.py；新增factor_product_context.py；api/routes/agent.py仅因子请求/产品身份分支；configs/factor-products.v1.json及factor-access.v1.json；docs/research/factor-observations/product-cases-20261013/；web/src/types.ts、components/FactorEvidenceView.tsx及配套窄测试、components/EvidenceCardView.tsx、components/AgentConsole.tsx、pages/AgentWorkspacePage.tsx（仅因子展示分支）、对应样式如确需；tests/unit/test_factor_product_context.py、tests/integration/test_factor_product_cases.py及受影响的旧因子用例；docs/experiments/factor-product-agent-2026-10-13.md及同名raw，registry/INDEX只本报告，原work-progress与自身协调记录。不可同时改同文件。
+- 唯一分工：Sol factor_observation_path构建两条既有回溯观察包及factor-access（科创range同原8ETF定义；创业使用已有momentum不同定义），不新训练/下载；Sol factor_outcomes产品身份/资料选择模块+agent窄路由+对应测试；Sol decision_delivery仅上述Web卡/渲染/测试；root factor_readonly简短结构化输出、独核、串行同步与实际Web验收。共享配置/范围由root协调。
+- 本次采用原研究闭环resume边界：既有封存资料/定义/原负结论复用，0新增拟合/回测/付费取数/交易，策略两原文hash与已确认相符。本轮小包是运行依赖，其他大结果按外盘规则；不迁移旧资料。未记录原历史到达仍unknown。无私持仓送外部模型。
+- 验收：创业159915、科创588000、QDII012920准确身份各一真实问答；简称/份额不确定可澄清而不假装覆盖；原沪深300反例保持；当前请求不默选历史；短正文不超过3依据、长资料默认关闭且可展开，抽屉/工作台/刷新同源。定义/源漂移/跨对象反例与必要相关测试、类型构建/归置。没有新判断增益证据就不能称交易更好。关键故障修复后复验，用户效果待验收。
+
+---
+
 # 单只ETF历史观察到Agent有界闭环完成
 
 - task-id research-utility-review-20261012；status completed（仅本轮有界接入与验收）；scope_released true；owner root；checked_coordination_sha 148ab735f642896e582bf499ca8b5aae98c77172；checked_at 2026-10-12T20:49:59.450643+08:00。已读本任务、investor-workspace-simplification-20261012、research-dispatch-controller及原因子负责人范围，最新增量仅独立视频，无同路径冲突。
