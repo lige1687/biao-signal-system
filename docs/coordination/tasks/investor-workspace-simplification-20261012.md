@@ -1,3 +1,9 @@
+# 图表加载提示残留的必要修复 2026-10-13T10:34:20.153711+08:00
+
+预热447.2秒完成，两个详情200且0.627/0.942秒。实际页面仍保留两张加载提示，控制台确认同级DetailLoadState与FactorContextPanel重复key=510300.SS；DetailPage同样代码缺陷。只给加载组件key加独立前缀，仍按产品重建状态；不改因子组件/信号/账户。验收真实加载→消失、切换ETF/指数不残留、无新重复key警告、类型检查和归置。此前冷态超时和截图保留。
+
+---
+
 # 预览入口恢复补注 2026-10-13T10:31:27.452184+08:00
 
 实际浏览器5188连接被拒绝，端口无监听；必要验收范围追加恢复同一隔离树原预览进程，不改前端代码/仓外配置/其他服务。8000唯一受管12989仍在冷态预热，两详情40秒超时保留，等待完成后验收。
@@ -196,8 +202,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "c1e4b861f4bd7110ea0d2e663ee4b4b72d87c1b2",
-  "checked_at": "2026-10-13T10:31:27.452184+08:00",
+  "checked_coordination_sha": "cb5556dfa033030f668a573878cf1ac94bf26932",
+  "checked_at": "2026-10-13T10:34:20.153711+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -216,13 +222,15 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
     "com.lei.backend (restore unique managed backend, no external plist edits)",
-    "5188 existing isolated Vite preview process (restore only; no frontend source or launch agent changes)"
+    "5188 existing isolated Vite preview process (restore only; no frontend source or launch agent changes)",
+    "web/src/pages/WorkspacePage.tsx (only unique loading/factor sibling keys)",
+    "web/src/pages/DetailPage.tsx (same sibling key repair)"
   ],
   "scope_released": false,
   "local_result_commit": "56fe0efbc0cabbb4d833aed7dc577ce6673bb147",
   "remote_result_commit": null,
-  "updated_at": "2026-10-13T10:31:27.452184+08:00",
-  "conflict_decision": "Latest remote unchanged except own record. Restore stopped 5188 existing isolated preview as required browser acceptance; preserve factor owner source and notify operational state only. Existing 8000 PID12989 unique and warming; no reload while warming."
+  "updated_at": "2026-10-13T10:34:20.153711+08:00",
+  "conflict_decision": "Read latest factor task 2026-10-13T10:31:50; it edits factor card consumers but not WorkspacePage/DetailPage. Fix only reproduced duplicate sibling keys causing orphan loading panels; keep all factor source intact. No backend source changes."
 }
 ```
 <!-- lei-coordination-json:end -->
