@@ -1,3 +1,9 @@
+# 因子owner完成接入后的串行重载 2026-10-13T10:36:39.496289+08:00
+
+12989的完整预热447.2秒、唯一监听、无新端口冲突和两个详情200已验收；页面两处key修复通过类型及实际加载/切换检查。因子owner已完成其原有用户任务的8文件接入，请求本root统一重载。先对其deployed-backend-fingerprints.json逐项复核，再只执行一次受管重载，读回新PID/health；新因子产品答案由原因子owner验收，不重复指派工作。
+
+---
+
 # 图表加载提示残留的必要修复 2026-10-13T10:34:20.153711+08:00
 
 预热447.2秒完成，两个详情200且0.627/0.942秒。实际页面仍保留两张加载提示，控制台确认同级DetailLoadState与FactorContextPanel重复key=510300.SS；DetailPage同样代码缺陷。只给加载组件key加独立前缀，仍按产品重建状态；不改因子组件/信号/账户。验收真实加载→消失、切换ETF/指数不残留、无新重复key警告、类型检查和归置。此前冷态超时和截图保留。
@@ -202,8 +208,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "cb5556dfa033030f668a573878cf1ac94bf26932",
-  "checked_at": "2026-10-13T10:34:20.153711+08:00",
+  "checked_coordination_sha": "ecbe9f4b5cfab50a16d9d4962c9896e52610f0c1",
+  "checked_at": "2026-10-13T10:36:39.496289+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -229,8 +235,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "scope_released": false,
   "local_result_commit": "56fe0efbc0cabbb4d833aed7dc577ce6673bb147",
   "remote_result_commit": null,
-  "updated_at": "2026-10-13T10:34:20.153711+08:00",
-  "conflict_decision": "Read latest factor task 2026-10-13T10:31:50; it edits factor card consumers but not WorkspacePage/DetailPage. Fix only reproduced duplicate sibling keys causing orphan loading panels; keep all factor source intact. No backend source changes."
+  "updated_at": "2026-10-13T10:36:39.496289+08:00",
+  "conflict_decision": "Own chart keys fixed; factor owner reports complete 8-file backend deployment and 35 related tests, requests existing managed service reload only. Root verifies exact fingerprint receipt, completes current 12989 full-preheat acceptance, then one launchctl kickstart with health/unique listener readback. No source overlap or new tasks assigned."
 }
 ```
 <!-- lei-coordination-json:end -->
