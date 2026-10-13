@@ -1,3 +1,9 @@
+# 预览入口恢复补注 2026-10-13T10:31:27.452184+08:00
+
+实际浏览器5188连接被拒绝，端口无监听；必要验收范围追加恢复同一隔离树原预览进程，不改前端代码/仓外配置/其他服务。8000唯一受管12989仍在冷态预热，两详情40秒超时保留，等待完成后验收。
+
+---
+
 # 接续后台重复启动故障 2026-10-13T10:23:00.229120+08:00
 
 用户2026-10-13明确“持续推进下一个任务哈，完成目标啥的”。复用原目标okr-4c2ea452d3cc及稳定任务，目标是恢复唯一受管后台，使看盘和Agent资料读取可靠。只服务既有技术信号读取与使用层；两桌面权威SHA与登记一致，不改规则/参数/数据或重跑市场实验。
@@ -190,8 +196,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "b5f3fa2deea5e0347883ff01af1acde6a421d73a",
-  "checked_at": "2026-10-13T10:23:00.229120+08:00",
+  "checked_coordination_sha": "c1e4b861f4bd7110ea0d2e663ee4b4b72d87c1b2",
+  "checked_at": "2026-10-13T10:31:27.452184+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -209,13 +215,14 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "write_paths": [
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
-    "com.lei.backend (restore unique managed backend, no external plist edits)"
+    "com.lei.backend (restore unique managed backend, no external plist edits)",
+    "5188 existing isolated Vite preview process (restore only; no frontend source or launch agent changes)"
   ],
   "scope_released": false,
   "local_result_commit": "56fe0efbc0cabbb4d833aed7dc577ce6673bb147",
   "remote_result_commit": null,
-  "updated_at": "2026-10-13T10:23:00.229120+08:00",
-  "conflict_decision": "Latest factor task active in own consumer/Web paths. No source edits in this initial runtime repair. Root owns service conflict diagnosis; factor owner notified of single reload owner, not assigned research. Preserve 70413 serving until shared source ready; no external config edits, database cleanup or change to calculations."
+  "updated_at": "2026-10-13T10:31:27.452184+08:00",
+  "conflict_decision": "Latest remote unchanged except own record. Restore stopped 5188 existing isolated preview as required browser acceptance; preserve factor owner source and notify operational state only. Existing 8000 PID12989 unique and warming; no reload while warming."
 }
 ```
 <!-- lei-coordination-json:end -->
