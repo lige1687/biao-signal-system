@@ -45,3 +45,10 @@
 - 实际渲染帧核对、完整解码通过；浏览器1倍未静音至ended=true/error=null。原创120BPM音乐和独立音效，峰值-2.5dBFS；独立听感及创作认可未验证。保留新旧预览，新版62316。
 - 选择性辉光、票券厚度扫光、图形侧面、解释落点粒子已落到真实工程；保留教学假设、无旁白/品牌/建议。原始资料见effect-study.md；同时改音画不归因单个特效、不承诺流量。
 - 外盘源码/文稿/节拍/字体许可/manifest逐项读回；本机小索引已更新。归置与前置材料检查通过。远端仅本协调记录，媒体源码仅本地外盘，不虚称远端可复现。未安装依赖/删除/改系统或Skill，未扩全片和发布。
+
+## 默认制作要求与完整片授权 2026-10-13T20:29:21.308540+08:00
+- status: active；scope_released=false；checked_coordination_sha: 932050cdb226ad9735cd83815675c850bbbea258；已读COORDINATION、自身、中控、cash-position、nasdaq-story、trend-perspective相关最新范围；三视频任务均未占本轮共享Skill文件，root唯一写者。
+- 用户明确“我们的要求看看skill里边有可以补充的不，不想重复，以后默认这样做，比如粒子、渲染、动态”，随后“然后可以给我做完整视频了”“skill做好后”。执行顺序：先更新核对Skill，再全片；视为本期样片方向认可与全片授权，不授权发布。
+- Skill范围仅.agents/skills/code-explainer-video/SKILL.md、references/motion-direction.md、references/music-motion-sync.md、references/music-candidates.md；合并默认质感/粒子/卡点与选曲，不改其他技能，不硬锁120BPM或泛用本片模板。既有未跟踪历史不整包提交，本次准确补丁/指纹保留在自己索引目录。
+- 随后全片范围：外盘同主题v05-full，约2分钟无旁白完整版，沿已认可声画方向、保持科普无建议，核原稿时点数字并纠正无法支持的陈述；必要素材/配乐/源码/粗剪/成片全外盘。本机同一小索引与docs/ops/work-progress/treasury-yield-video-20261013.md；不改系统、研究registry或其他影片。
+- 20:28盘UUID核对通过，可用562703499264B；预计外盘新增<2GiB，本机<100KiB，无依赖安装/删除/付费。Skill以结构/链接/差异/归置验收；全片核事实、语义递进、真实实帧、粗剪到全片播放、完整解码及指纹。
