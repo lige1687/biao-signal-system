@@ -1,3 +1,15 @@
+# 三产品真实因子问答与简卡有界验收完成
+
+- task-id research-utility-review-20261012；owner root；status completed（本轮产品接入与可读性工程）；scope_released true；updated_at 2026-10-13T11:06:50.541004+08:00；checked_coordination_sha 800c73d6c93dfcc85999795576316386549a9067；checked_at 2026-10-13T11:06:50.541004+08:00。已读COORDINATION、本任务、investor-workspace-simplification-20261012最终释放记录、research-dispatch-controller；无新增重叠写者，仅维护自身记录。全部当前登记范围及必要服务操作释放，不给其他任务新增授权。
+- 本地成果commit 70ab55556874228d2cba66cf50f96d0318e1a5be，分支codex/factor-evidence-integration-20261012，36准确路径。源码未推远端/未合main，完整运行材料远端不可复现；api/routes/agent.py保留实际运行既有基线，本次准确增量以raw/agent-route-delta.patch及写前指纹为准，不将其完整Git差异归为本轮新增。无关WorkspacePage改动未暂存。
+- 结果：科创50华夏588000.SS历史波动4.5858%、创业板易方达159915.SZ历史动量98.9691%，各自2026-06-30、来源/定义/限制独立绑定；QDII012920无专属资料准确说明。现值请求不回退历史，同名/份额澄清，用户只补代码仍接原问题。不新增研究有效性结论。
+- 真Web：sess_21ed96306c5d公开7轮14消息；抽屉刷新前后正文一致、工作台恢复同包；默认短结论+最多2事实+日期、长说明折叠，原报告链接可读。末次基金追问/查看资料通过：准确名称，无自动图表、无名称待核实，7卡0展开。实际初次临时补代码提示、基金误开图表和热更新保留状态失败均留痕并针对修复复验。
+- 验证：37项相关检查通过（含16项产品检查，不相加）、前端卡片检查/实际5188类型与完整build通过，主仓归置与暂存diff检查通过。root独算两数值差0；Sol分工两包/产品消费/前端，末次只读复核3部署文件逐字一致；root最终核8后端+5前端指纹。原owner交回后仅一次既有launchd加载，8000唯一PID20385健康200；未改plist/模型或另启后台。
+- 归档：docs/experiments/factor-product-agent-2026-10-13.md，raw/factor-product-agent-2026-10-13/acceptance.json等小证据；registry新增唯一条目，主仓663旧条保持，INDEX加导航，原work-progress更新。实际公开消息/截图保留本地不推。两原目标仅note，okr-ff1e0a86fbac134→135保持in_progress，okr-266b531f965d10→11保持review，旧历史/负责人/授权/里程碑/下一步读回保持；未代用户接受。
+- 本轮新增训练/回测/行情下载/真实计划成交0，确定性因子答案模型调用0；开发agent token与费用未知。两策略源hash保持，未重启封存研究或改变定义/交易范围。仍缺当前资料资格、普通问法自动选因子、真实判断及收益改善，用户效果待验收；这些不是本轮工程通过的结果。没有继续运行中的研究。
+
+---
+
 # 真实产品问答通过与最后读取入口加载
 
 - task-id research-utility-review-20261012；status active；scope_released false；checked_coordination_sha 386ce995e6ee9901fd1ad4b6d0c33bd5a621d5ed；checked_at 2026-10-13T10:49:29.470785+08:00。已读自身、investor-workspace-simplification-20261012最终结案与服务释放、中控原范围；无同块活动写者。原owner已明确交回原任务所需服务操作，唯一root串行使用现有launchd一次kickstart加载agent.py最后识别修复，不Popen、不改plist/环境。
