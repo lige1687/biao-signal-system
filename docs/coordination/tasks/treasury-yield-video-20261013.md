@@ -52,3 +52,7 @@
 - Skill范围仅.agents/skills/code-explainer-video/SKILL.md、references/motion-direction.md、references/music-motion-sync.md、references/music-candidates.md；合并默认质感/粒子/卡点与选曲，不改其他技能，不硬锁120BPM或泛用本片模板。既有未跟踪历史不整包提交，本次准确补丁/指纹保留在自己索引目录。
 - 随后全片范围：外盘同主题v05-full，约2分钟无旁白完整版，沿已认可声画方向、保持科普无建议，核原稿时点数字并纠正无法支持的陈述；必要素材/配乐/源码/粗剪/成片全外盘。本机同一小索引与docs/ops/work-progress/treasury-yield-video-20261013.md；不改系统、研究registry或其他影片。
 - 20:28盘UUID核对通过，可用562703499264B；预计外盘新增<2GiB，本机<100KiB，无依赖安装/删除/付费。Skill以结构/链接/差异/归置验收；全片核事实、语义递进、真实实帧、粗剪到全片播放、完整解码及指纹。
+
+## Skill完成，进入全片 2026-10-13T20:32:16.387295+08:00
+- status: active/full_production；checked_coordination_sha: d2286393406addde9a3d28be34d633f398b91b32；当前已读本轮规则/自身与三个影片负责人，登记以来无已知重叠。四份Skill局部改动已落本机，默认材质/光照/空间/事件粒子、选曲不锁死旧曲/120BPM、换曲联动声画；结构/相对链接/补丁反向/归置检查全部通过。准确patch与前后SHA在docs/ops/media/treasury-yield-20261013/default-effects-skill-20261013.*，未跟踪共享历史不冒领。
+- full授权原话“然后可以给我做完整视频了”“skill做好后”；按序完成Skill后启动，原科普主线保持，市场数字入片前核来源。
