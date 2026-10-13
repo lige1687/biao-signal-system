@@ -1,3 +1,15 @@
+# 接续后台重复启动故障 2026-10-13T10:23:00.229120+08:00
+
+用户2026-10-13明确“持续推进下一个任务哈，完成目标啥的”。复用原目标okr-4c2ea452d3cc及稳定任务，目标是恢复唯一受管后台，使看盘和Agent资料读取可靠。只服务既有技术信号读取与使用层；两桌面权威SHA与登记一致，不改规则/参数/数据或重跑市场实验。
+
+实测8000由PID70413监听，launchd同时反复启动其他PID、端口冲突退出，runs783；失败后仍进行29标的预热（30–81秒）。两详情当前暖态200、5.721/1.317秒。本轮先保留70413的可用服务，核身份与运行来源后停止重复启动，等因子owner当前源完整再串行恢复唯一受管实例；不动其他服务/仓外plist。不把消除重复实例等同全部图表提速。
+
+最新因子任务在b5f3fa2下活动，准确源/展示路径与本轮运维记录无重叠；已仅告知共用后台故障和单一服务操作者，不给其新研究或UI工作。root写协调/运维/归档/原目标note；Sol仅只读api/app.py、preheat.py、services.py、scripts/launchd/com.lei.backend.plist和启动脚本，write_paths=[]，network_allowed=false，max_agents=1，one_writer_per_file=true，preserve_dirty_worktree=true，model=gpt-6-sol/medium，controller_review required。返回原因、最小恢复及验收，禁止启动/停止进程、读凭据、修改文件或真实库；歧义/权限缺失即回报。
+
+验收：端口监听者唯一且与launchd管理PID相同；完整预热结束后未出现新端口冲突/循环；真实health、持仓、详情和Web读回。旧失败保留，准确时间和前后状态归档；无需源修改时只修运行管理，最终仅本地提交和原目标追加。此前长延迟/未知源/真实账户缺件仍保留。没有后台研究或新增通知。
+
+---
+
 # 持仓、自选与基金实际方向接入已完成，效果待用户验收
 
 - task-id investor-workspace-simplification-20261012；status completed（仅本轮实现、必要验证和归档）；scope_released true；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；updated_at 2026-10-12T13:10:22.577264+08:00。
@@ -177,9 +189,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "2a9d2590f0cd013053a62614f3c74f0346377a99",
-  "checked_at": "2026-10-12T13:10:22.577264+08:00",
+  "status": "active",
+  "checked_coordination_sha": "b5f3fa2deea5e0347883ff01af1acde6a421d73a",
+  "checked_at": "2026-10-13T10:23:00.229120+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -195,36 +207,15 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
   "write_paths": [
-    "web/src/components/portfolio/PortfolioAgent.tsx",
-    "web/src/pages/PortfolioPage.tsx",
-    "web/src/pages/WorkspacePage.tsx",
-    "web/src/components/AgentConsole.tsx",
-    "web/src/components/agentConsoleState.ts",
-    "web/src/components/agentConsoleState.test.mjs",
-    "web/src/components/WatchlistSidebar.tsx (observation instructions only)",
-    "src/lei_signal/plans/llm.py (expression prompt only; shared runtime after backup)",
-    "tests/unit/test_discussion_context_scope.py",
-    ".agents/skills/lei-system-chat/SKILL.md (output guidance only)",
-    "AGENTS.md (append user output preference only)",
-    "docs/ops/agent-answer-style.md",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
-    "com.lei.backend (one necessary reload after prompt checks)",
-    "src/lei_signal/portfolio/disclosure_context.py (new public read-only evidence)",
-    "src/lei_signal/api/portfolio_workspace.py (disclosure attachment only)",
-    "src/lei_signal/copilot/portfolio_context.py (disclosure whitelist only)",
-    "configs/fund-disclosures.v1.json (public evidence only)",
-    "tests/unit/test_fund_disclosure_context.py",
-    "web/src/components/portfolio/FundDisclosure.tsx (new)",
-    "web/src/pages/PortfolioPage.css (disclosure style only)",
-    "web/src/components/portfolio/portfolioWorkspace.ts (disclosure DTO)",
-    "web/src/components/portfolio/PortfolioToday.tsx (disclosure card only)"
+    "com.lei.backend (restore unique managed backend, no external plist edits)"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": "56fe0efbc0cabbb4d833aed7dc577ce6673bb147",
   "remote_result_commit": null,
-  "updated_at": "2026-10-12T13:10:22.577264+08:00",
-  "conflict_decision": "Checked latest factor task completion and independent media updates; no same-file conflict. Root releases only this bounded portfolio/watchlist/evidence scope. Other chat remains factor-only, no further assignments."
+  "updated_at": "2026-10-13T10:23:00.229120+08:00",
+  "conflict_decision": "Latest factor task active in own consumer/Web paths. No source edits in this initial runtime repair. Root owns service conflict diagnosis; factor owner notified of single reload owner, not assigned research. Preserve 70413 serving until shared source ready; no external config edits, database cleanup or change to calculations."
 }
 ```
 <!-- lei-coordination-json:end -->
