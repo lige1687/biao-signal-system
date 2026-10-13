@@ -1,3 +1,16 @@
+# 预览已验证，现用页同步待用户确认
+
+- status: blocked（仅仓外现用路径写入待确认）；updated_at: 2026-10-13T11:39:43.824818+08:00; checked_coordination_sha: 3bafc053c8dc63d747161d8c1ff8a425f764c5ee; checked_at: 2026-10-13T11:39:43.824818+08:00
+- 已读本记录及最新协调变更路径：docs/coordination/tasks/investor-workspace-simplification-20261012.md
+docs/coordination/tasks/research-utility-review-20261012.md。实现范围无扩大。唯一root，不改其他owner源码/后台。
+- 6文件完成持仓状态色/选中层级、基本面首页8历史图及6/12/36月切换；build/边界计算/真实Web/390px/归置/diff通过。实际资料缺口保持。
+- 预览127.0.0.1:5190/portfolio与/fundamentals，仓内.codex/worktrees/portfolio-trends-20261013，分支codex/portfolio-trends-20261013。源码仅本地未提交未推送，远端不可复现。
+- 证据docs/ops/work-progress/portfolio-trends-20261013.md及同名patch/manifest；截图仅本机主仓.codex/portfolio-trends-qa，不上传私人账户。原目标仅note版本12→13读回。
+- 尚未修改现用5188所在仓外checkout；用户AGENTS要求仓外修改先确认，具体6文件同步问题已提出。其他验收完成；无后台研究或新通知。
+- 恢复：人类允许同步后核before_sha256，先备份再精确同步，浏览器读回；主观视觉待人类验收。
+
+---
+
 # 持仓重点与基本面趋势展示
 
 - task-id: portfolio-trends-20261013; owner: 01a1334f-1167-7752-8041-e22a5dc2213b; status: active; updated_at: 2026-10-13T11:32:26.712393+08:00
