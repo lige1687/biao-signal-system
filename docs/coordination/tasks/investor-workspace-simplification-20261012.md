@@ -1,3 +1,13 @@
+# 补齐普通看盘入口及清单首屏 2026-10-13T12:00:28.894501+08:00
+
+38941真实重启、当前000300图表14.516秒显示，资料日期2026-10-13且已按原方式保存，读取提示/错误0，单只接口0.858秒，持仓0.028秒。整批后台当时未完成，表明当前图表已可先显示。实际首屏仍显示自选准备且无名清单；源码确认裸/路径selected取完整cards才出现，没有URL时图表查询不会提前启动。这是本次冷态闭环必需修复。
+
+新增唯一Luna/low前端合同：只写上述4文件，其他源/模型/服务/数据库只读，network_allowed=false,max_agents=1,one_writer_per_file=true,preserve_dirty_worktree=true,controller_review required。复用api.groups/watchlist/resolve(probe=false)原本地GET先取得名称/成员；完整dashboard未返回时先构造仅供导航的明确准备中条目，价格/信号/日期等一律空，不能伪造技术判定。裸入口选服务器内置大盘组第一产品，不硬编码代码；带URL时准确保留。点击/键盘先打开同一对象详情；完整cards返回后替换准备条目。保留现有因子问询与两个loading key修复，无真实写入。
+
+根会先用独立临时5192预览/9192只读代理，将同一dashboard响应延迟10秒，其他GET即时透传，保留旧首屏迟到证据；再验新清单/默认图表先出现与真实同产品切换。延迟演练不得当真实冷态14.5秒证据；无新后台重载/研究计算，临时只读服务收尾停止。不改他人5190预览/其持仓趋势文件。
+
+---
+
 # 候选独核通过，进入一次真实冷启动验收 2026-10-13T11:51:45.362745+08:00
 
 候选4准确源/测试路径完成：实际分析上限1、单只优先、互动批量其次、后台最后；保留旧缓存秒回/TTL/手动强刷/异常释放。根审发现并修正3边界：使用实际分析开始时点（不拿完成时刻冒充新资料）、后台复用绑定具体成功且未过期条目、驱逐/替换时释放前台memo旧引用。31项服务/预热由Sol通过；根用主仓真实运行依赖显式覆盖候选两模块，53项包括完整本隔离endpoint检查通过。原隔离缺write_tx导致的9失败及旧归置误报保留，未通过删除测试凑通过；主仓现行归置通过。_run_unlimited/_is_fresh/_provider_for逐字不变，SQL/策略文档不改。
@@ -256,8 +266,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "5108e8ed0eac43b2ef1394a57f51be7c2c6bee9b",
-  "checked_at": "2026-10-13T11:51:45.362745+08:00",
+  "checked_coordination_sha": "3f07d8222735b9087a02139d9b484003477317a7",
+  "checked_at": "2026-10-13T12:00:28.894501+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -276,13 +286,17 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "tests/unit/test_api_service_priority.py",
     "tests/unit/test_api_service_stale_while_revalidate.py (affected assertions only)",
     "tests/unit/test_api_preheat.py (background tag acceptance)",
-    "com.lei.backend (one final managed reload after exact source acceptance)"
+    "com.lei.backend (one final managed reload after exact source acceptance)",
+    "web/src/pages/WorkspacePage.tsx (cold navigation placeholders/default selection only)",
+    "web/src/components/WatchlistSidebar.tsx (pending navigation display only)",
+    "web/src/utils/watchlistNavigation.ts",
+    "web/src/utils/watchlistNavigation.test.mjs"
   ],
   "scope_released": false,
   "local_result_commit": "52b5083e870f2fb4a240d349b9346f7d022be239",
   "remote_result_commit": null,
-  "updated_at": "2026-10-13T11:51:45.362745+08:00",
-  "conflict_decision": "Latest added portfolio-trends only isolated Web and treasury media; read current top sections, no backend source or service overlap. Sole Sol stopped writing, root owns exact two-source apply and one managed reload. Existing factor task released, its source untouched."
+  "updated_at": "2026-10-13T12:00:28.894501+08:00",
+  "conflict_decision": "Actual cold graph 14.516s before full preparation. Found bare / selected waits all cards; raw group membership already available but empty sidebar misleading. Existing portfolio-trends changes only other six Web paths, factor scopes released. Root controlled GET-only delayed local proxy; Luna sole 4-file frontend writer, existing factor/loading keys preserved. No extra backend reload."
 }
 ```
 <!-- lei-coordination-json:end -->
