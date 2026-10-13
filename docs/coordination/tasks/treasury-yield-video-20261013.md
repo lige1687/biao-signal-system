@@ -56,3 +56,11 @@
 ## Skill完成，进入全片 2026-10-13T20:32:16.387295+08:00
 - status: active/full_production；checked_coordination_sha: d2286393406addde9a3d28be34d633f398b91b32；当前已读本轮规则/自身与三个影片负责人，登记以来无已知重叠。四份Skill局部改动已落本机，默认材质/光照/空间/事件粒子、选曲不锁死旧曲/120BPM、换曲联动声画；结构/相对链接/补丁反向/归置检查全部通过。准确patch与前后SHA在docs/ops/media/treasury-yield-20261013/default-effects-skill-20261013.*，未跟踪共享历史不冒领。
 - full授权原话“然后可以给我做完整视频了”“skill做好后”；按序完成Skill后启动，原科普主线保持，市场数字入片前核来源。
+
+## Skill与完整片交付 2026-10-13T21:08:39.793918+08:00
+- status: completed（制作交付）；scope_released=true；checked_coordination_sha: 11418f316440106124678a0c84d7419b0d6c4069；checked_at: 2026-10-13T21:08:39.793918+08:00。已读COORDINATION、自身、中控、cash-position、nasdaq-story、trend-perspective及research-utility-review最新增量，无文件重叠；root唯一写者。最终fetch无新增。
+- 用户要求先Skill后完整片已按序完成。四份Skill本机默认粒子/材质/光照/空间/动态卡点生效，结构、链接、精确补丁反向检查通过；未整包冒领未跟踪历史。补丁与指纹在本任务media目录。没有安装、删除、发布或系统策略修改。
+- 全片：外盘视频库/宏观科普/20261013-treasury-yield/v05-full/out/treasury-full-1080p.mp4；12881196B；SHA256 e7624bd3cac0a6c6680fd36b853d7bb3133487d607865632fcdca781da4049b8；1920×1080/30fps/4320帧/144秒。无旁白、原创120BPM电子配乐及音效、科普无投资建议。
+- 原稿时点数据已核来源并保留日期；无法支持的成分股下跌比例替换为假设权重算例，AI仅作可能盈利支撑。实际画面/转场、算术、完整解码通过；最终可见播放器1倍未静音至144秒ended=true/error=null。原粗剪背景页暂停/原生播放器超时及工程修正记录仍在checks，不覆盖失败。独立完整听审未验证、用户最终创作认可待验收、未发布。
+- 外盘107份文件manifest逐项读回，21:04盘UUID/容量健康；完整工程与媒体仅本地外盘，不宣称远端自包含。预览62317/preview.html。最终小索引与工作进度在codex/treasury-video-artifacts-20261013提交3d14c29918ce7e5522734d437b85b373bad83a70，推送后ls-remote一致；上一b1b7012含Skill精确补丁。
+- 归置通过。工作树稀疏设置曾误作用于主目录，已disable恢复，并保持原分支及125份已有tracked修改；详情保留外盘checks/production-issues.md，无reset/clean/数据删除。任务内不再追加修改，后续按用户观感反馈。
