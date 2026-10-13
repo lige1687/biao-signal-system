@@ -1,3 +1,18 @@
+# 接续核心痛点：缩短首次看图等待 2026-10-13T11:34:19.933706+08:00
+
+用户明确“你继续推进我们目前核心的痛点问题”。最终效果：打开正在查看的ETF/指数时，不必排在所有后台自选计算后；保留同一产品、实际资料日期与原信号结果。先复用已有447.2/364.4/308.9秒冷态证据及前次SQL候选失败记录，不重跑封存市场研究。
+
+采用systematic-debugging与codex-delegate。本轮只诊断，不改源/真实库/进程。两策略源实际SHA与确认指纹一致，本改动服务消费/调度层，计算规则及持久化语义不得改变。当前20385唯一受管，因子owner已完成释放；不向其派新任务。独立树HEAD52b5083e870f2fb4a240d349b9346f7d022be239，保留所有因子脏改。
+
+并行合同：max_agents=2, one_writer_per_file=true, preserve_dirty_worktree=true, network_allowed=false, executor=gpt-6-sol/medium, controller_review required。
+1. scheduling诊断：只读api/services.py、preheat.py、app.py、dashboard/symbol routes与相关服务测试，write_paths=[]；定位前台排队及同产品锁的顺序，提出能保持单次实际计算且优先当前详情的最小候选，必要小模拟仅内存，无真实行情/库写入。
+2. sqlite诊断：只读compose/pipeline.py、storage/sqlite_store.py、write_tx.py、既有本任务失败/验收与当前日志；允许活动库mode=ro只读schema/EXPLAIN，不全表扫描、不复制5GB库；write_paths=[]。定位预热写入成本与能否从调度上隔离，不能重试原事务语义失败候选。
+两者禁止修改文件、进程、账户、模型设置、网络/取数、下级代理；歧义/缺权限即回报。
+
+验收拟定：用阻塞式合成计算复现排队，当前详情能优先且后台继续、同产品不重复、异常释放、仅单个实际计算；缓存/日期/信号/持久化结果不变；最后一次必要受管重载实际浏览器冷启动对照，真实值与模拟分别记录。不能把模拟提速当真实提速，不能以停止存研究快照换通过。诊断之后再登记准确实现文件。
+
+---
+
 # 本轮看盘恢复与加载提示修复完成 2026-10-13T10:47:51.501408+08:00
 
 - checked_coordination_sha c6e3dc7b1755bc18bbebc85df11f69219805d6a6；已读本任务、research-utility-review-20261012最新活动范围及原中控边界；本轮来源只有自己的2处加载key和记录，因子owner消费者改动未暂存。用户整体目标仍进行中。
@@ -220,36 +235,26 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "c6e3dc7b1755bc18bbebc85df11f69219805d6a6",
-  "checked_at": "2026-10-13T10:47:51.501408+08:00",
+  "status": "active",
+  "checked_coordination_sha": "3bda282d9b95cc6bfb7ba7a382c91a7e95d20481",
+  "checked_at": "2026-10-13T11:34:19.933706+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
     "daily-trading-system-audit",
-    "research-dispatch-controller",
-    "ai-sycophancy-video-20261012",
-    "cash-position-video-20261009",
-    "dual-ma-video-copy-20261009",
-    "nasdaq-story-video-20261009",
-    "trend-perspective-video-20261009",
-    "trend-trading-video"
+    "research-dispatch-controller"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
   "write_paths": [
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
-    "com.lei.backend (restore unique managed backend, no external plist edits)",
-    "5188 existing isolated Vite preview process (restore only; no frontend source or launch agent changes)",
-    "web/src/pages/WorkspacePage.tsx (only unique loading/factor sibling keys)",
-    "web/src/pages/DetailPage.tsx (same sibling key repair)"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": "52b5083e870f2fb4a240d349b9346f7d022be239",
   "remote_result_commit": null,
-  "updated_at": "2026-10-13T10:47:51.501408+08:00",
-  "conflict_decision": "Bounded runtime/key repair complete; latest coordinated factor scope read and kept. Release own exact source and managed service operation scope. Factor owner may continue necessary managed reload for its existing task; use sole launchd job, no standalone Uvicorn. Its ongoing product question fix is not declared accepted by this task; no new assignment."
+  "updated_at": "2026-10-13T11:34:19.933706+08:00",
+  "conflict_decision": "Factor owner completed and released at 549dd881. This phase readonly cold-load root cause investigation only; no source/database/process changes yet. Two Sol readonly helpers with disjoint question scopes, no network or subprocess mutation. Implementation source scope registered separately after diagnosis."
 }
 ```
 <!-- lei-coordination-json:end -->
