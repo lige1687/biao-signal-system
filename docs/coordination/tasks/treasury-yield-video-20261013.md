@@ -1,0 +1,11 @@
+# 美债收益率科普关键15秒
+- task-id: treasury-yield-video-20261013；owner: 01a13345-d267-7f00-bb59-bd4fb3b9e5fb / root；status: active。
+- checked_coordination_sha: 549dd881d0ae31b78ff398e28047c8620c58c7d9；checked_at: 2026-10-13T11:22:09.929745+08:00。
+- 已读: COORDINATION 1.1、research-dispatch-controller、trend-perspective-video-20261009、nasdaq-story-video-20261009；独立新主题，无重叠；root唯一写者。
+- 用户明确：先做15s视频、给最关键的15s；本期直接做关键样片，未确认样片观感，不扩全片、不发布。
+- 基线：用户提供长稿；复用v13动作组织与指定音乐，只读旧工程；不复用其交易主张。
+- 范围：外盘视频库/宏观科普/20261013-treasury-yield/v01-key-15s 全部新媒体、源码、文稿、检查；本地 docs/ops/media/treasury-yield-20261013/external-location.json 小索引。不改系统、共享Skill、他片、registry。
+- 外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9已核；预计新增<1GiB，本机小记录<32KiB；不安装新依赖。
+- 验收：15秒实际视频、关键数值教学假设标识、无交易建议、无旁白、配乐+原创音效、可读实帧、完整解码与播放、SHA与外盘读回；主观听感/观感待用户。
+- 产物当前未生成；工作源仅本地外盘，远端不含媒体；无研究实验预算消耗。工作分支 codex/treasury-video-coordination-20261013 仅协调状态。
+- 下一步：制作关系动画并核验后交样片。适用code-explainer-video当期说明；音乐跨平台权利与账号资质未核，仅内部审阅。
