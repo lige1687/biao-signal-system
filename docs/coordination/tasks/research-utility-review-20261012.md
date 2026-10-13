@@ -1,3 +1,15 @@
+# 双均线保存账户的决策差额诊断交付
+
+- task-id research-utility-review-20261012；owner root；status completed（本轮有界旧账描述）；scope_released true；updated_at 2026-10-13T20:44:23.898433+08:00；checked_coordination_sha 8b043a5e5439baa8f659da85bd7ca0c4249c132a；checked_at 2026-10-13T20:44:23.898433+08:00。本轮已读COORDINATION、自身、technical-factor-sequence、中控、classic-factor-research、dual-ma-video-copy-20261009、investor-workspace-simplification-20261012；交付复核增量只treasury-yield-video-20261013的视频/Skill范围，与本报告无冲突。
+- 用户授权双均线沿操作增量方向探索。交付docs/experiments/dual-ma-decision-increment-2026-10-13.md、同名raw小协议/脚本/复核/位置及Web回执、原work-progress和registry/INDEX仅新增项。报告SHA256 becf5c846306df339839862630852dd33e1daaeb2557c2e47c3cb813a5f6a08f。工作分支codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be；本轮源码/文档仅本地未提交，不声称远端可复现，远端本次仅协调摘要。
+- 旧132账户复用；108账户日账、72对/1642自然日、1085声明交易日、9756重复维度行动行有界诊断完成。主控独核全72期末/费用/次数及3关键状态组一致；224源及日历前后hash一致；6合成检查通过。唯一保存资料核心批次1/1退出0，3秒；市场回测/拟合/新行情0，实际token费用未知。没有重开原已封存实验。
+- 结果：双20对简单线5/6多赚、对指数线3/6，无法称通用增强；中证1000双60对简单线+8993.24但目标差仅6天，对指数线+3437.11含直接费用+2775.21，2026H1反-6161.58。金额只是旧资金差解释，非因果、独立预测信息、完整原系统或生产采用。四个等于边界的旧账户未修复，未知/缺价和全部反例保留。
+- 外盘固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，结果/日志目录 /Volumes/win+mac通用/LeiSignal-新实验结果/research-utility-dual-ma-20261013/research-utility-dual-ma-20261013-20261013T201543-205d2caa0dea；约1.13MB，准确来源/产物指纹见本机result-location与外盘manifest。原manifest含._*说明文件，另有有效产物索引排除，原件未删改。
+- 真实5188报告成绩/增量/边界及刷新可见，API正文逐字一致；主仓665旧登记保持，仅增本条；归置/diff通过。原目标只note：okr-ff1e0a86fbac136→137、okr-6d9177bc89ff15→16逐字段读回，状态/授权/里程碑不变；用户验收待确认，不代行。
+- 分工Sol/medium字段与实现，Astra/high方法，root冻结/唯一真实执行/独核/写报告；Sol报告定向核对通过。范围释放只限本轮自身文档/增量登记，无共享源码/策略/服务改动。没有运行中的研究；本轮问题已回答，后续若做修正账户或真正未见资料验证须按原候选和新问题冻结，不借此扫描新参数。
+
+---
+
 # 双均线继续：第二条线改变了哪些参与决定
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；updated_at 2026-10-13T20:12:37.584920+08:00；checked_coordination_sha 7716890a101bad125570851b8966b6299ded297d；checked_at 2026-10-13T20:12:37.584920+08:00。已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、classic-factor-research、dual-ma-video-copy-20261009及最新investor-workspace-simplification-20261012和treasury-yield-video-20261013；现有均线132账户封存，技术owner保留原策略/共享研究入口，本轮只对旧保存证据做有界新诊断，无重复执行或同文件写者。
