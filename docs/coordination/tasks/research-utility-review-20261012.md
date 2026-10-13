@@ -1,3 +1,15 @@
+# 策略证据与专业设计已交付，完整A效果仍缺输入
+
+- task-id research-utility-review-20261012；owner root；status blocked（完整原文A市场效果）；本阶段证据重核/研究设计 completed；scope_released true（仅释放本轮文档/核验写范围，不改变原技术owner）；updated_at 2026-10-13T11:58:03.648489+08:00；checked_coordination_sha 7b643acf40fb9df21f3298978921edd7dfa832a2；checked_at 2026-10-13T11:58:03.648489+08:00。已读COORDINATION、自身、technical-factor-sequence、中控及本轮最新investor-workspace-simplification-20261012后台调度修复/一次冷启动、portfolio-trends-20261013独立Web、treasury-yield-video-20261013结案范围；无本轮报告/单登记项冲突，不碰共享源码/服务或他人任务。
+- 用户补充“专业的因子研究这一块还需要你多费心探讨，我基本是黑盒”。主控承担方法、对照、组合与可信度判断；仅原策略含义、新付费/权限、未定义的共用资金政策需具体人类决定。
+- 交付 docs/experiments/strategy-scenarios-attribution-2026-10-13.md；同名raw的brief、3份只读合同、source-manifest、reconcile_saved.py/existing-results、controller-review、publication/goal-note/validation回执；docs/research/proposals/research-utility-strategy-evidence-20261013/README.md；原work-progress。源码基线70ab55556874228d2cba66cf50f96d0318e1a5be，新增文档仅本地未提交/推送，不声称远端可复现；本轮远端只本协调摘要。
+- root独核95旧价格事件（39/95上涨；35/76与4/19；同ETF×周期9组56覆盖差21.4658点，可靠性不足）及35旧日线代理闭仓（4盈31亏，6账户盈亏和成交日期/零份额一致），72账户摘录与3原源hash/关键字段一致。上涨比例、闭仓胜率、完整原文A分开；原文资格19不合/16未知/0完整保持。创业等确认改善仍不及简单少投入；不给因子独立分收益，不相乘条件概率。
+- 现查指定本机仓库输入/10月6日清单/正式源码，未见六ETF连续真实60m和正式H；完整A还缺机会/目标/执行绑定。不是全机或供应商不存在。当前没有新市场批次运行；恢复沿原technical-factor-sequence/hourly的data-request，已有授权输入资格及完整语义满足后由原owner冻结新单问题比较，不能重开封存35/48或旧预算。其余必要证据/设计工作已交付。
+- 验收：真实5188/library准确报告、两种数字、源报告链接及刷新通过，API正文与本地逐字一致；主仓664旧登记逐值保持，只新增本报告，INDEX仅一条；归置与diff通过。旧报告31闭4开冲突、助手中证1000口述6纠为原7、登记表列表误读、初次API404/相对Web链接错误保留并解释/修正，无删失败。
+- 原目标仅note已读回：okr-ff1e0a86fbac135→136、K-baseline11→12，均in_progress；负责人/授权/里程碑/下一步保持。未代用户验收整个策略或关闭目标。两个Sol/medium只读来源/输入、Astra/high关键方法审阅；最终Sol定向报告复核无阻碍，root独算；0新拟合/回测/行情下载/真实记录，token费用未知。
+
+---
+
 # 转向策略场景、组合与条件贡献的证据整理
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；updated_at 2026-10-13T11:36:15.980306+08:00；checked_coordination_sha 29ac2511b4010dc382dadc2b9fcd484a42a7371d；checked_at 2026-10-13T11:36:55.937090+08:00。已读COORDINATION、本任务、technical-factor-sequence最新8ETF结案与完整策略C/小时输入阻塞、research-dispatch-controller，以及推送被拒后新增investor-workspace-simplification-20261012只读冷启动诊断、portfolio-trends-20261013独立Web展示、treasury-yield-video-20261013视频范围；不接管原技术owner/共享研究入口，不重跑封存35机会/48账户/144拟合。根仓脏状态保留。
