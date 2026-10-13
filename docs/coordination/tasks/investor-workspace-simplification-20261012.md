@@ -1,3 +1,11 @@
+# 候选独核通过，进入一次真实冷启动验收 2026-10-13T11:51:45.362745+08:00
+
+候选4准确源/测试路径完成：实际分析上限1、单只优先、互动批量其次、后台最后；保留旧缓存秒回/TTL/手动强刷/异常释放。根审发现并修正3边界：使用实际分析开始时点（不拿完成时刻冒充新资料）、后台复用绑定具体成功且未过期条目、驱逐/替换时释放前台memo旧引用。31项服务/预热由Sol通过；根用主仓真实运行依赖显式覆盖候选两模块，53项包括完整本隔离endpoint检查通过。原隔离缺write_tx导致的9失败及旧归置误报保留，未通过删除测试凑通过；主仓现行归置通过。_run_unlimited/_is_fresh/_provider_for逐字不变，SQL/策略文档不改。
+
+接下来root核两共享源与开始记录的指纹一致，保存小备份，精确替换services/preheat；不改其他源/模型/数据库/前端。只一次现有launchd重载，立即在真实5188当前000300页面读图，记录点击至图表、选中产品与资料日期、背景全29完成及新错误；最坏等待当前正在分析的一只仍可能较长。既有400秒全批和40/55秒超时是观测对照，不据此算受控倍数。若源漂移/真实错误需先定位，无原样连续重启。用户原目标仅最终追加note，其他条目保持。
+
+---
+
 # 调度修复实现合同 2026-10-13T11:39:09.250466+08:00
 
 已核主仓/隔离services与preheat逐字一致；当前热态510300仍15秒超时，000300 6.396秒，原基线回执cold-load-baseline-20261013.json。只读两Sol诊断一致：后台先持标的锁再等全局门，单只详情不能提高已排队同产品的优先权；此前SQL批量候选不等价，不采用。
@@ -248,13 +256,15 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "d9c2d21909ef58f28c1876f11b485ed4c9fd2e2c",
-  "checked_at": "2026-10-13T11:39:09.250466+08:00",
+  "checked_coordination_sha": "5108e8ed0eac43b2ef1394a57f51be7c2c6bee9b",
+  "checked_at": "2026-10-13T11:51:45.362745+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
     "daily-trading-system-audit",
-    "research-dispatch-controller"
+    "research-dispatch-controller",
+    "portfolio-trends-20261013",
+    "treasury-yield-video-20261013"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
@@ -271,8 +281,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "scope_released": false,
   "local_result_commit": "52b5083e870f2fb4a240d349b9346f7d022be239",
   "remote_result_commit": null,
-  "updated_at": "2026-10-13T11:39:09.250466+08:00",
-  "conflict_decision": "Readonly diagnoses confirm per-symbol lock acquired before global gate causes cold detail queue; SQL batch earlier semantic failure preserved. Factor scopes released; no overlapping active writer. Sole Sol implementation in own tree services/preheat/tests; root only docs, independent checks and exact apply/reload. No database/strategy changes."
+  "updated_at": "2026-10-13T11:51:45.362745+08:00",
+  "conflict_decision": "Latest added portfolio-trends only isolated Web and treasury media; read current top sections, no backend source or service overlap. Sole Sol stopped writing, root owns exact two-source apply and one managed reload. Existing factor task released, its source untouched."
 }
 ```
 <!-- lei-coordination-json:end -->
