@@ -1,3 +1,16 @@
+# 本轮看盘恢复与加载提示修复完成 2026-10-13T10:47:51.501408+08:00
+
+- checked_coordination_sha c6e3dc7b1755bc18bbebc85df11f69219805d6a6；已读本任务、research-utility-review-20261012最新活动范围及原中控边界；本轮来源只有自己的2处加载key和记录，因子owner消费者改动未暂存。用户整体目标仍进行中。
+- 本地源码/10路径证据75b70da3a9c5ebece3d3c6623fbe1ba5f58e9e01，交接记录52b5083e870f2fb4a240d349b9346f7d022be239，原codex分支；未推源码/未合main。效果见5188看盘，用户原持仓页保持。
+- 8000原70413与launchd重复启动冲突消除，恢复12989唯一管理、29标的447.2秒完成，观察新端口冲突0。5188原预览无监听已恢复15320。两详情首次各40秒超时保留；准备后200/0.627及0.942秒。
+- 真实页面发现加载后残留两提示，React日志确认同级重复key；WorkspacePage/DetailPage只给DetailLoadState key独立前缀。ETF加载、切换沪深300、按当前对象打开Agent草稿、独立详情都通过；加载提示0、因子入口1，无新重复key。类型和现行归置通过，截图仅本机。
+- 因子owner请求的完整8文件交付逐项核指纹后受管重载；迟到修正通知导致必要第二次加载，原顺序保留。最终17540唯一监听、runs3（1恢复+2代码加载），完整预热364.4秒，末次两详情200/5.523及1.063秒；最终浏览器刷新图表通过，新冲突/ERROR均0。两次55秒冷态失败保留，不称首次加载性能解决。
+- 原目标okr-4c2ea452d3cc仅note v19→20且API读回，负责人/状态/里程碑/授权/下一步保持。账户2026-09-04/原计划与自身技术资料仍缺，真实计划成交0，新增模型答案0，新研究0，未修改规则/数据库/仓外plist。
+- 证据原任务目录backend-instance-recovery-20261013.md、两个运行JSON、端点JSON、chart-loading-acceptance-20261013.json、goal-runtime-receipt-20261013.json；进度docs/ops/work-progress/investor-workspace-simplification-20261012.md。Sol/medium仅只读诊断，root操作/验收/登记；费用未知。
+- 本root释放本轮范围及服务操作。因子owner仍在其原用户任务修正产品问答入口，后续必要受管重载由该原任务自行串行核对，不另起手工实例；这只是运行操作交接，不向其新增任务。本记录不冒称原因子功能已验收。冷启动6–7.5分钟仍是明确剩余性能问题，已通过项不重验。
+
+---
+
 # 因子owner完成接入后的串行重载 2026-10-13T10:36:39.496289+08:00
 
 12989的完整预热447.2秒、唯一监听、无新端口冲突和两个详情200已验收；页面两处key修复通过类型及实际加载/切换检查。因子owner已完成其原有用户任务的8文件接入，请求本root统一重载。先对其deployed-backend-fingerprints.json逐项复核，再只执行一次受管重载，读回新PID/health；新因子产品答案由原因子owner验收，不重复指派工作。
@@ -207,9 +220,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "ecbe9f4b5cfab50a16d9d4962c9896e52610f0c1",
-  "checked_at": "2026-10-13T10:36:39.496289+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "c6e3dc7b1755bc18bbebc85df11f69219805d6a6",
+  "checked_at": "2026-10-13T10:47:51.501408+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -232,11 +245,11 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/src/pages/WorkspacePage.tsx (only unique loading/factor sibling keys)",
     "web/src/pages/DetailPage.tsx (same sibling key repair)"
   ],
-  "scope_released": false,
-  "local_result_commit": "56fe0efbc0cabbb4d833aed7dc577ce6673bb147",
+  "scope_released": true,
+  "local_result_commit": "52b5083e870f2fb4a240d349b9346f7d022be239",
   "remote_result_commit": null,
-  "updated_at": "2026-10-13T10:36:39.496289+08:00",
-  "conflict_decision": "Own chart keys fixed; factor owner reports complete 8-file backend deployment and 35 related tests, requests existing managed service reload only. Root verifies exact fingerprint receipt, completes current 12989 full-preheat acceptance, then one launchctl kickstart with health/unique listener readback. No source overlap or new tasks assigned."
+  "updated_at": "2026-10-13T10:47:51.501408+08:00",
+  "conflict_decision": "Bounded runtime/key repair complete; latest coordinated factor scope read and kept. Release own exact source and managed service operation scope. Factor owner may continue necessary managed reload for its existing task; use sole launchd job, no standalone Uvicorn. Its ongoing product question fix is not declared accepted by this task; no new assignment."
 }
 ```
 <!-- lei-coordination-json:end -->
