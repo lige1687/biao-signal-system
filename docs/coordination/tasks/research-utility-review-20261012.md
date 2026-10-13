@@ -1,3 +1,14 @@
+# 转向策略场景、组合与条件贡献的证据整理
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；updated_at 2026-10-13T11:36:15.980306+08:00；checked_coordination_sha 29ac2511b4010dc382dadc2b9fcd484a42a7371d；checked_at 2026-10-13T11:36:15.980306+08:00。已读COORDINATION、本任务、technical-factor-sequence最新8ETF结案与完整策略C/小时输入阻塞、research-dispatch-controller、investor-workspace-simplification-20261012释放；不接管原技术owner/共享研究入口，不重跑封存35机会/48账户/144拟合。根仓脏状态保留。
+- 用户本轮明确“给我们的平时操作依据提供一个可量化的数据和结果，核心围绕我们的策略，先把策略做好，各种场景胜率、组合、每因子归因都整一下”。目标：按原文策略层次组织可复核的场景成绩、条件共同出现的结果及相对原方法的贡献；避免将未来20日上涨比例冒充完整扣费交易胜率，避免把条件概率相乘。
+- 本阶段先复用原主战场A次序，并覆盖A/B/C/D资料完备状态；保持情绪/宽度/宏观及账户配置既有边界。读取两权威源/实现/现行标准，依原文最高来源区分完整版与既有简化版。0改规则/源码/生产/真实记录；不默认改任何待定语义、取新行情或扩大旧实验预算。
+- 基线本地codex/factor-evidence-integration-20261012@70ab55556874228d2cba66cf50f96d0318e1a5be，复用隔离树。写范围仅docs/experiments/strategy-scenarios-attribution-2026-10-13.md及同名raw小合同/来源核对/结果表、docs/research/proposals/research-utility-strategy-evidence-20261013/、本任务原work-progress、registry/INDEX本报告新条目、原目标证据note、本协调文件。新大结果先走已核外盘路由，当前仅小记录。旧原报告/raw/其他owner记录只读。
+- 分工：Sol只读核保存的主战场A/各模块成绩和条件表；另一Sol只读核本机是否新增合格历史小时输入与正式执行入口；Astra仅原文语义/胜率与归因设计关键歧义独立审阅。每人write_paths=[]、network_allowed=false、max_agents=1，不派下级；root写唯一交付与必要核数。契约先保存后派发。token费未知。
+- 验收：原策略场景与原文位置、确切对象/版本与已实现差异；保存输出直接核基准/候选/差额/次数及不能归因处；上涨比例与闭仓扣费胜率分开；共同条件不乘概率，缺条件/样本/时间明确；已有小时/源码资格现查，不复述旧阻塞当永久事实。若新市场研究确有必要且资格可满足，先单独补冻结合同/预算与范围再执行；资料或定义缺失只阻塞相应效果。不能以文档或计划冒充全策略完成。
+
+---
+
 # 三产品真实因子问答与简卡有界验收完成
 
 - task-id research-utility-review-20261012；owner root；status completed（本轮产品接入与可读性工程）；scope_released true；updated_at 2026-10-13T11:06:50.541004+08:00；checked_coordination_sha 800c73d6c93dfcc85999795576316386549a9067；checked_at 2026-10-13T11:06:50.541004+08:00。已读COORDINATION、本任务、investor-workspace-simplification-20261012最终释放记录、research-dispatch-controller；无新增重叠写者，仅维护自身记录。全部当前登记范围及必要服务操作释放，不给其他任务新增授权。
