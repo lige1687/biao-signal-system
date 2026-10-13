@@ -1,3 +1,11 @@
+# 历史观察核对通过，进入产品短答部署与Web验收
+
+- task-id research-utility-review-20261012；status active；scope_released false；checked_coordination_sha ec36483f2241e7602088846aa899b42baf516475；checked_at 2026-10-13T10:31:50.961107+08:00。已读自身、investor-workspace-simplification-20261012本轮后台修复、research-dispatch-controller未变范围；仅运行管理并行，无准确源冲突。8000重载由原owner串行，本任务不启动备用实例。
+- 两个真实包已独立核数，科创588000历史波动4.5858%、创业159915历史动量98.9691%，0新训练下载；主仓仅先放只读依赖，旧factor配置尚未替换。原观察12项通过，产品/展示继续必要测试。首次测试因新包尚未放到依赖路径失败，路径就位后通过；未弱化科学边界。
+- 写前7源与登记基线逐一相符。实际5188前端含原owner会话范围修复，采用实际预览基线，不以主仓旧web覆盖。保持本轮原范围；接下来精确同步卡片与产品读取，必要重载待原owner当前预热验收后协调。
+
+---
+
 # 创业板、科创50与QDII真实询问和简明因子卡
 
 - task-id research-utility-review-20261012；status active；scope_released false；owner root；checked_coordination_sha 6d353929f4f5c42eb7576e1a13350bfa2cffe586；checked_at 2026-10-13T10:21:30.272743+08:00。已读COORDINATION、本任务、investor-workspace-simplification-20261012（范围已释放）、research-dispatch-controller及原因子范围；最新增量仅独立视频，无同路径活动写者。
