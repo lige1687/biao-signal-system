@@ -1,3 +1,13 @@
+# 机会审核实现范围 2026-10-15T00:39:46.405930+08:00
+
+- 同一 owner/task active；checked_coordination_sha=93c21cb958ee362398097d14f4899cfc72ab24c9；checked_at=2026-10-15T00:39:46.405930+08:00；相关已读 task 与冲突决定保持，最新无其他范围变更。用户确认页面打开自动审核/资料未变复用；14:30数量含义仍待回复，定时创建暂不执行。
+- 只读核对发现现有自选卖信号未绑定真实持仓、个人判断只要求反对文字而无逐条反证查找。新增独立证据/审核层，不改判定或因子。合同与共享JSON接口在原 archive 的 opportunity-review-interface/evidence-implementation/service-implementation-20261015.json。
+- Sol A 唯一写主仓新 api/opportunity_evidence.py 和 tests/unit/test_opportunity_evidence.py；Sol B 唯一写主仓新 copilot/opportunity_review.py、api/routes/opportunity_reviews.py、tests/unit/test_opportunity_review_service.py。两者各只用临时库/假模型，无私有库/网络/进程操作。root独核并精确复制新文件到自己隔离树。
+- root唯一写两树 api/app.py 仅导入/注册新 router；两树原本人 api/routes/decisions.py、tests/unit/test_decision_journal.py 仅机会引用桥接/反证参考；隔离新 web/src/api/opportunityReviews.ts、pages/OpportunitiesPage.tsx、pages/opportunities.css，既有 App.tsx/TodayPage.tsx/DecisionsPage.tsx/api/decisions.ts 仅入口与准确引用。原 work-progress/archive；有新有界方案结论则复用上一主线实践报告追加本轮工程补注与原registry说明，不新增收益实验。共享 agent.py/LLM/因子/规则文件只读。他人脏区保留。
+- 页面先显示规则原结果与逐条来源；Agent自动选择关键支持/反对证据，引用只准使用现有编号，不能改写条件或生成数值；未核实资讯单列线索。逐卡材料指纹缓存、变化失效、并发不重算、失败留档；只在用户采纳后进入原个人判断/确认。一次原受管后台必要重载和本机真实界面/公开产品验收由root负责，真实计划/成交不写。
+
+---
+
 # 机会自动审核与反证核对：接续 2026-10-15T00:34:12.120889+08:00
 
 - 同一 task-id/owner，status active，scope_released=false；checked_coordination_sha=734fb7637aee0de4109321851d7d206d6461190b；checked_at=2026-10-15T00:34:12.120889+08:00。已读 COORDINATION1.1、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller；远端无新差异，无新增相关写者。
