@@ -1,3 +1,14 @@
+# 范围增量：缺失趋势与宏观缓存（当前）
+
+- status: active; updated_at: 2026-10-14T19:04:43.141373+08:00; checked_coordination_sha: 1d0c3790e03836273cdd236381023eb644102382; checked_at: 2026-10-14T19:04:43.141373+08:00
+- 已读portfolio-trends-20261013及上次以来实际变化任务（命令回执）；原已读清单沿用。新增只触本任务隔离树，不覆盖共享后台；其他owner源码避让。
+- 用户已授权补齐缺失指标。新增精确写范围：src/lei_signal/fundamentals/reading.py、src/lei_signal/api/routes/fundamentals.py中仅reading-history路由、src/lei_signal/fundamentals/service.py中仅macro_history缓存键、tests/unit/test_fundamentals_reading.py、web/vite.config.ts中独立预览代理、web/src/api/client.ts新增只读方法、web/src/components/fundamentals/既定组件。
+- 根因证据：macro_history缓存键macro_hist:metric未含page_size，先请求3条会污染60条请求。修复只加缓存维度，不改历史数据/计算规则。
+- Sol data_audit独占新增reading.py与test_fundamentals_reading.py（root负责路由、service小改与前端）。按需公共FRED3条实际利率/VXN/核心PCE及CN3条宏观源；不接付费，不改自动化。预览新只读API独立端口8190，仅挂本接口，其余继续8000；不启动业务调度器，不重启8000。
+- 验收：离线日期/同比/缺失/缓存隔离/失败测试，真实API每条独立来源与所属日，浏览器切换及错误/缺失，构建/归置。盈利预测与COT现阶段仍明确未接数据，不用新闻/PE冒充。
+
+---
+
 # 宏观阅读与 ERP 展示扩展（本轮当前状态）
 
 - task-id: portfolio-trends-20261013; owner: 01a1334f-1167-7752-8041-e22a5dc2213b; status: active; updated_at: 2026-10-14T18:52:17.812042+08:00
