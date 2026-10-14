@@ -1,3 +1,16 @@
+# 今日机会自动审查主线已交付 2026-10-15T01:52:16.960828+08:00
+
+- 本轮有界功能completed、scope_released=true，整体原目标继续in_progress，效果待用户验收。checked_coordination_sha=ae2f513401c1072e8b5a813daef5133270148d91；已读COORDINATION1.1、原相关任务及research-utility-review-20261012最新报告格式整改，后者不改机会/Agent/前端，无新冲突。只有root写本任务。
+- 页面 `/opportunities` 打开自动取准确自选/持仓/既有披露映射的必要行情，展示支持/反对/未知/日期；同资料复用、变化新留档。买入仅接做多候选，盘中待收盘；方法限制归未知；基金行业参考折叠单列。机会→准确产品个人原话审核→用户确认→保留原来源与后续复核已接通。
+- 58相关单测、Ruff、前端TypeScript/Vite、现行归置通过；独立合成浏览器完成生成/复用/变化重审/确认/读回，真实10卡整理完成并同run复用，公开ETF转原Agent完整答复与引用已读回。0真实判断/计划/成交新增。当前23项同产品资料不足，行业参考不算基金退出条件，未证明收益。
+- 实机首次空缓存问题已补精确准备状态/单飞/时点核对；一次模型跨产品证据引用被程序拒绝留档；做空镜像/方法限制分类缺陷已修回归。冷启动耗数分钟、原Agent约83秒及偏长旧术语仍记录为限制，不冒称性能或全部表达已修。
+- 用户明确每天14:30一份、数量按实际：原生heartbeat `leisignal` 新创建并view/TOML读回ACTIVE，仅当前线程调用机会生成API；旧automation-3/4/5/6仍PAUSED。首个定时执行尚未到时，需本机及服务可用，无自动下单、代确认、外部派发。
+- 原目标okr-4c2ea452d3cc只追加note v25→26读回，原负责人/授权/完成标准/历史保持。证据在本地隔离树原archive的opportunity-review-acceptance/delivery/public-agent-acceptance/synthetic-acceptance/automation-receipt/goal-receipt/failures-and-limits，work-progress已更新。
+- 分支codex/investor-workspace-simplification-20261012基线e6c4c2e025252c565ba15f05611561ca1ecd5b48；本轮16源码/测试指纹已存，8后端/测试与运行主仓相同。源码仅本地未提交/未推/未合主分支，远端不可独立复现。5188隔离前端与8000受管后端健康，临时6016停止，实际机会页留作交付。Sol/medium实现与独审均已完成，费用未知；未派任务给用户的因子研究对话。
+- 下一步：用户从机会卡提出真实想法并验收体验；接续只补具体主线缺口，首个计划生成另留运行回执，不重开封存研究或扩大交易授权。
+
+---
+
 # 实机冷缓存必要补齐 2026-10-15T01:26:52.848042+08:00
 
 - checked_coordination_sha=a18161b9ab3ebe2bed197800580d694a8e19b492；原任务范围无冲突。实际重载后缓存为空，34卡全unknown；已保存事实，不以此冒称机会审查有用。新增准确准备状态与本轮所需行情采集，写原opportunity_reviews.py及新tests/unit/test_opportunity_preparation.py，由Sol唯一实现；root集成前端准备状态及验证。
@@ -423,9 +436,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "a18161b9ab3ebe2bed197800580d694a8e19b492",
-  "checked_at": "2026-10-15T01:26:52.848042+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "ae2f513401c1072e8b5a813daef5133270148d91",
+  "checked_at": "2026-10-15T01:52:16.960828+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -456,12 +469,19 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
     "tests/unit/test_opportunity_preparation.py"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T01:26:52.848042+08:00",
-  "conflict_decision": "已读因子审查最新范围，仅其研究报告，无机会工程重叠。root唯一整合验收和日程写者；用户确认每天北京时间14:30一份、数量按实际机会。旧暂停通知不恢复。",
-  "source_state": "local_uncommitted_no_main_merge_no_source_push"
+  "updated_at": "2026-10-15T01:52:16.960828+08:00",
+  "conflict_decision": "已读最新因子流程整改仅其research/workflow.py报告展示与研究文件，无机会源码重叠；本轮有界主线完成，root唯一归档、目标note及协调写者，用户体验待验收。",
+  "source_state": "local_uncommitted_no_main_merge_no_source_push",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-review-acceptance.json",
+  "automation": {
+    "id": "leisignal",
+    "status": "ACTIVE",
+    "schedule": "每天北京时间14:30",
+    "first_scheduled_run_verified": false
+  }
 }
 ```
 <!-- lei-coordination-json:end -->
