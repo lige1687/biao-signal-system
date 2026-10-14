@@ -1,3 +1,17 @@
+# 宏观阅读与ERP预览已核验，待用户视觉验收
+
+- task-id: portfolio-trends-20261013; owner: 01a1334f-1167-7752-8041-e22a5dc2213b; status: review; scope_released: true; updated_at: 2026-10-14T19:27:08.251973+08:00; checked_coordination_sha: f45070be66bd9161196a4e2007e205169a94a81e; checked_at: 2026-10-14T19:27:08.251973+08:00
+- 已读COORDINATION1.1、自身、investor-workspace-simplification-20261012、investor-observation-map、research-dispatch-controller及最新变化research-utility-review-20261012（限定自己的报告/raw、单项登记，已释放）；原已读清单沿用。无共享文件冲突，未覆盖他人改动。
+- 用户授权语雀宏观读法、ERP优先及指标展现改善；AI CapEx仅按需新闻。已落地12阅读目录，ERP先图后数/同日期两端分解/历史位置/反例/来源；宏观教学四情景不判当前周期。6历史序列真实可取，新增调查周图明确缺周与过期。
+- 本轮增量精确范围沿用后文已登记的web/components/fundamentals、父页、client/vite、reading.py、reading-history路由、macro_history缓存键、单元测试及自有报告。client额外修复newsApi的from/to→date_from/date_to参数映射，组件北京时间再过滤；原近30日混入9月3日旧文，修复后0条如实。未改news后台。
+- 验收：794模块构建、10pytest、前端算术及新闻日期边界、6真实GET、422/405异常输入、12目录/中美/期间/情景/新闻浏览器、390px无溢出；标准主仓归置及隔离树目录检查通过。无error日志；原大包和共享ECharts卸载warning记录，未改他人共享图表，不声称主动断网流程已测。
+- 本地成果：仓内.codex/worktrees/portfolio-trends-20261013，分支codex/portfolio-trends-20261013，基础52b5083e；源码未提交未推送。预览5190+独立只读8190运行中，无调度器/自动通知。8000/5188源码与进程未改。远端只有协调摘要，不可称远端有本轮源码。
+- 报告docs/experiments/fundamentals-reading-ARCHIVE-2026-10-14.md、自有work-progress/API收据及本轮reading-20261014.patch/manifest；隔离registry668→669原项不变，INDEX增本报告。8000报告库未同步。图片仅本机.codex/portfolio-trends-qa/erp-reading-20261014.png、erp-mobile-20261014.png。原目标okr-a4fed76c71c3仅note版本13→14，状态不变且读回成功。
+- 仍缺期限结构、OI/COT、社融M1M2/新订单、同年度盈利预期连续数据，只提供读法/来源；不声称全部指标补齐，不改技术信号、仓位或交易，不做收益实验。用户视觉验收、仓外现用5188写入确认尚待；新数据接入要保持原口径与来源时间，未自动扩项。
+- root集成/验收；Sol中等做独立数据/新闻/调查，Astra高做ERP方法复核；独审两个P2已修。实际token/费用未知。
+
+---
+
 # 范围增量：缺失趋势与宏观缓存（当前）
 
 - status: active; updated_at: 2026-10-14T19:04:43.141373+08:00; checked_coordination_sha: 1d0c3790e03836273cdd236381023eb644102382; checked_at: 2026-10-14T19:04:43.141373+08:00
