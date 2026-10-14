@@ -1,3 +1,14 @@
+# 原双均线条件效力接续：过程、确认代价、组合与市场分组
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；updated_at 2026-10-14T18:11:29.011489+08:00；checked_coordination_sha 8437b428d27b2f20f740deea2556cac990f24cdb；checked_at 2026-10-14T18:11:29.011489+08:00。已读自身、technical-factor-sequence、classic-factor-research、research-dispatch-controller、theory-workflow-system-increment及lei-technical-reader-research、sentiment-factor-research有关状态。根规则沿用COORDINATION1.1；不接管原技术owner及市场/情绪入口。
+- 用户明确“按思路完成接下来的任务，要符合规范研究流程，值得借鉴拆开看，市场牛熊、3点建议，找到有效因子落实策略”。本轮采用research-closure/controller-led，围绕原同周期SMA+EMA的过程、确认代价、组合贡献；市场仅用当时可知的现有价格状态分组，未知保留，不增加硬过滤。原文、生产及真实交易不改。
+- 首段只做必要查重/资料/方法审核，找出可以执行的准确新问题；旧双均线132账户、D1共振、PPO及已封存等待/次序研究不改名重跑。当前共享研究入口、定义登记只读，若确需源码增量先另记准确路径并审重叠。完整A输入缺口按真实文件核，不当永久事实。
+- 根仓基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；复用codex/factor-evidence-integration-20261012隔离树，旧基线70ab55556874228d2cba66cf50f96d0318e1a5be。当前可写仅新 docs/experiments/trend-confirmation-conditional-2026-10-14.md、同名raw/contracts与各自产物、新同名proposal、本任务work-progress/目标note/协调；registry/INDEX仅本报告一项。源文件原路径只读，研究大输出依已核UUID外盘新目录，不回退内盘。
+- 并行两项独立低成本审核：Sol/medium查已有研究/输入/冻结预算；Astra/high核原策略含义与规范实验边界。每人明确一份新raw报告，network_allowed=false、max_agents=1、one_writer=true，不拟合/回测/取数/改共享文件。root读回关键事实并冻结唯一执行合同。全阶段共享有界预算，最多1核心+3有目的后续科学批次；实际对象/参数/模型组合在运行前登记，旧家族预算不重置；来源请求最多6、付费0，总时间约束沿真实额度，无另造强制结束点。
+- 终点：交付因子成绩/相对已有信息的增量、牛熊分组可比较性、确认代价和组合贡献的已测/受阻事实；必要可执行检验当轮完成。资料/语义真正阻塞只停相关分支，不把计划、助手回报或检查通过当作因子有效。
+
+---
+
 # 趋势交易增量资料研究已交付（2026-10-14）
 
 - task-id research-utility-review-20261012；owner root；status completed（限定资料研究）；scope_released true；updated_at 2026-10-14T17:14:40.451752+08:00；checked_coordination_sha 509358e456d4bfaec140438b337f3e338eed37cd；checked_at 2026-10-14T17:14:40.451752+08:00。已读COORDINATION、自身、technical-factor-sequence、classic-factor-research、research-dispatch-controller、treasury-yield-video-20261013及开工前新增ai-sycophancy-video-20261012发布记录；交付fetch与开工无新范围变化，独立文档无冲突。
