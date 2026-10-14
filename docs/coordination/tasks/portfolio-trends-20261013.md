@@ -1,3 +1,16 @@
+# ERP来源核查与DeepSeek固定试读已交付，待阅读效果验收
+
+- task-id portfolio-trends-20261013；owner 01a1334f-1167-7752-8041-e22a5dc2213b；status review；scope_released true；checked_coordination_sha dd3a1f52137efb5108937b69eb17e959e86939d8；checked_at/updated_at 2026-10-14T19:53:32.179447+08:00。已读COORDINATION1.1、自身、research-dispatch-controller、research-utility-review-20261012及investor-workspace-simplification-20261012最新持仓行业范围补充；后者仅持仓/行业与独立后台，无ERP文件冲突。
+- 用户追加阈值权威依据与“用DS先实验ERP”的授权已完成限定试验。Fed/NYU/AQR公式/用途不同，未找到本页算法通用风险机会线；不添加固定阈值，旧US阴性归档复用不重跑。
+- 实际DeepSeek端点返回deepseek-v4-pro[1m]：首次6000输出额度无正文；第二次仅本请求关闭推理产生正文，累计服务报告9669 tokens，费用未知。CN位置读反、US三年持续为负等错误被独立核出，原稿保留，页面明确核对修订。未发账户资料、不改全局模型/密钥。
+- 5190 ERP页图表后短卡：当前位置、变化原因、后续事实；原长说明折叠。仅中美近3年固定样本，无自动生成。市场/窗口/完整配对历史/快照绑定，更新隐藏旧稿；浏览器真实CN快照更新已触发，历史逐值未变后绑定核对版。
+- 验收：796模块构建、计算/日期/样本失效边界、真实中美/期间/来源展开、390与1280无横溢、console error 0；主仓标准归置及隔离目录层检查通过。已有大包warning保留。首模型失败、原文事实错、一次追加测试路径错误及首次页面等待超时均记档，不冒称全链自动核稿。
+- 成果只在仓内.codex/worktrees/portfolio-trends-20261013、codex/portfolio-trends-20261013，本轮代码未提交/推送。5前端文件及报告/raw/自身进度；报告docs/experiments/erp-threshold-ai-reading-2026-10-14.md，registry669→670旧项保持，INDEX已记，acceptance.json含精确SHA。原目标仅note14→15，status仍awaiting_approval读回。
+- 预览http://127.0.0.1:5190/fundamentals?topic=erp；图片本机.codex/portfolio-trends-qa/erp-ai-reading-20261014.png及mobile。8000/5188源码本任务未改，无交易/信号/自动通知/新收益实验。用户阅读视觉待验收；未接重新生成或其他指标推广，不冒称收益改善。
+- root唯一写入/源核验/修订，Sol中等独立只读数据核查。无剩余后台模型调用。后续根据用户试读再决定生成入口与扩展范围。
+
+---
+
 # ERP 阈值核查与 DeepSeek 阅读试验（当前）
 
 - task-id: portfolio-trends-20261013; owner: 01a1334f-1167-7752-8041-e22a5dc2213b; status: active; scope_released: false; checked_coordination_sha: 70c959c7e9a63c0aeaa6e1491fcf8246640f7bbe; checked_at/updated_at: 2026-10-14T19:38:42.368487+08:00
