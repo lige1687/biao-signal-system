@@ -1,3 +1,13 @@
+# 判断主线实现范围 2026-10-14T22:25:06.334966+08:00
+
+- 原task/owner继续active，checked_coordination_sha=4169d846f384e29b2aacfd745d300aefdf1e9898，checked_at=2026-10-14T22:25:06.334966+08:00；已读task与冲突决定保持，末次fetch无新差异。原两策略实际指纹匹配，服务执行/记录/解释层，不改交易规则。
+- 只读核对已完成：agent_sessions/messages/requests有准确原话、问题、回答和材料快照；trade_plans完整五项预案不能代装一句判断。最小新增认知判断确认与后续复核，仍复用原Agent问答；原计划/交易账本不改。用户再次要求后续只围绕主线补缺能力并持续做。
+- 唯一后台实现者Sol/medium写主仓新src/lei_signal/copilot/decision_journal.py、新api/routes/decisions.py、新tests/unit/test_decision_journal.py；root审阅后同步三新文件到自己隔离树并接入。冻结合同decision-mainline-backend-implementation-20261014.json含API/身份/日期/确认与幂等验收；执行者不联网/不读写真实库/不操作进程。
+- root唯一写：主仓和隔离src/lei_signal/api/app.py仅导入/注册新router；隔离新web/src/pages/DecisionsPage.tsx、decisions.css、web/src/api/decisions.ts；现有web/src/App.tsx、pages/TodayPage.tsx、pages/WorkspacePage.tsx、components/today/TodayActions.tsx、components/portfolio/PortfolioToday.tsx仅新增准确对象入口；必要新web/scripts/test_decision_mainline.mjs。自身archive decision-mainline-*及原work-progress。其他因子/Agent/ERP文件只读，原私有账本不存演练记录。
+- 主线首版：选择持仓/自选并写原话→既有Agent据证审核→显示完整确认卡，用户确认后留判断→可重开原话/依据并主动复核变化；页面读回缓存变化，缺/旧/不完整资料明确未知。观察记录不等于交易计划或成交。验收用临时SQLite和合成资料写全流程，公开ETF实际Agent只验审核不确认；真实用户未表达的判断不自动保存。无定时器/额外金融研究，必要接入完成后仅原受管后台重载。
+
+---
+
 # 判断审核与后续监督主线：接续 2026-10-14T22:00:10.271210+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；scope_released=false；checked_coordination_sha=8cfe4e9fa5468baff1473590c09a417d4a6724e7；checked_at=2026-10-14T22:00:10.271210+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、research-utility-review-20261012，以及原daily-trading-system-audit、investor-observation-map、research-dispatch-controller边界。当前ERP和因子原任务释放/限定其他文件，无当前主线重叠；不向其用户对话派任务。
