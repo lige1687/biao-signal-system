@@ -1,3 +1,13 @@
+# 因子流程审查：确认缺口与最小整改范围
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 0238af428c294398b8acbdb5f88fbc9e2bdd66f7；checked_at/updated_at 2026-10-15T01:31:55.653415+08:00。已读COORDINATION1.1、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller，以及最新investor-workspace-simplification-20261012变更；其机会工程与本次研究报告格式无交集。技术/经典任务共享workflow仅各自适配/输入块；本轮只render_report主指标展示，不改分派/预算/评价/公式。
+- 两份独立审查完成（11案例；方法及4项无行情探针），暂无可推翻既有主数字的已验证计算错误。当前账户层在声明/preflight/freeze已拒绝，不重复新增guard。
+- 新增准确写范围：src/lei_signal/research/workflow.py仅render_report的T03主指标前置展示及专用纯格式辅助；tests/unit/test_workflow_report_summary.py；docs/research/proposals/research-utility-strategy-evidence-20261013/README.md（自身原设计，澄清完整A还缺执行绑定，独立信息问题不以全A为前置）。保留原函数数值/科学判断及封存报告，不能把新代码指纹倒填旧合同。先隔离复制当前准确文件并保存基线指纹，Sol唯一源码/测试写者，root独核/同步；root唯一设计、最终报告、registry/INDEX写者。其余范围沿用。
+- 用户最新明确授权把研究背景发网页Gemini4最高思考及可选ChatGPT6Pro深度研究作参考。仅发方法与汇总结果，不含持仓/账户/凭证/原始数据；Gemini已核Argon高点并提交，ChatGPT模式仍在核。该外部参考授权不扩展原生产/交易边界；意见需主控对原文和项目证据独核。
+- 本轮0市场拟合/回测，已见资料只作方法审计及展示验证。原小时资料和完整策略执行缺口保持；不把改格式当成策略增益。
+
+---
+
 # 因子研究有效性与流程纠偏审查 2026-10-15
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 3650d135eb6c94a317aa6772a45c3e29b57b8b54；checked_at/updated_at 2026-10-15T01:16:54.157094+08:00。已读COORDINATION1.1、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller及最新investor-workspace-simplification-20261012/portfolio-trends-20261013。前者正在机会审核工程，本轮不碰Agent/生产/前端源码，后者独立ERP展示；无本轮新报告/raw重叠。
