@@ -1,3 +1,14 @@
+# ERP 阈值核查与 DeepSeek 阅读试验（当前）
+
+- task-id: portfolio-trends-20261013; owner: 01a1334f-1167-7752-8041-e22a5dc2213b; status: active; scope_released: false; checked_coordination_sha: 70c959c7e9a63c0aeaa6e1491fcf8246640f7bbe; checked_at/updated_at: 2026-10-14T19:38:42.368487+08:00
+- 已读COORDINATION1.1、自身、research-dispatch-controller及最新investor-workspace-simplification-20261012、research-utility-review-20261012。前者新范围为5188产品名与持仓分析；本轮只改仓内5190的ERP组件/样式/试验样本，避让PortfolioToday与全部持仓文件，无冲突。
+- 用户要求查ERP风险/机会阈值权威依据，无法界定可以不加；又要求把说明书式读法改成人话，先用DS实验ERP。采用research-closure限定来源核验和表达试验，0新收益实验；两份策略文档指纹已复核不变，仍仅叙事层。
+- 精确写范围：隔离树web/src/components/fundamentals/ErpReadingPanel.tsx、ErpAiReading.tsx及erpAiTrial.json、fundamentals-reading.css、web/scripts/test_fundamentals_reading.mjs；docs/experiments/erp-threshold-ai-reading-2026-10-14.md、raw/erp-threshold-ai-reading-2026-10-14/小型资料与模型收据、registry/INDEX本条、自己work-progress。root唯一写者，data_audit仅只读审阅。
+- 复用现有配置DeepSeek接口，单次发送公共ERP数据与已核来源摘要；不发账户资料、不改密钥/模型全局配置，不启动自动生成。实际模型名与输出/失败留痕，token费用取不到即未知。按需试验先做固定日期样本并清楚标明，不能冒充实时解读。
+- 验收：来源与本系统口径区分，不虚构权威阈值；算术和日期独核；模型是否乱编因果/建议独审；卡片可读，旧说明收起；市场/期间/数据变化不误配；构建、相关边界、桌面/390px真实页面及归置。5190/8190沿用，8000与仓外5188不改。源码未提交不冒称远端交付。
+
+---
+
 # 宏观阅读与ERP预览已核验，待用户视觉验收
 
 - task-id: portfolio-trends-20261013; owner: 01a1334f-1167-7752-8041-e22a5dc2213b; status: review; scope_released: true; updated_at: 2026-10-14T19:27:08.251973+08:00; checked_coordination_sha: f45070be66bd9161196a4e2007e205169a94a81e; checked_at: 2026-10-14T19:27:08.251973+08:00
