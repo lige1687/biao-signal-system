@@ -1,3 +1,12 @@
+# 主线追加公开最佳实践调研 2026-10-14T22:27:37.223333+08:00
+
+- 原task/owner继续active，checked_coordination_sha=de1ad06174f3d2bc7968310fd7c5d16736b0a347；checked_at=2026-10-14T22:27:37.223333+08:00；已读task/冲突决定同上，末次fetch无新差异。用户明确要求调研Twitter/GitHub等优秀实践，整理适合个人理财与Agent主线的思路/架构清单供其看；保留已授权实现，不自动采用所有外部建议。
+- research-closure report_only，限定一问题：现有判断→审核→记录→复核流程应借鉴哪些可核实实践。不做收益实验/安装/账户接入/新通知，不自设检索次数停止点；记录实际检索及失败，答案及反例足够后收敛。原研究预算与封存不变。
+- 两Sol/medium分别只读公共产品原件、Agent与判断日志原件，唯一写自身raw/product-sources.json与agent-sources.json；合同/brief在docs/experiments/raw/decision-mainline-practices-2026-10-14/。不得写代码/注册表、碰因子对话或发外部消息，公共网络只读，不上传私有资料。root唯一整合docs/experiments/decision-mainline-practices-2026-10-14.md、registry.json一条/INDEX一行、原work-progress及原目标note；主仓与自身隔离各保留适用基线的原条目，只追加本报告。
+- 验收：官方/原作者链接与读取范围、当前维护状态（适用时）、实际能力/本库推论分开；每项说明适配价值、代价/反例、当前差距、建议优先级及验证方式。报告大白话结论和ARCHIVE齐全，登记读回；外部实现不能当本系统操作或收益改善证据。
+
+---
+
 # 判断主线实现范围 2026-10-14T22:25:06.334966+08:00
 
 - 原task/owner继续active，checked_coordination_sha=4169d846f384e29b2aacfd745d300aefdf1e9898，checked_at=2026-10-14T22:25:06.334966+08:00；已读task与冲突决定保持，末次fetch无新差异。原两策略实际指纹匹配，服务执行/记录/解释层，不改交易规则。
