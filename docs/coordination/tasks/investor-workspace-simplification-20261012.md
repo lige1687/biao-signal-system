@@ -1,3 +1,11 @@
+# 实机冷缓存必要补齐 2026-10-15T01:26:52.848042+08:00
+
+- checked_coordination_sha=a18161b9ab3ebe2bed197800580d694a8e19b492；原任务范围无冲突。实际重载后缓存为空，34卡全unknown；已保存事实，不以此冒称机会审查有用。新增准确准备状态与本轮所需行情采集，写原opportunity_reviews.py及新tests/unit/test_opportunity_preparation.py，由Sol唯一实现；root集成前端准备状态及验证。
+- 仅准确自选ETF/指数、现有持仓一对一symbol及已披露行业参考symbol，复用AnalysisService.get_many交互批量优先级，单飞/失败不循环。既有分析链可能写其事件缓存，非新回测或真实交易；collector本身仍只读。取后仍核过期/盘中/回退，缺同产品不能由行业ETF代替。
+- 合成浏览器已通过原话→审核→确认→读回原机会来源，重复打开模型次数不增，材料变化新增审核；真实库0判断/计划/成交测试写入。日程待完整流程通过后创建。
+
+---
+
 # 机会主线整合验收与日程授权 2026-10-15T01:21:23.826209+08:00
 
 - checked_coordination_sha=d6fa9657b84ef9301d85b07f1f7e489f505a53cd；已读新增 research-utility-review-20261012 因子流程审查范围，仅其报告/研究工具，无本轮源码冲突。既有相关任务已读列表保持。
@@ -416,8 +424,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "d6fa9657b84ef9301d85b07f1f7e489f505a53cd",
-  "checked_at": "2026-10-15T01:21:23.826209+08:00",
+  "checked_coordination_sha": "a18161b9ab3ebe2bed197800580d694a8e19b492",
+  "checked_at": "2026-10-15T01:26:52.848042+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -445,12 +453,13 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/src/pages/TodayPage.tsx",
     "web/src/App.tsx",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-review-*",
-    "docs/ops/work-progress/investor-workspace-simplification-20261012.md"
+    "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
+    "tests/unit/test_opportunity_preparation.py"
   ],
   "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T01:21:23.826209+08:00",
+  "updated_at": "2026-10-15T01:26:52.848042+08:00",
   "conflict_decision": "已读因子审查最新范围，仅其研究报告，无机会工程重叠。root唯一整合验收和日程写者；用户确认每天北京时间14:30一份、数量按实际机会。旧暂停通知不恢复。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push"
 }
