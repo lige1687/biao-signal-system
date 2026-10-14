@@ -1,3 +1,13 @@
+# 无现成小时资料已记录；官方公开覆盖补查完成
+
+- task-id research-utility-review-20261012；owner root；status blocked（完整策略小时输入）；本次来源补查completed；scope_released true；checked_coordination_sha f5e02a56c0e67cbd62517b7cfcb0762ae183a197；checked_at/updated_at 2026-10-14T19:33:24.830900+08:00。已读本轮COORDINATION1.1、自身、technical-factor-sequence、research-dispatch-controller、portfolio-trends-20261013；末次fetch无新范围变化，无冲突。
+- 用户“咩有”已保存，不再重复问现成资料。真实浏览器读到BaoStock官方ETF5/15/30/60分钟自2026-01-05，日线自2005-02-23，不能补全原2020-2025小时；第三方旧镜像日线起点未采信。AKShare官方ETF分钟仍明确近期，现有Longbridge历史额度0。未取得完整合格来源，不等于所有免费来源不存在。来源和AX位置在原raw/hourly-public-source-followup.json/md。
+- 原日线诊断、报告及全部结果指纹不变；无新行情/拟合/回测/安装/购买/权限/通知。累计实际来源工具请求7次（此前3+本次4），实际token未知。曾把通用技能6次默认解释为停止点，已依据用户AGENTS禁止自设停止点纠正并完成必要官方动态页核实；原失败及解释保留，计数未重置，当前阻塞依据是真实覆盖与权限。
+- 本轮仅2个小来源记录、原continuation-state及work-progress更新；主/隔离字节读回、报告原SHA、准确diff及主仓归置通过。工作分支codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be；本轮材料仅本地未提交/推送，远端只有协调摘要。未新建实验或重复写目标note，原整体目标保持未完成。
+- 恢复须有能覆盖原期间的实际获许可小时源及完整执行绑定；不拿2026短历史冒充多轮牛熊，不接管原技术owner。没有继续运行的任务或自动恢复。
+
+---
+
 # 用户确认无现成小时资料：公开来源资格补查
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 1c6c3a63f021336cb5dee6e1c4867faea28ddcbc；checked_at/updated_at 2026-10-14T19:29:10.181630+08:00。已读COORDINATION1.1、自身、technical-factor-sequence、research-dispatch-controller及最新portfolio-trends-20261013；后者独立预览已释放，无本轮路径冲突。
