@@ -1,3 +1,15 @@
+# 中文名称与持仓行业参考已交付 2026-10-14T20:02:21.270202+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；本有界功能completed，scope_released=true；整体目标仍in_progress，用户体验待试用。checked_coordination_sha=3d279af3394ab48f6a644cc160f42a7f9cb2645e；checked_at=2026-10-14T20:02:21.270202+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、investor-observation-map、daily-trading-system-audit、research-utility-review-20261012、research-dispatch-controller；最后新增ERP交付仅5190/自身文件，明确不改5188/8000，本轮无交叉。只维护本任务。
+- 准确源码及本轮证据本地提交e6c4c2e025252c565ba15f05611561ca1ecd5b48，codex/investor-workspace-simplification-20261012，22路径180319字节，其中14源码/测试文件。未推源码、未合main；他人因子/Agent脏改仍未暂存。前端5188仍隔离树，主仓两个已有但未跟踪后台模块仅插入本轮小段，原内容保持；新config/helper/test与隔离逐字一致，其余基线差异不冒称消除。
+- 首页两ETF及自选/看盘标题改中文具体名称，内部身份/查询/选择保持。持仓新增“分析卖出条件”，显式点击顺序读取已绑定行业ETF，再打开所选基金问题；不自动发送模型。六家已核A股公司绑定两个A股行业ETF，29持仓中7只部分覆盖；原披露unknown字段不改，不推断其他公司/整只基金行业权重。易方达信息产业经理观点保留2026-06-30报告/08-31发布日。
+- ETF技术状态来自原规则缓存，过期、盘中、来源/权重/日期分别展示；不能迁移ETF价格为基金退出价，不改策略。28相关后端、5会话边界、今日/持仓回归、类型/build、主仓及隔离当前归置/diff通过。真实首页/自选中文、行业ETF图表、准确持仓草稿与日期已读回。最终真实模型建议质量本轮未实测，收益增量未证明；用户效果待看。
+- 首并发读取一个超出等待时间，后台后续完成；改顺序读取并复验。Sol独审发现过期提示遗漏已补字段/展示/材料和回归；初始误目录build、跨树pytest导入冲突、协调非快进拒绝均保留并已按原因修正，无强推/删除测试。原大包warning保留。两次必要原launchd重载（接入、stale修正），最终唯一8000 PID25768/health200，原启动参数/plist保持，无额外服务。
+- 原目标okr-4c2ea452d3cc仅note22→23且实际API读回，全部保护字段与历史前缀保持。0真实计划/成交/份额/通知/新金融实验，未向因子用户对话派任务。Sol/medium仅只读链路/独审，Luna/low四名称文件，根完成来源核对/接入/关键验收；实际费用未知。没有剩余后台模型调用或本轮必需待跑项。
+- 证据：原archive目录name-industry-delivery-20261014.md、name-industry-acceptance-20261014.json、name-industry-goal-note-20261014.json及三委派合同/独审；原work-progress已追加。截图仅本机.codex/name-industry-20261014/holding-industry.png。后续按用户具体体验接续；未覆盖公司/实时基本面/模型判断仍按问题核对，不把有限接入当全基金行业分析完成。
+
+---
+
 # 持仓行业参考接入：范围补充 2026-10-14T19:39:34.962041+08:00
 
 - 同一task/owner，active。新增portfolio-trends ERP/DeepSeek限定自身ERP文件已读，无本轮交叉；非快进失败已fetch审阅后普通merge，保留对方记录。checked_coordination_sha=2797e88c50746d8a57be8653da7b7b500b7e342c；原已读task及冲突决定保持。只读子Agent确认实际8000主仓已接披露，缺行业ETF和基本面；隔离树旧后台不代表线上。
