@@ -1,3 +1,13 @@
+# 中文名称与持仓卖出分析入口：开工 2026-10-14T19:35:17.665695+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；scope_released=false；checked_coordination_sha=dca1a724ce45dc98b41205cff101cf5a788d639e；checked_at=2026-10-14T19:35:17.665695+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、investor-observation-map、daily-trading-system-audit、research-utility-review-20261012及research-dispatch-controller最新段。portfolio-trends已释放且仅5190隔离预览，不同步其改动。
+- 用户要求：两只ETF与自选优先中文具体名称；已有持仓分析卖出机会；按最新可得披露的重仓行业，参考对应行业ETF并结合基本面辅助。服务既有展示/叙事分析层，不把行业ETF规则直接套作基金退出、不修改策略或交易记录。两份策略实际指纹与确认值一致。
+- 基线2871f81c8f3fe995b31ed3f70d066e14e982d603，原codex/investor-workspace-simplification-20261012工作树及5188。根独占本轮write_paths：web/src/utils/productNames.ts（新）、web/src/components/WatchlistSidebar.tsx、web/src/pages/WorkspacePage.tsx（名称）、web/src/pages/todayActionLogic.ts、web/src/pages/TodayPage.tsx、web/src/components/portfolio/PortfolioToday.tsx（分析按钮）、PortfolioAgent.tsx（预置问题）、FundDisclosure.tsx、FundIndustryContext.tsx（新）、fundIndustryContext.ts（新）、web/scripts/test_product_context.mjs（新）；自身work-progress和同任务archive本轮name-industry-*。api/client/types/全部后端、他人因子与Agent脏文件只读。
+- 委派GPT-6 Sol/medium仅只读基金披露→持仓Agent资料链，write_paths=[]，network_allowed=false，max_agents=1；根负责名称核对、必要官方来源及实际UI，未向因子用户对话派任务。
+- 验收：中文名称不混淆指数/ETF/A/C，代码只作内部身份；现有清单选择保持准确；披露行业及来源/覆盖范围可查，同市场ETF参考准确绑定、日期明确、未知不猜；持仓提供卖出条件分析问题，基本面只辅助解释；相关边界测试/build/真实点击及归置。无自动发送模型、计划/成交/份额写入、通知、回测、共享后台重启。结果与未接通项如实记录。
+
+---
+
 # 今日操作条件首页已验收；通知仅可行性核对 2026-10-14T18:56:02.483861+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；本有界展示工作completed，scope_released=true；整体目标仍in_progress，用户主观效果待看。checked_coordination_sha=6517d5fa0463e2cd7b32707e38454910f49601de；checked_at=2026-10-14T18:56:02.483861+08:00。已读COORDINATION1.1、自身、daily-trading-system-audit、中控，以及最新research-utility-review条件诊断和portfolio-trends宏观/ERP扩展；后者明确避让TodayPage/today.css且不写5188，彼此无交叉。
