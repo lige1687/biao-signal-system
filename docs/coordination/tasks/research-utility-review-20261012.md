@@ -1,3 +1,12 @@
+# 用户确认无现成小时资料：公开来源资格补查
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 1c6c3a63f021336cb5dee6e1c4867faea28ddcbc；checked_at/updated_at 2026-10-14T19:29:10.181630+08:00。已读COORDINATION1.1、自身、technical-factor-sequence、research-dispatch-controller及最新portfolio-trends-20261013；后者独立预览已释放，无本轮路径冲突。
+- 用户回复“咩有”，确认没有现成获许可小时资料或其他供应商。本轮仅续核公开来源覆盖、保留原研究结果及累计预算；不取回大行情、不安装、不购买、不接管原技术owner、不新增金融实验。独立小型来源核查由当前root完成，不额外委派。
+- 写范围仅本轮raw新增hourly-public-source-followup.json/md、continuation-state.json、原work-progress；既有结果及报告保持。基线codex/factor-evidence-integration-20261012@70ab55556874228d2cba66cf50f96d0318e1a5be，新增材料仅本地。需要报告勘误时仅新增明确补注，不覆盖封存数值，先核范围。
+- 验收：区分ETF与股票、完整2020-12至2026-09与近期分钟、官方说明与第三方线索、公开API与研究资格；给出可用/不足/未核实的实际来源结论，保存用户输入及恢复条件。原核心1次、拟合0不重跑；原3来源请求后目前补2次文档请求，累计5/6；已有BaoStock页面渲染空壳失败保留。
+
+---
+
 # 双均线市场条件诊断已验收；完整策略等待小时资料
 
 - task-id research-utility-review-20261012；owner root；status completed（限定本批保存资料条件诊断）；scope_released true；checked_coordination_sha e0c20b2b81d946a6fa5b971e467b6231c713406a；checked_at/updated_at 2026-10-14T19:15:08.757899+08:00。已读COORDINATION1.1及本轮原task清单；交付前实际新增investor-workspace-simplification-20261012已验收、portfolio-trends-20261013宏观阅读与缓存范围均已读，与本报告/本轮raw无冲突。registry/INDEX仅本报告一项，其他条目保持。
