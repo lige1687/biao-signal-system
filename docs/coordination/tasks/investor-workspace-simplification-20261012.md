@@ -1,3 +1,16 @@
+# 今日操作条件优先与通知可行性核对 2026-10-14T18:18:23.300516+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；scope_released=false。checked_coordination_sha=d30c943bf7c5e8ca5fa8882994259b2078e7ca9b；checked_at=2026-10-14T18:18:23.300516+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、daily-trading-system-audit、research-dispatch-controller及本轮最新research-utility-review范围。
+- 用户最新：反复资料待补令人烦；份额维护优先级较低，主要要知道今天操作；有效关联计划为0是未使用；认可功能顺序，询问Codex操作提示通知是否好做和效果，再要求继续。当前只改首页展示并评估通知，不恢复原暂停自动化或发送其他聊天。
+- 服务既有策略的观察与执行展示层。两份桌面策略实际SHA仍与用户确认值一致；展示已有Python保存的条件，不计算新买卖信号、不改参数/策略/输入，不把指数或板块信号当持仓基金指令。
+- 基线codex/investor-workspace-simplification-20261012@aacb101e0b5934ee98215376042016524a7a1d4e，现用5188及共享8000只读。原因子/Agent脏文件保持。根唯一源码写者：web/src/pages/TodayPage.tsx、web/src/pages/today.css、新web/src/components/today/TodayActions.tsx、新web/src/pages/todayActionLogic.ts、新web/scripts/test_today_actions.mjs；自身work-progress及archive同任务operation-focus-*证据/只读委派合同。原目标只在必要时追加note，不改其他字段。
+- 冲突决定：PortfolioToday.tsx、portfolio.css、todayLogic.ts（被前者复用）不改；dashboard/navigation/基本面及所有后端只读，避免portfolio-trends owner。无其他登记TodayPage/today.css写者。旧通知daily-trading-system-audit已完成取消状态；仅读四旧配置及官方文档，不接管其技能/算法/原日程。
+- 委派：GPT-6 Sol中等思考只读现有signals/opportunities接口与DTO，write_paths=[]、network_allowed=false、max_agents=1；无因子新派发/市场研究。已完成字段核对，root独核关键日期/对象边界。实际费用未知。
+- 验收：首页优先显示已保存候选和准确产品的观察条件；普通持仓不重复催补计划；旧/空/未知扫描不能声称今天无触发；板块代理与无名对象不冒充ETF机会；详情链接对象一致，读取失败与缺口保留折叠；类型/build、关键边界检查、真实浏览器和当前归置。通知提供带来源的样式与接入限制，不冒称实际到达。
+- 已完成：只读系统/页面/策略指纹/官方能力和接口核对。源码尚未改，UI验收未做，0新研究/真实计划/成交/份额/交易/定时器。下一步根实现上述首页小改并实测，保存准确回执。
+
+---
+
 # 首次图表及普通入口修复已验收，范围释放 2026-10-13T12:20:21.024610+08:00
 
 - task-id investor-workspace-simplification-20261012；本有界工程修复completed，scope_released=true；用户效果待试用，整体目标仍进行中。checked_coordination_sha=0a8eb1fd175ec37e84dc372a1a6ca74fca067400，已读原自身/因子/日常/中控及portfolio-trends、treasury-yield-video记录；最终fetch无新差异，无重叠写者。只维护本任务。
