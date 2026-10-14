@@ -1,3 +1,17 @@
+# 今日操作条件首页已验收；通知仅可行性核对 2026-10-14T18:56:02.483861+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；本有界展示工作completed，scope_released=true；整体目标仍in_progress，用户主观效果待看。checked_coordination_sha=6517d5fa0463e2cd7b32707e38454910f49601de；checked_at=2026-10-14T18:56:02.483861+08:00。已读COORDINATION1.1、自身、daily-trading-system-audit、中控，以及最新research-utility-review条件诊断和portfolio-trends宏观/ERP扩展；后者明确避让TodayPage/today.css且不写5188，彼此无交叉。
+- 成果2871f81c8f3fe995b31ed3f70d066e14e982d603，codex/investor-workspace-simplification-20261012；10准确文件提交，仅本地，未推源码、未合主分支。根只改TodayPage/today.css及新增TodayActions/todayActionLogic/边界脚本和自身5小记录。其他因子/Agent脏区、PortfolioToday/其CSS/todayLogic、api/client/types与后端均未暂存或修改。
+- 首页先呈现保存扫描结论及最多3张候选/观察卡；普通持仓不重复催补未使用计划，净值/披露/账户日期仍可见，覆盖收进折叠区。详情可点击单只GET读取同一产品/场景的满足条件、下一步、参考价/失效位及数据日，无自动整批读取、模型发送或记录写入。
+- 根验证旧/空/未来/未知口径和错误产品不冒充今天可操作，行业板块代理/无名称项不列操作卡，风险不推定为持仓指令。新边界脚本、原持仓回归、类型/build、现行归置及diff通过。原大块构建提示保留，web cwd误读源码失败已在正确目录更正。
+- 实际5188首页扫描2026-10-14收盘口径、可行动买入0、等待2；IGV卡→同产品图表/买点分析/场景条件及首页直接展开均实测。单品行情/条件2026-10-13，未把扫描日期当行情日；60分钟判断使用日线近似，未给出的失效位不代填。最终截图本机.codex/operation-focus-20261014，不入Git。主观效果与决策/收益增量不冒称完成。
+- 通知：已查官方定时/桌面能力、专用工具view及配置读回；automation-3/4/5/6仍PAUSED/failed_runs_only。只提供少量条件变化、日期/准确对象/重复静默的样式与接入限制；未创建或启用日程、未改用户全局设置、未向其他聊天发送。OS通知到达/重复静默/点击恢复仍未验收。
+- 原目标okr-4c2ea452d3cc仅note版本21→22，owner/status/authorization/milestones/next_action及历史前缀完整读回一致。用户最新主要关心今天操作，计划0因未使用已写note，不将计划或份额核对变成全部信息问答前置。
+- 证据：原archive目录operation-focus-and-notifications-20261014.md、operation-focus-acceptance-20261014.json、operation-focus-goal-note-20261014.json、operation-focus-delegation-20261014.json；原work-progress追加。Sol/medium只读字段审阅已完成，实际费用未知；根独立核日期与完整路径，未派因子用户对话新任务。0新金融实验/真实计划/成交/份额/后台重启/新模型答案/自动化修改。
+- 后续按用户试用和具体问题接续。真实通知启用方式/时间及送达需另作具体实施；本轮只问可行性没有自动恢复原四日报。源码可从此本地提交恢复；共享当前状态以本记录为准。
+
+---
+
 # 今日操作条件优先与通知可行性核对 2026-10-14T18:18:23.300516+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；scope_released=false。checked_coordination_sha=d30c943bf7c5e8ca5fa8882994259b2078e7ca9b；checked_at=2026-10-14T18:18:23.300516+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、daily-trading-system-audit、research-dispatch-controller及本轮最新research-utility-review范围。
