@@ -1,3 +1,13 @@
+# 判断审核与后续监督主线：接续 2026-10-14T22:00:10.271210+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；scope_released=false；checked_coordination_sha=8cfe4e9fa5468baff1473590c09a417d4a6724e7；checked_at=2026-10-14T22:00:10.271210+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、research-utility-review-20261012，以及原daily-trading-system-audit、investor-observation-map、research-dispatch-controller边界。当前ERP和因子原任务释放/限定其他文件，无当前主线重叠；不向其用户对话派任务。
+- 用户明确授权优先搭建“提出买卖判断→审查支持/反对依据→确认后记录→条件变化监督”主线，已有数据和因子按原用途进入判断。复用原目标okr-4c2ea452d3cc（最新方向note v24），不改策略/阈值，不新建金融实验，不启用日程，不记录测试真实交易。
+- 基线codex/investor-workspace-simplification-20261012@e6c4c2e025252c565ba15f05611561ca1ecd5b48，前端5188/主仓8000。先读取现有原话/冻结材料/计划/后续记录接口；root唯一写本轮原archive的decision-mainline-*和自身work-progress；源码准确范围待审阅后追加推送，再开始改动。共享与隔离已有他人脏文件保留。
+- Sol/medium只读实际运行主仓plans/copilot/agent/portfolio接口及相关单测，write_paths=[]，network_allowed=false，max_agents=1；冻结合同decision-mainline-backend-audit-20261014.json。不得查私有库/凭据、改文件/进程/真实记录、另派代理。root负责策略源核对、前端方案和最终验收。
+- 目标验收：从单一入口提出有准确产品的原话；审核保留支持/反对/未知及日期；确认前不落正式判断，确认后可重开；后来依据按同产品与原记录比较，未知不冒称改善/恶化；隔离样例完整读写演练、真实页面读回和必要回归。模型答复、条件监督、真实资金分别验收；失败保留。当前只在核对阶段，未声称功能完成。
+
+---
+
 # 中文名称与持仓行业参考已交付 2026-10-14T20:02:21.270202+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；本有界功能completed，scope_released=true；整体目标仍in_progress，用户体验待试用。checked_coordination_sha=3d279af3394ab48f6a644cc160f42a7f9cb2645e；checked_at=2026-10-14T20:02:21.270202+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、investor-observation-map、daily-trading-system-audit、research-utility-review-20261012、research-dispatch-controller；最后新增ERP交付仅5190/自身文件，明确不改5188/8000，本轮无交叉。只维护本任务。
