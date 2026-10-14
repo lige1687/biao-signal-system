@@ -1,3 +1,16 @@
+# 双均线市场条件诊断已验收；完整策略等待小时资料
+
+- task-id research-utility-review-20261012；owner root；status completed（限定本批保存资料条件诊断）；scope_released true；checked_coordination_sha e0c20b2b81d946a6fa5b971e467b6231c713406a；checked_at/updated_at 2026-10-14T19:15:08.757899+08:00。已读COORDINATION1.1及本轮原task清单；交付前实际新增investor-workspace-simplification-20261012已验收、portfolio-trends-20261013宏观阅读与缓存范围均已读，与本报告/本轮raw无冲突。registry/INDEX仅本报告一项，其他条目保持。
+- 有界成果docs/experiments/trend-confirmation-conditional-2026-10-14.md，SHA256 6e841e908eeaefa1e6edcffbdc3235886e0396ac59e88260b6c58bbadf7c04d1。protocol ea1166c7ce6710c78d3d018278844949b9cb4d18e68373f2463f196718aa7c6d；代码5c4153523372e989fe1d82787911388202a112f686d1c1abb8605371b134c178。外盘固定UUID route目录与3结果指纹在result-location.json，约112KiB，不把大型结果放Git。
+- 唯一核心1次完成，0拟合/新标签/市场回测。T03原1268预测/317日：上涨145日期加排列误差增0.02081百分点，横盘172日期少0.02158；两类均输简单历史均值；下跌0观察不能判断。2026H1横盘局部少0.1174仍落后简单平均0.3473，仅一段，不能挑出当有效因子。20/60完整日期重组的范围同时容纳改善/恶化，稀疏格null。
+- 等待137起点全部保留，88先失效、49确认含2未成熟；47成熟配对=上涨12/横盘20/下跌15，等待参照价平均贵0.180%/0.896%/1.247%，共同终点涨幅少0.189/0.976/1.417个百分点。该差不是盈利胜率/资金收益/因果贡献；下跌配对均2022-24，时期及后来成功选择限制明确。没有规则升级或用户买卖结论。
+- 完整原策略仍blocked_actual_hourly_input_and_execution：已引用本地与data/cache定向无匹配；Longbridge两预定小样第一返回最早2023-10、第二返回历史额度0，0行情行。1文档+2接口=3来源请求，均保留失败；无购买、扩权限、扫描密钥或循环试取。已向用户合并询问获许可资料路径/其他供应商；无答复前只阻塞依赖小时输入部分。不接管technical-factor-sequence原owner，不改变严格次序70<100及年龄预测原件缺失的旧边界。
+- 验收：root独立重算条件点值及137/47计数，11源未变；原全体恢复；真实5188自己的5号报告标签，正文与两表可读，刷新后数值、下跌空格及小时缺口读回；API正文相同，主仓与隔离报告hash一致。准确diff及主仓绝对路径归置通过；稀疏树相对脚本缺失失败留痕后更正。registry主仓667→668/隔离323→324，旧项逐值保持。两原目标仅note版本138→139及17→18，其他字段读回保持，用户主观验收待确认。
+- Sol/medium来源及独立实施合同，Astra/high方法，root冻结/唯一科学执行/独核/归档；实际token费用未知。委派绝对路径与早期指数日前缀遗漏在效果前纠正，原失败留存。没有继续运行的进程、主动通知或自动恢复。
+- 来源分支codex/factor-evidence-integration-20261012@70ab55556874228d2cba66cf50f96d0318e1a5be，本轮报告/raw/增量登记与work-progress仍仅本地未提交/推送；main运行库已读到本地镜像，远端仅协调摘要，不能声称远端源码可复现。整体“找到有效因子并落实完整策略”仍未完成；恢复条件是可用原小时输入及完整执行绑定，不继续改产品/参数追正结果。
+
+---
+
 # 有界条件诊断已冻结，等待唯一脚本交付后执行
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 9f15a5faf7ef45b782429db616091d14e716664b；checked_at/updated_at 2026-10-14T18:28:18.559517+08:00。已读开工相关任务及最新investor-workspace-simplification-20261012首页展示范围，仅web源码，与本轮新raw/报告不重叠；原共享研究源码仍只读。
