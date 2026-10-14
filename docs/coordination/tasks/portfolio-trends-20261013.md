@@ -1,3 +1,19 @@
+# 宏观阅读与 ERP 展示扩展（本轮当前状态）
+
+- task-id: portfolio-trends-20261013; owner: 01a1334f-1167-7752-8041-e22a5dc2213b; status: active; updated_at: 2026-10-14T18:52:17.812042+08:00
+- checked_coordination_sha: b0093aebe33b5e4214eaf9db416953717452dfce; checked_at: 2026-10-14T18:52:17.812042+08:00
+- 已读 COORDINATION1.1、portfolio-trends-20261013、investor-workspace-simplification-20261012、research-utility-review-20261012、investor-observation-map、research-dispatch-controller；后四项最新记录本轮开头已读取。
+- 授权增量：用户要求整合语雀观察指标、前述十类指标、突出 ERP、说明如何读图和依据；AI CapEx 仅按需新闻，其他行业专项排除。基本面仍为叙事层，不改变信号/交易/仓位。
+- 基线沿用本任务隔离工作树及已验证5190前端。工作分支codex/portfolio-trends-20261013，base 52b5083e870f2fb4a240d349b9346f7d022be239。未推代码部分仍仅本地。
+- 本轮写范围：原6前端文件；新增web/src/components/fundamentals/组件与样式、web/scripts/test_fundamentals_reading.mjs；必要的web/src/api/client.ts与web/src/types.ts增量仅在核缺口后；docs/ops/work-progress/portfolio-trends-20261013*、docs/experiments/fundamentals-reading-ARCHIVE-2026-10-14.md、该报告registry/INDEX登记。backend目前只读，若必须扩API先更新具体范围。
+- 唯一写者root；子代理只读审阅现有数据和ERP方法，不写源文件。避让TodayPage/today.css、IndexComparison/overlay/dashboard既有块、因子研究和他人文件。主仓web与仓外5188本轮不直接写。
+- 验收：ERP真实公式与成分/日期、现有十类数据能力及缺口如实、宏观按频率读趋势、AI新闻可点读来源，无自动监控；构建、必要计算与异常边界、真实API、桌面/窄屏完整路径、来源报告、归置。
+- 采用research-closure限定来源核对+UI实现，不开展收益实验。最多6次外部来源请求（失败计入），新财务/收益实验0，未证明收益增量。两份策略文档SHA与已确认值一致。
+- 截至本节点：语雀已通过已登录浏览器读到，末尾交互待检查；匿名网页访问失败保留。具体实现与本轮验收尚未执行。不存在后台通知或新自动化。
+- 原仓外同步确认仍未收到单独答复；本轮先交付仓内5190可用结果，不因此中断已授权工作。
+
+---
+
 # 预览已验证，现用页同步待用户确认
 
 - status: blocked（仅仓外现用路径写入待确认）；updated_at: 2026-10-13T11:39:43.824818+08:00; checked_coordination_sha: 3bafc053c8dc63d747161d8c1ff8a425f764c5ee; checked_at: 2026-10-13T11:39:43.824818+08:00
