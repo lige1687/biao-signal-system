@@ -1,3 +1,12 @@
+# 机会主线整合验收与日程授权 2026-10-15T01:21:23.826209+08:00
+
+- checked_coordination_sha=d6fa9657b84ef9301d85b07f1f7e489f505a53cd；已读新增 research-utility-review-20261012 因子流程审查范围，仅其报告/研究工具，无本轮源码冲突。既有相关任务已读列表保持。
+- 用户明确每天北京时间14:30生成一份，数量按实际机会。root在接口/实际流程验收后通过原生heartbeat配置本任务每日生成；先查重，不恢复旧暂停通知，不改计划/持仓/成交。电脑离线时明确未执行。
+- 两个Sol实现已返回；45项相关后端测试、前端build通过。正在独立审阅、合成完整浏览器路径和实际公开资料验收；真实模型效果及定时运行尚未验收。修复包含running轮询、自动模型材料排除私人备注/计划原文。新增一个Sol/medium只读独审，用户因子对话不派发。
+- 源码仍仅本地未提交；本轮最多必要后台重载；结束前读回实际API、日程、原目标note和协调。
+
+---
+
 # 机会审核实现范围 2026-10-15T00:39:46.405930+08:00
 
 - 同一 owner/task active；checked_coordination_sha=93c21cb958ee362398097d14f4899cfc72ab24c9；checked_at=2026-10-15T00:39:46.405930+08:00；相关已读 task 与冲突决定保持，最新无其他范围变更。用户确认页面打开自动审核/资料未变复用；14:30数量含义仍待回复，定时创建暂不执行。
@@ -407,8 +416,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "734fb7637aee0de4109321851d7d206d6461190b",
-  "checked_at": "2026-10-15T00:34:12.120889+08:00",
+  "checked_coordination_sha": "d6fa9657b84ef9301d85b07f1f7e489f505a53cd",
+  "checked_at": "2026-10-15T01:21:23.826209+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -420,14 +429,29 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
+    "src/lei_signal/api/opportunity_evidence.py",
+    "src/lei_signal/copilot/opportunity_review.py",
+    "src/lei_signal/api/routes/opportunity_reviews.py",
+    "src/lei_signal/api/routes/decisions.py",
+    "src/lei_signal/api/app.py",
+    "tests/unit/test_opportunity_evidence.py",
+    "tests/unit/test_opportunity_review_service.py",
+    "tests/unit/test_decision_journal.py",
+    "web/src/api/opportunityReviews.ts",
+    "web/src/api/decisions.ts",
+    "web/src/pages/OpportunitiesPage.tsx",
+    "web/src/pages/opportunities.css",
+    "web/src/pages/DecisionsPage.tsx",
+    "web/src/pages/TodayPage.tsx",
+    "web/src/App.tsx",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-review-*",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md"
   ],
   "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T00:34:12.120889+08:00",
-  "conflict_decision": "Read-only existing opportunity and agent audit first; root sole writer of scoped records. Source writes will be separately registered. Existing factor and other-owner files preserved; 14:30 generation clarification pending.",
+  "updated_at": "2026-10-15T01:21:23.826209+08:00",
+  "conflict_decision": "已读因子审查最新范围，仅其研究报告，无机会工程重叠。root唯一整合验收和日程写者；用户确认每天北京时间14:30一份、数量按实际机会。旧暂停通知不恢复。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push"
 }
 ```
