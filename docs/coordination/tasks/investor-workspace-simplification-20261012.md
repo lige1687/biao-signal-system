@@ -1,6 +1,6 @@
 # 持仓行业参考接入：范围补充 2026-10-14T19:39:34.962041+08:00
 
-- 同一task/owner，active。checked_coordination_sha=70c959c7e9a63c0aeaa6e1491fcf8246640f7bbe；原已读task及冲突决定保持。只读子Agent确认实际8000主仓已接披露，缺行业ETF和基本面；隔离树旧后台不代表线上。
+- 同一task/owner，active。新增portfolio-trends ERP/DeepSeek限定自身ERP文件已读，无本轮交叉；非快进失败已fetch审阅后普通merge，保留对方记录。checked_coordination_sha=2797e88c50746d8a57be8653da7b7b500b7e342c；原已读task及冲突决定保持。只读子Agent确认实际8000主仓已接披露，缺行业ETF和基本面；隔离树旧后台不代表线上。
 - 为完成用户分析链路，追加根唯一写范围：configs/fund-industry-references.v1.json（新）、src/lei_signal/portfolio/industry_context.py（新）、src/lei_signal/api/portfolio_workspace.py中新增只读industry_reference、src/lei_signal/copilot/portfolio_context.py仅携带此字段与边界文字、tests/unit/test_fund_industry_context.py（新）、web/src/components/portfolio/portfolioWorkspace.ts对应可选字段。主仓上述两已有文件只补本轮小段并保留原脏区，隔离树保留自身基线；不整体覆盖旧文件。无与最新portfolio-trends/research范围重叠。校验后仅必要本机8000重载，原服务启动方式保持，不启动额外调度器。
 - 来源：官方基金001513页面当前披露仍2026-06-30，保留报告日期；基金经理解释标观点及日期。行业ETF身份来自发行人/上交所；只匹配明确上市公司身份与业务，未知市场不推断，不改原披露234条unknown字段。读取已有缓存技术状态，仅行业观察，不向基金迁移退出价、不产生新信号。
 - 验收新增：同代码不同公司/份额/未来或缺日期拒绝匹配；未覆盖保留未知；有限来源字段确实进入服务器冻结Agent材料；现有持仓/计划状态不受影响；无模型自动发送或账户写入。
