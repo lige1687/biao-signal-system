@@ -1,3 +1,13 @@
+# 机会自动审核与反证核对：接续 2026-10-15T00:34:12.120889+08:00
+
+- 同一 task-id/owner，status active，scope_released=false；checked_coordination_sha=734fb7637aee0de4109321851d7d206d6461190b；checked_at=2026-10-15T00:34:12.120889+08:00。已读 COORDINATION1.1、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller；远端无新差异，无新增相关写者。
+- 用户要求自动审查持仓卖出/自选买入机会，主动找反对证据；已确认打开今日机会时生成、资料未变复用，随后提出每日14:30预生成，“100”含义待澄清。先按已确认页面触发完成，不擅自启用原暂停通知。既有个人判断审核真实试用2完整/1只读分流限制保留，本轮补机会入口及反证证据链；规则与研究结论不改。
+- 主线基线仍 codex/investor-workspace-simplification-20261012@e6c4c2e025252c565ba15f05611561ca1ecd5b48 加上一阶段未提交源码，acceptance 的12指纹为已验依据。运行5188隔离/8000主仓；他人因子/Agent脏文件不碰。先仅只读审查现有扫描、持仓和Agent材料取得链；root唯一写原 archive 的 opportunity-review-* 合同/记录及原 work-progress。实现准确写入范围审阅后另追加推送。
+- 两个 Sol/medium 独立只读审计：A 核买卖机会与持仓/行业来源字段；B 核 Agent 原问题、材料快照、查询与反对依据链。write_paths=[]，network_allowed=false，max_agents=1各自；不读私有库、不运行模型/服务、不改其他对话。root整合技术/时点/资金边界，不新开收益实验或安装平台。沿用 research-closure report_only 检查既有来源，不重做上轮19来源调研。
+- 验收：打开机会页自动获取实际候选与审核；同资料复用、变更失效、刷新不重复；支持/反对/未知可追到准确对象/日期/材料；持仓和自选身份分开，行业ETF不变成基金退出价；查看机会无需假造用户想法，采纳后仍显式确认；临时库完整演练和真实页面/公开产品回答验收。真实金融记录、策略/阈值保持。
+
+---
+
 # 判断主线首版和实践调研已交付 2026-10-15T00:26:42.302020+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；本有界实现/调研 status completed，scope_released=true；整体原目标仍 in_progress，用户使用效果待验收。checked_coordination_sha=401a5af8492fba36b8968f05bb77e9a96353159c；checked_at=2026-10-15T00:26:42.302020+08:00。已读 COORDINATION1.1、自身及 portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller 相关边界；末次 fetch 无新增差异，无新增重叠。只维护本任务；其他因子/Agent 文件与用户对话保持原负责人。
@@ -386,9 +396,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "401a5af8492fba36b8968f05bb77e9a96353159c",
-  "checked_at": "2026-10-15T00:27:12.234859+08:00",
+  "status": "active",
+  "checked_coordination_sha": "734fb7637aee0de4109321851d7d206d6461190b",
+  "checked_at": "2026-10-15T00:34:12.120889+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -400,30 +410,14 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
-    "src/lei_signal/copilot/decision_journal.py",
-    "src/lei_signal/api/routes/decisions.py",
-    "tests/unit/test_decision_journal.py",
-    "src/lei_signal/api/app.py",
-    "web/src/api/decisions.ts",
-    "web/src/pages/DecisionsPage.tsx",
-    "web/src/pages/decisions.css",
-    "web/src/App.tsx",
-    "web/src/pages/TodayPage.tsx",
-    "web/src/pages/WorkspacePage.tsx",
-    "web/src/components/today/TodayActions.tsx",
-    "web/src/components/portfolio/PortfolioToday.tsx",
-    "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-mainline-*",
-    "docs/experiments/decision-mainline-practices-2026-10-14.md",
-    "docs/experiments/raw/decision-mainline-practices-2026-10-14/",
-    "docs/experiments/registry.json (one report entry only)",
-    "docs/experiments/INDEX.md (one report row only)"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-review-*",
+    "docs/ops/work-progress/investor-workspace-simplification-20261012.md"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T00:27:12.234859+08:00",
-  "conflict_decision": "Final fetch unchanged; exact registered mainline and report paths only, all other owners preserved. Bounded implementation and public-source research complete; scope released. Source remains local uncommitted, fingerprint receipt available, no remote reproducibility claim. Original goal in_progress v25; user acceptance pending. No factor-chat dispatch, new financial experiments, financial confirmations or notifications. Prior coordination details remain in historical text.",
+  "updated_at": "2026-10-15T00:34:12.120889+08:00",
+  "conflict_decision": "Read-only existing opportunity and agent audit first; root sole writer of scoped records. Source writes will be separately registered. Existing factor and other-owner files preserved; 14:30 generation clarification pending.",
   "source_state": "local_uncommitted_no_main_merge_no_source_push"
 }
 ```
