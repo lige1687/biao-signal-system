@@ -1,3 +1,16 @@
+# 判断主线首版和实践调研已交付 2026-10-15T00:26:42.302020+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；本有界实现/调研 status completed，scope_released=true；整体原目标仍 in_progress，用户使用效果待验收。checked_coordination_sha=401a5af8492fba36b8968f05bb77e9a96353159c；checked_at=2026-10-15T00:26:42.302020+08:00。已读 COORDINATION1.1、自身及 portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller 相关边界；末次 fetch 无新增差异，无新增重叠。只维护本任务；其他因子/Agent 文件与用户对话保持原负责人。
+- 本轮主线已接到今日/持仓/自选：准确产品与原话→现有 Agent 审核→完整人工确认→原判断保留并追加复核。新 decision_journal、decisions router/API/page/CSS 接入，两树 app.py 各自两行注册，原范围内入口链接；临时库演练不写真实金融账本。按需比较资料和日期，无后台通知/自动交易；文字关注条件尚非自动规则。
+- 工作分支 codex/investor-workspace-simplification-20261012；基础完整 commit e6c4c2e025252c565ba15f05611561ca1ecd5b48。本轮源码及报告仅本地未提交、未推源码、未合 main；最近源码推送不含本轮成果，远端不可独立复现。准确 12 源文件 SHA256、失败和限制：docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-mainline-acceptance.json；原 work-progress 已追加。主仓三份新后端与隔离逐字一致；其他既有差异保持。不能用基线 commit 冒充本轮成果。
+- 验收：17 项隔离 SQLite 边界测试、Ruff、类型/build、两树现行归置和准确 diff 通过。真实浏览器确认响应丢失→刷新恢复仅 1 记录/1 确认；无计划次日净值变化→复核追加到 1 记录/2 确认，原话不改。公开 ETF 实际 3 次审核（2 完整、1 只读分流拒确认），全部保留；真实判断/计划/成交/份额未代写。含基金同 holding-id 换代码、材料变化、重试不同内容的拒绝和原请求恢复均有独立测试。用户可读性及日常效果待验收。
+- 运行：5188 前端 PID15320，原受管 8000 最后 PID73197/runs11/health200；临时演练 PID69227 已停止，页面关闭，截图与演练 SQLite 仅本机 .codex。构建既有大包警告、原隔离树缺 write_tx、首次模型缺当前日/关键词分流、初始演练错误与修正保留；不宣称冷启动完成。无额外自动化或仓外配置写入。
+- 公开实践报告 docs/experiments/decision-mainline-practices-2026-10-14.md 及同名 raw（19 来源记录）已完成并在主仓/隔离各自 registry 分类“方法论与验证”、verdict mixed、INDEX 登记；报告 ARCHIVE。X 无可核读相关原帖。借鉴判断原话、反证、准确资料日期、显式确认/恢复和简洁入口；无安装、私有上传、收益实验或旧预算重置。
+- 系统原条目 okr-4c2ea452d3cc 仅 note v24→25，实际 API 读回；owner/status/authorization/milestones 等保护字段及历史前缀保持，仍 in_progress。回执原 archive 的 decision-mainline-goal-receipt.json。不以本轮流程测试代表八目标或收益完成。
+- 三个 Sol/medium 有界执行与独审均完成，root 最终集成核验；费用未知，没有派因子用户对话。当前无本轮必需待跑任务。下一步：用户从 /decisions 提出真实判断并试用，按具体缺口接续；当前因子关键词只读分流、模型旧术语/偏长、更多实时变化与通知仍未完成。接续先读取本记录和 acceptance，不重跑通过项或封存研究。
+
+---
+
 # 本轮接续 2026-10-14T23:56:19.877710+08:00
 
 - 原 task-id/owner/status active 与范围保持；checked_coordination_sha=00e12ed302a0612c78d285302075393b667c41d4；checked_at=2026-10-14T23:56:19.877710+08:00。已读 COORDINATION1.1、自身当前记录，远端 fetch 无新增提交；沿用已读 portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller 的边界，无新增重叠。
@@ -374,37 +387,44 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "completed",
-  "checked_coordination_sha": "0a8eb1fd175ec37e84dc372a1a6ca74fca067400",
-  "checked_at": "2026-10-13T12:20:21.024610+08:00",
+  "checked_coordination_sha": "401a5af8492fba36b8968f05bb77e9a96353159c",
+  "checked_at": "2026-10-15T00:27:12.234859+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
+    "portfolio-trends-20261013",
     "research-utility-review-20261012",
     "daily-trading-system-audit",
-    "research-dispatch-controller",
-    "portfolio-trends-20261013",
-    "treasury-yield-video-20261013"
+    "investor-observation-map",
+    "research-dispatch-controller"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
-  "base_commit": "18e64fa632dba5dbad0e5fcae09b4ccc75f119a9",
+  "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
+    "src/lei_signal/copilot/decision_journal.py",
+    "src/lei_signal/api/routes/decisions.py",
+    "tests/unit/test_decision_journal.py",
+    "src/lei_signal/api/app.py",
+    "web/src/api/decisions.ts",
+    "web/src/pages/DecisionsPage.tsx",
+    "web/src/pages/decisions.css",
+    "web/src/App.tsx",
+    "web/src/pages/TodayPage.tsx",
+    "web/src/pages/WorkspacePage.tsx",
+    "web/src/components/today/TodayActions.tsx",
+    "web/src/components/portfolio/PortfolioToday.tsx",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/",
-    "src/lei_signal/api/services.py (priority waiting only; analysis/persistence unchanged)",
-    "src/lei_signal/api/preheat.py (tag existing get_many as background only)",
-    "tests/unit/test_api_service_priority.py",
-    "tests/unit/test_api_service_stale_while_revalidate.py (affected assertions only)",
-    "tests/unit/test_api_preheat.py (background tag acceptance)",
-    "com.lei.backend (one final managed reload after exact source acceptance)",
-    "web/src/pages/WorkspacePage.tsx (cold navigation placeholders/default selection only)",
-    "web/src/components/WatchlistSidebar.tsx (pending navigation display only)",
-    "web/src/utils/watchlistNavigation.ts",
-    "web/src/utils/watchlistNavigation.test.mjs"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-mainline-*",
+    "docs/experiments/decision-mainline-practices-2026-10-14.md",
+    "docs/experiments/raw/decision-mainline-practices-2026-10-14/",
+    "docs/experiments/registry.json (one report entry only)",
+    "docs/experiments/INDEX.md (one report row only)"
   ],
   "scope_released": true,
-  "local_result_commit": "aacb101e0b5934ee98215376042016524a7a1d4e",
+  "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-13T12:20:21.024610+08:00",
-  "conflict_decision": "Final fetch unchanged since registered scope; own 8 source/test paths and exact small records only. 16453fc7 source, aacb101e final records local only. Actual frontend/backend accepted; no further reload or delegated factor work. This bounded repair released; original goal stays in_progress v21 and preserved persistence/data gaps need a separate precise intake."
+  "updated_at": "2026-10-15T00:27:12.234859+08:00",
+  "conflict_decision": "Final fetch unchanged; exact registered mainline and report paths only, all other owners preserved. Bounded implementation and public-source research complete; scope released. Source remains local uncommitted, fingerprint receipt available, no remote reproducibility claim. Original goal in_progress v25; user acceptance pending. No factor-chat dispatch, new financial experiments, financial confirmations or notifications. Prior coordination details remain in historical text.",
+  "source_state": "local_uncommitted_no_main_merge_no_source_push"
 }
 ```
 <!-- lei-coordination-json:end -->
