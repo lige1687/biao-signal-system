@@ -1,3 +1,13 @@
+# 因子研究有效性与流程纠偏审查 2026-10-15
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 3650d135eb6c94a317aa6772a45c3e29b57b8b54；checked_at/updated_at 2026-10-15T01:16:54.157094+08:00。已读COORDINATION1.1、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller及最新investor-workspace-simplification-20261012/portfolio-trends-20261013。前者正在机会审核工程，本轮不碰Agent/生产/前端源码，后者独立ERP展示；无本轮新报告/raw重叠。
+- 用户明确要求审查久无有效因子的原因，区分目标/流程/方法/踩坑，查权威与X/低频交易实践并改正。本轮终点：证据绑定的缺陷清单、哪些是正常负结果/未证实、已落实修正与其相关验证；不以流程修复冒称策略收益。使用research-closure审查与工程修正，原实验结论/预算/策略语义不重写。
+- 复用隔离树codex/factor-evidence-integration-20261012@70ab55556874228d2cba66cf50f96d0318e1a5be，主仓来源只读；本轮新docs/experiments/factor-research-process-audit-2026-10-15.md、同名raw/contracts与独立审查/检索证据/必要审计脚本，原work-progress，registry/INDEX仅本报告。实现必要整改前根据确认缺陷另登记准确代码/文档路径及唯一写者，不预占共享研究入口。
+- 两个独立助手：Sol/medium只读代表性实际实验/谱系，写raw/empirical-audit.json及.md；Astra/high只读策略/方法/当前检查覆盖，写raw/method-audit.md。各自network=false、one_writer=true、max_agents=1，无拟合/回测/下载/改旧报告。root查公共原作者资料、核关键事实与最终修改。不开用户侧新聊天、不发外部消息、不上传私人资料、不买数据、不改生产/原文/规则。
+- 预算以用户实际范围/运行额度为准，记录全部源请求、失败与代理成本未知；通用6次默认不作为自行停止依据。新的审查不是重置任何封存金融实验。通过现有结果重算仅在具体疑点需要时执行；新市场参数/模型搜索0。原小时资料不足仍只阻塞完整策略，不作为整项流程审查的停止理由。
+
+---
+
 # 无现成小时资料已记录；官方公开覆盖补查完成
 
 - task-id research-utility-review-20261012；owner root；status blocked（完整策略小时输入）；本次来源补查completed；scope_released true；checked_coordination_sha f5e02a56c0e67cbd62517b7cfcb0762ae183a197；checked_at/updated_at 2026-10-14T19:33:24.830900+08:00。已读本轮COORDINATION1.1、自身、technical-factor-sequence、research-dispatch-controller、portfolio-trends-20261013；末次fetch无新范围变化，无冲突。
