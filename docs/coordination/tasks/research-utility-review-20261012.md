@@ -1,3 +1,15 @@
+# 因子流程审查、两路网页参考与最小整改已交付
+
+- task-id research-utility-review-20261012；owner root；status completed（限定审查与整改）；scope_released true；checked_coordination_sha e10a53ee84b2e1fa801b17f9ef2244c282c1993c；checked_at/updated_at 2026-10-15T02:06:43.832029+08:00。已读COORDINATION1.1、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller及最新investor-workspace-simplification-20261012结案增量；该owner机会/自动化与本轮研究展示无交集，不改其任务或通知。
+- 交付 docs/experiments/factor-research-process-audit-2026-10-15.md，SHA256 3bc04b7bdd3e87d1d92087fb6f95a836d3546b5f8810dc8dba76ebe51b956436；11代表案、原文/代码审查、7独立原作者来源及10检索工具调用。Gemini4Argon高点和GPT-6Pro聊天DeepResearch实际完成并读回，意见经核原件筛选，残余错误未采纳；初始输入笔误和UI截断保留，更正后仍不以多模型同意当证据。
+- 仅修workflow.py中T03主比较展示及专用纯格式辅助、新test_workflow_report_summary.py；自身proposal更正信息/资金入口与完整A依赖、已见家族历史限制。精确增量见本轮raw/*-correction.patch、integration-receipt.json；源码SHA e3ae7506f9e84d7fdc1edad8dea8f3fcce240f689bd3b0f531af7bd043230aac，未改评价/公式/预算/旧合同，不重复已有账户拒绝检查。
+- root隔离4项1.77s、主仓4项1.87s通过；Sol独核真实渲染/原hash/最终表格，root独算RMSE；旧T03三输入和10月14日报告hash不变。真实5188标题、性能/增量表、两路最终取舍及刷新读回，API正文与文件相同；归置/准确diff通过，registry仅新键，旧项保持。
+- 两原目标仅note并读回：okr-ff1e0a86fbac139→140、okr-6d9177bc89ff18→19，原状态/授权/负责人/里程碑/下一步保持，用户效果待验收。新拟合/回测/行情下载0；token费用未知。Sol/medium实际案例与小修，Astra/high方法，root独立文献/网页/集成/最终判断。
+- 成果仅本地codex/factor-evidence-integration-20261012工作树，基线70ab55556874228d2cba66cf50f96d0318e1a5be；本轮源码/文档未提交未推，准确内容指纹与delta已保存，不能以基线冒充最终源码提交。主仓精确镜像供研究工具/Web使用；远端仅本协调摘要，跨设备完整复现未建立。
+- 本轮问题已回答：未发现推翻所核主数字的计算错误；尚无已验证操作增益，完整A小时资料及触发/成交/退出/资金正式绑定仍缺。原技术owner继续其独立范围，不重开负向候选、不调整原规则、不用旧模拟替原文、不再次索要用户已说明没有的资料。网页研究均结束，无本轮后台任务。下一步仅用户阅读验收或具体新证据触发的新问题。
+
+---
+
 # 因子流程审查：确认缺口与最小整改范围
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 0238af428c294398b8acbdb5f88fbc9e2bdd66f7；checked_at/updated_at 2026-10-15T01:31:55.653415+08:00。已读COORDINATION1.1、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller，以及最新investor-workspace-simplification-20261012变更；其机会工程与本次研究报告格式无交集。技术/经典任务共享workflow仅各自适配/输入块；本轮只render_report主指标展示，不改分派/预算/评价/公式。
