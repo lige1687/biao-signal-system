@@ -1,3 +1,24 @@
+# 趋势交易增量资料研究已交付（2026-10-14）
+
+- task-id research-utility-review-20261012；owner root；status completed（限定资料研究）；scope_released true；updated_at 2026-10-14T17:14:40.451752+08:00；checked_coordination_sha 509358e456d4bfaec140438b337f3e338eed37cd；checked_at 2026-10-14T17:14:40.451752+08:00。已读COORDINATION、自身、technical-factor-sequence、classic-factor-research、research-dispatch-controller、treasury-yield-video-20261013及开工前新增ai-sycophancy-video-20261012发布记录；交付fetch与开工无新范围变化，独立文档无冲突。
+- 交付 docs/experiments/trend-strategy-increment-literature-2026-10-14.md，SHA256 d2e76e6dca5a2f87da42503c967c51b00735122f3b82e5ad2af2c6de960f2d62；同名raw小协议、来源/阅读级别、9项源指纹、757项精确人工算术核查、Web/API/登记/目标回执。原策略本来同周期SMA+EMA；单线仅诊断对照，完整原文与旧简化账户区分，过程示意不擅自升级不同日硬条件。
+- 结论：专业资料支持优先核原策略过程、回调位置及确认代价，公开6类趋势方向与原有信息对照；同源重复与旧双均线/PPO反例保留，没有新增已验证因子/组合胜率或生产采用。原完整A资料/执行限制沿原owner；本轮未重新查遍输入，不冒称全部策略完成。
+- 预算与来源：6次批量外部工具请求，15搜索+14打开+8定位=37项，4打开失败保留；X原帖未取得，Carver/SSRN只按实际阅读级别使用。0新市场回测/拟合/行情/付费，无子agent，token费未知。来源研究已回答，无活跃后台运行或后续自动任务。
+- 验收：原9项源指纹不变、API正文逐字一致，真实5188标签页5报告/性能与增量表/来源/刷新及可读性已核；主仓666→667与隔离树322→323旧登记逐值保持，仅增本报告。根仓归置/diff通过；隔离稀疏树误用相对归置脚本缺文件失败已保留，改在主仓实际执行通过。两个原目标仅note读回，ff1e0a86fbac137→138、6d9177bc89ff16→17，其他字段保留，用户验收待确认。
+- 工作分支codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be；本轮报告/raw/增量登记与原work-progress仅本地未提交/推送，远端只有协调摘要，不声称远端可复现。未改学习库共享JSON、原文、定义、生产源码或他人任务。释放仅本轮自己的文档/单项登记范围。
+
+---
+
+# 趋势交易增量资料研究（2026-10-14）
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；updated_at 2026-10-14T17:02:11.852587+08:00；checked_coordination_sha 2c075087819a5cafd9c347276b1096ae5caf3896；checked_at 2026-10-14T17:02:11.852587+08:00。已读 COORDINATION、自身、technical-factor-sequence、classic-factor-research、research-dispatch-controller、treasury-yield-video-20261013。最新增量仅视频，无本轮路径冲突；root 唯一写者，不接管原技术研究。
+- 用户明确授权检索专业趋势交易者、X及公开趋势因子，分析对原策略和因子研究的启示。问题限于原始资料与现有证据对照；原策略本来就是同周期 SMA+EMA，单线只作移除条件的研究对照，纠正“加第二条均线”的表达。基线为原文完整流程，旧简化账户不能冒充原策略成绩。
+- 工作树 codex/factor-evidence-integration-20261012，代码基线70ab55556874228d2cba66cf50f96d0318e1a5be；写范围仅 docs/experiments/trend-strategy-increment-literature-2026-10-14.md、同名raw小协议/来源账本/核验、registry/INDEX本报告单项、本任务原work-progress、原目标note和本协调记录。同步同名小文档至本地Web读取路径；不改原策略、定义、学习库共享JSON、源码或其他owner文件。
+- 研究模式 research / source review：6次外部检索工具请求上限（每次检索条目/页面分别记录），0新市场回测/拟合/行情下载、0付费、1负责人无委派；不重开封存双均线或颜色研究。前2次只读资料已执行；实际token费用未知。小报告与来源账本预计少于200KiB，不创建大型结果。
+- 验收：一手来源/阅读层次/日期，策略重合与真正未测内容、已核成绩与反例、增量判断表、具体可检验定义与权限边界、报告登记及Web读回。原论文或名家说法不等于本地ETF有效；X不可核就明示。独立新问题的市场效果不在本次资料研究中伪造。
+
+---
+
 # 双均线保存账户的决策差额诊断交付
 
 - task-id research-utility-review-20261012；owner root；status completed（本轮有界旧账描述）；scope_released true；updated_at 2026-10-13T20:44:23.898433+08:00；checked_coordination_sha 8b043a5e5439baa8f659da85bd7ca0c4249c132a；checked_at 2026-10-13T20:44:23.898433+08:00。本轮已读COORDINATION、自身、technical-factor-sequence、中控、classic-factor-research、dual-ma-video-copy-20261009、investor-workspace-simplification-20261012；交付复核增量只treasury-yield-video-20261013的视频/Skill范围，与本报告无冲突。
