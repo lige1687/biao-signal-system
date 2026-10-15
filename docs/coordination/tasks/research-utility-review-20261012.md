@@ -1,3 +1,14 @@
+# 个股双均线真实效果研究：接续
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3；checked_at/updated_at 2026-10-15T20:38:30.840292+08:00。本轮fetch/read COORDINATION、自身、research-dispatch-controller、risk-shape-information、technical-factor-sequence、original-eight-continuation-20261010、frozen-input-recovery-20261010与investor-workspace-simplification-20261012。后者只改机会/API/前端/宏观背景，与本研究无共享源码路径；保留全部脏状态。
+- 用户明确授权将取得的当前CN300/IVV504股票池实际检验双均线对单线/简单基准的新增帮助与等待/错过代价，最后Web可看结论。服务原策略同周期20方向确认的信息层，不变更策略/阈值/真实执行。历史名单事后选择、当前调整版本/到达未知保持，仅限定回顾，不冒称完整指数历史。
+- 沿用codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be与既有未提交增量。root唯一写报告stock-dual-ma-increment-2026-10-15、同名raw/自身进度、registry仅本键/INDEX仅本行及新定义绑定；研究适配候选范围src/lei_signal/research/stock_dual_ma_information.py、question_contract.py、workflow_inputs.py、workflow.py、必要workflow_evaluation.py、scripts/run_factor_lab.py、tests/unit/test_stock_dual_ma_information.py。原生入口draft→contract→register-report，新kind单独检查，不改旧冻结语义；正式适配唯一执行者待完整合同派发，root不并发改其源码。
+- Astra/high只读设计、Sol/medium只读输入和新适配、Sol/medium只读容量候选已完成；0真实效果拟合。预定20日主目标与20方向，ret20/rv20简单对照，S/E条件与确定性D交互区分；等待保留全部起点状态和共同终点，未确认收益不填零。准确科学合同将在看效果前冻结，不调参或重跑旧ETF/PPO/P26。
+- 真实发现CN backAdjustFactor归一切换会制造假跌，必须逐事件核前复权因子/日线preclose，未资格就不算效果。大结果仍走登记外盘，当前内盘5GiB预检受阻；用户明确授权另建Codex对话腾合适空间，已建01a13f90-f5ca-7111-ac4f-4afd655b71f3负责空间，本任务不清理资料、不降低保护线，继续独立定义/适配。
+- 验收为真实固定全池同观察比较、全起点等待去向、增量/性能/反例/日期相关范围、独立核数与Web实际读回；生产交易、付费、源码提交推送不在范围，远端仅协调。本题全部attempt/失败记录与累计预算保留，未把启动/实现当研究完成。
+
+---
+
 # 个股当前全池资料取得与资格核验：完成
 
 - task-id research-utility-review-20261012；owner root；status completed；scope_released true，仅本次来源取得问题；checked_coordination_sha 504eab88ce5e1f7210ef1074409904f9308ec380；checked_at/updated_at 2026-10-15T20:14:41.656676+08:00。已fetch并读COORDINATION、自身、research-dispatch-controller、risk-shape-information、technical-factor-sequence、original-eight-continuation-20261010、frozen-input-recovery-20261010及investor-workspace-simplification-20261012；最后增量是其机会质量审计完成，自身股票资料范围无冲突。原机会/生产/模型源码未接管。
