@@ -1,3 +1,12 @@
+# 低频交易下一重点与Gemini参考：只读决策研究
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha e9def1f1a17a256a534a901089bcb4c5114a86fd；checked_at/updated_at 2026-10-15T14:16:59.948203+08:00。已读COORDINATION、自身、investor-workspace-simplification-20261012、technical-factor-sequence、research-dispatch-controller，冲突决定：机会/UI/模型由原owner继续，本轮只读，不改代码/设置/交易记录、不代其验收。
+- 用户要求明确下一方向和重点、给Gemini补齐低频策略/因子接入/真实执行闭环/呈现背景，并独立吸收合理建议。采用research-closure report_only：核已有证据与实现，向既有Gemini4高点对话发去非私人摘要、读回并复核；不新增市场实验。实际成交与模拟验收分开，不上传持仓金额、个人计划、凭证或原行情。
+- root唯一写隔离及准确主仓镜像 docs/experiments/low-frequency-decision-priorities-2026-10-15.md、raw/low-frequency-decision-priorities-2026-10-15/，registry该一键及INDEX一行、自有work-progress；必要时仅给原目标追加note。只读Sol核现行决策/计划/手工成交/复盘能力及缺口，不写文件不联网。新源仅为本问题必要原件；不以通用默认扩预算，不重开封存结果。
+- 成果分支沿codex/factor-evidence-integration-20261012@70ab55556874228d2cba66cf50f96d0318e1a5be加本机已验修改。验收交付按优先顺序列可执行事项、理由/反例、现有能力、缺项及完成标准，保存Gemini原问答与采纳/拒绝理由。源码/报告不自动提交推送；远端仅协调。
+
+---
+
 # 因子研究纠偏与多项接入：有界验收完成
 
 - task-id research-utility-review-20261012；owner root；status completed；scope_released true；checked_coordination_sha 79508d71f887f5642df3dd9b6bd6ddfb9f2626ba；checked_at/updated_at 2026-10-15T14:08:22.661649+08:00。已读本轮COORDINATION、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller及investor-workspace-simplification-20261012，最新重载窗口确认文件不重叠。只释放本轮三源码/两配置/新观察/报告及登记键，机会/UI/模型由原owner继续；没有向其授予新工作。
