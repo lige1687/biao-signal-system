@@ -1,3 +1,14 @@
+# 因子研究纠偏与多项接入：有界验收完成
+
+- task-id research-utility-review-20261012；owner root；status completed；scope_released true；checked_coordination_sha 79508d71f887f5642df3dd9b6bd6ddfb9f2626ba；checked_at/updated_at 2026-10-15T14:08:22.661649+08:00。已读本轮COORDINATION、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller及investor-workspace-simplification-20261012，最新重载窗口确认文件不重叠。只释放本轮三源码/两配置/新观察/报告及登记键，机会/UI/模型由原owner继续；没有向其授予新工作。
+- 三项实际修正：全起点与可算结果分母/排除原因；报告用途及同指标同单位基准前置；产品全部绑定因子逐项消费。137等待去向旧报告已有，纠正此前误述，缺口是完整资金政策比较。588000新60日历史观察3.8938%与20日4.5858%同为2026-06-30，不是独立确认或组合收益。源码factor_product_context最终SHA 8ad559be47b280d7b2e41752bbd6f8f5becc77f5f0cebfae8e48cf13cea3b068，首屏明确不能据此判断买卖。
+- 35相关检查通过；文案修正后受影响4项通过；Astra独核无阻塞。8000真实请求588000双项/当前未知、159915单项、012920无绑定通过；5188首屏/展开来源/刷新后历史恢复通过。报告页面与API正文核同，目录自检通过。用户主观使用效果待验收；不代验另一owner模型链路。
+- 报告 docs/experiments/factor-decision-closure-2026-10-15.md SHA64d59d8202ca929778f89da61a9ee9d51ea356e5ac05978eea1974688b93c91a；raw同题约90KiB，含合同、原失败、精确patch、观察核对、测试/接口/归档/升级回执。主仓registry670→671/隔离325→326，仅一键，其他项保持。两既有目标仅note140→141及19→20，其余字段未改。原proposal与work-progress已补。
+- 来源分支codex/factor-evidence-integration-20261012@70ab55556874228d2cba66cf50f96d0318e1a5be加本地未提交修改；运行三源码两配置、新观察和小报告已准确本地镜像主仓。源码未提交/推送，远端只有协调；隔离树依赖主仓证据，不保证异机恢复。原策略/阈值/旧raw不变，无交易/模型设置更改；本owner没有重启服务，原owner管理重载后已读回最终实际行为。
+- 新市场拟合0/回测0，单日既有定义观察计算1，公开网页请求5，外部AI新调用0；token/费用未知。本有界问题已回答，无本任务后台运行。整体有效因子/组合及完整A未证明；当前因子资格、合格历史小时与正式执行链仍缺。只因新证据/明确未答问题接续，不重置旧预算或重跑封存结果追正收益。
+
+---
+
 # 验收与准确本地镜像窗口
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 2b36c47d99d8dc19dd2ad34d513dca4952df1d1d；checked_at/updated_at 2026-10-15T13:51:31.926255+08:00。已读取上一阶段 COORDINATION、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller、investor-workspace-simplification-20261012；本次fetch远端无更新，冲突决定沿用三源码/两配置准确范围，机会/UI/模型代码保持原owner。
