@@ -1,3 +1,14 @@
+# 资料整理与反方检查已接入，真实模型答复等待决定 2026-10-15T12:33:37.269960+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；本轮工程接入已验，整体in_progress；当前等待用户模型选择，scope_released=false，仅保留原机会文件的后续真实模型验收范围。没有后台审核运行或循环重试，不能称主线完成。checked_coordination_sha=39f5b4c1404415921ac9172113fe0753db9b837b；checked_at=2026-10-15T12:33:37.269960+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller；最后fetch无新增差异，无重叠，root唯一写本任务。
+- 已实现准确产品公开基本面/新闻整理与独立反方核对两项职责；新闻标题仅待核线索，报告/发布/核查日期区分；不传私人备注/净值/计划原文。原规则输出保持，MACD/灰色/B1仅背景，真实卖出依据沿用原信号。基金背景与官方ETF材料进入输入；较旧披露与缺正文如实保留。
+- 页面同一产品并看买卖条件、共享公开背景、分环节失败与明确重试。实机34产品/68方向卡，公开源34次核查取得10条标题；本轮模型4阶段请求（每次有限重试）均在响应头后约170秒超时，0正文。最后记录partial/12不需模型/56失败，打开复用同run且未追加调用；0运行中worker。公开Flash小请求约3.8秒返回只算连接可用，用户是否仅今日机会换用Flash尚待回复，配置与模型保持原值。原失败保留，不冒称金融分析通过。
+- 92相关Python检查、Ruff、主仓及隔离按现行检查器的归置、显示专测和TypeScript/Vite构建通过；既有大包提示保留。真实浏览器双向条件、公开来源/日期、易方达信息产业混合A准确买入与卖出想法入口已验；0真实判断/确认/计划/成交写入。窄屏、真实完整模型答复及首个14:30日程触发未验。本轮未更改既有日程或因子研究对话。
+- 运行5188隔离前端与8000受管后端健康，最后后端PID46459/runs16。本轮15准确源码配置测试路径、11后端镜像及指纹保存在原archive opportunity-context-acceptance-20261015.json；交付说明opportunity-context-delivery-20261015.md，work-progress已更新，截图仅本机.codex。分支codex/investor-workspace-simplification-20261012、基线e6c4c2e025252c565ba15f05611561ca1ecd5b48；源码仅本地未提交/未推/未合main，远端不能独立恢复本轮源码。
+- 原目标okr-4c2ea452d3cc只追加note v26→27并API读回，原owner/status/授权/完成标准保护字段保持；回执在原archive opportunity-context-goal-receipt-20261015.json。三项Sol/medium实现与独核已结束，费用未知。后续仅按用户模型选择或原服务恢复线索，完成真实来源、反证、日期与结果复用验收；不重跑已过检查或封存研究。
+
+---
+
 # 机会分析缺口修复与双向页面：开工 2026-10-15T11:49:54.454526+08:00
 
 - 同一task/owner重新active，scope_released=false；checked_coordination_sha=a59e350de12d543a9c4f674c0b0c1ad451c7e36d。已读COORDINATION1.1及自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller当前段；无新增相关写者。前轮58测试只覆盖工程流程，基本面遗漏与真实模型失败明确保留，不能称综合分析完成。
