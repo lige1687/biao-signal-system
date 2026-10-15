@@ -1,3 +1,14 @@
+# 今日机会：接入走势与重排第一屏（本轮进行中）
+
+- 更新时间 2026-10-15T16:19:06.858186+08:00；checked_coordination_sha 2292b0992f8985f5680be01326291e09526f9bdb。已读COORDINATION及原六相关任务；其他最新增量仅research-utility-review自身研究记录。沿用同一owner/task-id/分支，基础e6c4c2e025252c565ba15f05611561ca1ecd5b48，当前源码仍含本地未提交增量，不冒称远端可复现。
+- 用户反馈资料不足重复、没有结合K线、第一眼不知道看什么。本轮服务策略展示与资料理解层：保留Python技术判定，ETF真实OHLC、基金同份额真实净值折线、已核行业参考分开显示；不生成基金伪K线，不用行业ETF替代基金买卖条件。两份桌面策略SHA已核与登记一致。
+- 已查：29基金28单点NAV、0同产品OHLC；已有基金净值序列前端定义没有后端路由。新增独立opportunity_market按需单基金公开历史读取（复用现有funddata提供方，最多180点，缓存、超时/错误、身份/日期检查）；精确行业参考复用已有workspace，不改账户/计划。ETF复用detail图表。
+- 准确路径见结构区块。仅后端新module/route/test精确镜像到8000主树，前端只在5188工作树；备份指纹后必要时只重载com.lei.backend。Sol后端和图表文件范围互斥；root唯一页面/样式/API类型/登记。
+- 验收：真实ETF K线与买卖条件同屏、基金净值及行业参照有日期/准确身份、选择切换不串产品/不批量加载34图、失败可见可恢复、首屏重点明确、桌面/375px、相关测试/build/归置。新市场实验/策略改动/真实交易写入0。模型继续原Pro，此步不改其设置。
+- 14:45本日定时触发已真实执行：health200、ensure复用2049运行、54成功2失败12无需模型；原失败保留。该事实只更正旧“首定时未验证”，不扩大或改变自动化。
+
+---
+
 # 机会报告架构与Pro真实流程：有界验收结束
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status completed、scope_released true仅本批范围。checked_coordination_sha=31485cc71b4093aaa5a5be94b88789d3d772ea51；checked_at/updated_at=2026-10-15T14:42:53.042296+08:00。原六任务已读；新增research-utility-review只读方法报告无机会源码重叠。本轮没有向因子用户对话派任务；收到的接续建议保留参考，未擅自代改其范围。
@@ -487,9 +498,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "31485cc71b4093aaa5a5be94b88789d3d772ea51",
-  "checked_at": "2026-10-15T14:42:53.042296+08:00",
+  "status": "active",
+  "checked_coordination_sha": "2292b0992f8985f5680be01326291e09526f9bdb",
+  "checked_at": "2026-10-15T16:19:06.858186+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -501,42 +512,34 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
-    "src/lei_signal/api/opportunity_evidence.py",
-    "src/lei_signal/api/opportunity_context.py",
-    "src/lei_signal/copilot/opportunity_review.py",
-    "src/lei_signal/copilot/opportunity_transport.py",
+    "src/lei_signal/api/opportunity_market.py",
     "src/lei_signal/api/routes/opportunity_reviews.py",
-    "tests/unit/test_opportunity_evidence.py",
-    "tests/unit/test_opportunity_context.py",
-    "tests/unit/test_opportunity_review_service.py",
-    "tests/unit/test_opportunity_transport.py",
-    "tests/unit/test_opportunity_preparation.py",
-    "web/src/api/opportunityReviews.ts",
+    "tests/unit/test_opportunity_market.py",
+    "web/src/components/opportunities/OpportunityChart.tsx",
+    "web/src/components/opportunities/opportunityChartModel.ts",
     "web/src/pages/OpportunitiesPage.tsx",
     "web/src/pages/opportunities.css",
+    "web/src/api/opportunityReviews.ts",
     "web/scripts/test_opportunity_display.mjs",
-    "configs/opportunity-sources.v1.json",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-review-*",
+    "web/scripts/test_opportunity_chart.mjs",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-workflow-*",
-    "docs/experiments/decision-mainline-practices-2026-10-14.md",
-    "docs/experiments/raw/decision-mainline-practices-2026-10-14/report-pipeline-20261015/"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-*"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T14:42:53.042296+08:00",
-  "conflict_decision": "已读原六相关任务；最新research-utility-review仅方法报告/自身目标，没有机会模型或UI源码重叠。root唯一集成登记；本轮三个Sol已结束，因子用户对话未派任务。",
+  "updated_at": "2026-10-15T16:19:06.858186+08:00",
+  "conflict_decision": "最新其他任务仅具体决定研究的只读研究/自有报告，不接管机会源码。root改首屏/API类型/样式/相关显示测试与唯一登记；Sol分别独立后端按需公开行情资料和前端图表组件，不修改交叉文件。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-workflow-acceptance-20261015.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
     "schedule": "每天北京时间14:30",
-    "first_scheduled_run_verified": false
+    "first_scheduled_run_verified": true
   },
   "registry_scope": "registry.json仅原decision-mainline-practices报告键；其他任务新增项保留",
-  "remaining": "摩根标普500C两方向模型引用/格式检查失败；资料与用户效果限制见验收，无本轮运行中任务。整体系统目标in_progress v28。"
+  "remaining": "本轮用户反馈：资料未接全、无K线、首屏不清晰。按需接基金净值历史及已核行业ETF图，保留真实信号缺口。"
 }
 ```
 <!-- lei-coordination-json:end -->
