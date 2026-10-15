@@ -1,3 +1,14 @@
+# 机会报告架构与Pro真实流程：有界验收结束
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status completed、scope_released true仅本批范围。checked_coordination_sha=31485cc71b4093aaa5a5be94b88789d3d772ea51；checked_at/updated_at=2026-10-15T14:42:53.042296+08:00。原六任务已读；新增research-utility-review只读方法报告无机会源码重叠。本轮没有向因子用户对话派任务；收到的接续建议保留参考，未擅自代改其范围。
+- 用户明确继续Pro。两角色为基本面/新闻解释与资料内反方，程序负责既有接口/已存披露/官方清单/公开消息查询、同产品材料与机械校验。公开项目借鉴固定TradingAgents源码、OpenBB官方字段设计，补入原实践报告，无外部平台安装/收益实验。兼容请求使用nonstream、thinking disabled，未更改全局配置或换Flash。
+- 实跑固定快照34产品68方向56完成/2失败/10无需模型；最终盘中页面54完成/2失败/12无需模型，行情变化及通信指数资料不合格造成差异。摩根标普500C引用/格式失败保留，未全批追重算。SQLite争用4孤儿已恢复；存储重试不重调模型，旧未存回包无法恢复。独核发现SOXX编造用户论据/过强代理表述，旧答案失效留档后准确两卡复核完成。
+- 页面双向卡、各自反方、经理行业观点、来源日期、相同来源去重已实测。128相关Python、Ruff、构建、两树现行归置、375px无横溢、实际基金买入入口/两方向准确链接通过；浏览器刷新阶段回执80→80无新增模型调用。0真实判断/确认/计划/成交，0运行worker。8000受管PID82219/runs21、health200；5188隔离页面可见。原14:30日程未改，首个定时触发本轮未验。
+- 本地分支codex/investor-workspace-simplification-20261012，基线e6c4c2e025252c565ba15f05611561ca1ecd5b48加15路径未提交增量；11后端配置/测试主仓与隔离一致；源码未推/未合主分支，远端不能独立恢复。准确SHA与真实结果在opportunity-workflow-acceptance-20261015.json；失败和交付同名原archive。完整运行payload仅本机.codex，公共报告与小回执已镜像。
+- 原目标okr-4c2ea452d3cc仅note27→28、API读回，owner/status/授权/完成标准/历史保留，整体in_progress。仍5/34有同产品技术材料，基金完整当前成分/部分披露/新闻正文缺失，未证明投资效果。用户体验待验收；后续按明确资料或模型缺口接续，不重开封存研究。
+
+---
+
 # 真实模型恢复与本机受管重载窗口
 
 - checked_coordination_sha=89c1a3c6502b838753bf106a2cbd2201d2a1b294；checked_at=2026-10-15T13:53:31.247907+08:00；已读COORDINATION及原相关task，本次增量read research-utility-review-20261012，三源码两配置与本机会范围无重叠；其报告registry另键，不覆盖。task/owner和原授权范围保持。
@@ -476,9 +487,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "a59e350de12d543a9c4f674c0b0c1ad451c7e36d",
-  "checked_at": "2026-10-15T11:49:54.454526+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "31485cc71b4093aaa5a5be94b88789d3d772ea51",
+  "checked_at": "2026-10-15T14:42:53.042296+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -506,21 +517,26 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/scripts/test_opportunity_display.mjs",
     "configs/opportunity-sources.v1.json",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-review-*",
-    "docs/ops/work-progress/investor-workspace-simplification-20261012.md"
+    "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-workflow-*",
+    "docs/experiments/decision-mainline-practices-2026-10-14.md",
+    "docs/experiments/raw/decision-mainline-practices-2026-10-14/report-pipeline-20261015/"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T11:49:54.454526+08:00",
-  "conflict_decision": "读取原六相关任务及最新因子交付；本轮机会独立文件无重叠，root唯一集成登记，Sol按明确文件分工，不派发用户因子对话。",
+  "updated_at": "2026-10-15T14:42:53.042296+08:00",
+  "conflict_decision": "已读原六相关任务；最新research-utility-review仅方法报告/自身目标，没有机会模型或UI源码重叠。root唯一集成登记；本轮三个Sol已结束，因子用户对话未派任务。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-review-acceptance.json",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-workflow-acceptance-20261015.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
     "schedule": "每天北京时间14:30",
     "first_scheduled_run_verified": false
-  }
+  },
+  "registry_scope": "registry.json仅原decision-mainline-practices报告键；其他任务新增项保留",
+  "remaining": "摩根标普500C两方向模型引用/格式检查失败；资料与用户效果限制见验收，无本轮运行中任务。整体系统目标in_progress v28。"
 }
 ```
 <!-- lei-coordination-json:end -->
