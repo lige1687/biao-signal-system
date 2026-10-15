@@ -1,3 +1,13 @@
+# 个股双均线：六份合同冻结，真实比较正在执行
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 825d535ffbc065e0684dac6309ac9c9582e525bc；checked_at/updated_at 2026-10-15T21:24:13.003194+08:00。已读COORDINATION、原七相关任务，增量只读storage-headroom-20261015完成及investor-workspace-simplification-20261012最新时效/图表交付，均无研究源码或本报告重叠；root唯一报告/共享登记写者。
+- 空间任务已保存B站草稿、正常退出Chrome并按准确授权清缓存，原固定5GiB预检实际恢复；本研究不删资料/不改容量阈值。已在固定外盘创建新CN/US资格面板，含全部300/504对象；名单回看/调整版本/历史到达未知边界不变。
+- 当前六native合同v2已实际draft冻结通过；初版缺data_sha256资格包装而在统计前拒绝，失败原件保留。Astra核精度修补与13合成项通过；root只将重复label字段置空使冻结前不泄露答案，数学不变，保留前后指纹。源代码仅原独立树五文件，不改main/Streamlit/生产。
+- 真实六成对比较顺序运行，账本累计上限12fits/7200秒不变；CN前两项完成，第三项运行；US未启动。执行结束不等于科学核验。另Sol按只读合同独算价格端点/成熟均值/全部等待分母，0新增fits。性能、稳定性/40日同步区间、等待/未确认涨跌、独立核数、native登记和Web读回尚待完成，继续执行，不宣告有效因子。
+- 科学合同、sourceprecheck、失败、各plan/六合同和运行回执在同名raw；大结果/日志在stock-ma-*登记外盘目录，本机只小索引。预算/原ETF及PPO/P26封存不重置，未购买或新增行情。成果分支codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be加本地未提交修改；没有成果commit/push或main合并，远端仅本协调记录。
+
+---
+
 # 个股双均线真实效果研究：接续
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3；checked_at/updated_at 2026-10-15T20:38:30.840292+08:00。本轮fetch/read COORDINATION、自身、research-dispatch-controller、risk-shape-information、technical-factor-sequence、original-eight-continuation-20261010、frozen-input-recovery-20261010与investor-workspace-simplification-20261012。后者只改机会/API/前端/宏观背景，与本研究无共享源码路径；保留全部脏状态。
