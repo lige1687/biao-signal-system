@@ -1,3 +1,15 @@
+# 个股双均线增量、等待代价及Web交付：有界完成
+
+- task-id research-utility-review-20261012；owner root；status completed；scope_released true，仅本次股票20日方向问题；checked_coordination_sha f2bf827f6c52100df99787b80c413ec64b69e760；checked_at/updated_at 2026-10-15T22:15:57.972823+08:00。复用已读COORDINATION和原七任务、storage-headroom-20261015；再读investor-workspace-simplification-20261012最新简报/通信定位，末次fetch无新增，其API/UI不接管，彼此无共享源码路径。root唯一报告/共享登记写者，执行和独审agent已结束。
+- 原固定CN300/IVV504名单，实际共同评价296/499、95524/174916行，观察2025-01-02—2026-05-29，标签至6月底；6成对合同12真实fits，汇总/独审/原生登记0新增fits。40日同步日期1000次区间、时期/单股/季度反例及全部30933等待起点均完成，26冻结绑定再核未变；13合成+3相关检查、Astra独审精确边界、Sol独立全行核数和root另算关键差通过。
+- 有界结论：CN近期价格误差157.1949到全组合157.3937更差；US110.4434到110.4359仅改善0.0067%且跨期反号，单SMA110.4217更好；未确认稳定新增帮助。成对等待4476/8994，平均多等2.19/2.38交易日，参考价更高，至同一终点少涨1.334/1.168点，未确认上涨/下跌都保留。当前成员回顾/历史到达与修订/终止价值限制不变，不能当完整策略/真实资金收益。
+- 报告docs/experiments/stock-dual-ma-increment-2026-10-15.md，最终SHA3329066b6fd52782f8e8f4217e9cdd3f415af567d0b7a09be1e1319eeec86a82；同名raw合同、位置、失败、全量汇总380554B和核数回执完整。主树只镜像本报告/小raw，registry本键/INDEX本行，API逐字核同/pending=false；真实5188主成绩、等待、8预定知名股、遗漏对象、时期/来源限制展开/收起及刷新通过。实际窄屏首屏过长已做报告呈现修正，数值不变；归置和本任务diffcheck通过。用户视觉效果仍待验。
+- 目标仅note并精确读回：ff1e0a86fbac145到146仍in_progress，K-data-boundary24到25仍review；保护字段/历史前缀不变。POST与GET派生progress差异导致验收断言失败，先读回成功再继续另一项，未重复写。原生本机证据账本123340978B高于初估，实际余量仍足、登记估计已修64MiB；原账本保留，成本缺点记录，不伪称全部大文件在外盘。受管记时2813.9/7200秒，token费用未知。
+- 本地成果分支codex/factor-evidence-integration-20261012，基线70ab55556874228d2cba66cf50f96d0318e1a5be加未提交增量，无成果commit/push/main合并；生产源码/规则/真实交易未变，无新行情、不重开旧ETF/PPO/P26。远端仅本协调记录，跨设备完整复现未声明；完整大面板/预测/等待/日志须同已核资源外盘。
+- 本题全部必要验收已完成，无阻塞或本题后台研究进程；后续不自动扫描参数追正。整体有效因子、完整账户/小时条件和生产采用未完成，不代原负责人关闭。当前后续只保留已验证材料供用户查看；新独立问题须按其准确范围继续。
+
+---
+
 # 个股研究数值完成，准备报告库读回
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 7232ddcac52b3752ef5fa52b979f3b60ae8527f0；checked_at/updated_at 2026-10-15T22:05:19.724067+08:00。已读COORDINATION及原七相关任务，新增storage-headroom-20261015完成和investor-workspace-simplification-20261012截至21:59的简报/通信调用定位；其API/UI/模型修改与本题报告/raw/自身registry键无重叠，不代改其文件或状态。
