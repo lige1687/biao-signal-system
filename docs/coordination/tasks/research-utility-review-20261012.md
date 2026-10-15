@@ -1,3 +1,13 @@
+# 因子研究纠偏与多因子决策证据：新授权接续
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 5807cdff5a47f749b17faaf6e03200304b0913bb；checked_at/updated_at 2026-10-15T13:32:07.170853+08:00。已读COORDINATION1.1、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller及investor-workspace-simplification-20261012最新段；后者机会/模型接口保留其唯一写者，本轮只读，不接管页面或重载服务。
+- 用户本轮授权纠正过程问题及潜在陷阱，尝试从买卖决定交付但不强求正结果；研究多因子共同读取/组合评估架构并查权威公开来源。服务策略技术研究及证据解释层，不改原文/阈值/账户/交易、不新增参数搜索、不用模型投票代替组合有效性。
+- 复用隔离树codex/factor-evidence-integration-20261012@70ab55556874228d2cba66cf50f96d0318e1a5be，保留旧未提交修改。root新增docs/experiments/raw/factor-decision-closure-2026-10-15/及docs/experiments/factor-decision-closure-2026-10-15.md、自有work-progress；共享registry/INDEX稍后单独登记窗口，当前只读。代码准确范围在只读核查后另登记，不预占共享入口。旧报告、冻结输入、预算和结果不改。
+- 两个本任务只读助手：Sol/medium架构核查，Astra/high方法核查；合同在新raw各*-contract.json，write_paths=[]、network=false、max_agents=1。root负责公共原作者检索、范围决定、最终实现和验收；不新建用户chat、不调用其他模型网页、不外发私有材料。
+- 验收：已确认缺口落实相应程序/报告修正及反例测试；多因子可同一产品同一时间核查，资料过期/冲突/缺组合结果明确；以创业板、科创50和全球成长身份做只读实例，能调用不等于组合获利。若新科学比较有合格资料和定义再独立冻结，否则明确边界而不凑买卖建议。初始新拟合/市场回测0，源请求逐次记账；不以通用6次默认自行停止，沿用户真实范围/额度。
+
+---
+
 # 因子流程审查、两路网页参考与最小整改已交付
 
 - task-id research-utility-review-20261012；owner root；status completed（限定审查与整改）；scope_released true；checked_coordination_sha e10a53ee84b2e1fa801b17f9ef2244c282c1993c；checked_at/updated_at 2026-10-15T02:06:43.832029+08:00。已读COORDINATION1.1、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller及最新investor-workspace-simplification-20261012结案增量；该owner机会/自动化与本轮研究展示无交集，不改其任务或通知。
