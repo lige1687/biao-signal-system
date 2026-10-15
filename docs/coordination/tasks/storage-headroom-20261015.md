@@ -67,3 +67,5 @@
 - storage固定UUID正确、4资源available、外盘559455928320B；归置通过。数据库/冻结raw/环境/会话/他人工作树仍保留。任务目标已达（内盘保留线以上多于约1GiB），不再扩大清理，不恢复Chrome造成立即回写，不创建监控。
 - 成果codex/storage-headroom-20261015@23dc9cfe430d24bc847de8e6c9116c8d99bbdc07，唯一docs/ops/work-progress/storage-headroom-20261015.md，远端SHA及逐字内容读回。小私有证据bilibili-draft-saved.json、chrome-cleanup-receipt.json、chrome-final-preflight.json、research-worktree-preflight.json仅data/cache/storage-headroom-20261015/；旧包TAR恢复路径沿前文，私人内容不Git。
 - scope_released=true（本轮准确整理完成）；原恢复/操作记录保持。本任务无待决定/运行中清理/必要后续，主研究负责人自行读取结果继续，不发其他聊天消息。未来容量会变化，当前通过不担保永久余量。
+
+- 交付同步非快进失败保留：fetch后核新增investor-workspace-simplification-20261012机会质量范围，无Chrome缓存或本记录冲突；正常merge保留对方完整记录。checked_coordination_sha: 97c8d02b5f55e4418628e7d4fb59c7fee0d82276；checked_at: 2026-10-15T21:00:42.527046+08:00。未强推，成果与已验空间状态保持。
