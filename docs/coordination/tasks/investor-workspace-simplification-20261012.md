@@ -1,3 +1,11 @@
+# 实际验收发现并修复展示与模型资料差异 2026-10-15T20:59:02.673733+08:00
+
+checked_coordination_sha=8a5bdf3a8ba57a4b79cda29b478e7dce4c763544；已读原六任务及storage-headroom-20261015新范围，研究/磁盘任务与机会代码无冲突，root仍唯一集成/共享登记者。状态active，scope_released=false。已实际核通信候选始于2026-08-12、确认2026-10-15，图表同数据源；旧事件折叠。当前继续修复实际点击发现的K线tooltip序号错当开盘价，以及模型卡未引用同一近期事件生命周期/老价背景混入。已有字段与3根日K窗口沿用，不改变技术策略。
+
+新增准确依赖路径web/src/components/klineTooltipModel.ts、web/scripts/test_kline_tooltip.mjs，属于已登记KlineChart联动必要修复；其余源仍为原登记范围。模型年份校验发现仅YYYY年与有日期原件匹配误报，窄修复保留普通数字/百分比检查。只对受影响失败环节有界复验，保留旧失败，不对所有卡循环重试。来源别名实测漏绑已修且真实基金只作行业context。源码仅本地未提交未推；协调记录不代表源码交付。
+
+---
+
 # 用户补充时效与行业宏观背景 2026-10-15T20:33:42.952398+08:00
 
 checked_coordination_sha=476e4fa93dfbede7e68405e3b8fa92be5cbb166c；原六任务已读，fetch无新增变化。用户明确近期操作关注、旧10日结构不应作为新机会、32历史底部无用及上方代理术语不清；要求宏观与行业大事。沿用现有3根日K提醒窗口，不修改规则/阈值；旧仍有效只历史展开，Agent也需看到年龄和历史背景资格。
@@ -582,33 +590,59 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "c98ee23d9e654416137724fa0b819c9bbdd5602a",
-  "checked_at": "2026-10-15T20:00:16.912357+08:00",
+  "status": "active",
+  "checked_coordination_sha": "8a5bdf3a8ba57a4b79cda29b478e7dce4c763544",
+  "checked_at": "2026-10-15T20:59:02.673733+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
     "research-utility-review-20261012",
     "daily-trading-system-audit",
     "investor-observation-map",
-    "research-dispatch-controller"
+    "research-dispatch-controller",
+    "storage-headroom-20261015"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
-    "docs/experiments/opportunity-quality-audit-2026-10-15.md",
-    "docs/experiments/raw/opportunity-quality-audit-2026-10-15/",
-    "docs/experiments/registry.json (only opportunity-quality-audit-2026-10-15 key)",
-    "docs/experiments/INDEX.md (only own report row)",
-    "docs/ops/work-progress/investor-workspace-simplification-20261012.md"
+    "src/lei_signal/api/sell_signals.py",
+    "src/lei_signal/api/opportunity_signals.py",
+    "src/lei_signal/api/bar_status.py",
+    "src/lei_signal/api/card_mapper.py",
+    "src/lei_signal/api/portfolio_workspace.py",
+    "src/lei_signal/api/routes/opportunity_reviews.py",
+    "src/lei_signal/api/routes/symbols.py",
+    "src/lei_signal/portfolio/industry_context.py",
+    "src/lei_signal/api/opportunity_evidence.py",
+    "src/lei_signal/api/opportunity_context.py",
+    "src/lei_signal/copilot/opportunity_review.py",
+    "configs/opportunity-sources.v1.json",
+    "tests/unit/test_sell_signals.py",
+    "tests/unit/test_opportunity_signals.py",
+    "tests/unit/test_bar_status.py",
+    "tests/unit/test_opportunity_evidence.py",
+    "tests/unit/test_opportunity_context.py",
+    "tests/unit/test_opportunity_review_service.py",
+    "tests/unit/test_fund_industry_context.py",
+    "web/src/api/opportunityReviews.ts",
+    "web/src/pages/OpportunitiesPage.tsx",
+    "web/src/pages/opportunities.css",
+    "web/src/components/opportunities/",
+    "web/src/components/KlineChart.tsx",
+    "web/src/components/klineTooltipModel.ts",
+    "web/scripts/test_opportunity_signals.mjs",
+    "web/scripts/test_opportunity_chart.mjs",
+    "web/scripts/test_kline_tooltip.mjs",
+    "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-signals-*"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T20:00:16.912357+08:00",
-  "conflict_decision": "已读研究方股票全池来源新范围；不碰其数据和研究源码；仅本任务报告/raw及自己的registry键/INDEX行。",
+  "updated_at": "2026-10-15T20:59:02.673733+08:00",
+  "conflict_decision": "原六任务和存储恢复新增记录已读；研究/缓存删除与机会工程无共享写入。root唯一主树镜像及协调写者。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/experiments/raw/opportunity-quality-audit-2026-10-15/controller-review.json",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-signals-before-20261015.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
@@ -616,7 +650,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "registry.json only opportunity-quality-audit-2026-10-15 own key; preserve others",
-  "remaining": "审计阶段完成，完整当前事件历史准确率尚未评价；需要准确首次started事件适配/冻结、生命周期提取纠正及相同持仓执行资料。当前无后台计算。"
+  "remaining": "完成实际K线联动、同一近期事件进入模型、年份窄校验及有界真实复验；用户效果待验收。"
 }
 ```
 <!-- lei-coordination-json:end -->
