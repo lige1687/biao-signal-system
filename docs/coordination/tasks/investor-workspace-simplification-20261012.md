@@ -1,3 +1,14 @@
+# 今日机会走势与首屏：本批工程验收结束 2026-10-15T16:59:10.385435+08:00
+
+- checked_coordination_sha=b848afb78a701c46dba01b05611066e6d701081b；原六task与COORDINATION已读，末次fetch无新差异。原owner/task/分支不变；本有界status completed、scope_released true，整体原目标in_progress，用户效果待试用。
+- 新增按需基金真实净值历史，最多180点、身份日期及有效数值检查、单飞缓存和有限失败恢复；ETF复用现有真实OHLC/均线/成交量。基金和行业参考分别展示；图切换不改变基金判断对象。中文清单/选中产品/双向条件/基本面与反方层次完成；小屏选择框；compact仅机会页，不改计算或普通看盘默认。
+- 实测易方达信息产业混合A180净值点至2026-10-14；缓存读取1.491秒、模型调用82→82。基金买卖审核准确预选、行业参考切换、375px宽度、16相关后端测试、前端两边界检查/类型构建/现行归置通过。首次HTTP分页上限、隔离缺write_tx、临时JSX、成交量标签拥挤/舍入等失败及修复保留在opportunity-focus-failures。无失败项删改凑通过。
+- 最终68方向52完成/4失败/12无需模型；2产品模型失败保留，0运行worker，0判断/确认/计划/成交新增。29基金同产品技术时点仍缺；新NAV历史尚未喂入既有模型报告，部分报告/新闻正文未取得；不宣称资料全齐、主线或策略效果完成。
+- 11源码SHA与主仓3后端准确镜像在原archive/opportunity-focus-acceptance-20261015.json，交付同前缀delivery文档；原work-progress已补。本地未提交/未推源码/未合主分支，基线e6c4c2e025252c565ba15f05611561ca1ecd5b48，远端不可复现全部增量。5188隔离前端、8000仅必要受管重载一次。截图和原始小备份只留本机.codex，未上传私人库。
+- 3个Sol/medium有界实现与独核均结束，费用未知；未派因子用户对话。原系统目标note28→29已API读回、保护字段/历史保持。本日14:45日程已有真实执行复用回执，原首次未验状态已补正；本批未改日程或恢复其他通知。
+
+---
+
 # 紧凑图布局验收修补 2026-10-15T16:52:43.488476+08:00
 
 checked_coordination_sha 2719903140268e236267c99575f04d75db47c168；原六任务已读无新增差异。真实截图发现小图成交量轴与日期挤压，root在已登记KlineChart.tsx增机会页专用compact布局开关，默认不改变完整看盘。仅网格与标签，不改计算、模型或策略。原图/失败截图保留；修后构建及同图复验。
@@ -510,9 +521,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "2719903140268e236267c99575f04d75db47c168",
-  "checked_at": "2026-10-15T16:52:43.488476+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "b848afb78a701c46dba01b05611066e6d701081b",
+  "checked_at": "2026-10-15T16:59:10.385435+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -538,13 +549,13 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-*",
     "web/src/components/KlineChart.tsx"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T16:52:43.488476+08:00",
-  "conflict_decision": "最终真实截图发现330px机会K线成交量轴和日期挤压；同已登记KlineChart.tsx增加仅机会页启用的compact显示选项，只改网格/轴标签布局，默认其它页不变，所有数值/信号不变。无其他最新协调变化。",
+  "updated_at": "2026-10-15T16:59:10.385435+08:00",
+  "conflict_decision": "末次fetch与本登记版本相同，原六任务范围无新增重叠。本批机会图/首屏/净值接口已验并释放，普通看盘默认显示、他人因子文件保持；整体原目标仍进行中。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-workflow-acceptance-20261015.json",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-acceptance-20261015.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
@@ -552,7 +563,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "registry.json仅原decision-mainline-practices报告键；其他任务新增项保留",
-  "remaining": "本轮用户反馈：资料未接全、无K线、首屏不清晰。按需接基金净值历史及已核行业ETF图，保留真实信号缺口。"
+  "remaining": "用户效果待试用；29基金自身技术时点、新净值进模型、部分报告/新闻正文及2产品4方向模型失败仍未解决。仅按具体新缺口接续，不重开封存研究，不宣称本批后台仍在推进。"
 }
 ```
 <!-- lei-coordination-json:end -->
