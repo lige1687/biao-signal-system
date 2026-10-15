@@ -1,3 +1,12 @@
+# 个股研究数值完成，准备报告库读回
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 7232ddcac52b3752ef5fa52b979f3b60ae8527f0；checked_at/updated_at 2026-10-15T22:05:19.724067+08:00。已读COORDINATION及原七相关任务，新增storage-headroom-20261015完成和investor-workspace-simplification-20261012截至21:59的简报/通信调用定位；其API/UI/模型修改与本题报告/raw/自身registry键无重叠，不代改其文件或状态。
+- 六native真实比较与原生登记全部exit0；12fits，登记复用CN-d为0fit。固定CN300/IVV504实际共同评价296/499、95524/174916行，2025-01-02至2026-05-29，标签至2026-06-30；本题不是完整历史指数或资金账户。全部30,933等待起点保留。Sol独立逐行端点/预测/等待/区间核数通过，root另独算关键差，差仅浮点末位。26冻结绑定再核未变。
+- 本方法内CN组合未获新增支持，US相对简单价格仅微小改善且跨期反号，组合不优于单SMA；结果不用于擅改原策略。统一报告已生成SHA9c04eab86fcc983501a49bce9f13fb8b0e94df420c9438e482bdeb0b17e97777。后续仅主树新报告/小raw镜像、registry本键/INDEX本行、目标仅note及Web读回；生产源码不镜像。
+- 大结果在登记外盘；旧原生本机账本实际123340978B高于最初小记录估算，保护余量仍足，发布预检已按64MiB估计修正，原账本不搬删，缺点与实际2813.9秒受管记时留raw。Scientific variants6/12fits未扩，不调参、无新行情、无交易。工作分支原基线及未提交源码保持，远端只有协调记录，不能异机完整复现。
+
+---
+
 # 个股双均线：六份合同冻结，真实比较正在执行
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 825d535ffbc065e0684dac6309ac9c9582e525bc；checked_at/updated_at 2026-10-15T21:24:13.003194+08:00。已读COORDINATION、原七相关任务，增量只读storage-headroom-20261015完成及investor-workspace-simplification-20261012最新时效/图表交付，均无研究源码或本报告重叠；root唯一报告/共享登记写者。
