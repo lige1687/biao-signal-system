@@ -1,3 +1,11 @@
+# 验收与准确本地镜像窗口
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 2b36c47d99d8dc19dd2ad34d513dca4952df1d1d；checked_at/updated_at 2026-10-15T13:51:31.926255+08:00。已读取上一阶段 COORDINATION、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller、investor-workspace-simplification-20261012；本次fetch远端无更新，冲突决定沿用三源码/两配置准确范围，机会/UI/模型代码保持原owner。
+- Sol实施：多因子路径21相关检查通过，分母及报告11相关检查通过，root已核主差额同单位与原结果不变；Astra正在有界只读验收。root待核源基线后镜像三源码/两配置到主仓；两个新观察小文件已镜像，不改旧raw。8000重载交原机会owner协调。
+- 追加占用报告登记的准确一项 docs/experiments/factor-decision-closure-2026-10-15.md 及INDEX对应一行；只在当前内容上增加，保留其他项。正文/raw/原proposalREADME/自有work-progress仍root唯一写。源代码不提交或推送；远端仅协调状态。无新模型拟合/市场回测/策略变更/交易。
+
+---
+
 # 确认缺口后的准确实施范围
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha e9b79b57016b9dd9dbfc791fe6166820c0a429d6；checked_at/updated_at 2026-10-15T13:38:22.700120+08:00。本轮原相关记录已读，较开工无同路径新写者；两只读助手已完成，未改文件或运行市场。
