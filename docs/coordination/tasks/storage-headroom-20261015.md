@@ -2,7 +2,7 @@
 
 - task-id: storage-headroom-20261015
 - owner: 01a13f90-f5ca-7111-ac4f-4afd655b71f3 / root
-- status: active
+- status: blocked（已完成精确归档，目标余量尚未恢复；待用户决定活跃Chrome处理）
 - updated_at: 2026-10-15T20:39:17.224401+08:00
 - checked_coordination_sha: 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3
 - read_task_ids: mac-local-storage-cleanup, daily-trading-system-audit, research-utility-review-20261012, research-dispatch-controller, investor-workspace-simplification-20261012
@@ -27,3 +27,13 @@
 - 保留aNd8bPrCq（26.1007.71326/build20398）、Sparkle Launcher和当前Updater/Autoupdate进程；全部Codex运行环境/会话/浏览器缓存保留。初查/Applications/Codex.app不存在，已按实际进程纠正为ChatGPT.app，不据错误路径作判断。
 - 新外盘恢复目录：/Volumes/win+mac通用/个人资料归档/LeiSignal-内盘余量-20261015-01a13f90/；精确TAR/全文件hash元数据清单/恢复说明，逐项核验后再复查源稳定和无占用，任一失败保留源。
 - 该旧更新下载缓存符合用户已授权的闲置可恢复范围，不需停止当前应用。没有修改存储阈值、应用配置或研究源码。
+
+## 精确归档完成，容量目标仍受阻 2026-10-15T20:46:40.242522+08:00
+- checked_coordination_sha: 5d33c483057ee70c20d8cd7010d2a23608cd88e3；read_task_ids沿用上述5项，最新fetch与准确范围阶段无其他任务增量；唯一写者本root，无冲突。
+- 成果：codex/storage-headroom-20261015@3efc0f90729c882cb4c15d244155e5c3f003b982，仅docs/ops/work-progress/storage-headroom-20261015.md，远端完整commit及文件字节读回一致。详细回执data/cache/storage-headroom-20261015/仅本机，恢复包及manifest仅已核外盘。
+- 准确源0U9VRSSL6已移除：3978普通文件/5076总条目/2449126654内容字节，旧版本20052早于现装20156；新待装20398、当前环境、会话、DB、raw、他人工作树均保留。TAR2458030080B，SHA68fba3add9d8d63a79081d5fc41c149d3f3f2691cd9e1378fa82b9808c80cda8；manifest SHA1f897415cd51a3452b159bcf26ebd279a5020b23e37ee605e1967f10322548ce，恢复目录/说明见进度。
+- 全文件内容/类型/模式/链接读回、扩展属性另存、全源稳定、无句柄、固定UUID、源/holding不存在与保护版本inode/hash通过；未执行旧应用安装恢复。首次os.listxattr缺失失败在删除前终止，改macOS libc后完整验证。
+- 物理空间未恢复：精确移除前3787653120B→后3777155072B，净变化-10498048B，不能称释放2.45GB。20:44:07+08:00内盘3590631424B（3.344GiB），外盘559455928320B；既有plan_output（外盘估计1GiB/本机1MiB/保留5GiB）实际拒绝，0研究运行/0结果目录。
+- 系统本地快照20:42:18存在且交换文件分配20GiB，只读观察未隔离因果，未动快照/swap/系统设置。已检查其他大缓存：Chrome两处约1.06GiB属运行中、Codex分区约981MiB和runtime属当前环境、新更新包属运行中Updater；无可直接继续删的已核闲置对象。
+- 已向用户合并提问：是否允许正常退出Chrome并在无占用后仅清理Cache和Code Cache；未得到回复前保留。该候选不保证立即越过5GiB。阻塞验收是实际容量预检；恢复条件为自然/用户释放空间或明确上述活跃应用操作授权后重新核容量。
+- 归置通过；准确恢复/源删除清单已留；状态blocked不冒充完成，无后台复制/清理/监控，未向其他对话发送消息。主研究负责人可读本状态，继续不依赖空间的工作，不降低保护线。
