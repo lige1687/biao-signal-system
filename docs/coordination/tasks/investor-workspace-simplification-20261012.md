@@ -1,3 +1,11 @@
+# 用户补充时效与行业宏观背景 2026-10-15T20:33:42.952398+08:00
+
+checked_coordination_sha=476e4fa93dfbede7e68405e3b8fa92be5cbb166c；原六任务已读，fetch无新增变化。用户明确近期操作关注、旧10日结构不应作为新机会、32历史底部无用及上方代理术语不清；要求宏观与行业大事。沿用现有3根日K提醒窗口，不修改规则/阈值；旧仍有效只历史展开，Agent也需看到年龄和历史背景资格。
+
+root新增准确写范围：src/lei_signal/api/routes/symbols.py（传原读取时刻）、src/lei_signal/portfolio/industry_context.py（同上）、tests/unit/test_fund_industry_context.py；src/lei_signal/api/opportunity_context.py、configs/opportunity-sources.v1.json、src/lei_signal/copilot/opportunity_review.py及其相关tests（加入有原始日期的宏观/行业来源、相关行业标题检索资格和通俗说明；标题仍待核）。已有opportunity_evidence.py由root负责时点元数据与背景分类，不接管其它共享范围。明确官方资料以实际原文为据，旧产品说明保留作为展开资料，不用新模型设条件。前端仍由原UI agent唯一写，root不并发编辑。
+
+---
+
 # 机会信号生命周期、时点一致与K线联动接续 2026-10-15T20:28:30.342910+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；scope_released false；checked_coordination_sha=36c75d053a22b693f3f998777b18940935099840；checked_at=2026-10-15T20:28:30.342910+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller；远端新增股票来源完成记录只在其报告/raw，无本轮源码重叠。用户本轮明确按已讨论方案直接实现、实际运行验收。
