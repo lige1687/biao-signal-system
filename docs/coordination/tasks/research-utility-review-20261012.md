@@ -1,5 +1,7 @@
 # 股票资料范围具体化：当前全池取得
 
+- 并发同步补注：首次push非快进拒绝已保留；fetch后已读3c967fd144cca9669b9eb53b55332c40d09f0260的investor-workspace-simplification-20261012新增机会质量审计，其明确不接管股票取数，与本批无交叉。正常merge保留对方文件；checked_coordination_sha以此SHA为本轮最后检查基线，checked_at 2026-10-15T19:43:56.039927+08:00。
+
 - status active；scope_released false；checked_coordination_sha 3c967fd144cca9669b9eb53b55332c40d09f0260；checked_at/updated_at 2026-10-15T19:43:21.797876+08:00。核对原已读owner最新远端未变；新批输出只在独立外盘位置、root新raw脚本/合同，不触及原输入或其他owner。
 - 小探针实际成功：中证官方2026-10-15完整300名单，IVV 2026-10-13持仓股票504（含一只无市场标记），AAPL日线1005与茅台日线969/调整事件8。BaoStock指定2022-01-04虽然返回300，但updateDate=2021-11-15且含官方已调出的600705，不能认证历史名单。
 - 用户已明确全量与自行解决数据，新冻结bulk-contract：中证当前300与IVV全部504（明示基金代理不是正式指数成员）各固定池，2020-01-01至2026-06-30日线；CN每股原价+调整事件最多600请求，US每股OHLC/adjusted-close/events最多504请求，间隔≥1秒、不主动重试、429/连续传输失败停止该源，缺股保留不换股。新两外盘plan预计各400MiB、本机各400KB，实际空间已核。
