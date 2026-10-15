@@ -1,3 +1,9 @@
+# 同步并发更新读回补注 2026-10-15T17:05:24.768958+08:00
+
+checked_coordination_sha=8fa49a1be02ca6a64ad13a1124349a52e9d00084。最终推送遇远端研究任务新提交，非快进拒绝后已读其20/60联合研究源码/报告范围，与本显示无重叠；正常合并保留他人文件，未强推。前段“无新变化”以本补注修正，范围释放及本轮验收结果不变。
+
+---
+
 # 黑绿灰追加已验收 2026-10-15T17:04:18.626432+08:00
 
 checked_coordination_sha=8fa49a1be02ca6a64ad13a1124349a52e9d00084；原六任务无新变化。ETF及行业参考日K使用原biao_state并直接显示Python states/stateColors，补图例与最新状态；基金NAV无推断技术颜色。真实通信ETF黑绿灰图、最终构建通过，最新2文件SHA及截图引用已更新原opportunity-focus验收。原目标note29→30已读回、整体in_progress；源码仍本地未提交/未推。其余本批通过/失败/限制沿用上段，当前status completed/scope_released=true仅本有界批次，用户体验待验。
@@ -535,7 +541,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "completed",
   "checked_coordination_sha": "8fa49a1be02ca6a64ad13a1124349a52e9d00084",
-  "checked_at": "2026-10-15T17:04:18.626432+08:00",
+  "checked_at": "2026-10-15T17:05:24.768958+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -564,8 +570,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T17:04:18.626432+08:00",
-  "conflict_decision": "用户追加黑绿灰已在原OpportunityChart/CSS准确实现并验收；末次fetch无新任务差异，原六task读记录有效，释放本批文件范围。",
+  "updated_at": "2026-10-15T17:05:24.768958+08:00",
+  "conflict_decision": "同步时research-utility-review新增20/60联合研究，已读其新增范围，仅research模块及其自有报告，与机会显示不重叠。普通push曾非快进拒绝，已保留并正常整合远端，未强推。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-acceptance-20261015.json",
   "automation": {
