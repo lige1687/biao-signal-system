@@ -1,3 +1,9 @@
+# 用户补充：机会K线保留黑绿灰 2026-10-15T17:01:31.881475+08:00
+
+checked_coordination_sha=30a611dc5f69baf9d5b6568b92b3d33ef201bf41；原范围内仅OpportunityChart.tsx和opportunities.css改显示，复用Python已给states/stateColors及原biao_state模式，图例语义复核桌面技术体系2.7。ETF和行业参考都展示，基金NAV不造技术状态。构建与真实图复验后补原验收/进度/目标；无其他范围冲突。
+
+---
+
 # 今日机会走势与首屏：本批工程验收结束 2026-10-15T16:59:10.385435+08:00
 
 - checked_coordination_sha=b848afb78a701c46dba01b05611066e6d701081b；原六task与COORDINATION已读，末次fetch无新差异。原owner/task/分支不变；本有界status completed、scope_released true，整体原目标in_progress，用户效果待试用。
@@ -521,9 +527,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "b848afb78a701c46dba01b05611066e6d701081b",
-  "checked_at": "2026-10-15T16:59:10.385435+08:00",
+  "status": "active",
+  "checked_coordination_sha": "30a611dc5f69baf9d5b6568b92b3d33ef201bf41",
+  "checked_at": "2026-10-15T17:01:31.881475+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -549,11 +555,11 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-*",
     "web/src/components/KlineChart.tsx"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T16:59:10.385435+08:00",
-  "conflict_decision": "末次fetch与本登记版本相同，原六任务范围无新增重叠。本批机会图/首屏/净值接口已验并释放，普通看盘默认显示、他人因子文件保持；整体原目标仍进行中。",
+  "updated_at": "2026-10-15T17:01:31.881475+08:00",
+  "conflict_decision": "用户即时补充黑绿灰也要有。仅原OpportunityChart及CSS使用现有biao_state与服务器states/stateColors，附状态图例；无计算或策略修改，默认KlineChart不再扩改。原六task已读，末次无新差异。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-acceptance-20261015.json",
   "automation": {
@@ -563,7 +569,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "registry.json仅原decision-mainline-practices报告键；其他任务新增项保留",
-  "remaining": "用户效果待试用；29基金自身技术时点、新净值进模型、部分报告/新闻正文及2产品4方向模型失败仍未解决。仅按具体新缺口接续，不重开封存研究，不宣称本批后台仍在推进。"
+  "remaining": "补ETF/行业参考日K黑绿灰原状态配色及图例，实际页面/构建后释放同批范围。"
 }
 ```
 <!-- lei-coordination-json:end -->
