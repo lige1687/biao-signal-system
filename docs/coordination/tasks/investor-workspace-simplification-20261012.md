@@ -1,3 +1,15 @@
+# 机会信号生命周期、时点一致与K线联动接续 2026-10-15T20:28:30.342910+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；status active；scope_released false；checked_coordination_sha=36c75d053a22b693f3f998777b18940935099840；checked_at=2026-10-15T20:28:30.342910+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller；远端新增股票来源完成记录只在其报告/raw，无本轮源码重叠。用户本轮明确按已讨论方案直接实现、实际运行验收。
+- 服务既有策略事件提取及展示层；两份桌面策略SHA分别df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20、85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903，与登记一致。不改规则、阈值、模型、基金行业用途或金融记录，不重启旧研究。
+- 复用原隔离树/分支codex/investor-workspace-simplification-20261012，基线e6c4c2e025252c565ba15f05611561ca1ecd5b48及其既有未提交增量。先保留准确文件基线，根唯一集成者；校验主树原指纹后精确镜像必要后端，8000必要受管重载，5188已有隔离前端实测。
+- 准确写范围：src/lei_signal/api/sell_signals.py、新opportunity_signals.py、新bar_status.py、card_mapper.py、portfolio_workspace.py、routes/opportunity_reviews.py；tests/unit/test_sell_signals.py、新test_opportunity_signals.py、新test_bar_status.py及相关原测试；web/src/api/opportunityReviews.ts、pages/OpportunitiesPage.tsx、pages/opportunities.css、components/opportunities/OpportunityChart.tsx、opportunityChartModel.ts、新OpportunitySignals.tsx及新signalsModel.ts、components/KlineChart.tsx、web/scripts/test_opportunity_signals.mjs。确需opportunity_evidence.py/cards时间元数据由root小范围集成，其他schemas/rules/冻结UI不改。自己的work-progress和archive/opportunity-signals-*小验收文件、原目标okr-4c2ea452d3cc只追加进展。
+- 并行：Sol/medium信号生命周期及同结果快照API；Sol/medium统一形成中/收盘状态；Sol/medium前端信号清单与同图联动，互不改对方文件。root协调合同、隔离依赖核对、必要集成、测试及真实UI；不派用户因子对话。
+- 验收：结束关键波动、顶部解除不再进入当前提醒；候选底部失败不冒称持仓退出；新触发/有效/等待/解除、真日期与规则字段完整；单次结果返回K线与事实；盘中缓存不能到收盘自动晋升；买卖同屏、点选日期/价位定位、黑绿灰/基金行业参考保持；合成边界、真实通信ETF/基金、刷新复用、相关回归/构建/归置。当前仅登记，尚未声称已修。
+- 内盘约4.16GB，外盘固定设备已核可用；本批无大研究输出/下载，源码与必要小验收预计低于20MB，不清理任何资料。费用未知；阶段失败与旧记录保留，用户视觉效果仍须看实际页面。
+
+---
+
 # 机会质量审计阶段交付 2026-10-15T20:00:16.912357+08:00
 
 checked_coordination_sha=c98ee23d9e654416137724fa0b819c9bbdd5602a；已读COORDINATION1.1及原六任务，本轮远端仅research-utility-review股票来源任务更新，与本报告/raw没有共享写入。已正常快进保留其记录。用户授权历史买卖质量和机制贡献；本阶段交付机制与既有证据审计，当前页面事件准确率研究仍未完成。
