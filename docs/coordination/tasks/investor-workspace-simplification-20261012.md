@@ -1,3 +1,13 @@
+# 机会报告全流程审查与使用改进：接续 2026-10-15T13:31:40.915227+08:00
+
+- 原task/owner 01a123fc-553b-7b81-9952-36e1acb11dcc继续active，scope_released=false。checked_coordination_sha=11d0681732a1de95015d1cc441189f875774d49c，checked_at=2026-10-15T13:31:40.915227+08:00；已读COORDINATION1.1、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller当前段；无新增文件重叠，只维护本任务。
+- 用户要求查清报告所需Agent、协作与网上/既有接口取数，借鉴专业投资项目，实际跑通并补齐直观程度和信息密度。采用research-closure的report_only核既有资料/源码与新增必要原项目资料（不做资金/因子实验），同时执行已授权本地主线修复与真实验收。两策略实际SHA与批准值相同；服务展示/解释/审核层，不改规则、阈值、因子或交易账本。
+- 基线仍codex/investor-workspace-simplification-20261012@e6c4c2e025252c565ba15f05611561ca1ecd5b48加已验本地增量，5188隔离/8000主仓。既有4次Pro阶段失败和Flash小请求记录复用，模型选择尚待明确；先核实际请求与原供应商能力，禁止静默改全局模型或用测试替身冒充真实回答。只读审查三Sol已完成初查：外部项目、后端链路、前端可用性；不向因子研究对话派发。
+- 限定写路径：主仓及自身隔离api/opportunity_context.py、api/opportunity_evidence.py、api/routes/opportunity_reviews.py、copilot/opportunity_review.py、copilot/opportunity_transport.py及对应五项test_opportunity_context/evidence/preparation/review_service/transport.py，configs/opportunity-sources.v1.json；仅隔离web/src/api/opportunityReviews.ts、pages/OpportunitiesPage.tsx、pages/opportunities.css、scripts/test_opportunity_display.mjs。复用原archive的opportunity-workflow-*本轮审查/验收/脚本，原work-progress；原实践报告decision-mainline-practices-2026-10-14.md追加本轮调研补注及其raw/report-pipeline-20261015/来源/范围，registry原项说明/INDEX原行按需更新。root统一镜像/共享登记；子agent只按后续准确路径合同写入。
+- 验收从用户入口开始：每产品买卖现状、关键背景/反对依据、下次复核触发可扫读；取数来源/时点/同产品限制可查；技术/资料整理/反方状态准确；真实模型输出逐条核引用、日期、证据与推断，保存后刷新复用；失败/旧资料/无资料/窄屏与长名称可用；只跑受影响检查及既有回归，0真实判断确认/计划/成交写入。新闻标题不等于已读原件，独立反方角色不冒称独立检索。只在实际缺口范围补齐，不造平台、不重开封存研究、不动原14:30日程。必要后端受管重载由root完成。
+
+---
+
 # 资料整理与反方检查已接入，真实模型答复等待决定 2026-10-15T12:33:37.269960+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc；本轮工程接入已验，整体in_progress；当前等待用户模型选择，scope_released=false，仅保留原机会文件的后续真实模型验收范围。没有后台审核运行或循环重试，不能称主线完成。checked_coordination_sha=39f5b4c1404415921ac9172113fe0753db9b837b；checked_at=2026-10-15T12:33:37.269960+08:00。已读COORDINATION1.1、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller；最后fetch无新增差异，无重叠，root唯一写本任务。
