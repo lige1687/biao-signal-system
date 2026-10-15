@@ -20,3 +20,10 @@
 - research budget: 0研究、0新行情、0拟合；不降低预检、不启动他人研究、不创建定时器、不发送其他对话。
 - data: 私有清单仅本机/外盘，未上传；尚无新归档。
 - delta: 新独立受托空间恢复任务；不改旧清理owner状态。
+
+## 准确闲置下载包范围 2026-10-15T20:40:24.218512+08:00
+- checked_coordination_sha: b67d4d08dd5a7caf58184b4981c163dea5846235；已读上述5 task-id；增量研究owner确认本会话负责空间，无范围冲突。
+- 唯一允许处理源：/Users/yongbiaoli/Library/Caches/com.openai.codex/org.sparkle-project.Sparkle/Installation/0U9VRSSL6。名义分配2459414528B；其中旧ZIP及解包的ChatGPT.app为26.1007.21159/build20052，当前/Applications/ChatGPT.app为26.1007.30912/build20156。旧目录2026-10-09修改，lsof完整扫描exit1且stdout/stderr空。
+- 保留aNd8bPrCq（26.1007.71326/build20398）、Sparkle Launcher和当前Updater/Autoupdate进程；全部Codex运行环境/会话/浏览器缓存保留。初查/Applications/Codex.app不存在，已按实际进程纠正为ChatGPT.app，不据错误路径作判断。
+- 新外盘恢复目录：/Volumes/win+mac通用/个人资料归档/LeiSignal-内盘余量-20261015-01a13f90/；精确TAR/全文件hash元数据清单/恢复说明，逐项核验后再复查源稳定和无占用，任一失败保留源。
+- 该旧更新下载缓存符合用户已授权的闲置可恢复范围，不需停止当前应用。没有修改存储阈值、应用配置或研究源码。
