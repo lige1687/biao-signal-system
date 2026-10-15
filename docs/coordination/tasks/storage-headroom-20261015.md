@@ -2,7 +2,7 @@
 
 - task-id: storage-headroom-20261015
 - owner: 01a13f90-f5ca-7111-ac4f-4afd655b71f3 / root
-- status: active（用户已允许保存B站现有草稿后继续退出）
+- status: completed（草稿已保存，Chrome正常退出，两缓存清理，固定预检恢复）
 - updated_at: 2026-10-15T20:39:17.224401+08:00
 - checked_coordination_sha: 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3
 - read_task_ids: mac-local-storage-cleanup, daily-trading-system-audit, research-utility-review-20261012, research-dispatch-controller, investor-workspace-simplification-20261012
@@ -57,3 +57,13 @@
 - checked_coordination_sha: 43b1628767a785944e6b1e671a8ad039f6cbf430；已fetch且协调无增量，复用原5任务读取，新增只读treasury-yield-video-20261013相关范围。根协调规则不变。
 - 本聊天人类准确回答“保存该草稿，再继续退出（推荐）”。只点击当前B站美债既有草稿“存草稿”并核成功，保留内容原样、不投稿、不改标题/话题/权限；本授权限为退出前保全现有编辑，不接管视频制作/发布。
 - 随后正常退出Chrome，验证无进程及两准确缓存无句柄，再执行既有Cache/Code Cache清理和容量预检。原保留资料与5GiB线不变。
+
+## 完成并通过原存储预检 2026-10-15T21:00:10.021358+08:00
+- checked_coordination_sha: 97c8d02b5f55e4418628e7d4fb59c7fee0d82276；已fetch/read COORDINATION、原5任务及treasury-yield-video-20261013，无增量冲突；唯一写者保持。用户本聊天和原研究对话均明确“只保存草稿、不发布，再退出清缓存”。
+- B站草稿3986516只点击一次保存，独立新标签列表读回相同ID/标题及2026-10-15 20:55:00更新时间；未改内容/投稿。保存原页面短暂DOM滞留未触发重复写，核验临时页已关闭。
+- Chrome正常退出后进程为0，完整lsof两准确目录无句柄/无错误；仅移除Library/Caches/Google/Chrome/Default的Cache与Code Cache。78465条目，普通文件内容1069335567B；22项个人资料/登录/扩展目录或文件的inode/device/mode/hash/大小读回相同，两源不存在。没有强杀、清理其他资料、快照或swap；缓存无备份，按用户授权由浏览器重新访问时重建。
+- 清理窗口内盘14958858240→16603172864B，净增1644314624B（1.531GiB）；其他系统回收同窗发生，不全部归因缓存删除。20:49退出前2406199296B；20:58实际16570871808B（15.433GiB），swap分配20→12GiB由系统变化，未操作swap。旧更新包首次未测得释放的失败历史保留。
+- 原plan_output主仓与研究工作目录factor-evidence-integration-20261012都实际通过；估计外盘结果/日志1GiB、本机1MiB，保留内盘5368709120B、外盘10GiB不变。研究目录实测16562909184B；execution_authorized=false、没有创建结果目录或启动科研，主研究须按其真实合同/估计再预检。
+- storage固定UUID正确、4资源available、外盘559455928320B；归置通过。数据库/冻结raw/环境/会话/他人工作树仍保留。任务目标已达（内盘保留线以上多于约1GiB），不再扩大清理，不恢复Chrome造成立即回写，不创建监控。
+- 成果codex/storage-headroom-20261015@23dc9cfe430d24bc847de8e6c9116c8d99bbdc07，唯一docs/ops/work-progress/storage-headroom-20261015.md，远端SHA及逐字内容读回。小私有证据bilibili-draft-saved.json、chrome-cleanup-receipt.json、chrome-final-preflight.json、research-worktree-preflight.json仅data/cache/storage-headroom-20261015/；旧包TAR恢复路径沿前文，私人内容不Git。
+- scope_released=true（本轮准确整理完成）；原恢复/操作记录保持。本任务无待决定/运行中清理/必要后续，主研究负责人自行读取结果继续，不发其他聊天消息。未来容量会变化，当前通过不担保永久余量。
