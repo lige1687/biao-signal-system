@@ -1,3 +1,14 @@
+# 具体决定研究可行性续核：有界完成
+
+- task-id research-utility-review-20261012；owner root；status completed；scope_released true；checked_coordination_sha e31121c240f629cfdf0193eadd304541405817ab；checked_at/updated_at 2026-10-15T16:26:58.843207+08:00。已读COORDINATION、自身、investor-workspace-simplification-20261012、technical-factor-sequence、research-dispatch-controller、classic-factor-research。末次增量为原机会owner接走势/首屏，其新源码范围无重叠；不代改其UI/后端/模型或验收。
+- 用户关心具体决定能否验证、标的范围是否太复杂，并授权全权审视、最后结论进展。本次有界可行性问题已回答：4宽基137起点已有完整去向；8ETF联合信息有同源限定输入，当前入口只支持单项，联合需要独立适配/合同/预算。完整原文A仍缺低周期/准确执行；真实个人收益未验证。纠正上轮完整交易比较优先，先限定信息增量，不把信息增益当买卖收益。
+- Gemini额度恢复，4 Argon/高点（超级详尽）新请求1，完成态同档；原回复转录去空白3009字、FNV1a38e4884f核同。Sol/medium核输入，Astra/high核方法；后者初判实现A3可免低周期，经主控核最高原文后撤回，保留审阅错误及纠正。Gemini全家族归因/停其余产品解释等过强建议未采纳。
+- 实测3次声明探针（原项通过，两项预期拒绝），1次合成算例2项核验；不弱化validator、不改旧合同。新市场拟合/回测/行情下载/生产代码/真实记录0；本续轮Gemini1/网页源1，连同初版累计2/3，token费用未知。
+- 原报告增加续核与旧排序对照，SHA b2b2851a6fcfd32fb2685f69586f8ef184d61d47a4c8161ae045d364ec21df59；路径docs/experiments/low-frequency-decision-priorities-2026-10-15.md，证据同名raw/feasibility-followup/。API逐字核同、真实5188刷新7项读回、归置通过；registry仅原oneLiner，其他项保留。原目标仅note142→143，受保护字段未变，用户效果待验收。
+- 成果分支codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be加本地文档；源码/报告未提交推送，远端仅协调，不声称异机可复现。两策略源/输入/入口源码指纹不变。无后台研究。联合适配和性能实验、完整A收益、真实个人决策链仍未完成；本次完成仅指可行性审查。
+
+---
+
 # 具体决定研究的可行性与Gemini复核：继续
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha a7b96fabc2db1a3cf0f8939184f642af96059aa9；checked_at/updated_at 2026-10-15T15:56:43.683125+08:00。已读COORDINATION、自身、investor-workspace-simplification-20261012、technical-factor-sequence、research-dispatch-controller；原机会owner已完成本批，仍不接管其源码。本轮只读输入、定义与研究工具，独立小证据写自己的raw。
