@@ -2,7 +2,7 @@
 
 - task-id: storage-headroom-20261015
 - owner: 01a13f90-f5ca-7111-ac4f-4afd655b71f3 / root
-- status: active（用户已准确授权退出Chrome并清理两处缓存）
+- status: blocked（Chrome退出遇未保存B站草稿，缓存授权已获，等草稿处理决定）
 - updated_at: 2026-10-15T20:39:17.224401+08:00
 - checked_coordination_sha: 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3
 - read_task_ids: mac-local-storage-cleanup, daily-trading-system-audit, research-utility-review-20261012, research-dispatch-controller, investor-workspace-simplification-20261012
@@ -44,3 +44,11 @@
 - 本次唯一新增动作：正常退出Google Chrome，完整确认进程/无句柄；只处理/Users/yongbiaoli/Library/Caches/Google/Chrome/Default/Cache和同父目录Code Cache两处可再生成缓存。保留其余路径和整个Library/Application Support/Google/Chrome个人资料；不强杀、不关闭Codex、不动系统快照/swap。
 - 20:48:58+08:00内盘2536644608B，固定外盘身份正确/559455928320B。真实容量仍受阻，先保存退出前容量与保护路径快照，再退出/准确清理/读回/原plan_output预检。
 - 本轮仅两个缓存可直接丢弃并由浏览器重新生成，用户明确批准；保存逐文件删除清单与恢复说明（重新访问页面重建缓存），不冒称有缓存归档副本或已有登录验收。
+
+## Chrome退出被未保存草稿阻止 2026-10-15T20:53:50.180928+08:00
+- checked_coordination_sha: ee3e76e86c1d50f262ae440fd98b564ed517250a；已读COORDINATION与原5 task-id相关范围，无他人新增冲突；唯一写者保持。
+- 已收到准确缓存清理许可，未再询问同一许可；正常退出返回后进程仍在，lsof显示Cache日志占用。实际UI正常退出出现未保存更改警告，取消后定位到B站既有美债视频草稿编辑页；未放弃更改、未保存/投稿或改表单。
+- 为保护其他任务作品，已问用户保存草稿后退出/放弃未保存更改/保留页面三选一；这是新增草稿内容决定，不是重复清缓存授权。当前Chrome仍运行、两缓存源仍在、0新删除、0强杀。准备的准确清理器仅通过语法检查，未执行。
+- 20:52:34+08:00可用3937689600B（3.667GiB），真实plan_output仍低于5GiB拒绝，0真实研究。自然容量变化未归因清理；快照/swap/当前环境仍保留。
+- 进度成果codex/storage-headroom-20261015@26d003661593113c4ca52faf0aef72fb31da2d95与远端SHA/文件字节一致；本机chrome-before-quit.json/chrome-draft-blocker.json保存失败事实。原旧包归档/恢复证据沿用，不重删。
+- 下一步等用户草稿决定后继续正常退出和准确两缓存处理；本对话无需给原研究对话发消息，主负责人读本状态即可。目标余量未完成，不降低保护线、不创建监控。
