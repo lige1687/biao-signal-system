@@ -1,3 +1,14 @@
+# 机会分析缺口修复与双向页面：开工 2026-10-15T11:49:54.454526+08:00
+
+- 同一task/owner重新active，scope_released=false；checked_coordination_sha=a59e350de12d543a9c4f674c0b0c1ad451c7e36d。已读COORDINATION1.1及自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller当前段；无新增相关写者。前轮58测试只覆盖工程流程，基本面遗漏与真实模型失败明确保留，不能称综合分析完成。
+- 用户明确授权：修好Agent失败、接入基本面新闻与反例、页面提高信息密度，每产品买入/卖出都看；用户同意独立Agent职责由本负责人决定并落实。服务现有技术判断展示与叙事解释层，两份策略实际SHA与批准值相同；不改策略/阈值/因子，不恢复其他通知。
+- 当前实证：10:11/10:31模型请求超时或HTTP200无正文，None被合并成model_unavailable；基金context被全量过滤、ETF基本面未读取。修复必须分别验证源材料进入模型、反方独立检查、失败可诊断与有限重试、同资料复用、两个方向同屏及真实模型结果。
+- 源码在既有隔离树codex/investor-workspace-simplification-20261012基线e6c4c2e025252c565ba15f05611561ca1ecd5b48加原已验本地增量。保留他人脏区。后端本轮独立文件先主仓实现测试，root精确镜像隔离树；仅必要受管8000重载，前端5188；不交易/代确认或改金融记录。
+- 分工：Sol A只读模型根因后可唯一写新opportunity_transport.py及专测；Sol B只读资料盘点后可唯一写opportunity_evidence.py、新opportunity_context.py及对应专测；Sol C仅隔离前端三个文件和专测；root写opportunity_review.py、routes/opportunity_reviews.py/准备测试、接口合同/来源配置/阶段证据和协调。实现以root后续准确合同为准，先只读任务已启动。
+- 小资料/代码留本机；复用已存基金披露并按实际报告/发布/核查日期展示；网络资料只按明确产品进行必要查询、保留失败/未知，不把新闻标题当已核事实，不重下旧研究原件。原整体目标okr-4c2ea452d3cc继续in_progress。
+
+---
+
 # 今日机会自动审查主线已交付 2026-10-15T01:52:16.960828+08:00
 
 - 本轮有界功能completed、scope_released=true，整体原目标继续in_progress，效果待用户验收。checked_coordination_sha=ae2f513401c1072e8b5a813daef5133270148d91；已读COORDINATION1.1、原相关任务及research-utility-review-20261012最新报告格式整改，后者不改机会/Agent/前端，无新冲突。只有root写本任务。
@@ -436,9 +447,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "ae2f513401c1072e8b5a813daef5133270148d91",
-  "checked_at": "2026-10-15T01:52:16.960828+08:00",
+  "status": "active",
+  "checked_coordination_sha": "a59e350de12d543a9c4f674c0b0c1ad451c7e36d",
+  "checked_at": "2026-10-15T11:49:54.454526+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -451,29 +462,28 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
     "src/lei_signal/api/opportunity_evidence.py",
+    "src/lei_signal/api/opportunity_context.py",
     "src/lei_signal/copilot/opportunity_review.py",
+    "src/lei_signal/copilot/opportunity_transport.py",
     "src/lei_signal/api/routes/opportunity_reviews.py",
-    "src/lei_signal/api/routes/decisions.py",
-    "src/lei_signal/api/app.py",
     "tests/unit/test_opportunity_evidence.py",
+    "tests/unit/test_opportunity_context.py",
     "tests/unit/test_opportunity_review_service.py",
-    "tests/unit/test_decision_journal.py",
+    "tests/unit/test_opportunity_transport.py",
+    "tests/unit/test_opportunity_preparation.py",
     "web/src/api/opportunityReviews.ts",
-    "web/src/api/decisions.ts",
     "web/src/pages/OpportunitiesPage.tsx",
     "web/src/pages/opportunities.css",
-    "web/src/pages/DecisionsPage.tsx",
-    "web/src/pages/TodayPage.tsx",
-    "web/src/App.tsx",
+    "web/scripts/test_opportunity_display.mjs",
+    "configs/opportunity-sources.v1.json",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-review-*",
-    "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "tests/unit/test_opportunity_preparation.py"
+    "docs/ops/work-progress/investor-workspace-simplification-20261012.md"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T01:52:16.960828+08:00",
-  "conflict_decision": "已读最新因子流程整改仅其research/workflow.py报告展示与研究文件，无机会源码重叠；本轮有界主线完成，root唯一归档、目标note及协调写者，用户体验待验收。",
+  "updated_at": "2026-10-15T11:49:54.454526+08:00",
+  "conflict_decision": "读取原六相关任务及最新因子交付；本轮机会独立文件无重叠，root唯一集成登记，Sol按明确文件分工，不派发用户因子对话。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-review-acceptance.json",
   "automation": {
