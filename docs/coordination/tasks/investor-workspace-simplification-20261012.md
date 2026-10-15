@@ -1,3 +1,13 @@
+# 历史买卖机会质量与机制归因：接续 2026-10-15T19:39:23.445851+08:00
+
+checked_coordination_sha=64cf840d1e97508001c9a779a1bd1b9be49a7937；已读COORDINATION/自身/原六相关任务最新与research-utility-review股票来源新范围。用户本次授权核历史卖出后表现、买卖质量机制及指标贡献；服务机会证据评价层，保持策略/生产模型/阈值/成交不变。使用research-closure research模式，先复用封存报告/保存结果，当前未授权重跑旧耗尽月度4/4、固定2/2或因子家族。
+
+本轮只在自身隔离codex分支写新opportunity-quality-audit报告/raw、小进度；root唯一维护报告与registry本键/INDEX一行。主仓源码与其它研究只读，后续新计算若需工具适配须先另登记准确源码。两个Sol/medium独立只读：当前买卖生成/评分/质量检测实现、旧ETF买卖/退出证据可复用范围；合同分别小文件，无网络/市场运行/DB写入。必要方法歧义由root或Astra独核，预算不随派发重置。
+
+验收要回答：现有质量检测到底测什么、当前机会定义是否与历史样本相同、卖后减少损失与错过上涨的量级、买入后的收益/风险、相对简单方法的新增帮助及机制贡献；置信不足明确，不把命中比例当赚钱比例，不造指标权重。先冻结所需未回答问题再运行，旧绿/黑研究不重启；真实参数搜索、部署、通知、交易为0。资料大产物走已核外盘，小报告本机；已采用当前主仓研究规范索引，不以旧隔离缺文件降级。
+
+---
+
 # 同步并发更新读回补注 2026-10-15T17:05:24.768958+08:00
 
 checked_coordination_sha=8fa49a1be02ca6a64ad13a1124349a52e9d00084。最终推送遇远端研究任务新提交，非快进拒绝后已读其20/60联合研究源码/报告范围，与本显示无重叠；正常合并保留他人文件，未强推。前段“无新变化”以本补注修正，范围释放及本轮验收结果不变。
@@ -539,9 +549,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "8fa49a1be02ca6a64ad13a1124349a52e9d00084",
-  "checked_at": "2026-10-15T17:05:24.768958+08:00",
+  "status": "active",
+  "checked_coordination_sha": "64cf840d1e97508001c9a779a1bd1b9be49a7937",
+  "checked_at": "2026-10-15T19:39:23.445851+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -553,25 +563,17 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
-    "src/lei_signal/api/opportunity_market.py",
-    "src/lei_signal/api/routes/opportunity_reviews.py",
-    "tests/unit/test_opportunity_market.py",
-    "web/src/components/opportunities/OpportunityChart.tsx",
-    "web/src/components/opportunities/opportunityChartModel.ts",
-    "web/src/pages/OpportunitiesPage.tsx",
-    "web/src/pages/opportunities.css",
-    "web/src/api/opportunityReviews.ts",
-    "web/scripts/test_opportunity_display.mjs",
-    "web/scripts/test_opportunity_chart.mjs",
-    "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-*",
-    "web/src/components/KlineChart.tsx"
+    "docs/experiments/opportunity-quality-audit-2026-10-15.md",
+    "docs/experiments/raw/opportunity-quality-audit-2026-10-15/",
+    "docs/experiments/registry.json (only opportunity-quality-audit-2026-10-15 key)",
+    "docs/experiments/INDEX.md (only own report row)",
+    "docs/ops/work-progress/investor-workspace-simplification-20261012.md"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T17:05:24.768958+08:00",
-  "conflict_decision": "同步时research-utility-review新增20/60联合研究，已读其新增范围，仅research模块及其自有报告，与机会显示不重叠。普通push曾非快进拒绝，已保留并正常整合远端，未强推。",
+  "updated_at": "2026-10-15T19:39:23.445851+08:00",
+  "conflict_decision": "已读research-utility-review最新股票来源资格与20/60联合封存，仅读其既有结果，不委派用户因子对话、不接管股票取数/因子研究源码。自身新增机会质量问题仅核当前生成机制、旧检验与必要未回答的ETF事件后表现；原源/冻结预算不动。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-acceptance-20261015.json",
   "automation": {
@@ -581,7 +583,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "registry.json仅原decision-mainline-practices报告键；其他任务新增项保留",
-  "remaining": "整体目标仍进行中、用户效果待验；29基金技术时点、NAV进模型、部分报告/新闻正文和2产品4方向模型失败保持。无本批必要任务在后台继续。"
+  "remaining": "先只读核机会产生/质量判断实现与旧研究；新增真实计算前固定问题、标签、对照、时点和累计预算。当前0新市场运行。"
 }
 ```
 <!-- lei-coordination-json:end -->
