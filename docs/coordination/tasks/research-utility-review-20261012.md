@@ -1,3 +1,15 @@
+# 固定20/60日联合研究：完成与释放
+
+- task-id research-utility-review-20261012；owner root；status completed；scope_released true；checked_coordination_sha 26b2935dbf7dbd4923fb75b394b2a9cf2c6fe725；已重新fetch，远端无新差异。已读COORDINATION及自身、technical-factor-sequence、external-quant-resources、sentiment-factor-research、classic-factor-research、research-dispatch-controller、investor-workspace-simplification-20261012。冲突决定：只有本题研究与准确报告键/行；原机会owner范围、生产源码和模型不碰。
+- 用户继续研究授权下完成新固定联合问题：原8ETF/四期/28背景/20+60原定义，8新fit一次核心运行；旧两单项核同保存预测，不重跑旧48fit家族。联合MSE15.366397，B1改善0.853678%，强逐ETF成熟均值14.057755，联合更差9.309042%；主差额-1.308642，60日同步块1000次范围[-2.258317,-0.390421]。7/8ETF及3/4期较差，有色金属和2025为反例。全部历史已见，只结束指定组合用途，未否定所有波动信息/原策略。
+- 9相关测试通过，8680全部观察/6072旧预测核同（B1最大差0），指标与标签独立重算差0，保存系数还原误差1.78e-15；Astra独立性能复算误差<=3.6e-15。事后保存误差拆解0fit，年度高估/低估仅八ETF平均，不冒称因果。注册使用reuse-predictions，0额外fit；家族记录耗时333.570秒/3600秒。
+- 原全球登记表无关卡错误保持；精确两卡子集与旧冻结逐字段一致，经原验证器通过，仅隔离导航绑定。新six-path实现与相关依赖在codex/factor-evidence-integration-20261012@70ab55556874228d2cba66cf50f96d0318e1a5be加未提交修改；raw保存准确implementation.patch。未自动提交推源码/生产采用。首冻结缺生命周期证据、委派路径与synthetic夹具失败留存，没有隐去成本。
+- 报告docs/experiments/range-joint-increment-2026-10-15.md SHA08641105c8c1591ca54e9ef73caabec8e466fc02f1f03c9aeabc297326176b18；小raw约205KiB后另加25KiB实现patch；大结果/日志通过登记外盘计划，不入Git。运行/冻结/登记/独立复算指纹位置见delivery-manifest与location。两树报告核同、registry主仓672→673仅一键、INDEX一行；API正文核同、5188实际表/结论/反例及首屏截图验收。库中其他20未登记报告警告不属本题；本报告已登记。目录自检通过。
+- 目标okr-ff1e0a86fbac仅追加note143→144，状态/授权/里程碑/下一动作等不变；用户效果待验收。无新增行情/付费/Gemini请求/生产交易，token费用未知。当前固定组合不接作更好风险或买卖依据，下一优先是有机制的用途匹配/失准诊断，不搜索参数；完整A低周期与执行缺口保持。本题无后台运行，原问题completed/question_answered，不代表整体有效因子目标完成。
+- updated_at/checked_at 2026-10-15T17:40:45.241665+08:00。
+
+---
+
 # 联合研究：准确源码单写与执行定义绑定
 
 - status active；scope_released false；checked_coordination_sha 55010cf6d947439e4e9447c4a5d20e7100ecf42b；checked_at/updated_at 2026-10-15T17:14:03.203454+08:00。已读COORDINATION及上段七任务；新增机会owner仅既有图表/状态配色验收，范围无交叉。补记开工fetch后30a611→6e0a6a50增量已读为机会黑绿灰显示，未与本题重叠。
