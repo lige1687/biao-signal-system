@@ -1,3 +1,16 @@
+# 减少阅读成本：工程交付，Pro补验受余额阻塞 2026-10-15T22:24:31.419034+08:00
+
+checked_coordination_sha=1d36484be17bf34030528f06515dced87c60952f；已读COORDINATION、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller、storage-headroom-20261015。最新研究结案仅其报告/raw/登记，无本轮源码重叠。status=blocked、scope_released=true；释放本批工程写范围，余额恢复前无模型任务在后台运行。
+
+- 首屏两句Agent简报与有日期的来源事实、买入/卖出两侧近期事件、背景偏向已接通；无可用摘要明确待核。行业按业务、宽基按本地宏观；通信采用光模块/数据中心互联原件，电信运营统计退出主背景。报告期与技术日期分别显示，来源及K线展开查看，黑绿灰保持。叙事层不改变技术规则。
+- 主服务158项相关回归、最后连接关闭修复37项、前端3检查及构建、相关Ruff/归置/diff通过；实际桌面、375窄屏及图上2026-10-15定位通过。最后冷启动准备complete；原OperationalError及50次未细分HTTP失败保留，增加安全错误类别、缓存复用及连接及时关闭，未声称其他消费者全部验证。
+- 最终run orb_c9c4e57b429f281d9646c7428dfef5f48add756c99ef6d6c36a8165f52a8799c 为partial：68卡2complete/54failed/12not_needed。通信背景自行合计52.55%被原数字校验拒绝；只补验1次返回HTTP402，官方定义账户余额不足。保持deepseek-v4-pro[1m]，未付费或降低校验，后续服务失败停止队列。重开同输入同run、模型210→210、worker0，判断/确认/计划/成交均0。
+- 本轮新增59次模型请求、6成功，成功记录输入33631/output3683 tokens；失败计费及总费用未知。其余失败不冒称已完成。来源全面检索、基金自身技术及操作效果仍未证明。原目标okr-4c2ea452d3cc只追加note33→34并真实读回，保护字段与历史前缀保持，整体in_progress。
+- 原分支codex/investor-workspace-simplification-20261012/基线e6c4c2e025252c565ba15f05611561ca1ecd5b48不变；本轮源码本地未提交未推，主树必要后端镜像实际8000运行、隔离前端5188。16源文件指纹及准确验收见opportunity-brief-acceptance-20261015.json，交付/目标回执同前缀，截图仅本机.codex。远端协调同步不代表源码已远端归档。
+- 三Sol/medium有界执行和独核已结束，无因子对话派发；无大下载、删除、迁移、交易或新研究。本机可用约13.9GiB。剩余阻塞为配置中DeepSeek API余额，视觉效果待用户验收；恢复仅针对失败产品及具体缺口，不重跑封存研究。
+
+---
+
 ## 本轮实跑失败定位补注 2026-10-15T21:59:26.542400+08:00
 
 前6次模型返回后发生50次未细分HTTP错误；追加transport状态回执及失败停止覆盖。只补证据与有界调用，不更换Pro，不提高重试次数。通信背景数字校验拦下模型自行加总，保留校验，单产品至多一次针对性复验。checked_coordination_sha=37a28cbb67723d4c5bb0c68af4a3fd65261a7d16；已读任务与原登记相同、差异无新冲突。
@@ -620,9 +633,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "37a28cbb67723d4c5bb0c68af4a3fd65261a7d16",
-  "checked_at": "2026-10-15T21:59:26.542400+08:00",
+  "status": "blocked",
+  "checked_coordination_sha": "1d36484be17bf34030528f06515dced87c60952f",
+  "checked_at": "2026-10-15T22:24:31.419034+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -657,13 +670,13 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "src/lei_signal/copilot/opportunity_transport.py",
     "tests/unit/test_opportunity_transport.py"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T21:59:26.542400+08:00",
-  "conflict_decision": "最新协调仍为本任务登记，无新重叠。实跑发现未细分HTTP拒绝导致后续重复失败；增补同任务原transport及其测试，只保存无敏感的HTTP状态，服务失败停止后续队列，Pro设置不变。",
+  "updated_at": "2026-10-15T22:24:31.419034+08:00",
+  "conflict_decision": "已读原七任务及research-utility-review-20261012最新双均线研究结案差异，其报告/raw/登记范围与本轮机会源码无重叠。root唯一集成和共享登记者；本批工程已验并释放范围，Pro账户余额不足阻塞剩余模型验收，无后台循环重试。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-signals-acceptance-20261015.json",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-brief-acceptance-20261015.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
@@ -671,7 +684,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "registry.json only opportunity-quality-audit-2026-10-15 own key; preserve others",
-  "remaining": "针对用户新反馈实现行业/宽基资料适配、本地宏观复用、Agent首屏简报及带证据的利好利空标签，实际复验。"
+  "remaining": "配置中DeepSeek API余额恢复后，按失败产品准确材料补验Agent摘要；当前完整分析仍partial。首屏视觉效果待用户验收，原目标in_progress。行业每日原文自动全面检索及基金自身技术资料仍有限。"
 }
 ```
 <!-- lei-coordination-json:end -->
