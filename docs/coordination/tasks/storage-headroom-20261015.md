@@ -2,7 +2,7 @@
 
 - task-id: storage-headroom-20261015
 - owner: 01a13f90-f5ca-7111-ac4f-4afd655b71f3 / root
-- status: blocked（已完成精确归档，目标余量尚未恢复；待用户决定活跃Chrome处理）
+- status: active（用户已准确授权退出Chrome并清理两处缓存）
 - updated_at: 2026-10-15T20:39:17.224401+08:00
 - checked_coordination_sha: 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3
 - read_task_ids: mac-local-storage-cleanup, daily-trading-system-audit, research-utility-review-20261012, research-dispatch-controller, investor-workspace-simplification-20261012
@@ -37,3 +37,10 @@
 - 系统本地快照20:42:18存在且交换文件分配20GiB，只读观察未隔离因果，未动快照/swap/系统设置。已检查其他大缓存：Chrome两处约1.06GiB属运行中、Codex分区约981MiB和runtime属当前环境、新更新包属运行中Updater；无可直接继续删的已核闲置对象。
 - 已向用户合并提问：是否允许正常退出Chrome并在无占用后仅清理Cache和Code Cache；未得到回复前保留。该候选不保证立即越过5GiB。阻塞验收是实际容量预检；恢复条件为自然/用户释放空间或明确上述活跃应用操作授权后重新核容量。
 - 归置通过；准确恢复/源删除清单已留；状态blocked不冒充完成，无后台复制/清理/监控，未向其他对话发送消息。主研究负责人可读本状态，继续不依赖空间的工作，不降低保护线。
+
+## 用户明确授权Chrome两处缓存 2026-10-15T20:49:31.088166+08:00
+- checked_coordination_sha: 569254878f406cf8eac4f87afac9e4ebf1f28b86；已fetch/read COORDINATION及原5任务增量（无变化），复核主研究当前状态；唯一写者和冲突决定保持。
+- 原研究对话01a12bbb-44f2-7c22-a0a9-defd4f1640bc传来直接人类确认：“允许退出Chrome并清理这两处缓存”。确认卡已说明会关闭窗口、保留个人资料/登录/扩展、无法保证立即恢复空间。
+- 本次唯一新增动作：正常退出Google Chrome，完整确认进程/无句柄；只处理/Users/yongbiaoli/Library/Caches/Google/Chrome/Default/Cache和同父目录Code Cache两处可再生成缓存。保留其余路径和整个Library/Application Support/Google/Chrome个人资料；不强杀、不关闭Codex、不动系统快照/swap。
+- 20:48:58+08:00内盘2536644608B，固定外盘身份正确/559455928320B。真实容量仍受阻，先保存退出前容量与保护路径快照，再退出/准确清理/读回/原plan_output预检。
+- 本轮仅两个缓存可直接丢弃并由浏览器重新生成，用户明确批准；保存逐文件删除清单与恢复说明（重新访问页面重建缓存），不冒称有缓存归档副本或已有登录验收。
