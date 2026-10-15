@@ -1,3 +1,15 @@
+# 减少阅读成本：Agent简报与对应行业背景 2026-10-15T21:36:53.357430+08:00
+
+checked_coordination_sha=bc694b4e137a8f4c03726f5f8d687b772fac459c；已读COORDINATION、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller、storage-headroom-20261015。最新仅六合同研究进度，无机会源码共享冲突；root唯一集成和登记写者。本轮active/scope_released=false。
+
+用户新授权：行业产品按准确产业证据解释，宽基按对应市场宏观；通信设备不混同电信运营商；复用本地宏观，标偏利好/偏利空/影响不明，首屏优先1—2句Agent总结，细节和图表条件可展开。服务展示及叙事层，不改变Python技术判定/规则阈值/交易行为；两桌面源实际SHA与前轮登记一致。
+
+独立树/分支与e6c4c2e025252c565ba15f05611561ca1ecd5b48基线不变，先保存小范围当前字节及主树指纹。准确范围见JSON，基本面原服务只读复用，不改其指标/全局缓存策略；新增opportunity_macro纯适配与有界准备，原机会API/模型材料与前端摘要。root负责资料身份/整合及Pro提示，Sol分别只读相关性、本地宏观接入、前端表达，各自不重叠。用户因子聊天不派发。
+
+验收：行业/宽基/混合身份明确、无运营商统计误当设备业绩；本地宏观数据进模型且保留观察日/来源/缺失；利好利空只由有引用的背景观点显示、反方risk不误当标的利空；首屏两句有来源的Agent摘要，模型失败/陈旧不冒称已总结；展开K线条件仍同快照，桌面窄屏、相关回归和一次真实产品流程、刷新复用。预先保留旧15卡失败不全板循环重试。只小文件、无大下载/新研究/外部发布/删除/更换模型。
+
+---
+
 # 近期机会时效、双向信号及图表联动交付 2026-10-15T21:16:20.695358+08:00
 
 checked_coordination_sha=270d916bf70f107f8f205ab9c953e3e11c779695；已读COORDINATION及原六相关任务和storage-headroom-20261015最新完成记录，其缓存清理/研究范围与本次无交叉。用户已授权范围内本批工程completed、scope_released=true，整体原目标in_progress，用户效果待验。root唯一主树镜像和共享登记写者，三Sol/medium有界执行已结束；没有给用户因子对话派任务。
@@ -604,9 +616,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "270d916bf70f107f8f205ab9c953e3e11c779695",
-  "checked_at": "2026-10-15T21:16:20.695358+08:00",
+  "status": "active",
+  "checked_coordination_sha": "bc694b4e137a8f4c03726f5f8d687b772fac459c",
+  "checked_at": "2026-10-15T21:36:53.357430+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -619,42 +631,31 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
-    "src/lei_signal/api/sell_signals.py",
-    "src/lei_signal/api/opportunity_signals.py",
-    "src/lei_signal/api/bar_status.py",
-    "src/lei_signal/api/card_mapper.py",
-    "src/lei_signal/api/portfolio_workspace.py",
-    "src/lei_signal/api/routes/opportunity_reviews.py",
-    "src/lei_signal/api/routes/symbols.py",
-    "src/lei_signal/portfolio/industry_context.py",
-    "src/lei_signal/api/opportunity_evidence.py",
     "src/lei_signal/api/opportunity_context.py",
+    "src/lei_signal/api/opportunity_evidence.py",
+    "src/lei_signal/api/opportunity_macro.py",
+    "src/lei_signal/api/routes/opportunity_reviews.py",
     "src/lei_signal/copilot/opportunity_review.py",
     "configs/opportunity-sources.v1.json",
-    "tests/unit/test_sell_signals.py",
-    "tests/unit/test_opportunity_signals.py",
-    "tests/unit/test_bar_status.py",
-    "tests/unit/test_opportunity_evidence.py",
     "tests/unit/test_opportunity_context.py",
+    "tests/unit/test_opportunity_evidence.py",
+    "tests/unit/test_opportunity_macro.py",
     "tests/unit/test_opportunity_review_service.py",
-    "tests/unit/test_fund_industry_context.py",
+    "tests/unit/test_opportunity_preparation.py",
     "web/src/api/opportunityReviews.ts",
     "web/src/pages/OpportunitiesPage.tsx",
     "web/src/pages/opportunities.css",
     "web/src/components/opportunities/",
-    "web/src/components/KlineChart.tsx",
-    "web/src/components/klineTooltipModel.ts",
-    "web/scripts/test_opportunity_signals.mjs",
-    "web/scripts/test_opportunity_chart.mjs",
-    "web/scripts/test_kline_tooltip.mjs",
+    "web/scripts/test_opportunity_display.mjs",
+    "web/scripts/test_opportunity_summary.mjs",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-signals-*"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-brief-*"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T21:16:20.695358+08:00",
-  "conflict_decision": "原六任务及storage-headroom-20261015完成增量已读，最新仅Chrome缓存与存储恢复记录，无机会源码冲突；root唯一集成和登记写者。",
+  "updated_at": "2026-10-15T21:36:53.357430+08:00",
+  "conflict_decision": "原七任务已读；研究任务新增六合同仅独立因子源码和研究报告，无本轮机会/展示范围冲突。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-signals-acceptance-20261015.json",
   "automation": {
@@ -664,7 +665,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "registry.json only opportunity-quality-audit-2026-10-15 own key; preserve others",
-  "remaining": "本轮有界工程已验；用户视觉效果待验。整体目标in_progress；整板15张模型解释校验失败、每日行业原文全面检索、基金自身技术资料及历史真实操作价值尚未完成；无后台重试/回测。"
+  "remaining": "针对用户新反馈实现行业/宽基资料适配、本地宏观复用、Agent首屏简报及带证据的利好利空标签，实际复验。"
 }
 ```
 <!-- lei-coordination-json:end -->
