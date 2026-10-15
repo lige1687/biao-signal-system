@@ -1,3 +1,9 @@
+# 紧凑图布局验收修补 2026-10-15T16:52:43.488476+08:00
+
+checked_coordination_sha 2719903140268e236267c99575f04d75db47c168；原六任务已读无新增差异。真实截图发现小图成交量轴与日期挤压，root在已登记KlineChart.tsx增机会页专用compact布局开关，默认不改变完整看盘。仅网格与标签，不改计算、模型或策略。原图/失败截图保留；修后构建及同图复验。
+
+---
+
 # 走势接入实测与首屏简化补注 2026-10-15T16:36:00.098194+08:00
 
 checked_coordination_sha 68520b6481c13f1f1855464eeb85d6ab4081f60b；已读本次research-utility-review新增段，仍仅其自有材料，无本web重叠。新增精确路径web/src/components/KlineChart.tsx：默认保持其它页面，只给机会图可选关闭12-1展示角标，避免研究公式抢占买卖条件。root唯一写，公式/信号不改。真实NAV接口180点已部署8000并读回；3后端文件精确比对、16项相关测试通过。前端实际K线显示与买卖单侧标题核对通过，仍在基金切换/移动端验收，不宣称完成。
@@ -505,8 +511,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "68520b6481c13f1f1855464eeb85d6ab4081f60b",
-  "checked_at": "2026-10-15T16:36:00.098194+08:00",
+  "checked_coordination_sha": "2719903140268e236267c99575f04d75db47c168",
+  "checked_at": "2026-10-15T16:52:43.488476+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -535,8 +541,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T16:36:00.098194+08:00",
-  "conflict_decision": "最新仅研究负责人自有报告/输入只读续核。新增仅自己隔离web KlineChart可选显示开关，默认行为不变；root唯一写该文件，其它图表计算/共享主树前端不改。",
+  "updated_at": "2026-10-15T16:52:43.488476+08:00",
+  "conflict_decision": "最终真实截图发现330px机会K线成交量轴和日期挤压；同已登记KlineChart.tsx增加仅机会页启用的compact显示选项，只改网格/轴标签布局，默认其它页不变，所有数值/信号不变。无其他最新协调变化。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-workflow-acceptance-20261015.json",
   "automation": {
