@@ -1,3 +1,13 @@
+# 20/60日波动联合信息：新有界研究启动
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 30a611dc5f69baf9d5b6568b92b3d33ef201bf41；checked_at/updated_at 2026-10-15T17:03:35.921770+08:00。已读COORDINATION、自身、technical-factor-sequence、external-quant-resources、sentiment-factor-research、classic-factor-research、research-dispatch-controller、investor-workspace-simplification-20261012。其他当前active是机会图表与第一屏，与本研究无交集；不接管技术颜色/情绪/宏观/交易。
+- 用户明确继续投入研究，沿刚完成可行性审查推进尚未评价的20/60联合，服务既有策略风险信息说明层，不更改道路/触发/退出/仓位。固定原8ETF已见历史、原目标及强简单参照；独立问题/新合同，不重置原量价48fit封存预算、不扫描参数。初步单一联合+四时段同条件B1比较上限8fit（4联合+4必要同期对照），最终方法在看效果前由独审固定；旧单项复用核同保存预测。
+- root新增docs/experiments/raw/range-joint-increment-2026-10-15/、对应报告、自有work-progress；registry/INDEX仅本报告键/行，登记前另核当前文件。只读来源限定主仓合格8ETF包及旧20/60结果。大预测/日志走登记外盘，先plan-only；不下载行情/付费/上传私有资料。源码/报告不自动提交推送，远端仅协调。
+- Sol/medium先只读确认最小适配路径与旧基线可复用性，Astra/high先只读审新方法/时点/主对照；各有新合同，不写相同文件。拟实现准确范围：新src/lei_signal/research/price_range_joint_information.py、tests/unit/test_price_range_joint_information.py、tests/unit/test_price_range_joint_workflow.py，以及question_contract.py/workflow_inputs.py/workflow.py仅新增kind的校验/分派/绑定/演练；不改变旧kind行为或旧指纹。实际开写前由root明确源码唯一写者/设计。全局定义已有两个准确ID，不改原定义/全局登记；若现行结构不能绑定两项，先说明准确方案，不冒充旧单项。
+- 验收须实际冻结→计算→独立核数→发布，交性能/相对已有信息与强简单参照的差额、逐年/ETF反例与相关日期不确定性，不能以适配/测试代替效果。当前0新marketfit；Gemini前轮意见只作参考，不追加多模型投票。
+
+---
+
 # 具体决定研究可行性续核：有界完成
 
 - task-id research-utility-review-20261012；owner root；status completed；scope_released true；checked_coordination_sha e31121c240f629cfdf0193eadd304541405817ab；checked_at/updated_at 2026-10-15T16:26:58.843207+08:00。已读COORDINATION、自身、investor-workspace-simplification-20261012、technical-factor-sequence、research-dispatch-controller、classic-factor-research。末次增量为原机会owner接走势/首屏，其新源码范围无重叠；不代改其UI/后端/模型或验收。
