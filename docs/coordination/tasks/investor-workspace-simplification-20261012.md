@@ -1,3 +1,9 @@
+# 走势接入实测与首屏简化补注 2026-10-15T16:36:00.098194+08:00
+
+checked_coordination_sha 68520b6481c13f1f1855464eeb85d6ab4081f60b；已读本次research-utility-review新增段，仍仅其自有材料，无本web重叠。新增精确路径web/src/components/KlineChart.tsx：默认保持其它页面，只给机会图可选关闭12-1展示角标，避免研究公式抢占买卖条件。root唯一写，公式/信号不改。真实NAV接口180点已部署8000并读回；3后端文件精确比对、16项相关测试通过。前端实际K线显示与买卖单侧标题核对通过，仍在基金切换/移动端验收，不宣称完成。
+
+---
+
 # 今日机会：接入走势与重排第一屏（本轮进行中）
 
 - 更新时间 2026-10-15T16:19:06.858186+08:00；checked_coordination_sha 2292b0992f8985f5680be01326291e09526f9bdb。已读COORDINATION及原六相关任务；其他最新增量仅research-utility-review自身研究记录。沿用同一owner/task-id/分支，基础e6c4c2e025252c565ba15f05611561ca1ecd5b48，当前源码仍含本地未提交增量，不冒称远端可复现。
@@ -499,8 +505,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "2292b0992f8985f5680be01326291e09526f9bdb",
-  "checked_at": "2026-10-15T16:19:06.858186+08:00",
+  "checked_coordination_sha": "68520b6481c13f1f1855464eeb85d6ab4081f60b",
+  "checked_at": "2026-10-15T16:36:00.098194+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -523,13 +529,14 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/scripts/test_opportunity_display.mjs",
     "web/scripts/test_opportunity_chart.mjs",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-*"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-*",
+    "web/src/components/KlineChart.tsx"
   ],
   "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T16:19:06.858186+08:00",
-  "conflict_decision": "最新其他任务仅具体决定研究的只读研究/自有报告，不接管机会源码。root改首屏/API类型/样式/相关显示测试与唯一登记；Sol分别独立后端按需公开行情资料和前端图表组件，不修改交叉文件。",
+  "updated_at": "2026-10-15T16:36:00.098194+08:00",
+  "conflict_decision": "最新仅研究负责人自有报告/输入只读续核。新增仅自己隔离web KlineChart可选显示开关，默认行为不变；root唯一写该文件，其它图表计算/共享主树前端不改。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-workflow-acceptance-20261015.json",
   "automation": {
