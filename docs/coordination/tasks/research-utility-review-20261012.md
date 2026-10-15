@@ -1,3 +1,13 @@
+# 联合研究：准确源码单写与执行定义绑定
+
+- status active；scope_released false；checked_coordination_sha 55010cf6d947439e4e9447c4a5d20e7100ecf42b；checked_at/updated_at 2026-10-15T17:14:03.203454+08:00。已读COORDINATION及上段七任务；新增机会owner仅既有图表/状态配色验收，范围无交叉。补记开工fetch后30a611→6e0a6a50增量已读为机会黑绿灰显示，未与本题重叠。
+- Sol decision_input_feasibility 为隔离工作树六路径唯一源码写者：price_range_joint_information.py、question_contract.py、workflow_inputs.py、workflow.py、test_price_range_joint_information.py、test_price_range_joint_workflow.py；不改旧price_volume_path_information，不写主仓或生产。root只写本新raw/合同/报告及自有进度；Astra方法只读已给冻结条件。
+- 新技术信息问题明确：原8ETF原四时段，双列20/60、原28背景、ridge1、t+1..t+21收盘下探；新真实拟合上限8（B1四+联合四）。强基准为每折开始前同ETF合格成熟历史均值，整折不更新；同ID/标签/端点/训练行/28背景/标准化/权重/B1预测核同才复用旧单双项。60日同步日期块1000次种子20261004；不搜索变换。
+- 当前主登记表一无关post_top_bar_persistence记录不完整，actual_bindings真实预检查0fit失败。两所需展开卡已与旧冻结合同逐字段核同、无依赖；root派生本题只读绑定快照（保留profiles/source，排除无关objects/models/research_references）经原validator与resolve核同通过，仅在隔离current-standards导航该路径。主表、原卡、validator、现行方法版本都不改；原失败和来源SHA留本题raw。不是新的权威登记/资格，也不是回退规范。
+- 新工程临时/日志经plan_output核固定外盘，32MiB预计结果、4MiB本机小文件；只写登记result路径。研究运行另走plan-only→route-plan。原生storage_preflight尚未在主仓采用，不声称已启用；现有output_storage默认保护继续。只读准备失败留痕，0新市场拟合。
+
+---
+
 # 20/60日波动联合信息：新有界研究启动
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 30a611dc5f69baf9d5b6568b92b3d33ef201bf41；checked_at/updated_at 2026-10-15T17:03:35.921770+08:00。已读COORDINATION、自身、technical-factor-sequence、external-quant-resources、sentiment-factor-research、classic-factor-research、research-dispatch-controller、investor-workspace-simplification-20261012。其他当前active是机会图表与第一屏，与本研究无交集；不接管技术颜色/情绪/宏观/交易。
