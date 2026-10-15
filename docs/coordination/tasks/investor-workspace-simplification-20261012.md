@@ -1,3 +1,7 @@
+## 本轮实跑失败定位补注 2026-10-15T21:59:26.542400+08:00
+
+前6次模型返回后发生50次未细分HTTP错误；追加transport状态回执及失败停止覆盖。只补证据与有界调用，不更换Pro，不提高重试次数。通信背景数字校验拦下模型自行加总，保留校验，单产品至多一次针对性复验。checked_coordination_sha=37a28cbb67723d4c5bb0c68af4a3fd65261a7d16；已读任务与原登记相同、差异无新冲突。
+
 # 减少阅读成本：Agent简报与对应行业背景 2026-10-15T21:36:53.357430+08:00
 
 checked_coordination_sha=bc694b4e137a8f4c03726f5f8d687b772fac459c；已读COORDINATION、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller、storage-headroom-20261015。最新仅六合同研究进度，无机会源码共享冲突；root唯一集成和登记写者。本轮active/scope_released=false。
@@ -617,8 +621,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "bc694b4e137a8f4c03726f5f8d687b772fac459c",
-  "checked_at": "2026-10-15T21:36:53.357430+08:00",
+  "checked_coordination_sha": "37a28cbb67723d4c5bb0c68af4a3fd65261a7d16",
+  "checked_at": "2026-10-15T21:59:26.542400+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -649,13 +653,15 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/scripts/test_opportunity_display.mjs",
     "web/scripts/test_opportunity_summary.mjs",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-brief-*"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-brief-*",
+    "src/lei_signal/copilot/opportunity_transport.py",
+    "tests/unit/test_opportunity_transport.py"
   ],
   "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T21:36:53.357430+08:00",
-  "conflict_decision": "原七任务已读；研究任务新增六合同仅独立因子源码和研究报告，无本轮机会/展示范围冲突。",
+  "updated_at": "2026-10-15T21:59:26.542400+08:00",
+  "conflict_decision": "最新协调仍为本任务登记，无新重叠。实跑发现未细分HTTP拒绝导致后续重复失败；增补同任务原transport及其测试，只保存无敏感的HTTP状态，服务失败停止后续队列，Pro设置不变。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-signals-acceptance-20261015.json",
   "automation": {
