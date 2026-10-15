@@ -1,3 +1,18 @@
+# 个股当前全池资料取得与资格核验：完成
+
+- task-id research-utility-review-20261012；owner root；status completed；scope_released true，仅本次来源取得问题；checked_coordination_sha 504eab88ce5e1f7210ef1074409904f9308ec380；checked_at/updated_at 2026-10-15T20:14:41.656676+08:00。已fetch并读COORDINATION、自身、research-dispatch-controller、risk-shape-information、technical-factor-sequence、original-eight-continuation-20261010、frozen-input-recovery-20261010及investor-workspace-simplification-20261012；最后增量是其机会质量审计完成，自身股票资料范围无冲突。原机会/生产/模型源码未接管。
+- 用户最新要求每次覆盖个股，有名例子或随机/沪深300及标普全池，来源自行解决。本题实际取得中证官方2026-10-15全部300当前成员，300只451986日线；IVV2026-10-13全部504股票代理逐项查询，502只804462日线，价格窗口2020-01-01—2026-06-30。美国VYLR400/HOLX404完整保留不替换，标普官方完整历史名单未取到。
+- 1104响应大小/hash全核同；中国834非交易占位和5489调整事件（3332早于价格窗口），美国2条异常日线单列；无日期重复/越界/代码错配。中国调整正数与日期唯一核通过。Sol/medium分别查旧输入/美国原始来源，本地助手另独立全核两批原件计数；root完整检查与报告核算。SPY发行商持仓另核503普通股票代码重合，但日期/额外证券有别，不冒称正式历史指数成员。
+- BaoStock2022-01-04历史名单虽300条但更新滞后且含官方已移除600705，失败证据保留、不用于选池。两市场当前固定群体仅限回顾探索，历史退出/当时成员、终止财富及调整版本仍未合格。旧5211PPO/P26与82旧OHLC保存证据复用，未重跑既有负结果。
+- 报告docs/experiments/stock-universe-expansion-2026-10-15.md，SHA c8a4ade5e74eccaafc2df844aeb6d106a391f8199f6cb4d7eeacf25f5d92cbfb；同名raw有完整804名单冻结合同、采集/核验脚本、路径计划、失败、独审、主控检查与回执。完整数据固定登记外盘两目录，研究原件约58.6/87.9MB，OS说明文件未删；本地小raw约167KB。策略双源指纹未变。大包不入Git、旧资料不搬删。
+- 主仓/隔离报告一致；registry主675/隔离329，仅各新增本键，旧键保留；INDEX只本行，原low-frequency-decision-priorities追加每轮ETF/A股/美股分别交代，不改旧结论。API两全文核同、分类成功；真实5188表格/缺失/边界/覆盖要求读回。归置检查通过。
+- 原目标K-data-boundary仅note23→24，ff1e0a86fbac仅note144→145，版本与历史追加读回，其他状态/授权/负责人/里程碑/下一动作不动，不代用户验收。
+- 全部批次已结束，无本题后台进程。核心资料应用请求600+504、探针/交叉核对4HTTP+4BaoStock，来源失败/内部重试未知保留；新模型拟合0/未来收益计算0/交易回测0/生产修改0/真实交易0/付费0。实际token费用未知。委派草稿误拒和非快进push历史及正常整合已保留。
+- 成果在codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be加本机未提交修改，无成果commit/push、无main合并；远端仅本协调摘要，不能冒称异机已可复现。阶段证据docs/ops/work-progress/research-utility-review-20261012.md。
+- 后续准确问题为原双均线确认在同股票/日期相对单线及简单涨幅/波动资料的新增帮助和等待代价；实际计算前冻结原定义、日期、调整口径和统计合同。当前资料取得不等于因子有效/Agent买卖增益/完整历史指数完成。
+
+---
+
 # 股票资料范围具体化：当前全池取得
 
 - 并发同步补注：首次push非快进拒绝已保留；fetch后已读3c967fd144cca9669b9eb53b55332c40d09f0260的investor-workspace-simplification-20261012新增机会质量审计，其明确不接管股票取数，与本批无交叉。正常merge保留对方文件；checked_coordination_sha以此SHA为本轮最后检查基线，checked_at 2026-10-15T19:43:56.039927+08:00。
