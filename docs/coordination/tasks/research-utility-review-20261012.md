@@ -1,3 +1,14 @@
+# 个股研究恢复与沪深300/标普500数据接入核验
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；updated_at/checked_at 2026-10-15T19:34:42.008117+08:00；checked_coordination_sha 09125682e09167ea668fbc0e0c078679673f8518。已读COORDINATION、自身、research-dispatch-controller、risk-shape-information、technical-factor-sequence、original-eight-continuation-20261010及frozen-input-recovery-20261010相关最新范围。
+- 用户明确要求每次覆盖适用个股、有名案例或随机抽取、沪深300全量及标普成分股，授权自行查找资料。纠正此前优先事项遗漏个股；ETF负结果不可推广为股票无效。原PPO/P26保存证据复用不重跑，旧股池/资格/行情/owner路径只读。
+- 本次先解决可运行数据范围：官方/供应商成分名单、公开历史OHLC及调整字段实际取得与覆盖；当前成分固定回看和历史真实成员分开。独立新raw stock-universe-expansion-2026-10-15、同名报告及自身进度由root单写；registry仅本报告新键、INDEX仅一行；既有low-frequency-decision-priorities报告只追加范围纠正。股票效应研究须另冻结准确对象/日期/定义和基准后运行，不以数据取得冒充效应。
+- 工作树 codex/factor-evidence-integration-20261012，基线70ab55556874228d2cba66cf50f96d0318e1a5be加原未提交修改；主工作区脏内容保留。新原件/大输出走登记外盘计划，本地只小合同/报告/摘要。旧资产不搬不删，源文档/策略/生产/API模型不改。授权公开读取与本地研究，无付费、密钥外发、真实交易。
+- 分工：Sol/medium只读核现有股票输入覆盖，另一Sol/medium查询美国成分/行情一手文档与可达性，root核中国来源并执行小样实际接口检查。各合同单独冻结，不创建新用户任务。无源码共享写入重叠。数据源失败留痕，不重复无效请求；供应商限流停止该来源。验收为准确名单、来源/日期/字段/缺失/复权边界与可重复读取，而非新因子已有效。
+- 实际进展：已核5211收盘旧包、82只旧OHLC候选、2026-10-09旧效果恢复验收；尚未新取行情或计算股票效应。原8ETF联合8fit负结果封存，不重跑或改样本补救。token实际费用未知。
+
+---
+
 # 固定20/60日联合研究：完成与释放
 
 - task-id research-utility-review-20261012；owner root；status completed；scope_released true；checked_coordination_sha 26b2935dbf7dbd4923fb75b394b2a9cf2c6fe725；已重新fetch，远端无新差异。已读COORDINATION及自身、technical-factor-sequence、external-quant-resources、sentiment-factor-research、classic-factor-research、research-dispatch-controller、investor-workspace-simplification-20261012。冲突决定：只有本题研究与准确报告键/行；原机会owner范围、生产源码和模型不碰。
