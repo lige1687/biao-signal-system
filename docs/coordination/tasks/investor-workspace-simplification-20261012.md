@@ -1,3 +1,11 @@
+# 真实模型恢复与本机受管重载窗口
+
+- checked_coordination_sha=89c1a3c6502b838753bf106a2cbd2201d2a1b294；checked_at=2026-10-15T13:53:31.247907+08:00；已读COORDINATION及原相关task，本次增量read research-utility-review-20261012，三源码两配置与本机会范围无重叠；其报告registry另键，不覆盖。task/owner和原授权范围保持。
+- 原Pro未切模型：非流式兼容请求已返回，实际失败先后为输出截断、围栏和role混用，均保留；机械分类移交程序、模型只解释与核反例，严格引用校验仍在。公开SOXX原快照两方向已真实complete，反方10.4秒；同run复用无新调用，仍要独核语义与新快照完整页面。
+- 112受影响Python测试通过；现在root精确镜像本任务11后端配置测试文件到自身树，必要受管8000重载，并进行真实页面新快照验收。主仓他人因子文件保持，重载会载入当时主仓现有字节，其效果仍由原owner验收。不会替另一任务声明因子有效、不会派发新任务；0真实金融记录写入。
+
+---
+
 # 机会报告全流程审查与使用改进：接续 2026-10-15T13:31:40.915227+08:00
 
 - 原task/owner 01a123fc-553b-7b81-9952-36e1acb11dcc继续active，scope_released=false。checked_coordination_sha=11d0681732a1de95015d1cc441189f875774d49c，checked_at=2026-10-15T13:31:40.915227+08:00；已读COORDINATION1.1、自身、portfolio-trends-20261013、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller当前段；无新增文件重叠，只维护本任务。
