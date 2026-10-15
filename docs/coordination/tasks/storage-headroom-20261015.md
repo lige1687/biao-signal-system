@@ -2,7 +2,7 @@
 
 - task-id: storage-headroom-20261015
 - owner: 01a13f90-f5ca-7111-ac4f-4afd655b71f3 / root
-- status: blocked（Chrome退出遇未保存B站草稿，缓存授权已获，等草稿处理决定）
+- status: active（用户已允许保存B站现有草稿后继续退出）
 - updated_at: 2026-10-15T20:39:17.224401+08:00
 - checked_coordination_sha: 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3
 - read_task_ids: mac-local-storage-cleanup, daily-trading-system-audit, research-utility-review-20261012, research-dispatch-controller, investor-workspace-simplification-20261012
@@ -52,3 +52,8 @@
 - 20:52:34+08:00可用3937689600B（3.667GiB），真实plan_output仍低于5GiB拒绝，0真实研究。自然容量变化未归因清理；快照/swap/当前环境仍保留。
 - 进度成果codex/storage-headroom-20261015@26d003661593113c4ca52faf0aef72fb31da2d95与远端SHA/文件字节一致；本机chrome-before-quit.json/chrome-draft-blocker.json保存失败事实。原旧包归档/恢复证据沿用，不重删。
 - 下一步等用户草稿决定后继续正常退出和准确两缓存处理；本对话无需给原研究对话发消息，主负责人读本状态即可。目标余量未完成，不降低保护线、不创建监控。
+
+## 人类已允许保存阻塞退出的现有草稿 2026-10-15T20:54:43.821386+08:00
+- checked_coordination_sha: 43b1628767a785944e6b1e671a8ad039f6cbf430；已fetch且协调无增量，复用原5任务读取，新增只读treasury-yield-video-20261013相关范围。根协调规则不变。
+- 本聊天人类准确回答“保存该草稿，再继续退出（推荐）”。只点击当前B站美债既有草稿“存草稿”并核成功，保留内容原样、不投稿、不改标题/话题/权限；本授权限为退出前保全现有编辑，不接管视频制作/发布。
+- 随后正常退出Chrome，验证无进程及两准确缓存无句柄，再执行既有Cache/Code Cache清理和容量预检。原保留资料与5GiB线不变。
