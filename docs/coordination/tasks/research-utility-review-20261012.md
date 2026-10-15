@@ -1,3 +1,14 @@
+# 低频量化下一重点与Gemini建议复核：有界完成
+
+- task-id research-utility-review-20261012；owner root；status completed；scope_released true；checked_coordination_sha 132e9c20bdc8fdfdbefdf3e1067b17a9b60da369；checked_at/updated_at 2026-10-15T14:36:55.100522+08:00。已读COORDINATION、自身、investor-workspace-simplification-20261012、technical-factor-sequence、research-dispatch-controller；末次fetch无新变化。冲突决定：本轮只读流程与方法报告，未改任何机会/模型/UI/服务源码，原owner范围不变。
+- 用户请求明确下一重点并让Gemini理解低频策略、因子接入和真实执行链，指定Gemini4最高思考。1次请求提交时Argon高点、完成后选择器读到4 Argon已选中；打开思考等级时网页额度受限至14:56并显示Flash-Lite，未用低档追加。完整原文与本地转录去空白长度和校验一致；不上传私人记录/金额/凭证/原行情，外部意见仅参考。
+- 报告 docs/experiments/low-frequency-decision-priorities-2026-10-15.md SHA43014c1198ad19f75b31c4bdf8392fb1d0f2a68af7918024c7b1c84d0f531950。研究重点：原策略具体决定的完整比较；既有20/60日联合为独立有界信息问题；并行判断→计划→真实执行或放弃→复盘及短答。源码确认判断缺计划/成交关联、复盘不读判断，已有执行版本保存机制保留；尚未实施此关联，真实人类链和收益未验。
+- Sol/medium只读核实现，root复读关键源码/旧绩效和2原始方法来源。Gemini的固定旧数字门槛、线性重复差项、人工打卡代替数据和全部转工程建议修正/拒绝。通过用户已授权消息将准确断点与报告告知“更新LeiSignal原八目标交接”，不代其改动或验收。
+- 报告和小raw镜像主仓，registry主仓671→672/隔离326→327仅一键，旧值与INDEX旧字节保持；API正文核同，5188实际正文、表格、短答与最终刷新通过，目录自检通过。原目标ff1e0a86fbac仅note141→142，其他字段不变；用户效果仍待验收。
+- 新拟合/回测/行情下载/生产改动/真实记录均0；网页来源工具2调用，Gemini1请求；token/费用未知。报告分支codex/factor-evidence-integration-20261012@70ab55556874228d2cba66cf50f96d0318e1a5be加本地未提交文档，远端仅协调，不声称源码已推或异机可复现。完整A小时与准确执行绑定仍缺，未重新索要资料、重跑封存实验或自动继续。
+
+---
+
 # 低频交易下一重点与Gemini参考：只读决策研究
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha e9def1f1a17a256a534a901089bcb4c5114a86fd；checked_at/updated_at 2026-10-15T14:16:59.948203+08:00。已读COORDINATION、自身、investor-workspace-simplification-20261012、technical-factor-sequence、research-dispatch-controller，冲突决定：机会/UI/模型由原owner继续，本轮只读，不改代码/设置/交易记录、不代其验收。
