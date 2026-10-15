@@ -1,3 +1,17 @@
+# 近期机会时效、双向信号及图表联动交付 2026-10-15T21:16:20.695358+08:00
+
+checked_coordination_sha=270d916bf70f107f8f205ab9c953e3e11c779695；已读COORDINATION及原六相关任务和storage-headroom-20261015最新完成记录，其缓存清理/研究范围与本次无交叉。用户已授权范围内本批工程completed、scope_released=true，整体原目标in_progress，用户效果待验。root唯一主树镜像和共享登记写者，三Sol/medium有界执行已结束；没有给用户因子对话派任务。
+
+- 已解除/旧事件退出当前提醒；保留原3根日K近期窗口。同一次分析返回K线、数据时点、触发日期、关键价格及解除条件；盘中旧缓存不会自动晋升收盘。通信候选观察2026-08-12、原规则确认2026-10-15，1当前风险/52历史，不能推断现在卖出更好。历史数量和成交估计只作背景，前台词语简化，黑绿灰与基金行业参考边界保留。
+- 官方宏观/通信行业9月材料已核原文、带日期接入页面与Pro背景及反方；没有称为今天新闻。修复确切名称别名漏绑和年份误报，数值/引用原检查保留。实测发现并修复K线tooltip把序号399当开盘价，最新OHLC与原行情逐项一致。
+- 主树182相关测试、前端build与4个脚本、主树归置、桌面点击和375窄屏通过；旧树归置.git/.codex基线提醒及portfolio_workspace原7处E501保持，不冒称所有旧检查全绿。19后端/配置/测试文件主树镜像SHA一致，10前端文件SHA记录。
+- 实际run orb_a882228cf26895998c19c6f4b5b474f8b3109f3d52fd680b9bd2f35be65b8232：41complete/15failed/12not_needed，8产品仍有解释失败。通信Pro背景及买卖反方均返回；背景年份修复和卖方引用错误各单次针对性复验，原失败保留，无全板循环重试/放宽标准/换Flash。刷新同run，review attempts238→238、agent attempts149→149、runs34→34，workers0；判断/确认/计划/成交均0。
+- 验收/失败/交付/目标回执在原archive/opportunity-signals-*-20261015；截图和完整运行输出仅本机.codex/opportunity-signals-20261015。原目标okr-4c2ea452d3cc只note32→33，实际API读回保护字段和历史前缀不变；仍in_progress。
+- 成果分支codex/investor-workspace-simplification-20261012，基线e6c4c2e025252c565ba15f05611561ca1ecd5b48；源码本地未提交/未推，主树必要镜像与3次必要受管重载已验，未合main。准确源码指纹见验收，远端协调同步不代表源码远端可复现。
+- 待完成事实：每日行业原文自动全面检索、基金自身技术时点、当前信号历史操作价值未证明；整板模型仍partial。后续据明确缺口接续，旧冻结研究和预算不变，不留假运行状态。
+
+---
+
 # 实际验收发现并修复展示与模型资料差异 2026-10-15T20:59:02.673733+08:00
 
 checked_coordination_sha=8a5bdf3a8ba57a4b79cda29b478e7dce4c763544；已读原六任务及storage-headroom-20261015新范围，研究/磁盘任务与机会代码无冲突，root仍唯一集成/共享登记者。状态active，scope_released=false。已实际核通信候选始于2026-08-12、确认2026-10-15，图表同数据源；旧事件折叠。当前继续修复实际点击发现的K线tooltip序号错当开盘价，以及模型卡未引用同一近期事件生命周期/老价背景混入。已有字段与3根日K窗口沿用，不改变技术策略。
@@ -590,9 +604,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "8a5bdf3a8ba57a4b79cda29b478e7dce4c763544",
-  "checked_at": "2026-10-15T20:59:02.673733+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "270d916bf70f107f8f205ab9c953e3e11c779695",
+  "checked_at": "2026-10-15T21:16:20.695358+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -636,13 +650,13 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-signals-*"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T20:59:02.673733+08:00",
-  "conflict_decision": "原六任务和存储恢复新增记录已读；研究/缓存删除与机会工程无共享写入。root唯一主树镜像及协调写者。",
+  "updated_at": "2026-10-15T21:16:20.695358+08:00",
+  "conflict_decision": "原六任务及storage-headroom-20261015完成增量已读，最新仅Chrome缓存与存储恢复记录，无机会源码冲突；root唯一集成和登记写者。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-signals-before-20261015.json",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-signals-acceptance-20261015.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
@@ -650,7 +664,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "registry.json only opportunity-quality-audit-2026-10-15 own key; preserve others",
-  "remaining": "完成实际K线联动、同一近期事件进入模型、年份窄校验及有界真实复验；用户效果待验收。"
+  "remaining": "本轮有界工程已验；用户视觉效果待验。整体目标in_progress；整板15张模型解释校验失败、每日行业原文全面检索、基金自身技术资料及历史真实操作价值尚未完成；无后台重试/回测。"
 }
 ```
 <!-- lei-coordination-json:end -->
