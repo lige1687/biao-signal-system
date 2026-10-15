@@ -1,3 +1,16 @@
+# 机会质量审计阶段交付 2026-10-15T20:00:16.912357+08:00
+
+checked_coordination_sha=c98ee23d9e654416137724fa0b819c9bbdd5602a；已读COORDINATION1.1及原六任务，本轮远端仅research-utility-review股票来源任务更新，与本报告/raw没有共享写入。已正常快进保留其记录。用户授权历史买卖质量和机制贡献；本阶段交付机制与既有证据审计，当前页面事件准确率研究仍未完成。
+
+- 12旧账户×期末金额/最大跌幅/费用36项、95旧标签及56条可比差额、874已存预测按原equal_asset指标、153配对路径复核一致；5合成生命周期例复现ended误列新卖出支持、顶部解除缺标。合成不冒称历史误报率。
+- 报告docs/experiments/opportunity-quality-audit-2026-10-15.md，SHA256 25ce07dee6657ddf1f3aebd2164d756f2733f9149de305f13bd09c4debce4c0a；同名raw含合同/实际审计脚本/结果/失败/主控审阅/目标与报告API回执。两树文档及raw精确镜像；registry只加自身键，INDEX只加自身行，API已收录非待分类。文件名不含ARCHIVE，列表archived=false按现有语义保留，正文含ARCHIVE审计结案段。
+- K01独审初次等行权重不符，按原合同查证应equal_asset后纠正，无重拟合；失败保留。两份策略实际SHA一致。0新市场标签/拟合/账户/参数扫描/网络取数，旧预算保持；生产源码/模型/规则/金融库无修改。
+- 原目标okr-4c2ea452d3cc note30→31已读回，保护字段及历史前缀保持，整体in_progress。当前事件重放、生命周期提取修复、基金自身资料与原计划仍未验收；没有后台回测运行。
+- 原独立工作分支、基线不变；本轮报告/raw本地未提交、未推成果、未合主分支。协调同步不等于远端可复现产物。Sol两项只读、Astra一次方法边界及最终报告复核已结束；root统一核算/登记，费用未知，未派用户因子对话。
+- 当前有界审计阶段completed并释放本批文档范围；准确事件历史研究另需原生适配/资格冻结，当前仅记录未完成，未当成审计通过。后续不得拿持续K状态、简化三根顶部或旧A_ALL资金差当当前卡胜率。
+
+---
+
 # 历史买卖机会质量与机制归因：接续 2026-10-15T19:39:23.445851+08:00
 
 checked_coordination_sha=64cf840d1e97508001c9a779a1bd1b9be49a7937；已读COORDINATION/自身/原六相关任务最新与research-utility-review股票来源新范围。用户本次授权核历史卖出后表现、买卖质量机制及指标贡献；服务机会证据评价层，保持策略/生产模型/阈值/成交不变。使用research-closure research模式，先复用封存报告/保存结果，当前未授权重跑旧耗尽月度4/4、固定2/2或因子家族。
@@ -549,9 +562,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "64cf840d1e97508001c9a779a1bd1b9be49a7937",
-  "checked_at": "2026-10-15T19:39:23.445851+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "c98ee23d9e654416137724fa0b819c9bbdd5602a",
+  "checked_at": "2026-10-15T20:00:16.912357+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -569,21 +582,21 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/experiments/INDEX.md (only own report row)",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-15T19:39:23.445851+08:00",
-  "conflict_decision": "已读research-utility-review最新股票来源资格与20/60联合封存，仅读其既有结果，不委派用户因子对话、不接管股票取数/因子研究源码。自身新增机会质量问题仅核当前生成机制、旧检验与必要未回答的ETF事件后表现；原源/冻结预算不动。",
+  "updated_at": "2026-10-15T20:00:16.912357+08:00",
+  "conflict_decision": "已读研究方股票全池来源新范围；不碰其数据和研究源码；仅本任务报告/raw及自己的registry键/INDEX行。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-acceptance-20261015.json",
+  "validation_evidence": "docs/experiments/raw/opportunity-quality-audit-2026-10-15/controller-review.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
     "schedule": "每天北京时间14:30",
     "first_scheduled_run_verified": true
   },
-  "registry_scope": "registry.json仅原decision-mainline-practices报告键；其他任务新增项保留",
-  "remaining": "先只读核机会产生/质量判断实现与旧研究；新增真实计算前固定问题、标签、对照、时点和累计预算。当前0新市场运行。"
+  "registry_scope": "registry.json only opportunity-quality-audit-2026-10-15 own key; preserve others",
+  "remaining": "审计阶段完成，完整当前事件历史准确率尚未评价；需要准确首次started事件适配/冻结、生命周期提取纠正及相同持仓执行资料。当前无后台计算。"
 }
 ```
 <!-- lei-coordination-json:end -->
