@@ -1,3 +1,12 @@
+# 具体决定研究的可行性与Gemini复核：继续
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha a7b96fabc2db1a3cf0f8939184f642af96059aa9；checked_at/updated_at 2026-10-15T15:56:43.683125+08:00。已读COORDINATION、自身、investor-workspace-simplification-20261012、technical-factor-sequence、research-dispatch-controller；原机会owner已完成本批，仍不接管其源码。本轮只读输入、定义与研究工具，独立小证据写自己的raw。
+- 用户要求再核Gemini额度、继续下一步，明确关心具体决定是否难验证、如何划标的范围；最新授权全权审视并最后给结论/进展。本轮有界问题：现有材料能支持哪个有用且可执行的最小检验，哪些卡在资料/定义/方法；不把再次规划当实测，若有必要且获准的检查则执行。
+- root唯一写原报告docs/experiments/low-frequency-decision-priorities-2026-10-15.md的新续核段、同名raw/feasibility-followup/、registry原键说明及自己的work-progress。两个只读助手：Sol/medium核已有材料/运行入口/标的与时点；Astra/high审问题和最低可接受设计，不联网不跑市场不改文件。生产/原策略/冻结证据/旧预算不变。若确认需要新真实实验，先登记准确合同与输入资格，不用本段直接开未定义拟合。
+- Gemini4/最高档复查和聚焦参考使用用户明确授权，仅非私人研究摘要。累计保持前轮1次请求/2次网页来源，续轮单记不重置旧实验预算。目标是交付实证可行性表及已执行必要检查，复用原报告，不另造研究控制器/重复报告。
+
+---
+
 # 低频量化下一重点与Gemini建议复核：有界完成
 
 - task-id research-utility-review-20261012；owner root；status completed；scope_released true；checked_coordination_sha 132e9c20bdc8fdfdbefdf3e1067b17a9b60da369；checked_at/updated_at 2026-10-15T14:36:55.100522+08:00。已读COORDINATION、自身、investor-workspace-simplification-20261012、technical-factor-sequence、research-dispatch-controller；末次fetch无新变化。冲突决定：本轮只读流程与方法报告，未改任何机会/模型/UI/服务源码，原owner范围不变。
