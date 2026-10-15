@@ -1,3 +1,13 @@
+# 确认缺口后的准确实施范围
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha e9b79b57016b9dd9dbfc791fe6166820c0a429d6；checked_at/updated_at 2026-10-15T13:38:22.700120+08:00。本轮原相关记录已读，较开工无同路径新写者；两只读助手已完成，未改文件或运行市场。
+- 已证实：产品问答仅取factor_refs第一项；通用价格分组先删未成熟结果却叫机会占比且缺排除记录；用途映射未上首屏。简单基准和组合线性重复检查已有，不重复增加。137等待去向/88失效中34上涨原报告已有，直接复用，不重跑。
+- Sol1唯一写src/lei_signal/copilot/factor_product_context.py、tests/unit/test_factor_product_context.py、新test_factor_multi_context.py、tests/integration/test_factor_product_cases.py。逐项读取绑定，明确同日/缺项/未知可得时间，短摘要+完整明细，无综合分数/交易。Sol2唯一写src/lei_signal/research/workflow_descriptions.py、workflow.py仅描述/首屏呈现、tests/unit/test_workflow_description_coverage.py及既有test_workflow_report_summary.py；不改算法/旧数据/评价/原合同。均先隔离树，root后续逐字验收与准确本地镜像。
+- root唯一增量写configs/factor-products.v1.json及factor-access.v1.json（仅科创50已有60日波动研究绑定和一条同日历史观察，不新增定义）、docs/research/factor-observations/multi-factor-20261015/、自有研究proposalREADME新增本轮接入/决策证据约束、原自有报告/raw/进度。观察仅沿准确已有定义对原588000历史经济价计算一个2026-06-30值，独立算术/来源核验，不新增拟合或收益研究；小包留本机预计<32KiB，代码报告记录预计<1MiB，大结果0。原样保留20日观察，严禁声称两个同源窗口是独立证据。
+- Agent/机会路由/web/模型设置仍只读；共享registry/INDEX仍未占用。生产服务重载由原机会owner协调，未授权自改其文件。正式组合研究/完整资金链尚无证据，不因读取多个因子而放行买卖。
+
+---
+
 # 因子研究纠偏与多因子决策证据：新授权接续
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 5807cdff5a47f749b17faaf6e03200304b0913bb；checked_at/updated_at 2026-10-15T13:32:07.170853+08:00。已读COORDINATION1.1、自身、technical-factor-sequence、classic-factor-research、theory-workflow-system-increment、research-dispatch-controller及investor-workspace-simplification-20261012最新段；后者机会/模型接口保留其唯一写者，本轮只读，不接管页面或重载服务。
