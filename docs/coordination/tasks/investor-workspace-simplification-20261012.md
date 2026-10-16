@@ -1,3 +1,15 @@
+# Sol6.1机会分析实测：开工 2026-10-16T17:09:09.253314+08:00
+
+checked_coordination_sha=c913a67e66186b646909cdf9ef0352309f69591d；已读COORDINATION、自身、research-utility-review、daily-trading-system-audit、investor-observation-map、research-dispatch-controller，最新纯颜色账户研究独立且无重叠。原task与目标复用，用户明确授权用/Users/yongbiaoli/Desktop/lianghuadoc/lianghua/api.md中的gptkey调试，输出模型gpt-6.1-sol；追加验收简洁/信息密度/资料覆盖。Key仅读运行内存，不入代码/日志/报告，仓外文件不修改。
+
+本轮问题为固定2产品（通信ETF、易方达信息产业混合A）既有Agent在可核资料下能否输出具体双向关注条件、支持及反例。服务叙事/质量验证层，不改策略。两权威文档SHA仍df92d85b…/85e0e327…一致；沿原K线/近期/基金行业参考边界。复用原素材/角色/引用校验器，默认隔离运行及小报告，生产Pro配置/定时器和原失败历史保持。本批仅允许必要模型/接口调试，不自动全板重跑或永久切换。
+
+边界：先查官方模型与Key对指定模型的访问；核心2产品×背景/反方最多4次请求，短输出合成1次；如有具体格式/材料问题最多2次有理由纠错（总计<=7次非重置）。传输失败最多原操作1次+必要诊断1次；401/402/403/无模型访问即止该路。只传公开产品/行情/披露材料，账户金额/备注/个人判断不上传。预算内不换模型、不购买、不自设胜率。小原始回执/报告预估<5MiB，未知token如实保存；不跑收益实验或因子研究。
+
+验收：实际返回模型/用量/延时留回执；引用逐条可追踪且日期/对象/数值一致；双侧条件保留、旧与盘中不误称触发；基金行业不替代自身时点；简洁度与信息密度用具体字数/条数及独立语义复核，资料缺口明确。向用户给实际卡片输出及不足，完成登记/原目标note。root唯一产物写者，Sol6.1只读审验收清单与输出，无因子对话派发。
+
+---
+
 # 今日机会输出与界面打磨：有界交付 2026-10-16T16:12:40.795867+08:00
 
 checked_coordination_sha=995be3f46b6cfa538a116d169ea55cc1c07f6115；已读原相关任务及最新研究增量，无交叉。本批completed/scope_released=true仅工程范围，用户效果待验；原目标in_progress。
@@ -686,9 +698,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "995be3f46b6cfa538a116d169ea55cc1c07f6115",
-  "checked_at": "2026-10-16T16:12:40.795867+08:00",
+  "status": "active",
+  "checked_coordination_sha": "c913a67e66186b646909cdf9ef0352309f69591d",
+  "checked_at": "2026-10-16T17:09:09.253314+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -701,35 +713,18 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
-    "src/lei_signal/api/opportunity_context.py",
-    "src/lei_signal/api/opportunity_brief.py",
-    "src/lei_signal/api/routes/opportunity_reviews.py",
-    "tests/unit/test_opportunity_context.py",
-    "tests/unit/test_opportunity_brief.py",
-    "tests/unit/test_opportunity_review_routes.py",
-    "web/src/pages/OpportunitiesPage.tsx",
-    "web/src/pages/opportunities.css",
-    "web/src/api/opportunityReviews.ts",
-    "web/src/components/opportunities/OpportunityChart.tsx",
-    "web/src/components/opportunities/OpportunitySignals.tsx",
-    "web/src/components/opportunities/signalsModel.ts",
-    "web/scripts/test_opportunity_brief.mjs",
-    "web/scripts/test_opportunity_focus.mjs",
-    ".agents/skills/lei-system-chat/scripts/query.py",
-    ".agents/skills/lei-system-chat/SKILL.md",
-    ".agents/skills/lei-system-chat/references/api-usage.md",
-    "tests/unit/test_lei_system_chat_skill.py",
+    "docs/experiments/opportunity-agent-sol61-validation-2026-10-16.md",
+    "docs/experiments/raw/opportunity-agent-sol61-validation-2026-10-16/*",
+    "docs/experiments/registry.json (own report key only)",
+    "docs/experiments/INDEX.md (own report line only)",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-polish-*",
-    "web/src/components/KlineChart.tsx",
-    "web/src/components/klineTooltipModel.ts",
-    "web/scripts/test_kline_tooltip.mjs"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/sol61-validation-*"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-16T16:12:40.795867+08:00",
-  "conflict_decision": "末次fetch无新变更；原相关任务及0ad0c27研究增量已读，无交叉。root完成自身精确路径，2个capacity中断Sol由root接手并验收，范围释放。",
+  "updated_at": "2026-10-16T17:09:09.253314+08:00",
+  "conflict_decision": "已读原相关任务和c913a67研究增量：对方纯颜色账户研究module/raw/独立HTML，无本轮生产路径重叠。registry/INDEX仅追加自身键/行，写前再核最新内容。root唯一写者；Sol6.1只读输出验收，禁止访问key。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-polish-acceptance-20261016.json",
   "automation": {
@@ -739,7 +734,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "original okr-4c2ea452d3cc note35->36 only; protected fields and history preserved",
-  "remaining": "用户效果待验；完整Pro新分析仍未恢复（沿用10/16 15:43 HTTP402），基金同产品技术时点与当前行业权重未知；原主线in_progress，无活动子Agent。"
+  "remaining": "使用用户指定仓外gptkey和gpt-6.1-sol，隔离验证2产品双角色+短输出，不改全局Pro或定时器；实际输出、引用与资料完整度待验。"
 }
 ```
 <!-- lei-coordination-json:end -->
