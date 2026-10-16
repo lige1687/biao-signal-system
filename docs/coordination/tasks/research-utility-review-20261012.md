@@ -1,3 +1,14 @@
+# 纯颜色研究资金账户：用户选择已收到 2026-10-16T16:48:46.209277+08:00
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false。checked_coordination_sha=344a8ad7064318a6664674338acaf49d909f8995；checked_at=2026-10-16T16:48:46.209277+08:00；COORDINATION及自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012沿前轮已读相同版本，fetch无增量/无重叠。
+- 用户准确选择“加纯颜色研究对照：转绿后买入、转黑后退出、灰色持有；明确不是完整LEI策略”。恢复前轮待选择分支，前轮2市场0fits事件结果封存不重跑。新账户研究用途为把变色与实际资金的等待/退出/成本放到一起，研究代理不改原策略文档或交易。
+- 原独立工作树codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be。root唯一集成；新src/lei_signal/research/stock_color_account.py、tests/unit/test_stock_color_account.py、raw/stock-color-account-2026-10-16/、docs/experiments/stock-color-account-2026-10-16.md；自身definition新卡/独立快照及registry键/INDEX行/进度。原生因子入口明确不支持policy账户，不强改旧冻结kind，专用有界研究入口随raw归档、先资格和合成检查再冻结，独立审核后运行。图表独立HTML，不改生产web/API或旧事件研究源码。
+- 先只读Astra审方法与资金/缺价风险、资格统计由root或Luna分配；实现文件单写。输入仍固定外盘已核CN300/IVV504收盘面板，禁止为了曲线好看事后删股/补缺失收益。次日收盘纸面成交、现金/股票总额核对、费用/简单持有/单线及动作分解待审固定后执行。只用公开已存资料，不购买/新增行情，不生产交易。
+- 承接上一事件问题已用2真实市场/664.59秒，旧预算不重置；授权的新账户分支登记独立policy合同，默认1核心批+至多3必要纠错批，不追正不调参，2市场预定同批，0拟合，累计家族关联保留。实际预算/方法审核记录再冻结；外盘身份可用，内盘12.72GB/外盘552.12GB，小记录预估64MiB，大结果<=2GiB。
+- 最终验收：现金+持仓+费用逐日自洽、边界/延迟无未来信息、基准公平、结果独核、收益/回撤/月历图及完整报告登记、真实Web读回；待用户验收视觉。缺价若无法支持完整账户，不伪造，继续可独立资格/方法与可支持范围并合并说明阻塞。
+
+---
+
 # 个股转色20/30日与交互展示：有界交付 2026-10-16T16:28:06.786188+08:00
 
 - task-id research-utility-review-20261012；owner root；status completed；scope_released true仅本事件问题。checked_coordination_sha=acfa1f5d2a30e2f0bd664833eed9cf81fd4d1be7；checked_at=2026-10-16T16:28:06.786188+08:00。已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012；最新两项仅对方API/Web/Skill范围，无重叠，不接管。
