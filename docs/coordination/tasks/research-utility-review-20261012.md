@@ -1,3 +1,12 @@
+# 灰色转色旧证据与策略图表核对：report_only active
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 2cea97b5640330e445aa51a9bc6ad14545d47565；checked_at/updated_at 2026-10-16T14:40:19.810091+08:00。已读COORDINATION、自身、research-dispatch-controller、technical-factor-sequence、investor-workspace-simplification-20261012；后者独立Skill/接口任务不接管，颜色原负责人封存结果只读，不重跑。
+- 用户本轮问灰转黑/灰转绿是否做过、方法是否合理、抖音图表及当前策略阶段。模式report_only：核已有结果与原定义、只读指定公开图文和官方绩效展示资料；0新训练、0市场实验，不改颜色或生产。Sol medium只读助手核旧证据，root另查封存2699a201分支报告以补当前目录缺失。
+- root唯一写者：新docs/experiments/color-transition-evidence-and-strategy-view-2026-10-16.md及同名raw小证据；registry仅本键、INDEX仅本行、自有进度追加。先在原独立研究树准备，主树只镜像这些小报告；旧合同/数据/源码只读。不写别人报告，不新增外盘大结果或采集行情，不创建策略收益曲线冒充已有结果。
+- 验收：颜色状态/首次转色/严格灰转色的定义与现有成绩对应；原账户成绩与本轮信息研究分开；图文只记实见内容，未经复现绩效明确未知；官方图表方法有来源；报告登记、API读回、归置。此次局部文档范围完成后释放；整体有效因子及完整策略仍未完成。
+
+---
+
 # 个股双均线增量、等待代价及Web交付：有界完成
 
 - task-id research-utility-review-20261012；owner root；status completed；scope_released true，仅本次股票20日方向问题；checked_coordination_sha f2bf827f6c52100df99787b80c413ec64b69e760；checked_at/updated_at 2026-10-15T22:15:57.972823+08:00。复用已读COORDINATION和原七任务、storage-headroom-20261015；再读investor-workspace-simplification-20261012最新简报/通信定位，末次fetch无新增，其API/UI不接管，彼此无共享源码路径。root唯一报告/共享登记写者，执行和独审agent已结束。
