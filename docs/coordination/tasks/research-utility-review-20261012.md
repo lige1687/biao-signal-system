@@ -1,3 +1,16 @@
+# 个股纯颜色账户与完整策略计划：限定交付 2026-10-16T17:21:26.407112+08:00
+
+- task-id research-utility-review-20261012；owner root；status completed；scope_released true仅本题。checked_coordination_sha=287b55ecd5a73e0f256183ef24bc1520f84950f7；checked_at=2026-10-16T17:21:26.407112+08:00；已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012。对方仅两产品模型叙事实测，本轮研究/独立HTML/报告无重叠；未改生产Web/API。
+- 用户确认纯颜色对照已闭合：转绿后买、转黑后退出、灰色保持；CN300/US504全部资金格固定，下一计划日收盘、缺价订单过期、持仓缺价NAV未知、连续账户、0/5/10bp研究费用。6规则×3费用×2市场，2真实运行、0拟合、0新行情/付费、核心89.25秒；前事件2运行664.59秒继承留账，无旧题重跑/调参。
+- A股6/30持有sh.688072缺价，期末与年化未知，最近共同6/26双线1→1.5257、SMA1.5714、简单持有2.2360；美股6/30双线1.4374、SMA1.3737、简单持有2.5096。美股双线对SMA零费仅+0.73点，10bp+6.37点，不能把费用与复利差冒充更准预测。两市场无统一简单基准优势；非完整LEI，真实可执行收益与完整多周期/仓位风控仍未验证。
+- 已查旧个股预测/事件/等待与ETF账户去重，最新用户明确要双均线发散计划、完整策略计划一并给：报告含用途/优先级/复用来源/对照/停止条件、模块A→入退→仓位风控→组合路线与OHLC/历史成员/15/60分钟缺口。新方向仅计划，不自动执行。系统因子页值得复用但未生产接入，方案绑定既有组件/精确版本，价格信息与纸面资金与策略贡献分层。
+- 证据：docs/experiments/stock-color-account-2026-10-16.md，SHA9ecb1974b02a499a70110e3eff42189b318df5ee9745c68fa24466951763c7b4，主树/研究树/API正文同；同名raw有contract38绑定不变、22合成、独立原价格逐笔重建CN2776485/US5201010数值检查0错误（非独立金融样本）、结果/路径/失败/closure。Astra独审方法及结论，Sol账户/展示/查重，Luna独核。过程schema/UI变量/提前读文件小失败均保留，不重跑统计。
+- 5195临时只读图表服务，6市场费用组合与报告11表/链接/刷新读回通过，截图保存在raw；需本机及外盘可用，用户视觉待验。大结果与HTML在登记外盘CN/US stock-color-account运行目录，UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，准确位置/SHA在run-cn/us.json和viewer-location.json。无搬删旧资料。
+- 目标okr-ff1e0a86fbac只note147→148，仍in_progress，授权/其余字段/历史前缀读回不变。主树只同步本报告、小raw、自己的registry键/INDEX行/进度；归置检查通过。研究分支codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be加未提交成果；源码/报告未推，远端不可独立复现。只有协调元数据推送，成果位置不冒充成果commit。
+- 停止依据：本题固定账户、可读展示与后续计划已回答；完整策略新项目尚未执行。下一次先读本结果及未来计划，核对数据资格和具体新问题；不重启旧20日预测、20/30日事件或本账户以追正。无研究PID继续运行，仅保留只读图服务，不恢复主动通知。
+
+---
+
 # 入口归置更正 2026-10-16T16:59:03.559668+08:00
 
 checked_coordination_sha=c2f357d04fb73113de54f8d68a61ef892f64a2ab；已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012；无新冲突。一次性账户runner实际放scripts/archive/run_stock_color_account_20261016.py，遵循目录归置，登记同一输出政策；其余范围与owner不变。源码/合成结果后冻结前正进行独立审阅；未运行真实统计。
