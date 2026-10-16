@@ -1,3 +1,15 @@
+# 今日机会输出与界面打磨：开工 2026-10-16T15:37:06.099343+08:00
+
+checked_coordination_sha=ad557a1079a2d4f7ed088e0ac1191a1c2bb9716f；已读COORDINATION及JSON列相关任务，当前无交叉修改。用户“可以的开整吧”授权上轮四项方案：稳定报告、有时效的双向产品卡、摘要/K线/条件层级、网页和Skill共用结果。服务信息展示与流程可靠性层；两策略文件实际SHA仍与批准df92d85b…/85e0e327…一致，不改技术规则、阈值或策略权威源。
+
+先保留准确基线，原隔离分支e6c4c2e025252c565ba15f05611561ca1ecd5b48及未提交增量继续。生产日志定位本次14:30/14:42 SQLITE_BUSY在opportunity_context写入已查询资料，优先有限写入重试、不重复搜源/模型。root新增纯展示简报/API与Skill同份数据；Sol各自仅context与web，主树精确镜像前核原指纹，必要受管重载。保持Pro，实际验收只对两产品所需流程，不因故障全板反复模型重试；无余额时记录原错误仍完成可独立工程验收。
+
+验收：瞬时与持续DB争用不会重复取数/模型；失败/等待/完成状态一致并保留旧结果日期；近期/解除/过时和盘中不混称；两侧条件来源不编造，行业仅参考；首屏精简结论、可见K线及双向条件、关键反方与日期，来源展开，黑绿灰保留；实际通信ETF/易方达信息产业混合A、同API/Skill、桌面窄屏、刷新复用、相关回归。真实判断/计划/成交不代填；链接进入草稿不落记录。
+
+内盘可用约14.17GiB，固定外盘身份可用；仅小代码/记录/截图预计<20MB，无大下载或迁移删除，不启动研究、不改模型/定时器、不派因子对话。原目标okr-4c2ea452d3cc只追加阶段note，整体不提前完成。源码未提交未推，远端只协调记录；范围以JSON准确路径为准。
+
+---
+
 # 系统信息Skill：独立调用完成 2026-10-16T14:54:21.676424+08:00
 
 checked_coordination_sha=c6cd0b8b2faa8354b06f3f2e314492741d85bf00；已读COORDINATION及自身、daily-trading-system-audit、research-dispatch-controller、investor-observation-map、research-utility-review-20261012；最新灰色证据报告与本批路径无重叠。status=completed、scope_released=true仅本次Skill接入。整体目标仍in_progress，原主线运行限制保留。
@@ -654,9 +666,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "c6cd0b8b2faa8354b06f3f2e314492741d85bf00",
-  "checked_at": "2026-10-16T14:54:21.676424+08:00",
+  "status": "active",
+  "checked_coordination_sha": "ad557a1079a2d4f7ed088e0ac1191a1c2bb9716f",
+  "checked_at": "2026-10-16T15:37:06.099343+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -669,20 +681,32 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
-    ".agents/skills/lei-system-chat/SKILL.md",
-    ".agents/skills/lei-system-chat/agents/openai.yaml",
+    "src/lei_signal/api/opportunity_context.py",
+    "src/lei_signal/api/opportunity_brief.py",
+    "src/lei_signal/api/routes/opportunity_reviews.py",
+    "tests/unit/test_opportunity_context.py",
+    "tests/unit/test_opportunity_brief.py",
+    "tests/unit/test_opportunity_review_routes.py",
+    "web/src/pages/OpportunitiesPage.tsx",
+    "web/src/pages/opportunities.css",
+    "web/src/api/opportunityReviews.ts",
+    "web/src/components/opportunities/OpportunityChart.tsx",
+    "web/src/components/opportunities/OpportunitySignals.tsx",
+    "web/src/components/opportunities/signalsModel.ts",
+    "web/scripts/test_opportunity_brief.mjs",
+    "web/scripts/test_opportunity_focus.mjs",
     ".agents/skills/lei-system-chat/scripts/query.py",
+    ".agents/skills/lei-system-chat/SKILL.md",
     ".agents/skills/lei-system-chat/references/api-usage.md",
-    ".agents/skills/lei-system-chat/references/confirmed-records.md",
     "tests/unit/test_lei_system_chat_skill.py",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/system-query-skill-*"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-polish-*"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-16T14:54:21.676424+08:00",
-  "conflict_decision": "已读开工原相关任务及本次remote新增research-utility-review灰色证据结案，仅其报告/raw，与Skill无重叠。root唯一写者；6文件精准镜像主树，未接管生产API/模型/金融记录/通知或仓外设置；有界Skill范围释放。",
+  "updated_at": "2026-10-16T15:37:06.099343+08:00",
+  "conflict_decision": "已读COORDINATION、自身、daily-trading-system-audit、investor-observation-map、portfolio-trends-20261013、research-utility-review-20261012、research-dispatch-controller；无远端新增或相同写范围。root唯一主树集成/API/目标写者；Sol限定context写入修复与独立前端范围，因子对话不派任务。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/system-query-skill-acceptance-20261016.json",
   "automation": {
@@ -692,7 +716,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "none; original goal okr-4c2ea452d3cc note only 34 -> 35, protected fields unchanged",
-  "remaining": "本批Skill接入已完成，用户体验待实际调用；原今日资料准备SQLITE_BUSY及pending、Pro模型恢复仍属整体主线限制，未借本批修生产。"
+  "remaining": "修复公开资料写入锁争用，统一网页/Skill产品简报，首屏结论+K线+双向条件+关键反方，实际两产品闭环与用户效果验收"
 }
 ```
 <!-- lei-coordination-json:end -->
