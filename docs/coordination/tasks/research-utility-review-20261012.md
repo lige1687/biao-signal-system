@@ -1,3 +1,15 @@
+# 个股转色20/30日与交互展示：有界交付 2026-10-16T16:28:06.786188+08:00
+
+- task-id research-utility-review-20261012；owner root；status completed；scope_released true仅本事件问题。checked_coordination_sha=acfa1f5d2a30e2f0bd664833eed9cf81fd4d1be7；checked_at=2026-10-16T16:28:06.786188+08:00。已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012；最新两项仅对方API/Web/Skill范围，无重叠，不接管。
+- 固定CN300/IVV504当前名单，输入报价300/502；两市场冻结统计、0fits/0新行情、20主30辅助、三历史阶段。近期20日转绿平均CN+1.73%、US+1.09%，相对同股普通日期-0.23/-0.30点；转黑均值+1.04/+1.43%、下跌51.7/45.1%。有背景、单线、年度、每股和去最大贡献者对照，未确认稳定独立信息。当前名单回看/历史已见/退出与终止价值限制保留，不外推ETF或真实交易。
+- 原生验收、独立路径与主统计/普通日/事件/日期区间核验无误；最后相关5文件30项，原agent43项。两合同24绑定最后逐一不变。Astra纠正3句比较含义，无参数变化；两个Sol容量失败后gpt-6.1-sol完成原生、Luna核数、root图表。原生家族664.59/7200秒、2固定真实市场，发布复用0fit；金额/token成本未知。
+- 报告docs/experiments/stock-color-events-2026-10-16.md SHA e4e2f2ee7a022db9de68a241e6f236172dc48ed70f951a2520dbaf850d144b36，同名raw有合同、核验、位置、失败、UI/API/闭环。独立HTML13MB与大结果在登记外盘；5194临时只读服务，无持久部署。真实24筛选读数/截图、5188报告24行展开与图表往返、API正文哈希同。全局列表计数未知未声称通过，主树归置通过。
+- 主树仅镜像自身报告/小raw/registry键/INDEX行/进度；其他registry不变，生产源码/策略原文/交易未改。原目标ff1e0a86fbac仅note146→147，仍in_progress；保护字段/历史前缀读回不变。纯颜色研究账户选择仍待用户未执行，完整LEI资金与归因未验证，整体目标不完成。
+- codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be加本地未提交成果，源码/报告未推；远端仅协调元数据，不代表异机已可复现。外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，准确路径/输入与输出SHA在raw/native-runs.json及viewer-location.json，未搬删旧文件。研究进程均结束，仅保留5194图表查看服务；用户视觉待验。
+- 下一次先读本封存结论，不重跑本事件/旧ETF/10月15日每日状态研究，不以完整策略未验证为由自动扩项或调参。需要账户研究时先解决已提出的简化定义选择，原策略与可成交资料资格另核。
+
+---
+
 # 个股首次转色：原生流程检查通过，真实资料冻结中
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha bc9ec11f77ed4bd6fa41f0f07c5fc70662a4cc58；checked_at/updated_at 2026-10-16T16:00:17.978524+08:00。复用开工已读五任务，增量再读COORDINATION和investor-workspace-simplification-20261012，该任务明确API/Web/Skill且避开本研究源码/独立HTML，当前无重叠。
