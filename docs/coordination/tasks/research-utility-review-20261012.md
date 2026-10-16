@@ -1,3 +1,14 @@
+# 个股非绿转绿/非黑转黑20与30日及直观图表：研究开工
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha ad557a1079a2d4f7ed088e0ac1191a1c2bb9716f；checked_at/updated_at 2026-10-16T15:36:31.260133+08:00。已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012。旧ETF周色与10/15股票每日状态冻结不重跑；本次新问题为首次颜色转入事件，用户明确要求个股20/30日、历史分段、图表与收益风险解释。该问题无其他当前执行者。
+- 原工作树codex/factor-evidence-integration-20261012，基线70ab55556874228d2cba66cf50f96d0318e1a5be加既有本地增量；保留所有旧合同源码快照/失败。主树不直接开发，不改原策略文档/生产判定/交易。
+- root唯一共享入口写者：该树research/question_contract.py、workflow_inputs.py、workflow.py及定义登记的新对象/对应快照；新增stock_color_event_information.py与tests/unit对应新测试。新研究raw/stock-color-events-2026-10-16、小报告stock-color-events-2026-10-16.md及自身registry键/INDEX行/进度。图表优先独立研究HTML或报告图片，在隔离树新增准确路径，尚不占生产Web源码。
+- 输入复用10/15固定CN300/IVV504面板和资格；当前名单回看、供应商历史版本/时点/退出缺口明确；20主30辅助、2021-23开发/2024验证/2025-26H1测试的预定义提案待方法核查，已有历史不冒称盲验证。事件价格路径为核心；纯颜色研究资金对照是否同时做已向用户列出准确含义，回答前不执行账户分支。
+- 初始研究预算沿research-closure有界新问题：1核心批+最多3有理由后续、最多4真实实验尝试、不调参追正；0付费/0新行情。所有运行/失败累计，本问题不重置旧家族。来源资格、合成边界、正式入口、日期关联误差与同日期比较、稳定性/集中度、独核、图表Web可读是必要验收。大结果在固定已核外盘，本机小记录预估64MiB，旧117MiB账本不删不移。
+- 并行只读Astra方法/关键风险和Sol输入资格辅助，具体合同由root保存；实现文件分工后再写，无同文件双写。容量实测内盘15.23GB/外盘555.32GB，固定UUID已核。当前仅开工，不宣称研究结果或策略有效。
+
+---
+
 # 灰色转色旧证据与策略图表核对：有界完成
 
 - task-id research-utility-review-20261012；owner root；status completed；scope_released true，仅本轮report_only；checked_coordination_sha 94f4237936dce9c80f0d4db25369cd576d457010；checked_at/updated_at 2026-10-16T14:45:57.279791+08:00。已读COORDINATION、自身、research-dispatch-controller、technical-factor-sequence、investor-workspace-simplification-20261012；后续fetch无新增，其他研究/Skill与生产不接管。
