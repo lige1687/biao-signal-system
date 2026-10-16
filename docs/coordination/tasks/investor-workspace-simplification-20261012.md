@@ -1,3 +1,9 @@
+# 实机验收补充 2026-10-16T16:06:20.436287+08:00
+
+checked_coordination_sha=0ad0c27fb8a3e6e2693e5d25bc3934d17ac5ffce；前述相关任务和研究新增进度已读无重叠。通信图悬停日期与均线原始数组不符、OHLC被旧一致性检查隐藏。新增KlineChart/tooltip helper/既有test准确范围，按日期取原数据，不改信号。此前准备complete、模型复用15:43 HTTP402旧失败，无新增模型请求；网页与Skill两产品一致。
+
+---
+
 开工并发同步补注 2026-10-16T15:37:39.380499+08:00：首次普通push被远端新研究登记拒绝；已读3b5e713c8e40c4e0fb16a37ed4bbc62bfa44f440的个股颜色研究范围（research代码/报告/独立HTML），与本批API/Web/Skill无重叠。普通合并保留其记录，checked_coordination_sha据此更新；尚未修改共享实现。
 
 # 今日机会输出与界面打磨：开工 2026-10-16T15:37:06.099343+08:00
@@ -669,8 +675,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "3b5e713c8e40c4e0fb16a37ed4bbc62bfa44f440",
-  "checked_at": "2026-10-16T15:37:06.099343+08:00",
+  "checked_coordination_sha": "0ad0c27fb8a3e6e2693e5d25bc3934d17ac5ffce",
+  "checked_at": "2026-10-16T16:06:20.436287+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -702,13 +708,16 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     ".agents/skills/lei-system-chat/references/api-usage.md",
     "tests/unit/test_lei_system_chat_skill.py",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-polish-*"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-polish-*",
+    "web/src/components/KlineChart.tsx",
+    "web/src/components/klineTooltipModel.ts",
+    "web/scripts/test_kline_tooltip.mjs"
   ],
   "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-16T15:37:06.099343+08:00",
-  "conflict_decision": "已读COORDINATION、自身、daily-trading-system-audit、investor-observation-map、portfolio-trends-20261013、research-utility-review-20261012、research-dispatch-controller；无远端新增或相同写范围。root唯一主树集成/API/目标写者；Sol限定context写入修复与独立前端范围，因子对话不派任务。",
+  "updated_at": "2026-10-16T16:06:20.436287+08:00",
+  "conflict_decision": "最新研究任务仅自身source/stats与独立HTML；已读最新研究进度，与本API/Web无重叠。实机tooltip日期/均线错位，新增3个准确图表路径仅修展示，root唯一写者。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/system-query-skill-acceptance-20261016.json",
   "automation": {
