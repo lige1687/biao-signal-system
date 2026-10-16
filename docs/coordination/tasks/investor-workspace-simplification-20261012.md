@@ -1,3 +1,15 @@
+# 今日机会输出与界面打磨：有界交付 2026-10-16T16:12:40.795867+08:00
+
+checked_coordination_sha=995be3f46b6cfa538a116d169ea55cc1c07f6115；已读原相关任务及最新研究增量，无交叉。本批completed/scope_released=true仅工程范围，用户效果待验；原目标in_progress。
+
+- SQLite公开资料缓存有限写重试：真实瞬时/持续锁测试及本机准备complete通过，不重新搜源/调模型。网页和lei-system-chat共用简报，两真实产品六字段及技术快照逐项一致，已知缺口不回退另取一份行情。
+- 页面先看短摘要、默认K线/黑绿灰、近期买卖条件与解除条件，再看关键反方及来源日期；基金优先经理披露配置/持仓覆盖。实机信号定位10/15、375窄屏与ETF买入/基金卖出链接通过。悬停均线错位已从日期原数组修正，并真实核对10/15与10/16读数。
+- 相关后端160项、末次简报22项（含新增1项）、前端6组、build、Ruff及主树现行归置通过。旧树依赖缺失、初始测试/封套错误、两次远端并发、2个Sol capacity及Vite大小提示均保留到验收，未弱化检查。最终无worker，无活动子Agent，未派用户因子对话。
+- 实跑最终orb_91d7c02fae8e236e3cb0df00f63a59a4740f5d3c8885e4407abde5238702353f为partial：57失败、11无需模型；完整Agent未恢复。沿用本日15:43 Pro HTTP402，模型尝试212→212，未切模型/强制重试。基金净值10/15可读，基金自身技术时点、当前完整权重仍未知。
+- 原目标note35→36实际API读回，所有保护字段与历史前缀保持。0新增判断/确认/计划/成交；策略与预算未改，未新研究/定时器。20源/测试/Skill哈希与10主树镜像回执见原archive/opportunity-polish-acceptance-20261016.json；源码本地未提交未推，基线e6c4c2e025252c565ba15f05611561ca1ecd5b48，远端仅协调记录。8000受管必要重启2次已健康；5188仍原独立前端。
+
+---
+
 # 实机验收补充 2026-10-16T16:06:20.436287+08:00
 
 checked_coordination_sha=0ad0c27fb8a3e6e2693e5d25bc3934d17ac5ffce；前述相关任务和研究新增进度已读无重叠。通信图悬停日期与均线原始数组不符、OHLC被旧一致性检查隐藏。新增KlineChart/tooltip helper/既有test准确范围，按日期取原数据，不改信号。此前准备complete、模型复用15:43 HTTP402旧失败，无新增模型请求；网页与Skill两产品一致。
@@ -674,9 +686,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "0ad0c27fb8a3e6e2693e5d25bc3934d17ac5ffce",
-  "checked_at": "2026-10-16T16:06:20.436287+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "995be3f46b6cfa538a116d169ea55cc1c07f6115",
+  "checked_at": "2026-10-16T16:12:40.795867+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -713,21 +725,21 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/src/components/klineTooltipModel.ts",
     "web/scripts/test_kline_tooltip.mjs"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-16T16:06:20.436287+08:00",
-  "conflict_decision": "最新研究任务仅自身source/stats与独立HTML；已读最新研究进度，与本API/Web无重叠。实机tooltip日期/均线错位，新增3个准确图表路径仅修展示，root唯一写者。",
+  "updated_at": "2026-10-16T16:12:40.795867+08:00",
+  "conflict_decision": "末次fetch无新变更；原相关任务及0ad0c27研究增量已读，无交叉。root完成自身精确路径，2个capacity中断Sol由root接手并验收，范围释放。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/system-query-skill-acceptance-20261016.json",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-polish-acceptance-20261016.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
     "schedule": "每天北京时间14:30",
     "first_scheduled_run_verified": true
   },
-  "registry_scope": "none; original goal okr-4c2ea452d3cc note only 34 -> 35, protected fields unchanged",
-  "remaining": "修复公开资料写入锁争用，统一网页/Skill产品简报，首屏结论+K线+双向条件+关键反方，实际两产品闭环与用户效果验收"
+  "registry_scope": "original okr-4c2ea452d3cc note35->36 only; protected fields and history preserved",
+  "remaining": "用户效果待验；完整Pro新分析仍未恢复（沿用10/16 15:43 HTTP402），基金同产品技术时点与当前行业权重未知；原主线in_progress，无活动子Agent。"
 }
 ```
 <!-- lei-coordination-json:end -->
