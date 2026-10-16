@@ -1,3 +1,17 @@
+# Sol6.1分析与输出验证：API额度阻塞，独立样例已验 2026-10-16T17:23:56.045813+08:00
+
+checked_coordination_sha=bbb57dad639da217f0d979a1336a0b1cbd60efdd；已读COORDINATION及原相关任务和最新研究结案，无重叠。status=blocked/scope_released=true仅API核心受账户额度阻塞，无模型任务在后台。原目标in_progress。
+
+- 用户指定Key真实GET模型200；2次Sol6.1背景生成均429 credit_balance_exhausted/insufficient_quota，保留原始回执，停止后续API反方/合成，不盲重试、充值或换模型。Key只读运行内存，无凭据写入报告/源码或仓外文件修改，生产Pro/日程保持。
+- 独立用Codex gpt-6.1-sol4回合完成验收、两背景、四反方、一次有理由精简。现有引用/数字检查2+4通过，独审及主控语义核对，卡片每字段来源可查；背景198→105、203→109字，最终197/179字，日期另列。明确Codex样例不代表API/生产持久化恢复。
+- 近3日按实际10/14、10/15、10/16独核，通信仅10/15当前顶部预警，附原0.8280解除条件而非新退出规则；基金仍缺自身时点。原卡重复计划缺口与退出观察措辞保留后修正；官网核A类净值6.555、前十43.49%及经理报告期配置方向，旧前十独立相加一致。行业近况、调仓及完整当前行业权重仍缺，不编造胜率或操作。
+- 报告docs/experiments/opportunity-agent-sol61-validation-2026-10-16.md及raw20小文件196676字节镜像主树并核SHA，registry自身键/INDEX自身行；API分类/全文读回、现行归置及脚本语法通过。报告basename初查404后按列出相对路径正确读回，失败留验收。原目标仅note36→37且保护字段/历史不变，0判断/确认/计划/成交、生产模型尝试212/worker0。
+- 成果分支仍codex/investor-workspace-simplification-20261012、基线e6c4c2e025252c565ba15f05611561ca1ecd5b48，源码/产物本地未提交未推，远端仅协调元数据。没有因子对话派发，两个新Sol6.1子Agent均已结束。
+
+恢复只需原Key额度恢复后，在合同累计预算和原失败不删的前提下验剩余必要API步骤；本次没有证明完整自动报告或投资效果。只读样例预览在raw/cards-preview.md。
+
+---
+
 # Sol6.1机会分析实测：开工 2026-10-16T17:09:09.253314+08:00
 
 checked_coordination_sha=c913a67e66186b646909cdf9ef0352309f69591d；已读COORDINATION、自身、research-utility-review、daily-trading-system-audit、investor-observation-map、research-dispatch-controller，最新纯颜色账户研究独立且无重叠。原task与目标复用，用户明确授权用/Users/yongbiaoli/Desktop/lianghuadoc/lianghua/api.md中的gptkey调试，输出模型gpt-6.1-sol；追加验收简洁/信息密度/资料覆盖。Key仅读运行内存，不入代码/日志/报告，仓外文件不修改。
@@ -698,9 +712,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "c913a67e66186b646909cdf9ef0352309f69591d",
-  "checked_at": "2026-10-16T17:09:09.253314+08:00",
+  "status": "blocked",
+  "checked_coordination_sha": "bbb57dad639da217f0d979a1336a0b1cbd60efdd",
+  "checked_at": "2026-10-16T17:23:56.045813+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -720,21 +734,21 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/sol61-validation-*"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-16T17:09:09.253314+08:00",
-  "conflict_decision": "已读原相关任务和c913a67研究增量：对方纯颜色账户研究module/raw/独立HTML，无本轮生产路径重叠。registry/INDEX仅追加自身键/行，写前再核最新内容。root唯一写者；Sol6.1只读输出验收，禁止访问key。",
+  "updated_at": "2026-10-16T17:23:56.045813+08:00",
+  "conflict_decision": "已读最新bbb57dad纯颜色账户限定结案，不碰本API或模型；registry/INDEX仅自身键/行保留对方内容，无交叉。本批产物写范围释放，API核心因Key额度阻塞；无模型后台任务。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-polish-acceptance-20261016.json",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/sol61-validation-acceptance-20261016.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
     "schedule": "每天北京时间14:30",
     "first_scheduled_run_verified": true
   },
-  "registry_scope": "original okr-4c2ea452d3cc note35->36 only; protected fields and history preserved",
-  "remaining": "使用用户指定仓外gptkey和gpt-6.1-sol，隔离验证2产品双角色+短输出，不改全局Pro或定时器；实际输出、引用与资料完整度待验。"
+  "registry_scope": "original goal okr-4c2ea452d3cc note36->37; report category方法论与验证/verdict mixed; own registration only",
+  "remaining": "指定Key恢复可用额度后继承2失败请求，仅验两产品剩余API环节。Codex同模型输出样例已验；近期行业经营与基金自身技术条件/调仓未知，原目标in_progress。"
 }
 ```
 <!-- lei-coordination-json:end -->
