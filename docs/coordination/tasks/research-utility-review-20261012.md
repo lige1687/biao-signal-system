@@ -1,3 +1,11 @@
+# 账户专用入口与展示评估范围补充 2026-10-16T16:53:32.448789+08:00
+
+checked_coordination_sha=8669d11c41d10abb8ee8879a5de0ca15f762dfd4；已读前述同版本五任务，无交叉。因账户不属于原生因子入口，新增独立scripts/run_stock_color_account.py并仅在本研究树configs/research-output-policy.v1.json登记，复用现有plan/recheck/execute_new的外盘监控与容量保护，不绕过未登记拒绝；不迁移旧实验/不改旧冻结文件或生产配置。root唯一写这两路径。核心统计module/tests交Sol high，独立核算另派；两市场真实运行必须等合成/输入/完整合同哈希冻结。
+
+用户最新要求评估把研究图复用到现系统、区分因子/完整策略/仓位风控。Sol只读现5188树得到组件与契约路径；记录到本报告的接入评估，不写对方生产web/API。纯颜色账户任务继续，不把双线替完整策略。方法按Astra12点：固定全部计划资金，未知估值NA，次日缺价订单失效，连续账户，费用0/5/10bp，四格仅同终点财富差。精确输出接口将保存本raw，不造新的通用研究平台。
+
+---
+
 # 纯颜色研究资金账户：用户选择已收到 2026-10-16T16:48:46.209277+08:00
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false。checked_coordination_sha=344a8ad7064318a6664674338acaf49d909f8995；checked_at=2026-10-16T16:48:46.209277+08:00；COORDINATION及自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012沿前轮已读相同版本，fetch无增量/无重叠。
