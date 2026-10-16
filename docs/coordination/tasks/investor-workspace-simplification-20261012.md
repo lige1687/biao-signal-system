@@ -1,3 +1,14 @@
+# 系统信息Skill：独立调用完成 2026-10-16T14:54:21.676424+08:00
+
+checked_coordination_sha=c6cd0b8b2faa8354b06f3f2e314492741d85bf00；已读COORDINATION及自身、daily-trading-system-audit、research-dispatch-controller、investor-observation-map、research-utility-review-20261012；最新灰色证据报告与本批路径无重叠。status=completed、scope_released=true仅本次Skill接入。整体目标仍in_progress，原主线运行限制保留。
+
+- 复用lei-system-chat，补自包含入口、MCP/脚本路由、今日机会准备/续查/失败、近期信号、精简输出及名称/日期/缺口。新对话无需旧历史，从任意cwd可查；项目范围维护，无仓外安装。
+- 17单测、两树Ruff、Skill结构、相对引用及diff通过，主仓现行归置通过。隔离树旧归置脚本把既有.codex和.git工作树元数据报为违规；失败保留，未删除或改检查器。Luna低思考无历史上下文独核查询，20/20自选名称补齐后再读回通过，无省略；实际只读持仓/宏观/消息/技术/旧run均取得，原日期和错误保留。
+- 6准确文件已镜像主仓，指纹/失败/限制见system-query-skill-acceptance-20261016.json。源码本地未提交未推，原codex分支/基线不变。目标仅note34→35实际API读回，保护字段与历史前缀相同。无真实ensure/模型重试、服务重启、金融记录、策略/配置/自动化变更或因子对话派发。
+- 原10/16资料准备SQLITE_BUSY且run pending未修，不能当成完整今日报告；旧Pro余额问题本轮未复验。用户效果待其调用，工程接入完成不证明收益有效；没有后台子任务。
+
+---
+
 # 系统接口整理为独立Skill：开工 2026-10-16T14:37:53.997643+08:00
 
 checked_coordination_sha=a4c9e2adb96cb49b28dba1b821eac678b0bf2516；已读COORDINATION、自身、daily-trading-system-audit、research-dispatch-controller、investor-observation-map、research-utility-review-20261012最新状态。用户要求不依赖本对话上下文直接查询系统信息。服务信息接入/展示层，两策略文件SHA与批准值一致，不改判定。root唯一写者，仅既有lei-system-chat目录、新独立单测和自身进度/交付记录；不改原后端API、模型、通知、真实金融记录、仓外Skill设置。
@@ -643,9 +654,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "a4c9e2adb96cb49b28dba1b821eac678b0bf2516",
-  "checked_at": "2026-10-16T14:37:53.997643+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "c6cd0b8b2faa8354b06f3f2e314492741d85bf00",
+  "checked_at": "2026-10-16T14:54:21.676424+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "portfolio-trends-20261013",
@@ -667,21 +678,21 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/system-query-skill-*"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-16T14:37:53.997643+08:00",
-  "conflict_decision": "用户明确要求整理系统接口为不依赖对话历史的Skill。daily-trading-system-audit最新已交付按需模式；本轮仅更新其既有查询Skill并保留确认/通知/存储限制，不接管后端integrations、计划/交易或仓外设置。其他研究/观察任务不写该Skill。root唯一写者，现有服务只读查询；模型生成只通过合成服务测试，本轮不再次调用真实ensure。",
+  "updated_at": "2026-10-16T14:54:21.676424+08:00",
+  "conflict_decision": "已读开工原相关任务及本次remote新增research-utility-review灰色证据结案，仅其报告/raw，与Skill无重叠。root唯一写者；6文件精准镜像主树，未接管生产API/模型/金融记录/通知或仓外设置；有界Skill范围释放。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-brief-acceptance-20261015.json",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/system-query-skill-acceptance-20261016.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
     "schedule": "每天北京时间14:30",
     "first_scheduled_run_verified": true
   },
-  "registry_scope": "registry.json only opportunity-quality-audit-2026-10-15 own key; preserve others",
-  "remaining": "精简现有Skill并补独立脚本/接口路由/日期与失败处理，离线边界及真实只读查询验收；原Pro/资料准备失败另保留，不借本批改生产。"
+  "registry_scope": "none; original goal okr-4c2ea452d3cc note only 34 -> 35, protected fields unchanged",
+  "remaining": "本批Skill接入已完成，用户体验待实际调用；原今日资料准备SQLITE_BUSY及pending、Pro模型恢复仍属整体主线限制，未借本批修生产。"
 }
 ```
 <!-- lei-coordination-json:end -->
