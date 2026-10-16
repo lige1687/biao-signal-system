@@ -1,3 +1,13 @@
+# 灰色转色旧证据与策略图表核对：有界完成
+
+- task-id research-utility-review-20261012；owner root；status completed；scope_released true，仅本轮report_only；checked_coordination_sha 94f4237936dce9c80f0d4db25369cd576d457010；checked_at/updated_at 2026-10-16T14:45:57.279791+08:00。已读COORDINATION、自身、research-dispatch-controller、technical-factor-sequence、investor-workspace-simplification-20261012；后续fetch无新增，其他研究/Skill与生产不接管。
+- 复用旧研究，root补查原负责人已推2699a201分支：四ETF非绿转绿142/104日期、20间隔均涨0.512%，非黑转黑167/115、均涨0.083%；这不是严格灰来源。周背景增量和灰来源表达均已有窄研究，但严格灰转色完整效果/公平比较仍未找到。旧资金模拟存在，完整LEI及最新股票账户尚未验证，不将模型误差失败等同策略失败。
+- 新docs/experiments/color-transition-evidence-and-strategy-view-2026-10-16.md SHA b21af36383af260ac903c71119b11f961686d2ec344dd7c068f8600b6174f30e（12047B）；同名raw源摘录/指纹与读回。SEA公开图文实际看到净值/回撤、月度热图及正文，绩效真实性未独立验证。接口拒绝后正常网页成功；官方QuantConnect/pyfolio来源核对。Sol medium只读助手结束，root已纠正本地目录不全造成的遗漏。
+- 主树/原独立树报告一致、registry仅本键、INDEX仅本行及自身进度追加；API正文逐字一致，5188正文/142与167/图表设计/阶段表可读，tab保留。全局列表头当时未知，不声称列表全通过；归置与准确diffcheck通过。没有新增收益曲线/UI实现、0新训练/买卖模拟、旧预算不改、无后台研究。
+- 文档成果仅本地未提交/未推，远端仅协调；原工作分支/源码/策略文档/交易不变。不自动扩为新灰转色实验；本轮用户要解释和核旧证据，完成其边界。整体有效因子/完整策略目标未完成。
+
+---
+
 # 灰色转色旧证据与策略图表核对：report_only active
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha 2cea97b5640330e445aa51a9bc6ad14545d47565；checked_at/updated_at 2026-10-16T14:40:19.810091+08:00。已读COORDINATION、自身、research-dispatch-controller、technical-factor-sequence、investor-workspace-simplification-20261012；后者独立Skill/接口任务不接管，颜色原负责人封存结果只读，不重跑。
