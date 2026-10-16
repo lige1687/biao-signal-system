@@ -1,3 +1,9 @@
+# 入口归置更正 2026-10-16T16:59:03.559668+08:00
+
+checked_coordination_sha=c2f357d04fb73113de54f8d68a61ef892f64a2ab；已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012；无新冲突。一次性账户runner实际放scripts/archive/run_stock_color_account_20261016.py，遵循目录归置，登记同一输出政策；其余范围与owner不变。源码/合成结果后冻结前正进行独立审阅；未运行真实统计。
+
+---
+
 # 账户专用入口与展示评估范围补充 2026-10-16T16:53:32.448789+08:00
 
 checked_coordination_sha=8669d11c41d10abb8ee8879a5de0ca15f762dfd4；已读前述同版本五任务，无交叉。因账户不属于原生因子入口，新增独立scripts/run_stock_color_account.py并仅在本研究树configs/research-output-policy.v1.json登记，复用现有plan/recheck/execute_new的外盘监控与容量保护，不绕过未登记拒绝；不迁移旧实验/不改旧冻结文件或生产配置。root唯一写这两路径。核心统计module/tests交Sol high，独立核算另派；两市场真实运行必须等合成/输入/完整合同哈希冻结。
