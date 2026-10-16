@@ -1,3 +1,5 @@
+开工并发同步补注 2026-10-16T15:37:39.380499+08:00：首次普通push被远端新研究登记拒绝；已读3b5e713c8e40c4e0fb16a37ed4bbc62bfa44f440的个股颜色研究范围（research代码/报告/独立HTML），与本批API/Web/Skill无重叠。普通合并保留其记录，checked_coordination_sha据此更新；尚未修改共享实现。
+
 # 今日机会输出与界面打磨：开工 2026-10-16T15:37:06.099343+08:00
 
 checked_coordination_sha=ad557a1079a2d4f7ed088e0ac1191a1c2bb9716f；已读COORDINATION及JSON列相关任务，当前无交叉修改。用户“可以的开整吧”授权上轮四项方案：稳定报告、有时效的双向产品卡、摘要/K线/条件层级、网页和Skill共用结果。服务信息展示与流程可靠性层；两策略文件实际SHA仍与批准df92d85b…/85e0e327…一致，不改技术规则、阈值或策略权威源。
@@ -667,7 +669,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "ad557a1079a2d4f7ed088e0ac1191a1c2bb9716f",
+  "checked_coordination_sha": "3b5e713c8e40c4e0fb16a37ed4bbc62bfa44f440",
   "checked_at": "2026-10-16T15:37:06.099343+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
