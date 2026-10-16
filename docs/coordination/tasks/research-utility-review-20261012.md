@@ -1,3 +1,13 @@
+# 个股首次转色：原生流程检查通过，真实资料冻结中
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha bc9ec11f77ed4bd6fa41f0f07c5fc70662a4cc58；checked_at/updated_at 2026-10-16T16:00:17.978524+08:00。复用开工已读五任务，增量再读COORDINATION和investor-workspace-simplification-20261012，该任务明确API/Web/Skill且避开本研究源码/独立HTML，当前无重叠。
+- Astra/high方法审完，严格三态、相邻可判定、20主30辅、三个历史时期、普通日/单线/同背景共同支持及60日同步片段已固定；当前历史已见，0拟合。原生新增kind合成freeze→execute→reuse→publication走通及篡改拒绝，相关43tests passed；本题真实统计尚未开始，CN源资格/冻结正在运行，US随后。输入名单300/504完整保留。
+- 两个gpt-6-sol实施任务因工具返回capacity失败保留已有代码；gpt-6.1-sol/high有界接续native已完成，root接手viewer；Luna/low独立核算脚本完成、未读真实效果。主控仍唯一集成写者，五源码写权已归还；可重复执行边界/失败/真实路径由小raw记录。0新行情/0付费，token未知。
+- 新source/stats只在原研究工作树；大结果默认登记外盘stock-color-*，本机小记录估计调整256MiB以容纳native历史接触账，未扩大实验范围或科学预算；2固定市场运行、最多4有理由尝试、7200秒家族。纯颜色资金账户选择仍待用户，不执行该分支。
+- 完成后必须独立重算、归档性能/增量/风险参照、互动图表与真实Web读回；当前不宣称因子有效或结案。原codex分支基线70ab55556874228d2cba66cf50f96d0318e1a5be加本地未提交；远端仅协调元数据。
+
+---
+
 # 个股非绿转绿/非黑转黑20与30日及直观图表：研究开工
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false；checked_coordination_sha ad557a1079a2d4f7ed088e0ac1191a1c2bb9716f；checked_at/updated_at 2026-10-16T15:36:31.260133+08:00。已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012。旧ETF周色与10/15股票每日状态冻结不重跑；本次新问题为首次颜色转入事件，用户明确要求个股20/30日、历史分段、图表与收益风险解释。该问题无其他当前执行者。
