@@ -1,3 +1,15 @@
+# 完整策略资料规则与模块A分阶段研究：开工 2026-10-17T08:08:06.511296+08:00
+
+- task-id research-utility-review-20261012，owner root，status active，scope_released false。checked_coordination_sha=a5cec233787e8d419a6fe9cd12298c028f9d852f；checked_at=2026-10-17T08:08:06.511296+08:00；已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012；后者仅模型叙事/卡片验证，未涉及本轮策略研究。原题封存，不接管他人生产/情绪/宽度/宏观。
+- 用户明确授权2026-10-17：按优先级继续，先核清完整策略资料与规则，再逐步测模块A、仓位与风控，复用旧实验，最后Web展示。复用原研究工作树codex/factor-evidence-integration-20261012，基线70ab55556874228d2cba66cf50f96d0318e1a5be加之前未提交产物，主仓很脏不切换不重置。成果本地未推，协调推送不代表源码交付。
+- root唯一集成写者：新增docs/experiments/raw/module-a-strategy-readiness-2026-10-17/与同名报告（允许后续本题module-a研究适配/账户衍生及独立可读HTML在该raw），自己的registry键/INDEX行/进度、研究树definitions新对象及独立快照（若确需）、本研究树外盘政策单入口（若确需）。默认在研究层复用正式规则，不改生产src/backtest/rules/web/API、旧冻结脚本/合同、策略桌面原文及确认指纹。资料与定义核对完才登记确切运行器/写范围后实施。
+- 三个只读子任务：Astra/high逐条语义/时点，Sol/medium已存资料与去重，Sol/medium已有规则/账户引擎复用；不写共享源码，不跑策略效果。root核规范、合同、输出、独验及Web路径，后续实现再精确单写派发。
+- 研究边界：先明确原文允许日周最小A与完整多周期区别；不因缺小时档一概停止可执行日周核对，不用纯颜色代完整A。若关键目标/失效定义或必要可成交价格不明，不伪造收益；完成独立可推进核查后合并具体阻塞。仓位/风险对照仅在相同合格信号、初始研究资金及费用下逐项新增，不穷举组合/不调均线参数。
+- 预算承接：旧事件2市场664.59秒、旧颜色账户2市场89.25秒封存复用，不重置不重跑。新问题默认1核心批+最多3有理由纠错/必要延伸批、0参数优化/0拟合；拟定固定A→仓位→账户风控每项登记前审成本。最多6外部资料请求（失败也计）、不付费不自动切模型/购买。storage本轮固定盘核可用，内盘21.95GB、外盘551.72GB；预估本机小记录64MiB、新大产物2GiB内，先plan后绑定，不回退内盘。
+- 验收：原文规则—代码—可得时点—输入资格逐项证据；同资产同资金的简单持有与最简政策对照；机会流失原因；按条件资金/风险/成本差而非因子数量；独立资金与未来边界核算；报告归档/Web实页读回。当前尚无新市场效果，真实可执行完整LEI与视觉均未验收。
+
+---
+
 # 个股纯颜色账户与完整策略计划：限定交付 2026-10-16T17:21:26.407112+08:00
 
 - task-id research-utility-review-20261012；owner root；status completed；scope_released true仅本题。checked_coordination_sha=287b55ecd5a73e0f256183ef24bc1520f84950f7；checked_at=2026-10-16T17:21:26.407112+08:00；已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012。对方仅两产品模型叙事实测，本轮研究/独立HTML/报告无重叠；未改生产Web/API。
