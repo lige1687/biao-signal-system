@@ -1,3 +1,16 @@
+# 接续：用户确认四项问题与低频研究路线探索 2026-10-18T15:39:01.592601+08:00
+
+- task-id: personal-lowfreq-system-audit-20261018；owner: 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status: active；scope_released: false。
+- checked_coordination_sha: cc8f61a6aee2a43db6166e6d1a3332c4eda8561a；checked_at: 2026-10-18T15:39:01.592601+08:00；已读COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller最新相关条目。
+- 用户原话：3467确实是问题，你可以先记一下；再探索个人低频量化如何发散找到有效因子与策略，感觉旧研究未找到合适路径。四项映射为完整规则/实现、增量价值、组合风险、个人维护负担；已按直接请求写一个用户记忆增量，不把其他三项当新增确认。
+- 本轮有界问题：在已有结果与原始文献下，哪些不同机制和决策用途适合进入个人宽基ETF低频候选，原路线为何未形成可采用证据，哪些已有准备可复用；交付优先路线、反证、最小可否定问题与数据/语义限制。
+- 模式：research-closure 定性资料研究/路线审查；0新市场拟合、回测、寻优、新行情、生产、交易；公开原始来源最多6请求（含两查询及至多4定向读取），不为列清单自动开实验。无新子代理，不占网页输入。实际token费用未知。
+- 基线：成果分支codex/personal-lowfreq-system-audit-20261018@844cc8ba3f46a60c1d7c4777e0faec670f5594ae；已有七项审查不改。新增docs/experiments/low-frequency-research-directions-2026-10-18.md及同名raw小证据/状态；独立成果树registry/INDEX仅本新键/行；原progress增量。root唯一写者。
+- 冲突决定：原因子负责人正在research-increment-cost-diagnostic核既有增量/成本合同；本轮直接复用，不重复核数/不改其研究协议；系统实现负责判断行动链及首页/Agent，本轮不写UI/API。扩展路线只提案，不修改策略源或把宏观消息变硬过滤。
+- 验收：复用现有计划和候选状态，不把算对当有效；原文机制/境外与本地差异/反证；每路线明确决策、简单对手、复用资产、缺口和停止依据；用少量证据填实最终方向表。新报告归档、唯一登记、来源核验及远端读回。近期模块A纠错已完成，报告应使用10/18新结果而不是旧3笔。
+
+---
+
 # 个人低频投资系统整体审查
 
 - task-id: personal-lowfreq-system-audit-20261018
