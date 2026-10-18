@@ -1,3 +1,13 @@
+# 接续：宏观、情绪与行业新闻进入摘要解释 2026-10-18T22:25:36.745680+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=d64efbe51da38c3e5d78c7b6530873b2902fbbbf；checked_at=2026-10-18T22:25:36.745680+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller、daily-trading-system-audit、investor-observation-map。相关owner已释放此前有界任务，本轮只原机会摘要链，无因子/策略/报告组件重叠。
+- 用户指出摘要宏观/情绪/新闻解释不足，要求参考优秀经验。采用research-closure有界方法对照：问题=已有材料为何没形成可读关联解释；用途=读近期重点时同时看背景与反对依据；基准=已验summary/1三技术卡；成功=分类资料、日期/来源、产品关联、影响与未知明确并真实页面验收；反例=单期数据外推方向、新闻线索当事实、旧政策当今日日报、跨市场串用。不评估收益、不改技术规则，服务策略3.7背景及4.1解释层；两权威SHA保持df92d85b…/85e0e327…。
+- 源码工作树沿codex/investor-workspace-simplification-20261012@e6c4c2e025252c565ba15f05611561ca1ecd5b48本机未提交增量。准确写范围src/lei_signal/api/opportunity_summary.py，可新增同目录opportunity_summary_context.py；tests/unit/test_opportunity_summary.py及专属context测试；web/src/api/opportunityReviews.ts、web/src/components/opportunities/OpportunityDailySummary.tsx/opportunityDailySummary.css、web/scripts/test_opportunity_summary_context.mjs。routes/opportunity_reviews.py仅必要接口接线；自有progress、既有today-agent-output-polish-2026-10-18.md追加及registry自身条目/原目标note、同任务归档opportunity-context-summary-20261018前缀。主运行树精确核基线镜像后端及公开文档，不覆盖他人。
+- 来源预算最多6请求（助手外部3、root必要原始证据3）；不重做封存调研。真实生成核心一次，只有具体失败/重要缺陷可各做一次修正验证，最多三次补充，累计留痕；不重跑整板68审核、不重试旧失败。首选已有本地宏观/情绪/已核行业原文；未核新闻保留线索和日期，不补造已证实利好/利空。私有持仓金额/身份/计划不发模型；原DS配置保持。
+- 分工：Sol context_input_audit只读本地接口和资料，Sol context_best_practices最多3外部请求只读原始实践；root实现和独立核对、浏览器验收、唯一共享登记。验收含缺失/跨产品/日期/单期宏观边界、重复读取无模型、真实生成与来源语义、桌面窄屏、相关检查与归置。成果完成后释放范围，原目标保持待用户验收。
+
+---
+
 # 观察重点与Agent摘要：本轮已交付 2026-10-18T18:37:04.438784+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮展示与按需摘要；scope_released true。checked_coordination_sha=357324eb2003d38c00351fc9d11ae4f8de7c60ad；checked_at=2026-10-18T18:37:04.438784+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller、daily-trading-system-audit、investor-observation-map。最新fetch无其他增量，未与因子或方法文档负责人范围冲突。
