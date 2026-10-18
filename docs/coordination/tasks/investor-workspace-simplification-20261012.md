@@ -1,3 +1,5 @@
+本轮开工补注 2026-10-18T22:26:37.897576+08:00：正常push因research-utility新接续发生并发被拒；已fetch并读b1613117e69a7a83595cc2eac288a3d6ee7bc86c原A连续小周期范围，和本轮无重叠，普通merge保留。checked_coordination_sha=b1613117e69a7a83595cc2eac288a3d6ee7bc86c；已读task-id沿下段并补research-utility新段。新增准确写范围configs/opportunity-summary-sources.v1.json仅给显式摘要的经核公开原件增量，不改整板机会源配置、原68审核快照或触发整批生成。它按准确symbol/发布日期/原文/关联与限制保存；缺失/过期不当新闻。沿既定模型及来源预算。
+
 # 接续：宏观、情绪与行业新闻进入摘要解释 2026-10-18T22:25:36.745680+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=d64efbe51da38c3e5d78c7b6530873b2902fbbbf；checked_at=2026-10-18T22:25:36.745680+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller、daily-trading-system-audit、investor-observation-map。相关owner已释放此前有界任务，本轮只原机会摘要链，无因子/策略/报告组件重叠。
