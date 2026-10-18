@@ -1,3 +1,14 @@
+# 审查失败、同日宽度与新闻更新闭环接续 2026-10-19T00:49:33.601490+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=2c5e9fa643ee7173b184024ee1b3202eb7e277ae；checked_at=2026-10-19T00:49:33.601490+08:00；已读COORDINATION、自身、research-utility-review-20261012最新00:45、personal-lowfreq-system-audit-20261018最新00:32、research-dispatch-controller及原日常/观察任务；小时研究和静态SVG仍原owner，与本次源码无交集。
+- 用户明确先查清修好9张审查失败、宽度资料待核，再接近5日宏观和行业新闻自动更新，随后从实际使用链分析最大痛点。终点为失败有根因与定向恢复、宽度有同日分母/资格、新闻随既有ensure更新/去重并可查原文、页面真实核回；不通过去掉警告或减弱校验凑成功。服务背景叙事与资料质量层，两权威原文SHA df92d85b…/85e0e327…现场一致；策略、阈值、因子范围保持。
+- 沿原codex工作树基线e6c4c2e025252c565ba15f05611561ca1ecd5b48和未提交增量。限定源码范围：src/lei_signal/copilot/opportunity_review.py与opportunity_transport.py仅具体失败修复；src/lei_signal/api/opportunity_context.py、opportunity_market_watch.py、opportunity_summary_context.py、opportunity_summary.py、routes/opportunity_reviews.py资料刷新/只读接线；可新增api/opportunity_news.py、market_context/breadth_qualification.py及专属tests/unit/test_opportunity_news.py/test_breadth_qualification.py；现有market_context/a_share_breadth.py及scripts/precompute_a_share_ma.py仅必要同日覆盖纠错。原newsfeed模块只读复用，不恢复pipeline通知/清理。新configs/opportunity-news-sources.v1.json及原summary-sources仅明确公开源登记。各对应test_opportunity*.py、test_market_breadth.py只增受影响回归。
+- 前端限web/src/api/opportunityReviews.ts、OpportunityMarketWatch.tsx、OpportunityDailySummary.tsx、opportunityDailySummary.css与专属web/scripts/test_opportunity_*，必要刷新/质量状态；原页面主线审计先只读，不扩产品或策略。自身progress、既有today-agent-output-polish报告追加、registry自身键、原目标note和同任务data-loop-20261019前缀产物；大数据遵存储入口，旧历史不覆盖/不删，运行树仅核基线精确镜像。
+- 三有界Sol先只读：agent_loop_diagnosis查9失败，context_input_audit查宽度，context_best_practices查新闻链。root唯一共享写者；各自实现明确单文件范围后再派。复用已存成功模型结果；新请求只对具体已修缺陷/新原文，失败保留、同输入不循环，不换当前DS模型/Key。普通跨日prepare可能发生现有调用，单独累计；新闻刷新有超时、限流与日缓存，GET不取网/模型。不新增定时器、不恢复通知、不交易或写个人判断。
+- 后续用户连接审查采用research-closure的report_only：问题=现有资料和规则如何变成用户看懂/核对/行动或等待/复盘，基准=当前实际页面及已验回执；复用旧整体审查，选1—2个影响最大缺口并说明证据/反例/未证明处，不展开新的因子实验或全系统平台建设。先完成前三项工程，必要验收不足不能标交付。
+
+---
+
 # 近五日全市场重点统一展示交付 2026-10-19T00:41:40.470970+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮市场背景与显示纠错；scope_released true。checked_coordination_sha=b4fe58972d119877bc73832ebcdbd66338d61270；checked_at=2026-10-19T00:41:40.470970+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018最新00:32、research-utility-review-20261012最新00:30、research-dispatch-controller、daily-trading-system-audit、investor-observation-map。候选待办已结案、小时研究继续原owner，本轮无源码/研究范围冲突。
