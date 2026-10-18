@@ -1,3 +1,13 @@
+# 接续：Gemini反驳与既有因子完整案例 2026-10-18T22:27:13.569935+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=b93b5f4cd248a7a8f3952afd26d9d70506168ede；checked_at=2026-10-18T22:27:13.569935+08:00；已读COORDINATION、自身、research-utility-review最新18:28、investor-workspace-simplification最新18:37、research-dispatch-controller。原A/系统实现仍归原owner，本次只复用旧结果，不重复其新证据检查。
+- 用户原话：重试Gemini4最高思考找流程缺口；拿一个已有因子复用现有结果完整走金融含义、重复信息、收益和风险价值，不只停文档。采用research-closure report_only，主案例research.stock.color_event20@1.0.0及依赖它的纯颜色账户；10/15dual_ma20_confirmation仅同家族旁证（EMA起算/边界不同），绝不合称逐行同一因子。
+- 准确范围：成果基线codex/personal-lowfreq-system-audit-20261018@d12deb2c08123a5e5e5a6ece994b88f17ff3eacb；root唯一写docs/experiments/dual-ma-factor-worked-case-2026-10-18.md及同名raw小来源/算术/Gemini/验收记录；隔离树registry/INDEX仅本条，自有progress；若发现流程实质遗漏，docs/research/factor-discovery-playbook.md只追加必要修正并在主树同位置核一致，不改AGENTS原块、不改他人规范/定义/旧报告/合同/代码。原目标okr-ff1e0a86fbac仅一次交付note，现场核版本及保护字段。
+- 两助手只读：Sol evidence核准确定义/保存摘要/可比结果；Astra method核金融解释与重复/风险推断。root核关键差额、网页与报告。0新市场实验/拟合/行情/安装；仅已有小汇总算术与证据核验。旧预算不重置。Gemini本轮一项新流程提问及必要一次针对性追问，未确认提交不重发；外部页面失败原因留证，累计旧尝试保留。必要文献核查沿技能6来源请求上限，非用满目标。
+- 验收：精确因子身份、金融机制假设/竞争解释、重复关系、性能表和相对简单对手增量表、财富/风险/投入/费用并列、样本/已见历史/未测用途；保存数值独核，不把同族研究差异直接作增量。Gemini实际型号/思考档/本轮提示提交和新回复读回，逐条采纳或反驳；受阻明确列出，不引用旧回复冒充新讨论。主仓归置与来源/登记/远端核验；无生产/交易/通知授权。
+
+---
+
 # AI因子发现流程交付 2026-10-18T18:20:47.823565+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮有界方法审查及文档接入；scope_released true。checked_coordination_sha=65458667f152ee7388c06da781b47534e696e1c9；checked_at=2026-10-18T18:20:47.823565+08:00；已读COORDINATION、自身、research-utility-review最新18:11、investor-workspace-simplification最新18:12及research-dispatch-controller。双方均已声明与本方法文档无重叠，原策略/产品继续原owner；长期有效因子目标未完成。
