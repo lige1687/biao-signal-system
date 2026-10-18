@@ -1,3 +1,16 @@
+# 模块A有界纠错与系统内研究组件交付 2026-10-18T14:43:40.862597+08:00
+
+- task-id: research-utility-review-20261012；owner root；status completed（本批有界问题）；scope_released true。checked_coordination_sha=c4a3743d2dd05c8ca5f29afcc27d76f6582dec66；checked_at=2026-10-18T14:43:40.862597+08:00；已读COORDINATION及research-utility-review-20261012, investor-workspace-simplification-20261012, personal-lowfreq-system-audit-20261018, research-dispatch-controller, technical-factor-sequence。最新远端仅其他owner阶段完成，无本范围冲突；原有个人整体审查复用844cc8ba，不重复、不覆盖；机会页另一owner范围保持。
+- 原文/完整目标与首次身份已分清：周线漏检潜在但本批361触碰均周线多头，结果不变；同日满足A3/A4恢复，旧249完整复现、新342，首次早期63→78、收盘通过3→7。开盘4拒绝、1已有持仓，实际2笔，不放宽3倍/目标/首次生命周期。10bpETF无成交0%，CN固定-0.2524%、控制投入-0.1892%，保护实际缩小买入0次；完整LEI未证。
+- 已执行两新阶段：1615.36秒信号、1.87秒账户，旧465.02秒复用，总2082.25/3600；0拟合/寻优/新行情/付费。两信号独核60066/60301、账户288873/288798，均0错；Sol窄复核7条去向与钱账；Astra语义审问题已在冻结runner落实。
+- 系统5188 ReportsLibraryPage单一嵌入及research-results三文件；72保存账户/13机会案例小快照，收益/风险/投入/筛选/逐笔/范围视图均实际验收；选择器数值8组、旧新默认、空资料、拒单和已有持仓、未触发保护、图例及精度、截图和console已读。tsc/Vite通过，原包体与Router提示留存；主仓现行归置绿。用户视觉满意仍待验。
+- 成果docs/experiments/module-a-rule-audit-2026-10-18.md（SHA203073ab0a02ebab715f56e4eb1d3adbb51d6a88bcecac2b193f70b957f90eb3）、同名raw/closure.json、外盘两stage索引、精确新registry键/INDEX行，主树报告/小证据及主/liveweb镜像核同。原报告/原账户/生产规则不动。源码与报告仍本地未提交未推，远端只本协调元数据，不宣称远端可复现。
+- Gemini会话f84761101804a415网页4 Argon最高高点完整读回，合理原则与无依据门槛/错误闲置归因分开保存；未发持仓金额。整体个人审查由另一owner已完成并释放，本root复用。
+- 系统目标okr-ff1e0a86fbac仅追加note149→150并GET读回，状态仍in_progress；无真实交易/账户记录/模型设置/通知改动。
+- 已回答本轮有界问题，停止继续扫描；完整首选目标的区间语义、同日首次先后、小时资料及完整N/加仓/其他模块仍是未完成边界。后续先准备遮住未来价格的目标解释案例，经明确原文或用户确认再新增算法，不以更多交易为目标放宽。
+
+---
+
 # 并发范围核对 2026-10-18T14:02:30.138694+08:00
 
 checked_coordination_sha=1246841789b72a06b7f1fa65b31793976df03cf9；checked_at=2026-10-18T14:02:30.138694+08:00；已读COORDINATION及本任务、research-dispatch-controller、technical-factor-sequence、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018。普通push因并发被拒后已普通merge保留他人记录。机会owner明确避开ReportsLibraryPage/research-results。本root只继续两项Module A纠错、既有账户对比与系统内组件；个人整体审查由新personal-lowfreq-system-audit owner负责，本root已有只读材料仅作本报告相关解释、不新建同题整体报告、不改其文件。已提交的Gemini会话f84761101804a415只读取答复，不追加重复请求、不占用他人网页输入。旧封存、生产判定和账户资料不动。
