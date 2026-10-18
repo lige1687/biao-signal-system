@@ -1,0 +1,56 @@
+{
+  "checked_at": "2026-10-18T23:59:20.349869+08:00",
+  "purpose": "Clarify omitted universe and aggregation; user requested no duplicated research.",
+  "mode": "existing_evidence_clarification",
+  "market_runs": 0,
+  "downloads": 0,
+  "model_requests": 0,
+  "old_report_sha256": "142879a1d7ea5dabeab237545c4dfdfbe47f07db4567487c60ff858f943d9f51",
+  "new_report_sha256": "d9566dcc9bcae847ee7addb8a92ece81cdb298c8b42e071aae5898ae99df3a5c",
+  "playbook_sha256": "e777a8ec12a6b377c808105d191cd7f53142da86bea1da56968d4eb69b398dc2",
+  "sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/stock-universe-expansion-2026-10-15.md",
+      "sha256": "c8a4ade5e74eccaafc2df844aeb6d106a391f8199f6cb4d7eeacf25f5d92cbfb"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/stock-color-account-2026-10-16.md",
+      "sha256": "9ecb1974b02a499a70110e3eff42189b318df5ee9745c68fa24466951763c7b4"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-color-account-2026-10-16/contract.json",
+      "sha256": "1830c9eb4768fc5535294204eaed532f1c4b84995bea0909ae3b9d27132e6cba"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-color-account-2026-10-16/protocol.json",
+      "sha256": "c39373ce5095f9944096d6dc7df0f36126db0dd93a90082a1570c6e7970dbbf1"
+    }
+  ],
+  "universe": {
+    "cn": {
+      "list_date": "2026-10-15",
+      "source": "CSI official current CSI300 constituents",
+      "planned": 300,
+      "with_quotes": 300
+    },
+    "us": {
+      "list_date": "2026-10-13",
+      "source": "IVV equity holdings proxy",
+      "planned": 504,
+      "with_quotes": 502,
+      "missing_quotes": [
+        "HOLX",
+        "VYLR"
+      ]
+    }
+  },
+  "aggregation": "fixed initial 1/N per planned security, independent cash and virtual holdings, no transfers or rebalancing; summed within each market",
+  "historical_membership_rebuilt": false,
+  "numeric_sections_3_and_4_unchanged": true,
+  "registry_other_entries_unchanged": true,
+  "playbook_main_equals_result": true,
+  "prior_checks_retained": "checks.json and closure.json describe previous report version; this receipt binds the clarification",
+  "read_failure": "First lookup guessed two old raw filenames that did not exist; resolved via existing report and rg --files. No experiment or failed mutation.",
+  "repo_hygiene_main": "passed",
+  "scope": "Only own clarification and playbook; other research owners unchanged."
+}
