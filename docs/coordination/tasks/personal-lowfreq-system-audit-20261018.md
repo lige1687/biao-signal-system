@@ -1,3 +1,17 @@
+# 十年600股票实际检验与两项跟进已交付 2026-10-19T02:45:35.034018+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮固定历史问题；scope_released true。checked_coordination_sha=65d396a5921441acd1aaba18e242e6744b9eeee9；checked_at=2026-10-19T02:45:35.034018+08:00；已读COORDINATION、自身、research-utility-review-20261012最新01:41、investor-workspace-simplification-20261012最新01:37、research-dispatch-controller；冲突决定：独立月度选择研究，未接原LEI/日小时/底部退出/账户或系统UI。
+- 成果codex/personal-lowfreq-system-audit-20261018@4712eecc87f1a4882a281521816ed39f58cfcc5c已push/fetch核同；主报告commit392f4f185777611d6b955dedc1d8b31cdc647302，docs/experiments/lowfreq-expanded-discovery-2026-10-19.md SHA0d3684eb9c4fea6fd958057914592da4aeef054fb8e9fb6ebcdc7b84774260d0。正式研究模块/13合成测试已在d97e9c7，真实结果小证据、报告、registry本键/INDEX本行/progress在最终分支；主共享树源码与他人研究未改。
+- 实际范围：2014末来源2595中按预定hash选600A股，含51后来退出（48在2025年底前），2015—2025共132月，2015-01-05到2026-01-05价格端点；每月468—580合格，逐股月79200行/合格71369。不是600ETF、动态全A或79200独立观察。大数据资格与精确名单见input-v2、cohort及definition-binding。
+- 实际结果：直接中期最强20%相对同池全体月均−0.0922至−0.1215个百分点，主样本风险/目标更换无优势。预定波动/成交额9组内选择+0.3839至+0.4001，进一步短期27组+0.2779至+0.3083但不确定范围跨零；是不同选择方法，不能替主负结果。2015—2019主正、2020—2025主负；来源修正受影响2023-07整月剔除后131月仍主负/条件正。
+- 来源与跟进：605来源成功/610批量SDK操作，5匿名会话冲突保留，39成功旧请求未重做；6初始资格另计。实际日线1852185行。盘中临停复牌官方索引支持sz3003562023-06-20派生交易状态规范，原件/网页直开超时保留，仅2023-07特征变化。事前登记过去连续交易子群每月109—525、53869合格股月；主−0.2150，9/27点值仍正但6月抽取范围跨0、12月略高0，两种并列。子群改变构成，不能因果归因窗口。
+- 分工确实执行：Luna low采集、核心51.475秒、子群3.729秒，均exit0和7输出hash核回；Sol medium研究模块和子群脚本；Astra high设计/代码/效果裁决。root独立从逐股结果重建各2324项，Astra抽核3月与全部132组内加权均值。核心1、必要跟进2/最多3，公开文献6、来源冲突3；0旧六ETF重跑/拟合/参数网格/生产交易。两次联网前守卫、并发5失败、报告辅助脚本语法错误及旧工作树路径读取失败保留。实际模型费用未知。
+- 大来源与结果仅本机登记外盘：/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result。core-v1 manifest SHA7a3a7f0d67bc82f44d2352bb8b65b9f0ed0dde6d11bded975259cdc0b713c5a8；calendar-support-v1 manifest SHAcc532f8035832f3156d05749deff0bee239dc2e104ec4e30f5f300a809f44486。Git仅小合同/位置/指纹，不宣称异机已有大材料或独立恢复。当前来源是供应商内部交叉核验，复权代理/历史到达/行业/交易所完整性限制保留。
+- 归档验收：12本地链接、表值/分母/输入输出hash、原registry保持、固定模块未改、diff通过；主仓现行归置通过；成果树旧检查器3项继承告警(.git、COORDINATION.md、docs/coordination)保留，不删资料或改白名单凑绿。系统目标okr-8830a1f1ec4f v9→10准确读回，只新增decade-large-sample-cycle完成，总3/6、in_progress；授权/负责人/旧历史及其他标准不变，质量/价值/防御未勾，待用户验收。
+- 收尾：Astra判本固定历史问题无必需剩余实验；直接选择暂不升级、条件方法保留研究线索。下一题按原顺序补当时公开财报/行业/成员与修订，检验不同信息；ETF及资金执行另有明确范围后推进，不重启本题追正、不接原owner工作。尚未建成通用自动发现/真实可用因子系统；未使用新Gemini/RD-Agent框架运行，不恢复通知。本题无在跑市场或模型任务。
+
+---
+
 # 十年大样本工具已固化，真实采集继续 2026-10-19T02:12:03.454045+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=a80e83b8e304e9ad60ea6e1f93c71432b2a0524b；checked_at=2026-10-19T02:12:03.454045+08:00；已读COORDINATION、自身、research-utility-review-20261012最新01:41交付、investor-workspace-simplification-20261012最新01:37交付、research-dispatch-controller。冲突决定：继续独立600股票/132月选股检验，不接原策略退出、小时、账户或系统UI。
