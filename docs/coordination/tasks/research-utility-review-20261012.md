@@ -1,3 +1,13 @@
+# 确切纠错与展示范围冻结 2026-10-18T13:57:54.822776+08:00
+
+checked_coordination_sha=43c45f802af866a73740c361aeae80212b9239f5，checked_at=2026-10-18T13:57:54.822776+08:00；已读前述五任务，无新增交叉。研究新增raw/module-a-rule-audit-2026-10-18/detector_corrected.py与test由Sol唯一实施已交回；root的audit_adapter.py/runner脚本scripts/archive/run_module_a_audit_20261018.py、protocol/定义card/账户只读复用、研究树storage policy仅新增本入口、definitions只新增本id。只有周线触碰漏检、同日满足却推迟两修复，Astra审通过并指出必须finalize后比较旧249逐字段，本runner已绑定finalizer。两合成语义、失败不返还first和前向检查4passed，root初次PYTHONPATH失败已留记录。未运行市场。
+
+UI三新文件web/src/components/research-results/ResearchResultsPanel.tsx,researchResultsTypes.ts,research-results.css，由Sol完成在研究树、root独审集成至main及5188树；共享ReportsLibraryPage只新增import和一句组件，无其他重写。web/public/research-results/module-a-rule-audit-2026-10-18.json为small公开研究快照，正式原结果外盘保留。
+
+用户追加个人低频系统审查及网页Gemini4Argon最高思考，允许发送脱敏规则/公开研究数字；不送持仓/金额/密钥/文件路径。独立Sol最多4webcall查原始来源，root实际网页已选Argon高点（最高可选）并提交背景，答复待核。来源/意见不赋执行权限；原核查/组件继续。
+
+---
+
 # 目标与首次回撤核查、系统内研究组件：开工 2026-10-18T13:46:33.745391+08:00
 
 - task-id research-utility-review-20261012；owner root；status active；scope_released false。checked_coordination_sha=ab92c7ec539805f9cd53196f8cf884b5a8549e5a；checked_at=2026-10-18T13:46:33.745391+08:00。已读COORDINATION及自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012。后者最新范围只API模型验证且已释放前端范围；本题新研究组件不碰Agent/模型。
