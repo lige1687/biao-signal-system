@@ -1,3 +1,16 @@
+# 低频研究方向探索结案 2026-10-18T15:49:22.667916+08:00
+
+- task-id: personal-lowfreq-system-audit-20261018；owner: 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status: completed；scope_released: true。关闭本轮方向问题，不关闭有效因子/完整策略总目标。
+- checked_coordination_sha: 09daa44cb4c83cb029ec3049c616153e94971471；checked_at: 2026-10-18T15:49:22.667916+08:00；已读COORDINATION、自身、research-utility-review-20261012最新15:42结案、investor-workspace-simplification-20261012、research-dispatch-controller、classic-factor-research、technical-factor-sequence。冲突决定：原owner保持，本轮只自有新报告/raw与独立树registry/INDEX新条，不接管协议、UI/API或账本。
+- 用户确认3/4/6/7已按直接记忆请求落一个用户目录增量并读回，不扩大为其他项确认。新报告docs/experiments/low-frequency-research-directions-2026-10-18.md及同名raw3文件、registry/INDEX与原progress共7文件已发布成果分支codex/personal-lowfreq-system-audit-20261018@b4b03c2a74fddc19b35674c65a482d6890b16fb1；fetch完整SHA一致、精确文件diff为空。
+- 新发现影响优先级：原六ETF普通动量effect-b1待审草稿已为不稳定/未过旧正向筛选。正式/独立overall、分年与固定间隔摘要一致，组差恒等核对通过；最强两只相对六只均值−0.1062479个百分点，固定21日间隔强弱差−0.1973534点。本轮没有重跑统计/原始价格，没有代替原主控正式验收。纠正初稿“计算已备所以优先动量”的排序，不把旧弱结果包装成新希望。
+- 方向结论：原策略忠实还原与独立低频用途分线；重点转向完整持有—退出—再参与，以及不同风险来源组合；普通动量/简单趋势作对照；量价现有草案和慢信息扩展分别保留边界。不是已有效结论，不创建新策略/因子ID或收益执行合同。
+- 验收：21来源文件指纹、两权威策略SHA、6本地证据链接、实际报告SHA登记、旧registry条目/元数据不变、准确diff通过。主仓现行归置绿；隔离树继承旧检查器的3项白名单告警保留，不删改凑绿。旧审查844cc8ba内容不变。
+- 实际预算：2公开查询+4定向页面/论文读取=6；两AQR页面未取得足够正文不作为证据。1次保存摘要核数；0市场拟合/回测/新行情/子代理/网页模型/生产/交易/通知。实际token与费用未知。没有后台研究在运行。
+- 本轮完成条件：已交候选机制、当前反证、简单对手、可复用产物、缺口和优先级；具体策略效果仍未评价。下次如进入运行须沿原负责人和精确定义/资料/预算，不能借发散重开旧动量/宽度/颜色/波动或扩大基本面权限。系统待升级记录沿既有原owner，本轮未新建重复目标或改变完成状态。
+
+---
+
 # 接续：用户确认四项问题与低频研究路线探索 2026-10-18T15:39:01.592601+08:00
 
 - task-id: personal-lowfreq-system-audit-20261018；owner: 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status: active；scope_released: false。
