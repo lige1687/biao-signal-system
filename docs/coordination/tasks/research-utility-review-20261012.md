@@ -1,3 +1,9 @@
+# 单个静态SVG精确采用接手 2026-10-19T00:15:47.571119+08:00
+
+checked_coordination_sha=ce169faefda3669666c2fd38e890cfb9927eba43；已读最新系统五日摘要与方法选股资料收尾，无源码重叠。本研究图仍未在5188载入（HTTP200却为HTML，图naturalWidth=0，未算通过）。已明确通知系统owner root接手此一个静态文件，避免其当前主任务阻塞：/Users/yongbiaoli/.codex/worktrees/investor-workspace-20261012/lei-signal-lab/web/public/research-results/original-a-rule-case-2026-10-19.svg；先核同一git-common-dir，仅不存在时创建，存在只读验SHA4fb8e18c5d496a50d963e624ccc54713c2bad3bab55f211aa9a4ffa2fb0c7982，不覆盖不同内容。root唯一准确采用写者，不改任何UI源码/API/服务/构建或接管系统任务。源主/研究树SVG保持，HTTP及浏览器实际读回后才交付。
+
+---
+
 # 原规则具体复核图范围补注 2026-10-19T00:09:29.050562+08:00
 
 checked_coordination_sha=0a7c9fa2b2348d352d53cbc0da0b8d3b5f7d51fe；已读前述自身/系统/方法owner/中控，最新无写重叠。新Sina探针中证500ETF实际得到303天1212根截止2026H1小时，价格口径核查中；原Patreon交易流程表已读。原目标区域取价仍缺，不能跑完整A资金。仅补既有比亚迪2022-07-15案例的截至当日日/小时图（不重新筛事件/不含未来/不画AI猜定目标），新准确静态产物web/public/research-results/original-a-rule-case-2026-10-19.svg，raw内新render_rule_case.cjs/案例绑定。root写主/研究树，5188采用仍交系统owner；无共享前端/API源码改动。不重复旧绩效或已有等待描述。
