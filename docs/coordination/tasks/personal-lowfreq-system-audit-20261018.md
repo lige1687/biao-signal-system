@@ -1,3 +1,16 @@
+# 低频选标的与时机资料审查交付 2026-10-19T00:14:48.323174+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次有界资料审查和建议；scope_released true。checked_coordination_sha=f1e829054afc53723af4133ce8dda3b95c060a77；checked_at=2026-10-19T00:14:48.323174+08:00；已读COORDINATION、自身、research-utility-review最新00:09、investor-workspace-simplification最新00:12、research-dispatch-controller，最近fetch除本任务无其他增量。原A/小时/共同资金与系统UI仍归原owner。
+- 成果codex/personal-lowfreq-system-audit-20261018@196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a已push/fetch完整SHA一致，准确diff为空；主体e7bb2fdc20bf87a41cc62e75fe26d8cd7395dff4。报告docs/experiments/lowfreq-selection-and-timing-2026-10-19.md SHA05ced90c46e18b5bfcc49badf88dead79a5b5436af8ea6cb88263eb39062edda；同名raw有10源指纹、公开资料真实读取范围、检查及目标回执。报告/registry/INDEX在独立成果树，主树只精确采用playbook，未冒称已接主报告UI。
+- 结论：月度选标的是合理研究起点；区分同日选谁、单标的时机、何时切换因子。旧动量作参照，盈利能力/质量独立信息先核资料资格，价值与防御按用途后续；不预设动态切换优于固定组合。原策略思想有选股，技术实现明确不含基本面选股/组合，本轮未改变原边界或原文。
+- 实际复用：六ETF动量草稿正向筛选未过；84股票条件化事件池内2.88%对池外1.66%但分年反向；14混合ETF选强加退出17.31%年化/21.60%最大跌幅优于平均12.29%/24.62%，7行业ETF未胜平均且只5行业。14候选91.41%净利润集中2025—2026H1；选强含波动过滤，不能全归选股。数据和统计旧结果不重跑，不把旧报告方法过度表述或事后年份分类提升为已验证因子切换。
+- RD-Agent实际采用其假设→定义/实现→评价→反馈的记录组织，不安装/调用框架；本轮问题/来源/旧证据/取舍和下一题提案已落同一报告/raw。前两层通过后再比较选择与时机的四种情况，先查既有四组，避免重复。playbook主/成果SHA7a089c48881a15039ea586221b71a5d26f5672becd6914d1bcc9dfcb7eae7e5c一致；文字并非自动金融语义检查器。
+- 原目标okr-ff1e0a86fbac仅note158→159读回，除version/updated_at/history新增外全部字段一致，旧历史完整，status仍in_progress。不建重复目标，不覆盖另一研究owner下一步或授权。用户尚未验收任何新因子投资效果。
+- 验收：原文两SHA与确认值同、10来源未变、旧表16数值及91.41%与原报告同、当前registry旧条目保持/新条唯一、绝对本地链接、主树指引字节和归置通过；旧结果未独立重建日账，本轮方法结论不声称新统计检验。隔离树继承旧归置白名单限制仍如前，不删改凑绿。
+- 本轮3定向查询+3原件读取=6来源请求；AQR限原作者简介、French两方法页、RD-Agent当日main金融场景，无全文/固定源码版本或运行证明。Sol只读定位旧证据，root核原表与方法。0新市场计算/拟合/行情/RD-Agent运行/Gemini/生产/交易/通知；实际token费用未知。原工作指引误查主树路径后已转本成果树，无失败实验。停止依据为本轮学习建议问题已回答；新候选效果与资料资格未评价，不能冒称独立选股研究完成。
+
+---
+
 # 选标的资料审查已归档，原目标仅补说明 2026-10-19T00:13:12.124948+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active仅收尾；scope_released false。checked_coordination_sha=e9297af46844402f630f349c344c735c38cfe016；checked_at=2026-10-19T00:13:12.124948+08:00；已读COORDINATION、自身、research-utility-review最新00:09原规则图、investor-workspace-simplification最新00:12五日重点、research-dispatch-controller。无重叠，两个原owner继续其任务。
