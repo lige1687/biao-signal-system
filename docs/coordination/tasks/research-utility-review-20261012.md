@@ -1,3 +1,14 @@
+# 目标与首次回撤核查、系统内研究组件：开工 2026-10-18T13:46:33.745391+08:00
+
+- task-id research-utility-review-20261012；owner root；status active；scope_released false。checked_coordination_sha=ab92c7ec539805f9cd53196f8cf884b5a8549e5a；checked_at=2026-10-18T13:46:33.745391+08:00。已读COORDINATION及自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012。后者最新范围只API模型验证且已释放前端范围；本题新研究组件不碰Agent/模型。
+- 用户明确授权核清原始目标与首次回撤、查只剩3笔原因、核清后继续测试，不为增加交易放宽条件；Web须接系统组件。保留原文/旧冻结实验；新研究区docs/experiments/raw/module-a-rule-audit-2026-10-18/及同名报告，复用旧输入/账户结果，不重跑原颜色/预测。研究树codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be，成果仍本地未提交。
+- root独写协调/报告/自己的registry键/INDEX行/原进度；研究新适配和独立检查只在新raw及必要scripts/archive专用入口，确切文件冻结后补登记；规则桌面原文、生产信号代码只读。研究定义发生语义歧义则保留未知、仅完成可核分支，不静默变策略。
+- 系统组件拟写web/src/components/research-results/新目录、web/public/research-results/小展示包，以及ReportsLibraryPage.tsx唯一嵌入块；如需因子页导航再精确登记。现5188工作树/Users/yongbiaoli/.codex/worktrees/investor-workspace-20261012/lei-signal-lab，只由root进行准确新增文件和小块接入，保存原字节，不复制覆盖其他改动。无需新HTML服务。先只读核其接口与源码。
+- 本轮沿累计465.02秒5阶段历史保留；新问题一次规则审查与旧结果逐事件审计，最多一次纠正后信号+账户核心批和必要独立验证；0寻优/新行情/付费/原文修改，不将未知口径变收益。总计算沿原3600秒剩余；真实用量留账。外盘身份现有效，内盘16.87GB外盘551.64GB，本地小文件预计32MiB，外盘新增不超2GiB；正式运行先计划和指纹冻结。
+- 验收：原文—实现逐条、候选逐级数量与原因、明确实现问题或定义缺口、合格更正效果同基准比较、资金独核、系统报告页面组件可视可切换与来源可追。三个独立只读助手各只审语义、实现漏筛、UI接口；不得互写。
+
+---
+
 # 日周A、仓位与降投入：首批有界验收完成 2026-10-17T08:37:11.977011+08:00
 
 - task-id research-utility-review-20261012，owner root，status completed仅本批，scope_released true；完整LEI/有效因子总目标仍in_progress。checked_coordination_sha=b0e5691f75dc38d7d7a0d2a8306ef9c94b0c0ad9；checked_at=2026-10-17T08:37:11.977011+08:00；已读COORDINATION、自身、technical-factor-sequence、research-dispatch-controller、investor-workspace-simplification-20261012，同远端无增量，生产/Agent owner无范围冲突。
