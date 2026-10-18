@@ -9,7 +9,7 @@
   "prompt_summary_is_not_verbatim": true,
   "user_confirmed_sent": true,
   "submission_observed": true,
-  "reply_status": "generating",
+  "reply_status": "first_substantive_reply_complete_read_and_adjudicated",
   "failures_retained": [
     "setValue did not visibly replace placeholder initially",
     "native click and Return returned delayed unchanged UI",
@@ -18,5 +18,16 @@
     "DOM getTab nodeRepl.fetch request failed"
   ],
   "recovery": "User reported visible submission; later AX shows this user question, cleared input, Stop answer and unique new URL. No repeat prompt sent after user confirmation.",
-  "not_used": "Any prior Gemini conversation replies"
+  "not_used": "Any prior Gemini conversation replies",
+  "last_checked_at": "2026-10-18T22:55:23.270930+08:00",
+  "prompt_file": "gemini-prompt.txt",
+  "prompt_sha256_without_final_newline": "7d8d395bb0c4f0ff7df79ab681b947c49c8f3f1964c631fd2f2df11e9c5a0dbf",
+  "confirmed_identical_user_turns_in_current_conversation": 2,
+  "exact_total_model_requests": "unknown due delayed UI actions and transient sidebar identity",
+  "selected_reply": "first complete reply only; all four requested sections read",
+  "duplicate_generation_stop_attempted": true,
+  "duplicate_stop_confirmed": false,
+  "additional_ui_failure": "Browser direct channel nameSession/openTabs timed out and reset kernel. Native sidebar/return navigation eventually exposed first complete answer.",
+  "followup_questions_submitted": 0,
+  "review_file": "gemini-review.md"
 }

@@ -1,0 +1,32 @@
+{
+  "finding": "Main registry changed during this run; current main registry does not contain the three case objects. They exist in the original owner local registry and match frozen snapshots exactly. No claim that main integration is complete.",
+  "failed_checks_retained": [
+    "all-source SHA assertion detected main registry drift",
+    "attempt to locate exact case objects in main registry raised StopIteration; located correct owner registry, not silently ignored"
+  ],
+  "main_old_sha256": "b6a0b500b7c2ccbfb2418ba9a39105595485b03ff7fb85a65aa7c507497fcc12",
+  "main_current_sha256": "0e82f28b90c8c1811db2f9295c1cee37fb74fb5ea56e8d5caca8216b26cd5589",
+  "owner_registry_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/factor-evidence-integration-20261012/docs/research/definitions.v1.json",
+  "owner_registry_sha256": "abd923bc4b2ae57a1a5f84b21d2957d45674b11dc50c94f9fc71f45a7f9dd634",
+  "object_checks": [
+    {
+      "id": "research.stock.color_event20",
+      "version": "1.0.0",
+      "owner_registry_equals_frozen_object": true,
+      "changed_fields": []
+    },
+    {
+      "id": "research.stock.color_account20",
+      "version": "1.0.0",
+      "owner_registry_equals_frozen_object": true,
+      "changed_fields": []
+    },
+    {
+      "id": "research.stock.dual_ma20_confirmation",
+      "version": "1.0.0",
+      "owner_registry_equals_frozen_object": true,
+      "changed_fields": []
+    }
+  ],
+  "effect": "Frozen snapshots remain unchanged and authoritative for this reused experiment. No source edit or new experiment; main definition integration not evaluated as complete."
+}

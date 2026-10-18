@@ -65,3 +65,9 @@ checked_coordination_sha=d13868e788534ea78f220350513de971c098a2bd；checked_at=2
 - 20份来源指纹与旧registry条目/本地链接核对通过；主树归置通过；成果树继承.git、COORDINATION.md、docs/coordination三项旧检查失败，保留未修。源码恢复跨度字段匹配冻结绑定，但本轮未从逐日序列独立重建。
 - checked_coordination_sha=fc461f8542b715469b810f542594b15d0b330736；已读自身、research-utility-review最新22:25、investor-workspace-simplification最新接续、research-dispatch-controller，root唯一写者，无重叠接管。
 - Gemini本轮Argon高点、2543字完整提示及新用户消息已实读；用户亦确认已发送，新URL https://gemini.google.com/app/a661a2b9ca3d1ce6。仍等待最终回复；先前AX/截图迟延、点击无效、noWindowsAvailable与DOM失败保留，未重复提交；刷新仅读取原会话。外部答复尚未验收，不冒称共同讨论完成。
+
+
+2026-10-18T22:55:23.270930+08:00 Gemini新答复已取得并核查：a661a2b9ca3d1ce6首个四题完整回答实读。采纳灰色不动作/等待与新增信息分开评价的竞争解释；拒绝平均仓位线性缩放回撤、15%/5%硬阈值及任何缓冲少约30%的断言，Astra独核1→2→1半资金反例成立。实际出现两个同题用户回合，原生输入迟延导致重复的具体触发未知；不再声称仅一次请求。第二回合已点停止但回读仍生成中，状态保留，不算独立证据、不重发。局部文档补充及来源检查完成，最终提交/目标note与协调读回随后执行。
+
+
+2026-10-18T22:58:18.263113+08:00 最终验收：19/20初始来源未变；主树定义总表并发变化且当前无三对象，原owner树三项与各自冻结快照逐项完全一致，失败的全表断言与定位过程保存definition-drift-check.json，不冒称主树集成。新报告/指引/逐条裁决本地链接、原registry保持和主树同文已核。原目标仅note156→157/in_progress，保护字段及旧历史不变，精确读回。checked_coordination_sha=6d8d0d3f027e056793ce73b9bac8e4807c06430e，已读自身、research-utility最新22:56图产物范围、系统最新摘要范围及中控；无重叠。已完成本轮案例与新Gemini实质复核；重复网页回合停止尚未核实，不用作研究证据。0新市场运行，1次保存小表核数、1个无行情代数反例；实际模型费未知。最终成果与远端指针见协调任务。
