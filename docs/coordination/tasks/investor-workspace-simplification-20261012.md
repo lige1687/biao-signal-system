@@ -766,9 +766,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "active",
-  "checked_coordination_sha": "7b7d4b6d4981347a18afe45ddd45174fcdcfaadc",
-  "checked_at": "2026-10-18T15:54:33.673567+08:00",
+  "status": "completed",
+  "checked_coordination_sha": "3afef789ae72179e02bc38b3c7819f64af4bb0f6",
+  "checked_at": "2026-10-18T15:58:58.552977+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -814,22 +814,31 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "web/src/api/opportunityReviews.ts (recent list types/client only)",
     "web/src/pages/OpportunitiesPage.tsx (exact subject/side deeplink and existing plain-language formatter for first-screen counterevidence only)"
   ],
-  "scope_released": false,
+  "scope_released": true,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-18T15:54:33.673567+08:00",
-  "conflict_decision": "已读最新六任务，其他新增仅研究报告/路线结案，UI/API仍root唯一写者。实际页面发现反方首屏漏用已有中文格式化器，只补该调用；不改原始模型文字、技术判定或研究结果。",
+  "updated_at": "2026-10-18T15:58:58.552977+08:00",
+  "conflict_decision": "已读最新六任务和两研究owner新结案，源/页面由root独写，策略因子交原因子实现并核research_report指纹；只追加自有报告/登记键/目标note。所有源和私有验收本机未提交未推，协调元数据单独上传。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-chain-20261018-contract.json",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-chain-20261018-acceptance.json and decision-chain-20261018-delivery.md",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
     "schedule": "每天北京时间14:30",
     "first_scheduled_run_verified": true
   },
-  "registry_scope": "original goal okr-4c2ea452d3cc note37->38 read back; status/owner/authorization/milestones/history preserved; own report key only",
-  "remaining": "接未来判断→计划→已确认成交或明确未行动→复盘，人工确认关联和不变快照；复用估值。研究正文Agent消费缺report_sha256，等待原owner准确交付，不静默绕过核验。",
-  "runtime": "受管8000 PID65425 health200；5188使用原隔离web；最后源修复已准确镜像并必要重载，无主动ensure/失败重试。"
+  "registry_scope": "original goal okr-4c2ea452d3cc note38->39 read back; protected fields/history preserved; own report visual addendum and its own registry SHA only",
+  "remaining": "本轮首页/Agent输出/判断后续链必要开发与验收完成，用户效果待验收。旧生产审查仍partial 1完成55失败12无需；最新基金持仓及同基金技术缺口保留，后续按具体问题接续，不自动循环重试。策略/因子由原owner负责。",
+  "runtime": "受管8000 PID90910 health200；5188使用原隔离web；最新9后台/测试源准确镜像，最后仅AST相同格式更正；无活动模型worker，生产Agent调用226未新增。自身8019/5199演练已停止。"
 }
 ```
 <!-- lei-coordination-json:end -->
+
+
+## 近期清单与判断后续有界交付 2026-10-18T15:58:58.552977+08:00
+
+- 首页三产品四条风险已真实读回，事件10/15—16、行情10/16；已解除/过旧/研究近似排除。来源字段错用system造成全漏，已用真实通信样本纠正；缺缓存明确未知。
+- 首页→同产品卖出侧→10/15 K线定位实测，买入侧保留；黑绿灰、1280/375无横向溢出、无页面error。原计划/成交关联的四种隔离演练保存读回，生产判断/确认/后续/计划/成交仍0。
+- Agent3次公开固定资料验证输入41090输出1689，6初次格式通过中日期语义失败保留并一次纠正；没有写生产新审查或自动重试。旧partial1/55/12保持。
+- 后台106、首页25、修正21、最后来源18项通过（有重叠不相加）；前端4项/链接/构建、Ruff、主仓归置通过，旧构建块大小提醒保留。最终技术冷读11.83秒，不能宣称零等待。
+- 本轮工程完成/用户效果待验收；源码本机未提交，base e6c4c2e025252c565ba15f05611561ca1ecd5b48不冒称最新成果。准确24源指纹见acceptance；无新科研、主分支合入或真实交易。当前范围释放，无后台子任务待跑。
