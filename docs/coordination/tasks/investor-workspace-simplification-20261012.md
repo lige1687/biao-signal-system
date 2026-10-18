@@ -1,3 +1,13 @@
+# 观察重点与Agent摘要：本轮已交付 2026-10-18T18:37:04.438784+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮展示与按需摘要；scope_released true。checked_coordination_sha=357324eb2003d38c00351fc9d11ae4f8de7c60ad；checked_at=2026-10-18T18:37:04.438784+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller、daily-trading-system-audit、investor-observation-map。最新fetch无其他增量，未与因子或方法文档负责人范围冲突。
+- 已交付近期信号优先列表、红绿琥珀文字标注、基金行业观察、首屏三类计数与显式一键Agent摘要。摘要可跳转同产品双向条件和K线，黑绿灰保留；1280/375实测无横向溢出。真实摘要ops_fe50407e50814470bca20ae05b95ae8e来自1次DeepSeek Flash调用，输入4456/输出373，费用未知；二次实际点击复用，原机会审查模型321次保持、个人判断/计划/成交0新增，无后台重试。
+- 后端26项、前端4组与构建、Ruff、主运行树归置通过；报告API全文和系统research_report核SHA 852f3bdb031ef1891aec559dcefc4b5bbe4dd2fbb19379ae5af73d5b0e9d3442一致。原目标okr-4c2ea452d3cc仅note40→41，status/owner/授权/验收及历史保持。实际行情10月16日；摘要3个风险观察产品，1自选缓存及29基金同产品技术资料仍有边界，不把缺口或生成日期当新信号；冷启动等待及既有bundle/Starlette提醒保留。
+- 成果仍codex/investor-workspace-simplification-20261012@e6c4c2e025252c565ba15f05611561ca1ecd5b48本机未提交增量，准确11源路径/hash、patch及验收在docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-focus-summary-20261018-*。主运行树仅精确镜像3后端文件及对应公开报告/回执。截图在成果树.codex/opportunity-focus-20261018/summary-desktop-final.png和summary-mobile.png。远端仅协调元数据，不合入主分支。
+- 技术规则、其他Agent模型配置、持仓/交易与自动化保持；无新研究。当前交付等待用户使用反馈，原方向目标保持in_progress。本轮执行和验收已完成，无待跑模型或子任务。
+
+---
+
 # 观察重点与Agent摘要：真实验收后收尾 2026-10-18T18:32:08.639595+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active仅收尾；scope_released false。checked_coordination_sha=a2828373b5936998d9b09c6277071dddde766638；checked_at=2026-10-18T18:32:08.639595+08:00；已读 COORDINATION、上述六相关任务及本轮新 personal-lowfreq方法交付、research-utility-review原A交付。两owner释放各自有界范围，无本UI/API冲突。
