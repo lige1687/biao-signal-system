@@ -1,3 +1,14 @@
+# 十年大样本执行分工与输入冻结 2026-10-19T01:39:18.283243+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=1cbb4cff7cc4a8d86e868236691114ed2d6b0a2d；checked_at=2026-10-19T01:39:18.283243+08:00；已读COORDINATION、自身、research-utility-review-20261012最新01:12、investor-workspace-simplification-20261012最新01:37结案、research-dispatch-controller；冲突决定：本任务独立股票月度排序，不接原日线/小时/回调或UI/账户。
+- 用户要求六ETF不足，实际十年以上扩大样本，并Luna执行、Astra假设审核自循环。首个固定核心：2014年底历史快照2595沪深A股，按固定hash取600（含51后来退出，不按现在存续删）；评价2015—2025完整132月。主候选复用mixed.momentum.raw@1.0.0，不重复六ETF旧结果。与短期强弱、全池、已知波动及成交活跃度公平比较；未知结果保留原权重，非真实交易账户。
+- 代码分工明确：Sol medium momentum_reuse_audit唯一写新src/lei_signal/research/lowfreq_discovery.py与tests/unit/test_lowfreq_discovery.py，只合成测试；Luna low luna_decade_inventory唯一写本新raw的probe_history.py、acquire_history.py、acquisition-receipt.json与新外盘对应probe/acquisition，真实固定来源采集与监测；Astra high candidate_method_review只读设计/必要代码审查；root写冻结设计/合同/报告/核数与账本，不与子代理同文件并写。多模型费用未知。
+- 源探测6/6成功；旧33年面板是当前名单回溯，复用旧资格结论后不拿它冒充完整历史。历史快照有2595普通A，元数据身份均对齐；供应商完整性和公司行动仍须检验。600日线+5原价+5复权因子上限610请求，单源匿名、0重试、1秒间隔，2连续失败或429停。公开文献4/6，核心1+必要后续最多3；不借新批重置旧封存预算。
+- 新输入/结果写已核外盘lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080；新增量预计外盘2GiB/本机5MiB。原小raw/design-v1、bulk-v1、storage-plan与分别不可变委派合同记录实际定义和边界。原生workflow预测入口未支持本同日选择，独立研究工具补冻结/合成/指纹与独核，不伪造原生验收回执。
+- 成果分支仍codex/personal-lowfreq-system-audit-20261018@7919453f3edc3d28f1d9e6e819ce7895894664e0；本批未有市场效果，报告/目标不得先标能力建设成功。两个网络前目录检查失败已记录修复，6实际查询不重复。
+
+---
+
 # 用户要求十年以上扩样与分工自循环的实际验证 2026-10-19T01:28:35.877470+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=6f0e0b30a1b6acbe17eff0832763ae0ba3196c56；checked_at=2026-10-19T01:28:35.877470+08:00；已读COORDINATION、自身、research-utility-review最新01:12日/小时收盘资格及扩样回调、investor-workspace最新01:22资料链、中控。冲突决定：本任务独立金融机制与同日选择；不做原LEI、底部回调/日小时确认、账户政策、宽度情绪宏观或生产UI。
