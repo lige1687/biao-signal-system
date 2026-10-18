@@ -1,3 +1,14 @@
+# 原策略机制与科学方法审查已交付 2026-10-18T16:37:47.409331+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status completed仅本次有界机制/方法审查；scope_released true；完整LEI及有效组合总目标仍in_progress。checked_coordination_sha=fe9d1924ce991f1672f1e20b6e2680412bfa2b90；checked_at=2026-10-18T16:37:47.409331+08:00；已读COORDINATION、自身、personal最新1798b855方法选读交付、系统owner与中控边界；不重复其新独立体系/价值盈利学习，不改其他owner。
+- 三项收敛：原趋势中的确认入场；原入场理由对应的退出及新机会再入；原风险数量和共同资金。第二项9/8道路退出旧题直接复用；第一/三项原目标、首次、小时、N/共享资金定义仍缺，未宣称效果或正式可运行。其他均线有限对照，8个旧对象准确版本核验，不将首次底部当首次回撤，不将AND换OR，20经验条款与60/120主步骤分开。
+- 成果docs/experiments/lei-mechanism-methods-2026-10-18.md，SHA a96128a9038991b745ffebbb42bf32c83fad46e6cd7e9509fa8429fcba2b9501，主/研究树一致；同名raw含方法合同/候选记录/来源/保存摘要核对/closure。候选非新正式因子或运行合同。原始论文支持/反证与本地适配分开；重读已存Kaminski/Lo正式论文5—8页，Moreira官方摘要、Cederburg原文1—3页及此前同会话AQR/Arnott阅读复用，不声称全文精读。
+- 验收：11本地输入指纹含两原策略不变及保存原论文核同；1次A20E保存摘要核数，少184600.7911元/减少约5.190个百分点跌幅且投入大降，0新市场计算/拟合/行情。Sol6 medium查旧对象，Astra6 high审原文/方法并采纳5项纠正；均无文件写入。公开4子查询+2定向读取，实际token费用未知，旧2082.25/3600未重置。
+- 实际8000正文7604字匹配，research_report指纹verified且无截断；5188报告章节/5表/来源链接已读，截图保存，页面保留。主仓归置通过。registry首次使用错误键在写入前失败已留，适配entries后仅新项变化且其他项保持；旧报告不改。原目标note152→153，status/授权/其他字段及历史保护通过，系统owner已收到准确版本。
+- 源码/报告仅本地未提交未推，研究分支仍codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be；本次远端只协调元数据。完整效果未完成，下一原策略执行仍先核缺失定义/资料；已见历史不作新独立证明，不为正结果重跑封存。
+
+---
+
 # 原策略候选机制与科学方法收敛 2026-10-18T16:29:50.816119+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status active；scope_released false。checked_coordination_sha=7ece0acea5ea5aa36e765d65757dca834ab45077；checked_at=2026-10-18T16:29:50.816119+08:00；已读COORDINATION、自身、系统owner、personal-lowfreq-system-audit-20261018最新独立研究分工、中控。已接收用户经personal owner授权移交的原LEI缺口，不发回无新用户授权的跨聊天消息；本协调记录即接续回执。
