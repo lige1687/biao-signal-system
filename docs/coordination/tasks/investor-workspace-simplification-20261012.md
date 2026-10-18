@@ -1,3 +1,14 @@
+# 接续：观察重点颜色与一键 Agent 总结 2026-10-18T18:12:49.868880+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=b6dd1f045c3ca7714345e9957bf50a107e9faaa2；checked_at=2026-10-18T18:12:49.868880+08:00；已读 COORDINATION、自身、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller、daily-trading-system-audit、investor-observation-map。因子owner与方法文档owner范围无重叠。
+- 用户本轮授权：机会列表体现观察重点、用颜色突出；点击按钮让 Agent 总结今天机会与关注的操作条件。服务展示与叙事层，沿用原技术规则与 deepseek-flash 机会专用配置，不改策略/持仓/计划/交易/自动化，不重跑已完成68张审核卡。
+- 成果树 codex/investor-workspace-simplification-20261012@e6c4c2e025252c565ba15f05611561ca1ecd5b48；复用本机未提交前批成果。唯一写范围 web/src/pages/OpportunitiesPage.tsx、opportunities.css、新 opportunityFocusModel.ts、web/src/api/opportunityReviews.ts、新 components/opportunities/OpportunityDailySummary.tsx及样式、components/today/TodayRecentOpportunities.tsx与其既有样式/模型；后端新 api/opportunity_summary.py、api/routes/opportunity_reviews.py 准确新增接口块；对应 tests/unit/test_opportunity_summary.py 与 web/scripts 的本次模型检查；自有 progress、既有交付报告本轮补注及本次小验收记录。根主树仅逐文件核对后采用本次后端，保留其他脏改动。
+- 设计：沿现有黑绿灰体系；深色强调观察重点，绿色买入观察，红色卖出风险，琥珀色待确认，灰色暂无新触发/资料不足，并始终附文字标签。列表每项简短说明最近发生什么、观察什么与事件日期；旧审核状态降级。按钮显式触发受限汇总，资料相同复用已保存摘要，失败保留且不循环；新摘要与系统事实区分，产品身份/方向/资料日期可回点。
+- 验收：真实浏览器点按钮取得模型摘要；同输入二次点不重复模型；日期/引用/方向可核，私有金额/账户/计划原文不外发；无交易写入；桌面与手机信息可读/无横溢；后端边界测试、前端模型检查/构建、准确路径检查及归置；最终更新原目标说明与本任务回执。两策略实际SHA与已确认值一致。
+- 分工：Sol read-only opportunity_summary_path 已完成路径核查；接下来后端摘要与前端呈现按文件分工，root 负责接口整合、实际调用与浏览器验收。资料时间界限保持，不把周末生成日期当新交易日。
+
+---
+
 # 本轮主线最终交付 2026-10-18T16:51:08.252919+08:00
 
 checked_coordination_sha=53d0ca2b30525cdc185bfda40cdfafb6968bb871；已读JSON六相关任务及COORDINATION，latest personal独立方法差距交付无源码冲突。status=completed仅本轮系统实现，scope_released=true；原目标仍in_progress等使用验收。
