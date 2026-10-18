@@ -1,3 +1,11 @@
+# 资料链验收发现当前批次选择不一致：必要增量
+
+checked_coordination_sha=5f980694a795f1b36c6f3f42da67b96dab8eeac3；checked_at=2026-10-19T01:22:13.243575+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018最新01:18、research-utility-review-20261012最新01:12、research-dispatch-controller及日常/观察原记录。研究源码与本批无冲突。task-id/owner/分支/基线沿下；status active、scope_released false。
+
+实际准备complete复用56/0旧run，首页latest仍取另一较晚创建partial run；技术热缓存能显示事件，但审核状态仍错。追加仅src/lei_signal/api/recent_opportunities.py及tests/unit/test_recent_opportunities.py；原已登记copilot/opportunity_review.py、routes/opportunity_reviews.py/test继续。准备成功后持久记录当前run，两页默认统一；保留所有旧run/checked_at，不按成功数挑结果，不重跑模型。root唯一集成，子agent只具体源实现，先测试临时SQLite再读回真实页面。原技术/权限/金额/模型/研究范围保持。
+
+---
+
 # 审查失败、同日宽度与新闻更新闭环接续 2026-10-19T00:49:33.601490+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=2c5e9fa643ee7173b184024ee1b3202eb7e277ae；checked_at=2026-10-19T00:49:33.601490+08:00；已读COORDINATION、自身、research-utility-review-20261012最新00:45、personal-lowfreq-system-audit-20261018最新00:32、research-dispatch-controller及原日常/观察任务；小时研究和静态SVG仍原owner，与本次源码无交集。
