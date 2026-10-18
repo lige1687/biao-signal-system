@@ -1,3 +1,13 @@
+# 总交付方向收敛与原目标接续 2026-10-18T16:10:32.227769+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status planned（完整研究总交付），本轮方向整理active；scope_released false仅下述自有进度/原目标note。checked_coordination_sha=dffe8c640be7250867a06a8dec2d6e61e4950244；checked_at=2026-10-18T16:10:32.227769+08:00；已读COORDINATION、自身、系统investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018及中控既有边界。用户希望全部做到可交付，并明确本次总结大方向，不展开单个实验方案。
+- 复用stock-color-account raw/future-plan、10/18增量审查及个人方向报告b4b03c2a，不改封存文件、不另写同题报告。两策略实际SHA仍df92d85b…/85e0e327…；既有预算和研究状态不重置。当前按research-closure plan_only完成方向整理，不把本次规划当全面研究完成；0新市场运行、行情、拟合、原文和生产改动。
+- 本轮仅追加原docs/ops/work-progress/research-utility-review-20261012.md在主/研究树的总方向与验收、原okr-ff1e0a86fbac仅note；不改status/authorization/milestones，不新建重复目标。Sol6 medium只读查缺口已返回，无写入。公开查2请求，仅方法摘要不作新效果证据。实际token费用未知。
+- 方向：完整原文/资料与可追溯实现；双线全生命周期/场景增量；有限外部趋势方法对照；仓位/单笔与账户风控；多模块和资产的共同资金组合；现系统可读交付及后续观察。宽基ETF优先，个股作为独立必要覆盖；情绪/宽度/宏观既有owner与权限保持。其他均线是独立研究候选，不能反写原20/60/120规则或扫描成绩挑参数。
+- 唯一写者root；系统UI/API和判断链仍原系统owner。待记录和系统交接读回后释放本次文档范围，总目标保持未完成。资料/定义缺口只阻断依赖分支；原完整与独立扩展不能互相冒充。
+
+---
+
 # 第4/6点保存证据与增量方法审查交付 2026-10-18T15:42:41.924027+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现 01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status completed仅本轮有界审查；scope_released true。checked_coordination_sha=e1fe7a4644344bc0f3c3258ebd53f73773dfac9d；checked_at=2026-10-18T15:42:41.924027+08:00；已读COORDINATION、本任务、investor-workspace-simplification-20261012、research-dispatch-controller、personal-lowfreq-system-audit-20261018最新增量。后者路线探索只提案并复用本核数，系统owner独写UI/API判断链，无同范围改写。
