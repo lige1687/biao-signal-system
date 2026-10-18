@@ -18,3 +18,16 @@
 - checked_coordination_sha: 5db31760aae06cf88d38a6444ff6ac65e56fbc06；checked_at: 2026-10-18T14:10:00+08:00；已读daily-trading-system-audit、investor-observation-map、investor-workspace-simplification-20261012、research-utility-review-20261012、research-dispatch-controller、portfolio-trends-20261013。冲突决定不变，原负责人已明确整体审查归本任务。
 - 本问题已回答；完整策略验证、账户补录、产品实施及用户效果待原授权和负责人继续，不由本报告冒充完成。无新增实验或生产实现待本任务执行。
 - 协调权威：coordination/lei 的 docs/coordination/tasks/personal-lowfreq-system-audit-20261018.md。推送和读回之后释放本任务范围，保留成果树供阅读。
+
+## 2026-10-18 用户确认与方向探索接续
+
+- 用户明确确认原第3/4/6/7项，已按直接请求写一个用户记忆增量，未扩大成全部七项确认。
+- 新有界问题是低频发现路线；复用原因子owner最新纠错（ETF零成交、代表股2笔）与增量成本诊断，不重复其工作。
+- 新报告low-frequency-research-directions-2026-10-18.md提出相对强弱成果收敛、持有/再参与、组合风险三个优先方向，量价及慢信息分别保留草案与扩展边界。原报告844cc8ba不改。
+- 6次公开来源请求，0新市场实验/行情/子代理/网页模型/生产/交易；两AQR页未取得可依赖正文，未用作证据。数值来自旧报告，未重算冻结实验。
+- 准确来源指纹及未解决边界在同名raw；登记仅独立成果树自身新键/INDEX新行。下一步检查关键数字、链接、旧条目不变与归置，发布后协调读回；不宣称后台已开新策略研究。
+
+- 收尾进一步追到原动量效果待审草稿与两摘要：强两只相对六只平均−0.1062个百分点、固定21日间隔强弱差−0.1974点，未过原筛选。已纠正初稿优先级，保留原文件/待审状态，不重跑也不把本轮摘要核对称为正式验收。主要方向改为持有再参与和不同风险来源组合。
+
+- 结案复核：checked_coordination_sha=09daa44cb4c83cb029ec3049c616153e94971471，checked_at=2026-10-18T15:48:08.021753+08:00；已读自身、research-utility-review、investor-workspace-simplification、research-dispatch-controller、classic-factor-research、technical-factor-sequence；原因子owner本轮审查15:42已结案，归属不变。
+- 本轮问题已回答，报告/六来源链接/登记唯一性与SHA/原条目不变/21来源指纹通过。主仓现行归置绿，隔离树旧3项白名单告警仍保留。成果待本次准确commit推送读回，后续无本任务后台实验或代理。
