@@ -1,3 +1,15 @@
+# 连续小周期与原A增量接续 2026-10-18T22:25:30.101967+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status active；scope_released false。checked_coordination_sha=d64efbe51da38c3e5d78c7b6530873b2902fbbbf；checked_at=2026-10-18T22:25:30.101967+08:00；已读COORDINATION、本任务、investor-workspace-simplification最新交付、personal-lowfreq-system-audit最新方法指引、research-dispatch-controller、technical-factor-sequence的相关范围。原系统/方法owner范围不接管；现行方法playbook直接采用，不再重复泛方法研究。
+- 用户明确：继续取得连续小周期数据并核口径，目标/失效按原文核清；可自行解决继续；合格后真正测原策略增量、等待与错过，旧实验不重做，系统可阅。服务原A资料/定义与同机会增量研究，不改原文、生产、持仓或自动化。
+- 沿用研究树codex/factor-evidence-integration-20261012@70ab55556874228d2cba66cf50f96d0318e1a5be及已有本地成果。根主控唯一报告/协议/适配写者，原义Astra只读；可委派Sol在新raw采集脚本或明确资格工具路径，代码与市场运行分离。源成果仍本地未提交；远端只协调。
+- 写范围：docs/experiments/raw/original-a-intraday-qualification-2026-10-18/（协议/脚本/小证据）；docs/experiments/original-a-intraday-qualification-2026-10-18.md、registry仅该键/INDEX一行；必要新src/lei_signal/research/original_a_intraday.py及tests/unit/test_original_a_intraday.py；自有progress与原目标仅note。原研究和冻结输入/结果不改。主/研究树仅逐文件准确采用；Web仍走已有报告库，不插入他人UI。
+- 预定资料范围：原8ETF+6代表股不依收益选样，2019-09-01至2026-06-30（旧日线研究历史与前史），公开现装BaoStock取连续15/60分钟及同源日线/权息/交易日资料用于交叉核对；先一ETF资格再同批扩展，逐请求/分页/失败保存，禁买/装/换权限。用户新连续取数授权另记数据阶段，不修改旧一日能力协议；实际合理请求清单写入新协议后执行。
+- 新大结果默认合格外盘，固定身份/容量已核；旧2082.246742416057/3600市场秒累计继承，不重置。最多一固定定义核心比较及必要独核，不搜索参数；原义/输入不合格则只阻断相应结果，继续完成可用资料和明确证据。原AND、目标区域/失效及首次非硬条件不可退回代理冒充完整A。
+- 验收：连续覆盖/缺失/停牌/时间标签/日内与日线一致/复权分红/实际可得与历史修订分开；目标/失效原文裁决+来源；能计算则冻结同机会简单基准比较与等待/错过，不能则给准确未评价项；实际报告/Agent/Web读回、归置、预算/失败/恢复记录。完整原A未测前不得称原策略有效或无效。
+
+---
+
 # 原A证据检查与小时入口已交付 2026-10-18T18:28:16.194723+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status completed仅本轮有界证据检查；scope_released true。完整LEI效果仍not_evaluated，原目标in_progress。checked_coordination_sha=bd6a2c7fbf8f2cde4d05c41dd410ae78f156a700；checked_at=2026-10-18T18:28:16.194723+08:00；已读COORDINATION、自身、research-dispatch-controller、personal-lowfreq-system-audit最新方法交付及investor-workspace-simplification最新机会摘要范围。方法playbook/UI由原owner负责，无写入冲突、不重复实验。
