@@ -767,8 +767,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "cd3f34f7d8742b029c7b7432d3d03058dd462786",
-  "checked_at": "2026-10-18T15:32:21.308122+08:00",
+  "checked_coordination_sha": "7b7d4b6d4981347a18afe45ddd45174fcdcfaadc",
+  "checked_at": "2026-10-18T15:54:33.673567+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -812,13 +812,13 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "src/lei_signal/api/recent_opportunities.py",
     "tests/unit/test_recent_opportunities.py",
     "web/src/api/opportunityReviews.ts (recent list types/client only)",
-    "web/src/pages/OpportunitiesPage.tsx (exact subject/side deeplink only)"
+    "web/src/pages/OpportunitiesPage.tsx (exact subject/side deeplink and existing plain-language formatter for first-screen counterevidence only)"
   ],
   "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-18T15:32:21.308122+08:00",
-  "conflict_decision": "最新用户明确将策略/因子交因子实现，已实际发送范围交接；账目不补。root收敛首页近期机会列表与Agent输出，backend/frontend原有界判断链并行，研究报告及registry由原owner负责。Chrome已释放但优先IAB。",
+  "updated_at": "2026-10-18T15:54:33.673567+08:00",
+  "conflict_decision": "已读最新六任务，其他新增仅研究报告/路线结案，UI/API仍root唯一写者。实际页面发现反方首屏漏用已有中文格式化器，只补该调用；不改原始模型文字、技术判定或研究结果。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-chain-20261018-contract.json",
   "automation": {
