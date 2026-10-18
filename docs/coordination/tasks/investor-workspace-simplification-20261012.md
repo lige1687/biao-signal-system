@@ -1,3 +1,11 @@
+# 观察重点与Agent摘要：真实验收后收尾 2026-10-18T18:32:08.639595+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active仅收尾；scope_released false。checked_coordination_sha=a2828373b5936998d9b09c6277071dddde766638；checked_at=2026-10-18T18:32:08.639595+08:00；已读 COORDINATION、上述六相关任务及本轮新 personal-lowfreq方法交付、research-utility-review原A交付。两owner释放各自有界范围，无本UI/API冲突。
+- 已实测按钮1次DeepSeek Flash（input4456/output373，费用未知）生成3产品摘要；原机会审查模型321次保持，无交易写入；二次点击复用同summary。26后端检查、前端4组/构建、Ruff与主树归置通过，1280/375无横溢；正在保存最终截图和回执。冷热启动等待仍如实保留。
+- 收尾准确新增写范围：既有 docs/experiments/today-agent-output-polish-2026-10-18.md 追加本轮效果；registry.json仅该报告entry的report_sha256/oneLiner，保留其他条目；原progress和本任务归档前缀opportunity-focus-summary-20261018的acceptance/patch/goal-note。原目标okr-4c2ea452d3cc仅追加note，status/owner/授权/验收及历史保持；源本机未提交、不合主分支。前端本轮最终11路径以验收hash为准（无其他写范围）。
+
+---
+
 # 接续：观察重点颜色与一键 Agent 总结 2026-10-18T18:12:49.868880+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=b6dd1f045c3ca7714345e9957bf50a107e9faaa2；checked_at=2026-10-18T18:12:49.868880+08:00；已读 COORDINATION、自身、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller、daily-trading-system-audit、investor-observation-map。因子owner与方法文档owner范围无重叠。
