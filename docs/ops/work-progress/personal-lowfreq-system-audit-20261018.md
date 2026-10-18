@@ -56,3 +56,12 @@ checked_coordination_sha=d13868e788534ea78f220350513de971c098a2bd；checked_at=2
 2026-10-18T18:18:30.956054+08:00 验收：17来源指纹、全部本地链接、唯一登记/原条目不变、两AGENTS原字节保持、同一playbook及diff通过；五例方法独审修正已应用。主仓归置通过，成果树继承.git/COORDINATION.md/docs/coordination三项失败保留。成果树缺规范索引的相对链接已改为实际主仓原件，未复制原owner未提交规范。新协调ddbac21b55d1a39666db80a67be00c33850f73c7中原owner18:11已接续原A确认工具，明确不重复本通用发现流程，范围无冲突。Gemini当前提交未核、X原帖未核，均不作已完成；无新市场运行。
 
 2026-10-18T18:19:40+08:00 系统原目标已只追加本流程交付note：okr-ff1e0a86fbac 154→155/in_progress，旧历史和owner/status/authorization/milestones/next_action保持，准确正文读回；不新建目标、不关闭长期研究。回执同名raw/goal-receipt.json。主体成果9b937d39b588e457d7cf7c200b8bd72de9ac51dd已发布，补充回执提交以协调最终记录为准。
+
+
+## 2026-10-18T22:48:54.352940+08:00 20日颜色因子实际案例与工作流增补
+
+- 复用research.stock.color_event20@1.0.0及依赖账户，完成金融假说/竞争解释/数学重复、资金性能与用途增量表；10/15预测只作不同定义的家族旁证。新报告dual-ma-factor-worked-case-2026-10-18.md；小表脚本只核6组费用/市场恒等式、8组保存日期跨度，0市场重跑/拟合/行情。Sol独核数值，Astra核解释和RD-Agent选读身份，已修交易减少的基准措辞。
+- 用户新增要求已落实playbook：价值还可含判断一致/来源清晰/资料可靠性，但要真实对照；三个扩样本方向逐项说明范围变化；RD-Agent先借鉴可追踪假说—实现—反馈，再按需恢复，最后才考虑自动循环。本轮未安装/运行框架，不将旧反馈失败说成成功。主树同一playbook已核一致，AGENTS/生产/旧报告和合同未改。
+- 20份来源指纹与旧registry条目/本地链接核对通过；主树归置通过；成果树继承.git、COORDINATION.md、docs/coordination三项旧检查失败，保留未修。源码恢复跨度字段匹配冻结绑定，但本轮未从逐日序列独立重建。
+- checked_coordination_sha=fc461f8542b715469b810f542594b15d0b330736；已读自身、research-utility-review最新22:25、investor-workspace-simplification最新接续、research-dispatch-controller，root唯一写者，无重叠接管。
+- Gemini本轮Argon高点、2543字完整提示及新用户消息已实读；用户亦确认已发送，新URL https://gemini.google.com/app/a661a2b9ca3d1ce6。仍等待最终回复；先前AX/截图迟延、点击无效、noWindowsAvailable与DOM失败保留，未重复提交；刷新仅读取原会话。外部答复尚未验收，不冒称共同讨论完成。
