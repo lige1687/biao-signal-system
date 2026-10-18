@@ -1,3 +1,17 @@
+# 首轮实际研究交付：两类选择增量与财务资格 2026-10-19T01:18:42.430840+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮有界首轮问题；scope_released true。四候选总目标仍in_progress。checked_coordination_sha=cff9f02518545a176c02a8f57b3c36b1362e19a8；checked_at=2026-10-19T01:18:42.430840+08:00；已读COORDINATION、自身、research-utility-review最新01:12 ETF收盘语义资格与上涨回调扩样、investor-workspace最新00:49资料链、中控。冲突决定：原因子继续日/小时、原A/回调/账户；系统继续数据/新闻/UI，本任务仅独立选标的证据和候选资格，未接管。
+- 成果codex/personal-lowfreq-system-audit-20261018@7919453f3edc3d28f1d9e6e819ce7895894664e0已push/fetch同完整SHA；核心报告commit2965f4ffcff8e7bee955e3ec63523a7f6bfacdb9，docs/experiments/lowfreq-candidate-first-cycle-2026-10-19.md与同名raw、原progress、独立树registry新键/INDEX行。主共享源码/定义/规范/策略/报告登记未改；当前报告在独立成果树可读，系统目标含准确GitHub报告链接。
+- 实际研究1：复用六ETF固定2022—2026H1动量旧正式/独立结果，核1062日期，补一次时间依赖/分期/逐产品贡献诊断。最强两只相对六只平均−0.1062479个百分点，21日主近似范围−0.6697至+0.4152点，原筛选仍失败。无旧B1重跑、原待审草稿不改，4项整源漂移分别解释，未假称全源闭合。
+- 实际研究2：防御不依赖质量财务输入。最终独审指出该可执行工作后，追到10/3已完成四ETF风险研究（非9/23未执行旧连接器），复用317日保存预测及各折成熟历史均值，补同日选择预测最低两只的诊断。B2相对简单参照只改变11日，306日同选择/零差均入总数；所选两只个体未来日波动均值0.88821比简单参照0.88497略高；优于弱B1不足以采用。非原始RV20直接排序、非组合波动/回撤/账户，未新拟合/特征/标签。
+- 质量推进：取得Apple官方SEC companyfacts/submissions两JSON，六字段三截点核申报时期/时间/同版本，原HTML403保留。仅单公司资料例子；不把美股例子称A股/ETF资料集已解决。质量/价值仍缺适用市场历史候选/退出/行业及当时公开财报；防御完整收益风险/参与/操作代价未评价，未提前勾完成。最高研究缺口判断是合格同日候选资料+强简单对手+实际选择增量，未把它当数月延误的唯一确定原因。
+- 可追踪循环已实际用：问题/金融机制及竞争解释→已有资料和重复审计→固定一次必要补检→执行→独立核数→反馈停止或补资料。Sol medium独算两批关键主值及逐日选择，Astra high方法和结论边界；未重做区间抽取。5公开请求含1次403、1核心+2必要跟进（财务资格/防御保存预测）、8来源/分析尝试、另1联网前存储检查失败；旧拟合和封存实验重跑0；实际模型费用未知，不重置原预算。
+- 原件/完整结果位于已核登记外盘同一运行目录，精确路径/hash在manifest，本机35输入产物绑定与小合同。主报告14链接/原registry保持/数值与差额/diff核验通过；主仓现行归置通过；现行检查器检查成果树仅COORDINATION.md及docs/coordination继承2告警，保留不改白名单凑绿。
+- 系统唯一目标okr-8830a1f1ec4f v3→4→5已PATCH/note精确读回，完成traceable-workflow和momentum-reuse两项，总体in_progress；完整完成标准文本、授权、旧历史保持。其他目标/owner不写，原八目标不复开。下一题优先A股/宽基ETF历史候选与公开财务资料资格；不因既有弱结果重跑相同动量/风险模型，不装新平台，不恢复通知。
+- 收尾依据：本轮两个保存结果选择问题和单公司资料资格均回答，负结果保留；独审指出的必要可执行防御检查已做完。整体后续候选没有冒称完成或后台运行；需新合格资料和明确不同问题才进入下一批，不靠调参追正结果。无本题后台模型/市场任务。原始策略/生产/真实交易均未改。
+
+---
+
 # 按候选顺序执行首轮，并定位可用成果缺口 2026-10-19T00:50:00.395613+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=7af1e9b596614abc92f04283d97bd7c340c186ab；checked_at=2026-10-19T00:50:00.395613+08:00；已读COORDINATION及自身、research-utility-review-20261012最新00:45、investor-workspace-simplification-20261012最新00:41、research-dispatch-controller。原owner小时确认独立增量正在核图/审阅，完整原A待定义；本任务不做日/小时触发、等待、仓位或原策略资金比较，不改其模块/定义/图。
