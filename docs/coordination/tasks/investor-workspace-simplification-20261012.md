@@ -1,3 +1,16 @@
+# 近五日全市场重点统一展示交付 2026-10-19T00:41:40.470970+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮市场背景与显示纠错；scope_released true。checked_coordination_sha=b4fe58972d119877bc73832ebcdbd66338d61270；checked_at=2026-10-19T00:41:40.470970+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018最新00:32、research-utility-review-20261012最新00:30、research-dispatch-controller、daily-trading-system-audit、investor-observation-map。候选待办已结案、小时研究继续原owner，本轮无源码/研究范围冲突。
+- 已实现全市场近期重点/宏观重点新闻/行业大事三栏，近5自然日按真实发布日，行情按最近5个已保存观测日期。当前1项宽度待核、1条G17宏观、1条台积电行业原件，10/14两CPI折叠旧背景；常规5读数折叠。影响方向/反向情况/来源可见，行业最多3条且限已核范围，未核34标题及3条旧行业资料不作近期消息。20/80仅复用既有展示观察值，成分同日覆盖未核、重复读数不称新触发，技术规则/原文不改。
+- 真正准备完成后recent曾误用全局较新run，前端同批校验导致0；已为只读recent加可选run_id，机会页绑定resolved run。当前run orb_5bfd8463a96f44279fac5fc21ab307402933651c8aeeabad403f5097f4a76576 partial47完成/9失败/12无需；4近期事件/3产品显示，1产品行情/29基金同产品技术缺口保留。9失败不自动重试。内部仍有分产品背景字段，页面已去重，不冒称模型输入完全去重。
+- 摘要ops_6a3c1339346e4fa39a476241a76dfacc真实DS Flash一次，输入6682/输出1264，语义核对待核宽度/技术日期/同产品事实通过；再点同ID复用无新增。普通跨日页面另32尝试记录全部有完成回执，输入185224/输出15335，与摘要分别计；旧失败保留，费用未知，未切模型。summary总7、agent353、review534；个人判断/确认/后续/计划/成交五表均0，未改定时/交易或因子任务。
+- 后端48项、前端4组/构建/最终SSR、Ruff及主仓归置通过；1280三栏/375单栏无横溢，CPI发布/报告期、生成复用、通信双侧和K线实测。两次受管8000重载，冷准备数分钟仍在；后续Python纯排版AST同未第三次重启。隔离树旧write_tx/归置白名单、初次push拒绝、locator/只读SQL/registry定位与Ruff失败均留验收，不伪装首次通过。
+- 成果仍codex/investor-workspace-simplification-20261012基线e6c4c2e025252c565ba15f05611561ca1ecd5b48本机未提交未推，远端不可完整复现，无main合入。准确16路径增量补丁/源码指纹/验收/目标回执为docs/archive/handoffs-plans/investor-workspace-simplification-20261012/market-watch-20261019前缀，主/成果一致，后端9路径精确镜像；截图和模型原件在自有.codex/market-watch-20261019不入Git。原A静态图由原因子owner已自行采用，本轮未重复复制。
+- 原报告docs/experiments/today-agent-output-polish-2026-10-18.md追加并更新仅自身registry键，API全文15378字与SHA e0f146e1e4a558173a3c6f27f9ec5f2bc4459fb4c1482400de4c06b8f10f8cbe一致。原目标okr-4c2ea452d3cc仅note42→43，全部保护字段/旧历史不变，仍in_progress等用户效果验收。
+- 停止依据：用户本轮宏观统一、五日日期、行业重要性和真实页面/Agent验收均在限定工程范围完成。新闻全网持续抓取/宽度同日资格/完整持仓和投资效果未完成或未证明，明确覆盖边界，不以缺口延伸为全库研究。三个有界子Agent已结束，无本题待跑模型或后台续作；下一次按具体新缺口接原任务。
+
+---
+
 推送并发补注 2026-10-19T00:31:28.497233+08:00：首次普通push被拒，已fetch/read并合并新小时研究范围，无UI/API重叠；checked_coordination_sha=692c7e4ecdc72147fb8271b87975e2b8b6aa502d；已读task-id补research-utility-review-20261012最新00:30，其他同下。保留其新研究与原选股任务范围。
 
 # 近五日重点验收补充：清单绑定当前审查 2026-10-19T00:30:45.937632+08:00
