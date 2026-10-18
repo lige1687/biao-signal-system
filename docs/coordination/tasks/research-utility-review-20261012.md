@@ -1,3 +1,15 @@
+# 开题分工与原规则案例已交付 2026-10-18T17:33:53.209788+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status completed仅有界定义/资料准备；scope_released true；完整LEI效果blocked/not_evaluated，总目标仍in_progress。checked_coordination_sha=b339a97ea757a3ac27b77a36e72e556a1107235b；checked_at=2026-10-18T17:33:53.209788+08:00；已读COORDINATION、本任务、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller，交付前远端无新变更。系统UI/API及personal独立方案不接管，研究root唯一写者。
+- 用户要先金融含义和开题重点、职责分工并按优先级继续；已交六字段开题说明，常规方法/数据/实现/复核由AI，新方向、未能还原的核心原义、真实风险/费用由人类裁定。新增原LEI两视频字幕及时间戳，20/60先目标、随后20/60/120已定位；三价重算13倍与字幕20倍差异留存。字幕不当作独立音轨/画面核验，原文及正式规则不改。
+- 复用保存8ETF/6股397触碰：187首次中129同日起始，109不同产品日期；不能当129错误/成交。预先排序选3历史截面，共390条截至日价格，隐藏未来/接受/收益；1正常和3错误样例检查通过，Sol6 medium独核源SHA/计数/截面/比例一致，Astra6 high独核原义/出处并已应用措辞修正。0新市场回测/拟合/行情/参数寻优，案例整理0.3529秒，旧2082.2467/3600秒不重置，token成本未知。
+- 成果docs/experiments/lei-original-rule-cases-2026-10-18.md SHA7d7fc0b5a943c60cfbd74f6f1bf390a008eb945ce5aed2fe472dc263fec7a7b5及同名raw：contract、build_case_packet、storage/case/source/independent/registration/agent/goal回执、closure和Web截图；主/研究树小文件相同。外盘case-packet SHAa58c23bef1f134bcdf96055ab3b9e461fd4d4c1c008acfad7cb075f17ef60ca4，准确位置见case-receipt，设备和容量预检通过；不上传大原件。
+- 验收：真实API正文5539字符相同，Agent指纹verified且未截断；5188已核正文/开题表/最终粗体，报告页保留；主仓归置通过。原目标仅note153→154，保护字段/旧历史保持、状态in_progress，系统owner已收研究分工。失败保留：网页视频和官网失败、播放超时；字幕替代成功；末尾回执字段名错误在写前失败，按实际report_sha256修正后成功。全局20其他未登记报告不代改。
+- 完整目标区域取价、首次同日先后、合格历史小时/相关15分钟输入与原共同资金仍是核心缺口。已定向查桌面资料和文件索引，未定位原文提及Obsidian逐期笔记，已向用户询问位置；不让用户发明统计公式。下一步先原图/笔记与准确输入，合格后扩大ETF和个股共同机会，再原仓位风控/共同资金；旧颜色、等待和近似账户不重跑。
+- 研究分支codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be；源码/报告仍仅本地未提交未推，远端不能独立复现。本次远端只本协调元数据，不宣称完整策略或新因子有效。
+
+---
+
 # 原策略执行前定义与资料准备接续 2026-10-18T17:12:08.689167+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status active；scope_released false。checked_coordination_sha=a5f94629a106e160f52fe34fb1f288d07150f764；checked_at=2026-10-18T17:12:08.689167+08:00；已读COORDINATION、本任务、系统owner最终交付、personal方法差距最新交付、中控边界。原因子/策略归本owner，系统UI/API不动，personal独立新方案不重做。
