@@ -1,3 +1,15 @@
+# 首批权威方法学习交付 2026-10-18T16:35:41.549990+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次首批方法选读；scope_released true。长期因子发现/本地适配目标未完成。checked_coordination_sha 87518de51476bb3b69ecba16177bb8e04c49d418；checked_at 2026-10-18T16:35:41.549990+08:00；已重读自身、research-utility-review 16:29原策略接续回执，系统/中控/classic边界无新增变化；冲突决定仍不改原owner、教材、引擎、UI和旧冻结。
+- 原LEI问题交接已得到对方协调记录明确接收，不只投递成功；用户最新要求本对话先学习、后适配已另发送。因子实现仍active，不把收到交接写成原策略已完成。
+- 成果docs/experiments/authoritative-factor-discovery-learning-2026-10-18.md及同名raw两个小文件、registry/INDEX自身条目、原progress共6文件已发布codex/personal-lowfreq-system-audit-20261018@1798b855877ccdbad3f0faadc0782427ce9b4c02；fetch远端ref同完整SHA、精确文件diff空。报告SHA f6c4945bcbfd332b3c7316fe4b98f9131da3f2ded54c950a2a9d6cfcf2db95e2。
+- 方法学习：FF估值依据、Novy-Marx盈利测量、Arnott/Harvey/Markowitz经济依据与反例，复用华泰原方法页；收益、风险信息、风险动作、组合与操作价值分别看。摘要/部分页/元数据身份披露，两不可读来源不装作精读。旧Cederburg记录仅作成对阅读边界。无新因子有效主张，无新策略运行。
+- 独审3项修正并主控读回：教材相对链接在隔离树缺失改为本机真实原件并披露未移交；删当前引用未含的精确策略数；补借款及ETF成本。12本地来源和两策略指纹、全部本地链接、报告结论节/归档、旧registry条目不变、准确diff均过。主仓现行归置通过；隔离树旧检查器3既有白名单失败保留，未改规则或删除文件凑绿。
+- 本轮实际4+6=10公开请求、3访问失败；两Sol medium只读复用与窄审；0市场回测/拟合/新行情/新代码/新网页模型/生产/交易/通知；实际token费用未知。两次候选资料盘点未成为实验，不重开旧预算。成果小文件留本机，无大结果写入。
+- 当前无研究后台。完成理由mode_boundary：用户指定先迈出学习一步，本次具体案例和评价边界已交付；未来原文完整案例、当地ETF适配和独立候选效果均未宣称完成。沿现有classic-process学习库接续，不另造平台。展示工具返回queued，仅提供真实文件链接，不称已显示或上线。
+
+---
+
 # 用户收敛：先学习权威因子发现方法，再讨论本地适配 2026-10-18T16:31:00.490166+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false仅自有新方法报告、raw小来源记录及原progress/独立树registry和INDEX条目。checked_coordination_sha f893c9a37af939acca627f6364ee16e7732b9078；checked_at 2026-10-18T16:31:00.490166+08:00；已读COORDINATION、自身、research-utility-review、investor-workspace-simplification、中控及classic-factor-research；原任务归属保持。
