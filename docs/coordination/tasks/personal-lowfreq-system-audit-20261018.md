@@ -1,3 +1,12 @@
+# 样本范围表达纠正 2026-10-18T23:57:54.955777+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active仅文档补充；scope_released false。checked_coordination_sha=39dfe466b30915319f2636e814de8bf6c29ba1bc；checked_at=2026-10-18T23:57:54.955777+08:00；已读COORDINATION、自身、research-utility-review-20261012最新23:09、investor-workspace-simplification-20261012最新23:05、research-dispatch-controller。无范围重叠，两个原owner任务不接管。
+- 用户指出上一条未讲清universe，并确认金融现象→多用途价值→补缺口及RD-Agent可追踪循环；又明确不要重复研究，另外两对话各做各的。本轮只据旧报告/合同补样本名单来源、选择时点、计划/有报价数量、资金汇总法与外推边界；0新市场计算、0行情、0网页模型、0安装、0其他owner改动。
+- 基线成果d68e19dfcbd2bf020f94684f618b0668f6ab0788。唯一写者root；准确文件为自有dual-ma-factor-worked-case报告及其raw新增universe-clarification.json、registry仅该报告指纹、原progress；factor-discovery-playbook增加首屏范围说明要求和用户确认顺序，主树同文件精确镜像。旧实验/合同/统计和原始来源不动；不重写先前检查回执。
+- 验收为旧名单计数/来源文字、原性能表字节不变、报告指纹、registry旧条目/主树指引一致、归置及远端读回。本轮是解释纠正和已有工作流小补充，无新效果研究，系统目标不重复记同一成果。
+
+---
+
 # 双均线完整案例与 Gemini 意见裁决已交付 2026-10-18T23:01:08.831051+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮复用结果的案例及流程改进；scope_released true。checked_coordination_sha=51341fbb2ae64b5a42b15ca80a851f4c89b61793；checked_at=2026-10-18T23:01:08.831051+08:00；已读COORDINATION、自身、research-utility-review-20261012最新22:56静态研究图/小时等待段、investor-workspace-simplification-20261012最新22:58采用说明及宏观摘要范围、research-dispatch-controller。无写入重叠，原策略、小时研究、系统UI仍归原owner；长期有效因子方向未完成。
