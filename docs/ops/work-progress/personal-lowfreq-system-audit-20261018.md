@@ -31,3 +31,10 @@
 
 - 结案复核：checked_coordination_sha=09daa44cb4c83cb029ec3049c616153e94971471，checked_at=2026-10-18T15:48:08.021753+08:00；已读自身、research-utility-review、investor-workspace-simplification、research-dispatch-controller、classic-factor-research、technical-factor-sequence；原因子owner本轮审查15:42已结案，归属不变。
 - 本轮问题已回答，报告/六来源链接/登记唯一性与SHA/原条目不变/21来源指纹通过。主仓现行归置绿，隔离树旧3项白名单告警仍保留。成果待本次准确commit推送读回，后续无本任务后台实验或代理。
+
+
+## 2026-10-18T16:33:45.186558+08:00 学习在先的范围收敛
+
+用户确认原有策略交因子实现，已投递两条交接并见其active状态；后明确先学习权威研究者如何发现有金融含义的因子，再谈本地适配。此前两Sol的候选/资料盘点只读，无市场运行。当前新增docs/experiments/authoritative-factor-discovery-learning-2026-10-18.md，复用既有classic-process不重写教材。4+6=10公开请求、3访问失败保留，0新行情/回测/实现/生产。论文摘要、所读方法页、作者稿部分与本库延伸分别标注。原始两策略指纹核未变。结案验收见同名raw/review-state.json。
+
+窄独审3项已修：原教材改准确本机路径并披露成果树缺文件、删去当前引用未含的精确策略数、补借款与ETF实施成本。12来源指纹、全部本地链接、登记唯一性/旧条目不变、报告SHA及diff通过；主仓现行归置绿，隔离树继承3个旧白名单失败保留。首批方法选读完成，0新因子效果；后续完整原文案例和本地适配未宣称完成。准确成果commit与远端回执见协调记录。

@@ -1,3 +1,5 @@
+- 2026-10-18：[权威研究者怎样发现和验证因子](authoritative-factor-discovery-learning-2026-10-18.md)：先学金融机制、测量与反证，再讨论低频ETF适配；无新回测。
+
 # docs/experiments 总索引
 
 - 2026-09-17：[外部因子方法复用主控复核](factor-method-reuse-controller-review-2026-09-17.md)：R1–R4限定返修，未验收或批准安装。
