@@ -1,0 +1,58 @@
+{
+  "workspace_root": "/",
+  "mission": "Luna按同600名单和总610请求有界并发续采，复用已成功36原件而不重发",
+  "task_scope": [
+    "写新acquire_history_parallel.py，沿bulk-v1不变的同600+10唯一请求与旧queue/attempts，先逐个核36个原件hash及成功回执；跳过已有成功，剩574只请求一次，不改名单、不增加参数、不覆盖旧数据",
+    "最多6个独立Python进程，每个独立匿名BaoStock连接（SDK全局状态不可跨线程），全部数据请求实际开始时间共用锁，至少1秒全局间隔；记录实际开始/返回/pid/login，完整异常和每个调用次数；总唯一数据请求仍610含旧36，0retry",
+    "主控进程唯一写acquisition-parallel原件/attempts.jsonl/manifest；exclusive建新目录；创建前/每派发核已绑定run存储plan/同UUID设备/容量及mount；临时和日志放新外盘目录",
+    "请求前记started并在返回后记finished；每请求40s，最多6 in-flight；两个连续完成的来源错误用整数2（不把True转成1）或任何429停止新派发，允许已开始请求结束并记账，不偷偷重试；磁盘失联只停本采集子进程",
+    "manifest汇总旧36来源与新574来源，用绝对path/sha/code/kind/request/status；sources字段可直接供后续研究，request必须含code/frequency/adjustflag；实际读取schema/rows/hash全核，不计算绩效",
+    "Luna负责启动并监测完成，50个请求摘要一次；任何失败partial保留已成功数和精确待做清单；不新开线程/agent不改模型、不联网其他服务",
+    "不动旧脚本/旧attempts/旧manifest/旧源；修复和进程中断原因写本地acquisition-parallel-receipt.json；本次执行方式变更只提升等待效率，不变研究或总请求预算"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/bulk-v1.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/storage-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-universe-expansion-2026-10-15/acquire_frozen_cohorts.py",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/cohort.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/probe",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/acquisition-sequential-stop.json"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/acquire_history_parallel.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/acquisition-parallel-receipt.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition-parallel"
+  ],
+  "network_allowed": true,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "源码与fresh source receipts",
+    "完整600sources或精确失败列表/累计消耗",
+    "实际外盘manifest与读取核对"
+  ],
+  "stop_conditions": [
+    "只按bulk固定名单/参数/边界；两次连续错误或磁盘校验失败停",
+    "不计算市场效果不改设计，若耗时可继续等待不用请求主控继续"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "execution_revision": {
+    "predecessor": "luna-bulk-contract.json",
+    "old_completed": 36,
+    "remaining_data_calls_max": 574,
+    "max_inflight": 6,
+    "global_min_start_spacing_seconds": 1,
+    "total_request_max": 610,
+    "retry_max": 0,
+    "scientific_design_unchanged_by_acquisition": true
+  }
+}

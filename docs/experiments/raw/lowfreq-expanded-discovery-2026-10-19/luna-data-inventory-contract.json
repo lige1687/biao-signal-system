@@ -1,0 +1,38 @@
+{
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "No market computation, downloads, shared changes or additional agents; report missing inputs to root"
+  ],
+  "mission": "机械盘点现有行情资料的十年覆盖和历史成员资格，为扩大样本选择提供准确文件证据",
+  "task_scope": [
+    "先读stock-universe-expansion-2026-10-15与现有六ETF/长期宽基研究相关报告和小manifest，不整批载入原始行情",
+    "沿本仓原路径/报告精确外盘绑定，统计候选数量、实际最早最晚、复权/公司行动/退市/历史名单状态；原盘已核UUID，不扫描外盘其他目录",
+    "检查现有Python环境/采集脚本是否可直接补2014-2019；只读源码/字段，不查询网络",
+    "返回一个紧凑可复用表及必须补的资料，禁止以当前300/502名单冒称历史全市场"
+  ],
+  "read_only_paths": [
+    "docs/experiments/stock-universe-expansion-2026-10-15.md",
+    "docs/experiments/raw/stock-universe-expansion-2026-10-15",
+    "docs/experiments/broad-etf-risk-sizing-increment-2026-09-08.md",
+    "docs/experiments/raw/research-eighth-2026-09-08",
+    "configs",
+    "src/lei_signal/data",
+    "docs/progress"
+  ],
+  "expected_outputs": [
+    "准确源路径/实际覆盖数量/日期/历史成员和退出限制",
+    "可复用采集脚本与最小新增请求类型，不执行"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab"
+}

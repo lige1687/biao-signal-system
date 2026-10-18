@@ -1,0 +1,58 @@
+{
+  "workspace_root": "/",
+  "mission": "回归单连接，按总610上限实际续完600股票日线；保留并发失败，无成功原件重复",
+  "task_scope": [
+    "按resume-single-v1.json队列566(561日线+5调整原件)，单进程单连接依次跑，复用旧成功39，不重复成功股票，不改原601请求/科学生效定义；改用新目录，不改旧脚本/失败/源",
+    "修改原简短顺序脚本写新acquire_history_single_resume.py；SDK仅进程内cons.BAOSTOCK_PER_PAGE_COUNT=4000（默认2000需要2页），不能改已安装package。每次保存actual per_page_count/rowcount/lastdate。若返回页长被cap导致截断，应标失败停止，不伪造完整数据；不加未批准额外调用",
+    "新请求上限566，加旧44=610不变；仅5个session错误允许第二次（default每操作最多2），其余首次。调整样本从5对变2对+复用茅台probe只补raw=3个distinct，明确非全量公司行动认证；1秒间隔、40s时限、2连续真实失败停，429停，不再并行",
+    "任何重复源文件先核hash/源receipt，source数据写新external/acquisition-single-resume。全600都取得且资格明细保存才算采集完成；manifest合旧39+新全部有效来源，保留错误列表/每次调用消耗，不能把failed文件算success。主字段sources含code,path,sha256,status,request",
+    "日志和临时文件仅新外盘子目录，PYTHONDONTWRITEBYTECODE=1，禁止py_compile或工作树外锁；已有多写小锁/pycache保留并在回执记异常，不删除不问用户",
+    "启动并持续监控直至真实完成，50requests一次摘要，不跑市场表现。源速度慢不是提前收尾理由；若失败按准确原因停保留，不能自动预算重置"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/bulk-v1.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/storage-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-universe-expansion-2026-10-15/acquire_frozen_cohorts.py",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/cohort.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/probe",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/acquisition-sequential-stop.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/resume-single-v1.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition-parallel"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/acquire_history_single_resume.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/acquisition-single-resume-receipt.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition-single-resume"
+  ],
+  "network_allowed": true,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "源码与fresh source receipts",
+    "完整600sources或精确失败列表/累计消耗",
+    "实际外盘manifest与读取核对"
+  ],
+  "stop_conditions": [
+    "只按bulk固定名单/参数/边界；两次连续错误或磁盘校验失败停",
+    "不计算市场效果不改设计，若耗时可继续等待不用请求主控继续"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "execution_revision": {
+    "predecessor": "luna-bulk-parallel-contract.json",
+    "old_started": 44,
+    "old_success": 39,
+    "max_new": 566,
+    "total_max": 610,
+    "max_sessions": 1,
+    "scientific_effects_seen": false
+  }
+}

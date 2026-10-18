@@ -1,0 +1,40 @@
+{
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "No market computation, downloads, shared changes or additional agents; report missing inputs to root"
+  ],
+  "mission": "为独立低频因子发现设计至少十年大样本核心假设和公平对照，审查可证伪金融理由",
+  "task_scope": [
+    "用户认为六ETF四年不足并授权大样本十年；先读现有首轮及经典方法/当前playbook，选择一条明确金融解释与竞争解释",
+    "优先考虑已认可中期相对动量/质量/价值/防御，评估哪条最能以可得资料进行真正十年跨对象验证；有理由可选价格机制但避免只换窗口",
+    "设计同日低频选择、简单对手、既有信息增量、时期/对象反例和未知验证身份；用户要的是实际成果不能只建流程",
+    "A股与ETF主战场不变；可设计历史2014起可知名单的股票面板，与ETF单列；不拿当前幸存者冒充historical universe。数据盘点尚在进行，说明数据条件",
+    "不联网/不写/不市场运行，仅返回最小可执行设计及必需资料条件"
+  ],
+  "read_only_paths": [
+    "docs/research/factor-discovery-playbook.md",
+    "docs/research/current-standards.json",
+    "docs/research/research-question-method-standard.md",
+    "docs/research/factor-increment-evidence-standard.md",
+    "docs/research/research-workflow-usage.md",
+    "docs/experiments/stock-universe-expansion-2026-10-15.md",
+    ".codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-candidate-first-cycle-2026-10-19.md",
+    ".codex/worktrees/personal-audit-coordination-20261018/docs/experiments/authoritative-factor-discovery-learning-2026-10-18.md"
+  ],
+  "expected_outputs": [
+    "1主假设及可能失败原因/简单基准/样本选择原则/至少十年如何保证",
+    "最小固定比较与必要后续，避免新框架和无限参数迭代"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab"
+}

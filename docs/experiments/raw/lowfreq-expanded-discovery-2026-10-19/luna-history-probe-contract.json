@@ -1,0 +1,39 @@
+{
+  "workspace_root": "/",
+  "mission": "执行已定义的历史A股资料可得性探测，保存实际原件和调用账，不计算因子表现",
+  "task_scope": [
+    "在owned raw下新建probe_history.py；复用现有stock-universe-expansion probe_sources.py的匿名BaoStock调用及存储guard，不执行旧脚本",
+    "先核当前storage-plan身份和capacity，exclusive建立本次result/probe目录；6次数据查询：query_stock_basic()全量；query_all_stock(day=2014-12-31)；query_all_stock(day=2013-12-31)；query_trade_dates(start_date=2013-01-01,end_date=2026-01-15)；query_history_k_data_plus(code=sh.600519,2013-01-01到2026-01-15,字段date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,pctChg,isST,adjustflag=2)；query_adjust_factor同股票同窗口",
+    "数据请求最高6次，匿名login/logout另计；timeout40s，单请求不重试，两次连续失败停，429停；逐次保存kwargs/fields/rows/error/source/rawhash；分1秒请求；不换源、不加股票、不跑绩效",
+    "运行并核对4个metadata和2个price原件；返回字段/起止/计数和2014在市与metadata交叉情况，当前metadata的存续状态不可作为2014排除依据；不写brief/冻结科学合同"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-universe-expansion-2026-10-15/probe_sources.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/storage-plan.json"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/probe_history.py",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/probe"
+  ],
+  "network_allowed": true,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "probe_history.py实际源码",
+    "新外盘probe下原件、attempts.jsonl、summary.json；不得覆盖旧研究",
+    "真实请求数和异常"
+  ],
+  "stop_conditions": [
+    "只允许BaoStock匿名公开来源；不获取凭证不安装软件",
+    "磁盘身份失败、两次连续来源失败、越过6次数据请求时停；保留部分结果"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "mission": "实现Astra审查后的design-v2固定同日选择评价器",
+  "task_scope": [
+    "严格读取design-v2.json，只实现固定定义与研究评价，不另选模型参数",
+    "唯一写src/lei_signal/research/lowfreq_discovery.py和tests/unit/test_lowfreq_discovery.py；CLI --contract --out，原数据绝不修改；独立研究模块不得从raw脚本import算法，不改共用workflow/definitions",
+    "输入contract指定source文件list，每份BaoStockJSON字段data；historical cohort metadata/calendar指定路径；将每股票有效报价统计成月候选面板：原600每月都留行/eligibility_reason，selected membership只从观察日前列生成，然后计算未来标签",
+    "输出monthly.csv、selections.csv或parquet、per_stock_month.csv/parquet、quality.json、performance.json、annual.csv、increment.csv、manifest.json；数据文件大小写external新results子目录，拒绝覆盖；与主控冻结contract/hash必须一致",
+    "均值和所有情景都保留原权重未知不得reweight；按合同method列和条件9组结果；同时间block paired bootstrap，分时期年度和贡献分解",
+    "新增实质性测试：无未来信号污染、scale不变、halt有效报价、月末/次日/跨月日期、未成熟和退市未知不丢权重、同分和不整除样本、9组权重、所有未知/空池；测试只合成，不运行真实市场本批、不联网",
+    "约定实现可通过导入run_study(contract,out)和CLI；主控冻结实际source名单后Luna执行。若真实模式尚需资料定义，报告清楚但可先完成纯计算函数"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/design-v2.json",
+    "src/lei_signal/research/definitions.py",
+    "docs/research/definitions.v1.json",
+    "tests/unit/test_research_definitions.py",
+    "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/preexecution-review.json"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/lowfreq_discovery.py",
+    "tests/unit/test_lowfreq_discovery.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "准确两文件diff与测试结果",
+    "source contract JSON字段接口说明",
+    "明确未支持处，不假称已跑市场"
+  ],
+  "stop_conditions": [
+    "不改其他文件，不真实市场运行，不改设计参数；歧义报主控"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "revision": {
+    "supersedes": "sol-evaluator-contract.json",
+    "design": "design-v2.json",
+    "authorized_before_market": true
+  }
+}

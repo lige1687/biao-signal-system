@@ -1,0 +1,44 @@
+{
+  "workspace_root": "/",
+  "mission": "Luna实际采集固定600个2014历史股票十年以上行情，盯结果与失败，不能改样本或参数",
+  "task_scope": [
+    "写owned raw/acquire_history.py，读取bulk-v1.json及storage-plan，检查指纹/挂载UUID/设备/余量；绑定run已存在是本轮probe，核它保存storage-plan字节身份，不调用要求run缺席的recheck_saved_plan；exclusive创建result/acquisition，不覆盖probe",
+    "严格600个selected_codes按单进程1秒间隔下载BaoStock adjusted daily(2)，start/end/fields按bulk；另对spot_check_codes请求rawflag3及adjust factor同窗；保留每个请求args/error/hash/bytes/rows到attempts.jsonl；先将完整调用队列保存，不重试不补名字",
+    "总数据请求上限bulk-v1；login/logout单列，40秒请求时限；2连续error/429/磁盘失联停并写partial，不原样重试；空响应也当失败",
+    "每50请求打印当前状态；监控执行直到返回，检查每文件可parse与hash，返回实际count/窗口/失败列表；不算因子绩效；全量以manifest.json记录逐个code/path/sha供主控，final report来源未通过不可夸大",
+    "不改其他文件，不spawn；前probe两次网络前失败应在小receipt补记录但不倒填已封存原件"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/bulk-v1.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/storage-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-universe-expansion-2026-10-15/acquire_frozen_cohorts.py",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/cohort.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/probe"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/acquire_history.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/acquisition-receipt.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition"
+  ],
+  "network_allowed": true,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "源码与fresh source receipts",
+    "完整600sources或精确失败列表/累计消耗",
+    "实际外盘manifest与读取核对"
+  ],
+  "stop_conditions": [
+    "只按bulk固定名单/参数/边界；两次连续错误或磁盘校验失败停",
+    "不计算市场效果不改设计，若耗时可继续等待不用请求主控继续"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

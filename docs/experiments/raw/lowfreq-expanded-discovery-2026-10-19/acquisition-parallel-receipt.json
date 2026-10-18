@@ -1,0 +1,44 @@
+{
+  "schema": "lowfreq-acquisition-parallel-receipt/1.0",
+  "at": "2026-10-19T01:45:19.891636+08:00",
+  "script": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/acquire_history_parallel.py",
+  "script_sha256": "9e6390d9e879ea3cd2a76fd75137f1b23335d5ab05ca2ad5526b938905a5ec06",
+  "execution_status": "partial_stopped_by_two_consecutive_source_errors",
+  "prior_sequential_run": {
+    "completed_successfully": 36,
+    "reissued": 0,
+    "hashes_verified_before_resume": 36,
+    "stop_reason": "paused before request 37 per controller; prior FAIL_STOP integer conversion bug fixed by v2 literal 2"
+  },
+  "parallel_execution": {
+    "max_workers": 6,
+    "requests_started": 8,
+    "new_successful": 3,
+    "source_error_files": 5,
+    "not_started_after_stop": 3,
+    "queue_items_terminal": 11,
+    "total_unique_budget": 610,
+    "total_network_calls_including_prior_successful": 44,
+    "retries": 0,
+    "global_min_start_spacing_seconds": 1.001573085784912
+  },
+  "source_errors": [
+    "用户未登录"
+  ],
+  "source_limitation": "Independent BaoStock logins in parallel workers invalidated server session state: 5 requests returned error_code 10001001 user not logged in; corresponding logout often returned 10001010. No further requests were issued after the second consecutive completed source error.",
+  "manifest_readback": {
+    "status": "partial",
+    "files": 44,
+    "hash_schema_verified": "all_ok",
+    "successful_sources": 39,
+    "failed_source_files": 5,
+    "missing_requests_count": 571
+  },
+  "non_network_initial_failures": 2,
+  "no_factor_returns_or_signals_computed": true,
+  "limitations": [
+    "No factor performance or returns were computed.",
+    "5 partially returned error payloads were preserved and remain failed sources.",
+    "Remaining queue must not retry these eight started requests under frozen retry_max=0."
+  ]
+}

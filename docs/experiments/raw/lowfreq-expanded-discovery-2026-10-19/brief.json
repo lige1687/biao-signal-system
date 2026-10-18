@@ -1,0 +1,89 @@
+{
+  "research_id": "lowfreq-expanded-discovery-2026-10-19",
+  "mode": "research",
+  "execution": "running",
+  "question": "一项金融解释明确的低频同日选择因子，在至少十年且明显扩大的历史可知候选范围，是否超越简单对手并提供可用增量？",
+  "user_scope": "十年以上大样本、发现机制、Luna机械执行、Astra假设审核评估自循环；与原策略因子实现分离",
+  "baseline_commit": "7919453f3edc3d28f1d9e6e819ce7895894664e0",
+  "checked_coordination_sha": "6f0e0b30a1b6acbe17eff0832763ae0ba3196c56",
+  "strategy_hashes": {
+    "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "budget": {
+    "core_batches_max": 1,
+    "purposeful_followups_max": 3,
+    "literature_source_requests_max": 6,
+    "literature_source_requests_used": 6,
+    "bulk_data_plan": "resume-single-v1.json; cumulative610 SDK data operations; only5 invalid-login operations may repeat, reduced spot pairs within original ceiling",
+    "old_budget_reset": false,
+    "data_probe_max": 6,
+    "data_probe_used": 6
+  },
+  "started_at": "2026-10-19T01:29:41.381752+08:00",
+  "allowed_actions": [
+    "local qualification, scientific design, bounded public data expansion after registered batch plan, research implementation/execution, independent review and goal updates"
+  ],
+  "forbidden": [
+    "production/trading",
+    "originalLEI daily/hourly/account owner scope",
+    "parameter grid search",
+    "survivor pool relabeled historical complete",
+    "paid data or privilege expansion"
+  ],
+  "agents": [
+    {
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "role": "source acquisition and upcoming frozen core execution"
+    },
+    {
+      "model": "gpt-6-sol",
+      "reasoning_effort": "medium",
+      "role": "bounded research module and synthetic tests"
+    },
+    {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high",
+      "role": "hypothesis and independent scientific review"
+    }
+  ],
+  "attempts": [
+    {
+      "type": "literature_discovery",
+      "queries": [
+        "Baostock stock basic and all_stock historical API",
+        "Da Gurun Warachka Frog in Pan"
+      ],
+      "count": 2
+    },
+    {
+      "type": "data_qualification_probe",
+      "used": 6,
+      "status": "all success",
+      "result": "2014 A-share candidate2595; deterministic600 with51 future exits; no effect calculated"
+    }
+  ],
+  "failures": [
+    {
+      "step": "delegation dry-run before dispatch",
+      "reason": "generic validator rejects absolute paths; normalized declared paths relative to explicit project workspace_root",
+      "effect": "no agent spawned, no market or external writes"
+    },
+    {
+      "step": "Luna probe initial two process starts",
+      "network_requests": 0,
+      "reason": "extra directory check stat on not-yet-created task parent; corrected to registered base identity then mkdir task per output_storage.execute_new",
+      "status": "recovered without changing plan or requests"
+    },
+    {
+      "step": "parallel source acquisition",
+      "reason": "anonymous session collisions 10001001; 8 actual requests:3 success5 failures",
+      "resolution": "single-session-only resume, preserve44 actual attempts and39 success originals; no reset, reduce adjustment spot sample to3distinct"
+    }
+  ],
+  "old_long_matrix_reuse": "33year matrix is current-cohort history, no verified historic exits; audited 2026-09-09, not qualified full historic A share",
+  "design_current": "design-v3.json",
+  "acquisition_stage": "single-session resume active; 39 successful old records reused; max566 new data requests; total610 unchanged",
+  "scientific_review": "Astra final v3 code/design readback found no decisive barrier; real evaluation not started"
+}

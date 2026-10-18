@@ -1,0 +1,35 @@
+{
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "No market computation, downloads, shared changes or additional agents; report missing inputs to root"
+  ],
+  "mission": "在真正市场效果计算前独立审查600历史股票11年固定设计和数据资格",
+  "task_scope": [
+    "审design-v1金融/因子有效报价口径/次月close-to-close时点和未知权重情景是否会误导；具体实际输入信息见bulk-v1，可读其cohort文件但不读日线数值和市场结果",
+    "主控核出2014快照沪深A2595（sh60/sz00/sz30）全部type1、IPO<=2014年底且无提前退出；固定hash600含51后来退出，未按未来存续排除；供应商未被交易所完全独立核验，今天metadata含两只2026未来IPO但未混入2014",
+    "指出必须修复科学问题，不要求通用全栈系统；在数据采集中可review代码（未写好可稍后），不运行市场/不改文件、不联网/不委派"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/design-v1.json",
+    "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/bulk-v1.json",
+    "src/lei_signal/research/lowfreq_discovery.py",
+    "tests/unit/test_lowfreq_discovery.py",
+    "src/lei_signal/research/definitions.py",
+    "docs/research/definitions.v1.json"
+  ],
+  "expected_outputs": [
+    "必要修复/接受理由/剩余真实边界，是否可以运行固定核心历史研究"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018"
+}

@@ -1,0 +1,589 @@
+{
+  "before": {
+    "title": "低频选标的候选：动量复核、质量、价值与防御",
+    "purpose": "用户2026-10-19明确认可四类候选并要求列TODO、可复用的先复用且仍要检验，认可可追踪研究链。主战场仍是宽基与ETF；在同一日期比较谁更值得持有，和单标的操作时机、何时切换因子分别研究。顺序：①中期相对动量只复核已有定义与结果，先当简单参照；②盈利能力/质量先核当时已公开财务资料及行业可比性，作为独立股票研究候选；③价值核便宜的原因，区分低估与经营恶化；④低风险/防御按回撤、分散、参与代价和操作负担评价，不限定必须多赚钱。财务指标不直接移植黄金、债券或混合ETF。动量已有弱和负结果，不能改名重跑。认可的是研究方向和流程，不代表任何因子已有效。",
+    "parent_id": "okr-cd1a0bd5532c",
+    "priority": "high",
+    "owner": "本对话：低频因子发现（独立选标的与多用途价值）",
+    "target_date": null,
+    "next_action": "按用户新增明确要求，先补十年以上大样本能力：2014年末历史名单中固定600，含后来退出，2015—2025月度检验中期强弱、简单对手及条件增量；Luna实际采集/执行，Sol实现，Astra设计/审查，失败保留。先完成这项实际闭环再继续质量、价值、防御；不接管原策略因子实现。",
+    "evidence": "已完成方法审查见成果分支codex/personal-lowfreq-system-audit-20261018@196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a：docs/experiments/lowfreq-selection-and-timing-2026-10-19.md及raw。可复用mixed.momentum.raw@1.0.0、mixed.momentum.rank@1.0.0；factor-momentum-rank-reuse-2026-09-22；六ETF factor-etf-momentum-effect-b1-2026-09-23/report-draft仍主控待审且未过原正向筛选；rotation-reconstructed-four-way-2026-09-09含波动筛选/退出不能当纯动量效果。质量/价值/防御尚无本轮效果结论。RD-Agent已核通用执行与恢复，模型反馈两次失败，完整金融循环未核；复用组织方法不重装框架。\n\n2026-10-19首轮已执行：六ETF2022—2026H1保存动量结果复核+一次诊断，最高两只比六只平均少0.1062个百分点（未来21日变化，非账户收益）。四ETF2025/2026H1保存风险预测选择诊断317日，候选仅11日不同于各ETF历史平均参照，所选个体未来日波动多0.00324个百分点，未胜过强简单对手；非组合波动或回撤。质量真实取得SEC Apple两份官方JSON，六字段/三截点核申报时点，原件403保留；只是资料资格样例，未解决A股历史候选/退出/行业及财报版本。价值缺同类资料；防御完整收益风险代价未完成。两个保存诊断无新拟合/旧实验重跑；Sol独核关键数值，Astra审方法，失败/来源/计划/反馈均留痕。报告及manifest在上述准确成果commit。",
+    "milestones": [
+      {
+        "id": "traceable-workflow",
+        "title": "下一项实际研究留下金融现象/竞争解释、重复关系、准确对象与日期、当时可用资料、简单对手、冻结版本、效果及增量表、失败与下一步理由；现有文档不替代实际使用验证。",
+        "done": true
+      },
+      {
+        "id": "momentum-reuse",
+        "title": "P1 动量复核：对照准确定义/实现与旧输入、分组效果、成本及待审状态，保留负结果，明确哪些结论可复用和哪些缺口值得新检验；不以重跑或通过测试当有效。",
+        "done": true
+      },
+      {
+        "id": "decade-large-sample-cycle",
+        "title": "P1补强：完成至少十年、明显扩大历史候选且保留退出的实际因子发现检验；金融假设、Luna执行、Astra审核、性能及已有信息增量、不确定性和失败一并交付。六ETF旧结果不能替代该项。",
+        "done": false
+      },
+      {
+        "id": "quality-profitability",
+        "title": "P2 盈利能力/质量：先完成财务资料公开日期、修订、历史成员/退出、行业可比性资格核查；合格后按独立合同比较在已有动量之外的收益、风险和其他用途增量，缺资料可结论为不足。",
+        "done": false
+      },
+      {
+        "id": "value",
+        "title": "P3 价值：先限定盈利/净资产/现金流的一项有金融理由的测量，区分低估与恶化，核对与质量和动量重复信息及长期等待成本，再决定有界检验或暂缓。",
+        "done": false
+      },
+      {
+        "id": "defensive",
+        "title": "P4 低风险/防御：明确要降低什么风险，区分低波动与少持仓，和可执行简单对手比较回撤、亏损恢复、分散、放弃上涨、换手及操作负担，保留无改善结果。",
+        "done": false
+      }
+    ],
+    "links": [
+      {
+        "label": "已完成的候选及旧结果审查",
+        "url": "https://github.com/lige1687/biao-signal-system/blob/196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a/docs/experiments/lowfreq-selection-and-timing-2026-10-19.md"
+      },
+      {
+        "label": "现有问题驱动研究目标",
+        "url": "/upgrades?goal=okr-ff1e0a86fbac"
+      },
+      {
+        "label": "现有方法变化闭环",
+        "url": "/upgrades?goal=okr-aff4c096efb7"
+      },
+      {
+        "label": "首轮实际结果：动量、防御选择与质量资料",
+        "url": "https://github.com/lige1687/biao-signal-system/blob/2965f4ffcff8e7bee955e3ec63523a7f6bfacdb9/docs/experiments/lowfreq-candidate-first-cycle-2026-10-19.md"
+      }
+    ],
+    "kind": "concrete",
+    "id": "okr-8830a1f1ec4f",
+    "version": 7,
+    "status": "awaiting_approval",
+    "created_at": "2026-10-18T16:30:32+00:00",
+    "updated_at": "2026-10-18T17:44:24+00:00",
+    "authorization": {
+      "granted": false,
+      "scope": "按本轮用户要求依次推进低频选标的候选和研究侧缺口分析。先复用并核验动量旧证据，再质量、价值、防御；必要新比较固定问题、资料和累计预算。允许本地读资料、离线有限研究、报告与目标进度；不重跑封存、不接管日/小时/原A或系统UI、不改生产/交易/通知、不付费。",
+      "at": "2026-10-18T16:50:55+00:00"
+    },
+    "history": [
+      {
+        "at": "2026-10-18T16:30:32+00:00",
+        "action": "created",
+        "note": "目标已登记，登记不会启动执行。"
+      },
+      {
+        "at": "2026-10-18T16:50:55+00:00",
+        "action": "authorize",
+        "note": "用户2026-10-19明确：“按这个顺序去持续做吧，并且同步分析…最大缺口/痛点/迟迟看不到成果；注意和另一个因子实现的对话区分开。”",
+        "from_status": "planned",
+        "to_status": "approved",
+        "scope": "按本轮用户要求依次推进低频选标的候选和研究侧缺口分析。先复用并核验动量旧证据，再质量、价值、防御；必要新比较固定问题、资料和累计预算。允许本地读资料、离线有限研究、报告与目标进度；不重跑封存、不接管日/小时/原A或系统UI、不改生产/交易/通知、不付费。"
+      },
+      {
+        "at": "2026-10-18T16:50:57+00:00",
+        "action": "start",
+        "note": "开始首轮：动量旧证据可复用性及必要缺项检验，随后质量资料资格；并行只读财务库存和证据源链，不触及原因子实现日/小时比较。",
+        "from_status": "approved",
+        "to_status": "in_progress",
+        "scope": ""
+      },
+      {
+        "at": "2026-10-18T17:17:28+00:00",
+        "action": "edited",
+        "note": "进展已更新。",
+        "before": {
+          "owner": "本对话：低频因子发现（后续研究待启动）",
+          "next_action": "先沿docs/research/factor-discovery-playbook.md复用准确动量定义、六ETF待审草稿、旧选择与时机四组比较，核版本/样本/成本/负结果/负责人并给出能复用和不能回答的边界；盈利能力先列真实可用财务资料、公开日期与修订缺口。只在旧证据不能回答的具体新问题上，按现有授权及合同固定范围和预算再执行。当前待办登记不启动实验；不接管原有策略或系统实现对话，不重跑封存实验。",
+          "evidence": "已完成方法审查见成果分支codex/personal-lowfreq-system-audit-20261018@196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a：docs/experiments/lowfreq-selection-and-timing-2026-10-19.md及raw。可复用mixed.momentum.raw@1.0.0、mixed.momentum.rank@1.0.0；factor-momentum-rank-reuse-2026-09-22；六ETF factor-etf-momentum-effect-b1-2026-09-23/report-draft仍主控待审且未过原正向筛选；rotation-reconstructed-four-way-2026-09-09含波动筛选/退出不能当纯动量效果。质量/价值/防御尚无本轮效果结论。RD-Agent已核通用执行与恢复，模型反馈两次失败，完整金融循环未核；复用组织方法不重装框架。",
+          "milestones": [
+            {
+              "id": "traceable-workflow",
+              "title": "下一项实际研究留下金融现象/竞争解释、重复关系、准确对象与日期、当时可用资料、简单对手、冻结版本、效果及增量表、失败与下一步理由；现有文档不替代实际使用验证。",
+              "done": false
+            },
+            {
+              "id": "momentum-reuse",
+              "title": "P1 动量复核：对照准确定义/实现与旧输入、分组效果、成本及待审状态，保留负结果，明确哪些结论可复用和哪些缺口值得新检验；不以重跑或通过测试当有效。",
+              "done": false
+            },
+            {
+              "id": "quality-profitability",
+              "title": "P2 盈利能力/质量：先完成财务资料公开日期、修订、历史成员/退出、行业可比性资格核查；合格后按独立合同比较在已有动量之外的收益、风险和其他用途增量，缺资料可结论为不足。",
+              "done": false
+            },
+            {
+              "id": "value",
+              "title": "P3 价值：先限定盈利/净资产/现金流的一项有金融理由的测量，区分低估与恶化，核对与质量和动量重复信息及长期等待成本，再决定有界检验或暂缓。",
+              "done": false
+            },
+            {
+              "id": "defensive",
+              "title": "P4 低风险/防御：明确要降低什么风险，区分低波动与少持仓，和可执行简单对手比较回撤、亏损恢复、分散、放弃上涨、换手及操作负担，保留无改善结果。",
+              "done": false
+            }
+          ],
+          "links": [
+            {
+              "label": "已完成的候选及旧结果审查",
+              "url": "https://github.com/lige1687/biao-signal-system/blob/196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a/docs/experiments/lowfreq-selection-and-timing-2026-10-19.md"
+            },
+            {
+              "label": "现有问题驱动研究目标",
+              "url": "/upgrades?goal=okr-ff1e0a86fbac"
+            },
+            {
+              "label": "现有方法变化闭环",
+              "url": "/upgrades?goal=okr-aff4c096efb7"
+            }
+          ]
+        },
+        "after": {
+          "owner": "本对话：低频因子发现（独立选标的与多用途价值）",
+          "next_action": "沿原顺序推进质量的资料资格：优先核适合A股/宽基ETF主战场的历史候选成员、退出与行业，以及各报告版本真实公开日期；需要ETF质量时另核历史成分及权重，不能用当前名单回填过去。满足共同资料后再固定一个盈利能力测量，与动量及简单参照比较。价值复用合格资料；防御已有保存预测选择未胜过简单参照，暂缓此固定模型无理由延伸。更广的收益、回撤、分散、参与和操作价值仍分别验，不接管原LEI/小时/账户或系统UI。",
+          "evidence": "已完成方法审查见成果分支codex/personal-lowfreq-system-audit-20261018@196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a：docs/experiments/lowfreq-selection-and-timing-2026-10-19.md及raw。可复用mixed.momentum.raw@1.0.0、mixed.momentum.rank@1.0.0；factor-momentum-rank-reuse-2026-09-22；六ETF factor-etf-momentum-effect-b1-2026-09-23/report-draft仍主控待审且未过原正向筛选；rotation-reconstructed-four-way-2026-09-09含波动筛选/退出不能当纯动量效果。质量/价值/防御尚无本轮效果结论。RD-Agent已核通用执行与恢复，模型反馈两次失败，完整金融循环未核；复用组织方法不重装框架。\n\n2026-10-19首轮已执行：六ETF2022—2026H1保存动量结果复核+一次诊断，最高两只比六只平均少0.1062个百分点（未来21日变化，非账户收益）。四ETF2025/2026H1保存风险预测选择诊断317日，候选仅11日不同于各ETF历史平均参照，所选个体未来日波动多0.00324个百分点，未胜过强简单对手；非组合波动或回撤。质量真实取得SEC Apple两份官方JSON，六字段/三截点核申报时点，原件403保留；只是资料资格样例，未解决A股历史候选/退出/行业及财报版本。价值缺同类资料；防御完整收益风险代价未完成。两个保存诊断无新拟合/旧实验重跑；Sol独核关键数值，Astra审方法，失败/来源/计划/反馈均留痕。报告及manifest在上述准确成果commit。",
+          "milestones": [
+            {
+              "id": "traceable-workflow",
+              "title": "下一项实际研究留下金融现象/竞争解释、重复关系、准确对象与日期、当时可用资料、简单对手、冻结版本、效果及增量表、失败与下一步理由；现有文档不替代实际使用验证。",
+              "done": true
+            },
+            {
+              "id": "momentum-reuse",
+              "title": "P1 动量复核：对照准确定义/实现与旧输入、分组效果、成本及待审状态，保留负结果，明确哪些结论可复用和哪些缺口值得新检验；不以重跑或通过测试当有效。",
+              "done": true
+            },
+            {
+              "id": "quality-profitability",
+              "title": "P2 盈利能力/质量：先完成财务资料公开日期、修订、历史成员/退出、行业可比性资格核查；合格后按独立合同比较在已有动量之外的收益、风险和其他用途增量，缺资料可结论为不足。",
+              "done": false
+            },
+            {
+              "id": "value",
+              "title": "P3 价值：先限定盈利/净资产/现金流的一项有金融理由的测量，区分低估与恶化，核对与质量和动量重复信息及长期等待成本，再决定有界检验或暂缓。",
+              "done": false
+            },
+            {
+              "id": "defensive",
+              "title": "P4 低风险/防御：明确要降低什么风险，区分低波动与少持仓，和可执行简单对手比较回撤、亏损恢复、分散、放弃上涨、换手及操作负担，保留无改善结果。",
+              "done": false
+            }
+          ],
+          "links": [
+            {
+              "label": "已完成的候选及旧结果审查",
+              "url": "https://github.com/lige1687/biao-signal-system/blob/196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a/docs/experiments/lowfreq-selection-and-timing-2026-10-19.md"
+            },
+            {
+              "label": "现有问题驱动研究目标",
+              "url": "/upgrades?goal=okr-ff1e0a86fbac"
+            },
+            {
+              "label": "现有方法变化闭环",
+              "url": "/upgrades?goal=okr-aff4c096efb7"
+            },
+            {
+              "label": "首轮实际结果：动量、防御选择与质量资料",
+              "url": "https://github.com/lige1687/biao-signal-system/blob/2965f4ffcff8e7bee955e3ec63523a7f6bfacdb9/docs/experiments/lowfreq-candidate-first-cycle-2026-10-19.md"
+            }
+          ]
+        }
+      },
+      {
+        "at": "2026-10-18T17:17:28+00:00",
+        "action": "note",
+        "note": "首轮限定研究已交付，完成可追踪实际研究链和动量复核两项，其他完成标准保留未勾选。防御资格独核发现可执行部分后继续完成四ETF选择诊断，没有把质量缺资料泛化成全部受阻。总目标仍进行中；未启动后台回测或自动通知，未改生产或原策略。",
+        "from_status": "in_progress",
+        "to_status": "in_progress",
+        "scope": ""
+      },
+      {
+        "at": "2026-10-18T17:44:24+00:00",
+        "action": "edited",
+        "note": "目标内容已更新；范围或完成标准改变时需重新授权。",
+        "before": {
+          "next_action": "沿原顺序推进质量的资料资格：优先核适合A股/宽基ETF主战场的历史候选成员、退出与行业，以及各报告版本真实公开日期；需要ETF质量时另核历史成分及权重，不能用当前名单回填过去。满足共同资料后再固定一个盈利能力测量，与动量及简单参照比较。价值复用合格资料；防御已有保存预测选择未胜过简单参照，暂缓此固定模型无理由延伸。更广的收益、回撤、分散、参与和操作价值仍分别验，不接管原LEI/小时/账户或系统UI。",
+          "milestones": [
+            {
+              "id": "traceable-workflow",
+              "title": "下一项实际研究留下金融现象/竞争解释、重复关系、准确对象与日期、当时可用资料、简单对手、冻结版本、效果及增量表、失败与下一步理由；现有文档不替代实际使用验证。",
+              "done": true
+            },
+            {
+              "id": "momentum-reuse",
+              "title": "P1 动量复核：对照准确定义/实现与旧输入、分组效果、成本及待审状态，保留负结果，明确哪些结论可复用和哪些缺口值得新检验；不以重跑或通过测试当有效。",
+              "done": true
+            },
+            {
+              "id": "quality-profitability",
+              "title": "P2 盈利能力/质量：先完成财务资料公开日期、修订、历史成员/退出、行业可比性资格核查；合格后按独立合同比较在已有动量之外的收益、风险和其他用途增量，缺资料可结论为不足。",
+              "done": false
+            },
+            {
+              "id": "value",
+              "title": "P3 价值：先限定盈利/净资产/现金流的一项有金融理由的测量，区分低估与恶化，核对与质量和动量重复信息及长期等待成本，再决定有界检验或暂缓。",
+              "done": false
+            },
+            {
+              "id": "defensive",
+              "title": "P4 低风险/防御：明确要降低什么风险，区分低波动与少持仓，和可执行简单对手比较回撤、亏损恢复、分散、放弃上涨、换手及操作负担，保留无改善结果。",
+              "done": false
+            }
+          ]
+        },
+        "after": {
+          "next_action": "按用户新增明确要求，先补十年以上大样本能力：2014年末历史名单中固定600，含后来退出，2015—2025月度检验中期强弱、简单对手及条件增量；Luna实际采集/执行，Sol实现，Astra设计/审查，失败保留。先完成这项实际闭环再继续质量、价值、防御；不接管原策略因子实现。",
+          "milestones": [
+            {
+              "id": "traceable-workflow",
+              "title": "下一项实际研究留下金融现象/竞争解释、重复关系、准确对象与日期、当时可用资料、简单对手、冻结版本、效果及增量表、失败与下一步理由；现有文档不替代实际使用验证。",
+              "done": true
+            },
+            {
+              "id": "momentum-reuse",
+              "title": "P1 动量复核：对照准确定义/实现与旧输入、分组效果、成本及待审状态，保留负结果，明确哪些结论可复用和哪些缺口值得新检验；不以重跑或通过测试当有效。",
+              "done": true
+            },
+            {
+              "id": "decade-large-sample-cycle",
+              "title": "P1补强：完成至少十年、明显扩大历史候选且保留退出的实际因子发现检验；金融假设、Luna执行、Astra审核、性能及已有信息增量、不确定性和失败一并交付。六ETF旧结果不能替代该项。",
+              "done": false
+            },
+            {
+              "id": "quality-profitability",
+              "title": "P2 盈利能力/质量：先完成财务资料公开日期、修订、历史成员/退出、行业可比性资格核查；合格后按独立合同比较在已有动量之外的收益、风险和其他用途增量，缺资料可结论为不足。",
+              "done": false
+            },
+            {
+              "id": "value",
+              "title": "P3 价值：先限定盈利/净资产/现金流的一项有金融理由的测量，区分低估与恶化，核对与质量和动量重复信息及长期等待成本，再决定有界检验或暂缓。",
+              "done": false
+            },
+            {
+              "id": "defensive",
+              "title": "P4 低风险/防御：明确要降低什么风险，区分低波动与少持仓，和可执行简单对手比较回撤、亏损恢复、分散、放弃上涨、换手及操作负担，保留无改善结果。",
+              "done": false
+            }
+          ]
+        }
+      },
+      {
+        "at": "2026-10-18T17:44:24+00:00",
+        "action": "note",
+        "note": "用户新增明确授权：六个ETF和较短年限不足，要求至少十年、更大样本，简单模型如Luna执行回测并盯结果，Astra负责金融假设、审核评估及必要自循环。本次先推进600历史股票11年月度选择的有限公开资料扩充与检验，不把原traceable-workflow/momentum-reuse已完成解释为大样本能力建成；无生产/交易/付费/原策略改写。历史名单及资料探测已获，采集中，尚无本批效果。",
+        "from_status": "awaiting_approval",
+        "to_status": "awaiting_approval",
+        "scope": ""
+      }
+    ],
+    "progress": {
+      "done": 2,
+      "total": 6
+    }
+  },
+  "after": {
+    "title": "低频选标的候选：动量复核、质量、价值与防御",
+    "purpose": "用户2026-10-19明确认可四类候选并要求列TODO、可复用的先复用且仍要检验，认可可追踪研究链。主战场仍是宽基与ETF；在同一日期比较谁更值得持有，和单标的操作时机、何时切换因子分别研究。顺序：①中期相对动量只复核已有定义与结果，先当简单参照；②盈利能力/质量先核当时已公开财务资料及行业可比性，作为独立股票研究候选；③价值核便宜的原因，区分低估与经营恶化；④低风险/防御按回撤、分散、参与代价和操作负担评价，不限定必须多赚钱。财务指标不直接移植黄金、债券或混合ETF。动量已有弱和负结果，不能改名重跑。认可的是研究方向和流程，不代表任何因子已有效。",
+    "parent_id": "okr-cd1a0bd5532c",
+    "priority": "high",
+    "owner": "本对话：低频因子发现（独立选标的与多用途价值）",
+    "target_date": null,
+    "next_action": "按用户新增明确要求，先补十年以上大样本能力：2014年末历史名单中固定600，含后来退出，2015—2025月度检验中期强弱、简单对手及条件增量；Luna实际采集/执行，Sol实现，Astra设计/审查，失败保留。先完成这项实际闭环再继续质量、价值、防御；不接管原策略因子实现。",
+    "evidence": "已完成方法审查见成果分支codex/personal-lowfreq-system-audit-20261018@196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a：docs/experiments/lowfreq-selection-and-timing-2026-10-19.md及raw。可复用mixed.momentum.raw@1.0.0、mixed.momentum.rank@1.0.0；factor-momentum-rank-reuse-2026-09-22；六ETF factor-etf-momentum-effect-b1-2026-09-23/report-draft仍主控待审且未过原正向筛选；rotation-reconstructed-four-way-2026-09-09含波动筛选/退出不能当纯动量效果。质量/价值/防御尚无本轮效果结论。RD-Agent已核通用执行与恢复，模型反馈两次失败，完整金融循环未核；复用组织方法不重装框架。\n\n2026-10-19首轮已执行：六ETF2022—2026H1保存动量结果复核+一次诊断，最高两只比六只平均少0.1062个百分点（未来21日变化，非账户收益）。四ETF2025/2026H1保存风险预测选择诊断317日，候选仅11日不同于各ETF历史平均参照，所选个体未来日波动多0.00324个百分点，未胜过强简单对手；非组合波动或回撤。质量真实取得SEC Apple两份官方JSON，六字段/三截点核申报时点，原件403保留；只是资料资格样例，未解决A股历史候选/退出/行业及财报版本。价值缺同类资料；防御完整收益风险代价未完成。两个保存诊断无新拟合/旧实验重跑；Sol独核关键数值，Astra审方法，失败/来源/计划/反馈均留痕。报告及manifest在上述准确成果commit。",
+    "milestones": [
+      {
+        "id": "traceable-workflow",
+        "title": "下一项实际研究留下金融现象/竞争解释、重复关系、准确对象与日期、当时可用资料、简单对手、冻结版本、效果及增量表、失败与下一步理由；现有文档不替代实际使用验证。",
+        "done": true
+      },
+      {
+        "id": "momentum-reuse",
+        "title": "P1 动量复核：对照准确定义/实现与旧输入、分组效果、成本及待审状态，保留负结果，明确哪些结论可复用和哪些缺口值得新检验；不以重跑或通过测试当有效。",
+        "done": true
+      },
+      {
+        "id": "decade-large-sample-cycle",
+        "title": "P1补强：完成至少十年、明显扩大历史候选且保留退出的实际因子发现检验；金融假设、Luna执行、Astra审核、性能及已有信息增量、不确定性和失败一并交付。六ETF旧结果不能替代该项。",
+        "done": false
+      },
+      {
+        "id": "quality-profitability",
+        "title": "P2 盈利能力/质量：先完成财务资料公开日期、修订、历史成员/退出、行业可比性资格核查；合格后按独立合同比较在已有动量之外的收益、风险和其他用途增量，缺资料可结论为不足。",
+        "done": false
+      },
+      {
+        "id": "value",
+        "title": "P3 价值：先限定盈利/净资产/现金流的一项有金融理由的测量，区分低估与恶化，核对与质量和动量重复信息及长期等待成本，再决定有界检验或暂缓。",
+        "done": false
+      },
+      {
+        "id": "defensive",
+        "title": "P4 低风险/防御：明确要降低什么风险，区分低波动与少持仓，和可执行简单对手比较回撤、亏损恢复、分散、放弃上涨、换手及操作负担，保留无改善结果。",
+        "done": false
+      }
+    ],
+    "links": [
+      {
+        "label": "已完成的候选及旧结果审查",
+        "url": "https://github.com/lige1687/biao-signal-system/blob/196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a/docs/experiments/lowfreq-selection-and-timing-2026-10-19.md"
+      },
+      {
+        "label": "现有问题驱动研究目标",
+        "url": "/upgrades?goal=okr-ff1e0a86fbac"
+      },
+      {
+        "label": "现有方法变化闭环",
+        "url": "/upgrades?goal=okr-aff4c096efb7"
+      },
+      {
+        "label": "首轮实际结果：动量、防御选择与质量资料",
+        "url": "https://github.com/lige1687/biao-signal-system/blob/2965f4ffcff8e7bee955e3ec63523a7f6bfacdb9/docs/experiments/lowfreq-candidate-first-cycle-2026-10-19.md"
+      }
+    ],
+    "kind": "concrete",
+    "id": "okr-8830a1f1ec4f",
+    "version": 9,
+    "status": "in_progress",
+    "created_at": "2026-10-18T16:30:32+00:00",
+    "updated_at": "2026-10-18T17:46:59+00:00",
+    "authorization": {
+      "granted": true,
+      "scope": "用户2026-10-19明确授权：按既有候选顺序推进，先补至少十年、更大历史样本的真实因子发现与验证；可在固定名单/请求量内补必要公开资料，Luna机械采集与执行监测，Astra金融假设/科学审核/评估，复杂研究适配用Sol。旧结果复用，不为正结果调参；其他候选按原授权接续。原LEI/小时/账户和系统UI归原owner；不改原策略/生产/真实交易，不付费或扩大权限、不重跑封存、不主动通知。",
+      "at": "2026-10-18T17:46:59+00:00"
+    },
+    "history": [
+      {
+        "at": "2026-10-18T16:30:32+00:00",
+        "action": "created",
+        "note": "目标已登记，登记不会启动执行。"
+      },
+      {
+        "at": "2026-10-18T16:50:55+00:00",
+        "action": "authorize",
+        "note": "用户2026-10-19明确：“按这个顺序去持续做吧，并且同步分析…最大缺口/痛点/迟迟看不到成果；注意和另一个因子实现的对话区分开。”",
+        "from_status": "planned",
+        "to_status": "approved",
+        "scope": "按本轮用户要求依次推进低频选标的候选和研究侧缺口分析。先复用并核验动量旧证据，再质量、价值、防御；必要新比较固定问题、资料和累计预算。允许本地读资料、离线有限研究、报告与目标进度；不重跑封存、不接管日/小时/原A或系统UI、不改生产/交易/通知、不付费。"
+      },
+      {
+        "at": "2026-10-18T16:50:57+00:00",
+        "action": "start",
+        "note": "开始首轮：动量旧证据可复用性及必要缺项检验，随后质量资料资格；并行只读财务库存和证据源链，不触及原因子实现日/小时比较。",
+        "from_status": "approved",
+        "to_status": "in_progress",
+        "scope": ""
+      },
+      {
+        "at": "2026-10-18T17:17:28+00:00",
+        "action": "edited",
+        "note": "进展已更新。",
+        "before": {
+          "owner": "本对话：低频因子发现（后续研究待启动）",
+          "next_action": "先沿docs/research/factor-discovery-playbook.md复用准确动量定义、六ETF待审草稿、旧选择与时机四组比较，核版本/样本/成本/负结果/负责人并给出能复用和不能回答的边界；盈利能力先列真实可用财务资料、公开日期与修订缺口。只在旧证据不能回答的具体新问题上，按现有授权及合同固定范围和预算再执行。当前待办登记不启动实验；不接管原有策略或系统实现对话，不重跑封存实验。",
+          "evidence": "已完成方法审查见成果分支codex/personal-lowfreq-system-audit-20261018@196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a：docs/experiments/lowfreq-selection-and-timing-2026-10-19.md及raw。可复用mixed.momentum.raw@1.0.0、mixed.momentum.rank@1.0.0；factor-momentum-rank-reuse-2026-09-22；六ETF factor-etf-momentum-effect-b1-2026-09-23/report-draft仍主控待审且未过原正向筛选；rotation-reconstructed-four-way-2026-09-09含波动筛选/退出不能当纯动量效果。质量/价值/防御尚无本轮效果结论。RD-Agent已核通用执行与恢复，模型反馈两次失败，完整金融循环未核；复用组织方法不重装框架。",
+          "milestones": [
+            {
+              "id": "traceable-workflow",
+              "title": "下一项实际研究留下金融现象/竞争解释、重复关系、准确对象与日期、当时可用资料、简单对手、冻结版本、效果及增量表、失败与下一步理由；现有文档不替代实际使用验证。",
+              "done": false
+            },
+            {
+              "id": "momentum-reuse",
+              "title": "P1 动量复核：对照准确定义/实现与旧输入、分组效果、成本及待审状态，保留负结果，明确哪些结论可复用和哪些缺口值得新检验；不以重跑或通过测试当有效。",
+              "done": false
+            },
+            {
+              "id": "quality-profitability",
+              "title": "P2 盈利能力/质量：先完成财务资料公开日期、修订、历史成员/退出、行业可比性资格核查；合格后按独立合同比较在已有动量之外的收益、风险和其他用途增量，缺资料可结论为不足。",
+              "done": false
+            },
+            {
+              "id": "value",
+              "title": "P3 价值：先限定盈利/净资产/现金流的一项有金融理由的测量，区分低估与恶化，核对与质量和动量重复信息及长期等待成本，再决定有界检验或暂缓。",
+              "done": false
+            },
+            {
+              "id": "defensive",
+              "title": "P4 低风险/防御：明确要降低什么风险，区分低波动与少持仓，和可执行简单对手比较回撤、亏损恢复、分散、放弃上涨、换手及操作负担，保留无改善结果。",
+              "done": false
+            }
+          ],
+          "links": [
+            {
+              "label": "已完成的候选及旧结果审查",
+              "url": "https://github.com/lige1687/biao-signal-system/blob/196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a/docs/experiments/lowfreq-selection-and-timing-2026-10-19.md"
+            },
+            {
+              "label": "现有问题驱动研究目标",
+              "url": "/upgrades?goal=okr-ff1e0a86fbac"
+            },
+            {
+              "label": "现有方法变化闭环",
+              "url": "/upgrades?goal=okr-aff4c096efb7"
+            }
+          ]
+        },
+        "after": {
+          "owner": "本对话：低频因子发现（独立选标的与多用途价值）",
+          "next_action": "沿原顺序推进质量的资料资格：优先核适合A股/宽基ETF主战场的历史候选成员、退出与行业，以及各报告版本真实公开日期；需要ETF质量时另核历史成分及权重，不能用当前名单回填过去。满足共同资料后再固定一个盈利能力测量，与动量及简单参照比较。价值复用合格资料；防御已有保存预测选择未胜过简单参照，暂缓此固定模型无理由延伸。更广的收益、回撤、分散、参与和操作价值仍分别验，不接管原LEI/小时/账户或系统UI。",
+          "evidence": "已完成方法审查见成果分支codex/personal-lowfreq-system-audit-20261018@196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a：docs/experiments/lowfreq-selection-and-timing-2026-10-19.md及raw。可复用mixed.momentum.raw@1.0.0、mixed.momentum.rank@1.0.0；factor-momentum-rank-reuse-2026-09-22；六ETF factor-etf-momentum-effect-b1-2026-09-23/report-draft仍主控待审且未过原正向筛选；rotation-reconstructed-four-way-2026-09-09含波动筛选/退出不能当纯动量效果。质量/价值/防御尚无本轮效果结论。RD-Agent已核通用执行与恢复，模型反馈两次失败，完整金融循环未核；复用组织方法不重装框架。\n\n2026-10-19首轮已执行：六ETF2022—2026H1保存动量结果复核+一次诊断，最高两只比六只平均少0.1062个百分点（未来21日变化，非账户收益）。四ETF2025/2026H1保存风险预测选择诊断317日，候选仅11日不同于各ETF历史平均参照，所选个体未来日波动多0.00324个百分点，未胜过强简单对手；非组合波动或回撤。质量真实取得SEC Apple两份官方JSON，六字段/三截点核申报时点，原件403保留；只是资料资格样例，未解决A股历史候选/退出/行业及财报版本。价值缺同类资料；防御完整收益风险代价未完成。两个保存诊断无新拟合/旧实验重跑；Sol独核关键数值，Astra审方法，失败/来源/计划/反馈均留痕。报告及manifest在上述准确成果commit。",
+          "milestones": [
+            {
+              "id": "traceable-workflow",
+              "title": "下一项实际研究留下金融现象/竞争解释、重复关系、准确对象与日期、当时可用资料、简单对手、冻结版本、效果及增量表、失败与下一步理由；现有文档不替代实际使用验证。",
+              "done": true
+            },
+            {
+              "id": "momentum-reuse",
+              "title": "P1 动量复核：对照准确定义/实现与旧输入、分组效果、成本及待审状态，保留负结果，明确哪些结论可复用和哪些缺口值得新检验；不以重跑或通过测试当有效。",
+              "done": true
+            },
+            {
+              "id": "quality-profitability",
+              "title": "P2 盈利能力/质量：先完成财务资料公开日期、修订、历史成员/退出、行业可比性资格核查；合格后按独立合同比较在已有动量之外的收益、风险和其他用途增量，缺资料可结论为不足。",
+              "done": false
+            },
+            {
+              "id": "value",
+              "title": "P3 价值：先限定盈利/净资产/现金流的一项有金融理由的测量，区分低估与恶化，核对与质量和动量重复信息及长期等待成本，再决定有界检验或暂缓。",
+              "done": false
+            },
+            {
+              "id": "defensive",
+              "title": "P4 低风险/防御：明确要降低什么风险，区分低波动与少持仓，和可执行简单对手比较回撤、亏损恢复、分散、放弃上涨、换手及操作负担，保留无改善结果。",
+              "done": false
+            }
+          ],
+          "links": [
+            {
+              "label": "已完成的候选及旧结果审查",
+              "url": "https://github.com/lige1687/biao-signal-system/blob/196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a/docs/experiments/lowfreq-selection-and-timing-2026-10-19.md"
+            },
+            {
+              "label": "现有问题驱动研究目标",
+              "url": "/upgrades?goal=okr-ff1e0a86fbac"
+            },
+            {
+              "label": "现有方法变化闭环",
+              "url": "/upgrades?goal=okr-aff4c096efb7"
+            },
+            {
+              "label": "首轮实际结果：动量、防御选择与质量资料",
+              "url": "https://github.com/lige1687/biao-signal-system/blob/2965f4ffcff8e7bee955e3ec63523a7f6bfacdb9/docs/experiments/lowfreq-candidate-first-cycle-2026-10-19.md"
+            }
+          ]
+        }
+      },
+      {
+        "at": "2026-10-18T17:17:28+00:00",
+        "action": "note",
+        "note": "首轮限定研究已交付，完成可追踪实际研究链和动量复核两项，其他完成标准保留未勾选。防御资格独核发现可执行部分后继续完成四ETF选择诊断，没有把质量缺资料泛化成全部受阻。总目标仍进行中；未启动后台回测或自动通知，未改生产或原策略。",
+        "from_status": "in_progress",
+        "to_status": "in_progress",
+        "scope": ""
+      },
+      {
+        "at": "2026-10-18T17:44:24+00:00",
+        "action": "edited",
+        "note": "目标内容已更新；范围或完成标准改变时需重新授权。",
+        "before": {
+          "next_action": "沿原顺序推进质量的资料资格：优先核适合A股/宽基ETF主战场的历史候选成员、退出与行业，以及各报告版本真实公开日期；需要ETF质量时另核历史成分及权重，不能用当前名单回填过去。满足共同资料后再固定一个盈利能力测量，与动量及简单参照比较。价值复用合格资料；防御已有保存预测选择未胜过简单参照，暂缓此固定模型无理由延伸。更广的收益、回撤、分散、参与和操作价值仍分别验，不接管原LEI/小时/账户或系统UI。",
+          "milestones": [
+            {
+              "id": "traceable-workflow",
+              "title": "下一项实际研究留下金融现象/竞争解释、重复关系、准确对象与日期、当时可用资料、简单对手、冻结版本、效果及增量表、失败与下一步理由；现有文档不替代实际使用验证。",
+              "done": true
+            },
+            {
+              "id": "momentum-reuse",
+              "title": "P1 动量复核：对照准确定义/实现与旧输入、分组效果、成本及待审状态，保留负结果，明确哪些结论可复用和哪些缺口值得新检验；不以重跑或通过测试当有效。",
+              "done": true
+            },
+            {
+              "id": "quality-profitability",
+              "title": "P2 盈利能力/质量：先完成财务资料公开日期、修订、历史成员/退出、行业可比性资格核查；合格后按独立合同比较在已有动量之外的收益、风险和其他用途增量，缺资料可结论为不足。",
+              "done": false
+            },
+            {
+              "id": "value",
+              "title": "P3 价值：先限定盈利/净资产/现金流的一项有金融理由的测量，区分低估与恶化，核对与质量和动量重复信息及长期等待成本，再决定有界检验或暂缓。",
+              "done": false
+            },
+            {
+              "id": "defensive",
+              "title": "P4 低风险/防御：明确要降低什么风险，区分低波动与少持仓，和可执行简单对手比较回撤、亏损恢复、分散、放弃上涨、换手及操作负担，保留无改善结果。",
+              "done": false
+            }
+          ]
+        },
+        "after": {
+          "next_action": "按用户新增明确要求，先补十年以上大样本能力：2014年末历史名单中固定600，含后来退出，2015—2025月度检验中期强弱、简单对手及条件增量；Luna实际采集/执行，Sol实现，Astra设计/审查，失败保留。先完成这项实际闭环再继续质量、价值、防御；不接管原策略因子实现。",
+          "milestones": [
+            {
+              "id": "traceable-workflow",
+              "title": "下一项实际研究留下金融现象/竞争解释、重复关系、准确对象与日期、当时可用资料、简单对手、冻结版本、效果及增量表、失败与下一步理由；现有文档不替代实际使用验证。",
+              "done": true
+            },
+            {
+              "id": "momentum-reuse",
+              "title": "P1 动量复核：对照准确定义/实现与旧输入、分组效果、成本及待审状态，保留负结果，明确哪些结论可复用和哪些缺口值得新检验；不以重跑或通过测试当有效。",
+              "done": true
+            },
+            {
+              "id": "decade-large-sample-cycle",
+              "title": "P1补强：完成至少十年、明显扩大历史候选且保留退出的实际因子发现检验；金融假设、Luna执行、Astra审核、性能及已有信息增量、不确定性和失败一并交付。六ETF旧结果不能替代该项。",
+              "done": false
+            },
+            {
+              "id": "quality-profitability",
+              "title": "P2 盈利能力/质量：先完成财务资料公开日期、修订、历史成员/退出、行业可比性资格核查；合格后按独立合同比较在已有动量之外的收益、风险和其他用途增量，缺资料可结论为不足。",
+              "done": false
+            },
+            {
+              "id": "value",
+              "title": "P3 价值：先限定盈利/净资产/现金流的一项有金融理由的测量，区分低估与恶化，核对与质量和动量重复信息及长期等待成本，再决定有界检验或暂缓。",
+              "done": false
+            },
+            {
+              "id": "defensive",
+              "title": "P4 低风险/防御：明确要降低什么风险，区分低波动与少持仓，和可执行简单对手比较回撤、亏损恢复、分散、放弃上涨、换手及操作负担，保留无改善结果。",
+              "done": false
+            }
+          ]
+        }
+      },
+      {
+        "at": "2026-10-18T17:44:24+00:00",
+        "action": "note",
+        "note": "用户新增明确授权：六个ETF和较短年限不足，要求至少十年、更大样本，简单模型如Luna执行回测并盯结果，Astra负责金融假设、审核评估及必要自循环。本次先推进600历史股票11年月度选择的有限公开资料扩充与检验，不把原traceable-workflow/momentum-reuse已完成解释为大样本能力建成；无生产/交易/付费/原策略改写。历史名单及资料探测已获，采集中，尚无本批效果。",
+        "from_status": "awaiting_approval",
+        "to_status": "awaiting_approval",
+        "scope": ""
+      },
+      {
+        "at": "2026-10-18T17:46:59+00:00",
+        "action": "authorize",
+        "note": "记录当前聊天已有明确授权；新增十年大样本标准使系统自动改为待授权，现按用户原话登记，不再次向用户索要相同许可。",
+        "from_status": "awaiting_approval",
+        "to_status": "approved",
+        "scope": "用户2026-10-19明确授权：按既有候选顺序推进，先补至少十年、更大历史样本的真实因子发现与验证；可在固定名单/请求量内补必要公开资料，Luna机械采集与执行监测，Astra金融假设/科学审核/评估，复杂研究适配用Sol。旧结果复用，不为正结果调参；其他候选按原授权接续。原LEI/小时/账户和系统UI归原owner；不改原策略/生产/真实交易，不付费或扩大权限、不重跑封存、不主动通知。"
+      },
+      {
+        "at": "2026-10-18T17:46:59+00:00",
+        "action": "start",
+        "note": "十年大样本资料已在实际采集，设计预审和独立评价器合成验证已执行；尚未获得本批市场效果。",
+        "from_status": "approved",
+        "to_status": "in_progress",
+        "scope": ""
+      }
+    ],
+    "progress": {
+      "done": 2,
+      "total": 6
+    }
+  },
+  "readback_verified": true
+}

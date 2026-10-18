@@ -1,0 +1,131 @@
+{
+  "schema": "bounded-cross-sectional-study/1.0",
+  "research_id": "lowfreq-expanded-discovery-2026-10-19",
+  "version": "design-v3",
+  "frozen_before_performance": true,
+  "frozen_at": "2026-10-19T01:49:29.150734+08:00",
+  "question": "在2014年底当时已上市A股中，中期相对强弱能否帮助月度选择，并超越最近一个月涨幅及波动/成交活跃程度这些简单信息？",
+  "mechanism_hypothesis": "信息可能逐步被理解和反映，中期较强股票随后仍较强；最近短期波动可能暂时反转。关联不能单独证明信息反应缓慢。",
+  "competing_explanations": [
+    "行业趋势",
+    "波动/流动性构成",
+    "少数年份和个股",
+    "幸存者及退出缺失",
+    "公司行动与执行摩擦"
+  ],
+  "original_strategy_relation": "独立研究用途；不修改原LEI规则，不与日线/小时/回调任务重叠；股票结果不替代ETF可用性",
+  "definition": {
+    "reference": "mixed.momentum.raw@1.0.0",
+    "formula": "q.shift(21)/q.shift(252)-1",
+    "q": "本股票日期升序、实际交易且正数的BaoStock前复权收盘价；有效报价位移，非252共同交易日；停牌天无新有效报价",
+    "direction": "高分排前，按code字典顺序打破精确同分",
+    "status": "reuse registered numeric definition; provider economic-price proxy qualification separately assessed",
+    "baseline_short": "q/q.shift(21)-1",
+    "volatility": "在共同交易日日历上前60个每日账面价格变化的样本标准差(ddof=1)*sqrt(252)；真实停牌来源报价保留，漏报不填",
+    "liquidity": "共同交易日前20日成交金额均值；真实停牌amount0保留，供应商漏报不填",
+    "future_changes_forbidden": true,
+    "quote_spans": "输出动量21/252有效报价实际日历跨度，不称所有股票具有相同年/月窗口"
+  },
+  "universe": {
+    "asof": "2014-12-31",
+    "source": "BaoStock historical day all_stock and stock_basic identity cross-check; complete exchange-level verification not yet assumed",
+    "type": "沪深A股，sh60/sz00/sz30；排除指数B股；不按今天存续状态筛选",
+    "selection": "先形成完整历史名单，再按sha256(\"lowfreq-20141231-v1|\"+code)升序取前600；名单少于600则全部但不得宣称满足600",
+    "later_entrants": false,
+    "replace_failed_or_delisted": false,
+    "sample_size": 600,
+    "monthly_eligibility": "月末actual交易、253有效quote，历史明确isST=0，动量/短期/共同日历vol60+amount20均有限。明确0停牌可排除，已退出/尚未上市可排除；请求失败/预热之后应在市期间资料漏行/非法ST不当普通不合格，阻断受影响主比较月，报告原因、实际月数而非空月0。无法证实全候选数据覆盖时不得冒称完整600个月度比较",
+    "actual_years": "收益评价2015-01至2025-12，共132月；预热不算评价年限",
+    "raw_window": [
+      "2013-01-01",
+      "2026-01-15"
+    ]
+  },
+  "timing": {
+    "decision": "每月最后交易日收盘后；评价月为之后第一个月",
+    "entry": "次交易日收盘",
+    "exit": "下一次月末决策后的次交易日收盘",
+    "claim": "延后一天的价格变化/选择价值，不声称限价、停牌和真实账户可成交"
+  },
+  "methods": [
+    "pool_equal",
+    "momentum_top20",
+    "short_top20",
+    "momentum_q1",
+    "momentum_q2",
+    "momentum_q3",
+    "momentum_q4",
+    "momentum_q5"
+  ],
+  "top_selection": "ceil(N*0.2), same universe, equal target weights. quintiles rank partition deterministic",
+  "increment": "每月按vol60排序分3组，每个波动组按amount20再分3组；每组中期动量最高ceil(n/5)与本组全体对照，再按该组n/N汇总；背景控制只有波动与成交额，行业尚未排除",
+  "missing_outcomes": {
+    "no_renormalization": true,
+    "unknown_entry_or_exit": "retain original target weight; report unknown weight and counts, observed weighted contribution separately; no backfill chosen names",
+    "scenarios": [
+      "unknown monthly total return -100%",
+      "unknown monthly total return 0%"
+    ],
+    "scenario_warning": "仅两种明确情景，并非对合并/退出最终价值的真实上下界；缺失不得默认为0",
+    "source_suspension_close": "valid known source halt close included as marked-price outcome and flagged nonactionable, not treated as missing. Actual absent/invalid endpoint remains unknown; both endpoints finite strictlypositive",
+    "relative_adversarial": "对同一股票的candidate-minus-baseline deltaweight，unknown[-1,0]不利贡献=-sum(positive_deltaweight)，有利贡献=-sum(negative_deltaweight)；同股票结果跨方法共享，不单独改变各方法收益；此区间仅情景非真实价值界限; applies also to9/27 conditional methods after combining per-stock weights, not summing arbitrary independent cell intervals",
+    "empty_month": "任何无可评支持的方法/月为null；不入平均或当0；公布实际months与coverage，>=10年必须真实实际评价满足"
+  },
+  "primary_metrics": [
+    "monthly candidate-minus-pool mean percentage points",
+    "candidate-minus-short mean percentage points",
+    "conditional increment over vol/liquidity",
+    "all quintile means",
+    "unknown-outcome target weight",
+    "conditional increment over vol/liquidity/short-term return (27 cells)"
+  ],
+  "uncertainty": {
+    "paired_dates": true,
+    "circular_month_block_lengths": [
+      6,
+      12
+    ],
+    "draws": 2000,
+    "seed": 20261019,
+    "interval": [
+      2.5,
+      97.5
+    ],
+    "interpretation": "保留相邻月份联系的历史不确定范围，不代表新资料确认",
+    "scope": "paired raw comparisons and 9/27 monthly combined increments, same full132 calendar axis with invalid months null"
+  },
+  "secondary_value_metrics": [
+    "monthly std, worst month, mean worst10% months",
+    "hypothetical monthly marked-price cumulative path and peak-to-trough decline, explicitly non-investable estimate",
+    "target-list half-L1 replacement turnover, not actual drifted trading turnover",
+    "maximum sustainable per-target-replacement cost sensitivity, not real fee quote"
+  ],
+  "robustness": [
+    "fixed2015-2019 and2020-2025",
+    "year by year",
+    "leave-one-year-out",
+    "per-stock excess contribution and remove largest5 contributors post-hoc diagnostic without reranking",
+    "per-stock observed contributions use same actual defined months denominator as headline observed increment; exact sum reconciliation"
+  ],
+  "trial_budget": {
+    "core": 1,
+    "necessary_followups_max": 3,
+    "no_grid": true
+  },
+  "workflow_boundary": "native continuous/binary prediction workflow does not support same-day selection and source qfq economic proxy; dedicated research-tool module with preflight/synthetic/freeze/source-hash/ledger/independent reconciliation; do not forge native workflow receipt",
+  "evidence_stage": "retrospective historical exploratory validation; old momentum family exposed, not untouched confirmation",
+  "production_authorized": false,
+  "supersedes": {
+    "path": "design-v2.json",
+    "sha256": "fe06b9d7be560cd27d131b8ba1cdb9dda2571e2435f0426a57b879f87d953295",
+    "reason": "source-only qualification found valid halt rows with empty amount; Astra/root correct valuation vs execution, complete conditional uncertainty and aligned denominators; no market performance seen"
+  },
+  "increment_short_control": "预设补充：vol3组内amount3组内short_return3，共27组；各组中期最高ceil(n/5)与本组全体，按n/N汇总，报告稀疏支持；9组为波动/成交额条件增量，27组增加短期涨幅，不代表排除行业",
+  "data_normalization": {
+    "halt_amount": "only explicit tradestatus=\"0\" and blank string/None amount normalizes to0; preserve original raw and counts. Nonblank invalid/positive halt amount is conflict, traded missing remains error",
+    "halt_value": "only explicit status0, finite positive endpoint close uses known source marked price; flags no-trade separately; malformed status or nonpositive endpoint is unknown/error",
+    "actionability": "each method/month records entry-halt/exit-halt/either-halt target weights and monthly frequency. No reranking after future halt",
+    "st": "only explicit0/1, unknown not normal"
+  },
+  "method_reporting": "mean and actual month count remain available on valid months; cumulative/risk path leftnull across missing months; blocked months never zero"
+}
