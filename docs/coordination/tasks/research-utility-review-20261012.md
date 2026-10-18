@@ -1,3 +1,16 @@
+# 原A证据检查与小时入口已交付 2026-10-18T18:28:16.194723+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status completed仅本轮有界证据检查；scope_released true。完整LEI效果仍not_evaluated，原目标in_progress。checked_coordination_sha=bd6a2c7fbf8f2cde4d05c41dd410ae78f156a700；checked_at=2026-10-18T18:28:16.194723+08:00；已读COORDINATION、自身、research-dispatch-controller、personal-lowfreq-system-audit最新方法交付及investor-workspace-simplification最新机会摘要范围。方法playbook/UI由原owner负责，无写入冲突、不重复实验。
+- 已实现研究层original_a_evidence.py与专属单测；47项合成检查通过，显式核同产品、周期、定义/来源、原义资格及当时可得/有效；代理、缺失/晚到/过期未知不作通过。底部与小周期AND同成立，首次不作硬筛选；目标区域仅算上下界，不代选有利端点，未定原义不能通过。代码检查不证明策略有效。
+- 复用旧接受7条，原ID和旧判断不动；原义合格通过0、明确否定0、未知7。旧3底部代理/4EMA20收复由Sol独核，Astra独审语义；旧2实际买入和ETF拒绝原因只读。原文首次特别重视不能等同完整A只能首次，同日身份不明仅影响该标签/分组，不再笼统阻断全部原A。
+- 实际已安装BaoStock一次行情查询取得中证500ETF 2026-03-10四根60分钟K线，OHLC/去重/顺序/合并独核通过。连续前史、时点标签、价格基准/公司行动与历史修订仍未合格；1日样例不能用于完整A。当前长桥权限没有重测，旧额度0不作今天结论；无购买/安装/权限变化。桌面lianghuadoc备份手册去格式后与权威正文相同，无新增逐期原图。
+- 报告docs/experiments/original-a-confirmation-evidence-2026-10-18.md SHA1bea1c36d637fe8875b5d4d002d9555ab080dfc6861a8e01623cd0cd9162eb28；同名实现/测试和docs/experiments/raw/lei-original-rule-cases-2026-10-18/continuation小证据在主/研究树核同；旧registry键保持，新键/INDEX已归档。API全文3428字符、Agent指纹verified且未截断、5188两表/链接和截图验收通过；原报告literal粗体修复后重读，归置通过。系统owner已获增量与展示边界，不代验其当前产品开发。
+- 失败保留：存储拒绝复用已有资料输出，另建独立审计阶段并按计划绑定成功，原件不覆盖；初实现周期/来源资格漏项已补并过最终47检查；少数只读路径定位失败后转准确主仓路径，无失败写入。quote约2.0985秒、保存记录审计0.5477秒；0新市场回测/拟合/参数搜索，旧2082.246742416057/3600秒不重置，真实token费用未知。
+- 原目标okr-ff1e0a86fbac仅note155→156、in_progress、保护字段与旧历史不动。缺原目标/失效与底部锚点、合格连续小周期资料；之后才能比较原确认新增帮助，继而仓位/风控/共同资金。具体恢复项及输入位置/指纹在continuation/closure.json，不许把7未知说成7失败或胜率0。
+- 成果分支codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be；代码报告仍本地未提交未推。远端仅本协调元数据；不宣称完整策略完成或有效因子新增。
+
+---
+
 # 原A确认语义与实际放行机会接续 2026-10-18T18:11:07.356124+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status active；scope_released false；checked_coordination_sha=9ee684656de99d8384a18f78322e407620fa3d6c；checked_at=2026-10-18T18:11:07.356124+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018新增方法流程范围、investor-workspace-simplification-20261012、中控。personal正做通用发现流程，本轮不重复；系统UI/API不动。
