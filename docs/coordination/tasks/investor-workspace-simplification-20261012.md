@@ -1,3 +1,15 @@
+# 今日重点与Agent输出：按优先级打磨开工 2026-10-18T13:50:56.516171+08:00
+
+checked_coordination_sha=9a7d2e997b8a3e65f0d3b7a7eaf67730ccb18ce7；已读JSON列五任务最新段和COORDINATION1.1；本批为决策辅助展示/资料叙事层，不改技术判定与策略源。原策略指纹开工复核，原研究/输出验收复用。用户授权审查并按优先级直接做；新指示用DS最新模型、原API，检索Twitter与开源最佳实践并逐步实际验效果。只改机会链路，别的Agent配置保持。
+
+P1今日重点保留风险与双侧条件、日期一致、周末最近保存记录；P1简报显式待确认/关键资料缺口/独立日期；P2证据约束和简洁输出，基于原接口最新DeepSeek模型有界验证。复用原目标okr-4c2ea452d3cc，只追加本批note。root维护机会UI/模型/归档；today_focus_audit只写Today及signals最近只读入口；output_contract_audit只写brief后端/单测。原树基线e6c4c2e0且脏增量保留，准确镜像前核SHA；ReportsLibraryPage/research-results由另一研究owner写，本批避开。
+
+验收：风险不被等待挤掉、同产品双侧不吞；跨日详情不拼错；周末只读旧扫描真实标日；等待状态/缺失条件保留；失败/缺口首屏可见且不伪称Agent完成；官方DS真实返回/质量按来源/日期/对象/反例/简短多项核；桌面窄屏与相关回归。新公开调研至多6组请求（含已用检索），复用旧TradingAgents报告；模型先一次真实小材料调用，若账户不可用停止该路，成功后仅2产品背景/反方核心批及有具体原因纠正，不全板盲重试。旧Sol合同2失败+4Codex回合保留，不重置或冒称恢复。
+
+只写小代码/报告/回执，不下载大数据、不清理、不动私有财务记录、不下单、不改日程、不给因子对话派任务。无API可用时继续独立工程验收，真实模型输出未验就保留未验。
+
+---
+
 # Sol6.1分析与输出验证：API额度阻塞，独立样例已验 2026-10-16T17:23:56.045813+08:00
 
 checked_coordination_sha=bbb57dad639da217f0d979a1336a0b1cbd60efdd；已读COORDINATION及原相关任务和最新研究结案，无重叠。status=blocked/scope_released=true仅API核心受账户额度阻塞，无模型任务在后台。原目标in_progress。
@@ -712,33 +724,48 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "blocked",
-  "checked_coordination_sha": "bbb57dad639da217f0d979a1336a0b1cbd60efdd",
-  "checked_at": "2026-10-16T17:23:56.045813+08:00",
+  "status": "active",
+  "checked_coordination_sha": "9a7d2e997b8a3e65f0d3b7a7eaf67730ccb18ce7",
+  "checked_at": "2026-10-18T13:50:56.516171+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
-    "portfolio-trends-20261013",
     "research-utility-review-20261012",
     "daily-trading-system-audit",
     "investor-observation-map",
-    "research-dispatch-controller",
-    "storage-headroom-20261015"
+    "research-dispatch-controller"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
-    "docs/experiments/opportunity-agent-sol61-validation-2026-10-16.md",
-    "docs/experiments/raw/opportunity-agent-sol61-validation-2026-10-16/*",
-    "docs/experiments/registry.json (own report key only)",
-    "docs/experiments/INDEX.md (own report line only)",
+    "web/src/pages/todayActionLogic.ts",
+    "web/src/pages/todayActionLogic.test.mjs",
+    "web/src/components/today/TodayActions.tsx",
+    "web/src/api/client.ts (signals latest only)",
+    "src/lei_signal/api/routes/signals.py",
+    "tests/unit/test_signals_latest.py",
+    "src/lei_signal/api/opportunity_brief.py",
+    "tests/unit/test_opportunity_brief.py",
+    "web/src/pages/OpportunitiesPage.tsx",
+    "web/src/pages/opportunities.css",
+    "web/src/api/opportunityReviews.ts",
+    "web/src/pages/opportunityBriefModel.ts",
+    "web/scripts/test_opportunity_brief.mjs",
+    "src/lei_signal/copilot/opportunity_review.py",
+    "src/lei_signal/copilot/opportunity_transport.py",
+    "tests/unit/test_opportunity_review_service.py",
+    "tests/unit/test_opportunity_transport.py",
+    "docs/experiments/today-agent-output-polish-2026-10-18.md",
+    "docs/experiments/raw/today-agent-output-polish-2026-10-18/*",
+    "docs/experiments/registry.json (own key only)",
+    "docs/experiments/INDEX.md (own line only)",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/sol61-validation-*"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/today-agent-polish-*"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-16T17:23:56.045813+08:00",
-  "conflict_decision": "已读最新bbb57dad纯颜色账户限定结案，不碰本API或模型；registry/INDEX仅自身键/行保留对方内容，无交叉。本批产物写范围释放，API核心因Key额度阻塞；无模型后台任务。",
+  "updated_at": "2026-10-18T13:50:56.516171+08:00",
+  "conflict_decision": "research-utility-review只改ReportsLibraryPage嵌入块/research-results，本批明确避开；root唯一登记/集成写者，两个子Agent按下面准确范围分离。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/sol61-validation-acceptance-20261016.json",
   "automation": {
@@ -748,7 +775,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "original goal okr-4c2ea452d3cc note36->37; report category方法论与验证/verdict mixed; own registration only",
-  "remaining": "指定Key恢复可用额度后继承2失败请求，仅验两产品剩余API环节。Codex同模型输出样例已验；近期行业经营与基金自身技术条件/调仓未知，原目标in_progress。"
+  "remaining": "按优先级修今日重点排序与旧日期拼接、简报等待/缺口/日期；官方最新DS沿原API有界验证；公开最佳实践落地审查，不改策略或全局其他模型。"
 }
 ```
 <!-- lei-coordination-json:end -->
