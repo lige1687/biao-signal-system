@@ -1,3 +1,13 @@
+# 原策略执行前定义与资料准备接续 2026-10-18T17:12:08.689167+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status active；scope_released false。checked_coordination_sha=a5f94629a106e160f52fe34fb1f288d07150f764；checked_at=2026-10-18T17:12:08.689167+08:00；已读COORDINATION、本任务、系统owner最终交付、personal方法差距最新交付、中控边界。原因子/策略归本owner，系统UI/API不动，personal独立新方案不重做。
+- 用户要求金融含义和开题重点可查看、明确哪些决定需人类、按优先级继续实现与扩大样本。本轮先做最高依赖：原目标与首次的固定截面案例、可执行规则与合格小时输入盘点；不能仅再写泛方法计划。基线研究分支70ab55556874228d2cba66cf50f96d0318e1a5be，旧脏成果保留、源成果不提交；只推本协调元数据。
+- 唯一写者root：新docs/experiments/lei-original-rule-cases-2026-10-18.md及同名raw小证据/脚本（如需），registry/INDEX仅自身条目，原progress与原目标note，主/研究树小文件镜像。方法来源直接引用现有lei-mechanism-methods及既有原始资料，不再泛泛扩搜。无原文/正式定义/参数/策略引擎/生产/账户修改。
+- Astra6 high target_semantic_cases只读原文与3个人工边界案例；Sol6 medium hourly_input_inventory只读已存数据资格/路径。无子agent写入或市场运行。root只读取已存日线并按预先规则选有限历史截面，隐藏之后价格，所有候选不依收益挑选；人工与历史案例严格区分，不作为效果证据。若读数据先核storage及哈希。原2082.25/3600及其他冻结预算不重置；0新拟合/收益回测/行情/付费。实际token费用未知。
+- 验收：责任边界与一页开题说明；原含义可直接确定/需裁定/资料不足分明；案例不含截点之后输入；准确输入资格与复现脚本、来源指纹；系统报告全文可读、归档和原目标留痕。原策略效果保持未评价。关键未定含义在完成具体可审案例后集中询问，不要求用户替AI设计统计方法。
+
+---
+
 # 原策略机制与科学方法审查已交付 2026-10-18T16:37:47.409331+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status completed仅本次有界机制/方法审查；scope_released true；完整LEI及有效组合总目标仍in_progress。checked_coordination_sha=fe9d1924ce991f1672f1e20b6e2680412bfa2b90；checked_at=2026-10-18T16:37:47.409331+08:00；已读COORDINATION、自身、personal最新1798b855方法选读交付、系统owner与中控边界；不重复其新独立体系/价值盈利学习，不改其他owner。
