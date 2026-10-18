@@ -1,3 +1,16 @@
+# 双均线完整案例与 Gemini 意见裁决已交付 2026-10-18T23:01:08.831051+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮复用结果的案例及流程改进；scope_released true。checked_coordination_sha=51341fbb2ae64b5a42b15ca80a851f4c89b61793；checked_at=2026-10-18T23:01:08.831051+08:00；已读COORDINATION、自身、research-utility-review-20261012最新22:56静态研究图/小时等待段、investor-workspace-simplification-20261012最新22:58采用说明及宏观摘要范围、research-dispatch-controller。无写入重叠，原策略、小时研究、系统UI仍归原owner；长期有效因子方向未完成。
+- 成果分支codex/personal-lowfreq-system-audit-20261018，基线d12deb2c08123a5e5e5a6ece994b88f17ff3eacb；最新已push/fetch完整SHA相同为d68e19dfcbd2bf020f94684f618b0668f6ab0788，精确成果diff为空，树干净。报告docs/experiments/dual-ma-factor-worked-case-2026-10-18.md SHA142879a1d7ea5dabeab237545c4dfdfbe47f07db4567487c60ff858f943d9f51；同名raw含brief/checks/closure、来源清单、算术复核、独立审查及Gemini逐条裁决。
+- 主对象research.stock.color_event20@1.0.0和依赖账户research.stock.color_account20@1.0.0；10/15预测定义只作家族旁证，不混同EMA起算/相等边界。每边0.1%研究费用下双线相对单线累计收益A股−4.57、美股+6.37个百分点；交易笔数少32.93%/32.09%；零费用美股仅+0.73点，优势对费用敏感。A股缺估值日、当前名单和不同截止口径保留，不能宣称独立避险、ETF或完整LEI效果；少交易不是已证明个人省时。
+- 用户最新多用途、样本三方向及RD-Agent优先级已补入docs/research/factor-discovery-playbook.md，主共享树同文件逐字核同；新增对象/定义/单位/日期的证据可比性，判断一致性及资料可靠性等用途，市场阶段/不同底层风险/历史成员与退出三方向，先假说—实现—评价—反馈的可追踪引用，再按需恢复，最后考虑自动循环。AGENTS原入口不改，文字指引不冒称语义硬检查；未安装或运行RD-Agent。
+- Gemini实际会话https://gemini.google.com/app/a661a2b9ca3d1ce6，Argon最高高点与完整提示已实读，首个完整新答复四题读完。采纳灰色不行动可能解释少交易；拒绝按全期平均投入线性折算最大回撤、无依据15%/5%阈值和任意缓冲都少30%交易、把缺证据写成全部用途无效。资产1→2→1、半仓财富1→1.5→1的反例独核：跌幅33.33%并非25%。延迟UI产生相同提示重复回合，已点停止但未读回停止成功；duplicate_stop_confirmed=false，实际模型请求总数未知。只采用首答，不把重复当独立验证；未再提交追问。
+- 验收：Sol核数/源码来源，Astra核方法/补充指引/反例；六市场费用恒等式、八保存日期跨度、小来源、链接、唯一registry及旧条目不变均核回。主仓现行归置通过；隔离树继承.git/COORDINATION.md/docs/coordination三旧失败保留。20项源文件中19未变，主树definitions总表有变化且当前不含三案例对象；原负责人树定义三项与各冻结快照逐项一致。初hash断言和main查找失败及恢复证据在raw/definition-drift-check.json，不冒称主树定义集成完成。
+- 原目标okr-ff1e0a86fbac只追加交付note，版本156→157已读回，状态in_progress、owner/授权/验收/下一步/旧历史不变。报告/registry/INDEX在独立成果树，未镜像到主报告库；若干来源仅本地，拉成果分支不足以复现全部原研究。主共享脏改动未混入提交。
+- 实际本轮预算：0新市场回测/拟合/行情下载，1次保存小摘要算术脚本及1个无行情公式反例；旧预算、冻结输入和原结果不变，实际token费用未知。无生产/交易/通知变更。当前有界问题已回答，不重开旧实验；之后只有明确新用途/合格新证据/关键前提变化才登记有界检验。最小接手先读报告第7节、raw/closure和当前协调；不把未测用途写成已有效。
+
+---
+
 # 范围澄清：多用途价值、样本三方向与可追踪反馈 2026-10-18T22:39:37.726890+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=a00f8086aa37d9b5f4dc672289694632156446ad；checked_at=2026-10-18T22:39:37.726890+08:00；已读COORDINATION、自身、research-utility-review最新22:25、investor-workspace-simplification最新22时接续段、research-dispatch-controller。最新原A继续小周期资格、系统继续摘要上下文；本任务无代码/行情或owner重叠。
