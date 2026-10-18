@@ -1,3 +1,14 @@
+# 用户收敛：先学习权威因子发现方法，再讨论本地适配 2026-10-18T16:31:00.490166+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false仅自有新方法报告、raw小来源记录及原progress/独立树registry和INDEX条目。checked_coordination_sha f893c9a37af939acca627f6364ee16e7732b9078；checked_at 2026-10-18T16:31:00.490166+08:00；已读COORDINATION、自身、research-utility-review、investor-workspace-simplification、中控及classic-factor-research；原任务归属保持。
+- 用户最新原话：主要看权威、大手如何研究/发掘有效因子；先迈出学习一步，然后因地制宜到系统；独立因子是后续方向之一，要有明确金融含义。此条缩小当前范围为原始资料学习和方法比较，不执行本地新收益实验。此前两名Sol只读候选/数据盘点完成；月初日历与固定支出现金仅留备选，0代码、0行情、0市场结果、0实验合同冻结，不能写成已测或优先采用。
+- 最终交付：复用classic-process已有华泰教材，补原作者如何提出经济假设、选择可计算代理、用简单对手反驳、辨认风险/收益/组合用途的具体案例；明确实际已读范围和分歧，当前不推进原研究或生产规则。新文件改为docs/experiments/authoritative-factor-discovery-learning-2026-10-18.md及同名raw/source-manifest.json与review-state.json；未创建原拟independent-lowfreq-value文件，不删旧文件。
+- 预算沿尝试分段累计：用户收敛前候选学习4公开请求（2查询+2原件，含1失败）；收敛后有界方法学习6请求（2查询+4原件，含2不可读），总10公开请求、0市场计算。读取本地既有方法页不重复下载；前阶段原ETF实验预算均未触及。本次不是通过新任务名续跑收益或提高原预算。完整论文未读则逐节/摘要标注，不因文件可访问宣称精读。
+- root写报告/收尾；两原Sol仅查已有教学和原方法页，0写入。因子实现接原LEI的消息已成功投递，当前active，完整研究未完成。文献学习库现有README/seed/7课保持，无新schema/UI/全局定义；本报告引用现成学习入口，避免并行重建教材。
+- 验收：原作者与本库推导分开、金融含义与效果证明分开、支持与反证配对、学习完成与后续本地研究分开；每一主张来源/读取范围；方法报告登记/文件指纹/主控核对/远端读回。
+
+---
+
 # 接续：独立低频方案与用途价值研究 2026-10-18T16:26:59.701341+08:00
 
 - task-id: personal-lowfreq-system-audit-20261018；owner: 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status: active；scope_released: false。
