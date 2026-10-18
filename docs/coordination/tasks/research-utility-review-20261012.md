@@ -1,3 +1,13 @@
+# 原规则、小时确认与资金比较接续 2026-10-19T00:01:06.185436+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=a09d76a4985cd276c7b281000de5637c4c31c7c2；checked_at=2026-10-19T00:01:06.185436+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018最新样本说明、investor-workspace-simplification-20261012最终交付、research-dispatch-controller；未接管系统UI或方法owner，无当前重叠。
+- 用户本轮明确要求先核原目标/失效、首次回撤和多周期，再扩大ETF/股同机会比较小时确认净收益/风险/等待/买贵/漏涨，接着固定仓位风控贡献、最终共用资金组合。按依赖顺序推进；先核原规则，不用任意代理代替核心语义，不放宽条件或重复旧基准。原资金账户与颜色/等待封存直接复用；本轮新增必须有新输入或原比较未覆盖的具体问题。
+- 研究分支codex/factor-evidence-integration-20261012 base70ab55556874228d2cba66cf50f96d0318e1a5be；研究/主树既有脏改动保持，成果仍未提交未推。root唯一写新docs/experiments/raw/original-a-increment-continuation-2026-10-19/和docs/experiments/original-a-increment-continuation-2026-10-19.md、registry本键/INDEX本行、原progress/目标note；可行且定义已定后再登记准确研究模块/测试路径，不先改共享源码。两子任务只读：Astra核原文与已保存案例，Sol核已配置/已有来源能力和资料覆盖，均不下载大数据/不改文件/不安装/不购买；root统一调用必要资料并记全失败。
+- 已耗市场2137.524597248/3600秒，剩余约1462.4754秒，不重置。上批85逻辑采集+1替代失败全部保留；本次新来源发现最多6必要请求（包含失败），不扩大原批行情下载池，批量取数前另定准确身份/范围/条数。实际费用未知。研究输出仍固定外盘，经storage身份/容量预检；无删除、迁移、规则原文修改、生产、通知或交易。
+- 验收：原文可以唯一计算/主观未定/输入缺失分清；若依赖核齐，冻结同机会两政策，计成本、可交易时点和完整资金，以新增小时确认解释净收益/风险/等待及漏涨；独核头条数值/反例并原系统展示。原规则确实缺少可复核选法只阻断依赖分支，其余已授权资料/资金方法准备继续；不能以又一份等待描述或测试通过宣布有效。
+
+---
+
 # 连续小周期资料与小时确认等待交付 2026-10-18T23:09:47.164829+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮有界资料及等待描述；scope_released true。原完整策略效果仍not_evaluated，整体目标in_progress。checked_coordination_sha=0a9135217d7664d6a3eb5abf3b3486a54fa92dba；checked_at=2026-10-18T23:09:47.164829+08:00；已读COORDINATION、自身、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller。最新两owner收尾已核，系统owner已采用本次两SVG；无写入重叠，不代管UI/方法主线。
