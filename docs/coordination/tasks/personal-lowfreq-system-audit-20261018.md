@@ -1,3 +1,12 @@
+# 样本范围说明补正完成 2026-10-19T00:00:00.042111+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次说明纠正；scope_released true。checked_coordination_sha=2d029cbcbf6a987db74f2639af741bea93b7c2a1；checked_at=2026-10-19T00:00:00.042111+08:00；已读自身及前段列出的两owner最新记录/COORDINATION/中控，最新fetch无其他任务增量，原分工保持。
+- 已发布并fetch核对成果89c1537e2062321ab9b60c7522e5396d6ad2706b，分支codex/personal-lowfreq-system-audit-20261018，准确diff为空。报告首屏补中证2026-10-15沪深300名单300只及IVV2026-10-13股票504项/报价502；每市场初始同额分配、逐股独立现金和持仓、无跨股调配或恢复权重、最终相加。用户指出的遗漏已修，当前名单回看和缺退出者限制前置；原数值表第3/4节逐字不变，旧实验未重跑。
+- report SHA d9566dcc9bcae847ee7addb8a92ece81cdb298c8b42e071aae5898ae99df3a5c；playbook SHA e777a8ec12a6b377c808105d191cd7f53142da86bea1da56968d4eb69b398dc2，主/成果树相同。registry仅本报告指纹增量；raw/universe-clarification.json为本版回执，旧checks/closure保留旧版本。主仓归置通过、两名单计数/不重复和原来源文字核回。
+- 已记录用户确认金融现象→各用途价值→补缺口，RD-Agent可追踪循环优先；先复用与查负责人，不接管另外两对话。0市场计算/行情下载/新模型/新代理/安装/目标写入。一次猜测旧raw文件名未找到已转现存报告/合同核清，未产生失败写入。未改规则/策略/生产/交易/通知。
+
+---
+
 # 样本范围表达纠正 2026-10-18T23:57:54.955777+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active仅文档补充；scope_released false。checked_coordination_sha=39dfe466b30915319f2636e814de8bf6c29ba1bc；checked_at=2026-10-18T23:57:54.955777+08:00；已读COORDINATION、自身、research-utility-review-20261012最新23:09、investor-workspace-simplification-20261012最新23:05、research-dispatch-controller。无范围重叠，两个原owner任务不接管。
