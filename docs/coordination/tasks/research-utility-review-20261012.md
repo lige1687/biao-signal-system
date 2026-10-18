@@ -1,3 +1,14 @@
+# 研究增量与组合代价核清：用户分工后接续 2026-10-18T15:24:00.508400+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现 01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status active；scope_released false。checked_coordination_sha=dac56dea61c0f847e13699d8997b51dd0f179168；checked_at=2026-10-18T15:24:00.508400+08:00。已读COORDINATION、本任务、investor-workspace-simplification-20261012、research-dispatch-controller及既有personal审查结案；无同问题新写者。
+- 用户本轮重点4/6：复杂方法相对简单办法是否有增量、等待/错过/交易代价、重复风险与研究维护成本。确认账目未变暂不优先账务改造，历史理由未知，今后链路要通；明确系统实现交另一对话、因子与策略组合由本对话。已按授权发送给「系统实现」01a123fc-553b-7b81-9952-36e1acb11dcc，本轮root不写UI/API/活动账本。
+- 有界问题：复核已有性能/费用/等待证据，纠正混淆；交付忠于原文的增量比较合同、组合风险和成本验收字段及优先顺序。不开新策略参数或收益实验，不把纯颜色/简化A当完整LEI；只对保存结果做必要算术拆解。主控负责新docs/experiments/research-increment-cost-diagnostic-2026-10-18.md与同名raw，registry/INDEX仅自身新条、原progress、自身协调；同步主树同名小报告，不改旧封存。工作分支codex/factor-evidence-integration-20261012，base70ab55556874228d2cba66cf50f96d0318e1a5be，原本地脏成果保留。
+- 规范：research-closure、current-standards当前索引，工程/方法审查范围；不迁移旧合同或预算。最多1次保存数据核数核心及1次具体错误修复核数，不拟合/行情/付费；必要原始文献最多4请求含失败，Gemini至多1次最高模式补充审查。真实token成本未知。此为新有界方法诊断，旧A2082.25/3600及其他封存尝试不重置。
+- 只读Sol increment_evidence_audit负责旧颜色/预测/等待的数字与可比性，不写文件；root负责原文语义、原始文献、独立核数和最终方案。Gemini仅脱敏规则/公开研究统计，不发账户/密钥。本轮外部结果0大写入，原件如需读先核storage；小报告与证据预计<10MiB。
+- 验收：填实性能/增量/代价表，声明不可相加的归因；各研究分支原文/定义缺口与是否可开测明确；组合风险/维护代价字段可交系统owner；旧实验不重跑，报告可从现有系统库读取，来源/数字独核与归置通过。原完整策略未知项目保持未验证。
+
+---
+
 # 模块A有界纠错与系统内研究组件交付 2026-10-18T14:43:40.862597+08:00
 
 - task-id: research-utility-review-20261012；owner root；status completed（本批有界问题）；scope_released true。checked_coordination_sha=c4a3743d2dd05c8ca5f29afcc27d76f6582dec66；checked_at=2026-10-18T14:43:40.862597+08:00；已读COORDINATION及research-utility-review-20261012, investor-workspace-simplification-20261012, personal-lowfreq-system-audit-20261018, research-dispatch-controller, technical-factor-sequence。最新远端仅其他owner阶段完成，无本范围冲突；原有个人整体审查复用844cc8ba，不重复、不覆盖；机会页另一owner范围保持。
