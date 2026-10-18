@@ -1,3 +1,5 @@
+缓存接口测试范围补注 2026-10-18T14:17:21.961042+08:00，checked_coordination_sha=b4e4875a9b4a407afc15bd24f57ee29b59ca5414：原路由测试直接替换HTTP technical函数，新增仅两个mock目标跟随缓存内部函数，保留真实产品/日期断言；不弱化验收。已读任务与无冲突决定沿本段。
+
 # 真实冷启动失败与已有整体审查复用 2026-10-18T14:14:55.700543+08:00
 
 checked_coordination_sha=d52ddd9aa20eba2f1fb485a2a2efb5725403d8fa；已读COORDINATION、自身、research-utility-review最新边界及personal-lowfreq-system-audit完整结案。整体审查已由原负责人完成并推844cc8ba，本批不重复研究或写同题报告；已有Gemini答复从归档复用，不占用共享输入。
@@ -733,8 +735,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "d52ddd9aa20eba2f1fb485a2a2efb5725403d8fa",
-  "checked_at": "2026-10-18T14:14:55.700543+08:00",
+  "checked_coordination_sha": "b4e4875a9b4a407afc15bd24f57ee29b59ca5414",
+  "checked_at": "2026-10-18T14:17:21.961042+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -769,12 +771,13 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/experiments/INDEX.md (own line only)",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/today-agent-polish-*",
-    "src/lei_signal/api/routes/opportunity_reviews.py (brief cached-only technical path)"
+    "src/lei_signal/api/routes/opportunity_reviews.py (brief cached-only technical path)",
+    "tests/unit/test_opportunity_review_routes.py (cached helper mock targets only)"
   ],
   "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-18T14:14:55.700543+08:00",
+  "updated_at": "2026-10-18T14:17:21.961042+08:00",
   "conflict_decision": "整体个人系统审查由personal-lowfreq-system-audit已结案，本批复用其报告/Gemini意见，只补今日入口与Agent输出已核不足，不再提交同题整体报告；研究UI路径继续避开。冷brief源路由当前无其他写者。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/sol61-validation-acceptance-20261016.json",
