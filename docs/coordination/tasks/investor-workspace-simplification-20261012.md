@@ -766,9 +766,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "completed",
-  "checked_coordination_sha": "3afef789ae72179e02bc38b3c7819f64af4bb0f6",
-  "checked_at": "2026-10-18T15:58:58.552977+08:00",
+  "status": "active",
+  "checked_coordination_sha": "f6117e9952264ec4a980b8b57aaea755e7c473fe",
+  "checked_at": "2026-10-18T16:08:00.715745+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -812,13 +812,28 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "src/lei_signal/api/recent_opportunities.py",
     "tests/unit/test_recent_opportunities.py",
     "web/src/api/opportunityReviews.ts (recent list types/client only)",
-    "web/src/pages/OpportunitiesPage.tsx (exact subject/side deeplink and existing plain-language formatter for first-screen counterevidence only)"
+    "web/src/pages/OpportunitiesPage.tsx (exact subject/side deeplink and existing plain-language formatter for first-screen counterevidence only)",
+    "src/lei_signal/copilot/opportunity_review.py (pipeline, validation and bounded retry recovery)",
+    "src/lei_signal/api/routes/opportunity_reviews.py (preparation and ensure recovery)",
+    "src/lei_signal/api/opportunity_context.py (only if actual preparation defect)",
+    "src/lei_signal/copilot/opportunity_transport.py (only if actual transport defect)",
+    "tests/unit/test_opportunity_review_service.py",
+    "tests/unit/test_opportunity_review_routes.py",
+    "tests/unit/test_opportunity_preparation.py",
+    "tests/unit/test_opportunity_transport.py",
+    "web/src/pages/OpportunitiesPage.tsx (generation status and retry UI)",
+    "web/src/api/opportunityReviews.ts (generation state/client)",
+    "web/src/pages/opportunityBriefModel.ts (generation status)",
+    "web/scripts/test_opportunity_brief.mjs",
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/agent-delivery-20261018-*",
+    "docs/experiments/today-agent-output-polish-2026-10-18.md (delivery addendum)",
+    "docs/experiments/registry.json (own report key only)"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-18T15:58:58.552977+08:00",
-  "conflict_decision": "已读最新六任务和两研究owner新结案，源/页面由root独写，策略因子交原因子实现并核research_report指纹；只追加自有报告/登记键/目标note。所有源和私有验收本机未提交未推，协调元数据单独上传。",
+  "updated_at": "2026-10-18T16:08:00.715745+08:00",
+  "conflict_decision": "原因子/策略与整体路线owner范围不变；root负责Agent整批恢复、相关UI状态与端到端交付；Sol两个子任务只读诊断服务和显示，不改共享文件。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-chain-20261018-acceptance.json and decision-chain-20261018-delivery.md",
   "automation": {
@@ -828,7 +843,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "original goal okr-4c2ea452d3cc note38->39 read back; protected fields/history preserved; own report visual addendum and its own registry SHA only",
-  "remaining": "本轮首页/Agent输出/判断后续链必要开发与验收完成，用户效果待验收。旧生产审查仍partial 1完成55失败12无需；最新基金持仓及同基金技术缺口保留，后续按具体问题接续，不自动循环重试。策略/因子由原owner负责。",
+  "remaining": "用户明确所有当前任务做到可交付。本轮关闭生产55失败及主线实际可用性；先诊断旧失败，基于已修原因用原API执行一次受控恢复，保存逐卡失败和用量；新具体错误修复后仅定向验证，不无因循环。",
   "runtime": "受管8000 PID90910 health200；5188使用原隔离web；最新9后台/测试源准确镜像，最后仅AST相同格式更正；无活动模型worker，生产Agent调用226未新增。自身8019/5199演练已停止。"
 }
 ```
