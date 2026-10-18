@@ -1,3 +1,14 @@
+# 用户要求十年以上扩样与分工自循环的实际验证 2026-10-19T01:28:35.877470+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=6f0e0b30a1b6acbe17eff0832763ae0ba3196c56；checked_at=2026-10-19T01:28:35.877470+08:00；已读COORDINATION、自身、research-utility-review最新01:12日/小时收盘资格及扩样回调、investor-workspace最新01:22资料链、中控。冲突决定：本任务独立金融机制与同日选择；不做原LEI、底部回调/日小时确认、账户政策、宽度情绪宏观或生产UI。
+- 用户明确六ETF/四年不足，要求从十年起的大样本验证、发掘金融含义、Luna承担明确执行、Astra负责假设/审核/评估并接结果持续迭代。此前首轮结论只保留窄范围，不能冒称已建成大样本发现能力。本次目标：选定一个金融理由及竞争解释清楚的新扩样问题，核至少十年历史和可解释的大候选覆盖，实际完成资料资格—固定比较—执行—审核—必要后续—结论链；不以资料盘点/合同数量收尾。
+- 成果分支codex/personal-lowfreq-system-audit-20261018基线7919453f3edc3d28f1d9e6e819ce7895894664e0。root唯一写docs/experiments/lowfreq-expanded-discovery-2026-10-19.md及同名raw小合同/来源/账本、原progress、独立树registry/INDEX本条、原目标okr-8830a1f1ec4f；如需实际专用研究模块仅新src/lei_signal/research/lowfreq_discovery.py及tests/unit/test_lowfreq_discovery.py，先明确适配合同，不改共享定义或旧引擎。大行情/结果/日志走新外盘绑定，保留所有旧输入、预算和负结果。
+- 分工：Luna low先机械盘点现有长历史/候选覆盖，后按冻结明确脚本准备和运行监看；Astra high选假设/方法/实质审核，root总控和真实状态。必要疑难实现按项目既有模型分工可Sol执行，明确记录理由，不假称Luna完成。合同先保存、各路径单写，公开请求与市场运行统一累计。
+- 先核既有802股票、ETF长历史及旧因子库/文献，确定哪些真能复用；缺的历史成员/退出或财报公开时间在授权公开来源补，不用当前名单伪装全市场。原六ETF结果不重跑，真正扩池/时间列新探索身份。初始计划1核心+最多3必要后续，6公开来源检索/文献请求；数据批量请求在明确实际目录覆盖后单独登记总量/来源/限流和失败，不以无限重试凑覆盖，不付费/取密钥/扩大权限。尚未启动批量数据或回测。
+- 验收按用户要求：精确名单/成员规则和十年实际跨度；金融现象/竞争解释/可否定条件；单项性能、与简单对手和已有信息的增量、收益与其他用途分别评价；时期/资产反例和历史选择偏差；Luna实际执行回执/Astra具体裁决及必要续作；最后系统目标/归档/远端读回。核心数据若实在不可得必须保留受阻项，不能用小样本/模型协作演示冒充大样本验证。
+
+---
+
 # 首轮实际研究交付：两类选择增量与财务资格 2026-10-19T01:18:42.430840+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮有界首轮问题；scope_released true。四候选总目标仍in_progress。checked_coordination_sha=cff9f02518545a176c02a8f57b3c36b1362e19a8；checked_at=2026-10-19T01:18:42.430840+08:00；已读COORDINATION、自身、research-utility-review最新01:12 ETF收盘语义资格与上涨回调扩样、investor-workspace最新00:49资料链、中控。冲突决定：原因子继续日/小时、原A/回调/账户；系统继续数据/新闻/UI，本任务仅独立选标的证据和候选资格，未接管。
