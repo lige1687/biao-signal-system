@@ -1,3 +1,14 @@
+# 候选TODO与可追踪流程登记完成 2026-10-19T00:32:46.995793+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮待办登记和工作指引接续；scope_released true。checked_coordination_sha=6f1b4ac97138ee8869869ad304fb7dc46d6af171；checked_at=2026-10-19T00:32:46.995793+08:00；已读COORDINATION、自身、research-utility-review-20261012最新00:30小时条件独立增量、investor-workspace-simplification-20261012最新00:30及00:31补注、research-dispatch-controller；两任务继续原owner，无文件或研究题重叠。
+- 用户认可四候选并要求列TODO、复用且检验。系统真实新增okr-8830a1f1ec4f「低频选标的候选：动量复核、质量、价值与防御」，挂okr-cd1a0bd5532c，planned、5项未勾选；认可方向和流程已写明，不标新因子有效或实验运行。原问题目标okr-ff1e0a86fbac仅note160→161，方法闭环okr-aff4c096efb7仅note11→12；两次现场GET核内容/旧历史与owner/status/authorization/milestones/next_action保持。未改其他任务下一步、原八目标TODO或种子。
+- 成果codex/personal-lowfreq-system-audit-20261018@6fcec6236a053acad35b06c71284f6fb0198e6b9已push/fetch完整SHA一致，准确三文件diff空。文件为factor-discovery-playbook、原progress、lowfreq-selection-and-timing-2026-10-19/raw下新todo-registration-2026-10-19.json（实际docs/experiments/raw前缀）。playbook主/成果同SHA aa29ad35b346725984db81c83f1b2176f168564a134018a6255edc449ee65925；旧报告SHA05ced90c46e18b5bfcc49badf88dead79a5b5436af8ea6cb88263eb39062edda保持，旧registry/INDEX不动。
+- 已落实顺序：动量先核旧定义/弱证据→盈利能力先资料资格→价值→防御按用途；宽基ETF仍优先，财务股票候选独立扩展。三类复用裁决、金融现象/竞争解释、重复信息、当时资料、简单对手、效果/增量及反馈沿既有合同，不另造平台。下一实际研究需验证流程真正运行；本轮文档完成不等于流程自动检查或科学结果完成。
+- 验收：新待办唯一且5项未完成，API保护字段/旧历史/新note读回，主树同指引、本地链接、旧报告未变、diff与主仓归置通过。Luna low只核6条旧来源，准确动量对象/六ETF待审负结果/RD-Agent恢复接缝及两反馈失败均保留。成果树旧白名单三项限制未重跑或修改，未声称全绿。0新市场/行情/网页模型/框架运行/生产/交易/通知；费用未知。无本题后台研究。
+- 完成理由：用户本轮要求的TODO登记、复用检验要求及流程接续均已实际保存核回。后续具体研究沿系统目标和现行协调取一个有界问题，复用旧证据、按必要缺口冻结检验；不因本次确认自动执行整份候选清单，不重启原封存批次。
+
+---
+
 # 已认可候选登记到系统待办 2026-10-19T00:29:33.367027+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active仅待办登记及工作指引接续；scope_released false。checked_coordination_sha=f2d7793ac2e9329316ebdca67dde877e11002006；checked_at=2026-10-19T00:29:33.367027+08:00；已读COORDINATION、自身、research-utility-review-20261012最新00:19、investor-workspace-simplification-20261012最新00:12、research-dispatch-controller。原A受阻定义、系统摘要及旧八目标仍归原owner，本次无接管。
