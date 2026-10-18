@@ -1,3 +1,9 @@
+# 用户进一步收敛首页与Agent输出 2026-10-18T15:31:33.717617+08:00
+
+checked_coordination_sha=04f80ac88214e25e4dddc01275afffa32be31ec7；原六任务已读且远端自身读回一致。新增范围仅首页近期机会清单及已有Agent摘要/校验的具体缺陷；不改技术信号。root负责首页与Agent输出，backend仅判断后续API，frontend仅判断组件与页面，不写TodayPage/today.css。首页显示名称、买/卖方向、近期特征、触发/行情日期、已确认/待确认/未完成来源；过时/解除不当新机会。验收包括真实只读资料、桌面/窄屏、买卖与旧日期边界，生产个人记录零写入。用户说“上边说到的都去做”，保留已确认判断链范围。
+
+---
+
 # 用户分工后接续：未来判断与行动记录链 2026-10-18T15:27:53.715663+08:00
 
 checked_coordination_sha=780cb334a52cbb802a70be182a4134e01346ac4b；COORDINATION及自身、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller、personal-lowfreq-system-audit-20261018相关最新记录已读。原task/owner/分支及e6c4c2e0基线延续，现有脏改保留。
@@ -761,8 +767,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "780cb334a52cbb802a70be182a4134e01346ac4b",
-  "checked_at": "2026-10-18T15:27:53.715663+08:00",
+  "checked_coordination_sha": "04f80ac88214e25e4dddc01275afffa32be31ec7",
+  "checked_at": "2026-10-18T15:31:33.717617+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -792,13 +798,22 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-chain-20261018-*",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
     "docs/experiments/today-agent-output-polish-2026-10-18.md (previous visual acceptance addendum)",
-    "docs/experiments/raw/today-agent-output-polish-2026-10-18/acceptance.json (visual receipt)"
+    "docs/experiments/raw/today-agent-output-polish-2026-10-18/acceptance.json (visual receipt)",
+    "web/src/components/today/TodayActions.tsx",
+    "web/src/components/today/todayActionModel.ts",
+    "web/src/components/today/TodayRecentOpportunities.tsx",
+    "web/src/pages/todayOpportunityModel.ts",
+    "web/scripts/test_today_opportunities.mjs",
+    "src/lei_signal/api/opportunity_brief.py (display summary only)",
+    "src/lei_signal/copilot/opportunity_review.py (output validation/prompt only)",
+    "tests/unit/test_opportunity_brief.py",
+    "tests/unit/test_opportunity_review.py (affected output regressions only)"
   ],
   "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-18T15:27:53.715663+08:00",
-  "conflict_decision": "用户在因子实现会话本轮原话已read_thread核实：系统实现由本任务负责，研究/策略/组合由原owner；账目不变不优先改造，旧理由未记录保持未知。研究新报告/JSON/组件与registry原键保持原owner写。本批避让Chrome，用IAB验收。",
+  "updated_at": "2026-10-18T15:31:33.717617+08:00",
+  "conflict_decision": "最新用户明确将策略/因子交因子实现，已实际发送范围交接；账目不补。root收敛首页近期机会列表与Agent输出，backend/frontend原有界判断链并行，研究报告及registry由原owner负责。Chrome已释放但优先IAB。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-chain-20261018-contract.json",
   "automation": {
