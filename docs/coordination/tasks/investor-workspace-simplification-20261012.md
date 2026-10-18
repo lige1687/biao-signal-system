@@ -1,3 +1,12 @@
+# 近五日全市场重点统一展示：开工 2026-10-19T00:12:15.990385+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=da446d34ff8039fff74e50be927dbfdc4037cdfc；checked_at=2026-10-19T00:12:15.990385+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller、daily-trading-system-audit、investor-observation-map；方法学习与原A研究均不占本轮摘要源码，无冲突。
+- 用户要求宏观统一顶部、近5日真正值得关注的变化/阈值/CPI，产品仅保留相关行业近几日重要消息。服务策略背景解释层；原技术判定不变，阈值仅复用已定义规则，不将单期读数或历史分位包装为新信号。新闻近5自然日与行情最近5交易日分开标识，旧背景不冒称新消息。
+- 沿原codex/investor-workspace-simplification-20261012、本机未提交基线e6c4c2e025252c565ba15f05611561ca1ecd5b48。写范围：src/lei_signal/api/opportunity_summary.py及opportunity_summary_context.py，可新增opportunity_market_watch.py；routes/opportunity_reviews.py仅只读资料接线；tests/unit/test_opportunity_summary*.py及test_opportunity_market_watch.py；configs/opportunity-summary-sources.v1.json；web/src/api/opportunityReviews.ts、web/src/components/opportunities/OpportunityDailySummary.tsx、opportunityDailySummary.css、独立MarketWatch组件如必要及专用web/scripts/test_opportunity_*。自身progress、既有today-agent-output-polish报告追加、registry仅该条、原目标note及同任务归档market-watch-20261019前缀。根运行树只精确镜像已核增量，不覆盖他人。
+- 分工：Sol context_input_audit只读已有宏观/宽度接口与阈值，Sol context_best_practices只读新闻来源与日期；root唯一整合/共享写者，UI可独立有界交给原Luna。验收：去重、5日边界、旧未来无日期剔除、阈值与来源、无假触发、失败/空态、实际API及桌面/窄屏、原技术与双向条件保持、同输入复用；不重跑整板/因子实验或新定时/交易。额外静态原A图采用仍按原owner登记仅复制与HTTP hash核对，语义与报告归原owner。
+
+---
+
 # 宏观、情绪与行业解释已交付 2026-10-18T23:05:24.396255+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮有界摘要改进；scope_released true。checked_coordination_sha=7867dd0b936120748f9cb7ec440ec407a4f4ea01；checked_at=2026-10-18T23:05:24.396255+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller、daily-trading-system-audit、investor-observation-map，包括最新研究静态图及方法案例结案；无代码范围重叠。
