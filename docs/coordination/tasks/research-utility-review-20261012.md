@@ -1,3 +1,13 @@
+# 原策略候选机制与科学方法收敛 2026-10-18T16:29:50.816119+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status active；scope_released false。checked_coordination_sha=7ece0acea5ea5aa36e765d65757dca834ab45077；checked_at=2026-10-18T16:29:50.816119+08:00；已读COORDINATION、自身、系统owner、personal-lowfreq-system-audit-20261018最新独立研究分工、中控。已接收用户经personal owner授权移交的原LEI缺口，不发回无新用户授权的跨聊天消息；本协调记录即接续回执。
+- 用户要求收敛有金融含义的因子定义/策略组合，并讲清科学方法、权威依据，随后补充全收敛做了。当前有界交付为机制—可计算定义—反证—研究方法—来源的候选与方法审查，非新收益结论。不抢独立新低频体系；原A/双线/原仓位/原模块组合归本owner，独立方案归personal owner。
+- 原计划/10月审查复用；新增自身docs/experiments/lei-mechanism-methods-2026-10-18.md及同名raw小证据，registry/INDEX仅新项，原progress/目标note，主/研究树镜像；不改旧封存/原文/正式定义或研究引擎/UI/API。基线研究分支70ab55556874228d2cba66cf50f96d0318e1a5be，仍保留脏成果，源码不提交。
+- 方法范围：限定少数原策略组合假设、准确旧对象去重与已测反例、文献原始主张/适配/不采纳边界、时点/强简单基准/同机会资金/相关样本/多重尝试约束；缺原文含义和小时输入的效果不填零。最多1次保存表算术核对，0新行情/市场回测/拟合/参数扫描；公开检索4子查询+2定向原始读取已用6，停止外部扩搜，复用已读官方与原作者资料。旧2082.25/3600及其他封存预算不变。
+- Sol6 medium只读准确ID与旧研究去重；Astra6 high只读机制/方法与原文歧义复核，均无写入或网络。主控唯一写者。验收：候选能被数据推翻、每方法权威来源及本库改编清楚、历史表含增量/限制、新效果明确未测、Agent/API/Web可读报告并归档、原目标保护字段保持。
+
+---
+
 # 大方向与最终交付要求已收敛 2026-10-18T16:12:26.413127+08:00
 
 checked_coordination_sha=3c04883f2ae1354fd3f7577de9ad54b9b5b6716e；checked_at=2026-10-18T16:12:26.413127+08:00；已读自身/系统owner/personal方向owner/中控及COORDINATION，远端无新差异。status completed仅本次plan_only方向整理；scope_released true仅本轮进度/目标note，完整策略总目标仍in_progress。原任务未被小结替代。
