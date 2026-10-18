@@ -1,0 +1,43 @@
+{
+  "registered_at": "2026-10-19T00:57:59.774367+08:00",
+  "mode": "supplementary_saved_result_diagnostic",
+  "input_sha256": {
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/formal/daily.csv": "e5a67f5b869298fd01dbd92d1adab7582b6c1b4372d330acdefe6b83f3b50066",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/formal/pairs.csv": "62618ba12519592e2ac81686a5a125e23ec2c5ba3e463a6cad794a378fb0612d",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23/formal/summary.json": "43699eb706cd872bf8256db933010e25ca6ee2562cf13775b23502951b995e39"
+  },
+  "script_sha256": "57f65c077425ceba0694efe4b75617c5824782ca2d83dfce6a973e794b8fd26d",
+  "target": "unchanged t-to-21-common-day economic return",
+  "pool": [
+    "510300.SS",
+    "510050.SS",
+    "510500.SS",
+    "512100.SS",
+    "159915.SZ",
+    "588000.SS"
+  ],
+  "primary_mean": "high_minus_six alongside old primary rank_ic and high_minus_low",
+  "block_lengths": [
+    21,
+    63
+  ],
+  "resamples": 2000,
+  "seed": 20261019,
+  "original_periods": [
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026H1"
+  ],
+  "limitations": [
+    "已见的固定六ETF历史，不是独立新检验；原筛选失败不因本补充改变。",
+    "21日长度不保证覆盖全部时间依赖，63日仅固定敏感性；循环抽取将首尾相接是假设。",
+    "三个95%范围是分别的近似范围，不是共同保证或结论真假的概率。",
+    "全期名单事后固定且股票风险重叠；修订和当时到达未知不由抽样修复。",
+    "只描述21日期间变化，未算成本/交易/完整资金；贡献为带正负号的百分点，不用净贡献百分比。",
+    "两处内部缺日保留，末尾21未成熟排除；每次按各指标有效数求平均，缺失不填0。"
+  ],
+  "original_experiment_runs_reused_not_restarted": true,
+  "method_review": "Astra high建议执行一次解释诊断；旧筛选失败已足以停止相同方案无理由扩展，不需等待新统计门槛。"
+}

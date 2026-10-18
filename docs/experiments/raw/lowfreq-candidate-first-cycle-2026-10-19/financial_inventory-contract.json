@@ -1,0 +1,38 @@
+{
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "stop_conditions": [
+    "需要新数据/运行市场统计/范围或定义歧义时报告给主控",
+    "不修改旧冻结/原策略/生产/其他owner"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "mission": "核盈利能力/质量及随后价值候选现有本地数据是否够做无未来资料混入的低频选择研究",
+  "task_scope": [
+    "只读现有基本面审查/adapter/schema/cache目录和必要财务样例",
+    "检查真实字段、报告期vs公开日期/抓取时间/修订、历史成员/退出者、行业口径",
+    "库存/缺口具体计数；活动DB如必要只用mode=ro限定财务表，不读个人交易表，不打印密钥",
+    "禁止联网取数、跨项目/扫描全磁盘、回测、安装或写文件"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/fundamentals-independent-review-2026-10-02.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/fundamentals-expansion-review-2026-10-02.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/data",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/configs",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json"
+  ],
+  "expected_outputs": [
+    "可复用财务来源/字段及最早/最晚覆盖的精确证据",
+    "是否存在历史可用时间、行业、退出者；未知直写未知",
+    "能做的小范围资格验证及缺失核心资料，不以现在快照回填历史"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  }
+}

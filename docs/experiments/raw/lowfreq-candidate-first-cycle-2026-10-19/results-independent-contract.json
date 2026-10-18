@@ -1,0 +1,36 @@
+{
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "stop_conditions": [
+    "需要新数据/运行市场统计/范围或定义歧义时报告给主控",
+    "不修改旧冻结/原策略/生产/其他owner"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "mission": "独立核本轮保存结果诊断及单公司财务时点例子的关键数字",
+  "task_scope": [
+    "不导入本轮脚本；用标准库从old daily/pairs独立汇总均值、1062支持、原五期剔除及六项贡献回和",
+    "审查统计脚本保留缺失日/相同抽取日期/固定21+63长度，复核必要一个小代数例子，不重新做2000次抽取",
+    "只核已获官方API中2023-11-03发布2023-09-30期财报、两个前后截点与2024-06-28示例；核同accn六字段，不联网/写/市场运行"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/rotation-reconstructed-four-way-2026-09-09.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result"
+  ],
+  "expected_outputs": [
+    "关键数值/定义是否相符，任何会改变结论的错误；JSON原件未取到的限制保留"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  }
+}

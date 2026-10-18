@@ -1,0 +1,28 @@
+{
+  "scope": "单公司官方财务资料的时点资格探针，不做选股效果、不代表全市场",
+  "source": "SEC companyfacts/submissions JSON templates from official API documentation",
+  "entity_expected": "Apple Inc.; CIK 0000320193",
+  "purpose": "核财报期、filed/accn及提交acceptance时点、同报告期多版是否可区分；能否支持未来构造当时已知输入",
+  "selection_reason": "常见公开申报企业用于资料接口例子；事先指定，不按收益或因子值挑选",
+  "cutoff_example": "2024-06-28T23:59:59 America/New_York, only source-availability example not simulated trade",
+  "allowed_fetches": [
+    "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+    "https://data.sec.gov/submissions/CIK0000320193.json"
+  ],
+  "max_bytes_each": 15000000,
+  "network_budget_remaining_before": 4,
+  "no_market_returns": true,
+  "no_claim_of_historical_universe": true,
+  "no_bulk_download": true,
+  "failure_policy": "保留响应失败，不改来源权限或抓付费资料；替代仅在剩余请求内有明确理由",
+  "additional_original_filing": {
+    "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm",
+    "reason": "由已保存submissions accession/primaryDocument定位；核FY2023原始字段，不扩大股票样本"
+  },
+  "actual_cutoff_policy": {
+    "policy": "filingDate strictly before decision day and acceptanceDateTime before 00:00 UTC on decision day",
+    "reason": "Conservative exclusion of same-day release ambiguity. Original plan retained above; this is a disclosed implementation refinement.",
+    "effect": "Independent check: none of the three selected annual filings/values changes because each filing preceded its decision day by multiple days or months.",
+    "not_verified": "intraday release completeness or first public dissemination clock"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "reviewers": [
+    {
+      "agent": "momentum_reuse_audit",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "scope": "Independent standard-library arithmetic from saved CSVs, source drift/selected corporate-action checks, and saved SEC six-field examples. No import of controller calculation script.",
+      "verified": {
+        "valid_dates": 1062,
+        "high_mean": 0.005922312628557445,
+        "six_mean": 0.006984791952298866,
+        "difference": -0.0010624793237414218,
+        "sum_six_contributions": -0.0010624793237414194,
+        "omit_2024": 0.0008354308276068934,
+        "omit_2026H1": -0.0014246268819553764
+      },
+      "method_inspection": "Paired date rows, 21/63 lengths fixed, two internal missing dates retained. Did not repeat 2000 resamples.",
+      "quality": "Three cutoffs and same-accession six fields match saved JSON. Conservative cutoff refinement changes none of these examples. HTML403 not independently resolved."
+    },
+    {
+      "agent": "financial_inventory",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "scope": "Specified local sources/config/schema/data folders only; no private DB tables, no network.",
+      "finding": "No qualified company historical panel found in inspected scope. Current macro/index valuation and current industry labels are not historical firm characteristics."
+    },
+    {
+      "agent": "candidate_method_review",
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "scope": "Independent bounded question and diagnostic design review before calculation.",
+      "finding": "Saved-results diagnostic justified; retain failed original screen; circular block sensitivity is approximate, marginal intervals not joint; no post-result practical threshold; distinguish data blocker from explanation of all prior delay."
+    }
+  ],
+  "controller": "Accept limited reuse and source probe only; no old draft status promotion, no new investment effectiveness claim.",
+  "final_design_correction": {
+    "finding": "Do not falsely block defense on missing financial panel or unprepared contract",
+    "action": "Located10/3 completed risk forecast evidence, retained9/23 old scope, executed one new saved-prediction selection diagnostic",
+    "reviewer": "Astra high",
+    "pre_execution_adjustments": [
+      "Removed residual momentum design from defensive contract",
+      "FixedB2 forecast use not rawRV20 ranking",
+      "60primary120sensitivity circular/percentiles/fullaxis explicit",
+      "Identical selection dates retained withzero difference"
+    ]
+  },
+  "defensive_arithmetic": {
+    "reviewer": "Sol medium",
+    "scope": "Independent standard-library reading of old predictions/fold means; no controller import, refit or interval rerun",
+    "dates": 317,
+    "axis_dates": 359,
+    "excluded_maturity_dates": 42,
+    "boundary_ties": 0,
+    "mean_simple": 0.8849706189653981,
+    "mean_B1": 0.8958699354747592,
+    "mean_B2": 0.888213368803613,
+    "B2_minus_simple": 0.0032427498382150604,
+    "B2_minus_B1": -0.007656566671146157,
+    "changed_vs_simple": 11,
+    "identical_zero_dates": 306,
+    "decision": "Arithmetic and saved317daily choices agree. Limited historical choice use only."
+  }
+}

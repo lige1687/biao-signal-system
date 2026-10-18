@@ -1,0 +1,35 @@
+{
+  "mission": "执行前独立核固定保存预测的防御选择诊断是否回答新问题且不重复已封存风险误差研究",
+  "task_scope": [
+    "读defensive-selection-plan.json与旧classic-risk-target-fit报告相关段；只指出足以影响结论的设计错误或边界",
+    "不运行统计/联网/写；已有预测不重新拟合，已有训练均值只查绑定"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19/defensive-selection-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/classic-risk-target-fit-2026-10-02.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/classic-risk-target-fit-2026-10-02/saved-result-checks.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "是否执行该诊断/需改何处/能支持什么，最多1000字"
+  ],
+  "stop_conditions": [
+    "不修改旧定义或预算；旧研究不重跑"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "proposed_design": {
+    "plan": "defensive-selection-plan.json",
+    "scope": "four ETF saved predictions;60/120paired circular blocks; not six-ETF momentum"
+  },
+  "diagnosis_to_challenge": "largest research-side bottleneck appears lack of qualified cross-sectional candidate data and use-specific incremental evidence, not more indicators or workflow documents. Need distinguish legitimate no effect, insufficient data and incomplete review/acceptance. Cannot prove causal allocation of months of delay or label all research failure."
+}

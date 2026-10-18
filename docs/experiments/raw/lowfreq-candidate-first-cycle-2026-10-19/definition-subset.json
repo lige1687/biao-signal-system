@@ -1,0 +1,409 @@
+{
+  "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+  "read_at": "2026-10-19T01:07:01.468726+08:00",
+  "source_sha256": "0e82f28b90c8c1811db2f9295c1cee37fb74fb5ea56e8d5caca8216b26cd5589",
+  "scope": "Read-only semantic bindings; supplementary scripts consume saved outputs, do not invoke adapters",
+  "objects": [
+    {
+      "id": "mixed.momentum.raw",
+      "version": "1.0.0",
+      "name": "252至21有效报价涨幅",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "ranking",
+        "description",
+        "research_signal"
+      ],
+      "dependencies": [
+        "mixed.price.economic@1.0.0"
+      ],
+      "definition": {
+        "formula": "I(t-21)/I(t-252)-1",
+        "parameters": {
+          "long_lag": 252,
+          "skip_lag": 21
+        },
+        "endpoints": "自身有效报价行位移；第253条首次可算；不含最近21条",
+        "unit": "fraction",
+        "direction": "降序排序，负分允许",
+        "transforms": "无标准化、无截尾、无年化"
+      },
+      "universe": {
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格"
+      },
+      "status": {
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated"
+      },
+      "lifecycle": {
+        "state": "verified",
+        "basis": [
+          "docs/research/definitions.v1.json",
+          "tests/unit/test_research_definitions.py"
+        ],
+        "verification_scope": "函数级合成精确值验证与resolve/calculate身份参数绑定（仅该测试文件覆盖范围）；未做账户级回放，不构成有效性或生产授权"
+      }
+    },
+    {
+      "id": "mixed.rv20",
+      "version": "1.0.0",
+      "name": "20期简单收益的样本波动",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "mixed.asset.total_return@1.0.0"
+      ],
+      "definition": {
+        "formula": "std(I_t/I_prev-1 over last20,ddof=1)*sqrt(252)",
+        "parameters": {
+          "window": 20,
+          "ddof": 1,
+          "annualization": 252
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "universe": {
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格"
+      },
+      "status": {
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated"
+      },
+      "lifecycle": {
+        "state": "verified",
+        "basis": [
+          "docs/experiments/raw/factor-verification-completion-b6-2026-09-20/evidence-records/mixed.rv20@1.0.0.evidence.json",
+          "tests/unit/test_factor_lab_adapters.py",
+          "docs/experiments/raw/factor-verification-completion-b6-2026-09-20/independent-check/mixed.rv20@1.0.0.result.json"
+        ],
+        "verification_scope": "仅本地合成数值验证：精确登记实现测试及独立零被测实现导入复算逐行通过；未验证真实价格输入、市场效果或预测能力，未获 research_ready、生产或交易授权。"
+      }
+    },
+    {
+      "id": "mixed.rv_percentile",
+      "version": "1.0.0",
+      "name": "自身波动历史分位",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "diagnostic"
+      ],
+      "dependencies": [
+        "mixed.rv20@1.0.0"
+      ],
+      "definition": {
+        "formula": "average_rank(current RV20 within last756 slots)/nonmissing_count",
+        "parameters": {
+          "window": 756,
+          "minimum": 252,
+          "include_current": true,
+          "ties": "average"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "fraction",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "universe": {
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格"
+      },
+      "status": {
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/research/definitions.v1.json"
+        ],
+        "verification_scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      }
+    },
+    {
+      "id": "mixed.volatility_allowed",
+      "version": "1.0.0",
+      "name": "历史波动过滤状态",
+      "type": "state_signal",
+      "profile": "mixed",
+      "uses": [
+        "research_signal",
+        "description"
+      ],
+      "dependencies": [
+        "mixed.rv_percentile@1.0.0"
+      ],
+      "definition": {
+        "formula": "isNaN(rv_percentile) OR rv_percentile<0.8",
+        "parameters": {
+          "exclude_at_or_above": 0.8,
+          "nan": "pass_legacy"
+        },
+        "endpoints": "含t；有位移时以formula和parameters为准",
+        "unit": "boolean",
+        "direction": "见公式；无默认好坏评价",
+        "transforms": "无"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/research/definitions.v1.json"
+        ],
+        "verification_scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      }
+    },
+    {
+      "id": "mixed.momentum.rank",
+      "version": "1.0.0",
+      "name": "横截面动量有序名单",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "ranking",
+        "description"
+      ],
+      "dependencies": [
+        "mixed.eligible@1.0.0",
+        "mixed.momentum.raw@1.0.0"
+      ],
+      "definition": {
+        "formula": "sort(eligible finite momentum,key=(-score,symbol))",
+        "parameters": {
+          "ties": "exact equality then symbol ascending"
+        },
+        "endpoints": "月末并集决策日同截面；缺当日报价无资格",
+        "unit": "ordered_symbol_list",
+        "direction": "高分在前",
+        "transforms": "排序；无百分位、无近似相等容差"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/research/definitions.v1.json"
+        ],
+        "verification_scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      }
+    },
+    {
+      "id": "reference.ff5.hml",
+      "version": "1.0.0",
+      "name": "ff5 HML官方组合收益",
+      "type": "factor_return",
+      "uses": [
+        "attribution",
+        "description",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "prediction",
+        "security_characteristic"
+      ],
+      "scope": "author-defined US equities USD monthly realized returns",
+      "definition": {
+        "formula": "官方HML组合收益，原作者构造见research_references；不重复减RF",
+        "parameters": {},
+        "endpoints": "完整自然月",
+        "unit": "decimal_return",
+        "direction": "仅事后解释",
+        "transforms": "美股百分数/100；CH3原小数不变"
+      },
+      "input": {
+        "fields": [
+          "month",
+          "HML"
+        ],
+        "price_basis": "official research portfolio returns; not ETF execution prices",
+        "currency": "USD",
+        "frequency": "monthly",
+        "calendar": "calendar months"
+      },
+      "universe": {
+        "version": "ff5-202608-retrieved-20260928",
+        "eligibility": "source-defined stock universe",
+        "warmup": "N/A published return",
+        "missing": "blank/sentinel null; no zero",
+        "quality_gate": "strict columns,date,unit,hash checks",
+        "degrade": "unknown availability forbids prediction"
+      },
+      "time": {
+        "observation_time": "month end",
+        "available_at": "unknown historical release time, download not historical availability",
+        "decision_at": "retrospective analysis only",
+        "execution_at": "not applicable",
+        "timezone": "America/New_York",
+        "effective_from": "2026-09-28 local registration"
+      },
+      "dependencies": [],
+      "sources": [
+        "classic_ff5"
+      ],
+      "validation": {
+        "method": "published rows/strict parser and independent unit checks",
+        "tolerance": {
+          "absolute": 1e-12,
+          "relative": 1e-12,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_classic_benchmarks.py"
+        ],
+        "limitations": "no underlying-security replication"
+      },
+      "status": {
+        "definition_clarity": "source_bound",
+        "data_qualification": "published_realized_returns",
+        "implementation": "parsed",
+        "effectiveness": "author_reference_only",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "tests/unit/test_classic_benchmarks.py"
+        ]
+      }
+    },
+    {
+      "id": "reference.ff5.rmw",
+      "version": "1.0.0",
+      "name": "ff5 RMW官方组合收益",
+      "type": "factor_return",
+      "uses": [
+        "attribution",
+        "description",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "prediction",
+        "security_characteristic"
+      ],
+      "scope": "author-defined US equities USD monthly realized returns",
+      "definition": {
+        "formula": "官方RMW组合收益，原作者构造见research_references；不重复减RF",
+        "parameters": {},
+        "endpoints": "完整自然月",
+        "unit": "decimal_return",
+        "direction": "仅事后解释",
+        "transforms": "美股百分数/100；CH3原小数不变"
+      },
+      "input": {
+        "fields": [
+          "month",
+          "RMW"
+        ],
+        "price_basis": "official research portfolio returns; not ETF execution prices",
+        "currency": "USD",
+        "frequency": "monthly",
+        "calendar": "calendar months"
+      },
+      "universe": {
+        "version": "ff5-202608-retrieved-20260928",
+        "eligibility": "source-defined stock universe",
+        "warmup": "N/A published return",
+        "missing": "blank/sentinel null; no zero",
+        "quality_gate": "strict columns,date,unit,hash checks",
+        "degrade": "unknown availability forbids prediction"
+      },
+      "time": {
+        "observation_time": "month end",
+        "available_at": "unknown historical release time, download not historical availability",
+        "decision_at": "retrospective analysis only",
+        "execution_at": "not applicable",
+        "timezone": "America/New_York",
+        "effective_from": "2026-09-28 local registration"
+      },
+      "dependencies": [],
+      "sources": [
+        "classic_ff5"
+      ],
+      "validation": {
+        "method": "published rows/strict parser and independent unit checks",
+        "tolerance": {
+          "absolute": 1e-12,
+          "relative": 1e-12,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_classic_benchmarks.py"
+        ],
+        "limitations": "no underlying-security replication"
+      },
+      "status": {
+        "definition_clarity": "source_bound",
+        "data_qualification": "published_realized_returns",
+        "implementation": "parsed",
+        "effectiveness": "author_reference_only",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "tests/unit/test_classic_benchmarks.py"
+        ]
+      }
+    },
+    {
+      "id": "etf.reference.volatility20",
+      "version": "1.0.0",
+      "name": "volatility20研究简单对照",
+      "type": "feature",
+      "profile": "etf_ma20260924",
+      "uses": [
+        "comparison",
+        "diagnostic",
+        "research_signal"
+      ],
+      "spec_layer": "road",
+      "spec_anchor": [
+        "trading-spec-v1 §2.2/§4/§5/§15"
+      ],
+      "definition": {
+        "formula": "最近20个每日经济价格收益的标准差，ddof=1，不年化",
+        "parameters": {
+          "period": 20
+        },
+        "endpoints": "t及过去，S/E方向首21行可判",
+        "unit": "decimal_daily_std",
+        "direction": "描述，不直接交易",
+        "transforms": "保留连续数值及S/E布尔状态"
+      },
+      "sources": [
+        "classic_benchmark_code"
+      ],
+      "dependencies": [],
+      "validation": {
+        "method": "手算/边界/前缀和固定输入重算",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_classic_benchmarks.py"
+        ],
+        "limitations": "仅研究对照，不代表有效"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_frozen_sources",
+        "implementation": "implemented",
+        "effectiveness": "not_proven",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "tests/unit/test_classic_benchmarks.py"
+        ]
+      }
+    }
+  ],
+  "additional_read_at": "2026-10-19T01:15:55.918175+08:00"
+}

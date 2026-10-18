@@ -1,0 +1,36 @@
+{
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "stop_conditions": [
+    "需要新数据/运行市场统计/范围或定义歧义时报告给主控",
+    "不修改旧冻结/原策略/生产/其他owner"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "mission": "按最终独核意见，核防御候选可执行性，不将质量缺资料泛化到防御",
+  "task_scope": [
+    "只读已登记RV20/波动百分位对象、六ETF保存经济价值序列与旧防御/四组研究的相关内容",
+    "给出一个明确防御用途及最简单对手，核旧结果是否已回答；必要输入真实存在/是否满足日期、分红、缺失和公式支持",
+    "不计算市场效果、不联网、不修改。列出新检验是否必要可执行以及准确路径，不能拿未写合同当阻塞。"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/rotation-reconstructed-four-way-2026-09-09.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/factor-b14-rv-rank-recovered200-controller-review-2026-09-21.md"
+  ],
+  "expected_outputs": [
+    "可复用财务来源/字段及最早/最晚覆盖的精确证据",
+    "是否存在历史可用时间、行业、退出者；未知直写未知",
+    "能做的小范围资格验证及缺失核心资料，不以现在快照回填历史"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  }
+}

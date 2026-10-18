@@ -1,0 +1,202 @@
+{
+  "research_id": "lowfreq-candidate-first-cycle-2026-10-19",
+  "mode": "research",
+  "execution": "completed",
+  "question": "已有同日ETF选择证据能否支持优先采用相对动量；质量等不同信息候选的下一个真实瓶颈是什么",
+  "decision_use": "确定优先保留/暂缓/补资料的候选，解释研究到可用决定的最大断点",
+  "user_scope": "按认可顺序持续做并同步分析最缺乏部分，和因子实现对话区分",
+  "scope": [
+    "六ETF动量旧证据验收及必要新增保存结果诊断",
+    "按序到质量/价值数据资格及防御既有证据复用",
+    "研究侧系统痛点及因果归因限制",
+    "必要新增：10月3日四ETF风险保存预测的同日选择用途，不重跑旧拟合"
+  ],
+  "not_in_scope": [
+    "日/小时确认与完整原A资金，归因子实现",
+    "数据/新闻/UI运行闭环，归系统实现",
+    "生产、交易、自动通知、付费数据、参数搜索、重启封存"
+  ],
+  "target_and_baseline": "原六ETF2022-01-01至2026-06-30、21共同报价日结果；当日高二/低二/全六均值；后续质量资料资格先行",
+  "budget": {
+    "source_requests_max": 6,
+    "source_requests_used": 5,
+    "core_batches_max": 1,
+    "purposeful_followup_batches_max": 3,
+    "attempts_max": 10,
+    "new_batches_used": 1,
+    "old_experiments_rerun": 0,
+    "prior_scope_budgets_unchanged": true,
+    "purposeful_followup_batches_used": 2,
+    "source_and_analysis_attempts_used": 8,
+    "pre_network_mechanical_failures": 1,
+    "model_cost": "unknown"
+  },
+  "source_strategy_hashes": {
+    "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "standards_index": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/current-standards.json",
+  "stopping": "必要已授权检验做完；未知/负结果可交付；核心缺资料仅阻断对应分支；预算中断paused",
+  "output_location": "docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19",
+  "agents": {
+    "momentum_reuse": {
+      "network_allowed": false,
+      "max_agents": 3,
+      "one_writer_per_file": true,
+      "preserve_dirty_worktree": true,
+      "write_paths": [],
+      "stop_conditions": [
+        "需要新数据/运行市场统计/范围或定义歧义时报告给主控",
+        "不修改旧冻结/原策略/生产/其他owner"
+      ],
+      "controller_review": {
+        "required": true
+      },
+      "mission": "核已有六ETF动量证据可复用性，定位真正未做的必要检验",
+      "task_scope": [
+        "只读精确动量定义/现成计算/六ETF原合同、daily、pairs、summary、source closure",
+        "检查样本/端点/公式/旧独核、冻结预算及报告待审身份，不重新算市场指标",
+        "建议能改变结论的最小保存结果诊断；与原候选选择/时机四组身份区别"
+      ],
+      "read_only_paths": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/rotation-reconstructed-four-way-2026-09-09.md"
+      ],
+      "expected_outputs": [
+        "引用确切文件/行/样本，哪些可复用/需核/不可用",
+        "未解决缺口及必要诊断建议，不做宽泛新研究"
+      ],
+      "executor": {
+        "model": "gpt-6-sol",
+        "reasoning_effort": "medium"
+      }
+    },
+    "financial_inventory": {
+      "network_allowed": false,
+      "max_agents": 3,
+      "one_writer_per_file": true,
+      "preserve_dirty_worktree": true,
+      "write_paths": [],
+      "stop_conditions": [
+        "需要新数据/运行市场统计/范围或定义歧义时报告给主控",
+        "不修改旧冻结/原策略/生产/其他owner"
+      ],
+      "controller_review": {
+        "required": true
+      },
+      "mission": "核盈利能力/质量及随后价值候选现有本地数据是否够做无未来资料混入的低频选择研究",
+      "task_scope": [
+        "只读现有基本面审查/adapter/schema/cache目录和必要财务样例",
+        "检查真实字段、报告期vs公开日期/抓取时间/修订、历史成员/退出者、行业口径",
+        "库存/缺口具体计数；活动DB如必要只用mode=ro限定财务表，不读个人交易表，不打印密钥",
+        "禁止联网取数、跨项目/扫描全磁盘、回测、安装或写文件"
+      ],
+      "read_only_paths": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/fundamentals-independent-review-2026-10-02.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/fundamentals-expansion-review-2026-10-02.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/data",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/configs",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json"
+      ],
+      "expected_outputs": [
+        "可复用财务来源/字段及最早/最晚覆盖的精确证据",
+        "是否存在历史可用时间、行业、退出者；未知直写未知",
+        "能做的小范围资格验证及缺失核心资料，不以现在快照回填历史"
+      ],
+      "executor": {
+        "model": "gpt-6-sol",
+        "reasoning_effort": "medium"
+      }
+    }
+  },
+  "checked_coordination_sha": "7af1e9b596614abc92f04283d97bd7c340c186ab",
+  "started_at": "2026-10-19T00:50:53.259867+08:00",
+  "public_sources": [
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_port_form_op.html",
+      "read_scope": "full short construction page lines14-24",
+      "use": "profitability annual inputs, June formation; not proof of local effectiveness"
+    },
+    {
+      "url": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "read_scope": "API docs lines18-90",
+      "use": "free filings+XBRL; frames are last-filed not historical first-known"
+    },
+    {
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json",
+      "requested_at": "2026-10-19T00:53:58.907944+08:00",
+      "status": 200,
+      "content_type": "application/json",
+      "ok": true,
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result/sources/aapl-companyfacts.json",
+      "bytes": 3789099,
+      "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+      "entity": "Apple Inc."
+    },
+    {
+      "url": "https://data.sec.gov/submissions/CIK0000320193.json",
+      "requested_at": "2026-10-19T00:54:00.848790+08:00",
+      "status": 200,
+      "content_type": "application/json",
+      "ok": true,
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result/sources/aapl-submissions.json",
+      "bytes": 163690,
+      "sha256": "aad00f6aa75ba1405e0a34c788bdba9042281b2724fe1db3ff26f434b9a92e44",
+      "entity": "Apple Inc."
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm",
+      "requested_at": "2026-10-19T00:58:16.026518+08:00",
+      "ok": false,
+      "error_type": "HTTPError",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "momentum-saved-diagnostic-1",
+      "kind": "core_diagnostic",
+      "status": "completed",
+      "plan": "docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19/diagnostic-plan.json",
+      "old_market_runs": 0
+    },
+    {
+      "id": "quality-source-qualification-1",
+      "kind": "purposeful_followup_data_qualification",
+      "status": "completed",
+      "script_sha256": "aa8fb4949b94a7cb8289eeb0ca957fcfcff54f94b3e06df4cd4fc1fe089527b0",
+      "scope": "已指定单公司六字段及三个日期检查；不计算市场效果；不扩大为全股票池"
+    },
+    {
+      "id": "defensive-saved-selection-1",
+      "kind": "purposeful_followup2",
+      "status": "completed",
+      "old_market_runs": 0,
+      "plan": "defensive-selection-plan.json",
+      "new_fits": 0
+    }
+  ],
+  "failures": [
+    {
+      "step": "quality original filing fetch precheck",
+      "error": "OutputStorageError saved output exists or differs from new result route",
+      "network_attempted": false,
+      "reason": "recheck_saved_plan is an initializer for a new path, incorrectly used to resume own existing run",
+      "resolution": "custom existing-run verifier checks same UUID/device/capacity/path/plan and uses exclusive new files; old output preserved"
+    },
+    {
+      "step": "goal read-only inspection",
+      "error": "response key is items, not goals; KeyError before any write",
+      "resolution": "Inspected keys and read own item successfully"
+    }
+  ],
+  "completed_at": "2026-10-19T01:15:55.918175+08:00",
+  "evidence": "not_supported_for_two_fixed_historical_selection_uses;quality_source_probe_only",
+  "overall_four_candidate_goal": "in_progress",
+  "publication": "pending_readback",
+  "next_question": "Qualify historical candidate universe and financial records suitable to intended market;do not restart existing momentum/risk fits"
+}

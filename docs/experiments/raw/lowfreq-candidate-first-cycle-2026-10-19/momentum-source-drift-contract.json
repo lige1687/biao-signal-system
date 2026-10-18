@@ -1,0 +1,37 @@
+{
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "stop_conditions": [
+    "需要新数据/运行市场统计/范围或定义歧义时报告给主控",
+    "不修改旧冻结/原策略/生产/其他owner"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "mission": "定位源清单四处当前指纹漂移对旧动量保存结果可复用性的影响",
+  "task_scope": [
+    "只读source-audit四失败、原formal/independent观察CSV及manifest与旧名义价格，核变动是否影响冻结范围",
+    "查Git/现有manifest与定义片段，不恢复/覆盖原件，不重跑实验，不算新市场统计",
+    "抽查一处分红日、两缺日的源可定位性，返回影响结论和不足"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-etf-momentum-effect-b1-2026-09-23",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/factor-momentum-rank-reuse-2026-09-22.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/rotation-reconstructed-four-way-2026-09-09.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-six-etf-economic-momentum-2026-09-23",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/bars-helper-native",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19/source-audit.json"
+  ],
+  "expected_outputs": [
+    "四漂移各自解释/未知、旧保存结果独立分析可行性、抽核具体日期/值"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  }
+}

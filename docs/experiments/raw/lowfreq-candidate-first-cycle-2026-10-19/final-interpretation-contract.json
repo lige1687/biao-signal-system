@@ -1,0 +1,40 @@
+{
+  "mission": "最终只读裁决复核：新报告是否夸大因果/样本/增量/质量资格或提前关闭未完成任务",
+  "task_scope": [
+    "只读新报告、保存结果清单/两结果/已有审查；不联网不跑市场或重复数值检验",
+    "只返回会影响结论的错误，核用户关心的多用途、六ETF范围、平均的语义、资料样例与研究池区分、任务归属",
+    "仅做一轮有依据的最终检查，不扩大新问题"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-candidate-first-cycle-2026-10-19.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result/momentum-diagnostic.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result/quality-source-qualification.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "是否执行该诊断/需改何处/能支持什么，最多1000字"
+  ],
+  "stop_conditions": [
+    "不修改旧定义或预算；旧研究不重跑"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "proposed_design": {
+    "input": "saved formal/daily.csv and pairs.csv only; verify original output hashes and source inventory; no new score or outcome",
+    "motivation": "old report has no quantified date-dependence uncertainty and primary rank mean slightly positive but high-minus-all negative; need assess whether range rules out/implies any benefit, not rescue result",
+    "statistics": "paired circular moving blocks of calendar-ordered date rows up through last eligible outcome (keep two in-range NA dates); same resampled rows for rank_ic, high-minus-low, high-minus-six. Fixed length21 primary,63 sensitivity, 2000 resamples each seed20261019; percentile95 interval of date mean; source small retrospective pool not independent confirmation. No p-value or fabricated meaningful threshold",
+    "other_checks": "recalculate headline from saved outputs; original five periods/51 anchors reused; exact per-asset high-minus-all contribution and leave-one-original-period-out summaries as descriptive concentration, no selection or model",
+    "boundary": "new supplementary saved-result diagnosis recorded as exploratory 1batch; original formal+independent run budgets not reused/reset, output external. Not costs/account/production; sampling assumptions and short history limit intervals"
+  },
+  "diagnosis_to_challenge": "largest research-side bottleneck appears lack of qualified cross-sectional candidate data and use-specific incremental evidence, not more indicators or workflow documents. Need distinguish legitimate no effect, insufficient data and incomplete review/acceptance. Cannot prove causal allocation of months of delay or label all research failure."
+}

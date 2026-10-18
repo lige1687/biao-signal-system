@@ -1,0 +1,34 @@
+{
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "stop_conditions": [
+    "需要新数据/运行市场统计/范围或定义歧义时报告给主控",
+    "不修改旧冻结/原策略/生产/其他owner"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "mission": "独立核四ETF保存风险预测的选择诊断",
+  "task_scope": [
+    "不导入新脚本；独立读取旧run-01/result.json及saved-result-checks.json的fold均值，按同日每方法选2个最低预测，核317日期与实际y平均及选择变化",
+    "核新脚本共同完整359日轴、42日期成熟边界、并列排除规则、所有相同选择零差仍进比较；不重复1000次抽取",
+    "不联网/写文件/新拟合/新特征标签，不混同组合波动或原始RV20直接排序"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/classic-risk-target-fit-2026-10-02/run-01/result.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/classic-risk-target-fit-2026-10-02/run-01/contract.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/classic-risk-target-fit-2026-10-02/saved-result-checks.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result/defensive-selection-diagnostic.json"
+  ],
+  "expected_outputs": [
+    "关键数值/定义是否相符，任何会改变结论的错误；JSON原件未取到的限制保留"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  }
+}

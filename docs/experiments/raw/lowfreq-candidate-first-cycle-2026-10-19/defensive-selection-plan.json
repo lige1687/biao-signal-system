@@ -1,0 +1,58 @@
+{
+  "registered_at": "2026-10-19T01:12:39.991792+08:00",
+  "question": "已有风险预测若用于同日选择波动预期最低两只，RV20是否比原模型和各ETF成熟历史平均实际选得更平稳？",
+  "scope": "追加保存预测的选择诊断；四ETF已见历史，非新预测/训练/独立验证/组合风险/账户",
+  "financial_reason": "波动可能延续，但资产固有风险水平可能已解释排序；使用各ETF过去均值作为强简单对手",
+  "universe": [
+    "510050.SS",
+    "510300.SS",
+    "510500.SS",
+    "588000.SS"
+  ],
+  "dates": "原2025及2026H1两评价段共同317日期；保留完整359日评价轴及42个成熟边界排除",
+  "inputs": {
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/classic-risk-target-fit-2026-10-02/run-01/result.json": "a6eb7fc3516ae6947b44e28696ded9d8527ef5bfae65e5ae9e7644ae48824554",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/classic-risk-target-fit-2026-10-02/run-01/contract.json": "84f1c596bf604d582197352370003292f164b914f98e7fefcbd1c01c1309400d",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/classic-risk-target-fit-2026-10-02/run-01/preflight.json": "bc72a04e6f0c5a12151b9283f3893ab5f0900c5689e1bf99745989b47497d1de",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/classic-risk-target-fit-2026-10-02/saved-result-checks.json": "e427c762408ffc0e5c68cfcad165c5053e4dc6ab590fb1638ce34bc586cf9877"
+  },
+  "methods": [
+    "asset_mean",
+    "B1",
+    "B2"
+  ],
+  "selection": "每日按预测未来波动从小到大选2只、各半；第2/3预测严格相等则该日所有比较共同排除；不使用未来y选标的",
+  "baseline": "asset_mean使用旧核对保存的各fold训练期已成熟目标均值；无重算新训练或重新拟合",
+  "primary": "B2所选两个标的的实际未来日波动平均，减asset_mean所选平均；更低为更平稳",
+  "secondary": [
+    "B2-B1差额",
+    "三种方法各自选中的实际未来日波动与全四只均值",
+    "选项相同/改变日期、每产品入选数和两个旧评价期"
+  ],
+  "target": "原y：t+1..t+21经济收盘的20段日简单变化标准差，ddof1乘100，单位百分点，不年化",
+  "uncertainty": {
+    "paired_blocks": [
+      60,
+      120
+    ],
+    "draws": 1000,
+    "seed": 20261019,
+    "retain_missing_dates": true,
+    "no_new_threshold": true,
+    "primary_block": 60,
+    "sensitivity_block": 120,
+    "circular": true,
+    "algorithm": "same paired dates for both contrasts; circular contiguous blocks truncated to359 axis rows; percentile2.5/97.5 of means over actual finite dates",
+    "limitations": "359-day axis and317valid dates with120-day blocks offer little independent time information; approximate diagnostic only"
+  },
+  "limitations": [
+    "均值是两只各自波动的平均，不是组合波动或最大跌幅",
+    "股票共同风险/少产品/已见日期，不证明真实低波动ETF或个股效果",
+    "波动低不等于跌得少/更赚钱；账户费用、上涨参与与操作负担未测",
+    "仅解释旧固定预测的使用，不能将回顾性新增用途说成历史事前注册"
+  ],
+  "budget": "有理由跟进第2批；最多一次，不重开旧风险或动量原批次",
+  "include_unchanged_selections": "All eligible dates included; identical selections give zero difference. Changed dates only descriptive.",
+  "model_scope": "Selection using old B2 model forecast including RV20, not direct raw-RV20 ranking",
+  "script_sha256": "6a7e5e473be17febbe9705e5fcf2e0245479cc95c33b73d44605aa453fe8cc22"
+}
