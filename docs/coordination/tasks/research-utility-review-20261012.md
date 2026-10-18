@@ -1,3 +1,13 @@
+# 原A确认语义与实际放行机会接续 2026-10-18T18:11:07.356124+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status active；scope_released false；checked_coordination_sha=9ee684656de99d8384a18f78322e407620fa3d6c；checked_at=2026-10-18T18:11:07.356124+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018新增方法流程范围、investor-workspace-simplification-20261012、中控。personal正做通用发现流程，本轮不重复；系统UI/API不动。
+- 用户持续推进并确认短开题/原规则优先。服务原体系4.4确认层与实现10事前空间核对：验证旧已放行7机会是否同时具备原底部和小周期资料，未知不当失败或成功；将唯一已定的组合逻辑和目标区间数学检查实现为隔离研究工具，不重新定义目标区域、不重新生成原信号/账户，不扩参数。旧2082.246742/3600秒不重置。
+- 准确写范围：研究树src/lei_signal/research/original_a_evidence.py及tests/unit/test_original_a_evidence.py（如无现成功能可复用）；docs/experiments/raw/lei-original-rule-cases-2026-10-18/continuation/新的小合同/复核/来源回执与脚本；原报告不覆盖，新补充报告docs/experiments/original-a-confirmation-evidence-2026-10-18.md及registry本键/INDEX一行；原progress/目标仅note，主/研究树准确镜像。先登记后写；主控唯一报告/记录写者，执行agent只在指定2代码路径。
+- 同时定向检查现有报价能力，最多一公开ETF一天60分钟能力样例，不批量下载、不购买或改权限/模型。数据入口不可调用则记录当前不可调用，不把旧额度0当新实测。原文、全局定义/标准/AGENTS、生产规则/账户/通知不动。备份手册已核去font/空白与现权威正文一致，尚无逐期图。
+- 验收：规则与未知含义分开、确定性组合检查含未来可用时点/同日身份/空间跨门槛反例；旧7条逐条保留原值/限制且独立核对；数据能力实际回执；系统报告可读和归档，不能以实现检查冒充有效因子。必要原义未定时只阻断依赖分支，当前不是完整LEI收益试验。
+
+---
+
 # 开题分工与原规则案例已交付 2026-10-18T17:33:53.209788+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status completed仅有界定义/资料准备；scope_released true；完整LEI效果blocked/not_evaluated，总目标仍in_progress。checked_coordination_sha=b339a97ea757a3ac27b77a36e72e556a1107235b；checked_at=2026-10-18T17:33:53.209788+08:00；已读COORDINATION、本任务、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller，交付前远端无新变更。系统UI/API及personal独立方案不接管，研究root唯一写者。
