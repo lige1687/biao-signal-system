@@ -1,3 +1,15 @@
+# 宏观、情绪与行业解释已交付 2026-10-18T23:05:24.396255+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮有界摘要改进；scope_released true。checked_coordination_sha=7867dd0b936120748f9cb7ec440ec407a4f4ea01；checked_at=2026-10-18T23:05:24.396255+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller、daily-trading-system-audit、investor-observation-map，包括最新研究静态图及方法案例结案；无代码范围重叠。
+- 终版3产品9类背景，8类有可核材料、XLK新闻1类原文待核。宏观/情绪单期观察不推方向，旧行业报告保留日期；技术现象、价格角色、事实和技术来源由服务固定，Agent只解释相关机制与反向条件，展开可核原文/观察/发布/报告日期。1280/375均无横向溢出；原文反例、摘要到双向条件/同产品K线和再次点击复用已验。
+- 本轮真实模型4请求，input26632/output5409、deepseek-flash、费用未知，失败与语义错误保留。第三次机械通过后发现前高/报告期错误已留原行并标失败；终版在完全相同事实输入（事件排序归一后）上复用该次已独核的背景文本，删除模型技术改写与重复reason，按新规则重组；0第五次请求。摘要ops_a3175c64b6d7453dbe58c049e3f4a697明确复用已核分析。同输入重复点击未增模型，原审查321/流水478保持，五类个人记录仍0。
+- 37后端、最终19子集、前端3组/构建/类型/最后SSR、Ruff及主仓归置通过；初始工作树缺write_tx、Ruff行长和类型漏项、报告URL初次404均留过程，不降低检查。旧包体积及Starlette提醒保持。报告API完整hash829f7d22a2647cf5dbaa41ab298e85b7adc5fd074ab9a7412af0715eea0d127d；原目标okr-4c2ea452d3cc note41→42读回且保护字段/历史不变，status仍in_progress等使用验收。
+- 源码9路径在原codex/investor-workspace-simplification-20261012本机未提交，未合main；精确后端已镜像、5188前端实际验。公开过程、验收、.patch、goal-note均为docs/archive/handoffs-plans/investor-workspace-simplification-20261012/opportunity-context-summary-20261018前缀，两树同值；私有原回复/截图在该工作树.codex/opportunity-context-summary-20261018，不入Git。
+- 额外按因子原owner准确交接采用两个SVG：status SHA ef90ac2d7dec0e622e8eab801c074e4f1ee5c73c75568b407d811eb403e67c29；cost SHA69efd04deca7d4261aa09ce9850bb3bb6020152fbbff62d2b95dc29eb6828024；主原件不改，5188两HTTP正文hash已核。初次复制后Vite暂返HTML未算通过，最终均image/svg+xml。报告含义及独立验收仍原owner负责。
+- 限制：1产品行情缺口、29基金同产品技术输入不足仍在；方向判断、完整新闻/情绪覆盖、未来语言可靠性与真实投资效果均未证明；冷准备仍需分钟。无待跑模型、无新日程/因子实验/个人金融写入，用户效果待验收。
+
+---
+
 本轮采用范围补注 2026-10-18T22:58:24.573596+08:00：checked_coordination_sha=6d8d0d3f027e056793ce73b9bac8e4807c06430e；已读同六task及research-utility新增静态图段，仍无源文件冲突。用户已把因子研究交原owner、系统展示交本任务；按该owner交接只将web/public/research-results/original-a-intraday-2026-10-18-status.svg及original-a-intraday-2026-10-18-cost.svg按其已登记hash复制到5188成果树。主研究原件不改，不接管研究或报告；原owner独立验页面。本任务仍在宏观摘要最终验收，未扩大模型或研究预算。
 
 本轮开工补注 2026-10-18T22:26:37.897576+08:00：正常push因research-utility新接续发生并发被拒；已fetch并读b1613117e69a7a83595cc2eac288a3d6ee7bc86c原A连续小周期范围，和本轮无重叠，普通merge保留。checked_coordination_sha=b1613117e69a7a83595cc2eac288a3d6ee7bc86c；已读task-id沿下段并补research-utility新段。新增准确写范围configs/opportunity-summary-sources.v1.json仅给显式摘要的经核公开原件增量，不改整板机会源配置、原68审核快照或触发整批生成。它按准确symbol/发布日期/原文/关联与限制保存；缺失/过期不当新闻。沿既定模型及来源预算。
