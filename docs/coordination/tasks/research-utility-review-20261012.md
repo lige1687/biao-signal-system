@@ -1,3 +1,9 @@
+# 原规则具体复核图范围补注 2026-10-19T00:09:29.050562+08:00
+
+checked_coordination_sha=0a7c9fa2b2348d352d53cbc0da0b8d3b5f7d51fe；已读前述自身/系统/方法owner/中控，最新无写重叠。新Sina探针中证500ETF实际得到303天1212根截止2026H1小时，价格口径核查中；原Patreon交易流程表已读。原目标区域取价仍缺，不能跑完整A资金。仅补既有比亚迪2022-07-15案例的截至当日日/小时图（不重新筛事件/不含未来/不画AI猜定目标），新准确静态产物web/public/research-results/original-a-rule-case-2026-10-19.svg，raw内新render_rule_case.cjs/案例绑定。root写主/研究树，5188采用仍交系统owner；无共享前端/API源码改动。不重复旧绩效或已有等待描述。
+
+---
+
 # 原规则、小时确认与资金比较接续 2026-10-19T00:01:06.185436+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=a09d76a4985cd276c7b281000de5637c4c31c7c2；checked_at=2026-10-19T00:01:06.185436+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018最新样本说明、investor-workspace-simplification-20261012最终交付、research-dispatch-controller；未接管系统UI或方法owner，无当前重叠。
