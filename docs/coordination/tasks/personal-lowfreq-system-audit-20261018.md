@@ -1,3 +1,16 @@
+# 接续：独立低频方案与用途价值研究 2026-10-18T16:26:59.701341+08:00
+
+- task-id: personal-lowfreq-system-audit-20261018；owner: 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status: active；scope_released: false。
+- checked_coordination_sha: 99dc74856d4f0716cce321f9933bf960501c0969；checked_at: 2026-10-18T16:26:59.701341+08:00；已读COORDINATION、自身、research-utility-review-20261012 16:12、investor-workspace-simplification-20261012、research-dispatch-controller、classic-factor-research、technical-factor-sequence；冲突决定：原LEI及原模块由因子实现继续，本任务独立低频候选，不占原完整A/双线、UI/API、宽度情绪宏观及旧封存输入写入范围。
+- 用户原话：这个对话可以去寻找新的独立的低频方案；原有策略的问题交给因子实现；做透做全研究，规范落地，看到因子的价值，不只有盈利还有风险规避。用户已明确原油是原有笔误。已向因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc发送具体问题及证据，工具返回目标threadId成功，接续状态待其协调回执，不声称其研究已执行。
+- 本轮research模式：先查未重复的独立机制和合格资料，选择一个有界核心问题，事前固定定义/资料/简单基准/成本/风险代价，执行必要可行检验并核数。允许负向或证据不足，不承诺发现有效策略。新问题不重置旧实验预算，不改原策略、生产、账户或交易。
+- 文件范围：成果分支codex/personal-lowfreq-system-audit-20261018基线b4b03c2a74fddc19b35674c65a482d6890b16fb1；自有新 docs/experiments/independent-lowfreq-value-2026-10-18.md 与同名raw小合同/数据索引/审阅，原progress增量，独立树registry/INDEX仅新条。具体研究入口和输入资格核明后更新冻结范围；不先改共享研究引擎或全局定义。
+- 分工：root唯一写者与方法决定；沿用Sol medium evidence_audit只读候选/重复证据，account_audit只读跨风险资产资料与runner。均不运行收益、不下载、不写文件，不跨项目；必要方法独核另单独指定。实际token成本未知。
+- 本轮新预算：依research-closure一个核心问题，最多1核心批+3有理由的后续批，6公开原始来源请求，最多10实际尝试；真实来源与实验逐条登记。既有2082.25/3600及旧封存预算不动。资料检查与小报告本机，实际新结果先按storage/plan_output核外盘；不足不回退。
+- 验收：研究与原策略分工回执；资料/定义/可用时点；合成和独立数值核对；填实性能与相对已有信息增量；亏损恢复/参与代价/成本适用项；不确定性/反例/已见历史；来源指纹和所有尝试；归档及准确远端读回。核心缺资料的分支写blocked，能做的独立工作继续，不以路线表冒充效果研究完成。
+
+---
+
 # 低频研究方向探索结案 2026-10-18T15:49:22.667916+08:00
 
 - task-id: personal-lowfreq-system-audit-20261018；owner: 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status: completed；scope_released: true。关闭本轮方向问题，不关闭有效因子/完整策略总目标。
