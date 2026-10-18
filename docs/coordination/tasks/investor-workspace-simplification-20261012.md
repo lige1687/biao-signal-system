@@ -1,3 +1,5 @@
+推送并发补注 2026-10-19T00:31:28.497233+08:00：首次普通push被拒，已fetch/read并合并新小时研究范围，无UI/API重叠；checked_coordination_sha=692c7e4ecdc72147fb8271b87975e2b8b6aa502d；已读task-id补research-utility-review-20261012最新00:30，其他同下。保留其新研究与原选股任务范围。
+
 # 近五日重点验收补充：清单绑定当前审查 2026-10-19T00:30:45.937632+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=88bd743195b146d00da340ebb6c244c011e28d01；checked_at=2026-10-19T00:30:45.937632+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018最新00:29、research-utility-review-20261012最新00:19和原中控/日常/观察任务；新选标的登记与静态图均不占本轮文件，无冲突。
