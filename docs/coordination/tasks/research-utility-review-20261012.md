@@ -1,3 +1,14 @@
+# 上涨回调原义与ETF/个股条件组合扩样接续 2026-10-19T01:01:02.912795+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=97d4ec0fbe613f4ee6355250c17137c4bc1d449c；checked_at=2026-10-19T01:01:02.912795+08:00。已读COORDINATION、自身、系统00:49资料链范围、personal00:50动量质量首轮与中控；不接管动量/财务/市场背景或系统源码。
+- 用户要求继续用桌面笔记核上涨回调/目标/失效，独立因子优先ETF和更多股、组合真增量、旧实验复用并系统直观展示。优先新有界问题：在已确认底部提供支撑的同一批观察起点，冻结底部低点失效结束观察、原20组反向关键波动结束观察及两者结合，相对共同20日（30辅）固定终点分别减轻多少下探、放弃多少反弹；预定上升背景单列，不冒充完整A/账户。数据与具体方法合格后先冻结才算新效果。旧A03首次、A04变浅、D01盒顶、颜色/小时共同终点不重跑；旧ETF/股底部输入能复用则复用，扩样新信号另按前缀/边界核查。
+- 来源范围：桌面原笔记相关短段和原图新增最多3张；固定原两权威SHA不变。ETF优先核原小时资格失败和上交所基金收盘机制；已经1次官网定向检索，沿前轮新增6逻辑请求上限已用2，本轮最多余4，本次计第3，仍保留旧85+1及前轮6请求。若需实际行情只取必要已配置公开来源，不付费/换权限或重下已有原件。既有300A/502US日OHLCV已定位，可先独立日线研究；现成ETF原材料范围/复权先核，不把股票结论代ETF。
+- 写者root仅新docs/experiments/pullback-conditions-expanded-2026-10-19.md及同名raw小合同/脚本/源/回执，registry自身键/INDEX行、原progress/目标note；新src/lei_signal/research/pullback_context_increment.py与tests/unit/test_pullback_context_increment.py、必要独立数据适配器同raw；不改旧正式模块或原文/生产。定义如需扩样版本仅准确新卡、旧ID版本不覆盖，先列清来源/比较边界。静态产物仅web/public/research-results/pullback-conditions-expanded-2026-10-19.svg，root核后在同repo运行树精确create-only采用，不改UI/API/服务。大输入/明细/图原件走storage plan固定外盘。
+- 分工先只读：Astra hourly_increment_design核3图/理由B/C、去重和方法；Sol hourly_increment_reuse核ETF根因/更多股输入。后续Sol仅已明确新模块或准备适配器，root唯一实际市场/网络运行及共享表写者，独核另隔离，避免并行同文件。
+- 预算继承保守市场2139.394965/3600秒，不重置。拟最多1核心组合批及必要资格/前缀/独核，0拟合/寻参；总体尚需数据资格和冻结，不把计划记运行。验收必须有ETF与股票各自覆盖、历史名单/时点限制、性能与相对简单办法差额、组合相对各单项是否仍增益、时期/产品反例、独核及真实系统图；只降低投入/参与不等于预测更好。完整B/C不可唯一处只阻断依赖，独立能测就继续。
+
+---
+
 # 小时确认共同终点比较与桌面原笔记核回交付 2026-10-19T00:54:32.781343+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本有界机会比较；scope_released true。checked_coordination_sha=c49bc17936a402ff04cedbf69da9dfd0c774bb95；checked_at=2026-10-19T00:54:32.781343+08:00；已读COORDINATION、自身、personal00:50动量/质量首轮新范围、系统00:49数据链修复及中控。两新范围均不与本次原底部/小时/静态图重叠；选股新候选文献/财务不接管。
