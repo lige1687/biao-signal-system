@@ -1,3 +1,5 @@
+本轮采用范围补注 2026-10-18T22:58:24.573596+08:00：checked_coordination_sha=6d8d0d3f027e056793ce73b9bac8e4807c06430e；已读同六task及research-utility新增静态图段，仍无源文件冲突。用户已把因子研究交原owner、系统展示交本任务；按该owner交接只将web/public/research-results/original-a-intraday-2026-10-18-status.svg及original-a-intraday-2026-10-18-cost.svg按其已登记hash复制到5188成果树。主研究原件不改，不接管研究或报告；原owner独立验页面。本任务仍在宏观摘要最终验收，未扩大模型或研究预算。
+
 本轮开工补注 2026-10-18T22:26:37.897576+08:00：正常push因research-utility新接续发生并发被拒；已fetch并读b1613117e69a7a83595cc2eac288a3d6ee7bc86c原A连续小周期范围，和本轮无重叠，普通merge保留。checked_coordination_sha=b1613117e69a7a83595cc2eac288a3d6ee7bc86c；已读task-id沿下段并补research-utility新段。新增准确写范围configs/opportunity-summary-sources.v1.json仅给显式摘要的经核公开原件增量，不改整板机会源配置、原68审核快照或触发整批生成。它按准确symbol/发布日期/原文/关联与限制保存；缺失/过期不当新闻。沿既定模型及来源预算。
 
 # 接续：宏观、情绪与行业新闻进入摘要解释 2026-10-18T22:25:36.745680+08:00
