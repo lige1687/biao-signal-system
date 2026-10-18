@@ -1,3 +1,14 @@
+# 接续：本库研究与权威方法的差距审查 2026-10-18T16:40:35.438629+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false仅自有新审查报告/raw小证据、原progress及隔离树registry/INDEX本条。checked_coordination_sha 6b32b54b1f78abe31373cdbd6abd1e484a7e0085；checked_at 2026-10-18T16:40:35.438629+08:00；已读COORDINATION、自身、research-utility-review最新16:37结案、中控，既有系统owner范围保持。原策略与系统继续原owner，本次不写其文件。
+- 用户问题：比较本库已有方向与权威机构方法的不同和缺陷，解释为何长期仍无可用因子，审查金融含义与研究方法。沿上轮学习在先要求，以report_only做可定位的比较诊断；无新市场回测、拟合、下载或生产改动。
+- 增量边界：直接复用10/12痛点、10/15流程审计及10/18增量/机制审查，不重做11案；新增核前端选题中的可检验金融假设、代理与实际问题、简单对手退化时如何判断、负结果与方法缺陷/未完成的分别，和减少继续无效投入的具体取舍。不能把无正结果倒推为统计流程错误，也不能给所有负结果补金融故事。
+- 成果基线codex/personal-lowfreq-system-audit-20261018@1798b855877ccdbad3f0faadc0782427ce9b4c02；root唯一写docs/experiments/factor-research-gap-review-2026-10-18.md及同名raw/checks.json、source-manifest.json，原progress/隔离树registry和INDEX仅本新条。不改已封存原文、定义、合同、报告、教材或通用标准。
+- 分工：Sol medium evidence_audit只读18价格成交代理及区间联合的定义/合同与现有证据；Astra high method_diagnosis只读审方法归因与反例，因涉及策略语义/方法歧义用Astra。无助手网络或市场运行，root统一来源。最多6公开原件请求（必要补读优先），1次保存摘要/元数据核对，不重算市场。所有旧预算保持，实际token费用未知。
+- 验收：每个缺陷有准确案例、与权威做法的差异及反例/已修状态；主张范围明确，不量化未知浪费比例；给继续/暂缓/先补含义的方向取舍，不另造一套研究平台；核来源和登记、独审关键归因、成果远端读回。当前研究长期目标不因本审查完成而完成。
+
+---
+
 # 首批权威方法学习交付 2026-10-18T16:35:41.549990+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次首批方法选读；scope_released true。长期因子发现/本地适配目标未完成。checked_coordination_sha 87518de51476bb3b69ecba16177bb8e04c49d418；checked_at 2026-10-18T16:35:41.549990+08:00；已重读自身、research-utility-review 16:29原策略接续回执，系统/中控/classic边界无新增变化；冲突决定仍不改原owner、教材、引擎、UI和旧冻结。
