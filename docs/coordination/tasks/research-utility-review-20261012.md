@@ -1,3 +1,13 @@
+# 大方向与最终交付要求已收敛 2026-10-18T16:12:26.413127+08:00
+
+checked_coordination_sha=3c04883f2ae1354fd3f7577de9ad54b9b5b6716e；checked_at=2026-10-18T16:12:26.413127+08:00；已读自身/系统owner/personal方向owner/中控及COORDINATION，远端无新差异。status completed仅本次plan_only方向整理；scope_released true仅本轮进度/目标note，完整策略总目标仍in_progress。原任务未被小结替代。
+
+主/研究树原progress已追加六大方向和交付条件，复用future-plan及个人方向b4b03c2a，未另造报告/因子/实验合同。原目标note151→152并读回，保护字段和旧历史保持。系统owner已收用户范围及三层同源展示验收，本root无UI/API代码或账户改动。Sol6 medium只读检查返回，0新行情/拟合/市场运行，原2082.25/3600不重置。公开查询2次，AQR官方摘要只支持趋势表达相似与实施重要，不背书本系统。两原策略SHA未变。主仓归置通过；progress仅本地未提交，远端只协调元数据。
+
+六方向为：忠实原文与合格资料；双均线全生命周期/场景；有限其他趋势表达与补充信息；仓位风控；共同资金组合；现系统交付与后续观察。ETF优先，个股独立覆盖。原目标/首次/小时/资金冲突等缺口保留，下一执行先核前提，不为增交易或寻正改变原规则。用户此条明确要大方向，本轮不代开各方向实验或声称已经完成全部任务。
+
+---
+
 # 总交付方向收敛与原目标接续 2026-10-18T16:10:32.227769+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status planned（完整研究总交付），本轮方向整理active；scope_released false仅下述自有进度/原目标note。checked_coordination_sha=dffe8c640be7250867a06a8dec2d6e61e4950244；checked_at=2026-10-18T16:10:32.227769+08:00；已读COORDINATION、自身、系统investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018及中控既有边界。用户希望全部做到可交付，并明确本次总结大方向，不展开单个实验方案。
