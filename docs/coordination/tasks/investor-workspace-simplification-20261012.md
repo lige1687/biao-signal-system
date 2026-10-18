@@ -1,3 +1,12 @@
+# 近五日重点验收补充：清单绑定当前审查 2026-10-19T00:30:45.937632+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=88bd743195b146d00da340ebb6c244c011e28d01；checked_at=2026-10-19T00:30:45.937632+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018最新00:29、research-utility-review-20261012最新00:19和原中控/日常/观察任务；新选标的登记与静态图均不占本轮文件，无冲突。
+- 三栏已实现并真实读取：1项宽度资料待核、1条近五日宏观、1条行业大事；CPI10/14归较早背景。47后端检查与前端检查构建已过，最终交付仍需完整页面和摘要实测。
+- 实际准备已complete，但/recent取全局最新保存run，与页面当前准备完成的run不同，导致已缓存4条近期事件被前端同run校验排除。新增准确范围web/src/pages/OpportunitiesPage.tsx仅近期query绑定resolved run_id、tests/unit/test_recent_opportunities.py指定run只读及错误回归；已登记routes/opportunity_reviews.py与web/src/api/opportunityReviews.ts加可选run_id。首页无参数语义不变，仍只读已有缓存，不拉行情/重算规则/重试失败模型。root唯一修改者。
+- 验收当前run事件4条/3产品能展示，非法和不存在run明确报错，GET不新建DB/调用模型；随后同页面摘要一次实测、复用及窄屏。记录冷准备、旧失败与本轮普通新日准备新增记录，不冒称全部审查成功。其他开工范围和原目标note保持。
+
+---
+
 # 近五日全市场重点统一展示：开工 2026-10-19T00:12:15.990385+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=da446d34ff8039fff74e50be927dbfdc4037cdfc；checked_at=2026-10-19T00:12:15.990385+08:00；已读COORDINATION及自身、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller、daily-trading-system-audit、investor-observation-map；方法学习与原A研究均不占本轮摘要源码，无冲突。
