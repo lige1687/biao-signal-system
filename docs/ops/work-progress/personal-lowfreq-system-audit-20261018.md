@@ -46,3 +46,11 @@
 checked_coordination_sha=d13868e788534ea78f220350513de971c098a2bd；checked_at=2026-10-18T16:46:58.348467+08:00；已读自身、research-utility-review、research-dispatch-controller及系统owner既有范围，冲突决定不变。报告含已修错误/合理负结果/未知三类与取舍。来源原件多为主树本机未提交，准确内容绑定manifest；归档与发布检查见raw/checks.json。
 
 验收：17来源指纹、保存摘要算术、全部本地链接、登记唯一和原条目不变、diff检查通过。主仓现行归置绿；成果树旧检查器继承的.git、COORDINATION.md、docs/coordination三项失败保留，未修改检查器。既有目标okr-ff1e0a86fbac当前153/in_progress，不重复建目标或关闭。准确成果commit及交接以协调记录为准。
+
+## 2026-10-18T18:15:03.774097+08:00 金融现象优先的AI因子发现流程
+
+已复用原owner开题/案例工作，核当前代码真正检查范围、个股与8ETF的实际支持，读RD-Agent官方场景及入口代码；6公开请求、1本地X适配器缺失，0市场运行。Gemini实见4 Argon/高点，但本轮输入提交未核成功，不能称新讨论完成。三路只读代理和五例方法演练已完成，采纳两处边界修正。
+
+新增docs/research/factor-discovery-playbook.md、docs/experiments/ai-factor-discovery-workflow-2026-10-18.md及raw；主共享树仅同一playbook+AGENTS唯一新块，原字节前缀保留、不暂存其他修改。工作指引是AI阅读/审查要求，不是新增自动语义判断。checked_coordination_sha=9ee684656de99d8384a18f78322e407620fa3d6c；已读自身、research-utility-review最新17:33、系统owner及中控，无重叠接管。后续按本次验证/发布回执收尾，长期有效因子目标未完成。
+
+2026-10-18T18:18:30.956054+08:00 验收：17来源指纹、全部本地链接、唯一登记/原条目不变、两AGENTS原字节保持、同一playbook及diff通过；五例方法独审修正已应用。主仓归置通过，成果树继承.git/COORDINATION.md/docs/coordination三项失败保留。成果树缺规范索引的相对链接已改为实际主仓原件，未复制原owner未提交规范。新协调ddbac21b55d1a39666db80a67be00c33850f73c7中原owner18:11已接续原A确认工具，明确不重复本通用发现流程，范围无冲突。Gemini当前提交未核、X原帖未核，均不作已完成；无新市场运行。
