@@ -1,3 +1,11 @@
+# 小时比较已出数，限定图表与独核范围 2026-10-19T00:45:09.349096+08:00
+
+checked_coordination_sha=d2a95e1f020c5795b9d64a9451b440573c639aba；checked_at=2026-10-19T00:45:09.349096+08:00；已读COORDINATION、自身、系统owner00:41交付、personal-owner00:32候选TODO交付及中控；均无当前写入重叠。status active；scope_released false。本轮仍只用旧对象research.structure.bottom_hourly_waiting@1.0.0，不新增/改全局定义。冻结28绑定后唯一核心比较已完成0.604454秒，累计2138.394965/3600，0拟合，独核另记。原生workflow不支持此问题，使用有指纹的独立只读入口，不冒称native通过。
+
+补充准确图形路径：web/public/research-results/hourly-confirmation-increment-2026-10-19.svg；root唯一create-only写主/研究树和同repo的5188运行树，不改其UI/API/服务/构建，目标已存在不同字节则停止。原系统owner该阶段已scope释放；仍给其具体采用通知。Sol hourly_increment_reuse仅新增本raw/render_comparison.cjs，输出先固定外盘/publication，root核后采用；新Sol hourly_increment_independent_check只写本raw/independent-review.json，不import本轮实现，直接核旧源与关键结果、背景反例，不重启封存实验。Astra方法审阅已完成。主控新增原作者公开视频/字幕映射、结果报告和原进度/目标note。收益仅调整后价格机会分数，非实盘成交、账户净收益或同风险优势；少下探与少参与分开。无删改原源/生产/通知/交易。
+
+---
+
 # 理念与策略分开：小时条件独立价值研究接续 2026-10-19T00:30:37.347343+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=88bd743195b146d00da340ebb6c244c011e28d01；checked_at=2026-10-19T00:30:37.347343+08:00；已读COORDINATION、自身、personal-owner低频选标的最终资料审查、系统owner五日摘要范围、中控；未接管选股文献或系统UI，无当前重叠。
