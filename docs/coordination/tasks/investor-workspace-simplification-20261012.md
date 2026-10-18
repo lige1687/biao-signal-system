@@ -1,3 +1,17 @@
+# 用户分工后接续：未来判断与行动记录链 2026-10-18T15:27:53.715663+08:00
+
+checked_coordination_sha=780cb334a52cbb802a70be182a4134e01346ac4b；COORDINATION及自身、research-utility-review-20261012、daily-trading-system-audit、investor-observation-map、research-dispatch-controller、personal-lowfreq-system-audit-20261018相关最新记录已读。原task/owner/分支及e6c4c2e0基线延续，现有脏改保留。
+
+已read_thread核实因子实现最新人类原话及转交：账目没有变化，先用已有份额/金额估值；不优先账目改造。旧理由缺失保留未知，从今后开始记录；系统实现归本任务，因子/策略/组合仍原负责人。本轮服务原体系§5.2执行计划与复盘展示层，实际两策略SHA保持df92d85b…/85e0e327…，不改信号/阈值/研究。
+
+最小实现：独立追加式判断后续表，人工确认等待/未行动/复盘记录；准确同产品关联已有计划/成交，保存关联时快照和版本指纹，旧判断/金融记录不改。今日最多三条已保存判断，不自动审核/确认；页面能从原话到后续读回。建立新计划及真实成交仍走原确认流程，不以计划完成伪装成交。相关字段/接口由合同固定；main精确镜像前核SHA。
+
+root维护确认合同、集成、IAB验收与唯一共享登记；backend Sol只上述3源/2测试；frontend Sol只上述web范围。另Sol只读研究消费：新module-a-rule-audit报告已展示，但registry缺report_sha256，research_report拒读；原owner定稿后提供准确指纹即可接续，不复制大曲线进Agent、不把代理当完整策略。
+
+验收：同请求防重/异载荷冲突；同对象身份/方向/时间/版本核查；等待/未行动不增计划或成交；原文与历次快照不变；错误可恢复；今日入口与完整记录回链；临时合成库跑完整确认流程，生产只读及0个人写入；桌面/窄屏、相关回归及归置。用户解锁已确认，但Chrome研究owner正用，本轮不碰其输入。只加小文档/代码，无收费模型、回测、通知或新日程。
+
+---
+
 # 今日重点与个人低频审查：工程已验，目视待解锁 2026-10-18T14:38:34.720810+08:00
 
 checked_coordination_sha=f78d1f8b84c2bcbf2893877b43dc43ed2dfb9cbe；六相关任务及COORDINATION已读，远端无增量冲突。status=blocked仅余最终页面目视因Mac锁屏无法完成；本轮有界审查已结案，scope_released=true，无后台委派或主动模型重试。原主线目标仍in_progress。
@@ -746,9 +760,9 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
 {
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
-  "status": "blocked",
-  "checked_coordination_sha": "f78d1f8b84c2bcbf2893877b43dc43ed2dfb9cbe",
-  "checked_at": "2026-10-18T14:38:34.720810+08:00",
+  "status": "active",
+  "checked_coordination_sha": "780cb334a52cbb802a70be182a4134e01346ac4b",
+  "checked_at": "2026-10-18T15:27:53.715663+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
@@ -760,39 +774,33 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
   "write_paths": [
-    "web/src/pages/todayActionLogic.ts",
-    "web/src/pages/todayActionLogic.test.mjs",
-    "web/src/components/today/TodayActions.tsx",
-    "web/src/api/client.ts (signals latest only)",
-    "src/lei_signal/api/routes/signals.py",
-    "tests/unit/test_signals_latest.py",
-    "src/lei_signal/api/opportunity_brief.py",
-    "tests/unit/test_opportunity_brief.py",
-    "web/src/pages/OpportunitiesPage.tsx",
-    "web/src/pages/opportunities.css",
-    "web/src/api/opportunityReviews.ts",
-    "web/src/pages/opportunityBriefModel.ts",
-    "web/scripts/test_opportunity_brief.mjs",
-    "src/lei_signal/copilot/opportunity_review.py",
-    "src/lei_signal/copilot/opportunity_transport.py",
-    "tests/unit/test_opportunity_review_service.py",
-    "tests/unit/test_opportunity_transport.py",
-    "docs/experiments/today-agent-output-polish-2026-10-18.md",
-    "docs/experiments/raw/today-agent-output-polish-2026-10-18/*",
-    "docs/experiments/registry.json (own key only)",
-    "docs/experiments/INDEX.md (own line only)",
+    "src/lei_signal/copilot/decision_followups.py",
+    "src/lei_signal/copilot/decision_journal.py (schema/readback only)",
+    "src/lei_signal/api/routes/decisions.py (followup endpoints/readback only)",
+    "tests/unit/test_decision_followups.py",
+    "tests/unit/test_decision_journal.py (affected regressions only)",
+    "web/src/api/decisions.ts",
+    "web/src/pages/DecisionsPage.tsx",
+    "web/src/pages/decisions.css",
+    "web/src/pages/TodayPage.tsx",
+    "web/src/pages/today.css",
+    "web/src/components/decisions/DecisionFollowups.tsx",
+    "web/src/components/today/TodayDecisionFollowups.tsx",
+    "web/src/pages/SupervisorPage.tsx (exact plan link selection only)",
+    "web/src/pages/decisionFollowupModel.ts",
+    "web/scripts/test_decision_followups.mjs",
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-chain-20261018-*",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/today-agent-polish-*",
-    "src/lei_signal/api/routes/opportunity_reviews.py (brief cached-only technical path)",
-    "tests/unit/test_opportunity_review_routes.py (cached helper mock targets only)"
+    "docs/experiments/today-agent-output-polish-2026-10-18.md (previous visual acceptance addendum)",
+    "docs/experiments/raw/today-agent-output-polish-2026-10-18/acceptance.json (visual receipt)"
   ],
-  "scope_released": true,
+  "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-18T14:38:34.720810+08:00",
-  "conflict_decision": "最新远端与开工末次相同；已读六相关任务与COORDINATION。个人整体审查复用844cc8ba及其Gemini归档；研究UI/因子路径避开。追加旧失败误停修复限原opportunity_review.py及原单测，无新同块冲突。",
+  "updated_at": "2026-10-18T15:27:53.715663+08:00",
+  "conflict_decision": "用户在因子实现会话本轮原话已read_thread核实：系统实现由本任务负责，研究/策略/组合由原owner；账目不变不优先改造，旧理由未记录保持未知。研究新报告/JSON/组件与registry原键保持原owner写。本批避让Chrome，用IAB验收。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
-  "validation_evidence": "docs/experiments/raw/today-agent-output-polish-2026-10-18/acceptance.json",
+  "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/decision-chain-20261018-contract.json",
   "automation": {
     "id": "leisignal",
     "status": "ACTIVE",
@@ -800,7 +808,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "original goal okr-4c2ea452d3cc note37->38 read back; status/owner/authorization/milestones/history preserved; own report key only",
-  "remaining": "本轮有界审查已结案、相关工程已验；最终桌面/窄屏目视受Mac锁屏阻塞。生产旧run partial 1完成55失败12无需，未自动重跑；2隔离语义问题仍不验为通过，完整自动报告和实际投资帮助未证明。下一阶段按原目标连接原判断变化与今日入口，不补造历史。",
+  "remaining": "接未来判断→计划→已确认成交或明确未行动→复盘，人工确认关联和不变快照；复用估值。研究正文Agent消费缺report_sha256，等待原owner准确交付，不静默绕过核验。",
   "runtime": "受管8000 PID65425 health200；5188使用原隔离web；最后源修复已准确镜像并必要重载，无主动ensure/失败重试。"
 }
 ```
