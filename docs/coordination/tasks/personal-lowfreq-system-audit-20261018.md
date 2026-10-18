@@ -1,3 +1,13 @@
+# 已认可候选登记到系统待办 2026-10-19T00:29:33.367027+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active仅待办登记及工作指引接续；scope_released false。checked_coordination_sha=f2d7793ac2e9329316ebdca67dde877e11002006；checked_at=2026-10-19T00:29:33.367027+08:00；已读COORDINATION、自身、research-utility-review-20261012最新00:19、investor-workspace-simplification-20261012最新00:12、research-dispatch-controller。原A受阻定义、系统摘要及旧八目标仍归原owner，本次无接管。
+- 用户明确“几个候选方向可以给列todo…认可…能直接复用的复用…也要检验…形成比较规范科学的研究流程”。本轮完成边界为实际系统待办及可追踪指引，不启动市场实验。已查系统全清单及相关六目标：原问题覆盖/受限流程/方法闭环已有，四类低频选标的没有独立具体待办。
+- 拟新增1个具体目标到okr-cd1a0bd5532c方向，内含中期相对动量复核、盈利能力/质量、价值、低风险/防御四候选及共同研究链验收；按顺序记录，不把候选认可变成有效结论。planned状态，备注用户认可方向；下一实际研究仍按既有授权固定具体问题、输入及预算，不自动研究所有分支。原okr-ff1e0a86fbac及okr-aff4c096efb7只追加关联note，保护owner/status/authorization/milestones/next_action与历史。
+- 唯一写者root。成果基线codex/personal-lowfreq-system-audit-20261018@196ea5c50ab0d2c3c18a5fb2dac33ad9a085a93a；准确文件：docs/research/factor-discovery-playbook.md增加系统待办导航及已认可顺序（主树仅同增量镜像）、原progress、既有lowfreq-selection-and-timing-2026-10-19 raw新增todo-registration-2026-10-19.json。旧报告/registry/INDEX/规范/定义/合同/数据均不改；docs/okr/RESEARCH_TODO.md原八目标不混入新方向。
+- Luna low todo_evidence_check只核既有动量/RD-Agent引用；无写入/网络/重算。验收为系统记录唯一、各候选复用及待验项清楚、状态未伪装运行或完成、原目标保护字段与历史保持、指引两树一致、引用存在、归置与准确远端读回。0新市场/行情/模型网页/框架安装/生产/交易/通知；费用未知。
+
+---
+
 # 低频选标的与时机资料审查交付 2026-10-19T00:14:48.323174+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次有界资料审查和建议；scope_released true。checked_coordination_sha=f1e829054afc53723af4133ce8dda3b95c060a77；checked_at=2026-10-19T00:14:48.323174+08:00；已读COORDINATION、自身、research-utility-review最新00:09、investor-workspace-simplification最新00:12、research-dispatch-controller，最近fetch除本任务无其他增量。原A/小时/共同资金与系统UI仍归原owner。
