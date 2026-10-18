@@ -811,7 +811,8 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "src/lei_signal/api/routes/opportunity_reviews.py (read-only recent list endpoint)",
     "src/lei_signal/api/recent_opportunities.py",
     "tests/unit/test_recent_opportunities.py",
-    "web/src/api/opportunityReviews.ts (recent list types/client only)"
+    "web/src/api/opportunityReviews.ts (recent list types/client only)",
+    "web/src/pages/OpportunitiesPage.tsx (exact subject/side deeplink only)"
   ],
   "scope_released": false,
   "local_result_commit": null,
