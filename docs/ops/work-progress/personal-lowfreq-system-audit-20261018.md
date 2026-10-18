@@ -54,3 +54,5 @@ checked_coordination_sha=d13868e788534ea78f220350513de971c098a2bd；checked_at=2
 新增docs/research/factor-discovery-playbook.md、docs/experiments/ai-factor-discovery-workflow-2026-10-18.md及raw；主共享树仅同一playbook+AGENTS唯一新块，原字节前缀保留、不暂存其他修改。工作指引是AI阅读/审查要求，不是新增自动语义判断。checked_coordination_sha=9ee684656de99d8384a18f78322e407620fa3d6c；已读自身、research-utility-review最新17:33、系统owner及中控，无重叠接管。后续按本次验证/发布回执收尾，长期有效因子目标未完成。
 
 2026-10-18T18:18:30.956054+08:00 验收：17来源指纹、全部本地链接、唯一登记/原条目不变、两AGENTS原字节保持、同一playbook及diff通过；五例方法独审修正已应用。主仓归置通过，成果树继承.git/COORDINATION.md/docs/coordination三项失败保留。成果树缺规范索引的相对链接已改为实际主仓原件，未复制原owner未提交规范。新协调ddbac21b55d1a39666db80a67be00c33850f73c7中原owner18:11已接续原A确认工具，明确不重复本通用发现流程，范围无冲突。Gemini当前提交未核、X原帖未核，均不作已完成；无新市场运行。
+
+2026-10-18T18:19:40+08:00 系统原目标已只追加本流程交付note：okr-ff1e0a86fbac 154→155/in_progress，旧历史和owner/status/authorization/milestones/next_action保持，准确正文读回；不新建目标、不关闭长期研究。回执同名raw/goal-receipt.json。主体成果9b937d39b588e457d7cf7c200b8bd72de9ac51dd已发布，补充回执提交以协调最终记录为准。
