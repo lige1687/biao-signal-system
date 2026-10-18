@@ -1,3 +1,9 @@
+# 系统消费发现的自身登记缺口补充 2026-10-18T15:35:32.665601+08:00
+
+checked_coordination_sha=238a3d24c842a5c61df75e2576513a6864a57ab2；checked_at=2026-10-18T15:35:32.665601+08:00；已读自身、investor-workspace-simplification-20261012最新分工/后续链与COORDINATION，中控原边界未变。系统owner已承接判断/行动链，未改本研究。发现原module-a-rule-audit条目缺report_sha256导致Agent正文读取拒绝：新增本轮唯一元数据范围registry中该自身旧条目的report_sha256，主/研究树正文SHA仍203073ab0a02ebab715f56e4eb1d3adbb51d6a88bcecac2b193f70b957f90eb3；不改封存报告字节。新诊断报告同样登记实际SHA。root只写自身两键，其他条目保持。语义核由Astra6 high只读完成，普通核数Sol6 medium完成，均无市场执行。Chrome已释放，Gemini本轮补问未确认提交，旧意见复用。
+
+---
+
 # 研究增量与组合代价核清：用户分工后接续 2026-10-18T15:24:00.508400+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现 01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status active；scope_released false。checked_coordination_sha=dac56dea61c0f847e13699d8997b51dd0f179168；checked_at=2026-10-18T15:24:00.508400+08:00。已读COORDINATION、本任务、investor-workspace-simplification-20261012、research-dispatch-controller及既有personal审查结案；无同问题新写者。
