@@ -81,3 +81,14 @@ checked_coordination_sha=d13868e788534ea78f220350513de971c098a2bd；checked_at=2
 ## 2026-10-19 低频选股与时机资料审查
 
 已查原文选股思想与技术实现范围差异，3定向查询+3原件读取，复用排序、六ETF、84股、14/7ETF四组及板块RS五类证据。0市场运行/新行情/RD-Agent试跑。新增lowfreq-selection-and-timing报告/raw并登记，playbook补三层问题/相同资金对照/不重复循环，主树核同。因子原owner继续原A/小时与资金，不接管。具体金融候选以盈利能力资料资格为下一题提案，未改定义/规则/生产。
+
+
+## 2026-10-19 用户认可候选及系统TODO登记
+
+用户认可动量、盈利能力/质量、价值、防御四候选，要求先复用且检验，认可规范科学研究链。已查全清单及旧具体目标，无同范围待办；新增okr-8830a1f1ec4f到现有因子体系方向，planned、5项未勾选，明确后续研究待启动；用户原话与范围已保留，不把认可候选写成已有效或本轮已授权新批次。原okr-ff1e0a86fbac仅note160→161、okr-aff4c096efb7仅note11→12，owner/status/authorization/milestones/next_action及旧历史精确读回不变。系统SQLite权威；没有修改旧八目标RESEARCH_TODO或种子。
+
+playbook补一处候选导航与三类复用裁决（直接引用、核适用条件后引用、确有缺口再检验），主树同增量镜像；现有AGENTS入口保持。Luna low只核6条旧来源：全部存在，动量对象准确，六ETF草稿仍待审且未过正向筛选，RD-Agent通用执行与恢复成功不等于完整金融循环、两次模型失败保留。0新市场/行情/网页模型/框架安装/生产/交易/通知；实际token费用未知。
+
+开工checked_coordination_sha=f2d7793ac2e9329316ebdca67dde877e11002006，已读本任务、research-utility-review最新00:19、系统最新00:12及中控，无重叠；原A受阻仍归原owner。准确API及文件核验回执在docs/experiments/raw/lowfreq-selection-and-timing-2026-10-19/todo-registration-2026-10-19.json。新研究效果和实际流程运行尚未完成；本轮只完成登记接续。
+
+本轮核验：新目标唯一且5项未完成、两个原目标保护字段和新增记录再次核回；旧报告SHA未变、主/成果指引一致及本地链接通过；主仓现行归置退出0。成果树旧检查器已有三项白名单限制沿用前记录，本轮不修改检查器。
