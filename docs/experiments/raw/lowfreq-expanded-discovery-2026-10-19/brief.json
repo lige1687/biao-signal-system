@@ -1,7 +1,7 @@
 {
   "research_id": "lowfreq-expanded-discovery-2026-10-19",
   "mode": "research",
-  "execution": "running",
+  "execution": "analysis_completed_archive_pending",
   "question": "一项金融解释明确的低频同日选择因子，在至少十年且明显扩大的历史可知候选范围，是否超越简单对手并提供可用增量？",
   "user_scope": "十年以上大样本、发现机制、Luna机械执行、Astra假设审核评估自循环；与原策略因子实现分离",
   "baseline_commit": "7919453f3edc3d28f1d9e6e819ce7895894664e0",
@@ -18,7 +18,11 @@
     "bulk_data_plan": "resume-single-v1.json; cumulative610 SDK data operations; only5 invalid-login operations may repeat, reduced spot pairs within original ceiling",
     "old_budget_reset": false,
     "data_probe_max": 6,
-    "data_probe_used": 6
+    "data_probe_used": 6,
+    "bulk_data_actual": 610,
+    "core_batches_used": 1,
+    "purposeful_followups_used": 2,
+    "source_conflict_public_operations": 3
   },
   "started_at": "2026-10-19T01:29:41.381752+08:00",
   "allowed_actions": [
@@ -35,7 +39,7 @@
     {
       "model": "gpt-6-luna",
       "reasoning_effort": "low",
-      "role": "source acquisition and upcoming frozen core execution"
+      "role": "source acquisition and frozen core plus registered sensitivity actual execution"
     },
     {
       "model": "gpt-6-sol",
@@ -62,6 +66,26 @@
       "used": 6,
       "status": "all success",
       "result": "2014 A-share candidate2595; deterministic600 with51 future exits; no effect calculated"
+    },
+    {
+      "type": "actual_core",
+      "result_manifest_sha256": "7a3a7f0d67bc82f44d2352bb8b65b9f0ed0dde6d11bded975259cdc0b713c5a8",
+      "count": 1,
+      "exit_code": 0,
+      "wall_seconds": 51.475
+    },
+    {
+      "type": "past_continuous_trading_subset",
+      "count": 1,
+      "exit_code": 0,
+      "wall_seconds": 3.729,
+      "design_before_effect": true
+    },
+    {
+      "type": "independent_saved_result_arithmetic",
+      "source": "core andsubset",
+      "checks_each": 2324,
+      "market_rerun": false
     }
   ],
   "failures": [
@@ -80,10 +104,16 @@
       "step": "parallel source acquisition",
       "reason": "anonymous session collisions 10001001; 8 actual requests:3 success5 failures",
       "resolution": "single-session-only resume, preserve44 actual attempts and39 success originals; no reset, reduce adjustment spot sample to3distinct"
+    },
+    {
+      "step": "report saved-result arithmetic helper",
+      "reason": "unclosed parenthesis SyntaxError before file reads",
+      "resolution": "corrected helper syntax, core andsubset output assertions passed; no core/sensitivity reruns"
     }
   ],
   "old_long_matrix_reuse": "33year matrix is current-cohort history, no verified historic exits; audited 2026-09-09, not qualified full historic A share",
   "design_current": "design-v3.json",
-  "acquisition_stage": "single-session resume active; 39 successful old records reused; max566 new data requests; total610 unchanged",
-  "scientific_review": "Astra final v3 code/design readback found no decisive barrier; real evaluation not started"
+  "acquisition_stage": "complete600daily,605sources,610SDKoperations including5preserved failures",
+  "scientific_review": "Astra accepts bounded closure; direct selection unconfirmed, conditional clue mixed; no required experiments remain",
+  "ended_analysis_at": "2026-10-19T02:42:15.257743+08:00"
 }

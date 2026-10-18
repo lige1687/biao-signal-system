@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-19T02:31:57.679785+08:00",
+  "market_performance_seen": false,
+  "purpose": "Does variable-duration valid-quote momentum around long suspensions drive the fixed core result?",
+  "reason": "source-only qualification: 252quote actual span median379days max1660;7.7316%eligible rows exceed450days;21quote span max1133days",
+  "reuse": "core-v1 saved per_stock_month panel, frozen calendar, fixed132months; no additional source requests or factor recalculation",
+  "rule": "within original eligible rows, require momentum_252_start_date exactly equal frozen common-calendar date252positions before decision_date; rerank original momentum/short in that same restricted pool, same topceil(N/5), same9/27 controls and original missing/marked-price rules",
+  "parameter_search": false,
+  "primary_unchanged": true,
+  "comparison": "subset candidate versus subset pool and subset short; report subset support and complete132months; cannot compare to original all-stock average to claim fair benefit",
+  "scope_limit": "conditional subset with no trading suspension over past253common trading days; loss of generality explicit; same market history not independent confirmation",
+  "budget": "purposeful_followup2ofmaximum3; followup1 source-status adjudication; core unchanged1",
+  "implementation": "bounded saved-panel analysis; do not replace new factor definition or original canonical implementation",
+  "source_qualification_record_sha256": "cec816ebebbf3e624a99a9ff36ff46046bf7d72fdc15293ca615b253bc6f22a1"
+}

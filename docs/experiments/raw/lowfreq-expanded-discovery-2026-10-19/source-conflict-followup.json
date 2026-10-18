@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-19T02:27:31.558913+08:00",
+  "purpose": "source-only adjudication before any performance; sz.300356 2023-06-20 status0 conflicts with volume78417871 amount67956348.98 variedOHLC; primary dated exchange/company notice needed",
+  "question": "was2023-06-20 first delisting-period trading day, with no actual suspension?",
+  "scope": "one exact issuer-date official source verification, no additional market history or factor variants",
+  "authorization": "original user public large-sample data qualification and necessary self-review, no paid data/production",
+  "bounded_requests_max": 3,
+  "used": 3,
+  "counts_separate_from": "six literature/discovery requests remain6;610BaoStock SDK batch remains610; this is necessary source-adjudication followup1 of at most3",
+  "outcome_before_review": "131 qualified decision months; July2023 blocked; no effect computed",
+  "correction_rule": "only change a factual status in a derived copy if primary evidence resolves it; preserve original raw/hash and all old freezes, record exact date/field/source; otherwise retain blocked month, never select a better outcome",
+  "status": "official_search_index_evidence_available; direct opens timed out; awaiting independent scientific review",
+  "source_facts": [
+    {
+      "url": "https://www.szse.cn/disclosure/notice/temp/t20230620_601235.html",
+      "issuer": "Shenzhen Stock Exchange",
+      "notice_date": "2023-06-20",
+      "retrieval": "official-page search index returned complete short notice",
+      "code": "300356",
+      "intraday_halt_start": "10:39:03",
+      "intraday_resume": "10:49:04",
+      "reason": "intraday price rose at least30% from open",
+      "direct_open": "400 Timeout fetching"
+    },
+    {
+      "url": "https://www.szse.cn/disclosure/notice/company/t20230612_601113.html",
+      "issuer": "Shenzhen Stock Exchange",
+      "notice_date": "2023-06-12",
+      "retrieval": "official-page search index",
+      "delisting_trading_starts": "2023-06-20",
+      "direct_open": "400 Timeout fetching"
+    },
+    {
+      "url": "https://static.cninfo.com.cn/finalpage/2023-06-20/1217108617.PDF",
+      "issuer": "Guangyi Technology",
+      "notice_date": "2023-06-20",
+      "retrieval": "search index only; not additional open",
+      "fact": "shareholder reported acquiring16780000shares by centralized auction on2023-06-20"
+    }
+  ],
+  "proposed_resolution": "derive actual-trading-day status1 for this dated row with intraday-halt provenance; original status0 untouched; retain original131month qualification and disclose leave-July2023-out comparison; no effect computed",
+  "updated_at": "2026-10-19T02:28:37.577360+08:00"
+}

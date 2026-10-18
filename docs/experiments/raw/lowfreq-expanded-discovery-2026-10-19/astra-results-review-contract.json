@@ -1,0 +1,34 @@
+{
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "write_paths": [],
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "只读评审，不执行市场试验或扩样调参，不覆盖任何记录"
+  ],
+  "mission": "独立审阅600历史A股132个月真实结果，评价金融含义、重复信息、增量和科学缺口，不修饰负向主结果",
+  "task_scope": [
+    "读取core-v1的performance/quality及必要CSV、主控independent-reconciliation；关键数字独立抽核。主比较未优于同池全体但9组正，27组不确定，请审阅不能偷换问题或宣布有效。",
+    "评价：600历史队列而非全A/ETF；132月不等于79200独立样本；有效报价位移/复权代理/停牌未知场景/行业构成未排除。区分机制假说与证据、收益/风险/操作价值。",
+    "连续交易子群敏感性已在看效果前预登记，尚执行中；给主报告可支持结论、过度主张、必要的最少剩余核验。不设计参数搜索或额外市场实验。",
+    "只读审阅，返回紧凑结论给root；不修改任何文件、无网络。后续敏感性与报告将同一合同追加审阅。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1"
+  ],
+  "expected_outputs": [
+    "实数核验与科学结论、不可声称内容、最低剩余核验"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "workspace_root": "/"
+}

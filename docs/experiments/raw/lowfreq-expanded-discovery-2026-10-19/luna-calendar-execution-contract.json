@@ -1,0 +1,46 @@
+{
+  "workspace_root": "/",
+  "mission": "实际执行并盯完已预登记连续交易子群敏感性，保留原核心结果",
+  "task_scope": [
+    "运行前核脚本SHA bf76436d0261d8071f26ef59bb65524e75fe9a405206207df0d5d7ad95252a65、冻结input/design和core manifest7a3a7f0d67bc82f44d2352bb8b65b9f0ed0dde6d11bded975259cdc0b713c5a8、外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9及容量。",
+    "只执行一次：PYTHONDONTWRITEBYTECODE=1 python3 /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/run_calendar_support_sensitivity.py --core-dir /Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1 --input-contract /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json --design /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/calendar-support-sensitivity-design.json --out /Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1。日志exclusive create calendar-support-v1-run.log。不发网络、不覆盖现有结果。",
+    "等待结束并核manifest的7输出hash、132month和600*132全panel、实际子群支持及月数，禁止把程序通过称因子有效。写calendar-support-execution-receipt.json记录退出、时长、hash及质量；失败保持，反馈主控不自行改脚本或范围。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/run_calendar_support_sensitivity.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/calendar-support-sensitivity-design.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/storage-plan.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/probe",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/cohort.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/design-v3.json"
+  ],
+  "write_paths": [
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1-run.log",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/calendar-support-execution-receipt.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "calendar-support-v1真实结果与manifest",
+    "calendar-support-execution-receipt.json真实完成和核读"
+  ],
+  "stop_conditions": [
+    "固定核心一次；失败保留现场报告具体原因，不改阈值/名单/输入/费用，不覆盖重跑",
+    "不改他人文件或当前用户侧线程设置；外盘不可用停止写，不回退内盘"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "frozen_input_sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289",
+  "frozen_script_sha256": "bf76436d0261d8071f26ef59bb65524e75fe9a405206207df0d5d7ad95252a65"
+}

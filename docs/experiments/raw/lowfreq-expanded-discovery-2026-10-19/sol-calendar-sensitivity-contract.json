@@ -1,0 +1,39 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "mission": "为已预登记的连续交易日期子群敏感性写一个只消费核心保存结果的脚本",
+  "task_scope": [
+    "只写raw/run_calendar_support_sensitivity.py。读取calendar-support-sensitivity-design及已有正式lowfreq_discovery模块；不读实际结果数字、不执行真实市场分析。参数--core-dir --input-contract --design --out；out必须是input-contract.output_parent的全新直接子目录且外盘",
+    "复用core per_stock_month.csv和monthly.csv、冻结calendar；对原eligible行要求momentum_252_start_date等于共同calendar中decision索引减252日，只看过去。未满足者改eligibility_reason为calendar_window_not_equal，其余原不合格原因保留；不要求未来评价月连续报价",
+    "按原模块_selections/_conditional_groups/_combined_cell_weights/_weighted_outcome/_relative_unknown/_aggregate等纯函数重建原8方法及9/27比较，原future_return和halt flags复用。保持600*132完整行与原未知处理，重新生成weights与同子群对手，blocked月不填零。不改正式模块/设计/主结果",
+    "输出兼容monthly.csv selections.csv per_stock_month.csv annual.csv increment.csv performance.json quality.json manifest.json，便于root独立reconcile_result.py复算；quality加每月original_eligible、subset_eligible、比例、排除对象列表/原跨度/vol60/amount20和counts；组支持保留increment。manifest绑定原core manifest/input-contract/design/本脚本SHA，过滤AppleDouble；不伪造原core合同/主600全池已改善",
+    "只做无行情的语法和小结构核验；输出实现路径/SHA/未跑市场。主控和Luna执行后另独审。"
+  ],
+  "read_only_paths": [
+    "src/lei_signal/research/lowfreq_discovery.py",
+    "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/calendar-support-sensitivity-design.json",
+    "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/reconcile_result.py",
+    "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json"
+  ],
+  "write_paths": [
+    "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/run_calendar_support_sensitivity.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "新脚本及准确SHA",
+    "无行情语法/结构核验说明"
+  ],
+  "stop_conditions": [
+    "不得执行真实分析、改原模块/合同/主结果或参数",
+    "不创建其他代理或调用外部来源，无法兼容上报主控"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

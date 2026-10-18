@@ -1,0 +1,127 @@
+{
+  "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+  "source_sha256": "d699cdb3aa6c5d2a3f9841398097242ddf423516b8d1d05d9c8a03ca11432b06",
+  "read_at": "2026-10-19T02:18:18.874032+08:00",
+  "objects": [
+    {
+      "id": "mixed.price.economic",
+      "version": "1.0.0",
+      "name": "混合池信号经济价格",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "description",
+        "research_signal",
+        "attribution"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+        "parameters": {
+          "base": 1,
+          "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+        },
+        "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+        "unit": "index_level",
+        "direction": "高值只表示累计变化",
+        "transforms": "分红/拆分校正；不再复权或加汇率"
+      },
+      "validation": {
+        "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_research_definitions.py"
+        ],
+        "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+      },
+      "universe": {
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/research/definitions.v1.json"
+        ],
+        "verification_scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      }
+    },
+    {
+      "id": "mixed.momentum.raw",
+      "version": "1.0.0",
+      "name": "252至21有效报价涨幅",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "ranking",
+        "description",
+        "research_signal"
+      ],
+      "dependencies": [
+        "mixed.price.economic@1.0.0"
+      ],
+      "definition": {
+        "formula": "I(t-21)/I(t-252)-1",
+        "parameters": {
+          "long_lag": 252,
+          "skip_lag": 21
+        },
+        "endpoints": "自身有效报价行位移；第253条首次可算；不含最近21条",
+        "unit": "fraction",
+        "direction": "降序排序，负分允许",
+        "transforms": "无标准化、无截尾、无年化"
+      },
+      "universe": {
+        "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格"
+      },
+      "status": {
+        "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated"
+      },
+      "lifecycle": {
+        "state": "verified",
+        "basis": [
+          "docs/research/definitions.v1.json",
+          "tests/unit/test_research_definitions.py"
+        ],
+        "verification_scope": "函数级合成精确值验证与resolve/calculate身份参数绑定（仅该测试文件覆盖范围）；未做账户级回放，不构成有效性或生产授权"
+      }
+    },
+    {
+      "id": "mixed.momentum.rank",
+      "version": "1.0.0",
+      "name": "横截面动量有序名单",
+      "type": "feature",
+      "profile": "mixed",
+      "uses": [
+        "ranking",
+        "description"
+      ],
+      "dependencies": [
+        "mixed.eligible@1.0.0",
+        "mixed.momentum.raw@1.0.0"
+      ],
+      "definition": {
+        "formula": "sort(eligible finite momentum,key=(-score,symbol))",
+        "parameters": {
+          "ties": "exact equality then symbol ascending"
+        },
+        "endpoints": "月末并集决策日同截面；缺当日报价无资格",
+        "unit": "ordered_symbol_list",
+        "direction": "高分在前",
+        "transforms": "排序；无百分位、无近似相等容差"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/research/definitions.v1.json"
+        ],
+        "verification_scope": "仅定义登记存在；validation.tests为声明路径，本卡无逐卡合成验证留痕（存在≠验证）"
+      }
+    }
+  ],
+  "numeric_momentum_same_as_prior_snapshot": true,
+  "adoption": "numeric raw formula only; provider qfq series is a qualified-for-retrospective-study price proxy, not complete as-published total-return and real cash-flow replication; ranking cohort/eligibility from new frozen design, not adoption of mixed.eligible or full old strategy"
+}

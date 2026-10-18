@@ -1,0 +1,79 @@
+{
+  "schema": "lowfreq-calendar-support-execution-receipt/1",
+  "contract_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/luna-calendar-execution-contract.json",
+  "execution": {
+    "command": [
+      "PYTHONDONTWRITEBYTECODE=1",
+      "python3",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/run_calendar_support_sensitivity.py",
+      "--core-dir",
+      "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1",
+      "--input-contract",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+      "--design",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/calendar-support-sensitivity-design.json",
+      "--out",
+      "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1"
+    ],
+    "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+    "started_at": "2026-10-19T02:37:47.482445+08:00",
+    "ended_at": "2026-10-19T02:37:51.211489+08:00",
+    "wall_seconds": 3.729066167026758,
+    "exit_code": 0,
+    "log_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1-run.log",
+    "log_sha256": "6d22c4c32c194067824d249caecc1775b85845d1c97638c1c6e891f7dcbc41b7"
+  },
+  "bindings": {
+    "script_sha256": "bf76436d0261d8071f26ef59bb65524e75fe9a405206207df0d5d7ad95252a65",
+    "formal_evaluator_sha256": "dda4de0acd7335e73a481a66913f47359e974de25a0f220f545c31592fcad0df",
+    "input_contract_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+    "input_contract_sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289",
+    "sensitivity_design_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/calendar-support-sensitivity-design.json",
+    "sensitivity_design_sha256": "22bcfb62b46085ffa654270a3e4290d2a83793d2af39064d60071adfe6b6a5e5",
+    "core_manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/manifest.json",
+    "core_manifest_sha256": "7a3a7f0d67bc82f44d2352bb8b65b9f0ed0dde6d11bded975259cdc0b713c5a8"
+  },
+  "result": {
+    "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1",
+    "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1/manifest.json",
+    "manifest_sha256": "cc532f8035832f3156d05749deff0bee239dc2e104ec4e30f5f300a809f44486",
+    "quality_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1/quality.json",
+    "quality_sha256": "8e06722497e64b5c1eac39b4c650e9d626bf04b814915da36dd0f874abb641d8",
+    "performance_sha256": "86504417007c24e94ebc5175dc55fdcbc1bd623d8ac27124775a629763624916",
+    "output_hashes": {
+      "monthly.csv": "c4eefd50421aba0729a35b5651c45f77d40b4c1a089836322c8ffebddd64b205",
+      "selections.csv": "516e18e4db4e627a0673dae113b1cc8e73db390deec70bf2959f13731ad6f17f",
+      "per_stock_month.csv": "e7083d3d98e0eb24ecb50e492f494f0c6600df230910233595ad593169288254",
+      "annual.csv": "b02c588b5dabfca9f5356e7cd99af0a740cb503015f95c1356673e8cf87becf2",
+      "increment.csv": "7af067806d6b0d4789d943e649bd9d41c75478f5c2d0d4ad5ccb1574636e952a",
+      "performance.json": "86504417007c24e94ebc5175dc55fdcbc1bd623d8ac27124775a629763624916",
+      "quality.json": "8e06722497e64b5c1eac39b4c650e9d626bf04b814915da36dd0f874abb641d8"
+    }
+  },
+  "quality": {
+    "fixed_sample_count": 600,
+    "monthly_full_rows": 79200,
+    "expected_monthly_full_rows": 79200,
+    "month_status_counts": {
+      "evaluated": 132
+    },
+    "actual_evaluated_months": 132,
+    "ten_year_support_met": true,
+    "support_month_count": 132,
+    "subset_monthly_support_min": 109,
+    "subset_monthly_support_max": 525,
+    "zero_support_months": 0,
+    "original_eligible_stock_months": 71369,
+    "subset_eligible_stock_months": 53869,
+    "excluded_calendar_window_stock_months": 17500,
+    "ineligible_reasons": {
+      "calendar_window_not_equal": 17500,
+      "under_253_actual_quotes": 242,
+      "no_actual_month_end_quote": 2950,
+      "historical_isST": 2827,
+      "outside_historical_listing": 1812
+    },
+    "interpretation_limit": "subset composition changes; not isolated causal time-window effect"
+  },
+  "interpretation": "本回执仅记录连续交易子群执行及覆盖情况，不裁决研究效果或是否有效。"
+}
