@@ -1,3 +1,14 @@
+# 第4/6点保存证据与增量方法审查交付 2026-10-18T15:42:41.924027+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现 01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status completed仅本轮有界审查；scope_released true。checked_coordination_sha=e1fe7a4644344bc0f3c3258ebd53f73773dfac9d；checked_at=2026-10-18T15:42:41.924027+08:00；已读COORDINATION、本任务、investor-workspace-simplification-20261012、research-dispatch-controller、personal-lowfreq-system-audit-20261018最新增量。后者路线探索只提案并复用本核数，系统owner独写UI/API判断链，无同范围改写。
+- 结果：旧ETF联合赢弱背景却输各产品历史平均；A股双线预测未增益，美股未超过单SMA；颜色账户优势须拆费用/投入/等待，四种买卖账户差额可核回总差。1次保存摘要算术检查5来源/4四格/4分母通过，0新市场运行/拟合/行情/付费，未重开旧冻结预算2082.25/3600。Sol6 medium独核数字，Astra6 high独核原文与比较，均只读；实际token费用未知。
+- 交付docs/experiments/research-increment-cost-diagnostic-2026-10-18.md及同名raw的protocol/reconciled-results/next-question-design/system-handoff/closure，报告SHA256 7c54cddf4ddc3225fbf28602e123c7ea451b268e0bf2733c630c703fc10f87c4。方法设计不等于新执行合同；原文完整AND与简化OR区分，目标原出处为体系5.2/实现10。旧封存正文不改。
+- 验收：主/研究树新报告及registry一致；仅补原自有module-a-rule-audit登记SHA203073ab0a02ebab715f56e4eb1d3adbb51d6a88bcecac2b193f70b957f90eb3，其他条目保持。实际8000全文匹配、真实research_report两报告指纹验证且无截断；首次max_chars50000接口失败保留后改12000通过。5188正文/性能增量表可见，3旧报告链接跳错已只在新报告修正并重读，截图保存，归置通过。Agent证据读取不是模型回答或策略收益验收。
+- Gemini原4 Argon最高高点意见批判性复用；本轮补充输入失败，confirmed submissions=0，无新答复。准备稿和失败回执保留，Chrome已释放。系统owner收到职责/新报告及最后指纹，未来判断行动链由其开发，本root不代验收、不写账户与交易。原系统目标仅note150→151，保护字段及旧历史未变，仍in_progress。
+- 源码/报告仍在codex/factor-evidence-integration-20261012本地未提交未推；基线70ab55556874228d2cba66cf50f96d0318e1a5be，不用旧commit代表新产物。当前推送仅本协调元数据，无私有截图/大结果。完整LEI未完成；目标区间、同日首次语义、合格小时资料和共同资金冲突规则仍缺，下一步先核原文/固定截面候选解释，不能以简化版或放宽条件补交易数。
+
+---
+
 # 系统消费发现的自身登记缺口补充 2026-10-18T15:35:32.665601+08:00
 
 checked_coordination_sha=238a3d24c842a5c61df75e2576513a6864a57ab2；checked_at=2026-10-18T15:35:32.665601+08:00；已读自身、investor-workspace-simplification-20261012最新分工/后续链与COORDINATION，中控原边界未变。系统owner已承接判断/行动链，未改本研究。发现原module-a-rule-audit条目缺report_sha256导致Agent正文读取拒绝：新增本轮唯一元数据范围registry中该自身旧条目的report_sha256，主/研究树正文SHA仍203073ab0a02ebab715f56e4eb1d3adbb51d6a88bcecac2b193f70b957f90eb3；不改封存报告字节。新诊断报告同样登记实际SHA。root只写自身两键，其他条目保持。语义核由Astra6 high只读完成，普通核数Sol6 medium完成，均无市场执行。Chrome已释放，Gemini本轮补问未确认提交，旧意见复用。
