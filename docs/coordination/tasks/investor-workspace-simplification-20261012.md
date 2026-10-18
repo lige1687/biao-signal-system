@@ -1,3 +1,11 @@
+# 真实冷启动失败与已有整体审查复用 2026-10-18T14:14:55.700543+08:00
+
+checked_coordination_sha=d52ddd9aa20eba2f1fb485a2a2efb5725403d8fa；已读COORDINATION、自身、research-utility-review最新边界及personal-lowfreq-system-audit完整结案。整体审查已由原负责人完成并推844cc8ba，本批不重复研究或写同题报告；已有Gemini答复从归档复用，不占用共享输入。
+
+实际brief GET冷启动25秒超时，定位到读取已存报告后同步service.get分析。新增唯一源范围routes/opportunity_reviews.py的缓存读取辅助；保留显式technical接口，前端在同一ProductDetail显式读取后重读brief，K线与条件使用同一快照。空缓存不得调用get/联网/写库；已有缓存保持对象与日期核查。只修具体问题，不调整AnalysisService/策略/预热范围。
+
+---
+
 # 今日重点与Agent输出：按优先级打磨开工 2026-10-18T13:50:56.516171+08:00
 
 checked_coordination_sha=9a7d2e997b8a3e65f0d3b7a7eaf67730ccb18ce7；已读JSON列五任务最新段和COORDINATION1.1；本批为决策辅助展示/资料叙事层，不改技术判定与策略源。原策略指纹开工复核，原研究/输出验收复用。用户授权审查并按优先级直接做；新指示用DS最新模型、原API，检索Twitter与开源最佳实践并逐步实际验效果。只改机会链路，别的Agent配置保持。
@@ -725,14 +733,15 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
   "task_id": "investor-workspace-simplification-20261012",
   "owner": "01a123fc-553b-7b81-9952-36e1acb11dcc",
   "status": "active",
-  "checked_coordination_sha": "9a7d2e997b8a3e65f0d3b7a7eaf67730ccb18ce7",
-  "checked_at": "2026-10-18T13:50:56.516171+08:00",
+  "checked_coordination_sha": "d52ddd9aa20eba2f1fb485a2a2efb5725403d8fa",
+  "checked_at": "2026-10-18T14:14:55.700543+08:00",
   "read_task_ids": [
     "investor-workspace-simplification-20261012",
     "research-utility-review-20261012",
     "daily-trading-system-audit",
     "investor-observation-map",
-    "research-dispatch-controller"
+    "research-dispatch-controller",
+    "personal-lowfreq-system-audit-20261018"
   ],
   "work_branch": "codex/investor-workspace-simplification-20261012",
   "base_commit": "e6c4c2e025252c565ba15f05611561ca1ecd5b48",
@@ -759,13 +768,14 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "docs/experiments/registry.json (own key only)",
     "docs/experiments/INDEX.md (own line only)",
     "docs/ops/work-progress/investor-workspace-simplification-20261012.md",
-    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/today-agent-polish-*"
+    "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/today-agent-polish-*",
+    "src/lei_signal/api/routes/opportunity_reviews.py (brief cached-only technical path)"
   ],
   "scope_released": false,
   "local_result_commit": null,
   "remote_result_commit": null,
-  "updated_at": "2026-10-18T13:50:56.516171+08:00",
-  "conflict_decision": "research-utility-review只改ReportsLibraryPage嵌入块/research-results，本批明确避开；root唯一登记/集成写者，两个子Agent按下面准确范围分离。",
+  "updated_at": "2026-10-18T14:14:55.700543+08:00",
+  "conflict_decision": "整体个人系统审查由personal-lowfreq-system-audit已结案，本批复用其报告/Gemini意见，只补今日入口与Agent输出已核不足，不再提交同题整体报告；研究UI路径继续避开。冷brief源路由当前无其他写者。",
   "source_state": "local_uncommitted_no_main_merge_no_source_push",
   "validation_evidence": "docs/archive/handoffs-plans/investor-workspace-simplification-20261012/sol61-validation-acceptance-20261016.json",
   "automation": {
@@ -775,7 +785,7 @@ checked_coordination_sha f2144bd1b9171155a9b524eac4919f13c817dc50；读最新res
     "first_scheduled_run_verified": true
   },
   "registry_scope": "original goal okr-4c2ea452d3cc note36->37; report category方法论与验证/verdict mixed; own registration only",
-  "remaining": "按优先级修今日重点排序与旧日期拼接、简报等待/缺口/日期；官方最新DS沿原API有界验证；公开最佳实践落地审查，不改策略或全局其他模型。"
+  "remaining": "冷启动brief GET曾25秒超时；改为先返回已保存背景与缺口，技术资料仅缓存读取，用户显式读取K线再走原技术入口。root改前端，Sol改新增路由路径与原brief单测。"
 }
 ```
 <!-- lei-coordination-json:end -->
