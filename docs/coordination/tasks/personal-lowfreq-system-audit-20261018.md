@@ -1,3 +1,13 @@
+# 低频选股与操作时机的有界资料审查 2026-10-19T00:07:35.549297+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=3f7304cf485ac7bf1c0f46ed345ffe026c9f4102；checked_at=2026-10-19T00:07:35.549297+08:00；已读COORDINATION、自身、research-utility-review-20261012最新00:01、investor-workspace-simplification-20261012最新23:05、research-dispatch-controller。原owner继续原A/小时/资金研究；本轮只选股层方法、文献与已有证据，不做其组合资金或小时检验。
+- 用户新问题：横截面选股因子如何挖，动量和其他方向、低频是否需短周期、与单标的择时结合、借RD-Agent推进。最新收敛为网上资料与本系统对照后给答案建议，并持续要求不重复研究。采用research-closure report_only，核心问题是适合个人低频的选股层研究路径，不声称新因子/组合有效。
+- 成果基线89c1537e2062321ab9b60c7522e5396d6ad2706b，root唯一写新docs/experiments/lowfreq-selection-and-timing-2026-10-19.md及同名raw小来源/审查记录、隔离树registry/INDEX仅新条、原progress；自有factor-discovery-playbook必要新增选股/择时/因子切换三层及可复用记录指引，主树同文件精确采用。不给严格旧合同添字段、不改全局定义/策略源/代码/UI/生产/旧结果。
+- Sol evidence_audit只读已有横截面/动量/RS结果，返回准确路径、阴性和缺项；无网页/取数/写入。root核原文、公开原始来源与方法。新公开请求最多6（3定向查询+3原件读取，失败计入），0市场计算/行情/新模型网页/安装；实际token费用未知，旧预算不重置。
+- 验收：区分选谁、何时操作和何时切换因子；四类候选的金融理由/失败条件/低频节奏；当前策略叙事有选股原则但技术实现排除基本面选股/组合的边界；旧本地效果/未测组合明确；既有记录内的下一题及去重/停止理由；来源实际读取范围、归档/链接/原表不变/归置与远端核回。不启动其他对话的实验，也不要求用户重复授权已限的学习。
+
+---
+
 # 样本范围说明补正完成 2026-10-19T00:00:00.042111+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次说明纠正；scope_released true。checked_coordination_sha=2d029cbcbf6a987db74f2639af741bea93b7c2a1；checked_at=2026-10-19T00:00:00.042111+08:00；已读自身及前段列出的两owner最新记录/COORDINATION/中控，最新fetch无其他任务增量，原分工保持。
