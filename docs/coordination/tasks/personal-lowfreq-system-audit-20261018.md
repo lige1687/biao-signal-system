@@ -1,3 +1,13 @@
+# 十年大样本工具已固化，真实采集继续 2026-10-19T02:12:03.454045+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=a80e83b8e304e9ad60ea6e1f93c71432b2a0524b；checked_at=2026-10-19T02:12:03.454045+08:00；已读COORDINATION、自身、research-utility-review-20261012最新01:41交付、investor-workspace-simplification-20261012最新01:37交付、research-dispatch-controller。冲突决定：继续独立600股票/132月选股检验，不接原策略退出、小时、账户或系统UI。
+- 成果工具已推并读回codex/personal-lowfreq-system-audit-20261018@d97e9c7e5e16b895f5ffbf5f22066a1387989558；实际模块SHA dda4de0acd7335e73a481a66913f47359e974de25a0f220f545c31592fcad0df，design-v3 SHA c1943599b5365f484cbfa1553ccbd6c0358909e1c3a9468a115ec8cedc202539。Astra科学审查可进入固定运行；13合成案例通过，仍不代表市场有效。root source-only核243源753004行0数据错误；市场效果尚未计算。
+- 单连接Luna采集正在进行（02:10核361/600日线成功）。先前36成功保留；受限并发8实际新请求3成功5会话错误，改回单连接，不重复成功39。总610 SDK资料操作不变：余561日线+5调整检查，只有5个登录错误允许第二次；公司行动抽查降为3个对象，失败记录保留，SDK分页网络帧不冒称请求总量。6初始资格请求另计，文献6/6已满。
+- 范围/写者延续：Luna采集raw/acquire_history*.py及新外盘对应目录；Sol只新lowfreq_discovery.py和对应测试；root只自有raw资格/独算脚本、冻结/报告/registry本键/INDEX本行/progress/原目标，Astra只读。原固定600含51后来退出，其中48在2025年底前；股票选择信息研究不替代ETF可用性。
+- 下一步：完整来源hash绑定与资料资格→Luna执行固定核心→root从逐股结果独算、Astra效果审查→必要有理由跟进或负向结案；不以工具/合同/下载数量冒充因子发现成功。外盘来源不入Git，原源/失败不删，当前只推小工具与记录；未采用原生连续/二元workflow入口，不伪造验收。
+
+---
+
 # 十年大样本执行分工与输入冻结 2026-10-19T01:39:18.283243+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=1cbb4cff7cc4a8d86e868236691114ed2d6b0a2d；checked_at=2026-10-19T01:39:18.283243+08:00；已读COORDINATION、自身、research-utility-review-20261012最新01:12、investor-workspace-simplification-20261012最新01:37结案、research-dispatch-controller；冲突决定：本任务独立股票月度排序，不接原日线/小时/回调或UI/账户。
