@@ -1,3 +1,19 @@
+# 审查失败、宽度与新闻更新闭环已交付 2026-10-19T01:37:16.139384+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮有界工程和用户连接审查；scope_released true。checked_coordination_sha=55a32941cb65f21f7083c33ea5d8bf41817a9a5a；checked_at=2026-10-19T01:37:16.139384+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018最新01:28、research-utility-review-20261012最新01:12、research-dispatch-controller、daily-trading-system-audit、investor-observation-map。新十年发现/小时来源研究不占本轮源码，无冲突；因子任务仍归原owner。
+- 原9张失败已按具体原因恢复，当前run orb_5bfd8463a96f44279fac5fc21ab307402933651c8aeeabad403f5097f4a76576为56完成/0失败/12无需模型。原成功内容和失败历史保持；7次真实反方请求，输入17449/输出2481，10次卡片尝试。未改DS配置或减弱数字/引用校验。
+- 宽度旧资料混日/分母/复权资格已纠正；独立qfq新资料5116/5577同日覆盖91.7%，50日线上1024/5115=20.01955%，旧双低于20%重点撤下，有限样本作为普通读数。缺461、历史成员时点和完整历史未证明；旧snapshot/history/parquet指纹不变，新大资料在已核固定外盘，来源/日期/指纹有回执。
+- 近5自然日新闻接现有ensure及显式刷新，5个官方源有日缓存/失败冷却/原文日期/正文核对/去重，真实3条近期原件（宏观2、行业1），BLS一个来源未完整，其余空窗不冒称全网覆盖。未新增定时器或通知；新闻只解释背景，不改技术规则。
+- 额外修正默认当前批次指针：准备成功复用旧run时首页/机会页现在一致，旧run及checked_at不改。实际准备opr_90c93226c6c346418aa923fb8f6b968d完成，两recent完整响应相同，4事件/3产品、review_incomplete=false；旧失败提醒消失。
+- 新摘要ops_9501709e8bb54b43bc31e1eb341cfd55真实生成84字总览/3卡，实际重复点击复用，同产品买卖条件/K线可达。第一次摘要因超长失败保留；修提示后第二次通过，程序120字上限不变，两请求合计输入8181/输出2531。review模型尝试360、卡片尝试544、摘要9；个人判断/确认/后续/计划/成交五表均0，费用未知。
+- 相关69后端通过，后续当前批次54/新闻10/摘要17子集通过（重叠不相加）；前端检查/构建、Ruff、主仓归置和1280/375实际页面通过。3次必要受管后端重载；冷准备分钟等待、既有bundle/Starlette提示、1自选行情与29基金同产品技术缺口保持。
+- 最大使用缺口：近期ETF变化尚未直接关联用户持有基金。后续优先准确披露与同市场行业参考的持仓关联，再显示新增/延续/解除，再简化从今后开始的等待/未行动记录；ETF事件不能当基金买卖触发。不要求补造旧个人判断，不展开新研究。
+- 成果在codex/investor-workspace-simplification-20261012基线e6c4c2e025252c565ba15f05611561ca1ecd5b48本机未提交未推；主运行树19路径精确镜像、5188独立前端2路径。21路径增量patch SHA40c9ef4af80a1970ad501bc47af81b4a2cc336eaf648cd9f3eb776b54220ff87及sources/acceptance/goal-receipt在docs/archive/handoffs-plans/investor-workspace-simplification-20261012/data-loop-20261019-*；私有原回复/截图自有.codex/data-loop-20261019不入Git。远端仅协调元数据，无main合入。
+- 原报告docs/experiments/today-agent-output-polish-2026-10-18.md追加并实际API全文核SHA373a1553cac77f27178481989581b3c2cc3a922dff077ea8bb201c80f58790d6，仅自身registry键/INDEX行更新。原目标okr-4c2ea452d3cc note43→44实际读回，保护字段及旧历史保持、in_progress待用户使用验收。
+- 本次授权三项工程与用户连接审查完成，剩余输入范围和冷启动未冒称解决。全部有界子Agent及模型任务已结束；本任务无待跑工作，下一次按具体用户反馈接续，原研究/因子仍各自负责。
+
+---
+
 # 资料链验收发现当前批次选择不一致：必要增量
 
 checked_coordination_sha=5f980694a795f1b36c6f3f42da67b96dab8eeac3；checked_at=2026-10-19T01:22:13.243575+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018最新01:18、research-utility-review-20261012最新01:12、research-dispatch-controller及日常/观察原记录。研究源码与本批无冲突。task-id/owner/分支/基线沿下；status active、scope_released false。
