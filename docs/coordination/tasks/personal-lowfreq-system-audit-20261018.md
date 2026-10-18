@@ -1,3 +1,14 @@
+# 接续：金融现象优先的AI因子发现流程 2026-10-18T18:08:36.598460+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=bbc4cdee079cdd67e964dc6f99e8b392fb5c8fd8；checked_at=2026-10-18T18:08:36.598460+08:00；已读COORDINATION、自身、research-utility-review最新17:33、系统owner及research-dispatch-controller。原策略定义案例/合格输入仍归因子实现，本任务优化新候选发现与用途路由，无市场运行。
+- 用户要求：先金融现象与为什么；分类避免重复加工；收益以外核风险/回撤价值；后续AI遵循固定核验和可发散流程；复核8ETF/个股样本；与Gemini4讨论，查X及开源实践。采用research-closure有界方法研究和可执行文档落地，不提高旧市场预算。
+- 准确写范围：成果分支codex/personal-lowfreq-system-audit-20261018基线36e0cfe030aa6ad1a43da22ba6e2041d4b677db5；新docs/research/factor-discovery-playbook.md、docs/experiments/ai-factor-discovery-workflow-2026-10-18.md及同名raw小记录、registry/INDEX本条、自有progress；AGENTS.md只追加唯一lei-factor-discovery标记块，原字节前缀保持。主共享树仅采用相同新playbook与AGENTS新增块，不覆盖/暂存已有脏改动，不改通用规范/旧合同/程序/策略源。
+- 冲突检查：共享AGENTS既有存储/协作块保持，未见本新增标记范围的活跃owner；新playbook与本报告唯一写者root。原owner6字段开题记录复用，不重复另建登记系统。本轮服务研究组织/审阅层，不改变技术判定、交易或生产。
+- 分工：Sol evidence只读本地规范/入口/样本覆盖；Astra method只读用途/金融解释/扩样本/固定与发散衔接；Sol account外部3来源RD-Agent一手文档与源码，无克隆安装运行。root负责X（2搜索已空，余1定向访问）及Gemini最高模式实际讨论核验，至多2次提交/1追问，不重发未核请求；UI失败留证。公开来源上限6、市场实验0，预算旧值不重置。
+- 验收：准确指出文字要求与代码检查差别；可复用的一页起题记录和用途对照；扩样本按缺口而非凑数量；外部作者主张/已读代码/本地适配区分；Gemini实际模型/提交/答复身份核读；四个方法反例与一个风险用途正例检查；主树入口确实指向可读说明，原字节保持；归档/来源/远端读回。文档接入不称程序强拦截或全体AI遵从保证。
+
+---
+
 # 本库因子研究差距审查交付 2026-10-18T16:48:30.331994+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次report_only方法差距审查；scope_released true。checked_coordination_sha=d13868e788534ea78f220350513de971c098a2bd；checked_at=2026-10-18T16:48:30.331994+08:00；已读COORDINATION、自身、research-utility-review最新16:37交付、系统owner与research-dispatch-controller边界，远端无新变化。原策略与系统归属不变；长期有效因子目标未完成。
