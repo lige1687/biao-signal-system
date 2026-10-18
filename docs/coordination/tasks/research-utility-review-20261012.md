@@ -1,3 +1,12 @@
+# 范围补充：小时等待描述 2026-10-18T22:44:01.324462+08:00
+
+- checked_coordination_sha=fc461f8542b715469b810f542594b15d0b330736；已读本轮COORDINATION及本任务、investor-workspace-simplification新宏观新闻摘要范围、personal-lowfreq-system-audit新同族案例/playbook范围、research-dispatch-controller；两者无研究代码重叠。不介入其界面或Gemini。
+- 数据85逻辑查询已完成81非空/4空，原件外盘保留。原A完整目标语义不足仍不冒称完整买卖检验；新增一个已授权独立问题：依既有逐前缀底部定义，描述等待原实现中的小时双系列20/60/120排列的时间、观察价格变化及先破底/未知；原收益实验不重做，不用旧7放行样本、不改目标或门槛。实际进入须满足新资料资格及冻结合同。
+- 追加准确写范围：src/lei_signal/research/original_a_waiting.py、tests/unit/test_original_a_waiting.py（Sol唯一实现，root审查及精确镜像）；原新raw目录内waiting-protocol/runner/审计小记录；definitions.v1.json只新增research.structure.bottom_hourly_waiting@1.0.0的研究描述对象，绝不修改旧底部定义/源文件/封存合同。报告仍同一个新报告，Web现有报告库，不另开临时网站。
+- 原底部definition 1.0.0绑定算法可迁移复核但原252连续日线规则不削短；小时初始化与120根资格公开，资料差异不放大容差凑通过。目标、失效、无数据分开；不得给未合格完整A胜率/净值。新市场计算计入旧累计3600秒，采集/数据校验另列。
+
+---
+
 # 连续小周期与原A增量接续 2026-10-18T22:25:30.101967+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc；status active；scope_released false。checked_coordination_sha=d64efbe51da38c3e5d78c7b6530873b2902fbbbf；checked_at=2026-10-18T22:25:30.101967+08:00；已读COORDINATION、本任务、investor-workspace-simplification最新交付、personal-lowfreq-system-audit最新方法指引、research-dispatch-controller、technical-factor-sequence的相关范围。原系统/方法owner范围不接管；现行方法playbook直接采用，不再重复泛方法研究。
