@@ -1,3 +1,9 @@
+# 报告图产物范围补充 2026-10-18T22:56:09.871817+08:00
+
+checked_coordination_sha=89f258be11de8c5d052fb1c0b83d7805201faa69；已读同任务及系统/方法owner前述范围，当前fetch无增量，无写重叠。一次固定等待描述已执行，独核中，不调参数。新增仅研究图静态产物准确路径web/public/research-results/original-a-intraday-2026-10-18-status.svg和original-a-intraday-2026-10-18-cost.svg；root写主/研究树，正在运行5188工作树交系统owner采用。报告以现成Markdown图片引用，不改ReportsLibraryPage/机会摘要/组件代码，不另起演示网站。所有图仅等待数量/观察价差，不伪造净值。
+
+---
+
 # 范围补充：小时等待描述 2026-10-18T22:44:01.324462+08:00
 
 - checked_coordination_sha=fc461f8542b715469b810f542594b15d0b330736；已读本轮COORDINATION及本任务、investor-workspace-simplification新宏观新闻摘要范围、personal-lowfreq-system-audit新同族案例/playbook范围、research-dispatch-controller；两者无研究代码重叠。不介入其界面或Gemini。
