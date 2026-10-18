@@ -1,3 +1,14 @@
+# 理念与策略分开：小时条件独立价值研究接续 2026-10-19T00:30:37.347343+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=88bd743195b146d00da340ebb6c244c011e28d01；checked_at=2026-10-19T00:30:37.347343+08:00；已读COORDINATION、自身、personal-owner低频选标的最终资料审查、系统owner五日摘要范围、中控；未接管选股文献或系统UI，无当前重叠。
+- 用户最新明确“上涨趋势中回调是理念，具体如何实现是策略，还要结合选股，可以继续其他因子”；不再把完整A目标未唯一化泛化成所有因子研究都停。完整原A资金仍待定义，原规则不得乱补；另取现有未评价的具体问题：在同一日线底部、同一固定20交易日终点（30辅，沿用户先前窗口），新增小时确认本身是否改善后续价格/下探/等待/买贵/不参与代价。是条件/决定的研究表达，不冒称老师完整A、真实净资金或生产规则。先查已有同题、方法与输入，冻结后才看新结果；旧A01/A02/A03/颜色/账户/393等待描述不重跑。
+- 复用已保存6股事件/逐小时排列与路径，不重新筛信号；旧源资格/未来到达未知、幸存代表池限制保留。若ETF新来源跨期尺度与连续资格不足，先明确留样本缺口，不把股票代ETF。规范读主树current-standards/definitions（研究树旧索引漂移不代改）。市场累计2137.524597248/3600秒不重置；0拟合/参数搜索/付费，必要最多一次固定核心新比较加最小纠错/独核。原新来源6次历史保留；本次用户继续公开资料允许最多6新增必要公开源操作/失败，原视频只取未读部分/已存原字幕复用，实际SDK内部HTTP若未知如实标。
+- root唯一写docs/experiments/hourly-confirmation-decision-increment-2026-10-19.md及同名raw、registry本键/INDEX本行、原progress/目标note；准确研究模块/测试为src/lei_signal/research/hourly_confirmation_increment.py和tests/unit/test_hourly_confirmation_increment.py（方法核定后Sol唯一实现，root精确镜像），全局definitions仅新增本轮准确研究对象及源绑定，不改旧卡；不先改共享runner。root公开源与正式统计执行唯一写者。Astra hourly_increment_design只读方法，Sol hourly_increment_reuse只读去重/现成工具/输入；无代理网络或市场计算。
+- 公共视频继续核目标/失效含义，只读原作者已公开的趋势类型/计划片段；不购买付费全文、不把语义缺口以任意阈值补成原A。新大结果/图/日志固定外盘，先plan；不删除迁移旧件或改原文/规则/生产/通知/真实交易。后续必要静态图若生成，另登准确文件及运行树采用，不接管前端源码。
+- 验收：同机会共同终点、初未知/晚确认/未成熟/缺价都保留分母，分政策作用/确认后信息，收益价格口径与资金收益分清；绩效和相对简单参照差额表、时期/产品/反例/不确定性和独核；原系统报告直观看图。旧历史不重新当盲测，阴性可交付，不换窗口追正。
+
+---
+
 # 原A四步接续：核心定义受阻，资料与复核图交付 2026-10-19T00:19:52.038792+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status blocked（完整原A收益比较缺关键原义）；scope_released true（本轮准确写入已结束）。当前证据not_evaluated，不把四步或长期目标标完成。checked_coordination_sha=160d9b6307a2c47d8c23c8bab9aec729075f0618；checked_at=2026-10-19T00:19:52.038792+08:00；已读COORDINATION、自身、系统owner近五日背景摘要新范围、personal-owner低频选股文献与目标说明、中控；无研究/源码写重叠，不接管其他任务。
