@@ -1,3 +1,15 @@
+# 按候选顺序执行首轮，并定位可用成果缺口 2026-10-19T00:50:00.395613+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=7af1e9b596614abc92f04283d97bd7c340c186ab；checked_at=2026-10-19T00:50:00.395613+08:00；已读COORDINATION及自身、research-utility-review-20261012最新00:45、investor-workspace-simplification-20261012最新00:41、research-dispatch-controller。原owner小时确认独立增量正在核图/审阅，完整原A待定义；本任务不做日/小时触发、等待、仓位或原策略资金比较，不改其模块/定义/图。
+- 用户明确“按这个顺序去持续做，并且同步分析…最缺乏…最大缺口/痛点/迟迟看不到成果，注意和另一个因子实现对话区分”。采用research-closure research：先完成动量既有证据可复用性及缺项检验，按结果推进盈利能力资料资格，再到价值/防御的独立必要部分；同步用实际证据定位从候选到可用决定的断点，不重复10/18全面审计，不无限自动研究或后台通知。
+- 首个有界问题：已有同日ETF选择证据，能否支持优先采用相对动量；若不能，质量等不同信息候选的下一个真实瓶颈是什么？金融机制和竞争解释沿既有报告，6ETF固定名单及2022—2026H1原21日结果不可重选。复用旧pair/daily/summary、准确定义/代码、先审查口径和不确定性；如原材料能支持才新增保存结果诊断，不重新生成信号/行情或重跑旧实验。未合格资料阻断对应效果，不伪造数据或倒改旧协议。
+- 成果分支codex/personal-lowfreq-system-audit-20261018基线6fcec6236a053acad35b06c71284f6fb0198e6b9。root唯一写新docs/experiments/lowfreq-candidate-first-cycle-2026-10-19.md与同名raw小brief/manifest/合同/诊断脚本/审查/回执、自有progress、独立树registry/INDEX仅新条；本轮必要playbook补真实使用反例（主树只同增量）。系统okr-8830a1f1ec4f按用户授权开始，真实完成项再更新；原okr-ff1e0a86fbac/方法目标只关联note，不覆盖原owner状态。原data/定义/规范/源文档/生产/UI只读。
+- 并行最多3只读专业任务：Sol medium动量证据源链与旧预算核对；Sol medium财务资料本地资格盘点；Astra high仅在方法歧义/总缺口归因独核时使用。各自无网络/市场运行/共享修改，root唯一统计和公开来源请求。合同写同raw后派发，保留实际模型/费用未知。
+- 本轮新诊断预算采用skill默认：1核心问题，最多1核心批及3有理由的后续批、6公开源请求含失败、合计10尝试；每新增比较事前登记，旧封存预算不重置。纯引用/文件核对不计新市场批次但保留记录；外部失败每操作最多2次。新大结果按storage已核设备后plan外盘，本机只小记录；不跨项目/付费/改生产/交易/自动日程。
+- 验收：首屏名单/时间/用途清楚；动量效果与相对基准差额原表核回，必要依赖/时期诊断真实执行；质量资料有字段/公开时点/修订/成员覆盖的实际证据，后续分支有继续或停止理由；系统缺口按证据排序并承认合理负结果；真实研究链、归档、系统目标与远端读回。已有研究可直接回答就结案引用；必要且可执行新检验不能仅列建议。
+
+---
+
 # 候选TODO与可追踪流程登记完成 2026-10-19T00:32:46.995793+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮待办登记和工作指引接续；scope_released true。checked_coordination_sha=6f1b4ac97138ee8869869ad304fb7dc46d6af171；checked_at=2026-10-19T00:32:46.995793+08:00；已读COORDINATION、自身、research-utility-review-20261012最新00:30小时条件独立增量、investor-workspace-simplification-20261012最新00:30及00:31补注、research-dispatch-controller；两任务继续原owner，无文件或研究题重叠。
