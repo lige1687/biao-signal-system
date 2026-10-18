@@ -1,3 +1,17 @@
+# 连续小周期资料与小时确认等待交付 2026-10-18T23:09:47.164829+08:00
+
+- task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮有界资料及等待描述；scope_released true。原完整策略效果仍not_evaluated，整体目标in_progress。checked_coordination_sha=0a9135217d7664d6a3eb5abf3b3486a54fa92dba；checked_at=2026-10-18T23:09:47.164829+08:00；已读COORDINATION、自身、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller。最新两owner收尾已核，系统owner已采用本次两SVG；无写入重叠，不代管UI/方法主线。
+- 已拿6股2020-01-02至2026-06-30的15/60分钟、8ETF仅2026H1的116日；85逻辑查询81非空4空、176响应页。小时/15分钟内部价格除1根0.0001差额一致，但合成日线开高低收及量额有差异；4ETF缺调整因子/回传原始标记。只准合格连续段收盘排列，不模拟盘中成交/止损；ETF 709日线事件均缺合格小时起点前史。另一匿名ETF来源一次对端关闭、0行情，失败保留，不把来源文档当资料已到手。
+- 固定6股1502日线底部：467已确认、393后来确认、291确认前先破底、331起点未知、14等待中断、4同日先后不明、2截止。后来确认者中位21实际交易小时、观察价差+2.387536514%，303更高90更低。新等待描述完成；净收益、真正错过利润、费用和完整A增量未评价，不称避开291笔亏损。分6产品/3已见时期/全部月份及简单复杂结构保留；无调参、无旧实验重跑。
+- 23合成检查、3产品各300日前缀与旧算法相等及未来追加不变；独立全2211事件分类、393确认路径和去重4824小时价格/生效因子核算无差。EMA先N平均起算在本轮结果前纠正；定义总表有无关旧对象缺字段，未代改；本次新定义及依赖隔离通过。定义只exists/效果未评价/生产未授权。原文底部与短周期同时成立、小时允许、首次非唯一硬筛已核；20/60密集目标不可泛用全部A，目标锚点边界/时间及对应失效仍需可逐机会原义证据。
+- 报告docs/experiments/original-a-intraday-qualification-2026-10-18.md SHA41eca55092632c3162cabfdfdd54b893ddb24bb607e02e57dcc1de6b7dcd39c0；同名raw有全部协议、输入/运行/独核/替代源失败、delivery-acceptance、goal-note、closure及UI截图。主/研究树全文和新小证据一致；registry本键及INDEX已登。API6908字符完全一致，Agent registry hash verified未截断；两SVG HTTP200和hash一致，真实5188两图/表/本卡分类与结论可读，1280宽无页面横溢。全局20旧未登记报告不代改。视觉效果待用户验收。
+- 系统owner采用status SVG SHAef90ac2d7dec0e622e8eab801c074e4f1ee5c73c75568b407d811eb403e67c29、cost SVG SHA69efd04deca7d4261aa09ce9850bb3bb6020152fbbff62d2b95dc29eb6828024；原报告库插图，不再建独立临时网站。归置已通过；不以图/测试通过宣称策略有效。
+- 全部大行情和结果位于固定外盘LeiSignal-新实验结果，各准确路径/manifest哈希见collection/audit/waiting/figure-receipt；设备身份及容量核过，0回退内盘/删除/迁移。前缀、一次描述与独核新增约55.28秒；旧2082.246742416保留，累计2137.524597248/3600秒；采集约444秒、输入核查2.85秒另计；0拟合/搜索，真实token费用未知。实际Sol6 medium采集/实现和资格/独核，Astra6 high原文语义/3份源文档审阅，root集成与一次运行，无本题后台研究。
+- 原目标okr-ff1e0a86fbac只note157→158，保护字段与历史前缀一致，仍in_progress。成果分支codex/factor-evidence-integration-20261012，base70ab55556874228d2cba66cf50f96d0318e1a5be；源/报告仍本地未提交未推，远端不能独立复现，只有协调元数据推送。不改原文、正式规则、生产、交易或通知。
+- 恢复先读本报告、raw/closure和等待协议，再核storage与输入hash；只补合格ETF小时资料和可核的目标/初始失效原义，之后才能冻结同机会资金比较。现有两个原文及备份/字幕没有补足该选择，不擅自选有利目标或放宽条件；不依赖这些缺口的等待问题已交付，不重做旧颜色/底部/近似账户。
+
+---
+
 # 报告图产物范围补充 2026-10-18T22:56:09.871817+08:00
 
 checked_coordination_sha=89f258be11de8c5d052fb1c0b83d7805201faa69；已读同任务及系统/方法owner前述范围，当前fetch无增量，无写重叠。一次固定等待描述已执行，独核中，不调参数。新增仅研究图静态产物准确路径web/public/research-results/original-a-intraday-2026-10-18-status.svg和original-a-intraday-2026-10-18-cost.svg；root写主/研究树，正在运行5188工作树交系统owner采用。报告以现成Markdown图片引用，不改ReportsLibraryPage/机会摘要/组件代码，不另起演示网站。所有图仅等待数量/观察价差，不伪造净值。
