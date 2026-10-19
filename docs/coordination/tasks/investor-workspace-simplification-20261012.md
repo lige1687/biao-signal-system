@@ -1,3 +1,10 @@
+# FIP增量图单位位置修正同步 2026-10-20T00:56:09.110540+08:00
+
+- task-id investor-workspace-simplification-20261012；owner同下；status active；scope_released false；checked_coordination_sha=75ef266aaa75868a651fdae4856eeab1ef159958；checked_at=2026-10-20T00:56:09.110540+08:00；COORDINATION/self/research-utility/personal/dispatch沿上一已读内容，fetch无他人新变更。原因子owner实际窄窗发现单位右侧裁切，已修原图为轴中央，要求同范围准确同步。
+- 仅当前服务树原fip-increment.svg由已验f66e37…换为源2ab404fce92d3198f48c8fd958da47b5a443a08e4d3b7db73a56c93cf02533b1（5417字节）、更新原自身回执保留首次验收历史和进度。groups 4b47b61b字节保持，不重新复制。沿原分支/基线；不改来源、数据、报告、组件/API或研究。核XML、raw/源/目标/HTTP一致、页面解码与PID不变；研究与图中文字含义仍原owner验收，无新增功能或实验。
+
+---
+
 # FIP两张图像附件接入与浏览器验收完成 2026-10-20T00:55:02.628949+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅两张附件展示接入；scope_released true。checked_coordination_sha=ba0d611b2db19ba47e886726e768b2d5f927b939；checked_at=2026-10-20T00:55:02.628949+08:00；已读COORDINATION/self/research-utility最新00:48/personal00:43/dispatch，交付前fetch无他人新变更，无文件冲突。
