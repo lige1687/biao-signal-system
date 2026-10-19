@@ -1,3 +1,13 @@
+# ETF小时来源补证与下一阶段增量接续 2026-10-19T14:23:35.320772+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active，scope_released false。checked_coordination_sha=fe0704ce8ba81980e0f3e147276f0df780e36f65；checked_at=2026-10-19T14:23:35.320772+08:00；已读COORDINATION、self、personal-lowfreq-system-audit-20261018最新14:16、investor-workspace-simplification-20261012最新12:10及research-dispatch-controller。与盈利/动量选股及系统实现无交集。
+- 用户授权按ETF资料→回调背景增量→仓位风控→共同资金顺序推进，并明确补个股；本阶段优先核已存新浪510500连续303天资料能否在纠正基金收盘语义后形成合格小时比较；独立日线背景问题先查重再冻结，不承诺完整四步本轮均可运行。旧ETF/6股/812对象退出核心不重跑。
+- 继承市场累计2882.51346/3600秒、公开来源6/6无剩余；本阶段0新网络行情/资料请求，优先现存原字节及复权因子；新资料权限/预算若确需再列明，不静默重置。收盘语义1.1不强求ETF末小时close等官方日close，其他价、时段、复权要求不放宽。小时比较只在新来源合格、原定义复用及冻结后运行一次；无合格输入不得冒称完成。
+- root唯一写新docs/experiments/etf-hourly-source-recovery-2026-10-19.md及同名raw、原progress、registry本键/INDEX行/原目标note；必要新研究代码仅src/lei_signal/research/etf_hourly_recovery.py与对应unit测试；静态图仅web/public/research-results/etf-hourly-source-recovery-2026-10-19.svg。不改原策略/原实验/生产服务。大产物写已核外盘新目录。其他独立候选冻结后另补范围，当前只只读查重。
+- 按项目模型分工：Sol medium独立只读核原ETF来源及可用调整；Astra high只读审查新资格与问题去重；root实际执行/写共享文件。每助手唯一输出后续记录为本raw下各自audit，0网络、不得自行跑绩效。低成本有界任务优先Luna，不为机械一行检查派发。成果仍原研究分支base70ab555，本轮开始无新收益运行；准确源码提交在交付时记录。
+
+---
+
 # 底部失效与20组退出组合扩样已交付 2026-10-19T01:41:29.606483+08:00
 
 - task-id research-utility-review-20261012；owner 因子实现01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮有界问题；scope_released true。checked_coordination_sha=a850db332d1a4d3c6dd937af4635fd60dd0559d2；checked_at=2026-10-19T01:41:29.606483+08:00；已读COORDINATION、自身、系统01:37交付、personal01:39十年600股票月度排序新范围及中控。冲突决定：本任务仅原日线底部/退出及准确静态图，未接管选股/财务/十年排序或系统UI/API；交付前新阶段均无写交集。
