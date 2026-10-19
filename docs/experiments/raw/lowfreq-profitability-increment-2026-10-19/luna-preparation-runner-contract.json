@@ -1,0 +1,38 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "mission": "为已获取原件编写机械解析与正文取证runner，实际运行须待主控核准解析器SHA",
+  "task_scope": [
+    "只新增raw/prepare_financial_documents.py。参数--progress --plan --parser-sha256 --out --limit-codes可选；无网络、不实际运行解析/市场，先AST/help和轻量合成路径/身份字段检查。",
+    "源progress的codes按原cohort顺序遍历，只取状态complete/incomplete且已完成source_path的obtained/reused PDF，不取running代码未收尾材料。必须核source_path/sha256/bytes、publisher元数据和cohort确切code；任何前缀/失败不当原件。不能修改源。",
+    "生成每个doc独立JSON，含来源ID/code/title/announcementTime，按Asia/Shanghai把毫秒转公告日，不用UTC日；原件sha/bytes/实际发布时间字段保留。仅初始create-only输出，写满manifest后结束，不循环、不overwrite、不resume。--limit-codes是来源资格诊断计数不代表财务效果样本。",
+    "年报候选由目标report_year_from_title并非已证fullannual。读取PDF前8页正文识别证券代码（证券/股票代码字段与请求code一致）、年报标题与FY年份。即使字段解析成功，正文身份不明确/与元数据冲突则identity_unknown/conflict。通知标题关于…年报更正/补充公告不当全文年报；完整/疑似全文/通知/其他/不明标签及证据均保留，不按已取消文字追溯删除。",
+    "年度候选调用正式研究模块parse_annual_pdf，运行时严格核当前模块SHA等于--parser-sha256。原件版号/财务更正的可用性不在本runner猜。正文类型和identity独立字段，不因解析成功自称完整合格历史。",
+    "所有correction类别及疑似notice原PDF用现成pypdfium2逐页保存JSON[{page,text}]到外盘并记录hash，供主控后续语义判定；不输出财务组合分数/价格收益。显式关闭PdfDocument/页/文本页。",
+    "输出每doc JSON来源+解析+正文头证据、每notice正文、manifest统计源代码/成功失败/未知/每文档hash/moduleSHA。失败逐条保留，不因个体失败丢弃全体。所有大输出只传入获准外盘result下新子目录，核mount设备stat.st_dev==16777238及UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，至少10GiB保留；不内盘回退。"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_documents.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "脚本SHA和无网络合成检查，不实际跑市场或更正判定"
+  ],
+  "stop_conditions": [
+    "不改其他文件，不联网，不跑实际解析直到新执行合同"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "mission": "修正已核原年报解析器中的金额/货币/期间边界，禁止可读但错误的数字通过",
+  "task_scope": [
+    "同原两文件单写者，无网络/市场效果。主控已独跑7测试通过，但下列可读错误会影响大批样本，需新增有语义反例并修复。",
+    "_money当前(1,234.56)会被当正数，须支持明确括号负数或返回unknown，不得默认为正。表头有附注、行只有附注32+当期100.00而比较期空时，不能误把32当当期金额；将附注列信息纳入判断，无法确认两金额则unknown。",
+    "货币当前只在明示非人民币时拒绝，没有币种信息却默认人民币不满足合同。允许正文明确本位币/金额除特殊说明人民币的依据作为后备并保留证据；无币种说明不能凭境内发行人推人民币。修正币种： 人民币的空白/负向匹配回溯误拒问题。单位必须明确及换算保持。",
+    "表内明示2014年1-6月等非年度期间不能因页眉2014年年度报告而被当1-12月；有明确冲突先拒绝，只有缺显式期间才允许验证年度页眉/实际年度列。",
+    "parse_annual_pdf需close文本页/页/PdfDocument，避免数千PDF native句柄积累。不要共享多线程PDFium。公司身份和文档类型将由独立适配器结合官方secCode/标题/正文确认；不要假称本函数已验这些。",
+    "只读同6PDF回归字段应保持，新增括号负数/注号单金额/空币种/带空白人民币/半年度冲突反例。给真实SHA/通过与未知；不修到迎合覆盖率。"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/original-filings-controller-review.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/tests/unit/test_profitability_discovery.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "解析接口+SHA",
+    "有金融语义的合成反例及6原年报原件与已核金额一致/不合格原因，不算市场效果"
+  ],
+  "stop_conditions": [
+    "不联网/不新数据/不跑组合市场/不改旧源或其他owner"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "original_pdfs": [
+    {
+      "announcement_id": "1200948045",
+      "code": "000594",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-08-pdf.body",
+      "sha256": "9520d0adeabfefe45c5fbcf0d5c5408a3965436a42d64f8e0fab1ca1ac8c8e43",
+      "bytes": 3329403
+    },
+    {
+      "announcement_id": "1200972314",
+      "code": "000594",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-09-pdf.body",
+      "sha256": "24c26bd0d2d4f3af5e578f77edf28c0307110243c0fd07234dc6ce094f546b01",
+      "bytes": 2362232
+    },
+    {
+      "announcement_id": "1203334576",
+      "code": "600518",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-10-pdf.body",
+      "sha256": "39f1f6f68a0244242f6f543ea140cc573faccb1e2bbcfe0bc14c901d495e07e6",
+      "bytes": 3426959
+    },
+    {
+      "announcement_id": "1204793690",
+      "code": "600518",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-11-pdf.body",
+      "sha256": "15b3b15df2dfd3310cc16e1e345e8950e8a9cb047bdad38d1263e2b55cfd2985",
+      "bytes": 3886671
+    },
+    {
+      "announcement_id": "1200877315",
+      "code": "600519",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-12-pdf.body",
+      "sha256": "89145ef5bd12256c4c75c122b1c8d59846a912434f1abd0570f678bdb1a20f24",
+      "bytes": 2278854
+    },
+    {
+      "announcement_id": "1207911925",
+      "code": "600599",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-13-pdf.body",
+      "sha256": "7c08f4a7d560f4212f66e0e95ed07a492794d895767ceaf65f6634a02714014a",
+      "bytes": 2401457
+    }
+  ]
+}

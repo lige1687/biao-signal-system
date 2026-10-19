@@ -1,0 +1,8 @@
+{
+  "schema": "financial-design-amendment/1",
+  "base_design_sha256": "648476bf2cb79056d4982884e96b387ffc76a494598475644b12be0c69e526bc",
+  "effect_runs_before": 0,
+  "reason": "直接核财务与动量重复信息，不以持股不同推断机制独立",
+  "add": "each pool-month Spearman rank correlation financial vs momentum using only known scores; no future return inputs, no candidate/parameter/market expansion",
+  "limit": "correlation is descriptive overlap only, low correlation does not prove added investment value"
+}

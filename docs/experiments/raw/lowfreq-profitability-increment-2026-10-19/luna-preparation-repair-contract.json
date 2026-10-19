@@ -1,0 +1,37 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "mission": "修正机械runner真实路径/代码标识/文档类型误分类后才执行",
+  "task_scope": [
+    "仍只写prepare_financial_documents.py，继承原source资格/外盘/不联网/不实际运行限制；本轮必须用真实计划/financial-cohort和progress只读结构核对，不读取PDF。",
+    "ROOT当前硬编码主仓导致正式parser在owned工作树无法加载，应从脚本所在目录推导owned根(HERE.parents[3])，合成assert ROOT等于本工作树及模块存在。",
+    "cohort.fixed_codes是sh.600xxx/sz.000xxx，源progress.codes是六位；当前比较两集合必失败。按已冻结600 full -> six唯一映射，核进度六位都属于同600，完整证券代码保留为cohort_code用于以后价格连接，publisher_code单列；source item.code六位与映射核对。测试真实600身份和已完成条目至少一条但不读PDF。",
+    "NOTICE_RE不得在完整年报前8页全文中遇见修订/更正/更新/取消词就归notice，这会误拒大量真全文。元数据标题以关于/公告/说明等通知语境+更正补充识别notice；2014年年度报告（更新后/修订版/已取消）仍为suspected_full_text，保留修订标签和未知取消日，不凭它删历史。正文年度报告标题与期间及真正合并表由parser资格另核；遇到通知但有年度报告字样仍notice。",
+    "身份字段还包括公司代码（600519真实首页用此）、证券代码、股票代码；必须预期代码在明确字段内，任意六位只是weak_match。多代码冲突保留未知，不猜A/B主次。",
+    "修复后测试关于2019年年报更正公告=notice、完整2014年年度报告更新后/已取消不是notice、正文只提更正不改全文身份、公司代码600519明确匹配；--help/AST与真实600/progress结构检查。给最终SHA，不运行PDF解析。"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_documents.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "脚本SHA和无网络合成检查，不实际跑市场或更正判定"
+  ],
+  "stop_conditions": [
+    "不改其他文件，不联网，不跑实际解析直到新执行合同"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "mission": "冻结设计的同池月度选股比较与统计执行器，仅实现和合成核查，真实执行仍交Luna新合同",
+  "task_scope": [
+    "只新增raw/evaluate_profitability.py，不改正式parser/旧代码或其他文件，不联网/实际市场计算。数据输入仅已保存price per_stock_month.csv与待准备as-known-financial-panel.csv，固定financial-design.v1.json和amendment01 SHA绑定。无拟合/调参/其他候选。",
+    "panel接口逐600*132保留含未知行：month,decision_date,code(含sh./sz.),industry(C26),gp_status,gpa,cfo_status,cfoa,report_year,announcement_id,publication_date,reason；字段状态合格才入pool，不填零/不看future资格。price CSV已有eligibility_reason=eligible、momentum、future_return、outcome_reason、either_halt等；每月code唯一与cohort600/原132日和entry/exit绑定。root负责来源/版本资格，本脚本不得猜。",
+    "按设计三scope：GP主池用GP候选；同有GP+CFO池分别重新测GP和CFO。金融J排除/行业未知排除，两位CSRC代码，n<5全方法持有全行业、ceil(n*.2)、行业n/N权重，同行业rank同分平均最终code排。P/M/F/B/D五方法；全部权重和1。收益缺失目标权重不剔除，-1/0两情景；有停牌标价只能报价研究。",
+    "输出月度method收益/未知权重/暂停交易权重、每股明确5权重和feature/source键、每月资格层数与原因（原600/价格/行业/GP/GP+CFO）、每scope/场景performance与paired F-P/B-M/B-D/B-P/B-F表，年份/2015-19和2020-25/剔除任一年。主表月均/样本std/最差月/最差ceil(10%n)月均，P下跌共同月平均与配对差；连续完整132月份可附报价路径最大下跌，缺月不得拼完整路径。",
+    "其他输出：持有只数/最大权重/Σmin(wF,wM)及B/M重合、月收益共同变化（样本足够否则unknown）、目标权重更换0.5Σabs(new_target-old_target)标非实际成交、财报annID变更数量；财务与动量已知评分的当月Spearman相关并明确只描述重复信息。",
+    "不确定性固定6/12月循环日期成块重复抽10000、seed20261019、所有方法同位置，95%和考虑两候选择优97.5%区间。用全部132月位置保留缺月NAN再取当次有效均值，不把非连续月份拼成连续块；给有效抽取数/库版本/算法/索引hash。无有效月时结果明确not_evaluated不能crash/造零。",
+    "CLI --contract <json> --out 新外盘目录，contract绑定design/amendment/cohort/prices/panel/module与自身SHA；只在检查hash/单位/日期/600名单和scope前提通过后运行，输出create-only manifest各文件hash与准确执行秒数。此实现阶段尚无最终panel/合同，请不要为测试拿真实price拼假panel或跑市场。",
+    "--self-test纯合成验证sector权重/tiny行业/同分code/负数评分/缺future权重/D不同于B/同日期共同池/重复证券拒绝；输入字段边界不能靠测试镜像实现。"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-design.v1.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-design-amendment-01.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/evaluate_profitability.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "单脚本SHA、合成语义检查、未运行真实市场声明及接口缺口"
+  ],
+  "stop_conditions": [
+    "不联网/不真跑市场/不修改原输入/不增加科学候选与参数"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}
