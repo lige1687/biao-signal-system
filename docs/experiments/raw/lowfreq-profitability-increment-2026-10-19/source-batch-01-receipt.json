@@ -1,0 +1,84 @@
+{
+  "schema": "financial-source-batch-execution-receipt/1",
+  "coordination_sha256": "de4d18638cd329304ea187065f6cfd3f832e32ff",
+  "contract_path": "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-batch-01-contract.json",
+  "contract_sha256": "0b4e110c8444eb4a8cf8920abb53e33307a45edf008d8b5e66be24e3c568cb0b",
+  "runner_path": "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_batches.py",
+  "runner_sha256": "a3526af5c13483796425ab8347c4e76770c39de93c0b0e36053ab3bf7df828c2",
+  "input_hashes": {
+    "progress": "16ed4b91b5ceb116ac3f93d835cd2042475f34a4c5b7d27a3fe01f64c5df7a36",
+    "plan": "bcb2d5b3a8a3efe9ef08d656fe92b60af80ab6a1e0f17b4b8cddcd662b091e07",
+    "cohort": "6f073e37809613469efe6cd2adb6b7ef1b4e77515e99e7149e1636d9e390cc16",
+    "parser": "f413b863a70533c1a2326e57bd7f7ad6d551674621f04a23cda1890966506112",
+    "preparer": "3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012"
+  },
+  "reuse_manifest_bindings": [
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-diagnostic-25-v2/manifest.json",
+      "sha256": "4f5912651c0a8e8ba5cf4d93145871d55ad13a0b3064360d98a012fd8414afc4",
+      "execution_contract": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/luna-source-diagnostic-v2-contract.json",
+        "sha256": "763670aa86db8918b4ae9251d2a232a8abb486a0e6c98e54692bca61c2237de2"
+      },
+      "execution_receipt": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-diagnostic-25-v2-receipt.json",
+        "sha256": "bfb09f14768d8cb7ca2e6e3b584acfa80ea1e6c4dc4e89118b5676f7e81f330c"
+      }
+    }
+  ],
+  "execution": {
+    "command": [
+      "python3",
+      "-B",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_batches.py",
+      "--contract",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-batch-01-contract.json"
+    ],
+    "pid": 32761,
+    "terminal_session_id": 87161,
+    "exit_code": 0,
+    "elapsed_seconds": 446.3661629159469,
+    "network_requests": 0,
+    "market_effects_run": false,
+    "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-01",
+    "log_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-01.log",
+    "log_sha256": "0d5e9fe4e3ae1cc9b5b7e7bfd13e3e5fc538e66e46a8a90d10935db147744bec",
+    "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-01/manifest.json",
+    "manifest_sha256": "264d688eec9227c7ec3c4b3c49e584da51cd16577ea98f7b5fb12c46f5609ce0",
+    "prepared_journal_sha256": "f4a029116cc2d506eecb05814a261756fb3a6a48667e3af8fe056877f8ad7003"
+  },
+  "results": {
+    "documents_total": 4029,
+    "new_documents": 3409,
+    "reused_documents_exactly_equal_to_v2": 620,
+    "document_json_hashes_verified": 4029,
+    "notice_text_hashes_verified": 1720,
+    "notice_page_counts_verified": 1720,
+    "source_pdf_integrity_checks_verified": 4029,
+    "source_pdf_bytes_hashed": 10035422555,
+    "source_code_states": {
+      "complete": 168,
+      "incomplete": 10,
+      "running": 4,
+      "pending": 418
+    },
+    "manifest_error_reasons": {
+      "code_state_not_final_complete_or_incomplete": 422
+    },
+    "incomplete_source_document_count": 12,
+    "incomplete_source_reasons": {
+      "body_above_saved_byte_cap; prefix_preserved": 6,
+      "ChunkedEncodingError: ('Connection broken: IncompleteRead(233168 bytes read, 354764 more expected)', IncompleteRead(233168 bytes read, 354764 more expected))": 1,
+      "non_pdf_response": 1,
+      "no_finish; never_retry": 4
+    },
+    "unprepared_source_statuses": "All 422 manifest code-state errors are 418 pending and 4 running codes; no retry was attempted.",
+    "version_chain_completeness_inferred": false
+  },
+  "verification_failures": 0,
+  "limitations": [
+    "This step prepares source documents only; no market outcomes or strategy effects were evaluated.",
+    "Pending and running codes remain unprepared; incomplete source records are retained without retry.",
+    "Financial-version relevance and version-chain completeness remain unassessed."
+  ]
+}

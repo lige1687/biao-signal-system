@@ -1,0 +1,15 @@
+{
+  "schema": "execution-failure/1",
+  "created_utc": "2026-10-19T04:04:13.781699+00:00",
+  "agent": "luna_parse_v2",
+  "contract_sha256": "780be2a4749840a8c67ad24a28af39fc3c8b554e2f6f469a18c1c0b46aa9e980",
+  "exit_code": 1,
+  "error": "ValueError: frozen cohort or parser implementation changed",
+  "location": "prepare_financial_batches.py:181",
+  "cause": "Runner constant still bound old approved parser; updated contract alone did not update runner approval",
+  "output_directory_created": false,
+  "root_readback_output_absent": true,
+  "network": 0,
+  "market_effects_run": false,
+  "repair": "update runner explicit approved parser fingerprint, preserve failed contract, create new execution contract"
+}

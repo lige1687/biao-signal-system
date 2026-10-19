@@ -1,0 +1,616 @@
+{
+  "schema": "financial-parser-v3-independent-review/1",
+  "parser_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py",
+  "parser_sha256": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+  "source_index_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-01/expected-source-index.json",
+  "source_index_sha256": "11a411c4cdd098412a06e1daa2c0e615a321e6e9f398c044b5fac2c847f473c6",
+  "previous_independent_receipt_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/independent-source-spotcheck-01.json",
+  "previous_independent_receipt_sha256": "cd13847f3cd1b013303f134ecfd7a8c0e635decd4bc031cc50b221c6d8a2eef7",
+  "method": "pypdf independently extracts original PDF text; current parser locates candidate pages and amounts; pypdf checks the labeled row, current amount, nearby consolidated table heading, reported unit and fiscal year; six prior independently checked values are compared numerically. No outcome data read.",
+  "new_source_checks": [
+    {
+      "code": "sz.300309",
+      "announcement_id": "1216246509",
+      "fiscal_year": 2022,
+      "pdf_sha256": "b810f885b97248b74fc2d7cebc52d82eb80c60f9d1771cfcb1584e0c39a0eb14",
+      "publication_date": "2023-03-29",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 154,
+          "value_yuan": "1325868829.64",
+          "independent_pdf_row": "资产总计 1,325,868,829.64 4,336,314,720.21",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "revenue",
+          "page": 157,
+          "value_yuan": "51494620.44",
+          "independent_pdf_row": "其中：营业收入 51,494,620.44 72,591,310.17",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cost",
+          "page": 157,
+          "value_yuan": "237373170.43",
+          "independent_pdf_row": "其中：营业成本 237,373,170.43 428,511,258.85",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cfo",
+          "page": 161,
+          "value_yuan": "63358591.15",
+          "independent_pdf_row": "经营活动产生的现金流量净额 63,358,591.15 40,330,446.58",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        }
+      ]
+    },
+    {
+      "code": "sz.002303",
+      "announcement_id": "1207419687",
+      "fiscal_year": 2019,
+      "pdf_sha256": "e2d466981c89f2323650bed72e85c9107d84560a31f5aec2454575ca86212f44",
+      "publication_date": "2020-03-28",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 115,
+          "value_yuan": "7269432950.85",
+          "independent_pdf_row": "资产总计 7,269,432,950.85 6,369,909,693.04",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "revenue",
+          "page": 120,
+          "value_yuan": "3392132631.63",
+          "independent_pdf_row": "其中：营业收入 3,392,132,631.63 3,248,945,549.35",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cost",
+          "page": 120,
+          "value_yuan": "2304110212.24",
+          "independent_pdf_row": "其中：营业成本 2,304,110,212.24 2,196,210,059.84",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cfo",
+          "page": 126,
+          "value_yuan": "441130346.32",
+          "independent_pdf_row": "经营活动产生的现金流量净额 441,130,346.32 273,926,567.38",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        }
+      ]
+    },
+    {
+      "code": "sz.300320",
+      "announcement_id": "1207417529",
+      "fiscal_year": 2019,
+      "pdf_sha256": "0d96c3d5b896159787956fa0740600dbf043cf6efecee3c7a0b8c8b74f022d15",
+      "publication_date": "2020-03-28",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 83,
+          "value_yuan": "2843445071.86",
+          "independent_pdf_row": "资产总计 2,843,445,071.86 2,650,817,932.88",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "revenue",
+          "page": 87,
+          "value_yuan": "2241199353.12",
+          "independent_pdf_row": "其中：营业收入 2,241,199,353.12 2,130,068,972.10",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cost",
+          "page": 87,
+          "value_yuan": "1635325434.59",
+          "independent_pdf_row": "其中：营业成本 1,635,325,434.59 1,614,986,838.97",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cfo",
+          "page": 93,
+          "value_yuan": "204689597.18",
+          "independent_pdf_row": "经营活动产生的现金流量净额 204,689,597.18 23,398,935.20",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        }
+      ]
+    },
+    {
+      "code": "sz.002697",
+      "announcement_id": "1207416018",
+      "fiscal_year": 2019,
+      "pdf_sha256": "06319f930c5be1a89812a7f18a7eb0f1620bfd51d7051b9d7be9d7706bcdc2f2",
+      "publication_date": "2020-03-28",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 56,
+          "value_yuan": "5107757768.13",
+          "independent_pdf_row": "资产总计 5,107,757,768.13 4,794,059,433.44",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "revenue",
+          "page": 60,
+          "value_yuan": "7822778964.68",
+          "independent_pdf_row": "其中：营业收入 7,822,778,964.68 7,220,017,613.62",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cost",
+          "page": 61,
+          "value_yuan": "5406264301.44",
+          "independent_pdf_row": "其中：营业成本 5,406,264,301.44 5,099,959,318.20",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cfo",
+          "page": 66,
+          "value_yuan": "275596691.39",
+          "independent_pdf_row": "经营活动产生的现金流量净额 275,596,691.39 661,821,298.08",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        }
+      ]
+    },
+    {
+      "code": "sh.600406",
+      "announcement_id": "1203226111",
+      "fiscal_year": 2016,
+      "pdf_sha256": "0ba0c11065435c99b06a66f295b70aab5ff5c34c2e1e5fea593b0879e32bbd4b",
+      "publication_date": "2017-03-30",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 79,
+          "value_yuan": "17532386121.14",
+          "independent_pdf_row": "资产总计   17,532,386,121.14 16,333,822,317.77",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "revenue",
+          "page": 85,
+          "value_yuan": "11415282981.64",
+          "independent_pdf_row": "其中：营业收入 五、34 11,415,282,981.64 9,711,555,239.79",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cost",
+          "page": 85,
+          "value_yuan": "8815160560.81",
+          "independent_pdf_row": "其中：营业成本 五、34 8,815,160,560.81 7,262,110,951.74",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cfo",
+          "page": 89,
+          "value_yuan": "1824332191.35",
+          "independent_pdf_row": "经营活动产生的现金流量净额  1,824,332,191.35 1,199,945,731.79",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        }
+      ]
+    },
+    {
+      "code": "sh.600695",
+      "announcement_id": "1200924765",
+      "fiscal_year": 2014,
+      "pdf_sha256": "9a1718cb6ca2e5b2d752e70c4e5989946085c4129400208e3396a70f01e725e8",
+      "publication_date": "2015-04-28",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 37,
+          "value_yuan": "642492340.12",
+          "independent_pdf_row": "资产总计   642,492,340.12 462,675,863.99",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "revenue",
+          "page": 40,
+          "value_yuan": "270555991.83",
+          "independent_pdf_row": "其中：营业收入 （二十八） 270,555,991.83 291,968,358.52",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cost",
+          "page": 40,
+          "value_yuan": "249006544.50",
+          "independent_pdf_row": "其中：营业成本 （二十八） 249,006,544.50 270,117,055.76",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        },
+        {
+          "field": "cfo",
+          "page": 42,
+          "value_yuan": "-108275357.66",
+          "independent_pdf_row": "经营活动产生的现金流量净额   -108,275,357.66 -35,770,969.39",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": null
+        }
+      ]
+    }
+  ],
+  "previously_qualified_regression_checks": [
+    {
+      "code": "sz.000568",
+      "announcement_id": "1204601047",
+      "fiscal_year": 2017,
+      "pdf_sha256": "fb10fe39536763e3c2bf39ebc06aeae736ff20b094c50969d1fff7c880162bea",
+      "publication_date": "2018-04-11",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 63,
+          "value_yuan": "19755761074.20",
+          "independent_pdf_row": "资产总计 19,755,761,074.20 13,965,550,665.32",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "revenue",
+          "page": 67,
+          "value_yuan": "10394867493.46",
+          "independent_pdf_row": "其中：营业收入 10,394,867,493.46 8,626,696,462.91",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cost",
+          "page": 67,
+          "value_yuan": "2917815056.52",
+          "independent_pdf_row": "其中：营业成本 2,917,815,056.52 3,373,229,372.64",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cfo",
+          "page": 72,
+          "value_yuan": "3693407461.89",
+          "independent_pdf_row": "经营活动产生的现金流量净额 3,693,407,461.89 2,749,562,800.75",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        }
+      ]
+    },
+    {
+      "code": "sz.002143",
+      "announcement_id": "63730685",
+      "fiscal_year": 2013,
+      "pdf_sha256": "c3a9ac1222536e8e6bc411c5b5cd50108555ffea3fbf8e518e12c9917f1f9353",
+      "publication_date": "2014-03-27",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 53,
+          "value_yuan": "1826291775.58",
+          "independent_pdf_row": "资产总计 1,826,291,775.58 2,026,121,367.96",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "revenue",
+          "page": 57,
+          "value_yuan": "3521439215.86",
+          "independent_pdf_row": "其中：营业收入 3,521,439,215.86 2,822,170,562.38",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cost",
+          "page": 57,
+          "value_yuan": "3358564989.28",
+          "independent_pdf_row": "其中：营业成本 3,358,564,989.28 2,707,409,879.92",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cfo",
+          "page": 60,
+          "value_yuan": "222399353.96",
+          "independent_pdf_row": "经营活动产生的现金流量净额 222,399,353.96 -83,389,414.04",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        }
+      ]
+    },
+    {
+      "code": "sh.600138",
+      "announcement_id": "1203335619",
+      "fiscal_year": 2016,
+      "pdf_sha256": "50583d96cb70fe4e0ac980cad6476aa1efd4c3205c8fb917fd156bb3675f994b",
+      "publication_date": "2017-04-20",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 50,
+          "value_yuan": "10949447939.17",
+          "independent_pdf_row": "资产总计   10,949,447,939.17 9,554,776,010.88",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "revenue",
+          "page": 53,
+          "value_yuan": "10327476311.96",
+          "independent_pdf_row": "其中：营业收入 七、39 10,327,476,311.96 10,577,015,943.44",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cost",
+          "page": 53,
+          "value_yuan": "7870618455.46",
+          "independent_pdf_row": "其中：营业成本 七、39 7,870,618,455.46 8,338,016,299.63",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cfo",
+          "page": 56,
+          "value_yuan": "947431813.45",
+          "independent_pdf_row": "经营活动产生的现金流量净额   947,431,813.45 510,261,521.80",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        }
+      ]
+    },
+    {
+      "code": "sz.000803",
+      "announcement_id": "1201077677",
+      "fiscal_year": 2014,
+      "pdf_sha256": "7ef66e32364c2d7572974acc7cf9682c5ce2f1653d02147ff3bade01591f0bb0",
+      "publication_date": "2015-05-29",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 54,
+          "value_yuan": "457348369.14",
+          "independent_pdf_row": "资产总计 457,348,369.14 490,820,328.06",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "revenue",
+          "page": 58,
+          "value_yuan": "162991625.58",
+          "independent_pdf_row": "其中：营业收入 162,991,625.58 177,034,094.26",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cost",
+          "page": 58,
+          "value_yuan": "119103177.66",
+          "independent_pdf_row": "其中：营业成本 119,103,177.66 130,328,248.40",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cfo",
+          "page": 63,
+          "value_yuan": "-44124675.85",
+          "independent_pdf_row": "经营活动产生的现金流量净额 -44,124,675.85 -92,697,801.42",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        }
+      ]
+    },
+    {
+      "code": "sh.600523",
+      "announcement_id": "1204470432",
+      "fiscal_year": 2017,
+      "pdf_sha256": "c550381be6635048b2260cd39351e420601c4f1e6f25d7f9c70f2797e469dd6d",
+      "publication_date": "2018-03-13",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 55,
+          "value_yuan": "3658589143.27",
+          "independent_pdf_row": "资产总计   3,658,589,143.27 3,780,466,787.27",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "revenue",
+          "page": 58,
+          "value_yuan": "3391140353.89",
+          "independent_pdf_row": "其中：营业收入 七、61 3,391,140,353.89    3,361,211,067.89",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cost",
+          "page": 58,
+          "value_yuan": "2632116100.00",
+          "independent_pdf_row": "其中：营业成本 七、61 2,632,116,100.00 2,579,748,971.17",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cfo",
+          "page": 61,
+          "value_yuan": "278464864.31",
+          "independent_pdf_row": "经营活动产生的现金流量净额  278,464,864.31 451,520,693.36",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        }
+      ]
+    },
+    {
+      "code": "sz.002619",
+      "announcement_id": "1202226081",
+      "fiscal_year": 2015,
+      "pdf_sha256": "408cf7493f91d1617f5d508d69d9fddc7752b1826f37c537b4d8fa4c9427d665",
+      "publication_date": "2016-04-23",
+      "fields": [
+        {
+          "field": "assets",
+          "page": 56,
+          "value_yuan": "3680273518.85",
+          "independent_pdf_row": "资产总计 3,680,273,518.85 1,030,719,203.18",
+          "heading": "合并资产负债表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "revenue",
+          "page": 60,
+          "value_yuan": "489541504.88",
+          "independent_pdf_row": "其中：营业收入 489,541,504.88 375,839,733.03",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cost",
+          "page": 60,
+          "value_yuan": "174292711.26",
+          "independent_pdf_row": "其中：营业成本 174,292,711.26 247,869,851.91",
+          "heading": "合并利润表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        },
+        {
+          "field": "cfo",
+          "page": 64,
+          "value_yuan": "127061356.33",
+          "independent_pdf_row": "经营活动产生的现金流量净额 127,061,356.33 48,462,101.90",
+          "heading": "合并现金流量表",
+          "unit_line_present": true,
+          "fiscal_year_context_present": true,
+          "matches_previous_independent_amount": true
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "pdfs_checked": 12,
+    "new_pdfs_checked": 6,
+    "previous_pdfs_checked": 6,
+    "field_rows_verified": 48,
+    "field_rows_mismatched": 0,
+    "unconfirmed_field_rows": 0,
+    "network_requests": 0,
+    "research_effect_runs": 0
+  },
+  "limits": [
+    "Text-layer verification only; no rendered-page visual audit.",
+    "The pypdf check uses the current parser to nominate pages, then verifies the amounts against original PDF text and preceding table headers."
+  ]
+}

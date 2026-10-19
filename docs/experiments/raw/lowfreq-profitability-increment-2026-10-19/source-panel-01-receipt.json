@@ -1,0 +1,51 @@
+{
+  "schema": "source-panel-receipt/1",
+  "run_id": "source-panel-01",
+  "contract_sha256": "27524614bf13aaefe15b1ed35cd5adf19e31e3926d4b4f007d6c3cc3a81eb00a",
+  "builder_sha256": "c7b880b0246173e1e32dd692b97cff57ddafba460ec528cdb0b1aae507a40d64",
+  "execution": {
+    "pid": 35405,
+    "terminal_session_id": 89116,
+    "exit_code": 0,
+    "elapsed_seconds": 5.9,
+    "created_utc": "2026-10-19T03:58:26.813723+00:00",
+    "network_used": false,
+    "market_effects_run": false
+  },
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-01",
+  "manifest_sha256": "d1a92a15a472f46d97aefc6acb8dd19aed4c61ffc1841f4702b7738728b8987b",
+  "output_sha256": {
+    "panel.csv": "0a59055dd75cf78c6d361a4a64ef91d1d8c589deb54951f43b929859d8371aa2",
+    "audit.json": "398b047e200cac639803da0acdbe51d380aafda76c78fbf64efa594ef5fc3a81",
+    "monthly-coverage.json": "c3b84d5e96a5c9fa0f5ab4f152fa7ae1f30aec08551a0fddead5f0d8557e0997",
+    "notice-review-queue.json": "8d53dda2c812bda9043fa56c354b53d85c93ca1ffbcc1be8d90acc3b1e040456",
+    "expected-source-index.json": "11a411c4cdd098412a06e1daa2c0e615a321e6e9f398c044b5fac2c847f473c6"
+  },
+  "shape": {
+    "rows": 79200,
+    "months": 132,
+    "codes": 600,
+    "expected_documents": 6344
+  },
+  "coverage_summary": {
+    "gp_qualified_min": 1,
+    "gp_qualified_max": 60,
+    "gp_qualified_mean": 9.79,
+    "cfo_qualified_min": 1,
+    "cfo_qualified_max": 60,
+    "cfo_qualified_mean": 9.92,
+    "common_pool_min": 1,
+    "common_pool_max": 59,
+    "common_pool_mean": 9.61,
+    "period_unknown_counts": {
+      "source_catalog_incomplete": 55176,
+      "applicable_notice_unresolved": 11769,
+      "latest_full_annual_field_or_identity_unknown": 10916,
+      "annual_older_than_16_months": 635,
+      "financial_industry_excluded": 1496,
+      "missing_in_snapshot": 96
+    }
+  },
+  "unresolved_notice_queue": 2767,
+  "scope_note": "First source batch only; source coverage does not yet include all 600 codes completely. This is a source timing/qualification panel; no market-effect calculation was performed."
+}

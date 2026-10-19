@@ -1,0 +1,31 @@
+{
+  "schema": "financial-source-completion-tool-development/1",
+  "status": "implementation_for_controller_review_only",
+  "scope": "same fixed 600, FY2013-2024, publication through 2025-12-31; no financial values or market effects",
+  "files": {
+    "runner": "complete_financial_sources.py",
+    "synthetic_tests": "test_complete_financial_sources.py"
+  },
+  "mode": "plan by default, no HTTP unless exact approved execute contract",
+  "stage_boundary": "catalog waves contain only deterministic unissued pages; unknown pages after page 1 require a new frozen snapshot and contract. PDF stage requires all catalogs complete and a frozen unique target list.",
+  "request_budget": "each execute contract binds exactly the frozen operation list and its finite count; prior journal starts, including unfinished and failed starts, are counted and excluded from new requests; cumulative counts are written to the result manifest",
+  "execution_guards": [
+    "original final manifest, progress, journal and acquirer hashes must agree",
+    "same 600 codes and original category, URL, PDF target, concurrency, pacing, timeout, no retry and byte limits",
+    "create-only child of the original external result directory, fixed UUID and device, >=10 GiB free reserve",
+    "durable start/finish journal, prior 429 or two consecutive errors forbid new stages, and a preceding single failure is carried into the next stage"
+  ],
+  "validation": {
+    "synthetic_cases_passed": 4,
+    "cli_help_exit": 0,
+    "real_http_started": 0,
+    "real_completion_plan_frozen": false,
+    "real_merged_progress_created": false,
+    "market_effects_run": false
+  },
+  "limitations": [
+    "Original acquisition was still active during development; final progress and request budget have not been frozen.",
+    "A started failed or interrupted request cannot be recovered by this tool; it remains an explicit unknown.",
+    "A catalog reporting more than 30 pages remains incomplete under the original per-query page cap."
+  ]
+}

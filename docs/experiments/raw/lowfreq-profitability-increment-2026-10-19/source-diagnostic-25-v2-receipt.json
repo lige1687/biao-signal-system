@@ -1,0 +1,140 @@
+{
+  "schema": "financial-source-diagnostic-v2-receipt/1",
+  "coordination_sha256": "de4d18638cd329304ea187065f6cfd3f832e32ff",
+  "contract_path": "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/luna-source-diagnostic-v2-contract.json",
+  "contract_sha256": "763670aa86db8918b4ae9251d2a232a8abb486a0e6c98e54692bca61c2237de2",
+  "scope": "fixed first 25 cohort codes source qualification only; no market effects and no network",
+  "input_hashes": {
+    "runner_sha256": "3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012",
+    "parser_sha256": "f413b863a70533c1a2326e57bd7f7ad6d551674621f04a23cda1890966506112",
+    "progress_sha256": "f6c1b78ee33ff16941b797a06f4fd2b5ac7565a0c4084998abad3efe4f9bc375",
+    "bulk_plan_sha256": "bcb2d5b3a8a3efe9ef08d656fe92b60af80ab6a1e0f17b4b8cddcd662b091e07"
+  },
+  "execution": {
+    "command": [
+      "python3",
+      "-B",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_documents.py",
+      "--progress",
+      "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/progress-source-diagnostic-25.json",
+      "--plan",
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+      "--parser-sha256",
+      "f413b863a70533c1a2326e57bd7f7ad6d551674621f04a23cda1890966506112",
+      "--out",
+      "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-diagnostic-25-v2",
+      "--limit-codes",
+      "25"
+    ],
+    "completion": "finished; manifest and all expected outputs were read back",
+    "exit_code": null,
+    "exit_code_note": "The terminal session ended and the manifest was emitted, but the tool wrapper did not retain the numeric exit code; no rerun was made.",
+    "elapsed_seconds_approx": 285.879,
+    "duration_basis": "manifest creation timestamp to final manifest file timestamp",
+    "network_requests": 0,
+    "market_effects_run": false,
+    "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-diagnostic-25-v2",
+    "log_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-diagnostic-25-v2.log",
+    "log_sha256": "79b4787e4e18bb40f1a242b59359226904c0564c85fa824cccde766fa12fbd67",
+    "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-diagnostic-25-v2/manifest.json",
+    "manifest_sha256": "4f5912651c0a8e8ba5cf4d93145871d55ad13a0b3064360d98a012fd8414afc4",
+    "manifest_errors": [],
+    "counts": {
+      "documents_written": 620,
+      "documents_failed": 0,
+      "source_complete_codes": 23,
+      "source_incomplete_codes": 2
+    }
+  },
+  "verification": {
+    "source_pdf_originals_verified": 620,
+    "source_pdf_sha_bytes_and_runner_checks_passed": 620,
+    "identical_source_pdf_keys_and_hashes_vs_v1": 620,
+    "document_json_hashes_verified_v1_and_v2": 1240,
+    "notice_text_json_hashes_verified": 286,
+    "notice_page_shapes_verified": 286,
+    "v2_document_forms": {
+      "suspected_full_text": 333,
+      "other_or_year_mismatch": 30,
+      "unknown": 226,
+      "notice": 31
+    },
+    "v2_identity_status": {
+      "match": 600,
+      "identity_unknown": 20
+    },
+    "financial_field_status": {
+      "gross_profit_over_assets": {
+        "v1": {
+          "qualified": 144,
+          "unknown": 190,
+          "not_parsed": 286,
+          "unknown_reasons": {
+            "revenue_cost_or_assets_unknown": 190
+          }
+        },
+        "v2": {
+          "qualified": 190,
+          "unknown": 114,
+          "not_parsed": 316,
+          "unknown_reasons": {
+            "revenue_cost_or_assets_unknown": 114
+          }
+        }
+      },
+      "cash_flow_over_assets": {
+        "v1": {
+          "qualified": 148,
+          "unknown": 186,
+          "not_parsed": 286,
+          "unknown_reasons": {
+            "cash_flow_or_assets_unknown": 186
+          }
+        },
+        "v2": {
+          "qualified": 194,
+          "unknown": 110,
+          "not_parsed": 316,
+          "unknown_reasons": {
+            "cash_flow_or_assets_unknown": 110
+          }
+        }
+      }
+    },
+    "v1_to_v2_status_transitions": {
+      "gross_profit_over_assets": {
+        "unknown->qualified": 45,
+        "qualified->qualified": 144,
+        "not_parsed->not_parsed": 285,
+        "unknown->unknown": 114,
+        "unknown->not_parsed": 31,
+        "not_parsed->qualified": 1
+      },
+      "cash_flow_over_assets": {
+        "unknown->qualified": 45,
+        "qualified->qualified": 148,
+        "not_parsed->not_parsed": 285,
+        "unknown->unknown": 110,
+        "unknown->not_parsed": 31,
+        "not_parsed->qualified": 1
+      }
+    },
+    "output_failures": 0
+  },
+  "limitations": [
+    "The 25 codes are a source-qualification diagnostic, not an effect sample.",
+    "Financial unknowns remain unknown; v2 did not determine correction relevance or version-chain completeness.",
+    "The parser attempt count changed from 334 in v1 to 304 in v2 because 31 previously parsed records were reclassified as not parsed and one previously unparsed record was parsed; qualified counts must be read with that denominator change.",
+    "No market data, price outcomes, or strategy effects were evaluated."
+  ],
+  "corrections": [
+    {
+      "recorded_at": "2026-10-19T11:44:15+08:00",
+      "field": "input_hashes.progress_sha256",
+      "old_value": "3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012",
+      "corrected_value": "f6c1b78ee33ff16941b797a06f4fd2b5ac7565a0c4084998abad3efe4f9bc375",
+      "reason": "Receipt transcription error: runner SHA-256 was copied into the progress input field. Recomputed from the frozen progress-source-diagnostic-25.json and cross-checked against both the execution contract and v2 manifest; all three now match.",
+      "no_reparse": true
+    }
+  ]
+}

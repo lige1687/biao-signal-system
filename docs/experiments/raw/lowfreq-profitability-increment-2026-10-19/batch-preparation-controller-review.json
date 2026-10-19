@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-19T03:44:56.197495+00:00",
+  "runner_sha256": "a3526af5c13483796425ab8347c4e76770c39de93c0b0e36053ab3bf7df828c2",
+  "reviewer": "root independently compared exact approved v2 documents; Sol read-only semantic/IO review",
+  "checks": [
+    {
+      "id": "1222962581",
+      "code": "sz.300048",
+      "expected_sha256": "a63a32a9febcbb18a51e3a87b4f9e8641e8b587acb3609f021f100a32fe51816",
+      "complete_entry_equal": true
+    },
+    {
+      "id": "1219412091",
+      "code": "sz.300048",
+      "expected_sha256": "fa806798eef2e3dfd015600522a93e00afed582f8e5fc1154296e2313fe1cc65",
+      "complete_entry_equal": true
+    }
+  ],
+  "parser_exception_preserves_document_and_unknown": true,
+  "repairs_after_review": [
+    "bounded maximum8 submitted PDF tasks",
+    "one page extraction per new PDF",
+    "explicit failed/unissued/source-catalog coverage retained",
+    "legacy reuse binds actual command/manifest/receipt and code",
+    "new-document checkpoint journal persisted"
+  ],
+  "no_network": true,
+  "market_effects_run": false
+}

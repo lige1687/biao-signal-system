@@ -1,0 +1,44 @@
+{
+  "schema": "financial-source-qualification-amendment/1",
+  "created_utc": "2026-10-19T04:05:30.025212+00:00",
+  "root_accepted": true,
+  "effect_runs_before": 0,
+  "design_sha256": "648476bf2cb79056d4982884e96b387ffc76a494598475644b12be0c69e526bc",
+  "prior_rules": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/asof-version-rules.v1.json",
+    "sha256": "418b0ce653817bda3fe44c219103cbae5fdd4a7af51a25728d4fc7659b2f389f"
+  },
+  "new_rules_sha256": "5c9c97b1135e2ded336e58a67a2e38bf1444a0ba2211f00b34c7bf292b98050f",
+  "independent_review": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/notice-scope-method-audit.json",
+    "sha256": "bd0ab35e879e1e37d7b46783f08b23c4495939a23dc40685366a2525787f71ee"
+  },
+  "reason": "Source coverage diagnostic revealed indefinite exclusion caused by unclassified generic historical events. Target remains current publicly reported amounts. Amendment is after source diagnostics but before any financial effect; not described as original preregistration. No result-based policy selection.",
+  "root_decision": "Accept exact minimum algorithm in independent review, with source-candidate identity failure and known current dependencies still blocking. Former strict diagnostic kept, no financial variant selection.",
+  "unchanged": [
+    "600 fixed cohort",
+    "132 months",
+    "GP/A and CFO/A definitions/directions",
+    "same industry/16-month qualification",
+    "same comparisons and uncertainty",
+    "same source acquisition bounds and authority",
+    "no production/trading/LEI technical filtering"
+  ],
+  "implementation": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/build_financial_panel.py",
+    "sha256": "bcb154293894dc3f2b76c9871647489bdd859ebd7220bcaf766f03363e51f9be"
+  },
+  "tests": {
+    "passed": 22,
+    "prior_failure": "New no-backfill fixture reused same announcement ID for two periods, overwriting old in synthetic index; code returned no_public_full_annual correctly. Fixed fixture to distinct IDs, repeated all22 passed.",
+    "test_source": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/test_financial_panel.py",
+      "sha256": "f6eea1ee5a278fadbae44c076bcc2206fccb9534e1b4b795799843af8cae0c7c"
+    }
+  },
+  "rejected_claims": [
+    "unread notices resolved",
+    "new reports certified true",
+    "more coverage necessarily more accurate or more profitable"
+  ]
+}

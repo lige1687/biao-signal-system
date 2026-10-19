@@ -1,0 +1,242 @@
+{
+  "schema": "financial-notice-scope-method-audit/1.0.0",
+  "created_at": "2026-10-19T04:02:29.829764+00:00",
+  "reviewer": "astra_panel_review",
+  "status": "method_amendment_proposal_pending_root_acceptance",
+  "allowed_actions": "read existing sources and write this one audit JSON only; no code modification, network or financial effect calculation",
+  "network_requests": 0,
+  "effect_runs": 0,
+  "financial_values_approved": false,
+  "decision": "YES: replace indefinite exclusion from unreviewed old correction-category documents with an explicitly registered new-current-period measurement recovery rule; do not claim that old notices were cleared.",
+  "plain_conclusion": "可以恢复。研究的是当时完整年报公开报出的当期金额；旧公告没有读过，不等于此后每份新年报的当期数字永久不可知。恢复的是新报表的可测量状态，不是认定旧问题解决或财务真实。已知涉及当前年份/字段的未解决更正仍须阻断。",
+  "inputs": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-design.v1.json",
+      "sha256": "648476bf2cb79056d4982884e96b387ffc76a494598475644b12be0c69e526bc"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/asof-version-rules.v1.json",
+      "sha256": "418b0ce653817bda3fe44c219103cbae5fdd4a7af51a25728d4fc7659b2f389f"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/asof-panel-controller-decision.json",
+      "sha256": "07e7b8b634e4ea464176c9e9bea2a7d6c805541de2e379122f0898cac917bbdb"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/notice-controller-accepted-six.json",
+      "sha256": "01f08e837425c27ce4005e61c498a51819668276dad350631779b393ea68736f"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-panel-01-receipt.json",
+      "sha256": "fa69c3355e95c0ef0ed933abed94650982fe7f019226d6655aa8e278f8129ffd"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/build_financial_panel.py",
+      "sha256": "c7b880b0246173e1e32dd692b97cff57ddafba460ec528cdb0b1aae507a40d64"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/astra-six-corrections-proposal.json",
+      "sha256": "96261b992fb692bf5912ab48aa6bc9d7197d26ffdd2b29a7ce98b55a1abf5d88"
+    }
+  ],
+  "diagnostic_readback": {
+    "monthly_coverage_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-01/monthly-coverage.json",
+    "sha256": "c3b84d5e96a5c9fa0f5ab4f152fa7ae1f30aec08551a0fddead5f0d8557e0997",
+    "first_month": {
+      "month": "2015-01",
+      "all_600": 600,
+      "annual_source_seen": 182,
+      "industry_known": 596,
+      "industry_nonfinancial": 590,
+      "gp_qualified": 50,
+      "cfo_qualified": 50,
+      "common_pool": 50,
+      "unknown_reasons": {
+        "latest_full_annual_field_or_identity_unknown": 83,
+        "applicable_notice_unresolved": 49,
+        "source_catalog_incomplete": 418,
+        "financial_industry_excluded": 6,
+        "missing_in_snapshot": 4
+      }
+    },
+    "last_month": {
+      "month": "2025-12",
+      "all_600": 600,
+      "annual_source_seen": 182,
+      "industry_known": 600,
+      "industry_nonfinancial": 587,
+      "gp_qualified": 1,
+      "cfo_qualified": 1,
+      "common_pool": 1,
+      "unknown_reasons": {
+        "applicable_notice_unresolved": 61,
+        "latest_full_annual_field_or_identity_unknown": 110,
+        "annual_older_than_16_months": 14,
+        "financial_industry_excluded": 13,
+        "source_catalog_incomplete": 418
+      }
+    },
+    "gp_min": 1,
+    "gp_max": 60,
+    "gp_mean": 9.787878787878787,
+    "receipt_unknown_counts": {
+      "source_catalog_incomplete": 55176,
+      "applicable_notice_unresolved": 11769,
+      "latest_full_annual_field_or_identity_unknown": 10916,
+      "annual_older_than_16_months": 635,
+      "financial_industry_excluded": 1496,
+      "missing_in_snapshot": 96
+    },
+    "caution": "Counts across reasons/features are not necessarily disjoint. Only182 source-covered issuers and418 incomplete-catalog issuers in this source batch.2025-12 has110 latest-field/identity unknown and61 notice unknown; cannot attribute the whole collapse to notices or guarantee recovery fixes coverage."
+  },
+  "estimation_target": {
+    "frozen_support": [
+      {
+        "file": "asof-version-rules.v1.json",
+        "json_pointer": "/target",
+        "text": "current amounts actually publicly reported, not certification of economic truth"
+      },
+      {
+        "file": "financial-design.v1.json",
+        "json_pointer": "/record_qualification/audit_opinion",
+        "text": "describe only where actually qualified; no new audit screen"
+      },
+      {
+        "file": "financial-design.v1.json",
+        "json_pointer": "/record_qualification/corrections",
+        "text": "uncertain financial correction invalidates affected currently-used fields after its public date until qualified complete version, not unrelated newer years"
+      }
+    ],
+    "preferred": "在固定600股和原132月内，对当时最新完整合并年报当前年度数字可核的股票，比较固定GP/A、CFO/A与同池动量。过去未分类更正保留来源与风险标记；不把经济真实性认证当成数字可读的前提。",
+    "old_strict_condition": "当前实现额外要求所有历史correction类事件先被逐份审清；未审状态成为吸收状态。较长上市历史、更多公告、较少审阅投入均可导致长期退出，与两个财务比值定义不同。",
+    "why_strict_not_lower_bound": "排除可能与企业规模、经营困难、披露频率和格式相关；更多排除不保证收益更保守，也不是全600股效果下限。",
+    "why_recovery_not_truth_claim": "新年报对新的全年收入/成本/现金流和新期末资产提供独立完整公开声明。它证明发行人在该时点报出了这些数字；不能证明数字真实、旧诉讼结束或旧公告影响完全消失。",
+    "remaining_population_limit": "即使采用恢复规则，仍是采集/字段/行业可核子集的研究；不是全市场、ETF或可执行账户收益。"
+  },
+  "precise_v1_conflict_and_registration": {
+    "implementation": "build_financial_panel.py event_applies returns unreviewed_notice immediately when review is absent; recovery branch requires approved continuing_scope=cleared.",
+    "previous_reviewer_correction": "本审阅者先前要求未读旧公告必须逐篇证明不延及未来，是对现有冻结条件的严格解释；它不构成as-reported研究唯一科学合理的定义。现明确建议修改这个资格条件，不能把修改伪装成原v1已允许。",
+    "must_change_explicitly": [
+      "asof-panel-controller-decision old requirement: Unknown notice continuing_scope remains unknown; new-period recovery requires body-evidenced cleared or nonapplicable scope",
+      "asof-version-rules old new-period condition couples old-notice semantic clearance to observable new current-period measurement"
+    ],
+    "proposed_replacement": "An unreviewed, date-known generic correction event may cease blocking a subsequently qualified new-current-period annual measurement when fiscalend>eventdate and full-publication>eventdate. The event remains unreviewed with continuing_scope=unknown; known current-year/field conflicts and unresolved annual identity/version failures remain blocking.",
+    "change_label": "source-qualification amendment after coverage diagnostics, before first financial-factor effect calculation; not original preregistration, not unseen-history confirmation",
+    "unchanged": [
+      "same600 cohort",
+      "same132 months",
+      "same two financial definitions/directions",
+      "same16-month age",
+      "same source years and budget",
+      "same industry rules",
+      "same comparisons/methods/uncertainty",
+      "independent GP/CFO qualification and common pool",
+      "no future-return eligibility filter",
+      "no changed strategy/production/trade rule"
+    ],
+    "preserve": [
+      "all old source-panel outputs and strict qualification rationale",
+      "all failures and original contracts",
+      "all exact-ID accepted notice decisions"
+    ],
+    "next_registration": "Root accept/reject method then create separately versioned amendment with old/new hashes and bind subsequent panel contract before any effect run. This audit itself authorizes neither code change nor a numerical result."
+  },
+  "minimal_algorithm": [
+    {
+      "step": 1,
+      "rule": "Build expected annual candidates and events from complete original catalogs/targets, including failed/unissued files. Never infer complete version chain from successful prepared documents only."
+    },
+    {
+      "step": 2,
+      "rule": "At decision t use only publicdate<t. Pick latest report year then latest full version date within that year. Latest expected full identity/parse failure remains unknown; no older fallback. Same-day dependent-field conflicts remain unknown."
+    },
+    {
+      "step": 3,
+      "rule": "Require same-report current consolidated dependent fields, period/unit/currency/scale qualification, positive assets,16-calendar-month age. Different candidate dependencies remain separate. Do not repair multicurrency ambiguity by changing this notice rule."
+    },
+    {
+      "step": 4,
+      "rule": "Apply accepted exact-document decisions first: proven irrelevant clears only its scope; known nonmatching year/field is ignored; matching unresolved current year/field blocks unless a qualified full version has bound resolution evidence. Existing six accepted notice decisions remain intact."
+    },
+    {
+      "step": 5,
+      "rule": "Do not treat ambiguous full annual year/issuer/identity as generic notice. Those are source/version identity failures and cannot expire through this heuristic."
+    },
+    {
+      "step": 6,
+      "rule": "For an unreviewed generic correction event E with known issuer/publicdate, compare selected qualified annual A. If A.fiscalend>E.publicdate AND A.publicdate>E.publicdate, allow only new current-period measurement, recording every event as unreviewed_prior_notice and the exact recovery reason. Do not change continuing_scope to cleared or disposition to unrelated."
+    },
+    {
+      "step": 7,
+      "rule": "If either date comparison fails, event remains an active unresolved blocker pending source review. This deliberately retains a bounded conservative interval; it does not infer same-year notices harmless just because a later publication exists."
+    },
+    {
+      "step": 8,
+      "rule": "No recovery overrides a known current-period field conflict, recalled/replaced current annual without a qualified replacement, explicitly undetermined current values, or same-day contradiction. A generic investigation/audit/reliability warning alone is a descriptive flag under the frozen no-new-audit-screen scope."
+    },
+    {
+      "step": 9,
+      "rule": "All selected annuals/events themselves must be known by t. A later new annual never repairs past unknown months. No issuer-wide future completeness filter. Retain all600x132 rows."
+    }
+  ],
+  "meaningful_conflict_examples": [
+    {
+      "case": "2014 generic unreviewed resume/meeting/possibly-financial correction; qualified FY2016 full annual published2017",
+      "action": "new-period measurement allowed with unreviewed-old-event flag; do not certify the old event irrelevant"
+    },
+    {
+      "case": "2019 explicit correction of FY2017 revenue; selected FY2017 has no qualified complete revision",
+      "action": "unknown for affected GP from event publicdate onward; untouched2017 earlier decisions"
+    },
+    {
+      "case": "2019 explicit correction confined to FY2017; selected qualified FY2018",
+      "action": "known scope disjoint, so no blockage even though FY2018 fiscalend precedes the2019 event"
+    },
+    {
+      "case": "unreviewed correction in March2024; FY2023 annual publishedApril2024",
+      "action": "fiscalend condition fails; review required or unknown. Later publication alone is insufficient under this minimal amendment"
+    },
+    {
+      "case": "old ongoing investigation or general nonreliance warning, without identifying current annual/fields as undetermined or withdrawn",
+      "action": "flag current row for interpretation; do not invent an audit-quality exclusion"
+    },
+    {
+      "case": "old notice explicitly says identified FY2024 current asset figure remains undetermined; later FY2024 table shows number with no bound resolution",
+      "action": "known current dependency conflict remains unknown until qualified resolution; generic new-period recovery cannot override"
+    },
+    {
+      "case": "qualified current annual revenue/cost available but CFO extraction unresolved",
+      "action": "GP may enter GP pool; CFO stays unknown; common pool excludes; no fallback or cross-version splicing"
+    }
+  ],
+  "minimum_still_needed_evidence": {
+    "always": "Current annual issuer/year/date/current-consolidated columns and dependent field provenance; complete candidate catalog/expected-file status; exact known conflict/resolution bindings.",
+    "active_notice_set": "For each otherwise qualified row union all unresolved events that fail the two new-period date conditions, plus events with known explicit current-year/field scope and ambiguous annual identity. Deduplicate issuer+ID/hash; do not review only rows with one blocker.",
+    "old_unreviewed_events": "No full semantic review prerequisite solely to allow new-current-period measurement. Preserve original ID/date/source availability and unreviewed status. Missing old event date/issuer prevents safe timing comparison and stays unknown.",
+    "priority_triage": "Source searches for explicit current-report withdrawal, undetermined amounts and named future periods can prioritize manual source review; absence of keywords is not asserted as clearance. Prioritize by affected otherwise-qualified rows, never financial score/rank/returns.",
+    "bound_current_report_checks": "If a review does reveal explicit unresolved current-period conflict, record it consistently for all rows after its actual publicdate; never discard it to keep coverage.",
+    "no_extra_effect_branch": "Persist strict-source diagnostics and restored-row counts. Do not silently add strict-vs-recovered return variants or choose whichever performs better; any such financial follow-up needs registered purpose and budget."
+  },
+  "output_fields_recommended": [
+    "qualification_policy_version",
+    "measurement_recovery_reason",
+    "selected_full_annual_ID/hash/publicdate/fiscalend",
+    "unreviewed_prior_notice_ID/date/source_status list",
+    "known_current_scope_conflicts",
+    "financial_authenticity_not_certified",
+    "source_qualification_stage document_reviewed vs measurement_recovered_with_unreviewed_prior_notice"
+  ],
+  "required_source_only_acceptance": [
+    "Every recovered row must have existing full annual and pass unchanged field/version/age checks.",
+    "Exact count of restored stock-months by reason/year and GP/CFO/common pool, without returns; no invented benefit claim.",
+    "Synthetic counterexamples above preserve current-field conflict, same-day exclusion, latest-failed no fallback, no retroactive fill and separate feature dependencies.",
+    "Separate increases from catalog completion, parser repair and notice-policy amendment; none counts as factor performance.",
+    "Reject any implementation that marks unread events cleared/resolved merely to use new annuals."
+  ],
+  "limits": [
+    "Method is conditional on original publisher catalog coverage; missing announcements can leave unresolved version risk.",
+    "As-reported indicators can reflect measurement error, fraudulent statements and sector/accounting effects; this task does not establish economic truth.",
+    "First source batch remains incomplete and parser currency failures remain separate work.",
+    "No effect estimate, return result, new factor, new market, production adoption or trading approval supplied."
+  ]
+}

@@ -1,0 +1,669 @@
+{
+  "schema": "source-parser-review/1",
+  "reason": "No effect results inspected; original reports provide positive currency presentation/glossary evidence missed by narrow v2 patterns",
+  "prior_parser_sha256": "f413b863a70533c1a2326e57bd7f7ad6d551674621f04a23cda1890966506112",
+  "new_parser_sha256": "ca21c92d11694dbe1454e6d4e95649b8bd622fec0a72cab9404da14fe3a0c71b",
+  "semantic_tests": {
+    "passed": 23,
+    "command": "PYTHONPATH=src python3 -B -m pytest -q -p no:cacheprovider tests/unit/test_profitability_discovery.py"
+  },
+  "source_checks": [
+    {
+      "code": "sz.300309",
+      "id": "1216246509",
+      "original_document": {
+        "cohort_code": "sz.300309",
+        "publisher_code": "300309",
+        "announcement_id": "1216246509",
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-01/documents/300309-1216246509.json",
+        "sha256": "40ca181f83776b98cb41d240caee26a529d8585a0cacbe4514f8badb8bbf9acb",
+        "notice_text": null,
+        "document_form": "suspected_full_text",
+        "identity_status": "match"
+      },
+      "source": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/03718-pdf.body",
+        "bytes": 3793593,
+        "sha256": "b810f885b97248b74fc2d7cebc52d82eb80c60f9d1771cfcb1584e0c39a0eb14",
+        "checks": {
+          "status_qualified": true,
+          "publisher_code_matches": true,
+          "bytes_match": true,
+          "sha256_matches": true,
+          "pdf_header": true
+        }
+      },
+      "fields": {
+        "assets": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "1325868829.64",
+          "new_reason": null
+        },
+        "revenue": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "51494620.44",
+          "new_reason": null
+        },
+        "cost": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "237373170.43",
+          "new_reason": null
+        },
+        "cfo": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "63358591.15",
+          "new_reason": null
+        }
+      },
+      "new_table_evidence": {
+        "assets": {
+          "status": "qualified",
+          "reason": null,
+          "heading_page": 153,
+          "heading": "1、合并资产负债表",
+          "header": "项目 2022 年 12 月 31 日 2022 年 1 月 1 日",
+          "unit_line": "单位：元",
+          "currency_line": "3、营业周期  | 正常营业周期是指本集团从购买用于加工的资产起至实现现金或现金等价物的期间。本集团以 12 个月作为一个营业 | 周期，并以其作为资产和负债的流动性划分标准。 | 4、记账本位币  | 人民币为本集团及境内子公司经营所处的主要经济环境中的货币，本集团及境内子公司以人民币为记账本位币。本 | 集团编制本财务报表时所采用的货币为人民币。",
+          "currency_page": 184,
+          "currency_rule": "statement_presentation",
+          "currency_evidence": [
+            {
+              "page": 184,
+              "text": "3、营业周期  | 正常营业周期是指本集团从购买用于加工的资产起至实现现金或现金等价物的期间。本集团以 12 个月作为一个营业 | 周期，并以其作为资产和负债的流动性划分标准。 | 4、记账本位币  | 人民币为本集团及境内子公司经营所处的主要经济环境中的货币，本集团及境内子公司以人民币为记账本位币。本 | 集团编制本财务报表时所采用的货币为人民币。"
+            }
+          ],
+          "period_line": "项目 2022 年 12 月 31 日 2022 年 1 月 1 日",
+          "rejected_candidates": []
+        },
+        "profit": {
+          "status": "qualified",
+          "reason": null,
+          "heading_page": 157,
+          "heading": "3、合并利润表",
+          "header": "项目 2022 年度 2021 年度",
+          "unit_line": "单位：元",
+          "currency_line": "3、营业周期  | 正常营业周期是指本集团从购买用于加工的资产起至实现现金或现金等价物的期间。本集团以 12 个月作为一个营业 | 周期，并以其作为资产和负债的流动性划分标准。 | 4、记账本位币  | 人民币为本集团及境内子公司经营所处的主要经济环境中的货币，本集团及境内子公司以人民币为记账本位币。本 | 集团编制本财务报表时所采用的货币为人民币。",
+          "currency_page": 184,
+          "currency_rule": "statement_presentation",
+          "currency_evidence": [
+            {
+              "page": 184,
+              "text": "3、营业周期  | 正常营业周期是指本集团从购买用于加工的资产起至实现现金或现金等价物的期间。本集团以 12 个月作为一个营业 | 周期，并以其作为资产和负债的流动性划分标准。 | 4、记账本位币  | 人民币为本集团及境内子公司经营所处的主要经济环境中的货币，本集团及境内子公司以人民币为记账本位币。本 | 集团编制本财务报表时所采用的货币为人民币。"
+            }
+          ],
+          "period_line": "吉艾科技集团股份公司 2022 年年度报告全文",
+          "rejected_candidates": []
+        },
+        "cash": {
+          "status": "qualified",
+          "reason": null,
+          "heading_page": 161,
+          "heading": "5、合并现金流量表",
+          "header": "项目 2022 年度 2021 年度",
+          "unit_line": "单位：元",
+          "currency_line": "3、营业周期  | 正常营业周期是指本集团从购买用于加工的资产起至实现现金或现金等价物的期间。本集团以 12 个月作为一个营业 | 周期，并以其作为资产和负债的流动性划分标准。 | 4、记账本位币  | 人民币为本集团及境内子公司经营所处的主要经济环境中的货币，本集团及境内子公司以人民币为记账本位币。本 | 集团编制本财务报表时所采用的货币为人民币。",
+          "currency_page": 184,
+          "currency_rule": "statement_presentation",
+          "currency_evidence": [
+            {
+              "page": 184,
+              "text": "3、营业周期  | 正常营业周期是指本集团从购买用于加工的资产起至实现现金或现金等价物的期间。本集团以 12 个月作为一个营业 | 周期，并以其作为资产和负债的流动性划分标准。 | 4、记账本位币  | 人民币为本集团及境内子公司经营所处的主要经济环境中的货币，本集团及境内子公司以人民币为记账本位币。本 | 集团编制本财务报表时所采用的货币为人民币。"
+            }
+          ],
+          "period_line": "吉艾科技集团股份公司 2022 年年度报告全文",
+          "rejected_candidates": []
+        }
+      }
+    },
+    {
+      "code": "sz.000932",
+      "id": "1202110281",
+      "original_document": {
+        "cohort_code": "sz.000932",
+        "publisher_code": "000932",
+        "announcement_id": "1202110281",
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-01/documents/000932-1202110281.json",
+        "sha256": "552c05838299e298a522a5130441a6cd8187adc294843479c9e9ccae3510c0fa",
+        "notice_text": null,
+        "document_form": "suspected_full_text",
+        "identity_status": "match"
+      },
+      "source": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/01816-pdf.body",
+        "bytes": 3026486,
+        "sha256": "c0d30be4c643310a9e897f0c4a68e00d8222bf3c49bf228771652e178765102f",
+        "checks": {
+          "status_qualified": true,
+          "publisher_code_matches": true,
+          "bytes_match": true,
+          "sha256_matches": true,
+          "pdf_header": true
+        }
+      },
+      "fields": {
+        "assets": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "unknown",
+          "new_value": null,
+          "new_reason": "currency_not_verified_as_rmb"
+        },
+        "revenue": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "unknown",
+          "new_value": null,
+          "new_reason": "currency_not_verified_as_rmb"
+        },
+        "cost": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "unknown",
+          "new_value": null,
+          "new_reason": "currency_not_verified_as_rmb"
+        },
+        "cfo": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "unknown",
+          "new_value": null,
+          "new_reason": "currency_not_verified_as_rmb"
+        }
+      },
+      "new_table_evidence": {
+        "assets": {
+          "status": "unknown",
+          "reason": "currency_not_verified_as_rmb",
+          "candidate_pages": [
+            61
+          ],
+          "rejected": [
+            {
+              "heading_page": 61,
+              "heading": "1、合并资产负债表",
+              "header": "项目 期末余额 期初余额",
+              "unit_line": "单位：元",
+              "currency_line": null,
+              "currency_page": null,
+              "currency_rule": null,
+              "currency_evidence": [],
+              "period_line": null
+            }
+          ]
+        },
+        "profit": {
+          "status": "unknown",
+          "reason": "currency_not_verified_as_rmb",
+          "candidate_pages": [
+            65
+          ],
+          "rejected": [
+            {
+              "heading_page": 65,
+              "heading": "3、合并利润表",
+              "header": "项目 本期发生额 上期发生额",
+              "unit_line": "单位：元",
+              "currency_line": null,
+              "currency_page": null,
+              "currency_rule": null,
+              "currency_evidence": [],
+              "period_line": null
+            }
+          ]
+        },
+        "cash": {
+          "status": "unknown",
+          "reason": "currency_not_verified_as_rmb",
+          "candidate_pages": [
+            67
+          ],
+          "rejected": [
+            {
+              "heading_page": 67,
+              "heading": "5、合并现金流量表",
+              "header": "项目 本期发生额 上期发生额",
+              "unit_line": "单位：元",
+              "currency_line": null,
+              "currency_page": null,
+              "currency_rule": null,
+              "currency_evidence": [],
+              "period_line": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "code": "sz.002697",
+      "id": "1207416018",
+      "original_document": {
+        "cohort_code": "sz.002697",
+        "publisher_code": "002697",
+        "announcement_id": "1207416018",
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-diagnostic-25-v2/documents/002697-1207416018.json",
+        "sha256": "4e51eccd52b8e1019b0c523f5cfb54b45d1442257d2322d6940c9f3673e64450",
+        "notice_text": null,
+        "document_form": "suspected_full_text",
+        "identity_status": "match"
+      },
+      "source": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00446-pdf.body",
+        "bytes": 9231944,
+        "sha256": "06319f930c5be1a89812a7f18a7eb0f1620bfd51d7051b9d7be9d7706bcdc2f2",
+        "checks": {
+          "status_qualified": true,
+          "publisher_code_matches": true,
+          "bytes_match": true,
+          "sha256_matches": true,
+          "pdf_header": true
+        }
+      },
+      "fields": {
+        "assets": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "unknown",
+          "new_value": null,
+          "new_reason": "currency_not_verified_as_rmb"
+        },
+        "revenue": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "unknown",
+          "new_value": null,
+          "new_reason": "currency_not_verified_as_rmb"
+        },
+        "cost": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "unknown",
+          "new_value": null,
+          "new_reason": "currency_not_verified_as_rmb"
+        },
+        "cfo": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "unknown",
+          "new_value": null,
+          "new_reason": "currency_not_verified_as_rmb"
+        }
+      },
+      "new_table_evidence": {
+        "assets": {
+          "status": "unknown",
+          "reason": "currency_not_verified_as_rmb",
+          "candidate_pages": [
+            54,
+            92
+          ],
+          "rejected": [
+            {
+              "heading_page": 54,
+              "heading": "1、合并资产负债表",
+              "header": "项目 2019 年 12 月 31 日 2018 年 12 月 31 日",
+              "unit_line": "单位：元",
+              "currency_line": null,
+              "currency_page": null,
+              "currency_rule": null,
+              "currency_evidence": [
+                {
+                  "page": 78,
+                  "text": "本公司采用人民币为记账本位币。"
+                }
+              ],
+              "period_line": null
+            },
+            {
+              "heading_page": 92,
+              "heading": "合并资产负债表",
+              "header": "项目 2018 年 12 月 31 日 2019 年 01 月 01 日 调整数",
+              "unit_line": null,
+              "currency_line": null,
+              "currency_page": null,
+              "currency_rule": null,
+              "currency_evidence": [],
+              "period_line": null
+            }
+          ]
+        },
+        "profit": {
+          "status": "unknown",
+          "reason": "currency_not_verified_as_rmb",
+          "candidate_pages": [
+            60
+          ],
+          "rejected": [
+            {
+              "heading_page": 60,
+              "heading": "3、合并利润表",
+              "header": "项目 2019 年度 2018 年度",
+              "unit_line": "单位：元",
+              "currency_line": null,
+              "currency_page": null,
+              "currency_rule": null,
+              "currency_evidence": [
+                {
+                  "page": 78,
+                  "text": "本公司采用人民币为记账本位币。"
+                }
+              ],
+              "period_line": null
+            }
+          ]
+        },
+        "cash": {
+          "status": "unknown",
+          "reason": "currency_not_verified_as_rmb",
+          "candidate_pages": [
+            65
+          ],
+          "rejected": [
+            {
+              "heading_page": 65,
+              "heading": "5、合并现金流量表",
+              "header": "项目 2019 年度 2018 年度",
+              "unit_line": "单位：元",
+              "currency_line": null,
+              "currency_page": null,
+              "currency_rule": null,
+              "currency_evidence": [
+                {
+                  "page": 78,
+                  "text": "本公司采用人民币为记账本位币。"
+                }
+              ],
+              "period_line": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "code": "sz.002303",
+      "id": "1207419687",
+      "original_document": {
+        "cohort_code": "sz.002303",
+        "publisher_code": "002303",
+        "announcement_id": "1207419687",
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-01/documents/002303-1207419687.json",
+        "sha256": "0164637db0ba43d14b26c838248bbb905f0be8c7b46fbd8478e3895e88ad9429",
+        "notice_text": null,
+        "document_form": "suspected_full_text",
+        "identity_status": "match"
+      },
+      "source": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00841-pdf.body",
+        "bytes": 2804137,
+        "sha256": "e2d466981c89f2323650bed72e85c9107d84560a31f5aec2454575ca86212f44",
+        "checks": {
+          "status_qualified": true,
+          "publisher_code_matches": true,
+          "bytes_match": true,
+          "sha256_matches": true,
+          "pdf_header": true
+        }
+      },
+      "fields": {
+        "assets": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "7269432950.85",
+          "new_reason": null
+        },
+        "revenue": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "3392132631.63",
+          "new_reason": null
+        },
+        "cost": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "2304110212.24",
+          "new_reason": null
+        },
+        "cfo": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "441130346.32",
+          "new_reason": null
+        }
+      },
+      "new_table_evidence": {
+        "assets": {
+          "status": "qualified",
+          "reason": null,
+          "heading_page": 114,
+          "heading": "1、合并资产负债表",
+          "header": "项目 2019 年 12 月 31 日 2018 年 12 月 31 日",
+          "unit_line": "单位：元",
+          "currency_line": "本公司以人民币为记账本位币。",
+          "currency_page": 138,
+          "currency_rule": "functional_plus_consolidated_translation",
+          "currency_evidence": [
+            {
+              "page": 138,
+              "text": "本公司以人民币为记账本位币。"
+            },
+            {
+              "page": 141,
+              "text": "34  | 的外币非货币性项目，采用公允价值确定日的即期汇率折算，折算后的记账本位币金额与原记账本位币金额的差额，作为公 | 允价值变动(含汇率变动)处理，计入当期损益或确认为其他综合收益并计入资本公积。 | （2）外币财务报表的折算 | 本公司的控股子公司、合营企业、联营企业等，若采用与本公司不同的记账本位币，需对其外币财务报表折算后，再 | 进行会计核算及合并财务报表的编报。"
+            }
+          ],
+          "period_line": "2019 年 12 月 31 日",
+          "rejected_candidates": [
+            {
+              "heading_page": 156,
+              "heading": "合并资产负债表",
+              "header": "项目 2018 年 12 月 31 日 2019 年 01 月 01 日 调整数",
+              "unit_line": null,
+              "currency_line": null,
+              "currency_page": null,
+              "currency_rule": null,
+              "currency_evidence": [],
+              "period_line": null
+            }
+          ]
+        },
+        "profit": {
+          "status": "qualified",
+          "reason": null,
+          "heading_page": 120,
+          "heading": "3、合并利润表",
+          "header": "项目 2019 年度 2018 年度",
+          "unit_line": "单位：元",
+          "currency_line": "本公司以人民币为记账本位币。",
+          "currency_page": 138,
+          "currency_rule": "functional_plus_consolidated_translation",
+          "currency_evidence": [
+            {
+              "page": 138,
+              "text": "本公司以人民币为记账本位币。"
+            },
+            {
+              "page": 141,
+              "text": "34  | 的外币非货币性项目，采用公允价值确定日的即期汇率折算，折算后的记账本位币金额与原记账本位币金额的差额，作为公 | 允价值变动(含汇率变动)处理，计入当期损益或确认为其他综合收益并计入资本公积。 | （2）外币财务报表的折算 | 本公司的控股子公司、合营企业、联营企业等，若采用与本公司不同的记账本位币，需对其外币财务报表折算后，再 | 进行会计核算及合并财务报表的编报。"
+            }
+          ],
+          "period_line": "美盈森集团股份有限公司 2019 年年度报告全文",
+          "rejected_candidates": []
+        },
+        "cash": {
+          "status": "qualified",
+          "reason": null,
+          "heading_page": 125,
+          "heading": "5、合并现金流量表",
+          "header": "项目 2019 年度 2018 年度",
+          "unit_line": "单位：元",
+          "currency_line": "本公司以人民币为记账本位币。",
+          "currency_page": 138,
+          "currency_rule": "functional_plus_consolidated_translation",
+          "currency_evidence": [
+            {
+              "page": 138,
+              "text": "本公司以人民币为记账本位币。"
+            },
+            {
+              "page": 141,
+              "text": "34  | 的外币非货币性项目，采用公允价值确定日的即期汇率折算，折算后的记账本位币金额与原记账本位币金额的差额，作为公 | 允价值变动(含汇率变动)处理，计入当期损益或确认为其他综合收益并计入资本公积。 | （2）外币财务报表的折算 | 本公司的控股子公司、合营企业、联营企业等，若采用与本公司不同的记账本位币，需对其外币财务报表折算后，再 | 进行会计核算及合并财务报表的编报。"
+            }
+          ],
+          "period_line": "美盈森集团股份有限公司 2019 年年度报告全文",
+          "rejected_candidates": []
+        }
+      }
+    },
+    {
+      "code": "sz.300320",
+      "id": "1207417529",
+      "original_document": {
+        "cohort_code": "sz.300320",
+        "publisher_code": "300320",
+        "announcement_id": "1207417529",
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-01/documents/300320-1207417529.json",
+        "sha256": "45c6561ec88be2287bfee4e0680a3b98f703b8d3f0b9d2f997c51e76f9181ee9",
+        "notice_text": null,
+        "document_form": "suspected_full_text",
+        "identity_status": "match"
+      },
+      "source": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/04299-pdf.body",
+        "bytes": 6810667,
+        "sha256": "0d96c3d5b896159787956fa0740600dbf043cf6efecee3c7a0b8c8b74f022d15",
+        "checks": {
+          "status_qualified": true,
+          "publisher_code_matches": true,
+          "bytes_match": true,
+          "sha256_matches": true,
+          "pdf_header": true
+        }
+      },
+      "fields": {
+        "assets": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "2843445071.86",
+          "new_reason": null
+        },
+        "revenue": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "2241199353.12",
+          "new_reason": null
+        },
+        "cost": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "1635325434.59",
+          "new_reason": null
+        },
+        "cfo": {
+          "old_status": "unknown",
+          "old_value": null,
+          "new_status": "qualified",
+          "new_value": "204689597.18",
+          "new_reason": null
+        }
+      },
+      "new_table_evidence": {
+        "assets": {
+          "status": "qualified",
+          "reason": null,
+          "heading_page": 81,
+          "heading": "1、合并资产负债表",
+          "header": "项目 2019 年 12 月 31 日 2018 年 12 月 31 日",
+          "unit_line": "单位：元",
+          "currency_line": "元 指 人民币元",
+          "currency_page": 5,
+          "currency_rule": "whole_report_rmb_glossary",
+          "currency_evidence": [
+            {
+              "page": 5,
+              "text": "元 指 人民币元"
+            }
+          ],
+          "period_line": "2019 年 12 月 31 日",
+          "rejected_candidates": [
+            {
+              "heading_page": 46,
+              "heading": "合并资产负债表",
+              "header": "项目 2018年12月31日 2019年1月1日 调整数",
+              "unit_line": null,
+              "currency_line": null,
+              "currency_page": null,
+              "currency_rule": null,
+              "currency_evidence": [],
+              "period_line": null
+            },
+            {
+              "heading_page": 128,
+              "heading": "合并资产负债表",
+              "header": "项目 2018 年 12 月 31 日 2019 年 01 月 01 日 调整数",
+              "unit_line": null,
+              "currency_line": null,
+              "currency_page": null,
+              "currency_rule": null,
+              "currency_evidence": [],
+              "period_line": null
+            }
+          ]
+        },
+        "profit": {
+          "status": "qualified",
+          "reason": null,
+          "heading_page": 87,
+          "heading": "3、合并利润表",
+          "header": "项目 2019 年度 2018 年度",
+          "unit_line": "单位：元",
+          "currency_line": "元 指 人民币元",
+          "currency_page": 5,
+          "currency_rule": "whole_report_rmb_glossary",
+          "currency_evidence": [
+            {
+              "page": 5,
+              "text": "元 指 人民币元"
+            }
+          ],
+          "period_line": "江阴海达橡塑股份有限公司 2019 年年度报告全文",
+          "rejected_candidates": []
+        },
+        "cash": {
+          "status": "qualified",
+          "reason": null,
+          "heading_page": 92,
+          "heading": "5、合并现金流量表",
+          "header": "项目 2019 年度 2018 年度",
+          "unit_line": "单位：元",
+          "currency_line": "元 指 人民币元",
+          "currency_page": 5,
+          "currency_rule": "whole_report_rmb_glossary",
+          "currency_evidence": [
+            {
+              "page": 5,
+              "text": "元 指 人民币元"
+            }
+          ],
+          "period_line": "江阴海达橡塑股份有限公司 2019 年年度报告全文",
+          "rejected_candidates": []
+        }
+      }
+    }
+  ],
+  "market_effects_run": false,
+  "limits": "Exact source-linked qualification correction, not permission to accept functional currency alone or all report layouts. Existing v2 results retained; any rerender bound to new parser is a documented source correction."
+}

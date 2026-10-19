@@ -22,7 +22,7 @@ MONEY_TOKEN = re.compile(
     r"(?<![\d.])(?:[（(]\s*[-−－]?\d[\d,]*(?:\.\d{1,2})?\s*[）)]|"
     r"[-−－]?\d[\d,]*(?:\.\d{1,2})?)(?![\d.])")
 YEAR = re.compile(r"(20\d{2})\s*年")
-UNIT = re.compile(r"单位\s*[:：]\s*(?:人民币\s*)?(百万元|万元|元)(?![\w])")
+UNIT = re.compile(r"单位\s*[:：]\s*(?:人民币\s*)?(百万元|万元|元)(?=币种|[^\w]|$)")
 LABELS = {
     "revenue": re.compile(r"^(?:[一二三四五六七八九十]+[、．.]\s*|其中\s*[:：]\s*)?营业收入(?=\s|\d|$)"),
     "cost": re.compile(r"^(?:减\s*[:：]\s*|其中\s*[:：]\s*)?营业成本(?=\s|\d|$)"),
@@ -71,6 +71,8 @@ def _currency_evidence(pages):
     """Only whole-report presentation evidence; never subsidiary currency alone."""
     matches = {"statement": [], "glossary": [], "functional": [], "translation": []}
     for page_no, page in enumerate(pages, 1):
+        glossary_scope = next((n + 1 for n in range(max(0, page_no - 3), page_no)
+                               if re.search(r"(?m)^\s*释\s*义\s*$|释义项\s*指\s*释义内容", pages[n])), None)
         for line in page.splitlines():
             compact = re.sub(r"\s+", "", line)
             if re.search(r"财务附注中报表的单位为[:：]?人民币元|本财务报表以人民币列示|"
@@ -78,6 +80,14 @@ def _currency_evidence(pages):
                 matches["statement"].append({"page": page_no, "text": line.strip()[:240]})
             if re.search(r"元、万元、亿元指人民币元[、，](?:人民币)?万元[、，](?:人民币)?亿元", compact):
                 matches["glossary"].append({"page": page_no, "text": line.strip()[:240]})
+            # An explicit front-matter glossary maps the report's unit, even
+            # when only 元 or 元/万元 is defined. A subsidiary currency note
+            # or an isolated later table cannot supply this report-wide scope.
+            if page_no <= 20 and glossary_scope is not None and re.fullmatch(
+                    r"元(?:[、，]万元)?(?:[、，]亿元)?指人民币元"
+                    r"(?:[、，](?:人民币)?万元)?(?:[、，](?:人民币)?亿元)?", compact):
+                matches["glossary"].append({"page": page_no, "text": line.strip()[:240],
+                                            "scope_page": glossary_scope})
             if re.search(r"本公司(?:以|采用)人民币为记账本位币", compact):
                 matches["functional"].append({"page": page_no, "text": line.strip()[:240]})
             if re.search(r"境外经营的外币财务报表.*折算为人民币报表|"
@@ -91,6 +101,22 @@ def _currency_evidence(pages):
                     item["page"] == page_no for item in matches["statement"]):
                 matches["statement"].append({"page": page_no,
                                              "text": (first.strip() + " | " + second.strip())[:240]})
+        # Presentation policies are often wrapped over several PDF lines.
+        # Require the whole-report subject and full affirmative statement.
+        compact_page = re.sub(r"\s+", "", page)
+        scoped_presentation = ("编制本财务报表时所采用的货币为人民币" in compact_page or
+                               "本公司的控股子公司、合营企业、联营企业等" in compact_page)
+        for start in range(len(lines) if scoped_presentation else 0):
+            window = lines[start:start + 6]
+            compact = re.sub(r"\s+", "", "".join(window))
+            if re.search(r"本(?:公司|集团)编制本财务报表时所采用的货币为人民币", compact):
+                if not any(item["page"] == page_no for item in matches["statement"]):
+                    matches["statement"].append({"page": page_no, "text": " | ".join(window)})
+            if re.search(r"本公司的控股子公司、合营企业、联营企业等[，,]"
+                         r"若采用与本公司不同的记账本位币[，,]需对其外币财务报表折算后[，,]"
+                         r"再进行会计核算及合并财务报表的编报", compact):
+                if not any(item["page"] == page_no for item in matches["translation"]):
+                    matches["translation"].append({"page": page_no, "text": " | ".join(window)})
     all_evidence = (matches["statement"][:2] + matches["glossary"][:2] +
                     matches["functional"][:1] + matches["translation"][:1])
     if matches["statement"]:
@@ -119,7 +145,8 @@ def _qualification(rows, start, end, pages, kind, report_year):
     if len(dates) > 2:
         return "adjusted_or_multiple_columns", evidence, None
     if kind == "assets":
-        variants = (("期末余额", "期初余额"), ("年末余额", "年初余额"))
+        variants = (("期末余额", "期初余额"), ("年末余额", "年初余额"),
+                    ("期末余额", "年初余额"), ("年末余额", "期初余额"))
         current = any(a in compact and b in compact and compact.index(a) < compact.index(b)
                       for a, b in variants)
         reversed_columns = any(a in compact and b in compact and compact.index(a) > compact.index(b)

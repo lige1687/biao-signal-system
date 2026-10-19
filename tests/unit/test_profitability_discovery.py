@@ -195,6 +195,37 @@ def test_currency_two_evidence_or_global_rmb_glossary_but_not_functional_alone()
     assert result["tables"]["cash"]["currency_rule"] == "whole_report_rmb_glossary"
 
 
+def test_short_glossary_requires_front_report_glossary_scope():
+    base = _pages()[0].replace(" 币种：人民币", "")
+    for mapping in ("元 指 人民币元", "元、万元 指 人民币元、人民币万元"):
+        assert _parse_text_pages(["释义\n" + mapping, base], 2014)["fields"]["assets"]["status"] == "qualified"
+        assert _parse_text_pages(["释义\n释义项 指 释义内容", mapping, base], 2014)["fields"]["assets"]["status"] == "qualified"
+        assert _parse_text_pages([mapping, base], 2014)["fields"]["assets"]["status"] == "unknown"
+        assert _parse_text_pages([base] + [""] * 19 + ["释义\n" + mapping], 2014)["fields"]["assets"]["status"] == "unknown"
+
+
+def test_wrapped_group_presentation_and_complete_translation_policy():
+    base = _pages()[0].replace(" 币种：人民币", "")
+    statement = "本\n集团编制本财务报表时所采用的货币为人民币。"
+    assert _parse_text_pages([base, statement], 2014)["fields"]["revenue"]["status"] == "qualified"
+    functional = "本公司以人民币为记账本位币。"
+    policy = ("本公司的控股子公司、合营企业、联营企业等，若采用与本公司不同的记账本位币，需对其外币财务报表折算后，再\n"
+              "进行会计核算及合并财务报表的编报。")
+    result = _parse_text_pages([base, functional, policy], 2014)
+    assert result["tables"]["profit"]["currency_rule"] == "functional_plus_consolidated_translation"
+    assert _parse_text_pages([base, policy], 2014)["fields"]["revenue"]["status"] == "unknown"
+    assert _parse_text_pages([base, "子公司以人民币为记账本位币。", policy], 2014)["fields"]["revenue"]["status"] == "unknown"
+
+
+def test_joined_unit_currency_and_year_opening_header_do_not_change_amounts():
+    page = _pages(asset_header="项目 期末余额 年初余额")[0].replace("元 币种", "元币种")
+    result = _parse_text_pages([page], 2014)
+    assert result["fields"]["assets"]["value_yuan"] == "100.00"
+    assert result["fields"]["revenue"]["value_yuan"] == "40.00"
+    wrong = page.replace("元币种", "元美元 币种")
+    assert _parse_text_pages([wrong], 2014)["fields"]["assets"]["status"] == "unknown"
+
+
 def test_parenthesized_spaced_consolidated_titles_and_jan_first_comparative():
     page = _pages()[0].replace("合并资产负债表", "（一）合 并 资 产 负 债 表", 1)
     page = page.replace("合并利润表", "（三）合 并 利 润 表", 1)
