@@ -1,0 +1,75 @@
+{
+  "schema": "financial-conditional-risk-followup-design/1",
+  "research_id": "lowfreq-profitability-increment-2026-10-19",
+  "frozen_at_utc": "2026-10-19T06:16:35.297730+00:00",
+  "core_results_already_inspected": true,
+  "purpose": "Quantify uncertainty of the already specified same P-down month relative quote changes; not a new selection or return experiment. GP signal consistent across two eras and omitted-year diagnostics, unlike weak mean return; not yet evidence of adoptable risk protection.",
+  "input_monthly": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/core-01/monthly.json",
+    "sha256": "6caf8c028c63a726afabfeeec668b6d20eb8a9ed134c8412a05131313ed6574b"
+  },
+  "core_manifest": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/core-01/manifest.json",
+    "sha256": "f7d0f3da8160dabdb4489496df36cf6dff2156163c912d745abe8b4e37ef0b5a"
+  },
+  "scopes": [
+    "gp",
+    "common_gp",
+    "common_cfo"
+  ],
+  "scenarios": [
+    "unknown_minus_one",
+    "unknown_zero"
+  ],
+  "comparisons": [
+    "F-P",
+    "B-M",
+    "B-D",
+    "B-P",
+    "B-F"
+  ],
+  "primary": "B-M conditional on same scope/scenario P<0; B-D required simpler dilution rival; others complete context, no metric winner",
+  "statistic": "mean of original dated lhs-rhs in original same scope/scenario P<0 months; each resample draws all 132 dated positions and selects by original P<0 label with multiplicity; never resample only down months independently",
+  "resampling": {
+    "block_months": [
+      6,
+      12
+    ],
+    "draws": 10000,
+    "seed": 20261019,
+    "shared_indices": "exact original evaluator generator and index serialization/hash; all scopes/scenarios/contrasts use same draw for each length",
+    "intervals": [
+      0.95,
+      0.975
+    ],
+    "no_down_draw": "exclude that draw and report valid count; do not fill zero"
+  },
+  "stability": "reuse original two eras/every year/leave-one-year results, no new partition",
+  "test_requirements": [
+    "conditional denominator counts sampled down observations only",
+    "circular wrap and shared indices identity against original recorded hash",
+    "tied dates drawn with multiplicity",
+    "all-up draw yields missing not zero",
+    "constant paired difference has degenerate interval",
+    "positive/negative controls and strict P<0"
+  ],
+  "limitations": [
+    "post-core exploratory followup; not independent confirmation",
+    "intervals do not resolve source selection bias or industry snapshot uncertainty",
+    "97.5 interval is not simultaneous guarantee for all comparisons and risk metrics",
+    "does not show independence from volatility/liquidity/value or implementable wealth",
+    "no P-down state prediction or live timing rule tested",
+    "drawdown/worst-tail descriptive results do not become risk-control proofs"
+  ],
+  "budget": {
+    "followup_number": 1,
+    "followups_max": 3,
+    "new_market_requests": 0,
+    "rerun_core": false,
+    "no_parameter_search": true
+  },
+  "output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/risk-followup-01",
+  "estimated_new_external_bytes": 1048576,
+  "estimated_new_local_bytes": 32768,
+  "execution_requires": "root reviewed code hashes and final run contract"
+}

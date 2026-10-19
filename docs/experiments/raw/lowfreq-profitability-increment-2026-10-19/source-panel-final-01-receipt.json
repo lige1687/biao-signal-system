@@ -1,0 +1,79 @@
+{
+  "schema": "financial-source-panel-receipt/1",
+  "run_id": "source-panel-final-01",
+  "execution": {
+    "command": "PYTHONPATH=src python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/build_financial_panel.py --contract docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-panel-final-01-contract.json",
+    "pid": 62730,
+    "terminal_session_id": 97034,
+    "exit_code": 0,
+    "elapsed_seconds_approx": 23.3063,
+    "created_utc": "2026-10-19T06:01:07.210210+00:00",
+    "network_used": false,
+    "market_effects_run": false
+  },
+  "contract_sha256": "04e09aae8559c59d7659ea43ca9baeabfd83cbc10688a6800850d22d6ab37502",
+  "runner_sha256": "bcb154293894dc3f2b76c9871647489bdd859ebd7220bcaf766f03363e51f9be",
+  "manifest_sha256": "6cffd3eff268e15d7af42e9589a6af7e041b709741abee53645d13f9274a50ae",
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-final-01",
+  "storage": {
+    "mount": "/Volumes/win+mac通用",
+    "device": 16777238,
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9"
+  },
+  "output_sha256": {
+    "panel.csv": "65edc11bc5271a4d35194ea73d26540fdae93eb94aaf8e036378a65411af5e04",
+    "audit.json": "5765e8f64f0e201a5713e8c988bd336c0cbf29715f9014c079fa207fed5105a5",
+    "monthly-coverage.json": "0a1c8ec483a8f31362fd2516664bf02db8f22d68ecba271e5ba881a45498f29d",
+    "notice-review-queue.json": "9c519865b6de7cd16ecb968e9d45fbe62719b4bcd654790b351417ef7d450282",
+    "expected-source-index.json": "7a22328b0020883dcb0bd2e62b18c50ee5c7d5f79a64a8672b3539d2f60aa87c"
+  },
+  "shape": {
+    "rows": 79200,
+    "codes": 600,
+    "months": 132,
+    "expected_documents": 21145,
+    "month_start": "2015-01",
+    "month_end": "2025-12"
+  },
+  "monthly_qualification_counts": {
+    "gp_qualified": {
+      "min": 157,
+      "median": 264.0,
+      "max": 355,
+      "mean": 260.05
+    },
+    "cfo_qualified": {
+      "min": 163,
+      "median": 256.5,
+      "max": 351,
+      "mean": 256.11
+    },
+    "common_pool": {
+      "min": 155,
+      "median": 250.0,
+      "max": 339,
+      "mean": 248.2
+    }
+  },
+  "unknown_reason_period_sums": {
+    "latest_full_annual_field_or_identity_unknown": 21625,
+    "applicable_notice_unresolved": 23617,
+    "no_public_full_annual": 136,
+    "financial_industry_excluded": 1496,
+    "missing_in_snapshot": 96,
+    "annual_older_than_16_months": 1611
+  },
+  "unresolved_notice_queue": 9369,
+  "qualification_policy": "as-known-financial-version-rules/2.0.0",
+  "unreviewed_prior_notice_measurement_recovery": true,
+  "source_code_statuses": {
+    "complete": 584,
+    "incomplete": 16
+  },
+  "source_operation_counts": {
+    "catalog": 1237,
+    "pdf": 13778,
+    "total": 15015
+  },
+  "scope_note": "Final monthly source-qualification panel only, using terminal source preparations. This measures which financial values qualify by source date; it reads no future returns, performs no market-effect calculations, and makes no internet requests. Incomplete source records remain unknown."
+}

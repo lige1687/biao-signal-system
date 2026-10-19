@@ -1,0 +1,74 @@
+{
+  "schema": "core-01-independent-receipt/1",
+  "run": "core-01-independent-check",
+  "created_utc": "2026-10-19T06:14:37.827036+00:00",
+  "status": "completed_zero_checked_differences",
+  "scientific_effect_runs_added": 0,
+  "network_used": false,
+  "runner_command": "python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/independently_check_profitability.py --evaluation-contract docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/core-01-contract.json --result-manifest <BULKBASE>/core-01/manifest.json --out <BULKBASE>/core-01-independent-check",
+  "exit_code": 0,
+  "coordination_commit": "613358a",
+  "inputs": {
+    "verifier": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/independently_check_profitability.py",
+      "sha256": "0f6ec7364c7990d5e53dfc3db827c0606d19bf47d47d2b1b39a8830f61e9840c"
+    },
+    "evaluation_contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/core-01-contract.json",
+      "sha256": "e331f155dc1e74cebd0c8205d1988bf7bc84c2556bce65da37059e32a6cbb603"
+    },
+    "result_manifest": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/core-01/manifest.json",
+      "sha256": "f7d0f3da8160dabdb4489496df36cf6dff2156163c912d745abe8b4e37ef0b5a"
+    },
+    "storage_preflight": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-final-source-preflight.json",
+      "sha256": "213e33ffdd146e2217e3b2d77b8095e0f81bc1ae95de8f37a0f1a74f93fcacc7"
+    }
+  },
+  "external_device": {
+    "mount": "/Volumes/win+mac通用",
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "st_dev": 16777238,
+    "same_as_contract_device": true,
+    "free_bytes_before_run": 505508528128
+  },
+  "output": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/core-01-independent-check/independent-reconciliation.json",
+    "sha256": "8e2449f60876ffba7e7ae700d4b4a9ef2133d6b1541ae3d3378810fde5dd9965",
+    "bytes": 1467
+  },
+  "independent_result_status": "matched_checked_fields",
+  "checked_field_comparisons_total": 2178932,
+  "checks_by_area": {
+    "summary_membership": 8,
+    "layer_counts": 660,
+    "weight_membership": 93377,
+    "weights": 466880,
+    "stock_source": 1027136,
+    "ranks": 560256,
+    "monthly_methods": 13860,
+    "monthly_pool": 1584,
+    "monthly_presence": 1,
+    "performance": 4500,
+    "quote_drawdown": 750,
+    "p_down": 1500,
+    "paired": 5100,
+    "paired_p_down": 1700,
+    "other": 60,
+    "other_correlations": 24,
+    "uncertainty": 1536
+  },
+  "differences": [],
+  "differences_count": 0,
+  "unverified": [
+    "announcement change count and reason_counts",
+    "actual human maintenance, trading fills, costs, portfolio wealth",
+    "old nine-group volatility/liquidity-conditioned competitor; this result only compares frozen simple within-industry momentum"
+  ],
+  "interpretation_limits": [
+    "Marked quote drawdown compounds selected monthly stock quotes; it is not an executable account wealth path.",
+    "Low rank or return correlation describes difference in ordering/co-movement; it does not establish unique financial information or incremental investable value."
+  ],
+  "scope_note": "Checks arithmetic and source joins against the one frozen core result; no new market-effect scenario or old momentum run."
+}
