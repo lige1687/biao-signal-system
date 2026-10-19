@@ -1,0 +1,80 @@
+{
+  "schema": "source-batch-receipt/1",
+  "run_id": "source-batch-04",
+  "execution": {
+    "command": "python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_batches.py --contract docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-batch-04-contract.json",
+    "pid": 48520,
+    "terminal_session_id": 14919,
+    "exit_code": 0,
+    "elapsed_seconds": 262.06538379203994,
+    "created_utc": "2026-10-19T04:52:11.570760+00:00",
+    "network_used": false,
+    "market_effects_run": false
+  },
+  "hashes": {
+    "contract": "35fb187ee5766e2de8911b3b3f08e2af0b45017bd51aa16d633e7da6cbf4eed2",
+    "manifest": "c9984151918606070f04096531570cde3ff49a33037cb061a34403ac45a44764",
+    "runner": "522a6747b59d2aeee499ce717e4a8d1c9d7f612acd1fd7482e6f90b08a58eb8f",
+    "parser": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+    "preparer": "3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012",
+    "progress": "2579fc9299bee26602475b08f291cda1bd9043950edbd99d7fc63dff71c7f383",
+    "reuse_batch03_manifest": "587bd466eaa7fb0628a9d097dc605f0a392b48851652d31ff1b601f163502374"
+  },
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-04",
+  "storage": {
+    "checks": {
+      "mounted": true,
+      "uuid_matches": true,
+      "device_matches": true,
+      "external_result_exists": true,
+      "result_on_expected_device": true,
+      "output_is_new_child": true,
+      "output_absent": true,
+      "free_reserve_ok": true,
+      "storage_plan_not_execution_authority": true
+    },
+    "storage_plan_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-bulk-plan.json",
+    "storage_plan_sha256": "99c1b2b77f24b4206b86f5efc611b223bbb8d24f1ac447147b9d25115c369979",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "reserve_bytes": 10737418240
+  },
+  "documents": {
+    "new": 1928,
+    "reused": 7060,
+    "manifest_count": 8988,
+    "records_hash_verified": 8988,
+    "hash_failures": 0,
+    "notice_text_entries": 3901,
+    "errors": 210,
+    "error_reasons": {
+      "code_state_not_final_complete_or_incomplete": 210
+    },
+    "unprepared_document_states": 16,
+    "unprepared_reasons": {
+      "body_above_saved_byte_cap; prefix_preserved": 7,
+      "ChunkedEncodingError: ('Connection broken: IncompleteRead(233168 bytes read, 354764 more expected)', IncompleteRead(233168 bytes read, 354764 more expected))": 1,
+      "non_pdf_response": 3,
+      "no_finish; never_retry": 4,
+      "global_stop_or_budget_exhausted": 1
+    }
+  },
+  "source_attempt_state": {
+    "code_dictionary_keys": 600,
+    "status_counts": {
+      "complete": 374,
+      "incomplete": 16,
+      "pending": 210
+    },
+    "global_stop": true,
+    "updated_utc": "2026-10-19T04:44:45.711269+00:00",
+    "operations": {
+      "catalog": 808,
+      "pdf": 9000,
+      "total": 9808
+    }
+  },
+  "version_chain_completeness_inferred": false,
+  "scope_note": "Incremental original-document preparation only. Reused exact verified batch-03 manifest entries and parsed only newly obtained PDFs. The 600-key progress map includes 210 pending codes and 16 incomplete codes; its key count is not proof that source coverage is complete. No network requests or market outcome calculations were performed."
+}
