@@ -1,3 +1,16 @@
+# 现金经营盈利与应计阶段交付 2026-10-20T01:17:58.697012+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅原文/公式演练/公开组合核算，原US逐股复现与本地条件增量blocked_original_inputs；scope_released true。checked_coordination_sha=be27d54dc6b506856d013fe30ea8667b3907996f；checked_at=2026-10-20T01:17:58.697012+08:00；已读COORDINATION/self/personal最新三候选01:14/lowfreq-strategy-discovery/system/dispatch，CashOP/应计与低beta/资产/股份无重叠。其他owner财务修复不接管。
+- 报告docs/experiments/cash-profitability-accruals-2026-10-20.md SHA5dad13d20673a442094d2fdb09aecc61d856209a4d57818c0de92a2d96ebac3c，同名raw含合同、代码、原文来源、方法审、复核、缺口、交付回执。成果主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9仅本机未提交未推；协调不代表正文已移交。
+- 公开CSV复用、冻结后1核心/0跟进。738月1963.07—2024.12现金经营盈利+0.5059%、低应计+0.4051%/月；后十年现金经营盈利对经营盈利−0.3837pp/月、低应计−0.0734%/月。同期回归为描述关系，不代替逐股增量/原US/净账户，暂不采用、不追参数。
+- 原文与公开实现差异明确：Ball上一年资产/公开当年；公开Sloan摘要缺括号折旧而代码正确；已公开LS不再次乘Sign。公开代码版本与CSV生成链未完全绑定，等额/市值配置不同不排赢家。旧CFO/资产不是CashOP；旧+0.062pp差范围97.5%，报价问题未重算不升级。
+- 两年合康新能原PDF确有多数原值，缺的是映射/时点资格而非全无资料：政府补助递延收益不当客户预收，货币资金与现金等价物不同，后报比较列修订不倒灌。原件SHA/页码/关键8数root读回；未把单例资格写成600股可用。原US退市/财报输入仍缺，不宣称全任务完成。
+- Sol medium执行脚本与只读复用、Astra high方法审核、root独立矩阵/SVD核84项最大差3.45e-15；已完成。原规则/定义/策略SHA和699旧registry条目保持。API全文相同、AgentSHA verified未截断，5188真实报告5表/未完成提示读回；归置及本任务diff通过。没有新UI组件/生产适配器。
+- 目标okr-ff1e0a86fbac仅note173→174，旧history/其他字段/in_progress保持。来源CashOP6/6、Sloan5/6含失败，旧来源/市场预算不重置；外盘约2.59MB、本机raw+报告约56KB在64MiB/400KiB预估内。模型实际费用未知，无后台/交易/通知/付费/删除。
+- 来源SSL/find失败、fitz缺失和pypdf偏移警告留痕，镜像原稿身份明确；代码设计冻结后未改，原结果防覆盖。恢复读state、design、run-contract、core-receipt、independent-numeric-review与annual-source-spotcheck；先解决精确输入缺口，不重算已完成公开诊断。
+
+---
+
 # 现金经营盈利能力与应计原文复现启动 2026-10-20T01:01:11.987449+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=069484c80b53564b1d0131d80c5f326610af9ef3；checked_at=2026-10-20T01:01:11.987449+08:00；已读COORDINATION/self/personal最新数据资格00:58/lowfreq-strategy-discovery/system最新图像00:57/dispatch。原CFO/GP研究及修复只读复用，不接管、不重跑；本题原cashOP与Sloan定义先区分，独立新题，不重置旧预算。
