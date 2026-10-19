@@ -1,0 +1,38 @@
+{
+  "workspace_root": "/",
+  "mission": "实际执行已读审的原年报/更正原件资格探针，严格18操作并等待结果",
+  "task_scope": [
+    "核脚本SHA8c61c526d546e02ca6c549d19732364d285f56239189ec7e77130fd8ad542b52、plan/storageSHA及外盘身份。只执行一次 PYTHONDONTWRITEBYTECODE=1 python3 /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/probe_original_filings.py --plan /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/original-filings-probe-plan.json --storage-plan /Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-plan.json --out /Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1。",
+    "以exclusive创建外盘original-filings-probe-v1-run.log，等待真实完成。只按脚本固定18实际操作上限、0重试、一秒间隔、40秒单操作、429或连续2外部失败停，不能改端点绕过或补请求。",
+    "核外盘manifest/逐响应bytes/hash/PDF魔数、原始JSON字段身份与实际成功/失败/未发数量；写raw/original-filings-execution-receipt.json。未取到原始或更正如实记录，不能称因子效果或版本准入。无市场/源码修改。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/probe_original_filings.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/original-filings-probe-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-plan.json"
+  ],
+  "write_paths": [
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1-run.log",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/original-filings-execution-receipt.json"
+  ],
+  "network_allowed": true,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "真实外盘原件与manifest，或真实失败/未发原因",
+    "精确执行回执和核读，不裁决效果"
+  ],
+  "stop_conditions": [
+    "18实际操作或429或连续2失败；不改参数/源/权限，不自行重试",
+    "没有运行预算不得沿用前次attempt_id，未发标None；不执行py_compile产生仓外/多余字节码"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

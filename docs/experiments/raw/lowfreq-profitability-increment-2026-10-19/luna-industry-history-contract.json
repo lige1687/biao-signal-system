@@ -1,0 +1,39 @@
+{
+  "workspace_root": "/",
+  "mission": "单连接实际取得12个固定年末行业截面，给跨行业比较的资格数据",
+  "task_scope": [
+    "按industry-history-plan.json固定2014—2025各12/31，共12SDK操作；单连接、1秒间隔、40秒、0重试，429或连续2失败停止；不新取股票行情/财报或改参数。",
+    "只写raw/acquire_historical_industry.py和raw/industry-history-receipt.json，核storage plan设备/UUID、out为新直接子目录；新raw原件/manifest/日志放industry-history-v1；实际fields/rows/bytes/hash/每条updateDate范围/行业分类缺失、同code跨年标签变化记录。",
+    "所有600原名单对象均需保留覆盖/未覆盖，不以今天行业补；updateDate晚于请求日的行不得资格使用；如果2014无资料如实报告，不改成2015资料代表2014。等待真实结束并核完整原件hash，无市场效果/no py_compile。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/industry-history-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/probe/sdk-6-query_stock_industry.json"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/acquire_historical_industry.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/industry-history-receipt.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/industry-history-v1"
+  ],
+  "network_allowed": true,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "12固定历史行业原件和manifest或准确失败",
+    "600原股票跨期覆盖/更名/分类变化/真实缺失小回执"
+  ],
+  "stop_conditions": [
+    "12实际操作0重试；单连接，不复用其他匿名会话",
+    "不将claimedupdateDate当历史公开时间已独证、不跑效果、不改其他源"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

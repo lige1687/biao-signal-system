@@ -1,0 +1,34 @@
+{
+  "workspace_root": "/",
+  "mission": "限定盘点本仓已有财务历史来源和既有适配，避免重做",
+  "task_scope": [
+    "只读检索本仓data缓存目录清单及src integrators、fundamentals相关实验状态。已知旧盘点本地多宏观/估值，无公司面板；重点核2026-10-02 fundamentals-expansion-review是否有后来合格的财报/历史公开版本或可复用来源入口。",
+    "不打开私人账户数据库/环境凭证，不整批载入长日志；只读最相关manifest/state/README和代码签名。",
+    "返回原路径、资格状态、可复用入口/已封存不得重跑，不修改、不网络、不取数据。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/fundamentals-expansion-review-2026-10-02",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/data/cache",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/fundamentals-expansion-review-2026-10-02.md"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "具体发现、准确来源路径、限制与下一可执行步骤"
+  ],
+  "stop_conditions": [
+    "不改旧文件、不进行真实效果检验、不扩大来源或数据范围",
+    "无网络时禁止网络；不读账户数据库或凭证、不安装依赖"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

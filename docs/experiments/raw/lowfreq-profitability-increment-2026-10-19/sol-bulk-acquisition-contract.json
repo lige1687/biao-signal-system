@@ -1,0 +1,41 @@
+{
+  "workspace_root": "/",
+  "mission": "为固定600股、2013—2024全部原年报/更正的已获准资料扩展编写批量采集器，实际运行交Luna",
+  "task_scope": [
+    "只新增raw/acquire_financial_filings.py，参数--plan --storage-plan；严格消费bulk-acquisition-plan，不运行真实网络/效果。参照已有probe实现已验证端点/payload与外盘守卫。",
+    "先核cohort/缓存index/旧PDFhash，完整600标识不能替换；新外盘任务/唯一run/result按保存storageplan核UUID/device/容量后create-only。用4线程和全局起始间隔0.5秒的共享预算；14k总/6k目录/9kPDF上限，40秒0重试，429或连续2外部错误停全局，保存已开始请求和未开始状态。",
+    "每code两类目录读取全部页，30/page，保存total/读页/原响应/全部精确secCode公告/缺失orgId；旧公告返回为空计成功但明确无数据，解析模式错不得假complete，maxpage30到上限仍标incomplete。目录先保存、PDF可随本code目录完成后取；不可跳过退市或没有资料的证券。",
+    "fullannual FY2013—2024按已见probe过滤摘要/英文/审计/意见/问询，其原版、修订/更新/已取消元数据均保留，不按取消标签删历史；更正类全部实际正文取得供后续判断，不能只筛标题含年份。PDF只真实adjunctUrl、cninfo域，原字节/hash/时间/标题/annID/code独立保存。",
+    "在实际网络前优先按announcement_id+code复用计划旧原件；共享线程日记append含actualstarted/status/time/bytes/hash/error，flush；固定目标progress每code目录/实际PDF/未取及原因，定期外盘progress.json原子替换允许只它；最终manifest含计划与脚本SHA/准确操作计数/各来源/未完成，不在失败时声称600完成。",
+    "只做AST/help和无网络合成预算/分类/分页/复用结构核查；不执行py_compile或下载，不创建其他代理，不改旧脚本/原源/计划。脚本必须能从持久日记恢复未发事项，但默认首次create-only；恢复仅显式--resume同计划同run，不重请求成功源或改旧失败记录，失败重试默认不允许。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-bulk-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/probe_original_filings.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/acquire_financial_filings.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "单脚本SHA与明确CLI",
+    "无网络synthetic检查结果及未执行真实采集"
+  ],
+  "stop_conditions": [
+    "仅写准确脚本、不联网/运行市场/改其他源",
+    "不能因规模扩大放松任何版本/记录/限流；难点反馈主控"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "workspace_root": "/",
+  "mission": "定位公开年报公告/原件下载的本地已有API实现，不进行网络",
+  "task_scope": [
+    "只读已安装akshare包或本仓公开资料获取代码，定位巨潮/交易所年报公告历史查询和PDF原件地址构造，返回精确函数/参数/请求/分页/更正公告筛选说明。",
+    "本轮需要固定600A年度2013—2024原始版本，先取6005992019年报及更正、6005192014年报、0005942014年报（退出例）；不联网、不下载、不写脚本，不把能查当前公告当历史完整。",
+    "若无合适函数直接报告缺失，可给所见公开API参数而不猜未见端点。"
+  ],
+  "read_only_paths": [
+    "opt/homebrew/lib/python3.11/site-packages/akshare",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "具体发现、准确来源路径、限制与下一可执行步骤"
+  ],
+  "stop_conditions": [
+    "不改旧文件、不进行真实效果检验、不扩大来源或数据范围",
+    "无网络时禁止网络；不读账户数据库或凭证、不安装依赖"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

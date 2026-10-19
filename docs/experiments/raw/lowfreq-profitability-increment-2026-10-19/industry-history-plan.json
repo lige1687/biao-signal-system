@@ -1,0 +1,27 @@
+{
+  "purpose": "核跨行业可比性所需历史分类代理，非用今天行业回填过去",
+  "sdk": "query_stock_industry",
+  "dates": [
+    "2014-12-31",
+    "2015-12-31",
+    "2016-12-31",
+    "2017-12-31",
+    "2018-12-31",
+    "2019-12-31",
+    "2020-12-31",
+    "2021-12-31",
+    "2022-12-31",
+    "2023-12-31",
+    "2024-12-31",
+    "2025-12-31"
+  ],
+  "queries": 12,
+  "single_session": true,
+  "delay_seconds": 1,
+  "timeout_seconds": 40,
+  "retries": 0,
+  "stop": "429or2consecutivefailures",
+  "checks": "keep fullraw/updateDate/industryClassification, require claimedupdateDate<=querydate for usage; compare exactcode label changes and missing/exitcoverage; no usebeforeclaimeddate, historical first publication/vendor arrival remains not independently verified",
+  "reuse": "2015-06-30 probe2853rows cached; do not repeat it",
+  "out": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/industry-history-v1"
+}

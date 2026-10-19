@@ -1,0 +1,37 @@
+{
+  "workspace_root": "/",
+  "mission": "取得已保存目录中真正会计差错更正原文，替代误选关联交易公告的证据用途，原件均留存",
+  "task_scope": [
+    "按accounting-correction-plan实际1次GET官方PDF，正常请求不重试不换路；总原件探针从14到15次、PDF从7到8，均在原18/8上限内；不新查目录。",
+    "可编写仅该1请求的小脚本raw/fetch_accounting_correction.py，核storage plan外盘UUID/device、out是新直接子目录、原目录manifest与实际adjunctUrl吻合；exclusive写PDF/manifest/日志。40秒/30MB上限，403/429/失败保留原体并停止。",
+    "读回bytes/hash与PDF魔数，写raw/accounting-correction-receipt.json；未读正文不得称该声明调整三项主数。无其他请求/效果/源码修改/py_compile。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/accounting-correction-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-plan.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/manifest.json"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/fetch_accounting_correction.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/accounting-correction-receipt.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/accounting-correction-original-v1"
+  ],
+  "network_allowed": true,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "真实会计差错公告原件或准确失败",
+    "共享累积15/18操作8/8PDF的回执"
+  ],
+  "stop_conditions": [
+    "1实际请求0重试；失败保留，不补源、不读效果、不改既有原件"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

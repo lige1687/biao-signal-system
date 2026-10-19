@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-19T10:27:01.527467+08:00",
+  "reviewer": "gpt-6-astra/high candidate_method_review",
+  "main_candidate": "consolidated annual(revenue-cost_of_revenue)/period_end_total_assets, positive_assets, nonfinancial issuers",
+  "meaning": "asset-level gross earning ability, avoids interpreting leverage-boosted ROE as quality",
+  "limitations": "not complete quality or exact paper replication; industry, capital structure, valuation, price response compete",
+  "source_decision": [
+    "BaoStockpubDate/statDate alone insufficient for as-published versions",
+    "direct original annual statements and actual amendment/correction records required",
+    "do not infer gross profit by gpMargin*MBRevenue without aligned definitions",
+    "late restated comparative amounts cannot enter earlier decisions"
+  ],
+  "core_design_proposal": [
+    "same-date common financial-qualified universe; same industry weights/ranks where qualified historicalindustry exists",
+    "pool_equal; momentum_only_top20; profitability_only_top20; fixed0.5+0.5rankblendtop20",
+    "primary blend-minus-momentum with pool andprofitability comparisons, no changing20%/weights aftereffect",
+    "risk:worstmonth/worst10pct/markedpath; burden:targetturnover/reportupdates/coverage",
+    "version counterexample original beforecorrection and corrected onlyafteractualdisclosure"
+  ],
+  "source_probe_stage": "8fixed financialprobe+18originalfilingoperations beforebulk, no financial effects computed",
+  "remaining_definition_after_source": "confirm source field/period/unit/historicalsector and approved exactlocaldefinition"
+}

@@ -1,0 +1,41 @@
+{
+  "workspace_root": "/",
+  "mission": "核真实A股原年报和会计差错反例，决定批量资料取得资格及剩余效应前提",
+  "task_scope": [
+    "只读真实PDF/保存页面文本，根取600519FY2014收入31573928530.94成本2338550532.33资产65873165224.63(合并页39—43)，600599FY2019收入135872200成本84790992.37资产752327231.85(49—54)等；确认三数同报告、期间、单位，母公司不能混入。",
+    "真实6005182017原年报收入26476970977.57成本18450146871，2019-04-30会计差错公告更正为17578618640.06/10788017425.47。不是先前误选关联交易补充；后者保留但禁止作财务更正。核其版本证据和不回填原则，不把后来更正值套2018。",
+    "0005942014原件（已取消）和2015-05-06更新后原件的有效时点是否能支持本月度决策？当前取消标签本身不等于历史取消日，不得按未来标签删过去。只对受影响月明确未知。",
+    "判断是否可先对原600固定队列批量取得年度2013—2024全部原年报/显式修订/财务更正目录，在正式效果前逐条资料资格；未解决更正导致的数值在该更正公开后到下一份合格年度报之间标未知，不用旧值继续，不事后替股票；行业历史另核。",
+    "给可执行最小批量准入/效应前核查，非要求所有原件单独人工读完；无网络无写入无效果，不将source retrieval成功直接当因子通过。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-expanded-discovery-2026-10-19.md",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/factor-discovery-playbook.md",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/probe",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result/sources",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/accounting-correction-original-v1",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/statement-page-extract-v1"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "具体发现、准确来源路径、限制与下一可执行步骤"
+  ],
+  "stop_conditions": [
+    "不改旧文件、不进行真实效果检验、不扩大来源或数据范围",
+    "无网络时禁止网络；不读账户数据库或凭证、不安装依赖"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

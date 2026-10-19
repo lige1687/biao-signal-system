@@ -1,0 +1,48 @@
+{
+  "workspace_root": "/",
+  "mission": "实际执行已审核600固定队列年度原件批量补全，不计算市场效果",
+  "task_scope": [
+    "只运行核定脚本一次首次create-only。严格执行14000总/6000目录/9000PDF/4线程0.5秒/0重试/429或连续两失败停止；等待真实结束，保存原始失败。",
+    "不改变计划脚本或源；不尝试--resume或另路径重跑。只读监控progress/journal，结束逐文件核source bytes/hash和600状态、未获取原因。大数据保持外盘；不将目录/PDF获取成功冒称数据解析成功或因子有效。",
+    "将真实执行起止/exit/操作量/成功失败未发/目录状态/PDF数与原件hash核回写小receipt；如果网络触发停止，立即反馈准确错误而不原样重试。"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/acquire_financial_filings.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-bulk-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json"
+  ],
+  "write_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-receipt.json"
+  ],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "实际结束和完整或未完成manifest指纹、600覆盖/未取及原因、费用未知"
+  ],
+  "stop_conditions": [
+    "已冻结操作/请求错误/容量限制，不扩大权限和预算，不重试"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "script_sha256": "c929c0037b512c84a9345da8abe8f70cd42e9aa98c24f2afbeb549a4f6e24fba",
+  "plan_sha256": "bcb2d5b3a8a3efe9ef08d656fe92b60af80ab6a1e0f17b4b8cddcd662b091e07",
+  "storage_plan_sha256": "99c1b2b77f24b4206b86f5efc611b223bbb8d24f1ac447147b9d25115c369979",
+  "command": [
+    "python3",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/acquire_financial_filings.py",
+    "--plan",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+    "--storage-plan",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-bulk-plan.json"
+  ]
+}

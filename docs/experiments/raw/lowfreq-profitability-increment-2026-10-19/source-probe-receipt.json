@@ -1,0 +1,60 @@
+{
+  "task": "lowfreq-profitability-increment-2026-10-19 source qualification",
+  "status": "partial: 7 of 8 fixed source operations succeeded; one SEC ZIP request was denied",
+  "completed_at": "2026-10-19T10:27:24+08:00",
+  "contract_sha256": "dc4dcb99cbf90d704f9fe315823e0f6179d7003f4f7e1e5ee970cf196e8fcb0f",
+  "plan_sha256": "2c85ce2e677b3b37e3b35d8beb0d2edd45170f1302fbe8907420ff73e7bf84c2",
+  "external_manifest": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/probe/manifest.json",
+  "external_manifest_sha256": "fc35f43c46973ec1cd91cb93dc5ce657385f1d433fa4e4c5a8b41b1d374d9d46",
+  "data_operations": {
+    "fixed": 8,
+    "attempted": 8,
+    "succeeded": 7,
+    "failed": 1,
+    "retries": 0
+  },
+  "baostock": {
+    "successful_requests": 6,
+    "profit_fields": [
+      "code",
+      "pubDate",
+      "statDate",
+      "roeAvg",
+      "npMargin",
+      "gpMargin",
+      "netProfit",
+      "epsTTM",
+      "MBRevenue",
+      "totalShare",
+      "liqaShare"
+    ],
+    "profit_date_semantics": "Returns pubDate and statDate, but no updateDate or archived revision identifier in these responses.",
+    "performance_express_fields": [
+      "code",
+      "performanceExpPubDate",
+      "performanceExpStatDate",
+      "performanceExpUpdateDate",
+      "performanceExpressTotalAsset",
+      "performanceExpressNetAsset",
+      "performanceExpressEPSChgPct",
+      "performanceExpressROEWa",
+      "performanceExpressEPSDiluted",
+      "performanceExpressGRYOY",
+      "performanceExpressOPYOY"
+    ],
+    "express_example": "sh.600599 statDate 2019-12-31; publication and update dates both 2020-04-30; one row returned, so this sample does not show distinct revised versions.",
+    "industry": "date=2015-06-30 returned 2,853 rows; fields updateDate, code, code_name, industry, industryClassification."
+  },
+  "sec_companyfacts": {
+    "status": "success; exact 4,881,196-byte JSON retained",
+    "entity": "Microsoft Corporation (CIK 789019)",
+    "selected_tag_periods": "NetIncomeLoss: 2007-09-30 through 2026-06-30; OperatingIncomeLoss: 2008-06-30 through 2026-06-30; Assets: 2009-06-30 through 2026-06-30.",
+    "version_fields": "Facts include accn, form, filed, fy, fp, start/end, and sometimes frame; filing accession and filed date identify filing vintages, but do not by themselves prove the exact revision semantics for every field."
+  },
+  "sec_2014q4_zip": {
+    "status": "HTTP 403; error body retained (1,924 bytes)",
+    "detail": "SEC response page title says Request Rate Threshold Exceeded. No ZIP body was obtained; no retry, alternate route, or extraction."
+  },
+  "evidence_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/probe",
+  "scope_note": "Source qualification only; no market-effect, return, factor, or signal computation."
+}

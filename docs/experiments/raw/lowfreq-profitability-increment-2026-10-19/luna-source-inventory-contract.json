@@ -1,0 +1,33 @@
+{
+  "workspace_root": "/",
+  "mission": "盘点本轮可直接复用的质量/盈利历史资料和接口，实现事实只读核查",
+  "task_scope": [
+    "读取前轮SEC Apple资格脚本、manifest及相关两份外盘原JSON的结构/字段/版本/日期，不重新联网。核验输入SHA后概述能否区分as-filed版本，列同报告期间多版具体例子。",
+    "仅检查已安装baostock包中query_profit_data和query_stock_industry的准确签名/请求及返回声明，是否有revision/update版本字段；不取数、不调用SDK网络。",
+    "查前轮600A cohort与价格结果能复用的身份键和时间；返回可执行来源探测建议，不能把字段存在当合格或效果。无写入。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result/sources"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "具体发现、准确来源路径、限制与下一可执行步骤"
+  ],
+  "stop_conditions": [
+    "不改旧文件、不进行真实效果检验、不扩大来源或数据范围",
+    "无网络时禁止网络；不读账户数据库或凭证、不安装依赖"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

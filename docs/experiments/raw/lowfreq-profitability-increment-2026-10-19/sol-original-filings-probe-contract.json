@@ -1,0 +1,38 @@
+{
+  "workspace_root": "/",
+  "mission": "写严格消费固定计划的原年报/更正公告获取探针，执行交给Luna",
+  "task_scope": [
+    "只写raw/probe_original_filings.py，参数--plan --storage-plan --out。按固定plan最大18实际网络请求操作，1秒间隔/40秒0重试/429或连续2失败停；程序记录完整请求/错误/时刻/bytes/hash，保留原响应，不执行市场研究。",
+    "复用已见akshare CNINFO payload/分类映射，直接requests不调用会额外隐式取数的wrapper；先取公开code-orgId JSON，公告一次POST每页30；如退市code无映射，按计划searchkey-code无stock额外记一次query，记录并验证每条secCode，不丢身份。所有queries/pages/PDF在总18操作共享budget。",
+    "只跟真实返回adjunctUrl取PDF，最多8个，原JSON全保留。年报按固定年份/原年报排除摘要/英文/审计意见，按公告时刻取最早原版及明确修订/更正；无版本/原件如实记录，不猜ID或以新公告代原件。已知6005182016/2017更正作为资格反例，不是加入效应池。",
+    "写全新外盘out/probe manifest（方案绑定指纹、attempts、取得对象、候选/缺失原因），日志也外盘。不去解析财务数值、不额外搜索/网络；仅语法/无网络结构测试后反馈SHA，Luna实际执行。",
+    "写入前核storage-plan外盘UUID/device/容量，out是绑定result的全新直接子目录，result若尚未创建应报前置未就绪而不擅自修改或替代计划。不改其他脚本或旧源。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/original-filings-probe-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-plan.json",
+    "opt/homebrew/lib/python3.11/site-packages/akshare/stock_feature/stock_disclosure_cninfo.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/probe_original_filings.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "单脚本和SHA",
+    "无网络语法和计数/筛选结构检查，不执行真实下载"
+  ],
+  "stop_conditions": [
+    "不执行网络/效果、不改计划或其他文件、不猜原件ID"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

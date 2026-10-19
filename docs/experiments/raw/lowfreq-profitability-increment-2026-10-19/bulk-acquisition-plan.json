@@ -1,0 +1,108 @@
+{
+  "schema": "financial-filings-acquisition/1",
+  "qualification_approved_at": "2026-10-19T10:38:55.872946+08:00",
+  "scope": "fixed600historicalA, annualFY2013to2024 andcorrections known by2025-12-31, no effects",
+  "cohort_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+  "cohort_sha256": "6f073e37809613469efe6cd2adb6b7ef1b4e77515e99e7149e1636d9e390cc16",
+  "stock_index_reuse": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-01-stock_index.body",
+    "sha256": "d576cbc74648129cf95f3a9319145c7185a8f53917c2cca0a182a6e2bf9cd985"
+  },
+  "prior_pdf_reuse": [
+    {
+      "announcement_id": "1200948045",
+      "code": "000594",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-08-pdf.body",
+      "sha256": "9520d0adeabfefe45c5fbcf0d5c5408a3965436a42d64f8e0fab1ca1ac8c8e43",
+      "bytes": 3329403
+    },
+    {
+      "announcement_id": "1200972314",
+      "code": "000594",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-09-pdf.body",
+      "sha256": "24c26bd0d2d4f3af5e578f77edf28c0307110243c0fd07234dc6ce094f546b01",
+      "bytes": 2362232
+    },
+    {
+      "announcement_id": "1203334576",
+      "code": "600518",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-10-pdf.body",
+      "sha256": "39f1f6f68a0244242f6f543ea140cc573faccb1e2bbcfe0bc14c901d495e07e6",
+      "bytes": 3426959
+    },
+    {
+      "announcement_id": "1204793690",
+      "code": "600518",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-11-pdf.body",
+      "sha256": "15b3b15df2dfd3310cc16e1e345e8950e8a9cb047bdad38d1263e2b55cfd2985",
+      "bytes": 3886671
+    },
+    {
+      "announcement_id": "1200877315",
+      "code": "600519",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-12-pdf.body",
+      "sha256": "89145ef5bd12256c4c75c122b1c8d59846a912434f1abd0570f678bdb1a20f24",
+      "bytes": 2278854
+    },
+    {
+      "announcement_id": "1207911925",
+      "code": "600599",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-13-pdf.body",
+      "sha256": "7c08f4a7d560f4212f66e0e95ed07a492794d895767ceaf65f6634a02714014a",
+      "bytes": 2401457
+    },
+    {
+      "announcement_id": "1203387352",
+      "code": "600518",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-14-pdf.body",
+      "sha256": "9706757b97a37d4000069c8b5c794d261f9c556de37116984a7cdbe68850d08b",
+      "bytes": 216374
+    }
+  ],
+  "endpoint": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+  "query_date_range": "2014-01-01~2025-12-31",
+  "categories": {
+    "annual": "category_ndbg_szsh",
+    "correction": "category_bcgz_szsh"
+  },
+  "page_size": 30,
+  "read_all_pages": true,
+  "max_pages_per_query": 30,
+  "max_catalog_requests": 6000,
+  "max_pdf_requests": 9000,
+  "max_total_http_operations": 14000,
+  "http_concurrency": 4,
+  "global_min_start_interval_seconds": 0.5,
+  "per_operation_timeout_seconds": 40,
+  "retries": 0,
+  "stop_on": "HTTP429 or2consecutive externalfailures; preserve checkpoint; do not restart or change paths; no paid/credentials/bypass",
+  "max_bytes_json_each": 15000000,
+  "max_bytes_pdf_each": 30000000,
+  "annual_report_years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "annual_filter": "full Chinese annual report; keep original and explicitly revised/updated/canceled versions as actual metadata, exclude摘要/英文/审计/意见/问询; no later rewriting old versions",
+  "correction_filter": "download all correction-category documents (not only title-year matches); semanticfinancial relevance/affectedyear judged fromactualbodylater, ambiguous not silently calledrelevantorirrelevant",
+  "pdf_hosts": "actualreturned adjunctUrl under cninfo.com.cn; relative paths resolve to https://static.cninfo.com.cn/; no guessedIDs",
+  "missing_identity": "current code-orgId index lookup only; missingorg useofficialcode searchkey with empty stock and verify exactsecCode; no replacing/skip exitedstocks",
+  "catalog_status": "any unread pages/schema/source failure explicit incomplete; preserve total/actualpage counts andnames, nothing renamedcomplete",
+  "reuse_policy": "all prior matching announcement_id+code originalPDF hashes read and reuse, not network fetchedagain; cachedstockindex reused",
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result",
+  "storage_plan": "storage-bulk-plan.json",
+  "estimated_external_bytes": 32212254720,
+  "why_size": "7source annualPDFs approx2.3-3.9MB, up to7200yearlyrecords pluscorrections;30GiB plan not hardquota",
+  "journal": "appendactualattempt/time/parameters/HTTPstatus/bytes/hash/error/reuse, durable perrequest, progress600codes all states, finalmanifest fileshash; no sourceDB or credentials",
+  "market_effects_forbidden": true,
+  "prior_budget": "6discovery requests exhausted,8financialprobe +15originalfiling ops preserved; this is newlyfrozen bulk afterrawqualification, noreset/oldrerun"
+}

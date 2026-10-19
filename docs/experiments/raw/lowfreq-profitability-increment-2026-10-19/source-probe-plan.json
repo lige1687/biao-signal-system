@@ -1,0 +1,68 @@
+{
+  "scope": "source qualification only, no factor effect",
+  "requests": [
+    {
+      "sdk": "query_profit_data",
+      "kwargs": {
+        "code": "sh.600519",
+        "year": 2014,
+        "quarter": 4
+      }
+    },
+    {
+      "sdk": "query_profit_data",
+      "kwargs": {
+        "code": "sh.600519",
+        "year": 2024,
+        "quarter": 4
+      }
+    },
+    {
+      "sdk": "query_profit_data",
+      "kwargs": {
+        "code": "sh.600599",
+        "year": 2019,
+        "quarter": 4
+      }
+    },
+    {
+      "sdk": "query_profit_data",
+      "kwargs": {
+        "code": "sz.000594",
+        "year": 2014,
+        "quarter": 4
+      }
+    },
+    {
+      "sdk": "query_performance_express_report",
+      "kwargs": {
+        "code": "sh.600599",
+        "start_date": "2014-01-01",
+        "end_date": "2025-12-31"
+      }
+    },
+    {
+      "sdk": "query_stock_industry",
+      "kwargs": {
+        "date": "2015-06-30"
+      }
+    },
+    {
+      "http": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+      "max_bytes": 15000000
+    },
+    {
+      "http": "https://www.sec.gov/files/dera/data/financial-statement-data-sets/2014q4.zip",
+      "max_bytes": 150000000
+    }
+  ],
+  "max_data_operations": 8,
+  "retries": 0,
+  "delay_seconds": 1,
+  "timeout_seconds": 45,
+  "stop_on": "429 or2consecutiveexternalfailures; preserve partial; do not change anonymous session concurrently",
+  "prior_sources_reuse": "Apple original financial JSON read-only; no repeat download",
+  "version_question": "Does original/revised published value have distinguishable asof dates? No assumption that pubDate alone qualifies current revised number",
+  "external_output": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result",
+  "storage_plan": "storage-plan.json"
+}

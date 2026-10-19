@@ -1,0 +1,41 @@
+{
+  "workspace_root": "/",
+  "mission": "实际执行8次固定财务来源探测并保留原件，判明返回结构和历史版本证据，不算效果",
+  "task_scope": [
+    "只编写raw/probe_financial_sources.py，核保存storage-plan设备/容量与根路径后创建该唯一运行result/probe，不覆盖已有。可复用现有probe_history的序列化、记录和停机惯例；先核脚本明确没有其他网络再执行一次。",
+    "按source-probe-plan.json固定8操作：6单连接BaoStock SDK查询+2官方HTTP，SDK一秒间隔、分页完整、不截2000行，单操作45秒、0重试。HTTP用正常可说明用途的User-Agent，不取或绕过凭证，不对403换代理；最大15MBjson/150MBzip。429或连续2外部失败停后续，部分原件保留。",
+    "每个请求保存精确参数/时间/状态/bytes/hash/完整返回fields、rows与error；包保留原ZIP，只读取readme/sub/num头和少量行，不整批展开内部大文件到内盘。核pubDate/statDate/update等字段，原值/修订能否区分给事实，不把字段名当资格通过。",
+    "写外盘probe/manifest.json、raw/source-probe-receipt.json（小回执），返回6SDK+2HTTP实际完成计数、来源字段/版本/早年覆盖及失败。禁止真实市场效果、调参数、补请求/安装/改旧文件。"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-probe-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-plan.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/probe_history.py"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/probe_financial_sources.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-probe-receipt.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121"
+  ],
+  "network_allowed": true,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "8固定操作的完整源或真实失败",
+    "probe/manifest.json及小回执、脚本",
+    "实际日期/版本字段资格事实"
+  ],
+  "stop_conditions": [
+    "严格8操作上限0重试；429或连续2失败；外盘不可用不回退内盘",
+    "不补数据、不安装/取密钥、不做效果、不改其他文件"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "mission": "原年报历史版本与更正资格的关键风险审阅，给可执行的保守分类而非人工读取每份公告的空建议",
+  "task_scope": [
+    "只读已冻结financial-design.v1.json、采集元数据和少量已取得更正文样本；不联网/写文件/算市场效果。",
+    "请针对目录annual含关于年报更正的公告但并非完整年报，列出全文年报与通知的确定区分、报告年度确认、最新完整年报解析失败不回退的边界。采集器报告year_from_title只是候选元数据，不能当全文资格。",
+    "给出更正公告对GP/A与CFO/A的逐字段/年判定方式：明确非财务公告可忽略；真实会计差错需生效日期；不明是否/哪些年份受影响应如何unknown及何时恢复；不能只凭报刊日或文本出现任意年份猜受影响年；不能把旧年更正无差别取消明确无影响的新年。",
+    "少量正文样本核定哪些规则可机械执行、哪些只能保留unknown，不提议自动猜财报经济真实性。两种候选全报告；原取消标题不回填历史取消时间。给最小必要反例供Sol测试。"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-design.v1.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/original-filings-controller-review.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/accounting-correction-receipt.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "原件支持的版本/更正可执行资格与unknown边界、关键反例"
+  ],
+  "stop_conditions": [
+    "不算效果/不改冻结设计/不联网"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

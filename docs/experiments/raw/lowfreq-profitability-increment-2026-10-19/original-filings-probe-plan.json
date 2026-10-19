@@ -1,0 +1,70 @@
+{
+  "purpose": "真实原始年报/更正版本链资格，非财务效果或批量下载",
+  "max_total_data_operations": 18,
+  "request_delay_seconds": 1,
+  "timeout_seconds": 40,
+  "retries": 0,
+  "stop": "429 or2consecutiveHTTP/networkfailures; preserve all attempts and partial bodies",
+  "stock_index": "https://www.cninfo.com.cn/new/data/szse_stock.json",
+  "announcement_endpoint": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+  "query_cases": [
+    {
+      "code": "600599",
+      "report_years": [
+        2019
+      ],
+      "category": "年报",
+      "seDate": "2020-01-01~2026-10-19"
+    },
+    {
+      "code": "600599",
+      "report_years": [
+        2019
+      ],
+      "category": "补充更正",
+      "seDate": "2020-01-01~2026-10-19"
+    },
+    {
+      "code": "600519",
+      "report_years": [
+        2014
+      ],
+      "category": "年报",
+      "seDate": "2015-01-01~2016-12-31"
+    },
+    {
+      "code": "000594",
+      "report_years": [
+        2014
+      ],
+      "category": "年报",
+      "seDate": "2015-01-01~2017-12-31"
+    },
+    {
+      "code": "600518",
+      "report_years": [
+        2016,
+        2017
+      ],
+      "category": "年报",
+      "seDate": "2017-01-01~2020-12-31"
+    },
+    {
+      "code": "600518",
+      "report_years": [
+        2016,
+        2017
+      ],
+      "category": "补充更正",
+      "seDate": "2017-01-01~2021-12-31"
+    }
+  ],
+  "index_identity_only": "current code-orgId map not universe or historic industry; missing exit map use separately recorded searchkey-code no-stock query, then verify secCode exact; count within18",
+  "selection": "save raw JSON all metadata first; annual full report exclude摘要/英文/审计/意见; report-year title match; choose earliest published original, explicitly titled更正/修订 version if present, known correction announcement. No outcome-based selection. max8PDF objects, up to3neededpage2requestswithin18 total",
+  "pdf_locator": "only actual returned adjunctUrl or original linked attachment; http(s)asreturned or static.cninfo.com.cn plus returned relativepath; do not guess document IDs",
+  "max_bytes_json": 15000000,
+  "max_bytes_pdf_each": 30000000,
+  "out": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1",
+  "data_operation_counting": "8initial financial probe separate;18original filing operations new necessary source qualification, not reset of6discovery requests",
+  "financial_use": "only original consolidated income/cost/assets with unit and pub date qualifies; no arbitrary gpMargin*MBRevenue mapping"
+}

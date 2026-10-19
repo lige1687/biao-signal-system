@@ -1,0 +1,36 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "mission": "在市场结果尚未计算前冻结同600队列的盈利能力与财务质量比较设计",
+  "task_scope": [
+    "只读已有原年报/更正证据、旧132月输入格式和当前方法决定；不联网，不计算任何股票组合效果。",
+    "明确主假说GP/A（合并营业收入减营业成本除期末总资产）与金融业排除、公告日期<决策日、报表单位/版本完整、不确定更正的可用性；提出财报有效期的合理固定规则。",
+    "评估是否应另预定CFO/A（合并经营现金净流量/资产）以检验利润的现金支持；只在金融机制与本轮质量范围充分时纳入，最多这两个候选，不以数据方便/盈利结果选择。已有600599/600519现金流标签换行，请分清解析缺口与科学拒绝。",
+    "比较同一合格池的全体平均、动量前20%、盈利/现金前20%、50/50分数结合；明确行业内比较和行业权重，及50%动量持仓+50%全体平均是否必要简单对手。主比较不能仅胜弱动量。无参数搜索。",
+    "给出收益、最差月份/下跌月份、分散/重合、换股/财报维护等其他用途的最小必要表、两个候选多次挑选风险、时期稳定和不确定性、共同样本不足时结论限制。"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/astra-source-method-decision.json",
+    "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/original-filings-controller-review.json",
+    "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/industry-history-receipt.json",
+    "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+    "src/lei_signal/research/lowfreq_discovery.py"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "可直接交执行者的明确固定方法与拒绝/采纳理由，来源/版本问题仍未解决处"
+  ],
+  "stop_conditions": [
+    "不改任何文件、不算市场效果、不扩大候选/市场/预算"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

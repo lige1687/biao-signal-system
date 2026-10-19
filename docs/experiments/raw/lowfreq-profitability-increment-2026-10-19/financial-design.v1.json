@@ -1,0 +1,173 @@
+{
+  "schema": "independent-financial-discovery-design/1.0.0",
+  "frozen_at": "2026-10-19T10:51:18.333391+08:00",
+  "effect_data_inspected": false,
+  "question": "同固定历史股票队列，年度盈利/经营现金创造能力能否在动量之外改善月度选择收益、风险或可观察维护/分散用途",
+  "scope": "独立财务扩展，不进入原LEI技术判定，不代ETF/全市场/账户可执行收益",
+  "reviewer": "gpt-6-astra/high candidate_method_review final design accepted by root",
+  "reuse": {
+    "cohort": "financial-cohort.json",
+    "stock_count": 600,
+    "candidate_source_count": 2595,
+    "monthly_decisions": 132,
+    "period": "2015-01 through 2025-12",
+    "old_price_momentum_results": "reuse saved core-v1/per_stock_month.csv; never rerun old core",
+    "not_independent_confirmation": "previously viewed historical price outcomes; two new financial hypotheses not unknown history"
+  },
+  "candidates": [
+    {
+      "id": "research.cross_section.gross_profit_assets@1.0.0",
+      "registration": "local versioned definition in this attachment, not represented as existing central registry entry",
+      "formula": "(consolidated operating revenue - consolidated operating cost) / same year end total assets",
+      "unit": "ratio",
+      "direction": "higher",
+      "role": "primary profitability candidate",
+      "mechanism_hypothesis": "assets with greater gross earning capacity may provide information beyond price trend",
+      "competing_explanations": [
+        "industry/capital intensity",
+        "valuation",
+        "price already incorporates it",
+        "accounting reliability"
+      ],
+      "not_measured": "complete quality, direct profit authenticity"
+    },
+    {
+      "id": "research.cross_section.operating_cash_assets@1.0.0",
+      "registration": "local versioned definition in this attachment, not represented as existing central registry entry",
+      "formula": "consolidated net cash flows from operating activities / same year end total assets",
+      "unit": "ratio",
+      "direction": "higher",
+      "role": "sole predefined supplemental cash generation candidate",
+      "mechanism_hypothesis": "cash generation may differ from accrual gross earning capacity",
+      "competing_explanations": [
+        "working capital timing",
+        "taxes",
+        "business cycle",
+        "industry/capital intensity"
+      ],
+      "not_measured": "high CFO does not by itself establish honest or cash-supported gross profit"
+    }
+  ],
+  "record_qualification": {
+    "report_years": [
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "retained_signs": "negative and zero amounts retained, assets strictly positive",
+    "publication": "original publisher date converted Asia/Shanghai; strictly publication_date < decision_date, no invented publication clock",
+    "annual_version": "newest report year available, latest qualified full version within that year; later older-year release never replaces newer annual; original canceled labels do not cause future deletion",
+    "latest_failed": "latest expected full annual parse failed => unknown, no falling back older to avoid failure",
+    "max_age": "report period end plus 16 calendar months inclusive; revision never resets age",
+    "same_report": "consolidated current year income/cashflow and end year assets; exact period/currency/scale and evidence pages required; no parent company, total operating revenue or comparative restated backfill",
+    "corrections": "semantic body review and affected years/fields; uncertain financial correction invalidates affected currently-used fields after its public date until qualified complete version, not unrelated newer years; partial numbers cannot mix version without explicit unchanged evidence",
+    "audit_opinion": "describe only where actually qualified; no new audit screen",
+    "unqualified": "explicit missing reason, never zero filled"
+  },
+  "industry": {
+    "source": "12 saved year end BaoStock historical proxy snapshots; arrival/public availability not independently verified",
+    "snapshot_rule": "latest snapshot query_date <= decision_date, each updateDate < decision_date",
+    "code": "CSRC leading letter + two digits e.g C26",
+    "financial_exclusion": "leading J financial industry excluded",
+    "unknown": "not in main sector comparison; no future snapshot fill",
+    "within_year_limit": "year-end series does not establish all intra-year transitions"
+  },
+  "pools": {
+    "GP": "price + historical sector + qualified GP/assets",
+    "cash_common": "GP + CFO qualified; recompute GP methods on this identical pool for direct financial candidate comparison",
+    "never_future_filter": "future return missing keeps original target weight and recorded outcome status"
+  },
+  "selection": {
+    "frequency": "monthly same saved decision/entry/exit dates",
+    "industry_weights": "n industry / n common pool each month, same for all methods",
+    "rank": "ascending percentile, equal values average rank; final top cutoff tie by code",
+    "fraction": 0.2,
+    "count": "ceil(0.2*n sector)",
+    "tiny_sectors": "n<5 all methods hold full sector, label no effective selection",
+    "methods": {
+      "P": "all pool equal weight",
+      "M": "within industry momentum top 20%",
+      "F": "within industry financial candidate top 20%",
+      "B": "within industry 0.5 momentum percentile +0.5 financial percentile, top20%",
+      "D": "0.5 M target weights +0.5 P target weights; overlaps add"
+    },
+    "forbidden": "no third GP+CFO blend, no grids, no choosing direction/window/sector weights by returns"
+  },
+  "comparisons": [
+    "F-P",
+    "B-M",
+    "B-D",
+    "B-P",
+    "B-F"
+  ],
+  "outcomes": {
+    "returns": [
+      "monthly mean",
+      "all five paired mean differences",
+      "future unknown -100% and0 scenarios not true recovery bounds",
+      "unknown target weight and halt nonactionability reported"
+    ],
+    "risk": [
+      "worst month",
+      "worst10% months mean",
+      "same P-down month methods and paired differences",
+      "marked quote cumulative path/drawdown only if no missing months, not executable account"
+    ],
+    "other": [
+      "holdings count",
+      "max stock weight",
+      "weight overlap sum min(wF,wM)",
+      "monthly return co-movement",
+      "target list replacement magnitude",
+      "report update counts",
+      "missing/correction/parse maintenance burden"
+    ],
+    "unmeasured": [
+      "actual human maintenance time",
+      "real fills/fees/cash/corporate-action wealth",
+      "future independent confirmation",
+      "when to switch factors dynamically"
+    ]
+  },
+  "stability": {
+    "years": "every calendar year",
+    "periods": [
+      "2015-2019",
+      "2020-2025"
+    ],
+    "leave_one_year_out": true,
+    "uncertainty": {
+      "block_month_lengths": [
+        6,
+        12
+      ],
+      "draws": 10000,
+      "seed": 20261019,
+      "shared_indices": true,
+      "intervals": [
+        0.95,
+        0.975
+      ],
+      "positive_statement": "97.5% considers selection between two candidates; report both lengths and all candidate results, no multiple-risk-stat winner claim"
+    },
+    "time_claim": "<120 comparable months cannot claim completed ten-year effect test; 120 alone does not prove coverage sufficient"
+  },
+  "budget": {
+    "core_max": 1,
+    "purposeful_followups_max": 3,
+    "core_used": 0,
+    "old_momentum_budget_unchanged": true,
+    "market_fetch": 0,
+    "production_trading": false
+  },
+  "adapter": "native factor workflow currently lacks this cross-sectional financial/original filing adapter; dedicated frozen hashes + synthetic qualification + controller independent reconciliation, no false native pass"
+}
