@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-20T00:56:20.023222+08:00",
+  "commit": "76d4039bb652b1dedd9d28980888fc1d529b592e",
+  "remote_commit": "76d4039bb652b1dedd9d28980888fc1d529b592e",
+  "byte_matched_paths": [
+    "docs/experiments/INDEX.md",
+    "docs/experiments/lowfreq-data-integrity-enforcement-2026-10-20.md",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/actual-600-preflight.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/brief.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/check_real_inputs.py",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/controller-review.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/delegate-preflight-failure.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/luna-contract-v2.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/luna-contract.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/luna-inventory-receipt.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/old-financial-exposure.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/probe-qualification.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/probe-receipt.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/probe_missing_fields.py",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/qualify_probe.py",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/sol-contract-v2.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/sol-contract.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/source-plan.json",
+    "docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/storage-plan.json",
+    "docs/experiments/registry.json",
+    "docs/ops/work-progress/personal-lowfreq-system-audit-20261018.md",
+    "docs/research/lowfreq-input-checks.md",
+    "src/lei_signal/research/lowfreq_input_guard.py",
+    "tests/unit/test_lowfreq_input_guard.py"
+  ],
+  "report_sha256": "9e362de3715eaf92b20a4a9cf8c834f5e91a5f936337ce5264d7ef77514fb067",
+  "goal": {
+    "id": "okr-8830a1f1ec4f",
+    "version_before": 22,
+    "version_after": 23,
+    "status": "in_progress",
+    "note": "数据防失真检查已交付：真实600源1,852,185行在统计前拒绝sz.001914的1,560行混合复权口径，统计调用0，17项测试通过；重取来源仍复现混合口径。旧财务33权重记录/11月已核，2020-05与06两个动量起终点口径不同，旧增量/少亏线索暂停升级，修正影响未知。名义价3166行、10复权因子和1份股份财报样本补证；全历史股本、限制价/实际成交、当时版本仍缺。新入口生效，旧直接CLI与其他入口未自动迁移。报告 https://github.com/lige1687/biao-signal-system/blob/76d4039bb652b1dedd9d28980888fc1d529b592e/docs/experiments/lowfreq-data-integrity-enforcement-2026-10-20.md 。新源6/6、核心1、跟进2/3、0新收益实验；旧预算不变，整体目标未完成，无后台运行。",
+    "protected_fields_unchanged": [
+      "status",
+      "owner",
+      "authorization",
+      "milestones",
+      "evidence",
+      "next_action",
+      "links"
+    ]
+  }
+}
