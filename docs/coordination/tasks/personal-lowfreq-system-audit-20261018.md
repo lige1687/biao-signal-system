@@ -1,3 +1,15 @@
+# 并行选股诊断、价值来源与实际恢复流程交付 2026-10-19T15:46:23.607714+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次有界排序诊断、来源检查与新入口验收；scope_released true。价值效果总目标仍未完成。checked_coordination_sha=0efe3384c10a89ace97586f8d8923631060ffcc5；checked_at=2026-10-19T15:46:23.607714+08:00；已读COORDINATION/self/research-utility-review-20261012最新15:39/investor-workspace-simplification-20261012最新12:10/research-dispatch-controller。独立财务/选股/工具与原LEI、ETF小时、账户及UI分工保持，无接管/重跑。
+- 成果分支codex/personal-lowfreq-system-audit-20261018，最近完整成果81fb4e730c53d1781cd8eb3b017afabcf26ae87e；两报告及65准确研究文件c3a690d790adb08379fdbe4b8979dfe985f672bc已push/fetch逐文件读回；最新目标回执/progress两文件亦已读回。报告docs/experiments/lowfreq-parallel-research-2026-10-19.md（defd3c2ab898e0a02baa6ccba79cf7e4232462013bc4e3fd9ca3c3e68d1085c4）、lowfreq-value-increment-2026-10-19.md（19f2fd9577a7178bf902bb3e7d7b7b905f9ac9b642f436bd819b143310a9521f）；只登记独立树自身registry2键/INDEX2行，旧键/元数据保持，未合main。
+- Luna真实运行新P2解释诊断一次：固定600历史A股队列、132月，行业五档实际共同支持71—263股/月，毛利主72—273。最高−最低主毛利+0.0165、共同毛利−0.0535、共同现金+0.2293个百分点/月；后六年均负、6/12月分段范围均含0，全部五组不稳定递增。既有P2少亏/名单稳定用途保持；不是ETF或每只股预测证明。792月度行/21364支持记录，0新行情，manifest2bfa79f0a79428296d4560689105f29d1fd93ab7b13aebcbc0ddb415f9cf3086；root885核数无差异，Astra科学接受有限结案，无必要再试。P2累计1核心+2/3后续，旧原件/核心不改。
+- 新lowfreq_research_control.py已实际接本次runner，核设计/输入/代码/资格/时间/选择字段/预算/枚举历史。14控制+17诊断合成检查通过，Sol独核同日反例拒绝和真实恢复reuse/待审pending_review；最终绑定科学审核后accepted且evidence inconclusive。旧冻结合同不会发现新增attempt的缺口保留：已补本次终态、累计次数和准确恢复合同；尚无全局原子预约/未列举历史自动发现，不称所有AI都受控。运行恢复入口docs/experiments/raw/lowfreq-parallel-research-2026-10-19/workflow-runbook.md；不得从旧执行命令重跑。
+- 价值源资格实际完成：4固定数据操作、6原报公布后锚点匹配、8固定案例中5原PDF部分字段/3缺失。年度普通权益配同年末股数和价格获有条件支持；A/H多价格、优先权益扣除、库存股与原股数仍需明确，全部自动候选annual_bp_ready=false。原年报锚点不能给600股全部历史PB发资格。7提取合成测试，Luna实际一次exit0；0价值效果、0批量估值新下载。来源方法5/6含失败，数据4/4，P3核心0/1、后续0/3；下一阶段沿原题补批量年度资料资格与明确缺项，不能用论文/供应商曲线代替。
+- 重要边界与失败：新输出在登记外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，准确路径/原件SHA见两raw回执；大数据未入Git。主仓现行归置绿，成果树旧检查器3项继承白名单告警保留；全量暂存检查发现冻结French摘录尾部空白，原始字节保留、失败如实入收据，非全绿。执行编排当时未据exit阻止后续commit的失误亦保留，无历史重写。原策略/账户/生产/交易/通知均未改。
+- 本人目标okr-8830a1f1ec4f真实version13→15读回，in_progress、4/6、旧历史/负责人/授权/里程碑保持；新增准确commit报告链接和实物证据，价值未冒称完成。root负责假设/整合/验收，Luna low执行，Sol medium实现/独核，Astra high科学审；所有子任务结束，当前无后台研究/automation。实际token与费用未知。下一接续先读本记录、两报告与runbook，复用负结果和累计尝试，不与原因子实现重复。
+
+---
+
 # 用户授权并行研究与平稳研究流程 2026-10-19T15:03:02.973033+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=a06816323ed6c4f76e9d0f45332c51c8f1fe3974；checked_at=2026-10-19T15:03:02.973033+08:00；已读COORDINATION/self/research-utility-review-20261012最新14:55/investor-workspace-simplification-20261012最新12:10/research-dispatch-controller。基线/最近已推成果9c22e6a4069251dce5914f51ea13892d334ba40c，原成果树和分支继续。
