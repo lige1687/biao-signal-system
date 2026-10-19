@@ -1,3 +1,12 @@
+# FIP两张研究附件接入当前前端 2026-10-20T00:51:22.014185+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=43b57fd8b7387268d57f301c359a96901bf6a848；checked_at=2026-10-20T00:51:22.014185+08:00；已读COORDINATION、自身、research-utility-review最新00:48、personal-lowfreq-system-audit最新00:43、research-dispatch-controller。复用用户此前系统展示归本对话/因子归另一对话的明确分工；原owner请求只接两图，不参与FIP研究或改结论。
+- root唯一写当前codex/investor-workspace-simplification-20261012成果树web/public/research/fip-clock-profitability-2026-10-20/fip-groups.svg与fip-increment.svg（仅原附件按字节一致复制）、自身docs/archive/handoffs-plans/investor-workspace-simplification-20261012/fip-static-assets-20261020-receipt.json及work-progress；小回执和自身进度可准确镜像主树。主树原SVG、raw、报告、组件、API、规则、registry均不改，不重启服务，不跑研究。基线e6c4c2e025252c565ba15f05611561ca1ecd5b48与既有未提交内容保持，精确新增不覆盖其他内容。
+- 已核5188 PID15320 cwd为自身成果树/web，两URL HTTP200但text/html/578字节（应用回落页），目标原文件不存在。又发现两源SVG均重复viewBox属性，XML解析line1 column198失败，已交原owner修正其来源；不将格式失败强行当图片成功。源旧SHA4aad74c46edb4e678fd3cd68854209d6da6e327a08d1833a568b24b449cc8a09、f6c6f1992adabc7bf8bdeb1a7a4976bdbce5d8e58e8cb94841dacca6db6eb194保留回执，等源修正再按其最终SHA接入。两策略源实核与确认值同，服务层为研究证据展示。
+- 验收仅两图XML可读、原图/目标/HTTP字节SHA一致及image/svg+xml、报告页面实际图片可加载，原研究与服务PID保持；归置与准确回执保存。无来源修复则该图明确未交付，其他独立核查继续；不新增研究报告/实验/定时器/交易或对其他会话派无关任务。
+
+---
+
 # 因子研究证据与对外结论审查已交付 2026-10-19T16:38:31.493628+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮独立审查及结论纠正验收；scope_released true。checked_coordination_sha=451d5509f4ffd22b31778eaf1b7fcfb3a863ff2d；checked_at=2026-10-19T16:38:31.493628+08:00；已读COORDINATION/self/research-utility-review-20261012最新16:37/personal-lowfreq-system-audit-20261018最新16:11/research-dispatch-controller。原因子资料与纠正已交付且无后台研究；自己的18报告审查与财务原owner分工保持，未接管原研究或新实验。
