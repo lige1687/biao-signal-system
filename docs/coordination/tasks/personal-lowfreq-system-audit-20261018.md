@@ -1,3 +1,13 @@
+# 研究工具、基准与数据复用审查启动 2026-10-20T01:19:39.783907+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=a51d435524dfe4a4c0cc1e1f1f2b4c204cac587e；checked_at=2026-10-20T01:19:39.783907+08:00；已读COORDINATION/self/research-utility-review最新cashOP交付01:17/lowfreq-strategy-discovery/external-quant-resources顶部10月5日/dispatch。唯一写者root；Luna只读工具盘点。外部工具旧审查复用，现金经营盈利与应计、资产增长旧研究不重复。
+- 用户要求打磨工具/基准/数据并查重。问题：JKP/French/AQR、Alphalens/statsmodels/arch/QuantStats、RQData/vectorbt相对现有链路补什么、是否已接通，哪项真实缺口优先。只作现有实现/公开文档与有限工程诊断，不新增因子效果回测、安装、付费账户或生产改造。
+- 工作分支codex/personal-lowfreq-system-audit-20261018；base及最近已推504b1d4f9df556a90c849db571b5df8779a8c83e。root只写新docs/experiments/research-stack-gap-audit-2026-10-20.md、同名raw、registry本键/INDEX本行、原进度/本协调及自身目标note；必要导航只在自身指引附报告链接，改共享工具须另登记精确范围。
+- 验收：逐工具区分已审查/已实现/已接通/真实效果；现有定义/账本/引擎/数据来源定位；至少将关键接口缺口核到源码或真实回执；可执行必要诊断本轮完成；资料访问与点时版本、执行资格不能由公共文档推定。只读检查不重做封存市场试验。0新市场/安装/付费/交易/通知；本轮外部公开文档按必要性逐项记录，旧预算不借用；小文件预计400KiB本机，不创建大结果。
+- 当前正在核现有代码与文档，不把计划写成成果；下一步Luna盘点+root一手来源审查、确认最高优先缺口。现有blocked条件策略保持，不借本题绕过资料资格。
+
+---
+
 # 趋势条件三候选与OSAP复用审查交付 2026-10-20T01:14:27.907933+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status blocked仅条件策略核心效果资料资格；定义复用/已有证据审查子题completed；scope_released true。checked_coordination_sha=330aaf6c3a3b0074f21147c6ac7dfd3b1b5b5a6e；checked_at=2026-10-20T01:14:27.907933+08:00；已读COORDINATION/self/research-utility-review-20261012最新cashOP/应计01:01/独立资产增长/系统/dispatch，fetch无新增。低beta/资产/股份与原owner现金经营盈利及应计不重叠，不修改其输入/研究。
