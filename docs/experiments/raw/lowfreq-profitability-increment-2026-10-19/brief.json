@@ -1,7 +1,7 @@
 {
   "research_id": "lowfreq-profitability-increment-2026-10-19",
   "mode": "research",
-  "execution": "running",
+  "execution": "completed",
   "question": "当时已公开的盈利能力/质量信息是否在动量之外改善低频选择的收益、风险或其他可观察用途？",
   "scope": "independent financial research; prefer prior600historicalA/132months; source qualification before final design; no original strategy changes",
   "baseline_commit": "4712eecc87f1a4882a281521816ed39f58cfcc5c",
@@ -29,7 +29,7 @@
     },
     "industry_actual": 12,
     "core_used": 1,
-    "purposeful_followups_used": 0,
+    "purposeful_followups_used": 1,
     "bulk_original_actual": {
       "catalog": 808,
       "pdf": 9000,
@@ -58,7 +58,8 @@
       "cumulative_bulk_http_starts": 15015,
       "all_prior_other_source_requests": 41
     },
-    "core_reserved": 0
+    "core_reserved": 0,
+    "followup_reserved": 0
   },
   "strategy_hashes": {
     "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
@@ -68,7 +69,7 @@
     "lowfreq-expanded-discovery-2026-10-19 completed and unchanged",
     "lowfreq-candidate-first-cycle-2026-10-19 SEC Apple source qualification only"
   ],
-  "stage": "conditional risk uncertainty followup preparation; core complete",
+  "stage": "bounded profitability versus momentum question completed; mixed return/risk evidence, pending user acceptance",
   "prohibited": [
     "current restated figures labeled as past known",
     "old momentum rerun",
@@ -112,8 +113,8 @@
     }
   },
   "financial_design_sha256": "648476bf2cb79056d4982884e96b387ffc76a494598475644b12be0c69e526bc",
-  "latest_coordination_pushed_readback": "fe0704ce8ba81980e0f3e147276f0df780e36f65",
-  "last_state_checked_utc": "2026-10-19T06:16:35.297730+00:00",
+  "latest_coordination_pushed_readback": "fb36ded4b72a8250fb5c5e4d0a48b671283129d4",
+  "last_state_checked_utc": "2026-10-19T06:30:51.326343+00:00",
   "accepted_design_amendments": [
     {
       "path": "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-design-amendment-01.json",
@@ -140,5 +141,16 @@
     "exit_code": 0,
     "result_manifest_sha256": "f7d0f3da8160dabdb4489496df36cf6dff2156163c912d745abe8b4e37ef0b5a",
     "independent_receipt_sha256": "a6be2f7146a2f9b43d00c541361ed7ad7e89d1b4e69baf75de95591cea94e9b4"
+  },
+  "risk_followup": {
+    "contract_sha256": "400d54d85f144b48ae770a39fe373e2f1babe5decef5d1959550729077b75852",
+    "status": "completed_independently_reconciled",
+    "attempt": "risk-followup-01",
+    "exit_code": 0,
+    "manifest_sha256": "99d6bab0e9b64624647ed89fbd32adf62bbca384574c12c7902fbbd039d5fc0d"
+  },
+  "final_acceptance": {
+    "path": "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/final-controller-acceptance.json",
+    "sha256": "8d9a9236418816e9a1799652d81ee7209a90838a349823fdb8c6eeffe6751bf8"
   }
 }

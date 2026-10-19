@@ -1,0 +1,26 @@
+{
+  "schema": "financial-risk-followup-controller-review/1",
+  "checked_utc": "2026-10-19T06:22:55.965525+00:00",
+  "decision": "accepted_one_followup_only",
+  "design_sha256": "261c2fa8b321e6990e16f250e8bd20234d3eb14cc0f8ef6733784a438a8f0093",
+  "runner_sha256": "0b7e45572406a469915812241fc9990b0a198cee865ebaaf2c7cd6eee5b37c7c",
+  "independent_semantic_tests": {
+    "run": "root repeated 7 defined synthetic tests",
+    "status": "passed"
+  },
+  "code_review": [
+    "all 132 dated positions sampled in circular blocks, strict original P<0, missing conditional samples excluded not zero",
+    "30 series,120rows, all original five comparisons/scopes/scenarios and fixed intervals",
+    "shared index digests match frozen core and means/counts must reconcile prior paired results",
+    "exact design/runner/monthly/core bound by hash, external UUID/device/capacity and create-only output"
+  ],
+  "storage": {
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "st_dev": 16777238,
+    "free_bytes": 505508003840,
+    "estimated_new_external_bytes": 1048576,
+    "estimated_new_local_bytes": 32768
+  },
+  "independent_actual_result_check_required": true,
+  "scope": "post-core exploratory conditional-risk uncertainty only; no new selection, no changes to originals, no production/trading"
+}

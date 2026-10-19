@@ -1,0 +1,61 @@
+{
+  "schema": "financial-research-final-controller-acceptance/1",
+  "reviewed_at": "2026-10-19T14:30:51.308842+08:00",
+  "status": "bounded_research_completed_mixed_evidence_pending_user_acceptance",
+  "checked_coordination_sha": "fb36ded4b72a8250fb5c5e4d0a48b671283129d4",
+  "previous_read_coordination_sha": "eac3db47aec9b3f83909d9b524b59a0822305386",
+  "read_tasks": [
+    "COORDINATION",
+    "personal-lowfreq-system-audit-20261018",
+    "research-utility-review-20261012 latest14:28",
+    "investor-workspace-simplification-20261012 latest12:10",
+    "research-dispatch-controller"
+  ],
+  "conflict_decision": "own independent financial factor results only, no ETF-hourly/LEI/UI/account changes",
+  "report": {
+    "path": "docs/experiments/lowfreq-profitability-increment-2026-10-19.md",
+    "sha256": "0692bb724ea8413fdb22326ceb557bea239fd5d42b87f0121356f6ba62e9a413",
+    "populated_numeric_cells_verified": 103,
+    "verification": "7 performance rows/10 incremental-return rows/9 risk rows source checked; mandatory sections/raw links checked; four wording-only scientific corrections applied afterward"
+  },
+  "evidence": {
+    "core-01-contract.json": "e331f155dc1e74cebd0c8205d1988bf7bc84c2556bce65da37059e32a6cbb603",
+    "core-01-receipt.json": "e56ec3b1d774098e21812690694bee0385068efeac52535629e29e5b64f907ab",
+    "core-01-independent-receipt.json": "a6be2f7146a2f9b43d00c541361ed7ad7e89d1b4e69baf75de95591cea94e9b4",
+    "core-controller-evidence.json": "7c8a9bf39d91d4f18df7d9a8d6a0e318f2cef049823b7e3f1cd907f057c97780",
+    "risk-followup-01-contract.json": "400d54d85f144b48ae770a39fe373e2f1babe5decef5d1959550729077b75852",
+    "risk-followup-01-receipt.json": "49aea0c929ddac617c7237849b9cd977a5040971d389ed8579aced2d1ef4eff3",
+    "risk-followup-independent-review.json": "564c47b73c248e6af28ceec5acfef2a102325c61b81ed8bf359da535ca0fcd62",
+    "risk-followup-scientific-review.json": "37dc0003c473961fffa8eecc45218dc895da2f5c84d2863c99d135fdfa7150e7",
+    "final-return-risk-decomposition.json": "dd1e8e1e68919c375f9961e516e7353b9ee8e95865df59517f3e7fdd891192ce"
+  },
+  "verdict": {
+    "extra_average_return": "not_established",
+    "gp_mixed_same_down_month_risk": "retain_limited_historical_evidence",
+    "cfo_mixed_same_down_month_risk": "incremental_benefit_inconclusive",
+    "standalone_cfo_risk": "bounded_evidence_vs_all_pool_not_momentum_increment",
+    "other_uses": "target_list_stability_descriptive; actual net operating/cost savings and independent diversification unproved"
+  },
+  "budget": {
+    "core_used": 1,
+    "core_max": 1,
+    "purposeful_followups_used": 1,
+    "purposeful_followups_max": 3,
+    "financial_bulk_source_http": 15015,
+    "prior_other_source_requests": 41,
+    "new_market_requests_this_effect_stage": 0,
+    "cost_unknown": true
+  },
+  "closure_reason": "The specified historical incremental question is answered with source and inference limits. The necessary conditional-risk uncertainty check is complete. Tiny-cell stronger-baseline test cannot distinguish methods; no new partition or parameter search justified. Independent effect/ETF execution is a separate uncompleted question.",
+  "validation": {
+    "risk_synthetic_tests": 7,
+    "core_independent_checked_fields": 2178932,
+    "core_independent_differences": 0,
+    "risk_independent_checked_fields": 720,
+    "risk_independent_differences": 0,
+    "main_current_hygiene": "passed",
+    "worktree_old_hygiene": "3 pre-existing whitelist issues (.git file, COORDINATION.md, docs/coordination); unchanged and not hidden"
+  },
+  "production_adoption": false,
+  "real_trading": false
+}

@@ -1,0 +1,529 @@
+{
+  "schema": "financial-risk-followup-scientific-review/1",
+  "created_utc": "2026-10-19T06:27:32.983613+00:00",
+  "reviewer": "astra_increment_boundary",
+  "status": "scientific_review_complete_bounded_history_can_close_after_report_finalization",
+  "new_experiments_executed": 0,
+  "network_requests": 0,
+  "source_or_parameter_changes": false,
+  "answer_plain": "本次没有证明财务指标能增加月平均收益；毛利与动量的固定混合，在同一批股票平均配置下跌的月份，显示较一致的少亏证据，值得保留为有限的历史风险用途线索。共同股票范围里59个这样的月份，相对仅动量平均少亏0.3454个百分点；按连续12个月重抽得到的97.5%范围为少亏0.1020至0.5670个百分点。经营现金单独选择相对全体平均也有下跌月少亏线索，但加入动量后的额外改善仍不确定。这些结果没有证明能提前识别下跌、获得更多收益、超过波动等全部已有信息，或在个人账户与ETF上实现。",
+  "accepted_evidence": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/risk-followup-design.json",
+      "sha256": "261c2fa8b321e6990e16f250e8bd20234d3eb14cc0f8ef6733784a438a8f0093"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/risk-followup-01-receipt.json",
+      "sha256": "49aea0c929ddac617c7237849b9cd977a5040971d389ed8579aced2d1ef4eff3"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/risk-followup-01/manifest.json",
+      "sha256": "99d6bab0e9b64624647ed89fbd32adf62bbca384574c12c7902fbbd039d5fc0d"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/risk-followup-01/conditional_intervals.json",
+      "sha256": "5cf197c7d23f6c83b47f5c24dd7fb76f5b5b360f9f5c492a6a3cd3c2fb882c76"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/risk-followup-independent-review.json",
+      "sha256": "564c47b73c248e6af28ceec5acfef2a102325c61b81ed8bf359da535ca0fcd62"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/core-01-scientific-review.json",
+      "sha256": "4204f29fc50be2ffa9ff428182a63a0cdddb0a0b6580fddf143bdfac107b93e4"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/final-source-scientific-review.json",
+      "sha256": "a9b2d135984e8a7bc265b2db1c6129f34370fd9aa8197d0f4d0316ec78305ead"
+    }
+  ],
+  "checks": {
+    "all_dispatched_hashes_matched": true,
+    "result_rows": 120,
+    "dimensions": "3 scopes x2 scenarios x5 frozen comparisons x2 block lengths x2 confidence levels",
+    "every_row_10000_valid_draws": true,
+    "two_scenario_risk_results_identical_to_1e_14": true,
+    "same_original_index_hashes": "6:b717407ab8165ec58a25c87210c2faa1741ec01867814ce5e9202f40f0ae7ec7;12:a08ac269b8961267b790b4b721128f3f34b97f19254ab567a0f225afd913f64d",
+    "independent_arithmetic": "Root independent NumPy dated-count-matrix implementation checked720 scalar fields over120 rows;0 differences, status matched. Reviewer verified receipt hash and reused it without rerunning the effect.",
+    "not_established_by_arithmetic": "Source truth, complete historical availability, all-risk-family error probability, future causal financial increment, real fills/costs/account wealth."
+  },
+  "complete_risk_comparison": {
+    "unit": "percentage points per original P-down month; positive means the left method fell less than the reference on average",
+    "scope_key": {
+      "gp": "GP/assets primary eligible pool",
+      "common_gp": "GP/assets on same GP+CFO qualified pool",
+      "common_cfo": "CFO/assets on that same pool"
+    },
+    "columns": [
+      "scope",
+      "comparison",
+      "P_down_months",
+      "observed_difference_pp",
+      "block6_95pct_range_pp",
+      "block6_97_5pct_range_pp",
+      "block12_95pct_range_pp",
+      "block12_97_5pct_range_pp"
+    ],
+    "rows": [
+      [
+        "gp",
+        "F-P",
+        60,
+        0.289758,
+        [
+          0.008331,
+          0.555441
+        ],
+        [
+          -0.026418,
+          0.595058
+        ],
+        [
+          0.022064,
+          0.561666
+        ],
+        [
+          -0.007878,
+          0.603694
+        ]
+      ],
+      [
+        "gp",
+        "B-M",
+        60,
+        0.337383,
+        [
+          0.104734,
+          0.557059
+        ],
+        [
+          0.0714,
+          0.589589
+        ],
+        [
+          0.117746,
+          0.535583
+        ],
+        [
+          0.083843,
+          0.561979
+        ]
+      ],
+      [
+        "gp",
+        "B-D",
+        60,
+        0.378149,
+        [
+          0.129595,
+          0.602005
+        ],
+        [
+          0.094156,
+          0.631059
+        ],
+        [
+          0.167862,
+          0.574043
+        ],
+        [
+          0.134807,
+          0.601961
+        ]
+      ],
+      [
+        "gp",
+        "B-P",
+        60,
+        0.418915,
+        [
+          0.06316,
+          0.750557
+        ],
+        [
+          0.011423,
+          0.79418
+        ],
+        [
+          0.113038,
+          0.694613
+        ],
+        [
+          0.072797,
+          0.731403
+        ]
+      ],
+      [
+        "gp",
+        "B-F",
+        60,
+        0.129157,
+        [
+          -0.156706,
+          0.391028
+        ],
+        [
+          -0.195806,
+          0.426165
+        ],
+        [
+          -0.090649,
+          0.335337
+        ],
+        [
+          -0.12588,
+          0.363029
+        ]
+      ],
+      [
+        "common_gp",
+        "F-P",
+        59,
+        0.367065,
+        [
+          0.129625,
+          0.585538
+        ],
+        [
+          0.095383,
+          0.614356
+        ],
+        [
+          0.138998,
+          0.589209
+        ],
+        [
+          0.102612,
+          0.618014
+        ]
+      ],
+      [
+        "common_gp",
+        "B-M",
+        59,
+        0.345424,
+        [
+          0.133634,
+          0.546763
+        ],
+        [
+          0.100832,
+          0.576205
+        ],
+        [
+          0.137823,
+          0.541114
+        ],
+        [
+          0.102011,
+          0.567034
+        ]
+      ],
+      [
+        "common_gp",
+        "B-D",
+        59,
+        0.419267,
+        [
+          0.184708,
+          0.632856
+        ],
+        [
+          0.151917,
+          0.663252
+        ],
+        [
+          0.196644,
+          0.62138
+        ],
+        [
+          0.161493,
+          0.655637
+        ]
+      ],
+      [
+        "common_gp",
+        "B-P",
+        59,
+        0.493109,
+        [
+          0.139446,
+          0.821141
+        ],
+        [
+          0.092048,
+          0.873134
+        ],
+        [
+          0.160999,
+          0.790622
+        ],
+        [
+          0.10881,
+          0.839095
+        ]
+      ],
+      [
+        "common_gp",
+        "B-F",
+        59,
+        0.126044,
+        [
+          -0.15762,
+          0.383418
+        ],
+        [
+          -0.200465,
+          0.420265
+        ],
+        [
+          -0.101682,
+          0.325841
+        ],
+        [
+          -0.132983,
+          0.351691
+        ]
+      ],
+      [
+        "common_cfo",
+        "F-P",
+        59,
+        0.422628,
+        [
+          0.105595,
+          0.751051
+        ],
+        [
+          0.062835,
+          0.805681
+        ],
+        [
+          0.111343,
+          0.71826
+        ],
+        [
+          0.067026,
+          0.766372
+        ]
+      ],
+      [
+        "common_cfo",
+        "B-M",
+        59,
+        0.299757,
+        [
+          -0.077816,
+          0.664556
+        ],
+        [
+          -0.135644,
+          0.714608
+        ],
+        [
+          -0.111485,
+          0.702039
+        ],
+        [
+          -0.176684,
+          0.763585
+        ]
+      ],
+      [
+        "common_cfo",
+        "B-D",
+        59,
+        0.373599,
+        [
+          0.012556,
+          0.725367
+        ],
+        [
+          -0.044227,
+          0.77598
+        ],
+        [
+          -0.016073,
+          0.742252
+        ],
+        [
+          -0.069132,
+          0.803819
+        ]
+      ],
+      [
+        "common_cfo",
+        "B-P",
+        59,
+        0.447442,
+        [
+          0.007429,
+          0.861345
+        ],
+        [
+          -0.048002,
+          0.920492
+        ],
+        [
+          0.016709,
+          0.848573
+        ],
+        [
+          -0.036839,
+          0.911842
+        ]
+      ],
+      [
+        "common_cfo",
+        "B-F",
+        59,
+        0.024813,
+        [
+          -0.221414,
+          0.259647
+        ],
+        [
+          -0.255677,
+          0.293589
+        ],
+        [
+          -0.205179,
+          0.238144
+        ],
+        [
+          -0.237481,
+          0.262415
+        ]
+      ]
+    ],
+    "both_unknown_scenarios": "All observed differences/intervals in this table equal under unknown=-100% and unknown=0% to checked tolerance; both120 result combinations were reviewed. This is not proof that actual missing outcomes or recoveries are known.",
+    "interpretation": "The confidence ranges describe the chosen historical resampling procedure; they are not the probability that the causal effect is true, and they do not account for selecting this follow-up after observing multiple core risk summaries."
+  },
+  "use_specific_decisions": {
+    "extra_average_return": {
+      "decision": "not_established",
+      "evidence": "Common-pool B-M GP+0.0366pp/month, CFO+0.0620pp/month; every frozen paired return interval at95/97.5 and6/12months includes0;2020-2025 B-M GP-0.0310pp and CFO-0.0708pp.",
+      "limit": "Not proof of zero useful return; no meaningful-equivalence threshold was predefined."
+    },
+    "gp_mixed_downside_month_use": {
+      "decision": "retain_bounded_exploratory_historical_risk_evidence",
+      "evidence": "Primary pool B-M+0.3374pp,97.5% intervals6month[+0.0714,+0.5896],12month[+0.0838,+0.5620]. Common pool B-M+0.3454pp,6month[+0.1008,+0.5762],12month[+0.1020,+0.5670]. B-D and B-P are also positive across both block lengths, confidence levels,scenarios and both GP pools.",
+      "stability": "Primary B-M2015-2019+0.3401pp/2020-2025+0.3352pp; common+0.3184/+0.3683pp. Removing any one year leaves primary+0.3041 to+0.4124pp/common+0.2961 to+0.4126pp.",
+      "counterexamples": "GP primary B-M on down months is negative in2019 and2021; full-period worst month of GP B is slightly worse than M, and early-period worst-tenth-month average is also slightly worse. It is not all-risk improvement.",
+      "claim_limit": "Observed under the fixed blend and source-qualified pool versus specified simple industry-controlled momentum/dilution. Neither every future decline nor independent financial causality is established."
+    },
+    "cfo_added_to_momentum": {
+      "decision": "incremental_downside_month_benefit_inconclusive",
+      "evidence": "Common B-M+0.2998pp,97.5%6month[-0.1356,+0.7146],12month[-0.1767,+0.7636]. Even95% intervals cross0. B-D at95%6months alone is positive, but12months and both97.5% intervals cross0; cannot choose the favorable setting.",
+      "counterexamples": "B-M down-month difference2015-2019+0.7153pp but2020-2025-0.0509pp; later B-D-0.0369pp and B-P-0.0229pp. Better full-sample marked drawdown/worst-month descriptions cannot override this instability."
+    },
+    "standalone_financial_risk": {
+      "decision": "describe_bounded_risk_evidence_against_P_separately_from_momentum_increment",
+      "evidence": "Common CFO F-P+0.4226pp,97.5%6month[+0.0628,+0.8057],12month[+0.0670,+0.7664]. Common GP F-P+0.3671pp has positive97.5%intervals too. GP primary F-P+0.2898pp is positive only at95%;97.5%intervals include0, revealing qualification-pool sensitivity.",
+      "stability": "CFO F-P down-month mean+0.7360pp in2015-2019 and+0.1582pp in2020-2025; GP primary+0.5681/+0.0620pp and common+0.5556/+0.2080pp.",
+      "limit": "A positive F-P conditional-risk difference is not evidence of incremental value after momentum, and common-versus-primary observations are not independent replications. All B-F uncertainty intervals cross0."
+    },
+    "diversification_and_maintenance": {
+      "decision": "descriptive_list_stability_only_no_confirmed_net_operating_or_independent_diversification_benefit",
+      "evidence": "Common F-M return correlation about0.973GP/0.977CFO despite rank correlations0.044/0.078. Target replacement about27.02% for M,14.57/14.95% for F,25.17/25.18% for B and17.68% for D.",
+      "limit": "This is target-list change before realized holding drift, fills and fees. Financial-source/version maintenance adds work; human hours and net costs unmeasured. High co-movement does not disprove modest conditional risk benefit; it does rule out presenting low rank correlation as established independent portfolio behavior."
+    }
+  },
+  "why_no_additional_experiment_is_required_now": {
+    "decision": "close_current_bounded_historical_question_after_existing_delivery_checks",
+    "basis": [
+      "The necessary risk uncertainty gap identified after the core is now answered using the already-frozen monthly series; return, risk and other-use claims can each be made with their actual evidence strength.",
+      "Both positive and negative evidence are preserved. No unresolved arithmetic discrepancy remains. A limited exploratory risk lead does not by itself require every possible baseline or a new market.",
+      "The existing joint industry-by-nine-cell audit leaves about93%weight in hold-all tiny cells and changes median B-M weights by only2.6%-2.9%;27/33/34 months are identical. It cannot fairly establish broad independence and should not be mechanically run as a pass/fail requirement.",
+      "Answer beyond all existing volatility/liquidity/value information, new ETF/market/history or live account deployment is outside the current supported question and requires its own scope. Do not merge groups, relax thresholds, rerun sealed momentum or use remaining budget to search positive results."
+    ],
+    "remaining_delivery": "Root must finalize report text/tables and normal archive/registry/reproducibility checks. Those are delivery tasks, not a reason for new financial experiments.",
+    "budget_state": "Core1 used; purposeful followup1 used out of maximum3. Unused allowance is not a research obligation. Source acquisition ended with its failures and0remaining permitted requests."
+  },
+  "report_draft_review": {
+    "reviewed_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-profitability-increment-2026-10-19.md",
+    "reviewed_sha256": "943b4376bdb37b83e8d9005a03484c99d6641bc752c17ff6b865ebba77a27c84",
+    "status": "initial_draft_review_superseded_by_latest_report_readback",
+    "acceptable_existing_boundaries": "Draft already distinguishes common and primary pools, quotation versus account wealth, later-period return reversal, source missingness, old-notice recovery, post-observed price history and no production/ETF inference. These are retained.",
+    "initial_requested_changes": [
+      {
+        "location": "Opening status, one-line conclusion, risk placeholder, minimum decision card and archive placeholder",
+        "change": "Replace pending-risk wording with completed limited findings above. Preserve no-average-return-increment and exploratory/source/execution caveats. Do not describe risk as untested after this successful follow-up."
+      },
+      {
+        "location": "Return increment table",
+        "change": "Add both frozen B-P comparisons currently omitted: common GP+0.0322pp/month,12month97.5%[-0.2173,+0.3211];common CFO+0.0576pp,[-0.2154,+0.3151] under the report minus100 scenario. This completes all5 original comparisons without selecting outcomes."
+      },
+      {
+        "location": "Performance-table column heading and risk text",
+        "change": "Use 同池平均配置下跌的月份 instead of 全部股票下跌月份, which could imply every individual stock falls. State59common/60primary down months; this state is observed after the month and is not a trading trigger."
+      },
+      {
+        "location": "Risk section",
+        "change": "Show both candidates B-M and B-D with6/12month97.5%ranges; state95%results and both unknown scenarios were also reviewed. Include primary GP B-M, common CFO F-P and GP-primary F-P sensitivity so a favorable subset is not promoted. State CFO later-period reversal and GP worst-month/early-tail counterexamples."
+      },
+      {
+        "location": "Competition-explanation table row already reflected in price trend",
+        "change": "Replace blanket 尚未证明新增价值 with 尚未证明额外平均收益；下跌月风险用途有有限证据, maintaining distinction between return and risk."
+      },
+      {
+        "location": "System-gap paragraph 强简单对手的区分能力有限",
+        "change": "Specify the sparse industry×volatility/liquidity joint comparison. Ordinary core industry-only M/B has meaningful selection opportunity, so do not suggest the core simple opponent itself was mechanically indistinguishable."
+      },
+      {
+        "location": "Maintenance wording 600股完整按月资料",
+        "change": "Say 固定600股的月度记录 or 完整600×132记录网格 to avoid implying every financial field is complete. Keep observed list stability separate from validated lower net human cost."
+      }
+    ]
+  },
+  "allowed_mean_decomposition": {
+    "scientifically_acceptable": true,
+    "formula": "overall mean paired difference = (n_Pdown/132)*mean difference in P<0 months + (n_Pnonnegative/132)*mean difference in P>=0 months",
+    "limit": "Pure arithmetic attribution of this same series, not another optimization or independent benefit. Label remaining months as P>=0, not necessarily strictly rising. Keep both scenarios and original dates, do not imply known-in-advance switching or a causal protection premium/opportunity cost."
+  },
+  "required_final_limits": [
+    "Follow-up chosen after seeing core risk results; it is exploratory.97.5%intervals are not a simultaneous guarantee across all metrics,comparisons or family attempts.",
+    "Retain fixed2014historical cohort, financial-qualified selection bias, incomplete sources, retrospective annual industry snapshots and about88%v2 measurement recovery with old notices unresolved.",
+    "The inspected price history is not an unseen validation set. Shared months/stocks and repeated annual values limit independent evidence.",
+    "Low statistical overlap is not investment usefulness. Limited historical risk evidence does not prove independent financial mechanism beyond volatility/liquidity/value.",
+    "No live state prediction, timing/switch rule, account fills, fees, corporate-action wealth or ETF application was tested. No originalLEI financial hard filter or trading adoption authorized."
+  ],
+  "final_fact_wording": "在这批历史可比股票中，毛利与动量各占一半的固定评分，没有证明能多赚钱；但在同池平均配置下跌的月份，相对简单动量平均少亏约0.34个百分点，前后时期方向一致，补充检验的不确定范围仍为正。可保留为有限风险用途的历史证据。经营现金单独选股也有少亏线索，加入动量后的额外保护尚不明确。本轮按此范围结案，不转为ETF或实盘规则。",
+  "latest_report_readback": {
+    "checked_utc": "2026-10-19T06:28:14.317798+00:00",
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-profitability-increment-2026-10-19.md",
+    "sha256": "943b4376bdb37b83e8d9005a03484c99d6641bc752c17ff6b865ebba77a27c84",
+    "main_conclusion": "accepted_with_bounded_historical_risk_evidence_and_no_average_return_or_implementation_claim",
+    "risk_table": "reviewed numeric values agree with frozen follow-up; GP primary/common and CFO common F-P/B-M/B-D plus text B-P/B-F context retained",
+    "newly_resolved": [
+      "Both omitted B-P return rows added correctly.",
+      "Risk placeholder, one-line pending phrase, decision card and archive placeholder replaced.",
+      "59/60down months, post-core selection, after-the-fact P<0 state, missing-scenario equivalence, GP/CFO differing conclusions and sparse-nine limitation retained.",
+      "Same-series nonnegative-month decomposition is worded as arithmetic rather than causal attribution."
+    ],
+    "minor_remaining_wording_precisions": [
+      {
+        "from": "全部股票下跌月份的平均变化",
+        "to": "同池平均配置下跌月份的平均变化",
+        "reason": "Avoid implying every individual stock fell."
+      },
+      {
+        "from": "强简单对手的区分能力有限",
+        "to": "同时控制行业、波动与成交活跃程度的细分比较区分能力有限",
+        "reason": "The core ordinary industry-only M/B is meaningfully distinct; only the finer joint cells collapse."
+      },
+      {
+        "from": "不能仅用稀释动量解释本次结果",
+        "to": "本次指定的一半动量、一半全体方案未复现全部少亏差额；其他风险构成解释仍未排除",
+        "reason": "One dilution benchmark does not eliminate every generic momentum-dilution or volatility-exposure explanation."
+      },
+      {
+        "from": "竞争解释表中尚未证明新增价值",
+        "to": "尚未证明额外平均收益；有限下跌月风险证据另述",
+        "reason": "Do not make a blanket no-value claim after a use-specific risk finding."
+      }
+    ],
+    "scientific_retest_needed": false,
+    "closure": "Current bounded scientific question can close; these wording clarifications and normal registration/delivery are report tasks."
+  }
+}

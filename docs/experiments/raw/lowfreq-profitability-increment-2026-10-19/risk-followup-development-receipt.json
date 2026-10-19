@@ -1,0 +1,34 @@
+{
+  "schema": "financial-risk-followup-development-receipt/1",
+  "created_utc": "2026-10-19T06:20:49.192883+00:00",
+  "scope": "source-bound post-core P-down conditional paired mean interval runner and synthetic tests only",
+  "design": {
+    "path": "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/risk-followup-design.json",
+    "sha256": "261c2fa8b321e6990e16f250e8bd20234d3eb14cc0f8ef6733784a438a8f0093"
+  },
+  "files": {
+    "risk_conditional_followup.py": {
+      "sha256": "0b7e45572406a469915812241fc9990b0a198cee865ebaaf2c7cd6eee5b37c7c",
+      "bytes": 13837
+    },
+    "test_risk_conditional_followup.py": {
+      "sha256": "e4beca42568b2f47b1c6222b9bab7c706d9e6b15ddeef4c4ecd902bb595c04be",
+      "bytes": 5618
+    }
+  },
+  "synthetic_tests": {
+    "command": "python3 -B -m unittest -v test_risk_conditional_followup.py",
+    "passed": 7,
+    "failed": 0,
+    "core_shared_index_sha256": {
+      "6": "b717407ab8165ec58a25c87210c2faa1741ec01867814ce5e9202f40f0ae7ec7",
+      "12": "a08ac269b8961267b790b4b721128f3f34b97f19254ab567a0f225afd913f64d"
+    }
+  },
+  "real_effect_run": "not_run",
+  "pending": "Root binds a final contract including exact runner SHA and external device identity; Luna executes once; root independently checks scientific interpretation.",
+  "limits": [
+    "Only original P-negative month paired quote differences and original 132-date circular block draws are computed.",
+    "Intervals are exploratory and cannot establish adoptable risk protection."
+  ]
+}
