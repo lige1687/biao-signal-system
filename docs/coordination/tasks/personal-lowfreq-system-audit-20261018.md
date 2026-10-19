@@ -1,3 +1,16 @@
+# 经典月度反转链路诊断已交付 2026-10-20T00:21:02.019963+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次有界历史诊断；scope_released true。checked_coordination_sha=e455b77684640fc8f5d1f82cbe2c1c6899a2401e；checked_at=2026-10-20T00:21:02.019963+08:00；已读COORDINATION、自身、research-utility-review-20261012、lowfreq-strategy-discovery-20261019、investor-workspace-simplification-20261012及中控；其他owner四项经典复现/原LEI/ETF/账户/UI不接管。
+- 主体成果codex/personal-lowfreq-system-audit-20261018@42e914ab1990d91ee8e6805fe8d288a62c6a82f3：30准确文件全部远端字节读回；目标与进度后继787a6d52125f1e82a0ab9d6e8dfaf305a0737323，2文件推送/fetch/字节核同。报告docs/experiments/classic-factor-chain-diagnostic-2026-10-20.md，SHA31a41c91f442cef219662175bc2929d34c7fb73c13494dea45dcfca84f281818；raw同名目录，登记/INDEX完成。主树未合入，不宣称其他机器完整依赖已齐。
+- 结果：原600历史队列保留资格分母、隔离sz.001914一源，2015—2025共132月，每月442—577信号合格；平均原始IC−0.062779、取反+0.062779，12月块95范围[-0.085150,-0.040259]；2017反向，5组不严格单调。取反不增信息，不以匹配文献范围判系统通过。真实财报、市值、成本/可成交、ETF收益未验证。
+- 新来源缺口：sz.001914原返回1560行adjustflag3而请求2；旧lowfreq_discovery._quotes只核请求，旧per_stock有132记录及311方法选择记录。价格究竟应怎样调整/旧数值影响仍未核，不宣称全部价格错或旧结论已推翻。原件/旧源码/冻结不变，本轮core在统计前拒绝，addendum在看效果前隔离该源后跟进完成。未来调用须核返回字段，既有结果需有理由纠错，不盲重跑。
+- 验收：600源+名册/日历/代码SHA、79,200资格行、660组权重/贡献、原生Rank入口264项差<1e-16、9原价端点/两个极端月独算一致；当前工程80过/1旧冻结文档漂移拒绝，失败保留。时间元数据伪声明控制说明不能只靠接口声明防未来。新raw五组为本次诊断，未说全正式入口接通。成果树归置器准确三路径白名单修复后全绿，主树不改。
+- 预算：本新问题来源6/6，core失败1/1，必要跟进1/3已完成；旧P1/P2/P3不重置。Luna low只读、Sol medium单脚本、root源码/科学与独核；费用未知。外盘UUID和新core plan固定，实际普通结果约49MB；内盘小产物约百KiB，报告/registry等依原处。原预检工程日志与真实core结果两目录留痕，无资料删除。
+- 系统目标okr-8830a1f1ec4f仅note20→21读回，status仍in_progress，owner/授权/milestones/evidence/next_action/links保护字段未变；结果待用户验收。无后台研究/生产/交易/通知。
+- 后续有界问题：先解决该源复权语义及历史用途影响；规模/BP/EP需合格的历史市值、权益/利润及发布时间/修订版本，当前缺口不以价格IC通过代验。恢复从本报告/raw/trial-ledger开始，不复跑已完成诊断寻求更贴近文献的数值。
+
+---
+
 # 经典诊断交付前核对与窄范围归置修复 2026-10-20T00:17:12.017482+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=0a5e89ee66c499e7efa42f8ac5e502eafc0824aa；checked_at=2026-10-20T00:17:12.017482+08:00；已读self、research-utility-review-20261012、lowfreq-strategy-discovery-20261019、investor-workspace-simplification-20261012、中控与COORDINATION；无新同题/同路径冲突，其他四因子复现不重做。
