@@ -1,3 +1,13 @@
+# 价值、长期反转及价值动量互补复现启动 2026-10-20T01:21:07.487224+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=222b5aa11cc95e242ff4fabbf2c5ef2a9bd43a70；checked_at=2026-10-20T01:21:07.487224+08:00；已读COORDINATION/self/personal工具审查01:19/system00:57/dispatch；低频价值原owner来源资格报告只读复用。与工具可用性审查不重叠，不接管原A股600股财报映射/预算。
+- 用户要求价值A股美股复现、长期反转、均值回归区分，先价值后与动量互补，异常结果检查代码流程。新有界问题：官方公开价值与价值动量原组合可否核算，原始逐股复现还缺什么；长期反转先核准确经典定义与旧实验，均值回归为问题类别不冒名一个因子。独立选股扩展，LEI技术生产/原文不改。
+- root唯一写docs/experiments/value-momentum-reversal-replication-2026-10-20.md及同名raw、registry本键/INDEX本行、原progress/目标note。本题raw/run_reference.py可单派Sol；不改共享代码或正式定义。源文献和大结果默认外盘预计64MiB/本机400KiB，预检后执行。
+- 复用原A股年度价值资格：旧8例未ready，无旧价值收益；旧来源5/6及供应商4/4不能重置。本轮新官方公开资料问题按US价值、China价值、价值动量原组合各最多6来源请求，已分别1/2/2；反转原文优先本地复用、最多6，旧月反转不重跑。公开效果最多1核心+3必要跟进，先资格和设计冻结，不参数网格。原逐股范围缺输入则明确blocked而非拿组合替代。
+- Sol medium value_reversal_reuse只读旧报告/字段/预算，网络写入市场计算皆无；parent统一来源和设计，关键方法可Astra审阅。验收：原方法、性能、相对动量增量/风险与成本、A美边界及异常审计；独立复算、Web与Agent报告读回、原登记/策略不变。实际费用未知；无付费、生产、交易、通知、删除或自动后台。主基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，主树脏状态保留，本地研究不自动提交；协调元数据单独推后核。
+
+---
+
 # 现金经营盈利与应计阶段交付 2026-10-20T01:17:58.697012+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅原文/公式演练/公开组合核算，原US逐股复现与本地条件增量blocked_original_inputs；scope_released true。checked_coordination_sha=be27d54dc6b506856d013fe30ea8667b3907996f；checked_at=2026-10-20T01:17:58.697012+08:00；已读COORDINATION/self/personal最新三候选01:14/lowfreq-strategy-discovery/system/dispatch，CashOP/应计与低beta/资产/股份无重叠。其他owner财务修复不接管。
