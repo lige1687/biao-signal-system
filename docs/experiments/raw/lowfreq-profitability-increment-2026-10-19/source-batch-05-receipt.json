@@ -1,0 +1,92 @@
+{
+  "schema": "source-batch-receipt/1",
+  "run_id": "source-batch-05",
+  "snapshot_context": {
+    "state": "running_partial_snapshot_for_preparation_only",
+    "snapshot_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/progress-source-batch-05.json",
+    "snapshot_sha256": "609cf5d71c5330e981334b7716a8cc1a492370d9cf89eab8798652f6ba098c1a",
+    "snapshot_captured_utc": "2026-10-19T05:07:05.585312+00:00",
+    "frozen_journal_prefix_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/journal-completion-pdf-source-batch05.jsonl",
+    "frozen_journal_prefix_sha256": "3aafcde16143b9566e0ef0c944fff1d361b21872879cded6818cc6b467ee6cc0",
+    "verified_prefix_event_counts": {
+      "start": 668,
+      "finish": 664
+    },
+    "global_stop": false,
+    "source_boundary_acceptance": false
+  },
+  "execution": {
+    "command": "python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_batches.py --contract docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-batch-05-contract.json",
+    "pid": 52233,
+    "terminal_session_id": 96110,
+    "exit_code": 0,
+    "elapsed_seconds": 144.73197541595437,
+    "created_utc": "2026-10-19T05:07:37.761214+00:00",
+    "network_used": false,
+    "market_effects_run": false
+  },
+  "hashes": {
+    "contract": "d254e10301d8ad282668c9ab96a1e4efda878458ee815e0da4ded5dd09bdc067",
+    "manifest": "5ac51b06ac69d328c6c501eeb065fe065525f85938507a62690dfc0405fd78e9",
+    "runner": "522a6747b59d2aeee499ce717e4a8d1c9d7f612acd1fd7482e6f90b08a58eb8f",
+    "parser": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+    "preparer": "3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012",
+    "progress_snapshot": "609cf5d71c5330e981334b7716a8cc1a492370d9cf89eab8798652f6ba098c1a",
+    "reuse_batch04_manifest": "c9984151918606070f04096531570cde3ff49a33037cb061a34403ac45a44764"
+  },
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-05",
+  "storage": {
+    "checks": {
+      "mounted": true,
+      "uuid_matches": true,
+      "device_matches": true,
+      "external_result_exists": true,
+      "result_on_expected_device": true,
+      "output_is_new_child": true,
+      "output_absent": true,
+      "free_reserve_ok": true,
+      "storage_plan_not_execution_authority": true
+    },
+    "storage_plan_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-bulk-plan.json",
+    "storage_plan_sha256": "99c1b2b77f24b4206b86f5efc611b223bbb8d24f1ac447147b9d25115c369979",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "reserve_bytes": 10737418240
+  },
+  "documents": {
+    "new": 664,
+    "reused": 8988,
+    "manifest_total": 9652,
+    "record_hashes_verified": 9652,
+    "hash_failures": 0,
+    "notice_text_records_verified": 4207,
+    "runner_errors": 0,
+    "unprepared_document_states": 4129,
+    "unprepared_reasons": {
+      "body_above_saved_byte_cap; prefix_preserved": 7,
+      "ChunkedEncodingError: ('Connection broken: IncompleteRead(233168 bytes read, 354764 more expected)', IncompleteRead(233168 bytes read, 354764 more expected))": 1,
+      "non_pdf_response": 3,
+      "no_finish; never_retry": 4,
+      "unissued": 4114
+    }
+  },
+  "source_attempt_state": {
+    "code_dictionary_keys": 600,
+    "status_counts": {
+      "complete": 399,
+      "incomplete": 201
+    },
+    "catalogs_known_for_all_600": true,
+    "all_sources_terminal_or_accepted": false,
+    "running_partial_snapshot_for_preparation_only": true,
+    "operation_counts": {
+      "catalog": 1237,
+      "pdf": 9668,
+      "total": 10905
+    },
+    "unfinished_journal_starts_at_snapshot": 4
+  },
+  "version_chain_completeness_inferred": false,
+  "scope_note": "Prepared newly finished originals from the immutable 664-finish prefix and reused 8,988 exact batch-04 records. The source acquisition stage was still running when the snapshot was taken; this is not final source acceptance or a complete final-source boundary. No HTTP requests or effect calculations were performed."
+}

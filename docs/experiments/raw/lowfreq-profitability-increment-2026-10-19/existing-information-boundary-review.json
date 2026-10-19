@@ -1,0 +1,104 @@
+{
+  "schema": "financial-existing-information-boundary-review/1",
+  "review_date": "2026-10-19",
+  "mode": "bounded independent method review; root adjudicates",
+  "financial_effect_data_inspected": false,
+  "experiments_executed": 0,
+  "network_requests": 0,
+  "summary_plain": "冻结核心足以回答：在同一批合格股票、相同行业比重下，加入盈利或经营现金资料是否比简单动量选择更好。它不能回答是否超过已有的波动和成交活跃程度分组信息。只有出现拟保留的收益或风险改善解释时，才有必要用同一批保存资料补做一次更丰富条件下的比较；核心没有显示改善时，不自动继续寻找有利方法。",
+  "reviewed_sources": [
+    "financial-design.v1.json",
+    "financial-design-amendment-01.json",
+    "financial-design-amendment-02.json",
+    "docs/experiments/lowfreq-expanded-discovery-2026-10-19.md",
+    "src/lei_signal/research/lowfreq_discovery.py::_features",
+    "src/lei_signal/research/lowfreq_discovery.py::_rank_partition",
+    "src/lei_signal/research/lowfreq_discovery.py::_conditional_groups",
+    "src/lei_signal/research/lowfreq_discovery.py::_combined_cell_weights",
+    "src/lei_signal/research/lowfreq_discovery.py::_evaluate",
+    "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/execution-freeze-v2.json"
+  ],
+  "required_before_valid_core": {
+    "additional_stronger_baseline_required": false,
+    "reason": "A defined simple baseline is sufficient for an explicitly baseline-limited question. Core M is newly industry-controlled on the financial-qualified pool; old whole-pool momentum performance does not establish M is weak in this different comparison.",
+    "existing_requirements_remain": [
+      "Finish source qualification under the immutable source contract and amendment 02; this review does not qualify any financial record.",
+      "Verify as-of financial values, sector timing proxy, same pool, same industry weights, ranking/ties/tiny-sector rules, shared future outcome values, missing-outcome weight retention, and independent arithmetic before claims.",
+      "Report F-P, B-M, B-D, B-P and B-F with all frozen return/risk/maintenance measures and uncertainty. A B-M gain alone is insufficient to call the more complex method worth retaining if it simply repairs a poor M and does not improve the relevant P/D comparison.",
+      "For direct GP versus CFO conclusions recompute GP on the identical cash_common pool; do not compare each candidate's preferred coverage.",
+      "Do not interpret score correlation, holdings differences, or low return co-movement alone as useful increment or proof of an independent financial mechanism."
+    ],
+    "permitted_core_claim": "在这批历史合格股票与固定行业比重下，本次固定组合相对简单行业内动量的收益/风险差额为……；结果仅针对这两个财务指标及这个组合方式。",
+    "prohibited_core_claims": [
+      "财务信息已超过所有已有价格信息或已证明独立价值",
+      "低相关就表示能改善组合",
+      "GP/A或CFO/A已验证完整质量、盈利真实性或因果机制",
+      "未超过当前M证明财务信息对所有方法无用"
+    ]
+  },
+  "old_nine_exact_compatibility": {
+    "features": {
+      "momentum": "saved valid-quote close[i-21]/close[i-252]-1; no calendar-window reinterpretation",
+      "vol60": "sample standard deviation of 60 close-to-close returns over 61 common-calendar closes, multiplied by sqrt(252), as emitted by the frozen evaluator",
+      "amount20": "mean of 20 common-calendar daily amounts, preserving the original qualified halt normalization"
+    },
+    "partition": "Sort the entire eligible month pool by (vol60 ascending, code ascending); split into three contiguous groups of size floor(n/3), with the first n mod 3 groups receiving one extra. Inside each volatility group sort by (amount20 ascending, code ascending) and apply the same partition. This is nested grouping, not two independent global terciles or quantile cutpoints.",
+    "selection": "Within each of the nine cells sort by (-momentum, code), select ceil(n_cell/5), equally weight selected members within cell; multiply by n_cell/N. Original implementation does not impose the current n<5 hold-all rule.",
+    "why_saved_headline_not_direct_comparator": [
+      "Old eligible pool includes names now excluded by financial qualification, unknown industry or financial-industry exclusion; the old cell boundaries and ranks differ.",
+      "Old nine-cell selection controls cell shares but not industry shares. Core M/B explicitly preserve industry shares.",
+      "Original old-core uncertainty settings differ from the new core. Compare paired new month-level weights/outcomes under the current frozen uncertainty method, not old confidence intervals against new ones.",
+      "The old nine-cell method is a richer information reference with a historical lead, not an established superior strategy or independent confirmation."
+    ],
+    "reuse_available_in_code": "The frozen per_stock_month.csv writer includes month/code, eligibility_reason, momentum, short, vol60, amount20, decision/entry/exit dates, future_return, outcome_reason and halt fields. This is code-schema evidence only: root must confirm actual saved file headers, fingerprints and joins before any follow-up. No external data read or new retrieval occurred in this review.",
+    "sealed_boundary": "Never invoke the old evaluator, rerun the old momentum study, rewrite original output or import old return aggregates as the financial baseline. A new recorded comparison may derive new weights only from authorized saved decision-time fields and reuse the same saved outcomes."
+  },
+  "conditional_next_check": {
+    "status": "conditional method proposal, not executed and not a new authorization",
+    "trigger": "After core reconciliation, root proposes retaining financial information for a return or downside-risk benefit beyond simple industry-controlled momentum, and existing vol60/amount20 exposure differences could plausibly explain that benefit. This includes a risk-only claim. A positive point estimate with uncertainty still spanning material deterioration remains inconclusive; follow-up cannot upgrade it by selecting a prettier statistic.",
+    "not_triggered_by": [
+      "Core provides no supported or decision-relevant improvement and the conclusion stays limited to tested combinations; do not seek a favorable conditional interaction.",
+      "Only descriptive report-update burden, replacement magnitude or overlap is being reported without a benefit claim.",
+      "A wish to prove all possible independence or beat every historical baseline."
+    ],
+    "single_question": "Does the same half-momentum/half-financial ranking still change return or downside risk relative to momentum and its simple dilution when industry, past volatility group and amount group weights are all held equal?",
+    "single_design": {
+      "inputs": "Use each already-frozen core pool-month, saved momentum/vol60/amount20, qualified industry and financial scores; same 132 scheduled months and original outcome/availability rules. Preserve primary GP pool and existing common-pool candidate comparisons; no candidate chosen by financial effects.",
+      "groups": "On each financial-qualified pool first reconstruct the exact nested global nine cells described above. Intersect each cell with the existing qualified industry label. These joint cells preserve both industry and volatility/liquidity-cell shares. Do not create nine cells separately within each industry, which is a different conditioning rule.",
+      "weights": "Give each nonempty joint cell share n_joint/N. In cells n_joint<5 all methods hold every cell member equally. In cells n_joint>=5 select ceil(0.2*n_joint), equally weighted within cell. Sum shares; total target weight equals one with no cash created.",
+      "scores": "M_star selects highest saved momentum with code tie-break. B_star selects highest 0.5 within-joint-cell momentum percentile + 0.5 within-joint-cell financial percentile, using average ranks for equal values and code tie-break. D_star is 0.5*M_star +0.5*P, adding overlap. P is the same full-pool equal-weight target.",
+      "contrasts": "Primary B_star-M_star; dilution diagnostic B_star-D_star; retain B_star/P performance context using the same frozen core outcome definitions. This is one prespecified conditional comparison, not separate optimized strategies or a grid.",
+      "uncertainty": "Use the frozen shared month resampling indices, 6/12-month lengths, 10000 draws and both candidates' reporting discipline. Same P-down months, unknown-result scenarios and no discontinuous stitched wealth path.",
+      "compatibility_limit": "This is an industry-controlled extension of the old nine-cell information set, not a replication of old nine-cell portfolio performance. Joint-cell ranking and n<5 hold-all differ intentionally and must be disclosed. It cannot rule out all continuous volatility/liquidity effects within cells or omitted valuation/size effects."
+    },
+    "support_preflight_before_effects": [
+      "Verify actual saved fields and hashes; do not repair missing features from new downloads or future records.",
+      "Report by month/period/pool joint-cell counts, n distribution, weight in n<5 hold-all cells, weight where B_star can actually differ from M_star, selected counts and top-name concentration. Inspect these without future outcomes.",
+      "Joint cells may be sparse with at most 600 stocks and many industries. If every relevant joint cell is tiny, the comparison is mechanically identical and cannot test added selection; do not count zero as financial ineffectiveness.",
+      "If only a small share can differ, root must record whether it meaningfully tests the proposed claim before outcomes. There is no invented retrospective coverage pass threshold. Report the actual supported share and restrict the conclusion to it; do not loosen cell rules, merge sectors or search group counts to gain power.",
+      "Do not scale the small exposed share's result into a full-portfolio promise or select only favorable supported months."
+    ],
+    "required_evidence": [
+      "Pre-effect branch decision, immutable source/code hashes and accounting under the original follow-up budget; preserve core outputs unchanged.",
+      "Independent small numerical fixtures for nested partition remainder handling, ties, industry intersection, tiny cells, overlaps and weight sums.",
+      "Saved stock-month weights and joined source identities; no future return field reaches membership, grouping, ranking or weights.",
+      "Numerical equality of industry and original nine-cell weight totals across methods each month; shared outcome values and missing weight treatment.",
+      "Paired effect table with magnitude/uncertainty, every year and both frozen periods, original counterexamples and use-specific judgment; selected-after-core status remains exploratory."
+    ],
+    "budget": "At most one purposeful follow-up under root's existing max-three allowance, currently zero used per delegation. The pre-effect support audit is not a hidden return experiment. No source calls, old-core rerun, grid, or budget increase.",
+    "if_uninformative_or_unavailable": "Keep the valid narrow core answer and state: 尚未判断是否超过已知的波动和成交活跃程度信息；同时控制这些条件后的可比较股票不足。Do not claim the broader independent-value question is completed, and do not substitute an unfair old-aggregate comparison."
+  },
+  "optional_new_questions_not_required_now": [
+    "Exact unadjusted old-nine policy replication on the financial pool, which abandons fixed industry weights and answers a different policy comparison.",
+    "27-cell short-return conditioning, alternative windows, ranks, blends, industry schemes, financial definitions or dynamic switching.",
+    "Joint continuous exposure models, valuation/size attribution, new markets/ETF cohorts, genuinely unseen history, real fees/fills or account capital simulation."
+  ],
+  "mechanisms_and_remaining_confounders": [
+    "Higher GP/assets may represent productive assets but also industry capital intensity, valuation or accounting structure. Fixed industry weights remove industry allocation differences, not within-industry business-model or valuation differences.",
+    "CFO/assets may reflect durable cash generation or temporary working-capital/tax/cycle timing. GP and CFO are distinct fixed hypotheses; neither certifies honest profit.",
+    "A rank blend can lower exposure to extreme momentum and thereby change losses without supplying a new financial mechanism. D is a necessary simple dilution reference, though it does not match every nonlinear holding effect.",
+    "Volatility/amount conditioning probes an existing explanation with saved information. Passing it is a narrower historical conditional result, not causal independence, an unseen confirmation, or evidence that every existing factor has been beaten.",
+    "Report qualification and historical sector proxies limit eligible coverage. Effects on their common pool do not establish effects for missing reports, excluded financial firms, later IPOs, ETFs or the user's account."
+  ],
+  "root_decision_needed": "Accept or reject the conditional proposal before any corresponding financial-effect run; preserve the frozen core and its legitimate narrow conclusion. This reviewer does not start follow-ups or allocate the parent's budget."
+}

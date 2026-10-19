@@ -1,0 +1,181 @@
+{
+  "schema": "source-batch04-quality-audit/1",
+  "scope": "read-only source preparation increment after batch03; no returns, HTTP, fitting, panel rule change, or parser repair",
+  "status": "source_only_audit_complete_partial_acquisition",
+  "inputs": {
+    "batch03_manifest": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-03/manifest.json",
+      "sha256": "587bd466eaa7fb0628a9d097dc605f0a392b48851652d31ff1b601f163502374"
+    },
+    "batch04_contract": {
+      "path": "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-batch-04-contract.json",
+      "sha256": "35fb187ee5766e2de8911b3b3f08e2af0b45017bd51aa16d633e7da6cbf4eed2"
+    },
+    "batch04_manifest": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-04/manifest.json",
+      "sha256": "c9984151918606070f04096531570cde3ff49a33037cb061a34403ac45a44764"
+    },
+    "accepted_parser_v3_independent_review": {
+      "path": "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/parser-v3-independent-review.json",
+      "sha256": "32214581d5c90ba576a23be4feaffeab457c0578c1530ffe35c3a5d2771d99b6"
+    }
+  },
+  "increment": {
+    "new_documents": 1928,
+    "reused_prior_documents": 7060,
+    "total_documents": 8988,
+    "code_source_status": {
+      "complete": 374,
+      "incomplete": 16,
+      "pending": 210,
+      "running": 0
+    },
+    "unprepared_document_states": 16,
+    "unprepared_reason_counts": {
+      "body_above_saved_byte_cap; prefix_preserved": 7,
+      "ChunkedEncodingError: ('Connection broken: IncompleteRead(233168 bytes read, 354764 more expected)', IncompleteRead(233168 bytes read, 354764 more expected))": 1,
+      "non_pdf_response": 3,
+      "no_finish; never_retry": 4,
+      "global_stop_or_budget_exhausted": 1
+    },
+    "batch_errors": 210,
+    "batch_error_reasons": {
+      "code_state_not_final_complete_or_incomplete": 210
+    },
+    "document_form_identity_counts": {
+      "suspected_full_text|match": 1027,
+      "suspected_full_text|identity_unknown": 47,
+      "unknown|match": 628,
+      "notice|match": 83,
+      "unknown|identity_unknown": 60,
+      "other_or_year_mismatch|match": 76,
+      "suspected_full_text|weak_match": 2,
+      "notice|identity_unknown": 3,
+      "other_or_year_mismatch|identity_unknown": 2
+    },
+    "parser_status_counts": {
+      "unknown": 216,
+      "not_run": 882,
+      "qualified": 830
+    },
+    "field_status_counts": {
+      "assets|unknown": 183,
+      "revenue|unknown": 197,
+      "cost|unknown": 193,
+      "cfo|unknown": 196,
+      "assets|qualified": 863,
+      "revenue|qualified": 849,
+      "cost|qualified": 853,
+      "cfo|qualified": 850
+    },
+    "field_unknown_reasons": {
+      "assets|current_column_header_missing": 36,
+      "revenue|consolidated_table_missing": 5,
+      "cost|consolidated_table_missing": 5,
+      "cfo|consolidated_table_missing": 5,
+      "assets|currency_not_verified_as_rmb": 125,
+      "revenue|currency_not_verified_as_rmb": 127,
+      "cost|currency_not_verified_as_rmb": 127,
+      "cfo|currency_not_verified_as_rmb": 131,
+      "revenue|field_ambiguous_or_amount_unreadable": 18,
+      "cost|field_ambiguous_or_amount_unreadable": 16,
+      "cfo|field_missing": 14,
+      "revenue|annual_report_period_not_verified": 10,
+      "cost|annual_report_period_not_verified": 10,
+      "cfo|annual_report_period_not_verified": 10,
+      "assets|annual_report_period_not_verified": 2,
+      "revenue|current_column_header_missing": 23,
+      "cost|current_column_header_missing": 23,
+      "cfo|current_column_header_missing": 27,
+      "assets|report_period_year_or_duration_mismatch": 9,
+      "assets|adjusted_or_multiple_columns": 4,
+      "revenue|report_period_year_or_duration_mismatch": 2,
+      "cost|report_period_year_or_duration_mismatch": 2,
+      "cfo|report_period_year_or_duration_mismatch": 2,
+      "assets|unit_missing_or_conflicting": 1,
+      "assets|consolidated_table_missing": 1,
+      "revenue|field_missing": 3,
+      "assets|current_and_comparative_columns_not_verified": 4,
+      "revenue|current_and_comparative_columns_not_verified": 3,
+      "cost|current_and_comparative_columns_not_verified": 3,
+      "cfo|field_ambiguous_or_amount_unreadable": 1,
+      "cfo|current_and_comparative_columns_not_verified": 1,
+      "cost|field_missing": 1,
+      "revenue|unit_missing_or_conflicting": 6,
+      "cost|unit_missing_or_conflicting": 6,
+      "cfo|unit_missing_or_conflicting": 5,
+      "assets|field_missing": 1
+    },
+    "currency_unknown_full_match_documents": 118,
+    "currency_unknown_full_match_codes": 23,
+    "qualified_amount_unit_sign_inconsistencies": [],
+    "same_day_same_fiscal_year_full_candidates": 10,
+    "same_day_fourfield_qualified_identical_groups": 7,
+    "same_day_fourfield_qualified_conflicts": [],
+    "qualified_parser_but_document_identity_nonmatch_count": 31,
+    "title_parser_fiscal_year_mismatch_count": 0
+  },
+  "independent_original_pdf_checks": [
+    {
+      "code": "sz.300284",
+      "announcement_id": "1223096868",
+      "title": "2024年年度报告",
+      "document_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-04/documents/300284-1223096868.json",
+      "document_sha256": "4d0c5d3670a48a0068f6b8392381444cfabd08e18c0a005279856fd8695425f0",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/07672-pdf.body",
+      "pdf_sha256": "7f530bc771dbc85c5365507be493b0800d597aa63bba186457d3388b79538047",
+      "parser_reason": "currency_not_verified_as_rmb",
+      "pypdf_original_pages_1_based": [
+        78,
+        83,
+        86
+      ],
+      "finding": "PDF has unit 元 on consolidated tables but no explicit RMB currency in inspected contexts; unknown is conservative, not a proven parser error"
+    },
+    {
+      "code": "sz.000961",
+      "announcement_id": "1213106981",
+      "title": "2021年年度报告",
+      "document_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-04/documents/000961-1213106981.json",
+      "document_sha256": "a363e7cf19c1da9871178d16f6b1a8f227e84488e018c1241c244c26121249c1",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/07618-pdf.body",
+      "pdf_sha256": "07e56e109a99eb2b7afa1c6d87608a1b996c6b384a28dbadf925a849217e2379",
+      "parser_reason": "current_column_header_missing",
+      "pypdf_original_pages_1_based": [
+        90,
+        92
+      ],
+      "finding": "PDF presents consolidated and parent company columns side by side; rejecting simple current-column extraction avoids silent parent/company mixing"
+    },
+    {
+      "code": "sz.000906",
+      "announcement_id": "1219792296",
+      "title": "2023年年度报告",
+      "document_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-04/documents/000906-1219792296.json",
+      "document_sha256": "bc328ab68bcc861bfb065c4b9b6269df17dadfe018efc9e4915d52975d98b746",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/09088-pdf.body",
+      "pdf_sha256": "ffb4de76aff45b723e1c526015b149efb4932839a27efb746876efd87756cbcf",
+      "parser_reason": "unit_missing_or_conflicting",
+      "pypdf_original_pages_1_based": [
+        106,
+        110,
+        112
+      ],
+      "finding": "PDF explicitly says 金额单位均为人民币元 near consolidated statements; this is a concrete unhandled unit phrase, retained unknown pending separate repair authority"
+    }
+  ],
+  "findings": [
+    "No qualified field in the 1928 new documents had an impossible nonpositive total asset, negative revenue/cost, or raw-value versus declared-unit mismatch.",
+    "The 118 full-text identity-matched documents across 23 codes with RMB-unverified reasons remain unknown; the inspected 苏交科 sample supports conservative exclusion when only 元 appears.",
+    "浙商中拓 2023 annual uses explicit 人民币元 phrasing on consolidated table pages, a concrete format gap; it must not be silently promoted by this audit.",
+    "中南建设 2021 combines consolidated and parent columns; rejection preserves no-mixing rule.",
+    "No conflicting same-day, same-year fully-qualified four-field duplicates found in this increment. Different-date same-year versions remain expected revisions, not inherently duplicate identities."
+  ],
+  "limits": [
+    "Only three new original PDFs were independently inspected, chosen by source failure category before any outcome review.",
+    "Counted parser statuses and consistency from 1928 new prepared JSONs; did not independently validate all new PDF financial amounts.",
+    "The parser-qualified-but-document-identity-nonmatch and title-year mismatch counts are diagnostic only; qualification requires the separate panel identity rules.",
+    "210 code-state errors are pending-code preparation states, not 210 parser failures.",
+    "Acquisition is partial: 210 codes pending and 16 incomplete in batch04."
+  ]
+}
