@@ -1,3 +1,13 @@
+# 将低频研究流程沉淀为项目Skill 2026-10-19T19:12:46.870374+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=0edb19172a1a6419ef4fefd344f3682c6b93ec9e；checked_at=2026-10-19T19:12:46.870374+08:00；已读COORDINATION/self18:38/system16:38/personal16:11/dispatch。用户明确要求沉淀研究Skill或AI可读项目MD，防后续重复踩坑；原owner已释放上轮文档范围，本轮延续，不改他人研究。
+- 范围：在主工作区新建 .agents/skills/lei-lowfreq-research/SKILL.md、agents/openai.yaml及必要references/failure-cases.md；AGENTS首屏接入；现有factor-discovery-playbook及lei-gpt-zcode-orchestrator只改路由/合并重复说明；原自身work-progress和目标note。root唯一写者，Sol只做隔离只读行为演练，无文件写权。
+- 不造第二研究平台/定义库/预算/执行器，复用research-closure、current-standards、发现指引、现有冻结/验收入口与报告归档。Skill是本项目决策与防错适配，普通问答/只规划不会误启动实验；原版/代理、时点/覆盖、风险/机会成本、负结果/停止均保留。
+- 验收：技能格式与元数据、所有项目相对链接存在、入口可到达、详细规范单一来源；两个无前史的执行者从真实简短请求及给定资料独立使用Skill，核结果而不只问是否理解；真实实验/网络/生产/交易均0。行为测试仅有限演练，不宣称所有AI或科学有效性保证。
+- 基线当前主树多人脏改动，精确局部补丁；本轮新小文字本机，保护原策略、规则、规范索引及历史报告/冻结产物，已耗尽来源预算不动。当前只登记，尚未声称Skill已创建或生效；远端仅协调元数据，无全局/仓外写入或自动化。
+
+---
+
 # 低频研究优先判断已接入现有AI入口 2026-10-19T18:38:50.963233+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮文档维护；scope_released true；完整策略/因子效果目标仍in_progress。checked_coordination_sha=69c0cbdf5646ca348fda808220e0871b5ddfd0cb；checked_at=2026-10-19T18:38:50.963233+08:00；已读COORDINATION/self/system16:38/personal16:11及其00:32已释放playbook/dispatch，交付前fetch无他人新增，冲突决定不变。
