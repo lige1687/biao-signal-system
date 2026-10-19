@@ -1,3 +1,12 @@
+# 用户授权并行研究与平稳研究流程 2026-10-19T15:03:02.973033+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=a06816323ed6c4f76e9d0f45332c51c8f1fe3974；checked_at=2026-10-19T15:03:02.973033+08:00；已读COORDINATION/self/research-utility-review-20261012最新14:55/investor-workspace-simplification-20261012最新12:10/research-dispatch-controller。基线/最近已推成果9c22e6a4069251dce5914f51ea13892d334ba40c，原成果树和分支继续。
+- 用户追加“都去并行做…价值…系统的动量…对应的选股…主要想建设标准规范流程、保证AI平稳运行”。本轮并行价值资料与增量检验、已有动量定义/负结果复用核查、选股评价缺项和研究运行保障。原ETF小时/完整LEI实施仍归research-utility-review，不接管其源码/实验；本轮系统动量只读映射和独立600股资料，不自动重跑原系统策略。方法发散先记录金融理由和已见历史；未合格候选不自动进入收益循环。
+- 新增限定路径docs/experiments/raw/lowfreq-parallel-research-2026-10-19/及同名报告，可能必要独立研究工具src/lei_signal/research/lowfreq_research_control.py、tests/unit/test_lowfreq_research_control.py（先审现有能力再落实，非新平台）；root唯一整合本合同/旧progress/报告/registry自身键/INDEX自身行/本人goal；Luna low仅momentum-reuse-audit.json；Sol medium先selection-workflow-gap-audit.json只读。价值原raw/分工沿上次记录，Astra完成当前定义审查后审各线方法，后续实现准确路径另派发。共享规范和原工作流代码只读，不改另一owner。
+- 验收以可追踪实际研究链、阻止已证实的错误运行和恢复不重复执行为准；程序能查的客观限制实际演练，金融解释由主控审。价值最多1核心+3必要跟进保持，方法来源查询2/6（1官网失败、1搜索未获合格原文），价格/财务旧实验不重跑。动量/选股先查已存产物，只对真正新缺项冻结有界诊断；无默认全组合、参数网格、付费、生产、交易或通知。大结果仍固定外盘，旧失败和预算保持。
+
+---
+
 # 按原顺序开展P3价值研究 2026-10-19T14:57:36.909043+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=20aeb7c1bf1ed1944433b838135c20d820472539；checked_at=2026-10-19T14:57:36.909043+08:00；已读COORDINATION/self/research-utility-review-20261012最新14:55/investor-workspace-simplification-20261012最新12:10/research-dispatch-controller。原因子扩展ETF/个股小时覆盖和定义审查与本财务估值研究无交集；各自只动registry键/INDEX行，独立工作树。基线和已推成果9c22e6a4069251dce5914f51ea13892d334ba40c，原工作树/工作分支继续。
