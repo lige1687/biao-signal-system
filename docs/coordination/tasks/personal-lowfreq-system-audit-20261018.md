@@ -1,3 +1,14 @@
+# 12–1动量定义与A股股票池/成交链诊断启动 2026-10-20T00:26:22.686601+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=b8ab1c3e6f8443c31bf839154467dedfbcc3ae8c；checked_at=2026-10-20T00:26:22.686601+08:00。已读COORDINATION/self/research-utility-review-20261012最新FIP00:22与四经典00:18/lowfreq-strategy-discovery-20261019/investor-workspace-simplification-20261012/dispatch。无文件冲突：原美国论文逐股复现及FIP仍归因子实现；本题只审现有A股600历史队列的12–1日期定义、逐月资格和执行缺口，不重跑原论文或旧收益实验。
+- 用户明确要求经典12–1、名单对齐、每次调仓停牌/涨跌停/价格流动性/退市/微盘/未来函数体检。复用P1和经典反转来源及结果，允许新计算只限既有输入的逐月健康计数和12–1因子数值/日期核验，无新收益优化。T+1失败不得倒灌T排名，后来退市不从全历史抹除。
+- root唯一写本成果树docs/experiments/momentum-universe-execution-audit-2026-10-20.md、raw同名目录、registry本键/INDEX本行和原work-progress/目标note；不改生产、共享定义、旧冻结或他人文件。后续Sol单写本raw/audit_saved_inputs.py，Luna只读静态盘点，无网络/市场运行；root负责核方法与真正运行。
+- 新问题预算最多6来源（当前French原定义1次）、1核心输入审计与最多3必要跟进；旧P1/P2/P3及反转来源6/6、核心失败1/1、跟进1/3照旧，绝不清零。无新行情下载/付费/交易/通知。外盘预估64MiB，内盘小产物300KiB，须预检绑定后运行。
+- 验收：原600源/日历/名单SHA及返回复权字段；132调仓日逐层数量与未知；日历12–1和有效报价252/21端点比较；原名单与未来成交信息分离；价格/流动性/历史市值缺口明示。已有绩效只引用并披露不可成交/费用缺口；标准原样复现和可交易策略仍未完成。
+- 当前成果基线787a6d52125f1e82a0ab9d6e8dfaf305a0737323；本轮新结果未出，范围登记不当成完成。
+
+---
+
 # 经典月度反转链路诊断已交付 2026-10-20T00:21:02.019963+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次有界历史诊断；scope_released true。checked_coordination_sha=e455b77684640fc8f5d1f82cbe2c1c6899a2401e；checked_at=2026-10-20T00:21:02.019963+08:00；已读COORDINATION、自身、research-utility-review-20261012、lowfreq-strategy-discovery-20261019、investor-workspace-simplification-20261012及中控；其他owner四项经典复现/原LEI/ETF/账户/UI不接管。
