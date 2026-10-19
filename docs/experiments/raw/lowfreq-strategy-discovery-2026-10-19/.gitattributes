@@ -1,2 +1,2 @@
-# Frozen selector bytes include CRLF; preserve the contract fingerprint on checkout.
-effect-selector.csv -text
+# Preserve frozen CSV bytes and recognize CRLF as the recorded line ending.
+effect-selector.csv -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

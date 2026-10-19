@@ -21,3 +21,5 @@
 设备：当前Mac /Users/yongbiaoli/Desktop/lei-signal-lab；成果分支codex/lowfreq-strategy-discovery-20261019，基线9aa770628ba83d3eb6a23d0dd62f14466b3e5d91。实际成果提交及远端读回将写协调任务，随后补本记录。
 
 剩余：本有界问题无必要追加实验；整体研究目标保留in_progress/待用户验收。价值资料4/4预算耗尽且股本/权益/同日价格未合格；利润兑现仅来源可行，未启动第二个收益问题。未来须明确一项新证据如何改变判断后再单独开题。
+
+成果准确提交：50c49c73fb90488b429f53a0540a16fff6ca3e70（固定CSV原字节已保留，前置研究提交f0cbb611ef5bdad477ac6423db20e4e18bf67d1e）；当前待最后元数据提交并推送读回。未改写已推历史。
