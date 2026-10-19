@@ -1,0 +1,82 @@
+{
+  "schema": "financial-filings-resume-receipt/1",
+  "status": "stopped_at_frozen_pdf_request_limit",
+  "recorded_at": "2026-10-19T03:43:17.167103+00:00",
+  "pid": 27614,
+  "exec_session_id": 21429,
+  "working_directory": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "command": "python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/acquire_financial_filings.py --plan docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json --storage-plan docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-bulk-plan.json --resume",
+  "script_sha256": "c929c0037b512c84a9345da8abe8f70cd42e9aa98c24f2afbeb549a4f6e24fba",
+  "plan_sha256": "bcb2d5b3a8a3efe9ef08d656fe92b60af80ab6a1e0f17b4b8cddcd662b091e07",
+  "storage_plan_sha256": "99c1b2b77f24b4206b86f5efc611b223bbb8d24f1ac447147b9d25115c369979",
+  "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result",
+  "source_only": true,
+  "market_effects_run": false,
+  "frozen_limits": {
+    "max_total_http_operations": 14000,
+    "max_catalog_requests": 6000,
+    "max_pdf_requests": 9000,
+    "http_concurrency": 4,
+    "global_min_start_interval_seconds": 0.5,
+    "retries": 0,
+    "stop_on": "HTTP 429 or two consecutive external failures"
+  },
+  "journal_snapshot": {
+    "starts_catalog": 808,
+    "starts_pdf": 9000,
+    "finishes_catalog": 808,
+    "finishes_pdf": 8996,
+    "reuses_pdf": 3,
+    "events": 19615
+  },
+  "prior_interrupted_starts_not_reissued": 4,
+  "current_global_stop": true,
+  "financial_effects_or_trading": false,
+  "last_updated": "2026-10-19T04:46:09.228303+00:00",
+  "coverage_snapshot": {
+    "fixed_codes": 600,
+    "code_status_counts": {
+      "complete": 374,
+      "incomplete": 16,
+      "pending": 210
+    },
+    "both_annual_and_correction_catalogs_complete": 390,
+    "annual_catalog_status_counts": {
+      "complete": 390,
+      "unknown": 210
+    },
+    "correction_catalog_status_counts": {
+      "complete": 384,
+      "complete_empty": 6,
+      "unknown": 210
+    }
+  },
+  "exit_code": 0,
+  "first_new_http_start_utc": "2026-10-19T03:27:08.867916+00:00",
+  "actual_finished_utc": "2026-10-19T04:44:46.148718+00:00",
+  "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/manifest-0001.json",
+  "manifest_sha256": "ab07d9e0c310131258faf2a5338cc394c44f1cdd385fe35695f466acec4cf553",
+  "manifest_counts": {
+    "http_success": 9793,
+    "failed_or_interrupted_http": 15,
+    "all_600_complete": false,
+    "global_stopped": true
+  },
+  "failed_finish_counts_by_error": {
+    "body_above_saved_byte_cap; prefix_preserved": 7,
+    "ChunkedEncodingError: ('Connection broken: IncompleteRead(233168 bytes read, 354764 more expected)', IncompleteRead(233168 bytes read, 354764 more expected))": 1,
+    "non_pdf_response": 3
+  },
+  "never_reissued_interrupted_operations": [
+    "pdf:002249:1216563400",
+    "pdf:002593:1217001335",
+    "pdf:600582:1207634265",
+    "pdf:600855:63839618"
+  ],
+  "raw_manifest_verification": {
+    "manifest_files": 9804,
+    "bytes_scanned": 21662781255,
+    "missing_files": 0,
+    "size_or_sha256_mismatches": 0
+  }
+}
