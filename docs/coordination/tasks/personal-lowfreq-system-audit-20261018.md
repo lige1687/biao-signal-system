@@ -1,3 +1,12 @@
+# 经典诊断交付前核对与窄范围归置修复 2026-10-20T00:17:12.017482+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=0a5e89ee66c499e7efa42f8ac5e502eafc0824aa；checked_at=2026-10-20T00:17:12.017482+08:00；已读self、research-utility-review-20261012、lowfreq-strategy-discovery-20261019、investor-workspace-simplification-20261012、中控与COORDINATION；无新同题/同路径冲突，其他四因子复现不重做。
+- 真实月度反转诊断已计算/独核132月，原始IC−0.062779；核心先因sz.001914返回adjustflag3与请求2冲突拒绝，保留失败，来源资格补注后隔离1只，必要跟进1/3完成。旧解析器仅核请求，既有材料确有该股暴露；未重算或改旧成果，后续需核语义/影响。原生Rank接口264项与独立核数一致，5组不严格单调，金融数据分支仍缺字段。详细报告与raw待推。
+- 追加唯一窄写权：本独立成果树scripts/check_repo_hygiene.py。旧检查器拒绝项目规定的.git工作树文件、COORDINATION.md与docs/coordination；主树新版对本树仍拒绝后两项。仅把这3个准确路径纳入本树白名单，复用已在另一成果树采用的相同修正；不改主树、不宽泛放行，不删除资料。原失败回执保留，修后核全树；其余范围不变。
+- 外盘普通输出估计从30MiB在执行前调至96MiB，实际约49MB；旧预检目录只放检查日志，新core plan固定新目录。预算未据此重置。
+
+---
+
 # 经典因子诊断：月度反转与数据链路  2026-10-20T00:00:39.144081+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=af56e187dd237647f8e766bff2da8d41712b3a65；checked_at=2026-10-20T00:00:39.144081+08:00；已读COORDINATION、自身、research-utility-review-20261012最新四项复现、lowfreq-strategy-discovery-20261019、classic-factor-research、中控与UI owner。
