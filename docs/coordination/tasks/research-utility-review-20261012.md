@@ -1,3 +1,14 @@
+# 新增低频信息建议审阅已完成 2026-10-19T23:35:47.684384+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮report_only；scope_released true。checked_coordination_sha=71f6286a1bc42516de5879dbd57c57604dd690f5；checked_at=2026-10-19T23:35:47.684384+08:00；已读COORDINATION/self/system16:38/personal19:27/new-lowfreq20:06/dispatch，交付fetch无新记录，冲突决定保持原各owner。
+- 已吸收用户建议，报告docs/experiments/lowfreq-information-candidate-review-2026-10-19.md，SHA ac060dc32bd9f67a5acfcd6ae70e8417e697fb8e397164b775a9bca83501365a。行业排序与下跌结构是有条件优先核查，非已验证；盈利意外先核历史预期资料并复用独立负责人，成交候补。旧行业硬过滤/领先性负面记录保留；不以新角色名重跑旧用途。
+- playbook新增用途分工、完整简单对手、数学依赖及当次参考；Skill沿原路径读取，无新增技能/平台/账本。原two-version-continuation仅追加指向。registry仅本键、INDEX仅本行，全部旧条目/其他字段/原接续前缀及10项保护SHA保持。原策略实际两SHA匹配，定义库1.6.14不变。
+- 系统报告API完整正文逐字及SHA相同、registry_sha256_verified=true，列表pending=false；归置/diff通过。原目标note170→171，status in_progress，旧history与其他字段原样。open_in_codex返回queued，仅请求显示，不声称已目视验收页面。
+- Sol medium increment_candidate_review只读查重/定义复核；3方法检索+3原站打开，其中NBER403如实保留，只用检索摘要；另两源只读摘要/引言，不称全综述。0新行情/市场计算/生产/交易/通知；原预算/封存不重置。初始注册表键、coord路径、报告max_chars和草稿SHA错误已修正，准确失败与回执见raw/review-receipt.json及原work-progress。
+- 本轮有界审阅完成，原研究/完整策略总目标未完成。下一实际问题先核行业/下跌结构的重复与资料资格，再选一项；未运行这些新检验，无后台任务。产物只在主树codex/factor-unit-research-20260915本地未提交未推，协调元数据不是成果移交；未覆盖其他worktree或独立财务owner成果。
+
+---
+
 # 外部低频候选建议吸收审阅 2026-10-19T23:30:06.951368+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=ac0e5ab228206de7337739172bb910c585ccca5c；checked_at=2026-10-19T23:30:06.951368+08:00；已读COORDINATION1.1、self技能交付、system16:38、personal19:27交接、lowfreq-strategy-discovery20:06交付、research-dispatch-controller。
