@@ -1,3 +1,13 @@
+# 现金经营盈利能力与应计原文复现启动 2026-10-20T01:01:11.987449+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=069484c80b53564b1d0131d80c5f326610af9ef3；checked_at=2026-10-20T01:01:11.987449+08:00；已读COORDINATION/self/personal最新数据资格00:58/lowfreq-strategy-discovery/system最新图像00:57/dispatch。原CFO/GP研究及修复只读复用，不接管、不重跑；本题原cashOP与Sloan定义先区分，独立新题，不重置旧预算。
+- 用户本轮明确要求找原研究、先复现，再看已有动量/盈利外增量。优先核Ball等2016现金经营盈利能力与Sloan1996应计的准确公式、数据与科学方法；本地能否原式计算需资格，CFO/资产不冒名cashOP。基本面不接生产技术硬过滤，LEI原策略不改。
+- root唯一可写docs/experiments/cash-profitability-accruals-2026-10-20.md和同名raw，registry本键/INDEX本行、原work-progress与目标note。本轮暂不改共享代码/定义；如实测适配需新绑定精确实现后再统计。公开论文/原始与大结果外盘预检；预计64MiB外盘/400KiB本机。不删除、付费、交易、私有外发、通知。
+- Sol medium cash_accrual_reuse只读核旧数据/公式/性能/尝试与缺口，无网络/写/市场计算/下级；root统一来源和方法。当前文献各最多6请求（Ball已3含find失败、Sloan2）；本有界原公式问题最多1核心+3必要跟进，数据不合格不统计，旧P2/P3预算沿原记录。原四经典和FIP不重复。
+- 验收：原文公式与非等价关系、旧输入实际字段及日期资格、能执行的有界原定义检验/公开证据复核、性能与增量表/反例/限制并列、不得把公开组合当逐股复现、不把公式恒等关系当两个独立收益源。原US输入若仍缺则明确阻塞，执行独立可推进项；原文原数不可当本地已复现。成果主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9仅本地未提交，协调元数据推后核回。
+
+---
+
 # FIP本地适配与毛利复用验收交付 2026-10-20T00:58:27.923185+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed（仅本轮有界适配与复用）；scope_released true。checked_coordination_sha=ea8207fb5c7ae39d3f86414f779f8197b4beddf8；checked_at=2026-10-20T00:58:27.923185+08:00；已读COORDINATION/self/system最新00:57/personal最新00:43/new-lowfreq/dispatch。系统owner两图唯一接入已验收；不接管其组件及个人财务修复，不与他人路径冲突。
