@@ -1,0 +1,47 @@
+{
+  "reviewer": "gpt-6-astra/high + root",
+  "source_scope": "25-source diagnostic only, no market effects",
+  "accepted_fixes": [
+    {
+      "case": "300048-1222962581",
+      "rule": "same-version company RMB functional-currency statement PLUS explicit consolidated foreign-operation statements converted to RMB presentation + table unit yuan; later same-report pages allowed",
+      "evidence_pages": [
+        111,
+        116
+      ],
+      "reject": "functional currency alone / subsidiary-specific statement / no target currency / conflicting applicable currency"
+    },
+    {
+      "case": "300048-1219412091",
+      "rule": "current year Dec31 first column and same-year Jan1 comparative is valid; comparative unused",
+      "evidence_pages": [
+        90
+      ]
+    },
+    {
+      "case": "300371-1223123325",
+      "rule": "actual CFS headings parenthesized ordinal and layout spaces; issuer company-info page10 beyond old8-page window",
+      "evidence_pages": [
+        10,
+        150,
+        154,
+        157
+      ]
+    },
+    {
+      "case": "000016-1223095858",
+      "rule": "same issuer A/B stock code field includes000016 and200016; global glossary 元/万元/亿元 explicitly RMB can qualify table currency absent conflict",
+      "evidence_pages": [
+        7,
+        8
+      ]
+    }
+  ],
+  "still_unknown": [
+    "unread halfyear correction002229-1203298566 not annual and not automatically irrelevant",
+    "current vs prior column unresolved",
+    "same-day version conflicts without explicit relation",
+    "three-amount columns until reliable column mapping implemented"
+  ],
+  "controller_additional_counterexample": "current parser accepts header 项目 上期发生额 本期发生额 then picks first old value. Need current column ordering explicit or reject reversed; likewise 期初/期末 reversed."
+}

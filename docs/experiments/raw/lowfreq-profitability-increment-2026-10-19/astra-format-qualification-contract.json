@@ -1,0 +1,35 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "mission": "以25代码真实格式为依据审查解析扩展与货币语义，不降低财务资格以凑覆盖",
+  "task_scope": [
+    "只读正式parser及source-diagnostic-25 manifest/必要几个原件，无网络/改文件/市场效果。334年度候选仅144 GP合格，先核Unknown是否是清楚可修的格式，不当成金融无效。",
+    "重点300048-1222962581（2024）：表单位元无币种，后文p111本公司以人民币为记账本位币、p116境外经营外币财务报表按以下方法折算为人民币报表。是否二证一起能支持合并报表人民币？只有功能本位币时应否unknown？给可执行证据条件与不能推断处。",
+    "300048-1219412091（2023）资产表项目2023年12月31日与2023年1月1日，当前左列清楚。是否可接受当年年初作比较列（不用比较值）？当前三列若只是比较年度调整前后是否可读当期唯一列，哪些必须unknown？",
+    "抽核2个consolidated_table_missing/identity_unknown的真实原件格式，辨明标题空格/断行证券代码等是否可修，无须通读620文件。纠正通知vs全文边界：correction类别本身不能禁止真更新全文，body/title年报当前年度与完整表证据可确认后方为版本；同日冲突不能按ID排序。",
+    "输出Sol能实现的必要字段/身份规则与反例，不计算收益，也不增候选/参数。"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-diagnostic-25-receipt.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-design.v1.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_documents.py"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "财务格式可修与必须unknown的明确依据/例子，不把工程通过当因子有效"
+  ],
+  "stop_conditions": [
+    "不联网/不改文件/不看市场效果"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

@@ -26,13 +26,38 @@ EXPECTED_DEVICE = 16777238
 EXPECTED_UUID = 'DEBA1C85-6059-3865-B50A-A8EE1F80E4D9'
 MIN_FREE_BYTES = 10 * 1024**3
 PARSER_MODULE = ROOT / 'src/lei_signal/research/profitability_discovery.py'
-ANNUAL_TITLE_RE = re.compile(r'(?<!\d)(20\d{2})\s*年?\s*(?:年度报告|年报)')
+ANNUAL_TITLE_RE = re.compile(r'(?<!\d)(20\d{2})\s*年?\s*(?:(?<!半)年度报告|年报)')
 NOTICE_CONTEXT_RE = re.compile(r'公告|通知|说明')
 NOTICE_ACTION_RE = re.compile(r'更正|补充')
 REVISION_RE = re.compile(r'更新后|修订版|修订稿|更正后|补充后|已取消|取消|撤销')
 CODE_RE = re.compile(r'(?<!\d)(\d{6})(?!\d)')
 YEAR_RE = re.compile(r'(?<!\d)(20\d{2})\s*年')
 ISSUER_CODE_FIELD_RE = re.compile(r'证券代码|股票代码|公司代码')
+
+
+def _issuer_blocks(pages: list[str]) -> list[dict]:
+    blocks = []
+    for page_no, text in enumerate(pages[:20], 1):
+        lines = [line.strip() for line in text.splitlines()]
+        for index, line in enumerate(lines):
+            if not ISSUER_CODE_FIELD_RE.search(line):
+                continue
+            block = line
+            if not CODE_RE.search(block):
+                for following in lines[index + 1:index + 3]:
+                    if ISSUER_CODE_FIELD_RE.search(following):
+                        break
+                    block += ' | ' + following
+                    if CODE_RE.search(block):
+                        break
+            codes = sorted(set(CODE_RE.findall(block)))
+            ab_context = bool(
+                ('股票简称' in block or '证券简称' in block) and
+                re.search(r'(?:A[、/，,\s].*B|A股.*B股|A类.*B类)', block,
+                          flags=re.IGNORECASE))
+            blocks.append({'page': page_no, 'line': index + 1, 'text': block[:300],
+                           'codes': codes, 'same_issuer_ab_context': ab_context})
+    return blocks
 
 
 def cohort_to_publisher_code(cohort_code: str) -> str:
@@ -137,17 +162,16 @@ def _validate_source_pdf(item: dict, publisher_code: str) -> tuple[Path, dict]:
 def classify_pdf_header(pages: list[str], publisher_code: str, report_year: int | None,
                         announcement_title: str | None = None) -> dict:
     """Keep document form and issuer identity as independent evidence fields."""
-    text = '\n'.join(pages[:8])
+    text = '\n'.join(pages[:20])
     code_matches = set(CODE_RE.findall(text))
-    field_lines = [line.strip() for line in text.splitlines()
-                   if ISSUER_CODE_FIELD_RE.search(line)]
-    field_codes = set()
-    for line in field_lines:
-        field_codes.update(CODE_RE.findall(line))
+    blocks = _issuer_blocks(pages)
+    field_lines = [block['text'] for block in blocks]
+    field_codes = {code for block in blocks for code in block['codes']}
     title_years = {int(value) for value in YEAR_RE.findall(text)}
-    has_annual_title = bool(re.search(r'年度报告|年报', text))
+    has_annual_title = bool(ANNUAL_TITLE_RE.search(text))
     title_text = announcement_title or ''
-    title_has_annual = bool(ANNUAL_TITLE_RE.search(title_text))
+    title_match = ANNUAL_TITLE_RE.search(title_text)
+    title_has_annual = bool(title_match and not re.search(r'半年度|季度|季报|中期', title_text))
     title_notice = title_has_annual and bool(NOTICE_CONTEXT_RE.search(title_text))
     first_two_pages = '\n'.join(pages[:2])
     top_lines = [line.strip() for line in first_two_pages.splitlines() if line.strip()][:8]
@@ -159,7 +183,11 @@ def classify_pdf_header(pages: list[str], publisher_code: str, report_year: int 
     notices = title_notice or body_title_notice
     revision_text = '\n'.join([title_text, text])
     revision_markers = sorted(set(REVISION_RE.findall(revision_text)))
-    if field_codes == {publisher_code}:
+    ab_match = (len(field_codes) == 2 and publisher_code in field_codes and
+                any(set(block['codes']) == field_codes and block['same_issuer_ab_context']
+                    for block in blocks) and
+                all(set(block['codes']) <= field_codes for block in blocks))
+    if field_codes == {publisher_code} or ab_match:
         identity = 'match'
     elif len(field_codes) > 1:
         identity = 'identity_unknown'
@@ -174,7 +202,7 @@ def classify_pdf_header(pages: list[str], publisher_code: str, report_year: int 
         form = 'unknown'
     elif notices:
         form = 'notice'
-    elif report_year is not None and report_year in title_years and has_annual_title:
+    elif report_year is not None and report_year in title_years and has_annual_title and title_has_annual:
         form = 'suspected_full_text'
     elif has_annual_title:
         form = 'other_or_year_mismatch'
@@ -182,12 +210,74 @@ def classify_pdf_header(pages: list[str], publisher_code: str, report_year: int 
         form = 'unknown'
     return {'document_form': form, 'identity_status': identity,
             'identity_field_lines': field_lines, 'identity_field_codes': sorted(field_codes),
+            'identity_field_blocks': blocks, 'same_issuer_ab_codes': ab_match,
             'all_header_codes': sorted(code_matches), 'header_years': sorted(title_years),
             'annual_title_present': has_annual_title, 'notice_terms_present': notices,
             'title_notice_context': title_notice, 'body_title_notice_context': body_title_notice,
             'revision_markers': revision_markers,
             'cancellation_date': 'unknown' if re.search(r'已取消|取消|撤销', revision_text) else None,
-            'header_text_pages': len(pages[:8])}
+            'header_text_pages': len(pages[:20])}
+
+
+def annual_candidate_evidence(categories: list[str], year: int | None, title: str | None,
+                              header: dict, pages: list[str], heading_pattern) -> dict:
+    title_match = ANNUAL_TITLE_RE.search(title or '')
+    title_year = int(title_match.group(1)) if title_match and not re.search(
+        r'半年度|季度|季报|中期', title or '') else None
+    rows = [(page_no, line.strip()) for page_no, page in enumerate(pages, 1)
+            for line in page.splitlines() if line.strip()]
+    headings = [(index, re.sub(r'\s+', '', match.group(1)),
+                 re.sub(r'\s+', '', match.group(2)))
+                for index, (_, line) in enumerate(rows)
+                if (match := heading_pattern.fullmatch(line))]
+    consolidated_heads = {table for _, owner, table in headings if owner == '合并'}
+    table_shapes = {}
+    if year is None:
+        return {'status': 'unknown', 'title_year': title_year,
+                'consolidated_headings': sorted(consolidated_heads),
+                'statement_shapes': {}, 'reason': 'annual_year_missing',
+                'title_and_body_full_year': False,
+                'correction_category_not_excluded': 'correction' in categories}
+    for number, (start, owner, table) in enumerate(headings):
+        if owner != '合并':
+            continue
+        end = headings[number + 1][0] if number + 1 < len(headings) else len(rows)
+        segment = rows[start:end]
+        nearby = [line for _, line in segment[:20]]
+        page_no = rows[start][0]
+        page_heading = '\n'.join(pages[page_no - 1].splitlines()[:2])
+        column = next((line for line in nearby if line.startswith('项目')), '')
+        compact = re.sub(r'\s+', '', column)
+        current = (('期末' in compact and '期初' in compact or
+                    '年末' in compact and '年初' in compact or
+                    f'{year}年12月31日' in compact and
+                    (f'{year-1}年12月31日' in compact or f'{year}年1月1日' in compact))
+                   if table == '资产负债表' else
+                   ('本期' in compact and '上期' in compact or
+                    f'{year}年度' in compact and f'{year-1}年度' in compact))
+        unit = any(re.search(r'单位\s*[:：]\s*(?:人民币)?\s*(?:元|万元|百万元)', line)
+                   for line in nearby[:12])
+        period = any(re.search(rf'{year}\s*年\s*(?:12\s*月\s*31\s*日|1\s*[—–-]\s*12\s*月)', line)
+                     for line in nearby[:12]) or bool(re.search(rf'{year}\s*年(?:度报告|年度报告)', page_heading))
+        amount = any(len(re.findall(r'(?<!\d)[-−－]?\d[\d,]*\.\d{2}(?!\d)', line)) >= 2
+                     for _, line in segment)
+        shape = {'page': page_no, 'header': column[:220], 'current_and_comparative_present': current,
+                 'unit_present': unit, 'annual_period_present': period, 'two_amount_row_present': amount}
+        table_shapes.setdefault(table, []).append(shape)
+    all_statements = all(len([s for s in table_shapes.get(table, []) if all(
+        s[field] for field in ('current_and_comparative_present', 'unit_present',
+                               'annual_period_present', 'two_amount_row_present'))]) == 1
+        for table in ('资产负债表', '利润表', '现金流量表'))
+    candidate = (bool(set(categories) & {'annual', 'correction'}) and year is not None and
+                 title_year == year and header['document_form'] == 'suspected_full_text' and
+                 bool(consolidated_heads))
+    return {'status': 'suspected' if candidate else 'unknown', 'title_year': title_year,
+            'consolidated_headings': sorted(consolidated_heads),
+            'statement_shapes': table_shapes,
+            'all_three_statement_shapes_qualified': all_statements,
+            'qualification_note': 'Each financial field is checked independently by the parser; cash flow shape is not a prerequisite for gross profitability.',
+            'title_and_body_full_year': header['document_form'] == 'suspected_full_text',
+            'correction_category_not_excluded': 'correction' in categories}
 
 
 def _extract_all_pages(pdf_path: Path) -> list[str]:
@@ -314,12 +404,18 @@ def prepare(progress_path: Path, plan_path: Path, parser_sha256: str,
             pdf_path, source_identity = _validate_source_pdf(item, publisher_code)
             title = item.get('announcement_title')
             year = item.get('report_year_from_title')
-            year = int(year) if year is not None else None
+            title_match = ANNUAL_TITLE_RE.search(title or '')
+            title_year = int(title_match.group(1)) if title_match and not re.search(
+                r'半年度|季度|季报|中期', title or '') else None
+            year = int(year) if year is not None else title_year
+            if year is not None and title_year is not None and year != title_year:
+                raise ValueError('title_year_conflicts_with_acquisition_record')
             announcement_day, announcement_time = _announcement_date(item.get('announcement_time_ms'))
             pages = _extract_all_pages(pdf_path)
             header = classify_pdf_header(pages, publisher_code, year, title)
             categories = list(item.get('categories') or [])
-            is_annual_candidate = 'annual' in categories and year is not None
+            candidate = annual_candidate_evidence(categories, year, title, header, pages, parser.HEAD)
+            is_annual_candidate = candidate['status'] == 'suspected'
             parsed = None
             if is_annual_candidate:
                 parsed = parser.parse_annual_pdf(pdf_path, year, publisher_code,
@@ -337,6 +433,7 @@ def prepare(progress_path: Path, plan_path: Path, parser_sha256: str,
                                     'pdf_url', 'status', 'reason')},
                                 'source_identity': source_identity},
                      'header_evidence': header,
+                     'annual_candidate_evidence': candidate,
                      'financial_parser_result': parsed,
                      'version_chain_completeness': 'unknown'}
             stem = f'{publisher_code}-{item.get("announcement_id", "unknown")}'

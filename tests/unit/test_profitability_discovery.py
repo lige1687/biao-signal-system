@@ -1,8 +1,10 @@
 """Semantic counterexamples for original annual-statement extraction."""
 
 from decimal import Decimal
+import importlib.util
+from pathlib import Path
 
-from lei_signal.research.profitability_discovery import _parse_text_pages, parse_annual_pdf
+from lei_signal.research.profitability_discovery import HEAD, _parse_text_pages, parse_annual_pdf
 
 
 def _pages(*, unit="元", asset="100.00", revenue="40.00", cost="10.00",
@@ -177,3 +179,120 @@ def test_pdfium_handles_closed_after_extraction(tmp_path, monkeypatch):
     result = parse_annual_pdf(path, 2014, "000001", "id", "2015-01-01")
     assert result["page_count"] == 1
     assert closed == ["text", "page", "pdf"]
+
+
+def test_currency_two_evidence_or_global_rmb_glossary_but_not_functional_alone():
+    base = _pages()[0].replace(" 币种：人民币", "")
+    functional = base + "\n本公司以人民币为记账本位币。"
+    assert _parse_text_pages([functional], 2014)["fields"]["revenue"]["status"] == "unknown"
+    translated = functional + "\n境外经营的外币财务报表按以下方法折算为人民币报表"
+    result = _parse_text_pages([translated], 2014)
+    assert result["fields"]["revenue"]["status"] == "qualified"
+    assert result["tables"]["profit"]["currency_rule"] == "functional_plus_consolidated_translation"
+    assert len(result["tables"]["profit"]["currency_evidence"]) == 2
+    glossary = "元、万元、亿元 指 人民币元、人民币万元、人民币亿元\n" + base
+    result = _parse_text_pages([glossary], 2014)
+    assert result["tables"]["cash"]["currency_rule"] == "whole_report_rmb_glossary"
+
+
+def test_parenthesized_spaced_consolidated_titles_and_jan_first_comparative():
+    page = _pages()[0].replace("合并资产负债表", "（一）合 并 资 产 负 债 表", 1)
+    page = page.replace("合并利润表", "（三）合 并 利 润 表", 1)
+    page = page.replace("合并现金流量表", "（五）合 并 现 金 流 量 表", 1)
+    page = page.replace("项目 期末余额 期初余额", "项目 2014 年 12 月 31 日 2014 年 1 月 1 日", 1)
+    result = _parse_text_pages([page], 2014)
+    assert all(result["fields"][field]["status"] == "qualified"
+               for field in ("assets", "revenue", "cost", "cfo"))
+
+
+def test_reversed_columns_and_three_amounts_are_unknown():
+    reversed_income = _pages(profit_header="项目 上期发生额 本期发生额")
+    assert _parse_text_pages(reversed_income, 2014)["tables"]["profit"]["reason"] == "current_column_not_first"
+    reversed_assets = _pages(asset_header="项目 期初余额 期末余额")
+    assert _parse_text_pages(reversed_assets, 2014)["tables"]["assets"]["reason"] == "current_column_not_first"
+    reversed_dates = _pages(asset_header="项目 2014 年 1 月 1 日 2014 年 12 月 31 日")
+    assert _parse_text_pages(reversed_dates, 2014)["fields"]["assets"]["status"] == "unknown"
+    three = _pages(profit_header="项目 本期发生额 上期发生额 调整前")
+    assert _parse_text_pages(three, 2014)["fields"]["revenue"]["status"] == "unknown"
+    this_amount = _pages(profit_header="项目 本期金额 上期金额")[0].replace(
+        "营业收入 32", "营业收入").replace("营业成本 32", "营业成本")
+    assert _parse_text_pages([this_amount], 2014)["fields"]["revenue"]["status"] == "qualified"
+
+
+def test_statement_reference_without_heading_does_not_create_a_table():
+    page = _pages()[0].replace("合并资产负债表\n", "参见合并资产负债表\n", 1)
+    result = _parse_text_pages([page], 2014)
+    assert result["fields"]["assets"]["status"] == "unknown"
+
+
+def _preparer():
+    script = (Path(__file__).resolve().parents[2] /
+              "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_documents.py")
+    spec = importlib.util.spec_from_file_location("financial_preparer_test", script)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_issuer_field_at_page_ten_and_code_on_next_line():
+    preparer = _preparer()
+    pages = ["2024 年年度报告"] + [""] * 8 + ["一、公司信息\n股票代码\n300371"]
+    result = preparer.classify_pdf_header(pages, "300371", 2024, "2024年年度报告")
+    assert result["identity_status"] == "match"
+    assert result["identity_field_blocks"][0]["page"] == 10
+    assert result["identity_field_blocks"][0]["codes"] == ["300371"]
+
+
+def test_same_issuer_a_b_codes_and_other_issuer_field_conflict():
+    preparer = _preparer()
+    pages = ["2024 年年度报告\n股票简称 深康佳 A、深康佳 B 股票代码 000016、200016"]
+    result = preparer.classify_pdf_header(pages, "000016", 2024, "2024年年度报告")
+    assert result["identity_status"] == "match" and result["same_issuer_ab_codes"]
+    pages.append("其他公司股票代码 300371")
+    result = preparer.classify_pdf_header(pages, "000016", 2024, "2024年年度报告")
+    assert result["identity_status"] == "identity_unknown"
+
+
+def test_unrelated_six_digit_number_and_halfyear_notice_do_not_qualify():
+    preparer = _preparer()
+    pages = ["2024 年年度报告\n关联客户 300371"]
+    result = preparer.classify_pdf_header(pages, "300371", 2024, "2024年年度报告")
+    assert result["identity_status"] == "weak_match"
+    half = preparer.classify_pdf_header(["2024年半年度报告\n股票代码 300371"],
+                                         "300371", 2024, "2024年半年度报告")
+    assert half["document_form"] != "suspected_full_text"
+    notice = preparer.classify_pdf_header(["2024年年度报告更正公告\n股票代码 300371"],
+                                           "300371", 2024, "2024年年度报告更正公告")
+    assert notice["document_form"] == "notice"
+
+
+def test_full_annual_candidate_keeps_gross_profit_when_cash_table_is_unreadable():
+    preparer = _preparer()
+    title = "2024年年度报告（更正后）"
+    pages = ["股票代码 300371\n" + _pages()[0].replace("2014", "2024")]
+    header = preparer.classify_pdf_header(pages, "300371", 2024, title)
+    evidence = preparer.annual_candidate_evidence(["correction"], 2024, title,
+                                                    header, pages, HEAD)
+    assert evidence["status"] == "suspected"
+    assert evidence["correction_category_not_excluded"]
+    without_cash = [pages[0].replace("合并现金流量表", "参见合并现金流量表")]
+    evidence = preparer.annual_candidate_evidence(["correction"], 2024, title,
+                                                    header, without_cash, HEAD)
+    assert evidence["status"] == "suspected"
+    parsed = _parse_text_pages(without_cash, 2024)
+    assert parsed["gross_profit_over_assets"]["status"] == "qualified"
+    assert parsed["cash_flow_over_assets"]["status"] == "unknown"
+    notice_title = "关于2024年年度报告更正的公告"
+    notice_header = preparer.classify_pdf_header(pages, "300371", 2024, notice_title)
+    assert preparer.annual_candidate_evidence(["correction"], 2024, notice_title,
+                                               notice_header, pages, HEAD)["status"] == "unknown"
+
+
+def test_notice_without_annual_year_retains_unknown_without_crash():
+    preparer = _preparer()
+    pages = ["更正公告\n合并资产负债表\n项目 期末余额 期初余额"]
+    header = preparer.classify_pdf_header(pages, "300371", None, "更正公告")
+    result = preparer.annual_candidate_evidence(
+        ["correction"], None, "更正公告", header, pages, HEAD)
+    assert result["status"] == "unknown"
+    assert result["reason"] == "annual_year_missing"

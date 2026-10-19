@@ -1,0 +1,59 @@
+{
+  "schema": "as-known-financial-version-rules/1.0.0",
+  "design_sha256": "648476bf2cb79056d4982884e96b387ffc76a494598475644b12be0c69e526bc",
+  "effect_runs_before": 0,
+  "target": "current amounts actually publicly reported, not certification of economic truth",
+  "reviewer": "Astra high candidate_method_review and root",
+  "version_selection": [
+    "publication_date < decision_date strictly",
+    "latest available report year, then latest full report version publication within that year",
+    "body notice is never full version merely because title names year",
+    "latest expected full report parse/identity failure gives unknown, never fall back old",
+    "same day differing dependent amounts without explicit replacement relation unknown; identical dependent field group may be treated consistent with all sourceIDs retained, no order byID",
+    "16calendar months from fiscalend inclusive, revision never resets",
+    "current cancel label does not imply past cancel date"
+  ],
+  "correction_events": {
+    "required": [
+      "original documentID/code/publicationdate",
+      "full readable body or explicit unresolved source",
+      "affected fiscal period/year and fields with exact source evidence",
+      "applicable/irrelevant/unknown reason and evidence page"
+    ],
+    "unknown_scope": "only after eventpublic date, score using possibly affected prior report becomes unknown; no backfill from later knowledge",
+    "known_scope": "only matching annual fields/years; later old year correction never replaces newer annual"
+  },
+  "new_period_recovery": {
+    "reason_code": "new_period_current_statement_supersedes_unscoped_prior_uncertainty",
+    "all_conditions": [
+      "new issuer full consolidated annual verified",
+      "new fiscalend > old noticepublication date AND new fullannualpublication > noticepublication",
+      "use new currentyear/end amounts only, dependent fields each qualified",
+      "old notice does not explicitly extend uncertainty to new year or say future reports unusable; new current amounts not marked undetermined",
+      "no other unresolved event applicable to new year/current version, no unresolved same-day conflict"
+    ],
+    "evidence": [
+      "oldnoticeID/date",
+      "newfullannualID/date/yearend",
+      "used dependent fields",
+      "specific recoveryreason"
+    ],
+    "not_claimed": [
+      "old notice resolved",
+      "prior historical unknown restored",
+      "economic accounts certified"
+    ]
+  },
+  "source_estimate_review": {
+    "original9000PDF": "controller protection estimate, not user imposed cap; old v1 limits unchanged during active run",
+    "authority": "user authorized continuous same600 sameannual years and corrections cutoff; no new source/market/fees/credentials",
+    "next_if_guard_reached": "first frozen finite missing catalog stage reusing all old successful sources and preserving failed/indeterminate no retries, then actual unique unissued attachment count determines new finite download plan",
+    "cumulative_cost": "retain original usage and revised actual stage budgets; never say original budget unchanged or reset",
+    "unchanged_stops": [
+      "HTTP429",
+      "consecutive external failures",
+      "storage/device/capacity mismatch"
+    ],
+    "no_execution_from_this_record": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "mission": "依据真实原件修复格式识别，不改变财务定义/来源/金融门槛；保留25诊断v1并另版再资格",
+  "task_scope": [
+    "只改正式parser+test、raw/prepare_financial_documents.py；最后仅把evaluate_profitability.py的PARSER_SHA常量绑定新parser SHA。无网络/不跑组合市场。现有v1代码与诊断已Git62ed9e7b和外盘保留。",
+    "先读format-qualification-controller-decision.json及真实案例原件/文档映射。只依据同年度同版本的明确证据扩展人民币列报：本公司RMB本位币+明确境外经营合并报表折算为人民币报表两段，或全报告元/万元/亿元指人民币的通用词汇说明，或明确财报人民币列报/金额人民币单位；支持证据在表后。仅功能币仍unknown，子公司单独说明不可当全公司，表头冲突拒绝。保留所有证据页/片段及条件。",
+    "HEAD允许（一）等括号编号、合并表名内部排版空白，仍需真表头/期间/金额避免目录和引用通过；资产当前列年末可与当年Jan1比较。支持表头本期金额/上期金额、期末/期初规范变体时明确位置；不得只两词同时出现就默认左列为当前。倒序当前后置未实现定位就unknown；三金额/调整多列本轮保守unknown除非确有可靠映射，不盲放开。",
+    "prepare runner可扫描公司信息到前20页并保留实际证据页/字段块；公司代码/证券代码/股票代码跨行仅同一字段块拼；目标代码必须明确发行人字段。允许真实同一公司A/B股票代码字段含两代码且有同公司字段上下文，不以全文任意六位证明身份；有别家公司字段冲突仍unknown。修订全文/通知区别不变；correction类真实年度全文不能只因category不是annual而排除，title/body年份+年度全文与合并表资格需独立确认后才给candidate，不把半年度/季度/通知误当。",
+    "保留unknown初因，文档类型仍suspected直到版本适配器核定。raw runner的--limit-codes诊断不是效应样本；不可覆盖原v1输出。修正任何根路径/绑定约束仍保持原件hash/source snapshot/设备守卫。",
+    "新增真实对应格式/人民币二证/全书RMB词汇/单功能币拒绝/倒序列拒绝/括号标题/正文引用拒绝/别公司代码/同公司A-B/跨行字段与20页公司信息的有意义反例。回归6原年报4数和上述4真实大批原件，记录成功和仍未知；不改到凑覆盖。",
+    "测试通过后给parser/runner/test/eval4文件各SHA，root验后交Luna对同25另目录v2，不自行真实大批重跑。"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/format-qualification-controller-decision.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-diagnostic-25-receipt.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/sol-financial-parser-contract.json"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/tests/unit/test_profitability_discovery.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_documents.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/evaluate_profitability.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "4准确SHA、语义测试与实际案例资格，不算市场"
+  ],
+  "stop_conditions": [
+    "不联网/不跑市场/不改源与原v1产物/不新增候选"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

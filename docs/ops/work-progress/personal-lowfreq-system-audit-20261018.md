@@ -161,3 +161,12 @@ checked_coordination_sha=1cbb4cff7cc4a8d86e868236691114ed2d6b0a2d；已读自身
 - 六原年报四字段经PDFium与独立pypdf原文核对；初版12语义测试已主控独跑通过，保存parser-controller-review。正式模块SHA9c6c726d4a30dd44d4a5fa3c7d66cd7b22c45cc6ed0eeea3e74c5581622fc9cb。仅覆盖已验证格式，未冒称全面解析/版本资格。
 - 第二Luna low编写机械取证runner，主控识别并修复主仓/工作树路径、交易所前缀映射、全文修订词误判通知三问题。root独核后，冻结活进度独立快照并实际执行前25源代码诊断（非效应样本）。大产物固定bulk外盘source-diagnostic-25-v1，尚在跑；原600批量继续，失败未重试。
 - Sol medium只写冻结设计比较执行器、纯合成，不触真实效果；主控和Astra保留全文/更正/逐字段年份边界。新市场核心执行次数仍0。下一步检查25诊断暴露的具体格式及所有更正文证据，完成必要修复后全600数据资格。
+
+
+## 2026-10-19T11:39:58.353236+08:00 中断恢复、逐字段资格与版本审查
+
+- 上轮Luna/Sol额度错误后本轮用户明确继续。实查旧采集进程已停止，journal3427start/3423finish，4中断永久保留未重发；progress131完整/6不完整/4旧运行/459待取。一次当前可用性委派成功，Luna low以原脚本/计划+--resume实际恢复，session21429/PID27614；原源预算/限速/失败停止保持，未重置额度或购买。
+- root接回prepare写权，修复无年份更正TypeError及GP候选错误依赖现金流表。初验19通过1失败（旧测试恰好规定了错误依赖），改成GP可用/CFO未知的语义反例并保留通知排除，21测试通过；三额外合成检查通过。parser f413b863a70533c1a2326e57bd7f7ad6d551674621f04a23cda1890966506112，runner 3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012。
+- 第二Luna low正在同25代码/同快照620原件v2诊断，旧v1保留，有具体格式与依赖修正才重解析。新目录source-diagnostic-25-v2，不是25股票效果试验。
+- Astra high只读审查明确expected索引必须从全部目录/目标建立、含失败及未发；不能仅用成功解析后回退旧年。未经正文审查的更正continuing_scope=unknown，不以未发现冒充不延续；仅已核22 code+ID业务公告豁免，后续按真实必要事件逐篇审查。Sol medium仅新build_financial_panel.py和同raw测试，尚未真实运行。
+- checked_coordination_sha=c2006894ecbff6b741ca17b11de2229a41fc97e8，读自身/因子01:41/系统11:23/中控；de4d18638cd329304ea187065f6cfd3f832e32ff成功推fetch读回。原LEI/账户/UI无交集。storage实核11:32固定外盘UUID/541GB及内盘27.65GB，费用未知。新财务效果仍0，核心1+最多3跟进未用；本任务未完成，需资料资格面板及真实比较。

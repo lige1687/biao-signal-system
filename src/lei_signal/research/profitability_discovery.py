@@ -14,13 +14,15 @@ from pathlib import Path
 import pypdfium2
 
 TABLES = {"assets": "资产负债表", "profit": "利润表", "cash": "现金流量表"}
-HEAD = re.compile(r"^(?:[一二三四五六七八九十\d]+[、．.])?\s*(合并|母公司)(资产负债表|利润表|现金流量表)\s*$")
+HEAD = re.compile(
+    r"^(?:(?:[一二三四五六七八九十\d]+[、．.]|[（(][一二三四五六七八九十\d]+[）)])\s*)?"
+    r"(合\s*并|母\s*公\s*司)\s*(资\s*产\s*负\s*债\s*表|利\s*润\s*表|现\s*金\s*流\s*量\s*表)\s*$")
 NUM = re.compile(r"(?<![\d.])[-−－]?\d[\d,]*(?:\.\d{1,2})?(?![\d.])")
 MONEY_TOKEN = re.compile(
     r"(?<![\d.])(?:[（(]\s*[-−－]?\d[\d,]*(?:\.\d{1,2})?\s*[）)]|"
     r"[-−－]?\d[\d,]*(?:\.\d{1,2})?)(?![\d.])")
 YEAR = re.compile(r"(20\d{2})\s*年")
-UNIT = re.compile(r"单位\s*[:：]\s*(百万元|万元|元)(?![\w])")
+UNIT = re.compile(r"单位\s*[:：]\s*(?:人民币\s*)?(百万元|万元|元)(?![\w])")
 LABELS = {
     "revenue": re.compile(r"^(?:[一二三四五六七八九十]+[、．.]\s*|其中\s*[:：]\s*)?营业收入(?=\s|\d|$)"),
     "cost": re.compile(r"^(?:减\s*[:：]\s*|其中\s*[:：]\s*)?营业成本(?=\s|\d|$)"),
@@ -44,7 +46,8 @@ def _rows(pages):
 
 
 def _sections(rows):
-    headings = [(i, match.group(1), match.group(2))
+    headings = [(i, re.sub(r"\s+", "", match.group(1)),
+                 re.sub(r"\s+", "", match.group(2)))
                 for i, (_, _, line) in enumerate(rows)
                 if (match := HEAD.fullmatch(line))]
     result = {name: [] for name in TABLES}
@@ -64,14 +67,49 @@ def _context(rows, start, end, pages):
     return nearby, page_header
 
 
+def _currency_evidence(pages):
+    """Only whole-report presentation evidence; never subsidiary currency alone."""
+    matches = {"statement": [], "glossary": [], "functional": [], "translation": []}
+    for page_no, page in enumerate(pages, 1):
+        for line in page.splitlines():
+            compact = re.sub(r"\s+", "", line)
+            if re.search(r"财务附注中报表的单位为[:：]?人民币元|本财务报表以人民币列示|"
+                         r"财务报表的列报货币为[:：]?人民币", compact):
+                matches["statement"].append({"page": page_no, "text": line.strip()[:240]})
+            if re.search(r"元、万元、亿元指人民币元[、，](?:人民币)?万元[、，](?:人民币)?亿元", compact):
+                matches["glossary"].append({"page": page_no, "text": line.strip()[:240]})
+            if re.search(r"本公司(?:以|采用)人民币为记账本位币", compact):
+                matches["functional"].append({"page": page_no, "text": line.strip()[:240]})
+            if re.search(r"境外经营的外币财务报表.*折算为人民币报表|"
+                         r"在编制合并财务报表时将境外经营的财务报表折算为人民币", compact):
+                matches["translation"].append({"page": page_no, "text": line.strip()[:240]})
+        # Some issuer presentation sentences end on the next extracted line.
+        lines = page.splitlines()
+        for first, second in zip(lines, lines[1:]):
+            compact = re.sub(r"\s+", "", first + second)
+            if "本财务报表以人民币列示" in compact and not any(
+                    item["page"] == page_no for item in matches["statement"]):
+                matches["statement"].append({"page": page_no,
+                                             "text": (first.strip() + " | " + second.strip())[:240]})
+    all_evidence = (matches["statement"][:2] + matches["glossary"][:2] +
+                    matches["functional"][:1] + matches["translation"][:1])
+    if matches["statement"]:
+        return "statement_presentation", all_evidence
+    if matches["functional"] and matches["translation"]:
+        return "functional_plus_consolidated_translation", all_evidence
+    if matches["glossary"]:
+        return "whole_report_rmb_glossary", all_evidence
+    return None, all_evidence
+
+
 def _qualification(rows, start, end, pages, kind, report_year):
     nearby, page_header = _context(rows, start, end, pages)
     header = next((line for line in nearby[1:] if line.startswith("项目") and
-                   ("期末余额" in line or "本期" in line or "年度" in line or "年12" in line
-                    or "年 12" in line)), None)
+                   any(word in line for word in ("期末", "期初", "年末", "年初", "本期", "上期", "年度", "年12", "年 12"))), None)
     evidence = {"heading_page": rows[start][0], "heading": rows[start][2],
                 "header": header, "unit_line": None, "currency_line": None,
-                "currency_page": None, "period_line": None}
+                "currency_page": None, "currency_rule": None,
+                "currency_evidence": [], "period_line": None}
     if header is None:
         return "current_column_header_missing", evidence, None
     compact = re.sub(r"\s+", "", header)
@@ -81,13 +119,28 @@ def _qualification(rows, start, end, pages, kind, report_year):
     if len(dates) > 2:
         return "adjusted_or_multiple_columns", evidence, None
     if kind == "assets":
-        current = "期末余额" in compact and "期初余额" in compact or (
-            len(dates) == 2 and dates[0].startswith(str(report_year)) and
-            dates[1].startswith(str(report_year - 1)))
+        variants = (("期末余额", "期初余额"), ("年末余额", "年初余额"))
+        current = any(a in compact and b in compact and compact.index(a) < compact.index(b)
+                      for a, b in variants)
+        reversed_columns = any(a in compact and b in compact and compact.index(a) > compact.index(b)
+                               for a, b in variants)
+        if len(dates) == 2:
+            current_date = f"{report_year}年12月31日"
+            prior_dates = {f"{report_year-1}年12月31日", f"{report_year}年1月1日"}
+            current = dates[0] == current_date and dates[1] in prior_dates
+            reversed_columns = dates[1] == current_date and dates[0] in prior_dates
     else:
-        current = "本期发生额" in compact and ("上期发生额" in compact or "上期金额发生额" in compact)
-        current = current or (len(dates) == 2 and dates[0].startswith(str(report_year))
-                              and dates[1].startswith(str(report_year - 1)))
+        variants = (("本期发生额", "上期发生额"), ("本期发生额", "上期金额发生额"),
+                    ("本期金额", "上期金额"))
+        current = any(a in compact and b in compact and compact.index(a) < compact.index(b)
+                      for a, b in variants)
+        reversed_columns = any(a in compact and b in compact and compact.index(a) > compact.index(b)
+                               for a, b in variants)
+        if len(dates) == 2:
+            current = dates[0] == f"{report_year}年度" and dates[1] == f"{report_year-1}年度"
+            reversed_columns = dates[1] == f"{report_year}年度" and dates[0] == f"{report_year-1}年度"
+    if reversed_columns:
+        return "current_column_not_first", evidence, None
     if not current:
         return "current_and_comparative_columns_not_verified", evidence, None
     unit_lines = [line for line in nearby[:12] if "单位" in line and
@@ -107,14 +160,22 @@ def _qualification(rows, start, end, pages, kind, report_year):
             return "currency_not_verified_as_rmb", evidence, None
         evidence["currency_line"] = currency_marks[0][0]
         evidence["currency_page"] = rows[start][0]
+        evidence["currency_rule"] = "table_currency"
+        evidence["currency_evidence"] = [{"page": rows[start][0], "text": currency_marks[0][0]}]
+    elif re.search(r"单位\s*[:：]\s*人民币\s*(?:元|万元|百万元)", units[0][0]):
+        evidence["currency_line"] = units[0][0]
+        evidence["currency_page"] = rows[start][0]
+        evidence["currency_rule"] = "table_rmb_unit"
+        evidence["currency_evidence"] = [{"page": rows[start][0], "text": units[0][0]}]
     else:
-        # A statement preface, rather than domicile, can establish its currency.
-        preface = [(page_no, line) for page_no, page in enumerate(pages[:rows[start][0]], 1)
-                   for line in page.splitlines()
-                   if re.search(r"(?:财务附注中报表的单位为|财务报表的列报货币为)\s*[:：]?\s*人民币元?", line)]
-        if not preface:
+        rule, source = _currency_evidence(pages)
+        evidence["currency_rule"] = rule
+        evidence["currency_evidence"] = source
+        if rule is None:
             return "currency_not_verified_as_rmb", evidence, None
-        evidence["currency_page"], evidence["currency_line"] = preface[-1]
+        primary = (next(item for item in source if "记账本位币" in item["text"])
+                   if rule == "functional_plus_consolidated_translation" else source[0])
+        evidence["currency_page"], evidence["currency_line"] = primary["page"], primary["text"]
     period_lines = [line for line in nearby[1:12] if YEAR.search(line) and
                     ("月" in line or "年度" in line or "—" in line or "-" in line)]
     explicit = [(line, match) for line in period_lines if

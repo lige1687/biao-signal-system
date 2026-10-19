@@ -1,0 +1,91 @@
+{
+  "schema": "financial-source-diagnostic-receipt/1",
+  "execution_contract_path": "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/luna-source-diagnostic-execution-contract.json",
+  "execution_contract_sha256": "b0a6aa8413bc8a3dc8b0b23f554b5dcccae8b54fe84218f9c62638c55670a363",
+  "source_snapshot_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/progress-source-diagnostic-25.json",
+  "source_snapshot_sha256": "f6c1b78ee33ff16941b797a06f4fd2b5ac7565a0c4084998abad3efe4f9bc375",
+  "runner_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_documents.py",
+  "runner_sha256": "ebafec87b19d935e1449992e2f523cd0fa37ec70996da4d5243a2251ca9d49bb",
+  "parser_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py",
+  "parser_sha256": "9c6c726d4a30dd44d4a5fa3c7d66cd7b22c45cc6ed0eeea3e74c5581622fc9cb",
+  "command": [
+    "python3",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_documents.py",
+    "--progress",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/progress-source-diagnostic-25.json",
+    "--plan",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+    "--parser-sha256",
+    "9c6c726d4a30dd44d4a5fa3c7d66cd7b22c45cc6ed0eeea3e74c5581622fc9cb",
+    "--out",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-diagnostic-25-v1",
+    "--limit-codes",
+    "25"
+  ],
+  "limit_codes": 25,
+  "purpose": "仅对固定cohort前25代码做来源与年度财务字段资格诊断；不是收益或市场效果样本。",
+  "execution": {
+    "exit_code": 0,
+    "real_seconds": 221.53,
+    "network_used": false,
+    "market_effects_run": false
+  },
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-diagnostic-25-v1",
+  "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-diagnostic-25-v1/manifest.json",
+  "manifest_sha256": "30a313a3ea1b3b7b9f8b370f7f1ce88afe85fc7a23b398c2edaa5967c9a376d3",
+  "counts": {
+    "documents_written": 620,
+    "documents_failed": 0,
+    "source_complete_codes": 23,
+    "source_incomplete_codes": 2,
+    "annual_parser_attempts": 334,
+    "correction_full_texts_saved": 286
+  },
+  "source_original_checks": {
+    "publisher_code_match": 620,
+    "bytes_match": 620,
+    "sha256_match": 620,
+    "pdf_header_match": 620
+  },
+  "parser": {
+    "status": {
+      "qualified": 144,
+      "unknown": 190
+    },
+    "gross_profit_over_assets": {
+      "qualified": 144,
+      "unknown": 190,
+      "unknown_reason": "revenue_cost_or_assets_unknown"
+    },
+    "cash_flow_over_assets": {
+      "qualified": 148,
+      "unknown": 186,
+      "unknown_reason": "cash_flow_or_assets_unknown"
+    }
+  },
+  "document_form_distribution": {
+    "suspected_full_text": 334,
+    "other_or_year_mismatch": 52,
+    "notice": 31,
+    "unknown": 203
+  },
+  "identity_distribution": {
+    "match": 579,
+    "identity_unknown": 36,
+    "weak_match": 5,
+    "conflict": 0
+  },
+  "readback_checks": {
+    "manifest_sha_matches": true,
+    "all_620_document_json_hashes_match": true,
+    "all_286_notice_json_hashes_and_page_shapes_match": true,
+    "version_chain_completeness_inferred": false
+  },
+  "limitations": [
+    "仅诊断前25个固定代码，范围不是效果样本。",
+    "190份年度候选财务字段状态未知；没有把未知当作通过。",
+    "文档类型中203份未知，身份有36份未知与5份弱匹配。",
+    "没有判定更正是否影响财务字段，也没有推断版本链完整。"
+  ]
+}
