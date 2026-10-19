@@ -1,3 +1,13 @@
+# 趋势条件下低贝塔、资产增长、净发行与OSAP复用启动 2026-10-20T01:00:48.647318+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=069484c80b53564b1d0131d80c5f326610af9ef3；checked_at=2026-10-20T01:00:48.647318+08:00；已读COORDINATION/self/原因子FIP交付00:58/独立资产增长20:06/系统00:57/dispatch。新用户请求比较同样趋势下的低贝塔、资产扩张与净股份发行，参考Open Source Asset Pricing复现；不重复资产增长已封存同题，不接管原US/FIP/LEI实现。
+- 本轮有界问题：三类候选如何准确复用外部定义，现有证据能否支持趋势条件增量；先原方法/本地结果和资料资格，只有明确同一趋势定义、合格市场锚及无混口径来源才冻结局部新比较。金融解释/简单降仓对手/上行代价分开，不改生产或原技术定义。
+- root唯一写本成果树docs/experiments/trend-factor-reuse-2026-10-20.md、raw同名目录、registry本键/INDEX本行、既有progress/目标note；只读其他owner原件/成果。Luna只读本地资料及可计算性；如需研究代码先另登记准确文件。不改旧输入检查、旧冻结/定义/因子实现或共享工作流。
+- 新来源问题默认6请求上限（当前2次公开检索，含1次无有效AQR命中），同族旧预算全继承，不拿本轮替旧补数预算。新比较最多1核心+3必要跟进，尚未冻结/运行；可执行必要检验继续，核心资料不足则明确阻塞该分支，不伪造收益。无付费、安装、凭证读取、外发私有数据、交易/生产/通知；仅小文件本机，若需大结果先固定外盘检查。
+- 验收：低beta与低波动/BAB区别，CMA与资产增长信号/本地旧结果区别，净股份与回购公告/现金融资区别；OSAP源码及版本/依赖/口径对应，有效性不靠库名背书。实际执行情况、性能与增量表和未补资料一起交付，不只给候选清单。当前成果基线cdf5aeefc0cd8dc031209b9c7eb027075e7e1f65。
+
+---
+
 # 数据防失真检查与来源补证交付 2026-10-20T00:58:23.474081+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅新入口防护和本批资格检查；scope_released true；全量补证/有效策略目标仍未完成。checked_coordination_sha=ea8207fb5c7ae39d3f86414f779f8197b4beddf8；checked_at=2026-10-20T00:58:23.474081+08:00；已读COORDINATION/self/research-utility-review-20261012最新FIP00:48/investor-workspace-simplification-20261012最新图像00:57/lowfreq-strategy-discovery-20261019/dispatch；与原FIP/US/LEI及系统UI无范围冲突。一次交付准备因并发fetch更新远端跟踪SHA，在写入前断言停止；已重读唯一更新的系统记录，未覆盖他人。
