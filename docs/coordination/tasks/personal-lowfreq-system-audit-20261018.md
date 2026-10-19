@@ -1,3 +1,11 @@
+# 新增来源金额独立抽核 2026-10-19T13:32:46.929979+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=2a27c73d8fc2b31a3b8777868e08c1844fb71a54；checked_at=2026-10-19T13:32:46.929979+08:00；COORDINATION/自身/research-utility-review-20261012/investor-workspace-simplification-20261012/research-dispatch-controller已读，无其他变更或交集。成果仍7c88c8835e5020fba601ae949fa2ab4ff3ca476f。
+- 原件增加了新的发行人及格式，Sol只读batch06相对05新增1333中至多6份已合格原件，按财务值极端/单位/早年格式选择并冻结，再以独立PDF文本核4字段、合并表与年度。只唯一写自身raw/lowfreq-profitability-increment-2026-10-19/source-batch06-independent-fields-review.json，不改parser/合同、不读价格或未来结果、不联网。不同于旧12份解析器验证，不重复旧PDF。
+- sourcePDF原4778仍运行；05:31UTC2576starts/2572finishes，其中一份nonPDF响应保留不重试。原控制器停止边界及核心0/跟进0保持。最终资格和效果仍未验收，数据核对不代替价值判断。
+
+---
+
 # 新增来源第六批已核，最终比较仍等待原件收束 2026-10-19T13:30:26.933242+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=bf0e0f990c334a12d766d490b459fc1a0429b920；checked_at=2026-10-19T13:30:26.933242+08:00；已读COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller，fetch无其他变化；冲突决定不变，仅独立600历史股票财务候选，不接原策略/UI。
