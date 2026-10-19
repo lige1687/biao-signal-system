@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_rank_ic_evaluation.py",
+    "tests/unit/test_classic_benchmarks.py",
+    "--basetemp",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T000100-c0f8b35dfdfd/checks/tmp"
+  ],
+  "returncode": 1,
+  "log": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T000100-c0f8b35dfdfd/checks/existing-tests.log",
+  "log_sha256": "e575528b867ef2389b868bc8a2b6abaa26fe2b5b0ff4b1232847259784589458",
+  "scope": "existing synthetic arithmetic/time contracts only, no new market computation",
+  "stdout_tail": "t = Path(__file__).resolve().parents[2]\n        protocol = (\n            root\n            / \"docs/archive/handoffs-plans/classic-benchmarks-2026-09-28\"\n            / \"protocol-complete.json\"\n        )\n        out = tmp_path / \"run\"\n        command = [\n            sys.executable,\n            \"scripts/run_factor_lab.py\",\n            \"--benchmark-protocol\",\n            str(protocol),\n            \"--out\",\n            str(out),\n        ]\n        run = subprocess.run(\n            command,\n            cwd=root,\n            env={**os.environ, \"PYTHONPATH\": str(root / \"src\")},\n            capture_output=True,\n            text=True,\n            timeout=60,\n        )\n>       assert run.returncode == 0, run.stderr\nE       AssertionError: Traceback (most recent call last):\nE           File \"/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/run_factor_lab.py\", line 121, in <module>\nE             sys.exit(main())\nE                      ^^^^^^\nE           File \"/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/run_factor_lab.py\", line 111, in main\nE             run_pilot(args.benchmark_protocol, args.out, register_report=args.register_report)\nE           File \"/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/factor_lab/benchmark_pilot.py\", line 345, in run_pilot\nE             raise ValueError(\"frozen hash mismatch: \" + rel)\nE         ValueError: frozen hash mismatch: docs/research/ai-execution-contract.md\nE         \nE       assert 1 == 0\nE        +  where 1 = CompletedProcess(args=['/opt/homebrew/opt/python@3.11/bin/python3.11', 'scripts/run_factor_lab.py', '--benchmark-proto...alueError(\"frozen hash mismatch: \" + rel)\\nValueError: frozen hash mismatch: docs/research/ai-execution-contract.md\\n').returncode\n\ntests/unit/test_classic_benchmarks.py:257: AssertionError\n=========================== short test summary info ============================\nFAILED tests/unit/test_classic_benchmarks.py::test_cli_end_to_end_and_independent_fixed_snapshot\n1 failed, 80 passed in 3.31s\n",
+  "stderr_tail": ""
+}

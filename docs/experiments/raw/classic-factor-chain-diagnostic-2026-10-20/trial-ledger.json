@@ -1,0 +1,29 @@
+{
+  "source_requests_used": 6,
+  "core": {
+    "status": "failed",
+    "attempt": 1,
+    "design_sha256": "3055b90444290246646d12212468303d02995951ff02e039315c4f16e9b9218b",
+    "code_sha256": "a5e91c1261038aa94fb95be2cfd208bdf0e105800144b4fb6deba7e2a55fa2e4",
+    "output_plan": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/classic-factor-chain-diagnostic-2026-10-20/storage-plan-core.json",
+    "started_at": "2026-10-20T00:07:05.172907+08:00",
+    "estimate_adjustment": "30MiB to96MiB before execution because separate CSV artifacts duplicate diagnostic columns",
+    "returncode": 1
+  },
+  "followups_used": 1,
+  "old_families": "no sealed P1/P2/P3 market reruns; prior budgets preserved",
+  "engineering": "81 existing checks: 80 passed, one pre-statistics old-contract fingerprint refusal; synthetic provenance controls and runner self-test",
+  "followup1": {
+    "status": "accepted_bounded_diagnostic",
+    "reason": "Core stopped before statistics: source sz.001914 contains adjustflag3 for1560 rows although request specifies2. Older lowfreq_discovery._quotes checks request but not returned adjustment field. No evidence here that all such prices are numerically wrong.",
+    "new_code_sha256": "d02320773eead60d90e73d99af94ac9fc0b9bf99e0fe3ccca4e08c5e6129059f",
+    "returncode": 0
+  },
+  "lifecycle": {
+    "execution": "completed",
+    "evidence": "supported_bounded_arithmetic_and_source_gap",
+    "completion_reason": "question_answered_with_financial_branches_blocked",
+    "scope": "monthly reversal diagnostic only",
+    "next": "qualify source adjustment metadata and affected prior use; no production change"
+  }
+}

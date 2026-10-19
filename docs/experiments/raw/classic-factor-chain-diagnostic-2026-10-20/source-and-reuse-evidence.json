@@ -1,0 +1,63 @@
+{
+  "retrieved_or_checked": "2026-10-19/20 Asia/Shanghai",
+  "sources": [
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/Ken.French/Data_Library/det_st_rev_factor.html",
+      "finding": "prior one month, low previous returns minus high previous returns, monthly size partitions; US value-weight portfolio returns, not A-share rank IC benchmark",
+      "access": "official page read via web"
+    },
+    {
+      "url": "https://doi.org/10.1016/j.jfineco.2019.03.008",
+      "local_pdf": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/classic-benchmarks-2026-09-28/sources/ch3-paper.pdf",
+        "sha256": "8270a7fbd28120f4ef1d96529075b75417aab1f52fe5b78deb57a589172782f6"
+      },
+      "finding": "Size and Value in China, JFE 134 (2019), Appendix A.1 PDF page16: 2000-2016 WIND/CSMAR; float and nontradable shares total market cap; recent public report release before month end; excludes smallest30%, recent IPO and sparse trading",
+      "access": "local saved publisher PDF inspected; new NBER403 and authorPDFtimeout retained"
+    }
+  ],
+  "unverified_claim": "No inspected primary source establishes universal A-share monthly mean RankIC -0.04 to -0.06 or a universal leakage threshold. Search excerpts from secondary sources not accepted.",
+  "source_requests": [
+    {
+      "kind": "search",
+      "q": "China A shares short term reversal monthly rank IC 0.04 0.06 factor"
+    },
+    {
+      "kind": "search",
+      "q": "site.mba.tuck.dartmouth.edu short term reversal factor prior 1 month returns size book market construction"
+    },
+    {
+      "kind": "search",
+      "q": "site.ssrn.com China value size factors earnings price Liu Stambaugh Yuan 2019"
+    },
+    {
+      "kind": "open",
+      "url": "French short-term reversal details",
+      "status": "read"
+    },
+    {
+      "kind": "open",
+      "url": "https://www.nber.org/system/files/working_papers/w24458/w24458.pdf",
+      "status": "403"
+    },
+    {
+      "kind": "open",
+      "url": "https://www.mingshiim.com/static/sizevaluechina.pdf",
+      "status": "timeout"
+    }
+  ],
+  "reuse_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-value-increment-2026-10-19.md",
+      "sha256": "19f2fd9577a7178bf902bb3e7d7b7b905f9ac9b642f436bd819b143310a9521f"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/work-progress/rank-ic-evaluation-local-integration.md",
+      "sha256": "20ccb4333c4a919374f1ab726a3cae2c072881b5f9f7d69975bbe5da6a6420ad"
+    }
+  ],
+  "agent_reviews": {
+    "luna": "read-only inventory: date-level IC/average ties implemented; generic diagnostics only median2 groups; synthetic temporal checks not real financial source alignment",
+    "sol": "bounded runner one file; self-test only; core run by root; real fee/token cost unknown"
+  }
+}

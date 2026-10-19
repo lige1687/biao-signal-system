@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-20T00:09:21.647209+08:00",
+  "market_results_seen": false,
+  "core_attempt": 1,
+  "followup_attempt": 1,
+  "reason": "Core stopped before statistics: source sz.001914 contains adjustflag3 for1560 rows although request specifies2. Older lowfreq_discovery._quotes checks request but not returned adjustment field. No evidence here that all such prices are numerically wrong.",
+  "correction": "Allow parsing known flag3 only to quarantine every monthly observation of any source with mixed/non2 returned adjustment metadata. Never relabel3to2; keep original600 qualification denominator, no replacement; label/score calculations use only other qualified sources. This restriction uses source quality, not future returns, and is a historical diagnostic not a live investable universe.",
+  "original_code_sha256": "a5e91c1261038aa94fb95be2cfd208bdf0e105800144b4fb6deba7e2a55fa2e4",
+  "new_code_sha256": "d02320773eead60d90e73d99af94ac9fc0b9bf99e0fe3ccca4e08c5e6129059f",
+  "design_sha256": "3055b90444290246646d12212468303d02995951ff02e039315c4f16e9b9218b",
+  "scope": "same dates/score/label/weights/uncertainty; no new source or parameter search",
+  "repair_owner": "root after Sol released runner; old experiment/module untouched"
+}

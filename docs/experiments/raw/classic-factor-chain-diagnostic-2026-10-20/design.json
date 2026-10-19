@@ -1,0 +1,78 @@
+{
+  "schema": "classic-chain-diagnostic/1",
+  "frozen_at": "2026-10-20T00:01:31.363254+08:00",
+  "question": "Can a bounded monthly reversal diagnostic expose arithmetic, direction, calendar and information-availability defects in our research chain?",
+  "mode": "research",
+  "use": "pipeline diagnostic, not trading selection or literal paper replication",
+  "definition": {
+    "id": "local.classic.monthly-reversal-diagnostic@1.0.0",
+    "raw": "close(month_end_t)/close(month_end_t_minus_1)-1",
+    "reversal": "-raw",
+    "adjustment": "reuse BaoStock adjustflag=2 quotation proxy; provider historical arrival and total shareholder-return equivalence unqualified",
+    "eligibility": "fixed 600 codes from bound historical cohort sources; both calendar month ends present, positive finite close, tradestatus=1, current isST=0; no future data in eligibility",
+    "label": "close(first_session_month_t_plus_2)/close(first_session_month_t_plus_1)-1; exact calendar dates, positive prices, suspension prices retained marked; missing NOT filled",
+    "months": "formation 2014-12 through 2025-11, 132 monthly labels 2015-01 through 2025-12",
+    "minimum_ic_pairs": 3,
+    "quintiles": "sort raw ascending; fractional membership across exact ties, five equal target-weight groups formed before outcome missingness; each group weight sum=1",
+    "comparison": "raw vs negative score is sign-invariance diagnostic, no new information; all eligible equal-weight reference; no claim incremental alpha"
+  },
+  "evaluation": {
+    "metrics": [
+      "date-level Spearman with average ties, then equal-month mean",
+      "raw and reversal direction equality",
+      "five group observed weighted contribution and unknown weight, paired low-minus-high",
+      "calendar 21-effective-quote disagreement diagnostic",
+      "yearly and fixed 2015-2019 vs 2020-2025",
+      "12-month circular block uncertainty for mean IC, 2000 draws seed 20261020"
+    ],
+    "tests": [
+      "hand arithmetic with ties",
+      "raw sign reversal identity",
+      "within-month permutation fixed seed",
+      "future-mutation cannot alter prior scores",
+      "constant score undefined",
+      "monthly quintile tie membership and unknown weight preservation",
+      "existing RankIC timing rejection tests; no claim covers actual financial disclosures"
+    ],
+    "annualization": "no annualized return claim if outcome missing or quotation/execution qualification incomplete; monthly contribution descriptive only"
+  },
+  "budget": {
+    "source_requests_used": 6,
+    "source_requests_max": 6,
+    "core_max": 1,
+    "core_used": 0,
+    "followups_max": 3,
+    "followups_used": 0,
+    "old_family_budgets_preserved": true
+  },
+  "inputs": {
+    "price_contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+      "sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289"
+    }
+  },
+  "code_reuse": {
+    "src/lei_signal/research/factor_lab/diagnostics.py": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/factor_lab/diagnostics.py",
+      "sha256": "da84ca7b13502a9669e09d5c0c3b610b75e557a3b939742d8ac400f037b99cc8"
+    },
+    "src/lei_signal/research/factor_lab/rank_ic_evaluation.py": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/factor_lab/rank_ic_evaluation.py",
+      "sha256": "049d1076c4c3dd0a98eced31d7503bfc6eb7d441d18b7f04a78bbba6c3f4e25f"
+    },
+    "src/lei_signal/research/momentum_prototype.py": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/momentum_prototype.py",
+      "sha256": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f"
+    }
+  },
+  "scope_limits": [
+    "no original LEI or other owner four-factor study",
+    "no new downloads",
+    "no shared engine edits",
+    "size/BP/EP only qualification, no missing fields invented",
+    "not unseen history; old P1 price history already examined",
+    "no production or trading authorization"
+  ],
+  "success": "correctness established only for checked invariants; empirical sign/range/monotonicity not hard pass threshold",
+  "stop": "bounded diagnostic reconciled; fundamental branches blocked if required point-in-time fields absent"
+}

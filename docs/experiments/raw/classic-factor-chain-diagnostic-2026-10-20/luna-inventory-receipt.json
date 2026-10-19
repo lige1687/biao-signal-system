@@ -1,0 +1,26 @@
+{
+  "mission": "readonly current RankIC chain and old-input inventory",
+  "task_scope": [
+    "date-level IC, ties, direction, temporal-test coverage",
+    "old price contract and missing size/value fields"
+  ],
+  "read_only_paths": [
+    "src/lei_signal/research/factor_lab",
+    "tests/unit/test_rank_ic_evaluation.py",
+    "own lowfreq-expanded-discovery raw contracts"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true,
+    "completed": "root read relevant source sections, tests, and source contract"
+  },
+  "result": "existing date-level Spearman and temporal masks available; median2 groups only; no real financial timestamp evidence from synthetic tests; source files not read by Luna"
+}

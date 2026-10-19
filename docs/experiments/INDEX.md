@@ -623,3 +623,5 @@
 - `docs/reports/` — 说明：回测 HTML 报告已迁至 `web/public/reports/`
 - `docs/` 根的 `handoff-* / plan-*` 为应用线（data-sync）历史任务书与方案，
   与本目录研究线互不隶属
+
+- [经典因子链路诊断：月度反转](classic-factor-chain-diagnostic-2026-10-20.md) — 132个月，方向核验与来源复权标记缺口；规模/BP/EP未评估。

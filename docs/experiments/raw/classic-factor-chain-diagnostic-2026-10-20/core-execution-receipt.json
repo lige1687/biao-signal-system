@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/classic-factor-chain-diagnostic-2026-10-20/run_diagnostic.py",
+    "--design",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/classic-factor-chain-diagnostic-2026-10-20/design.json",
+    "--storage-plan",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/classic-factor-chain-diagnostic-2026-10-20/storage-plan-core.json"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/classic-factor-chain-diagnostic-2026-10-20/run_diagnostic.py\", line 414, in <module>\n    main()\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/classic-factor-chain-diagnostic-2026-10-20/run_diagnostic.py\", line 387, in main\n    contract, sessions, records = load_inputs(design)  # all bound input hashes before any statistics\n                                  ^^^^^^^^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/classic-factor-chain-diagnostic-2026-10-20/run_diagnostic.py\", line 340, in load_inputs\n    require(r['adjustflag'] == '2' and r['tradestatus'] in ('0','1') and r['isST'] in ('0','1'),\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/classic-factor-chain-diagnostic-2026-10-20/run_diagnostic.py\", line 27, in require\n    raise ValueError(message)\nValueError: invalid source flag: sz.001914 2013-01-04\n",
+  "log": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T000100-c0f8b35dfdfd/checks/core-execution.log",
+  "log_sha256": "3bad2d14f4174e38010d66771c313728e66c07834144a431d033cd64de878307",
+  "finished_at": "2026-10-20T00:07:09.095636+08:00"
+}

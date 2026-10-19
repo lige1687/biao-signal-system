@@ -1,0 +1,30 @@
+{
+  "synthetic_only": true,
+  "controls": [
+    {
+      "case": "score_copies_future_outcome_but_declares_earlier_timestamps",
+      "mean_ic": 1.0,
+      "eligible": 4,
+      "interpretation": "metadata validation cannot identify falsely declared provenance; requires causal feature construction audit, not evidence any live factor leaks"
+    },
+    {
+      "case": "same_future_score_with_honest_late_source_timestamp",
+      "eligible": 0,
+      "reasons": [
+        [
+          "source_not_yet_available"
+        ],
+        [
+          "source_not_yet_available"
+        ],
+        [
+          "source_not_yet_available"
+        ],
+        [
+          "source_not_yet_available"
+        ]
+      ],
+      "interpretation": "declared future input correctly excluded"
+    }
+  ]
+}
