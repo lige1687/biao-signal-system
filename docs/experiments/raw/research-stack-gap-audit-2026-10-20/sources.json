@@ -1,0 +1,64 @@
+{
+  "checked_at": "2026-10-20T01:25:09.078898+08:00",
+  "retrieval": "web tool official pages; no market files downloaded",
+  "requests": 22,
+  "unique_pages": 10,
+  "sources": [
+    {
+      "title": "RQData A股",
+      "url": "https://www.ricequant.com/doc/rqdata/python/stock-mod",
+      "read_scope": "get_pit_financials_ex date cutoff, statements all/latest, info_date, if_adjusted; get_shares historical date range. Public API docs only; no account/data test."
+    },
+    {
+      "title": "QuantStats",
+      "url": "https://github.com/ranaroussi/quantstats",
+      "read_scope": "stats/plots/reports consume return series; not a security factor selection or trading execution engine."
+    },
+    {
+      "title": "vectorbt portfolio",
+      "url": "https://vectorbt.dev/api/portfolio/base/",
+      "read_scope": "from_orders/from_signals/from_order_func, shared cash, fees/slippage; official caveats on execution order and same-tick prices."
+    },
+    {
+      "title": "JKP homepage",
+      "url": "https://jkpfactors.com/",
+      "read_scope": "153 characteristics in 13 themes and 93 countries; reference scope, not verified local reproduction. Public data licence CC BY-NC 4.0 on page."
+    },
+    {
+      "title": "French library",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+      "read_scope": "US and regional data collections; source FIZ/CIZ change reinvestment conventions. Existing US monthly parser is not an A-share benchmark."
+    },
+    {
+      "title": "AQR datasets",
+      "url": "https://www.aqr.com/Insights/Datasets",
+      "read_scope": "Momentum, BAB, HML and QMJ research files; original/updated variants distinct; local selection effects not verified."
+    },
+    {
+      "title": "statsmodels rolling regression",
+      "url": "https://www.statsmodels.org/stable/examples/notebooks/generated/rolling_ls.html",
+      "read_scope": "RollingOLS available, default drops missing values inside window; historical fit is not actionable next-period prediction automatically."
+    },
+    {
+      "title": "arch comparison",
+      "url": "https://arch.readthedocs.io/en/latest/multiple-comparison/multiple-comparison_examples.html",
+      "read_scope": "SPA/StepM/MCS compare models with losses; current page header7.2.0 not local vendored8.0.0 identity. P values not truth probability."
+    },
+    {
+      "title": "JKP download",
+      "url": "https://jkpfactors.com/data",
+      "read_scope": "Portfolio low/mid/high and long-short returns available; monthly stock-level data access requires institutional WRDS subscription."
+    },
+    {
+      "title": "RQData generic",
+      "url": "https://www.ricequant.com/doc/rqdata/python/generic-api",
+      "read_scope": "all_instruments date parameter and get_price adjustment/suspension controls. Public declarations do not prove account access or fills."
+    }
+  ],
+  "failed_or_limited": [
+    {
+      "operation": "find China in JKP data page",
+      "result": "no text match; country selector not qualified by this result"
+    }
+  ]
+}

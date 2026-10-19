@@ -1,0 +1,37 @@
+{
+  "mission": "补齐已有研究准备工具的参照卡检索，保留既有研究边界。",
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "task_scope": [
+    "只修改已指定preparation模块及新增针对性测试；重用现有research_references列表",
+    "增加term匹配和准确reference-ref查询，独立于definitions输出；保留原卡用途/状态/来源；未知版本拒绝与截断披露",
+    "不改原定义和行情/策略，先失败案例再改动并核对兼容性"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/research-stack-gap-audit-2026-10-20/preparation-before.py"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/preparation.py",
+    "tests/unit/test_research_preparation_references.py"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "准确代码diff与针对性测试",
+    "先失败后通过回执和实际使用例",
+    "未核范围"
+  ],
+  "stop_conditions": [
+    "需要改其他文件",
+    "定义含义不清",
+    "依赖不可用"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

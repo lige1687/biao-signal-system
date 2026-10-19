@@ -1,0 +1,57 @@
+{
+  "real_cli_queries": [
+    {
+      "query": "JKP",
+      "matched": 1,
+      "refs": [
+        "reference.jkp.catalog@1.0.0"
+      ],
+      "cards_exactly_equal_to_registry": true,
+      "execution_authorized": false,
+      "source_verification": "registered_metadata_only"
+    },
+    {
+      "query": "French",
+      "matched": 8,
+      "refs": [
+        "reference.case.ff5_aug2026@1.0.0",
+        "reference.ff5.cma@1.0.0",
+        "reference.ff5.hml@1.0.0",
+        "reference.ff5.mkt_rf@1.0.0",
+        "reference.ff5.rmw@1.0.0",
+        "reference.ff5.smb@1.0.0",
+        "reference.model.ff5@1.0.0",
+        "reference.mom.mom@1.0.0"
+      ],
+      "cards_exactly_equal_to_registry": true,
+      "execution_authorized": false,
+      "source_verification": "registered_metadata_only"
+    },
+    {
+      "query": "AQR",
+      "matched": 2,
+      "refs": [
+        "reference.aqr.bab@1.0.0",
+        "reference.aqr.qmj@1.0.0"
+      ],
+      "cards_exactly_equal_to_registry": true,
+      "execution_authorized": false,
+      "source_verification": "registered_metadata_only"
+    }
+  ],
+  "exact_ref_query_pass": true,
+  "unknown_version_rejected": true,
+  "old_definition_case_output_unchanged": true,
+  "legacy_and_new_tests": "18 passed",
+  "market_runs": 0,
+  "installed_packages": 0,
+  "implementation_sha256": "df43c9794319d35e67b1fe27baa963c229dac2bd616a1dc5af1c1de5ddc02345",
+  "registry_sha256_at_check": "041be015a5f37d4daaf065d816040f24508b9944da1882e54b480eeef1ad9503",
+  "main_worktree_mirrored": true,
+  "luna_initial_test_claims": {
+    "first_old_test": "3 failed; reported by executor",
+    "first_green": "3 passed; synthetic wrong schema, rejected by root",
+    "real_schema_before_fix": "2 failed, 2 passed; reported by executor",
+    "after_fix": "4 passed; independently rerun by root"
+  }
+}

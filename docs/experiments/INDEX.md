@@ -1,3 +1,5 @@
+- 2026-10-20：[研究工具、基准与数据复用审查](research-stack-gap-audit-2026-10-20.md)：补通已有参照卡检索，复用诊断工具；数据与成交资格优先。
+
 - 2026-10-18：[权威研究者怎样发现和验证因子](authoritative-factor-discovery-learning-2026-10-18.md)：先学金融机制、测量与反证，再讨论低频ETF适配；无新回测。
 
 # docs/experiments 总索引

@@ -1,0 +1,40 @@
+{
+  "mission": "盘点已有研究工具代码、调用关系和登记，返回准确可复用能力及证据路径。",
+  "task_scope": [
+    "只读指定目录，核对代码是否存在及实际调用方，区分工具提及与接通",
+    "优先精读French benchmarks、factor_lab诊断与归因、preparation、backtest引擎、statsmodels和arch有限组件",
+    "查询QuantStats、vectorbt、rqdatac现有集成；以限定路径未找到措辞报告缺失"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/backtest",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/tests/unit",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/run_factor_lab.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-quant-tools",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/literature-tools-fit-2026-10-08.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/pyproject.toml"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "简洁功能对照表含路径行号与调用方",
+    "最关键的两处接通或数据缺口，不能因搜不到断言全系统没有",
+    "无文件修改声明及未核范围"
+  ],
+  "stop_conditions": [
+    "范围歧义",
+    "需要额外权限",
+    "需要修改文件"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}
