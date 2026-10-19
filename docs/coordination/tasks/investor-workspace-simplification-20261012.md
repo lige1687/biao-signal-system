@@ -1,3 +1,16 @@
+# 近期重点、持仓关联与页面减法已交付 2026-10-19T12:10:33.613201+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮有界工程；scope_released true。checked_coordination_sha=de4d18638cd329304ea187065f6cfd3f832e32ff；checked_at=2026-10-19T12:10:33.613201+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018最新11:32、research-utility-review-20261012最新01:41、research-dispatch-controller、daily-trading-system-audit、investor-observation-map；末次fetch无新增变化，财务来源与因子文件无交集。
+- 机会页默认3个近期产品（2已收盘风险、1盘中等待），中文名/黑绿灰、事件日/交易日年龄/行情日、盘中解除与已解除分开；搜索/全部/深链可达。同产品K线前移，实际按钮定位10/15。准确旧披露业务→同市场ETF→6只基金关联，6/30报告期、公司业务和来源可展开；参考关系不当基金技术触发，私人关联不进模型。
+- 复用原判断入口，现场通信ETF/卖出方向正确，两原话框空、审核禁用；0代填和个人记录写入。宏观和近5天新闻集中折叠，短Agent居前。借鉴TradingView清单联动与NN/g渐进披露，无规则/阈值/因子范围变更。
+- Agent改为短总览+选重点编号，事实/日期/条件由系统固定。真实5次摘要，前4次引用、数字、重复产品、超长失败保留，第5次ops_887f8c7fa18b42cbabacf558f7349d66成功78字存储总览/3项，重复按钮同ID、总摘要记录14不增。输入19494/输出2580 token，DS Flash原配置未改，费用未知。独核发现指纹排序会选旧事件，已改沿原日期优先并回归。中文展示将卖出信号明确为卖出侧风险提示。
+- 当前run orb_c79334329215a43a0321017b5ca265c2515262dc3b89a77d1c80745a66dba0cf为51完成/5失败/12无需；未循环重试。普通准备新增3反方HTTP尝试28486/1663 token，6卡审核尝试；五类个人表全0。一次SQLite忙后保留停止原因，明确停止且无活动线程才允许已存事实摘要；停止标记跨重启尚未持久恢复。7次受管重载；后续仅5原自选技术温读，冷准备延迟和额外API30秒超时保留。
+- 52后端、7前端组、构建/类型/Ruff和主仓归置通过；1280/375无横溢、摘要生成复用、基金详情、原判断入口和K线定位实测。1产品行情状态未知、29基金同产品技术缺口、旧披露当前权重及投资效果未证明；用户阅读效果待验。
+- 报告docs/experiments/today-agent-output-polish-2026-10-18.md追加SHA ccc0933a5e442f265370718befefd66b9f7396ba1d9d2467b03ae1611c1b5e60全文21521字API读回；原目标okr-4c2ea452d3cc仅note44→45，保护字段/旧历史保持，仍in_progress。21源指纹/19路径patch SHA0fcd3996aaf1b477d307928633bf3a1c3dd483404b658662dbc27b7fde8a86fb、2原有未跟踪测试完整快照、acceptance/goal-receipt位于原archive的reading-flow-20261019前缀。私有原回复/截图留成果树.codex/reading-flow-20261019。
+- 成果仍codex/investor-workspace-simplification-20261012基线e6c4c2e025252c565ba15f05611561ca1ecd5b48本机未提交未推，8后端/测试路径精确镜像运行树，5188原前端；仅协调元数据推远端，无main合入。Sol medium两实施子任务、Luna medium只读复核已结束；无待跑模型/子任务，不派发因子对话，不创建通知或定时器。
+
+---
+
 # 持仓关联、近期重点与低阅读成本接续 2026-10-19T11:23:20.005834+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=58cf2898e34e3c7233577d00a3c2067fcee87373；checked_at=2026-10-19T11:23:20.005834+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018最新10:47、research-utility-review-20261012最新01:41、中控、daily-trading-system-audit、investor-observation-map；财务资料/因子源码与本轮无交集，不接管原研究。
