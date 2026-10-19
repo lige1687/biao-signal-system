@@ -1,3 +1,14 @@
+# 因子证据与对外结论独立审查 2026-10-19T16:18:45.588358+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=95bf2589f09b3d5f4d4e84b1df139c217747ceeb；checked_at=2026-10-19T16:18:45.588358+08:00。已读COORDINATION、自身、research-utility-review-20261012最新16:08、personal-lowfreq-system-audit-20261018最新16:11、research-dispatch-controller；原因子owner正在另做长历史数据前置，本owner只审已有证据与对用户结论，不跑同题研究。
+- 用户先同意长历史及时间切分，再明确要求重新审查因子研究符合标准与否、纠正依据不足即下结论。本轮research-closure report_only：复用10/15十一案已查结果，逐项审之后10/16—19技术/小时/财务的新效果结论及汇总展示；先完整列实际审阅范围，不宣称全库逐行审计。科学判断与程序检查、局部价格与完整账户、已见历史与独立新验证分开。
+- 写入仅本任务新报告docs/experiments/factor-evidence-standards-audit-2026-10-19.md及同名raw小证据、自己的work-progress、registry本键/INDEX本行；在investor成果树与主运行树准确镜像这些新增文件。原研究报告/原raw/合同/策略源/所有研究源码及其他owner协调记录只读；需要纠正由独立审查写可执行修复意见，不覆盖封存结果。现有系统目标只追加本轮证据备注，保护原状态/授权/负责人。
+- 验收：范围清单及指纹；逐项声明→原数据/合同/代码/运行证据→规范要求→支持/限定/缺失/错误；独立抽核关键数和覆盖，不重新拟合或下载行情；准确指出尚未验证范围，给原负责人最小修复要求。报告归档/API读回、归置；无新生产因子、交易、通知或自动化。小产物本机，已有外盘只核身份后读原定位。
+- 独立分工：Sol medium核技术/小时的范围与结论，Sol medium核已交付财务比较，Astra high窄审原版语义/完整账户及潜在结论越界；均只读、无网络、无市场回测，root唯一写报告与共享登记。复用方法审阅助手已完结果。原研究累计预算不动，本题仅已保存结果的核数及读取，模型实际费用未知。
+- 成果分支codex/investor-workspace-simplification-20261012，基线e6c4c2e025252c565ba15f05611561ca1ecd5b48＋现有本机未提交增量；不混暂存其他任务、不合main。远端此时仅协调登记；尚未给研究合规或有效性通过结论。
+
+---
+
 # 近期重点、持仓关联与页面减法已交付 2026-10-19T12:10:33.613201+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮有界工程；scope_released true。checked_coordination_sha=de4d18638cd329304ea187065f6cfd3f832e32ff；checked_at=2026-10-19T12:10:33.613201+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018最新11:32、research-utility-review-20261012最新01:41、research-dispatch-controller、daily-trading-system-audit、investor-observation-map；末次fetch无新增变化，财务来源与因子文件无交集。
