@@ -1,3 +1,14 @@
+# 扩样后的方向复审与接续纠正已交付 2026-10-19T16:08:58.162661+08:00
+
+- task-id research-utility-review-20261012；status completed仅本次有界方法审查；scope_released true；完整原版/兼容效果及长历史仍未完成。checked_coordination_sha=9d93fa1dc4c1d6a21b8b23a5bffb98b6579e30d0；checked_at=2026-10-19T16:08:58.162661+08:00；已读COORDINATION/self/personal最新16:01/system12:10/中控，另一owner独立财务机制范围不重叠，不接管或改共享规范。
+- 复用10/15、10/18与19日扩样、财务已交付结果；确认已测无增量/原版未完整/后期来源不合格分别说明，数学同义不重复计票、局部负结果不取消原版。原candidate-register仅新增当前复审层，旧字段完全不变；two-version追加分项依赖/当前数据资格/约十年时间分段/已见历史边界。完整目标缺口不应阻断全部独立局部问题，旧局部效果直接复用。
+- 报告docs/experiments/research-direction-correction-2026-10-19.md SHAff76e8b18a795d6cf271dd58b12da78ba66763eae08bc48976b5c89b4a22013d；主/R自己registry键和INDEX行读回；系统5188真实标题/4表/长历史文案，542宽无横溢；Agent5619字符全文、sha verified/未截断。旧20未分类不代改。归置绿、8保护文件不变、保存摘要算术/候选旧字段一致；非新市场独立复算。
+- 方法6/6请求含1打开失败，来源阅读范围逐项留痕；Astra原代理只读挑战。0新行情/效果/调参/生产/真实交易，旧市场累计2898.484713/3600保持。自身目标note166→167，状态/旧历史/保护字段不变；收到系统转交的长历史原话已写接续，不新派或回发。
+- 证据raw/research-direction-correction-2026-10-19/brief、sources、evidence-check、independent-challenge、validation、goal-receipt；原work-progress追加。本地未提交未推，成果分支基线70ab55556874228d2cba66cf50f96d0318e1a5be非本次成果；远端仅协调元数据。无后台研究/通知，用户视觉待验。
+- 下一接续：沿原版主线核剩余可计算身份/B/C；后期小时先固定冲突对象日期核合格替代源，再决定扩批；原版可算后一个兼容差异，再仓位和共同资金。旧负结果不调参翻盘，日线十年不冒充小时十年，已见期不改名独立留出。此有界审查完成不关闭总目标。
+
+---
+
 # 扩样之后的研究方向复审与接续修正 2026-10-19T15:58:52.200381+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=e9915ae6310eb8b09d72298268cb2721276e44ae；checked_at=2026-10-19T15:58:52.200381+08:00；已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新15:46/investor-workspace-simplification-20261012最新12:10/research-dispatch-controller。各原owner范围不变，不接管财务选股或UI。
