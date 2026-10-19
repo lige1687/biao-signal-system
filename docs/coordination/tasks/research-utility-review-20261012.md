@@ -1,3 +1,17 @@
+# 定义主动审查与扩样已交付 2026-10-19T15:39:17.209528+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本次有界审查及比较；scope_released true。checked_coordination_sha=d06fc5c6b291c8d60d2dc45631c662bcc5545d69；checked_at=2026-10-19T15:39:17.209528+08:00；已读COORDINATION/self、personal-lowfreq-system-audit-20261018最新15:03、system最新12:10及中控；末次fetch无变化，未接管其他owner财务/选股/系统范围。
+- 本轮177卡172ID定义扫描完成，5元数据坏卡修复、新小时来源范围1.2登记，主仓178卡strictload通过；原文共同满足/实现任选一冲突、首次底部≠首次回撤、均线与颜色重复价格信息留痕。原策略源/阈值不改，主表修改前快照保留；R旧表未覆盖，不能声称全迁移。
+- 原固定8ETF＋历史hash60股含6退出者；20日8ETF448次、58股5876次，小时对直接−0.0211/−0.5583点，个股还输固定等5日0.2183点。ETF有限向上背景线索保留；不支持普遍强制、不称完整LEI有效/无效。旧510500效果全字段0变化，旧实验不重跑。
+- 已核股票后段真实坑：2023-08-09起小时极值与日线频繁不一致，未见flag/code/time错；未放宽容差。5874次在2021—2023，2024仅2次、2025零，后期验证未完成；原60全部保留，600319缺因子、002052无共同窗口。资料请求182尝试/180逻辑原件，179成功1空，一次登录恢复；7ETF14报价＋4拆分源，旧510500不重下。
+- 1成功核心3.320671秒，原件准备11.246657秒；首次0.250141秒缺字段失败在新效果前，旧脚本/绑定/空目录保留，None修复后新输出。已知市场累计2898.484713/3600秒、审计秒数未知另列，源969.799秒分列；0拟合/寻优/新效果跟进。实际token/费用未知。Astra审语义、Luna登记、6.1Sol来源与最终独核（Luna容量回退），所有代理已结束。
+- 独核99绑定/输出指纹0差、12612有效20/30记录差额0；40组均值最大3.55e-15，8组共同日期块区间端点0差。53既有相关检查及6新合成检查通过（缺价fix后6复验），主仓归置通过。
+- 报告docs/experiments/factor-definition-coverage-audit-2026-10-19.md SHA21b05017e54635c0cdb931d1c7b482f4c2903d73110366541980f8514a1c97c7，registry自身键/INDEX行完成。主/R报告相同，单SVG主/R/5188树create-only同SHA b5a922f908a07cef8ea4b155a18802a90bd48d05a1ad280236afb53a2c60a27a。真实Web542宽无溢、8表、1100×1470图HTTP200；Agent9173字全文未截断且registrySHA verified。截图同raw/web-comparison.png，用户视觉待验；全库其他20待分类不代改。
+- 自己目标仅note164→165、in_progress及原字段保持，系统owner已收到研究/覆盖/代理边界。原完整策略、后期个股合格小时、同资金仓位/风控仍未完成；本结案不关闭总目标。当前无后台研究。
+- 源成果仍codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be加主仓本地未提交未推代码/报告；仅协调元数据推远端。R只报告/自身registry/INDEX/SVG镜像，非完整研究迁移。恢复入口本题raw/closure与controller-final-review、原progress；新问题先复用本文与旧负结果，不重复筛赢家。
+
+---
+
 # 扩样核心完成与定义登记勘误读回 2026-10-19T15:29:04.459828+08:00
 
 - task-id research-utility-review-20261012；status active；scope_released false；checked_coordination_sha=fd2ec86311300b2d1cad79e429b6f5d5bed4833e；checked_at=2026-10-19T15:29:04.459828+08:00；已读COORDINATION/self、personal-lowfreq-system-audit-20261018最新15:03（价值/动量只读/选股流程）、system最新12:10、中控。冲突决定：各自范围无交叉，不接管财务/选股流程或UI/API。
