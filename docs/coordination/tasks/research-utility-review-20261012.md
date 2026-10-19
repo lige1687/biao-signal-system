@@ -1,3 +1,12 @@
+# 原版优先与兼容扩展的边界调整已落实 2026-10-19T15:52:44.271514+08:00
+
+- task-id research-utility-review-20261012；status completed仅本次顺序纠正和两版映射；scope_released true；完整原版效果仍blocked/definition_missing，兼容扩展效果未运行。checked_coordination_sha=390319ba47b9bf0ae8dcf0654e13451f3ad4ea14；checked_at=2026-10-19T15:52:44.271514+08:00；已读COORDINATION/self/personal最新15:46/system12:10/中控，末次fetch无新增变化，无owner范围冲突。
+- 已写现有计划附件docs/experiments/raw/lei-mechanism-methods-2026-10-18/two-version-continuation.md及two-version-validation.json；不新建重复实验报告。原版主线保留稳定趋势/位置/方向/底部AND低周期、首次分组、按入场理由定目标失效；扩展独立表达假设/变化/遗漏。删除原条件只能解释对照，不能叫兼容原版。
+- 源文件SHA与已确认配置一致，Astra窄复核返回；完整原版仍缺稳定趋势/回撤身份和目标B/失效C的唯一执行定义，旧资料/7案例未知保持，不编参数凑回测。原型局部小时负结果不取消原规则，0新市场/数据，旧累计2898.484713秒保持。
+- 主/R的factor-definition-coverage-audit registry仅oneLiner补“非完整原版/原条件保持”，原正文SHA与其他键不变；真实目标仅note165→166，in_progress及保护字段读回；系统owner已收到用户纠正，不要求生产改动。原progress追加，归置通过。新附件本机未提交未推，仍基线70ab55556874228d2cba66cf50f96d0318e1a5be，当前无后台研究。
+
+---
+
 # 用户纠正：原义版优先、兼容扩展独立 2026-10-19T15:49:08.505854+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=4565df0228d8d763ee0f2074b1214f63c36a7f5d；checked_at=2026-10-19T15:49:08.505854+08:00；已读COORDINATION/self/personal最新15:46/system12:10/中控。其他owner保持，未接管选股/财务/产品UI。
