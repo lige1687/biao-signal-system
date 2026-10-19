@@ -1,3 +1,12 @@
+# 用户纠正：原义版优先、兼容扩展独立 2026-10-19T15:49:08.505854+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=4565df0228d8d763ee0f2074b1214f63c36a7f5d；checked_at=2026-10-19T15:49:08.505854+08:00；已读COORDINATION/self/personal最新15:46/system12:10/中控。其他owner保持，未接管选股/财务/产品UI。
+- 用户明确要求先遵循策略原版有一版，再做含义兼容的发散版。本轮先落实两版比较边界和已有实现资格，纠正将局部小时结果读为取消原规则的风险；复用原文、已审定义和旧7案例，不重跑177卡或旧封存。两份原文不改；原版共同满足、首次分组、目标/失效对应入场理由不动。
+- 限定写路径：既有docs/experiments/raw/lei-mechanism-methods-2026-10-18/新增two-version-continuation.md与小validation收据，原work-progress新增阶段；本负责人factor-definition-coverage-audit报告registry自身oneLiner只补非完整原版边界（M/R），旧报告正文/数字/sha/冻结合同不改；原目标只追加用户指令note。必要给已获用户授权的系统chat澄清原规则不取消。root唯一写者，Astra只读窄语义审阅已返回。
+- 0新行情/市场实验/参数/生产，原累计2898.484713秒保留。先核原版可执行定义及兼容分支不变量，缺核心目标/失效/路径不能编造；本阶段完成只表示两版控制与映射已交付，不表示两版效果测完。基线70ab55556874228d2cba66cf50f96d0318e1a5be+本机未提交成果，远端仍仅协调元数据。
+
+---
+
 # 定义主动审查与扩样已交付 2026-10-19T15:39:17.209528+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本次有界审查及比较；scope_released true。checked_coordination_sha=d06fc5c6b291c8d60d2dc45631c662bcc5545d69；checked_at=2026-10-19T15:39:17.209528+08:00；已读COORDINATION/self、personal-lowfreq-system-audit-20261018最新15:03、system最新12:10及中控；末次fetch无变化，未接管其他owner财务/选股/系统范围。
