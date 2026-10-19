@@ -1,0 +1,85 @@
+{
+  "schema": "lowfreq-p4-source-feasibility/1",
+  "status": "read_only_source_feasibility_completed_no_effect_run",
+  "question": "Whether profit-to-cash realization and net-share change can be distinguished from existing gross-profit/assets and operating-cash/assets using the eight fixed value-source cases",
+  "scope": {
+    "case_count": 8,
+    "available_original_pdfs": 5,
+    "missing_qualified_pdfs": 3,
+    "network_or_download": false,
+    "new_bulk_extraction": false,
+    "future_outcomes_or_returns_read": false,
+    "p3_source_budget_used": "unchanged; no P3 source request",
+    "existing_anchor_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/annual-source-qualification-01/anchors.json",
+    "existing_anchor_sha256": "a738b0babd8ad734fae8e928a1933e9a54d178fedf8ac2b0659136e8229b9a52"
+  },
+  "conclusion": {
+    "profit_cash": "Existing P2 fields include consolidated revenue, operating cost, total assets and operating cash flow, but no qualified net-profit field. Gross profit is revenue minus cost, not net profit. Therefore net profit minus operating cash cannot be reconstructed by renaming GP/CFO. Five fixed PDFs visibly contain both consolidated total net profit and parent-attributable net profit, which differ, so a new definition must choose the numerator, bind announcement/version and qualify the exact consolidated statement before any comparison. It may still be a transformation of profit and cash rather than independent information.",
+    "net_shares": "A year-end share count difference is not equivalent to cash financing. The fixed originals show cash placement, A/H shares, employee incentives, repurchase cancellation and bonus shares. Cash financing would need event-level amount, consideration, date, share class, registration, treasury/cancellation and financing-cash-flow reconciliation; one annual count or share-capital line cannot establish it.",
+    "decision": "P4 is source-feasible in five examples only; no 600-company eligible panel, performance result, real trading rule or ETF transfer is established. Continue profit-cash as a quality-family source question; keep net-share/cash-financing as a separate source candidate pending event evidence."
+  },
+  "existing_input_boundary": {
+    "p2_parser_fields": ["assets", "revenue", "cost", "cfo"],
+    "p2_parser_path": "src/lei_signal/research/profitability_discovery.py",
+    "p2_parser_lines": "16-33; 322-337",
+    "missing_for_profit_cash": ["qualified consolidated total net profit or explicitly chosen parent-attributable net profit", "same-fiscal-year and same-report-version income and cash-flow fields", "publication-before-decision and correction history", "receivables/inventory and other accrual components for explanation", "same-scale denominator and prior-year persistence if claimed"],
+    "existing_p2_cfo_caveat": "CFO/assets is one annual cash-flow level divided by end assets; it does not already measure accruals, income-to-cash conversion or persistence."
+  },
+  "fixed_cases": [
+    {
+      "code": "600010", "year": 2013, "publication_date": "2014-03-08",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/06939-pdf.body",
+      "pdf_sha256": "527c85ab08efe69d47b4bdc40747c208125ac94c9470290ca2e5c351aaa6b0b9", "sha_readback": "matched",
+      "net_profit": {"consolidated_total_yuan": "248673284.41", "parent_attributable_yuan": "250692689.71", "page": 44, "heading_page": 43},
+      "operating_cash_net_yuan": "7148991336.68", "cash_page": 45, "cash_heading_page": 44,
+      "shares": {"page": 26, "evidence": "Private A-share placement of 1,578,947,368 shares at RMB3.80/share; report states RMB5,999,999,998.40 raised and total shares rose to 8,002,591,027. Financing cash flow also records investment cash received on page 45, but event-to-cash reconciliation and use-of-proceeds still require checking."}
+    },
+    {
+      "code": "600012", "year": 2018, "publication_date": "2019-03-25",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/02911-pdf.body",
+      "pdf_sha256": "a310eddc98a8b21156ab157911129a33499e675bf69f2cb204f2eac048451eee", "sha_readback": "matched",
+      "net_profit": {"consolidated_total_yuan": "1096642037.84", "parent_attributable_yuan": "1123042225.39", "page": 105, "heading_page": 104},
+      "operating_cash_net_yuan": "1807617059.70", "cash_page": 108, "cash_heading_page": 107,
+      "shares": {"page": 13, "evidence": "Report describes both listed A and H shares and 1,658,610,000 total year-end shares; year-end share capital line is unchanged from previous year on page 101. A-only price cannot value or interpret all classes."}
+    },
+    {
+      "code": "300048", "year": 2024, "publication_date": "2025-03-26",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00010-pdf.body",
+      "pdf_sha256": "76e39fe16087bb1ebc3b55740db128793c128b29e0b89b8ceced4d4cc5f99bac", "sha_readback": "matched",
+      "net_profit": {"consolidated_total_yuan": "29241366.58", "parent_attributable_yuan": "10296131.82", "page": 90, "heading_page": 89},
+      "operating_cash_net_yuan": "306110683.60", "cash_page": 93, "cash_heading_page": 92,
+      "shares": {"page": 72, "evidence": "Two 2024 restricted-share incentive vestings changed total shares from 1,113,738,857 to 1,116,163,857 and then 1,116,701,357; share-capital line on page 86 reflects the final count. The count increase alone does not say whether ordinary outside investors supplied cash."}
+    },
+    {
+      "code": "600518", "year": 2017, "publication_date": "2018-04-26",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-11-pdf.body",
+      "pdf_sha256": "15b3b15df2dfd3310cc16e1e345e8950e8a9cb047bdad38d1263e2b55cfd2985", "sha_readback": "matched",
+      "net_profit": {"consolidated_total_yuan": "4094646237.18", "parent_attributable_yuan": "4100926148.57", "page": 104, "heading_page": 103},
+      "operating_cash_net_yuan": "1842794237.84", "cash_page": 107, "cash_heading_page": 106,
+      "shares": {"page": 68, "evidence": "Report describes repurchase and cancellation of 480,000 incentive shares and registration of 27,510,000 restricted shares; year-end shares reached 4,974,253,675. Page 101 separately shows treasury stock and other equity instruments. Gross share change combines distinct events, so cannot be read as net cash financing."}
+    },
+    {
+      "code": "600519", "year": 2014, "publication_date": "2015-04-21",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-12-pdf.body",
+      "pdf_sha256": "89145ef5bd12256c4c75c122b1c8d59846a912434f1abd0570f678bdb1a20f24", "sha_readback": "matched",
+      "net_profit": {"consolidated_total_yuan": "16269371509.83", "parent_attributable_yuan": "15349804322.27", "page": 44, "heading_page": 43},
+      "operating_cash_net_yuan": "12632522436.60", "cash_page": 47, "cash_heading_page": 46,
+      "shares": {"page": 20, "evidence": "Implementation of the prior annual distribution gave one bonus share per ten existing shares and increased total shares by 103,818,000 to 1,141,998,000. This is a direct counterexample to treating positive share-count change as cash raised; the same section says no new securities issuance/listing in the recent three years."}
+    },
+    {"code": "600050", "year": 2024, "pdf": null, "status": "unknown_no_qualified_consolidated_balance_in_fixed_batch"},
+    {"code": "000007", "year": 2013, "pdf": null, "status": "unknown_no_qualified_consolidated_balance_in_fixed_batch"},
+    {"code": "002352", "year": 2018, "pdf": null, "status": "unknown_no_qualified_consolidated_balance_in_fixed_batch"}
+  ],
+  "unresolved": [
+    "The five visible values have not been promoted to a frozen historical net-profit panel; report dates and correction coverage beyond these original PDFs remain unqualified.",
+    "For total-versus-parent profit, the appropriate financial object and alignment with consolidated CFO must be frozen before testing; minority interests explain why the numbers differ but do not by themselves select a formula.",
+    "Operating cash can diverge from net profit through working capital, taxes, noncash costs and timing; five examples do not establish future risk or returns.",
+    "Share-count comparability requires splits, bonus shares, A/H classes, restricted shares, repurchases held as treasury versus cancelled, corporate actions and actual cash received/paid. Cash-flow statement line items alone may aggregate multiple events.",
+    "P4 has no new source requests, effect tests, ETF evidence, account outcomes or production authority."
+  ],
+  "original_reference_paths": [
+    "docs/experiments/lowfreq-mechanism-discovery-2026-10-19.md",
+    "docs/experiments/lowfreq-value-increment-2026-10-19.md",
+    "docs/experiments/raw/lowfreq-value-increment-2026-10-19/annual-source-01-execution-receipt.json"
+  ]
+}

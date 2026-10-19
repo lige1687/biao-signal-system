@@ -23,7 +23,8 @@ REPO = Path(__file__).resolve().parents[1]
 
 #: 仓库根层白名单（文件）。工具配置目录（.streamlit 等）单独列。
 ROOT_KEEP_FILES = {
-    ".DS_Store", ".env", ".env.example", ".gitignore", ".plan.md",
+    ".DS_Store", ".env", ".env.example", ".git", ".gitignore", ".plan.md",
+    "COORDINATION.md",  # 项目强制协调入口；.git 文件是正常 worktree 指针
     "AGENTS.md", "CLAUDE.md", "README.md", "pyproject.toml",
     "project.config.json", "project.private.config.json",
 }
@@ -91,6 +92,7 @@ DOCS_KEEP = {
     "plan-agent-superentry-v1.md",     # copilot/sentiment.py 注释锚定
 }
 DOCS_KEEP_DIRS = {
+    "coordination",  # 项目强制的跨任务协调记录
     "archive", "artifacts", "experiments", "literature-learning", "okr",
     "ops", "prompts", "reports", "research", "superpowers", "timing-sweep",
 }

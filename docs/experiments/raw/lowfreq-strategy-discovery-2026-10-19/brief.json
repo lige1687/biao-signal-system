@@ -1,0 +1,175 @@
+{
+  "research_id": "lowfreq-strategy-discovery-20261019",
+  "mode": "research",
+  "delivery_mode": "final_only",
+  "execution": "completed",
+  "stage": "bounded historical question closed; no clear additional value beyond simple methods",
+  "created_at": "2026-10-19T19:31:37.161868+08:00",
+  "checked_coordination_sha": "0ed6033ded8cb7f9eedb40b3ade53db195c54ab3",
+  "published_coordination_sha": "993613d3e4aaca86cb179541e860d943707000b0",
+  "owner": "01a153e8-cbb2-7730-bd5a-9ac733b1c388",
+  "source_task": "personal-lowfreq-system-audit-20261018",
+  "question": "同样资产扩张，毛利创造能力不同是否改变低频选股判断，条件组合是否较只看扩张、只看毛利和简单合分有额外帮助",
+  "decision_use": "独立股票候选年度持有选择，主战场ETF尚未映射，不修改原LEI技术/账户；年度窗口须看资料支持后在收益前冻结",
+  "mechanism": "新增资产需要后续经营兑现，毛利支撑弱的扩张可能反映过度投资或尚未投产；经营支撑强可能减轻这种风险，均为待检验假说",
+  "competitors": [
+    "投资项目有建设周期，当前毛利落后不等于毁值",
+    "资产增长可能是合并范围、汇率、重估，不是资本开支",
+    "规模、行业、风险与估值可能解释差别",
+    "同分母使毛利比率与资产增长机械相关"
+  ],
+  "value_decision": "先补已存原报的连续资产资格；技术趋势/路径近似已有大量历史反例，新的季度风险用途只留窄候选，当前不重复；原价值方向保留且预算不重置",
+  "budget": {
+    "core_max": 1,
+    "core_used": 1,
+    "followup_max": 3,
+    "followup_used": 1,
+    "source_requests_max": 6,
+    "source_requests_used": 2,
+    "source_qualification_passes": 1,
+    "network_data_downloads_authorized_this_stage": 0,
+    "expected_local_metadata_bytes": 4194304
+  },
+  "inherited_budgets": {
+    "P1": "sealed no rerun",
+    "P2": {
+      "core_used": 1,
+      "core_max": 1,
+      "followup_used": 2,
+      "followup_max": 3
+    },
+    "P3": {
+      "method_source_used": 5,
+      "method_source_max": 6,
+      "data_used": 4,
+      "data_max": 4,
+      "core_used": 0,
+      "core_max": 1,
+      "followup_used": 0,
+      "followup_max": 3
+    },
+    "prior_financial_http": 15015,
+    "prior_other_sources": 41
+  },
+  "new_question_reason": "资产水平为旧分母，连续年度增长与经营条件的交互未测试；新跨期资料依赖须单独合格，不以P2旧qualification自动通过",
+  "protected": [
+    "source worktree and old frozen outputs",
+    "shared registry/main",
+    "strategy sources and production/trades",
+    "original owner LEI/ETF/hourly/account"
+  ],
+  "read_reused_reports": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-expanded-discovery-2026-10-19.md",
+      "sha256": "0d3684eb9c4fea6fd958057914592da4aeef054fb8e9fb6ebcdc7b84774260d0"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-profitability-increment-2026-10-19.md",
+      "sha256": "0692bb724ea8413fdb22326ceb557bea239fd5d42b87f0121356f6ba62e9a413"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-parallel-research-2026-10-19.md",
+      "sha256": "defd3c2ab898e0a02baa6ccba79cf7e4232462013bc4e3fd9ca3c3e68d1085c4"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-value-increment-2026-10-19.md",
+      "sha256": "19f2fd9577a7178bf902bb3e7d7b7b905f9ac9b642f436bd819b143310a9521f"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-mechanism-discovery-2026-10-19.md",
+      "sha256": "0ed78cb26b564be10c3489be717eb48efaaecec08565a343a05dbb03c1c64376"
+    }
+  ],
+  "standards": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/current-standards.json",
+      "sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/factor-discovery-playbook.md",
+      "sha256": "3b9088a3085138b256c094ccffece33a0aef054388b7a44825a4981b0bbf2d41"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-lowfreq-research/SKILL.md",
+      "sha256": "8ddef292fa1ad2040e031782dc62ccd02e82ed7019f3d83370abd8a56efcb3ea"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/configs/strategy-documents.v1.json",
+      "sha256": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b"
+    }
+  ],
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "already_seen_history": true,
+  "stop": "必要比较完成关闭本有界历史问题；不以剩余额度找正值；核心数据/预算不足记阻塞或暂停；真实独立新证据及ETF未宣称完成",
+  "delegation": [
+    {
+      "name": "old_results_audit",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "read_only": true,
+      "writes": [],
+      "network": false
+    },
+    {
+      "name": "technical_overlap",
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "read_only": true,
+      "writes": [],
+      "network": false
+    },
+    {
+      "name": "growth_design_review",
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "read_only": true,
+      "writes": [],
+      "network": false
+    },
+    {
+      "name": "source_run",
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "source_execution_count": 1,
+      "effect_execution_count": 1,
+      "write_scope": "external new output and local execution receipts",
+      "network": false
+    }
+  ],
+  "fees_tokens": "unknown",
+  "budget_control": {
+    "core_max": 1,
+    "core_used": 1,
+    "followup_max": 3,
+    "followup_used": 1
+  },
+  "source_method_reads": [
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_port_form_inv.html",
+      "supports": "annual asset change and June formation only; US universe not local performance",
+      "read_at": "2026-10-19"
+    },
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_port_form_op.html",
+      "supports": "French OP subtracts cost interest SG&A and divides equity, distinct from local gross_profit/assets; not claiming replication",
+      "read_at": "2026-10-19"
+    }
+  ],
+  "completed_at": "2026-10-19T20:00:58.476783+08:00",
+  "latest_restore_contract": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/restore-contract.json",
+  "actual_delegation_followups": {
+    "Sol": "source module 10 tests; effect module15 tests; source-only P4 review",
+    "Astra": "method source/repair/final result independent review",
+    "Luna": "one source run and failed core run; receipt time/log discrepancy preserved and corrected by root",
+    "root": "one followup repair execution, direct PDF and weighted-return resums, archive"
+  }
+}

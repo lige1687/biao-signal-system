@@ -126,6 +126,69 @@
         "breadth_inputs",
         "breadth_quality"
       ]
+    },
+    "lowfreq_growth_20261019": {
+      "scope": "独立历史A股固定600候选，2015—2024十个年度；2025仅来源覆盖，非ETF/原LEI/账户",
+      "not_for": [
+        "production_trade",
+        "ETF_inference",
+        "causal_claim"
+      ],
+      "input": {
+        "fields": [
+          "code",
+          "decision_date",
+          "assets_current",
+          "assets_prior",
+          "revenue",
+          "cost",
+          "momentum",
+          "industry"
+        ],
+        "price_basis": "BaoStock adjustflag2原始冻结报价；现金分红/公司行动未逐项核对",
+        "currency": "CNY",
+        "frequency": "annual June formation",
+        "calendar": "冻结市场交易日；July first close to following July first close"
+      },
+      "universe": {
+        "version": "P1 fixed2014end eligible2595 sample600, original hash inputs",
+        "eligibility": "共同历史报告资格与6月决策日P1 eligible；缺失全留未知，不按未来筛选",
+        "warmup": "动量第253有效报价首次可算；双期年度资产公开且跨报严格相等",
+        "missing": "无回填/选较早原报；效果缺价0%/-100%为假设情景，原权重保留",
+        "quality_gate": "source-design exact source IDs/hashes/year/publication; historical vendor arrival unknown",
+        "degrade": "未知保持未知，2025无成熟收益"
+      },
+      "time": {
+        "observation_time": "年度报告期末和6月末历史收盘",
+        "available_at": "报告公告日期严格早于决策日；历史供应商到达时刻未知",
+        "decision_at": "6月最后市场交易日收盘；本次仅历史再现",
+        "execution_at": "次月首交易日收盘假设，实际成交未确认",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-19新研究登记，不倒填旧实验"
+      },
+      "validation": {
+        "method": "合成边界、来源跨报与审阅、共同样本和固定股数对照；不以检查通过推导有效",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_asset_growth_discovery.py",
+          "tests/unit/test_asset_growth_effect.py"
+        ],
+        "limitations": "10个已见年度，非新独立验证；资本开支/并购/会计范围未区分"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "pending_this_run",
+        "implementation": "isolated_research_adapter",
+        "effectiveness": "not_evaluated_at_registration",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "lowfreq_growth_design_20261019"
+      ]
     }
   },
   "sources": {
@@ -264,6 +327,10 @@
     "factor_v0_comparisons": {
       "path": "docs/experiments/raw/research-factor-library-v0-2026-09-09/run-01/decision-comparisons.csv",
       "sha256": "b2f7c5b2f530b935fecf2a76dfc5d135ca2def7ffeb4e10f99d9ca4242c18f69"
+    },
+    "lowfreq_growth_design_20261019": {
+      "path": "docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/effect-design-proposal-v2.json",
+      "sha256": "4ca4c04c895d5e1862cbe581eee5ea07b9b662f35ac97f815561b23fd56ae061"
     }
   },
   "objects": [
@@ -5034,6 +5101,101 @@
         "factor_v0_run_quality",
         "factor_v0_comparisons"
       ]
+    },
+    {
+      "id": "research.cross_section.reported_asset_growth",
+      "version": "1.0.0",
+      "name": "报告资产增长",
+      "type": "feature",
+      "profile": "lowfreq_growth_20261019",
+      "uses": [
+        "description",
+        "comparison",
+        "research_signal"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "A_t/A_prior-1",
+        "parameters": {
+          "positive_assets": true
+        },
+        "endpoints": "报告同一原件当前与上一年年末，两份年报读回相等；动量按有效报价行位移",
+        "unit": "fraction",
+        "direction": "较快/较慢仅描述",
+        "transforms": "四格使用每年行业中位数；其他对手与费用详绑定设计，无参数搜索"
+      }
+    },
+    {
+      "id": "research.cross_section.gross_profit_assets",
+      "version": "1.0.0",
+      "name": "毛利占资产比例",
+      "type": "feature",
+      "profile": "lowfreq_growth_20261019",
+      "uses": [
+        "description",
+        "comparison",
+        "research_signal"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "(annual revenue-annual cost)/A_t",
+        "parameters": {},
+        "endpoints": "报告同一原件当前与上一年年末，两份年报读回相等；动量按有效报价行位移",
+        "unit": "fraction",
+        "direction": "较高为经营支撑候选",
+        "transforms": "四格使用每年行业中位数；其他对手与费用详绑定设计，无参数搜索"
+      }
+    },
+    {
+      "id": "research.stock.momentum_252_21",
+      "version": "1.0.0",
+      "name": "股票中期涨幅",
+      "type": "feature",
+      "profile": "lowfreq_growth_20261019",
+      "uses": [
+        "description",
+        "comparison",
+        "research_signal"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "adjusted_close(valid_t-21)/adjusted_close(valid_t-252)-1",
+        "parameters": {
+          "long_lag": 252,
+          "skip_lag": 21
+        },
+        "endpoints": "报告同一原件当前与上一年年末，两份年报读回相等；动量按有效报价行位移",
+        "unit": "fraction",
+        "direction": "降序候选；不等同ETF经济价格定义",
+        "transforms": "四格使用每年行业中位数；其他对手与费用详绑定设计，无参数搜索"
+      }
+    },
+    {
+      "id": "research.stock.asset_growth_gp_condition",
+      "version": "1.0.0",
+      "name": "高扩张低毛利条件",
+      "type": "state_signal",
+      "profile": "lowfreq_growth_20261019",
+      "uses": [
+        "description",
+        "comparison",
+        "research_signal"
+      ],
+      "dependencies": [
+        "research.cross_section.reported_asset_growth@1.0.0",
+        "research.cross_section.gross_profit_assets@1.0.0"
+      ],
+      "definition": {
+        "formula": "growth>industry annual median(growth) AND gp_assets<industry annual median(gp_assets)",
+        "parameters": {
+          "growth_strict": true,
+          "gp_strict": true
+        },
+        "endpoints": "报告同一原件当前与上一年年末，两份年报读回相等；动量按有效报价行位移",
+        "unit": "boolean",
+        "direction": "true为本次研究拟排除；不是买卖信号",
+        "transforms": "四格使用每年行业中位数；其他对手与费用详绑定设计，无参数搜索"
+      }
     }
   ],
   "models": [],
@@ -5068,6 +5230,11 @@
       "version": "1.1.0",
       "date": "2026-09-09",
       "change": "新增纯50有效报价状态及完整ETF二元账户两个研究定义；旧对象版本、公式、来源保持。"
+    },
+    {
+      "version": "1.2.0",
+      "date": "2026-10-19",
+      "change": "独立工作分支追加4个低频股票研究对象；未覆盖新版主树登记内容，后续集成只并本题新增项；旧对象不变"
     }
   ],
   "standard_version": "1.0.0"

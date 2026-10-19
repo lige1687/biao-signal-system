@@ -1,0 +1,46 @@
+{
+  "mission": "Implement offline dual-year source qualification for one asset growth research question",
+  "task_scope": [
+    "new research qualification module and meaningful synthetic checks only; no real file processing or outcome reads"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/source-design.json",
+    "docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/storage-plan.json",
+    "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19",
+    "src/lei_signal/research/profitability_discovery.py"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/asset_growth_discovery.py",
+    "tests/unit/test_asset_growth_discovery.py",
+    "docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/source-development-receipt.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "module supporting bound qualification contract and output new external directory",
+    "meaningful synthetic source/time/notice/format tests",
+    "development receipt with paths tests limitations"
+  ],
+  "stop_conditions": [
+    "scope or source ambiguity",
+    "unsafe action",
+    "no market effects or downloading"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "design": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/source-design.json",
+    "sha256": "8efe102de1d2dc9b30249ed3760717417b54faf14330fd25cf9c467cb9c78e30"
+  },
+  "output_plan": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/storage-plan.json",
+  "workspace": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019",
+  "external_read_bindings_note": "Source data files are explicitly path/hash bound by source-design.json; this development task may inspect schema examples only, never outcome inputs or bulk source processing.",
+  "prior_failure": "v1 dry-run rejected absolute paths; rewritten repo-relative contracts without changing actual write scope or authority"
+}

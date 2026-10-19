@@ -1,0 +1,49 @@
+{
+  "schema": "asset-growth-source-development-receipt/1",
+  "created_utc": "2026-10-19T11:40:13Z",
+  "status": "implemented_pending_controller_review",
+  "scope": "Offline source qualification only; no real bulk source run, future outcome read, network request, or market effect calculation",
+  "development_contract": "docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/source-development-contract-v2.json",
+  "design_sha256": "8efe102de1d2dc9b30249ed3760717417b54faf14330fd25cf9c467cb9c78e30",
+  "files": {
+    "src/lei_signal/research/asset_growth_discovery.py": "177d90a034e44acd51eeb64ffc3cfe02adcf2a206a22adfd2e97c14416bf22c6",
+    "tests/unit/test_asset_growth_discovery.py": "11cbafc2a08e2a7dc9e76ca9618b746a5e1733234eb0d7fdaac5cbf212f64924"
+  },
+  "implemented": [
+    "CLI requires asset-growth-source-run/1 contract, frozen design SHA and bound old audit, source index, panel, parser, rules and reviewed notice decisions",
+    "July formation axis must be exactly 600 historical codes for each year 2015 through 2025, 6600 distinct rows; output is source-only and create-only on named external device and UUID",
+    "For each old GP-qualified row, exact current latest annual IDs must match old audit; latest prior annual is selected without fallback after failed PDF or field; source PDF and prepared document hashes and identities are checked",
+    "Consolidated current and comparative total assets use the frozen parser's money token and scale; both current and prior full reports must qualify and comparative must exactly equal prior report current assets; GP revenue, cost, assets and ratio are read back against old audit",
+    "Same-day annual candidates must agree; unknown notices need both fiscal years and both publications after the event plus matching cross-report amounts; explicit affected asset years block absent exact resolved full ID",
+    "Outputs panel.csv, source-pairs.json, coverage.json and manifest.json contain qualification and source evidence only, with unknown rows and reason counts retained"
+  ],
+  "verification": {
+    "command": "PYTHONPATH=src python3 -B -m unittest tests.unit.test_asset_growth_discovery -v",
+    "result": "10 tests passed",
+    "checks": [
+      "negative growth retained",
+      "latest failed report not replaced with older report",
+      "same-day conflict",
+      "future or same-day publication",
+      "prior missing or mismatched",
+      "unit, note-number, adjusted or reversed columns",
+      "year-start amount requires exact prior-report agreement",
+      "dual-period notice boundary and exact review hash",
+      "source-only contract rejection and Python parser hash-only binding",
+      "annual summary/English exclusion, true ambiguous annual notice, notice mentioning annual report, and revised full annual as a version"
+    ],
+    "diff_check": "git diff --check passed"
+  },
+  "review_repair": {
+    "cause": "The first notice predicate treated 7346 excluded annual summaries or English reports with unknown year as unresolved notices, and would count a full revised annual tagged correction twice. The frozen source index has 7275 annual summaries and 69 annual English files in the largest unknown-year groups, plus six annual/correction dual-category files. The original preparation schema calls a qualified full annual suspected_full_text and annual_candidate_evidence.status suspected; a revised full annual sample uses both values.",
+    "change": "Read the old parser as a byte-bound Python module, not JSON. Exclude records with excluded_doc_kind from notice events; distinguish revised full annual versions from correction notices and retain genuinely ambiguous annual titles. Latest failed full reports remain candidates and cannot trigger fallback.",
+    "evidence_scope": "Read-only source-index metadata and three representative prepared record metadata examples; no real 6600-row source run or future outcomes"
+  },
+  "limits": [
+    "Synthetic tests establish specified code branches, not real 6600-row coverage or source truth; the root controller must review before authorizing the separate source run",
+    "Only the six decisions with exact accepted review identity may clear known notices; other business or correction claims stay conservative unknown unless an exact review is added to the frozen scope",
+    "Unreviewed notice measurement recovery reports internally consistent later numbers but keeps continuing scope unknown and does not certify financial authenticity",
+    "Asset expansion is reported balance-sheet change, not organic investment; mergers, accounting perimeter and foreign-exchange effects remain possible",
+    "No ETF, account, trading, market return or production conclusion follows from source qualification"
+  ]
+}

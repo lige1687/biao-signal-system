@@ -1,0 +1,117 @@
+{
+  "schema": "asset-growth-effect-design/1",
+  "created_at": "2026-10-19T19:36:44.509724+08:00",
+  "status": "predeclared_before_any_new_outcomes; execute only after source qualification accepted",
+  "question": "每年6月底选择持有一年，排除报告资产增长较快且毛利资产比较低的股票，能否改善相对只看扩张、毛利、简单合分的选择",
+  "scope": "independent historical A-share stock selection; not ETF, not original LEI, no real account",
+  "definition_refs": [
+    "research.cross_section.reported_asset_growth@1.0.0",
+    "research.cross_section.gross_profit_assets@1.0.0",
+    "mixed.momentum.raw@1.0.0"
+  ],
+  "observations": {
+    "years": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "decision": "June last market trading day",
+    "entry": "July first market trading day close after decision",
+    "exit": "next July first market trading day close",
+    "full_horizon_required": true,
+    "planned_mature_years": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "unmatured": "2025 kept coverage only; never shorten outcome or substitute future cutoff"
+  },
+  "input_binding": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+    "sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289"
+  },
+  "old_price_semantics": "saved BaoStock adjustflag2 daily quotes; input/source adjudication retained; no new requests; dividends/corporate action cash not reconciled. annual outcome must read underlying raw quotes not multiply monthly selections.",
+  "eligibility": "source qualification terminal plus current signal-day actual trading/known ST0, old eligible June momentum and price eligibility projection. No future availability filter. All planned600 and unknown records preserved; future entry/exit failures retain original weight.",
+  "groups": {
+    "industry": "inherited leading CSRC2 digit, annual snapshot asknown; J excluded inherited",
+    "quadrants": "per year industry unweighted median growth and gp; strict > median high, < median low, equals ties; ties stay in selection except strictHG/LP; fourcell effect only industries with all4 nonempty; report missing/tie support",
+    "interaction": "within high growth highGP-lowGP minus within low growth highGP-lowGP; industry aggregation n_sector/supportedN; all4 same supported sectors",
+    "primary_policy": "Conditional exclude only growth>medianG AND GP<medianGP; retain all others, k per sector; all methods same industry weights n/N and fully invest",
+    "methods": {
+      "P": "all common pool equal weight",
+      "M": "highest momentum k in industry",
+      "G": "lowest growth k",
+      "F": "highest GP/assets k",
+      "A": "highest 0.5*rankpct(-growth)+0.5*rankpct(GP) k",
+      "C": "conditional exclusion, equal initial sector allocation among retained"
+    },
+    "ties": "rank score ties averaged; cutoff weight split among tied names so selected mass k, no code tiebreak. Record actual count/HHI. C can k=n and equals P; do not infer no-action protection."
+  },
+  "annual_valuation": {
+    "weights": "fixed initial stock units from initial weights/entry price, mark weights drift with price, no intra-year sale/rebalance/reallocation",
+    "months": "month-end closes from July through next June plus exact final exit; mark all original stocks including ST/suspension; stock raw quote missing remains missing, never use future to drop or renormalize",
+    "unknown_scenarios": [
+      "each unknown valuation at 0% change from original entry",
+      "each unknown valuation at -100% from original entry"
+    ],
+    "label": "two sensitivity scenarios not real recovery bounds; show observed weight/unknown weight/endpoint halt weights",
+    "risk": "annual fixed-share path maximum peak-to-trough decline from entry plus monthly marks/exit, monthly limited not daily max. Same P-down/up month differences based on current within-cohort period P return; retrospective not switching signal",
+    "counterexamples": "all ten years, first5 vs last5, leave-one-year-out paired means, excluded stocks annual gains/losses and contribution, top contributors; no posthoc rule change",
+    "fees": "trading fills/spread/taxes unknown. Show gross quote results, initial/final gross target-turnover model and 10/30 basis points per one-way trade cost sensitivity as assumed common levels, not measured costs. Conservative separate annual full entry+exit round-trip 20/60bp applied equally; across-year rebalance cost optional only if implemented accurately",
+    "concentration": "stock count, max initial weight, sum squared weights, n_selected, k, target membership replacement across years; no real human maintenance saving"
+  },
+  "primary_comparisons": [
+    "C-A",
+    "C-G",
+    "C-F",
+    "C-M",
+    "C-P"
+  ],
+  "uncertainty": {
+    "unit": "annual cohorts, not stock rows independent",
+    "paired_95_interval": "annual shared-year resampling with block length2,10000 draws,seed20261019; only10 years, coarse exploratory interval not proof",
+    "leave_one_year_out": true,
+    "periods": [
+      "2015-2019",
+      "2020-2024"
+    ],
+    "no_useful_effect_threshold": "not pre-agreed; do not claim ruling out economically meaningful improvement"
+  },
+  "denominator_identity": "GP/Acurrent*(1+G)=GP/Aprior; combined signals may mechanically overlap. A real conditional difference is not proof of two independent mechanisms or causal investment quality.",
+  "followups": "max3 purposeful only if specific ambiguity changes conclusion; first preserve all primary results; do not fill quota or tune partitions",
+  "prohibited": [
+    "changed parameters/horizon to save result",
+    "future eligibility filter",
+    "no-price stock drop",
+    "repeat P1/P2 or using per_stock_month chain as annual wealth",
+    "fee/net/account or ETF claims"
+  ],
+  "technical_preflight": "reuse lowfreq_research_control.check before any outcome read; raw label files must be bound; source-only selector score=G financial_score=GP momentum=M, exact allowed columns. Contract scientific identity/history and budget bound by root after qualification.",
+  "source_requests": [
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_port_form_inv.html",
+      "supports": "annual asset change and June formation only; US universe not local performance",
+      "read_at": "2026-10-19"
+    },
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_port_form_op.html",
+      "supports": "French OP subtracts cost interest SG&A and divides equity, distinct from local gross_profit/assets; not claiming replication",
+      "read_at": "2026-10-19"
+    }
+  ]
+}

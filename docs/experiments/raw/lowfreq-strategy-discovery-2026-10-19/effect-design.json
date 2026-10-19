@@ -1,0 +1,481 @@
+{
+  "schema": "asset-growth-effect-design/1",
+  "created_at": "2026-10-19T19:36:44.509724+08:00",
+  "status": "predeclared_before_any_new_outcomes; execute only after source qualification accepted",
+  "question": "每年6月底选择持有一年，排除报告资产增长较快且毛利资产比较低的股票，能否改善相对只看扩张、毛利、简单合分的选择",
+  "scope": "independent historical A-share stock selection; not ETF, not original LEI, no real account",
+  "definition_refs": [
+    "research.cross_section.reported_asset_growth@1.0.0",
+    "research.cross_section.gross_profit_assets@1.0.0",
+    "research.stock.momentum_252_21@1.0.0",
+    "research.stock.asset_growth_gp_condition@1.0.0"
+  ],
+  "observations": {
+    "years": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "decision": "June last market trading day",
+    "entry": "July first market trading day close after decision",
+    "exit": "next July first market trading day close",
+    "full_horizon_required": true,
+    "planned_mature_years": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "unmatured": "2025 kept coverage only; never shorten outcome or substitute future cutoff"
+  },
+  "input_binding": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+    "sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289"
+  },
+  "old_price_semantics": "saved BaoStock adjustflag2 daily quotes; input/source adjudication retained; no new requests; dividends/corporate action cash not reconciled. annual outcome must read underlying raw quotes not multiply monthly selections.",
+  "eligibility": "source qualification terminal plus current signal-day actual trading/known ST0, old eligible June momentum and price eligibility projection. No future availability filter. All planned600 and unknown records preserved; future entry/exit failures retain original weight.",
+  "groups": {
+    "industry": "inherited leading CSRC2 digit, annual snapshot asknown; J excluded inherited",
+    "quadrants": "per year industry unweighted median growth and gp; strict > median high, < median low, equals ties; ties stay in selection except strictHG/LP; fourcell effect only industries with all4 nonempty; report missing/tie support",
+    "interaction": "within high growth highGP-lowGP minus within low growth highGP-lowGP; industry aggregation n_sector/supportedN; all4 same supported sectors",
+    "primary_policy": "Conditional exclude only growth>medianG AND GP<medianGP; retain all others, k per sector; all methods same industry weights n/N and fully invest",
+    "methods": {
+      "P": "all common pool equal weight",
+      "M": "highest momentum k in industry",
+      "G": "lowest growth k",
+      "F": "highest GP/assets k",
+      "A": "highest 0.5*rankpct(-growth)+0.5*rankpct(GP) k",
+      "C": "conditional exclusion, equal initial sector allocation among retained"
+    },
+    "ties": "rank score ties averaged; cutoff weight split among tied names so selected mass k, no code tiebreak. Record actual count/HHI. C can k=n and equals P; do not infer no-action protection."
+  },
+  "annual_valuation": {
+    "weights": "fixed initial stock units from initial weights/entry price, mark weights drift with price, no intra-year sale/rebalance/reallocation",
+    "months": "month-end closes from July through next June plus exact final exit; mark all original stocks including ST/suspension; stock raw quote missing remains missing, never use future to drop or renormalize",
+    "unknown_scenarios": [
+      "each unknown valuation at 0% change from original entry",
+      "each unknown valuation at -100% from original entry"
+    ],
+    "label": "two sensitivity scenarios not real recovery bounds; show observed weight/unknown weight/endpoint halt weights",
+    "risk": "Only first12 segments from July entry to next June month-end enter same P-up/down month comparison; first segment slightly short. Final short segment to next July first close is only annual endpoint/drawdown. This retrospective classification is not a switching signal.",
+    "counterexamples": "all ten years, first5 vs last5, leave-one-year-out paired means, excluded stocks annual gains/losses and contribution, top contributors; no posthoc rule change",
+    "fees": "Gross terminal wealth V transforms to V*(1-s)/(1+b) for b=s=0.001 and0.003. Fully purchasable/liquidatable assumption, no guarantee conservative, no realized net-account claim, no cross-year netting.",
+    "concentration": "stock count, max initial weight, sum squared weights, n_selected, k, target membership replacement across years; no real human maintenance saving",
+    "observability": "Each segment records original missing weight and both endpoint observability. Separate fully_observed from scenario_involved conditional estimates. Prior NAV zero gives null percent change. Marked drawdowns identify imputation; no imputed decline is evidence of actual protection. Missing or untradable entry retains original weight with no invented units in all later unknown scenarios; later suspension is a mark, not executable liquidation."
+  },
+  "primary_comparisons": [
+    "C-A",
+    "C-G",
+    "C-F",
+    "C-M",
+    "C-P"
+  ],
+  "uncertainty": {
+    "unit": "annual cohorts, not stock rows independent",
+    "paired_95_interval": "annual shared-year resampling with block length2,10000 draws,seed20261019; only10 years, coarse exploratory interval not proof",
+    "leave_one_year_out": true,
+    "periods": [
+      "2015-2019",
+      "2020-2024"
+    ],
+    "no_useful_effect_threshold": "not pre-agreed; do not claim ruling out economically meaningful improvement"
+  },
+  "denominator_identity": "GP/Acurrent*(1+G)=GP/Aprior; combined signals may mechanically overlap. A real conditional difference is not proof of two independent mechanisms or causal investment quality.",
+  "followups": "max3 purposeful only if specific ambiguity changes conclusion; first preserve all primary results; do not fill quota or tune partitions",
+  "prohibited": [
+    "changed parameters/horizon to save result",
+    "future eligibility filter",
+    "no-price stock drop",
+    "repeat P1/P2 or using per_stock_month chain as annual wealth",
+    "fee/net/account or ETF claims"
+  ],
+  "technical_preflight": "reuse lowfreq_research_control.check before any outcome read; raw label files must be bound; source-only selector score=G financial_score=GP momentum=M, exact allowed columns. Contract scientific identity/history and budget bound by root after qualification.",
+  "source_requests": [
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_port_form_inv.html",
+      "supports": "annual asset change and June formation only; US universe not local performance",
+      "read_at": "2026-10-19"
+    },
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_port_form_op.html",
+      "supports": "French OP subtracts cost interest SG&A and divides equity, distinct from local gross_profit/assets; not claiming replication",
+      "read_at": "2026-10-19"
+    }
+  ],
+  "amendment": {
+    "created_at": "2026-10-19T19:45:26.276664+08:00",
+    "before_outcome_access": true,
+    "reason": "independent scientific review: partial tail, observed vs imputed marks, exact fee convention, actual registry IDs"
+  },
+  "selector_sha256": "bb5c1549d26816468265ca600b034c38bfb6d60133b3ab2acd0c39ef1f4738f4",
+  "definition_registry_binding": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/research/definitions.v1.json",
+    "sha256": "4a6d40b3550e4e2b6584faa7f94a187e55ac8c65477fc573e81cd5423b4170b4"
+  },
+  "resolved_definitions": [
+    {
+      "scope": "独立历史A股固定600候选，2015—2024十个年度；2025仅来源覆盖，非ETF/原LEI/账户",
+      "not_for": [
+        "production_trade",
+        "ETF_inference",
+        "causal_claim"
+      ],
+      "input": {
+        "fields": [
+          "code",
+          "decision_date",
+          "assets_current",
+          "assets_prior",
+          "revenue",
+          "cost",
+          "momentum",
+          "industry"
+        ],
+        "price_basis": "BaoStock adjustflag2原始冻结报价；现金分红/公司行动未逐项核对",
+        "currency": "CNY",
+        "frequency": "annual June formation",
+        "calendar": "冻结市场交易日；July first close to following July first close"
+      },
+      "universe": {
+        "version": "P1 fixed2014end eligible2595 sample600, original hash inputs",
+        "eligibility": "共同历史报告资格与6月决策日P1 eligible；缺失全留未知，不按未来筛选",
+        "warmup": "动量第253有效报价首次可算；双期年度资产公开且跨报严格相等",
+        "missing": "无回填/选较早原报；效果缺价0%/-100%为假设情景，原权重保留",
+        "quality_gate": "source-design exact source IDs/hashes/year/publication; historical vendor arrival unknown",
+        "degrade": "未知保持未知，2025无成熟收益"
+      },
+      "time": {
+        "observation_time": "年度报告期末和6月末历史收盘",
+        "available_at": "报告公告日期严格早于决策日；历史供应商到达时刻未知",
+        "decision_at": "6月最后市场交易日收盘；本次仅历史再现",
+        "execution_at": "次月首交易日收盘假设，实际成交未确认",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-19新研究登记，不倒填旧实验"
+      },
+      "validation": {
+        "method": "合成边界、来源跨报与审阅、共同样本和固定股数对照；不以检查通过推导有效",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_asset_growth_discovery.py",
+          "tests/unit/test_asset_growth_effect.py"
+        ],
+        "limitations": "10个已见年度，非新独立验证；资本开支/并购/会计范围未区分"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "pending_this_run",
+        "implementation": "isolated_research_adapter",
+        "effectiveness": "not_evaluated_at_registration",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "lowfreq_growth_design_20261019"
+      ],
+      "id": "research.cross_section.reported_asset_growth",
+      "version": "1.0.0",
+      "name": "报告资产增长",
+      "type": "feature",
+      "profile": "lowfreq_growth_20261019",
+      "uses": [
+        "description",
+        "comparison",
+        "research_signal"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "A_t/A_prior-1",
+        "parameters": {
+          "positive_assets": true
+        },
+        "endpoints": "报告同一原件当前与上一年年末，两份年报读回相等；动量按有效报价行位移",
+        "unit": "fraction",
+        "direction": "较快/较慢仅描述",
+        "transforms": "四格使用每年行业中位数；其他对手与费用详绑定设计，无参数搜索"
+      }
+    },
+    {
+      "scope": "独立历史A股固定600候选，2015—2024十个年度；2025仅来源覆盖，非ETF/原LEI/账户",
+      "not_for": [
+        "production_trade",
+        "ETF_inference",
+        "causal_claim"
+      ],
+      "input": {
+        "fields": [
+          "code",
+          "decision_date",
+          "assets_current",
+          "assets_prior",
+          "revenue",
+          "cost",
+          "momentum",
+          "industry"
+        ],
+        "price_basis": "BaoStock adjustflag2原始冻结报价；现金分红/公司行动未逐项核对",
+        "currency": "CNY",
+        "frequency": "annual June formation",
+        "calendar": "冻结市场交易日；July first close to following July first close"
+      },
+      "universe": {
+        "version": "P1 fixed2014end eligible2595 sample600, original hash inputs",
+        "eligibility": "共同历史报告资格与6月决策日P1 eligible；缺失全留未知，不按未来筛选",
+        "warmup": "动量第253有效报价首次可算；双期年度资产公开且跨报严格相等",
+        "missing": "无回填/选较早原报；效果缺价0%/-100%为假设情景，原权重保留",
+        "quality_gate": "source-design exact source IDs/hashes/year/publication; historical vendor arrival unknown",
+        "degrade": "未知保持未知，2025无成熟收益"
+      },
+      "time": {
+        "observation_time": "年度报告期末和6月末历史收盘",
+        "available_at": "报告公告日期严格早于决策日；历史供应商到达时刻未知",
+        "decision_at": "6月最后市场交易日收盘；本次仅历史再现",
+        "execution_at": "次月首交易日收盘假设，实际成交未确认",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-19新研究登记，不倒填旧实验"
+      },
+      "validation": {
+        "method": "合成边界、来源跨报与审阅、共同样本和固定股数对照；不以检查通过推导有效",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_asset_growth_discovery.py",
+          "tests/unit/test_asset_growth_effect.py"
+        ],
+        "limitations": "10个已见年度，非新独立验证；资本开支/并购/会计范围未区分"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "pending_this_run",
+        "implementation": "isolated_research_adapter",
+        "effectiveness": "not_evaluated_at_registration",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "lowfreq_growth_design_20261019"
+      ],
+      "id": "research.cross_section.gross_profit_assets",
+      "version": "1.0.0",
+      "name": "毛利占资产比例",
+      "type": "feature",
+      "profile": "lowfreq_growth_20261019",
+      "uses": [
+        "description",
+        "comparison",
+        "research_signal"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "(annual revenue-annual cost)/A_t",
+        "parameters": {},
+        "endpoints": "报告同一原件当前与上一年年末，两份年报读回相等；动量按有效报价行位移",
+        "unit": "fraction",
+        "direction": "较高为经营支撑候选",
+        "transforms": "四格使用每年行业中位数；其他对手与费用详绑定设计，无参数搜索"
+      }
+    },
+    {
+      "scope": "独立历史A股固定600候选，2015—2024十个年度；2025仅来源覆盖，非ETF/原LEI/账户",
+      "not_for": [
+        "production_trade",
+        "ETF_inference",
+        "causal_claim"
+      ],
+      "input": {
+        "fields": [
+          "code",
+          "decision_date",
+          "assets_current",
+          "assets_prior",
+          "revenue",
+          "cost",
+          "momentum",
+          "industry"
+        ],
+        "price_basis": "BaoStock adjustflag2原始冻结报价；现金分红/公司行动未逐项核对",
+        "currency": "CNY",
+        "frequency": "annual June formation",
+        "calendar": "冻结市场交易日；July first close to following July first close"
+      },
+      "universe": {
+        "version": "P1 fixed2014end eligible2595 sample600, original hash inputs",
+        "eligibility": "共同历史报告资格与6月决策日P1 eligible；缺失全留未知，不按未来筛选",
+        "warmup": "动量第253有效报价首次可算；双期年度资产公开且跨报严格相等",
+        "missing": "无回填/选较早原报；效果缺价0%/-100%为假设情景，原权重保留",
+        "quality_gate": "source-design exact source IDs/hashes/year/publication; historical vendor arrival unknown",
+        "degrade": "未知保持未知，2025无成熟收益"
+      },
+      "time": {
+        "observation_time": "年度报告期末和6月末历史收盘",
+        "available_at": "报告公告日期严格早于决策日；历史供应商到达时刻未知",
+        "decision_at": "6月最后市场交易日收盘；本次仅历史再现",
+        "execution_at": "次月首交易日收盘假设，实际成交未确认",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-19新研究登记，不倒填旧实验"
+      },
+      "validation": {
+        "method": "合成边界、来源跨报与审阅、共同样本和固定股数对照；不以检查通过推导有效",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_asset_growth_discovery.py",
+          "tests/unit/test_asset_growth_effect.py"
+        ],
+        "limitations": "10个已见年度，非新独立验证；资本开支/并购/会计范围未区分"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "pending_this_run",
+        "implementation": "isolated_research_adapter",
+        "effectiveness": "not_evaluated_at_registration",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "lowfreq_growth_design_20261019"
+      ],
+      "id": "research.stock.momentum_252_21",
+      "version": "1.0.0",
+      "name": "股票中期涨幅",
+      "type": "feature",
+      "profile": "lowfreq_growth_20261019",
+      "uses": [
+        "description",
+        "comparison",
+        "research_signal"
+      ],
+      "dependencies": [],
+      "definition": {
+        "formula": "adjusted_close(valid_t-21)/adjusted_close(valid_t-252)-1",
+        "parameters": {
+          "long_lag": 252,
+          "skip_lag": 21
+        },
+        "endpoints": "报告同一原件当前与上一年年末，两份年报读回相等；动量按有效报价行位移",
+        "unit": "fraction",
+        "direction": "降序候选；不等同ETF经济价格定义",
+        "transforms": "四格使用每年行业中位数；其他对手与费用详绑定设计，无参数搜索"
+      }
+    },
+    {
+      "scope": "独立历史A股固定600候选，2015—2024十个年度；2025仅来源覆盖，非ETF/原LEI/账户",
+      "not_for": [
+        "production_trade",
+        "ETF_inference",
+        "causal_claim"
+      ],
+      "input": {
+        "fields": [
+          "code",
+          "decision_date",
+          "assets_current",
+          "assets_prior",
+          "revenue",
+          "cost",
+          "momentum",
+          "industry"
+        ],
+        "price_basis": "BaoStock adjustflag2原始冻结报价；现金分红/公司行动未逐项核对",
+        "currency": "CNY",
+        "frequency": "annual June formation",
+        "calendar": "冻结市场交易日；July first close to following July first close"
+      },
+      "universe": {
+        "version": "P1 fixed2014end eligible2595 sample600, original hash inputs",
+        "eligibility": "共同历史报告资格与6月决策日P1 eligible；缺失全留未知，不按未来筛选",
+        "warmup": "动量第253有效报价首次可算；双期年度资产公开且跨报严格相等",
+        "missing": "无回填/选较早原报；效果缺价0%/-100%为假设情景，原权重保留",
+        "quality_gate": "source-design exact source IDs/hashes/year/publication; historical vendor arrival unknown",
+        "degrade": "未知保持未知，2025无成熟收益"
+      },
+      "time": {
+        "observation_time": "年度报告期末和6月末历史收盘",
+        "available_at": "报告公告日期严格早于决策日；历史供应商到达时刻未知",
+        "decision_at": "6月最后市场交易日收盘；本次仅历史再现",
+        "execution_at": "次月首交易日收盘假设，实际成交未确认",
+        "timezone": "Asia/Shanghai",
+        "effective_from": "2026-10-19新研究登记，不倒填旧实验"
+      },
+      "validation": {
+        "method": "合成边界、来源跨报与审阅、共同样本和固定股数对照；不以检查通过推导有效",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_asset_growth_discovery.py",
+          "tests/unit/test_asset_growth_effect.py"
+        ],
+        "limitations": "10个已见年度，非新独立验证；资本开支/并购/会计范围未区分"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "pending_this_run",
+        "implementation": "isolated_research_adapter",
+        "effectiveness": "not_evaluated_at_registration",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "lowfreq_growth_design_20261019"
+      ],
+      "id": "research.stock.asset_growth_gp_condition",
+      "version": "1.0.0",
+      "name": "高扩张低毛利条件",
+      "type": "state_signal",
+      "profile": "lowfreq_growth_20261019",
+      "uses": [
+        "description",
+        "comparison",
+        "research_signal"
+      ],
+      "dependencies": [
+        "research.cross_section.reported_asset_growth@1.0.0",
+        "research.cross_section.gross_profit_assets@1.0.0"
+      ],
+      "definition": {
+        "formula": "growth>industry annual median(growth) AND gp_assets<industry annual median(gp_assets)",
+        "parameters": {
+          "growth_strict": true,
+          "gp_strict": true
+        },
+        "endpoints": "报告同一原件当前与上一年年末，两份年报读回相等；动量按有效报价行位移",
+        "unit": "boolean",
+        "direction": "true为本次研究拟排除；不是买卖信号",
+        "transforms": "四格使用每年行业中位数；其他对手与费用详绑定设计，无参数搜索"
+      }
+    }
+  ],
+  "runner_dependencies": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/src/lei_signal/research/lowfreq_discovery.py",
+      "sha256": "dda4de0acd7335e73a481a66913f47359e974de25a0f220f545c31592fcad0df"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/src/lei_signal/research/lowfreq_research_control.py",
+      "sha256": "8be2f35b437eccc7de57f7766536acf245761af7de109f6b64d80189c550f2e6"
+    }
+  ],
+  "frozen_at": "2026-10-19T19:49:06.393216+08:00"
+}

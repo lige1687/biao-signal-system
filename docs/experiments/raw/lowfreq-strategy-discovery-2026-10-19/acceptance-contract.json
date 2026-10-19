@@ -1,0 +1,75 @@
+{
+  "schema": "lowfreq-research-control/1",
+  "action": "acceptance",
+  "stage": "diagnostic",
+  "scopes": [
+    "annual_growth_gp"
+  ],
+  "bindings": {
+    "design": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/effect-design.json",
+      "sha256": "8e1a12671282daf33041fcfbc63ea70ec74ea6cfa59a3cb05aa724b918691307"
+    },
+    "runner": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/src/lei_signal/research/asset_growth_effect.py",
+      "sha256": "cda97071d4a392b89a76fd513c78a46e5ed34e0f32851dc7d6a5e097d196a0f5"
+    },
+    "source_qualification": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/effect-source-qualification.json",
+      "sha256": "713654943e7c8aa75b96284dce81057f7ba25810ab862aab419ae46e09565c01"
+    },
+    "prior_manifest": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-strategy-discovery-20261019/lowfreq-strategy-discovery-20261019-20261019T193137-ffeeeb0dece3/result/source-qualification-01/manifest.json",
+      "sha256": "a130978a1ea1579fbe9298f8f5c1acc0e660d5e39733f5f406237c46a08ea092"
+    },
+    "brief": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/brief.json",
+      "sha256": "e231e543de2d0a2eb3737b6612003923acf18da0fc671bc6e168a66d795023c3"
+    },
+    "controller_review": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/acceptance-controller-review.json",
+      "sha256": "0b7c96fa86aca25eebfd809955b4fec3998ec828dbcf644213acdaa04762f557"
+    },
+    "selector": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/effect-selector.csv",
+      "sha256": "bb5c1549d26816468265ca600b034c38bfb6d60133b3ab2acd0c39ef1f4738f4"
+    }
+  },
+  "scientific_identity": {
+    "question": "每年6月底选择持有一年，排除报告资产增长较快且毛利资产比较低的股票，能否改善相对只看扩张、毛利、简单合分的选择",
+    "definition": "research.cross_section.reported_asset_growth@1.0.0 + research.cross_section.gross_profit_assets@1.0.0 + research.stock.momentum_252_21@1.0.0 + research.stock.asset_growth_gp_condition@1.0.0",
+    "formula": "C excludes strict industry-median HG/lowGP; annual fixed initial shares; same sector weight same retained count M/G/F/A; fourcell interaction",
+    "uses": [
+      "annual_stock_selection",
+      "retrospective_downside_information"
+    ],
+    "inputs": [
+      {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+        "sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289"
+      },
+      {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/effect-selector.csv",
+        "sha256": "bb5c1549d26816468265ca600b034c38bfb6d60133b3ab2acd0c39ef1f4738f4"
+      }
+    ]
+  },
+  "history": {
+    "reviewed_history_complete": true,
+    "attempts": [
+      {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/effect-attempt-failed.json",
+        "sha256": "db11bb40ea7a2d9793485e690e378292a8b3f2d8d3727321cb2e823649b72273"
+      },
+      {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/repair-attempt-completed.json",
+        "sha256": "20585d6f5ca38da954d51e1d75db6a089a09abd1a5f7240a6ea0ad388a7691eb"
+      }
+    ],
+    "inherited_other_family_history": "P1 sealed; P2 core1 followup2; P3 data4/4 source5/6; brief retains these, this new growth question never run"
+  },
+  "result_manifest": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/controlled-result-manifest.json",
+    "sha256": "afe2c42e1feb2a7030900762c3ca2804292088c752ebef6a7c2f79d819ec8123"
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "asset-growth-effect-development-receipt/1",
+  "checked_at": "2026-10-19T19:53:10.566920+08:00",
+  "status": "synthetic_implementation_ready_pending_source_qualification_and_controller_review",
+  "development_contract_sha256": "c895b808a7492e5d9ea48bc09563fca1190c9bf9592f77858b8fc87be94f9651",
+  "design_proposal_sha256": "f7bb04d106c532b366a955358c876ceff9143b60ccb5785d8eb4af36019d0e2c",
+  "code": {
+    "path": "src/lei_signal/research/asset_growth_effect.py",
+    "sha256": "cda97071d4a392b89a76fd513c78a46e5ed34e0f32851dc7d6a5e097d196a0f5"
+  },
+  "synthetic_tests": {
+    "path": "tests/unit/test_asset_growth_effect.py",
+    "sha256": "0bbf7aefd955cc7dfc6b7abd834b145df2da9a24bbbaf239e54063fe7ea62b44",
+    "command": "PYTHONPATH=src python3 -m pytest -q tests/unit/test_asset_growth_effect.py",
+    "result": "15 passed"
+  },
+  "other_checks": {
+    "py_compile": "pass after diagnostic repair restriction",
+    "cli_help": "pass after revision",
+    "git_diff_check": "pass after diagnostic repair restriction",
+    "repo_hygiene": "failed on three inherited worktree paths: .git, COORDINATION.md, docs/coordination; no task file implicated"
+  },
+  "real_market_execution": "not_run_by_implementation_agent; parent core attempt failed and retained separately",
+  "network_requests": 0,
+  "writes": [
+    "src/lei_signal/research/asset_growth_effect.py",
+    "tests/unit/test_asset_growth_effect.py",
+    "docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/effect-development-receipt.json"
+  ],
+  "contract_schema": {
+    "schema": "asset-growth-effect-contract/1",
+    "required": [
+      "control_contract",
+      "design",
+      "input_contract",
+      "selector",
+      "runner",
+      "output_parent",
+      "output_name"
+    ],
+    "bindings": "each *_contract/design/selector/runner object contains absolute path and sha256; runner matches control binding and this exact module; control scientific identity inputs contains original input contract SHA; output_parent pre-existing external directory and output_name fresh child"
+  },
+  "control_before_outcomes": "lowfreq_research_control.check(effect preflight) must return eligible_for_separate_execution; only then underlying 600-stock raw quotes are opened",
+  "limits": [
+    "source-only selector and terminal source qualification not yet available in this implementation turn",
+    "ten-year historical outcomes and user acceptance not evaluated",
+    "quote returns omit reconciled dividend cash and full corporate actions",
+    "0%/-100% unknown outcomes are sensitivity assumptions, not actual recovery bounds"
+  ],
+  "revisions_after_review": [
+    "month results are exactly twelve entry-to-June periods; next-July exit only annual wealth and path risk",
+    "each period gives prior/current raw-quote unknown weights and observed-vs-scenario evidence; previous NAV zero produces no return",
+    "entry unpriced or untradable names retain original allocation as unknown throughout; no share units inferred",
+    "path drawdown flags any imputed quote",
+    "hypothetical executable fee sensitivity uses netV=grossV*(1-sell_rate)/(1+buy_rate), 10/30 basis points each side",
+    "entry ST does not add an unfrozen future filter: actual trading and positive entry close form units; June decision ST remains the established eligibility check",
+    "all old quote parser errors remain in quote_quality; only expected_listed_day_missing_from_source is nonfatal_missing, all other returned errors or parser exceptions block before annual output",
+    "diagnostic repair requires SHA-bound failed effect contract and failed receipt, exact unchanged design/selector/input/source qualification, terminal source with qualified count, effects_authorized true and controller followup budget; normal effect cannot carry repair_of",
+    "result manifest records actual diagnostic repair stage and failed contract/receipt fingerprints"
+  ],
+  "effect_design_proposal_v2_sha256": "4ca4c04c895d5e1862cbe581eee5ea07b9b662f35ac97f815561b23fd56ae061"
+}
