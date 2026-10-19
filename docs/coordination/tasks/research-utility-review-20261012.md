@@ -1,3 +1,15 @@
+# 单ETF小时补证与真实系统展示已交付 2026-10-19T14:42:11.865203+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本有界题；scope_released true。checked_coordination_sha=d8c853ec7e529daff9414087cd682ca56a51c7d2；checked_at=2026-10-19T14:42:11.865203+08:00；已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新14:33/system最新12:10/research-dispatch-controller；无研究/写路径交集，不接管另owner600股盈利研究。
+- 旧新浪510500303天1212小时与同日Bao因子核回；独立价格资格302天、最长连续299，6/25开盘冲突排除，7量差异与无15min交核明示。新research.structure.bottom_hourly_waiting@1.1.0只加来源和同时点价格规则，旧卡/旧结果/原文不改；95旧底部身份复用。H15确认无后续时间记未知，其他15确认日起次日算后续日收盘下探。
+- 唯一新核心0.068935秒：20日79次直接2.280975%、小时1.992877%、固定5日1.823403%，差−0.288098点，平均下探仅少0.081024点；实际需等待19次差−1.19788点。30日77次差−0.260481；时期/背景/等待及宽不确定范围并列，不支持普遍强制条件、不称完整A或账户。11合成、独核16353项0差异；随机日期段范围未独立重抽；仅1ETF短历史。
+- 报告docs/experiments/etf-hourly-source-recovery-2026-10-19.md SHA83531d90e11c40f08105b1ea3006a88a747147a99399049810b2a40c2f09c2bf；主/研究两树同字节、registry只自身键/INDEX行。静态SVG fcfb24a3089f6209ee33f9038708e1f3d34412fec6c390907619ca81f591bee5 精确create-only采用主/研究/5188树web/public/research-results/etf-hourly-source-recovery-2026-10-19.svg。实际542宽无横溢、1100×1320图和6表、HTTP200、Agent全文5241字SHA verified且未截断，截图同名raw/web-comparison.png，用户视觉待验。
+- 主目标只note163→164，status仍in_progress/原历史保护字段核回。主仓归置通过；全部大产物固定外盘，0新行情、无生产/交易/服务改动/删除/通知。来源6/6原预算不重置，累计市场2883.667244/3600秒，无后台研究。本题已回答，更多ETF/个股小时输入及完整执行/仓位/共同资金仍缺，不标总目标完成。
+- Sol来源成功；Sol独核容量拒绝、检查无半成品后主控完成独立标准库复算；Astra方法审阅。保留首次registry字段误用→精确纠正、Agent索引超时→只读probe200后成功、首图来源笔误及视口滚动失败，均未重跑市场。
+- 成果仍codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be加本机未提交/未推代码与报告；仅协调元数据已推，不假称成果跨设备完成。原progress与新raw/closure、controller-review记录具体证据及恢复边界。个股后续优先包含退出者历史队列的新增小时证据，日线旧结果复用；不得用数据源变化当独立市场验证。
+
+---
+
 # 来源与同时点口径新版本登记 2026-10-19T14:28:41.960010+08:00
 
 - 原task active；checked_coordination_sha=6dc8dddc6773a065265a678b7fd1a2626a3ea283；checked_at=2026-10-19T14:28:41.960010+08:00；已读self、personal14:16、system12:10、中控与COORDINATION，无新冲突。来源审查12指纹通过，新浪303天仅6/25开盘冲突，独立仅价格研究候选302天/最长299天；7量差异单列，历史到达未证。
