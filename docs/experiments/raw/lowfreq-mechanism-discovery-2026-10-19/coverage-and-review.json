@@ -1,0 +1,157 @@
+{
+  "checked_at": "2026-10-19T16:08:21.104656+08:00",
+  "scope": "Current definition register and own P1/P2/P3 reports; not an exhaustive repository absence claim",
+  "registry": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+    "version": "1.6.14",
+    "objects": 178,
+    "sha256": "fbf6f2747215f0a1ca678ccbf2bc579ee5f6b2ae1324736252a23b82b6ca8618"
+  },
+  "coverage": [
+    {
+      "family": "momentum",
+      "definitions": [
+        "mixed.momentum.raw@1.0.0",
+        "mixed.momentum.rank@1.0.0"
+      ],
+      "state": "defined and own historical effects evaluated; retain negative and conditional findings"
+    },
+    {
+      "family": "profitability_cash",
+      "local_definitions": [
+        "research.cross_section.gross_profit_assets@1.0.0",
+        "research.cross_section.operating_cash_assets@1.0.0"
+      ],
+      "state": "local P2 definitions not entire quality family; average incremental return inconclusive; limited downturn evidence retained"
+    },
+    {
+      "family": "value",
+      "reference": "reference.ff5.hml@1.0.0",
+      "reference_kind": "published realized factor_return, not local stock valuation feature",
+      "local_state": "source qualification only; zero value effects"
+    },
+    {
+      "family": "investment_expansion",
+      "reference": "reference.ff5.cma@1.0.0",
+      "reference_kind": "published realized factor_return, not local asset growth feature",
+      "local_state": "asset fields exist; consecutive comparable annual values and growth effect not qualified"
+    },
+    {
+      "family": "accrual_cash_conversion",
+      "existing": "operating cash/assets",
+      "local_state": "not earnings minus cash or persistence; do not rename existing metric as new mechanism"
+    },
+    {
+      "family": "share_count_change",
+      "existing": "limited share-count points in value source cases",
+      "local_state": "no qualified split-adjusted annual panel or effect evidence in checked artifacts"
+    }
+  ],
+  "candidates": [
+    {
+      "name": "资产扩张",
+      "priority": "first new mechanism",
+      "phenomenon": "capital investment change versus operating ability level",
+      "mechanisms_are_hypotheses": [
+        "overexpansion following optimistic expectations or cheap funding",
+        "lower required return permits greater investment"
+      ],
+      "competing_explanations": [
+        "high-return projects",
+        "acquisitions/consolidation",
+        "FX/accounting changes",
+        "industry cycle"
+      ],
+      "baseline": [
+        "momentum",
+        "existing profitability/cash",
+        "valuation when qualified"
+      ],
+      "reuse": "original annual asset records, not already qualified growth panel",
+      "data_gate": "two consecutive comparable fiscal values, original public versions, denominator and consolidation scope",
+      "effects": "not_evaluated"
+    },
+    {
+      "name": "利润兑现",
+      "priority": "quality-family extension, conditional on meaningful measurement difference",
+      "phenomenon": "persistence of cash and noncash earnings components",
+      "baseline": [
+        "same-source net income and operating cash when available",
+        "existing gross profitability/cash/momentum"
+      ],
+      "duplication": "a difference of two inputs is not automatically additional information; gross profit is not net income",
+      "counterexamples": [
+        "normal working-capital investment",
+        "payment timing"
+      ],
+      "data_gate": "net income and matched accounting terms, then receivables/inventory if required; no exact Sloan replication claimed",
+      "effects": "not_evaluated"
+    },
+    {
+      "name": "净股数变化",
+      "priority": "financing mechanism reserve, greater new data burden",
+      "phenomenon": "equity financing and repurchases change ownership claims",
+      "definition_reference": "annual log change in split-adjusted shares outstanding; not financing cash amount",
+      "baseline": [
+        "momentum",
+        "valuation when qualified",
+        "asset expansion when qualified"
+      ],
+      "duplication": "issuance may finance the same investment captured by asset growth",
+      "counterexamples": [
+        "valuable project financing",
+        "stock acquisitions",
+        "employee compensation"
+      ],
+      "data_gate": "share classes, split/bonus/issuance/repurchase/cancellation treatment; period public availability",
+      "effects": "not_evaluated"
+    }
+  ],
+  "review_roles": {
+    "luna": {
+      "agent": "/root/luna_parse_v2",
+      "model": "gpt-6-luna",
+      "effort": "low",
+      "mode": "read_only",
+      "completed": true,
+      "finding": "coverage gaps scoped to current register and reports; prioritize asset reuse; no new files or market runs"
+    },
+    "astra": {
+      "agent": "/root/astra_increment_boundary",
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "mode": "read_only",
+      "completed": true,
+      "finding": "economic description does not imply return mechanism; cash difference can duplicate inputs; share count not financing amount"
+    },
+    "root": {
+      "independent_check": "read registry actual version/count/object types/status and source definitions; preserve old report hashes",
+      "decision": "continue value source line; new asset expansion first; cash conversion stays quality family; share count reserved until qualified"
+    }
+  },
+  "new_market_experiments": 0,
+  "all_candidates_effective": false,
+  "automatic_production_authorization": false,
+  "sources": [
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_port_form_inv.html",
+      "read": "construction and stock scope; asset growth annual definition; browser title erroneous Earnings/Price but body explicitly Investment",
+      "use": "definition only; economic mechanisms below are hypotheses, not established local effectiveness"
+    },
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2598",
+      "read": "author-posted abstract via search result, not full paper",
+      "use": "earnings persistence differs by accrual/cash composition and investor fixation interpretation; exact local accounting proxy not frozen"
+    },
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_port_form_NI.html",
+      "read": "construction and stock scope; split-adjusted shares log change",
+      "use": "definition only; share increase not proof of economic dilution"
+    },
+    {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+      "read": "official directory and update notes",
+      "use": "source routing; do not substitute published US portfolio results for local outcomes"
+    }
+  ]
+}
