@@ -360,3 +360,5 @@ Luna low只读核当前定义178对象与本任务旧结果，Astra high挑战�
 有界审查及代码补缺completed，策略效果未评价。复用已有Alphalens真实排名诊断与有限statsmodels/arch、French解析和CN/CH3归因（明确两者不同范围）、原引擎与家族账本。新增RQData公开API资格说明、QuantStats/vectorbt采用边界。主控纠正Luna两次盘点漏项及顶层机构测试夹具错误，失败与裁决留raw。新preparation按research_references取回准确版本和term，真实JKP/French/AQR 1/8/2卡逐字段核同，旧动量定义/案例输出保持，18相关测试/两树归置/diff/报告本地链接/旧registry保持通过。root按原SHA镜像主树两代码文件及指引精确新增段，原主树未跟踪状态保持，不批量复制其他依赖。
 
 报告docs/experiments/research-stack-gap-audit-2026-10-20.md；raw同名包含前后真实CLI、verification、来源、主控裁决、委派合同和失败。22公开读取/定位操作、10独立文档；0新行情/市场/安装/付费/交易/通知，旧家族预算不重置，Luna低思考只盘点与小实现，模型费用未知。目标仅note24→25/in_progress，保护字段精确读回；用户确认与有效策略目标未完成。成果分支codex/personal-lowfreq-system-audit-20261018，准确推送与协调见本轮发布回执；当前接续先查最新owner，优先既有历史数据与成交缺口，RQData需真实数据访问/许可，不能将公开文档当取数成功。主树运行可用不代表跨设备全部13历史依赖已恢复。
+
+主体成果c921c6fac887e2d70fcf36eeecfd75cdf65cc2b2已推并逐字核回28文件，主树CLI保持与成果树一致。首次暂存检查发现新测试末尾空行，修正仅格式后通过；此前无新commit，后随命令只推旧HEAD并回报up-to-date，失败回执已保留。两树现行归置均通过。open_in_codex仅返回queued，不宣称界面已展示。交付前checked_coordination_sha=5be1d1e032394063dcfb792c16619e42bc0e4ece，无新增其他task变更。
