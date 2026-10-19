@@ -1,3 +1,13 @@
+# 质量/盈利能力历史资料与动量增量研究开始 2026-10-19T10:20:44.479930+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=ed12eb5fc881d6259a7132d0e7fe5bb647e2d661；checked_at=2026-10-19T10:20:44.479930+08:00；已读COORDINATION、自身、research-utility-review01:41、investor-workspace01:37、research-dispatch-controller；冲突决定：本轮独立质量/盈利能力历史资料及同日选择价值，不接原策略触发、底部退出、日小时、账户和系统UI。
+- 用户新明确授权继续按顺序补质量/盈利能力历史公开资料、再检验相对动量的收益/风险/其他用途，Luna执行、主控假设审查迭代，不能只报告/TODO。复用已封存600股票/132月动量输入与结果，不重跑旧主试验；优先同市场/历史队列，财务资料无法资格时记录问题并查获准公开版本来源，不能用当前修订值回填历史冒充合格。
+- 成果分支codex/personal-lowfreq-system-audit-20261018基线4712eecc87f1a4882a281521816ed39f58cfcc5c。root唯一写docs/experiments/lowfreq-profitability-increment-2026-10-19.md、同名raw计划/核数/来源/回执、原progress、独立registry本键/INDEX本行、原目标okr-8830a1f1ec4f。必要研究代码只新增src/lei_signal/research/profitability_discovery.py和对应tests/unit/test_profitability_discovery.py，不改原模块/策略/共享定义。大资料/结果默认已核外盘新唯一运行，不覆盖旧源。
+- 分工预定：Luna low机械来源资格、采集和实际执行；Sol medium只明确研究适配或只读已有资料盘点；Astra high只读金融假说/时点/比较设计及最后裁决。每阶段新不可变合同登记准确路径后派发，避免同文件写交集。现有合格财务面板尚未证实，先查可知时间/原值与修订/退出及行业，不先算效果。
+- 本轮是质量/盈利能力新有界问题，继承旧家族尝试和单公司SEC例子身份；不重置600股票动量已用1核心+2跟进和旧文献预算。新问题拟1核心+最多3必要跟进、6来源发现请求；真实批量数据操作先资格后明确数量/限流/失败上限，非无限取数。无付费、安装依赖、生产交易、通知或原owner目标写入。验收须实际性能与动量增量表及风险/操作取舍；必要数据不合格不能冒称效果完成。
+
+---
+
 # 十年600股票实际检验与两项跟进已交付 2026-10-19T02:45:35.034018+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮固定历史问题；scope_released true。checked_coordination_sha=65d396a5921441acd1aaba18e242e6744b9eeee9；checked_at=2026-10-19T02:45:35.034018+08:00；已读COORDINATION、自身、research-utility-review-20261012最新01:41、investor-workspace-simplification-20261012最新01:37、research-dispatch-controller；冲突决定：独立月度选择研究，未接原LEI/日小时/底部退出/账户或系统UI。
