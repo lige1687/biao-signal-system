@@ -1,3 +1,14 @@
+# 盈利能力原年报资格通过，进入600队列批量补全 2026-10-19T10:47:45.740706+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active，scope_released false。checked_coordination_sha=9b59c8c4e5a0fbe0ab8967f33eda4cec43ef62f7；checked_at=2026-10-19T10:47:45.740706+08:00；已读COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller；原owner记录无新变化，无文件/研究问题交集。
+- 用户本轮授权仍为先补质量/盈利历史，再真检验相对动量新增收益/风险/其他用途，Luna执行主控审核。已得7份年度原件与1份真实会计差错公告；600518的2017数字2019才更正，不准回填历史。12个年末行业截面实际12/12成功并独核hash，updateDate不冒称首次公开。原API只有pubDate无版本的盈利率未采用为合格历史原值。
+- 新批量阶段只同固定600股FY2013—2024、2014—2025披露原年报/更正目录及PDF，不新行情、不重跑旧132月动量；明确14,000操作/6,000目录/9,000PDF上限、4线程共享0.5秒起始间隔、40秒0重试、429或连续2错误停，先写持久日记，已开始操作不自动重发。新资料storage-bulk-plan外盘30GiB计划/16MiB本机小记录已核设备UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9；大原件只外盘，计划非实际完成。
+- 唯一写范围与上一阶段不变：自身报告/raw/progress/registry键/INDEX行/原目标；正式研究适配仅profitability_discovery.py及对应unit test。Sol medium写明确采集/解析工具，Luna low实际采集/执行，Astra high冻结科学设计和复核；单文件单写者。主控采纳前核代码和原件。当前采集器未正式运行、市场效果尚未算，不将来源资格当策略有效。
+- 新source discovery6/6、第一来源探测8次、原公告15次含8PDF，行业12次；所有失败保留，SEC403不重试绕过。旧动量核心1+跟进2和封存结果保持。新盈利效果预算1核心+最多3有理由跟进未消耗。只有GP/A盈利主假说已建议；现金支持指标是否另纳入先独立方法审查，不因结果增减候选。
+- 当前成果仅本地未提交，最后已推成果4712eecc87f1a4882a281521816ed39f58cfcc5c；新原件位置/指纹见raw/lowfreq-profitability-increment-2026-10-19各receipt/plan。下一步实际批量取原件、验证合并表同单位同版本，再在共同合格范围固定比较并交性能/增量/覆盖表。没有跨项目、生产/交易、主动通知、原策略改动。
+
+---
+
 # 质量/盈利能力历史资料与动量增量研究开始 2026-10-19T10:20:44.479930+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=ed12eb5fc881d6259a7132d0e7fe5bb647e2d661；checked_at=2026-10-19T10:20:44.479930+08:00；已读COORDINATION、自身、research-utility-review01:41、investor-workspace01:37、research-dispatch-controller；冲突决定：本轮独立质量/盈利能力历史资料及同日选择价值，不接原策略触发、底部退出、日小时、账户和系统UI。
