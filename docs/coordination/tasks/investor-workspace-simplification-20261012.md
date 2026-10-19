@@ -1,3 +1,14 @@
+# 持仓关联、近期重点与低阅读成本接续 2026-10-19T11:23:20.005834+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=58cf2898e34e3c7233577d00a3c2067fcee87373；checked_at=2026-10-19T11:23:20.005834+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018最新10:47、research-utility-review-20261012最新01:41、中控、daily-trading-system-audit、investor-observation-map；财务资料/因子源码与本轮无交集，不接管原研究。
+- 用户明确授权按持仓关联、变化时效、轻判断记录三优先级实现；机会页减法，默认只近期重点，近期技术事件与同产品走势前移，K线保留，Agent串联少读字。终点为真实页面能从近期事件看关联基金/依据日期、当前与解除状态/等待条件、一跳记录自己判断，原确认不省略；需真实截图和交互验收。服务体系4.1叙事与5.2/5.3执行推演层，两源实际SHA df92d85b…/85e0e327…与确认值相同；不改技术判定/阈值。
+- 沿原codex/investor-workspace-simplification-20261012@e6c4c2e025252c565ba15f05611561ca1ecd5b48及既有未提交增量。限定后端src/lei_signal/api/recent_opportunities.py、opportunity_summary.py、routes/opportunity_reviews.py；可新增纯函数api/opportunity_connections.py，及对应test_recent_opportunities/test_opportunity_summary/test_opportunity_review_routes、新test_opportunity_connections.py。复用portfolio/industry_context、已有证据/披露配置只读，不凭名称推关系，不新抓全市场或改金融记录。
+- 前端限web/src/pages/OpportunitiesPage.tsx、opportunities.css、opportunityFocusModel.ts、todayOpportunityModel.ts；api/opportunityReviews.ts；components/opportunities/OpportunityDailySummary.tsx、opportunityDailySummary.css和可新增OpportunityHoldingLinks/其model；DecisionsPage.tsx、decisions.css/相关decision组件仅必要轻记录入口，web/scripts/test_opportunity*与对应decision测试。TodayRecentOpportunities及其model仅必要同读时效/关联，不改研究页面。root唯一整合源/类型/报告/共享写者，子Agent单文件分工后再写。
+- 验收：真实既有关系且同市场/目标身份、披露日与行情日分开，参考ETF不产生基金买卖触发；新/持续/解除/过期/盘中与双侧边界；默认重点且旧深链可达、无重点不编造；首屏摘要简短、K线前移、状态/来源折叠、1280/375无横溢；轻记录用户原话及明确确认，生产个人判断/计划/成交0测试写入。真实Agent核心一次，具体语义缺陷才修正验证，不改模型/Key不重跑旧审核；失败记录保留，同输入复用。
+- 分工Sol medium holding_link_audit只读关联来源，Sol medium reading_flow_audit只读布局和确认流；随后明确文件分工实现。仅小代码/报告/原目标note，原报告追加及registry自身键/INDEX行、自有progress和archive下reading-flow-20261019前缀；主运行树逐文件基线核对后精确镜像。没有新研究、通知、定时器、交易、仓外清理、主分支合并。
+
+---
+
 # 审查失败、宽度与新闻更新闭环已交付 2026-10-19T01:37:16.139384+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅本轮有界工程和用户连接审查；scope_released true。checked_coordination_sha=55a32941cb65f21f7083c33ea5d8bf41817a9a5a；checked_at=2026-10-19T01:37:16.139384+08:00；已读COORDINATION、自身、personal-lowfreq-system-audit-20261018最新01:28、research-utility-review-20261012最新01:12、research-dispatch-controller、daily-trading-system-audit、investor-observation-map。新十年发现/小时来源研究不占本轮源码，无冲突；因子任务仍归原owner。
