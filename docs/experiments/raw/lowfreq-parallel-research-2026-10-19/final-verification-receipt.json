@@ -10,7 +10,7 @@
   "missing_targets_preserved": 3,
   "main_current_hygiene": "pass",
   "worktree_legacy_hygiene": "3 preexisting .git/COORDINATION.md/docs-coordination whitelist errors; no new path issue; not claimed all-green",
-  "git_diff_check": "pass",
+  "git_diff_check": "pre-stage tracked diff passed; staged full diff exit2: preserved French web source has trailing spaces and blank EOF. Research/source hashes unchanged; not claimed all-green.",
   "source_budgets": {
     "method_requests": 5,
     "method_max": 6,
@@ -24,5 +24,11 @@
     "followup_max": 3
   },
   "large_files_uploaded": false,
-  "production_or_trades": false
+  "production_or_trades": false,
+  "staged_check_failure": {
+    "path": "docs/experiments/raw/lowfreq-value-increment-2026-10-19/french-source.txt",
+    "reason": "immutable captured source whitespace",
+    "execution_note": "commit ran after failed staged check because separate awaited calls did not condition on exit code; preserved failure, no source rewrite or history rewrite",
+    "correction": "subsequent publishing checks inspect exit/status before dependent action; source formatting remains explicitly accepted provenance limitation"
+  }
 }
