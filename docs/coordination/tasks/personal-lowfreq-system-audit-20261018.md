@@ -1,3 +1,15 @@
+# 数据防失真检查与来源补证交付 2026-10-20T00:58:23.474081+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅新入口防护和本批资格检查；scope_released true；全量补证/有效策略目标仍未完成。checked_coordination_sha=ea8207fb5c7ae39d3f86414f779f8197b4beddf8；checked_at=2026-10-20T00:58:23.474081+08:00；已读COORDINATION/self/research-utility-review-20261012最新FIP00:48/investor-workspace-simplification-20261012最新图像00:57/lowfreq-strategy-discovery-20261019/dispatch；与原FIP/US/LEI及系统UI无范围冲突。一次交付准备因并发fetch更新远端跟踪SHA，在写入前断言停止；已重读唯一更新的系统记录，未覆盖他人。
+- 主体成果codex/personal-lowfreq-system-audit-20261018@76d4039bb652b1dedd9d28980888fc1d529b592e，24准确路径远端逐字核同；后继回执/进度cdf5aeefc0cd8dc031209b9c7eb027075e7e1f65两路径已核。报告docs/experiments/lowfreq-data-integrity-enforcement-2026-10-20.md及raw同名目录；新入口src/lei_signal/research/lowfreq_input_guard.py，tests/unit/test_lowfreq_input_guard.py，用法docs/research/lowfreq-input-checks.md。registry本键/INDEX本行齐，未合主树/生产，不宣称所有入口采用。
+- 实测600源1,852,185行，因sz.001914的1,560行返回flag3而请求2在统计前拒绝，旧统计调用0/收益目录未建；17合成测试root独核通过。文件身份/字段/日期/日历/OHLC/状态等检查已执行，停牌空活动2506行警告；原件/旧代码SHA保持。
+- 4预定匿名请求取回该股名义与复权各3166行、10复权因子、茅台2014股份报表1条。复权共同字段与旧源完全一致；报告期2014-12-31但pubDate2015-04-21，不能用于2014年末。全历史股本/市值、限制价/成交、当时版本仍未合格，不能用今天股本补过去。
+- 复用原因子gp-existing-source-exposure，主控独核旧财务33权重记录/11月；2020-05、06的252/21动量两端确实flag3/2混用，余9月两端flag2。旧财务增量和少亏用途暂停升级，修正后总体影响未知；未重算或推翻整个因子。旧报告不覆盖，本报告须随旧结论引用。原FIP/美国复现不接管、不重复。
+- Luna低只读盘点、Sol中等编程、root主控与实际取数核数；source6/6（2检索+4资料）/核心1/必要跟进2of3/新收益0，旧家族预算不变。首次委派预检失败及v2同范围修正保留，费用未知。外盘固定UUID/plan核同，结果1,624,277B；双工作区归置/格式/8本地链接通过。
+- 目标okr-8830a1f1ec4f仅note22→23读回，整体in_progress、保护字段未变；无后台/通知/交易。恢复先补准确价格事件/股份时点资料或冻结有理由隔离方案，再用原家族预算纠错；不得从旧直接CLI声称已过新检查或换名刷新预算。新入口不证明实际成交，辅助函数测试不等于所有旧研究已迁移。
+
+---
+
 # 数据失真防护与缺失资料补证启动 2026-10-20T00:43:20.782608+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=4618a292980de2f7701f63b34dee28925e2825a9；checked_at=2026-10-20T00:43:20.782608+08:00；已读COORDINATION/self/research-utility-review-20261012最新FIP00:28/new-lowfreq/system/dispatch。用户明确要求把处理原则和优先补项做到，授权本轮数据资格防护和公开资料补证；不是重开旧收益实验，不接管原US/FIP/LEI。
