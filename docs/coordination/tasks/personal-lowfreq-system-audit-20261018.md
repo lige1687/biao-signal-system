@@ -1,3 +1,13 @@
+# 盈利历史资料中断接续与逐字段资格  2026-10-19T11:32:30.261888+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=c2006894ecbff6b741ca17b11de2229a41fc97e8；checked_at=2026-10-19T11:32:30.261888+08:00；已读COORDINATION、自身、research-utility-review-20261012最新01:41、investor-workspace-simplification-20261012最新11:23、research-dispatch-controller。冲突决定：只独立600股票盈利资料/相对动量价值，不接原因子/账户/UI；文件范围沿用，仅自身raw新增来源和按时点面板工具。
+- 最近已推成果62ed9e7b77de7ecedb144cb4dd2de82dd8e361d9，工作分支codex/personal-lowfreq-system-audit-20261018；parser v2及后续小合同尚本地未提交。25公司620原PDF诊断已完成，32更正文档已有逐条引文及主控复核；不是25股票效果试验，尚无新财务效果运行。
+- 上次Luna/Sol返回额度限制；本轮已核采集进程不存在，journal实际3427 start/3423 finish，4项中断未定，progress131完整/6不完整/4运行旧标记/459待取。原失败和中断保留，续采只未发请求，仍沿原14000总/6000目录/9000PDF，不重跑已请求操作。恢复前核固定脚本/计划及外盘身份。
+- 当前唯一写者：root先修prepare_financial_documents.py的无年份异常与毛利润不依赖现金流资格；原agent已不活跃。Luna在当前可用时机械续采/执行，否则记录实际回退，不能谎称Luna运行。其余正式研究模块/测试与自身报告/raw/progress/registry键/INDEX行/原目标范围不变。新效果1核心+最多3跟进仍0使用。
+- storage已实核11:32，固定UUID符合，外盘541046472704B/内盘27652685824B空余。无删除、跨项目、生产、真实交易、通知或旧实验重跑。下一必要动作：资料接续、字段版本资格、完整600×132月可知面板，再正式比较和独核；仍在执行，不把资料工程标为金融研究完成。
+
+---
+
 # 盈利能力原年报资格通过，进入600队列批量补全 2026-10-19T10:47:45.740706+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active，scope_released false。checked_coordination_sha=9b59c8c4e5a0fbe0ab8967f33eda4cec43ef62f7；checked_at=2026-10-19T10:47:45.740706+08:00；已读COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller；原owner记录无新变化，无文件/研究问题交集。
