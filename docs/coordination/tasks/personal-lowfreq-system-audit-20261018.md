@@ -1,3 +1,13 @@
+# 数据失真防护与缺失资料补证启动 2026-10-20T00:43:20.782608+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=4618a292980de2f7701f63b34dee28925e2825a9；checked_at=2026-10-20T00:43:20.782608+08:00；已读COORDINATION/self/research-utility-review-20261012最新FIP00:28/new-lowfreq/system/dispatch。用户明确要求把处理原则和优先补项做到，授权本轮数据资格防护和公开资料补证；不是重开旧收益实验，不接管原US/FIP/LEI。
+- 目标：将已确认返回复权/日期/未来状态误用等问题变为新研究执行前可阻断检查；真实600旧包验证拒绝，检查前不得调用统计；核历史名义价格、流通/总股数与限制价格来源，合格与未知分列。复用input_preflight/data_quality时间语义，旧低频合同不是snapshot格式，新增窄适配不重建平台。
+- 唯一写范围：本成果树src/lei_signal/research/lowfreq_input_guard.py、tests/unit/test_lowfreq_input_guard.py，docs/experiments/lowfreq-data-integrity-enforcement-2026-10-20.md及raw同名目录、registry本键/INDEX本行、原work-progress/目标note；必要说明docs/research/lowfreq-input-checks.md。旧lowfreq_discovery/冻结/收益/原策略/生产不改。Sol唯一写模块和测试；Luna只读既有资料和渠道盘点；root新数据资格/报告/真实执行。
+- 新数据补证问题最多6外部请求(含失败)，1核心资格审查+3必要跟进；旧动量6/6和所有旧家族保持，不改名刷新。先复用本地SDK说明/已存资料，再决定具体请求；不付费/取凭证/装软件/批量无界补数。预计外盘64MiB、本机400KiB，plan通过后新资料写外盘。
+- 验收：伪造或不符返回字段、未来资料/事后删名单、缺执行证据不得静默通过；已知坏600包在统计前拒绝、原数据/代码SHA不变；代表性新增原件/时间/版本逐项对照，资料不合格不说补齐。每用途给剩余原因；不声称所有旧入口自动迁移。成果基线3e9915e670a35be01af2b3b80ae0cde1859ac0c9。
+
+---
+
 # 12–1与股票池体检交付 2026-10-20T00:39:19.764339+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮132次调仓输入/公式诊断；scope_released true。checked_coordination_sha=4ff7e4cfd49b80f336b6adc50b62bcf60fb0bf5c；checked_at=2026-10-20T00:39:19.764339+08:00；已读COORDINATION/self/research-utility-review-20261012最新FIP00:28/lowfreq-strategy-discovery-20261019/investor-workspace-simplification-20261012/dispatch；原US逐股/FIP/LEI/财务/UI职责不接管，未改共享定义或引擎。
