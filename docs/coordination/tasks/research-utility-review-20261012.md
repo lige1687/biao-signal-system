@@ -1,3 +1,13 @@
+# 低频研究优先判断接入现有AI入口 2026-10-19T18:34:00.144076+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=c2eedba38973c440d724d4f609d1435b37f0c8cc；checked_at=2026-10-19T18:34:00.144076+08:00；已读 COORDINATION/self/system16:38/personal16:11/dispatch，以及personal00:32已释放playbook交付。原财务候选、原LEI和UI分工保持，无活跃同块写者。
+- 用户直接要求：把三点（同类去重、具体决定、证据决定继续暂停）和五点（低频慢反馈、大机会代价、风险暴露、多重尝试、开发服务问题）放到后续研究AI首要考虑；AI承担预期价值、样本支持、取舍与换方向判断。本轮是现有研究流程文档维护，不启动收益或行情实验，不新建研究平台、全局Skill、定时器或程序硬拦截。
+- 唯一写者root；准确写范围：主工作区AGENTS.md首屏及原lei-factor-discovery块、docs/research/factor-discovery-playbook.md的开题/收尾与低频优先要求、.agents/skills/lei-gpt-zcode-orchestrator/SKILL.md的委派/回调引用；既有自身docs/ops/work-progress/research-utility-review-20261012.md追加证据，必要自有目标note。三文档服务研究组织和证据解释层，不改技术判定/阈值、原策略源、旧合同/报告/预算或当前规范索引。
+- 基线：主树codex/factor-unit-research-20260915当前已有多人未提交增量；仅精确局部补丁，不暂存混合文件整包；本轮成果先本机采用，远端仅协调元数据，不声称全客户端已加载。原成果分支/来源与效果累计预算不变。
+- 验收：三点五点逐项有入口、同一开题记录有价值/基准/低频期限/样本与开跑决定、回调有改善/代价/保留暂停及恢复条件；缺资料与无效果分开、价格同家族不自动全无效、不得以新方向名义绕过权限；原文件无关内容/两源hash保持、链接和归置核对；Sol medium只读差距和案例挑战，不写文件/联网/计算市场结果。0新市场或来源请求，实际模型费用未知。
+
+---
+
 # 长历史资料资格与三项结论纠正已交付 2026-10-19T16:37:12.487796+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮资料资格与纠正；完整原版/兼容/账户目标仍in_progress。scope_released true仅此次新增文件；checked_coordination_sha=207963f35b16fd34b79c08c38935ff3e21c56adc；checked_at=2026-10-19T16:37:12.487796+08:00；已读COORDINATION/self/system16:18独立审查/personal16:11/dispatch。没有抢先跑新效果或接管独立审查；系统owner可据以下文件只读验收，无需双方往返消息。
