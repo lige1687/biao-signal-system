@@ -1,3 +1,16 @@
+# 12–1与股票池体检交付 2026-10-20T00:39:19.764339+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮132次调仓输入/公式诊断；scope_released true。checked_coordination_sha=4ff7e4cfd49b80f336b6adc50b62bcf60fb0bf5c；checked_at=2026-10-20T00:39:19.764339+08:00；已读COORDINATION/self/research-utility-review-20261012最新FIP00:28/lowfreq-strategy-discovery-20261019/investor-workspace-simplification-20261012/dispatch；原US逐股/FIP/LEI/财务/UI职责不接管，未改共享定义或引擎。
+- 主体成果codex/personal-lowfreq-system-audit-20261018@594398cd9d9b4139f27b438afb6c33eafd68255b，22准确路径推送字节核同；目标与进度后继3e9915e670a35be01af2b3b80ae0cde1859ac0c9两路径远端字节核同。报告docs/experiments/momentum-universe-execution-audit-2026-10-20.md SHA15a992cd5808c939536004a476b2f9b87f952f4d24902bf678689205b36eee44，raw同名；registry本键/INDEX行已登记；未合主树，Codex打开返回queued，不宣称已显示。
+- 结果：600历史队列/79200股票月/132月时间链核同；自然月12–1共同67759记录、每月393–565。99.76%分数不同、排名绝对差中位21名；旧252/21按旧定义74067条算术复核差<1.8e-15，不能将其冒称自然月12–1。旧252窗口最大1660日。本轮新IC/收益/风险效果均未评价，不重复旧收益实验。
+- 旧动量选中14327股票月中34个次日来源停牌(29月)、15个全天单价上涨(14月)；全日单价且有量不证明必定涨停/买不到，缺限制价格/订单。原选中权重全保留不重排；51个后来退出成员保留664次退出前选择、退出后0，含并购等退出未知最终所得。名义价格/最低流动性/微盘过滤未齐，历史市值股本资料未绑定。
+- 返回adjustflag旧缺口仍仅sz.0019141560行冲突；新增分数隔离该源，旧600分母/报告/原件不改。完整经典原样复现及可交易策略仍未完成，不能以体检核数通过代替数据资格或效用。
+- 执行：Luna低只读审查、Sol中等单脚本/内存演练、root实跑/独核；6/6源请求(含2查找无匹配)，1输入审计，0新收益运行/行情下载。两绝对路径预检被拒在派发前，保留合同和失败，v2相同范围改相对路径通过；旧家族预算全部不变。9原价/1960排名核对、79200权重相同、600源与输出SHA核同、归置/diff通过。费用未知。
+- 外盘固定UUID及storage-plan绑定，真实普通结果22147867B，大明细不入Git；内盘小记录/报告保持。目标okr-8830a1f1ec4f仅note21→22读回，status仍in_progress，保护字段未变。goal-before仅本地不提交；无资料删除/后台/生产/交易/通知。
+- 恢复条件：先绑定合格历史名义/限制价格和股本/规模、明确执行现金及退出规则，再冻结原样复现/可交易各自口径；原US逐股缺口由原owner继续。新真实计算须继承本轮及家族预算，不能改名重置或自动联网。
+
+---
+
 # 12–1动量定义与A股股票池/成交链诊断启动 2026-10-20T00:26:22.686601+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=b8ab1c3e6f8443c31bf839154467dedfbcc3ae8c；checked_at=2026-10-20T00:26:22.686601+08:00。已读COORDINATION/self/research-utility-review-20261012最新FIP00:22与四经典00:18/lowfreq-strategy-discovery-20261019/investor-workspace-simplification-20261012/dispatch。无文件冲突：原美国论文逐股复现及FIP仍归因子实现；本题只审现有A股600历史队列的12–1日期定义、逐月资格和执行缺口，不重跑原论文或旧收益实验。
