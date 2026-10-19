@@ -1,3 +1,14 @@
+# 同一绿色候选动量增量：有界比较交付 2026-10-20T02:07:25.439935+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮回顾性同池比较；scope_released true。checked_coordination_sha=fbf0c3e614b8300174b925e91809c818538cf843；checked_at=2026-10-20T02:07:25.439935+08:00；已读COORDINATION/self/personal-lowfreq-system-audit-20261018/investor-workspace-simplification-20261012/research-dispatch-controller/lowfreq-strategy-discovery-20261019；最新fetch无新增差异，无范围冲突，不接管他人系统或财务来源修复。
+- 报告docs/experiments/green-momentum-selection-2026-10-20.md SHA6021f2482a832f51146e97e7fd0e98f5128d6414960bb46dbed243a1effc0088；raw合同SHA0cfc1dd41bc120562088f62caa9243a616bc9150ddc8d00ffca4d8bd90f7d16c。固定历史600股、排除此前已知混复权1股、594股至少一个月合格、115比较月。残差对缩放同77月−0.100pp、对普通同75月+0.019，当前绿色月度排序用途暂停扩张；高点组合同76月+0.454，仅复验线索，未知与后期贡献限制。
+- 1次核心、0效果跟进、0新来源请求；12合成测试、独立805组月结果及4原始分数，最大误差1.42e-14；统计前缺失/卖出后价格/HAC日历/费用同月修正留痕。6研究对象追加、旧objects/sources及701旧报告保持，10绑定未变；无参数追正。
+- 5188真实7表与研究前序链接核回、API全文一致、AgentSHA verified未截断；归置通过。目标okr-ff1e0a86fbac仅note175→176，in_progress/旧历史/其它字段保持。用户阅读效果待认可。外盘约19.23MB/raw约0.40MB，无后台/通知/删除/付费/生产/交易，实际模型费未知。
+- 主成果在codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9上的本地未提交文件；本协调只交元数据，不声称源码已远端移交。Sol high实现、Sol medium独核、Astra high方法审；均结束。
+- 恢复从raw/state、design、core-contract、source-qualification-review、controller-method-review、independent-check-v3、delivery-validation与storage-plan。原US逐股复现/ETF/完整LEI账户未测；先解决执行未知及历史版本，再考虑高点独立复验，不重跑旧公开组合/FIP/价值或本题已答比较。
+
+---
+
 # 同一绿色候选内动量选择增量启动 2026-10-20T01:44:31.470825+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=06126603ccc40ab19de3f23b2723300219b0807b；checked_at=2026-10-20T01:44:31.470825+08:00；已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新工具审查01:30、investor-workspace-simplification-20261012最新00:57、research-dispatch-controller及lowfreq-strategy-discovery-20261019原样本来源。与工具/系统及财务owner无重叠，不接管旧预算/输入修复。
