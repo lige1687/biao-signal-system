@@ -1,0 +1,43 @@
+{
+  "schema": "financial-document-batch/1",
+  "created_at": "2026-10-19T04:22:42.769284+00:00",
+  "inputs": {
+    "progress": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/progress-source-batch-03.json",
+      "sha256": "96507723a0d9ebc9da601af5f9a04e0bf69c74ed35ea92f44f610293b2a59621"
+    },
+    "plan": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+      "sha256": "bcb2d5b3a8a3efe9ef08d656fe92b60af80ab6a1e0f17b4b8cddcd662b091e07"
+    },
+    "cohort": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+      "sha256": "6f073e37809613469efe6cd2adb6b7ef1b4e77515e99e7149e1636d9e390cc16"
+    },
+    "parser": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py",
+      "sha256": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae"
+    },
+    "preparer": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_documents.py",
+      "sha256": "3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012"
+    }
+  },
+  "reuse_manifests": [
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/manifest.json",
+      "sha256": "b7027c9b9c8efbba1157296a4f07c66d8e4fe7a73d1c2953050672c3ccb7e8fe"
+    }
+  ],
+  "workers": 4,
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-03",
+  "runner_sha256": "522a6747b59d2aeee499ce717e4a8d1c9d7f612acd1fd7482e6f90b08a58eb8f",
+  "market_effects_allowed": false,
+  "network_requests_allowed": 0,
+  "source_progress_operations": {
+    "catalog": 645,
+    "pdf": 7142,
+    "total": 7787
+  },
+  "purpose": "Incremental v3 source preparation only; reuse exact immutable batch02 records, parse only newly available source PDFs; acquisition continues separately."
+}

@@ -36,6 +36,18 @@ def context(state, starts=None):
 
 
 class CompletionTests(unittest.TestCase):
+    def test_one_failed_source_is_not_a_controller_stop(self):
+        state = {'catalogs': {}, 'pdfs': []}
+        frozen = context(state)
+        result = {'operations': []}
+        responses = {'one': {'successful': False, 'error': 'preserved_source_failure'}}
+        counts = {'catalog': 0, 'pdf': 0, 'total': 0}
+        with patch.object(completion, 'journal_starts', return_value=({}, set(), counts, 1, None)):
+            merged = completion.merge_progress(frozen, result, responses, {}, controller_stopped=False)
+        self.assertFalse(merged['global_stop'])
+        self.assertTrue(merged['stage_had_unsuccessful_operations'])
+        self.assertEqual(merged['codes']['600000']['status'], 'incomplete')
+
     def test_catalog_wave_only_known_unstarted_pages(self):
         state = {'catalogs': {'annual': {'status': 'incomplete', 'expected_pages': 3,
                                         'pages': [{'page': 1}]},

@@ -1,0 +1,23 @@
+{
+  "schema": "independent-financial-reconciliation-development/1",
+  "status": "code_and_synthetic_tests_ready_final_result_not_run",
+  "files_sha256": {
+    "independently_check_profitability.py": "0f6ec7364c7990d5e53dfc3db827c0606d19bf47d47d2b1b39a8830f61e9840c",
+    "test_independently_check_profitability.py": "6b82d0d7b63a74ece3e7311969b9400f1712151c389433b6f4a2c8565420a043"
+  },
+  "synthetic_tests": {
+    "passed": 8,
+    "command": "python3 -m unittest docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/test_independently_check_profitability.py -v"
+  },
+  "real_market_outcome_read": false,
+  "effect_experiment_run": false,
+  "requires": "root frozen financial evaluation contract and result manifest for one independent reconciliation; external create-only output",
+  "checked": "pool and stock membership, sector rank/cutoff, five target weights, unknown-return scenarios, monthly/annual/period/worst-month/P-down summaries, paired differences, quote drawdown, financial-momentum Spearman, method return correlations, overlap and replacement, six/12-month shared circular 10000-draw intervals with 95/97.5% and global index digest",
+  "not_claimed": "announcement change count and reason_counts; human maintenance, execution costs, actual account wealth, old nine-group volatility/liquidity-conditioned competitor",
+  "hygiene_check": "three pre-existing worktree-level violations: .git, COORDINATION.md, docs/coordination; no change by this task",
+  "dependency": "Python standard library only; random.Random MT19937 required to reproduce frozen shared indices",
+  "interpretation_limits": [
+    "marked quote drawdown is not executable account wealth",
+    "low correlation does not establish unique financial information or incremental investable value"
+  ]
+}

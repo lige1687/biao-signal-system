@@ -1,0 +1,104 @@
+{
+  "schema": "source-coverage-validation-receipt/1",
+  "run_id": "source-coverage-02b-validation",
+  "status": "attempts_pending",
+  "execution": {
+    "command": "PYTHONPATH=src python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/summarize_financial_source_coverage.py --panel-contract docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-panel-02-contract.json --out /Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-coverage-02b-validation",
+    "pid": 44884,
+    "terminal_session_id": 98096,
+    "exit_code": 0,
+    "elapsed_seconds_approx": 1.2,
+    "network_used": false,
+    "market_outcomes_read": false,
+    "effect_run": false
+  },
+  "hashes": {
+    "panel_contract": "39f2c77da1eebac8e507b517b8048b676a6714be6803f4af47c2c5d35c6f7730",
+    "validator": "5a02fd2ce99ea14fceabc8d54fa6b3054c3c1f579914c748e7e098c01c2e0849",
+    "preeffect_review": "2cdb98ea8f41d121175f7155188f9ea9397254646096c59f5635aa17f229a03d",
+    "prior_failed_validation_receipt": "ea3aaf2ae7b51e8c12870731ec424a232103ced9772663381e8fce5bc9647a6a",
+    "source_coverage_output": "5ec600a514456cb70fb55cad331fa387992c4752927845346b2dfa8cb7eb572a",
+    "panel_manifest": "32ec7f85d95b284cd8c7faab3a97992104198332f1717142f1762f0080db9c5a"
+  },
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-coverage-02b-validation",
+  "output_files": [
+    "source-coverage.json"
+  ],
+  "shape": {
+    "codes": 600,
+    "months": 132,
+    "stock_months": 79200
+  },
+  "source_code_state_counts": {
+    "annual:complete": 246,
+    "annual:missing": 354,
+    "both_complete": 246,
+    "code:complete": 232,
+    "code:incomplete": 10,
+    "code:pending": 354,
+    "code:running": 4,
+    "correction:complete": 242,
+    "correction:complete_empty": 4,
+    "correction:missing": 354,
+    "either_incomplete": 354
+  },
+  "attempt_state": {
+    "terminal": false,
+    "terminal_code_statuses": [
+      "complete",
+      "incomplete"
+    ],
+    "pending_or_running_or_missing_codes": 358
+  },
+  "source_completeness": {
+    "all_codes_fully_complete": false,
+    "both_catalog_complete_count": 246
+  },
+  "review_comparison": {
+    "actual": {
+      "common_monthly_N": {
+        "min": 62,
+        "median": 97.0,
+        "max": 132
+      },
+      "common_tiny_hold_all_mass_median": 0.5791933103787505
+    },
+    "expected": {
+      "common_monthly_N": {
+        "min": 62,
+        "median": 97,
+        "max": 132
+      },
+      "common_tiny_hold_all_mass_median": 0.5791933103787505
+    },
+    "actual_exit_attrition": {
+      "known_outDate_by_2025_12_31": {
+        "common_stock_months": 222,
+        "catalog_covered_base_stock_months": 877
+      },
+      "no_known_outDate_by_2025_12_31": {
+        "common_stock_months": 12589,
+        "catalog_covered_base_stock_months": 27976
+      }
+    },
+    "expected_exit_attrition": {
+      "known_outDate_by_2025_12_31": {
+        "common_stock_months": 222,
+        "catalog_covered_base_stock_months": 877
+      },
+      "no_known_outDate_by_2025_12_31": {
+        "common_stock_months": 12589,
+        "catalog_covered_base_stock_months": 27976
+      }
+    },
+    "checks": {
+      "common_N_matches_review": true,
+      "tiny_median_matches_review": true,
+      "exit_attrition_matches_review": true,
+      "market_outcomes_read_false": true,
+      "effect_run_false": true,
+      "attempts_pending_true": true
+    }
+  },
+  "scope_note": "Source-only calculation on the already reviewed partial panel. Values match the frozen Astra pre-effect review. 358 codes remain pending/running; this validation does not establish final 600-code source coverage and does not calculate market effects."
+}

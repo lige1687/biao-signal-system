@@ -1,0 +1,57 @@
+{
+  "schema": "source-coverage-validation-receipt/1",
+  "run_id": "source-coverage-02-validation",
+  "status": "failed_before_output",
+  "execution": {
+    "command": "PYTHONPATH=src python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/summarize_financial_source_coverage.py --panel-contract docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-panel-02-contract.json --out /Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-coverage-02-validation",
+    "pid": 44284,
+    "terminal_session_id": 94226,
+    "exit_code": 1,
+    "elapsed_seconds_approx": 3,
+    "network_used": false,
+    "market_outcomes_read": false,
+    "effect_run": false
+  },
+  "hashes": {
+    "panel_contract": "39f2c77da1eebac8e507b517b8048b676a6714be6803f4af47c2c5d35c6f7730",
+    "validator": "4da8470a891019d705c2016664e423a0d75aa1d32a6d629937c9285591445ecc",
+    "preeffect_review": "2cdb98ea8f41d121175f7155188f9ea9397254646096c59f5635aa17f229a03d"
+  },
+  "intended_output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-coverage-02-validation",
+  "output_created": false,
+  "failure": {
+    "exception": "ValueError: recovery flag recharacterized",
+    "location": "summarize_financial_source_coverage.py:96",
+    "raised_from": "summarize_financial_source_coverage.py:190",
+    "condition": "Validator requires any measurement_recovered_with_unreviewed_prior_notice flag to have field status qualified. The saved audit contains such flags on status=unknown rows; 110113 flag occurrences had status=unknown, notice_review_status=unreviewed, financial_authenticity_certified=false.",
+    "representative_key": {
+      "month": "2015-03",
+      "code": "sz.002593",
+      "field": "gp"
+    },
+    "data_modified": false,
+    "retry_or_code_edit": false
+  },
+  "review_comparison": {
+    "reference": "preeffect-source-adequacy-review.json",
+    "expected_common_monthly_N": {
+      "min": 62,
+      "median": 97,
+      "max": 132
+    },
+    "expected_common_tiny_hold_all_mass_median": 0.5791933103787505,
+    "expected_exit_metadata_attrition": {
+      "known_outDate_by_2025_12_31": {
+        "common_stock_months": 222,
+        "catalog_covered_base_stock_months": 877
+      },
+      "no_known_outDate_by_2025_12_31": {
+        "common_stock_months": 12589,
+        "catalog_covered_base_stock_months": 27976
+      }
+    },
+    "actual_values": "not emitted; validator raised before summary output",
+    "comparison_status": "not_computed_due_to_failure"
+  },
+  "scope_note": "Independent source-only arithmetic/schema validation of already reviewed source-panel-02. No market outcome data read and no effects calculated."
+}

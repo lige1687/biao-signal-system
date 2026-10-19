@@ -294,7 +294,7 @@ def rebuild_catalogs(progress, operations, responses, acquirer, plan):
             cat['reason'] = None if cat['status'].startswith('complete') else 'unread_pages_after_bounded_wave'
 
 
-def merge_progress(context, plan_result, responses, journal_binding):
+def merge_progress(context, plan_result, responses, journal_binding, *, controller_stopped):
     progress = copy.deepcopy(context['progress'])
     operations = plan_result['operations']
     rebuild_catalogs(progress, operations, responses, context['acquirer'], context['plan'])
@@ -326,7 +326,9 @@ def merge_progress(context, plan_result, responses, journal_binding):
     counts = dict(context['counts'])
     _, _, stage_counts, _, _ = journal_starts([journal_binding])
     progress['operations'] = {key: counts[key] + stage_counts[key] for key in counts}
-    progress['global_stop'] = any(not x.get('successful') for x in responses.values())
+    progress['global_stop'] = bool(controller_stopped)
+    progress['global_stop_scope'] = 'current_bounded_stage; prior stops retained in journals and manifests'
+    progress['stage_had_unsuccessful_operations'] = any(not x.get('successful') for x in responses.values())
     progress['updated_utc'] = datetime.now(timezone.utc).isoformat()
     return progress
 
@@ -399,7 +401,8 @@ def execute_locked(contract_path, contract, snapshot, plan_binding, proposal, ta
                 responses[task['op_id']] = {'event': 'worker_error', 'error': f'{type(exc).__name__}:{exc}',
                                            'successful': False}
     new_journal = {'path': str(out / 'journal.jsonl'), 'sha256': sha(out / 'journal.jsonl')}
-    merged = merge_progress(context, proposal, responses, new_journal)
+    merged = merge_progress(context, proposal, responses, new_journal,
+                            controller_stopped=controller.stop.is_set())
     merged['completion_lineage'] = {'origin_manifest_sha256': snapshot['inputs']['origin_manifest']['sha256'],
         'journal_sha256s': [x['sha256'] for x in snapshot['journals']] + [new_journal['sha256']],
         'prior_progress_sha256': snapshot['inputs']['progress']['sha256'],
