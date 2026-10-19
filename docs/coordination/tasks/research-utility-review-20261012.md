@@ -1,12 +1,14 @@
 # 四经典复现阶段交付，原始输入仍受阻 2026-10-20T00:18:17.554479+08:00
 
-- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status blocked；scope_released true。checked_coordination_sha=0a5e89ee66c499e7efa42f8ac5e502eafc0824aa；checked_at=2026-10-20T00:18:17.554479+08:00；交付fetch无新增owner，已读COORDINATION/self/system/personal最新月反转诊断/new-lowfreq/dispatch，无冲突。仅原文/公开结果阶段完成，四原逐股研究均未完成。
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status blocked；scope_released true。checked_coordination_sha=a93f461f1719b50dd4e3eb5c33c55d4337976a95；checked_at=2026-10-20T00:18:17.554479+08:00；交付push遇并行远端更新后已读personal最新00:17诊断及其独立树归置窄修复；与本题无新冲突，已合并远端保留双方记录；COORDINATION/self/system/new-lowfreq/dispatch保持。仅原文/公开结果阶段完成，四原逐股研究均未完成。
 - 报告docs/experiments/classic-four-factor-replication-2026-10-19.md，SHA1e9f3e03fd7daaf71d56a8cacc7e4c91b58b60147708789224ce0eb298c05f0d；raw合同/来源/方法澄清/核算代码/失败/独核/交付记录齐。主树codex/factor-unit-research-20260915基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，新增成果本地未提交未推，协调SHA不代表正文移交。
 - 原始股票市场实验0；公开三序列核心1次0.2854秒，平均月强弱组差0.991860%、0.473030%、0.950315%，不同期/定义不能选优。残差缺1930前5月不补零；盈利公开列对应Foster1984，未冒充CJL1996。两Sol分别查重与实现，Astra high只读核方法；21人工检查和root68独核通过，最大差3.55e-15。公开代码与CSV生成链未核全，不能用正数宣称原复现/本地有效。
 - 已更正盈利统计SUE不必依赖历史分析师预期；残差原算法差异限定为解释待核，High52脚本未拆股调整不等于上游未调整。冻结方法/合同保持，以controller-method-review和报告补充澄清。来源24次含失败，旧预算保持，本地适配不重跑。
 - 系统API全文与报告相同，Agent SHA verified、未截断；浏览器5表读回。仅本registry键/INDEX行；9保护文件和697旧条目不变，归置/diff通过；目标note171→172，原in_progress及旧history保持。外盘主结果约9.96MB、失败OCR残留117.29MB在独立250MiB预检路由保留；本raw约164KB，未清理/动库。
 - 失败保留：扫描无文本/OCR超时、委派绝对路径格式拒绝后相对路径通过、协调NameError未写及非快进推送后核远端恢复、独核首次错误无缺月假设修正；末次functions语法错误在shell运行前失败后修正。原资料与核心结果不改。当前子代理结束、无后台计算/自动通知。
 - 实际阻塞：尚无合格且有使用权限的原范围美国逐股及退出者/公司行动原件、公告季度EPS历史版本。作者开放组合与代码已取回仍不能重建这些输入；未购买或越权获取。恢复先读state及已保存原件，资料资格齐备后逐股计算；补公开FF单表也不能补股票缺口。停止不是因负结果或自设时间，不以本阶段交付假称四因子完成。
+
+- 最后读远端时间=2026-10-20T00:18:52.301550+08:00；新增个股adjustflag问题归原诊断owner，本题公开聚合输入不受该本地单股文件影响，不据此接管旧实验。
 
 ---
 
