@@ -1,3 +1,11 @@
+# 本负责人定义登记勘误及扩样来源资格 2026-10-19T15:07:11.860610+08:00
+
+- 原task active；checked_coordination_sha=f04f560b49f21f107f18d2e46aae08b19194a9d8；checked_at=2026-10-19T15:07:11.860610+08:00；已读self/personal14:33/system12:10/中控（远端无新owner变化）；root唯一写docs/research/definitions.v1.json中本负责人5错误卡元数据及新增小时1.2卡/来源，M/R精确字段同步。先前177张扫描发现全量strictload失败，不绕开校验器；原公式/阈值/依赖/用途/效果状态不变，旧表全快照+SHA及逐字段勘误留新raw。三个0.1草稿transforms与exists字词、底部退出policy类型、小时1.1来源ID仅格式修复；Astra独立确认同ID元数据勘误可行，旧冻结绑定不回填。
+- 8ETF新增14报价+4split源取得未算效果；原4缺因子ETF返回adjustflag3而非所请求1，不能以raw比值1补合格。新Sina明确split状态与三份官方拆分公告交核，仅现金累计0且f1的供应商拆分价格代理，独立1.2来源版本、旧卡不偷换。股票固定历史60含6退出者，最多180新源请求已开始且无替换，另6股及旧510500结果只复用。
+- 仍不改桌面原策略/生产UI服务/账户/其他owner。源额度由用户此次扩大授权显式新增，旧请求累计不清零；核心未开始，原市场秒数仍继承。
+
+---
+
 # 用户纠正后的全面覆盖与定义主动审查 2026-10-19T14:55:56.870133+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=89eb6fa1fc0df37d0af6637df3e74a64ec5dc9be；checked_at=2026-10-19T14:55:56.870133+08:00；已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新14:33/system最新12:10/research-dispatch-controller。无共享写冲突，不接管盈利/动量选择及系统UI/API。
