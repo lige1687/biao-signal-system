@@ -1,3 +1,13 @@
+# 十年资料资格、历史已见审计与时间分段接续 2026-10-19T16:16:35.028690+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=13ae6e6ce6b013b51ec49fb8da0f4dc3333a783c；checked_at=2026-10-19T16:16:35.028690+08:00；已读COORDINATION/self/personal最新16:11/system12:10/中控。原本系统chat转交人类继续与专业方法落地要求；不新派用户chat，不回发，不接管独立财务候选或UI。
+- 本次先完成可执行的既有原件覆盖与时间边界核查：原8ETF和固定60股，按产品/年/频率统计原件、资格、连续窗口与旧事件；查已有替代来源是否覆盖固定后期冲突，审已用于开发/看效果的日期，明确能否冻结十年开发/验证/最终日期与跨界20/30日结果隔离。不重跑旧信号/收益，不扩封存参数。
+- 继承已知市场2898.484713/3600秒；来源旧Bao182/182、ETF18/18和旧方法6/6已用完，本轮不重置/新增联网行情。先只读已有原件/缓存和必要资格计算；如确缺外部新源，写准确缺口和恢复所需小范围来源预算，不伪称已找到。容量16:15核外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9、available；内盘12.51GB、外盘505.17GB。新大派生仍走output_storage，预计小汇总本机<2MB，不覆盖原件。
+- 唯一写范围：docs/experiments/long-history-time-validation-2026-10-19.md及同raw小合同/可复用资格脚本/结果；必要新src/lei_signal/research/history_coverage_audit.py与tests/unit/test_history_coverage_audit.py（仅若现有功能不足，不改旧runner）；既有two-version及candidate current_review仅挂本次准确恢复入口；自己的registry键/INDEX行/progress/goal-note。共享规范/原表/旧冻结/生产/UI只读。root整合；已有Sol代理先只读数据定位与时间审查，准确产物写权另指派，避免碰同文件。
+- 验收：原件hash与年度分母、缺失/不合格分列、指数/ETF不混、旧日期已见留痕、跨边界及不同标的同日分段真实检查；科学要求逐项绑定现有实现/人工/未知；原版缺目标不伪造完整效果，所有实际运行/预算记录，系统读回。完成前先核必要独立工作，不以再写计划替代。
+
+---
+
 # 扩样后的方向复审与接续纠正已交付 2026-10-19T16:08:58.162661+08:00
 
 - task-id research-utility-review-20261012；status completed仅本次有界方法审查；scope_released true；完整原版/兼容效果及长历史仍未完成。checked_coordination_sha=9d93fa1dc4c1d6a21b8b23a5bffb98b6579e30d0；checked_at=2026-10-19T16:08:58.162661+08:00；已读COORDINATION/self/personal最新16:01/system12:10/中控，另一owner独立财务机制范围不重叠，不接管或改共享规范。
