@@ -1,3 +1,16 @@
+# FIP本地适配与毛利复用验收交付 2026-10-20T00:58:27.923185+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed（仅本轮有界适配与复用）；scope_released true。checked_coordination_sha=ea8207fb5c7ae39d3f86414f779f8197b4beddf8；checked_at=2026-10-20T00:58:27.923185+08:00；已读COORDINATION/self/system最新00:57/personal最新00:43/new-lowfreq/dispatch。系统owner两图唯一接入已验收；不接管其组件及个人财务修复，不与他人路径冲突。
+- 报告docs/experiments/fip-clock-profitability-2026-10-20.md SHA04b8859dfb0b6940589fdb3f369f0d8aceb711954168798f2a06ced4d3670bf5。600历史队列598只有合格观察/127月，59742合格股票月、1994未来未知；赢家连续组相对全部六个月已知贡献−0.044pp、时钟代理内−0.143pp，两项范围跨零，未支持当前排序/过滤采用。原US逐股完整复现、ETF、净账户均未完成，不能外推。
+- 原公式/兼容时钟用途按冻结合同一次核心完成，0跟进/调参；3次source-only保留失败和修正，v2/v3特征字节同，v1仅reason差异。毛利复用旧P2未重跑，sz.001914实际进入旧权重11月33行，新证据raw/gp-existing-source-exposure.json，旧数值待原owner纠错。
+- 11边界测试、17048独立保存算术核对/正常方程回归/12端点复查通过；旧178定义/163来源/698报告项、原策略/规则/时钟源码不变。报告库全文与原稿同、Agent当前SHA verified/不截断；raw技术附件用本地路径显示不造Web无效链接。归置及相关diff通过。
+- Web两图实际浏览器加载并窄窗核单位完整：groups 4b47b61b…/27478B，increment 2ab404fc…/5417B；5188返回SVG与raw同，运行树由系统owner复制，PID未重启。其回执f240c1fd…已读；自己的web-assets-readback/agent-report-readback/delivery-validation/attempt保存。用户阅读效果仍待认可，研究有效性未因显示通过升级。
+- 失败留痕：来源路由键错误未启动、定义source形状冻结前修正、SVG重复viewBox与单位裁切修正、主/服务树不同导致HTML回落、保护检查错误JSON解析YAML、短Agent索引名拒绝、report哈希键修正后读回。未删除原材料、未用新参数追正值。
+- 目标okr-ff1e0a86fbac仅note172→173，in_progress及原字段保留。FIP3/6和GP3/6来源请求；核心1/1、跟进0/3，原四经典预算不重置。外盘约67.1MB、本raw约140KB在128MiB/500KiB预估内；模型实际费未知。Sol medium执行/复用、Astra high方法审核及root独核均结束，无后台研究或主动通知。
+- 主成果codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9本地未提交未推；本协调仅元数据，不代表源码和报告远端可复现；阶段证据在原work-progress。当前用途问题已回答，负向保留；剩余明确输入缺口与跨owner任务在报告列明，非整体完成。
+
+---
+
 # FIP 结果验收及图像附件发布 2026-10-20T00:48:13.844666+08:00
 
 - task-id research-utility-review-20261012；active；scope_released false；checked_coordination_sha=f95c098b6e7a8580ee4166b075683e63f962db5c；checked_at=2026-10-20T00:48:13.844666+08:00；已读COORDINATION/self/personal最新数据防护00:43及动量体检00:39/new-lowfreq/system/dispatch。其他owner新guard与本FIP无路径冲突，不接管旧财务修复。
