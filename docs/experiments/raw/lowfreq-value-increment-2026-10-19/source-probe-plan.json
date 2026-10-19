@@ -1,0 +1,59 @@
+{
+  "schema": "value-source-probe/1",
+  "research_id": "lowfreq-value-increment-2026-10-19",
+  "purpose": "source timing and corporate action qualification, no effect computation",
+  "max_data_operations": 4,
+  "retries": 0,
+  "timeout_seconds": 45,
+  "delay_seconds": 1,
+  "stop_on": "429 or two consecutive external failures",
+  "requests": [
+    {
+      "method": "query_history_k_data_plus",
+      "kwargs": {
+        "code": "sz.300048",
+        "fields": "date,code,close,pbMRQ,adjustflag,tradestatus",
+        "start_date": "2024-01-01",
+        "end_date": "2025-04-30",
+        "frequency": "d",
+        "adjustflag": "3"
+      }
+    },
+    {
+      "method": "query_history_k_data_plus",
+      "kwargs": {
+        "code": "sh.600518",
+        "fields": "date,code,close,pbMRQ,adjustflag,tradestatus",
+        "start_date": "2017-01-01",
+        "end_date": "2019-06-30",
+        "frequency": "d",
+        "adjustflag": "3"
+      }
+    },
+    {
+      "method": "query_history_k_data_plus",
+      "kwargs": {
+        "code": "sh.600519",
+        "fields": "date,code,close,pbMRQ,adjustflag,tradestatus",
+        "start_date": "2015-01-01",
+        "end_date": "2015-08-31",
+        "frequency": "d",
+        "adjustflag": "3"
+      }
+    },
+    {
+      "method": "query_dividend_data",
+      "kwargs": {
+        "code": "sh.600519",
+        "year": "2014",
+        "yearType": "report"
+      }
+    }
+  ],
+  "storage_plan": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/storage-plan.json",
+    "sha256": "5403779fad6757080a5fdb816b8cf9a89ab89773e392d987a827667597233e80"
+  },
+  "market_effects_allowed": false,
+  "anchor_reason": "original/corrected annual values and known capital actions from existing source probes; not selected by returns"
+}

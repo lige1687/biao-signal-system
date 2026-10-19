@@ -1,0 +1,38 @@
+{
+  "task_scope": [
+    "read only fixed cohort source schemas and prior contracts",
+    "do not inspect or rerun future price effects",
+    "preserve all original files"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-profitability-increment-2026-10-19.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "source identity mismatch",
+    "need network/new source or unlisted writes",
+    "missing core semantics"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "mission": "Inventory exact saved valuation fields, raw vs adjusted prices, annual equity/profit/share data and source evidence; no financial effect.",
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-reuse-inventory.json"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "expected_outputs": [
+    "source-reuse-inventory.json",
+    "precise source paths/field identities and missing prerequisites",
+    "bounded conclusion without inventing availability"
+  ]
+}

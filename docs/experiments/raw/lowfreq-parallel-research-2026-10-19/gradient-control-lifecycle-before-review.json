@@ -1,0 +1,40 @@
+{
+  "old_frozen_contract": {
+    "status": "eligible_for_separate_execution",
+    "stage": "diagnostic",
+    "identity_sha256": "046b2d171cda91a29d741c91990050dec24ca2a34c1c1fe6f3b5ebf203e1aa91",
+    "source_counts": {
+      "qualified": 93376,
+      "unknown": 0
+    },
+    "limit": "read-only; no atomic budget reservation; history completeness is controller-declared"
+  },
+  "updated_resume": {
+    "status": "reuse",
+    "identity_sha256": "046b2d171cda91a29d741c91990050dec24ca2a34c1c1fe6f3b5ebf203e1aa91",
+    "source_counts": {
+      "qualified": 93376,
+      "unknown": 0
+    },
+    "limit": "enumerated history only; this guard does not schedule or prevent bypass"
+  },
+  "without_scientific_result_approval": {
+    "status": "pending_review",
+    "stage": "diagnostic",
+    "evidence_status": "inconclusive",
+    "identity_sha256": "046b2d171cda91a29d741c91990050dec24ca2a34c1c1fe6f3b5ebf203e1aa91",
+    "source_counts": {
+      "qualified": 93376,
+      "unknown": 0
+    },
+    "limit": "receipt integrity and declared acceptance only, not scientific truth"
+  },
+  "rerun_executed": false,
+  "budget": {
+    "core_max": 1,
+    "core_used": 1,
+    "followup_max": 3,
+    "followup_used": 2
+  },
+  "limit": "Resuming must use this new bound history. Old frozen contracts do not auto-discover later attempts; no global atomic lock."
+}

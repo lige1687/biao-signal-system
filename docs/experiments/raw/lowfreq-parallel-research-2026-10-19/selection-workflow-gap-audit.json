@@ -1,0 +1,121 @@
+{
+  "schema": "lowfreq-selection-workflow-gap-audit/1",
+  "created_at": "2026-10-19T15:08:21.510239+08:00",
+  "mode": "report_only; source-code and saved-artifact review; no new data, network, or market effect run",
+  "coordination_sha": "f04f560b49f21f107f18d2e46aae08b19194a9d8",
+  "scope": "P1 fixed-600 momentum selection, P2 independent profitability, and the P3 parallel selection/value lane; main repository native workflow read only",
+  "plain_answer": "已有股票研究确实逐股排序并保存逐股结果，不能说只看平均曲线。原生六阶段入口对其受支持的特征有硬性预算和重复运行检查，但尚不能执行这两个股票月度选择算法；本轮靠各自冻结脚本和主控回执维持边界。下一条价值研究需要一个很小的专用运行前后核验层，而非新研究平台。",
+  "sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/current-standards.json",
+      "sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/research-workflow-usage.md",
+      "sha256": "75d3b6ff20df108f8f87d0c720af52748d6bfd6271236b05109aff0dce1ca8bf"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/factor-discovery-playbook.md",
+      "sha256": "aa29ad35b346725984db81c83f1b2176f168564a134018a6255edc449ee65925"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/workflow.py",
+      "sha256": "714cc6bd14507068c76e56c4f9cf38beb6f6d262611724178584c704cc499101"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/question_contract.py",
+      "sha256": "ed4a44fbb3fbf6c7b986bd2fb9261f98f15cf33b604f04b84e7ceb4e2fffcb97"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+      "sha256": "dda4de0acd7335e73a481a66913f47359e974de25a0f220f545c31592fcad0df"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/evaluate_profitability.py",
+      "sha256": "ff5e895222ce9726f79e9dc67d3637a99752e3cf2fa66181ab36ad86c7223db4"
+    }
+  ],
+  "native_workflow": {
+    "hard_checks_for_supported_adapters": [
+      {
+        "control": "finite implemented feature menu; current data feature bar frequency daily quoted",
+        "location": "question_contract.py:295-310"
+      },
+      {
+        "control": "path/content SHA, input/preflight qualification and frozen observation digest before callback",
+        "location": "workflow.py:179-356,1664-1702"
+      },
+      {
+        "control": "family lock, journaled attempts and cumulative scientific variant/time budget; unresolved start blocks retry; cross-family seen result check for controlled runs",
+        "location": "workflow.py:122-153,1207-1268"
+      },
+      {
+        "control": "create-only output, calculated result receipt, separate publication acceptance and failure state",
+        "location": "workflow.py:1284-1402,1664-1814"
+      }
+    ],
+    "limits_not_to_overclaim": [
+      "Finite feature menu excludes financial ratios and this stock-month selection method; native workflow cannot run arbitrary raw scripts (question_contract.py:295-310; workflow.py:1680-1683).",
+      "The journal scans only controlled workflow journals; legacy raw scripts and independently executed P1/P2 do not enter it (workflow.py:1243-1259; research-workflow-usage.md:153-167).",
+      "The native contract checks four distinct controller reasons as wording, not true mechanism, source completeness, or sample adequacy (question_contract.py:888-908; research-workflow-usage.md:174)."
+    ]
+  },
+  "independent_P1_P2_controls": {
+    "hard": [
+      "P1 binds frozen design and exact 600-source cohort, validates each source hash/status, fixed 132 months and 600x132 stock rows, writes create-only external child and manifest; lowfreq_discovery.py:678-745.",
+      "P2 binds all listed design/cohort/price/panel/parser/runner SHA values and accepted source lineage, fixed units, source/pool rules in panel, create-only external output and manifest; evaluate_profitability.py:553-630; build_financial_panel.py:105-181,310-375,516-585.",
+      "P1 result has independent saved arithmetic and P2 core independent receipt; these are post-run checks on saved results, not native family-journal entries."
+    ],
+    "manual_or_documented": [
+      "P1 and P2 attempt ceilings and cumulative follow-ups live in their brief/receipts and controller review; neither P1 nor P2 evaluator reserves in native family ledger (P1 brief.json budget; P2 brief.json budgets; lowfreq_discovery.py:678-745; evaluate_profitability.py:553-630).",
+      "Financial mechanism, valuation overlap, stopping on the known evidence and untested sample generalization require controller judgment (factor-discovery-playbook.md:7-28,71-73,111-113).",
+      "A source panel can represent unknown coverage rather than inventing values; its manifest has lineage, not a general scientific final-acceptance flag (build_financial_panel.py:310-313,575-585; evaluate_profitability.py:574-589)."
+    ]
+  },
+  "concrete_misrun_examples_not_claimed_to_have_occurred": [
+    {
+      "case": "New P3 value script takes today’s P/B or an unreviewed newer annual filing as if it were known at a 2015 decision date.",
+      "why_current_guard_misses": "Native feature menu rejects this new ratio; P2 as-of panel rules bind GP/CFO specifically, and a new value script has no automatic reuse of that eligibility logic.",
+      "evidence": "question_contract.py:295-310; P2 financial-design.v1.json record_qualification; build_financial_panel.py:311-375",
+      "minimal_gate": "For every code/month, require a source status with source document ID, public date strictly before decision, version and expiry/unknown reason before any effect row."
+    },
+    {
+      "case": "P3 code uses the saved per_stock_month.csv outcome column while choosing a valuation cutoff, then records it as a pre-result hypothesis.",
+      "why_current_guard_misses": "P1/P2 saved stock rows deliberately contain future_return for evaluation; a new raw script is outside native pre-callback separation and cross-family seen-evidence journal.",
+      "evidence": "lowfreq_discovery.py:436-529,678-745; evaluate_profitability.py:480-531; workflow.py:1243-1259",
+      "minimal_gate": "Freeze a source-only proposal with code hash/fields/threshold/uses and a selector input projection that rejects outcome columns; mark later changes exploratory."
+    },
+    {
+      "case": "An agent starts a second P1/P2-style effect run in another new output directory after a partial first attempt or without counting it against cumulative follow-up budget.",
+      "why_current_guard_misses": "Both independent evaluators protect one output path but do not consult native family starts/finishes; P1 explicitly accepts any new child of bound output parent and P2 accepts any new bound create-only path. Manual brief/receipt accounting was used this round.",
+      "evidence": "lowfreq_discovery.py:668-745; evaluate_profitability.py:553-630; P1/P2 brief.json budgets; workflow.py:1225-1240",
+      "minimal_gate": "Before launch, compare exact question/family/design/input digest with existing P1/P2 manifests and receipts; if prior start lacks terminal receipt, stop for reconciliation; consume existing brief budget rather than resetting a new one."
+    }
+  ],
+  "selection_vs_average_curve": {
+    "P1": "Sufficient to show the direct momentum ranking is not merely a whole-pool average curve: 600x132 preserved stock rows, monthly chosen lists and equal-pool comparison; five same-date momentum rank groups were reported (0.9734%,1.1191%,1.2149%,1.1933%,0.9736% monthly from strongest to weakest), without monotone selection signal. The nine-cell conditioned result is a separate question, not a positive proof for direct momentum. Evidence: lowfreq-expanded-discovery-2026-10-19.md:7-30,48-64,129-133; lowfreq_discovery.py:219-267,619-640.",
+    "P2": "Sufficient to show an actual stock-selection comparison, not just a mean financial curve: same month/industry/pool, saved financial and momentum percentiles and per-stock P/M/F/B/D target weights, plus 132-month and era/annual paired outcomes. It does not yet display the full within-date financial-score rank gradient; GP/common monthly qualified pools shrink to 142-329 and tiny sectors all-hold. Evidence: lowfreq-profitability-increment-2026-10-19.md:15-16,33-59,116-140; evaluate_profitability.py:206-238,480-531.",
+    "single_necessary_diagnostic_if_selection_gradient_is_the_decision": "Use the already saved P2 stock_weights.csv with its manifest hash. First derive bands from a projection containing only month/code/industry/financial_percentile and source eligibility: within each industry with at least five qualified stocks, split the frozen score order into five stable (score,code) bands with remainder-first sizes, recording tied-score and tiny-sector/constant-score mass. Only after the band assignment is frozen, join the saved future_return/either_halt columns. Preserve original industry n/N mass; report each band’s outcome and top-minus-bottom monthly paired difference under both existing unknown-result scenarios, 2015-2019 versus 2020-2025 and yearly support. Reconcile rows/weights to the saved P/M/F/B/D outputs; no new source fetch, parameter choice, rerun of old momentum/core or claim of independent confirmation. If tiny/constant bands dominate, mark gradient not evaluable rather than change band count."
+  },
+  "minimum_tool_patch": {
+    "judgment": "A task-local lowfreq_research_control.py is justified for the next P3 contract because native workflow has no adapter for source-timed stock valuation/selection and three operational checks remain manual. It should be a guard around existing contracts and manifests, not a new experiment engine, ledger, or shared-workflow modification.",
+    "scope": [
+      "read-only preflight: exact design/runner/source/price/cohort hash lineage and at-decision qualification matrix; distinguish terminal source gaps from an acquisition/preparation attempt still pending; reject outcome columns in selector/proposal phase",
+      "read-only attempt check: compare existing P1/P2/P3 briefs, contracts, manifests and receipts for identical source/question/run identity, cumulative budget and any unsettled attempt; no inferred fresh budget on filename change",
+      "post-run acceptance: output create-only external identity plus expected files/hash, 600x132 preservation or explicit P3 defined support, all pending/failed states retained, conclusion status never inferred from process exit"
+    ],
+    "acceptance": [
+      "A current value quote with publication after decision is rejected while an explicitly unknown source stays unknown.",
+      "A selector projection containing future_return is rejected before selecting any cutoff; evaluation phase may read it only under the frozen selector contract.",
+      "An existing start without terminal receipt blocks a second effect run, and a completed identical run reports reuse rather than recomputation.",
+      "Changing output name, agent, or factor label leaves cumulative recorded core/follow-up counts unchanged.",
+      "The guard accepts the already sealed P1/P2 manifests as historical references without altering them and reports the native workflow as not applicable for these adapters."
+    ],
+    "non_goals": [
+      "No edits to question_contract.py, workflow.py, native ledger or another owner’s scripts in this audit.",
+      "No new data collection, return calculation, parameter grid, production decision or claim that program checks can establish financial mechanism truth."
+    ]
+  },
+  "completion": "audit_complete_only; proposed patch and diagnostic not implemented or run",
+  "scope_boundary": "P3 currently has only scope-receipt.json (three parallel lanes and authorization); no frozen P3 value definition, source contract, evaluator or result is claimed in this audit."
+}

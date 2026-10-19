@@ -1,0 +1,145 @@
+{
+  "schema": "source-probe-execution-receipt/1",
+  "status": "complete",
+  "command": "python3 -B docs/experiments/raw/lowfreq-value-increment-2026-10-19/probe_valuation_sources.py --contract docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-probe-execution-contract.json",
+  "worktree": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "process": {
+    "session_id": 98758,
+    "pid": 82056,
+    "started_local": "2026-10-19T15:08:17+08:00",
+    "ended_local": "2026-10-19T15:08:24+08:00",
+    "elapsed_seconds": 7,
+    "exit_code": 0,
+    "retries": 0
+  },
+  "bindings": {
+    "contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-probe-execution-contract.json",
+      "sha256": "802ccf21b656c972afb24454822599ae87c679a5a766e11e86b65b6821410d20"
+    },
+    "runner": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/probe_valuation_sources.py",
+      "sha256": "b8eb2b6301bd2bb8caf9eb187e268dfb6d89b509019a6d67cf159dbf742b4a7b"
+    },
+    "plan": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-probe-plan.json",
+      "sha256": "2b788b4205f467f34cbed3f0ac0ee3ac18b10327e88ba052c3c915295d082dc7"
+    },
+    "storage_plan": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/storage-plan.json",
+      "sha256": "5403779fad6757080a5fdb816b8cf9a89ab89773e392d987a827667597233e80"
+    },
+    "output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result",
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "external_device": 16777238
+  },
+  "operations": {
+    "planned": 4,
+    "used": 4,
+    "successful": 4,
+    "failed": 0,
+    "rows_by_operation": [
+      320,
+      605,
+      163,
+      1
+    ],
+    "total_rows": 1089,
+    "login_success": true,
+    "logout_success": true,
+    "market_effects_run": false,
+    "qualification": "source timing remains pending independent original-document comparison"
+  },
+  "manifest": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/manifest.json",
+    "sha256": "9df93a701c0a0b48a5919155be61c649d6cbaaf3bef4223a2a647618f3164b6e",
+    "status": "complete",
+    "stop_reason": null
+  },
+  "artifacts": {
+    "01-query_history_k_data_plus-sz.300048.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/01-query_history_k_data_plus-sz.300048.json",
+      "sha256": "d79bdbf814b710bfffd7689700cc0f01b85743a84429765a11058a8e4c6d8a9f",
+      "rows": 320,
+      "fields": [
+        "date",
+        "code",
+        "close",
+        "pbMRQ",
+        "adjustflag",
+        "tradestatus"
+      ],
+      "status": "ok"
+    },
+    "02-query_history_k_data_plus-sh.600518.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/02-query_history_k_data_plus-sh.600518.json",
+      "sha256": "eee8de9ddf646f7416e8a20dbc8729a7ff6733f1a1eb0805d78ac0d4a4e3274c",
+      "rows": 605,
+      "fields": [
+        "date",
+        "code",
+        "close",
+        "pbMRQ",
+        "adjustflag",
+        "tradestatus"
+      ],
+      "status": "ok"
+    },
+    "03-query_history_k_data_plus-sh.600519.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/03-query_history_k_data_plus-sh.600519.json",
+      "sha256": "7b34fb9b2e20bf211afd85ce2be4d820bab070f3ecf8f207523c70d1ae6a5220",
+      "rows": 163,
+      "fields": [
+        "date",
+        "code",
+        "close",
+        "pbMRQ",
+        "adjustflag",
+        "tradestatus"
+      ],
+      "status": "ok"
+    },
+    "04-query_dividend_data-sh.600519.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/04-query_dividend_data-sh.600519.json",
+      "sha256": "c25e938814fa66855cace6c9c0f2fec167602eef37a78bc4fa74d353169f6ecc",
+      "rows": 1,
+      "fields": [
+        "code",
+        "dividPreNoticeDate",
+        "dividAgmPumDate",
+        "dividPlanAnnounceDate",
+        "dividPlanDate",
+        "dividRegistDate",
+        "dividOperateDate",
+        "dividPayDate",
+        "dividStockMarketDate",
+        "dividCashPsBeforeTax",
+        "dividCashPsAfterTax",
+        "dividStocksPs",
+        "dividCashStock",
+        "dividReserveToStockPs"
+      ],
+      "status": "ok"
+    },
+    "storage-plan.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/storage-plan.json",
+      "sha256": "5403779fad6757080a5fdb816b8cf9a89ab89773e392d987a827667597233e80"
+    },
+    "contract.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/contract.json",
+      "sha256": "802ccf21b656c972afb24454822599ae87c679a5a766e11e86b65b6821410d20"
+    },
+    "attempts.jsonl": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/attempts.jsonl",
+      "sha256": "5acb3125b8b801339fa4340d5e4f7bc964551b9fc084fd2c9689e8448813b926",
+      "bytes": 3062
+    }
+  },
+  "inventory_correction": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-reuse-inventory.json",
+    "sha256": "c7a1f5818886c8aadb4a597c2a6c3f0dea53b73cb246beb16a5b92d3fa7f43dd",
+    "previous_sha256": "fee8147e64f23e3bdc877eb2fd49c8d6926d3b69f71f97bb0ac1b0c7e10a694a",
+    "status": "already corrected; verified read-only"
+  },
+  "scope_note": "仅4项资料来源探针，不做估值效果或收益计算；每项原始记录按manifest核哈希和行数；不含._说明文件。"
+}

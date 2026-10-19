@@ -1,0 +1,107 @@
+{
+  "schema": "financial-selection-gradient/1",
+  "research_id": "lowfreq-parallel-research-2026-10-19",
+  "question": "在同一行业同一日期，经营财务得分从低到高是否对应逐股后续结果改善，还是仅最高组/组合平均的局部现象？",
+  "mechanism": "检视财务排序与后续结果的形状，分清广泛梯度、只发生在一端、无清晰关系及随时期变化。无单调收益梯度不直接推翻已有限成立的GP坏月份证据；单调梯度也不证明因果或预测可迁移。",
+  "already_seen_history": true,
+  "status": "method_accepted_by_controller_pending_data_projection_and_execution_binding",
+  "use": "explanatory diagnostic of sealed stock selection; not new confirmation, not actionable portfolio",
+  "why_new": "P2已保存F/top20比较，但没有完整同业五组排序梯度。用户现在明确扩展选股和稳定流程；原核心及风险跟进不重跑。",
+  "family_history": {
+    "family": "lowfreq-profitability-increment-2026-10-19",
+    "prior_core_used": 1,
+    "prior_followups_used": 1,
+    "requested_followup_ordinal": 2,
+    "followups_max": 3,
+    "prior_evidence": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/final-source-controller-acceptance.json",
+      "sha256": "0fb57231b26a4ea9bb850915f5c4fe6ded3ca5cc46562ef4b26940d221a6dae6"
+    },
+    "report": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-profitability-increment-2026-10-19.md",
+      "sha256": "0692bb724ea8413fdb22326ceb557bea239fd5d42b87f0121356f6ba62e9a413"
+    }
+  },
+  "inputs": {
+    "stock_weights": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/core-01/stock_weights.csv",
+      "sha256": "54ef3ba6dd3231957260fa93d2abc625e64723d0b682bf260839fdd93553d5f2"
+    },
+    "manifest": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/core-01/manifest.json",
+      "sha256": "f7d0f3da8160dabdb4489496df36cf6dff2156163c912d745abe8b4e37ef0b5a"
+    }
+  },
+  "scopes": [
+    "gp",
+    "common_gp",
+    "common_cfo"
+  ],
+  "selection": {
+    "source": "financial_score only, no outcomes",
+    "sectors": "sector_n >=5 and at least 2 distinct scores",
+    "partition": {
+      "input": "每scope/月份/行业，严格复用已保存financial_score，不按回报排序，不额外四舍五入分数制造同分；股票代码仅作输出稳定排序。",
+      "eligibility": "行业原n>=5且至少两个不同分数；不再增加最低不同分数数量来追求好看梯度。",
+      "algorithm": "按分数从低到高。每个相同分数块有m只股票，在排序位置连续区间[a,a+m]占m个位置。第j组(j=1..5)区间[(j−1)n/5, j*n/5]。令该块与组区间重合长度为L，则块中每只股票给该组的份额alpha=L/m。每只股票五组alpha加总1，同分股票获得完全相同alpha；每组份额总数n/5。",
+      "weight": "行业原权重n/N保持。每只股票在第j组的权重=(n/N)*alpha/(n/5)。行业分数相同块可能同时参与相邻组，是公平分摊，无需凭代码拆同分。",
+      "raw_contribution": "各组跨支持行业权重和为支持比例S。raw=sum(weight*return)只能称原池中的支持部分贡献，不能称余下现金0收益的实际组合。",
+      "conditional_return": "S>0时组条件回报=raw/S，全部五组用相同S。支持行业间相对权重保持原n/N，不人为每行业等权。",
+      "interpretation": "每组有效人数n/5可非整数，组之间由于相同值存在共同股票份额。五组不是五份独立证据，更不是五套可执行仓位；同分多时曲线平坦可能是度量分辨率低。",
+      "support_reports": [
+        "每月原N、支持N与S；分别给n<5剔除/常数剔除人数和原权重，不能重复加总。",
+        "每行业不同分数个数、跨组同分块原权重、Q1与Q5共同股票份额及实际不同目标权重。",
+        "按年度和scope汇总支持，检查2015–2019与2020–2025的资料范围差异；不要换组数补样本。"
+      ],
+      "deterministic_checks": [
+        "每股票五组alpha之和1；每同分块所有股票alpha完全相同。",
+        "每行业每组alpha之和n/5；每组raw权重和S；条件权重和1。",
+        "五组条件回报简单平均严格等于同支持股票按原池等权的supported_P回报（两未知情景分别检查）。",
+        "行顺序/股票代码重命名不改变分组金融结果；反转分数时Q1与Q5对应反转。",
+        "所有同分/无支持/缺回报/单行业n=5和n=6、边界跨同分、大同分块分别用合成数据检查；不增真实实验。"
+      ]
+    },
+    "sector_mass": "original n/N kept, excluded sectors counted and not redistributed for raw contribution; also show normalized supported conditional results",
+    "quintile_weight": "within each sector each group normalized to that sector original n/N; raw sum equals supported mass, conditional sums1; do not count excluded mass as zero-return actual investment",
+    "no_changed_portfolios": "saved P/M/F/B/D weights checked for each scope/month unit sums, then readonly",
+    "same_support_baseline": "supported_P from exactly supported stocks; quintile mean must equal supported_P, not sealed full P"
+  },
+  "outcomes": {
+    "field": "future_return",
+    "scenarios": [
+      "zero",
+      "loss100"
+    ],
+    "unknown": "same original missing rows zero or -1 without dropping; scenarios not real bounds",
+    "monthly": "raw weighted contribution, supported conditional group returns, top-bottom paired difference percentage points, score rank association optional not included",
+    "summary": "mean each five groups and high-low, positive-month share, annual means, same2015-2019/2020-2025, worst and best month descriptive",
+    "uncertainty": "paired circular month blocks length6 and12, 2000 draws seed20261019; interval 2.5/97.5 percentiles; descriptive already-seen results and multiple scopes, not confirmatory significance; identical circular date block draws across all scopes/scenarios, save draw matrix SHA",
+    "no_support": "retain all132 dates, conditional returns missing not0; each block draw mean supported months only, allmissing draw recorded missing"
+  },
+  "source_limits": "Same P2 qualified financials/version amendment/industry historical proxy, no ETF/trading/cost claims. Tiny and tied supports reported. No optimization or horizons grid.",
+  "outputs": [
+    "monthly.csv",
+    "support.csv",
+    "summary.json",
+    "manifest.json"
+  ],
+  "execution": "no real computation until reviewed contract and tool hash frozen",
+  "supersedes_draft_sha256": "0be5a85566708909a91a3113d683b5ceeec6369f70c771ad622a31dc3234e295",
+  "scientific_review": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/selection-gradient-review.json",
+    "sha256": "eec54ec663277d096904f2dcb2b9167e82ee647a21ea272286570d1eca0d9f89",
+    "required_changes_adopted": [
+      "tie preservation",
+      "no-support missing",
+      "same-supported pool baseline",
+      "all scopes/scenarios with same draw indices"
+    ]
+  },
+  "selector_sha256": "c5cfa4c8346e1c8e098f026f5efbce067b96ecea3ef5d793440fb99314189fb3",
+  "machine_rules": {
+    "tie_allocation": "rank_interval_overlap_equal_per_tie",
+    "minimum_sector_n": 5,
+    "no_support": "retain_calendar_missing_no_zero",
+    "same_support_baseline": true
+  }
+}

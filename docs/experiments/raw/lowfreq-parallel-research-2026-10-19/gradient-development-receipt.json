@@ -1,0 +1,54 @@
+{
+  "artifacts": {
+    "control_module": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_research_control.py",
+      "sha256": "8be2f35b437eccc7de57f7766536acf245761af7de109f6b64d80189c550f2e6"
+    },
+    "design": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/selection-gradient-design.json",
+      "sha256": "9830f510e5a50c12c9cc2b32905b1bf5b1742b60ed7de50bdc545b256ca3fdc2"
+    },
+    "runner": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/run_selection_gradient.py",
+      "sha256": "e77c7ddbd56d5884cd309d943ab3583cd086f541b07a223fdcf2ab7e16bfa8ff"
+    },
+    "selector_sha256": "c5cfa4c8346e1c8e098f026f5efbce067b96ecea3ef5d793440fb99314189fb3",
+    "storage_module": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+      "sha256": "aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95"
+    },
+    "tests": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/test_selection_gradient.py",
+      "sha256": "f83a64c45ce2a9c9759bbf4f0d67e71af7cc92016072f5eee7d9dc0c3a9d2a4b"
+    }
+  },
+  "completed_at_utc": "2026-10-19T07:25:36+00:00",
+  "corrections_history": [
+    {
+      "issue": "initial output-storage import targeted a module absent from this worktree",
+      "resolution": "load only the SHA-bound main-repository output_storage.py specified by the execution contract; no module copied and no research run started"
+    },
+    {
+      "issue": "support CSV moved to explicit month-summary rows and invalidated an earlier synthetic assertion expecting industry-only rows",
+      "resolution": "updated the test to select row_type=industry and assert one accurate row_type=month summary; final 17-test run passed"
+    }
+  ],
+  "execution_boundary": {
+    "external_gradient_output_created": false,
+    "future_return_rows_read": 0,
+    "market_data_requests": 0,
+    "real_results_generated": false,
+    "real_saved_input_read": false,
+    "status": "awaiting root accepted review and frozen execution contract"
+  },
+  "schema": "selection-gradient-development-receipt/1",
+  "synthetic_verification": {
+    "command": "python3 -B -m unittest docs/experiments/raw/lowfreq-parallel-research-2026-10-19/test_selection_gradient.py -v",
+    "exit_code": 0,
+    "syntax_check": "ast.parse runner and tests passed",
+    "tests_failed": 0,
+    "tests_passed": 17,
+    "tests_run": 17
+  },
+  "worktree": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018"
+}

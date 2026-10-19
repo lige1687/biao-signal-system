@@ -1,0 +1,27 @@
+{
+  "schema": "lowfreq-research-control-development/1",
+  "created_utc": "2026-10-19T07:19:03.709036+00:00",
+  "mode": "synthetic_only_no_market_or_network",
+  "files": {
+    "src/lei_signal/research/lowfreq_research_control.py": {
+      "sha256": "d5c585e55426be1570d0d7cb6627e1f83eb1561f31386498fa8fe34b33b2f4c9",
+      "bytes": 14267
+    },
+    "tests/unit/test_lowfreq_research_control.py": {
+      "sha256": "ea7a97177ff256305de4e4e209d0021013aa0cff0e76908a4c4ded88134e6952",
+      "bytes": 12078
+    }
+  },
+  "test": {
+    "command": "PYTHONPATH=src python3 -B -m unittest -q tests.unit.test_lowfreq_research_control",
+    "passed": 12,
+    "failed": 0
+  },
+  "interface": "lei_signal.research.lowfreq_research_control.check(contract_dict) and --contract FILE CLI",
+  "limitations": [
+    "read-only verifier; no scheduler or atomic budget reservation",
+    "only root-enumerated, SHA-bound history is checked; declaration does not prove completeness",
+    "scientific mechanism and market outcome truth require independent review"
+  ],
+  "real_data_run": "not_run"
+}

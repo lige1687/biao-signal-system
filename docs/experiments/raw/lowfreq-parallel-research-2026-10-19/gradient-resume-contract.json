@@ -1,0 +1,78 @@
+{
+  "schema": "lowfreq-research-control/1",
+  "action": "preflight",
+  "stage": "diagnostic",
+  "scopes": [
+    "gp",
+    "common_gp",
+    "common_cfo"
+  ],
+  "bindings": {
+    "design": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/selection-gradient-design.json",
+      "sha256": "9830f510e5a50c12c9cc2b32905b1bf5b1742b60ed7de50bdc545b256ca3fdc2"
+    },
+    "runner": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/run_selection_gradient.py",
+      "sha256": "e77c7ddbd56d5884cd309d943ab3583cd086f541b07a223fdcf2ab7e16bfa8ff"
+    },
+    "source_qualification": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/source-projection/qualification.json",
+      "sha256": "bf1897d808ad3b3c987be40360b39fcbc8b524f6a28d4263a1414cf7363c68b7"
+    },
+    "prior_manifest": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/core-01/manifest.json",
+      "sha256": "f7d0f3da8160dabdb4489496df36cf6dff2156163c912d745abe8b4e37ef0b5a"
+    },
+    "brief": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/control-brief-02.json",
+      "sha256": "dd4ad6f4f2eeb7b9a18cbd8387d3289aaa214f1bb7fa4460118837d2ee73bf93"
+    },
+    "controller_review": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/gradient-controller-review.json",
+      "sha256": "508130f1884eff02270e9ddfa8a4dc384758f327ef4dc602aff1d52a1649076b"
+    },
+    "selector": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/source-projection/selector.csv",
+      "sha256": "c5cfa4c8346e1c8e098f026f5efbce067b96ecea3ef5d793440fb99314189fb3"
+    }
+  },
+  "scientific_identity": {
+    "question": "在同一行业同一日期，经营财务得分从低到高是否对应逐股后续结果改善，还是仅最高组/组合平均的局部现象？",
+    "definition": "financial_selection_gradient.tied_interval_fractional@1.0.0 research-local diagnostic of P2 values, not new factor registration",
+    "formula": "5 identical rank interval groups within industry n>=5 and nonconstant; tied stocks equally overlap; Q5-Q1, same supported pool,0/-100 missing outcomes;132 known dates",
+    "inputs": [
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/core-01/stock_weights.csv",
+        "sha256": "54ef3ba6dd3231957260fa93d2abc625e64723d0b682bf260839fdd93553d5f2"
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/core-01/manifest.json",
+        "sha256": "f7d0f3da8160dabdb4489496df36cf6dff2156163c912d745abe8b4e37ef0b5a"
+      }
+    ],
+    "uses": [
+      "shape explanation of saved stock selection",
+      "support and concentration diagnosis"
+    ]
+  },
+  "history": {
+    "reviewed_history_complete": true,
+    "scope": "P2 family actual 1core+1risk followup and all current parallel task states; source fetch/parse attempts separately retained, not mislabeled return runs; other conversations excluded/read coordination",
+    "attempts": [
+      {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/history-core-01-attempt.json",
+        "sha256": "1dcbfe488f2f52e220e5e2b64d067e21cc81aef13f9c0a2ca88ef106de5ce2ee"
+      },
+      {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/history-risk-followup-01-attempt.json",
+        "sha256": "99baa184a9a80de532890f16580915c208fa58d2376e79f1bdf04d05e295893e"
+      },
+      {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/gradient-terminal-attempt.json",
+        "sha256": "1bfe975b2cac9da116a9b6c3521cae9ab99c58fba7cd4638ed60f928daa1bd42"
+      }
+    ]
+  },
+  "already_seen_history": true
+}

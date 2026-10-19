@@ -1,0 +1,658 @@
+{
+  "schema": "financial-selection-gradient-result-scientific-review/1",
+  "created_utc": "2026-10-19T07:35:44.159868+00:00",
+  "reviewer": "astra_increment_boundary",
+  "status": "accepted_bounded_explanatory_result_can_close_no_further_experiment_required",
+  "plain_answer": "财务得分更高，并没有呈现稳定的“下一月赚得更多”排序。毛利最高组和最低组的全期差额接近零，经营现金最高组全期平均较好，但后半段反而较差，所有高低差的不确定范围都包含零。这个结果限制了把财务分数当普遍选股收益刻度的用法；先前毛利与动量混合在同池下跌月份少亏的有限证据仍保留，两者回答不同问题。",
+  "boundaries": {
+    "already_seen_history": true,
+    "same_2015_2025_132_months": true,
+    "new_independent_validation": false,
+    "independent_arithmetic_review_only": true,
+    "statistics_rerun": false,
+    "source_or_parameter_changes": false,
+    "network_requests": 0,
+    "read_only_old_P2": true,
+    "write_only": "gradient-result-review.json"
+  },
+  "evidence": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/selection-gradient-design.json",
+      "sha256": "9830f510e5a50c12c9cc2b32905b1bf5b1742b60ed7de50bdc545b256ca3fdc2"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/gradient-controller-review.json",
+      "sha256": "508130f1884eff02270e9ddfa8a4dc384758f327ef4dc602aff1d52a1649076b"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/gradient-execution-contract.json",
+      "sha256": "d4813ec25f8e2e7175f0b29f9f330d1c4c10be970eae4b598f0812ba783c8630"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/gradient-execution-receipt.json",
+      "sha256": "cd7034f5037c2df472a0814c57f8d41530c6b6bf32cc7c9ee39ca32187d286c1"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/gradient-01/manifest.json",
+      "sha256": "2bfa79f0a79428296d4560689105f29d1fd93ab7b13aebcbc0ddb415f9cf3086"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/gradient-01/monthly.csv",
+      "sha256": "8cc54e514c79c628427b28a09cb29cad2686d099f14feecf1d2fcb6a8f1c0c1c"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/gradient-01/summary.json",
+      "sha256": "aeae6f377ae52d658c15b733f7facf6ce4dc3baa71fc71dce6948a4d64efbbb3"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/gradient-01/support.csv",
+      "sha256": "829e3248556528676401315e85e43fd5c422ca89a2a67aa420c54e67daff38f3"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/risk-followup-scientific-review.json",
+      "sha256": "37dc0003c473961fffa8eecc45218dc895da2f5c84d2863c99d135fdfa7150e7"
+    }
+  ],
+  "method_adherence": {
+    "frozen_design_hash_matches": true,
+    "controller_pre_effect_acceptance_matches": true,
+    "output_hashes_match_manifest": true,
+    "three_scopes_two_scenarios_all_132_dates": true,
+    "tie_preserving_rule_in_final_design": true,
+    "no_support_missing_not_zero_rule_in_final_design": true,
+    "actual_no_support_months": 0,
+    "scope_of_independent_check": "未导入runner；只用csv、math.fsum独立重算各组/高低差全期、两期、逐年均值与极值、胜出月份比例、支持统计及恒等式。区间仅核冻结设计参数与保存的完整两块结果，未重抽2000次；逐股份额生成已由前置开发和主控验收，本审阅不冒充重新验证全部逐股分组。"
+  },
+  "independent_arithmetic": {
+    "total_scalar_checks": 157353,
+    "checks_by_type": {
+      "summary_group_mean": 30,
+      "summary_group_other": 90,
+      "summary_group_period": 60,
+      "summary_group_annual": 330,
+      "summary_main": 30,
+      "summary_diff_period": 12,
+      "summary_P_period": 12,
+      "summary_period_support": 84,
+      "summary_diff_annual": 66,
+      "summary_P_annual": 66,
+      "summary_annual_support": 396,
+      "monthly_support_ratio": 792,
+      "monthly_support_partition": 792,
+      "monthly_baseline_identity": 792,
+      "monthly_raw_baseline_identity": 792,
+      "monthly_diff_identity": 792,
+      "monthly_raw_normalized": 4752,
+      "monthly_group_weight": 3960,
+      "support_vs_monthly": 7128,
+      "sector_aggregate_source_count": 396,
+      "sector_aggregate_supported_count": 396,
+      "sector_aggregate_supported_mass": 396,
+      "sector_original_mass": 20968,
+      "sector_group_effective_n": 104840,
+      "sector_support_eligibility": 6609,
+      "support_extreme_distinct_targets": 396,
+      "scenario_unknown_weight_identity": 1980,
+      "scenario_highlow_identical": 396
+    },
+    "max_abs_error_by_type": {
+      "summary_group_mean": 0.0,
+      "summary_group_other": 0.0,
+      "summary_group_period": 0.0,
+      "summary_group_annual": 0.0,
+      "summary_main": 1.7763568394002505e-15,
+      "summary_diff_period": 9.71445146547012e-17,
+      "summary_P_period": 0.0,
+      "summary_period_support": 0.0,
+      "summary_diff_annual": 6.661338147750939e-16,
+      "summary_P_annual": 0.0,
+      "summary_annual_support": 0.0,
+      "monthly_support_ratio": 0.0,
+      "monthly_support_partition": 0.0,
+      "monthly_baseline_identity": 7.105427357601002e-15,
+      "monthly_raw_baseline_identity": 3.552713678800501e-15,
+      "monthly_diff_identity": 4.218847493575595e-15,
+      "monthly_raw_normalized": 1.0658141036401503e-14,
+      "monthly_group_weight": 3.3306690738754696e-16,
+      "support_vs_monthly": 0.0,
+      "sector_aggregate_source_count": 0.0,
+      "sector_aggregate_supported_count": 0.0,
+      "sector_aggregate_supported_mass": 1.1102230246251565e-16,
+      "sector_original_mass": 0.0,
+      "sector_group_effective_n": 1.7763568394002505e-15,
+      "sector_support_eligibility": 0.0,
+      "support_extreme_distinct_targets": 3.3306690738754696e-16,
+      "scenario_unknown_weight_identity": 8.881784197001252e-16,
+      "scenario_highlow_identical": 0.0
+    },
+    "failures": [],
+    "summary_key_numbers_independently_recomputed": [
+      {
+        "scope": "gp",
+        "scenario": "zero",
+        "independent_from_monthly": {
+          "Q1_mean_pct": 1.3317359601291596,
+          "Q2_mean_pct": 1.0241992580418546,
+          "Q3_mean_pct": 1.3243643409734582,
+          "Q4_mean_pct": 1.232613897806066,
+          "Q5_mean_pct": 1.3482743717757444,
+          "Q5_minus_Q1_mean_pp": 0.016538411646584712,
+          "Q5_minus_Q1_positive_supported_month_share": 0.44696969696969696,
+          "Q5_minus_Q1_worst_supported_month_pp": -8.895152911668013,
+          "Q5_minus_Q1_best_supported_month_pp": 9.539092734064123,
+          "supported_P_mean_pct": 1.2522375657452567,
+          "Q5_minus_Q1_2015_2019_pp": 0.06444097033443791,
+          "Q5_minus_Q1_2020_2025_pp": -0.023380387259959612
+        }
+      },
+      {
+        "scope": "gp",
+        "scenario": "loss100",
+        "independent_from_monthly": {
+          "Q1_mean_pct": 1.3317359601291596,
+          "Q2_mean_pct": 1.0091081074925368,
+          "Q3_mean_pct": 1.3243643409734582,
+          "Q4_mean_pct": 1.232613897806066,
+          "Q5_mean_pct": 1.3482743717757444,
+          "Q5_minus_Q1_mean_pp": 0.016538411646584712,
+          "Q5_minus_Q1_positive_supported_month_share": 0.44696969696969696,
+          "Q5_minus_Q1_worst_supported_month_pp": -8.895152911668013,
+          "Q5_minus_Q1_best_supported_month_pp": 9.539092734064123,
+          "supported_P_mean_pct": 1.2492193356353931,
+          "Q5_minus_Q1_2015_2019_pp": 0.06444097033443791,
+          "Q5_minus_Q1_2020_2025_pp": -0.023380387259959612
+        }
+      },
+      {
+        "scope": "common_gp",
+        "scenario": "zero",
+        "independent_from_monthly": {
+          "Q1_mean_pct": 1.4708956659489392,
+          "Q2_mean_pct": 1.0171359445639852,
+          "Q3_mean_pct": 1.4118549156119444,
+          "Q4_mean_pct": 1.1752952361963072,
+          "Q5_mean_pct": 1.4173585668974935,
+          "Q5_minus_Q1_mean_pp": -0.053537099051445616,
+          "Q5_minus_Q1_positive_supported_month_share": 0.4696969696969697,
+          "Q5_minus_Q1_worst_supported_month_pp": -8.871687366007587,
+          "Q5_minus_Q1_best_supported_month_pp": 11.091682716944058,
+          "supported_P_mean_pct": 1.2985080658437338,
+          "Q5_minus_Q1_2015_2019_pp": 0.04760834725179934,
+          "Q5_minus_Q1_2020_2025_pp": -0.13782497097081642
+        }
+      },
+      {
+        "scope": "common_gp",
+        "scenario": "loss100",
+        "independent_from_monthly": {
+          "Q1_mean_pct": 1.4708956659489392,
+          "Q2_mean_pct": 1.000948428376469,
+          "Q3_mean_pct": 1.4118549156119444,
+          "Q4_mean_pct": 1.1752952361963072,
+          "Q5_mean_pct": 1.4173585668974935,
+          "Q5_minus_Q1_mean_pp": -0.053537099051445616,
+          "Q5_minus_Q1_positive_supported_month_share": 0.4696969696969697,
+          "Q5_minus_Q1_worst_supported_month_pp": -8.871687366007587,
+          "Q5_minus_Q1_best_supported_month_pp": 11.091682716944058,
+          "supported_P_mean_pct": 1.2952705626062304,
+          "Q5_minus_Q1_2015_2019_pp": 0.04760834725179934,
+          "Q5_minus_Q1_2020_2025_pp": -0.13782497097081642
+        }
+      },
+      {
+        "scope": "common_cfo",
+        "scenario": "zero",
+        "independent_from_monthly": {
+          "Q1_mean_pct": 1.1776499598833403,
+          "Q2_mean_pct": 1.318605142226084,
+          "Q3_mean_pct": 1.354127368209889,
+          "Q4_mean_pct": 1.2352024564339725,
+          "Q5_mean_pct": 1.4069554024653832,
+          "Q5_minus_Q1_mean_pp": 0.2293054425820429,
+          "Q5_minus_Q1_positive_supported_month_share": 0.5681818181818182,
+          "Q5_minus_Q1_worst_supported_month_pp": -11.678532105039718,
+          "Q5_minus_Q1_best_supported_month_pp": 6.748907626564952,
+          "supported_P_mean_pct": 1.2985080658437338,
+          "Q5_minus_Q1_2015_2019_pp": 0.6729475385070212,
+          "Q5_minus_Q1_2020_2025_pp": -0.14039630402210562
+        }
+      },
+      {
+        "scope": "common_cfo",
+        "scenario": "loss100",
+        "independent_from_monthly": {
+          "Q1_mean_pct": 1.1776499598833403,
+          "Q2_mean_pct": 1.3024176260385678,
+          "Q3_mean_pct": 1.354127368209889,
+          "Q4_mean_pct": 1.2352024564339725,
+          "Q5_mean_pct": 1.4069554024653832,
+          "Q5_minus_Q1_mean_pp": 0.2293054425820429,
+          "Q5_minus_Q1_positive_supported_month_share": 0.5681818181818182,
+          "Q5_minus_Q1_worst_supported_month_pp": -11.678532105039718,
+          "Q5_minus_Q1_best_supported_month_pp": 6.748907626564952,
+          "supported_P_mean_pct": 1.2952705626062304,
+          "Q5_minus_Q1_2015_2019_pp": 0.6729475385070212,
+          "Q5_minus_Q1_2020_2025_pp": -0.14039630402210562
+        }
+      }
+    ],
+    "at_least_12_summary_numbers_verified": true
+  },
+  "performance_table_all_scenarios": [
+    {
+      "scope": "gp",
+      "scenario": "zero",
+      "group_means_pct": [
+        1.3317359601291596,
+        1.0241992580418546,
+        1.3243643409734582,
+        1.232613897806066,
+        1.3482743717757444
+      ],
+      "high_minus_low_pp": 0.016538411646584712,
+      "early_pp": 0.06444097033443791,
+      "late_pp": -0.023380387259959612,
+      "positive_months": 59,
+      "intervals_95_from_frozen_summary_not_rerun": {
+        "12": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.5409352986537824,
+            0.6308221350892591
+          ]
+        },
+        "6": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.5568866083860934,
+            0.6165468195895321
+          ]
+        }
+      },
+      "all_five_early_pct": [
+        1.2786530296993557,
+        0.5471232872382276,
+        1.1840918139744794,
+        1.0473618993413176,
+        1.3430940000337936
+      ],
+      "all_five_late_pct": [
+        1.3759717354873298,
+        1.4217625670448772,
+        1.4412581134726072,
+        1.3869905631933563,
+        1.35259134822737
+      ]
+    },
+    {
+      "scope": "gp",
+      "scenario": "loss100",
+      "group_means_pct": [
+        1.3317359601291596,
+        1.0091081074925368,
+        1.3243643409734582,
+        1.232613897806066,
+        1.3482743717757444
+      ],
+      "high_minus_low_pp": 0.016538411646584712,
+      "early_pp": 0.06444097033443791,
+      "late_pp": -0.023380387259959612,
+      "positive_months": 59,
+      "intervals_95_from_frozen_summary_not_rerun": {
+        "12": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.5409352986537824,
+            0.6308221350892591
+          ]
+        },
+        "6": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.5568866083860934,
+            0.6165468195895321
+          ]
+        }
+      },
+      "all_five_early_pct": [
+        1.2786530296993557,
+        0.5471232872382276,
+        1.1840918139744794,
+        1.0473618993413176,
+        1.3430940000337936
+      ],
+      "all_five_late_pct": [
+        1.3759717354873298,
+        1.394095457704461,
+        1.4412581134726072,
+        1.3869905631933563,
+        1.35259134822737
+      ]
+    },
+    {
+      "scope": "common_gp",
+      "scenario": "zero",
+      "group_means_pct": [
+        1.4708956659489392,
+        1.0171359445639852,
+        1.4118549156119444,
+        1.1752952361963072,
+        1.4173585668974935
+      ],
+      "high_minus_low_pp": -0.053537099051445616,
+      "early_pp": 0.04760834725179934,
+      "late_pp": -0.13782497097081642,
+      "positive_months": 62,
+      "intervals_95_from_frozen_summary_not_rerun": {
+        "12": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.5772860184753124,
+            0.526165222725921
+          ]
+        },
+        "6": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.6161521448016817,
+            0.5445495509268738
+          ]
+        }
+      },
+      "all_five_early_pct": [
+        1.4086345563503015,
+        0.5713445320223693,
+        1.2520432802336656,
+        1.027806713294495,
+        1.456242903602101
+      ],
+      "all_five_late_pct": [
+        1.5227799239478035,
+        1.388628788348665,
+        1.5450312784271767,
+        1.298202338614484,
+        1.3849549529769871
+      ]
+    },
+    {
+      "scope": "common_gp",
+      "scenario": "loss100",
+      "group_means_pct": [
+        1.4708956659489392,
+        1.000948428376469,
+        1.4118549156119444,
+        1.1752952361963072,
+        1.4173585668974935
+      ],
+      "high_minus_low_pp": -0.053537099051445616,
+      "early_pp": 0.04760834725179934,
+      "late_pp": -0.13782497097081642,
+      "positive_months": 62,
+      "intervals_95_from_frozen_summary_not_rerun": {
+        "12": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.5772860184753124,
+            0.526165222725921
+          ]
+        },
+        "6": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.6161521448016817,
+            0.5445495509268738
+          ]
+        }
+      },
+      "all_five_early_pct": [
+        1.4086345563503015,
+        0.5713445320223693,
+        1.2520432802336656,
+        1.027806713294495,
+        1.456242903602101
+      ],
+      "all_five_late_pct": [
+        1.5227799239478035,
+        1.3589516753382187,
+        1.5450312784271767,
+        1.298202338614484,
+        1.3849549529769871
+      ]
+    },
+    {
+      "scope": "common_cfo",
+      "scenario": "zero",
+      "group_means_pct": [
+        1.1776499598833403,
+        1.318605142226084,
+        1.354127368209889,
+        1.2352024564339725,
+        1.4069554024653832
+      ],
+      "high_minus_low_pp": 0.2293054425820429,
+      "early_pp": 0.6729475385070212,
+      "late_pp": -0.14039630402210562,
+      "positive_months": 75,
+      "intervals_95_from_frozen_summary_not_rerun": {
+        "12": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.2206557109737223,
+            0.6617455700841699
+          ]
+        },
+        "6": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.27285734252286614,
+            0.7540783754961538
+          ]
+        }
+      },
+      "all_five_early_pct": [
+        0.7419536381748949,
+        1.115477312367853,
+        1.0461275705430175,
+        1.3976122877352521,
+        1.4149011766819162
+      ],
+      "all_five_late_pct": [
+        1.5407302279737116,
+        1.4878783337746102,
+        1.6107938662656154,
+        1.0998609303495732,
+        1.400333923951606
+      ]
+    },
+    {
+      "scope": "common_cfo",
+      "scenario": "loss100",
+      "group_means_pct": [
+        1.1776499598833403,
+        1.3024176260385678,
+        1.354127368209889,
+        1.2352024564339725,
+        1.4069554024653832
+      ],
+      "high_minus_low_pp": 0.2293054425820429,
+      "early_pp": 0.6729475385070212,
+      "late_pp": -0.14039630402210562,
+      "positive_months": 75,
+      "intervals_95_from_frozen_summary_not_rerun": {
+        "12": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.2206557109737223,
+            0.6617455700841699
+          ]
+        },
+        "6": {
+          "all_missing_draws": 0,
+          "draws_with_values": 2000,
+          "interval_pp": [
+            -0.27285734252286614,
+            0.7540783754961538
+          ]
+        }
+      },
+      "all_five_early_pct": [
+        0.7419536381748949,
+        1.115477312367853,
+        1.0461275705430175,
+        1.3976122877352521,
+        1.4149011766819162
+      ],
+      "all_five_late_pct": [
+        1.5407302279737116,
+        1.458201220764164,
+        1.6107938662656154,
+        1.0998609303495732,
+        1.400333923951606
+      ]
+    }
+  ],
+  "support": [
+    {
+      "scope": "gp",
+      "all_months_supported": 132,
+      "source_stockmonths": 31872,
+      "supported_stockmonths": 22321,
+      "supported_count_minmax": [
+        72,
+        273
+      ],
+      "mean_supported_mass": 0.6868103474539187,
+      "median_supported_mass": 0.6788726886766103,
+      "minmax_supported_mass": [
+        0.496551724137931,
+        0.8452012383900929
+      ],
+      "early_late_supported_mass": [
+        0.6529415002221912,
+        0.7150343868136915
+      ],
+      "max_cross_group_tie_mass": 0.0,
+      "max_Q1_Q5_shared_target_weight": 0.0,
+      "zero_constant_score_exclusion": true
+    },
+    {
+      "scope": "common_gp",
+      "all_months_supported": 132,
+      "source_stockmonths": 30752,
+      "supported_stockmonths": 21063,
+      "supported_count_minmax": [
+        71,
+        263
+      ],
+      "mean_supported_mass": 0.6716729845417275,
+      "median_supported_mass": 0.6747786551806653,
+      "minmax_supported_mass": [
+        0.4930555555555556,
+        0.8402555910543131
+      ],
+      "early_late_supported_mass": [
+        0.6437506768007507,
+        0.6949415743258749
+      ],
+      "max_cross_group_tie_mass": 0.0,
+      "max_Q1_Q5_shared_target_weight": 0.0,
+      "zero_constant_score_exclusion": true
+    },
+    {
+      "scope": "common_cfo",
+      "all_months_supported": 132,
+      "source_stockmonths": 30752,
+      "supported_stockmonths": 21063,
+      "supported_count_minmax": [
+        71,
+        263
+      ],
+      "mean_supported_mass": 0.6716729845417275,
+      "median_supported_mass": 0.6747786551806653,
+      "minmax_supported_mass": [
+        0.4930555555555556,
+        0.8402555910543131
+      ],
+      "early_late_supported_mass": [
+        0.6437506768007507,
+        0.6949415743258749
+      ],
+      "max_cross_group_tie_mass": 0.0,
+      "max_Q1_Q5_shared_target_weight": 0.0,
+      "zero_constant_score_exclusion": true
+    }
+  ],
+  "scenario_explanation": {
+    "changed_group_months": [
+      {
+        "scope": "gp",
+        "month": "2023-06",
+        "group": 2,
+        "zero_minus_loss100_pp": 1.9920318725099597
+      },
+      {
+        "scope": "common_gp",
+        "month": "2023-06",
+        "group": 2,
+        "zero_minus_loss100_pp": 2.1367521367521376
+      },
+      {
+        "scope": "common_cfo",
+        "month": "2023-06",
+        "group": 2,
+        "zero_minus_loss100_pp": 2.1367521367521367
+      }
+    ],
+    "high_minus_low_identical_all_396_scope_months": true,
+    "interpretation": "两种未知收益情景的高低差完全相同，是因为支持部分唯一未知结果落在2023-06的第2组；其他原池未知股票属于被排除的小行业。全5组结果并非完全相同。不能把高低差相同称作退市损失或缺失资料已全面解决。"
+  },
+  "scientific_findings": {
+    "gp_main": "五组均值（零情景，%/月）1.331736、1.024199、1.324364、1.232614、1.348274，不单调；最高−最低+0.016538个百分点/月，12个月成段重抽95%范围[-0.540935,+0.630822]。2015–19为+0.064441，2020–25为−0.023380；132个月仅59个月最高组较好。",
+    "gp_common": "共同池五组1.470896、1.017136、1.411855、1.175295、1.417359；高低差−0.053537，12月范围[-0.577286,+0.526165]，前期+0.047608、后期−0.137825；62/132个月为正。主池/共同池符号变化应保留，不能挑主池弱正。",
+    "cfo_common": "共同池五组1.177650、1.318605、1.354127、1.235202、1.406955；高低差+0.229305，12月范围[-0.220656,+0.661746]，前期+0.672948、后期−0.140396，75/132个月为正。第4组低于第3组，后期最高组还低于最低组和中间组，不能称稳定梯度。",
+    "all_intervals": "3个范围×两未知情景×6/12月的12个高低差95%范围全部跨零。宽范围不是证明绝无任何有用程度，亦不能将单个正均值当收益能力。",
+    "annual_counterexamples": "GP两范围2022、2023、2024、2025均为负高低差；2025主池−1.223821、共同池−1.143322个百分点/月。CFO后期6年中2020、2022、2023、2025为负，2020−0.611296、2025−0.351951；2017正差+1.710378不能掩盖这些反例。",
+    "actual_separation": "本次最高/最低组没有共同股票份额，所有月的原池目标权重半绝对差等于支持份额，条件化后为1；没有同分跨组块。缺少稳定收益梯度不能归咎于旧行业×9组约93%全持有退化。本次仅行业分组，仍不能推断控制波动/流动性后的独立性。",
+    "support_shift": "每月平均支持份额主GP68.6810%，共同池67.1673%，全部132月有支持。前后期主GP65.2942%升至71.5034%，共同池64.3751%升至69.4942%；约三分之一原财务池来自被排除的小行业。后期差额转负可能同时反映经济关系/样本组成变化；本次不能因果分解，不能以未核的组成故事撤销反例。"
+  },
+  "financial_uses": {
+    "not_supported": [
+      "把更高GP/assets或CFO/assets解释为下个月收益普遍更高的连续选股标尺。",
+      "对每只股票预测成功，或对所有A股/ETF、账户的收益改善。",
+      "因为Q5与Q1差额较好就给反向持仓/做空Q1建议；高低差只是解释量，不是可执行多空策略。",
+      "超越动量、波动、流动性等全部既有信息的独立收益；本诊断只按财务分数分组。"
+    ],
+    "retained": "旧P2毛利与动量固定混合在同一池平均配置下跌月份少亏的有限历史风险证据保留；共同GP B−M为+0.3454个百分点/坏月，既有97.5%12月范围[+0.1020,+0.5670]。现金单独相对同池平均的坏月线索保留，加入动量后的风险增量仍不稳定。本次梯度未重估风险，不新增或推翻该结论。",
+    "other_value": "新贡献是把“最高组合历史表现”与“财务分越高普遍越好”分开，防止把财务分数包装成通用收益评级。它是解释和约束使用方式的信息，不是新增策略收益或已量化操作节省。"
+  },
+  "source_and_execution_limits": [
+    "仅原600历史名单中价格、行业及原件财务资格满足后、再限每行业至少5只的支持部分，非全市场；GP主池与共同GP/CFO分别报告。",
+    "继承旧年报公告/修订规则、约88%旧notice恢复来源条件、历史行业代理、退出与缺失资料选择偏差，不因本次算术无差异消失。",
+    "财务数据年度重复、同月股票共同波动；2000次6/12个月成段抽样仅在所用依赖假设下描述不确定性。已见历史和多个比较不能成为独立确认。",
+    "所有均值为月度价格结果的算术均值，不是年化复利、可成交收益或真实财富。未覆盖费用、停牌成交、ETF复制和账户持仓规则。",
+    "五组份额规则可能把同一股票分摊相邻组；即使此数据无同分跨组也不能称五组独立样本。原始支持贡献权重总和小于1，不能把排除部分当现金零回报。"
+  ],
+  "followup_decision": {
+    "additional_experiment_required_now": false,
+    "reason": "固定五组、两时期、逐年反例、两缺失情景及成段不确定性已回答这次有限排序形状问题；没有足够稳定的新收益线索需要用最后一次预算追认。既有风险问题已有完成的必要跟进，不能为了财务排序不赚钱再换组数、行业过滤、时期或目标追正值。",
+    "budget": "原P2 core1+风险followup1+本次梯度followup2；最多3次中的余量是上限，不是必须花完。",
+    "genuinely_new_question": "只有新的经济假设、真正未看资料或具体可执行风险动作/账户问题获准，才另行定义；本结果不自动授权。"
+  },
+  "acceptance_for_root": {
+    "arithmetic": "通过本文件记录的独立monthly/支持聚合核数，0超容差差异。",
+    "scientific": "接受为已见历史的限定描述；允许这项补充问题结案。",
+    "delivery_conditions": "主控最终报告须给完整5组与高低差表、两情景第2组差别、前后期反例、支持比例、旧风险结论来源及“不是逐只股票预测”的边界；封存/登记由root负责。",
+    "not_claimed": "未复算抽样区间、未独立重建逐股未来收益或份额，也未批准生产/交易。"
+  }
+}

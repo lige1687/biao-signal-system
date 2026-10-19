@@ -1,0 +1,557 @@
+{
+  "schema": "lowfreq-value-source-anchor-review/1",
+  "reviewer": "astra_increment_boundary",
+  "status": "bounded_anchors_verified_full_PIT_not_qualified",
+  "plain_answer": "合康两份年报和康美2017原报均能与公布后的PB对应，康美所查锚点没有提前采用2019重述的迹象；茅台的季报和2015分配实施日期仍缺，不能把这四次接口成功当成全历史数据可用。",
+  "scope": {
+    "codes": [
+      "300048",
+      "600518",
+      "600519"
+    ],
+    "network_requests_by_reviewer": 0,
+    "factor_or_future_return_effects_read_or_run": 0,
+    "writes_only": "source-anchor-review.json",
+    "existing_P2_modified": false,
+    "source_operations_executed_by_parent_team": 4,
+    "source_acquisition_not_authorized_here": true,
+    "review_mode": "report_only;原件页及估值分母核对，不评价价格之后的收益"
+  },
+  "coordination": "本阶段范围由root登记；未代写协调文件。",
+  "storage_check": "2026-10-19T15:08:28+08:00 available=true, identity_ok=true, UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9。",
+  "tools": "bundled Python pypdf逐个读取指定财务表/股本/目录页；系统及bundled fitz不可用，未安装。未批扫13761份原件。",
+  "sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/original-filings-probe-plan.json",
+      "sha256": "70c16afe1a60c9d2c9f94d07868121f44ba2ffeee5c2aabfe74ef9aae0157de7"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/manifest.json",
+      "sha256": "efa7123465533012d4fe754185f9aaa1f5bfc8a1e3323496441b68c8616710c4"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/accounting-correction-receipt.json",
+      "sha256": "4d21cea1fceedab3bde9fa6eaead60ea92903ca9d3f264d1fd64ec6756f6baf1"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/accounting-correction-original-v1/manifest.json",
+      "sha256": "d10c227047eee62647b1860372392972f1a55bef9828a715b2638b2d26815b40"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-reuse-inventory.json",
+      "sha256": "c7a1f5818886c8aadb4a597c2a6c3f0dea53b73cb246beb16a5b92d3fa7f43dd"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-discovery-02.json",
+      "sha256": "fdb737281a372d236d9c8cb4a5ace52330e2ad990bed2553b98a85b4fdf695bd"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/manifest.json",
+      "sha256": "9df93a701c0a0b48a5919155be61c649d6cbaaf3bef4223a2a647618f3164b6e"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-probe-execution-receipt.json",
+      "sha256": "d3d6f140c0cd4e3c27c2546465c8c5815be2581c234e89d2c5067581dd6cb664"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/01-query_history_k_data_plus-sz.300048.json",
+      "sha256": "d79bdbf814b710bfffd7689700cc0f01b85743a84429765a11058a8e4c6d8a9f"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/02-query_history_k_data_plus-sh.600518.json",
+      "sha256": "eee8de9ddf646f7416e8a20dbc8729a7ff6733f1a1eb0805d78ac0d4a4e3274c"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/03-query_history_k_data_plus-sh.600519.json",
+      "sha256": "7b34fb9b2e20bf211afd85ce2be4d820bab070f3ecf8f207523c70d1ae6a5220"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/04-query_dividend_data-sh.600519.json",
+      "sha256": "c25e938814fa66855cace6c9c0f2fec167602eef37a78bc4fa74d353169f6ecc"
+    }
+  ],
+  "official_method_evidence": {
+    "saved_doc_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-discovery-02.json",
+    "lines": [
+      393,
+      433,
+      479
+    ],
+    "formula": "PB=总市值/(最近披露归母权益−其他权益工具)，adjustflag3不复权，PB六位小数。",
+    "limitation": "文档公式没有承诺历史版本不可重写；实际日期切换仅有限支持，不能替代供应商版本政策。"
+  },
+  "original_anchors": [
+    {
+      "code": "300048",
+      "report_year": 2023,
+      "publication_date": "2024-03-27",
+      "announcement_id": "1219412091",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00014-pdf.body",
+      "pdf_sha256": "5ecef7c6e07c86bde5dab25880b709b01c71f6ae1d3056b84ceb24522f7bd4de",
+      "pages_one_based": [
+        7,
+        77,
+        78,
+        84,
+        90,
+        92
+      ],
+      "basis": "合并报表，人民币元；普通股股数单位股",
+      "parent_attributable_equity": "1675587235.62",
+      "other_equity_instruments": "0",
+      "other_equity_evidence_status": "原行空白，未直接把空值填零；第84页明确无优先股，第92页所有已填权益组成加总恰等于归母权益，残差0.00。此案支持没有另列其他权益余额；不推广为通用空值规则。",
+      "ordinary_equity_for_pb": "1675587235.62",
+      "ordinary_shares_report_end": "1113738857",
+      "report_end_bvps": "1.504470482545083726031837641",
+      "excerpts": [
+        "第92页：股本 1,113,738,857.00；资本公积 904,854,747.86；其他综合收益 -3,318,723.77；盈余公积 71,015,072.42；未分配利润 -410,702,717.89；归属于母公司所有者权益合计 1,675,587,235.62。",
+        "第77–78页：总股数1,113,738,857；2023年7月5日及11月23日限制性股票上市。"
+      ]
+    },
+    {
+      "code": "300048",
+      "report_year": 2024,
+      "publication_date": "2025-03-26",
+      "announcement_id": "1222962581",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00010-pdf.body",
+      "pdf_sha256": "76e39fe16087bb1ebc3b55740db128793c128b29e0b89b8ceced4d4cc5f99bac",
+      "pages_one_based": [
+        7,
+        71,
+        72,
+        78,
+        84,
+        86
+      ],
+      "basis": "合并报表，人民币元；普通股股数单位股",
+      "parent_attributable_equity": "1703212286.57",
+      "other_equity_instruments": "0",
+      "other_equity_evidence_status": "原行空白；第78页明确无优先股，且第86页全部已填权益组成加总等于归母权益，残差0.00。没有把资产项“其他权益工具投资”误当所发行其他权益工具。",
+      "ordinary_equity_for_pb": "1703212286.57",
+      "ordinary_shares_report_end": "1116701357",
+      "report_end_bvps": "1.525217351885066259483375912",
+      "excerpts": [
+        "第86页：股本1,116,701,357.00；资本公积921,550,366.99；其他综合收益-5,647,923.77；盈余公积71,015,072.42；未分配利润-400,406,586.07；归母权益1,703,212,286.57。",
+        "第72页：2024年7月9日完成登记，7月11日上市，股数1,113,738,857变1,116,163,857；11月22日完成登记，11月25日上市，变1,116,701,357。"
+      ]
+    },
+    {
+      "code": "600518",
+      "report_year": 2017,
+      "publication_date": "2018-04-26",
+      "announcement_id": "1204793690",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-11-pdf.body",
+      "pdf_sha256": "15b3b15df2dfd3310cc16e1e345e8950e8a9cb047bdad38d1263e2b55cfd2985",
+      "pages_one_based": [
+        6,
+        7,
+        67,
+        68,
+        75,
+        76,
+        99,
+        100,
+        101
+      ],
+      "basis": "合并报表，人民币元；普通股股数单位股",
+      "parent_attributable_equity": "32032959807.76",
+      "other_equity_instruments": "2967700000.00",
+      "other_equity_evidence_status": "第101页明确其他权益工具2,967,700,000.00，其中优先股同额；不能按30,000,000股×面值100元直接代替账面余额，也不能省扣。",
+      "ordinary_equity_for_pb": "29065259807.76",
+      "ordinary_shares_report_end": "4974253675",
+      "report_end_bvps": "5.843139837004794493115592863",
+      "excerpts": [
+        "第101页：归母权益32,032,959,807.76；其他权益工具/优先股2,967,700,000.00；股本4,974,253,675.00。",
+        "第68页：2017年6月9日注销480,000股；12月22日新增27,510,000股登记，总普通股4,974,253,675。第76页优先股30,000,000股，面值100元。"
+      ]
+    },
+    {
+      "code": "600519",
+      "report_year": 2014,
+      "publication_date": "2015-04-21",
+      "announcement_id": "1200877315",
+      "pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/original-filings-probe-v1/attempt-12-pdf.body",
+      "pdf_sha256": "89145ef5bd12256c4c75c122b1c8d59846a912434f1abd0570f678bdb1a20f24",
+      "pages_one_based": [
+        1,
+        4,
+        19,
+        20,
+        23,
+        39,
+        40,
+        41
+      ],
+      "basis": "合并报表，人民币元；普通股股数单位股",
+      "parent_attributable_equity": "53430402446.09",
+      "other_equity_instruments": "0",
+      "other_equity_evidence_status": "第40页其他权益工具/优先股/永续债空白；第23页明确本期无优先股，已填权益项加总与归母权益残差0.00，支持本案未列其他权益余额。",
+      "ordinary_equity_for_pb": "53430402446.09",
+      "ordinary_shares_report_end": "1141998000",
+      "report_end_bvps": "46.78677409775673862826379731",
+      "excerpts": [
+        "第40–41页：股本1,141,998,000.00；资本公积1,374,964,415.72；其他综合收益-619,043.99；盈余公积5,249,407,234.62；一般风险准备98,594,502.37；未分配利润45,566,057,337.37；归母权益53,430,402,446.09。",
+        "第1页仅分配预案：以2014年末114,199.80万股为基数每10股送1股、派现金43.74元；仍待股东大会，不是2015实施日期证明。第20页所叙2014年内实施的是2013年度方案。"
+      ]
+    }
+  ],
+  "correction_anchor": {
+    "code": "600518",
+    "publication_date": "2019-04-30",
+    "announcement_id": "1206168278",
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-increment-20261019/lowfreq-profitability-increment-20261019-20261019T102257-90b550e27121/result/accounting-correction-original-v1/accounting-correction-response.body",
+    "sha256": "33597d0422fb5c7bde775df5b3f199ad26e321bdda4432a5b4875c91de0d66de",
+    "pages_one_based": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "fact": "真实会计差错公告，明确重述2017合并报表；不是原小探针attempt14关联交易补充。",
+    "page2_equity_deltas": {
+      "surplus_reserve": "-361961529.28",
+      "undistributed_profit": "-3257653763.48"
+    },
+    "derived_parent_equity": "28413344515.00",
+    "derived_ordinary_equity": "25445644515.00",
+    "same_2017_report_end_shares": "4974253675",
+    "derived_restatement_bvps": "5.115469812664911988028033170",
+    "derivation_limit": "此总权益/每股数为依据第2页完整受影响权益项目加原报计算，公告未直接列归母总额；用同2017期末股数作2017版本比较，不能代替2019当时最新季报及股数。公告不证明历史数字经济真实，仅识别当时公开版本。"
+  },
+  "actual_pb_comparisons": [
+    {
+      "date": "2024-03-26",
+      "code": "sz.300048",
+      "close": "5.0900",
+      "pbMRQ": "3.056538",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "1.665282747997898275761662378"
+    },
+    {
+      "date": "2024-03-27",
+      "code": "sz.300048",
+      "close": "4.9300",
+      "pbMRQ": "3.276900",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "1.504470688760718972199334737"
+    },
+    {
+      "date": "2024-03-28",
+      "code": "sz.300048",
+      "close": "5.0300",
+      "pbMRQ": "3.343369",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "1.504470490693668572030188711"
+    },
+    {
+      "date": "2024-07-10",
+      "code": "sz.300048",
+      "close": "4.4200",
+      "pbMRQ": "2.937911",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "1.504470353254404234845779876"
+    },
+    {
+      "date": "2024-07-11",
+      "code": "sz.300048",
+      "close": "4.5400",
+      "pbMRQ": "3.024244",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "1.501201622620397031456456556"
+    },
+    {
+      "date": "2024-11-22",
+      "code": "sz.300048",
+      "close": "5.1000",
+      "pbMRQ": "3.341101",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "1.526442930040127490907937234"
+    },
+    {
+      "date": "2024-11-25",
+      "code": "sz.300048",
+      "close": "5.2200",
+      "pbMRQ": "3.421362",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "1.525708182881554188068962010"
+    },
+    {
+      "date": "2025-03-25",
+      "code": "sz.300048",
+      "close": "5.4000",
+      "pbMRQ": "3.539340",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "1.525708182881554188068962010"
+    },
+    {
+      "date": "2025-03-26",
+      "code": "sz.300048",
+      "close": "5.4500",
+      "pbMRQ": "3.573261",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "1.525217441435148454031205669"
+    },
+    {
+      "date": "2025-03-27",
+      "code": "sz.300048",
+      "close": "5.3500",
+      "pbMRQ": "3.507697",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "1.525217257933054080782918251"
+    },
+    {
+      "date": "2018-04-25",
+      "code": "sh.600518",
+      "close": "22.0200",
+      "pbMRQ": "3.900012",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "5.646136473426235611582733592"
+    },
+    {
+      "date": "2018-04-26",
+      "code": "sh.600518",
+      "close": "22.0600",
+      "pbMRQ": "3.775367",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "5.843140547660664512880469634"
+    },
+    {
+      "date": "2018-04-27",
+      "code": "sh.600518",
+      "close": "22.4900",
+      "pbMRQ": "3.848958",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "5.843139883573684098397540321"
+    },
+    {
+      "date": "2019-04-29",
+      "code": "sh.600518",
+      "close": "10.6000",
+      "pbMRQ": "1.665688",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "6.363736786240880645114811417"
+    },
+    {
+      "date": "2019-04-30",
+      "code": "sh.600518",
+      "close": "9.5400",
+      "pbMRQ": "1.864609",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "5.116354152532783012417080471"
+    },
+    {
+      "date": "2015-04-20",
+      "code": "sh.600519",
+      "close": "234.0300",
+      "pbMRQ": "5.483356",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "42.68006673285484291007186110"
+    },
+    {
+      "date": "2015-04-21",
+      "code": "sh.600519",
+      "close": "257.4300",
+      "pbMRQ": "5.087507",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "50.60042177828944510543179597"
+    },
+    {
+      "date": "2015-04-22",
+      "code": "sh.600519",
+      "close": "263.8900",
+      "pbMRQ": "5.215174",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "50.60042100225227384551311231"
+    },
+    {
+      "date": "2015-07-16",
+      "code": "sh.600519",
+      "close": "251.5900",
+      "pbMRQ": "4.972093",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "50.60042119083452381119983074"
+    },
+    {
+      "date": "2015-07-17",
+      "code": "sh.600519",
+      "close": "228.2900",
+      "pbMRQ": "4.962785",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "46.00038083455156731552948596"
+    },
+    {
+      "date": "2015-07-20",
+      "code": "sh.600519",
+      "close": "225.1100",
+      "pbMRQ": "4.893655",
+      "adjustflag": "3",
+      "tradestatus": "1",
+      "implied_bvps": "46.00038212746914116340444923"
+    }
+  ],
+  "original_anchor_rounding_checks": [
+    {
+      "code": "300048",
+      "date": "2024-03-27",
+      "expected_pb_from_original": "3.276900449160035360093190300",
+      "returned_pb": "3.276900",
+      "absolute_pb_rounding_error": "4.49160035360093190300E-7",
+      "compatible_with_six_decimal_rounding": true
+    },
+    {
+      "code": "300048",
+      "date": "2024-03-28",
+      "expected_pb_from_original": "3.343369018108514779162017689",
+      "returned_pb": "3.343369",
+      "absolute_pb_rounding_error": "1.8108514779162017689E-8",
+      "compatible_with_six_decimal_rounding": true
+    },
+    {
+      "code": "300048",
+      "date": "2025-03-26",
+      "expected_pb_from_original": "3.573261209796863284495933896",
+      "returned_pb": "3.573261",
+      "absolute_pb_rounding_error": "2.09796863284495933896E-7",
+      "compatible_with_six_decimal_rounding": true
+    },
+    {
+      "code": "300048",
+      "date": "2025-03-27",
+      "expected_pb_from_original": "3.507696783929030930651971806",
+      "returned_pb": "3.507697",
+      "absolute_pb_rounding_error": "2.16070969069348028194E-7",
+      "compatible_with_six_decimal_rounding": true
+    },
+    {
+      "code": "600518",
+      "date": "2018-04-26",
+      "expected_pb_from_original": "3.775367459168665284624469704",
+      "returned_pb": "3.775367",
+      "absolute_pb_rounding_error": "4.59168665284624469704E-7",
+      "compatible_with_six_decimal_rounding": true
+    },
+    {
+      "code": "600518",
+      "date": "2018-04-27",
+      "expected_pb_from_original": "3.848958030675579431151601254",
+      "returned_pb": "3.848958",
+      "absolute_pb_rounding_error": "3.0675579431151601254E-8",
+      "compatible_with_six_decimal_rounding": true
+    }
+  ],
+  "rounding_rule": "以原件精确人民币/股数算应有PB，对照接口六位小数，容许末位四舍五入0.5e-6；不拟合容差，不调整财务数迎合接口。这里只用六个清晰公布后日期作符合检验。",
+  "case_judgments": {
+    "300048": {
+      "judgment": "两份年度数值及公布前后切换支持受限历史时点一致；尚非所有日期合格。",
+      "2023_switch": "2024-03-26隐含1.665282748；03-27变1.504470689，与原报1.504470482545一致；03-28同样通过六位PB舍入。",
+      "2024_switch": "2025-03-25隐含1.525708183；03-26变1.525217441，与原报1.525217351885一致；03-27通过。",
+      "share_events": "2024-07-11隐含每股数变化与年度叙述新增股上市日期一致；11-25同样。其比例可支持股数分母变化，但晚披露年报叙述不替代当时2024-043/067公告原件/发布时间；登记日期与上市日期不同须保留。",
+      "unknown": "2024-08-19/10-25及2025-04-25等分母变更的中期/季度原件未核；03-27之前旧季度分母未核。不能把未变化自动当已正确更新最近季报。"
+    },
+    "600518": {
+      "judgment": "2018-04-26/27使用的分母与2017原报扣除优先股相符，明显不同于2019重述2017数；该反例探针未发现提前回填。",
+      "original_vs_restatement": {
+        "original_bvps": "5.843139837004794493115592863",
+        "restated_bvps": "5.115469812664911988028033170"
+      },
+      "date_semantics": "2017年报实际公开2018-04-26；2017日线本来不应使用2017年末年报。当前比较用2018公开窗口，未把财年当公开年。",
+      "unknown": "2019-04-30隐含5.116354153接近但不等于2017重述同股数5.115469813；同日可能还有2018年报/2019一季报且股数已变化，缺这些原件不可强称与2017修订匹配。2017各季度/2018各季度也未逐一核。",
+      "failure_condition": "若后续查到某公开前日期PB恰用未来重述、且股数/季度/口径差已排除，应拒绝该供应商序列进入严格时点主检验；本次未出现此证据。"
+    },
+    "600519": {
+      "judgment": "2014年报锚点明确，但PB日线尚无法与最新季度和2015实施分配完整对齐。",
+      "annual_bvps": "46.78677409775673862826379731",
+      "observed": "2015-04-20隐含42.680066733；04-21变50.600421778，并非2014年度46.786774098；不能据此判提前或错误，可能是当日季度数，尚未验证。",
+      "distribution_mismatch": "query_dividend_data(year=2014,yearType=report)实际返回2014-03-25方案、2014-06-25除权；不覆盖2015-07-17。年报每10送1仅预案，不能作为2015已生效证据。07-16/07-17隐含分母比约1.1，与送股机制相容，但尚未独立核2015实施公告和季度净资产。",
+      "actual_dividend_response": {
+        "code": "sh.600519",
+        "dividPreNoticeDate": "",
+        "dividAgmPumDate": "2014-05-20",
+        "dividPlanAnnounceDate": "2014-03-25",
+        "dividPlanDate": "2014-06-18",
+        "dividRegistDate": "2014-06-24",
+        "dividOperateDate": "2014-06-25",
+        "dividPayDate": "2014-06-25",
+        "dividStockMarketDate": "2014-06-26",
+        "dividCashPsBeforeTax": "4.374",
+        "dividCashPsAfterTax": "3.9266或4.1503",
+        "dividStocksPs": "0.100000",
+        "dividCashStock": "10送1派43.74元（含税，扣税后39.266或41.503元）",
+        "dividReserveToStockPs": ""
+      }
+    }
+  },
+  "common_limits": [
+    "刊登日期来自既有公告metadata并与原PDF身份绑定；未核盘前/盘后具体时分。日线当天close含该分母只能支持日级一致，不证明开盘前可知；研究应保持publication_date<decision_date或有明确交易时间约定。",
+    "当前下载原件及公告时间能重建公开信息，不是2015–2025当日供应商到达时间的存档；PDF当前版本/供应商vintage仍有残余不确定性。",
+    "空行保留空的原始状态，通过完整权益加总及明确无优先股作本案推断；不能将此方法改成所有空值自动零填。",
+    "这些是价值分母/股本资格检查，不是价格涨跌表现、因子有效性或ETF/账户可执行证据。"
+  ],
+  "next_source_decision": {
+    "no_detected_future_restatement_at_checked_anchors": true,
+    "blanket_PIT_approval": false,
+    "automatic_600_stock_batch_approval": false,
+    "root_action": "可基于有限一致性决定下一小批来源资格工作并单独冻结预算；若采用供应商PB，先补可区分的茅台季报及2015股本实施来源，明确无法取得供应商历史版本保证的剩余范围。原件自行算年度B/P仍是一条独立可行来源路径，但需同日总股数/原价；不能混入MRQ同列。",
+    "stop_this_review": "限定三例的现有原件与4请求已核完，缺项明确。任何新取数及主检验由root另冻，不因缺项扩到全市场扫描。"
+  },
+  "annual_year_end_measurement_adjudication": {
+    "status": "scientifically_reasonable_conditional_recommendation_before_effects",
+    "plain_answer": "可以把年度末账面净资产与同日市场价值配对，研究当时相对便宜的公司在年报公布后还有没有选择价值。这个问题有金融意义，也较少依赖供应商未说明的历史回填规则；它衡量的是已披露的旧年末估值，不是每个月眼下有多便宜。",
+    "official_reference": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/french-source.txt",
+      "sha256": "65b31172075bb437dc524949a626794bc446399c0b0f3dd5004a6ebfdb80b9d2",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/det_form_btm.html",
+      "line": 22,
+      "relevance": "支持使用历史年末市值作为账面/市值分母的研究惯例。该页六月组建、美国断点及负账面处理不自动移植；本案逐公告更新/16个月有效期是本库另定方法，不宣称完整复制French。"
+    },
+    "single_definition_to_freeze": {
+      "name": "已披露年度末普通股账面净资产/年度末普通股市值",
+      "formula": "(同一年度原合并报表归母权益−其他权益工具账面余额)/(该年度末同口径普通股股数×该年度末未复权价格)，多价股份须按股份类别分别计价后加总。",
+      "numerator_date": "财务年度末；版本须公开日期严格早于决策日，使用当时已公开版本。",
+      "denominator_date": "与财务年度末同一时点的股份及未复权市场价；不用报告发布时/当前股本，不用调整后价格。A股12月31日非交易日按冻结的最后市场交易日规则，记录实际价格日期。若跨这几天有股本事件，先对齐价格单位与股数，不默认为日期近就相同。",
+      "carry_forward": "原报公开后生效，直到更晚合格版本/下年度合格原报更新或原有16个月财政年度末年龄上限；必须明确新报告已公开但无法解析时沿用原P2不退回旧版规则。修订使用同财年末分母，不能把后来更正数字倒灌公布以前。",
+      "annual_report_post_year_end_changes": "年报“现有总股本”或分红基数可能已是公布日前股数；优先合并报表股本并与期末普通股股份表核对，不能直接取利润分配段的当前股本。",
+      "signed_values": "负普通股净资产保留经济含义和原冻结处理；不能未声明删除负值、取倒数或将无法核实其他权益当0。French另组负值不是本案擅自增加过滤的理由。"
+    },
+    "mechanism_and_competition": {
+      "meaning": "同样账面普通股资本对应的历史市场估价高低，可能含预期过悲/估值修复，也可能是持续低回报、困境和账面资产不可兑现。",
+      "increment_over_GP": "GP/assets衡量经营毛利产出，年度B/P把股权账面规模与市场定价联系起来，分母和经济问题不同，值得以同池对手检验；但共同依赖账面资产、资本结构和行业，并不天然独立。",
+      "price_between_year_end_and_disclosure": "年末至披露期间价格可能已显著上涨或下跌，旧B/P可能只描述过去便宜并已被修复，也可能机械联系这段价格变化/动量或困境。披露之后仍有差额才与此问题相关；无差额不否定当前时点价值度量。",
+      "post_disclosure_price_drift": "一旦冻结为年度数，披露后价格变动也不更新其分母。结果若有效应称旧年末估值提供额外信息，不能声称及时估值或动态买入折价。",
+      "no_additional_grid": "沿用已审同池M/GP/H/T/简单稀释的单一比较；不同时跑年度B/P与供应商MRQ择优，不为控制披露后价格变化临时增加网格。已有动量对手只能部分检验竞争解释，不能把剩余差额命名独立价值alpha。"
+    },
+    "minimum_inputs": [
+      "年度原件/公告链、原合并归母权益与其他权益工具的明确口径；负值、空值和修订各有状态。",
+      "年度末普通股股份总数与每股面值/股本金额区分；优先股不混普通股数，库存股处理与市值股份口径明确；年末之后新增、回购、送转不得回填。",
+      "同一证券的未复权年末价、实际交易日期和停牌/缺价状态；不能拿停牌多日前价格无披露当年末可交易价。固定最后市场日无有效交易时应预定缺失或标价代理口径，不用未来首个复牌价。",
+      "多类普通股（A/B/H等）有不同价格或货币时，归母普通股权益覆盖全公司，不能仅A股市值除全公司权益；若无其他市场授权，按预定来源资格标缺失，或显式定义A价×全部普通股的代理且限定结论，不能静默等同完整市值。",
+      "公布前价格本身已存在，但财务数只有公告后可用；报告日期/审计签署日不能代替公开日期；新字段需独立原文资格，旧GP通过不自动证明。"
+    ],
+    "remaining_work_classification": {
+      "necessary_before_effects": "root先决定并冻结这一个年度测量版本与数据合同，再有界核年度末股数/原价可取得性及真实支持范围。",
+      "not_required_for_this_definition": "不必先完成供应商MRQ全历史PIT保证，也不必补所有历史季度净资产；600519股利错年原响应原样保留。",
+      "no_automatic_authorization": "本审阅不授权600股全量扫描/新请求/价值效果运行。"
+    }
+  }
+}

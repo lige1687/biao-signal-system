@@ -1,0 +1,306 @@
+{
+  "schema": "lowfreq-value-source-reuse-inventory/1",
+  "research_id": "lowfreq-value-increment-2026-10-19",
+  "created_scope": "bounded existing-data inventory only; no network, no new market data, no future effects",
+  "inventory_contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/luna-inventory-contract.json",
+    "sha256": "6518241b9892ff9250d7888a43b0447793b2c1eef2cf243ce7f38219f5980486"
+  },
+  "brief": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/brief.json",
+    "sha256": "eddfac6e191385fce47e70045f86c13f64394bc79c6036e39f62b017e8f8b129"
+  },
+  "old_price_source_contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+    "sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289",
+    "schema": "lowfreq-evaluator-contract/1",
+    "fixed_cohort_source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/cohort.json",
+    "fixed_cohort_source_sha256": "2ac169c90bff72aa77dd180f324dfd27753766bfedb48fb9f4fea87843e1aaba",
+    "contract_source_records": 600,
+    "daily_frequency": [
+      "d"
+    ],
+    "requested_window": [
+      "2013-01-01",
+      "2026-01-15"
+    ],
+    "uniform_requested_field_count": 13,
+    "uniform_requested_fields": [
+      "adjustflag",
+      "amount",
+      "close",
+      "code",
+      "date",
+      "high",
+      "isST",
+      "low",
+      "open",
+      "pctChg",
+      "preclose",
+      "tradestatus",
+      "volume"
+    ],
+    "adjustflag_values": [
+      "2"
+    ],
+    "contains_peTTM": false,
+    "contains_pbMRQ": false,
+    "contains_total_shares": false,
+    "contains_unadjusted_price": false,
+    "adjustment_evidence": {
+      "design_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/design-v3.json",
+      "design_sha256": "c1943599b5365f484cbfa1553ccbd6c0358909e1c3a9468a115ec8cedc202539",
+      "design_price_definition": null,
+      "contract_request_adjustflag": "2"
+    },
+    "bounded_saved_response_samples": [
+      {
+        "code": "sh.600010",
+        "response_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition-single-resume/sh.600010-daily-attempt1.json",
+        "response_sha256": "d6d70c850ec59644635952a3add7e6fdc4c7cda54e989128e4ecb8dc70d4a402",
+        "response_fields": [
+          "date",
+          "code",
+          "open",
+          "high",
+          "low",
+          "close",
+          "preclose",
+          "volume",
+          "amount",
+          "adjustflag",
+          "tradestatus",
+          "pctChg",
+          "isST"
+        ],
+        "first_row": {
+          "date": "2013-01-04",
+          "code": "sh.600010",
+          "open": "1.9374797400",
+          "high": "1.9479904800",
+          "low": "1.8919332000",
+          "close": "1.9059475200",
+          "preclose": "1.8919332000",
+          "volume": "76571721",
+          "amount": "418976931.0000",
+          "adjustflag": "2",
+          "tradestatus": "1",
+          "pctChg": "0.740700",
+          "isST": "0"
+        }
+      },
+      {
+        "code": "sh.600012",
+        "response_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition-single-resume/sh.600012-daily-attempt1.json",
+        "response_sha256": "926ab005aafa6221e8fd473f40001b99a985a820ae2ab9298ddd81cedfde6b92",
+        "response_fields": [
+          "date",
+          "code",
+          "open",
+          "high",
+          "low",
+          "close",
+          "preclose",
+          "volume",
+          "amount",
+          "adjustflag",
+          "tradestatus",
+          "pctChg",
+          "isST"
+        ],
+        "first_row": {
+          "date": "2013-01-04",
+          "code": "sh.600012",
+          "open": "2.3222631600",
+          "high": "2.3279830200",
+          "low": "2.2879440000",
+          "close": "2.3051035800",
+          "preclose": "2.3108234400",
+          "volume": "2031161",
+          "amount": "8192321.0000",
+          "adjustflag": "2",
+          "tradestatus": "1",
+          "pctChg": "-0.247500",
+          "isST": "0"
+        }
+      },
+      {
+        "code": "sh.600050",
+        "response_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition-single-resume/sh.600050-daily-attempt1.json",
+        "response_sha256": "8418bd4d997539d6b69901528c263c6f421422bd062fde16f016234cd3195513",
+        "response_fields": [
+          "date",
+          "code",
+          "open",
+          "high",
+          "low",
+          "close",
+          "preclose",
+          "volume",
+          "amount",
+          "adjustflag",
+          "tradestatus",
+          "pctChg",
+          "isST"
+        ],
+        "first_row": {
+          "date": "2013-01-04",
+          "code": "sh.600050",
+          "open": "2.7838109500",
+          "high": "2.7916971000",
+          "low": "2.7364940500",
+          "close": "2.7522663500",
+          "preclose": "2.7601525000",
+          "volume": "128981591",
+          "amount": "452150886.0000",
+          "adjustflag": "2",
+          "tradestatus": "1",
+          "pctChg": "-0.285700",
+          "isST": "0"
+        }
+      }
+    ]
+  },
+  "existing_financial_source_panel": {
+    "contract_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-panel-final-01-contract.json",
+    "contract_sha256": "04e09aae8559c59d7659ea43ca9baeabfd83cbc10688a6800850d22d6ab37502",
+    "panel_manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-final-01/manifest.json",
+    "panel_manifest_sha256": "6cffd3eff268e15d7af42e9589a6af7e041b709741abee53645d13f9274a50ae",
+    "panel_csv_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-final-01/panel.csv",
+    "panel_csv_sha256": "65edc11bc5271a4d35194ea73d26540fdae93eb94aaf8e036378a65411af5e04",
+    "panel_fields": [
+      "month",
+      "decision_date",
+      "code",
+      "industry",
+      "gp_status",
+      "gpa",
+      "cfo_status",
+      "cfoa",
+      "report_year",
+      "announcement_id",
+      "publication_date",
+      "reason"
+    ],
+    "audit_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-final-01/audit.json",
+    "audit_sha256": "5765e8f64f0e201a5713e8c988bd336c0cbf29715f9014c079fa207fed5105a5",
+    "batch08_manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-08/manifest.json",
+    "batch08_manifest_sha256": "56a486d82b994659baf2e3a9fff9b715877bdddd7dde96c529b6716784594014",
+    "batch08_document_count": 13761,
+    "batch08_new_documents": 1452,
+    "batch08_reused_documents": 12309,
+    "batch08_errors": 0,
+    "parser_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py",
+    "parser_sha256": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+    "parsed_field_schema": [
+      "assets",
+      "revenue",
+      "cost",
+      "cfo"
+    ],
+    "derived_financial_fields": [
+      "gross_profit_over_assets",
+      "cash_flow_over_assets"
+    ],
+    "parsed_equity": false,
+    "parsed_net_profit": false,
+    "parsed_share_capital_or_total_shares": false,
+    "parsed_eps": false,
+    "sampled_prepared_records": [
+      {
+        "cohort_code": "sz.300048",
+        "announcement_id": "1222962581",
+        "title": "2024年年度报告",
+        "publication_date": "2025-03-26",
+        "report_year": 2024,
+        "document_identity_status": "match",
+        "document_form": "suspected_full_text",
+        "prepared_record_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/300048-1222962581.json",
+        "prepared_record_sha256": "38592c76956ffd8778eee8da97196486c68721bbbcf28dffc3fd6871c5dc0b5d",
+        "financial_parser_status": "qualified",
+        "parsed_fields": {
+          "assets": "qualified",
+          "revenue": "qualified",
+          "cost": "qualified",
+          "cfo": "qualified"
+        },
+        "parsed_field_names": [
+          "assets",
+          "revenue",
+          "cost",
+          "cfo"
+        ],
+        "requested_fields_absent": {
+          "equity": true,
+          "net_profit": true,
+          "share_capital": true,
+          "eps": true
+        },
+        "original_pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00010-pdf.body",
+        "original_pdf_sha256": "76e39fe16087bb1ebc3b55740db128793c128b29e0b89b8ceced4d4cc5f99bac"
+      },
+      {
+        "cohort_code": "sz.300048",
+        "announcement_id": "1219412091",
+        "title": "2023年年度报告",
+        "publication_date": "2024-03-27",
+        "report_year": 2023,
+        "document_identity_status": "match",
+        "document_form": "suspected_full_text",
+        "prepared_record_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/300048-1219412091.json",
+        "prepared_record_sha256": "211d99c345f9afe05d044c65a8a38203de1bf755a3e4feff30f6aa767d6508c0",
+        "financial_parser_status": "qualified",
+        "parsed_fields": {
+          "assets": "qualified",
+          "revenue": "qualified",
+          "cost": "qualified",
+          "cfo": "qualified"
+        },
+        "parsed_field_names": [
+          "assets",
+          "revenue",
+          "cost",
+          "cfo"
+        ],
+        "requested_fields_absent": {
+          "equity": true,
+          "net_profit": true,
+          "share_capital": true,
+          "eps": true
+        },
+        "original_pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00014-pdf.body",
+        "original_pdf_sha256": "5ecef7c6e07c86bde5dab25880b709b01c71f6ae1d3056b84ceb24522f7bd4de"
+      }
+    ]
+  },
+  "reusable_now": [
+    "600-code daily adjusted price/return history for existing market context and same fixed cohort; its request schema lacks valuation ratios and share counts.",
+    "A 2015-01 to 2025-12 monthly source-qualification panel with GP/assets and CFO/assets fields, publication date, report year, announcement ID, and per-field status/reason.",
+    "Saved prepared annual-report records and extracted text with publication-date/source identity metadata; only the parser fields above are presently structured in the inspected records."
+  ],
+  "missing_for_value_candidate": [
+    "Historical point-in-time unadjusted price or a vendor-supplied point-in-time valuation ratio; current daily price requests use adjustflag 2 and the saved design calls the price 前复权.",
+    "Time-aligned total shares/share capital (and corporate-action adjustment history if computing market capitalization) for each stock and date.",
+    "As-reported net profit and parent-attributable equity/book value in a defined consolidated basis, currency, unit, report period, announcement/publication date, and revision chain.",
+    "A frozen mapping from those verified values to the intended valuation feature, with price/financial dates aligned before any effect test."
+  ],
+  "source_time_and_adjustment_boundary": {
+    "sample_financial_publication_dates": [
+      "2025-03-26",
+      "2024-03-27"
+    ],
+    "old_price_basis": "adjusted forward-price series according to the saved design; not non-adjusted close",
+    "financial_statement_time": "prepared records retain report_year, announcement_id and publication_date; existing monthly panel reports those dates for qualified GP/CFO source; no claim made for value fields not extracted"
+  },
+  "limitations": [
+    "Only three price response first rows and two prepared financial-record schemas were checked; the two bound original PDF byte files were SHA-verified but their PDF contents/pages were not read or parsed in this inventory.",
+    "Potential labels in original reports are not qualified data until extracted, tied to issuer/statement/currency/unit/period/revision, and shown available by each decision date.",
+    "Assets is not equity; gross profit derived from revenue minus cost is not net profit."
+  ],
+  "corrections": [
+    {
+      "previous_inventory_sha256": "fee8147e64f23e3bdc877eb2fd49c8d6926d3b69f71f97bb0ac1b0c7e10a694a",
+      "reason": "The prepared record source_identity.path binds original PDF bytes despite the .pdf.body suffix; renamed the prior extracted_text_path/extracted_text_sha256 labels to original_pdf_path/original_pdf_sha256."
+    }
+  ]
+}

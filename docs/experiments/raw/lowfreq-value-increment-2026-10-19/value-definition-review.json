@@ -1,0 +1,174 @@
+{
+  "schema": "value-definition-scientific-review/1",
+  "created_utc": "2026-10-19T07:04:57.747345+00:00",
+  "reviewer": "astra_increment_boundary",
+  "mode": "definition and source qualification review only",
+  "status": "conditional_single_B_over_P_recommendation_not_yet_input_qualified",
+  "network_requests": 0,
+  "effect_runs": 0,
+  "new_future_outcome_read": false,
+  "old_P2_changed": false,
+  "answer_plain": "优先把账面净资产相对股价的高低作为本轮唯一价值测量：同样的普通股股东权益，市场价格更低，是否在已有动量和毛利信息之外带来帮助。现有原件可以继续核净资产，但已有总资产、毛利和现金流不能代替它；历史价格还必须与当时股本、股权类别及复权口径对应。供应商历史市净率可用于有边界的来源核验，不能只凭字段名称认定它当时就可得。先完成有限核验再选定一次口径，资料不完美不要求停掉所有可做工作。",
+  "inputs_reviewed": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/astra-definition-contract.json",
+      "sha256": "e4d19313a23eb0a482085ffec2cceacb16883b8eb06ed945f95efb626156d24e"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/brief.json",
+      "sha256": "bebfd733efc5e38608aa9d534059e36f998283bdbd7016d5b1518e392e76581f"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-design.v1.json",
+      "sha256": "648476bf2cb79056d4982884e96b387ffc76a494598475644b12be0c69e526bc"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-panel-final-01-contract.json",
+      "sha256": "04e09aae8559c59d7659ea43ca9baeabfd83cbc10688a6800850d22d6ab37502"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+      "sha256": "3e2318e8526241a7a81d41144aeae8a4ae3453bc0c6dbe5e7b2466577bffb1e7"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/current-standards.json",
+      "sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/research/factor-discovery-playbook.md",
+      "sha256": "aa29ad35b346725984db81c83f1b2176f168564a134018a6255edc449ee65925"
+    }
+  ],
+  "reuse_without_revalidation": {
+    "already_known_P2": "Same600 fixed2014cohort/132dates, GP/assets industry-controlled fixed blend has limited retrospective down-month evidence; no robust extra mean return. Already-viewed price history remains viewed. No profitability effect file was re-opened for this task.",
+    "existing_exact_references": [
+      "reference.characteristic.bp@1.0.0",
+      "reference.characteristic.ep@1.0.0"
+    ],
+    "reference_status": "Both registry entries are not implemented, blocked_point_in_time_financials, historical_availability unknown, not_tested. They are definition references, not qualified executable security features.",
+    "CH3_context": "Local registry records CH3 size/earnings-price construction. This supports E/P relevance but not local security-level implementation, current profitability results, or permission to copy the paper smallest30% exclusion.",
+    "inventory_status": "The delegated current-price-schema and3-stock unadjusted coverage facts are controller-provided; Luna is independently checking actual saved schemas. This reviewer does not pretend to have verified all raw files."
+  },
+  "single_candidate_choice": {
+    "preferred": "B/P, book equity attributable to ordinary shareholders divided by contemporaneous market value of the same ordinary equity",
+    "proposed_local_definition_id": "research.cross_section.book_equity_market_equity@1.0.0; proposal only, not represented as registered/implemented",
+    "why_this_first": "It asks about price paid for an accounting stock of shareholder capital, complementing already measured annual gross earning/cash flows. Annual balance-sheet sources can be reused; it avoids declaring gross profit to be net earnings. This is a question-specific data/meaning decision, not a claim that B/P outperforms E/P in China.",
+    "E_over_P_assessment": "E/P is a financially meaningful alternative: ordinary shareholders reported earnings per unit of market equity. It has a direct cash-generating-capacity interpretation but shares more operating-cycle/profit information with GP and CFO; new attributed net profit and earnings-period qualification are required. TTM additionally needs correctly dated current-quarter and prior-year cumulative components or four standalone quarters. Existing gross profit is not net profit.",
+    "one_candidate_not_two_effects": "Do not test both and pick a winner. If bounded official source checks establish a clearly qualified E/P route while B/P remains semantically unresolved, root may record a before-effect replacement with precise reason and freeze exactly one E/P definition. It is not an automatic data-convenience fallback and must not reset the attempt history.",
+    "financial_hypothesis": "A low market price relative to reported shareholder capital may reflect pessimism that later eases or compensation for bearing risk; this could change monthly selection even after past returns and earning capacity are known. Monthly reporting is a practical evaluation horizon, not a claim that valuation corrects within one month.",
+    "competing_explanations": [
+      "Low price anticipates genuine deterioration, impairment, leverage/refinancing stress or unproductive assets.",
+      "Historical-cost assets, intangible-heavy businesses and industry capital intensity make accounting book values incompletely comparable.",
+      "Price declines mechanically raise B/P and often lower momentum; a blend may merely reduce momentum or alter volatility/liquidity/size exposures.",
+      "High annual profit/E/P could be a cyclical peak or one-off item; CFO can be working-capital timing. Existing GP/CFO evidence does not make these explanations disappear."
+    ],
+    "failure_conditions": [
+      "No improvement over existing M+GP score and its simple dilution on the exact same qualified pool.",
+      "Apparent benefit depends on a few years/names or on source recoverability rather than a broadly usable decision rule.",
+      "Lower losses require giving up more opportunity or incur source/maintenance costs that remain unjustified; report the trade-off rather than inventing a utility score."
+    ],
+    "duplicate_classification": "Not algebraically identical to GP/assets or CFO/assets, and not proven independent. B/P combines balance-sheet equity with market pricing; GP/assets and CFO/assets share accounting scale and business-cycle exposures. E/P also combines earnings and market pricing, so it is neither wholly new nor a mere renamed GP/assets. Do not treat rank differences or low correlation as added investment value."
+  },
+  "preferred_explicit_measurement": {
+    "basis": "Annual original as-publicly-reported ordinary-equity book value, retaining the existing annual16-month freshness convention; select annual rather than MRQ before effects unless root explicitly adopts a separately documented MRQ measurement at source qualification.",
+    "formula": "V_i,t = BE_ordinary_i,latest_qualified_annual_known_before_t / ME_ordinary_i,t; denominator strictly positive, same currency and same ordinary-equity ownership perimeter.",
+    "book_field": "Consolidated equity attributable to the parent shareholders, less separately identified preferred/perpetual or other nonordinary equity claims where applicable. Do not use total consolidated equity including minority interests or total assets. If no such claims exist, retain evidence of absence/zero rather than guessing.",
+    "market_value": "For a qualified single ordinary share class: actual unadjusted decision-date close times contemporaneous total ordinary shares outstanding of that same issuer/class. Not free-float shares, trading volume, end-of-year shares used indefinitely or earnings weighted-average diluted shares.",
+    "multiclass": "For A/H or A/B/multiple priced ordinary classes, economic issuer market equity requires sum of class-specific price x class shares with contemporaneous currency conversion. A-share price times all ordinary shares is a distinct proxy, not silently the same issuer market value. Without qualified class evidence, preserve a specific unknown reason for that stock-month; do not invent classes or quietly fetch extra markets.",
+    "price_basis": "Use the actual historical unadjusted per-share price, or a correctly reversible adjustment anchored with a qualified same-date factor and share basis. Future-dependent adjusted close times historical unadjusted shares is not a market capitalization. Original price-return outputs remain untouched and retain their prior interpretation.",
+    "signs": "Retain signed BE where reliably known: positive values are book capital,zero is0/positive market cap,negative values are accounting deficits and must not be advertised as cheap. Direction higher B/P fixed; do not screen negative equity just to improve results. Unknown/absent/ambiguous BE never becomes0. If the vendor blanks negative values, those records remain unknown unless reconstructed from qualified source.",
+    "year_and_version": "Use newest qualified report year publicly available before the original decision date, latest qualified full version of that year then known; no backward fill from later restated comparative numbers, no older report fallback when a known newer expected version fails. Record exact original announcement/version and period end.",
+    "date_rule": "Financial publication_date strictly before decision_date as existing study; no invented intraday time. Shares/events need their own public-known and effective dates: a future-effective capital change is not applied early; a retrospectively reported change cannot be backfilled as if then known.",
+    "capital_change_semantics": "Splits/bonus issues change share units; rights/new issuance/repurchase can also change economic capital. Use contemporaneous qualified share counts and the latest known annual BE as explicitly stale public book information. Do not mechanically add future issuance cash to old BE or invent book-value updates. Report old-book/new-market-cap mismatch after capital events as a known measurement limitation.",
+    "MRQ_not_silent_substitute": "Vendor pbMRQ inverse usually denotes a recent-report book-per-share price measure, but exact meaning must come from source documentation. If it uses quarterly rather than annual book equity, it is not interchangeable with this annual definition. Root can choose one explicitly named MRQ B/P version before effects with period,release,revision and staleness rules; never mix annual and MRQ values row-by-row as if equivalent.",
+    "PE_not_silent_substitute": "If E/P is selected, freeze annual or TTM, net-profit attribution to ordinary equity, nonrecurring-item treatment, share denominator and signed loss handling. Construct TTM without double-counting year-to-date statements. peTTM inverse is only equivalent after numerator/denominator and time semantics are verified; zero PE is undefined, not zero E/P."
+  },
+  "minimum_data_and_exact_reuse": {
+    "existing_paths": {
+      "cohort": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+      "annual_source_binding": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-panel-final-01-contract.json",
+      "GP_source_policy": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/asof-version-rules.v2.json",
+      "GP_amendment": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-design-amendment-02.json",
+      "existing_price_binding": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json"
+    },
+    "existing_prices_by_controller_inventory": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,pctChg,isST; no PB/PE fields. Only3-stock unadjusted spot-checks known, not a600-stock valuation price panel.",
+    "existing_qualified_fields": "Consolidated revenue,cost,end-year total assets,CFO. They qualify existing GP/CFO only; no assumed qualified parent-common-equity,net-profit or historical-share series.",
+    "essential_new_fields": [
+      "Original same-period parent ordinary shareholder book equity with table/period/unit/currency/pages and public date; or a fully specified vendor B/P numerator matching the adopted definition.",
+      "Actual decision-date unadjusted price and total shares with ownership-class scope,share units,source public/effective dates and capital-event handling; or a qualified direct market-cap/BP field with those semantics documented.",
+      "Field-specific announcement/correction applicability,latest-version failures and missing reasons; do not reuse GP-qualified flags as automatic permission for new equity/profit/share fields."
+    ],
+    "do_not_need_before_meaningful_source_work": [
+      "No requirement to reread every original PDF or clear every historical generic notice. Reuse exact already-reviewed identities and the explicit current as-of policy where it applies.",
+      "No new all-market census,ETF data,valuation factor family or mandatory stock-count threshold.",
+      "No requirement to compute future returns to select source audit cases."
+    ],
+    "field_policy_caution": "The old v2 rule permits certain new-period measurements while retaining prior-notice uncertainty. New BE/share/profit dependencies must be explicitly attached and audited; a known share/equity-affecting notice cannot be dismissed because GP/CFO were usable. Do not retroactively modify P2 contracts or amounts."
+  },
+  "bounded_vendor_history_qualification": {
+    "budget_owner": "Root owns at most6 initial official-method/interface requests including failures. This reviewer uses0; any large600-stock new-data batch needs its own frozen request list and read/write/storage binding. Proposed checks are priorities, not authorization to exceed6calls.",
+    "first_official_questions": [
+      "Exact pbMRQ/peTTM formulas, consolidated/parent/ordinary ownership, share units, price adjustment basis and negative/zero/missing semantics.",
+      "Which financial period is used for each dated row, when it becomes eligible after publication, how revisions and later replacements affect earlier historical rows, and whether history is stored-as-of or regenerated from latest financials.",
+      "Historical share-count/effective-date handling and multiple-share-class valuation; confirm interface adjusted/unadjusted enumerations from current official documentation rather than assuming a numeric code."
+    ],
+    "finite_empirical_checks": "Choose a small set of discriminating existing-source cases before valuation effects: ordinary annual publication with known old/new amounts; a known full revision whose issue date is later than an earlier comparison date; a split/bonus/share-capital event; negative/zero equity or a clear multiple-class boundary if available. The same case may cover several checks; do not fabricate a case or demand every type if absent. Save missing types as untested. Reuse already obtained PDFs rather than adding source calls for their contents.",
+    "publication_test": "For adjacent saved trading dates before and after a known report release, compare vendor implied book-per-share/earnings basis to independently read original old/new public numbers. It must not incorporate a future report before release; any conservative delay is documented and applied consistently. Dividing historical price by PB is a diagnostic implied amount, not independent evidence on its own.",
+    "revision_test": "Compare a historical point before a known correction against original and corrected amounts. A historical row matching only the later corrected figure is a specific look-ahead contradiction. Re-query stability today alone does not establish what was published historically; source vintage/revision policy and original amounts matter.",
+    "share_event_test": "Independently reconcile at least one relevant price/share-unit event using saved original source. Split/bonus unit changes must not mechanically create value through mixing adjusted price and old shares. Rights/new issuance are not assumed economically neutral; separate cash/capital effects from units.",
+    "method_equality_test": "For clean single-class records compute the adopted formula independently and compare to1/pbMRQ or1/peTTM only when definitions match. Use a predeclared tolerance derived from displayed rounding/units, not a fit chosen to make observations agree. Never infer a new ratio direction,window or cutoff from future returns.",
+    "support_test": "On qualified price+industry+GP+V records count actual dates/months/sectors,entry/exit-tag missingness,nonpositive/missing value rates,within-industry score variation and method-list differences before effects. Retain all600x132 positions with explicit reason. No return-selected source subset and no reranking by observed future outcomes.",
+    "acceptance_tiers": [
+      {
+        "case": "Original numbers,publication versions,share/price basis and no-leakage ordering can be traced under a fixed method; representative checks agree.",
+        "action": "Freeze a finite qualified subset and label retrospective reconstruction from preserved originals. Full proof of every historical vendor database arrival is not required; remaining provenance limits are disclosed."
+      },
+      {
+        "case": "Vendor method is explicitly historical/as-released or gives usable period/publication/revision evidence; representative source cases agree, no counterexample found, but original arrival/vintage cannot be fully proved.",
+        "action": "Root may adopt a precisely named bounded historical-source proxy if it still enforces no-future-report/revision constraints. State vendor-time/revision uncertainty; do not call it proven real-time PIT or allow known contradictions. Selection on an unknown future-updated numerator is not repaired by a disclaimer."
+      },
+      {
+        "case": "Dated PB/PE columns exist but numerator date/revision policy is unresolved, or a known future-report/restatement mismatch occurs.",
+        "action": "Do not qualify those rows for the main as-known value effect. Preserve source diagnostic; continue original-PDF BE extraction and limited historical-price/share qualification or the explicitly pre-effect single-candidate replacement if genuinely supportable. No fake PIT from API success."
+      }
+    ],
+    "how_to_keep_progress_without_perfect_data": "Complete field definitions,source fixtures,original equity extraction,share-price provenance and supported-row inventory in parallel with the bounded official checks. If useful dated rows qualify, evaluate that exact supported historical question. If indispensable market-value/time semantics remain unavailable after the allowed probes, name the missing field and a concrete smallest new-source batch; do not claim value ineffectiveness or terminate already-authorized independent qualification work."
+  },
+  "smallest_fair_increment_design": {
+    "status": "method proposal for root to freeze after source support,not an executed or final contract",
+    "pool": "Same600 and same132 original decision/entry/exit dates, existing price eligibility, historical nonfinancial industry and GP qualification, plus qualified V. Do not require CFO merely for this value question. Recompute all current comparison targets on this identical V-qualified pool; do not subtract old P2 aggregates on a different pool or rerun the sealed old evaluator.",
+    "industry": "Same n_industry/N weights,average percentile ranks with code tie-break,ceil20% selection,n<5 all-held as existing study. Show actual selected fraction and score opportunity; no industry×9 multiplication.",
+    "methods": {
+      "P": "all qualified pool equal weight",
+      "M": "existing industry momentum top20%",
+      "G": "existing industry GP/assets top20%",
+      "H": "existing equal MOM+GP rank score,top20%; Hscore=(rM+rG)/2",
+      "V": "value rank alone,top20%",
+      "T": "one proposed added-value representation,score=(rM+rG+rV)/3=(2/3)*Hscore+(1/3)*rV,top20%",
+      "D": "(2/3)*H target weights+(1/3)*P target weights;overlaps add"
+    },
+    "why_these_weights": "One equal-contribution three-information score keeps the ratio of existing M:GP unchanged and explicitly allocates one-third to V. The fixed target-weight dilution comparator uses the same reduction in the old H contribution. These are transparent implementation choices,not optimized or a causal matching proof; root can settle one choice before effects and cannot run a grid.",
+    "primary_contrasts": [
+      "T-H: value beyond both already-available momentum and GP representation",
+      "T-D: improvement beyond simpler dilution of the existing method"
+    ],
+    "necessary_context": [
+      "V-P: value on its own versus simple pool",
+      "T-M and T-G: actual comparison to each stated existing information source",
+      "P,M,G,H,V,T,D absolute outcome/risk/target-list summaries; retain all planned contrasts, not only favorable ones"
+    ],
+    "outputs": "Reuse paired monthly quotation means,original downside-month quantity and its uncertainty,tail/worst-month/path descriptions,original periods/every year/leave-one-year,common shared6/12month uncertainty,source coverage and maintenance metrics. Predeclare return/risk/other uses now, so risk is not selected only after a negative return result. No future-outcome availability filter; original unknown-result assumptions remain explicit.",
+    "value_trap_interpretation": "V-P and T-H/T-D determine whether apparent cheapness is useful after existing earning-capacity information. Even a better blend does not establish it identifies actual deteriorating firms or predicts future fundamental recovery. Do not introduce an after-the-fact cheap-and-healthy threshold or extra distress screen.",
+    "stronger_information_limit": "This tests beyond M+GP and its fixed representation, not all volatility/liquidity/valuation/size information. The prior93% tiny-cell degeneration is a reason to avoid that mechanical joint stratification,not permission to claim those alternatives excluded.",
+    "outcome_limits": "Return labels stay the existing retrospective adjusted-quotation proxy; this study does not become full corporate-action wealth or executable-account research merely by qualifying valuation denominators."
+  },
+  "before_effect_minimum_checks": [
+    "Source and local definition selected once,with annual/MRQ or annual/TTM explicitly fixed and exactnew/source/oldinput fingerprints.",
+    "Signed numerator,current positive denominator,ordinary-equity/class scope,currency/scale and corporate-action unit fixtures independently checked.",
+    "Publication/revision no-future boundary,known-latest-failed no-fallback and new-field notice applicability enforced; no latest historical-value backfill.",
+    "One actual source case rederived by another reviewer for book/profit/share-price identity plus the relevant timing/event counterexample; representativeness limits retained,no all-PDF re-audit.",
+    "All comparison methods share original dates and the same V+GP qualified pool with sector shares equal; enough real nonidentical selection is described rather than enforcing an invented minimumN.",
+    "Root records currentsource budget,finite new acquisition scope if needed,core1/followups<=3 with no automatic retries/reset; new large outputs use the registered external route."
+  ],
+  "conclusion_scope": "Proceed with bounded source qualification for one preferred annual B/P candidate. Current inventory does not yet supply a qualified value series. This is a resolvable input task,not a failed value effect and not automatic permission for a600-stock new download. No originalLEI technical filter,ETF mapping,production,trading or notification action is authorized."
+}

@@ -1,0 +1,111 @@
+{
+  "schema": "lowfreq-workflow-actual-review/1",
+  "review_date": "2026-10-19",
+  "review_mode": "read_only_code_contract_and_synthetic_checks",
+  "scope": "P2 selection-gradient new entry only; no real statistic or network request executed by this review",
+  "inputs_sha256": {
+    "control_module": "8be2f35b437eccc7de57f7766536acf245761af7de109f6b64d80189c550f2e6",
+    "control_tests": "e01abf3eedecbe1811343ba6aaac52f0c6d03af1b3e01623d4d24129c4326eea",
+    "execution_contract": "d4813ec25f8e2e7175f0b29f9f330d1c4c10be970eae4b598f0812ba783c8630",
+    "control_contract": "432b39c30c6080695509e86efc85e288de37c1014045abc9efbbfc1a584c4b94",
+    "controller_review": "508130f1884eff02270e9ddfa8a4dc384758f327ef4dc602aff1d52a1649076b",
+    "runner": "e77c7ddbd56d5884cd309d943ab3583cd086f541b07a223fdcf2ab7e16bfa8ff",
+    "existing_execution_receipt": "cd7034f5037c2df472a0814c57f8d41530c6b6bf32cc7c9ee39ca32187d286c1"
+  },
+  "checks": {
+    "control_unit_tests": "14 passed; synthetic temp files only",
+    "runner_unit_tests": "17 passed; synthetic rows only",
+    "same_day_publication_probe": "qualified publication_date equal to decision_date raised ControlError: qualified source was not public before decision",
+    "actual_control_contract_read_only": {
+      "status": "eligible_for_separate_execution",
+      "source_qualified_rows": 93376,
+      "source_unknown_rows": 0,
+      "identity_sha256": "046b2d171cda91a29d741c91990050dec24ca2a34c1c1fe6f3b5ebf203e1aa91"
+    }
+  },
+  "programmatically_rejected_in_this_entry": [
+    {
+      "condition": "scientific design not accepted or label access not explicitly authorized",
+      "evidence": "lowfreq_research_control.py check() stage diagnostic gates scientific_design_accepted and label_access_authorized; runner validates exact controller review and invokes bound check() before reading stock_weights outcomes"
+    },
+    {
+      "condition": "bound design, runner, source qualification, selector, prior manifest, brief, review, or execution input SHA changed",
+      "evidence": "control _bound() and runner _load_bound() compare SHA256; runner also rechecks stock_weights just before processing"
+    },
+    {
+      "condition": "enumerated attempt remains started or lacks terminal receipt/manifest",
+      "evidence": "control _attempts() rejects started; requires receipt for each terminal record and manifest for completed"
+    },
+    {
+      "condition": "declared cumulative budget spent or understates enumerated attempts",
+      "evidence": "control check() requires integer used<=max, used>=same-stage enumerated attempts, and used<max for new preflight"
+    },
+    {
+      "condition": "same scientific identity already completed in reviewed enumerated history, even if input path/output label changes",
+      "evidence": "control _identity() hashes question/definition/formula/input content SHAs/uses, then check() returns reuse; runner execution requires eligible_for_separate_execution"
+    },
+    {
+      "condition": "source-only selector includes future_return, weight, or other non-whitelisted column; unknown source filled score",
+      "evidence": "control _qualified_rows() checks exact CSV column whitelist, scope+code+decision_date status, nonfinite scores, unknown score blank"
+    },
+    {
+      "condition": "qualified source publication is same day or later than decision",
+      "evidence": "control _qualified_rows() applies publication_date < decision_date; separate same-day synthetic probe rejected"
+    },
+    {
+      "condition": "unreviewed result equated with valid acceptance",
+      "evidence": "acceptance requires reviewed result_accepted, matching manifest SHA, allowed evidence/status and output hashes; current review says result_accepted=false"
+    }
+  ],
+  "material_limit_found": {
+    "severity": "P1_workflow_state_gap",
+    "finding": "After the existing gradient-01 execution, the frozen control history still lists only the prior core and risk followup attempts. Read-only check of that exact control contract continues to return eligible_for_separate_execution. The fixed gradient-01 output path is create-only and blocks overwriting it, but the guard alone cannot detect a new output route for the already completed scientific identity until this run is added to reviewed history and its spent budget recorded.",
+    "actual_evidence": "gradient-execution-receipt.json records exit_code 0 and a result manifest; gradient-control-contract.json history.attempts has only history-core-01 and history-risk-followup-01; actual check() returned eligible_for_separate_execution",
+    "needed_control_step": "Before any later P2 family execution, root must bind this gradient attempt, terminal receipt and manifest into reviewed history, update followup_used, and read back the revised control result. No automatic atomic reservation exists."
+  },
+  "manual_or_outside_boundary": [
+    "This read-only guard runs only when a caller invokes the new entry; it is not a scheduler, file-system sandbox, global history discovery, or atomic budget counter.",
+    "History completeness and scientific identity wording are controller declarations. It cannot identify a semantically duplicate question with changed wording or omitted attempt.",
+    "Source qualification status, financial score meaning and original P2 evidence were projected and accepted elsewhere; this guard checks declared publication inequality and frozen bytes, not independent financial truth. The 93376 projected records are all qualified and do not represent all unknown source rows.",
+    "The selector column whitelist keeps result columns out of that projection. The already seen diagnostic runner is separately authorized to read the bound stock_weights future_return column; the guard cannot erase agent memory of earlier outcomes.",
+    "A process exit code or computed manifest does not by itself mean accepted scientific evidence. The current controller review has result_accepted=false."
+  ],
+  "review_conclusion": "The new runner does call the frozen control before outcome computation and enforces its eligible status. Listed negative conditions are mechanically blocked for the enumerated contract and unit cases. A post-run attempt-history update is required before claiming duplicate-run prevention for subsequent routes.",
+  "postrun_recovery_readback": {
+    "mode": "independent read-only check of two new bound contracts; no gradient rerun",
+    "inputs_sha256": {
+      "resume_contract": "058674c6f27aa8615e5ba8cd39e48d48cde9176dc29d32ba3a89ac5309fce939",
+      "pending_acceptance_contract": "62f3167d7d40cd1643818dfe0f1fce79880b41a22b8a4dcee33a86ef2352611a",
+      "lifecycle_before_review": "56f6a37d22ed63a44ab838cc492bd6d077f602ceca94f5f3dac4acf018a26ff7",
+      "terminal_attempt": "1bfe975b2cac9da116a9b6c3521cae9ab99c58fba7cd4638ed60f928daa1bd42",
+      "terminal_receipt": "74e755413af6886eaa61d904e7642e80906de4d75e074a6c45948b11c8c61c98",
+      "brief_cumulative_02": "dd4ad6f4f2eeb7b9a18cbd8387d3289aaa214f1bb7fa4460118837d2ee73bf93",
+      "controlled_result": "ef31341a1c485434852e6675fbe094cc46ca9233d685ab9c91ad81122ac21557"
+    },
+    "actual_check_results": {
+      "gradient-resume-contract.json": {
+        "status": "reuse",
+        "identity_sha256": "046b2d171cda91a29d741c91990050dec24ca2a34c1c1fe6f3b5ebf203e1aa91",
+        "qualified_rows": 93376,
+        "unknown_rows": 0
+      },
+      "gradient-pending-acceptance-contract.json": {
+        "status": "pending_review",
+        "evidence_status": "inconclusive",
+        "identity_sha256": "046b2d171cda91a29d741c91990050dec24ca2a34c1c1fe6f3b5ebf203e1aa91",
+        "qualified_rows": 93376,
+        "unknown_rows": 0
+      }
+    },
+    "budget_readback": {
+      "core_used": 1,
+      "core_max": 1,
+      "followup_used": 2,
+      "followup_max": 3
+    },
+    "attempt_binding": "gradient-terminal-attempt.json binds terminal receipt, controlled result manifest and original execution manifest; terminal receipt binds original execution receipt",
+    "explicit_resume_entry": "gradient-resume-contract.json for future preflight/reuse; gradient-pending-acceptance-contract.json for the pre-review result state",
+    "preserved_limit": "The old frozen gradient-control-contract.json still cannot discover this later attempt and still returns eligible_for_separate_execution. This recovery is explicit, enumerated and non-atomic, not global duplicate-run protection.",
+    "scientific_result_state": "The computed diagnostic remains pending scientific review under the checked acceptance contract; no claim of scientific acceptance."
+  }
+}

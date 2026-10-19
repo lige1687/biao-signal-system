@@ -1,0 +1,43 @@
+{
+  "schema": "annual-value-anchor-development/1",
+  "created_utc": "2026-10-19T07:29:26.015918+00:00",
+  "scope": "only eight frozen annual targets; five available PDFs; no market prices or effects",
+  "plan": {
+    "path": "docs/experiments/raw/lowfreq-value-increment-2026-10-19/annual-source-qualification-plan.json",
+    "sha256": "a06eb1f33ebe953432eabf52a59c0b6f5e89a25c03c5dd3b4b34bc6fb23dbdd9"
+  },
+  "files": {
+    "extract_annual_value_anchors.py": {
+      "sha256": "6ffc350954c77cf76499696c5de7d72fbff12f6fa62e971ef45c12d1fed727e7",
+      "bytes": 14405
+    },
+    "test_annual_value_anchors.py": {
+      "sha256": "a5b5250258d3040842fb08a9d9dbb8747fda49cbbe96443f7d6acc3306a76eb9",
+      "bytes": 3988
+    }
+  },
+  "synthetic_tests": {
+    "command": "PYTHONPATH=<worktree>/src python3 -B -m unittest -q test_annual_value_anchors.py",
+    "passed": 7,
+    "failed": 0
+  },
+  "bounded_original_probe": {
+    "codes": [
+      "600518",
+      "600012",
+      "600519"
+    ],
+    "scope": "in-memory field extraction on only these original PDFs; no output files or market effects",
+    "observed": [
+      "600518 2017 parent equity and preferred balance exact fields; explicit shares only candidate; treasury outstanding noted",
+      "600012 2018 parent equity exact; A/H multi-price class detected; blank other equity unknown",
+      "600519 2014 parent equity exact; blank other equity unknown; explicit shares only candidate"
+    ]
+  },
+  "real_batch_run": "not_run",
+  "output_directory_created": false,
+  "limits": [
+    "All annual B/P statuses stay source-only; same-year-end prices not read.",
+    "Blank other equity, ordinary share identity, multi-price classes and treasury convention remain explicit review questions."
+  ]
+}

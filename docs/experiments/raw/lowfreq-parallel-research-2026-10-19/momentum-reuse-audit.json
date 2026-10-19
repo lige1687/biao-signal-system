@@ -1,0 +1,183 @@
+{
+  "schema": "momentum-reuse-audit/1",
+  "scope": {
+    "purpose": "只复用已保存定义、报告与结果；无网络、无行情/收益重算，不接管ETF或小时方向。",
+    "checked_at": "2026-10-19",
+    "coordination_sha": "f04f560b49f21f107f18d2e46aae08b19194a9d8"
+  },
+  "source_fingerprints": {
+    "expanded_report": {
+      "path": "docs/experiments/lowfreq-expanded-discovery-2026-10-19.md",
+      "sha256": "0d3684eb9c4fea6fd958057914592da4aeef054fb8e9fb6ebcdc7b84774260d0"
+    },
+    "selection_timing_report": {
+      "path": "docs/experiments/lowfreq-selection-and-timing-2026-10-19.md",
+      "sha256": "05ced90c46e18b5bfcc49badf88dead79a5b5436af8ea6cb88263eb39062edda"
+    },
+    "design_v3": {
+      "path": "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/design-v3.json",
+      "sha256": "c1943599b5365f484cbfa1553ccbd6c0358909e1c3a9468a115ec8cedc202539"
+    },
+    "input_contract_v2": {
+      "path": "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+      "sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289"
+    },
+    "definition_snapshot": {
+      "path": "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/definition-binding.json",
+      "sha256": "bd1afb8c98f9b47858f80b3a1c8aabb61441927c90940566c06c7650ee6b27db",
+      "source_sha256": "d699cdb3aa6c5d2a3f9841398097242ddf423516b8d1d05d9c8a03ca11432b06"
+    },
+    "definitions_registry_current_read": {
+      "path": "docs/research/definitions.v1.json",
+      "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+    },
+    "lei_strategy_source": {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "relevant_lines": "51, 309, 434"
+    },
+    "lei_implementation_source": {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "relevant_line": "10"
+    },
+    "core_manifest": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/manifest.json",
+      "sha256": "7a3a7f0d67bc82f44d2352bb8b65b9f0ed0dde6d11bded975259cdc0b713c5a8"
+    },
+    "calendar_manifest": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1/manifest.json",
+      "sha256": "cc532f8035832f3156d05749deff0bee239dc2e104ec4e30f5f300a809f44486"
+    },
+    "core_reconciliation": {
+      "path": "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/core-independent-reconciliation.json",
+      "sha256": "218448a73e0f449b2fedf75ba142ef8527e3b723b24948be5342e75c14d20d65"
+    },
+    "calendar_reconciliation": {
+      "path": "docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/calendar-independent-reconciliation.json",
+      "sha256": "1cef80051405ae174dac5a41c5a824b7eddf73ad2f2db1eb54707fa9f310396e"
+    }
+  },
+  "concepts": [
+    {
+      "concept": "系统相对强度",
+      "definition": "LEI原文在行业处写“行业相对强度=行业ETF÷VTI”，并将防御行业强度上升作为风险提示；这是行业产品相对大盘的状态，不是个股排序因子。原策略文另有“强于大盘”的定性选股想法，但该处没有固定计算期和门槛。",
+      "source": "LEI 技术交易体系.md:51,309; exact source SHA above"
+    },
+    {
+      "concept": "横截面动量选股",
+      "definition": "mixed.momentum.raw@1.0.0: I(t-21)/I(t-252)-1；按每只股票有效报价行位移，跳过最近21条，非严格固定日历12-1。mixed.momentum.rank@1.0.0: 同月末合格个股按分数降序，同分按代码升序。试验实际用BaoStock前复权收盘价作为价格代理，报价跨度中位379天、最大1660天；不完整复现登记经济价格对象及完整LEI。",
+      "source": "definitions snapshot and design-v3; source hashes above"
+    },
+    {
+      "concept": "单股时机",
+      "definition": "trend.above200@1.0.0是P_signal>SMA200；trend.cross_up200@1.0.0是P_t>SMA200_t且上一有效报价P_prev<=SMA200_prev。定义范围只指混合池经济指数状态/事件。它们表示单个对象何时处于/刚上穿长期均线，不等于跨股挑谁。LEI技术实现文件明确范围为单标的分析、入场、失效、止盈和持仓状态，不含基本面选股和组合配置。",
+      "source": "definitions.v1.json current read; implementation source line 10; historical report distinguishes selection/timing"
+    }
+  ],
+  "saved_evidence": {
+    "cohort_and_period": "固定2014年底历史A股样本600只，评价2015-01至2025-12共132月；每月横截面股票面板600行，月合格468-580只，71,369合格股票月。不是后来上市股票动态覆盖，也不是ETF。",
+    "direct_method": "同池全体平均月变化+1.0948%；直接挑中期强势前20%为+0.9734%，相对同池约-0.1215个百分点（未知未来结果计0）；未知结果按-100%情景差约-0.0922个百分点。主方法未显示风险改善，名单更换幅度高于全体。",
+    "quintile_pattern": "已保存五组均值（核心、未知计0；由高分至低分）：0.9734%、1.1191%、1.2149%、1.1933%、0.9736%；不是分数越高结果越好。连续交易子群相同五组为0.8423%、1.1617%、1.1969%、1.1549%、0.9280%，同样不单调。",
+    "conditional_clues": "波动与成交金额分9组后组内选强相对各组全体+0.3839至+0.4001百分点/月；再按短期涨幅分27组后+0.2779至+0.3083。核心27组6/12月抽样区间跨零；条件分组不是行业中性结果，也不是原直接策略成功。",
+    "robustness_and_limit": "连续交易子群保留53,869/71,369合格股票月（75.48%），9组差+0.3541，27组+0.2712；这是同段历史的条件子群，不是独立验证。未知入/出场26条，另1,023条为入场或离场停牌标记价格；费用、实际成交、完整公司行动现金流和交易所级独立核实未完成。",
+    "prior_selection_timing": "另一已保存的条件案例：84只选股池内旧技术触发的可比20日结果5293项，前20%池内均值2.88%、池外1.66%，2021/2022/2025方向反转；只是条件事件描述。16板块、288周映射212个旧信号的预先领先确认判定未通过，原负结果保留。"
+  },
+  "what_is_saved": {
+    "per_stock_month.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/per_stock_month.csv",
+      "sha256": "732d63142467fc9193106b927596bd2d9c9d4d2b74d6a6d9d74164db2bfea3fb",
+      "rows": 79200,
+      "relevant_columns": [
+        "month",
+        "code",
+        "momentum",
+        "short",
+        "future_return",
+        "outcome_reason",
+        "weight_momentum_q1",
+        "weight_momentum_q2",
+        "weight_momentum_q3",
+        "weight_momentum_q4",
+        "weight_momentum_q5"
+      ],
+      "meaning": "每股每月原始分数、结果和五组目标权重已存；无显式rank或rank-correlation列。"
+    },
+    "performance.json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/performance.json",
+      "sha256": "30a49a1525a90c4ca2c881b306876b6554044889a51d26b21c7b1860cca2d410",
+      "relevant_fields": [
+        "quintile_means_pct",
+        "per_stock_excess_contribution_pct",
+        "largest_five_observed_contributors",
+        "period_split"
+      ],
+      "meaning": "五组均值、逐股贡献和时段拆分汇总已存；无显式逐月rank相关统计。"
+    },
+    "increment.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/increment.csv",
+      "sha256": "555ce20bb3778a447fc338ed077af4f70c2afdb307846199133828b6b4ba7cf0",
+      "rows": 9504,
+      "columns": [
+        "month",
+        "control",
+        "vol_group",
+        "amount_group",
+        "short_group",
+        "n",
+        "share_of_pool",
+        "scenario",
+        "top_minus_cell_pct",
+        "weighted_increment_pct",
+        "top_unknown_weight",
+        "cell_unknown_weight"
+      ],
+      "meaning": "逐月分组条件差值已存；有波动/成交金额/短期涨幅组，无行业分类字段。"
+    },
+    "annual.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/annual.csv",
+      "sha256": "70e31ffd20d4912ba48cf1aaa248c65b3331064cc03ce09c562eb0bd44191b35",
+      "rows": 11
+    },
+    "calendar_support_per_stock_month.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/calendar-support-v1/per_stock_month.csv",
+      "sha256": "e7083d3d98e0eb24ecb50e492f494f0c6600df230910233595ad593169288254",
+      "rows": 79200,
+      "meaning": "同一600×132网格并有original_eligibility_reason，严限定过去253共同交易日连续有报价的条件子群。"
+    },
+    "not_saved_in_manifest_outputs": [
+      "每月动量名次相关系数",
+      "行业分类/行业内排名或行业控制结果",
+      "完整LEI单股触发与选股组合效果"
+    ]
+  },
+  "reuse_decision": {
+    "do_not_repeat": [
+      "固定600股票×132月核心直接动量结果；已封存核心及连续报价子群/2023-07剔除诊断不重跑、不调参。",
+      "16行业相对强度旧研究的预先确认未通过；不得换名重包装或扩大成新成功结果。"
+    ],
+    "one_decision_relevant_gap": "若价值/盈利能力研究后仍需判断动量自身是否仅代理行业共同上涨，唯一最能改变解释的缺口是用历史时点可得的行业归属，在同一已保存样本上做行业内排序/行业控制的增量对照，并预先固定可比基线；现有9/27分组只控制波动、成交额和短期涨幅，没有行业控制。先复用已有行情和逐股面板；若无可靠历史行业归属/时点版本，保留为无法回答，不重跑旧核心。",
+    "current_decision": "无需再跑同一动量收益测试；动量可以作为已知基线供新的合格价值/质量信息同日比较。是否做上述行业控制只在有可靠时点行业资料且它会改变决策时再定，不能用今天分类填历史。"
+  },
+  "manifest_output_sha256_verification": {
+    "core-v1": {
+      "monthly.csv": "d59998ef2f6ae8ad240ad9a0124c1390edff077b38b964b44660777ad68f72f5",
+      "selections.csv": "4f79e38de12a01ac4d5cc4ef4b3a45725d1f23a990f93f9f8416ac945b5b2276",
+      "per_stock_month.csv": "732d63142467fc9193106b927596bd2d9c9d4d2b74d6a6d9d74164db2bfea3fb",
+      "annual.csv": "70e31ffd20d4912ba48cf1aaa248c65b3331064cc03ce09c562eb0bd44191b35",
+      "increment.csv": "555ce20bb3778a447fc338ed077af4f70c2afdb307846199133828b6b4ba7cf0",
+      "quality.json": "ff5baf16ce053885a046acd05b9d83d31d8ba24686aaea308d53643f0f6cff38",
+      "performance.json": "30a49a1525a90c4ca2c881b306876b6554044889a51d26b21c7b1860cca2d410"
+    },
+    "calendar-support-v1": {
+      "monthly.csv": "c4eefd50421aba0729a35b5651c45f77d40b4c1a089836322c8ffebddd64b205",
+      "selections.csv": "516e18e4db4e627a0673dae113b1cc8e73db390deec70bf2959f13731ad6f17f",
+      "per_stock_month.csv": "e7083d3d98e0eb24ecb50e492f494f0c6600df230910233595ad593169288254",
+      "annual.csv": "b02c588b5dabfca9f5356e7cd99af0a740cb503015f95c1356673e8cf87becf2",
+      "increment.csv": "7af067806d6b0d4789d943e649bd9d41c75478f5c2d0d4ad5ccb1574636e952a",
+      "performance.json": "86504417007c24e94ebc5175dc55fdcbc1bd623d8ac27124775a629763624916",
+      "quality.json": "8e06722497e64b5c1eac39b4c650e9d626bf04b814915da36dd0f874abb641d8"
+    }
+  },
+  "verification": "各manifest声明的14个结果文件均逐一重算SHA-256并匹配；CSV表头/记录数和JSON字段仅作读取，不重新生成市场结果。"
+}

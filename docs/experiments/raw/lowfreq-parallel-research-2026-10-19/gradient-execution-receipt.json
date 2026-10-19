@@ -1,0 +1,205 @@
+{
+  "attempt_count": 1,
+  "command": "python3 -B docs/experiments/raw/lowfreq-parallel-research-2026-10-19/run_selection_gradient.py --contract docs/experiments/raw/lowfreq-parallel-research-2026-10-19/gradient-execution-contract.json",
+  "completed_at_utc": "2026-10-19T07:32:02+00:00",
+  "contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/gradient-execution-contract.json",
+    "sha256": "d4813ec25f8e2e7175f0b29f9f330d1c4c10be970eae4b598f0812ba783c8630"
+  },
+  "errors": [],
+  "exit_code": 0,
+  "process": {
+    "elapsed_seconds": null,
+    "exec_session_id": 35214,
+    "initial_exec_wait_seconds": 1.001969,
+    "pid": null,
+    "pid_capture": "process completed before PID inspection; no rerun was made",
+    "start_time_utc": null
+  },
+  "result": {
+    "compact_summary": {
+      "common_cfo/loss100": {
+        "Q5_minus_Q1_mean_pp": 0.22930544258204288,
+        "group_mean_pct": [
+          1.1776499598833403,
+          1.3024176260385678,
+          1.354127368209889,
+          1.2352024564339725,
+          1.4069554024653832
+        ],
+        "interval_12m_pp": [
+          -0.2206557109737223,
+          0.6617455700841699
+        ],
+        "interval_6m_pp": [
+          -0.27285734252286614,
+          0.7540783754961538
+        ],
+        "positive_month_share": 0.5681818181818182,
+        "support_mean_2015_2019": 0.6437506768007507,
+        "support_mean_2020_2025": 0.6949415743258749
+      },
+      "common_cfo/zero": {
+        "Q5_minus_Q1_mean_pp": 0.22930544258204288,
+        "group_mean_pct": [
+          1.1776499598833403,
+          1.318605142226084,
+          1.354127368209889,
+          1.2352024564339725,
+          1.4069554024653832
+        ],
+        "interval_12m_pp": [
+          -0.2206557109737223,
+          0.6617455700841699
+        ],
+        "interval_6m_pp": [
+          -0.27285734252286614,
+          0.7540783754961538
+        ],
+        "positive_month_share": 0.5681818181818182,
+        "support_mean_2015_2019": 0.6437506768007507,
+        "support_mean_2020_2025": 0.6949415743258749
+      },
+      "common_gp/loss100": {
+        "Q5_minus_Q1_mean_pp": -0.053537099051445644,
+        "group_mean_pct": [
+          1.4708956659489392,
+          1.000948428376469,
+          1.4118549156119444,
+          1.1752952361963072,
+          1.4173585668974935
+        ],
+        "interval_12m_pp": [
+          -0.5772860184753124,
+          0.526165222725921
+        ],
+        "interval_6m_pp": [
+          -0.6161521448016817,
+          0.5445495509268738
+        ],
+        "positive_month_share": 0.4696969696969697,
+        "support_mean_2015_2019": 0.6437506768007507,
+        "support_mean_2020_2025": 0.6949415743258749
+      },
+      "common_gp/zero": {
+        "Q5_minus_Q1_mean_pp": -0.053537099051445644,
+        "group_mean_pct": [
+          1.4708956659489392,
+          1.0171359445639852,
+          1.4118549156119444,
+          1.1752952361963072,
+          1.4173585668974935
+        ],
+        "interval_12m_pp": [
+          -0.5772860184753124,
+          0.526165222725921
+        ],
+        "interval_6m_pp": [
+          -0.6161521448016817,
+          0.5445495509268738
+        ],
+        "positive_month_share": 0.4696969696969697,
+        "support_mean_2015_2019": 0.6437506768007507,
+        "support_mean_2020_2025": 0.6949415743258749
+      },
+      "gp/loss100": {
+        "Q5_minus_Q1_mean_pp": 0.016538411646584737,
+        "group_mean_pct": [
+          1.3317359601291596,
+          1.0091081074925368,
+          1.3243643409734582,
+          1.232613897806066,
+          1.3482743717757444
+        ],
+        "interval_12m_pp": [
+          -0.5409352986537824,
+          0.6308221350892591
+        ],
+        "interval_6m_pp": [
+          -0.5568866083860934,
+          0.6165468195895321
+        ],
+        "positive_month_share": 0.44696969696969696,
+        "support_mean_2015_2019": 0.6529415002221912,
+        "support_mean_2020_2025": 0.7150343868136915
+      },
+      "gp/zero": {
+        "Q5_minus_Q1_mean_pp": 0.016538411646584737,
+        "group_mean_pct": [
+          1.3317359601291596,
+          1.0241992580418546,
+          1.3243643409734582,
+          1.232613897806066,
+          1.3482743717757444
+        ],
+        "interval_12m_pp": [
+          -0.5409352986537824,
+          0.6308221350892591
+        ],
+        "interval_6m_pp": [
+          -0.5568866083860934,
+          0.6165468195895321
+        ],
+        "positive_month_share": 0.44696969696969696,
+        "support_mean_2015_2019": 0.6529415002221912,
+        "support_mean_2020_2025": 0.7150343868136915
+      }
+    },
+    "control_identity_sha256": "046b2d171cda91a29d741c91990050dec24ca2a34c1c1fe6f3b5ebf203e1aa91",
+    "control_status": "eligible_for_separate_execution",
+    "input_hashes": {
+      "control_contract_sha256": "432b39c30c6080695509e86efc85e288de37c1014045abc9efbbfc1a584c4b94",
+      "control_module_sha256": "8be2f35b437eccc7de57f7766536acf245761af7de109f6b64d80189c550f2e6",
+      "controller_review_sha256": "508130f1884eff02270e9ddfa8a4dc384758f327ef4dc602aff1d52a1649076b",
+      "core_manifest_sha256": "f7d0f3da8160dabdb4489496df36cf6dff2156163c912d745abe8b4e37ef0b5a",
+      "design_sha256": "9830f510e5a50c12c9cc2b32905b1bf5b1742b60ed7de50bdc545b256ca3fdc2",
+      "stock_weights_sha256": "54ef3ba6dd3231957260fa93d2abc625e64723d0b682bf260839fdd93553d5f2",
+      "storage_module_sha256": "aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95"
+    },
+    "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/gradient-01/manifest.json",
+    "manifest_sha256": "2bfa79f0a79428296d4560689105f29d1fd93ab7b13aebcbc0ddb415f9cf3086",
+    "market_data_requests": 0,
+    "monthly_rows": 792,
+    "months": 132,
+    "new_strategy_backtest_run": false,
+    "outputs": {
+      "monthly.csv": {
+        "bytes": 382833,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/gradient-01/monthly.csv",
+        "sha256": "8cc54e514c79c628427b28a09cb29cad2686d099f14feecf1d2fcb6a8f1c0c1c"
+      },
+      "summary.json": {
+        "bytes": 67860,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/gradient-01/summary.json",
+        "sha256": "aeae6f377ae52d658c15b733f7facf6ce4dc3baa71fc71dce6948a4d64efbbb3"
+      },
+      "support.csv": {
+        "bytes": 3328723,
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/gradient-01/support.csv",
+        "sha256": "829e3248556528676401315e85e43fd5c422ca89a2a67aa420c54e67daff38f3"
+      }
+    },
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-selection-gradient-20261019/lowfreq-selection-gradient-20261019-20261019T151202-35b3e95482c7/result/gradient-01",
+    "saved_outcome_diagnostic_run": true,
+    "scenarios": [
+      "zero",
+      "loss100"
+    ],
+    "scope": [
+      "gp",
+      "common_gp",
+      "common_cfo"
+    ],
+    "source_selector_sha256": "c5cfa4c8346e1c8e098f026f5efbce067b96ecea3ef5d793440fb99314189fb3",
+    "support_row_types": {
+      "industry": 20968,
+      "month": 396
+    },
+    "support_rows": 21364
+  },
+  "runner": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/run_selection_gradient.py",
+    "sha256": "e77c7ddbd56d5884cd309d943ab3583cd086f541b07a223fdcf2ab7e16bfa8ff"
+  },
+  "schema": "selection-gradient-execution-receipt/1"
+}

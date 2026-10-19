@@ -1,0 +1,78 @@
+{
+  "schema": "financial-selection-gradient-scientific-review/1",
+  "reviewer": "astra_increment_boundary",
+  "design_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-parallel-research-2026-10-19/selection-gradient-design.json",
+  "design_sha256": "0be5a85566708909a91a3113d683b5ceeec6369f70c771ad622a31dc3234e295",
+  "status": "conditional_accept_for_new_authorized_explanatory_question_requires_tie_rule_and_missing_month_freeze",
+  "plain_answer": "这项补充能回答财务排序的信息是否遍布较多股票，还是只集中在最高组，值得在已授权的选股方向做一次。但它仍是把已看过的历史按股票重新归组，不能证明每一只股票都可预测，也不能把收益不随排序递增当成财务风险用途被否定。",
+  "scope": {
+    "mode": "design_review_only",
+    "new_real_group_results_read": false,
+    "real_computation_or_network_by_reviewer": 0,
+    "P2_core_or_followup_rerun": false,
+    "write_only": "selection-gradient-review.json",
+    "budget_decision": "有条件支持原P2家族第2次有目的跟进；不重置原core1+已用followup1，不把此前封存完成改成未完成。root另冻实际合同/工具后才可运行。"
+  },
+  "necessity": {
+    "required_to_validate_sealed_P2": false,
+    "useful_for_new_explicit_stock_selection_question": true,
+    "why": "P2只给最高组选取及组合比较，五组可显示最低组、居中组与最高组是否规律变化，或高低差仅由一端/少数年份驱动；这是不同且有限的问题，直接复用已存逐股资料，无需重新取数和重跑核心。",
+    "what_it_does_not_answer": "每只股票长期效果、可重复个股预测、超越动量/毛利全部既有信息的独立增量、原因识别及真实交易执行仍不由五组平均回答。不要把五组称为逐只股票效果验证完成。"
+  },
+  "mechanism_correction": {
+    "draft_issue": "草案“若信息稳定，排序不应只由最高组偶然贡献”过强：真实关系可能阈值化、非线性，或只在坏月份提供风险用途。",
+    "replacement": "检视财务排序与后续结果的形状，分清广泛梯度、只发生在一端、无清晰关系及随时期变化。无单调收益梯度不直接推翻已有限成立的GP坏月份证据；单调梯度也不证明因果或预测可迁移。",
+    "alternative_explanations": [
+      "陷入困境但低财务分的股票反弹，导致低端非单调；需描述而非另选过滤规则。",
+      "行业内规模、波动/流动性、动量及资料可取得性共同影响排序；本诊断不排除。",
+      "年度财务值逐月复用，股票与月份并非相互独立；不能把数万股票月当独立样本。"
+    ]
+  },
+  "required_before_freeze": [
+    {
+      "item": "同分值不可按股票代码产生财务优劣",
+      "reason": "常数行业排除仍不能解决跨切口的部分同分；代码划分会让相同财务分被赋予不同组，组差可能仅取决于代码。只披露同分跨界不足以支持“从低到高”的金融解释。",
+      "resolution": "冻结下列按同分分摊的唯一五组算法。不得先跑code硬分再据结果决定是否换算法。"
+    },
+    {
+      "item": "零支持月份处理",
+      "reason": "n<5及常数行业剔除后，某月可能没有有效行业；条件组回报不可零补，未知回报两情景规则也不能拿来填无支持月。",
+      "resolution": "先仅用分数/行业检查每scope每月支持；有支持才计算条件回报，原132日期保留无支持标记。整段日期抽样，成对高低差在各draw按出现次数对支持月取均值；整draw无支持则missing并报告。若全部132月均有支持，照原132月方法即可。"
+    },
+    {
+      "item": "明确组排序对象与同池对照",
+      "reason": "这里不是复现原F最高20%组合：常数/小行业被排除且新五组同分处理不同。",
+      "resolution": "保留原P/M/F/B/D只读完整性检查；新输出命名为supported_Q1..Q5，仅描述新支持子集。额外从这些相同股票直接计算supported_P平均作为恒等核对，不能直接减封存全池P作效果差。"
+    },
+    {
+      "item": "预先固定报告与不确定性对象",
+      "reason": "不能选五组中最好的一对、一个时期或一种未知情景报道。",
+      "resolution": "三个scope两情景全部五组均值、固定Q5−Q1、原分期/逐年、正差月份比例及支持表完整输出。区间主要对固定Q5−Q1，若给各组区间则五组全部；不择优。6/12个月、2000次、seed20261019可用于描述诊断，所有scope/scenario使用同一日期抽样矩阵并保存hash。此处95%范围非多重比较后赢家证明。"
+    }
+  ],
+  "recommended_single_tie_preserving_partition": {
+    "input": "每scope/月份/行业，严格复用已保存financial_score，不按回报排序，不额外四舍五入分数制造同分；股票代码仅作输出稳定排序。",
+    "eligibility": "行业原n>=5且至少两个不同分数；不再增加最低不同分数数量来追求好看梯度。",
+    "algorithm": "按分数从低到高。每个相同分数块有m只股票，在排序位置连续区间[a,a+m]占m个位置。第j组(j=1..5)区间[(j−1)n/5, j*n/5]。令该块与组区间重合长度为L，则块中每只股票给该组的份额alpha=L/m。每只股票五组alpha加总1，同分股票获得完全相同alpha；每组份额总数n/5。",
+    "weight": "行业原权重n/N保持。每只股票在第j组的权重=(n/N)*alpha/(n/5)。行业分数相同块可能同时参与相邻组，是公平分摊，无需凭代码拆同分。",
+    "raw_contribution": "各组跨支持行业权重和为支持比例S。raw=sum(weight*return)只能称原池中的支持部分贡献，不能称余下现金0收益的实际组合。",
+    "conditional_return": "S>0时组条件回报=raw/S，全部五组用相同S。支持行业间相对权重保持原n/N，不人为每行业等权。",
+    "interpretation": "每组有效人数n/5可非整数，组之间由于相同值存在共同股票份额。五组不是五份独立证据，更不是五套可执行仓位；同分多时曲线平坦可能是度量分辨率低。",
+    "support_reports": [
+      "每月原N、支持N与S；分别给n<5剔除/常数剔除人数和原权重，不能重复加总。",
+      "每行业不同分数个数、跨组同分块原权重、Q1与Q5共同股票份额及实际不同目标权重。",
+      "按年度和scope汇总支持，检查2015–2019与2020–2025的资料范围差异；不要换组数补样本。"
+    ],
+    "deterministic_checks": [
+      "每股票五组alpha之和1；每同分块所有股票alpha完全相同。",
+      "每行业每组alpha之和n/5；每组raw权重和S；条件权重和1。",
+      "五组条件回报简单平均严格等于同支持股票按原池等权的supported_P回报（两未知情景分别检查）。",
+      "行顺序/股票代码重命名不改变分组金融结果；反转分数时Q1与Q5对应反转。",
+      "所有同分/无支持/缺回报/单行业n=5和n=6、边界跨同分、大同分块分别用合成数据检查；不增真实实验。"
+    ]
+  },
+  "unknown_outcomes": "复用原future_return缺失状态，零或−100%是原假设情景，不是实际可实现边界。不得删除未知股票、按已知结果重排或按场景改变支持。",
+  "descriptive_shape_reporting": "五组曲线和各相邻均值差可直接描述；无需为“单调”造新的优化阈值/综合评分/成功标准。即使五均值顺序排列，高低差的不确定范围、分期反例和分数支持仍必须披露；无显著差不证明所有有用程度都被排除。",
+  "scope_comparability": "gp主池与common_gp/common_cfo分别报告；共同池才可直接对照GP/CFO。财务得分、行业和原件时点条件继承原冻结资格及约88%旧notice恢复边界；强行业×9组此前约93%全持有导致区别能力弱，不在这里机械加交叉组或宣称已控制该信息。",
+  "implementation_acceptance_boundary": "本文件只审科学方法，未检查工具实际实现/输入hash/真实支持/新结果。root在修改草案并完成实际合同和合成检查后可决定一次运行；若只想改文案、不换code拆同分规则，应把所有跨组同分影响限制为代码任意性的描述，不能作财务顺序结论。"
+}
