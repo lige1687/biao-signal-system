@@ -1,3 +1,14 @@
+# 低频研究优先判断已接入现有AI入口 2026-10-19T18:38:50.963233+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮文档维护；scope_released true；完整策略/因子效果目标仍in_progress。checked_coordination_sha=69c0cbdf5646ca348fda808220e0871b5ddfd0cb；checked_at=2026-10-19T18:38:50.963233+08:00；已读COORDINATION/self/system16:38/personal16:11及其00:32已释放playbook/dispatch，交付前fetch无他人新增，冲突决定不变。
+- 当前主树采用三处：AGENTS首屏低频首要判断SHA0d2dc3940d7ba94b02a205ea389ad1cf39684a65118f644d9dbe14f35cfa31f3；docs/research/factor-discovery-playbook.md SHA50cb4ad74b91b1e0a7ccb34ee3a59d7f246c20cda23f56d8e90b2222d9899525；.agents/skills/lei-gpt-zcode-orchestrator/SKILL.md SHA71a41671066ffade97b9c4f05f164fb7e6cc05399f182784d1fde352be231840。仅本轮局部增量，无关正文逐字保留。现行规范索引/模板/rules/两源配置及两桌面原件SHA不变，旧实验不迁移。
+- AI在大规模投入前承担金融理由、具体低频决定、预期可观察帮助/代价、简单对手、同类复用与样本支持，先作投入决定；回调交改善/代价/保留复验暂停及恢复证据。三点五点明确列出，所有原合格机会的损失收益与大行情/风险投入/已看历史/开发实际用途均核。价格同源不自动无效，缺资料不冒充无增量，暂停具体用途不删原条件，不重置授权/预算。
+- 验收：Sol gpt-6-sol/medium只读前后差距及六类假设演练（参数扫描、伪扩样、胜率/大行情/投入混淆、新用途、短期亏损改规则、无问题的图表），全部能按指引裁决；root核准确链接/原文保留/保护文件、git diff --check与归置通过。仅证明说明可被读懂，非程序自动科学拦截或所有AI行为保证。一次快照输出截断解析失败未写文件，减量重取后通过，记录在原progress。
+- 原目标okr-ff1e0a86fbac仅note168→169已GET读回，status in_progress、原history前缀及其他字段保持，不新建目标或勾完成。原docs/ops/work-progress/research-utility-review-20261012.md追加准确阶段证据。此为规范维护，无新实验报告/registry项、市场/来源请求/生产/交易/通知/定时器；实际模型费用未知。
+- 成果仅本地主工作区未提交未推，其他worktree/运行AI/设备加载状态未验证；远端仅本协调元数据，不以协调提交冒充三文件远端复现。没有改写他人任务或独立财务候选；无需回复/派发。本有界要求已完成，后续真实研究仍须按入口留下具体投入决定及结果裁决，不用本次演练证明因子有效。
+
+---
+
 # 低频研究优先判断接入现有AI入口 2026-10-19T18:34:00.144076+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=c2eedba38973c440d724d4f609d1435b37f0c8cc；checked_at=2026-10-19T18:34:00.144076+08:00；已读 COORDINATION/self/system16:38/personal16:11/dispatch，以及personal00:32已释放playbook交付。原财务候选、原LEI和UI分工保持，无活跃同块写者。
