@@ -1,0 +1,59 @@
+{
+  "schema": "financial-document-batch/1",
+  "created_at": "2026-10-19T05:39:47.444131+00:00",
+  "inputs": {
+    "progress": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/progress-source-batch-07.json",
+      "sha256": "feb93fa00bbb0cb304f3ded80b8e395b1f745ebe1b8fcc06f068f9af4c535a89"
+    },
+    "plan": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/bulk-acquisition-plan.json",
+      "sha256": "bcb2d5b3a8a3efe9ef08d656fe92b60af80ab6a1e0f17b4b8cddcd662b091e07"
+    },
+    "cohort": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+      "sha256": "6f073e37809613469efe6cd2adb6b7ef1b4e77515e99e7149e1636d9e390cc16"
+    },
+    "parser": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py",
+      "sha256": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae"
+    },
+    "preparer": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_documents.py",
+      "sha256": "3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012"
+    }
+  },
+  "reuse_manifests": [
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-06/manifest.json",
+      "sha256": "5c04e1af94324cd48e7e2c6e3c50c699291c6a305c7aec3c9eb3bfada0c03b4f"
+    }
+  ],
+  "workers": 4,
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-07",
+  "runner_sha256": "522a6747b59d2aeee499ce717e4a8d1c9d7f612acd1fd7482e6f90b08a58eb8f",
+  "market_effects_allowed": false,
+  "network_requests_allowed": 0,
+  "source_progress_operations": {
+    "catalog": 1237,
+    "pdf": 12327,
+    "total": 13564
+  },
+  "purpose": "Immutable finished-response prefix of running final PDF stage; reuse exact v3 batch06 records and prepare only new finished originals. No final source acceptance, no panel/effects.",
+  "in_flight_source_snapshot": {
+    "state": "running_partial_snapshot_for_preparation_only",
+    "source_contract": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/completion-pdf-01-contract.json",
+    "source_contract_sha256": "6fe2aac97e3a242d92c240a7ea773be25384557a1ac0bd16e2ac67ba52ff6273",
+    "live_journal_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/journal.jsonl",
+    "journal_prefix": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/journal-completion-pdf-source-batch07.jsonl",
+      "sha256": "763f98f2bb073c911fca5652224c121b1cd90d9e1f45dd34947fc2599cd8c950"
+    },
+    "captured_utc": "2026-10-19T05:39:47.444131+00:00",
+    "prefix_finish_count": 3324,
+    "future_effects_forbidden": true,
+    "terminal_source_manifest_required_before_effects": true
+  },
+  "estimated_new_external_bytes": 2147483648,
+  "estimated_new_local_bytes": 32768
+}

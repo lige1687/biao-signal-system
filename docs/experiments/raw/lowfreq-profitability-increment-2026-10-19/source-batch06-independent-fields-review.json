@@ -1,0 +1,595 @@
+{
+  "schema": "source-batch06-independent-fields-review/1",
+  "status": "all_selected_fields_confirmed",
+  "source_only": true,
+  "market_price_or_future_outcome_read": false,
+  "network_requests": 0,
+  "sample_precommitted_from_new_qualified_documents": true,
+  "selection_basis": "Among 1333 batch06-minus-batch05 documents, restrict to suspected full annual text, issuer identity match, all four fields qualified; choose extreme GP/assets and CFO/assets plus distinct years/header formats. No returns or price data.",
+  "selection_pool": {
+    "new_documents": 1333,
+    "four_field_qualified_full_identity_match": 550,
+    "qualified_field_units_observed": "元 only; no alternative qualified unit available for within-batch06 sampling"
+  },
+  "manifest_bindings": {
+    "batch05": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-05/manifest.json",
+      "sha256": "5ac51b06ac69d328c6c501eeb065fe065525f85938507a62690dfc0405fd78e9"
+    },
+    "batch06": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-06/manifest.json",
+      "sha256": "5c04e1af94324cd48e7e2c6e3c50c699291c6a305c7aec3c9eb3bfada0c03b4f"
+    }
+  },
+  "documents_checked": [
+    {
+      "code": "sz.002432",
+      "announcement_id": "1216694516",
+      "selection_reason": "highest GP/assets and CFO/assets among new four-field qualified documents; 2022 year-specific headings",
+      "report_year": 2022,
+      "publication_date": "2023-04-29",
+      "title": "2022年年度报告",
+      "prepared_document_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-06/documents/002432-1216694516.json",
+      "prepared_document_sha256": "2efddaba1843441f8dbdb76ab16e60a87c5582da63d8530b2a35fff64d11a7b9",
+      "original_pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01739-pdf.body",
+      "original_pdf_sha256": "a52b3cbadc42d778e28a76468503c40b0ae8a72cd832b2928500774cf3fb82f8",
+      "pdf_pages": 210,
+      "tables": {
+        "assets": {
+          "heading_page_1_based": 73,
+          "heading": "合并资产负债表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 2022 年 12 月 31 日 2022 年 1 月 1 日",
+          "context_page_window_1_based": [
+            71,
+            74
+          ]
+        },
+        "profit": {
+          "heading_page_1_based": 78,
+          "heading": "合并利润表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 2022 年度 2021 年度",
+          "context_page_window_1_based": [
+            76,
+            79
+          ]
+        },
+        "cash": {
+          "heading_page_1_based": 81,
+          "heading": "合并现金流量表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 2022 年度 2021 年度",
+          "context_page_window_1_based": [
+            79,
+            82
+          ]
+        }
+      },
+      "fields": {
+        "assets": {
+          "page_1_based": 75,
+          "parser_value_yuan": "21730643774.98",
+          "independent_first_current_amount": "21730643774.98",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "资产总计 21,730,643,774.98 3,930,327,210.41",
+          "status": "pass"
+        },
+        "revenue": {
+          "page_1_based": 78,
+          "parser_value_yuan": "26315360917.43",
+          "independent_first_current_amount": "26315360917.43",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业收入 26,315,360,917.43 2,397,097,777.49",
+          "status": "pass"
+        },
+        "cost": {
+          "page_1_based": 78,
+          "parser_value_yuan": "5367194898.95",
+          "independent_first_current_amount": "5367194898.95",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业成本 5,367,194,898.95 875,549,473.54",
+          "status": "pass"
+        },
+        "cfo": {
+          "page_1_based": 82,
+          "parser_value_yuan": "18221682959.48",
+          "independent_first_current_amount": "18221682959.48",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "经营活动产生的现金流量净额 18,221,682,959.48 293,114,031.60",
+          "status": "pass"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "code": "sz.002458",
+      "announcement_id": "1202240523",
+      "selection_reason": "lowest GP/assets; negative GP and CFO; 2015 current-period headings",
+      "report_year": 2015,
+      "publication_date": "2016-04-26",
+      "title": "2015年年度报告",
+      "prepared_document_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-06/documents/002458-1202240523.json",
+      "prepared_document_sha256": "d8989da20329e2cf6ae3bd67f329217c4703d7f3107c8f8363affad34f004915",
+      "original_pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01790-pdf.body",
+      "original_pdf_sha256": "fc34ef8c60cbb0490eabfd0a0af570ef3540077f0f1a31d762c9a10581968cd8",
+      "pdf_pages": 159,
+      "tables": {
+        "assets": {
+          "heading_page_1_based": 56,
+          "heading": "合并资产负债表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 期末余额 期初余额",
+          "context_page_window_1_based": [
+            54,
+            57
+          ]
+        },
+        "profit": {
+          "heading_page_1_based": 61,
+          "heading": "合并利润表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 本期发生额 上期发生额",
+          "context_page_window_1_based": [
+            59,
+            62
+          ]
+        },
+        "cash": {
+          "heading_page_1_based": 64,
+          "heading": "合并现金流量表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 本期发生额 上期发生额",
+          "context_page_window_1_based": [
+            62,
+            65
+          ]
+        }
+      },
+      "fields": {
+        "assets": {
+          "page_1_based": 57,
+          "parser_value_yuan": "1754795712.09",
+          "independent_first_current_amount": "1754795712.09",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "资产总计 1,754,795,712.09 1,824,511,259.19",
+          "status": "pass"
+        },
+        "revenue": {
+          "page_1_based": 61,
+          "parser_value_yuan": "604290341.75",
+          "independent_first_current_amount": "604290341.75",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业收入 604,290,341.75 841,921,368.35",
+          "status": "pass"
+        },
+        "cost": {
+          "page_1_based": 61,
+          "parser_value_yuan": "831412604.08",
+          "independent_first_current_amount": "831412604.08",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业成本 831,412,604.08 764,365,038.65",
+          "status": "pass"
+        },
+        "cfo": {
+          "page_1_based": 65,
+          "parser_value_yuan": "-261497296.97",
+          "independent_first_current_amount": "-261497296.97",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "经营活动产生的现金流量净额 -261,497,296.97 70,034,625.38",
+          "status": "pass"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "code": "sz.002433",
+      "announcement_id": "1202088285",
+      "selection_reason": "lowest CFO/assets; distinct issuer; 2015",
+      "report_year": 2015,
+      "publication_date": "2016-03-29",
+      "title": "2015年年度报告",
+      "prepared_document_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-06/documents/002433-1202088285.json",
+      "prepared_document_sha256": "bf4eefaf864ad28c798de08dd04baed3142b9a2941a3eda23427d037078b6405",
+      "original_pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01750-pdf.body",
+      "original_pdf_sha256": "e3ba0f1b039a52762fb8cd71a843b0470fcb87043332971c7b4b4cac4ad8937a",
+      "pdf_pages": 169,
+      "tables": {
+        "assets": {
+          "heading_page_1_based": 65,
+          "heading": "合并资产负债表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 期末余额 期初余额",
+          "context_page_window_1_based": [
+            63,
+            66
+          ]
+        },
+        "profit": {
+          "heading_page_1_based": 71,
+          "heading": "合并利润表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 本期发生额 上期发生额",
+          "context_page_window_1_based": [
+            69,
+            72
+          ]
+        },
+        "cash": {
+          "heading_page_1_based": 74,
+          "heading": "合并现金流量表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 本期发生额 上期发生额",
+          "context_page_window_1_based": [
+            72,
+            75
+          ]
+        }
+      },
+      "fields": {
+        "assets": {
+          "page_1_based": 67,
+          "parser_value_yuan": "5868858395.62",
+          "independent_first_current_amount": "5868858395.62",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "资产总计 5,868,858,395.62 4,493,309,540.47",
+          "status": "pass"
+        },
+        "revenue": {
+          "page_1_based": 71,
+          "parser_value_yuan": "2371647775.65",
+          "independent_first_current_amount": "2371647775.65",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业收入  2,371,647,775.65 1,227,636,592.54",
+          "status": "pass"
+        },
+        "cost": {
+          "page_1_based": 71,
+          "parser_value_yuan": "1697114316.78",
+          "independent_first_current_amount": "1697114316.78",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业成本  1,697,114,316.78 768,352,582.78",
+          "status": "pass"
+        },
+        "cfo": {
+          "page_1_based": 75,
+          "parser_value_yuan": "-1271221783.38",
+          "independent_first_current_amount": "-1271221783.38",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "经营活动产生的现金流量净额 -1,271,221,783.38 -270,648,264.98",
+          "status": "pass"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "code": "sz.002047",
+      "announcement_id": "63906126",
+      "selection_reason": "2013 early-year source and strongly negative CFO/assets",
+      "report_year": 2013,
+      "publication_date": "2014-04-24",
+      "title": "2013年年度报告",
+      "prepared_document_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-06/documents/002047-63906126.json",
+      "prepared_document_sha256": "491a2a1b60c526ec7726a3798a955885fbec9e8499f6b267bb2d1327a7f646e1",
+      "original_pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01116-pdf.body",
+      "original_pdf_sha256": "7c25f9ce01ba4f5a5aacc83901ef758fa6078c2c13931653239d0945d74c5134",
+      "pdf_pages": 165,
+      "tables": {
+        "assets": {
+          "heading_page_1_based": 72,
+          "heading": "合并资产负债表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 期末余额 期初余额",
+          "context_page_window_1_based": [
+            70,
+            73
+          ]
+        },
+        "profit": {
+          "heading_page_1_based": 77,
+          "heading": "合并利润表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 本期金额 上期金额",
+          "context_page_window_1_based": [
+            75,
+            78
+          ]
+        },
+        "cash": {
+          "heading_page_1_based": 79,
+          "heading": "合并现金流量表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 本期金额 上期金额",
+          "context_page_window_1_based": [
+            77,
+            80
+          ]
+        }
+      },
+      "fields": {
+        "assets": {
+          "page_1_based": 73,
+          "parser_value_yuan": "2790936151.12",
+          "independent_first_current_amount": "2790936151.12",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "资产总计 2,790,936,151.12 1,916,924,035.71",
+          "status": "pass"
+        },
+        "revenue": {
+          "page_1_based": 77,
+          "parser_value_yuan": "3726811295.68",
+          "independent_first_current_amount": "3726811295.68",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业收入 3,726,811,295.68 2,912,851,581.79",
+          "status": "pass"
+        },
+        "cost": {
+          "page_1_based": 77,
+          "parser_value_yuan": "3097665358.60",
+          "independent_first_current_amount": "3097665358.60",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业成本 3,097,665,358.60 2,452,131,895.34",
+          "status": "pass"
+        },
+        "cfo": {
+          "page_1_based": 80,
+          "parser_value_yuan": "-448596095.11",
+          "independent_first_current_amount": "-448596095.11",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "经营活动产生的现金流量净额 -448,596,095.11 143,725,938.41",
+          "status": "pass"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "code": "sz.002530",
+      "announcement_id": "1200704883",
+      "selection_reason": "2014 early-year source with unusual cash comparative header",
+      "report_year": 2014,
+      "publication_date": "2015-03-17",
+      "title": "2014年年度报告",
+      "prepared_document_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-06/documents/002530-1200704883.json",
+      "prepared_document_sha256": "139e4a9129333cb91b53425946909fbcaad26be6a6226aaf83901e68bad13005",
+      "original_pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01959-pdf.body",
+      "original_pdf_sha256": "bec7ee236453c9ff7bb06a81c506a9f45f747e972419dd8e6c0e6d274a1ad17e",
+      "pdf_pages": 137,
+      "tables": {
+        "assets": {
+          "heading_page_1_based": 61,
+          "heading": "合并资产负债表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 期末余额 期初余额",
+          "context_page_window_1_based": [
+            59,
+            62
+          ]
+        },
+        "profit": {
+          "heading_page_1_based": 65,
+          "heading": "合并利润表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 本期发生额 上期发生额",
+          "context_page_window_1_based": [
+            63,
+            66
+          ]
+        },
+        "cash": {
+          "heading_page_1_based": 68,
+          "heading": "合并现金流量表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 本期发生额 上期金额发生额",
+          "context_page_window_1_based": [
+            66,
+            69
+          ]
+        }
+      },
+      "fields": {
+        "assets": {
+          "page_1_based": 62,
+          "parser_value_yuan": "1001245853.57",
+          "independent_first_current_amount": "1001245853.57",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "资产总计 1,001,245,853.57 853,401,195.22",
+          "status": "pass"
+        },
+        "revenue": {
+          "page_1_based": 65,
+          "parser_value_yuan": "367175382.04",
+          "independent_first_current_amount": "367175382.04",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业收入 367,175,382.04 383,443,040.35",
+          "status": "pass"
+        },
+        "cost": {
+          "page_1_based": 65,
+          "parser_value_yuan": "252129423.85",
+          "independent_first_current_amount": "252129423.85",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业成本 252,129,423.85 271,849,709.20",
+          "status": "pass"
+        },
+        "cfo": {
+          "page_1_based": 68,
+          "parser_value_yuan": "33662027.14",
+          "independent_first_current_amount": "33662027.14",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "经营活动产生的现金流量净额 33,662,027.14 1,080,951.23",
+          "status": "pass"
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "code": "sz.002356",
+      "announcement_id": "1223365489",
+      "selection_reason": "2024 recent-year source and negative CFO/assets",
+      "report_year": 2024,
+      "publication_date": "2025-04-29",
+      "title": "2024年年度报告",
+      "prepared_document_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-06/documents/002356-1223365489.json",
+      "prepared_document_sha256": "d717b21a747a2d41ffd38468890c50ac384f3a7372ffa8f071f0f9646363873e",
+      "original_pdf_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01591-pdf.body",
+      "original_pdf_sha256": "ab7dac9c1279d09ef7942ba517ead4f2e2dae350b550c58d9b72da4a85fd0884",
+      "pdf_pages": 166,
+      "tables": {
+        "assets": {
+          "heading_page_1_based": 73,
+          "heading": "合并资产负债表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 期末余额 期初余额",
+          "context_page_window_1_based": [
+            71,
+            74
+          ]
+        },
+        "profit": {
+          "heading_page_1_based": 77,
+          "heading": "合并利润表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 2024 年度 2023 年度",
+          "context_page_window_1_based": [
+            75,
+            78
+          ]
+        },
+        "cash": {
+          "heading_page_1_based": 81,
+          "heading": "合并现金流量表",
+          "independent_heading_found": true,
+          "unit_yuan_found": true,
+          "fiscal_year_context_found": true,
+          "current_column_context_found": true,
+          "parser_header_for_navigation": "项目 2024 年度 2023 年度",
+          "context_page_window_1_based": [
+            79,
+            82
+          ]
+        }
+      },
+      "fields": {
+        "assets": {
+          "page_1_based": 74,
+          "parser_value_yuan": "822694153.04",
+          "independent_first_current_amount": "822694153.04",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "资产总计 822,694,153.04 800,673,205.98",
+          "status": "pass"
+        },
+        "revenue": {
+          "page_1_based": 77,
+          "parser_value_yuan": "406576269.90",
+          "independent_first_current_amount": "406576269.90",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业收入 406,576,269.90 164,985,753.91",
+          "status": "pass"
+        },
+        "cost": {
+          "page_1_based": 77,
+          "parser_value_yuan": "350517119.69",
+          "independent_first_current_amount": "350517119.69",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "其中：营业成本 350,517,119.69 86,696,000.87",
+          "status": "pass"
+        },
+        "cfo": {
+          "page_1_based": 81,
+          "parser_value_yuan": "-94312278.21",
+          "independent_first_current_amount": "-94312278.21",
+          "unit": "元",
+          "unit_scale_consistent": true,
+          "independent_labeled_current_row": "经营活动产生的现金流量净额 -94,312,278.21 -11,903,212.81",
+          "status": "pass"
+        }
+      },
+      "status": "pass"
+    }
+  ],
+  "field_rows_confirmed": 24,
+  "field_rows_targeted": 24,
+  "failures": [],
+  "unconfirmed": [],
+  "limits": [
+    "pypdf text-layer row and nearby consolidated heading/period/unit verification, not rendered-page visual audit or accounting authenticity certification",
+    "Six deliberately chosen new originals do not represent all new or old filings. Previously reviewed 12 PDFs were not rechecked.",
+    "The batch06 all-qualified sample offered only 元 as declared field unit, so a different unit could not be tested.",
+    "Financial-ratio extremes were used only to select source checks, not to infer future performance."
+  ],
+  "verification_correction": "First local text matcher removed spaces before reading current/comparative amount columns and falsely marked 22 rows unconfirmed; same six frozen PDFs were rechecked preserving original row whitespace. Earlier draft was not used as evidence."
+}

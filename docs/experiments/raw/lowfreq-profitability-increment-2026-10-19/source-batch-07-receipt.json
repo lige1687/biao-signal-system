@@ -1,0 +1,105 @@
+{
+  "schema": "source-batch-receipt/1",
+  "run_id": "source-batch-07",
+  "snapshot_context": {
+    "state": "running_partial_snapshot_for_preparation_only",
+    "progress_snapshot_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/progress-source-batch-07.json",
+    "progress_snapshot_sha256": "feb93fa00bbb0cb304f3ded80b8e395b1f745ebe1b8fcc06f068f9af4c535a89",
+    "captured_utc": "2026-10-19T05:39:47.444131+00:00",
+    "frozen_journal_prefix_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/journal-completion-pdf-source-batch07.jsonl",
+    "frozen_journal_prefix_sha256": "763f98f2bb073c911fca5652224c121b1cd90d9e1f45dd34947fc2599cd8c950",
+    "verified_prefix_counts": {
+      "start": 3327,
+      "finish": 3324,
+      "successful_finish": 3321,
+      "failed_finish": 3
+    },
+    "failed_finish_details": [
+      {
+        "op_id": "pdf:002432:1200002441",
+        "error": "non_pdf_response"
+      },
+      {
+        "op_id": "pdf:600050:63779675",
+        "error": "body_above_saved_byte_cap; prefix_preserved"
+      },
+      {
+        "op_id": "pdf:600233:1209841391",
+        "error": "body_above_saved_byte_cap; prefix_preserved"
+      }
+    ],
+    "source_boundary_acceptance": false
+  },
+  "execution": {
+    "command": "python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_batches.py --contract docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-batch-07-contract.json",
+    "pid": 58894,
+    "terminal_session_id": 12638,
+    "exit_code": 0,
+    "elapsed_seconds": 188.42113362497184,
+    "created_utc": "2026-10-19T05:40:11.612860+00:00",
+    "network_used": false,
+    "market_effects_run": false
+  },
+  "hashes": {
+    "contract": "52acb676d9f49bd817fec53db2e3dc7dee88ff7e45342e8cb39743d727d129ba",
+    "manifest": "0aa2f73efc538d554db91fb8ec55e413ff13021d368c3070d0e9a1dcc76b25b4",
+    "runner": "522a6747b59d2aeee499ce717e4a8d1c9d7f612acd1fd7482e6f90b08a58eb8f",
+    "parser": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+    "preparer": "3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012",
+    "progress_snapshot": "feb93fa00bbb0cb304f3ded80b8e395b1f745ebe1b8fcc06f068f9af4c535a89",
+    "reuse_batch06_manifest": "5c04e1af94324cd48e7e2c6e3c50c699291c6a305c7aec3c9eb3bfada0c03b4f"
+  },
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-07",
+  "storage": {
+    "checks": {
+      "mounted": true,
+      "uuid_matches": true,
+      "device_matches": true,
+      "external_result_exists": true,
+      "result_on_expected_device": true,
+      "output_is_new_child": true,
+      "output_absent": true,
+      "free_reserve_ok": true,
+      "storage_plan_not_execution_authority": true
+    },
+    "storage_plan_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-bulk-plan.json",
+    "storage_plan_sha256": "99c1b2b77f24b4206b86f5efc611b223bbb8d24f1ac447147b9d25115c369979",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "reserve_bytes": 10737418240
+  },
+  "documents": {
+    "new": 1324,
+    "reused": 10985,
+    "manifest_total": 12309,
+    "record_hashes_verified": 12309,
+    "hash_failures": 0,
+    "notice_text_records_verified": 5323,
+    "runner_errors": 0,
+    "unprepared_document_states": 1472,
+    "unprepared_reasons": {
+      "body_above_saved_byte_cap; prefix_preserved": 9,
+      "ChunkedEncodingError: ('Connection broken: IncompleteRead(233168 bytes read, 354764 more expected)', IncompleteRead(233168 bytes read, 354764 more expected))": 1,
+      "non_pdf_response": 4,
+      "no_finish; never_retry": 4,
+      "unissued": 1454
+    }
+  },
+  "source_attempt_state": {
+    "code_dictionary_keys": 600,
+    "status_counts": {
+      "complete": 518,
+      "incomplete": 82
+    },
+    "running_partial_snapshot_for_preparation_only": true,
+    "all_sources_finally_accepted": false,
+    "operations": {
+      "catalog": 1237,
+      "pdf": 12327,
+      "total": 13564
+    }
+  },
+  "version_chain_completeness_inferred": false,
+  "scope_note": "Prepared only the successful newly finished originals in the immutable partial snapshot; reused exact batch-06 records. Snapshot contained 3 failed finishes, which remain explicit and were not treated as prepared. This is not final source acceptance. No network requests, panels, or market-effect calculations."
+}

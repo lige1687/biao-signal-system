@@ -1,0 +1,120 @@
+{
+  "schema": "financial-completion-execution-receipt/1",
+  "status": "completed_with_source_gaps",
+  "recorded_at_utc": "2026-10-19T05:56:18.776195+00:00",
+  "pid": 50320,
+  "exec_session_id": 72702,
+  "working_directory": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "command": "python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/complete_financial_sources.py --execute --contract docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/completion-pdf-01-contract.json",
+  "stage": "pdf",
+  "contract_path": "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/completion-pdf-01-contract.json",
+  "contract_sha256": "6fe2aac97e3a242d92c240a7ea773be25384557a1ac0bd16e2ac67ba52ff6273",
+  "runner_sha256": "b3939d55a764481ddf1e227d0406acbd349b9f9b5231ff90f599b4df50d601a7",
+  "plan_sha256": "11531b477b3854f83302fb3b73e64324d5c2da005959d847a5f82510d7e63130",
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01",
+  "prior_http_starts": {
+    "catalog": 1237,
+    "pdf": 9000,
+    "total": 10237
+  },
+  "this_stage_max_starts": 4778,
+  "cumulative_max_starts": 15015,
+  "source_only": true,
+  "market_effects_run": false,
+  "financial_effects_or_trading": false,
+  "journal_snapshot": {
+    "start_pdf": 4778,
+    "finish_pdf": 4778,
+    "unique_start_op_ids": 4778,
+    "unique_finish_op_ids": 4778,
+    "successful_finishes": 4773,
+    "unsuccessful_finishes": 5
+  },
+  "exit_code": null,
+  "exit_code_basis": "Unknown: process PID is gone and the saved exec session ID returned Unknown process id; terminal manifest JSON was emitted, but numeric exit status was not retained.",
+  "finished_at_utc": "2026-10-19T05:54:02.650040+00:00",
+  "process_still_running": false,
+  "terminal_stdout": {
+    "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/manifest.json",
+    "manifest_sha256": "aac09d01f9622d193ed51610a9c37bd614eda9f44192d9172d6cc5543db20a6d",
+    "merged_progress_sha256": "00744a62f375c55791a67b0ca0533710621eff168126a2401c6276d796431857",
+    "stage": "pdf",
+    "new_http_starts": {
+      "catalog": 0,
+      "pdf": 4778,
+      "total": 4778
+    },
+    "all_600_complete": false
+  },
+  "cumulative_http_starts": {
+    "catalog": 1237,
+    "pdf": 13778,
+    "total": 15015
+  },
+  "retained_unissued_or_blocked_count": 20,
+  "prior_started_never_retry_count": 15,
+  "this_stage_unsuccessful_op_ids": [
+    "pdf:002432:1200002441",
+    "pdf:600050:63779675",
+    "pdf:600233:1209841391",
+    "pdf:600233:1219832303",
+    "pdf:600875:1216301205"
+  ],
+  "this_stage_errors": [
+    {
+      "op_id": "pdf:002432:1200002441",
+      "status": 200,
+      "bytes": 533,
+      "error": "non_pdf_response",
+      "sha256": "1d463d63ba033cbd177190cf72dbbd63277102288bba1bfa0652cd88a9bce9d3"
+    },
+    {
+      "op_id": "pdf:600050:63779675",
+      "status": 200,
+      "bytes": 30000000,
+      "error": "body_above_saved_byte_cap; prefix_preserved",
+      "sha256": "cbcb5b75d1a4a54b5c1ec1ade14234af04c475cfe4d1345d679237437c1a6da4"
+    },
+    {
+      "op_id": "pdf:600233:1209841391",
+      "status": 200,
+      "bytes": 30000000,
+      "error": "body_above_saved_byte_cap; prefix_preserved",
+      "sha256": "80ae194ef30a2e6a31315d4d7820c9104ab45799c52a9906c37174bc00b21de8"
+    },
+    {
+      "op_id": "pdf:600233:1219832303",
+      "status": 200,
+      "bytes": 30000000,
+      "error": "body_above_saved_byte_cap; prefix_preserved",
+      "sha256": "78ff8e09a3a20c9f1b91cd70128655e8c4d9a18a3963a5d2bfd7380d45f9c632"
+    },
+    {
+      "op_id": "pdf:600875:1216301205",
+      "status": 200,
+      "bytes": 30000000,
+      "error": "body_above_saved_byte_cap; prefix_preserved",
+      "sha256": "d646836cf609e3d13d2f167a359a74cc05b0133f0f741c3fa73ca3620c902b3b"
+    }
+  ],
+  "merged_code_status_counts": {
+    "complete": 584,
+    "incomplete": 16
+  },
+  "merged_catalog_status_counts": {
+    "complete": 1189,
+    "complete_empty": 11
+  },
+  "body_readback": {
+    "journal_body_entries": 4778,
+    "files_present": 4778,
+    "size_and_sha256_match": 4778,
+    "total_bytes_read": 11476947410
+  },
+  "artifact_hashes": {
+    "manifest.json": "aac09d01f9622d193ed51610a9c37bd614eda9f44192d9172d6cc5543db20a6d",
+    "progress.json": "00744a62f375c55791a67b0ca0533710621eff168126a2401c6276d796431857",
+    "journal.jsonl": "180d2d40f4d0dc1e5c39d5c024e5eca2e027b9d3cc8fdd2f7997d3e983daefcf"
+  },
+  "next_stage_launched": false
+}

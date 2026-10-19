@@ -1,0 +1,96 @@
+{
+  "schema": "source-batch-receipt/1",
+  "run_id": "source-batch-08",
+  "snapshot_context": {
+    "state": "terminal_progress_snapshot",
+    "snapshot_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/progress.json",
+    "snapshot_sha256": "00744a62f375c55791a67b0ca0533710621eff168126a2401c6276d796431857",
+    "snapshot_updated_utc": "2026-10-19T05:54:03.102656+00:00",
+    "global_stop": false,
+    "stage_had_unsuccessful_operations": true,
+    "completion_lineage": {
+      "origin_manifest_sha256": "ab07d9e0c310131258faf2a5338cc394c44f1cdd385fe35695f466acec4cf553",
+      "journal_sha256s": [
+        "4e2d5c50f661a43e53fa6af74b7089d330631c3ffbaeecd56c42c904b1f62946",
+        "3c66e65febfde563d00554d1d83280809ee14acf92518ea7844fcac600dec3d8",
+        "2ae8c4a167d947de5f28384a7b67f4225ec8e67401186e9902bca6add5df6a45",
+        "180d2d40f4d0dc1e5c39d5c024e5eca2e027b9d3cc8fdd2f7997d3e983daefcf"
+      ],
+      "prior_progress_sha256": "d7464cfbd5ff5191e0044e2c98f0c450675b9305c0a5f9a96be3129fd6b59641",
+      "stage_plan_sha256": "11531b477b3854f83302fb3b73e64324d5c2da005959d847a5f82510d7e63130"
+    },
+    "source_boundary_acceptance": true
+  },
+  "execution": {
+    "command": "python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/prepare_financial_batches.py --contract docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-batch-08-contract.json",
+    "pid": 61758,
+    "terminal_session_id": 92678,
+    "exit_code": 0,
+    "elapsed_seconds": 212.55540766601916,
+    "created_utc": "2026-10-19T05:56:06.048894+00:00",
+    "network_used": false,
+    "market_effects_run": false
+  },
+  "hashes": {
+    "contract": "10af99ccb18e510d7a3314e0adb12a260e404ad6f798491676dbf394b9fbcb89",
+    "manifest": "56a486d82b994659baf2e3a9fff9b715877bdddd7dde96c529b6716784594014",
+    "runner": "522a6747b59d2aeee499ce717e4a8d1c9d7f612acd1fd7482e6f90b08a58eb8f",
+    "parser": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+    "preparer": "3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012",
+    "terminal_progress": "00744a62f375c55791a67b0ca0533710621eff168126a2401c6276d796431857",
+    "reuse_batch07_manifest": "0aa2f73efc538d554db91fb8ec55e413ff13021d368c3070d0e9a1dcc76b25b4"
+  },
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-08",
+  "storage": {
+    "checks": {
+      "mounted": true,
+      "uuid_matches": true,
+      "device_matches": true,
+      "external_result_exists": true,
+      "result_on_expected_device": true,
+      "output_is_new_child": true,
+      "output_absent": true,
+      "free_reserve_ok": true,
+      "storage_plan_not_execution_authority": true
+    },
+    "storage_plan_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/storage-bulk-plan.json",
+    "storage_plan_sha256": "99c1b2b77f24b4206b86f5efc611b223bbb8d24f1ac447147b9d25115c369979",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "reserve_bytes": 10737418240
+  },
+  "documents": {
+    "new": 1452,
+    "reused": 12309,
+    "manifest_total": 13761,
+    "record_hashes_verified": 13761,
+    "hash_failures": 0,
+    "notice_text_records_verified": 5904,
+    "runner_errors": 0,
+    "unprepared_document_states": 20,
+    "unprepared_reasons": {
+      "body_above_saved_byte_cap; prefix_preserved": 11,
+      "ChunkedEncodingError: ('Connection broken: IncompleteRead(233168 bytes read, 354764 more expected)', IncompleteRead(233168 bytes read, 354764 more expected))": 1,
+      "non_pdf_response": 4,
+      "no_finish; never_retry": 4
+    }
+  },
+  "source_attempt_state": {
+    "code_dictionary_keys": 600,
+    "status_counts": {
+      "complete": 584,
+      "incomplete": 16
+    },
+    "all_catalogs_known": true,
+    "terminal": true,
+    "network_requests_remaining": 0,
+    "operations": {
+      "catalog": 1237,
+      "pdf": 13778,
+      "total": 15015
+    }
+  },
+  "version_chain_completeness_inferred": false,
+  "scope_note": "Final source-document preparation from the terminal progress snapshot. Reused exact batch-07 records and prepared only newly completed originals. 20 document items remain explicitly unprepared/incomplete; 584 codes are complete and 16 incomplete. No network requests, panel generation, or market-effect calculations."
+}
