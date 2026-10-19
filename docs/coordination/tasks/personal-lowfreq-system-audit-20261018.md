@@ -1,3 +1,11 @@
+# 研究准备检索入口具体补缺 2026-10-20T01:22:33.356603+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=defe0d5e64ee3b3e92f55dcf0d0ea9b35c0c11f3；checked_at=2026-10-20T01:22:33.356603+08:00。原已读任务不变，新增读theory-workflow-system-increment完整相关准备/发布阶段，最终10月8日有限交付已释放，无在做的本两路径写入。原main文件未跟踪，内容与原报告分开留SHA，不能覆盖不相关改动。
+- 实查缺口：preparation检索cases与objects，遗漏现有research_references；JKP/French/AQR已登记却不能直接取回。新增精确范围为src/lei_signal/research/preparation.py（只读研究准备层，不改变交易/定义）、tests/unit/test_research_preparation_references.py；自身worktree中Luna唯一实现者，root审核后按原SHA比较只将准确补丁镜像到主树，使真实CLI可用；原test_research_preparation.py只读回归。文档仍自己报告/raw/进度/registry本键/INDEX本行，可在自身playbook附用法链接。不改原definitions/runner/ledger/因子或策略。
+- 验收：词与准确版本查现有参照卡；和因子对象分开输出；来源/市场/用途/未实现状态原样保留；未知版本拒绝、无命中/截断明确；不取网络、不授权执行；原14准备测试回归与实际JKP/French/AQR CLI对比。两策略SHA本轮重新核同，服务于研究准备层。本轮非市场试验，旧工具封存结果不重跑。
+
+---
+
 # 研究工具、基准与数据复用审查启动 2026-10-20T01:19:39.783907+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=a51d435524dfe4a4c0cc1e1f1f2b4c204cac587e；checked_at=2026-10-20T01:19:39.783907+08:00；已读COORDINATION/self/research-utility-review最新cashOP交付01:17/lowfreq-strategy-discovery/external-quant-resources顶部10月5日/dispatch。唯一写者root；Luna只读工具盘点。外部工具旧审查复用，现金经营盈利与应计、资产增长旧研究不重复。
