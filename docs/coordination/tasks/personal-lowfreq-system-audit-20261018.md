@@ -1,3 +1,12 @@
+# 按原顺序开展P3价值研究 2026-10-19T14:57:36.909043+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=20aeb7c1bf1ed1944433b838135c20d820472539；checked_at=2026-10-19T14:57:36.909043+08:00；已读COORDINATION/self/research-utility-review-20261012最新14:55/investor-workspace-simplification-20261012最新12:10/research-dispatch-controller。原因子扩展ETF/个股小时覆盖和定义审查与本财务估值研究无交集；各自只动registry键/INDEX行，独立工作树。基线和已推成果9c22e6a4069251dce5914f51ea13892d334ba40c，原工作树/工作分支继续。
+- 用户明确“继续按下一步方向去拓展”，进入原授权P3价值：便宜与经营恶化、已有动量和盈利信息的区别。复用固定600历史股/132月及原件，不重跑封存P1/P2、不改原LEI/ETF/账户或生产交易。先核可计算估值和当时资料资格，再冻单一有金融理由的候选、公平对照，实际执行可行核心与必要反例。无法核股本/价格/财务时点则保留未知，不拿利润率冒充估值。
+- 新路径docs/experiments/raw/lowfreq-value-increment-2026-10-19/及报告docs/experiments/lowfreq-value-increment-2026-10-19.md；root单写brief/合同/决定/报告、registry本键/INDEX本行、原progress/本人目标。Luna low只写source-reuse-inventory.json，查已存字段和有限原件，不读未来效果；Astra high只写value-definition-review.json，审测量/竞争解释/最低资格。后续代码/执行逐项冻结写权，旧原件与代码只读。
+- 新有界题最多1核心+3必要跟进，P1/P2家族已看历史及旧累计预算保留，不借旧余额改名重跑。本阶段0效果/0新行情，方法与来源资格小查询最多6次含失败；若确需同600估值新字段，先按缺项清单冻结有限数据预算，无付费/无限抓取。大产物仍固定外盘；14:56已核UUID/可用505501974528B，不回退内盘。当前资料资格阶段，不以启动/工程成功冒充有效因子。
+
+---
+
 # 盈利/现金对动量的有界研究已交付 2026-10-19T14:33:18.281003+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次有界历史问题；scope_released true；checked_coordination_sha=fb36ded4b72a8250fb5c5e4d0a48b671283129d4；checked_at=2026-10-19T14:33:18.281003+08:00；已读COORDINATION/self/research-utility-review-20261012最新14:28/investor-workspace-simplification-20261012最新12:10/research-dispatch-controller；最新fetch无变化，原ETF小时/LEI/UI/账户owner范围无交集。
