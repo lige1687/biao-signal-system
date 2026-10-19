@@ -1,3 +1,15 @@
+# 价值、动量互补与长期反转复算阶段交付 2026-10-20T01:38:47.138304+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅公开参考复算与方法审查，原A/US逐股及LEI增量blocked_original_inputs；scope_released true。checked_coordination_sha=7a24b92205c15e3a58ad161fc7f7b9a2c2442804；checked_at=2026-10-20T01:38:47.138304+08:00；已读COORDINATION/self/personal工具审查01:30、system00:57/dispatch及旧价值owner报告；无新增范围冲突，不接管其他owner输入修复/预算。
+- 报告docs/experiments/value-momentum-reversal-replication-2026-10-20.md SHA7177f66107e727230d33d60061148b95756bfaeb46e9b527bc09e26338986755，raw含design冻结、21来源账、失败v1、独核与交付回执。主成果codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9本地未提交未推，协调元数据不代表正文移交。
+- 美股474月1972.02—2011.07：价值/动量/各半年化平均3.93/7.70/5.82%，波动14.82/17.02/6.77%，原表6项舍入一致；并未多赚。A股2000—16价值月均1.1097%、波动3.7941%与原表1.14/3.75未精确吻合，差异原因保留。2017—21月均1.054%，不是未见验证。
+- 初始长多按总回报标签判断撤回：原表excess标题与文件标签冲突、数字相符，未核本金收益；机械CAGR/回撤不入主结论。同月各半减动量−0.0426pp区间跨0可保留。长期反转原36月与旧1月/OSAP13—36月不同，不重跑；均值回归未造规则。
+- 原A股价值8例资料未ready、无原价值效果，预算不重置。1核心输出字段失败、1跟进修正，225独立核数差3.55e-15；来源US6/China6/combo5/reversal4含失败，各上限6。Sol中等两执行/复用，Astra高方法审，root独核；无多余参数。归置/准确diff、700旧登记/原策略规则定义保护均通过。
+- API全文相同、AgentSHA verified未截断、5188浏览器6表与边界读回。目标okr-ff1e0a86fbac仅note174→175/in_progress，旧history/其它字段保持。外盘5261660B、本机166417B；无交易/生产/付费/通知/删除、后台，实际模型费未知。
+- 恢复读同raw state/design/core-receipt/followup-01-receipt/controller-method-review/independent-numeric-review/storage-plan；先解决原逐股输入、长多现金口径与原China版本，不能以公开组合取代完整研究，不能重跑已完成参考或重复旧owner取数。
+
+---
+
 # 价值、长期反转及价值动量互补复现启动 2026-10-20T01:21:07.487224+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=222b5aa11cc95e242ff4fabbf2c5ef2a9bd43a70；checked_at=2026-10-20T01:21:07.487224+08:00；已读COORDINATION/self/personal工具审查01:19/system00:57/dispatch；低频价值原owner来源资格报告只读复用。与工具可用性审查不重叠，不接管原A股600股财报映射/预算。
