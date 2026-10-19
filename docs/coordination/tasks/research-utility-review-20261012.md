@@ -1,3 +1,14 @@
+# 同一绿色候选内动量选择增量启动 2026-10-20T01:44:31.470825+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=06126603ccc40ab19de3f23b2723300219b0807b；checked_at=2026-10-20T01:44:31.470825+08:00；已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新工具审查01:30、investor-workspace-simplification-20261012最新00:57、research-dispatch-controller及lowfreq-strategy-discovery-20261019原样本来源。与工具/系统及财务owner无重叠，不接管旧预算/输入修复。
+- 用户明确授权同历史池、固定双均线绿色候选比较普通与残差动量，收益/下跌/换手代价；亦同意52周高点增量。新有界问题为月度选择的回顾性同池研究，旧公开组合复算/价值/FIP/绿色事件不重跑。保留原LEI绿色语义，绿色不冒称完整入场退出；不修改原技术/阈值/生产。
+- 唯一新增范围：docs/experiments/green-momentum-selection-2026-10-20.md与同名raw；src/lei_signal/research/green_momentum.py；tests/unit/test_green_momentum.py；definitions仅本题研究对象追加；registry仅本报告键、INDEX仅本行、原progress与目标note。root负责合同/定义/共享登记；Sol可独写新模块、测试及本题runner，Astra只读方法审。当前只读两助手已完成，无市场统计或写文件。
+- 复用600股2014年底历史池合同v2与CH3已存原件，先重核价格字段/连续月/发布时间局限，再冻结设计和代码指纹。BHM36月滚动估计及截距歧义留裁决；加简单波动缩放对照隔离收益来源。CH3事后版本仅支持回顾比较，不能声明当时可交易。美股个股原输入缺口继续明确，不能冒充A美全复现。
+- 新问题累计预算按research-closure：1核心+最多3必要跟进（纠错也计），最多6新增公开来源请求，先复用；不参数网格、不选择好结果。预估外盘256MiB/本机600KiB，storage实核外盘身份通过、内盘13.67GiB。执行前计划绑定/源资格/定义冻结；未知未来结果保留权重，不按未来可得筛选择。
+- 验收：同日同股票池同选择比例、等投入，普通/简单缩放/残差及52周高点对照；性能和相对基准增量/放弃上涨/避免损失/换手费用敏感性，独核方法与数字；归档/系统Web读回。原股价复权与因子历史发布未核不声称真实净收益。主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9保持脏状态，本地成果不自动提交，协调元数据单独推后核；无交易/付费/通知/删除/生产改动。
+
+---
+
 # 价值、动量互补与长期反转复算阶段交付 2026-10-20T01:38:47.138304+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅公开参考复算与方法审查，原A/US逐股及LEI增量blocked_original_inputs；scope_released true。checked_coordination_sha=7a24b92205c15e3a58ad161fc7f7b9a2c2442804；checked_at=2026-10-20T01:38:47.138304+08:00；已读COORDINATION/self/personal工具审查01:30、system00:57/dispatch及旧价值owner报告；无新增范围冲突，不接管其他owner输入修复/预算。
