@@ -1,0 +1,49 @@
+{
+  "source_requests_used": 2,
+  "max": 6,
+  "source_queries": [
+    {
+      "query": "site.baostock.com 历史A股K线数据 turn 流通股本",
+      "result": "official home and upstream code docs; adjustflag3 unadjusted, historyquery fields turn"
+    },
+    {
+      "query": "site.tushare.pro/document daily_basic stk_limit total_share circ_mv",
+      "result": "official docs daily_basic32 and stk_limit183;2000points access, nottested credentials"
+    }
+  ],
+  "references": [
+    "https://www.baostock.com/",
+    "https://github.com/zxygithub/baostock/blob/master/docs/pythonAPI.md",
+    "https://tushare.pro/document/2?doc_id=32",
+    "https://tushare.pro/document/2?doc_id=183"
+  ],
+  "remaining_requests": [
+    {
+      "key": "001914-nominal",
+      "method": "query_history_k_data_plus",
+      "adjustflag": "3",
+      "window": "2013-01-01/2026-01-15"
+    },
+    {
+      "key": "001914-adjusted-repeat",
+      "method": "query_history_k_data_plus",
+      "adjustflag": "2",
+      "window": "2013-01-01/2026-01-15",
+      "purpose": "compare sourceflag knownmismatch; newversion no overwrite"
+    },
+    {
+      "key": "001914-adjust-factors",
+      "method": "query_adjust_factor",
+      "window": "2013-01-01/2026-01-15"
+    },
+    {
+      "key": "600519-share-fields",
+      "method": "query_profit_data",
+      "year": 2014,
+      "quarter": 4,
+      "purpose": "fields and period/publication qualifier; no historical dailyshares claim"
+    }
+  ],
+  "login_policy": "anonymous handshake logged; if failure consumes one intended data-source attempt; no infinite retries",
+  "no_new_returns": true
+}

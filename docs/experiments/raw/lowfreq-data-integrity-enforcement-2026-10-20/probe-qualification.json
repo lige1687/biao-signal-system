@@ -1,0 +1,133 @@
+{
+  "checks": [
+    {
+      "key": "001914-nominal",
+      "rows": 3166,
+      "start": "2013-01-04",
+      "end": "2026-01-15",
+      "flags": {
+        "3": 3166
+      },
+      "problems": []
+    },
+    {
+      "key": "001914-adjusted-repeat",
+      "rows": 3166,
+      "start": "2013-01-04",
+      "end": "2026-01-15",
+      "flags": {
+        "3": 1560,
+        "2": 1606
+      },
+      "problems": []
+    }
+  ],
+  "old_source_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition-single-resume/sz.001914-daily-attempt1.json",
+  "old_source_sha256": "1a70bc7a0c059717ada8ab20038866fb729dfa039cf9da819611e58fcf8d822b",
+  "new_vs_old_common_fields_changed_rows": 0,
+  "flag3_span": [
+    "2013-01-04",
+    "2019-06-05"
+  ],
+  "flag2_span": [
+    "2019-06-06",
+    "2026-01-15"
+  ],
+  "flag3_ohlc_equals_nominal_rows": 1560,
+  "adjusted_vs_nominal_close_different_rows": 1606,
+  "adjustment_factor_records": [
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2019-06-06",
+      "foreAdjustFactor": "0.913520",
+      "backAdjustFactor": "6.411102",
+      "adjustFactor": "6.411102"
+    },
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2019-12-16",
+      "foreAdjustFactor": "0.913520",
+      "backAdjustFactor": "6.411102",
+      "adjustFactor": "6.411102"
+    },
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2020-08-12",
+      "foreAdjustFactor": "0.916267",
+      "backAdjustFactor": "6.430384",
+      "adjustFactor": "6.430384"
+    },
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2021-06-17",
+      "foreAdjustFactor": "0.922220",
+      "backAdjustFactor": "6.472160",
+      "adjustFactor": "6.472160"
+    },
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2022-06-16",
+      "foreAdjustFactor": "0.927966",
+      "backAdjustFactor": "6.512485",
+      "adjustFactor": "6.512485"
+    },
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2023-07-27",
+      "foreAdjustFactor": "0.934965",
+      "backAdjustFactor": "6.561605",
+      "adjustFactor": "1.000000"
+    },
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2023-07-28",
+      "foreAdjustFactor": "0.934965",
+      "backAdjustFactor": "6.561605",
+      "adjustFactor": "6.561605"
+    },
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2024-08-21",
+      "foreAdjustFactor": "0.953193",
+      "backAdjustFactor": "6.689526",
+      "adjustFactor": "6.689526"
+    },
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2025-08-13",
+      "foreAdjustFactor": "0.971079",
+      "backAdjustFactor": "6.815053",
+      "adjustFactor": "1.000000"
+    },
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2025-08-14",
+      "foreAdjustFactor": "0.971079",
+      "backAdjustFactor": "6.815053",
+      "adjustFactor": "6.815053"
+    }
+  ],
+  "financial_sample": {
+    "code": "sh.600519",
+    "pubDate": "2015-04-21",
+    "statDate": "2014-12-31",
+    "roeAvg": "0.319612",
+    "npMargin": "0.515279",
+    "gpMargin": "0.925934",
+    "netProfit": "16269371509.830000",
+    "epsTTM": "13.441183",
+    "MBRevenue": "31572875951.450000",
+    "totalShare": "1141998000.00",
+    "liqaShare": "1141998000.00"
+  },
+  "decisions": {
+    "001914_old_and_repeat_adjusted": "blocked: mixed returned adjustment conventions confirmed twice; no automatic conversion",
+    "001914_nominal": "bounded current-vendor historical nominal sample; not point-in-time revision proof or total return",
+    "001914_adjustment_factors": "10 supplier events, earliest2019; cannot prove complete older corporate actions/identity history",
+    "600519_share_fields": "one fiscal-period report, date-only publication2015-04-21; not admissible at2014-12-31, no verified arrival time/version/daily shares",
+    "daily_size_filters": "still blocked pending historical dated share changes, field units and coverage qualification",
+    "actual_price_limits_and_fills": "still not supplied by these four requests"
+  },
+  "performance_experiments": 0,
+  "source_attempts": 6
+}

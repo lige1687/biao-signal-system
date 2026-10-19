@@ -1,0 +1,157 @@
+{
+  "at": "2026-10-20T00:50:03.649935+08:00",
+  "source_requests_before": 2,
+  "source_attempts_this_run": 4,
+  "total_source_attempts": 6,
+  "max_source_attempts": 6,
+  "no_new_returns": true,
+  "requests": [
+    {
+      "kind": "login",
+      "at": "2026-10-20T00:49:49.446649+08:00",
+      "error_code": "0",
+      "error_msg": "success",
+      "seconds": 0.2907189589459449
+    },
+    {
+      "kind": "data_request",
+      "key": "001914-nominal",
+      "at": "2026-10-20T00:49:49.454702+08:00",
+      "method": "query_history_k_data_plus",
+      "kwargs": {
+        "code": "sz.001914",
+        "start_date": "2013-01-01",
+        "end_date": "2026-01-15",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST",
+        "frequency": "d",
+        "adjustflag": "3"
+      },
+      "status": "ok",
+      "rows": 3166,
+      "fields": [
+        "date",
+        "code",
+        "open",
+        "high",
+        "low",
+        "close",
+        "preclose",
+        "volume",
+        "amount",
+        "adjustflag",
+        "turn",
+        "tradestatus",
+        "pctChg",
+        "isST"
+      ],
+      "error_code": "0",
+      "error_msg": "success",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T004432-f8387b6b4781/result/001914-nominal.json",
+      "sha256": "3a7fad36509602baffab108dc106dd241a68dda24efe85ee0f5ad6f12f075d31",
+      "bytes": 770878,
+      "seconds": 6.2615515410434455
+    },
+    {
+      "kind": "data_request",
+      "key": "001914-adjusted-repeat",
+      "at": "2026-10-20T00:49:56.725610+08:00",
+      "method": "query_history_k_data_plus",
+      "kwargs": {
+        "code": "sz.001914",
+        "start_date": "2013-01-01",
+        "end_date": "2026-01-15",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,turn,tradestatus,pctChg,isST",
+        "frequency": "d",
+        "adjustflag": "2"
+      },
+      "status": "ok",
+      "rows": 3166,
+      "fields": [
+        "date",
+        "code",
+        "open",
+        "high",
+        "low",
+        "close",
+        "preclose",
+        "volume",
+        "amount",
+        "adjustflag",
+        "turn",
+        "tradestatus",
+        "pctChg",
+        "isST"
+      ],
+      "error_code": "0",
+      "error_msg": "success",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T004432-f8387b6b4781/result/001914-adjusted-repeat.json",
+      "sha256": "6d6bbe937f03ff080b8ee875f1188246a39f7fb70a7e2cbc7f1084253a86d8e4",
+      "bytes": 818751,
+      "seconds": 3.7093371669761837
+    },
+    {
+      "kind": "data_request",
+      "key": "001914-adjust-factors",
+      "at": "2026-10-20T00:50:01.446734+08:00",
+      "method": "query_adjust_factor",
+      "kwargs": {
+        "code": "sz.001914",
+        "start_date": "2013-01-01",
+        "end_date": "2026-01-15"
+      },
+      "status": "ok",
+      "rows": 10,
+      "fields": [
+        "code",
+        "dividOperateDate",
+        "foreAdjustFactor",
+        "backAdjustFactor",
+        "adjustFactor"
+      ],
+      "error_code": "0",
+      "error_msg": "success",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T004432-f8387b6b4781/result/001914-adjust-factors.json",
+      "sha256": "b8a98ebac2c44f63337250a3dee39b32fc18dd831955de0e029e2649e13757d7",
+      "bytes": 1237,
+      "seconds": 0.04743400006555021
+    },
+    {
+      "kind": "data_request",
+      "key": "600519-share-fields",
+      "at": "2026-10-20T00:50:02.498171+08:00",
+      "method": "query_profit_data",
+      "kwargs": {
+        "code": "sh.600519",
+        "year": 2014,
+        "quarter": 4
+      },
+      "status": "ok",
+      "rows": 1,
+      "fields": [
+        "code",
+        "pubDate",
+        "statDate",
+        "roeAvg",
+        "npMargin",
+        "gpMargin",
+        "netProfit",
+        "epsTTM",
+        "MBRevenue",
+        "totalShare",
+        "liqaShare"
+      ],
+      "error_code": "0",
+      "error_msg": "success",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T004432-f8387b6b4781/result/600519-share-fields.json",
+      "sha256": "98b7f40ddbb5828e54909cecda1ff25138ed137c86b4e6f2025405d015bd6c66",
+      "bytes": 501,
+      "seconds": 0.06676129100378603
+    },
+    {
+      "kind": "logout",
+      "at": "2026-10-20T00:50:03.648783+08:00",
+      "error_code": "0"
+    }
+  ],
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T004432-f8387b6b4781/result"
+}

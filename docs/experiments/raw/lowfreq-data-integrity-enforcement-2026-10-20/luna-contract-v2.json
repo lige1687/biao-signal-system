@@ -1,0 +1,37 @@
+{
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "scope ambiguity",
+    "missing permissions",
+    "unsafe action"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "mission": "Read-only locate existing history nominalprice/shares/marketcap/limit datasets and alreadyinstalled vendor interfaces; inspect only metadata/relevant functions, no remote/rawlarge reads/privatecredentials.",
+  "task_scope": [
+    "Inspect relevant existing local metadata and code only"
+  ],
+  "read_only_paths": [
+    "src/lei_signal/research/input_preflight.py",
+    "src/lei_signal/research/data_quality.py",
+    "src/lei_signal/data",
+    ".codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+    ".codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/brief.json",
+    "docs/experiments",
+    "scripts/archive",
+    "configs"
+  ],
+  "write_paths": [],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "expected_outputs": [
+    "bounded implementation/tests or precise existing-data inventory, limitations"
+  ]
+}

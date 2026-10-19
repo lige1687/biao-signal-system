@@ -1,0 +1,16 @@
+{
+  "model": "gpt-6-luna",
+  "reasoning": "low",
+  "mode": "read_only_local_inventory",
+  "findings": {
+    "existing_adjusted_quotes": "providers.py Eastmoney/Yahoo/Sina/Tencent do not bind historical shares or exact limits in this legacy contract",
+    "baostock": "anonymous installed SDK; prior bounded probe exists",
+    "tushare": "archive wrapper exists, no qualified historical daily_basic/stk_limit source bound",
+    "missing_in_inspected_paths": [
+      "nominal price full panel",
+      "historical dated total/float shares",
+      "exact historical price limits"
+    ]
+  },
+  "limits": "targeted inventory, not proof no such data anywhere"
+}

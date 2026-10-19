@@ -1,0 +1,37 @@
+{
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "scope ambiguity",
+    "missing permissions",
+    "unsafe action"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "mission": "Implement narrow source adapter and guarded entry/test; preserve frozen lowfreq_discovery; no realdata/network runs.",
+  "task_scope": [
+    "Implement exactly two owned files and in-memory checks only"
+  ],
+  "read_only_paths": [
+    "src/lei_signal/research/input_preflight.py",
+    "src/lei_signal/research/data_quality.py",
+    "src/lei_signal/data",
+    ".codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+    ".codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/brief.json"
+  ],
+  "write_paths": [
+    ".codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_input_guard.py",
+    ".codex/worktrees/personal-audit-coordination-20261018/tests/unit/test_lowfreq_input_guard.py"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "expected_outputs": [
+    "bounded implementation/tests or precise existing-data inventory, limitations"
+  ]
+}
