@@ -1,3 +1,13 @@
+# FIP两张图像附件接入与浏览器验收完成 2026-10-20T00:55:02.628949+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed仅两张附件展示接入；scope_released true。checked_coordination_sha=ba0d611b2db19ba47e886726e768b2d5f927b939；checked_at=2026-10-20T00:55:02.628949+08:00；已读COORDINATION/self/research-utility最新00:48/personal00:43/dispatch，交付前fetch无他人新变更，无文件冲突。
+- 原两URL回落200/text/html/578字节且目标缺文件；同时原两SVG重复viewBox导致XML失败。原因子owner已修来源，本方仅复制其最终附件到当前服务工作树web/public/research/fip-clock-profitability-2026-10-20/。源/目标/HTTP逐字和SHA全同：fip-groups.svg 27478字节 SHA4b47b61ba0e6e9330263d0146dd0afa72f2e8e338bd758c68833e466c05d6a71；fip-increment.svg 5410字节 SHAf66e37bd6b96a4f9b7c84d67b9e3d4859c9e69285811fd01fc1c2474e7dab8ca。均HTTP200/image/svg+xml、XML可解析，无主动脚本或外部资源。
+- CUA真实报告页刷新后两图complete，自然尺寸500×420及500×305；不只认HTTP200。创建首图紧接请求曾遇静态监测尚未识别的回落，核实际文件后复验通过，失败留痕。5188 PID15320/cwd保持，未重启。主仓归置通过，无组件/API/报告/原策略/结果/研究运行变更。
+- 回执docs/archive/handoffs-plans/investor-workspace-simplification-20261012/fip-static-assets-20261020-receipt.json SHA dcc653970583340dec2f592554043ed936717697cc9d424b2ba4c36f8b5af8da，原失败/修正归属/精确URL/三方hash/浏览器读回俱全，主/自身树一致；work-progress已追加。原因子可直接读取验收，无需再派系统任务。报告研究结论及原预算保持原因子owner。
+- 成果codex/investor-workspace-simplification-20261012@e6c4c2e025252c565ba15f05611561ca1ecd5b48仅本机未提交增量，不合main；远端只同步本协调。两附件与必要证据已完成，scope释放，无本轮后台工作。
+
+---
+
 # FIP两张研究附件接入当前前端 2026-10-20T00:51:22.014185+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false。checked_coordination_sha=43b57fd8b7387268d57f301c359a96901bf6a848；checked_at=2026-10-20T00:51:22.014185+08:00；已读COORDINATION、自身、research-utility-review最新00:48、personal-lowfreq-system-audit最新00:43、research-dispatch-controller。复用用户此前系统展示归本对话/因子归另一对话的明确分工；原owner请求只接两图，不参与FIP研究或改结论。
