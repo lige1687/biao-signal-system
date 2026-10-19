@@ -1,3 +1,14 @@
+# 用户纠正后的全面覆盖与定义主动审查 2026-10-19T14:55:56.870133+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=89eb6fa1fc0df37d0af6637df3e74a64ec5dc9be；checked_at=2026-10-19T14:55:56.870133+08:00；已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新14:33/system最新12:10/research-dispatch-controller。无共享写冲突，不接管盈利/动量选择及系统UI/API。
+- 用户明确指出单510500不足，要求扩大ETF及个股、主动审定义符合原策略/科学流程。本轮覆盖固定原8ETF及现有6股，并在新效果前按历史名单固定更广个股；先资料资格、原规则与代理区别，后一次冻结的跨对象比较。复用旧底部身份与阴性实验，不改原文、不调阈值、不假称完整策略或独立历史未见资料。
+- 新范围docs/experiments/factor-definition-coverage-audit-2026-10-19.md及同名raw；必要新研究工具src/lei_signal/research/hourly_coverage_expansion.py与对应unit测试，旧模块只读；root唯一写registry自身键、INDEX行、原progress与目标note。静态研究图仅web/public/research-results/factor-definition-coverage-audit-2026-10-19.svg，精确create-only镜像到已授权5188展示树。不改活动服务/数据库金融记录/原封存数据。
+- 来源扩展依据本轮用户明确要求，不把旧默认6次额度当供应商限制；旧6/6和85+1记录完整保留。新的固定公共数据批次在原预算附件登记对象/请求上限/来源后启动，无付费、无无限爬取，失败计数。旧市场累计2883.667244秒/3600秒保留，本轮优先复用旧计算并核可执行量，不默默重置。
+- Astra high只读审规则/定义；Sol medium只读审可用数据/去重，root冻结新来源与效果合同后执行。新产物先设备容量预检，外盘写入；语义审查发现偏差仅研究版显式纠错，不擅改桌面确认源。目标为全覆盖清单、定义问题及修正、跨ETF/个股性能和增量、反例/缺口、系统实看。
+- 成果仍codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be加本机未提交产物；本轮尚未运行新行情或效果，不以协调推送代表研究完成。
+
+---
+
 # 单ETF小时补证与真实系统展示已交付 2026-10-19T14:42:11.865203+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本有界题；scope_released true。checked_coordination_sha=d8c853ec7e529daff9414087cd682ca56a51c7d2；checked_at=2026-10-19T14:42:11.865203+08:00；已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新14:33/system最新12:10/research-dispatch-controller；无研究/写路径交集，不接管另owner600股盈利研究。
