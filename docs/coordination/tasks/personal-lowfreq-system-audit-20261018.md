@@ -1,3 +1,14 @@
+# 盈利资料首批资格与旧公告作用期限修正 2026-10-19T12:12:03.531767+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=6a2e5c3b52f06cb9f16d313c25e4ad0ec1aaf834；checked_at=2026-10-19T12:12:03.531767+08:00；已读COORDINATION、自身、research-utility-review-20261012(01:41)、investor-workspace-simplification-20261012最新12:10交付、research-dispatch-controller。冲突决定不变：仅独立600股年度盈利/经营现金相对同池动量，不接原策略或系统UI。
+- 成果codex/personal-lowfreq-system-audit-20261018@f914a022da82f0eaf9417fc6c50b6619e8328623已push/fetch29准确文件读回；第一批4029源(620复用)与1720公告文本hash全核，79200行/132月来源面板真实exit0；仅182来源代码，非最终600效果。
+- 首批严格规则把未读通用更正永久阻断新年报。root/Astra明确在首个财务效果前修订asof-version-rules.v2及financial-design-amendment-02，保留旧合同和诊断：新年末及披露日晚于旧事件、当前完整字段通过才恢复当期测量，未读事件仍unknown；已知当前字段/年份冲突不豁免。不是原始事前方案，不按收益选版本。固定旧批仅改此口径，共同合格股月1268→6848、每月27—109；是来源资格变化，不是收益提升。
+- parser v3按实际币种/释义/单位表头补解析，24反例通过；Sol独立pypdf核12原PDF48字段，旧24值不变。22时点反例通过，原失败保留。最新源/方法/核数在自身raw，大原件只固定外盘。
+- 04:10UTC采集6706 starts(559目录/6147PDF)，253完整/10不完整/4运行/333待取；Luna沿原上限继续，失败和4旧无finish不重发。第二批02原指纹门禁exit1无产物，修runner后02b合同由Luna执行约3090准备记录、尚未完成核验。补齐工具root审查并补执行期锁、失败目录不阻独立完整代码、storage绑定/运行设备检查，尚0补齐HTTP；须原run结束后冻结实际未发清单与累计预算。
+- 独立源/比较工具root单写；Luna执行回执，Sol/Astra独核。范围沿原raw/正式profitability_discovery.py+test/自身报告progress/未来registry本键与INDEX本行。不改共享策略、生产、交易、通知。财务核心1+最多3必要跟进仍0使用；下一必须完成资料尝试/最终面板/实际比较与独核，不以资料工程结案。
+
+---
+
 # 盈利历史资料中断接续与逐字段资格  2026-10-19T11:32:30.261888+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=c2006894ecbff6b741ca17b11de2229a41fc97e8；checked_at=2026-10-19T11:32:30.261888+08:00；已读COORDINATION、自身、research-utility-review-20261012最新01:41、investor-workspace-simplification-20261012最新11:23、research-dispatch-controller。冲突决定：只独立600股票盈利资料/相对动量价值，不接原因子/账户/UI；文件范围沿用，仅自身raw新增来源和按时点面板工具。
