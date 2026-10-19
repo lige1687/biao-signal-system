@@ -1,3 +1,12 @@
+# FIP 本地适配实现单写者登记 2026-10-20T00:28:41.829715+08:00
+
+- task-id research-utility-review-20261012；active；scope_released false；checked_coordination_sha=b8ab1c3e6f8443c31bf839154467dedfbcc3ae8c；checked_at=2026-10-20T00:28:41.829715+08:00；复读COORDINATION/self/personal/new-lowfreq/system/dispatch，无新远端变动与冲突。
+- 新增精确范围：src/lei_signal/research/fip.py、tests/unit/test_research_fip.py 由Sol medium fip_local_compute唯一写；本题raw下run_local.py亦由该agent写。root唯一写docs/research/definitions.v1.json本对象 research.price.fip_information_discreteness@1.0.0 与sources/changelog本项，保护旧内容；raw其余设计/冻结/验收、报告及登记仍root。
+- Astra high fip_method_review只读原论文与设计，审原文时点/对照/缺失推断。Sol先做纯公式及输入资格/人工验证，不准实际统计；原文细节和source-only样本支持核清、方法冻结与SHA绑定后由root运行效果。保持原1核心+最多3必要跟进，不新增参数网格、不改时钟/均线/财务旧实验。
+- 本轮为原公式的A股本地适配及条件历史比较；现有预测入口不原生支持顺序截面排序，按question-method-standard§10显式冻结专用方法，不伪装成原US完整复现或生产预测。复用当前规范、源合同/日历/历史队列、已有时钟斜率，尽量不用重复平台。
+
+---
+
 # FIP原研究、时钟增量与毛利复用启动 2026-10-20T00:22:53.627402+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=31847ca7386f324ab06897f64723451b4123e273；checked_at=2026-10-20T00:22:53.627402+08:00；已读COORDINATION/self/system/personal最新00:21月反转交付/new-lowfreq/dispatch。无新文件冲突，个人财务P2/P3及经典反转旧成果只读复用。
