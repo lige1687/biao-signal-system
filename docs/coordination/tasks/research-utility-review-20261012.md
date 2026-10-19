@@ -1,3 +1,13 @@
+# FIP 结果验收及图像附件发布 2026-10-20T00:48:13.844666+08:00
+
+- task-id research-utility-review-20261012；active；scope_released false；checked_coordination_sha=f95c098b6e7a8580ee4166b075683e63f962db5c；checked_at=2026-10-20T00:48:13.844666+08:00；已读COORDINATION/self/personal最新数据防护00:43及动量体检00:39/new-lowfreq/system/dispatch。其他owner新guard与本FIP无路径冲突，不接管旧财务修复。
+- FIP核心1次已跑：59742合格股票月/127月，1994后续未知；赢家连续组对全集已知贡献−0.044pp/6月，时钟二类连续半数−0.143pp，均跨零；Astra方法审阅与root独核通过。原美国复现未完成，ETF/实盘未测，暂停当前用途采用。
+- 新增root唯一写静态报告图像附件web/public/research/fip-clock-profitability-2026-10-20/fip-groups.svg及fip-increment.svg（从本raw已绑定结果绘图复制）。仅为了系统正文可见且Agent读取不吞大量SVG坐标；不改UI组件/API/业务逻辑。报告改为图像链接并做Web读回。
+- 毛利复用新增事实：旧stock_weights.csv中sz.001914确有33行/11个月（gp/common_gp/common_cfo），原报告先保留不升级结论，原财务owner范围保持；证据raw/gp-existing-source-exposure.json，未重算影响。
+- 源请求FIP3/6、GP3/6；市场核心1/1、必要跟进0/3；三次source-only原文件保留，v2/v3features相同，v1仅reason不同资格数同。外盘估计为128MiB（保留三次资格文件），非研究预算扩大。正文主树本地未提交，最终验收后收尾。
+
+---
+
 # FIP 本地适配实现单写者登记 2026-10-20T00:28:41.829715+08:00
 
 - task-id research-utility-review-20261012；active；scope_released false；checked_coordination_sha=b0d48c69253818a6282e60e9425194f31c1810fe；checked_at=2026-10-20T00:28:41.829715+08:00；复读COORDINATION/self/personal/new-lowfreq/system/dispatch，并核对远端新个人诊断收尾记录，无范围冲突。首次推送被快进保护拒绝，实际读差异并合并后重推。
