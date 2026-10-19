@@ -1,0 +1,39 @@
+{
+  "executor": "gpt-6-luna",
+  "effort": "low",
+  "task": "luna_universe_filters",
+  "read_only": true,
+  "findings": [
+    {
+      "check": "T universe",
+      "status": "implemented locally",
+      "evidence": "lowfreq_discovery.py:452-465; actualquote,253validquotes,finitefeatures,notST,listdate"
+    },
+    {
+      "check": "T+1 open/limit execution",
+      "status": "absent",
+      "evidence": "_outcome278-297 usesclose andhaltmark; no open orlimits"
+    },
+    {
+      "check": "no retrospective nextday rerank",
+      "status": "static code supports",
+      "evidence": "weights at469, outcomes473; unknownweights retained299-322"
+    },
+    {
+      "check": "price/liquidity/microcap floors",
+      "status": "absent",
+      "evidence": "positive close only; amount20 feature notfloor; shares/marketcap absent"
+    },
+    {
+      "check": "delisting",
+      "status": "partial",
+      "evidence": "outDate excludes onlyafterdate, no replacement; fullhistoricalmembership/PITunproven"
+    },
+    {
+      "check": "calendar12–1",
+      "status": "differentfromexisting",
+      "evidence": "_features187-215 uses validquote21/252"
+    }
+  ],
+  "controller_review": "Directly read same key functions; doesnot establish allentrypoints. source-return adjustflag conflict inherited and separately quarantined."
+}

@@ -1,0 +1,43 @@
+{
+  "question": "Audit 132 monthly universes and reproduce calendar 12–1 scores (no new returns) from existing A-share fixed600 inputs; identify execution and microcap evidence gaps",
+  "mode": "research_input_diagnostic",
+  "input_contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+    "sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289"
+  },
+  "saved_per_stock": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/per_stock_month.csv",
+    "sha256": "732d63142467fc9193106b927596bd2d9c9d4d2b74d6a6d9d74164db2bfea3fb"
+  },
+  "saved_monthly": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/monthly.csv",
+    "sha256": "d59998ef2f6ae8ad240ad9a0124c1390edff077b38b964b44660777ad68f72f5"
+  },
+  "period": "formation2014-12 through2025-11,132 months",
+  "score": "At formation month-end T: price at last market session in month T-1 divided by price at last market session in month T-12 minus1. Do not shift per-asset valid quotes to approximate month ends. This is a price-return local definition, not qualified dividend total return or original US replication.",
+  "endpoint": "Require explicit traded status1 and finite positive closes at BOTH month-end signal endpoints. Count endpoint halted/missing separately; no backwards fill. T must be known active/notST from saved eligibility.",
+  "scope": "Keep original600 denominator; source any adjustflag!=2 is quarantined and counted, do not change saved results. Compare both scores only on saved eligible and sourcequalified and calendareligible common rows. New market-value/costs/returns NOT computed.",
+  "health": "Per decision: all600, saved exclusion reason counts, source quarantine; T traded, ST, blank row; T and T+1 one-price-up candidates defined exact decimal OHLC equality AND pctChg>0 AND volume>0, labelled ambiguous not limit-up or guaranteed nofill. Count T+1 tradestatus0 or missing for saved momentum top20 without reranking, preserve original selected weights. Save source IPO/out metadata and count later delisted members and their pre-exit saved selections. Historic total/free-float shares, nominal price/limit prices and order-book data absent => unknown.",
+  "no_thresholds": "Do not invent minimum price/liquidity/marketcap thresholds or use adjusted prices for nominal-price floors. amount20 is grouping control not minimum filter.",
+  "synthetic_checks": [
+    "calendar month endpoint example",
+    "suspension makes252/21 differ",
+    "changing future T+1 must not change T score/rank",
+    "later delisting must not remove pre-exit member",
+    "known suspended execution flag without renormalizing rankings"
+  ],
+  "budget": {
+    "sources_max": 6,
+    "sources_used": 1,
+    "core_max": 1,
+    "followups_max": 3,
+    "price_downloads": 0,
+    "previous_families": "preserved, no reset"
+  },
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T002729-460374ee1510/result",
+  "strategy_layer": "Independent cross-sectional research input diagnostic; no change to original LEI technical decisions",
+  "strategy_source_sha256": [
+    "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  ]
+}

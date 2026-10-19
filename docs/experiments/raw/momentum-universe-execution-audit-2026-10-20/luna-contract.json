@@ -1,0 +1,33 @@
+{
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "scope ambiguity",
+    "missing permission",
+    "unsafe action"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "mission": "Read-only static audit existing lowfreq_discovery filters and saved-result contract. Report precise line refs and supported vs missing perrebalance guarantees. No external data reads needed, no execution.",
+  "task_scope": [
+    "Read-only static audit existing lowfreq_discovery filters and saved-result contract. Report precise line refs and supported vs missing perrebalance guarantees. No external data reads needed, no execution."
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/momentum-universe-execution-audit-2026-10-20/design.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/momentum-universe-execution-audit-2026-10-20/storage-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json"
+  ],
+  "write_paths": [],
+  "expected_outputs": [
+    "precise findings and evidence"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  }
+}
