@@ -1,3 +1,13 @@
+# 扩样之后的研究方向复审与接续修正 2026-10-19T15:58:52.200381+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=e9915ae6310eb8b09d72298268cb2721276e44ae；checked_at=2026-10-19T15:58:52.200381+08:00；已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新15:46/investor-workspace-simplification-20261012最新12:10/research-dispatch-controller。各原owner范围不变，不接管财务选股或UI。
+- 用户新增要求完成原版/兼容版本相关核查后审查为何研究不出有效结果、修正方向并借鉴他人。本轮问题是10月15旧流程审查之后，扩样/定义/新独立财务结果如何改变根因判断，以及下一研究应保留/停止/先解决什么；不把两版边界整理说成两版效果已完成。
+- 基线70ab55556874228d2cba66cf50f96d0318e1a5be＋主仓已有本机未提交研究；旧封存实验与累计2898.484713秒保持。0新市场效果/行情/调参/账户/生产；本题方法来源最多6请求含失败，保存摘要独立核对不重跑原市场。Astra原代理只读挑战新旧推论，主控唯一整合。
+- 写范围：docs/experiments/research-direction-correction-2026-10-19.md及同名raw小证据；既有raw/lei-mechanism-methods-2026-10-18/candidate-register.json和two-version-continuation.md只补当前优先级/依赖边界，保存前快照，不覆盖旧冻结；自有work-progress、registry本键/INDEX本行（主与R精确镜像）；本人goal只note与读回。共享规范/工作流/其他owner报告只读，不另造平台。必要向已获授权的系统chat发送研究边界，不要求改生产。
+- 验收：关键旧数与来源指纹、后期资料资格和原版覆盖区分，权威来源实际读回/明确不能移植之处，接续计划确实修正且旧证据不变，报告API/Web可读、自身归档和归置检查。若没有新增可检验定义或数据，不把改名重跑写成下一步。完整原版账户及兼容增量仍未评估。
+
+---
+
 # 原版优先与兼容扩展的边界调整已落实 2026-10-19T15:52:44.271514+08:00
 
 - task-id research-utility-review-20261012；status completed仅本次顺序纠正和两版映射；scope_released true；完整原版效果仍blocked/definition_missing，兼容扩展效果未运行。checked_coordination_sha=390319ba47b9bf0ae8dcf0654e13451f3ad4ea14；checked_at=2026-10-19T15:52:44.271514+08:00；已读COORDINATION/self/personal最新15:46/system12:10/中控，末次fetch无新增变化，无owner范围冲突。
