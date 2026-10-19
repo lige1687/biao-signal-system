@@ -22,3 +22,5 @@
 - 本次拟年度6月底选择并观察一年，预计2015—2024十个成熟市场年度，2025未成熟单列；资料资格未完成、尚未读取新效果，不因样本行数宣称足够。新题上限1核心+3必要跟进，0/6新来源，资格准备与旧P1/P2效果分开留账。首批资格只读所有旧原件，外盘计划已核并绑定，容量通过不代表科研通过。
 
 - 2026-10-19T19:36:44.509724+08:00 效果工具准备范围：Sol medium technical_overlap唯一写本成果树 src/lei_signal/research/asset_growth_effect.py、tests/unit/test_asset_growth_effect.py、raw/effect-development-receipt.json；root冻结其他记录。只编写/合成验证，无真实收益读取。拟定年度固定初始股数、同行共同池和相同保留数对照、四格及条件排除、缺失不删/未知情景、全年少亏少赚及集中风险；来源资格通过后才绑定执行。checked_coordination_sha=1b63d938625d9ae9e548974ac86e787dc80f4a6f，已读任务无重叠；其余owner不变。新来源实际2/6官方构造页面只支持定义，不作为本地有效证据。
+
+- 2026-10-19T19:44:27.984566+08:00 定义核对补正：checked_coordination_sha=fe66b25fa45cdbd5c1d65a7c81a20f154a277511；已读self/原owner等任务，仍无冲突。本独立树额外允许root仅追加 docs/research/definitions.v1.json 中本题独立股票来源/共同profile/四个研究对象，不改已有对象或生产消费者。旧mixed.momentum.raw绑定ETF经济价格，不能冒充本题BaoStock股票价格定义；增长/毛利新ID必须实际登记并在收益前精确解析。只写工作分支，未向共享主树合入。Astra预审要求固定12月风险段、报价观察与缺价情景分开、交易费用公式修正，均在收益读取前办理。
