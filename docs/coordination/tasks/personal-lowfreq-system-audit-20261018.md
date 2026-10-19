@@ -1,3 +1,14 @@
+# 经典因子诊断：月度反转与数据链路  2026-10-20T00:00:39.144081+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=af56e187dd237647f8e766bff2da8d41712b3a65；checked_at=2026-10-20T00:00:39.144081+08:00；已读COORDINATION、自身、research-utility-review-20261012最新四项复现、lowfreq-strategy-discovery-20261019、classic-factor-research、中控与UI owner。
+- 用户新提出短期反转/规模/BP/EP用于检查IC方向、分组与财报时间对齐。新问题为诊断链路正确性，不重复其他owner的横截面动量/52周高点/盈利意外/残差动量，也不重跑已封存资产增长/盈利研究。原始LEI/ETF/账户/UI不接管。
+- 在原独立树codex/personal-lowfreq-system-audit-20261018，基础596ace305ee9c451ae853aa23bfd708738c932e0，唯一新写docs/experiments/classic-factor-chain-diagnostic-2026-10-20.md、raw同名新目录、自己work-progress、registry本键/INDEX本行；所有共享生产/研究源码只读。沿用当前standards、research-closure及lei-lowfreq-research。小记录估计600KiB；新普通结果预检后外盘预计30MiB。
+- 一个新核心：复用600只2014历史队列2015—2025价格原件，历月短期收益及其相反数、随后延迟一天的月度报价变化，逐月IC/五组诊断及机械故障注入；非原文全市场精确复现/可交易收益。规模与BP/EP只核字段/版本/时点缺口，缺字段不冒造数。新数据下载0；旧P1/P2/P3家族预算不重置。本题来源请求6/6（含两PDF取源失败），核心0/1、必要跟进0/3。
+- Luna low只读盘点现有rank计算与测试/本机输入合同，无写权/市场计算/网络；后续具体执行合同写入新raw后再派Sol，root负责定义/来源/数值独核。实际模型费用未知。
+- 验收：输入与代码SHA、时间分离与无未来数据检查、方向反转恒等式、独立计算IC/分组、缺失权重与样本/年份披露、相关性数值不充当万能阈值、归档及远端准确路径读回。价值效果与ETF适用性不在本轮完成范围。没有生产/交易/通知授权。
+
+---
+
 # 用户新建研究对话接手续办 2026-10-19T19:27:38.737122+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次用户授权的新对话创建与交接；scope_released true。checked_coordination_sha=433e2cf39903495b542ef574b64679dd345ee535；checked_at=2026-10-19T19:27:38.737122+08:00；已读COORDINATION、自身、research-utility-review-20261012最新19:20、investor-workspace-simplification-20261012最新16:38、中控及新任务存在状态。原LEI/ETF小时/账户与UI owner保持；本源对话不并行重做接手的独立研究。
