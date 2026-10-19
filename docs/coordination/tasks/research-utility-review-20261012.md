@@ -1,3 +1,13 @@
+# 四论文公开参考核算与单写者登记 2026-10-20T00:07:08.844991+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=abf0fafc9ec11b76c97416e3a3ec9206f53fb6fe；checked_at=2026-10-20T00:07:08.844991+08:00。已读COORDINATION/self/system/personal最新00:00/new-lowfreq/dispatch；personal仅短期反转等链路诊断，明确不做本四项，无新冲突。
+- 四原文已下载并逐项核主要方法；CJL扫描文本失败和OCR超时后以本地页面图核对。原美国逐股、退市及公告财报输入尚无合格绑定，四项原范围效果仍blocked。公开OSAP2025组合收益和v2代码b4e911e69678a7424f318617a61d813f54183123存在方法差异，仅固定三列汇总作公开结果核算，不能冒充原论文逐股重建或LEI有效性。
+- 唯一写者Sol medium classic_reference_compute仅写raw/classic-four-factor-replication-2026-10-19下run_reference_check.py、check_method_arithmetic.py、method-arithmetic-checks.json；只读两份方法/冻结合同、只跑人工数据、无网络/真实数据读取。root写本题其余已登记文件并执行真实公开CSV核算。委派合同delegate-contract-v3.json相对路径版dry-run已通过；旧两版绝对路径失败留痕，未派发。
+- 固定参考合同SHA0e9523bb25a27886808580ad454446edfc028155609924e98a52e44e63dd402c；1参考核心+最多3必要跟进，原四项核心仍0。来源24/24含失败和截图调用，旧家族预算不重置；本阶段不新增联网。既有外盘计划绑定结果路径；不改定义/原策略/生产/旧实验。
+- 上次协调编辑因字符串花括号NameError未写，随后推送被远端快进拒绝；已检查新增owner记录并ff同步后重做，不能把失败当已同步。实际成果仍本地未提交，协调不替代成果交接。
+
+---
+
 # 四项经典因子原研究复现启动 2026-10-19T23:53:39.059806+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=952396700390ffde17e7ccc5c41a2fe9d1d9d3ba；checked_at=2026-10-19T23:53:39.059806+08:00；已读COORDINATION1.1/self/system/personal/new-lowfreq/dispatch，scope无新冲突。
