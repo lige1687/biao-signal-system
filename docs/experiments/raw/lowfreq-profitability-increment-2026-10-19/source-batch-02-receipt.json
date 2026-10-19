@@ -1,0 +1,66 @@
+{
+  "schema": "source-batch-receipt/1",
+  "run_id": "source-batch-02b",
+  "attempts": [
+    {
+      "contract": "source-batch-02-contract.json",
+      "contract_sha256": "780be2a4749840a8c67ad24a28af39fc3c8b554e2f6f469a18c1c0b46aa9e980",
+      "exit_code": 1,
+      "pid": null,
+      "failure": "ValueError: frozen cohort or parser implementation changed",
+      "location": "prepare_financial_batches.py:181",
+      "cause": "Runner constant was pinned to the old parser fingerprint; this contract had the updated parser fingerprint. Failed before creating output.",
+      "output_created": false,
+      "receipt_evidence": "source-batch-02-failure.json"
+    },
+    {
+      "contract": "source-batch-02b-contract.json",
+      "contract_sha256": "150b70b7bb12fb1fdb1ab3387441c62bca0a0a2881e5620e35e35ca4d4c3baca",
+      "runner_sha256": "522a6747b59d2aeee499ce717e4a8d1c9d7f612acd1fd7482e6f90b08a58eb8f",
+      "parser_sha256": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+      "pid": 37427,
+      "terminal_session_id": 17075,
+      "exit_code": 0,
+      "elapsed_seconds": 778.391160374973,
+      "created_utc": "2026-10-19T04:04:24.196689+00:00",
+      "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/manifest.json",
+      "manifest_sha256": "b7027c9b9c8efbba1157296a4f07c66d8e4fe7a73d1c2953050672c3ccb7e8fe"
+    }
+  ],
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02",
+  "external_log_path": null,
+  "external_log_note": "No source-batch-02.log file was present after the run; command stdout returned manifest path, manifest SHA, counts and elapsed time.",
+  "counts": {
+    "new_documents": 5531,
+    "reused_documents": 0,
+    "document_records_hash_verified": 5531,
+    "hash_verification_failures": 0,
+    "errors": 358,
+    "error_reason_counts": {
+      "code_state_not_final_complete_or_incomplete": 358
+    },
+    "code_source_coverage": {
+      "complete": 232,
+      "incomplete": 10,
+      "pending": 354,
+      "running": 4
+    },
+    "unprepared_document_states": 12,
+    "documents_with_notice_text": 2368,
+    "output_files": 7902
+  },
+  "input_sha256": {
+    "contract": "150b70b7bb12fb1fdb1ab3387441c62bca0a0a2881e5620e35e35ca4d4c3baca",
+    "runner": "522a6747b59d2aeee499ce717e4a8d1c9d7f612acd1fd7482e6f90b08a58eb8f",
+    "parser": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+    "preparer": "3bdabe21d029f648435812ab3c517d1d66b46afb8343ca62adb4815d90a9f012",
+    "progress": "0a88bad447fcfb59dd1ed3a420fd9527e84af4517a481d1e05bf0f83fe07b40d",
+    "cohort": "6f073e37809613469efe6cd2adb6b7ef1b4e77515e99e7149e1636d9e390cc16",
+    "plan": "bcb2d5b3a8a3efe9ef08d656fe92b60af80ab6a1e0f17b4b8cddcd662b091e07"
+  },
+  "market_effects_run": false,
+  "network_requests_allowed": false,
+  "network_used": false,
+  "version_chain_completeness_inferred": false,
+  "scope_note": "Second source-document preparation batch using the updated parser. All 5,531 document records in the manifest matched their recorded SHA-256. 358 code/source rows remained pending or running and were not prepared. No market outcome calculation was run."
+}

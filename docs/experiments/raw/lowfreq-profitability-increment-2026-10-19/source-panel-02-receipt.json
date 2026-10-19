@@ -1,0 +1,96 @@
+{
+  "schema": "source-panel-receipt/1",
+  "run_id": "source-panel-02",
+  "execution": {
+    "command": "PYTHONPATH=src python3 -B docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/build_financial_panel.py --contract docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/source-panel-02-contract.json",
+    "pid": 40955,
+    "terminal_session_id": 7200,
+    "exit_code": 0,
+    "elapsed_seconds": 10.416,
+    "created_utc": "2026-10-19T04:19:43.392515+00:00",
+    "network_used": false,
+    "market_effects_run": false
+  },
+  "contract_sha256": "39f2c77da1eebac8e507b517b8048b676a6714be6803f4af47c2c5d35c6f7730",
+  "runner_sha256": "bcb154293894dc3f2b76c9871647489bdd859ebd7220bcaf766f03363e51f9be",
+  "parser_sha256": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+  "input_sha256": {
+    "plan": "bcb2d5b3a8a3efe9ef08d656fe92b60af80ab6a1e0f17b4b8cddcd662b091e07",
+    "progress": "0a88bad447fcfb59dd1ed3a420fd9527e84af4517a481d1e05bf0f83fe07b40d",
+    "cohort": "6f073e37809613469efe6cd2adb6b7ef1b4e77515e99e7149e1636d9e390cc16",
+    "parser": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+    "design": "648476bf2cb79056d4982884e96b387ffc76a494598475644b12be0c69e526bc",
+    "version_rules": "5c9c97b1135e2ded336e58a67a2e38bf1444a0ba2211f00b34c7bf292b98050f",
+    "controller_review": "fd8577e928b37a892f405890c8b0c1e92dca4e15af69c07683843e27ad696813",
+    "industry_receipt": "e1bdf9aa2e3050d6a3348071dd4cbab6e8b3b85b05ece85709835923bc8b05e5",
+    "runner": "bcb154293894dc3f2b76c9871647489bdd859ebd7220bcaf766f03363e51f9be",
+    "preparation": [
+      "b7027c9b9c8efbba1157296a4f07c66d8e4fe7a73d1c2953050672c3ccb7e8fe"
+    ],
+    "price_calendar": "732d63142467fc9193106b927596bd2d9c9d4d2b74d6a6d9d74164db2bfea3fb",
+    "notice_review": "4df131e01f80fac47b1c0ac147c2bca6f6b6248aac2f8544bddafc31a3430046",
+    "qualification_amendment": "d2acaead51a2cd5ab031d43f070008c31108f89bef221b4cb6669660c80744b6"
+  },
+  "output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-02",
+  "external_storage": {
+    "mount": "/Volumes/win+mac通用",
+    "device": 16777238,
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9"
+  },
+  "manifest_sha256": "32ec7f85d95b284cd8c7faab3a97992104198332f1717142f1762f0080db9c5a",
+  "output_sha256": {
+    "panel.csv": "984385d05feb917f91b449a0ee79fe57c2cd58b7910c6bd57afc73234940ebe8",
+    "audit.json": "4c26c4a81be128bb295444fc5a8a8c55df75d6e63dedc3b8332a220476917b92",
+    "monthly-coverage.json": "aa2fa896be52a65bd848135ad4ccbf634ea1308a48daf799eaf46306df3da554",
+    "notice-review-queue.json": "c14bd382ce7d3e5266d4065db188c3e08d21b1dcf9d284a807d0838cb2a67525",
+    "expected-source-index.json": "11ea12d6f3c91ee2ff7d42fc82398cf71dbadc2ae809c2f1d60851df4aa4edc3"
+  },
+  "shape": {
+    "rows": 79200,
+    "months": 132,
+    "panel_codes": 600,
+    "source_codes_attempted": 242,
+    "expected_documents": 8671
+  },
+  "qualification_policy": "as-known-financial-version-rules/2.0.0",
+  "unresolved_notice_queue": 3802,
+  "unreviewed_prior_notice_measurement_recovery": true,
+  "monthly_qualified_counts": {
+    "gp_qualified": {
+      "min": 67,
+      "median": 108.0,
+      "max": 150,
+      "mean": 107.86
+    },
+    "cfo_qualified": {
+      "min": 70,
+      "median": 105.0,
+      "max": 150,
+      "mean": 105.64
+    },
+    "common_pool": {
+      "min": 66,
+      "median": 101.0,
+      "max": 148,
+      "mean": 102.61
+    }
+  },
+  "unknown_reason_period_sums": {
+    "latest_full_annual_field_or_identity_unknown": 8759,
+    "applicable_notice_unresolved": 9487,
+    "no_public_full_annual": 4,
+    "source_catalog_incomplete": 46728,
+    "financial_industry_excluded": 1496,
+    "missing_in_snapshot": 96,
+    "annual_older_than_16_months": 780
+  },
+  "source_code_statuses": {
+    "complete": 232,
+    "incomplete": 10,
+    "running": 4,
+    "pending": 354
+  },
+  "scope_note": "Source-only panel under accepted version-2 policy; 242 source codes have complete or incomplete status and 4 are running while 354 remain pending. It is not final coverage of all 600 codes. No HTTP requests and no market-effect calculations.",
+  "external_log_path": null,
+  "external_log_note": "No source-panel-02.log file was created; the command returned the complete manifest JSON on stdout."
+}

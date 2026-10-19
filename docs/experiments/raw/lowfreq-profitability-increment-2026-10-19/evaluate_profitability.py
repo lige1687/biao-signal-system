@@ -27,7 +27,7 @@ from pathlib import Path
 DESIGN_SHA = "648476bf2cb79056d4982884e96b387ffc76a494598475644b12be0c69e526bc"
 AMENDMENT_SHA = "49ae1ab6af18622686e5f8feae58e19493a95dfb4ece8759f2d173addf3d0405"
 COHORT_SHA = "6f073e37809613469efe6cd2adb6b7ef1b4e77515e99e7149e1636d9e390cc16"
-PARSER_SHA = "f413b863a70533c1a2326e57bd7f7ad6d551674621f04a23cda1890966506112"
+PARSER_SHA = "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae"
 METHODS = ("P", "M", "F", "B", "D")
 SCOPES = (("gp", "gpa", False), ("common_gp", "gpa", True),
           ("common_cfo", "cfoa", True))
@@ -558,7 +558,8 @@ def run(contract_path, out_path):
     if spec.get("schema") != "financial-evaluation-run/1":
         raise ValueError("wrong evaluation contract schema")
     bound = spec["inputs"]
-    if set(bound) != {"design", "amendment", "cohort", "prices", "panel", "parser", "runner"}:
+    if set(bound) != {"design", "amendment", "cohort", "prices", "panel", "parser", "runner",
+                      "panel_manifest", "panel_contract", "qualification_amendment"}:
         raise ValueError("missing/extraneous bound input")
     for name, item in bound.items():
         path = Path(item["path"]).resolve()
@@ -570,6 +571,22 @@ def run(contract_path, out_path):
             bound["parser"]["sha256"] != PARSER_SHA or
             Path(bound["runner"]["path"]).resolve() != Path(__file__).resolve()):
         raise ValueError("frozen protocol or runner identity mismatch")
+    panel_manifest = json.loads(Path(bound["panel_manifest"]["path"]).read_text(encoding="utf-8"))
+    panel_contract = json.loads(Path(bound["panel_contract"]["path"]).read_text(encoding="utf-8"))
+    qualification = json.loads(Path(bound["qualification_amendment"]["path"]).read_text(encoding="utf-8"))
+    if (panel_manifest.get("schema") != "financial-panel-result/1" or
+            panel_manifest.get("contract_sha256") != bound["panel_contract"]["sha256"] or
+            panel_manifest.get("outputs", {}).get("panel.csv") != bound["panel"]["sha256"] or
+            Path(bound["panel"]["path"]).resolve() !=
+            Path(panel_contract["output"]["path"]).resolve() / "panel.csv" or
+            panel_manifest.get("inputs") != panel_contract.get("inputs") or
+            panel_contract["inputs"].get("parser") != bound["parser"] or
+            panel_contract["inputs"].get("design") != bound["design"] or
+            panel_contract["inputs"].get("cohort") != bound["cohort"] or
+            panel_contract["inputs"].get("qualification_amendment") != bound["qualification_amendment"] or
+            qualification.get("root_accepted") is not True or qualification.get("effect_runs_before") != 0 or
+            qualification.get("new_rules_sha256") != panel_contract["inputs"]["version_rules"]["sha256"]):
+        raise ValueError("financial source qualification lineage differs from accepted panel")
     design = json.loads(Path(bound["design"]["path"]).read_text(encoding="utf-8"))
     amendment = json.loads(Path(bound["amendment"]["path"]).read_text(encoding="utf-8"))
     if (amendment["base_design_sha256"] != DESIGN_SHA or design["reuse"]["monthly_decisions"] != 132 or

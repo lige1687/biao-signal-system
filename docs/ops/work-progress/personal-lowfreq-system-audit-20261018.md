@@ -184,3 +184,12 @@ checked_coordination_sha=1cbb4cff7cc4a8d86e868236691114ed2d6b0a2d；已读自身
 - 原采集仍由Luna沿14000总/6000目录/9000PDF持续，最近报告6358starts、533目录/5825PDF，8累计失败、4此前无finish不重发。原guard不改；Sol已准备独立有限目录/原件补齐工具，root审查中，尚0新补齐HTTP。目录真实数量冻结后才能明确新预算，累计不重置。
 - 最新已推成果1fb7f119289a5c533a2fdeb7e9d606c05373bd77；本节及新脚本/合同尚待准确路径提交。checked_coordination_sha=de4d18638cd329304ea187065f6cfd3f832e32ff；checked_at=2026-10-19T12:08:23.561000+08:00；已读COORDINATION/self/research-utility-review-20261012/investor-workspace-simplification-20261012/research-dispatch-controller；无交集，独立新财务来源/比较研究，不接原策略/系统UI。
 - 大文件在已核固定外盘新目录，未删源/改生产/真实交易/通知；新财务核心1+最多3必要跟进仍0使用。下一必需动作：完成同600来源尝试与字段资格、冻结最终共同面板、实际执行核心并独核性能/增量/风险和用途。
+
+
+## 第二批财务原件与按月资格已核对 2026-10-19T12:21:42.236346+08:00
+
+- checked_coordination_sha=d76a8f91325b0feacac85dd0e9ebb1a089be8e2a；checked_at=2026-10-19T12:21:42.236346+08:00；已读COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller。其他两会话范围无变化，本轮不接原策略或UI。
+- Luna source-batch-02b真实exit0，5531份新解析、2368份公告文本，358项待处理/运行中代码状态保留；manifest b7027c9b9c8efbba1157296a4f07c66d8e4fe7a73d1c2953050672c3ccb7e8fe。首个02合同指纹拒绝及02b成功分开保存在receipt。
+- Root逐一复核6份已审公告新旧PDF身份、日期及文本hash完全相同，仅为新批次绑定文本路径，原结论不变。Luna执行source-panel-02真实exit0，5输出hash逐一核对；79200行/132月/600代码是完整表格，不是600只合格股票。来源232完成/10不完整/4运行/354待处理；共同财务资格每月66—148，中位101。只来源检查，尚未消费价格结果，不能声称因子有效。
+- source-panel-02 manifest 32ec7f85d95b284cd8c7faab3a97992104198332f1717142f1762f0080db9c5a；panel与价格、行业的最终可比较数量会由效果入口另行逐月核对，不混用资格口径。
+- 来源收集仍在原run内；第一轮预算未触发前不动其合同。独立核算器已完成权重/主要收益统计实现，Sol继续补关键区间及相关性独核；Astra仅审最终可主张范围和必要来源检查。财务核心及必要跟进仍0执行，不将工程阶段作为研究完成。
