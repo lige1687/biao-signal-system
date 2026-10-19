@@ -1,3 +1,14 @@
+# 研究工具复用审查与准备检索补缺交付 2026-10-20T01:30:59.249953+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本工具审查/检索补缺，历史数据及策略效果仍有阻塞；scope_released true。checked_coordination_sha=5be1d1e032394063dcfb792c16619e42bc0e4ece；checked_at=2026-10-20T01:30:59.249953+08:00；已读COORDINATION/self/research-utility-review最新价值长期反转01:21/lowfreq-strategy-discovery/external-quant-resources/dispatch/theory-workflow-system-increment准备工具与最终发布历史；无新scope重叠，不接管另一对话因子复现。
+- 主体codex/personal-lowfreq-system-audit-20261018@c921c6fac887e2d70fcf36eeecfd75cdf65cc2b2，28准确文件推后逐字核同；交付回执fd538be2201cf69d210aca20389c227c6c71c58a两文件已核。报告docs/experiments/research-stack-gap-audit-2026-10-20.md SHA5972acce72f75fed5709ed395fa39c59b4676d6fd04f7d72ce199770668727d3及raw；registry本键/INDEX行齐。未合main；主工作区仅按原SHA镜像已审核准备模块、新测试和指引精确新增段，可实际调用，不改其他未跟踪内容或定义/引擎。
+- 修补真实断点：preparation仅搜对象/案例，遗漏research_references。现--term JKP/French/AQR --limit50分别1/8/2卡，和登记逐字段同；--reference-ref精确版本可取，latest拒绝，截断明确。参照与可计算对象分列、原用途状态保留、execution_authorized=false。18测试、真实CLI与旧定义/案例输出同、两树归置、链接、旧registry条目不变均核。open_in_codex仅queued，不称已展示。
+- 复用已做Alphalens排名持续/成员变化及statsmodels/arch有限组件、French解析/快照工具、自建引擎与原家族账本；特别纠正classic_attribution仅CN/CNY/CH3固定范围，不能说已接US FF5通用归因。QuantStats/vectorbt未装不补无问题功能；RQData公开接口候选，但账号、样本/版本/历史覆盖未取回；JKP公开组合和需WRDS访问的逐股资料分开。优先历史可知资料和成交链路，0新市场效果。
+- Luna低思考盘点/小实现；root纠正漏查已存Alphalens报告、French覆盖误读及错误合成schema，并真实验收。派发绝对路径预检失败与新测试尾空行暂存失败均保留；未发生新市场重跑。22公开读取/定位、10文档，0安装/付费/交易/通知；旧预算不变、实际模型费用未知。目标仅note24→25/in_progress，保护字段核同。
+- 后继读取本报告/verification/controller-review及已有数据防护；不得重复本轮检索修补或旧市场实验。必要历史资料及实际RQData访问仍需具体输入，公开文档不等于取数成功；本轮未扩大原500/600股样本、策略语义或旧纠错预算。独立Git源码不保证旧13受限来源全设备恢复。
+
+---
+
 # 研究准备检索入口具体补缺 2026-10-20T01:22:33.356603+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=defe0d5e64ee3b3e92f55dcf0d0ea9b35c0c11f3；checked_at=2026-10-20T01:22:33.356603+08:00。原已读任务不变，新增读theory-workflow-system-increment完整相关准备/发布阶段，最终10月8日有限交付已释放，无在做的本两路径写入。原main文件未跟踪，内容与原报告分开留SHA，不能覆盖不相关改动。
