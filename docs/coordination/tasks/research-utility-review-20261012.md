@@ -1,3 +1,15 @@
+# 长历史资料资格与三项结论纠正已交付 2026-10-19T16:37:12.487796+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮资料资格与纠正；完整原版/兼容/账户目标仍in_progress。scope_released true仅此次新增文件；checked_coordination_sha=207963f35b16fd34b79c08c38935ff3e21c56adc；checked_at=2026-10-19T16:37:12.487796+08:00；已读COORDINATION/self/system16:18独立审查/personal16:11/dispatch。没有抢先跑新效果或接管独立审查；系统owner可据以下文件只读验收，无需双方往返消息。
+- 实物docs/experiments/long-history-time-validation-2026-10-19.md SHA906eaaadcd134aaec6fccb24ef221b644a0ef4c6a38481d8e523b7b9b4834d3d及同raw：contract、audit_coverage、coverage-summary/by-asset-year/inputs、source-alternatives、seen-history、time-boundary-check、check_claim_boundaries/claim-boundaries、method-checks、coverage-acceptance、summary-correction-receipt、API/readback、goal-receipt、delivery-validation、closure。68产品952产品年/403来源hash，无源不一致；股票2013原日线但准备2019起，2014年底名单不回头授权2013预测；未prepared=未评价。2024/25小时合格产品日7197/6407但120连续状态仅55/32日、3/2股；8ETF小时仍短。旧候选长日线缺调整依据，未抬资格；已存7月后ETF行情未自动授独立最终期。
+- 25432旧20/30日记录实际日期/成熟/跨段核对0差异，4既有合成边界通过，root4产品8产品年度独核一致；三旧段只是描述分组，旧已见史与首次新取产品不当盲测。0新收益、0行情请求；qualification实际9.796062秒，市场旧2898.484713不动，保守已知合计2908.280775/3600秒。原Bao182/182、ETF18/18、方法6/6保持；人工/模型实际费用未知。
+- F1—F3均独核原件后接受。F1原版底部AND低周期保持，已纠正自己三篇registry.oneLiner（original-a-increment-continuation/hourly-confirmation-decision-increment/etf-hourly-source-recovery），旧报告/原表hash不改，当前INDEX/新报告给有日期纠正导航。F2原393确认中287早于15时，但run_waiting65—77资格依赖整日完整和日末，明确只有回顾时点，盘中可得/成交未核，不据此伪称技术数值已错。F3短ETF/股票后期/复用紧贴当前摘要；完整原版不能从局部等待结果取消条件。原candidate绑定输入保持，既有two-version追加最新准确状态，不重写冻结记录。
+- 系统验收：4报告全文SHA与登记核同，三修摘要+新报告API列表逐字读回pending=false；真实5188页面5表/542px无横溢、纠正和年度数字可见。首4次research_report因max_chars14000>12000被拒，改参数后成功，失败保留。主仓归置退出0。原目标okr-ff1e0a86fbac仅note167→168，其他字段/旧历史保持、in_progress；未以资料审核冒充投资效果。
+- 已存缓存与限定来源收据未找到修复固定股票后期冲突的独立小时原件；原权限失败不代表今天权限。下一恢复需先读本资格/独立标准审查，锁定原版机会目标失效及新合格时期；涉及新联网源须继承已耗尽预算并明确新小额度，不隐性重置。旧局部价格/颜色/基准直接复用。整体未完成理由是核心定义、覆盖/时点和最终期资格缺失，不是算完或“还需研究”的泛称。
+- 成果codex/factor-evidence-integration-20261012基线70ab55556874228d2cba66cf50f96d0318e1a5be及主运行树本机未提交增量；本轮源产物未提交未推，远端不可复现全部。R仅新报告/自身registry摘要/INDEX/progress镜像，非全输入移交。数据仍固定外盘，raw小汇总约1.60MB本机；年度JSON仅压缩空白保留952记录，format-receipt有新旧hash。两源和8本轮绑定输入保持。没有主分支合入、交易、通知、定时器、后台研究；两个Sol有界子任务均结束。
+
+---
+
 # 追加独立审查所要求的结论纠正 2026-10-19T16:25:14.476800+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=b4b16d02b72fe8426142f8fadb5933a50182c7fe；checked_at=2026-10-19T16:25:14.476828+08:00；已读COORDINATION/self/system最新16:18独立审查/personal16:11/dispatch。唯一写者和原分工不变。
