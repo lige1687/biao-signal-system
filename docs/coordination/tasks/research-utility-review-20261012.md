@@ -1,3 +1,12 @@
+# 追加独立审查所要求的结论纠正 2026-10-19T16:25:14.476800+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false。checked_coordination_sha=b4b16d02b72fe8426142f8fadb5933a50182c7fe；checked_at=2026-10-19T16:25:14.476828+08:00；已读COORDINATION/self/system最新16:18独立审查/personal16:11/dispatch。唯一写者和原分工不变。
+- 系统owner已提供factor-evidence-standards-audit-2026-10-19/controller-review.md；主控已现场核原策略§4.4及三篇原摘要，F1成立：底部且低周期本来是原版条件，局部全底部研究不得说成原版待升级。F2整日价格核对赋予盘中资格将进一步只读核数；F3已见和有限实际时期由当前资格明细回应。0新市场计算、0新数据、0策略修改。
+- 在原long-history-time-validation报告及raw中加明确日期的纠正、old/new摘要与原件hash回执；允许仅更新自己原original-a-increment-continuation、hourly-confirmation-decision-increment、etf-hourly-source-recovery三个registry当前oneLiner及自身INDEX纠正导航。三篇原报告/冻结raw/旧数字字节不改，报告sha保持；本轮新report明确指向纠正，当前two-version/current_direction_review补对应限制。系统owner只读验收，不改其独立审查报告。原科研合同budget全部继承，不重置来源/方法次数。
+- 验收增加F1原文与当前列表逐字readback、F2实际来源字段及计数、F3实际年度和已见证据；API读回旧报告hash及新摘要和纠正链接。限定纠正不代表完整策略效果或实际盘中可执行性已证明。源/report仍本机未提交未推，远端仅本协调元数据。
+
+---
+
 # 十年资料资格、历史已见审计与时间分段接续 2026-10-19T16:16:35.028690+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=13ae6e6ce6b013b51ec49fb8da0f4dc3333a783c；checked_at=2026-10-19T16:16:35.028690+08:00；已读COORDINATION/self/personal最新16:11/system12:10/中控。原本系统chat转交人类继续与专业方法落地要求；不新派用户chat，不回发，不接管独立财务候选或UI。
