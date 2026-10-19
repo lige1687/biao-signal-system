@@ -1,3 +1,14 @@
+# 个人低频研究项目Skill已交付 2026-10-19T19:20:02.591652+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本次Skill/项目文档维护；scope_released true；完整研究目标仍in_progress。checked_coordination_sha=0b0c80c8bf85802ce79b3ae6432a0ebfee60043a；checked_at=2026-10-19T19:20:02.591652+08:00；已读COORDINATION/self/system16:38/personal16:11/dispatch，本轮fetch无他人新增范围，无路径冲突。
+- 新增 .agents/skills/lei-lowfreq-research/SKILL.md（59行，SHA8ddef292fa1ad2040e031782dc62ccd02e82ed7019f3d83370abd8a56efcb3ea）、agents/openai.yaml（ca0e19fc860e52858b8ea76e200b85b3d90e537fa69091bfc069f8fb23eaa61a）、references/failure-cases.md（5d6a4cb746380f7c01aaf610a4b4b8114db2a6f7a28a903000e9d617cb8d0bfa）。覆盖复用/投入取舍/原版语义/时间资格/公平比较/收益风险机会代价/停止及恢复，详细三点五点复用既有playbook，不另造平台/账本/预算。
+- AGENTS首屏和原因子入口接Skill（89a51f7003749e77ef9ee3abc4945311b66046b920f6309d32a01fcca1861746）；playbook反向链接（3b9088a3085138b256c094ccffece33a0aef054388b7a44825a4981b0bbf2d41）；orchestrator简化为同Skill委派/回调适配（c7acc40326e7fcf0dd12dc1e2accbc86d66d05ac716bbc66b8d12ad1653543ef）。三文件无关字节保留，旧规范/规则/策略配置及3案例报告SHA不变。
+- 两个无前史Sol medium只读行为演练：已有报告下50参数/300股/删除原小时条件建议；虚构新过滤器资料下胜率和终值提升但仓位/机会/名单/费用问题。首轮均不执行或误称有效；第一例遗漏新联网需旧预算边界，已据此补“旧下一步不自动有权限、当前低频优先级及分支依赖、下步可执行状态”并定向重验，明确旧资料审查可做而新联网额度未落实。共2首次+1复验；有限行为证据，不保证所有AI/科学效果。
+- skill-creator quick_validate通过，10个相对链接存在、元数据合格、AGENTS两路可达、归置/diff检查通过。一次补丁长行匹配失败未写，精确读回后修复；记录在原work-progress。新Skill文件open_in_codex回执queued，未冒称用户已看到。目标okr-ff1e0a86fbac仅note169→170真实读回，in_progress、旧history/保护字段保持。
+- 成果仅本地主工作区，未提交未推，其他worktree/设备/运行AI自动发现未验；远端仅协调元数据，不声称从协调SHA复现技能正文。0新市场/来源查询/生产/交易/通知/自动化，旧预算保持，模型实际费用未知。无本题后台工作。研究/原策略效果仍未验证，下一真实任务按新入口留下实际投入决定和结果证据，不重复封存。
+
+---
+
 # 将低频研究流程沉淀为项目Skill 2026-10-19T19:12:46.870374+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=0edb19172a1a6419ef4fefd344f3682c6b93ec9e；checked_at=2026-10-19T19:12:46.870374+08:00；已读COORDINATION/self18:38/system16:38/personal16:11/dispatch。用户明确要求沉淀研究Skill或AI可读项目MD，防后续重复踩坑；原owner已释放上轮文档范围，本轮延续，不改他人研究。
