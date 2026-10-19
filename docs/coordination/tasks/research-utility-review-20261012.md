@@ -1,3 +1,14 @@
+# 四项经典因子原研究复现启动 2026-10-19T23:53:39.059806+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=952396700390ffde17e7ccc5c41a2fe9d1d9d3ba；checked_at=2026-10-19T23:53:39.059806+08:00；已读COORDINATION1.1/self/system/personal/new-lowfreq/dispatch，scope无新冲突。
+- 用户明确优先复现横截面动量、52周高点、盈利意外、残差动量，以检查流程。新用途是经典原研究复现，先核原文定义/样本/组合及既有数据，条件具备者真实执行；不先改成LEI条件策略，不以A股或六ETF适配冒充美国原文。原财务owner范围保持，用户本次盈利意外研究和其资产增长/毛利问题不同，不重复原实验。
+- 写权：主树docs/experiments/classic-four-factor-replication-2026-10-19.md及raw同名目录（方法卡、合同/状态、来源指纹、资格、独立计算、失败回执），registry本键/INDEX本行、原work-progress/目标note；必要原方法纯研究核验代码仅本raw，不改定义库/生产/原文/旧报告。外盘source PDFs及提取文本走output_storage计划，不回退；预计30MiB外盘和300KiB本机。后续真实效果若所需资料未具备，明确blocked，不冒称完成。
+- 标准与预算：采用当前standards索引、lei-lowfreq-research、research-closure；四个用户指定原论文各为有界复现问题，分别最多6来源请求、1核心+3必要跟进（上限，不是必须跑），共享总上限24来源、4核心+12必要跟进；全部记录到本题账本。现已2检索（JT1993与残差各1）、0市场计算；旧家族已见史/预算保留，不以复现名重开旧适配。无付费采购/权限扩展/交易/生产/通知。
+- 委派Sol medium classic_factor_reuse只读已有资料与资格，已完成：现有A股/ETF版本不是原文；限定项目清单未见可绑定CRSP/Compustat/IBES输入，未全机断言缺失。root负责原文核对与资料来源资格；后续明确单写者再委派计算，不盲试参数。成果仅本地，原主树基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，未提交未推；协调元数据不代表正文移交。
+- 验收：每篇原文版本/页节、核心公式和样本差别、数据许可/当时时点/缺失、可执行原表对照与数值正确性分层；同历史不要求未知验证身份，但后续本地有效性另测。复现成功只支持已覆盖流程，不证明整体无错；不能以正收益匹配代替计算核验。0新效果不填收益表；暂停/阻塞具体列明，其他可独立工作继续。
+
+---
+
 # 新增低频信息建议审阅已完成 2026-10-19T23:35:47.684384+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮report_only；scope_released true。checked_coordination_sha=71f6286a1bc42516de5879dbd57c57604dd690f5；checked_at=2026-10-19T23:35:47.684384+08:00；已读COORDINATION/self/system16:38/personal19:27/new-lowfreq20:06/dispatch，交付fetch无新记录，冲突决定保持原各owner。
