@@ -1,3 +1,14 @@
+# FIP原研究、时钟增量与毛利复用启动 2026-10-20T00:22:53.627402+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=31847ca7386f324ab06897f64723451b4123e273；checked_at=2026-10-20T00:22:53.627402+08:00；已读COORDINATION/self/system/personal最新00:21月反转交付/new-lowfreq/dispatch。无新文件冲突，个人财务P2/P3及经典反转旧成果只读复用。
+- 用户新授权FIP原研究复刻、结合LEI时钟提出兼容新定义并测增量；毛利/总资产候选先核Novy-Marx原文和已测结果。FIP来源/定义为新题，不重开前四经典美国原始数据缺口或旧收益实验。旧毛利P2/P3已测同公式，先复用，对缺规模/估值和输入问题如实留缺口，不重复跑。
+- root唯一可写主树docs/experiments/fip-clock-profitability-2026-10-20.md及raw同名目录、registry本键/INDEX本行、原work-progress/目标note。新公式实现仅研究工具/本题raw；正式定义及工具适配具体路径在效果前增补范围，不提前改共享引擎/定义/原策略。两原策略SHA先核相同，时钟保留斜率及加速度语义，FIP不冒名替换。原财务owner范围不接管。
+- Sol medium fip_existing_data只读查重与现有日线资格；Sol medium profitability_reuse只读P2/P3数据、性能、增量及限制；无写/网络/市场运行。root读原论文并审科学设计。FIP与毛利各最多6来源请求（已各2检索含无关命中），旧来源预算不重置；本次FIP最多1核心+3必要跟进，候选/时期/用途冻结后再执行，无参数网格。毛利本轮只复用、不新增市场比较。
+- 预期交付：说明FIP符号比例不一定是连续上涨天数或涨幅集中度；核原方法、时钟差异、相同涨幅与必要风险条件下的路径增量，性能/增量/机会代价与真实样本局限并列。美国原样复现输入仍缺时明确blocked；已有A股历史队列/ETF资料只作独立本地适配且先核返回adjustflag、公司行动/名单/停牌退出/预热，不能重命名原样复现。
+- 大结果/论文/日志默认外盘，初步预算64MiB外盘/500KiB本机，实际数据需求核清后plan绑定；不删除、不移旧材料、不付费、不生产、不交易、不主动通知。开始阶段0新市场计算/下载，仅源检索与既有证据盘点。成果本地未提交，远端只有协调元数据。
+
+---
+
 # 四经典复现阶段交付，原始输入仍受阻 2026-10-20T00:18:17.554479+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status blocked；scope_released true。checked_coordination_sha=a93f461f1719b50dd4e3eb5c33c55d4337976a95；checked_at=2026-10-20T00:18:17.554479+08:00；交付push遇并行远端更新后已读personal最新00:17诊断及其独立树归置窄修复；与本题无新冲突，已合并远端保留双方记录；COORDINATION/self/system/new-lowfreq/dispatch保持。仅原文/公开结果阶段完成，四原逐股研究均未完成。
