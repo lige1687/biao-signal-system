@@ -327,3 +327,5 @@ Luna low只读核当前定义178对象与本任务旧结果，Astra high挑战�
 - 报告docs/experiments/momentum-universe-execution-audit-2026-10-20.md，raw同名；已登记registry与INDEX。Luna低只读、Sol中等单脚本、root真实执行及独核；1次输入审计、0次新收益实验，来源6/6，旧家族预算不重置。外盘位置在storage-plan，约22.15MB；原输入/收益/策略不变。
 - 当前有界诊断completed；经典原样复现和真实成交未完成，恢复须合格历史名义价格/限制价格/股本及执行规则；不新算漂亮结果掩盖资格缺口。未改他人原US/FIP范围。交付前读协调4ff7e4cfd49b80f336b6adc50b62bcf60fb0bf5c，无新增冲突。
 - 本阶段结果当前本地待准确提交推送，后台任务无；Git成果SHA随后在协调记录引用。
+
+- 交付读回：22准确文件已推送并核远端字节一致，成果594398cd9d9b4139f27b438afb6c33eafd68255b；目标note版本21→22读回，仍in_progress，保护字段不变。本报告/工具在成果树，未合主树；外盘22.15MB明细不入Git。
