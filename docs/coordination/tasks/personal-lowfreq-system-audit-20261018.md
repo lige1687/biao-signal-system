@@ -1,3 +1,12 @@
+# 补齐金融现象发现与候选来源 2026-10-19T16:01:07.308456+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false；checked_coordination_sha=2d3a108fb95af0c351fb27fe991bbeb98bbd8ca0；checked_at=2026-10-19T16:01:07.308456+08:00；已读COORDINATION、自身、原因子最新15:58、系统12:10、中控。原因子方向复审涉及原LEI/小时与账户，本题只补独立低频财务候选的金融现象/原作者依据和重复关系，双方不改共享规范/定义。基线及已推81fb4e730c53d1781cd8eb3b017afabcf26ae87e。
+- 用户修正“也比较缺少金融含义明确的指标，还可以发掘”。本题采用research-closure report_only：核现有候选覆盖，辨别指标可解释与价格/风险机制成立的差别，提出少量确有新现象的独立候选、竞争解释、可复用资料和缺口。0新行情/效果/调参，不借发现新题重启旧P1/P2或P3资料预算。
+- root唯一写本成果树docs/experiments/lowfreq-mechanism-discovery-2026-10-19.md及同名raw小证据，原work-progress、registry本键/INDEX本行、本人目标note/下一行动；不改主仓playbook/定义/原owner研究。Luna low只读既有定义与已测覆盖，不写、不网络；root核原始文献，必要Astra只读挑战机制。公开资料本题最多6请求，含3搜索+1官方目录+2官方定义；与P3来源5/6单列，不重置P3或旧效果家族预算。
+- 验收：有金融含义的现象、可反驳的价格/风险解释、资料到指标的明确映射、重复关系、低频与股票/ETF边界、哪一步已做/未评估。定性方法与候选发现没有伪造性能；沿现有一张开题记录，不再加同义流程平台。发现的候选不自动取得效果/生产许可。小文字本机，不新建大输出或跨项目读数。
+
+---
+
 # 并行选股诊断、价值来源与实际恢复流程交付 2026-10-19T15:46:23.607714+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本次有界排序诊断、来源检查与新入口验收；scope_released true。价值效果总目标仍未完成。checked_coordination_sha=0efe3384c10a89ace97586f8d8923631060ffcc5；checked_at=2026-10-19T15:46:23.607714+08:00；已读COORDINATION/self/research-utility-review-20261012最新15:39/investor-workspace-simplification-20261012最新12:10/research-dispatch-controller。独立财务/选股/工具与原LEI、ETF小时、账户及UI分工保持，无接管/重跑。
