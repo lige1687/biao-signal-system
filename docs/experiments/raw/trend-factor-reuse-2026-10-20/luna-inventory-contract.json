@@ -1,0 +1,37 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "mission": "Locate existing trend-event and beta input evidence and prior asset-growth findings, with exact available paths and unresolved gaps",
+  "task_scope": [
+    "Read relevant local definitions, reports and input manifests; return a focused evidence inventory"
+  ],
+  "read_only_paths": [
+    "docs/experiments",
+    "docs/research",
+    "configs",
+    ".codex/worktrees/lowfreq-strategy-discovery-20261019/docs/experiments",
+    ".codex/worktrees/lowfreq-strategy-discovery-20261019/src/lei_signal/research/asset_growth_effect.py",
+    ".codex/worktrees/personal-audit-coordination-20261018/docs/experiments",
+    "src/lei_signal/research",
+    "src/lei_signal/data"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "exact prior beta/asset-growth results and budgets; existing qualified trend input/benchmark paths and gaps; no calculations or file edits"
+  ],
+  "stop_conditions": [
+    "missing permission",
+    "scope ambiguity",
+    "unsafe action"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

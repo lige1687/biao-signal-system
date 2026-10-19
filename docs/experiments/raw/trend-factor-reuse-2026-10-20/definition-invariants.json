@@ -1,0 +1,19 @@
+{
+  "synthetic_only": true,
+  "green_price_vs_slope_cases": 27,
+  "equivalent_cases": 27,
+  "color_note": "equivalence requires same source, seed, timing and missing handling; state vs transition remains different",
+  "known_beta": 0.5,
+  "split_only_example": {
+    "assumed_factor_convention": "convert each historical share count to latest share units: old2/new1",
+    "multiplication_net_growth": 0.0,
+    "division_net_growth": 3.0,
+    "claim": "demonstrates why conversion convention must be checked; does not adjudicate all vendor definitions"
+  },
+  "missing_month_example": {
+    "lag_rows": 12,
+    "actual_elapsed_months": 13,
+    "claim": "OSAP AssetGrowth group shift(12) requires upstream complete monthly panel"
+  },
+  "market_returns_evaluated": false
+}

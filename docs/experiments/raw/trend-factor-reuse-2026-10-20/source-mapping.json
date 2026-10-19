@@ -1,0 +1,105 @@
+{
+  "at": "2026-10-20T01:06:21.412845+08:00",
+  "verified_local_sources": [
+    {
+      "commit": "8db892442c2c3a3779b0f1eac4370d3655be15a1",
+      "path": "SignalDoc.csv",
+      "saved": "docs/experiments/raw/literature-tools-fit-2026-10-08/sources/CrossSection/SignalDoc.csv",
+      "url": "https://raw.githubusercontent.com/OpenSourceAP/CrossSection/8db892442c2c3a3779b0f1eac4370d3655be15a1/SignalDoc.csv",
+      "sha256": "f6c055120bad7afe97c16e23e0f49bce0982269026605a955e8064bd661cf415"
+    },
+    {
+      "commit": "8db892442c2c3a3779b0f1eac4370d3655be15a1",
+      "path": "Signals/pyCode/Predictors/Beta.py",
+      "saved": "docs/experiments/raw/literature-tools-fit-2026-10-08/sources/CrossSection/Signals/pyCode/Predictors/Beta.py",
+      "url": "https://raw.githubusercontent.com/OpenSourceAP/CrossSection/8db892442c2c3a3779b0f1eac4370d3655be15a1/Signals/pyCode/Predictors/Beta.py",
+      "sha256": "6929bf9f18bf8b0a36a6b79bca80cdb1b485c461ad574ef103eda4736c8a1be3"
+    }
+  ],
+  "selected_metadata": [
+    {
+      "Acronym": "AssetGrowth",
+      "Authors": "Cooper, Gulen and Schill",
+      "Year": "2008",
+      "Signal Rep Quality": "1_good",
+      "Sign": "-1.0",
+      "Stock Weight": "EW",
+      "Portfolio Period": "12.0",
+      "Start Month": "6.0"
+    },
+    {
+      "Acronym": "NetEquityFinance",
+      "Authors": "Bradshaw, Richardson, Sloan",
+      "Year": "2006",
+      "Signal Rep Quality": "1_good",
+      "Sign": "-1.0",
+      "Stock Weight": "EW",
+      "Portfolio Period": "12.0",
+      "Start Month": "6.0"
+    },
+    {
+      "Acronym": "ShareIss1Y",
+      "Authors": "Pontiff and Woodgate",
+      "Year": "2008",
+      "Signal Rep Quality": "1_good",
+      "Sign": "-1.0",
+      "Stock Weight": "EW",
+      "Portfolio Period": "12.0",
+      "Start Month": "6.0"
+    },
+    {
+      "Acronym": "ShareIss5Y",
+      "Authors": "Daniel and Titman",
+      "Year": "2006",
+      "Signal Rep Quality": "2_fair",
+      "Sign": "-1.0",
+      "Stock Weight": "EW",
+      "Portfolio Period": "12.0",
+      "Start Month": "6.0"
+    },
+    {
+      "Acronym": "Beta",
+      "Authors": "Fama and MacBeth",
+      "Year": "1973",
+      "Signal Rep Quality": "1_good",
+      "Sign": "1.0",
+      "Stock Weight": "EW",
+      "Portfolio Period": "1.0",
+      "Start Month": "6.0"
+    },
+    {
+      "Acronym": "BetaFP",
+      "Authors": "Frazzini and Pedersen",
+      "Year": "2014",
+      "Signal Rep Quality": "3_distant",
+      "Sign": "1.0",
+      "Stock Weight": "EW",
+      "Portfolio Period": "1.0",
+      "Start Month": "6.0"
+    }
+  ],
+  "beta_fp_tree_path": "Signals/pyCode/Predictors/ZZ2_BetaFP.py",
+  "failed_probe": "Predictors/BetaFP.py404; metadata/tree locates correct prefixed path, body not newly fetched",
+  "live_code_observations": {
+    "AssetGrowth": {
+      "url": "https://raw.githubusercontent.com/OpenSourceAP/CrossSection/master/Signals/pyCode/Predictors/AssetGrowth.py",
+      "observed_formula": "(at - groupby_permno_shift12(at))/groupby_permno_shift12(at)",
+      "range": "monthly Compustat intermediate; upstream monthly completeness/time_avail_m not audited",
+      "version": "unpinned master read via web; not a frozen implementation"
+    },
+    "ShareIss1Y": {
+      "url": "https://raw.githubusercontent.com/OpenSourceAP/CrossSection/master/Signals/pyCode/Predictors/ShareIss1Y.py",
+      "observed_formula": "adjusted_shares = shrout*cfacshr; lag6/lag18 -1 via calendar joins",
+      "local_metadata_expression": "shrout/cfacshr",
+      "range": "different observed versions/definitions require convention check, not declared upstream bug",
+      "version": "unpinned master read via web; not a frozen implementation"
+    }
+  },
+  "source_requests_used": 6,
+  "source_requests_max": 6,
+  "new_market_calculations": 0,
+  "controller_inventory_corrections": [
+    "local SignalDoc rows exist although first helper search said absent",
+    "green price conditions and SMA/EMA rising are algebraically equivalent under same recurrence, so no demonstrated report conflict; synthetic27cases confirmed"
+  ]
+}

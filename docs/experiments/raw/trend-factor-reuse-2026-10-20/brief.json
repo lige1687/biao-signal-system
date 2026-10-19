@@ -1,0 +1,35 @@
+{
+  "question": "Can low beta, asset growth and net share issuance improve selection within the same LEI trend opportunity; what OSAP definitions are actually reusable?",
+  "mode": "research",
+  "decision_use": "conditional stock selection and upside/downside tradeoff; no production hard filter",
+  "baseline": "same trend alone, simple lower exposure and volatility/momentum controls where inputs qualify",
+  "source_budget": {
+    "max": 6,
+    "used": 6,
+    "details": [
+      "OSAP search",
+      "combined AQR/CMA search no useful match",
+      "OSAP BetaFP.py 404",
+      "OSAP AssetGrowth.py",
+      "OSAP ShareIss1Y.py",
+      "AQR BAB article"
+    ]
+  },
+  "market_core_max": 1,
+  "market_core_used": 0,
+  "followups_max": 3,
+  "followups_used": 0,
+  "old_family_budgets": "unchanged; asset growth previous core1+follow1 preserved; no rerun without new evidence",
+  "allowed": [
+    "read existing local evidence",
+    "new bounded source mapping",
+    "conditional test only after true trend/source/market-anchor qualification"
+  ],
+  "blocked_claims": [
+    "OSAP source code implies qualified A-share data",
+    "standalone BAB/CMA result implies LEI conditional improvement",
+    "candidate equals implemented live rule"
+  ],
+  "output": "small report and source mapping, large results only after external storage plan",
+  "status": "qualification"
+}
