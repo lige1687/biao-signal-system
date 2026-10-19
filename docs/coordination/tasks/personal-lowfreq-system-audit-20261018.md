@@ -1,3 +1,14 @@
+# 原采集结束，按实际缺项有限补齐  2026-10-19T12:51:38.805753+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=aa774e26d2d638e8b59ce2113084a56c9d9af037；checked_at=2026-10-19T12:51:38.805753+08:00；已读COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller；无范围交集，仅独立600股财务来源与相对动量，不接原策略/生产/UI。
+- 工作分支codex/personal-lowfreq-system-audit-20261018，最新已推且逐文件读回bf094f744582d59c85295708d4d9a102b04611ca。原采集exit0且进程不存在；原manifest ab07d9e0c310131258faf2a5338cc394c44f1cdd385fe35695f466acec4cf553，808目录+9000PDF=9808starts，11失败finish与4中断均保留不重发。600中390双目录完成、210未查，非全部资料已齐。
+- 已冻结completion-catalog-01-contract SHA7e96e22e039e88580136f11984d1315919b6af9536b3b7dfd5ec1ecbcade9b80，精确420未发目录请求，累计上限10228，不隐含PDF授权；原v1已列同队列完成规则，此处按实际清单细分、记录新增累计成本，不改原run/预算。4线程0.5秒40秒0重试，429/连续2失败停止；随后只对实际未发页及PDF另冻结有限清单。
+- Luna唯一执行新采集输出completion-catalog-01及自身receipt；另一Luna执行source-batch-04，合同35fb187ee5766e2de8911b3b3f08e2af0b45017bd51aa16d633e7da6cbf4eed2，只增量复用7060原件，无HTTP/效果。root单写合同/自身报告进度；Sol只独核工具，文件范围保持自身raw和正式profitability_discovery.py/对应测试。
+- v3解析器、v2时点规则、来源覆盖及效果独核器检查已完成；来源helper真实02b与Astra6项一致，原错误假设失败回执保留。当前效果核心1+最多3必要跟进仍0使用。下一必需：完成来源尝试、最终资格与公平同池实际效果、独核和归档，不以资料工程结案。
+- 大资料仅固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9外盘，最新实际空余521442689024B；64MiB新目录估计，6.3GB最坏响应上限，本机32KiB小记录。无删除/付费/跨项目/通知/交易/旧研究重跑。
+
+---
+
 # 第二批盈利来源资格完成，继续补齐600股原件 2026-10-19T12:23:13.914977+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=d76a8f91325b0feacac85dd0e9ebb1a089be8e2a；checked_at=2026-10-19T12:23:13.914977+08:00；已读COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller；其他负责人边界无变化，仅独立600股财务发现，不接原策略/生产/UI。
