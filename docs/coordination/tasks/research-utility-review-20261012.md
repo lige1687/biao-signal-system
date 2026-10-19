@@ -1,3 +1,11 @@
+# 来源与同时点口径新版本登记 2026-10-19T14:28:41.960010+08:00
+
+- 原task active；checked_coordination_sha=6dc8dddc6773a065265a678b7fd1a2626a3ea283；checked_at=2026-10-19T14:28:41.960010+08:00；已读self、personal14:16、system12:10、中控与COORDINATION，无新冲突。来源审查12指纹通过，新浪303天仅6/25开盘冲突，独立仅价格研究候选302天/最长299天；7量差异单列，历史到达未证。
+- Astra核旧定义1.0要求15分钟交核和末小时等日close，不能冒充沿用资格。新增唯一卡 research.structure.bottom_hourly_waiting@1.1.0 到docs/research/definitions.v1.json（两工作树各只加此卡），同名raw/definition-binding.json留冻结；旧1.0不改。策略含义和20/60/120及底部身份不变，仅新的Sina来源资格与同时点观察价处理，明确研究表达，不修改桌面原文。
+- 同时点纠正：H日15:00首次小时确认无后续时间→unknown；其他15:00确认日官方close不计为之后下探，从翌日计算。新增模块etf_hourly_recovery.py与测试目前11项合成通过，旧evaluate未修改。未跑收益。Source读审0.032233秒纳入累计，不把新卡合格当有效。
+
+---
+
 # ETF小时来源补证与下一阶段增量接续 2026-10-19T14:23:35.320772+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active，scope_released false。checked_coordination_sha=fe0704ce8ba81980e0f3e147276f0df780e36f65；checked_at=2026-10-19T14:23:35.320772+08:00；已读COORDINATION、self、personal-lowfreq-system-audit-20261018最新14:16、investor-workspace-simplification-20261012最新12:10及research-dispatch-controller。与盈利/动量选股及系统实现无交集。
