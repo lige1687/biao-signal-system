@@ -1,3 +1,10 @@
+# 接入前核验 2026-10-20T17:08:57.196315+08:00
+
+- status active；checked_coordination_sha=539064ab56efbb7fd8b00821e219ad14ba4dd2a7；checked_at=2026-10-20T17:08:57.196315+08:00。已读前列任务与最新investor-workspace-simplification17:03（三图完成释放）和pro-advice-process-review17:05（次开盘比较完成，不升级近似过滤）。无路径重叠；原A/低换手成果只消费状态和结论，仍不复制其研究。
+- 新账本55项相关检查（含旧纯诊断25项）已通过，前端类型/视图检查通过；独立资金/时点发现已修复。新增独立只读核账与保存输入回放在同一已登记package/tests范围内，回放另存审计DB、不覆盖真实记录。下一步按已登记准确路径接入，当前尚无真实模拟成交或收益样本。
+
+---
+
 # 本地观察服务最小接入 2026-10-20T16:59:07.127369+08:00
 
 - status active；scope_released false；checked_coordination_sha=13047277ff5e0fa8bd96a5d90c05e7cfc7860667；checked_at=2026-10-20T16:59:07.127369+08:00。已核COORDINATION及上一段全部task-id，新增读personal-lowfreq-system-audit的16:49/16:52两段；变化仅美股公开分组参考定义，不重叠。
