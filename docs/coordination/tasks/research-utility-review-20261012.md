@@ -1,3 +1,13 @@
+# 因子类型指标与原文差异审查启动 2026-10-20T11:58:00.431525+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=7b1cf2c055acebc7a84445fadfaf9b3fb68f1557；checked_at=2026-10-20T11:58:00.431525+08:00。已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新11:50、gemini-strategy-review-20261020最新11:50、lowfreq-strategy-discovery-20261019、research-dispatch-controller，系统任务沿原报告展示。对方财务输入恢复与ETF斜率×R²研究不接管，不重跑本题高点。
+- 用户问现有因子指标是否按类型合理、与原研究差距、2021—25样本支持、短期反转是否值得进一步研究。本轮report_only：复用封存性能和方法，必要仅对保存汇总作算术/口径复核；0新股票效果/模型/调参/行情下载。新增公开原始来源最多6请求含失败，优先原件。
+- root唯一写docs/experiments/factor-type-metrics-audit-2026-10-20.md及同名raw小审计记录、registry本键/INDEX本行/原progress/目标note；必要仅更新既有发现指引中一个有证据的指标与样本误判案例（先核重复，不改旧合同/定义/阈值/生产）。不修改旧报告结果、共享实现或别人的研究任务。
+- 分工拟Sol medium只读核六份经典报告的原文可比性/指标，Sol medium只读核高点保存摘要及50/81/64月选择/精度；无写文件/新网络/效果运行，root负责短期反转原来源与结论。两路相同只读不冲突。
+- 验收：每类因子匹配主要用途/指标、原版与公开组合复算及LEI适配分层；给准确可比数字与不可比原因；50月不自动判够或不够，范围和缺失/同市场相关性解释；短期反转原定义/旧尝试/新问题可行性和停止边界；现有系统报告API和浏览器读回。小产物预算200KiB，无大结果写入；主成果仍本地未提交，协调元数据单独推核。
+
+---
+
 # 高点组合额外历史股票复验交付 2026-10-20T11:30:22.753809+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本次固定组合采用问题；scope_released true。checked_coordination_sha=e6ca543cefe9bc776029f4903762d9437d9e1be3；checked_at=2026-10-20T11:30:22.753809+08:00；最终fetch无新增提交。已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新11:19/gemini-strategy-review-20261020最新11:18/investor-workspace-simplification-20261012最新00:57/research-dispatch-controller/lowfreq-strategy-discovery-20261019；无范围冲突，其他财务与系统成果保留。
