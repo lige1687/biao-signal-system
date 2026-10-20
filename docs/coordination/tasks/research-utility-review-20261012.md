@@ -1,3 +1,13 @@
+# 高点组合成交与跨股票复验启动 2026-10-20T10:35:17.714511+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=d766b3591a451af973e029f4b323e9e21456d719；checked_at=2026-10-20T10:35:17.714511+08:00；已读COORDINATION/self/personal最新工具交付01:30/system00:57/lowfreq-strategy-discovery及原dispatch范围；无新增冲突。
+- 用户明确继续普通动量＋52周高点：先核缺失成交/历史口径，独立样本复验，收益风险错过机会及Web结论；同时审查其四类经典因子和四类资料建议。不把粘贴正向效果当既定事实或生产授权，不新增IVOL/FIP/反转效果研究。
+- root唯一写docs/experiments/high52-execution-revalidation-2026-10-20.md及同名raw、registry本键/INDEX行/原progress/目标note。后续所需新纯研究适配限定src/lei_signal/research/high52_revalidation.py与tests/unit/test_high52_revalidation.py；旧green_momentum与冻结合同不改。若需定义，仅本题新执行政策独立追加，先登记具体定义后实施。
+- 当前三助手只读：Sol medium green_residual_reuse查既有未用样本与来源暴露；Sol high green_momentum_impl核180未知和成交政策；Astra high green_residual_method审原文含义与四因子建议。无效果计算/下载/写共享文件。保留原600、月频/前30%/green/rankmean，无新增波动或IVOL过滤。
+- 继承前题累计核心1/1、跟进0/3；本轮必要补缺与未用股票复验使用剩余跟进，不重跑旧结果。来源原0/6，本轮已4个只读公开检索（包括未找到FIP的查询）；余2，优先既有原件。资料/历史独立性核不过则受影响效果不运行，不能以数据缺口判无效。外盘新结果预估256MiB、本机800KiB，写前固定盘与容量计划。无交易/付费/生产/通知/删除；主成果本地未提交，协调元数据单独推核。
+
+---
+
 # 同一绿色候选动量增量：有界比较交付 2026-10-20T02:07:25.439935+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本轮回顾性同池比较；scope_released true。checked_coordination_sha=fbf0c3e614b8300174b925e91809c818538cf843；checked_at=2026-10-20T02:07:25.439935+08:00；已读COORDINATION/self/personal-lowfreq-system-audit-20261018/investor-workspace-simplification-20261012/research-dispatch-controller/lowfreq-strategy-discovery-20261019；最新fetch无新增差异，无范围冲突，不接管他人系统或财务来源修复。
