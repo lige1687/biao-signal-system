@@ -1,3 +1,16 @@
+# 按用途核心约定、美股补充与时间澄清交付 2026-10-20T16:07:36.428614+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（本轮有界问题）；scope_released true。checked_coordination_sha=14b2eef19685760400eb07f5b58f90152b6a5bb7；checked_at=2026-10-20T16:07:36.428614+08:00。已读COORDINATION/self、research-utility-review-20261012最新15:54短反转低波对照、pro-advice-process-review-20261020最新15:59完成、gemini-strategy-review-20261020、lowfreq-strategy-discovery-20261019、research-dispatch-controller。未接管他人工作，无新路径冲突。
+- 成果codex/personal-lowfreq-system-audit-20261018@e1330a7d8ee4c7f8babef2afe06de34278fce7e9，首提交d4e23e238a12e2658de688e8a90893751af75bef的25准确路径及最后4路径已正常推送并逐字读回。报告us-factor-purpose-evaluation-2026-10-20.md SHA bc73eae769c34989a9d5a34b6bc7a85ad2f136db0110f31624aba00631f3bad1；main报告/raw/registry本键/INDEX本行镜像，API全文/category/verdict通过，归置通过；open_in_codex仅queued。
+- 用户要求已实际落main AGENTS、factor-discovery-playbook、lei-lowfreq-research skill：每因子按金融含义×用途×市场×期限固定主指标、简单对手、代价与取舍；不只看收益、不过度总分、不事后换用途报成功，未测写未评价。时间披露补准确起止及已见身份。保留原文，before/准确零上下文patch/前后SHA留本报告raw；三核心文件仍main工作区增量，未批量将主树其他规则导入旧成果树，未声称全运行器自动拦截。
+- 已读并合入pro-advice-process-review补充的实际买入组、可比报警负担、行动延迟三项简短细化；原已有校准/机会/大赢家要求不复制。没有改对方报告/任务，没有新回测验收文字。对方“待原写者合入”现由本记录给出已合入证据。
+- 美股新增只有一次OSAP2025公开GP/BM/Mom组合描述，2015-01至2024-12主120月，1963-07至2014-12背景618月，无拟合/独立留出。价值混合相对halfM原M亏损月+1.0108pp、逐项95%[+.0700,+2.0121]，但平均/起伏差未确定、上涨参与和最差月并非更好；保留缓冲线索，不按均值低淘汰。毛利相对halfM均值+.5565伴SD+1.0876，亏损月差-.0802未确定；不称更好防守，不否定其他用途。全部对手/最强12上涨月/候选单用/时期反例并列，mix-halfM=half候选不重复算证据。
+- Sol实现8合成，Luna实际执行1次return0，Astra前后科学审，root独立源CSV与numpy192项核2.22e-16；resultSHA044c68f295cfb9ca096a3835f2db7410c96f3230935b53fcfb88d700d65bdc2f。大输出固定外盘us-factor-purpose-evaluation-20261020/...T154625-9494f8fe1748/result，准确路径design/receipt。新core1/repair0、方法来源2含404失败1、0行情财报下载，旧预算及原10次请求保持。阶段diff-check曾因patch文本空白上下文失败，改为等价零上下文且原失败全文保留，未关闭检查/修改结果。
+- A股时间独核：132个进场月，首2015-01-05至2015-02-02收盘、末2025-12-01至2026-01-05收盘；P1/P2前60后72，防御前72后60，不混称后期/训练测试。600资料在另一新用途的价格衔接检查资格损失尚未查明影响，报告仅复用旧冻结数字，不把本旧单股修正当全源可靠；不重复其排查。US新输入独立。
+- 目标okr-8830a1f1ec4f34→36仅next_action/报告链接/note，in_progress/4of6及旧记录保持，无accept。完整本地美股逐股/ETF及可交易策略未完成；本轮限定问题已回答，无必要未执行统计。下一新题需买入端/同池/成本的具体资格和用途，不自动扩212候选、重置旧家族或后台通知。当前无运行中任务；无生产/交易/付费/删除。
+
+---
+
 # 按用途评价核心约定与美股证据补齐 2026-10-20T15:42:38.020795+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false；checked_coordination_sha=8d5c442234eeae9240dc430fafad2dbb4656e1e6；checked_at=2026-10-20T15:42:38.020795+08:00。已读COORDINATION/self、research-utility-review-20261012最新15:38绿色池短反转、gemini-strategy-review-20261020已完成ETF斜率、lowfreq-strategy-discovery-20261019及research-dispatch-controller；不接管/重跑上述任务。成果基线codex/personal-lowfreq-system-audit-20261018@30aedf142b0dc3c0885c8ed02767d00ba6fbef1f。
