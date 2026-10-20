@@ -1,3 +1,16 @@
+# 中美机构与散户反向研究：补齐数据并分别检验 2026-10-20T20:16:05.778080+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha a7bd3ff63234c0a7c8baa72e8ff977abe50c92c8；checked_at 2026-10-20T20:16:05.778080+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/market-style-observation-20261020；账户/美股盈利保持上轮已核范围，无本题共享实现写入。
+- 用户本轮明确同意机构拥挤/散户极端两个方向，要求A股与美股分别研究、补齐数据，专门寻找NAAIM免费及时更新来源。本轮research，先取得及核历史/最新资料，再对合格且尚未回答的问题冻结有界检验。旧AAII泛模型/融资泛模型/定投负结果不重跑，不自动重启原sentiment-factor-research合同。
+- 基线主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；本题已有成果codex/mechanism-rebalancing-review-20261020@027949c17668b1d360ee0a0362a2864e550d32dd。核心策略两源只读核实际SHA，情绪/机构是独立研究候选，不改原LEI买卖/过滤语义。
+- root唯一写两个新报告 docs/experiments/us-contrarian-positioning-research-2026-10-20.md、a-share-contrarian-positioning-research-2026-10-20.md，共用小记录docs/experiments/raw/contrarian-market-data-research-2026-10-20/、原progress追加、registry各自准确键/INDEX各自行；一次性复现脚本在本新raw内。旧冻结/源码/共享定义/现有服务/他人任务只读，正式新定义如需要另先登记准确范围。
+- 三个Sol medium独立资料子任务：NAAIM免费最新及历史来源、US CFTC TFF一个股指合约的资料取得核查、A股主动基金持仓/申赎与散户可用数据；各只写冻结分配的新raw子目录及对应外盘目录，不得互写或研究效果。root负责机制、数据验收、必要有界统计与独立审查；最多3助手，不另开用户chat。
+- 固定外盘storage已核UUID身份与约498GB余量；下载/普通输入/结果按plan_output唯一目录写外盘，本机只小记录/代码/报告预估3MiB，外盘预估150MiB。无付费、安装、私人上传、交易、生产更改或定时采集；来源公开可读不等于完整历史及时可得。
+- 验收：两市场独立定义/对象/时期/可知时点、可复用原始数据/字段/指纹与最新日期、NAAIM至少可核最新与既有历史重合；每条链能答/不能答分清。合格数据才能做预登记的必要比较，含价格简单对手、事件依赖、反例、少亏/少赚/等待成本；不扫阈值追正。新实验对象先冻结，旧至少1028拟合/4Pro保留；来源及失败累计，不以新名重置。具体分支数据不足只停该分支。
+- 权限：按用户本轮补齐数据与分别研究授权继续，仓外写入仅既有授权的固定实验输出盘；旧源/账户目标数据库不写。阶段成果与断点留原进度和本新raw，本题未取数/运行时不标完成。
+
+---
+
 # 机构持仓与散户情绪反向设计交付 2026-10-20T19:41:18.882181+08:00
 
 - task-id/owner沿原；status completed（本次plan_only设计和来源核查）；scope_released true；checked_coordination_sha 72e5db1362fba9c1f2bfbe323cd780a534107a24；checked_at 2026-10-20T19:41:18.882181+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/strategy-account-bridge-20261020/personal-lowfreq-system-audit-20261018；交付前新增market-style-observation-20261020已读，主题为风格/环境看板，与本报告无文件重叠，registry各自准确键串行追加。原情绪研究及账户/财务owner保持。
