@@ -1,3 +1,15 @@
+# 资料修复实核与防御用途接续 2026-10-20T12:06:03.759774+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=6b658cb2ec79250a5b17330f84af505a00e2c864；checked_at=2026-10-20T12:06:03.759774+08:00。已读COORDINATION/self/research-utility-review-20261012最新11:58、gemini-strategy-review-20261020最新11:59、lowfreq-strategy-discovery-20261019/research-dispatch-controller沿前轮；原因子指标审计和ETF斜率×R²分别归原owner，本题不重做、不改共享定义。
+- 资料阶段已实际完成：20份34页公告双读、14可解除这份公告对GP/assets和CFO/assets的阻挡、6保留；原3696特征月份逐值复现，原合格金额未变；新增206公司月份至少一项合格、169两项且非金融、165再满足旧技术股票池资格。新批未写旧panel、无市场效果，详source-recovery-receipt。9年报关键页实读发现A/B股与反向购买模拟股本，价值完整序列仍不合格。OSAP准备入口已复用原owner修复并真实读回通过。
+- 增补有界问题：已有600历史A股、2015—2025的逐股月度保存面板，过去波动较低是否改善动量选股的下跌/漏涨取舍，较相同名单75%资金的简单办法有无帮助。只重用79,200已看行，不重算价格特征；月末资格和原结果未知/停牌口径不改。前40%动量中按低波动取同样前20%数量为固定待检验方法；纯低波动、动量、全池和75%动量作对照。此为保存结果新增选择诊断，不是成交账户、完整LEI或ETF检验。
+- 预算：沿first-cycle原core1、followup2/3，本次最多使用剩余第3批；原8/10来源/分析尝试，限定本次最多1真实诊断及1必要修复/重跑，总数不超过10，旧预算不重置。0新行情/财报下载、0参数搜索。当前效果尚未运行，先冻结方法/代码、合成边界、输入hash，再一次真实计算；性能/增量/少亏少赚/换名单/未知权重齐全。初次四ETF负结果继续暂缓，不用本题挽救。
+- 写范围仍本题financial-input-recovery-2026-10-20报告/raw、仅自有registry/INDEX/进度与目标；raw新增防御设计/独立一次性诊断脚本及验证，不写通用workflow或正式因子定义。现行question_contract的选择政策需独立评价器，不能伪装原生预测入口已支持；同一账本记录本次用途和累计预算。大输出另plan128MiB，本机整个阶段小记录预计不超过2MiB；已有800KiB计划保持绑定不倒改，新增输出另核容量。
+- 分工：Luna low唯一写本raw的defensive_diagnostic.py和defensive-synthetic.json，方法固定后执行；Astra只读审金融假设/公平比较；Sol仅新source-price-reuse.json定位本项目已经取得的未复权价，不取新资料。root写其余本raw文件并审核结果。此前Astra独审、Sol九原件与Luna队列小输出已完成，路径不再改。共享资料只读，外盘只写本题新目录。
+- 成果基线仍codex/personal-lowfreq-system-audit-20261018@14f286cbab22c81fd0e64aca89e457fc1a69e6d3，本轮资料产物仅本地未提交；最终按准确路径提交推送并读回，不自动合主干。下一步先审核新设计，若公平比较或必要字段不支持则保留具体不足，不填补未知为真实收益。
+
+---
+
 # 继续目标：历史财务输入恢复与剩余候选核对 2026-10-20T11:50:03.459221+08:00
 
 - task-id/owner沿原；status active；scope_released false。checked_coordination_sha=e9d92eb94557fc4194867e5f5f74d59997d1f076；checked_at=2026-10-20T11:50:03.459221+08:00；已读COORDINATION/self、因子实现11:30最终交付（含共享登记修复）、lowfreq-strategy-discovery、dispatch与Gemini已完成范围。root仅接续本题财务/独立候选，不重复高点300股及原LEI/ETF账户。基线14f286cbab22c81fd0e64aca89e457fc1a69e6d3。
