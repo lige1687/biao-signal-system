@@ -1,3 +1,16 @@
+# 来源恢复与有限防御比较交付 2026-10-20T12:35:37.574999+08:00
+
+- task-id/owner沿原；本轮来源恢复/限定历史用途status completed，整体目标仍in_progress；下一旧代码资料补证待追加预算决定，未运行；scope_released false仅保留本题来源恢复范围。checked_coordination_sha=128fde9fed140b07251cf8317f8e17709b5370c8；checked_at=2026-10-20T12:35:37.574999+08:00。最新fetch无其他任务变动，已读COORDINATION/self、原因子12:06指标审计、Gemini12:08ETF52月交付，独立发现/中控沿本轮已读。其他对话结果不重做。
+- 主体成果codex/personal-lowfreq-system-audit-20261018@27db74f857d9fa154ef33a4436ec8c460282d242，72准确路径push/fetch/逐字节读回一致；报告financial-input-recovery-2026-10-20.md及raw、仅自有registry键/INDEX行/原进度。主树报告/raw同名镜像，API全文与category/verdict核同、报告链接全存；open_in_codex仅queued，不宣称视觉验收。外盘大结果未入Git。
+- 实际来源恢复：20公告34页，14仅对本两经营指标解除/6保留，3696旧指标月份精确复现，1593原合格值不变；206公司月至少一项、169共同且非金融、165再满足旧技术资格。新注释独立存储17.57MB，未改旧panel/收益。9固定原年报核康佳A/B、深桑达漏表头、中国天楹反向购买模拟股本/回购日期；完整价值序列仍缺。与他人新300股票原价重合0，不拼错样本。
+- 防御v2被主控旧价格缺陷复核拒绝；fresh600源1852185行+具体历史依赖，63月共同缺失。v3保留600股/132日期，只69个月可评（2016三月+2020-07至2025-12）；无删除单股重排、无空月0、原权重全部匹配。Luna27合成+一次真实运行exit0；root独核各法69月/全部3差额/67相邻月对，误差2.22e-16；Astra独立裁决一致。14.51MB真实输出在defensive-storage-plan准确外盘。
+- 科学结论：组合对原动量月均+0.8253pp、负分量改善+0.5844pp；对75%动量少亏差+0.0361pp未确定；对纯低波动总差+0.0864pp未确定且负分量更差0.2085pp、名单更换34.62%对24.42%。暂缓固定组合升级，低波动保留候选，未证明有效。两未知情景及12/24月块保留，不能称完整十年/独立新时期/ETF/低beta/可成交账户。无追加效果挽救。
+- 本题累计first-cycle core1、followup3/3、attempt9/10；本阶段公开方法/身份定位6/6、新行情/财报下载0。P2及P3预算沿旧，价值4/4资料探针不重置。OSAPprepare真实已过，复用原owner修复，无重复共享改动。费用未知；无生产、交易、付费、通知、删除或后台效果进程。
+- 下一资料路线已具体化：官方搜索原文核000043在2019-12-16改001914，不把该日期当2019-06-06价格断点原因。next-source-request-plan列10次免费旧代码价格/行动查询，遇限流或两连败停；旧源6/6已耗，已向用户请求明确追加预算，目前未答复且未执行。后续只从state/合同/真实回执恢复，不重跑本69月或旧20公告。
+- 系统目标okr-8830a1f1ec4f版本26→28，更新本轮note/下一步/报告链接并读回，status/milestones/owner/授权/旧证据保持；总目标未报完成。主树归置通过；成果树用现行检查器仍报既有COORDINATION.md及docs/coordination两项，无本题新违规，未删改检查凑绿。旧失败预检/来源拒绝及不可用链接修正保留。
+
+---
+
 # 防御输入依赖隔离后再评价 2026-10-20T12:20:16.669718+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=a6a3d1a83a0e4289ad93f8fc5d23ab9285459b0b；checked_at=2026-10-20T12:20:16.669718+08:00。已读COORDINATION/self、research-utility-review-20261012最新12:06指标审计、gemini-strategy-review-20261020最新12:08 ETF真实52月交付；lowfreq-strategy-discovery-20261019/research-dispatch-controller沿本轮已读且无新变更。其他任务成果只复用，不重跑。
