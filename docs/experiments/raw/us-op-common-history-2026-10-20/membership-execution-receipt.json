@@ -1,0 +1,320 @@
+{
+  "schema": "us-op-membership-execution-receipt/1",
+  "started_at": "2026-10-20T19:30:17.567074+08:00",
+  "ended_at": "2026-10-20T19:30:29.403683+08:00",
+  "elapsed_seconds": 11.836609125,
+  "pid": 88104,
+  "returncode": 0,
+  "status": "success_source_qualification_only",
+  "actual_model": "gpt-6-luna low",
+  "command": [
+    "python3",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/qualify_membership.py",
+    "--job",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/membership-job.json",
+    "--storage-plan",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json"
+  ],
+  "contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/luna-membership-contract.json",
+    "sha256": "4dcaf491474cd39d48d773b952b3983504cdcf37704e0bf512fe9506acee6b19"
+  },
+  "job": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/membership-job.json",
+    "sha256": "a9b98567b0db5816ba85838ab93cc4b6f9cf03b89e6da3544bffbdae1a7202d0"
+  },
+  "storage_plan": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json",
+    "sha256": "16f51100823abb23054e0da923bbbd7f15785a13607d6c4c86dc1d58ce54256e",
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "device": 16777238
+  },
+  "runner": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/qualify_membership.py",
+    "sha256": "af7e637b1561fb4a52bbd803d5f1b9c865290e3c84f6be09eb1a6a08f3d10a56"
+  },
+  "synthetic_tests": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/test_qualify_membership.py",
+    "sha256": "7f63ad3ec6175faae4a613be4f928595ace8fa0bd3a8ab2073bfb848358cf477",
+    "passed": 4
+  },
+  "input_sha256": {
+    "membership_intervals.parquet": "a2695e0503a5489ef6f101b9f6d91770a1a114d290b047b8765cbee60947e5fe",
+    "prices.parquet": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563",
+    "fja-history.csv": "36326709d46d6cd25834de5df457b16f5f96fad3a06b9beac28f7b88aa0b0d54",
+    "renames.csv": "e571766f6f362e38d61d7c24d16e5d99db3776b7faea1b94d0c7b0e202d327a0",
+    "exit_gaps.csv": "7fd978df63316793d0b9c7497ba13aa48789f71c02b2db919e884fb0f215364a",
+    "no_trade_days.csv": "e6ce9efaeea91b3e3e8198a6a3b20bf56d217e82fe83c83b133fab27492de2f1"
+  },
+  "network_requests": 0,
+  "market_effects": 0,
+  "stdout": "{\"status\": \"complete\", \"output\": \"/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification\", \"months\": 120, \"interval_rows\": 1801, \"price_keys\": 60510}\n",
+  "stderr": "",
+  "result": {
+    "directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification",
+    "files": [
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification/annual-membership-summary.csv",
+        "name": "annual-membership-summary.csv",
+        "bytes": 625,
+        "sha256": "bd56354b7eb5b43e649f6be5f910a43b616d663b7ec1d40537caef56f00e05f2",
+        "rows_including_header": 11
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification/exit-events.csv",
+        "name": "exit-events.csv",
+        "bytes": 18759,
+        "sha256": "5b997ea2752c9920bc906bff780c89a4e1ccb2f298ed4a479b4da84adff3fd49",
+        "rows_including_header": 219
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification/fja-membership-differences.csv",
+        "name": "fja-membership-differences.csv",
+        "bytes": 945190,
+        "sha256": "9b175d0690b24624888942e7626c1c3bb386fb3b4a6bceec3b3fa860e6b293bf",
+        "rows_including_header": 13349
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification/monthly-members.csv",
+        "name": "monthly-members.csv",
+        "bytes": 2590713,
+        "sha256": "fa62aecb08e4da3a63ecb49a2b8ee483b3266c4bd65a1352ddff1f96003d498b",
+        "rows_including_header": 60511
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification/monthly-price-qualification.csv",
+        "name": "monthly-price-qualification.csv",
+        "bytes": 6111317,
+        "sha256": "94e788612fe0eaa7597997b07b49b8512e0372270d25a919babc72ca3e65f3fe",
+        "rows_including_header": 60511
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification/special-exit-price-windows.csv",
+        "name": "special-exit-price-windows.csv",
+        "bytes": 1919,
+        "sha256": "475acf0ab30b94fd459fb3d375603922ddca9820fffa2d7596c60572f8ce3f88",
+        "rows_including_header": 27
+      },
+      {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification/summary.json",
+        "name": "summary.json",
+        "bytes": 8646,
+        "sha256": "a0e6702b4611664d79a12f28c8d811fe92297229eb462303d3d9e52dcdb2d1b1",
+        "rows_including_header": null
+      }
+    ],
+    "summary_sha256": "a0e6702b4611664d79a12f28c8d811fe92297229eb462303d3d9e52dcdb2d1b1",
+    "monthly_periods": 120,
+    "membership_intervals": 1801,
+    "month_ticker_keys": 60510,
+    "exit_events": 218,
+    "monthly_raw_FJA_differences": 9023,
+    "monthly_renamed_FJA_differences": 3923,
+    "anchor_points": [
+      {
+        "comparison_type": "anchor",
+        "comparison_date": "2014-12-31",
+        "membership_asof_date": "2014-12-31",
+        "fja_snapshot_date": "2014-12-24",
+        "membership_count": 502,
+        "membership_sha256": "2399a8c25a19fc675199c1d2920e408c50ae771618a779d13d5eff87efa61efa",
+        "fja_count": 499,
+        "fja_sha256": "4041711e920faa86507e23ab845f880995534e4a41eb026590bd4c1f8558fea8",
+        "raw_common": 408,
+        "raw_membership_only": 94,
+        "raw_fja_only": 91,
+        "mapped_membership_count": 502,
+        "mapped_fja_count": 499,
+        "mapped_common": 435,
+        "mapped_membership_only": 67,
+        "mapped_fja_only": 64,
+        "membership_rename_collisions": 0,
+        "fja_rename_collisions": 0
+      },
+      {
+        "comparison_type": "anchor",
+        "comparison_date": "2019-12-31",
+        "membership_asof_date": "2019-12-31",
+        "fja_snapshot_date": "2019-12-23",
+        "membership_count": 505,
+        "membership_sha256": "f21973769a4398ba084f5d6ba1cf637f8e7095c40daab8040a6d2ae55f9ed1ea",
+        "fja_count": 505,
+        "fja_sha256": "d22eccae1343559b5d226bc6791a6f081d98a4dfcc7ef989f22f4b83ceb7fa20",
+        "raw_common": 476,
+        "raw_membership_only": 29,
+        "raw_fja_only": 29,
+        "mapped_membership_count": 505,
+        "mapped_fja_count": 505,
+        "mapped_common": 501,
+        "mapped_membership_only": 4,
+        "mapped_fja_only": 4,
+        "membership_rename_collisions": 0,
+        "fja_rename_collisions": 0
+      },
+      {
+        "comparison_type": "anchor",
+        "comparison_date": "2024-12-31",
+        "membership_asof_date": "2024-12-31",
+        "fja_snapshot_date": "2024-12-23",
+        "membership_count": 503,
+        "membership_sha256": "5d7ab30817b4c29e521122661207f1f9982efc522f29e0bdbc6850e8e17d2dba",
+        "fja_count": 503,
+        "fja_sha256": "b6e27d4fe726d73d3e6a2d69f5c555118620a1264efd1529d9547f3dab7a6486",
+        "raw_common": 496,
+        "raw_membership_only": 7,
+        "raw_fja_only": 7,
+        "mapped_membership_count": 503,
+        "mapped_fja_count": 503,
+        "mapped_common": 500,
+        "mapped_membership_only": 3,
+        "mapped_fja_only": 3,
+        "membership_rename_collisions": 0,
+        "fja_rename_collisions": 0
+      }
+    ],
+    "quote_quality_counts_independently_readback": {
+      "month_ticker_rows": 60510,
+      "missing_price_row": 7,
+      "duplicate_price_keys": 0,
+      "close_missing": 0,
+      "close_negative": 0,
+      "close_zero": 0,
+      "adj_close_missing": 0,
+      "adj_close_negative": 0,
+      "adj_close_zero": 0,
+      "volume_missing": 22,
+      "volume_negative": 0,
+      "volume_zero": 1,
+      "no_trade_days_listed": 1,
+      "positive_exact_quote": 60480
+    },
+    "annual_membership": [
+      {
+        "year": 2015,
+        "unique_tickers_any_interval_overlap": 532,
+        "unique_tickers_seen_at_month_end": 529,
+        "year_end_month_end_tickers": 504,
+        "interval_rows_overlapping_year": 532,
+        "interval_starts_in_year": 30,
+        "interval_ends_in_year": 28,
+        "reentries_in_year": 1,
+        "tickers_with_multiple_interval_rows_overlapping_year": 0,
+        "overlapping_interval_pairs_in_year": 0
+      },
+      {
+        "year": 2016,
+        "unique_tickers_any_interval_overlap": 533,
+        "unique_tickers_seen_at_month_end": 531,
+        "year_end_month_end_tickers": 505,
+        "interval_rows_overlapping_year": 533,
+        "interval_starts_in_year": 29,
+        "interval_ends_in_year": 28,
+        "reentries_in_year": 1,
+        "tickers_with_multiple_interval_rows_overlapping_year": 0,
+        "overlapping_interval_pairs_in_year": 0
+      },
+      {
+        "year": 2017,
+        "unique_tickers_any_interval_overlap": 533,
+        "unique_tickers_seen_at_month_end": 531,
+        "year_end_month_end_tickers": 505,
+        "interval_rows_overlapping_year": 533,
+        "interval_starts_in_year": 28,
+        "interval_ends_in_year": 28,
+        "reentries_in_year": 2,
+        "tickers_with_multiple_interval_rows_overlapping_year": 0,
+        "overlapping_interval_pairs_in_year": 0
+      },
+      {
+        "year": 2018,
+        "unique_tickers_any_interval_overlap": 528,
+        "unique_tickers_seen_at_month_end": 527,
+        "year_end_month_end_tickers": 505,
+        "interval_rows_overlapping_year": 528,
+        "interval_starts_in_year": 23,
+        "interval_ends_in_year": 23,
+        "reentries_in_year": 1,
+        "tickers_with_multiple_interval_rows_overlapping_year": 0,
+        "overlapping_interval_pairs_in_year": 0
+      },
+      {
+        "year": 2019,
+        "unique_tickers_any_interval_overlap": 528,
+        "unique_tickers_seen_at_month_end": 525,
+        "year_end_month_end_tickers": 505,
+        "interval_rows_overlapping_year": 528,
+        "interval_starts_in_year": 23,
+        "interval_ends_in_year": 23,
+        "reentries_in_year": 3,
+        "tickers_with_multiple_interval_rows_overlapping_year": 0,
+        "overlapping_interval_pairs_in_year": 0
+      },
+      {
+        "year": 2020,
+        "unique_tickers_any_interval_overlap": 523,
+        "unique_tickers_seen_at_month_end": 520,
+        "year_end_month_end_tickers": 505,
+        "interval_rows_overlapping_year": 523,
+        "interval_starts_in_year": 18,
+        "interval_ends_in_year": 18,
+        "reentries_in_year": 1,
+        "tickers_with_multiple_interval_rows_overlapping_year": 0,
+        "overlapping_interval_pairs_in_year": 0
+      },
+      {
+        "year": 2021,
+        "unique_tickers_any_interval_overlap": 524,
+        "unique_tickers_seen_at_month_end": 522,
+        "year_end_month_end_tickers": 505,
+        "interval_rows_overlapping_year": 524,
+        "interval_starts_in_year": 19,
+        "interval_ends_in_year": 19,
+        "reentries_in_year": 1,
+        "tickers_with_multiple_interval_rows_overlapping_year": 0,
+        "overlapping_interval_pairs_in_year": 0
+      },
+      {
+        "year": 2022,
+        "unique_tickers_any_interval_overlap": 521,
+        "unique_tickers_seen_at_month_end": 520,
+        "year_end_month_end_tickers": 503,
+        "interval_rows_overlapping_year": 521,
+        "interval_starts_in_year": 16,
+        "interval_ends_in_year": 18,
+        "reentries_in_year": 4,
+        "tickers_with_multiple_interval_rows_overlapping_year": 0,
+        "overlapping_interval_pairs_in_year": 0
+      },
+      {
+        "year": 2023,
+        "unique_tickers_any_interval_overlap": 519,
+        "unique_tickers_seen_at_month_end": 517,
+        "year_end_month_end_tickers": 503,
+        "interval_rows_overlapping_year": 519,
+        "interval_starts_in_year": 16,
+        "interval_ends_in_year": 16,
+        "reentries_in_year": 1,
+        "tickers_with_multiple_interval_rows_overlapping_year": 0,
+        "overlapping_interval_pairs_in_year": 0
+      },
+      {
+        "year": 2024,
+        "unique_tickers_any_interval_overlap": 520,
+        "unique_tickers_seen_at_month_end": 520,
+        "year_end_month_end_tickers": 503,
+        "interval_rows_overlapping_year": 520,
+        "interval_starts_in_year": 17,
+        "interval_ends_in_year": 17,
+        "reentries_in_year": 0,
+        "tickers_with_multiple_interval_rows_overlapping_year": 0,
+        "overlapping_interval_pairs_in_year": 0
+      }
+    ]
+  },
+  "limitations": [
+    "FJA/interval comparison is not independent validation; rename mappings aid matching only.",
+    "Interval end is an index membership event and does not confirm an underlying security exit.",
+    "No return, momentum, ranking or effectiveness calculation was performed."
+  ]
+}

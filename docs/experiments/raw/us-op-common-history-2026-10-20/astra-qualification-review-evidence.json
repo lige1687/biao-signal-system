@@ -1,0 +1,125 @@
+{
+  "schema": "astra-readonly-qualification-crosscheck/1",
+  "created_at": "2026-10-20T12:24:59.996286+00:00",
+  "status": "candidate_counts_only_not_factor_admission",
+  "scope": "Independent metadata and source arithmetic audit; no factor ratios, return computation or ranking.",
+  "inputs": {
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/annual-formation-coverage/monthly-formation-readiness.csv": "68395f574a12090cee95435cc9111dd262b1bf129225f9274c230ecc396706c0",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-outcome-qualification-v2/event-outcomes.csv": "3179d87bce9ae6c04fe6f5a5458d48181825d48c299f663ccd697db74df887f9",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/annual-formation-coverage/calendar-observation-year-funnel.csv": "1a1d01b31c37c7c8077f4193ac5eb798952e4dcd5cf3b5c07c213541d2e04551"
+  },
+  "candidate_rule": "Existence of at least one candidate issuer evaluation with each revenue,cogs,sga,interest,equity status finite_unique_amount and equity >0; optional preferred status finite_unique_amount. Deduplicate member month/ticker. This is NOT identity, economic field mapping, exact period, or BE acceptance.",
+  "multiple_candidate_issuer_evaluation_rows": 0,
+  "candidate_counts": {
+    "unique_flows_positive_equity": {
+      "member_months": 12817,
+      "distinct_tickers": 208,
+      "distinct_accessions": 1201
+    },
+    "also_explicit_unique_preferred": {
+      "member_months": 5786,
+      "distinct_tickers": 109,
+      "distinct_accessions": 539
+    }
+  },
+  "year_funnel_sums": {
+    "ticker_month_rows": 60510,
+    "candidate_cik_link": 59781,
+    "annual_document_asof_cutoff": 58341,
+    "four_flows_finite": 17693,
+    "four_flows_plus_positive_equity": 15228,
+    "plus_explicit_finite_preferred": 6791
+  },
+  "exit_join_rule": "Join candidate month,ticker to formation_spy_month_end[:7],ticker; restrict held_at_prior_month_end True. Missing quote is not proof of economic loss or zero payout.",
+  "exit_counts": {
+    "events": 218,
+    "held_prior_month": 212,
+    "held_target_missing": 101,
+    "narrow_candidate_held_exit": 17,
+    "narrow_candidate_held_target_missing": 10
+  },
+  "narrow_candidate_missing_target_cases": [
+    {
+      "ticker": "BRCM-201601",
+      "formation": "2016-01-29",
+      "target": "2016-02-29",
+      "adsh": "0001054374-15-000012"
+    },
+    {
+      "ticker": "CELG",
+      "formation": "2019-10-31",
+      "target": "2019-11-29",
+      "adsh": "0000816284-19-000014"
+    },
+    {
+      "ticker": "FDO-201507",
+      "formation": "2015-06-30",
+      "target": "2015-07-31",
+      "adsh": "0000034408-13-000015"
+    },
+    {
+      "ticker": "FLIR",
+      "formation": "2021-04-30",
+      "target": "2021-05-28",
+      "adsh": "0000354908-20-000010"
+    },
+    {
+      "ticker": "HAR-201703",
+      "formation": "2017-02-28",
+      "target": "2017-03-31",
+      "adsh": "0001193125-15-283170"
+    },
+    {
+      "ticker": "PCP-201601",
+      "formation": "2016-01-29",
+      "target": "2016-02-29",
+      "adsh": "0000079958-14-000023"
+    },
+    {
+      "ticker": "SIAL-201511",
+      "formation": "2015-10-30",
+      "target": "2015-11-30",
+      "adsh": "0000090185-15-000027"
+    },
+    {
+      "ticker": "STJ-201701",
+      "formation": "2016-12-30",
+      "target": "2017-01-31",
+      "adsh": "0000203077-16-000013"
+    },
+    {
+      "ticker": "VAR",
+      "formation": "2021-03-31",
+      "target": "2021-04-30",
+      "adsh": "0000203527-19-000025"
+    },
+    {
+      "ticker": "WCG",
+      "formation": "2019-12-31",
+      "target": "2020-01-31",
+      "adsh": "0001279363-19-000008"
+    }
+  ],
+  "aapl_independent_raw_check": {
+    "accession": "0000320193-20-000096",
+    "start": "2019-09-29",
+    "end": "2020-09-26",
+    "currency": "USD billions",
+    "revenue": 274.515,
+    "cogs": 169.559,
+    "literal_sga": 19.916,
+    "research_development": 18.752,
+    "interest": 2.873,
+    "operating_income": 66.288,
+    "literal_subtraction": 82.167,
+    "conditional_sga_includes_separate_rd_subtraction": 63.415,
+    "claim": "Arithmetic only; not certified standardized OP numerator or OP ratio"
+  },
+  "limitations": [
+    "All candidate rows retain unverified identity and exact-period status.",
+    "Numerical uniqueness is not economic equivalence or standardized SGA/COGS/BE qualification.",
+    "Explicit preferred tag is a diagnostic branch, not a universal admission requirement.",
+    "No source completeness or missing-at-random assumption.",
+    "Only already-saved files read; no network or performance runs."
+  ]
+}

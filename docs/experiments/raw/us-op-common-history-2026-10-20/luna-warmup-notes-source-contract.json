@@ -1,0 +1,30 @@
+{
+  "mission": "补年度形成法所需2013年当时已公开文件，获取SEC附注资料的原始说明与确切下载链接",
+  "reason": "2015年1-6月若沿2014年6月固定年度形成，会用财年终止于2013的年报；非12月年结公司2013年已发布，不可用2014年后比较列倒补。附注来源可解决FSDS仅主表漏利息/优先股信息的问题，先读说明，不先下载所有附注。",
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fetch_public.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/requests-07-warmup-notes.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/http-ledger.jsonl",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/acquisition-07-receipt.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/sec-fsds-2013q1.zip",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/sec-fsds-2013q2.zip",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/sec-fsds-2013q3.zip",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/sec-fsds-2013q4.zip",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/sec-fsn-index.html",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/sec-fsn-documentation.pdf"
+  ],
+  "scope": [
+    "固定6请求，一次执行fetch_public.py requests-07-warmup-notes.json，串行；403/429停止host，两次连续失败停止，不回退",
+    "4ZIP校验SHA/CRC/必需sub,num,pre,tag；PDF/headerHTML确实数据内容不是限流页；提取HTML中2014Q1附注archive确切href，仅报不新增请求",
+    "所有大源外盘，原44ZIP/旧效力结果不变；新增最多640MiB仍在已授权10GiB存储计划，实际bytes记录",
+    "不提取/计算财务/收益，不提交/子代理；确认收据"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "created_at": "2026-10-20T19:56:07.247727+08:00"
+}

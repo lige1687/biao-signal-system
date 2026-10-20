@@ -1,0 +1,293 @@
+{
+  "status": "completed_source_only_accounting_structure_v2b",
+  "scope": "Derived only from already saved candidate facts and existing panel tables; no ZIP rescans, no network, no market outcomes, no strategy/OP ratio calculation.",
+  "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B docs/experiments/raw/us-op-common-history-2026-10-20/accounting_structure_probe_v2.py --out \"/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/accounting-structure-probe-v2b\"",
+  "execution": {
+    "runner_path": "docs/experiments/raw/us-op-common-history-2026-10-20/accounting_structure_probe_v2.py",
+    "runner_sha256": "5daebd27b1d7d8f62afe82111d677d6f4c65e82b75886f265aeaf85424b74a31",
+    "self_test_command": "PYTHONDONTWRITEBYTECODE=1 python3 -B docs/experiments/raw/us-op-common-history-2026-10-20/accounting_structure_probe_v2.py --self-test",
+    "self_test_result": "11 assertions passed",
+    "started_at_utc": "2026-10-20T12:46:36.418402+00:00",
+    "finished_at_utc": "2026-10-20T12:46:40.167987+00:00",
+    "elapsed_seconds": 3.776,
+    "exec_session_id": 20077,
+    "returncode": 0,
+    "os_pid": "not exposed by exec tool"
+  },
+  "result_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/accounting-structure-probe-v2b",
+  "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/accounting-structure-probe-v2b/manifest.json",
+  "manifest_sha256": "3b1f825a1879bde6de2b8d1713d4c245f135678caf666b192185a59d0f1be70b",
+  "summary_sha256": "81899ddd2954680fdc83df4757cbeab0c50a04a28fbd6ad15dbebe95e7a114c2",
+  "output_files_reverified": [
+    {
+      "path": "equity-pathway-review.csv",
+      "bytes": 1139570,
+      "rows": 1201,
+      "sha256": "182301f3c413afe769e3e40a47a9065365a3260f3d25f37e68903491b2a3d7b7"
+    },
+    {
+      "path": "balance-sheet-closure.csv",
+      "bytes": 474100,
+      "rows": 1201,
+      "sha256": "db315ddcc65d8590e6dd2e1d1e3397785b7c9032e1c4aae16f0296d14c1cd046"
+    },
+    {
+      "path": "preferred-tag-filter-audit.csv",
+      "bytes": 265630,
+      "rows": 1293,
+      "sha256": "88ddcc2bbcfbf0224f6b3c5f6f9741bca308ee8a3eae431c914f94ec7ab74330"
+    },
+    {
+      "path": "example-source-facts.csv",
+      "bytes": 10080,
+      "rows": 26,
+      "sha256": "305cc8750f1d81a6205df3af947c3618ea017f2570604604b4fd82f2f290964a"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 9661,
+      "rows": null,
+      "sha256": "81899ddd2954680fdc83df4757cbeab0c50a04a28fbd6ad15dbebe95e7a114c2"
+    }
+  ],
+  "input_bindings": {
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/accounting-structure-probe/manifest.json": {
+      "sha256": "6f82221a3ce6c637260d1212c47a09a1ae09d65a9eead5d5ac6bb252b631430e",
+      "bytes": 8666
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/accounting-structure-probe/filing-structure-candidates.csv": {
+      "sha256": "1dddd86f27ddd98adaa4ca5297d6439696ff66bf471b0570d04575410b40e318",
+      "bytes": 20076855
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/accounting-structure-probe/fact-rows.csv": {
+      "sha256": "d7695a5a6e4e573beeed77da1f4ec691a155b22006b7956f4ec99424dbd919b1",
+      "bytes": 27386078
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/accounting-structure-probe/operating-income-identity-checks.csv": {
+      "sha256": "2999d0eda785075f2adf1f4fcadfdbe25e6b46e7e4ef683582d08818732d2ec9",
+      "bytes": 331273
+    },
+    "docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json": {
+      "sha256": "16f51100823abb23054e0da923bbbd7f15785a13607d6c4c86dc1d58ce54256e",
+      "bytes": 815
+    },
+    "docs/experiments/raw/us-op-common-history-2026-10-20/annual-profitability-adaptation.json": {
+      "sha256": "1e1032642919d89e820336644e68359d0cbb66501792fe757a7a9997dc534a8e",
+      "bytes": 4269
+    },
+    "docs/experiments/raw/us-op-common-history-2026-10-20/controller-taxonomy-2014q1.json": {
+      "sha256": "bc68698461e15c9382ed27fcdd92dde847cda789040cf78cf0809ea2c7025708",
+      "bytes": 14540
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/statement-facts.csv": {
+      "sha256": "be3ce99d4c1ab38cd907b5613e6b092b91b6b01cb15400a7b21c9ba7831d1093",
+      "bytes": 128266690
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/presentation.csv": {
+      "sha256": "29c254c34ba2731fff756928a630009aa47ae3958cd12db947b9e040e9464fca",
+      "bytes": 66928611
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/statement-facts.csv": {
+      "sha256": "fb0753f5a7832c559781b1bd784319e56b255e9e8f93c70965fc59c3212cb3bf",
+      "bytes": 72934
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/presentation.csv": {
+      "sha256": "4e21c4906b7f35c000773cc0a7bb52b9609f78f134cadb9a5abe939c470624a7",
+      "bytes": 34063
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/statement-facts.csv": {
+      "sha256": "f5f724c9675a47cba525eb9531d180fc234cc95c3f2d1c179572de2d04e917be",
+      "bytes": 12903167
+    },
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/presentation.csv": {
+      "sha256": "20a740c103aa81637c81a33a2adcbe93a736abee6256317eb167174f79c508a3",
+      "bytes": 6628933
+    },
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json": {
+      "sha256": "16f51100823abb23054e0da923bbbd7f15785a13607d6c4c86dc1d58ce54256e",
+      "bytes": 815
+    }
+  },
+  "readback_counts": {
+    "candidate_accessions": 1201,
+    "adsh_rounded_date_groups": 1201,
+    "per_year_old_candidate_support": {
+      "2012": {
+        "filings": 7,
+        "unique_CIKs": 7,
+        "unique_member_month_ticker_keys": 42,
+        "filing_to_month_key_links": 42
+      },
+      "2013": {
+        "filings": 98,
+        "unique_CIKs": 98,
+        "unique_member_month_ticker_keys": 630,
+        "filing_to_month_key_links": 630
+      },
+      "2014": {
+        "filings": 103,
+        "unique_CIKs": 103,
+        "unique_member_month_ticker_keys": 1162,
+        "filing_to_month_key_links": 1162
+      },
+      "2015": {
+        "filings": 95,
+        "unique_CIKs": 95,
+        "unique_member_month_ticker_keys": 1108,
+        "filing_to_month_key_links": 1108
+      },
+      "2016": {
+        "filings": 98,
+        "unique_CIKs": 98,
+        "unique_member_month_ticker_keys": 1133,
+        "filing_to_month_key_links": 1133
+      },
+      "2017": {
+        "filings": 94,
+        "unique_CIKs": 94,
+        "unique_member_month_ticker_keys": 1107,
+        "filing_to_month_key_links": 1107
+      },
+      "2018": {
+        "filings": 115,
+        "unique_CIKs": 115,
+        "unique_member_month_ticker_keys": 1362,
+        "filing_to_month_key_links": 1362
+      },
+      "2019": {
+        "filings": 121,
+        "unique_CIKs": 121,
+        "unique_member_month_ticker_keys": 1425,
+        "filing_to_month_key_links": 1425
+      },
+      "2020": {
+        "filings": 130,
+        "unique_CIKs": 130,
+        "unique_member_month_ticker_keys": 1501,
+        "filing_to_month_key_links": 1501
+      },
+      "2021": {
+        "filings": 117,
+        "unique_CIKs": 117,
+        "unique_member_month_ticker_keys": 1392,
+        "filing_to_month_key_links": 1392
+      },
+      "2022": {
+        "filings": 115,
+        "unique_CIKs": 115,
+        "unique_member_month_ticker_keys": 1316,
+        "filing_to_month_key_links": 1316
+      },
+      "2023": {
+        "filings": 108,
+        "unique_CIKs": 108,
+        "unique_member_month_ticker_keys": 639,
+        "filing_to_month_key_links": 639
+      }
+    },
+    "standard_commonstockholdersequity_direct_plus_nci_complete": 0,
+    "inclusive_equity_minus_preferred_complete": 247,
+    "parent_equity_plus_nci_minus_preferred_complete": 249,
+    "assets_liabilities_equity_reference_closed": 311,
+    "assets_liabilities_equity_reference_nonzero_residual": 87,
+    "residual_matches_one_reported_redeemable_or_temporary_item": 85,
+    "normal_zero_preferred_no_special_equity_exact_pathway_count": 99,
+    "per_year_normal_zero_preferred_pathway": {
+      "2013": {
+        "filings": 5,
+        "unique_CIKs": 5,
+        "unique_member_month_keys": 30
+      },
+      "2014": {
+        "filings": 9,
+        "unique_CIKs": 9,
+        "unique_member_month_keys": 103
+      },
+      "2015": {
+        "filings": 10,
+        "unique_CIKs": 10,
+        "unique_member_month_keys": 108
+      },
+      "2016": {
+        "filings": 8,
+        "unique_CIKs": 8,
+        "unique_member_month_keys": 96
+      },
+      "2017": {
+        "filings": 8,
+        "unique_CIKs": 8,
+        "unique_member_month_keys": 96
+      },
+      "2018": {
+        "filings": 11,
+        "unique_CIKs": 11,
+        "unique_member_month_keys": 132
+      },
+      "2019": {
+        "filings": 10,
+        "unique_CIKs": 10,
+        "unique_member_month_keys": 117
+      },
+      "2020": {
+        "filings": 9,
+        "unique_CIKs": 9,
+        "unique_member_month_keys": 97
+      },
+      "2021": {
+        "filings": 9,
+        "unique_CIKs": 9,
+        "unique_member_month_keys": 108
+      },
+      "2022": {
+        "filings": 10,
+        "unique_CIKs": 10,
+        "unique_member_month_keys": 115
+      },
+      "2023": {
+        "filings": 10,
+        "unique_CIKs": 10,
+        "unique_member_month_keys": 60
+      }
+    },
+    "earliest_example": {
+      "name": "MOLSON COORS BREWING CO",
+      "adsh": "0000024545-14-000004",
+      "cik": "24545",
+      "fy": "2013",
+      "period": "20131231",
+      "accepted": "2014-02-14 14:51:00.0"
+    },
+    "redeemable_nci_exception": "Henry Schein 0001000228-14-000010: residual 497539000 equals separately reported redeemable NCI 497539000"
+  },
+  "preserved_prior_attempts": [
+    {
+      "label": "v1-source-probe attempt 1",
+      "returncode": 1,
+      "error": "TypeError: a JSON string was treated as a mapping in the direct-common-equity summary; output directory absent, so no partial output."
+    },
+    {
+      "label": "v1-source-probe attempt 2",
+      "returncode": 0,
+      "manifest_sha256": "6f82221a3ce6c637260d1212c47a09a1ae09d65a9eead5d5ac6bb252b631430e",
+      "known_issue": "PreferredStockParOrStatedValuePerShare included in broad preferred discovery field; v1 preserved and not used for qualification."
+    },
+    {
+      "label": "v2a-derived attempt",
+      "returncode": 0,
+      "manifest_sha256": "0049ed221950968fdf29edf656a63733296fa104d3fb6007c04426aa145a393b",
+      "known_issue": "NCI detector also included StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest as a component; v2a preserved and not used for qualification."
+    },
+    {
+      "label": "v2b-derived run",
+      "returncode": 0,
+      "manifest_sha256": "3b1f825a1879bde6de2b8d1713d4c245f135678caf666b192185a59d0f1be70b",
+      "correction": "Exclude per-share/share-count tags, total-equity tags as NCI components, and temporary/redeemable items from ordinary NCI; only standard us-gaap versions enter paths; assets/liabilities equality and special-equity residual are kept separately."
+    }
+  ],
+  "qualification_limits": [
+    "The 1,201 accessions came from a prior four-flow plus positive-equity filter and cannot define the later cohort because the fixed adaptation does not require COGS/SG&A/revenue.",
+    "The Molson Coors structure is a source-review candidate; interest placement below reported operating income is evidence to inspect, not a standalone guarantee of economic classification.",
+    "No OperatingIncomeLoss minus interest amount, denominator measurement, OP ratio, factor, or return was calculated.",
+    "D&A was not added back; custom tag amounts remain candidates only."
+  ]
+}

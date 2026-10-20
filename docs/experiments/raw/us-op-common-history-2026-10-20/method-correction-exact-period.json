@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-20T20:05:29.963351+08:00",
+  "source": "sec-fsds-2014q1.zip/readme.htm",
+  "correction": "NUM.ddate, SUB.period and SUB.fye are rounded to month end; qtrs rounded to whole quarter. Prior root assumption that NUM.ddate was exact was incorrect. Existing source rows remain unchanged. Annual coverage is a candidate upper bound, never exact financial-period acceptance.",
+  "evidence_case": {
+    "adsh": "0000320193-20-000096",
+    "companyfacts_exact_end": "2020-09-26",
+    "fsds_ddate": "20200930",
+    "fsds_period": "20200930",
+    "filed": "20201030",
+    "accepted": "2020-10-29 18:06:00.0"
+  },
+  "effect_runs_at_detection": 0,
+  "action": "Luna annual-formation work notified before acceptance; add exact_period_unverified and year-boundary risk; require original XBRL periods/Companyfacts or FSN datp/durp for actual eligibility, no filenames-as-proof."
+}

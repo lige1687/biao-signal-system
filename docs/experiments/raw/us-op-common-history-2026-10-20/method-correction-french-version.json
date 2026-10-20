@@ -1,0 +1,15 @@
+{
+  "created_at": "2026-10-20T20:35:00+08:00",
+  "scope": "Definition correction before any OP scoring or efficacy experiment; original brief retained",
+  "source": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+  "accessed": "2026-10-20",
+  "findings": [
+    "The current main library states that since August 2016, BE for fiscal years ending in 1993 or later no longer adds deferred taxes and investment tax credit.",
+    "The August 2018 notice includes minority interest in the operating-profitability denominator. The separate size-OP detail page omits this update.",
+    "The September 2020 notice describes profitability as operating income before depreciation and amortization less interest, scaled by book equity; the explicit August 2018 minority-interest update must also be considered.",
+    "The size-OP detail page permits missing individual expenses when revenue, positive book equity and at least one expense field exist in the source database. This is not evidence that a missing SEC XBRL tag represents zero."
+  ],
+  "impact": "The prior brief's simple R-COGS-SGA-interest / BE wording is incomplete as a strict replication of the current French reference. A direct annual XBRL accounting adaptation must have its own explicit meaning and label; no fallback to net income/assets or silent substitution of OperatingIncomeLoss.",
+  "status": "Scientific accounting-target review pending; no factor scores or market outcomes computed",
+  "historical_results": "Published French portfolio returns remain unchanged; this correction concerns the definition and qualification of new stock-level inputs."
+}

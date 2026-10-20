@@ -1,0 +1,76 @@
+{
+  "schema": "us-op-joint-qualification/1",
+  "created_at": "2026-10-20T19:20:31.805263+08:00",
+  "question": "历史同一批美股里，动量相近时，经营盈利高低是否帮助选择对象、辨别下行风险或减少无益操作？",
+  "principal_purpose": "同日期同历史资格的候选排序；月度观察年度盈利，月度执行假设必须另冻结",
+  "financial_hypothesis": "经营利润相对股东账面投入的持续创造能力可能补充过去价格已反映的信息。高盈利可能有较稳经营，低盈利可能脆弱。",
+  "competing_explanations": [
+    "行业结构与资本轻重不同",
+    "高盈利已在估值中充分反映，价格已提前反应",
+    "会计标签、并购和幸存者缺失造成假效果"
+  ],
+  "not_equivalent": [
+    "毛利/资产",
+    "净利润/资产",
+    "现金利润/资产",
+    "季度EPS变化",
+    "French边际组合之间的相关性"
+  ],
+  "period": {
+    "main": "2015-01-01/2024-12-31",
+    "warmup": "2013-01-01/2014-12-31",
+    "time_split": "前2015—2019后2020—2024用于稳定性描述；已见市场历史，不称独立留出"
+  },
+  "universe": "优先恢复历史S&P500成员作为US大型股适配；最终名单来源、证券身份、覆盖与退出资格在数据核验后绑定；非French纽约所规模中位数池",
+  "formula_target": "prior-year revenue less COGS less SG&A less interest / book equity, preserving comparable accounting scope and missing-vs-zero; unverified equivalences block scoring",
+  "availability": "不得用财年结束日当公开日；保存每份申报及接受时间，按当时可知版本重放，不把今日修订回填历史；有条件可用保守日期次交易日但不能冒称实际首次公布时间",
+  "benchmark": "同日期同资格且动量相近的中间盈利组与全体；动量用t-12到t-2完整月收益，观察价与行动价分开",
+  "predeclared_utilities": {
+    "ranking": [
+      "随后收益排序关联",
+      "分组差额与排序形态",
+      "历史前后差异",
+      "相同动量内增量"
+    ],
+    "risk_information": [
+      "未来损失分布",
+      "波动和下跌月份",
+      "亏损概率；同等提示数量比较"
+    ],
+    "decision_or_portfolio": [
+      "若有真实行动定义，再核少亏/少赚/集中/参与程度/费用/最大账面跌幅；无合格数据不填策略收益"
+    ],
+    "operational": [
+      "名单更换",
+      "原件缺失和修订处理工作量",
+      "不可判时可靠拒绝而非补零"
+    ]
+  },
+  "qualification_first": [
+    "按区间保存加入/离开指数，离开指数不等于退市；不合并重复进出",
+    "证券身份和代码复用；CIK是发行人不等于证券",
+    "退市/并购真实终值或未知，不以最后价或零填补",
+    "同一accession年度字段与普通权益口径齐全，财报原件和版本",
+    "坏数据样例应阻止效果统计"
+  ],
+  "reuse": [
+    "us-long-only-factor-evaluation-2026-10-20",
+    "osap-history-revisions-2026-10-20",
+    "lowturnover-green-account-2026-10-20 MSFT EPS source only"
+  ],
+  "ownership": "本题年度OP，同级pro-advice owner季度盈利变化；其他因子实现、宽度、ETF账户不接管",
+  "budget": {
+    "discovery_requests_so_far": 8,
+    "source_request_plan": "先每候选来源元数据和样例；合格后仅冻结名单对应必要历史文件；每请求留账，403/429停止该host采集不换方式绕过，不能盲目数百请求",
+    "new_effect_core_max": 1,
+    "mechanical_repair_max": 1,
+    "old_budgets": "不重置",
+    "storage_estimate_gib": 10,
+    "fixed_fsds_acquisition_requests": 43,
+    "fixed_fsds_reason": "2015—2024逐月同池比较需要每年形成时可见的年度数据及其修订；2014Q1样本已合格读取真实sub/num/pre/tag结构；本批只补精确历史文件，不下载后来财报填旧值",
+    "warmup_correction_requests": 6,
+    "warmup_correction_reason": "2015年1-6月若沿2014年6月固定年度形成，会用财年终止于2013的年报；非12月年结公司2013年已发布，不可用2014年后比较列倒补。附注来源可解决FSDS仅主表漏利息/优先股信息的问题，先读说明，不先下载所有附注。"
+  },
+  "status": "qualification_in_progress",
+  "evidence_boundary": "资格不足不作收益增量估计，仍完成可取得资料和精确缺口。"
+}

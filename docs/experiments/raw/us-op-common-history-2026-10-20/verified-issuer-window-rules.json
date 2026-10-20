@@ -1,0 +1,63 @@
+{
+  "created_at": "2026-10-20T20:23:20.959089+08:00",
+  "purpose": "Evidence-backed issuer candidates for narrowly verified historical windows, preserving security labels and unknown remainder",
+  "source_candidate_sha256": "3bde13c078874b5786c34dfcc3cbb632b33cb1c68f3684408c4b33311ebfa7e1",
+  "rules": [
+    {
+      "ticker": "AGN",
+      "start_month": "2015-01",
+      "end_month": "2015-02",
+      "cik": "1578845",
+      "issuer": "Actavis plc; current normalized AGN label",
+      "evidence": [
+        "https://www.sec.gov/Archives/edgar/data/1578845/000119312514066242/0001193125-14-066242-index.htm",
+        "https://www.sec.gov/Archives/edgar/data/1578845/000156459016013478/agn-10k_20151231.htm"
+      ],
+      "retain_distinct_label": "AGN-201503 / original Allergan CIK850693"
+    },
+    {
+      "ticker": "CB-201601",
+      "start_month": "2015-01",
+      "end_month": "2015-12",
+      "cik": "20171",
+      "issuer": "The Chubb Corporation before ACE acquisition",
+      "evidence": [
+        "https://www.sec.gov/Archives/edgar/data/20171/000119312516430909/d113061d8k.htm"
+      ],
+      "retain_distinct_label": "CB / ACE CIK896159"
+    },
+    {
+      "ticker": "JCI-201609",
+      "start_month": "2015-01",
+      "end_month": "2016-08",
+      "cik": "53669",
+      "issuer": "Johnson Controls Inc before Tyco merger",
+      "evidence": [
+        "https://www.sec.gov/Archives/edgar/data/53669/000005366915000034/jci201510-k.htm",
+        "https://www.sec.gov/Archives/edgar/data/833444/000110465916143068/a16-17941_1ex99d1.htm"
+      ],
+      "retain_distinct_label": "JCI / Tyco CIK833444"
+    },
+    {
+      "tickers": [
+        "GOOG",
+        "GOOGL"
+      ],
+      "start_month": "2015-01",
+      "end_month": "2015-09",
+      "cik": "1288776",
+      "issuer": "Google Inc before Alphabet holding-company succession",
+      "evidence": [
+        "https://www.sec.gov/Archives/edgar/data/1288776/000119312515336550/0001193125-15-336550-index-headers.html",
+        "https://www.sec.gov/Archives/edgar/data/1652044/000119312515336577/d82837d8k12b.htm",
+        "https://www.nasdaqtrader.com/TraderNews.aspx?id=ETA2015-156"
+      ],
+      "retain_distinct_label": "GOOG and GOOGL remain distinct share classes"
+    }
+  ],
+  "scope_limits": [
+    "No whole-pool identity certification, no inferred merger proceeds or copying price histories.",
+    "Rules annotate only listed months. Pre-formation predecessor financial succession still needs separate qualification; correcting member-month CIK does not automatically authorize borrowing predecessor annual accounts.",
+    "Original monthly candidate table and prior coverage outputs remain immutable. No factor/effect computation."
+  ]
+}

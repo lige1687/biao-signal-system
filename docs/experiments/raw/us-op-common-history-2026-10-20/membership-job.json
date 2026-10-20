@@ -1,0 +1,39 @@
+{
+  "input_files": [
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/membership_intervals.parquet",
+      "sha256": "a2695e0503a5489ef6f101b9f6d91770a1a114d290b047b8765cbee60947e5fe"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/prices.parquet",
+      "sha256": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/fja-history.csv",
+      "sha256": "36326709d46d6cd25834de5df457b16f5f96fad3a06b9beac28f7b88aa0b0d54"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/renames.csv",
+      "sha256": "e571766f6f362e38d61d7c24d16e5d99db3776b7faea1b94d0c7b0e202d327a0"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/exit_gaps.csv",
+      "sha256": "7fd978df63316793d0b9c7497ba13aa48789f71c02b2db919e884fb0f215364a"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/no_trade_days.csv",
+      "sha256": "e6ce9efaeea91b3e3e8198a6a3b20bf56d217e82fe83c83b133fab27492de2f1"
+    }
+  ],
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification",
+  "external_device": 16777238,
+  "main_start": "2015-01-01",
+  "main_end": "2024-12-31",
+  "warmup_start": "2013-12-01",
+  "sample_dates": [
+    "2014-12-31",
+    "2019-12-31",
+    "2024-12-31"
+  ],
+  "policy": "资格检查，无收益/排序/因子统计；成员区间start<=t<end，空end开放；同ticker多次区间保留；fja快照取date<=t最后一份，若renames直接/传递映射只用于匹配，不赋予证券身份已确认。"
+}

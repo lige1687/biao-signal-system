@@ -1,0 +1,37 @@
+{
+  "schema": "annual-report-profitability-adaptation/1",
+  "created_at": "2026-10-20T20:43:31.735021+08:00",
+  "status": "definition_fixed_before_outcomes_data_qualification_pending",
+  "question_unchanged": "Does annual operating profitability provide information among stocks with similar momentum?",
+  "name_zh": "扣折旧及利息后的经营盈利相对普通权益",
+  "formula": "(reported consolidated OperatingIncomeLoss - separately reported non-operating interest expense) / permanent common equity including noncontrolling interests",
+  "financial_reason": "Retain the reported consumption of fixed and intangible assets as an operating cost. Measure the annual earnings generated from operations after financing expense relative to equity capital. This is one explicit economic measurement, not selected by observing returns.",
+  "difference_from_reference": "This annual-report adaptation is after depreciation and amortization. It is not a strict replication of the current French/Compustat operating profitability measure. No unverified D&A amount is added back. Prior published French results are motivation only, not comparable stock-level performance.",
+  "no_second_formula_search": true,
+  "numerator_qualification": [
+    "Exact standard US-GAAP OperatingIncomeLoss, one finite consolidated USD amount for the selected annual submission and period.",
+    "Interest expense must be a monetary expense amount, separately below operating income in the same income statement or otherwise supported by the statement structure. Net interest, interest-plus-other and custom namespace tags are not silently mapped.",
+    "Reported operating income already deducts operating costs, including R&D where relevant; R&D and literal SG&A are not subtracted again.",
+    "Income-statement identities and representative original NUM/PRE/TAG facts verify the adopted structure; incompatible statements are excluded with reasons."
+  ],
+  "denominator_qualification": [
+    "Use exact standard equity amounts; keep common equity, parent equity, inclusive equity, preferred stock and noncontrolling interests distinct.",
+    "An explicit zero preferred-stock aggregate permits inclusive permanent equity as the denominator. Per-share par value and shares outstanding are not aggregate equity.",
+    "A nonzero preferred amount must be economically compatible with the chosen subtraction; ambiguous carrying/redemption/par bases are not prioritized by convenience.",
+    "Assets = liabilities + inclusive permanent equity provides a structural check that separately classified temporary equity is not omitted. Nonzero temporary or redeemable equity requires a separate researched mapping and is outside this initial coherent category.",
+    "Parent plus noncontrolling equity must reconcile where both components are disclosed. Missing NCI is not zero unless supported by a complete statement identity.",
+    "The denominator must be positive. No deferred tax credit is added."
+  ],
+  "timing": {
+    "target_return_months": "2015-01 through 2024-12",
+    "formation_date": "last observed market trading day of the preceding month",
+    "annual_anchor": "latest June 30 on or before the formation month-end; June-end formation uses that year's annual anchor for the following July return",
+    "filing_asof": "accepted date no later than two calendar days before annual anchor; target latest fiscal year ending in preceding calendar year, with normal annual period and no unresolved transition-period ambiguity",
+    "data_identity": "Keep original accessions and amendments; no future restatement values or later comparative columns inserted into earlier formation dates."
+  },
+  "scope": "Historically eligible US large-cap non-financial companies with this observable accounting structure; per-date qualification, never future survival or complete future returns.",
+  "run_permission": "No scores or effect statistics until statement structure and common sample checks pass and a separate execution contract freezes inputs, code, outputs, uncertainty and missing-outcome handling.",
+  "review_reference": "accounting-target-ruling.md",
+  "original_brief": "research-brief.json",
+  "original_frozen_results": "Unchanged; no production or trading authorization."
+}

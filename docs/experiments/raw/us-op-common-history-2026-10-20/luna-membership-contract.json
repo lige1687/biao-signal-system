@@ -1,0 +1,47 @@
+{
+  "mission": "真实核历史名单/价格资格，量化缺失和差异，非策略研究",
+  "task_scope": [
+    "按membership-job读取固定输入，所有SHA必须相符，输出create-only合同外盘子目录",
+    "输出2015—2024月末120期按当时区间名单；每年unique成员、进入/退出区间数、重复/重入；三锚点名单SHA和数量；逐次退出事件列表end在主期，区分指数退出和真实证券退出未核",
+    "SPY实有交易日为报价日历代理；只核每日成员与正有效adj_close/真实quote覆盖，不计算收益；价格缺失、重复、负/零、无量/停牌单独计数；no_trade_days的date/ticker实际结构先读",
+    "fja用每个锚点/每月最后交易日最近历史快照；比较raw以及给定renames后共同/仅各方名单，输出全部差异，不把两份同源对齐称独立验证",
+    "对SIVB/SBNY/TWTR及STI若存在保存退出前后各最多5条date/close/source/volume/adj_close数据供主控核原件；不推断兑付/正确身份",
+    "代码本地小件、详表外盘；用pandas按列读取235MB文件可，但不要打印大量数据；输出摘要JSON与全部明细CSV",
+    "合成小测试覆盖end-exclusive、重入、代码更名链、不知日期不回看未来快照，随后运行一次真实资格"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/membership-job.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/membership_intervals.parquet",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/prices.parquet",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/fja-history.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/renames.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/exit_gaps.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/no_trade_days.csv"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/qualify_membership.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/test_qualify_membership.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/membership-execution-receipt.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "可复用历史月度名单及退出表、覆盖摘要、源码和检查收据",
+    "所有不一致原样保留，不能动态补成员让结果通过"
+  ],
+  "stop_conditions": [
+    "禁止财务映射猜测/算效力/删旧文件/更改来源",
+    "内存高则分块，不能本机存大件"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

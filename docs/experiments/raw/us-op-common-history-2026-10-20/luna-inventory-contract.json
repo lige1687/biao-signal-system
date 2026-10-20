@@ -1,0 +1,37 @@
+{
+  "mission": "仅盘点本地现有美股历史成员、证券身份、退出记录、价格与SEC原件可复用资格，不重新统计旧收益",
+  "task_scope": [
+    "定位同批美股US当前IVV502报价原件/历史覆盖；历史SP500是否已经取得",
+    "核Apple SEC companyfacts/submissions原件SHA、所含年度OP相关标签范围",
+    "复用MSFT EPS资格文件只记录位置不重做；未找到明确写缺失"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/ops/work-progress",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/saved-input-inventory.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "保存来源路径SHA和准确范围及缺失表；不复制大原件、不读所有大表",
+    "只有contract write path可写，简要消息报告"
+  ],
+  "stop_conditions": [
+    "路径/身份/原件缺失如实报告，不扩大取数",
+    "不写其他owner资料、旧raw、主树/生产；不删除"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "max_subagents": 0
+}

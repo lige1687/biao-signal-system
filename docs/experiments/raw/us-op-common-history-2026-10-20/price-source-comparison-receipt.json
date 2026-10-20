@@ -1,0 +1,80 @@
+{
+  "task_id": "us-op-common-history-20261020-price-source-comparison",
+  "status": "completed",
+  "run_count_successful_comparisons": 1,
+  "initial_attempt_note": "One setup attempt stopped before comparison because four otherwise valid old files contained no observations in 2020-2024; corrected the period-count handling and completed one comparison.",
+  "period": {
+    "start": "2020-01-01",
+    "end": "2024-12-31"
+  },
+  "inputs": {
+    "new_prices": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/prices.parquet",
+      "sha256": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563"
+    },
+    "old_attempts_sha256": "34de27e077d34feb02a8df7d85cd5e83d7dc055ce2acbdf9508fd8dc51c713e2",
+    "old_verification_sha256": "a7a89d3b0ba9f4595f45ceb70019eebf4ad545b9620287b6bf6a5c7fab2637ec",
+    "old_original_successful_files_sha_verified": 502,
+    "old_source": "Yahoo chart endpoint (query1.finance.yahoo.com)",
+    "new_source_labels": [
+      "yahoo"
+    ],
+    "source_dependence": "All matched new-source observations are labeled yahoo, and the old originals also came from Yahoo; this is same-provider comparison, not independent-provider corroboration."
+  },
+  "synthetic_validation": {
+    "status": "passed",
+    "constant_level_scale_diff_max": 0.0,
+    "missing_day_comparable_count": 0
+  },
+  "results": {
+    "old_symbols_with_period_data": 498,
+    "old_symbols_without_period_data": [
+      "FDXF",
+      "HONA",
+      "Q",
+      "SNDK"
+    ],
+    "matched_symbols": 498,
+    "matched_daily_change_pairs": 616628,
+    "source_groups": {
+      "yahoo": {
+        "n": 616628,
+        "median_abs_diff": 6.765377602580003e-08,
+        "p90_abs_diff": 2.3064064913480564e-07,
+        "p99_abs_diff": 1.1268308835952127e-05,
+        "max_abs_diff": 0.14214194492114907,
+        "threshold_counts": {
+          "1e-05": 6273,
+          "0.0001": 1967,
+          "0.001": 73,
+          "0.01": 18
+        }
+      }
+    },
+    "over_1_percentage_point_record_count": 18,
+    "comparison_rule": "Same ticker, same date, and identical prior observed date in both sources; adjusted-close day changes only.",
+    "effect_statistics_calculated": false
+  },
+  "output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/price-source-comparison",
+  "outputs": {
+    "summary.json": {
+      "bytes": 167437,
+      "sha256": "a1469f973cd61ae20f1435607cd4c8a687bad85a08c500c32521d918f7733c5e"
+    },
+    "differences-over-1pp.csv": {
+      "bytes": 2718,
+      "sha256": "b685d703b8dcfd9ba90444098c777d08bc95156537dd346dcca1a69f1237f13b"
+    },
+    "input-output-manifest.json": {
+      "bytes": 62363,
+      "sha256": "d50319e90f78481fc16be120bae928b39eb2175357291a00d36472651daf6aca"
+    }
+  },
+  "script_sha256": "f01acbf04058eddfb63704d8fa86d47544d11c0ce88628a086a8a278798bff41",
+  "limitations": [
+    "Four old symbols had no observations in 2020-2024: FDXF, HONA, Q, SNDK.",
+    "382 symbols in the broader new prices file were outside the old 502-symbol set and were not compared.",
+    "No factor or strategy performance was measured.",
+    "macOS ._ sidecar metadata files were excluded from analytical outputs and were not removed."
+  ]
+}

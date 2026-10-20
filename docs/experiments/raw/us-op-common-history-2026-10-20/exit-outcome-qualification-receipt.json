@@ -1,0 +1,57 @@
+{
+  "task": "Bounded source-only audit of 2015-2024 index removal quote availability; not a sale or return analysis.",
+  "command": "python3 -B docs/experiments/raw/us-op-common-history-2026-10-20/qualify_exit_outcomes.py --contract docs/experiments/raw/us-op-common-history-2026-10-20/luna-exit-outcome-contract.json",
+  "contract_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/luna-exit-outcome-contract.json",
+  "contract_sha256": "acc4e569bd4b02fc213fec4750ee0041900043bffe682e9cc6578d9cfa58ae8b",
+  "runner_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/qualify_exit_outcomes.py",
+  "runner_sha256": "88832f83ca8945df4646e5ac25757065182cc852058c889186f6276475d54be1",
+  "returncode": 0,
+  "execution_start_timestamp": "not captured before dispatch",
+  "completion_timestamp_utc": "2026-10-20T12:15:21Z",
+  "elapsed_seconds_tool_reported": 4.04,
+  "network_requests": 0,
+  "market_effect_or_strategy_return_calculation": false,
+  "result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-outcome-qualification",
+  "manifest_sha256": "837e9a14934faa466bdc17da57301b8bbd89e45719f5d4246f55ab4f758e8938",
+  "manifest_outputs_verified": {
+    "event-outcomes.csv": {
+      "sha256": "4d05d76dd21dc3cb3ce8f81875d9a158114d4000fd59906041e9ff7e9c5859fc",
+      "bytes": 103324
+    },
+    "special-cases.json": {
+      "sha256": "4a7ce6f68a057dcbbf96b8c14e644ba15de581010fd42d0a97380a051c19b9cf",
+      "bytes": 6151
+    },
+    "summary.json": {
+      "sha256": "3689ccd7a3366db239dc2a899daf735f0a2f41eeae1ee1a6816e9dd42264dbb9",
+      "bytes": 4711
+    }
+  },
+  "readback": {
+    "event_rows": 218,
+    "unique_interval_rows": 218,
+    "event_date_min": "2015-01-27",
+    "event_date_max": "2024-12-23",
+    "summary": {
+      "calendar_definition": "Observed SPY dates only; prior-calendar-month end for formation and removal-month end for target observation.",
+      "date_range": [
+        "2015-01-27",
+        "2024-12-23"
+      ],
+      "event_count": 218,
+      "events_with_any_first_post_removal_candidate": 119,
+      "exit_gap_rows_for_SIVB_SBNY": 2,
+      "explicit_no_trade_day_rows": 3019,
+      "held_at_prior_month_end": 212,
+      "no_network_or_effect_calculation": true,
+      "not_a_sale_or_return_test": true,
+      "not_held_at_prior_month_end": 6,
+      "target_quote_status_counts": {
+        "missing": 102,
+        "observable_quote_candidate": 116
+      }
+    }
+  },
+  "schema_limit": "membership_intervals.parquet provides ticker/start/end only; no event-type field exists, so event types cannot be classified from bound inputs. Exact ticker-event counts are retained in summary.json.",
+  "interpretation_limit": "SPY month-end dates are an observation calendar only. Missing quotes, positive quote candidates and post-removal quotes do not establish sale execution, proceeds, cash/share entitlement or terminal value. No alias, carry-forward or zero fill."
+}

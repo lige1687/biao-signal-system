@@ -1,0 +1,109 @@
+{
+  "schema": "us-op-common-history-saved-input-inventory/1",
+  "checked_at": "2026-10-20",
+  "scope": "Read-only source inventory only; no historical returns recomputed.",
+  "us_current_cohort_prices": {
+    "report": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/stock-universe-expansion-2026-10-15.md",
+    "report_sha256": "c8a4ade5e74eccaafc2df844aeb6d106a391f8199f6cb4d7eeacf25f5d92cbfb",
+    "cohort_definition": "IVV holdings snapshot dated 2026-10-13, 504 rows marked as equities; current-holdings proxy, not official historical S&P 500 constituents.",
+    "frozen_cohort_contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-universe-expansion-2026-10-15/bulk-contract.json",
+      "sha256": "31e14d3f00cbd24b41d0a0e9b3c04217b755393799d8c841170b4ab61d5e52db"
+    },
+    "price_response_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result",
+    "source": "Yahoo chart response JSONs; report says raw OHLC, adjusted close, dividend and split events retained.",
+    "coverage": "2020-01-02 to 2026-06-30; 502 of 504 have nonempty series; 804462 daily rows total among returned series.",
+    "response_verification": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result/verification.json",
+      "sha256": "a7a89d3b0ba9f4595f45ceb70019eebf4ad545b9620287b6bf6a5c7fab2637ec",
+      "bytes": 342252,
+      "matched_file_hashes": 504,
+      "cohort_size": 504,
+      "nonempty_price_symbols": 502,
+      "total_price_rows": 804462,
+      "date_endpoints": "2020-01-02 through 2026-06-30"
+    },
+    "response_summary": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result/summary.json",
+      "sha256": "ec933c099399f0c836b8a2d993696f62727bd405f810976895f50790f5d1ca29",
+      "attempts": 504,
+      "successful_queries": 502,
+      "failed_queries": 2
+    },
+    "representative_aapl_response": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result/AAPL.json",
+      "sha256": "efe3addd7ea6c5e3b7e63bc8d55fd502056b92679233b174cfa2de6048f9665d",
+      "bytes": 181421,
+      "rows": 1631,
+      "fields": "Yahoo chart JSON: meta, timestamp, events, indicators (including OHLC/adjusted close and volume)"
+    },
+    "failed_members": [
+      {
+        "symbol": "HOLX",
+        "response_sha256": "f0b5f9feeac9f1fc93c31b1edc03fbc1fda4acb3ec5e233ebb39d6f8b66e1769",
+        "status": "Yahoo not-found; possible delisting, but no historical exit/terminal-value record."
+      },
+      {
+        "symbol": "VYLR",
+        "response_sha256": "3d83e8bf8856b28dd2728334ea73f98be5ae1d852704d4c84a69dd8a98b548e5",
+        "status": "No price data in requested window."
+      }
+    ]
+  },
+  "historical_membership_and_exits": {
+    "official_sp500_historical_constituent_panel_found": false,
+    "historical_delisted_or_exited_company_universe_found": false,
+    "evidence": "The stock-universe report and frozen contract explicitly scope the 504 current IVV equity holdings as a retrospective current cohort; report states official S&P historical membership was not obtained. Yahoo failures for HOLX/VYLR do not provide historical membership or terminal delisting returns.",
+    "source_receipt": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/stock-universe-expansion-2026-10-15/delivery-manifest.json",
+      "sha256": "444050d10c3dd0d71ebf577526371561fc8bb24894dc5b665704d1409de616fc",
+      "us_output": "stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result"
+    }
+  },
+  "apple_sec_financial_facts": {
+    "company": "Apple Inc. (CIK 0000320193); a one-company example, not panel coverage.",
+    "companyfacts": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result/sources/aapl-companyfacts.json",
+      "sha256": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+      "bytes": 3789099,
+      "taxonomy": "dei and us-gaap; currency USD.",
+      "annual_10k_fact_tag_availability": {
+        "SalesRevenueNet": "USD; annual 10-K facts with end dates 2007-09-29 to 2017-09-30 (deprecated tag; not all fact rows correspond to their filing fiscal year).",
+        "Revenues": "USD; annual 10-K facts include 2018; legacy/new revenue taxonomy overlaps and requires point-in-time tag mapping.",
+        "RevenueFromContractWithCustomerExcludingAssessedTax": "USD; annual 10-K facts with end dates 2017-09-30 to 2025-09-27; some filings include comparative prior-year periods.",
+        "CostOfGoodsAndServicesSold": "USD; annual 10-K facts with end dates 2007-09-29 to 2025-09-27; some filings include comparative prior-year periods.",
+        "SellingGeneralAndAdministrativeExpense": "USD; annual 10-K facts with end dates 2007-09-29 to 2025-09-27; some filings include comparative prior-year periods.",
+        "ResearchAndDevelopmentExpense": "USD; annual 10-K facts with end dates 2007-09-29 to 2025-09-27; some filings include comparative prior-year periods.",
+        "OperatingIncomeLoss": "USD; annual 10-K facts with end dates 2007-09-29 to 2025-09-27; some filings include comparative prior-year periods.",
+        "Assets": "USD; annual 10-K facts with end dates 2008-09-27 to 2025-09-27; some filings include comparative prior-year periods.",
+        "StockholdersEquity": "USD; annual 10-K facts with end dates 2006-09-30 to 2025-09-27; some filings include comparative prior-year periods.",
+        "InterestExpenseNonOperating / InterestAndDebtExpense": "these exact tags absent in saved us-gaap facts; broader alternate taxonomy/tag mapping not qualified."
+      },
+      "qualification_limit": "Tag availability only. No operating-profitability metric was reconstructed; filed versions and announcement time must be selected per historical decision date.",
+      "retrieval_context": "The saved inputs are from the 2026-10-19 local source bundle (as recorded by the OSAP public saved audit)."
+    },
+    "submissions": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result/sources/aapl-submissions.json",
+      "sha256": "aad00f6aa75ba1405e0a34c788bdba9042281b2724fe1db3ff26f434b9a92e44",
+      "bytes": 163690,
+      "recent_filings": "recent array has 1000 filings, 2015-09-18 to 2026-10-16, with filingDate, reportDate, acceptanceDateTime, form, accessionNumber and primaryDocument.",
+      "older_filings_file": "CIK0000320193-submissions-001.json; metadata covers 1267 filings, 1994-01-26 to 2015-09-16; older accession details require that referenced file, not present as a second downloaded original in this inventory."
+    }
+  },
+  "msft_eps_qualification": {
+    "located_in_bounded_report_and_raw_names": true,
+    "qualification_index": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/lowturnover-green-account-2026-10-20/earnings-source-qualification.json",
+      "sha256": "12b72b212d80322eab3002f8182533e0262dea5e880f2c82f478c262491b6640",
+      "bytes": 5346
+    },
+    "saved_original": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowturnover-green-account-20261020/lowturnover-green-account-20261020-20261020T164139-85ceb32cf909/source-probe/MSFT-EarningsPerShareDiluted.json",
+      "sha256": "25e40e12d3e814b0ecf6f651ad3f4a51f83e035b2acd3bf91285187e7d3195a7",
+      "bytes": 49041
+    },
+    "owner_conclusion": "引用 earnings-source-qualification.json 中其他owner的资格结论；本盘点仅核索引/原件路径和SHA，没有重做EPS覆盖或统计。",
+    "history_note": "此前限定文件名搜索未定位，保留为当时过程；当前盘点已由准确索引补正。"
+  },
+  "conclusion": "Inputs support a current-IVV-cohort price retrospective and single-company SEC fact example only. Missing historical S&P members, historical exits/terminal values, and a broad point-in-time US financial panel prevent a common-history annual OP-vs-momentum stock comparison."
+}

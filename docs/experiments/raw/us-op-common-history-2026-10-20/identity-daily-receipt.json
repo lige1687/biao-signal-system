@@ -1,0 +1,32 @@
+{
+  "status": "failed_preserved_no_result_files",
+  "contract": "luna-identity-daily-contract.json",
+  "contract_sha256": "622bd24793078e254032a7969b2d025fdd303128760f418fc9862a38251385ed",
+  "job_sha256": "be5fc4704d61d771c110a98709f6c70b0ef9c3bc991002157ee13687e0a9b8ec",
+  "storage_plan_sha256": "16f51100823abb23054e0da923bbbd7f15785a13607d6c4c86dc1d58ce54256e",
+  "runner": "qualify_identity_daily.py",
+  "runner_sha256": "e0936d6b60947cd1aa63ee43127e07f63c4a523a2df4419cad0ca9bb3dc619f7",
+  "synthetic_test": "test_qualify_identity_daily.py",
+  "synthetic_test_sha256": "c84f354d2566473261d0a369f3fe00ecf378fb8fb9fe1fe2e78417ad9f31b87d",
+  "synthetic_test_result": "PASS 9 assertions",
+  "attempts": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B docs/experiments/raw/us-op-common-history-2026-10-20/qualify_identity_daily.py --contract docs/experiments/raw/us-op-common-history-2026-10-20/luna-identity-daily-contract.json",
+      "exit_code": 1,
+      "runner_sha256": "f563e287bc9ee61931bdf475a77e1cbc8096e0a012d408e0cb6003b0e6e07fc7",
+      "error": "KeyError: contract has no inputs field; failed before external output directory creation."
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B docs/experiments/raw/us-op-common-history-2026-10-20/qualify_identity_daily.py --contract docs/experiments/raw/us-op-common-history-2026-10-20/luna-identity-daily-contract.json",
+      "tool_session_id": 96328,
+      "exit_code": 1,
+      "error": "TypeError: temporal_eligible passed datetime.date; expects ISO string. The output directory was created before this failure."
+    }
+  ],
+  "external_output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/identity-daily-qualification",
+  "external_output_state": "directory exists; inspected and contains no entries",
+  "last_verified_at_utc": "2026-10-20T11:37:21.950022+00:00",
+  "network_requests": 0,
+  "returns_or_op_calculated": false,
+  "next_step_blocker": "合同绑定输出路径已占用（空目录由第二次失败创建）。需要主控决定是否另冻结新输出合同，再修复类型后执行；不覆盖或自行重试。"
+}

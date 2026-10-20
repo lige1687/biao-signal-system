@@ -1,0 +1,77 @@
+{
+  "mission": "完整十年年度财报当时可用性和字段覆盖诊断，生成逐月60,510行漏斗；只资格上限，不算OP和收益",
+  "input_files": [
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/submissions.csv",
+      "sha256": "065c80c6fe6edae076c2f326770a54b18b0f6e1caccdfb9fc72fb10811ace327"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/presentation.csv",
+      "sha256": "29c254c34ba2731fff756928a630009aa47ae3958cd12db947b9e040e9464fca"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/statement-facts.csv",
+      "sha256": "be3ce99d4c1ab38cd907b5613e6b092b91b6b01cb15400a7b21c9ba7831d1093"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/submissions.csv",
+      "sha256": "e689f77b386cbda66e0c9417a9dcd27e731e5b6835ca965b9704d262630a3f0b"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/presentation.csv",
+      "sha256": "4e21c4906b7f35c000773cc0a7bb52b9609f78f134cadb9a5abe939c470624a7"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/statement-facts.csv",
+      "sha256": "fb0753f5a7832c559781b1bd784319e56b255e9e8f93c70965fc59c3212cb3bf"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/submissions.csv",
+      "sha256": "427a58c1e1a529a91a465df8dc41a3fd2e0d142f00e8b59c17d0200a332e70ae"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/presentation.csv",
+      "sha256": "20a740c103aa81637c81a33a2adcbe93a736abee6256317eb167174f79c508a3"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/statement-facts.csv",
+      "sha256": "f5f724c9675a47cba525eb9531d180fc234cc95c3f2d1c179572de2d04e917be"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/identity-daily-qualification-v2/monthly-identity-candidates.csv",
+      "sha256": "3bde13c078874b5786c34dfcc3cbb632b33cb1c68f3684408c4b33311ebfa7e1"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/financial-tag-feasibility.json",
+      "sha256": "d973d96fe0905e45d8352b0b26059cee1eb6ace7fb7e3ac1944284cc90b5ea8c"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/identity-controller-audit.json",
+      "sha256": "1d3009a2dd78b3a1026ec52d64ba36a7ecefa20b0cbe44c97e1ec62ebde7f4d1"
+    }
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/annual_formation_coverage.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/test_annual_formation_coverage.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/annual-formation-coverage-receipt.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/annual-formation-coverage"
+  ],
+  "scope": [
+    "合并三个新来源面板：原899+两个前身+2013暖身；记录所有adsh/来源/版本。重复key冲突不可选赢家。",
+    "每份年度10-K/10-K/A用IS qtrs4候选值的ddate最接近SUB.period且距离≤7天仅作期间候选，多候选/无候选分开；NUM的实际ddate年份才是目标财政年终止的日历年，不用SUB.fy号代替",
+    "revenue/COGS/SGA/interest原始候选tag组沿financial-tag-feasibility.json，各tag分别保留；字段必须有非空有限数值，不能只tag存在。不同数值的多个同类tag记为ambiguous，不强选总和/优先级，也不将合计加子项。",
+    "权益分母只统计候选StockholdersEquity/CommonStockholdersEquity及是否正；另保留PreferredStockValue/CarryingValue/RedemptionValue明确0/正值/无值；不同权益定义不能自动互换/减去。不要算OP/任何ratio。",
+    "逐月成员取原60510key。金融年度形成用截至上一6月底：7-12月用当年6月末，1-6月用上年6月末；只用该形成年的前一年实际ddate的年度文件；accepted日期必须至少早于形成日期2个自然日，作为保守资料可用诊断，不称真实到达或时区已核。",
+    "每CIK/formation截止选目标actualddate最新且accepted最新的单份完整或不完整原件，所有10KA保留，最新不全则报不全不能借未来或随便拼旧数据。不相同CIK自动继承；当前candidate join不是批准身份，所有候选覆盖都标upper_bound_unvalidated_identity，knownGoogle/AGN/CB/JCI冲突另列受影响数，不能说已修全部。",
+    "输出per-filing候选日期字段长/宽摘要、monthly-formation-readiness完整60510行、逐年漏斗、字段缺失与amendment后不完整数。每年：候选CIK可连、当时有年度document、四flow都有限、flow加positiveEquity、再显式preferred金额的数量；都为资料候选非因子合格数。",
+    "合成端到端测试包括晚发布/未来修订不进旧截止、10KA缺字段不借补、非12月年结前一年标签、date距period2天、空值不是0、同CIK两类股票不合并；通过后代码/合同冻结SHA，一轮真实资格运行外盘create-only。",
+    "只白名单文件读回，不扫描._*或.DS_Store。原件/旧实验不改，0网络/OP/收益/子代理/正式代码"
+  ],
+  "created_at": "2026-10-20T20:02:42.323533+08:00",
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review_required": true,
+  "storage_plan": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json"
+}

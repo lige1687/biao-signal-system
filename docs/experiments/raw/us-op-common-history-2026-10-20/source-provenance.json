@@ -1,0 +1,198 @@
+{
+  "created_at": "2026-10-20T20:26:08.297213+08:00",
+  "source_ledgers": [
+    {
+      "original_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/request-ledger-originals/http-ledger-final-2117.jsonl",
+      "original_sha256": "0c9e1114ef146f80144af7623ec9ab1db019ffb68f1c59c3282e6b1add797dbb",
+      "public_copy": "http-ledger-public.jsonl",
+      "public_sha256": "277828280264040639a9931c16d7c4c12fe52f01a09c0f803649733e461d6e0f",
+      "requests": 75,
+      "statuses": {
+        "200": 74,
+        "403": 1
+      },
+      "bytes": 4803057717
+    },
+    {
+      "original_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/request-ledger-originals/http-identity-ledger-final-2117.jsonl",
+      "original_sha256": "fae73c9504c73cf198496c53f5d1387943444afbc448f6b1d2543ef908af2f2f",
+      "public_copy": "http-identity-ledger-public.jsonl",
+      "public_sha256": "840f3a49eed745c963ebc76156507c24ec8ac0c17b6ec5139bb9ead43d94f53a",
+      "requests": 5,
+      "statuses": {
+        "200": 5
+      },
+      "bytes": 125425
+    }
+  ],
+  "web_tool_request_actions": null,
+  "web_count_basis": "Root and prior scientific-source actions known at least77; C-exit search/open/find exact actions not recoverable, so global total unknown. Explicit HTTP source requests counted separately:88, including2 forbidden responses.",
+  "web_failures_since_latest_summary": [
+    "PDF find interest/preferred returned no match despite existing local text",
+    "Apple PDF screenshot page49 timeout, local render succeeded; page34 screenshot did not supply usable pixels; local renders used"
+  ],
+  "sources": [
+    {
+      "name": "French OP target",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/Data_Library/six_portfolios_me_op.html",
+      "finding": "June formation, prior fiscal year, target R-COGS-SGA-interest divided by BE; Compustat-to-XBRL equivalence not established"
+    },
+    {
+      "name": "SEC primary-statement data",
+      "url": "https://www.sec.gov/data-research/sec-markets-data/financial-statement-data-sets",
+      "finding": "48 archives2013-2024 saved; ZIP readme confirms rounded NUM/SUB dates"
+    },
+    {
+      "name": "SEC notes source",
+      "url": "https://www.sec.gov/data-research/sec-markets-data/financial-statement-notes-data-sets",
+      "finding": "Schema read; direct request403; zero notes archives acquired; host stopped"
+    },
+    {
+      "name": "Johnbrick frozen implementation",
+      "url": "https://github.com/Johnbrick123/sp500-data/tree/6738888cc01c5f78aba3a5fe24e85d8446ea0b19",
+      "finding": "Public membership/prices/actions qualified as candidate sources; no full identity or terminal certification"
+    },
+    {
+      "name": "lawcal history",
+      "url": "https://github.com/lawcal/sp500-components-history/tree/2d0556e4ca01dc9203231c8b60d503a227be4512",
+      "finding": "Current-backfilled issuer candidates, history windows require correction"
+    },
+    {
+      "name": "FJA history",
+      "url": "https://github.com/fja05680/sp500/tree/a2430f2af0c79ddf0748e91de11bdeb1616ab5a7",
+      "finding": "Related provenance to Johnbrick, not independent confirmation"
+    },
+    {
+      "name": "Apple as filed2020",
+      "url": "https://s2.q4cdn.com/470004039/files/doc_financials/2020/ar/_10-K-2020-%28As-Filed%29.pdf",
+      "finding": "Official issuer PDF download200, original rows/period cross-read against saved SEC facts"
+    },
+    {
+      "name": "SGA standardization Peters Taylor",
+      "url": "https://memento.epfl.ch/public/upload/files/Paper_Taylor.pdf",
+      "finding": "Appendix A.1 XSGA includes R&D unless COGS; direct label substitution rejected"
+    },
+    {
+      "name": "Profitability accounting research",
+      "url": "https://www.ivey.uwo.ca/media/3775544/linnainmaa.pdf",
+      "finding": "Compustat SGA grouping must not be guessed from label equality"
+    },
+    {
+      "name": "SimFin fields",
+      "url": "https://github.com/SimFin/simfin/blob/master/simfin/names.py",
+      "finding": "Most recent restatement data and date; not all original vintages"
+    },
+    {
+      "name": "SimFin access",
+      "url": "https://github.com/SimFin/simfin/blob/master/README.md",
+      "finding": "Requires APIkey for data; no new account or purchase; no data acquired"
+    },
+    {
+      "name": "SEFD research dataset",
+      "url": "https://arxiv.org/html/2606.18192v1",
+      "finding": "Full text reconstruction lead; original accession/field accuracy still needs qualification; not acquired or substituted"
+    },
+    {
+      "name": "NortonLifeLock distribution",
+      "url": "https://www.businesswire.com/news/home/20200109005772/en/NortonLifeLock-Declares-%2412-Special-Dividend",
+      "finding": "Issuer announcement2020-01-09 confirms$12, paymentJan31, exFeb3; fills GEN distribution amount/date question"
+    },
+    {
+      "name": "NortonLifeLock exchange action",
+      "url": "https://www.miaxglobal.com/alerts/2020/01/31/miax-exchange-group-options-markets-corporate-action-alert-nortonlifelock-inc-2",
+      "finding": "Exchange announcement2020-01-31 confirms effective2020-02-03"
+    },
+    {
+      "name": "French method-version notices",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+      "finding": "2016 deferred-tax handling,2018 minority-interest denominator,2020 before-D&A interpretation; original simple formula is incomplete for current French reference. Fixed annual-report adaptation is permitted scientifically, pending accounting proof."
+    },
+    {
+      "name": "MolsonCoors2013original",
+      "url": "https://s27.q4cdn.com/826627388/files/doc_financials/2013/ar/61c36ca1-82ad-4c9a-b685-8a9fdd4b564f.pdf",
+      "finding": "PDF income and equity pages visually read; independent source structure acceptance; 301pages FY2013."
+    },
+    {
+      "name": "Aptiv2017continuity",
+      "url": "https://www.aptiv.com/en/newsroom/article/aptiv-plc-to-transform-future-mobility",
+      "source_date": "2017-12-05",
+      "finding": "Issuer states continuing former Delphi Automotive renamed Aptiv after Powertrain separation; spin-off is distinct Delphi Technologies. Returned search page body read; local full original not downloaded."
+    },
+    {
+      "name": "Dentsply2016continuity",
+      "url": "https://investor.dentsplysirona.com/news-releases/news-release-details/dentsply-sirona-completes-145-billion-merger-equals",
+      "source_date": "2016-02-29",
+      "finding": "Issuer completion release gives XRAY as combined issuer and Sirona share exchange. Annual-report search excerpt confirms continuing XRAY. This supports name continuity, not market price adjustment qualification."
+    },
+    {
+      "name": "JCI2016lineage",
+      "url": "https://investors.johnsoncontrols.com/~/media/Files/J/Johnson-Controls-IR/quarterly-reports/2017/jci-6-30-2017-10-q.pdf",
+      "source_date": "2017-06-30report",
+      "finding": "Issuer report search text confirms Tyco0.955ordinary share consolidation and old JCI conversion. Existing normalized price basis still not independently qualified; those specific observations withheld."
+    }
+  ],
+  "blocked_hosts": [
+    "www.abbottinvestor.com",
+    "www.sec.gov"
+  ],
+  "acquired_notes_archives": 0,
+  "new_effect_runs": {
+    "core_attempts": 1,
+    "core_outcome_results": 0,
+    "core_failure": "unmapped approved debt-interest tag; stopped before output directory or labels",
+    "repair_attempts": 1,
+    "repair_completed": 1,
+    "parameter_search": 0,
+    "execution_receipt": "matched-effect-repair-execution-receipt.json",
+    "network_requests_for_effect": 0
+  },
+  "raw_evidence_note": "Full source originals external, SHA tied. Public links and notes are not evidence that every candidate fact passed.",
+  "previous_ledger_bindings": [
+    {
+      "original_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/request-ledger-originals/http-ledger.jsonl",
+      "original_sha256": "1a024312a7b7ff9edc1972879bc164550849185400f4c61e1dac8d2efc5a78fe",
+      "public_copy": "http-ledger-public.jsonl",
+      "public_sha256": "2e6fab08ccc39a84698f4d7cc3ee3394e2a5b66a750690d4dc508d2b3bc54a9a",
+      "requests": 74,
+      "statuses": {
+        "200": 73,
+        "403": 1
+      },
+      "bytes": 4800683415
+    },
+    {
+      "original_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/request-ledger-originals/http-identity-ledger.jsonl",
+      "original_sha256": "fae73c9504c73cf198496c53f5d1387943444afbc448f6b1d2543ef908af2f2f",
+      "public_copy": "http-identity-ledger-public.jsonl",
+      "public_sha256": "840f3a49eed745c963ebc76156507c24ec8ac0c17b6ec5139bb9ead43d94f53a",
+      "requests": 5,
+      "statuses": {
+        "200": 5
+      },
+      "bytes": 125425
+    }
+  ],
+  "updated_at": "2026-10-20T21:48:30.503512+08:00",
+  "additional_source_receipts": [
+    {
+      "path": "c-exits/exit-primary-case-receipt.json",
+      "sha256": "a264f7713b9307801c4da0f1f961eb13c96c71c3bd5f2ab5faa9335fb2220b74",
+      "requests": 8,
+      "successful": 7,
+      "blocked_hosts": [
+        "www.abbottinvestor.com"
+      ]
+    }
+  ],
+  "recorded_source_http_requests": 88,
+  "exit_source_cost_review": {
+    "receipt_path": "c-exits/exit-primary-case-receipt.json",
+    "receipt_sha256": "718811041035706efa7a42b3a967272fe615d917dab8497aba9d9a68181f1b4f",
+    "http_requests": 8,
+    "http200": 7,
+    "http403": 1,
+    "web_search_open_find_actions": "unknown; not reconstructable; parent known web minimum 77 not global total",
+    "additional_requests_for_cost_review": 0
+  },
+  "known_root_web_action_lower_bound": 77
+}

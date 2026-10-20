@@ -1,0 +1,88 @@
+{
+  "schema": "matched-annual-profitability-study/1",
+  "created_at": "2026-10-20T21:10:40.239913+08:00",
+  "status": "design_fixed_before_outcome_calculation_pending_final_input_freeze",
+  "question": "在历史大盘股可核年度报表类别内，局部相邻动量时按经营盈利选择，是否改善下一月排序、收益、亏损风险或操作负担？",
+  "definition_ref": "research.fundamental.annual_operating_profitability_after_da@1.0.0",
+  "accounting_definition": "annual-profitability-adaptation.json",
+  "timing": {
+    "targets": "2015-01 through 2024-12; 120 fixed calendar months",
+    "formation": "previous month final SPY session",
+    "annual": "June anchor last SPY session on or before June30; acceptance no later than that session minus 2 calendar days; July uses current June, January through June use previous June",
+    "period": "latest rounded fiscal period in anchor year minus 1; select latest accepted 10-K/10-K/A before qualifying, never fall back to an older qualified submission",
+    "momentum": "P(month-end m-2)/P(month-end m-13)-1, 12 valid endpoints spanning 11 complete month returns; skip most recent month",
+    "label": "formed close to target month-end total-return adjusted price ratio; no claim of tradable same-close execution"
+  },
+  "admission": {
+    "inputs": "B v5 source-qualified accounting candidates, root identity decision, candidate manual-action qualification",
+    "decision_only": "Only identity/source/accounting/momentum/formation quote known-at-formation tests admit rows. Target missing/exit/target action unknown never changes membership/pairs/selections.",
+    "duplicate_issuer": "keep one security per CIK, alphabetic exact frozen historical ticker; log alternatives; never based on future outcome",
+    "source_scope": "Historical S&P500 membership reconstructed from current public snapshots; qualified accounting structure, not full market/PIT vendor arrival proof."
+  },
+  "pairing": {
+    "sort": "momentum ascending then ticker ascending",
+    "odd_omission": "t=12*(target_year-2015)+target_month-1; omit 1-based rank 1+2*(t mod ((n+1)//2)); remaining adjacent ranks paired",
+    "even": "consecutive disjoint sorted pairs",
+    "op_tie": "use higher_momentum selection; no directed high-minus-low claim for equal OP",
+    "momentum_tie": "both momentum baselines choose lexicographically first ticker",
+    "methods": [
+      "profitability",
+      "higher_momentum",
+      "lower_momentum"
+    ],
+    "formation_weights": "each pair gets 1/K; select one name per pair; full pool includes odd unpaired member for rank description; no loss-driven re-pairing"
+  },
+  "outcomes": {
+    "ordinary": "only qualified exact ticker end quotes with no unresolved target action; adj_end/adj_formation-1",
+    "exits": "all unresolved economic-right/cash/share/dividend cases remain null, with acquired primary terms saved; no last-price/zero imputation",
+    "same_choice": "increment=0 algebraically even if return null; policy return and own loss status remain null",
+    "different_choice": "increment known only if both selected returns known; save sum_known_delta/K, mean_identifiable_delta, unknown_delta_count/K separately",
+    "return_bounds": "none for unknown mean return; do not invent finite upside cap",
+    "loss_bounds": "loss=return<0; unknown may be 0 or1; same selected ticker cancels; pair delta interval uses shared identity"
+  },
+  "metrics": {
+    "primary": "monthly profitability-minus-higher_momentum mean among identifiable pair differences, with original-weight known contribution and unknown weight; joint comparison to lower_momentum mandatory",
+    "secondary": [
+      "raw monthly Spearman rank correlation of OP with observed target returns, average ranks for ties",
+      "OP higher-minus-lower within pair, exclude OP-ties from directed contrast but retain all pairs in policy delta",
+      "loss part min(r,0) and upside part max(r,0), pairwise differences and algebraic sum",
+      "four sign cells: both nonnegative, both negative, profitability negative/opponent nonnegative, profitability nonnegative/opponent negative; count/sum/mean per opponent",
+      "own loss-event probability ranges and pair shared-identity difference ranges",
+      "monthly method mean, standard deviation, worst-decile mean only on months with every selected return known for ALL THREE methods; full-pool cumulative strategy/maxdrawdown not computed",
+      "every monthly momentum absolute gap median/max; full and paired sample counts; agreement/switch proportions",
+      "monthly target-name and equal target-weight change (0.5 L1) for 119 transitions; not drift-adjusted turnover or fees",
+      "monthly OP-MOM rank correlation and count of selected original annual reports/newly changed filings for information overlap and maintenance"
+    ],
+    "not_claimed": [
+      "causal alpha",
+      "full-market profitability effect",
+      "account net return",
+      "executed loss avoidance",
+      "ETF evidence",
+      "strict French replication",
+      "future held-out validation"
+    ]
+  },
+  "time_slices": [
+    "2015-01..2019-12",
+    "2020-01..2024-12",
+    "2015-01..2024-12"
+  ],
+  "uncertainty": {
+    "method": "circular moving blocks of 12 calendar months; sample ceil(N/12) uniform start indices, concatenate modulo N and take first N; preserve every calendar month and all method/missing columns together",
+    "replications": 2000,
+    "seed": 20261020,
+    "interval": "2.5 and97.5 percentile of corresponding statistic; no significance threshold as automatic adoption",
+    "main": "Full120-month statistics; two 60-month slices descriptive only, no additional parameter fits"
+  },
+  "budget": {
+    "new_core_runs": 1,
+    "mechanical_repair_max": 1,
+    "old_results": "unchanged",
+    "tuning": "none"
+  },
+  "method_amendment_before_results": "Sparse monthly candidate count13..25 prevents5x3groups; use fixed adjacent pairing and both momentum directions. Extra partial linear correlation removed before results per Astra review.",
+  "review": "matched-design-review.md",
+  "source_version_limit": "Current reconstructed historical files, historical accession acceptance retained; cannot certify all historical vendors/revisions/issuers by matching names alone.",
+  "output": "new external matched-op-effect-v1 directory only; originals unchanged"
+}

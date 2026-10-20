@@ -1,0 +1,176 @@
+{
+  "schema": "fsds-extraction-development-receipt/1",
+  "status": "completed_source_qualification_only",
+  "job_path": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-qualification-job.json",
+  "job_sha256": "f58dc202fe15391bbafdc1ae51b01e0fdd686c474a179bacee1f2fd3dd271b48",
+  "script_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/extract_fsds.py",
+  "script_sha256": "0463502b8f56489285a912bb9a79219be3c8c8f395438b9313177ee01b9f64ba",
+  "storage_plan_path": "docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json",
+  "storage_plan_sha256": "16f51100823abb23054e0da923bbbd7f15785a13607d6c4c86dc1d58ce54256e",
+  "source_sha256_verified": "bf55481c6e0088fb45e8efeb2d8de6912a9c3533da918376a24ca5f84144680f",
+  "storage_before": {
+    "mount": "/Volumes/win+mac通用",
+    "device": 16777238,
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "free_bytes": 503105060864
+  },
+  "storage_after": {
+    "mount": "/Volumes/win+mac通用",
+    "device": 16777238,
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "free_bytes": 502936764416
+  },
+  "output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-qualification-2014q1",
+  "outputs": {
+    "annual-submissions.csv": {
+      "sha256": "a880072b836034e06766675ee56ebe6bc489fe71cfda2e2de61046618e069acf",
+      "bytes": 504687
+    },
+    "presentation.csv": {
+      "sha256": "380e089ca35649a17dd729fc0003142f76db3118e9715b44f59fb6b8abdfb39b",
+      "bytes": 32735649
+    },
+    "statement-facts.csv": {
+      "sha256": "a7fd00d3ac6eefab84bda33fbca1fd8968a15722495bb3e8f325d5b3ecc79886",
+      "bytes": 58318212
+    },
+    "qualification.json": {
+      "sha256": "059d5c0723e8d84a7f86d29b8a8594f39cbc2df9c735685f6bc1ed5b824d4df9",
+      "bytes": 4745
+    }
+  },
+  "retained_rows": 601959,
+  "submission_rows": 4781,
+  "presentation_rows": 289216,
+  "duplicate_audit": {
+    "duplicate_groups": 0,
+    "duplicate_extra_rows": 0,
+    "conflicting_value_groups": 0
+  },
+  "scratch_index_removed": true,
+  "calculated_factor_or_return_statistics": false,
+  "verification": {
+    "synthetic_test": {
+      "command": "python3 -B -m unittest -v docs/experiments/raw/us-op-common-history-2026-10-20/test_extract_fsds.py",
+      "status": "passed",
+      "tests_run": 1,
+      "coverage": [
+        "same accession",
+        "separate 10-K/10-K-A accession",
+        "exact adsh+tag+version join",
+        "IS/BS only",
+        "USD and qtrs 0/4 filters",
+        "empty segments/coreg filters",
+        "preserve all ddate including prior comparative",
+        "duplicate and conflicting amounts retained without summation"
+      ],
+      "harness_correction": "First invocation had a test-only StringIO close/readback error; test fixture was corrected to keep the in-memory buffer readable and the full test then passed."
+    },
+    "syntax_check": "AST parse passed for extractor and test file; python -B used to avoid bytecode writes.",
+    "real_execution_command": "python3 -B docs/experiments/raw/us-op-common-history-2026-10-20/extract_fsds.py --job docs/experiments/raw/us-op-common-history-2026-10-20/fsds-qualification-job.json",
+    "output_readback": {
+      "annual-submissions.csv": {
+        "rows": 4781,
+        "header": [
+          "adsh",
+          "cik",
+          "name",
+          "sic",
+          "period",
+          "fy",
+          "fp",
+          "filed",
+          "accepted"
+        ],
+        "sha256_matches_receipt": true
+      },
+      "presentation.csv": {
+        "rows": 289216,
+        "header": [
+          "adsh",
+          "report",
+          "line",
+          "stmt",
+          "inpth",
+          "rfile",
+          "tag",
+          "version",
+          "plabel",
+          "negating"
+        ],
+        "sha256_matches_receipt": true
+      },
+      "statement-facts.csv": {
+        "rows": 601959,
+        "header": [
+          "adsh",
+          "tag",
+          "version",
+          "ddate",
+          "qtrs",
+          "uom",
+          "segments",
+          "coreg",
+          "value",
+          "footnote"
+        ],
+        "sha256_matches_receipt": true
+      },
+      "qualification.json": {
+        "sha256_matches_receipt": true,
+        "schema": "sec-fsds-annual-qualification/1"
+      }
+    },
+    "counts_read_from_qualification": {
+      "sub_rows_scanned": 7158,
+      "selected_submissions": 4781,
+      "pre_rows_scanned": 792750,
+      "pre_main_is_bs_rows": 289216,
+      "num_rows_scanned": 3483361,
+      "num_rows_without_selected_is_bs_presentation_match": 1835783,
+      "num_rows_matched_selected_presentation": 1647578,
+      "excluded_nonempty_segments": 816636,
+      "excluded_union": 1045619,
+      "excluded_nonempty_coreg": 194739,
+      "excluded_qtrs_not_0_or_4": 199277,
+      "retained_statement_fact_rows": 601959,
+      "excluded_non_usd": 91486
+    },
+    "form_counts": {
+      "10-K": 4651,
+      "10-K/A": 130
+    },
+    "pre_excluded_rows_derived": 503534,
+    "non_target_submission_rows_derived": 2377,
+    "duplicate_audit": {
+      "duplicate_groups": 0,
+      "duplicate_extra_rows": 0,
+      "conflicting_value_groups": 0
+    },
+    "source_member_structure": 5,
+    "factor_or_return_statistics_run": false,
+    "coverage_metadata": {
+      "filing_date_min_max": [
+        "20140102",
+        "20140331"
+      ],
+      "accepted_string_lexical_min_max": [
+        "2014-01-02 12:11:00.0",
+        "2014-04-01 09:40:00.0"
+      ],
+      "submission_period_min_max": [
+        "20110930",
+        "20140930"
+      ],
+      "fiscal_year_min_max": [
+        2011,
+        2014
+      ],
+      "retained_fact_ddate_min_max": [
+        "19840430",
+        "20151231"
+      ],
+      "note": "Raw field bounds only; accepted values are not timezone-normalized and no disclosure-availability inference was made."
+    }
+  }
+}

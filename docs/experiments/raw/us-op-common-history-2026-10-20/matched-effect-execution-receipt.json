@@ -1,0 +1,52 @@
+{
+  "schema": "matched-effect-execution-receipt/1",
+  "status": "failed_before_output",
+  "core_attempt": 1,
+  "mechanical_repair_attempts": 0,
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/run_matched_effect.py",
+    "--contract",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/matched-execution-contract.json",
+    "--out",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/matched-op-effect-v1"
+  ],
+  "environment": {
+    "PYTHONPATH": "src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/matched-execution-contract.json",
+    "sha256": "8188c438f9cdd23b89285df3a8b7c6813990d2768151a93ee8cdac31f030ba79"
+  },
+  "runner": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/run_matched_effect.py",
+    "sha256": "6e7df52c8d0ad80c4e0ebad670dad7302fec757ea7ad197cf1b3b9607d0e8366"
+  },
+  "process": {
+    "pid": 26025,
+    "started_at_utc": "2026-10-20T13:29:32.858735+00:00",
+    "ended_at_utc": "2026-10-20T13:29:33.704868+00:00",
+    "elapsed_seconds": 0.8457409159746021,
+    "returncode": 1
+  },
+  "log": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/matched-op-effect-v1.execution.log",
+    "sha256": "034a1d6005aab3667f3c08d08b7e26b4eb1947b8b8b0130182bf1a0806732a2b"
+  },
+  "output": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/matched-op-effect-v1",
+    "exists": false,
+    "manifest": null,
+    "files": {}
+  },
+  "failure": {
+    "exception": "ValueError",
+    "message": "final-admitted row failed runner revalidation: ('2015-01', 'WU', '0001365135', '0001365135-14-000014')",
+    "diagnostic": "Read-only row inspection found source_facts.interest has the single standard-tag fact InterestExpenseDebt (us-gaap/2013, USD, ddate=20131231, qtrs=4, value=195600000.0000). Current _filing_op accepts InterestExpense or InterestExpenseNonOperating, so the final-admitted row did not pass revalidation. No code, contract, or data was changed; no retry was made."
+  },
+  "real_statistics": false,
+  "unknown_counts": "unavailable; run stopped during admission revalidation before output creation",
+  "network_requests": 0
+}

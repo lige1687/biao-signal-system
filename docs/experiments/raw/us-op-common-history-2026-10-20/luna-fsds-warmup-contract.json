@@ -1,0 +1,31 @@
+{
+  "mission": "2013年首版年报补提取，用于2015年前半年的年度形成信息资格",
+  "job_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fsds-warmup-job.json",
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/extract_fsds_panel.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fsds-warmup-job.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/candidate-ciks-warmup.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/acquisition-07-receipt.json"
+  ],
+  "write_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fsds-warmup-execution-receipt.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-warmup-extraction.log"
+  ],
+  "execution": [
+    "固定4个新保存且CRC合格的2013源ZIP，901候选CIK；调用已审extract_fsds_panel.py --job fsds-warmup-job.json 一次",
+    "stdout小收据为fsds-warmup-execution-receipt.json；stderr外盘fsds-warmup-extraction.log；读回3表行数/SHA和财报范围",
+    "不能重复提取14-24面板、不联网、无OP/收益、代码不变；失败留痕不得静默重跑"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review_required": true,
+  "budget": {
+    "core_factor_runs": 0,
+    "source_extractions": 1
+  },
+  "created_at": "2026-10-20T19:45:09.449304+08:00"
+}

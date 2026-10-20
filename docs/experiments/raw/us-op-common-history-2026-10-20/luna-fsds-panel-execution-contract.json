@@ -1,0 +1,33 @@
+{
+  "mission": "将44个已取得并CRC合格的SEC源提取为899候选CIK申报版本面板，只资格非效果",
+  "job_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fsds-panel-job.json",
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/extract_fsds_panel.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/test_extract_fsds_panel.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fsds-panel-job.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/candidate-ciks-v2.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/acquisition-04-receipt.json"
+  ],
+  "write_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fsds-panel-execution-receipt.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-panel-extraction.log"
+  ],
+  "execution": [
+    "核合同/job/source SHA然后执行一次；已通过合成，勿重复整套",
+    "命令 /opt/homebrew/opt/python@3.11/bin/python3.11 extract_fsds_panel.py --job fsds-panel-job.json，stdout小收据为fsds-panel-execution-receipt.json；stderr/log放新外盘目录的同级新日志路径，不内盘大日志",
+    "结束真实读回表头/行数/文件SHA，返回SUB数量及年度/10K10KA，source provenance/duplicates保留",
+    "无网络/补零/改CIK/算OP/收益/下级/commit；遇失败保留已经产物并回报主控"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review_required": true,
+  "budget": {
+    "core_factor_runs": 0,
+    "source_extractions": 1
+  },
+  "created_at": "2026-10-20T19:45:09.449304+08:00"
+}

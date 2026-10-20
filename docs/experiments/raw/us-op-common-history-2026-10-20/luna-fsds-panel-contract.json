@@ -1,0 +1,44 @@
+{
+  "mission": "把已通过结构演练的FSDS提取推广为固定候选CIK批处理，保留版本原件；只实现不启动全批",
+  "task_scope": [
+    "新独立extract_fsds_panel.py/test_extract_fsds_panel.py，复用已有流式实现但不改旧script/结果；命令--job绑定输入列表、每SHA、候选CIK文件SHA、scriptSHA、external device与create-only输出",
+    "SUB保留源所有列（含form/instance/prevrpt/nciks/aciks），额外source_zip；限10-K/10-K/A且CIK在候选列表，按年度/修订全部保留，不选后见最佳版",
+    "PRE保留上述申报所有IS/BS行全部列；NUM同accession/tag/version主表结合，USD/qtrs0或4/全entity；源所有字段+source_zip，全部ddate含原比较期保留，不能当财年当前值",
+    "每份ZIP按局部key计重复/冲突并保留原值；从ZIP顺序流式不整体解压、不写本机大件；source inspect后输出small summary含每ZIP计数SHA与输入源指纹",
+    "raw细表为CSV或gz均可，请保持读出接口清楚；输出固定子目录由job给，job未通过hash不写；脚本只有被root后续执行才解析全批",
+    "合成测试至少覆盖form字段保留、多CIK过滤、同accession不跨接、主表与旁注/segments区别、qtrs4/0、重复冲突保留、ddate与period相差两天不提前筛掉、不同来源重复检测信息。测试tmp放外盘合同新test目录，不清理旧结果",
+    "SEC period字段文档说明按月末取整，后续不能拿period和ddate严格等同；本提取不做年度值选取，accepted时区未知留原字符串"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/extract_fsds.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/test_extract_fsds.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/candidate-ciks.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-qualification-2014q1"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/extract_fsds_panel.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/test_extract_fsds_panel.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fsds-panel-development-receipt.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-panel-synthetic"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "代码和有意义合成测试收据，勿先跑全历史"
+  ],
+  "stop_conditions": [
+    "不构造OP/算收益、不自动补零、不猜tag等价",
+    "不改旧原件/合同/日志，不写另一EPS任务",
+    "无删除现有数据/不提交/不派下级"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

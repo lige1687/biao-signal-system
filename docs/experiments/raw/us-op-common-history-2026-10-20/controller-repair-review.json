@@ -1,0 +1,49 @@
+{
+  "at": "2026-10-20T21:39:30.514096+08:00",
+  "status": "accepted_for_single_repaired_run",
+  "pre_effect_accounting_correction": true,
+  "code": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/run_matched_effect.py",
+    "sha256": "7d9728312e8f1f71cc0e7ea8d6b25f8467f4af8bbf1c685249f969df6950787a",
+    "bytes": 47514
+  },
+  "tests": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/test_run_matched_effect.py",
+    "sha256": "afaf9110a171254a240be165482847e5b4ecbbc961204cfa1d30e18bb31dceee",
+    "bytes": 23914
+  },
+  "old_failure_receipt": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/matched-effect-execution-receipt.json",
+    "sha256": "6850ae21d84d2c64db81cb69ede915042711ba07aebed90ca701ca8e22ecbdb2",
+    "bytes": 2932
+  },
+  "preserved_original_code": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/failed-core-v1/run_matched_effect.py",
+    "sha256": "6e7df52c8d0ad80c4e0ebad670dad7302fec757ea7ad197cf1b3b9607d0e8366",
+    "bytes": 44024
+  },
+  "new_admission_summary": {
+    "candidate_rows": 2181,
+    "admitted_rows": 1967,
+    "rejected_rows": 214,
+    "unique_ciks": 42,
+    "months": 120,
+    "monthly_min": 11,
+    "monthly_median": 16.0,
+    "monthly_max": 24,
+    "unknown_outcome_rows": 4,
+    "adsh": 185
+  },
+  "changes": [
+    "admit standalone InterestExpenseDebt only with source-line accepted mapping",
+    "bind all 197 used accessions and enforce accepted-only admission",
+    "remove 116 net-or-other mixed-interest company months before labels; preserve the other input fields",
+    "ordinary InterestExpense and existing formula/pairing/unknown/uncertainty rules unchanged"
+  ],
+  "verification": {
+    "combined_synthetic_tests": 22,
+    "exit_code": 0,
+    "command": "PYTHONPATH=src:docs/experiments/raw/us-op-common-history-2026-10-20 PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/opt/python@3.11/bin/python3.11 -B -m unittest tests.unit.test_annual_profitability test_run_matched_effect -q"
+  },
+  "not_claimed": "all historical reports or whole registry valid; only qualified fixed selected source category"
+}

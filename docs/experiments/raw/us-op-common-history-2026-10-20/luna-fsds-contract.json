@@ -1,0 +1,41 @@
+{
+  "mission": "编写并执行一个SEC FSDS年度原件提取器，资格资料不计算因子效果",
+  "task_scope": [
+    "只读固定2014q1.zip，sub保存全部10-K及10-K/A的adsh/cik/name/sic/period/fy/fp/filed/accepted",
+    "PRE保存上述申报的IS和BS主表呈现记录；NUM通过adsh+tag+version连接主表，保留USD/qtrs0或4/空segments空coreg及全部报告日期；字段和重复不丢弃，不能sum重复",
+    "输出annual-submissions.csv、statement-facts.csv、presentation.csv、qualification.json，完整字段/源指纹/排除数量/冲突数量/原数据结构",
+    "stream ZIP不整体解压443MB；不要Pandas一次加载全文件，分块或csv流；原件不变",
+    "先用小合成ZIP验证同accession、前后版、segments/coreg、季度/年度、重复金额不相加、旧比较期不冒充当期；再运行一次真实资格，非收益实验"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fsds-qualification-job.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/sec-fsds-2014q1.zip",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/extract_fsds.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/test_extract_fsds.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fsds-development-receipt.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-qualification-2014q1"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "3个代码/回执小文件及固定外盘表",
+    "测试与真实资格命令退出码、行数、主文件SHA、限制"
+  ],
+  "stop_conditions": [
+    "不猜XBRL不同tag的等价，不构造OP或算收益",
+    "ZIP缺失/指纹不同停止",
+    "不要写季度EPS或其他owner文件，不提交Git、不派下级"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

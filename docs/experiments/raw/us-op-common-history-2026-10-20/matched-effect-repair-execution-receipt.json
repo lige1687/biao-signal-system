@@ -1,0 +1,255 @@
+{
+  "schema": "matched-effect-repair-execution-receipt/1",
+  "status": "completed",
+  "contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/matched-execution-repair-contract.json",
+    "sha256": "a586b457f41e7e1b2f272431778fe105156f86fcc8eed7c293778f96deb574af"
+  },
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/run_matched_effect.py",
+    "--contract",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/matched-execution-repair-contract.json",
+    "--out",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/matched-op-effect-v2"
+  ],
+  "environment": {
+    "PYTHONPATH": "src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "process": {
+    "pid": 28450,
+    "started_at_utc": "2026-10-20T13:39:49.945151+00:00",
+    "ended_at_utc": "2026-10-20T13:39:53.337766+00:00",
+    "elapsed_seconds": 3.3923409580020234,
+    "returncode": 0
+  },
+  "attempts": {
+    "this_repair_attempt": 1,
+    "prior_failed_core_attempts": 1,
+    "additional_retries": 0
+  },
+  "inputs": {
+    "accounting_candidates": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-common-panel-v5/accounting-candidate-rows.csv",
+      "sha256": "6458a4d23f76add8ed506a631eaf571adf07776b630e0f2f158bb3096285126f"
+    },
+    "filings": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-qualification-v2/filings.jsonl",
+      "sha256": "b323193685ca7727979c8dfa9babacde1fed91683e7e1800186408649d772383"
+    },
+    "admission": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/final-common-inputs/final-admission-v2.json",
+      "sha256": "6b08020efd659fec559168dc63d3d2384f7a852be19e14451b5340454867213b"
+    },
+    "design": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/matched-effect-design.json",
+      "sha256": "bf46a59c5a275599a9134d1a80757b85fafca3f682e0d4e1c36298bd08de19ca"
+    },
+    "definition_snapshot": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/final-common-inputs/definitions-current-card-view.json",
+      "sha256": "94b4304a8b5a58944c97a17b6eba5bef4614d6aa8cec274c51de1a513d972ae9"
+    },
+    "adapter": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/annual_profitability.py",
+      "sha256": "29b2cf2ca25f3822c2d0799f9fb138c1e4682046068ce84d13f27febd59db3d3"
+    },
+    "runner": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/run_matched_effect.py",
+      "sha256": "7d9728312e8f1f71cc0e7ea8d6b25f8467f4af8bbf1c685249f969df6950787a"
+    },
+    "tests": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/test_run_matched_effect.py",
+      "sha256": "afaf9110a171254a240be165482847e5b4ecbbc961204cfa1d30e18bb31dceee"
+    },
+    "adapter_tests": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/tests/unit/test_annual_profitability.py",
+      "sha256": "f1d3b59e1cc8dc67c55727e8d5c6aca94f24b20422f8f99767d94c56a2142079"
+    },
+    "accounting_definition": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/annual-profitability-adaptation.json",
+      "sha256": "1e1032642919d89e820336644e68359d0cbb66501792fe757a7a9997dc534a8e"
+    },
+    "timing_clarification": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/timing-clarification.json",
+      "sha256": "afe6e854181a061e1f75dd22ad5e245a969ddd513e2dc36e314906c08ed1dcb6"
+    },
+    "identity_decision": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/identity-adjudication.json",
+      "sha256": "00a06058f2bab9e3cbead6aa36784b44946de78cc452aa587c579f1cce73b66a"
+    },
+    "common_input_independent_audit": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/controller-common-input-audit.json",
+      "sha256": "62c0eb5ee832e32310fb950c5578515f15e88ac7d947fc04186f5dd9e7fad99a"
+    },
+    "scientific_admission_review": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/final-admission-science-review.md",
+      "sha256": "a312c69012eefb1ed78b62849ede44283f3410fbd5e75f6bc8fcdd9b1b99aac9"
+    },
+    "design_review": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/matched-design-review.md",
+      "sha256": "14b985602f29f5ea2e6d328aae3949893d48468301cc4fbdc13ab8705a6bf831"
+    },
+    "runner_development": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/matched-runner-repair-development-receipt.json",
+      "sha256": "75767a6d3f984bdb506bf1dccfc325504a34f84a96beca763550f31c21b452be"
+    },
+    "accounting_acceptance": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/controller-accounting-acceptance.json",
+      "sha256": "fbf3d3bb999f9ed6e9ffb339659723e9f0ef1b4bf68a07660b0ac7f6c72ca6eb"
+    },
+    "exit_source_readback": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/controller-exit-source-readback.json",
+      "sha256": "8cb9c08a012753d2205eba757378a816a2c92fca0f691a2fc3c6047ba1a1c53e"
+    },
+    "corporate_action_receipt": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/c-actions/receipt.json",
+      "sha256": "0f9881ef37eb0f8c41c44208cb022a0c522d62783b473f00cf3f576b2ce4ef2e"
+    },
+    "controller_runner_review": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/controller-repair-review.json",
+      "sha256": "44971641b0c6ea05283a4e4823b7b99edf8316ef0ed926f3b306718d95ece0bd"
+    },
+    "interest_adjudication": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/interest-line-adjudication.json",
+      "sha256": "773d073841c3325ee3563441e4e59c65f702a75ac040f5cfc46607a7f735c3bd"
+    },
+    "interest_semantic_review": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/interest-tag-scope-review.md",
+      "sha256": "631ad98803c7f1d012070864c31b7bdd457737256250f1062bb9ca65c66b7ce6"
+    },
+    "revised_admission_binding": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/final-admission-v2-binding.json",
+      "sha256": "2dedafe3a6a1a0fd73a42d0f90392fc4c4d497785fdf6ea816d04a66541b8961"
+    },
+    "original_failed_contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/matched-execution-contract.json",
+      "sha256": "8188c438f9cdd23b89285df3a8b7c6813990d2768151a93ee8cdac31f030ba79"
+    }
+  },
+  "output": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/matched-op-effect-v2",
+    "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/matched-op-effect-v2/manifest.json",
+    "manifest_sha256": "327a81cd49a2a00c39908d494e3838850b98015e1a67c3eb9ae338583105d927",
+    "manifest_status": "completed",
+    "files": {
+      "formation-with-feature.csv": {
+        "sha256": "268dba1aa73876a5a724b4754ec6019cf6a9bec3edcd70bc3147d5b1b7bb4b31",
+        "bytes": 235534,
+        "data_rows": 1967
+      },
+      "pairs.csv": {
+        "sha256": "e0419f51098cc7edd0076f14ea1f8d2b43f9d8d2b327ec7ca253f6be9b2acebb",
+        "bytes": 212757,
+        "data_rows": 953
+      },
+      "policy-choices.csv": {
+        "sha256": "57829a53a2ae825804550f203407af17912441ca1397694f314f459f9278d0a2",
+        "bytes": 129527,
+        "data_rows": 953
+      },
+      "monthly.csv": {
+        "sha256": "531b80c22cabc6d0ee0e145697f5ff5be8dc911a168ed3b2728f1f015e77ba3a",
+        "bytes": 211665,
+        "data_rows": 120
+      },
+      "yearly.csv": {
+        "sha256": "c29ccc4ca2ee7ba6e8d31e62aee037475d093ffd436b87d976a9d5f61219385e",
+        "bytes": 19873,
+        "data_rows": 10
+      },
+      "period-summary.json": {
+        "sha256": "6cca791df43d8b2af31c90ec7001ed1ca4dd19794b8735cbc4c8e1f253828234",
+        "bytes": 7536,
+        "data_rows": null
+      },
+      "uncertainty.json": {
+        "sha256": "00118fb273edab918941a25687e99590cbde2aa50e26f0923ef342be6d3e07c1",
+        "bytes": 5378,
+        "data_rows": null
+      },
+      "sign-cells.csv": {
+        "sha256": "a1e0e3ab1c048339ac2c70678e16f466a2ffa78ef8426d486a12cd2a631c715e",
+        "bytes": 78490,
+        "data_rows": 960
+      },
+      "coverage.json": {
+        "sha256": "a08cc880a9b15f7f2938832c60e82fbccf30c531056e325c7b4748bfe7e05d0d",
+        "bytes": 5179,
+        "data_rows": null
+      },
+      "odd-omissions.csv": {
+        "sha256": "d03f69f5be489fc0f13f67d18d7e18c8c2fad70e77378272426f3cd5f2577018",
+        "bytes": 5407,
+        "data_rows": 61
+      }
+    }
+  },
+  "execution_log": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/matched-op-effect-v2.execution.log",
+    "sha256": "caf686c0bc5213a9141edb1e5cefc0a82d14f8697c9bb71f8ba619d59a11568d"
+  },
+  "coverage": {
+    "admitted_rows": 1967,
+    "unique_ciks_expected": 42,
+    "months": 120,
+    "formed_rows": 1967,
+    "pair_rows": 953,
+    "pending_admitted_outcomes": 4,
+    "unknown_target_labels": 4,
+    "unknown_target_label_reasons": {
+      "target_quote_missing_or_rejected;acquired_exit_rights_not_fully_priced": 3,
+      "target_month_manual_action_not_independently_qualified": 1
+    },
+    "all_methods_complete_months": 117,
+    "unique_ciks_actual": 42,
+    "companies_per_month": {
+      "min": 11,
+      "median": 16.0,
+      "max": 24
+    }
+  },
+  "full_period_summary": {
+    "profitability": {
+      "mean_monthly_return": 0.009537539822103806,
+      "sample_std_monthly_return": 0.053676946542503094,
+      "worst_decile_mean": -0.08587748980554767,
+      "mean_monthly_loss_probability": 0.43876678876678876
+    },
+    "higher_momentum": {
+      "mean_monthly_return": 0.00913914197021166,
+      "sample_std_monthly_return": 0.05155667356603017,
+      "worst_decile_mean": -0.08198054095618483,
+      "mean_monthly_loss_probability": 0.4261840011840012
+    },
+    "lower_momentum": {
+      "mean_monthly_return": 0.011300789702188082,
+      "sample_std_monthly_return": 0.05640358388760198,
+      "worst_decile_mean": -0.08450099080614064,
+      "mean_monthly_loss_probability": 0.451997076997077
+    },
+    "profitability_minus_higher_momentum": {
+      "mean_known_original_weight_contribution": 0.00026771795360527114,
+      "months_with_known_contribution": 120,
+      "mean_loss_part_original_weight_contribution": -0.00026879537218959696,
+      "mean_loss_part_identifiable_pair_difference": -0.0002802394609343763,
+      "mean_upside_part_original_weight_contribution": 0.0005365133257948683,
+      "mean_upside_part_identifiable_pair_difference": 0.0005382149920240737,
+      "mean_known_identifiable_pair_difference": 0.00025797553108969736,
+      "months_with_identifiable_pair_difference": 120
+    },
+    "profitability_minus_lower_momentum": {
+      "mean_known_original_weight_contribution": -0.0018080809179455506,
+      "months_with_known_contribution": 120,
+      "mean_loss_part_original_weight_contribution": 0.0007001208329803138,
+      "mean_loss_part_identifiable_pair_difference": 0.0007129095529375128,
+      "mean_upside_part_original_weight_contribution": -0.0025082017509258643,
+      "mean_upside_part_identifiable_pair_difference": -0.0024885246732652155,
+      "mean_known_identifiable_pair_difference": -0.001775615120327703,
+      "months_with_identifiable_pair_difference": 120
+    }
+  },
+  "network_requests": 0,
+  "scope_note": "Mechanical execution receipt only; root/Astra retain scientific interpretation and acceptance."
+}

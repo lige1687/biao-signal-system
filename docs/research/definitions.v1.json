@@ -282,6 +282,18 @@
       "sha256": "0a53513f2e1eb803607619fb1efefa64fe87897fe826d91917041b489f1da898",
       "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/6_Portfolios_ME_Prior_12_2_CSV.zip",
       "vintage": "CRSP 202608 CIZ"
+    },
+    "annual_op_after_da_definition": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/annual-profitability-adaptation.json",
+      "sha256": "1e1032642919d89e820336644e68359d0cbb66501792fe757a7a9997dc534a8e"
+    },
+    "annual_op_after_da_timing": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/timing-clarification.json",
+      "sha256": "afe6e854181a061e1f75dd22ad5e245a969ddd513e2dc36e314906c08ed1dcb6"
+    },
+    "annual_op_after_da_source_acceptance": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/controller-accounting-acceptance.json",
+      "sha256": "fbf3d3bb999f9ed6e9ffb339659723e9f0ef1b4bf68a07660b0ac7f6c72ca6eb"
     }
   },
   "objects": [
@@ -5427,6 +5439,102 @@
         "vintage": "202608 CRSP/CIZ, retrieved 2026-10-20"
       },
       "object_refs": []
+    },
+    {
+      "id": "research.fundamental.annual_operating_profitability_after_da",
+      "version": "1.0.0",
+      "name": "扣折旧及利息后的年度经营盈利相对普通权益（报告口径）",
+      "type": "feature",
+      "uses": [
+        "description",
+        "ranking",
+        "comparison",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "strict_french_replication",
+        "causal_alpha_claim",
+        "ETF_evidence"
+      ],
+      "scope": "历史S&P500非金融公司中，具有可解释年度报表结构的有限子集。独立研究适配，不参与LEI技术判定。",
+      "definition": {
+        "formula": "(OperatingIncomeLoss - separately_reported_nonoperating_interest_expense) / permanent_common_equity_including_noncontrolling_interests",
+        "parameters": {
+          "depreciation_amortization": "already deducted in reported operating income; no add-back",
+          "preferred_stock": "explicit aggregate zero required for this initial category",
+          "winsorization": "none",
+          "implementation": "src/lei_signal/research/annual_profitability.py::operating_profitability_after_da"
+        },
+        "endpoints": "One selected as-filed annual submission, consolidated USD, same rounded fiscal period; latest eligible amendment selected before source qualification.",
+        "unit": "ratio, not percent return",
+        "direction": "higher means more reported annual operating profit after interest relative to book capital; effectiveness separately tested",
+        "transforms": "negative operating profit retained; invalid or nonpositive denominator and unresolved statement structure unavailable, never zero-imputed"
+      },
+      "input": {
+        "fields": [
+          "OperatingIncomeLoss",
+          "nonoperating_interest_expense",
+          "inclusive_common_equity",
+          "adsh",
+          "cik",
+          "accepted",
+          "annual_source_cutoff",
+          "financials_qualified"
+        ],
+        "price_basis": "not applicable to accounting feature; downstream momentum/outcomes separately qualified",
+        "currency": "USD, same unit for numerator and denominator",
+        "frequency": "annual accounting observation; June refresh used monthly",
+        "calendar": "US annual filing/actual observed June-end SPY trading date"
+      },
+      "universe": {
+        "version": "us-op-common-history-2026-10-20/final-admission-binding",
+        "eligibility": "historical formation membership plus qualified accounting, issuer identity, past momentum and formation quote; future outcome missing does not remove members",
+        "warmup": "2013-2014 as needed for2015 first observations",
+        "missing": "unavailable, with exact reasons; latest incomplete amendment does not fall back",
+        "quality_gate": "reported-op qualification v2 plus root accounting acceptance and final admission",
+        "degrade": "source or timing failure prevents scoring; never alter production filters"
+      },
+      "time": {
+        "observation_time": "selected prior-calendar-year annual report period",
+        "available_at": "SEC accepted date, no later than last SPY session on/before June30 minus2 calendar days; actual historic vendor arrival unknown",
+        "decision_at": "at month-end formation after information cutoff; annual anchor currentJune for July onward",
+        "execution_at": "not defined by feature; no same-close execution claim",
+        "timezone": "America/New_York",
+        "effective_from": "2026-10-20 research registration; old frozen studies unchanged"
+      },
+      "dependencies": [],
+      "sources": [
+        "annual_op_after_da_definition",
+        "annual_op_after_da_timing",
+        "annual_op_after_da_source_acceptance"
+      ],
+      "validation": {
+        "method": "Original annual-report and NUM/PRE/TAG structural checks, same-report interest lines, complete equity identity, synthetic arithmetic counterexamples; source qualification separate from effect",
+        "tolerance": {
+          "absolute": 1e-12,
+          "relative": 1e-12,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_annual_profitability.py",
+          "docs/experiments/raw/us-op-common-history-2026-10-20/controller-accounting-acceptance.json",
+          "docs/experiments/raw/us-op-common-history-2026-10-20/reported-op-qualification-v2-receipt.json"
+        ],
+        "limitations": "Reported OI includes special items/equity-method income. After-D&A adaptation differs from French. SEC period dates rounded; current historical dataset may contain later technical corrections. Subset not representative of all stocks."
+      },
+      "status": {
+        "definition_clarity": "explicit_research_adaptation",
+        "data_qualification": "limited_source_structure_and_admission",
+        "implementation": "pure_research_adapter_synthetic_checked",
+        "effectiveness": "pending_frozen_common_sample_comparison",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "owner_task": "personal-lowfreq-system-audit-20261018",
+        "created_at": "2026-10-20T21:14:35.643264+08:00",
+        "source_snapshot": "final-admission-binding.json"
+      }
     }
   ],
   "models": [],

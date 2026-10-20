@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-20T21:53:32.382732+08:00",
+  "scope": "bounded fixed US annual operating profitability comparison",
+  "status": "accepted_for_research_archive",
+  "unit_tests": {
+    "passed": 22,
+    "exit_code": 0
+  },
+  "independent_arithmetic_audit_sha256": "4f510168e50fba07fcc69bbdbf3dceddfcd493458ff5e8ef280ff042449348a1",
+  "final_scientific_review_sha256": "ee39bf323384847cf70bcf1db6bd2eff8f72a5edee502b0eccadf74c7a51ad22",
+  "api_report_sha256": "054049d1ddcdf366b26b0e39555e44bc7adc4e36e891b1f3f5b6c18e6fcc5b3c",
+  "hygiene_own_worktree": true,
+  "hygiene_main": true,
+  "diff_check": {
+    "full_staged_exit_code": 2,
+    "warnings": [
+      {
+        "path": "docs/experiments/raw/us-op-common-history-2026-10-20/qualify_identity_daily_v2.py",
+        "line": 98,
+        "message": "trailing whitespace in preserved frozen qualification code"
+      },
+      {
+        "path": "docs/experiments/raw/us-op-common-history-2026-10-20/qualify_reported_op.py",
+        "line": 81,
+        "message": "trailing whitespace in preserved superseded qualification code"
+      }
+    ],
+    "decision": "Preserve exact scientific code hashes; do not edit frozen code or suppress checker. Explicit archival style warnings retained. All other task paths pass the same whitespace check.",
+    "other_task_paths_exit_code": 0,
+    "research_logic_failure": false
+  },
+  "browser_open": "queued; no visual acceptance claim",
+  "research_effect": "no confirmed monthly return or defensive increment; retain bounded operational observation",
+  "private_paths_excluded": [
+    "http-ledger.jsonl",
+    "http-identity-ledger.jsonl",
+    "coordination.index",
+    "final-admission.json"
+  ],
+  "production_authorized": false,
+  "trading_authorized": false,
+  "goal_self_acceptance": false
+}

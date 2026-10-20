@@ -1,0 +1,41 @@
+{
+  "task": "All 2015-2024 historical index removals: source-only holding-end continuity audit",
+  "created_at": "2026-10-20T20:13:45.338370+08:00",
+  "inputs": [
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/membership_intervals.parquet",
+      "sha256": "a2695e0503a5489ef6f101b9f6d91770a1a114d290b047b8765cbee60947e5fe"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/exit_gaps.csv",
+      "sha256": "7fd978df63316793d0b9c7497ba13aa48789f71c02b2db919e884fb0f215364a"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/no_trade_days.csv",
+      "sha256": "e6ce9efaeea91b3e3e8198a6a3b20bf56d217e82fe83c83b133fab27492de2f1"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/renames.csv",
+      "sha256": "e571766f6f362e38d61d7c24d16e5d99db3776b7faea1b94d0c7b0e202d327a0"
+    }
+  ],
+  "prices": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/prices.parquet",
+    "sha256": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563"
+  },
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-outcome-qualification",
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/qualify_exit_outcomes.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/exit-outcome-qualification-receipt.json"
+  ],
+  "scope": [
+    "All intervals with end_exclusive in 2015-01-01 through 2024-12-31, expected 218 events; retain interval identity, do not deduplicate repeated entries.",
+    "Use observed SPY date set solely as source calendar proxy. For each removal choose prior calendar-month last SPY day as formation, removal-month last SPY day as end observation. State this is information-observation availability, not execution eligibility or a portfolio test.",
+    "Check whether that interval was a member at formation, using [start,end). If not, flag not in prior-month cohort instead of treating as held.",
+    "For exact ticker and date, preserve row counts, close/adj_close/volume/source and halted/no-trade flags; finite positive quotes with positive volume are observable candidates, never prove executable sales or terminal value.",
+    "For each removal report last observed pre-removal quote, first nonhalt positive-volume post-removal quote (if any up to end2024), exact target-month-end quote; no carry-forward/alias price copying/zero fill.",
+    "If target quote absent or halt occurs, state terminal security/cash/share entitlement unverified; do not discard cases or infer liquidation from index removal. Even continuous quotes do not certify merger treatment.",
+    "Read available exit_gaps matching SIVB/SBNY and save exact rows with uncertainty. Report counts event types, formation held/not-held, target quote candidate/missing/bad/halt; direct cases Chubb old, JCI old, Allergan old, SIVB, SBNY.",
+    "No network, OP, factor/portfolio returns, outcome-based pool removal, production code or data overwrite. Create-only output and SHA receipt with source/run/readback."
+  ]
+}

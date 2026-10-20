@@ -1,0 +1,75 @@
+{
+  "task": "Narrow issuer-CIK annotation for four verified historical windows, preserving original monthly candidate rows and month/ticker keys.",
+  "command": "python3 -B docs/experiments/raw/us-op-common-history-2026-10-20/annotate_issuer_windows.py --rules docs/experiments/raw/us-op-common-history-2026-10-20/verified-issuer-window-rules.json --candidates '<bound monthly-identity-candidates.csv>' --out '<new issuer-window-corrections>'",
+  "started_at_utc": "2026-10-20T12:24:26Z",
+  "completed_at_utc": "2026-10-20T12:24:28Z",
+  "returncode": 0,
+  "script_sha256": "3d01acb157899d8a11243ee74bd5fd74451a14e359fae4f3b7ec45740da58b15",
+  "rules_sha256": "5901b2825ca9ddeb10afcd71d040a5abdda0316577af4d19e02adce3bfd69e5b",
+  "source_candidate_sha256": "3bde13c078874b5786c34dfcc3cbb632b33cb1c68f3684408c4b33311ebfa7e1",
+  "source_candidate_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/identity-daily-qualification-v2/monthly-identity-candidates.csv",
+  "external_output_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/issuer-window-corrections",
+  "manifest_sha256": "a12985658dc3be8ec29c90c08d372e1453df41d796ba4857ed7892d4f0f58cc2",
+  "manifest_outputs_verified": {
+    "changed-candidates.csv": {
+      "sha256": "44dd916b47a389efd60a8f94798f46e34f64881ceef0aa193c87ddceb5fb8969",
+      "bytes": 32588
+    },
+    "summary.json": {
+      "sha256": "8c646c508dcbe4ecf16b06cfa936cec7ee29e4516b22a1d1488d5d8c71e10966",
+      "bytes": 563
+    }
+  },
+  "selected_rows": 52,
+  "unique_month_ticker_keys": 52,
+  "counts_by_ticker": {
+    "AGN": 2,
+    "CB-201601": 12,
+    "GOOG": 9,
+    "GOOGL": 9,
+    "JCI-201609": 20
+  },
+  "counts_by_rule": {
+    "AGN": 2,
+    "CB-201601": 12,
+    "JCI-201609": 20,
+    "GOOG+GOOGL": 18
+  },
+  "original_candidate_ciks_by_ticker": {
+    "AGN": [
+      "0000850693"
+    ],
+    "CB-201601": [
+      "0000896159"
+    ],
+    "GOOG": [
+      "0001652044"
+    ],
+    "GOOGL": [
+      "0001652044"
+    ],
+    "JCI-201609": [
+      "0000833444"
+    ]
+  },
+  "annotated_ciks_by_ticker": {
+    "AGN": [
+      "0001578845"
+    ],
+    "CB-201601": [
+      "0000020171"
+    ],
+    "GOOG": [
+      "0001288776"
+    ],
+    "GOOGL": [
+      "0001288776"
+    ],
+    "JCI-201609": [
+      "0000053669"
+    ]
+  },
+  "coverage_or_return_recalculated": false,
+  "network_requests": 0,
+  "boundary": "These are issuer identity annotations only. They do not authorize using predecessor financial statements at formation (including June year-end rules) or infer liquidation/terminal value."
+}

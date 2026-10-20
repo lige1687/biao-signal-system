@@ -1,0 +1,198 @@
+{
+  "schema": "reported-op-qualification-receipt/1",
+  "status": "completed_structural_scan",
+  "scope": "8,247 source filing submissions from three SHA-bound FSDS panels; no price/return inputs, no network, no ratio/factor/portfolio computation. “qualified” means only structural reported-data candidate, not historical issuer identity acceptance.",
+  "external_storage": {
+    "mount": "/Volumes/win+mac通用",
+    "device": 16777238,
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-qualification"
+  },
+  "counts": {
+    "rows_read_back": 8247,
+    "qualified": 293,
+    "not_qualified": 7954,
+    "by_fy": {
+      "2011": {
+        "not_qualified": 1
+      },
+      "2012": {
+        "not_qualified": 596,
+        "qualified": 15
+      },
+      "2013": {
+        "not_qualified": 691,
+        "qualified": 25
+      },
+      "2014": {
+        "not_qualified": 696,
+        "qualified": 29
+      },
+      "2015": {
+        "not_qualified": 688,
+        "qualified": 30
+      },
+      "2016": {
+        "not_qualified": 661,
+        "qualified": 23
+      },
+      "2017": {
+        "not_qualified": 672,
+        "qualified": 26
+      },
+      "2018": {
+        "not_qualified": 654,
+        "qualified": 28
+      },
+      "2019": {
+        "not_qualified": 647,
+        "qualified": 26
+      },
+      "2020": {
+        "not_qualified": 646,
+        "qualified": 24
+      },
+      "2021": {
+        "not_qualified": 644,
+        "qualified": 20
+      },
+      "2022": {
+        "not_qualified": 634,
+        "qualified": 22
+      },
+      "2023": {
+        "not_qualified": 631,
+        "qualified": 22
+      },
+      "2024": {
+        "not_qualified": 93,
+        "qualified": 3
+      }
+    },
+    "by_panel": {
+      "candidate": {
+        "not_qualified": 7245,
+        "qualified": 273
+      },
+      "predecessor": {
+        "not_qualified": 4
+      },
+      "warmup": {
+        "not_qualified": 705,
+        "qualified": 20
+      }
+    },
+    "failed_reason_counts": {
+      "balance_Assets": 57,
+      "balance_Liabilities": 2714,
+      "balance_StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest": 3560,
+      "balance_identity": 5903,
+      "filing_type_period": 1,
+      "interest": 4102,
+      "operating_income": 2160,
+      "parent_nci_reconciliation": 1315,
+      "positive_inclusive_equity": 5217,
+      "preferred_total": 5308,
+      "sic": 1550,
+      "temporary_redeemable_equity": 1206
+    }
+  },
+  "inputs": {
+    "candidate/submissions.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/submissions.csv",
+      "sha256": "065c80c6fe6edae076c2f326770a54b18b0f6e1caccdfb9fc72fb10811ace327",
+      "bytes": 2315855,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-panel-execution-receipt.json",
+      "receipt_sha256": "34d26cfb2488e11acb7f72d7fb123190c246789fab2bde14a80d4a0aabf8bcaa"
+    },
+    "candidate/presentation.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/presentation.csv",
+      "sha256": "29c254c34ba2731fff756928a630009aa47ae3958cd12db947b9e040e9464fca",
+      "bytes": 66928611,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-panel-execution-receipt.json",
+      "receipt_sha256": "34d26cfb2488e11acb7f72d7fb123190c246789fab2bde14a80d4a0aabf8bcaa"
+    },
+    "candidate/statement-facts.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/statement-facts.csv",
+      "sha256": "be3ce99d4c1ab38cd907b5613e6b092b91b6b01cb15400a7b21c9ba7831d1093",
+      "bytes": 128266690,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-panel-execution-receipt.json",
+      "receipt_sha256": "34d26cfb2488e11acb7f72d7fb123190c246789fab2bde14a80d4a0aabf8bcaa"
+    },
+    "predecessor/submissions.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/submissions.csv",
+      "sha256": "e689f77b386cbda66e0c9417a9dcd27e731e5b6835ca965b9704d262630a3f0b",
+      "bytes": 1371,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-predecessor-execution-receipt.json",
+      "receipt_sha256": "9a2e0695f47407d42c50e0f4fd7383a0ba385941fe8755562c741766145d0f26"
+    },
+    "predecessor/presentation.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/presentation.csv",
+      "sha256": "4e21c4906b7f35c000773cc0a7bb52b9609f78f134cadb9a5abe939c470624a7",
+      "bytes": 34063,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-predecessor-execution-receipt.json",
+      "receipt_sha256": "9a2e0695f47407d42c50e0f4fd7383a0ba385941fe8755562c741766145d0f26"
+    },
+    "predecessor/statement-facts.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/statement-facts.csv",
+      "sha256": "fb0753f5a7832c559781b1bd784319e56b255e9e8f93c70965fc59c3212cb3bf",
+      "bytes": 72934,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-predecessor-execution-receipt.json",
+      "receipt_sha256": "9a2e0695f47407d42c50e0f4fd7383a0ba385941fe8755562c741766145d0f26"
+    },
+    "warmup/submissions.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/submissions.csv",
+      "sha256": "427a58c1e1a529a91a465df8dc41a3fd2e0d142f00e8b59c17d0200a332e70ae",
+      "bytes": 220031,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-warmup-execution-receipt.json",
+      "receipt_sha256": "7d64e0f75d7858078cc27883d505645dfb08b8fae25c85de6f7d4c057907785c"
+    },
+    "warmup/presentation.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/presentation.csv",
+      "sha256": "20a740c103aa81637c81a33a2adcbe93a736abee6256317eb167174f79c508a3",
+      "bytes": 6628933,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-warmup-execution-receipt.json",
+      "receipt_sha256": "7d64e0f75d7858078cc27883d505645dfb08b8fae25c85de6f7d4c057907785c"
+    },
+    "warmup/statement-facts.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/statement-facts.csv",
+      "sha256": "f5f724c9675a47cba525eb9531d180fc234cc95c3f2d1c179572de2d04e917be",
+      "bytes": 12903167,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-warmup-execution-receipt.json",
+      "receipt_sha256": "7d64e0f75d7858078cc27883d505645dfb08b8fae25c85de6f7d4c057907785c"
+    }
+  },
+  "outputs": {
+    "filings_jsonl": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-qualification/filings.jsonl",
+      "sha256": "3e5f3a83e1d80688f194a7080268a6c52f172cacd18536114a85220561d5ddb0",
+      "bytes": 33770455
+    },
+    "summary_json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-qualification/summary.json",
+      "sha256": "ea2306a6fcff3d31d6b5fe4bd7492d986d890f9ebf8d86e6bd59cbc8e9f3cea2",
+      "bytes": 6865
+    }
+  },
+  "local_artifacts": {
+    "script": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/qualify_reported_op.py",
+      "sha256": "4f5ab88653cfd9168515dffd58c99736e705fbd631f7ec1a88769690c00352ab"
+    },
+    "tests": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/test_qualify_reported_op.py",
+      "sha256": "92ea922f18cc76c750370a908845d39aa7c897a6de895e79b7abc5bcf22f998b"
+    },
+    "synthetic_tests": "10 passed"
+  },
+  "source_sha_completeness": "all 8,247 rows have source_zip_sha256 bound to panel execution receipt input_sources",
+  "failure_records": [
+    "Initial pre-scan invocation stopped before qualification rows were evaluated because receipt input_sources keys are path/sha256 rather than source_zip/sha256; corrected basename lookup. No external output was created by that attempt; the single subsequent full scan completed."
+  ],
+  "limitations": [
+    "Input panel rows are source-extraction candidates and retained only facts selected by the extraction procedure; this scan did not re-open ZIPs or independently validate source identity.",
+    "No custom-tag inference or missing-value imputation.",
+    "Negative interest amount is separately flagged for review; no ratio is calculated.",
+    "No factor, return, strategy or portfolio conclusion."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "reviewed_at": "2026-10-20T20:53:44.701454+08:00",
+  "decision": "Accept defined as-reported after-D&A accounting structure for bounded common-sample qualification; not French replication or final factor efficacy.",
+  "definition": "annual-profitability-adaptation.json",
+  "original_source_case": {
+    "adsh": "0000024545-14-000004",
+    "company": "MOLSON COORS BREWING CO",
+    "year_end": "2013-12-31",
+    "income_pdf_page": 92,
+    "income_printed_page": 69,
+    "equity_pdf_page": 95,
+    "equity_printed_page": 72,
+    "units": "USD millions",
+    "operating_income": 805.7,
+    "interest_expense": 183.8,
+    "parent_equity": 8638.9,
+    "minority_equity": 24.9,
+    "inclusive_equity": 8663.8,
+    "preferred_total": 0,
+    "assets": 15580.1,
+    "liabilities": 6916.3,
+    "verified": "Root independently parsed original ZIP NUM/PRE/TAG and visually read both original PDF pages. Preferred shares explicitly none issued. Interest outside operating income. Actual fiscal year end confirmed.",
+    "scope_limit": "Reported OI contains equity-method income539.0m and special items-200.0m. These remain in the fixed as-reported measure; not described as pure recurring earnings, cash profit, or exact French formula."
+  },
+  "negative_cases": [
+    "Apple literal SG&A omits separately disclosed R&D; no extra subtraction from reported OI.",
+    "Henry Schein redeemable NCI497.539m differs from permanent NCI2.804m; excluded by complete balance condition.",
+    "Per-share preferred par value cannot substitute for aggregate preferred equity.",
+    "Cross-report OI/interest line matching repaired before any efficacy; full qualification count unchanged293."
+  ],
+  "status": {
+    "accounting_structure": "accepted_limited",
+    "historical_identity": "pending_common_sample",
+    "momentum_windows": "pending_common_sample",
+    "future_outcomes": "pending_common_sample",
+    "new_effect_runs": 0
+  },
+  "inputs": {
+    "docs/experiments/raw/us-op-common-history-2026-10-20/controller-molson-source-case.json": "4ae2db2bbcf85963959e5e69c9b131e28f422a28ec4a9b2c7effe82899d684e2",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/molson-coors-2013-original-annual.pdf": "e99dc555ef8a28aa9668f0b31eef662e39269c4571c32929e92cb5ef3e01d8da",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/molson-source-pages/selected-page-text.json": "8d7bf11943d42029c8f044fe97d6e374ca3a404cf9481ab0679b8ab79757a0f1",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/molson-source-pages/income-p92.png": "794c182548b84fe16607bfe0510538758aba5c5936e0782c167374bae38f3471",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/molson-source-pages/equity-p95.png": "fcc429022cd3c8ebcb292ececc7db20262f309f6dcb1d9ef916686ca72f66e88",
+    "docs/experiments/raw/us-op-common-history-2026-10-20/reported-op-qualification-v2-receipt.json": "7b6be4febff29c007f1a56d87cd10e9a5a0dc94c1830c66fa0c901591c0983bd",
+    "docs/experiments/raw/us-op-common-history-2026-10-20/annual-profitability-adaptation.json": "1e1032642919d89e820336644e68359d0cbb66501792fe757a7a9997dc534a8e"
+  },
+  "warnings": [
+    "PDF rendering emitted fontconfig warning; both PNGs created and visual numbers verified.",
+    "This accepts a coherent source measurement, not a claim that 293 filings create a large or representative joint sample."
+  ]
+}

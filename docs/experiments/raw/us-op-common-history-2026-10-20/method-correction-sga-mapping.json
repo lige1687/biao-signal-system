@@ -1,0 +1,24 @@
+{
+  "created_at": "2026-10-20T20:20:03.192524+08:00",
+  "scope": "Financial definition correction before any OP score or efficacy evaluation",
+  "earlier_case": "aapl-source-case.json computes literal US-GAAP Revenue-COGS-SellingGeneralAndAdministrativeExpense-InterestExpense only; $82.167bn is NOT certified French/Compustat OP numerator",
+  "new_evidence": [
+    {
+      "url": "https://memento.epfl.ch/public/upload/files/Paper_Taylor.pdf",
+      "meaning": "Peters/Taylor Appendix A.1 states Compustat XSGA includes R&D unless allocated to COGS; financial-statement SG&A label alone is not an automatic mapping."
+    },
+    {
+      "url": "https://www.ivey.uwo.ca/media/3775544/linnainmaa.pdf",
+      "meaning": "Profitability research explains Compustat XSGA as reported SG&A plus R&D in its described construction; confirm target mapping before scoring."
+    }
+  ],
+  "illustrative_amounts_usd_bn": {
+    "literal_sga_only": 82.167,
+    "reported_operating_income": 66.288,
+    "if_sga_includes_separate_rd": 63.415,
+    "difference_from_reported_operating_income": -2.873
+  },
+  "interpretation": "Conditional arithmetic only. Need source taxonomy mapping, non-overlap and depreciation treatment for target. Do not pick better-looking definition by returns. No ratio or performance from this example.",
+  "coverage_effect": "Annual coverage outputs count raw candidate tag presence; they cannot establish the required standardized SGA/COGS/BE fields. Do not rerun tag counts or rename them qualified OP.",
+  "new_effect_runs": 0
+}

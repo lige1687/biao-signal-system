@@ -1,0 +1,196 @@
+{
+  "schema": "reported-op-qualification-v2-receipt/1",
+  "status": "completed_recheck",
+  "purpose": "Correct OI PRE report/line pairing. v1 retained unchanged. No new source requests; no price/return/factor/portfolio calculation.",
+  "external_storage": {
+    "mount": "/Volumes/win+mac通用",
+    "device": 16777238,
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-qualification-v2"
+  },
+  "counts": {
+    "rows_read_back": 8247,
+    "qualified": 293,
+    "not_qualified": 7954,
+    "v1_v2_qualification_difference_count": 0,
+    "negative_interest_manual_review_count": 11,
+    "automatic_scoring_eligible_count": 293,
+    "by_fy": {
+      "2011": {
+        "not_qualified": 1
+      },
+      "2012": {
+        "not_qualified": 596,
+        "qualified": 15
+      },
+      "2013": {
+        "not_qualified": 691,
+        "qualified": 25
+      },
+      "2014": {
+        "not_qualified": 696,
+        "qualified": 29
+      },
+      "2015": {
+        "not_qualified": 688,
+        "qualified": 30
+      },
+      "2016": {
+        "not_qualified": 661,
+        "qualified": 23
+      },
+      "2017": {
+        "not_qualified": 672,
+        "qualified": 26
+      },
+      "2018": {
+        "not_qualified": 654,
+        "qualified": 28
+      },
+      "2019": {
+        "not_qualified": 647,
+        "qualified": 26
+      },
+      "2020": {
+        "not_qualified": 646,
+        "qualified": 24
+      },
+      "2021": {
+        "not_qualified": 644,
+        "qualified": 20
+      },
+      "2022": {
+        "not_qualified": 634,
+        "qualified": 22
+      },
+      "2023": {
+        "not_qualified": 631,
+        "qualified": 22
+      },
+      "2024": {
+        "not_qualified": 93,
+        "qualified": 3
+      }
+    },
+    "by_panel": {
+      "candidate": {
+        "not_qualified": 7245,
+        "qualified": 273
+      },
+      "predecessor": {
+        "not_qualified": 4
+      },
+      "warmup": {
+        "not_qualified": 705,
+        "qualified": 20
+      }
+    }
+  },
+  "inputs": {
+    "candidate/submissions.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/submissions.csv",
+      "sha256": "065c80c6fe6edae076c2f326770a54b18b0f6e1caccdfb9fc72fb10811ace327",
+      "bytes": 2315855,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-panel-execution-receipt.json",
+      "receipt_sha256": "34d26cfb2488e11acb7f72d7fb123190c246789fab2bde14a80d4a0aabf8bcaa"
+    },
+    "candidate/presentation.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/presentation.csv",
+      "sha256": "29c254c34ba2731fff756928a630009aa47ae3958cd12db947b9e040e9464fca",
+      "bytes": 66928611,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-panel-execution-receipt.json",
+      "receipt_sha256": "34d26cfb2488e11acb7f72d7fb123190c246789fab2bde14a80d4a0aabf8bcaa"
+    },
+    "candidate/statement-facts.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/statement-facts.csv",
+      "sha256": "be3ce99d4c1ab38cd907b5613e6b092b91b6b01cb15400a7b21c9ba7831d1093",
+      "bytes": 128266690,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-panel-execution-receipt.json",
+      "receipt_sha256": "34d26cfb2488e11acb7f72d7fb123190c246789fab2bde14a80d4a0aabf8bcaa"
+    },
+    "predecessor/submissions.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/submissions.csv",
+      "sha256": "e689f77b386cbda66e0c9417a9dcd27e731e5b6835ca965b9704d262630a3f0b",
+      "bytes": 1371,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-predecessor-execution-receipt.json",
+      "receipt_sha256": "9a2e0695f47407d42c50e0f4fd7383a0ba385941fe8755562c741766145d0f26"
+    },
+    "predecessor/presentation.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/presentation.csv",
+      "sha256": "4e21c4906b7f35c000773cc0a7bb52b9609f78f134cadb9a5abe939c470624a7",
+      "bytes": 34063,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-predecessor-execution-receipt.json",
+      "receipt_sha256": "9a2e0695f47407d42c50e0f4fd7383a0ba385941fe8755562c741766145d0f26"
+    },
+    "predecessor/statement-facts.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-predecessor-panel/statement-facts.csv",
+      "sha256": "fb0753f5a7832c559781b1bd784319e56b255e9e8f93c70965fc59c3212cb3bf",
+      "bytes": 72934,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-predecessor-execution-receipt.json",
+      "receipt_sha256": "9a2e0695f47407d42c50e0f4fd7383a0ba385941fe8755562c741766145d0f26"
+    },
+    "warmup/submissions.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/submissions.csv",
+      "sha256": "427a58c1e1a529a91a465df8dc41a3fd2e0d142f00e8b59c17d0200a332e70ae",
+      "bytes": 220031,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-warmup-execution-receipt.json",
+      "receipt_sha256": "7d64e0f75d7858078cc27883d505645dfb08b8fae25c85de6f7d4c057907785c"
+    },
+    "warmup/presentation.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/presentation.csv",
+      "sha256": "20a740c103aa81637c81a33a2adcbe93a736abee6256317eb167174f79c508a3",
+      "bytes": 6628933,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-warmup-execution-receipt.json",
+      "receipt_sha256": "7d64e0f75d7858078cc27883d505645dfb08b8fae25c85de6f7d4c057907785c"
+    },
+    "warmup/statement-facts.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-2013-warmup-panel/statement-facts.csv",
+      "sha256": "f5f724c9675a47cba525eb9531d180fc234cc95c3f2d1c179572de2d04e917be",
+      "bytes": 12903167,
+      "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/fsds-warmup-execution-receipt.json",
+      "receipt_sha256": "7d64e0f75d7858078cc27883d505645dfb08b8fae25c85de6f7d4c057907785c"
+    }
+  },
+  "v1_baseline": {
+    "receipt": "docs/experiments/raw/us-op-common-history-2026-10-20/reported-op-qualification-receipt.json",
+    "receipt_sha256": "e1ee728c8d06eba205087df56ea51627fcae003d59bfd86db18c097d34b33a46",
+    "filings_jsonl_sha256": "3e5f3a83e1d80688f194a7080268a6c52f172cacd18536114a85220561d5ddb0"
+  },
+  "outputs": {
+    "filings_jsonl": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-qualification-v2/filings.jsonl",
+      "sha256": "b323193685ca7727979c8dfa9babacde1fed91683e7e1800186408649d772383",
+      "bytes": 38654454
+    },
+    "summary_json": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-qualification-v2/summary.json",
+      "sha256": "808812135fc5acb6ee4a358ad75d1d5c53e8b7d57a7dfb7e1f241088dcb42b2f",
+      "bytes": 7396
+    },
+    "v1_v2_differences": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-qualification-v2/v1-v2-differences.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "records": 0
+    }
+  },
+  "local_artifacts": {
+    "script": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/qualify_reported_op_v2.py",
+      "sha256": "aecd6ccd58b9ab5b2d079bf766e702de1aa4a3a083a1eddf35432ad251f8293a"
+    },
+    "tests": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/test_qualify_reported_op_v2.py",
+      "sha256": "618356f8abc2d77940634d46242f50845c3451066feb6ecaf13d3b85b6918839"
+    },
+    "synthetic_tests": "3 passed, including cross-report line false-positive rejection and cross-report conflicting-interest rejection"
+  },
+  "review_notes": [
+    "Negative-interest cases are flagged for manual review and marked automatic_scoring_eligible=false when structurally qualified; count is 11 filings with a negative paired interest amount.",
+    "A prior v1 reason count for positive_inclusive_equity included missing/ambiguous equity as well as nonpositive amounts; it must not be read as a count of actual negative-equity issuers.",
+    "Structural qualification does not confirm historical issuer identity or underlying economic rights."
+  ],
+  "failure_records": [],
+  "network_requests": 0,
+  "price_or_return_inputs_read": false
+}

@@ -1,0 +1,124 @@
+{
+  "reviewed_at": "2026-10-20T21:15:48.162091+08:00",
+  "source": "root independent pandas/dict recomputation, no qualification runner imports",
+  "checks": {
+    "candidate_rows_checked": 2181,
+    "latest_accepted_selected_accessions_match": 2181,
+    "formation_month_and12_momentum_endpoint_months_match": 2181,
+    "active_exact_ticker_membership_intervals_unique": 2181,
+    "errors": [],
+    "admitted_unknown_future_rows_retained": 6
+  },
+  "boundary_examples": [
+    {
+      "month": "2015-01",
+      "adsh": "0001445305-13-002422",
+      "period": 20130831,
+      "accepted": "2013-10-16 15:40:00.0",
+      "cutoff": "2014-06-28",
+      "formation": "2014-12-31",
+      "momentum_endpoints": [
+        "2013-12-31",
+        "2014-11-28"
+      ]
+    },
+    {
+      "month": "2015-06",
+      "adsh": "0001445305-13-002422",
+      "period": 20130831,
+      "accepted": "2013-10-16 15:40:00.0",
+      "cutoff": "2014-06-28",
+      "formation": "2015-05-29",
+      "momentum_endpoints": [
+        "2014-05-30",
+        "2015-04-30"
+      ]
+    },
+    {
+      "month": "2015-07",
+      "adsh": "0000909832-14-000021",
+      "period": 20140831,
+      "accepted": "2014-10-15 17:30:00.0",
+      "cutoff": "2015-06-28",
+      "formation": "2015-06-30",
+      "momentum_endpoints": [
+        "2014-06-30",
+        "2015-05-29"
+      ]
+    },
+    {
+      "month": "2019-07",
+      "adsh": "0000909832-18-000013",
+      "period": 20180831,
+      "accepted": "2018-10-26 09:22:00.0",
+      "cutoff": "2019-06-26",
+      "formation": "2019-06-28",
+      "momentum_endpoints": [
+        "2018-06-29",
+        "2019-05-31"
+      ]
+    }
+  ],
+  "admitted_counts": {
+    "all_accounting_candidate_rows": 2181,
+    "admitted_rows": 2083,
+    "admitted_ciks": 47,
+    "admitted_tickers": 47,
+    "target_months": 120,
+    "per_month_min": 12,
+    "per_month_max": 24,
+    "per_month_median": 17.0,
+    "excluded_reason_counts": {
+      "historical_momentum_depends_on_unverified_manual_action": 90,
+      "historical_security_price_basis_not_qualified": 15,
+      "momentum_endpoints_not_qualified": 3,
+      "formation_quote_not_qualified": 3
+    },
+    "admitted_unknown_outcome_rows": [
+      {
+        "target_month": "2016-09",
+        "ticker": "EMC-201609",
+        "outcome_reasons": [
+          "target_quote_missing_or_rejected;acquired_exit_rights_not_fully_priced"
+        ]
+      },
+      {
+        "target_month": "2017-01",
+        "ticker": "STJ-201701",
+        "outcome_reasons": [
+          "target_quote_missing_or_rejected;acquired_exit_rights_not_fully_priced"
+        ]
+      },
+      {
+        "target_month": "2017-01",
+        "ticker": "VAR",
+        "outcome_reasons": [
+          "target_month_manual_action_not_independently_qualified"
+        ]
+      },
+      {
+        "target_month": "2017-03",
+        "ticker": "HAR-201703",
+        "outcome_reasons": [
+          "target_quote_missing_or_rejected;acquired_exit_rights_not_fully_priced"
+        ]
+      },
+      {
+        "target_month": "2021-04",
+        "ticker": "VAR",
+        "outcome_reasons": [
+          "target_quote_missing_or_rejected;acquired_exit_rights_not_fully_priced"
+        ]
+      },
+      {
+        "target_month": "2023-07",
+        "ticker": "BWA",
+        "outcome_reasons": [
+          "target_month_manual_action_not_independently_qualified"
+        ]
+      }
+    ]
+  },
+  "effect_runs": 0,
+  "limitation": "Does not independently certify all historical company identities or corporate distributions; limited reconstruction and action exclusions remain."
+}

@@ -1,0 +1,244 @@
+{
+  "task_id": "cor-dividend-issuer-audit-20261020",
+  "status": "completed_with_partial_old_event_coverage",
+  "network_requests": 0,
+  "financial_effect_or_strategy_performance_calculated": false,
+  "sec_zip": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/sec-fsds-2020q4.zip",
+    "ledger_status": 200,
+    "bytes": 89811373,
+    "sha256": "7cabec2c9b90511983623e6db3869b24c7a894466bd409f060a8da32790ae68e",
+    "zip_crc": "passed",
+    "required_members_present": [
+      "num.txt",
+      "pre.txt",
+      "sub.txt",
+      "tag.txt"
+    ]
+  },
+  "sec_filing": {
+    "issuer": {
+      "adsh": "0001140859-20-000050",
+      "cik": "1140859",
+      "name": "AMERISOURCEBERGEN CORP",
+      "form": "10-K",
+      "filed": "20201119",
+      "period": "20200930",
+      "fy": "2020",
+      "fp": "FY",
+      "accepted": "2020-11-19 10:58:00.0"
+    },
+    "core_site_comparison_issuer": {
+      "adsh": "0001558370-20-012091",
+      "cik": "1490892",
+      "name": "CORESITE REALTY CORP",
+      "form": "10-Q",
+      "filed": "20201030",
+      "period": "20200930",
+      "fy": "2020",
+      "fp": "Q3",
+      "accepted": "2020-10-30 07:18:00.0"
+    },
+    "cik_1140859_and_1490892_are_distinct": true
+  },
+  "dividend_facts_in_sec_10k": {
+    "query": "same accession; tags containing dividend and per-share; ddate 2019-10-01 through 2020-09-30",
+    "matching_num_rows": [
+      {
+        "adsh": "0001140859-20-000050",
+        "tag": "CommonStockDividendsPerShareCashPaid",
+        "version": "us-gaap/2020",
+        "ddate": "20200930",
+        "qtrs": "4",
+        "uom": "USD",
+        "value": "1.6600",
+        "coreg": "",
+        "segments": "",
+        "footnote": "",
+        "sec_tag_definition": {
+          "tag": "CommonStockDividendsPerShareCashPaid",
+          "version": "us-gaap/2020",
+          "custom": "0",
+          "datatype": "perShare",
+          "tlabel": "Common Stock, Dividends, Per Share, Cash Paid",
+          "doc": "Aggregate dividends paid during the period for each share of common stock outstanding."
+        }
+      }
+    ],
+    "matching_pre_rows": [
+      {
+        "adsh": "0001140859-20-000050",
+        "report": "6",
+        "line": "19",
+        "stmt": "EQ",
+        "inpth": "0",
+        "tag": "DividendsCommonStockCash",
+        "version": "us-gaap/2020",
+        "plabel": "Cash dividends",
+        "negating": "1"
+      },
+      {
+        "adsh": "0001140859-20-000050",
+        "report": "7",
+        "line": "1",
+        "stmt": "EQ",
+        "inpth": "1",
+        "tag": "CommonStockDividendsPerShareCashPaid",
+        "version": "us-gaap/2020",
+        "plabel": "Cash dividends (usd per share)",
+        "negating": "0"
+      },
+      {
+        "adsh": "0001140859-20-000050",
+        "report": "8",
+        "line": "43",
+        "stmt": "CF",
+        "inpth": "0",
+        "tag": "PaymentsOfDividendsCommonStock",
+        "version": "us-gaap/2020",
+        "plabel": "Cash dividends on common stock",
+        "negating": "1"
+      }
+    ],
+    "annual_cash_paid_qtrs4_20200930_found": [
+      {
+        "adsh": "0001140859-20-000050",
+        "tag": "CommonStockDividendsPerShareCashPaid",
+        "version": "us-gaap/2020",
+        "ddate": "20200930",
+        "qtrs": "4",
+        "uom": "USD",
+        "value": "1.6600",
+        "coreg": "",
+        "segments": "",
+        "footnote": "",
+        "sec_tag_definition": {
+          "tag": "CommonStockDividendsPerShareCashPaid",
+          "version": "us-gaap/2020",
+          "custom": "0",
+          "datatype": "perShare",
+          "tlabel": "Common Stock, Dividends, Per Share, Cash Paid",
+          "doc": "Aggregate dividends paid during the period for each share of common stock outstanding."
+        }
+      }
+    ],
+    "target_date_per_share_facts_found": []
+  },
+  "old_yahoo_COR_original": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result/COR.json",
+    "sha256": "17c0faefc148ad91e09a56125f3849c531be35cf22a8258df93b58eeb4c450f4",
+    "attempt_record": {
+      "code": "COR",
+      "original_ticker": "COR",
+      "returned_symbol": "COR",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/COR",
+      "params": {
+        "period1": 1577836800,
+        "period2": 1782864000,
+        "interval": "1d",
+        "events": "div,splits"
+      },
+      "retrieved_at": "2026-10-15T19:47:11.963613+08:00",
+      "file": "COR.json",
+      "bytes": 178371,
+      "sha256": "17c0faefc148ad91e09a56125f3849c531be35cf22a8258df93b58eeb4c450f4"
+    },
+    "metadata": {
+      "symbol": "COR",
+      "longName": "Cencora, Inc.",
+      "shortName": "Cencora, Inc.",
+      "exchangeName": "NYQ",
+      "currency": "USD",
+      "dataGranularity": "1d"
+    },
+    "requested_event_window": {
+      "start": "2019-10-01",
+      "end": "2020-09-30"
+    },
+    "query_event_coverage_start": "2020-01-01",
+    "coverage_complete_for_requested_window": false,
+    "returned_dividend_events": [
+      {
+        "date": "2020-02-13",
+        "amount": 0.42
+      },
+      {
+        "date": "2020-03-30",
+        "amount": 1.22
+      },
+      {
+        "date": "2020-05-15",
+        "amount": 0.42
+      },
+      {
+        "date": "2020-06-29",
+        "amount": 1.22
+      },
+      {
+        "date": "2020-08-14",
+        "amount": 0.42
+      },
+      {
+        "date": "2020-09-29",
+        "amount": 1.22
+      }
+    ],
+    "sum_of_returned_events_only": 4.92,
+    "full_window_total": null,
+    "missing_event_coverage": {
+      "start": "2019-10-01",
+      "end": "2019-12-31",
+      "reason": "saved query begins 2020-01-01; unavailable events are unknown, not zero"
+    }
+  },
+  "new_vendor_overrides": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-corporate_action_overrides.csv",
+    "sha256": "ebed89ded2ff749133447f910fe9e4e75b27922e760cc1e6c49a6397f44017c5",
+    "matching_COR_override_rows": [
+      {
+        "ticker": "COR",
+        "date": "2019-12-30",
+        "split_factor": "",
+        "dividend": "0.0",
+        "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show."
+      },
+      {
+        "ticker": "COR",
+        "date": "2020-03-30",
+        "split_factor": "",
+        "dividend": "0.0",
+        "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show."
+      },
+      {
+        "ticker": "COR",
+        "date": "2020-06-29",
+        "split_factor": "",
+        "dividend": "0.0",
+        "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show."
+      },
+      {
+        "ticker": "COR",
+        "date": "2020-09-29",
+        "split_factor": "",
+        "dividend": "0.0",
+        "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show."
+      }
+    ],
+    "CoreSite_date_old_events_amount_sum": 3.66,
+    "issuer_annual_cash_paid_per_share": "1.6600"
+  },
+  "interpretation_boundary": "The saved data show ticker reuse contamination: the old Yahoo object is labeled COR/Cencora yet carries CoreSite-sized $1.22 distributions on three matching ex-dates, and the saved override table zeros those dates. The 2020 AmerisourceBergen 10-K reports annual common dividends paid of $1.6600 per share (qtrs=4, ddate 20200930). This supports the issuer-mismatch diagnosis; it does not independently verify each ex-date or the full legal distribution history. Missing 2019 Q4 old Yahoo events are unknown, never treated as zero.",
+  "input_hashes": {
+    "http_ledger": "1a024312a7b7ff9edc1972879bc164550849185400f4c61e1dac8d2efc5a78fe",
+    "sec_zip": "7cabec2c9b90511983623e6db3869b24c7a894466bd409f060a8da32790ae68e",
+    "old_attempts": "34de27e077d34feb02a8df7d85cd5e83d7dc055ce2acbdf9508fd8dc51c713e2",
+    "old_verification": "a7a89d3b0ba9f4595f45ceb70019eebf4ad545b9620287b6bf6a5c7fab2637ec",
+    "old_COR_json": "17c0faefc148ad91e09a56125f3849c531be35cf22a8258df93b58eeb4c450f4",
+    "override_csv": "ebed89ded2ff749133447f910fe9e4e75b27922e760cc1e6c49a6397f44017c5"
+  },
+  "execution": {
+    "started_at": "2026-10-20T20:23:50.915229+08:00",
+    "completed_at": "2026-10-20T20:24:13.771183+08:00",
+    "script_sha256": "0dee656533d9d9d7e5138ecfbbd86211d3c80022803f4c64e5e2f5d69058996d"
+  }
+}

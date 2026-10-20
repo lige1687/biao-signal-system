@@ -1,0 +1,30 @@
+{
+  "mission": "用已取得的2014Q1候选财报小样核年报字段覆盖和口径问题，不算因子效果",
+  "read_only_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-qualification-2014q1/annual-submissions.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-qualification-2014q1/presentation.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-qualification-2014q1/statement-facts.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/sec-fsds-2014q1.zip",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/candidate-ciks-v2.json"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/financial-tag-feasibility.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/financial-tag-feasibility.json"
+  ],
+  "scope": [
+    "仅读已完成Q1小样，不能读仍写的fsds-candidate-panel文件",
+    "候选899CIK×10K/10KA，按SUB.period与NUM ddATE最近且相差至多7天只是候选当前年日期，不据此金融接受；保留多候选，不能比较年报FY号与日历年偷换。无法近似匹配原样报缺。",
+    "按同accession当前候选日期qtrs4匹配revenue、COGS、SGA、interest四个字段候选，qtrs0匹配StockholdersEquity、CommonStockholdersEquity、PreferredStockValue/CarryingValue/RedemptionValue。别替代/自动0/计算ratio。",
+    "输出每组原始tag在IS/BS与当前日期出现的filing数，四流量联合、加权益、加显式preferred金额或0的联合数量；列所有收入/COGS/SGA/interest语义相关custom tags和原PRE标签，供root挑映射而非Luna判断。",
+    "从ZIP tag.txt只取相应标准tag定义与version、custom、crdr，一行最小摘要；不要复制巨大表。",
+    "具体tags收入: Revenues,SalesRevenueNet,RevenueFromContractWithCustomerExcludingAssessedTax,RevenueFromContractWithCustomerIncludingAssessedTax,SalesRevenueGoodsNet,SalesRevenueServicesNet。成本:CostOfRevenue,CostOfGoodsAndServicesSold,CostOfGoodsSold,CostOfServices。SGA:SellingGeneralAndAdministrativeExpense。interest:InterestExpense,InterestAndDebtExpense,InterestExpenseDebt,InterestExpenseNonOperating。各tag分别计数，不宣称这些可自动互换。",
+    "给AAPL/MSFT/GOOG/AMZN/五个实际缺字段公司样例的原tag/value/statement/date，保留如2013年没有Q1入档原因；不要猜。",
+    "写小Python和JSON，局部自核日期/uniqueaccession和输入hash，实际运行一次；不新增取数/效果统计/正式源码；不占别的文件"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "created_at": "2026-10-20T19:49:06.350369+08:00",
+  "controller_review_required": true
+}

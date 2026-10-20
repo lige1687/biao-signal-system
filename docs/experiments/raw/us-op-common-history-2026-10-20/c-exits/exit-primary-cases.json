@@ -1,0 +1,209 @@
+{
+  "schema": "exit-primary-case-review/1",
+  "scope": "Source-only issuer action qualification for four named exit-month gaps. No terminal values, proceeds, security counts, returns, or strategy effects calculated.",
+  "events": [
+    {
+      "event": "EMC-201609",
+      "removed": "2016-09-08",
+      "consideration_and_rights": [
+        "Dell 2016 Q3 Form 10-Q reports that each EMC share at the September 7, 2016 effective time was converted to $24.05 cash plus 0.11146 Dell Class V common share, with cash instead of any fractional Class V share.",
+        "The Class V shares were designed to track Dell’s economic interest in the Class V Group (then including about 65% of Dell’s VMware economic interest); the filing states this was tracking-stock exposure, not direct ownership or recourse to those group assets. The market price was not guaranteed to track that interest.",
+        "Dell’s 2019 Form 10-K reports Class V was exchanged on December 28, 2018 for either $120 cash per share subject to a $14 billion aggregate cash cap, or 1.8066 Dell Class C shares. This later conversion is part of the original entitlement chain, not a value assigned here."
+      ],
+      "dividends": "The two saved Dell filings reviewed here do not establish whether a Class V dividend was paid over the full holding interval. VMware dividend context in the 2016 filing is not proof of all later Dell Class V distributions. Unknown.",
+      "recipient_quote": {
+        "ticker": "DVMT",
+        "date": "2016-09-30",
+        "rows": 0,
+        "status": "No exact-day DVMT quote in the saved prices.parquet. The tracking-share entitlement remains unpriced here; it must not be set to zero."
+      },
+      "sources": [
+        {
+          "event": "EMC-201609",
+          "name": "emc-dell-2016q3-10q.html",
+          "url": "https://investors.delltechnologies.com/sec-filings/all-sec-filings/content/0001571996-16-000021/delltechnologiesq3fy1710q.htm",
+          "source_date": "2016-12-09",
+          "issuer": "Dell Technologies",
+          "purpose": "actual EMC merger terms, close/effective date, Class V tracking-stock rights and dividend authority/record context",
+          "started_at": "2026-10-20T21:04:29+0800",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "final_url": "https://investors.delltechnologies.com/sec-filings/all-sec-filings/content/0001571996-16-000021/delltechnologiesq3fy1710q.htm",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-primary-cases/originals/emc-dell-2016q3-10q.html",
+          "bytes": 3606842,
+          "sha256": "750fae20d65620c5c7b12180ea9a65ff0ab025fe6523e3044f241415bdc00305",
+          "ended_at": "2026-10-20T21:04:32+0800"
+        },
+        {
+          "event": "EMC-201609",
+          "name": "dell-class-v-completion-2018.html",
+          "url": "https://investors.delltechnologies.com/sec-filings/all-sec-filings/content/0001571996-19-000008/delltechnologiesfy1910k.htm",
+          "source_date": "2019-03-29",
+          "issuer": "Dell Technologies",
+          "purpose": "actual Class V tracking-share exchange completion and cash/share election rights",
+          "started_at": "2026-10-20T21:04:33+0800",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "final_url": "https://investors.delltechnologies.com/sec-filings/all-sec-filings/content/0001571996-19-000008/delltechnologiesfy1910k.htm",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-primary-cases/originals/dell-class-v-completion-2018.html",
+          "bytes": 7244411,
+          "sha256": "7f7dd6a6b1791f0904464a54853fafb339e8ec66eb068d009fe7ea53d5b2ca26",
+          "ended_at": "2026-10-20T21:04:35+0800"
+        }
+      ]
+    },
+    {
+      "event": "STJ-201701",
+      "removed": "2017-01-05",
+      "consideration_and_rights": [
+        "Abbott’s saved completion release says the acquisition completed January 4, 2017 and that January 4 was the last day St. Jude Medical shares traded on the NYSE.",
+        "The saved completion release does not state cash/share exchange ratios or dividend treatment. Abbott investor filing page returned HTTP 403, so those terms and any St. Jude dividend remain unverified from saved originals."
+      ],
+      "dividends": "Unknown from the saved accessible original; do not infer zero.",
+      "recipient_quote": {
+        "ticker": "ABT",
+        "date": "2017-01-31",
+        "rows": 1,
+        "status": "One exact-day row in saved prices.parquet: close 41.77000045776367, adjusted close 34.844304229090326, volume 12,318,200, source yahoo. Positive-volume observation with no matching no_trade_days record; this establishes quote presence only, not merger entitlement or execution."
+      },
+      "sources": [
+        {
+          "event": "STJ-201701",
+          "name": "abbott-stj-completion-2017.html",
+          "url": "https://abbott.mediaroom.com/2017-01-04-Abbott-Completes-the-Acquisition-of-St-Jude-Medical",
+          "source_date": "2017-01-04",
+          "issuer": "Abbott Laboratories",
+          "purpose": "completion date and last trading day of STJ",
+          "started_at": "2026-10-20T21:04:40+0800",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "final_url": "https://abbott.mediaroom.com/2017-01-04-Abbott-Completes-the-Acquisition-of-St-Jude-Medical",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-primary-cases/originals/abbott-stj-completion-2017.html",
+          "bytes": 203512,
+          "sha256": "65618a41e0b9ec90d5e0c65f587a665ccbeaa8ac5fad994158e4971c00cdb878",
+          "ended_at": "2026-10-20T21:04:44+0800"
+        },
+        {
+          "event": "STJ-201701",
+          "name": "abbott-2017-10k.html",
+          "url": "https://www.abbottinvestor.com/sec-filings/sec-filing/10-k/0001047469-17-000744/",
+          "source_date": "2017-02-17",
+          "issuer": "Abbott Laboratories",
+          "purpose": "actual St Jude merger terms/effective date and whether the declared St Jude dividend was paid",
+          "started_at": "2026-10-20T21:04:36+0800",
+          "status": 403,
+          "error": "HTTP Error 403: Forbidden",
+          "ended_at": "2026-10-20T21:04:39+0800"
+        }
+      ]
+    },
+    {
+      "event": "HAR-201703",
+      "removed": "2017-03-16",
+      "consideration_and_rights": [
+        "Samsung’s March 10, 2017 completion release says HARMAN holders were to receive $112 cash per share; HARMAN common shares ceased trading before the March 13 market open and were delisted. Cash-only consideration is stated in this release."
+      ],
+      "dividends": "HARMAN’s January 26 release declared $0.35 per share for the quarter ended December 31, 2016, payable February 22, 2017 to holders of record February 6. The release states scheduled payment; this review did not separately verify settlement.",
+      "recipient_quote": {
+        "ticker": null,
+        "date": "2017-03-31",
+        "rows": null,
+        "status": "No receiving equity identified in the saved deal terms; consideration described as cash. No recipient-equity quote check applies."
+      },
+      "sources": [
+        {
+          "event": "HAR-201703",
+          "name": "samsung-harman-completion-2017.html",
+          "url": "https://news.samsung.com/us/samsung-electronics-completes-acquisition-of-harman/",
+          "source_date": "2017-03-10",
+          "issuer": "Samsung Electronics / HARMAN",
+          "purpose": "completion, $112 per share cash, cessation of trading/delisting date",
+          "started_at": "2026-10-20T21:04:45+0800",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "final_url": "https://news.samsung.com/us/samsung-electronics-completes-acquisition-of-harman/",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-primary-cases/originals/samsung-harman-completion-2017.html",
+          "bytes": 59698,
+          "sha256": "22df89038e3e739b591052c42536fcff13f3a94981d5fb9475033ef21969202e",
+          "ended_at": "2026-10-20T21:04:48+0800"
+        },
+        {
+          "event": "HAR-201703",
+          "name": "harman-dividend-2017.html",
+          "url": "https://news.harman.com/releases/harman-announces-quarterly-cash-dividend-5693314",
+          "source_date": "2017-01-26",
+          "issuer": "HARMAN",
+          "purpose": "declared $0.35 dividend, record date and payment date",
+          "started_at": "2026-10-20T21:04:49+0800",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "final_url": "https://news.harman.com/releases/harman-announces-quarterly-cash-dividend-5693314",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-primary-cases/originals/harman-dividend-2017.html",
+          "bytes": 49565,
+          "sha256": "599d9d3ba8fe46905eba2218edf797a38f5044f457510d7e120bfcee50765252",
+          "ended_at": "2026-10-20T21:04:53+0800"
+        }
+      ]
+    },
+    {
+      "event": "VAR-202104",
+      "removed": "2021-04-20",
+      "consideration_and_rights": [
+        "Siemens Healthineers’ August 2, 2020 agreement announcement states Varian shareholders would receive USD 177.50 cash per share.",
+        "The April 15, 2021 completion release says the acquisition was completed and Varian common stock ceased NYSE trading before that day’s open."
+      ],
+      "dividends": "The two saved Siemens releases do not establish whether a separate Varian dividend was declared or paid. Unknown.",
+      "recipient_quote": {
+        "ticker": null,
+        "date": "2021-04-30",
+        "rows": null,
+        "status": "No receiving equity identified in the saved deal terms; consideration described as cash. No recipient-equity quote check applies."
+      },
+      "sources": [
+        {
+          "event": "VAR-202104",
+          "name": "siemens-varian-announcement-2020.html",
+          "url": "https://www.siemens-healthineers.com/press/releases/august3.html",
+          "source_date": "2020-08-02",
+          "issuer": "Siemens Healthineers / Varian",
+          "purpose": "merger agreement consideration $177.50 cash per share and expected closing period",
+          "started_at": "2026-10-20T21:04:54+0800",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "final_url": "https://www.siemens-healthineers.com/press/releases/august3.html",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-primary-cases/originals/siemens-varian-announcement-2020.html",
+          "bytes": 85620,
+          "sha256": "f47bb4e9e4625f43ac8649fa5f5ef71e615f1c6088ddaacb4dd49ada890dcb90",
+          "ended_at": "2026-10-20T21:04:57+0800"
+        },
+        {
+          "event": "VAR-202104",
+          "name": "siemens-varian-completion-2021.html",
+          "url": "https://www.siemens-healthineers.com/press/releases/varian-closing",
+          "source_date": "2021-04-15",
+          "issuer": "Siemens Healthineers",
+          "purpose": "actual completion/effective date and cessation of VAR trading",
+          "started_at": "2026-10-20T21:04:58+0800",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "final_url": "https://www.siemens-healthineers.com/press/releases/varian-closing",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-primary-cases/originals/siemens-varian-completion-2021.html",
+          "bytes": 78697,
+          "sha256": "b70606d029cb1016cae19d8473e81801ce7fb9c35d1d90aa143f3775ef93a5a1",
+          "ended_at": "2026-10-20T21:05:00+0800"
+        }
+      ]
+    }
+  ],
+  "source_limits": [
+    "At most two necessary documents per event were attempted. Abbott investor host returned 403; no alternate host, retry, or additional request was made.",
+    "No original obtained in this task supports all historical dividends across each full interval; unknown remains unknown.",
+    "Sources establish announced/completed transaction terms as described but do not independently establish individual account-level cash or share delivery."
+  ],
+  "price_input": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/prices.parquet",
+    "sha256": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563",
+    "query_scope": "Exact receiving ticker/date pairs only: DVMT 2016-09-30; ABT 2017-01-31. No price changes, returns, or terminal values calculated."
+  },
+  "interpretation_boundary": "Removal from an index only means the index stopped listing the company; it does not itself sell an investor’s shares or create an economic loss. Missing quote or missing entitlement evidence is not zero value."
+}

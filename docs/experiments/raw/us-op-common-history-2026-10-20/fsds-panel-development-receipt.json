@@ -1,0 +1,44 @@
+{
+  "schema": "sec-fsds-panel-development-receipt/1",
+  "status": "implementation_and_synthetic_test_passed",
+  "completed_at_utc": "2026-10-20T11:36:03Z",
+  "contract": {
+    "path": "docs/experiments/raw/us-op-common-history-2026-10-20/luna-fsds-panel-contract.json",
+    "sha256": "765b9f923c9852d3de1655aa3054bdb77d3a07ebd9d67bf1e22156c57fe06c26"
+  },
+  "artifacts": {
+    "extract_fsds_panel.py": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/extract_fsds_panel.py",
+      "sha256": "03c6f7e536a9868ffde0267538c2f916c7dfb7b794187fadb3f99b1d2160df53",
+      "bytes": 17706
+    },
+    "test_extract_fsds_panel.py": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/test_extract_fsds_panel.py",
+      "sha256": "3701f3a47fe95a519d02552f36e63f4b70449effc5f5a944acf3ad0d649541e8",
+      "bytes": 8941
+    }
+  },
+  "verification": {
+    "synthetic_test_command": "python3 -B -m unittest -v docs/experiments/raw/us-op-common-history-2026-10-20/test_extract_fsds_panel.py",
+    "synthetic_test_status": "passed",
+    "tests_run": 1,
+    "syntax_check": "AST parse passed for extractor and test",
+    "test_coverage": [
+      "preserve form, instance, prevrpt, nciks, aciks and all other SUB source fields",
+      "multiple candidate CIKs, noncandidate CIK exclusion, and 10-K/10-K/A selection",
+      "IS/BS main statements only and exact accession/tag/version linkage",
+      "USD, qtrs 0/4, entity-wide filtering; retain duplicates and conflicts",
+      "preserve comparative ddate and ddate differing from SEC period by two days",
+      "per-source and across-source duplicate detection without dropping rows"
+    ],
+    "synthetic_test_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-panel-synthetic",
+    "synthetic_test_tmp": "created on the external test directory and removed by the test TemporaryDirectory context; no pre-existing data was removed",
+    "full_historical_extraction_started": false,
+    "network_or_market_statistics": false
+  },
+  "limitations": [
+    "Implementation only; no full historical SEC ZIP batch was run.",
+    "The CLI requires a future SHA-bound --job; this task did not create or execute that job.",
+    "The extractor preserves filings and source fact rows; it does not choose annual values, harmonize tags, construct operating profitability, or calculate returns."
+  ]
+}

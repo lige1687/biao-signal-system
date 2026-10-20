@@ -1,0 +1,57 @@
+{
+  "schema": "annual-profitability-adapter-development-receipt/1",
+  "definition": "research.fundamental.annual_operating_profitability_after_da@1.0.0",
+  "status": "v2_overflow_guard_tests_passed",
+  "scope": "pure adapter only; no real-company OP, returns, or research run",
+  "files": {
+    "adapter": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/annual_profitability.py",
+      "sha256": "29b2cf2ca25f3822c2d0799f9fb138c1e4682046068ce84d13f27febd59db3d3"
+    },
+    "test": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/tests/unit/test_annual_profitability.py",
+      "sha256": "f1d3b59e1cc8dc67c55727e8d5c6aca94f24b20422f8f99767d94c56a2142079"
+    }
+  },
+  "tests": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest tests.unit.test_annual_profitability",
+      "exit_code": 1,
+      "note": "Initial import failed because src was not on sys.path."
+    },
+    {
+      "command": "PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest tests.unit.test_annual_profitability",
+      "exit_code": 0,
+      "result": "Ran 7 tests; OK"
+    },
+    {
+      "command": "PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest tests.unit.test_annual_profitability",
+      "exit_code": 0,
+      "result": "Ran 8 tests; OK; includes finite-input subtraction and division overflow counterexamples."
+    }
+  ],
+  "corrections": [
+    {
+      "reason": "Reran the same focused tests with the repository src directory on PYTHONPATH after the initial invocation could not import the package."
+    },
+    {
+      "from": "v1",
+      "to": "v2",
+      "reason": "Finite inputs can still overflow during subtraction (-1e308 - 1e308) or division (positive subnormal equity); the adapter now returns None unless the computed result is finite."
+    }
+  ],
+  "versions": [
+    {
+      "version": "v1",
+      "adapter_sha256": "45e6201ed8298d96816df081b25ba96224913d1a2fee049dae075aee0f6caa73",
+      "test_sha256": "d3de99c7826ec7d31aaf5977125d644754ffc73f2d97ffb2f25db63e38cdce00",
+      "note": "Original adapter/test retained in receipt history."
+    },
+    {
+      "version": "v2",
+      "adapter_sha256": "29b2cf2ca25f3822c2d0799f9fb138c1e4682046068ce84d13f27febd59db3d3",
+      "test_sha256": "f1d3b59e1cc8dc67c55727e8d5c6aca94f24b20422f8f99767d94c56a2142079",
+      "note": "Reject non-finite computed results as well as non-finite inputs."
+    }
+  ]
+}

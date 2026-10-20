@@ -1,0 +1,92 @@
+{
+  "schema": "candidate-action-qualification-receipt/1",
+  "status": "completed_source_action_window_linkage_only",
+  "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+  "candidate_rows": 2181,
+  "matched_action_window_links": 222,
+  "candidate_months_with_at_least_one_exact_ticker_action_match": 66,
+  "total_months": 120,
+  "focus_action_links": 46,
+  "network_requests": 0,
+  "price_data_read": false,
+  "op_values_calculated": false,
+  "future_returns_calculated": false,
+  "source_input_hashes": {
+    "accounting-candidate-rows.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-common-panel-v5/accounting-candidate-rows.csv",
+      "sha256": "6458a4d23f76add8ed506a631eaf571adf07776b630e0f2f158bb3096285126f"
+    },
+    "johnbrick-spinoffs.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-spinoffs.csv",
+      "sha256": "af7eb38d1d428bed6b9dd6f66118b2c0f7a12c63e19eef4cfa5887f6925944b6"
+    },
+    "johnbrick-corporate_action_overrides.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-corporate_action_overrides.csv",
+      "sha256": "ebed89ded2ff749133447f910fe9e4e75b27922e760cc1e6c49a6397f44017c5"
+    },
+    "johnbrick-dividend_rescale.csv": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-dividend_rescale.csv",
+      "sha256": "942c0ddeef804c383e21c06a5a439cf07a9e7ab646272ba6320d9a23615d7597"
+    }
+  },
+  "external_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/candidate-action-qualification",
+  "external_manifest_sha256": "2e1d7329526b0730b8b7fcab4dfd42ef389cb58bebd7dafbd7d828646a386e88",
+  "external_manifest": {
+    "schema": "candidate-action-qualification-manifest/1",
+    "inputs": {
+      "accounting-candidate-rows.csv": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-common-panel-v5/accounting-candidate-rows.csv",
+        "sha256": "6458a4d23f76add8ed506a631eaf571adf07776b630e0f2f158bb3096285126f"
+      },
+      "johnbrick-spinoffs.csv": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-spinoffs.csv",
+        "sha256": "af7eb38d1d428bed6b9dd6f66118b2c0f7a12c63e19eef4cfa5887f6925944b6"
+      },
+      "johnbrick-corporate_action_overrides.csv": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-corporate_action_overrides.csv",
+        "sha256": "ebed89ded2ff749133447f910fe9e4e75b27922e760cc1e6c49a6397f44017c5"
+      },
+      "johnbrick-dividend_rescale.csv": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-dividend_rescale.csv",
+        "sha256": "942c0ddeef804c383e21c06a5a439cf07a9e7ab646272ba6320d9a23615d7597"
+      }
+    },
+    "outputs": [
+      {
+        "path": "action-window-links.jsonl",
+        "bytes": 247629,
+        "sha256": "e037509f6d41dd4e39848644f286a01991922a836b2ea53a10893f4dcfac3503"
+      },
+      {
+        "path": "monthly-impact-counts.jsonl",
+        "bytes": 24671,
+        "sha256": "3fe2bd1750b1cd36bc6b363bbcc871bc3f60fc25023199cc56af8955380ce999"
+      },
+      {
+        "path": "focus-case-links.json",
+        "bytes": 68362,
+        "sha256": "903eb453976311bec60a7ca7c9f407dd147ba26ed52d9213848c3eb67dcd615e"
+      },
+      {
+        "path": "historical-rescale-rule.json",
+        "bytes": 1019,
+        "sha256": "631efa1be132b671e870e05842b6d3fa506d7ff1b9c5b6d2553288976faf722f"
+      },
+      {
+        "path": "summary.json",
+        "bytes": 1538,
+        "sha256": "714a749eb452b36fdbdfbe1a0d2f0ae05fe75603a0c2005fbfb7798ee572a63f"
+      }
+    ],
+    "output_total_bytes": 343219,
+    "network_requests": 0,
+    "price_data_read": false,
+    "op_or_return_calculation": false,
+    "appledouble_sidecars": "Excluded from manifest and left untouched."
+  },
+  "review_limits": [
+    "All action records remain manually curated inputs and are not independently issuer-source qualified in this task.",
+    "An action in a momentum window is explicitly marked not_yet_qualified; a formation-to-target action is outcome_pending. The formation candidate stays included.",
+    "The historical dividend rescale row is a cutoff-based dividend adjustment rule, not a dated event."
+  ]
+}

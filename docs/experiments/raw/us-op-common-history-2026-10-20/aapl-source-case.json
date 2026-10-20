@@ -1,0 +1,145 @@
+{
+  "purpose": "one annual filing field/period/availability counterexample, no OP score or returns",
+  "accession": "0000320193-20-000096",
+  "original_period": [
+    "2019-09-29",
+    "2020-09-26"
+  ],
+  "fsds_period": "20200930",
+  "fsds_num_ddate": "20200930",
+  "filed": "20201030",
+  "accepted_raw_timezone_not_assumed": "2020-10-29 18:06:00.0",
+  "same_accession_companyfacts": {
+    "revenue": {
+      "tag": "RevenueFromContractWithCustomerExcludingAssessedTax",
+      "start": "2019-09-29",
+      "end": "2020-09-26",
+      "val": 274515000000,
+      "accn": "0000320193-20-000096",
+      "fy": 2020,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2020-10-30"
+    },
+    "cost": {
+      "tag": "CostOfGoodsAndServicesSold",
+      "start": "2019-09-29",
+      "end": "2020-09-26",
+      "val": 169559000000,
+      "accn": "0000320193-20-000096",
+      "fy": 2020,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2020-10-30"
+    },
+    "selling_admin": {
+      "tag": "SellingGeneralAndAdministrativeExpense",
+      "start": "2019-09-29",
+      "end": "2020-09-26",
+      "val": 19916000000,
+      "accn": "0000320193-20-000096",
+      "fy": 2020,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2020-10-30"
+    },
+    "interest": {
+      "tag": "InterestExpense",
+      "start": "2019-09-29",
+      "end": "2020-09-26",
+      "val": 2873000000,
+      "accn": "0000320193-20-000096",
+      "fy": 2020,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2020-10-30"
+    },
+    "reported_operating_income": {
+      "tag": "OperatingIncomeLoss",
+      "start": "2019-09-29",
+      "end": "2020-09-26",
+      "val": 66288000000,
+      "accn": "0000320193-20-000096",
+      "fy": 2020,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2020-10-30"
+    },
+    "research_development": {
+      "tag": "ResearchAndDevelopmentExpense",
+      "start": "2019-09-29",
+      "end": "2020-09-26",
+      "val": 18752000000,
+      "accn": "0000320193-20-000096",
+      "fy": 2020,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2020-10-30"
+    },
+    "total_stockholders_equity": {
+      "tag": "StockholdersEquity",
+      "end": "2020-09-26",
+      "val": 65339000000,
+      "accn": "0000320193-20-000096",
+      "fy": 2020,
+      "fp": "FY",
+      "form": "10-K",
+      "filed": "2020-10-30"
+    }
+  },
+  "primary_statement_comparison": {
+    "revenue": {
+      "fsds_primary_values": [
+        274515000000.0
+      ],
+      "agrees": true
+    },
+    "cost": {
+      "fsds_primary_values": [
+        169559000000.0
+      ],
+      "agrees": true
+    },
+    "selling_admin": {
+      "fsds_primary_values": [
+        19916000000.0
+      ],
+      "agrees": true
+    },
+    "interest": {
+      "fsds_primary_values": [],
+      "agrees": false
+    },
+    "reported_operating_income": {
+      "fsds_primary_values": [
+        66288000000.0
+      ],
+      "agrees": true
+    },
+    "research_development": {
+      "fsds_primary_values": [
+        18752000000.0
+      ],
+      "agrees": true
+    },
+    "total_stockholders_equity": {
+      "fsds_primary_values": [
+        65339000000.0
+      ],
+      "agrees": true
+    }
+  },
+  "arithmetic_usd": {
+    "revenue_less_cost_less_sga_less_interest": 82167000000,
+    "reported_operating_income": 66288000000,
+    "difference_explained_by_rd_less_interest": 15879000000
+  },
+  "conclusion": "Primary-only FSDS omits this interest fact; a missing field is not zero. Reported operating income is a different formula. FSDS dates are rounded. Common book-equity denominator is not certified; no profitability score constructed.",
+  "input_sha256": {
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261019T005338-7bfb5ca1b315/result/sources/aapl-companyfacts.json": "73a86c6aedc31f77cac2ea4df5f80f0b3bd7e6eb58bb4e01444fbedf3afb9c43",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/submissions.csv": "065c80c6fe6edae076c2f326770a54b18b0f6e1caccdfb9fc72fb10811ace327",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/fsds-candidate-panel/statement-facts.csv": "be3ce99d4c1ab38cd907b5613e6b092b91b6b01cb15400a7b21c9ba7831d1093"
+  },
+  "script_sha256": "a31fbfb622ddfc754804ada99bf69853c97bb6b35ba422dee2dfd96b6be9918b",
+  "effect_runs": 0
+}

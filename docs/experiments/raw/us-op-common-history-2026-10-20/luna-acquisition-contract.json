@@ -1,0 +1,57 @@
+{
+  "mission": "执行固定公开来源获取，并只核下载格式与SHA，不计算效力",
+  "task_scope": [
+    "用Python执行fetch_public.py requests-03.json一次",
+    "核原件下载SHA、csv/parquet格式、members表字段，返回覆盖和字段",
+    "任何失败保留并报告，不自行新增URL或重试/替代"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/fetch_public.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/requests-03.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/http-ledger.jsonl",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/fja-history.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/fja-README.md",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/fja-LICENSE",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-fetch_crsp.py",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-build_universe.py",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/full_check_permno_map.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/members.parquet",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/prices.parquet",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/renames.csv",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/acquisition-03-receipt.json"
+  ],
+  "network_allowed": true,
+  "network_urls": [
+    "https://raw.githubusercontent.com/fja05680/sp500/a2430f2af0c79ddf0748e91de11bdeb1616ab5a7/S%26P%20500%20Historical%20Components%20%26%20Changes%20%28Updated%29.csv",
+    "https://raw.githubusercontent.com/fja05680/sp500/a2430f2af0c79ddf0748e91de11bdeb1616ab5a7/README.md",
+    "https://raw.githubusercontent.com/fja05680/sp500/a2430f2af0c79ddf0748e91de11bdeb1616ab5a7/LICENSE",
+    "https://raw.githubusercontent.com/Johnbrick123/sp500-data/6738888cc01c5f78aba3a5fe24e85d8446ea0b19/fetch_crsp.py",
+    "https://raw.githubusercontent.com/Johnbrick123/sp500-data/6738888cc01c5f78aba3a5fe24e85d8446ea0b19/build_universe.py",
+    "https://github.com/Johnbrick123/sp500-data/releases/download/data/full_check_permno_map.csv",
+    "https://github.com/Johnbrick123/sp500-data/releases/download/data/members.parquet",
+    "https://github.com/Johnbrick123/sp500-data/releases/download/data/prices.parquet",
+    "https://github.com/Johnbrick123/sp500-data/releases/download/data/renames.csv"
+  ],
+  "max_requests": 9,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "下载回执与成员表列/文件指纹；实际全部失败也记录"
+  ],
+  "stop_conditions": [
+    "403/429停止该host，不变通",
+    "已有文件拒绝覆盖",
+    "不修改任何外部项目或旧冻结数据、不跑第三方下载的Python文件"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

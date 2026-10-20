@@ -1,0 +1,1817 @@
+{
+  "schema": "reported-op-common-panel-receipt/1",
+  "status": "completed_source_qualification_only",
+  "scope": {
+    "target_months": 120,
+    "target_period": [
+      "2015-01",
+      "2024-12"
+    ],
+    "formation_calendar_start": "2014-12",
+    "network_requests": 0,
+    "op_values_calculated": false,
+    "future_returns_calculated": false,
+    "strategy_results_calculated": false
+  },
+  "storage": {
+    "mount": "/Volumes/win+mac通用",
+    "device": 16777238,
+    "uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "free_bytes_preflight": 497978834944,
+    "chosen_output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-common-panel-v5"
+  },
+  "implementation": {
+    "script": "docs/experiments/raw/us-op-common-history-2026-10-20/build_reported_op_common_panel.py",
+    "script_sha256": "4eb7817c63dc57cfe24de4ca4e1337abdad99f240fcc185b1272897f296b9e1f",
+    "tests": "docs/experiments/raw/us-op-common-history-2026-10-20/test_build_reported_op_common_panel.py",
+    "test_sha256": "c81aa39490464b8e6c7dc04bca8f1908c9036cb8bbbb2cb800698dcfc3e49fc9",
+    "synthetic_tests": "10 passed; including June 30 weekend cutoff, June/July annual anchor switch, latest unqualified amendment without fallback, 12 exact momentum endpoints, gap rejection despite positive volume, missing quote does not delete member, mid-period price-source difference interval, and source/price field retention."
+  },
+  "preserved_attempts": [
+    {
+      "attempt": 1,
+      "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-common-panel",
+      "session_id": 41952,
+      "exit_code": 1,
+      "code_sha256": "eda9ce563fbead89d6508bd2bf5e33a606c947af7b176a6fe5b58d6bd2afb22e",
+      "failure": "AppleDouble ._* sidecar was mistaken for CSV while counting manifest rows; data outputs had already been written; original directory preserved without rewriting."
+    },
+    {
+      "attempt": 2,
+      "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-common-panel-v2",
+      "session_id": 73046,
+      "exit_code": 0,
+      "formation_rows": 60509,
+      "accounting_rows": 2181,
+      "note": "completed readback, but only point-date price-source discrepancy links; retained as historical version."
+    },
+    {
+      "attempt": 3,
+      "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-common-panel-v3",
+      "session_id": 6702,
+      "exit_code": 0,
+      "formation_rows": 60509,
+      "accounting_rows": 2181,
+      "note": "retained all 18 discrepancy records but interval links needed correction."
+    },
+    {
+      "attempt": 4,
+      "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-common-panel-v4",
+      "session_id": 69669,
+      "exit_code": 0,
+      "code_sha256": "3789342501fa7b22cf7730ff96472f2e2c692a1aeded9637362637c797a31403",
+      "tool_wait_seconds_approx": 7.1,
+      "note": "final interval-linked qualification output; no earlier attempt overwritten."
+    },
+    {
+      "attempt": 5,
+      "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-common-panel-v5",
+      "session_id": 98758,
+      "exit_code": 0,
+      "code_sha256": "4eb7817c63dc57cfe24de4ca4e1337abdad99f240fcc185b1272897f296b9e1f",
+      "note": "Final output; stores all exact close/adj_close/volume/source values for qualifying or rejected month-end endpoints and 12 momentum endpoints; links every price-source event by interval and keeps unlinked events."
+    }
+  ],
+  "result": {
+    "manifest_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/reported-op-common-panel-v5/manifest.json",
+    "manifest_sha256": "f34c3b5f3afb5e1f05cdba0942908b152eac3fff3ad8c55cfc4d2e6751988a20",
+    "manifest_outputs": [
+      {
+        "path": "all-formation-rows.csv",
+        "sha256": "05cd7c8bf19002716fa63211f3da59eed9bcbbf215ca3abf657ac757fd223d43",
+        "bytes": 248771283,
+        "rows": 60509,
+        "verified_sha256": "05cd7c8bf19002716fa63211f3da59eed9bcbbf215ca3abf657ac757fd223d43",
+        "verified_rows": 60509
+      },
+      {
+        "path": "accounting-candidate-rows.csv",
+        "sha256": "6458a4d23f76add8ed506a631eaf571adf07776b630e0f2f158bb3096285126f",
+        "bytes": 7418480,
+        "rows": 2181,
+        "verified_sha256": "6458a4d23f76add8ed506a631eaf571adf07776b630e0f2f158bb3096285126f",
+        "verified_rows": 2181
+      },
+      {
+        "path": "identity-review.csv",
+        "sha256": "a3349386291d6f483ca44ca22097d701b1ab259d40bbaceb7a8e6d20ea939775",
+        "bytes": 846279,
+        "rows": 5528,
+        "verified_sha256": "a3349386291d6f483ca44ca22097d701b1ab259d40bbaceb7a8e6d20ea939775",
+        "verified_rows": 5528
+      },
+      {
+        "path": "coverage-by-target-year.csv",
+        "sha256": "5113dcc4b70a858b84e6effd16d28871651b0c6539d3239209f914c968288cde",
+        "bytes": 1449,
+        "rows": 10,
+        "verified_sha256": "5113dcc4b70a858b84e6effd16d28871651b0c6539d3239209f914c968288cde",
+        "verified_rows": 10
+      },
+      {
+        "path": "price-source-difference-review.csv",
+        "sha256": "171476dbb88155e1a2859e081753018a968f20feb8894ba0a9154199985e415d",
+        "bytes": 7742,
+        "rows": 18,
+        "verified_sha256": "171476dbb88155e1a2859e081753018a968f20feb8894ba0a9154199985e415d",
+        "verified_rows": 18
+      },
+      {
+        "path": "summary.json",
+        "sha256": "6c1ba3f6c29fe730ae05fe3fbdb2dc789cd7b5dbd2fa8f677dc69db005a38062",
+        "bytes": 1608,
+        "rows": null,
+        "verified_sha256": "6c1ba3f6c29fe730ae05fe3fbdb2dc789cd7b5dbd2fa8f677dc69db005a38062",
+        "verified_rows": null
+      }
+    ],
+    "supersedes_v4_manifest_sha256": "6dbbe1866843948af73be2a260e25f7ef54c18a8b10929c4f03e87333e14729e",
+    "formation_rows": 60509,
+    "formation_rows_per_month": {
+      "min": 502,
+      "median": 505.0,
+      "max": 506
+    },
+    "annual_account_candidate_rows": 2181,
+    "distinct_candidate_ciks": 49,
+    "annual_account_candidates_per_month": {
+      "min": 13,
+      "median": 18.0,
+      "max": 25
+    },
+    "joint_source_mom_and_target_quote_rows": 2174,
+    "joint_per_month_rows": {
+      "min": 13,
+      "median": 18.0,
+      "max": 25
+    },
+    "joint_per_month_ciks": {
+      "min": 13,
+      "median": 18.0,
+      "max": 25
+    },
+    "identity_candidate_rows_by_status": {
+      "exact_candidate": 55584,
+      "no_candidate": 752,
+      "nonexact_candidate": 4126,
+      "ambiguous": 47
+    },
+    "account_candidate_rows_by_identity_status": {
+      "exact_candidate": 2099,
+      "nonexact_candidate": 80,
+      "ambiguous": 2
+    },
+    "full_momentum_window_qualified_rows": 60186,
+    "target_end_quote_present_rows": 60401,
+    "target_end_quote_qualified_rows": 60378,
+    "target_end_quote_missing_or_rejected_rows": 131,
+    "price_source_difference_rows": 18,
+    "price_source_difference_rows_linked_to_intervals": 18,
+    "price_source_difference_interval_links": 204,
+    "membership_removed_before_target_end_rows_all_members": 212,
+    "eligible_candidate_exit_events": [
+      {
+        "ticker": "EMC-201609",
+        "candidate_cik": "0000790070",
+        "selected_sec_name": "EMC CORP",
+        "target_month": "2016-09",
+        "adsh": "0000790070-16-000229",
+        "membership_end_exclusive": "2016-09-08T00:00:00",
+        "exact_target_month_end_quote_present": false,
+        "target_quote_qualification_reason": "missing_exact_ticker_price",
+        "mom_window_qualified": true,
+        "liquidation_or_exit_value_status": "unknown; no terminal value or exit return computed"
+      },
+      {
+        "ticker": "GME",
+        "candidate_cik": "0001326380",
+        "selected_sec_name": "GAMESTOP CORP.",
+        "target_month": "2016-04",
+        "adsh": "0001445305-14-001259",
+        "membership_end_exclusive": "2016-04-25T00:00:00",
+        "exact_target_month_end_quote_present": true,
+        "target_quote_qualification_reason": "",
+        "mom_window_qualified": true,
+        "liquidation_or_exit_value_status": "unknown; no terminal value or exit return computed"
+      },
+      {
+        "ticker": "HAR-201703",
+        "candidate_cik": "0000800459",
+        "selected_sec_name": "HARMAN INTERNATIONAL INDUSTRIES INC /DE/",
+        "target_month": "2017-03",
+        "adsh": "0001193125-15-283170",
+        "membership_end_exclusive": "2017-03-16T00:00:00",
+        "exact_target_month_end_quote_present": false,
+        "target_quote_qualification_reason": "missing_exact_ticker_price",
+        "mom_window_qualified": true,
+        "liquidation_or_exit_value_status": "unknown; no terminal value or exit return computed"
+      },
+      {
+        "ticker": "JCI-201609",
+        "candidate_cik": "0000833444",
+        "selected_sec_name": "TYCO INTERNATIONAL PLC",
+        "target_month": "2016-09",
+        "adsh": "0000833444-15-000091",
+        "membership_end_exclusive": "2016-09-06T00:00:00",
+        "exact_target_month_end_quote_present": false,
+        "target_quote_qualification_reason": "missing_exact_ticker_price",
+        "mom_window_qualified": false,
+        "liquidation_or_exit_value_status": "unknown; no terminal value or exit return computed"
+      },
+      {
+        "ticker": "NWL",
+        "candidate_cik": "0000814453",
+        "selected_sec_name": "NEWELL BRANDS INC.",
+        "target_month": "2023-09",
+        "adsh": "0000814453-23-000026",
+        "membership_end_exclusive": "2023-09-18T00:00:00",
+        "exact_target_month_end_quote_present": true,
+        "target_quote_qualification_reason": "",
+        "mom_window_qualified": true,
+        "liquidation_or_exit_value_status": "unknown; no terminal value or exit return computed"
+      },
+      {
+        "ticker": "STJ-201701",
+        "candidate_cik": "0000203077",
+        "selected_sec_name": "ST JUDE MEDICAL INC",
+        "target_month": "2017-01",
+        "adsh": "0000203077-16-000013",
+        "membership_end_exclusive": "2017-01-05T00:00:00",
+        "exact_target_month_end_quote_present": false,
+        "target_quote_qualification_reason": "missing_exact_ticker_price",
+        "mom_window_qualified": true,
+        "liquidation_or_exit_value_status": "unknown; no terminal value or exit return computed"
+      },
+      {
+        "ticker": "VAR",
+        "candidate_cik": "0000203527",
+        "selected_sec_name": "VARIAN MEDICAL SYSTEMS INC",
+        "target_month": "2021-04",
+        "adsh": "0000203527-19-000025",
+        "membership_end_exclusive": "2021-04-20T00:00:00",
+        "exact_target_month_end_quote_present": false,
+        "target_quote_qualification_reason": "missing_exact_ticker_price",
+        "mom_window_qualified": true,
+        "liquidation_or_exit_value_status": "unknown; no terminal value or exit return computed"
+      }
+    ],
+    "eligible_candidate_register_by_cik": [
+      {
+        "candidate_cik": "0000016732",
+        "tickers": [
+          "CPB"
+        ],
+        "selected_sec_names": [
+          "CAMPBELL SOUP CO"
+        ],
+        "periods": [
+          "20130731",
+          "20140731",
+          "20150731",
+          "20170731",
+          "20180731",
+          "20190731",
+          "20200731",
+          "20210731",
+          "20220731",
+          "20230731"
+        ],
+        "adshs": [
+          "0000016732-13-000023",
+          "0000016732-14-000023",
+          "0000016732-15-000034",
+          "0000016732-17-000058",
+          "0000016732-18-000062",
+          "0000016732-19-000070",
+          "0000016732-20-000111",
+          "0000016732-21-000103",
+          "0000016732-22-000093",
+          "0000016732-23-000109"
+        ],
+        "source_zips": [
+          "sec-fsds-2013q3.zip",
+          "sec-fsds-2014q3.zip",
+          "sec-fsds-2015q3.zip",
+          "sec-fsds-2017q3.zip",
+          "sec-fsds-2018q3.zip",
+          "sec-fsds-2019q3.zip",
+          "sec-fsds-2020q3.zip",
+          "sec-fsds-2021q3.zip",
+          "sec-fsds-2022q3.zip",
+          "sec-fsds-2023q3.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000024545",
+        "tickers": [
+          "TAP"
+        ],
+        "selected_sec_names": [
+          "MOLSON COORS BEVERAGE CO",
+          "MOLSON COORS BREWING CO"
+        ],
+        "periods": [
+          "20131231",
+          "20141231",
+          "20151231",
+          "20161231",
+          "20171231",
+          "20181231",
+          "20191231",
+          "20201231",
+          "20211231",
+          "20221231"
+        ],
+        "adshs": [
+          "0000024545-14-000004",
+          "0000024545-15-000004",
+          "0000024545-16-000054",
+          "0000024545-17-000005",
+          "0000024545-18-000009",
+          "0000024545-19-000007",
+          "0000024545-20-000005",
+          "0000024545-21-000004",
+          "0000024545-22-000005",
+          "0000024545-23-000006"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q1.zip",
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2016q1.zip",
+          "sec-fsds-2017q1.zip",
+          "sec-fsds-2018q1.zip",
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip",
+          "sec-fsds-2022q1.zip",
+          "sec-fsds-2023q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000033185",
+        "tickers": [
+          "EFX"
+        ],
+        "selected_sec_names": [
+          "EQUIFAX INC"
+        ],
+        "periods": [
+          "20131231",
+          "20141231",
+          "20151231",
+          "20161231",
+          "20171231",
+          "20181231",
+          "20191231",
+          "20201231",
+          "20211231",
+          "20221231"
+        ],
+        "adshs": [
+          "0000033185-16-000037",
+          "0000033185-17-000008",
+          "0000033185-18-000011",
+          "0000033185-19-000007",
+          "0000033185-20-000011",
+          "0000033185-21-000025",
+          "0000033185-22-000014",
+          "0000033185-23-000012",
+          "0001144204-14-012238",
+          "0001628280-15-001024"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q1.zip",
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2016q1.zip",
+          "sec-fsds-2017q1.zip",
+          "sec-fsds-2018q1.zip",
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip",
+          "sec-fsds-2022q1.zip",
+          "sec-fsds-2023q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000046080",
+        "tickers": [
+          "HAS"
+        ],
+        "selected_sec_names": [
+          "HASBRO, INC."
+        ],
+        "periods": [
+          "20221231",
+          "20231231"
+        ],
+        "adshs": [
+          "0000046080-23-000017",
+          "0000046080-24-000034"
+        ],
+        "source_zips": [
+          "sec-fsds-2023q1.zip",
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000062996",
+        "tickers": [
+          "MAS"
+        ],
+        "selected_sec_names": [
+          "MASCO CORP /DE/"
+        ],
+        "periods": [
+          "20171231",
+          "20181231",
+          "20201231"
+        ],
+        "adshs": [
+          "0000062996-18-000015",
+          "0000062996-19-000011",
+          "0000062996-21-000008"
+        ],
+        "source_zips": [
+          "sec-fsds-2018q1.zip",
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2021q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000064803",
+        "tickers": [
+          "CVS"
+        ],
+        "selected_sec_names": [
+          "CVS HEALTH CORP"
+        ],
+        "periods": [
+          "20181231",
+          "20191231",
+          "20201231",
+          "20211231",
+          "20221231",
+          "20231231"
+        ],
+        "adshs": [
+          "0000064803-19-000013",
+          "0000064803-20-000007",
+          "0000064803-21-000011",
+          "0000064803-22-000008",
+          "0000064803-23-000009",
+          "0000064803-24-000007"
+        ],
+        "source_zips": [
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip",
+          "sec-fsds-2022q1.zip",
+          "sec-fsds-2023q1.zip",
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000072207",
+        "tickers": [
+          "NBL"
+        ],
+        "selected_sec_names": [
+          "NOBLE ENERGY INC"
+        ],
+        "periods": [
+          "20161231",
+          "20171231",
+          "20181231"
+        ],
+        "adshs": [
+          "0000072207-17-000014",
+          "0000072207-18-000020",
+          "0000072207-19-000018"
+        ],
+        "source_zips": [
+          "sec-fsds-2017q1.zip",
+          "sec-fsds-2018q1.zip",
+          "sec-fsds-2019q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000077476",
+        "tickers": [
+          "PEP"
+        ],
+        "selected_sec_names": [
+          "PEPSICO INC"
+        ],
+        "periods": [
+          "20181231"
+        ],
+        "adshs": [
+          "0000077476-19-000017"
+        ],
+        "source_zips": [
+          "sec-fsds-2019q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000091440",
+        "tickers": [
+          "SNA"
+        ],
+        "selected_sec_names": [
+          "SNAP-ON INC"
+        ],
+        "periods": [
+          "20181231",
+          "20191231",
+          "20201231",
+          "20211231",
+          "20221231",
+          "20231231"
+        ],
+        "adshs": [
+          "0000091440-19-000003",
+          "0000091440-20-000004",
+          "0000091440-21-000005",
+          "0000091440-22-000005",
+          "0000091440-23-000005",
+          "0000091440-24-000005"
+        ],
+        "source_zips": [
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip",
+          "sec-fsds-2022q1.zip",
+          "sec-fsds-2023q1.zip",
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000105770",
+        "tickers": [
+          "WST"
+        ],
+        "selected_sec_names": [
+          "WEST PHARMACEUTICAL SERVICES INC"
+        ],
+        "periods": [
+          "20181231",
+          "20191231"
+        ],
+        "adshs": [
+          "0000105770-19-000012",
+          "0000105770-20-000015"
+        ],
+        "source_zips": [
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000203077",
+        "tickers": [
+          "STJ-201701"
+        ],
+        "selected_sec_names": [
+          "ST JUDE MEDICAL INC"
+        ],
+        "periods": [
+          "20141231",
+          "20151231"
+        ],
+        "adshs": [
+          "0000203077-15-000003",
+          "0000203077-16-000013"
+        ],
+        "source_zips": [
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2016q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000203527",
+        "tickers": [
+          "VAR"
+        ],
+        "selected_sec_names": [
+          "VARIAN MEDICAL SYSTEMS INC"
+        ],
+        "periods": [
+          "20150930",
+          "20170930",
+          "20180930",
+          "20190930"
+        ],
+        "adshs": [
+          "0000203527-19-000025",
+          "0001628280-15-008998",
+          "0001628280-17-011837",
+          "0001628280-18-014588"
+        ],
+        "source_zips": [
+          "sec-fsds-2015q4.zip",
+          "sec-fsds-2017q4.zip",
+          "sec-fsds-2018q4.zip",
+          "sec-fsds-2019q4.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000313927",
+        "tickers": [
+          "CHD"
+        ],
+        "selected_sec_names": [
+          "CHURCH & DWIGHT CO INC /DE/"
+        ],
+        "periods": [
+          "20141231",
+          "20151231",
+          "20161231",
+          "20171231"
+        ],
+        "adshs": [
+          "0001564590-15-000786",
+          "0001564590-16-012917",
+          "0001564590-17-002326",
+          "0001564590-18-002984"
+        ],
+        "source_zips": [
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2016q1.zip",
+          "sec-fsds-2017q1.zip",
+          "sec-fsds-2018q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000711404",
+        "tickers": [
+          "COO"
+        ],
+        "selected_sec_names": [
+          "COOPER COMPANIES INC",
+          "COOPER COMPANIES, INC."
+        ],
+        "periods": [
+          "20151031",
+          "20161031",
+          "20171031",
+          "20181031",
+          "20191031",
+          "20201031",
+          "20211031",
+          "20221031",
+          "20231031"
+        ],
+        "adshs": [
+          "0000711404-15-000021",
+          "0000711404-16-000042",
+          "0000711404-17-000044",
+          "0000711404-18-000047",
+          "0000711404-19-000051",
+          "0000711404-20-000042",
+          "0000711404-21-000038",
+          "0000711404-22-000053",
+          "0000711404-23-000072"
+        ],
+        "source_zips": [
+          "sec-fsds-2015q4.zip",
+          "sec-fsds-2016q4.zip",
+          "sec-fsds-2017q4.zip",
+          "sec-fsds-2018q4.zip",
+          "sec-fsds-2019q4.zip",
+          "sec-fsds-2020q4.zip",
+          "sec-fsds-2021q4.zip",
+          "sec-fsds-2022q4.zip",
+          "sec-fsds-2023q4.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000790070",
+        "tickers": [
+          "EMC-201609"
+        ],
+        "selected_sec_names": [
+          "EMC CORP"
+        ],
+        "periods": [
+          "20131231",
+          "20141231",
+          "20151231"
+        ],
+        "adshs": [
+          "0000790070-14-000040",
+          "0000790070-15-000062",
+          "0000790070-16-000229"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q1.zip",
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2016q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000800459",
+        "tickers": [
+          "HAR-201703"
+        ],
+        "selected_sec_names": [
+          "HARMAN INTERNATIONAL INDUSTRIES INC /DE/"
+        ],
+        "periods": [
+          "20140630",
+          "20150630"
+        ],
+        "adshs": [
+          "0001193125-14-300900",
+          "0001193125-15-283170"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q3.zip",
+          "sec-fsds-2015q3.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000804328",
+        "tickers": [
+          "QCOM"
+        ],
+        "selected_sec_names": [
+          "QUALCOMM INC/DE"
+        ],
+        "periods": [
+          "20150930",
+          "20160930",
+          "20170930",
+          "20180930",
+          "20190930",
+          "20200930",
+          "20210930",
+          "20220930",
+          "20230930"
+        ],
+        "adshs": [
+          "0000804328-22-000021",
+          "0000804328-23-000055",
+          "0001234452-15-000271",
+          "0001234452-16-000552",
+          "0001234452-17-000190",
+          "0001728949-18-000095",
+          "0001728949-19-000072",
+          "0001728949-20-000067",
+          "0001728949-21-000076"
+        ],
+        "source_zips": [
+          "sec-fsds-2015q4.zip",
+          "sec-fsds-2016q4.zip",
+          "sec-fsds-2017q4.zip",
+          "sec-fsds-2018q4.zip",
+          "sec-fsds-2019q4.zip",
+          "sec-fsds-2020q4.zip",
+          "sec-fsds-2021q4.zip",
+          "sec-fsds-2022q4.zip",
+          "sec-fsds-2023q4.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000814453",
+        "tickers": [
+          "NWL"
+        ],
+        "selected_sec_names": [
+          "NEWELL BRANDS INC."
+        ],
+        "periods": [
+          "20191231",
+          "20201231",
+          "20211231",
+          "20221231"
+        ],
+        "adshs": [
+          "0000814453-20-000078",
+          "0000814453-21-000050",
+          "0000814453-22-000017",
+          "0000814453-23-000026"
+        ],
+        "source_zips": [
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip",
+          "sec-fsds-2022q1.zip",
+          "sec-fsds-2023q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000818479",
+        "tickers": [
+          "XRAY"
+        ],
+        "selected_sec_names": [
+          "DENTSPLY INTERNATIONAL INC /DE/",
+          "DENTSPLY SIRONA INC."
+        ],
+        "periods": [
+          "20131231",
+          "20141231",
+          "20151231",
+          "20161231",
+          "20171231",
+          "20181231",
+          "20191231",
+          "20201231"
+        ],
+        "adshs": [
+          "0000818479-14-000004",
+          "0000818479-15-000005",
+          "0000818479-16-000056",
+          "0000818479-17-000007",
+          "0000818479-18-000014",
+          "0000818479-19-000010",
+          "0000818479-20-000006",
+          "0000818479-21-000007"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q1.zip",
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2016q1.zip",
+          "sec-fsds-2017q1.zip",
+          "sec-fsds-2018q1.zip",
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000832101",
+        "tickers": [
+          "IEX"
+        ],
+        "selected_sec_names": [
+          "IDEX CORP /DE/"
+        ],
+        "periods": [
+          "20201231",
+          "20211231",
+          "20221231",
+          "20231231"
+        ],
+        "adshs": [
+          "0000832101-21-000017",
+          "0000832101-22-000008",
+          "0000832101-23-000013",
+          "0000832101-24-000009"
+        ],
+        "source_zips": [
+          "sec-fsds-2021q1.zip",
+          "sec-fsds-2022q1.zip",
+          "sec-fsds-2023q1.zip",
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000833444",
+        "tickers": [
+          "JCI",
+          "JCI-201609"
+        ],
+        "selected_sec_names": [
+          "TYCO INTERNATIONAL PLC"
+        ],
+        "periods": [
+          "20150930"
+        ],
+        "adshs": [
+          "0000833444-15-000091"
+        ],
+        "source_zips": [
+          "sec-fsds-2015q4.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000851968",
+        "tickers": [
+          "MHK"
+        ],
+        "selected_sec_names": [
+          "MOHAWK INDUSTRIES INC"
+        ],
+        "periods": [
+          "20131231",
+          "20141231",
+          "20181231",
+          "20191231",
+          "20201231",
+          "20211231",
+          "20221231",
+          "20231231"
+        ],
+        "adshs": [
+          "0000851968-14-000021",
+          "0000851968-15-000022",
+          "0000851968-19-000020",
+          "0000851968-20-000020",
+          "0000851968-21-000019",
+          "0000851968-22-000026",
+          "0000851968-23-000033",
+          "0000851968-24-000027"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q1.zip",
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip",
+          "sec-fsds-2022q1.zip",
+          "sec-fsds-2023q1.zip",
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000858877",
+        "tickers": [
+          "CSCO"
+        ],
+        "selected_sec_names": [
+          "CISCO SYSTEMS, INC."
+        ],
+        "periods": [
+          "20130731",
+          "20140731",
+          "20150731",
+          "20160731",
+          "20170731",
+          "20180731",
+          "20190731"
+        ],
+        "adshs": [
+          "0000858877-13-000049",
+          "0000858877-14-000029",
+          "0000858877-15-000070",
+          "0000858877-16-000117",
+          "0000858877-17-000016",
+          "0000858877-18-000011",
+          "0000858877-19-000012"
+        ],
+        "source_zips": [
+          "sec-fsds-2013q3.zip",
+          "sec-fsds-2014q3.zip",
+          "sec-fsds-2015q3.zip",
+          "sec-fsds-2016q3.zip",
+          "sec-fsds-2017q3.zip",
+          "sec-fsds-2018q3.zip",
+          "sec-fsds-2019q3.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000875320",
+        "tickers": [
+          "VRTX"
+        ],
+        "selected_sec_names": [
+          "VERTEX PHARMACEUTICALS INC / MA"
+        ],
+        "periods": [
+          "20191231",
+          "20201231"
+        ],
+        "adshs": [
+          "0000875320-20-000007",
+          "0000875320-21-000006"
+        ],
+        "source_zips": [
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000882835",
+        "tickers": [
+          "ROP"
+        ],
+        "selected_sec_names": [
+          "ROPER INDUSTRIES INC"
+        ],
+        "periods": [
+          "20131231"
+        ],
+        "adshs": [
+          "0000882835-14-000011"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000884887",
+        "tickers": [
+          "RCL"
+        ],
+        "selected_sec_names": [
+          "ROYAL CARIBBEAN CRUISES LTD"
+        ],
+        "periods": [
+          "20231231"
+        ],
+        "adshs": [
+          "0000884887-24-000075"
+        ],
+        "source_zips": [
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000898293",
+        "tickers": [
+          "JBL"
+        ],
+        "selected_sec_names": [
+          "JABIL INC"
+        ],
+        "periods": [
+          "20220831"
+        ],
+        "adshs": [
+          "0001193125-22-268383"
+        ],
+        "source_zips": [
+          "sec-fsds-2022q4.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000900075",
+        "tickers": [
+          "CPRT"
+        ],
+        "selected_sec_names": [
+          "COPART INC"
+        ],
+        "periods": [
+          "20170731",
+          "20180731",
+          "20190731",
+          "20200731"
+        ],
+        "adshs": [
+          "0000900075-17-000044",
+          "0000900075-18-000048",
+          "0000900075-19-000022",
+          "0000900075-20-000021"
+        ],
+        "source_zips": [
+          "sec-fsds-2017q3.zip",
+          "sec-fsds-2018q4.zip",
+          "sec-fsds-2019q3.zip",
+          "sec-fsds-2020q3.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000908255",
+        "tickers": [
+          "BWA"
+        ],
+        "selected_sec_names": [
+          "BORGWARNER INC"
+        ],
+        "periods": [
+          "20211231",
+          "20221231"
+        ],
+        "adshs": [
+          "0000908255-22-000009",
+          "0000908255-23-000013"
+        ],
+        "source_zips": [
+          "sec-fsds-2022q1.zip",
+          "sec-fsds-2023q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000909832",
+        "tickers": [
+          "COST"
+        ],
+        "selected_sec_names": [
+          "COSTCO WHOLESALE CORP /NEW"
+        ],
+        "periods": [
+          "20130831",
+          "20140831",
+          "20150831",
+          "20160831",
+          "20170831",
+          "20180831",
+          "20190831",
+          "20200831",
+          "20210831",
+          "20220831",
+          "20230831"
+        ],
+        "adshs": [
+          "0000909832-14-000021",
+          "0000909832-15-000014",
+          "0000909832-16-000032",
+          "0000909832-17-000014",
+          "0000909832-18-000013",
+          "0000909832-19-000019",
+          "0000909832-20-000017",
+          "0000909832-21-000014",
+          "0000909832-22-000021",
+          "0000909832-23-000042",
+          "0001445305-13-002422"
+        ],
+        "source_zips": [
+          "sec-fsds-2013q4.zip",
+          "sec-fsds-2014q4.zip",
+          "sec-fsds-2015q4.zip",
+          "sec-fsds-2016q4.zip",
+          "sec-fsds-2017q4.zip",
+          "sec-fsds-2018q4.zip",
+          "sec-fsds-2019q4.zip",
+          "sec-fsds-2020q4.zip",
+          "sec-fsds-2021q4.zip",
+          "sec-fsds-2022q4.zip",
+          "sec-fsds-2023q4.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0000916076",
+        "tickers": [
+          "MLM"
+        ],
+        "selected_sec_names": [
+          "MARTIN MARIETTA MATERIALS INC"
+        ],
+        "periods": [
+          "20221231",
+          "20231231"
+        ],
+        "adshs": [
+          "0000950170-23-004361",
+          "0000950170-24-019275"
+        ],
+        "source_zips": [
+          "sec-fsds-2023q1.zip",
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001090872",
+        "tickers": [
+          "A"
+        ],
+        "selected_sec_names": [
+          "AGILENT TECHNOLOGIES INC",
+          "AGILENT TECHNOLOGIES, INC."
+        ],
+        "periods": [
+          "20131031",
+          "20141031",
+          "20151031",
+          "20161031",
+          "20171031",
+          "20181031",
+          "20191031"
+        ],
+        "adshs": [
+          "0001090872-13-000029",
+          "0001090872-14-000045",
+          "0001090872-15-000051",
+          "0001090872-16-000082",
+          "0001090872-17-000018",
+          "0001090872-18-000019",
+          "0001090872-19-000022"
+        ],
+        "source_zips": [
+          "sec-fsds-2013q4.zip",
+          "sec-fsds-2014q4.zip",
+          "sec-fsds-2015q4.zip",
+          "sec-fsds-2016q4.zip",
+          "sec-fsds-2017q4.zip",
+          "sec-fsds-2018q4.zip",
+          "sec-fsds-2019q4.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001093557",
+        "tickers": [
+          "DXCM"
+        ],
+        "selected_sec_names": [
+          "DEXCOM INC"
+        ],
+        "periods": [
+          "20181231",
+          "20191231",
+          "20201231"
+        ],
+        "adshs": [
+          "0001093557-19-000041",
+          "0001093557-20-000029",
+          "0001093557-21-000024"
+        ],
+        "source_zips": [
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001099800",
+        "tickers": [
+          "EW"
+        ],
+        "selected_sec_names": [
+          "EDWARDS LIFESCIENCES CORP"
+        ],
+        "periods": [
+          "20231231"
+        ],
+        "adshs": [
+          "0001099800-24-000004"
+        ],
+        "source_zips": [
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001109357",
+        "tickers": [
+          "EXC"
+        ],
+        "selected_sec_names": [
+          "EXELON CORP"
+        ],
+        "periods": [
+          "20161231"
+        ],
+        "adshs": [
+          "0001193125-17-039639"
+        ],
+        "source_zips": [
+          "sec-fsds-2017q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001136893",
+        "tickers": [
+          "FIS"
+        ],
+        "selected_sec_names": [
+          "FIDELITY NATIONAL INFORMATION SERVICES, INC."
+        ],
+        "periods": [
+          "20131231",
+          "20141231",
+          "20151231",
+          "20161231",
+          "20171231",
+          "20181231",
+          "20191231",
+          "20231231"
+        ],
+        "adshs": [
+          "0001136893-14-000009",
+          "0001136893-15-000006",
+          "0001136893-16-000061",
+          "0001136893-17-000008",
+          "0001136893-18-000011",
+          "0001136893-19-000008",
+          "0001136893-20-000032",
+          "0001136893-24-000015"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q1.zip",
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2016q1.zip",
+          "sec-fsds-2017q1.zip",
+          "sec-fsds-2018q1.zip",
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001137789",
+        "tickers": [
+          "STX"
+        ],
+        "selected_sec_names": [
+          "SEAGATE TECHNOLOGY PLC"
+        ],
+        "periods": [
+          "20140630",
+          "20150630",
+          "20160630"
+        ],
+        "adshs": [
+          "0001047469-14-006770",
+          "0001047469-15-006787",
+          "0001047469-16-014732"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q3.zip",
+          "sec-fsds-2015q3.zip",
+          "sec-fsds-2016q3.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001174922",
+        "tickers": [
+          "WYNN"
+        ],
+        "selected_sec_names": [
+          "WYNN RESORTS LTD"
+        ],
+        "periods": [
+          "20141231",
+          "20151231",
+          "20161231",
+          "20171231",
+          "20181231",
+          "20191231"
+        ],
+        "adshs": [
+          "0001174922-15-000021",
+          "0001174922-16-000144",
+          "0001174922-17-000027",
+          "0001174922-18-000019",
+          "0001174922-19-000021",
+          "0001174922-20-000024"
+        ],
+        "source_zips": [
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2016q1.zip",
+          "sec-fsds-2017q1.zip",
+          "sec-fsds-2018q1.zip",
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001300514",
+        "tickers": [
+          "LVS"
+        ],
+        "selected_sec_names": [
+          "LAS VEGAS SANDS CORP"
+        ],
+        "periods": [
+          "20181231",
+          "20191231",
+          "20201231",
+          "20211231",
+          "20221231",
+          "20231231"
+        ],
+        "adshs": [
+          "0001300514-19-000021",
+          "0001300514-20-000011",
+          "0001300514-21-000033",
+          "0001300514-22-000007",
+          "0001300514-23-000021",
+          "0001300514-24-000048"
+        ],
+        "source_zips": [
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip",
+          "sec-fsds-2022q1.zip",
+          "sec-fsds-2023q1.zip",
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001326380",
+        "tickers": [
+          "GME"
+        ],
+        "selected_sec_names": [
+          "GAMESTOP CORP."
+        ],
+        "periods": [
+          "20140131"
+        ],
+        "adshs": [
+          "0001445305-14-001259"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q2.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001365135",
+        "tickers": [
+          "WU"
+        ],
+        "selected_sec_names": [
+          "WESTERN UNION CO"
+        ],
+        "periods": [
+          "20131231",
+          "20141231",
+          "20151231",
+          "20161231"
+        ],
+        "adshs": [
+          "0001365135-14-000014",
+          "0001365135-15-000008",
+          "0001365135-16-000062",
+          "0001365135-17-000008"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q1.zip",
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2016q1.zip",
+          "sec-fsds-2017q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001418135",
+        "tickers": [
+          "KDP"
+        ],
+        "selected_sec_names": [
+          "KEURIG DR PEPPER INC."
+        ],
+        "periods": [
+          "20211231",
+          "20221231",
+          "20231231"
+        ],
+        "adshs": [
+          "0001418135-22-000005",
+          "0001418135-23-000003",
+          "0001418135-24-000007"
+        ],
+        "source_zips": [
+          "sec-fsds-2022q1.zip",
+          "sec-fsds-2023q1.zip",
+          "sec-fsds-2024q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001510295",
+        "tickers": [
+          "MPC"
+        ],
+        "selected_sec_names": [
+          "MARATHON PETROLEUM CORP"
+        ],
+        "periods": [
+          "20141231",
+          "20151231"
+        ],
+        "adshs": [
+          "0001510295-15-000007",
+          "0001510295-16-000078"
+        ],
+        "source_zips": [
+          "sec-fsds-2015q1.zip",
+          "sec-fsds-2016q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001521332",
+        "tickers": [
+          "APTV"
+        ],
+        "selected_sec_names": [
+          "APTIV PLC",
+          "DELPHI AUTOMOTIVE PLC"
+        ],
+        "periods": [
+          "20161231",
+          "20171231",
+          "20181231",
+          "20191231",
+          "20201231",
+          "20211231"
+        ],
+        "adshs": [
+          "0001521332-17-000013",
+          "0001521332-18-000013",
+          "0001521332-19-000007",
+          "0001521332-20-000012",
+          "0001521332-21-000009",
+          "0001521332-22-000010"
+        ],
+        "source_zips": [
+          "sec-fsds-2017q1.zip",
+          "sec-fsds-2018q1.zip",
+          "sec-fsds-2019q1.zip",
+          "sec-fsds-2020q1.zip",
+          "sec-fsds-2021q1.zip",
+          "sec-fsds-2022q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001532063",
+        "tickers": [
+          "ESRX-201812"
+        ],
+        "selected_sec_names": [
+          "EXPRESS SCRIPTS HOLDING CO."
+        ],
+        "periods": [
+          "20131231",
+          "20141231"
+        ],
+        "adshs": [
+          "0001532063-14-000006",
+          "0001532063-15-000004"
+        ],
+        "source_zips": [
+          "sec-fsds-2014q1.zip",
+          "sec-fsds-2015q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001535527",
+        "tickers": [
+          "CRWD"
+        ],
+        "selected_sec_names": [
+          "CROWDSTRIKE HOLDINGS, INC."
+        ],
+        "periods": [
+          "20230131"
+        ],
+        "adshs": [
+          "0001535527-23-000008"
+        ],
+        "source_zips": [
+          "sec-fsds-2023q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001585689",
+        "tickers": [
+          "HLT"
+        ],
+        "selected_sec_names": [
+          "HILTON WORLDWIDE HOLDINGS INC."
+        ],
+        "periods": [
+          "20161231",
+          "20171231",
+          "20181231"
+        ],
+        "adshs": [
+          "0001585689-17-000038",
+          "0001585689-18-000033",
+          "0001585689-19-000034"
+        ],
+        "source_zips": [
+          "sec-fsds-2017q1.zip",
+          "sec-fsds-2018q1.zip",
+          "sec-fsds-2019q1.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001730168",
+        "tickers": [
+          "AVGO"
+        ],
+        "selected_sec_names": [
+          "BROADCOM INC."
+        ],
+        "periods": [
+          "20181031",
+          "20221031",
+          "20231031"
+        ],
+        "adshs": [
+          "0001730168-18-000084",
+          "0001730168-22-000118",
+          "0001730168-23-000096"
+        ],
+        "source_zips": [
+          "sec-fsds-2018q4.zip",
+          "sec-fsds-2022q4.zip",
+          "sec-fsds-2023q4.zip"
+        ]
+      },
+      {
+        "candidate_cik": "0001757898",
+        "tickers": [
+          "STE"
+        ],
+        "selected_sec_names": [
+          "STERIS PLC"
+        ],
+        "periods": [
+          "20190331"
+        ],
+        "adshs": [
+          "0001757898-19-000005"
+        ],
+        "source_zips": [
+          "sec-fsds-2019q2.zip"
+        ]
+      }
+    ],
+    "annual_coverage": [
+      {
+        "target_year": "2015",
+        "formation_member_rows": "6034",
+        "unique_tickers_total": "6034",
+        "identity_exact_candidate_rows": "4793",
+        "identity_ambiguous_rows": "39",
+        "identity_missing_candidate_rows": "251",
+        "eligible_annual_filing_rows": "186",
+        "eligible_filing_and_12_mom_endpoint_rows": "186",
+        "eligible_filing_and_target_month_quote_rows": "186",
+        "eligible_filing_mom_and_target_quote_rows": "186",
+        "unique_eligible_ciks": "19",
+        "formation_tickers_with_qualified_12_mom_endpoints": "5982",
+        "formation_tickers_with_qualified_target_quote": "6002",
+        "formation_tickers_missing_or_rejected_target_quote": "32",
+        "identity_historical_validity": "pending_manual_review",
+        "future_returns_calculated": "False",
+        "op_calculated": "False"
+      },
+      {
+        "target_year": "2016",
+        "formation_member_rows": "6056",
+        "unique_tickers_total": "6056",
+        "identity_exact_candidate_rows": "5073",
+        "identity_ambiguous_rows": "8",
+        "identity_missing_candidate_rows": "220",
+        "eligible_annual_filing_rows": "229",
+        "eligible_filing_and_12_mom_endpoint_rows": "226",
+        "eligible_filing_and_target_month_quote_rows": "225",
+        "eligible_filing_mom_and_target_quote_rows": "225",
+        "unique_eligible_ciks": "23",
+        "formation_tickers_with_qualified_12_mom_endpoints": "5979",
+        "formation_tickers_with_qualified_target_quote": "6027",
+        "formation_tickers_missing_or_rejected_target_quote": "29",
+        "identity_historical_validity": "pending_manual_review",
+        "future_returns_calculated": "False",
+        "op_calculated": "False"
+      },
+      {
+        "target_year": "2017",
+        "formation_member_rows": "6060",
+        "unique_tickers_total": "6060",
+        "identity_exact_candidate_rows": "5264",
+        "identity_ambiguous_rows": "0",
+        "identity_missing_candidate_rows": "162",
+        "eligible_annual_filing_rows": "202",
+        "eligible_filing_and_12_mom_endpoint_rows": "202",
+        "eligible_filing_and_target_month_quote_rows": "200",
+        "eligible_filing_mom_and_target_quote_rows": "200",
+        "unique_eligible_ciks": "21",
+        "formation_tickers_with_qualified_12_mom_endpoints": "6034",
+        "formation_tickers_with_qualified_target_quote": "6046",
+        "formation_tickers_missing_or_rejected_target_quote": "14",
+        "identity_historical_validity": "pending_manual_review",
+        "future_returns_calculated": "False",
+        "op_calculated": "False"
+      },
+      {
+        "target_year": "2018",
+        "formation_member_rows": "6060",
+        "unique_tickers_total": "6060",
+        "identity_exact_candidate_rows": "5441",
+        "identity_ambiguous_rows": "0",
+        "identity_missing_candidate_rows": "83",
+        "eligible_annual_filing_rows": "209",
+        "eligible_filing_and_12_mom_endpoint_rows": "209",
+        "eligible_filing_and_target_month_quote_rows": "209",
+        "eligible_filing_mom_and_target_quote_rows": "209",
+        "unique_eligible_ciks": "21",
+        "formation_tickers_with_qualified_12_mom_endpoints": "6053",
+        "formation_tickers_with_qualified_target_quote": "6045",
+        "formation_tickers_missing_or_rejected_target_quote": "15",
+        "identity_historical_validity": "pending_manual_review",
+        "future_returns_calculated": "False",
+        "op_calculated": "False"
+      },
+      {
+        "target_year": "2019",
+        "formation_member_rows": "6060",
+        "unique_tickers_total": "6060",
+        "identity_exact_candidate_rows": "5643",
+        "identity_ambiguous_rows": "0",
+        "identity_missing_candidate_rows": "27",
+        "eligible_annual_filing_rows": "242",
+        "eligible_filing_and_12_mom_endpoint_rows": "242",
+        "eligible_filing_and_target_month_quote_rows": "242",
+        "eligible_filing_mom_and_target_quote_rows": "242",
+        "unique_eligible_ciks": "24",
+        "formation_tickers_with_qualified_12_mom_endpoints": "6022",
+        "formation_tickers_with_qualified_target_quote": "6049",
+        "formation_tickers_missing_or_rejected_target_quote": "11",
+        "identity_historical_validity": "pending_manual_review",
+        "future_returns_calculated": "False",
+        "op_calculated": "False"
+      },
+      {
+        "target_year": "2020",
+        "formation_member_rows": "6060",
+        "unique_tickers_total": "6060",
+        "identity_exact_candidate_rows": "5765",
+        "identity_ambiguous_rows": "0",
+        "identity_missing_candidate_rows": "9",
+        "eligible_annual_filing_rows": "278",
+        "eligible_filing_and_12_mom_endpoint_rows": "278",
+        "eligible_filing_and_target_month_quote_rows": "278",
+        "eligible_filing_mom_and_target_quote_rows": "278",
+        "unique_eligible_ciks": "28",
+        "formation_tickers_with_qualified_12_mom_endpoints": "6024",
+        "formation_tickers_with_qualified_target_quote": "6055",
+        "formation_tickers_missing_or_rejected_target_quote": "5",
+        "identity_historical_validity": "pending_manual_review",
+        "future_returns_calculated": "False",
+        "op_calculated": "False"
+      },
+      {
+        "target_year": "2021",
+        "formation_member_rows": "6060",
+        "unique_tickers_total": "6060",
+        "identity_exact_candidate_rows": "5817",
+        "identity_ambiguous_rows": "0",
+        "identity_missing_candidate_rows": "0",
+        "eligible_annual_filing_rows": "244",
+        "eligible_filing_and_12_mom_endpoint_rows": "244",
+        "eligible_filing_and_target_month_quote_rows": "243",
+        "eligible_filing_mom_and_target_quote_rows": "243",
+        "unique_eligible_ciks": "25",
+        "formation_tickers_with_qualified_12_mom_endpoints": "6045",
+        "formation_tickers_with_qualified_target_quote": "6053",
+        "formation_tickers_missing_or_rejected_target_quote": "7",
+        "identity_historical_validity": "pending_manual_review",
+        "future_returns_calculated": "False",
+        "op_calculated": "False"
+      },
+      {
+        "target_year": "2022",
+        "formation_member_rows": "6046",
+        "unique_tickers_total": "6046",
+        "identity_exact_candidate_rows": "5876",
+        "identity_ambiguous_rows": "0",
+        "identity_missing_candidate_rows": "0",
+        "eligible_annual_filing_rows": "198",
+        "eligible_filing_and_12_mom_endpoint_rows": "198",
+        "eligible_filing_and_target_month_quote_rows": "198",
+        "eligible_filing_mom_and_target_quote_rows": "198",
+        "unique_eligible_ciks": "20",
+        "formation_tickers_with_qualified_12_mom_endpoints": "6031",
+        "formation_tickers_with_qualified_target_quote": "6033",
+        "formation_tickers_missing_or_rejected_target_quote": "13",
+        "identity_historical_validity": "pending_manual_review",
+        "future_returns_calculated": "False",
+        "op_calculated": "False"
+      },
+      {
+        "target_year": "2023",
+        "formation_member_rows": "6036",
+        "unique_tickers_total": "6036",
+        "identity_exact_candidate_rows": "5931",
+        "identity_ambiguous_rows": "0",
+        "identity_missing_candidate_rows": "0",
+        "eligible_annual_filing_rows": "189",
+        "eligible_filing_and_12_mom_endpoint_rows": "189",
+        "eligible_filing_and_target_month_quote_rows": "189",
+        "eligible_filing_mom_and_target_quote_rows": "189",
+        "unique_eligible_ciks": "18",
+        "formation_tickers_with_qualified_12_mom_endpoints": "6018",
+        "formation_tickers_with_qualified_target_quote": "6035",
+        "formation_tickers_missing_or_rejected_target_quote": "1",
+        "identity_historical_validity": "pending_manual_review",
+        "future_returns_calculated": "False",
+        "op_calculated": "False"
+      },
+      {
+        "target_year": "2024",
+        "formation_member_rows": "6037",
+        "unique_tickers_total": "6037",
+        "identity_exact_candidate_rows": "5981",
+        "identity_ambiguous_rows": "0",
+        "identity_missing_candidate_rows": "0",
+        "eligible_annual_filing_rows": "204",
+        "eligible_filing_and_12_mom_endpoint_rows": "204",
+        "eligible_filing_and_target_month_quote_rows": "204",
+        "eligible_filing_mom_and_target_quote_rows": "204",
+        "unique_eligible_ciks": "21",
+        "formation_tickers_with_qualified_12_mom_endpoints": "5998",
+        "formation_tickers_with_qualified_target_quote": "6033",
+        "formation_tickers_missing_or_rejected_target_quote": "4",
+        "identity_historical_validity": "pending_manual_review",
+        "future_returns_calculated": "False",
+        "op_calculated": "False"
+      }
+    ],
+    "all-formation_rows_have_future_return_false": true,
+    "all-formation_rows_have_op_value_false": true
+  },
+  "interpretation_limits": [
+    "Identity exact/rename/suffix and verified-window labels are candidates, not independently approved historical identities.",
+    "Source-qualified filing selection is as-of accepted cutoff and does not backfill from an older report if latest is unqualified.",
+    "Target-end quotes are availability metadata; index removal does not imply a sale or a known liquidation value.",
+    "A historical price-source discrepancy is retained as a review flag, not used to remove rows or claim error direction."
+  ],
+  "corrections_history": [
+    {
+      "prior_receipt_sha256": "f800d235ed293ed03b1c725291cef80f5b1c028da7fe3eeb99d85309ebee3d31",
+      "reason": "Final v5 readback adds exact close/adjusted-close/volume/source details for formation, target month-end and all momentum endpoints; price-source differences are linked by intervals, not endpoint-only. Prior v4 output remains preserved."
+    }
+  ]
+}

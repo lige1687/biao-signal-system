@@ -1,0 +1,75 @@
+{
+  "task_id": "us-op-common-history-20261020-price-action-reconciliation",
+  "status": "qualified_with_unresolved_action_truth",
+  "executed_at": "2026-10-20T20:16:25.865122+08:00",
+  "network_requests": 0,
+  "external_vendor_code_executed": false,
+  "factor_or_portfolio_performance_calculated": false,
+  "input_hashes": {
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/price-source-comparison/differences-over-1pp.csv": "b685d703b8dcfd9ba90444098c777d08bc95156537dd346dcca1a69f1237f13b",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-compute_adjusted.py": "cb5aa6a6f935b131116eb947b9d4ef8230a1d1e32b9968a694e4aa7e442cbc98",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-corporate_action_overrides.csv": "ebed89ded2ff749133447f910fe9e4e75b27922e760cc1e6c49a6397f44017c5",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-spinoffs.csv": "af7eb38d1d428bed6b9dd6f66118b2c0f7a12c63e19eef4cfa5887f6925944b6",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-dividend_rescale.csv": "942c0ddeef804c383e21c06a5a439cf07a9e7ab646272ba6320d9a23615d7597",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-fetch_prices.py": "548008fd0e10e930c8d0f9f9041762e9f0a11f3e4dee767378913acf718ed425",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-README.md": "2650e119b7e3fa4f9756d1a5995aada5e8b7628177d5d98b7a039aca5fa6e2e2",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/prices.parquet": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result/COR.json": "17c0faefc148ad91e09a56125f3849c531be35cf22a8258df93b58eeb4c450f4",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result/attempts.jsonl": "34de27e077d34feb02a8df7d85cd5e83d7dc055ce2acbdf9508fd8dc51c713e2",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result/verification.json": "a7a89d3b0ba9f4595f45ceb70019eebf4ad545b9620287b6bf6a5c7fab2637ec"
+  },
+  "script_sha256": "01a48a1c0d4b5fbfef17fba9db73915876ce769050b59025ff2ceace3e6bfed9",
+  "result": {
+    "rows_reconciled": 18,
+    "categories": {
+      "COR_ticker_reuse_dividend_override": 8,
+      "spinoff_action_table": 8,
+      "unmatched_cash_distribution": 1,
+      "ordinary_cash_dividend_formula": 1
+    },
+    "all_18_new_daily_changes_reproduced_by_saved_formula_or_action_table": true,
+    "maximum_absolute_residual_pp": 2.220446049250313e-14,
+    "independent_corporate_action_truth_confirmed": false,
+    "numerical_explanation_does_not_prove_legal_entitlement_or_event_close": true,
+    "cor_old_saved_core_site_dividend_events": {
+      "2020-03-30": 1.22,
+      "2020-09-29": 1.22,
+      "2021-03-30": 1.23,
+      "2020-12-30": 1.23,
+      "2021-12-01": 1.27,
+      "2021-09-29": 1.27,
+      "2020-06-29": 1.22,
+      "2021-06-29": 1.27
+    },
+    "cor_override_dividend": 0.0,
+    "cor_saved_ticker_reuse_finding": "Yahoo's old COR series combines Cencora/AmerisourceBergen prices with CoreSite REIT dividends on eight ex-dates; saved overrides set those payments to zero. This is evidence of vendor ticker-history contamination in the saved files, not an independent confirmation of legal entitlements.",
+    "GEN_2020_02_03_unmatched_12_dollar_distribution": true,
+    "same_yahoo_origin_is_not_independent_source_verification": true
+  },
+  "output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/price-action-reconciliation",
+  "outputs": {
+    "cor-bars-audit.csv": {
+      "bytes": 4894,
+      "sha256": "86cd1e7c1f7764fbf17c978cbbd664e8896fd8681b818ca5bbc98b74d337a06c"
+    },
+    "input-output-manifest.json": {
+      "bytes": 3284,
+      "sha256": "d20b2b24396cf5e0f3ba6ce159507fabe6e76083c426eb8d0acad5da0f71bf72"
+    },
+    "row-reconciliation.csv": {
+      "bytes": 16225,
+      "sha256": "852db6a69d385099f9cd5cc5ee75e806208fbcfa82ba08fee055c0c7d74032ed"
+    },
+    "summary.json": {
+      "bytes": 1626,
+      "sha256": "12227fcc028ed0bb8d13524a5e066acef186287b85a8d03644e49f9c858076cb"
+    }
+  },
+  "manifest_sha256": "d20b2b24396cf5e0f3ba6ce159507fabe6e76083c426eb8d0acad5da0f71bf72",
+  "output_bytes_total": 26029,
+  "limitations": [
+    "All action truth remains unverified from an independent source in this task.",
+    "The GEN $12 distribution reproduces the saved adjusted-price change but has no matching row in the supplied override or spin-off tables.",
+    "The old COR saved Yahoo record matches the new price series bars on those dates while carrying CoreSite dividend events; the eight saved overrides zero them, but this comparison alone cannot establish the legal events for either issuing company."
+  ]
+}

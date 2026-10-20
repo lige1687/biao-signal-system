@@ -1,3 +1,38 @@
+# 美股年度经营盈利：有界结果已完成并进系统 2026-10-20T21:53:32.382732+08:00
+
+- 本轮completed/evidence mixed；owner/task/工作分支沿原。checked_coordination_sha=c6bf568a63f7984f58b71ea132b33dfefcbe3e66；checked_at=2026-10-20T21:53:32.382732+08:00，已读self/research-dispatch-controller/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/pro-advice-process-review-20261020/strategy-account-bridge-20261020/market-style-observation-20261020/mechanism-rebalancing-review-20261020及COORDINATION；交付范围无冲突。成果基线008625c1c4eb1b63d82403565799343075b30922，本轮提交在本阶段核验后生成并由协调结案指向准确commit。
+- 实际最终资料：60509历史形成成员月、8247年度申报候选；以原费用定义逐报告排净额/混合项后，185原申报、42CIK、1967月份、120月、953相邻MOM配对、61日历省略、4未来未知保留。先前47家/2083为被此次源语义纠错取代的准入版本，旧证据留存。不是全市场随机样本，只覆盖成员月份3.25%；最大MOM差110.47pp，严格同MOM作用仍未识别。
+- core1首次在接收益前失败；repair1成功exit0/3.4秒。合同a586b457f41e7e1b2f272431778fe105156f86fcc8eed7c293778f96deb574af；manifest327a81cd49a2a00c39908d494e3838850b98015e1a67c3eb9ae338583105d927。Luna执行/root独立1967公式、1963源报价结果、953决策及6统计区间核同、Astra最终审；22相关合成检查通过。无调参、新模型、旧实验重跑。
+- 结论：相对较高MOM可确定配对月均+0.0258pp，95%经验范围[-0.2632,+0.3430]；相对较低MOM -0.1776pp，范围跨零。暂停该逐月收益/防守强化，保留财务资料与名单稳定描述（目标权重变化30.03%对50.74%/49.67%，不是实成交换手/费用）。严格同MOM的独立作用未证明，42家受限类别不否定盈利整类。下次只因扩大相容权益/利息资料并改善匹配距离的新证据恢复，不重复当前历史或接管他人低换手。
+- 报告us-op-common-history-2026-10-20.md SHA054049d1ddcdf366b26b0e39555e44bc7adc4e36e891b1f3f5b6c18e6fcc5b3c；registry/INDEX已登记。主树仅本报告/raw、新研究adapter/test、本定义卡3来源、登记本键/导航本行准确镜像；其他定义/登记全部保留。5188API正文SHA/分类/mixed逐字读回，两树归置通过。open_in_codex仅queued，未声明浏览器视觉验收。
+- Git完整暂存空白检查exit2：两份已冻结资格脚本的原有行末空白；为保持原哈希未改、未关闭检查，失败及路径留delivery-validation。其余本任务文件同一空白检查通过；两树归置和研究核数/22合成仍通过。此为归档样式限制，不虚报全项检查绿色。
+- 原目标okr-8830a1f1ec4f v38→40，只写next_action/报告link/note，status in_progress、4/6、owner/授权/其他字段和旧历史不变，不代验收。根只保留本progress于成果树，主树不覆盖他人或旧进度。
+- 源明确HTTP请求88，含2个403停止；可核web至少77，子任务web精确数缺失，全局总数未知。大源和结果原外盘存，约4.2MB小报告/资格元数据可移交；私有签名查询、coordination.index和本地admission副本不进Git。完整财务版本/退出价值仍有限，0生产/交易/购买/删除/通知；当前无计算或采集任务运行。
+
+---
+
+# 美股年度经营盈利：固定共同资料与配对方法 2026-10-20T21:21:01.364869+08:00
+
+- 沿本任务稳定owner/task/工作分支；最新已读并登记协调 fd258a7691bd70933b05ee856618b1b5da273188，登记前 checked_coordination_sha ad1e60df3f5c9762a8ca04ee59e51732e617ad21，已读self/中控/utility/discovery/pro-advice/strategy-account-bridge/market-style/mechanism当前记录；无季度EPS/ETF/账户重叠。成果HEAD仍008625c，本轮尚未提交。
+- A口径已固定并独核Molson2013原PDF与原NUM/PRE/TAG：营业利润扣独立利息/含永久少数权益的普通权益，保留已扣折旧/特殊项目，不冒充French当前标准。293申报源合格；Luna修跨报表行关联与显式优先股perShare误用，失败版本留档。定义新卡及研究纯函数/8合成检查已在独立树，正式实现不从raw导入。
+- B最终v5：120结果月2015—2024、从2014-12形成，60509成员月，2181会计候选。root独立核全部2181截止前最新年报、历史成员唯一有效区间和12MOM月份正确。新最终准入2083行/47公司，每月12—24中位17；98行因历史资料资格拒绝，未来未知6行保留。历史手工行动影响与未来事件分别处理，不按未来存续挑股。
+- 已取得四项退出7原件/8请求，EMC跟踪股无目标日价格、STJ条款/股息不齐等仍未知；不填0、不用末价代替。全部218退出不要求先齐，再对受限集合完成有界统计。来源累计明确88HTTP尝试，2个host403停止；web动作另计，实际token费用未知。
+- Astra冻前接受相邻MOM配对；奇数奇名次按日历轮换遗漏；OP并列沿MOM；同时比稍高和稍低MOM，以免把反转当盈利信息。未知保留、原权重已知贡献与可识别部分均值分别报、亏损概率边界共享身份抵消；收益/损失/上涨/四情形/名单变化分别评价。2000次共同12月连块、固定seed，不改参数追正。
+- 正在做Luna runner＋合成；root已抓到准入rows字段、并列、主均值分母、遗漏名单与输出白名单问题，修好后才freeze。此刻真实效果0/1，repair0/1；后续必要效果及独立审核仍待执行，当前不结案。所有大件固定原外盘，final-admission大表外盘绑定，本机工作副本不进Git。
+
+---
+
+# 美股年度经营盈利：历史来源已落盘，收敛会计口径 2026-10-20T20:34:22.260619+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false；checked_coordination_sha e4b86ad42d758cab14e961584186232ca807dcc7；checked_at 2026-10-20T20:34:22.260619+08:00。已读COORDINATION/self/research-dispatch-controller/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/pro-advice-process-review-20261020/strategy-account-bridge-20261020，新增market-style-observation-20261020、mechanism-rebalancing-review-20261020当前范围已核；后两项为风格UI及机构散户资料，与本年度OP无重叠。准备写入前远端变化断言已停止，补读20:32风格预览交付后继续，未覆盖他人。
+- 原注册范围不扩，成果基线008625c1c4eb1b63d82403565799343075b30922。已取得48份SEC季度主表ZIP及固定版本历史S&P500成员/报价/退出候选；2015—2024共120月、716代码标签、60510成员月。不能将来源成功/今日代码映射称历史资格全部通过。
+- Luna执行主表及预热/前身补证、每日资格、年度申报覆盖、退出和18价格差异解释；Astra独立来源/方法审；root核原件/身份/重大差额。52成员月历史CIK更正另表保存，原输入保持；旧COR/Cencora Yahoo分红混入CoreSite记录的具体污染已核，旧收益未覆盖。引用旧502报价的任务需知此限制，本题不改他人成果。
+- 年度候选58341成员月可找到当时申报；12817成员月为四流量及正权益唯一金额候选，尚非OP合格。24修订年报选中但缺流量，涉及269成员月。218指数退出中212为此前月末持有，101缺目标月末同代码报价，不能补0/最后价或直接剔除。
+- 必要动作A：从现有候选按报表结构核费用/R&D/折旧/权益含义后决定局部比较。Luna唯一写新accounting_structure_probe.py及receipt、小结/外盘新目录；root定义裁决，Astra只写accounting-target-ruling.md。缺少全市场100%不是停止依据。新效力core0/1、repair0/1；来源79次含1次SEC403，web读/搜索72动作截至本记录；SEC该host停止，0附注ZIP，不绕过。
+- 新大结果仅已绑定固定外盘us-op-common-history-20261020/...T191922-92db83e55b32/result，源约4.8GB。本机小记录/报告范围原样；0生产/交易/付费/删除/通知。尚未完成OP增量；资格通过才冻结统计，否则准确登记缺证据。当前无需用户再授权已允许的数据处理。
+
+---
+
 # 美股买入端有界交付完成 2026-10-20T17:19:28.364955+08:00
 
 - 本题status completed/evidence mixed；结果及44准确路径已推codex/personal-lowfreq-system-audit-20261018@6e63149514b9b5fe44549fa5298db1d5d42c8df0并逐字核同。报告SHA 57bb8b14535a820e6b1d5a7ac99249f2e1fc4e8c86664f46c17ee0ab29e07263，5188 API全文/分类/mixed核同；两树归置与diff通过。目标okr-8830a1f1ec4f v36→38，仅next_action/link/note更新，in_progress和4/6、owner/授权/旧历史保持。页面打开仅queued，未报视觉验收。

@@ -1,0 +1,484 @@
+{
+  "status": "passed",
+  "purpose": "Independent arithmetic audit of fixed result, no new efficacy experiment",
+  "contract_sha256": "a586b457f41e7e1b2f272431778fe105156f86fcc8eed7c293778f96deb574af",
+  "manifest_sha256": "327a81cd49a2a00c39908d494e3838850b98015e1a67c3eb9ae338583105d927",
+  "formula_rows": 1967,
+  "formula_max_abs_error": 1.1102230246251565e-16,
+  "price_return_rows": 1963,
+  "unknown_stock_months": 4,
+  "all_choices_verified": 953,
+  "odd_omission_months": 61,
+  "comparison": {
+    "higher_momentum": {
+      "identified_monthly_means": {
+        "delta_identifiable_mean": 0.00025797553108969986,
+        "loss_part_identifiable_mean": -0.00028023946093437525,
+        "upside_part_identifiable_mean": 0.0005382149920240741
+      },
+      "original_weight_known_contribution": {
+        "delta_identifiable_mean": 0.00026771795360527363,
+        "loss_part_identifiable_mean": -0.00026879537218959593,
+        "upside_part_identifiable_mean": 0.0005365133257948685
+      },
+      "different_choice_pairs": 475,
+      "unknown_difference_pairs": 2,
+      "unchanged_choice_pairs": 478
+    },
+    "lower_momentum": {
+      "identified_monthly_means": {
+        "delta_identifiable_mean": -0.0017756151203277045,
+        "loss_part_identifiable_mean": 0.0007129095529375127,
+        "upside_part_identifiable_mean": -0.0024885246732652177
+      },
+      "original_weight_known_contribution": {
+        "delta_identifiable_mean": -0.0018080809179455524,
+        "loss_part_identifiable_mean": 0.0007001208329803136,
+        "upside_part_identifiable_mean": -0.002508201750925866
+      },
+      "different_choice_pairs": 478,
+      "unknown_difference_pairs": 2,
+      "unchanged_choice_pairs": 475
+    }
+  },
+  "confidence_interval_components_verified": 6,
+  "loss_probability_bounds_independently_verified": true,
+  "complete_month_mean_std_worst_decile_independently_verified": true,
+  "financial_reports_used": 185,
+  "annual_coverage": [
+    {
+      "year": 2015,
+      "company_months": 151,
+      "companies": 16,
+      "monthly_min": 11,
+      "monthly_max": 15,
+      "pairs": 72,
+      "unknown_stock_months": 0
+    },
+    {
+      "year": 2016,
+      "company_months": 190,
+      "companies": 19,
+      "monthly_min": 15,
+      "monthly_max": 16,
+      "pairs": 94,
+      "unknown_stock_months": 1
+    },
+    {
+      "year": 2017,
+      "company_months": 177,
+      "companies": 18,
+      "monthly_min": 14,
+      "monthly_max": 16,
+      "pairs": 85,
+      "unknown_stock_months": 2
+    },
+    {
+      "year": 2018,
+      "company_months": 186,
+      "companies": 20,
+      "monthly_min": 15,
+      "monthly_max": 16,
+      "pairs": 90,
+      "unknown_stock_months": 0
+    },
+    {
+      "year": 2019,
+      "company_months": 219,
+      "companies": 23,
+      "monthly_min": 16,
+      "monthly_max": 22,
+      "pairs": 109,
+      "unknown_stock_months": 0
+    },
+    {
+      "year": 2020,
+      "company_months": 266,
+      "companies": 26,
+      "monthly_min": 22,
+      "monthly_max": 24,
+      "pairs": 133,
+      "unknown_stock_months": 0
+    },
+    {
+      "year": 2021,
+      "company_months": 232,
+      "companies": 24,
+      "monthly_min": 17,
+      "monthly_max": 22,
+      "pairs": 112,
+      "unknown_stock_months": 1
+    },
+    {
+      "year": 2022,
+      "company_months": 180,
+      "companies": 18,
+      "monthly_min": 13,
+      "monthly_max": 17,
+      "pairs": 84,
+      "unknown_stock_months": 0
+    },
+    {
+      "year": 2023,
+      "company_months": 168,
+      "companies": 16,
+      "monthly_min": 13,
+      "monthly_max": 15,
+      "pairs": 78,
+      "unknown_stock_months": 0
+    },
+    {
+      "year": 2024,
+      "company_months": 198,
+      "companies": 20,
+      "monthly_min": 16,
+      "monthly_max": 17,
+      "pairs": 96,
+      "unknown_stock_months": 0
+    }
+  ],
+  "rank_ic_monthly_mean": 0.03539754415765655,
+  "rank_ic_monthly_median": 0.00373376623376615,
+  "op_momentum_rank_correlation_mean": 0.005468843735720175,
+  "pair_gap_quantiles": {
+    "0.5": 0.0378065214607017,
+    "0.9": 0.14752561204031925,
+    "0.95": 0.2608918278488576,
+    "1.0": 1.1047123913515295
+  },
+  "loss_probability_bounds_monthly_average": {
+    "higher_momentum": {
+      "paired_loss_probability_delta_bounds": [
+        0.011984126984126982,
+        0.013783369408369406
+      ],
+      "loss_probability_method_bounds": [
+        0.4345211038961038,
+        0.4363203463203463
+      ],
+      "loss_probability_opponent_bounds": [
+        0.4214953102453103,
+        0.4235786435786436
+      ]
+    },
+    "lower_momentum": {
+      "paired_loss_probability_delta_bounds": [
+        -0.0142252886002886,
+        -0.012141955266955268
+      ],
+      "loss_probability_method_bounds": [
+        0.4345211038961038,
+        0.4363203463203463
+      ],
+      "loss_probability_opponent_bounds": [
+        0.44770472582972587,
+        0.4495039682539683
+      ]
+    }
+  },
+  "four_cells": [
+    {
+      "opponent": "higher_momentum",
+      "cell": "both_negative",
+      "count": 316,
+      "mean_difference": 0.0017129955192643465
+    },
+    {
+      "opponent": "higher_momentum",
+      "cell": "both_nonnegative",
+      "count": 455,
+      "mean_difference": 0.0028046828212258635
+    },
+    {
+      "opponent": "higher_momentum",
+      "cell": "profitability_negative_opponent_nonnegative",
+      "count": 94,
+      "mean_difference": -0.11199400119871537
+    },
+    {
+      "opponent": "higher_momentum",
+      "cell": "profitability_nonnegative_opponent_negative",
+      "count": 85,
+      "mean_difference": 0.10977513545191692
+    },
+    {
+      "opponent": "lower_momentum",
+      "cell": "both_negative",
+      "count": 323,
+      "mean_difference": -0.0002789782427735285
+    },
+    {
+      "opponent": "lower_momentum",
+      "cell": "both_nonnegative",
+      "count": 443,
+      "mean_difference": -0.0057604135354680135
+    },
+    {
+      "opponent": "lower_momentum",
+      "cell": "profitability_negative_opponent_nonnegative",
+      "count": 87,
+      "mean_difference": -0.1086886809322156
+    },
+    {
+      "opponent": "lower_momentum",
+      "cell": "profitability_nonnegative_opponent_negative",
+      "count": 97,
+      "mean_difference": 0.10359427319229861
+    }
+  ],
+  "operations": {
+    "profitability": {
+      "target_weight_change_mean": 0.3003474116919495,
+      "target_weight_change_median": 0.2857142857142857,
+      "observed_transitions": 119,
+      "selected_distinct_tickers": 40,
+      "top5_name_counts": {
+        "CPB": 91,
+        "COST": 89,
+        "WYNN": 58,
+        "QCOM": 56,
+        "EFX": 53
+      }
+    },
+    "higher_momentum": {
+      "target_weight_change_mean": 0.5073620357233802,
+      "target_weight_change_median": 0.5,
+      "observed_transitions": 119,
+      "selected_distinct_tickers": 42,
+      "top5_name_counts": {
+        "EFX": 57,
+        "TAP": 54,
+        "COST": 52,
+        "CPB": 52,
+        "COO": 48
+      }
+    },
+    "lower_momentum": {
+      "target_weight_change_mean": 0.4967414238422641,
+      "target_weight_change_median": 0.5,
+      "observed_transitions": 119,
+      "selected_distinct_tickers": 42,
+      "top5_name_counts": {
+        "COST": 62,
+        "TAP": 57,
+        "QCOM": 56,
+        "EFX": 54,
+        "CPB": 54
+      }
+    }
+  },
+  "company_months_by_ticker": [
+    {
+      "ticker": "COST",
+      "cik": "0000909832",
+      "months": 120
+    },
+    {
+      "ticker": "EFX",
+      "cik": "0000033185",
+      "months": 114
+    },
+    {
+      "ticker": "TAP",
+      "cik": "0000024545",
+      "months": 114
+    },
+    {
+      "ticker": "CPB",
+      "cik": "0000016732",
+      "months": 108
+    },
+    {
+      "ticker": "QCOM",
+      "cik": "0000804328",
+      "months": 102
+    },
+    {
+      "ticker": "COO",
+      "cik": "0000711404",
+      "months": 99
+    },
+    {
+      "ticker": "XRAY",
+      "cik": "0000818479",
+      "months": 90
+    },
+    {
+      "ticker": "MHK",
+      "cik": "0000851968",
+      "months": 84
+    },
+    {
+      "ticker": "FIS",
+      "cik": "0001136893",
+      "months": 84
+    },
+    {
+      "ticker": "CSCO",
+      "cik": "0000858877",
+      "months": 78
+    },
+    {
+      "ticker": "WYNN",
+      "cik": "0001174922",
+      "months": 72
+    },
+    {
+      "ticker": "A",
+      "cik": "0001090872",
+      "months": 67
+    },
+    {
+      "ticker": "SNA",
+      "cik": "0000091440",
+      "months": 66
+    },
+    {
+      "ticker": "CVS",
+      "cik": "0000064803",
+      "months": 66
+    },
+    {
+      "ticker": "LVS",
+      "cik": "0001300514",
+      "months": 62
+    },
+    {
+      "ticker": "CPRT",
+      "cik": "0000900075",
+      "months": 47
+    },
+    {
+      "ticker": "APTV",
+      "cik": "0001521332",
+      "months": 44
+    },
+    {
+      "ticker": "WU",
+      "cik": "0001365135",
+      "months": 42
+    },
+    {
+      "ticker": "CHD",
+      "cik": "0000313927",
+      "months": 42
+    },
+    {
+      "ticker": "VAR",
+      "cik": "0000203527",
+      "months": 42
+    },
+    {
+      "ticker": "IEX",
+      "cik": "0000832101",
+      "months": 42
+    },
+    {
+      "ticker": "STX",
+      "cik": "0001137789",
+      "months": 36
+    },
+    {
+      "ticker": "MAS",
+      "cik": "0000062996",
+      "months": 36
+    },
+    {
+      "ticker": "HLT",
+      "cik": "0001585689",
+      "months": 36
+    },
+    {
+      "ticker": "KDP",
+      "cik": "0001418135",
+      "months": 30
+    },
+    {
+      "ticker": "AVGO",
+      "cik": "0001730168",
+      "months": 30
+    },
+    {
+      "ticker": "DXCM",
+      "cik": "0001093557",
+      "months": 25
+    },
+    {
+      "ticker": "VRTX",
+      "cik": "0000875320",
+      "months": 24
+    },
+    {
+      "ticker": "EMC-201609",
+      "cik": "0000790070",
+      "months": 21
+    },
+    {
+      "ticker": "STJ-201701",
+      "cik": "0000203077",
+      "months": 19
+    },
+    {
+      "ticker": "MLM",
+      "cik": "0000916076",
+      "months": 18
+    },
+    {
+      "ticker": "HAS",
+      "cik": "0000046080",
+      "months": 18
+    },
+    {
+      "ticker": "WST",
+      "cik": "0000105770",
+      "months": 13
+    },
+    {
+      "ticker": "PEP",
+      "cik": "0000077476",
+      "months": 12
+    },
+    {
+      "ticker": "STE",
+      "cik": "0001757898",
+      "months": 12
+    },
+    {
+      "ticker": "EXC",
+      "cik": "0001109357",
+      "months": 12
+    },
+    {
+      "ticker": "GME",
+      "cik": "0001326380",
+      "months": 10
+    },
+    {
+      "ticker": "ROP",
+      "cik": "0000882835",
+      "months": 6
+    },
+    {
+      "ticker": "RCL",
+      "cik": "0000884887",
+      "months": 6
+    },
+    {
+      "ticker": "CRWD",
+      "cik": "0001535527",
+      "months": 6
+    },
+    {
+      "ticker": "EW",
+      "cik": "0001099800",
+      "months": 6
+    },
+    {
+      "ticker": "JBL",
+      "cik": "0000898293",
+      "months": 6
+    }
+  ],
+  "inputs_or_results_modified": false,
+  "network_requests": 0
+}

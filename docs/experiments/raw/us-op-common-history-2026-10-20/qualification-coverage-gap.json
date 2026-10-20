@@ -1,0 +1,21 @@
+{
+  "source_filings_sha256": "b323193685ca7727979c8dfa9babacde1fed91683e7e1800186408649d772383",
+  "filings": 8247,
+  "reason_counts_not_mutually_exclusive": {
+    "operating_income: requires one finite standard OperatingIncomeLoss in main IS": 2160,
+    "interest: requires finite listed interest tag after an actual OI line on the same IS report; all legally paired finite values must agree": 4102,
+    "sic: financial SIC 6000-6999 or missing/invalid": 1550,
+    "balance_Liabilities: requires one finite standard BS amount": 2714,
+    "balance_identity: Assets must equal Liabilities plus inclusive equity exactly": 5903,
+    "positive_inclusive_equity: inclusive equity must be positive": 5217,
+    "parent_nci_reconciliation: parent equity plus MinorityInterest must exactly equal inclusive equity when both present": 1315,
+    "temporary_redeemable_equity: nonzero standard temporary/redeemable total blocks admission": 1206,
+    "balance_StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest: requires one finite standard BS amount": 3560,
+    "preferred_total: requires >=1 standard monetary total and every finite amount zero": 5308,
+    "balance_Assets: requires one finite standard BS amount": 57,
+    "filing_type_period: requires 10-K/10-K/A and fp=FY": 1
+  },
+  "final_member_month_coverage": 0.032507560858715236,
+  "final_used_accessions": 185,
+  "note": "Rejected means this fixed strict accounting category not established; absent expected tag is not proof of defective financial statements."
+}

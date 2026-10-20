@@ -1,0 +1,48 @@
+{
+  "mission": "补齐上一资格缺的每日覆盖，构造带冲突状态的历史CIK候选连接",
+  "task_scope": [
+    "上一membership合同要求每日覆盖，实际仅月末，保留旧结果；新输出SPY实际交易日×当时members覆盖总数/逐年数/所有缺价停牌重复无量明细，不能把月末覆盖当每天覆盖",
+    "连接lawcal历史记录仅生成候选，不称合格：date_added、date_removed、created_at和星号原样保存；按其helper时间规则候选，且保留原始价格label",
+    "先确切symbol与点横线class规范、剥离 -YYYYMM 的旧证券标签只为候选匹配，再提供renames反向/传递可达候选；不能将CB/AGN等同名不同CIK合并；输出exact/rename/ambiguous/no_candidate分状态，不自动赢家",
+    "允许同CIK多symbol，将所有支持记录列明；当期多CIK全部留存待主控；不按收益相似匹配身份",
+    "标GOOG/GOOGL早于2015已有Alpha CIK1652044疑似继承问题，IR/TT、AGN/ACT、CB/ACE作为必查身份例，输出相应原始记录与月例",
+    "STI-201912应补入上一STI无匹配样例，读取退场前后5条价格；不推断卖出兑付",
+    "只实现小代码+有意义合成测试然后执行真实资格一次；输入不可变、没有网络/OP/收益、无下级"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/identity-daily-job.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/lawcal-data-components_history.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/lawcal-bin-update.py",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/membership_intervals.parquet",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/prices.parquet",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/renames.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/no_trade_days.csv",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/membership-price-qualification/monthly-members.csv"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/qualify_identity_daily.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/test_qualify_identity_daily.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/identity-daily-receipt.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/identity-daily-qualification"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "每日覆盖摘要/缺口表；60k候选连接与冲突原始记录；样例；代码测试及收据",
+    "清楚说明没有已经证明历史CIK正确，不能吞缺失/混接"
+  ],
+  "stop_conditions": [
+    "不删旧资料/不改主代码、不提交、不重跑收益",
+    "未知身份保留unknown不用名字相似强行填"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

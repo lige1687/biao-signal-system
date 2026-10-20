@@ -1,0 +1,79 @@
+{
+  "task": "v2 supplementary source-only qualification; v1 outputs preserved. Source-reported exit_gaps windows block candidate dates strictly between last_trade and next_trade.",
+  "command": "python3 -B docs/experiments/raw/us-op-common-history-2026-10-20/qualify_exit_outcomes_v2.py --contract docs/experiments/raw/us-op-common-history-2026-10-20/luna-exit-outcome-contract.json",
+  "started_at_utc": "2026-10-20T12:18:57Z",
+  "completed_at_utc": "2026-10-20T12:19:02Z",
+  "elapsed_seconds_tool_reported": 5.41,
+  "returncode": 0,
+  "contract_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/luna-exit-outcome-contract.json",
+  "contract_sha256": "acc4e569bd4b02fc213fec4750ee0041900043bffe682e9cc6578d9cfa58ae8b",
+  "runner_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/qualify_exit_outcomes_v2.py",
+  "runner_sha256": "e9420f5238adcb22de0c60b92061d0647f19c992601fd20404f68cd351f0d46a",
+  "source_hashes": {
+    "membership_intervals.parquet": "a2695e0503a5489ef6f101b9f6d91770a1a114d290b047b8765cbee60947e5fe",
+    "exit_gaps.csv": "7fd978df63316793d0b9c7497ba13aa48789f71c02b2db919e884fb0f215364a",
+    "no_trade_days.csv": "e6ce9efaeea91b3e3e8198a6a3b20bf56d217e82fe83c83b133fab27492de2f1",
+    "renames.csv": "e571766f6f362e38d61d7c24d16e5d99db3776b7faea1b94d0c7b0e202d327a0",
+    "prices.parquet": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563"
+  },
+  "network_requests": 0,
+  "market_effect_calculation": false,
+  "result_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/exit-outcome-qualification-v2",
+  "manifest_sha256": "1d219d45c497f4353b9e0ee377b7933d410ca7147f12c7713c7e29940efa755e",
+  "manifest_outputs_verified": {
+    "event-outcomes.csv": {
+      "sha256": "3179d87bce9ae6c04fe6f5a5458d48181825d48c299f663ccd697db74df887f9",
+      "bytes": 141626
+    },
+    "special-cases.json": {
+      "sha256": "eb4efe3ac24ce1cae8e67c1e97aab03bc43fac457a9540347c7aae5b00d17c48",
+      "bytes": 7184
+    },
+    "summary.json": {
+      "sha256": "0f4c3a73df0e3659bed50f29fc287fe46d03af63ebae4915aeeffa09aa7e6642",
+      "bytes": 5006
+    }
+  },
+  "readback": {
+    "event_rows": 218,
+    "unique_interval_rows": 218,
+    "v1_event_rows": 218,
+    "v1_target_status_counts": {
+      "observable_quote_candidate": 116,
+      "missing": 102
+    },
+    "v2_target_status_counts": {
+      "observable_quote_candidate": 116,
+      "missing": 102
+    },
+    "v1_first_post_candidate_events": 119,
+    "v2_first_post_source_filtered_candidate_events": 218,
+    "v1_first_post_dates_after_2024_12_31": 0,
+    "changed_first_post_dates": [
+      {
+        "ticker": "SBNY",
+        "v1": "2023-03-24",
+        "v2_raw": "2023-03-24",
+        "v2_source_filtered": "2023-03-28"
+      },
+      {
+        "ticker": "SIVB",
+        "v1": "2023-03-21",
+        "v2_raw": "2023-03-21",
+        "v2_source_filtered": "2023-03-28"
+      }
+    ],
+    "target_month_end_counts_unchanged": true,
+    "search_end_date": "2024-12-31"
+  },
+  "synthetic_check": {
+    "quote_volume": 4,
+    "date": "2023-03-21",
+    "source_gap": [
+      "2023-03-09",
+      "2023-03-28"
+    ],
+    "candidate_rejected": true
+  },
+  "limits": "exit_gaps only blocks explicitly reported intervals; lack of a gap record is not proof of tradability. No sale, proceeds, shares/cash entitlement, or terminal equity value verified."
+}

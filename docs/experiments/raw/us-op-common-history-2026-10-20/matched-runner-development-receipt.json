@@ -1,0 +1,43 @@
+{
+  "schema": "matched-runner-development-receipt/1",
+  "status": "synthetic_tests_passed_no_real_run",
+  "scope": "runner implementation and synthetic validation only; no real financial outcomes or market-effect calculations executed",
+  "command": "PYTHONPATH=src:docs/experiments/raw/us-op-common-history-2026-10-20 PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest test_run_matched_effect -v",
+  "exit_code": 0,
+  "tests_passed": 12,
+  "tests_failed": 0,
+  "bindings": {
+    "design": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/matched-effect-design.json",
+      "sha256": "bf46a59c5a275599a9134d1a80757b85fafca3f682e0d4e1c36298bd08de19ca"
+    },
+    "runner": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/run_matched_effect.py",
+      "sha256": "6e7df52c8d0ad80c4e0ebad670dad7302fec757ea7ad197cf1b3b9607d0e8366"
+    },
+    "tests": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/test_run_matched_effect.py",
+      "sha256": "7184534a307c26e950dfcc2d0df10b778b6cc1388b74fb2b79af76d398eb9da4"
+    },
+    "formal_adapter": {
+      "path": "src/lei_signal/research/annual_profitability.py",
+      "sha256": "29b2cf2ca25f3822c2d0799f9fb138c1e4682046068ce84d13f27febd59db3d3"
+    }
+  },
+  "synthetic_coverage": [
+    "feature-only choices before outcome join",
+    "admission missing/duplicate rejection",
+    "expected counts and storage/hash/authorization guards",
+    "same-choice unknown delta=0 while own outcomes remain unknown",
+    "MOM tie rule",
+    "OP tie and directional high-minus-low label difference",
+    "loss/upside decomposition and both denominators",
+    "invalid return-label handling",
+    "calendar month preservation",
+    "full temporary CSV/JSONL execution with exact output whitelist",
+    "real temporary CSV/JSONL fixture includes rejected row with missing momentum; odd omission rank uses only admitted feature-complete pool"
+  ],
+  "real_output_written": false,
+  "network_requests": 0,
+  "notes": "Root review correction applied: odd omission rank is computed from exactly the admitted finite feature pool used by pairing. No real run authorized or performed."
+}

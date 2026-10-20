@@ -1,0 +1,34 @@
+{
+  "mission": "复用旧502只美股2020-2024价格原件，独立算日价格变化与新全历史源差异；只数据质检不评价因子",
+  "read_only_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/prices.parquet",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/stock-universe-us-20261015/stock-universe-us-20261015-20261015T194201-82eb0af53148/result",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/storage-plan.json"
+  ],
+  "input_binding": {
+    "new_prices_sha256": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563",
+    "old_attempts_sha256": "34de27e077d34feb02a8df7d85cd5e83d7dc055ce2acbdf9508fd8dc51c713e2",
+    "old_verification_sha256": "a7a89d3b0ba9f4595f45ceb70019eebf4ad545b9620287b6bf6a5c7fab2637ec"
+  },
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/compare_saved_price_sources.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/price-source-comparison-receipt.json",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/price-source-comparison"
+  ],
+  "scope": [
+    "所有旧attempts成功原件按原SHA核验；只2020-01-01至2024-12-31，504旧请求中502非空；排除._*元数据；input不改不下载",
+    "只精确symbol连接，可点/横线股份标签替换但必须单列，不能模糊/收益相关认身份；缺符号明确报。新源source字段逐项保留，不能称全部独立提供商，因为部分同源Yahoo",
+    "按两源各自连续有效adj_close观察计算close-to-close变化，必须同一天且各自上一观察日期相同，避免跨缺日比较；NaN/非正/重复日期单列不可吞",
+    "不是收益实验，不做因子、分组、收益率年化等；这里只核同个价格观察差异。输出总数/source分组/每ticker的绝对差异中位、90/99百分位、最大；1e-5、1e-4、1e-3、1e-2阈值仅诊断计数非合格阈值",
+    "将所有绝对差异>0.01的date,ticker,source,两端adj_close,两端日期,两种日变化和diff写外盘CSV；极值不是自动错误判定",
+    "旧原件来自2026-10-15下载，新源2026-10-20冻结；价格复权版本可有常数level比例变化，所以不以level不同判错；不把此幸存重叠样本证明2015-19或退出者正确",
+    "实现小脚本，至少合成验证不把跨缺日和后复权常数变化判成差异；一次真实运行；JSON/所有output哈希/输入清单和代码hash，新增大输出外盘create-only；本机receipt小摘要"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "created_at": "2026-10-20T19:50:30.161147+08:00",
+  "no_network": true,
+  "no_effect_statistics": true
+}

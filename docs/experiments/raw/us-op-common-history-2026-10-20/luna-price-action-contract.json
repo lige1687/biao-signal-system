@@ -1,0 +1,51 @@
+{
+  "task": "Reconcile 18 precomputed daily return disagreements using fixed local corporate-action data; qualification only",
+  "created_at": "2026-10-20T20:13:01.427626+08:00",
+  "inputs": [
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/price-source-comparison/differences-over-1pp.csv",
+      "sha256": "b685d703b8dcfd9ba90444098c777d08bc95156537dd346dcca1a69f1237f13b"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-compute_adjusted.py",
+      "sha256": "cb5aa6a6f935b131116eb947b9d4ef8230a1d1e32b9968a694e4aa7e442cbc98"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-corporate_action_overrides.csv",
+      "sha256": "ebed89ded2ff749133447f910fe9e4e75b27922e760cc1e6c49a6397f44017c5"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-spinoffs.csv",
+      "sha256": "af7eb38d1d428bed6b9dd6f66118b2c0f7a12c63e19eef4cfa5887f6925944b6"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-dividend_rescale.csv",
+      "sha256": "942c0ddeef804c383e21c06a5a439cf07a9e7ab646272ba6320d9a23615d7597"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-fetch_prices.py",
+      "sha256": "548008fd0e10e930c8d0f9f9041762e9f0a11f3e4dee767378913acf718ed425"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/johnbrick-README.md",
+      "sha256": "2650e119b7e3fa4f9756d1a5995aada5e8b7628177d5d98b7a039aca5fa6e2e2"
+    }
+  ],
+  "prices": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources/prices.parquet",
+    "sha256": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563"
+  },
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/price-action-reconciliation",
+  "allowed_code_and_receipt": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/reconcile_price_actions.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-op-common-history-2026-10-20/price-action-reconciliation-receipt.json"
+  ],
+  "rules": [
+    "No network and no execution/import of vendor code. Read methods and independently implement arithmetic only for the fixed 18 rows.",
+    "Compare ordinary cash dividend formula (P_t+D_t)/P_previous-1 against new return; for a matching spin-off event reproduce stated parent_shares/ratio/spinco_close/cash formula. Retain all action rows and sources.",
+    "COR ticker reuse: inspect action overrides, all price columns, old saved originals when bound by existing compare contract; do not presume Yahoo or new is right.",
+    "Classify numerical reconciliation, source explanation, and independently confirmed corporate-action truth separately. Same Yahoo origin is not independent source verification. Unknown stays unknown.",
+    "No factor scoring, forward signal results, portfolio metrics, source repairs, or retrospective backtest. Create-only external output; source hashes before; whitelist output hashes/readback after.",
+    "Report 18 rows, categories and unresolved residuals. Receipt actual script/hash/times, status, bytes; follow existing storage plan."
+  ]
+}

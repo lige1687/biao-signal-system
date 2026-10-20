@@ -1,0 +1,46 @@
+{
+  "schema": "matched-runner-repair-development-receipt/1",
+  "status": "synthetic_validation_passed_no_real_run",
+  "scope": "single authorized code-preparation repair; no real OP, return, market, or network execution",
+  "correction": "InterestExpenseDebt is accepted only when the SHA-bound interest adjudication has accepted=true and an exact keep presentation matching the selected fact tag/version/report/line. InterestAndDebtExpense remains rejected. Every final-admitted adsh must have exactly one boolean adjudication row accepted=true; rejected or missing rows fail closed.",
+  "adjudication_schema": "interest-line-semantic-adjudication/1; parser uses rows[].adsh and rows[].accepted boolean only; derives keep/reject sets; requires source_filings_sha256 equal the bound filings input SHA. No adjudication-file SHA pinned because the controlling JSON is pending final read-back.",
+  "validation": {
+    "command": "PYTHONPATH=src:docs/experiments/raw/us-op-common-history-2026-10-20 PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest test_run_matched_effect -v",
+    "exit_code": 0,
+    "runner_tests_passed": 14,
+    "runner_tests_failed": 0,
+    "adapter_command": "PYTHONPATH=src:tests/unit PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest test_annual_profitability -v",
+    "adapter_exit_code": 0,
+    "adapter_tests_passed": 8,
+    "adapter_tests_failed": 0,
+    "coverage": [
+      "InterestExpenseDebt passes with exact adjudicated line only",
+      "InterestAndDebtExpense remains unresolved/rejected",
+      "missing/duplicate/nonboolean adjudication rows fail",
+      "final-admitted rejected or missing adsh fails closed",
+      "adjudication source_filings_sha256 must equal bound filings SHA",
+      "synthetic full CSV/JSONL end-to-end bound includes adjudication input"
+    ],
+    "preliminary_failed_invocation": {
+      "command": "PYTHONPATH=src:docs/experiments/raw/us-op-common-history-2026-10-20 PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest test_run_matched_effect test_annual_profitability -v",
+      "exit_code": 1,
+      "cause": "The adapter test module was not importable because tests/unit was absent from PYTHONPATH; runner tests still passed in that invocation. The adapter suite was then run separately with PYTHONPATH=src:tests/unit and passed."
+    }
+  },
+  "bindings": {
+    "runner": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/run_matched_effect.py",
+      "sha256": "7d9728312e8f1f71cc0e7ea8d6b25f8467f4af8bbf1c685249f969df6950787a"
+    },
+    "tests": {
+      "path": "docs/experiments/raw/us-op-common-history-2026-10-20/test_run_matched_effect.py",
+      "sha256": "afaf9110a171254a240be165482847e5b4ecbbc961204cfa1d30e18bb31dceee"
+    },
+    "definition": {
+      "path": "src/lei_signal/research/annual_profitability.py",
+      "sha256": "29b2cf2ca25f3822c2d0799f9fb138c1e4682046068ce84d13f27febd59db3d3"
+    }
+  },
+  "real_run_authorized_or_performed": false,
+  "next_step": "Wait for root to freeze an updated execution contract bound to final adjudication and corrected final admission; no execution in this development task."
+}
