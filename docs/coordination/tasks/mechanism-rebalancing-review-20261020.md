@@ -1,3 +1,18 @@
+# 机构仓位金融含义扩展与季度回报判断：有界检验交付 2026-10-20T23:43:20.448332+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner 01a158cd-e0ee-7260-b91f-629930ce779f/root；status completed（本轮新定义与两项美国季度回报用途）；scope_released true（仅本轮新路径，冻结原件不可覆盖）。真实赎回、共同持仓、行业景气及A股效果仍未评价，不宣称整方向完成。
+- checked_coordination_sha=b7f53089c42c167130c90ec5e757eb401e5da3f2；checked_at=2026-10-20T23:43:20.448332+08:00。已读COORDINATION1.1及self、research-dispatch-controller、sentiment-factor-research、personal-lowfreq-system-audit-20261018、strategy-account-bridge-20261020、market-style-observation-20261020。交付补读A股反转适用完成/风格曲线与被动解读/成熟策略候选审阅；这些归原owner，与本题新raw/报告无交叉，不重复取数或接管。
+- 成果 codex/mechanism-rebalancing-review-20261020@e30797304630190a479d27ca0a361d67adccc223（核心84d40a23eb53eaed960765ca1abcaaa0c9e7ff4e），37准确路径505715B普通push、远端ref及逐文件字节核同，后续仅回执/自身progress两路径。报告 docs/experiments/institutional-positioning-mechanism-extension-2026-10-20.md，API全文与列表唯一核同；registry自身一键宏观与情绪/mixed，INDEX一行，735旧项保持。未合main、未切换共享树/索引、0删除。
+- 区分信息/景气认同、被动价格变化、共同持仓、真实赎回及投资限制。Coval–Stafford/Lou全文方法段、Wardlaw2020和Li–Zheng2025仅摘要；最新Pástor/Sikorskaya/Wang实为2026-09-04三作者稿，完整持仓/总资产/限额例外条件须保留，价格被动超限不必然强卖，基金与股票结果分开；尚未原文复现。
+- 新固定1核心批144年度拟合、NAAIM592/CFTC544共同评价周、2015-01-05—2026-07-13对齐，未来季度成熟至10-12。加入四周变化及趋势关系，较价格+当前水平误差多0.9243%/1.6299%，95%主差额范围跨零，完整候选也未胜过过去平均回报。暂停本版季度收益增强；NAAIM上涨背景未来路径跌幅少1.285pp只保留辅助线索，不换成已验证避险。
+- CFTC744结构配对269分母项较大、139占比/张数变化方向相反；固定旧OI分母并控制总量变化。NAAIM均值非同一管理人交易；所有真实公布时点仍未知，历史当前版本/已见行情仅探索，训练成熟检查不能替代PIT。没有完整LEI、账户净收益、费用、少亏/少赚证据。
+- Astra medium文学/设计/结论审阅；Sol medium测量，Sol medium实施；另以独立代码核2504项0差异、2次年度增广最小二乘、26周区间一致；root独核分母例子/主差额及17新和22旧冻结绑定未变。冻结措辞forgone downside澄清为未来路径风险，未改冻结或重跑。
+- 本轮50来源动作（root14、文献33、测量3），root3访问拒绝/2工具长度限制、文献10失败留账。模型实际费用未知。旧≥1124拟合+144=≥1268，≥4历史Pro保留；另2次独立系数核算不算候选搜索。0旧重跑/参数搜索/新行情下载/付费/生产/交易/自动通知/目标库写入。两次本地读字段检查失败已纠正实际键名，未改数据或服务。
+- 大PDF、排程及结果保存在storage-plan绑定的UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9固定外盘，本机小raw/报告；外盘需实际连接恢复，未上传大原件。复现先读controller/freeze.json、research-contract/results-summary/closure-state及verification，不重复运行覆盖effects-v1。无本题后台实验。
+- 下一项最有可能改变判断的证据是同一基金真实资金压力、完整持仓及当时披露链条；未取得前不继续扫现有仓位阈值。生产采用/原规则变更/交易仍无授权。原目标不代验收，A股研究缺口保持单列。
+
+---
+
 # 机构持仓含义扩展：趋势认同、集中与约束 2026-10-20T23:17:34.505519+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha 30596ce3e740c0db64ad4da98bed3b6481e7a214；checked_at 2026-10-20T23:17:34.505519+08:00。已读COORDINATION/self/sentiment-factor-research、personal-lowfreq-system-audit-20261018最新年度OP结案；dispatch/账户/风格范围沿上一轮核查，无本题文件冲突。
