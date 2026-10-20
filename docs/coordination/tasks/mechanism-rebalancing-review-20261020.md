@@ -1,3 +1,14 @@
+# 整体研究流程顺序审计 2026-10-20T19:04:38.389483+08:00
+
+- task-id沿原；owner沿原/root；status active；scope_released false；checked_coordination_sha 5792e2908990006e8507dbaf210da5a5550cfa31；checked_at 2026-10-20T19:04:38.389483+08:00。已读COORDINATION/self/research-dispatch-controller/theory-workflow-system-increment/pro-advice-process-review-20261020/strategy-account-bridge-20261020/research-utility-review-20261012/personal-lowfreq-system-audit-20261018最新范围。
+- 用户本轮“刚说的顺序流程，看一下整个流程系统”。模式report_only：核观察现象→机制金融含义→可反驳假设→资料→统计→规则→回测稳健性→实际增量及采用。复用已完成文献和月末检验，0新市场实验/取数/参数变化。
+- 基线主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，最近已推自身成果3b3adbee4b22f4546946c024a1d608a915d93faf。源码/规范/页面/其他owner目标与运行服务只读；不修共享definitions、不接管前向策略。
+- root唯一新写 docs/experiments/research-process-sequence-audit-2026-10-20.md、同名raw小证据、原progress追加；registry仅本键、INDEX仅本行。协调沿本任务，成果沿codex/mechanism-rebalancing-review-20261020。可做无市场数据的只读合同验证探针，不改变入口或生产。
+- 两Sol medium只读并行：workflow_code_audit核原生程序与约束；workflow_product_audit核规范/学习/报告/前向页面连接。各无写权；root独核并归档。冲突决定：active strategy-account-bridge的新个股策略保持原owner；原生workflow作者保留，当前无代码修改。
+- 验收：每步规范/程序/实际入口证据、顺序可跳过的准确边界、真实案例及优先修补范围；不能把报告归档当机制成立/策略采用，不能把单入口覆盖说成全系统。结论、API报告读回、归置和远端自身文件核验后收尾。
+
+---
+
 # 月末股债低频适用性检验交付 2026-10-20T18:54:47.214931+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner沿原；status completed（本轮有界适用性检验）；scope_released true；checked_coordination_sha c3aced7add992f7768bebae94e0d4c875ec851c4；checked_at 2026-10-20T18:54:47.214931+08:00。已读COORDINATION/self/dispatch/personal-lowfreq-system-audit-20261018/research-utility-review-20261012/strategy-account-bridge-20261020；后者新个股前向范围保持，无重复或源码冲突。
