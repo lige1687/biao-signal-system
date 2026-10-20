@@ -1,3 +1,15 @@
+# A股短期反转适用范围：只读审查交付 2026-10-20T23:36:05.379706+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（仅本轮适用范围问题）；scope_released true（本轮新报告/小记录，旧结果仍冻结）。checked_coordination_sha=1360d5264d4640991aa4d78ed8beacfe3774e3c9；checked_at=2026-10-20T23:36:05.379706+08:00；已读COORDINATION及self、research-dispatch-controller、research-utility-review-20261012、strategy-account-bridge-20261020、mechanism-rebalancing-review-20261020、market-style-observation-20261020。策略owner23:26成熟原型/UI审查已明确避让本反转资料汇总，本方不接管其实施/前向。
+- 成果codex/personal-lowfreq-system-audit-20261018@c57b4dc6a53da87b7a8be05af4aa34f5d500b2a9，11准确路径正常push/逐字读回。报告docs/experiments/a-share-reversal-applicability-review-2026-10-20.md SHA66854c3879ab1ceb6f95bc0b33999ec1cf5bc0463eb47ce4867e325b9e7a1348；主树新报告/raw/registry本键/INDEX本行精确镜像；5报告API正文逐字读回、两树归置与准确暂存diff检查通过，旧11输入SHA未变。
+- 复用本对话600历史候选132月原始涨幅Rank IC−0.062779（方向诊断，来源资格仍受限）；因子实现300股绿色排序60月偏冷对全集+0.643pp，但对低波71月+0.359pp范围跨零；10股账户偏冷−41.32%未胜低波−26.31%；另owner20股rv+30.56%、最大跌幅52.97%，对v累计+14.5189pp/跌幅少4.3686pp，但4685笔、高费转亏。四种用途/规则分开，旧正负结果全保留。
+- 原始文献关键：Liu/Stambaugh/Yuan《Size and Value in China》，作者稿2018-12-11，附录A.2正文28页看过去20交易日，**每日调整1/5、每批持5交易日，再汇总月收益**；不可冒称月度调仓原样复现。https://rodneywhitecenter.wharton.upenn.edu/wp-content/uploads/2019/04/01-18-Stambaugh.Published.BlumePrize.pdf 。其CH4加入异常换手后反转未解释部分不显著；不把低相关/机制故事当独立增量。20股组合正收益不全归反转，ETF/择时等待未评价。
+- 决定：保留月度候选排序与有限组合研究，暂停硬过滤和直接采用；原策略与前向负责人不变。盈利资料42公司/成员月3.25%和动量配对差限制严格增量推断，补资料不保证转正；优先合格会计表达/覆盖，再核真正相近动量，不重跑当前封存。
+- Luna沿现有只读任务核三报告/小回执；root核范围/论文/保存数字差额。0新回测/0参数/0行情/0生产或服务修改。6公开动作（2搜索/2open其中403一次/2find）后停止，未绕过拒绝；旧预算不重置，实际模型费用未知。未新增大结果或外盘读写。经典旧报告当前API404已改为已推送原提交链接，不补写旧正文/覆盖他人；所有边界留delivery-verification。
+- 当前无待跑统计或执行agent，本有界问题已答；后续须有新证据才能重开。报告及小证据在原分支，其他owner仅本地源码/大数据不在本提交，远端不能据此完整复现全部账户。未改目标库状态/通知/交易权限。
+
+---
+
 # A股短期反转：已有结果与适用范围审查 2026-10-20T23:25:55.671451+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha=300606f10c8695b2e1f09611ced2e89e096ef369；checked_at=2026-10-20T23:25:55.671451+08:00；已读COORDINATION及task-id：personal-lowfreq-system-audit-20261018, research-dispatch-controller, research-utility-review-20261012, strategy-account-bridge-20261020, mechanism-rebalancing-review-20261020, market-style-observation-20261020。另核“因子实现”会话01a12bbb-44f2-7c22-a0a9-defd4f1640bc、三份已交付报告，原owner仍负责实施和前向；不接管不重跑。
