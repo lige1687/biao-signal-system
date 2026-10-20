@@ -1,3 +1,15 @@
+# 宽度与波动率仓位、季度盈利资料两个问题进入独立核查
+
+- task-id pro-advice-process-review-20261020；owner 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status active；scope_released false；checked_coordination_sha 6c6725b396e7534f8b0b05333cba2d8de08bb0d5；checked_at 2026-10-20T19:16:56.845291+08:00。本轮实际读COORDINATION、自身、sentiment-factor-research、risk-shape-information、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller；旧宽度负责人仍保留其轨道，本题只复用旧证据并回答用户新增两项用途，不改其他owner文件或范围。
+- 用户原话“2我们之前也有做过类似的研究，比如根据宽度，你看看能否继续研究透？以及你定义的市场起伏是啥？金融含义是啥？都可以告诉我一下然后我们继续推进研究；以及3，我觉得是对的，就是可能数据不太好搞，你这两个问题研究一下”。授权两项有界研究：既有宽度与收益波动率的仓位价值/剩余证据；季度盈利变化的历史可知资料与后续比较资格。财报不进入生产技术判定，波动率不改原策略关键性波动定义。
+- 工作基线 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；最近本题成果 codex/pro-advice-process-review-20261020@dbdb64d9bf7da73e2be198d1fd03e23566f8af0a。多人脏树保持；以独立Git index先read-tree完整父树、准确路径断言发布，不使用旧故障worktree。
+- root唯一新增写范围：docs/experiments/raw/breadth-volatility-increment-2026-10-20/及同名报告、raw/quarterly-earnings-availability-2026-10-20/及同名报告，原自身work-progress；registry/INDEX仅两题准确键/行。现有源码/定义/生产/账户/旧封存/桌面原文只读。若需要新技术实现范围，在开工前另登记。
+- 当前Sol medium breadth_volatility_audit与quarterly_earnings_audit分别只读旧证据/输入资格，write_paths=[] network_allowed=false，无子委派。旧36+4宽度账户、风险分组与原2/2及4/4风险匹配失败均保留，不因新题名重置预算；原MSFT 71期212版本资格统计直接复用，不重复下载。不接管原低换手或美股长期因子研究。
+- 验收：给出明确金融含义；旧性能和增量边界；准确可用时点/指纹/比较对象；在已有资格与授权内执行能改变决定的必要新检查，不能执行的分支给具体缺口。新效力试验须先固定问题、定义、同样本/资金对手、全部尝试和预算，未测不填效果数。当前0新效力/0新来源，金融资料方法用现行standards索引。
+- 存储已核UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 available true；外盘503.5GB、本机15.6GB。新结果先plan_output外盘，预计至多64MiB、内部小记录至多1MiB；容量不是研究授权。没有新后台任务/通知/跨chat消息/数据库写入。
+
+---
+
 # 低频确认次开盘比较已交付，局部用途暂不升级
 
 - task-id pro-advice-process-review-20261020；owner 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status completed（仅本次有界比较）；scope_released true；checked_coordination_sha ce36318a5a5e98797c8cce51f2588d05960bb1d6；checked_at 2026-10-20T17:05:20.825858+08:00。本轮已读COORDINATION/self、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、lowfreq-strategy-discovery-20261019、strategy-account-bridge-20261020、research-dispatch-controller、dot-pro-strategy-definition，并补读最新investor-workspace-simplification-20261012静态资源交付。新增美股参考定义/前向观察服务/低换手账户均不重叠，不接管其任务。
