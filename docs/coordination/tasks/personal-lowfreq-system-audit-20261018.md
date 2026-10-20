@@ -1,3 +1,15 @@
+# 美股同池经营盈利：历史名单、退出与当时财报补齐 2026-10-20T19:18:44.459419+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha 429b83e3700e3ee865eb9ba1f944dc679e9834d1；checked_at 2026-10-20T19:18:44.459419+08:00；已读COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/research-dispatch-controller/pro-advice-process-review-20261020；前向服务与旧Gemini范围沿上轮只读。新增pro-advice季度盈利变化归该owner，本题年度OP水平与同池动量比较，不重做其微软EPS、低换手或宽度仓位。
+- 用户明确授权继续经营盈利、补同批美股历史名单/退出/当时财报，缺的找公开来源，Luna执行、root假设和审核。基线codex/personal-lowfreq-system-audit-20261018@008625c1c4eb1b63d82403565799343075b30922，最近成果同此。复用旧French/OSAP和已有SEC原件，不重跑封存收益或重置旧请求/实验预算。
+- 本轮唯一新增路径docs/experiments/us-op-common-history-2026-10-20.md及同名raw目录；自己的原work-progress；registry仅本键、INDEX仅本行，核验后准确镜像main；Luna限定写新raw内独立文件，root统一合同/结论。共享实现/定义/策略/其他任务/生产只读；如需要新增正式实现先另登记。主期拟2015—2024，历史S&P500若采用须明示为大型股适配，与French大于NYSE中位数不同，不能把旧各自分组宣称同池。
+- 当前先资格：完整成员区间及退出原因、历史证券身份、历史收益/退出兑付、按发布或接受时间截断年度财报与修订；确认支持后才冻结同池动量内盈利比较，按收益/下跌损失/放弃上涨/集中/名单变化/维护成本分别交付。不以接口成功或存活者齐全冒充全链路。
+- 本轮公开资料定位已3搜索、5打开请求（含重复读取计入）；后续确定URL写来源账，先小件识别和退出案例，合格才扩固定2013—2024必要财务来源。所有失败/限流留账，429或访问拒绝停止该来源，不付费、不绕过。新效力核心最多1，纠错最多1且不能追正；旧家族尝试保持。预算不是以新题名重启旧OSAP限额入口。
+- 存储固定外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9已核可用503.5GB，内盘15.6GB；预计源资料至多8GiB、新派生2GiB、本机小文件4MiB，新增大件先plan绑定不回退。无删除/生产/真实交易/付费/通知/新用户侧对话；实际调用费用未知。
+- 验收：来源可定位SHA、名单覆盖与失踪者不被删除、财报首版及修订时点可重放、同池资格分母、预定用途对手与代价、关键数独核、报告库/API/成果远端读回。当前新核心0，未把准备写作结果；资料阻塞则准确保留未评价项并做完可执行补证。
+
+---
+
 # 美股公开买入分组按用途比较交付 2026-10-20T17:20:54.884245+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（本轮公开买入端及现有输入能力问题）；scope_released true。checked_coordination_sha cc77fc7c8d515a7307481ffa5d83d0dffaaba508；checked_at 2026-10-20T17:20:54.884245+08:00。前段所列COORDINATION及self/research-utility-review/lowfreq-discovery/gemini/dispatch/pro-advice/strategy-account-bridge已读，最新fetch到本sha无新改动；无冲突，不接管他人季度盈利、低换手、ETF或前向服务。
