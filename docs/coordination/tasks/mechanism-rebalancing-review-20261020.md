@@ -1,3 +1,17 @@
+# 中美反向研究本轮交付 2026-10-20T20:45:05.706493+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner 01a158cd-e0ee-7260-b91f-629930ce779f/root；status completed（本轮US有界历史比较＋中美数据资格）；scope_released true。**A股效果仍缺资料、完整策略未完成**，不把本轮结案当研究方向全部完成。
+- checked_coordination_sha 4a529dc0a0c8002c8b01a6e745dd48d404d1c06b；checked_at 2026-10-20T20:45:05.706493+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research，以及新增market-style-observation-20261020和personal-lowfreq-system-audit-20261018；交付再fetch无变化。后两owner为风格UI/年度盈利，不与本题文件或问题重叠；未接管旧情绪合同/共享规范/源码/定义/服务。
+- 用户授权补数据、A股美股分别研究。本轮实际补NAAIM官方1050日期＋免费最新8期=1058，最新2026-10-14=74.53，252重合匹配；CFTC1062周、AAII公开21行/7新周。官方页延迟不能泛化为免费源都延迟；周度而非盘中，无持续采集许可或SLA声明。
+- 美国两固定季度风险比较：NAAIM600评价周，加入价格后主误差少0.5535%，范围含恶化、方向与高仓位反向相反；CFTC560周误差多5.7993%，高组粗差不稳。两组合主误差都差于过去平均，不采用本版简单反向用途。当前版本回顾、actual_release_at空、非真实时点预测；账户/费用/其他用途未评价。
+- A股取得嘉实5原PDF、286持仓行；东方财富3历史逐年查询成功，证实前十大发现路径。CKGSB20原PDF（19可读，1三次截断）、18同题散户行，5有独立公布日，其中2期结果到期；历史主动基金总体/首发/完整面板及抽样一致性未齐。A股0市场拟合，不能以资料不足写成效果失败。
+- 3 Sol medium取数，Astra medium冻前/最终科学审阅，Sol独立四模型误差/8路径/2年度系数核同，最大主数字差7.11e-15；root核22冻结SHA、主要增量、12中国清单文件、报告API全文及730旧登记保持。归置/diff通过；浏览器视觉未验。错误路径API404已按真实report ID恢复，源站拒绝/截断/编码错误均留账。
+- 新核心1、96年度拟合，0阈值搜索/政策回测/旧重跑；旧家族≥1028拟合/≥4Pro保留，已知累计≥1124拟合，另独核2数值求解。root8请求、NAAIM25、CFTC3API/9来源页、中国32搜索/46显式URL调用及10编码错误；压缩前部分浏览器调用总数不可恢复，总请求未知，不造精确数。实际token费用未知。
+- 两报告 docs/experiments/us-contrarian-positioning-research-2026-10-20.md 与 a-share-contrarian-positioning-research-2026-10-20.md；raw docs/experiments/raw/contrarian-market-data-research-2026-10-20/。报告/registry/INDEX/progress与小记录成果 codex/mechanism-rebalancing-review-20261020@5cbca7e7c049b14b0215a38364c464972ee06f23，核心27ae6650db716a751651475f301bdbccec59a10d（41准确路径450000B）和最后回执均普通推送、ref/字节读回；0删除/强推/合main。新数据原件84.38MB/56文件留固定外盘storage-plan路径，Git仅位置/指纹，不宣称无外盘的clone可重现。
+- 目标数据库、原生产、原策略、交易/通知均未写；未代用户验收。恢复先读closure-state、冻结与两审阅，不重跑追正。中国机构恢复所需为历史主动基金总体与公告资格；散户需连续抽样/首发历史。没有本题后台任务，无同范围必需可执行统计留空；完整数据与真实策略未完成保持明确。
+
+---
+
 # 中美机构与散户反向研究：补齐数据并分别检验 2026-10-20T20:16:05.778080+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha a7bd3ff63234c0a7c8baa72e8ff977abe50c92c8；checked_at 2026-10-20T20:16:05.778080+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/market-style-observation-20261020；账户/美股盈利保持上轮已核范围，无本题共享实现写入。
