@@ -1,3 +1,17 @@
+# 用户授权独立实现与真实验证 2026-10-20T11:50:34.185053+08:00
+
+- task-id gemini-strategy-review-20261020；owner 01a15749-ea9b-7c61-975c-65028e32432e/root；status active；scope_released false。checked_coordination_sha f7022410341e4a6289094bffb637952c7163337b；checked_at 2026-10-20T11:50:34.185053+08:00；已读COORDINATION/self、technical-factor-sequence、research-utility-review-20261012最新11:30、personal-lowfreq-system-audit-20261018最新、原dispatch及前轮相关任务。
+- 用户本轮原话：“我觉得他的思路还是不错的，可以借鉴和实现，验证一下看看效果”。由report_only转为独立研究实现与验证；旧审阅报告与6来源预算封存保留。新有界问题：120日对数斜率×R²是否改善月度宽基ETF选择，较同期限动量、单斜率、波动调整、既有离散趋势信息和简单平均分配，收益风险及操作代价如何。
+- 主控投入：先完成这个精确公式，旧SMA斜率变化未回答；4宽基主分析、4行业辅助分开。月末分数、下月首日开盘、前2各半、同资金与预定费用。经济OHLC仅有限历史纸面账户，不冒充完整原A或可实盘。CGO缺换手/份额，本轮不造代理替代；其余新公式保留后续独立问题。
+- 独立工作区 .codex/worktrees/gemini-steady-trend-20261020，分支codex/gemini-steady-trend-20261020，base 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，禁止自动commit/成果push。主树脏改保留；协调元数据仍按强制规则单独push。
+- 唯一写权：Sol medium在独立树 src/lei_signal/research/steady_trend_selection.py 与 tests/unit/test_steady_trend_selection.py；root在独立树同名raw/合同/runner/报告、定义仅本题对象和来源、registry本键与INDEX本行。主树只新增本报告/同名raw小接续/本registry键与INDEX行，必要本题定义/源码镜像须前置核同名不存在再登记；共享workflow、旧原文/规则/输入/生产/他人记录不改。
+- 入口：本题是月度选择政策的同资金比较，按现行question_contract的account/policy需独立evaluator。复用既有资格/冻结/定义/尝试账本与output_storage，不能伪装原生预测器已支持或改成固定20日误差。先合同/合成/来源核对与代码绑定，再一次真实效果。
+- 只读Astra high已审候选选择与公平比较；Sol medium已核输入SHA aaf497e345404bacd0bc3db3899928de4ba5767fc10b332af5351dd13340c00d、10694条/1337日，2020-12-21至2026-06-30。历史已见、2漏日和行动/到达边界保留。
+- 新问题上限1核心+3必要跟进，最多6新来源但计划0，0调参扫描；此刻0真实效果。不会重置旧D01/斜率/颜色预算或重跑封存。预估本机小记录2MiB、独立源码工作树20MiB；外盘结果日志64MiB，执行前plan_output绑定，盘UUID已核、内置13GB/外盘504GB可用。
+- 新具体目标在系统待升级去重登记，绑定本原话；完成后仅提交待验收，不自动验收。验收是实际性能/增量/代价、资格与独立核数、复现记录及归档；下一步冻结完整定义、写独立工具并完成真实比较。
+
+---
+
 # 本轮建议审阅已完成 2026-10-20T11:18:10.386408+08:00
 
 - task-id: gemini-strategy-review-20261020；owner: 01a15749-ea9b-7c61-975c-65028e32432e/root；status: completed（仅report_only问题）；scope_released: true。
