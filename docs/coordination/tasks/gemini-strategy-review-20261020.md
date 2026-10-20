@@ -1,3 +1,16 @@
+# 独立实现与52月真实比较交付 2026-10-20T12:08:37.565431+08:00
+
+- task-id gemini-strategy-review-20261020；owner沿原；status completed（本120日候选月度ETF选择问题）；scope_released true。checked_coordination_sha 0547a76a21c8dfb704b3a2fb3034e44e828e0817；checked_at 2026-10-20T12:08:37.565431+08:00；已读COORDINATION/self、research-utility-review-20261012最新12:06交付及12:07并发界限、personal-lowfreq-system-audit-20261018最新12:06防御接续、technical-factor-sequence、lowfreq-strategy-discovery-20261019、research-dispatch-controller。无冲突，不接管他们的新用途。
+- 实际完成独立研究实现、冻结后1核心批：固定4宽基主池/4行业辅池，52完整月，2022-02-07至2026-06-01，两费用6方法。输入/代码14绑定未变；0调参扫描/拟合/新来源/旧效果重跑。后续1组必要独核和保存结果分解，预算未重置。
+- 宽基0.1%单边：候选累计7.506%、普通涨幅6.854%、四只平均分配26.740%；最大跌幅38.586%、38.241%、32.219%。主月差+0.0178百分点，95%范围[-0.4099,+0.4720]，换19/52月；行业39.126%对66.556%，最大跌幅47.373%对34.770%。保留实现，暂停本月度选择用途，未证明普适无效、未检验完整原A/回撤或突破。
+- 产物 docs/experiments/gemini-steady-trend-etf-2026-10-20.md SHA 42dd4c47466b51d7416e0116d18f007272d465fba7e72b18c97e3627cc06ee38；同名raw有design/freeze/source-qualification/definitions-new/execution-attempt/independent-audit/account-reconciliation/manifest/final-checks。正式研究模块src/lei_signal/research/steady_trend_selection.py与专用测试已从独立树逐字镜像；主definitions仅新增本6对象/1来源，registry本键/INDEX本行，所有旧值核同。成果本地未commit、未push，协调提交不等于成果提交。
+- 真实验证：11合成检查；独立最小二乘+另一费用求根核432特征/24账户/8020数值，最大差9.33e-15；12主费率账户已卖+未卖毛损益-费用与净变动差<1e-12；归置exit0；报告API全文SHA与本地一致。文件名未含ARCHIVE所以UI filename badge=false，但正文ARCHIVE及registry的completed状态已记，不改名破旧路径。
+- 外盘输出绑定 /Volumes/win+mac通用/LeiSignal-新实验结果/gemini-steady-trend-etf-20261020/gemini-steady-trend-etf-20261020-20261020T115557-1b07371cc6c2/result，结果+自包含图约10.7MB，manifest可核；没有内盘大结果回退。原输入11上游及两原文指纹不变；经济价/历史到达未知/小现存池限制保留。
+- 目标okr-4b824f7bb9a3实际资料/成果读回后submit_review，version5、status review，未代用户accept。原文、规则、生产、真实交易、他人目标与通知未修改。
+- 委派Sol medium实现、Astra high方法与代码/结论独审，root唯一效果执行与独立核算。工程拒绝/尾差/缺绘图库均留事件，未改研究问题追正。恢复只读保存结果；新信息或另一有理由用途才重开，禁止删执行记录重跑。
+
+---
+
 # 冻结准备与准确交付路径 2026-10-20T11:59:23.903696+08:00
 
 - task-id沿原；status active；checked_coordination_sha 84b67edc7107cce46ca358eb644cf7a53c573794；checked_at 2026-10-20T11:59:23.903696+08:00。已读self/COORDINATION、research-utility-review-20261012最新11:58、personal-lowfreq-system-audit-20261018最新11:50、technical-factor-sequence、dispatch及原相关任务。新审阅不修改本题定义，实现不重叠。
