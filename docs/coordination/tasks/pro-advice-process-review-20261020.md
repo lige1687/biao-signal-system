@@ -1,3 +1,14 @@
+# 用户已批准完成融合：实际采用核验与本题收尾
+
+- task-id: pro-advice-process-review-20261020；owner: 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status: active；scope_released: false。checked_coordination_sha: 08aa11b701433c12ec1bc70d53e6030f4311e034；checked_at: 2026-10-20T16:12:49.695062+08:00。
+- 用户授权原话：“可以啊，完成吧去”。本轮核三项建议实际采用与入口，然后准确收尾；不启动新研究或生产变更。
+- 已读task-id：self、personal-lowfreq-system-audit-20261018最新16:07交付、research-dispatch-controller；前轮research-utility-review范围不变。原owner已声明合入实际买入组、可比报警负担、行动延迟，main现行playbook实际读到对应段；复用其成果、不重复写核心文件。
+- 唯一写者root：本题原报告、raw/adoption-supplement.md状态、raw/adoption-verification.json新核验回执、原progress；registry仅本报告oneLiner、INDEX仅本行。保留旧review/verification事故历史；AGENTS/skill/playbook只读。
+- 基础已推成果codex/pro-advice-process-review-20261020@667c544572f4a166d3e5b45c74c6778979f38dcb。只读助手adoption_verify为Luna/low，核三个语义与阅读入口，0网络/写权/市场计算/下级。root核字节及已有owner证据。
+- 验收：三项内容覆盖，项目AGENTS与skill入口真实有效，原资料和规则边界保留，待合入表述更正，准确登记/归置/远端读回。总新市场/外部资料请求0，token费用未知。
+
+---
+
 # Pro建议有界审阅完成；最小补充待核心文档原写者合入
 
 - task-id: pro-advice-process-review-20261020；owner: 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status: completed；scope_released: true。
