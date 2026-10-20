@@ -1,3 +1,16 @@
+# 高点组合额外历史股票复验交付 2026-10-20T11:30:22.753809+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed仅本次固定组合采用问题；scope_released true。checked_coordination_sha=e6ca543cefe9bc776029f4903762d9437d9e1be3；checked_at=2026-10-20T11:30:22.753809+08:00；最终fetch无新增提交。已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新11:19/gemini-strategy-review-20261020最新11:18/investor-workspace-simplification-20261012最新00:57/research-dispatch-controller/lowfreq-strategy-discovery-20261019；无范围冲突，其他财务与系统成果保留。
+- 报告docs/experiments/high52-execution-revalidation-2026-10-20.md SHAb9bfe3681ce199212e9593bc54569f0a411c567c3c45c4cc3a3d86d55d09758d已登记mixed。2014历史2595减旧600后固定哈希抽300，600来源请求全返回、932813日线+4752事件，19个后来退出者保留；不冒充新的市场时期。旧600效果不重跑。
+- 81同月完整比较：普通/组合月均0.294855%/0.409637%，差+0.114782个百分点，95%范围[-0.216732,+0.446297]；2021—25的50月差-0.024618个百分点。风险略低但大涨前10%捕获38.40%→36.64%。费用25bps只用同64月，差+0.139439个百分点仍不确定，同月扣费前+0.133125；不混用81月。111未知保留权重；成交困难敏感性未知270。当前不采用固定组合，不用新过滤挽救结果；未证明账户净收益/ETF/US或完整LEI有效。
+- 源资格前纠正back归一化假跳变、因子舍入相关性、pct补零精度、停牌空字段及成交方向；161当前幸存样本仅诊断、source-v2到50处停止无输出，正式300的source-v3和effects-v1各一次。原source-v1模块快照留存但精确runner快照缺失，未用于效果。最终源码603f71c0…、runner7a0fd4c4…及效果a6d0d556…实核未变。9项合成边界、10308独立数值检查（最大1.85e-14）及Sol只读报告核数通过。
+- 自身旧登记缺陷已修：仅sources.green_momentum_methods_20261020转为来源文件+SHA，六个research.selection卡各补11个必填描述字段，原值/公式/版本/范围/状态/生产限制及其他owner条目完整保留。修前注册表外盘保存；修后SHAe08e38e0e62adc116dda776074b5a2a4a34d89081f25ec20312945e76e1b8d88。真实prepare解析6卡、来源matched、issues空、execution_authorized false；相关60检查通过。两次辅助断言误写纠正留痕，未改验证器、未重算收益，冻结合同未倒改。
+- 现有5188系统报告6表、结论和修复说明真实可见；API全文同本地，Agent SHA核对且不截断；704其他登记保持、归置通过。目标okr-ff1e0a86fbac只note176→177/in_progress，旧历史/其余字段保持。用户阅读效果待验收，整体研究目标未冒称完成。
+- 本题累计沿旧core1/1、followup1/3；600资料调用加6文献请求含2次403，未重置计数，无参数搜索。Sol执行及只读复核，Astra部分方法反馈后容量失败，主控独核，不冒称完整Astra通过；模型实费未知。本地小产物约263674B、外盘133443458B，在800KiB/256MiB预估内。无后台行情运行、交易、付费、通知、删除或生产改动。
+- 主成果codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9仍本机未提交未推；协调元数据不代表正文跨设备移交。恢复读同raw的state/design-v2/effects-contract/source-v3-review/independent-review/registry-schema-repair/delivery-validation及storage-plan；不重跑已封存结果。重开须有明确新用途或新时期/市场及合格输入。
+
+---
+
 # 高点复验收尾及自身登记格式补正 2026-10-20T11:24:10.171747+08:00
 
 - 原task-id/owner不变，status active，scope_released false；checked_coordination_sha=7a2863bd98d0be5ab3210bfa8ca5777aea344b4e；checked_at=2026-10-20T11:24:10.171747+08:00。已读COORDINATION/self、personal最新11:19、gemini-strategy-review最新11:18、system00:57、dispatch、lowfreq-strategy-discovery。新财务/OSAP及Gemini报告不重复，无行情研究冲突。
