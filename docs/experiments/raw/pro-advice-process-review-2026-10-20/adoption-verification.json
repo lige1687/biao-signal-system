@@ -1,0 +1,59 @@
+{
+  "schema": "document-adoption-verification/1",
+  "verified_at": "2026-10-20T16:15:30.083004+08:00",
+  "status": "completed_document_adoption",
+  "user_authorization": "可以啊，完成吧去",
+  "adopted_by": "personal-lowfreq-system-audit-20261018",
+  "verified_by": "pro-advice-process-review-20261020",
+  "owner_evidence_commit": "e1330a7d8ee4c7f8babef2afe06de34278fce7e9",
+  "owner_evidence_path": "docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/core-change-receipt.json",
+  "owner_evidence_remote_bytes_verified": true,
+  "core_files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "c4e2910df90a2d5194835dd1edf4ddfff2749f70ecf8e54a19df4bb3cf2e7adc",
+      "matches_owner_adoption_receipt": true
+    },
+    {
+      "path": "docs/research/factor-discovery-playbook.md",
+      "sha256": "26d4eb80641279f2a3622faeb3895079f646e31903b91edd648337493196fe36",
+      "matches_owner_adoption_receipt": true
+    },
+    {
+      "path": ".agents/skills/lei-lowfreq-research/SKILL.md",
+      "sha256": "d0b7ba268f1fb7cf8610c35a6a8b837c7145f9134950996d14f2ddcfb0feab5d",
+      "matches_owner_adoption_receipt": true
+    }
+  ],
+  "adopted_paragraph": {
+    "path": "docs/research/factor-discovery-playbook.md",
+    "line": 93,
+    "sha256": "a6af2057a7a669a84451a0535ff17d0d92d11ae5e65da5de3e5aca399fc27987"
+  },
+  "semantic_checks": {
+    "actual_buy_group": true,
+    "comparable_alert_burden": true,
+    "action_delay": true
+  },
+  "entry_chain": "AGENTS.md -> .agents/skills/lei-lowfreq-research/SKILL.md -> docs/research/factor-discovery-playbook.md#按用途挑对手和评价不能统一只看收益",
+  "entry_chain_verified": true,
+  "core_files_modified_in_this_acceptance": false,
+  "independent_review": {
+    "agent": "adoption_verify",
+    "model": "gpt-6-luna",
+    "effort": "low",
+    "write_paths": [],
+    "result": "three semantic requirements and entry chain covered",
+    "wording_note": "group count/proportion/tie details not repeated in concise paragraph; existing ex-ante fixed group and question/method standard section 7 retain definition/tie requirements; no new threshold inferred"
+  },
+  "registry_only_own_oneLiner_changed": true,
+  "index_only_own_line_changed": true,
+  "old_review_source_and_failure_receipts_preserved": true,
+  "new_market_runs": 0,
+  "new_external_source_requests": 0,
+  "production_changes": false,
+  "automatic_enforcement_claimed": false,
+  "long_term_process_effect_measured": false,
+  "hygiene": "passed after report and registry updates",
+  "tokens_and_cost": "unknown"
+}
