@@ -1,3 +1,16 @@
+# 宽度波动仓位与季度盈利资料两个有界问题已交付 2026-10-20T19:39:13.621501+08:00
+
+- task-id pro-advice-process-review-20261020；owner 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status completed（本两题）；scope_released true；checked_coordination_sha c2f9449c97b0d37d29dfc90fffae182aa6cd0057；checked_at 2026-10-20T19:39:13.621501+08:00。本轮已读self/COORDINATION、sentiment-factor-research、risk-shape-information、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller、strategy-account-bridge-20261020；交付前读新增market-style-observation-20261020与mechanism-rebalancing-review-20261020。另两题为面板资料及机构/散户设计，原OP同池继续，均不重叠本8资金路径/微软季度资格。ab7baec4当次“无新增”表述已由progress更正，实际另有OP及前向交付，随后已读确认无冲突。
+- 用户明确选择2/3已落实。报告docs/experiments/breadth-volatility-increment-2026-10-20.md及quarterly-earnings-availability-2026-10-20.md，registry本2键/INDEX本2行；当前成果仅本地主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，未自动提交/推送技术成果。上一轮已推dbdb64d9不含本轮，不混称远端可复现。只协调文件依项目约定推送读回。
+- 仓位新增8完整账户，旧8半仓/宽度对手保存复用。主0.1%费用、初始100万、2018-07-05—2026-06-30：510300固定半仓131.71万/最大跌23.17%，单独波动155.97万/31.64%，宽度180.67万/26.89%，组合157.60万/21.38%；159915对应188.50万/32.59%、195.79万/31.87%、394.93万/32.40%、189.73万/22.32%。更高费率组合创业板187.55万略低半仓188.14万；不声称普遍优势。组合按防守用途有限保留，少赚/年份反例/费用/恢复/少参与涨跌均披露，非同风险增量、暂不采用。
+- 40输入SHA核同，2名义CSV换行差异LF→CRLF精确旧SHA；成员/历史到达仍未知。root从交易、费用、名义价格及股息重建8逐日账户最大差9.32e-10元；Astra独核月末cap、target及W3确认通过。5pp等待取消差异已修、9合成通过；root独扫418/416日期无新增成交可能，旧8账户资金有效，不重跑。执行前原代码bffcb046…与修正4e29e862…均保存，旧signals/rejects不是修正代码重新生成。首次诊断列名失败2条后读回补6条，失败保留。原风险匹配2/2与4/4不复开。
+- 财报6/6定向请求全200，原件212季度记录/71精确期间/70终点，63同申报同比中62份reportDate为当季；同一较晚申报两期配对只有2015Q3差+.03→+.07，0翻正。初期误分日期与混拼最新值5变/1翻正均纠正留史，原2016Q3.60存在。2018原年报Note1追溯重述背景已核，不把会计变化当经营改善；季度.60→.72分解/日期差仍未解。SEC accepted≠首次公告；不虚构下一交易日；无共同历史股票/退出价格，收益增量未测。root独核原始6源SHA及340/212/70/63/62通过。
+- 两完整报告含用途/简单对手/性能与增量/反例/恢复条件/主控可交回审阅；归置通过，真实报告API正文SHA逐字读回和category/mixed详情已核。列表首次命中60秒缓存为待分类，缓存过期后另核；不为此重启生产或改API。
+- 大源/账户留各storage-plan绑定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9外盘，本机仅小报告代码和回执。0新行情请求，财报6数据请求；web方法3失败另记，未伪称读完论文。模型Sol medium双执行/Astra high方法/root独核，实际费用未知。目标API仅查重，upgrade-note待仓外写入许可，无自动通知/生产/真实交易/清理/后台进程。
+- 停止依据：固定两ETF用途取舍和单公司资料可用性已回答，必需范围内检验已完成。恢复仓位需合格历史宽度/预定新时期或对象；盈利效力需原owner共同历史证券/退出价格与披露时点资格，不重复其采集、不换参数追正。完整系统/原A/全市场因子效力未冒称完成。
+
+---
+
 # 两题已冻结并进入实际核验
 
 - task-id/owner沿原；status active；checked_coordination_sha cdc3c0db2645776848a5c21f6cf83dafd15f6df1；checked_at 2026-10-20T19:21:36.966893+08:00；已读self及上述相关task-id，最近增量仅本题登记，无新冲突。范围仍仅本两raw/报告/自己的进度和registry/INDEX本键。
