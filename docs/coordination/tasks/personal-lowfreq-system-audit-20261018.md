@@ -1,3 +1,14 @@
+# 美股买入端价值与经营能力比较启动 2026-10-20T16:37:58.690975+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false；checked_coordination_sha 4c98483d663f3577b4ca9149a9a01e65d73baa73；checked_at 2026-10-20T16:37:58.690975+08:00。已读 COORDINATION/self/research-utility-review-20261012 最新16:32低换手实施、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、research-dispatch-controller；本题不接管A股来源修复/低换手账户/技术策略/资产扩张/ETF斜率。
+- 用户原话“按你说的优先级持续推进吧”。先回答OSAP美国公开价值/毛利/动量的买入组是否有个人只做多用途，再依据结果决定同池逐股及ETF适配投入。既有多空结果全部复用，不重跑、不扫描212因子、不把公开组合当本地逐股复现。独立财务研究，不改变LEI技术判定或基本面叙事边界。
+- 工作分支 codex/personal-lowfreq-system-audit-20261018，当前已推基线 e1330a7d8ee4c7f8babef2afe06de34278fce7e9；复用既有隔离树。root唯一新写 docs/experiments/us-long-only-factor-evaluation-2026-10-20.md、同名raw、原progress及系统原目标note；报告登记仅本键/INDEX本行，最后按最新原表串行追加。新增一次性分析/验证脚本仅本raw，既有原始资料/冻结报告不改。主树仅验收后镜像本新路径，不修改生产及他人代码。
+- 首选复用已存OSAP2025目录/多空原件，补三项公开分组与必要基准；新问题有限预算1核心+最多3有理由跟进、6次公开来源请求（含失败），旧家族累计不重置。先核范围/组序/多空恒等式/权重/单位/来源版本，再冻结计算；2015-01至2024-12主120月、1963-07至2014-12背景沿既有已见身份，非独立测试。若公平买入基准缺失，补必要公开资料或如实限定，不能把绝对正收益当选股优势。
+- 计划复用Luna/low执行、Sol/medium明确方案实现、必要Astra独审；写权按各合同准确划分。源核/金融意义/基准/科学结论由root负责。尚未运行收益或新下载，待来源资格/设计完成；不虚报派发。验收含买入/低分组/差额、同用途基准与风险/上涨/费用缺口、时期与集中反例、独立核数、真实报告/API及远端读回。
+- 固定外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9 已核可用约504GB，内盘约16GB；新输出预计128MiB、本机小记录2MiB，先plan绑定不回退。无删除、付费、生产、交易、主动通知或新用户侧对话。
+
+---
+
 # 按用途核心约定、美股补充与时间澄清交付 2026-10-20T16:07:36.428614+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（本轮有界问题）；scope_released true。checked_coordination_sha=14b2eef19685760400eb07f5b58f90152b6a5bb7；checked_at=2026-10-20T16:07:36.428614+08:00。已读COORDINATION/self、research-utility-review-20261012最新15:54短反转低波对照、pro-advice-process-review-20261020最新15:59完成、gemini-strategy-review-20261020、lowfreq-strategy-discovery-20261019、research-dispatch-controller。未接管他人工作，无新路径冲突。
