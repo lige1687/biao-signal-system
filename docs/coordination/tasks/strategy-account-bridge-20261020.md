@@ -1,3 +1,16 @@
+# 完整策略前向观察工程交付 2026-10-20T17:29:54.456412+08:00
+
+- task-id strategy-account-bridge-20261020；owner沿下；status completed（本轮工程与方法吸收，呈现待用户验收）；scope_released true；checked_coordination_sha=e2c3f7e1f96a6abab604b4e9310752b980e6a7be；checked_at=2026-10-20T17:29:54.456412+08:00。已读前列COORDINATION/相关task-id，新增核research-utility-review17:11低换手完成和personal-lowfreq-system-audit17:20美股比较完成。无同路径冲突；原A仍未闭合，低换手和近似小时确认暂不采用，原owner报告已在观察页链接，未重跑。
+- 成果分支codex/strategy-account-bridge-20261020基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；本轮代码和报告仅本地未自动提交/推送，精确源码隔离树及主树镜像，前端仅已登记准确路径进入5188服务树。不可说远端已完整复现。报告docs/experiments/strategy-forward-observation-2026-10-20.md SHA f9d8ed02fc4a480fe0d9f1c23c18a8f980c2eb0f4a03910f960fed7684222184；最终回执docs/experiments/raw/strategy-forward-observation-2026-10-20/delivery-verification.json SHA 36097ed2e420f9c8faaee65ba54d01411770ae1fd7bca24f76905fca90951893；原progress已追加。
+- 真实冻结/启用2026-10-20T17:10:07.738479+08:00，2独立虚拟参照账户、1排队订单、0模拟成交、0有效日估值。接收到的当日行情早于启用，不回填收益。原A与低换手未启动。只读核账通过，真实重启未改冻结时间/重建订单，保存输入回放7表逐项一致；前向收益优势尚无证据。
+- 当前持续服务8018只绑定127.0.0.1，API PID51814、watch PID51818；5188 Vite PID48880以 LEI_FORWARD_PROXY 定向新策略接口，旧主API8000 PID36604未重启。这些PID为本次读回，不是永久标识。交易窗口5分钟/16:35检查，下一计划10/21 09:30；实际看活动目录runner-status。没有系统开机恢复/通知，休眠与漏跑不追溯成交。
+- 代码指纹配置冻结，原件保存在raw/frozen-runtime-source；其他owner修改这些模块会使旧版本暂停新增记账，应新版本处理，不覆盖旧库。data/forward-observation活动DB/config/log/replay被Git忽略；合成UI验收库与真实库分开，两个演练服务已停止，未删除资料。只剩实际观察服务持续运行。
+- 必要检查：Python新观察30/纯等待25/旧信号API5通过；类型/视图回归、主树归置、两报告API逐字读回；真实采集/旧页/报告及合成曲线点击日期与共同期，390宽页面零横溢、曲线336宽。早期HMR/定位失败和资金时点反例修复保留回执。工程通过不代表策略有效；源文/规则/旧实验/真实交易未改。
+- 小记录本阶段raw约0.40MB，不含活动库；前阶段raw约0.73MB。外部方法新增4原件，报价/日线适配只用于真实资料接收，0历史市场拟合/重跑。Astra关键资金与时点审阅、Sol服务/UI、Luna纯核账/等待，root集成验收，费用未知。
+- 系统待升级既有K-baseline只读；仓外库按用户限制尚未写，精确拟追加说明在raw/strategy-forward-observation-2026-10-20/upgrade-note.md，待用户确认。原目标状态/owner/授权/里程碑不改。
+
+---
+
 # 接入前核验 2026-10-20T17:08:57.196315+08:00
 
 - status active；checked_coordination_sha=539064ab56efbb7fd8b00821e219ad14ba4dd2a7；checked_at=2026-10-20T17:08:57.196315+08:00。已读前列任务与最新investor-workspace-simplification17:03（三图完成释放）和pro-advice-process-review17:05（次开盘比较完成，不升级近似过滤）。无路径重叠；原A/低换手成果只消费状态和结论，仍不复制其研究。
