@@ -1,3 +1,18 @@
+# 市场环境面板交互预览交付 2026-10-20T20:32:45.750033+08:00
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status completed（本轮UI预览）；scope_released true（本轮新增组件/限定父页修改）；用户视觉效果待验收，正式5188尚未接入。
+- checked_coordination_sha c40df6c6508e4867deb79828131a9e59aafcc3f9；checked_at 2026-10-20T20:32:45.750033+08:00。沿开工已读self/dispatch/investor-workspace-simplification/investor-observation-map/portfolio-trends/strategy-account-bridge；交付新增读mechanism-rebalancing-review-20261020最新20:16范围，只新资料/研究，与UI无冲突。
+- 可直接试读 http://127.0.0.1:5192/fundamentals#fund-sec-market；PID6389，cwd仓内.codex/market-style-preview-20261020/web。浏览器保留该页。仅loopback预览，不替换5188，不改8000/8028源码、交易规则或系统目标SQLite。
+- 首屏全球4风格同母指数/日期/美元含股息回报、风险条件、策略重叠；4期间/两市场可切换。详情按需展开波动/估值/11行业/前10持仓；旧资金/调查/产品资料保留折叠。每周观察/月度五问复盘有入口，研究报告链接真实打开。
+- 全球风格固定2026-09-30，当前回撤/历史估值位置/收益贡献无资料明确留空；VIX18.44(10/19)、HY3.31%(10/16)、A股宽度50日18.1%(10/16)复用现有接口并标可用时点未核/非实时。NFCI/本地市场波动率未接。策略CN/US相关0.85/0.80、目标名单交集占并集14.3%/11.1%，历史回放与10/20起新记录分开。
+- 最终构建826模块通过；1280/1024/390px页面无横溢；四期间、两市场、质量详情/行业/前10、复盘/报告跳转通过，console error0。React受控输入验证零/空/错市场/历史失败4项；源数据16差额及行业/前10合计核数通过。既有Router/ECharts和大包warning保留，未借机修他人模块。
+- 两Sol medium读查后分别独写风格3文件/策略2文件，root容器2文件/父页/验收。Sol关键独核发现历史读取失败误标未接入，已修且受控验证；首次出版diff检查指出patch空白上下文，被改为绑定准确before SHA的零上下文patch，重建结果核同且暂存检查通过。无新收益实验/付费取数/自动通知；不宣称策略有效。
+- 成果分支codex/market-style-observation-20261020@f2005b40047a3332085c9adef3b4cd4d2195c429，18准确路径308537B全blob与远端SHA核同。7新组件源码、父页精确补丁、原报告/进度增量、UI清单/验证/核数与3截图；父页现有其他owner未提交改动不整文件混传。补丁需before SHA a56ed25549ccdd79895ba6817e0392533790e2441f7b5fe7a386935eef4aba33，先核再git apply --unidiff-zero；实际已在仓内临时树重建核同。完整运行壳源取自5188本机，只读复制，不冒称全应用远端可恢复。
+- 证据原raw目录ui-manifest/ui-verification/ui-data-checks/ui-render-checks.json、ui-desktop/ui-desktop-us/ui-mobile.jpg、ui-preview-baseline.json、ui-integration.patch均在上述成果；ui-publication-receipt.json为本机补存读回回执。本轮源码/共享主树分支及索引未切换、未清理删除、未合main。
+- 下一步由用户试读后决定是否正式采用；仓外5188准确8路径写入按原边界另确认。持续MSCI数据与许可/本地波动/NFCI/归因及完整风格暴露仍待规划，因子与策略增量按用户顺序后续独立研究。系统原目标保持此前planned，不冒称本轮已同步其状态。
+
+---
+
 # 市场环境阅读面板：仓内独立预览实现 2026-10-20T20:14:48.162067+08:00
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active；scope_released false。
