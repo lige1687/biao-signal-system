@@ -1,0 +1,142 @@
+{
+  "schema": "bounded-method-review/1",
+  "question": "Pro建议相对现行流程有何增量，如何最小融合",
+  "mode": "report_only",
+  "execution": "completed",
+  "evidence": "supported_process_comparison_only",
+  "completed_reason": "question_answered",
+  "generated_at": "2026-10-20T15:57:09.367837+08:00",
+  "scope": "qualitative review; no factor performance claim",
+  "budget": {
+    "source_operations": 5,
+    "source_failures": 1,
+    "source_limit": 6,
+    "market_runs": 0,
+    "downloads": 0,
+    "agents": 1,
+    "tokens_and_cost": "unknown"
+  },
+  "input_attachment": {
+    "location": "user_attachment/已粘贴的文本.txt",
+    "sha256": "77c9f89c4f67020d54ea3dbe9aac28aa5dce300fc46e11cb36e32c4a12ed76ef",
+    "lines": 606,
+    "uploaded_to_git": false
+  },
+  "sources": [
+    {
+      "path": "docs/research/current-standards.json",
+      "sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71",
+      "bytes": 1209
+    },
+    {
+      "path": "docs/research/factor-discovery-playbook.md",
+      "sha256": "b34ecf896d06576ed1f26bc0ed6ef8f096212177450b2bdadb504b28e89c6b08",
+      "bytes": 29910
+    },
+    {
+      "path": "docs/research/research-question-method-standard.md",
+      "sha256": "4326abd2dd3cf5a4a8edf9cdfed132677f394bb42c2d8d308db20852cb52c25b",
+      "bytes": 22491
+    },
+    {
+      "path": "docs/research/experiment-backtest-principles.md",
+      "sha256": "67b49a08396b0c8cb93cb526466200cc798bdb4cd8ce77509658f291cc29493c",
+      "bytes": 23327
+    },
+    {
+      "path": "docs/research/experiment-report-template.md",
+      "sha256": "a141107c915dcf738621e6e8746d89e97fb2d835b4c16883805dc7fb19ab7170",
+      "bytes": 15786
+    },
+    {
+      "path": "docs/research/research-workflow-usage.md",
+      "sha256": "75d3b6ff20df108f8f87d0c720af52748d6bfd6271236b05109aff0dce1ca8bf",
+      "bytes": 17537
+    },
+    {
+      "path": "src/lei_signal/research/workflow_evaluation.py",
+      "sha256": "508459ca3964a55e1688fef345d6e667acba68141f8be8f04f1ea1c5f0018c1c",
+      "bytes": 32517
+    },
+    {
+      "path": "src/lei_signal/research/ranking_diagnostics.py",
+      "sha256": "d7599d32c62a25c4779511eccb5189c96b32c543dd95e2ff2fd6e6262921ceb8",
+      "bytes": 12171
+    },
+    {
+      "path": "src/lei_signal/research/factor_lab/rank_ic_evaluation.py",
+      "sha256": "049d1076c4c3dd0a98eced31d7503bfc6eb7d441d18b7f04a78bbba6c3f4e25f",
+      "bytes": 33487
+    },
+    {
+      "path": "docs/experiments/green-momentum-selection-2026-10-20.md",
+      "sha256": "6021f2482a832f51146e97e7fd0e98f5128d6414960bb46dbed243a1effc0088",
+      "bytes": 14310
+    },
+    {
+      "path": "docs/experiments/gemini-steady-trend-etf-2026-10-20.md",
+      "sha256": "42dd4c47466b51d7416e0116d18f007272d465fba7e72b18c97e3627cc06ee38",
+      "bytes": 19658
+    }
+  ],
+  "strategy_sources": [
+    {
+      "id": "technical-system",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "approved_match": true,
+      "read_scope": "relevant purpose, timeframe, original entry/exit and risk boundaries"
+    },
+    {
+      "id": "technical-implementation",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "approved_match": true,
+      "read_scope": "relevant purpose, timeframe, original entry/exit and risk boundaries"
+    }
+  ],
+  "source_operations": [
+    {
+      "operation": "open AQR time series momentum",
+      "result": "success"
+    },
+    {
+      "operation": "open sklearn calibration",
+      "result": "success"
+    },
+    {
+      "operation": "open NBER w22208",
+      "result": "Internal Error"
+    },
+    {
+      "operation": "find sklearn calibration Brier",
+      "result": "success"
+    },
+    {
+      "operation": "search official NBER w22208",
+      "result": "success; official abstract only"
+    }
+  ],
+  "coverage_evidence": {
+    "use_evaluation": "docs/research/factor-discovery-playbook.md:76",
+    "existing_probability_calibration": "docs/research/research-question-method-standard.md:60",
+    "existing_large_winner_rule": "docs/research/experiment-backtest-principles.md:142",
+    "brier_implementation": "src/lei_signal/research/workflow_evaluation.py:458",
+    "ties_implementation": "src/lei_signal/research/ranking_diagnostics.py:139",
+    "rank_only": "src/lei_signal/research/factor_lab/rank_ic_evaluation.py:655"
+  },
+  "delegate": {
+    "name": "advice_coverage",
+    "model": "gpt-6-sol",
+    "effort": "medium",
+    "write_paths": [],
+    "network_allowed": false,
+    "max_agents": 1,
+    "controller_review": "code checked; narrowed missing-calibration claim after broader standard read; corrected rank file path"
+  },
+  "adoption": "supplement ready; shared core files not edited due active owner",
+  "existing_goal_ids": [
+    "okr-cd1a0bd5532c",
+    "okr-db317013f48a",
+    "okr-8830a1f1ec4f"
+  ],
+  "goals_written": false
+}

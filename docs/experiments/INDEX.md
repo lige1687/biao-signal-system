@@ -1,3 +1,5 @@
+- 2026-10-20：[Pro建议与研究流程对照](pro-advice-process-review-2026-10-20.md)：既有原则复用；补行动延迟及可比报警负担，核心补充待合入。
+
 # docs/experiments 总索引
 
 - 2026-09-17：[外部因子方法复用主控复核](factor-method-reuse-controller-review-2026-09-17.md)：R1–R4限定返修，未验收或批准安装。
