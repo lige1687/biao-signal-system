@@ -1,3 +1,14 @@
+# 派生价格接入及受影响结论纠正 2026-10-20T13:50:18.375649+08:00
+
+- task-id/owner沿原；status active，scope_released false；checked_coordination_sha=6a5cdaf5f6ee4c143c1d471fa82a13696aeb3a1e；checked_at=2026-10-20T13:50:18.375649+08:00；已读COORDINATION及self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller最新段，范围无冲突。成果基线2233e518eaac574b63b8604dc5e212d18f7b688f。
+- 问题：已核1560日五价修正能否显式进入旧600股研究，并改变哪些旧判断。只复用原对象、时期、金融假设、方法、财务面板；新来源请求0，不加入恢复的165财务公司月，不接管原LEI、资产扩张、ETF、生产或交易。原价/旧文件/旧结果完整保留。
+- 新增独占路径src/lei_signal/research/lowfreq_derived_prices.py、tests/unit/test_lowfreq_derived_prices.py、docs/experiments/raw/derived-price-integration-2026-10-20/及同名报告；root独占合同/记录/报告、registry本键/INDEX本行/原progress/目标next_action；Sol独占新适配器/测试；Luna冻结后机械执行。只在验证后镜像主树本路径。旧正式模块不改、不从raw导入正式模块。
+- 验收：原600源的阻断仅原1560标志例外，全部overlay原值/五价/公式/日期/非价字段/未改行可核；实际接入特征、名单、权重、评价价格和统计依赖。旧原标志3保持，派生依据另列。只有全部相关依赖不变才复用旧结论；P1/P2仅重算受影响固定方法，防御若资料合格则按原规则比较同69月与完整132月。合成通过不等于效果改善。
+- Astra已书面建议此为来源纠错的必要直接后果，沿用户持续完成目标授权；不新增研究问题或搜索参数。防御跟进3/3保持，本次必要纠正登记旧家族第10/10实际尝试；P1/P2计数先核最新回执，各自如实登记，不把多个家族算成零成本一次。固定一次纠正批次，自动重跑禁止。费用未知。
+- 外盘新计划预计128MiB、本机2MiB，身份/容量重核后写；报告含旧版、同日期纠正版及恢复支持版，已见历史不冒充新验证。价值全池同年普通权益/法定股份/原价仍是未结项，本阶段不假称总目标完成。
+
+---
+
 # 旧代码资料与派生修正实核交付 2026-10-20T13:43:54.955044+08:00
 
 - task-id/owner沿原；当前有界来源补证completed，整体目标active/in_progress，scope_released false保留数据资格和显式研究接入职责。checked_coordination_sha=db3e8dd88cf89b6b0f6b3366665fd7f458c44322；checked_at=2026-10-20T13:43:54.955044+08:00；重新读取COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller，范围无交叠，旧300新源与本600零交集复核正确。
