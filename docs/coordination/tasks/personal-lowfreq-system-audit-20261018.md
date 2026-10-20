@@ -1,3 +1,12 @@
+# 美股来源边界与固定对照细化 2026-10-20T16:49:43.674439+08:00
+
+- task-id/owner/工作树/唯一写权沿本任务上一段；status active；checked_coordination_sha 3ee01c5403457f5997debee551544456c97e4e16；checked_at 2026-10-20T16:49:43.674439+08:00。本次fetch核相关任务首段，已读 self/research-utility-review-20261012低换手进行中/lowfreq-strategy-discovery/gemini/research-dispatch-controller；无新写权重叠，未接他人问题。
+- OSAP全包和BM分项均返回HTTP200的quota HTML，保存并拒绝，不再访问该下载入口。采用已授权来源French官方三个2×3分组作为独立参照；OP经营盈利非GP，B/M非OSAP有形账面值，202608 CRSP/CIZ修订版也非2025 OSAP同口径。原OSAP买入端仍不可评价，旧多空结果不改。
+- 初始6次为本主控的取数规划，当前用户持续推进授权下，具体必要替代来源追加6次，累计12（含失败），0付费/0全库扫描，详见 source-amendment。原10次旧代码价格授权及旧实验预算不动。三ZIP及CSV已成功保存固定外盘、只查格式和日期，尚未读取效果统计。最近可用2026-08；主2015-01—2024-12、背景1963-07—2014-12，新2025-01—2026-08仅补充公开历史，分期在新效果前固定。
+- 主比较固定价值加权月收益、大规模组三格；B为三组各分1/3资金，H/N/L为高/中/低组。H-B、H-N和B-L分清挑高分与避弱组，B含H/L所以不重复算支持。小规模为预定背景，不能看结果改主结论；不把H-L冒称HML/RMW、不同分组股票池冒称同池增量，大规模不自动等于可交易。Astra方法条件接受，root按H-N简单对手补充后冻结；真实统计仍0。
+
+---
+
 # 美股买入端价值与经营能力比较启动 2026-10-20T16:37:58.690975+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false；checked_coordination_sha 4c98483d663f3577b4ca9149a9a01e65d73baa73；checked_at 2026-10-20T16:37:58.690975+08:00。已读 COORDINATION/self/research-utility-review-20261012 最新16:32低换手实施、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、research-dispatch-controller；本题不接管A股来源修复/低换手账户/技术策略/资产扩张/ETF斜率。
