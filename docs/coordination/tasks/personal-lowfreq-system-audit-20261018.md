@@ -1,3 +1,15 @@
+# 派生价格接入与三项固定结论纠正交付 2026-10-20T14:11:11.809801+08:00
+
+- task-id/owner沿原；本轮来源纠正completed，完整目标active/in_progress，scope_released false保留年度价值/资料资格工作。checked_coordination_sha=ef0606e1791a848799b007b83a428b789abfeab7；checked_at=2026-10-20T14:11:11.809801+08:00；已读COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller，无重叠，不接管因子实现、资产扩张和ETF。
+- 成果codex/personal-lowfreq-system-audit-20261018@170f705f7122ef055910ee931dfe5b9fdd858b38已push/fetch、33准确文件逐字核同。报告derived-price-integration-2026-10-20.md SHA23e88e7fc8ad8c5b6e62b2446df32646eb61a745df314d8afec40e1d8f389e99；同名raw含合同/原失败和v1/回执/独核。新正式lowfreq_derived_prices.py和专用测试，旧数学/原输入/报告保持。
+- 实际600源1852185行preflight；1560行五价7800格派生并保留原flag3。P1/防御Luna单次exit0，132原月份全部evaluate，原69月所有字段在1e-12内一致后恢复63月。root重建660名单/5985数值，max1.45e-15。P1第3/3跟进、防御同第三跟进第10/10尝试，0新source，不清历史账。
+- 研究判断：P1直接动量相对同池−0.1200pp/月，9组+0.3835pp有限线索、27组仍不确定；混合低波动相对M+0.4334pp/月和少亏+0.5200pp，但相对75%M亏损部分−0.1730pp、相对纯LV−0.1697pp，名单替换35.52%。Astra收尾支持保留少亏线索、暂停防御采用；已看股票报价不能当ETF/低beta/实际账户。
+- P2Luna一次纠正跟进3/3，2020May/June三个范围共6动量值变化但所有权重/收益/排序相关不变，旧bootstrap/risk/gradient实际依赖未变直接复用，未新增165恢复财务公司月。root3960方法情景+全部目标替换独核通过；1622浮点末位差max7.22e-16查明旧sum(set)顺序，未冒称逐字一致。P2manifest误列12个macOS元数据，保留并在独核剔除统计数量，无重跑。
+- 10合成测试及主树归置通过，报告/raw/新源码主树精确镜像；registry339/712只加本键，INDEX只加本行；API正文/方法论与验证/mixed核同。目标next_action31→32读回，status/4of6/授权/owner/旧history保持；未将完整目标标完成。open_in_codex仅queued，不称视觉验收。
+- 下一项需回答年度价值共同资料是否足以检验：复用5503原件/3915归母权益候选，查普通权益性质、同年末法定普通股份和未复权价；不要重算已封存P1/P2/防御或再扩参数。该来源修正已有有界答案，当前各执行进程/代理均结束，整体研究仍可继续。恢复先读本报告/raw/自身progress与系统32，不把旧“等待10源批准”当现阻塞。
+
+---
+
 # 派生价格接入及受影响结论纠正 2026-10-20T13:50:18.375649+08:00
 
 - task-id/owner沿原；status active，scope_released false；checked_coordination_sha=6a5cdaf5f6ee4c143c1d471fa82a13696aeb3a1e；checked_at=2026-10-20T13:50:18.375649+08:00；已读COORDINATION及self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller最新段，范围无冲突。成果基线2233e518eaac574b63b8604dc5e212d18f7b688f。
