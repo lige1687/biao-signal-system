@@ -1,3 +1,13 @@
+# 美股年度盈利：共同资格与一次限定比较准备 2026-10-20T21:03:42.835019+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha ad1e60df3f5c9762a8ca04ee59e51732e617ad21；checked_at 2026-10-20T21:03:42.835019+08:00；已读 COORDINATION/self/research-dispatch-controller/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/pro-advice-process-review-20261020/strategy-account-bridge-20261020/market-style-observation-20261020/mechanism-rebalancing-review-20261020；新增机构反向20:45交付不冲突，季度EPS/账户/ETF均归原负责人。
+- 口径在效果前固定：营业利润已扣折旧，减表内分列利息、除含永久少数权益的普通权益；不冒称French严格复现。原Molson2013报表独核会计恒等式；293份合格源、B初步2181公司月份、每月13—25。最新修订先选再判，不能回退更完整旧版；2015年1月用2014年12月形成，年度资料锚定六月实际交易日减两天。收益统计仍0/1。
+- 本次准确范围增量：root可在 docs/research/definitions.v1.json 仅增 research.fundamental.annual_operating_profitability_after_da@1.0.0 及本题来源键；新 src/lei_signal/research/annual_profitability.py 和 tests/unit/test_annual_profitability.py 只做研究纯函数，正式计算不从raw导入。其他定义/共享入口/生产不改。先在独立工作树实施，主树仅准确镜像本新路径和对象键；当前global registry已有不兼容外部来源元数据时不替他人修整，记录本分支有效绑定。
+- 本题年度报表跨股票配对不在现有单资产技术workflow适配范围；独立合同固定同日资格/小样本方法/未来缺失/代码来源/预算并做反例，不宣称原生入口已覆盖。Luna完成B并修期间价格差异连接，另一Luna定向核4退出原件及接收证券报价存在性；Astra仅冻前方法审，root负责假设、身份、冻前通过和最后结论。新增效力core0/1、repair0/1。
+- 当前候选JCI含旧TYCO误关联，将在形成资格明确处理；未见未来结果不用于排股。所有失败版本保留，新的财报映射与日期修复都不改旧冻结结果。大件仍唯一已绑定外盘，预计范围内；无付费/删除/生产/交易/通知/新用户对话。
+
+---
+
 # 美股年度经营盈利：历史来源已落盘，收敛会计口径 2026-10-20T20:34:22.260619+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false；checked_coordination_sha e4b86ad42d758cab14e961584186232ca807dcc7；checked_at 2026-10-20T20:34:22.260619+08:00。已读COORDINATION/self/research-dispatch-controller/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/pro-advice-process-review-20261020/strategy-account-bridge-20261020，新增market-style-observation-20261020、mechanism-rebalancing-review-20261020当前范围已核；后两项为风格UI及机构散户资料，与本年度OP无重叠。准备写入前远端变化断言已停止，补读20:32风格预览交付后继续，未覆盖他人。
