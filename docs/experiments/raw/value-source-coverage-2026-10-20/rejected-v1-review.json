@@ -1,0 +1,31 @@
+{
+  "reviewed_at": "2026-10-20T13:07:23.626355+08:00",
+  "status": "repair_required_before_real_execution",
+  "findings": [
+    {
+      "severity": "required_before_real_batch",
+      "issue": "selected_pages leaves PdfDocument/page/textpage unclosed across 4315 files; close all handles using try/finally."
+    },
+    {
+      "severity": "required_before_real_batch",
+      "issue": "_money uses findall and accepts arbitrary residual text/dash; require whole tail exactly two amount tokens with whitespace only, so label + dash + two values or footnote text cannot masquerade as clean cells."
+    },
+    {
+      "severity": "required_before_real_batch",
+      "issue": "original_selection accepts non-int equal year e.g.2018.0; use isinstance(year,int) and not bool, exact plan predicate/reason-count names."
+    },
+    {
+      "severity": "required_before_real_batch",
+      "issue": "storage preflight must include estimated_bytes+reserve and internal_metadata+reserve, then device/mount recheck periodically and before writing."
+    },
+    {
+      "severity": "required_before_real_batch",
+      "issue": "fresh PDF header and financial_parser_result code/year/announcement/publication/path/SHA identity should be checked, beyond source metadata saved checks."
+    },
+    {
+      "severity": "required_before_real_batch",
+      "issue": "retained real headers/units must include bound header/heading lines and reject currency conflicts in continuation; dated-vs-labelled header conflicts currently not fully checked."
+    }
+  ],
+  "real_batch_started": false
+}

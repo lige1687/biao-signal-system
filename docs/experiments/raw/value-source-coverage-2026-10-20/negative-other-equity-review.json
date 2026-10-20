@@ -1,0 +1,48 @@
+{
+  "trigger": "two unexpected negative other-equity amounts found in fixed batch; necessary anomaly review only",
+  "extra_source_pages": 2,
+  "checks": [
+    {
+      "code": "sz.002329",
+      "year": 2024,
+      "pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01542-pdf.body",
+        "sha256": "4f99a6e5cbcfe15cd2a97fe0b3b6d8710db47846cdcfa11f04f2e0b8226d71aa"
+      },
+      "page": 112,
+      "neighbour_lines": [
+        "所有者权益：",
+        "股本 869,049,335.00 869,049,335.00",
+        "其他权益工具 -109,113,811.00 -109,113,811.00",
+        "其中：优先股",
+        "永续债",
+        "资本公积 1,297,199,489.24 1,324,843,583.88",
+        "减：库存股 125,009,014.00 125,009,014.00"
+      ],
+      "verdict": "negative_signed_amount_is_present_on_original_consolidated_statement",
+      "economic_qualification": "unknown; retain signed source fact, investigate claim identity before ordinary equity calculation; no factor qualification"
+    },
+    {
+      "code": "sz.002329",
+      "year": 2023,
+      "pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01538-pdf.body",
+        "sha256": "b893132db946ef1174afd7e91f2a20d444ea499750a9ebad7bc8e362624f07d4"
+      },
+      "page": 110,
+      "neighbour_lines": [
+        "所有者权益：",
+        "股本 869,049,335.00 837,640,035.00",
+        "其他权益工具 -109,113,811.00 -109,113,811.00",
+        "其中：优先股",
+        "永续债",
+        "资本公积 1,324,843,583.88 1,201,466,789.57",
+        "减：库存股 125,009,014.00"
+      ],
+      "verdict": "negative_signed_amount_is_present_on_original_consolidated_statement",
+      "economic_qualification": "unknown; retain signed source fact, investigate claim identity before ordinary equity calculation; no factor qualification"
+    }
+  ],
+  "does_not_validate_all_other_equity_candidates": true,
+  "market_run": false
+}

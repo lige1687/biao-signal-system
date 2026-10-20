@@ -1,0 +1,69 @@
+{
+  "schema": "saved-value-fields-source-only/1",
+  "created_at": "2026-10-20T13:04:00.407815+08:00",
+  "task_id": "personal-lowfreq-system-audit-20261018",
+  "purpose": "Qualify parent-equity and related balance-sheet amount facts from already-qualified saved annual consolidated statements; no factor score or market effect.",
+  "expected_index_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-final-01/expected-source-index.json",
+  "expected_index_sha256": "7a22328b0020883dcb0bd2e62b18c50ee5c7d5f79a64a8672b3539d2f60aa87c",
+  "old_parser_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/profitability_discovery.py",
+  "old_parser_sha256": "dc009a8e95ae1e61dabed0ee861f0109b686f0bebeacb7b1985a91dd5e1f42ae",
+  "cohort_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+  "cohort_sha256": "6f073e37809613469efe6cd2adb6b7ef1b4e77515e99e7149e1636d9e390cc16",
+  "storage_plan_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-source-coverage-2026-10-20/storage-plan.json",
+  "storage_plan_sha256": "56484f86c615b14058896bc7b6e26a12b4b081ec5327f1892cd790117b78c817",
+  "storage_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "expected_originals": 5503,
+  "expected_company_years": 5481,
+  "expected_issuers": 598,
+  "expected_assets_table_qualified": 4315,
+  "max_pages_per_qualified_pdf": 6,
+  "fields": [
+    "parent_equity",
+    "other_equity",
+    "treasury_stock",
+    "accounting_capital"
+  ],
+  "factor_ready": false,
+  "market_effects_allowed": false,
+  "network_requests_allowed": 0,
+  "legacy_budgets_unchanged": true,
+  "rules": [
+    "Keep each original/version separately; do not pick latest by numerical value",
+    "Use qualified consolidated assets-table current-column and currency/unit binding only",
+    "Only fully aligned two numeric amount cells; one blank or three ambiguous cells is unknown",
+    "Never fill blank with zero; accounting capital in yuan is not legal ordinary shares",
+    "All records remain source candidates; no ordinary-equity numerator, share count, market cap or score generated",
+    "Do not use later original to fill missing old version",
+    "Announcement date is source date; precise release time and vendor availability remain unknown",
+    "Boundary must be confirmed before next financial table; exceeding page limit fails closed"
+  ],
+  "audit_selection": "Before execution: minimum sha256(code|year|announcement_id) among qualified table originals in each year; inspect original current and comparator parent-equity rows independently. Unknown/absent stays unknown; 12 cases are error detection, not statistical certification.",
+  "index_total_records": 21145,
+  "selection_predicate": [
+    "code in cohort.fixed_codes",
+    "isinstance(year,int) and 2013 <= year <= 2024",
+    "title == str(year)+年年度报告",
+    "pdf.status == obtained",
+    "prepared_binding.identity_status == match"
+  ],
+  "expected_first_exclusion_counts": {
+    "outside_years": 12727,
+    "not_exact_annual_title": 2680,
+    "prepared_identity_not_match": 224,
+    "pdf_not_obtained": 11
+  }
+}

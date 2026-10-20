@@ -1,0 +1,1271 @@
+{
+  "schema_version": 1,
+  "purpose": "independent_original_page_review",
+  "selection_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-source-coverage-2026-10-20/independent-audit-selection.json",
+  "selection_rule": "Before execution: minimum sha256(code|year|announcement_id) among qualified table originals in each year; inspect original current and comparator parent-equity rows independently. Unknown/absent stays unknown; 12 cases are error detection, not statistical certification.",
+  "reader": "pypdfium2 get_textpage().get_text_range and pypdf PdfReader extract_text; existing local runtime; no install/download/network",
+  "source_files_verified": 12,
+  "missing_sha": 0,
+  "hash_or_byte_failures": 0,
+  "pdf_text_extraction_failures": 0,
+  "cases": [
+    {
+      "code": "sh.600582",
+      "year": 2013,
+      "announcement_id": "63687068",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/03455-pdf.body",
+        "sha256": "346d83596f1785c231e9f6757994adb2aed43c2c2e8a75fe322cc8a691228e10",
+        "bytes": 2512091,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 42,
+        "heading": "合并资产负债表",
+        "period_line": "2013 年 12 月 31 日",
+        "unit_line": "单位:元 币种:人民币",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "mother_company_table_first_page": 44,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 42,
+        "table_heading_page_pdf_1based": 42,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 附注 期末余额 年初余额",
+        "unit_line_exact": "单位:元 币种:人民币",
+        "period_line_exact": "2013 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          42,
+          44
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "5854667828.84",
+          "comparative_yuan": "5162458353.80",
+          "page": 44,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "5,854,667,828.84",
+          "comparative_display": "5,162,458,353.80",
+          "evidence": {
+            "page": 44,
+            "text_excerpt": "归属于母公司所有者 | 权益合计 5,854,667,828.84 5,162,458,353.80"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "1213920000.00",
+          "comparative_yuan": "1213920000.00",
+          "page": 44,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "1,213,920,000.00",
+          "comparative_display": "1,213,920,000.00",
+          "evidence": {
+            "page": 44,
+            "text_excerpt": "实收资本（或股本） | 1,213,920,000.00 1,213,920,000.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 44,
+          "interpretation": "在该页所列旧式合并资产负债表中未见“其他权益工具”项目；不能由此推断经济余额为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 44,
+            "text_excerpt": null
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 44,
+          "interpretation": "原行列名可见但金额单元格空白；当前列与比较列均保持null，不当作零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 44,
+            "text_excerpt": "减：库存股"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sh.601113",
+      "year": 2014,
+      "announcement_id": "1200714414",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/04451-pdf.body",
+        "sha256": "8bc079b3a643f0231612e946187b2020ce707426fd68f2f8225df688ee1aab29",
+        "bytes": 3306913,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 47,
+        "heading": "合并资产负债表",
+        "period_line": "2014 年 12 月 31 日",
+        "unit_line": "单位:元 币种:人民币",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53
+        ],
+        "mother_company_table_first_page": 49,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 47,
+        "table_heading_page_pdf_1based": 47,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 附注 期末余额 期初余额",
+        "unit_line_exact": "单位:元 币种:人民币",
+        "period_line_exact": "2014 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          47,
+          48,
+          49
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          49,
+          50,
+          51,
+          52,
+          53
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "1655444910.16",
+          "comparative_yuan": "1761437165.09",
+          "page": 49,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "1,655,444,910.16",
+          "comparative_display": "1,761,437,165.09",
+          "evidence": {
+            "page": 49,
+            "text_excerpt": "归属于母公司所有者权益合计 1,655,444,910.16 1,761,437,165.09"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "640000000.00",
+          "comparative_yuan": "640000000.00",
+          "page": 48,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "640,000,000.00",
+          "comparative_display": "640,000,000.00",
+          "evidence": {
+            "page": 48,
+            "text_excerpt": "股本 （二十六） 640,000,000.00 640,000,000.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 48,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 48,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 48,
+          "interpretation": "原行列名可见但金额单元格空白；当前列与比较列均保持null，不当作零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 48,
+            "text_excerpt": "减：库存股"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sz.300176",
+      "year": 2015,
+      "announcement_id": "1202046529",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/08769-pdf.body",
+        "sha256": "202448116f64bedb11646cc192fc3e1997a166ee74fbfefadb0b3ee916a62b12",
+        "bytes": 2749822,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 69,
+        "heading": "1、合并资产负债表",
+        "period_line": "2015 年 12 月 31 日",
+        "unit_line": "单位：元",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75
+        ],
+        "mother_company_table_first_page": 72,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 69,
+        "table_heading_page_pdf_1based": 69,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 期末余额 期初余额",
+        "unit_line_exact": "单位：元",
+        "period_line_exact": "2015 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          69,
+          71,
+          72
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          72,
+          73,
+          74,
+          75
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "598300859.18",
+          "comparative_yuan": "565399805.18",
+          "page": 72,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "598,300,859.18",
+          "comparative_display": "565,399,805.18",
+          "evidence": {
+            "page": 72,
+            "text_excerpt": "归属于母公司所有者权益合计 598,300,859.18 565,399,805.18"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "107280000.00",
+          "comparative_yuan": "107280000.00",
+          "page": 71,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "107,280,000.00",
+          "comparative_display": "107,280,000.00",
+          "evidence": {
+            "page": 71,
+            "text_excerpt": "股本 107,280,000.00 107,280,000.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 71,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 71,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 71,
+          "interpretation": "原行列名可见但金额单元格空白；当前列与比较列均保持null，不当作零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 71,
+            "text_excerpt": "减：库存股"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sz.002174",
+      "year": 2016,
+      "announcement_id": "1203263544",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/08707-pdf.body",
+        "sha256": "92b9e7b3f38e578a09bff7781cf65c64f61827b6c2872023a71646146f4a3c77",
+        "bytes": 3510901,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 74,
+        "heading": "1、合并资产负债表",
+        "period_line": "2016 年 12 月 31 日",
+        "unit_line": "单位：元",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80
+        ],
+        "mother_company_table_first_page": 77,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 74,
+        "table_heading_page_pdf_1based": 74,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 期末余额 期初余额",
+        "unit_line_exact": "单位：元",
+        "period_line_exact": "2016 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          74,
+          76,
+          77
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          77,
+          78,
+          79,
+          80
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "2711477777.67",
+          "comparative_yuan": "2188211216.37",
+          "page": 77,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "2,711,477,777.67",
+          "comparative_display": "2,188,211,216.37",
+          "evidence": {
+            "page": 77,
+            "text_excerpt": "归属于母公司所有者权益合计 2,711,477,777.67 2,188,211,216.37"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "861315045.00",
+          "comparative_yuan": "287105015.00",
+          "page": 76,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "861,315,045.00",
+          "comparative_display": "287,105,015.00",
+          "evidence": {
+            "page": 76,
+            "text_excerpt": "股本 861,315,045.00 287,105,015.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 76,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 76,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 76,
+          "interpretation": "原行列名可见但金额单元格空白；当前列与比较列均保持null，不当作零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 76,
+            "text_excerpt": "减：库存股"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sz.002067",
+      "year": 2017,
+      "announcement_id": "1204788311",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/02330-pdf.body",
+        "sha256": "da0e8fdd3ba3c9f1edd1561f63bc230073eb790e59e570bfb5cf30a086e51f5e",
+        "bytes": 3227511,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 82,
+        "heading": "1、合并资产负债表",
+        "period_line": "2017 年 12 月 31 日",
+        "unit_line": "单位：元",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88
+        ],
+        "mother_company_table_first_page": 85,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 82,
+        "table_heading_page_pdf_1based": 82,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 期末余额 期初余额",
+        "unit_line_exact": "单位：元",
+        "period_line_exact": "2017 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          82,
+          84,
+          85
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          85,
+          86,
+          87,
+          88
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "3855090284.68",
+          "comparative_yuan": "3281950986.46",
+          "page": 85,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "3,855,090,284.68",
+          "comparative_display": "3,281,950,986.46",
+          "evidence": {
+            "page": 85,
+            "text_excerpt": "归属于母公司所有者权益合计 3,855,090,284.68 3,281,950,986.46"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "1128451000.00",
+          "comparative_yuan": "1093951000.00",
+          "page": 84,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "1,128,451,000.00",
+          "comparative_display": "1,093,951,000.00",
+          "evidence": {
+            "page": 84,
+            "text_excerpt": "股本 1,128,451,000.00 1,093,951,000.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 84,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 84,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": "115920000.00",
+          "comparative_yuan": null,
+          "page": 84,
+          "interpretation": "原行当前列显示金额；比较列没有印出金额，保留null。",
+          "current_display": "115,920,000.00",
+          "comparative_display": null,
+          "evidence": {
+            "page": 84,
+            "text_excerpt": "减：库存股 115,920,000.00"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sh.601137",
+      "year": 2018,
+      "announcement_id": "1206068655",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/04533-pdf.body",
+        "sha256": "72c3c35ab4dd33e177d5aa33b3cf452b8b38ccc805a81537730f67651bb10a67",
+        "bytes": 2851840,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 77,
+        "heading": "合并资产负债表",
+        "period_line": "2018 年 12 月 31 日",
+        "unit_line": "单位:元 币种:人民币",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83
+        ],
+        "mother_company_table_first_page": 79,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 77,
+        "table_heading_page_pdf_1based": 77,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 附注 期末余额 期初余额",
+        "unit_line_exact": "单位:元 币种:人民币",
+        "period_line_exact": "2018 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          77,
+          78,
+          79
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          79,
+          80,
+          81,
+          82,
+          83
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "3509210874.53",
+          "comparative_yuan": "3321193579.25",
+          "page": 79,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "3,509,210,874.53",
+          "comparative_display": "3,321,193,579.25",
+          "evidence": {
+            "page": 79,
+            "text_excerpt": "归属于母公司所有者权益合计 3,509,210,874.53 3,321,193,579.25"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "627219708.00",
+          "comparative_yuan": "627219708.00",
+          "page": 78,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "627,219,708.00",
+          "comparative_display": "627,219,708.00",
+          "evidence": {
+            "page": 78,
+            "text_excerpt": "实收资本（或股本） 627,219,708.00 627,219,708.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 78,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 78,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": "94016825.54",
+          "comparative_yuan": "-",
+          "page": 78,
+          "interpretation": "比较列原印“-”，保留原符号；不将其数值化为零。",
+          "current_display": "94,016,825.54",
+          "comparative_display": "-",
+          "evidence": {
+            "page": 78,
+            "text_excerpt": "减：库存股 94,016,825.54 -"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sh.600668",
+      "year": 2019,
+      "announcement_id": "1207633647",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/03993-pdf.body",
+        "sha256": "2bda76176bb4dea51dca096329292b8c6168c3278d6512a6193f0dcfa3e4039d",
+        "bytes": 3728020,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 80,
+        "heading": "合并资产负债表",
+        "period_line": "2019 年 12 月 31 日",
+        "unit_line": "单位:元 币种:人民币",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86
+        ],
+        "mother_company_table_first_page": 82,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 80,
+        "table_heading_page_pdf_1based": 80,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 附注 2019 年 12 月 31 日 2018 年 12 月 31 日",
+        "unit_line_exact": "单位:元 币种:人民币",
+        "period_line_exact": "2019 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          80,
+          82
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          82,
+          83,
+          84,
+          85,
+          86
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "3789109866.97",
+          "comparative_yuan": "3162706749.10",
+          "page": 82,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "3,789,109,866.97",
+          "comparative_display": "3,162,706,749.10",
+          "evidence": {
+            "page": 82,
+            "text_excerpt": "归属于母公司所有者权益 | （或股东权益）合计 | 3,789,109,866.97 3,162,706,749.10"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "344083828.00",
+          "comparative_yuan": "344083828.00",
+          "page": 82,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "344,083,828.00",
+          "comparative_display": "344,083,828.00",
+          "evidence": {
+            "page": 82,
+            "text_excerpt": "实收资本（或股本） 344,083,828.00 344,083,828.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 82,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 82,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 82,
+          "interpretation": "原行列名可见但金额单元格空白；当前列与比较列均保持null，不当作零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 82,
+            "text_excerpt": "减：库存股"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sz.002260",
+      "year": 2020,
+      "announcement_id": "1209828124",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01423-pdf.body",
+        "sha256": "44154176044838cf24bef7e2346ff26258c134382f0fa32fc6bcd2e279f7cadd",
+        "bytes": 3780640,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 64,
+        "heading": "1、合并资产负债表",
+        "period_line": "2020 年 12 月 31 日",
+        "unit_line": "单位：元",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70
+        ],
+        "mother_company_table_first_page": 67,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 64,
+        "table_heading_page_pdf_1based": 64,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 2020 年 12 月 31 日 2019 年 12 月 31 日",
+        "unit_line_exact": "单位：元",
+        "period_line_exact": "2020 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          64,
+          67
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          67,
+          68,
+          69,
+          70
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "790195168.88",
+          "comparative_yuan": "28363990.67",
+          "page": 67,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "790,195,168.88",
+          "comparative_display": "28,363,990.67",
+          "evidence": {
+            "page": 67,
+            "text_excerpt": "归属于母公司所有者权益合计 790,195,168.88 28,363,990.67"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "556920000.00",
+          "comparative_yuan": "265200000.00",
+          "page": 67,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "556,920,000.00",
+          "comparative_display": "265,200,000.00",
+          "evidence": {
+            "page": 67,
+            "text_excerpt": "股本 556,920,000.00 265,200,000.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 67,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 67,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 67,
+          "interpretation": "原行列名可见但金额单元格空白；当前列与比较列均保持null，不当作零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 67,
+            "text_excerpt": "减：库存股"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sz.002674",
+      "year": 2021,
+      "announcement_id": "1213106197",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/02271-pdf.body",
+        "sha256": "c2f7327b9a6d69cd42eb6190d776abef85dfdf4f6ecf52c28c40e88bd3d18ccf",
+        "bytes": 4046966,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 94,
+        "heading": "1、合并资产负债表",
+        "period_line": "2021 年 12 月 31 日",
+        "unit_line": "单位：元",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "mother_company_table_first_page": 97,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 94,
+        "table_heading_page_pdf_1based": 94,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 2021 年 12 月 31 日 2020 年 12 月 31 日",
+        "unit_line_exact": "单位：元",
+        "period_line_exact": "2021 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          94,
+          97
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          97,
+          98,
+          99,
+          100
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "2300125427.67",
+          "comparative_yuan": "2132531117.02",
+          "page": 97,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "2,300,125,427.67",
+          "comparative_display": "2,132,531,117.02",
+          "evidence": {
+            "page": 97,
+            "text_excerpt": "归属于母公司所有者权益合计 2,300,125,427.67 2,132,531,117.02"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "291862944.00",
+          "comparative_yuan": "291862944.00",
+          "page": 97,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "291,862,944.00",
+          "comparative_display": "291,862,944.00",
+          "evidence": {
+            "page": 97,
+            "text_excerpt": "股本 291,862,944.00 291,862,944.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 97,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 97,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 97,
+          "interpretation": "原行列名可见但金额单元格空白；当前列与比较列均保持null，不当作零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 97,
+            "text_excerpt": "减：库存股"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sz.002117",
+      "year": 2022,
+      "announcement_id": "1216298710",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01251-pdf.body",
+        "sha256": "b18634e7a300c6c4ce9264fae2dc3474271d59247242f34b678cf69be4c4a58e",
+        "bytes": 3208727,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 51,
+        "heading": "1、合并资产负债表",
+        "period_line": "2022 年 12 月 31 日",
+        "unit_line": "单位：元",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57
+        ],
+        "mother_company_table_first_page": 53,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 51,
+        "table_heading_page_pdf_1based": 51,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 2022 年 12 月 31 日 2022 年 1 月 1 日",
+        "unit_line_exact": "单位：元",
+        "period_line_exact": "2022 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          51,
+          53
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          53,
+          54,
+          55,
+          56,
+          57
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "1538039670.60",
+          "comparative_yuan": "1567128163.96",
+          "page": 53,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "1,538,039,670.60",
+          "comparative_display": "1,567,128,163.96",
+          "evidence": {
+            "page": 53,
+            "text_excerpt": "归属于母公司所有者权益合计 1,538,039,670.60 1,567,128,163.96"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "545666421.00",
+          "comparative_yuan": "545666421.00",
+          "page": 53,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "545,666,421.00",
+          "comparative_display": "545,666,421.00",
+          "evidence": {
+            "page": 53,
+            "text_excerpt": "股本 545,666,421.00 545,666,421.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 53,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 53,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 53,
+          "interpretation": "原行列名可见但金额单元格空白；当前列与比较列均保持null，不当作零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 53,
+            "text_excerpt": "减：库存股"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sz.002350",
+      "year": 2023,
+      "announcement_id": "1219637036",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01558-pdf.body",
+        "sha256": "4e1613b22288d3856758661c20733a08cfbde282e408743a452fb95946105d55",
+        "bytes": 3199172,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 86,
+        "heading": "1、合并资产负债表",
+        "period_line": "2023 年 12 月 31 日",
+        "unit_line": "单位：元",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92
+        ],
+        "mother_company_table_first_page": 88,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 86,
+        "table_heading_page_pdf_1based": 86,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 2023 年 12 月 31 日 2023 年 1 月 1 日",
+        "unit_line_exact": "单位：元",
+        "period_line_exact": "2023 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          86,
+          88
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          88,
+          89,
+          90,
+          91,
+          92
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "1696378822.97",
+          "comparative_yuan": "1865934404.06",
+          "page": 88,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "1,696,378,822.97",
+          "comparative_display": "1,865,934,404.06",
+          "evidence": {
+            "page": 88,
+            "text_excerpt": "归属于母公司所有者权益合计 1,696,378,822.97 1,865,934,404.06"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "542331351.00",
+          "comparative_yuan": "542369011.00",
+          "page": 88,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "542,331,351.00",
+          "comparative_display": "542,369,011.00",
+          "evidence": {
+            "page": 88,
+            "text_excerpt": "股本 542,331,351.00 542,369,011.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 88,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 88,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": "100016803.20",
+          "comparative_yuan": "100130195.82",
+          "page": 88,
+          "interpretation": "两列均显示库存股金额。",
+          "current_display": "100,016,803.20",
+          "comparative_display": "100,130,195.82",
+          "evidence": {
+            "page": 88,
+            "text_excerpt": "减：库存股 100,016,803.20 100,130,195.82"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    },
+    {
+      "code": "sz.000755",
+      "year": 2024,
+      "announcement_id": "1223265716",
+      "original": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/01070-pdf.body",
+        "sha256": "dd62363bccf793f6833e36b85cdd97e8c672689faa852355a9f69f0fd709aa0a",
+        "bytes": 2497883,
+        "identity_status": "match"
+      },
+      "table": {
+        "heading_page": 93,
+        "heading": "1、合并资产负债表",
+        "period_line": "2024 年 12 月 31 日",
+        "unit_line": "单位：元",
+        "comparative_column": "年初余额/上一年12月31日，依原表表头",
+        "pages_read": [
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99
+        ],
+        "mother_company_table_first_page": 95,
+        "mother_company_table_excluded": true,
+        "selection_heading_page": 93,
+        "table_heading_page_pdf_1based": 93,
+        "table_heading_page_is_from_selection_record": true,
+        "header_exact": "项目 期末余额 期初余额",
+        "unit_line_exact": "单位：元",
+        "period_line_exact": "2024 年 12 月 31 日",
+        "selection_metadata_note": "header/unit/period values copied from selected prepared table record; chosen heading page was also independently read in source PDF.",
+        "pages_used_for_fields": [
+          93,
+          95
+        ],
+        "mother_company_table_data_used": false,
+        "mother_company_table_or_later_pages_read": [
+          95,
+          96,
+          97,
+          98,
+          99
+        ],
+        "mother_company_table_exclusion_note": "这些页的文本曾在定位循环中读取；输出字段只摘自所选合并报表行，没有采用母公司表或其后内容。"
+      },
+      "fields": {
+        "parent_equity_total": {
+          "current_yuan": "5351669638.21",
+          "comparative_yuan": "4951681084.04",
+          "page": 95,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "5,351,669,638.21",
+          "comparative_display": "4,951,681,084.04",
+          "evidence": {
+            "page": 95,
+            "text_excerpt": "归属于母公司所有者权益合计 5,351,669,638.21 4,951,681,084.04"
+          }
+        },
+        "share_capital": {
+          "current_yuan": "1467310196.00",
+          "comparative_yuan": "1467310196.00",
+          "page": 95,
+          "interpretation": "原表当前列与比较列的归母权益合计/股本金额；单位取原表标注的元。保留逗号格式的显示值，normalized yuan字段为去千分位逗号的同一原值。",
+          "current_display": "1,467,310,196.00",
+          "comparative_display": "1,467,310,196.00",
+          "evidence": {
+            "page": 95,
+            "text_excerpt": "股本 1,467,310,196.00 1,467,310,196.00"
+          }
+        },
+        "other_equity_instruments": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 95,
+          "interpretation": "列名和子行可见，但没有列出金额；两期数值保持null，不等同于已证实为零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 95,
+            "text_excerpt": [
+              "其他权益工具",
+              "其中：优先股",
+              "永续债"
+            ]
+          }
+        },
+        "treasury_shares": {
+          "current_yuan": null,
+          "comparative_yuan": null,
+          "page": 95,
+          "interpretation": "原行列名可见但金额单元格空白；当前列与比较列均保持null，不当作零。",
+          "current_display": null,
+          "comparative_display": null,
+          "evidence": {
+            "page": 95,
+            "text_excerpt": "减：库存股"
+          }
+        }
+      },
+      "scope_note": "独立读取原件合并资产负债表；未使用母公司表。"
+    }
+  ],
+  "limitations": [
+    "金额按元记录；空白保持null，原文“-”保留字符串、不擅自等同零。",
+    "其他权益工具未见金额不等于经济余额必然为零。",
+    "12个指定年度是原页抽查，不代表完整覆盖率或财务有效性结论。",
+    "定位过程中有超出母公司资产负债表标题的页面被文本提取；见各例pages_read与scope_exception。越界页面内容未纳入金额字段。",
+    "母公司报表未作为字段来源；核对对象仅为合并资产负债表。",
+    "其他权益工具未见金额不等于经济余额必然为零；空白与原印“-”分别保留为null和原符号。",
+    "12个指定年度是原页抽查，不代表完整覆盖率或财务有效性结论。"
+  ],
+  "created_at_local": "2026-10-20T13:07:42+08:00",
+  "scope_exception": {
+    "description": "定位脚本有一轮读取超过所需合并报表行的页面，包含母公司资产负债表页及后续页。该越界文本已明确标记为已读取但未用作字段；所有金额采用合并资产负债表行。",
+    "reporting": "每例列出实际页码范围pages_read、指标/表头采用页pages_used_for_fields以及母公司表标题页至读取末页范围mother_company_table_or_later_pages_read。"
+  }
+}
