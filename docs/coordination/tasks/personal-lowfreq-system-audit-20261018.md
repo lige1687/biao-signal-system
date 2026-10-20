@@ -1,3 +1,13 @@
+# 按用户新回复继续核公开历史资料 2026-10-20T10:59:17.280195+08:00
+
+- 原任务active；checked_coordination_sha=e149dd9c269b969bbd4e35e4e910de9e23ef913a；checked_at=2026-10-20T10:59:17.280195+08:00；已读COORDINATION/self及因子实现最新范围（高点/历史300行情）；此前theory/external/discovery/dispatch范围沿用，无并行复制行情。
+- 用户确认“暂时没有”RQData权限，并授权继续找公开/开源替代。新增本轮问题：原披露/修订是否可从巨潮及SEC等公开路径获得，现有资料覆盖到哪里，哪些开源接口只是最新整理值。复用原件，必要小额公开元数据/原件只写已登记外盘目录，不取密钥、不付费、不整库下载或重跑收益。
+- 文件仍是同名osap-history报告/raw/usage及本registry键/INDEX行，root独占；Luna low只读已有公开材料覆盖，Sol medium只读官方渠道资料，root核真实可取得样例。原实验累计计数保持，本次新增来源查询独立记账，不借此重跑耗尽的因子实验。
+- 已知共享阻塞：主工作区preparation被既有sources.green_momentum_methods_20261020格式(kind/paths/originals/limits)与definitions.py要求(path/sha256)不匹配拒绝；新OSAP参照卡仅已登记，独立OSAP与财报读取器实际可用。该来源归因子实现，本任务不改或绕过其卡与验证器。原隔离树还缺新版standards，失败原样留存。
+- RQData状态改为用户无权限，替代公开渠道审查继续；不是整个任务等待付费数据。工具与真实两年报案例已完成但全市场可靠历史仍未完成。
+
+---
+
 # OSAP 真实资料接通与目录导航补齐 2026-10-20T10:51:25.568078+08:00
 
 - 原任务 active；checked_coordination_sha=66aac72fc664f6ee4a56974c97dda38baff5ee36；checked_at=2026-10-20T10:51:25.568078+08:00；已读 COORDINATION/self/research-utility-review最新10:45历史300股票资料范围及此前theory/external/discovery/dispatch；对方价格/高点资料与本题财报版本及OSAP参照无冲突。
