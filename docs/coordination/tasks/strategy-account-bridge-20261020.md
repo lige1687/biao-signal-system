@@ -1,3 +1,15 @@
+# 多策略前向资格审阅交付 2026-10-20T18:31:57.661824+08:00
+
+- task-id/owner沿原；status completed（本次资格问题）；scope_released true；checked_coordination_sha=cc9269a293e0a746912ad4a73f55b869f45fe750；checked_at=2026-10-20T18:31:57.661824+08:00；已读self/COORDINATION/前段8个相关task-id，交付前重读mechanism-rebalancing-review18:28接续：该owner正核月末机构再平衡实际用途，未接管、未重复。其他范围不变。
+- 结论：不同收益来源组合方向可采用；现存没有两套已具完整规则、可比每日账户及充分组合证据的互补策略可直接启用。四ETF季度配置优先保留一个候选，不能当四策略；与同四ETF不调整周收益相关0.977362，不算独立来源。旧B9/LEI -0.0031435来自LEI周频净值沿用日频，不能确认真实逐日共同下跌。
+- 新报告docs/experiments/multistrategy-forward-readiness-2026-10-20.md及同raw brief/核数脚本/回执；registry新增本键、原前向报告仅附资格入口并更新自身SHA；INDEX一行；原progress追加。其他登记值保持。原5输入、9冻结服务源码和两策略原件SHA未变，运行服务/配置/账本/真实交易没有改动。
+- 独立只读复核11700行：四ETF单位净值equity/units差0；672个完整周相关及旧2261个日表变动相关独立吻合。季度比不调整期末多50088.59元、最大跌幅少5.0446pp、213额外交易/1899.21元额外费用，仍1539天恢复且2020至22投入亏损。不把单基金差额全归调整。
+- 1次保存结果描述诊断，0新市场回测/拟合/优化；外部2工具调用含5查询+1原PDF打开，Kris准确5至7原句未找到。Sol medium候选/独核，root来源/集成/判断，费用未知。raw约31KB，小报告本机；无大结果与下载。
+- 两报告API全文与本地逐字一致、归置通过；初始schema/cwd/旧路径查询失败已说明并修正，没依失败改历史。本次证据边界已回答，未来组合效果仍未评价，不宣称已启用多策略。当前实现仅单ETF持有/现金通道；通用多资产/共享资金仍是后续明确功能。
+- K-baseline v12 in_progress及06B v14 review只读，仓外note未获前轮准确确认，本轮仍未写。成果主工作区仅本地未提交/未推送，远端仅本协调元数据；不自动合main。恢复需原owner产出完整可比策略账户和固定共享资金比较，不重做旧绿/黑实验或凑策略数量。
+
+---
+
 # 多策略组合前向资格审阅 2026-10-20T18:23:04.216385+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=0022cc2f296009c66d7d32b8253aeb54c0930946；checked_at=2026-10-20T18:23:04.216385+08:00。已读COORDINATION、self、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、mechanism-rebalancing-review-20261020最新范围。
