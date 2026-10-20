@@ -1,3 +1,16 @@
+# 低换手绿色选股账户：有界检验交付 2026-10-20T17:11:50.472625+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed（仅本轮低换手账户问题）；scope_released true；checked_coordination_sha=59d04372ab4d214e569a323c055f0b23432d8366；checked_at=2026-10-20T17:11:50.472625+08:00。已读COORDINATION/self、personal-lowfreq-system-audit-20261018（16:52美股参考定义，原owner）、lowfreq-strategy-discovery-20261019、research-dispatch-controller、investor-workspace-simplification-20261012（17:03三图交付）、strategy-account-bridge-20261020（17:08前向观察接入，无重复研究）、pro-advice-process-review-20261020（17:05次开盘比较交付）；无同路径冲突，不接管其研究或服务。
+- 用户授权“按这个思路去推进，我要看到成果”已落实1个新增连续资金问题：固定2014年底历史300股，2015—2025共132月，10万元最多10只；3排序×2排名保留×3费用共18组效果前冻结。单边0.25%主方案普通动量累计−80.19%、偏冷−41.32%、低波动−26.31%；偏冷相对低波平均每月−0.123个百分点，估计范围跨零，暂不采用本版。低波前10名对照+26.31%但最大跌幅61.04%，完整披露，不能事后挑为成功。偏冷放宽保留范围少230笔约10.9%，对普通动量少持有21次大涨机会；平均每月仍14.3笔，未达到省心证明。
+- 源修复限定证据：旧600/43股276处断点268可由原价因子精度解释，8处仍不兼容；不能推广全600。原诊断漏001914已有修正，较大断点从误写14纠正为7，旧效果实际正确载入，无重跑。新300共5处断点保留，18组无当日持有，未知路径仅合成覆盖；停牌旧价最高权益占比51.5%/57.9%/67.6%及集中风险披露，非真实可成交收益。
+- 报告 docs/experiments/lowturnover-green-account-2026-10-20.md SHA b5e1b516a89227777033caf7c65f21072ae2acbb1e6d41f65bc00294e3a4e0e4，已登记category组合与仓位/verdict mixed；新增代码src/lei_signal/research/lowturnover_green_account.py、对应14项合成检查。独立18组110指纹/48150每日/481500资金槽/46923成交受阻/2376月账核数0失败，最大差1.46e−11；root另独核12原价×因子和关键跌幅报价一致。归置与准确路径diff检查通过；这些检查不证明因子有效。
+- 系统owner已将3张SVG准确采用到5188运行树，报告实际浏览器标题/结论/4表/3图解码与资金曲线视觉核过；542宽有17px现有页面横溢，不冒称零横溢。API全文同SHA，Agent17:09 SHA verified且不截断，报告页标为交付保留。用户视觉待验。系统目标仅追加note179→180，in_progress和保护字段/旧history不变。
+- 核心1/1、跟进0/3、公开来源3/6、0新行情；旧短反转core1/1/followup2/3/source2/6原预算保持，未重跑旧效果或扫参数。SEC微软71季度/212披露、5季度不同版本已存，仅历史盈利资料资格起点，尚未计算盈利因子。两策略原文、生产和交易规则不改；原完整LEI、美股ETF资金验证、未见时期和600全来源仍未完成。
+- 主树codex/factor-unit-research-20260915基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；本轮源码报告小回执仅本地未提交未推，远端不可完整复现；只推协调元数据。小记录同名raw约0.20MB，合同SHA c689535a82f1de8fd1f6d902f443c1e7e4523c5b8b371542151b24a9360db023；manifestSHA 8c9a4ed4eed1ac988952882a3379ba6d932fa482efb35074c691802cc2282402。大结果约199MB在固定外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，storage-plan.json绑定准确路径；盈利原件另由source-probe-storage-plan定位。不转移旧文件、不买数据、不自动通知。
+- 收尾依据：本固定账户问题和必要核验已答，结果不支持继续同历史扫阈值；无本题后台任务。下一独立问题是季度盈利发布版本/历史匹配资格，先复用已有现金盈利和美股owner成果，不宣称已经有独立非价格因子。详细恢复入口同raw/state、contract、delivery-validation、goal-receipt、final-method-review，记录Astra关键方法、Sol实现/独核与root原价/交付检查；模型实际费用未知。
+
+---
+
 # 低换手选股实施与资料修复接续 2026-10-20T16:32:37.492344+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=c227bf302446f1c02e81ef182d27d0e430486f1a；checked_at=2026-10-20T16:32:37.492344+08:00。已读COORDINATION/self/personal-lowfreq-system-audit已完成16:07/lowfreq-strategy-discovery已交接完成/research-dispatch-controller/investor-workspace-simplification两图完成记录，其他Gemini/Pro沿原不接管，当前无新路径冲突。用户原话“可以，按你这个思路去推进哈，我要看到成果”，授权从已交付短期反转进入数据/低换手实施/合理组合与非价格资料资格。
