@@ -1,3 +1,18 @@
+# 曲线、宽度投影与按需解读预览交付 2026-10-20T23:57:04.678399+08:00
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status completed（本轮隔离预览）；scope_released true（本轮自有组件/服务/资料）；用户视觉效果待验收。后续投资增量与生产采用未完成。
+- checked_coordination_sha 95168e7ff21792d0a9ae21bd6ada9fcc50cb36eb；checked_at 2026-10-20T23:57:04.678399+08:00；开始读COORDINATION1.1、self、research-dispatch-controller、investor-workspace-simplification-20261012、investor-observation-map、portfolio-trends-20261013、personal-lowfreq-system-audit-20261018、mechanism-rebalancing-review-20261020；交付重读变化的personal/mechanism/strategy-account-bridge-20261020最新段与dispatch。对方研究资料及strategy-portfolios审核模块无同文件交叉，不接管其研究/运行树。
+- 成果 codex/market-style-observation-20261020@5edea3086d56ac600bf66d3cc3517071b688c378，29准确文件832KB级逐字远端读回；本轮26变更，另3自有既有组件未变。主树18e64fa分支/索引不切换不清理；未合main。raw/curves-publication-receipt.json本机保存完整清单。父页沿上一成果精确ui-integration.patch，不混传他人父页未提交改动；完整运行壳仍本地依赖，远端不冒称整套可恢复。
+- 入口 http://127.0.0.1:5192/fundamentals#fund-sec-market，新增独立8192 loopback阅读服务；预览源在仓内.codex/market-style-preview-20261020/web。浏览器已保留。源码12组件与副本SHA核同，原5188父页SHA不变；共享8000/8028/规则/LLM源码未改。
+- 风格相对母指数／累计路径与价格／宽度并排；B20/B50/B200及已有六条件同时投影同期价格，宽度缺失日期不延伸色带；VIX/HY曲线成对，行业/前十/估值/五问/来源折叠。B20未加入原六条件，未发明策略阈值。MSCI年度端点2014—2025加2026前九月，无伪造日月路径。
+- Agent仅按钮点击触发：沿已配置DeepSeek模型，选择3—4张已核事实/方法卡及顺序；服务端填数字/解读/来源，失败不伪装成功。同资料复用；市场/窗口/内容变化后旧解读隐藏；无定时器/通知/模型自动重试。权威方法来源MSCI/StockCharts/CBOE/FRED，不冒称机构点评本页当前数据。
+- 核验：构建831模块通过（既有大包warning保留）、7服务边界测试0.43秒通过、1280/1024/390无横溢、console error0；曲线/六条件/细节/两市场/价格选择/收起/真实点击通过。同日价格修订指纹改变；刷新、切换和同资料再点击没有额外模型请求。原raw/curves-verification、manifest、official-history、passive-check、desktop/mobile/agent-visible截图和三解读文本可核。
+- 3个Sol medium独立实施风格/宽度/后端测试，root整合/风险/按钮/核验；共3次实际模型调用，前两次较慢且用量未知，最后0.9秒398tokens；总用量/费用未知。模型仅本独立请求关闭推理、1024输出上限，无全局设置变化。公开方法核查6次，0新收益实验/0付费数据。初稿策略日期与风险质量注释修复，原始文本保留。
+- 数据边界：A宽度10/16、US9/4，非今天；MSCI9/30旧月末+年度，不能判本周切换。VIX观察17.85与UI7300日历史末值18.84同日10/20但批次不同（7665诊断17.94）；UI明确分列，未改上游缓存。HY3.29%(10/19)两路一致。本地市场波动/NFCI/收益贡献/当前回撤/历史估值位置/完整资金持仓及共同有效样本仍缺。
+- 原系统目标okr-f07e0054448a仍此前planned，本轮无仓外DB写入；未改策略原件/阈值/交易或自动化。后续只按用户实际试读调整预览；生产采用另核准确范围；因子选股、风险对比简单降仓、完整策略增量按用户顺序后续独立定义与验证。
+
+---
+
 # 曲线、宽度同期投影与点击式 Agent 解读 2026-10-20T23:24:26.821853+08:00
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active；scope_released false。
