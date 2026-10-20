@@ -1,3 +1,14 @@
+# 机构拥挤与散户情绪反向候选：设计和资料核查 2026-10-20T19:24:12.332718+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha ab7baec4b763f598d199e9361d770494fed9ae50；checked_at 2026-10-20T19:24:12.332718+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/strategy-account-bridge-20261020/personal-lowfreq-system-audit-20261018最新范围；原情绪owner及新财务/前向保持，不接管旧研究。
+- 用户问A股和美股机构持仓阈值/散户情绪反向因子如何设计、用什么数据。本轮plan_only及来源资格审阅：机构敞口/持有比例/共同持仓分开，散户调查/杠杆行为分开；复用AAII、NAAIM、融资及旧定投负结果。0新行情下载、拟合、收益实验、阈值优化或交易/生产修改。
+- root唯一写入docs/experiments/institutional-crowding-retail-contrarian-design-2026-10-20.md及同名raw小证据；原progress追加，registry仅本新键/INDEX本行。规范/定义/源码/旧合同只读；成果沿codex/mechanism-rebalancing-review-20261020，基础13787d684b34a211fc871a0138726164cd693e73。当前主树旧脏改保留。
+- Sol medium本地旧证据盘点，Sol medium美国官方资料（SEC/CFTC/AAII/NAAIM）；Astra medium只读设计审查；均无写权。root核A股规则及公开原件、关键旧表、增量问题与设计边界，不额外开用户任务或通知。
+- 采用research-closure plan_only、lei-lowfreq-research及当前规范；新源只小网页/PDF工具读取，未落大件，不付费或全历史下载。用户限制优先，不因通用技能默认次数人为停止必要核验；实际请求/失败合并留账，不重置旧家族预算。
+- 验收：两市场资料/延迟/许可/历史资格清单、可计算候选与竞争解释/否定条件、用途/简单对照/漏涨与风险代价、复用与不重复理由。设计不冒充有效性，原体系E和机构账户范围不改；目标API仅只读去重，仓外数据库无写入。
+
+---
+
 # 整体研究顺序核查交付 2026-10-20T19:11:21.995829+08:00
 
 - task-id/owner沿原；status completed（本次report_only流程问题）；scope_released true；checked_coordination_sha e4c9ca870e9a6a98ef693d1a9ca9a4724843a593；checked_at 2026-10-20T19:11:21.995829+08:00。已读COORDINATION/self/research-dispatch-controller/theory-workflow-system-increment/pro-advice-process-review-20261020/strategy-account-bridge-20261020/research-utility-review-20261012/personal-lowfreq-system-audit-20261018；交付前fetch相关范围无变化，无代码冲突。
