@@ -1,3 +1,13 @@
+# 已有价值原件的字段漏读修复 2026-10-20T12:40:49.824150+08:00
+
+- task-id/owner沿原，status active，scope_released false。checked_coordination_sha=6bab9a29d3f05ac377768cc8391f5c3065151de5；checked_at=2026-10-20T12:40:49.824150+08:00。已读COORDINATION/self、research-utility-review-20261012、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、research-dispatch-controller当前段，无新变动；不重做原LEI/资产增长/ETF。
+- 基线codex/personal-lowfreq-system-audit-20261018@d51ffac2c7baed0062ae0a35ad7b099e2f8715d5；上一目标轮有实际进度：165共同财务输入恢复及69月防御比较，已验证交付。整体目标未完成。本轮新增来源请求0，10次旧代码取数预算仍待用户明确答复，所有旧家族计数保持。
+- 继续已有可执行缺项：先定位000032三年原件的合并资产负债表漏读，基于已核页/原件SHA制作有限格式修复；复用9原件人工审阅作为独立值基准，不再全文研究，不读收益。不把会计股本当法定股数、不把空白其他权益或库存股转成0，不输出合格估值/收益。
+- 唯一新增写入docs/experiments/raw/value-field-repair-2026-10-20/，root写方案/原件绑定/执行合同/核验，Luna写单个提取脚本及相关测试，Sol当前仅只读定位；必要小报告docs/experiments/value-field-repair-2026-10-20.md及registry自身键/INDEX自身行/原progress，主树镜像只在核验后。旧冻结extract_annual_value_anchors.py及原件/报告/市场输出不改。
+- 验收：说明漏读根因，真实源SHA/年份/合并表/币种/单位核同；恢复字段与先前人工审阅精确相等，母公司/错误年/模糊列/空白拒绝；价值数据仍缺项明确。既有小JSON输出不超过500KiB，若需大输出先走外盘plan；无新市场实验/安装/生产/通知/付费/删除。模型分工保持，费用未知。
+
+---
+
 # 来源恢复与有限防御比较交付 2026-10-20T12:35:37.574999+08:00
 
 - task-id/owner沿原；本轮来源恢复/限定历史用途status completed，整体目标仍in_progress；下一旧代码资料补证待追加预算决定，未运行；scope_released false仅保留本题来源恢复范围。checked_coordination_sha=128fde9fed140b07251cf8317f8e17709b5370c8；checked_at=2026-10-20T12:35:37.574999+08:00。最新fetch无其他任务变动，已读COORDINATION/self、原因子12:06指标审计、Gemini12:08ETF52月交付，独立发现/中控沿本轮已读。其他对话结果不重做。
