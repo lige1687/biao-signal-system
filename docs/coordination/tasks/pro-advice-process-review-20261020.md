@@ -1,3 +1,16 @@
+# 用户授权接续：先核最新确认研究，再推进实际行动缺口
+
+- task-id: pro-advice-process-review-20261020；owner: 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status: active；scope_released: false；updated_at: 2026-10-20T16:39:01.137487+08:00。checked_coordination_sha: ab8a73604d3f818dde41aa08fe275ae05d4b823a；checked_at: 2026-10-20T16:39:01.137487+08:00。已读 COORDINATION、自身、research-utility-review-20261012（含10月19日原A/小时/扩样及20日结案）、personal-lowfreq-system-audit-20261018、lowfreq-strategy-discovery-20261019、strategy-account-bridge-20261020、research-dispatch-controller、dot-pro-strategy-definition。
+- 用户原话“可以的，持续推进吧？”沿已建议的宽基ETF完整入场确认→退出与低投入比较→共享资金顺序。先纠正前答遗漏10月19日已完成小时比较/ETF扩样；旧7案例不能冒充最新全部进展。原A目标/失效/身份缺口保持原owner，完整资金效果仍阻塞；不接管其文件、重跑旧实验或重置预算。
+- 当前具体问题：已完成的原A/小时研究之外，低频按日查看至实际可行动时间是否仍有值得检验的增量缺口。当前仅已存证据盘点与科学/可执行性判断；任何新效果比较须先记录同问题必要性、原授权与累计预算、固定定义/同机会对手和数据资格，未定原A语义不代填。
+- 主工作基线 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9（多人脏改保留）；本任务前次已推成果 codex/pro-advice-process-review-20261020@367d2137e296fb826572757c31f5046b4430a98e。本轮独占新增 docs/experiments/raw/lowfreq-confirmation-execution-2026-10-20/、同名报告（若形成新有界结论），root仅追加自身work-progress和自身协调记录；registry/INDEX仅本题唯一键/行。共享源码、定义、方法文档、其他owner产物全部只读，具体新代码范围在必要时另登记。
+- 查重决定：已有小时对立即/固定5日、8ETF448机会、退出扩样均复用；strategy-account-bridge正在交付方法和旧账户时长，不进入其文件。不以原owner历史scope释放推定可抢占其主问题。原A完整研究仍由原owner；本题独立复核与新行动缺口是否值得，未登记同题实施者状态未知。
+- 只读助手 Sol medium confirmation_resume_audit（旧数据/预算/覆盖）和 Astra high confirmation_method_decision（是否有必要新检验）；write_paths=[]、network_allowed=false、无下级。合同已在实际派发消息固定，root独核来源及最终判断；实际token费用未知。
+- 当前0新来源/0新市场效果/0拟合/0生产交易/0跨chat消息；原家族市场累计2898.484713/3600秒、各原来源预算继承，不把新名字当重置。新行情/付费/权威原文修改不在本轮范围。存储UUID已核、内盘16.4GB外盘504.2GB；本机小记录预计250KiB，新大结果若必要须先固定外盘计划。
+- 验收：最新材料及指纹读回、旧问题与真缺口区分；若有获准可执行必要比较则完成，否则准确交阻塞所需原材料，性能/增量未测不填数。不以再次方法整理算策略有效。
+
+---
+
 # Pro三项流程补充已采用并独立核验，用户要求已完成
 
 - task-id: pro-advice-process-review-20261020；owner: 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status: completed；scope_released: true。checked_coordination_sha: 8b0f4a8071985cd973f85d873942d0d53a1c2603；checked_at: 2026-10-20T16:17:16.306494+08:00。已读task-id：self、personal-lowfreq-system-audit-20261018、research-dispatch-controller；原owner已释放核心写范围，仍直接复用其采用成果，无核心文件二次修改或其他冲突。
