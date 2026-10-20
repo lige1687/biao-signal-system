@@ -1,3 +1,15 @@
+# 曲线、宽度同期投影与点击式 Agent 解读 2026-10-20T23:24:26.821853+08:00
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active；scope_released false。
+- checked_coordination_sha 2ceb2a4b9416f7992a423cb39e465a9a58737832；checked_at 2026-10-20T23:24:26.821853+08:00；已读 COORDINATION1.1、self、research-dispatch-controller、investor-workspace-simplification-20261012、investor-observation-map、portfolio-trends-20261013、personal-lowfreq-system-audit-20261018、mechanism-rebalancing-review-20261020；冲突决定：已有曲线/规则/API只读复用，不接管原owner。
+- 用户明确要曲线、20/50/200宽度及叠加状态/投影、权威方法的被动Agent解读与紧凑布局；继续5192隔离预览。全球风格只有核实的年度路径，不造日/月历史；投影为同期历史条件映射到价格，不预测未来。
+- 写入范围：web/src/components/market-style/本任务组件；web/src/pages/FundamentalsPage.tsx仅此前本任务integration；新增src/lei_signal/market_style_observation/独立8192阅读服务、tests/unit/test_market_style_observation.py；原报告/raw/progress；仓内.codex/market-style-preview-20261020/副本及vite代理。共享图表/规则/LLM/8000/8028模块与仓外5188只读，不改目标数据库、交易/生产、主动通知。
+- 分工：Sol负责StyleComparison/样式/官方年度小数据，Sol负责独立BreadthComparison/样式与对应图表，Sol负责独立后端与针对性测试；root容器/风险曲线/Agent按钮、解读边界、核验。所有实现仅在上述互不重叠路径。
+- 基线成果f2005b40047a3332085c9adef3b4cd4d2195c429；主共享树18e64fa不切换不清理。验收：真实历史/相对母指数口径、20/50/200曲线/条件/价格同轴日期与缺口、桌面窄屏、显式点击才请求模型、变更市场/窗口/数据旧读法失效、实际一次模型调用并核对来源/数字/缺项；失败不得伪装AI成功。
+- 现阶段来源核查、复用核查完成，实施待开始；原系统目标planned保持，不重复登记。资料费用未知，0新策略效果实验；权威来源提供方法，不能冒称其评价本系统数据。
+
+---
+
 # 市场环境面板交互预览交付 2026-10-20T20:32:45.750033+08:00
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status completed（本轮UI预览）；scope_released true（本轮新增组件/限定父页修改）；用户视觉效果待验收，正式5188尚未接入。
