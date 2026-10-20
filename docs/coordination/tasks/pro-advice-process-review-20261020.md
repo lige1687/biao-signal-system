@@ -1,3 +1,13 @@
+# 两题已冻结并进入实际核验
+
+- task-id/owner沿原；status active；checked_coordination_sha cdc3c0db2645776848a5c21f6cf83dafd15f6df1；checked_at 2026-10-20T19:21:36.966893+08:00；已读self及上述相关task-id，最近增量仅本题登记，无新冲突。范围仍仅本两raw/报告/自己的进度和registry/INDEX本键。
+- 波动率新合同SHA 55869b3cc490c215d9cce9e2bc3f340a375da21717b825a07f0cf2da96658992：两ETF2018-07-05至2026-06-30，两原费率，新增V月末20日波动10%目标无杠杆及BV=min(原宽度,波动上限)共8路径；原B/半仓保存路径复用，不重跑旧矩阵。不是同风险设计、不称alpha；10%是预设研究值非用户承受线。W3所有新增投入保留50日确认，旧5pp调整区/分红/现金/限制保持。原两个CSV LF→CRLF后精确等旧SHA，旧账户收盘/成交价逐日一致，数值身份已核，历史成员和到达缺口保持。
+- 财报资格合同SHA 87bfc6252d5cbaf7237c38b04e28f43349226f31d91a7dc555521c377f970497：保存MSFT EPS按accession/首次保存申报及同文件上年同期重建，核SEC接受时刻与两原公告，最多6新data请求，来源方法web单列。原粗盘点直接复用；不做股价/选股效力。发现季度起点差一天不能误判整季度缺首次资料，已要求保留更正、按end显示日期冲突和版本边界。
+- Astra high只读方法已交：政策取舍不能冒充同风险增量；季度同比不能累计EPS相减。Sol medium两个独立执行者按合同各写自身raw和指定外盘，无正式源码/其他owner改动。40宽度输入及原EPS SHA已绑定，真实代码检查/新运行正在执行尚未验收。
+- 两个外盘目录均由plan_output核固定UUID并生成唯一位置；本机每题1MiB/外盘64MiB估计。新核心仅本8路径、必要纠错最多3并留史，0行情请求；旧封存预算不重置。结束须完整性能/增量/年份/少亏少赚与主控独核；财报可交资格结果但不冒充已证明因子效力。
+
+---
+
 # 宽度与波动率仓位、季度盈利资料两个问题进入独立核查
 
 - task-id pro-advice-process-review-20261020；owner 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status active；scope_released false；checked_coordination_sha 6c6725b396e7534f8b0b05333cba2d8de08bb0d5；checked_at 2026-10-20T19:16:56.845291+08:00。本轮实际读COORDINATION、自身、sentiment-factor-research、risk-shape-information、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller；旧宽度负责人仍保留其轨道，本题只复用旧证据并回答用户新增两项用途，不改其他owner文件或范围。
