@@ -1,3 +1,13 @@
+# A股短期反转：已有结果与适用范围审查 2026-10-20T23:25:55.671451+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha=300606f10c8695b2e1f09611ced2e89e096ef369；checked_at=2026-10-20T23:25:55.671451+08:00；已读COORDINATION及task-id：personal-lowfreq-system-audit-20261018, research-dispatch-controller, research-utility-review-20261012, strategy-account-bridge-20261020, mechanism-rebalancing-review-20261020, market-style-observation-20261020。另核“因子实现”会话01a12bbb-44f2-7c22-a0a9-defd4f1640bc、三份已交付报告，原owner仍负责实施和前向；不接管不重跑。
+- 用户本轮要求解释美股盈利资料不足、核A股反转已有研究及应用范围。新增有界问题是：哪些现成证据支持月度候选排序、少换股账户或趋势组合，哪些不能支持。mode report_only：旧输入与结果只读复用；本轮0新回测/0调参/0行情下载，不重置旧家族预算。
+- 成果基线codex/personal-lowfreq-system-audit-20261018@d58b9b2a743aeae216423d0395eae829dafc4687。准确新范围仅 docs/experiments/a-share-reversal-applicability-review-2026-10-20.md、同名raw小证据/本轮记录；registry仅本键、INDEX本行，自己的progress追加。成果先独立工作树，核验后精确镜像本新报告/raw及登记键；原源码/定义/合同/报告/前向服务/他人记录只读。
+- root负责原文方法/证据边界/结论；沿现有Luna trend_inventory只读核三报告、小回执和定义差异，无写权/外盘读/联网/再委派。Luna已经返回，主控将核关键数字及范围，不把回执当市场真实性证明。来源定位与原文核查采用research-closure默认至多6次公开请求，已2次搜索；旧研究预算保持，实际模型成本未知。
+- 本轮计划只创建小文档/元数据约100KiB本机，无新大结果、缓存或外盘写；不改策略、生产、交易、账户配置、通知或目标库状态。验收：最新正负结果均复用、定义和时期分开、原始权威论文可定位、性能与增量和代价并列、报告/API/远端读回。缺资料不能推断有效，原价格短反转与机构仓位反向不是同题。
+
+---
+
 # 美股经营盈利：有界诊断交付完成 2026-10-20T21:58:05.172565+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（本轮明确口径/公开资料下的固定比较）；scope_released true（本轮新路径，旧冻结内容仍不可改）。checked_coordination_sha=c6bf568a63f7984f58b71ea132b33dfefcbe3e66；checked_at=2026-10-20T21:58:05.172565+08:00；已读COORDINATION及task-id：personal-lowfreq-system-audit-20261018, research-dispatch-controller, research-utility-review-20261012, lowfreq-strategy-discovery-20261019, pro-advice-process-review-20261020, strategy-account-bridge-20261020, market-style-observation-20261020, mechanism-rebalancing-review-20261020, gemini-strategy-review-20261020。最新fetch与前交付登记无他人变化，无范围冲突。不接管季度EPS、原技术因子、低换手前向、账户与ETF任务；总目标不宣称全部完成。
