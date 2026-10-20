@@ -1,0 +1,100 @@
+{
+  "schema": "joint-source-review-notes/1",
+  "at": "2026-10-20T14:25:34.101743+08:00",
+  "reviewer_inputs": "只读子代理审阅后由主控整理；具体原页关键数值主控独读，不以代理完成状态代替事实。",
+  "astra_next_action": {
+    "decision": "先共同输入和最小端到端，再决定取价或暂缓；不继续扩大通用PDF提取。",
+    "enough_to_continue": "非价格输入在原132决策月形成跨年度、可区分新增价值与动量/毛利/简单稀释的共同候选集合，才冻结必要免费原价批次。",
+    "not_enough": "只有1–2发行人数值锚点时不得用无意义回测凑完成；来源资格题可完成，价值效果仍未评价。"
+  },
+  "astra_equity_rule": {
+    "answer": "普通股账面金额可通过完整组成唯一核算；不必每份额外证明全文没有优先股。但多个空白可能抵消时不可据残差零推全部零。",
+    "states": [
+      "explicit_zero",
+      "uniquely_reconciled_zero",
+      "not_uniquely_determined"
+    ],
+    "conditions": [
+      "绑定同一年度原合并表/币种/单位/层级",
+      "其他权益总项和优先股永续子项不重复加",
+      "库存股是减项，其他数值保留符号",
+      "非普通工具金额清楚时扣除，不排整公司",
+      "负其他权益需工具会计解释，不自动减负增加普通权益",
+      "舍入精度及权利条款未全审保留限制"
+    ],
+    "relevance": "提供可以前进的规则，但本批所有空白并未满足唯一可解条件，不能追认3915全数合格。"
+  },
+  "sol_format_review": {
+    "reuse": "value-field-repair-2026-10-20/read_reviewed_value_fields.py::extract_post_change_total_shares只适用预绑股份页及清晰前后列",
+    "saved_prepared_text_contains_full_pdf": false,
+    "source_examples": [
+      {
+        "code": "000032",
+        "year": 2013,
+        "page": 37,
+        "fact": "总数232864320；无限售人民币普通股232826500不是全部普通股，另有限售37820。"
+      },
+      {
+        "code": "000016",
+        "year": 2023,
+        "page": 66,
+        "fact": "总数2407945408含A1596593800与B811351608，不能乘单一A价。"
+      },
+      {
+        "code": "000035",
+        "year": 2018,
+        "page": 100,
+        "fact": "总股份数字被PDF拆成多行，单行正则漏读；不能猜拼。"
+      },
+      {
+        "code": "000032",
+        "year": 2023,
+        "page": 118,
+        "fact": "总数1137959234，B/H明示0，但p136其他权益工具空白仍未知。"
+      }
+    ],
+    "full_corpus_cost": "股份页索引目前缺；定位范围样例29–118页，扩大5503份需新增大规模页面处理与权利/股类核对；未实跑，费用及耗时未知。"
+  },
+  "new_001914_2019_original_review": {
+    "original_pdf": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/00997-pdf.body",
+      "sha256": "83a25dfbb5a2a175df19ac47a9567f3b0c57533abfd34c001caada6ccdfffa43"
+    },
+    "publication_date": "2020-04-14",
+    "announcement_id": "1207491514",
+    "root_reread_pages": [
+      69,
+      104,
+      105
+    ],
+    "root_sha_matched": true,
+    "fields": {
+      "parent_equity_yuan": "7983640524.49",
+      "legal_end_year_total_shares": 1060346060,
+      "other_equity": "blank_unknown",
+      "treasury_stock": "blank_unknown",
+      "single_A_price_all_shares": "not_fully_qualified"
+    },
+    "evidence": [
+      "p69 unit股 and before/after headings; 三、股份总数 666,961,416 100.00% 393,384,644 0 393,384,644 1,060,346,060 100.00%",
+      "p104股本1060346060.00为金额；p105归母权益7983640524.49，其他权益/优先/永续/库存行空白。",
+      "p71发行股份393384644股购买招商物业，2019年12月纳入合并；当年与前一年业务范围不同。"
+    ],
+    "status": "legal_total_share_and_parent_equity_amount_verified_ordinary_equity_and_class_scope_unresolved",
+    "factor_ready": false,
+    "sol_unique_pdf_pages": [
+      2,
+      3,
+      4,
+      5,
+      69,
+      70,
+      71,
+      72,
+      102,
+      104,
+      105
+    ],
+    "sol_unique_page_count": 11
+  }
+}

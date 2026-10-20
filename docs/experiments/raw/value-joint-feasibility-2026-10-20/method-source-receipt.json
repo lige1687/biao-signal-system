@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-20T14:25:34.101743+08:00",
+  "tool_calls": 1,
+  "queries": 2,
+  "market_data_requests": 0,
+  "scope": "官方年报格式/会计列报的来源定位；未用新法规倒推历史资格。",
+  "sources": [
+    {
+      "title": "CSRC 年报内容与格式2021修订",
+      "url": "https://www.csrc.gov.cn/csrc/c101864/c6df1268b5b294448bdec7e010d880a01/6df1268b5b294448bdec7e010d880a01/files/附件1：公开发行证券的公司信息披露内容与格式准则第2号—年度报告的内容与格式（2021年修订）.pdf",
+      "use": "官方搜索摘要区分报告期末/披露前月份，并引用股份变动报告格式；未作为个别年报股数真值证明。"
+    },
+    {
+      "title": "CSRC 股份变动报告格式2022",
+      "url": "https://www.csrc.gov.cn/csrc/c101954/c1719665/content.shtml",
+      "use": "来源入口，只读搜索定位，未声称全文已核或实际数据已具备。"
+    },
+    {
+      "title": "财政部列报准则2026",
+      "url": "https://kjs.mof.gov.cn/zt/kjzzss/kuaijizhunzeshishi/202608/t20260806_3995008.htm",
+      "use": "搜索返回但不用于2013–2024历史追认，未据此把空白改0。"
+    }
+  ]
+}

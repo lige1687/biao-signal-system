@@ -1,0 +1,633 @@
+{
+  "schema": "annual-value-joint-source-check-result/1",
+  "plan": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/plan.json",
+    "sha256": "f48e3fa971f217c331f0d006ae97aa3981e547d59fb756d74a11e0634c43ab96"
+  },
+  "inputs": {
+    "definition_binding": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-anchor-review.json",
+      "sha256": "07b0edaaa21944c27d491a65142208e38dd280385e16637d4e7de2d883d77655"
+    },
+    "cohort": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+      "sha256": "6f073e37809613469efe6cd2adb6b7ef1b4e77515e99e7149e1636d9e390cc16",
+      "fixed_code_count": 600
+    },
+    "field_rows": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/value-source-coverage-20261020/value-source-coverage-20261020-20261020T130320-7eba8083bee1/result/rows.jsonl",
+      "sha256": "8b32326958c5da1c19015869abd923e1ddbcf9b88891fb5623e79059c5d558ac",
+      "record_count": 5503
+    },
+    "calendar": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/probe/trade_dates.json",
+      "sha256": "258f8a99213aed75b5515a22a4d36a79dd5e4350febdb434f9bf6e6357a0c05e"
+    },
+    "price_sources": {
+      "sz.001914": {
+        "data": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T004432-f8387b6b4781/result/001914-nominal.json",
+          "sha256": "3a7fad36509602baffab108dc106dd241a68dda24efe85ee0f5ad6f12f075d31"
+        },
+        "receipt": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/probe-receipt.json",
+          "sha256": "02f20cddd9cde80c9c4a367ade3963674f525f44af0292e6a4952f88bd1791dd"
+        },
+        "requested_adjustflag": "3",
+        "response_rows": 3166,
+        "response_schema": "data"
+      },
+      "sz.300048": {
+        "data": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition-single-resume/sz.300048-raw_daily-attempt1.json",
+          "sha256": "faa5b9de6292c8c242fa9e8989e43891f47544e6385fb7ce20449f5a39f7e05e"
+        },
+        "receipt": {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/resume-single-v1.json",
+          "sha256": "cf60e3869178ecfae29ca0d83e0aa4ba83e4d720e529ac7a85c668a8b3030901"
+        },
+        "requested_adjustflag": "3",
+        "response_rows": 3166,
+        "response_schema": "data"
+      }
+    }
+  },
+  "scope": {
+    "years": [
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "fixed_cohort_only": true,
+    "only_bound_two_price_responses": true,
+    "market_data_requests": 0,
+    "market_effects_computed": false,
+    "factor_eligibility_asserted": false
+  },
+  "totals": {
+    "cohort_original_document_rows": 5503,
+    "cohort_company_years_with_originals": 5481,
+    "parent_equity_candidate_rows": 3915,
+    "other_equity_candidate_rows": 173,
+    "company_years_with_bound_price_on_last_market_day": 18,
+    "joint_original_price_records": 18
+  },
+  "by_year": {
+    "2013": {
+      "last_market_date": "2013-12-31",
+      "original_document_rows": 526,
+      "issuers_with_originals": 526,
+      "parent_equity_candidate_rows": 346,
+      "other_equity_candidate_rows": 0,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 1
+    },
+    "2014": {
+      "last_market_date": "2014-12-31",
+      "original_document_rows": 534,
+      "issuers_with_originals": 533,
+      "parent_equity_candidate_rows": 432,
+      "other_equity_candidate_rows": 9,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 1
+    },
+    "2015": {
+      "last_market_date": "2015-12-31",
+      "original_document_rows": 520,
+      "issuers_with_originals": 514,
+      "parent_equity_candidate_rows": 462,
+      "other_equity_candidate_rows": 5,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 1
+    },
+    "2016": {
+      "last_market_date": "2016-12-30",
+      "original_document_rows": 523,
+      "issuers_with_originals": 517,
+      "parent_equity_candidate_rows": 474,
+      "other_equity_candidate_rows": 5,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 1
+    },
+    "2017": {
+      "last_market_date": "2017-12-29",
+      "original_document_rows": 487,
+      "issuers_with_originals": 485,
+      "parent_equity_candidate_rows": 449,
+      "other_equity_candidate_rows": 4,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 1
+    },
+    "2018": {
+      "last_market_date": "2018-12-28",
+      "original_document_rows": 531,
+      "issuers_with_originals": 530,
+      "parent_equity_candidate_rows": 474,
+      "other_equity_candidate_rows": 16,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 1
+    },
+    "2019": {
+      "last_market_date": "2019-12-31",
+      "original_document_rows": 534,
+      "issuers_with_originals": 533,
+      "parent_equity_candidate_rows": 204,
+      "other_equity_candidate_rows": 13,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 2
+    },
+    "2020": {
+      "last_market_date": "2020-12-31",
+      "original_document_rows": 360,
+      "issuers_with_originals": 359,
+      "parent_equity_candidate_rows": 195,
+      "other_equity_candidate_rows": 16,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 2
+    },
+    "2021": {
+      "last_market_date": "2021-12-31",
+      "original_document_rows": 367,
+      "issuers_with_originals": 364,
+      "parent_equity_candidate_rows": 205,
+      "other_equity_candidate_rows": 23,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 2
+    },
+    "2022": {
+      "last_market_date": "2022-12-30",
+      "original_document_rows": 367,
+      "issuers_with_originals": 367,
+      "parent_equity_candidate_rows": 216,
+      "other_equity_candidate_rows": 21,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 2
+    },
+    "2023": {
+      "last_market_date": "2023-12-29",
+      "original_document_rows": 378,
+      "issuers_with_originals": 377,
+      "parent_equity_candidate_rows": 226,
+      "other_equity_candidate_rows": 30,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 2
+    },
+    "2024": {
+      "last_market_date": "2024-12-31",
+      "original_document_rows": 376,
+      "issuers_with_originals": 376,
+      "parent_equity_candidate_rows": 232,
+      "other_equity_candidate_rows": 31,
+      "cohort_issuers_with_last_market_day_price": 2,
+      "issuers_with_original_and_last_market_day_price": 2
+    }
+  },
+  "original_price_intersections": [
+    {
+      "code": "sz.300048",
+      "report_year": 2013,
+      "market_last_trading_date": "2013-12-31",
+      "announcement_id": "63796336",
+      "announcement_date": "2014-04-08",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00066-pdf.body",
+        "sha256": "793259ca61d37ee575af5153c1dd4e26f5f4fb7054a2bdf20d7ad903b82b194c"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "8.1200",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2013-12-31"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2014,
+      "market_last_trading_date": "2014-12-31",
+      "announcement_id": "1200746266",
+      "announcement_date": "2015-03-27",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00062-pdf.body",
+        "sha256": "3f9dd0666697b987b735388b686fb4f7ea6bbbdfa15dd3fcf19c38b25688e6e0"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "13.1100",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2014-12-31"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2015,
+      "market_last_trading_date": "2015-12-31",
+      "announcement_id": "1202239393",
+      "announcement_date": "2016-04-26",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00058-pdf.body",
+        "sha256": "94d1d99652d1dcefaccb39a165a53b2d7727a5fdc7ac442391ffb51be9a9c3c6"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "21.1900",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2015-12-31"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2016,
+      "market_last_trading_date": "2016-12-30",
+      "announcement_id": "1203323245",
+      "announcement_date": "2017-04-19",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00054-pdf.body",
+        "sha256": "c1bd9a3ae6437e205e02aec290741d0fc67cd46a9bbf1db55aac982ab29098e0"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "8.2200",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2016-12-30"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2017,
+      "market_last_trading_date": "2017-12-29",
+      "announcement_id": "1204740436",
+      "announcement_date": "2018-04-25",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00051-pdf.body",
+        "sha256": "984ca07694fd1a3b4430b977aac2bfaf525d07a53951b2259203804de63f8f0b"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "3.8200",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2017-12-29"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2018,
+      "market_last_trading_date": "2018-12-28",
+      "announcement_id": "1206101574",
+      "announcement_date": "2019-04-26",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00036-pdf.body",
+        "sha256": "1e789ad840d5db566415e2287a42ae680d059374b3998309a1eb73b27ca43df2"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "2.3900",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2018-12-28"
+      }
+    },
+    {
+      "code": "sz.001914",
+      "report_year": 2019,
+      "market_last_trading_date": "2019-12-31",
+      "announcement_id": "1207491514",
+      "announcement_date": "2020-04-14",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/00997-pdf.body",
+        "sha256": "83a25dfbb5a2a175df19ac47a9567f3b0c57533abfd34c001caada6ccdfffa43"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "20.2900",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.001914",
+        "date": "2019-12-31"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2019,
+      "market_last_trading_date": "2019-12-31",
+      "announcement_id": "1207585064",
+      "announcement_date": "2020-04-24",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00032-pdf.body",
+        "sha256": "50d4f3b760ac9013d3e5b4a52736b6664bd2e04dad2a9c2621acb0c2985576ce"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "source_candidate",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "2.4100",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2019-12-31"
+      }
+    },
+    {
+      "code": "sz.001914",
+      "report_year": 2020,
+      "market_last_trading_date": "2020-12-31",
+      "announcement_id": "1209427344",
+      "announcement_date": "2021-03-23",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/00998-pdf.body",
+        "sha256": "bca276532ec7ede0503b2b2902ae00c35a66f5b400020c693ecb05a5dc1f95dc"
+      },
+      "field_status": {
+        "parent_equity": "unknown",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "unknown"
+      },
+      "price": {
+        "close": "21.5300",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.001914",
+        "date": "2020-12-31"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2020,
+      "market_last_trading_date": "2020-12-31",
+      "announcement_id": "1209730264",
+      "announcement_date": "2021-04-20",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00029-pdf.body",
+        "sha256": "4e3e17f56c88f3be8726f9410e014d0cf28ff4e27e3e98892f40f614a3ccf3be"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "source_candidate",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "4.8100",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2020-12-31"
+      }
+    },
+    {
+      "code": "sz.001914",
+      "report_year": 2021,
+      "market_last_trading_date": "2021-12-31",
+      "announcement_id": "1212609471",
+      "announcement_date": "2022-03-18",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/00999-pdf.body",
+        "sha256": "4efab7f392454831e2768889ad32ebe1c264b1b2fed9d14833a0c0dcf31bf655"
+      },
+      "field_status": {
+        "parent_equity": "unknown",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "unknown"
+      },
+      "price": {
+        "close": "20.2600",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.001914",
+        "date": "2021-12-31"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2021,
+      "market_last_trading_date": "2021-12-31",
+      "announcement_id": "1212885193",
+      "announcement_date": "2022-04-12",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00026-pdf.body",
+        "sha256": "811add5583cb7249a180ae5e80dcdc6c39369bfdf8a0b9067ab8c04d46e0ba5b"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "7.1400",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2021-12-31"
+      }
+    },
+    {
+      "code": "sz.001914",
+      "report_year": 2022,
+      "market_last_trading_date": "2022-12-30",
+      "announcement_id": "1216148247",
+      "announcement_date": "2023-03-18",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01000-pdf.body",
+        "sha256": "5a2955262e82270a2dd462d9767b043d2e370282a97dea65e9205b500aaa0aff"
+      },
+      "field_status": {
+        "parent_equity": "unknown",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "unknown"
+      },
+      "price": {
+        "close": "15.3800",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.001914",
+        "date": "2022-12-30"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2022,
+      "market_last_trading_date": "2022-12-30",
+      "announcement_id": "1216442050",
+      "announcement_date": "2023-04-18",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00022-pdf.body",
+        "sha256": "86601eabcd1dde10534d06954cab18b223e5ccf426a1098a5aea4b5bd1421791"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "4.8600",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2022-12-30"
+      }
+    },
+    {
+      "code": "sz.001914",
+      "report_year": 2023,
+      "market_last_trading_date": "2023-12-29",
+      "announcement_id": "1219313125",
+      "announcement_date": "2024-03-16",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01001-pdf.body",
+        "sha256": "a5aa42608123d2d1baa5703eeef5a1e71993c831174a7bf6bfd4a1317ad41a39"
+      },
+      "field_status": {
+        "parent_equity": "unknown",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "unknown"
+      },
+      "price": {
+        "close": "11.9600",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.001914",
+        "date": "2023-12-29"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2023,
+      "market_last_trading_date": "2023-12-29",
+      "announcement_id": "1219412091",
+      "announcement_date": "2024-03-27",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00014-pdf.body",
+        "sha256": "5ecef7c6e07c86bde5dab25880b709b01c71f6ae1d3056b84ceb24522f7bd4de"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "5.0600",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2023-12-29"
+      }
+    },
+    {
+      "code": "sz.001914",
+      "report_year": 2024,
+      "market_last_trading_date": "2024-12-31",
+      "announcement_id": "1222816005",
+      "announcement_date": "2025-03-17",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/completion-pdf-01/raw/01002-pdf.body",
+        "sha256": "8fe83eb422b1ae2f101470ee7debbba7741be3283645f24a24e9a2644119add8"
+      },
+      "field_status": {
+        "parent_equity": "unknown",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "unknown"
+      },
+      "price": {
+        "close": "10.5700",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.001914",
+        "date": "2024-12-31"
+      }
+    },
+    {
+      "code": "sz.300048",
+      "report_year": 2024,
+      "market_last_trading_date": "2024-12-31",
+      "announcement_id": "1222962581",
+      "announcement_date": "2025-03-26",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00010-pdf.body",
+        "sha256": "76e39fe16087bb1ebc3b55740db128793c128b29e0b89b8ceced4d4cc5f99bac"
+      },
+      "field_status": {
+        "parent_equity": "source_candidate",
+        "other_equity": "unknown",
+        "treasury_stock": "unknown",
+        "accounting_capital": "source_candidate"
+      },
+      "price": {
+        "close": "5.0400",
+        "adjustflag": "3",
+        "tradestatus": "1",
+        "code": "sz.300048",
+        "date": "2024-12-31"
+      }
+    }
+  ],
+  "limitations": [
+    "This checks only the original 600-code cohort and the two price responses bound in the plan.",
+    "Candidate financial fields and matching source dates do not establish financial-factor eligibility or point-in-time qualification.",
+    "No missing values are imputed and no returns/effects are calculated."
+  ]
+}

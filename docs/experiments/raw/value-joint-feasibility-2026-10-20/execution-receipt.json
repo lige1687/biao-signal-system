@@ -1,0 +1,47 @@
+{
+  "schema": "joint-source-execution-receipt/1",
+  "started_at": "2026-10-20T14:24:41+08:00",
+  "ended_at": "2026-10-20T14:24:42+08:00",
+  "elapsed_seconds": 0.14,
+  "exit_code": 1,
+  "status": "failed_preserved_no_retry",
+  "actual_executor": "gpt-6-luna low (assigned executor)",
+  "contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/execution-contract.json",
+    "sha256": "cd4e0c94e784f8816fd8022b989773677ea8eef397d89349e94d31fc2fd9a2bf"
+  },
+  "bindings": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/plan.json",
+      "sha256": "f48e3fa971f217c331f0d006ae97aa3981e547d59fb756d74a11e0634c43ab96"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/check_joint_sources.py",
+      "sha256": "7ddc40c492b2dc60c4d5795e3728d85c9ba1558ec17b8debc5ad6d403a37d856"
+    }
+  ],
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/check_joint_sources.py",
+    "--plan",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/plan.json",
+    "--out",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/joint-result.json"
+  ],
+  "network_requests": 0,
+  "market_effects": 0,
+  "output": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/joint-result.json",
+    "exists": false,
+    "sha256": null,
+    "bytes": null
+  },
+  "failure": {
+    "exception": "AttributeError",
+    "location": "check_joint_sources.py:190",
+    "message": "response_schema expression passed a string path to read_json(); read_json expects pathlib.Path",
+    "traceback": "Traceback (most recent call last):\n  File \"check_joint_sources.py\", line 274, in <module>\n    raise SystemExit(main())\n  File \"check_joint_sources.py\", line 268, in main\n    result = run(args.plan, args.out)\n  File \"check_joint_sources.py\", line 190, in run\n    read_json(binding[\"data\"][\"path\"])\n  File \"check_joint_sources.py\", line 23, in read_json\n    with path.open(encoding=\"utf-8\") as f:\nAttributeError: 'str' object has no attribute 'open'"
+  },
+  "notes": "Exactly one contract command attempted. No result artifact was created. No retries or code/contract changes made."
+}

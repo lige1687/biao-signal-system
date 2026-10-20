@@ -1,0 +1,39 @@
+{
+  "schema": "joint-source-failure-history/1",
+  "at": "2026-10-20T14:25:34.101743+08:00",
+  "events": [
+    {
+      "stage": "first_inventory",
+      "issue": "遗漏已存001914新代码全段未复权价，误以为旧代码止于2019-12-13使FY2019无价",
+      "correction": "主控读取旧source-review绑定后要求补核，FY2019–24实际都有有效最后市场日原价",
+      "new_downloads": 0
+    },
+    {
+      "stage": "first_inventory",
+      "issue": "以旧阶段文字误报价格修复尚未进入evaluator",
+      "correction": "170f705f已有132月P1/防御和P2真实纠正，读报告和收据更新，未重跑。"
+    },
+    {
+      "stage": "original_scope_assumption",
+      "issue": "以300048短探针覆盖误判只FY2024有年末价",
+      "correction": "独立Luna从resume-single-v1发现旧完整3166行名义价，执行前plan已改绑全段，保留短探针对照。",
+      "new_downloads": 0
+    },
+    {
+      "stage": "agent_path_transcription",
+      "issue": "600519非队列全文名义价目录在聊天漏字",
+      "correction": "代理立即改正；以真实receipt+SHA读回，不使用聊天拼出的路径。"
+    },
+    {
+      "stage": "joint_actual_run1",
+      "issue": "read_json expects Path but response_schema passed str; root code review also missed this type mismatch",
+      "correction": "Archived exact failed runner/plan/contract/receipt; normalize Path in JSON reader; verified str and Path produce identical JSON. One necessary second local join attempt, no effects/network."
+    },
+    {
+      "stage": "manual_review_receipt",
+      "issue": "代理把11个唯一页误报12",
+      "correction": "按实际页号清单纠正为11；未重新打开原件凑数。"
+    }
+  ],
+  "principle": "后续状态以已绑定最新产物为准；代理结论先与实际收据核对，失败不删。"
+}

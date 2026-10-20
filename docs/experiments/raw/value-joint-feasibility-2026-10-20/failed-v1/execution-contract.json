@@ -1,0 +1,29 @@
+{
+  "schema": "joint-source-execution/1",
+  "execution_authorized": true,
+  "mode": "source_only",
+  "bindings": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/plan.json",
+      "sha256": "f48e3fa971f217c331f0d006ae97aa3981e547d59fb756d74a11e0634c43ab96"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/check_joint_sources.py",
+      "sha256": "7ddc40c492b2dc60c4d5795e3728d85c9ba1558ec17b8debc5ad6d403a37d856"
+    }
+  ],
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/check_joint_sources.py",
+    "--plan",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/plan.json",
+    "--out",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-joint-feasibility-2026-10-20/joint-result.json"
+  ],
+  "actual_runs_max": 1,
+  "network_requests": 0,
+  "market_effects": 0,
+  "review": "Root inspected complete script, supported data/rows schemas, exact cohort/calendar/hash matching; output retains source status and makes no qualification claim. Positive close/trading status and cohort joint counts will be independently checked from source rows. Existing source receipt requests independently inventoried. Output <1MiB.",
+  "requested_executor": "gpt-6-luna low"
+}

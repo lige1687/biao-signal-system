@@ -1,0 +1,104 @@
+{
+  "schema": "annual-value-joint-source-check/1",
+  "at": "2026-10-20T14:22:17.274764+08:00",
+  "question": "在原600历史发行人的年度净资产价值定义下，已存原件、法定普通股数和同年末原价有多少共同支持，是否值得立即开展一次相对动量/毛利的效果比较？",
+  "decision_use": "决定本轮个股年度价值进入效果检验或因输入不足暂缓；不改ETF或既有LEI",
+  "mode": "source_qualification",
+  "definition_binding": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-anchor-review.json",
+    "sha256": "07b0edaaa21944c27d491a65142208e38dd280385e16637d4e7de2d883d77655"
+  },
+  "definition_key": "annual_year_end_measurement_adjudication",
+  "cohort": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19/financial-cohort.json",
+    "sha256": "6f073e37809613469efe6cd2adb6b7ef1b4e77515e99e7149e1636d9e390cc16"
+  },
+  "field_rows": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/value-source-coverage-20261020/value-source-coverage-20261020-20261020T130320-7eba8083bee1/result/rows.jsonl",
+    "sha256": "8b32326958c5da1c19015869abd923e1ddbcf9b88891fb5623e79059c5d558ac"
+  },
+  "calendar": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/probe/trade_dates.json",
+    "sha256": "258f8a99213aed75b5515a22a4d36a79dd5e4350febdb434f9bf6e6357a0c05e"
+  },
+  "price_sources": [
+    {
+      "code": "sz.001914",
+      "data": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T004432-f8387b6b4781/result/001914-nominal.json",
+        "sha256": "3a7fad36509602baffab108dc106dd241a68dda24efe85ee0f5ad6f12f075d31"
+      },
+      "receipt": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/probe-receipt.json",
+        "sha256": "02f20cddd9cde80c9c4a367ade3963674f525f44af0292e6a4952f88bd1791dd"
+      },
+      "requested_adjustflag": "3"
+    },
+    {
+      "code": "sz.300048",
+      "data": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition-single-resume/sz.300048-raw_daily-attempt1.json",
+        "sha256": "faa5b9de6292c8c242fa9e8989e43891f47544e6385fb7ce20449f5a39f7e05e"
+      },
+      "receipt": {
+        "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/resume-single-v1.json",
+        "sha256": "cf60e3869178ecfae29ca0d83e0aa4ba83e4d720e529ac7a85c668a8b3030901"
+      },
+      "requested_adjustflag": "3"
+    }
+  ],
+  "years": [
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "rules": [
+    "仅按原公司/财年/公告版本相交，不用未来收益筛资料。",
+    "同年末最后市场交易日需实际未复权价格和交易状态；不使用股票自身最后有价日冒充。",
+    "财务表候选、股份数、股份类别、普通股权益、版本链分列；未知不自动补0。",
+    "公开日期严格早于决策日期，年报原数与以后重述分开；目前不编造完整时点资格。",
+    "不按数据完整挑54幸存者，也不合入其他owner新300股票。"
+  ],
+  "authorization": "用户要求持续推进公开可靠资料替代与本任务全部目标；本阶段复用已存输入、有限原页检查及原目标更新，无新增行情/财报请求或市场效果。",
+  "budget": {
+    "existing_value_core_used": 0,
+    "existing_value_core_max": 1,
+    "existing_value_followups_used": 0,
+    "existing_value_followups_max": 3,
+    "existing_value_data_probe_used": 4,
+    "existing_value_data_probe_max": 4,
+    "existing_value_method_calls_used_before": 5,
+    "method_search_calls_this_stage": 1,
+    "method_queries_this_stage": 2,
+    "new_market_data_requests": 0,
+    "new_market_effect_runs": 0,
+    "local_joint_check_runs_max": 1,
+    "new_pdf_manual_pages_max": 18,
+    "full_pdf_scan": false
+  },
+  "coordination_commit": "95430d6ee2c4f70d271f9e66f513bc37cd970423",
+  "outputs": "本目录小JSON收据/汇总，预计<1MiB；原始输入均只读，未产生大输出。",
+  "stopping_rule": "在实际联合支持核清及指定原件页检查完成后作投入判断；若仅1–2发行人数值锚点且其余尚需大规模新增股权/股类提取，不做零意义横截面回测；保留价值效果未评价和具体恢复条件，不宣称价值无效或数据永远取不到。",
+  "known_short_probe_for_independent_overlap_check": {
+    "code": "sz.300048",
+    "data": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/01-query_history_k_data_plus-sz.300048.json",
+      "sha256": "d79bdbf814b710bfffd7689700cc0f01b85743a84429765a11058a8e4c6d8a9f"
+    },
+    "receipt": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-probe-execution-receipt.json",
+      "sha256": "d3d6f140c0cd4e3c27c2546465c8c5815be2581c234e89d2c5067581dd6cb664"
+    },
+    "requested_adjustflag": "3"
+  },
+  "pre_execution_inventory_correction": "独立Luna盘点发现300048早已保存2013–2026名义价；用已有全段替代短窗口作为共同覆盖输入，保留短窗口作重叠核对；无新下载/收益选择。001914既有新代码名义价也已纳入。初版遗漏已记录，不改旧来源。"
+}
