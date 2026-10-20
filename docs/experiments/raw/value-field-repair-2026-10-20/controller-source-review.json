@@ -1,0 +1,229 @@
+{
+  "checked_at": "2026-10-20T12:42:37.009381+08:00",
+  "method": "Root independently read exact pages from SHA-matched original PDFs and recalculated field values; not copied from parser output. Plan preexisting manual benchmarks match original.",
+  "root_cause": [
+    "Current header parser recognizes 项目 but not 资产 or spaced 项 目.",
+    "2013 PDF extraction orders consolidated heading/date/unit after its table; line-order assumption also prevents detection.",
+    "2023 parent equity label uses 股东权益, not 所有者权益.",
+    "Share-change tables explicitly separate before, movements, and after; legal total is not implied by accounting capital amount."
+  ],
+  "documents": [
+    {
+      "code": "000032",
+      "report_year": 2013,
+      "source_pdf_sha256": "3208731ff190185af0f52dab45e096d1f296793c475fe4516320fe35d936351d",
+      "prepared_sha256": "059f395fa6ca5e2591a7454cfe20f0fe97632fe4b1af054c1a407e980f9ad904",
+      "old_assets_status": "unknown",
+      "old_assets_reason": "current_column_header_missing",
+      "parent_equity_yuan": "876744908.73",
+      "comparative_equity_yuan": "909719940.70",
+      "equity_evidence": {
+        "pdf_page": 68,
+        "text": "归属于母公司所有者权益合计 876,744,908.73 909,719,940.70"
+      },
+      "legal_shares_at_report_end": 232864320,
+      "share_evidence": {
+        "pdf_page": 37,
+        "text": "三、股份总数 232,864,320 100% 232,864,320 100%"
+      },
+      "headers_and_units": [
+        {
+          "pdf_page": 67,
+          "line": 2,
+          "text": "资 产 附注五 期末余额 年初余额"
+        },
+        {
+          "pdf_page": 67,
+          "line": 38,
+          "text": "合并资产负债表"
+        },
+        {
+          "pdf_page": 67,
+          "line": 41,
+          "text": "（除特别注明外，金额单位均为人民币元）"
+        },
+        {
+          "pdf_page": 68,
+          "line": 2,
+          "text": "负债和股东权益 附注五 期末余额 年初余额"
+        },
+        {
+          "pdf_page": 68,
+          "line": 42,
+          "text": "合并资产负债表（续）"
+        },
+        {
+          "pdf_page": 68,
+          "line": 45,
+          "text": "（除特别注明外，金额单位均为人民币元）"
+        },
+        {
+          "pdf_page": 37,
+          "line": 5,
+          "text": "单位：股"
+        },
+        {
+          "pdf_page": 37,
+          "line": 6,
+          "text": "本次变动前 本次变动增减（＋，－） 本次变动后"
+        }
+      ],
+      "does_not_resolve": [
+        "common_equity_adjustments",
+        "treasury_convention",
+        "historical_class_prices",
+        "revision_chain",
+        "historical_share_change_dates"
+      ]
+    },
+    {
+      "code": "000032",
+      "report_year": 2018,
+      "source_pdf_sha256": "42f230f9e67d8842957796d2e855fff0f7ba1968a7884ec34af833f81e697803",
+      "prepared_sha256": "5b4598e8fe4ec9d0941c2bf8cf64a111bd334665eee9fab1befb7a5224d2a83e",
+      "old_assets_status": "unknown",
+      "old_assets_reason": "current_column_header_missing",
+      "parent_equity_yuan": "1365968206.00",
+      "comparative_equity_yuan": "1499724761.28",
+      "equity_evidence": {
+        "pdf_page": 92,
+        "text": "归属于母公司所有者权益合计 1,365,968,206.00 1,499,724,761.28"
+      },
+      "legal_shares_at_report_end": 413219661,
+      "share_evidence": {
+        "pdf_page": 53,
+        "text": "三、股份总数 422,254,134 100.00% 0 0 0 -9,034,473 -9,034,473 413,219,661 100.00%"
+      },
+      "headers_and_units": [
+        {
+          "pdf_page": 91,
+          "line": 3,
+          "text": "合并资产负债表"
+        },
+        {
+          "pdf_page": 91,
+          "line": 5,
+          "text": "（除特别注明外，金额单位均为人民币元）"
+        },
+        {
+          "pdf_page": 91,
+          "line": 6,
+          "text": "资产 附注 期末余额 年初余额"
+        },
+        {
+          "pdf_page": 92,
+          "line": 3,
+          "text": "合并资产负债表（续）"
+        },
+        {
+          "pdf_page": 92,
+          "line": 5,
+          "text": "（除特别注明外，金额单位均为人民币元）"
+        },
+        {
+          "pdf_page": 92,
+          "line": 6,
+          "text": "负债和所有者权益 附注 期末余额 年初余额"
+        },
+        {
+          "pdf_page": 53,
+          "line": 6,
+          "text": "单位：股"
+        },
+        {
+          "pdf_page": 53,
+          "line": 7,
+          "text": "本次变动前 本次变动增减（＋，－） 本次变动后"
+        }
+      ],
+      "does_not_resolve": [
+        "common_equity_adjustments",
+        "treasury_convention",
+        "historical_class_prices",
+        "revision_chain",
+        "historical_share_change_dates"
+      ]
+    },
+    {
+      "code": "000032",
+      "report_year": 2023,
+      "source_pdf_sha256": "854095919c8f93f9f255efcd1bdd960737291712245744459b3abfa294f9b89a",
+      "prepared_sha256": "f57e0e875866b48e73c75c129d03d452816e96538e74bcb95d54aa02860a56ee",
+      "old_assets_status": "unknown",
+      "old_assets_reason": "current_column_header_missing",
+      "parent_equity_yuan": "6488818048.97",
+      "comparative_equity_yuan": "5573195221.75",
+      "equity_evidence": {
+        "pdf_page": 136,
+        "text": "归属于母公司股东权益合计 6,488,818,048.97 5,573,195,221.75"
+      },
+      "legal_shares_at_report_end": 1137959234,
+      "share_evidence": {
+        "pdf_page": 118,
+        "text": "三、股份总数 1,137,959,234 100.00% 0 0 0 0 0 1,137,959,234 100.00%"
+      },
+      "headers_and_units": [
+        {
+          "pdf_page": 135,
+          "line": 2,
+          "text": "合并资产负债表"
+        },
+        {
+          "pdf_page": 135,
+          "line": 4,
+          "text": "编制单位：深圳市桑达实业股份有限公司 单位：人民币元"
+        },
+        {
+          "pdf_page": 135,
+          "line": 5,
+          "text": "项 目 附注 2023 年 12 月 31 日 2022 年 12 月 31 日"
+        },
+        {
+          "pdf_page": 136,
+          "line": 2,
+          "text": "合并资产负债表（续）"
+        },
+        {
+          "pdf_page": 136,
+          "line": 4,
+          "text": "编制单位：深圳市桑达实业股份有限公司 单位：人民币元"
+        },
+        {
+          "pdf_page": 136,
+          "line": 5,
+          "text": "项 目 附注 2023 年 12 月 31 日 2022 年 12 月 31 日"
+        },
+        {
+          "pdf_page": 118,
+          "line": 5,
+          "text": "单位：股"
+        },
+        {
+          "pdf_page": 118,
+          "line": 6,
+          "text": "本次变动前 本次变动增减（＋，－） 本次变动后"
+        }
+      ],
+      "does_not_resolve": [
+        "common_equity_adjustments",
+        "treasury_convention",
+        "historical_class_prices",
+        "revision_chain",
+        "historical_share_change_dates"
+      ]
+    }
+  ],
+  "new_network_requests": 0,
+  "effect_runs": 0,
+  "qualified_factor_rows": 0,
+  "all_old_sources_unchanged": true,
+  "source_code_evidence": {
+    "path": "src/lei_signal/research/profitability_discovery.py",
+    "function": "_qualification",
+    "lines": [
+      131,
+      140
+    ],
+    "behavior": "line.startswith(\"项目\") and search only after the table heading in nearby rows. This rejects 资产 and 项 目; the2013 heading is emitted after the table."
+  }
+}

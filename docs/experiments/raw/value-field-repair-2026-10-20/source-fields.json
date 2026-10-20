@@ -1,0 +1,304 @@
+{
+  "schema": "reviewed-value-field-source-candidates/1",
+  "plan": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/plan.json",
+    "sha256": "3455a679f3882878bd7d38a24d177111fd04b346390b6b9384fe768745c36963"
+  },
+  "status": "source_fields_only_not_point_in_time_qualified",
+  "factor_ready": false,
+  "field_scope": [
+    "parent_attributable_equity_yuan",
+    "legal_total_shares_at_report_end"
+  ],
+  "targets": [
+    {
+      "code": "000032",
+      "report_year": 2013,
+      "announcement_id": "63941824",
+      "publication_date": "2014-04-29",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/02596-pdf.body",
+        "sha256": "3208731ff190185af0f52dab45e096d1f296793c475fe4516320fe35d936351d",
+        "bytes": 3477810,
+        "selected_balance_pages": [
+          67,
+          68
+        ],
+        "selected_share_pages": [
+          36,
+          37,
+          38
+        ]
+      },
+      "prepared_text": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000032-63941824.json",
+        "sha256": "059f395fa6ca5e2591a7454cfe20f0fe97632fe4b1af054c1a407e980f9ad904",
+        "identity_status": "match",
+        "prior_parser_status": "unknown",
+        "prior_parser_reason": "current_column_header_missing"
+      },
+      "parent_attributable_equity_yuan": {
+        "status": "source_candidate",
+        "unit": "RMB_yuan",
+        "value": "876,744,908.73",
+        "evidence": {
+          "page": 68,
+          "line": 36,
+          "raw_text": "归属于母公司所有者权益合计 876,744,908.73 909,719,940.70"
+        },
+        "header_evidence": [
+          {
+            "page": 67,
+            "line": 2,
+            "raw_line": "资 产 附注五 期末余额 年初余额",
+            "kind": "labelled",
+            "signature": [
+              "期末余额",
+              "年初余额"
+            ]
+          },
+          {
+            "page": 68,
+            "line": 2,
+            "raw_line": "负债和股东权益 附注五 期末余额 年初余额",
+            "kind": "labelled",
+            "signature": [
+              "期末余额",
+              "年初余额"
+            ]
+          }
+        ],
+        "period_evidence": {
+          "current": "2013年12月31日"
+        },
+        "unit_evidence": [
+          {
+            "page": 67,
+            "line": 41,
+            "raw_line": "（除特别注明外，金额单位均为人民币元）"
+          },
+          {
+            "page": 68,
+            "line": 45,
+            "raw_line": "（除特别注明外，金额单位均为人民币元）"
+          }
+        ],
+        "comparative_value_not_selected": "909,719,940.70"
+      },
+      "legal_total_shares_at_report_end": {
+        "status": "source_candidate",
+        "unit": "shares",
+        "value": "232864320",
+        "basis": "股份总数 row final count before 100% in 本次变动后 column",
+        "report_year_context": 2013,
+        "evidence": {
+          "page": 37,
+          "line": 26,
+          "raw_text": "三、股份总数 232,864,320 100% 232,864,320 100%"
+        }
+      },
+      "preserved_unknowns": {
+        "other_equity_instruments_balance": "unknown; not presumed zero",
+        "treasury_stock": "unknown; blank or dash is not interpreted as zero",
+        "share_classes_and_unrestricted_float": "not reconciled across all classes",
+        "revision_chain_and_as_known_at_date": "unknown; selected report only"
+      },
+      "factor_ready": false,
+      "qualification": "source_fields_only_not_point_in_time_qualified"
+    },
+    {
+      "code": "000032",
+      "report_year": 2018,
+      "announcement_id": "1206089248",
+      "publication_date": "2019-04-25",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/02567-pdf.body",
+        "sha256": "42f230f9e67d8842957796d2e855fff0f7ba1968a7884ec34af833f81e697803",
+        "bytes": 12084196,
+        "selected_balance_pages": [
+          91,
+          92
+        ],
+        "selected_share_pages": [
+          52,
+          53,
+          54
+        ]
+      },
+      "prepared_text": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000032-1206089248.json",
+        "sha256": "5b4598e8fe4ec9d0941c2bf8cf64a111bd334665eee9fab1befb7a5224d2a83e",
+        "identity_status": "match",
+        "prior_parser_status": "unknown",
+        "prior_parser_reason": "current_column_header_missing"
+      },
+      "parent_attributable_equity_yuan": {
+        "status": "source_candidate",
+        "unit": "RMB_yuan",
+        "value": "1,365,968,206.00",
+        "evidence": {
+          "page": 92,
+          "line": 54,
+          "raw_text": "归属于母公司所有者权益合计 1,365,968,206.00 1,499,724,761.28"
+        },
+        "header_evidence": [
+          {
+            "page": 91,
+            "line": 6,
+            "raw_line": "资产 附注 期末余额 年初余额",
+            "kind": "labelled",
+            "signature": [
+              "期末余额",
+              "年初余额"
+            ]
+          },
+          {
+            "page": 92,
+            "line": 6,
+            "raw_line": "负债和所有者权益 附注 期末余额 年初余额",
+            "kind": "labelled",
+            "signature": [
+              "期末余额",
+              "年初余额"
+            ]
+          }
+        ],
+        "period_evidence": {
+          "current": "2018年12月31日"
+        },
+        "unit_evidence": [
+          {
+            "page": 91,
+            "line": 5,
+            "raw_line": "（除特别注明外，金额单位均为人民币元）"
+          },
+          {
+            "page": 92,
+            "line": 5,
+            "raw_line": "（除特别注明外，金额单位均为人民币元）"
+          }
+        ],
+        "comparative_value_not_selected": "1,499,724,761.28"
+      },
+      "legal_total_shares_at_report_end": {
+        "status": "source_candidate",
+        "unit": "shares",
+        "value": "413219661",
+        "basis": "股份总数 row final count before 100% in 本次变动后 column",
+        "report_year_context": 2018,
+        "evidence": {
+          "page": 53,
+          "line": 30,
+          "raw_text": "三、股份总数 422,254,134 100.00% 0 0 0 -9,034,473 -9,034,473 413,219,661 100.00%"
+        }
+      },
+      "preserved_unknowns": {
+        "other_equity_instruments_balance": "unknown; not presumed zero",
+        "treasury_stock": "unknown; blank or dash is not interpreted as zero",
+        "share_classes_and_unrestricted_float": "not reconciled across all classes",
+        "revision_chain_and_as_known_at_date": "unknown; selected report only"
+      },
+      "factor_ready": false,
+      "qualification": "source_fields_only_not_point_in_time_qualified"
+    },
+    {
+      "code": "000032",
+      "report_year": 2023,
+      "announcement_id": "1219652709",
+      "publication_date": "2024-04-18",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/02557-pdf.body",
+        "sha256": "854095919c8f93f9f255efcd1bdd960737291712245744459b3abfa294f9b89a",
+        "bytes": 3100064,
+        "selected_balance_pages": [
+          135,
+          136
+        ],
+        "selected_share_pages": [
+          117,
+          118,
+          119
+        ]
+      },
+      "prepared_text": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000032-1219652709.json",
+        "sha256": "f57e0e875866b48e73c75c129d03d452816e96538e74bcb95d54aa02860a56ee",
+        "identity_status": "match",
+        "prior_parser_status": "unknown",
+        "prior_parser_reason": "current_column_header_missing"
+      },
+      "parent_attributable_equity_yuan": {
+        "status": "source_candidate",
+        "unit": "RMB_yuan",
+        "value": "6,488,818,048.97",
+        "evidence": {
+          "page": 136,
+          "line": 46,
+          "raw_text": "归属于母公司股东权益合计 6,488,818,048.97 5,573,195,221.75"
+        },
+        "header_evidence": [
+          {
+            "page": 135,
+            "line": 5,
+            "raw_line": "项 目 附注 2023 年 12 月 31 日 2022 年 12 月 31 日",
+            "kind": "dated",
+            "signature": [
+              "2023年12月31日",
+              "2022年12月31日"
+            ]
+          },
+          {
+            "page": 136,
+            "line": 5,
+            "raw_line": "项 目 附注 2023 年 12 月 31 日 2022 年 12 月 31 日",
+            "kind": "dated",
+            "signature": [
+              "2023年12月31日",
+              "2022年12月31日"
+            ]
+          }
+        ],
+        "period_evidence": {
+          "current": "2023年12月31日"
+        },
+        "unit_evidence": [
+          {
+            "page": 135,
+            "line": 4,
+            "raw_line": "编制单位：深圳市桑达实业股份有限公司 单位：人民币元"
+          },
+          {
+            "page": 136,
+            "line": 4,
+            "raw_line": "编制单位：深圳市桑达实业股份有限公司 单位：人民币元"
+          }
+        ],
+        "comparative_value_not_selected": "5,573,195,221.75"
+      },
+      "legal_total_shares_at_report_end": {
+        "status": "source_candidate",
+        "unit": "shares",
+        "value": "1137959234",
+        "basis": "股份总数 row final count before 100% in 本次变动后 column",
+        "report_year_context": 2023,
+        "evidence": {
+          "page": 118,
+          "line": 36,
+          "raw_text": "三、股份总数 1,137,959,234 100.00% 0 0 0 0 0 1,137,959,234 100.00%"
+        }
+      },
+      "preserved_unknowns": {
+        "other_equity_instruments_balance": "unknown; not presumed zero",
+        "treasury_stock": "unknown; blank or dash is not interpreted as zero",
+        "share_classes_and_unrestricted_float": "not reconciled across all classes",
+        "revision_chain_and_as_known_at_date": "unknown; selected report only"
+      },
+      "factor_ready": false,
+      "qualification": "source_fields_only_not_point_in_time_qualified"
+    }
+  ],
+  "limitations": [
+    "其他权益工具余额、库存股、股份类别和受限流通股仍未知。",
+    "修订链及公告时点可得性未核验；本结果不能用于回测或选股。"
+  ]
+}

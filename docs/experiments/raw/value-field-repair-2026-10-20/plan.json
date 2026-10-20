@@ -1,0 +1,122 @@
+{
+  "schema": "reviewed-value-field-repair/1",
+  "created_at": "2026-10-20T12:41:34.673319+08:00",
+  "source_review": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/value-nine-source-review.json",
+    "sha256": "e8515648effe75e61312cde7c115d7856af31798215dd583d2d0fa726260d55a"
+  },
+  "targets": [
+    {
+      "code": "000032",
+      "report_year": 2013,
+      "announcement_id": "63941824",
+      "publication_date": "2014-04-29",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/02596-pdf.body",
+        "sha256": "3208731ff190185af0f52dab45e096d1f296793c475fe4516320fe35d936351d",
+        "bytes": 3477810,
+        "verified": true
+      },
+      "prepared_text": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000032-63941824.json",
+        "sha256": "059f395fa6ca5e2591a7454cfe20f0fe97632fe4b1af054c1a407e980f9ad904",
+        "verified": true,
+        "identity_status": "match"
+      },
+      "equity": "876744908.73",
+      "accounting_share_capital": "232864320.00",
+      "legal_total_shares": 232864320,
+      "balance_page": 68,
+      "share_page": 37,
+      "other_equity": "no_separate_line_in_this_statement_unknown",
+      "treasury": "dash_as_reported_not_inferred_zero",
+      "classes": "RMB common 232826500 unrestricted; other 37820 restricted; B/H rows blank, not affirmative proof of none",
+      "revision_chain": "only selected annual-report version verified; earlier initial filing, later corrections, and as-known-at-date chronology not established"
+    },
+    {
+      "code": "000032",
+      "report_year": 2018,
+      "announcement_id": "1206089248",
+      "publication_date": "2019-04-25",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/02567-pdf.body",
+        "sha256": "42f230f9e67d8842957796d2e855fff0f7ba1968a7884ec34af833f81e697803",
+        "bytes": 12084196,
+        "verified": true
+      },
+      "prepared_text": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000032-1206089248.json",
+        "sha256": "5b4598e8fe4ec9d0941c2bf8cf64a111bd334665eee9fab1befb7a5224d2a83e",
+        "verified": true,
+        "identity_status": "match"
+      },
+      "equity": "1365968206.00",
+      "accounting_share_capital": "413219661.00",
+      "legal_total_shares": 413219661,
+      "balance_page": 92,
+      "share_page": 53,
+      "other_equity": "blank_unknown",
+      "treasury": "blank_unknown",
+      "classes": "A/RMB common; B and H rows explicitly 0 in share-change table",
+      "revision_chain": "only selected annual-report version verified; earlier initial filing, later corrections, and as-known-at-date chronology not established"
+    },
+    {
+      "code": "000032",
+      "report_year": 2023,
+      "announcement_id": "1219652709",
+      "publication_date": "2024-04-18",
+      "original_pdf": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/02557-pdf.body",
+        "sha256": "854095919c8f93f9f255efcd1bdd960737291712245744459b3abfa294f9b89a",
+        "bytes": 3100064,
+        "verified": true
+      },
+      "prepared_text": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000032-1219652709.json",
+        "sha256": "f57e0e875866b48e73c75c129d03d452816e96538e74bcb95d54aa02860a56ee",
+        "verified": true,
+        "identity_status": "match"
+      },
+      "equity": "6488818048.97",
+      "accounting_share_capital": "1137959234.00",
+      "legal_total_shares": 1137959234,
+      "balance_page": 136,
+      "share_page": 118,
+      "other_equity": "blank_unknown",
+      "treasury": "blank_unknown",
+      "classes": "A/RMB common; B and H rows explicitly 0 in share-change table",
+      "revision_chain": "only selected annual-report version verified; earlier initial filing, later corrections, and as-known-at-date chronology not established"
+    }
+  ],
+  "expected_output": "source_fields_only_not_point_in_time_qualified",
+  "field_scope": [
+    "parent_attributable_equity_yuan",
+    "legal_total_shares_at_report_end"
+  ],
+  "rules": [
+    "Current and comparative columns must be explicit and in order. Header dates or fiscal-period statement required.",
+    "Require consolidated balance heading and RMB yuan evidence. Parent-company table rejected.",
+    "Share count is last current end-year total in a share-change table. Before-year count and percentage are not shares. No requirement that share count equals accounting capital.",
+    "Blank other equity or treasury never zero. No other equity investment-as-equity.",
+    "Preserve source publication date and unknown revision chain; no factor-ready output.",
+    "Exact originals and prepared records must match source identity and SHA.",
+    "Do not change old script or parse outputs; all existing values and sources immutable."
+  ],
+  "budgets": {
+    "new_network_requests": 0,
+    "new_effect_runs": 0,
+    "full_universe_scans": 0,
+    "source_targets": 3,
+    "local_small_output_estimate_bytes": 512000,
+    "prior_research_and_source_budgets_unchanged": true
+  },
+  "coordination": {
+    "checked": "6bab9a29d3f05ac377768cc8391f5c3065151de5",
+    "scope_commit": "048fc8d17fbf1e9e724ebaab9f49c6ab7501acdc"
+  },
+  "model_roles": {
+    "sol": "read-only root-cause localization completed",
+    "luna": "bounded implementation and execution",
+    "root": "design/source verification and independent acceptance"
+  }
+}

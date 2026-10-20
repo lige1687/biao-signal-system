@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-20T12:45:43.875219+08:00",
+  "stage": "controller_pre_execution_review",
+  "decision": "reject_v1_before_real_execution",
+  "real_runs": 0,
+  "issues": [
+    "Current/prior explicit dates demanded despite valid dated year-end plus 年初/期末 columns; 2013/2018 original pages have no explicit prior date.",
+    "Exactly-one unit rejects repeated identical RMB yuan statement units on two pages.",
+    "Exactly-one header rejects 2023 identical headers repeated on continued table.",
+    "Share label ignores literal 三、股份总数 prefix present in all three originals.",
+    "Unconditional line concatenation can read following minority/equity row numbers as missing parent equity.",
+    "Unsigned amount pattern could turn a negative balance positive.",
+    "Ambiguous duplicate share candidates are ignored if only one parses, inconsistent with exact unique-source rule."
+  ],
+  "model_decision": "Escalate layout-sensitive parser correction to Sol medium after Luna first implementation; root final review. Original financial values and market inputs unchanged."
+}

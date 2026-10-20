@@ -1,0 +1,44 @@
+{
+  "schema": "reviewed-value-field-execution/1",
+  "frozen_at": "2026-10-20T12:48:55.229855+08:00",
+  "inputs": {
+    "plan.json": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/plan.json",
+      "sha256": "3455a679f3882878bd7d38a24d177111fd04b346390b6b9384fe768745c36963"
+    },
+    "read_reviewed_value_fields.py": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/read_reviewed_value_fields.py",
+      "sha256": "a28219c7c7e600b800fa43f3f43105c420cf8612a7623359009a5a836ef9024e"
+    },
+    "test_reviewed_value_fields.py": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/test_reviewed_value_fields.py",
+      "sha256": "92529c5707362b9f5b9da5c5319973a91acc3af7fecb314242402a20cffdbb40"
+    },
+    "controller-source-review.json": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/controller-source-review.json",
+      "sha256": "017c1f7405ef4d2b725ece416d03e0102bc3f6f3e83b5a0486e8822812000a72"
+    }
+  },
+  "command": [
+    "python3",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/read_reviewed_value_fields.py",
+    "--plan",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/plan.json",
+    "--out",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/source-fields.json"
+  ],
+  "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "actual_invocations_allowed": 1,
+  "retries": 0,
+  "executor": "Luna",
+  "network_requests": 0,
+  "market_effect_runs": 0,
+  "preflight_tests": {
+    "count": 17,
+    "passed": true
+  },
+  "controller_review": "Source facts independently checked; v1 rejected; Sol corrected layouts; root added before-only and negative final shares rejection. Source extraction only.",
+  "output": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/source-fields.json",
+  "receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/execution-receipt.json"
+}

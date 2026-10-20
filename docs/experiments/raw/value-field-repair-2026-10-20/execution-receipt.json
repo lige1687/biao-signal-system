@@ -1,0 +1,52 @@
+{
+  "schema": "reviewed-value-field-execution-receipt/1",
+  "started_at": "2026-10-20T04:49:09Z",
+  "ended_at": "2026-10-20T04:49:15Z",
+  "exit_code": 0,
+  "command": [
+    "python3",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/read_reviewed_value_fields.py",
+    "--plan",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/plan.json",
+    "--out",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/source-fields.json"
+  ],
+  "contract_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/execution-contract.json",
+  "contract_sha256": "f8d207ac8e1472f9dd1d752a2e7ded6192629584dee6256458950ab7be322cd0",
+  "inputs": {
+    "plan.json": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/plan.json",
+      "expected_sha256": "3455a679f3882878bd7d38a24d177111fd04b346390b6b9384fe768745c36963",
+      "actual_sha256": "3455a679f3882878bd7d38a24d177111fd04b346390b6b9384fe768745c36963",
+      "match": true
+    },
+    "read_reviewed_value_fields.py": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/read_reviewed_value_fields.py",
+      "expected_sha256": "a28219c7c7e600b800fa43f3f43105c420cf8612a7623359009a5a836ef9024e",
+      "actual_sha256": "a28219c7c7e600b800fa43f3f43105c420cf8612a7623359009a5a836ef9024e",
+      "match": true
+    },
+    "test_reviewed_value_fields.py": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/test_reviewed_value_fields.py",
+      "expected_sha256": "92529c5707362b9f5b9da5c5319973a91acc3af7fecb314242402a20cffdbb40",
+      "actual_sha256": "92529c5707362b9f5b9da5c5319973a91acc3af7fecb314242402a20cffdbb40",
+      "match": true
+    },
+    "controller-source-review.json": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/controller-source-review.json",
+      "expected_sha256": "017c1f7405ef4d2b725ece416d03e0102bc3f6f3e83b5a0486e8822812000a72",
+      "actual_sha256": "017c1f7405ef4d2b725ece416d03e0102bc3f6f3e83b5a0486e8822812000a72",
+      "match": true
+    }
+  },
+  "stdout": "{\"status\": \"source_fields_only_not_point_in_time_qualified\", \"output\": \"/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/source-fields.json\", \"targets\": 3, \"factor_ready\": false}\n",
+  "stderr": "",
+  "output": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/value-field-repair-2026-10-20/source-fields.json",
+    "exists": true,
+    "sha256": "7070e776101b333f0aed34c17721f8aee0666201e603e1d547e20f95f302341b",
+    "bytes": 11161
+  },
+  "acceptance": "pending_controller_review"
+}
