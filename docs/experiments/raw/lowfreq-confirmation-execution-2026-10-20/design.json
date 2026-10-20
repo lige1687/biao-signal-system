@@ -1,0 +1,290 @@
+{
+  "schema": "lowfreq-confirmation-execution/1",
+  "created_at": "2026-10-20T16:41:16.799936+08:00",
+  "question": "在每天收盘知情、下一交易日开盘开始价格观察时，小时排列确认是否胜过不加确认或固定等5个交易日？",
+  "use": "低频查看和确认的局部历史实施近似；不是完整原A，不改变原条件",
+  "reason": "旧比较用首次小时确认的收盘价，未统一低频可行动时点；检验行动延迟是否改变已有不升级结论",
+  "original_a_status": "blocked: stable-trend/pullback identity and plan target/invalidity semantics missing; preserved owner",
+  "parent_task": "research-utility-review-20261012",
+  "controller_task": "pro-advice-process-review-20261020",
+  "source_definition": "research.structure.bottom_hourly_waiting@1.2.0",
+  "not_same_definition": "new daily-close check + next-open observation policy, separately frozen here; no global definition card edited",
+  "assets": [
+    {
+      "code": "sh.510500",
+      "name": "中证500ETF",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/etf-hourly-source-recovery-20261019/etf-hourly-source-recovery-20261019-20261019T142513-83baf91d019c/result/qualified-input.json",
+      "sha256": "a8b5b4bb15dab83ef3f70855f030fe828c005aefe6cb0557e7c8af3b19230f0b",
+      "mode": "reuse_sealed_input_and_effect",
+      "qualification": {
+        "source_branch": "sina-etf-hour-price/1.0",
+        "reason_counts": {
+          "daily_unqualified": 1138,
+          "missing_or_misordered_hour_slots": 211,
+          "qualified": 302,
+          "hour_vs_daily_OHL_mismatch": 1
+        },
+        "longest_qualified_days": 299,
+        "volume_mismatch_days": 7,
+        "scope": "price_only; no independently verified minute OHLC or volume or historical availability"
+      }
+    },
+    {
+      "code": "sh.510050",
+      "name": "上证50ETF",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-coverage-20261019/factor-coverage-20261019-20261019T145952-09e7daaf86a0/result/etf-inputs/sh_510050.json",
+      "sha256": "40cd98009f7f202bbfbdcf0ec23438dad950645a4428e79f25880e5a2e6e15f4",
+      "mode": "Bao_effective_factors_and_saved_daily",
+      "events": 268,
+      "qualification": {
+        "source_branch": "sina-etf-hour-price/1.0",
+        "reason_counts": {
+          "missing_or_misordered_hour_slots": 1350,
+          "qualified": 302
+        },
+        "longest_qualified_days": 302,
+        "volume_mismatch_days": 7,
+        "scope": "price_only; no independently verified minute OHLC or volume or historical availability"
+      }
+    },
+    {
+      "code": "sh.510300",
+      "name": "沪深300ETF",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-coverage-20261019/factor-coverage-20261019-20261019T145952-09e7daaf86a0/result/etf-inputs/sh_510300.json",
+      "sha256": "51c4fabaee736e546c818d7285818c8780ff9e67124f54176dfbaf046ab2c67a",
+      "mode": "Bao_effective_factors_and_saved_daily",
+      "events": 291,
+      "qualification": {
+        "source_branch": "sina-etf-hour-price/1.0",
+        "reason_counts": {
+          "missing_or_misordered_hour_slots": 1350,
+          "qualified": 301,
+          "hour_vs_daily_OHL_mismatch": 1
+        },
+        "longest_qualified_days": 298,
+        "volume_mismatch_days": 7,
+        "scope": "price_only; no independently verified minute OHLC or volume or historical availability"
+      }
+    },
+    {
+      "code": "sh.588000",
+      "name": "科创50ETF",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-coverage-20261019/factor-coverage-20261019-20261019T145952-09e7daaf86a0/result/etf-inputs/sh_588000.json",
+      "sha256": "5a529a3d058d29499ca63b90830577eef9b04fa6c8f01b0005e599e486e4eada",
+      "mode": "Sina_reported_split_only_price_proxy_cash_zero; official_three_splits_crosschecked",
+      "events": 170,
+      "qualification": {
+        "source_branch": "sina-etf-hour-price/1.0",
+        "reason_counts": {
+          "daily_unqualified": 290,
+          "missing_or_misordered_hour_slots": 1060,
+          "qualified": 301,
+          "hour_vs_daily_OHL_mismatch": 1
+        },
+        "longest_qualified_days": 298,
+        "volume_mismatch_days": 7,
+        "scope": "price_only; no independently verified minute OHLC or volume or historical availability"
+      }
+    },
+    {
+      "code": "sh.512480",
+      "name": "半导体ETF",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-coverage-20261019/factor-coverage-20261019-20261019T145952-09e7daaf86a0/result/etf-inputs/sh_512480.json",
+      "sha256": "b1b327ce0ed96d4a2495200921d1fc48588f77fbc9195122a296020d7c7d2a10",
+      "mode": "Sina_reported_split_only_price_proxy_cash_zero; official_three_splits_crosschecked",
+      "events": 252,
+      "qualification": {
+        "source_branch": "sina-etf-hour-price/1.0",
+        "reason_counts": {
+          "missing_or_misordered_hour_slots": 1349,
+          "daily_unqualified": 1,
+          "qualified": 301,
+          "hour_vs_daily_OHL_mismatch": 1
+        },
+        "longest_qualified_days": 298,
+        "volume_mismatch_days": 7,
+        "scope": "price_only; no independently verified minute OHLC or volume or historical availability"
+      }
+    },
+    {
+      "code": "sh.512400",
+      "name": "有色金属ETF",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-coverage-20261019/factor-coverage-20261019-20261019T145952-09e7daaf86a0/result/etf-inputs/sh_512400.json",
+      "sha256": "c4d799bb9e3d60b6ed638f734375885d62cd3e846843ba17acc47c268b44eee6",
+      "mode": "Bao_effective_factors_and_saved_daily",
+      "events": 55,
+      "qualification": {
+        "source_branch": "sina-etf-hour-price/1.0",
+        "reason_counts": {
+          "daily_unqualified": 1223,
+          "missing_or_misordered_hour_slots": 127,
+          "qualified": 301,
+          "hour_vs_daily_OHL_mismatch": 1
+        },
+        "longest_qualified_days": 298,
+        "volume_mismatch_days": 7,
+        "scope": "price_only; no independently verified minute OHLC or volume or historical availability"
+      }
+    },
+    {
+      "code": "sh.512800",
+      "name": "银行ETF",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-coverage-20261019/factor-coverage-20261019-20261019T145952-09e7daaf86a0/result/etf-inputs/sh_512800.json",
+      "sha256": "ecea88186261a0df6c2b43b21e3ae75c276355d842567f3b678900300aa16244",
+      "mode": "Sina_reported_split_only_price_proxy_cash_zero; official_three_splits_crosschecked",
+      "events": 262,
+      "qualification": {
+        "source_branch": "sina-etf-hour-price/1.0",
+        "reason_counts": {
+          "missing_or_misordered_hour_slots": 1350,
+          "qualified": 301,
+          "hour_vs_daily_OHL_mismatch": 1
+        },
+        "longest_qualified_days": 298,
+        "volume_mismatch_days": 7,
+        "scope": "price_only; no independently verified minute OHLC or volume or historical availability"
+      }
+    },
+    {
+      "code": "sh.512170",
+      "name": "医疗ETF",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-coverage-20261019/factor-coverage-20261019-20261019T145952-09e7daaf86a0/result/etf-inputs/sh_512170.json",
+      "sha256": "98614258f912fadf3ffff2eac09bb3f9ebe7cfcd83f9d506000e62dd69ded43c",
+      "mode": "Sina_reported_split_only_price_proxy_cash_zero; official_three_splits_crosschecked",
+      "events": 196,
+      "qualification": {
+        "source_branch": "sina-etf-hour-price/1.0",
+        "reason_counts": {
+          "missing_or_misordered_hour_slots": 1349,
+          "daily_unqualified": 1,
+          "qualified": 301,
+          "hour_vs_daily_OHL_mismatch": 1
+        },
+        "longest_qualified_days": 298,
+        "volume_mismatch_days": 7,
+        "scope": "price_only; no independently verified minute OHLC or volume or historical availability"
+      }
+    }
+  ],
+  "old_events": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-coverage-20261019/factor-coverage-20261019-20261019T145952-09e7daaf86a0/result/comparison-v2/events.json",
+    "sha256": "13b1a95edab40f21f662302bc9189c552bb287c6f9bdbd7e40737466809c1f51"
+  },
+  "main_assets": [
+    "sh.510050",
+    "sh.510300",
+    "sh.510500",
+    "sh.588000"
+  ],
+  "auxiliary_assets": [
+    "sh.512480",
+    "sh.512400",
+    "sh.512800",
+    "sh.512170"
+  ],
+  "horizons": {
+    "primary": 20,
+    "secondary": 30,
+    "meaning": "reuse previous fixed endpoint for comparability, not recommended holding duration"
+  },
+  "periods": [
+    [
+      "2021-2023",
+      "2021-01-01",
+      "2023-12-31"
+    ],
+    [
+      "2024-2025",
+      "2024-01-01",
+      "2025-12-31"
+    ],
+    [
+      "2026H1",
+      "2026-01-01",
+      "2026-06-30"
+    ]
+  ],
+  "policies": {
+    "direct": "first saved bottom at t0 close -> next daily open, cancel if opening strictly below frozen anchor",
+    "hourly_eod": "from t0 through H-1, check only each15:00 saved hourly state, requires hour_qualified=true and known bool bull; daily low after t0 strictly below anchor ends eligibility before close decision; true at close schedules next daily open, cancel if opening strictly below anchor; do not reissue after cancellation",
+    "fixed5": "wait exactly5 daily trading-index steps, cancel if any low in(t0,t0+5] strictly below anchor, otherwise observe t0+6 open subject same opening gap cancellation; no hourly info used"
+  },
+  "unknowns": "retain ALL original events; immature/crossperiod/dailyunqualified/missinginitial15state/unknownhourwhilewaiting/missingopen stay unknown; never fill zero; broken or neverconfirmed with known complete evidence are nonparticipation=0. H15confirmation means noentrybeforeendpoint => known no participation, not unknown if all preceding info valid. Missing later hours after candidate entered not required. Full future daily path qualification is retrospective sample limitation not a live signal claim.",
+  "prices": "same saved adjusted price fields, positive and exact qualifying hashes; no new source, interpolation, tolerance, dividends, costs or guaranteed fills",
+  "targets": "score=100*(Hclose/entryopen-1) for participant else0; decline=max(0,100*(1-min(entryopen,dailycloses entryday..H)/entryopen)); not account return or account drawdown",
+  "decomposition": "hourly-direct = timing on bothparticipants + avoided_down - missed_up when only direct + hourlyonly positive/negative contributions if any; common denominator per asset then fixed equal assets; include nextopen-minus-decisionclose, scheduled/cancelled, confirmation lost at15, waiting trading days, all positive and negative missed opportunities",
+  "support": "do not select old448 as source population; report old paired vs new paired intersection and excluded reasons; old hourly prices only retrospective side reference, not executable baseline; first identify all input event dates without effects",
+  "subgroups": [
+    "main4broad",
+    "aux4sector",
+    "all8",
+    "initial15bull vs initialunconfirmed",
+    "same old rising background (saved annotation reuse only)",
+    "2024-2025 vs2026H1",
+    "per-product",
+    "old-new paired intersection"
+  ],
+  "uncertainty": "shared60tradingdayblocks 2000 draws seed20261020 on fixed product group; omit incomplete-product draws and disclose counts; descriptive already-seen history, no probability or independent validation claim",
+  "decision_rule": "no posthoc effectiveness threshold; compare main increment, fixed5 opponent, downsides, missed rises and coverage; complete bounded question even negative; no extra parameter/product searches",
+  "budget": {
+    "inherited_market_seconds": 2898.484713,
+    "cap_seconds": 3600,
+    "new_source_requests": 0,
+    "source_limits": "old6/6 preserved; no new request allowance",
+    "new_core_max": 1,
+    "purposeful_followup_max": 3,
+    "all_new_effect_and_independent_numeric_seconds_counted": true,
+    "prior_full_family_attempt_count": "unknown; do not reset"
+  },
+  "write_paths": [
+    "src/lei_signal/research/lowfreq_confirmation_execution.py",
+    "tests/unit/test_lowfreq_confirmation_execution.py",
+    "docs/experiments/raw/lowfreq-confirmation-execution-2026-10-20"
+  ],
+  "standards": {
+    "schema_version": "research-standards/1.0",
+    "new_entry": "scripts/run_factor_lab.py --workflow-contract",
+    "legacy_frozen_studies": "keep_original_bindings",
+    "standards": {
+      "mission": {
+        "path": "docs/research/lei-factor-research-mission.md",
+        "version": "1.2.0"
+      },
+      "question_method": {
+        "path": "docs/research/research-question-method-standard.md",
+        "version": "1.3.1"
+      },
+      "increment": {
+        "path": "docs/research/factor-increment-evidence-standard.md",
+        "version": "1.1.0"
+      },
+      "principles": {
+        "path": "docs/research/experiment-backtest-principles.md",
+        "version": "1.2"
+      },
+      "execution": {
+        "path": "docs/research/ai-execution-contract.md",
+        "version": "1.1.0"
+      },
+      "definition": {
+        "path": "docs/research/definition-standard.md",
+        "version": "1.2.0"
+      },
+      "template": {
+        "path": "docs/research/experiment-report-template.md",
+        "version": "1.2.1"
+      }
+    },
+    "definition_registry": "docs/research/definitions.v1.json",
+    "report_registry": "docs/experiments/registry.json",
+    "strategy_sources": "configs/strategy-documents.v1.json",
+    "new_contract_schema": "research-workflow/1.1"
+  },
+  "strategy_sources": {
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "method_review": "Astra confirmation_method_decision conditional approval; readonly source Sol; implementation must undergo temporal tests and preflight before effects",
+  "native_workflow": "saved-event policy comparison unsupported by current adapter; independent immutable contract, dependency SHA, pure formal research module and explicit preflight; no claim native validation",
+  "allowed": "local research only; no production/trades/strategychanges/oldresultedits/newnetwork/externalmessages/deletion"
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "lowfreq-confirmation-implementation-receipt/1",
+  "design_sha256": "5aba781fb5ede8cdb1e32975df9318d2f328ae7726e280dc7d6ee8c72d839c12",
+  "files": {
+    "src/lei_signal/research/lowfreq_confirmation_execution.py": "46d6d7cddb551f852a96bfc16b90c762dcd58207c8afdc625492d919404b5aee",
+    "tests/unit/test_lowfreq_confirmation_execution.py": "0f770ec8aa78194285c2b1a62231ba70bf2f4f306d2a272dd3a2763d9c6401e7",
+    "docs/experiments/raw/lowfreq-confirmation-execution-2026-10-20/run_comparison.py": "c81aa93ceee19237ab4556b147dfb3f161f84ce0d70a8f4b6373599975fe3f90"
+  },
+  "synthetic_tests": "17 passed",
+  "preflight": {
+    "assets": 8,
+    "original_events": 1589,
+    "effects_computed": false
+  },
+  "market_effect_run": false,
+  "output_written": false,
+  "controller_review_required": true,
+  "notes": [
+    "pure policy decisions preserve action when later daily qualification changes",
+    "historical price observations are not executable fills",
+    "run mode requires frozen file binding, actual cumulative budget state, and exact planned external result path"
+  ],
+  "initial_implementation_files": {
+    "src/lei_signal/research/lowfreq_confirmation_execution.py": "43f2a5af7031c70106345075225e35e22d1e4849e3165c094fcf7da7ec6a2f24",
+    "tests/unit/test_lowfreq_confirmation_execution.py": "d86619ceeae48dc0a156bf0e954da47eb78896be4fa554b500115b1121600fb8",
+    "docs/experiments/raw/lowfreq-confirmation-execution-2026-10-20/run_comparison.py": "6f309e0cb00731ef0943ceeacf2057aaaf355e8df64afc1b20d44bf9877972d2"
+  },
+  "controller_review_corrections": [
+    "all early unknown rows now carry paired=false and initial15bull=null; common_status follows paired",
+    "equal asset summary never silently drops an absent required product",
+    "expected rows derived from qualified input counts, not optional design events fields",
+    "nonfinite prices rejected",
+    "old first-hour observation and intraday bull lost at 15:00 retained as side references",
+    "shared 60 trading-date block ranges cover both direct and fixed5 with incomplete-product draws omitted",
+    "intraday-lost side reference stops before endpoint day when no candidate decision occurred"
+  ]
+}
