@@ -1,3 +1,11 @@
+# 美股买入端冻结实现及参考定义 2026-10-20T16:52:54.464358+08:00
+
+- 本任务 status active；checked_coordination_sha 21a99853500b60775960ed41ea2c14a6d796ce78；checked_at 2026-10-20T16:52:54.464358+08:00；已实际读取self、research-utility-review-20261012、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、research-dispatch-controller当前首段，具体范围留 coordination-definition-read。无新冲突。前一条3ee01c54记录的相关首段在随后操作已补读，未发现变化；不是借元数据取得排他锁。
+- 在原独立树允许root仅追加 docs/research/definitions.v1.json 的 reference.french.longonly.bm/op/mom@1.0.0三个公开分组参照对象；不改原卡、版本或生产。执行绑定独立树注册表快照，报告明确解析三参照但没有本地逐股特征。最终主树单项接入须再核当前并发写者，不整表覆盖。
+- Sol/medium 实际已派发本raw/analyze_long_only.py、test_analyze_long_only.py及development-receipt唯一写权，禁止实际收益；root冻结后Luna/low执行。新H-N对照、三个时期、primary/big区间和共同重取已写design。三真实CSV可用，OSAP失败保留，来源累计12/12，本题真实效果仍0/1。
+
+---
+
 # 美股来源边界与固定对照细化 2026-10-20T16:49:43.674439+08:00
 
 - task-id/owner/工作树/唯一写权沿本任务上一段；status active；checked_coordination_sha 3ee01c5403457f5997debee551544456c97e4e16；checked_at 2026-10-20T16:49:43.674439+08:00。本次fetch核相关任务首段，已读 self/research-utility-review-20261012低换手进行中/lowfreq-strategy-discovery/gemini/research-dispatch-controller；无新写权重叠，未接他人问题。
