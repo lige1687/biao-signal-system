@@ -1,3 +1,16 @@
+# OSAP与公开历史修订核验交付 2026-10-20T11:19:01.137542+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮资料接入/公开来源/定点补证；scope_released true。全市场可靠历史与整体研究目标未完成。checked_coordination_sha=5eaf5813272a1261dea08bc473b470121e46ce18；checked_at=2026-10-20T11:19:01.137542+08:00；已读COORDINATION/self/research-utility-review-20261012/research-dispatch-controller/lowfreq-strategy-discovery-20261019，以及新增gemini-strategy-review-20261020最终11:18段；theory/external此前范围无新变更。因子实现仍做行情/高点/300股，本轮不重复。一次协调写入因远端跟踪SHA并发改变在写前断言停止，已fetch读新Gemini完成段后再行，未覆盖他人。
+- 主体成果codex/personal-lowfreq-system-audit-20261018@14f286cbab22c81fd0e64aca89e457fc1a69e6d3，40准确路径远端逐字核同。报告docs/experiments/osap-history-revisions-2026-10-20.md与同名raw；osap_reference.py、financial_revisions.py、两测试、usage已落主工作区真实读回；registry只本键/INDEX本行/definitions只OSAP1.1参照，旧项保留。未合main。
+- OSAP331目录(212Predictor/114Placebo/5Drop)、212公开差额收益列接通，12序列14,256字段独核；US2025发布版整体至2024-12，各序列期间不同。目录331原始差异多为格式，详细定义只有1实质来源说明变化+1空值差异；仅1真实收益版本，未声称两版收益修订已核。
+- 合康同2023期间的原报/次年比较列：保证费用改列导致成本增、销售费减18,649,349.03元，毛利率差−1.2507pp、营业利润未变。六类时点实测，供应商未知不合格；Astra指出三版本区间问题已修。原600股链本已保留原报，新读取器是指定期间与日期精度补充，不处理全量撤销/替代或财务真实性。
+- 用户无RQData，公开替代已核：巨潮/交易所原件优先、SEC公开JSON无需密钥，Tushare积分有条件，免费整理值不冒充完整历史。初始5094年报记录含取消更新，最终600股132月共同可用中位250；9369公告×指标待核=4766公告，9337行原件已取得。Apple146总资产记录70期末、3期末后报值不同，未仅据此判重述。
+- 实际补证1份合康1206159525：11页原文和PDF重提取一致，仅投票表格更正。新增financial-notice-review/1注释通过旧接口；22指标月份补证前精确匹配旧结果，补证后11公司月份两项输入合格，旧全量表/收益未覆盖。后续显式绑定新注释及notice-effect-verification，不能只按标题批量放行。
+- 验收raw/delivery-validation：31测试、双树归置/diff、真实CLI、5188报告全文/类别/链接；goal note25→26精确读回、status/其它字段未变。源码适配类型/链接失败保留。全局preparation仍受既有green_momentum_methods_20261020来源kind/paths/originals/limits与path/sha256规范不符阻断，属因子实现，本轮未改或绕过；两个独立读取入口可用。
+- 0新市场效果、0行情财报原件下载；旧研究预算不重置。Luna low盘点、Sol medium实现/公开来源、Astra high方法审、root实物与结论，费用未知。外盘固定UUID新输出约1.36MB，旧原件保持；无后台/通知/付费/生产交易。下一项在原财务任务合同及累计预算内，处理已存待核公告/字段，以新增可用输入和原件证据验收；完整历史股本/候选池/退出/成交仍未齐，不称有效策略或可靠库全完成。
+
+---
+
 # 按用户新回复继续核公开历史资料 2026-10-20T10:59:17.280195+08:00
 
 - 原任务active；checked_coordination_sha=e149dd9c269b969bbd4e35e4e910de9e23ef913a；checked_at=2026-10-20T10:59:17.280195+08:00；已读COORDINATION/self及因子实现最新范围（高点/历史300行情）；此前theory/external/discovery/dispatch范围沿用，无并行复制行情。
