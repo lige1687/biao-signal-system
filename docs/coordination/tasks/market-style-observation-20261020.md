@@ -1,3 +1,16 @@
+# 五问完整性返核与可用证据补齐 2026-10-21T00:01:24.848299+08:00
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active；scope_released false。本轮按用户“上一个对话都完成了没，而不是只完成初版”恢复原完整要求；前轮completed仅界面阶段，不能代表五问/整项完成。
+- checked_coordination_sha 3a99cc6f319b8012d5be256a94c21ab215d3c92f；checked_at 2026-10-21T00:01:24.848299+08:00；已复核COORDINATION及self/dispatch/investor-workspace-simplification/investor-observation-map/portfolio-trends/personal-lowfreq/mechanism/strategy-account-bridge最新范围，较上次核查无变更。原owner共享服务与文件仍只读；根保留唯一整合写者。
+- 基线成果codex/market-style-observation-20261020@5edea3086d56ac600bf66d3cc3517071b688c378；主树18e64fa共享脏区不切换、不清理。策略原件两SHA再核一致，服务市场观察与收益/风险解释层，不变原技术规则。
+- 本轮问题：五问哪些实际回答、哪些现有资料可回答但遗漏、哪些真正缺核心资料；把能答的完整呈现在五问/按需周观察月复盘中。已发现官方长期最大跌幅、逐日账户共同亏损与同资金组合效果可直接复用，不应留空。现持仓集中不能代替历史贡献，估值快照不能代替历史分位。
+- 写入范围：本任务web/src/components/market-style/与src/lei_signal/market_style_observation/、tests/unit/test_market_style_observation*.py、自有报告/raw/progress、仓内5192预览副本。原FundamentalsPage只沿已绑定入口不改；共享8000/8028服务/规则/冻结/他人组件/5188仓外只读。系统升级DB未授权新写，不改状态。
+- 分工：Sol只读四MSCI事实已核2次官方PDF请求，后续仅styleSnapshot/StyleComparison补官方最大跌幅明确日期；Sol只读账户已核，后续独写portfolio_review.py及其独立测试，复用8028现有曲线，不重跑收益实验；root五问结论组件、周/月按需阅读、独立服务接入与必要NFCI/本地波动来源核验。各自文件不交叉。
+- 验收：五问每项有事实答案、数字/日期/基准、明确未答字段；Q1收益/波动/长期最大跌幅，Q2同口径超额，Q3行业和前十集中/贡献边界，Q4相对估值/历史位置边界，Q5共同涨跌/亏损/同资金组合及真实持仓边界。周摘要和月五问完整复盘分别被动点选；来源/错误/数据变化保护；真实UI与相关计算核验，不用画图或按钮通过冒充完成。
+- 成本/证据：原资料研究6批+探针，上一曲线阶段6次公开调用与3次模型，累计不归零；本轮先用2次已核PDF，必要缺口最多另4次公开源动作，0参数搜索/新效力实验/付费/交易/通知。每项真缺口须记录已查渠道/不可替代原因，不能只写待补就完成整项。
+
+---
+
 # 曲线、宽度投影与按需解读预览交付 2026-10-20T23:57:04.678399+08:00
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status completed（本轮隔离预览）；scope_released true（本轮自有组件/服务/资料）；用户视觉效果待验收。后续投资增量与生产采用未完成。
