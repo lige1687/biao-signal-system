@@ -1,3 +1,12 @@
+# 低换手账户三图静态接入完成 2026-10-20T17:03:09.176817+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed（仅三静态资源）；scope_released true；checked_coordination_sha=6382fa322262ffa358206fe3db2a42f039d8b708；checked_at=2026-10-20T17:03:09.176817+08:00。沿本轮已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/dispatch，交付前fetch新变更已读，无同块冲突。
+- 三图准确复制到5188实际运行树web/public/research/lowturnover-green-account-20261020/：capital-path.svg 65608B SHA f791e2b6b18789a5e8424e01ffdaa5e634669af2cc4946576107f4b97940393f；drawdown.svg 71217B SHA e7e6dc2d45aeca6b1e26aafe9f669ca3a3b07ebea6b7d1b710763c928f2df087；buffer-tradeoff.svg 10108B SHA 04e4d8073e8a9d872a6063cb317b6419a297ae232f10a5daf5d351e79b12bcdc。源/目标/HTTP逐字一致、XML/image/svg+xml通过，最后源核未变；PID15320/cwd保持，无重启。
+- 首张创建后即时GET仍返回578B HTML应用回落，失败保留；核实际文件并后续GET后三张均通过。回执docs/archive/handoffs-plans/investor-workspace-simplification-20261012/lowturnover-static-assets-20261020-receipt.json SHA a6753d08f5a4209f08c5e5b025c412a94c5e7574b3e49924db083e028506201b，主/自身树同字节；原progress追加，主仓归置通过。报告登记/浏览器独验/研究结论仍原因子owner，本方未执行；报价账户研究未完整复现原策略，静态接入不代表研究有效。
+- 不改原源图、报告、研究数字、其他Web、API、策略，不运行回测或新任务。成果沿codex/investor-workspace-simplification-20261012@e6c4c2e025252c565ba15f05611561ca1ecd5b48，仅本机未提交，远端仅协调元数据，研究owner可读本回执交付；无本轮后台任务。
+
+---
+
 # 低换手报价账户三张图静态接入 2026-10-20T17:00:58.218581+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=28971e70d9799e946994d74ee45b5d41ba81b448；checked_at=2026-10-20T17:00:58.218581+08:00。沿原用户系统/因子分工，原因子owner明确委派准确三静态资源；已读COORDINATION（与前次无变）、self、research-utility-review-20261012最新16:32、personal-lowfreq-system-audit-20261018最新16:52、research-dispatch-controller；全任务检索仅原owner声明主树源，运行树无同块写者。
