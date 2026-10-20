@@ -1,3 +1,17 @@
+# 扩展为完整策略前向观察台 2026-10-20T16:43:37+08:00
+
+- task-id/owner沿下文；status active；scope_released false；checked_coordination_sha=40e048f7fd54c043ab093c34290100ad55088b21；checked_at=2026-10-20T16:43:37+08:00。已读COORDINATION1.1及先前相关任务，新增核research-utility-review最新16:32、pro-advice-process-review最新16:41、personal-lowfreq-system-audit最新16:37、investor-workspace-simplification最新16:15、dot-trade-state-accounting、dot-pro-strategy-definition。
+- 用户新增授权：“看着我们做一个前向验证的界面也是很不错的，按他的思路，借鉴专业研究和实践优秀经验，去做这件事推全”；“还有原来我们说的策略的事情也推全哈，注意不要和其他在做的重合了”。资料为新附件完整策略前向观察建议。原建议吸收已交本机报告/方法卡/两学习条目/25项纯工具检查/六对旧账时长；当前阶段继续，不以启动计划当完成。
+- 新问题：从实际启用时间追加完整策略版本与虚拟账户事件，在现有/fwd展示规则、净值/回撤/现金、逐日不同动作与失败，历史信号涨跌继续保持单独身份。首期选择一只国内宽基ETF与被动对照；原A缺确认/目标、共享资金确定政策仍未齐，不创造4策略曲线，不代原owner改规则。适合的完整合同先接，未齐项明确待补；基准配置只用于虚拟工程观察，不是真实风险预算。
+- 独占新增 src/lei_signal/forward_observation/、tests/unit/test_forward_observation*.py、configs/forward-observation.v1.json、web/src/components/strategy-forward/、web/run-strategy-forward-regression.mjs；最小修改 src/lei_signal/api/routes/fwd_ledger.py（仅新前向策略GET/操作入口）、web/src/pages/FwdLedgerPage.tsx（新完整账户页签，保留旧面板）、必要web/package.json测试命令。不修改全局types/client/App/TopNav或旧研究引擎。
+- 根负责人新报告 docs/experiments/strategy-forward-observation-2026-10-20.md 与同raw/；沿原progress记录两阶段；registry/INDEX仅新增本报告项，前一报告最新证据说明可小补。运行账本 data/forward-observation/ 下SQLite等本机忽略文件，不进Git，不写原推荐/情绪/交易库，不接券商。源码先在现有独立成果树；主树窄镜像；当前5188服务树对应本功能准确前端路径仅验后同步，旧owner已释放此轮范围，保留其其他文件与进程。后台接入先独立端口验证，必要本地服务采用不触及其他任务的实验进程；调度仅新虚拟观察服务，明确实际存活/恢复限制，不恢复通知。
+- 查重：原A及低换手连续账户归research-utility-review；收盘知情/次开盘ETF确认归pro-advice-process-review；财务买入组归personal-lowfreq-system-audit；本题只前向记录与展示基础设施及被动对照，不重复其历史收益计算，不改源报告/输入。后续消费其带完整合同的导出，未知和未授权不伪装接入。
+- 验收：冻结/启动/资料到达/决策/订单/模拟成交时间分列；版本不可变、重复输入与重启不重复记账、缺价/过期/未成交/资金不足有原因；权益含现金持仓费用分红，未知估值不可零填；共同有效日期比较和短期绩效限制；点击日期能追溯；API/浏览器读回含窄屏；新真实观察与合成测试/历史回放分开；现有/fwd回归保持。持续运行须真实进程/心跳证据，未启动策略不显示收益。
+- 采用既有research-closure/lei-lowfreq-research与frontend-design相关部分，用户明确方案不重复索取设计批准。Sol负责明确后台实现，Sol负责UI，Astra只读策略/资金时间设计与关键核查，Luna已完成25项小工具及UI定位。主控核最终合同、数据源/许可范围、验收与结论。
+- 当前4份原始来源已读：QuantConnect paper/reconciliation、Lo2002夏普统计、GIPS短期不年化条款；旧AQR/绩效/框架资料复用。没有重新跑市场实验或改策略阈值；前向资料只从真实接收时刻起记。新小代码/测试/报告预计2MiB，活动DB单独本机，持续大结果沿原外盘规则不回退。
+
+---
+
 # 策略完整性建议吸收与账户评价补缺
 
 - task-id: strategy-account-bridge-20261020；owner: 01a1585f-53de-7883-a5cb-d9c5be52902c/root；status: active；scope_released: false；updated_at: 2026-10-20T16:19:26.538496+08:00。
