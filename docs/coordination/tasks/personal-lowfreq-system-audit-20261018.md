@@ -1,3 +1,13 @@
+# 已保存年报的价值字段覆盖补缺 2026-10-20T13:03:07.425713+08:00
+
+- task-id/owner沿原，status active，scope_released false；checked_coordination_sha=0959f7bbcacdb3804291c98af38e57a793ea9f9a，checked_at=2026-10-20T13:03:07.425713+08:00；已读COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller本轮最新记录，无重叠；不接管因子实现、资产扩张或ETF研究。
+- 基线成果e824fb0170afd004bdf9018d543995251b2d2ac1。只读核5503既有原件绑定、5481公司年、598公司；4315记录已有合格合并资产负债表上下文。现在推进真实字段提取，不把3例特定页修复放宽冒充通用解析，不追加网络请求、不读价格/收益、不改旧冻结。待批准10次来源额度仍未获答复，不执行。
+- 本轮有界问题：旧600研究池、2013—2024已取得原年报，在已有表头/币种/单位/当期列资格之下，可取出多少归母权益及相关所有者权益字段，哪些原因仍阻挡年度价值。仅4315上下文尝试字段，另1188明确保留原失败；保留同年多原件、原公布日期及精确时刻未知，空白不转0，会计股本不当法定股数，所有记录factor_ready=false。因子效果和修订完整性资格仍不放行。
+- 唯一新增写范围docs/experiments/raw/value-source-coverage-2026-10-20/，小报告docs/experiments/value-source-coverage-2026-10-20.md、registry本键/INDEX本行/原progress；主树只在验证后同名镜像。root方案/合同/独核；Sol medium只写新提取脚本和相关合成测试；Luna low一次真实提取/回执。大JSON/页证据/日志走新外盘计划，预计256MiB外盘/2MiB本机；不写旧parser、正式定义/生产/交易/通知。
+- 验收：索引/每prepared/PDF SHA与身份复核、源表与列/单位边界、空白/重复/截断/母表混入拒绝、按年份与失败原因覆盖清单、固定独立原页核对且失败保留；全部5503记录有状态，不漏未合格原件。只1资料提取批次及必要实现修复，不新增或重置任何旧家族市场/资料请求预算；金额提取不等于价值分数或有效因子。费用未知。
+
+---
+
 # 原件字段修复真实验收交付 2026-10-20T12:53:34.786558+08:00
 
 - task-id/owner沿原；本轮3原件字段修复status completed，完整目标in_progress；scope_released false保留公开财务输入及价格补证职责。checked_coordination_sha=048fc8d17fbf1e9e724ebaab9f49c6ab7501acdc；checked_at=2026-10-20T12:53:34.786558+08:00，fresh fetch无变化，已读本轮self/因子指标/资产扩张/ETF趋势/中控，均不重做。
