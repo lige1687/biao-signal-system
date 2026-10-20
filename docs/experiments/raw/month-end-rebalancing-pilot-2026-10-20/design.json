@@ -1,0 +1,117 @@
+{
+  "schema": "bounded-external-mechanism-study/1.0",
+  "question": "美国股票与国债ETF的月末相对价格规律，是否支持进一步研究个人低频执行日期",
+  "status": "design_before_event_outcomes",
+  "family": "month-end-equity-bond-rebalancing",
+  "scope": "external financial-mechanism candidate, not existing LEI technical rule",
+  "native_technical_workflow": "unsupported; do not claim native workflow passed; independent bound study using current standards",
+  "definition_ref": "research.rebalancing.calendar_drift_60_40@1.0.0",
+  "hypothesis": "股票相对债券上涨造成股票配置超目标，受固定配置约束机构在月底卖股买债，随后股票相对债券收益较低；相反偏离方向相反",
+  "competing_explanations": [
+    "一般短期反转",
+    "不依赖股债偏离的日历效应",
+    "分红与调整数据口径",
+    "特殊危机月份",
+    "机构并非统一月底/统一60比40调仓"
+  ],
+  "mechanism_limit": "没有机构逐笔持仓和交易，价格关联不能识别因果；漂移是月内股债总回报比的确定变换",
+  "paper": {
+    "url": "https://afajof.org/management/viewp.php?n=144452",
+    "version_date": "2025-12-15",
+    "original": "ES/TY futures, daily updated signal predicts next day; final five-day window selected after comparison",
+    "adaptation": "SPY/IEF, one signal at sixth-last close monthly, subsequent five closes; not exact replication"
+  },
+  "universe": [
+    "SPY",
+    "IEF"
+  ],
+  "currency": "USD",
+  "period": {
+    "start": "2003-01-01",
+    "end": "2026-09-30"
+  },
+  "period_groups": {
+    "historical": [
+      "2003-01-01",
+      "2023-02-28"
+    ],
+    "later_history": [
+      "2023-03-01",
+      "2025-12-31"
+    ],
+    "after_paper_version_retrospective": [
+      "2026-01-01",
+      "2026-09-30"
+    ]
+  },
+  "signal": {
+    "stock_target": 0.6,
+    "bond_target": 0.4,
+    "formula": "d=0.6*Gs/(0.6*Gs+0.4*Gb)-0.6",
+    "baseline": "previous month last close",
+    "observe": "sixth-last trading-day close",
+    "known_time": "after that day's final prices; historical vendor arrival unknown",
+    "future_information": "outcomes may not enter signal, sample eligibility or fitted coefficients"
+  },
+  "target": {
+    "primary": "SPY total return minus IEF total return, signal close to month-end close, five trading intervals",
+    "secondary": "next actual open to month-end close, excludes entry-day ex-dividend entitlement",
+    "unit": "fraction; display percentage points",
+    "account_return": false,
+    "distributions": "cash dividend reinvested at ex-date close, hypothetical economic-return calculation; payment lag ignored",
+    "missing": "reject asymmetric dates or missing/nonpositive prices; no fill; immature month omitted explicitly"
+  },
+  "fixed_comparators": [
+    "historical monthly target mean",
+    "expanding OLS on stock-only month-to-date log total return",
+    "expanding OLS on month-to-date stock/bond log total-return ratio",
+    "expanding OLS on 60/40 drift"
+  ],
+  "prediction": {
+    "minimum_training_months": 60,
+    "training": "expanding, label_end strictly before current signal_date",
+    "primary_metric": "paired mean squared prediction error, drift versus relative log-return comparator",
+    "secondary": [
+      "versus historical mean",
+      "stock-only versus relative-return information"
+    ],
+    "tuning": "none"
+  },
+  "phenomenon": {
+    "primary_description": "negative sign of drift times subsequent relative return; balanced sign groups and regression interpretation separately",
+    "placebo": "signal ten common trading sessions earlier; same formation length as corresponding month-end event, five-session target",
+    "uncertainty": "circular block resampling consecutive 12-month blocks, 5000 draws, seed 20261020; describe intervals, not probability of hypothesis",
+    "sensitivity": [
+      "exclude 2008 and 2020 together",
+      "raw close/dividend reconstruction versus vendor adjusted series",
+      "next-open observation"
+    ],
+    "subgroups": [
+      "drift positive",
+      "drift negative",
+      "three fixed date groups"
+    ],
+    "all_outcomes": "retain winners/losers, worst/best months; no threshold selection",
+    "calendar_control": "paired monthly pooled OLS y ~ 1 + EOM + relative_log + EOM*relative_log; slope interaction with 5000 circular 12-month block draws, monthly pairs kept together; no interval for fewer than24 months",
+    "signed_difference_limit": "descriptive only, not sufficient to exclude calendar mean return"
+  },
+  "decision": {
+    "use": "prioritize or pause execution-date research; no immediate trade trigger or hard filter",
+    "continue_condition": "direction and magnitude offer credible useful evidence beyond simple controls and survive calendar, crisis and execution-time checks; if not, do not build timing policy to chase gains",
+    "cost_scenarios": "5/10/20 basis points per shifted dollar are illustrative hurdle levels only; not claimed actual account costs",
+    "practical_minimum": "unknown until actual holding and feasible execution schedule; do not claim equivalence or rule out all useful effects",
+    "stopping": "answer the bounded applicability question, including negative or insufficient evidence; no parameter sweep",
+    "production_authorization": false,
+    "trading_authorization": false
+  },
+  "known_limitations": [
+    "One market and one preselected surviving ETF pair; cannot extrapolate to mainland ETF calendars, FX, taxes or premiums",
+    "2026 is retrospective after this paper version, not verified unseen or real-time forward observation",
+    "Model expression gain is not independent new raw information",
+    "No full LEI policy or account return comparison unless this first test justifies a separate frozen use"
+  ],
+  "attempts": {
+    "market_runs_before_design": 0,
+    "parameter_search": 0
+  }
+}

@@ -38,6 +38,8 @@
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
+- MONTH-END-REBALANCING-20261020：[月末股债再平衡的低频适用性](month-end-rebalancing-pilot-2026-10-20.md)：285月有历史关联，最近9月8次反向；保留候选，本版执行规则暂不采用，完整账户未测。
+
 - 2026-09-17：[Agent消息 S1 通过复核](agent-news-s1-repair2-controller-review-2026-09-17.md)：110项测试、58项独立检查通过；允许继续S2，线上未恢复。
 
 - 2026-09-17：[Agent消息 S1 首次返修主控复核](agent-news-s1-repair1-controller-review-2026-09-17.md)：18个旧反例通过，来源异常识别尚有遗漏，限定第二次返修。

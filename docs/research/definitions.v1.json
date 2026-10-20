@@ -264,6 +264,10 @@
     "factor_v0_comparisons": {
       "path": "docs/experiments/raw/research-factor-library-v0-2026-09-09/run-01/decision-comparisons.csv",
       "sha256": "b2f7c5b2f530b935fecf2a76dfc5d135ca2def7ffeb4e10f99d9ca4242c18f69"
+    },
+    "month_end_rebalancing_design_20261020": {
+      "path": "docs/experiments/raw/month-end-rebalancing-pilot-2026-10-20/design.json",
+      "sha256": "7a1c49e8f93252fb919c276ec213826d1921e9aabd0f00f2fa382a29735b286c"
     }
   },
   "objects": [
@@ -5034,6 +5038,93 @@
         "factor_v0_run_quality",
         "factor_v0_comparisons"
       ]
+    },
+    {
+      "id": "research.rebalancing.calendar_drift_60_40",
+      "version": "1.0.0",
+      "name": "月内60比40股债配置偏离（外部机制研究）",
+      "type": "feature",
+      "uses": [
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "causal_claim",
+        "complete_lei_strategy",
+        "independent_raw_information"
+      ],
+      "scope": "美国SPY/IEF当前取得历史总回报、月末事件；非ES/TY期货复现",
+      "definition": {
+        "formula": "w*Gs/(w*Gs+(1-w)*Gb)-w",
+        "parameters": {
+          "w": 0.6
+        },
+        "endpoints": "previous month last close to sixth-last close",
+        "unit": "fraction of portfolio equity weight",
+        "direction": "positive hypothesizes stock selling and bond buying",
+        "transforms": "cash-dividend economic index; no fitting in signal"
+      },
+      "input": {
+        "fields": [
+          "date",
+          "SPY_close",
+          "IEF_close",
+          "SPY_dividend",
+          "IEF_dividend"
+        ],
+        "price_basis": "raw close plus ex-date dividend reinvestment; payment lag ignored",
+        "currency": "USD",
+        "frequency": "daily inputs, monthly observations",
+        "calendar": "matching observed US quote dates; next month required; no fill"
+      },
+      "universe": {
+        "version": "SPY-IEF-fixed-20261020",
+        "eligibility": "both valid quotes, complete shared observed month; prespecified pair",
+        "warmup": "previous month endpoint; predictions require 60 mature months",
+        "missing": "reject asymmetric dates/nonfinite/nonpositive prices",
+        "quality_gate": "source hashes, OHLC checks, cash-action events, common dates",
+        "degrade": "limited retrospective, not tradability certification"
+      },
+      "time": {
+        "observation_time": "sixth-last trading-day close",
+        "available_at": "historical arrival unknown; retrieved 2026-10-20",
+        "decision_at": "after signal close, hypothetical diagnosis",
+        "execution_at": "next open observation only; not an order",
+        "timezone": "America/New_York",
+        "effective_from": "2026-10-20 research"
+      },
+      "dependencies": [],
+      "validation": {
+        "method": "synthetic arithmetic/dividends/calendar/prefix; independent numbers",
+        "tolerance": {
+          "absolute": 1e-10,
+          "relative": 1e-10,
+          "integer": 0
+        },
+        "tests": [
+          "tests/unit/test_month_end_rebalancing.py"
+        ],
+        "limitations": "no institutional flow identification, full account or forward proof"
+      },
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "limited_vendor_snapshot",
+        "implementation": "synthetic_checked",
+        "effectiveness": "not_yet_evaluated",
+        "production": "not_authorized"
+      },
+      "sources": [
+        "month_end_rebalancing_design_20261020"
+      ],
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/experiments/raw/month-end-rebalancing-pilot-2026-10-20/design.json"
+        ],
+        "verification_scope": "study definition; effectiveness assessed separately"
+      },
+      "research_owner": "mechanism-rebalancing-review-20261020"
     }
   ],
   "models": [],
