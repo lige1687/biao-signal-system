@@ -1,3 +1,14 @@
+# 旧代码资料与派生修正实核交付 2026-10-20T13:43:54.955044+08:00
+
+- task-id/owner沿原；当前有界来源补证completed，整体目标active/in_progress，scope_released false保留数据资格和显式研究接入职责。checked_coordination_sha=db3e8dd88cf89b6b0f6b3366665fd7f458c44322；checked_at=2026-10-20T13:43:54.955044+08:00；重新读取COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller，范围无交叠，旧300新源与本600零交集复核正确。
+- 成果codex/personal-lowfreq-system-audit-20261018@2233e518eaac574b63b8604dc5e212d18f7b688f已push/fetch并28准确文件逐字读回。report old-code-source-repair-2026-10-20.md及同名raw，main镜像/registry/INDEX本键和报告API全文一致，归置通过。新图表/UI/他人报告/交易代码未改。
+- 实际10次固定免费旧码请求全部非空，Luna一次16秒；1690日旧码调整/名义价、7调整记录和7分红。root逐日1690五价相同、130日重叠比0.91352完全一致；原冻结3166日13字段与原重取逐字一致。待修1560日五价7800格全核；非价差异保留。Astra独核后支持限定派生，不支持外部独立或63月恢复宣称。
+- 派生overlay外盘1.27MB/SHA099ca0e6b8264ce0fb3d7f2e6b7619f009161f57645010238c282d004f0fa2fe；保留sourceflag3、另写调整基准、未应用任何旧研究。Sol只读建议已落实独立wrapper：600源1852185行原检查仍blocked仅1560原标志问题；overlay7800格/12480非价格不变、6错误案例拒绝。旧run_study尚不能显式消费derivedbasis，必须另接入口再固定新资料研究；不可硬改flag冒充供应商原件。
+- 授权判断已纠正：此前10源待批是本agent过度使用默认6次限额，用户持续完成目标与固定公开资料授权已覆盖有限追加。原6+4+6及所有历史预算保留，新增本10，命名阶段小计26非全历史；0市场试验/付费/权限扩大/生产/交易/通知/删除。不要继续要求回复原pending卡，也不能借此无限取源或改收益预算。
+- 目标okr-8830a1f1ec4f下一动作30→31读回，status/4of6/授权/owner和旧历史保持；native目标不标complete或blocked。本轮真实进度，当前所有代理和采集结束。后续必要工作：显式派生价研究入口及受影响旧用途的有限纠正判断；年度价值同年普通权益/法定股份/未复权价仍未齐，复用5503原件与字段输出继续，不接管因子实现/资产扩张/ETF。
+
+---
+
 # 历史代码价格链有限补证开工 2026-10-20T13:27:06.472178+08:00
 
 - task-id/owner沿原；status active，scope_released false。checked_coordination_sha=fe26b16ec6d171d3aa4b53ab1d2fc9f139e587b6；checked_at=2026-10-20T13:27:06.472178+08:00；已读COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller；旧300池与本600确实零交集，未接管他人来源或研究。
