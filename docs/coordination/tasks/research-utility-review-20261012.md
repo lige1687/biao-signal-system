@@ -1,3 +1,14 @@
+# 绿色候选内月度反转增量研究启动 2026-10-20T15:38:56.458066+08:00
+
+- task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=c923512669b1a1818db81226dcb3c4d17659fa96；checked_at=2026-10-20T15:38:56.458066+08:00。已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新14:35/gemini-strategy-review-20261020/lowfreq-strategy-discovery-20261019/research-dispatch-controller。对方600派生价已交付只读复用，年度价值与ETF斜率不重做。
+- 用户本轮明确继续短期反转、相同绿色且中期动量相近时近期过热选股、公开资料自行补。新有界用途为月度条件选股增量；旧132月普通反转诊断及高点效果封存不重跑。未更改原LEI技术判定，不以研究排序代完整原策略。
+- 主成果基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；当前旧交付仅本地未提交。新增独占src/lei_signal/research/short_reversal_selection.py、tests/unit/test_short_reversal_selection.py、docs/experiments/short-reversal-green-selection-2026-10-20.md及同名raw；root维护本registry键/INDEX行/原progress/原目标note，definitions仅本新research.selection.short_reversal对象及来源，必要报告静态图仅web/public/research/short-reversal-green-selection-20261020/。不改共享旧实现/旧报告/合同/UI组件。
+- Sol medium只读reversal_data核300/600资料同口径复用；Astra high只读reversal_method核条件比较与缺失处理；具体实现限定新源码/测试后再派发。root唯一冻结/运行/归档。核心1次，必要最多3次有改变判断理由的跟进，新增公开资料至多6批且实际请求逐项计数，旧家族全部预算保留；当前本新问题0运行0下载。先复用若无需新资料则0下载。
+- 验收：信号截止时点/同池/绿色原义与12-1动量、最近1月定义、竞争解释、简单对手预先固定；因子性能与相对已有信息增量、风险/错过上涨/换手费用/不确定性/年份反例；缺失收益保留原权重、不可成交不能填0或偷偷删股；源码合成检验、来源指纹与独立核数；系统报告API/浏览器真实读回。600与300不得混称新时间验证，历史可比性先核。不执行生产/交易/付费/删除/通知。
+- 固定外盘已核UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，约504GB可用，内盘约16GB；新大输出先plan绑定，估计外盘256MiB本机2MiB。资料不足仍完成有依据的有限判断，例行问题不再打扰用户。
+
+---
+
 # 因子指标、原文差异与样本审查交付 2026-10-20T12:06:17.760167+08:00
 
 - task-id/owner沿原；status completed仅本轮report_only；scope_released true；checked_coordination_sha=6b658cb2ec79250a5b17330f84af505a00e2c864；checked_at=2026-10-20T12:06:17.760167+08:00。已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新11:50、gemini-strategy-review-20261020最新11:59、lowfreq-strategy-discovery-20261019、research-dispatch-controller，系统沿原展示。Gemini六对象及新独立源码不接管，与本文无冲突。
