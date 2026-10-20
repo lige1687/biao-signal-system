@@ -1,3 +1,12 @@
+# 绿色候选两张图最终版接入验收完成 2026-10-20T16:15:59.420354+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed（仅本次静态附件接入）；scope_released true；checked_coordination_sha=3442ba0a1ab3638961b2626b5c5798fdde6608a6；checked_at=2026-10-20T16:15:59.420354+08:00。交付前fetch已核，沿本轮已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/dispatch，另读pro-advice-process-review最新16:12，均无路径冲突。
+- 最新源/5188运行树/HTTP逐字SHA一致：increment.svg 11901B SHA a8ca88cc06fdfbd4b51aaa5514170a2f1ae70fb3a122f97adfd0d676b5fdb85a；performance.svg 11582B SHA cdbb347f8a490ee2e7dbf578483a5aa0d022c89afd0db20b32d78595b28449c1。两URL200/image/svg+xml、XML通过；CUA真实SVG根和标签可读，760×650及760×830，解析错误0；最终源再核未变。PID15320/cwd保持，未重启。
+- 回执docs/archive/handoffs-plans/investor-workspace-simplification-20261012/short-reversal-static-assets-20261020-receipt.json SHA af689bbf7611b55344867a6068bd03c1873212aa43ecd39a8b3383de9fbbd46d，主/自身树一致，原HTML回落、第一版复制和来源owner字号排版修正保留；原进度追加，主仓归置通过。最终正文整体可读性由原因子owner另验，本方不做研究结论验收。未修改源图/报告/组件/API/策略、未跑研究。
+- 成果仍codex/investor-workspace-simplification-20261012基线e6c4c2e025252c565ba15f05611561ca1ecd5b48加本机未提交增量；仅本协调元数据推送，远端不含图像交付。无本轮后台任务，原因子可按wait_threads读最终回执，无跨聊天回传。
+
+---
+
 # 同两张研究图最终字号版同步 2026-10-20T16:13:37.463041+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=41231cd2affeed8fb1d8392b69eddc621f48b179；checked_at=2026-10-20T16:13:37.463041+08:00。已读COORDINATION/self/research-utility-review-20261012/personal-lowfreq-system-audit-20261018/research-dispatch-controller，当前同范围无写入冲突。
