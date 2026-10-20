@@ -1,3 +1,14 @@
+# 冻结准备与准确交付路径 2026-10-20T11:59:23.903696+08:00
+
+- task-id沿原；status active；checked_coordination_sha 84b67edc7107cce46ca358eb644cf7a53c573794；checked_at 2026-10-20T11:59:23.903696+08:00。已读self/COORDINATION、research-utility-review-20261012最新11:58、personal-lowfreq-system-audit-20261018最新11:50、technical-factor-sequence、dispatch及原相关任务。新审阅不修改本题定义，实现不重叠。
+- 追加允许交付镜像路径：主树新增 src/lei_signal/research/steady_trend_selection.py、tests/unit/test_steady_trend_selection.py（当前均不存在）；docs/research/definitions.v1.json仅追加research.gemini_steady.*六对象和gemini_steady_trend_20261020一个来源，不覆盖其他对象/版本/字段。主树新报告与同名raw、registry本键/INDEX本行沿原。先独立树测试及冻结，核数后准确路径镜像；无生产消费者，无自动成果commit/push。
+- 资格：输入SHA沿原、11源指纹全匹配，10694行无重复；13条浮点OHLC尾差最大1.11e-16，以预先1e-12数值容差核验且不改输入；2022年以后8产品零缺日。5月与6月2026信号均未成熟，最后完整终点6月首日开盘。历史已看与经济价边界保留。
+- 合同sixmethods、twofees、120日、top2各半不调参；Astra已明确费用分母、逐日回撤、缺未来停止，Sol合成实现中。6准确定义经既有parser核通过；尚未真实效果。
+- 目标okr-4b824f7bb9a3已按用户本轮原话创建/授权/开始，版本3读回。外盘plan已绑定新唯一目录，估64MiB，执行前重核；本机小报告2MiB。实际工程失败（尾差/OKR父级类型/dryrun路径）均留事件，不改研究问题。
+- 下一步独立核代码、冻结代码和资料，再执行1核心批，核性能/增量/费用/少赚少亏及报告归档。其他Gemini候选和完整原A不在此次比较，不冒充实现。
+
+---
+
 # 用户授权独立实现与真实验证 2026-10-20T11:50:34.185053+08:00
 
 - task-id gemini-strategy-review-20261020；owner 01a15749-ea9b-7c61-975c-65028e32432e/root；status active；scope_released false。checked_coordination_sha f7022410341e4a6289094bffb637952c7163337b；checked_at 2026-10-20T11:50:34.185053+08:00；已读COORDINATION/self、technical-factor-sequence、research-utility-review-20261012最新11:30、personal-lowfreq-system-audit-20261018最新、原dispatch及前轮相关任务。
