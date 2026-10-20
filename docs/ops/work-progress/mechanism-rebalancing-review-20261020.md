@@ -31,3 +31,11 @@
 - 仅本新报告/raw/登记键/INDEX行和本进度；目标API只读去重，仓外数据库未写。待归置、报告API和准确Git读回后交付；无本题后台运行。
 
 - 2026-10-20T19:09:39+08:00：报告API全文相同、旧724登记项保持、24只读来源SHA不变、归置及diff通过。交付前重新fetch为e4c9ca870e9a6a98ef693d1a9ca9a4724843a593，相关任务无新变化；范围不扩。科学/收益未测，当前完成的是全流程审计。远端成果见本轮raw/delivery-receipt.json；源码/规则/服务均未改。
+
+## 机构持仓与散户情绪反向设计 2026-10-20T19:36:47.230443+08:00
+
+- 用户询问中美市场的设计与数据，本轮plan_only完成来源核查、旧证据去重与可检验问题设计；新市场实验0、旧研究重跑0、数据购买0。报告 docs/experiments/institutional-crowding-retail-contrarian-design-2026-10-20.md。
+- checked_coordination_sha=334303c036a4bb08ce6b502b294f3b41427ec202，交付前fetch无新增变化。已读self/research-dispatch-controller/sentiment-factor-research/strategy-account-bridge-20261020/personal-lowfreq-system-audit-20261018及COORDINATION；原情绪owner保留，与账户前向和美股盈利资料无文件重叠。
+- 机构总敞口、个股持股比例与共同赎回压力分开；AAII个人预期、NAAIM机构调查、CFTC分类期货与中国融资行为不互换。优先美国TFF资料及A股主动基金持仓/申赎历史资格。原AAII/融资/定投负结果复用，所有新策略收益未评价。
+- Sol medium本地证据盘点、Sol medium美国来源、Astra medium机制/时点独审；主控核旧表与中国官方来源。共30来源请求，3失败；0全历史下载。实际token费用未知。
+- 仅本报告/raw、registry本键、INDEX本行与本进度；目标API仅只读，不写仓外数据库。报告API、来源SHA、归置及准确Git交付回执见本题raw，原策略/源码/服务/交易均未改。
