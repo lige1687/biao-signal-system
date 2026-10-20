@@ -1,3 +1,12 @@
+# 独立历史队列资料范围具体化 2026-10-20T10:45:11.435790+08:00
+
+- 原任务active，scope_released false；checked_coordination_sha=ee5b59c6b6528a4c0f27d308e8a88a9d080ab289；checked_at=2026-10-20T10:45:11.435790+08:00；已读任务沿本轮启动，无新共享路径冲突。
+- 当前用户明确要先补成交历史资料再独立样本复验；现有161新增OHLC来自当前300幸存名单，只作源检查，不运行其额外效果。按历史2595减旧600固定哈希抽300，补公开未复权日线及调整事件，不排除退市/失败、不补选。acquisition-contract已先于取数冻结，时间2013—2026-01，调整1990起；同历史跨股票验证，非新的市场时期。
+- 资料检查6次请求（含2次403）历史保留；本次落实用户新增样本授权，预登记一批最多600个资料调用（300×日线和因子），一次一连接、间隔1秒、超时40秒、无自动重试、连续2次失败或429停止。总来源上限606，不重置旧计数；效果仍继承1核心已用、最多3跟进，禁止换参数。root可派Sol medium唯一写本题raw/acquire_new_cohort.py，原件和日志仅已绑定外盘；不改旧源或生产。
+- 新300和161资料检查保留不同状态，不把当前名单或价格矩阵充作独立历史复验。已读旧采集实现防止并发连接串包，按code/字段/flag验证返回身份。
+
+---
+
 # 高点组合成交与跨股票复验启动 2026-10-20T10:35:17.714511+08:00
 
 - task-id research-utility-review-20261012；owner01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=d766b3591a451af973e029f4b323e9e21456d719；checked_at=2026-10-20T10:35:17.714511+08:00；已读COORDINATION/self/personal最新工具交付01:30/system00:57/lowfreq-strategy-discovery及原dispatch范围；无新增冲突。
