@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-20T13:30:03.100376+08:00",
+  "question": "Can prior security code supply the historical price and action chain missing under001914?",
+  "scope": "one issuer000043->001914; nominal and adjusted2013-01-01..2019-12-13; distributions2013..2019",
+  "before_results": true,
+  "checks": [
+    "Verify source payload hashes and exact request fields/dates/identity; no silent code remapping.",
+    "Count duplicate and missing dates, returned adjustment flags, real trading status; empty response remains source-unavailable.",
+    "Compare nominal old-code versus saved current-code nominal for all shared dates; report mismatches rather than patch.",
+    "Compare adjusted/raw same-code ratios before and after2019-06-06; do not assume code-change2019-12-16 explains break.",
+    "Compare old-code adjusted versus current-code adjusted overlap, separate old badflag interval; constant rebase can differ from error but needs evidence.",
+    "Review action-factor dates and all acquired dividend event dates, blanks and report-year/ex-date scope.",
+    "No multiplying prices by invented scale or merging new sources into sealed experiments.",
+    "Only a sufficiently evidenced correction could be proposed later; current output contains no new market effects."
+  ],
+  "budget": "exact10data requests max,0retry,stoponrate/twofailures; prior16 namedphase attempts retained plusothers unmodified",
+  "acceptance": "source availability and correction support only; nofactor/trading efficacy claim"
+}

@@ -1,0 +1,223 @@
+{
+  "at": "2026-10-20T13:34:11.871232+08:00",
+  "kind": "source_only_no_strategy_outcomes",
+  "sources": {
+    "old_code_adjusted": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/old-code-source-repair-20261020/old-code-source-repair-20261020-20261020T132742-8f42ed912bb2/result/request-01.json",
+      "sha256": "f9040fb1d030ceb7745bca1271993b79a63c024a124233b042fbe4b5251c6cb7",
+      "n": 1690,
+      "first": "2013-01-04",
+      "last": "2019-12-13",
+      "codes": {
+        "sz.000043": 1690
+      },
+      "adjustflags": {
+        "2": 1690
+      },
+      "nontrading_rows": 80
+    },
+    "old_code_nominal": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/old-code-source-repair-20261020/old-code-source-repair-20261020-20261020T132742-8f42ed912bb2/result/request-02.json",
+      "sha256": "76dcb0685f2bc41b8b2329e26dedb08d20bf78263235d3dcbfcbb26050196be2",
+      "n": 1690,
+      "first": "2013-01-04",
+      "last": "2019-12-13",
+      "codes": {
+        "sz.000043": 1690
+      },
+      "adjustflags": {
+        "3": 1690
+      },
+      "nontrading_rows": 80
+    },
+    "current_code_nominal": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T004432-f8387b6b4781/result/001914-nominal.json",
+      "sha256": "3a7fad36509602baffab108dc106dd241a68dda24efe85ee0f5ad6f12f075d31",
+      "n": 3166,
+      "first": "2013-01-04",
+      "last": "2026-01-15",
+      "codes": {
+        "sz.001914": 3166
+      },
+      "adjustflags": {
+        "3": 3166
+      },
+      "nontrading_rows": 80
+    },
+    "current_code_adjusted": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/personal-lowfreq-system-audit-20261018/personal-lowfreq-system-audit-20261018-20261020T004432-f8387b6b4781/result/001914-adjusted-repeat.json",
+      "sha256": "6d6bbe937f03ff080b8ee875f1188246a39f7fb70a7e2cbc7f1084253a86d8e4",
+      "n": 3166,
+      "first": "2013-01-04",
+      "last": "2026-01-15",
+      "codes": {
+        "sz.001914": 3166
+      },
+      "adjustflags": {
+        "3": 1560,
+        "2": 1606
+      },
+      "nontrading_rows": 80
+    }
+  },
+  "common_nominal_dates": 1690,
+  "nominal_mismatches_by_field": {
+    "open": 0,
+    "high": 0,
+    "low": 0,
+    "close": 0,
+    "preclose": 0,
+    "volume": 80,
+    "amount": 671,
+    "tradestatus": 0,
+    "pctChg": 715,
+    "isST": 0
+  },
+  "new_nominal_dates_not_in_saved_current_code": 0,
+  "good_adjusted_overlap": {
+    "n": 130,
+    "first": "2019-06-06",
+    "last": "2019-12-13",
+    "ratio_min": "0.91352",
+    "ratio_max": "0.91352",
+    "constant_ratio": "0.91352",
+    "ohlc_preclose_max_abs_residual": {
+      "open": "0E-15",
+      "high": "0E-15",
+      "low": "0E-15",
+      "close": "0E-15",
+      "preclose": "0E-15"
+    }
+  },
+  "bad_current_code_overlap": {
+    "n": 1560,
+    "first": "2013-01-04",
+    "last": "2019-06-05"
+  },
+  "factor_events": [
+    {
+      "date": "2013-06-17",
+      "prior_date": "2013-06-14",
+      "factor_from_prices_before": "0.889508",
+      "factor_from_prices_after": "0.905710",
+      "source_fore_factor": "0.905710",
+      "dividend_matches": 1,
+      "cash_per_share": "0.1",
+      "stock_dividend": "0.000000",
+      "reserve_to_stock": "",
+      "expected_factor_jump": "1.018214936247723132969034608",
+      "observed_factor_jump": "1.018214563556482909653426389",
+      "relative_jump_error": "-3.660241339581400159432E-7"
+    },
+    {
+      "date": "2014-05-16",
+      "prior_date": "2014-05-15",
+      "factor_from_prices_before": "0.905710",
+      "factor_from_prices_after": "0.941368",
+      "source_fore_factor": "0.941368",
+      "dividend_matches": 1,
+      "cash_per_share": "0.2",
+      "stock_dividend": "0.000000",
+      "reserve_to_stock": "",
+      "expected_factor_jump": "1.039370078740157480314960630",
+      "observed_factor_jump": "1.039370217840147508584425478",
+      "relative_jump_error": "1.33831051012047136634E-7"
+    },
+    {
+      "date": "2015-06-12",
+      "prior_date": "2015-06-11",
+      "factor_from_prices_before": "0.941368",
+      "factor_from_prices_after": "0.946787",
+      "source_fore_factor": "0.946787",
+      "dividend_matches": 1,
+      "cash_per_share": "0.1",
+      "stock_dividend": "0.000000",
+      "reserve_to_stock": "",
+      "expected_factor_jump": "1.005757052389176741508347726",
+      "observed_factor_jump": "1.005756516048984031749538969",
+      "relative_jump_error": "-5.332701286415861767664E-7"
+    },
+    {
+      "date": "2016-05-18",
+      "prior_date": "2016-05-17",
+      "factor_from_prices_before": "0.946787",
+      "factor_from_prices_after": "0.953116",
+      "source_fore_factor": "0.953116",
+      "dividend_matches": 1,
+      "cash_per_share": "0.05",
+      "stock_dividend": "0.000000",
+      "reserve_to_stock": "",
+      "expected_factor_jump": "1.006684491978609625668449198",
+      "observed_factor_jump": "1.006684713668438624526952736",
+      "relative_jump_error": "2.20217784981601806967E-7"
+    },
+    {
+      "date": "2017-06-22",
+      "prior_date": "2017-06-21",
+      "factor_from_prices_before": "0.953116",
+      "factor_from_prices_after": "0.960008",
+      "source_fore_factor": "0.960008",
+      "dividend_matches": 1,
+      "cash_per_share": "0.07",
+      "stock_dividend": "0.000000",
+      "reserve_to_stock": "",
+      "expected_factor_jump": "1.007231404958677685950413223",
+      "observed_factor_jump": "1.007231019099459037514846042",
+      "relative_jump_error": "-3.830889473350621836218E-7"
+    },
+    {
+      "date": "2018-06-06",
+      "prior_date": "2018-06-05",
+      "factor_from_prices_before": "0.960008",
+      "factor_from_prices_after": "0.972222",
+      "source_fore_factor": "0.972222",
+      "dividend_matches": 1,
+      "cash_per_share": "0.1",
+      "stock_dividend": "0.000000",
+      "reserve_to_stock": "",
+      "expected_factor_jump": "1.012722646310432569974554707",
+      "observed_factor_jump": "1.012722810643244639628003100",
+      "relative_jump_error": "1.62268329505964334720E-7"
+    },
+    {
+      "date": "2019-06-06",
+      "prior_date": "2019-06-05",
+      "factor_from_prices_before": "0.972222",
+      "factor_from_prices_after": "1.000000",
+      "source_fore_factor": "1.000000",
+      "dividend_matches": 1,
+      "cash_per_share": "0.3",
+      "stock_dividend": "0.000000",
+      "reserve_to_stock": "",
+      "expected_factor_jump": "1.028571428571428571428571429",
+      "observed_factor_jump": "1.028571663673523125376714372",
+      "relative_jump_error": "2.28571480816338472306E-7"
+    }
+  ],
+  "max_abs_price_ratio_vs_returned_fore_factor": "0.000000",
+  "pre_first_factor_period": {
+    "n": 103,
+    "first": "2013-01-04",
+    "last": "2013-06-14",
+    "observed_ratio_unique": [
+      "0.889508"
+    ]
+  },
+  "action_date_sets_match_dividend": true,
+  "current_code_overlap_factors": [
+    {
+      "code": "sz.001914",
+      "dividOperateDate": "2019-06-06",
+      "foreAdjustFactor": "0.913520",
+      "backAdjustFactor": "6.411102",
+      "adjustFactor": "6.411102"
+    }
+  ],
+  "limits": [
+    "One vendor internal consistency only; not exchange-level independent proof or a cash account model.",
+    "No old source/panel/outcome replaced; old code retired2019-12-16 and source flag break2019-06-06 are different dates.",
+    "Returned dividend year convention may be implementation year despite yearType=report; actual date governs, not request year.",
+    "Any derived normalized series remains a new source version requiring separate input requalification and pre-registered correction before outcomes.",
+    "No600-stock value price/share panel supplied by this one issuer."
+  ]
+}

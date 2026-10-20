@@ -1,0 +1,74 @@
+{
+  "schema": "old-code-source-execution/1",
+  "at": "2026-10-20T13:32:25.788439+08:00",
+  "execution_authorized": true,
+  "executor": "gpt-6-luna low",
+  "bindings": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/old-code-source-repair-2026-10-20/probe_old_code.py",
+      "sha256": "dc4dd963d1e85a2722f861ce6e3c83ca8b88f9bf4960dd3581b742750327d2a1"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/old-code-source-repair-2026-10-20/source-plan.json",
+      "sha256": "e62acfb472195506f59827ac71ef5edc72d0de899265efcfb52103dec6bcc15a"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/old-code-source-repair-2026-10-20/storage-plan.json",
+      "sha256": "69bed0dab37cbe774458b46b89c8f8c194ec2df1d9316b308ed8e36ebc83553e"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/old-code-source-repair-2026-10-20/protected-inputs.json",
+      "sha256": "869d75a851322219d758883126b9fe44e82068628bf158560a0bd4018dcb133e"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/old-code-source-repair-2026-10-20/authorization-review.json",
+      "sha256": "9a1ba955fe1b1d251b1846b8483fde0f1afdf75f856a360fcb3c97a75fbfcd8a"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/old-code-source-repair-2026-10-20/review-plan.json",
+      "sha256": "d6a6e53fb1e1f4b52bd979082e64a10e560678459bb58045c38822f82e854375"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/next-source-request-plan.json",
+      "sha256": "7a5d036c0ca51b1e9ad726cb96ec0ffbc42b79bbabeb7993901937e6578f8388"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/security-identity-source.json",
+      "sha256": "69c0398d9a92ed54f398fe3939a3041c2921cc296981bb900dc47586f8acf58b"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/probe-receipt.json",
+      "sha256": "02f20cddd9cde80c9c4a367ade3963674f525f44af0292e6a4952f88bd1791dd"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/financial-input-recovery-2026-10-20.md",
+      "sha256": "bd10e73f3c46f025755b7a68ab6a37bcca18c61c3168addcac8f543130d26777"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/value-source-coverage-2026-10-20.md",
+      "sha256": "e98eb9ccd62120a87629e1ba01228510bbef4af83370fac86ae34869b3a163a9"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/old-code-source-repair-2026-10-20/probe_old_code.py"
+  ],
+  "scope": "source-only exact10max no retries; no effect rerun",
+  "root_review": {
+    "preexecution_issues_fixed": [
+      "CheckedLog had no fileno method although flush already fsyncs; removed invalid duplicate call.",
+      "Timeout now includes row iteration and records final SDK status.",
+      "Fatal after requests recovers consumed count from append-only start journal rather than reporting zero."
+    ],
+    "checks": "AST, no-network helper checks and all source hashes passed; real source outcome remains unknown",
+    "original_luna_sha256": "9b133158bca9160b6cc4af7cf113869e9c60701bc6a8ab9b84efedd8ff088b69"
+  }
+}
