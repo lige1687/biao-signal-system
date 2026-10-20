@@ -1,0 +1,79 @@
+{
+  "at": "2026-10-20T10:47:34.929514+08:00",
+  "reused_receipts": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/classic-four-factor-replication-2026-10-19/sources.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/cash-profitability-accruals-2026-10-20/annual-source-spotcheck.json"
+  ],
+  "official_reads": [
+    "https://www.openassetpricing.com/",
+    "https://www.openassetpricing.com/data/",
+    "https://www.openassetpricing.com/faq/",
+    "https://github.com/OpenSourceAP/CrossSection",
+    "https://www.ricequant.com/doc/rqdata/python/stock-mod.html",
+    "https://github.com/OpenSourceAP/CrossSection/releases/tag/v2.0.0",
+    "https://github.com/OpenSourceAP/CrossSection/commit/b4e911e69678a7424f318617a61d813f54183123"
+  ],
+  "failures": [
+    "first open OSAP/data timeout",
+    "first open RQ stock-mod timeout",
+    "tool discovery namespace unsupported; purpose-built plugin search via available runtime used",
+    "CNINFO inventory first code key sz.300048 mismatched source key 300048; corrected without changing input",
+    "Notice reuse probe passed list to existing dict API, then date object to ISO string API; both failed before selection; corrected and exact old-output comparison passed"
+  ],
+  "data_downloads": 0,
+  "new_performance_runs": 0,
+  "rqdata_actual_access": "user_confirmed_no_access; not a blocker for public original-source review",
+  "local_read_timestamp_semantics": "manifest retrieved_at is this local retrieval; original source request times remain in reused receipt; not historical public or vendor arrival time",
+  "reported_osap_release_code": "b4e911e69678a7424f318617a61d813f54183123",
+  "local_source_snapshot_code": "8db892442c2c3a3779b0f1eac4370d3655be15a1",
+  "generation_link": "official release association established; exact CSV regeneration not verified",
+  "public_source_reads": [
+    {
+      "url": "https://akshare.akfamily.xyz/data/stock/stock.html",
+      "kind": "maintainer_documentation",
+      "finding": "CNINFO report search by date/category with source links; latest structured financial tables do not establish a full version archive"
+    },
+    {
+      "url": "https://github.com/akfamily/akshare/blob/main/akshare/stock_feature/stock_disclosure_cninfo.py",
+      "kind": "maintainer_source",
+      "finding": "CNINFO announcement pagination and links; no actual data request this turn"
+    },
+    {
+      "url": "https://www.sse.com.cn/disclosure/listedinfo/listedcompanies/",
+      "kind": "exchange",
+      "finding": "XBRL display; PDF authoritative; no new table fetch"
+    },
+    {
+      "url": "https://www.sec.gov/search-filings/edgar-application-programming-interfaces",
+      "kind": "regulator",
+      "page_updated": "2025-04-08",
+      "finding": "Public unauthenticated JSON; CompanyFacts multiple submissions; recent history and older file index; Frames selects latest filed"
+    },
+    {
+      "url": "https://www.sec.gov/search-filings/edgar-search-assistance/accessing-edgar-data",
+      "kind": "regulator",
+      "finding": "public filing indexes; current archive corrections are possible"
+    },
+    {
+      "url": "https://tushare.pro/document/2?doc_id=33",
+      "kind": "provider",
+      "finding": "income announcement/report types; points required; no account query"
+    },
+    {
+      "url": "https://tushare.pro/document/2?doc_id=36",
+      "kind": "provider",
+      "finding": "balance data fields and access requirements"
+    },
+    {
+      "url": "https://tushare.pro/document/2?doc_id=44",
+      "kind": "provider",
+      "finding": "cash flow fields and access requirements"
+    },
+    {
+      "url": "https://pypi.org/project/baostock/",
+      "kind": "publisher_package",
+      "finding": "free source; no verified full revision archive; helper read small source package in memory only"
+    }
+  ],
+  "public_review_at": "2026-10-20T11:12:20.738274+08:00"
+}

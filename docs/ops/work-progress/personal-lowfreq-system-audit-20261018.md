@@ -362,3 +362,15 @@ Luna low只读核当前定义178对象与本任务旧结果，Astra high挑战�
 报告docs/experiments/research-stack-gap-audit-2026-10-20.md；raw同名包含前后真实CLI、verification、来源、主控裁决、委派合同和失败。22公开读取/定位操作、10独立文档；0新行情/市场/安装/付费/交易/通知，旧家族预算不重置，Luna低思考只盘点与小实现，模型费用未知。目标仅note24→25/in_progress，保护字段精确读回；用户确认与有效策略目标未完成。成果分支codex/personal-lowfreq-system-audit-20261018，准确推送与协调见本轮发布回执；当前接续先查最新owner，优先既有历史数据与成交缺口，RQData需真实数据访问/许可，不能将公开文档当取数成功。主树运行可用不代表跨设备全部13历史依赖已恢复。
 
 主体成果c921c6fac887e2d70fcf36eeecfd75cdf65cc2b2已推并逐字核回28文件，主树CLI保持与成果树一致。首次暂存检查发现新测试末尾空行，修正仅格式后通过；此前无新commit，后随命令只推旧HEAD并回报up-to-date，失败回执已保留。两树现行归置均通过。open_in_codex仅返回queued，不宣称界面已展示。交付前checked_coordination_sha=5be1d1e032394063dcfb792c16619e42bc0e4ece，无新增其他task变更。
+
+
+## 2026-10-20T11:16:59.942589+08:00 OSAP、公开历史来源与财报修订交付
+
+- 用户要求可靠历史、修订和OSAP接入，后确认暂无RQData，转向公开/开源来源。此有界接入与来源核对完成；整体可靠全市场历史目标仍in_progress。策略文档SHA沿本轮核同，不改技术规则、旧冻结、生产或交易。
+- checked_coordination_sha=26cb61310c001509583c731b2361ee437e609990；checked_at=2026-10-20T11:16:59.942589+08:00；已读COORDINATION、自身、research-utility-review-20261012、research-dispatch-controller、lowfreq-strategy-discovery-20261019，以及新变更gemini-strategy-review-20261020；此前theory/external范围无变化。因子实现继续行情与高点执行/历史300，本轮财报和OSAP无冲突。
+- 两只读模块osap_reference/financial_revisions及各测试、usage、日期报告/raw已落主工作区同名路径。331目录/212收益列（US、2025发布版、截至2024-12；具体序列各自期间），12列14,256单元独核；无新效果/原件下载。合康两年报同2023期间的成本/费用重分类使毛利率相差1.2507个百分点，原公告前后与供应商未知状态六类实测。
+- 原600股132月整理复用，共同可用中位数250股，9,369公告×指标待核=4,766份公告，9,337行已取得原件。按11页全文及PDF独立重提取核合康1206159525仅投票表格更正；新注释通过原接口。受影响22指标月份补证前与旧输出逐字段一致，补证后11公司月份两项输入资格通过；未改旧全量表/收益。SEC已存Apple146资产记录70期末，3期末后报金额不同，原文原因未判。
+- Main31相关测试、双树归置、diff、实际OSAP/财报CLI和5188报告全文/分类/链接通过。全局preparation仍被其他owner green_momentum_methods来源格式阻断，已登记，不绕过；独立入口可用。期间区间重叠bug修复及公告适配2次类型失败、链接修正均留痕，不删除失败。
+- 原报告链已有as-known版本处理，新工具是指定期间与日期精度的补充；不是首次历史面板或完整财务资格。完整历史股份/退市/候选池/成交仍未齐。无RQData账户不阻断已有公开原件核对；后续按原财务任务合同/预算处理剩余队列，不重下载或重跑封存收益。
+- 目标okr-8830a1f1ec4f仅note25→26，原status/字段/历史保护读回。Luna low盘点、Sol medium实现和公开来源、Astra high独立审查、root实物/接口/结论，费用未知；无后台、通知、付费、生产。新大输出约1.36MB在已登记外盘固定UUID；小报告/代码/来源收据本地。
+- 报告docs/experiments/osap-history-revisions-2026-10-20.md；验收raw/delivery-validation.json、notice-effect-verification.json、public-saved-audit.json；主体提交由git log本文件定位，精确远端交付以协调记录为准。

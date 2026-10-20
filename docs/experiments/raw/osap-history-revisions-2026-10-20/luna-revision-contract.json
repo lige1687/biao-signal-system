@@ -1,0 +1,36 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "需要写其他路径",
+    "输入或方法歧义不能合理消除",
+    "依赖不可用"
+  ],
+  "expected_outputs": [
+    "真实结果与代码路径",
+    "针对边界验证及未核事项"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "mission": "只读定位真实财报历史修订证据和既有数据版本工具，给父级准确文件/页码/值/时间。",
+  "task_scope": [
+    "优先读cash-profitability-accruals的annual-source-spotcheck及指向原件；找同一财务期间同一指标在原报与后报比较列的真实差异",
+    "查既有data_snapshot、record_inputs、lowfreq输入guard中版本功能，明确已实现范围及不适合复用处",
+    "只返回最多2个清楚案例及原路径，不下载不算收益不写文件；如没有真实差异如实说明"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/cash-profitability-accruals-2026-10-20",
+    "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19",
+    "src/lei_signal/research",
+    "src/lei_signal/data_provenance.py"
+  ],
+  "write_paths": []
+}

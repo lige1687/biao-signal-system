@@ -1,0 +1,36 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "需要写其他路径",
+    "输入或方法歧义不能合理消除",
+    "依赖不可用"
+  ],
+  "expected_outputs": [
+    "真实结果与代码路径",
+    "针对边界验证及未核事项"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "high"
+  },
+  "mission": "独立复核 OSAP 和财报版本选择的关键时点与单位风险，只读，不重做市场研究。",
+  "task_scope": [
+    "审阅两个新模块及真实manifest/bundle，重点找金融口径/未来版本/同日日期/字段缺失/哈希和Sign处理缺陷",
+    "区分输入资格和效果研究，返回阻断性问题及最小修复；不重复全量测试不改文件"
+  ],
+  "read_only_paths": [
+    "src/lei_signal/research/osap_reference.py",
+    "src/lei_signal/research/financial_revisions.py",
+    "tests/unit/test_osap_reference.py",
+    "tests/unit/test_financial_revisions.py",
+    "docs/experiments/raw/osap-history-revisions-2026-10-20"
+  ],
+  "write_paths": []
+}

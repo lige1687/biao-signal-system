@@ -1,0 +1,39 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "需要写其他路径",
+    "输入或方法歧义不能合理消除",
+    "依赖不可用"
+  ],
+  "expected_outputs": [
+    "真实结果与代码路径",
+    "针对边界验证及未核事项"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "mission": "实现只读 OSAP 公开参考资料入口与版本差异比较，不做收益研究。",
+  "task_scope": [
+    "读取绑定SHA的OSAP SignalDoc与宽表LSreturns CSV；目录检索返回完整原字段及版本，series准确列名返回日期/原百分数/小数，不乘Sign、不做填充、不算业绩",
+    "manifest要求schema osap-reference/1，vintage、market US、retrieved_at带时区、published_at可null，catalog/returns各path/sha256，return_unit percent，return_direction published_long_short；拒绝哈希失配、重复列/日期/月份、无效日期、非数值inf、未知信号或未声明单位/方向，NA保留缺失且报告范围",
+    "diff两个manifest比较catalog字段及收益历史值、新增日期、新增或消失信号、缺失变化；比较不得修改源，不把修订差异解释为历史可知；期间日期不得冒充发布时间",
+    "CLI用--manifest及子命令catalog --signal/--term，series --signal(可重复)，diff --other-manifest；stdout JSON，小型数据返回可含rows，摘要显示缺失与日期范围；仅stdlib优先，避免新增依赖",
+    "测试用synthetic source fixture和tmpdir；API无网络/自动下载/写缓存/收益统计；报告未核的股票级时间及代码版本关联"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/osap-history-revisions-2026-10-20",
+    "src/lei_signal/research/preparation.py"
+  ],
+  "write_paths": [
+    "src/lei_signal/research/osap_reference.py",
+    "tests/unit/test_osap_reference.py"
+  ]
+}

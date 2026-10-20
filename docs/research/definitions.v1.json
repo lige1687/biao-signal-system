@@ -5070,5 +5070,59 @@
       "change": "新增纯50有效报价状态及完整ETF二元账户两个研究定义；旧对象版本、公式、来源保持。"
     }
   ],
-  "standard_version": "1.0.0"
+  "standard_version": "1.0.0",
+  "research_references": [
+    {
+      "id": "reference.osap.catalog",
+      "version": "1.1.0",
+      "name": "Open Source Asset Pricing",
+      "aliases": [
+        "OSAP",
+        "OpenSourceAP"
+      ],
+      "kind": "method",
+      "source": {
+        "institution": "Open Source Asset Pricing",
+        "url": "https://www.openassetpricing.com/data/",
+        "read_scope": "October2025 data page, release notes, saved catalog and 12 selected return columns checked 2026-10-20",
+        "reported_code_release": "v2.0.0",
+        "reported_code_commit": "b4e911e69678a7424f318617a61d813f54183123",
+        "code_data_generation_independently_reproduced": false
+      },
+      "construction": "public US aggregate portfolio reference; 331 catalog rows including212Predictor114Placebo5Drop,212published return columns; not raw stock observations",
+      "external_id": "reference.osap.catalog",
+      "implementation": "src/lei_signal/research/osap_reference.py; usage docs/research/osap-history-usage.md",
+      "market": "US",
+      "asset_type": "equity",
+      "universe": "source-defined; not interchangeable with ETF pool",
+      "frequency": "monthly",
+      "calendar": "source monthly portfolio observation dates",
+      "currency": "source US portfolio denomination; no currency conversion",
+      "unit": "published percent returns, decimal conversion divide by100 exactly once",
+      "inputs": "SHA-bound SignalDoc.csv and published wide LSreturns.csv; October2025 release reused",
+      "historical_availability": "unknown",
+      "missing_policy": "NA preserved; no filling; duplicates and nonfinite values rejected",
+      "preprocessing": "read-only parsing; Sign is NOT applied again to published long-short returns",
+      "questions": [
+        "retrieve original financial definitions and reference coverage; inspect version changes without assuming local factor validity"
+      ],
+      "uses": [
+        "description"
+      ],
+      "not_for": [
+        "production_trade",
+        "prediction",
+        "宣称完成A股或ETF因子验证"
+      ],
+      "variant": "canonical",
+      "local_changes": [
+        "offline SHA-bound reader and vintage comparison, no change to source return definitions"
+      ],
+      "license_status": "source publicly accessible; redistribution not established",
+      "engineering_status": "local_reference_reader_verified",
+      "evidence_status": "real_saved_reference_input_checked_no_new_performance_test",
+      "usage_path": "docs/research/osap-history-usage.md",
+      "evidence_path": "docs/experiments/osap-history-revisions-2026-10-20.md"
+    }
+  ]
 }

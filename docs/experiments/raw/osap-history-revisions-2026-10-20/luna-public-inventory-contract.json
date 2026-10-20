@@ -1,0 +1,36 @@
+{
+  "workspace_root": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "controller_review": {
+    "required": true
+  },
+  "stop_conditions": [
+    "需要写其他路径",
+    "输入或方法歧义不能合理消除",
+    "依赖不可用"
+  ],
+  "expected_outputs": [
+    "真实结果与代码路径",
+    "针对边界验证及未核事项"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "mission": "只读盘点已存公开历史财报来源覆盖，避免重复采集。",
+  "task_scope": [
+    "沿现有lowfreq-profitability-bulk和increment来源清单，汇总已存原件数量、公司数量、报告年度与发布日期覆盖",
+    "检查已存SEC Apple companyfacts/submissions原件位置与hash，不重新下载",
+    "不做收益计算，不新建研究、不写文件，不把本次取得时间当历史发布时间"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/lowfreq-profitability-increment-2026-10-19",
+    "docs/experiments/raw/lowfreq-profitability-bulk-2026-10-19",
+    "docs/experiments/raw/lowfreq-research",
+    "docs/experiments/raw/cash-profitability-accruals-2026-10-20"
+  ],
+  "write_paths": []
+}

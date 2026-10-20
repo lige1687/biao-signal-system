@@ -1,0 +1,34 @@
+{
+  "status": "not_executed_access_not_verified",
+  "provider": "RQData",
+  "document": "https://www.ricequant.com/doc/rqdata/python/stock-mod.html",
+  "function": "get_pit_financials_ex",
+  "common_arguments": {
+    "order_book_ids": [
+      "300048.XSHE"
+    ],
+    "fields": [
+      "operating_revenue",
+      "cost_of_goods_sold",
+      "selling_expense",
+      "profit_from_operation"
+    ],
+    "start_quarter": "2023q4",
+    "end_quarter": "2023q4",
+    "statements": "all",
+    "market": "cn"
+  },
+  "date_cases": [
+    "20240628",
+    "20250327"
+  ],
+  "oracle": "hekang-financial-versions.json; official report pair, compare records not presumed supplier behavior",
+  "requirements": [
+    "retain all report versions/info_date/if_adjusted without filling",
+    "verify units and consolidated statement scope",
+    "do not equate info_date to vendor arrival or local retrieval",
+    "historical membership/shares/delisting still separate"
+  ],
+  "credentials": "never store in research artifact",
+  "production_authorized": false
+}

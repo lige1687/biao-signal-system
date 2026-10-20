@@ -1,0 +1,25 @@
+{
+  "command": "preparation --reference-ref reference.osap.catalog@1.1.0 in isolated worktree",
+  "error": "ValueError: current standards missing or outside root",
+  "resolved_by": null,
+  "historical_output": "preparation-readback.json empty stdout kept",
+  "followup_failures": [
+    {
+      "where": "isolated code with --root main",
+      "error": "source requires path and sha256"
+    },
+    {
+      "where": "main existing entry",
+      "error": "source requires path and sha256",
+      "source_id": "green_momentum_methods_20261020",
+      "actual_keys": [
+        "kind",
+        "paths",
+        "originals",
+        "limits"
+      ],
+      "owner": "research-utility-review-20261012"
+    }
+  ],
+  "status": "global preparation unresolved; independent new readers work; new reference entry registered only"
+}
