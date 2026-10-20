@@ -1,3 +1,12 @@
+# 年度价值共同输入的可用性核验 2026-10-20T14:17:06.994433+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false；checked_coordination_sha=fe9173b078035bafde6953949f6e71f2a020bc2d；checked_at=2026-10-20T14:17:06.994433+08:00。已读COORDINATION/self及research-utility-review-20261012、gemini-strategy-review-20261020、lowfreq-strategy-discovery-20261019、research-dispatch-controller最新段；无重叠，沿170f705f7122ef055910ee931dfe5b9fdd858b38成果接续。原LEI/新300股/ETF及资产扩张仍归原owner。
+- 本轮只回答年度价值是否有可信的共同输入、下一批来源加工是否值得。沿已裁定年度末普通股账面权益/同年度末普通股市值，复用5503原件/3915归母权益候选，不重跑原提取，不更改已看P1/P2/防御效果。旧资料探针4/4、方法5/6、价值core0/1跟进0/3保持；本轮第一步0新增下载0收益计算。缺股数、权益权利、原价、版本各自列出，不用会计金额/空值补零/后年比较数凑齐。
+- 本轮新增独占路径docs/experiments/raw/value-joint-feasibility-2026-10-20/及同名报告；root拥有方案/判断/验收/归档、本registry键/INDEX行/原进度/原目标next_action；Luna只读jointcoverage，Sol只读已有年报股份表格式，Astra只读必要性裁定，当前不派发可冲突实现。进一步实现或源请求先在同任务更新准确范围。原文、旧脚本、冻结输入/输出不改，不改生产/交易/权限/通知，不删除。
+- 验收：精确结合原600与财年2013—2024的实际原件和已有原价；记录按公司年及版本的共同支持与具体断点。必须提出并完成能改变判断的最小来源检验；有可信输入才定义收益比较，不把单一发行人或仅运行成功当大样本价值证据。必要后续沿既有授权和累计预算另实记，不设无限循环。主树镜像仅验收后本路径；大输出固定外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，先绑定计划再执行。
+
+---
+
 # 派生价格接入与三项固定结论纠正交付 2026-10-20T14:11:11.809801+08:00
 
 - task-id/owner沿原；本轮来源纠正completed，完整目标active/in_progress，scope_released false保留年度价值/资料资格工作。checked_coordination_sha=ef0606e1791a848799b007b83a428b789abfeab7；checked_at=2026-10-20T14:11:11.809801+08:00；已读COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller，无重叠，不接管因子实现、资产扩张和ETF。
