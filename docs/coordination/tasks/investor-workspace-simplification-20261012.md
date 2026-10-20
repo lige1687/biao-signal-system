@@ -1,3 +1,11 @@
+# 绿色候选短期反转两张研究图接入 2026-10-20T16:09:03.614326+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=16c443980f86f8533e75865ef73c854f2e858cbd；checked_at=2026-10-20T16:09:03.614326+08:00；已读COORDINATION/self/research-utility-review最新15:54/personal-lowfreq-system-audit最新16:07/dispatch。沿原用户研究/系统分工，原因子请求两图同前次FIP接入；该owner负责主树源与报告，本方只负责当前5188运行树静态附件，无路径冲突。
+- 唯一写当前codex/investor-workspace-simplification-20261012成果树web/public/research/short-reversal-green-selection-20261020/{increment.svg,performance.svg}及自身docs/archive/handoffs-plans/investor-workspace-simplification-20261012/short-reversal-static-assets-20261020-receipt.json、原work-progress（小证据可镜像主树）。两图准确采用复制时最新原件；原owner告知一条风险注释会修，不改图示数据。保持原报告/组件/API/其他图/策略/运行进程，不重启不研究不部署。沿原e6c4c2e025252c565ba15f05611561ca1ecd5b48＋本机增量，不混暂存。
+- 当前两目标文件缺失，两个URL HTTP200/text/html/578B回落；源XML已解析，两策略源与确认SHA相同。服务研究证据展示层。验收：原源/运行树/HTTP三方SHA一致且image/svg+xml；实际浏览器解析/图像加载；仅约23KB文件、小回执与既有进度，主仓归置，不将接入算研究效果验收。原owner可用wait_threads读取最终状态，无跨聊天回传或新任务。
+
+---
+
 # FIP增量图可读性版本已同步验收 2026-10-20T00:57:26.066142+08:00
 
 - task-id investor-workspace-simplification-20261012；owner同下；status completed；scope_released true；checked_coordination_sha=91208ab8ebdc7f68bc0d5df56f454b6ae67443de；checked_at=2026-10-20T00:57:26.066142+08:00；交付前fetch无新增，COORDINATION/self/research-utility/personal/dispatch已读且范围不变。
