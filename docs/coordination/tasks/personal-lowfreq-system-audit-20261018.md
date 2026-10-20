@@ -1,3 +1,13 @@
+# 按用途评价核心约定与美股证据补齐 2026-10-20T15:42:38.020795+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false；checked_coordination_sha=8d5c442234eeae9240dc430fafad2dbb4656e1e6；checked_at=2026-10-20T15:42:38.020795+08:00。已读COORDINATION/self、research-utility-review-20261012最新15:38绿色池短反转、gemini-strategy-review-20261020已完成ETF斜率、lowfreq-strategy-discovery-20261019及research-dispatch-controller；不接管/重跑上述任务。成果基线codex/personal-lowfreq-system-audit-20261018@30aedf142b0dc3c0885c8ed02767d00ba6fbef1f。
+- 用户本轮要求补美股覆盖、明确时间样本、每个因子依用途与合适指标取舍，并明确把此写入研究核心/项目md/skill。root唯一增量修改主树docs/research/factor-discovery-playbook.md、.agents/skills/lei-lowfreq-research/SKILL.md、AGENTS.md相关段；保留原有内容及他人修改，保存准确增量patch/前后指纹，不改旧规范版本/冻结合同或生产。playbook原审计已释放，新短反转任务不声明这3路径。
+- 新增独占本成果树docs/experiments/us-factor-purpose-evaluation-2026-10-20.md及同名raw；registry仅本键、INDEX本行、原progress及原目标note。核验后主树仅本报告/raw镜像与准确规范增量；不覆盖他人状态。先只读盘点美股原件/时间分段/Gemini已存意见，再冻结一个可用旧资料回答的美股补充问题，严分外部公开多空组合与本地个股/ETF验证。
+- 复用A股P1/P2/防御全部封存输出、US当前成员颜色案例及OSAP既有下载，不重跑收益或新取价格。新问题核心最多1批、至多1必要纠错，方法定位最多3公开来源请求、0新行情/财报下载；旧预算保持，过去10次旧代码请求不重置。旧历史已见不得称新验证，明确全部用途/主辅指标/同池对照/反例与未评价价值。
+- 先并行Luna只读美股资料范围、Sol只读A股时间划分；root金融用途/核心文字/Gemini裁决；必要独立方法审阅后才能运行新统计。验收：关键数字独核、范围/分期与各自用途可定位、规则实际读回、报告/API一致、归置检查。外盘固定UUID已核可用504GB，预计小记录2MiB/新结果64MiB，若实际大输出先冻结存储计划；不删除、不付费、不改真实交易或通知。
+
+---
+
 # 年度价值资格与当前候选取舍结案 2026-10-20T14:35:41.092334+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（本轮有界来源与候选判断）；scope_released true（本轮新增路径）；checked_coordination_sha=95430d6ee2c4f70d271f9e66f513bc37cd970423；checked_at=2026-10-20T14:35:41.092334+08:00。已读COORDINATION/self、research-utility-review-20261012、gemini-strategy-review-20261020、lowfreq-strategy-discovery-20261019、research-dispatch-controller；自本轮范围登记无其他更新，无重叠。完整系统目标仍in_progress/4of6，不宣称全数据库/实盘/ETF目标完成。
