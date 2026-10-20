@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-20T14:10:10.250528+08:00",
+  "unit_tests": {
+    "command": "PYTHONPATH=src python3 -B -m pytest tests/unit/test_lowfreq_derived_prices.py -p no:cacheprovider -q",
+    "exit_code": 0,
+    "passed": 10,
+    "seconds": 0.16
+  },
+  "main_hygiene": {
+    "command": "python3 scripts/check_repo_hygiene.py",
+    "exit_code": 0
+  },
+  "actual_input_preflight": "conditional_derived_historical_only",
+  "actual_runs": {
+    "p1_defensive": "exit0;19files",
+    "P2": "exit0;13substantivefilesincludingmanifest"
+  },
+  "independent_checks": {
+    "P1_defensive": {
+      "status": "passed",
+      "rows": 79200,
+      "months": 132,
+      "independently_rebuilt_defensive_lists": 660,
+      "numeric_comparisons": 5985,
+      "maximum_absolute_error": 1.4432899320127035e-15,
+      "source": "new CSV; no old research helper imported",
+      "uncertainty": "not rerun; frozen statistical algorithm/code and sample support reviewed separately",
+      "market_experiments_added": 0
+    },
+    "P2": {
+      "status": "passed",
+      "monthly_records": 396,
+      "stock_records": 93376,
+      "monthly_exact_difference_count": 1622,
+      "monthly_exact_difference_fields": [
+        "target_replacement"
+      ],
+      "monthly_maximum_rounding_difference": 7.216449660063518e-16,
+      "all_original_and_corrected_turnover_independently_checked": true,
+      "all_3960_method_scenarios_independently_recomputed": true,
+      "maximum_absolute_error": 1.5612511283791264e-17,
+      "performance_and_paired_values_exactly_unchanged": true,
+      "old_risk_and_gradient_reuse_independently_supported": true,
+      "macos_metadata_entries_not_counted_as_results": 12,
+      "effect_runs_added": 0
+    }
+  },
+  "scientific_review": "Astraacceptedboundedcorrection;recommendnotadoptdefensivecombo",
+  "total_goal": "active;value-data-next"
+}

@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-20T13:57:11.876540+08:00",
+  "status": "real_launch_attempt_recorded",
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/derived-price-integration-2026-10-20/run_correction.py"
+  ],
+  "contract_sha256": "68fdee4c2d7b2fa053ad626a05ff17e4abef3fc898c42e1fca365abc3556d1f3",
+  "budget": {
+    "p1": {
+      "family": "lowfreq-expanded-discovery-2026-10-19",
+      "core_used": 1,
+      "followups_before": 2,
+      "followup_number": 3,
+      "followups_max": 3,
+      "new_price_source_requests": 0,
+      "actual_corrective_attempts_planned": 1,
+      "old_bulk_calls": 610,
+      "old_literature_calls": 6,
+      "old_probes": 6,
+      "old_source_conflict_calls": 3
+    },
+    "defensive": {
+      "family": "lowfreq-candidate-first-cycle-2026-10-19",
+      "core_used": 1,
+      "followups_used": 3,
+      "followups_max": 3,
+      "attempts_before": 9,
+      "attempt_number": 10,
+      "attempts_max": 10,
+      "purpose": "source correction within same third followup; no fourth question",
+      "actual_corrective_attempts_planned": 1,
+      "new_sources": 0
+    }
+  },
+  "note": "Attempt consumed before launch; any failure remains counted. No automatic second attempt."
+}
