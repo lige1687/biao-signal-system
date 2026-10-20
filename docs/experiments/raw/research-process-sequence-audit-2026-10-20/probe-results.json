@@ -1,0 +1,75 @@
+{
+  "as_of": "2026-10-20T19:08:43.544397+08:00",
+  "mode": "report_only",
+  "market_runs": 0,
+  "declaration_checks": {
+    "existing_1_1_without_dedicated_mechanism_fields": {
+      "accepted": true
+    },
+    "claim_mapping_fields": [
+      "original_statement",
+      "source_section",
+      "proxy_definition",
+      "preserved_conditions",
+      "omitted_conditions",
+      "decision_use",
+      "observation_time",
+      "intended_action_time",
+      "application_scope",
+      "tested_scope",
+      "unresolved_uses"
+    ],
+    "missing_research_design": {
+      "accepted": false,
+      "reason": "workflow.research_design: must be an object"
+    },
+    "design_uses_outcome_values": {
+      "accepted": false,
+      "reason": "workflow.research_design.sample_fit.outcome_values_used_for_design: must be false; future outcome values cannot shape design"
+    },
+    "account_policy_at_information_entry": {
+      "accepted": false,
+      "reason": "workflow.question.layer: account/policy research needs its own executable evaluator"
+    }
+  },
+  "current_registry": {
+    "accepted": false,
+    "reason": "source requires path and sha256",
+    "version": "1.6.15",
+    "object_count": 198,
+    "sha256": "dc7354173c363a06043785b363fac09fa818da23e4797c65ee8d90f0b6f03779",
+    "source_mismatches": [
+      {
+        "source_id": "french_longonly_bm_202608",
+        "keys": [
+          "path",
+          "sha256",
+          "url",
+          "vintage"
+        ],
+        "absolute_path": true
+      },
+      {
+        "source_id": "french_longonly_op_202608",
+        "keys": [
+          "path",
+          "sha256",
+          "url",
+          "vintage"
+        ],
+        "absolute_path": true
+      },
+      {
+        "source_id": "french_longonly_mom_202608",
+        "keys": [
+          "path",
+          "sha256",
+          "url",
+          "vintage"
+        ],
+        "absolute_path": true
+      }
+    ]
+  },
+  "boundary": "Declaration checks only; no real preflight, freeze, evaluator, ledger write or strategy adoption."
+}
