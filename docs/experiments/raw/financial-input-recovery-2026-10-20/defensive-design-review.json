@@ -1,0 +1,149 @@
+{
+  "schema": "defensive-design-scientific-review/1",
+  "created_utc": "2026-10-20T04:10:30.829998+00:00",
+  "reviewer": "astra_increment_boundary",
+  "status": "conditional_approval_after_finite_definition_amendments_before_effects",
+  "plain_answer": "值得用最后一次跟进比较：在相对动量靠前的股票中再偏向低波动，究竟比原动量、少投入25%的原动量和直接选低波动，少亏多少、漏涨多少。现有价格资料支持一次有限历史检验，不支持真实成交、账户或ETF结论。运行前只需明确本记录中的计算口径及完整对比，不应换参数或扩大实验。",
+  "scope": {
+    "new_outcomes_read": false,
+    "existing_per_stock_future_return_values_read": false,
+    "source_data_queries": 0,
+    "backtests_or_statistics_run": 0,
+    "existing_technical_helper_read": true,
+    "write_only": "defensive-design-review.json",
+    "source_panel_hash": "复用local-feasibility的已核SHA声明；本审阅未重新读取包含未来结果的整张面板。执行预检仍须核实际SHA。"
+  },
+  "evidence": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/astra-defensive-contract.json",
+      "sha256": "104af1a141ff923934fb83f3aebb7246414f5569f11e99189a5d9411e115a88f"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-design.json",
+      "sha256": "f93a84b1223968b0b0c6a28b8df3a2cc9549858ed9dc129dec64fa06fd53c76b"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/local-feasibility.json",
+      "sha256": "3180c8d927d81ac116d63b55d517362d1d71e5e084b811a1ed7a707133a2535d"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+      "sha256": "dda4de0acd7335e73a481a66913f47359e974de25a0f220f545c31592fcad0df"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19/brief.json",
+      "sha256": "d70bffd070d6e9e63ef4f4bc2fc2beb9ff1492b070b38f6c20d5c8704d60e075"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-candidate-first-cycle-2026-10-19.md",
+      "sha256": "bd3ec527b2744b5a46e8d0c6015fc630785e58e111da1a33724d42dc7330db5c"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/rotation-reconstructed-four-way-2026-09-09.md",
+      "sha256": "8253d9a364c0a1ef3849101628da82e44a513ce38ce68eb6fe8ce443cefd2d51"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.agents/skills/lei-lowfreq-research/SKILL.md",
+      "sha256": "8ddef292fa1ad2040e031782dc62ccd02e82ed7019f3d83370abd8a56efcb3ea"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/current-standards.json",
+      "sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/factor-discovery-playbook.md",
+      "sha256": "20220055231e284c46df044406df7e659d1099ac05cf246c27bdadd148cde017"
+    }
+  ],
+  "financial_case": {
+    "mechanism": "近期个股波动可能持续；在相对动量前40%左右的范围选较低波动，可降低对剧烈涨跌股票的暴露。在月度持有尺度是否降低组合亏损、是否保留上涨，需要实际同资金比较。该机制不要求先证实更高平均收益。",
+    "why_this_is_more_than_a_name": "直接比较选择行为及损失/上涨代价，且用固定75%仓位的原动量来检验少承担风险这一简单竞争解释；不同于再增加相近预测特征后只比较误差。",
+    "key_competitors_and_confounds": [
+      "从动量前20%改成前约40%再选，既改变波动也改变动量强度；不是保持完全相同动量后识别低波动因果效应。",
+      "相对靠前不等于过去绝对上涨，市场普跌时入选仍可全部负动量；不能写成只买上涨股票。",
+      "低个股波动不保证低组合波动，行业聚集及股票间共同涨跌可能抵消；本轮不补行业中性化、规模或beta网格，保留这些解释。",
+      "vol60包含共同市场日的已标价序列；过去停牌期间若保留不变报价，低波动可能部分反映价格未更新及流动性风险。月末实际交易资格不足以证明过去60日每日可交易；现有输入无完整60日停牌分解，端点停牌权重必须披露，但不能声称已排除这一解释。",
+      "波动延续只解释风险可能变化，不能自动推导更高收益；强反弹时高波动/此前弱势股票可能领先，低波动选择会漏掉涨幅。"
+    ]
+  },
+  "timing_review": {
+    "structural_future_leak_identified": false,
+    "helper_code_evidence": "_decision_and_execution_dates以被评价月份前一月末为decision、当月首市场日为entry、下一月首市场日为exit；_features的momentum取有效报价i−21/i−252，vol60取decision及之前61个共同市场日；_selections只按eligibility、历史分数、code。",
+    "required_runtime_checks": [
+      "每月所有600行月份/decision/entry/exit一致且decision<entry<exit；不以未来结果存在、entry/exit是否交易决定资格。",
+      "原eligibility即使逐股eligible，仍可能遇整月source_errors阻断原权重。必须先匹配saved weight_momentum_top20；若合格名单重建与保存全零或其他权重不一致，停止资格核对，不能删月/重新开通或按future_return补选。",
+      "改变或置空future_return、outcome_reason及所有未来端点交易/停牌字段，不得改变任何方法的权重。gainers只能在选择冻结后作评价。",
+      "全年/月序列固定保留，任何空选择或阻断月为missing，不能借cash=0填成方法0收益；按同一成对可评价日期比较并报告计划132→合格→有定义月份数。"
+    ],
+    "residual": "现有供应商前复权价格、历史到达时间及行动完整性沿旧局限。代码结构无使用未来字段，不等于已证明底层供应商数据完全逐时可得。"
+  },
+  "fair_comparison": {
+    "same_count_and_capital": "pool_equal背景；M与LV与M_LV每月同n、同等权全资金；M75与M同名单但0.75总股票权重和0.25零收益现金，所有方法用同一资金分母。不得将M75回报再除以0.75后比较。",
+    "tie_rule": "固定历史分数后code排序可以作为这个政策的确定性实现，披露其任意性；本题不把code切口当财务连续梯度证据，不要求重做同分分摊。",
+    "simple_lowvol": "纯低波动是检验动量预筛是否带来价值的必要简单对手。只有胜过M及M75仍可能只是直接低波动就能达到，必须完整给出M_LV相对LV的损失/上涨/总差。",
+    "not_new_grid": "固定2n、n、75%及60日均保持。不得看到结果后调动量范围、波动窗口、现金比例或时期。",
+    "cash_boundary": "固定75%仅一个可执行概念上的简单降投入对手，未做真实执行；胜过它不证明超过所有风险匹配仓位或有效配置边界。"
+  },
+  "required_amendments_before_effects": [
+    {
+      "id": "R1",
+      "issue": "主要分量的运算顺序尚不够机器明确。",
+      "change": "对每方法每月先按该方法目标权重聚合股票结果并加入固定现金0，得R_m；L_m=min(R_m,0)、U_m=max(R_m,0)。不能先对每只股票截取负/正回报再求和。所有月份的均值应满足mean(R)=mean(L)+mean(U)，每个配对差也同样满足。",
+      "why": "逐股截取会把同月互相抵消的股票损益当作整个方法亏损，回答的是另一问题；主指标是频率和程度合在一起的月度负分量，不是只看亏损月份的平均亏损。"
+    },
+    {
+      "id": "R2",
+      "issue": "_relative_unknown是线性总收益差函数，不能直接给非线性亏损分量或上涨分量范围。",
+      "change": "冻结helper只用于总月变化的未知股票系数范围。两未知情景各自先生成各方法完整R_m，再分别算L/U及成对区间；非线性分量仅给这两个情景，不额外声称是任意缺失取值下的最坏/最好界限。",
+      "why": "min/max在两方法的零点不同，线性系数端点不等于非线性分量差的最坏端点；保留全亏/零场景已足够本轮范围。"
+    },
+    {
+      "id": "R3",
+      "issue": "纯低波动列为对手，但不在当前paired uncertainty comparisons中。",
+      "change": "在同一次冻结运行里，给M_LV−LV与已有M_LV−M、M_LV−M75同样的月总/负/正分量、两场景、12/24月共享日期块区间。仍为一个固定对手和同一批，非新实验；若不补区间，只能描述LV点差并明确不能判断组合较纯低波动有可靠增量。",
+      "why": "避免通过较弱的纯动量或单一降投入对手就称“兼顾动量”必要。无需增加更多模型或仓位。"
+    },
+    {
+      "id": "R4",
+      "issue": "top10%名字可能把下跌市中跌得较少的股票称成上涨赢家，且名字覆盖不计投入。",
+      "change": "保持冻结排序算法，改称“已观测次月价格变化最靠前10%的股票覆盖率”，记录已观测数、ceil10%分母及其中实际正回报数。M与M75同名单覆盖率应相同，不能据此说75%现金没漏收益；少投入的机会代价由U及总变化报告。缺失股票排名未知，不当未上涨。",
+      "why": "无需改为只取正值或另加阈值；只是准确命名及必需分母。"
+    },
+    {
+      "id": "R5",
+      "issue": "空月、配对日期和共享抽样索引需冻结。",
+      "change": "全132日期轴保留；不能给无选择月补0，各方法指标/成对区间使用显式相同日期支持。12/24月循环块2000次使用同一索引矩阵跨方法、场景和R/L/U，保留重复日期次数与全missing draw状态。前72月2015–20和后60月2021–25及逐年报告提前固定，不能看结果换分期。",
+      "why": "保持损失/上涨/总变化恒等式与成对相关性，防止比较不同日期或把无资料当现金。"
+    },
+    {
+      "id": "R6",
+      "issue": "预算文本after_successful_dispatch不能被解释成失败真实尝试不计数。",
+      "change": "沿first-cycle brief累计core1、followup2、attempts8；本批实际启动即登记第3次目的跟进与第9次尝试，失败保留。至多第10次仅可用于同冻结问题的获准修复重试，不另开第4个目的或改规则。预检/合成与真实attempt分别记录，真实未运行不写已运行。",
+      "why": "预算不因新股票样本、新名称或失败复位；原brief execution=completed说明旧问题已结，不自动授权本批，当前用户持续推进授权和本轮合同负责授权。"
+    }
+  ],
+  "joint_decision_rule_without_invented_threshold": {
+    "principle": "主要损失差更高时必须同时给上涨分量、总变化和覆盖率代价，不将少亏自动判为采用；没有用户既定收益牺牲偏好或实际有用阈值，就不现场补阈值。",
+    "retention": "只在相对M、M75及LV的完整取舍和分期具有可解释帮助时，保留具体历史风险选择线索；存在明显少涨或总表现代价时明确按每月百分点给出，最多是取舍候选。",
+    "negative_or_uncertain": "不稳定、主要改善可由简单对手覆盖、或缺失敏感时暂缓这个固定用途；区间宽不说整类低波动无效。",
+    "secondary_role": "波动、最差月、最差10%均值、换名单率与端点停牌只解释主结果，不从中择一个好指标宣布成功。_turnover比较目标权重不计价格漂移，不是实际交易额/费用。固定现金比例时现金差为0，但首月排除且总权重需核。"
+  },
+  "overlap_with_prior_work": {
+    "four_ETF": "旧first-cycle四ETF诊断用保存模型预测选两只，2025至2026上半年317日，评价个别ETF未来起伏的平均，相对各ETF历史平均风险参照；306/317日选法相同。现在是600历史股票月度原始vol60与动量的固定政策、评价方法组合月亏损/上涨代价，问题和行为不同，可有限补缺，不能把它称旧ETF模型复验或证伪。",
+    "four_ETF_account_and_14_ETF": "2026-09-09四格重建报告先四只核账，14只（含黄金海外及重复方向）比较动量选前三/自身RV20历史高分位过滤及长期均线退出，含完整资金/费用；2020-12至2026-06，仅原范围成立。本轮跨股票低波动排名、无月中退出和成交链，不能复用其账户收益或拼成独立防御证据，也不重跑/改owner的规则。",
+    "old_nine_cell_momentum": "已有股票按波动/流动性分组的动量差额属于条件信息比较，当前是新固定选择行动的少亏/漏涨用途。旧历史已看、同源信息与重复尝试须标注；本批不声称超越这些强条件已有信息。",
+    "investment_priority": "宽基/ETF仍优先。此次只因保存股票面板使一个具体风险取舍问题可零取数低成本回答才支持一次；不给它扩到ETF或新账户的自动许可。"
+  },
+  "sample_judgment": {
+    "what_supports_one_run": "固定600历史股票、132月与保存资格/目标权重支持一次探索性月度政策比较；月度决策与约一个月持有清楚，不需要新增训练。",
+    "what_it_cannot_prove": "79200股票月不是79200独立经历；11年包含共同市场阶段，12/24月块仅约11/5.5个块长单位，2000次重抽不增加市场经历。不确定范围仍粗略，不能当全市场/未来/实盘证明。",
+    "not_required": "不增加行业×9组、beta控制、现金比例网格、其他持有期或独立新市场取数；已有假设与预算内的固定比较足以回答限定问题。"
+  },
+  "execution_release": {
+    "approve_current_file_unamended": false,
+    "approve_after_R1_to_R6_clarified_and_controller_freeze": true,
+    "scope_of_permission": "主控将上述小修订写入design/执行合同、完成已列合成和输入检查后，可沿同一家族最后跟进运行一次；本review不替代root权限、runner实现审查或结果验收。",
+    "rerun_old_experiments": false,
+    "future_results_access_by_this_reviewer": "本次未读取；真实输出后可另派有限结果审阅。"
+  }
+}

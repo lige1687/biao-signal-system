@@ -1,0 +1,53 @@
+{
+  "mission": "Execute exactly one approved offline saved-panel defensive diagnostic with fixed source isolation and budget; no new sources or tuning",
+  "task_scope": [
+    "one fixed research execution plus receipt; no implementation changes"
+  ],
+  "workspace_root": "/",
+  "execution_cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018",
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/per_stock_month.csv",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/configs/storage-resources.v1.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/configs/storage-policy.v1.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/configs/research-output-policy.v1.json"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-launch.json",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-execution-receipt.json",
+    "Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-defensive-selection-20261020/lowfreq-defensive-selection-20261020-20261020T122132-428359aa0240"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "defensive-execution-receipt.json",
+    "per_month.json",
+    "performance.json",
+    "new_weights.csv"
+  ],
+  "stop_conditions": [
+    "any SHA or scope mismatch",
+    "source or storage unavailable",
+    "first execution failure; no retry"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "command": [
+    "python3",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/launch_defensive.py"
+  ],
+  "frozen_execution_contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-execution-contract.json",
+    "sha256": "dfa162175fac61afea017d715bbf1aa58e9062c5fb55462fe5b5f4a129fdd724"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "source-price-reuse/1",
+  "mode": "read_only_manifest_and_one_small_probe_record",
+  "network_requests": 0,
+  "market_effects_computed": false,
+  "target": {
+    "old_cohort_codes": 600,
+    "old_source_contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+      "sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289"
+    },
+    "requested_year_ends": [
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ]
+  },
+  "findings": {
+    "old_600_price_source": {
+      "count": 600,
+      "request_fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,pctChg,isST",
+      "request_adjustflag": "2",
+      "per_code_path_and_sha": "see evaluation-input-contract-v2.json sources[]",
+      "year_end_raw_close_status": "not eligible as unadjusted: requested front-adjusted history; no saved old600-wide raw daily plus adjustment-event pair found in reviewed source manifests",
+      "exception": "sz.001914 original returned mixed adjustflag3 and 2 in one source, previously quarantined; not a usable raw series"
+    },
+    "new_300_raw_and_adjustments": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/high52-execution-revalidation-20261020/high52-execution-revalidation-20261020-20261020T103838-98db6d9bfda6/result/acquisition-v1/new_source_manifest.json",
+      "sha256": "5f3bd55994025442b5d7af416a8bd316f347b73ad61dcf134ac6040c9597cca6",
+      "codes": 300,
+      "overlap_with_old_600": 0,
+      "interpretation": "300 successful original daily plus adjustment-event pairs are for different symbols, so zero old600 year-end source reuse"
+    },
+    "prior_value_probe": {
+      "receipt_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19/source-probe-execution-receipt.json",
+      "receipt_sha256": "d3d6f140c0cd4e3c27c2546465c8c5815be2581c234e89d2c5067581dd6cb664",
+      "price_codes": [
+        "sh.600518",
+        "sh.600519",
+        "sz.300048"
+      ],
+      "overlap_with_old_600": [
+        "sz.300048"
+      ],
+      "overlap_count": 1,
+      "overlap_record": {
+        "code": "sz.300048",
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-value-qualification-20261019/lowfreq-value-qualification-20261019-20261019T150610-8f93eb66a419/result/01-query_history_k_data_plus-sz.300048.json",
+        "sha256": "d79bdbf814b710bfffd7689700cc0f01b85743a84429765a11058a8e4c6d8a9f",
+        "record_count": 320,
+        "fields": [
+          "date",
+          "code",
+          "close",
+          "pbMRQ",
+          "adjustflag",
+          "tradestatus"
+        ],
+        "requested_adjustflag": "3",
+        "actual_adjustflags": [
+          "3"
+        ],
+        "saved_date_span": [
+          "2024-01-02",
+          "2025-04-30"
+        ],
+        "year_end_2024": {
+          "date": "2024-12-31",
+          "close_rmb": "5.0400",
+          "adjustflag": "3",
+          "tradestatus": "1"
+        },
+        "limitations": "only close/PB/flag/trading status, no OHLC or adjustment-event pair; one current-vendor historical quote, not independently certified original day-of-vendor version"
+      }
+    },
+    "unadjusted_year_end_coverage_old_600_by_fiscal_year": {
+      "2013": 0,
+      "2014": 0,
+      "2015": 0,
+      "2016": 0,
+      "2017": 0,
+      "2018": 0,
+      "2019": 0,
+      "2020": 0,
+      "2021": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 1
+    },
+    "shares_originals": {
+      "index_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-final-01/expected-source-index.json",
+      "index_sha256": "7a22328b0020883dcb0bd2e62b18c50ee5c7d5f79a64a8672b3539d2f60aa87c",
+      "filter": "old600 code, exact annual title, obtained PDF, prepared issuer identity match",
+      "matched_code_years_by_fiscal_year": {
+        "2013": 526,
+        "2014": 533,
+        "2015": 514,
+        "2016": 517,
+        "2017": 485,
+        "2018": 530,
+        "2019": 533,
+        "2020": 359,
+        "2021": 364,
+        "2022": 367,
+        "2023": 377,
+        "2024": 376
+      },
+      "unique_matched_code_years": 5481,
+      "distinct_codes_any_year": 598,
+      "status": "PDF originals and prepared text are reusable source candidates for share count/class/treasury extraction, but metadata match does not certify those fields, chronology, or complete common-equity denominator; nine-file targeted page review is separate"
+    },
+    "other_share_source": "lowfreq-value annual-source-01 receipt contains five targeted PDFs with partial share-class/treasury findings; no cohort-wide qualified ordinary-share count series located"
+  },
+  "conclusion": "Only sz.300048 at 2024-12-31 has a saved old600-overlap unadjusted (flag3) year-end close from the small value probe. 2013-2023 have zero located unadjusted year-end closes for the old600 in reviewed manifests; 2024 is 1 of 600. New300 raw+adjustment files have zero code overlap. Existing annual PDFs help source-only share audit but do not replace a 600-code raw-price and capital-action qualification. Do not change target cohort or compute ratios/returns."
+}

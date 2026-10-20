@@ -1,0 +1,365 @@
+{
+  "schema": "local-feasibility/1",
+  "as_of": "2026-10-20 Asia/Shanghai",
+  "mode": "read_only_source_and_column_check",
+  "network_requests": 0,
+  "effect_computations": 0,
+  "p4_saved_panel": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/per_stock_month.csv",
+    "sha256": "732d63142467fc9193106b927596bd2d9c9d4d2b74d6a6d9d74164db2bfea3fb",
+    "verified": true,
+    "rows_claimed_by_prior_report": 79200,
+    "monthly_scope": "2015-01 through 2025-12, fixed 600 historical A shares",
+    "definition_source": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+      "sha256": "dda4de0acd7335e73a481a66913f47359e974de25a0f220f545c31592fcad0df"
+    },
+    "input_contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-expanded-discovery-2026-10-19/evaluation-input-contract-v2.json",
+      "sha256": "b9108e54acbbdb1c042f30045e46f3a704938cc829606772fb659e638bfa3289"
+    },
+    "columns": {
+      "identity": [
+        "month",
+        "decision_date",
+        "code",
+        "entry_date",
+        "exit_date"
+      ],
+      "eligibility": [
+        "eligibility_reason",
+        "valid_count",
+        "amount20"
+      ],
+      "past_risk": [
+        "vol60"
+      ],
+      "momentum": [
+        "momentum",
+        "short",
+        "momentum_252_start_date",
+        "momentum_21_calendar_days",
+        "momentum_252_calendar_days"
+      ],
+      "future_price_outcome": [
+        "future_return",
+        "outcome_reason"
+      ],
+      "trading_and_unknown": [
+        "entry_traded",
+        "exit_traded",
+        "entry_halt",
+        "exit_halt",
+        "either_halt",
+        "suspension_marked_price_proxy"
+      ],
+      "existing_target_weights": [
+        "weight_pool_equal",
+        "weight_momentum_top20",
+        "weight_short_top20",
+        "weight_momentum_q1",
+        "weight_momentum_q2",
+        "weight_momentum_q3",
+        "weight_momentum_q4",
+        "weight_momentum_q5"
+      ]
+    },
+    "definitions": {
+      "eligibility": "eligible only if historically listed at decision close, actual positive month-end traded quote, at least 253 valid quotes, finite momentum/short/vol60/amount20 and historical isST=0; source errors can block whole month",
+      "vol60": "Sample standard deviation of 60 simple daily returns over 61 consecutive market dates ending at decision close, annualized by square root of 252; missing dates block the feature, not silently skipped",
+      "momentum": "Close at 21 valid trading quotes ago divided by close 252 valid trading quotes ago minus one; may span more than 252 calendar days after suspension",
+      "future_return": "Front-adjusted close at first market date of following month divided by front-adjusted close at first market date of current month minus one; suspended entry/exit with valid marked close returns a proxy and is flagged, missing/invalid endpoints return null",
+      "baseline_count": "Existing momentum_top20 selects ceil(20% of same eligible monthly pool), descending momentum then code tie-break; new lower-volatility arm can select identical count ascending vol60 then code tie-break, with fixed equal target weights"
+    },
+    "feasibility": "Saved columns suffice for one bounded same-month, same-count low-volatility versus momentum price-outcome diagnostic without re-reading daily quote sources. New low-volatility selection weights, method monthly aggregation, unknown-weight accounting and replacement rate must be calculated from saved rows; no extra historical feature needs recomputation. A fixed lower-capital comparator must be specified separately; the existing panel is not a filled-account ledger.",
+    "limitations": [
+      "future_return is quote change, not executable trade or account drawdown",
+      "marked suspended endpoints may have a price proxy but no fill; keep separate from fully traded outcomes",
+      "later exits and missing endpoints retain null and target weight; no inferred recovery proceeds",
+      "front-adjusted BaoStock price is a proxy and has no independent complete corporate-action verification",
+      "all 132 months and prices were previously examined; any new result is exploratory"
+    ]
+  },
+  "p3_selection": {
+    "rule": "From fixed 600-stock cohort, sort six-digit code ascending; exclude eight already reviewed codes; require exact original annual-report title for each of 2013, 2018 and 2023, obtained PDF, matching prepared issuer identity, and non-financial status in the saved industry/financial panel. Choose the first three surviving companies; for repeated exact-title versions choose earliest publication date. Do not select by returns or accounting values.",
+    "excluded_prior_codes": [
+      "000007",
+      "002352",
+      "300048",
+      "600010",
+      "600012",
+      "600050",
+      "600518",
+      "600519"
+    ],
+    "selected_codes": [
+      "000016",
+      "000032",
+      "000035"
+    ],
+    "nonfinancial_evidence": "Saved financial panel audit shows industry_reason null for all three codes at 2015-01, 2019-05 and 2024-05; no financial_industry_excluded reason in those checked dates. Industry classification across every intervening day was not reverified.",
+    "source_index": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-panel-final-01/expected-source-index.json",
+      "sha256": "7a22328b0020883dcb0bd2e62b18c50ee5c7d5f79a64a8672b3539d2f60aa87c"
+    },
+    "nine_annual_documents": [
+      {
+        "code": "000016",
+        "report_year": 2013,
+        "announcement_id": "63788613",
+        "publication_date": "2014-04-04",
+        "title": "2013年年度报告",
+        "original_pdf": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00549-pdf.body",
+          "sha256": "960aeb9ec11c531a5c9f2ec806503fd4f433f49cc78c90f869eab3a008edd72f",
+          "bytes": 1223983,
+          "verified": true
+        },
+        "prepared_text": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000016-63788613.json",
+          "sha256": "38069f0da5952a0d28a72a83d68b4853b7a129b5fa75933ce2150aa8669f370a",
+          "verified": true,
+          "identity_status": "match"
+        },
+        "consolidated_balance_heading_page_recorded": 70,
+        "pdf_page_count": 209,
+        "field_review": "targeted_original_pages_read"
+      },
+      {
+        "code": "000016",
+        "report_year": 2018,
+        "announcement_id": "1205967768",
+        "publication_date": "2019-03-30",
+        "title": "2018年年度报告",
+        "original_pdf": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00526-pdf.body",
+          "sha256": "46cc8cfd5b008bd135703a845e4b9ee1796f24339096dd020c005c466e8a4f6a",
+          "bytes": 1650627,
+          "verified": true
+        },
+        "prepared_text": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000016-1205967768.json",
+          "sha256": "01eb1cb6333c654dc4235ec24450adb8d66ede87fd8aa3726db771eccdbfb36c",
+          "verified": true,
+          "identity_status": "match"
+        },
+        "consolidated_balance_heading_page_recorded": 84,
+        "pdf_page_count": 267,
+        "field_review": "targeted_original_pages_read"
+      },
+      {
+        "code": "000016",
+        "report_year": 2023,
+        "announcement_id": "1219494193",
+        "publication_date": "2024-04-02",
+        "title": "2023年年度报告",
+        "original_pdf": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/00506-pdf.body",
+          "sha256": "bb48a8d325d1aded990c1d4d635a2202e5119d9066a225abef6eff3d86b5e387",
+          "bytes": 1552406,
+          "verified": true
+        },
+        "prepared_text": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000016-1219494193.json",
+          "sha256": "0e65696260099d103d7917a61e8984522d619386c530eb02da9d5cbc38eece03",
+          "verified": true,
+          "identity_status": "match"
+        },
+        "consolidated_balance_heading_page_recorded": 80,
+        "pdf_page_count": 259,
+        "field_review": "targeted_original_pages_read"
+      },
+      {
+        "code": "000032",
+        "report_year": 2013,
+        "announcement_id": "63941824",
+        "publication_date": "2014-04-29",
+        "title": "2013年年度报告",
+        "original_pdf": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/02596-pdf.body",
+          "sha256": "3208731ff190185af0f52dab45e096d1f296793c475fe4516320fe35d936351d",
+          "bytes": 3477810,
+          "verified": true
+        },
+        "prepared_text": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000032-63941824.json",
+          "sha256": "059f395fa6ca5e2591a7454cfe20f0fe97632fe4b1af054c1a407e980f9ad904",
+          "verified": true,
+          "identity_status": "match"
+        },
+        "consolidated_balance_heading_page_recorded": null,
+        "pdf_page_count": 170,
+        "field_review": "not_read_this_task"
+      },
+      {
+        "code": "000032",
+        "report_year": 2018,
+        "announcement_id": "1206089248",
+        "publication_date": "2019-04-25",
+        "title": "2018年年度报告",
+        "original_pdf": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/02567-pdf.body",
+          "sha256": "42f230f9e67d8842957796d2e855fff0f7ba1968a7884ec34af833f81e697803",
+          "bytes": 12084196,
+          "verified": true
+        },
+        "prepared_text": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000032-1206089248.json",
+          "sha256": "5b4598e8fe4ec9d0941c2bf8cf64a111bd334665eee9fab1befb7a5224d2a83e",
+          "verified": true,
+          "identity_status": "match"
+        },
+        "consolidated_balance_heading_page_recorded": null,
+        "pdf_page_count": 216,
+        "field_review": "not_read_this_task"
+      },
+      {
+        "code": "000032",
+        "report_year": 2023,
+        "announcement_id": "1219652709",
+        "publication_date": "2024-04-18",
+        "title": "2023年年度报告",
+        "original_pdf": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/02557-pdf.body",
+          "sha256": "854095919c8f93f9f255efcd1bdd960737291712245744459b3abfa294f9b89a",
+          "bytes": 3100064,
+          "verified": true
+        },
+        "prepared_text": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000032-1219652709.json",
+          "sha256": "f57e0e875866b48e73c75c129d03d452816e96538e74bcb95d54aa02860a56ee",
+          "verified": true,
+          "identity_status": "match"
+        },
+        "consolidated_balance_heading_page_recorded": null,
+        "pdf_page_count": 309,
+        "field_review": "not_read_this_task"
+      },
+      {
+        "code": "000035",
+        "report_year": 2013,
+        "announcement_id": "63664551",
+        "publication_date": "2014-03-12",
+        "title": "2013年年度报告",
+        "original_pdf": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/01684-pdf.body",
+          "sha256": "2e37ca31e14bfb40001e305db5ad5e5e4c97b315bf57aedaeacfe70888396e3f",
+          "bytes": 1168758,
+          "verified": true
+        },
+        "prepared_text": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000035-63664551.json",
+          "sha256": "7ec0ed2987feab8768dcbad6a23fa1e2a9d8225c8e2575fcd444b627fa0698a2",
+          "verified": true,
+          "identity_status": "match"
+        },
+        "consolidated_balance_heading_page_recorded": 51,
+        "pdf_page_count": 115,
+        "field_review": "not_read_this_task"
+      },
+      {
+        "code": "000035",
+        "report_year": 2018,
+        "announcement_id": "1206117024",
+        "publication_date": "2019-04-29",
+        "title": "2018年年度报告",
+        "original_pdf": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/01666-pdf.body",
+          "sha256": "7dae746d17aed41704bcb6bcb8e1804f5767aa27d0ae4afab4f2fecbf31714de",
+          "bytes": 8444507,
+          "verified": true
+        },
+        "prepared_text": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000035-1206117024.json",
+          "sha256": "f1ce9e1d1cee6070ae58d69f3b0ff43af9e9f87a1809d090ebaf7f1cbbc52c12",
+          "verified": true,
+          "identity_status": "match"
+        },
+        "consolidated_balance_heading_page_recorded": 132,
+        "pdf_page_count": 249,
+        "field_review": "not_read_this_task"
+      },
+      {
+        "code": "000035",
+        "report_year": 2023,
+        "announcement_id": "1219907481",
+        "publication_date": "2024-04-30",
+        "title": "2023年年度报告",
+        "original_pdf": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/raw/01639-pdf.body",
+          "sha256": "8ef12aaf59ae32329cb6742f6fac947b921c3d4bf3e308f370ec8fb9802e3ee5",
+          "bytes": 4681619,
+          "verified": true
+        },
+        "prepared_text": {
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-profitability-bulk-20261019/lowfreq-profitability-bulk-20261019-20261019T103720-b6ff13df5b8d/result/source-batch-02/documents/000035-1219907481.json",
+          "sha256": "18082ab930778d4b71beea2a1cae6d10edb04a3f5783c5f7ac39f41534c32ab8",
+          "verified": true,
+          "identity_status": "match"
+        },
+        "consolidated_balance_heading_page_recorded": null,
+        "pdf_page_count": 290,
+        "field_review": "not_read_this_task"
+      }
+    ],
+    "representative_three_year_review": {
+      "code": "000016",
+      "issuer": "康佳集团/深康佳A与深康佳B",
+      "2013": {
+        "identity_pdf_page": 7,
+        "consolidated_balance_pdf_pages": [
+          70,
+          71,
+          72
+        ],
+        "share_table_pdf_page": 46,
+        "parent_equity_yuan_as_reported": "4080458151.63",
+        "share_capital_yuan_as_reported": "1203972704.00",
+        "share_total_reported": 1203972704,
+        "share_table_notes": "B-class listed foreign shares 405675804; unrestricted RMB ordinary shares 599914960; restricted-share class allocation not independently settled here.",
+        "other_equity_instruments": "not separately labelled in selected consolidated balance page",
+        "treasury_shares": "line present without readable amount; blank is not zero"
+      },
+      "2018": {
+        "identity_pdf_page": 7,
+        "consolidated_balance_pdf_pages": [
+          84,
+          85,
+          86
+        ],
+        "share_table_pdf_page": 52,
+        "parent_equity_yuan_as_reported": "8104736790.53",
+        "share_capital_yuan_as_reported": "2407945408.00",
+        "share_total_reported": 2407945408,
+        "share_table_notes": "Unrestricted RMB ordinary shares 1596574300; B-class listed foreign shares 811351608; restricted shares 19500, class allocation requires check.",
+        "other_equity_instruments": "line present without amount on selected page; blank is not zero",
+        "treasury_shares": "line present without amount; blank is not zero"
+      },
+      "2023": {
+        "identity_pdf_page": 8,
+        "consolidated_balance_pdf_pages": [
+          80,
+          81,
+          82
+        ],
+        "share_table_pdf_page": 66,
+        "parent_equity_yuan_as_reported": "5644401184.65",
+        "share_capital_yuan_as_reported": "2407945408.00",
+        "share_total_reported": 2407945408,
+        "share_table_notes": "Unrestricted RMB ordinary shares 1596593800; B-class listed foreign shares 811351608; total 2407945408.",
+        "other_equity_instruments": "line present without amount on selected page; blank is not zero",
+        "treasury_shares": "line present without amount; blank is not zero"
+      }
+    },
+    "remaining_original_read_status": "000032 and 000035 original PDF financial/share pages not read in this task; their nine-file identity and fingerprints were verified. Three-year full reading of the first code was chosen to stay within bounded necessary inspection.",
+    "value_implication": "One representative company spans A and B ordinary share classes. Its parent equity cannot be divided by A-share-only market value as though all equity belonged to A shares. Other equity and treasury blank cells are unresolved, and same-year-end raw A/B prices are not in the saved stock price contract. No book-to-market ratio or value effect was computed."
+  },
+  "verification": {
+    "nine_pdf_hashes_match": true,
+    "nine_prepared_text_hashes_match": true,
+    "p4_panel_hash_matches_receipt": true,
+    "files_written": [
+      "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/local-feasibility.json"
+    ]
+  }
+}

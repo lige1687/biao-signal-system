@@ -1,0 +1,198 @@
+{
+  "schema": "defensive-isolation-scientific-review/1",
+  "created_at": "2026-10-20T04:21:11.240883+00:00",
+  "reviewer": "astra_increment_boundary",
+  "verdict": "accept_v3_bounded_descriptive_run_subject_to_implementation_acceptance",
+  "plain_answer": "可以用剩余69个月完成一次限定的风险取舍比较。已知错误来源涉及的63个月须对所有方法共同记缺失；保留证据主要来自2020年下半年至2025年，不能称完整11年、跨两个完整时期验证，也不支持规则采用。原v2拒绝保持；本记录接受新的隔离前提。",
+  "evidence": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/map_price_dependencies.py",
+      "sha256": "add5b31f39bea2b3d58f60079bf014e4b2d138bdf9fa1ed3fa3165f57950abee"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/price-dependency-audit.json",
+      "sha256": "3e3bac4606ec7ec7b2060783480e0899149bd0b0902d0d4d410216df177b367a"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-design-v2.json",
+      "sha256": "88f82d8e92bf5ad2f1e9e70d2e0555b8c6dd3b73a6763e9fbd2bc113cfca7b41"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-design-v2-acceptance.json",
+      "sha256": "4ded0a50ac114a1319a1fc4a1e67d0eb277aeaf2f44b18260846a9eacb4d8a5c"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+      "sha256": "dda4de0acd7335e73a481a66913f47359e974de25a0f220f545c31592fcad0df"
+    },
+    {
+      "code": "sz.001914",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/acquisition-single-resume/sz.001914-daily-attempt1.json",
+      "sha256": "1a70bc7a0c059717ada8ab20038866fb729dfa039cf9da819611e58fcf8d822b",
+      "status": "ok",
+      "request": {
+        "code": "sz.001914",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,pctChg,isST",
+        "start_date": "2013-01-01",
+        "end_date": "2026-01-15",
+        "frequency": "d",
+        "adjustflag": "2"
+      }
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-design-v3.json",
+      "sha256": "724f83eceb73c1b97785cb0a1f380ed0b201b0f4c27dc5bf35fb66fa98dd8778"
+    }
+  ],
+  "scope": {
+    "real_outcomes_read": false,
+    "new_return_statistics_run": false,
+    "new_source_requests": 0,
+    "read_original_source_fields": [
+      "date",
+      "tradestatus",
+      "adjustflag"
+    ],
+    "original_source_sha_independently_verified": true,
+    "only_file_written": "defensive-isolation-review.json",
+    "old_acceptance_changed": false
+  },
+  "review_of_mapping": {
+    "full_source_scan": "复用本次fresh_all_600_guard，600源1852185行，唯一已检出阻断仍为sz.001914的1560行口径冲突。本审阅没有重复全600源扫描；不是对所有未实现来源问题的保证。",
+    "source_mapping_satisfied": [
+      "审阅脚本确实先核来源与面板SHA；读取面板只保留日期、资格、历史窗口定位及原基准权重，无future_return数值进入屏蔽规则。",
+      "eligible月历史动量使用actual-quote i−252与i−21，并与保存起点、valid_count及21日实际跨度核对；vol60覆盖61个共同市场日期，不只查波动首尾。",
+      "资格中的short使用判断日及i−21，已在依赖集合内；amount20取20个共同日期，已包含在61日窗口内。股价正值/有效报价计数不因正比例复权本身改变；本次唯一已检出故障为复权标记/价格口径，不能把这点推广到任意错误价格。",
+      "任一候选输入有问题即全方法整月阻断，与是否最终持有无关；不删股票、不重排修好结果。",
+      "评价端点flag核查只用于来源资格审计，未用于决定历史选择或收益优劣。当前保留且该股eligible的66月，全部entry/exit标记2，无None；代码允许None不等于本批实际存在None。"
+    ],
+    "independent_checks": {
+      "audit_sha_matches_parent": true,
+      "unique_month_records": 132,
+      "blocked_months_rederived_from_records": 63,
+      "retained_months": 69,
+      "disjoint_complete_132_partition": true,
+      "retained_segments": [
+        "2016-08至2016-10：3个月",
+        "2020-07至2025-12：连续66个月"
+      ],
+      "early_period": 9,
+      "later_period": 60,
+      "annual_support": {
+        "2015": 0,
+        "2016": 3,
+        "2017": 0,
+        "2018": 0,
+        "2019": 0,
+        "2020": 6,
+        "2021": 12,
+        "2022": 12,
+        "2023": 12,
+        "2024": 12,
+        "2025": 12
+      },
+      "three_ineligible_decision_rows": [
+        {
+          "date": "2016-07-29",
+          "tradestatus": "0",
+          "adjustflag": "3"
+        },
+        {
+          "date": "2016-08-31",
+          "tradestatus": "0",
+          "adjustflag": "3"
+        },
+        {
+          "date": "2016-09-30",
+          "tradestatus": "0",
+          "adjustflag": "3"
+        }
+      ],
+      "three_ineligible_interpretation": "这3个月不具资格由原始停牌字段直接确定，不依赖错误的历史涨幅；因此无需仅因其更早源有问题就阻断其他股票方法。",
+      "retained_eligible_momentum_and_outcome_endpoints_all_flag2": true,
+      "all_listed_bad_dependency_dates_match_flag3": true,
+      "boundary_confirmation": "2020-06仍用2019-05-16 flag3动量起点；2020-07起点2019-06-14为flag2，因此不能按自然年或简单提前12个月猜截止。"
+    },
+    "not_independently_repeated": [
+      "未重新计算价格特征或收益",
+      "未重跑inspect_contract全600源检查",
+      "未再次完整重建全部日历依赖集合；已审映射代码、独核关键端点和停牌反例及记录恒等式"
+    ]
+  },
+  "scientific_scope": {
+    "why_continue": "现有输入足以比较同一月份同一资格池下三种固定简单对手的少亏与少涨；69个月包含一个连续66月段，仍可能区分这个固定用途是否有描述性帮助。无需为完整11年不可恢复而丢弃全部可用观察。",
+    "why_not_validation": "原目标132月近一半被来源问题屏蔽，早段仅9月，且其中3月由单一股票停牌触发可用；日期支持并非随机缺失。不能用剩余平均值估计完整2015–2025平均，不把早晚结果一致当稳定跨阶段证明。",
+    "what_inference_means": "区间仅表达已保存且可评估日期上，按既定日期块重抽的结果波动；它不纠正有选择的时期缺失，也不提供未来成功概率。12/24月尺度下可用连续经历仍很少，2000次不增加独立市场经历。",
+    "hindsight_boundary": "这是事后发现来源缺陷后的研究资料隔离，不是当时可执行的空仓规则。缺失月份无方法回报，不能拿跳过它们的累计曲线、年化收益或回撤声称实际可获得表现。",
+    "allowed_endpoints": [
+      "描述哪种固定方法在这69个月少亏、少涨及总变化如何，并完整比较M/M75/LV。",
+      "若不稳定、被简单对手覆盖或代价明显，就暂缓此固定用途；仍不证伪整个低波动家族。",
+      "若有有用取舍，只保留这个有限历史线索，不自动采用、不追加追正值试验。"
+    ]
+  },
+  "v3_precise_requirements": [
+    {
+      "id": "V3-1",
+      "requirement": "绑定price-dependency-audit.json精确SHA3e3bac4606ec7ec7b2060783480e0899149bd0b0902d0d4d410216df177b367a及映射脚本SHA；使用该固定63月列表，不在效果后缩小屏蔽。执行前重新核绑定输入。"
+    },
+    {
+      "id": "V3-2",
+      "requirement": "保留600股票与132月原记录，新增source_integrity_blocked及原因。所有方法/两未知情景/总负正分量/覆盖率/条件描述等同用69月；63月全部missing，不能被unknown=0或-100填补。原未知情景只对保留月内原未知股票结果有效。"
+    },
+    {
+      "id": "V3-3",
+      "requirement": "未屏蔽月原eligibility、n及全部排序保持；原M权重逐行核对，保存权重与新质量屏蔽分开。屏蔽期不是cash方法或删股后的新组合。"
+    },
+    {
+      "id": "V3-4",
+      "requirement": "继续三对手M、M75、LV及R1-R6；主亏损先组合再截取，同支持下总=负+正，全部成对差同样成立。计数输出69/132及各年实际数；前2015–2020仅9月必须标稀疏描述，零支持年NA而非0。"
+    },
+    {
+      "id": "V3-5",
+      "requirement": "12/24月2000次在原132月日历共用同索引并保留缺口；相同抽样索引跨全部方法/场景/分量，重复日期重复计数；全无有效值的抽样为missing，输出有效抽样次数和每次有效月份数量分布，不压缩成连续69月。"
+    },
+    {
+      "id": "V3-6",
+      "requirement": "覆盖率分母和实际正值数沿R4输出；被阻断月coverage NA，不以0稀释。换名单率仅用相邻日历月均可评估的月份对，本支持应为2+65=67对；不得跨2016至2020缺口比较名单并称连续换手。"
+    },
+    {
+      "id": "V3-7",
+      "requirement": "主报告精确写2016年3个月及2020-07至2025-12共69个月。保留原预设9对60分期而明确不可解释为两个完整时期；不另外选漂亮年份或新增分期获胜口径。"
+    },
+    {
+      "id": "V3-8",
+      "requirement": "旧整包guard及v2拒绝保持。v3入口应先检查全部原来源并只接受已绑定的这一种故障及屏蔽处理；若出现额外阻断或屏蔽对不上即停，不把expected failure改成全包passed。"
+    },
+    {
+      "id": "V3-9",
+      "requirement": "实际效果启动仍记firstcycle最后followup3/3及attempt9，失败不退还；至多attempt10用于同冻结问题获准修复。来源只读核查不冒充已运行效果。"
+    }
+  ],
+  "release": {
+    "allow_one_run_after_v3_frozen_and_implementation_passes": true,
+    "allow_v2_run": false,
+    "new_data_or_parameter_changes_authorized": false,
+    "further_scientific_redesign_required": false,
+    "further_pre_effect_review_required_if_v3_matches_this_record": false,
+    "result_acceptance_still_required": true,
+    "qualification": "主控须把上述有限用途和隔离规则绑定执行合同，并完成代码/合成验收；本记录未验runner实现。",
+    "v3_scientifically_accepted": true
+  },
+  "operational_note": "工作树缺storage模块，首次只读检查失败；已改用主仓已登记storage入口核外盘身份可用(2026-10-20T12:19:42+08:00)，随后只读父任务指定源并核内容SHA。无写入外盘。",
+  "updated_at": "2026-10-20T04:21:28.212029+00:00",
+  "v3_readback": {
+    "hash_matches_controller": true,
+    "blocked_list_matches_audit_exactly": true,
+    "counts_and_period_support_match": true,
+    "shared_132_axis_missing_and_uncertainty_scope_explicit": true,
+    "topdecile_counts_and_blocked_missing_explicit": true,
+    "budget_actual_launch_explicit": true,
+    "claim_boundary_explicit": true,
+    "remaining_implementation_clarifications": [
+      "secondary名单更换率仍须按相邻日历月两端均可评估执行（67对），不能跨缺口；在本审阅绑定执行验收即可，无需改变冻结选法。",
+      "保持全空抽样missing和重复日期倍数，输出实际有效抽样次数；v3 shared deterministic index规则按真实索引等同性核验。"
+    ],
+    "design_accepted": true,
+    "this_is_not_runner_test_acceptance": true
+  }
+}

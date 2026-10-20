@@ -1,0 +1,98 @@
+{
+  "schema": "saved-selection-diagnostic/1",
+  "question": "在同一低频股票机会中，兼顾过去涨幅和较小波动，能否比纯动量及少投入25%资金的动量方法少亏，同时不漏掉过多上涨？",
+  "decision": "保留为风险选择候选、暂缓此用途，或因资料不足继续保留未知；不要求正收益。",
+  "financial_hypothesis": "波动有延续性，同样有过去涨势的股票中，近期波动较小者可能在随后月份跌得少；代价可能是漏掉上涨急剧的股票。选低波动是否比单纯少投入资金更有帮助，需要直接比较。",
+  "competing_explanations": [
+    "少亏仅来自减少高风险敞口，少投入资金即可做到。",
+    "行业和规模构成不同导致差异；本题没有完整历史市值和行业中性化，不能声称独立定价信息。",
+    "动量和波动都来自价格，属于同一来源的不同测量，不能当两份独立证据。",
+    "不同市场阶段的损益可能相反；旧时期已看，新增选法仍是探索。"
+  ],
+  "source": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/per_stock_month.csv",
+    "sha256": "732d63142467fc9193106b927596bd2d9c9d4d2b74d6a6d9d74164db2bfea3fb"
+  },
+  "helper": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+    "sha256": "dda4de0acd7335e73a481a66913f47359e974de25a0f220f545c31592fcad0df",
+    "functions": ["_weighted_outcome", "_relative_unknown", "_turnover", "_blocks", "_mean", "_sample_std"]
+  },
+  "population": {
+    "fixed_historical_stocks": 600,
+    "months": 132,
+    "rows": 79200,
+    "start": "2015-01",
+    "end": "2025-12",
+    "eligibility": "exact saved eligibility_reason=eligible; no future-based membership changes",
+    "missing_and_suspensions": "retain original null outcomes and original target weights; halted endpoint marked quotes remain separately flagged",
+    "independent_sample_note": "132 dependent market months, not79200 independent trials; all dates previously examined"
+  },
+  "definitions": {
+    "past_volatility": "Saved vol60: sample std of60 daily simple changes over61 consecutive market dates at decision close, times sqrt252.",
+    "momentum": "Saved momentum: price21 valid quotes ago / price252 valid quotes ago -1, with original suspension/calendar limitations.",
+    "future_price_change": "Saved future_return: next-month first-market-date adjusted close / current-month first-market-date adjusted close -1. Marked price outcome only, not a fill or net account return.",
+    "cash": "zero monthly return assumption, no interest or financing benefit claimed",
+    "n": "ceil(0.20 * eligible monthly count), same as existing momentum_top20",
+    "tie_break": "six-digit/exchange code lexical ascending after score",
+    "methods": {
+      "pool_equal": "all eligible stocks, each1/N",
+      "momentum_top20": "n highest momentum, each1/n; MUST exactly match saved weight_momentum_top20",
+      "momentum75": "same momentum_top20 names, each0.75/n; remaining0.25 cash at zero",
+      "lowvol_top20": "n lowest vol60 across eligible pool, each1/n; simple standalone risk choice",
+      "momentum_lowvol": "among min(2*n,N) highest momentum, select n lowest vol60, each1/n"
+    },
+    "excluded_work": "No new factor values, training, parameter grid, beta estimate, account simulation, trade fills, costs, corporate-action reconstruction or ETF generalization."
+  },
+  "evaluation": {
+    "primary_method": "momentum_lowvol",
+    "primary_comparators": ["momentum_top20", "momentum75"],
+    "primary_measure": "mean(min(monthly_price_change,0)); a higher value means less monthly loss. Compare both original full-capital and75%-capital momentum.",
+    "joint_required_tradeoff": "mean(max(monthly_price_change,0)), mean total monthly change and selected share of observed next-month top10% gainers; less loss alone is not acceptance.",
+    "secondary": [
+      "monthly standard deviation",
+      "worst monthly price change",
+      "average worst10% monthly changes",
+      "mean target-list replacement0.5*sum(abs(new_weight-old_weight)), excluding first month",
+      "selected-name overlap with momentum",
+      "mean/max unknown outcome weight and entry/exit halt weight",
+      "same-month pool down/up conditional differences as retrospective descriptions only",
+      "2015-2020 and2021-2025 summaries and annual means"
+    ],
+    "no_account_drawdown_claim": true,
+    "outcome_scenarios": {
+      "scenario_zero": "unknown outcome assumed0, not imputed as known; main diagnostic alongside unknown weights",
+      "scenario_minus100": "unknown outcome assumed-100%, stress scenario",
+      "relative_unknown": "reuse helper paired unknown-stock coefficients with assumed unknown outcomes in[-100%,0]; scenario range, not mathematical bounds on possible market outcomes"
+    },
+    "gainers": "Within each original monthly eligible pool, among finite observed outcomes rank descending then code, take ceil10%; report share of these observed names selected. Unknown outcomes remain disclosed and are not assumed nongainers.",
+    "uncertainty": {
+      "paired_circular_month_blocks": [12, 24],
+      "draws": 2000,
+      "seed": 20261020,
+      "comparisons": "momentum_lowvol minus each primary comparator; monthly total, negative component and positive component under each scenario",
+      "interpretation": "approximate dependence-aware uncertainty on already-seen history, not proof of live efficacy"
+    },
+    "stop": "One frozen comparison; negative, unstable or missing-data-sensitive result is retained. No tuning to obtain improvement."
+  },
+  "budget": {
+    "family": "lowfreq-candidate-first-cycle-2026-10-19",
+    "core_used": 1,
+    "followups_before": 2,
+    "followups_after_successful_dispatch": 3,
+    "followups_max": 3,
+    "source_and_analysis_attempts_before": 8,
+    "source_and_analysis_attempts_max": 10,
+    "planned_effect_runs": 1,
+    "new_source_requests": 0,
+    "old_experiments_rerun": 0
+  },
+  "implementation_acceptance": [
+    "Input SHA, row keys,600*132, fixed exact months and all600 codes per month verified.",
+    "All actual selections use only eligibility, code, momentum and vol60; changing future fields must not change weights.",
+    "Synthetic ties, equal outcomes,75% cash,unknown weights,halt flags and turnover cases pass before statistics.",
+    "Baseline target weights match every saved row within1e-12.",
+    "Independent controller recomputes key aggregate numbers and source hashes.",
+    "Standalone policy diagnostic is explicitly outside native continuous-prediction evaluator; existing family budget and frozen evidence remain authoritative."
+  ]
+}

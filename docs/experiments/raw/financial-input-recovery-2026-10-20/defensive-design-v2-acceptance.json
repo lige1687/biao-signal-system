@@ -1,0 +1,196 @@
+{
+  "schema": "defensive-design-v2-acceptance/1",
+  "created_utc": "2026-10-20T04:16:28.604141+00:00",
+  "reviewer": "astra_increment_boundary",
+  "verdict": "blocked_pending_pre_effect_source_dependency_mask_and_refreeze",
+  "plain_answer": "R1-R6的比较设计基本成立，但已确认旧源混用未复权/前复权价格，现设计不可直接运行。可先按历史输入来源给所有方法共同阻断受影响月份，保留其余月份原名单和权重；只有这份不看收益的影响日期清单核清并重新冻结后，才可判断是否执行最后一次跟进。不能只删除某只股票，也不能只沿用旧财务池发现的两个月。",
+  "evidence": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-design-v2.json",
+      "sha256": "88f82d8e92bf5ad2f1e9e70d2e0555b8c6dd3b73a6763e9fbd2bc113cfca7b41"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-design-review.json",
+      "sha256": "ca69eb7afc8aceb2ddc93266055e6dc7a1aed74fa074ca528192f80612ced7ea"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/lowfreq-data-integrity-enforcement-2026-10-20.md",
+      "sha256": "9e362de3715eaf92b20a4a9cf8c834f5e91a5f936337ce5264d7ef77514fb067"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/controller-review.json",
+      "sha256": "740b6450a16332e886badb0b204a5237e56f5c6def2b04b56e44edbef6260e8d"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/probe-receipt.json",
+      "sha256": "02f20cddd9cde80c9c4a367ade3963674f525f44af0292e6a4952f88bd1791dd"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/actual-600-preflight.json",
+      "sha256": "741f6ec272ec4c318a0d4f09c17746eb0e840d8af3ce64e9b6f8b7a827f317f9"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/probe-qualification.json",
+      "sha256": "6c225cb1263e3466bbb0b185bf22c02af5d168c8ad04642fee7fb527b7fd6ace"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-data-integrity-enforcement-2026-10-20/old-financial-exposure.json",
+      "sha256": "079f2852531d21f0123664de5d44a04e1fe9e21e6735cf9a30b1f97740eee24c"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/local-feasibility.json",
+      "sha256": "3180c8d927d81ac116d63b55d517362d1d71e5e084b811a1ed7a707133a2535d"
+    }
+  ],
+  "scope": {
+    "read_only_sources": [
+      "defensive-design-v2.json",
+      "defensive-design-review.json",
+      "existing data-integrity report and the seven source/review artifacts listed in evidence"
+    ],
+    "real_panel_read": false,
+    "future_effects_read": false,
+    "statistics_run": false,
+    "implementation_audited": false,
+    "only_write": "defensive-design-v2-acceptance.json",
+    "historical_source_exposure_values_seen": "既有old-financial-exposure记录内的历史动量输入及端点日期/标记；没有新选法未来结果。报告已有旧P2数字属已见背景，不作为本次放行依据。"
+  },
+  "item_review": [
+    {
+      "id": "R1",
+      "status": "explicitly_satisfied",
+      "evidence": [
+        "evaluation.component_order",
+        "evaluation.primary_measure",
+        "evaluation.uncertainty.comparisons"
+      ],
+      "finding": "先聚合方法总回报，再截取负/正分量，均值恒等式明确。各方法同日期支持时，配对差恒等式由此成立，执行验收应同时核。"
+    },
+    {
+      "id": "R2",
+      "status": "explicitly_satisfied",
+      "evidence": [
+        "evaluation.relative_range_scope",
+        "evaluation.component_order",
+        "evaluation.outcome_scenarios",
+        "evaluation.uncertainty.comparisons"
+      ],
+      "finding": "未知范围仅用于线性总差，负/正分量按两情景分别计算；不能将两情景误写成所有未知结果下的完整上下界。"
+    },
+    {
+      "id": "R3",
+      "status": "explicitly_satisfied",
+      "evidence": [
+        "evaluation.primary_comparators",
+        "evaluation.uncertainty.comparisons"
+      ],
+      "finding": "纯低波动已加入总/负/正分量、两情景和12/24月区间。primary_measure尾句仍只提两种动量，按明确列出的三对手完整执行即可，不应据该尾句漏掉低波动。"
+    },
+    {
+      "id": "R4",
+      "status": "substantive_definition_satisfied_counts_confirmed_by_controller_message_not_yet_explicit_in_v2",
+      "evidence": [
+        "evaluation.gainers"
+      ],
+      "finding": "已正确说明靠前10%未必上涨、M与M75同名单覆盖、不按资金调整及未知排名；v2未明确要求输出已观测数和前10%中实际正值数，主控本轮消息已明确承诺。分母为ceil(0.1*已观测数)，零分母或阻断月须为missing而非0。"
+    },
+    {
+      "id": "R5",
+      "status": "calendar_and_missing_rule_satisfied_shared_draw_details_confirmed_by_controller_message_require_binding",
+      "evidence": [
+        "population.month_blocks",
+        "evaluation.uncertainty",
+        "evaluation.secondary",
+        "implementation_acceptance"
+      ],
+      "finding": "132月、整月阻断、空选择不补0、固定分期已写。v2未逐字明确跨方法/情景/分量共同索引、相同有效支持、重复日期和全空抽样规则。主控已声明同helper固定seed/length/n产生同索引；只有输入日期轴完全相同、同初始化且相同调用语义时这个实现才等价于共享矩阵，必须以索引相等或其指纹检查确认。"
+    },
+    {
+      "id": "R6",
+      "status": "explicit_accounting_satisfied_with_same_question_retry_boundary_retained",
+      "evidence": [
+        "budget.accounting",
+        "budget.followups_max",
+        "budget.source_and_analysis_attempts_before",
+        "budget.source_and_analysis_attempts_max",
+        "budget.planned_effect_runs",
+        "evaluation.stop"
+      ],
+      "finding": "真实启动消耗跟进与尝试，失败不退还；本批第3次跟进/第9次尝试，既有上限保持。旧字段after_successful_dispatch只是过时命名，明确accounting文字为准。第10次只能在原冻结问题内获准修复，不可另开目的或调参。"
+    }
+  ],
+  "necessary_execution_conditions": [
+    {
+      "id": "E1",
+      "requirement": "输出每月原资格池已观测数、ceil10%分母、该组中真实正回报数；阻断/空选择/零分母的覆盖率为missing，并报告有效月份数，不能用0稀释均值。",
+      "basis": "R4及主控已发现coverage0漏洞；不改变排序或新增指标择优。"
+    },
+    {
+      "id": "E2",
+      "requirement": "用完整相同132日期轴生成12/24月抽样索引，跨方法/情景/总负正分量完全相同；相同有效支持，重复抽到的日期重复计数；整次无有效结果为missing，输出有效抽样次数，不补0。实现可重复调用同helper，但须确认同日期顺序、相同随机初始化/长度/n及实际索引相同。",
+      "basis": "R5；固定seed本身不保证过滤日期之后仍抽到相同月份。"
+    },
+    {
+      "id": "E3",
+      "requirement": "独立实现验收须覆盖主控指出的纯低波动relative对手、nullable数值与布尔值区分、阻断月coverage missing，以及完整_performance合成。这里不评价尚未读取的修复是否完成。",
+      "basis": "本次仅设计审查，不能把主控发现并已派修写成程序通过。"
+    },
+    {
+      "id": "E4",
+      "requirement": "主控冻结执行合同时明确纳入本接受记录/上述E1-E3，或在同一合同把这些已承诺细节补齐；保留本批启动即followup3/attempt9及失败记录。",
+      "basis": "不以聊天承诺代替可复查执行约束；无需因此重新设计或开启额外审查轮次。"
+    }
+  ],
+  "claim_wording": {
+    "required_correction_when_reporting": "financial_hypothesis中的“同样有过去涨势”须理解为相对动量靠前；可能绝对下跌，不能报成只选择过去上涨股票。joint_required_tradeoff中的gainers以evaluation.gainers的精确定义为准。",
+    "remaining_limits": [
+      "扩大动量候选范围同时改变动量强度，不能把全部差额归因于低波动。",
+      "历史停牌/未更新标价、行业及共同涨跌可影响低波动表现，端点标记不能证明已排除。",
+      "必须一起解释少亏、少涨及总变化；无偏好阈值不据单项好看宣布采用。",
+      "本次仍是已看600股票历史的用途探索，不是独立未来验证，也不推导ETF、账户成交或费用后表现。"
+    ]
+  },
+  "release": {
+    "design_changes_or_new_experiment_required": false,
+    "source_isolation_amendment_and_refreeze_required": true,
+    "run_allowed_now": false,
+    "run_allowed_after_controller_freeze_and_implementation_checks": false,
+    "conditional_recovery": "除E1-E4之外，主控完成source_integrity_adjudication所列历史来源依赖屏蔽和独立核验，确认剩余样本能回答明确限定的问题后，才可重新放行；不能把原R1-R6通过当来源资格通过。",
+    "unconditional_implementation_or_result_approval": false,
+    "reason": "新增已确认的源字段语义冲突优先于面板可计算性，撤回先前仅设计层面的有条件运行接受。"
+  },
+  "superseded_draft_sha256": "6846a9a87c7085352df14499ba0d63c934f1742588651af2460b3f81d5a0e307",
+  "updated_utc": "2026-10-20T04:17:53.224706+00:00",
+  "source_integrity_adjudication": {
+    "confirmed_facts": [
+      "原600源1852185行的实际guard唯一阻断是sz.001914的1560行returned_adjustflag=3；日期2013-01-04至2019-06-05，2019-06-06起返回2。",
+      "重复请求的共同字段与旧源逐行0变化；flag3的1560行OHLC等于名义原价，故不能以新请求或面板SHA正确解除语义问题。",
+      "旧财务池2020-05/06两个动量端点跨flag3/2已核实；这是该旧财务池的暴露，不是P4所有月份的完备名单。",
+      "local-feasibility证明字段足以计算、内容SHA绑定；它没有检查各字段依赖的价格口径，不足以证明科学来源合格。"
+    ],
+    "minimal_acceptable_remedy": "统计前根据已保存来源日期和返回口径，建立只使用判断日及此前资料的统一月份阻断清单。保留600股票及132月原轴；共同阻断整个月份，未阻断月份的资格、n、排序和原基准权重全部不变。该处理限制适用时期，不声称修好了原源。",
+    "dependency_rule": [
+      "针对每个原eligible候选，核用于当前方法的动量i−252和i−21端点、vol60全部61个共同市场日期，以及实际资格所消费的价格依赖；若这些所需记录有已知口径不符或无法定位，则该判断日期所有方法共同阻断。不能只检查最终有正权重的名字，因为坏排序值可影响其他股票入选。",
+      "两端都为flag3仍属未经资格核验的名义价格，不可因比值同单位就接受。公司行动调整并未证明能相消。无需为本次修复重算任何新的动量/波动值。",
+      "若资格字段还消费short或其他历史价格窗口，即使新选法不直接用该分数，资格依赖也需覆盖。主控应沿实际代码列依赖，不能自行猜日期范围。",
+      "原本不具资格的股票无需因其无关坏历史自动拖累月份，但必须证明其不具资格原因不依赖这批错误价格；若无法证明则保守阻断，不能臆断它永远不会入选。",
+      "可以选择更保守的整个所需历史报价窗口均合格规则，前提是效果前固定并披露额外被阻断月份；不能在看效果后在宽窄规则间选择。"
+    ],
+    "outcome_quality_boundary": "还须确认保留日期的评价价格端点没有已知口径错误。只核来源日期/标记即可，不读取回报数值。未来端点质量不能反过来改变入选名单；若仍存在坏评价端点，保留原目标权重并按单独冻结的source_invalid未知处理，或保持该比较不可评估，不能静默当原可用回报。当前尚未验证此情况是否存在，因此不默认已有两情景自动覆盖它。",
+    "calendar_and_comparison": [
+      "同一来源屏蔽作用于全部5方法、两情景、全部主副指标及覆盖率；不是坏股票剔除后重新归一化。",
+      "原权重核验在来源屏蔽前逐行核，屏蔽另存原因和日期；屏蔽月份无评价值，不是全现金策略月份。",
+      "抽样仍在原132月日历上，缺口不能压缩成相邻月份；重复抽到的有效日期计重复次数，空抽样为missing。",
+      "换名单率不跨来源缺口假装连续交易；只有相邻日历月都具资格时才计算，并单列有效对数。",
+      "报告全期、前72/后60月、各年实际保留数及屏蔽原因；原2015-2025标题须说明非完整11年可评估。不得以当前时段支持为旧完整历史结论背书。"
+    ],
+    "stop_or_continue": "无需仅因原整包guard拒绝就永远终止这题；来源依赖隔离是有解释、对所有方法公平的补救。但当前未有P4完整影响清单，不能声称可评估月份数或放行。若已有保存资料无法形成可信映射，或保留后不能回答跨时期的取舍，按资料不足收尾，不新取数、不调阈值抢救。若只能回答有限时期，应先明确改成该有限问题，保留原分期不可评估事实。",
+    "required_evidence_before_run": [
+      "已保存坏源与面板的准确SHA对应，实际所需字段依赖和日期映射。",
+      "所有132月阻断/保留列表及每个原因、具体源行日期/标记；不含后续收益选择依据。",
+      "各方法统一支持、原权重未变、保留评价端点无已知口径错的只读核查。",
+      "更新design/合同绑定屏蔽SHA及有效支持范围；输入问题未清不能绕过实际guard，仅调用旧helper不是豁免。"
+    ],
+    "budget": "仍沿原firstcycle最后followup3/3、attempts8至最多10；此次来源只读定位不谎称真实效果已启动。统计启动规则仍为第9次尝试。"
+  }
+}

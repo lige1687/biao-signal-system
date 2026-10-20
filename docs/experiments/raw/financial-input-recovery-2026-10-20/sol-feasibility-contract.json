@@ -1,0 +1,37 @@
+{
+  "mission": "Inspect exact saved stock-level fields for a defensive diagnostic and select original value-source pages; no market effect or network",
+  "task_scope": [
+    "local read-only evidence reconciliation; one small output"
+  ],
+  "read_only_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-profitability-increment-2026-10-19",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-value-increment-2026-10-19",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/osap-history-revisions-2026-10-20",
+    "Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments",
+    "Volumes/win+mac通用/LeiSignal-新实验结果"
+  ],
+  "write_paths": [
+    "Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/local-feasibility.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "local-feasibility.json with exact columns, hashes, original evidence paths and missing fields"
+  ],
+  "stop_conditions": [
+    "missing source",
+    "scope ambiguity",
+    "source fingerprint mismatch"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "workspace_root": "/",
+  "execution_cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018"
+}

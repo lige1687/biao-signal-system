@@ -1,0 +1,117 @@
+{
+  "schema": "source-repair-proposal/1",
+  "status": "prepared_not_authorized_not_executed",
+  "question": "Can a verified historical security identifier recover the missing price and corporate-action chain before the current ticker?",
+  "why_informative": "Known source fault blocks63 evaluation dates. Official code identity is now known; do not re-download same current-code mixed series.",
+  "source_identity_evidence": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/security-identity-source.json",
+    "sha256": "69c0398d9a92ed54f398fe3939a3041c2921cc296981bb900dc47586f8acf58b"
+  },
+  "requests": [
+    {
+      "method": "query_history_k_data_plus",
+      "kwargs": {
+        "code": "sz.000043",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,pctChg,isST",
+        "start_date": "2013-01-01",
+        "end_date": "2019-12-13",
+        "frequency": "d",
+        "adjustflag": "2"
+      }
+    },
+    {
+      "method": "query_history_k_data_plus",
+      "kwargs": {
+        "code": "sz.000043",
+        "fields": "date,code,open,high,low,close,preclose,volume,amount,adjustflag,tradestatus,pctChg,isST",
+        "start_date": "2013-01-01",
+        "end_date": "2019-12-13",
+        "frequency": "d",
+        "adjustflag": "3"
+      }
+    },
+    {
+      "method": "query_adjust_factor",
+      "kwargs": {
+        "code": "sz.000043",
+        "start_date": "2013-01-01",
+        "end_date": "2019-12-13"
+      }
+    },
+    {
+      "method": "query_dividend_data",
+      "kwargs": {
+        "code": "sz.000043",
+        "year": "2013",
+        "yearType": "report"
+      }
+    },
+    {
+      "method": "query_dividend_data",
+      "kwargs": {
+        "code": "sz.000043",
+        "year": "2014",
+        "yearType": "report"
+      }
+    },
+    {
+      "method": "query_dividend_data",
+      "kwargs": {
+        "code": "sz.000043",
+        "year": "2015",
+        "yearType": "report"
+      }
+    },
+    {
+      "method": "query_dividend_data",
+      "kwargs": {
+        "code": "sz.000043",
+        "year": "2016",
+        "yearType": "report"
+      }
+    },
+    {
+      "method": "query_dividend_data",
+      "kwargs": {
+        "code": "sz.000043",
+        "year": "2017",
+        "yearType": "report"
+      }
+    },
+    {
+      "method": "query_dividend_data",
+      "kwargs": {
+        "code": "sz.000043",
+        "year": "2018",
+        "yearType": "report"
+      }
+    },
+    {
+      "method": "query_dividend_data",
+      "kwargs": {
+        "code": "sz.000043",
+        "year": "2019",
+        "yearType": "report"
+      }
+    }
+  ],
+  "max_new_data_operations": 10,
+  "retries": 0,
+  "stop_after_consecutive_failures": 2,
+  "stop_on_rate_limit": true,
+  "paid": false,
+  "account_keys_required": false,
+  "market_effects_allowed": false,
+  "existing_budgets_unchanged": "Old input-integrity source phase6/6 and old value probe4/4 remain consumed. This proposed10-request addition requires an explicit budget decision and cannot reset old totals.",
+  "acceptance": [
+    "exact identity, raw returned adjustment fields and dates",
+    "full original-return persistence and fingerprints",
+    "compare overlapping old/new price basis without assuming rename fixes dividends",
+    "corporate-action dates and factors; missing cases remain unknown",
+    "no overwrite or retrospective replacement of old panels, no effects until a separately frozen correction decision"
+  ],
+  "output_estimate_bytes": 33554432,
+  "local_metadata_estimate_bytes": 204800,
+  "output_policy": "registered external new-result directory after fresh route plan; no internal fallback",
+  "fallback": "If retired identifier not supported or two failures, retain exact failed requests and stop this source operation; no silent other-provider retry."
+}

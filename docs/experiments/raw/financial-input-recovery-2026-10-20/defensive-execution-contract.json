@@ -1,0 +1,88 @@
+{
+  "schema": "saved-defensive-execution/1",
+  "status": "approved_frozen",
+  "frozen_at": "2026-10-20T12:24:28.349077+08:00",
+  "purpose": "在同一低频股票机会中，兼顾过去涨幅和较小波动，能否比纯动量及少投入25%资金的动量方法少亏，同时不漏掉过多上涨？",
+  "bindings": {
+    "design": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-design-v3.json",
+      "sha256": "724f83eceb73c1b97785cb0a1f380ed0b201b0f4c27dc5bf35fb66fa98dd8778"
+    },
+    "input": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/core-v1/per_stock_month.csv",
+      "sha256": "732d63142467fc9193106b927596bd2d9c9d4d2b74d6a6d9d74164db2bfea3fb"
+    },
+    "helper": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/lowfreq_discovery.py",
+      "sha256": "dda4de0acd7335e73a481a66913f47359e974de25a0f220f545c31592fcad0df",
+      "functions": [
+        "_weighted_outcome",
+        "_relative_unknown",
+        "_turnover",
+        "_blocks",
+        "_mean",
+        "_sample_std"
+      ]
+    },
+    "source_integrity": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/price-dependency-audit.json",
+      "sha256": "3e3bac4606ec7ec7b2060783480e0899149bd0b0902d0d4d410216df177b367a"
+    },
+    "runner": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive_diagnostic.py",
+      "sha256": "e4c2655b58c86124f359146734116166e06f43c0fec316e9f2b846d90c2840d2"
+    }
+  },
+  "additional_bindings": {
+    "storage_plan": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-storage-plan.json",
+      "sha256": "0c89e4b3e307c5c08667445be6a9be6039c468d737b7da5625c9c910f481579b"
+    },
+    "synthetic": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-synthetic.json",
+      "sha256": "25d892e5c56bb1123fa1ec2f340aab929bcc1f5a8d0af8ab98b18a0e841c438b"
+    },
+    "independent_review": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-isolation-review.json",
+      "sha256": "34c1bb551f44308c901e1817e2a1ff76c6a6ba77380c1eb61a2ce58852d2e90d"
+    },
+    "launcher": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/launch_defensive.py",
+      "sha256": "c5fca875226918a13221177cb7b948595d71590689a61afd8fccd40e56bce4b8"
+    },
+    "scope": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-isolation-scope.json",
+      "sha256": "b2afe126d422780bcba6aa551e511f5266229dbab0b01900bb6ed5e7f095a512"
+    },
+    "strategy": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/strategy-anchors.json",
+      "sha256": "6af5402f7514dd9e6d01733329cccab95d148e2fdeaeebe80cb32c933c0730db"
+    }
+  },
+  "output_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-defensive-selection-20261020/lowfreq-defensive-selection-20261020-20261020T122132-428359aa0240/result",
+  "budget": {
+    "family": "lowfreq-candidate-first-cycle-2026-10-19",
+    "previous_brief": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/lowfreq-candidate-first-cycle-2026-10-19/brief.json",
+      "sha256": "d70bffd070d6e9e63ef4f4bc2fc2beb9ff1492b070b38f6c20d5c8704d60e075"
+    },
+    "core_used": 1,
+    "followups_before": 2,
+    "followup_number": 3,
+    "followups_max": 3,
+    "attempts_before": 8,
+    "attempt_number": 9,
+    "attempts_max": 10,
+    "new_source_requests": 0,
+    "new_effect_runs_authorized": 1,
+    "automatic_retry": false
+  },
+  "controller_review": {
+    "implementation_reviewed": true,
+    "source_isolation_readback": true,
+    "baseline_all_rows_must_match": true,
+    "no_full_decade_claim": true,
+    "no_account_or_production_claim": true,
+    "remaining_qualification": "run results and independent numerical verification pending"
+  }
+}

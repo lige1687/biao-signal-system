@@ -1,0 +1,853 @@
+{
+  "schema": "defensive-result-scientific-review/1",
+  "created_at": "2026-10-20T04:28:07.352953+00:00",
+  "reviewer": "astra_increment_boundary",
+  "verdict": "retain_limited_historical_comparison_signal_defer_combined_defensive_rule_and_close_bounded_question",
+  "plain_answer": "在剩余69个月里，动量候选中再选低波动，比原动量少亏且月均价格变化更好，值得保留这条有限历史线索；但它没有证明比少投入25%资金更能少亏，直接选低波动的亏损更小，组合选法相对后者的总优势很小且不稳定，还更频繁更换名单。因此暂缓把组合选法升级为新增防御规则，本轮有界比较可以结案。",
+  "evidence": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-execution-receipt.json",
+      "sha256": "bd814642589892b84886583ab5e6098cc7351f04a1d250e5543b8e9ba9bea13c"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-controller-review.json",
+      "sha256": "abc688a84549b4efb71bb0706a4fd89a4624afc5500603f395c9405e00f0722d"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-design-v3.json",
+      "sha256": "724f83eceb73c1b97785cb0a1f380ed0b201b0f4c27dc5bf35fb66fa98dd8778"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/financial-input-recovery-2026-10-20/defensive-isolation-review.json",
+      "sha256": "34c1bb551f44308c901e1817e2a1ff76c6a6ba77380c1eb61a2ce58852d2e90d"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-defensive-selection-20261020/lowfreq-defensive-selection-20261020-20261020T122132-428359aa0240/result/performance.json",
+      "sha256": "27c8ee132436bcb74dba0d8bf4a7119b644f27699e32755432618fc3af0dfe0a",
+      "bytes": 139628
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-defensive-selection-20261020/lowfreq-defensive-selection-20261020-20261020T122132-428359aa0240/result/per_month.json",
+      "sha256": "e17588e176c9e1c25f8627453acebd3ae8b679c5c8631c19745468d2091b03d3",
+      "bytes": 2296682
+    }
+  ],
+  "verification_boundary": {
+    "performance_and_per_month_hashes_independently_checked": true,
+    "full_comparisons_and_scenarios_read": true,
+    "new_statistics_or_resampling_run": false,
+    "new_effect_experiments": 0,
+    "source_or_code_modified": false,
+    "arithmetic_evidence_reused": "主控已从new_weights独立重算69月各法与三组差额，最大误差2.220446049250313e-16；共同支持、63缺失、67相邻名单对均核实。本审阅不重复该实验，读取既有数值并做单位转换/固定表内差额解释。",
+    "resampling_independent_reverification": false,
+    "only_written_file": "defensive-result-review.json"
+  },
+  "scope": {
+    "planned_months": 132,
+    "blocked_source_months": 63,
+    "evaluated_months": 69,
+    "dates": "2016-08至2016-10及2020-07至2025-12",
+    "early_label_actual_months": 9,
+    "2021_2025_actual_months": 60,
+    "fixed_historical_cohort": 600,
+    "all_history_previously_seen": true,
+    "no_full_decade_acceptance": true,
+    "measure_definition": "每月先算整个方法的价格变化；负分量为min(R,0)，正分量为max(R,0)。以下负分量改善表示所有可评月份的平均负贡献减少，合并了亏损频率和程度，不能读成每个下跌月都少亏同样金额。"
+  },
+  "method_performance": {
+    "pool_equal": {
+      "price_statistics_percent": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 1.363969911824957,
+          "mean_negative_component": -1.827281875046907,
+          "mean_positive_component": 3.191251786871865,
+          "monthly_standard_deviation": 7.049835958772476,
+          "worst_month": -16.615939062797377,
+          "mean_worst10pct_months": -10.18415574179211
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 1.3056209229585902,
+          "mean_negative_component": -1.837875137848794,
+          "mean_positive_component": 3.143496060807384,
+          "monthly_standard_deviation": 7.05106572403208,
+          "worst_month": -16.615939062797377,
+          "mean_worst10pct_months": -10.2362462472647
+        }
+      },
+      "target_list_replacement_percent": 0.6662462568839286,
+      "replacement_adjacent_pairs": 67,
+      "observed_top_decile_names_coverage_percent": 100.0,
+      "unknown_weight_percent": {
+        "mean": 0.058348988866366955,
+        "max": 0.7299270072992701
+      },
+      "either_endpoint_halt_weight_percent": {
+        "mean": 0.39310122728402835,
+        "max": 3.558052434456929
+      }
+    },
+    "momentum_top20": {
+      "price_statistics_percent": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 0.786497190191901,
+          "mean_negative_component": -2.1931074247540234,
+          "mean_positive_component": 2.9796046149459245,
+          "monthly_standard_deviation": 6.951423221767393,
+          "worst_month": -16.612636648940175,
+          "mean_worst10pct_months": -10.191028665574793
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 0.7733219596253662,
+          "mean_negative_component": -2.206282655320558,
+          "mean_positive_component": 2.9796046149459245,
+          "monthly_standard_deviation": 6.9618836949160405,
+          "worst_month": -16.612636648940175,
+          "mean_worst10pct_months": -10.191028665574793
+        }
+      },
+      "target_list_replacement_percent": 25.07795365451482,
+      "replacement_adjacent_pairs": 67,
+      "observed_top_decile_names_coverage_percent": 25.454633275251265,
+      "unknown_weight_percent": {
+        "mean": 0.013175230566534914,
+        "max": 0.9090909090909091
+      },
+      "either_endpoint_halt_weight_percent": {
+        "mean": 0.34821152641317893,
+        "max": 4.716981132075471
+      }
+    },
+    "momentum75": {
+      "price_statistics_percent": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 0.5898728926439254,
+          "mean_negative_component": -1.6448305685655178,
+          "mean_positive_component": 2.234703461209443,
+          "monthly_standard_deviation": 5.213567416325544,
+          "worst_month": -12.45947748670513,
+          "mean_worst10pct_months": -7.643271499181095
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 0.5799914697190242,
+          "mean_negative_component": -1.654711991490419,
+          "mean_positive_component": 2.234703461209443,
+          "monthly_standard_deviation": 5.22141277118703,
+          "worst_month": -12.45947748670513,
+          "mean_worst10pct_months": -7.643271499181095
+        }
+      },
+      "target_list_replacement_percent": 18.808465240886115,
+      "replacement_adjacent_pairs": 67,
+      "observed_top_decile_names_coverage_percent": 25.454633275251265,
+      "unknown_weight_percent": {
+        "mean": 0.009881422924901186,
+        "max": 0.6818181818181818
+      },
+      "either_endpoint_halt_weight_percent": {
+        "mean": 0.2611586448098842,
+        "max": 3.5377358490566038
+      }
+    },
+    "lowvol_top20": {
+      "price_statistics_percent": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 1.5253715009004194,
+          "mean_negative_component": -1.400261689179858,
+          "mean_positive_component": 2.9256331900802772,
+          "monthly_standard_deviation": 5.613378066618441,
+          "worst_month": -10.280254575788057,
+          "mean_worst10pct_months": -7.253323538602582
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 1.5121962703338845,
+          "mean_negative_component": -1.413436919746393,
+          "mean_positive_component": 2.9256331900802772,
+          "monthly_standard_deviation": 5.635343952197268,
+          "worst_month": -10.280254575788057,
+          "mean_worst10pct_months": -7.383193668472711
+        }
+      },
+      "target_list_replacement_percent": 24.423670532391057,
+      "replacement_adjacent_pairs": 67,
+      "observed_top_decile_names_coverage_percent": 12.431555622695901,
+      "unknown_weight_percent": {
+        "mean": 0.013175230566534914,
+        "max": 0.9090909090909091
+      },
+      "either_endpoint_halt_weight_percent": {
+        "mean": 0.33530127217857414,
+        "max": 5.6074766355140175
+      }
+    },
+    "momentum_lowvol": {
+      "price_statistics_percent": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 1.611780942220013,
+          "mean_negative_component": -1.6087350359358366,
+          "mean_positive_component": 3.2205159781558503,
+          "monthly_standard_deviation": 6.095595681042525,
+          "worst_month": -12.352129360294406,
+          "mean_worst10pct_months": -8.933545360850582
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 1.598605711653478,
+          "mean_negative_component": -1.6087350359358366,
+          "mean_positive_component": 3.2073407475893148,
+          "monthly_standard_deviation": 6.0917587185362345,
+          "worst_month": -12.352129360294406,
+          "mean_worst10pct_months": -8.933545360850582
+        }
+      },
+      "target_list_replacement_percent": 34.617635845555874,
+      "replacement_adjacent_pairs": 67,
+      "observed_top_decile_names_coverage_percent": 21.507748725413478,
+      "unknown_weight_percent": {
+        "mean": 0.013175230566534914,
+        "max": 0.9090909090909091
+      },
+      "either_endpoint_halt_weight_percent": {
+        "mean": 0.5120854786795735,
+        "max": 5.6074766355140175
+      }
+    }
+  },
+  "all_three_increment_tables": {
+    "momentum_lowvol_minus_momentum_top20": {
+      "scenario_zero": {
+        "mean_difference_monthly_pp": {
+          "mean_total_increment": 0.8252837520281119,
+          "mean_negative_component_increment": 0.5843723888181864,
+          "mean_positive_component_increment": 0.24091136320992554
+        },
+        "intervals_95_monthly_pp": {
+          "12": {
+            "total": [
+              0.5234270496625951,
+              1.1058681467731268
+            ],
+            "negative_component": [
+              0.29824078484897143,
+              0.8730463107431579
+            ],
+            "positive_component": [
+              -0.1323812660008086,
+              0.5963549172757932
+            ]
+          },
+          "24": {
+            "total": [
+              0.5599569608357252,
+              1.0579555184020688
+            ],
+            "negative_component": [
+              0.2766410475284605,
+              0.8654267152834436
+            ],
+            "positive_component": [
+              -0.12526612273346088,
+              0.6246982521905612
+            ]
+          }
+        },
+        "draws": {
+          "12": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              9,
+              124
+            ]
+          },
+          "24": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              3,
+              132
+            ]
+          }
+        }
+      },
+      "scenario_minus100": {
+        "mean_difference_monthly_pp": {
+          "mean_total_increment": 0.8252837520281119,
+          "mean_negative_component_increment": 0.5975476193847213,
+          "mean_positive_component_increment": 0.22773613264339063
+        },
+        "intervals_95_monthly_pp": {
+          "12": {
+            "total": [
+              0.5201611094103161,
+              1.1066442558329082
+            ],
+            "negative_component": [
+              0.298742341592623,
+              0.9055516906594365
+            ],
+            "positive_component": [
+              -0.1355911523665403,
+              0.5736609429049817
+            ]
+          },
+          "24": {
+            "total": [
+              0.5520405231873069,
+              1.0551425915181305
+            ],
+            "negative_component": [
+              0.2766410475284605,
+              0.8912874293541728
+            ],
+            "positive_component": [
+              -0.12526612273346088,
+              0.5932895274647536
+            ]
+          }
+        },
+        "draws": {
+          "12": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              9,
+              124
+            ]
+          },
+          "24": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              3,
+              132
+            ]
+          }
+        }
+      },
+      "linear_unknown_total_difference_range_pp": {
+        "observed_delta": 0.8252837520281127,
+        "adverse_unknown_minus100_or_zero": 0.8121085214615775,
+        "favorable_unknown_minus100_or_zero": 0.8384589825946474
+      }
+    },
+    "momentum_lowvol_minus_momentum75": {
+      "scenario_zero": {
+        "mean_difference_monthly_pp": {
+          "mean_total_increment": 1.0219080495760877,
+          "mean_negative_component_increment": 0.03609553262968076,
+          "mean_positive_component_increment": 0.9858125169464068
+        },
+        "intervals_95_monthly_pp": {
+          "12": {
+            "total": [
+              0.7370306490735405,
+              1.3567899527539773
+            ],
+            "negative_component": [
+              -0.2780481202560886,
+              0.3190703698190606
+            ],
+            "positive_component": [
+              0.5989316733973715,
+              1.3805490850936675
+            ]
+          },
+          "24": {
+            "total": [
+              0.7982875661458166,
+              1.3952895190216643
+            ],
+            "negative_component": [
+              -0.25435830627667216,
+              0.2931043647517279
+            ],
+            "positive_component": [
+              0.6146442071783056,
+              1.4039710544688893
+            ]
+          }
+        },
+        "draws": {
+          "12": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              9,
+              124
+            ]
+          },
+          "24": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              3,
+              132
+            ]
+          }
+        }
+      },
+      "scenario_minus100": {
+        "mean_difference_monthly_pp": {
+          "mean_total_increment": 1.018614241934454,
+          "mean_negative_component_increment": 0.04597695555458195,
+          "mean_positive_component_increment": 0.972637286379872
+        },
+        "intervals_95_monthly_pp": {
+          "12": {
+            "total": [
+              0.7445212861863549,
+              1.3429483433113474
+            ],
+            "negative_component": [
+              -0.2753970036748676,
+              0.3417953828252138
+            ],
+            "positive_component": [
+              0.5946212314986484,
+              1.3579418883248662
+            ]
+          },
+          "24": {
+            "total": [
+              0.814090707384356,
+              1.3927164628746092
+            ],
+            "negative_component": [
+              -0.24745283433026555,
+              0.31410265209842936
+            ],
+            "positive_component": [
+              0.6140026449574908,
+              1.3794427604118462
+            ]
+          }
+        },
+        "draws": {
+          "12": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              9,
+              124
+            ]
+          },
+          "24": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              3,
+              132
+            ]
+          }
+        }
+      },
+      "linear_unknown_total_difference_range_pp": {
+        "observed_delta": 1.0219080495760873,
+        "adverse_unknown_minus100_or_zero": 1.0087328190095526,
+        "favorable_unknown_minus100_or_zero": 1.0317894725009886
+      }
+    },
+    "momentum_lowvol_minus_lowvol_top20": {
+      "scenario_zero": {
+        "mean_difference_monthly_pp": {
+          "mean_total_increment": 0.08640944131959354,
+          "mean_negative_component_increment": -0.20847334675597878,
+          "mean_positive_component_increment": 0.29488278807557233
+        },
+        "intervals_95_monthly_pp": {
+          "12": {
+            "total": [
+              -0.39543787280519,
+              0.8077550052502082
+            ],
+            "negative_component": [
+              -0.594077676809216,
+              0.14918043581671617
+            ],
+            "positive_component": [
+              -0.20473676547719122,
+              0.9320205127578687
+            ]
+          },
+          "24": {
+            "total": [
+              -0.3586457463031144,
+              0.9731014650792674
+            ],
+            "negative_component": [
+              -0.5169306129688608,
+              0.1493977828350809
+            ],
+            "positive_component": [
+              -0.1601199342376465,
+              0.9291100186787632
+            ]
+          }
+        },
+        "draws": {
+          "12": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              9,
+              124
+            ]
+          },
+          "24": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              3,
+              132
+            ]
+          }
+        }
+      },
+      "scenario_minus100": {
+        "mean_difference_monthly_pp": {
+          "mean_total_increment": 0.08640944131959356,
+          "mean_negative_component_increment": -0.19529811618944384,
+          "mean_positive_component_increment": 0.2817075575090374
+        },
+        "intervals_95_monthly_pp": {
+          "12": {
+            "total": [
+              -0.40520667500571494,
+              0.8202062087156233
+            ],
+            "negative_component": [
+              -0.5914242613796719,
+              0.1887219843106945
+            ],
+            "positive_component": [
+              -0.22324460489380002,
+              0.9293978844844415
+            ]
+          },
+          "24": {
+            "total": [
+              -0.3607471510547695,
+              0.9867978305491703
+            ],
+            "negative_component": [
+              -0.5077751539928164,
+              0.17177735150707532
+            ],
+            "positive_component": [
+              -0.1742799537819089,
+              0.9291100186787632
+            ]
+          }
+        },
+        "draws": {
+          "12": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              9,
+              124
+            ]
+          },
+          "24": {
+            "valid": 2000,
+            "requested": 2000,
+            "finite_date_occurrences_range": [
+              3,
+              132
+            ]
+          }
+        }
+      },
+      "linear_unknown_total_difference_range_pp": {
+        "observed_delta": 0.08640944131959363,
+        "adverse_unknown_minus100_or_zero": 0.07323421075305872,
+        "favorable_unknown_minus100_or_zero": 0.09958467188612855
+      }
+    }
+  },
+  "period_tables_percent": {
+    "2015-2020": {
+      "pool_equal": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 2.597516325328012,
+          "mean_negative_component": -1.334944808749436,
+          "mean_positive_component": 3.9324611340774474
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 2.55685348759022,
+          "mean_negative_component": -1.3552576261372076,
+          "mean_positive_component": 3.912111113727427
+        }
+      },
+      "momentum_top20": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 2.1341887193088875,
+          "mean_negative_component": -1.5704180313726228,
+          "mean_positive_component": 3.70460675068151
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 2.1341887193088875,
+          "mean_negative_component": -1.5704180313726228,
+          "mean_positive_component": 3.70460675068151
+        }
+      },
+      "momentum75": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 1.600641539481665,
+          "mean_negative_component": -1.1778135235294676,
+          "mean_positive_component": 2.778455063011133
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 1.600641539481665,
+          "mean_negative_component": -1.1778135235294676,
+          "mean_positive_component": 2.778455063011133
+        }
+      },
+      "lowvol_top20": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 2.7625168844935275,
+          "mean_negative_component": -1.3660058469710692,
+          "mean_positive_component": 4.128522731464597
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 2.7625168844935275,
+          "mean_negative_component": -1.3660058469710692,
+          "mean_positive_component": 4.128522731464597
+        }
+      },
+      "momentum_lowvol": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 2.9721206094258594,
+          "mean_negative_component": -1.3234636350411488,
+          "mean_positive_component": 4.295584244467008
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 2.9721206094258594,
+          "mean_negative_component": -1.3234636350411488,
+          "mean_positive_component": 4.295584244467008
+        }
+      }
+    },
+    "2021-2025": {
+      "pool_equal": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 1.178937949799499,
+          "mean_negative_component": -1.901132434991528,
+          "mean_positive_component": 3.080070384791027
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 1.1179360382638457,
+          "mean_negative_component": -1.9102677646055322,
+          "mean_positive_component": 3.0282038028693776
+        }
+      },
+      "momentum_top20": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 0.5843434608243532,
+          "mean_negative_component": -2.2865108337612337,
+          "mean_positive_component": 2.870854294585586
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 0.569191945672838,
+          "mean_negative_component": -2.3016623489127483,
+          "mean_positive_component": 2.870854294585586
+        }
+      },
+      "momentum75": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 0.4382575956182645,
+          "mean_negative_component": -1.7148831253209251,
+          "mean_positive_component": 2.1531407209391897
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 0.42689395925462803,
+          "mean_negative_component": -1.7262467616845616,
+          "mean_positive_component": 2.1531407209391897
+        }
+      },
+      "lowvol_top20": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 1.3397996933614533,
+          "mean_negative_component": -1.4054000655111765,
+          "mean_positive_component": 2.74519975887263
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 1.3246481782099382,
+          "mean_negative_component": -1.4205515806626914,
+          "mean_positive_component": 2.74519975887263
+        }
+      },
+      "momentum_lowvol": {
+        "scenario_zero": {
+          "mean_total_monthly_price_change": 1.4077299921391362,
+          "mean_negative_component": -1.6515257460700399,
+          "mean_positive_component": 3.0592557382091763
+        },
+        "scenario_minus100": {
+          "mean_total_monthly_price_change": 1.392578476987621,
+          "mean_negative_component": -1.6515257460700399,
+          "mean_positive_component": 3.0441042230576607
+        }
+      }
+    }
+  },
+  "annual_counterevidence_zero_scenario_pp": {
+    "2016": {
+      "momentum_top20": {
+        "mean_total_monthly_price_change": 0.584161894323943,
+        "mean_negative_component": 0.0,
+        "mean_positive_component": 0.584161894323943
+      },
+      "momentum75": {
+        "mean_total_monthly_price_change": 1.5841101451701614,
+        "mean_negative_component": 0.0,
+        "mean_positive_component": 1.5841101451701614
+      },
+      "lowvol_top20": {
+        "mean_total_monthly_price_change": 0.5012728953880767,
+        "mean_negative_component": 0.0,
+        "mean_positive_component": 0.5012728953880767
+      }
+    },
+    "2020": {
+      "momentum_top20": {
+        "mean_total_monthly_price_change": 0.9648168880134858,
+        "mean_negative_component": 0.37043159449721075,
+        "mean_positive_component": 0.5943852935162746
+      },
+      "momentum75": {
+        "mean_total_monthly_price_change": 1.2651635323312103,
+        "mean_negative_component": -0.21847516726752197,
+        "mean_positive_component": 1.483638699598732
+      },
+      "lowvol_top20": {
+        "mean_total_monthly_price_change": 0.06376913970445909,
+        "mean_negative_component": 0.06381331789488062,
+        "mean_positive_component": -4.417819042118465e-05
+      }
+    },
+    "2021": {
+      "momentum_top20": {
+        "mean_total_monthly_price_change": 1.312619523350036,
+        "mean_negative_component": 0.44650183059958026,
+        "mean_positive_component": 0.8661176927504556
+      },
+      "momentum75": {
+        "mean_total_monthly_price_change": 1.6303071146011983,
+        "mean_negative_component": 0.12486615447295304,
+        "mean_positive_component": 1.5054409601282452
+      },
+      "lowvol_top20": {
+        "mean_total_monthly_price_change": -0.29464499575599035,
+        "mean_negative_component": 0.24893469530724194,
+        "mean_positive_component": -0.5435796910632327
+      }
+    },
+    "2022": {
+      "momentum_top20": {
+        "mean_total_monthly_price_change": 0.658090610519227,
+        "mean_negative_component": 0.3377277551541984,
+        "mean_positive_component": 0.3203628553650285
+      },
+      "momentum75": {
+        "mean_total_monthly_price_change": 0.5311117379987124,
+        "mean_negative_component": -0.6309488365067218,
+        "mean_positive_component": 1.1620605745054344
+      },
+      "lowvol_top20": {
+        "mean_total_monthly_price_change": 0.09198135167043611,
+        "mean_negative_component": -1.280241419905771,
+        "mean_positive_component": 1.3722227715762074
+      }
+    },
+    "2023": {
+      "momentum_top20": {
+        "mean_total_monthly_price_change": 0.9667739694262788,
+        "mean_negative_component": 0.9222779517696152,
+        "mean_positive_component": 0.0444960176566634
+      },
+      "momentum75": {
+        "mean_total_monthly_price_change": 0.8040228299477209,
+        "mean_negative_component": 0.47554800108379586,
+        "mean_positive_component": 0.3284748288639249
+      },
+      "lowvol_top20": {
+        "mean_total_monthly_price_change": -0.4322439368153278,
+        "mean_negative_component": -0.026628251920917875,
+        "mean_positive_component": -0.40561568489441024
+      }
+    },
+    "2024": {
+      "momentum_top20": {
+        "mean_total_monthly_price_change": 0.688334857615136,
+        "mean_negative_component": 1.0509559664856682,
+        "mean_positive_component": -0.3626211088705318
+      },
+      "momentum75": {
+        "mean_total_monthly_price_change": 0.7635158503929138,
+        "mean_negative_component": 0.10415993308854482,
+        "mean_positive_component": 0.6593559173043693
+      },
+      "lowvol_top20": {
+        "mean_total_monthly_price_change": -0.7359938883894775,
+        "mean_negative_component": -0.3490666629299272,
+        "mean_positive_component": -0.38692722545955044
+      }
+    },
+    "2025": {
+      "momentum_top20": {
+        "mean_total_monthly_price_change": 0.49111369566323776,
+        "mean_negative_component": 0.4174619344469046,
+        "mean_positive_component": 0.0736517612163326
+      },
+      "momentum75": {
+        "mean_total_monthly_price_change": 1.1184044496638135,
+        "mean_negative_component": 0.24316164411585373,
+        "mean_positive_component": 0.875242805547959
+      },
+      "lowvol_top20": {
+        "mean_total_monthly_price_change": 1.7105529631787741,
+        "mean_negative_component": 0.17637323665505641,
+        "mean_positive_component": 1.534179726523717
+      }
+    }
+  },
+  "interpretation_by_comparator": {
+    "vs_momentum": "月均总差+0.825284pp，两未知情景相同；负分量改善+0.584372/+0.597548pp；正分量+0.240911/+0.227736pp。12/24月重抽的总差和负分量区间均在0以上，正分量区间均跨0。说明这些保存日期上确有改善线索，不说明在未来既少亏又不漏涨。2024年正分量相对M反而−0.362621pp。",
+    "vs_momentum75": "月均总差+1.021908/+1.018614pp、正分量+0.985813/+0.972637pp的两种区间均在0以上；但负分量仅+0.036096/+0.045977pp且两块均跨0。不能认定它比简单少投入25%更可靠地少亏。MLV月波动6.0956%高于M75的5.2136%，最差10%月份均值−8.9335%也劣于−7.6433%；单个最差月略好不构成统一风险优势。2022年负分量相对M75−0.630949pp。",
+    "vs_pure_lowvol": "这是真正限制升级的简单对手。MLV负分量多亏0.208473/0.195298pp，正分量多0.294883/0.281708pp，抵消后总差仅+0.086409pp；总/负/正三项两块两情景的95%区间全跨0。直接低波动的月波动、最差月与最差10%均更温和。不能把微小总点差当组合更优，也不能把更少亏一项当纯低波动已经获准采用。",
+    "background_pool": "全资格池为背景，不将后来发现它月均1.36397%高于纯动量0.78650%转成新选优试验；所有比较都依赖同一已见时期。"
+  },
+  "upside_and_operating_costs": {
+    "coverage": "观察到的次月排名前10%股票中，MLV平均选中21.5077%，M/M75为25.4546%，LV为12.4316%。MLV比M漏掉更多排名靠前名字，比LV覆盖多；这是名字覆盖，不是资金收益或买入成功。M与M75相同覆盖率不能说少投入不漏涨。",
+    "replacement": "67个可比较相邻月，目标名单/权重更换量MLV34.6176%、M25.0780%、M75按总资金18.8085%、LV24.4237%。MLV比M和LV各高约9.54和10.19个百分点。指标未计价格漂移及实际成交，不能直接称真实交易额；但新增维护及潜在交易成本方向明确，不能凭无费用价格差宣布净增益。",
+    "position_load": "同n选择平均约108.74只股票；这些等权目标不能直接转为个人账户可维护规模或ETF组合。",
+    "no_beta_equivalence": "60日个股波动排名衡量个股自身价格起伏，没有估计对市场的敏感度；不能称低beta策略，亦未控制行业、规模、共同涨跌或证明独立风险来源。"
+  },
+  "unknown_and_halt": {
+    "unknowns": "M、LV、MLV平均未知权重都为0.0131752%，各最大0.909091%，但发生在不同月份：LV2021-01、MLV2021-09、M2023-07；M75对应2023-07为0.681818%。因此两极情景的总均值差相同来自平均未知权重相同，不是逐月缺失相消或结果已知。",
+    "linear_range": "相对LV总差在线性未知取[-100%,0]系数计算范围约+0.073234至+0.099585pp；范围小不解除跨月市场不确定性，不能扩成所有可能缺失回报或非线性亏损差的数学界限。",
+    "halts": "MLV入场或退出端点停牌目标权重均值0.512085%，最大5.607477%，高于M均值0.348212%和LV0.335301%。标价结果不证明这些头寸可成交；历史60日停牌或价格更新不足仍可能影响低波动测量。",
+    "source_missing": "这类少量个股结果未知与整段63月来源阻断完全不同；两情景不补回被阻断时期，不能以个股未知小来宣称总体资料影响小。"
+  },
+  "period_and_counterexample": {
+    "early_period": "所谓2015–2020仅9个月（2016三个月及2020下半年），不能当独立早期验证。",
+    "2021_2025": "60个月MLV相对M总差约+0.823387pp、负分量+0.634985pp；相对M75负分量仅+0.063357pp；相对LV负分量−0.246126pp、正分量+0.314056pp、总差仅+0.067930pp（以上零情景）。主要反例在完整后段仍存在。",
+    "annual_LV": "相对LV，MLV月均总差2021−0.294645pp、2023−0.432244pp、2024−0.735994pp、2025+1.710553pp；2022负分量差−1.280241pp。不能把2025的大差额与其余年份抵消后的微正均值称稳定兼顾。",
+    "retrospective_states": "保存的28个全池下跌月里，MLV相对全池平均+0.867784pp，弱于M75的+1.224351pp和LV的+1.293702pp；41个全池上涨月MLV相对全池−0.175585pp，比M75/LV少落后。它呈现更多参与上涨、承受更多下跌的取舍；状态为事后标签，不能据此做事前切换规则。"
+  },
+  "uncertainty_limits": [
+    "全部36组区间均2000次有效，但12月块有效日期出现次数为9–124、24月块为3–132；这是允许重复日期的次数，不是独立观察数。部分抽样支持很少，区间仅为既定算法的有限历史描述。",
+    "没有独立未来验证，且约48%的原月份因来源错误被屏蔽；时间缺失集中，不可据这些区间推断完整11年平均或未来可靠概率。",
+    "总/负/正与各风险描述相关，不能从多个指标中挑一个显著值宣布通过；未作普适赢家或风险调整alpha检验。"
+  ],
+  "final_adjudication": {
+    "bounded_question_answered": true,
+    "retain": "保留动量内低波动选择相对原动量的有限价格历史改善线索，以及相对现金与纯低波动的明确取舍记录。",
+    "defer": "暂缓新增组合防御规则、生产采用、账户或ETF迁移；相对纯低波动的必要增量未确立，比固定少投入更少亏也未确立。",
+    "pure_lowvol_status": "作为本批更强风险简单对手保留；本次不自动另选它成为已验证策略。",
+    "further_experiment_required_now": false,
+    "why_no_extra_run": "原固定问题已回答，决定受强对手、换名单代价、时期缺失及执行边界共同限制；不为追正值或用完尝试上限追加参数/实验。",
+    "budget": "本家族核心1、目的跟进3/3已使用、真实尝试9/最多10；剩余尝试不构成新增目的授权。",
+    "reopen_only": "若以后另获授权且出现可靠补齐来源或独立可执行场景，重新界定问题和累计预算；当前不承诺自动跟进。"
+  }
+}

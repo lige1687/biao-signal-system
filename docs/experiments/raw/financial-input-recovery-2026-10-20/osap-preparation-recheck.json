@@ -1,0 +1,122 @@
+{
+  "checked_at": "2026-10-20T11:55:08.246899+08:00",
+  "exit_code": 0,
+  "result": {
+    "schema": "research-preparation-context/1.0",
+    "execution_authorized": false,
+    "definition_status": "idea_definition_only",
+    "definitions": [],
+    "cases": [],
+    "research_references": [
+      {
+        "ref": "reference.osap.catalog@1.1.0",
+        "card": {
+          "id": "reference.osap.catalog",
+          "version": "1.1.0",
+          "name": "Open Source Asset Pricing",
+          "aliases": [
+            "OSAP",
+            "OpenSourceAP"
+          ],
+          "kind": "method",
+          "source": {
+            "institution": "Open Source Asset Pricing",
+            "url": "https://www.openassetpricing.com/data/",
+            "read_scope": "October2025 data page, release notes, saved catalog and 12 selected return columns checked 2026-10-20",
+            "reported_code_release": "v2.0.0",
+            "reported_code_commit": "b4e911e69678a7424f318617a61d813f54183123",
+            "code_data_generation_independently_reproduced": false
+          },
+          "construction": "public US aggregate portfolio reference; 331 catalog rows including212Predictor114Placebo5Drop,212published return columns; not raw stock observations",
+          "external_id": "reference.osap.catalog",
+          "implementation": "src/lei_signal/research/osap_reference.py; usage docs/research/osap-history-usage.md",
+          "market": "US",
+          "asset_type": "equity",
+          "universe": "source-defined; not interchangeable with ETF pool",
+          "frequency": "monthly",
+          "calendar": "source monthly portfolio observation dates",
+          "currency": "source US portfolio denomination; no currency conversion",
+          "unit": "published percent returns, decimal conversion divide by100 exactly once",
+          "inputs": "SHA-bound SignalDoc.csv and published wide LSreturns.csv; October2025 release reused",
+          "historical_availability": "unknown",
+          "missing_policy": "NA preserved; no filling; duplicates and nonfinite values rejected",
+          "preprocessing": "read-only parsing; Sign is NOT applied again to published long-short returns",
+          "questions": [
+            "retrieve original financial definitions and reference coverage; inspect version changes without assuming local factor validity"
+          ],
+          "uses": [
+            "description"
+          ],
+          "not_for": [
+            "production_trade",
+            "prediction",
+            "宣称完成A股或ETF因子验证"
+          ],
+          "variant": "canonical",
+          "local_changes": [
+            "offline SHA-bound reader and vintage comparison, no change to source return definitions"
+          ],
+          "license_status": "source publicly accessible; redistribution not established",
+          "engineering_status": "local_reference_reader_verified",
+          "evidence_status": "real_saved_reference_input_checked_no_new_performance_test",
+          "usage_path": "docs/research/osap-history-usage.md",
+          "evidence_path": "docs/experiments/osap-history-revisions-2026-10-20.md"
+        },
+        "registered_evidence_status": "real_saved_reference_input_checked_no_new_performance_test",
+        "match_reasons": [
+          "explicit_reference_ref"
+        ],
+        "explicit": true
+      }
+    ],
+    "reference_search": {
+      "registered_count": 29,
+      "matched_count": 1,
+      "truncated_count": 0,
+      "undisplayed_refs": [],
+      "explicit_refs": [
+        "reference.osap.catalog@1.1.0"
+      ],
+      "retrieval_scope": "registered_metadata_only",
+      "verification_note": "仅返回已有登记；本次未抓取或重新核验来源，不代表已实现或有效。",
+      "no_match_note": ""
+    },
+    "case_search": {
+      "search_available": true,
+      "scanned_count": 12,
+      "matched_count": 0,
+      "truncated_count": 0,
+      "undisplayed_ids": [],
+      "missing_requested_ids": [],
+      "no_match_note": "无命中不等于没有风险；可用准确案例ID补查。"
+    },
+    "source_bindings": [
+      {
+        "path": "docs/research/current-standards.json",
+        "declared_sha256": null,
+        "actual_sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71",
+        "status": "present",
+        "qualification_note": "actual fingerprint only; no declared source anchor"
+      },
+      {
+        "path": "docs/research/definitions.v1.json",
+        "declared_sha256": null,
+        "actual_sha256": "e08e38e0e62adc116dda776074b5a2a4a34d89081f25ec20312945e76e1b8d88",
+        "status": "present",
+        "qualification_note": "actual fingerprint only; no declared source anchor"
+      }
+    ],
+    "issues": [],
+    "financial_review_prompts": [
+      "相信什么金融现象，适用哪些资产与情形？",
+      "为何可能关联目标？这是待检验假设，不是已经证明的原因。",
+      "准确计算式、单位、方向是什么，与邻近变体有何区别？",
+      "观察值当时何时可知，何时形成决定，何时能够行动？",
+      "什么是正例和反例，缺资料及未发生的情形如何保留？",
+      "哪些结果会削弱或否定这个想法，结论允许覆盖多大范围？"
+    ],
+    "handoff": "将人工判断写回原合同的 claim_mapping、controller_review、source_refs 和 sources；文字匹配不代表语义理解或方法获批准。"
+  },
+  "stderr": "",
+  "supersedes": "2026-10-20 11:14 retrieval format blocker; original owner repaired at 11:30"
+}
