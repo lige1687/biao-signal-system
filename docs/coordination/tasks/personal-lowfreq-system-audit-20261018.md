@@ -1,3 +1,14 @@
+# 美股公开买入分组按用途比较交付 2026-10-20T17:20:54.884245+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（本轮公开买入端及现有输入能力问题）；scope_released true。checked_coordination_sha cc77fc7c8d515a7307481ffa5d83d0dffaaba508；checked_at 2026-10-20T17:20:54.884245+08:00。前段所列COORDINATION及self/research-utility-review/lowfreq-discovery/gemini/dispatch/pro-advice/strategy-account-bridge已读，最新fetch到本sha无新改动；无冲突，不接管他人季度盈利、低换手、ETF或前向服务。
+- 成果codex/personal-lowfreq-system-audit-20261018@008625c1c4eb1b63d82403565799343075b30922；首次结果6e63149514b9b5fe44549fa5298db1d5d42c8df0的44准确路径及最后4交付文件都已普通push并逐字读回。报告docs/experiments/us-long-only-factor-evaluation-2026-10-20.md SHA57bb8b14535a820e6b1d5a7ac99249f2e1fc4e8c86664f46c17ee0ab29e07263；主树新report/raw、三reference卡及source键精确镜像，旧登记值不变；registry美股与跨市场/mixed，INDEX已登记，5188 API全文与SHA核同；open仅queued不报视觉验收。
+- French202608/CIZ大规模股主2015-01—2024-12共120月；原来源各自动态827—977只，非共同池；背景618月和最新20月预定保留。OP H-B平均+0.2443pp/月、B负月+0.3686，但H-N收益与下跌月范围跨零、最大跌幅略差且最新20月H-N负；保留有限候选。BM无主期普遍防守支持；MOM少亏少赚、最新起伏升高，保留基准不采新规则。OP非GP，不将French替代当OSAP拆解成功。
+- Sol明确实现7合成检查，Luna/low一次核心执行18.4秒，root独立原CSV+NumPy核53178项/4548行及所有固定重取区间，差<=5.56e-17，Astra前后科学审阅；两树归置/diff通过。来源12次（含OSAP两次限额HTML），核心1、额外变体0，失败留存；不重跑旧效果、不新增生产/交易/付费/通知/删除。模型实际token费用未知。
+- 原goal okr-8830a1f1ec4f v36→38，只next_action/link/note，状态in_progress/4of6/授权/owner/旧历史全保持。未代用户验收。原策略SHA不变，完整策略及共同US逐股/ETF证据仍未完成。
+- 数据大件留固定外盘，路径由raw/storage-plan/manifest绑定；结果SHA ccd7784e8212bd37d3d1bffee34871fecd5e1e09ab750cd90815c163bb7c044f。当前范围无必需待办、无后台进程；恢复先读state、manifest、controller-conclusion、scientific-review、next-step-readiness，不重跑。新问题应先核可取得的共同历史成员/退出收益/OP当时版本，与其他owner微软EPS资料复用划界；边际组合相关性不能填此缺口。
+
+---
+
 # 美股买入端复核完成，准备交付 2026-10-20T17:12:52.673603+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active（归档读回中）；checked_coordination_sha ab68aa8e85a085601bc3d11828d559654fc3502c；checked_at 2026-10-20T17:12:52.673603+08:00。已读COORDINATION及personal-lowfreq-system-audit-20261018,research-utility-review-20261012,lowfreq-strategy-discovery-20261019,gemini-strategy-review-20261020,research-dispatch-controller,pro-advice-process-review-20261020,strategy-account-bridge-20261020当前范围；补读另owner17:11完成低换手/微软EPS资格以及前向服务17:08，均不接管。准备同步首次因remote ref变化在写入前断言停止，读取新增两任务后恢复，没有覆盖他人。
