@@ -1,3 +1,12 @@
+# OSAP 真实资料接通与目录导航补齐 2026-10-20T10:51:25.568078+08:00
+
+- 原任务 active；checked_coordination_sha=66aac72fc664f6ee4a56974c97dda38baff5ee36；checked_at=2026-10-20T10:51:25.568078+08:00；已读 COORDINATION/self/research-utility-review最新10:45历史300股票资料范围及此前theory/external/discovery/dispatch；对方价格/高点资料与本题财报版本及OSAP参照无冲突。
+- 实际接通331目录/212公开收益列、真实8财报字段版本，源文件未变，无新市场收益研究。Astra独审指出三版本日期区间重叠缺陷，已修正并加入回归，待最终复核。
+- 为让既有准备工具能找到接入入口，范围增补docs/research/definitions.v1.json仅新增 reference.osap.catalog@1.1.0 研究参照卡（保留旧1.0和所有原对象），主树与本工作树分别保留各自既有内容；不新增交易因子或改正式策略。本题报告/registry本键/INDEX本行及使用文档也在主树准确落地供现有报告库消费，采用前核同名新文件不存在，旧文件写前指纹再核，原条目保持。
+- 原写范围/委派边界仍有效；Luna原件复核、Sol OSAP实现已完成，Astra高时点审查已回调，root复核与归档。源代码版本和公开组合生成关系未核，RQData真实访问未核，当前可见授权不能当已接通。
+
+---
+
 # OSAP 接入与历史版本可用性补缺启动 2026-10-20T10:40:52.958706+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=ee5b59c6b6528a4c0f27d308e8a88a9d080ab289；checked_at=2026-10-20T10:40:52.958706+08:00；已读 COORDINATION/self/research-utility-review 最新高点执行复验10:35/theory-workflow-system-increment/external-quant-resources/research-dispatch-controller/lowfreq-strategy-discovery，并检索所有任务的拟写模块。另一个对话继续高点组合与股票执行，本轮不重跑其因子效果。
