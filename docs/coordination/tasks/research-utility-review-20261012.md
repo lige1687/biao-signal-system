@@ -1,6 +1,6 @@
 # 固定选股完成，必要简单对手补核 2026-10-20T15:54:59.151888+08:00
 
-- task-id/owner沿原，status active，scope_released false；checked_coordination_sha=8d5c442234eeae9240dc430fafad2dbb4656e1e6；checked_at=2026-10-20T15:54:59.151888+08:00。fresh fetch无变更；已读self/COORDINATION/personal最新14:35/gemini最新12:08/lowfreq-strategy-discovery/dispatch，范围无冲突。
+- task-id/owner沿原，status active，scope_released false；checked_coordination_sha=a67043a2741d017ce67004eab1549a8412abafe4；checked_at=2026-10-20T15:54:59.151888+08:00。本轮fetch发现并发更新，首推被正常保护拒绝；已读self/COORDINATION/personal最新15:42美股与方法文字、pro-advice-process-review新审查、gemini最新12:08/lowfreq-strategy-discovery/dispatch，均无实现重叠。已普通合并完整恢复后的协调树，仅他人2任务有最终净变更。
 - 核心已执行1/1：300有120合格月60完整月；600有严重来源衔接资格损失，不能冒称有效复验。root与Astra识别待补解释：偏冷选择波动也较低，需要相同动量组的低波动半数作为简单对手；只用保存features/outcomes，不新增行情/改原名单/改阈值。另已登记保存结果缺失/贡献诊断跟进1/3。
 - 新必要跟进2/3：主300同5组权重、相同选股数量，只增加vol60最低半数对手，比较cool-lowvol及相同月份收益/风险/费用/少赚；事后解释核查，不称独立验证。精确新增唯一写src/lei_signal/research/short_reversal_lowvol_control.py、tests/unit/test_short_reversal_lowvol_control.py、本raw/followup-lowvol.py及合同/小回执；原核心文件及外盘结果不修改。root实现/冻结，Sol现有保存数值独核继续。大输出仍原固定盘新followup子目录，预计16MiB在原256MiB内。0新增source取数。
 - 600显示价格微小衔接差的原因尚未全面证明，不放宽检查、不凭修过1股放行整批；本次主300范围可完成。无生产/交易/阈值修改/付费/删除，主成果仍本地未提交。
