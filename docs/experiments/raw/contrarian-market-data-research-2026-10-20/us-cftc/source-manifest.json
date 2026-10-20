@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "scope": "CFTC TFF futures-only, code 13874A only; data qualification, no outcome test",
+  "retrieved_at_utc": "2026-10-20T12:18:55.681098+00:00",
+  "raw_file": "/Volumes/win+mac通用/LeiSignal-新实验结果/contrarian-market-data-research-20261020/contrarian-market-data-research-20261020-20261020T201641-8db4c9e11062/result/us-cftc/cftc-tff-futures-only-13874A-snapshot-2026-10-20.csv",
+  "raw_sha256": "7e58691af996974cc7620a09523aceef6e1b0ddc0e1e2c9a443202b8406d2f1e",
+  "raw_bytes": 318128,
+  "raw_format": "UTF-8 CSV as directly returned by filtered CFTC SODA API",
+  "api_query_url": "https://publicreporting.cftc.gov/resource/gpe5-46if.csv?%24select=id%2Cmarket_and_exchange_names%2Creport_date_as_yyyy_mm_dd%2Cyyyy_report_week_ww%2Ccontract_market_name%2Ccftc_contract_market_code%2Copen_interest_all%2Cdealer_positions_long_all%2Cdealer_positions_short_all%2Cdealer_positions_spread_all%2Casset_mgr_positions_long%2Casset_mgr_positions_short%2Casset_mgr_positions_spread%2Clev_money_positions_long%2Clev_money_positions_short%2Clev_money_positions_spread%2Cother_rept_positions_long%2Cother_rept_positions_short%2Cother_rept_positions_spread%2Ctot_rept_positions_long_all%2Ctot_rept_positions_short%2Cnonrept_positions_long_all%2Cnonrept_positions_short_all&%24where=cftc_contract_market_code%3D%2713874A%27&%24order=report_date_as_yyyy_mm_dd+ASC&%24limit=5000",
+  "response_headers": {
+    "Content-Type": "text/csv; charset=UTF-8",
+    "Last-Modified": "Fri, 16 Oct 2026 19:30:08 GMT"
+  },
+  "selection": {
+    "dataset_id": "gpe5-46if",
+    "report": "TFF - Futures Only",
+    "contract_code": "13874A",
+    "fields": [
+      "id",
+      "market_and_exchange_names",
+      "report_date_as_yyyy_mm_dd",
+      "yyyy_report_week_ww",
+      "contract_market_name",
+      "cftc_contract_market_code",
+      "open_interest_all",
+      "dealer_positions_long_all",
+      "dealer_positions_short_all",
+      "dealer_positions_spread_all",
+      "asset_mgr_positions_long",
+      "asset_mgr_positions_short",
+      "asset_mgr_positions_spread",
+      "lev_money_positions_long",
+      "lev_money_positions_short",
+      "lev_money_positions_spread",
+      "other_rept_positions_long",
+      "other_rept_positions_short",
+      "other_rept_positions_spread",
+      "tot_rept_positions_long_all",
+      "tot_rept_positions_short",
+      "nonrept_positions_long_all",
+      "nonrept_positions_short_all"
+    ],
+    "units": "futures contracts"
+  },
+  "checks": {
+    "rows": 1062,
+    "date_first": "2006-06-13",
+    "date_last": "2026-10-13",
+    "unique_report_dates": 1062,
+    "unique_ids": 1062,
+    "null_count_core_fields": {
+      "open_interest_all": 0,
+      "asset_mgr_positions_long": 0,
+      "asset_mgr_positions_short": 0,
+      "asset_mgr_positions_spread": 0,
+      "lev_money_positions_long": 0,
+      "lev_money_positions_short": 0,
+      "lev_money_positions_spread": 0
+    },
+    "nonpositive_open_interest": 0,
+    "negative_count_core_fields": {
+      "open_interest_all": 0,
+      "asset_mgr_positions_long": 0,
+      "asset_mgr_positions_short": 0,
+      "asset_mgr_positions_spread": 0,
+      "lev_money_positions_long": 0,
+      "lev_money_positions_short": 0,
+      "lev_money_positions_spread": 0
+    },
+    "arithmetic_issue_ids": [],
+    "name_variants": {
+      "E-MINI S&P 500 STOCK INDEX - CHICAGO MERCANTILE EXCHANGE": 817,
+      "E-MINI S&P 500 - CHICAGO MERCANTILE EXCHANGE": 245
+    }
+  },
+  "manual_spot_check": {
+    "official_web_row": "https://publicreporting.cftc.gov/w/gpe5-46if/default",
+    "report_date": "2006-06-13",
+    "contract_code": "13874A",
+    "open_interest": 2042655,
+    "asset_manager_long": 370566,
+    "asset_manager_short": 169268,
+    "matches_raw": true
+  },
+  "request_ledger": [
+    {
+      "kind": "official API schema metadata",
+      "url": "https://publicreporting.cftc.gov/api/views/gpe5-46if.json",
+      "status": 200,
+      "result": "field names inspected, not saved as original bytes"
+    },
+    {
+      "kind": "official API aggregate",
+      "url": "https://publicreporting.cftc.gov/resource/gpe5-46if.json?%24select=count%28%2A%29+as+n%2Cmin%28report_date_as_yyyy_mm_dd%29+as+earliest%2Cmax%28report_date_as_yyyy_mm_dd%29+as+latest&%24where=cftc_contract_market_code%3D%2713874A%27",
+      "status": 200,
+      "result": {
+        "rows": 1062,
+        "first": "2006-06-13",
+        "last": "2026-10-13"
+      }
+    },
+    {
+      "kind": "official API filtered original CSV",
+      "url": "https://publicreporting.cftc.gov/resource/gpe5-46if.csv?%24select=id%2Cmarket_and_exchange_names%2Creport_date_as_yyyy_mm_dd%2Cyyyy_report_week_ww%2Ccontract_market_name%2Ccftc_contract_market_code%2Copen_interest_all%2Cdealer_positions_long_all%2Cdealer_positions_short_all%2Cdealer_positions_spread_all%2Casset_mgr_positions_long%2Casset_mgr_positions_short%2Casset_mgr_positions_spread%2Clev_money_positions_long%2Clev_money_positions_short%2Clev_money_positions_spread%2Cother_rept_positions_long%2Cother_rept_positions_short%2Cother_rept_positions_spread%2Ctot_rept_positions_long_all%2Ctot_rept_positions_short%2Cnonrept_positions_long_all%2Cnonrept_positions_short_all&%24where=cftc_contract_market_code%3D%2713874A%27&%24order=report_date_as_yyyy_mm_dd+ASC&%24limit=5000",
+      "status": 200,
+      "bytes": 318128,
+      "sha256": "7e58691af996974cc7620a09523aceef6e1b0ddc0e1e2c9a443202b8406d2f1e"
+    }
+  ],
+  "network_errors": [],
+  "source_pages": [
+    "https://www.cftc.gov/es/node/128971",
+    "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
+    "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm",
+    "https://www.cftc.gov/idc/groups/public/@commitmentsoftraders/documents/file/tfmexplanatorynotes.pdf",
+    "https://www.cftc.gov/PressRoom/PressReleases/5857-10",
+    "https://www.cftc.gov/PressRoom/PressReleases/6745-13",
+    "https://www.cftc.gov/PressRoom/PressReleases/7864-19",
+    "https://www.cftc.gov/PressRoom/PressReleases/8662-23",
+    "https://www.cftc.gov/PressRoom/PressReleases/9138-25"
+  ],
+  "use_boundary": "Current public archive snapshot; not weekly first-publication versions or comprehensive historical actual release timestamps. No performance or tradability finding."
+}

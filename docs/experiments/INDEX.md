@@ -1,3 +1,7 @@
+- 2026-10-20：[美股机构仓位与散户情绪研究](us-contrarian-positioning-research-2026-10-20.md)：NAAIM免费最新及长历史已取得，两项机构季度风险用途未支持采用，AAII旧证据复用。
+
+- 2026-10-20：[A股机构拥挤与散户情绪资料](a-share-contrarian-positioning-research-2026-10-20.md)：5份基金原件与18期直接调查已存，全市场/公布时点未齐，效果未评价。
+
 - 2026-10-20：[机制优先研究与月末股债再平衡](mechanism-rebalancing-review-2026-10-20.md)：核心流程已写入指引，部分程序检查已实现；保留独立候选，本地交易效果未评价。
 
 # docs/experiments 总索引

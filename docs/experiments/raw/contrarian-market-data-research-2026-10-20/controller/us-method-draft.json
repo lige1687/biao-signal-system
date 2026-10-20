@@ -1,0 +1,57 @@
+{
+  "status": "draft pending input qualification and independent review",
+  "question": "For US S&P 500 E-mini TFF Asset Manager/Institutional category, does high net-long share identify greater subsequent SPY quarterly downside beyond recent price trend and volatility?",
+  "use": "risk recognition, not automatic inverse trading or full Module E",
+  "markets": "US only; no pooled A-share estimates",
+  "x_definition": {
+    "id": "candidate:us.tff-13874a-asset-manager-net-share@draft-1",
+    "formula": "100*(asset_mgr_long_all-asset_mgr_short_all)/open_interest_all",
+    "units": "percentage points of open interest",
+    "futures_only": true,
+    "category": "Asset Manager/Institutional",
+    "contract_code": "13874A",
+    "no_clip": true,
+    "not_measured": [
+      "total institutional stock exposure",
+      "actual redemption or forced selling",
+      "position concentration within institutions"
+    ]
+  },
+  "initial_period_rule": "exclude signal dates before 2011; 2006-2010 historical positions may only supply later rolling-distribution warmup once publicly released, not earlier decisions",
+  "availability_rule": "actual official release when evidenced; otherwise usual release alignment explicitly unqualified historical assumption; historical current vintage remains descriptive, not validated live forecast; delayed releases and corrected records isolated before execution",
+  "frequency": "weekly positions, low-frequency risk assessment for roughly a quarter; no position sizing",
+  "main_target": "largest peak-to-trough decline along 64 consecutive observed SPY adjusted closes beginning after the observation/availability anchor, percent positive loss",
+  "horizon_return_segments": 63,
+  "auxiliary": "same 63 segments price appreciation reported to expose forgone gains, not another optimized target",
+  "price_baseline": [
+    "prior63 return percent",
+    "prior252 return percent",
+    "past63 daily return std times sqrt252 percent",
+    "current adjusted close / trailing252 max minus1 percent"
+  ],
+  "models": [
+    "historical mean",
+    "baseline prices",
+    "factor alone",
+    "baseline plus factor"
+  ],
+  "method": "one fixed standardized linear ridge lambda0.001, intercept unpenalized; annual expanding fits and matured labels only; earliest potential evaluation2015 subject to observed input support; no tuning",
+  "state_description": "high and low at past260 weekly observations 90th/10th percentile, exclude current; illustrative fixed tail definitions now selected before outcomes only for CFTC not original NAAIM/AAII; continuous primary model retained",
+  "uncertainty": "paired contiguous weekly blocks26 primary and13 sensitivity,2000 resamples; same predictions and dates; preserve overlap, no claim exact independence",
+  "period_checks": [
+    "2015-2019",
+    "2020-2022",
+    "2023-latest mature"
+  ],
+  "concentration": "contribution of largest5 weeks and leave one calendar year out, using saved errors not re-fit",
+  "increment_metric": "squared risk prediction error change and mean absolute error in percentage points; compare simple mean too",
+  "not_claimed": [
+    "causal forced-sale effect",
+    "trading profitability",
+    "A-share transfer",
+    "complete LEI effectiveness",
+    "unseen validation"
+  ],
+  "budget": "one core batch, no parameter grid, only necessary implementation correction and two predeclared block lengths; exact actual annual model counts saved",
+  "stop": "close limited historical question after arithmetic/time/uncertainty/period counterchecks; actual vintage uncertainty remains an explicit evidence boundary, not a blanket reason to avoid descriptive test"
+}

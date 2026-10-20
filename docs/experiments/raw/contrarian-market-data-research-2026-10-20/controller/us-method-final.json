@@ -1,0 +1,269 @@
+{
+  "status": "frozen before new market outcome calculation",
+  "question": "For US S&P 500 E-mini TFF Asset Manager/Institutional category, does high net-long share identify greater subsequent SPY quarterly downside beyond recent price trend and volatility?",
+  "use": "risk recognition, not automatic inverse trading or full Module E",
+  "markets": "US only; no pooled A-share estimates",
+  "initial_period_rule": "exclude signal dates before 2011; 2006-2010 historical positions may only supply later rolling-distribution warmup once publicly released, not earlier decisions",
+  "availability_rule": "all observations use the same explicitly hypothetical research alignment: first actual SPY close strictly after Friday in report calendar week; target begins NEXT quote close. actual_release_at stays nullable and is NOT replaced by this alignment. Current-vintage retrospective association only, not historical realtime forecast. Known CFTC delay/correction periods excluded before outcomes.",
+  "frequency": "weekly positions, low-frequency risk assessment for roughly a quarter; no position sizing",
+  "main_target": "largest peak-to-trough decline along 64 consecutive observed SPY adjusted closes beginning after the observation/availability anchor, percent positive loss",
+  "horizon_return_segments": 63,
+  "auxiliary": "same 63 segments price appreciation reported to expose forgone gains, not another optimized target",
+  "price_baseline": [
+    "prior63 return percent",
+    "prior252 return percent",
+    "past63 daily return std times sqrt252 percent",
+    "current adjusted close / trailing252 max minus1 percent"
+  ],
+  "models": [
+    "historical mean",
+    "baseline prices",
+    "factor alone",
+    "baseline plus factor"
+  ],
+  "method": "one fixed standardized linear ridge lambda0.001, intercept unpenalized; annual expanding fits and matured labels only; earliest potential evaluation2015 subject to observed input support; no tuning",
+  "state_description": "high and low at past260 weekly observations 90th/10th percentile, exclude current; illustrative fixed tail definitions now selected before outcomes only for CFTC not original NAAIM/AAII; continuous primary model retained",
+  "uncertainty": "paired contiguous weekly blocks26 primary and13 sensitivity,2000 resamples; same predictions and dates; preserve overlap, no claim exact independence",
+  "period_checks": [
+    "2015-2019",
+    "2020-2022",
+    "2023-latest mature"
+  ],
+  "concentration": "contribution of largest5 weeks and leave one calendar year out, using saved errors not re-fit",
+  "increment_metric": "squared risk prediction error change and mean absolute error in percentage points; compare simple mean too",
+  "not_claimed": [
+    "causal forced-sale effect",
+    "trading profitability",
+    "A-share transfer",
+    "complete LEI effectiveness",
+    "unseen validation"
+  ],
+  "budget": {
+    "core_batches": 1,
+    "candidate_count": 2,
+    "annual_models": 4,
+    "max_years_per_candidate": 12,
+    "core_annual_fits_max": 96,
+    "parameter_grid": 0,
+    "market_policy_simulations": 0,
+    "bootstrap_calendar_lengths": [
+      26,
+      13
+    ],
+    "resamples_each": 2000,
+    "corrections": "only demonstrated implementation defect; preserve failure and count attempts, no tuning"
+  },
+  "stop": "close limited historical question after arithmetic/time/uncertainty/period counterchecks; actual vintage uncertainty remains an explicit evidence boundary, not a blanket reason to avoid descriptive test",
+  "frozen_at": "2026-10-20T12:29:47.413418+00:00",
+  "candidates": {
+    "cftc": {
+      "id": "candidate:us.tff-13874a-asset-manager-net-share@draft-1",
+      "formula": "100*(asset_mgr_long_all-asset_mgr_short_all)/open_interest_all",
+      "units": "percentage points of open interest",
+      "futures_only": true,
+      "category": "Asset Manager/Institutional",
+      "contract_code": "13874A",
+      "no_clip": true,
+      "not_measured": [
+        "total institutional stock exposure",
+        "actual redemption or forced selling",
+        "position concentration within institutions"
+      ]
+    },
+    "naaim": {
+      "id": "candidate:sentiment.naaim-exposure@draft-1",
+      "formula": "unclipped official weekly Mean/Average; official values preferred, current public extension after last official date only",
+      "units": "percent reported equity exposure, not total institutional ownership",
+      "thresholds": {
+        "low": "<=40",
+        "high": ">=100"
+      },
+      "identity_cleaning": "same-date <=0.005pp rounding duplicates choose final official row; exclude2014-03-18 and2014-03-19 together; first/gap>8d/extreme starting after removal is unknown, not confirmed entry",
+      "not_complete_module_E": true
+    }
+  },
+  "primary_question": "For each US institutional positioning proxy separately, does high positioning identify greater following-quarter path drawdown beyond past price trends and volatility?",
+  "target_semantics": "maximum peak-to-trough decline within future64 closes (63segments); distinct from loss starting at initial close, which is recorded separately. Neither proves avoided losses from an action.",
+  "cftc_exclusions": {
+    "initial": "all report dates before2011",
+    "calendar_masks": [
+      [
+        "2013-10-01",
+        "2013-12-31"
+      ],
+      [
+        "2018-12-24",
+        "2019-03-31"
+      ],
+      [
+        "2023-01-01",
+        "2023-03-31"
+      ],
+      [
+        "2025-09-30",
+        "2025-12-31"
+      ]
+    ],
+    "individual": [
+      "2017-03-28"
+    ],
+    "rationale": "conservative masks around known announcement exceptions; includes some normal weeks, not a claim all were delayed;2019-03-26 correction inside2019Q1mask; remaining history still not first-vintage-qualified"
+  },
+  "cftc_tail_warmup": "past260 retained input observations from2011 onward before current row; masked dates retained only for retrospective distribution calculation and not evaluated; no use of pre2011 backclassified history",
+  "model_semantics": "minimize mean squared error +0.001*sum standardized slope squares, intercept unpenalized; transform based only on matured training rows; project all risk predictions to max(0,prediction) before scoring, selected before outcomes",
+  "evaluation_period": "2015-01-01 through latest matured window in saved SPY vintage ending2026-10-16; each source own common dates, not pooled",
+  "qualification": {
+    "path": "docs/experiments/raw/contrarian-market-data-research-2026-10-20/controller/us-qualification.json",
+    "sha256": "66d50a0eb80d8eb248e82d3745be511c38a98208efe51243b675464db0d70d8f"
+  },
+  "input_support": {
+    "naaim": {
+      "annual": {
+        "2015": {
+          "training_rows": 429,
+          "evaluation_rows": 51,
+          "training_end": "2014-12-30"
+        },
+        "2016": {
+          "training_rows": 480,
+          "evaluation_rows": 51,
+          "training_end": "2015-12-29"
+        },
+        "2017": {
+          "training_rows": 531,
+          "evaluation_rows": 52,
+          "training_end": "2016-12-27"
+        },
+        "2018": {
+          "training_rows": 583,
+          "evaluation_rows": 53,
+          "training_end": "2017-12-26"
+        },
+        "2019": {
+          "training_rows": 635,
+          "evaluation_rows": 52,
+          "training_end": "2018-12-26"
+        },
+        "2020": {
+          "training_rows": 688,
+          "evaluation_rows": 52,
+          "training_end": "2019-12-31"
+        },
+        "2021": {
+          "training_rows": 740,
+          "evaluation_rows": 52,
+          "training_end": "2020-12-29"
+        },
+        "2022": {
+          "training_rows": 792,
+          "evaluation_rows": 52,
+          "training_end": "2021-12-28"
+        },
+        "2023": {
+          "training_rows": 844,
+          "evaluation_rows": 52,
+          "training_end": "2022-12-27"
+        },
+        "2024": {
+          "training_rows": 896,
+          "evaluation_rows": 53,
+          "training_end": "2023-12-26"
+        },
+        "2025": {
+          "training_rows": 949,
+          "evaluation_rows": 52,
+          "training_end": "2024-12-31"
+        },
+        "2026": {
+          "training_rows": 1001,
+          "evaluation_rows": 28,
+          "training_end": "2025-12-30"
+        }
+      },
+      "mature": 1042,
+      "confirmed_entries": {
+        "low": 40,
+        "high": 25
+      }
+    },
+    "cftc": {
+      "annual": {
+        "2015": {
+          "training_rows": 181,
+          "evaluation_rows": 52,
+          "training_end": "2014-12-30"
+        },
+        "2016": {
+          "training_rows": 233,
+          "evaluation_rows": 52,
+          "training_end": "2015-12-29"
+        },
+        "2017": {
+          "training_rows": 285,
+          "evaluation_rows": 51,
+          "training_end": "2016-12-27"
+        },
+        "2018": {
+          "training_rows": 336,
+          "evaluation_rows": 52,
+          "training_end": "2017-12-26"
+        },
+        "2019": {
+          "training_rows": 388,
+          "evaluation_rows": 39,
+          "training_end": "2018-12-26"
+        },
+        "2020": {
+          "training_rows": 427,
+          "evaluation_rows": 52,
+          "training_end": "2019-12-31"
+        },
+        "2021": {
+          "training_rows": 479,
+          "evaluation_rows": 52,
+          "training_end": "2020-12-29"
+        },
+        "2022": {
+          "training_rows": 531,
+          "evaluation_rows": 52,
+          "training_end": "2021-12-28"
+        },
+        "2023": {
+          "training_rows": 583,
+          "evaluation_rows": 39,
+          "training_end": "2022-12-27"
+        },
+        "2024": {
+          "training_rows": 622,
+          "evaluation_rows": 53,
+          "training_end": "2023-12-26"
+        },
+        "2025": {
+          "training_rows": 675,
+          "evaluation_rows": 39,
+          "training_end": "2024-12-31"
+        },
+        "2026": {
+          "training_rows": 727,
+          "evaluation_rows": 27,
+          "training_end": "2025-12-30"
+        }
+      },
+      "mature": 754,
+      "confirmed_entries": {
+        "low": 10,
+        "high": 25
+      }
+    }
+  },
+  "controller_decision": {
+    "universe": "SPY risk as US broad ETF; NAAIM active manager respondents and E-mini asset managers are distinct input populations, cannot generalize to all US/A-share institutions",
+    "proxy": "measures exposure/net futures share; lacks forced selling and concentration; mechanism hypothesis not proven",
+    "method": "about180+ matured initial CFTC weeks and400+ NAAIM weeks permit only fixed small retrospective model; overlapping quarters reduce independent support, extrema remain descriptive",
+    "claim": "limited current-vintage conditional historical comparisons and hypothesis direction; no causal, live deployment, net return or whole-strategy proof"
+  },
+  "scientific_review": "controller/method-review.md",
+  "direction_rule": "lower error alone does not support contrarian high-position risk if high exposure instead associates with lower future risk",
+  "additional_uncertainty": "high-minus-middle future drawdown and price-model residual differences with same calendar blocks; no causal interpretation",
+  "old_history": "prior sentiment family >=1028 fits and >=4Pro retained; new full NAAIM source and quarterly risk distinct from old131week20dayreturn; SPY history previously inspected, no independent validation"
+}

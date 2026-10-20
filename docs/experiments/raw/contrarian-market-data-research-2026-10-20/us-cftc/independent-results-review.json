@@ -1,0 +1,338 @@
+{
+  "scope": "Independent arithmetic/read-back of saved US candidates, no new outcome fit grid or source request",
+  "status": "pass",
+  "freeze_sha_match": {
+    "us-method-final.json": true,
+    "us_research.py": true,
+    "us-qualification.json": true,
+    "synthetic-check.json": true,
+    "method-review.md": true,
+    "price-input-reuse.json": true,
+    "release-evidence.json": true,
+    "naaim-annual-input-support.csv": true,
+    "naaim-combined-input-only.csv": true,
+    "naaim-official-2026-08-19-parsed.csv": true,
+    "naaim-official-2026-08-19.xlsx": true,
+    "request-ledger-initial.json": true,
+    "request-ledger-official-xlsx.json": true,
+    "request-ledger-winter-json.json": true,
+    "winterresearch-metrics-stock.json": true,
+    "winterresearch-naaim-parsed.csv": true,
+    "cftc-tff-futures-only-13874A-snapshot-2026-10-20.csv": true,
+    "naaim-schedule.json": true,
+    "cftc-schedule.json": true,
+    "SPY.json": true,
+    "LEI 技术交易体系.md": true,
+    "LEI 技术实现.md": true
+  },
+  "result_sha_match": true,
+  "price_sha_match": true,
+  "model_solve_count": 2,
+  "new_market_fits": 0,
+  "candidate_reviews": {
+    "naaim": {
+      "observations": 1042,
+      "predictions": 600,
+      "fits_saved": 48,
+      "metrics": {
+        "mean": {
+          "mse": 33.47713975445023,
+          "mae_pp": 4.269035073421725,
+          "max_abs_delta": 0.0
+        },
+        "prices": {
+          "mse": 35.75770577922758,
+          "mae_pp": 4.316747555312751,
+          "max_abs_delta": 0.0
+        },
+        "factor": {
+          "mse": 33.85450489014038,
+          "mae_pp": 3.8493856852268435,
+          "max_abs_delta": 7.105427357601002e-15
+        },
+        "combined": {
+          "mse": 35.559776074647026,
+          "mae_pp": 4.212444922923716,
+          "max_abs_delta": 7.105427357601002e-15
+        }
+      },
+      "annual": {
+        "2015": {
+          "n_train": 429,
+          "n_evaluation": 51,
+          "latest_mature_train_label": "2014-12-30"
+        },
+        "2016": {
+          "n_train": 480,
+          "n_evaluation": 51,
+          "latest_mature_train_label": "2015-12-29"
+        },
+        "2017": {
+          "n_train": 531,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2016-12-27"
+        },
+        "2018": {
+          "n_train": 583,
+          "n_evaluation": 53,
+          "latest_mature_train_label": "2017-12-26"
+        },
+        "2019": {
+          "n_train": 635,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2018-12-26"
+        },
+        "2020": {
+          "n_train": 688,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2019-12-31"
+        },
+        "2021": {
+          "n_train": 740,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2020-12-29"
+        },
+        "2022": {
+          "n_train": 792,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2021-12-28"
+        },
+        "2023": {
+          "n_train": 844,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2022-12-27"
+        },
+        "2024": {
+          "n_train": 896,
+          "n_evaluation": 53,
+          "latest_mature_train_label": "2023-12-26"
+        },
+        "2025": {
+          "n_train": 949,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2024-12-31"
+        },
+        "2026": {
+          "n_train": 1001,
+          "n_evaluation": 28,
+          "latest_mature_train_label": "2025-12-30"
+        }
+      },
+      "sample_labels": [
+        {
+          "report_date": "2015-01-07",
+          "target_start": "2015-01-13",
+          "target_end": "2015-04-15",
+          "n_closes": 64,
+          "risk63": 3.5331926545108416,
+          "loss_from_start63": 1.5142385823155857,
+          "return63": 4.596866063055738,
+          "max_abs_difference": 0.0
+        },
+        {
+          "report_date": "2020-02-05",
+          "target_start": "2020-02-11",
+          "target_end": "2020-05-12",
+          "n_closes": 64,
+          "risk63": 33.717275321149764,
+          "loss_from_start63": 33.10834674980373,
+          "return63": -13.990437048239023,
+          "max_abs_difference": 0.0
+        },
+        {
+          "report_date": "2020-03-04",
+          "target_start": "2020-03-10",
+          "target_end": "2020-06-09",
+          "n_closes": 64,
+          "risk63": 22.244987159303186,
+          "loss_from_start63": 22.244987159303186,
+          "return63": 11.877245987347695,
+          "max_abs_difference": 0.0
+        },
+        {
+          "report_date": "2026-07-01",
+          "target_start": "2026-07-07",
+          "target_end": "2026-10-05",
+          "n_closes": 64,
+          "risk63": 3.3763770557464934,
+          "loss_from_start63": 2.4407829831026406,
+          "return63": 3.8844003045465314,
+          "max_abs_difference": 0.0
+        }
+      ],
+      "source_formula_checks": {
+        "rows_checked": 1042,
+        "source_mismatches": [],
+        "threshold_mismatches": [],
+        "actual_release_populated": 0
+      },
+      "increment_pct_vs_prices": 0.5535302119285657,
+      "increment_pct_vs_mean": -6.221070065939394,
+      "independent_augmented_qr_solve": {
+        "year": 2025,
+        "model": "combined",
+        "n_train": 949,
+        "max_beta_abs_difference": 3.2862601528904634e-14,
+        "max_mu_abs_difference": 1.4210854715202004e-14,
+        "max_sd_abs_difference": 1.0658141036401503e-14
+      },
+      "official_parsed_crosscheck": {
+        "rows_checked": 1042,
+        "source": "naaim-official-2026-08-19-parsed.csv",
+        "allowed_rounding_pp": 0.00501,
+        "missing_dates": [],
+        "value_mismatches": [],
+        "threshold_mismatches": []
+      }
+    },
+    "cftc": {
+      "observations": 754,
+      "predictions": 560,
+      "fits_saved": 48,
+      "metrics": {
+        "mean": {
+          "mse": 35.197343683127,
+          "mae_pp": 4.068515094155252,
+          "max_abs_delta": 7.105427357601002e-15
+        },
+        "prices": {
+          "mse": 37.54583407097218,
+          "mae_pp": 4.360924435628443,
+          "max_abs_delta": 0.0
+        },
+        "factor": {
+          "mse": 37.19243700232807,
+          "mae_pp": 4.349367358321375,
+          "max_abs_delta": 0.0
+        },
+        "combined": {
+          "mse": 39.723236573027485,
+          "mae_pp": 4.638825037243895,
+          "max_abs_delta": 0.0
+        }
+      },
+      "annual": {
+        "2015": {
+          "n_train": 181,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2014-12-30"
+        },
+        "2016": {
+          "n_train": 233,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2015-12-29"
+        },
+        "2017": {
+          "n_train": 285,
+          "n_evaluation": 51,
+          "latest_mature_train_label": "2016-12-27"
+        },
+        "2018": {
+          "n_train": 336,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2017-12-26"
+        },
+        "2019": {
+          "n_train": 388,
+          "n_evaluation": 39,
+          "latest_mature_train_label": "2018-12-26"
+        },
+        "2020": {
+          "n_train": 427,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2019-12-31"
+        },
+        "2021": {
+          "n_train": 479,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2020-12-29"
+        },
+        "2022": {
+          "n_train": 531,
+          "n_evaluation": 52,
+          "latest_mature_train_label": "2021-12-28"
+        },
+        "2023": {
+          "n_train": 583,
+          "n_evaluation": 39,
+          "latest_mature_train_label": "2022-12-27"
+        },
+        "2024": {
+          "n_train": 622,
+          "n_evaluation": 53,
+          "latest_mature_train_label": "2023-12-26"
+        },
+        "2025": {
+          "n_train": 675,
+          "n_evaluation": 39,
+          "latest_mature_train_label": "2024-12-31"
+        },
+        "2026": {
+          "n_train": 727,
+          "n_evaluation": 27,
+          "latest_mature_train_label": "2025-12-30"
+        }
+      },
+      "sample_labels": [
+        {
+          "report_date": "2015-01-06",
+          "target_start": "2015-01-13",
+          "target_end": "2015-04-15",
+          "n_closes": 64,
+          "risk63": 3.5331926545108416,
+          "loss_from_start63": 1.5142385823155857,
+          "return63": 4.596866063055738,
+          "max_abs_difference": 0.0
+        },
+        {
+          "report_date": "2020-02-04",
+          "target_start": "2020-02-11",
+          "target_end": "2020-05-12",
+          "n_closes": 64,
+          "risk63": 33.717275321149764,
+          "loss_from_start63": 33.10834674980373,
+          "return63": -13.990437048239023,
+          "max_abs_difference": 0.0
+        },
+        {
+          "report_date": "2020-03-03",
+          "target_start": "2020-03-10",
+          "target_end": "2020-06-09",
+          "n_closes": 64,
+          "risk63": 22.244987159303186,
+          "loss_from_start63": 22.244987159303186,
+          "return63": 11.877245987347695,
+          "max_abs_difference": 0.0
+        },
+        {
+          "report_date": "2026-07-07",
+          "target_start": "2026-07-14",
+          "target_end": "2026-10-12",
+          "n_closes": 64,
+          "risk63": 3.3584561955757097,
+          "loss_from_start63": 2.975404784271718,
+          "return63": 3.7511299111102625,
+          "max_abs_difference": 0.0
+        }
+      ],
+      "source_formula_checks": {
+        "rows_checked": 754,
+        "source_mismatches": [],
+        "threshold_mismatches": [],
+        "actual_release_populated": 0
+      },
+      "increment_pct_vs_prices": -5.7993185021257165,
+      "increment_pct_vs_mean": -12.858620612526849,
+      "independent_augmented_qr_solve": {
+        "year": 2020,
+        "model": "combined",
+        "n_train": 427,
+        "max_beta_abs_difference": 1.509903313490213e-14,
+        "max_mu_abs_difference": 1.0658141036401503e-14,
+        "max_sd_abs_difference": 4.884981308350689e-15
+      }
+    }
+  },
+  "failures": [],
+  "max_headline_metric_abs_difference": 7.105427357601002e-15
+}

@@ -1,0 +1,42 @@
+{
+  "task_scope": [
+    "public sources acquisition and data qualification only, no outcome statistics",
+    "separate US and China; preserve old frozen research"
+  ],
+  "read_only_paths": [
+    "docs/experiments/institutional-crowding-retail-contrarian-design-2026-10-20.md",
+    "docs/research/current-standards.json",
+    "configs/strategy-documents.v1.json"
+  ],
+  "network_allowed": true,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "source URLs, asof and observed latest dates",
+    "immutable downloads with sha256 and parseable data",
+    "availability/coverage/units/revisions gaps and request ledger",
+    "small report in own raw only"
+  ],
+  "stop_conditions": [
+    "payment or login bypass needed",
+    "scope ambiguity",
+    "protected source or outside assigned writes",
+    "do not retry same access denial more than once"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "mission": "china data acquisition and qualification",
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/contrarian-market-data-research-2026-10-20/china",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/contrarian-market-data-research-20261020/contrarian-market-data-research-20261020-20261020T201641-8db4c9e11062/result/china"
+  ],
+  "external_output": "/Volumes/win+mac通用/LeiSignal-新实验结果/contrarian-market-data-research-20261020/contrarian-market-data-research-20261020-20261020T201641-8db4c9e11062/result/china",
+  "source_request_budget": "necessary source requests for bounded data qualification; record all including failures, no blind repeated query",
+  "storage_plan": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/contrarian-market-data-research-2026-10-20/storage-plan.json"
+}

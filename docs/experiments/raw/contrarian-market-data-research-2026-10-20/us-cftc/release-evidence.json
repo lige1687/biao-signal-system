@@ -1,0 +1,127 @@
+{
+  "scope": "CFTC TFF futures-only, CFTC contract 13874A; evidence dates, not a complete point-in-time calendar",
+  "timezone": "America/New_York",
+  "normal_rule": {
+    "report_day": "usually Tuesday",
+    "publication_day": "usually Friday",
+    "publication_time": "15:30 America/New_York",
+    "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
+    "warning": "not a per-week actual publication timestamp"
+  },
+  "historical_backfill": {
+    "tff_launch_announcement": "2010-07-22",
+    "launch_source": "https://www.cftc.gov/PressRoom/PressReleases/5857-10",
+    "historical_publication_announcement": "2010-12-03",
+    "historical_source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm",
+    "historic_first_report_date": "2006-06-13",
+    "rows_with_report_date_before_launch_announcement": 215,
+    "definitely_pre_first_report_rows_through_2010_07_13": 214,
+    "first_possible_report_date_requires_confirmation": "2010-07-20",
+    "classification_backcast_source": "https://www.cftc.gov/idc/groups/public/@commitmentsoftraders/documents/file/tfmexplanatorynotes.pdf",
+    "warning": "rows through 2010-07-13 cannot have had contemporaneous TFF weekly release; 2010-07-20 may be first-release week but is not proven by this announcement; early classification uses later trader classifications"
+  },
+  "known_exceptions": [
+    {
+      "event": "2013 federal shutdown",
+      "report_date": "2013-10-01",
+      "original_scheduled_publication_date": "2013-10-04",
+      "announcement_publication_date": "2013-10-25",
+      "date_status": "CFTC announced first resumed publication for this date, not a row-level timestamp",
+      "source": "https://www.cftc.gov/PressRoom/PressReleases/6745-13"
+    },
+    {
+      "event": "2018-2019 federal shutdown",
+      "report_date": "2018-12-24",
+      "original_scheduled_publication_date": "2018-12-28",
+      "announcement_publication_date": "2019-02-01",
+      "date_status": "CFTC expected date for first resumed report; later reports not reconstructed here",
+      "source": "https://www.cftc.gov/PressRoom/PressReleases/7864-19"
+    },
+    {
+      "event": "ION incident",
+      "original_scheduled_publication_date": "2023-02-03",
+      "announcement_publication_date": "2023-02-24",
+      "date_status": "CFTC special announcement says issued today",
+      "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm"
+    },
+    {
+      "event": "ION incident",
+      "original_scheduled_publication_date": "2023-02-10",
+      "announcement_publication_date": "2023-03-03",
+      "date_status": "CFTC special announcement says issued today",
+      "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm"
+    },
+    {
+      "event": "ION incident",
+      "original_scheduled_publication_date": "2023-02-17",
+      "announcement_publication_date": "2023-03-08",
+      "date_status": "CFTC special announcement says issued today",
+      "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm"
+    },
+    {
+      "event": "ION incident",
+      "original_scheduled_publication_date": "2023-02-24",
+      "announcement_publication_date": "2023-03-10",
+      "date_status": "CFTC special announcement says issued today",
+      "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm"
+    },
+    {
+      "event": "ION incident",
+      "original_scheduled_publication_date": "2023-03-03",
+      "announcement_publication_date": "2023-03-14",
+      "date_status": "CFTC special announcement says issued today",
+      "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm"
+    },
+    {
+      "event": "ION incident",
+      "original_scheduled_publication_date": "2023-03-10",
+      "announcement_publication_date": "2023-03-16",
+      "date_status": "CFTC special announcement says issued today",
+      "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm"
+    },
+    {
+      "event": "ION incident",
+      "original_scheduled_publication_date": "2023-03-17",
+      "announcement_publication_date": "2023-03-21",
+      "date_status": "CFTC special announcement says issued today",
+      "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm"
+    },
+    {
+      "event": "2017 correction explicitly names 13874A",
+      "report_date": "2017-03-28",
+      "corrected_publication_date": "2017-04-04",
+      "date_status": "CFTC special announcement says updated reports published; first-version values not retained in this snapshot",
+      "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm"
+    },
+    {
+      "event": "2019 reporting firm correction explicitly names 13874A",
+      "report_date": "2019-03-26",
+      "publication_date": "2019-03-29",
+      "announcement_date": "2019-04-03",
+      "date_status": "CFTC says additional reportable positions were added to reports published 2019-03-29; first-version comparison not available",
+      "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm"
+    }
+  ],
+  "shutdown_2025": {
+    "source": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalSpecialAnnouncements/index.htm",
+    "schedule_version_date": "2025-12-09",
+    "status": "updated intended publication dates, not verified row-level arrival receipts",
+    "supersedes_initial_plan_source": "https://www.cftc.gov/PressRoom/PressReleases/9138-25",
+    "report_to_new_date": {
+      "2025-09-30": "2025-11-19",
+      "2025-10-07": "2025-11-21",
+      "2025-10-14": "2025-11-25",
+      "2025-10-21": "2025-12-02",
+      "2025-10-28": "2025-12-05",
+      "2025-11-04": "2025-12-09",
+      "2025-11-10": "2025-12-10",
+      "2025-11-18": "2025-12-12",
+      "2025-11-25": "2025-12-15",
+      "2025-12-02": "2025-12-17",
+      "2025-12-09": "2025-12-19",
+      "2025-12-16": "2025-12-23",
+      "2025-12-23": "2025-12-29"
+    }
+  },
+  "historical_release_list_gap_source": "https://www.cftc.gov/es/node/128971"
+}

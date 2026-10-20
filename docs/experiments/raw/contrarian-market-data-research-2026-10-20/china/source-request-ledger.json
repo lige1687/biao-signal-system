@@ -1,0 +1,82 @@
+{
+  "created_utc": "2026-10-20T12:32:28.044347+00:00",
+  "direct_source_requests": [
+    {
+      "kind": "fund_original_pdf",
+      "success": 5,
+      "failed": 0
+    },
+    {
+      "kind": "jsfund_2020Q4_legacy_pdf",
+      "url": "https://www.jsfund.cn/portal2011/Services/AttachDownLoad.jsp?id=483181",
+      "result": "HTTP 404; official legacy announcement page still exists"
+    },
+    {
+      "kind": "ckgsb_index",
+      "url": "https://english.ckgsb.edu.cn/knowledge/the-ckgsb-investor-sentiment-survey/",
+      "result": "HTTP 200; 20 linked report entries"
+    },
+    {
+      "kind": "ckgsb_original_pdf",
+      "pdf_parse_valid": 19,
+      "invalid": "2020Q4: first download and two later direct re-GETs each returned the same 163840-byte truncated PDF without an EOF marker; retained as invalid original response.",
+      "unique_index_pdf_entries": 20,
+      "initial_http_200_pdf_responses": 20,
+      "extra_http_200_responses_for_2020Q4_validation": 2,
+      "total_http_200_pdf_responses": 22,
+      "pdf_parse_valid_unique_files": 19
+    },
+    {
+      "kind": "ckgsb_initial_unicode_url",
+      "result": "Ten unencoded Chinese URL attempts failed client-side before an HTTP response; percent-encoded retry subsequently downloaded those ten reports.",
+      "client_side_encoding_errors": 10,
+      "http_responses_from_these_errors": 0
+    },
+    {
+      "kind": "eastmoney_historical_holdings_probe",
+      "success_http_200": 3,
+      "requests": [
+        "070002 year=2008",
+        "070002 year=2016",
+        "000011 year=2016"
+      ],
+      "result": "4 quarter blocks each, no report publication timestamps"
+    },
+    {
+      "kind": "csrc_eid_portal",
+      "url": "https://eid.csrc.gov.cn/fund",
+      "result": "TLS internal error; no further retry"
+    },
+    {
+      "kind": "csrc_legacy_portal",
+      "url": "https://fund.csrc.gov.cn/",
+      "result": "connection reset; no further retry"
+    }
+  ],
+  "request_accounting": {
+    "unit": "explicit tool operations or Python urllib.request.urlopen invocations; redirects/internal search-engine requests are not counted",
+    "web_tool": {
+      "search_query_items_observed": 32,
+      "search_query_basis": "8 items in the compacted prior-turn summary plus six visible four-query web calls in the retained log",
+      "open_items_visible_after_compaction": 10,
+      "click_items_visible_after_compaction": 5,
+      "find_items_visible_after_compaction": 1,
+      "pre_compaction_open_click_find_items": "unknown; these visible counts are lower bounds, not all-session totals",
+      "all_session_web_tool_call_total": "unknown"
+    },
+    "direct_urlopen_invocations_visible": {
+      "fund_original_pdf_success": 5,
+      "jsfund_legacy_2020Q4_pdf_http_404": 1,
+      "jsfund_legacy_announcement_html_success": 1,
+      "ckgsb_index_html_success": 6,
+      "ckgsb_index_html_http_403": 1,
+      "ckgsb_pdf_http_200_initial_unique_reports": 20,
+      "ckgsb_pdf_http_200_extra_validation_2020Q4": 2,
+      "ckgsb_press_release_html_success": 5,
+      "eastmoney_historical_f10_success": 3,
+      "csrc_official_portals_tls_or_reset_errors": 2,
+      "total_explicit_urlopen_invocations": 46,
+      "note": "The 2020Q4 PDF accounts for three HTTP-200 responses: one initial download plus two validation re-GETs. Ten Unicode-URL errors are separate client-side attempts and are excluded from 46."
+    }
+  }
+}
