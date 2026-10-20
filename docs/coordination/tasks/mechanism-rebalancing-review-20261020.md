@@ -1,3 +1,14 @@
+# 机构持仓与散户情绪反向设计交付 2026-10-20T19:41:18.882181+08:00
+
+- task-id/owner沿原；status completed（本次plan_only设计和来源核查）；scope_released true；checked_coordination_sha 72e5db1362fba9c1f2bfbe323cd780a534107a24；checked_at 2026-10-20T19:41:18.882181+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/strategy-account-bridge-20261020/personal-lowfreq-system-audit-20261018；交付前新增market-style-observation-20261020已读，主题为风格/环境看板，与本报告无文件重叠，registry各自准确键串行追加。原情绪研究及账户/财务owner保持。
+- 结论：机构总敞口、个股持股比例与共同持仓/受迫交易分开；散户调查、机构调查、融资行为不能互换。优先美国CFTC TFF一个类别及A股主动基金持仓/申赎的历史可得性核查；原AAII/NAAIM/融资/定投限定结果保留，尚无新因子有效性或交易增量结论。首入极端与等待解除须保留同批机会、等待损失及漏掉的大涨。
+- 报告 docs/experiments/institutional-crowding-retail-contrarian-design-2026-10-20.md，SHA e32aa8f3cd3a14fac07991e8665fbc5919b548b03b96e8aead113b8e50072206；API全文及唯一列表核同，其他726登记值保持，9只读源SHA不变，归置/diff通过。本机报告库登记成功；没有浏览器视觉验收或市场实验。
+- 成果 codex/mechanism-rebalancing-review-20261020@027949c17668b1d360ee0a0362a2864e550d32dd；核心2e6dd10816d56f26b65d89beb5631623c1e0c4dc共9准确路径213441字节及最后交付回执普通推送，远端ref与逐文件字节读回，0删除，无main合并。分支registry/INDEX只加入本题增量，不打包共享主树其他改动。
+- Sol medium本地复用和美国官方源，Astra medium机制/时点独审，root核中国来源和主要旧结果。30来源请求含3失败，0全历史下载/新市场运行/旧拟合重跑/付费；实际token费用未知。全部来源读取边界、旧结果及失败见本题raw。
+- 目标API只读去重，仓外目标库未写；核心规范/源码/规则/生产/交易/通知保持。本次设计问题已答，候选完整历史资格和策略效果未评价，不把设计结案当采用。无本题后台任务，未重启原情绪合同。
+
+---
+
 # 机构拥挤与散户情绪反向候选：设计和资料核查 2026-10-20T19:24:12.332718+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha ab7baec4b763f598d199e9361d770494fed9ae50；checked_at 2026-10-20T19:24:12.332718+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/strategy-account-bridge-20261020/personal-lowfreq-system-audit-20261018最新范围；原情绪owner及新财务/前向保持，不接管旧研究。
