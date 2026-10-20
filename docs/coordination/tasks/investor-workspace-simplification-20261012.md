@@ -1,3 +1,11 @@
+# 同两张研究图最终字号版同步 2026-10-20T16:13:37.463041+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=41231cd2affeed8fb1d8392b69eddc621f48b179；checked_at=2026-10-20T16:13:37.463041+08:00。已读COORDINATION/self/research-utility-review-20261012/personal-lowfreq-system-audit-20261018/research-dispatch-controller，当前同范围无写入冲突。
+- 原因子owner追加同两SVG最终760宽、文字放大及performance上下排版版，源固定：increment11901B/a8ca88cc06fdfbd4b51aaa5514170a2f1ae70fb3a122f97adfd0d676b5fdb85a，performance11582B/cdbb347f8a490ee2e7dbf578483a5aa0d022c89afd0db20b32d78595b28449c1。仅原登记运行树准确两路径、原回执和进度；源图/数据/报告/组件/API/策略不动，原失败与第一版保留记录。基线和分工沿下段，原owner随后验最终报告可读性。
+- 验收仍源/目标/HTTP逐字与image/svg+xml、实际浏览器SVG解析；不将展示接入写成研究效用通过，不重启、不另派任务。
+
+---
+
 # 绿色候选短期反转两张研究图接入 2026-10-20T16:09:03.614326+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=16c443980f86f8533e75865ef73c854f2e858cbd；checked_at=2026-10-20T16:09:03.614326+08:00；已读COORDINATION/self/research-utility-review最新15:54/personal-lowfreq-system-audit最新16:07/dispatch。沿原用户研究/系统分工，原因子请求两图同前次FIP接入；该owner负责主树源与报告，本方只负责当前5188运行树静态附件，无路径冲突。
