@@ -1,3 +1,14 @@
+# 用户否定现有组合后的成熟策略来源审查 2026-10-20T23:26:34.827601+08:00
+
+- task-id/owner沿原；status active；scope_released false。checked_coordination_sha=f490e5d23be678c9cf1b5df5cc29f85d325c1d8d；checked_at=2026-10-20T23:26:34.827601+08:00；已读COORDINATION及本任务、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、market-style-observation-20261020最新相关段。年度OP已有负向/受限结案，季度EPS资格和机构仓位扩展归原owner；不重复采集和运行。风格5192独立预览不触及本/fwd模块。
+- 用户新要求：现两策略年化/回撤不好，复核A股反转依据；从成熟、有金融含义的策略出发扩大候选，借鉴/修改/组合，并给用户具体审核材料。边界问题：当前方案为何不足，哪些成熟原型提供真实不同来源且值得下一次检验。采用research-closure及lei-lowfreq-research，固定旧结果只读诊断；不靠扫旧参数追正，不将论文买多卖空成绩冒充本地只买账户。
+- 本轮独写范围：docs/experiments/mature-strategy-review-2026-10-20.md及同名raw小证据；自己的progress；registry/INDEX只新增本键/行；web/src/components/strategy-portfolios/StrategyResearchReview.tsx和配套CSS/静态内容、StrategyPortfolios.tsx最小入口与研究状态标签；必要本地5188既授权精确镜像。原配置、7冻结模块、活动账本、旧订单/采集器只读，不改变原规则或实际运行状态。研究服务于独立策略研究选择层，不改桌面原文/LEI生产信号。
+- root唯一来源和综合判断；Sol只读旧报告/规则差异；Astra只读成熟候选方法审阅（另派准确范围）。新的效力批次须取得合格定义/资料且另登记冻结，当前不默认再算一批。资料研究先用默认6次来源请求含失败，旧家族尝试不归零；未配置后台或通知。只生成小报告/UI证据，预计本机小于1MiB，已有大输入只读经storage确认；不新增行情采集。
+- 验收：反转原论文与本地完整规则区别；可读性能/增量及失败归因边界；少量候选有机制、原规则/本地改动、强对手、数据资格、代价、反证和去重；界面可见具体待审核事项与明确未通过状态，现有历史/前向功能不变；来源日期和实际阅读范围、归档/API/UI读回。
+- 基线主工作树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；本地旧交付仍未提交，远端协调不代表代码已发布。当前无新结果，成果与未知保留后再判断完成边界。
+
+---
+
 # 个股多策略历史比较与前向系统交付 2026-10-20T19:19:52.643726+08:00
 
 - 交付复核2026-10-20T19:20:31.122333+08:00：首次协调push因并发前进被拒，已fetch并读取783a6b0ddf884cd4693c654d45c189b785d81f09的新美股经营盈利任务19:18记录；该owner正补年度OP同池历史/退出/财报，我们只保留待补入口，无重复实施；普通merge保留他人记录后再推。
