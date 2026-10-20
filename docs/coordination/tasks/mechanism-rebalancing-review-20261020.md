@@ -1,3 +1,15 @@
+# 机构持仓含义扩展：趋势认同、集中与约束 2026-10-20T23:17:34.505519+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha 30596ce3e740c0db64ad4da98bed3b6481e7a214；checked_at 2026-10-20T23:17:34.505519+08:00。已读COORDINATION/self/sentiment-factor-research、personal-lowfreq-system-audit-20261018最新年度OP结案；dispatch/账户/风格范围沿上一轮核查，无本题文件冲突。
+- 用户明确要求扩大机构仓位定义与金融含义探索，区分火爆/行业景气与反向风险，专业研究并衡量已有体系之外的因子增量。保留共同持仓＋赎回约束机制；新的有界问题先由原始文献与可测量资料筛选，再冻结必要比较。美股优先，本轮中国只复用独立资料缺口，不拿美股代替。
+- 沿成果基线codex/mechanism-rebalancing-review-20261020@5cbca7e7c049b14b0215a38364c464972ee06f23；旧两US季度风险及AAII/融资/定投封存不重跑，家族≥1124拟合/≥4Pro保留。后续研究来自用户新机制解释，不将旧负结果改用途追认成功，既见价格历史保持探索身份。
+- root新增docs/experiments/institutional-positioning-mechanism-extension-2026-10-20.md与raw同名目录，原progress追加，registry/INDEX仅本新键/行。独立研究代码只在本新raw，不改策略原件/规则/共享定义/源码/服务/其他owner原件。原有数据只读复用，新增普通结果和原件绑定新的固定外盘目录，预计外盘30MiB、本机2MiB。
+- 分工：Astra medium审原始论文与金融含义/可识别边界，独写raw/literature/；Sol medium核已有NAAIM/CFTC测量、构造资格与来源，独写raw/measurement/，不看新未来结果。root选择一个可回答的主用途并预登记变量/对手/时期/反证；必要实现/核数随后明确独写范围。均不另建用户chat，不共享写者。
+- 验收：高仓位/主动增减/共同集中/外生资金约束/景气信息分别给准确对象、分母、日期与竞争解释；先确认观测足以回答哪个问题，不用仓位变化冒充强制卖出。不强迫统一预测误差；若可回答增量问题，按用途用最有挑战的简单价格/原信息对手，保留全部被改变机会与风险/漏涨代价，固定后再运行，不扫阈值。
+- 新核心批次按必要问题冻结，原历史计数不归零；0已执行新统计。必要来源/方法/验证在授权内完成，真实资料缺口只阻塞依赖分支；不买数据、不绕权、不重启后台、不写仓外目标库或生产。每次扩展须有可能改变判断的新证据，停止于有界问题已答或真实证据边界。
+
+---
+
 # 中美反向研究本轮交付 2026-10-20T20:45:05.706493+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner 01a158cd-e0ee-7260-b91f-629930ce779f/root；status completed（本轮US有界历史比较＋中美数据资格）；scope_released true。**A股效果仍缺资料、完整策略未完成**，不把本轮结案当研究方向全部完成。
