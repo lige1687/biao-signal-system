@@ -1,3 +1,13 @@
+# 美股经营盈利：固定比较完成，正在交付 2026-10-20T21:49:53.090363+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false（仅待本轮归档与精确镜像）；checked_coordination_sha=fd258a7691bd70933b05ee856618b1b5da273188；checked_at=2026-10-20T21:49:53.090363+08:00。已读COORDINATION/self、research-dispatch-controller、research-utility-review-20261012、lowfreq-strategy-discovery-20261019、mechanism/pro-advice/strategy桥接及market-style当前相关段；fetch核与21:03登记无变化，无范围冲突。不接管季度EPS、技术因子实现、低换手前向、宽度仓位或ETF。
+- 来源资格实际补齐并核：48 SEC主表包、8247申报候选、历史形成60509成员月。固定扣折旧后的OP语义、原定义禁止净利息/其他金融混合项；源标签资格曾误放12份、116月份，在任何收益连接前纠正。最终1967行、42CIK、185报告、120月、4未来未知保留；每月11–24，中位16。不是全市场或严格相同动量的证明。
+- Luna实际core1首次在输入检查失败、repair1成功（exit0，3.4秒），原失败代码/合同/log留存。953配对、61奇数省略、117完整月份；P相对高MOM已知配对月均+0.0258pp，95%范围[-0.2632,+0.3430]；相对低MOM -0.1776pp、范围跨零。暂缓逐月收益/防守强化，保留目标名单变动30.03%对50.74%/49.67%的有限描述；未比较保留持仓简单对手，不接管其owner。严格同MOM独立作用仍未识别，MOM差95%分位26.09pp；不调参追正。
+- root独立核1967公式/1963已知回报/953选择/6统计区间及缺失边界；Astra最终裁决已读回。合同a586b457f41e7e1b2f272431778fe105156f86fcc8eed7c293778f96deb574af，manifest327a81cd49a2a00c39908d494e3838850b98015e1a67c3eb9ae338583105d927；外盘位置见storage-plan与合同。新效果运行0网络，原件88明确HTTP请求；总web动作未知，已知至少77；403停止不绕过。
+- 交付仍仅先前登记准确范围：docs/experiments/us-op-common-history-2026-10-20.md、同名raw、小纯研究adapter src/lei_signal/research/annual_profitability.py及tests/unit/test_annual_profitability.py、definitions.v1.json只新增本对象与3来源、registry本键/INDEX本行、自己的progress；按内容核读后主树精确镜像，仅原目标note/next_action/link。旧定义、其他记录、旧实验及生产授权保持。不提交原始request签名查询/coordination.index/大源文件/本地admission工作副本。成果提交与API/目标读回尚待，不能提前称交付完。
+
+---
+
 # 美股年度盈利：共同资格与一次限定比较准备 2026-10-20T21:03:42.835019+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha ad1e60df3f5c9762a8ca04ee59e51732e617ad21；checked_at 2026-10-20T21:03:42.835019+08:00；已读 COORDINATION/self/research-dispatch-controller/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/pro-advice-process-review-20261020/strategy-account-bridge-20261020/market-style-observation-20261020/mechanism-rebalancing-review-20261020；新增机构反向20:45交付不冲突，季度EPS/账户/ETF均归原负责人。
