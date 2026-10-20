@@ -1,3 +1,14 @@
+# 用户纠偏：A股与美股个股多因子完整策略并行前向 2026-10-20T18:39:57.148465+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=eaff9ff69639eb44688eefb1f317699595901218；checked_at=2026-10-20T18:39:57.148465+08:00。已读COORDINATION/self/dispatch、research-utility-review、personal-lowfreq-system-audit、lowfreq-strategy-discovery、gemini、investor-workspace、mechanism-rebalancing-review最新；机构月末SPY/IEF仍归原owner，不重复。
+- 用户明确纠正：不是四ETF配置，要求完整因子组合成多套选股、进出、整体调仓与风控的策略系统；A股和美股个股都覆盖，同时看前向，复用之前研究依据和效果。这授权独立研究策略版本的实现/比较/模拟观察，不改原LEI原文/生产/真实交易。不将旧因子局部负结果当全部构建阻塞，也不宣称先已证明有效或低相关。
+- root主范围新增 src/lei_signal/strategy_portfolios/、tests/unit/test_strategy_portfolios*.py、configs/strategy-portfolios.v1.json、web/src/components/strategy-portfolios/、web/run-strategy-portfolios-regression.mjs；最小修改web/src/pages/FwdLedgerPage.tsx、web/package.json、web/vite.config.ts仅新功能入口/测试/proxy。新独立本机API拟8028，不重启旧8000、不改frozen9模块/config或旧账本。新data/strategy-portfolios活动目录忽略不入Git。
+- 报告 docs/experiments/factor-strategy-portfolios-2026-10-20.md及同raw，原progress追加，registry/INDEX仅自己键/行；原两方法报告仅有日期补充本用户纠偏，旧历史不抹去。大历史输入/输出/日志按已核UUID外盘输出计划，当前代码与活动DB本机，原冻结不移动。先核资料和公式，再冻结具体策略/市场范围，禁止事后调参选赢家。
+- 已派Astra high factor_strategy_design_v2只读方法，Sol medium factor_strategy_data_v2只读本机数据能力；均无写权/外部联网/效果/再委派。后续明确实现者单文件独占后登记。root为新小合同/集成唯一写者；不写共享旧定义/引擎或其他owner结果。
+- 预期验收：多个真正可执行完整版本而非只有挂牌；每市场同池同成本简单对照、收益/跌幅/现金/调仓/共同亏损证据；前向实际冻版本和启动时点、真实输入、订单与净值、失败不假填；UI宽窄屏和日期追溯；数据缺口如实保留并做可推进部分。尚未宣布已启用或已有优势；策略可淘汰但前向研究基础设施不以缺完美策略停下。
+
+---
+
 # 多策略前向资格审阅交付 2026-10-20T18:31:57.661824+08:00
 
 - task-id/owner沿原；status completed（本次资格问题）；scope_released true；checked_coordination_sha=cc9269a293e0a746912ad4a73f55b869f45fe750；checked_at=2026-10-20T18:31:57.661824+08:00；已读self/COORDINATION/前段8个相关task-id，交付前重读mechanism-rebalancing-review18:28接续：该owner正核月末机构再平衡实际用途，未接管、未重复。其他范围不变。
