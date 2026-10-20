@@ -1,3 +1,14 @@
+# 多策略组合前向资格审阅 2026-10-20T18:23:04.216385+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=0022cc2f296009c66d7d32b8253aeb54c0930946；checked_at=2026-10-20T18:23:04.216385+08:00。已读COORDINATION、self、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、mechanism-rebalancing-review-20261020最新范围。
+- 用户新问题：吸收不同收益来源、较低相关的多策略组合；先核完整规则和组合回测，再决定哪些可并行前向。服务组合研究资格层；不以5至7数量为目标，不改旧前向冻结版本或追加未合格策略。
+- 本轮唯一写者root：新增docs/experiments/multistrategy-forward-readiness-2026-10-20.md及同名raw小记录；registry仅此键、INDEX仅此行；原progress追加；原strategy-forward-observation报告仅附本次资格说明/链接并更新自身登记SHA。源码/运行配置/服务/真实账本只读。
+- 当前基线主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，成果仍仅本地未提交。先复用已有合体/相关性/跨资产组合与近期负结果；若无两套完整且同口径合格收益序列，不伪造相关性或资金组合，不重跑封存。
+- 查重：月末再平衡文献归mechanism-rebalancing-review，原A/低换手归research-utility-review，US公开分组归personal-lowfreq-system-audit；只消费证据、不接管。Sol medium portfolio_candidate_audit只读候选资料，不联网/写入/实验/再委派；root独立核关键结论。
+- 验收：原始来源读取边界、候选资格表、简单同资金对照和共同下跌/费用/低频维护的组合判定、现存可用证据及具体缺口；报告/登记/接口读回和归置。0新市场拟合/参数扫描/开机任务/真实交易，系统待升级仓外写入仍待此前准确确认，本消息不视为批准。
+
+---
+
 # 完整策略前向观察工程交付 2026-10-20T17:29:54.456412+08:00
 
 - task-id strategy-account-bridge-20261020；owner沿下；status completed（本轮工程与方法吸收，呈现待用户验收）；scope_released true；checked_coordination_sha=e2c3f7e1f96a6abab604b4e9310752b980e6a7be；checked_at=2026-10-20T17:29:54.456412+08:00。已读前列COORDINATION/相关task-id，新增核research-utility-review17:11低换手完成和personal-lowfreq-system-audit17:20美股比较完成。无同路径冲突；原A仍未闭合，低换手和近似小时确认暂不采用，原owner报告已在观察页链接，未重跑。
