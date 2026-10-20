@@ -1,3 +1,13 @@
+# 继续目标：历史财务输入恢复与剩余候选核对 2026-10-20T11:50:03.459221+08:00
+
+- task-id/owner沿原；status active；scope_released false。checked_coordination_sha=e9d92eb94557fc4194867e5f5f74d59997d1f076；checked_at=2026-10-20T11:50:03.459221+08:00；已读COORDINATION/self、因子实现11:30最终交付（含共享登记修复）、lowfreq-strategy-discovery、dispatch与Gemini已完成范围。root仅接续本题财务/独立候选，不重复高点300股及原LEI/ETF账户。基线14f286cbab22c81fd0e64aca89e457fc1a69e6d3。
+- 用户本轮要求“推进所有我们的目标完成…看优秀思路和实践解决卡点”。具体先回答：在不改旧资格规则、不重新下载的情况下，已保存公告能恢复多少可靠财务输入，剩余失败是什么；并读回OSAP全局准备入口、核价值/防御原验收及可执行后续，不能拿大目标开启无界实验。root已实读准备入口能返回OSAP1.1，旧阻塞时点报告不覆盖。
+- 唯一新增写范围：docs/experiments/financial-input-recovery-2026-10-20.md及raw同名目录（队列/注释/补证脚本/合同/状态/收据）、registry本键/INDEX本行、原work-progress和本目标记录。共享实现/旧解析器/冻结raw/规则不改；必要正式模块先另登记。Luna low只写raw/luna-triage.json；Sol medium只写raw/value-defensive-gap.json；root其余独占；后续独立文档审阅者只读。
+- 本轮第一批限同一旧600股132月公开财务原件；先把现有4766公告按具体影响及已存全文分流，选可验证的一批进行原文复核，样本和用途不变，不按收益选择。原规则/原刊发时间/身份和撤销约束保持；只生成新增资料资格，不重跑P1/P2收益。整体后续候选继承原家族计数：P2核心1+跟进2/3，P3资料4/4方法5/6等不重置；本题方法来源最多6请求，无新行情财报下载、付费、安装、生产或交易。
+- 验收以真实可用公司月份变化、误分类反例/剩余未知、源指纹和原选择器一致性；成功运行和更大行数不等于资料真实或投资有效。借鉴成熟项目的证据驱动迭代/保留未知，落到本题已有合同与账本。外盘固定UUID已核，拟新增资料检查输出128MiB、本机小记录800KiB，实际计划后运行；无新后台或通知。
+
+---
+
 # OSAP与公开历史修订核验交付 2026-10-20T11:19:01.137542+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本轮资料接入/公开来源/定点补证；scope_released true。全市场可靠历史与整体研究目标未完成。checked_coordination_sha=5eaf5813272a1261dea08bc473b470121e46ce18；checked_at=2026-10-20T11:19:01.137542+08:00；已读COORDINATION/self/research-utility-review-20261012/research-dispatch-controller/lowfreq-strategy-discovery-20261019，以及新增gemini-strategy-review-20261020最终11:18段；theory/external此前范围无新变更。因子实现仍做行情/高点/300股，本轮不重复。一次协调写入因远端跟踪SHA并发改变在写前断言停止，已fetch读新Gemini完成段后再行，未覆盖他人。
