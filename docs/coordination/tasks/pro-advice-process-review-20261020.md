@@ -1,3 +1,13 @@
+# 接续范围明确：同一收盘信息、次开盘价格的ETF确认比较
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha 73f06cdbad1b26b54ac2eb7f60a9b40134cf7916；checked_at 2026-10-20T16:41:58.458471+08:00。已读本轮上述task-id与最新coordination；最新增量未出现同题写者。原A、旧小时效果及其他owner报告继续只读。
+- Sol查重与Astra方法审查均完成：旧六股和8ETF小时即时报价观察已有，新问题统一收盘知情/次开盘价格；主四宽基、辅助四行业预先固定。完整A目标/失效仍受阻，不能冒充补齐。8份已存输入SHA现场核同，均保存daily adjusted_open与15:00 bull状态；没有新取数。
+- 新设计 docs/experiments/raw/lowfreq-confirmation-execution-2026-10-20/design.json，SHA 5aba781fb5ede8cdb1e32975df9318d2f328ae7726e280dc7d6ee8c72d839c12。主问题20日、30日辅助只为与旧问题可比；直接、收盘小时、固定5日三种新实施比较，开盘跳空取消、原机会全部保留、旧448交集及未知单列。已看历史探索，不是原策略/真实账户/可保证成交。
+- 追加准确独占代码范围 src/lei_signal/research/lowfreq_confirmation_execution.py、tests/unit/test_lowfreq_confirmation_execution.py；实现者沿Sol medium confirmation_resume_audit新合同，另写本raw/run_comparison.py、implementation-receipt.json。不得调用旧效果或写旧文件。root设计、输入preflight、冻结/运行/归档，Astra只读关键时点复核。其他范围沿原，不修改definitions/sharedworkflow/旧代码。
+- 效果前先合成检查及输入覆盖资格；新core最多1，必要纠错沿旧跟进额度3并记实际全部尝试；新增效果与独核合计不超原701.515287秒余额，公开来源0。新大结果预计32MiB、内部小记录250KiB，先固定外盘路由。完成回答或资料边界即止，不扫描参数或扩产品。
+
+---
+
 # 用户授权接续：先核最新确认研究，再推进实际行动缺口
 
 - task-id: pro-advice-process-review-20261020；owner: 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status: active；scope_released: false；updated_at: 2026-10-20T16:39:01.137487+08:00。checked_coordination_sha: ab8a73604d3f818dde41aa08fe275ae05d4b823a；checked_at: 2026-10-20T16:39:01.137487+08:00。已读 COORDINATION、自身、research-utility-review-20261012（含10月19日原A/小时/扩样及20日结案）、personal-lowfreq-system-audit-20261018、lowfreq-strategy-discovery-20261019、strategy-account-bridge-20261020、research-dispatch-controller、dot-pro-strategy-definition。
