@@ -1,3 +1,16 @@
+# 低频确认次开盘比较已交付，局部用途暂不升级
+
+- task-id pro-advice-process-review-20261020；owner 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status completed（仅本次有界比较）；scope_released true；checked_coordination_sha ce36318a5a5e98797c8cce51f2588d05960bb1d6；checked_at 2026-10-20T17:05:20.825858+08:00。本轮已读COORDINATION/self、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、lowfreq-strategy-discovery-20261019、strategy-account-bridge-20261020、research-dispatch-controller、dot-pro-strategy-definition，并补读最新investor-workspace-simplification-20261012静态资源交付。新增美股参考定义/前向观察服务/低换手账户均不重叠，不接管其任务。
+- 用户“可以的，持续推进吧？”已落实一项新问题：每日收盘状态、次开盘报价，同ETF机会直接/小时/固定5日。成果 codex/pro-advice-process-review-20261020@dbdb64d9bf7da73e2be198d1fd03e23566f8af0a，基线367d2137e296fb826572757c31f5046b4430a98e；普通push后远端完整SHA、25准确路径逐字SHA已核。主共享脏树和其他成果保留，0删除，无main合并。
+- 主四宽基20日244机会：直接2.60895%、小时2.39648%、固定5日1.67522%；小时减直接−0.21248个百分点，途中收盘下探少0.34732个百分点。78个起点未确认机会小时比直接少0.82758、比固定5日少0.67801个百分点；总体胜固定等待主要来自起点已确认组。结论保留研究实现，暂不升级新的近似入场过滤；原低周期条件不删。原完整A趋势/回撤身份、目标与失效定义仍受阻，非本题完成或收益证明。
+- 报告 docs/experiments/lowfreq-confirmation-execution-2026-10-20.md；原报告库registry只加本键/INDEX本行；代码 src/lei_signal/research/lowfreq_confirmation_execution.py、tests/unit/test_lowfreq_confirmation_execution.py；合同/输入/codeSHA/预算/输出位置/回执在同名raw。18合成检查、前置8输入/1589事件、3178行分母独核、871组×3政策数值时点独核；逐行数差0，固定产品均值差<1e-12。Astra high最终accepted，Sol medium实现，root运行独核归档，实际token费用未知。
+- 20日全8新449/旧448交集448；30日422/421交集421；所有原机会保留。真实覆盖2025-05-21至2026-05-27，重叠机会/5时间块/未知历史到达/报价非成交/无费用分红/非完整账户均披露。既有小时研究未重跑，0新来源，原6/6保持；新增核心1、效果纠错0，原市场累计约2904.20/3600秒（state精确值），家族旧尝试数未知不重置。
+- 报告API列表与正文逐字读回通过、归置通过；初次用basename详情404按实际返回全名修正，未改API。只读21文件中全局definitions由原负责人并发更新，本题源卡与旧definition-binding逐字段同一，其他20及18冻结依赖同SHA；失败与差异留archive-check。科学通过不靠测试数量，实盘/生产/完整原A未验证。
+- 大结果/日志在storage-plan绑定的外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9路径，event-rows/summary/run-receipt SHA见report-evidence，未入Git；异机必须同盘与SHA核验，不说单拉分支就可复现。本机小记录约0.9MiB高于250KiB初估，真实量已披露，未删除资料。
+- 用户要求的流程细化已在前阶段采用，本阶段用真实问题完成行动延迟验证。无生产/交易/桌面原文/系统目标数据库/其他owner修改，无跨chat消息、自动化或后台任务。必要本题检查已完成，不追加参数或同批扩样。恢复完整A须有可追溯目标/失效案例和唯一语义；新的固定规则时期证据才能恢复本近似用途，不能用同一历史重复行当新验证。
+
+---
+
 # 接续范围明确：同一收盘信息、次开盘价格的ETF确认比较
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha 73f06cdbad1b26b54ac2eb7f60a9b40134cf7916；checked_at 2026-10-20T16:41:58.458471+08:00。已读本轮上述task-id与最新coordination；最新增量未出现同题写者。原A、旧小时效果及其他owner报告继续只读。
