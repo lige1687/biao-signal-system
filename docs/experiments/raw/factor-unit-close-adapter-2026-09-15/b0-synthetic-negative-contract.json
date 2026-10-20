@@ -1,0 +1,101 @@
+{
+ "data_mode": "synthetic",
+ "object_ref": "candidate:lei.dual_ma.bull_state@draft-1",
+ "candidate_card": {
+  "path": "docs/experiments/raw/factor-research-workbench-v1-2026-09-14/candidate-card-dual-ma-bull-state-draft-1.md",
+  "sha256": "907d17631e27011423bebbf068bcb2bbc6e1b44a184618597cf54f868e066dc1"
+ },
+ "theme": "trend",
+ "type": "state_signal",
+ "use": "historical_description",
+ "lookback": 20,
+ "e_offset": 1,
+ "x_offset": 22,
+ "regime": "none",
+ "universe": {
+  "universe_id": "synthetic-fixture",
+  "members": [
+   "510300",
+   "159915",
+   "SPY",
+   "QQQ"
+  ],
+  "attribute_labels": {}
+ },
+ "target_basis": "total_return_wealth",
+ "data_identity": {
+  "510300": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-close-adapter-2026-09-15/synthetic-fixtures/510300.parquet",
+   "sha256": "aca117f6e08f158b95980390157c478b62bc1aefd7dcf735420f0e2a8718bbb7",
+   "fetched_at": null,
+   "available_at": null,
+   "point_in_time_verified": false,
+   "price_basis_status": "price_basis_verified",
+   "price_basis_evidence": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-close-adapter-2026-09-15/synthetic-fixtures/price_basis_evidence_synthetic.json"
+  },
+  "159915": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-close-adapter-2026-09-15/synthetic-fixtures/159915.parquet",
+   "sha256": "aca117f6e08f158b95980390157c478b62bc1aefd7dcf735420f0e2a8718bbb7",
+   "fetched_at": null,
+   "available_at": null,
+   "point_in_time_verified": false,
+   "price_basis_status": "price_basis_verified",
+   "price_basis_evidence": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-close-adapter-2026-09-15/synthetic-fixtures/price_basis_evidence_synthetic.json"
+  },
+  "SPY": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-close-adapter-2026-09-15/synthetic-fixtures/SPY.parquet",
+   "sha256": "aca117f6e08f158b95980390157c478b62bc1aefd7dcf735420f0e2a8718bbb7",
+   "fetched_at": null,
+   "available_at": null,
+   "point_in_time_verified": false,
+   "price_basis_status": "price_basis_verified",
+   "price_basis_evidence": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-close-adapter-2026-09-15/synthetic-fixtures/price_basis_evidence_synthetic.json"
+  },
+  "QQQ": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-close-adapter-2026-09-15/synthetic-fixtures/QQQ.parquet",
+   "sha256": "aca117f6e08f158b95980390157c478b62bc1aefd7dcf735420f0e2a8718bbb7",
+   "fetched_at": null,
+   "available_at": null,
+   "point_in_time_verified": false,
+   "price_basis_status": "price_basis_verified",
+   "price_basis_evidence": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-close-adapter-2026-09-15/synthetic-fixtures/price_basis_evidence_synthetic.json"
+  }
+ },
+ "calendar_identity": {
+  "CN": {
+   "source": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+   "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+   "coverage": [
+    "1990-01-01",
+    "2026-12-31"
+   ],
+   "session_close": "15:00",
+   "timezone": "Asia/Shanghai",
+   "half_day_close": null
+  },
+  "US": {
+   "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-close-adapter-2026-09-15/synthetic-fixtures/us_calendar_synthetic.json",
+   "sha256": "caade62846e1a543a30e7d513bf78d84dc055517b757cccfba944f4f77fa1abc",
+   "coverage": [
+    "1990-01-01",
+    "2026-12-31"
+   ],
+   "session_close": "16:00",
+   "timezone": "America/New_York",
+   "half_day_close": {
+    "time": "13:00",
+    "timezone": "America/New_York"
+   }
+  }
+ },
+ "code_identity": {
+  "src/lei_signal/research/factor_unit/__init__.py": "72c20484fbeb7b11a1a556ef20a09c58883dd97b4088dc5bc0a83409bdc1eeec",
+  "src/lei_signal/research/factor_unit/close_state.py": "b0efb324a2ef65d1f415c19be4f50b96ebf25f140da0c31b2b759d68ef04db10",
+  "src/lei_signal/research/factor_unit/study_contract.py": "12133d58df00ce0d860b29eb5aa4aa442af7f57c0d1c96e98579a127e488197b",
+  "src/lei_signal/research/factor_unit/state_description.py": "022ecf258cec56c3c1432926441a45ef2b2b61014d2578bcc5ebf256769133d2"
+ },
+ "standards": [
+  "docs/research/experiment-backtest-principles.md@1.1"
+ ],
+ "research_cutoff": "2026-09-15T23:59:00+08:00"
+}

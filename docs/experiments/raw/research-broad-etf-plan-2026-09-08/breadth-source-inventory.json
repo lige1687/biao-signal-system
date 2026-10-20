@@ -1,0 +1,100 @@
+{
+  "as_of": "2026-09-08",
+  "scope": "read_only_inventory_no_return_run",
+  "strategy_layer": "market_environment_position_budget",
+  "independent_acceptance": false,
+  "plain_conclusion": "九条指数收盘价和全A宽度成品仍在，可以隔离复刻A持有与B宽度三档；三支终审脚本缺失，当前不能原样复算walk-forward、安慰剂和压力测试，旧passed不算本次独立验收。",
+  "reproduction_status": {
+    "A_B_legacy_replication": "conditionally_feasible",
+    "A_B_independent_validation": "pending",
+    "final_review_exact_reproduction": "blocked_missing_scripts",
+    "breadth_source_rebuild": "unverified"
+  },
+  "frozen_protocol": {
+    "window": ["2015-06-16", "2026-08-18"],
+    "breadth_field": "ma200_pct",
+    "tiers": [{"condition": "b200 < 43.3", "exposure": 1.0}, {"condition": "43.3 <= b200 < 56.7", "exposure": 0.5}, {"condition": "b200 >= 56.7", "exposure": 0.0}],
+    "signal_frequency": "last_available_observation_each_calendar_week",
+    "effective_time": "next_common_trading_row_after_signal_day",
+    "execution_price_interpretation": "next_common_trading_day_close",
+    "rebalance_band_pp": 5.0,
+    "one_way_cost_bps": 10.0,
+    "cash_rate": 0.0,
+    "price_return": "index_close_price_return_without_dividends"
+  },
+  "code_dependencies": [
+    {"path": "scripts/run_portfolio_split.py", "status": "present", "sha256": "af5cae26d1f1f5fa8c48e6448035bd59ed4ce02bd2d60c496539c1bd62ab1d17"},
+    {"path": "scripts/run_siphon_detector.py", "status": "present", "sha256": "f2d71db88b6a85eeb40d93bb111a1ecf8df1708a6fe7b9f6c442c2b1f5ef07d0", "used_symbols": ["COST", "MID", "HIGH", "tier_weight", "weekly_last"], "transitive_dependencies_for_A_B": ["python_stdlib", "numpy", "pandas"], "project_package_imports_for_A_B": false, "network_or_user_cache_access_for_A_B": false},
+    {"path": "scripts/run_bform_walkforward.py", "status": "missing", "searched": ["current_repo", "all_git_history", "/Users/yongbiaoli/lei-signal-sync"]},
+    {"path": "scripts/run_bform_placebo.py", "status": "missing", "searched": ["current_repo", "all_git_history", "/Users/yongbiaoli/lei-signal-sync"]},
+    {"path": "scripts/run_bform_stress.py", "status": "missing", "searched": ["current_repo", "all_git_history", "/Users/yongbiaoli/lei-signal-sync"]}
+  ],
+  "breadth": {
+    "path": "docs/experiments/raw/breadth_overlay/a_share_breadth_33y_snapshot.json",
+    "status": "present",
+    "sha256": "8fabf1882d1d04fa2912bfa7545d4c1216a23e964d0981b1addc7042f43b33ca",
+    "rows": 8109,
+    "start": "1993-04-22",
+    "end": "2026-08-18",
+    "runtime_access": "local_file_only",
+    "dynamic_cache_load": false,
+    "online_refresh": false,
+    "upstream_stock_panel": "unverified",
+    "upstream_universe_snapshot": "missing_or_unbound",
+    "upstream_generator_version": "missing_or_unbound"
+  },
+  "instruments": [
+    {"name": "沪深300", "path": "docs/experiments/raw/portfolio_split/sh000300_close.parquet", "sha256": "e8f51bfc53f3fac3a9c53d9b942949c368041ea7649a7c0b404766949e9d7863", "start": "2002-01-04", "end": "2026-08-27", "status": "present"},
+    {"name": "上证50", "path": "docs/experiments/raw/portfolio_split/sh000016_close.parquet", "sha256": "d90b7878318a2d8af82521ba7cb20d22bac5684a53b96b3645d885518e1def57", "start": "2004-01-02", "end": "2026-08-27", "status": "present"},
+    {"name": "中证白酒", "path": "docs/experiments/raw/portfolio_split/sz399997_close.parquet", "sha256": "c539365843f9c464ccac66af796258fdf6263a4b9ae49477cddeea59caae77e7", "start": "2015-06-16", "end": "2026-08-27", "status": "present"},
+    {"name": "国证地产", "path": "docs/experiments/raw/portfolio_split/sz399393_close.parquet", "sha256": "fc3075ee5fbfc6401f35aed2c1c05ebadd8efcfec05d9297e8907d24c484bfbe", "start": "2012-08-20", "end": "2026-08-27", "status": "present"},
+    {"name": "创业板指", "path": "docs/experiments/raw/siphon_detector/cyb_399006_close.parquet", "sha256": "04e199c1e0b3e779af280ccf04f58a08a462998e1a47220e4b08551e72351adc", "start": "2010-06-01", "end": "2026-08-27", "status": "present"},
+    {"name": "证券公司", "path": "docs/experiments/raw/siphon_detector/sec_399975_close.parquet", "sha256": "6b229cc01368be9f1bb99b8ce3b2eaaf80d3406b1b73e6cfb396ae330cff83ca", "start": "2015-05-19", "end": "2026-08-27", "status": "present"},
+    {"name": "新能车", "path": "docs/experiments/raw/portfolio_split/sz399976_close.parquet", "sha256": "12fead5a010f8626cc4fd567160232d080f177cb02f86d4eb7cc2e8263bb87b5", "start": "2015-05-19", "end": "2026-08-27", "status": "present"},
+    {"name": "中证医疗", "path": "docs/experiments/raw/portfolio_split/sz399989_close.parquet", "sha256": "ca12b1f36dfb7b4a9efc074ca430f8d23ac4a3452493aa8c659ea5afd3d4fdaf", "start": "2015-05-19", "end": "2026-08-27", "status": "present"},
+    {"name": "国证有色", "path": "docs/experiments/raw/portfolio_split/sz399395_close.parquet", "sha256": "4e8cbac36a4383f44b5fb9b58a08b5e25c60861477194505f17377f602f35bd61", "start": "2012-10-29", "end": "2026-08-27", "status": "present"}
+  ],
+  "historical_outputs": [
+    {"path": "docs/experiments/raw/portfolio_split/bform_walkforward_results.json", "sha256": "c1b94cf4e7f2358398f2b1306cabe93f7abb02f9a209748a12f4ab8c94b098e9", "status": "present_summary_only"},
+    {"path": "docs/experiments/raw/portfolio_split/bform_placebo_results.json", "sha256": "b72efae9576c2be8db9428845d3b02505db0c9925d675e673ad1c4a1e2a17fe7", "status": "present_summary_only"},
+    {"path": "docs/experiments/raw/portfolio_split/bform_stress_results.json", "sha256": "18d8fb5206a38dea6b64f2eaa7b6dfc2d658e0140bf5c6c850b154de4cca4360", "status": "present_summary_only"}
+  ],
+  "candidate_issue": {
+    "id": "actual_weights_not_drifted_after_returns",
+    "status": "confirmed_synthetic_accounting_difference",
+    "evidence": "scripts/run_portfolio_split.py:117-139",
+    "diagnostic_path": "docs/experiments/raw/research-broad-etf-plan-2026-09-08/weight-drift-check.json",
+    "fixture": "two assets 100/100 -> 104/96 -> 100/100; max natural weight drift 2pp below 5pp band",
+    "original_end": 1.0006009615384615,
+    "constant_shares_end": 0.999,
+    "difference": 0.001600961538461454,
+    "controls": {"one_asset_roundtrip": "same", "two_assets_flat": "same"},
+    "description": "已证实收益后actual权重未随各资产涨跌漂移，最小反例与恒定份额账不同。这里只能证明记账差异，不能推断旧B9全窗差异方向、大小或宽度超额消失。"
+  },
+  "missing_for_exact_final_review": [
+    "scripts/run_bform_walkforward.py",
+    "scripts/run_bform_placebo.py",
+    "scripts/run_bform_stress.py",
+    "walk-forward精确训练网格与分段实现",
+    "安慰剂平移抽样实现与随机种子记录",
+    "压力测试五档权重表与延迟实现",
+    "运行环境锁定文件或完整版本记录",
+    "所有终审输入的绑定哈希清单"
+  ],
+  "runtime_dependencies_for_A_B": {
+    "complete_import_chain_checked": true,
+    "direct": ["python_stdlib", "numpy", "pandas", "scripts/run_siphon_detector.py"],
+    "parquet_engine": "required_but_exact_engine_version_not_archived",
+    "environment_lock_for_legacy_run": "missing",
+    "copy_also": ["pyproject.toml"]
+  },
+  "first_batch": {
+    "run_now": false,
+    "arms": ["A_equal_weight_hold", "B_breadth_three_tier"],
+    "independent_check": "constant_share_cash_ledger",
+    "parameter_scan": false,
+    "use_network": false,
+    "use_user_cache": false,
+    "reference_only_metrics": {"A_ann_pct": -0.48, "B_ann_pct": 11.99, "B_maxdd_pct": -34.73}
+  }
+}

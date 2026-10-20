@@ -1,0 +1,19 @@
+{
+ "checks": 12132,
+ "failures": [],
+ "tolerance": 1e-12,
+ "verified": [
+  "stability.json（全期/逐年/留一年/等权/符号/不完整年）",
+  "yearly.csv",
+  "leave-one-year-out.csv",
+  "overlap.json",
+  "resampling L63/L126 逐次2000行×（delta/两组n/原因）",
+  "uncertainty.json 分位（手工linear插值）与点估计",
+  "manifest 双向文件集合+逐文件SHA",
+  "保护基线 121 文件零漂移",
+  "输入SHA 六项（装载时已核）"
+ ],
+ "no_new_seed": true,
+ "imports": "标准库 + numpy（仅 np.load 读起点矩阵 IO）",
+ "result": "PASS"
+}

@@ -1,0 +1,167 @@
+--- original/research-package/src/lei_signal/backtest/engine.py
++++ research/research-package/src/lei_signal/backtest/engine.py
+@@ -26,6 +26,7 @@
+ 
+ import pandas as pd
+ 
++from lei_signal.backtest.entry_qualification import qualify_entry_at_open
+ from lei_signal.domain.rules_config import get_rule
+ from lei_signal.domain.types import SignalEvent
+ from lei_signal.features.indicators import average_true_range
+@@ -280,6 +281,21 @@
+     return (symbol.endswith(".SS") or symbol.endswith(".SZ")) and not symbol.startswith("TH")
+ 
+ 
++def b3_exit_triggered(
++    *, close: float, sma20: float, sma60: float, close_lag20: float,
++    breakout_reference: float | None, entry_variant: str,
++) -> bool:
++    """Research B3 only; structural stop is checked separately and first.
++
++    Inputs must share the same price units. Preserves the existing dual-action
++    definition; the independent alignment condition applies only to ambush.
++    """
++    cond_back = breakout_reference is None or close < breakout_reference
++    cond_down = close < sma20 and close < close_lag20
++    alignment_breaks = entry_variant == "ambush" and sma20 <= sma60
++    return (cond_back and cond_down) or alignment_breaks
++
++
+ def simulate_trade(
+     frame: pd.DataFrame,
+     spec: EntrySpec,
+@@ -296,6 +312,27 @@
+     退出日开盘较昨收跌幅 <= -9.5% 视为跌停卖不出（顺延至下一可交易日开盘）。
+     """
+     entry_position = spec.signal_position + 1
++    qualification = None
++    if entry_position < len(frame):
++        qualification = qualify_entry_at_open(
++            open_price=frame["open"].iloc[entry_position],
++            stop_price=spec.stop_price, target_price=spec.target_price,
++        )
++        if not qualification.accepted:
++            return Trade(
++                symbol=spec.symbol, entry_variant=spec.entry_variant,
++                exit_variant=exit_variant, is_first_touch=spec.is_first_touch,
++                ma_period=spec.ma_period, clock_type=spec.clock_type,
++                weekly_bull_env=spec.weekly_bull_env, trend_stage=spec.trend_stage,
++                signal_date=spec.signal_date,
++                entry_date=frame.index[entry_position].date(),
++                entry_price=(qualification.entry_price
++                             if qualification.entry_price is not None else float("nan")),
++                stop_price=spec.stop_price, target_price=spec.target_price,
++                reward_risk=spec.reward_risk, exit_reason=qualification.reason,
++                meta={"entry_reason": spec.entry_reason, "entry_accepted": False,
++                      "actual_reward_risk": qualification.actual_reward_risk},
++            )
+     if (
+         limit_guard
+         and is_cn_symbol(spec.symbol)
+@@ -356,7 +393,8 @@
+         stop_price=spec.stop_price,
+         target_price=spec.target_price,
+         reward_risk=spec.reward_risk,
+-        meta={"entry_reason": spec.entry_reason},
++        meta={"entry_reason": spec.entry_reason, "entry_accepted": True,
++              "actual_reward_risk": qualification.actual_reward_risk},
+     )
+     risk = trade.entry_price - spec.stop_price
+     if risk <= 0:
+@@ -420,13 +458,12 @@
+             # 埋伏单底线（独立触发，不与双条件联立）：多头排列被破坏
+             # （SMA20 <= SMA60，规格「20 组与 60 组完成交叉或不可避免要交叉」）。
+             row = frame.iloc[position]
+-            ref = spec.breakout_reference
+-            cond_back = ref is None or close < float(ref)
+-            cond_break_ma20 = (
+-                close < float(row["sma20"]) and close < float(row["close_lag20"])
+-            )
+-            cond_alignment_breaks = float(row["sma20"]) <= float(row["sma60"])
+-            if (cond_back and cond_break_ma20) or cond_alignment_breaks:
++            if b3_exit_triggered(
++                close=close, sma20=float(row["sma20"]),
++                sma60=float(row["sma60"]), close_lag20=float(row["close_lag20"]),
++                breakout_reference=spec.breakout_reference,
++                entry_variant=spec.entry_variant,
++            ):
+                 return close_at(position, "exit_b3_dual")
+     trade.holding_bars = len(frame) - 1 - entry_position
+     trade.exit_reason = "open_at_end"
+@@ -447,4 +484,5 @@
+     "entry_specs_from_events",
+     "prepare_frame",
+     "simulate_trade",
++    "b3_exit_triggered",
+ ]
+--- original/research-package/src/lei_signal/rules/dense_breakout.py
++++ research/research-package/src/lei_signal/rules/dense_breakout.py
+@@ -113,7 +113,9 @@
+         if flag:
+             age += 1
+             away = 0
+-        else:
++        elif age > 0:
++            # Research fix: only an established sideways state can age while away.
++            # Initial warmup and time after a reset remain at zero until True.
+             away += 1
+             if away > exit_bars:
+                 age = 0
+--- /dev/null
++++ research/research-package/src/lei_signal/backtest/entry_qualification.py
+@@ -0,0 +1,55 @@
++"""Research-only actual-open qualification; frozen §10 minimum, no target reselection."""
++from __future__ import annotations
++
++from dataclasses import dataclass
++import math
++
++from lei_signal.domain.rules_config import get_rule
++
++
++@dataclass(frozen=True, slots=True)
++class EntryQualification:
++    accepted: bool
++    reason: str
++    entry_price: float | None
++    stop_price: float | None
++    target_price: float | None
++    actual_reward_risk: float | None
++
++
++def _price(value: float | None) -> float | None:
++    try:
++        result = float(value)
++    except (TypeError, ValueError, OverflowError):
++        return None
++    return result if math.isfinite(result) and result > 0 else None
++
++
++def qualify_entry_at_open(
++    *, open_price: float | None, stop_price: float | None, target_price: float | None
++) -> EntryQualification:
++    """All three prices must use the same units at the actual execution time.
++
++    Uses the target and stop already fixed at signal time, without selecting a new
++    target after observing the open. The frozen ledger minimum remains 3.
++    This pure function does not decide whether the market permits a trade.
++    """
++    entry, stop, target = map(_price, (open_price, stop_price, target_price))
++    rr = None
++    if entry is None:
++        reason = "skipped_invalid_entry_price"
++    elif stop is None:
++        reason = "skipped_invalid_stop_price"
++    elif entry <= stop:
++        reason = "skipped_open_at_or_below_stop"
++    elif target_price is None:
++        reason = "skipped_target_unavailable_at_entry"
++    elif target is None:
++        reason = "skipped_invalid_target_price"
++    elif target <= entry:
++        reason = "skipped_target_not_above_entry"
++    else:
++        rr = (target - entry) / (entry - stop)
++        threshold = float(get_rule("reward_risk_filter").param("rr_min_ideal", 3))
++        reason = "accepted" if rr >= threshold else "skipped_actual_reward_risk_below_3"
++    return EntryQualification(reason == "accepted", reason, entry, stop, target, rr)

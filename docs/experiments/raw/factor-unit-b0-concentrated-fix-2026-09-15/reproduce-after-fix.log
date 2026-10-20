@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-b0-controller-review-2026-09-15/reproduce.py", line 20, in <module>
+    results['contract_control'] = validate_study_contract(base)['status']
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/factor_unit/study_contract.py", line 272, in validate_study_contract
+    _require(
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/factor_unit/study_contract.py", line 85, in _require
+    raise ValueError(msg)
+ValueError: standards 项必须为 {path, version, sha256}（不得裁剪为带@字符串）
+exit=1

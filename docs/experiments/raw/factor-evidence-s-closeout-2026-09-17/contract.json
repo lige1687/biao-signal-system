@@ -1,0 +1,12 @@
+{
+  "mission": "仅完成因子证据可靠性工具S1–S3入口、解释和记录收尾，保留真实历史结果并交主控复核",
+  "goals": [
+    {"id":"G1","goal":"直接调用不能自填真实身份，真实入口仍有完整校验链","acceptance":["同标的伪base_dir/sha的real直接调用写盘前拒绝","合法合成及单组正例保持，真实main校验链源码检查与合成测试证据"]},
+    {"id":"G2","goal":"机器解释不再把特定历史结果硬编码成通用结论","acceptance":["两年反号合成反例不输出未反号断言","年度与稀疏说明中性且指向实际计数，不改统计值"]},
+    {"id":"G3","goal":"过程记录诚实、修后源码可恢复、旧结果受保护","acceptance":["收集失败与行为复现分开记录，未补造日志","新源码快照与实际字节一致，旧冻结结果不变","交付真实测试/次数/失败日志和归置检查结果"]}
+  ],
+  "in_scope":["严格按brief及主控报告§9.5限定文件、累计预算完成S1–S3"],
+  "out_of_scope":["真实重跑、新研究、联网资料、新依赖、策略参数修改、共享登记与OKR写入、git写操作"],
+  "protected_paths":["src/lei_signal/research/factor_lab/","src/lei_signal/research/factor_unit/","configs/","docs/research/definitions.v1.json","docs/experiments/registry.json","docs/experiments/INDEX.md","docs/experiments/raw/factor-evidence-reliability-v1-2026-09-16/run-01/","docs/experiments/raw/factor-evidence-reliability-v1-2026-09-16/freeze/","docs/experiments/raw/factor-evidence-reliability-v1-2026-09-16/protocol-v1.0.0.json"],
+  "stop_conditions":["分支/HEAD或同文件并行漂移","S收尾已有执行者在途或完成","预算耗尽","需扩大范围或权限","无法保护既有结果"]
+}

@@ -1,0 +1,106 @@
+{
+ "schema_version": "research-use-measurement/1.2",
+ "snapshot": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+ "entry_point": "check_snapshot（口径与币种从快照派生，无法谎报）",
+ "cross_checks": [
+  "declared_uses",
+  "snapshot_basis",
+  "currency",
+  "calendar_object_required",
+  "field_structure"
+ ],
+ "measurement": {
+  "description": {
+   "verdict": "usable",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   },
+   "result": "放行(usable)"
+  },
+  "ranking": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [],
+    "structural": [
+     "starts_after_window"
+    ]
+   },
+   "result": "放行(conditional)"
+  },
+  "research_signal": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [
+     "action_available_at_unknown",
+     "zero_volume_days"
+    ],
+    "structural": []
+   },
+   "result": "拒绝(conditional)"
+  },
+  "attribution": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [
+     "action_available_at_unknown",
+     "zero_volume_days"
+    ],
+    "structural": []
+   },
+   "result": "拒绝(conditional)"
+  },
+  "comparison": {
+   "verdict": "conditional",
+   "blockers": {
+    "fixable": [],
+    "structural": [
+     "starts_after_window"
+    ]
+   },
+   "result": "放行(conditional)"
+  },
+  "diagnostic": {
+   "verdict": "usable",
+   "blockers": {
+    "fixable": [],
+    "structural": []
+   },
+   "result": "放行(usable)"
+  }
+ },
+ "binding": {
+  "mixed.momentum.raw@1.0.0": {
+   "resolved": true,
+   "id": "mixed.momentum.raw",
+   "version": "1.0.0",
+   "type": "feature",
+   "uses": [
+    "ranking",
+    "description",
+    "research_signal"
+   ],
+   "not_for": [
+    "production_trade",
+    "unique_alpha_claim",
+    "prediction_from_contemporaneous_fit"
+   ],
+   "contract_digest": "4a73747acd27aa90ff0fbf5909028ba661d1a7a785fc8c694fb54319b52eb5b5",
+   "required_fields": [
+    "date",
+    "economic_index",
+    "symbol"
+   ],
+   "missing_fields": [
+    "economic_index"
+   ],
+   "directly_satisfiable": false,
+   "reasons": [
+    "缺少输入字段 ['economic_index']"
+   ]
+  }
+ },
+ "authorization": {
+  "production_trade": false
+ }
+}

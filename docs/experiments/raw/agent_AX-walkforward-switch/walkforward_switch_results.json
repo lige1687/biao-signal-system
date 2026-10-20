@@ -1,0 +1,508 @@
+{
+ "config": {
+  "bands": [
+   1.0,
+   2.0,
+   3.0
+  ],
+  "blocks": {
+   "399006": [
+    2016,
+    2018,
+    2020,
+    2022,
+    2024
+   ],
+   "510300": [
+    2018,
+    2020,
+    2022,
+    2024
+   ],
+   "512100": [
+    2022,
+    2024
+   ]
+  },
+  "entries": [
+   41.333333333333336,
+   43.333333333333336,
+   45.333333333333336
+  ],
+  "fee": 10.0,
+  "train_years": 6
+ },
+ "criteria_doc": "AX 任务：换档决策的走样本（walk-forward）前向验证 + 相对痛苦度量。\n\n【背景与定位】AU（binary-hysteresis-vs-t3-decision-2026-09-04）判「换」，但\n诚实条款写明：二元侧参数（43.33 进仓线、2pp 带宽）都在全样本上选定，属样本\n内证据。本任务把同一决策放到走样本协议下重考：**每个前向段只用段前 6 年\n数据选二元参数，然后前向交易 2 年**；三档参数冻结（冠军 43.33/56.67 定版已\n久，符合\"当时的人只用当时的数据\"纪律）。这是把 AU 从\"系统内决策依据\"升级\n为\"准样本外证据\"的关键一步，也是换档前最后一块该补的证据。\n\n【走样本协议（跑前写死）】\n- 标的：399006（2010-06 起）、510300（2012-05 起）、512100（2016-11 起）。\n  588000（2020-11 起）凑不出 6 年训练窗，诚实排除（登记，不用短窗凑数）。\n- 前向段（每段 2 个自然年，交易日历按各标的对齐样本切）：\n  399006: [2016,2018) [2018,2020) [2020,2022) [2022,2024) [2024,2026)  共 5 段\n  510300: [2018,2020) [2020,2022) [2022,2024) [2024,2026)              共 4 段\n  512100: [2022,2024) [2024,2026)                                      共 2 段\n  合计 11 个前向 (标的×段) 样本。训练窗 = 段起点前推 6 年（2010 起步的段，\n  训练窗短于 6 年的段弃用——不存在，因起点已按数据可用性排过）。\n- 二元参数选择（仅用训练窗）：E ∈ {41.3333, 43.3333, 45.3333}（AJ/AP 同格）\n  × b ∈ {1, 2, 3}pp，共 9 格；选择标准 = 训练窗 Calmar 最大；平手比终值；\n  再平手取带宽小者。**资格线（防\"永远空仓\"退化格）**：训练窗在场时间\n  ≥10% 才有资格；全部格不合格时取 E=43.3333/b=2 并登记 degraded。\n- 前向执行：选定参数的二元+滞回 vs 冻结三档，同一对齐样本同一费率\n  （10bp，AU 主口径；1bp 不重复，方向已证一致）。\n- 引擎全部逐字复用（simulate / ladder_target / hysteresis_target），\n  T 收盘信号 T+1 开盘成交，min_trade=0.05。\n\n【预注册三选一判定线（跑前写死，只对走样本二元臂）】\n  11 个前向段上：\n  - 「换档决策在走样本下保持」：二元(走样本参数) Calmar > 三档 于 ≥6/11 段\n    且 终值 > 三档 于 ≥6/11 段。\n    [依据：AU 样本内为 6/8 与 8/8；走样本下允许退化到简单多数，若连多数都\n    保不住，样本内优势大概率是参数泄漏的产物。]\n  - 「换档证据被动摇」：三档 Calmar ≥ 二元 于 ≥6/11 段 且 三档终值 ≥ 二元\n    于 ≥6/11 段。\n  - 其余 = 「混合」（如 Calmar 多数胜但终值多数负——登记为\"防御性优势\"\n    结构，含义单独解释，不硬套两极）。\n  冻结参数二元臂（43.33/2 全程不重选）与走样本臂并列报告（描述级）：\n  用于区分\"引擎差异\"与\"参数重选损耗\"两个成分。\n\n【相对痛苦度量（全样本 fee=10bp，描述级，回答\"换了之后会有多难受\"）】\n  对核心 4 标的（含 588000，度量不需训练窗）：二元(43.33/2) 与三档的日净值\n  比值曲线 r(t)：\n  - 最大相对回撤：1 − min(r/running_max(r))（二元相对三档落后最多多少）；\n  - 最长水下期：r 连续低于其前高的最长交易日数（换档后\"感觉变差\"能持续\n    多久）；及其起止日期；\n  - 最差滚动 252 日相对收益。\n  这些数字不进判定，用途是给用户换档前的预期管理。\n\n【红线遵守】不产生买卖指令；不改生产代码/缓存/既有归档；产出全为新增。\n双跑哈希 PYTHONHASHSEED=0/42 逐位一致。\n",
+ "pain_metrics_fee10": {
+  "399006": {
+   "longest_underwater_td": 725,
+   "max_relative_dd_pct": -19.08,
+   "underwater_from": "2013-01-08",
+   "underwater_to": "2015-12-31",
+   "worst_roll252_rel_pct": -14.75
+  },
+  "510300": {
+   "longest_underwater_td": 670,
+   "max_relative_dd_pct": -9.85,
+   "underwater_from": "2020-03-02",
+   "underwater_to": "2022-11-30",
+   "worst_roll252_rel_pct": -8.74
+  },
+  "512100": {
+   "longest_underwater_td": 1576,
+   "max_relative_dd_pct": -12.76,
+   "underwater_from": "2020-03-02",
+   "underwater_to": "2026-08-27",
+   "worst_roll252_rel_pct": -10.01
+  },
+  "588000": {
+   "longest_underwater_td": 879,
+   "max_relative_dd_pct": -18.07,
+   "underwater_from": "2023-01-11",
+   "underwater_to": "2026-08-27",
+   "worst_roll252_rel_pct": -14.06
+  }
+ },
+ "segments": [
+  {
+   "BIN_HYST_frozen": {
+    "cagr": -0.004223896049814102,
+    "calmar": -0.017740369158891413,
+    "final": 0.9918365713123242,
+    "mdd": -0.2380951609283226,
+    "time_in_market": 0.6618852459016393
+   },
+   "BIN_HYST_wf": {
+    "cagr": -0.05027036651060346,
+    "calmar": -0.21113560777380566,
+    "final": 0.9049450338938158,
+    "mdd": -0.2380951609283226,
+    "time_in_market": 0.6844262295081968
+   },
+   "T3": {
+    "cagr": -0.02878880579670806,
+    "calmar": -0.12091302353421114,
+    "final": 0.9450022435254857,
+    "mdd": -0.2380951609283226,
+    "time_in_market": 0.8483606557377049
+   },
+   "block": [
+    2016,
+    2018
+   ],
+   "calmar_frozen_wins": true,
+   "calmar_wf_wins": false,
+   "final_frozen_wins": true,
+   "final_wf_wins": false,
+   "fwd_days": 488,
+   "selected": {
+    "E": 45.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "399006",
+   "train_days": 1040
+  },
+  {
+   "BIN_HYST_frozen": {
+    "cagr": 0.04407371905300095,
+    "calmar": 0.12044171297946993,
+    "final": 1.0869228473248416,
+    "mdd": -0.36593401042472384,
+    "time_in_market": 0.7166324435318275
+   },
+   "BIN_HYST_wf": {
+    "cagr": 0.06393778740072653,
+    "calmar": 0.17472491099287737,
+    "final": 1.1272407752016242,
+    "mdd": -0.36593401042472384,
+    "time_in_market": 0.7392197125256673
+   },
+   "T3": {
+    "cagr": 0.04519793420286611,
+    "calmar": 0.12351389298416622,
+    "final": 1.089185737045402,
+    "mdd": -0.36593401042472384,
+    "time_in_market": 0.8172484599589322
+   },
+   "block": [
+    2018,
+    2020
+   ],
+   "calmar_frozen_wins": false,
+   "calmar_wf_wins": true,
+   "final_frozen_wins": false,
+   "final_wf_wins": true,
+   "fwd_days": 487,
+   "selected": {
+    "E": 45.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "399006",
+   "train_days": 1432
+  },
+  {
+   "BIN_HYST_frozen": {
+    "cagr": 0.38937905462085665,
+    "calmar": 1.703401135956772,
+    "final": 1.8855585081060007,
+    "mdd": -0.22858917162935255,
+    "time_in_market": 0.43004115226337447
+   },
+   "BIN_HYST_wf": {
+    "cagr": 0.41640148800546206,
+    "calmar": 1.8216151055511898,
+    "final": 1.9569229294149777,
+    "mdd": -0.22858917162935255,
+    "time_in_market": 0.43621399176954734
+   },
+   "T3": {
+    "cagr": 0.43845511368364765,
+    "calmar": 1.9180922287718145,
+    "final": 2.016110450471329,
+    "mdd": -0.22858917162935255,
+    "time_in_market": 0.6666666666666666
+   },
+   "block": [
+    2020,
+    2022
+   ],
+   "calmar_frozen_wins": false,
+   "calmar_wf_wins": false,
+   "final_frozen_wins": false,
+   "final_wf_wins": false,
+   "fwd_days": 486,
+   "selected": {
+    "E": 43.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "399006",
+   "train_days": 1464
+  },
+  {
+   "BIN_HYST_frozen": {
+    "cagr": -0.05586112933581644,
+    "calmar": -0.2436650632349287,
+    "final": 0.8954741135761196,
+    "mdd": -0.2292537493647916,
+    "time_in_market": 0.6177685950413223
+   },
+   "BIN_HYST_wf": {
+    "cagr": -0.06135479950600631,
+    "calmar": -0.26849870576951235,
+    "final": 0.8854934462043166,
+    "mdd": -0.22851059683943198,
+    "time_in_market": 0.6384297520661157
+   },
+   "T3": {
+    "cagr": -0.11449879986338773,
+    "calmar": -0.4543589691513058,
+    "final": 0.7917164073299197,
+    "mdd": -0.25200074750864787,
+    "time_in_market": 0.890495867768595
+   },
+   "block": [
+    2022,
+    2024
+   ],
+   "calmar_frozen_wins": true,
+   "calmar_wf_wins": true,
+   "final_frozen_wins": true,
+   "final_wf_wins": true,
+   "fwd_days": 484,
+   "selected": {
+    "E": 43.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "399006",
+   "train_days": 1461
+  },
+  {
+   "BIN_HYST_frozen": {
+    "cagr": 0.20131140789404656,
+    "calmar": 0.9795789005063524,
+    "final": 1.4233294094307156,
+    "mdd": -0.20550810944374875,
+    "time_in_market": 0.37731958762886597
+   },
+   "BIN_HYST_wf": {
+    "cagr": 0.20131140789404656,
+    "calmar": 0.9795789005063524,
+    "final": 1.4233294094307156,
+    "mdd": -0.20550810944374875,
+    "time_in_market": 0.37731958762886597
+   },
+   "T3": {
+    "cagr": 0.23176174072793065,
+    "calmar": 1.127749855493503,
+    "final": 1.4935782974455565,
+    "mdd": -0.20550810944374875,
+    "time_in_market": 0.3958762886597938
+   },
+   "block": [
+    2024,
+    2026
+   ],
+   "calmar_frozen_wins": false,
+   "calmar_wf_wins": false,
+   "final_frozen_wins": false,
+   "final_wf_wins": false,
+   "fwd_days": 485,
+   "selected": {
+    "E": 45.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "399006",
+   "train_days": 1457
+  },
+  {
+   "BIN_HYST_frozen": {
+    "cagr": 0.005747390143364006,
+    "calmar": 0.01836738727766474,
+    "final": 1.0111368207655398,
+    "mdd": -0.3129127761329993,
+    "time_in_market": 0.7166324435318275
+   },
+   "BIN_HYST_wf": {
+    "cagr": 0.030317179806105488,
+    "calmar": 0.09688699892911878,
+    "final": 1.0594168084090076,
+    "mdd": -0.3129127761329993,
+    "time_in_market": 0.7392197125256673
+   },
+   "T3": {
+    "cagr": 0.00015233898371525,
+    "calmar": 0.00048684168667661055,
+    "final": 1.0002944220427843,
+    "mdd": -0.3129127761329993,
+    "time_in_market": 0.8172484599589322
+   },
+   "block": [
+    2018,
+    2020
+   ],
+   "calmar_frozen_wins": true,
+   "calmar_wf_wins": true,
+   "final_frozen_wins": true,
+   "final_wf_wins": true,
+   "fwd_days": 487,
+   "selected": {
+    "E": 45.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "510300",
+   "train_days": 1355
+  },
+  {
+   "BIN_HYST_frozen": {
+    "cagr": 0.10448142017096007,
+    "calmar": 0.6910291650714862,
+    "final": 1.211250822739866,
+    "mdd": -0.15119683141036688,
+    "time_in_market": 0.43004115226337447
+   },
+   "BIN_HYST_wf": {
+    "cagr": 0.12143666536811115,
+    "calmar": 0.8031693801738287,
+    "final": 1.2473667496512417,
+    "mdd": -0.15119683141036677,
+    "time_in_market": 0.4691358024691358
+   },
+   "T3": {
+    "cagr": 0.1119250271371135,
+    "calmar": 0.7402604015776967,
+    "final": 1.2270433420456008,
+    "mdd": -0.15119683141036688,
+    "time_in_market": 0.6666666666666666
+   },
+   "block": [
+    2020,
+    2022
+   ],
+   "calmar_frozen_wins": false,
+   "calmar_wf_wins": true,
+   "final_frozen_wins": false,
+   "final_wf_wins": true,
+   "fwd_days": 486,
+   "selected": {
+    "E": 45.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "510300",
+   "train_days": 1464
+  },
+  {
+   "BIN_HYST_frozen": {
+    "cagr": -0.036634354948405945,
+    "calmar": -0.18857045992104474,
+    "final": 0.930826471837087,
+    "mdd": -0.19427409236709137,
+    "time_in_market": 0.6177685950413223
+   },
+   "BIN_HYST_wf": {
+    "cagr": -0.07404644544513583,
+    "calmar": -0.37135974528156385,
+    "final": 0.8626409231021992,
+    "mdd": -0.19939276237114512,
+    "time_in_market": 0.7066115702479339
+   },
+   "T3": {
+    "cagr": -0.08314265533391896,
+    "calmar": -0.4112140955450408,
+    "final": 0.8464385992603586,
+    "mdd": -0.20218824265670687,
+    "time_in_market": 0.890495867768595
+   },
+   "block": [
+    2022,
+    2024
+   ],
+   "calmar_frozen_wins": true,
+   "calmar_wf_wins": true,
+   "final_frozen_wins": true,
+   "final_wf_wins": true,
+   "fwd_days": 484,
+   "selected": {
+    "E": 45.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "510300",
+   "train_days": 1461
+  },
+  {
+   "BIN_HYST_frozen": {
+    "cagr": 0.18505550418390038,
+    "calmar": 1.4950536785383537,
+    "final": 1.3864931244870087,
+    "mdd": -0.12377850162866444,
+    "time_in_market": 0.37731958762886597
+   },
+   "BIN_HYST_wf": {
+    "cagr": 0.18505550418390038,
+    "calmar": 1.4950536785383537,
+    "final": 1.3864931244870087,
+    "mdd": -0.12377850162866444,
+    "time_in_market": 0.37731958762886597
+   },
+   "T3": {
+    "cagr": 0.19870991463324406,
+    "calmar": 1.6053669419054197,
+    "final": 1.417403176791719,
+    "mdd": -0.12377850162866444,
+    "time_in_market": 0.3958762886597938
+   },
+   "block": [
+    2024,
+    2026
+   ],
+   "calmar_frozen_wins": false,
+   "calmar_wf_wins": false,
+   "final_frozen_wins": false,
+   "final_wf_wins": false,
+   "fwd_days": 485,
+   "selected": {
+    "E": 43.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "510300",
+   "train_days": 1457
+  },
+  {
+   "BIN_HYST_frozen": {
+    "cagr": 0.7162432190309453,
+    "calmar": 2.9342867360300016,
+    "final": 2.8158494566036767,
+    "mdd": -0.2440944881889764,
+    "time_in_market": 0.6169772256728778
+   },
+   "BIN_HYST_wf": {
+    "cagr": 0.7050291440941545,
+    "calmar": 2.771401238703927,
+    "final": 2.780690349801553,
+    "mdd": -0.2543944681297279,
+    "time_in_market": 0.7060041407867494
+   },
+   "T3": {
+    "cagr": 0.6146821920228478,
+    "calmar": 2.350019669295819,
+    "final": 2.505148777580051,
+    "mdd": -0.2615647009486677,
+    "time_in_market": 0.8902691511387164
+   },
+   "block": [
+    2022,
+    2024
+   ],
+   "calmar_frozen_wins": true,
+   "calmar_wf_wins": true,
+   "final_frozen_wins": true,
+   "final_wf_wins": true,
+   "fwd_days": 483,
+   "selected": {
+    "E": 45.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "512100",
+   "train_days": 1258
+  },
+  {
+   "BIN_HYST_frozen": {
+    "cagr": 0.08208565795076606,
+    "calmar": 0.3141723743661365,
+    "final": 1.1639653790067845,
+    "mdd": -0.26127586206896547,
+    "time_in_market": 0.37731958762886597
+   },
+   "BIN_HYST_wf": {
+    "cagr": 0.08208565795076606,
+    "calmar": 0.3141723743661365,
+    "final": 1.1639653790067845,
+    "mdd": -0.26127586206896547,
+    "time_in_market": 0.37731958762886597
+   },
+   "T3": {
+    "cagr": 0.10740881389674684,
+    "calmar": 0.4110935202594244,
+    "final": 1.216957105545251,
+    "mdd": -0.26127586206896547,
+    "time_in_market": 0.3958762886597938
+   },
+   "block": [
+    2024,
+    2026
+   ],
+   "calmar_frozen_wins": false,
+   "calmar_wf_wins": false,
+   "final_frozen_wins": false,
+   "final_wf_wins": false,
+   "fwd_days": 485,
+   "selected": {
+    "E": 45.3333,
+    "band": 3.0,
+    "degraded": false
+   },
+   "sym": "512100",
+   "train_days": 1456
+  }
+ ],
+ "verdict": "换档决策在走样本下保持",
+ "verdict_inputs": {
+  "frozen_calmar_wins": 5,
+  "frozen_final_wins": 5,
+  "n_segments": 11,
+  "skipped": [],
+  "t3_calmar_wins": 5,
+  "t3_final_wins": 5,
+  "wf_calmar_wins": 6,
+  "wf_final_wins": 6
+ }
+}

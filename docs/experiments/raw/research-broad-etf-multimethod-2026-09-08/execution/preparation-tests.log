@@ -1,0 +1,19 @@
+2026-09-08 · python3 -B
+
+Preparation boundary tests:
+....
+----------------------------------------------------------------------
+Ran 7 tests in 0.001s
+OK
+
+Frozen old-account hashes:
+{"status":"matched","files":16,"accounts":12}
+
+Representative adapter reconstruction:
+{"status":"exact_values_matched","representative_accounts":[{"account_id":"sh510300-breadth_three_tier-fee0.001","daily":4199,"trades":98},{"account_id":"sz159915-simple_60_close_breakout-fee0.001","daily":4199,"trades":29},{"account_id":"sz159915-hold-fee0.001","daily":4199,"trades":1}]}
+
+Expected protocol gate:
+RuntimeError: new-return run blocked: final root protocol is not locked
+exit=1 (expected at that preparation stage; no candidate return had been run)
+
+One later boundary-test draft used binary floating-point `130/3` and failed because its decimal string lies just above the intended boundary. This was a test-fixture error before the return run. The final test uses finite decimal values immediately below and above both repeating-decimal boundaries; 7/7 passed before signals were regenerated and inputs locked.

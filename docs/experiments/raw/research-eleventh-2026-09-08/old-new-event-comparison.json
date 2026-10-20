@@ -1,0 +1,83 @@
+{
+  "modules": [
+    {
+      "module": "A",
+      "old_events": 1515,
+      "new_events": 1531,
+      "removed": 46,
+      "added": 62,
+      "changed": 79,
+      "removed_confirmed": 25,
+      "added_confirmed": 47
+    },
+    {
+      "module": "C",
+      "old_events": 1456,
+      "new_events": 632,
+      "removed": 824,
+      "added": 0,
+      "changed": 0,
+      "removed_confirmed": 497,
+      "added_confirmed": 0
+    },
+    {
+      "module": "D",
+      "old_events": 16,
+      "new_events": 11,
+      "removed": 6,
+      "added": 1,
+      "changed": 0,
+      "removed_confirmed": 0,
+      "added_confirmed": 0
+    }
+  ],
+  "restored_confirmations": [
+    {
+      "symbol": "sh513100",
+      "cutoff": "2015-12-31",
+      "event_id": "first_ma_pullback:245b71f9a586c2897551083d",
+      "event_preserved": true,
+      "full_fields_equal_old_prefix": false,
+      "cross_version_changes": [
+        {
+          "field": "evidence.a3_structure_id",
+          "before": "strict_bottom:2015-12-31",
+          "after": "strict_bottom:2015-12-30",
+          "reason": "separate raw-history reconstruction proves first publication on Dec30; old Dec31 source date was already rewritten"
+        }
+      ]
+    },
+    {
+      "symbol": "sh513100",
+      "cutoff": "2015-12-31",
+      "event_id": "first_ma_pullback:f94c91ba94386219b5f875fe",
+      "event_preserved": true,
+      "full_fields_equal_old_prefix": false,
+      "cross_version_changes": [
+        {
+          "field": "evidence.a3_structure_id",
+          "before": "strict_bottom:2015-12-31",
+          "after": "strict_bottom:2015-12-30",
+          "reason": "separate raw-history reconstruction proves first publication on Dec30; old Dec31 source date was already rewritten"
+        }
+      ]
+    },
+    {
+      "symbol": "sh518880",
+      "cutoff": "2022-12-30",
+      "event_id": "first_ma_pullback:444a4142a9b03566cd5683a6",
+      "event_preserved": true,
+      "full_fields_equal_old_prefix": true,
+      "cross_version_changes": []
+    },
+    {
+      "symbol": "sh518880",
+      "cutoff": "2022-12-30",
+      "event_id": "first_ma_pullback:57ae0e0ad19b6f101dbdd97a",
+      "event_preserved": true,
+      "full_fields_equal_old_prefix": true,
+      "cross_version_changes": []
+    }
+  ],
+  "meaning": "old implementation versus repaired implementation differences; distinct from fixed-history consistency; events are not eligible or independent trades"
+}

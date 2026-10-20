@@ -1,0 +1,197 @@
+{
+  "etf.trend.price50.state@1.0.0": {
+    "scope": "510300与159915的冻结历史研究；不等同旧B1/SMA200，也不是宽度确认条件",
+    "not_for": [
+      "production_trade",
+      "ranking",
+      "attribution"
+    ],
+    "input": {
+      "fields": [
+        "date",
+        "symbol",
+        "nominal_open",
+        "nominal_close",
+        "actions",
+        "restrictions",
+        "price_limit_regimes"
+      ],
+      "price_basis": "etf.price.continuous@1.0.0的冻结ETF连续价算法；账户用名义开收盘与独立公司行动。只在有报价日连接恰好该日生效的动作；非报价日行动尚未泛化支持。",
+      "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+      "frequency": "daily_account_calendar",
+      "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+    },
+    "universe": {
+      "version": "first12冻结510300/159915名义行情及行动；固定2018-07-05—2026-06-30",
+      "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+      "warmup": "含当日最近50条有效连续收盘；不足返回缺失且不发指令",
+      "missing": "信号不填缺报价；账户缺开盘/受限订单延期；同日新收盘状态改变替换旧订单；其余沿冻结B1执行",
+      "quality_gate": "有限冻结ETF输入；历史到达时间未知，不依赖股票宽度覆盖率",
+      "degrade": "未覆盖的公司行动/报价异常阻断适用性；不能自动推广至其他产品"
+    },
+    "time": {
+      "observation_time": "ETF有效报价日收盘后",
+      "available_at": "冻结输入实际到达时间未知；本次重算时已取得，不伪造历史available_at",
+      "decision_at": "有效收盘后，首次或二元状态变化时",
+      "execution_at": "严格晚于信号日的下一允许开盘",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09研究定义登记；不追溯改生产"
+    },
+    "validation": {
+      "method": "合成相等/预热/缺报价/行动连接测试，并在运行后保存全部状态变化、成交和资金账",
+      "tolerance": {
+        "absolute": 1e-10,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "docs/experiments/raw/research-breadth-price50-decision-2026-09-09/execution/test_price50.py"
+      ],
+      "limitations": "仅绑定本轮两ETF冻结输入；纯50日跌回均线会退出，W3价格确认转负本身不退出。完整方案差不能全部归于宽度；旧消费者未迁移。"
+    },
+    "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_etf_inputs_historical_availability_unknown",
+      "implementation": "isolated_adapter_pre_result_definition",
+      "effectiveness": "not_yet_evaluated_at_definition_freeze",
+      "production": "not_authorized"
+    },
+    "sources": [
+      "price50_protocol",
+      "etf_510300",
+      "etf_159915",
+      "etf_actions",
+      "etf_restrictions",
+      "etf_limits"
+    ],
+    "id": "etf.trend.price50.state",
+    "version": "1.0.0",
+    "name": "ETF连续价格50日均线二元状态",
+    "type": "state_signal",
+    "uses": [
+      "research_signal",
+      "description",
+      "comparison"
+    ],
+    "dependencies": [
+      "etf.price.continuous@1.0.0"
+    ],
+    "definition": {
+      "formula": "当日连续价格close严格大于截至当日最近50条有效报价的简单平均值时为1，否则为0；不足50条为缺失",
+      "parameters": {
+        "window_valid_quotes": 50,
+        "comparison": "strict_gt",
+        "equal_target": 0,
+        "missing_before_window": true
+      },
+      "endpoints": "均线含当日；第50条有效连续价格首次可评价",
+      "unit": "boolean",
+      "direction": "1表示目标持有，0表示目标现金",
+      "transforms": "按已生效现金分红和拆分连接原名义收盘为连续价格；停牌/缺报价不补行"
+    }
+  },
+  "benchmark.etf.price_sma50_binary_account@1.0.0": {
+    "scope": "固定两只ETF、两档费用的完整可投资历史参照账户",
+    "not_for": [
+      "production_trade",
+      "ranking",
+      "attribution"
+    ],
+    "input": {
+      "fields": [
+        "date",
+        "symbol",
+        "nominal_open",
+        "nominal_close",
+        "actions",
+        "restrictions",
+        "price_limit_regimes"
+      ],
+      "price_basis": "etf.price.continuous@1.0.0的冻结ETF连续价算法；账户用名义开收盘与独立公司行动。只在有报价日连接恰好该日生效的动作；非报价日行动尚未泛化支持。",
+      "currency": "CNY；无外币换算；不能重复增加汇率贡献",
+      "frequency": "daily_account_calendar",
+      "calendar": "自然日记账；真实ETF报价决定可交易日期；股票宽度日历另列"
+    },
+    "universe": {
+      "version": "first12冻结510300/159915名义行情及行动；固定2018-07-05—2026-06-30",
+      "eligibility": "固定ETF自身上市且有当日可交易开盘；不受股票成分数量或宽度覆盖率约束",
+      "warmup": "含当日最近50条有效连续收盘；不足返回缺失且不发指令",
+      "missing": "信号不填缺报价；账户缺开盘/受限订单延期；同日新收盘状态改变替换旧订单；其余沿冻结B1执行",
+      "quality_gate": "有限冻结ETF输入；历史到达时间未知，不依赖股票宽度覆盖率",
+      "degrade": "未覆盖的公司行动/报价异常阻断适用性；不能自动推广至其他产品"
+    },
+    "time": {
+      "observation_time": "ETF有效报价日收盘后",
+      "available_at": "冻结输入实际到达时间未知；本次重算时已取得，不伪造历史available_at",
+      "decision_at": "有效收盘后，首次或二元状态变化时",
+      "execution_at": "严格晚于信号日的下一允许开盘",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09研究定义登记；不追溯改生产"
+    },
+    "validation": {
+      "method": "边界测试、运行前后输入哈希、四账户信号/订单/资金/公司行动/汇总核账",
+      "tolerance": {
+        "absolute": 1e-08,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "docs/experiments/raw/research-breadth-price50-decision-2026-09-09/execution/test_price50.py"
+      ],
+      "limitations": "仅绑定本轮两ETF冻结输入；纯50日跌回均线会退出，W3价格确认转负本身不退出。完整方案差不能全部归于宽度；旧消费者未迁移。"
+    },
+    "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_etf_inputs_historical_availability_unknown",
+      "implementation": "isolated_adapter_pre_result_definition",
+      "effectiveness": "not_yet_evaluated_at_definition_freeze",
+      "production": "not_authorized"
+    },
+    "sources": [
+      "price50_protocol",
+      "etf_510300",
+      "etf_159915",
+      "etf_actions",
+      "etf_restrictions",
+      "etf_limits"
+    ],
+    "id": "benchmark.etf.price_sma50_binary_account",
+    "version": "1.0.0",
+    "name": "ETF纯50日价格二元账户参照",
+    "type": "benchmark",
+    "uses": [
+      "comparison"
+    ],
+    "dependencies": [
+      "etf.trend.price50.state@1.0.0",
+      "cash.zero@1.0.0"
+    ],
+    "definition": {
+      "formula": "目标仓位=etf.trend.price50.state；只在首次有效状态及以后状态改变时发指令",
+      "parameters": {
+        "targets": [
+          0,
+          1
+        ],
+        "lot": 100,
+        "initial_cash": 1000000,
+        "external_deposits": 0
+      },
+      "endpoints": "2018-07-05至2026-06-30",
+      "unit": "account_path",
+      "direction": "不预设相对宽度策略优劣",
+      "transforms": "无每日再平衡"
+    },
+    "policy": {
+      "selection": "固定510300或159915，不选产品",
+      "weights": "状态1目标100%，状态0目标0%；=SMA50为0；不足50条不发指令",
+      "cash": "初始100万元CNY，外部流量0，利息0；名义份额/现金/应收；登记日权益/除息应收/支付日开盘前可用近似",
+      "fees": "每边0.001主费用、0.002压力；100份取整，不虚构期末卖费",
+      "rebalance": "首次有效收盘及其后状态改变后生成订单；不每日恢复比例，分红到账不单独触发买入",
+      "execution": "本批execution/run_price50.py隔离适配；名义开盘、现金费用、100份、停牌限价延期；新状态可替换受限旧单",
+      "exit": "收盘状态变0后下一允许开盘全部退出；不假设当天收盘成交",
+      "reentry": "以后收盘状态变1后下一允许开盘重新投入",
+      "investability": "真实ETF历史账户近似；价差/容量/历史到达时间未验，不授权交易"
+    }
+  }
+}

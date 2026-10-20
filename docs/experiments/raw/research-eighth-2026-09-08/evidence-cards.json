@@ -1,0 +1,247 @@
+[
+  {
+    "user_question": "为什么几乎没有交易？",
+    "conclusion": "B原始6机会仅2符合原结构下的信号纪律；普通突破1082条全被目标/风险纪律拒绝，不能推广成所有突破无效。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "technical-candidates",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/candidate-study/run-lock.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/candidate-study/summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/candidate-study/candidates.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/candidate-review/review-2026-09-08.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/candidate-review/summary.json"
+      ],
+      "source_hash": [
+        "36c54e85c33c99cb63ac171b248d77be7ca68c1b67fbf067783e4009a25d5b74",
+        "7bd8ab681443162335dc75c2c0ce729e4d5a16197cf82de0d616c52ebbbd6495",
+        "db545f5eefa24f21270edba99ffecf50eb499f48b179e943275f7b6dab2675a6",
+        "70f4a9e5a65c579bfbfecefd8e31d961c5b8b044119f8831fdc48d16dc24b1d5",
+        "93daea665d3e5eb233a491a5a91a017768b6fe9298e82ba0f67f720ce38e893e"
+      ],
+      "source_version": "research-eighth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "candidate_coverage_and_qualification",
+      "strategy_scope": [],
+      "limitations": "有限四产品历史且已反复查看，不是未来验证；完整B纪律、全部公司行动和真实成交制度未齐；资金与费用为研究假设，非用户实际条件；重复配置交易不是独立市场经历；未改变生产有效性或代用户验收",
+      "compatibility": "unknown",
+      "evidence_id": "technical-candidates",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/candidate-study/run-lock.json",
+      "strategies": [],
+      "note": "有限四产品历史且已反复查看，不是未来验证；完整B纪律、全部公司行动和真实成交制度未齐；资金与费用为研究假设，非用户实际条件；重复配置交易不是独立市场经历；未改变生产有效性或代用户验收"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "原名义历史及已核行动；完整事件/日历仍未全覆盖",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/manifest.json",
+        "sha256": "a7e0bf0d09b682bfa00e19bc017988cb1df9e1c88bee0113bd709ea7527d17c8"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/b-research-fix/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§2.3/§3/§9B/§10/§13；副本三项修复见b-research-fix/research.patch；非完整B",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-eighth-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": true,
+      "review_scope": "候选39条及全部数量；账户全部33592日及1925成交；按各卡报告范围，不冒称全部目标重新实现",
+      "limitations": [
+        "有限四产品历史且已反复查看，不是未来验证",
+        "完整B纪律、全部公司行动和真实成交制度未齐",
+        "资金与费用为研究假设，非用户实际条件",
+        "重复配置交易不是独立市场经历",
+        "未改变生产有效性或代用户验收"
+      ]
+    }
+  },
+  {
+    "user_question": "完整现金一起算，B比简单办法改善了吗？",
+    "conclusion": "模拟共入金60万元；B两笔后亏850元，平均持仓约0.0473%；未证明普遍改善。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "technical-accounts",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/protocol-addendum-01.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/account-results/run-lock.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/account-results/summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/account-results/comparisons.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/account-review/README.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/execution-checks.json"
+      ],
+      "source_hash": [
+        "b09162f56d37840c786388004643af99498b2d7c45d7ce86fd9539469d0a6592",
+        "c8687cb478b24a6558ddaf318c9070116db209eb15b7cd4d6af43006ac1292e0",
+        "5e3799e0f9a9322f037f53ab305b70b09f1981789bfccd49c26d0faf0e649685",
+        "f0475097665b1d21f90dbc5fba005515142c9701b0c5a178dca7a4536e569d15",
+        "e71894278873f5c26ffa59bcf0bed9a12f860c7adcd76e039f258211e5d9886d",
+        "87cc537756cccc91262d3b47bc5ba2b803300dfcd8a069ec289836db686bd6ee",
+        "e8a18cdfef79f05a0d356110e951931bb7d8d5de7eb65e69628bb6b5fc83009e"
+      ],
+      "source_version": "research-eighth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "limited_known_event_cash_comparison",
+      "strategy_scope": [],
+      "limitations": "有限四产品历史且已反复查看，不是未来验证；完整B纪律、全部公司行动和真实成交制度未齐；资金与费用为研究假设，非用户实际条件；重复配置交易不是独立市场经历；未改变生产有效性或代用户验收",
+      "compatibility": "unknown",
+      "evidence_id": "technical-accounts",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/protocol.md",
+      "strategies": [],
+      "note": "有限四产品历史且已反复查看，不是未来验证；完整B纪律、全部公司行动和真实成交制度未齐；资金与费用为研究假设，非用户实际条件；重复配置交易不是独立市场经历；未改变生产有效性或代用户验收"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "原名义历史及已核行动；完整事件/日历仍未全覆盖",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/manifest.json",
+        "sha256": "a7e0bf0d09b682bfa00e19bc017988cb1df9e1c88bee0113bd709ea7527d17c8"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/b-research-fix/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§2.3/§3/§9B/§10/§13；副本三项修复见b-research-fix/research.patch；非完整B",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-eighth-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": true,
+      "review_scope": "候选39条及全部数量；账户全部33592日及1925成交；按各卡报告范围，不冒称全部目标重新实现",
+      "limitations": [
+        "有限四产品历史且已反复查看，不是未来验证",
+        "完整B纪律、全部公司行动和真实成交制度未齐",
+        "资金与费用为研究假设，非用户实际条件",
+        "重复配置交易不是独立市场经历",
+        "未改变生产有效性或代用户验收"
+      ]
+    }
+  },
+  {
+    "user_question": "按计划风险金额买入是否减少了损失？",
+    "conclusion": "本批两次买入都先受现金限制，P7与P4数量和结果完全相同；不能据此宣称风险预算无用。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "technical-risk-sizing",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/account-results/P4/trades.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/account-results/P7/trades.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/account-review/README.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/account-review/order-boundary-checks.json"
+      ],
+      "source_hash": [
+        "76d542e0ec01b4444efc87453b58929350bd557704c5f4bc95e79a1f75e52091",
+        "19fdf7bb15922e1e8c76717deaf71eda0bbb0eee0168db78b5df8f11dfa79f58",
+        "87cc537756cccc91262d3b47bc5ba2b803300dfcd8a069ec289836db686bd6ee",
+        "1979dfff48d0505b09cd977399c65356f40a4dc35cbbe493bfe13c66be30daf5"
+      ],
+      "source_version": "research-eighth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "realized_position_sizing_comparison",
+      "strategy_scope": [],
+      "limitations": "有限四产品历史且已反复查看，不是未来验证；完整B纪律、全部公司行动和真实成交制度未齐；资金与费用为研究假设，非用户实际条件；重复配置交易不是独立市场经历；未改变生产有效性或代用户验收",
+      "compatibility": "unknown",
+      "evidence_id": "technical-risk-sizing",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/account-results/P4/trades.csv",
+      "strategies": [],
+      "note": "有限四产品历史且已反复查看，不是未来验证；完整B纪律、全部公司行动和真实成交制度未齐；资金与费用为研究假设，非用户实际条件；重复配置交易不是独立市场经历；未改变生产有效性或代用户验收"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "原名义历史及已核行动；完整事件/日历仍未全覆盖",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/manifest.json",
+        "sha256": "a7e0bf0d09b682bfa00e19bc017988cb1df9e1c88bee0113bd709ea7527d17c8"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/b-research-fix/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§2.3/§3/§9B/§10/§13；副本三项修复见b-research-fix/research.patch；非完整B",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-eighth-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": true,
+      "review_scope": "候选39条及全部数量；账户全部33592日及1925成交；按各卡报告范围，不冒称全部目标重新实现",
+      "limitations": [
+        "有限四产品历史且已反复查看，不是未来验证",
+        "完整B纪律、全部公司行动和真实成交制度未齐",
+        "资金与费用为研究假设，非用户实际条件",
+        "重复配置交易不是独立市场经历",
+        "未改变生产有效性或代用户验收"
+      ]
+    }
+  }
+]

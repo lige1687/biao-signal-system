@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.lei.newsfeed</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/yongbiaoli/.workbuddy/binaries/python/envs/default/bin/python3</string>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/precompute_newsfeed.py</string>
+  </array>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PYTHONPATH</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/src</string>
+  </dict>
+
+  <!-- 每天 20:30：覆盖当天 A 股盘后政策/快讯 + 前夜美股；美股凌晨消息次日可见 -->
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Hour</key><integer>20</integer><key>Minute</key><integer>30</integer></dict>
+  </array>
+
+  <key>StandardOutPath</key>
+  <string>/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/logs/precompute_newsfeed.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/logs/precompute_newsfeed.err.log</string>
+
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>

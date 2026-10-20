@@ -1,0 +1,107 @@
+{
+  "status": "passed_with_declared_limits",
+  "conclusion": "The frozen one-condition comparison is reproduced for the complete-account ledger, the four new invested-capital curves, and all 660 fixed-entry paths. Removing the road exit is implemented as specified, while the initial structural stop remains active.",
+  "protocol_compliance": {
+    "single_condition_change": true,
+    "complete_accounts": 4,
+    "fixed_entries": 330,
+    "fixed_paths": 660,
+    "same_frozen_inputs": true,
+    "old_archives_read_only": true,
+    "independent_simulator_does_not_import_executor_simulate": true,
+    "first_failed_attempt_retained": true
+  },
+  "complete_account_review": {
+    "accounts_compared": 8,
+    "new_accounts": 4,
+    "old_regression_accounts": 4,
+    "daily_rows_per_account": 4199,
+    "fields_compared": ["equity", "cash", "shares", "receivable", "fees"],
+    "maximum_absolute_difference": 0.0,
+    "trade_sequences_exact": true,
+    "roundtrip_entry_and_exit_dates_exact": true,
+    "evidence": "attempt-02-review-results-v2.json"
+  },
+  "new_invested_curve_review": {
+    "accounts": 4,
+    "daily_points_per_account": 4199,
+    "calendar_span_days": 4198,
+    "terminal_unit_maximum_absolute_difference": 4.440892098500626e-16,
+    "annualized_return_maximum_absolute_difference": 0.0,
+    "maximum_decline_maximum_absolute_difference": 0.0,
+    "evidence": "new-invested-curve-check.json"
+  },
+  "fixed_entry_review": {
+    "groups": 330,
+    "paths": 660,
+    "path_mismatch_count": 0,
+    "maximum_absolute_differences": {
+      "exit_price": 0.0,
+      "sell_fee": 2.2737367544323206e-13,
+      "dividend_accrued": 3.637978807091713e-12,
+      "terminal_market_value": 1.1641532182693481e-10,
+      "net_pnl": 1.1641532182693481e-10,
+      "net_return": 8.881784197001252e-16
+    },
+    "independently_counted_outcomes": {
+      "improved": 80,
+      "worsened": 244,
+      "unchanged": 6
+    },
+    "evidence": "fixed-attempt-02-comparison.json"
+  },
+  "rule_and_code_review": {
+    "execution_engine_unchanged": true,
+    "engine_diff_empty": true,
+    "actual_execution_change": "run_full_accounts.py passes an exit callback that returns None; the unchanged engine evaluates the initial structural stop before the callback.",
+    "fixed_attempt_02_change": "code-attempt-02.diff changes the output directory and adds holding-day, holding-decline, losing-streak, and concentration summaries; exit and cash-flow logic is unchanged.",
+    "boundary_tests_reported_by_executor": 6,
+    "boundary_tests_reported_by_fixed_runner": 12,
+    "independent_rule_checks": [
+      "strict less-than threshold",
+      "structural stop priority",
+      "entry-day close may create a signal but cannot sell the same day",
+      "exit occurs at the first later allowed open",
+      "dividend rights and ending valuation are processed independently"
+    ],
+    "quality_assessment": "acceptable_for_a_frozen_research_batch",
+    "quality_notes": [
+      "The full-account runner is compact and relies on fixed directory layout, but it locks sources and code and regresses the unchanged old engine outputs.",
+      "An empty engine.diff alone would be misleading; the substantive experiment change is in the runner callback.",
+      "The fixed runner uses Decimal for money and preserves the first failed summary attempt."
+    ]
+  },
+  "attempt_history": [
+    {
+      "attempt": "attempt-01-independent",
+      "status": "failed_and_retained",
+      "reason": "The first independent fixed-entry implementation skipped the entry-day close signal, producing 60 discrepancies."
+    },
+    {
+      "attempt": "attempt-02-review-results.json",
+      "status": "review_process_failure_retained",
+      "reason": "The verifier compared the corrected checker against its pre-correction path/hash lock. This was a review bookkeeping failure, not a strategy or executor failure."
+    },
+    {
+      "attempt": "attempt-02-review-results-v2.json",
+      "status": "passed",
+      "reason": "The verifier used the explicit corrected-code revision lock."
+    }
+  ],
+  "declared_limits": [
+    "Fixed-path daily holding-decline series and its summary fields were code-reviewed but not independently recomputed.",
+    "Executor invested-trades.json and invested-annual.json aggregations were not independently recomputed.",
+    "The old four invested-capital curves were not repeated in this batch because they were independently checked in the sealed technical batch.",
+    "A fixed-path mean includes overlapping paths and open-position ending valuations; it is not a complete-account return or a closed-trade win rate.",
+    "Rule compliance and arithmetic reproduction do not establish that R1 is a complete A/B/C/D strategy or justify production adoption."
+  ],
+  "interpretation_review": {
+    "draft_report_material_error_found": false,
+    "notes": [
+      "The draft separates invested-capital and complete-account results.",
+      "The draft states that the Shanghai new account has no closed trade and that the Shenzhen floating gain is not a closed win rate.",
+      "The draft fixed-entry section correctly treats 660 paths as separately calculated overlapping paths rather than independent market evidence.",
+      "The draft remains marked unfinished pending archive work by the controller."
+    ]
+  }
+}

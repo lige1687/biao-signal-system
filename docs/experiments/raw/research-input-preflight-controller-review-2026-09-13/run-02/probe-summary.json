@@ -1,0 +1,311 @@
+{
+  "source_control": {
+    "request_satisfied": true,
+    "sources_verified": true,
+    "errors": [],
+    "objects": {
+      "mixed.price.economic@1.0.0": {
+        "ref": "mixed.price.economic@1.0.0",
+        "resolved": true,
+        "purpose_allowed": true,
+        "card_uses": [
+          "description",
+          "research_signal",
+          "attribution"
+        ],
+        "contract_digest": "d310853944aec5449128c20462294828592c7f7cdeff7532098b82049f771e21",
+        "binding": {
+          "resolved": true,
+          "id": "mixed.price.economic",
+          "version": "1.0.0",
+          "type": "feature",
+          "uses": [
+            "description",
+            "research_signal",
+            "attribution"
+          ],
+          "not_for": [
+            "production_trade",
+            "unique_alpha_claim",
+            "prediction_from_contemporaneous_fit"
+          ],
+          "contract_digest": "d310853944aec5449128c20462294828592c7f7cdeff7532098b82049f771e21",
+          "required_fields": [
+            "date",
+            "economic_index",
+            "symbol"
+          ],
+          "missing_fields": [],
+          "directly_satisfiable": true,
+          "reasons": []
+        },
+        "missing_fields": [],
+        "directly_satisfiable": true,
+        "resolved_cards": {
+          "mixed.price.economic@1.0.0": {
+            "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+            "not_for": [
+              "production_trade",
+              "unique_alpha_claim",
+              "prediction_from_contemporaneous_fit"
+            ],
+            "input": {
+              "fields": [
+                "date",
+                "symbol",
+                "economic_index"
+              ],
+              "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+              "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+              "frequency": "daily_valid_quotes",
+              "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+            },
+            "universe": {
+              "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+              "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+              "warmup": "按每个对象窗口，不以日历天补足",
+              "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+              "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+              "degrade": "缺报价不发新信号；未确认资料不得生产"
+            },
+            "time": {
+              "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+              "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+              "decision_at": "不得早于available_at",
+              "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+              "timezone": "Asia/Shanghai",
+              "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+            },
+            "validation": {
+              "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+              "tolerance": {
+                "absolute": 1e-10,
+                "relative": 1e-10,
+                "integer": 0
+              },
+              "tests": [
+                "tests/unit/test_research_definitions.py"
+              ],
+              "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+            },
+            "status": {
+              "definition_clarity": "explicit",
+              "data_qualification": "limited_frozen_sources",
+              "implementation": "mapped_legacy_not_migrated",
+              "effectiveness": "not_tested_by_normalization",
+              "production": "not_authorized"
+            },
+            "sources": [
+              "mixed_code",
+              "mixed_protocol",
+              "mixed_prices",
+              "mixed_actions",
+              "mixed_pool"
+            ],
+            "id": "mixed.price.economic",
+            "version": "1.0.0",
+            "name": "混合池信号经济价格",
+            "type": "feature",
+            "profile": "mixed",
+            "uses": [
+              "description",
+              "research_signal",
+              "attribution"
+            ],
+            "dependencies": [],
+            "definition": {
+              "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+              "parameters": {
+                "base": 1,
+                "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+              },
+              "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+              "unit": "index_level",
+              "direction": "高值只表示累计变化",
+              "transforms": "分红/拆分校正；不再复权或加汇率"
+            }
+          }
+        }
+      }
+    }
+  },
+  "source_hash_failed": {
+    "request_satisfied": false,
+    "sources_verified": false,
+    "errors": [],
+    "objects": {
+      "mixed.price.economic@1.0.0": {
+        "ref": "mixed.price.economic@1.0.0",
+        "resolved": true,
+        "purpose_allowed": true,
+        "card_uses": [
+          "description",
+          "research_signal",
+          "attribution"
+        ],
+        "contract_digest": "d310853944aec5449128c20462294828592c7f7cdeff7532098b82049f771e21",
+        "blocked_by": "sources_unverified",
+        "binding": {
+          "resolved": true,
+          "id": "mixed.price.economic",
+          "version": "1.0.0",
+          "type": "feature",
+          "uses": [
+            "description",
+            "research_signal",
+            "attribution"
+          ],
+          "not_for": [
+            "production_trade",
+            "unique_alpha_claim",
+            "prediction_from_contemporaneous_fit"
+          ],
+          "contract_digest": "d310853944aec5449128c20462294828592c7f7cdeff7532098b82049f771e21",
+          "required_fields": [
+            "date",
+            "economic_index",
+            "symbol"
+          ],
+          "missing_fields": [],
+          "directly_satisfiable": true,
+          "reasons": []
+        },
+        "missing_fields": [],
+        "directly_satisfiable": true,
+        "resolved_cards": {
+          "mixed.price.economic@1.0.0": {
+            "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+            "not_for": [
+              "production_trade",
+              "unique_alpha_claim",
+              "prediction_from_contemporaneous_fit"
+            ],
+            "input": {
+              "fields": [
+                "date",
+                "symbol",
+                "economic_index"
+              ],
+              "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+              "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+              "frequency": "daily_valid_quotes",
+              "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+            },
+            "universe": {
+              "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+              "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+              "warmup": "按每个对象窗口，不以日历天补足",
+              "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+              "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+              "degrade": "缺报价不发新信号；未确认资料不得生产"
+            },
+            "time": {
+              "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+              "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+              "decision_at": "不得早于available_at",
+              "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+              "timezone": "Asia/Shanghai",
+              "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+            },
+            "validation": {
+              "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+              "tolerance": {
+                "absolute": 1e-10,
+                "relative": 1e-10,
+                "integer": 0
+              },
+              "tests": [
+                "tests/unit/test_research_definitions.py"
+              ],
+              "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+            },
+            "status": {
+              "definition_clarity": "explicit",
+              "data_qualification": "limited_frozen_sources",
+              "implementation": "mapped_legacy_not_migrated",
+              "effectiveness": "not_tested_by_normalization",
+              "production": "not_authorized"
+            },
+            "sources": [
+              "mixed_code",
+              "mixed_protocol",
+              "mixed_prices",
+              "mixed_actions",
+              "mixed_pool"
+            ],
+            "id": "mixed.price.economic",
+            "version": "1.0.0",
+            "name": "混合池信号经济价格",
+            "type": "feature",
+            "profile": "mixed",
+            "uses": [
+              "description",
+              "research_signal",
+              "attribution"
+            ],
+            "dependencies": [],
+            "definition": {
+              "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+              "parameters": {
+                "base": 1,
+                "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+              },
+              "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+              "unit": "index_level",
+              "direction": "高值只表示累计变化",
+              "transforms": "分红/拆分校正；不再复权或加汇率"
+            }
+          }
+        }
+      }
+    }
+  },
+  "reversed_no_calendar": {
+    "request_satisfied": false,
+    "sources_verified": true,
+    "errors": [
+      {
+        "stage": "evaluation",
+        "error": "起止倒置：evaluation_start=2026-06-30 晚于 evaluation_end=2026-06-01；属输入错误，不是正常的数据拒绝"
+      }
+    ],
+    "objects": {}
+  },
+  "invalid_no_calendar": {
+    "request_satisfied": false,
+    "sources_verified": true,
+    "errors": [
+      {
+        "stage": "evaluation",
+        "error": "非法评价期日期：Invalid isoformat string: 'garbage'"
+      }
+    ],
+    "objects": {}
+  },
+  "cli_source_hash_failed": {
+    "exit_code": 2
+  },
+  "cli_unknown_object": {
+    "exit_code": 2
+  },
+  "write_failure": {
+    "returned_exit": 3,
+    "partial_request_satisfied": true,
+    "manifest_exists": false
+  },
+  "real_description": {
+    "exit_code": 0,
+    "stable_fields_equal": false,
+    "rows": 18916
+  },
+  "real_objects": {
+    "exit_code": 2,
+    "stable_fields_equal": false,
+    "rows": 18916
+  },
+  "real_ranking": {
+    "exit_code": 2,
+    "stable_fields_equal": false,
+    "rows": 18916
+  }
+}

@@ -1,0 +1,115 @@
+{
+ "schema_version": "research-use-measurement/1.0",
+ "protocol": "research-identity-wiring-2026-09-10",
+ "snapshot": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot",
+ "calendar_months_covered": 82,
+ "verdicts_default": {
+  "description": "usable",
+  "ranking": "conditional",
+  "research_signal": "conditional",
+  "attribution": "conditional",
+  "comparison": "conditional",
+  "diagnostic": "usable"
+ },
+ "blockers_by_use": {
+  "description": {
+   "fixable": [],
+   "structural": []
+  },
+  "ranking": {
+   "fixable": [],
+   "structural": [
+    "starts_after_window"
+   ]
+  },
+  "research_signal": {
+   "fixable": [
+    "action_available_at_unknown",
+    "zero_volume_days"
+   ],
+   "structural": []
+  },
+  "attribution": {
+   "fixable": [
+    "action_available_at_unknown",
+    "zero_volume_days"
+   ],
+   "structural": []
+  },
+  "comparison": {
+   "fixable": [],
+   "structural": [
+    "starts_after_window"
+   ]
+  },
+  "diagnostic": {
+   "fixable": [],
+   "structural": []
+  }
+ },
+ "with_accept_structural": {
+  "description": {
+   "granted": true,
+   "verdict": "usable"
+  },
+  "ranking": {
+   "granted": true,
+   "verdict": "conditional"
+  },
+  "research_signal": {
+   "granted": false,
+   "verdict": "conditional",
+   "remaining_fixable": [
+    "action_available_at_unknown",
+    "zero_volume_days"
+   ]
+  },
+  "attribution": {
+   "granted": false,
+   "verdict": "conditional",
+   "remaining_fixable": [
+    "action_available_at_unknown",
+    "zero_volume_days"
+   ]
+  },
+  "comparison": {
+   "granted": true,
+   "verdict": "conditional"
+  },
+  "diagnostic": {
+   "granted": true,
+   "verdict": "usable"
+  }
+ },
+ "counts": {
+  "part_0": {
+   "instruments": 14,
+   "rows_total": 18916,
+   "findings_by_level": {
+    "info": 0,
+    "warn": 12,
+    "block": 0
+   }
+  },
+  "part_1": {
+   "total": 21,
+   "unique_ids": 21,
+   "by_type": {
+    "cash_dividend": 17,
+    "split": 3,
+    "trading_halt": 1
+   },
+   "without_available_at": 21,
+   "with_announcement_lower_bound": 3,
+   "findings_by_level": {
+    "info": 2,
+    "warn": 1,
+    "block": 0
+   }
+  }
+ },
+ "note": "accept_structural 只在无可修缺陷时放行；research_signal/attribution 仍被拒绝，证明它不是放宽闸门的后门",
+ "authorization": {
+  "production_trade": false
+ }
+}

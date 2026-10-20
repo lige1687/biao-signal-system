@@ -1,0 +1,52 @@
+{
+  "engine_sha256": "e3f3c26831de2b4b1e4fbf782538f43f0e2673cd23aef7cf8510d0fc5a888583",
+  "checks": [
+    {
+      "name": "quarter_and_ex_date",
+      "passed": true,
+      "detail": "Hand expected: x=1000, y=1800, cash=400, receivable=2600, equity=39000."
+    },
+    {
+      "name": "pay_after_quarter_sale_and_cash_ownership",
+      "passed": true,
+      "detail": "Payment uses registered 1300 shares, not current 1000; buys only originating x with dividend."
+    },
+    {
+      "name": "quarter_and_split",
+      "passed": true,
+      "detail": "Hand expected x=4800, y=1900, cash=800, equity=39000; no fivefold phantom wealth."
+    },
+    {
+      "name": "daily_independent_wealth_bridge_False",
+      "passed": true,
+      "detail": {
+        "days": 186,
+        "max_error": 1.4551915228366852e-11,
+        "min_cash": 0.0,
+        "same_day_opposite_trades": 0,
+        "nav_cashflow_bridge": "passed"
+      }
+    },
+    {
+      "name": "daily_independent_wealth_bridge_True",
+      "passed": true,
+      "detail": {
+        "days": 186,
+        "max_error": 1.4551915228366852e-11,
+        "min_cash": 0.0,
+        "same_day_opposite_trades": 0,
+        "nav_cashflow_bridge": "passed"
+      }
+    },
+    {
+      "name": "same_day_close_and_future_orders",
+      "passed": true,
+      "detail": "Changing quarter execution day close leaves same open orders and all prior daily ledgers unchanged."
+    }
+  ],
+  "bad_close_probe": {
+    "engine_rejected": false,
+    "nav_is_finite": false
+  },
+  "historical_candidates_executed": false
+}

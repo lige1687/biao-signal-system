@@ -1,0 +1,1266 @@
+{
+ "schema_version": "research-offline-loop/1.0",
+ "protocol": "research-data-provenance-round2-2026-09-10",
+ "started_at": "2026-09-10T16:34:54.818247+00:00",
+ "finished_at": "2026-09-10T16:34:54.939712+00:00",
+ "accounts_run": 0,
+ "step1_snapshot": {
+  "source": "docs/experiments/raw/research-data-provenance-2026-09-10/example-fullpool",
+  "verified": true,
+  "instruments": 14,
+  "rows": 18916
+ },
+ "step2_identity": {
+  "audit": {
+   "products_before": 14,
+   "products_after": 14,
+   "rows_before": 18916,
+   "rows_after": 18916,
+   "first_date": "2019-09-02",
+   "last_date": "2026-06-30",
+   "unmapped": [],
+   "empty_intersection": false,
+   "balanced": true,
+   "note": "与对侧共有产品 2 个"
+  },
+  "mapping": {
+   "159652.SZ": {
+    "raw": "159652.SZ",
+    "bare_code": "159652",
+    "exchange": "SZSE",
+    "canonical": "159652.SZ",
+    "source_format": "SZ",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "510300.SH": {
+    "raw": "510300.SH",
+    "bare_code": "510300",
+    "exchange": "SSE",
+    "canonical": "510300.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "512400.SH": {
+    "raw": "512400.SH",
+    "bare_code": "512400",
+    "exchange": "SSE",
+    "canonical": "512400.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "512890.SH": {
+    "raw": "512890.SH",
+    "bare_code": "512890",
+    "exchange": "SSE",
+    "canonical": "512890.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "513870.SH": {
+    "raw": "513870.SH",
+    "bare_code": "513870",
+    "exchange": "SSE",
+    "canonical": "513870.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "515050.SH": {
+    "raw": "515050.SH",
+    "bare_code": "515050",
+    "exchange": "SSE",
+    "canonical": "515050.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "515130.SH": {
+    "raw": "515130.SH",
+    "bare_code": "515130",
+    "exchange": "SSE",
+    "canonical": "515130.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "515170.SH": {
+    "raw": "515170.SH",
+    "bare_code": "515170",
+    "exchange": "SSE",
+    "canonical": "515170.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "515300.SH": {
+    "raw": "515300.SH",
+    "bare_code": "515300",
+    "exchange": "SSE",
+    "canonical": "515300.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "515880.SH": {
+    "raw": "515880.SH",
+    "bare_code": "515880",
+    "exchange": "SSE",
+    "canonical": "515880.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "516220.SH": {
+    "raw": "516220.SH",
+    "bare_code": "516220",
+    "exchange": "SSE",
+    "canonical": "516220.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "518850.SH": {
+    "raw": "518850.SH",
+    "bare_code": "518850",
+    "exchange": "SSE",
+    "canonical": "518850.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "562590.SH": {
+    "raw": "562590.SH",
+    "bare_code": "562590",
+    "exchange": "SSE",
+    "canonical": "562590.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   },
+   "588000.SH": {
+    "raw": "588000.SH",
+    "bare_code": "588000",
+    "exchange": "SSE",
+    "canonical": "588000.SS",
+    "source_format": "SH",
+    "registered": true,
+    "repo_resolvable": true
+   }
+  }
+ },
+ "step3_calendar": {
+  "source": {
+   "publisher": "深圳证券交易所（SZSE）",
+   "authority": "exchange_official",
+   "endpoint_template": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month={month}&random=0.1",
+   "field_semantics": {
+    "jyrq": "日期",
+    "jybz": "交易标志：1=交易日，0=非交易日（含周末与法定休市）"
+   },
+   "months_requested": [
+    "2019-09",
+    "2019-10",
+    "2020-01",
+    "2020-02",
+    "2020-10",
+    "2021-02",
+    "2021-09",
+    "2021-10",
+    "2022-01",
+    "2022-04",
+    "2022-10",
+    "2023-01",
+    "2023-09",
+    "2023-10",
+    "2024-02",
+    "2024-10",
+    "2025-01",
+    "2025-02",
+    "2025-10",
+    "2026-01",
+    "2026-02",
+    "2026-06"
+   ],
+   "months_failed": [],
+   "requests_used": 22,
+   "day_count": 664,
+   "trading_day_count": 389,
+   "limitations": [
+    "本次仅按月抽样，未覆盖冻结输入的全部 82 个月；未取月份一律为未知，不得回退为普通工作日",
+    "jybz 反映事后确认的开休市结果，不证明该安排在更早时点已经公布",
+    "深交所日历不自动等同于上交所日历；跨所差异未在本次核验"
+   ],
+   "fetched_calls": [
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2019-09&random=0.1",
+     "requested_at": "2026-09-10T16:27:04.731011+00:00",
+     "returned_at": "2026-09-10T16:27:04.841185+00:00",
+     "http_status": 200,
+     "body_sha256": "4c8f26c4661618c96aaa41b592129c9f40e83d886cb40b308cb96f974f0e9c23"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2019-10&random=0.1",
+     "requested_at": "2026-09-10T16:27:04.841541+00:00",
+     "returned_at": "2026-09-10T16:27:04.920910+00:00",
+     "http_status": 200,
+     "body_sha256": "244064e528e726025cdf2e4bb4634395a2af1f2e2fb28a4539e6051f4ff85120"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2020-01&random=0.1",
+     "requested_at": "2026-09-10T16:27:04.921181+00:00",
+     "returned_at": "2026-09-10T16:27:05.005244+00:00",
+     "http_status": 200,
+     "body_sha256": "e1388676d56e45e58a214d8593a36576ad5e9195b75917afc66d43a729487186"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2020-02&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.005466+00:00",
+     "returned_at": "2026-09-10T16:27:05.092344+00:00",
+     "http_status": 200,
+     "body_sha256": "c1486b336630a5be5656d42c444505977e6ccec8a947d39410bec63ade986c27"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2020-10&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.092591+00:00",
+     "returned_at": "2026-09-10T16:27:05.177889+00:00",
+     "http_status": 200,
+     "body_sha256": "c9d3582ea736486f9a881007686c4866916d5c1bd1dadd48d36236b7787fe1c4"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2021-02&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.178959+00:00",
+     "returned_at": "2026-09-10T16:27:05.265945+00:00",
+     "http_status": 200,
+     "body_sha256": "08f80bee267642bc12947d58a054008982cb4b7cf9e194c8ccfee6ce7205800f"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2021-09&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.266232+00:00",
+     "returned_at": "2026-09-10T16:27:05.370901+00:00",
+     "http_status": 200,
+     "body_sha256": "aeaebe804534006ef06e00e272b642e009489a98820ebd7721a46abbbc482da9"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2021-10&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.372203+00:00",
+     "returned_at": "2026-09-10T16:27:05.458607+00:00",
+     "http_status": 200,
+     "body_sha256": "ebf560edd78c2792da131f8ec0d3aca823cdc1d5e2212eeeced91405a5a8c8cb"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2022-01&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.458934+00:00",
+     "returned_at": "2026-09-10T16:27:05.549494+00:00",
+     "http_status": 200,
+     "body_sha256": "d18a82679f81e744a2e1bddbbb6737ced1ba2090e94448e60edc79acb802f391"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2022-04&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.550227+00:00",
+     "returned_at": "2026-09-10T16:27:05.642553+00:00",
+     "http_status": 200,
+     "body_sha256": "3eda94b0597bf5479c4214d3283441cadaa22ca37fb3dbc3860b73ef2e219eed"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2022-10&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.643538+00:00",
+     "returned_at": "2026-09-10T16:27:05.724309+00:00",
+     "http_status": 200,
+     "body_sha256": "d7eef0c9060ef01dfb530a258c8932120d639bdc1eccd42b7842ef5a90da8c7c"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2023-01&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.725404+00:00",
+     "returned_at": "2026-09-10T16:27:05.817439+00:00",
+     "http_status": 200,
+     "body_sha256": "d3739f68ebe7123f326abebf51c9ecc53b73ec2d75598e0837885e3f492b6da2"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2023-09&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.817722+00:00",
+     "returned_at": "2026-09-10T16:27:05.900418+00:00",
+     "http_status": 200,
+     "body_sha256": "7ee6a30c1ee5015a1d058b545b52dd636c97694d2372154ca394dd28dc35dbf4"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2023-10&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.901070+00:00",
+     "returned_at": "2026-09-10T16:27:05.989869+00:00",
+     "http_status": 200,
+     "body_sha256": "fae6176ee2f915616d937bf35bbb64871b23c3bc690f39aeae448ad93f37dcb4"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2024-02&random=0.1",
+     "requested_at": "2026-09-10T16:27:05.990408+00:00",
+     "returned_at": "2026-09-10T16:27:06.083469+00:00",
+     "http_status": 200,
+     "body_sha256": "4e09ec9acabc36f0efd45b58ce5279f00f4356c35cddedfe8a9490fe753ad458"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2024-10&random=0.1",
+     "requested_at": "2026-09-10T16:27:06.084133+00:00",
+     "returned_at": "2026-09-10T16:27:06.166896+00:00",
+     "http_status": 200,
+     "body_sha256": "81931775463a35cd3f0a3afed5fa8581eb685f612826085237d27917d54fd532"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2025-01&random=0.1",
+     "requested_at": "2026-09-10T16:27:06.167561+00:00",
+     "returned_at": "2026-09-10T16:27:06.254415+00:00",
+     "http_status": 200,
+     "body_sha256": "8715190be638cf1402a23be947ac2d48a746dd173b81ccd1366964afd4f9ed2c"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2025-02&random=0.1",
+     "requested_at": "2026-09-10T16:27:06.254738+00:00",
+     "returned_at": "2026-09-10T16:27:06.336722+00:00",
+     "http_status": 200,
+     "body_sha256": "c98d3d25e88a417b74ba9d4c6dea8265ebf37bbd8cffc7131ba8db8373dd5dd8"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2025-10&random=0.1",
+     "requested_at": "2026-09-10T16:27:06.337036+00:00",
+     "returned_at": "2026-09-10T16:27:06.418875+00:00",
+     "http_status": 200,
+     "body_sha256": "fe89276f6ad730daab7300e886ce25b95afb1b7e1554e6b965fec91cdcf6687b"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2026-01&random=0.1",
+     "requested_at": "2026-09-10T16:27:06.419139+00:00",
+     "returned_at": "2026-09-10T16:27:06.494775+00:00",
+     "http_status": 200,
+     "body_sha256": "4bc0fc30d3575737bb6da529cc5b4046d03a469129c61b46e1bc012d969dd6d7"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2026-02&random=0.1",
+     "requested_at": "2026-09-10T16:27:06.495447+00:00",
+     "returned_at": "2026-09-10T16:27:06.580355+00:00",
+     "http_status": 200,
+     "body_sha256": "12eb97683c4237253dbe841c525a36e8e42c15d4ad593c8830eb5c77d9e9e1e5"
+    },
+    {
+     "url": "http://www.szse.cn/api/report/exchange/onepersistenthour/monthList?month=2026-06&random=0.1",
+     "requested_at": "2026-09-10T16:27:06.580629+00:00",
+     "returned_at": "2026-09-10T16:27:06.662174+00:00",
+     "http_status": 200,
+     "body_sha256": "5f7315c9497a4d2dc14435276a50ebbceb8467ee86d530b6a2e337f1cda25d54"
+    }
+   ]
+  },
+  "coverage": {
+   "start": "2019-09-02",
+   "end": "2026-06-30",
+   "covered_months": [
+    "2019-09",
+    "2019-10",
+    "2020-01",
+    "2020-02",
+    "2020-10",
+    "2021-02",
+    "2021-09",
+    "2021-10",
+    "2022-01",
+    "2022-04",
+    "2022-10",
+    "2023-01",
+    "2023-09",
+    "2023-10",
+    "2024-02",
+    "2024-10",
+    "2025-01",
+    "2025-02",
+    "2025-10",
+    "2026-01",
+    "2026-02",
+    "2026-06"
+   ],
+   "missing_months": [
+    "2019-11",
+    "2019-12",
+    "2020-03",
+    "2020-04",
+    "2020-05",
+    "2020-06",
+    "2020-07",
+    "2020-08",
+    "2020-09",
+    "2020-11",
+    "2020-12",
+    "2021-01",
+    "2021-03",
+    "2021-04",
+    "2021-05",
+    "2021-06",
+    "2021-07",
+    "2021-08",
+    "2021-11",
+    "2021-12",
+    "2022-02",
+    "2022-03",
+    "2022-05",
+    "2022-06",
+    "2022-07",
+    "2022-08",
+    "2022-09",
+    "2022-11",
+    "2022-12",
+    "2023-02",
+    "2023-03",
+    "2023-04",
+    "2023-05",
+    "2023-06",
+    "2023-07",
+    "2023-08",
+    "2023-11",
+    "2023-12",
+    "2024-01",
+    "2024-03",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-11",
+    "2024-12",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-11",
+    "2025-12",
+    "2026-03",
+    "2026-04",
+    "2026-05"
+   ],
+   "trading_days_known": 389,
+   "closed_days_known": 274,
+   "complete": false
+  }
+ },
+ "step4_quality": {
+  "findings": [
+   {
+    "level": "warn",
+    "code": "calendar_coverage_partial",
+    "message": "日历仅覆盖 22 个月，缺 60 个月；未覆盖区间的缺失日期保持未知，不推断",
+    "instrument": null,
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "research_signal",
+     "comparison"
+    ],
+    "evidence": {
+     "covered_months": 22,
+     "missing_months": [
+      "2019-11",
+      "2019-12",
+      "2020-03",
+      "2020-04",
+      "2020-05",
+      "2020-06",
+      "2020-07",
+      "2020-08",
+      "2020-09",
+      "2020-11",
+      "2020-12",
+      "2021-01"
+     ],
+     "missing_month_count": 60
+    }
+   },
+   {
+    "level": "warn",
+    "code": "zero_volume_days",
+    "message": "存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）",
+    "instrument": "159652.SZ",
+    "field": "volume",
+    "affects_uses": [
+     "research_signal",
+     "attribution"
+    ],
+    "evidence": {
+     "days": 5
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "159652.SZ",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2023-02-08",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "510300.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "510300.SH",
+     "resolved": "510300.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "512400.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "512400.SH",
+     "resolved": "512400.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "512890.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "512890.SH",
+     "resolved": "512890.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "513870.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "513870.SH",
+     "resolved": "513870.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "513870.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2023-11-02",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "515050.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "515050.SH",
+     "resolved": "515050.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "515050.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2019-10-16",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "515130.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "515130.SH",
+     "resolved": "515130.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "515130.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2020-05-11",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "515170.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "515170.SH",
+     "resolved": "515170.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "515170.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2021-01-13",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "515300.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "515300.SH",
+     "resolved": "515300.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "515300.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2019-09-19",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "515880.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "515880.SH",
+     "resolved": "515880.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "515880.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2019-09-06",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "516220.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "516220.SH",
+     "resolved": "516220.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "516220.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2021-03-10",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "518850.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "518850.SH",
+     "resolved": "518850.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "518850.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2020-06-05",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "562590.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "562590.SH",
+     "resolved": "562590.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "562590.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2023-10-18",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "symbol_convention_mismatch",
+    "message": "'588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "instrument": "588000.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison",
+     "attribution"
+    ],
+    "evidence": {
+     "given": "588000.SH",
+     "resolved": "588000.SH",
+     "market": "other",
+     "repo_canonical_example": "510300.SS"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "starts_after_window",
+    "message": "首个报价晚于评价期起点（未上市或数据起点晚）",
+    "instrument": "588000.SH",
+    "field": null,
+    "affects_uses": [
+     "ranking",
+     "comparison"
+    ],
+    "evidence": {
+     "first_date": "2020-11-16",
+     "window_start": "2019-09-02"
+    }
+   },
+   {
+    "level": "warn",
+    "code": "action_available_at_unknown",
+    "message": "21/21 条行动缺少 available_at；保持未知，不补造为收盘或本次抓取时刻。本批只能用于历史重建，不得声称当时可知",
+    "instrument": null,
+    "field": null,
+    "affects_uses": [
+     "research_signal",
+     "attribution"
+    ],
+    "evidence": {
+     "without_available_at": 21,
+     "total": 21
+    }
+   },
+   {
+    "level": "info",
+    "code": "coverage_unproven",
+    "message": "没有行动记录不等于已证明该期间没有分红、拆分或停牌；本文件缺连续官方「无其他行动」证明",
+    "instrument": null,
+    "field": null,
+    "affects_uses": [
+     "attribution"
+    ],
+    "evidence": {}
+   }
+  ],
+  "verdicts": [
+   {
+    "use": "description",
+    "verdict": "usable",
+    "reasons": []
+   },
+   {
+    "use": "ranking",
+    "verdict": "conditional",
+    "reasons": [
+     "calendar_coverage_partial: 日历仅覆盖 22 个月，缺 60 个月；未覆盖区间的缺失日期保持未知，不推断",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）"
+    ]
+   },
+   {
+    "use": "research_signal",
+    "verdict": "conditional",
+    "reasons": [
+     "calendar_coverage_partial: 日历仅覆盖 22 个月，缺 60 个月；未覆盖区间的缺失日期保持未知，不推断",
+     "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）",
+     "action_available_at_unknown: 21/21 条行动缺少 available_at；保持未知，不补造为收盘或本次抓取时刻。本批只能用于历史重建，不得声称当时可知"
+    ]
+   },
+   {
+    "use": "attribution",
+    "verdict": "conditional",
+    "reasons": [
+     "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）",
+     "symbol_convention_mismatch: '510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "action_available_at_unknown: 21/21 条行动缺少 available_at；保持未知，不补造为收盘或本次抓取时刻。本批只能用于历史重建，不得声称当时可知"
+    ]
+   },
+   {
+    "use": "comparison",
+    "verdict": "conditional",
+    "reasons": [
+     "calendar_coverage_partial: 日历仅覆盖 22 个月，缺 60 个月；未覆盖区间的缺失日期保持未知，不推断",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "symbol_convention_mismatch: '513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+     "symbol_convention_mismatch: '588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+     "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）"
+    ]
+   },
+   {
+    "use": "diagnostic",
+    "verdict": "usable",
+    "reasons": []
+   }
+  ],
+  "counts": {
+   "part_0": {
+    "instruments": 14,
+    "rows_total": 18916,
+    "findings_by_level": {
+     "info": 0,
+     "warn": 26,
+     "block": 0
+    }
+   },
+   "part_1": {
+    "total": 21,
+    "unique_ids": 21,
+    "by_type": {
+     "cash_dividend": 17,
+     "split": 3,
+     "trading_halt": 1
+    },
+    "without_available_at": 21,
+    "findings_by_level": {
+     "info": 1,
+     "warn": 1,
+     "block": 0
+    }
+   }
+  },
+  "blocked_instruments": []
+ },
+ "step5_binding": {
+  "provided_fields": [
+   "close",
+   "date",
+   "high",
+   "low",
+   "open",
+   "symbol",
+   "volume"
+  ],
+  "declared_currency": "CNY",
+  "purpose": "description",
+  "bindings": {
+   "mixed.price.economic@1.0.0": {
+    "resolved": true,
+    "id": "mixed.price.economic",
+    "version": "1.0.0",
+    "type": "feature",
+    "uses": [
+     "description",
+     "research_signal",
+     "attribution"
+    ],
+    "not_for": [
+     "production_trade",
+     "unique_alpha_claim",
+     "prediction_from_contemporaneous_fit"
+    ],
+    "contract_digest": "d310853944aec5449128c20462294828592c7f7cdeff7532098b82049f771e21",
+    "required_fields": [
+     "date",
+     "economic_index",
+     "symbol"
+    ],
+    "missing_fields": [
+     "economic_index"
+    ],
+    "directly_satisfiable": false,
+    "reasons": [
+     "缺少输入字段 ['economic_index']"
+    ]
+   },
+   "mixed.momentum.raw@1.0.0": {
+    "resolved": true,
+    "id": "mixed.momentum.raw",
+    "version": "1.0.0",
+    "type": "feature",
+    "uses": [
+     "ranking",
+     "description",
+     "research_signal"
+    ],
+    "not_for": [
+     "production_trade",
+     "unique_alpha_claim",
+     "prediction_from_contemporaneous_fit"
+    ],
+    "contract_digest": "4a73747acd27aa90ff0fbf5909028ba661d1a7a785fc8c694fb54319b52eb5b5",
+    "required_fields": [
+     "date",
+     "economic_index",
+     "symbol"
+    ],
+    "missing_fields": [
+     "economic_index"
+    ],
+    "directly_satisfiable": false,
+    "reasons": [
+     "缺少输入字段 ['economic_index']"
+    ]
+   },
+   "trend.sma200@1.0.0": {
+    "resolved": true,
+    "id": "trend.sma200",
+    "version": "1.0.0",
+    "type": "feature",
+    "uses": [
+     "description",
+     "diagnostic"
+    ],
+    "not_for": [
+     "production_trade",
+     "unique_alpha_claim",
+     "prediction_from_contemporaneous_fit"
+    ],
+    "contract_digest": "77455540aa2dc2dda7a46b4871eb0bdef4655859d12ebbdeafce04a9ba5b7ef3",
+    "required_fields": [
+     "date",
+     "economic_index",
+     "symbol"
+    ],
+    "missing_fields": [
+     "economic_index"
+    ],
+    "directly_satisfiable": false,
+    "reasons": [
+     "缺少输入字段 ['economic_index']"
+    ]
+   }
+  },
+  "note": "directly_satisfiable=false 不是错误，而是如实说明本批数据还不足以直接喂给该对象；只有真正被调用并测试过的能力才可标「已接入」。"
+ },
+ "step6_use_requests": {
+  "description": {
+   "granted": true,
+   "verdict": "usable"
+  },
+  "ranking": {
+   "granted": false,
+   "verdict": "conditional",
+   "reasons": [
+    "calendar_coverage_partial: 日历仅覆盖 22 个月，缺 60 个月；未覆盖区间的缺失日期保持未知，不推断",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）"
+   ]
+  },
+  "research_signal": {
+   "granted": false,
+   "verdict": "conditional",
+   "reasons": [
+    "calendar_coverage_partial: 日历仅覆盖 22 个月，缺 60 个月；未覆盖区间的缺失日期保持未知，不推断",
+    "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）",
+    "action_available_at_unknown: 21/21 条行动缺少 available_at；保持未知，不补造为收盘或本次抓取时刻。本批只能用于历史重建，不得声称当时可知"
+   ]
+  },
+  "attribution": {
+   "granted": false,
+   "verdict": "conditional",
+   "reasons": [
+    "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）",
+    "symbol_convention_mismatch: '510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "action_available_at_unknown: 21/21 条行动缺少 available_at；保持未知，不补造为收盘或本次抓取时刻。本批只能用于历史重建，不得声称当时可知"
+   ]
+  },
+  "comparison": {
+   "granted": false,
+   "verdict": "conditional",
+   "reasons": [
+    "calendar_coverage_partial: 日历仅覆盖 22 个月，缺 60 个月；未覆盖区间的缺失日期保持未知，不推断",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '510300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '510300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512400.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512400.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '512890.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '512890.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "symbol_convention_mismatch: '513870.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '513870.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '515050.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515050.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '515130.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515130.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '515170.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515170.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '515300.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515300.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '515880.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '515880.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '516220.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '516220.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '518850.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '518850.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '562590.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '562590.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）",
+    "symbol_convention_mismatch: '588000.SH' 不被本仓库 resolve_symbol 判为 A 股（解析为 '588000.SH'/other）。若与仓库口径数据按代码合并会得到空交集且不报错，须先统一写法",
+    "starts_after_window: 首个报价晚于评价期起点（未上市或数据起点晚）"
+   ]
+  },
+  "diagnostic": {
+   "granted": true,
+   "verdict": "usable"
+  }
+ },
+ "code_identity": {
+  "symbol_identity": "00438dd5a033820b852024fe9d29a84c59b1e7fb2f7f3febc3a84d4a098c0659",
+  "trading_calendar": "4eb47c439232c9afcf8d50831202ad13a116228c38d49d67741c83c1d196d84c",
+  "data_quality": "71d581e99350ba56692ef8e7c4a76da437acc49be0add62a435d4ef3f92d604a",
+  "data_snapshot": "1bd91ede1d97be8ddaf1b718447e9c3322d4fbdf6cca5821fce2633e500596cf"
+ },
+ "authorization": {
+  "production_trade": false,
+  "note": "数据与接口验证；不构成策略有效或获准交易"
+ }
+}

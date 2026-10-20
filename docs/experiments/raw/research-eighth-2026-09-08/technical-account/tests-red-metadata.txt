@@ -1,0 +1,46 @@
+test_b3_negative_slopes_alone_do_not_exit (__main__.AccountTests.test_b3_negative_slopes_alone_do_not_exit) ... ok
+test_b3_uses_price_below_sma_and_cost_even_positive_slopes (__main__.AccountTests.test_b3_uses_price_below_sma_and_cost_even_positive_slopes) ... ok
+test_buy_missing_union_session_expires (__main__.AccountTests.test_buy_missing_union_session_expires) ... ok
+test_dividend_after_sale_receivable_then_holiday_payment (__main__.AccountTests.test_dividend_after_sale_receivable_then_holiday_payment) ... ok
+test_dividend_exday_wealth_conservation (__main__.AccountTests.test_dividend_exday_wealth_conservation) ... ok
+test_dividend_rebases_pending_buy_proportionally (__main__.AccountTests.test_dividend_rebases_pending_buy_proportionally) ... ok
+test_gap_below_stop_rejected_and_no_new_hard_open_exit (__main__.AccountTests.test_gap_below_stop_rejected_and_no_new_hard_open_exit) ... ok
+test_gap_rr_rejected_once (__main__.AccountTests.test_gap_rr_rejected_once) ... ok
+test_holding_duplicate_and_same_day_duplicate (__main__.AccountTests.test_holding_duplicate_and_same_day_duplicate) ... ok
+test_holiday_deposit_and_insufficient_lot (__main__.AccountTests.test_holiday_deposit_and_insufficient_lot) ... ok
+test_missing_target (__main__.AccountTests.test_missing_target) ... ok
+test_no_cash_borrowed_between_products (__main__.AccountTests.test_no_cash_borrowed_between_products) ... ok
+test_old_dividend_does_not_transfer_to_new_position (__main__.AccountTests.test_old_dividend_does_not_transfer_to_new_position) ... ok
+test_p7_current_monday_deposit_not_previous_risk_wealth (__main__.AccountTests.test_p7_current_monday_deposit_not_previous_risk_wealth) ... ok
+test_p7_risk_size (__main__.AccountTests.test_p7_risk_size) ... ok
+test_plain_buy_and_deposits_not_return (__main__.AccountTests.test_plain_buy_and_deposits_not_return) ... ok
+test_real_candidate_metadata_cannot_override_account_order_id (__main__.AccountTests.test_real_candidate_metadata_cannot_override_account_order_id) ... ERROR
+test_sell_deferred_until_available (__main__.AccountTests.test_sell_deferred_until_available) ... ok
+test_signal_rejection_not_rescued (__main__.AccountTests.test_signal_rejection_not_rescued) ... ok
+test_split_without_quote_rebases_quantity_and_levels (__main__.AccountTests.test_split_without_quote_rebases_quantity_and_levels) ... ok
+test_structure_priority_and_no_sell_day_reentry (__main__.AccountTests.test_structure_priority_and_no_sell_day_reentry) ... ok
+test_tail_missing_not_liquidated (__main__.AccountTests.test_tail_missing_not_liquidated) ... ok
+test_tplus_and_exit_close_not_consumed (__main__.AccountTests.test_tplus_and_exit_close_not_consumed) ... ok
+
+======================================================================
+ERROR: test_real_candidate_metadata_cannot_override_account_order_id (__main__.AccountTests.test_real_candidate_metadata_cannot_override_account_order_id)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 154, in test_real_candidate_metadata_cannot_override_account_order_id
+    r=run(cs=[c]);self.assertEqual(len(r['trades']),1);o=r['orders'][0]
+      ^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 19, in run
+    return simulate(prices,actions or [],[candidate()] if cs is None else cs,kw.pop('obs',observations(prices)),start='2024-01-01',end=kw.pop('end','2024-01-10'),config_id=config,limits={s:1. for s in prices},**kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/engine.py", line 210, in simulate
+    o=order('buy',s,d,'candidate_entry',planned_date=planned,**{k:deepcopy(v) for k,v in c.items() if k not in ('symbol','signal_date','config_id','side','reason','status','attempts','planned_date')})
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/engine.py", line 69, in order
+    o=dict(order_id=f'{config_id}-O{len(orders)+1}',config_id=config_id,side=side,symbol=s,
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: dict() got multiple values for keyword argument 'order_id'
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.004s
+
+FAILED (errors=1)

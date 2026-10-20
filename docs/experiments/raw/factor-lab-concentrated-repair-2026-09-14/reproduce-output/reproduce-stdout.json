@@ -1,0 +1,327 @@
+{
+  "unknown_available": {
+    "definition_reference": "test.ref@1.0.0",
+    "entity_axis": "instrument",
+    "value_type": "continuous",
+    "evaluation_cutoff": "2030-01-01 15:00:00+08:00",
+    "protocol": {
+      "protocol_id": "test-protocol",
+      "version": "0.0.1",
+      "kind": "predictive_diagnostic",
+      "data_mode": "synthetic",
+      "sha256": "7a46bf58c6d5cfc14edc76605d324b3a87b9b3d6507001abb9203ba5c72e715e"
+    },
+    "diagnostic": "cross_section_ic",
+    "tie_method": "average",
+    "min_pairs": 3,
+    "n_periods": 1,
+    "n_periods_with_value": 1,
+    "mean_ic": 1.0,
+    "periods": [
+      {
+        "date": "2024-01-01",
+        "n": 3,
+        "ic": 1.0,
+        "reason": null,
+        "excluded_counts": {}
+      }
+    ],
+    "summary_caveats": {
+      "ic_meaning": "当期分数排序与随后结果排序的吻合程度；不等于可获利或策略价值",
+      "correlation_robust_confidence_interval": "not_implemented",
+      "dependence_risk": "重叠标签窗与共同状态使各期样本互相不独立；相关系数只是描述，不构成'结果不是巧合'的显著性证据"
+    }
+  },
+  "crossing": {
+    "split_findings": [],
+    "overlap_findings": [
+      {
+        "code": "label_crosses_segment_boundary",
+        "segment": "dev",
+        "next_segment": "validation",
+        "boundary": "2024-01-11",
+        "n_pairs": 1,
+        "detail": "标签窗越过下一段起点（边界接触也算）：这些样本的结局部分 发生在validation期间，不能当作dev段的干净样本",
+        "example_observation_dates": [
+          "2024-01-09"
+        ]
+      },
+      {
+        "code": "concentrated_on_few_dates",
+        "segment": "dev",
+        "max_single_date_share": 1.0,
+        "detail": "大量样本集中在少数观察日：不是独立证据"
+      }
+    ],
+    "trial_history_status": "provided",
+    "trial_findings": [
+      {
+        "code": "all_trials_kept",
+        "n_trials": 1,
+        "n_success": 1,
+        "n_failed_or_abandoned": 0,
+        "detail": "保存所有版本，不只存赢家；多次尝试会放大挑到偶然赢家的风险"
+      }
+    ],
+    "trials_kept": [
+      {
+        "trial_id": "t1",
+        "definition_reference": "mixed.momentum.raw@1.0.0",
+        "parameters": {},
+        "split_id": "s1",
+        "outcome": "success",
+        "selection_basis": "predeclared",
+        "seen_segments": [
+          "dev"
+        ],
+        "run_version": "run-01"
+      }
+    ],
+    "sample_counts": {
+      "dev": {
+        "n_pairs": 1,
+        "n_usable_clean": 1,
+        "n_label_crossing_into_next_segment": 1,
+        "n_label_known_after_next_segment_start": 0,
+        "distinct_observation_dates": 1,
+        "distinct_entities": 1,
+        "seen_marker": true,
+        "first_date": "2024-01-09",
+        "last_date": "2024-01-09",
+        "max_single_date_share": 1.0,
+        "segment_ic": {
+          "n": 1,
+          "ic_pooled_over_segment": null,
+          "reason": "fewer_than_three_pairs",
+          "note": "段内合并相关仅作方向描述；合并跨日样本不是独立证据"
+        }
+      },
+      "validation": {
+        "n_pairs": 0,
+        "n_usable_clean": 0,
+        "n_label_crossing_into_next_segment": 0,
+        "n_label_known_after_next_segment_start": 0,
+        "distinct_observation_dates": 0,
+        "distinct_entities": 0,
+        "seen_marker": true,
+        "first_date": null,
+        "last_date": null,
+        "segment_ic": null
+      },
+      "holdout": {
+        "n_pairs": 0,
+        "n_usable_clean": 0,
+        "n_label_crossing_into_next_segment": 0,
+        "n_label_known_after_next_segment_start": 0,
+        "distinct_observation_dates": 0,
+        "distinct_entities": 0,
+        "seen_marker": false,
+        "first_date": null,
+        "last_date": null,
+        "segment_ic": null
+      }
+    },
+    "preprocessing": "none",
+    "seen_markers": {
+      "dev": true,
+      "validation": true,
+      "holdout": false
+    },
+    "limitations": [
+      "本审计只识别已声明的结构风险；没有任何测试能简单宣布排除过拟合",
+      "重叠标签与共享状态使有效样本小于表面行数；本输出不提供相关性稳健推断",
+      "未列出的尝试（含其他任务/会话的尝试）无法由本工具发现；历史未知时按 unknown 处理",
+      "已看过的保留段不能靠重命名或换工具恢复为未知"
+    ],
+    "overfit_risk_status": "not_excluded",
+    "note": "本审计生成合法配对与分段诊断，不训练模型，不自动给出通过结论"
+  },
+  "future": {
+    "split_findings": [],
+    "overlap_findings": [
+      {
+        "code": "concentrated_on_few_dates",
+        "segment": "holdout",
+        "max_single_date_share": 1.0,
+        "detail": "大量样本集中在少数观察日：不是独立证据"
+      }
+    ],
+    "trial_history_status": "provided",
+    "trial_findings": [
+      {
+        "code": "all_trials_kept",
+        "n_trials": 1,
+        "n_success": 1,
+        "n_failed_or_abandoned": 0,
+        "detail": "保存所有版本，不只存赢家；多次尝试会放大挑到偶然赢家的风险"
+      }
+    ],
+    "trials_kept": [
+      {
+        "trial_id": "t1",
+        "definition_reference": "mixed.momentum.raw@1.0.0",
+        "parameters": {},
+        "split_id": "s1",
+        "outcome": "success",
+        "selection_basis": "predeclared",
+        "seen_segments": [
+          "dev"
+        ],
+        "run_version": "run-01"
+      }
+    ],
+    "sample_counts": {
+      "dev": {
+        "n_pairs": 0,
+        "n_usable_clean": 0,
+        "n_label_crossing_into_next_segment": 0,
+        "n_label_known_after_next_segment_start": 0,
+        "distinct_observation_dates": 0,
+        "distinct_entities": 0,
+        "seen_marker": true,
+        "first_date": null,
+        "last_date": null,
+        "segment_ic": null
+      },
+      "validation": {
+        "n_pairs": 0,
+        "n_usable_clean": 0,
+        "n_label_crossing_into_next_segment": 0,
+        "n_label_known_after_next_segment_start": 0,
+        "distinct_observation_dates": 0,
+        "distinct_entities": 0,
+        "seen_marker": true,
+        "first_date": null,
+        "last_date": null,
+        "segment_ic": null
+      },
+      "holdout": {
+        "n_pairs": 1,
+        "n_usable_clean": 1,
+        "n_label_crossing_into_next_segment": 0,
+        "n_label_known_after_next_segment_start": 0,
+        "distinct_observation_dates": 1,
+        "distinct_entities": 1,
+        "seen_marker": false,
+        "first_date": "2024-01-23",
+        "last_date": "2024-01-23",
+        "max_single_date_share": 1.0,
+        "segment_ic": {
+          "n": 1,
+          "ic_pooled_over_segment": null,
+          "reason": "fewer_than_three_pairs",
+          "note": "段内合并相关仅作方向描述；合并跨日样本不是独立证据"
+        }
+      }
+    },
+    "preprocessing": "none",
+    "seen_markers": {
+      "dev": true,
+      "validation": true,
+      "holdout": false
+    },
+    "limitations": [
+      "本审计只识别已声明的结构风险；没有任何测试能简单宣布排除过拟合",
+      "重叠标签与共享状态使有效样本小于表面行数；本输出不提供相关性稳健推断",
+      "未列出的尝试（含其他任务/会话的尝试）无法由本工具发现；历史未知时按 unknown 处理",
+      "已看过的保留段不能靠重命名或换工具恢复为未知"
+    ],
+    "overfit_risk_status": "not_excluded",
+    "note": "本审计生成合法配对与分段诊断，不训练模型，不自动给出通过结论"
+  },
+  "comparison": {
+    "layer1_capital": {
+      "base": {
+        "account": "base",
+        "contributions": [
+          {
+            "symbol": "100001",
+            "net_sales": 0.0,
+            "gross_purchases": 51.0,
+            "cash_dividends_paid": 2.0,
+            "ending_receivable": 0.0,
+            "ending_market_value": 55.0,
+            "net_contribution": 6.0
+          }
+        ],
+        "reconciliation": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "ending_equity": 106.0,
+          "initial_cash": 100.0,
+          "sum_contribution": 6.0,
+          "tolerance_cny": 0.01
+        },
+        "tolerance_cny": 0.01,
+        "status": "reconciled",
+        "note": "资金贡献只说明钱在哪里赚到，不能单独证明为什么赚到；缺期末持仓或手续费记录会破坏核对"
+      },
+      "variant": {
+        "account": "variant",
+        "contributions": [
+          {
+            "symbol": "100001",
+            "net_sales": 54.45,
+            "gross_purchases": 51.0,
+            "cash_dividends_paid": 2.0,
+            "ending_receivable": 0.0,
+            "ending_market_value": 0.0,
+            "net_contribution": 5.450000000000003
+          }
+        ],
+        "reconciliation": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "ending_equity": 105.45,
+          "initial_cash": 100.0,
+          "sum_contribution": 5.450000000000003,
+          "tolerance_cny": 0.01
+        },
+        "tolerance_cny": 0.01,
+        "status": "reconciled",
+        "note": "资金贡献只说明钱在哪里赚到，不能单独证明为什么赚到；缺期末持仓或手续费记录会破坏核对"
+      }
+    },
+    "layer2_decision_increment": {
+      "status": "attributable_to_declared_action_only",
+      "declared_action": "exit",
+      "variant": "variant",
+      "base": "base",
+      "checks_passed": {
+        "initial_cash_equal": true,
+        "pool_equal": true,
+        "period_equal": true,
+        "fee_schedule_equal": true,
+        "external_deposits_not_observable": true,
+        "benchmark_not_observable": true,
+        "frozen_rules_not_observable": true
+      },
+      "unchecked_assumptions": [
+        "费率只在单边账户中出现（['sell']），按协议声明视为不变；该假设不可由数据证实",
+        "外部入金在本账户表结构中不可观察；按协议声明视为无，未由数据证实",
+        "基准账户规则不在两份账户结果内；本轮未核对",
+        "除声明动作外的规则是否全部冻结，无法从两份结果证明；依赖协议声明"
+      ],
+      "differences": {
+        "net_pnl": -0.5499999999999972,
+        "net_return": -0.00550000000000006,
+        "cagr": -565.3863096583925,
+        "max_drawdown": 0.0,
+        "fees": 0.55,
+        "trades": 1
+      },
+      "note": "各维度差额是同一受控比较的描述，不可相加成资金贡献；资金归属见层1。年化差、回撤差不是可加的利润项"
+    },
+    "layer3_risk_model": {
+      "status": "not_run",
+      "reason": "no_model_card_provided",
+      "note": "本轮未做风险模型是合法状态；剩余收益不自动叫独特alpha或运气"
+    },
+    "note": "三层分别回答不同的钱的问题；不能相加成伪精确总账"
+  },
+  "empty_expectations": {
+    "tolerance_abs": 1e-06,
+    "checks": [],
+    "all_passed": true
+  }
+}

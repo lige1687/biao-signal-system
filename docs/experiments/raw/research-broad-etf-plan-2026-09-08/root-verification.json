@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-09-08T11:32:59.453136+00:00",
+  "legacy_summary_recomputed_from_daily": [
+    {
+      "arm": "A_等权持有",
+      "metrics_from_saved_daily": {
+        "ann_pct": -0.48,
+        "maxdd_pct": -49.6,
+        "calmar": -0.01,
+        "sharpe": 0.1
+      },
+      "match": true
+    },
+    {
+      "arm": "B_全宽度闸",
+      "metrics_from_saved_daily": {
+        "ann_pct": 11.99,
+        "maxdd_pct": -34.73,
+        "calmar": 0.345,
+        "sharpe": 0.72
+      },
+      "match": true
+    }
+  ],
+  "legacy_input_hashes_checked": 13,
+  "comparison_references_added_by_root": {
+    "docs/experiments/raw/portfolio_split/portfolio_split_results.json": "eec06b8268aa68281bd3c75a26161404e64f8cffdacfa459cad56daa1f0dd884",
+    "docs/experiments/raw/portfolio_split/bform_stress_results.json": "18d8fb5206a38dea6b64f2eaa7b6dfc2d658e0140bf5c6c850b154de4cca4360"
+  },
+  "reference_scope_note": "original runner read these two source JSON files; root subsequently froze copies and checked their stated comparison, not claimed part of original runner input lock",
+  "weight_drift_diagnostic_checked": true,
+  "plan_v1_sha256": "08a3ad2dd285f818e942992484eef0362a84dfa25f442631fbc373ea17052b8f",
+  "report_links_checked": 5,
+  "new_etf_return_accounts_run": 0,
+  "legacy_index_paths_run": 2,
+  "scope_review": [
+    "6 broad ETFs + 4 sector ETFs fixed; 2 other assets separate",
+    "first new ETF batch 2 products x 3 methods x 2 costs = 12",
+    "source missing final-review scripts disclosed",
+    "no historical outcome or implementation fidelity inferred from original passed labels",
+    "top same-day and B definitions block respective cells only",
+    "only draft OKR proposal; no mutation"
+  ]
+}

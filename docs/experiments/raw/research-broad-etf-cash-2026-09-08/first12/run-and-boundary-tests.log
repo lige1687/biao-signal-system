@@ -1,0 +1,22 @@
+2026-09-08 final verification (python3 -B)
+
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.004s
+
+OK
+VERIFIED accounts=12 daily_rows=50388 input_hashes=14
+exit=0
+
+Checks covered:
+- first partial week and weekly latest valid breadth observation
+- fee affordability, integer lots, breadth-only 5pp band and mandatory simple exit
+- receivable included in equity but unavailable for spending
+- month/year changes start at true initial 100000 and reconcile to total gain
+- initial buy fee appears in drawdown
+- frozen breadth hash
+- Friday signal waits through weekend; dividend entitlement, receivable, sale and payment remain intact
+- hold ignores technical signals and emits early cash-only calendar rows
+- a blocked weekly order is cancelled when the following week has no fresh breadth observation
+- 159915 suspension date whose close mark is forbidden is absent from prepared breakout signals
+

@@ -1,0 +1,25 @@
+# 补修轮源指纹（2026-09-15）
+
+## 修前（= 主控复核时被审状态，与 raw/agent-conversation-controller-review-2026-09-15/results.json 同源）
+f21c94f98e06d24e857e7615257dbceda860d9d217efafa85aa0c9829de17a2f  src/lei_signal/api/routes/agent.py
+de03130c89cd8cb7fc12be8ae3c6fe90cd83fc932b78b3b0edc5c6e640996301  src/lei_signal/plans/llm.py
+56d7c21218d1e9425dd014ed71e356a817aeb21f8150ca6d09c0908f4f5240a6  web/src/pages/AgentWorkspacePage.tsx
+d82ab63a58811b788ed3fa6f4dee526357eeb45f12feaf93675f91e922e3bd54  web/src/components/AgentConsole.tsx
+
+## 修后（本轮补修完成）
+010a0b5ac4f768c17d3de39364e0fda1c563fe5184d62af7b74c5af0c494b5c3  src/lei_signal/api/routes/agent.py
+179ebcf945408bd36f4f29f75992d2eab0d4d6933e09ffa80a0b54a59e72889e  src/lei_signal/plans/llm.py
+741aee5eed506f2edeb8dd9b5c751c50bfa542f620c058978d97ed4ed32471db  src/lei_signal/copilot/chat_identity.py
+96e9e6a6e8367699901482b01652aaaa7627e7bad985ada5d48cdfc0bfdfad2c  src/lei_signal/api/schemas.py
+08f4b0adaeae2bf48d457a0da125dba8576144d2d51bd7eefb3e4dac4866bca3  web/src/pages/AgentWorkspacePage.tsx
+7d181d6738919f978eb0adc2b6dda943b86665dde7dd110baa71dab90658f66d  web/src/components/AgentConsole.tsx
+73402096d09a1d36edbf680cc41f6ebcfdaeef68fc342d88c99c8f3e8cef8b89  web/src/types.ts
+
+## 二轮补修后（2026-09-15 遗漏一/二修复完成）
+a4331bb42ffb12b1ca12a1caa59f845fad81ecb3530b56b3bb49e310a81ca954  src/lei_signal/api/routes/agent.py
+f6bd40c3edecbf78e4737326970172df8da21c0de49083c7510d8436a2535874  src/lei_signal/plans/llm.py
+390161408ac35290203ad05fe8a6ef8d955e8c44ef17e74982733d7a3cd456a3  src/lei_signal/copilot/chat_identity.py
+a9ac2bcd318940d112388a5df17967ee4f281ec8fd8e5fe68ee407264f8500e0  src/lei_signal/api/schemas.py
+4e3dfdb127cfc46ae2d086604a4bea5acddc03b61dd30d36b8bedd7b4e987a6e  src/lei_signal/storage/sqlite_store.py
+a927c9fb3bb3e6f1f229944fc7b96d49f7219ef9ebd9c249ba40c44cb488eaea  web/src/pages/AgentWorkspacePage.tsx
+257fcb2672c5805dd15cf5adc4b4ba0f8ac0af148a624441b1c822ac52c8d765  web/src/types.ts

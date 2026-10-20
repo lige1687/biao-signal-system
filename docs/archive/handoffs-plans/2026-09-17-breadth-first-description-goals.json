@@ -1,0 +1,14 @@
+{
+  "mission": "完成一个固定B200宽度与510300随后21段交易日价格变化的受限历史描述，交付可独立复算的证据，不宣称预测或交易有效。",
+  "goals": [
+    {"id":"G1","goal":"冻结真实输入身份、准确目标和受限用途，完成最小研究适配","acceptance":["新增两研究模块与raw CLI，复用TradingCalendar/resolve/rank_diagnostic数学核，不改旧消费者；协议核固定B200/510300/[1,22]/日期窗/用途/输入哈希/代码必需键","卡与规范、代码实际原字节和输入身份完整可追溯，价格逐列来源与历史可得性仍未知，不伪装synthetic或qualified"]},
+    {"id":"G2","goal":"算法、边界与失败路径经独立小例证明","acceptance":["合成独立期望rho为1/-1/sqrt(3)/2、常数与不足3对为null；缺失/阈值/重复/身份错误/端点/重叠/写盘失败测试","B1 state与in_comparison字段改变不影响新实验样本；CSV/JSON严格合法，反例和合法控制均留证"]},
+    {"id":"G3","goal":"获得一次固定范围的真实描述及独立核验","acceptance":["唯一正式run-01带完整观察轴pairs、排除对账、全期和2019至2025全部年度统计及区间重叠说明，目标为t+1收盘至t+22收盘","独立脚本不用被测配对/统计函数，从输入逐行核键集/单位/端点/目标/原因，并复算全期年度排名相关，浮点绝对容差1e-12、整数与null严格一致"]},
+    {"id":"G4","goal":"形成可持续积累的因子证据记录与用户可读报告","acceptance":["docs/experiments/breadth-b200-first-description-2026-09-17.md含一句话结论、五种状态、真实消费对象、冻结协议、全部结果和限制、尝试史及决策卡","不把相关当收益/贡献/显著性/横截面IC，不宣称过拟合已排除，负结果亦如实交付；只交登记建议不写registry/INDEX/OKR"]},
+    {"id":"G5","goal":"限定写入与尝试预算可核对","acceptance":["既有文件保护基线、每次命令原始日志、失败与次数台账、排他输出和manifest最后写可核；不覆盖旧raw","定向pytest≤10、旧相关回归≤1、ruff≤3、hygiene≤2、完整合成CLI≤3、真实正式尝试1、独立核验≤2；触顶即停，未完成诚实交回"]}
+  ],
+  "in_scope":["严格执行同目录2026-09-17-breadth-first-description-execution.md v1.0.0的Task0–4","仅新增src/lei_signal/research/breadth_description.py、breadth_description_contract.py和tests/unit/test_breadth_description.py","仅新增docs/experiments/raw/breadth-b200-first-description-2026-09-17/与docs/experiments/breadth-b200-first-description-2026-09-17.md","用户批准的单一受限历史描述及独立复核，不是继续资料盘点"],
+  "out_of_scope":["联网/新依赖/新数据","重建宽度、扩池、增加B50或变化量或阈值分组","策略/账户/费用收益/显著性/回归/重抽样/参数扫描","任何生产或现存代码修改","共享registry/INDEX/OKR写入","git提交暂存切换重置","正式失败后自行第二次真实运行"],
+  "protected_paths":["所有既有文件和其他任务脏改动","docs/research/definitions.v1.json","旧raw/旧协议/封存源码","src/lei_signal/research/factor_lab/","src/lei_signal/research/factor_unit/","src/lei_signal/research/factor_evidence/","configs/","web/","docs/experiments/registry.json","docs/experiments/INDEX.md"],
+  "stop_conditions":["HEAD/分支或固定输入身份变化","需改变方法、观察期、目标、对象或授权","触及写入面外文件","达到任何相应预算或唯一真实运行失败","结果不能完整对账","完成交主控独立复核，不自动进入下一研究"]
+}

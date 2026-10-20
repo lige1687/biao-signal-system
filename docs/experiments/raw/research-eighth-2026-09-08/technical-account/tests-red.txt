@@ -1,0 +1,155 @@
+test_buy_missing_union_session_expires (__main__.AccountTests.test_buy_missing_union_session_expires) ... FAIL
+test_dividend_after_sale_receivable_then_holiday_payment (__main__.AccountTests.test_dividend_after_sale_receivable_then_holiday_payment) ... FAIL
+test_dividend_rebases_pending_buy_proportionally (__main__.AccountTests.test_dividend_rebases_pending_buy_proportionally) ... FAIL
+test_gap_rr_rejected_once (__main__.AccountTests.test_gap_rr_rejected_once) ... FAIL
+test_holding_duplicate_and_same_day_duplicate (__main__.AccountTests.test_holding_duplicate_and_same_day_duplicate) ... FAIL
+test_holiday_deposit_and_insufficient_lot (__main__.AccountTests.test_holiday_deposit_and_insufficient_lot) ... FAIL
+test_missing_target (__main__.AccountTests.test_missing_target) ... FAIL
+test_p7_risk_size (__main__.AccountTests.test_p7_risk_size) ... FAIL
+test_plain_buy_and_deposits_not_return (__main__.AccountTests.test_plain_buy_and_deposits_not_return) ... FAIL
+test_sell_deferred_until_available (__main__.AccountTests.test_sell_deferred_until_available) ... FAIL
+test_signal_rejection_not_rescued (__main__.AccountTests.test_signal_rejection_not_rescued) ... FAIL
+test_split_without_quote_rebases_quantity_and_levels (__main__.AccountTests.test_split_without_quote_rebases_quantity_and_levels) ... FAIL
+test_structure_priority_and_no_sell_day_reentry (__main__.AccountTests.test_structure_priority_and_no_sell_day_reentry) ... FAIL
+test_tail_missing_not_liquidated (__main__.AccountTests.test_tail_missing_not_liquidated) ... FAIL
+test_tplus_and_exit_close_not_consumed (__main__.AccountTests.test_tplus_and_exit_close_not_consumed) ... FAIL
+
+======================================================================
+FAIL: test_buy_missing_union_session_expires (__main__.AccountTests.test_buy_missing_union_session_expires)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 55, in test_buy_missing_union_session_expires
+    self.assertEqual(len(r['orders']),1);self.assertEqual(r['orders'][0]['attempts'][0]['date'],'2024-01-02');self.assertEqual(r['trades'],[])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_dividend_after_sale_receivable_then_holiday_payment (__main__.AccountTests.test_dividend_after_sale_receivable_then_holiday_payment)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 60, in test_dividend_after_sale_receivable_then_holiday_payment
+    r=run(p,actions=[act]);self.assertEqual(len(r['trades']),2);days={d['date']:d for d in r['daily']}
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2
+
+======================================================================
+FAIL: test_dividend_rebases_pending_buy_proportionally (__main__.AccountTests.test_dividend_rebases_pending_buy_proportionally)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 96, in test_dividend_rebases_pending_buy_proportionally
+    r=run(p,actions=[act]);self.assertEqual(len(r['trades']),1);self.assertAlmostEqual(r['roundtrips'][0]['stop'],.81)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_gap_rr_rejected_once (__main__.AccountTests.test_gap_rr_rejected_once)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 29, in test_gap_rr_rejected_once
+    self.assertEqual(len(r['orders']),1);self.assertEqual(r['orders'][0]['reason'],'open_rr_below3');self.assertEqual(r['trades'],[])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_holding_duplicate_and_same_day_duplicate (__main__.AccountTests.test_holding_duplicate_and_same_day_duplicate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 40, in test_holding_duplicate_and_same_day_duplicate
+    r=run(cs=[candidate('a'),candidate('b'),candidate('c','2024-01-02')]);self.assertEqual(len(r['orders']),3)
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 3
+
+======================================================================
+FAIL: test_holiday_deposit_and_insufficient_lot (__main__.AccountTests.test_holiday_deposit_and_insufficient_lot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 80, in test_holiday_deposit_and_insufficient_lot
+    self.assertEqual(len(r['daily']),10);self.assertEqual(r['daily'][0]['cash'],50);self.assertEqual(r['trades'],[])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 10
+
+======================================================================
+FAIL: test_missing_target (__main__.AccountTests.test_missing_target)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 32, in test_missing_target
+    c=candidate();c['target']=None;r=run(cs=[c]);self.assertEqual(len(r['orders']),1)
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_p7_risk_size (__main__.AccountTests.test_p7_risk_size)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 83, in test_p7_risk_size
+    r=run(config='P7',weekly_per_symbol=2500);self.assertEqual(len(r['trades']),1);self.assertEqual(r['trades'][0]['shares'],200)
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_plain_buy_and_deposits_not_return (__main__.AccountTests.test_plain_buy_and_deposits_not_return)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 23, in test_plain_buy_and_deposits_not_return
+    r=run();self.assertEqual(len(r['trades']),1);self.assertEqual(r['trades'][0]['shares'],200)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_sell_deferred_until_available (__main__.AccountTests.test_sell_deferred_until_available)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 50, in test_sell_deferred_until_available
+    self.assertEqual(len(r['trades']),2);self.assertEqual(r['trades'][1]['date'],'2024-01-05')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2
+
+======================================================================
+FAIL: test_signal_rejection_not_rescued (__main__.AccountTests.test_signal_rejection_not_rescued)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 36, in test_signal_rejection_not_rescued
+    r=run(cs=[candidate(signal_accepted=False,signal_reject_reason='signal_rr_below3')]);self.assertEqual(len(r['orders']),1)
+                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_split_without_quote_rebases_quantity_and_levels (__main__.AccountTests.test_split_without_quote_rebases_quantity_and_levels)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 70, in test_split_without_quote_rebases_quantity_and_levels
+    r=run(p,actions=[act]);self.assertEqual(len(r['trades']),1);days={d['date']:d for d in r['daily']}
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_structure_priority_and_no_sell_day_reentry (__main__.AccountTests.test_structure_priority_and_no_sell_day_reentry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 89, in test_structure_priority_and_no_sell_day_reentry
+    self.assertEqual(len(r['trades']),2);sells=[o for o in r['orders'] if o['side']=='sell'];self.assertEqual(len(sells),1);self.assertEqual(sells[0]['reason'],'structure_stop')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2
+
+======================================================================
+FAIL: test_tail_missing_not_liquidated (__main__.AccountTests.test_tail_missing_not_liquidated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 76, in test_tail_missing_not_liquidated
+    self.assertEqual(len(r['trades']),1);self.assertFalse(r['roundtrips'][0]['closed']);self.assertIn('X',r['daily'][-1]['stale_symbols'])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1
+
+======================================================================
+FAIL: test_tplus_and_exit_close_not_consumed (__main__.AccountTests.test_tplus_and_exit_close_not_consumed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/technical-account/test_engine.py", line 45, in test_tplus_and_exit_close_not_consumed
+    self.assertEqual(len(r['trades']),2);self.assertEqual(r['trades'][1]['date'],'2024-01-03');self.assertEqual(r['trades'][1]['price'],.75)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.001s
+
+FAILED (failures=15)

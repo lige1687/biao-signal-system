@@ -1,0 +1,67 @@
+{
+  "schema_version": "research-data-snapshot/1.0",
+  "transform_version": "research-data-snapshot/1.0",
+  "mode": "import",
+  "semantics": {
+    "fields": [
+      "date",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume",
+      "economic_index"
+    ],
+    "currency": "CNY",
+    "price_basis": "nominal_close",
+    "trading_calendar": {
+      "authority": "none"
+    }
+  },
+  "instruments": [
+    {
+      "instrument_id": "510300.SS",
+      "rows": 302,
+      "first_date": "2025-01-02",
+      "last_date": "2026-02-27",
+      "normalized": {
+        "path": "normalized/510300.SS.csv",
+        "sha256": "47f4557ed12803b8f48eaf398ee454170f5cb3ffe3aa2467c552b1d8b81d8262"
+      },
+      "raw_responses": [],
+      "provider_report": {
+        "provider": "t",
+        "adjusted": false,
+        "duplicates_removed": 0,
+        "warnings": []
+      }
+    },
+    {
+      "instrument_id": "159915.SZ",
+      "rows": 302,
+      "first_date": "2025-01-02",
+      "last_date": "2026-02-27",
+      "normalized": {
+        "path": "normalized/159915.SZ.csv",
+        "sha256": "3ed1d243ea8c6fc15da6252b4bba71a06c1a47bfecfc8325c5792b232d025dbf"
+      },
+      "raw_responses": [],
+      "provider_report": {
+        "provider": "t",
+        "adjusted": false,
+        "duplicates_removed": 0,
+        "warnings": []
+      }
+    }
+  ],
+  "uses": [
+    "description",
+    "ranking",
+    "research_signal"
+  ],
+  "not_for": [
+    "production_trade"
+  ],
+  "market_data_refs": {},
+  "synthetic": true
+}

@@ -1,0 +1,160 @@
+{
+ "task": "债务三：510500 中证500ETF 判负重审（修平数据×完整验证协议，预注册）",
+ "data": {
+  "source": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/510500.parquet",
+  "window": [
+   "2013-03-15",
+   "2026-08-27"
+  ],
+  "jumps_flattened": [
+   {
+    "date": "2015-04-15",
+    "ratio": 3.4855
+   },
+   {
+    "date": "2022-08-29",
+    "ratio": 0.8726
+   }
+  ],
+  "post_fix_max_abs_daily": 0.1
+ },
+ "framework": "full_audit 第十四轮 BASE: ladder/b200/3bands/fixed/30-70/contrarian/gamma1/minw0/fee10bp/cn_all/min_trade0.05 × {无闸,+MA200闸cap0}; 三窗=行数中点切分",
+ "three_windows": {
+  "raw_nogate": {
+   "full_excess": -0.1033,
+   "h1_excess": -0.2367,
+   "h2_excess": 0.0181,
+   "all_positive": false,
+   "full_strat_cagr": 0.0744,
+   "full_bench_cagr": 0.1778,
+   "full_strat_mdd": -0.3918,
+   "full_bench_mdd": -0.6327,
+   "window": [
+    "2013-03-15",
+    "2026-08-27"
+   ]
+  },
+  "raw_gate": {
+   "full_excess": -0.1283,
+   "h1_excess": -0.2523,
+   "h2_excess": -0.017,
+   "all_positive": false,
+   "full_strat_cagr": 0.0494,
+   "full_bench_cagr": 0.1778,
+   "full_strat_mdd": -0.2304,
+   "full_bench_mdd": -0.6327,
+   "window": [
+    "2013-03-15",
+    "2026-08-27"
+   ]
+  },
+  "fixed_nogate": {
+   "full_excess": 0.0049,
+   "h1_excess": -0.0084,
+   "h2_excess": 0.0185,
+   "all_positive": false,
+   "full_strat_cagr": 0.0858,
+   "full_bench_cagr": 0.0809,
+   "full_strat_mdd": -0.3918,
+   "full_bench_mdd": -0.6327,
+   "window": [
+    "2013-03-15",
+    "2026-08-27"
+   ]
+  },
+  "fixed_gate": {
+   "full_excess": -0.0639,
+   "h1_excess": -0.0846,
+   "h2_excess": -0.0431,
+   "all_positive": false,
+   "full_strat_cagr": 0.0171,
+   "full_bench_cagr": 0.0809,
+   "full_strat_mdd": -0.2423,
+   "full_bench_mdd": -0.6327,
+   "window": [
+    "2013-03-15",
+    "2026-08-27"
+   ]
+  }
+ },
+ "rolling_5y": {
+  "windows": [
+   {
+    "start": "2013-03-15",
+    "end": "2018-03-15",
+    "excess": -0.0326
+   },
+   {
+    "start": "2014-04-02",
+    "end": "2019-04-02",
+    "excess": -0.0786
+   },
+   {
+    "start": "2015-04-17",
+    "end": "2020-04-16",
+    "excess": 0.143
+   },
+   {
+    "start": "2016-04-27",
+    "end": "2021-04-27",
+    "excess": 0.0509
+   },
+   {
+    "start": "2017-05-11",
+    "end": "2022-05-11",
+    "excess": 0.0507
+   },
+   {
+    "start": "2018-05-23",
+    "end": "2023-05-23",
+    "excess": 0.0586
+   },
+   {
+    "start": "2019-06-05",
+    "end": "2024-06-04",
+    "excess": 0.0593
+   },
+   {
+    "start": "2020-06-17",
+    "end": "2025-06-17",
+    "excess": 0.0594
+   },
+   {
+    "start": "2021-07-01",
+    "end": "2026-07-01",
+    "excess": 0.0059
+   }
+  ],
+  "count": 9,
+  "positive_pct": 0.7778,
+  "median": 0.0509,
+  "worst": -0.0786,
+  "best": 0.143
+ },
+ "neighborhood": {
+  "per_variant": {
+   "low25": -0.0062,
+   "low35": 0.0016,
+   "high65": -0.0012,
+   "high75": 0.0118,
+   "gamma0.85": 0.004,
+   "gamma1.15": 0.0057,
+   "nbands1": -0.0053,
+   "nbands5": -0.0035,
+   "minw0.1": 0.0076
+  },
+  "dropped": [],
+  "computable": 9,
+  "positive_pct": 0.5556,
+  "median": 0.0016,
+  "worst": -0.0062
+ },
+ "criteria_check": {
+  "a_three_windows_all_positive": false,
+  "b_rolling_pos_ge_60pct": true,
+  "c_neighborhood_pos_ge_2thirds_median_gt0": false,
+  "stay_negative_trigger": false
+ },
+ "implementation_check_vs_audit": true,
+ "verdict_pre_registered": "证据不足"
+}

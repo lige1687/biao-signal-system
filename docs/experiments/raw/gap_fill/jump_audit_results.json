@@ -1,0 +1,748 @@
+{
+ "criteria": {
+  "jumps": {
+   "159928": [
+    "2021-06-25"
+   ],
+   "510500": [
+    "2015-04-15",
+    "2022-08-29"
+   ],
+   "512010": [
+    "2021-06-28"
+   ],
+   "512100": [
+    "2022-09-05"
+   ],
+   "512200": [
+    "2024-08-12"
+   ],
+   "512480": [
+    "2021-03-29",
+    "2026-07-03"
+   ],
+   "512690": [
+    "2021-05-17",
+    "2021-12-31"
+   ],
+   "512800": [
+    "2025-07-07"
+   ],
+   "515880": [
+    "2026-02-03",
+    "2026-07-06"
+   ]
+  },
+  "method": "跳变日起价格同除跳变比(收益置0)，多跳变按时间序",
+  "framework": "full_audit 第十四轮 BASE(30/70无闸+闸, fee10bp, cn_all, 三窗中点切分)",
+  "flip_rule": "无闸版三窗全正布尔在修平前后改变=结论翻转；状态不变且|Δ全窗超额|≥2pp=数值修正"
+ },
+ "subjects": {
+  "159928": {
+   "name": "消费ETF",
+   "jumps": [
+    {
+     "date": "2021-06-25",
+     "ratio": 0.2553,
+     "single_day_return": -0.7447
+    }
+   ],
+   "post_fix_max_abs_daily": 0.1003,
+   "window": [
+    "2013-09-16",
+    "2026-08-27"
+   ],
+   "nogate": {
+    "raw": {
+     "full_excess": 0.0958,
+     "h1_excess": -0.0337,
+     "h2_excess": 0.1875,
+     "all_positive": false,
+     "full_strat_mdd": -0.6802,
+     "full_bench_mdd": -0.8999,
+     "full_bench_cagr": -0.0311,
+     "window": [
+      "2013-09-16",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.0238,
+     "h1_excess": -0.0337,
+     "h2_excess": 0.0714,
+     "all_positive": false,
+     "full_strat_mdd": -0.4934,
+     "full_bench_mdd": -0.6079,
+     "full_bench_cagr": 0.0809,
+     "window": [
+      "2013-09-16",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.072,
+    "flipped": false
+   },
+   "gate": {
+    "raw": {
+     "full_excess": 0.1117,
+     "h1_excess": -0.101,
+     "h2_excess": 0.2767,
+     "all_positive": false,
+     "full_strat_mdd": -0.2551,
+     "full_bench_mdd": -0.8999,
+     "full_bench_cagr": -0.0311,
+     "window": [
+      "2013-09-16",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": -0.0036,
+     "h1_excess": -0.101,
+     "h2_excess": 0.0806,
+     "all_positive": false,
+     "full_strat_mdd": -0.2832,
+     "full_bench_mdd": -0.6079,
+     "full_bench_cagr": 0.0809,
+     "window": [
+      "2013-09-16",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.1153,
+    "flipped": false
+   }
+  },
+  "510500": {
+   "name": "中证500ETF",
+   "jumps": [
+    {
+     "date": "2015-04-15",
+     "ratio": 3.4855,
+     "single_day_return": 2.4855
+    },
+    {
+     "date": "2022-08-29",
+     "ratio": 0.8726,
+     "single_day_return": -0.1274
+    }
+   ],
+   "post_fix_max_abs_daily": 0.1,
+   "window": [
+    "2013-03-15",
+    "2026-08-27"
+   ],
+   "nogate": {
+    "raw": {
+     "full_excess": -0.1033,
+     "h1_excess": -0.2367,
+     "h2_excess": 0.0181,
+     "all_positive": false,
+     "full_strat_mdd": -0.3918,
+     "full_bench_mdd": -0.6327,
+     "full_bench_cagr": 0.1778,
+     "window": [
+      "2013-03-15",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.0049,
+     "h1_excess": -0.0084,
+     "h2_excess": 0.0185,
+     "all_positive": false,
+     "full_strat_mdd": -0.3918,
+     "full_bench_mdd": -0.6327,
+     "full_bench_cagr": 0.0809,
+     "window": [
+      "2013-03-15",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": 0.1082,
+    "flipped": false
+   },
+   "gate": {
+    "raw": {
+     "full_excess": -0.1283,
+     "h1_excess": -0.2523,
+     "h2_excess": -0.017,
+     "all_positive": false,
+     "full_strat_mdd": -0.2304,
+     "full_bench_mdd": -0.6327,
+     "full_bench_cagr": 0.1778,
+     "window": [
+      "2013-03-15",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": -0.0639,
+     "h1_excess": -0.0846,
+     "h2_excess": -0.0431,
+     "all_positive": false,
+     "full_strat_mdd": -0.2423,
+     "full_bench_mdd": -0.6327,
+     "full_bench_cagr": 0.0809,
+     "window": [
+      "2013-03-15",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": 0.0644,
+    "flipped": false
+   }
+  },
+  "512010": {
+   "name": "医药ETF",
+   "jumps": [
+    {
+     "date": "2021-06-28",
+     "ratio": 0.2608,
+     "single_day_return": -0.7392
+    }
+   ],
+   "post_fix_max_abs_daily": 0.1005,
+   "window": [
+    "2015-08-04",
+    "2026-08-27"
+   ],
+   "nogate": {
+    "raw": {
+     "full_excess": 0.1535,
+     "h1_excess": -0.0055,
+     "h2_excess": 0.2532,
+     "all_positive": false,
+     "full_strat_mdd": -0.6293,
+     "full_bench_mdd": -0.9138,
+     "full_bench_cagr": -0.1106,
+     "window": [
+      "2015-08-04",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.0791,
+     "h1_excess": -0.0055,
+     "h2_excess": 0.1439,
+     "all_positive": false,
+     "full_strat_mdd": -0.4237,
+     "full_bench_mdd": -0.6693,
+     "full_bench_cagr": 0.0089,
+     "window": [
+      "2015-08-04",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.0744,
+    "flipped": false
+   },
+   "gate": {
+    "raw": {
+     "full_excess": 0.1515,
+     "h1_excess": -0.0102,
+     "h2_excess": 0.2533,
+     "all_positive": false,
+     "full_strat_mdd": -0.5026,
+     "full_bench_mdd": -0.9138,
+     "full_bench_cagr": -0.1106,
+     "window": [
+      "2015-08-04",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.0679,
+     "h1_excess": -0.0102,
+     "h2_excess": 0.1273,
+     "all_positive": false,
+     "full_strat_mdd": -0.2865,
+     "full_bench_mdd": -0.6693,
+     "full_bench_cagr": 0.0089,
+     "window": [
+      "2015-08-04",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.0836,
+    "flipped": false
+   }
+  },
+  "512100": {
+   "name": "中证1000ETF",
+   "jumps": [
+    {
+     "date": "2022-09-05",
+     "ratio": 2.7627,
+     "single_day_return": 1.7627
+    }
+   ],
+   "post_fix_max_abs_daily": 0.0999,
+   "window": [
+    "2016-11-04",
+    "2026-08-27"
+   ],
+   "nogate": {
+    "raw": {
+     "full_excess": 0.0343,
+     "h1_excess": 0.0422,
+     "h2_excess": 0.024,
+     "all_positive": true,
+     "full_strat_mdd": -0.4727,
+     "full_bench_mdd": -0.5097,
+     "full_bench_cagr": 0.1285,
+     "window": [
+      "2016-11-04",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.0308,
+     "h1_excess": 0.0422,
+     "h2_excess": 0.0194,
+     "all_positive": true,
+     "full_strat_mdd": -0.4727,
+     "full_bench_mdd": -0.5097,
+     "full_bench_cagr": 0.0135,
+     "window": [
+      "2016-11-04",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.0035,
+    "flipped": false
+   },
+   "gate": {
+    "raw": {
+     "full_excess": -0.09,
+     "h1_excess": 0.0416,
+     "h2_excess": -0.2323,
+     "all_positive": false,
+     "full_strat_mdd": -0.1721,
+     "full_bench_mdd": -0.5097,
+     "full_bench_cagr": 0.1285,
+     "window": [
+      "2016-11-04",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.0283,
+     "h1_excess": 0.0416,
+     "h2_excess": 0.015,
+     "all_positive": true,
+     "full_strat_mdd": -0.1721,
+     "full_bench_mdd": -0.5097,
+     "full_bench_cagr": 0.0135,
+     "window": [
+      "2016-11-04",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": 0.1183,
+    "flipped": true
+   }
+  },
+  "512200": {
+   "name": "房地产ETF",
+   "jumps": [
+    {
+     "date": "2024-08-12",
+     "ratio": 2.7007,
+     "single_day_return": 1.7007
+    }
+   ],
+   "post_fix_max_abs_daily": 0.1002,
+   "window": [
+    "2017-09-25",
+    "2026-08-27"
+   ],
+   "nogate": {
+    "raw": {
+     "full_excess": 0.1073,
+     "h1_excess": 0.0478,
+     "h2_excess": 0.1804,
+     "all_positive": true,
+     "full_strat_mdd": -0.4557,
+     "full_bench_mdd": -0.6413,
+     "full_bench_cagr": 0.0304,
+     "window": [
+      "2017-09-25",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.0956,
+     "h1_excess": 0.0478,
+     "h2_excess": 0.1432,
+     "all_positive": true,
+     "full_strat_mdd": -0.4557,
+     "full_bench_mdd": -0.6413,
+     "full_bench_cagr": -0.0821,
+     "window": [
+      "2017-09-25",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.0117,
+    "flipped": false
+   },
+   "gate": {
+    "raw": {
+     "full_excess": -0.0302,
+     "h1_excess": -0.0093,
+     "h2_excess": -0.0571,
+     "all_positive": false,
+     "full_strat_mdd": -0.5506,
+     "full_bench_mdd": -0.6413,
+     "full_bench_cagr": 0.0304,
+     "window": [
+      "2017-09-25",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.0478,
+     "h1_excess": -0.0093,
+     "h2_excess": 0.1025,
+     "all_positive": false,
+     "full_strat_mdd": -0.5181,
+     "full_bench_mdd": -0.6413,
+     "full_bench_cagr": -0.0821,
+     "window": [
+      "2017-09-25",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": 0.078,
+    "flipped": false
+   }
+  },
+  "512480": {
+   "name": "半导体ETF",
+   "jumps": [
+    {
+     "date": "2021-03-29",
+     "ratio": 0.511,
+     "single_day_return": -0.489
+    },
+    {
+     "date": "2026-07-03",
+     "ratio": 0.493,
+     "single_day_return": -0.507
+    }
+   ],
+   "post_fix_max_abs_daily": 0.1002,
+   "window": [
+    "2019-06-12",
+    "2026-08-27"
+   ],
+   "nogate": {
+    "raw": {
+     "full_excess": -0.022,
+     "h1_excess": 0.1157,
+     "h2_excess": -0.1555,
+     "all_positive": false,
+     "full_strat_mdd": -0.6935,
+     "full_bench_mdd": -0.7815,
+     "full_bench_cagr": 0.0072,
+     "window": [
+      "2019-06-12",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": -0.0268,
+     "h1_excess": 0.1404,
+     "h2_excess": -0.1906,
+     "all_positive": false,
+     "full_strat_mdd": -0.4763,
+     "full_bench_mdd": -0.6249,
+     "full_bench_cagr": 0.2285,
+     "window": [
+      "2019-06-12",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.0048,
+    "flipped": false
+   },
+   "gate": {
+    "raw": {
+     "full_excess": 0.078,
+     "h1_excess": 0.2957,
+     "h2_excess": -0.1205,
+     "all_positive": false,
+     "full_strat_mdd": -0.5571,
+     "full_bench_mdd": -0.7815,
+     "full_bench_cagr": 0.0072,
+     "window": [
+      "2019-06-12",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": -0.0115,
+     "h1_excess": 0.2182,
+     "h2_excess": -0.2265,
+     "all_positive": false,
+     "full_strat_mdd": -0.3783,
+     "full_bench_mdd": -0.6249,
+     "full_bench_cagr": 0.2285,
+     "window": [
+      "2019-06-12",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.0895,
+    "flipped": false
+   }
+  },
+  "512690": {
+   "name": "酒ETF",
+   "jumps": [
+    {
+     "date": "2021-05-17",
+     "ratio": 0.52,
+     "single_day_return": -0.48
+    },
+    {
+     "date": "2021-12-31",
+     "ratio": 0.7294,
+     "single_day_return": -0.2706
+    }
+   ],
+   "post_fix_max_abs_daily": 0.1008,
+   "window": [
+    "2019-05-06",
+    "2026-08-27"
+   ],
+   "nogate": {
+    "raw": {
+     "full_excess": 0.0793,
+     "h1_excess": -0.0144,
+     "h2_excess": 0.1655,
+     "all_positive": false,
+     "full_strat_mdd": -0.7549,
+     "full_bench_mdd": -0.8743,
+     "full_bench_cagr": -0.1044,
+     "window": [
+      "2019-05-06",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.042,
+     "h1_excess": -0.1281,
+     "h2_excess": 0.1655,
+     "all_positive": false,
+     "full_strat_mdd": -0.5287,
+     "full_bench_mdd": -0.6685,
+     "full_bench_cagr": 0.0276,
+     "window": [
+      "2019-05-06",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.0373,
+    "flipped": false
+   },
+   "gate": {
+    "raw": {
+     "full_excess": 0.1167,
+     "h1_excess": 0.0177,
+     "h2_excess": 0.2085,
+     "all_positive": true,
+     "full_strat_mdd": -0.5551,
+     "full_bench_mdd": -0.8743,
+     "full_bench_cagr": -0.1044,
+     "window": [
+      "2019-05-06",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.0719,
+     "h1_excess": -0.1136,
+     "h2_excess": 0.2085,
+     "all_positive": false,
+     "full_strat_mdd": -0.3063,
+     "full_bench_mdd": -0.6685,
+     "full_bench_cagr": 0.0276,
+     "window": [
+      "2019-05-06",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.0448,
+    "flipped": true
+   }
+  },
+  "512800": {
+   "name": "银行ETF",
+   "jumps": [
+    {
+     "date": "2025-07-07",
+     "ratio": 0.5031,
+     "single_day_return": -0.4969
+    }
+   ],
+   "post_fix_max_abs_daily": 0.1003,
+   "window": [
+    "2017-08-03",
+    "2026-08-27"
+   ],
+   "nogate": {
+    "raw": {
+     "full_excess": 0.0995,
+     "h1_excess": 0.007,
+     "h2_excess": 0.1888,
+     "all_positive": true,
+     "full_strat_mdd": -0.2789,
+     "full_bench_mdd": -0.5869,
+     "full_bench_cagr": -0.0227,
+     "window": [
+      "2017-08-03",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": 0.0195,
+     "h1_excess": 0.007,
+     "h2_excess": 0.0327,
+     "all_positive": true,
+     "full_strat_mdd": -0.2789,
+     "full_bench_mdd": -0.2789,
+     "full_bench_cagr": 0.0573,
+     "window": [
+      "2017-08-03",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.08,
+    "flipped": false
+   },
+   "gate": {
+    "raw": {
+     "full_excess": 0.0598,
+     "h1_excess": -0.0323,
+     "h2_excess": 0.1488,
+     "all_positive": false,
+     "full_strat_mdd": -0.2692,
+     "full_bench_mdd": -0.5869,
+     "full_bench_cagr": -0.0227,
+     "window": [
+      "2017-08-03",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": -0.0202,
+     "h1_excess": -0.0323,
+     "h2_excess": -0.0074,
+     "all_positive": false,
+     "full_strat_mdd": -0.2692,
+     "full_bench_mdd": -0.2789,
+     "full_bench_cagr": 0.0573,
+     "window": [
+      "2017-08-03",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.08,
+    "flipped": false
+   }
+  },
+  "515880": {
+   "name": "通信ETF",
+   "jumps": [
+    {
+     "date": "2026-02-03",
+     "ratio": 0.343,
+     "single_day_return": -0.657
+    },
+    {
+     "date": "2026-07-06",
+     "ratio": 0.4794,
+     "single_day_return": -0.5206
+    }
+   ],
+   "post_fix_max_abs_daily": 0.1004,
+   "window": [
+    "2019-09-06",
+    "2026-08-27"
+   ],
+   "nogate": {
+    "raw": {
+     "full_excess": 0.0939,
+     "h1_excess": 0.1437,
+     "h2_excess": 0.046,
+     "all_positive": true,
+     "full_strat_mdd": -0.7053,
+     "full_bench_mdd": -0.8303,
+     "full_bench_cagr": -0.0658,
+     "window": [
+      "2019-09-06",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": -0.0756,
+     "h1_excess": 0.1437,
+     "h2_excess": -0.3697,
+     "all_positive": false,
+     "full_strat_mdd": -0.3852,
+     "full_bench_mdd": -0.4697,
+     "full_bench_cagr": 0.2229,
+     "window": [
+      "2019-09-06",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.1695,
+    "flipped": true
+   },
+   "gate": {
+    "raw": {
+     "full_excess": 0.1102,
+     "h1_excess": 0.111,
+     "h2_excess": 0.1066,
+     "all_positive": true,
+     "full_strat_mdd": -0.3016,
+     "full_bench_mdd": -0.8303,
+     "full_bench_cagr": -0.0658,
+     "window": [
+      "2019-09-06",
+      "2026-08-27"
+     ]
+    },
+    "fixed": {
+     "full_excess": -0.147,
+     "h1_excess": 0.111,
+     "h2_excess": -0.4814,
+     "all_positive": false,
+     "full_strat_mdd": -0.3852,
+     "full_bench_mdd": -0.4697,
+     "full_bench_cagr": 0.2229,
+     "window": [
+      "2019-09-06",
+      "2026-08-27"
+     ]
+    },
+    "delta_full_excess": -0.2572,
+    "flipped": true
+   }
+  }
+ },
+ "cyb100_band_recheck": {
+  "note": "512100修平后特征代回阶段二距离规则（组A中位数含修平版512100）",
+  "fixed_512100_feats": {
+   "ann_vol": 0.2524,
+   "abs_mdd": 0.4635
+  },
+  "dist_A": 1.145,
+  "dist_B": 0.713,
+  "main_band_would_flip": true,
+  "conclusion": "修平后主档位线仍40/60"
+ }
+}

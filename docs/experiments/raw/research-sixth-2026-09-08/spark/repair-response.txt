@@ -1,0 +1,19 @@
+已按你要求仅修改了 `inventory.py`，并跑了 `--self-test`。
+
+### 修改内容
+- 保留字段名为 `duplicate_identity_occurrences`，不再用 `duplicates`，且不再暗示“实际交易重复”。
+- 每个重复身份组加入 `occurrences`，含：
+  - `file`（文件路径）
+  - `json_path`（JSON 路径，如 `$.items[0]`）
+- `entry_variant` / `exit_variant` 为缺失或 `null` 时都记为 `missing_optional_identity`，不参与重复身份分组。
+- 统一将 `symbol/signal_date/entry_variant/exit_variant` 归一化为字符串 key，避免非标量（dict/list）导致的排序/不可哈希崩溃。
+- 支持空目录与不存在路径：
+  - 不存在路径返回可读 `json_errors`（`path does not exist`），不崩溃。
+- 修正已知自测写法：`json.dump` 不会制造非法 JSON 的问题，已改为直接写入非法文本 `"{ not json"`。
+
+### 自测结果
+- 命令：`python3 inventory.py --self-test`
+- 结果：通过（退出码 0），输出中可见：
+  - `duplicate_identity_occurrences` 正常识别重复组并带 `occurrences`
+  - `missing_optional_identity` 计数正确
+  - 不存在路径 / 空目录 / 非标量身份场景均有可预测输出且不崩溃。

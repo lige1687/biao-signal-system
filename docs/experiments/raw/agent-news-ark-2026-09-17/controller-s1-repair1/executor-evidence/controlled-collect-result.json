@@ -1,0 +1,82 @@
+{
+  "db_path": "/tmp/agent-news-s1/newsfeed-s1.db",
+  "started_at": "2026-09-17T12:44:38+08:00",
+  "http_attempts": [
+    {
+      "url": "https://www.federalreserve.gov/feeds/press_monetary.xml",
+      "timeout_sec": 20,
+      "at": "2026-09-17T12:44:38+08:00"
+    }
+  ],
+  "run_error": null,
+  "pipeline_result": {
+    "run_id": 1,
+    "status": "ok",
+    "inserted": 2,
+    "per_source": {
+      "eastmoney": 0,
+      "sina": 0,
+      "fed": 2
+    },
+    "scored": 0,
+    "digest": false,
+    "pushed": 0,
+    "stages": {
+      "collect": {
+        "status": "ok",
+        "finished_at": "2026-09-17T12:44:38+08:00",
+        "errors": []
+      },
+      "score": {
+        "status": "skipped",
+        "finished_at": null,
+        "errors": [],
+        "reason": "no_llm"
+      },
+      "digest": {
+        "status": "skipped",
+        "finished_at": null,
+        "errors": [],
+        "reason": "no_llm"
+      },
+      "push": {
+        "status": "skipped",
+        "finished_at": null,
+        "errors": [],
+        "reason": "no_llm"
+      }
+    },
+    "sources": {
+      "eastmoney": {
+        "attempted_at": "2026-09-17T12:44:38+08:00",
+        "ok": true,
+        "error": null
+      },
+      "sina": {
+        "attempted_at": "2026-09-17T12:44:38+08:00",
+        "ok": true,
+        "error": null
+      },
+      "fed": {
+        "attempted_at": "2026-09-17T12:44:38+08:00",
+        "ok": true,
+        "error": null
+      }
+    },
+    "errors": []
+  },
+  "replay": {
+    "skipped": false,
+    "inserted_on_replay": 0,
+    "per_source_fed": 0,
+    "total_before": 2,
+    "total_after": 2,
+    "idempotent": true,
+    "run_status": "ok",
+    "health_aggregates": {
+      "latest_success_at": "2026-09-17T12:44:38+08:00",
+      "latest_item_at": "2026-09-17T02:00:00+08:00",
+      "unscored_count": 2
+    }
+  }
+}

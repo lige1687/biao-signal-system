@@ -1,0 +1,119 @@
+[
+  {
+    "role": "user",
+    "content": "510300 最近怎么看？先说判断，再讲机会和风险，现有依据够不够？本次只讨论。",
+    "grounded": true,
+    "created_at": "2026-09-15T02:37:22+00:00",
+    "message_id": 95,
+    "question_id": 95,
+    "resolved_symbol": null,
+    "evidence_card": null,
+    "system_generated": false,
+    "message_kind": "",
+    "plan_artifact": null,
+    "plan_draft": null,
+    "next_steps": [],
+    "answer_incomplete": null,
+    "retry": null
+  },
+  {
+    "role": "assistant",
+    "content": "现在还在黑色关键风险阶段，顶部警报刚确认、价格压在短均线下面，系统里没有任何买点，先看着，等重新站上4.587再说。\n\n这是510300（沪深300ETF）2026-09-15收盘后的技术全貌，不是今天的数据，不能直接代表这之后的行情；你说只讨论，我就只讲状态和条件。先说涨法画像：近一年它是**震荡型**，没有明确方向，这类无趋势行情里系统的经验是少动，趋势回调那套做法在这里吃不到肉、别硬套；唯一值得等的是均线密集后带量的标志性动作（B类形态，但近两年核心池里很少触发）。\n\n风险是实的。9月11日顶部警报确认：第二高点低于前高4.803，收盘跌破颈线4.587；最新收盘4.56在20日指数均线和长均线下方，MACD在9月2日又死叉，而此前一个月金叉、死叉来回切，短周期本身就不稳。多头线索只有两条：9月9日成立了双底和抬高低点候选（颈线4.706），以及这波回调一直缩量——只能说明杀跌量能不强，不等于有人主动进攻。另外维度看板把长周期标成\"改善中\"，但事件流水里9月7日刚记录EMA60下穿EMA120、长周期背景转空，两处是打架的，我不替它圆。\n\n依据够不够，分两层看。对\"现在有没有机会\"这个问题，结论依据是够的：买点审阅近3个交易日候选为零，这是确定性判定。对\"以后信号出现时值不值得参考\"，历史经验与当下问题**不一致，仅可参考**——宽基A稳健档在510300上有样本外+2.26R（26笔；R指每笔预定风险金额的倍数，+2.26R就是平均每笔赚2.26倍预定风险金额），说明这类标的在信号真触发时历史上做得动，但这笔成绩不能提前借给现在；本标的自己的胜率表只有A档4笔、C档2笔，样本太小，而且表本身没存规则版本和出入场配置，只能描述它自己的结果。至于\"双宽度冰点后120日13/13全涨\"那条经验，这次不适用：A股20日线上方只有29%、美股36%（截至9月4日），都没到≤20的极端区。\n\n接下来就看两个位置。**4.587**是刚跌破的顶部警报颈线，重新站回去才算短期止住；**4.706**是双底候选颈线、也是8月末那波摆动高点，站上它双底才成立、才算转强。在此之前就是缩量偏弱的状态，没有需要提前做的动作。情绪面目前偏热（散户加杠杆、净流入、动能多数向上），冰点前提不成立，板块级条件也还没核实，这块没有可引用的条件统计，知道就行。",
+    "grounded": true,
+    "created_at": "2026-09-15T02:39:47+00:00",
+    "message_id": 96,
+    "question_id": 95,
+    "resolved_symbol": "510300.SS",
+    "evidence_card": {
+      "facts": {
+        "symbol": "510300.SS",
+        "as_of": "2026-09-15",
+        "verdict_cn": "当前无机会",
+        "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+        "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:510300.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+            "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:510300.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+            "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+        },
+        "comparison_config": {
+          "symbol": "510300.SS",
+          "module": {
+            "value": "A",
+            "source": "engine_default"
+          },
+          "exit_variant": {
+            "value": "a6_1_costbasis",
+            "source": "engine_default"
+          },
+          "entry_variant": {
+            "value": null,
+            "source": "engine_default"
+          },
+          "rr_min": {
+            "value": 3.0,
+            "source": "engine_default"
+          },
+          "fee_label": {
+            "value": "standard",
+            "source": "engine_default"
+          },
+          "ruleset_sha256": {
+            "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+            "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+        },
+        "matched_runs": [],
+        "supporting_runs": [],
+        "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+        "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+        ],
+        "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": []
+    },
+    "system_generated": false,
+    "message_kind": "",
+    "plan_artifact": null,
+    "plan_draft": null,
+    "next_steps": [
+      {
+        "kind": "expand_evidence",
+        "label_cn": "查看依据详情"
+      },
+      {
+        "kind": "prepare_backtest",
+        "label_cn": "准备补测",
+        "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+    ],
+    "answer_incomplete": null,
+    "retry": null
+  }
+]

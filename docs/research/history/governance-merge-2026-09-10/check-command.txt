@@ -1,0 +1,27 @@
+python3 - <<'PY'
+import pathlib,json,re,hashlib
+from urllib.parse import unquote,urlsplit
+files=["AGENTS.md","docs/research/experiment-backtest-principles.md","docs/research/definition-standard.md","docs/research-playbook.md","docs/research/ai-execution-contract.md","docs/research/experiment-report-template.md","docs/literature-learning/README.md","docs/README.md","docs/experiments/governance-pack-merge-2026-09-10.md","docs/experiments/INDEX.md"]
+checked=0;bad=[]
+for name in files:
+ p=pathlib.Path(name);s=p.read_text()
+ assert s.count('\uFFFD')==0,name
+ assert sum(line.startswith('```') for line in s.splitlines())%2==0,name
+ for target in re.findall(r'\]\(([^)]+)\)',s):
+  target=target.strip('<>');u=urlsplit(target)
+  if u.scheme or target.startswith('/upgrades') or target.startswith('/library'):continue
+  rel=unquote(u.path)
+  if not rel:continue
+  dest=(p.parent/rel).resolve();checked+=1
+  if not dest.exists():bad.append([name,target])
+paths=['docs/research/definitions.v1.json','docs/superpowers/plans/2026-09-09-factor-library-v0.md','docs/experiments/factor-library-v0-delivery-2026-09-09.md']
+paths+=sorted(str(p) for p in pathlib.Path('docs/experiments/raw/research-factor-library-v0-2026-09-09').rglob('*') if p.is_file())
+h=hashlib.sha256()
+for p in paths:h.update(p.encode()+b'\0'+hashlib.sha256(pathlib.Path(p).read_bytes()).digest())
+assert h.hexdigest()=='2850b849f83e3425ae26fd920c653de037038696d8c410e832cc49c7a9af168d', 'protected content changed'
+r=json.loads(pathlib.Path('docs/experiments/registry.json').read_text());e=r['entries']['docs/experiments/governance-pack-merge-2026-09-10.md'];assert e['category'] in r['categories']
+pkg=pathlib.Path('/Users/yongbiaoli/Desktop/LeiSignal-governance-pack-2026-09-10')
+for p in (pkg/'templates').glob('*.json'):
+ j=json.loads(p.read_text());assert j['template_only'] and not j['execution_authorized'] and not j['production_authorized'] and j['schema_status']=='field_example_not_integrated'
+print(json.dumps(dict(local_links=checked,broken=bad,protected_files=len(paths),protected_sha256=h.hexdigest(),template_jsons=4),ensure_ascii=False));assert not bad
+PY

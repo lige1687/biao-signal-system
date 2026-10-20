@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "at": "2026-09-09T10:00:14.655169+00:00",
+  "checks": {
+    "old_48_sealed_files_unchanged": true,
+    "protocol_hash": true,
+    "eight_new_accounts": true,
+    "independent_verification": true,
+    "old_baseline_exact": true,
+    "original_group_accounting": true,
+    "representative_group_accounting": true,
+    "dedup-execution/final-manifest.json": true,
+    "period-review/final-lock.json": true,
+    "dedup-review/final-lock.json": true,
+    "pool-sources/actual-holdings/manifest.json": true,
+    "report_sections": true,
+    "registry": true,
+    "index": true,
+    "factual_plan": true
+  },
+  "independent_counts": {
+    "accounts": 8,
+    "monthly_decisions": 536,
+    "75_monthly_signals": 134,
+    "reentry_event_stops": 174,
+    "fast_stops": 174,
+    "monthly_budget_cancels": 76,
+    "reentry_event_triggers": 96,
+    "reentry_event_fills": 96,
+    "fast_reentries": 96,
+    "75_target_groups": 134,
+    "full_target_groups": 402,
+    "ledger_rows": 16304,
+    "summary_accounts": 8
+  },
+  "read_only_report_review": "phase13_accounts verified numeric tables, differences, phase shares, recovery periods and completion boundaries; no required numeric correction",
+  "limits": [
+    "Fixed11 representatives are a concentration sensitivity study, not complete historical universe.",
+    "Trade protocol frozen before new returns; full adapter/input lock was only completed after first successful run, explicitly documented.",
+    "5 funds: extracted holdings rows matched official text; full-table independent omission exclusion remains incomplete. 510300 NAV weights remain secondary-source estimates.",
+    "No production or OKR progress update."
+  ]
+}

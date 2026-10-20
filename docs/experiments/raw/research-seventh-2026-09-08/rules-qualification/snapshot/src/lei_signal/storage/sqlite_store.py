@@ -1,0 +1,1607 @@
+"""SQLite 存储：迁移、幂等事件写入与结构生命周期。
+
+迁移与幂等模式参考
+    licai-wt-pg-integration@2ee7fdc
+    src/plan_guardian/adapters/sqlite/migrations.py
+改造原因：
+  1. 旧实现用 `migration_steps/NNN_*.py` 模块目录 + pkgutil 发现；
+     新项目规模小，改为模块内声明的 (ordinal, name, sql) 序列，
+     保留「按序号顺序应用 + schema_migrations 记账 + 幂等」的核心设计。
+  2. 只定义 signal_events / structure_instances / daily_assessments /
+     analysis_runs / rule_registry；不移植账本、订单、通知、账户表。
+  3. signal_events 只追加：以 event_id 为主键，重复写入用
+     INSERT OR IGNORE 忽略，绝不 UPDATE 已有事件。
+"""
+from __future__ import annotations
+
+import json
+import sqlite3
+from collections.abc import Iterable
+from dataclasses import dataclass
+from datetime import date
+from pathlib import Path
+
+from lei_signal.domain.types import DailyAssessment, SignalEvent, StructureInstance
+
+MIGRATIONS: tuple[tuple[int, str, str], ...] = (
+    (
+        1,
+        "001_core_tables",
+        """
+        CREATE TABLE IF NOT EXISTS assets (
+            symbol TEXT PRIMARY KEY,
+            display_name TEXT,
+            market TEXT,
+            timezone TEXT
+        );
+
+        -- 只追加：event_id 为主键，重复运行以 INSERT OR IGNORE 幂等忽略
+        CREATE TABLE IF NOT EXISTS signal_events (
+            event_id TEXT PRIMARY KEY,
+            symbol TEXT NOT NULL,
+            timeframe TEXT NOT NULL,
+            event_date TEXT NOT NULL,
+            available_date TEXT NOT NULL,
+            rule_id TEXT NOT NULL,
+            rule_version TEXT NOT NULL,
+            direction TEXT NOT NULL,
+            severity TEXT NOT NULL,
+            strength INTEGER NOT NULL,
+            reason_cn TEXT NOT NULL,
+            provenance TEXT NOT NULL,
+            evidence_json TEXT NOT NULL,
+            invalidation_json TEXT NOT NULL,
+            structure_id TEXT,
+            run_id TEXT
+        );
+        CREATE INDEX IF NOT EXISTS idx_events_symbol_available
+            ON signal_events(symbol, available_date);
+        CREATE INDEX IF NOT EXISTS idx_events_rule ON signal_events(rule_id);
+
+        CREATE TABLE IF NOT EXISTS structure_instances (
+            structure_id TEXT PRIMARY KEY,
+            symbol TEXT NOT NULL,
+            structure_type TEXT NOT NULL,
+            side TEXT NOT NULL,
+            detected_date TEXT NOT NULL,
+            confirmed_date TEXT,
+            c_price REAL,
+            neckline REAL,
+            reference_high REAL,
+            status TEXT NOT NULL,
+            invalidated_date TEXT,
+            invalidated_reason TEXT,
+            source_event_ids TEXT NOT NULL,
+            source_rule_id TEXT,
+            provenance TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS daily_assessments (
+            symbol TEXT NOT NULL,
+            as_of TEXT NOT NULL,
+            stage TEXT NOT NULL,
+            color TEXT NOT NULL,
+            dimensions_json TEXT NOT NULL,
+            stage_change_reason_cn TEXT,
+            primary_structure_id TEXT,
+            b1_price REAL,
+            data_status TEXT NOT NULL,
+            ruleset_version TEXT NOT NULL,
+            PRIMARY KEY (symbol, as_of)
+        );
+
+        CREATE TABLE IF NOT EXISTS analysis_runs (
+            run_id TEXT PRIMARY KEY,
+            symbol TEXT NOT NULL,
+            started_at TEXT NOT NULL,
+            ruleset_version TEXT NOT NULL,
+            provider TEXT,
+            last_data_date TEXT,
+            event_count INTEGER NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS rule_registry (
+            rule_id TEXT NOT NULL,
+            rule_version TEXT NOT NULL,
+            provenance TEXT NOT NULL,
+            note_cn TEXT,
+            PRIMARY KEY (rule_id, rule_version)
+        );
+        """,
+    ),
+    (
+        2,
+        "002_structure_lifecycle_events",
+        """
+        -- 结构状态可以更新，但每次变化必须同步写一条生命周期事件
+        CREATE TABLE IF NOT EXISTS structure_lifecycle (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            structure_id TEXT NOT NULL,
+            changed_on TEXT NOT NULL,
+            from_status TEXT,
+            to_status TEXT NOT NULL,
+            reason TEXT,
+            UNIQUE (structure_id, changed_on, to_status)
+        );
+        CREATE INDEX IF NOT EXISTS idx_lifecycle_structure
+            ON structure_lifecycle(structure_id);
+        """,
+    ),
+    (
+        3,
+        "003_opportunity_risk_split",
+        """
+        -- Round 2 修复 4：机会阶段与风险状态分离。
+        -- daily_assessments 增加 opportunity_stage / risk_state 独立字段。
+        -- 旧 stage 字段保留作为兼容。
+        -- 使用安全的列添加：sqlite 无 IF NOT EXISTS，包装在 try/catch 中。
+        """,
+    ),
+    (
+        4,
+        "004_event_lifecycle_columns",
+        """
+        -- Round 2 收尾修复：事件生命周期字段持久化。
+        -- valid_until / lifecycle_id / ended_event_id 使数据库可还原状态的
+        -- 有效/结束时间，与内存事件、解释层、研究使用同一生命周期。
+        -- sqlite 无 ALTER TABLE ADD COLUMN IF NOT EXISTS，由 apply_migrations 处理。
+        """,
+    ),
+    (
+        5,
+        "005_event_lifecycle_snapshots",
+        """
+        -- Round 3 修复 D3：事件的生命周期字段（valid_until / lifecycle_id /
+        -- ended_event_id）随后续行情变化而变化；同一 event_id 在不同 as_of 下
+        -- 看到的「正确」生命周期可能不同。signal_events 保持不可变（身份字段），
+        -- 本表只追加生命周期快照，PRIMARY KEY = (event_id, run_id, as_of)。
+        CREATE TABLE IF NOT EXISTS event_lifecycle_snapshots (
+            event_id       TEXT NOT NULL,
+            run_id         TEXT NOT NULL,
+            as_of          TEXT NOT NULL,
+            valid_until    TEXT,
+            lifecycle_id   TEXT,
+            ended_event_id TEXT,
+            recorded_at    TEXT NOT NULL,
+            PRIMARY KEY (event_id, run_id, as_of)
+        );
+        CREATE INDEX IF NOT EXISTS idx_lifecycle_as_of
+            ON event_lifecycle_snapshots(as_of);
+        """,
+    ),
+    (
+        6,
+        "006_market_context_tables",
+        """
+        -- Round 4: Market context independent storage.
+        -- Does NOT write to signal_events, daily_assessments, or structure_instances.
+
+        -- Universe membership version tracking
+        CREATE TABLE IF NOT EXISTS universe_membership_versions (
+            market_id       TEXT NOT NULL,
+            as_of           TEXT NOT NULL,
+            universe_version TEXT NOT NULL,
+            symbol_count    INTEGER NOT NULL,
+            source          TEXT NOT NULL,
+            source_version  TEXT NOT NULL,
+            source_kind     TEXT NOT NULL,
+            retrieved_at    TEXT NOT NULL,
+            provenance      TEXT NOT NULL,
+            PRIMARY KEY (market_id, as_of, universe_version)
+        );
+        CREATE INDEX IF NOT EXISTS idx_universe_market_asof
+            ON universe_membership_versions(market_id, as_of);
+
+        -- Market breadth snapshots
+        CREATE TABLE IF NOT EXISTS market_breadth_snapshots (
+            market_id         TEXT NOT NULL,
+            as_of             TEXT NOT NULL,
+            available_at      TEXT NOT NULL,
+            universe_version  TEXT NOT NULL,
+            constituent_count INTEGER NOT NULL,
+            eligible_20       INTEGER NOT NULL,
+            eligible_50       INTEGER NOT NULL,
+            eligible_200      INTEGER NOT NULL,
+            missing_20        INTEGER NOT NULL,
+            missing_50        INTEGER NOT NULL,
+            missing_200       INTEGER NOT NULL,
+            coverage_20       REAL NOT NULL,
+            coverage_50       REAL NOT NULL,
+            coverage_200      REAL NOT NULL,
+            breadth_20        REAL,
+            breadth_50        REAL,
+            breadth_200       REAL,
+            percentile_20     REAL,
+            percentile_50     REAL,
+            percentile_200    REAL,
+            source_kind       TEXT NOT NULL,
+            provenance        TEXT NOT NULL,
+            data_status       TEXT NOT NULL,
+            run_id            TEXT NOT NULL,
+            PRIMARY KEY (market_id, as_of, universe_version)
+        );
+        CREATE INDEX IF NOT EXISTS idx_breadth_market_asof
+            ON market_breadth_snapshots(market_id, as_of);
+
+        -- Market context events (extreme events, divergence, etc.)
+        CREATE TABLE IF NOT EXISTS market_context_events (
+            id                INTEGER PRIMARY KEY AUTOINCREMENT,
+            market_id         TEXT NOT NULL,
+            as_of             TEXT NOT NULL,
+            available_at      TEXT NOT NULL,
+            event_type        TEXT NOT NULL,
+            event_version     TEXT NOT NULL,
+            threshold_origin  TEXT NOT NULL,
+            evidence_json     TEXT NOT NULL,
+            provenance        TEXT NOT NULL,
+            source_kind       TEXT NOT NULL,
+            data_status       TEXT NOT NULL,
+            run_id            TEXT NOT NULL,
+            UNIQUE (market_id, as_of, event_type, event_version)
+        );
+        CREATE INDEX IF NOT EXISTS idx_context_events_market_asof
+            ON market_context_events(market_id, as_of);
+
+        -- Sentiment observations (NAAIM, AAII)
+        CREATE TABLE IF NOT EXISTS sentiment_observations (
+            series_id             TEXT NOT NULL,
+            survey_week           TEXT NOT NULL,
+            available_at          TEXT NOT NULL,
+            source                TEXT NOT NULL,
+            license_status        TEXT NOT NULL,
+            publication_delay_days INTEGER,
+            current_eligible      INTEGER NOT NULL,
+            exposure_index        REAL,
+            bullish               REAL,
+            neutral               REAL,
+            bearish               REAL,
+            bull_bear             REAL,
+            percentile            REAL,
+            label                 TEXT NOT NULL,
+            PRIMARY KEY (series_id, survey_week, available_at)
+        );
+        CREATE INDEX IF NOT EXISTS idx_sentiment_available
+            ON sentiment_observations(series_id, available_at);
+
+        -- Market context assessments (summary + reasons + conflicts)
+        CREATE TABLE IF NOT EXISTS market_context_assessments (
+            market_id           TEXT NOT NULL,
+            as_of               TEXT NOT NULL,
+            available_at        TEXT NOT NULL,
+            long_regime         TEXT NOT NULL,
+            heat_state          TEXT NOT NULL,
+            breadth_direction   TEXT NOT NULL,
+            summary             TEXT NOT NULL,
+            reasons_json        TEXT NOT NULL,
+            conflicts_json      TEXT NOT NULL,
+            drawdown_from_ath   REAL,
+            naaim_label         TEXT NOT NULL,
+            aaii_label          TEXT NOT NULL,
+            source_kind         TEXT NOT NULL,
+            provenance          TEXT NOT NULL,
+            data_status         TEXT NOT NULL,
+            run_id              TEXT NOT NULL,
+            PRIMARY KEY (market_id, as_of, available_at)
+        );
+        CREATE INDEX IF NOT EXISTS idx_context_assess_market_asof
+            ON market_context_assessments(market_id, available_at);
+        """,
+    ),
+    (
+        7,
+        "007_watchlist",
+        """
+        -- 看盘系统自选股列表（Web UI 作用域，纯新增，不影响研究表）
+        CREATE TABLE IF NOT EXISTS watchlist_items (
+            symbol TEXT PRIMARY KEY,
+            display_name TEXT,
+            market TEXT NOT NULL,
+            note TEXT,
+            sort_order INTEGER NOT NULL DEFAULT 0,
+            added_at TEXT NOT NULL
+        );
+        """,
+    ),
+    (
+        8,
+        "008_watchlist_groups",
+        """
+        -- 自选分组（如「科技」「防御」）。内置「大盘」组是 config 常量，
+        -- 不入库、不可删，因此本表只存用户自建组。
+        CREATE TABLE IF NOT EXISTS watchlist_groups (
+            group_id   INTEGER PRIMARY KEY AUTOINCREMENT,
+            name       TEXT NOT NULL UNIQUE,
+            sort_order INTEGER NOT NULL DEFAULT 0,
+            created_at TEXT NOT NULL
+        );
+        """,
+    ),
+    (
+        9,
+        "009_market_context_append_only",
+        """
+        -- Round 5: market-context append-only revisions.
+        -- Each write is a new row keyed by revision_no; never UPDATE prior rows,
+        -- never INSERT OR REPLACE the latest reading. eligibility/missing counts
+        -- are persisted (not zeroed) and stale rows are filtered at query time.
+
+        CREATE TABLE IF NOT EXISTS market_breadth_snapshot_revisions (
+            market_id         TEXT NOT NULL,
+            as_of             TEXT NOT NULL,
+            universe_version  TEXT NOT NULL,
+            revision_no       INTEGER NOT NULL,
+            available_at      TEXT NOT NULL,
+            run_id            TEXT NOT NULL,
+            source_kind       TEXT NOT NULL,
+            provenance        TEXT NOT NULL,
+            data_status       TEXT NOT NULL,
+            constituent_count INTEGER NOT NULL,
+            eligible_20       INTEGER NOT NULL,
+            eligible_50       INTEGER NOT NULL,
+            eligible_200      INTEGER NOT NULL,
+            missing_20        INTEGER NOT NULL,
+            missing_50        INTEGER NOT NULL,
+            missing_200       INTEGER NOT NULL,
+            coverage_20       REAL NOT NULL,
+            coverage_50       REAL NOT NULL,
+            coverage_200      REAL NOT NULL,
+            breadth_20        REAL,
+            breadth_50        REAL,
+            breadth_200       REAL,
+            percentile_20     REAL,
+            percentile_50     REAL,
+            percentile_200    REAL,
+            PRIMARY KEY (market_id, as_of, universe_version, revision_no)
+        );
+        CREATE INDEX IF NOT EXISTS idx_breadth_revisions_latest
+            ON market_breadth_snapshot_revisions(market_id, as_of, revision_no DESC);
+
+        CREATE TABLE IF NOT EXISTS market_context_assessment_revisions (
+            market_id           TEXT NOT NULL,
+            as_of               TEXT NOT NULL,
+            available_at        TEXT NOT NULL,
+            revision_no         INTEGER NOT NULL,
+            run_id              TEXT NOT NULL,
+            long_regime         TEXT NOT NULL,
+            heat_state          TEXT NOT NULL,
+            breadth_direction   TEXT NOT NULL,
+            summary             TEXT NOT NULL,
+            reasons_json        TEXT NOT NULL,
+            conflicts_json      TEXT NOT NULL,
+            drawdown_from_ath   REAL,
+            naaim_label         TEXT NOT NULL,
+            aaii_label          TEXT NOT NULL,
+            source_kind         TEXT NOT NULL,
+            provenance          TEXT NOT NULL,
+            data_status         TEXT NOT NULL,
+            PRIMARY KEY (market_id, as_of, available_at, revision_no)
+        );
+        CREATE INDEX IF NOT EXISTS idx_assess_revisions_latest
+            ON market_context_assessment_revisions(
+                market_id, as_of, available_at DESC, revision_no DESC
+            );
+        """,
+    ),
+    (
+        10,
+        "010_trade_plans",
+        """
+        -- 计划台账主体：记录状态机 + 价位，刻意不含数量/金额/成交价/账户
+        CREATE TABLE IF NOT EXISTS trade_plans (
+            plan_id                  TEXT PRIMARY KEY,
+            symbol                   TEXT NOT NULL,
+            module                   TEXT NOT NULL,          -- A/B/C/D，对齐 MODULE_MAP
+            direction                TEXT NOT NULL,          -- long/short
+            entry_rule_id            TEXT,                   -- 入场理由锚点（漂移检测主对象）
+            entry_lifecycle_id       TEXT,
+            entry_trigger_cn         TEXT,
+            entry_price_ref          REAL,                   -- 参考入场价，非成交价
+            invalidation_price       REAL,                   -- revision_no=0 的值永久冻结
+            target_b_price           REAL,
+            target_b_source          TEXT,
+            reward_risk_at_plan      REAL,                   -- 建计划时 R/R 快照；不可计算时 NULL
+            valid_until              TEXT NOT NULL,          -- 逐计划自填有效期；draft 允许空串
+            state                    TEXT NOT NULL,          -- 见 PLAN_STATES
+            ruleset_version          TEXT NOT NULL,
+            reason                   TEXT NOT NULL,          -- 制定原因必填；draft 允许空串
+            -- 五项交易假设（决策 1，制定时冻结，复议对照原文；Python 不语义解析）
+            thesis_cn                TEXT NOT NULL DEFAULT '',
+            invalidation_criteria_cn TEXT NOT NULL DEFAULT '',
+            drawdown_playbook_cn     TEXT NOT NULL DEFAULT '',
+            take_profit_plan_cn      TEXT NOT NULL DEFAULT '',
+            stop_plan_cn             TEXT NOT NULL DEFAULT '',
+            entered_on               TEXT,
+            exited_on                TEXT,
+            exit_reason_rule_id      TEXT,
+            superseded_by            TEXT,
+            created_at               TEXT NOT NULL,
+            updated_at               TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_plans_symbol_state
+            ON trade_plans(symbol, state);
+
+        -- append-only 修订史：revision_no=0 为创建快照，原始失效价与五项预案永远在此
+        CREATE TABLE IF NOT EXISTS trade_plan_revisions (
+            revision_id        TEXT PRIMARY KEY,
+            plan_id            TEXT NOT NULL,
+            revision_no        INTEGER NOT NULL,             -- 0 = 创建快照
+            changed_field      TEXT NOT NULL,                -- __snapshot__ 或字段名
+            old_value          TEXT,
+            new_value          TEXT,
+            verdict            TEXT NOT NULL,                -- 见 VERDICT_*
+            verdict_reason_cn  TEXT,
+            changed_at         TEXT NOT NULL,
+            changed_by         TEXT NOT NULL,                -- user/system
+            UNIQUE (plan_id, revision_no, changed_field)
+        );
+        CREATE INDEX IF NOT EXISTS idx_revisions_plan
+            ON trade_plan_revisions(plan_id, revision_no);
+
+        -- 待办（决策 4）：ENTER/EXIT/REVIEW，催办计数，推迟复活谓词
+        CREATE TABLE IF NOT EXISTS plan_action_items (
+            action_id              TEXT PRIMARY KEY,
+            plan_id                TEXT NOT NULL,
+            kind                   TEXT NOT NULL,             -- ENTER/EXIT/REVIEW
+            source_alert_code      TEXT NOT NULL,
+            state                  TEXT NOT NULL,             -- open/done/deferred/expired
+            due_from               TEXT,                      -- = alert 的 actionable_from
+            nag_count              INTEGER NOT NULL DEFAULT 0,
+            last_nagged_bar_date   TEXT,
+            resume_on              TEXT,                      -- 推迟复活谓词 JSON
+            closed_on              TEXT,
+            close_kind             TEXT,                      -- done/deferred/expired
+            created_at             TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_actions_plan_state
+            ON plan_action_items(plan_id, state);
+
+        -- 原因注解（append-only，永不修改已冻结记录）：推迟/放宽/收紧/复议/事后补充
+        CREATE TABLE IF NOT EXISTS plan_annotations (
+            annotation_id  TEXT PRIMARY KEY,
+            plan_id        TEXT NOT NULL,
+            ref_kind       TEXT NOT NULL,                    -- revision/action
+            ref_id         TEXT,
+            kind           TEXT NOT NULL,                    -- 见 Annotation.kind
+            reason_cn      TEXT NOT NULL,
+            created_at     TEXT NOT NULL,
+            author         TEXT NOT NULL                     -- user/system/agent
+        );
+        CREATE INDEX IF NOT EXISTS idx_annotations_plan
+            ON plan_annotations(plan_id, created_at);
+        """,
+    ),
+    (
+        11,
+        "011_feishu_webhook_nonces",
+        """
+        -- Webhook 回执链接 nonce：一次性消费，防止旧链接重放。
+        CREATE TABLE IF NOT EXISTS feishu_webhook_nonces (
+            nonce TEXT PRIMARY KEY,
+            plan_id TEXT NOT NULL,
+            action_id TEXT NOT NULL,
+            expires_at INTEGER NOT NULL,
+            consumed_at TEXT,
+            created_at TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_feishu_nonces_expiry
+            ON feishu_webhook_nonces(expires_at);
+        """,
+    ),
+    (
+        12,
+        "012_holding_watch_plans",
+        """
+        -- 持仓盯盘（人类 2026-08-05 决定）：已在场内的标的只监督退出。
+        -- plan_kind=holding_watch 时直接落 entered，不走 armed 入场判定。
+        -- 仍然只记价位与状态，不记数量/金额/账户（对齐 migration 010 的边界）。
+        ALTER TABLE trade_plans ADD COLUMN plan_kind TEXT NOT NULL DEFAULT 'entry';
+        ALTER TABLE trade_plans ADD COLUMN take_profit_price REAL;
+        ALTER TABLE trade_plans ADD COLUMN stop_price REAL;
+        -- 信号型退出触发：逗号分隔 rule_id（如 lei_color 转黑、dual_ma_bull_confirmed）
+        ALTER TABLE trade_plans ADD COLUMN watch_signal_rule_ids TEXT NOT NULL DEFAULT '';
+        CREATE INDEX IF NOT EXISTS idx_plans_kind_state
+            ON trade_plans(plan_kind, state);
+        """,
+    ),
+    (
+        13,
+        "013_watch_subscriptions",
+        """
+        -- 提醒订阅 (决策 2, 2026-08-08): 用户从 BuyPointReview.watch_conditions
+        -- 一键订阅某条"未来买点"条件, 由 14:45 checker 盯盘.
+        --
+        -- state 状态机:
+        --   active  -> pending_confirmation (checker 命中)
+        --   pending_confirmation -> promoted (Step 3 落计划后回填 promoted_plan_id)
+        --   pending_confirmation -> dismissed (人放弃, 写 dismissed_reason)
+        --   active  -> dismissed (人主动取消)
+        --
+        -- kind 区分价位型 vs 状态型, v1 只接 price (kind=state 留 TODO).
+        CREATE TABLE IF NOT EXISTS watch_subscriptions (
+            watch_id            TEXT PRIMARY KEY,        -- ws_<symbol>_<ts>_<hash>
+            symbol              TEXT NOT NULL,
+            direction           TEXT NOT NULL,           -- long/short
+            module              TEXT NOT NULL,           -- A/B/C/D
+            source_candidate_id TEXT,                    -- review 里的 candidate id
+            source_rule_id      TEXT,                    -- 锚定 rule_id
+            level               REAL,                    -- kind=price 时有值
+            watch_kind          TEXT NOT NULL,           -- price | state
+            watch_text_cn       TEXT NOT NULL,           -- 照抄 WatchConditionDTO.text_cn
+            as_signal_rule_ids  TEXT NOT NULL DEFAULT '',
+            state               TEXT NOT NULL,           -- 见状态机
+            created_at          TEXT NOT NULL,
+            last_checked_at     TEXT,                    -- 上次 checker 跑过的时间
+            triggered_at        TEXT,                    -- 首次进入 pending_confirmation 的时间
+            triggered_price     REAL,                    -- 当时 last_close
+            triggered_reason_cn TEXT,                    -- checker 给的命中原因
+            promoted_plan_id    TEXT,                    -- Step 3 落计划后回填
+            dismissed_at        TEXT,
+            dismissed_reason    TEXT
+        );
+        CREATE INDEX IF NOT EXISTS idx_watch_state_created
+            ON watch_subscriptions(state, created_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_watch_symbol_state
+            ON watch_subscriptions(symbol, state);
+        """,
+    ),
+    (
+        14,
+        "014_plan_source_field",
+        """
+        -- 计划来源 (Step 3, 决策 2, 2026-08-09): trade_plans 加 source 字段,
+        -- 区分计划是用户手建 / 来自提醒 / 来自 agent (未来).
+        --
+        --   user           = 手动 (默认)
+        --   watch_promoted = 来自提醒命中 (Step 2 watch 触发, 用户确认后落计划)
+        --   agent          = 来自 agent (预留, 当前未启用)
+        --
+        -- 为什么要 source:
+        --   1) 让用户/审计能一眼看出"这条计划是被提醒带出来的还是我自己想做的"
+        --   2) Step 2 watch promoted_plan_id 反查时, 知道这条 plan 是从哪个 watch 来的
+        --   3) 未来按来源筛选报告 (eg "本月看提醒命中的计划胜率如何")
+        ALTER TABLE trade_plans ADD COLUMN source TEXT NOT NULL DEFAULT 'user';
+        CREATE INDEX IF NOT EXISTS idx_plans_source_state
+            ON trade_plans(source, state);
+        """,
+    ),
+    (
+        15,
+        "015_daily_opportunity_scan",
+        """
+        -- 今日机会雷达 (2026-08-10): 15:00 launchd 扫全自选, 落当日 verdict 快照.
+        -- dashboard 面板 + TopNav 红点读这张表, 不现场跑 scan (scan 5-10s, 轮询不可接受).
+        --
+        -- 一行 = 一个标的一天的 scan 结果. (scan_date, symbol) 唯一.
+        -- 当日重扫 = 先 DELETE 当日再 INSERT (upsert_scan_results 整体重写).
+        CREATE TABLE IF NOT EXISTS daily_opportunity_scan (
+            scan_date        TEXT NOT NULL,        -- YYYY-MM-DD (UTC date)
+            symbol           TEXT NOT NULL,
+            display_name     TEXT NOT NULL DEFAULT '',
+            verdict          TEXT NOT NULL,        -- actionable | blocked | waiting | none
+            verdict_cn       TEXT NOT NULL DEFAULT '',
+            best_scenario_cn TEXT,
+            best_state       TEXT,
+            reward_risk_ratio REAL,
+            reward_risk_computable INTEGER NOT NULL DEFAULT 0,
+            blocking_reasons TEXT NOT NULL DEFAULT '[]',  -- JSON array
+            missing_summary_cn TEXT NOT NULL DEFAULT '',
+            has_active_plan  INTEGER NOT NULL DEFAULT 0,
+            error            TEXT,
+            generated_at     TEXT NOT NULL,
+            PRIMARY KEY (scan_date, symbol)
+        );
+        CREATE INDEX IF NOT EXISTS idx_daily_scan_date_verdict
+            ON daily_opportunity_scan(scan_date, verdict);
+        """,
+    ),
+    # 两线并行期各自把新迁移占在 16 号（signal_alerts / newsfeed），且 ordinal 是
+    # schema_migrations 主键——任一侧留在 16 都会撞另一侧已有库的主键。名字才是
+    # 幂等键（按名跳过），故 16 空出：signal_alerts=18、newsfeed=19。
+    (
+        18,
+        "016_signal_alerts",
+        """
+        -- 今日自选信号卖点表 (2026-08-23): 看盘主页「今日自选信号」横幅的数据源.
+        -- 卖点行来自 extract_sell_signals (纯提取, 不做新判定);
+        -- 买点行继续写 daily_opportunity_scan (既有表), 读 API 合并两表.
+        -- 当日重扫 = 先 DELETE 当日再 INSERT (与 daily_opportunity_scan 同语义).
+        -- side='meta' 的 as_of 行记录本次扫描口径 (intraday | close), 是"今日是否扫过"的唯一判据.
+        CREATE TABLE IF NOT EXISTS signal_alerts (
+            scan_date      TEXT NOT NULL,        -- YYYY-MM-DD (UTC date)
+            symbol         TEXT NOT NULL,
+            display_name   TEXT NOT NULL DEFAULT '',
+            side           TEXT NOT NULL,        -- sell | unavailable | meta
+            tier           TEXT NOT NULL,        -- hard | warn | soft | meta
+            kind           TEXT NOT NULL,        -- structure_invalidated | exit_proxy |
+                                                  -- top_structure_confirmed | key_wave_black |
+                                                  -- color_black | data_unavailable | as_of
+            kind_cn        TEXT NOT NULL DEFAULT '',
+            title          TEXT NOT NULL DEFAULT '',
+            reason_cn      TEXT NOT NULL DEFAULT '',
+            is_new         INTEGER NOT NULL DEFAULT 0,
+            key_prices     TEXT NOT NULL DEFAULT '{}',  -- JSON object {name: price}
+            provenance     TEXT NOT NULL DEFAULT 'system',
+            available_date TEXT NOT NULL DEFAULT '',
+            error          TEXT,
+            generated_at   TEXT NOT NULL,
+            PRIMARY KEY (scan_date, symbol, side, kind)
+        );
+        CREATE INDEX IF NOT EXISTS idx_signal_alerts_date_side_tier
+            ON signal_alerts(scan_date, side, tier);
+        """,
+    ),
+    (
+        17,
+        "017_agent_sessions",
+        """
+        -- agent 会话层：多轮记忆（append-only，不含数量/金额）
+        CREATE TABLE IF NOT EXISTS agent_sessions (
+            session_id     TEXT PRIMARY KEY,
+            symbol         TEXT,                   -- NULL = 全局会话
+            title_cn       TEXT NOT NULL DEFAULT '',
+            created_at     TEXT NOT NULL,          -- UTC ISO
+            last_active_at TEXT NOT NULL
+        );
+        CREATE TABLE IF NOT EXISTS agent_messages (
+            message_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            session_id TEXT NOT NULL REFERENCES agent_sessions(session_id),
+            role       TEXT NOT NULL CHECK (role IN ('user','assistant')),
+            content    TEXT NOT NULL,
+            grounded   INTEGER NOT NULL DEFAULT 0,
+            meta_json  TEXT NOT NULL DEFAULT '{}',
+            created_at TEXT NOT NULL               -- UTC ISO
+        );
+        CREATE INDEX IF NOT EXISTS idx_agent_messages_session
+            ON agent_messages(session_id, message_id);
+        CREATE INDEX IF NOT EXISTS idx_agent_sessions_symbol
+            ON agent_sessions(symbol, last_active_at);
+        """,
+    ),
+    (
+        19,
+        "016_newsfeed",
+        """
+        -- 资讯流 (2026-08-27): 基本面消息检索与排序系统的存储.
+        -- 只追加: dedupe_key 唯一约束 + INSERT OR IGNORE, 重跑幂等.
+        -- LLM 打分是"补全"不是改写: importance IS NULL = 未评分, 按时间排序展示.
+        CREATE TABLE IF NOT EXISTS news_items (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            source TEXT NOT NULL,            -- eastmoney|sina|gnews|wechat|bilibili
+            source_name TEXT,                -- 公众号名 / UP主名 / 快讯频道名
+            dedupe_key TEXT NOT NULL UNIQUE,
+            url TEXT,
+            category TEXT,                   -- macro|risk|policy|industry|blogger
+            title TEXT NOT NULL,
+            summary TEXT,
+            content TEXT,                    -- 公众号正文 / B站字幕全文, 可 NULL
+            symbols TEXT,                    -- JSON array
+            direction TEXT,                  -- bullish|bearish|neutral
+            importance INTEGER,              -- 0-10, NULL=未评分
+            llm_note TEXT,
+            published_at TEXT NOT NULL,      -- ISO8601
+            ingested_at TEXT NOT NULL,
+            scored_at TEXT
+        );
+        CREATE INDEX IF NOT EXISTS idx_news_items_published ON news_items(published_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_news_items_category ON news_items(category);
+
+        CREATE TABLE IF NOT EXISTS news_digests (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            digest_date TEXT NOT NULL UNIQUE,   -- YYYY-MM-DD (本地)
+            payload_json TEXT NOT NULL,
+            created_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS news_watermarks (
+            source_key TEXT PRIMARY KEY,
+            cursor_value TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS news_runs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            started_at TEXT NOT NULL,
+            finished_at TEXT,
+            status TEXT NOT NULL,            -- running|ok|partial|failed
+            stats_json TEXT,
+            errors_json TEXT
+        );
+        """,
+    ),
+    (
+        20,
+        "020_portfolio",
+        """
+        -- 我的持仓（2026-09-04）：基金/ETF 持仓快照 + 赛道分组 + 分组结论。
+        -- 与 trade_plans 的边界：计划台账只记「状态机 + 价位」刻意不含金额；
+        -- 持仓台账反过来——只记「我实际拿着什么、值多少钱」，为持仓体检页
+        -- 提供数据。分组结论（verdict_cn）是已验证回测结论的大白话翻译，
+        -- 属展示/参考层（叙事标注），不参与任何信号判定。
+        CREATE TABLE IF NOT EXISTS portfolio_groups (
+            group_key     TEXT PRIMARY KEY,   -- us_index / us_tech_active / ...
+            name          TEXT NOT NULL,      -- 海外·纳指/标普指数
+            market        TEXT NOT NULL,      -- us / cn / hk / other
+            sort_order    INTEGER NOT NULL,
+            verdict_cn    TEXT NOT NULL,      -- 系统怎么看（大白话结论）
+            verdict_basis TEXT NOT NULL DEFAULT '',  -- 结论依据（实验/文档出处）
+            updated_at    TEXT NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS portfolio_holdings (
+            holding_id    TEXT PRIMARY KEY,   -- 稳定 slug（名称哈希），seed 幂等用
+            group_key     TEXT NOT NULL REFERENCES portfolio_groups(group_key),
+            name          TEXT NOT NULL,      -- 基金/ETF 全称
+            code          TEXT,               -- 基金代码（截图未含，待补；可空）
+            market_value  REAL NOT NULL,      -- 市值（元），快照口径
+            return_pct    REAL,               -- 持有收益率 %，可空
+            tags          TEXT NOT NULL DEFAULT '[]',  -- JSON 数组：QDII/定投/...
+            note          TEXT NOT NULL DEFAULT '',
+            as_of         TEXT NOT NULL,      -- 快照日期（截图日）
+            updated_at    TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_portfolio_holdings_group
+            ON portfolio_holdings(group_key);
+
+        -- 组合级元信息：数据来源说明 + 组合级提示（observations JSON 数组）
+        CREATE TABLE IF NOT EXISTS portfolio_meta (
+            key        TEXT PRIMARY KEY,      -- as_of / data_source_cn / observations
+            value      TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        );
+        """,
+    ),
+    (
+        21,
+        "021_portfolio_funddata",
+        """
+        -- 持仓基金数据层（2026-09-04 第二轮）：净值自动更新 + 季报穿透。
+        -- snapshot_nav/implied_shares/cost_value 三者一旦写定即视为锚点：
+        -- 之后每日市值 = implied_shares × 最新净值；收益 = 市值/cost_value - 1。
+        -- 锚点值不随后续刷新改动（错误修正走人工 SQL），保证口径可追溯。
+        CREATE TABLE IF NOT EXISTS portfolio_holdings_nav (
+            holding_id       TEXT PRIMARY KEY REFERENCES portfolio_holdings(holding_id),
+            code             TEXT NOT NULL,
+            snapshot_nav     REAL NOT NULL,     -- 快照日（或最近 ≤ as_of）单位净值
+            snapshot_nav_date TEXT NOT NULL,
+            implied_shares   REAL NOT NULL,     -- 反推份额 = 快照市值 / snapshot_nav
+            cost_value       REAL NOT NULL,     -- 推算投入成本 = 市值/(1+收益率)
+            latest_nav       REAL,
+            latest_nav_date  TEXT,
+            updated_at       TEXT NOT NULL
+        );
+
+        -- 季报穿透：每只基金最新一期季报的前十大持仓（只做叙事标注，不进信号）。
+        -- weight_pct = 占基金净值比例；market 由代码形态分类（A股6位/港股5位/美股字母）。
+        -- 刷新策略：每只基金只保留最新一期（重跑先 DELETE 该基金再 INSERT）。
+        CREATE TABLE IF NOT EXISTS portfolio_fund_top10 (
+            holding_id     TEXT NOT NULL REFERENCES portfolio_holdings(holding_id),
+            report_quarter TEXT NOT NULL,      -- 2026Q2
+            report_date    TEXT NOT NULL,      -- 2026-06-30
+            stock_code     TEXT NOT NULL,
+            stock_name     TEXT NOT NULL,
+            market         TEXT NOT NULL,      -- cn / hk / us / other
+            weight_pct     REAL NOT NULL,      -- 占净值 %
+            PRIMARY KEY (holding_id, stock_code)
+        );
+        CREATE INDEX IF NOT EXISTS idx_pf_top10_holding
+            ON portfolio_fund_top10(holding_id);
+        """,
+    ),
+    (
+        22,
+        "022_copilot_tables",
+        """
+        -- Agent 超级入口（plan-agent-superentry-v1）三张表。
+        -- 边界变更记录（2026-09-05 用户拍板，决策 D1）：
+        --   基金成交台账允许记录金额（用户口头报单，手动确认落库）；
+        --   仍不接券商、不自动下单；个股交易暂缓；trade_plans 仍不存数量金额。
+        CREATE TABLE IF NOT EXISTS fund_trades (
+            trade_id     TEXT PRIMARY KEY,  -- ft_{fund_code}_{trade_date}_{hash8}
+            fund_code    TEXT NOT NULL,
+            fund_name    TEXT NOT NULL,
+            side         TEXT NOT NULL CHECK(side IN ('buy','sell')),
+            amount       REAL NOT NULL,     -- 金额（元），报单口径
+            trade_date   TEXT NOT NULL,     -- YYYY-MM-DD
+            priced_nav   REAL,              -- 系统定价（净值/收盘口径），NULL=未定价
+            price_status TEXT NOT NULL DEFAULT 'pending',  -- pending|priced|failed
+            plan_id      TEXT,              -- 可选关联 trade_plans.plan_id
+            source       TEXT NOT NULL DEFAULT 'web',      -- agent|web
+            note         TEXT NOT NULL DEFAULT '',
+            created_at   TEXT NOT NULL,
+            updated_at   TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_fund_trades_code
+            ON fund_trades(fund_code, trade_date);
+
+        CREATE TABLE IF NOT EXISTS trade_reviews (
+            review_id   TEXT PRIMARY KEY,   -- rv_{kind}_{ref_key}
+            kind        TEXT NOT NULL,      -- trade | weekly
+            ref_key     TEXT NOT NULL,      -- trade_id 或 ISO 周（2026-W36）
+            payload     TEXT NOT NULL,      -- JSON：复盘卡结构化数据
+            narrative   TEXT NOT NULL DEFAULT '',  -- GLM 叙事，空=模板
+            grounded    INTEGER NOT NULL DEFAULT 0,
+            created_at  TEXT NOT NULL,
+            updated_at  TEXT NOT NULL,
+            UNIQUE(kind, ref_key)
+        );
+
+        CREATE TABLE IF NOT EXISTS recommendation_journal (
+            journal_id  TEXT PRIMARY KEY,   -- rj_{run_date}
+            run_date    TEXT NOT NULL UNIQUE,
+            payload     TEXT NOT NULL,      -- JSON：RecommendCardDTO 完整输出
+            outcome     TEXT,               -- JSON：T+N 对账结果（可空）
+            outcome_at  TEXT,
+            created_at  TEXT NOT NULL,
+            updated_at  TEXT NOT NULL
+        );
+        """,
+    ),
+    (
+        23,
+        "023_agent_observation_ledger",
+        """
+        -- Agent 观察存证账本（总任务书 §3.6 前向验证闭环统一机制）。
+        -- 两张表只增不改事实字段：agent_observations 记「当时说了什么」
+        -- （不可变；重试相同内容去重、内容变化另记修订并回链原记录），
+        -- agent_observation_outcomes 按 (observation, evaluation_version,
+        -- horizon) 一行一档，pending/ready/missing_data/not_applicable。
+        -- 旧 recommendation_journal / sentiment_signal_journal.json 原样保留
+        -- （兼容读），历史通过 observation.backfill_* 幂等迁入，不删除不覆盖。
+        CREATE TABLE IF NOT EXISTS agent_observations (
+            observation_id     TEXT PRIMARY KEY,  -- obs_{source_type}_{record_id}_{hash8}
+            schema_version     INTEGER NOT NULL DEFAULT 1,
+            source_type        TEXT NOT NULL,     -- recommendation | sentiment_day | …
+            source_record_id   TEXT NOT NULL,     -- 来源侧记录键（如 run_date）
+            scope              TEXT NOT NULL DEFAULT '',   -- 数据范围（如 a_share_etf / cn_sector）
+            strategy           TEXT NOT NULL DEFAULT '',   -- 适用策略（不跨场景混算）
+            instrument_id      TEXT,              -- 对象标的/板块；组级主张可空
+            event_group_id     TEXT NOT NULL,     -- 同一次展示批次（同批重试同 id）
+            observed_at        TEXT NOT NULL,     -- 事实所属交易日（run_date）
+            available_at       TEXT,              -- 底层数据可用时点（不可考=unknown）
+            emitted_at         TEXT NOT NULL,     -- 实际展示时点（不可考=unknown）
+            input_hash         TEXT NOT NULL DEFAULT 'unknown',
+            payload_hash       TEXT NOT NULL,     -- 内容摘要 sha256 前 16 位
+            payload            TEXT NOT NULL,     -- JSON：当时展示内容摘要
+            claim              TEXT NOT NULL DEFAULT '',
+            horizons           TEXT NOT NULL DEFAULT '[]',  -- JSON: [1,5,20] / [10,20]
+            baseline           TEXT,              -- 基准 id；NULL=无基准（不得标超额）
+            direction          TEXT,              -- up | down | NULL=无方向主张
+            layer              TEXT NOT NULL DEFAULT 'observation',
+            evaluation_kind    TEXT NOT NULL,     -- fwd_close_change_v1 等
+            evaluation_version TEXT NOT NULL,
+            rule_refs          TEXT NOT NULL DEFAULT '[]',
+            evidence_refs      TEXT NOT NULL DEFAULT '[]',
+            supersedes_id      TEXT,              -- 修订：指向被本条取代的原记录
+            superseded_by      TEXT,              -- 回链字段（唯一允许更新的事实外字段）
+            legacy             INTEGER NOT NULL DEFAULT 0,  -- 1=历史迁移，部分字段不可考
+            created_at         TEXT NOT NULL,
+            updated_at         TEXT NOT NULL
+        );
+        CREATE INDEX IF NOT EXISTS idx_agent_obs_source
+            ON agent_observations(source_type, source_record_id);
+        CREATE INDEX IF NOT EXISTS idx_agent_obs_group
+            ON agent_observations(event_group_id);
+
+        CREATE TABLE IF NOT EXISTS agent_observation_outcomes (
+            observation_id     TEXT NOT NULL,
+            evaluation_version TEXT NOT NULL,
+            horizon            INTEGER NOT NULL,  -- 天数（1/5/20/10…）
+            status             TEXT NOT NULL DEFAULT 'pending'
+                CHECK(status IN ('pending','ready','missing_data','not_applicable')),
+            base_price         REAL,              -- 起算价（信号日收盘）
+            base_available_at  TEXT,
+            due_date           TEXT,              -- 评价到期日（拿到行情才回填；不可伪造）
+            eval_date          TEXT,              -- 实际评价日（=到期日所在的行情日）
+            eval_price         REAL,
+            change_pct         REAL,              -- 带符号涨跌（百分点）
+            baseline_change_pct REAL,             -- 基准同期涨跌；NULL=无基准
+            hit                INTEGER,           -- 方向命中 1/0；无方向主张=NULL
+            note               TEXT NOT NULL DEFAULT '',
+            evaluated_at       TEXT,
+            PRIMARY KEY (observation_id, evaluation_version, horizon)
+        );
+        CREATE INDEX IF NOT EXISTS idx_agent_obs_outcomes_status
+            ON agent_observation_outcomes(status);
+        """,
+    ),
+    (
+        24,
+        "024_agent_observation_v12",
+        """
+        -- 观察账本 v1.2 返修增量（总控 00-review-contract-v1.2 §3/§4/§6）。
+        -- 不改 023 已部署结构，只加列/加表；旧字段兼容读取，旧行新列取默认值。
+        -- record_type：display_batch=完整展示批次（无评价期限、不进分母）；
+        --               claim=单对象可评价主张。023 旧行默认 claim。
+        ALTER TABLE agent_observations ADD COLUMN record_type TEXT NOT NULL DEFAULT 'claim';
+        -- 研究样本键：来源/策略/标的/观察日/主张类别方向/规则/评价配置 共同决定；
+        -- 纯措辞或展示修订不改变 sample_key，不增加研究样本（v1.2 §4）。
+        ALTER TABLE agent_observations ADD COLUMN sample_key TEXT;
+        -- 评价配置摘要（改方法=新版本，不给新方法借旧成绩）
+        ALTER TABLE agent_observations ADD COLUMN eval_config_hash TEXT;
+        -- 批次链：前一展示批次（A→B→A 保留完整顺序）
+        ALTER TABLE agent_observations ADD COLUMN previous_batch_id TEXT;
+        -- 批次成员（claim observation_id 列表 JSON；当前对象集合从当前批次读取）
+        ALTER TABLE agent_observations ADD COLUMN batch_members TEXT NOT NULL DEFAULT '[]';
+        -- 来源质量：ok=上线后真实前向 | legacy=历史迁入 | unknown=无法考证 |
+        --           available_rows=按行参考口径。legacy 不与真实前向样本合并。
+        ALTER TABLE agent_observations ADD COLUMN legacy_quality TEXT;
+        -- 展示状态：shown=实际展示 | not_shown=仅生成过程（不进前向统计）
+        ALTER TABLE agent_observations ADD COLUMN display_status TEXT NOT NULL DEFAULT 'shown';
+        CREATE INDEX IF NOT EXISTS idx_agent_obs_sample
+            ON agent_observations(sample_key);
+
+        -- 结果行补充：评价口径类型冗余（便查，不参与身份）
+        ALTER TABLE agent_observation_outcomes ADD COLUMN evaluation_kind TEXT NOT NULL DEFAULT '';
+
+        -- 旧推荐账本版本绑定（v1.2 §6：旧读接口必须返回与当前卡片版本匹配的成绩，
+        -- 先保全唯一旧原文和成绩，再更新兼容视图）：
+        --   payload_hash=当前卡片内容摘要；outcome_payload_hash=成绩归属的卡片摘要；
+        --   两者不等 → load_outcome 明确返回 None（无匹配结果），旧版本进 history 表。
+        ALTER TABLE recommendation_journal ADD COLUMN payload_hash TEXT;
+        ALTER TABLE recommendation_journal ADD COLUMN outcome_payload_hash TEXT;
+        CREATE TABLE IF NOT EXISTS recommendation_journal_history (
+            run_date     TEXT NOT NULL,
+            seq          INTEGER NOT NULL,
+            payload      TEXT NOT NULL,
+            outcome      TEXT,
+            payload_hash TEXT NOT NULL,
+            saved_at     TEXT NOT NULL,
+            PRIMARY KEY (run_date, seq)
+        );
+        """,
+    ),
+    (
+        25,
+        "025_agent_observation_refs_frozen",
+        """
+        -- 联合收尾（2026-09-08，P4/P7/P3）：引用与评价配置真正落库。
+        -- 不改 023/024 已部署结构，只加列；旧行新列取默认值（NULL/[]）。
+        -- 评价配置完整正文（不只摘要）：恢复「当时怎么算」所需全部信息。
+        ALTER TABLE agent_observations ADD COLUMN eval_config_json TEXT;
+        -- 冻结引用（写入时快照，之后材料更新不回写旧记录；v1.2 §1）：
+        --   rule_refs_frozen     = [RuleRef.to_dict()]（rule_id/version/config_hash）
+        --   evidence_refs_frozen = [EvidenceRef.to_dict()]（id/版本/来源材料哈希/兼容性）
+        --   data_refs_frozen     = [MarketDataRef.to_dict()]（数据引用含日期）
+        ALTER TABLE agent_observations ADD COLUMN rule_refs_frozen TEXT;
+        ALTER TABLE agent_observations ADD COLUMN evidence_refs_frozen TEXT;
+        ALTER TABLE agent_observations ADD COLUMN data_refs_frozen TEXT;
+        -- 首次实际展示时间（P3：生成未展示不算；真正展示时落时间，不覆盖）
+        ALTER TABLE agent_observations ADD COLUMN first_shown_at TEXT;
+
+        -- 023 旧行补来源质量标记：无 sample_key/引用冻结的旧记录按 unknown
+        -- 隔离（v1.2：无法考证不默认 ok，不与真实前向样本合并）。
+        UPDATE agent_observations
+           SET legacy_quality = 'unknown'
+         WHERE legacy_quality IS NULL AND sample_key IS NULL;
+        """,
+    ),
+    (
+        26,
+        "026_agent_observation_batch_members",
+        """
+        -- 09R2 成员可见性契约（总控定稿 2026-09-08）：三层事实分别保存——
+        -- 主张（全局首展/冻结依据）、展示批次（成员构成/修订链/批次首展）、
+        -- **批次成员展示**（某条主张在这一批内是否、何时真正展示）。
+        -- 只承担展示归属，不是第二套主张/成绩或交易账本。
+        CREATE TABLE IF NOT EXISTS agent_observation_batch_members (
+            batch_id        TEXT NOT NULL,   -- 展示批次（agent_observations.observation_id）
+            observation_id  TEXT NOT NULL,   -- 成员主张（agent_observations.observation_id）
+            member_key      TEXT NOT NULL DEFAULT '',
+                -- 完整业务成员身份 SHA256（含 claim_class；不含 input_hash/冻结引用）
+            member_identity_version TEXT NOT NULL DEFAULT 'v1',
+            business_member_json TEXT NOT NULL DEFAULT '{}',
+                -- 规范化业务成员原文（member_key 的输入，供审计/重排）
+            first_shown_at  TEXT,            -- 该成员在该批首次实际展示；未展示为空
+                -- 只允许空→真实时点，不覆盖首次值
+            visibility_quality TEXT NOT NULL DEFAULT 'known'
+                CHECK(visibility_quality IN ('known','unknown')),
+                -- known+空时间=明确尚未展示；unknown+空时间=旧资料无法证明
+            created_at      TEXT NOT NULL,
+            updated_at      TEXT NOT NULL,
+            PRIMARY KEY (batch_id, observation_id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_aobm_member
+            ON agent_observation_batch_members(member_key);
+        CREATE INDEX IF NOT EXISTS idx_aobm_obs
+            ON agent_observation_batch_members(observation_id);
+
+        -- 旧数据诚实回填（§6）：旧库只有「成员构成」（batch_members 列），
+        -- 没有逐批展示事实；claim_class 未落库，业务成员键无法唯一重建——
+        -- 一律回填为 unknown + 空 key + 空时间，不冒充 known，不补今天。
+        -- 旧批次因此不参与成员级可见集合（完整视图经主张全局状态照常可查，
+        -- 原值保留）；新写入的批次由应用层写 known 关系。
+        INSERT OR IGNORE INTO agent_observation_batch_members
+            (batch_id, observation_id, member_key, member_identity_version,
+             business_member_json, first_shown_at, visibility_quality,
+             created_at, updated_at)
+        SELECT b.observation_id, je.value, '', 'legacy', '{}', NULL, 'unknown',
+               b.created_at, b.created_at
+          FROM agent_observations b, json_each(b.batch_members) je
+         WHERE b.record_type = 'display_batch'
+           AND b.batch_members IS NOT NULL
+           AND je.value <> '';
+        """,
+    ),
+)
+
+
+@dataclass(frozen=True, slots=True)
+class WriteReport:
+    """写入结果，区分新增与幂等忽略。"""
+
+    inserted: int
+    ignored: int
+
+
+def connect(path: str | Path) -> sqlite3.Connection:
+    """打开连接并应用迁移。
+
+    - ``timeout=30.0``：并发写（同一进程多线程 + 跨进程）时，后到的连接会等 30 秒
+      而不是立即 ``database is locked``。5s 不够：生产库上 analyze 持久化
+      event_lifecycle_snapshots 的写事务可超 5s（实测 agent_chat 建会话曾撞锁）。
+    - ``PRAGMA journal_mode = WAL``：多读单写场景下读写不再互斥。看盘页一次
+      会拉 11+ 个标的，每个都要打开 lab.db，串行阻塞会卡到 60s+。WAL 让
+      读和写可以并发，唯一互斥的是「写 vs 写」，由 busy_timeout 兜底。
+    - 迁移必须 **只** 第一次开连接时跑一次（pragma journal_mode 是持久化的，
+      后续连接会复用），避免并发连接重复 apply 互相抢锁。
+    """
+    connection = sqlite3.connect(str(path), timeout=30.0)
+    connection.row_factory = sqlite3.Row
+    connection.execute("PRAGMA foreign_keys = ON")
+    connection.execute("PRAGMA journal_mode = WAL")
+    apply_migrations(connection)
+    return connection
+
+
+def _safe_add_column(
+    connection: sqlite3.Connection,
+    table: str,
+    column: str,
+    type_sql: str,
+) -> None:
+    """sqlite 不支持 ALTER TABLE ADD COLUMN IF NOT EXISTS；用 try/except 兜底。"""
+    try:
+        connection.execute(
+            f"ALTER TABLE {table} ADD COLUMN {column} {type_sql}"
+        )
+    except sqlite3.OperationalError as exc:
+        if "duplicate column" not in str(exc).lower():
+            raise
+
+
+def apply_migrations(connection: sqlite3.Connection) -> tuple[str, ...]:
+    """按序号顺序应用未执行的迁移。已应用的跳过（幂等）。"""
+    connection.execute(
+        """
+        CREATE TABLE IF NOT EXISTS schema_migrations (
+            ordinal INTEGER PRIMARY KEY,
+            name TEXT NOT NULL UNIQUE,
+            applied_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+        )
+        """
+    )
+    connection.commit()
+
+    applied = {
+        row["name"] for row in connection.execute("SELECT name FROM schema_migrations")
+    }
+    executed: list[str] = []
+    for ordinal, name, sql in sorted(MIGRATIONS):
+        if name in applied:
+            continue
+        # 003 包含 ALTER TABLE ADD COLUMN：sqlite 无 IF NOT EXISTS，
+        # 用 _safe_add_column 处理
+        if name == "003_opportunity_risk_split":
+            _safe_add_column(connection, "daily_assessments", "opportunity_stage", "TEXT")
+            _safe_add_column(connection, "daily_assessments", "risk_state", "TEXT")
+            connection.execute(
+                "CREATE INDEX IF NOT EXISTS idx_assessments_opp "
+                "ON daily_assessments(symbol, as_of, opportunity_stage)"
+            )
+        elif name == "004_event_lifecycle_columns":
+            _safe_add_column(connection, "signal_events", "valid_until", "TEXT")
+            _safe_add_column(connection, "signal_events", "lifecycle_id", "TEXT")
+            _safe_add_column(connection, "signal_events", "ended_event_id", "TEXT")
+        elif name == "008_watchlist_groups":
+            # 建分组表 + 给已有 watchlist_items 补 group_id 列。
+            # group_id 可空：NULL = 未分组（左栏归入「未分组」）。
+            # 不加外键约束：删组时把成员置 NULL 而非级联删除标的。
+            connection.executescript(sql)
+            _safe_add_column(connection, "watchlist_items", "group_id", "INTEGER")
+        else:
+            # executescript 会隐式提交，因此记账单独提交
+            connection.executescript(sql)
+        connection.execute(
+            "INSERT INTO schema_migrations (ordinal, name) VALUES (?, ?)",
+            (ordinal, name),
+        )
+        connection.commit()
+        executed.append(name)
+    return tuple(executed)
+
+
+def write_events(
+    connection: sqlite3.Connection,
+    events: Iterable[SignalEvent],
+    *,
+    run_id: str | None = None,
+) -> WriteReport:
+    """只追加写入事件。同 event_id 幂等忽略，绝不覆盖已有行。
+
+    Round 2 收尾修复：写入 valid_until / lifecycle_id / ended_event_id，
+    使数据库可还原状态的「有效/结束时间」，与内存事件、解释层、研究同一生命周期。
+    """
+    inserted = 0
+    attempted = 0
+    for event in events:
+        attempted += 1
+        cursor = connection.execute(
+            """
+            INSERT OR IGNORE INTO signal_events (
+                event_id, symbol, timeframe, event_date, available_date,
+                rule_id, rule_version, direction, severity, strength,
+                reason_cn, provenance, evidence_json, invalidation_json,
+                structure_id, run_id, valid_until, lifecycle_id, ended_event_id
+            ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+            """,
+            (
+                event.event_id,
+                event.symbol,
+                event.timeframe,
+                event.event_date.isoformat(),
+                event.available_date.isoformat(),
+                event.rule_id,
+                event.rule_version,
+                event.direction.value,
+                event.severity.value,
+                event.strength,
+                event.reason_cn,
+                event.provenance.value,
+                json.dumps(event.evidence, ensure_ascii=False, sort_keys=True, default=str),
+                json.dumps(event.invalidation, ensure_ascii=False, sort_keys=True, default=str),
+                event.structure_id,
+                run_id or event.run_id,
+                event.valid_until.isoformat() if event.valid_until is not None else None,
+                event.lifecycle_id,
+                event.ended_event_id,
+            ),
+        )
+        inserted += cursor.rowcount if cursor.rowcount > 0 else 0
+    connection.commit()
+    return WriteReport(inserted=inserted, ignored=attempted - inserted)
+
+
+def _expected_structure_transitions(
+    structure: StructureInstance,
+) -> list[tuple[str | None, str, date]]:
+    """根据结构日期字段推断完整状态链（按时间顺序）。
+
+    每个元素 ``(from_status, to_status, changed_on)``：
+      * ``None -> candidate``                  @ detected_date
+      * ``candidate -> confirmed``             @ confirmed_date     （已确认时）
+      * ``confirmed/candidate -> invalidated``  @ invalidated_date  （已失效时）
+
+    旧实现只比较「数据库已有状态」与「当前快照状态」，对一次性传入的最终结构
+    只会记录一次跳变，并因 ``confirmed_date or invalidated_date`` 的 or 链把
+    **确认日**误当作**失效日**，漏掉 candidate→confirmed 与 confirmed→invalidated。
+    这里改为从日期字段重建完整链路，每次运行都补全缺失转换（INSERT OR IGNORE 幂等）。
+    """
+    transitions: list[tuple[str | None, str, date]] = [
+        (None, "candidate", structure.detected_date),
+    ]
+    confirmed_date = structure.confirmed_date
+    is_confirmed = confirmed_date is not None and structure.status.value in (
+        "confirmed",
+        "active",
+        "invalidated",
+    )
+    if is_confirmed and confirmed_date is not None:
+        transitions.append(("candidate", "confirmed", confirmed_date))
+    if structure.invalidated_date is not None and structure.status.value == "invalidated":
+        prev = "confirmed" if is_confirmed else "candidate"
+        transitions.append((prev, "invalidated", structure.invalidated_date))
+    return transitions
+
+
+def write_structures(
+    connection: sqlite3.Connection,
+    structures: Iterable[StructureInstance],
+) -> WriteReport:
+    """写入结构。状态变化允许更新，但每次变化同步写生命周期事件。
+
+    Round 2 收尾修复：生命周期依据 ``detected_date`` / ``confirmed_date`` /
+    ``invalidated_date`` 重建完整转换链，每次运行幂等补全（不再漏记确认、不再把
+    确认日误当失效日）。
+    """
+    inserted = 0
+    updated = 0
+    for structure in structures:
+        existing = connection.execute(
+            "SELECT status FROM structure_instances WHERE structure_id = ?",
+            (structure.structure_id,),
+        ).fetchone()
+        payload = (
+            structure.structure_id,
+            structure.symbol,
+            structure.structure_type,
+            structure.side,
+            structure.detected_date.isoformat(),
+            structure.confirmed_date.isoformat() if structure.confirmed_date else None,
+            structure.c_price,
+            structure.neckline,
+            structure.reference_high,
+            structure.status.value,
+            structure.invalidated_date.isoformat() if structure.invalidated_date else None,
+            structure.invalidated_reason,
+            json.dumps(list(structure.source_event_ids), ensure_ascii=False),
+            structure.source_rule_id,
+            structure.provenance.value,
+        )
+        if existing is None:
+            connection.execute(
+                """
+                INSERT INTO structure_instances (
+                    structure_id, symbol, structure_type, side, detected_date,
+                    confirmed_date, c_price, neckline, reference_high, status,
+                    invalidated_date, invalidated_reason, source_event_ids,
+                    source_rule_id, provenance
+                ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                """,
+                payload,
+            )
+            inserted += 1
+        elif existing["status"] != structure.status.value:
+            connection.execute(
+                """
+                UPDATE structure_instances SET
+                    confirmed_date = ?, status = ?, invalidated_date = ?,
+                    invalidated_reason = ?
+                WHERE structure_id = ?
+                """,
+                (
+                    structure.confirmed_date.isoformat() if structure.confirmed_date else None,
+                    structure.status.value,
+                    structure.invalidated_date.isoformat()
+                    if structure.invalidated_date
+                    else None,
+                    structure.invalidated_reason,
+                    structure.structure_id,
+                ),
+            )
+            updated += 1
+        # 生命周期：依据日期字段重建完整转换链，幂等补全（INSERT OR IGNORE）。
+        # 放在 if/elif 之外，保证无论结构是新建还是更新，缺失转换都会被补上。
+        for from_status, to_status, changed_on in _expected_structure_transitions(
+            structure
+        ):
+            _record_lifecycle(
+                connection,
+                structure_id=structure.structure_id,
+                changed_on=changed_on,
+                from_status=from_status,
+                to_status=to_status,
+                reason=structure.invalidated_reason or "status_change",
+            )
+    connection.commit()
+    return WriteReport(inserted=inserted, ignored=updated)
+
+
+def _record_lifecycle(
+    connection: sqlite3.Connection,
+    *,
+    structure_id: str,
+    changed_on: date,
+    from_status: str | None,
+    to_status: str,
+    reason: str | None,
+) -> None:
+    connection.execute(
+        """
+        INSERT OR IGNORE INTO structure_lifecycle
+            (structure_id, changed_on, from_status, to_status, reason)
+        VALUES (?,?,?,?,?)
+        """,
+        (structure_id, changed_on.isoformat(), from_status, to_status, reason),
+    )
+
+
+def write_assessment(
+    connection: sqlite3.Connection,
+    assessment: DailyAssessment,
+) -> None:
+    """写入每日解释快照（同一天重复运行覆盖为同值）。
+
+    Round 2 修复 4：同时写入 opportunity_stage 与 risk_state 独立字段。
+    旧 stage 字段保留作为兼容。
+    """
+    connection.execute(
+        """
+        INSERT OR REPLACE INTO daily_assessments (
+            symbol, as_of, stage, color, dimensions_json,
+            stage_change_reason_cn, primary_structure_id, b1_price,
+            data_status, ruleset_version,
+            opportunity_stage, risk_state
+        ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
+        """,
+        (
+            assessment.symbol,
+            assessment.as_of.isoformat(),
+            assessment.stage.value,
+            assessment.color.value,
+            json.dumps(assessment.dimensions, ensure_ascii=False, sort_keys=True),
+            assessment.stage_change_reason_cn,
+            assessment.primary_structure.structure_id
+            if assessment.primary_structure
+            else None,
+            assessment.b1_price,
+            assessment.data_status,
+            assessment.rule_ruleset_version,
+            assessment.opportunity_stage.value,
+            assessment.risk_state.value,
+        ),
+    )
+    connection.commit()
+
+
+def record_run(
+    connection: sqlite3.Connection,
+    *,
+    run_id: str,
+    symbol: str,
+    started_at: str,
+    ruleset_version: str,
+    provider: str | None,
+    last_data_date: date | None,
+    event_count: int,
+) -> None:
+    """记录运行元数据，使结果可复现追溯。"""
+    connection.execute(
+        """
+        INSERT OR REPLACE INTO analysis_runs (
+            run_id, symbol, started_at, ruleset_version,
+            provider, last_data_date, event_count
+        ) VALUES (?,?,?,?,?,?,?)
+        """,
+        (
+            run_id,
+            symbol,
+            started_at,
+            ruleset_version,
+            provider,
+            last_data_date.isoformat() if last_data_date else None,
+            event_count,
+        ),
+    )
+    connection.commit()
+
+
+def count_events(connection: sqlite3.Connection, symbol: str | None = None) -> int:
+    if symbol is None:
+        row = connection.execute("SELECT COUNT(*) AS n FROM signal_events").fetchone()
+    else:
+        row = connection.execute(
+            "SELECT COUNT(*) AS n FROM signal_events WHERE symbol = ?", (symbol,)
+        ).fetchone()
+    return int(row["n"])
+
+
+# ========================================================================
+# Round 3 修复 D3：事件生命周期快照
+# -----------------------------------------------------------------------
+# signal_events 保持不可变（身份字段：发生日、规则版本、证据、结构ID），
+# 用 ``INSERT OR IGNORE`` 幂等忽略。新增 ``event_lifecycle_snapshots`` 表
+# 记录每次分析时算出的 valid_until / lifecycle_id / ended_event_id。
+# 这样后续增量重跑（更长行情下同一 event_id 的 valid_until 可能延长）
+# 不会覆盖旧记录，而是新增一条快照。``read_latest_lifecycle`` 按
+# as_of 降序取最新结果。
+# ========================================================================
+
+
+@dataclass(frozen=True, slots=True)
+class LifecycleSnapshot:
+    """事件在某个 as_of 下的生命周期快照。"""
+
+    event_id: str
+    run_id: str
+    as_of: str
+    valid_until: str | None
+    lifecycle_id: str | None
+    ended_event_id: str | None
+    recorded_at: str
+
+
+def _read_existing_event_identity(
+    connection: sqlite3.Connection,
+    event: SignalEvent,
+) -> dict[str, object] | None:
+    """读取数据库中已存在事件的**身份字段**（不可变字段）。
+
+    身份字段是「事件是什么」的稳定语义，不包括观测时刻的原始数值（close、
+    ema20 等）——后者是 evidence 的快照，随数据源 / 重算口径变化属于正常
+    现象，归入 ``event_lifecycle_snapshots`` 表记录演变。
+    """
+    row = connection.execute(
+        """
+        SELECT event_date, available_date, rule_id, rule_version, structure_id,
+               symbol, timeframe
+        FROM signal_events WHERE event_id = ?
+        """,
+        (event.event_id,),
+    ).fetchone()
+    if row is None:
+        return None
+    return {
+        "event_date": row["event_date"],
+        "available_date": row["available_date"],
+        "rule_id": row["rule_id"],
+        "rule_version": row["rule_version"],
+        "structure_id": row["structure_id"],
+        "symbol": row["symbol"],
+        "timeframe": row["timeframe"],
+    }
+
+
+class EventIdentityConflictError(RuntimeError):
+    """同一 event_id 的身份字段不一致。
+
+    身份字段是历史事实，不应改变。如果出现冲突说明上游规则或事件生成
+    逻辑发生了非预期变更（如规则版本错误、structure_id 错误绑定），
+    必须显式报错，不得静默覆盖。
+    """
+
+
+def _assert_event_identity(
+    connection: sqlite3.Connection,
+    event: SignalEvent,
+) -> None:
+    existing = _read_existing_event_identity(connection, event)
+    if existing is None:
+        return
+    new_values = {
+        "event_date": event.event_date.isoformat(),
+        "available_date": event.available_date.isoformat(),
+        "rule_id": event.rule_id,
+        "rule_version": event.rule_version,
+        "structure_id": event.structure_id,
+        "symbol": event.symbol,
+        "timeframe": event.timeframe,
+    }
+    for key, expected in existing.items():
+        if new_values[key] != expected:
+            raise EventIdentityConflictError(
+                f"事件 {event.event_id} 的身份字段 {key} 不一致："
+                f"已存={expected!r}，新值={new_values[key]!r}。"
+                "身份字段是不可变历史事实，必须显式处理，不得静默覆盖。"
+            )
+
+
+def write_event_lifecycles(
+    connection: sqlite3.Connection,
+    events: Iterable[SignalEvent],
+    *,
+    run_id: str | None,
+    as_of: date,
+) -> tuple[int, int]:
+    """写入事件生命周期快照。
+
+    与 ``write_events`` 不同：
+      * 本函数是**追加**写入：同一 ``(event_id, run_id, as_of)`` 主键下
+        重复写入用 ``INSERT OR REPLACE`` 覆盖（同一次分析内重新跑覆盖为同值）。
+      * **不修改 signal_events**：身份字段保持不可变。
+      * 如果 signal_events 里已有该 event_id 但身份字段不同 → **报错**，
+        不允许任何形式覆盖（保留审计线索）。
+
+    返回 ``(inserted, identity_conflicts)``。
+    """
+    from datetime import UTC, datetime
+
+    if run_id is None:
+        raise ValueError("write_event_lifecycles 必须显式传入 run_id")
+
+    inserted = 0
+    recorded_at = datetime.now(UTC).isoformat()
+    as_of_text = as_of.isoformat()
+
+    for event in events:
+        _assert_event_identity(connection, event)
+        cursor = connection.execute(
+            """
+            INSERT OR REPLACE INTO event_lifecycle_snapshots (
+                event_id, run_id, as_of, valid_until,
+                lifecycle_id, ended_event_id, recorded_at
+            ) VALUES (?,?,?,?,?,?,?)
+            """,
+            (
+                event.event_id,
+                run_id,
+                as_of_text,
+                event.valid_until.isoformat() if event.valid_until is not None else None,
+                event.lifecycle_id,
+                event.ended_event_id,
+                recorded_at,
+            ),
+        )
+        inserted += cursor.rowcount if cursor.rowcount > 0 else 0
+    connection.commit()
+    return inserted, 0
+
+
+def read_latest_lifecycle(
+    connection: sqlite3.Connection,
+    event_id: str,
+) -> LifecycleSnapshot | None:
+    """读取该 event_id 的**最新**生命周期快照（as_of 降序，相同则取 recorded_at 较晚者）。
+
+    用于增量回放场景：同一事件在多次分析中可能有不同快照，本函数返回
+    「最近一次分析认为它什么时候结束」。如果该事件从未写入快照则返回 None。
+    """
+    row = connection.execute(
+        """
+        SELECT event_id, run_id, as_of, valid_until, lifecycle_id,
+               ended_event_id, recorded_at
+        FROM event_lifecycle_snapshots
+        WHERE event_id = ?
+        ORDER BY as_of DESC, recorded_at DESC
+        LIMIT 1
+        """,
+        (event_id,),
+    ).fetchone()
+    if row is None:
+        return None
+    return LifecycleSnapshot(
+        event_id=row["event_id"],
+        run_id=row["run_id"],
+        as_of=row["as_of"],
+        valid_until=row["valid_until"],
+        lifecycle_id=row["lifecycle_id"],
+        ended_event_id=row["ended_event_id"],
+        recorded_at=row["recorded_at"],
+    )
+
+
+def read_lifecycle_at_as_of(
+    connection: sqlite3.Connection,
+    event_id: str,
+    as_of: date,
+) -> LifecycleSnapshot | None:
+    """读取该 event_id 在指定 as_of 时的生命周期快照。"""
+    row = connection.execute(
+        """
+        SELECT event_id, run_id, as_of, valid_until, lifecycle_id,
+               ended_event_id, recorded_at
+        FROM event_lifecycle_snapshots
+        WHERE event_id = ? AND as_of = ?
+        ORDER BY recorded_at DESC
+        LIMIT 1
+        """,
+        (event_id, as_of.isoformat()),
+    ).fetchone()
+    if row is None:
+        return None
+    return LifecycleSnapshot(
+        event_id=row["event_id"],
+        run_id=row["run_id"],
+        as_of=row["as_of"],
+        valid_until=row["valid_until"],
+        lifecycle_id=row["lifecycle_id"],
+        ended_event_id=row["ended_event_id"],
+        recorded_at=row["recorded_at"],
+    )
+
+
+__all__ = [
+    "EventIdentityConflictError",
+    "LifecycleSnapshot",
+    "MIGRATIONS",
+    "WriteReport",
+    "apply_migrations",
+    "connect",
+    "count_events",
+    "read_latest_lifecycle",
+    "read_lifecycle_at_as_of",
+    "record_run",
+    "write_assessment",
+    "write_event_lifecycles",
+    "write_events",
+    "write_structures",
+]

@@ -1,0 +1,53 @@
+{
+  "as_of": "2026-09-08",
+  "research_end": "2026-06-30",
+  "research_end_weekday": "Tuesday",
+  "source_week": [2026, 27],
+  "finding": "2026-06-30 is inside an unfinished calendar week, so its last available breadth observation is a terminal candidate rather than a confirmed completed-week signal.",
+  "counts": {
+    "completed_week_usable_records": 588,
+    "unconfirmed_partial_week_candidates": 1,
+    "stored_records_per_breadth_account": 589
+  },
+  "terminal_record": {
+    "signal_date": "2026-06-30",
+    "breadth": 28.3897,
+    "target": "1",
+    "stored_reason": "weekly_breadth_target",
+    "stored_eligible_date": "2026-07-06",
+    "status": "unconfirmed_partial_week",
+    "candidate_only": true,
+    "eligible_date_is_hypothetical": true,
+    "executable_in_window": false,
+    "economic_effect_in_first12": false
+  },
+  "accounts": [
+    {
+      "account_id": "sh510300-breadth_three_tier-fee0.001",
+      "signals_sha256": "b29be1c9893638e893e0d9e40c92b47d013d1d2c0722d6c699f9e3b425d65213",
+      "rejected_sha256": "49ffcdbabe92b977415204487b6a1f918c4a5dc583c34f591e2150c28f367b26",
+      "stored_terminal_disposition": "signal_awaiting_next_open_after_period_end"
+    },
+    {
+      "account_id": "sh510300-breadth_three_tier-fee0.002",
+      "signals_sha256": "05b47a6da5c300d76b0da73a2b64bed92dd40fed6719274f08e6e989b58ace65",
+      "rejected_sha256": "b872d36a7920b6795fd0b8696e48a91deb76e3ce4f206cfbb15a1c8af8bc68a3",
+      "stored_terminal_disposition": "signal_awaiting_next_open_after_period_end"
+    },
+    {
+      "account_id": "sz159915-breadth_three_tier-fee0.001",
+      "signals_sha256": "e628d25e1d0cd0c18b4a3e6992ea8243ac1b2d942e1658ddbf874d30a030bb74",
+      "rejected_sha256": "759eb7ace3305e75c832b9b576c5508ebea5f26ec7908767a667027eae514a2b",
+      "stored_terminal_disposition": "signal_awaiting_next_open_after_period_end"
+    },
+    {
+      "account_id": "sz159915-breadth_three_tier-fee0.002",
+      "signals_sha256": "3b8d9c6f49625a6aac31ee842a921d502a9590a17c21ac52cb5fe848d710d271",
+      "rejected_sha256": "e9a3f804951383ab6e1c7914002ff49c343149acb78a7be9d870994bd77f94cb",
+      "stored_terminal_disposition": "signal_awaiting_next_open_after_period_end"
+    }
+  ],
+  "prepared_signals_sha256": "190aab1eb3551c428334de4e8d63baf1da68d3aa01c08fc7faf0fa9b2f556cc8",
+  "scope": "Qualification overlay only. Original runner, inputs, prepared signals, accounts, returns, trades, and simple-breakout counts remain unchanged.",
+  "future_fix": "A new batch runner should type an unfinished terminal week as a candidate before serialization rather than as weekly_breadth_target. Do not retrofit this locked run."
+}

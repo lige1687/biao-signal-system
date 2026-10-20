@@ -1,0 +1,115 @@
+[
+  {
+    "role": "user",
+    "content": "510300 最近怎么看？先说你的判断，再讲机会和风险，以及现有依据是否够用。",
+    "grounded": true,
+    "created_at": "2026-09-14T10:59:05+00:00",
+    "message_id": 1,
+    "question_id": 1,
+    "resolved_symbol": null,
+    "evidence_card": null,
+    "system_generated": false,
+    "message_kind": "",
+    "plan_artifact": null,
+    "plan_draft": null,
+    "next_steps": []
+  },
+  {
+    "role": "assistant",
+    "content": "【510300.SS（510300.SS）】数据日 2026-09-04。AI 讲解暂时不可用，以下是系统直接给出的数据事实。\n当前状态：黑色 / 关键风险 / 风险关注 有效顶部+黑色（针对你问的技术面问题）。\n机会：当前没有系统定义的买点候选——如实说明，不是遗漏。\n风险：目前被系统规则挡住（1.无法明确当前趋势类型、7.多周期杂乱）。\n参考：成交最密集的价位在 4.9087（筹码分布代理，不是真实持仓成本）。\n历史依据：暂不能确定是否适用——本标的缺少与这次问题匹配的历史统计，详细原因见下方依据卡。\n接下来可以：说说你想用哪种打法讨论（趋势回调 / 突破 / 反转），或对这个标的发起一次历史补测。",
+    "grounded": false,
+    "created_at": "2026-09-14T11:02:05+00:00",
+    "message_id": 2,
+    "question_id": 1,
+    "resolved_symbol": "510300.SS",
+    "evidence_card": {
+      "facts": {
+        "symbol": "510300.SS",
+        "as_of": "2026-09-04",
+        "verdict_cn": "当前无机会",
+        "buy_point_candidate_n": 0
+      },
+      "history_and_scope": {
+        "winrate_evidence": {
+          "schema_version": "provenance/1.2",
+          "id": "module_winrate:510300.SS",
+          "source_path": "docs/experiments/module_winrate.json",
+          "source_hash": "833435eb27d054013c82563a65432900e11b030088161177020d7264799e590e",
+          "source_version": "1",
+          "status": "unverified",
+          "window": "（表内未保存数据窗口，仅 all/recent 两档）",
+          "statistic_kind": "trade_r_stats",
+          "strategy_scope": [
+            "technical_execution"
+          ],
+          "limitations": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿",
+          "compatibility": "unknown",
+          "evidence_id": "module_winrate:510300.SS",
+          "source": "docs/experiments/module_winrate.json",
+          "strategies": [
+            "technical_execution"
+          ],
+          "note": "现有 module_winrate 表按 symbol+entry_date 先去重再分模块：同日同标的的不同模块结果互相覆盖，取决于输入顺序（总控探针 O 已复现）；且条目未保存source_run_ids、入场/退出变体、规则版本、费用与数据窗口——配置不全，不得标 exact，引用一律按 unknown/reference 处理，重新生成方法由总控定稿"
+        },
+        "comparison_config": {
+          "symbol": "510300.SS",
+          "module": {
+            "value": "A",
+            "source": "engine_default"
+          },
+          "exit_variant": {
+            "value": "a6_1_costbasis",
+            "source": "engine_default"
+          },
+          "entry_variant": {
+            "value": null,
+            "source": "engine_default"
+          },
+          "rr_min": {
+            "value": 3.0,
+            "source": "engine_default"
+          },
+          "fee_label": {
+            "value": "standard",
+            "source": "engine_default"
+          },
+          "ruleset_sha256": {
+            "value": "feb2c51dce704c95eea54fe3a3b6df73b6abf66f1c3e1618c99806ed5c1651c5",
+            "source": "current_active_ledger"
+          },
+          "window": null,
+          "window_state": "unverified",
+          "note_cn": "配置来源=message/inherited:question:N/adopted:run:ID/engine_default；window 为 null 表示窗口维度尚未核实，不默认与旧运行相同，也不进入「支持本问题」材料"
+        },
+        "matched_runs": [],
+        "supporting_runs": [],
+        "note_cn": "旧胜率表缺入场退出变体/规则版本/来源运行信息（兼容性 unknown），只能描述该表自己的历史结果；本标的补测结果按完整方法逐项比较，只有 exact 支持本问题——换退出/入场/规则/费用都不借"
+      },
+      "explanations": {
+        "kinds": [
+          "news",
+          "major_events",
+          "sentiment",
+          "experience"
+        ],
+        "note_cn": "解释/假设，不参与技术判定、不是统计结论"
+      },
+      "pending_conditions": []
+    },
+    "system_generated": false,
+    "message_kind": "",
+    "plan_artifact": null,
+    "plan_draft": null,
+    "next_steps": [
+      {
+        "kind": "expand_evidence",
+        "label_cn": "查看依据详情"
+      },
+      {
+        "kind": "prepare_backtest",
+        "label_cn": "准备补测",
+        "note_cn": "这个标的还没有与本次问题完全匹配的历史测试结果"
+      }
+    ]
+  }
+]

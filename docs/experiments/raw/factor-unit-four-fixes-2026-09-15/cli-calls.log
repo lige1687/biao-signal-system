@@ -1,0 +1,71 @@
+# CLI 调用台账（本轮手工调用；pytest集成测试内的子进程调用另计）
+## 2026-09-15 21:04:29 build_contracts.py
+/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/four-fixes-synthetic-positive-contract.json
+/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/four-fixes-synthetic-negative-contract.json
+exit=0
+## 2026-09-15 21:04:44 正式合成正例（预期exit 0）
+cmd: python3 scripts/check_factor_unit_readiness.py --contract docs/experiments/raw/factor-unit-four-fixes-2026-09-15/four-fixes-synthetic-positive-contract.json --out docs/experiments/raw/factor-unit-four-fixes-2026-09-15/final-synthetic-positive-01
+NOTE: 510300: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格
+NOTE: 159915: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格
+NOTE: SPY: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格
+NOTE: QQQ: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格
+NOTE: 存在 pending_controller_freeze 目标（510300, 159915, SPY, QQQ）：资格齐备待主控冻结协议；不自动启动执行
+EXIT 0: 本轮声明用途资格齐备（不自动启动B1）
+exit=0
+## 2026-09-15 21:04:45 正式合成负例-必需键哈希清零（预期exit 3）
+cmd: python3 scripts/check_factor_unit_readiness.py --contract docs/experiments/raw/factor-unit-four-fixes-2026-09-15/four-fixes-synthetic-negative-contract.json --out docs/experiments/raw/factor-unit-four-fixes-2026-09-15/final-synthetic-negative-01
+合同/身份错误: 必需代码键哈希不符 src/lei_signal/rules/dual_ma.py
+exit=3
+## 2026-09-15 21:06:46 make_supplement.py（旧真实终包补件，只读原件）
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/make_supplement.py", line 131, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/make_supplement.py", line 85, in main
+    **{name: {'from': path, 'sha256': digest}
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/make_supplement.py", line 88, in <dictcomp>
+    for name in [ev_names[p]]},
+                          ^
+NameError: cannot access free variable 'p' where it is not associated with a value in enclosing scope
+exit=1
+## 2026-09-15 21:06:46 restore_drill.py（临时目录恢复演练，不调用真实运行入口）
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/restore_drill.py", line 86, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/restore_drill.py", line 27, in main
+    mapping = json.loads((SUPP / 'mapping.json').read_text())
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py", line 1058, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.7_1/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py", line 1044, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/supplement/mapping.json'
+exit=1
+## 2026-09-15 21:07:14 make_supplement.py 纠错后重跑（半成品目录已删，排他重建）
+supplement written: /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/supplement
+  evidence ok: /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-b0-concentrated-fix-2026-09-15/real-evidence.json == 934c84d6f5cebf68…（与旧合同引用一致）
+exit=0
+## 2026-09-15 21:07:14 restore_drill.py 重跑
+OK: 旧包已列文件 22 项身份一致
+OK: 4 产品证据补件哈希均与旧合同引用一致
+OK: 外部输入依赖 6 项身份一致
+OK: mapping.json 3 项记录与补件一致
+恢复演练：通过 —— 恢复级别=「代码/证据包+声明的外部输入」，未调用真实运行入口，仓库原件零改动
+exit=0
+## 2026-09-15 21:10:00 纠错1批：ruff B007/F401 修复后重建合同与正式包
+/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/four-fixes-synthetic-positive-contract.json
+/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-unit-four-fixes-2026-09-15/four-fixes-synthetic-negative-contract.json
+exit=0
+NOTE: 510300: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格
+NOTE: 159915: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格
+NOTE: SPY: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格
+NOTE: QQQ: available_at 未知/未证（point_in_time_verified=false）→ 仅事后描述资格，不授予预测资格
+NOTE: 存在 pending_controller_freeze 目标（510300, 159915, SPY, QQQ）：资格齐备待主控冻结协议；不自动启动执行
+EXIT 0: 本轮声明用途资格齐备（不自动启动B1）
+exit=0
+合同/身份错误: 必需代码键哈希不符 src/lei_signal/rules/dual_ma.py
+exit=3

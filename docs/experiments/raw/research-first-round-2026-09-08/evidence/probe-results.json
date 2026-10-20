@@ -1,0 +1,119 @@
+{
+  "module_dedup_order": {
+    "orders": [
+      [
+        "A",
+        "B"
+      ],
+      [
+        "B",
+        "A"
+      ]
+    ],
+    "keys": [
+      [
+        "FIXTURE|A"
+      ],
+      [
+        "FIXTURE|B"
+      ]
+    ],
+    "same_output": false,
+    "synthetic_only": true
+  },
+  "discussion_winrate_shape": {
+    "value": {
+      "winrate_cn": "A模块历史：1笔、胜率100%、平均每笔+2倍风险金（样本过小，仅供参考）",
+      "modules": {
+        "A": {
+          "winrate_cn": "1笔、胜率100%、平均每笔+2倍风险金（样本过小，仅供参考）",
+          "n": 1,
+          "win_rate": 1.0,
+          "avg_r": 2.0
+        }
+      },
+      "note_cn": "历史胜率标注（回测统计，样本有限，叙事参考不构成判定）"
+    },
+    "required_match_fields_missing": [
+      "entry_variant",
+      "exit_variant",
+      "condition_definition",
+      "holding_horizon",
+      "rule_version",
+      "data_window",
+      "fees",
+      "source_run_ids",
+      "compatibility"
+    ]
+  },
+  "internal_missing_price": {
+    "symbol": "FIXTURE",
+    "name": "合成测试",
+    "as_of": "2026-07-31",
+    "close": 140.0,
+    "color": "green",
+    "ma200_gap": null,
+    "dd2y": 0.0,
+    "tier": null,
+    "deep20": null,
+    "bottom_zone": null,
+    "b200": null,
+    "state_status": "degraded",
+    "window_note": "200日窗口缺 1 个收盘，年线/距年线不可判"
+  },
+  "outdated_calendar_weekend": {
+    "2026-09-12T12:00:00": {
+      "health": "unknown",
+      "reason": "参考日历截至 2026-08-03，未覆盖发布截止已过的候选交易日 2026-09-11（可能漏列新交易日，不能证明当前）",
+      "reference_lag_trading_days": 0,
+      "calendar_ref": {
+        "market": "cn",
+        "timezone": "Asia/Shanghai",
+        "source": "a_share_klines.parquet（价格日期参考）",
+        "content_digest": "4596ee15024aa4a9",
+        "coverage_start": "2026-07-01",
+        "coverage_end": "2026-08-03",
+        "n_days": 24,
+        "authority": "price_dates_reference"
+      },
+      "as_of_cutoff": null,
+      "completeness": "unknown",
+      "lag_trading_days": 0
+    },
+    "2026-09-14T08:00:00": {
+      "health": "unknown",
+      "reason": "参考日历截至 2026-08-03，未覆盖发布截止已过的候选交易日 2026-09-11（可能漏列新交易日，不能证明当前）",
+      "reference_lag_trading_days": 0,
+      "calendar_ref": {
+        "market": "cn",
+        "timezone": "Asia/Shanghai",
+        "source": "a_share_klines.parquet（价格日期参考）",
+        "content_digest": "4596ee15024aa4a9",
+        "coverage_start": "2026-07-01",
+        "coverage_end": "2026-08-03",
+        "n_days": 24,
+        "authority": "price_dates_reference"
+      },
+      "as_of_cutoff": null,
+      "completeness": "unknown",
+      "lag_trading_days": 0
+    }
+  },
+  "q1": {
+    "probe_error": "NameError: name 'cur' is not defined",
+    "qualification": "Intermediate source snapshot; no product verdict."
+  },
+  "q3": {
+    "probe_error": "NameError: name 'cur' is not defined",
+    "qualification": "Intermediate source snapshot; no product verdict."
+  },
+  "q4": {
+    "probe_error": "NameError: name 'cur' is not defined",
+    "qualification": "Intermediate source snapshot; no product verdict."
+  },
+  "assertions": {
+    "missing_price_preserves_window": true,
+    "old_calendar_not_fresh": true,
+    "order_problem_reproduced": true
+  }
+}

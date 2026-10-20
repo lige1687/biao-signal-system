@@ -1,0 +1,62 @@
+{
+  "observed_at": "2026-09-10T09:30:28.651202+00:00",
+  "reviewed_at": "2026-09-10T09:31:05.019016+00:00",
+  "observation_record": "docs/research/observations/breadth-v1/records/2026-09-10T093028.651202_0000-a0a59604.json",
+  "changed_sources": [
+    "source-01",
+    "source-02",
+    "source-03"
+  ],
+  "facts": {
+    "raw_columns": [
+      "symbol",
+      "date",
+      "close"
+    ],
+    "raw_rows": 4064496,
+    "raw_latest_date": "2026-09-10",
+    "raw_first_date": "2023-01-12",
+    "raw_symbol_count": 5215,
+    "member_latest_date_counts": {
+      "2026-08-28": 3,
+      "2026-08-31": 2,
+      "2026-09-03": 2,
+      "2026-09-04": 1,
+      "2026-09-07": 1,
+      "2026-09-08": 3,
+      "2026-09-09": 2,
+      "2026-09-10": 5201
+    },
+    "code_date": "2026-09-10",
+    "code_count": 5561,
+    "snapshot": {
+      "as_of": "2026-09-10 17:00",
+      "date": "2026-09-10",
+      "ma20_pct": 45.08448540706605,
+      "ma50_pct": 58.95364493171764,
+      "ma200_pct": 25.47114824169419,
+      "eligible": 5208,
+      "up": 955,
+      "down": 4512,
+      "flat": 94,
+      "total": 5561,
+      "up_pct": 17.17317029311275,
+      "adv_dec_ratio": 0.2116578014184397,
+      "limit_up": 43,
+      "limit_down": 21,
+      "source": "腾讯日K线(本机收盘后预计算)"
+    }
+  },
+  "qualification": {
+    "common_200_denominator": "not provided; daily snapshot still uses previous audited schema, no shared denominator/coverage evidence",
+    "historical_membership": "current dated code list only; no historical effective/arrival chain",
+    "etf_nominal_prices_and_actions": "all previously audited ETF and action source fingerprints unchanged; existing gaps remain",
+    "availability": "actual read time recorded; snapshot as_of is source claim, not independently verified acquisition time",
+    "stage": "input_observation_only",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "Daily raw inputs refreshed; no matching complete input set. No actionable new qualification evidence; remain quiet.",
+  "scope": "read-only local inspection, no fetch, backtest, parameter or OKR change"
+}

@@ -1,0 +1,16 @@
+{
+  "diagnostic_of": "S02 same existing synthetic frame, no new case",
+  "checked_at_utc": "2026-09-08T05:29:49.541268+00:00",
+  "plan_sha256": "9071fafe136afbe5646f1694022eeff4e5f145f8d5c26d6c7401b02a3dbba41d",
+  "script_sha256": "5dfefd91fff622c9f17a68b0f972b43d7a6412a06d99c6b81a4cb995b2330c2e",
+  "input_sha256": "77fe45f939dc3b5ff4a7283a482f3831f79289841e39e80c2f913e3461274f04",
+  "first_valid_clock3_position": 119,
+  "first_valid_clock3_date": "2020-06-16",
+  "age_at_first_valid_clock3": 15,
+  "watch_position": 230,
+  "watch_date": "2020-11-18",
+  "age_at_watch": 126,
+  "actual_clock3_bars_until_watch": 112,
+  "initial_insufficient_rows": 119,
+  "finding": "初始化无有效横盘状态时的False也计入寿命；此例126寿命只有112根有效横盘，预热期计入14根。不能将S02突破行为通过解释为126有效横盘已验证。"
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "learning-followup/1",
+  "date": "2026-09-09",
+  "merge_policy": "按paper_id和entry.id追加，不覆盖旧阅读历史；本次未修改Zotero",
+  "reading_updates": [],
+  "entries": [
+    {
+      "id": "kaminski2014-r1-exit-1-20260909",
+      "paper_id": "kaminski2014",
+      "title": "原始止损与保住涨幅，是两个不同问题",
+      "category": "实验方法",
+      "body_markdown": "原始失效位主要针对买入时的风险。价格后来涨了很多，如果保护位置始终不变，原来的保护仍在，却可能允许大部分涨幅回吐。\n\n本地例子：创业板2015-01-09同一笔买入，原道路退出于2015-06-19卖出，扣费赚约116.40%；只守原始失效位则2018-08-07才卖，亏约7.19%。这说明本地道路退出承担了保护已赚涨幅的作用，但不能由一个例子宣布所有道路退出都更好。\n\n可借鉴的实验做法：固定原买入日期、价格、数量和费用；只改变一个卖出条件；将原版全部逐笔结果先核平，再比较所有原买入，而不是只挑保护成功的例子。同时记录期间最深下跌和仍未卖出的持仓。初始止损、逐步抬高保护位置与道路退出应分别定义、分别验证，不能混为同一种止损。",
+      "method_acceptance": {
+        "origin": "已读论文退出与再次进入框架的本地适配；数字来自本地ETF研究",
+        "paper_numeric_threshold": null,
+        "automatic_adoption": false
+      },
+      "evidence_paths": [
+        "docs/experiments/r1-road-exit-contribution-2026-09-09.md",
+        "docs/experiments/raw/research-r1-exit-contribution-2026-09-09/protocol.md",
+        "docs/experiments/raw/research-thirteenth-2026-09-08/paper-methods/METHODS.md"
+      ]
+    },
+    {
+      "id": "kaminski2014-r1-exit-2-20260909",
+      "paper_id": "kaminski2014",
+      "title": "平均每笔赚得更多，不一定让同一笔钱赚得更多",
+      "category": "实验方法",
+      "body_markdown": "论文方法把卖出、卖出后资金去向和再次进入一起定义。我们采用这个框架，同时保留两种比较：每个原买入单独换卖法，以及完整资金按先后机会继续买卖。\n\n本轮固定原买入后，取消道路退出的平均每笔收益提高，但持有期限大幅延长，中间一笔反而更亏；这些长期持仓还会相互重叠。若把它们都当作资金可以同时买到，就会夸大可实现效果。真正沿机会先后运行时，创业板投入资金的完整日历年化从约16.68%降到10.48%，期间最深下跌从约48.49%扩大到67.11%。\n\n可借鉴的验收做法：每笔对照列平均、中间值、持有期限和期末浮盈；完整资金另列新增或错过的买入、费用、收益和下跌。两者不能相加，也不能将差额简单相减称为重新买入的纯贡献。留现金与缺少入场是不同原因；未投入现金不进每笔回报的分母，等待时间仍保留在日历年化中。",
+      "method_acceptance": {
+        "origin": "已读论文退出与再次进入框架的本地适配；数字来自本地ETF研究",
+        "paper_numeric_threshold": null,
+        "automatic_adoption": false
+      },
+      "evidence_paths": [
+        "docs/experiments/r1-road-exit-contribution-2026-09-09.md",
+        "docs/experiments/raw/research-r1-exit-contribution-2026-09-09/protocol.md",
+        "docs/experiments/raw/research-thirteenth-2026-09-08/paper-methods/METHODS.md"
+      ]
+    }
+  ]
+}

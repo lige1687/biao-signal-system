@@ -1,0 +1,59 @@
+--- docs/experiments/raw/research-tenth-2026-09-08/cd-contract/research-package/src/lei_signal/rules/module_d_false_breakout.py	2026-09-08 15:44:06
++++ docs/experiments/raw/research-eleventh-2026-09-08/research-package/src/lei_signal/rules/module_d_false_breakout.py	2026-09-08 16:02:15
+@@ -146,7 +146,9 @@
+         elif start is not None:
+             loose += 1
+             if loose > exit_bars:
+-                intervals.append((start, position - loose + 1))
++                # 区间只能在连续离开条件已经满足的当日结束，不能用后来
++                # 21 根走势把结束位置倒写到离开第一根，删除已发布事件。
++                intervals.append((start, position))
+                 start = None
+                 loose = 0
+     if start is not None:
+@@ -162,6 +164,7 @@
+     reclaim_window: int,
+     valley: Pivot,
+     start_position: int,
++    superseded_position: int | None = None,
+ ) -> list[SignalEvent]:
+     """单个波谷参照的假跌破循环：跌破 -> 创新低 -> 双动作齐备 -> 确认/失效。"""
+     events: list[SignalEvent] = []
+@@ -180,6 +183,14 @@
+     done = False
+ 
+     for position in range(start, len(frame)):
++        # 最近确认波谷只约束新流程。已经跌破并进入等待的旧流程如何处理
++        # 尚无策略定义，维持原流程，不在本次修复中擅自终止。
++        if (
++            not broken_down
++            and superseded_position is not None
++            and position >= superseded_position
++        ):
++            break
+         row = frame.iloc[position]
+         close = float(row["close"])
+         low = float(row["low"])
+@@ -274,15 +285,22 @@
+         frame, cluster_threshold, min_bars, exit_bars
+     ):
+         # 密集区期间已确认的波谷（参照）；无波谷则跳过该密集区。
++        zone_valleys: list[tuple[Pivot, int]] = []
+         for valley in valleys:
+             start_position = by_day.get(valley.available_date)
+             if start_position is None or not (zone_start <= start_position < zone_end):
+                 continue
++            zone_valleys.append((valley, start_position))
++        for valley_number, (valley, start_position) in enumerate(zone_valleys):
++            superseded_position = None
++            if valley_number + 1 < len(zone_valleys):
++                superseded_position = zone_valleys[valley_number + 1][1]
+             events.extend(
+                 _scan_zone(
+                     frame, symbol, spec,
+                     reclaim_window=reclaim_window, valley=valley,
+                     start_position=start_position,
++                    superseded_position=superseded_position,
+                 )
+             )
+     events.sort(key=lambda e: (e.available_date, e.event_id))

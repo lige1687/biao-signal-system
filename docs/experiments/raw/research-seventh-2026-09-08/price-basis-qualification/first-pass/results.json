@@ -1,0 +1,283 @@
+{
+  "created_at_utc": "2026-09-08T05:29:15.776071+00:00",
+  "input_lock_sha256": "6e7a321d625a1bc03d0a4cf81a1e7ed78e6bc9aa1f0d8e6e20da9400a115ba05",
+  "code_lock_sha256": "dbcd0b61f98ebf85f27a8e932db34315a47b3b54fff3d70c15a1e646c76e1da3",
+  "scope": "price conversion only; no candidate signals, trades, strategy returns or account simulation",
+  "checks": [
+    {
+      "name": "all_frozen_rows_finite_positive_ordered_and_roundtrip",
+      "status": "passed",
+      "detail": {
+        "instruments": {
+          "sh510300": {
+            "date_min": "2013-01-04",
+            "date_max": "2026-09-07",
+            "rows_checked_each_mode": {
+              "cash_additive_v1": 3322,
+              "cash_proportional_v1": 3322
+            }
+          },
+          "sh513100": {
+            "date_min": "2013-05-15",
+            "date_max": "2026-09-07",
+            "rows_checked_each_mode": {
+              "cash_additive_v1": 3238,
+              "cash_proportional_v1": 3238
+            }
+          },
+          "sh518880": {
+            "date_min": "2013-07-29",
+            "date_max": "2026-09-07",
+            "rows_checked_each_mode": {
+              "cash_additive_v1": 3189,
+              "cash_proportional_v1": 3189
+            }
+          },
+          "sz159915": {
+            "date_min": "2013-01-04",
+            "date_max": "2026-09-07",
+            "rows_checked_each_mode": {
+              "cash_additive_v1": 3321,
+              "cash_proportional_v1": 3321
+            }
+          }
+        },
+        "max_roundtrip_absolute_error": "1E-39"
+      }
+    },
+    {
+      "name": "real_2014_dividend_and_no_double_count_arithmetic",
+      "status": "passed",
+      "detail": {
+        "previous_nominal": {
+          "date": "2014-01-20",
+          "open": "2.222",
+          "close": "2.212",
+          "high": "2.226",
+          "low": "2.201",
+          "volume": "2296621.0"
+        },
+        "ex_nominal": {
+          "date": "2014-01-21",
+          "open": "2.17",
+          "close": "2.182",
+          "high": "2.195",
+          "low": "2.167",
+          "volume": "2902637.0"
+        },
+        "dividend_per_share": "0.048",
+        "methods": {
+          "cash_additive_v1": {
+            "previous_bar_converted": {
+              "date": "2014-01-20",
+              "open": "2.174",
+              "high": "2.178",
+              "low": "2.153",
+              "close": "2.164",
+              "volume": "2296621.0",
+              "volume_unit": "original source unit, split-adjusted; unit not independently established",
+              "basis_as_of": "2014-01-21",
+              "events": [
+                "510300-cash-2014-01-21"
+              ]
+            },
+            "line_at_ex_open": "2.164"
+          },
+          "cash_proportional_v1": {
+            "previous_bar_converted": {
+              "date": "2014-01-20",
+              "open": "2.173783001808318264014466546112115732369",
+              "high": "2.177696202531645569620253164556962025316",
+              "low": "2.153238698010849909584086799276672694394",
+              "close": "2.164000000000000000000000000000000000000",
+              "volume": "2296621.0",
+              "volume_unit": "original source unit, split-adjusted; unit not independently established",
+              "basis_as_of": "2014-01-21",
+              "events": [
+                "510300-cash-2014-01-21"
+              ]
+            },
+            "line_at_ex_open": "2.164000000000000000000000000000000000000"
+          }
+        },
+        "one_share_cash_receivable_wealth_change": "0.008137432188065099457504520795660036166",
+        "technical_close_change": "0.008317929759704251386321626617375231054",
+        "nominal_price_only_change": "-0.0135623869801084990958408679927667269439",
+        "incorrect_technical_plus_dividend_change": "0.03001774892787784993966701540580199416431",
+        "meaning": "Single event arithmetic only; receivable is not spendable until pay date; no strategy return. Converter emits no money or account credit."
+      }
+    },
+    {
+      "name": "real_2022_split_effective_without_event_day_quote",
+      "status": "passed",
+      "detail": {
+        "previous_quote": {
+          "date": "2022-01-12",
+          "open": "5.16",
+          "close": "5.192",
+          "high": "5.197",
+          "low": "5.16",
+          "volume": "218919.0"
+        },
+        "event_day": "2022-01-13",
+        "event_day_quote_present": false,
+        "synthetic_tradeable_OHLC_inserted": false,
+        "first_resumed_quote": {
+          "date": "2022-01-14",
+          "open": "1.01",
+          "close": "1.015",
+          "high": "1.016",
+          "low": "1.007",
+          "volume": "1256441.0"
+        },
+        "methods": {
+          "cash_additive_v1": {
+            "adjusted_previous_bar": {
+              "date": "2022-01-12",
+              "open": "1.032",
+              "high": "1.0394",
+              "low": "1.032",
+              "close": "1.0384",
+              "volume": "1094595.0",
+              "volume_unit": "original source unit, split-adjusted; unit not independently established",
+              "basis_as_of": "2022-01-13",
+              "events": [
+                "513100-split-2022-01-13"
+              ]
+            },
+            "line_nominal_basis": "1.08",
+            "event_ids": [
+              "513100-split-2022-01-13"
+            ]
+          },
+          "cash_proportional_v1": {
+            "adjusted_previous_bar": {
+              "date": "2022-01-12",
+              "open": "1.032",
+              "high": "1.0394",
+              "low": "1.032",
+              "close": "1.0384",
+              "volume": "1094595.0",
+              "volume_unit": "original source unit, split-adjusted; unit not independently established",
+              "basis_as_of": "2022-01-13",
+              "events": [
+                "513100-split-2022-01-13"
+              ]
+            },
+            "line_nominal_basis": "1.08",
+            "event_ids": [
+              "513100-split-2022-01-13"
+            ]
+          }
+        },
+        "zero_new_cash": "100 old units become 500 units; stale last quote divides by 5; total marked value unchanged"
+      }
+    },
+    {
+      "name": "full_input_equals_each_date_prefix_at_action_boundaries",
+      "status": "passed",
+      "detail": {
+        "asof_symbol_phase_mode_cases": 360,
+        "bar_comparisons": 621384
+      }
+    },
+    {
+      "name": "future_prices_and_future_events_do_not_leak",
+      "status": "passed",
+      "detail": "Future prices, announced-but-not-effective actions, and not-yet-announced actions do not change the saved as-of output."
+    },
+    {
+      "name": "announcement_phase_and_structure_confirmation_boundaries",
+      "status": "passed",
+      "detail": {
+        "rejections": [
+          "structure not yet confirmed at requested decision phase",
+          "structure not yet confirmed at requested decision phase"
+        ],
+        "meaning": "Date-only announcements/structure confirmation on the same date are available after close, not at open."
+      }
+    },
+    {
+      "name": "cash_then_split_then_cash_and_level_composition",
+      "status": "passed",
+      "detail": {
+        "cash_additive_v1": {
+          "a": "0.2",
+          "b": "-0.3",
+          "price10": "1.7"
+        },
+        "cash_proportional_v1": {
+          "a": "0.1700000000000000000000000000000000000000",
+          "b": "0E-41",
+          "price10": "1.700000000000000000000000000000000000000"
+        }
+      }
+    },
+    {
+      "name": "negative_controls_detect_terminal_leak_and_wrong_inverse_execution",
+      "status": "passed",
+      "detail": {
+        "cash_additive_v1": {
+          "saved_signal_price": "2.212",
+          "wrong_terminal_adjusted_signal": "1.3650",
+          "proper_ex_day_level": "2.164",
+          "wrong_old_nominal_execution_level": "2.212"
+        },
+        "cash_proportional_v1": {
+          "saved_signal_price": "2.212",
+          "wrong_terminal_adjusted_signal": "1.770006239403012217439630782338702337549",
+          "proper_ex_day_level": "2.164000000000000000000000000000000000000",
+          "wrong_old_nominal_execution_level": "2.212000000000000000000000000000000000000"
+        }
+      }
+    },
+    {
+      "name": "invalid_inputs_stop_instead_of_guessing",
+      "status": "passed",
+      "detail": {
+        "duplicate_economic_event_different_id": "duplicate or conflicting economic event",
+        "conflicting_same_economic_event_amount": "duplicate or conflicting economic event",
+        "missing_proportional_reference": "missing previous nominal quote",
+        "reference_not_above_dividend": "reference close <= dividend",
+        "nonpositive_additive_price": "nonpositive converted OHLC",
+        "same_day_cash_and_split_unknown_order": "same-day mixed action order unspecified",
+        "future_price_observation": "future historical observation"
+      }
+    },
+    {
+      "name": "additive_vs_proportional_have_material_percentage_semantics",
+      "status": "passed",
+      "detail": {
+        "real_2014_fixed_indicator_example": {
+          "cash_additive_v1": {
+            "sma20_on_ex_date": "2.24365",
+            "close_to_sma20_fraction": "-0.0274775477458605397455039778931651549930",
+            "previous_day_high_low_width_over_low": "0.01161170459823502090106827682303762192290",
+            "historical_reference_2_50_at_2014_01_17": "2.452"
+          },
+          "cash_proportional_v1": {
+            "sma20_on_ex_date": "2.241941139240506329113924050632911392406",
+            "close_to_sma20_fraction": "-0.0267362680452941576679567068208014810858",
+            "previous_day_high_low_width_over_low": "0.01135847342117219445706497046796910495218",
+            "historical_reference_2_50_at_2014_01_17": "2.445750452079566003616636528028933092224"
+          }
+        },
+        "synthetic_percent_threshold_example": {
+          "original_low": 10,
+          "original_high": "10.2",
+          "dividend": 1,
+          "additive_width": "0.02222222222222222222222222222222222222222",
+          "proportional_width": "0.02",
+          "fixed_threshold": ".02",
+          "additive_pass": false,
+          "proportional_pass": true
+        },
+        "interpretation": "This is a fixed arithmetic threshold illustration, not a B-module signal count or rule amendment. Under positive affine transforms, order and same-basis reward/risk ratios stay unchanged; percentages and percentage stops can change."
+      }
+    }
+  ],
+  "failures": [],
+  "passed_groups": 10,
+  "failed_groups": 0,
+  "formal_G3_status": "mathematics-qualified-for-tested-proxies; strategy dividend convention and complete action coverage remain unresolved"
+}

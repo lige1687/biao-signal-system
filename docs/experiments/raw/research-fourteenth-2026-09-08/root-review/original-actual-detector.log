@@ -1,0 +1,19 @@
+F.                                                                       [100%]
+=================================== FAILURES ===================================
+_________________ test_real_detector_invalid_top_does_not_exit _________________
+
+    def test_real_detector_invalid_top_does_not_exit():
+        frame, tops, trade = run([(100,90),(99,89),(98,88),(105,95),(106,96),(107,97),(108,98),(109,99)], 6)
+        assert len(tops) == 1
+        assert tops[0].confirmed_date == frame.index[2].date()
+        assert tops[0].invalidated_date == frame.index[3].date()
+>       assert trade.exit_reason == 'open_at_end'
+E       AssertionError: assert 'exit_a6_2_top_plus_keywave' == 'open_at_end'
+E         
+E         - open_at_end
+E         + exit_a6_2_top_plus_keywave
+
+docs/experiments/raw/research-fourteenth-2026-09-08/root-review/test_actual_detector.py:53: AssertionError
+=========================== short test summary info ============================
+FAILED docs/experiments/raw/research-fourteenth-2026-09-08/root-review/test_actual_detector.py::test_real_detector_invalid_top_does_not_exit
+1 failed, 1 passed in 0.48s

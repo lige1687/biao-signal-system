@@ -1,0 +1,100 @@
+{
+ "arms": {
+  "b9": {
+   "ann_pct": 11.99,
+   "calmar": 0.345,
+   "maxdd_pct": -34.73,
+   "seg_dd_pct": -28.79,
+   "sharpe": 0.72
+  },
+  "gold": {
+   "ann_pct": 13.28,
+   "calmar": 0.435,
+   "maxdd_pct": -30.52,
+   "seg_dd_pct": -11.38,
+   "sharpe": 0.89
+  },
+  "gold_10": {
+   "ann_pct": 12.13,
+   "calmar": 0.372,
+   "maxdd_pct": -32.59,
+   "seg_dd_pct": -26.2,
+   "sharpe": 0.77
+  },
+  "gold_15": {
+   "ann_pct": 12.2,
+   "calmar": 0.388,
+   "maxdd_pct": -31.45,
+   "seg_dd_pct": -24.79,
+   "sharpe": 0.8
+  },
+  "gold_20": {
+   "ann_pct": 12.26,
+   "calmar": 0.405,
+   "maxdd_pct": -30.27,
+   "seg_dd_pct": -23.3,
+   "sharpe": 0.83
+  },
+  "gold_5": {
+   "ann_pct": 12.06,
+   "calmar": 0.358,
+   "maxdd_pct": -33.68,
+   "seg_dd_pct": -27.53,
+   "sharpe": 0.75
+  },
+  "gold_gated_ref": {
+   "ann_pct": 8.35,
+   "calmar": 0.532,
+   "maxdd_pct": -15.71,
+   "seg_dd_pct": -9.98,
+   "sharpe": 0.87
+  },
+  "gold_rebal_10": {
+   "ann_pct": 12.37,
+   "calmar": 0.388,
+   "maxdd_pct": -31.85,
+   "seg_dd_pct": -24.65,
+   "sharpe": 0.8
+  },
+  "hold": {
+   "ann_pct": -0.47,
+   "calmar": -0.009,
+   "maxdd_pct": -49.6,
+   "seg_dd_pct": -44.95,
+   "sharpe": 0.1
+  }
+ },
+ "corr_b9_gold": 0.027,
+ "experiment": "gold_expand_b9_518880",
+ "half_detail": [
+  {
+   "G1": false,
+   "G2": true,
+   "half": "front"
+  },
+  {
+   "G1": true,
+   "G2": true,
+   "half": "back"
+  }
+ ],
+ "verdict": {
+  "G1": true,
+  "G2": true,
+  "G3": true,
+  "G4": true,
+  "G5": false,
+  "PASS_all": false
+ },
+ "verdict_rules": {
+  "G1": "gold10 ann >= b9 ann",
+  "G2": "gold10 maxdd <= b9 maxdd + 1.0pp",
+  "G3": "gold10 seg_dd <= b9 seg_dd (2021-06-18~2024-02-29)",
+  "G4": "G1&G2 hold at w 5%/15%/20%",
+  "G5": "G1&G2 hold in front/back half windows"
+ },
+ "window": [
+  "2015-06-16",
+  "2026-08-18"
+ ]
+}

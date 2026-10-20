@@ -1,0 +1,39 @@
+# 个人低频策略发现接手与投入审查
+
+- task-id: lowfreq-strategy-discovery-20261019；owner: 01a153e8-cbb2-7730-bd5a-9ac733b1c388/root；status: completed；scope_released: true；updated_at: 2026-10-19T20:06:38.477820+08:00。
+- checked_coordination_sha: ccf6aae9e3c02505718964946039b6f3ffb81c0a；checked_at: 2026-10-19T20:06:38.477820+08:00；已读 COORDINATION1.1、personal-lowfreq-system-audit-20261018（16:11交付）、research-utility-review-20261012（19:20技能交付）、investor-workspace-simplification-20261012（16:38证据审查）、research-dispatch-controller。
+- 来源：用户明确新对话接手独立个人低频研究；源对话01a14d90-0f4a-7931-bfcd-519ec9395431仅交接，之后不并行重做。原LEI/ETF小时/原版兼容/账户仍归research-utility-review-20261012，本题不接管。
+- 目标：复用动量/毛利/现金旧结果，按金融理由、增量和资料成本选择当前最有价值且可执行的一个问题并完成必要检验；保留价值优先队列，资产扩张×经营支撑先核连续年度资产，利润兑现及净股数变化先核原件与维护成本。一次一个问题，无穷举。
+- 成果分支 codex/lowfreq-strategy-discovery-20261019；base_commit 9aa770628ba83d3eb6a23d0dd62f14466b3e5d91；独立工作树 .codex/worktrees/lowfreq-strategy-discovery-20261019。最近已推本题成果：无；继承原成果基线只读，不用它冒充本题交付。
+- root唯一写本独立树 docs/experiments/lowfreq-strategy-discovery-2026-10-19.md、docs/experiments/raw/lowfreq-strategy-discovery-2026-10-19/、docs/ops/work-progress/lowfreq-strategy-discovery-20261019.md、registry本报告键及INDEX本行。当前仅接手与资格阶段；具体新研究脚本/合同和输出写权在冻结前更新。不改主工作区、源成果树、旧冻结原件、共享定义/引擎/UI/策略/规则。
+- 标准：采用当前主树current-standards.json的版本索引、lei-lowfreq-research、research-closure、factor-discovery-playbook；主树新技能仅本机的状态保留，独立树不伪称自动继承新版。
+- 并行只读：Sol medium old_results_audit核旧P1/P2性能、反例、预算与资产输入；Sol medium technical_overlap核技术家族重复和ETF资料资格。两者无网络/市场计算/写权/下级。root统一科学判断与外部来源预算。实际模型费用未知。
+- 累计预算：P1不重跑；P2已1核心+2/3后续；P3方法来源5/6、数据4/4、核心0/1、后续0/3，先核原账本，禁止新名重置。新独立问题按既有research-closure有限预算并计家族历史；现在0新市场运行、0新取数、0付费/生产/交易/通知。
+- 验收：原件SHA/源合同和累计预算核同、金融假设及竞争解释、共同样本/简单对手、四格及全部机会代价、独立关键核数、性能与增量表/不确定性/反例、用途取舍及恢复条件；登记归档和准确提交推送读回。旧脚本通过不算科学证据。
+- 冲突决定：当前无自有新路径重叠；各技术旧owner内容只读，财务旧输入只读。注册表只在本独立树增本键，不写其他owner条目。新大结果先核固定UUID与容量，并走output_storage计划，不回退内盘或移旧材料。
+- 进度：已fetch原成果分支及协调，现有报告/预算审核中；新收益与资料资格尚未验收。阻塞：当前未确认，待资料盘点；不因旧价值数据预算用完让独立技术检查停下。下一步：完成只读盘点，冻结一个有辨别力的新问题或明确资料边界，执行已授权必要检验。
+
+- 2026-10-19T19:28:24.021182+08:00：首推因源owner交接新记录并发推进被拒；已fetch并读4bddb591的新交接，原owner明确不并行重做，正常merge保留双方。checked_coordination_sha=4bddb591（完整SHA见下次开工读回），无范围冲突，旧5报告不变；目标现18，不用旧17覆盖。
+
+## 资产跨期资格实现 2026-10-19T19:33:55.165594+08:00
+
+- checked_coordination_sha=993613d3e4aaca86cb179541e860d943707000b0；已读self/来源最新交接及前述owner，无新增范围冲突。主控选择资产增长×毛利，先用现存原报严格核跨期，不新增下载；原因：新财务变化未测试，宽泛技术路径组合重复较多。Astra独审已指出旧单期更正恢复不可沿用，采用双期均晚于公告并跨报相等的有限测量资格。
+- 新准确写权仅本成果树 src/lei_signal/research/asset_growth_discovery.py、tests/unit/test_asset_growth_discovery.py 和raw/source-development-receipt.json，由Sol medium old_results_audit唯一实现；root写其他设计/执行合同/报告/记录。此处服务独立研究数据资格层，不改原LEI语义或生产。
+- 本次拟年度6月底选择并观察一年，预计2015—2024十个成熟市场年度，2025未成熟单列；资料资格未完成、尚未读取新效果，不因样本行数宣称足够。新题上限1核心+3必要跟进，0/6新来源，资格准备与旧P1/P2效果分开留账。首批资格只读所有旧原件，外盘计划已核并绑定，容量通过不代表科研通过。
+
+- 2026-10-19T19:36:44.509724+08:00 效果工具准备范围：Sol medium technical_overlap唯一写本成果树 src/lei_signal/research/asset_growth_effect.py、tests/unit/test_asset_growth_effect.py、raw/effect-development-receipt.json；root冻结其他记录。只编写/合成验证，无真实收益读取。拟定年度固定初始股数、同行共同池和相同保留数对照、四格及条件排除、缺失不删/未知情景、全年少亏少赚及集中风险；来源资格通过后才绑定执行。checked_coordination_sha=1b63d938625d9ae9e548974ac86e787dc80f4a6f，已读任务无重叠；其余owner不变。新来源实际2/6官方构造页面只支持定义，不作为本地有效证据。
+
+- 2026-10-19T19:44:27.984566+08:00 定义核对补正：checked_coordination_sha=fe66b25fa45cdbd5c1d65a7c81a20f154a277511；已读self/原owner等任务，仍无冲突。本独立树额外允许root仅追加 docs/research/definitions.v1.json 中本题独立股票来源/共同profile/四个研究对象，不改已有对象或生产消费者。旧mixed.momentum.raw绑定ETF经济价格，不能冒充本题BaoStock股票价格定义；增长/毛利新ID必须实际登记并在收益前精确解析。只写工作分支，未向共享主树合入。Astra预审要求固定12月风险段、报价观察与缺价情景分开、交易费用公式修正，均在收益读取前办理。
+
+- 2026-10-19T19:52:12.594207+08:00 来源真实执行终态：checked_coordination_sha=0ed6033ded8cb7f9eedb40b3ade53db195c54ab3，已读self及原owner相关任务无变更/无冲突。Luna low完成一次6600位置来源核对，1529合格；共同信号资格1424（完整年度72—165/年）。root直接读回6页原PDF及合格/跨报不等/更正未明案例。原预算核心1/1已消耗：首次效果因全日历3个缺报检查拒绝，无年度输出；失败日志/报价质量/代码快照保留。计划按既有后续1/3修复同一比较：仅把设计已允许的缺日报价保留为缺价情景，非法价格等继续拒绝；失败合同/receipt、同design/selector/input指纹全部绑定。研究问题/条件/收益期限不变，不增core、不重置P1/P2/P3。P4已只读5PDF现存案例，3缺失保留，无新下载。
+
+- 2026-10-19T19:57:06.258755+08:00 修复跟进已真实完成，独立复核权重与年度均值及来源；科学结论待报告归档。checked_coordination_sha=62c8caeb71949780cb54e4954370c8b08b2a4469；已读相关owner状态无变化。本次结案归置检查原有3处误报：Git工作树.git文件、本项目强制COORDINATION.md及docs/coordination。root额外唯一写本成果树scripts/check_repo_hygiene.py，仅登记上述三个已被项目规则使用的准确路径；不删除/挪资料、不放宽其他命名、不改主树检查器。原失败输出保留，修正后重跑本树全库检查。
+
+## 有界交付完成 2026-10-19T20:06:38.477820+08:00
+
+- checked_coordination_sha: ccf6aae9e3c02505718964946039b6f3ffb81c0a；已读task-id：self、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller；fetch后无新的相关变更，冲突决定：本题仅独立分支准确路径，原owner范围不动。
+- 实际最终成果commit：fa4fb252f9b5e08f1869b74ce0100fca4f960d35，分支codex/lowfreq-strategy-discovery-20261019，已push/fetch核相等；主体证据57649dd25fc6ed1ebf4eadaff59768c03eb9c07e。报告docs/experiments/lowfreq-strategy-discovery-2026-10-19.md及raw、work-progress。主工作树/UI未合入。
+- 结论：条件方法对全选+0.5272百分点/年，但对简单合分仅+0.1985、粗区间跨零；去掉2022为负。严格四格27—74只/年，机制差异7年负；197排除位置89次上涨。暂停新增选股条件，保留有限线索，非整类无效或ETF结论。本有界问题完成，不代表整个低频目标完成。
+- 交付核验：实际来源1次；核心失败1/1完整保留，原规则缺报兼容修复跟进1/3实际完成。原件/原报告SHA、年度原权重独立核数、10+15合成、精确CSV Git字节、全库归置检查通过。受控验收accepted/evidence inconclusive，最新恢复返回reuse，不重跑旧执行合同。
+- 系统目标okr-8830a1f1ec4f实际19→20并读回，增证据/next_action/准确commit链接，status仍in_progress，owner/授权/里程碑均未改；待用户验收。原P1/P2/P3累计预算不变，P4五PDF/三缺只读来源已落实；无后台进程、交易、付费、生产或通知。
+- scope_released=true仅释放本次写入认领，不允许覆盖本次及旧冻结资料。后续有新问题才登记：价值缺口仍受原资料预算限制，利润兑现仍需一致口径/版本资格；原LEI/ETF/账户负责人保持。资料固定外盘UUID/manifest见storage-plan与报告；无盘不回退。

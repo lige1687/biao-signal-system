@@ -1,0 +1,21 @@
+..............F...                                                       [100%]
+=================================== FAILURES ===================================
+________________ test_s13_no_llm_degraded_has_evidence_sections ________________
+
+env = namespace(client=<starlette.testclient.TestClient object at 0x143bf2410>, db='/private/var/folders/l3/zrwg12bn3lz_zny9.../var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/pytest-of-yongbiaoli/pytest-456/test_s13_no_llm_degraded_has_e0/env'))
+real_result = AnalysisResult(symbol='000001.SS', display_name='000001.SS', frame=               open     high  ...  bearish_expansio..., last_data_date=datetime.date(2026, 8, 6))}, cache_fallback_used=False, cache_age_seconds=None, sqlite_persisted=None)
+
+    def test_s13_no_llm_degraded_has_evidence_sections(env, real_result):  # noqa: ANN001
+        r = chat(env.client, "这个标的最近如何")
+        assert r.status_code == 200
+        body = r.json()
+        assert body["grounded"] is False
+>       assert "历史结果及适用范围" in body["reply"]
+E       AssertionError: assert '历史结果及适用范围' in '上证指数（000001.SS）：按系统数据，现在没有系统定义的买点候选，还整理不成可执行的入场计划。\n注意：AI 讲解暂时不可用。以下是系统按 2026-08-06 数据直接给出的事实——今天是 2026-09-15，这是过去的数据...理，不是真实持仓成本）。\n历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以核实是否是同一种做法（明细见下方依据卡）。\n接下来可以先核实这个标的的最新数据；想继续讨论的话，说一个你关心的条件或价位，系统有对应事实时再展开。'
+
+tests/unit/test_discussion_backtest_03b.py:532: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  lei_signal.plans.llm:llm.py:721 ark HTTP 404，放弃（model=deepseek-v4-pro[1m]）。响应摘要：
+=========================== short test summary info ============================
+FAILED tests/unit/test_discussion_backtest_03b.py::test_s13_no_llm_degraded_has_evidence_sections
+1 failed, 17 passed in 152.34s (0:02:32)

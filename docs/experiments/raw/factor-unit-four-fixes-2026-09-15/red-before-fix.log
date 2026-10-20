@@ -1,0 +1,25 @@
+src/lei_signal/research/factor_unit/state_description.py:117: ValueError
+=============================== warnings summary ===============================
+tests/unit/test_factor_unit_four_fixes.py::test_sparse_unknown_state_slot_not_counted
+  /Users/yongbiaoli/Desktop/lei-signal-lab/tests/unit/test_factor_unit_four_fixes.py:227: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value 'nan' has dtype incompatible with bool, please explicitly cast to a compatible dtype first.
+    values.loc[0, 'state'] = None
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_forged_snapshot_provenance_bound_not_qualified
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_forged_price_basis_verified_fake_vendor_rejected
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_structured_vendor_ref_nonexistent_file_rejected
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_vendor_record_wrong_input_binding_rejected
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_vendor_record_missing_params_or_semantics_rejected
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_valid_vendor_material_still_not_total_return_qualified
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_conflicting_duplicate_evidence_records_rejected
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_duplicate_source_decision_rows_rejected
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_sha256_16_prefix_no_longer_accepted
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_sparse_cannot_see_future
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_sparse_positive_control_cutoff_2030
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_sparse_unknown_state_slot_not_counted
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_sparse_not_mature_reason_before_close
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_nullable_boolean_pipeline_hand_computed
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_all_pd_na_states_accepted_as_unknown
+FAILED tests/unit/test_factor_unit_four_fixes.py::test_mixed_bool_na_none_nan_accepted
+16 failed, 3 passed, 1 warning in 1.07s

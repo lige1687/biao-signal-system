@@ -1,0 +1,45 @@
+{
+  "protocol_version": "first12-v1-2026-09-08",
+  "research_window": ["2015-01-01", "2026-06-30"],
+  "warmup_before_start": true,
+  "symbols": ["sh510300", "sz159915"],
+  "methods": ["hold", "breadth_three_tier", "simple_60_close_breakout"],
+  "fees_per_side": ["0.001", "0.002"],
+  "initial_cash": "100000",
+  "cash_interest": "0",
+  "buy_lot": 100,
+  "long_only": true,
+  "borrowing": false,
+  "trade_price": "original_nominal_open",
+  "terminal_mark": "last_valid_original_nominal_close_on_or_before_end",
+  "breakout": {"lookback_quotes": 60, "basis": "close", "strict": true, "execution": "next_available_open"},
+  "breadth": {
+    "field": "ma200_pct",
+    "tiers": [
+      {"lt": "43.3", "target": "1.0"},
+      {"gte": "43.3", "lt": "56.7", "target": "0.5"},
+      {"gte": "56.7", "target": "0.0"}
+    ],
+    "frequency": "last_valid_observation_in_completed_calendar_week",
+    "evaluation": "once_at_first_fillable_open_in_following_calendar_week",
+    "band": "0.05",
+    "missing_week": "no_new_target_cancel_stale_unfilled_order_keep_shares"
+  },
+  "dividend": {
+    "entitlement": "units_at_record_date_end",
+    "effective_date": "create_receivable_before_open",
+    "pay_date": "move_receivable_to_spendable_cash_before_open"
+  },
+  "main_run_gate": "funding-difference-closed.json with closed=true"
+  ,"inputs": {
+    "breadth": "inputs/a_share_breadth_33y_snapshot.json",
+    "bars": "inputs/bars/{symbol}-nominal.csv",
+    "actions": "inputs/actions.json",
+    "action_coverage": "inputs/action-coverage.json",
+    "execution_parameters": "inputs/execution-parameters-source.json",
+    "dated_restrictions": "inputs/dated-restrictions.json",
+    "price_limits": "inputs/price-limit-regimes.json",
+    "price_helper": "inputs/price-helper/price_basis.py",
+    "eligibility": "inputs/etf-coverage-inventory.json"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "status": "passed",
+  "original_e0_e1": {
+    "status": "passed",
+    "c1_candidates": 84,
+    "qualified_fixed_candidates": 21,
+    "fixed_paths": 84,
+    "fixed_paths_entered": 72,
+    "membership_counts": {
+      "G0": 84,
+      "GP": 12,
+      "GQ": 5,
+      "GPQ": 5
+    },
+    "prior_evidence_rows": 1344,
+    "maturity_paths": 72,
+    "accounts": 32,
+    "filled_account_buys": 76,
+    "time_issues": 0,
+    "exit_samples": 12
+  },
+  "e2": {
+    "accounts": 16,
+    "fixed_paths": 42,
+    "entered_fixed_paths": 36,
+    "prior_evidence_rows_with_all_three_exits": 2016
+  },
+  "time_safety": {
+    "original_prior_evidence_rows": 1344,
+    "all_strictly_prior": true,
+    "maximum_available_completed_opportunities": 11,
+    "maximum_mature_60_opportunities": 11,
+    "rows_meeting_30_candidate_display_threshold": 0,
+    "future_entries_excluded_from_unresolved": true,
+    "sixty_quote_holding_uses_dedicated_field": true
+  },
+  "invested_capital": {
+    "original_nonempty_accounts": 12,
+    "original_fields": 84,
+    "original_max_difference": "7.76753707859429792595784E-16",
+    "e2_nonempty_accounts": 6,
+    "e2_fields": 42,
+    "e2_max_difference": "6.63111129405209256899005E-16",
+    "daily_peak_drawdown_independently_rebuilt": true
+  },
+  "scope": {
+    "membership_and_entry": "all 84 C1 candidates, all 32 original account candidate orders and 76 filled buys",
+    "exit": "12 representative original account exit orders checked for next-day ordering; independent outcome reviewer covers full exit core",
+    "e2_exit_semantics": "E1 is black-state exit; E2 requires post-entry green before later black. They are not renamed as the same rule."
+  },
+  "integrity": {
+    "original_locked_files": 596,
+    "original_unchanged": true,
+    "e2_locked_files": 298,
+    "differences": []
+  },
+  "preserved_failures": [
+    "pre-protocol calendar-day/inclusive evidence draft",
+    "future holding/entry fields in evidence builder",
+    "fixed initial cash used for later account buy cap",
+    "empty-account NaN in invested comparison"
+  ]
+}

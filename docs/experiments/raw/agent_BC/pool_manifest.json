@@ -1,0 +1,100 @@
+{
+ "pool": [
+  {
+   "symbol": "SPY",
+   "name": "标普500 ETF",
+   "rows": 8457,
+   "start": "1993-01-29",
+   "end": "2026-09-03"
+  },
+  {
+   "symbol": "QQQ",
+   "name": "纳指100 ETF",
+   "rows": 6915,
+   "start": "1999-03-10",
+   "end": "2026-09-03"
+  },
+  {
+   "symbol": "DIA",
+   "name": "道指 ETF",
+   "rows": 7201,
+   "start": "1998-01-20",
+   "end": "2026-09-03"
+  },
+  {
+   "symbol": "IWM",
+   "name": "罗素2000 小盘 ETF",
+   "rows": 6607,
+   "start": "2000-05-26",
+   "end": "2026-09-03"
+  },
+  {
+   "symbol": "XLK",
+   "name": "科技行业 ETF",
+   "rows": 6967,
+   "start": "1998-12-22",
+   "end": "2026-09-03"
+  },
+  {
+   "symbol": "XLF",
+   "name": "金融行业 ETF",
+   "rows": 6967,
+   "start": "1998-12-22",
+   "end": "2026-09-03"
+  },
+  {
+   "symbol": "XLV",
+   "name": "医疗行业 ETF",
+   "rows": 6967,
+   "start": "1998-12-22",
+   "end": "2026-09-03"
+  },
+  {
+   "symbol": "XLE",
+   "name": "能源行业 ETF",
+   "rows": 6967,
+   "start": "1998-12-22",
+   "end": "2026-09-03"
+  },
+  {
+   "symbol": "^GSPC",
+   "name": "标普500 指数（基准时钟）",
+   "rows": 24786,
+   "start": "1927-12-30",
+   "end": "2026-09-03"
+  },
+  {
+   "symbol": "^IXIC",
+   "name": "纳指综合指数（校验用）",
+   "rows": 14012,
+   "start": "1971-02-05",
+   "end": "2026-09-03"
+  }
+ ],
+ "cross_checks": {
+  "X1_gspc_vs_timingcache": {
+   "corr": 1.0,
+   "overlap_days": 24466,
+   "pass": true
+  },
+  "X2_spy_vs_gspc": {
+   "corr": 0.98489,
+   "overlap_days": 8455,
+   "pass": false
+  },
+  "X3_qqq_vs_ixic": {
+   "corr": 0.96349,
+   "overlap_days": 6914,
+   "pass": false
+  },
+  "single_source_declared": [
+   "DIA",
+   "IWM",
+   "XLK",
+   "XLF",
+   "XLV",
+   "XLE"
+  ]
+ },
+ "all_cross_checks_pass": false
+}

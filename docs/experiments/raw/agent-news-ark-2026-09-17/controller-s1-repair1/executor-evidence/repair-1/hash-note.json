@@ -1,0 +1,16 @@
+{
+  "issue": "R5：execution 1 的 changed-files.json 对自身声称的哈希无效（生成后又把自身写入导致循环）",
+  "initial_record": {
+    "file": "docs/experiments/raw/agent-news-ark-2026-09-17/changed-files.json",
+    "claimed_self_sha256": "9a19c69c…（主控 hash-check 记录的初版声称值）",
+    "actual_sha256_at_review": "79256c09…（主控复核实测）",
+    "controller_evidence": "raw/agent-news-ark-2026-09-17/controller-s1-initial/hash-check.json",
+    "note": "初版及其不一致记录由主控快照保全（controller-s1-initial/executor-evidence），本返修不回写初版伪装一致。"
+  },
+  "repair_policy": {
+    "rule": "changed-files.json 不对自身声称最终哈希：自身条目 after_sha256 置 null 并注明原因；最终一致性由主控外置校验（hash-check）确认。",
+    "applied_in": "repair-1 重新生成的 changed-files.json",
+    "other_44_hashes": "主控复核 45 次哈希核对中其余 44 个一致，未发现代码/依据的其他哈希偏差。"
+  },
+  "repair_commands": "见 repair-1/commands.jsonl"
+}

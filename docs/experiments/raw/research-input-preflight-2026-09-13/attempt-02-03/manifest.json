@@ -1,0 +1,618 @@
+{
+ "schema_version": "research-input-preflight-manifest/1.0",
+ "generated_at": "2026-09-13T04:48:20.758681+00:00",
+ "generated_at_note": "这是本次运行时刻，不得当作数据的对外可用时刻",
+ "specs": {
+  "principles": {
+   "path": "docs/research/experiment-backtest-principles.md",
+   "version": "v1.1",
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6"
+  },
+  "definition_standard": {
+   "path": "docs/research/definition-standard.md",
+   "version": "1.1.0",
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c"
+  },
+  "execution_contract": {
+   "path": "docs/research/ai-execution-contract.md",
+   "version": "1.0.1",
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"
+  },
+  "report_template": {
+   "path": "docs/research/experiment-report-template.md",
+   "version": "1.1.0",
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e"
+  }
+ },
+ "protocol": {
+  "path": "docs/experiments/raw/research-input-preflight-2026-09-13/protocol.json",
+  "sha256": "0d1e0021b6630d1046619d9360e7061474a0e0b7d9f05b1a30fd5a63a61e5f51"
+ },
+ "code_hashes": {
+  "input_preflight": "c4ed39dbde5d54624f727b6aaffe716650773c773de501b8d1ad3cfccf5a2dde",
+  "check_research_input": "e20917ea673242820787b16b1b8f00e9951cba8944d301c7ae63767b42bf802e",
+  "data_quality": "ddad2ecfd676e0c1c9dbc3787afcc29024c53581f3eb664a97167f2e9fc8f783",
+  "data_snapshot": "748f75249190d89619b84498c7efe336f27f0a23e3cc0b3b5c3fff947393dc49",
+  "trading_calendar": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e",
+  "definitions": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+  "factor_runtime": "1f596f29aff27973ea55b55c49efd3c4c6fb1fdd200946a8618c272dad822579"
+ },
+ "input_hashes": {
+  "snapshot_json": "d4e6518b957d06a50189a574cbd547a98e479bae872a284c0718febff781ce27",
+  "calendar": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+  "publication": "657ef122c62aefcf8d580e5e20e85beac8b1a0979c399f3529ae30d6b245ef02",
+  "actions": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81",
+  "registry": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+ },
+ "input_times": {
+  "snapshot_timing": {
+   "started_at": "2026-09-10T00:00:00+00:00",
+   "finished_at": "2026-09-10T00:00:15+00:00",
+   "note": "started_at/finished_at 是本次运行时刻；不得当作数据的对外可用时刻。"
+  },
+  "time_semantics": {
+   "observed_at": "数据自身观察日（日线收盘）",
+   "available_at": "来源对外可用时刻；未核实一律 null 并给 reason",
+   "generated_at": "本地标准化产物生成时刻",
+   "fetched_at": "本次取得时刻；导入模式为 null",
+   "rule": "后来取得的历史资料只证明本次取得了该版本，不证明历史当天就拿得到"
+  },
+  "per_instrument": {
+   "159652.SZ": {
+    "fetched_at": null,
+    "first_date": "2023-02-08",
+    "last_date": "2026-06-30"
+   },
+   "510300.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "512400.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "512890.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "513870.SS": {
+    "fetched_at": null,
+    "first_date": "2023-11-02",
+    "last_date": "2026-06-30"
+   },
+   "515050.SS": {
+    "fetched_at": null,
+    "first_date": "2019-10-16",
+    "last_date": "2026-06-30"
+   },
+   "515130.SS": {
+    "fetched_at": null,
+    "first_date": "2020-05-11",
+    "last_date": "2026-06-30"
+   },
+   "515170.SS": {
+    "fetched_at": null,
+    "first_date": "2021-01-13",
+    "last_date": "2026-06-30"
+   },
+   "515300.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-19",
+    "last_date": "2026-06-30"
+   },
+   "515880.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-06",
+    "last_date": "2026-06-30"
+   },
+   "516220.SS": {
+    "fetched_at": null,
+    "first_date": "2021-03-10",
+    "last_date": "2026-06-30"
+   },
+   "518850.SS": {
+    "fetched_at": null,
+    "first_date": "2020-06-05",
+    "last_date": "2026-06-30"
+   },
+   "562590.SS": {
+    "fetched_at": null,
+    "first_date": "2023-10-18",
+    "last_date": "2026-06-30"
+   },
+   "588000.SS": {
+    "fetched_at": null,
+    "first_date": "2020-11-16",
+    "last_date": "2026-06-30"
+   }
+  },
+  "available_at": null,
+  "available_at_note": "历史到达时间未知；保持 null，不用本次生成时刻顶替"
+ },
+ "registry": {
+  "loaded": true,
+  "container_version": "1.2.0",
+  "objects": 81,
+  "sources": 34,
+  "sources_verified": true
+ },
+ "objects": {
+  "mixed.price.economic@1.0.0": {
+   "contract_digest": "d310853944aec5449128c20462294828592c7f7cdeff7532098b82049f771e21",
+   "resolved": true,
+   "purpose_allowed": true,
+   "directly_satisfiable": false,
+   "missing_fields": [
+    "economic_index"
+   ],
+   "blocked_by": null,
+   "binding_reasons": [
+    "缺少输入字段 ['economic_index']"
+   ],
+   "resolved_cards_closure": {
+    "mixed.price.economic@1.0.0": {
+     "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "mixed.price.economic",
+     "version": "1.0.0",
+     "name": "混合池信号经济价格",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "description",
+      "research_signal",
+      "attribution"
+     ],
+     "dependencies": [],
+     "definition": {
+      "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+      "parameters": {
+       "base": 1,
+       "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+      },
+      "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+      "unit": "index_level",
+      "direction": "高值只表示累计变化",
+      "transforms": "分红/拆分校正；不再复权或加汇率"
+     }
+    }
+   }
+  },
+  "mixed.momentum.raw@1.0.0": {
+   "contract_digest": "4a73747acd27aa90ff0fbf5909028ba661d1a7a785fc8c694fb54319b52eb5b5",
+   "resolved": true,
+   "purpose_allowed": true,
+   "directly_satisfiable": false,
+   "missing_fields": [
+    "economic_index"
+   ],
+   "blocked_by": null,
+   "binding_reasons": [
+    "缺少输入字段 ['economic_index']"
+   ],
+   "resolved_cards_closure": {
+    "mixed.momentum.raw@1.0.0": {
+     "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "公式一致不证明市场有效；旧消费者未迁移"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "mixed.momentum.raw",
+     "version": "1.0.0",
+     "name": "252至21有效报价涨幅",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "ranking",
+      "description",
+      "research_signal"
+     ],
+     "dependencies": [
+      "mixed.price.economic@1.0.0"
+     ],
+     "definition": {
+      "formula": "I(t-21)/I(t-252)-1",
+      "parameters": {
+       "long_lag": 252,
+       "skip_lag": 21
+      },
+      "endpoints": "自身有效报价行位移；第253条首次可算；不含最近21条",
+      "unit": "fraction",
+      "direction": "降序排序，负分允许",
+      "transforms": "无标准化、无截尾、无年化"
+     }
+    },
+    "mixed.price.economic@1.0.0": {
+     "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "mixed.price.economic",
+     "version": "1.0.0",
+     "name": "混合池信号经济价格",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "description",
+      "research_signal",
+      "attribution"
+     ],
+     "dependencies": [],
+     "definition": {
+      "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+      "parameters": {
+       "base": 1,
+       "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+      },
+      "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+      "unit": "index_level",
+      "direction": "高值只表示累计变化",
+      "transforms": "分红/拆分校正；不再复权或加汇率"
+     }
+    }
+   }
+  },
+  "trend.sma200@1.0.0": {
+   "contract_digest": "77455540aa2dc2dda7a46b4871eb0bdef4655859d12ebbdeafce04a9ba5b7ef3",
+   "resolved": true,
+   "purpose_allowed": true,
+   "directly_satisfiable": false,
+   "missing_fields": [
+    "economic_index"
+   ],
+   "blocked_by": null,
+   "binding_reasons": [
+    "缺少输入字段 ['economic_index']"
+   ],
+   "resolved_cards_closure": {
+    "trend.sma200@1.0.0": {
+     "scope": "仅混合池经济指数；不是ETF连续价或成分股复权价的别名",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "输入产品合法有效报价；计算不要求273月选资格",
+      "warmup": "按SMA窗口；距离和状态继承依赖SMA",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "公式一致不证明市场有效；旧消费者未迁移"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "isolated_formula_or_selection_compared_with_legacy; consumers_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "trend.sma200",
+     "version": "1.0.0",
+     "name": "200有效报价简单均线",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "description",
+      "diagnostic"
+     ],
+     "dependencies": [
+      "mixed.price.economic@1.0.0"
+     ],
+     "definition": {
+      "formula": "SMA200=sum(last 200 valid P_signal including t)/200",
+      "parameters": {
+       "window": 200,
+       "min_periods": 200
+      },
+      "endpoints": "[t-199,t]有效报价，包含t",
+      "unit": "same_as_P_signal",
+      "direction": "描述平均价格，不单独表示方向",
+      "transforms": "算术均值；无EMA权重"
+     }
+    },
+    "mixed.price.economic@1.0.0": {
+     "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+     "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+     ],
+     "input": {
+      "fields": [
+       "date",
+       "symbol",
+       "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+     },
+     "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "按本对象有效报价窗口计算；计算本身不要求273条，273仅属于月选资格",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+     },
+     "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+     },
+     "validation": {
+      "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+      "tolerance": {
+       "absolute": 1e-10,
+       "relative": 1e-10,
+       "integer": 0
+      },
+      "tests": [
+       "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "旧事件缺精确available_at；新economic_index适配要求带时区事件时间。除息连接不等于当天分红可花"
+     },
+     "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "not_tested_by_normalization",
+      "production": "not_authorized"
+     },
+     "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+     ],
+     "id": "mixed.price.economic",
+     "version": "1.0.0",
+     "name": "混合池信号经济价格",
+     "type": "feature",
+     "profile": "mixed",
+     "uses": [
+      "description",
+      "research_signal",
+      "attribution"
+     ],
+     "dependencies": [],
+     "definition": {
+      "formula": "相邻有效报价间按已生效事件连接；I0=1；factor=(nominal_close*split_multiplier+cash_equivalent)/previous_nominal_close",
+      "parameters": {
+       "base": 1,
+       "event_order": "effective_date,event_id；reverse合并：split时mult*=ratio,cash*=ratio；dividend时cash+=amount"
+      },
+      "endpoints": "prev有效报价之后、当前报价当日及之前的生效事件",
+      "unit": "index_level",
+      "direction": "高值只表示累计变化",
+      "transforms": "分红/拆分校正；不再复权或加汇率"
+     }
+    }
+   }
+  }
+ },
+ "evaluation": {
+  "start": "2019-09-02",
+  "end": "2026-06-30"
+ },
+ "outputs": {
+  "preflight_json": "9675d0b66d7722b57c994f6a239646196553379e0b3c3a1d42daba1bfd293837",
+  "preflight_md": "7da63716e6f9798d92f4afccc26760e1f8ee352eceb12ade4386ab7c82d9ac03"
+ },
+ "request_satisfied": false,
+ "calculation_run": false,
+ "production_authorized": false
+}

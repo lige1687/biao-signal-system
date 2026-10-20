@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.lei.intraday</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/python3</string>
+        <string>scripts/intraday_check.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PYTHONPATH</key>
+        <string>/Users/yongbiaoli/Desktop/lei-signal-lab/src</string>
+    </dict>
+
+    <!-- 14:45 盘中快照判定（人类决策 2026-08-04）。
+         触发了就推 actionable alert，没触发不推。
+         不等收盘确认（收盘后操作不了）。
+         其他时间不通知（不做日内）。 -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Weekday</key><integer>1</integer>
+            <key>Hour</key><integer>14</integer>
+            <key>Minute</key><integer>45</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>2</integer>
+            <key>Hour</key><integer>14</integer>
+            <key>Minute</key><integer>45</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>3</integer>
+            <key>Hour</key><integer>14</integer>
+            <key>Minute</key><integer>45</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>4</integer>
+            <key>Hour</key><integer>14</integer>
+            <key>Minute</key><integer>45</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>5</integer>
+            <key>Hour</key><integer>14</integer>
+            <key>Minute</key><integer>45</integer>
+        </dict>
+    </array>
+
+    <key>StandardOutPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/intraday.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/intraday.err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

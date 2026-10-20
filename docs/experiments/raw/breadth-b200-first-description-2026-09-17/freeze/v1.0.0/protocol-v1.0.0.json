@@ -1,0 +1,139 @@
+{
+ "schema": "lei-signal.breadth-description-protocol/1.0.0",
+ "protocol_id": "breadth-b200-first-description",
+ "protocol_version": "1.0.0",
+ "canonical_relative_path": "docs/experiments/raw/breadth-b200-first-description-2026-09-17/freeze/v1.0.0/protocol-v1.0.0.json",
+ "family": "breadth-unit-csi300-b200-21-v1",
+ "use": "restricted_post_hoc_description",
+ "mode": "restricted_historical",
+ "object": {
+  "reference": "breadth.csi300.b200.legacy_percent@1.0.0",
+  "comparison": "breadth.csi300.b200.common@1.0.0",
+  "unit_conversion": {
+   "from": "percent",
+   "to": "fraction",
+   "scale": 100
+  },
+  "note": "实际消费 legacy_percent 冻结序列并做 /100 单位转换；与 common 卡对照。不调用 common.calculate 重建宽度，不声称实际输入完全满足卡的价格/历史可知要求。"
+ },
+ "symbol": "510300",
+ "date_window": {
+  "evaluation_start": "2019-10-08",
+  "evaluation_end": "2025-12-31",
+  "calendar_verify_start": "2019-09-02",
+  "calendar_verify_end": "2026-02-03"
+ },
+ "target": {
+  "offsets": [
+   1,
+   22
+  ],
+  "formula": "close(x)/close(e)-1",
+  "unit": "fraction",
+  "segments": 21,
+  "note": "e = t 后第 1 个交易日收盘；x = t 后第 22 个交易日收盘。"
+ },
+ "cutoff": "2026-09-17T00:00:00+08:00",
+ "calendar": {
+  "timezone": "Asia/Shanghai",
+  "decision_time": "15:00"
+ },
+ "statistics": {
+  "primary": "time_series_spearman",
+  "rank_method": "average",
+  "min_pairs": 3,
+  "years": [
+   2019,
+   2020,
+   2021,
+   2022,
+   2023,
+   2024,
+   2025
+  ],
+  "year_assignment": "observation_date_year",
+  "no_p_values": true,
+  "no_resampling": true,
+  "note": "min_pairs 是数学核输出约定，不是统计可信阈值；不算推断。"
+ },
+ "quality": {
+  "qualification": "restricted",
+  "available_at": null,
+  "historical_availability_verified": false,
+  "source_price_basis": "unverified_per_column"
+ },
+ "tolerances": {
+  "ratio_absolute": 1e-12,
+  "coverage_absolute": 1e-12,
+  "verification_float_absolute": 1e-12
+ },
+ "exclusion_priority": [
+  "breadth_row_missing",
+  "breadth_invalid",
+  "breadth_value_missing",
+  "target_row_missing",
+  "label_not_mature",
+  "target_missing"
+ ],
+ "inputs": {
+  "breadth_csi300.parquet": {
+   "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/breadth_csi300.parquet",
+   "sha256": "63fa7f0ef837c161194fb8f1f17140069074812085c8b449b93aa4d5f2998a58",
+   "role": "只消费b200及质量列"
+  },
+  "observations.csv": {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/observations.csv",
+   "sha256": "1dfe4c206212c31809f53f4b66bb40b3dd4ec193b03daf37c1540f8307eb9d5d",
+   "role": "复用既有main/e_date/x_date，忽略state及其筛选字段"
+  },
+  "prices.csv": {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/prices.csv",
+   "sha256": "bc8582af3ac7b4c2f00a5b51d81754606179347cc3811c911d7579242cb56703",
+   "role": "独立核对既有目标的指定供应商调整价快照"
+  },
+  "calendar.json": {
+   "path": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16/run-02/input-package/calendar.json",
+   "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+   "role": "日历逐日推导"
+  }
+ },
+ "specs": {
+  "experiment-backtest-principles.md": {
+   "path": "docs/research/experiment-backtest-principles.md",
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6"
+  },
+  "ai-execution-contract.md": {
+   "path": "docs/research/ai-execution-contract.md",
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"
+  },
+  "definition-standard.md": {
+   "path": "docs/research/definition-standard.md",
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c"
+  },
+  "experiment-report-template.md": {
+   "path": "docs/research/experiment-report-template.md",
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e"
+  },
+  "definitions.v1.json": {
+   "path": "docs/research/definitions.v1.json",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ },
+ "code": {
+  "docs/experiments/raw/breadth-b200-first-description-2026-09-17/run_breadth.py": "ea65f2b17fbe0a908cc68e21c628ccdf8d0006e2796b1f17216b17e87dc41240",
+  "src/lei_signal/research/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "src/lei_signal/research/breadth_description.py": "1272e59bb6aa56dcd2aa8bf67547f4e809b0ea32a04a3e9c9221765c90e85fdc",
+  "src/lei_signal/research/breadth_description_contract.py": "f4e39f0686de8b7656126c6b542752447f799f401636ff23309351c1825db2c6",
+  "src/lei_signal/research/definitions.py": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+  "src/lei_signal/research/factor_runtime.py": "1f596f29aff27973ea55b55c49efd3c4c6fb1fdd200946a8618c272dad822579",
+  "src/lei_signal/research/momentum_prototype.py": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f",
+  "src/lei_signal/research/trading_calendar.py": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e"
+ },
+ "no_claims": [
+  "不宣称预测能力或交易有效性",
+  "不把相关当收益、贡献、显著性或横截面IC",
+  "不证明结果不是巧合；不排除过拟合；不检验非单调关系",
+  "不外推为真实当时信号、因果贡献、含分红财富或交易利润",
+  "源数据已被旧研究观察，不是全新未知验证资料；宽度成员变化不全是价格转强"
+ ]
+}

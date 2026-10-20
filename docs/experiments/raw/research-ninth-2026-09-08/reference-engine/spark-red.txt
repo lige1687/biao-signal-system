@@ -1,0 +1,110 @@
+EEEEEEE
+======================================================================
+ERROR: test_diagnostic_invalid_stop_or_signal_ref (test_diagnostic.DiagnosticReferenceTests.test_diagnostic_invalid_stop_or_signal_ref)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 74, in test_diagnostic_invalid_stop_or_signal_ref
+    p_zero = run(config='R1', cs=[deepcopy(bad_stop)], obs=observations(data()))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 40, in run
+    return simulate(
+           ^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/engine.py", line 15, in simulate
+    if config_id not in ['P'+str(i) for i in range(8)]:raise ValueError('Unknown configuration')
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unknown configuration
+
+======================================================================
+ERROR: test_low_rr_r1_buys_while_p5_rejects (test_diagnostic.DiagnosticReferenceTests.test_low_rr_r1_buys_while_p5_rejects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 67, in test_low_rr_r1_buys_while_p5_rejects
+    r1 = run(config='R1', cs=[deepcopy(c_low_rr)], obs=observations(data()))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 40, in run
+    return simulate(
+           ^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/engine.py", line 15, in simulate
+    if config_id not in ['P'+str(i) for i in range(8)]:raise ValueError('Unknown configuration')
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unknown configuration
+
+======================================================================
+ERROR: test_missing_target_r0_buys_and_p0_rejects (test_diagnostic.DiagnosticReferenceTests.test_missing_target_r0_buys_and_p0_rejects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 57, in test_missing_target_r0_buys_and_p0_rejects
+    r0 = run(config='R0', cs=[deepcopy(c_missing_target)])
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 40, in run
+    return simulate(
+           ^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/engine.py", line 15, in simulate
+    if config_id not in ['P'+str(i) for i in range(8)]:raise ValueError('Unknown configuration')
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unknown configuration
+
+======================================================================
+ERROR: test_next_union_quote_date_only (test_diagnostic.DiagnosticReferenceTests.test_next_union_quote_date_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 134, in test_next_union_quote_date_only
+    r = run(config='R0', prices=p, cs=[candidate('union-date')], obs=observations(p))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 40, in run
+    return simulate(
+           ^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/engine.py", line 15, in simulate
+    if config_id not in ['P'+str(i) for i in range(8)]:raise ValueError('Unknown configuration')
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unknown configuration
+
+======================================================================
+ERROR: test_open_gap_below_stop_still_rejects (test_diagnostic.DiagnosticReferenceTests.test_open_gap_below_stop_still_rejects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 92, in test_open_gap_below_stop_still_rejects
+    r = run(config='R1', prices=p, cs=[deepcopy(c)], obs=observations(p))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 40, in run
+    return simulate(
+           ^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/engine.py", line 15, in simulate
+    if config_id not in ['P'+str(i) for i in range(8)]:raise ValueError('Unknown configuration')
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unknown configuration
+
+======================================================================
+ERROR: test_signal_accepted_false_unrelated_or_none_still_rejects (test_diagnostic.DiagnosticReferenceTests.test_signal_accepted_false_unrelated_or_none_still_rejects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 98, in test_signal_accepted_false_unrelated_or_none_still_rejects
+    r_other = run(config='R1', cs=[deepcopy(c)], obs=observations(data()))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 40, in run
+    return simulate(
+           ^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/engine.py", line 15, in simulate
+    if config_id not in ['P'+str(i) for i in range(8)]:raise ValueError('Unknown configuration')
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unknown configuration
+
+======================================================================
+ERROR: test_target_and_source_preserved_with_diagnostic_metadata (test_diagnostic.DiagnosticReferenceTests.test_target_and_source_preserved_with_diagnostic_metadata)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 117, in test_target_and_source_preserved_with_diagnostic_metadata
+    r = run(config='R0', cs=[deepcopy(c)], obs=observations(data()))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/test_diagnostic.py", line 40, in run
+    return simulate(
+           ^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-engine/engine.py", line 15, in simulate
+    if config_id not in ['P'+str(i) for i in range(8)]:raise ValueError('Unknown configuration')
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unknown configuration
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.002s
+
+FAILED (errors=7)

@@ -1,0 +1,54 @@
+test_bad_event_sequence_rejected (__main__.HistoryChecks.test_bad_event_sequence_rejected) ... ok
+test_duplicate_event_rejected (__main__.HistoryChecks.test_duplicate_event_rejected) ... FAIL
+test_late_resume_blocks_open_not_close_mark (__main__.HistoryChecks.test_late_resume_blocks_open_not_close_mark) ... ERROR
+test_limit_change_only_from_effective_date (__main__.HistoryChecks.test_limit_change_only_from_effective_date) ... ERROR
+test_nonfinite_close_rejected (__main__.HistoryChecks.test_nonfinite_close_rejected) ... FAIL
+test_split_during_missing_day_then_resume (__main__.HistoryChecks.test_split_during_missing_day_then_resume) ... ERROR
+
+======================================================================
+ERROR: test_late_resume_blocks_open_not_close_mark (__main__.HistoryChecks.test_late_resume_blocks_open_not_close_mark)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 24, in test_late_resume_blocks_open_not_close_mark
+    r=simulate(p,[],start='2021-02-08',end='2021-02-10',weekly=2000,fee=0,cash_rate=0,rebalance=False,limits={'x':.1},blocked_dates={'x':['2021-02-08','2021-02-09']})
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: simulate() got an unexpected keyword argument 'blocked_dates'
+
+======================================================================
+ERROR: test_limit_change_only_from_effective_date (__main__.HistoryChecks.test_limit_change_only_from_effective_date)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 18, in test_limit_change_only_from_effective_date
+    r=simulate(p,[],start='2020-08-17',end='2020-08-25',weekly=1200,fee=0,cash_rate=0,rebalance=False,limits={'x':.1},limit_changes={'x':[('2020-08-24',.2)]})
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: simulate() got an unexpected keyword argument 'limit_changes'
+
+======================================================================
+ERROR: test_split_during_missing_day_then_resume (__main__.HistoryChecks.test_split_during_missing_day_then_resume)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 33, in test_split_during_missing_day_then_resume
+    r=simulate(p,[e],start='2022-01-10',end='2022-01-17',weekly=1000,fee=0,cash_rate=0,rebalance=False,limits={'x':.1},blocked_dates={'x':['2022-01-13']})
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: simulate() got an unexpected keyword argument 'blocked_dates'
+
+======================================================================
+FAIL: test_duplicate_event_rejected (__main__.HistoryChecks.test_duplicate_event_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 14, in test_duplicate_event_rejected
+    with self.assertRaises(ValueError):run(prices(),events=[e,e])
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_nonfinite_close_rejected (__main__.HistoryChecks.test_nonfinite_close_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-fifth-2026-09-08/study/test_history_rules.py", line 8, in test_nonfinite_close_rejected
+    with self.assertRaises(ValueError):run(p)
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+FAILED (failures=2, errors=3)

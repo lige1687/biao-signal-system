@@ -1,0 +1,34 @@
+{
+  "engine_sha256": "896dc3680201dc7c198b3fbba226e98f55edd022d2b2101df64a4dbbae880dbf",
+  "checks": [
+    {
+      "name": "one_real_dividend_conserves_wealth",
+      "pass_expected": true,
+      "final_equity": 1000
+    },
+    {
+      "name": "same_economic_dividend_different_ids",
+      "rejected": false,
+      "actual_final_equity": 1100.0,
+      "correct_if_rejected_or_deduplicated": 1000,
+      "extra_receipt": 100
+    },
+    {
+      "name": "invalid_split_calendar_date",
+      "rejected": false,
+      "event_logged": false
+    },
+    {
+      "name": "recorded_dividend_survives_later_sale",
+      "pass_expected": true,
+      "paid_cash": 200,
+      "final_equity": 12000,
+      "manual_reason": "第一次投入4000，登记前x上涨增加4000，第二次投入4000；无费用，分红不改变财富。"
+    },
+    {
+      "name": "quarter_waits_for_all_quotes",
+      "pass_expected": true,
+      "rebalance_date": "2023-04-03"
+    }
+  ]
+}

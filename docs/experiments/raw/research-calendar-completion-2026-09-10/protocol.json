@@ -1,0 +1,100 @@
+{
+  "protocol_id": "research-calendar-completion-2026-09-10",
+  "version": "1.0.0",
+  "round": 3,
+  "scope": "把交易日历补到覆盖冻结输入的全部 82 个月，并尝试取得该日历的发布时间证据",
+
+  "authorization_basis": {
+    "user_words": "继续",
+    "context": "紧接第二轮交付的「下一步最值得单独授权的一件事」——补齐日历并取得发布时间证据",
+    "interpretation": "视为授权执行该项，且为其扩大外部请求预算",
+    "caveat": "第二轮预算为 30 次且明令「不自动扩大预算」。本轮预算是显式重设而非自动扩大；若用户本意不同，须停止并改回。"
+  },
+
+  "prior_state": {
+    "round2_report": "docs/experiments/research-data-provenance-round2-2026-09-10.md",
+    "calendar_artifact": "docs/experiments/raw/research-data-provenance-round2-2026-09-10/calendar-szse/calendar.json",
+    "months_covered": 22,
+    "months_needed_total": 82,
+    "months_missing": 60,
+    "frozen_range": "2019-09-02..2026-06-30",
+    "requests_used_round2": 27
+  },
+
+  "network_budget": {
+    "max_requests_total": 75,
+    "breakdown": {
+      "remaining_months": 60,
+      "publication_time_probing": 10,
+      "retry_and_slack": 5
+    },
+    "includes_retries_and_redirects": true,
+    "sources_allowed": [
+      "深圳证券交易所公开接口（第二轮已核可用）",
+      "上海证券交易所公开接口（第二轮失败，本轮可再试，计入同一预算）"
+    ],
+    "forbidden": [
+      "批量下载行情/财务/公司行动",
+      "安装 akshare / baostock / Qlib / Alphalens 等框架",
+      "新增账号、凭据、付费访问",
+      "写生产缓存"
+    ],
+    "stop_rule": "预算用尽即停，交已覆盖范围与明确缺口，不伪称全覆盖"
+  },
+
+  "two_questions_kept_separate": {
+    "q1_ex_post_confirmation": "某日事后确认是否开市 —— 第二轮已可回答（覆盖内）；本轮目标是把覆盖补满",
+    "q2_known_in_advance": "当时是否已经知道后续开休市安排 —— 第二轮完全无法回答；本轮尝试取得公告发布时间，取不到就如实保持未知"
+  },
+
+  "writable_paths": [
+    "docs/experiments/raw/research-calendar-completion-2026-09-10/**",
+    "src/lei_signal/research/trading_calendar.py",
+    "tests/unit/test_research_calendar_and_identity.py",
+    "docs/experiments/research-calendar-completion-2026-09-10.md",
+    "docs/experiments/registry.json",
+    "docs/experiments/INDEX.md"
+  ],
+
+  "protected_paths": [
+    "docs/experiments/raw/research-data-provenance-2026-09-10/**",
+    "docs/experiments/raw/research-data-provenance-round2-2026-09-10/**",
+    "docs/experiments/research-data-provenance-2026-09-10.md",
+    "docs/experiments/research-data-provenance-round2-2026-09-10.md",
+    "docs/experiments/raw/research-rotation-clean-2026-09-09/**",
+    "docs/experiments/raw/research-mixed-defense-2026-09-09/**",
+    "docs/experiments/raw/research-factor-library-v0-2026-09-09/**",
+    "docs/research/definitions.v1.json",
+    "src/lei_signal/research/definitions.py",
+    "src/lei_signal/research/factor_runtime.py",
+    "src/lei_signal/research/factor_account_adapter.py",
+    "src/lei_signal/research/factor_diagnostics.py",
+    "src/lei_signal/research/data_snapshot.py",
+    "src/lei_signal/research/symbol_identity.py",
+    "src/lei_signal/data_provenance.py",
+    "src/lei_signal/data/**",
+    "configs/rules.v1.yaml"
+  ],
+  "protected_note": "第二轮日历产物只读：本轮写新目录，不改旧 calendar.json。data_quality.py 本轮不改（第二轮已接入日历参数）。",
+
+  "acceptance": [
+    "82 个月全部取到，或明确列出仍缺哪些月及原因",
+    "用补齐后的日历重新核对冻结价格全区间 1652 个日期（第二轮只核了 389 个交易日）",
+    "任何新出现的来源冲突必须报告，不得掩盖",
+    "发布时间证据取到则登记，取不到则 schedule_known_at 继续返回未知",
+    "未覆盖日期仍返回未知，绝不回退为工作日"
+  ],
+
+  "explicitly_not_in_scope": [
+    "不测因子、不跑账户、不做收益回测",
+    "不改公司行动可得时间（仍为 0/21）",
+    "不解除 attribution 用途限制（它由行动可得时间决定，不由日历决定）",
+    "不改 OKR 完成勾选、授权或范围"
+  ],
+
+  "completion_is_not": [
+    "日历补齐不等于数据合格",
+    "覆盖完整不等于历史时点合法",
+    "零冲突不等于两个来源都正确，只说明互不矛盾"
+  ]
+}

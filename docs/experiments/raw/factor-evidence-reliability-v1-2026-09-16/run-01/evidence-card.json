@@ -1,0 +1,47 @@
+{
+ "object_ref": "candidate:lei.dual_ma.bull_state@draft-1",
+ "use": "post_hoc_historical_sensitivity_diagnostic",
+ "symbol": "510300",
+ "target": "P_vendor(t+22)/P_vendor(t+1) - 1（观察日t后第1个至第22个交易日收盘，21个价格变动区间；直接取观察表 main 列，不重算）",
+ "window": {
+  "start": "2019-10-08",
+  "end": "2025-12-31"
+ },
+ "input": {
+  "base_dir": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16",
+  "observations_csv_sha256": "1dfe4c206212c31809f53f4b66bb40b3dd4ec193b03daf37c1540f8307eb9d5d"
+ },
+ "protocol": {
+  "identity": "factor-evidence-reliability@1.0.0",
+  "sha256": "769a350160ef9f3da896df9c048b4b4ff664d64a4b1ab88cdf7dfb54adb88db1"
+ },
+ "observed_before": true,
+ "observed_before_note": "输入观察表已用于 B1 历史描述；本研究是事后补充，不是未见数据验证",
+ "method": {
+  "stability": "全期+逐年+留一年+等权年度差",
+  "overlap": "相邻交易日区间级重叠审计",
+  "resampling": "circular_block_bootstrap L63/L126 各2000次 PCG64 seed 20260916 成对同索引"
+ },
+ "results": {
+  "stability": "stability.json",
+  "yearly": "yearly.csv",
+  "leave_one_year_out": "leave-one-year-out.csv",
+  "overlap": "overlap.json",
+  "uncertainty": "uncertainty.json"
+ },
+ "limitations": [
+  "事后描述；快照2026-09-08取得，历史可得性未知",
+  "标签重叠非独立；重用比不是有效样本数",
+  "条件性范围不是有效概率/显著性/独立样本数",
+  "未接入：IC/排序、factor_return、风险模型归因、真实时点验证"
+ ],
+ "qualifications": {
+  "definition_clarity": "二元状态定义来自候选卡（draft）",
+  "data_qualification": "B1共同合法集合；供应商调整价未核含分红财富",
+  "implementation": "本包独立实现+测试；与 arch 未做逐值兼容核验",
+  "effectiveness": "无预测有效性证据；逐年方向不一致",
+  "production": "无生产授权"
+ },
+ "next_step": "最多一个最能改变判断的实验：由主控/用户决定（见正式报告）",
+ "valid": null
+}

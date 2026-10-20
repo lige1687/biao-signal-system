@@ -1,0 +1,57 @@
+{
+  "status": "conditional_numeric_boundary_exceptions",
+  "numeric_boundary_exceptions": [
+    {
+      "candidate_id": "A20E:first_ma_pullback:64e8c7322fdea81bccfdf858",
+      "config": "A20E",
+      "symbol": "sh518880",
+      "signal_date": "2023-12-08",
+      "signal_ref": "4.591",
+      "stop": "4.563",
+      "target": "4.675",
+      "decimal_reward_risk": "3",
+      "reported_binary_float_reward_risk": 2.9999999999999365,
+      "actual_signal_rejection": "signal_reward_risk_below_3",
+      "planned_date": "2023-12-11",
+      "next_open": "4.547",
+      "independent_next_open_reason": "nonpositive_open_risk",
+      "account_fill_impact": "none: next open would independently fail positive-risk requirement"
+    },
+    {
+      "candidate_id": "A20J:first_ma_pullback:5dfc14dc6e284f6f8b6b9c36",
+      "config": "A20J",
+      "symbol": "sh518880",
+      "signal_date": "2023-12-08",
+      "signal_ref": "4.591",
+      "stop": "4.563",
+      "target": "4.675",
+      "decimal_reward_risk": "3",
+      "reported_binary_float_reward_risk": 2.9999999999999365,
+      "actual_signal_rejection": "signal_reward_risk_below_3",
+      "planned_date": "2023-12-11",
+      "next_open": "4.547",
+      "independent_next_open_reason": "nonpositive_open_risk",
+      "account_fill_impact": "none: next open would independently fail positive-risk requirement"
+    }
+  ],
+  "full_source_events": 2174,
+  "confirmed_source_candidates": 891,
+  "original_reference_candidates": 1742,
+  "total_candidates": 2633,
+  "per_config": {
+    "REF_BREAKOUT": 1082,
+    "C1": 165,
+    "C2": 116,
+    "REF_ROAD": 660,
+    "C3": 103,
+    "A20E": 189,
+    "A20J": 184,
+    "A60E": 63,
+    "A60J": 52,
+    "A120E": 10,
+    "A120J": 6,
+    "D": 3
+  },
+  "max_numeric_difference": "7.4E-13",
+  "not_reviewed": "Independent recreation of A/C/D signal detector and target-selection algorithm; source mapping and declared target dates/qualification are verified, full target-prefix checks are in adapter evidence."
+}

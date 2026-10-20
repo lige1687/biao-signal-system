@@ -1,0 +1,716 @@
+{
+ "task": "factor-unit-readiness-2026-09-15 Task3",
+ "generated_at": "2026-09-15T11:23:28.823314+08:00",
+ "budget_note": "12份数据集预算；目录清单/文件头侦察不占预算但记录于scouting_notes",
+ "scouting_notes": [
+  "apx_510300_SS.csv / apx_159915_SZ.csv（旧情绪研究锚点文件）文件头显示为周频（date间隔约7天），不适合作为双均线日频研究载体；未纳入12份预算，仅记录头两行侦察结果",
+  "cache根 510300.SS.bars.parquet 为腾讯短历史（meta.json: 641行，2024-01-23起），不满足2010-2025窗口；未纳入预算",
+  "标普500历史成员名单：本仓库raw与~/.lei_signal_lab/cache搜索未见任何标普500逐日/逐期历史成员文件（仅有已算好的宽度序列），美宽度对象按设计标'未登记+成员资料缺失'",
+  "timing/ 目录存在 *.parquet.quarantined 旧副本（159915/512010/512480/512690/512800/515050/515220/515880/513100/513500等），正式文件与隔离副本并存，资格以正式文件为准并记录"
+ ],
+ "datasets": [
+  {
+   "key": "carrier_510300_timing",
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/510300.parquet",
+   "sha256": "a6d518e02313f03cb98ebd69a3e459c9382bd85864f5b1d86771c3c04665fcb4",
+   "bytes": 86140,
+   "mtime": "2026-08-28T00:10:51.153267+08:00",
+   "rows": 3465,
+   "columns": [
+    "date",
+    "open",
+    "high",
+    "low",
+    "close"
+   ],
+   "first_date": "2012-05-28",
+   "last_date": "2026-08-27",
+   "duplicate_dates": 0,
+   "date_gaps": {
+    "median_gap_days": 1.0,
+    "max_gap_days": 11,
+    "gaps_gt_3x_median": 90,
+    "gaps_gt_10_days": 4,
+    "top5_gaps": [
+     {
+      "after": "2023-10-09",
+      "days": 11
+     },
+     {
+      "after": "2024-02-19",
+      "days": 11
+     },
+     {
+      "after": "2020-02-03",
+      "days": 11
+     },
+     {
+      "after": "2026-02-24",
+      "days": 11
+     },
+     {
+      "after": "2022-10-10",
+      "days": 10
+     }
+    ]
+   },
+   "value_quality": {
+    "open": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "high": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "low": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "close": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": 0
+    }
+   },
+   "market_note": "A股/沪",
+   "source_note": "timing研究缓存（2026-08-27/28抓取）；具体供应商与复权口径以列名/元数据为准，本轮如实记录未知项"
+  },
+  {
+   "key": "carrier_159915_timing",
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/159915.parquet",
+   "sha256": "f6d5010501fd14cf10941407ca9e6954c6d0fbcc48d631027839f45ac0d8af37",
+   "bytes": 90489,
+   "mtime": "2026-08-28T00:11:03.954372+08:00",
+   "rows": 3573,
+   "columns": [
+    "date",
+    "open",
+    "high",
+    "low",
+    "close"
+   ],
+   "first_date": "2011-12-09",
+   "last_date": "2026-08-27",
+   "duplicate_dates": 0,
+   "date_gaps": {
+    "median_gap_days": 1.0,
+    "max_gap_days": 11,
+    "gaps_gt_3x_median": 95,
+    "gaps_gt_10_days": 4,
+    "top5_gaps": [
+     {
+      "after": "2020-02-03",
+      "days": 11
+     },
+     {
+      "after": "2023-10-09",
+      "days": 11
+     },
+     {
+      "after": "2024-02-19",
+      "days": 11
+     },
+     {
+      "after": "2026-02-24",
+      "days": 11
+     },
+     {
+      "after": "2022-10-10",
+      "days": 10
+     }
+    ]
+   },
+   "value_quality": {
+    "open": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "high": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "low": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "close": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": 0
+    }
+   },
+   "market_note": "A股/深",
+   "source_note": "timing研究缓存（2026-08-27/28抓取）；具体供应商与复权口径以列名/元数据为准，本轮如实记录未知项"
+  },
+  {
+   "key": "carrier_SPY_timing",
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/SPY.parquet",
+   "sha256": "584ea5441e19065ac557df14235aa621a5c74f39659e4a8b8926435a33ca4713",
+   "bytes": 387368,
+   "mtime": "2026-08-27T12:19:37.769104+08:00",
+   "rows": 8451,
+   "columns": [
+    "Date",
+    "open",
+    "high",
+    "low",
+    "close"
+   ],
+   "first_date": "1993-01-29",
+   "last_date": "2026-08-26",
+   "duplicate_dates": 0,
+   "date_gaps": {
+    "median_gap_days": 1.0,
+    "max_gap_days": 7,
+    "gaps_gt_3x_median": 223,
+    "gaps_gt_10_days": 0,
+    "top5_gaps": [
+     {
+      "after": "2001-09-17",
+      "days": 7
+     },
+     {
+      "after": "2007-01-03",
+      "days": 5
+     },
+     {
+      "after": "2012-10-31",
+      "days": 5
+     },
+     {
+      "after": "2022-02-22",
+      "days": 4
+     },
+     {
+      "after": "2013-05-28",
+      "days": 4
+     }
+    ]
+   },
+   "value_quality": {
+    "open": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "high": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "low": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "close": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": 0
+    }
+   },
+   "market_note": "美股/NYSE Arca",
+   "source_note": "timing研究缓存（2026-08-27/28抓取）；具体供应商与复权口径以列名/元数据为准，本轮如实记录未知项"
+  },
+  {
+   "key": "carrier_QQQ_timing",
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/timing/QQQ.parquet",
+   "sha256": "3706b3d182fb986aec13ffabe4020638ae7a0fa101043b226bd26e04c9f48548",
+   "bytes": 314057,
+   "mtime": "2026-08-27T12:19:39.049507+08:00",
+   "rows": 6909,
+   "columns": [
+    "Date",
+    "open",
+    "high",
+    "low",
+    "close"
+   ],
+   "first_date": "1999-03-10",
+   "last_date": "2026-08-26",
+   "duplicate_dates": 0,
+   "date_gaps": {
+    "median_gap_days": 1.0,
+    "max_gap_days": 7,
+    "gaps_gt_3x_median": 185,
+    "gaps_gt_10_days": 0,
+    "top5_gaps": [
+     {
+      "after": "2001-09-17",
+      "days": 7
+     },
+     {
+      "after": "2007-01-03",
+      "days": 5
+     },
+     {
+      "after": "2012-10-31",
+      "days": 5
+     },
+     {
+      "after": "2020-04-13",
+      "days": 4
+     },
+     {
+      "after": "2019-01-22",
+      "days": 4
+     }
+    ]
+   },
+   "value_quality": {
+    "open": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "high": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "low": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "close": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": 0
+    }
+   },
+   "market_note": "美股/Nasdaq",
+   "source_note": "timing研究缓存（2026-08-27/28抓取）；具体供应商与复权口径以列名/元数据为准，本轮如实记录未知项"
+  },
+  {
+   "key": "csi300_membership_daily",
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+   "sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30",
+   "bytes": 136179,
+   "mtime": "2026-09-09T18:13:21.464509+08:00",
+   "rows": 843900,
+   "columns": [
+    "date",
+    "symbol",
+    "version"
+   ],
+   "first_date": "2014-12-01",
+   "last_date": "2026-06-30",
+   "distinct_dates": 2813,
+   "duplicate_date_symbol": 0,
+   "members_per_date_min": 300,
+   "members_per_date_median": 300.0,
+   "members_per_date_max": 300,
+   "date_gaps": {
+    "median_gap_days": 1.0,
+    "max_gap_days": 11,
+    "gaps_gt_3x_median": 75,
+    "gaps_gt_10_days": 4,
+    "top5_gaps": [
+     {
+      "after": "2020-02-03",
+      "days": 11
+     },
+     {
+      "after": "2024-02-19",
+      "days": 11
+     },
+     {
+      "after": "2026-02-24",
+      "days": 11
+     },
+     {
+      "after": "2023-10-09",
+      "days": 11
+     },
+     {
+      "after": "2022-02-07",
+      "days": 10
+     }
+    ]
+   },
+   "source_note": "breadth-confirmation轮准备的沪深300逐日成员链（20交易日探测，登记卡universe.version声明可能漏段内往返）"
+  },
+  {
+   "key": "us_aaii_survey",
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/sentiment_research_2026-09/aaii_clean.csv",
+   "sha256": "6ff46d9cfb4c2680f64a4262ecb363248ce534c7c2230fa2a6af9c30275fe0e3",
+   "bytes": 96195,
+   "mtime": "2026-09-04T00:46:47.470333+08:00",
+   "declared_identity": "us_aaii_survey",
+   "rows": 2038,
+   "columns": [
+    "reported",
+    "bullish",
+    "neutral",
+    "bearish",
+    "bull_bear"
+   ],
+   "first_date": "1987-07-24",
+   "last_date": "2026-08-27",
+   "duplicate_dates": 0,
+   "date_gaps": {
+    "median_gap_days": 7.0,
+    "max_gap_days": 14,
+    "gaps_gt_3x_median": 0,
+    "gaps_gt_10_days": 3,
+    "top5_gaps": [
+     {
+      "after": "2000-07-06",
+      "days": 14
+     },
+     {
+      "after": "2021-01-21",
+      "days": 14
+     },
+     {
+      "after": "1996-01-18",
+      "days": 14
+     },
+     {
+      "after": "1990-11-30",
+      "days": 9
+     },
+     {
+      "after": "1991-07-12",
+      "days": 9
+     }
+    ]
+   },
+   "value_quality": {
+    "bullish": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "neutral": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "bearish": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "bull_bear": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    }
+   },
+   "frequency_observed": "周频（调查）",
+   "source_note": "AAII官方xls直下清洗版（旧报告口径）；无available_at列，发布时刻=周四盘前为旧报告叙述，本文件未带时点字段",
+   "metadata_file": null
+  },
+  {
+   "key": "us_naaim_survey",
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/sentiment_research_2026-09/naaim_clean.csv",
+   "sha256": "4dc4e982d3a5f143cc4217ef4fc523b0890293e5f870bc47be88eefa7b0dbe3a",
+   "bytes": 17736,
+   "mtime": "2026-09-04T00:46:47.442701+08:00",
+   "declared_identity": "us_naaim_survey",
+   "rows": 1047,
+   "columns": [
+    "date",
+    "naaim"
+   ],
+   "first_date": "2006-07-05",
+   "last_date": "2026-07-29",
+   "duplicate_dates": 0,
+   "date_gaps": {
+    "median_gap_days": 7.0,
+    "max_gap_days": 14,
+    "gaps_gt_3x_median": 0,
+    "gaps_gt_10_days": 2,
+    "top5_gaps": [
+     {
+      "after": "2016-11-23",
+      "days": 14
+     },
+     {
+      "after": "2014-12-03",
+      "days": 14
+     },
+     {
+      "after": "2026-07-29",
+      "days": 7
+     },
+     {
+      "after": "2013-05-01",
+      "days": 7
+     },
+     {
+      "after": "2013-04-24",
+      "days": 7
+     }
+    ]
+   },
+   "value_quality": {
+    "naaim": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    }
+   },
+   "frequency_observed": "周频（调查）",
+   "source_note": "MacroMicro转载NAAIM（免费源滞后约5周）；无available_at列",
+   "metadata_file": null
+  },
+  {
+   "key": "cn_margin_history",
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/sentiment_research_2026-09/margin_history.csv",
+   "sha256": "71ed64655b16fb5abc21afef2d912557f01639e2138aee018ab60736247e5eda",
+   "bytes": 295164,
+   "mtime": "2026-09-04T00:46:47.500020+08:00",
+   "declared_identity": "cn_margin_history",
+   "rows": 3991,
+   "columns": [
+    "date",
+    "RZYE",
+    "RZMRE",
+    "RZJME",
+    "RZYEZB",
+    "LTSZ"
+   ],
+   "first_date": "2010-03-31",
+   "last_date": "2026-09-02",
+   "duplicate_dates": 0,
+   "date_gaps": {
+    "median_gap_days": 1.0,
+    "max_gap_days": 11,
+    "gaps_gt_3x_median": 106,
+    "gaps_gt_10_days": 4,
+    "top5_gaps": [
+     {
+      "after": "2024-02-19",
+      "days": 11
+     },
+     {
+      "after": "2023-10-09",
+      "days": 11
+     },
+     {
+      "after": "2020-02-03",
+      "days": 11
+     },
+     {
+      "after": "2026-02-24",
+      "days": 11
+     },
+     {
+      "after": "2012-10-08",
+      "days": 10
+     }
+    ]
+   },
+   "value_quality": {
+    "RZYE": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": 0
+    },
+    "RZMRE": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "RZJME": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    },
+    "LTSZ": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": 0
+    }
+   },
+   "frequency_observed": "日频（T+1盘前披露）",
+   "source_note": "东财datacenter沪深北两融合计；RZYE融资余额(万元量纲需核)、LTSZ流通市值",
+   "metadata_file": null
+  },
+  {
+   "key": "cn_northbound_net",
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/sentiment_research_2026-09/northbound_net.csv",
+   "sha256": "f8077920d7814751fd699196ff62bf796297de58f3ad8573bfb1d5365b958e5f",
+   "bytes": 51277,
+   "mtime": "2026-09-04T00:46:47.509913+08:00",
+   "declared_identity": "cn_northbound_net",
+   "rows": 2264,
+   "columns": [
+    "date",
+    "NET_DEAL_AMT"
+   ],
+   "first_date": "2014-11-17",
+   "last_date": "2024-08-16",
+   "duplicate_dates": 0,
+   "date_gaps": {
+    "median_gap_days": 1.0,
+    "max_gap_days": 12,
+    "gaps_gt_3x_median": 98,
+    "gaps_gt_10_days": 4,
+    "top5_gaps": [
+     {
+      "after": "2016-10-11",
+      "days": 12
+     },
+     {
+      "after": "2020-02-03",
+      "days": 11
+     },
+     {
+      "after": "2024-02-19",
+      "days": 11
+     },
+     {
+      "after": "2023-10-09",
+      "days": 11
+     },
+     {
+      "after": "2022-10-10",
+      "days": 10
+     }
+    ]
+   },
+   "value_quality": {
+    "NET_DEAL_AMT": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    }
+   },
+   "frequency_observed": "日频（已终止披露）",
+   "source_note": "东财北向净买入合计；2024-08-16后披露终止，序列止于此为资料事实而非缺失",
+   "metadata_file": null
+  },
+  {
+   "key": "us_sp500_breadth_200dma",
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/sentiment_research_2026-09/breadth_sp500_200dma.csv",
+   "sha256": "ac9ab39b7086b42e01617ee4a08e21e25300d9e981668058b7a23628ad915bca",
+   "bytes": 112809,
+   "mtime": "2026-09-04T00:46:47.527078+08:00",
+   "declared_identity": "us_sp500_breadth_200dma",
+   "rows": 6704,
+   "columns": [
+    "date",
+    "breadth"
+   ],
+   "first_date": "2000-01-03",
+   "last_date": "2026-08-28",
+   "duplicate_dates": 0,
+   "date_gaps": {
+    "median_gap_days": 1.0,
+    "max_gap_days": 7,
+    "gaps_gt_3x_median": 180,
+    "gaps_gt_10_days": 0,
+    "top5_gaps": [
+     {
+      "after": "2001-09-17",
+      "days": 7
+     },
+     {
+      "after": "2007-01-03",
+      "days": 5
+     },
+     {
+      "after": "2012-10-31",
+      "days": 5
+     },
+     {
+      "after": "2001-05-29",
+      "days": 4
+     },
+     {
+      "after": "2004-02-17",
+      "days": 4
+     }
+    ]
+   },
+   "value_quality": {
+    "breadth": {
+     "missing": 0,
+     "non_finite": 0,
+     "non_positive": null
+    }
+   },
+   "frequency_observed": "日频",
+   "source_note": "标普500高于200日线成分占比（MacroMicro转载），0-100百分数口径；非本仓库登记对象",
+   "metadata_file": null
+  },
+  {
+   "key": "cn_tx_sector_flow",
+   "path": "/Users/yongbiaoli/.lei_signal_lab/cache/tx_sector_flow_pilot.json",
+   "sha256": "7243e428ddbc91b4028012298e35853a7f044d20916be90eb8084560ca464d29",
+   "bytes": 8435957,
+   "mtime": "2026-09-14T19:00:39.750062+08:00",
+   "boards": 161,
+   "points_total": 75611,
+   "date_min": "2021-08-02",
+   "date_max": "2026-09-04",
+   "missing_small_yi": 0,
+   "missing_main_yi": 0,
+   "fields_per_point": [
+    "date",
+    "jumbo_yi",
+    "main_yi",
+    "mid_yi",
+    "n_stocks",
+    "small_yi"
+   ],
+   "source_note": "腾讯板块聚合资金流（约246交易日/161-166板块，旧报告口径96%+与东财一致）；供应商分类不等于真实散户心理"
+  },
+  {
+   "key": "frozen_research_snapshot_v2",
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+   "snapshot_json_sha256": "d4e6518b957d06a50189a574cbd547a98e479bae872a284c0718febff781ce27",
+   "normalized_files": [
+    "159652.SZ.csv",
+    "510300.SS.csv",
+    "512400.SS.csv",
+    "512890.SS.csv",
+    "513870.SS.csv",
+    "515050.SS.csv",
+    "515130.SS.csv",
+    "515170.SS.csv",
+    "515300.SS.csv",
+    "515880.SS.csv",
+    "516220.SS.csv",
+    "518850.SS.csv",
+    "562590.SS.csv",
+    "588000.SS.csv"
+   ],
+   "normalized_file_count": 14,
+   "snapshot_meta_keys": [
+    "authorization",
+    "code_identity",
+    "instruments",
+    "known_gaps",
+    "market_data_refs",
+    "mode",
+    "not_for",
+    "protocol_id",
+    "request",
+    "schema_version",
+    "semantics",
+    "source",
+    "timing",
+    "transform_version",
+    "uses",
+    "uses_basis"
+   ],
+   "symbols": null,
+   "rows": null,
+   "first_date": null,
+   "last_date": null,
+   "source_note": "冻结14产品研究快照（input-preflight报告记录14只/18916行/2019-09-02起）；冻结存量数据不因加列获得资格"
+  }
+ ]
+}

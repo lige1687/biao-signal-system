@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.lei.sector.trend</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/yongbiaoli/.workbuddy/binaries/python/envs/default/bin/python3</string>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/precompute_sector_trend.py</string>
+  </array>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PYTHONPATH</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/src</string>
+  </dict>
+
+  <!-- 每个交易日(周一~五) 16:45 收盘后跑，错开 16:30 的全A宽度/日K 维护 -->
+  <!-- launchd Weekday: 0/7=周日,1=周一,2=周二,3=周三,4=周四,5=周五,6=周六 -->
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>16</integer><key>Minute</key><integer>45</integer></dict>
+    <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>16</integer><key>Minute</key><integer>45</integer></dict>
+    <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>16</integer><key>Minute</key><integer>45</integer></dict>
+    <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>16</integer><key>Minute</key><integer>45</integer></dict>
+    <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>16</integer><key>Minute</key><integer>45</integer></dict>
+  </array>
+
+  <key>StandardOutPath</key>
+  <string>/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/logs/precompute_sector_trend.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/logs/precompute_sector_trend.err.log</string>
+
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>

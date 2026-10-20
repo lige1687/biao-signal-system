@@ -1,0 +1,79 @@
+{
+  "id": "mixed11-evaluation-and-historical-qualification-v1",
+  "frozen_at": "2026-09-09T11:30:20.805553+00:00",
+  "principles": {
+    "path": "docs/research/experiment-backtest-principles.md",
+    "version": "v1.0"
+  },
+  "strategy_spec": "docs/trading-spec-v1.md V1.0; authorized independent allocation/trend-holding extension, not ABCD proof",
+  "ruleset": "configs/rules.v1.yaml 1.5.0; no change",
+  "status": "descriptive evaluation of already seen frozen historical accounts; no new strategy returns",
+  "source_protocol": "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-protocol.json",
+  "source_files": {
+    "docs/research/experiment-backtest-principles.md": "9dad4d24d7c3ebe570222342339a3a3f2537b1df5819a6f36fd4cbb8a5cbfa68",
+    "docs/research/experiment-report-template.md": "1ea156a23711390da8a8768cfd7f55cc10f8415b8716cffca70df856e3386bdb",
+    "docs/trading-spec-v1.md": "dd75d70cd22b103e815d3b314b47c36731230aa268d05e42fa447ba55e639798",
+    "configs/rules.v1.yaml": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-protocol.json": "31d7a59b216f71577683f80ef89d9a41d7e2dd79c1655ed19836310d622da303",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/final-manifest.json": "80bf3fa0f4f80c491eb641107e36c6ae1f1df29ea68ce23ba1ac524135d438f2",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-execution/equity.csv": "d25b2afba6846d81926f26d86efefca2f832b6d915a8835251fe25c4925473c2",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-execution/trades.csv": "6b386c7b224b5a1d4dd5e042f7772fb1d4ba9b1075510b9ce0081e2187c6a661",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-execution/actions.csv": "6cc4841bda25fa39385f61f3537ac8bdd0faeb2e3d00de5610c9bdefdf45e58b",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-execution/signals.csv": "dea6c8bbfbc66d986cc147ea4b0d3758a6d5a88c93f2573937032b6e1b85ef19",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-execution/summary.json": "be1b012be8aaa4177a827f104e7b4f57d8ec67751f4e4b4a87af0c0a8b014f22"
+  },
+  "methods": [
+    "equal",
+    "no_exit_100",
+    "no_exit_75",
+    "fast_reentry_exit"
+  ],
+  "fees": [
+    0.001,
+    0.002
+  ],
+  "windows": [
+    {
+      "id": "early",
+      "start": "2020-12-01",
+      "end": "2024-12-31",
+      "initial_mark": "original initial1m"
+    },
+    {
+      "id": "late",
+      "start": "2025-01-01",
+      "end": "2026-06-30",
+      "initial_mark": "actual2024-12-31close, no reset/no external flow"
+    },
+    {
+      "id": "full",
+      "start": "2020-12-01",
+      "end": "2026-06-30",
+      "initial_mark": "original initial1m"
+    }
+  ],
+  "metrics": [
+    "cumulative/annualized phase return",
+    "phase local maximum drawdown with preceding marked capital",
+    "whole-history maximum drawdown and natural-day high-to-recovery duration",
+    "end-unrecovered intervals separately",
+    "average and year-end exposure, annual traded notional/average equity and fees",
+    "11pool own fast reentry cycles grouped by actual monthly selection period, fees and realized/boundary marks separate",
+    "no inherited49count and no unconditional probability claims"
+  ],
+  "purpose": "complete fair four-way evaluation; distinguish pool-wide favorable period from candidate-specific benefit; clarify recovery experience",
+  "pass_stop": "No new efficacy certification threshold applied after seeing known results. Accept accounting/coverage completion only if all four two-cost paths, periods, censored cycles and report reconcile; unresolved inputs lower evidence. Stop at evaluation and bounded qualification audit, no parameter search or expanded-economic-universe returns.",
+  "historical_qualification_stages": {
+    "A_repair": "same already specified economic directions only, restore contemporaneously existing/terminated/merged products and effective tracking objective; source audit first, no last-price indefinite carry through termination",
+    "B_extension": "new economic directions require separate protocol and frozen inclusion rules after A; not labeled data repair"
+  },
+  "not_run": [
+    "new entry/exit/confirmation rules",
+    "breadth filters",
+    "complex factor regression",
+    "new pool returns without complete qualification source",
+    "unknown-market observation"
+  ],
+  "okr_updated": false,
+  "production_authorized": false
+}

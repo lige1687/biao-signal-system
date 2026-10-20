@@ -1,0 +1,76 @@
+{
+  "clean_eof": {
+    "text": "半句话",
+    "interrupted": false
+  },
+  "provider_error": {
+    "text": "半句话",
+    "interrupted": false
+  },
+  "normal": {
+    "text": "半句话",
+    "interrupted": false
+  },
+  "history_retry": {
+    "first_done": {
+      "session_id": "sess_39befc24ddfa",
+      "resolved_symbol": null,
+      "grounded": false,
+      "question_id": 1,
+      "evidence_card": null,
+      "plan_artifact": null,
+      "answer_state": "answered",
+      "next_steps": [],
+      "verify_note": "AI 讲解因连接中断未完成；以上是已收到的部分，上方系统资料仍然可用。可重试同一问题（不会重复记录）。"
+    },
+    "stored_answers": [
+      {
+        "content": "按系统资料，先观察。",
+        "grounded": 0,
+        "meta_json": "{\"trace\": []}"
+      }
+    ],
+    "claims": [
+      {
+        "client_request_id": "controller-interrupted-1",
+        "session_id": "sess_39befc24ddfa",
+        "question_id": 1,
+        "request_hash": "7751fa943c93d6b39802961d26f64cf45d9094148a80e61daf425ac38f3b6884",
+        "created_at": "2026-09-14T16:24:01.370661+00:00",
+        "answer_message_id": 2,
+        "answer_state": "answered",
+        "state_at": "2026-09-14T16:24:14.670913+00:00"
+      }
+    ],
+    "retry_events": [
+      [
+        "token",
+        {
+          "t": "按系统资料，先观察。"
+        }
+      ],
+      [
+        "done",
+        {
+          "session_id": "sess_39befc24ddfa",
+          "resolved_symbol": null,
+          "grounded": false,
+          "question_id": 1,
+          "evidence_card": null,
+          "plan_artifact": null,
+          "answer_state": "answered",
+          "next_steps": [],
+          "replayed": true
+        }
+      ]
+    ],
+    "model_calls": 1
+  },
+  "source_before": {
+    "src/lei_signal/plans/llm.py": "de03130c89cd8cb7fc12be8ae3c6fe90cd83fc932b78b3b0edc5c6e640996301",
+    "src/lei_signal/api/routes/agent.py": "f21c94f98e06d24e857e7615257dbceda860d9d217efafa85aa0c9829de17a2f",
+    "web/src/pages/AgentWorkspacePage.tsx": "56d7c21218d1e9425dd014ed71e356a817aeb21f8150ca6d09c0908f4f5240a6",
+    "web/src/components/AgentConsole.tsx": "d82ab63a58811b788ed3fa6f4dee526357eeb45f12feaf93675f91e922e3bd54"
+  },
+  "source_unchanged": true
+}

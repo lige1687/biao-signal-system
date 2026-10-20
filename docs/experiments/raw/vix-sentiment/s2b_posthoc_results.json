@@ -1,0 +1,36 @@
+{
+  "baseline_mean": {
+    "21": 0.010946,
+    "63": 0.032072,
+    "126": 0.062433,
+    "252": 0.128728
+  },
+  "definition": "VIX/VIX3M expanding pctile >= 90, cooldown 10td",
+  "first_last": [
+    "2010-11-26",
+    "2026-03-23"
+  ],
+  "n_signals": 82,
+  "placebo": {
+    "mean": 0.132543,
+    "n_placebo": 300,
+    "p90": 0.157651,
+    "p95": 0.159983,
+    "redraws_total": 0
+  },
+  "reason": "pre-registered S2 label(rule) inconsistency: label=backwardation, rule=pctile<=10 (contango)",
+  "sample_dates_2020_2022_check": [
+    "2020-02-24",
+    "2020-03-10",
+    "2020-03-25",
+    "2020-04-09"
+  ],
+  "signal_mean": {
+    "21": 0.021888,
+    "63": 0.052064,
+    "126": 0.081736,
+    "252": 0.152335
+  },
+  "status": "POST-HOC, report-only, never adopt without new pre-registration",
+  "win_rate_252": 0.890244
+}

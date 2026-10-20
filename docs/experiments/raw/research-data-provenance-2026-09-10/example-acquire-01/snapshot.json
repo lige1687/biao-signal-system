@@ -1,0 +1,217 @@
+{
+ "schema_version": "research-data-snapshot/1.0",
+ "transform_version": "research-data-snapshot/1.0",
+ "mode": "acquire",
+ "protocol_id": "research-data-provenance-2026-09-10",
+ "source": {
+  "source_id": "sina_getKLineData",
+  "import_source": null
+ },
+ "request": {
+  "instruments": [
+   "510300.SS",
+   "515300.SS"
+  ],
+  "trading_days_requested": {
+   "510300.SS": 60,
+   "515300.SS": 60
+  },
+  "fields_requested": [
+   "date",
+   "open",
+   "high",
+   "low",
+   "close",
+   "volume"
+  ],
+  "calls": [
+   {
+    "url": "https://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol=sh510300&scale=240&ma=no&datalen=60",
+    "requested_at": "2026-09-10T16:07:52.503938+00:00",
+    "returned_at": "2026-09-10T16:07:52.625717+00:00",
+    "ok": true,
+    "error": null,
+    "body_sha256": "6b43e7df9af55647f0aeabcaecb6bb65f2ea20aaeee6a866c977dc2a2e72f7f6",
+    "body_bytes": 6145
+   },
+   {
+    "url": "https://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol=sh515300&scale=240&ma=no&datalen=60",
+    "requested_at": "2026-09-10T16:07:52.631533+00:00",
+    "returned_at": "2026-09-10T16:07:52.748702+00:00",
+    "ok": true,
+    "error": null,
+    "body_sha256": "7c6392b8765540504d97ebaa6db1d7406f2c78cb284029b7a62f577fe74386a7",
+    "body_bytes": 6081
+   }
+  ],
+  "requests_used": 2,
+  "budget": {
+   "max_instruments": 2,
+   "max_trading_days": 60,
+   "max_requests": 10,
+   "timeout_seconds": 15.0,
+   "max_retries": 2
+  }
+ },
+ "timing": {
+  "started_at": "2026-09-10T16:07:52.503806+00:00",
+  "finished_at": "2026-09-10T16:07:52.752068+00:00",
+  "note": "started_at/finished_at 是本次运行时刻；不得当作数据的对外可用时刻。"
+ },
+ "instruments": [
+  {
+   "instrument_id": "510300.SS",
+   "market": "CN",
+   "requested_trading_days": 60,
+   "rows": 60,
+   "first_date": "2026-06-18",
+   "last_date": "2026-09-10",
+   "raw_responses": [
+    {
+     "path": "raw/510300.SS.00.raw.json",
+     "url": "https://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol=sh510300&scale=240&ma=no&datalen=60",
+     "sha256": "6b43e7df9af55647f0aeabcaecb6bb65f2ea20aaeee6a866c977dc2a2e72f7f6",
+     "bytes": 6145
+    }
+   ],
+   "normalized": {
+    "path": "normalized/510300.SS.csv",
+    "sha256": "41e3cbfa7cb1dc96afef40c15e68a8d1436ec0b109d30e8f6de56c51a4e913d6"
+   },
+   "provider_report": {
+    "provider": "sina",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": "2026-09-10T16:07:52.625717+00:00"
+  },
+  {
+   "instrument_id": "515300.SS",
+   "market": "CN",
+   "requested_trading_days": 60,
+   "rows": 60,
+   "first_date": "2026-06-18",
+   "last_date": "2026-09-10",
+   "raw_responses": [
+    {
+     "path": "raw/515300.SS.00.raw.json",
+     "url": "https://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData?symbol=sh515300&scale=240&ma=no&datalen=60",
+     "sha256": "7c6392b8765540504d97ebaa6db1d7406f2c78cb284029b7a62f577fe74386a7",
+     "bytes": 6081
+    }
+   ],
+   "normalized": {
+    "path": "normalized/515300.SS.csv",
+    "sha256": "1559e49201bf573ba8b8de2b1c90ba1f5450bb9521b5990c75745aa479fc99bf"
+   },
+   "provider_report": {
+    "provider": "sina",
+    "adjusted": false,
+    "duplicates_removed": 0,
+    "warnings": [
+     "行情未复权：分红拆股可能造成虚假的颜色切换"
+    ]
+   },
+   "fetched_at": "2026-09-10T16:07:52.748702+00:00"
+  }
+ ],
+ "market_data_refs": {
+  "510300.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "sina_getKLineData",
+   "instrument_id": "510300.SS",
+   "market": "CN",
+   "observed_at": "2026-09-10",
+   "available_at": null,
+   "generated_at": "2026-09-10T16:07:52.631433+00:00",
+   "last_valid_at": "2026-09-10",
+   "health": "unknown",
+   "reason": "来源发布节奏未核实（data_provenance.SOURCE_POLICIES 为空）；对外可用时刻未知，不用抓取时刻顶替",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "sina_getKLineData",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": "2026-09-10T16:07:52.625717+00:00",
+   "transform_version": "research-data-snapshot/1.0"
+  },
+  "515300.SS": {
+   "schema_version": "provenance/1.2",
+   "source_id": "sina_getKLineData",
+   "instrument_id": "515300.SS",
+   "market": "CN",
+   "observed_at": "2026-09-10",
+   "available_at": null,
+   "generated_at": "2026-09-10T16:07:52.752012+00:00",
+   "last_valid_at": "2026-09-10",
+   "health": "unknown",
+   "reason": "来源发布节奏未核实（data_provenance.SOURCE_POLICIES 为空）；对外可用时刻未知，不用抓取时刻顶替",
+   "calendar_ref": null,
+   "as_of_cutoff": null,
+   "source_policy_ref": null,
+   "reference_lag_trading_days": null,
+   "source": "sina_getKLineData",
+   "completeness": "unknown",
+   "lag_trading_days": null,
+   "fetched_at": "2026-09-10T16:07:52.748702+00:00",
+   "transform_version": "research-data-snapshot/1.0"
+  }
+ },
+ "semantics": {
+  "fields": {
+   "date": "交易日（Asia/Shanghai，无时区标注的日期）",
+   "open": "开盘价，人民币元",
+   "high": "最高价，人民币元",
+   "low": "最低价，人民币元",
+   "close": "收盘价，人民币元",
+   "volume": "成交量，原始单位未统一认证（只宜同一标的自身相对比较）"
+  },
+  "currency": "CNY",
+  "price_basis": "nominal_close",
+  "price_basis_note": "nominal_close = 名义未复权收盘价；公司行动不在价格里，需另接已登记的 actions 输入",
+  "corporate_action_basis": "not_included_in_price",
+  "trading_calendar": {
+   "authority": "none",
+   "note": "本仓库无真实交易所日历。data/calendar.py 的 WeekdayCalendar 是周一至周五近似且节假日表为空，不得当交易日历使用；data_provenance.reference_calendar 的 authority 为 price_dates_reference，只是参考。"
+  },
+  "time_semantics": {
+   "observed_at": "数据自身观察日（日线收盘）",
+   "available_at": "来源对外可用时刻；未核实一律 null 并给 reason",
+   "generated_at": "本地标准化产物生成时刻",
+   "fetched_at": "本次取得时刻；导入模式为 null",
+   "rule": "后来取得的历史资料只证明本次取得了该版本，不证明历史当天就拿得到"
+  }
+ },
+ "code_identity": {
+  "data_snapshot": "1bd91ede1d97be8ddaf1b718447e9c3322d4fbdf6cca5821fce2633e500596cf",
+  "data_quality": "905ac3474dc2288f4b602e964a049abfcce573b4a15e96511ffe64e829f07081",
+  "providers": "69c7a09954bbf2c6c8b8a8d90474bbdce43be26b03cae8dc6993711718a3805c",
+  "validation": "18d221abbfea6879c980e324a1b346765bcf499ede5141ce3306e9c01106d62b",
+  "data_provenance": "3c5ac99a39feddf619e140c08df13251b6a785c17679bacb7638756a776c749a"
+ },
+ "known_gaps": [
+  "来源发布节奏未核实，available_at 全部未知（health=unknown）",
+  "无真实交易所日历，无法区分整池缺席日与非交易日",
+  "volume 绝对单位未统一认证，只宜同一标的自身相对比较",
+  "价格不含公司行动；分红拆分须由已登记的 actions 输入单独提供"
+ ],
+ "uses": [
+  "description",
+  "diagnostic",
+  "comparison"
+ ],
+ "not_for": [
+  "production_trade",
+  "宣称历史时点可交易",
+  "作为复权价格使用"
+ ],
+ "authorization": {
+  "production_trade": false,
+  "note": "本快照只是数据资料，不构成策略有效或获准交易的证据"
+ }
+}

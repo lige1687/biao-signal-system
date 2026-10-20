@@ -1,0 +1,253 @@
+[
+  {
+    "user_question": "旧退出基准能否算对？",
+    "conclusion": "2245笔已结束交易全部独立复现；2309条中仍有一条MSFT尾部缺价观察限制。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "exit-baseline-2309",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/all-2309-rows.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/input-manifest.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/review-2026-09-08.md"
+      ],
+      "source_hash": [
+        "2fc86b5d636931756a0381fd11aa2eba24db200abfec59432ca6c7647c898586",
+        "0989ee539de20594fc43ccd706262ef0a278597c8f07701c05a1afcbf8c33d75",
+        "c0af3fa913027804dff7c45bf79cfc1446fe4d312b083edbc1d884a3a972672b",
+        "3b16ac9dc154b58efd6d562e9e144545bd8fc33a1ad95202d118555efbc7d3c8"
+      ],
+      "source_version": "research-sixth/2026-09-08",
+      "status": "mixed",
+      "window": "逐标的历史范围，见价格质量表；不是当前信号",
+      "statistic_kind": "legacy_reproduction",
+      "strategy_scope": [],
+      "limitations": "旧机会有历史选择偏差，未重生成入场；复权及指数代理不等于真实可买现金账户；真实产品成本及所有历史交易限制未核验；各标的资料尾期不同，MSFT末尾空价不能当有效观察；研究交付不等于生产采用或用户验收",
+      "compatibility": "unknown",
+      "evidence_id": "exit-baseline-2309",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/summary.json",
+      "strategies": [],
+      "note": "旧机会有历史选择偏差，未重生成入场；复权及指数代理不等于真实可买现金账户；真实产品成本及所有历史交易限制未核验；各标的资料尾期不同，MSFT末尾空价不能当有效观察；研究交付不等于生产采用或用户验收"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_legacy_pool",
+        "instrument_id": "A_B_C_historical_universe",
+        "market": "mixed",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "多市场代理、历史收盘/开盘；available_at没有逐条独立核实",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_legacy_pool",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/input-manifest.json",
+        "input_manifest_sha256": "c0af3fa913027804dff7c45bf79cfc1446fe4d312b083edbc1d884a3a972672b"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/inputs/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略规格§2.3/§3/§9/§10；旧执行配置复现与固定机会研究，不修改生产",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-sixth-2026-09-08",
+      "opportunities": 2309,
+      "independent_market_episodes": null,
+      "independent_event_count_reason": "同一次市场变化会影响多笔持仓，交易行数不是独立行情次数。",
+      "independently_reviewed": true,
+      "review_scope": "见各卡来源的独立复核报告；原输入与未来有效性不等同",
+      "production_adopted": false,
+      "limitations": [
+        "旧机会有历史选择偏差，未重生成入场",
+        "复权及指数代理不等于真实可买现金账户",
+        "真实产品成本及所有历史交易限制未核验",
+        "各标的资料尾期不同，MSFT末尾空价不能当有效观察",
+        "研究交付不等于生产采用或用户验收"
+      ]
+    }
+  },
+  {
+    "user_question": "旧普通时间退出真的拖累那么多吗？",
+    "conclusion": "两方案分别多算6条和2条，修正后变化接近零；不构成采用证据。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "time-exit-899",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/protocol-addendum-01.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/time-exit-audit.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/time-exit-paired-ledger.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/time-exit-review/README.md"
+      ],
+      "source_hash": [
+        "511e281019f38e39f22eac476356f196d7f7150f5075a95867f430f0619b6552",
+        "a62d602ea72729d42b623aeb77ee8d4ec2333a646fa12236f90eb9f20b079ac6",
+        "7beedc9b15bf9a13a4f16b95460b059fa0ddd15f49223b35d74ece0dbdc363ce",
+        "c7cb13d76f3e0cc89f30e0b6c8eadb01850252b4526b5a6d8426d5ae39361d38",
+        "2c5a18f22fab76a2501dba11a80902a5d30aa8c134e8e33af7ebf3fe140e5dc1"
+      ],
+      "source_version": "research-sixth/2026-09-08",
+      "status": "mixed",
+      "window": "逐标的历史范围，见价格质量表；不是当前信号",
+      "statistic_kind": "legacy_duplicate_count_audit",
+      "strategy_scope": [],
+      "limitations": "旧机会有历史选择偏差，未重生成入场；复权及指数代理不等于真实可买现金账户；真实产品成本及所有历史交易限制未核验；各标的资料尾期不同，MSFT末尾空价不能当有效观察；研究交付不等于生产采用或用户验收",
+      "compatibility": "unknown",
+      "evidence_id": "time-exit-899",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/protocol.md",
+      "strategies": [],
+      "note": "旧机会有历史选择偏差，未重生成入场；复权及指数代理不等于真实可买现金账户；真实产品成本及所有历史交易限制未核验；各标的资料尾期不同，MSFT末尾空价不能当有效观察；研究交付不等于生产采用或用户验收"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_legacy_pool",
+        "instrument_id": "A_B_C_historical_universe",
+        "market": "mixed",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "多市场代理、历史收盘/开盘；available_at没有逐条独立核实",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_legacy_pool",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/input-manifest.json",
+        "input_manifest_sha256": "c0af3fa913027804dff7c45bf79cfc1446fe4d312b083edbc1d884a3a972672b"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/inputs/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略规格§2.3/§3/§9/§10；旧执行配置复现与固定机会研究，不修改生产",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-sixth-2026-09-08",
+      "opportunities": 899,
+      "independent_market_episodes": null,
+      "independent_event_count_reason": "同一次市场变化会影响多笔持仓，交易行数不是独立行情次数。",
+      "independently_reviewed": true,
+      "review_scope": "见各卡来源的独立复核报告；原输入与未来有效性不等同",
+      "production_adopted": false,
+      "limitations": [
+        "旧机会有历史选择偏差，未重生成入场",
+        "复权及指数代理不等于真实可买现金账户",
+        "真实产品成本及所有历史交易限制未核验",
+        "各标的资料尾期不同，MSFT末尾空价不能当有效观察",
+        "研究交付不等于生产采用或用户验收"
+      ]
+    }
+  },
+  {
+    "user_question": "结构位下方多留半个通常波动幅度是否有帮助？",
+    "conclusion": "同资金A平均结果略好但期间损失更深，B略差、C退出不变；同计划风险减少投入与损失，也降低平均收益。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "atr-half-buffer",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/atr-protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/atr-protocol-lock.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/atr-results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/atr-paired-summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/atr-opportunity-ledger.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/atr-review/README.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/atr-review/independent-results.json"
+      ],
+      "source_hash": [
+        "9fcbbb13ccdd22fc7cf9adb0af3c4eb88e5e2a1177eea229c7d26e36d1fd1774",
+        "1652b8dafead31dd5f78d462245ec2d86dc05d16e5c861c4d9eee47f390e5078",
+        "bf620d8d6ca3e0c3524a50784b10e31b89121600178aa9f9138a8f90b7faa532",
+        "d82818bae28da8f65b7dd547c12a90e6c27b6da41f952027b751834cc991a941",
+        "9c5cb3e9c731f373c8c739703f8a6f646a1976e47ee2e95160be0b1b002d7eb0",
+        "38ceb3c64c3ea563f209eb3ce9ffde4a7d49ebe0725dd580edfa1b3a338dac5d",
+        "e51e2a11c5da4acc0189123c292c7de9b5aee3a9646f48ee08837c1da56ffaac"
+      ],
+      "source_version": "research-sixth/2026-09-08",
+      "status": "mixed",
+      "window": "逐标的历史范围，见价格质量表；不是当前信号",
+      "statistic_kind": "fixed_opportunity_mechanism_comparison",
+      "strategy_scope": [],
+      "limitations": "旧机会有历史选择偏差，未重生成入场；复权及指数代理不等于真实可买现金账户；真实产品成本及所有历史交易限制未核验；各标的资料尾期不同，MSFT末尾空价不能当有效观察；研究交付不等于生产采用或用户验收",
+      "compatibility": "unknown",
+      "evidence_id": "atr-half-buffer",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/atr-protocol.md",
+      "strategies": [],
+      "note": "旧机会有历史选择偏差，未重生成入场；复权及指数代理不等于真实可买现金账户；真实产品成本及所有历史交易限制未核验；各标的资料尾期不同，MSFT末尾空价不能当有效观察；研究交付不等于生产采用或用户验收"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_legacy_pool",
+        "instrument_id": "A_B_C_historical_universe",
+        "market": "mixed",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "多市场代理、历史收盘/开盘；available_at没有逐条独立核实",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_legacy_pool",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/full-baseline-review/input-manifest.json",
+        "input_manifest_sha256": "c0af3fa913027804dff7c45bf79cfc1446fe4d312b083edbc1d884a3a972672b"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-sixth-2026-09-08/inputs/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略规格§2.3/§3/§9/§10；旧执行配置复现与固定机会研究，不修改生产",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-sixth-2026-09-08",
+      "opportunities": 2309,
+      "independent_market_episodes": null,
+      "independent_event_count_reason": "同一次市场变化会影响多笔持仓，交易行数不是独立行情次数。",
+      "independently_reviewed": true,
+      "review_scope": "见各卡来源的独立复核报告；原输入与未来有效性不等同",
+      "production_adopted": false,
+      "limitations": [
+        "旧机会有历史选择偏差，未重生成入场",
+        "复权及指数代理不等于真实可买现金账户",
+        "真实产品成本及所有历史交易限制未核验",
+        "各标的资料尾期不同，MSFT末尾空价不能当有效观察",
+        "研究交付不等于生产采用或用户验收"
+      ]
+    }
+  }
+]

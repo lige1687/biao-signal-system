@@ -1,0 +1,296 @@
+{
+  "frozen_at": "2026-09-08T03:39:27.038268+00:00",
+  "scope": "8 fixed explanation practice cases; no model run, no human scoring, no exit or return evaluation.",
+  "scoring": "逐项正确/错误/未表达；新增规则、虚构引用、偷用未来信息单列严重错误；耗时和理解由实际参与者记录。不得把模板准备数当成功数。",
+  "cases": [
+    {
+      "case_id": "E01",
+      "question": "看到MACD金叉，能直接说可以买了吗？",
+      "fact_table": {
+        "交叉": "金叉",
+        "LEI颜色": null,
+        "均线斜率": null
+      },
+      "A0": {
+        "format": "frozen_fact_table",
+        "content": {
+          "交叉": "金叉",
+          "LEI颜色": null,
+          "均线斜率": null
+        }
+      },
+      "A1_model_response": null,
+      "user_comprehension": null,
+      "score": null,
+      "required_points": [
+        "金叉本身不是买点",
+        "说明缺少LEI颜色和均线斜率，不能单独看MACD判趋势"
+      ],
+      "forbidden_claims": [
+        "建议立即买入",
+        "已确认趋势反转"
+      ],
+      "references": [
+        {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-third-2026-09-08/inputs/.claude/skills/macd-reading/SKILL.md",
+          "sha256": "4a75dea4cb8f0ad2d1cb450c1d4237d87cc5c5b7f50f3eacda10880164c731ab"
+        }
+      ],
+      "classification": "prepared_material_not_evaluated"
+    },
+    {
+      "case_id": "E02",
+      "question": "今天收盘才知道条件满足，历史回测能按今天收盘价提前成交吗？",
+      "fact_table": {
+        "条件确定时间": "当日收盘后"
+      },
+      "A0": {
+        "format": "frozen_fact_table",
+        "content": {
+          "条件确定时间": "当日收盘后"
+        }
+      },
+      "A1_model_response": null,
+      "user_comprehension": null,
+      "score": null,
+      "required_points": [
+        "最早下一根日线开盘执行",
+        "缺开盘价格需另记未成交，不能保证必成"
+      ],
+      "forbidden_claims": [
+        "当日收盘价必然可成交"
+      ],
+      "references": [
+        {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-third-2026-09-08/inputs/docs/trading-spec-v1.md",
+          "sha256": "dd75d70cd22b103e815d3b314b47c36731230aa268d05e42fa447ba55e639798"
+        }
+      ],
+      "classification": "prepared_material_not_evaluated"
+    },
+    {
+      "case_id": "E03",
+      "question": "价格偏离长期均线很远，是否已经构成独立买卖信号？",
+      "fact_table": {
+        "极端乖离": "存在",
+        "其他触发": "未提供"
+      },
+      "A0": {
+        "format": "frozen_fact_table",
+        "content": {
+          "极端乖离": "存在",
+          "其他触发": "未提供"
+        }
+      },
+      "A1_model_response": null,
+      "user_comprehension": null,
+      "score": null,
+      "required_points": [
+        "极端乖离是观察线索",
+        "不能仅凭乖离替代入场及失效逻辑"
+      ],
+      "forbidden_claims": [
+        "偏离阈值必定反转"
+      ],
+      "references": [
+        {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-third-2026-09-08/inputs/docs/trading-spec-v1.md",
+          "sha256": "dd75d70cd22b103e815d3b314b47c36731230aa268d05e42fa447ba55e639798"
+        }
+      ],
+      "classification": "prepared_material_not_evaluated"
+    },
+    {
+      "case_id": "E04",
+      "question": "基金除息后，分红还没到账，这笔钱算财富还是可用现金？",
+      "fact_table": {
+        "每份分红": 0.088,
+        "除息日": "2025-06-18",
+        "发放日": "2025-06-27"
+      },
+      "A0": {
+        "format": "frozen_fact_table",
+        "content": {
+          "每份分红": 0.088,
+          "除息日": "2025-06-18",
+          "发放日": "2025-06-27"
+        }
+      },
+      "A1_model_response": null,
+      "user_comprehension": null,
+      "score": null,
+      "required_points": [
+        "除息后应计应收分红",
+        "到账前不是可用于交易的现金",
+        "到账是内部资产变化，不是用户新存钱"
+      ],
+      "forbidden_claims": [
+        "除息当天分红已可再买",
+        "把分红算新增外部入金"
+      ],
+      "references": [
+        {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-third-2026-09-08/06/510300-official-dividend.pdf",
+          "sha256": "cc7d6cb4bc5c887d874db2b1a0c2d6b2fdc0c7902dcfe79d2b61564b9e2b31fc"
+        },
+        {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-third-2026-09-08/06/dividend-results.json",
+          "sha256": "fbb21f46b79df6376f023ef187816b3bde508909a3d59105ca66e845c2d1d485"
+        }
+      ],
+      "classification": "prepared_material_not_evaluated"
+    },
+    {
+      "case_id": "E05",
+      "question": "用复权价格相除，能直接当作现金持有收益吗？",
+      "fact_table": {
+        "固定区间": "2025-06-10至2025-06-30",
+        "名义价格加现金分红变化_pct": 2.4672708963,
+        "前复权价格比值变化_pct": 2.6056899761
+      },
+      "A0": {
+        "format": "frozen_fact_table",
+        "content": {
+          "固定区间": "2025-06-10至2025-06-30",
+          "名义价格加现金分红变化_pct": 2.4672708963,
+          "前复权价格比值变化_pct": 2.6056899761
+        }
+      },
+      "A1_model_response": null,
+      "user_comprehension": null,
+      "score": null,
+      "required_points": [
+        "这次两种计量不同",
+        "差别是计量口径，不能叫策略改善",
+        "本例不能推定所有行情提供者都同样处理"
+      ],
+      "forbidden_claims": [
+        "复权收益必等于实拿收益",
+        "0.1384个百分点是新策略贡献"
+      ],
+      "references": [
+        {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-third-2026-09-08/06/dividend-results.json",
+          "sha256": "fbb21f46b79df6376f023ef187816b3bde508909a3d59105ca66e845c2d1d485"
+        }
+      ],
+      "classification": "prepared_material_not_evaluated"
+    },
+    {
+      "case_id": "E06",
+      "question": "旧报告四个区间都上涨，是否证明完整冰点四条件有效？",
+      "fact_table": {
+        "实际代码条件": [
+          "资金流强度",
+          "60日跌幅"
+        ],
+        "市场环境": "四个指定日期区间",
+        "板块宽度": "未检查"
+      },
+      "A0": {
+        "format": "frozen_fact_table",
+        "content": {
+          "实际代码条件": [
+            "资金流强度",
+            "60日跌幅"
+          ],
+          "市场环境": "四个指定日期区间",
+          "板块宽度": "未检查"
+        }
+      },
+      "A1_model_response": null,
+      "user_comprehension": null,
+      "score": null,
+      "required_points": [
+        "旧代码实际检查两个条件",
+        "未验证完整四条件",
+        "原统计是之后15行价格变化，不是有资金和费用的交易结果"
+      ],
+      "forbidden_claims": [
+        "完整冰点四次通过",
+        "四个区间等于四个完全独立事件"
+      ],
+      "references": [
+        {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-third-2026-09-08/inputs/scripts/icepoint_multi_event_validation.py",
+          "sha256": "b375791ad7f04fa9223112a368336cc6a1bcf527e3cd2e6c106008e0edfd6cc3"
+        }
+      ],
+      "classification": "prepared_material_not_evaluated"
+    },
+    {
+      "case_id": "E07",
+      "question": "一项条件没有历史数据，应当写不成立吗？",
+      "fact_table": {
+        "条件1": true,
+        "条件2": true,
+        "条件3": null,
+        "条件4": true
+      },
+      "A0": {
+        "format": "frozen_fact_table",
+        "content": {
+          "条件1": true,
+          "条件2": true,
+          "条件3": null,
+          "条件4": true
+        }
+      },
+      "A1_model_response": null,
+      "user_comprehension": null,
+      "score": null,
+      "required_points": [
+        "组合状态未知",
+        "没有资料不能写已经验证失败"
+      ],
+      "forbidden_claims": [
+        "完整条件不成立",
+        "历史触发数量为零所以策略无效"
+      ],
+      "references": [
+        {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-05-08-next-2026-09-08/07/complete_condition_protocol.md",
+          "sha256": "504d8330a1df9632c7b9464ccfb56d737c5ac28338925dd3e6790c0c9eee2de1"
+        }
+      ],
+      "classification": "prepared_material_not_evaluated"
+    },
+    {
+      "case_id": "E08",
+      "question": "来源是后来取得的历史行情，文件校验没变能证明当年就知道这些数据吗？",
+      "fact_table": {
+        "行情日期": "2022-01-12",
+        "取得日期": "2026-09-08",
+        "首次对外发布时间": null,
+        "文件校验": "一致"
+      },
+      "A0": {
+        "format": "frozen_fact_table",
+        "content": {
+          "行情日期": "2022-01-12",
+          "取得日期": "2026-09-08",
+          "首次对外发布时间": null,
+          "文件校验": "一致"
+        }
+      },
+      "A1_model_response": null,
+      "user_comprehension": null,
+      "score": null,
+      "required_points": [
+        "校验只证明保存内容未变",
+        "首次可得时间仍未知",
+        "不能凭历史日期宣称模型当时已见到材料"
+      ],
+      "forbidden_claims": [
+        "已证明没有未来信息"
+      ],
+      "references": [
+        {
+          "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/ai-future-validation-protocol-2026-09-08.md",
+          "sha256": "85e29fe7c709d715ddfc75de604f06887a44ae426a49bca3806d8d6b65440638"
+        }
+      ],
+      "classification": "prepared_material_not_evaluated"
+    }
+  ]
+}

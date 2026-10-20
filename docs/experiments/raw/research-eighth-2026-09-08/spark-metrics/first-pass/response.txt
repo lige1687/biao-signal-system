@@ -1,0 +1,17 @@
+Implemented.
+
+- Added `summarize(result) -> dict` in [`metrics.py`](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/spark-metrics/metrics.py)
+- Added full coverage unit tests in [`test_metrics.py`](/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/spark-metrics/test_metrics.py)
+- No other files were changed.
+
+What’s covered:
+- Daily validation for required fields and finite numeric values (`equity`, `assets`, `cash`, `receivable`, `total_funding`, `nav`, `fees`)
+- `ValueError` on missing/invalid daily fields, missing/invalid `nav/equity/funding`, non-positive `nav`, NaN/inf
+- All requested metrics, including closed/open split, drawdown/recovery duration, and order rejection counts
+- Empty closed-sets return `None` for mean/median/fraction fields
+- Explicit zero activity values
+- No input mutation (`result` preserved)
+
+Test run (visible):
+- `python3 -m unittest -q test_metrics.py`
+- Result: `Ran 9 tests in 0.000s` and `OK`.

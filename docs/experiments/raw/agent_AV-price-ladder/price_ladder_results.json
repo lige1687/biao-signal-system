@@ -1,0 +1,6907 @@
+{
+ "config": {
+  "arms": {
+   "lump": "baseline",
+   "pl3x5": "primary",
+   "pl3x8": "exploratory",
+   "pl_half10": "exploratory",
+   "pl_newlow": "exploratory",
+   "staged12": "control"
+  },
+  "deadline_td": 250,
+  "eval_td": 500,
+  "fee": 0.001
+ },
+ "corporate_action_adjustments": [
+  {
+   "date": "2022-09-05",
+   "overnight_ratio": 2.7627,
+   "symbol": "512100"
+  },
+  {
+   "date": "2021-03-29",
+   "overnight_ratio": 0.511,
+   "symbol": "512480"
+  },
+  {
+   "date": "2026-07-03",
+   "overnight_ratio": 0.493,
+   "symbol": "512480"
+  }
+ ],
+ "criteria_doc": "AV 任务：双≤20 极端底部——价格阶梯执行 vs 时间分批 vs 一次性。\n\n预注册全文（跑前写死，跑完不得回头调整判定线）。\n\n【研究问题】AK/AM 链条已确认：A 股双≤20 极端底部的\"二次下探\"真实存在\n（警报后 60 日中位 −5.5%~−10.7%），但**时间分批**兑现不了这个结构（AM：分批\n少赚 1.7~2.3pp，晚投批次成本更贵）。本任务测剩下唯一直接利用\"底部是过程\"\n结构的执行形态：**价格阶梯**——首批立即进场，后续批次不在日历上等，而在\n价格跌到预设深度时才接（跌不深就持现金到截止日）。核心张力：V 型反弹时\n后批买不到/买更贵（AE/AM/美债三轮已见的\"反弹罚金\"），阴跌时后批接到更便宜。\n哪个占优是实证问题。\n\n【事件集（复用 AK，禁止重定义）】AK extreme_bottom_events.json 的 37 簇 × 5\n标的 = 79 (symbol, event_date) 样本；对齐断言与 AM 逐字同逻辑（searchsorted\n≤7 自然日 + event_trade_date 断言），本脚本 import AM 的实现，不允许复制走样。\n\n【时间线（跑前写死，修掉 AM 的窗口不对称批评）】\n  - i0 = 事件交易日（警报收盘对齐日，AK 的 event_trade_date）。\n  - 建仓截止 D = i0 + 250 交易日：所有臂（含价格阶梯）必须在此前满仓，\n    阶梯未触发的批次在 D 收盘按市价补齐（登记 never_triggered 率）。\n  - 评估终点 E = i0 + 500 交易日收盘；收益 = 账户总值/C − 1（C=1.0）。\n  - 回撤窗 [i0, E] **所有臂同窗**（AM 的批评口径）。\n  - i0+500 越界 → 该事件所有配对缺失（不外推）。\n  - 价格全部 close-to-close；复用 AK/AM 公司行为前复权（隔夜|±50%|）。\n\n【臂（等额资金批；费用每笔买入 10bp，与 AM 同）】\n  - lump：i0 收盘一次满仓（基准）。\n  - staged12：12 笔按 21 交易日间隔（AM 12m 臂的重建，作对照，应复现 AM ≈ −2pp）。\n  - pl3x5【主判定臂】：3 等批；批1 i0 收盘；批2 触发价 P0×0.95；批3 P0×0.90；\n    未触发批 D 收盘补齐。\n  - pl3x8【探索臂】：同上但 −8%/−16%（测\"更深的耐心\"）。\n  - pl_half10【探索臂】：1/2 i0 收盘 + 1/2 @ P0×0.90 或 D。\n  - pl_newlow【探索臂】：3 等批；批1 i0；批2 = 首个\"自 i0 起运行新低\"收盘\n    （t ≥ i0+5 且 close ≤ min(close[i0..t])，即跌破建仓以来全部收盘含 P0）；\n    批3 = 下一个新低且距批2 ≥10 交易日；未触发 D 补齐。\n  多重性处理（写死）：**只有主臂 pl3x5 参与判定**；探索臂与对照臂任何数字\n  只描述，探索臂\"赢了\"也不触发判定输出，只登记。\n\n【设计偏差诚实登记】阶梯深度(−5/−10)是在看过 AK 二次下探深度(−5.5~−10.7%)\n之后选的，属样本内设计；本实验对\"结构是否存在\"是样本内、对\"该不该用\"\n只有描述级效力。转折级结论需等下一轮真实极端底部的前瞻样本。\n\n【度量（每事件×每臂）】ret_pct(i0+500)、dd_pct(同窗)、平均成本 vs lump\n（等额资金调和平均，pp）、n_trades、never_triggered 批次数、各批成交日。\n\n【配对与聚合】diff = 臂.ret − lump.ret（pp）；dd_impr = lump.dd − 臂.dd（pp，\n正=阶梯更浅）。合并池中位数/四分位/正占比；分标的中位（≥2 配对才有资格）；\nAK type 分组（process/middle/event_v）中位；配对符号检验（复用 AM 确定性实现，\n描述级）。\n\n【预注册三选一判定线（只对主臂 pl3x5，跑前写死）】\n  样本下限：合并池配对数 ≥10，否则直接\"证据不足\"。\n  - 「价格阶梯更优」同时满足：\n    (P1) 池中位 diff(pl3x5 − lump) ≥ +1.0pp\n         [依据：AM 时间分批代价 −1.7~−2.3pp；阶梯要改变执行决策，收益增量\n          至少要抵掉时间分批代价的一半，否则不值得偏离 AM 已收案的\"一次性\"]；\n    (P2) 池中位 dd_impr ≥ +1.0pp\n         [依据：AK 二次下探中位 −5.5~−10.7%，阶梯现金批天然躲一半，实际\n          改善不足 1pp 说明现金批没起到保护作用]；\n    (P3) ≥3/5 个有资格标的（配对 ≥2）分标的中位 diff > 0。\n  - 「价格阶梯无效」满足任一：\n    (N1) 池中位 diff ≤ 0；或\n    (N2) |池中位 diff| < 0.5 且 dd_impr 中位 < 1.0（收益平、保护也无）。\n  - 其余 = 「证据不足/交换」（如收益为正但不足 +1pp 且回撤改善明显——\n    按登记如实报\"交换\"结构，不硬塞进两极）。\n\n【红线遵守】不回答\"该不该建仓\"；不产生买卖规则（阶梯深度是实验参数不是\n推荐参数）；不改生产代码/缓存/既有归档；产出全为新增。\n双跑哈希：PYTHONHASHSEED=0 / 42，sha256(canonical json) 逐位一致。\n",
+ "events": [
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -49.32,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -26.51
+    },
+    "pl3x5": {
+     "build_end_offset": 20,
+     "cost_vs_p0_pp": -5.67,
+     "dd_pct": -49.32,
+     "fill_days": [
+      0,
+      17,
+      20
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -22.1
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -8.52,
+     "dd_pct": -42.56,
+     "fill_days": [
+      0,
+      19,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -19.67
+    },
+    "pl_half10": {
+     "build_end_offset": 20,
+     "cost_vs_p0_pp": -5.42,
+     "dd_pct": -49.32,
+     "fill_days": [
+      0,
+      20
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -22.3
+    },
+    "pl_newlow": {
+     "build_end_offset": 234,
+     "cost_vs_p0_pp": -6.92,
+     "dd_pct": -42.8,
+     "fill_days": [
+      0,
+      17,
+      234
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -21.05
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 3.81,
+     "dd_pct": -45.65,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -29.21
+    }
+   },
+   "event_date": "2010-05-25",
+   "event_trade_date": "2010-06-01",
+   "name": "创业板指",
+   "p0": 973.233,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -37.77,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 17.91
+    },
+    "pl3x5": {
+     "build_end_offset": 136,
+     "cost_vs_p0_pp": -5.4,
+     "dd_pct": -32.63,
+     "fill_days": [
+      0,
+      14,
+      136
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 24.65
+    },
+    "pl3x8": {
+     "build_end_offset": 149,
+     "cost_vs_p0_pp": -10.29,
+     "dd_pct": -28.14,
+     "fill_days": [
+      0,
+      97,
+      149
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 31.44
+    },
+    "pl_half10": {
+     "build_end_offset": 136,
+     "cost_vs_p0_pp": -5.55,
+     "dd_pct": -29.74,
+     "fill_days": [
+      0,
+      136
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 24.84
+    },
+    "pl_newlow": {
+     "build_end_offset": 87,
+     "cost_vs_p0_pp": -2.71,
+     "dd_pct": -35.54,
+     "fill_days": [
+      0,
+      12,
+      87
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 21.2
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -4.06,
+     "dd_pct": -27.84,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 22.9
+    }
+   },
+   "event_date": "2011-05-30",
+   "event_trade_date": "2011-05-30",
+   "name": "创业板指",
+   "p0": 834.316,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -22.14,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 88.7
+    },
+    "pl3x5": {
+     "build_end_offset": 163,
+     "cost_vs_p0_pp": -6.14,
+     "dd_pct": -17.11,
+     "fill_days": [
+      0,
+      161,
+      163
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 101.03
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 2.82,
+     "dd_pct": -17.11,
+     "fill_days": [
+      0,
+      162,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 83.52
+    },
+    "pl_half10": {
+     "build_end_offset": 163,
+     "cost_vs_p0_pp": -5.91,
+     "dd_pct": -17.11,
+     "fill_days": [
+      0,
+      163
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 100.54
+    },
+    "pl_newlow": {
+     "build_end_offset": 82,
+     "cost_vs_p0_pp": -0.61,
+     "dd_pct": -22.14,
+     "fill_days": [
+      0,
+      17,
+      82
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 89.86
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 4.53,
+     "dd_pct": -17.11,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 80.52
+    }
+   },
+   "event_date": "2012-03-29",
+   "event_trade_date": "2012-03-29",
+   "name": "创业板指",
+   "p0": 683.959,
+   "symbol": "399006",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -22.14,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 96.8
+    },
+    "pl3x5": {
+     "build_end_offset": 91,
+     "cost_vs_p0_pp": -5.53,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      84,
+      91
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 108.32
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 9.61,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      91,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 79.54
+    },
+    "pl_half10": {
+     "build_end_offset": 91,
+     "cost_vs_p0_pp": -5.74,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      91
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 108.79
+    },
+    "pl_newlow": {
+     "build_end_offset": 52,
+     "cost_vs_p0_pp": -1.62,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      10,
+      52
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 100.05
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 14.88,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 71.3
+    }
+   },
+   "event_date": "2012-07-16",
+   "event_trade_date": "2012-07-16",
+   "name": "创业板指",
+   "p0": 691.385,
+   "symbol": "399006",
+   "type": "middle"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 118.44
+    },
+    "pl3x5": {
+     "build_end_offset": 41,
+     "cost_vs_p0_pp": -5.98,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      39,
+      41
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 132.34
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 14.83,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      40,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 90.24
+    },
+    "pl_half10": {
+     "build_end_offset": 41,
+     "cost_vs_p0_pp": -5.79,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      41
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 131.86
+    },
+    "pl_newlow": {
+     "build_end_offset": 42,
+     "cost_vs_p0_pp": -5.25,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      32,
+      42
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 130.55
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 24.73,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 75.13
+    }
+   },
+   "event_date": "2012-09-25",
+   "event_trade_date": "2012-09-25",
+   "name": "创业板指",
+   "p0": 682.335,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 145.45
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 52.34,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 61.12
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 52.34,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 61.12
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 34.71,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 82.2
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 52.34,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 61.12
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 55.49,
+     "dd_pct": -21.31,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 57.85
+    }
+   },
+   "event_date": "2012-12-13",
+   "event_trade_date": "2012-12-13",
+   "name": "创业板指",
+   "p0": 632.181,
+   "symbol": "399006",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -44.19,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -28.3
+    },
+    "pl3x5": {
+     "build_end_offset": 35,
+     "cost_vs_p0_pp": -8.37,
+     "dd_pct": -42.83,
+     "fill_days": [
+      0,
+      34,
+      35
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -21.75
+    },
+    "pl3x8": {
+     "build_end_offset": 36,
+     "cost_vs_p0_pp": -10.1,
+     "dd_pct": -42.83,
+     "fill_days": [
+      0,
+      34,
+      36
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -20.24
+    },
+    "pl_half10": {
+     "build_end_offset": 35,
+     "cost_vs_p0_pp": -8.32,
+     "dd_pct": -42.83,
+     "fill_days": [
+      0,
+      35
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -21.79
+    },
+    "pl_newlow": {
+     "build_end_offset": 48,
+     "cost_vs_p0_pp": -9.44,
+     "dd_pct": -42.83,
+     "fill_days": [
+      0,
+      33,
+      48
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -20.82
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -4.21,
+     "dd_pct": -33.15,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -25.14
+    }
+   },
+   "event_date": "2015-07-07",
+   "event_trade_date": "2015-07-07",
+   "name": "创业板指",
+   "p0": 2352.01,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -28.74,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -21.74
+    },
+    "pl3x5": {
+     "build_end_offset": 13,
+     "cost_vs_p0_pp": -6.34,
+     "dd_pct": -28.74,
+     "fill_days": [
+      0,
+      2,
+      13
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -16.44
+    },
+    "pl3x8": {
+     "build_end_offset": 32,
+     "cost_vs_p0_pp": -8.96,
+     "dd_pct": -28.74,
+     "fill_days": [
+      0,
+      4,
+      32
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -14.03
+    },
+    "pl_half10": {
+     "build_end_offset": 13,
+     "cost_vs_p0_pp": -6.18,
+     "dd_pct": -28.74,
+     "fill_days": [
+      0,
+      13
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -16.58
+    },
+    "pl_newlow": {
+     "build_end_offset": 32,
+     "cost_vs_p0_pp": -9.95,
+     "dd_pct": -28.74,
+     "fill_days": [
+      0,
+      13,
+      32
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -13.09
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -5.22,
+     "dd_pct": -25.39,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -17.42
+    }
+   },
+   "event_date": "2016-01-07",
+   "event_trade_date": "2016-01-07",
+   "name": "创业板指",
+   "p0": 2256.524,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -30.55,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -13.81
+    },
+    "pl3x5": {
+     "build_end_offset": 226,
+     "cost_vs_p0_pp": -5.65,
+     "dd_pct": -20.1,
+     "fill_days": [
+      0,
+      162,
+      226
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -8.64
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -7.67,
+     "dd_pct": -18.36,
+     "fill_days": [
+      0,
+      163,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -6.65
+    },
+    "pl_half10": {
+     "build_end_offset": 226,
+     "cost_vs_p0_pp": -5.5,
+     "dd_pct": -21.9,
+     "fill_days": [
+      0,
+      226
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -8.79
+    },
+    "pl_newlow": {
+     "build_end_offset": 151,
+     "cost_vs_p0_pp": -1.66,
+     "dd_pct": -23.35,
+     "fill_days": [
+      0,
+      139,
+      151
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -12.36
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 1.55,
+     "dd_pct": -23.83,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -15.13
+    }
+   },
+   "event_date": "2016-05-18",
+   "event_trade_date": "2016-05-18",
+   "name": "创业板指",
+   "p0": 2020.476,
+   "symbol": "399006",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -37.44,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -16.67
+    },
+    "pl3x5": {
+     "build_end_offset": 188,
+     "cost_vs_p0_pp": -6.22,
+     "dd_pct": -36.59,
+     "fill_days": [
+      0,
+      48,
+      188
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -11.14
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -2.85,
+     "dd_pct": -36.04,
+     "fill_days": [
+      0,
+      188,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -14.23
+    },
+    "pl_half10": {
+     "build_end_offset": 188,
+     "cost_vs_p0_pp": -5.63,
+     "dd_pct": -36.59,
+     "fill_days": [
+      0,
+      188
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -11.71
+    },
+    "pl_newlow": {
+     "build_end_offset": 48,
+     "cost_vs_p0_pp": -3.14,
+     "dd_pct": -37.44,
+     "fill_days": [
+      0,
+      11,
+      48
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -13.97
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 0.76,
+     "dd_pct": -36.27,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -17.3
+    }
+   },
+   "event_date": "2017-05-08",
+   "event_trade_date": "2017-05-08",
+   "name": "创业板指",
+   "p0": 1788.708,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -36.59,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 0.54
+    },
+    "pl3x5": {
+     "build_end_offset": 129,
+     "cost_vs_p0_pp": -7.32,
+     "dd_pct": -32.19,
+     "fill_days": [
+      0,
+      44,
+      129
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 8.49
+    },
+    "pl3x8": {
+     "build_end_offset": 163,
+     "cost_vs_p0_pp": -9.67,
+     "dd_pct": -30.43,
+     "fill_days": [
+      0,
+      44,
+      163
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 11.3
+    },
+    "pl_half10": {
+     "build_end_offset": 129,
+     "cost_vs_p0_pp": -6.4,
+     "dd_pct": -29.67,
+     "fill_days": [
+      0,
+      129
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 7.41
+    },
+    "pl_newlow": {
+     "build_end_offset": 28,
+     "cost_vs_p0_pp": -0.55,
+     "dd_pct": -36.59,
+     "fill_days": [
+      0,
+      14,
+      28
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 1.1
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -8.45,
+     "dd_pct": -26.25,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 9.82
+    }
+   },
+   "event_date": "2017-12-05",
+   "event_trade_date": "2017-12-05",
+   "name": "创业板指",
+   "p0": 1758.59,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -36.59,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 21.92
+    },
+    "pl3x5": {
+     "build_end_offset": 90,
+     "cost_vs_p0_pp": -5.59,
+     "dd_pct": -31.84,
+     "fill_days": [
+      0,
+      3,
+      90
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 29.14
+    },
+    "pl3x8": {
+     "build_end_offset": 145,
+     "cost_vs_p0_pp": -8.82,
+     "dd_pct": -25.18,
+     "fill_days": [
+      0,
+      88,
+      145
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 33.71
+    },
+    "pl_half10": {
+     "build_end_offset": 90,
+     "cost_vs_p0_pp": -5.46,
+     "dd_pct": -29.18,
+     "fill_days": [
+      0,
+      90
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 28.96
+    },
+    "pl_newlow": {
+     "build_end_offset": 120,
+     "cost_vs_p0_pp": -6.87,
+     "dd_pct": -26.74,
+     "fill_days": [
+      0,
+      88,
+      120
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 30.91
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -10.26,
+     "dd_pct": -21.03,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 35.87
+    }
+   },
+   "event_date": "2018-02-01",
+   "event_trade_date": "2018-02-01",
+   "name": "创业板指",
+   "p0": 1697.39,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": -0.0,
+     "dd_pct": -26.6,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 61.38
+    },
+    "pl3x5": {
+     "build_end_offset": 35,
+     "cost_vs_p0_pp": -6.26,
+     "dd_pct": -22.98,
+     "fill_days": [
+      0,
+      1,
+      35
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 72.17
+    },
+    "pl3x8": {
+     "build_end_offset": 64,
+     "cost_vs_p0_pp": -8.77,
+     "dd_pct": -20.32,
+     "fill_days": [
+      0,
+      33,
+      64
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 76.9
+    },
+    "pl_half10": {
+     "build_end_offset": 35,
+     "cost_vs_p0_pp": -6.52,
+     "dd_pct": -21.52,
+     "fill_days": [
+      0,
+      35
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 72.63
+    },
+    "pl_newlow": {
+     "build_end_offset": 44,
+     "cost_vs_p0_pp": -7.17,
+     "dd_pct": -20.98,
+     "fill_days": [
+      0,
+      33,
+      44
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 73.84
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -11.13,
+     "dd_pct": -20.12,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 81.6
+    }
+   },
+   "event_date": "2018-06-15",
+   "event_trade_date": "2018-06-15",
+   "name": "创业板指",
+   "p0": 1641.663,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -20.32,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 80.25
+    },
+    "pl3x5": {
+     "build_end_offset": 34,
+     "cost_vs_p0_pp": -6.73,
+     "dd_pct": -20.32,
+     "fill_days": [
+      0,
+      19,
+      34
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 93.25
+    },
+    "pl3x8": {
+     "build_end_offset": 37,
+     "cost_vs_p0_pp": -8.84,
+     "dd_pct": -20.32,
+     "fill_days": [
+      0,
+      32,
+      37
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 97.72
+    },
+    "pl_half10": {
+     "build_end_offset": 34,
+     "cost_vs_p0_pp": -7.41,
+     "dd_pct": -20.32,
+     "fill_days": [
+      0,
+      34
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 94.67
+    },
+    "pl_newlow": {
+     "build_end_offset": 32,
+     "cost_vs_p0_pp": -3.57,
+     "dd_pct": -20.32,
+     "fill_days": [
+      0,
+      14,
+      32
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 86.92
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -1.74,
+     "dd_pct": -20.12,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 83.43
+    }
+   },
+   "event_date": "2018-08-16",
+   "event_trade_date": "2018-08-16",
+   "name": "创业板指",
+   "p0": 1463.872,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -20.32,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 176.24
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 33.02,
+     "dd_pct": -20.12,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 107.66
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 33.02,
+     "dd_pct": -20.12,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 107.66
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 22.88,
+     "dd_pct": -20.12,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 124.8
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 33.02,
+     "dd_pct": -20.12,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 107.66
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 27.29,
+     "dd_pct": -20.12,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 117.01
+    }
+   },
+   "event_date": "2019-01-03",
+   "event_trade_date": "2019-01-03",
+   "name": "创业板指",
+   "p0": 1214.497,
+   "symbol": "399006",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -45.6,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -20.33
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -2.36,
+     "dd_pct": -41.93,
+     "fill_days": [
+      0,
+      2,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -18.4
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -0.43,
+     "dd_pct": -37.55,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": -19.99
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -0.32,
+     "dd_pct": -39.77,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": -20.07
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -0.43,
+     "dd_pct": -37.55,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": -19.99
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 6.18,
+     "dd_pct": -39.97,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -24.97
+    }
+   },
+   "event_date": "2022-04-21",
+   "event_trade_date": "2022-04-21",
+   "name": "创业板指",
+   "p0": 2312.456,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -41.45,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -6.77
+    },
+    "pl3x5": {
+     "build_end_offset": 215,
+     "cost_vs_p0_pp": -5.59,
+     "dd_pct": -33.24,
+     "fill_days": [
+      0,
+      157,
+      215
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -1.25
+    },
+    "pl3x8": {
+     "build_end_offset": 249,
+     "cost_vs_p0_pp": -8.75,
+     "dd_pct": -30.93,
+     "fill_days": [
+      0,
+      164,
+      249
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 2.17
+    },
+    "pl_half10": {
+     "build_end_offset": 215,
+     "cost_vs_p0_pp": -5.61,
+     "dd_pct": -34.47,
+     "fill_days": [
+      0,
+      215
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -1.22
+    },
+    "pl_newlow": {
+     "build_end_offset": 214,
+     "cost_vs_p0_pp": -4.69,
+     "dd_pct": -33.87,
+     "fill_days": [
+      0,
+      156,
+      214
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -2.18
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -1.12,
+     "dd_pct": -35.87,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -5.71
+    }
+   },
+   "event_date": "2022-09-29",
+   "event_trade_date": "2022-09-29",
+   "name": "创业板指",
+   "p0": 2332.995,
+   "symbol": "399006",
+   "type": "middle"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 71.51
+    },
+    "pl3x5": {
+     "build_end_offset": 64,
+     "cost_vs_p0_pp": -5.89,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      54,
+      64
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 82.25
+    },
+    "pl3x8": {
+     "build_end_offset": 73,
+     "cost_vs_p0_pp": -9.09,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      61,
+      73
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 88.67
+    },
+    "pl_half10": {
+     "build_end_offset": 64,
+     "cost_vs_p0_pp": -5.61,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      64
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 81.7
+    },
+    "pl_newlow": {
+     "build_end_offset": 52,
+     "cost_vs_p0_pp": -1.23,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      38,
+      52
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 73.65
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -2.68,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 76.23
+    }
+   },
+   "event_date": "2023-10-23",
+   "event_trade_date": "2023-10-23",
+   "name": "创业板指",
+   "p0": 1864.909,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 93.81
+    },
+    "pl3x5": {
+     "build_end_offset": 145,
+     "cost_vs_p0_pp": -5.57,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      6,
+      145
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 105.25
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 4.32,
+     "dd_pct": -26.26,
+     "fill_days": [
+      0,
+      8,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 85.79
+    },
+    "pl_half10": {
+     "build_end_offset": 145,
+     "cost_vs_p0_pp": -5.69,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      145
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 105.51
+    },
+    "pl_newlow": {
+     "build_end_offset": 142,
+     "cost_vs_p0_pp": -6.71,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      10,
+      142
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 107.74
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 9.22,
+     "dd_pct": -26.73,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 77.45
+    }
+   },
+   "event_date": "2024-01-19",
+   "event_trade_date": "2024-01-19",
+   "name": "创业板指",
+   "p0": 1715.436,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 133.81
+    },
+    "pl3x5": {
+     "build_end_offset": 21,
+     "cost_vs_p0_pp": -5.91,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      12,
+      21
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 148.51
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 0.28,
+     "dd_pct": -21.72,
+     "fill_days": [
+      0,
+      17,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 133.15
+    },
+    "pl_half10": {
+     "build_end_offset": 21,
+     "cost_vs_p0_pp": -5.56,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      21
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 147.57
+    },
+    "pl_newlow": {
+     "build_end_offset": 21,
+     "cost_vs_p0_pp": -4.9,
+     "dd_pct": -29.14,
+     "fill_days": [
+      0,
+      10,
+      21
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 145.85
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 6.82,
+     "dd_pct": -20.13,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 118.89
+    }
+   },
+   "event_date": "2024-06-06",
+   "event_trade_date": "2024-06-06",
+   "name": "创业板指",
+   "p0": 1820.448,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {},
+   "event_date": "2024-08-22",
+   "event_trade_date": "2024-08-22",
+   "name": "创业板指",
+   "p0": 1546.631,
+   "symbol": "399006",
+   "type": "event_v"
+  },
+  {
+   "arms": {},
+   "event_date": "2026-07-17",
+   "event_trade_date": "2026-07-17",
+   "name": "创业板指",
+   "p0": 3428.63,
+   "symbol": "399006",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -24.99,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 17.26
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -0.3,
+     "dd_pct": -17.94,
+     "fill_days": [
+      0,
+      219,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 17.62
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 3.94,
+     "dd_pct": -17.94,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 12.82
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 2.92,
+     "dd_pct": -18.52,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 13.93
+    },
+    "pl_newlow": {
+     "build_end_offset": 217,
+     "cost_vs_p0_pp": -1.69,
+     "dd_pct": -17.94,
+     "fill_days": [
+      0,
+      190,
+      217
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 19.27
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 9.91,
+     "dd_pct": -18.5,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 6.69
+    }
+   },
+   "event_date": "2002-01-30",
+   "event_trade_date": "2002-01-30",
+   "name": "沪深300",
+   "p0": 1145.855,
+   "symbol": "000300",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -24.99,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -9.76
+    },
+    "pl3x5": {
+     "build_end_offset": 129,
+     "cost_vs_p0_pp": -5.52,
+     "dd_pct": -19.35,
+     "fill_days": [
+      0,
+      14,
+      129
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -4.49
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -2.03,
+     "dd_pct": -19.35,
+     "fill_days": [
+      0,
+      128,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -7.89
+    },
+    "pl_half10": {
+     "build_end_offset": 129,
+     "cost_vs_p0_pp": -5.7,
+     "dd_pct": -19.35,
+     "fill_days": [
+      0,
+      129
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -4.3
+    },
+    "pl_newlow": {
+     "build_end_offset": 124,
+     "cost_vs_p0_pp": -2.55,
+     "dd_pct": -20.24,
+     "fill_days": [
+      0,
+      10,
+      124
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -7.41
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -1.98,
+     "dd_pct": -19.35,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -7.94
+    }
+   },
+   "event_date": "2002-05-16",
+   "event_trade_date": "2002-05-16",
+   "name": "沪深300",
+   "p0": 1261.522,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -41.98,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -32.79
+    },
+    "pl3x5": {
+     "build_end_offset": 126,
+     "cost_vs_p0_pp": -5.43,
+     "dd_pct": -41.98,
+     "fill_days": [
+      0,
+      89,
+      126
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -28.93
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -3.3,
+     "dd_pct": -39.03,
+     "fill_days": [
+      0,
+      99,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -30.49
+    },
+    "pl_half10": {
+     "build_end_offset": 126,
+     "cost_vs_p0_pp": -5.51,
+     "dd_pct": -41.98,
+     "fill_days": [
+      0,
+      126
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -28.87
+    },
+    "pl_newlow": {
+     "build_end_offset": 54,
+     "cost_vs_p0_pp": -0.14,
+     "dd_pct": -41.98,
+     "fill_days": [
+      0,
+      34,
+      54
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -32.69
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 1.9,
+     "dd_pct": -41.62,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -34.04
+    }
+   },
+   "event_date": "2003-05-13",
+   "event_trade_date": "2003-05-13",
+   "name": "沪深300",
+   "p0": 1216.426,
+   "symbol": "000300",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -29.35,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 22.42
+    },
+    "pl3x5": {
+     "build_end_offset": 66,
+     "cost_vs_p0_pp": -5.87,
+     "dd_pct": -29.35,
+     "fill_days": [
+      0,
+      13,
+      66
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 30.05
+    },
+    "pl3x8": {
+     "build_end_offset": 162,
+     "cost_vs_p0_pp": -8.7,
+     "dd_pct": -24.58,
+     "fill_days": [
+      0,
+      57,
+      162
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 34.08
+    },
+    "pl_half10": {
+     "build_end_offset": 66,
+     "cost_vs_p0_pp": -5.81,
+     "dd_pct": -29.35,
+     "fill_days": [
+      0,
+      66
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 29.97
+    },
+    "pl_newlow": {
+     "build_end_offset": 48,
+     "cost_vs_p0_pp": -3.22,
+     "dd_pct": -29.35,
+     "fill_days": [
+      0,
+      11,
+      48
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 26.49
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -9.33,
+     "dd_pct": -22.27,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 35.01
+    }
+   },
+   "event_date": "2004-06-09",
+   "event_trade_date": "2004-06-09",
+   "name": "沪深300",
+   "p0": 1137.546,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -18.48,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 214.56
+    },
+    "pl3x5": {
+     "build_end_offset": 36,
+     "cost_vs_p0_pp": -5.49,
+     "dd_pct": -13.82,
+     "fill_days": [
+      0,
+      28,
+      36
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 232.84
+    },
+    "pl3x8": {
+     "build_end_offset": 49,
+     "cost_vs_p0_pp": -9.11,
+     "dd_pct": -13.82,
+     "fill_days": [
+      0,
+      34,
+      49
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 246.09
+    },
+    "pl_half10": {
+     "build_end_offset": 36,
+     "cost_vs_p0_pp": -5.58,
+     "dd_pct": -13.82,
+     "fill_days": [
+      0,
+      36
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 233.14
+    },
+    "pl_newlow": {
+     "build_end_offset": 36,
+     "cost_vs_p0_pp": -5.37,
+     "dd_pct": -13.82,
+     "fill_days": [
+      0,
+      26,
+      36
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 232.42
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -5.24,
+     "dd_pct": -13.82,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 231.96
+    }
+   },
+   "event_date": "2005-03-18",
+   "event_trade_date": "2005-03-18",
+   "name": "沪深300",
+   "p0": 978.665,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -16.82,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 327.6
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 32.09,
+     "dd_pct": -16.82,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 223.71
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 32.09,
+     "dd_pct": -16.82,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 223.71
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 22.28,
+     "dd_pct": -16.82,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 249.68
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 13.46,
+     "dd_pct": -16.82,
+     "fill_days": [
+      0,
+      12,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 276.87
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 11.81,
+     "dd_pct": -16.82,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 282.44
+    }
+   },
+   "event_date": "2005-06-15",
+   "event_trade_date": "2005-06-15",
+   "name": "沪深300",
+   "p0": 866.834,
+   "symbol": "000300",
+   "type": "middle"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -59.87,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -9.56
+    },
+    "pl3x5": {
+     "build_end_offset": 21,
+     "cost_vs_p0_pp": -5.43,
+     "dd_pct": -59.87,
+     "fill_days": [
+      0,
+      11,
+      21
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -4.37
+    },
+    "pl3x8": {
+     "build_end_offset": 57,
+     "cost_vs_p0_pp": -9.37,
+     "dd_pct": -56.31,
+     "fill_days": [
+      0,
+      21,
+      57
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -0.22
+    },
+    "pl_half10": {
+     "build_end_offset": 21,
+     "cost_vs_p0_pp": -5.28,
+     "dd_pct": -59.87,
+     "fill_days": [
+      0,
+      21
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -4.53
+    },
+    "pl_newlow": {
+     "build_end_offset": 20,
+     "cost_vs_p0_pp": -4.09,
+     "dd_pct": -59.87,
+     "fill_days": [
+      0,
+      10,
+      20
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -5.71
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -36.42,
+     "dd_pct": -27.1,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 42.24
+    }
+   },
+   "event_date": "2008-03-18",
+   "event_trade_date": "2008-03-18",
+   "name": "沪深300",
+   "p0": 3763.948,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -55.72,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -21.91
+    },
+    "pl3x5": {
+     "build_end_offset": 11,
+     "cost_vs_p0_pp": -7.5,
+     "dd_pct": -51.12,
+     "fill_days": [
+      0,
+      10,
+      11
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -15.58
+    },
+    "pl3x8": {
+     "build_end_offset": 13,
+     "cost_vs_p0_pp": -9.22,
+     "dd_pct": -50.2,
+     "fill_days": [
+      0,
+      10,
+      13
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -13.98
+    },
+    "pl_half10": {
+     "build_end_offset": 11,
+     "cost_vs_p0_pp": -6.25,
+     "dd_pct": -52.03,
+     "fill_days": [
+      0,
+      11
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -16.7
+    },
+    "pl_newlow": {
+     "build_end_offset": 25,
+     "cost_vs_p0_pp": -12.51,
+     "dd_pct": -48.33,
+     "fill_days": [
+      0,
+      10,
+      25
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -10.74
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -34.68,
+     "dd_pct": -28.82,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 19.54
+    }
+   },
+   "event_date": "2008-05-26",
+   "event_trade_date": "2008-05-26",
+   "name": "沪深300",
+   "p0": 3559.217,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -35.85,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -8.36
+    },
+    "pl3x5": {
+     "build_end_offset": 24,
+     "cost_vs_p0_pp": -6.24,
+     "dd_pct": -35.85,
+     "fill_days": [
+      0,
+      22,
+      24
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -2.27
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -1.09,
+     "dd_pct": -32.71,
+     "fill_days": [
+      0,
+      23,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -7.35
+    },
+    "pl_half10": {
+     "build_end_offset": 24,
+     "cost_vs_p0_pp": -5.39,
+     "dd_pct": -35.85,
+     "fill_days": [
+      0,
+      24
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -3.14
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -0.69,
+     "dd_pct": -32.7,
+     "fill_days": [
+      0,
+      22,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -7.72
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 7.92,
+     "dd_pct": -32.67,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -15.09
+    }
+   },
+   "event_date": "2010-05-25",
+   "event_trade_date": "2010-05-25",
+   "name": "沪深300",
+   "p0": 2813.943,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -32.6,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -26.78
+    },
+    "pl3x5": {
+     "build_end_offset": 83,
+     "cost_vs_p0_pp": -5.93,
+     "dd_pct": -25.64,
+     "fill_days": [
+      0,
+      49,
+      83
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -22.17
+    },
+    "pl3x8": {
+     "build_end_offset": 133,
+     "cost_vs_p0_pp": -8.96,
+     "dd_pct": -23.16,
+     "fill_days": [
+      0,
+      78,
+      133
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -19.58
+    },
+    "pl_half10": {
+     "build_end_offset": 83,
+     "cost_vs_p0_pp": -6.17,
+     "dd_pct": -26.14,
+     "fill_days": [
+      0,
+      83
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -21.96
+    },
+    "pl_newlow": {
+     "build_end_offset": 49,
+     "cost_vs_p0_pp": -2.28,
+     "dd_pct": -30.04,
+     "fill_days": [
+      0,
+      12,
+      49
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -25.07
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -9.0,
+     "dd_pct": -22.29,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -19.54
+    }
+   },
+   "event_date": "2011-05-30",
+   "event_trade_date": "2011-05-30",
+   "name": "沪深300",
+   "p0": 2954.506,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -11.36
+    },
+    "pl3x5": {
+     "build_end_offset": 119,
+     "cost_vs_p0_pp": -5.24,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0,
+      94,
+      119
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -6.46
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -2.87,
+     "dd_pct": -22.01,
+     "fill_days": [
+      0,
+      101,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -8.73
+    },
+    "pl_half10": {
+     "build_end_offset": 119,
+     "cost_vs_p0_pp": -5.33,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0,
+      119
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -6.37
+    },
+    "pl_newlow": {
+     "build_end_offset": 71,
+     "cost_vs_p0_pp": -0.83,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0,
+      59,
+      71
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -10.61
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -0.5,
+     "dd_pct": -24.3,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -10.91
+    }
+   },
+   "event_date": "2012-03-29",
+   "event_trade_date": "2012-03-29",
+   "name": "沪深300",
+   "p0": 2443.122,
+   "symbol": "000300",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -3.11
+    },
+    "pl3x5": {
+     "build_end_offset": 91,
+     "cost_vs_p0_pp": -5.37,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0,
+      29,
+      91
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 2.39
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -5.79,
+     "dd_pct": -18.94,
+     "fill_days": [
+      0,
+      34,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 2.85
+    },
+    "pl_half10": {
+     "build_end_offset": 91,
+     "cost_vs_p0_pp": -5.47,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0,
+      91
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 2.5
+    },
+    "pl_newlow": {
+     "build_end_offset": 22,
+     "cost_vs_p0_pp": -1.85,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0,
+      10,
+      22
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -1.28
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 0.38,
+     "dd_pct": -21.49,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -3.48
+    }
+   },
+   "event_date": "2012-07-16",
+   "event_trade_date": "2012-07-16",
+   "name": "沪深300",
+   "p0": 2399.731,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 7.07
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 6.31,
+     "dd_pct": -18.21,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 0.72
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 6.31,
+     "dd_pct": -18.21,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 0.72
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 4.66,
+     "dd_pct": -20.05,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 2.31
+    },
+    "pl_newlow": {
+     "build_end_offset": 44,
+     "cost_vs_p0_pp": -2.06,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0,
+      33,
+      44
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 9.33
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 8.52,
+     "dd_pct": -19.43,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -1.34
+    }
+   },
+   "event_date": "2012-09-25",
+   "event_trade_date": "2012-09-25",
+   "name": "沪深300",
+   "p0": 2210.154,
+   "symbol": "000300",
+   "type": "middle"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -24.82,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 57.99
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 2.56,
+     "dd_pct": -15.98,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 54.04
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 2.56,
+     "dd_pct": -15.98,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 54.04
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 1.91,
+     "dd_pct": -18.42,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 55.03
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 0.15,
+     "dd_pct": -14.86,
+     "fill_days": [
+      0,
+      121,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 57.75
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 8.0,
+     "dd_pct": -16.11,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 46.29
+    }
+   },
+   "event_date": "2012-12-13",
+   "event_trade_date": "2012-12-13",
+   "name": "沪深300",
+   "p0": 2242.635,
+   "symbol": "000300",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": -0.0,
+     "dd_pct": -32.87,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -5.4
+    },
+    "pl3x5": {
+     "build_end_offset": 34,
+     "cost_vs_p0_pp": -8.3,
+     "dd_pct": -26.72,
+     "fill_days": [
+      0,
+      1,
+      34
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 3.16
+    },
+    "pl3x8": {
+     "build_end_offset": 34,
+     "cost_vs_p0_pp": -8.91,
+     "dd_pct": -26.39,
+     "fill_days": [
+      0,
+      33,
+      34
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 3.85
+    },
+    "pl_half10": {
+     "build_end_offset": 34,
+     "cost_vs_p0_pp": -9.06,
+     "dd_pct": -26.39,
+     "fill_days": [
+      0,
+      34
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 4.02
+    },
+    "pl_newlow": {
+     "build_end_offset": 137,
+     "cost_vs_p0_pp": -12.54,
+     "dd_pct": -19.2,
+     "fill_days": [
+      0,
+      33,
+      137
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 8.16
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -14.31,
+     "dd_pct": -14.52,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 10.4
+    }
+   },
+   "event_date": "2015-07-07",
+   "event_trade_date": "2015-07-07",
+   "name": "沪深300",
+   "p0": 3928.003,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -15.11,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 32.9
+    },
+    "pl3x5": {
+     "build_end_offset": 13,
+     "cost_vs_p0_pp": -5.56,
+     "dd_pct": -8.95,
+     "fill_days": [
+      0,
+      6,
+      13
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 40.73
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -3.62,
+     "dd_pct": -6.11,
+     "fill_days": [
+      0,
+      13,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 37.9
+    },
+    "pl_half10": {
+     "build_end_offset": 13,
+     "cost_vs_p0_pp": -5.68,
+     "dd_pct": -9.13,
+     "fill_days": [
+      0,
+      13
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 40.9
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -2.01,
+     "dd_pct": -7.58,
+     "fill_days": [
+      0,
+      10,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 35.63
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -2.33,
+     "dd_pct": -7.01,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 36.07
+    }
+   },
+   "event_date": "2016-01-07",
+   "event_trade_date": "2016-01-07",
+   "name": "沪深300",
+   "p0": 3294.384,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -15.18,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 24.95
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 8.82,
+     "dd_pct": -15.18,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 14.82
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 8.82,
+     "dd_pct": -15.18,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 14.82
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 6.48,
+     "dd_pct": -15.18,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 17.35
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 8.82,
+     "dd_pct": -15.18,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 14.82
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 8.35,
+     "dd_pct": -15.18,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 15.32
+    }
+   },
+   "event_date": "2016-05-18",
+   "event_trade_date": "2016-05-18",
+   "name": "沪深300",
+   "p0": 3068.036,
+   "symbol": "000300",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -32.46,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 8.18
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 10.07,
+     "dd_pct": -27.29,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": -1.71
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 10.07,
+     "dd_pct": -27.29,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": -1.71
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 7.36,
+     "dd_pct": -28.75,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 0.76
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 10.07,
+     "dd_pct": -27.29,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": -1.71
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 14.23,
+     "dd_pct": -30.83,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -5.3
+    }
+   },
+   "event_date": "2017-05-08",
+   "event_trade_date": "2017-05-08",
+   "name": "沪深300",
+   "p0": 3358.813,
+   "symbol": "000300",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -32.46,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -1.27
+    },
+    "pl3x5": {
+     "build_end_offset": 129,
+     "cost_vs_p0_pp": -5.56,
+     "dd_pct": -24.53,
+     "fill_days": [
+      0,
+      86,
+      129
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 4.54
+    },
+    "pl3x8": {
+     "build_end_offset": 140,
+     "cost_vs_p0_pp": -9.55,
+     "dd_pct": -21.19,
+     "fill_days": [
+      0,
+      129,
+      140
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 9.16
+    },
+    "pl_half10": {
+     "build_end_offset": 129,
+     "cost_vs_p0_pp": -5.47,
+     "dd_pct": -25.63,
+     "fill_days": [
+      0,
+      129
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 4.45
+    },
+    "pl_newlow": {
+     "build_end_offset": 86,
+     "cost_vs_p0_pp": -3.62,
+     "dd_pct": -26.25,
+     "fill_days": [
+      0,
+      47,
+      86
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 2.44
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -9.12,
+     "dd_pct": -20.31,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 8.64
+    }
+   },
+   "event_date": "2017-12-05",
+   "event_trade_date": "2017-12-05",
+   "name": "沪深300",
+   "p0": 4040.17,
+   "symbol": "000300",
+   "type": "middle"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -30.63,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -7.3
+    },
+    "pl3x5": {
+     "build_end_offset": 45,
+     "cost_vs_p0_pp": -5.45,
+     "dd_pct": -26.36,
+     "fill_days": [
+      0,
+      5,
+      45
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -1.95
+    },
+    "pl3x8": {
+     "build_end_offset": 92,
+     "cost_vs_p0_pp": -9.04,
+     "dd_pct": -24.44,
+     "fill_days": [
+      0,
+      6,
+      92
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 1.91
+    },
+    "pl_half10": {
+     "build_end_offset": 45,
+     "cost_vs_p0_pp": -5.43,
+     "dd_pct": -26.45,
+     "fill_days": [
+      0,
+      45
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -1.98
+    },
+    "pl_newlow": {
+     "build_end_offset": 75,
+     "cost_vs_p0_pp": -7.84,
+     "dd_pct": -24.45,
+     "fill_days": [
+      0,
+      45,
+      75
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 0.59
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -17.0,
+     "dd_pct": -15.55,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 11.69
+    }
+   },
+   "event_date": "2018-02-01",
+   "event_trade_date": "2018-02-01",
+   "name": "沪深300",
+   "p0": 4245.898,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -21.01,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 27.06
+    },
+    "pl3x5": {
+     "build_end_offset": 12,
+     "cost_vs_p0_pp": -5.36,
+     "dd_pct": -17.22,
+     "fill_days": [
+      0,
+      5,
+      12
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 34.27
+    },
+    "pl3x8": {
+     "build_end_offset": 77,
+     "cost_vs_p0_pp": -9.03,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      8,
+      77
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 39.68
+    },
+    "pl_half10": {
+     "build_end_offset": 12,
+     "cost_vs_p0_pp": -5.48,
+     "dd_pct": -17.22,
+     "fill_days": [
+      0,
+      12
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 34.42
+    },
+    "pl_newlow": {
+     "build_end_offset": 34,
+     "cost_vs_p0_pp": -7.22,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      10,
+      34
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 36.95
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -8.48,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 38.83
+    }
+   },
+   "event_date": "2018-06-15",
+   "event_trade_date": "2018-06-15",
+   "name": "沪深300",
+   "p0": 3753.434,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 42.36
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 2.91,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      37,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 38.33
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 1.7,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      88,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 39.98
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 7.62,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 32.28
+    },
+    "pl_newlow": {
+     "build_end_offset": 34,
+     "cost_vs_p0_pp": -2.13,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      18,
+      34
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 45.45
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 5.58,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 34.83
+    }
+   },
+   "event_date": "2018-08-16",
+   "event_trade_date": "2018-08-16",
+   "name": "沪深300",
+   "p0": 3276.728,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 87.67
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 24.46,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 50.79
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 24.46,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 50.79
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 17.29,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 60.01
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 24.46,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 50.79
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 24.43,
+     "dd_pct": -16.08,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 50.82
+    }
+   },
+   "event_date": "2019-01-03",
+   "event_trade_date": "2019-01-03",
+   "name": "沪深300",
+   "p0": 2964.842,
+   "symbol": "000300",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -29.28,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -8.99
+    },
+    "pl3x5": {
+     "build_end_offset": 126,
+     "cost_vs_p0_pp": -5.79,
+     "dd_pct": -24.32,
+     "fill_days": [
+      0,
+      3,
+      126
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -3.4
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -2.95,
+     "dd_pct": -23.34,
+     "fill_days": [
+      0,
+      122,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -6.22
+    },
+    "pl_half10": {
+     "build_end_offset": 126,
+     "cost_vs_p0_pp": -6.03,
+     "dd_pct": -24.32,
+     "fill_days": [
+      0,
+      126
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -3.15
+    },
+    "pl_newlow": {
+     "build_end_offset": 122,
+     "cost_vs_p0_pp": -5.47,
+     "dd_pct": -24.32,
+     "fill_days": [
+      0,
+      112,
+      122
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -3.72
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 0.16,
+     "dd_pct": -24.04,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -9.14
+    }
+   },
+   "event_date": "2022-04-21",
+   "event_trade_date": "2022-04-21",
+   "name": "沪深300",
+   "p0": 3995.83,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": -0.0,
+     "dd_pct": -24.8,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 2.45
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -3.38,
+     "dd_pct": -21.26,
+     "fill_days": [
+      0,
+      12,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 6.03
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -4.53,
+     "dd_pct": -21.3,
+     "fill_days": [
+      0,
+      17,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 7.31
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -2.51,
+     "dd_pct": -19.31,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 5.09
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -3.38,
+     "dd_pct": -21.26,
+     "fill_days": [
+      0,
+      12,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 6.03
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 2.28,
+     "dd_pct": -21.85,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 0.16
+    }
+   },
+   "event_date": "2022-09-29",
+   "event_trade_date": "2022-09-29",
+   "name": "沪深300",
+   "p0": 3827.143,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -15.66,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 35.21
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 2.24,
+     "dd_pct": -13.79,
+     "fill_days": [
+      0,
+      42,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 32.25
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 0.9,
+     "dd_pct": -13.82,
+     "fill_days": [
+      0,
+      73,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 34.01
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 6.34,
+     "dd_pct": -13.42,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 27.14
+    },
+    "pl_newlow": {
+     "build_end_offset": 40,
+     "cost_vs_p0_pp": -1.56,
+     "dd_pct": -15.66,
+     "fill_days": [
+      0,
+      30,
+      40
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 37.35
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 0.94,
+     "dd_pct": -15.66,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 33.94
+    }
+   },
+   "event_date": "2023-10-23",
+   "event_trade_date": "2023-10-23",
+   "name": "沪深300",
+   "p0": 3474.244,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -15.66,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 44.2
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 12.09,
+     "dd_pct": -11.07,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 28.64
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 12.09,
+     "dd_pct": -11.07,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 28.64
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 8.8,
+     "dd_pct": -12.37,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 32.53
+    },
+    "pl_newlow": {
+     "build_end_offset": 157,
+     "cost_vs_p0_pp": -1.93,
+     "dd_pct": -15.66,
+     "fill_days": [
+      0,
+      10,
+      157
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 47.03
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 10.54,
+     "dd_pct": -14.03,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 30.45
+    }
+   },
+   "event_date": "2024-01-19",
+   "event_trade_date": "2024-01-19",
+   "name": "沪深300",
+   "p0": 3269.776,
+   "symbol": "000300",
+   "type": "middle"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -15.66,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 37.91
+    },
+    "pl3x5": {
+     "build_end_offset": 65,
+     "cost_vs_p0_pp": -5.29,
+     "dd_pct": -15.66,
+     "fill_days": [
+      0,
+      21,
+      65
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 45.62
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -0.92,
+     "dd_pct": -11.16,
+     "fill_days": [
+      0,
+      58,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 39.18
+    },
+    "pl_half10": {
+     "build_end_offset": 65,
+     "cost_vs_p0_pp": -5.29,
+     "dd_pct": -15.66,
+     "fill_days": [
+      0,
+      65
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 45.61
+    },
+    "pl_newlow": {
+     "build_end_offset": 20,
+     "cost_vs_p0_pp": -2.43,
+     "dd_pct": -15.66,
+     "fill_days": [
+      0,
+      10,
+      20
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 41.34
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 3.73,
+     "dd_pct": -10.24,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 32.94
+    }
+   },
+   "event_date": "2024-06-06",
+   "event_trade_date": "2024-06-06",
+   "name": "沪深300",
+   "p0": 3592.245,
+   "symbol": "000300",
+   "type": "process"
+  },
+  {
+   "arms": {},
+   "event_date": "2024-08-22",
+   "event_trade_date": "2024-08-22",
+   "name": "沪深300",
+   "p0": 3313.136,
+   "symbol": "000300",
+   "type": "middle"
+  },
+  {
+   "arms": {},
+   "event_date": "2026-07-17",
+   "event_trade_date": "2026-07-17",
+   "name": "沪深300",
+   "p0": 4529.095,
+   "symbol": "000300",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -45.45,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -24.96
+    },
+    "pl3x5": {
+     "build_end_offset": 185,
+     "cost_vs_p0_pp": -5.6,
+     "dd_pct": -41.97,
+     "fill_days": [
+      0,
+      11,
+      185
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -20.51
+    },
+    "pl3x8": {
+     "build_end_offset": 191,
+     "cost_vs_p0_pp": -10.02,
+     "dd_pct": -38.16,
+     "fill_days": [
+      0,
+      185,
+      191
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -16.6
+    },
+    "pl_half10": {
+     "build_end_offset": 185,
+     "cost_vs_p0_pp": -5.78,
+     "dd_pct": -40.06,
+     "fill_days": [
+      0,
+      185
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -20.35
+    },
+    "pl_newlow": {
+     "build_end_offset": 184,
+     "cost_vs_p0_pp": -4.28,
+     "dd_pct": -42.76,
+     "fill_days": [
+      0,
+      11,
+      184
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -21.6
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -2.7,
+     "dd_pct": -41.5,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -22.88
+    }
+   },
+   "event_date": "2017-05-08",
+   "event_trade_date": "2017-05-08",
+   "name": "中证1000ETF",
+   "p0": 2.3759,
+   "symbol": "512100",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -40.0,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -13.77
+    },
+    "pl3x5": {
+     "build_end_offset": 44,
+     "cost_vs_p0_pp": -5.67,
+     "dd_pct": -38.16,
+     "fill_days": [
+      0,
+      41,
+      44
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -8.59
+    },
+    "pl3x8": {
+     "build_end_offset": 129,
+     "cost_vs_p0_pp": -10.76,
+     "dd_pct": -33.32,
+     "fill_days": [
+      0,
+      44,
+      129
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -3.37
+    },
+    "pl_half10": {
+     "build_end_offset": 44,
+     "cost_vs_p0_pp": -5.74,
+     "dd_pct": -38.16,
+     "fill_days": [
+      0,
+      44
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -8.53
+    },
+    "pl_newlow": {
+     "build_end_offset": 40,
+     "cost_vs_p0_pp": -0.62,
+     "dd_pct": -38.97,
+     "fill_days": [
+      0,
+      14,
+      40
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -13.23
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -14.66,
+     "dd_pct": -26.32,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 1.04
+    }
+   },
+   "event_date": "2017-12-05",
+   "event_trade_date": "2017-12-05",
+   "name": "中证1000ETF",
+   "p0": 2.2406,
+   "symbol": "512100",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -38.16,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -1.01
+    },
+    "pl3x5": {
+     "build_end_offset": 88,
+     "cost_vs_p0_pp": -7.14,
+     "dd_pct": -33.41,
+     "fill_days": [
+      0,
+      3,
+      88
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 6.6
+    },
+    "pl3x8": {
+     "build_end_offset": 100,
+     "cost_vs_p0_pp": -10.88,
+     "dd_pct": -27.76,
+     "fill_days": [
+      0,
+      88,
+      100
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 11.07
+    },
+    "pl_half10": {
+     "build_end_offset": 88,
+     "cost_vs_p0_pp": -7.89,
+     "dd_pct": -30.82,
+     "fill_days": [
+      0,
+      88
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 7.46
+    },
+    "pl_newlow": {
+     "build_end_offset": 100,
+     "cost_vs_p0_pp": -8.58,
+     "dd_pct": -29.58,
+     "fill_days": [
+      0,
+      87,
+      100
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 8.28
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -15.22,
+     "dd_pct": -20.25,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 16.76
+    }
+   },
+   "event_date": "2018-02-01",
+   "event_trade_date": "2018-02-01",
+   "name": "中证1000ETF",
+   "p0": 2.1163,
+   "symbol": "512100",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -28.51,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 30.93
+    },
+    "pl3x5": {
+     "build_end_offset": 33,
+     "cost_vs_p0_pp": -5.96,
+     "dd_pct": -24.03,
+     "fill_days": [
+      0,
+      1,
+      33
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 39.22
+    },
+    "pl3x8": {
+     "build_end_offset": 61,
+     "cost_vs_p0_pp": -8.67,
+     "dd_pct": -21.88,
+     "fill_days": [
+      0,
+      8,
+      61
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 43.37
+    },
+    "pl_half10": {
+     "build_end_offset": 33,
+     "cost_vs_p0_pp": -5.3,
+     "dd_pct": -24.55,
+     "fill_days": [
+      0,
+      33
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 38.26
+    },
+    "pl_newlow": {
+     "build_end_offset": 33,
+     "cost_vs_p0_pp": -6.6,
+     "dd_pct": -23.91,
+     "fill_days": [
+      0,
+      13,
+      33
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 40.18
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -12.35,
+     "dd_pct": -17.89,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 49.38
+    }
+   },
+   "event_date": "2018-06-15",
+   "event_trade_date": "2018-06-15",
+   "name": "中证1000ETF",
+   "p0": 1.9477,
+   "symbol": "512100",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": -0.0,
+     "dd_pct": -19.49,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 56.96
+    },
+    "pl3x5": {
+     "build_end_offset": 34,
+     "cost_vs_p0_pp": -6.61,
+     "dd_pct": -19.26,
+     "fill_days": [
+      0,
+      21,
+      34
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 68.07
+    },
+    "pl3x8": {
+     "build_end_offset": 37,
+     "cost_vs_p0_pp": -11.01,
+     "dd_pct": -19.26,
+     "fill_days": [
+      0,
+      34,
+      37
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 76.39
+    },
+    "pl_half10": {
+     "build_end_offset": 34,
+     "cost_vs_p0_pp": -7.38,
+     "dd_pct": -19.26,
+     "fill_days": [
+      0,
+      34
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 69.48
+    },
+    "pl_newlow": {
+     "build_end_offset": 21,
+     "cost_vs_p0_pp": -2.52,
+     "dd_pct": -19.26,
+     "fill_days": [
+      0,
+      11,
+      21
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 61.03
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -1.49,
+     "dd_pct": -15.91,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 59.33
+    }
+   },
+   "event_date": "2018-08-16",
+   "event_trade_date": "2018-08-16",
+   "name": "中证1000ETF",
+   "p0": 1.7074,
+   "symbol": "512100",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -19.26,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 80.74
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 26.11,
+     "dd_pct": -15.91,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 43.32
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 26.11,
+     "dd_pct": -15.91,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 43.32
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 18.38,
+     "dd_pct": -15.91,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": 52.67
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 11.39,
+     "dd_pct": -15.91,
+     "fill_days": [
+      0,
+      20,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 62.26
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 22.87,
+     "dd_pct": -15.91,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 47.09
+    }
+   },
+   "event_date": "2019-01-03",
+   "event_trade_date": "2019-01-03",
+   "name": "中证1000ETF",
+   "p0": 1.4477,
+   "symbol": "512100",
+   "type": "event_v"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -41.57,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -6.68
+    },
+    "pl3x5": {
+     "build_end_offset": 3,
+     "cost_vs_p0_pp": -6.97,
+     "dd_pct": -41.57,
+     "fill_days": [
+      0,
+      2,
+      3
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 0.31
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 0.08,
+     "dd_pct": -39.65,
+     "fill_days": [
+      0,
+      2,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -6.76
+    },
+    "pl_half10": {
+     "build_end_offset": 3,
+     "cost_vs_p0_pp": -6.11,
+     "dd_pct": -41.57,
+     "fill_days": [
+      0,
+      3
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -0.61
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 6.92,
+     "dd_pct": -37.31,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": -12.73
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 10.67,
+     "dd_pct": -38.24,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -15.68
+    }
+   },
+   "event_date": "2022-04-21",
+   "event_trade_date": "2022-04-21",
+   "name": "中证1000ETF",
+   "p0": 2.398,
+   "symbol": "512100",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -38.36,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -2.54
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -2.74,
+     "dd_pct": -31.4,
+     "fill_days": [
+      0,
+      219,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 0.21
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -2.05,
+     "dd_pct": -31.89,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": -0.5
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -1.55,
+     "dd_pct": -33.6,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": -1.01
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -2.74,
+     "dd_pct": -31.4,
+     "fill_days": [
+      0,
+      219,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 0.21
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 5.57,
+     "dd_pct": -35.93,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -7.69
+    }
+   },
+   "event_date": "2022-09-29",
+   "event_trade_date": "2022-09-29",
+   "name": "中证1000ETF",
+   "p0": 2.494,
+   "symbol": "512100",
+   "type": "middle"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -30.93,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 35.49
+    },
+    "pl3x5": {
+     "build_end_offset": 64,
+     "cost_vs_p0_pp": -5.84,
+     "dd_pct": -21.56,
+     "fill_days": [
+      0,
+      63,
+      64
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 43.9
+    },
+    "pl3x8": {
+     "build_end_offset": 73,
+     "cost_vs_p0_pp": -10.46,
+     "dd_pct": -21.36,
+     "fill_days": [
+      0,
+      64,
+      73
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 51.32
+    },
+    "pl_half10": {
+     "build_end_offset": 64,
+     "cost_vs_p0_pp": -5.83,
+     "dd_pct": -22.91,
+     "fill_days": [
+      0,
+      64
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 43.88
+    },
+    "pl_newlow": {
+     "build_end_offset": 64,
+     "cost_vs_p0_pp": -4.45,
+     "dd_pct": -22.71,
+     "fill_days": [
+      0,
+      54,
+      64
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 41.79
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -4.27,
+     "dd_pct": -16.83,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 41.54
+    }
+   },
+   "event_date": "2023-10-23",
+   "event_trade_date": "2023-10-23",
+   "name": "中证1000ETF",
+   "p0": 2.268,
+   "symbol": "512100",
+   "type": "middle"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -21.36,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 56.1
+    },
+    "pl3x5": {
+     "build_end_offset": 9,
+     "cost_vs_p0_pp": -5.47,
+     "dd_pct": -21.36,
+     "fill_days": [
+      0,
+      1,
+      9
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 65.12
+    },
+    "pl3x8": {
+     "build_end_offset": 11,
+     "cost_vs_p0_pp": -10.04,
+     "dd_pct": -21.36,
+     "fill_days": [
+      0,
+      8,
+      11
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 73.52
+    },
+    "pl_half10": {
+     "build_end_offset": 9,
+     "cost_vs_p0_pp": -5.46,
+     "dd_pct": -21.36,
+     "fill_days": [
+      0,
+      9
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 65.11
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -0.48,
+     "dd_pct": -16.11,
+     "fill_days": [
+      0,
+      10,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 56.85
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 2.62,
+     "dd_pct": -16.11,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 52.11
+    }
+   },
+   "event_date": "2024-01-19",
+   "event_trade_date": "2024-01-19",
+   "name": "中证1000ETF",
+   "p0": 2.135,
+   "symbol": "512100",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -16.83,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 72.76
+    },
+    "pl3x5": {
+     "build_end_offset": 52,
+     "cost_vs_p0_pp": -5.36,
+     "dd_pct": -16.83,
+     "fill_days": [
+      0,
+      12,
+      52
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 82.56
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 2.08,
+     "dd_pct": -13.52,
+     "fill_days": [
+      0,
+      21,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 69.24
+    },
+    "pl_half10": {
+     "build_end_offset": 52,
+     "cost_vs_p0_pp": -5.42,
+     "dd_pct": -16.83,
+     "fill_days": [
+      0,
+      52
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 82.66
+    },
+    "pl_newlow": {
+     "build_end_offset": 21,
+     "cost_vs_p0_pp": -3.27,
+     "dd_pct": -16.83,
+     "fill_days": [
+      0,
+      10,
+      21
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 78.6
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 8.49,
+     "dd_pct": -13.75,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 59.24
+    }
+   },
+   "event_date": "2024-06-06",
+   "event_trade_date": "2024-06-06",
+   "name": "中证1000ETF",
+   "p0": 2.073,
+   "symbol": "512100",
+   "type": "process"
+  },
+  {
+   "arms": {},
+   "event_date": "2024-08-22",
+   "event_trade_date": "2024-08-22",
+   "name": "中证1000ETF",
+   "p0": 1.827,
+   "symbol": "512100",
+   "type": "middle"
+  },
+  {
+   "arms": {},
+   "event_date": "2026-07-17",
+   "event_trade_date": "2026-07-17",
+   "name": "中证1000ETF",
+   "p0": 2.908,
+   "symbol": "512100",
+   "type": "middle"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -42.6,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -22.14
+    },
+    "pl3x5": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 0.57,
+     "dd_pct": -40.96,
+     "fill_days": [
+      0,
+      2,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -22.58
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -0.11,
+     "dd_pct": -40.97,
+     "fill_days": [
+      0,
+      3,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -22.05
+    },
+    "pl_half10": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 5.27,
+     "dd_pct": -39.98,
+     "fill_days": [
+      0,
+      250
+     ],
+     "n_trades": 2,
+     "never_triggered": 1,
+     "ret_pct": -26.03
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 7.15,
+     "dd_pct": -38.99,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": -27.33
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 6.96,
+     "dd_pct": -42.19,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -27.2
+    }
+   },
+   "event_date": "2022-04-21",
+   "event_trade_date": "2022-04-21",
+   "name": "科创50",
+   "p0": 957.72,
+   "symbol": "000688.SH",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -44.8,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 1.34
+    },
+    "pl3x5": {
+     "build_end_offset": 238,
+     "cost_vs_p0_pp": -5.93,
+     "dd_pct": -39.25,
+     "fill_days": [
+      0,
+      2,
+      238
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 7.73
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -5.75,
+     "dd_pct": -33.75,
+     "fill_days": [
+      0,
+      217,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 7.53
+    },
+    "pl_half10": {
+     "build_end_offset": 238,
+     "cost_vs_p0_pp": -5.55,
+     "dd_pct": -36.0,
+     "fill_days": [
+      0,
+      238
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 7.3
+    },
+    "pl_newlow": {
+     "build_end_offset": 237,
+     "cost_vs_p0_pp": -5.9,
+     "dd_pct": -33.65,
+     "fill_days": [
+      0,
+      215,
+      237
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 7.69
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 4.11,
+     "dd_pct": -40.68,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -2.65
+    }
+   },
+   "event_date": "2022-09-29",
+   "event_trade_date": "2022-09-29",
+   "name": "科创50",
+   "p0": 961.47,
+   "symbol": "000688.SH",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -28.89,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 66.39
+    },
+    "pl3x5": {
+     "build_end_offset": 64,
+     "cost_vs_p0_pp": -6.34,
+     "dd_pct": -22.09,
+     "fill_days": [
+      0,
+      54,
+      64
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 77.64
+    },
+    "pl3x8": {
+     "build_end_offset": 70,
+     "cost_vs_p0_pp": -9.47,
+     "dd_pct": -22.09,
+     "fill_days": [
+      0,
+      61,
+      70
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 83.78
+    },
+    "pl_half10": {
+     "build_end_offset": 64,
+     "cost_vs_p0_pp": -6.19,
+     "dd_pct": -22.09,
+     "fill_days": [
+      0,
+      64
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 77.36
+    },
+    "pl_newlow": {
+     "build_end_offset": 52,
+     "cost_vs_p0_pp": -0.83,
+     "dd_pct": -24.79,
+     "fill_days": [
+      0,
+      42,
+      52
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 67.78
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -6.43,
+     "dd_pct": -17.98,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 77.81
+    }
+   },
+   "event_date": "2023-10-23",
+   "event_trade_date": "2023-10-23",
+   "name": "科创50",
+   "p0": 840.14,
+   "symbol": "000688.SH",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -22.09,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 93.28
+    },
+    "pl3x5": {
+     "build_end_offset": 8,
+     "cost_vs_p0_pp": -5.45,
+     "dd_pct": -22.09,
+     "fill_days": [
+      0,
+      6,
+      8
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 104.43
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 5.81,
+     "dd_pct": -17.98,
+     "fill_days": [
+      0,
+      7,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 82.66
+    },
+    "pl_half10": {
+     "build_end_offset": 8,
+     "cost_vs_p0_pp": -5.56,
+     "dd_pct": -22.09,
+     "fill_days": [
+      0,
+      8
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 104.66
+    },
+    "pl_newlow": {
+     "build_end_offset": 146,
+     "cost_vs_p0_pp": -8.46,
+     "dd_pct": -17.98,
+     "fill_days": [
+      0,
+      10,
+      146
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 111.14
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 5.83,
+     "dd_pct": -17.98,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 82.63
+    }
+   },
+   "event_date": "2024-01-19",
+   "event_trade_date": "2024-01-19",
+   "name": "科创50",
+   "p0": 765.47,
+   "symbol": "000688.SH",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -19.27,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 189.4
+    },
+    "pl3x5": {
+     "build_end_offset": 65,
+     "cost_vs_p0_pp": -5.82,
+     "dd_pct": -19.27,
+     "fill_days": [
+      0,
+      17,
+      65
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 207.26
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 4.87,
+     "dd_pct": -19.27,
+     "fill_days": [
+      0,
+      56,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 175.97
+    },
+    "pl_half10": {
+     "build_end_offset": 65,
+     "cost_vs_p0_pp": -5.75,
+     "dd_pct": -19.27,
+     "fill_days": [
+      0,
+      65
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 207.07
+    },
+    "pl_newlow": {
+     "build_end_offset": 54,
+     "cost_vs_p0_pp": -3.84,
+     "dd_pct": -19.27,
+     "fill_days": [
+      0,
+      12,
+      54
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 200.94
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 18.09,
+     "dd_pct": -19.27,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 145.07
+    }
+   },
+   "event_date": "2024-06-06",
+   "event_trade_date": "2024-06-06",
+   "name": "科创50",
+   "p0": 743.23,
+   "symbol": "000688.SH",
+   "type": "process"
+  },
+  {
+   "arms": {},
+   "event_date": "2024-08-22",
+   "event_trade_date": "2024-08-22",
+   "name": "科创50",
+   "p0": 685.53,
+   "symbol": "000688.SH",
+   "type": "process"
+  },
+  {
+   "arms": {},
+   "event_date": "2026-07-17",
+   "event_trade_date": "2026-07-17",
+   "name": "科创50",
+   "p0": 1715.4,
+   "symbol": "000688.SH",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -47.55,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": -25.54
+    },
+    "pl3x5": {
+     "build_end_offset": 2,
+     "cost_vs_p0_pp": -6.97,
+     "dd_pct": -47.55,
+     "fill_days": [
+      0,
+      2,
+      2
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -19.96
+    },
+    "pl3x8": {
+     "build_end_offset": 112,
+     "cost_vs_p0_pp": -9.39,
+     "dd_pct": -47.55,
+     "fill_days": [
+      0,
+      2,
+      112
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": -17.82
+    },
+    "pl_half10": {
+     "build_end_offset": 2,
+     "cost_vs_p0_pp": -5.32,
+     "dd_pct": -47.55,
+     "fill_days": [
+      0,
+      2
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": -21.36
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -5.55,
+     "dd_pct": -44.95,
+     "fill_days": [
+      0,
+      112,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": -21.17
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -0.27,
+     "dd_pct": -47.55,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": -25.34
+    }
+   },
+   "event_date": "2022-04-21",
+   "event_trade_date": "2022-04-21",
+   "name": "半导体ETF",
+   "p0": 0.4491,
+   "symbol": "512480",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -47.55,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 15.86
+    },
+    "pl3x5": {
+     "build_end_offset": 3,
+     "cost_vs_p0_pp": -6.95,
+     "dd_pct": -47.55,
+     "fill_days": [
+      0,
+      2,
+      3
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 24.51
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -3.91,
+     "dd_pct": -42.86,
+     "fill_days": [
+      0,
+      2,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 20.57
+    },
+    "pl_half10": {
+     "build_end_offset": 3,
+     "cost_vs_p0_pp": -5.67,
+     "dd_pct": -47.55,
+     "fill_days": [
+      0,
+      3
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 22.82
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": -1.2,
+     "dd_pct": -36.91,
+     "fill_days": [
+      0,
+      250,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 2,
+     "ret_pct": 17.26
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 6.21,
+     "dd_pct": -42.7,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 9.08
+    }
+   },
+   "event_date": "2022-09-29",
+   "event_trade_date": "2022-09-29",
+   "name": "半导体ETF",
+   "p0": 0.4136,
+   "symbol": "512480",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": -0.0,
+     "dd_pct": -34.47,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 84.15
+    },
+    "pl3x5": {
+     "build_end_offset": 61,
+     "cost_vs_p0_pp": -6.6,
+     "dd_pct": -24.33,
+     "fill_days": [
+      0,
+      54,
+      61
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 97.17
+    },
+    "pl3x8": {
+     "build_end_offset": 69,
+     "cost_vs_p0_pp": -8.91,
+     "dd_pct": -22.42,
+     "fill_days": [
+      0,
+      56,
+      69
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 102.15
+    },
+    "pl_half10": {
+     "build_end_offset": 61,
+     "cost_vs_p0_pp": -6.01,
+     "dd_pct": -26.25,
+     "fill_days": [
+      0,
+      61
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 95.92
+    },
+    "pl_newlow": {
+     "build_end_offset": 56,
+     "cost_vs_p0_pp": -3.63,
+     "dd_pct": -26.67,
+     "fill_days": [
+      0,
+      46,
+      56
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 91.08
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": -5.84,
+     "dd_pct": -19.39,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 95.56
+    }
+   },
+   "event_date": "2023-10-23",
+   "event_trade_date": "2023-10-23",
+   "name": "半导体ETF",
+   "p0": 0.387,
+   "symbol": "512480",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -19.61,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 133.43
+    },
+    "pl3x5": {
+     "build_end_offset": 7,
+     "cost_vs_p0_pp": -6.4,
+     "dd_pct": -19.61,
+     "fill_days": [
+      0,
+      6,
+      7
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 149.4
+    },
+    "pl3x8": {
+     "build_end_offset": 10,
+     "cost_vs_p0_pp": -9.64,
+     "dd_pct": -19.61,
+     "fill_days": [
+      0,
+      7,
+      10
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 158.33
+    },
+    "pl_half10": {
+     "build_end_offset": 7,
+     "cost_vs_p0_pp": -5.92,
+     "dd_pct": -19.61,
+     "fill_days": [
+      0,
+      7
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 148.11
+    },
+    "pl_newlow": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 5.17,
+     "dd_pct": -19.39,
+     "fill_days": [
+      0,
+      10,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 121.96
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 8.89,
+     "dd_pct": -19.39,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 114.38
+    }
+   },
+   "event_date": "2024-01-19",
+   "event_trade_date": "2024-01-19",
+   "name": "半导体ETF",
+   "p0": 0.3485,
+   "symbol": "512480",
+   "type": "process"
+  },
+  {
+   "arms": {
+    "lump": {
+     "build_end_offset": 0,
+     "cost_vs_p0_pp": 0.0,
+     "dd_pct": -19.9,
+     "fill_days": [
+      0
+     ],
+     "n_trades": 1,
+     "never_triggered": 0,
+     "ret_pct": 318.22
+    },
+    "pl3x5": {
+     "build_end_offset": 70,
+     "cost_vs_p0_pp": -5.71,
+     "dd_pct": -19.9,
+     "fill_days": [
+      0,
+      54,
+      70
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 343.52
+    },
+    "pl3x8": {
+     "build_end_offset": 250,
+     "cost_vs_p0_pp": 7.26,
+     "dd_pct": -19.9,
+     "fill_days": [
+      0,
+      65,
+      250
+     ],
+     "n_trades": 3,
+     "never_triggered": 1,
+     "ret_pct": 289.92
+    },
+    "pl_half10": {
+     "build_end_offset": 70,
+     "cost_vs_p0_pp": -5.71,
+     "dd_pct": -19.9,
+     "fill_days": [
+      0,
+      70
+     ],
+     "n_trades": 2,
+     "never_triggered": 0,
+     "ret_pct": 343.56
+    },
+    "pl_newlow": {
+     "build_end_offset": 48,
+     "cost_vs_p0_pp": -0.77,
+     "dd_pct": -19.9,
+     "fill_days": [
+      0,
+      12,
+      48
+     ],
+     "n_trades": 3,
+     "never_triggered": 0,
+     "ret_pct": 321.45
+    },
+    "staged12": {
+     "build_end_offset": 231,
+     "cost_vs_p0_pp": 24.98,
+     "dd_pct": -19.9,
+     "fill_days": [
+      0,
+      21,
+      42,
+      63,
+      84,
+      105,
+      126,
+      147,
+      168,
+      189,
+      210,
+      231
+     ],
+     "n_trades": 12,
+     "never_triggered": 0,
+     "ret_pct": 234.63
+    }
+   },
+   "event_date": "2024-06-06",
+   "event_trade_date": "2024-06-06",
+   "name": "半导体ETF",
+   "p0": 0.3466,
+   "symbol": "512480",
+   "type": "process"
+  },
+  {
+   "arms": {},
+   "event_date": "2024-08-22",
+   "event_trade_date": "2024-08-22",
+   "name": "半导体ETF",
+   "p0": 0.3268,
+   "symbol": "512480",
+   "type": "process"
+  },
+  {
+   "arms": {},
+   "event_date": "2026-07-17",
+   "event_trade_date": "2026-07-17",
+   "name": "半导体ETF",
+   "p0": 1.07,
+   "symbol": "512480",
+   "type": "process"
+  }
+ ],
+ "pooled": {
+  "pl3x5": {
+   "by_type": {
+    "event_v": {
+     "dd_med": -1.78,
+     "diff_med": -6.92,
+     "n": 12
+    },
+    "middle": {
+     "dd_med": -6.79,
+     "diff_med": 4.13,
+     "n": 8
+    },
+    "process": {
+     "dd_med": -1.36,
+     "diff_med": 7.22,
+     "n": 49
+    }
+   },
+   "dd_impr_med": -1.84,
+   "diff_med": 6.09,
+   "diff_pos_rate": 0.812,
+   "diff_q25": 3.86,
+   "diff_q75": 9.02,
+   "n_pairs": 69,
+   "per_instrument": {
+    "000300": {
+     "dd_med": -4.03,
+     "diff_med": 5.04,
+     "n": 28
+    },
+    "000688.SH": {
+     "dd_med": -1.64,
+     "diff_med": 11.15,
+     "n": 5
+    },
+    "399006": {
+     "dd_med": -0.84,
+     "diff_med": 6.98,
+     "n": 20
+    },
+    "512100": {
+     "dd_med": -3.35,
+     "diff_med": 7.61,
+     "n": 11
+    },
+    "512480": {
+     "dd_med": 0.0,
+     "diff_med": 13.02,
+     "n": 5
+    }
+   },
+   "sign_test": {
+    "k_pos": 56,
+    "n_nonzero": 69,
+    "p_two_sided": 0.0
+   }
+  },
+  "pl3x8": {
+   "by_type": {
+    "event_v": {
+     "dd_med": -3.15,
+     "diff_med": -7.54,
+     "n": 12
+    },
+    "middle": {
+     "dd_med": -6.54,
+     "diff_med": -2.15,
+     "n": 8
+    },
+    "process": {
+     "dd_med": -4.69,
+     "diff_med": 7.71,
+     "n": 49
+    }
+   },
+   "dd_impr_med": -4.69,
+   "diff_med": 4.86,
+   "diff_pos_rate": 0.667,
+   "diff_q25": -3.95,
+   "diff_q75": 10.43,
+   "n_pairs": 69,
+   "per_instrument": {
+    "000300": {
+     "dd_med": -4.85,
+     "diff_med": 2.46,
+     "n": 28
+    },
+    "000688.SH": {
+     "dd_med": -4.11,
+     "diff_med": 0.09,
+     "n": 5
+    },
+    "399006": {
+     "dd_med": -3.96,
+     "diff_med": 7.0,
+     "n": 20
+    },
+    "512100": {
+     "dd_med": -6.47,
+     "diff_med": 10.4,
+     "n": 11
+    },
+    "512480": {
+     "dd_med": 0.0,
+     "diff_med": 7.72,
+     "n": 5
+    }
+   },
+   "sign_test": {
+    "k_pos": 46,
+    "n_nonzero": 69,
+    "p_two_sided": 0.0076
+   }
+  },
+  "pl_half10": {
+   "by_type": {
+    "event_v": {
+     "dd_med": -1.78,
+     "diff_med": -5.38,
+     "n": 12
+    },
+    "middle": {
+     "dd_med": -4.76,
+     "diff_med": 3.54,
+     "n": 8
+    },
+    "process": {
+     "dd_med": -1.36,
+     "diff_med": 6.96,
+     "n": 49
+    }
+   },
+   "dd_impr_med": -2.24,
+   "diff_med": 5.72,
+   "diff_pos_rate": 0.797,
+   "diff_q25": 3.92,
+   "diff_q75": 9.42,
+   "n_pairs": 69,
+   "per_instrument": {
+    "000300": {
+     "dd_med": -3.7,
+     "diff_med": 5.01,
+     "n": 28
+    },
+    "000688.SH": {
+     "dd_med": -2.62,
+     "diff_med": 10.97,
+     "n": 5
+    },
+    "399006": {
+     "dd_med": -0.84,
+     "diff_med": 6.9,
+     "n": 20
+    },
+    "512100": {
+     "dd_med": -3.35,
+     "diff_med": 7.33,
+     "n": 11
+    },
+    "512480": {
+     "dd_med": 0.0,
+     "diff_med": 11.77,
+     "n": 5
+    }
+   },
+   "sign_test": {
+    "k_pos": 55,
+    "n_nonzero": 69,
+    "p_two_sided": 0.0
+   }
+  },
+  "pl_newlow": {
+   "by_type": {
+    "event_v": {
+     "dd_med": -0.1,
+     "diff_med": -5.07,
+     "n": 12
+    },
+    "middle": {
+     "dd_med": -3.52,
+     "diff_med": 3.04,
+     "n": 8
+    },
+    "process": {
+     "dd_med": -2.69,
+     "diff_med": 4.07,
+     "n": 49
+    }
+   },
+   "dd_impr_med": -2.6,
+   "diff_med": 3.23,
+   "diff_pos_rate": 0.841,
+   "diff_q25": 0.75,
+   "diff_q75": 6.67,
+   "n_pairs": 69,
+   "per_instrument": {
+    "000300": {
+     "dd_med": -2.85,
+     "diff_med": 2.54,
+     "n": 28
+    },
+    "000688.SH": {
+     "dd_med": -4.1,
+     "diff_med": 6.35,
+     "n": 5
+    },
+    "399006": {
+     "dd_med": -0.1,
+     "diff_med": 3.94,
+     "n": 20
+    },
+    "512100": {
+     "dd_med": -4.26,
+     "diff_med": 3.36,
+     "n": 11
+    },
+    "512480": {
+     "dd_med": -2.6,
+     "diff_med": 3.23,
+     "n": 5
+    }
+   },
+   "sign_test": {
+    "k_pos": 58,
+    "n_nonzero": 69,
+    "p_two_sided": 0.0
+   }
+  },
+  "staged12": {
+   "by_type": {
+    "event_v": {
+     "dd_med": -1.07,
+     "diff_med": -11.13,
+     "n": 12
+    },
+    "middle": {
+     "dd_med": -3.91,
+     "diff_med": -6.78,
+     "n": 8
+    },
+    "process": {
+     "dd_med": -4.85,
+     "diff_med": 1.82,
+     "n": 49
+    }
+   },
+   "dd_impr_med": -4.12,
+   "diff_med": -1.27,
+   "diff_pos_rate": 0.435,
+   "diff_q25": -10.57,
+   "diff_q75": 6.05,
+   "n_pairs": 69,
+   "per_instrument": {
+    "000300": {
+     "dd_med": -5.08,
+     "diff_med": -0.81,
+     "n": 28
+    },
+    "000688.SH": {
+     "dd_med": -4.11,
+     "diff_med": -5.06,
+     "n": 5
+    },
+    "399006": {
+     "dd_med": -4.35,
+     "diff_med": -0.98,
+     "n": 20
+    },
+    "512100": {
+     "dd_med": -3.95,
+     "diff_med": 2.08,
+     "n": 11
+    },
+    "512480": {
+     "dd_med": -0.22,
+     "diff_med": -6.78,
+     "n": 5
+    }
+   },
+   "sign_test": {
+    "k_pos": 30,
+    "n_nonzero": 69,
+    "p_two_sided": 0.3356
+   }
+  }
+ },
+ "verdict": "证据不足/交换（主臂 pl3x5）",
+ "verdict_inputs": {
+  "N1": false,
+  "N2": false,
+  "P1": true,
+  "P2": false,
+  "P3": true,
+  "n_pairs": 69
+ }
+}

@@ -1,0 +1,12 @@
+{
+  "frozen_at": "2026-09-09T20:40:00+08:00",
+  "provider": "baostock.query_hs300_stocks",
+  "rule": "For each selected event, use the original 20-quote-day probe interval containing it. The left endpoint is already an original probe; query the next 20 ETF quote dates through and including the right endpoint exactly once each, for 40 date requests total. Do not retry failed dates.",
+  "events": [
+    {"selected_week_date": "2018-12-14", "known_effective_date": "2018-12-17", "left_probe": "2018-12-05", "right_probe": "2019-01-04"},
+    {"selected_week_date": "2019-06-14", "known_effective_date": "2019-06-17", "left_probe": "2019-06-06", "right_probe": "2019-07-05"}
+  ],
+  "request_cap": 40,
+  "profit_or_return_fields_used": false,
+  "qualification_boundary": "Same third-party source only increases sampling density; it does not prove official completeness or historical availability."
+}

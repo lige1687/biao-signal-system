@@ -1,0 +1,58 @@
+{
+  "status": "legacy_evaluation_metadata_only",
+  "principles_version": "v1.0",
+  "definition_standard_version": "1.0.0",
+  "registry_version": "1.0.0",
+  "registry_sha256": "1626c0b4f414de09fbb2f523daffa73c8db0018048cf860cc5f40c3b1414de7a",
+  "adopted_registered_objects": [],
+  "legacy_objects": [
+    "equal",
+    "no_exit_100",
+    "no_exit_75",
+    "fast_reentry_exit"
+  ],
+  "reference_only_objects": [
+    "mixed.equal@1.0.0",
+    "mixed.no_exit_100@1.0.0",
+    "mixed.no_exit_75@1.0.0",
+    "mixed.fast_reentry_exit@1.0.0"
+  ],
+  "reference_boundary": "Registered cards bind full14, not fixed11; no exact identity or migration claimed.",
+  "dependencies": "Frozen dedup protocol and its existing account input files; no new model.",
+  "models": [],
+  "pool_version": "fixed11 under dedup-protocol.json",
+  "data_cutoff": "2026-06-30",
+  "historical_available_at": "unknown",
+  "historical_decision_at": "see frozen execution protocol; source arrival timestamps unknown",
+  "metadata_available_at": "2026-09-09T11:52:05.012132+00:00",
+  "metadata_decision_at": "2026-09-09T11:52:05.012132+00:00",
+  "timezone": "Asia/Shanghai",
+  "protocol_sha256": "4e19e4f33cd8a202ad4ecb2eac8fff1e24e815d211d846b3deb9603843eb5465",
+  "input_files": {
+    "docs/research/experiment-backtest-principles.md": "9dad4d24d7c3ebe570222342339a3a3f2537b1df5819a6f36fd4cbb8a5cbfa68",
+    "docs/research/experiment-report-template.md": "1ea156a23711390da8a8768cfd7f55cc10f8415b8716cffca70df856e3386bdb",
+    "docs/trading-spec-v1.md": "dd75d70cd22b103e815d3b314b47c36731230aa268d05e42fa447ba55e639798",
+    "configs/rules.v1.yaml": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-protocol.json": "31d7a59b216f71577683f80ef89d9a41d7e2dd79c1655ed19836310d622da303",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/final-manifest.json": "80bf3fa0f4f80c491eb641107e36c6ae1f1df29ea68ce23ba1ac524135d438f2",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-execution/equity.csv": "d25b2afba6846d81926f26d86efefca2f832b6d915a8835251fe25c4925473c2",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-execution/trades.csv": "6b386c7b224b5a1d4dd5e042f7772fb1d4ba9b1075510b9ce0081e2187c6a661",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-execution/actions.csv": "6cc4841bda25fa39385f61f3537ac8bdd0faeb2e3d00de5610c9bdefdf45e58b",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-execution/signals.csv": "dea6c8bbfbc66d986cc147ea4b0d3758a6d5a88c93f2573937032b6e1b85ef19",
+    "docs/experiments/raw/research-mixed-pool-audit-2026-09-09/dedup-execution/summary.json": "be1b012be8aaa4177a827f104e7b4f57d8ec67751f4e4b4a87af0c0a8b014f22"
+  },
+  "code_files": {
+    "docs/experiments/raw/research-mixed-evaluation-2026-09-09/reentry/audit_reentries.py": "7814415677fe0ed1236d9260474a333d558f2e7a866bf2d79ad0a66cadd280b0",
+    "docs/experiments/raw/research-mixed-evaluation-2026-09-09/reentry/build_episodes.py": "83ebf1892c21528e91e916791e52ff9c99eb3ee8ab638f7b1e6907ab39c9cc4d",
+    "docs/experiments/raw/research-mixed-evaluation-2026-09-09/charts/drawdown.py": "2f7c37d36d73f1b2d4aed2c03b88e66246306df9d4274b707bb887431e79708b",
+    "docs/experiments/raw/research-mixed-evaluation-2026-09-09/review/verify.py": "e7997476a35cfa3c4ecd9eda7abd14a30b335c327561f0f1ddb8408f55e2949f",
+    "docs/experiments/raw/research-mixed-evaluation-2026-09-09/evaluation/evaluate.py": "56a880181e9ac76daedca216d39414ba9727a3a4bed46ee8209f904f62bd75f6"
+  },
+  "quality": {
+    "definition_clarity": "explicit frozen legacy protocol",
+    "data_qualification": "limited historical sources; incomplete historical universe",
+    "implementation": "accounting and independent evaluation checks passed; not migrated",
+    "effectiveness": "same-history sensitivity evidence only",
+    "production": "not_authorized"
+  }
+}

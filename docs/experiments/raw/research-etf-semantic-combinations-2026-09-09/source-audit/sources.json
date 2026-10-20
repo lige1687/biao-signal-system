@@ -1,0 +1,102 @@
+{
+  "status": "sufficient_for_bounded_four-way_candidate_comparison",
+  "scope": {
+    "symbols": [
+      "sh510300",
+      "sz159915"
+    ],
+    "base_config": "C1",
+    "new_return_run": false,
+    "downloaded_data": false
+  },
+  "recommended_groups": [
+    "C1 baseline",
+    "C1 plus L1-near-SMA20 position",
+    "C1 plus dual-MA bullish confirmation",
+    "C1 plus position and confirmation"
+  ],
+  "candidate_counts": {
+    "base": 84,
+    "position": 12,
+    "confirmation": 5,
+    "position_and_confirmation": 5,
+    "joint_cells": {
+      "neither": 72,
+      "position_only": 7,
+      "confirmation_only": 0,
+      "both": 5
+    }
+  },
+  "definition": {
+    "trigger": "C1 confirmed reclaim: close returns to or above previously confirmed L1 within the frozen reclaim window after a false breakdown",
+    "position": "close >= SMA20 and abs(L1 - SMA20) <= 1.0 * simple-average ATR20 on the C1 reclaim date",
+    "confirmation": "source_event.evidence.dual_ma_bull_state on the C1 reclaim date",
+    "invalidation": "fixed source_event.evidence.l2_price / stop_price; no post-entry reason change"
+  },
+  "sources": [
+    {
+      "path": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/inputs/source-candidates/precision-candidates.json.gz",
+      "sha256": "5f4ec9749f21284270093b0de15694e9c8322009b7600a72f2854d9310220c54",
+      "role": "adapted candidates before reward/risk acceptance; 84 C1 rows for the two symbols"
+    },
+    {
+      "path": "docs/experiments/raw/research-twelfth-2026-09-08/independent-review/precision-addendum/accepted/adapter/all-source-events.json.gz",
+      "sha256": "74cf89ba3dc6f3bae441201f0e6ab21d9dd7049184de206002b72a8e12ec8ccc",
+      "role": "upstream confirmed and failed event stream"
+    },
+    {
+      "path": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/inputs/bars/sh510300-nominal.csv",
+      "sha256": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf",
+      "role": "raw bars converted by PriceBasis to each signal-date basis before causal SMA20 and ATR20 reconstruction"
+    },
+    {
+      "path": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/inputs/bars/sz159915-nominal.csv",
+      "sha256": "dc15f1c722114cf0f67d3c63d123b91fce27d60a9c41c4796a058b7b05fdece0",
+      "role": "raw bars converted by PriceBasis to each signal-date basis before causal SMA20 and ATR20 reconstruction"
+    },
+    {
+      "path": "docs/experiments/raw/research-twelfth-2026-09-08/research-package/src/lei_signal/rules/two_b_reversal.py",
+      "sha256": "2fd401b1745059c3b5fce375524b4fc100ee7d350e6cdf41ba3f6fb24273bdc5",
+      "role": "C1/C2/C3 timing, L1 confirmation, L2 invalidation, and stored confirmation-state semantics"
+    },
+    {
+      "path": "docs/experiments/raw/research-twelfth-2026-09-08/research-package/src/lei_signal/features/indicators.py",
+      "sha256": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+      "role": "causal SMA and simple-average true-range formula"
+    },
+    {
+      "path": "docs/experiments/raw/research-twelfth-2026-09-08/research-package/src/lei_signal/rules/first_ma_pullback.py",
+      "sha256": "62939b320b8732bc330627eb702fa9d45aa934e94f6372cab94cdc3b1619036f",
+      "role": "existing 1.0 ATR position-distance precedent"
+    },
+    {
+      "path": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/inputs/actions.json",
+      "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789",
+      "role": "dated corporate actions used by PriceBasis"
+    },
+    {
+      "path": "docs/experiments/raw/research-broad-etf-technical-2026-09-08/execution/inputs/exit-observations.json.gz",
+      "sha256": "a27c10088c1b59f8d53be7ec1c8cffd9c084257d5e5dbe9e2231a2fae80ad722",
+      "role": "independent same-date SMA20 cross-check"
+    },
+    {
+      "path": "docs/experiments/raw/research-eighth-2026-09-08/product-qualification/price-helper/price_basis.py",
+      "sha256": "ba443c4c69c2c42b55cd092ca19a1f552354daf4a2f5acf3be13d77ed64a3b4d",
+      "role": "point-in-time cash_proportional_v1 conversion"
+    }
+  ],
+  "limitations": [
+    "confirmation is a duplicate of the existing C3 state semantic and all five confirmed rows also pass position",
+    "L1 source pivot date is not a standalone stored field; its confirmed-available date is encoded in lifecycle_id",
+    "the position condition is a cross-module research proxy, not a complete module-A signal",
+    "no pre-authorized MACD strength threshold exists for this batch"
+  ],
+  "generated": {
+    "path": "docs/experiments/raw/research-etf-semantic-combinations-2026-09-09/source-audit/conditions.json",
+    "sha256": "e43f694b7b09028ea82fed03a16e920508115442effaad4c659dde54fd9d1ec6",
+    "source_code_lock": "source-code-lock.json",
+    "sma20_exit_observation_checks": 84,
+    "future_tail_checks": 84
+  },
+  "failed_attempt": "failed-initial-basis-note.md"
+}

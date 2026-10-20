@@ -1,0 +1,506 @@
+{
+ "integrity": {
+  "verified": true,
+  "hash_mismatches": [],
+  "instruments": 14,
+  "rows": 18916
+ },
+ "sources_verified": true,
+ "sources_error": null,
+ "uses": {
+  "description": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": ""
+  },
+  "ranking": {
+   "verdict": "conditional",
+   "declared": true,
+   "default_accepted": false,
+   "reason": "starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；日期算法自洽，但来源的资格状态无法确认（qualification='task_verified_fact_only'）；未声明或被省略不等于真实来源已核验，自述值如 official/verified 同样不构成资格——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；日期算法自洽，但来源的资格状态无法确认（qualification='task_verified_fact_only'）；未声明或被省略不等于真实来源已核验，自述值如 official/verified 同样不构成资格——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市"
+  },
+  "research_signal": {
+   "verdict": "conditional",
+   "declared": true,
+   "default_accepted": false,
+   "reason": "zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知"
+  }
+ },
+ "objects": {
+  "mixed.momentum.raw@1.0.0": {
+   "missing_fields": [],
+   "directly_satisfiable": true
+  },
+  "mixed.price.economic@1.0.0": {
+   "missing_fields": [],
+   "directly_satisfiable": true
+  }
+ },
+ "coverage": {
+  "complete": true,
+  "missing_months": [],
+  "day_incomplete_months": []
+ },
+ "action_findings": [
+  {
+   "level": "warn",
+   "code": "action_available_at_unknown",
+   "instrument": null,
+   "message": "21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+   "evidence": {
+    "without_available_at": 21,
+    "with_announcement_lower_bound": 3,
+    "fully_unknown": 18,
+    "total": 21,
+    "lower_bound_semantics": "announcement_date 只证明不晚于该日已公布，不证明该日之前不可知，也不是带时区的真实到达时刻"
+   }
+  },
+  {
+   "level": "info",
+   "code": "action_announcement_lower_bound_available",
+   "instrument": null,
+   "message": "3 条行动带 announcement_date，可作可得性下界；这是现有本地资料中唯一的时点线索",
+   "evidence": {
+    "count": 3
+   }
+  },
+  {
+   "level": "info",
+   "code": "coverage_unproven",
+   "instrument": null,
+   "message": "没有行动记录不等于已证明该期间没有分红、拆分或停牌；本文件缺连续官方「无其他行动」证明",
+   "evidence": {}
+  }
+ ],
+ "price_findings": [
+  {
+   "code": "product_internal_gap",
+   "instrument": "512890.SS",
+   "message": "产品在自身首末报价之间缺 1 个交易日的报价，其中 1 天与登记的停牌记录逐日匹配；不自动等于数据错误，也不自动等于停牌",
+   "evidence": {
+    "dates": [],
+    "count": 0,
+    "explained_by_halt": [
+     "2021-10-22"
+    ],
+    "explained_count": 1,
+    "explained_by": [
+     {
+      "date": "2021-10-22",
+      "event_id": "512890-halt-2021-10-22"
+     }
+    ],
+    "cause": "halt",
+    "note": "首次报价之前、最后报价之后的资格与上市证据相关，不在本检查范围；停牌解释只说明数据缺口来源，不等于当时可交易"
+   }
+  },
+  {
+   "code": "zero_volume_days",
+   "instrument": "159652.SZ",
+   "message": "存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）",
+   "evidence": {
+    "days": 5
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "159652.SZ",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2023-02-08",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "513870.SS",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2023-11-02",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "515050.SS",
+   "message": "首个报价晚于评价期起点；日期算法自洽，但来源的资格状态无法确认（qualification='task_verified_fact_only'）；未声明或被省略不等于真实来源已核验，自述值如 official/verified 同样不构成资格——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2019-10-16",
+    "window_start": "2019-09-02",
+    "listing_evidence": {
+     "source": {
+      "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/run-06/listing-bridge/listing-bridge-515050.json",
+      "sha256": "a0827607b5cf3e693de85ef736d3f72a23220854e59e44c03e0a050bb079f990"
+     },
+     "listing_date": "2019-10-16"
+    },
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "日期算法自洽，但来源的资格状态无法确认（qualification='task_verified_fact_only'）；未声明或被省略不等于真实来源已核验，自述值如 official/verified 同样不构成资格",
+     "dates": {
+      "outcome": "coherent",
+      "detail": "上市日期与评价期/首报价/残余缺口自洽"
+     },
+     "source": {
+      "outcome": "unverified",
+      "qualified": false,
+      "detail": "来源的资格状态无法确认（qualification='task_verified_fact_only'）；未声明或被省略不等于真实来源已核验，自述值如 official/verified 同样不构成资格"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "515130.SS",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2020-05-11",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "515170.SS",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2021-01-13",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "515300.SS",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2019-09-19",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "515880.SS",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2019-09-06",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "516220.SS",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2021-03-10",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "518850.SS",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2020-06-05",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "562590.SS",
+   "message": "首个报价晚于评价期起点；日期算法自洽，但来源的资格状态无法确认（qualification='task_verified_fact_only'）；未声明或被省略不等于真实来源已核验，自述值如 official/verified 同样不构成资格——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2023-10-18",
+    "window_start": "2019-09-02",
+    "listing_evidence": {
+     "source": {
+      "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/run-06/listing-bridge/listing-bridge-562590.json",
+      "sha256": "4cb12b1e124b37278a89a2937d4d26ccb95f6e4e0f7ddd357817023fac1c6287"
+     },
+     "listing_date": "2023-10-18"
+    },
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "日期算法自洽，但来源的资格状态无法确认（qualification='task_verified_fact_only'）；未声明或被省略不等于真实来源已核验，自述值如 official/verified 同样不构成资格",
+     "dates": {
+      "outcome": "coherent",
+      "detail": "上市日期与评价期/首报价/残余缺口自洽"
+     },
+     "source": {
+      "outcome": "unverified",
+      "qualified": false,
+      "detail": "来源的资格状态无法确认（qualification='task_verified_fact_only'）；未声明或被省略不等于真实来源已核验，自述值如 official/verified 同样不构成资格"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "starts_after_window",
+   "instrument": "588000.SS",
+   "message": "首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市",
+   "evidence": {
+    "first_date": "2020-11-16",
+    "window_start": "2019-09-02",
+    "listing_evidence": null,
+    "cause": "unconfirmed",
+    "evidence_check": {
+     "structural": false,
+     "reason": "缺少上市资格证据",
+     "dates": {
+      "outcome": "missing"
+     },
+     "source": {
+      "outcome": "missing"
+     },
+     "synthetic": false
+    }
+   }
+  },
+  {
+   "code": "action_available_at_unknown",
+   "instrument": null,
+   "message": "21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+   "evidence": {
+    "without_available_at": 21,
+    "with_announcement_lower_bound": 3,
+    "fully_unknown": 18,
+    "total": 21,
+    "lower_bound_semantics": "announcement_date 只证明不晚于该日已公布，不证明该日之前不可知，也不是带时区的真实到达时刻"
+   }
+  },
+  {
+   "code": "action_announcement_lower_bound_available",
+   "instrument": null,
+   "message": "3 条行动带 announcement_date，可作可得性下界；这是现有本地资料中唯一的时点线索",
+   "evidence": {
+    "count": 3
+   }
+  },
+  {
+   "code": "coverage_unproven",
+   "instrument": null,
+   "message": "没有行动记录不等于已证明该期间没有分红、拆分或停牌；本文件缺连续官方「无其他行动」证明",
+   "evidence": {}
+  }
+ ],
+ "identity_errors": [
+  {
+   "scope": "mapping",
+   "error": "'510300' 与 '510300.SS' 映射到同一规范身份 '510300.SS'"
+  },
+  {
+   "scope": "mapping",
+   "error": "'512890' 与 '512890.SS' 映射到同一规范身份 '512890.SS'"
+  },
+  {
+   "scope": "mapping",
+   "error": "'515300' 与 '515300.SS' 映射到同一规范身份 '515300.SS'"
+  },
+  {
+   "scope": "mapping",
+   "error": "'512400' 与 '512400.SS' 映射到同一规范身份 '512400.SS'"
+  },
+  {
+   "scope": "mapping",
+   "error": "'515880' 与 '515880.SS' 映射到同一规范身份 '515880.SS'"
+  },
+  {
+   "scope": "mapping",
+   "error": "'515050' 与 '515050.SS' 映射到同一规范身份 '515050.SS'"
+  }
+ ],
+ "time_violations": [],
+ "input_times": {
+  "snapshot_timing": {
+   "started_at": "2026-09-10T00:00:00+00:00",
+   "finished_at": "2026-09-10T00:00:15+00:00",
+   "note": "started_at/finished_at 是本次运行时刻；不得当作数据的对外可用时刻。",
+   "derived_at": "2026-09-13T12:09:59.727978+00:00"
+  },
+  "per_instrument_fetched_at": {
+   "159652.SZ": {
+    "fetched_at": null,
+    "first_date": "2023-02-08",
+    "last_date": "2026-06-30"
+   },
+   "510300.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "512400.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "512890.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-02",
+    "last_date": "2026-06-30"
+   },
+   "513870.SS": {
+    "fetched_at": null,
+    "first_date": "2023-11-02",
+    "last_date": "2026-06-30"
+   },
+   "515050.SS": {
+    "fetched_at": null,
+    "first_date": "2019-10-16",
+    "last_date": "2026-06-30"
+   },
+   "515130.SS": {
+    "fetched_at": null,
+    "first_date": "2020-05-11",
+    "last_date": "2026-06-30"
+   },
+   "515170.SS": {
+    "fetched_at": null,
+    "first_date": "2021-01-13",
+    "last_date": "2026-06-30"
+   },
+   "515300.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-19",
+    "last_date": "2026-06-30"
+   },
+   "515880.SS": {
+    "fetched_at": null,
+    "first_date": "2019-09-06",
+    "last_date": "2026-06-30"
+   },
+   "516220.SS": {
+    "fetched_at": null,
+    "first_date": "2021-03-10",
+    "last_date": "2026-06-30"
+   },
+   "518850.SS": {
+    "fetched_at": null,
+    "first_date": "2020-06-05",
+    "last_date": "2026-06-30"
+   },
+   "562590.SS": {
+    "fetched_at": null,
+    "first_date": "2023-10-18",
+    "last_date": "2026-06-30"
+   },
+   "588000.SS": {
+    "fetched_at": null,
+    "first_date": "2020-11-16",
+    "last_date": "2026-06-30"
+   }
+  },
+  "actions_available_at": {
+   "declared": 0,
+   "unknown": 21,
+   "note": "行动原始记录的 available_at 未知条目只能事后重建，不冒充历史可知输入"
+  }
+ },
+ "policy": "not_applicable_no_account_policy"
+}

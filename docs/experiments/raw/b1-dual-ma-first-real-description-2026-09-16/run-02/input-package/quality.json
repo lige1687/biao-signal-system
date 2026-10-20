@@ -1,0 +1,93 @@
+{
+ "symbol": "sh510300",
+ "coverage": {
+  "start": "2019-09-02",
+  "end": "2026-02-03",
+  "required_sessions": 1558,
+  "first_session": "2019-09-02",
+  "last_session": "2026-02-03"
+ },
+ "calendar": {
+  "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+  "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1"
+ },
+ "completeness_gate": "由已核日历逐日推导必需交易日并逐日比对；行数仅交叉证据",
+ "cross_check_rows": {
+  "expected_by_controller": 1558,
+  "actual": 1558
+ },
+ "audit": {
+  "inputs": [
+   {
+    "file": "sh510300-2013.json",
+    "sha256": "7465f640a561d6cbf9279546a0fd714f73a9bdcde7b7d5b70c4a319a9cb6b9f9",
+    "rows": 483,
+    "retrieved_at": "2026-09-08T03:34:17.805931+00:00"
+   },
+   {
+    "file": "sh510300-2015.json",
+    "sha256": "a4d14c593c8a35d31cab5a76d1eb54311750d8661f26c3b240921713dcb6c9a3",
+    "rows": 501,
+    "retrieved_at": "2026-09-08T03:34:17.806071+00:00"
+   },
+   {
+    "file": "sh510300-2017.json",
+    "sha256": "59984078ea8a3da16e5925d4e950f71092883c5fc84dc5b52a2e831248a23e1b",
+    "rows": 499,
+    "retrieved_at": "2026-09-08T03:34:17.806207+00:00"
+   },
+   {
+    "file": "sh510300-2019.json",
+    "sha256": "0383041afeab893aacc0f0323f2ac355a51060c69fb4152fd418433e9b5a567b",
+    "rows": 497,
+    "retrieved_at": "2026-09-08T03:34:17.806311+00:00"
+   },
+   {
+    "file": "sh510300-2021.json",
+    "sha256": "52b6f7428b28202f50776e81eb2b7c6fd6a11454cd6fa4628de1bd80ba27e5c6",
+    "rows": 498,
+    "retrieved_at": "2026-09-08T03:34:18.075282+00:00"
+   },
+   {
+    "file": "sh510300-2023.json",
+    "sha256": "f046a5c5682e1a2923eff0aea2b9bc174ab9bfd0ddf8d219e04df5cd1b179409",
+    "rows": 496,
+    "retrieved_at": "2026-09-08T03:34:18.083760+00:00"
+   },
+   {
+    "file": "sh510300-2025.json",
+    "sha256": "e5f6ef5d81d1b370aeb6ccc86b61dca2558cd8e2ec7af2e842a75352c8e4eebc",
+    "rows": 420,
+    "retrieved_at": "2026-09-08T03:34:18.203105+00:00"
+   }
+  ],
+  "unique_dates": 3322,
+  "duplicates_deduped": 72,
+  "missing_sessions": [],
+  "extra_rows_quarantined": [],
+  "out_of_window_rows": 1764,
+  "out_of_window_note": "覆盖窗口之外的合法交易日数据，不属本包范围，不算异常",
+  "selected_rows": 1558,
+  "required_sessions": 1558,
+  "complete": true
+ },
+ "invalid_ohlc": 0,
+ "complete": true,
+ "declarations": {
+  "price_basis": "vendor_qfq",
+  "extracted_field": "qfqday",
+  "currency": "CNY",
+  "retrieved_at": "继承原件清单（见 audit.inputs 逐条）",
+  "assembled_at": "2026-09-15T23:05:15.580727+08:00",
+  "historical_available_at": null,
+  "adjustment_anchor": "unknown（精确复权锚点未证）",
+  "data_mode": "real",
+  "historical_reconstruction_only": true,
+  "not_claims": [
+   "total_return_wealth",
+   "point_in_time_verified",
+   "factor_effective",
+   "tradable_profit"
+  ]
+ }
+}

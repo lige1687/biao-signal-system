@@ -1,0 +1,597 @@
+{
+ "schema_version": "fixed-etf-evidence-bundle/1.0",
+ "synthetic": false,
+ "generated_by": "task2_extract_facts.py（本轮任务级证据抽取，非第二份对象登记表）",
+ "reads": {
+  "count": 17,
+  "limit": 80,
+  "files": [
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20231214_MO7U.txt",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20231214_MO7U.pdf",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240618_QXY9.txt",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240618_QXY9.pdf",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240913_SAOV.txt",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240913_SAOV.pdf",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20241128_QVEK.txt",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20241128_QVEK.pdf",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250612_HGW2.txt",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250612_HGW2.pdf",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250915_NN2J.txt",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250915_NN2J.pdf",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512890-official-split.pdf",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515050-official-split.pdf",
+   "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515880-official-split.pdf",
+   "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/515050-listing.pdf",
+   "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/562590-listing.pdf"
+  ]
+ },
+ "records": [
+  {
+   "record_id": "515300-515300_20231214_MO7U",
+   "instrument_id": "515300.SS",
+   "fact_type": "cash_dividend",
+   "event_id": "515300-cash_dividend-2023-12-19",
+   "facts": {
+    "announcement_sent_date": "2023-12-14",
+    "fund_main_code": "515300",
+    "cash_per_10_shares_announced": "0.6610",
+    "cash_per_share_computed": 0.0661,
+    "record_date": "2023-12-18",
+    "ex_date": "2023-12-19",
+    "pay_date": "2023-12-22",
+    "field_checks": {
+     "code_matches_frozen_symbol": true,
+     "ex_date_matches": true,
+     "per_share_matches_frozen": true,
+     "unit_conversion_hand_checked": true
+    }
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20231214_MO7U.txt",
+    "sha256": "5877f9764d3a785a54a2c96c40edb8f67c820ab38ad137f22adeada30c909728",
+    "pdf_path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20231214_MO7U.pdf",
+    "pdf_sha256": "bd46358cca56e22f7a0e49e9cfd461b2e25060c8772fc68403305d9aae37c38b"
+   },
+   "locator": {
+    "page": 1,
+    "section": "公告基本信息/与分红相关的其他信息"
+   },
+   "short_supporting_text": "公告送出日期：2023-12-14；本次分红方案（单位：元/10份基金份额）0.6610；除息日 2023-12-19",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2023-12-14",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "公告送出日期为基金管理人官方公告的公布日期下界；不据此填写精确 available_at"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "description",
+    "fact_verification"
+   ],
+   "limitations": [
+    "金额/日期与冻结行动一致，不构成历史可得性证明",
+    "文内基金全称含『红利低波动』字样而主代码为 515300；主代码与除息日/金额均与冻结行动一致，全称疑点登记于 conflicts，不在本轮自动裁决"
+   ]
+  },
+  {
+   "record_id": "515300-515300_20240618_QXY9",
+   "instrument_id": "515300.SS",
+   "fact_type": "cash_dividend",
+   "event_id": "515300-cash_dividend-2024-06-21",
+   "facts": {
+    "announcement_sent_date": "2024-06-18",
+    "fund_main_code": "515300",
+    "cash_per_10_shares_announced": "0.7140",
+    "cash_per_share_computed": 0.0714,
+    "record_date": "2024-06-20",
+    "ex_date": "2024-06-21",
+    "pay_date": "2024-06-26",
+    "field_checks": {
+     "code_matches_frozen_symbol": true,
+     "ex_date_matches": true,
+     "per_share_matches_frozen": true,
+     "unit_conversion_hand_checked": true
+    }
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240618_QXY9.txt",
+    "sha256": "3668566a2a317f6d17c348c42f23e1176c439a2bfea5c14bd99127aaaa46f5c2",
+    "pdf_path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240618_QXY9.pdf",
+    "pdf_sha256": "b993b33e769f5d5e98a593a0d57c373159ecab9050e34f0c5cdefa07f8c35351"
+   },
+   "locator": {
+    "page": 1,
+    "section": "公告基本信息/与分红相关的其他信息"
+   },
+   "short_supporting_text": "公告送出日期：2024-06-18；本次分红方案（单位：元/10份基金份额）0.7140；除息日 2024-06-21",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2024-06-18",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "公告送出日期为基金管理人官方公告的公布日期下界；不据此填写精确 available_at"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "description",
+    "fact_verification"
+   ],
+   "limitations": [
+    "金额/日期与冻结行动一致，不构成历史可得性证明",
+    "文内基金全称含『红利低波动』字样而主代码为 515300；主代码与除息日/金额均与冻结行动一致，全称疑点登记于 conflicts，不在本轮自动裁决"
+   ]
+  },
+  {
+   "record_id": "515300-515300_20240913_SAOV",
+   "instrument_id": "515300.SS",
+   "fact_type": "cash_dividend",
+   "event_id": "515300-cash_dividend-2024-09-20",
+   "facts": {
+    "announcement_sent_date": "2024-09-13",
+    "fund_main_code": "515300",
+    "cash_per_10_shares_announced": "0.6540",
+    "cash_per_share_computed": 0.0654,
+    "record_date": "2024-09-19",
+    "ex_date": "2024-09-20",
+    "pay_date": "2024-09-25",
+    "field_checks": {
+     "code_matches_frozen_symbol": true,
+     "ex_date_matches": true,
+     "per_share_matches_frozen": true,
+     "unit_conversion_hand_checked": true
+    }
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240913_SAOV.txt",
+    "sha256": "746782188a3a68fa1c8910d5169b0207ef5025f9eaa402e59853a440b538e4a6",
+    "pdf_path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20240913_SAOV.pdf",
+    "pdf_sha256": "d0fcca84c84c5e5f2985f6b566a17edc8943089cbba604fa68a96ae4799e578c"
+   },
+   "locator": {
+    "page": 1,
+    "section": "公告基本信息/与分红相关的其他信息"
+   },
+   "short_supporting_text": "公告送出日期：2024-09-13；本次分红方案（单位：元/10份基金份额）0.6540；除息日 2024-09-20",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2024-09-13",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "公告送出日期为基金管理人官方公告的公布日期下界；不据此填写精确 available_at"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "description",
+    "fact_verification"
+   ],
+   "limitations": [
+    "金额/日期与冻结行动一致，不构成历史可得性证明",
+    "文内基金全称含『红利低波动』字样而主代码为 515300；主代码与除息日/金额均与冻结行动一致，全称疑点登记于 conflicts，不在本轮自动裁决"
+   ]
+  },
+  {
+   "record_id": "515300-515300_20241128_QVEK",
+   "instrument_id": "515300.SS",
+   "fact_type": "cash_dividend",
+   "event_id": "515300-cash_dividend-2024-12-03",
+   "facts": {
+    "announcement_sent_date": "2024-11-28",
+    "fund_main_code": "515300",
+    "cash_per_10_shares_announced": "0.6340",
+    "cash_per_share_computed": 0.0634,
+    "record_date": "2024-12-02",
+    "ex_date": "2024-12-03",
+    "pay_date": "2024-12-06",
+    "field_checks": {
+     "code_matches_frozen_symbol": true,
+     "ex_date_matches": true,
+     "per_share_matches_frozen": true,
+     "unit_conversion_hand_checked": true
+    }
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20241128_QVEK.txt",
+    "sha256": "579e1fda632a201933331d1b7f52dc7151b41ba48beb78b27301db5718a4cc77",
+    "pdf_path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20241128_QVEK.pdf",
+    "pdf_sha256": "42e76e778fce0ad3ec7617d3ff8a5a35bcb459a96d7ab8acd45acb50762ec157"
+   },
+   "locator": {
+    "page": 1,
+    "section": "公告基本信息/与分红相关的其他信息"
+   },
+   "short_supporting_text": "公告送出日期：2024-11-28；本次分红方案（单位：元/10份基金份额）0.6340；除息日 2024-12-03",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2024-11-28",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "公告送出日期为基金管理人官方公告的公布日期下界；不据此填写精确 available_at"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "description",
+    "fact_verification"
+   ],
+   "limitations": [
+    "金额/日期与冻结行动一致，不构成历史可得性证明",
+    "文内基金全称含『红利低波动』字样而主代码为 515300；主代码与除息日/金额均与冻结行动一致，全称疑点登记于 conflicts，不在本轮自动裁决"
+   ]
+  },
+  {
+   "record_id": "515300-515300_20250612_HGW2",
+   "instrument_id": "515300.SS",
+   "fact_type": "cash_dividend",
+   "event_id": "515300-cash_dividend-2025-06-17",
+   "facts": {
+    "announcement_sent_date": "2025-06-12",
+    "fund_main_code": "515300",
+    "cash_per_10_shares_announced": "0.2370",
+    "cash_per_share_computed": 0.0237,
+    "record_date": "2025-06-16",
+    "ex_date": "2025-06-17",
+    "pay_date": "2025-06-20",
+    "field_checks": {
+     "code_matches_frozen_symbol": true,
+     "ex_date_matches": true,
+     "per_share_matches_frozen": true,
+     "unit_conversion_hand_checked": true
+    }
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250612_HGW2.txt",
+    "sha256": "968692c7602d257c1700df0a570913ad3ceb49d3593d3eec57c9043d5b1fcf64",
+    "pdf_path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250612_HGW2.pdf",
+    "pdf_sha256": "e654cfe4108dc9f19572d020c4af95d7b7bff3c4160a0d981d83792622e23db8"
+   },
+   "locator": {
+    "page": 1,
+    "section": "公告基本信息/与分红相关的其他信息"
+   },
+   "short_supporting_text": "公告送出日期：2025-06-12；本次分红方案（单位：元/10份基金份额）0.2370；除息日 2025-06-17",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2025-06-12",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "公告送出日期为基金管理人官方公告的公布日期下界；不据此填写精确 available_at"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "description",
+    "fact_verification"
+   ],
+   "limitations": [
+    "金额/日期与冻结行动一致，不构成历史可得性证明",
+    "文内基金全称含『红利低波动』字样而主代码为 515300；主代码与除息日/金额均与冻结行动一致，全称疑点登记于 conflicts，不在本轮自动裁决"
+   ]
+  },
+  {
+   "record_id": "515300-515300_20250915_NN2J",
+   "instrument_id": "515300.SS",
+   "fact_type": "cash_dividend",
+   "event_id": "515300-cash_dividend-2025-09-18",
+   "facts": {
+    "announcement_sent_date": "2025-09-15",
+    "fund_main_code": "515300",
+    "cash_per_10_shares_announced": "0.2330",
+    "cash_per_share_computed": 0.0233,
+    "record_date": "2025-09-17",
+    "ex_date": "2025-09-18",
+    "pay_date": "2025-09-23",
+    "field_checks": {
+     "code_matches_frozen_symbol": true,
+     "ex_date_matches": true,
+     "per_share_matches_frozen": true,
+     "unit_conversion_hand_checked": true
+    }
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250915_NN2J.txt",
+    "sha256": "535dc62ca451fdfa83b6bb67bcd08a41893856a63adaa84e531ea94e03acefc8",
+    "pdf_path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/515300-official-qualification/sources/515300_20250915_NN2J.pdf",
+    "pdf_sha256": "779e0693869e088e9f4cdfb3abe1747122b78177b5210741f4f5e8a4a5f2b651"
+   },
+   "locator": {
+    "page": 1,
+    "section": "公告基本信息/与分红相关的其他信息"
+   },
+   "short_supporting_text": "公告送出日期：2025-09-15；本次分红方案（单位：元/10份基金份额）0.2330；除息日 2025-09-18",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2025-09-15",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "公告送出日期为基金管理人官方公告的公布日期下界；不据此填写精确 available_at"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "description",
+    "fact_verification"
+   ],
+   "limitations": [
+    "金额/日期与冻结行动一致，不构成历史可得性证明",
+    "文内基金全称含『红利低波动』字样而主代码为 515300；主代码与除息日/金额均与冻结行动一致，全称疑点登记于 conflicts，不在本轮自动裁决"
+   ]
+  },
+  {
+   "record_id": "515300-no-original-20251215",
+   "instrument_id": "515300.SS",
+   "fact_type": "cash_dividend",
+   "event_id": "515300-cash_dividend-2025-12-15",
+   "facts": {
+    "ex_date_frozen": "2025-12-15",
+    "cash_per_unit_frozen": 0.0228,
+    "official_original": "missing_locally"
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+    "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81"
+   },
+   "locator": {
+    "page": null,
+    "section": "events（冻结记录，非官方原文）"
+   },
+   "short_supporting_text": "冻结行动值仅有二手表格来源；本地无官方公告原文",
+   "time_evidence": {
+    "kind": "unknown",
+    "available_at": null,
+    "published_date": null,
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "explicit missing"
+   },
+   "facts_verified": false,
+   "historical_availability_verified": false,
+   "allowed_for": [],
+   "limitations": [
+    "缺官方公告原文；本轮不核、不补、不改冻结值"
+   ]
+  },
+  {
+   "record_id": "512890-official-split",
+   "instrument_id": "512890.SS",
+   "fact_type": "split",
+   "event_id": "512890-split-2021-10-22",
+   "facts": {
+    "split_ratio_announced": "1:2",
+    "direction": "旧1份变新2份",
+    "record_date": null,
+    "ex_date": null,
+    "field_checks": {
+     "ratio_matches_frozen": true,
+     "ex_date_matches_frozen": null
+    },
+    "fund_name_seen": "红利低波ETF"
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/512890-official-split.pdf",
+    "sha256": "4e224e9585dcb6bb0151fd5b043f9df201724a819a2bc722181c54db4e1821b9"
+   },
+   "locator": {
+    "page": 1,
+    "section": "份额拆分安排/拆分比例"
+   },
+   "short_supporting_text": "拆分比例 1:2；权益登记日 None；除权日 None",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2021-10-13",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "冻结记录含 announcement_date（官方公告日）下界；PDF 文本同源核对"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "description",
+    "fact_verification"
+   ],
+   "limitations": [
+    "拆分方向与比例已核；历史可得性未证明"
+   ]
+  },
+  {
+   "record_id": "515050-official-split",
+   "instrument_id": "515050.SS",
+   "fact_type": "split",
+   "event_id": "515050-split-2026-05-13",
+   "facts": {
+    "split_ratio_announced": "1:3",
+    "direction": "旧1份变新3份",
+    "record_date": "2026-05-12",
+    "ex_date": "2026-05-13",
+    "field_checks": {
+     "ratio_matches_frozen": true,
+     "ex_date_matches_frozen": true
+    },
+    "fund_name_seen": "通信ETF"
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515050-official-split.pdf",
+    "sha256": "b8cbe27f95651df691224c4c19ff087a52908c28bdc4ef88973e57bbb0d62424"
+   },
+   "locator": {
+    "page": 1,
+    "section": "份额拆分安排/拆分比例"
+   },
+   "short_supporting_text": "拆分比例 1:3；权益登记日 2026-05-12；除权日 2026-05-13",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2026-05-07",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "冻结记录含 announcement_date（官方公告日）下界；PDF 文本同源核对"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "description",
+    "fact_verification"
+   ],
+   "limitations": [
+    "拆分方向与比例已核；历史可得性未证明"
+   ]
+  },
+  {
+   "record_id": "515880-official-split",
+   "instrument_id": "515880.SS",
+   "fact_type": "split",
+   "event_id": "515880-split-2026-02-03",
+   "facts": {
+    "split_ratio_announced": "1:3",
+    "direction": "旧1份变新3份",
+    "record_date": "2026-02-02",
+    "ex_date": "2026-02-03",
+    "field_checks": {
+     "ratio_matches_frozen": true,
+     "ex_date_matches_frozen": true
+    },
+    "fund_name_seen": null
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/515880-official-split.pdf",
+    "sha256": "6dbf89de8a08ed48d5894807255b8ff2d7bb64c2c4dac6cfa7854ca6cc09a10f"
+   },
+   "locator": {
+    "page": 1,
+    "section": "份额拆分安排/拆分比例"
+   },
+   "short_supporting_text": "拆分比例 1:3；权益登记日 2026-02-02；除权日 2026-02-03",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2026-01-28",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "冻结记录含 announcement_date（官方公告日）下界；PDF 文本同源核对"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "description",
+    "fact_verification"
+   ],
+   "limitations": [
+    "拆分方向与比例已核；历史可得性未证明"
+   ]
+  },
+  {
+   "record_id": "515050-listing-announcement",
+   "instrument_id": "515050.SS",
+   "fact_type": "listing",
+   "event_id": "515050-listing",
+   "facts": {
+    "listing_trade_date": "2019-10-16",
+    "fund_name_seen": "华夏中证5G通",
+    "note": "上市交易日为官方上市(交易)公告书记载；区别于基金成立日/募集日"
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/515050-listing.pdf",
+    "sha256": "014bb99ca6f9a5d8a1d4bfe0967e1f3c4d85f0b5632dbd9104ae81d5da9bec9c"
+   },
+   "locator": {
+    "page": 1,
+    "section": "上市交易公告书（提示性公告/基本信息）"
+   },
+   "short_supporting_text": "上市时间/将于 2019-10-16 在上海证券交易所上市；公告/上网日期 2019-10-16",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2019-10-16",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "公告日期/上网日期为公布下界；精确 available_at 不据此填写"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "listing_evidence_bridge"
+   ],
+   "limitations": [
+    "上市交易日已核，尚需与快照首报价日期相容性核对（Task 4/5）",
+    "历史可得性未证明"
+   ]
+  },
+  {
+   "record_id": "562590-listing-announcement",
+   "instrument_id": "562590.SS",
+   "fact_type": "listing",
+   "event_id": "562590-listing",
+   "facts": {
+    "listing_trade_date": "2023-10-18",
+    "fund_name_seen": null,
+    "note": "上市交易日为官方上市(交易)公告书记载；区别于基金成立日/募集日"
+   },
+   "source": {
+    "path": "docs/experiments/raw/research-mixed-evaluation-2026-09-09/historical-qualification/sources/562590-listing.pdf",
+    "sha256": "95fe32ff583ff000ecc9d53ab2c09ce5d6934681d542e8ec0fde24723aa98a7f"
+   },
+   "locator": {
+    "page": 1,
+    "section": "上市交易公告书（提示性公告/基本信息）"
+   },
+   "short_supporting_text": "上市时间/将于 2023-10-18 在上海证券交易所上市；公告/上网日期 2023-10-13",
+   "time_evidence": {
+    "kind": "published_date_bound",
+    "available_at": null,
+    "published_date": "2023-10-13",
+    "not_before": null,
+    "not_after": null,
+    "timezone": "Asia/Shanghai",
+    "basis": "公告日期/上网日期为公布下界；精确 available_at 不据此填写"
+   },
+   "facts_verified": true,
+   "historical_availability_verified": false,
+   "allowed_for": [
+    "listing_evidence_bridge"
+   ],
+   "limitations": [
+    "上市交易日已核，尚需与快照首报价日期相容性核对（Task 4/5）",
+    "历史可得性未证明"
+   ]
+  }
+ ],
+ "conflicts": [
+  {
+   "conflict_id": "identity-515300-name-wording",
+   "instrument_id": "515300.SS",
+   "description": "六份公告文内基金全称含『嘉实沪深300红利低波动』字样，而冻结行动主代码为 515300；主代码、除息日、金额逐字段一致",
+   "resolution_this_round": "不自动裁决；登记疑点，主代码/日期/金额一致性已核",
+   "affected": "515300 全部六条官方记录"
+  }
+ ],
+ "summary": {
+  "records": 12,
+  "facts_verified_true": 11,
+  "by_type": {
+   "listing": 2,
+   "split": 3,
+   "cash_dividend": 7
+  }
+ }
+}

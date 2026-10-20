@@ -1,0 +1,9 @@
+id,severity,status,detail
+all_a_universe_proxy,material_definition_limit,open,"Denominator is cached-panel columns between each column first/last valid quote, not the official point-in-time universe of all then-listed A shares."
+current_list_backfill_survivorship,material_source_limit,open,prepare_data.py explicitly labels the panel current-list backfill; stocks gone before snapshot can be absent.
+legacy_arrival_times,historical_availability_limit,open,Frozen source arrival times are not proven; definition-standard v1.0.0 says old data remain legacy and are not retroactively migrated.
+chinext_2017_chain,scope_limit,open,Own-index ChiNext branch failed at 2017-10-09 and was paused; it does not affect the all-A account arithmetic but prevents own-index comparison.
+2790_vs_1884_scope,documentation_mismatch,explained,"data_quality computes both 2790 rows and 1884 valid rows on 2015-01-01..2026-06-30, so that legacy ratio is calculable; it is mislabeled if presented as the frozen 2018-07-05 main comparison window, whose ratio is 1884/1936."
+invalid_day_behavior,behavior_check,explained,52 invalid all-A dates produced 11 invalid weeks and no archived W0-W3 trades on those dates; no archived waiting order was cancelled specifically by invalid week.
+w3_daily_invalid_confirmation_latent,semantic_limit,not_observed,W3 daily confirmation does not re-check same-day width validity when the week has another valid row; archived paths have zero such buys on the 52 invalid dates.
+159915_missing_quote_2021_02_08,calendar_difference,explained,"159915 has no quote on 2021-02-08 while 510300 does; archived accounts mark it non-quote, carry the 2021-02-05 mark, and do not trade."

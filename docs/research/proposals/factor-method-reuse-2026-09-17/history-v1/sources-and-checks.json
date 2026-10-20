@@ -1,0 +1,94 @@
+{
+  "job": {
+    "job_id": "e624f7e6-f3c1-43c4-bd58-8fb9abb83964",
+    "stage": "S1",
+    "execution": 1,
+    "attempt": "initial",
+    "date": "2026-09-17",
+    "model_self_report": "bigmodel-coding-plan/GLM-5.3 via ZCode CLI (reasoning high; internal reasoning not observable)",
+    "base": "branch codex/factor-unit-research-20260915, HEAD 29b150f58b3f6d8c6e558a748c12dac3384af173 (verified at start)",
+    "dirty_workspace": "既有脏改动在 src/tests/web/docs/experiments 等（见 git status 快照），与本目录不重叠，未触碰；无相关输入漂移",
+    "writable_scope": "docs/research/proposals/factor-method-reuse-2026-09-17/（开工时不存在，新建）"
+  },
+  "local_references": {
+    "note": "sha256 于 2026-09-17 计算于工作区当前（脏）状态",
+    "docs/research/experiment-backtest-principles.md": {"version": "v1.1", "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6"},
+    "docs/research/ai-execution-contract.md": {"version": "1.0.1", "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"},
+    "docs/research/definition-standard.md": {"version": "1.1.0", "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c"},
+    "docs/research/experiment-report-template.md": {"version": "v1.1 (模板, 未单独印版本号)", "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e"},
+    "docs/literature-learning/README.md": {"version": "v1.1.0", "sha256": "c8d3bb1ed17f03a3822bcfa0ba752b7dc794095cb8bc9b92ae6704be0c6bd7fe"},
+    "docs/experiments/research-tool-reuse-shortlist-2026-09-14.md": {"version": "v1.1.0", "sha256": "9344ca56c9b82b12e407d8f92a88a616e8d92be34459c5149a92483526f20d2d"},
+    "docs/experiments/factor-library-external-backlog-2026-09-09.md": {"version": "v1.1.0", "sha256": "fe174a156e10a0b8c1fed36eed9330b660ae714b5da459e0dc21eb7f9e46ec4e"},
+    "docs/research/proposals/factor-workflow-audit-2026-09-17/workflow-map.md": {"version": "v1.1", "sha256": "b40761f11b100e8ef891bbe9e32ba26483cc21677034230cfe220040bf2e5411"},
+    "docs/research/definitions.v1.json": {"version": "registry version 1.2.0 (81对象, workflow-map §1.1 已核; 本轮只读)", "sha256": "未计算"}
+  },
+  "external_access_ledger": {
+    "budget": "最多18次打开/抓取（含失败与搜索结果页）",
+    "used": 18,
+    "times_note": "时刻为大约值（会话内锚定 13:05 CST；逐次时钟未自动记录）",
+    "accesses": [
+      {"n": 1, "url": "https://www.statsmodels.org/stable/generated/statsmodels.stats.sandwich_covariance.cov_hac.html", "time": "~12:50", "purpose": "cov_hac 签名/默认值", "ok": true, "scope": "全页；文档站自称 0.15.0"},
+      {"n": 2, "url": "https://arch.readthedocs.io/en/stable/bootstrap/timeseries-bootstraps.html", "time": "~12:50", "purpose": "块自助总览", "ok": false, "scope": "60s 超时，未读"},
+      {"n": 3, "url": "https://arch.readthedocs.io/en/stable/bootstrap/generated/arch.bootstrap.StationaryBootstrap.html", "time": "~12:53", "purpose": "StationaryBootstrap 签名", "ok": false, "scope": "60s 超时，未读"},
+      {"n": 4, "url": "https://arch.readthedocs.io/en/stable/bootstrap/generated/arch.bootstrap.optimal_block_length.html", "time": "~12:53", "purpose": "optimal_block_length 签名/方法", "ok": true, "scope": "全页"},
+      {"n": 5, "url": "https://arch.readthedocs.io/en/stable/bootstrap/generated/arch.bootstrap.StationaryBootstrap.html", "time": "~12:55", "purpose": "重试 StationaryBootstrap", "ok": true, "scope": "全页"},
+      {"n": 6, "url": "https://arch.readthedocs.io/en/stable/multiple-comparison/multiple-comparison_examples.html", "time": "~12:55", "purpose": "SPA/StepM/MCS 语义", "ok": true, "scope": "全页"},
+      {"n": 7, "url": "https://raw.githubusercontent.com/stefan-jansen/alphalens-reloaded/main/src/alphalens/utils.py", "time": "~12:57", "purpose": "清洗/前向收益默认值（源码）", "ok": true, "scope": "get_clean_factor_and_forward_returns / compute_forward_returns / quantize_factor 相关段（工具摘要, 非309行全文逐行）"},
+      {"n": 8, "url": "https://raw.githubusercontent.com/stefan-jansen/alphalens-reloaded/main/src/alphalens/performance.py", "time": "~12:57", "purpose": "IC/分组/换手默认值（源码）", "ok": true, "scope": "factor_information_coefficient / mean_return_by_quantile / turnover 相关段"},
+      {"n": 9, "url": "https://pypi.org/project/alphalens-reloaded/", "time": "~12:59", "purpose": "版本钉扎", "ok": false, "scope": "页面加载失败"},
+      {"n": 10, "url": "https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.get_robustcov_results.html", "time": "~12:59", "purpose": "get_robustcov_results HAC 参数", "ok": true, "scope": "全页"},
+      {"n": 11, "url": "https://github.com/stefan-jansen/alphalens-reloaded/releases", "time": "~13:00", "purpose": "最新发布 tag", "ok": true, "scope": "最新条目（0.4.5, 2025-07-23）；license 未显示"},
+      {"n": 12, "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library/F-F_Research_Data_Factors.HTML", "time": "~13:00", "purpose": "Mkt-RF 详情", "ok": false, "scope": "HTTP 404"},
+      {"n": 13, "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library/f-f_momentum_factor.HTML", "time": "~13:00", "purpose": "动量详情", "ok": false, "scope": "HTTP 404"},
+      {"n": 14, "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html", "time": "~13:02", "purpose": "库索引: 找准确链接", "ok": true, "scope": "F-F Research Data Factors 与 Momentum Factor 链接段"},
+      {"n": 15, "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library/F-F_Research_Data_Factors.html", "time": "~13:02", "purpose": "小写重试", "ok": false, "scope": "HTTP 404"},
+      {"n": 16, "url": "WebSearch: French Mkt-RF construction (site:mba.tuck.dartmouth.edu)", "time": "~13:03", "purpose": "定位官方详情页", "ok": "partial", "scope": "搜索结果页；二手线索，未作依据；返回的官方页描述促使第17次直读官方页"},
+      {"n": 17, "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html", "time": "~13:04", "purpose": "直读官方页描述文字（Mkt-RF 定义/重构/CIZ）", "ok": true, "scope": "3&5因子与动量条目的描述、重构与修订说明段"},
+      {"n": 18, "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library/det_mom_factor.html", "time": "~13:04", "purpose": "动量因子构造详情", "ok": true, "scope": "全页"}
+    ],
+    "not_accessed": "原始论文（Newey-West 1986/1994, Politis-Romano 1994, Politis-White 2004）均未获取未读；French 数据包 zip 未下载"
+  },
+  "licenses": {
+    "statsmodels": "BSD-3（常识性标注, 本轮未核 LICENSE 原文——unknown）",
+    "arch": "未核（unknown）",
+    "alphalens-reloaded": "Apache-2.0（performance.py 页标注; LICENSE 文件未核）",
+    "ken.french data": "数据使用条款未核（unknown）；未下载任何数据",
+    "code_vs_data": "全部按代码/数据许可分开登记，未核即 unknown，不默认开源可用"
+  },
+  "errors_and_unknowns": [
+    "French 详情页三次 404（.HTML×2/.html×1），市场因子详情未单独读成；Mkt-RF 构造细节来自库索引页描述文字，动量来自 det_mom_factor.html",
+    "French 动量因子是否减无风险、单位：页面未明示（unknown）",
+    "arch / statsmodels 未固定发布版版本；arch 版本号未在所读页显示；alphalens 源码读的是 main 而非 tag 0.4.5",
+    "pypi 页加载失败，版本经 GitHub releases 页确认",
+    "方法卡两篇原始论文未读，卡内作者结论为文档转述"
+  ],
+  "commands_actual": {
+    "read_only_local": [
+      "git rev-parse HEAD; git status --short",
+      "shasum -a 256 <8份本地引用文档>",
+      "python3 -c json.load definitions.v1.json ×2（对象清单与定义卡只读）——计入本地结构校验 2/3",
+      "date; ls/wc"
+    ],
+    "structure_checks": "2 次（definitions.v1.json 解析），未超 3 次限额",
+    "hygiene": "python3 scripts/check_repo_hygiene.py → 通过（✓ 归置自检通过），1/1",
+    "real_statistics_run": 0,
+    "installs": 0,
+    "production_changes": 0,
+    "downloads_of_market_or_factor_data": 0,
+    "shared_writes": "无（仅本目录新建5+1个文件）"
+  },
+  "deliverable_identity": {
+    "note": "sha256 在 sources-and-checks.json 写入前计算；本文件自身不列 hash 以避免自引用循环（以字节数代替）",
+    "README.md": {"sha256": "62a6722ebc908a32a1cf6aae8a9fed3643a656cd27fd52af138732c606c38b33", "bytes": 3646},
+    "capability-reuse.csv": {"sha256": "161fa7bfafcbf017c281edc9b410bb5779843155211507c0ea4d80976d3a2cfa", "bytes": 7472},
+    "method-cards.md": {"sha256": "95685d396128ac57b5e79db04a3fedb64b41c176f561275af81e1a2b6909c23c", "bytes": 5881},
+    "factor-definition-crosswalk.md": {"sha256": "30faf358988a119b350911437d16d6097f5498a5010185dce6c8145c83dd49d0", "bytes": 4729},
+    "next-pilot-proposal.md": {"sha256": "adeaefdae10a5de88c0cedcd4a9e23ed36577db8ed8b7438c8de3d42db286da3", "bytes": 4118},
+    "sources-and-checks.json": {"sha256": null, "note": "自身, 见上"}
+  },
+  "scope_disclaimers": [
+    "本目录为待主控审核的提案，不是权威规范变更；不进 registry/INDEX/OKR",
+    "外部来源持续变化，所有结论以台账时点为准",
+    "未宣称任何兼容性已验证、任何因子有效、任何过拟合已排除"
+  ]
+}

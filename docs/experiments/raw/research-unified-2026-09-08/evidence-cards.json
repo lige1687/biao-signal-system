@@ -1,0 +1,568 @@
+{
+  "public_schema": "provenance/1.2",
+  "contract_source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/src/lei_signal/data_provenance.py",
+  "contract_hash": "3c5ac99a39feddf619e140c08df13251b6a785c17679bacb7638756a776c749a",
+  "cards": [
+    {
+      "evidence_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "id": "research-unified:e01",
+          "source_path": [
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e01/run-manifest.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e01/paired-summary.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e01/account-summary.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e01/review/review-v2.md"
+          ],
+          "source_hash": [
+            "cc654bb06c49107c6923fdec79e048bd5226b9d9c40417bce26f8d2395c234b8",
+            "8af1901a2226bd350ef2210c5f5b75f316520098e8c357a6dd31b0f0042f6478",
+            "fdf829087018fee26435f6cdf2bb849c48e5fea28b33a228ba11fae0e314adbe",
+            "baf7f4a4ae979f7772e207ad92c68aa368bc8f04c107fc79c04073ce4ff7a566"
+          ],
+          "source_version": "2026-09-08-frozen-research",
+          "status": "unverified",
+          "window": "按对象共同可用起点至2026-08-27",
+          "statistic_kind": "implementation_and_historical_replay",
+          "strategy_scope": [
+            "ambush"
+          ],
+          "limitations": "无完整交易所日历、历史宽度发布时间和产品真实成交约束；未解决全部缺数场景。",
+          "compatibility": "reference",
+          "evidence_id": "research-unified:e01",
+          "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e01/run-manifest.json",
+          "strategies": [
+            "ambush"
+          ],
+          "note": "无完整交易所日历、历史宽度发布时间和产品真实成交约束；未解决全部缺数场景。"
+        }
+      ],
+      "data_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "source_id": "research-unified:e01",
+          "instrument_id": "SH000001,SZ399001,000300,000015,399006,510500,512100,588000",
+          "market": "CN",
+          "observed_at": null,
+          "available_at": null,
+          "generated_at": null,
+          "last_valid_at": "2026-08-27",
+          "health": "unknown",
+          "reason": "冻结历史研究；数据公开时点、正式交易日历或历史版本尚未完整核实，不代表当前机会。",
+          "calendar_ref": null,
+          "as_of_cutoff": null,
+          "source_policy_ref": null,
+          "reference_lag_trading_days": null,
+          "source": "research-unified:e01",
+          "completeness": "unknown",
+          "lag_trading_days": null
+        }
+      ],
+      "rule_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "rule_id": "__ruleset__",
+          "version": "2.1.0",
+          "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v2.yaml",
+          "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+          "definition_ref": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v1.yaml",
+          "fallback_note": "仅记录首轮实际读取的运行账本版本；解释以v1策略为溯源，不追认旧实验采用此版本。实验参数以本卡research_extension配置为准。"
+        }
+      ],
+      "research_extension": {
+        "question": "旧目标退出成交时间和完整资金是否算对？",
+        "plain_conclusion": "原146个旧机会全部复现；58个卖出日期因时间修正改变。完整预算路径已核账，不能把修正收益当新策略优势。",
+        "claim_type": "implementation_and_historical_replay",
+        "support_state": "limited_support",
+        "matching": {
+          "market": "CN",
+          "instruments": "SH000001,SZ399001,000300,000015,399006,510500,512100,588000",
+          "module": null,
+          "entry_variant": "deep20/bottom/lowtier/base分别",
+          "condition_definition": "见E01冻结事件定义；未知不触发，非技术A/B/C/D",
+          "exit_variant": "建仓完成后前收达到30%/50%，次有效开盘；固定第756报价日期限",
+          "holding_horizon": "触发后252报价日建仓、从253可退出、最长756报价日",
+          "fees": "单边0.1%主档、0.2%压力档；现金利息0",
+          "rule_version": "研究冻结配置，不回填现行版本为旧版本",
+          "data_window": "按对象共同可用起点至2026-08-27",
+          "available_at": "收盘16:00为研究约定，供应商实际发布时间未知",
+          "instrument_relation": "指数和ETF混合的历史代理，不等于用户可买组合",
+          "budget": "初始1、无外部追加、现金与持仓全计",
+          "cutoff": "2026-08-27"
+        },
+        "counts": {
+          "legacy_opportunities": 146,
+          "paired_rows_two_fees": 292,
+          "continuous_paths": 64,
+          "independent_event_count": null,
+          "unknown_reason": "共享行情与费用情景重复，不能按结果行数视作独立事件"
+        },
+        "independent_review": "另一研究agent独立算146旧机会、292配对、64资金账及事件流；不是生产验收。",
+        "source_run_ids": [
+          "e01/run-manifest.json",
+          "e01/paired-summary.json",
+          "e01/account-summary.json",
+          "e01/review/review-v2.md"
+        ],
+        "uncertainty": "无完整交易所日历、历史宽度发布时间和产品真实成交约束；未解决全部缺数场景。",
+        "can_answer": [
+          "旧算法的时间问题",
+          "冻结有限路径的现金与费用"
+        ],
+        "cannot_answer": [
+          "未来收益",
+          "当前机会胜率",
+          "生产可自动采用"
+        ]
+      }
+    },
+    {
+      "evidence_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "id": "research-unified:e02",
+          "source_path": [
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e02/protocol-v1.md",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e02/run-manifest.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e02/comparison-summary.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e02/continuous-summary.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e02/review.md"
+          ],
+          "source_hash": [
+            "a689702490bef67fe5e1dbed3acb6ee6a89444ba931c9fc273663bccefcb3961",
+            "ff33dae94f6ad44f0501dfda12dbe6e8c9b25cd86c1615ee2141979f8b68aa17",
+            "ff5ae23a85c0c3c158e382ee7862ae1955d992c9e743709f5764622e07d22d68",
+            "b6d91ef256a3462e7735297624d1413daf231fd61ed0cdba319abec2d4489768",
+            "550507f8d1408862a12ff16d7259bf652e72b9672e479829d246d10e5c215a9b"
+          ],
+          "source_version": "2026-09-08-frozen-research",
+          "status": "unverified",
+          "window": "按对象共同可用起点至2026-08-27",
+          "statistic_kind": "historical_statistic",
+          "strategy_scope": [
+            "ambush"
+          ],
+          "limitations": "历史已研究；146机会覆盖合并只有1个连通组，无法给可靠误差概率；非新增独立未来验证。",
+          "compatibility": "reference",
+          "evidence_id": "research-unified:e02",
+          "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/e02/protocol-v1.md",
+          "strategies": [
+            "ambush"
+          ],
+          "note": "历史已研究；146机会覆盖合并只有1个连通组，无法给可靠误差概率；非新增独立未来验证。"
+        }
+      ],
+      "data_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "source_id": "research-unified:e02",
+          "instrument_id": "SH000001,SZ399001,000300,000015,399006,510500,512100,588000",
+          "market": "CN",
+          "observed_at": null,
+          "available_at": null,
+          "generated_at": null,
+          "last_valid_at": "2026-08-27",
+          "health": "unknown",
+          "reason": "冻结历史研究；数据公开时点、正式交易日历或历史版本尚未完整核实，不代表当前机会。",
+          "calendar_ref": null,
+          "as_of_cutoff": null,
+          "source_policy_ref": null,
+          "reference_lag_trading_days": null,
+          "source": "research-unified:e02",
+          "completeness": "unknown",
+          "lag_trading_days": null
+        }
+      ],
+      "rule_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "rule_id": "__ruleset__",
+          "version": "2.1.0",
+          "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v2.yaml",
+          "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+          "definition_ref": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v1.yaml",
+          "fallback_note": "仅记录首轮实际读取的运行账本版本；解释以v1策略为溯源，不追认旧实验采用此版本。实验参数以本卡research_extension配置为准。"
+        }
+      ],
+      "research_extension": {
+        "question": "成长对象目标50%比统一30%多带来什么？",
+        "plain_conclusion": "受改动的12条连续路径9条期末财富增加、3条不变；单次机会各组中位差为0，不能认定普遍改善。",
+        "claim_type": "historical_statistic",
+        "support_state": "limited_support",
+        "matching": {
+          "market": "CN",
+          "instruments": "SH000001,SZ399001,000300,000015,399006,510500,512100,588000",
+          "module": null,
+          "entry_variant": "deep20/bottom/lowtier/base分别",
+          "condition_definition": "见E01冻结事件定义；未知不触发，非技术A/B/C/D",
+          "exit_variant": "A30%；B仅399006/512100/58800050%；C仅固定期限",
+          "holding_horizon": "触发后252报价日建仓、从253可退出、最长756报价日",
+          "fees": "单边0.1%主档、0.2%压力档；现金利息0",
+          "rule_version": "研究冻结配置，不回填现行版本为旧版本",
+          "data_window": "按对象共同可用起点至2026-08-27",
+          "available_at": "收盘16:00为研究约定，供应商实际发布时间未知",
+          "instrument_relation": "指数和ETF混合的历史代理，不等于用户可买组合",
+          "budget": "初始1、无外部追加、现金与持仓全计",
+          "cutoff": "2026-08-27"
+        },
+        "counts": {
+          "fixed_opportunities": 146,
+          "single_paths": 876,
+          "continuous_paths": 192,
+          "changed_continuous_paths_per_fee": 12,
+          "coverage_components": 1,
+          "independent_event_count": null,
+          "unknown_reason": "连通覆盖组不是独立市场事件，费用/方案复用行情"
+        },
+        "independent_review": "独立复核64基准每日文件、40非改动对照文件、1笔50%卖出算术与标签变更；未独立重算所有候选。",
+        "source_run_ids": [
+          "e02/protocol-v1.md",
+          "e02/run-manifest.json",
+          "e02/comparison-summary.json",
+          "e02/continuous-summary.json",
+          "e02/review.md"
+        ],
+        "uncertainty": "历史已研究；146机会覆盖合并只有1个连通组，无法给可靠误差概率；非新增独立未来验证。",
+        "can_answer": [
+          "固定对象/方法/预算的历史收益风险取舍"
+        ],
+        "cannot_answer": [
+          "50%最优",
+          "其他成长产品效果",
+          "未来高概率获利",
+          "整套跨资产菜单通过"
+        ]
+      }
+    },
+    {
+      "evidence_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "id": "research-unified:06",
+          "source_path": [
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/product-inventory.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/source-manifest.json"
+          ],
+          "source_hash": [
+            "3ce59fe6ba73b25cfeb00cc58e03a46f8af93a6565c4aab0e350c7ce4e9a9eec",
+            "c66d7b89ae7be2f52cd5c31423d1e28f48495a0b9a53747d0ae11ddcb837e220"
+          ],
+          "source_version": "2026-09-08-frozen-research",
+          "status": "unverified",
+          "window": "第18轮两冻结路径及2026-09-08库存审计",
+          "statistic_kind": "source_and_measurement_audit",
+          "strategy_scope": [
+            "income_dca"
+          ],
+          "limitations": "缺币种/分红/复权/发布时间元数据，未执行统一可交易时点修正后的长历史收益。",
+          "compatibility": "reference",
+          "evidence_id": "research-unified:06",
+          "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/product-inventory.json",
+          "strategies": [
+            "income_dca"
+          ],
+          "note": "缺币种/分红/复权/发布时间元数据，未执行统一可交易时点修正后的长历史收益。"
+        }
+      ],
+      "data_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "source_id": "research-unified:06",
+          "instrument_id": "000300→510300;399006→159915;518880;^IXIC≠513100;QQQ不能静默替代",
+          "market": "CN/US",
+          "observed_at": null,
+          "available_at": null,
+          "generated_at": null,
+          "last_valid_at": "2026-08-27",
+          "health": "unknown",
+          "reason": "冻结历史研究；数据公开时点、正式交易日历或历史版本尚未完整核实，不代表当前机会。",
+          "calendar_ref": null,
+          "as_of_cutoff": null,
+          "source_policy_ref": null,
+          "reference_lag_trading_days": null,
+          "source": "research-unified:06",
+          "completeness": "unknown",
+          "lag_trading_days": null
+        }
+      ],
+      "rule_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "rule_id": "__ruleset__",
+          "version": "2.1.0",
+          "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v2.yaml",
+          "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+          "definition_ref": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v1.yaml",
+          "fallback_note": "仅记录首轮实际读取的运行账本版本；解释以v1策略为溯源，不追认旧实验采用此版本。实验参数以本卡research_extension配置为准。"
+        }
+      ],
+      "research_extension": {
+        "question": "原四资产成绩能否当作四只基金的预期？",
+        "plain_conclusion": "不能直接移用：研究代理和产品不完全一致，新增入金也会遮住投资自身下跌。",
+        "claim_type": "source_and_measurement_audit",
+        "support_state": "limited_support",
+        "matching": {
+          "instruments": "000300→510300;399006→159915;518880;^IXIC≠513100;QQQ不能静默替代",
+          "market": "CN/US",
+          "module": null,
+          "entry_variant": "第18轮原现金流，首轮复用",
+          "exit_variant": "原季度再平衡",
+          "holding_horizon": "原冻结窗口",
+          "fees": "沿原脚本，非新产品费用核实",
+          "data_window": "各文件历史不同",
+          "available_at": null,
+          "rule_version": "原版本来源见首轮资金manifest",
+          "cutoff": "2026-08-27"
+        },
+        "counts": {
+          "reused_account_paths": 2,
+          "new_profit_experiments": 0,
+          "independent_event_count": null,
+          "unknown_reason": "本轮为元数据与定义审计"
+        },
+        "independent_review": "两资金路径独立复核见首轮；本轮未将复用计新验证。",
+        "source_run_ids": [
+          "other-lines/product-inventory.json",
+          "other-lines/source-manifest.json"
+        ],
+        "uncertainty": "缺币种/分红/复权/发布时间元数据，未执行统一可交易时点修正后的长历史收益。",
+        "can_answer": [
+          "旧数字含义和适用边界",
+          "缺哪些产品资料"
+        ],
+        "cannot_answer": [
+          "四只基金将复制原收益",
+          "原组合通过2008"
+        ]
+      }
+    },
+    {
+      "evidence_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "id": "research-unified:07",
+          "source_path": [
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/overlap-protocol.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/overlap-summary.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/window-state-overlap.csv",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/icepoint-study.py"
+          ],
+          "source_hash": [
+            "3d7351bb1a6adcb9c9a2d89149175f9c6359aafc7601baa32871f0c144ff3958",
+            "7d15958ef2c52d26f5e15032c1fce6e43d2973287bb5665bd2aa0e0d72d213fc",
+            "25c3330f83651d2c2d3f0eac61b5a4ef928a94c4774bc60e94478a639497eb72",
+            "b375791ad7f04fa9223112a368336cc6a1bcf527e3cd2e6c106008e0edfd6cc3"
+          ],
+          "source_version": "2026-09-08-frozen-research",
+          "status": "unverified",
+          "window": "4个原窗口，2022及2026",
+          "statistic_kind": "feasibility_audit",
+          "strategy_scope": [
+            "sentiment_observation"
+          ],
+          "limitations": "缺四条件准确逐日历史与可用时间；未计算收益。",
+          "compatibility": "reference",
+          "evidence_id": "research-unified:07",
+          "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/overlap-protocol.json",
+          "strategies": [
+            "sentiment_observation"
+          ],
+          "note": "缺四条件准确逐日历史与可用时间；未计算收益。"
+        }
+      ],
+      "data_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "source_id": "research-unified:07",
+          "instrument_id": "8指数/ETF窗口描述，非板块精确映射",
+          "market": "CN",
+          "observed_at": null,
+          "available_at": null,
+          "generated_at": null,
+          "last_valid_at": "2026-08-27",
+          "health": "unknown",
+          "reason": "冻结历史研究；数据公开时点、正式交易日历或历史版本尚未完整核实，不代表当前机会。",
+          "calendar_ref": null,
+          "as_of_cutoff": null,
+          "source_policy_ref": null,
+          "reference_lag_trading_days": null,
+          "source": "research-unified:07",
+          "completeness": "unknown",
+          "lag_trading_days": null
+        }
+      ],
+      "rule_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "rule_id": "__ruleset__",
+          "version": "2.1.0",
+          "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v2.yaml",
+          "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+          "definition_ref": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v1.yaml",
+          "fallback_note": "仅记录首轮实际读取的运行账本版本；解释以v1策略为溯源，不追认旧实验采用此版本。实验参数以本卡research_extension配置为准。"
+        }
+      ],
+      "research_extension": {
+        "question": "完整冰点是否增加独立机会？",
+        "plain_conclusion": "选定旧脚本只做简化条件；64行窗口状态重叠不能回答完整四条件交集或交易优势。",
+        "claim_type": "feasibility_audit",
+        "support_state": "evidence_insufficient",
+        "matching": {
+          "instruments": "8指数/ETF窗口描述，非板块精确映射",
+          "market": "CN",
+          "module": null,
+          "condition_definition": "完整四条件历史缺失；原两条件研究与窗口状态分别保存",
+          "holding_horizon": "无完整交易",
+          "fees": null,
+          "available_at": null,
+          "rule_version": "原脚本冻结",
+          "cutoff": "2026-08-27"
+        },
+        "counts": {
+          "descriptive_rows": 64,
+          "new_profit_experiments": 0,
+          "trade_count": null,
+          "independent_event_count": null,
+          "unknown_reason": "窗口不是完整四条件事件"
+        },
+        "independent_review": "负责人源脚本与固定日期描述核对，未独立收益验收。",
+        "source_run_ids": [
+          "other-lines/overlap-protocol.json",
+          "other-lines/overlap-summary.json",
+          "other-lines/window-state-overlap.csv",
+          "other-lines/icepoint-study.py"
+        ],
+        "uncertainty": "缺四条件准确逐日历史与可用时间；未计算收益。",
+        "can_answer": [
+          "可行性缺口",
+          "旧证据范围"
+        ],
+        "cannot_answer": [
+          "四条件4/4赚钱",
+          "联合胜率提高",
+          "硬过滤有效"
+        ]
+      }
+    },
+    {
+      "evidence_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "id": "research-unified:08",
+          "source_path": [
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/ai-cache-audit.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/ai-study.py",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/ai-replay/protocol.md",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/ai-replay/run-manifest.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/ai-replay/results.json",
+            "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/ai-replay/arithmetic-crosscheck.json"
+          ],
+          "source_hash": [
+            "06324ebf0c0e697070f89777a2a64517872e8e1742daf45e00447ff89ec8aeaa",
+            "4b425ca899c5ae72407155094a29a3d5b64af5ed8d4eeff40838b6e219bbe636",
+            "7e1fcc39cb75aea49a39f77a59e31a935a97ed28c0e1f2fb26cbcda0d0da06d3",
+            "5c9bd60d0b01a205d2ac56264f3e7a06ce7d263b8c3760004b78d8682ccca194",
+            "d83d9049e73feff5ebb77414482b1b9831ab91f0b9545346d3f9e56207daca4b",
+            "17e7490cfb0257bf86958e93ce0c8b370a7ba33514fd71084b21bccba515d09b"
+          ],
+          "source_version": "2026-09-08-frozen-research",
+          "status": "unverified",
+          "window": "2021-01-04—2026-08-24",
+          "statistic_kind": "cached_action_replay",
+          "strategy_scope": [
+            "ambush"
+          ],
+          "limitations": "现存提示词含后来行情但与缓存版本无法绑定；同收盘买入仍沿旧法；延后卖出未重新调用模型，不是完整修正版。",
+          "compatibility": "reference",
+          "evidence_id": "research-unified:08",
+          "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-unified-2026-09-08/other-lines/ai-cache-audit.json",
+          "strategies": [
+            "ambush"
+          ],
+          "note": "现存提示词含后来行情但与缓存版本无法绑定；同收盘买入仍沿旧法；延后卖出未重新调用模型，不是完整修正版。"
+        }
+      ],
+      "data_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "source_id": "research-unified:08",
+          "instrument_id": "512690.SS,513180.SS,512010.SS,512480.SS,510300.SS",
+          "market": "CN",
+          "observed_at": null,
+          "available_at": null,
+          "generated_at": null,
+          "last_valid_at": "2026-08-24",
+          "health": "unknown",
+          "reason": "冻结历史研究；数据公开时点、正式交易日历或历史版本尚未完整核实，不代表当前机会。",
+          "calendar_ref": null,
+          "as_of_cutoff": null,
+          "source_policy_ref": null,
+          "reference_lag_trading_days": null,
+          "source": "research-unified:08",
+          "completeness": "unknown",
+          "lag_trading_days": null
+        }
+      ],
+      "rule_refs": [
+        {
+          "schema_version": "provenance/1.2",
+          "rule_id": "__ruleset__",
+          "version": "2.1.0",
+          "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v2.yaml",
+          "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+          "definition_ref": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/evidence/snapshot/configs/rules.v1.yaml",
+          "fallback_note": "仅记录首轮实际读取的运行账本版本；解释以v1策略为溯源，不追认旧实验采用此版本。实验参数以本卡research_extension配置为准。"
+        }
+      ],
+      "research_extension": {
+        "question": "AI是否已经证明能事前改善退出？",
+        "plain_conclusion": "没有；只能重放缓存动作，版本和当时输入缺失；部分路径少赚且最深下跌不改善。",
+        "claim_type": "cached_action_replay",
+        "support_state": "evidence_insufficient",
+        "matching": {
+          "instruments": "512690.SS,513180.SS,512010.SS,512480.SS,510300.SS",
+          "market": "CN",
+          "module": null,
+          "entry_variant": "旧收盘状态、同收盘周投入",
+          "exit_variant": "无主动退出/缓存收盘/同动作次开盘；旧机械摘要独立列",
+          "holding_horizon": "固定窗口，末尾估值",
+          "fees": "单边0.1%；现金0",
+          "available_at": "原历史材料和生成时点未知",
+          "model_version": null,
+          "prompt_binding": null,
+          "rule_version": "冻结旧脚本",
+          "cutoff": "2026-08-24"
+        },
+        "counts": {
+          "cache_rows": 130,
+          "hold": 123,
+          "sell_half": 7,
+          "replay_results": 20,
+          "daily_paths": 15,
+          "model_calls": 0,
+          "independent_event_count": null,
+          "unknown_reason": "123保持和7卖出非独立市场试验；同一持仓重复建议"
+        },
+        "independent_review": "同一负责人以不同算术路径核对15个每日账；非另一agent独立验收。",
+        "source_run_ids": [
+          "other-lines/ai-cache-audit.json",
+          "other-lines/ai-study.py",
+          "ai-replay/protocol.md",
+          "ai-replay/run-manifest.json",
+          "ai-replay/results.json",
+          "ai-replay/arithmetic-crosscheck.json"
+        ],
+        "uncertainty": "现存提示词含后来行情但与缓存版本无法绑定；同收盘买入仍沿旧法；延后卖出未重新调用模型，不是完整修正版。",
+        "can_answer": [
+          "缓存动作怎样影响历史账",
+          "现存材料哪些无法复现"
+        ],
+        "cannot_answer": [
+          "模型事前能力",
+          "自动退出",
+          "持续收入或技术入场效果"
+        ]
+      }
+    }
+  ]
+}

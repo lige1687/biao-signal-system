@@ -1,0 +1,979 @@
+diff --git a/src/lei_signal/api/routes/agent.py b/src/lei_signal/api/routes/agent.py
+index 6b03b343..0c33456e 100644
+--- a/src/lei_signal/api/routes/agent.py
++++ b/src/lei_signal/api/routes/agent.py
+@@ -11,6 +11,7 @@ import json
+ import logging
+ import re
+ from contextlib import closing
++from datetime import datetime
+ from pathlib import Path
+ 
+ from fastapi import APIRouter, HTTPException, Request
+@@ -1005,12 +1006,16 @@ def _server_plan_artifact(conn, session_id: str, question_id: int,
+ 
+ 
+ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
+-    """AI 讲解不可用/校验失败时的系统直出（UX 第一期 2026-09-13 重写）。
+-
+-    与 AI 路径同一套四要素结构：现在怎么看 / 机会与风险 / 历史依据够不够 /
+-    接下来可以做什么。数值全部直读 ctx_payload，不造数字、不含工程标识；
+-    影响理解的信息（数据日期、AI 暂不可用、没有可用统计）必须可见。
++    """AI 讲解不可用/校验失败时的系统直出（可靠性一期 2026-09-14 改写）。
++
++    表达口径（任务书 §5；改前/改后对照见实验报告 E 节）：第一句直接回答
++    这次问题（大白话），颜色/阶段等系统标签放后文作细节；数据日期不是
++    今天时同强度说明「不能直接代表今天」（只读日期事实，不发明按天数
++    折算的新鲜度规则）；依据一句话说清「能否支持本次判断」；下一步 ≤3 条
++    且贴问题，优先给可观察的既有条件。数值全部直读 ctx_payload，
++    不新增判定逻辑。
+     """
++    today = datetime.now().astimezone().strftime("%Y-%m-%d")
+     if ctx_payload.get("context_kind") == "global":
+         # global 会话无标的技术材料：只给大盘概况与环境信息，不硬凑标的内容
+         lines = ["AI 讲解暂时不可用，以下是系统直接给出的市场概况。"]
+@@ -1027,75 +1032,107 @@ def _degraded_reply(symbol: str, ctx_payload: dict) -> str:
+     as_of = ctx_payload.get("as_of", "-")
+     review = ctx_payload.get("buy_point_review") or {}
+     candidates = review.get("candidates") or []
+-    # ① 现在怎么看
+-    lines = [
+-        f"【{display}（{symbol}）】数据日 {as_of}。AI 讲解暂时不可用，"
+-        "以下是系统直接给出的数据事实。",
+-        f"当前状态：{a.get('color_cn', '状态未知')} / {a.get('stage_cn', '-')}"
+-        f" / 风险关注 {a.get('risk_state_cn', '-')}"
+-        f"（针对你问的技术面问题）。",
+-    ]
+-    # ② 机会与风险
++    trad = review.get("tradability") or {}
++    blocked = bool(trad) and not trad.get("tradable") and bool(
++        trad.get("blocking_reasons"))
++
++    # ① 先回答这次问题：第一句就是大白话结论（只重组既有判定字段，
++    # 不做新判定；候选状态/价位照抄，不加解释性定语）。
+     if candidates:
+-        for c in candidates[:2]:
+-            lines.append(
+-                f"机会：{c.get('scenario_cn', '')}目前[{c.get('state_cn', '')}]，"
+-                f"关键价位 {c.get('key_price') or '系统未给出'}。"
+-            )
++        c0 = candidates[0]
++        lines = [
++            f"{display}（{symbol}）：按系统数据，目前有 {len(candidates)} 个"
++            f"系统定义的买点候选；最接近的一个是「{c0.get('scenario_cn', '')}」，"
++            f"状态「{c0.get('state_cn', '')}」，关键价位 "
++            f"{c0.get('key_price') or '系统未给出'}。",
++        ]
++    elif blocked:
++        lines = [
++            f"{display}（{symbol}）：按系统数据，现在不构成可执行的入场计划"
++            "——按规则本轮不适合讨论开新仓。",
++            f"系统给出的原因是：{'、'.join(trad['blocking_reasons'])}。",
++        ]
+     else:
++        lines = [
++            f"{display}（{symbol}）：按系统数据，现在没有系统定义的买点候选，"
++            "还整理不成可执行的入场计划。",
++        ]
++
++    # ② 数据日期与讲解状态：AI 不可用必须可见；日期不是今天就同强度说明
++    # 「不能直接代表今天」（只读日期事实，不发明按天数折算的新鲜度规则）。
++    if as_of and as_of != "-" and as_of != today:
+         lines.append(
+-            "机会：当前没有系统定义的买点候选——如实说明，不是遗漏。"
++            f"注意：AI 讲解暂时不可用。以下是系统按 {as_of} 数据直接给出的"
++            f"事实——今天是 {today}，这是过去的数据，不能直接代表今天；"
++            "先用最新数据核实再谈下一步。"
+         )
+-    trad = review.get("tradability") or {}
+-    if trad and not trad.get("tradable") and trad.get("blocking_reasons"):
++    else:
+         lines.append(
+-            "风险：目前被系统规则挡住（" + "、".join(trad["blocking_reasons"]) + "）。"
++            f"数据日 {as_of}。AI 讲解暂时不可用，以下是系统直接给出的数据事实。"
+         )
++
++    # 系统标签（颜色/阶段/风险）是细节，不再当第一句。
++    lines.append(
++        f"系统状态：{a.get('color_cn', '状态未知')} / {a.get('stage_cn', '-')}"
++        f" / 风险关注 {a.get('risk_state_cn', '-')}。"
++    )
++
++    # ③ 机会与风险：有候选列候选（阻断原因已进第一句，不重复）。
++    if candidates:
++        for c in candidates[:2]:
++            lines.append(
++                f"机会：{c.get('scenario_cn', '')}目前[{c.get('state_cn', '')}]，"
++                f"关键价位 {c.get('key_price') or '系统未给出'}。"
++            )
+     vp = ctx_payload.get("volume_profile") or {}
+     if vp.get("poc"):
+         lines.append(
+             f"参考：成交最密集的价位在 {vp['poc']}（筹码分布代理，"
+             "不是真实持仓成本）。"
+         )
+-    # ③ 历史依据够不够
++
++    # ④ 历史依据够不够：首层一句话说清能否支持本次判断，明细留在依据卡。
+     card = ctx_payload.get("evidence_card") or {}
+     hs = card.get("history_and_scope") or {}
+     matched = [r for r in (hs.get("matched_runs") or []) if isinstance(r, dict)]
+     exact_n = sum(1 for r in matched if r.get("supports_question"))
+     if exact_n:
+         lines.append(
+-            f"历史依据：有 {exact_n} 次与本问题方法完全一致的补测结果"
+-            "（数值见下方依据卡）。"
++            f"历史依据：有 {exact_n} 次与本问题方法完全一致的补测结果，"
++            "可以支撑这次判断（数值见下方依据卡）。"
+         )
+     elif matched:
+         lines.append(
+-            "历史依据：本标的有补测记录，但没有与这次问题完全匹配的方法组合，"
+-            "暂不能确定是否适用（旧结果只作参考，见下方依据卡）。"
++            "历史依据：现在不能给这次判断附上可靠的胜率——本标的有历史补测，"
++            "但没有与这次问题完全一致的方法组合，旧结果只作参考（见下方依据卡）。"
+         )
+     else:
+         we = hs.get("winrate_evidence") or {}
+-        compat = we.get("compatibility")
+-        if compat == "exact":
++        if we.get("compatibility") == "exact":
+             lines.append("历史依据：本标的有同方法的历史胜率表，适用于这次问题。")
+         else:
+             lines.append(
+-                "历史依据：暂不能确定是否适用——本标的缺少与这次问题匹配的"
+-                "历史统计，详细原因见下方依据卡。"
++                "历史依据：现在不能给这次判断附上可靠的胜率——现有记录不足以"
++                "核实是否是同一种做法（明细见下方依据卡）。"
+             )
+-    # ④ 接下来可以做什么（来自现有观察条件，不造触发价）
++
++    # ⑤ 接下来可以做什么：≤3 条、贴问题；无候选时不再让用户先选打法。
+     pending = [str(x) for x in (card.get("pending_conditions") or []) if x]
+     if pending:
+-        lines.append("接下来可以：等这些条件满足再看——" + "；".join(pending[:3]) + "。")
+-    elif not candidates:
+         lines.append(
+-            "接下来可以：说说你想用哪种打法讨论（趋势回调 / 突破 / 反转），"
+-            "或对这个标的发起一次历史补测。"
++            "接下来先观察这些条件，哪条变化了再回来讨论："
++            + "；".join(pending[:3]) + "。"
+         )
+-    else:
++    elif candidates:
+         lines.append(
+             "接下来可以：在下方动作里选一项继续（查看依据详情 / 准备补测 / "
+             "讨论进出计划）。"
+         )
++    else:
++        lines.append(
++            "接下来可以先核实这个标的的最新数据；想继续讨论的话，说一个你"
++            "关心的条件或价位，系统有对应事实时再展开。"
++        )
+     return "\n".join(lines)
+ 
+ 
+@@ -2302,6 +2339,13 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
+                             if outcome.kind == "resume" else None),
+                     ))
+             except Exception as exc:  # noqa: BLE001
++                # 可靠性一期（2026-09-14）：准备段失败必须留服务端日志。
++                # 此前异常只进 SSE、不打日志，运行版首问「database is locked」
++                # 在服务端无任何痕迹（见实验报告 A 节归因）。
++                logger.exception(
++                    "agent_chat_stream 准备段失败（session=%s message=%r）",
++                    body.session_id, body.message[:50],
++                )
+                 q.put(("error", exc))
+ 
+         _threading.Thread(target=_work, daemon=True).start()
+@@ -2312,6 +2356,10 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
+             try:
+                 kind, payload = q.get(timeout=180)
+             except _queue.Empty:
++                logger.warning(
++                    "agent_chat_stream 准备段超时180s（session=%s message=%r）",
++                    body.session_id, body.message[:50],
++                )
+                 yield _sse("done", {
+                     "session_id": "", "resolved_symbol": None, "grounded": False,
+                     "verify_note": "准备阶段超时（180s），请稍后重试。",
+@@ -2364,15 +2412,44 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
+         resume = outcome.kind == "resume"
+         question_id: int | None = outcome.question_id if resume else None
+ 
++        # 可靠性一期（2026-09-14）：系统资料就绪即推送，不等模型。字段与
++        # done 同名同源（不是第二套证据），前端据此先渲染事实卡并提示
++        # 「资料已就绪，AI 解释仍在生成」；done 仍是唯一的最终完成信号。
++        yield _sse("prepared", {
++            "session_id": session_id,
++            "resolved_symbol": symbol,
++            "quick_card": _quick_card(ctx_payload, symbol),
++            "evidence_card": ctx_payload.get("evidence_card"),
++            "next_steps": _build_next_steps(ctx_payload, symbol),
++        })
++
+         if not resume:
+             # 03B：先落 user 消息 + discussion_v1 快照（回测绑定需要 question_id）；
+             # 编号已在进入时领取——并发双发在此收口，输家复用赢家原问题
+-            with closing(connect(_db_path(request))) as conn:
+-                appended, user_msg, dup = _append_user_for_claim(
+-                    conn, outcome, body, symbol,
+-                    review_dump=ctx_payload.get("buy_point_review"),
+-                    as_of=ctx_payload.get("as_of"), window_sel=window_sel)
+-                question_id = user_msg.message_id if user_msg is not None else None
++            try:
++                with closing(connect(_db_path(request))) as conn:
++                    appended, user_msg, dup = _append_user_for_claim(
++                        conn, outcome, body, symbol,
++                        review_dump=ctx_payload.get("buy_point_review"),
++                        as_of=ctx_payload.get("as_of"), window_sel=window_sel)
++                    question_id = (
++                        user_msg.message_id if user_msg is not None else None)
++            except Exception as exc:  # noqa: BLE001
++                # 落库失败不假装开始回答：资料已展示，如实说明历史没存上，
++                # 重试同一问题走既有 replay/resume 身份（不重复建问题）。
++                logger.exception(
++                    "agent_chat_stream 问题落库失败（session=%s）", session_id)
++                yield _sse("done", {
++                    "session_id": session_id,
++                    "resolved_symbol": symbol,
++                    "grounded": False,
++                    "verify_note": (
++                        "系统资料已在上方展示；但本次问题未能写入历史记录"
++                        f"（{type(exc).__name__}），AI 解释没有开始。"
++                        "请稍后重试同一问题。"
++                    ),
++                })
++                return
+             if appended == "duplicate":
+                 dup = dup or {}
+                 yield _sse("done", {
+@@ -2391,6 +2468,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
+ 
+         config = plans_llm.load_ark_config()
+         pieces: list[str] = []
++        interrupted = False
+         if config is not None:
+             yield _sse("stage", {"key": "llm", "text": "AI 组织语言（逐字输出）"})
+             for piece in plans_llm.chat_discussion_stream(
+@@ -2399,6 +2477,10 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
+                 body.message,
+                 config,
+             ):
++                # 可靠性一期：流式中断哨兵——部分正文不再冒充完整回答
++                if piece is plans_llm.STREAM_INTERRUPTED:
++                    interrupted = True
++                    break
+                 pieces.append(piece)
+                 yield _sse("token", {"t": piece})
+ 
+@@ -2406,7 +2488,16 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
+         grounded = False
+         verify_note = ""
+         fallback = ""
+-        if full:
++        if interrupted and full:
++            # 有部分正文：保留已收到内容，如实标记解释未完成；不再叠加完整模板
++            grounded = False
++            verify_note = (
++                "AI 讲解因连接中断未完成；以上是已收到的部分，"
++                "上方系统资料仍然可用。可重试同一问题（不会重复记录）。"
++            )
++        elif interrupted:
++            verify_note = "AI 讲解因连接中断未完成，系统改用模板直出。"
++        if full and not interrupted:
+             from lei_signal.plans.grounding import (  # noqa: PLC0415
+                 collect_payload_numbers,
+                 verify_numeric_grounding,
+@@ -2427,7 +2518,7 @@ def agent_chat_stream(request: Request, body: AgentChatRequest):
+                     f"以上 AI 流式原文未过溯源校验（{txt_reason or num_reason}），"
+                     "请以下方模板直出为准。"
+                 )
+-        if not full or not grounded:
++        if (not full or not grounded) and not (interrupted and full):
+             fallback = _degraded_reply(symbol or "", ctx_payload)
+ 
+         trace = _build_trace(alerts)
+diff --git a/src/lei_signal/plans/llm.py b/src/lei_signal/plans/llm.py
+index 2eeed47f..cb47b0b5 100644
+--- a/src/lei_signal/plans/llm.py
++++ b/src/lei_signal/plans/llm.py
+@@ -502,15 +502,16 @@ def _post_user_content(
+         return None
+ 
+ 
+-def _post_streaming_anthropic(
++def _iter_anthropic_stream(
+     url: str, headers: dict[str, str], body: dict[str, Any], config: ArkConfig
+-) -> str | None:
+-    """Anthropic 协议流式投递：累积 text_delta，thinking block 自动跳过。
++) -> Iterator[str]:
++    """Anthropic 协议 SSE 流：逐段 yield 正文 text_delta（thinking 增量跳过）。
+ 
+-    失败（网络/非 200/空正文）返回 None，调用方降级模板。UTF-8 必须显式指定
+-    （requests 对 SSE 的默认编码猜测会把中文拆成 mojibake）。
++    连接超时 10s、读超时 config.timeout——SSE 下读超时按「字节间隔」计，
++    思考期间网关持续推送增量事件即不会触发；这是非流式请求做不到的
++    （非流式必须等全文，思考型模型长输入会整段沉默到读超时）。
++    任何失败仅结束迭代（调用方据已收内容降级），不抛异常。
+     """
+-    parts: list[str] = []
+     try:
+         with requests.post(
+             url, headers=headers, json=body,
+@@ -521,7 +522,7 @@ def _post_streaming_anthropic(
+                     "ark(流式) HTTP %s，放弃（model=%s）。响应摘要：%s",
+                     resp.status_code, config.model, resp.text[:200],
+                 )
+-                return None
++                return
+             resp.encoding = "utf-8"
+             in_text = False
+             for line in resp.iter_lines(decode_unicode=True):
+@@ -537,12 +538,30 @@ def _post_streaming_anthropic(
+                 elif etype == "content_block_delta" and in_text:
+                     delta = event.get("delta") or {}
+                     if delta.get("type") == "text_delta":
+-                        parts.append(delta.get("text") or "")
++                        piece = delta.get("text") or ""
++                        if piece:
++                            yield piece
+     except requests.RequestException as exc:
+         logger.warning(
+             "ark(流式) 调用异常：%s: %s（model=%s）", type(exc).__name__, exc, config.model
+         )
+-        return None
++        yield STREAM_INTERRUPTED
++
++
++def _post_streaming_anthropic(
++    url: str, headers: dict[str, str], body: dict[str, Any], config: ArkConfig
++) -> str | None:
++    """Anthropic 协议流式投递：累积 text_delta 返回完整正文。
++
++    失败（网络/非 200/空正文/流中断）返回 None，调用方降级模板。UTF-8 编码由
++    ``_iter_anthropic_stream`` 显式指定（requests 对 SSE 的默认编码猜测会把
++    中文拆成 mojibake）。
++    """
++    parts: list[str] = []
++    for piece in _iter_anthropic_stream(url, headers, body, config):
++        if piece is STREAM_INTERRUPTED:
++            return None
++        parts.append(piece)
+     text = "".join(parts).strip()
+     if not text:
+         logger.warning("ark(流式) 无 text_delta 输出（model=%s）", config.model)
+@@ -749,12 +768,15 @@ DISCUSSION_SYSTEM_PROMPT = """你是 LEI 交易系统的研究讨论伙伴（表
+    不强迫分四点，但四件事都要能读到：
+    ① 现在怎么看：标的名称/代码、所依据的数据日期、系统当前状态，
+      并交代这是针对哪类问题或哪种交易方法说的；
++     数据日期不是今天的，必须同强度说明「这是 X 日期的数据，不能直接
++     代表今天」，不得用「当前」描述旧数据（可靠性一期 2026-09-14）；
+    ② 机会与风险：已有事实支持什么、哪里冲突。没有可核实的机会就如实说，
+      不为了填满版式硬凑利好；
+    ③ 历史依据够不够：说「适用于这次问题 / 与这次问题不一致（仅可参考）/
+      暂不能确定是否适用」之一并给一句原因；现成统计保持原数值和原范围；
+    ④ 接下来可以做什么：来自材料的观察条件或补测建议；没有明确触发价
+-     就不编数字。
++     就不编数字。用户说「先不买、只观察」时，给可观察的既有条件与值得
++     回来讨论的变化，不要求用户先选打法或补测。
+ 3. 正文不出现工程标识：运行编号、资料路径、方法代码（如 a6_1_costbasis、
+    模块字母编号）、exact/unknown 等英文枚举一律不写——它们由系统在依据卡
+    里展示。compatibility 类信息用上面的中文说法表达。
+@@ -838,6 +860,11 @@ def chat_discussion(
+ #: 统一 LLM 请求入口别名：路由层与测试 monkeypatch 此名字即可不触网替换。
+ _llm_call = _request_completion
+ 
++#: 流式异常终止标记（可靠性一期 2026-09-14）：流式请求中途网络中断时，
++#: 迭代器在已产出内容之后追加该哨兵；路由层据此把回答标记为「未完成」，
++#: 不再把部分正文冒充完整回答。正常收尾（含 [DONE]）不产出该标记。
++STREAM_INTERRUPTED = object()
++
+ #: copilot 讲解系统提示：与监督员同一套铁律，面向流水线卡片而非 alert。
+ COPILOT_SYSTEM_PROMPT = """你是 LEI 交易系统 Agent 超级入口的**表达层**。
+ 
+@@ -906,16 +933,30 @@ __all__ = [
+ def _request_completion_stream(
+     config: ArkConfig, messages: list[dict]
+ ) -> Iterator[str]:
+-    """OpenAI 兼容流式请求：逐段 yield 正文 token（思考模型的 reasoning 增量跳过）。
++    """流式请求：逐段 yield 正文增量（思考模型的 reasoning 增量跳过）。
+ 
+-    仅支持 openai 风格（GLM/DeepSeek 走这里）；anthropic 风格退化为一次性
+-    yield 完整正文（复用 _request_completion）。任何失败直接结束迭代器
++    2026-09-14（讨论可靠性一期）：anthropic 风格不再退化为一次性非流式请求。
++    此前非 OpenAI 风格直接走 ``_request_completion``，思考型模型长输入在
++    thinking 期间整段无字节，稳定触发读超时（实测 /api/plan + ark-code-latest
++    180s 超时，见 docs/experiments/agent-real-conversation-case-2026-09-14.md）；
++    现按 ``_iter_anthropic_stream`` 同构 SSE 增量投递。任何失败直接结束迭代器
+     （调用方据已收 token 判断是否完整），不抛异常——流式路径 best-effort。
+     """
+-    if config.style != STYLE_OPENAI:
+-        text = _request_completion(config, messages)
+-        if text:
+-            yield text
++    if config.style == STYLE_ANTHROPIC:
++        url = f"{config.base_url}/v1/messages"
++        headers = {
++            "x-api-key": config.api_key,
++            "anthropic-version": "2023-06-01",
++            "Content-Type": "application/json",
++        }
++        conversation = list(messages)
++        body: dict[str, Any] = {"model": config.model, "max_tokens": config.max_tokens}
++        if conversation and conversation[0].get("role") == "system":
++            body["system"] = str(conversation[0].get("content", ""))
++            conversation = conversation[1:]
++        body["messages"] = conversation
++        body["stream"] = True
++        yield from _iter_anthropic_stream(url, headers, body, config)
+         return
+     url = f"{config.base_url}/chat/completions"
+     headers = {
+@@ -939,23 +980,30 @@ def _request_completion_stream(
+             )
+             return
+         resp.encoding = "utf-8"
+-        for line in resp.iter_lines(decode_unicode=True):
+-            if not line or not line.startswith("data:"):
+-                continue
+-            data = line[5:].strip()
+-            if data == "[DONE]":
+-                return
+-            try:
+-                chunk = json.loads(data)
+-            except (ValueError, TypeError):
+-                continue
+-            choices = chunk.get("choices") or []
+-            if not choices:
+-                continue
+-            delta = choices[0].get("delta") or {}
+-            piece = delta.get("content")
+-            if piece:
+-                yield str(piece)
++        try:
++            for line in resp.iter_lines(decode_unicode=True):
++                if not line or not line.startswith("data:"):
++                    continue
++                data = line[5:].strip()
++                if data == "[DONE]":
++                    return
++                try:
++                    chunk = json.loads(data)
++                except (ValueError, TypeError):
++                    continue
++                choices = chunk.get("choices") or []
++                if not choices:
++                    continue
++                delta = choices[0].get("delta") or {}
++                piece = delta.get("content")
++                if piece:
++                    yield str(piece)
++        except requests.RequestException as exc:
++            # 中途断流：已产出内容保留，再以哨兵告知调用方「未完成」
++            logger.warning(
++                "流式请求中断：%s: %s（model=%s）", type(exc).__name__, exc, config.model,
++            )
++            yield STREAM_INTERRUPTED
+     except requests.RequestException as exc:
+         logger.warning(
+             "流式请求异常：%s: %s（model=%s）", type(exc).__name__, exc, config.model,
+diff --git a/tests/unit/test_agent_stream.py b/tests/unit/test_agent_stream.py
+index 67e72be2..581d89b7 100644
+--- a/tests/unit/test_agent_stream.py
++++ b/tests/unit/test_agent_stream.py
+@@ -88,6 +88,72 @@ def test_stream_tokens_and_grounded_done(app, monkeypatch):
+     assert "fallback" not in done
+ 
+ 
++def test_stream_interrupted_partial_keeps_text_and_marks_incomplete(app, monkeypatch):
++    """可靠性一期：流式中断后部分正文保留、明确标记未完成、不给完整模板。"""
++    monkeypatch.setenv("GLM_API_KEY", "k")
++    monkeypatch.setattr(
++        agent_routes.plans_llm, "load_ark_config",
++        lambda: plans_llm.ArkConfig(api_key="k"),
++    )
++
++    def fake_stream(payload, history, message, config):
++        yield "按系统数据，先说结论。"
++        yield plans_llm.STREAM_INTERRUPTED
++
++    monkeypatch.setattr(
++        agent_routes.plans_llm, "chat_discussion_stream", fake_stream
++    )
++    with TestClient(app) as c:
++        with c.stream(
++            "POST", "/api/agent/chat/stream",
++            json={"context_kind": "global", "message": "随便说说"},
++        ) as r:
++            text = "".join(chunk for chunk in r.iter_text())
++    events = _parse_sse(text)
++    tokens = [d["t"] for e, d in events if e == "token"]
++    assert tokens == ["按系统数据，先说结论。"]
++    done = next(d for e, d in events if e == "done")
++    assert done["grounded"] is False
++    assert "未完成" in done["verify_note"]
++    # 部分正文不叠加完整模板（模板只在零正文/校验失败时兜底）
++    assert "fallback" not in done
++
++
++def test_stream_prepared_event_precedes_tokens_and_done(app, monkeypatch):
++    """可靠性一期（2026-09-14）：资料就绪先发 prepared（不等模型）。
++
++    前端据此先渲染系统事实卡；prepared 字段与 done 同名同源，不是第二套证据。
++    """
++    monkeypatch.setenv("GLM_API_KEY", "k")
++    monkeypatch.setattr(
++        agent_routes.plans_llm, "load_ark_config",
++        lambda: plans_llm.ArkConfig(api_key="k"),
++    )
++
++    def fake_stream(payload, history, message, config):
++        yield "第一段。"
++
++    monkeypatch.setattr(
++        agent_routes.plans_llm, "chat_discussion_stream", fake_stream
++    )
++    with TestClient(app) as c:
++        with c.stream(
++            "POST", "/api/agent/chat/stream",
++            json={"context_kind": "global", "message": "随便说说"},
++        ) as r:
++            text = "".join(chunk for chunk in r.iter_text())
++    events = _parse_sse(text)
++    kinds = [e for e, _ in events]
++    assert "prepared" in kinds
++    assert kinds.index("prepared") < kinds.index("token")
++    assert kinds.index("prepared") < kinds.index("done")
++    prepared = next(d for e, d in events if e == "prepared")
++    assert prepared["session_id"]
++    assert "resolved_symbol" in prepared
++    assert "quick_card" in prepared and "evidence_card" in prepared
++    assert "next_steps" in prepared
++
++
+ def test_stream_verify_fail_appends_fallback(app, monkeypatch):
+     monkeypatch.setenv("GLM_API_KEY", "k")
+     monkeypatch.setattr(
+diff --git a/tests/unit/test_agent_ux_phase1.py b/tests/unit/test_agent_ux_phase1.py
+index c7a81f83..3e98e0cd 100644
+--- a/tests/unit/test_agent_ux_phase1.py
++++ b/tests/unit/test_agent_ux_phase1.py
+@@ -9,6 +9,8 @@
+ """
+ from __future__ import annotations
+ 
++import re
++from datetime import datetime
+ from pathlib import Path
+ 
+ import pandas as pd
+@@ -111,14 +113,39 @@ def test_degraded_reply_keeps_four_parts_without_engineering_codes() -> None:
+     assert "接下来" in text
+     # 影响理解的信息可见
+     assert "AI 讲解暂时不可用" in text
+-    # 不造数字：无统计时不给胜率
+-    assert "胜率" not in text
++    # 可靠性一期：数据日期非今日时同强度说明「不能直接代表今天」
++    assert "不能直接代表今天" in text
++    # 不造数字：无统计时不给任何胜率数值（可说「没有可靠胜率」）
++    assert not re.search(r"胜率[约为:：\s]*\d", text)
+     # 工程标识不进正文（运行编号/英文枚举）
+     assert "run_x" not in text
+     assert "exact" not in text
+     assert "a6_1_costbasis" not in text
+ 
+ 
++def test_degraded_reply_leads_with_plain_answer_not_color() -> None:
++    """可靠性一期（2026-09-14）：第一句是大白话回答，颜色/标签退到细节行。"""
++    text = _degraded_reply(SYMBOL, _symbol_ctx())
++    first_line = text.splitlines()[0]
++    assert first_line.startswith("平安银行（000001.SS）：按系统数据")
++    # 颜色不再出现在第一句
++    assert "绿色" not in first_line
++
++
++def test_degraded_reply_stale_date_vs_fresh_date() -> None:
++    """数据日期是今天时不添加「过去数据」警示；不是今天时必须同强度说明。"""
++    ctx = _symbol_ctx()
++    today = datetime.now().astimezone().strftime("%Y-%m-%d")
++    ctx["as_of"] = today
++    ctx["evidence_card"] = {"facts": {"as_of": today}}
++    fresh = _degraded_reply(SYMBOL, ctx)
++    assert "不能直接代表今天" not in fresh
++    ctx_stale = _symbol_ctx()  # as_of=2026-09-11 < 今天
++    stale = _degraded_reply(SYMBOL, ctx_stale)
++    assert "不能直接代表今天" in stale
++    assert "先用最新数据核实" in stale
++
++
+ def test_degraded_reply_no_candidates_states_it_plainly() -> None:
+     ctx = _symbol_ctx()
+     ctx["buy_point_review"] = {"candidates": []}
+diff --git a/web/src/components/AgentConsole.tsx b/web/src/components/AgentConsole.tsx
+index 78e63614..cd954bcc 100644
+--- a/web/src/components/AgentConsole.tsx
++++ b/web/src/components/AgentConsole.tsx
+@@ -11,6 +11,7 @@ import NextStepsBar from "./agent/NextStepsBar";
+ import BacktestSetupPanel, { type BacktestSetupPayload } from "./agent/BacktestSetupPanel";
+ import { atrDiscussionDraft, detectUnsupportedExitRequest, SUPPORTED_EXITS_CN, windowLabelFromComparisonConfig } from "../utils/agentUx";
+ import { useAgentConsole } from "../App";
++import { readAgentEvents } from "../pages/agentWorkspaceLogic";
+ import { parseBacktestModule, resolveRoute } from "../utils/resolveRoute";
+ import {
+   pollTask, recoverActiveTasks, requestBacktestTask, taskCreatedTextCn, taskStatusTextCn,
+@@ -46,11 +47,15 @@ type Turn = {
+   /** U1/U3 返修：补测中文选择面板（绑定本回答的问题与标的） */
+   setupPanel?: BacktestSetupPayload | null;
+   panelSubmitting?: boolean;
++  /** 可靠性一期 2026-09-14：讨论路径改走流式端点后的轮次状态 */
++  status?: "working" | "complete" | "failed" | "stopped";
++  stages?: { key: string; text: string }[];
++  /** prepared 事件已到——系统资料就绪，AI 解释未完成 */
++  factsReady?: boolean;
++  fallback?: string;
++  verifyNote?: string;
+ };
+ 
+-/** 发起提问时捕获的上下文快照：回复落地前据此校验上下文未变，防止串扰。 */
+-type AskVars = { message: string; symbol: string | null; sessionId: string | null; epoch: number };
+-
+ const SYMBOL_CHIPS = ["这个买点为什么是买点", "技术面讨论", "给这个买点建计划", "这个标的我的计划"];
+ /** 全局快捷指令：走 copilot dispatch（零 LLM 直达流水线），未命中回落通用讨论。 */
+ const GLOBAL_CHIPS = ["今天看什么", "持仓速览", "我要报单", "本周复盘"];
+@@ -58,12 +63,11 @@ const GLOBAL_CHIPS = ["今天看什么", "持仓速览", "我要报单", "本周
+ /** U4 返修：控制台单条对话抽为组件——本地保存"查看依据详情"的展开状态，
+  * 点击动作条按钮时与工作台同行为：定位到本回答并真正展开依据区；
+  * U1/U3：补测面板挂在原回答上（setupPanel），提交/取消都在本条内完成。 */
+-function ConsoleTurnView({ index, turn, symbol, sessionId, pending, navigate, registerRef, scrollToTurn, onDraft, onPrepareBacktest, onSetupSubmit, onSetupCancel }: {
++function ConsoleTurnView({ index, turn, symbol, sessionId, navigate, registerRef, scrollToTurn, onDraft, onPrepareBacktest, onSetupSubmit, onSetupCancel }: {
+   index: number;
+   turn: Turn;
+   symbol: string | null;
+   sessionId: string | null;
+-  pending: boolean;
+   navigate: (path: string) => void;
+   registerRef: (index: number, el: HTMLDivElement | null) => void;
+   scrollToTurn: (index: number) => void;
+@@ -73,27 +77,34 @@ function ConsoleTurnView({ index, turn, symbol, sessionId, pending, navigate, re
+   onSetupCancel: (turn: Turn) => void;
+ }) {
+   const [detailsExpanded, setDetailsExpanded] = useState(false);
++  const working = turn.status === "working";
+   return (
+     <div className="turn" ref={(el) => registerRef(index, el)}>
+       <div className="who">{turn.who === "you" ? "你" : "agent"}</div>
+-      {turn.who === "agent" ? (
++      {turn.who === "agent" && working && (
++        <div className="muted" role="status">
++          {turn.factsReady
++            ? "系统资料已就绪（见下方依据卡），AI 解释仍在生成…"
++            : (turn.stages?.[turn.stages.length - 1]?.text ?? "正在读取资料…")}
++        </div>
++      )}
++      {turn.who === "you" && <div className="msg">{turn.text}</div>}
++      {turn.who === "agent" && !working && (
+         /* 控制台无主图上下文：onBp 置空、notableCount=0，「买点①」chip 渲染为不可点的暗态 */
+         /* FR-3: plan-draft 围栏块从正文剔除（卡片已单独渲染原始 JSON），防裸 JSON 进对话流 */
+         /* UX 第一期：首屏/正文拆段与工作台共用同一组件（expanded=控制台保持全文） */
+         <AnswerText
+-          text={turn.text.replace(/```plan-draft[\s\S]*?```/g, "").trim()}
++          text={(turn.fallback || turn.text).replace(/```plan-draft[\s\S]*?```/g, "").trim()}
+           markdown={(t) => (
+             <AgentMarkdown text={t} onBp={() => undefined} notableCount={0} />
+           )}
+           expanded
+         />
+-      ) : (
+-        <div className="msg">{turn.text}</div>
+       )}
+       {turn.who === "agent" && turn.evidenceCard && (
+         <EvidenceCardView card={turn.evidenceCard} forceDetailsOpen={detailsExpanded} />
+       )}
+-      {turn.who === "agent" && !pending && turn.nextSteps && turn.nextSteps.length > 0 && (
++      {turn.who === "agent" && turn.status !== "working" && turn.nextSteps && turn.nextSteps.length > 0 && (
+         <NextStepsBar
+           steps={turn.nextSteps}
+           symbol={turn.resolved ?? symbol}
+@@ -156,6 +167,12 @@ function ConsoleTurnView({ index, turn, symbol, sessionId, pending, navigate, re
+       {turn.who === "agent" && turn.trace && turn.trace.length > 0 && (
+         <ProvenanceBadge items={turn.trace} />
+       )}
++      {turn.who === "agent" && turn.verifyNote && (
++        <div className="grounded-tag warn">{turn.verifyNote}</div>
++      )}
++      {turn.who === "agent" && turn.status === "failed" && turn.evidenceCard && (
++        <div className="grounded-tag warn">AI 解释未完成；上面的系统资料仍然可用。</div>
++      )}
+       {turn.who === "agent" && turn.grounded === false && (
+         <div className="grounded-tag warn">判定层数据直出（LLM 不可用或未过校验）</div>
+       )}
+@@ -224,46 +241,117 @@ export default function AgentConsole() {
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []);
+ 
+-  const ask = useMutation({
+-    // 请求参数全部来自 mutate 时捕获的 AskVars 快照，不读渲染闭包里的最新状态
+-    mutationFn: ({ message, symbol: askSymbol, sessionId: askSession }: AskVars) =>
+-      api.agentChat({
+-        session_id: askSession,
+-        context_kind: askSymbol ? "symbol" : "global",
+-        symbol: askSymbol,
+-        message,
+-      }),
+-    onSuccess: (reply, vars) => {
+-      // I-1 防护：仅当发起时的标的与世代均未变才落地；pending 期间切标的 / 开新会话 → 丢弃。
+-      if (vars.symbol !== symbol || vars.epoch !== generationRef.current) return;
+-      setSessionId(reply.session_id);
+-      setTurns((cur) => [
+-        ...cur,
+-        { who: "agent", text: reply.reply, grounded: reply.grounded, trace: reply.trace,
+-          // 03B-R3 S5/S4：服务端计划产物 + 精确问题归属随回答落地
+-          evidenceCard: reply.evidence_card ?? null,
+-          planArtifact: reply.plan_artifact ?? null,
+-          resolved: reply.resolved_symbol ?? null,
+-          questionId: reply.question_id ?? null,
+-          // UX 第一期：下一步动作随回答落地（与工作台同源）
+-          nextSteps: reply.next_steps ?? null },
+-      ]);
+-    },
+-    onError: (e: unknown, vars) => {
+-      if (vars.epoch !== generationRef.current) return;
+-      setTurns((cur) => [
+-        ...cur,
+-        { who: "agent", text: `取回失败：${e instanceof Error ? e.message : String(e)}` },
+-      ]);
+-    },
+-  });
++  // 可靠性一期（2026-09-14）：讨论路径从一次性 agentChat 改走流式端点——
++  // prepared 事件先渲染系统资料卡，模型正文逐段追加；失败保留已显示资料。
++  // 补测准备（handleBacktest）仍走普通接口，两套接口按既有分工并存。
++  const [pending, setPending] = useState(false);
++
++  const send = (message: string) => {
++    const text = message.trim();
++    if (!text || pending) return;
++    const gen = generationRef.current;
++    const askSymbol = symbol;
++    const askSession = sessionId;
++    const turnId = crypto.randomUUID();
++    setInput("");
++    setTurns((cur) => [
++      ...cur,
++      { who: "you" as const, text },
++      { id: turnId, who: "agent" as const, text: "", status: "working" as const, stages: [] },
++    ]);
++    setPending(true);
++    void (async () => {
++      const controller = new AbortController();
++      const patchTurn = (value: Partial<Turn>) => setTurns((cur) => cur.map(
++        (t) => (t.id === turnId ? { ...t, ...value } : t),
++      ));
++      let received = "";
++      let completed = false;
++      try {
++        const response = await fetch("/api/agent/chat/stream", {
++          method: "POST",
++          headers: { "Content-Type": "application/json" },
++          signal: controller.signal,
++          body: JSON.stringify({
++            session_id: askSession,
++            context_kind: askSymbol ? "symbol" : "global",
++            symbol: askSymbol,
++            message: text,
++          }),
++        });
++        if (!response.ok || !response.body) throw new Error(`服务返回 ${response.status}`);
++        const stages: NonNullable<Turn["stages"]> = [];
++        for await (const event of readAgentEvents(response.body)) {
++          // 迟到防护：期间切标的/开新会话（世代已变）→ 丢弃后续事件，不串入新会话
++          if (generationRef.current !== gen) { controller.abort(); return; }
++          if (event.event === "stage") {
++            stages.push({ key: String(event.data.key), text: String(event.data.text) });
++            patchTurn({ stages: [...stages] });
++          } else if (event.event === "prepared") {
++            const p = event.data as {
++              session_id?: string; resolved_symbol?: string | null;
++              evidence_card?: EvidenceCard | null; next_steps?: NextStep[] | null;
++            };
++            if (p.session_id) setSessionId(p.session_id);
++            patchTurn({
++              factsReady: true,
++              resolved: p.resolved_symbol ?? null,
++              evidenceCard: p.evidence_card ?? null,
++              nextSteps: p.next_steps ?? null,
++            });
++          } else if (event.event === "token") {
++            received += String(event.data.t ?? "");
++            patchTurn({ text: received });
++          } else if (event.event === "error") {
++            throw new Error(String(event.data.message ?? event.data.error ?? "分析服务暂时不可用"));
++          } else if (event.event === "done") {
++            completed = true;
++            const d = event.data as {
++              session_id?: string; resolved_symbol?: string | null; grounded?: boolean;
++              fallback?: string; verify_note?: string; question_id?: number | null;
++              plan_artifact?: PlanArtifact | null; next_steps?: NextStep[] | null;
++            };
++            if (d.session_id) setSessionId(d.session_id);
++            patchTurn({
++              text: received || (d.fallback ?? ""),
++              status: "complete",
++              grounded: d.grounded,
++              fallback: d.fallback,
++              verifyNote: d.verify_note,
++              resolved: d.resolved_symbol ?? null,
++              questionId: d.question_id ?? null,
++              planArtifact: d.plan_artifact ?? null,
++              nextSteps: d.next_steps ?? null,
++            });
++          }
++        }
++        if (!completed && generationRef.current === gen) {
++          patchTurn({
++            status: "failed",
++            text: received,
++            verifyNote: "连接提前结束；已保留收到的内容。重试同一问题会复用原问题，不会重复记录。",
++          });
++        }
++      } catch (e) {
++        if (generationRef.current !== gen) return;
++        patchTurn({
++          status: "failed",
++          text: received,
++          verifyNote: `未能完成：${e instanceof Error ? e.message : String(e)}`,
++        });
++      } finally {
++        // 世代已变时由 resetConversation 负责清 pending，避免盖掉新请求的忙态
++        if (generationRef.current === gen) setPending(false);
++      }
++    })();
++  };
+ 
+   // 上下文重置（切标的 / 开新会话共用）：作废在飞回复并清 pending 状态与本地视图。
+-  // reset 只清 observer 状态（isPending 立即回落），mutation 本身仍会 settle，
+-  // 但其 onSuccess/onError 因世代不匹配不会写回——UI 与数据两条路都不串扰。
++  // reset 只清 observer 状态（pending 立即回落），在飞请求因世代不匹配不会写回——
++  // UI 与数据两条路都不串扰。
+   const resetConversation = () => {
+     generationRef.current += 1;
+-    ask.reset();
++    setPending(false);
+     setSessionId(null);
+     setTurns([]);
+   };
+@@ -274,15 +362,6 @@ export default function AgentConsole() {
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [symbol]);
+ 
+-  const send = (message: string) => {
+-    const text = message.trim();
+-    if (!text || ask.isPending) return;
+-    setTurns((cur) => [...cur, { who: "you", text }]);
+-    setInput("");
+-    // 捕获发起时的完整上下文（标的 + 会话 + 世代），供落地前校验
+-    ask.mutate({ message: text, symbol, sessionId, epoch: generationRef.current });
+-  };
+-
+   // copilot dispatch：全局快捷指令/自由输入先走规则意图路由（零 LLM），
+   // 命中流水线直接出卡片；chat_fallback 再转通用讨论（一次 LLM）。
+   const dispatch = useMutation({
+@@ -420,7 +499,7 @@ export default function AgentConsole() {
+ 
+   const routeAndAct = async (raw: string) => {
+     const text = raw.trim();
+-    if (!text || dispatch.isPending || ask.isPending) return;
++    if (!text || dispatch.isPending || pending) return;
+     let route: Awaited<ReturnType<typeof resolveRoute>>;
+     try {
+       route = await resolveRoute({ message: text, sessionId, symbol });
+@@ -486,7 +565,7 @@ export default function AgentConsole() {
+           )}
+           {turns.map((turn, i) => (
+             <ConsoleTurnView key={i} index={i} turn={turn} symbol={symbol} sessionId={sessionId}
+-              pending={ask.isPending} navigate={navigate}
++              navigate={navigate}
+               registerRef={(idx, el) => { if (el) turnRefs.current.set(idx, el); else turnRefs.current.delete(idx); }}
+               scrollToTurn={(idx) => turnRefs.current.get(idx)?.scrollIntoView({ behavior: "smooth", block: "start" })}
+               onDraft={setInput}
+@@ -495,14 +574,14 @@ export default function AgentConsole() {
+               onSetupCancel={(t) => setTurns((cur) => cur.map((x) => (x.id === t.id ? { ...x, setupPanel: null } : x)))}
+             />
+           ))}
+-          {ask.isPending && <div className="muted">agent 正在整理…</div>}
++          {pending && <div className="muted">agent 正在整理…</div>}
+         </div>
+         <div className="agent-chips">
+           {chips.map((c) => (
+             <button
+               key={c}
+               className="btn small chip"
+-              disabled={ask.isPending || dispatch.isPending}
++              disabled={pending || dispatch.isPending}
+               onClick={() => (symbol ? send(c) : c === "我要报单" ? setInput("我") : dispatchOrSend(c))}
+             >
+               {c}
+@@ -520,9 +599,9 @@ export default function AgentConsole() {
+               dispatchOrSend(input);
+             }}
+             placeholder={symbol ? "就这个标的讨论（多轮记忆）" : "问点什么"}
+-            disabled={ask.isPending}
++            disabled={pending}
+           />
+-          <button className="btn small primary" onClick={() => dispatchOrSend(input)} disabled={ask.isPending || !input.trim()}>
++          <button className="btn small primary" onClick={() => dispatchOrSend(input)} disabled={pending || !input.trim()}>
+             发送
+           </button>
+         </div>
+diff --git a/web/src/pages/AgentWorkspacePage.tsx b/web/src/pages/AgentWorkspacePage.tsx
+index a36fd48f..88d655b9 100644
+--- a/web/src/pages/AgentWorkspacePage.tsx
++++ b/web/src/pages/AgentWorkspacePage.tsx
+@@ -33,6 +33,8 @@ type Turn = {
+   preview?: TradePreview | null; quickCard?: QuickCard | null;
+   status?: "working" | "complete" | "failed" | "stopped";
+   stages?: { key: string; text: string }[];
++  /** 可靠性一期 2026-09-14：prepared 事件已到——系统资料就绪，AI 解释未完成 */
++  factsReady?: boolean;
+   fallback?: string; verifyNote?: string; error?: string; history?: boolean;
+   evidenceCard?: EvidenceCard | null; questionId?: number | null;
+   taskId?: string; detailRun?: string | null; planArtifact?: PlanArtifact | null;
+@@ -95,10 +97,13 @@ function TurnRow({ turn, onOpen, onChart, onAsk, expanded = false, sessionId, on
+     </header>
+     {turn.stages?.length ? <details className="ar-progress"><summary>{working ? turn.stages[turn.stages.length - 1]?.text : "查看处理过程"}</summary>
+       <ol>{turn.stages.map((s, i) => <li key={`${s.key}-${i}`}>{s.text}</li>)}</ol></details> : working && <p className="ar-working" role="status">正在读取资料，首次分析可能需要一些时间…</p>}
++    {working && turn.factsReady && <p className="ar-working" role="status">系统资料已就绪（见下方卡片），AI 解释仍在生成…</p>}
+     {turn.fallback && <p className="ar-notice">本次采用系统提供的结果，请结合下方说明查看。</p>}
+     <AnswerText text={fullText} markdown={markdown} expanded={expanded || working || selfExpanded} />
+-    {turn.quickCard && !working && <QuickCardView card={turn.quickCard} onChart={onChart} />}
+-    {turn.evidenceCard && !working && <EvidenceCardView card={turn.evidenceCard} forceDetailsOpen={expanded || selfExpanded} />}
++    {/* 可靠性一期：资料卡在 prepared 事件后即显示（working 期间也可看），
++        失败/超时后同样保留——先于 AI 解释到达，不随模型失败消失。 */}
++    {turn.quickCard && <QuickCardView card={turn.quickCard} onChart={onChart} />}
++    {turn.evidenceCard && <EvidenceCardView card={turn.evidenceCard} forceDetailsOpen={expanded || selfExpanded} />}
+     <CopilotCardDispatcher card={turn.card ?? null} preview={expanded ? null : turn.preview ?? null} />
+     {!working && (() => {
+       const bound = turn.resolved;
+@@ -129,6 +134,7 @@ function TurnRow({ turn, onOpen, onChart, onAsk, expanded = false, sessionId, on
+     {turn.detailRun && <Link className="btn small" to={`/backtest?run=${encodeURIComponent(turn.detailRun)}`}>查看该次回测详情（{turn.detailRun}）</Link>}
+     {turn.verifyNote && <p className="ar-notice">{turn.verifyNote}</p>}
+     {turn.error && <p className="ar-notice" role="alert">{turn.error}</p>}
++    {turn.status === "failed" && (turn.quickCard || turn.evidenceCard) && <p className="ar-notice">AI 解释未完成；上面的系统资料仍然可用。</p>}
+     {!working && <footer className="ar-answer-actions">
+       {onOpen && !turn.preview && <button onClick={onOpen}>展开到资料区</button>}
+       {turn.resolved && <button onClick={() => onChart(turn.resolved!)}>查看图表</button>}
+@@ -292,6 +298,13 @@ export default function AgentWorkspacePage() {
+       for await(const event of readAgentEvents(response.body)) {
+         if(ticket!==requestId.current)return;
+         if(event.event === "stage") {stages.push({key:String(event.data.key),text:String(event.data.text)});patch(id,{stages:[...stages]});}
++        else if(event.event === "prepared") {
++          // 可靠性一期：资料就绪即渲染（不等模型）。字段与 done 同源，
++          // done 到达时覆盖为终值，不产生第二份记录。
++          const p=event.data as {session_id?:string;resolved_symbol?:string|null;quick_card?:QuickCard;evidence_card?:EvidenceCard|null;next_steps?:NextStep[]|null};
++          if(p.session_id)setSessionId(p.session_id);
++          patch(id,{factsReady:true,resolved:p.resolved_symbol??null,quickCard:p.quick_card??null,evidenceCard:p.evidence_card??null,nextSteps:p.next_steps??null});
++        }
+         else if(event.event === "token") {received+=String(event.data.t??"");patch(id,{text:received});}
+         else if(event.event === "error")throw new Error(String(event.data.message??event.data.error??"分析服务暂时不可用"));
+         else if(event.event === "done") {

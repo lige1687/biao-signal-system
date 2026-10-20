@@ -1,0 +1,101 @@
+{
+ "result_identity": "post_hoc_historical_description",
+ "data_mode": "real",
+ "historical_reconstruction_only": true,
+ "historical_available_at": null,
+ "adjustment_anchor": "unknown（精确复权锚点未证）",
+ "object_ref": "candidate:lei.dual_ma.bull_state@draft-1",
+ "symbol": "510300",
+ "target_basis": "vendor_adjusted_price_change",
+ "target_main": "P_vendor(t+22)/P_vendor(t+1) - 1",
+ "target_aux": "min(0, min(P_vendor(s)/P_vendor(t+1) - 1)), s in t+1..t+22",
+ "target_note": "21个变动区间，不是22段；aux是相对起点最差收盘变化，不是最高点到最低点回撤",
+ "vendor_wealth_note": "供应商调整价与含分红财富等价性未核；不加现金分红、不重复复权，不声称已获得真实成交利润",
+ "knowledge_time_note": "输入快照2026-09-08取回；成熟截止2026-02-03T15:00+08是标签窗口截断，不是2月已拥有9月快照的证明",
+ "reconciliation": {
+  "observations_in_eval_window": 1516,
+  "state_true": 590,
+  "state_false": 926,
+  "state_unknown": 0,
+  "states_sum_equals_window": true,
+  "comparison_n": 1516,
+  "comparison_true": 590,
+  "comparison_false": 926,
+  "true_plus_false_equals_comparison": true,
+  "flag_counts_overlapping": {
+   "state_known": 1516,
+   "main_legal": 1516,
+   "mature": 1516,
+   "note": "可重叠标记，只作标记，不得相加冒充剔除人数"
+  },
+  "primary_exclusion_counts": {},
+  "primary_exclusion_note": "互斥主要排除原因；与in_comparison相加等于窗内观察数",
+  "exclusion_plus_comparison_equals_window": true,
+  "outside_window_rows": 42,
+  "warmup_sessions_before_window": 20,
+  "warmup_note": "准备期20行在评价窗前单列，不伪称评价窗内未知20行",
+  "sparse_true_group_sum": true,
+  "sparse_false_group_sum": true
+ },
+ "no_claims": [
+  "strategy_return",
+  "annualization",
+  "significance",
+  "IC",
+  "alpha",
+  "production_advice",
+  "factor_effective",
+  "total_return_wealth",
+  "point_in_time_verified"
+ ],
+ "input_audit": {
+  "package": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/510300-offline-reuse-2026-09-15/run-02",
+  "manifest_sha256": "8d39a83eec833c13f14ee78ad36899b6ae49f32f64b024c33ee75474bc3a6ae7",
+  "prices_csv_sha256": "bc8582af3ac7b4c2f00a5b51d81754606179347cc3811c911d7579242cb56703",
+  "calendar_sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+  "fetch_manifest_sha256": "5ba8a51d93dcca331204b4df71aa47f5b15a76dedee8ee3ab951689e0979f0c4",
+  "originals": {
+   "sh510300-2013.json": "7465f640a561d6cbf9279546a0fd714f73a9bdcde7b7d5b70c4a319a9cb6b9f9",
+   "sh510300-2015.json": "a4d14c593c8a35d31cab5a76d1eb54311750d8661f26c3b240921713dcb6c9a3",
+   "sh510300-2017.json": "59984078ea8a3da16e5925d4e950f71092883c5fc84dc5b52a2e831248a23e1b",
+   "sh510300-2019.json": "0383041afeab893aacc0f0323f2ac355a51060c69fb4152fd418433e9b5a567b",
+   "sh510300-2021.json": "52b6f7428b28202f50776e81eb2b7c6fd6a11454cd6fa4628de1bd80ba27e5c6",
+   "sh510300-2023.json": "f046a5c5682e1a2923eff0aea2b9bc174ab9bfd0ddf8d219e04df5cd1b179409",
+   "sh510300-2025.json": "e5f6ef5d81d1b370aeb6ccc86b61dca2558cd8e2ec7af2e842a75352c8e4eebc"
+  },
+  "retrieved_at": {
+   "sh510300-2013.json": "2026-09-08T03:34:17.805931+00:00",
+   "sh510300-2015.json": "2026-09-08T03:34:17.806071+00:00",
+   "sh510300-2017.json": "2026-09-08T03:34:17.806207+00:00",
+   "sh510300-2019.json": "2026-09-08T03:34:17.806311+00:00",
+   "sh510300-2021.json": "2026-09-08T03:34:18.075282+00:00",
+   "sh510300-2023.json": "2026-09-08T03:34:18.083760+00:00",
+   "sh510300-2025.json": "2026-09-08T03:34:18.203105+00:00"
+  },
+  "retrieved_at_note": "逐原件继承的既有声明；精确请求起止仍未知，不伪造成新的请求时间",
+  "rows": 1558,
+  "sessions": 1558,
+  "first_session": "2019-09-02",
+  "last_session": "2026-02-03",
+  "completeness_gate": "包内日历逐日推导的交易日集合逐日比对；行数只是交叉证据",
+  "manifest_complete_field": true,
+  "declarations": {
+   "price_basis": "vendor_qfq",
+   "extracted_field": "qfqday",
+   "currency": "CNY",
+   "retrieved_at": "继承原件清单（见 audit.inputs 逐条）",
+   "assembled_at": "2026-09-15T23:05:15.580727+08:00",
+   "historical_available_at": null,
+   "adjustment_anchor": "unknown（精确复权锚点未证）",
+   "data_mode": "real",
+   "historical_reconstruction_only": true,
+   "not_claims": [
+    "total_return_wealth",
+    "point_in_time_verified",
+    "factor_effective",
+    "tradable_profit"
+   ]
+  }
+ },
+ "analysis_executed_at": "2026-09-16T10:44:24.993967+08:00"
+}

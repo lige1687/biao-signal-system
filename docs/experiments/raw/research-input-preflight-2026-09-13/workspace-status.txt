@@ -1,0 +1,291 @@
+ M .env.example
+ M AGENTS.md
+ M docs/README.md
+ M docs/experiments/INDEX.md
+ M docs/experiments/registry.json
+ M docs/research-playbook.md
+ M scripts/ai_judgment_experiment.py
+ M scripts/ambush_dca_glm_exit.py
+ M src/lei_signal/api/app.py
+ M src/lei_signal/api/routes/agent.py
+ M src/lei_signal/api/routes/copilot.py
+ M src/lei_signal/api/routes/plans.py
+ M src/lei_signal/api/schemas.py
+ M src/lei_signal/backtest/service.py
+ M src/lei_signal/plans/conformance.py
+ M src/lei_signal/plans/llm.py
+ M src/lei_signal/plans/sessions.py
+ M src/lei_signal/plans/store.py
+ M src/lei_signal/storage/sqlite_store.py
+ M tests/integration/test_agent_chat_e2e.py
+ M tests/unit/test_copilot_ops.py
+ M tests/unit/test_plans_conformance_routes.py
+ M web/index.html
+ M web/package.json
+ M web/run-structure-regression.mjs
+ M web/src/App.tsx
+ M web/src/api/client.ts
+ M web/src/components/AgentConsole.tsx
+ M web/src/components/AgentMarkdown.tsx
+ M web/src/components/AssessmentPanel.tsx
+ M web/src/components/BuyPointDrawer.tsx
+ M web/src/components/ChartControls.tsx
+ M web/src/components/ColorBadge.tsx
+ M web/src/components/CreatePlanDialog.tsx
+ M web/src/components/ExplanationPanel.tsx
+ M web/src/components/KlineChart.tsx
+ M web/src/components/MarketBreadthPanel.tsx
+ M web/src/components/SentimentSectorBlock.tsx
+ M web/src/components/TimingResearchReport.tsx
+ M web/src/components/TodayOpportunityPanel.tsx
+ M web/src/components/TodayOverviewPanel.tsx
+ M web/src/components/TodaySignalBanner.tsx
+ M web/src/components/TopNav.tsx
+ M web/src/components/TrendChecklist.tsx
+ M web/src/components/WatchSubscriptionsPanel.tsx
+ M web/src/components/WatchlistSidebar.tsx
+ M web/src/components/copilot/CopilotCards.tsx
+ M web/src/components/klineTimeframe.ts
+ M web/src/data/reportsIndex.ts
+ M web/src/main.tsx
+ M web/src/pages/AgentWorkspacePage.tsx
+ M web/src/pages/DailyBriefPage.tsx
+ M web/src/pages/DetailPage.tsx
+ M web/src/pages/FactorPanelPage.tsx
+ M web/src/pages/FundamentalsPage.tsx
+ M web/src/pages/ReportsLibraryPage.tsx
+ M web/src/pages/SectorsPage.tsx
+ M web/src/pages/SupervisorPage.tsx
+ M web/src/pages/WorkspacePage.tsx
+ M web/src/styles.css
+ M web/src/types.ts
+?? .workbuddy/
+?? configs/dca_evidence.json
+?? configs/semantic_states.v1.json
+?? docs/artifacts/
+?? docs/experiments/a-road-exit-account-comparison-2026-09-08.md
+?? docs/experiments/a-top-lifecycle-consumer-audit-2026-09-08.md
+?? docs/experiments/acd-information-qualification-2026-09-08.md
+?? docs/experiments/acd-limited-account-comparison-2026-09-08.md
+?? docs/experiments/acd-repair-validation-2026-09-08.md
+?? docs/experiments/agent-03b-runtime-integration-2026-09-09.md
+?? docs/experiments/ai-defense-evidence-audit-2026-09-08.md
+?? docs/experiments/ai-explanation-exercise-pack-2026-09-08.md
+?? docs/experiments/ai-future-validation-protocol-2026-09-08.md
+?? docs/experiments/ambush-complete-menu-review-2026-09-08.md
+?? docs/experiments/ambush-pending-boundaries-2026-09-08.md
+?? docs/experiments/atr-buffer-opportunity-study-2026-09-08.md
+?? docs/experiments/breadth-freeze-start-2026-09-09.md
+?? docs/experiments/breadth-price50-decision-2026-09-09.md
+?? docs/experiments/breadth-source-provenance-audit-2026-09-09.md
+?? docs/experiments/broad-breadth-cash-reconciliation-2026-09-08.md
+?? docs/experiments/broad-etf-combination-design-2026-09-08.md
+?? docs/experiments/broad-etf-first12-account-comparison-2026-09-08.md
+?? docs/experiments/broad-etf-increment-decision-comparison-2026-09-08.md
+?? docs/experiments/broad-etf-research-plan-and-baseline-2026-09-08.md
+?? docs/experiments/broad-etf-risk-sizing-increment-2026-09-08.md
+?? docs/experiments/broad-etf-technical-capital-comparison-2026-09-08.md
+?? docs/experiments/dca-actual-fund-cash-comparison-2026-09-08.md
+?? docs/experiments/dca-adaptive-exits-2026-09-08.md
+?? docs/experiments/dca-combos-exit-2026-09-07.md
+?? docs/experiments/dca-deep20-episodes-2026-09-08.md
+?? docs/experiments/dca-entry-timing-table-2026-09-07.md
+?? docs/experiments/dca-final-form-assembly-2026-09-08.md
+?? docs/experiments/dca-instrument-measurement-review-2026-09-08.md
+?? docs/experiments/dca-joint-policy-2026-09-08.md
+?? docs/experiments/dca-kc-rebal-core-2026-09-07.md
+?? docs/experiments/dca-long-cash-study-closeout-2026-09-08.md
+?? docs/experiments/dca-long-data-cash-boundary-2026-09-08.md
+?? docs/experiments/dca-split-data-audit-2026-09-08.md
+?? docs/experiments/definition-normalization-ARCHIVE-2026-09-09.md
+?? docs/experiments/entry-discipline-and-b-zone-diagnosis-2026-09-08.md
+?? docs/experiments/etf-breadth-source-and-confirmation-backtest-2026-09-09.md
+?? docs/experiments/etf-dividend-reinvestment-reference-2026-09-09.md
+?? docs/experiments/etf-research-direction-map-2026-09-09.md
+?? docs/experiments/etf-semantic-combinations-2026-09-09.md
+?? docs/experiments/exit-baseline-full-audit-2026-09-08.md
+?? docs/experiments/factor-library-external-backlog-2026-09-09.md
+?? docs/experiments/factor-library-v0-delivery-2026-09-09.md
+?? docs/experiments/factor-library-v0-task-2026-09-09.md
+?? docs/experiments/governance-pack-merge-2026-09-10.md
+?? docs/experiments/icepoint-legacy-replay-2026-09-08.md
+?? docs/experiments/invested-capital-performance-correction-2026-09-08.md
+?? docs/experiments/lei-academic-literature-ARCHIVE-2026-09-08.md
+?? docs/experiments/literature-learning-library-handoff-2026-09-08.md
+?? docs/experiments/mixed-four-way-evaluation-2026-09-09.md
+?? docs/experiments/mixed-pool-concentration-audit-2026-09-09.md
+?? docs/experiments/mixed-pool-defense-comparison-2026-09-09.md
+?? docs/experiments/paper-methods-applied-checks-2026-09-08.md
+?? docs/experiments/qlib-alpha158-controller-review-2026-09-13.md
+?? docs/experiments/qlib-alpha158-definition-review-2026-09-12.md
+?? docs/experiments/r1-road-exit-contribution-2026-09-09.md
+?? docs/experiments/raw/agent-03b-runtime-integration-2026-09-09/
+?? docs/experiments/raw/dca-complete-trades-2026-09-07/
+?? docs/experiments/raw/dca-deep20-episodes-2026-09-08/
+?? docs/experiments/raw/dca-entry-timing-table-2026-09-07/
+?? docs/experiments/raw/dca-final-form-assembly-2026-09-08/
+?? docs/experiments/raw/dca-joint-policy-2026-09-08/
+?? docs/experiments/raw/definition-normalization-2026-09-09/
+?? docs/experiments/raw/qlib-alpha158-definition-review-2026-09-12/
+?? docs/experiments/raw/research-05-08-next-2026-09-08/
+?? docs/experiments/raw/research-breadth-freeze-2026-09-09/
+?? docs/experiments/raw/research-breadth-price50-decision-2026-09-09/
+?? docs/experiments/raw/research-breadth-provenance-2026-09-09/
+?? docs/experiments/raw/research-broad-etf-cash-2026-09-08/
+?? docs/experiments/raw/research-broad-etf-combination-design-2026-09-08/
+?? docs/experiments/raw/research-broad-etf-multimethod-2026-09-08/
+?? docs/experiments/raw/research-broad-etf-plan-2026-09-08/
+?? docs/experiments/raw/research-broad-etf-risk-sizing-2026-09-08/
+?? docs/experiments/raw/research-broad-etf-technical-2026-09-08/
+?? docs/experiments/raw/research-calendar-completion-2026-09-10/
+?? docs/experiments/raw/research-controller-fixes-2026-09-11-02/
+?? docs/experiments/raw/research-controller-fixes-2026-09-11/
+?? docs/experiments/raw/research-controller-fixes-2026-09-13-02/
+?? docs/experiments/raw/research-controller-fixes-2026-09-13/
+?? docs/experiments/raw/research-controller-handoff-2026-09-09/
+?? docs/experiments/raw/research-controller-review-response-2026-09-09/
+?? docs/experiments/raw/research-data-foundation-controller-review-2026-09-13/
+?? docs/experiments/raw/research-data-provenance-2026-09-10/
+?? docs/experiments/raw/research-data-provenance-round2-2026-09-10/
+?? docs/experiments/raw/research-dividend-reinvestment-2026-09-09/
+?? docs/experiments/raw/research-eighth-2026-09-08/
+?? docs/experiments/raw/research-eleventh-2026-09-08/
+?? docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/
+?? docs/experiments/raw/research-etf-condition-preparation-2026-09-09/
+?? docs/experiments/raw/research-etf-direction-map-2026-09-09/
+?? docs/experiments/raw/research-etf-semantic-combinations-2026-09-09/
+?? docs/experiments/raw/research-factor-library-v0-2026-09-09/
+?? docs/experiments/raw/research-fifth-2026-09-08/
+?? docs/experiments/raw/research-first-round-2026-09-08/
+?? docs/experiments/raw/research-fourteenth-2026-09-08/
+?? docs/experiments/raw/research-fourth-2026-09-08/
+?? docs/experiments/raw/research-handoff-controller-review-2026-09-09/
+?? docs/experiments/raw/research-identity-wiring-2026-09-10/
+?? docs/experiments/raw/research-input-preflight-2026-09-13/
+?? docs/experiments/raw/research-invested-capital-metrics-2026-09-08/
+?? docs/experiments/raw/research-lead-task-review-2026-09-08/
+?? docs/experiments/raw/research-mixed-defense-2026-09-09/
+?? docs/experiments/raw/research-mixed-evaluation-2026-09-09/
+?? docs/experiments/raw/research-mixed-pool-audit-2026-09-09/
+?? docs/experiments/raw/research-ninth-2026-09-08/
+?? docs/experiments/raw/research-r1-exit-contribution-2026-09-09/
+?? docs/experiments/raw/research-rotation-audit-2026-09-09/
+?? docs/experiments/raw/research-rotation-clean-2026-09-09/
+?? docs/experiments/raw/research-sector-etf-technical-2026-09-09/
+?? docs/experiments/raw/research-seventh-2026-09-08/
+?? docs/experiments/raw/research-sixth-2026-09-08/
+?? docs/experiments/raw/research-tenth-2026-09-08/
+?? docs/experiments/raw/research-third-2026-09-08/
+?? docs/experiments/raw/research-thirteenth-2026-09-08/
+?? docs/experiments/raw/research-twelfth-2026-09-08/
+?? docs/experiments/raw/research-unified-2026-09-08/
+?? docs/experiments/references/
+?? docs/experiments/research-05-08-delivery-handoff-2026-09-08.md
+?? docs/experiments/research-05-08-progress-2026-09-08.md
+?? docs/experiments/research-calendar-completion-2026-09-10.md
+?? docs/experiments/research-controller-fixes-2026-09-11-02.md
+?? docs/experiments/research-controller-fixes-2026-09-11.md
+?? docs/experiments/research-controller-fixes-2026-09-13-02.md
+?? docs/experiments/research-controller-fixes-2026-09-13.md
+?? docs/experiments/research-controller-handoff-all-results-2026-09-09.md
+?? docs/experiments/research-controller-review-response-2026-09-09.md
+?? docs/experiments/research-data-foundation-audit-and-handoff-2026-09-10.md
+?? docs/experiments/research-data-foundation-controller-review-2026-09-13.md
+?? docs/experiments/research-data-foundation-summary-2026-09-10.md
+?? docs/experiments/research-data-provenance-2026-09-10.md
+?? docs/experiments/research-data-provenance-round2-2026-09-10.md
+?? docs/experiments/research-first-experiment-protocol-2026-09-08.md
+?? docs/experiments/research-first-round-ARCHIVE-2026-09-08.md
+?? docs/experiments/research-fourth-progress-2026-09-08.md
+?? docs/experiments/research-handoff-controller-review-2026-09-09.md
+?? docs/experiments/research-identity-wiring-2026-09-10.md
+?? docs/experiments/research-lead-task-review-2026-09-08.md
+?? docs/experiments/research-local-phase-closeout-2026-09-08.md
+?? docs/experiments/research-promising-directions-review-2026-09-08.md
+?? docs/experiments/research-sixth-handoff-2026-09-08.md
+?? docs/experiments/research-third-progress-2026-09-08.md
+?? docs/experiments/research-unified-progress-2026-09-08.md
+?? docs/experiments/rotation-3438-reproducibility-audit-2026-09-09.md
+?? docs/experiments/rotation-reconstructed-four-way-2026-09-09.md
+?? docs/experiments/sentiment-combination-feasibility-review-2026-09-08.md
+?? docs/experiments/sentiment-four-input-audit-2026-09-08.md
+?? docs/experiments/technical-account-limited-comparison-2026-09-08.md
+?? docs/experiments/two-strategy-scope-review-2026-09-09.md
+?? docs/literature-learning/
+?? docs/okr/
+?? docs/research/
+?? docs/superpowers/plans/2026-09-08-broad-index-etf-research.md
+?? docs/superpowers/plans/2026-09-08-system-upgrades.md
+?? docs/superpowers/plans/2026-09-09-etf-breadth-source-confirmation-backtest.md
+?? docs/superpowers/plans/2026-09-09-etf-semantic-combinations.md
+?? docs/superpowers/plans/2026-09-09-factor-library-v0.md
+?? docs/superpowers/plans/2026-09-13-research-input-preflight.md
+?? docs/superpowers/specs/2026-09-09-etf-breadth-source-confirmation-design.md
+?? docs/superpowers/specs/2026-09-09-etf-entry-reason-and-prior-evidence-design.md
+?? lab.db-shm
+?? lab.db-wal
+?? preparation-tests.log
+?? scripts/run_factor_library_v0.py
+?? scripts/run_research_data_snapshot.py
+?? scripts/verify_research_definitions.py
+?? src/lei_signal/api/learning_library.py
+?? src/lei_signal/api/routes/dca.py
+?? src/lei_signal/api/routes/learning.py
+?? src/lei_signal/api/routes/upgrades.py
+?? src/lei_signal/api/upgrade_models.py
+?? src/lei_signal/api/upgrades_store.py
+?? src/lei_signal/copilot/backtest_requests.py
+?? src/lei_signal/copilot/chat_identity.py
+?? src/lei_signal/copilot/resolve.py
+?? src/lei_signal/copilot/semantic_states.py
+?? src/lei_signal/data_provenance.py
+?? src/lei_signal/dca/
+?? src/lei_signal/research/data_quality.py
+?? src/lei_signal/research/data_snapshot.py
+?? src/lei_signal/research/definitions.py
+?? src/lei_signal/research/factor_account_adapter.py
+?? src/lei_signal/research/factor_diagnostics.py
+?? src/lei_signal/research/factor_runtime.py
+?? src/lei_signal/research/symbol_identity.py
+?? src/lei_signal/research/trading_calendar.py
+?? tests/integration/test_controller_fixes_cross_module.py
+?? tests/integration/test_factor_library_v0.py
+?? tests/integration/test_research_data_snapshot_cli.py
+?? tests/integration/test_research_offline_loop_round2.py
+?? tests/unit/test_controller_fixes.py
+?? tests/unit/test_controller_fixes_round2.py
+?? tests/unit/test_controller_fixes_round3.py
+?? tests/unit/test_controller_fixes_round4.py
+?? tests/unit/test_discussion_backtest_03b.py
+?? tests/unit/test_discussion_contract_r2.py
+?? tests/unit/test_discussion_identifier_spans.py
+?? tests/unit/test_factor_account_adapter.py
+?? tests/unit/test_factor_diagnostics.py
+?? tests/unit/test_factor_runtime.py
+?? tests/unit/test_learning_library.py
+?? tests/unit/test_plan_confirm_guard.py
+?? tests/unit/test_research_calendar_and_identity.py
+?? tests/unit/test_research_data_quality.py
+?? tests/unit/test_research_data_snapshot.py
+?? tests/unit/test_research_definitions.py
+?? tests/unit/test_upgrades.py
+?? web/AGENT-WORKSPACE.md
+?? web/DESIGN.md
+?? web/run-agent-price-regression.mjs
+?? web/run-agent-workspace-regression.mjs
+?? web/run-factor-panel-regression.mjs
+?? web/src/api/upgrades.ts
+?? web/src/components/EvidenceCardView.tsx
+?? web/src/components/PlanDraftCard.tsx
+?? web/src/components/agent/
+?? web/src/pages/LearningLibraryPage.tsx
+?? web/src/pages/MindsetPage.tsx
+?? web/src/pages/UpgradesPage.tsx
+?? web/src/pages/agent-workspace.css
+?? web/src/pages/agentWorkspaceLogic.ts
+?? web/src/pages/factorPanelLogic.ts
+?? web/src/pages/upgrades.css
+?? web/src/utils/backtestTasks.ts
+?? web/src/utils/resolveRoute.ts
+?? web/src/utils/storageMigration.ts
+?? web/src/workspace-design.css

@@ -1,0 +1,65 @@
+{
+  "definition_reference": "candidate:lei.dual_ma.bull_state@draft-1",
+  "entity_axis": "instrument",
+  "value_type": "boolean",
+  "evaluation_cutoff": "2030-01-01 15:00:00+08:00",
+  "protocol": {
+    "protocol_id": "factor-lab-demo-2-state",
+    "version": "1.1.0",
+    "kind": "state_diagnostic",
+    "data_mode": "synthetic",
+    "sha256": "57d2f33afeae298d52645c7dd871cdc11c29dee078538d5592fb18a4bcc8e149"
+  },
+  "diagnostic": "state_outcomes",
+  "entities": [
+    {
+      "entity_id": "dm_a",
+      "n_usable": 23,
+      "groups": {
+        "state_true": {
+          "n": 8,
+          "mean_target": 0.18842040061675067,
+          "median_target": 0.18834459459459463
+        },
+        "state_false": {
+          "n": 15,
+          "mean_target": 0.2004331471051368,
+          "median_target": 0.20388349514563098
+        }
+      },
+      "mean_difference_true_minus_false": -0.012012746488386128,
+      "excluded_counts": {
+        "target_missing": 22,
+        "value_missing:warmup_not_ready": 20
+      },
+      "not_ready_single_listed": true
+    },
+    {
+      "entity_id": "dm_b",
+      "n_usable": 23,
+      "groups": {
+        "state_true": {
+          "n": 0,
+          "mean_target": null,
+          "median_target": null
+        },
+        "state_false": {
+          "n": 23,
+          "mean_target": -0.21527560329956133,
+          "median_target": -0.2142857142857143
+        }
+      },
+      "mean_difference_true_minus_false": null,
+      "excluded_counts": {
+        "target_missing": 22,
+        "value_missing:warmup_not_ready": 20
+      },
+      "not_ready_single_listed": true
+    }
+  ],
+  "summary_caveats": {
+    "meaning": "状态为真/假时后续结果的样本数与均值差额；不是交易收益",
+    "same_state_episode_not_independent": "重叠标签窗与共同状态使各期样本互相不独立；相关系数只是描述，不构成'结果不是巧合'的显著性证据",
+    "correlation_robust_confidence_interval": "not_implemented"
+  }
+}

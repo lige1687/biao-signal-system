@@ -1,0 +1,17 @@
+双跑哈希核对（任务L · 板块级RS事件研究）
+================================================
+运行目录: docs/experiments/raw/sector_rs/
+脚本:     run_sector_rs_eventstudy.py（预注册协议见脚本 docstring，跑前写死）
+解释器:   /Users/liyongbiao/Desktop/biao-signal-system/.venv/bin/python
+          （pandas 2.3.3 / numpy 2.x；系统 python3 无 pandas，用恢复仓旁姐妹仓 venv，只读依赖）
+工作目录: /Users/liyongbiao/Desktop/biao-signal-system-recovery（分支 recovery/lei-round2）
+
+PYTHONHASHSEED=0  sha256(records_sector_rs.json) = 287665f14cb1a7a431b977e63de5906d9edd3ccb1c7bea7cde8abb8689360ba0
+PYTHONHASHSEED=0  sha256(analysis_sector_rs.json) = 326a55fa86f4ae784ecee700bc739c065161a7dc6bbdd25d772e9d92299ac4bf
+
+PYTHONHASHSEED=42 sha256(records_sector_rs.json) = 287665f14cb1a7a431b977e63de5906d9edd3ccb1c7bea7cde8abb8689360ba0
+PYTHONHASHSEED=42 sha256(analysis_sector_rs.json) = 326a55fa86f4ae784ecee700bc739c065161a7dc6bbdd25d772e9d92299ac4bf
+
+结论：两 seed 输出字节一致（sha256 相同），复现通过。
+analysis JSON 刻意不含时间戳（哈希即复现凭证）。
+panel_weekly_sector_rs.csv 为 E1 周面板（288 周 × 16 板块 = 4608 行），由同脚本落盘。

@@ -1,0 +1,359 @@
+{
+  "results": [
+    {
+      "check": "G0 baseline: preview db ready",
+      "verdict": "PASS",
+      "detail": "plans=23 fund_trades=0"
+    },
+    {
+      "check": "G1.1 ruleset-version endpoint is authoritative",
+      "verdict": "PASS",
+      "detail": "v=2.1.0"
+    },
+    {
+      "check": "G1.2 load-failure blocks submit (no empty version)",
+      "verdict": "PASS",
+      "detail": "disabled=True hint=True"
+    },
+    {
+      "check": "G2.1 P3 legal prefill (C/two_b_reversal)",
+      "verdict": "PASS",
+      "detail": "计划草稿 · TH881272.SECTOR（保存后仍需确认） · 原问题 #51 · 服务端产物 | 模块/方向：C · long | 入场理由：two_b_reversal | 失效价：未"
+    },
+    {
+      "check": "G2.2 save returns real plan_id",
+      "verdict": "PASS",
+      "detail": "plan_TH881272_SECTOR_20260913150513_fbbb4f36"
+    },
+    {
+      "check": "G3.1 incomplete draft confirm rejected, still editable",
+      "verdict": "PASS",
+      "detail": "state=draft"
+    },
+    {
+      "check": "G2.3 complete→confirm 200, state=armed",
+      "verdict": "PASS",
+      "detail": "state=armed "
+    },
+    {
+      "check": "G4.1 history restore shows armed status without re-save",
+      "verdict": "PASS",
+      "detail": "计划草稿 · TH881272.SECTOR（保存后仍需确认） · 原问题 #51 · 服务端产物 | 模块/方向：C · long | 入场理由：two_b_reversal | 失效价：未给出（待补草稿） | 有效期至：- | 入场条件"
+    },
+    {
+      "check": "G4.2 restore adds no plans/trades",
+      "verdict": "PASS",
+      "detail": "plans=24 trades=0"
+    },
+    {
+      "check": "G4.3 two questions → two distinct plans, own bindings",
+      "verdict": "PASS",
+      "detail": "A=plan_TH881272_SECTOR_202(q51) B=plan_TH881272_SECTOR_202(q53)"
+    },
+    {
+      "check": "G5.1 console entry: save + review entry reachable",
+      "verdict": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "G5.2 late save response does not leak into new conversation",
+      "verdict": "PASS",
+      "detail": "welcome=True stray=False"
+    },
+    {
+      "check": "G3.2 early signal gives no legal prefill → stays pending",
+      "verdict": "PASS",
+      "detail": "计划草稿 · 516220.SS（保存后仍需确认） · 原问题 #59 · 服务端产物 | 模块/方向：null · null | 入场理由：- | 失效价：未给出（待补草稿） | 有效期至：- | 入场条件：- | 认错退"
+    }
+  ],
+  "plan_requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:5174/api/plans"
+    },
+    {
+      "status": 201,
+      "url": "http://127.0.0.1:5174/api/plans"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/confirm"
+    },
+    {
+      "status": 422,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/confirm"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/conformance"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/chat"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/chat"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/conformance"
+    },
+    {
+      "method": "PUT",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/draft"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/chat"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/chat"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/draft"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/conformance"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/conformance"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/confirm"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36/confirm"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150513_fbbb4f36"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:5174/api/plans"
+    },
+    {
+      "status": 201,
+      "url": "http://127.0.0.1:5174/api/plans"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150550_41e99158"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_TH881272_SECTOR_20260913150550_41e99158"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:5174/api/plans"
+    },
+    {
+      "status": 201,
+      "url": "http://127.0.0.1:5174/api/plans"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/plan_th881272_20260913150615_95576338"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/plan_th881272_20260913150615_95576338"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:5174/api/plans"
+    },
+    {
+      "status": 201,
+      "url": "http://127.0.0.1:5174/api/plans"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/summary"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    },
+    {
+      "status": 200,
+      "url": "http://127.0.0.1:5174/api/plans/ruleset-version"
+    }
+  ]
+}

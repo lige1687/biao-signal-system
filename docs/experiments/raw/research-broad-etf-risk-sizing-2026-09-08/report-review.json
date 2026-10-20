@@ -1,0 +1,60 @@
+{
+  "date": "2026-09-08",
+  "scope": "read-only final report review; accounts were not rerun",
+  "report": "docs/experiments/broad-etf-risk-sizing-increment-2026-09-08.md",
+  "verdict": "pass",
+  "findings": [],
+  "checks": {
+    "eight_account_table_matches": true,
+    "ending_wealth_differences_match": true,
+    "drawdown_differences_match": true,
+    "fees_match": true,
+    "same_buy_ids_and_dates_all_pairs": true,
+    "same_sale_ids_dates_reasons_all_pairs": true,
+    "risk_limited_buys": 330,
+    "cash_limited_buys": 0,
+    "equal_limit_buys": 0,
+    "source_candidates_per_fee_pair": 313,
+    "candidate_orders_two_fees": 626,
+    "main_fee_losses_over_one_percent_by_symbol": {
+      "sh510300": 2,
+      "sz159915": 2
+    },
+    "double_fee_losses_over_one_percent_by_symbol": {
+      "sh510300": 3,
+      "sz159915": 3
+    },
+    "main_fee_worst_completed_loss_fraction": {
+      "sh510300": -0.027786252651409653,
+      "sz159915": -0.011104778248767865
+    },
+    "annual_values_and_signs_match": true,
+    "annual_rows_all_eight_accounts": 96,
+    "realized_and_unrealized_pnl_match": true,
+    "local_markdown_links_checked": 9,
+    "local_markdown_links_missing": 0,
+    "scope_and_attribution_not_overstated": true,
+    "independent_review_status": "passed",
+    "independent_maximum_numeric_difference_yuan": "8E-11"
+  },
+  "example_check": {
+    "symbol": "sh510300",
+    "entry_date": "2019-12-12",
+    "previous_equity": 106076.96680000002,
+    "shares": 11400,
+    "actual_shares_initial_risk": 1056.0561172901914,
+    "configured_one_percent_budget": 1060.7696680000004,
+    "stop_signal_date": "2020-02-03",
+    "exit_date": "2020-02-04",
+    "exit_price": 3.65,
+    "net_pnl": -2947.481399999994
+  },
+  "post_review_step": "Generate final-manifest.json after this review stops writing; this is an expected final sealing step, not a report issue.",
+  "reviewed_sha256": {
+    "report": "67b7d42ff6ee96162b7045d1c79b28f24ded41671a6cd39e5fabdbe86456d7ba",
+    "decision-analysis/results.json": "8fc205e4fd72d92e3dde9c1759bc53e52dd54497fa58a58909823f760b2862a3",
+    "decision-analysis/annual.json": "4bda80c9b8d49460a12d9db7a458414b7bdc51de01128b0d7aa42c14143d1416",
+    "decision-analysis/position-risk.json": "7d860be352f27ce4588749eef42c8725259010dbc09f34ca7d6096a6b0f24283",
+    "independent-review/results.json": "fedd867ad21f9f2d6048687a1bdaedf117ae216a4686df4aa02bc447673942e1"
+  }
+}

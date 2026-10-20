@@ -1,0 +1,243 @@
+[
+  {
+    "user_question": "改善是否集中于特定年份？",
+    "conclusion": "A同资金净改善约98%来自三个年份；逐笔与日历汇总独立重算一致，但抽样边界权重不均，不能作未来概率。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "calendar-attribution",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/calendar-protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/calendar-results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/calendar-monthly.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/calendar-yearly.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/month-block-protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/month-block-results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/calendar-review/README.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/calendar-review/results.json"
+      ],
+      "source_hash": [
+        "22620eec361e9956237c34ac90b6bbbdb6e0713f59010aaf95b562d2fd674591",
+        "7b6f281f06c9d1bed0fd7114819bb41a4fd97557149144c1ca972003bfa27cc8",
+        "d2c0bb577ff24b0ce93954d8539a84fc351100fec9579c97c4956244ff03e4f7",
+        "7bfa5b2fac932f08f01351077c3499e6f543e465aaf1446bd96e959578a4cd65",
+        "3610e732b77e7e0e76f56eaa89098c75bbc745deada2676b1df9e11d42f1ab0d",
+        "ba47a2efc459e6dc24903a995df24c2806ba915db9dddc6b2f41fd81172fc367",
+        "d489566891b98bf2cadcb637c382febc43502712e5e655c5fd9861d8c4564127",
+        "afb627a9cc70e612093c9544af6e9abf7216fe1307f69032222f48745cdb9e70"
+      ],
+      "source_version": "research-seventh/2026-09-08",
+      "status": "mixed",
+      "window": "冻结历史与合成例子，非当前信号",
+      "statistic_kind": "fixed_opportunity_calendar_diagnostic",
+      "strategy_scope": [],
+      "limitations": "旧机会选择与历史产品覆盖变化未消除；月份抽样低估原窗首尾权重；独立预算贡献不是有限共享资金账户",
+      "compatibility": "unknown",
+      "evidence_id": "calendar-attribution",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/calendar-protocol.md",
+      "strategies": [],
+      "note": "旧机会选择与历史产品覆盖变化未消除；月份抽样低估原窗首尾权重；独立预算贡献不是有限共享资金账户"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_research_inputs",
+        "instrument_id": "",
+        "market": "mixed",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "依各卡范围分别使用旧行情、合成例子或四只基金名义行情",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_research_inputs",
+        "completeness": "unknown",
+        "lag_trading_days": null
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略规格§2.3/§3/§9/§10；仅研究验证，完整B资格未成立",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-seventh-2026-09-08",
+      "independently_reviewed": true,
+      "review_scope": "日历由另一实现全量重算；规则与价格卡仅各自研究检查及负责人阅读，不冒称另一实现全量复算",
+      "independent_market_episodes": null,
+      "production_adopted": false,
+      "limitations": [
+        "旧机会选择与历史产品覆盖变化未消除",
+        "月份抽样低估原窗首尾权重",
+        "独立预算贡献不是有限共享资金账户"
+      ]
+    }
+  },
+  {
+    "user_question": "当前回测能否代表完整B？",
+    "conclusion": "不能：退出适用范围、跳空后风险比和预热计龄存在差异；16项为行为检查，不是16条完整纪律验收。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "b-rule-qualification",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/qualification.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/review-2026-09-08.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/rule-field-mapping.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/attempt-01/results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/s02-age-diagnostic.json"
+      ],
+      "source_hash": [
+        "6bee6ac021a0b89a71b462402fe163ff428ea4f470f89fc73ee59d67084b2de6",
+        "1f913255586ca2b35ae141fec1495fdb132b31b61aa159c02912c82a08a9f203",
+        "77e8226247e1068078ef72e9de52ed01c0070d186975528f8b3677263f62321d",
+        "c4f57e42363942d8c5b6236086d94c9ef4c15a5baa6fdb92e2106e2aa43f6efd",
+        "cceda563cedb545a670f6eb5e859002176d582c324a9ba5e84d588e5801a0c4c",
+        "b0a44c153707dd7d18beaf2b58990c649dd9f863d0017d51f4a3a4e7520e975c"
+      ],
+      "source_version": "research-seventh/2026-09-08",
+      "status": "mixed",
+      "window": "冻结历史与合成例子，非当前信号",
+      "statistic_kind": "synthetic_rule_qualification",
+      "strategy_scope": [],
+      "limitations": "没有运行新的策略收益；九条纪律尚未全进入回测链；只标B研究代理，未修改生产",
+      "compatibility": "unknown",
+      "evidence_id": "b-rule-qualification",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/protocol.md",
+      "strategies": [],
+      "note": "没有运行新的策略收益；九条纪律尚未全进入回测链；只标B研究代理，未修改生产"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_research_inputs",
+        "instrument_id": "",
+        "market": "mixed",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "依各卡范围分别使用旧行情、合成例子或四只基金名义行情",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_research_inputs",
+        "completeness": "unknown",
+        "lag_trading_days": null
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略规格§2.3/§3/§9/§10；仅研究验证，完整B资格未成立",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-seventh-2026-09-08",
+      "independently_reviewed": false,
+      "review_scope": "日历由另一实现全量重算；规则与价格卡仅各自研究检查及负责人阅读，不冒称另一实现全量复算",
+      "independent_market_episodes": null,
+      "production_adopted": false,
+      "limitations": [
+        "没有运行新的策略收益",
+        "九条纪律尚未全进入回测链",
+        "只标B研究代理，未修改生产"
+      ]
+    }
+  },
+  {
+    "user_question": "历史技术价能否转换成当时成交价？",
+    "conclusion": "局部转换与日期边界最终11组检查通过；加法和比例转换改变部分条件，正式价格定义仍须明确。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "price-basis-qualification",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/price-basis-qualification/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/price-basis-qualification/protocol-amendment-1.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/price-basis-qualification/results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/price-basis-qualification/qualification-report.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/price-basis-qualification/input-lock.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/price-basis-qualification/first-pass/review-counterexamples.json"
+      ],
+      "source_hash": [
+        "0e2e96ec5e59e5e6d27a4f7272f40369ed7db6963cb9241ec77be3d7d7009e6f",
+        "6575a5ba04226cdd8b5e90f8afba93d346ee543701f25dcbd02d4bc22713f895",
+        "5c416ce7d8937c58fb27893e21ef5033c554efc4c8ec61e0e8acd3ac8a15b9ee",
+        "09c4d713d51999fd7f2b4cee57e381de9e35e117567918032e45c9dc0b10e5f0",
+        "6e7a321d625a1bc03d0a4cf81a1e7ed78e6bc9aa1f0d8e6e20da9400a115ba05",
+        "7a8b5b9230bf73374c00774b6cf15ba6c4060e8f99123099459c601f5142cfaf"
+      ],
+      "source_version": "research-seventh/2026-09-08",
+      "status": "mixed",
+      "window": "冻结历史与合成例子，非当前信号",
+      "statistic_kind": "point_in_time_price_conversion",
+      "strategy_scope": [],
+      "limitations": "部分已核公司行为不等于完整历史；价格与量的单位定义、真实费用和完整交易日历未完成；局部函数测试不等于策略有效",
+      "compatibility": "unknown",
+      "evidence_id": "price-basis-qualification",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/price-basis-qualification/protocol.md",
+      "strategies": [],
+      "note": "部分已核公司行为不等于完整历史；价格与量的单位定义、真实费用和完整交易日历未完成；局部函数测试不等于策略有效"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_research_inputs",
+        "instrument_id": "",
+        "market": "mixed",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "依各卡范围分别使用旧行情、合成例子或四只基金名义行情",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_research_inputs",
+        "completeness": "unknown",
+        "lag_trading_days": null
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-seventh-2026-09-08/rules-qualification/snapshot/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略规格§2.3/§3/§9/§10；仅研究验证，完整B资格未成立",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-seventh-2026-09-08",
+      "independently_reviewed": false,
+      "review_scope": "日历由另一实现全量重算；规则与价格卡仅各自研究检查及负责人阅读，不冒称另一实现全量复算",
+      "independent_market_episodes": null,
+      "production_adopted": false,
+      "limitations": [
+        "部分已核公司行为不等于完整历史",
+        "价格与量的单位定义、真实费用和完整交易日历未完成",
+        "局部函数测试不等于策略有效"
+      ]
+    }
+  }
+]

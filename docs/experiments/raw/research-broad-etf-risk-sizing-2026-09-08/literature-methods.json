@@ -1,0 +1,83 @@
+{
+  "date": "2026-09-08",
+  "scope": "literature_method_and_prior_experiment_overlap_only",
+  "new_full_text_read": false,
+  "conclusion": "The exact comparison has not been run before: two broad ETFs, one-time CNY 100000 accounts, unchanged R1 candidates and exits, with only entry quantity changed to the frozen 1% planned-risk rule.",
+  "literature": {
+    "id": "cederburg2020",
+    "title": "On the performance of volatility-managed portfolios",
+    "local_method_note": "docs/experiments/raw/research-seventh-2026-09-08/paper-methods/METHODS.md",
+    "previously_read_sections": [
+      "2.2",
+      "3",
+      "4.1",
+      "4.3.1-4.3.3"
+    ],
+    "previously_read_print_pages": [
+      "98-101",
+      "105-107",
+      "110",
+      "112"
+    ],
+    "online_appendix_obtained": false,
+    "author_copy_url": "https://www.lehigh.edu/~xuy219/research/COWY.pdf",
+    "publisher_url": "https://www.sciencedirect.com/science/article/pii/S0304405X2030132X",
+    "publisher_abstract_check_only": true,
+    "method": "The paper measures how much daily prices moved during the prior month and uses that to decide the next month's investment amount. Its real-time combinations use an initial 120-month estimation period and then only prior history for the next month, under paper-specific preferences and borrowing limits.",
+    "applicable_lessons": [
+      "separate full-history comparisons from implementable information timing",
+      "compare paired methods on the same history",
+      "report both risk changes and return costs",
+      "inspect instability and concentration across periods"
+    ],
+    "does_not_support": [
+      "a 1% planned-risk parameter",
+      "CNY 100000 initial capital",
+      "stop-distance position sizing",
+      "R1 signals or exits",
+      "local transaction-cost values",
+      "any predicted return or drawdown",
+      "calling this experiment a replication of volatility management"
+    ]
+  },
+  "prior_experiments": [
+    {
+      "name": "atr_buffer_opportunity_study",
+      "path": "docs/experiments/atr-buffer-opportunity-study-2026-09-08.md",
+      "tested": "Independent budget per one of 2309 fixed opportunities, including same-budget and 1% planned-risk views; no reinvestment after exit.",
+      "why_not_duplicate": "Not a shared complete account and explicitly lacks re-entry, whole-lot concurrent cash constraints, and full corporate-action accounting."
+    },
+    {
+      "name": "P7_vs_P4",
+      "path": "docs/experiments/technical-account-limited-comparison-2026-09-08.md",
+      "tested": "Four funds receiving CNY 250 each week, CNY 600000 total contributions; P7 adds 1% sizing to a B research proxy.",
+      "why_not_duplicate": "Only two buys occurred and available cash constrained both first, so 1% did not change quantities; it was neither R1 nor one-time CNY 100000."
+    },
+    {
+      "name": "acd_limited_accounts",
+      "path": "docs/experiments/acd-limited-account-comparison-2026-09-08.md",
+      "tested": "A/C/D signals used 1% prior-equity planned risk in four weekly-funded fund accounts.",
+      "why_not_duplicate": "Different entries, exits, and funding schedule."
+    },
+    {
+      "name": "technical_R1",
+      "path": "docs/experiments/broad-etf-technical-capital-comparison-2026-09-08.md",
+      "tested": "510300 and 159915, one-time CNY 100000, R1 using available cash.",
+      "why_not_duplicate": "This is the unchanged reference; it did not apply 1% risk sizing."
+    },
+    {
+      "name": "REF_ROAD",
+      "tested": "Periodic contributions, target filtering, and structure-only exit.",
+      "why_not_duplicate": "Funding, filtering, and exit differ from R1."
+    }
+  ],
+  "acceptance_recommendations": [
+    "Keep candidates, exits, timing, products, period, fees, corporate actions, and initial capital unchanged between paired methods.",
+    "Use only prior-day equity and information available at the planned entry open.",
+    "Count entries where 1% truly reduces quantity, cash caps quantity first, or whole-lot rounding rejects the order.",
+    "Report exposure, fees, maximum drawdown, annual wealth contributions, realized results, and unrealized results.",
+    "State that gaps and fees can cause actual losses above planned risk.",
+    "Treat annual concentration as a historical diagnostic, not future validation.",
+    "Do not tune the 1% parameter after seeing results or claim superiority over an untested fixed-reduction control."
+  ]
+}

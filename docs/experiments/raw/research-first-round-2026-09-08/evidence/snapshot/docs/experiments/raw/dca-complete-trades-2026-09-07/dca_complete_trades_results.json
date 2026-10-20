@@ -1,0 +1,5697 @@
+{
+ "criteria_doc": "条件触发定投的完整交易闭环（第十三轮）：入场条件 → 定投建仓 → 出场条件 → 平仓。\n\n问题（用户 2026-09-07 指出方法论缺陷后重设计）：此前一~十二轮的定投实验\n只有买入侧，\"判负/有增量\"全部是窗口终点账面市值的对比——**一笔交易都没有\n闭环**。本实验改为完整交易制：每笔交易有明确的入场触发、12 个月定投建仓、\n明确的出场条件（含时间强制离场），平仓落袋后逐笔统计。\n\n预注册口径（跑前写死，跑后不得改）：\n\n- 样本：8 个 A 股指数/ETF 全历史（同第十一轮：SH000001/SZ399001 31y、\n  000300 22y、000015 21y、399006 14y、510500/512100/588000 短）。\n- 交易生命周期（每标的每触发独立、不重叠：交易进行中忽略新事件）：\n  * 入场触发四档：deep20（距年线 ≤−20%）/ bottom（底部区域：惨×回撤≤−15%×\n    年线下方）/ lowtier（惨档 b200<43.3）/ base（每月末机械开仓，对照）；\n    事件 = 触发由假转真且间隔 ≥126 根 K 线（base 为月末，同规则）。\n  * 建仓：触发后 12 个月（252 根 K 线）每周等额定投，每笔预算 1.0，\n    买入费 10bp。\n  * 出场五档（建仓完成后每周检查，信号日收盘判定 → 次日开盘平仓，卖出费\n    10bp）：X30（距年线 ≥+30%）/ X20（距年线 ≥+20%）/ Xtime（建仓完成后\n    满 12 个月时间离场）/ Xtarget（累计浮盈 ≥+30% 止盈）/ Xheat（b200>56.7）。\n  * 时间强制：建仓完成后 24 个月无出场触发 → 强制平仓（保证每笔闭环）。\n- 逐笔度量：净收益率（平仓款/预算−1）、胜率、持有月数（建仓 12 个月+\n    等待期）、P10/P90、最大单笔亏损。\n- 预注册方向预期（描述性登记，不设通过线）：\n  P1 X30 出场中位 ≥ Xtime（状态表：+30% 之后 12 个月中位 −12.4%）；\n  P2 deep20 入场的交易中位收益 > base 入场；\n  P3 Xheat 出场是五档里最差（热档前瞻为正，出场在砍牛腿）；\n  P4 bottom 入场介于两者之间。结果与预期相反时如实登记。\n- 结论级别：只检验不决策。禁止买卖指令类词汇。\n- 已知边界：事件聚类/重叠样本局限沿十一轮；每标的每触发的交易数有限\n  （登记 n）；科创50 仅 5 年；状态表口径沿十一轮（point-in-time）。\n",
+ "trades": {
+  "deep20|X30": {
+   "SH000001": [
+    {
+     "ret": 0.5385615489170028,
+     "hold_months": 13.0,
+     "forced": false,
+     "entry_date": "1996-01-18",
+     "exit_date": "1997-03-19"
+    },
+    {
+     "ret": 0.7789525225420375,
+     "hold_months": 20.666666666666668,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2007-03-05"
+    },
+    {
+     "ret": -0.2388315419009034,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2009-02-10",
+     "exit_date": "2014-03-05"
+    },
+    {
+     "ret": -0.10074264973525338,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-26",
+     "exit_date": "2018-10-08"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.4142889930038811,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1998-08-17",
+     "exit_date": "2000-03-09"
+    },
+    {
+     "ret": 0.4367303640240441,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2005-06-01",
+     "exit_date": "2013-03-15"
+    },
+    {
+     "ret": 0.17634534460131124,
+     "hold_months": 26.19047619047619,
+     "forced": false,
+     "entry_date": "2012-08-27",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": -0.22481941812701067,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-26",
+     "exit_date": "2018-10-08"
+    },
+    {
+     "ret": 0.6008937671961698,
+     "hold_months": 22.238095238095237,
+     "forced": false,
+     "entry_date": "2018-08-06",
+     "exit_date": "2020-07-10"
+    },
+    {
+     "ret": -0.11845660355346543,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-04-21",
+     "exit_date": "2025-06-06"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.187543388399356,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2005-01-19",
+     "exit_date": "2008-03-13"
+    },
+    {
+     "ret": 0.28231488090715096,
+     "hold_months": 32.285714285714285,
+     "forced": false,
+     "entry_date": "2012-02-07",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": 0.03898717591196066,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-25",
+     "exit_date": "2018-09-28"
+    },
+    {
+     "ret": -0.038813576066589195,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-04-26",
+     "exit_date": "2025-06-11"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.26441676307634265,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2009-02-10",
+     "exit_date": "2014-03-05"
+    },
+    {
+     "ret": 0.09491669014382897,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-01-13",
+     "exit_date": "2019-02-22"
+    }
+   ],
+   "399006": [
+    {
+     "ret": -0.43039939278667794,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-09-02",
+     "exit_date": "2018-10-15"
+    },
+    {
+     "ret": 0.474478583992727,
+     "hold_months": 16.238095238095237,
+     "forced": false,
+     "entry_date": "2018-09-17",
+     "exit_date": "2020-02-19"
+    },
+    {
+     "ret": -0.022499184919240522,
+     "hold_months": 29.80952380952381,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "510500": [
+    {
+     "ret": -0.14650217479161354,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-01-15",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.4654179623472918,
+     "hold_months": 20.333333333333332,
+     "forced": false,
+     "entry_date": "2018-10-11",
+     "exit_date": "2020-07-14"
+    },
+    {
+     "ret": -0.09103769074742185,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-04-25",
+     "exit_date": "2025-06-10"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.6296031952089036,
+     "hold_months": 23.952380952380953,
+     "forced": false,
+     "entry_date": "2018-06-19",
+     "exit_date": "2020-07-14"
+    },
+    {
+     "ret": 0.5343073940496732,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-04-22",
+     "exit_date": "2025-06-10"
+    }
+   ],
+   "588000": [
+    {
+     "ret": 0.06372976382259288,
+     "hold_months": 29.571428571428573,
+     "forced": false,
+     "entry_date": "2022-03-15",
+     "exit_date": "2024-10-09"
+    }
+   ]
+  },
+  "deep20|X20": {
+   "SH000001": [
+    {
+     "ret": 0.4017742433778866,
+     "hold_months": 12.476190476190476,
+     "forced": false,
+     "entry_date": "1996-01-18",
+     "exit_date": "1997-03-04"
+    },
+    {
+     "ret": 0.016824078131776554,
+     "hold_months": 19.952380952380953,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2006-05-15"
+    },
+    {
+     "ret": -0.2388315419009034,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2009-02-10",
+     "exit_date": "2014-03-05"
+    },
+    {
+     "ret": -0.10074264973525338,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-26",
+     "exit_date": "2018-10-08"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.4142889930038811,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1998-08-17",
+     "exit_date": "2000-03-09"
+    },
+    {
+     "ret": 1.0407301730214034,
+     "hold_months": 19.523809523809526,
+     "forced": false,
+     "entry_date": "2005-06-01",
+     "exit_date": "2011-02-17"
+    },
+    {
+     "ret": 0.09348027253518909,
+     "hold_months": 26.095238095238095,
+     "forced": false,
+     "entry_date": "2012-08-27",
+     "exit_date": "2014-12-03"
+    },
+    {
+     "ret": -0.22481941812701067,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-26",
+     "exit_date": "2018-10-08"
+    },
+    {
+     "ret": 0.3616507733047607,
+     "hold_months": 17.80952380952381,
+     "forced": false,
+     "entry_date": "2018-08-06",
+     "exit_date": "2020-02-24"
+    },
+    {
+     "ret": -0.03609672900227889,
+     "hold_months": 28.38095238095238,
+     "forced": false,
+     "entry_date": "2022-04-21",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.187543388399356,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2005-01-19",
+     "exit_date": "2008-03-13"
+    },
+    {
+     "ret": 0.12322994648871322,
+     "hold_months": 32.04761904761905,
+     "forced": false,
+     "entry_date": "2012-02-07",
+     "exit_date": "2014-11-28"
+    },
+    {
+     "ret": 0.03898717591196066,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-25",
+     "exit_date": "2018-09-28"
+    },
+    {
+     "ret": 0.0352301244580413,
+     "hold_months": 28.238095238095237,
+     "forced": false,
+     "entry_date": "2022-04-26",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.03185709803165926,
+     "hold_months": 23.80952380952381,
+     "forced": false,
+     "entry_date": "2009-02-10",
+     "exit_date": "2013-02-04"
+    },
+    {
+     "ret": 0.09491669014382897,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-01-13",
+     "exit_date": "2019-02-22"
+    }
+   ],
+   "399006": [
+    {
+     "ret": -0.43039939278667794,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-09-02",
+     "exit_date": "2018-10-15"
+    },
+    {
+     "ret": 0.34566635816163793,
+     "hold_months": 15.523809523809524,
+     "forced": false,
+     "entry_date": "2018-09-17",
+     "exit_date": "2020-01-21"
+    },
+    {
+     "ret": 0.037705631776510096,
+     "hold_months": 29.761904761904763,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2024-10-08"
+    }
+   ],
+   "510500": [
+    {
+     "ret": -0.14650217479161354,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-01-15",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.35955421433966794,
+     "hold_months": 20.095238095238095,
+     "forced": false,
+     "entry_date": "2018-10-11",
+     "exit_date": "2020-07-07"
+    },
+    {
+     "ret": -0.05733196391505169,
+     "hold_months": 28.285714285714285,
+     "forced": false,
+     "entry_date": "2022-04-25",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.33152502281893326,
+     "hold_months": 19.428571428571427,
+     "forced": false,
+     "entry_date": "2018-06-19",
+     "exit_date": "2020-02-24"
+    },
+    {
+     "ret": 0.4913467870162824,
+     "hold_months": 28.285714285714285,
+     "forced": false,
+     "entry_date": "2022-04-22",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "588000": [
+    {
+     "ret": 0.06559923616674523,
+     "hold_months": 29.523809523809526,
+     "forced": false,
+     "entry_date": "2022-03-15",
+     "exit_date": "2024-10-08"
+    }
+   ]
+  },
+  "deep20|Xtime": {
+   "SH000001": [
+    {
+     "ret": 0.49638512247052313,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1996-01-18",
+     "exit_date": "1997-08-20"
+    },
+    {
+     "ret": -0.21655438608694455,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2006-03-13"
+    },
+    {
+     "ret": -0.20953531506420564,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2009-02-10",
+     "exit_date": "2012-08-07"
+    },
+    {
+     "ret": 0.055848586856891425,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-08-26",
+     "exit_date": "2017-03-21"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.5417888762286354,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1998-08-17",
+     "exit_date": "2001-04-10"
+    },
+    {
+     "ret": 0.7159003557355175,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2005-06-01",
+     "exit_date": "2010-05-05"
+    },
+    {
+     "ret": -0.16318356183912697,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2012-08-27",
+     "exit_date": "2014-03-27"
+    },
+    {
+     "ret": -0.00792572634491917,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-08-26",
+     "exit_date": "2017-03-21"
+    },
+    {
+     "ret": 0.30245709918741626,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-08-06",
+     "exit_date": "2020-03-02"
+    },
+    {
+     "ret": -0.13509900441574052,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-04-21",
+     "exit_date": "2023-11-13"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 1.0863549774320886,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2005-01-19",
+     "exit_date": "2009-05-13"
+    },
+    {
+     "ret": 0.013051710565519237,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2012-02-07",
+     "exit_date": "2013-09-11"
+    },
+    {
+     "ret": 0.05089819149007613,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-08-25",
+     "exit_date": "2017-03-20"
+    },
+    {
+     "ret": -0.1057847190249761,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-04-26",
+     "exit_date": "2023-11-16"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.22123275397465725,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2009-02-10",
+     "exit_date": "2012-08-07"
+    },
+    {
+     "ret": 0.1866498392629925,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2016-01-13",
+     "exit_date": "2017-08-03"
+    }
+   ],
+   "399006": [
+    {
+     "ret": -0.1262896125248294,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-09-02",
+     "exit_date": "2017-03-28"
+    },
+    {
+     "ret": 0.31705781090056084,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-09-17",
+     "exit_date": "2020-04-14"
+    },
+    {
+     "ret": -0.20821512367241135,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2023-09-22"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.01982847999305548,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2016-01-15",
+     "exit_date": "2017-08-07"
+    },
+    {
+     "ret": 0.10284431990359821,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-10-11",
+     "exit_date": "2020-04-30"
+    },
+    {
+     "ret": -0.09915203239225179,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-04-25",
+     "exit_date": "2023-11-15"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.19231268955988123,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-06-19",
+     "exit_date": "2020-01-06"
+    },
+    {
+     "ret": 0.5373760088377726,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-04-22",
+     "exit_date": "2023-11-15"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.13163009614131027,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-15",
+     "exit_date": "2023-10-09"
+    }
+   ]
+  },
+  "deep20|Xtarget": {
+   "SH000001": [
+    {
+     "ret": 0.27572879588721744,
+     "hold_months": 12.142857142857142,
+     "forced": false,
+     "entry_date": "1996-01-18",
+     "exit_date": "1997-02-21"
+    },
+    {
+     "ret": 0.7571005993479023,
+     "hold_months": 20.61904761904762,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2007-03-02"
+    },
+    {
+     "ret": -0.2388315419009034,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2009-02-10",
+     "exit_date": "2014-03-05"
+    },
+    {
+     "ret": -0.10074264973525338,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-26",
+     "exit_date": "2018-10-08"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.4142889930038811,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1998-08-17",
+     "exit_date": "2000-03-09"
+    },
+    {
+     "ret": 0.2704830655891213,
+     "hold_months": 12.238095238095237,
+     "forced": false,
+     "entry_date": "2005-06-01",
+     "exit_date": "2009-03-17"
+    },
+    {
+     "ret": 0.2905274368027413,
+     "hold_months": 27.095238095238095,
+     "forced": false,
+     "entry_date": "2012-08-27",
+     "exit_date": "2015-01-05"
+    },
+    {
+     "ret": -0.22481941812701067,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-26",
+     "exit_date": "2018-10-08"
+    },
+    {
+     "ret": 0.2867610007838728,
+     "hold_months": 16.904761904761905,
+     "forced": false,
+     "entry_date": "2018-08-06",
+     "exit_date": "2020-01-20"
+    },
+    {
+     "ret": -0.11845660355346543,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-04-21",
+     "exit_date": "2025-06-06"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.187543388399356,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2005-01-19",
+     "exit_date": "2008-03-13"
+    },
+    {
+     "ret": 0.2677557276368694,
+     "hold_months": 32.333333333333336,
+     "forced": false,
+     "entry_date": "2012-02-07",
+     "exit_date": "2014-12-08"
+    },
+    {
+     "ret": 0.29779704231134896,
+     "hold_months": 27.904761904761905,
+     "forced": false,
+     "entry_date": "2015-08-25",
+     "exit_date": "2018-01-18"
+    },
+    {
+     "ret": -0.038813576066589195,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-04-26",
+     "exit_date": "2025-06-11"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.26441676307634265,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2009-02-10",
+     "exit_date": "2014-03-05"
+    },
+    {
+     "ret": 0.2964981129304598,
+     "hold_months": 23.571428571428573,
+     "forced": false,
+     "entry_date": "2016-01-13",
+     "exit_date": "2018-01-22"
+    }
+   ],
+   "399006": [
+    {
+     "ret": -0.43039939278667794,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-09-02",
+     "exit_date": "2018-10-15"
+    },
+    {
+     "ret": 0.28111441854550434,
+     "hold_months": 15.142857142857142,
+     "forced": false,
+     "entry_date": "2018-09-17",
+     "exit_date": "2020-01-09"
+    },
+    {
+     "ret": -0.23028384542751645,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-08",
+     "exit_date": "2025-04-21"
+    }
+   ],
+   "510500": [
+    {
+     "ret": -0.14650217479161354,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-01-15",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.29421340284045705,
+     "hold_months": 20.047619047619047,
+     "forced": false,
+     "entry_date": "2018-10-11",
+     "exit_date": "2020-07-06"
+    },
+    {
+     "ret": -0.09103769074742185,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-04-25",
+     "exit_date": "2025-06-10"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.28566684245124585,
+     "hold_months": 19.333333333333332,
+     "forced": false,
+     "entry_date": "2018-06-19",
+     "exit_date": "2020-02-20"
+    },
+    {
+     "ret": 0.6245246688197938,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-04-22",
+     "exit_date": "2023-05-11"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.014788074631798653,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-15",
+     "exit_date": "2025-04-28"
+    }
+   ]
+  },
+  "deep20|Xheat": {
+   "SH000001": [
+    {
+     "ret": 0.20176975851388912,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1996-01-18",
+     "exit_date": "1997-02-19"
+    },
+    {
+     "ret": -0.18915423606465642,
+     "hold_months": 17.428571428571427,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2006-02-22"
+    },
+    {
+     "ret": -0.1510239970850742,
+     "hold_months": 23.142857142857142,
+     "forced": false,
+     "entry_date": "2009-02-10",
+     "exit_date": "2013-01-15"
+    },
+    {
+     "ret": 0.004223788579676535,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2015-08-26",
+     "exit_date": "2016-09-07"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.4142889930038811,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1998-08-17",
+     "exit_date": "2000-03-09"
+    },
+    {
+     "ret": 0.3004410020467645,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2005-06-01",
+     "exit_date": "2009-03-11"
+    },
+    {
+     "ret": 0.007917945596455978,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2012-08-27",
+     "exit_date": "2013-09-13"
+    },
+    {
+     "ret": 0.023428052634869356,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2015-08-26",
+     "exit_date": "2016-09-07"
+    },
+    {
+     "ret": 0.17243330754484765,
+     "hold_months": 12.761904761904763,
+     "forced": false,
+     "entry_date": "2018-08-06",
+     "exit_date": "2019-09-10"
+    },
+    {
+     "ret": -0.035274918304008196,
+     "hold_months": 14.80952380952381,
+     "forced": false,
+     "entry_date": "2022-04-21",
+     "exit_date": "2023-08-01"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.187543388399356,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2005-01-19",
+     "exit_date": "2008-03-13"
+    },
+    {
+     "ret": 0.07667540613190793,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2012-02-07",
+     "exit_date": "2013-03-07"
+    },
+    {
+     "ret": 0.012191961239633287,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2015-08-25",
+     "exit_date": "2016-09-06"
+    },
+    {
+     "ret": -0.004417767595749966,
+     "hold_months": 14.666666666666666,
+     "forced": false,
+     "entry_date": "2022-04-26",
+     "exit_date": "2023-08-01"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.12908292255566867,
+     "hold_months": 23.142857142857142,
+     "forced": false,
+     "entry_date": "2009-02-10",
+     "exit_date": "2013-01-15"
+    },
+    {
+     "ret": 0.10676256040418619,
+     "hold_months": 13.238095238095237,
+     "forced": false,
+     "entry_date": "2016-01-13",
+     "exit_date": "2017-03-08"
+    }
+   ],
+   "399006": [
+    {
+     "ret": -0.02838969052607232,
+     "hold_months": 12.142857142857142,
+     "forced": false,
+     "entry_date": "2015-09-02",
+     "exit_date": "2016-09-20"
+    },
+    {
+     "ret": 0.2787941083864762,
+     "hold_months": 15.095238095238095,
+     "forced": false,
+     "entry_date": "2018-09-17",
+     "exit_date": "2020-01-08"
+    },
+    {
+     "ret": -0.054009990828930765,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2023-03-22"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.0628934525264222,
+     "hold_months": 13.142857142857142,
+     "forced": false,
+     "entry_date": "2016-01-15",
+     "exit_date": "2017-03-08"
+    },
+    {
+     "ret": 0.1493778355113451,
+     "hold_months": 14.523809523809524,
+     "forced": false,
+     "entry_date": "2018-10-11",
+     "exit_date": "2020-01-08"
+    },
+    {
+     "ret": -0.03314498401219346,
+     "hold_months": 14.714285714285714,
+     "forced": false,
+     "entry_date": "2022-04-25",
+     "exit_date": "2023-08-01"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.08258061510862857,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2018-06-19",
+     "exit_date": "2019-07-03"
+    },
+    {
+     "ret": 0.6085678719216774,
+     "hold_months": 14.714285714285714,
+     "forced": false,
+     "entry_date": "2022-04-22",
+     "exit_date": "2023-08-01"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.050308049170690206,
+     "hold_months": 16.0,
+     "forced": false,
+     "entry_date": "2022-03-15",
+     "exit_date": "2023-08-01"
+    }
+   ]
+  },
+  "bottom|X30": {
+   "SH000001": [
+    {
+     "ret": 0.6370964521705946,
+     "hold_months": 14.666666666666666,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1997-03-19"
+    },
+    {
+     "ret": 0.2619679552372689,
+     "hold_months": 15.19047619047619,
+     "forced": false,
+     "entry_date": "1998-03-09",
+     "exit_date": "1999-06-23"
+    },
+    {
+     "ret": 0.7789525225420375,
+     "hold_months": 20.666666666666668,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2007-03-05"
+    },
+    {
+     "ret": -0.23755458765789605,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-06-12",
+     "exit_date": "2014-03-04"
+    },
+    {
+     "ret": 0.40014037417454373,
+     "hold_months": 16.142857142857142,
+     "forced": false,
+     "entry_date": "2013-07-17",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": -0.09671770945320568,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-21",
+     "exit_date": "2018-09-26"
+    },
+    {
+     "ret": 0.2670742943519908,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2018-06-15",
+     "exit_date": "2021-07-26"
+    },
+    {
+     "ret": 0.03326854571305016,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-15",
+     "exit_date": "2025-04-28"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.9347784345891175,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-18"
+    },
+    {
+     "ret": 0.16804897215674974,
+     "hold_months": 15.19047619047619,
+     "forced": false,
+     "entry_date": "1998-03-06",
+     "exit_date": "1999-06-22"
+    },
+    {
+     "ret": 0.3033314241792391,
+     "hold_months": 20.0,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2006-05-16"
+    },
+    {
+     "ret": -0.3385516572118623,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2009-02-27",
+     "exit_date": "2014-03-24"
+    },
+    {
+     "ret": 0.25314936944654587,
+     "hold_months": 19.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": -0.21833695405165165,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-07",
+     "exit_date": "2018-08-09"
+    },
+    {
+     "ret": 0.601305828305918,
+     "hold_months": 23.857142857142858,
+     "forced": false,
+     "entry_date": "2018-06-19",
+     "exit_date": "2020-07-10"
+    },
+    {
+     "ret": -0.34779736880673473,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-03-09",
+     "exit_date": "2024-04-19"
+    },
+    {
+     "ret": 0.49833329396805337,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2023-04-21",
+     "exit_date": "2026-06-09"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.1073087910955923,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-05-10",
+     "exit_date": "2007-05-15"
+    },
+    {
+     "ret": 0.38754794234646295,
+     "hold_months": 17.0,
+     "forced": false,
+     "entry_date": "2013-06-21",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": 0.03172316360452121,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-21",
+     "exit_date": "2018-09-26"
+    },
+    {
+     "ret": 0.4976058594110382,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2018-05-30",
+     "exit_date": "2021-07-08"
+    },
+    {
+     "ret": -0.2835794107380477,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-07-27",
+     "exit_date": "2024-09-05"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.2702704993281777,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2009-02-27",
+     "exit_date": "2014-03-24"
+    },
+    {
+     "ret": 0.373854765366598,
+     "hold_months": 16.142857142857142,
+     "forced": false,
+     "entry_date": "2013-07-17",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": 0.06826204536409253,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-21",
+     "exit_date": "2018-09-26"
+    },
+    {
+     "ret": 0.07254463306402736,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2018-04-20",
+     "exit_date": "2021-06-01"
+    },
+    {
+     "ret": 0.10111632849883345,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-01-11",
+     "exit_date": "2024-02-27"
+    },
+    {
+     "ret": 0.05469769005189007,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2023-06-26",
+     "exit_date": "2026-08-06"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.49730670070865646,
+     "hold_months": 12.571428571428571,
+     "forced": false,
+     "entry_date": "2012-12-27",
+     "exit_date": "2014-02-11"
+    },
+    {
+     "ret": -0.3628874995157009,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-24",
+     "exit_date": "2018-09-27"
+    },
+    {
+     "ret": 0.32923858604477196,
+     "hold_months": 26.523809523809526,
+     "forced": false,
+     "entry_date": "2017-11-02",
+     "exit_date": "2020-02-19"
+    },
+    {
+     "ret": -0.4350460337925699,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-03-09",
+     "exit_date": "2024-04-19"
+    },
+    {
+     "ret": 0.22589941052694207,
+     "hold_months": 16.761904761904763,
+     "forced": false,
+     "entry_date": "2023-04-21",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "510500": [
+    {
+     "ret": -0.25984852599166786,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-01-04",
+     "exit_date": "2019-02-13"
+    },
+    {
+     "ret": 0.4673903659746754,
+     "hold_months": 24.238095238095237,
+     "forced": false,
+     "entry_date": "2018-06-08",
+     "exit_date": "2020-07-14"
+    },
+    {
+     "ret": -0.14489963025189656,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-08",
+     "exit_date": "2025-04-21"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.4080045858528605,
+     "hold_months": 31.142857142857142,
+     "forced": false,
+     "entry_date": "2017-11-03",
+     "exit_date": "2020-07-14"
+    },
+    {
+     "ret": 0.895647779840903,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2023-03-23"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.03261635053556189,
+     "hold_months": 34.0,
+     "forced": false,
+     "entry_date": "2021-10-27",
+     "exit_date": "2024-10-09"
+    }
+   ]
+  },
+  "bottom|X20": {
+   "SH000001": [
+    {
+     "ret": 0.2732322453707723,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-17"
+    },
+    {
+     "ret": 0.16724425998394943,
+     "hold_months": 14.904761904761905,
+     "forced": false,
+     "entry_date": "1998-03-09",
+     "exit_date": "1999-06-15"
+    },
+    {
+     "ret": 0.016824078131776554,
+     "hold_months": 19.952380952380953,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2006-05-15"
+    },
+    {
+     "ret": -0.23755458765789605,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-06-12",
+     "exit_date": "2014-03-04"
+    },
+    {
+     "ret": 0.2512522086357505,
+     "hold_months": 15.857142857142858,
+     "forced": false,
+     "entry_date": "2013-07-17",
+     "exit_date": "2014-11-27"
+    },
+    {
+     "ret": -0.09671770945320568,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-21",
+     "exit_date": "2018-09-26"
+    },
+    {
+     "ret": 0.2670742943519908,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2018-06-15",
+     "exit_date": "2021-07-26"
+    },
+    {
+     "ret": 0.03326854571305016,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-15",
+     "exit_date": "2025-04-28"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.9347784345891175,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-18"
+    },
+    {
+     "ret": 0.11126800059865416,
+     "hold_months": 14.952380952380953,
+     "forced": false,
+     "entry_date": "1998-03-06",
+     "exit_date": "1999-06-15"
+    },
+    {
+     "ret": 0.2016400887130052,
+     "hold_months": 19.761904761904763,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2006-05-09"
+    },
+    {
+     "ret": -0.3385516572118623,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2009-02-27",
+     "exit_date": "2014-03-24"
+    },
+    {
+     "ret": 0.164874006020852,
+     "hold_months": 18.952380952380953,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-12-03"
+    },
+    {
+     "ret": -0.21833695405165165,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-07",
+     "exit_date": "2018-08-09"
+    },
+    {
+     "ret": 0.3620012546047915,
+     "hold_months": 19.428571428571427,
+     "forced": false,
+     "entry_date": "2018-06-19",
+     "exit_date": "2020-02-24"
+    },
+    {
+     "ret": -0.34779736880673473,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-03-09",
+     "exit_date": "2024-04-19"
+    },
+    {
+     "ret": 0.11521299532294127,
+     "hold_months": 16.761904761904763,
+     "forced": false,
+     "entry_date": "2023-04-21",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.1073087910955923,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-05-10",
+     "exit_date": "2007-05-15"
+    },
+    {
+     "ret": 0.215407716340142,
+     "hold_months": 16.761904761904763,
+     "forced": false,
+     "entry_date": "2013-06-21",
+     "exit_date": "2014-11-28"
+    },
+    {
+     "ret": 0.03172316360452121,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-21",
+     "exit_date": "2018-09-26"
+    },
+    {
+     "ret": 0.38731116694116796,
+     "hold_months": 24.428571428571427,
+     "forced": false,
+     "entry_date": "2018-05-30",
+     "exit_date": "2020-07-09"
+    },
+    {
+     "ret": -0.2835794107380477,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-07-27",
+     "exit_date": "2024-09-05"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.028863676357762658,
+     "hold_months": 23.19047619047619,
+     "forced": false,
+     "entry_date": "2009-02-27",
+     "exit_date": "2013-02-04"
+    },
+    {
+     "ret": 0.22778462749236428,
+     "hold_months": 15.904761904761905,
+     "forced": false,
+     "entry_date": "2013-07-17",
+     "exit_date": "2014-11-28"
+    },
+    {
+     "ret": 0.06826204536409253,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-21",
+     "exit_date": "2018-09-26"
+    },
+    {
+     "ret": 0.07254463306402736,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2018-04-20",
+     "exit_date": "2021-06-01"
+    },
+    {
+     "ret": 0.10111632849883345,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-01-11",
+     "exit_date": "2024-02-27"
+    },
+    {
+     "ret": 0.05469769005189007,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2023-06-26",
+     "exit_date": "2026-08-06"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.3459535970541936,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2012-12-27",
+     "exit_date": "2014-01-20"
+    },
+    {
+     "ret": -0.3628874995157009,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-24",
+     "exit_date": "2018-09-27"
+    },
+    {
+     "ret": 0.08451690540488732,
+     "hold_months": 15.714285714285714,
+     "forced": false,
+     "entry_date": "2017-11-02",
+     "exit_date": "2019-03-13"
+    },
+    {
+     "ret": -0.4350460337925699,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-03-09",
+     "exit_date": "2024-04-19"
+    },
+    {
+     "ret": 0.3014032343187467,
+     "hold_months": 16.714285714285715,
+     "forced": false,
+     "entry_date": "2023-04-21",
+     "exit_date": "2024-10-08"
+    }
+   ],
+   "510500": [
+    {
+     "ret": -0.25984852599166786,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-01-04",
+     "exit_date": "2019-02-13"
+    },
+    {
+     "ret": 0.36138412889844185,
+     "hold_months": 24.0,
+     "forced": false,
+     "entry_date": "2018-06-08",
+     "exit_date": "2020-07-07"
+    },
+    {
+     "ret": -0.0682429051860941,
+     "hold_months": 29.80952380952381,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.04574410949272756,
+     "hold_months": 16.333333333333332,
+     "forced": false,
+     "entry_date": "2017-11-03",
+     "exit_date": "2019-04-02"
+    },
+    {
+     "ret": 0.895647779840903,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2023-03-23"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.03091620352420077,
+     "hold_months": 33.95238095238095,
+     "forced": false,
+     "entry_date": "2021-10-27",
+     "exit_date": "2024-10-08"
+    }
+   ]
+  },
+  "bottom|Xtime": {
+   "SH000001": [
+    {
+     "ret": 0.7617567903718285,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1997-07-02"
+    },
+    {
+     "ret": 0.3948301055762182,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1998-03-09",
+     "exit_date": "2000-03-27"
+    },
+    {
+     "ret": -0.21655438608694455,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2006-03-13"
+    },
+    {
+     "ret": -0.21505070830601813,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2008-06-12",
+     "exit_date": "2012-08-06"
+    },
+    {
+     "ret": 0.509944714506366,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2013-07-17",
+     "exit_date": "2015-02-03"
+    },
+    {
+     "ret": 0.053059609523368634,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-08-21",
+     "exit_date": "2017-03-16"
+    },
+    {
+     "ret": 0.10627611165127515,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-06-15",
+     "exit_date": "2020-01-03"
+    },
+    {
+     "ret": -0.027011541811422735,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-15",
+     "exit_date": "2023-10-09"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 1.9771258991680267,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1997-07-03"
+    },
+    {
+     "ret": 0.30878142377152695,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1998-03-06",
+     "exit_date": "2000-03-24"
+    },
+    {
+     "ret": -0.04582677188948914,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2006-03-13"
+    },
+    {
+     "ret": -0.20511662751498783,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2009-02-27",
+     "exit_date": "2012-08-24"
+    },
+    {
+     "ret": 0.011772487868317194,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-11-06"
+    },
+    {
+     "ret": -0.08520169441696457,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-07-07",
+     "exit_date": "2017-01-23"
+    },
+    {
+     "ret": 0.24230870768307056,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-06-19",
+     "exit_date": "2020-01-06"
+    },
+    {
+     "ret": -0.2354681439818952,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2021-03-09",
+     "exit_date": "2022-09-26"
+    },
+    {
+     "ret": 0.09767857818265946,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2023-04-21",
+     "exit_date": "2024-11-15"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 0.9817622221217015,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2004-05-10",
+     "exit_date": "2009-03-23"
+    },
+    {
+     "ret": 0.6109105692438288,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2013-06-21",
+     "exit_date": "2015-01-08"
+    },
+    {
+     "ret": 0.05721087187113438,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-08-21",
+     "exit_date": "2017-03-16"
+    },
+    {
+     "ret": 0.1597801030866952,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-05-30",
+     "exit_date": "2019-12-17"
+    },
+    {
+     "ret": -0.09040929856223678,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2021-07-27",
+     "exit_date": "2023-02-21"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.24558385549655004,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2009-02-27",
+     "exit_date": "2012-08-24"
+    },
+    {
+     "ret": 0.4507918094595522,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2013-07-17",
+     "exit_date": "2015-02-03"
+    },
+    {
+     "ret": 0.09892163182307834,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-08-21",
+     "exit_date": "2017-03-16"
+    },
+    {
+     "ret": -0.013394506663697348,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-04-20",
+     "exit_date": "2019-11-11"
+    },
+    {
+     "ret": -0.05383649055827966,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2021-01-11",
+     "exit_date": "2022-08-04"
+    },
+    {
+     "ret": 0.0029714540686278657,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2023-06-26",
+     "exit_date": "2025-01-14"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.2447827639067981,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2012-12-27",
+     "exit_date": "2014-07-28"
+    },
+    {
+     "ret": -0.11593183496983173,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-08-24",
+     "exit_date": "2017-03-17"
+    },
+    {
+     "ret": -0.11256452149156326,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2017-11-02",
+     "exit_date": "2019-05-27"
+    },
+    {
+     "ret": -0.27053402332901655,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2021-03-09",
+     "exit_date": "2022-09-26"
+    },
+    {
+     "ret": 0.17143501909124015,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2023-04-21",
+     "exit_date": "2024-11-15"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.011098388729612108,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2016-01-04",
+     "exit_date": "2017-07-25"
+    },
+    {
+     "ret": 0.08724345719213833,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-06-08",
+     "exit_date": "2019-12-26"
+    },
+    {
+     "ret": -0.12037564778617704,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2023-09-22"
+    }
+   ],
+   "512100": [
+    {
+     "ret": -0.08727340917075888,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2017-11-03",
+     "exit_date": "2019-05-28"
+    },
+    {
+     "ret": 0.6891910909473398,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2023-09-25"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.08107054035935168,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2021-10-27",
+     "exit_date": "2023-05-19"
+    }
+   ]
+  },
+  "bottom|Xtarget": {
+   "SH000001": [
+    {
+     "ret": 0.22371712032067337,
+     "hold_months": 12.095238095238095,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-18"
+    },
+    {
+     "ret": 0.2975957585392639,
+     "hold_months": 15.238095238095237,
+     "forced": false,
+     "entry_date": "1998-03-09",
+     "exit_date": "1999-06-24"
+    },
+    {
+     "ret": 0.7571005993479023,
+     "hold_months": 20.61904761904762,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2007-03-02"
+    },
+    {
+     "ret": -0.23755458765789605,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-06-12",
+     "exit_date": "2014-03-04"
+    },
+    {
+     "ret": 0.27634693992951176,
+     "hold_months": 16.0,
+     "forced": false,
+     "entry_date": "2013-07-17",
+     "exit_date": "2014-12-02"
+    },
+    {
+     "ret": -0.09671770945320568,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-21",
+     "exit_date": "2018-09-26"
+    },
+    {
+     "ret": 0.2937905468270696,
+     "hold_months": 30.857142857142858,
+     "forced": false,
+     "entry_date": "2018-06-15",
+     "exit_date": "2021-02-10"
+    },
+    {
+     "ret": 0.03326854571305016,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-15",
+     "exit_date": "2025-04-28"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.9347784345891175,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-18"
+    },
+    {
+     "ret": 0.28650676612689496,
+     "hold_months": 15.380952380952381,
+     "forced": false,
+     "entry_date": "1998-03-06",
+     "exit_date": "1999-06-28"
+    },
+    {
+     "ret": 1.3147872566406007,
+     "hold_months": 20.61904761904762,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2007-03-02"
+    },
+    {
+     "ret": -0.3385516572118623,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2009-02-27",
+     "exit_date": "2014-03-24"
+    },
+    {
+     "ret": 0.23869306383243427,
+     "hold_months": 19.095238095238095,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-12-08"
+    },
+    {
+     "ret": -0.21833695405165165,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-07",
+     "exit_date": "2018-08-09"
+    },
+    {
+     "ret": 0.28709220587494677,
+     "hold_months": 18.523809523809526,
+     "forced": false,
+     "entry_date": "2018-06-19",
+     "exit_date": "2020-01-20"
+    },
+    {
+     "ret": -0.34779736880673473,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-03-09",
+     "exit_date": "2024-04-19"
+    },
+    {
+     "ret": 0.29634590691690477,
+     "hold_months": 27.761904761904763,
+     "forced": false,
+     "entry_date": "2023-04-21",
+     "exit_date": "2025-09-15"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.1073087910955923,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-05-10",
+     "exit_date": "2007-05-15"
+    },
+    {
+     "ret": 0.29581879162703495,
+     "hold_months": 16.904761904761905,
+     "forced": false,
+     "entry_date": "2013-06-21",
+     "exit_date": "2014-12-03"
+    },
+    {
+     "ret": 0.2968631051845674,
+     "hold_months": 28.0,
+     "forced": false,
+     "entry_date": "2015-08-21",
+     "exit_date": "2018-01-18"
+    },
+    {
+     "ret": 0.29881872091691686,
+     "hold_months": 24.285714285714285,
+     "forced": false,
+     "entry_date": "2018-05-30",
+     "exit_date": "2020-07-06"
+    },
+    {
+     "ret": -0.2835794107380477,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-07-27",
+     "exit_date": "2024-09-05"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.2702704993281777,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2009-02-27",
+     "exit_date": "2014-03-24"
+    },
+    {
+     "ret": 0.25602624194237134,
+     "hold_months": 16.0,
+     "forced": false,
+     "entry_date": "2013-07-17",
+     "exit_date": "2014-12-02"
+    },
+    {
+     "ret": 0.2901844405574534,
+     "hold_months": 28.142857142857142,
+     "forced": false,
+     "entry_date": "2015-08-21",
+     "exit_date": "2018-01-23"
+    },
+    {
+     "ret": 0.07254463306402736,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2018-04-20",
+     "exit_date": "2021-06-01"
+    },
+    {
+     "ret": 0.10111632849883345,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-01-11",
+     "exit_date": "2024-02-27"
+    },
+    {
+     "ret": 0.05469769005189007,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2023-06-26",
+     "exit_date": "2026-08-06"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.3459535970541936,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2012-12-27",
+     "exit_date": "2014-01-20"
+    },
+    {
+     "ret": -0.3628874995157009,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-08-24",
+     "exit_date": "2018-09-27"
+    },
+    {
+     "ret": 0.2804338635868764,
+     "hold_months": 26.428571428571427,
+     "forced": false,
+     "entry_date": "2017-11-02",
+     "exit_date": "2020-02-17"
+    },
+    {
+     "ret": -0.4350460337925699,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-03-09",
+     "exit_date": "2024-04-19"
+    },
+    {
+     "ret": 0.2879331278629982,
+     "hold_months": 26.80952380952381,
+     "forced": false,
+     "entry_date": "2023-04-21",
+     "exit_date": "2025-08-18"
+    }
+   ],
+   "510500": [
+    {
+     "ret": -0.25984852599166786,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-01-04",
+     "exit_date": "2019-02-13"
+    },
+    {
+     "ret": 0.2959553708495577,
+     "hold_months": 23.952380952380953,
+     "forced": false,
+     "entry_date": "2018-06-08",
+     "exit_date": "2020-07-06"
+    },
+    {
+     "ret": -0.14489963025189656,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-08",
+     "exit_date": "2025-04-21"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.2707418272320288,
+     "hold_months": 30.952380952380953,
+     "forced": false,
+     "entry_date": "2017-11-03",
+     "exit_date": "2020-07-08"
+    },
+    {
+     "ret": 0.895647779840903,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2023-03-23"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.10232237800136479,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-10-27",
+     "exit_date": "2024-12-06"
+    }
+   ]
+  },
+  "bottom|Xheat": {
+   "SH000001": [
+    {
+     "ret": 0.2732322453707723,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-17"
+    },
+    {
+     "ret": 0.03763969238153986,
+     "hold_months": 14.333333333333334,
+     "forced": false,
+     "entry_date": "1998-03-09",
+     "exit_date": "1999-05-28"
+    },
+    {
+     "ret": -0.18915423606465642,
+     "hold_months": 17.428571428571427,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2006-02-22"
+    },
+    {
+     "ret": -0.14746644260286323,
+     "hold_months": 23.19047619047619,
+     "forced": false,
+     "entry_date": "2008-06-12",
+     "exit_date": "2013-01-15"
+    },
+    {
+     "ret": 0.042091333474044035,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2013-07-17",
+     "exit_date": "2014-07-30"
+    },
+    {
+     "ret": -0.004052466992020887,
+     "hold_months": 12.142857142857142,
+     "forced": false,
+     "entry_date": "2015-08-21",
+     "exit_date": "2016-09-06"
+    },
+    {
+     "ret": 0.08964376808839081,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2018-06-15",
+     "exit_date": "2019-07-02"
+    },
+    {
+     "ret": 0.0322340392749243,
+     "hold_months": 16.0,
+     "forced": false,
+     "entry_date": "2022-03-15",
+     "exit_date": "2023-08-01"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.9347784345891175,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-18"
+    },
+    {
+     "ret": -0.0682799600421159,
+     "hold_months": 14.380952380952381,
+     "forced": false,
+     "entry_date": "1998-03-06",
+     "exit_date": "1999-05-28"
+    },
+    {
+     "ret": -0.0028290388970141356,
+     "hold_months": 17.428571428571427,
+     "forced": false,
+     "entry_date": "2002-01-30",
+     "exit_date": "2006-02-22"
+    },
+    {
+     "ret": -0.1470200756015314,
+     "hold_months": 22.523809523809526,
+     "forced": false,
+     "entry_date": "2009-02-27",
+     "exit_date": "2013-01-15"
+    },
+    {
+     "ret": -0.09996330350139404,
+     "hold_months": 14.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-07-03"
+    },
+    {
+     "ret": 0.0014228863689365046,
+     "hold_months": 12.333333333333334,
+     "forced": false,
+     "entry_date": "2015-07-07",
+     "exit_date": "2016-07-27"
+    },
+    {
+     "ret": 0.11577241748633882,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2018-06-19",
+     "exit_date": "2019-07-03"
+    },
+    {
+     "ret": -0.1546516506366189,
+     "hold_months": 21.857142857142858,
+     "forced": false,
+     "entry_date": "2021-03-09",
+     "exit_date": "2023-01-31"
+    },
+    {
+     "ret": 0.18568176027502403,
+     "hold_months": 16.714285714285715,
+     "forced": false,
+     "entry_date": "2023-04-21",
+     "exit_date": "2024-10-08"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.1073087910955923,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-05-10",
+     "exit_date": "2007-05-15"
+    },
+    {
+     "ret": -0.037689959583038335,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2013-06-21",
+     "exit_date": "2014-07-04"
+    },
+    {
+     "ret": 0.011463554854650226,
+     "hold_months": 12.142857142857142,
+     "forced": false,
+     "entry_date": "2015-08-21",
+     "exit_date": "2016-09-06"
+    },
+    {
+     "ret": 0.07332409227951153,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2018-05-30",
+     "exit_date": "2019-06-14"
+    },
+    {
+     "ret": -0.07487865966302676,
+     "hold_months": 17.333333333333332,
+     "forced": false,
+     "entry_date": "2021-07-27",
+     "exit_date": "2023-01-31"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.12639011548091938,
+     "hold_months": 22.523809523809526,
+     "forced": false,
+     "entry_date": "2009-02-27",
+     "exit_date": "2013-01-15"
+    },
+    {
+     "ret": 0.027522915910821233,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2013-07-17",
+     "exit_date": "2014-07-30"
+    },
+    {
+     "ret": 0.019413128486305053,
+     "hold_months": 12.142857142857142,
+     "forced": false,
+     "entry_date": "2015-08-21",
+     "exit_date": "2016-09-06"
+    },
+    {
+     "ret": 0.014697215835742572,
+     "hold_months": 12.19047619047619,
+     "forced": false,
+     "entry_date": "2018-04-20",
+     "exit_date": "2019-05-13"
+    },
+    {
+     "ret": 0.00036193907461234964,
+     "hold_months": 23.571428571428573,
+     "forced": false,
+     "entry_date": "2021-01-11",
+     "exit_date": "2023-01-31"
+    },
+    {
+     "ret": 0.18061858014784815,
+     "hold_months": 14.761904761904763,
+     "forced": false,
+     "entry_date": "2023-06-26",
+     "exit_date": "2024-10-08"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.4266639224032043,
+     "hold_months": 12.285714285714286,
+     "forced": false,
+     "entry_date": "2012-12-27",
+     "exit_date": "2014-01-27"
+    },
+    {
+     "ret": -0.019323453138897717,
+     "hold_months": 12.095238095238095,
+     "forced": false,
+     "entry_date": "2015-08-24",
+     "exit_date": "2016-09-06"
+    },
+    {
+     "ret": -0.05050446779347062,
+     "hold_months": 15.19047619047619,
+     "forced": false,
+     "entry_date": "2017-11-02",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": -0.16855685827524247,
+     "hold_months": 21.857142857142858,
+     "forced": false,
+     "entry_date": "2021-03-09",
+     "exit_date": "2023-01-31"
+    },
+    {
+     "ret": 0.3014032343187467,
+     "hold_months": 16.714285714285715,
+     "forced": false,
+     "entry_date": "2023-04-21",
+     "exit_date": "2024-10-08"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.06257362295990698,
+     "hold_months": 13.571428571428571,
+     "forced": false,
+     "entry_date": "2016-01-04",
+     "exit_date": "2017-03-08"
+    },
+    {
+     "ret": 0.04569522507801049,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2018-06-08",
+     "exit_date": "2019-06-25"
+    },
+    {
+     "ret": -0.035235784131604,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2023-03-22"
+    }
+   ],
+   "512100": [
+    {
+     "ret": -0.08727340917075888,
+     "hold_months": 15.142857142857142,
+     "forced": false,
+     "entry_date": "2017-11-03",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.895647779840903,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-08",
+     "exit_date": "2023-03-23"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.0904213489218374,
+     "hold_months": 14.523809523809524,
+     "forced": false,
+     "entry_date": "2021-10-27",
+     "exit_date": "2023-01-31"
+    }
+   ]
+  },
+  "lowtier|X30": {
+   "SH000001": [
+    {
+     "ret": 0.6370964521705946,
+     "hold_months": 14.666666666666666,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1997-03-19"
+    },
+    {
+     "ret": 0.2595163722992604,
+     "hold_months": 15.666666666666666,
+     "forced": false,
+     "entry_date": "1998-02-23",
+     "exit_date": "1999-06-23"
+    },
+    {
+     "ret": 0.9763219875012157,
+     "hold_months": 16.285714285714285,
+     "forced": false,
+     "entry_date": "2003-02-24",
+     "exit_date": "2007-03-05"
+    },
+    {
+     "ret": -0.05455200540766447,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2010-05-10",
+     "exit_date": "2014-10-15"
+    },
+    {
+     "ret": 0.48521963468970086,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.08356339121672629,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-09-02"
+    },
+    {
+     "ret": 0.0896709334712189,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-08-05",
+     "exit_date": "2022-09-14"
+    },
+    {
+     "ret": 0.0496853101582595,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.9347784345891175,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-18"
+    },
+    {
+     "ret": 0.1560125139656754,
+     "hold_months": 15.619047619047619,
+     "forced": false,
+     "entry_date": "1998-02-23",
+     "exit_date": "1999-06-22"
+    },
+    {
+     "ret": 0.29840516340230594,
+     "hold_months": 15.619047619047619,
+     "forced": false,
+     "entry_date": "2003-02-24",
+     "exit_date": "2006-05-16"
+    },
+    {
+     "ret": -0.2257215461374079,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2010-05-10",
+     "exit_date": "2014-10-15"
+    },
+    {
+     "ret": 0.4471750520845219,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.09873110107261829,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-09-02"
+    },
+    {
+     "ret": 0.11041893337210795,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-08-05",
+     "exit_date": "2022-09-14"
+    },
+    {
+     "ret": -0.08762368177441582,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.1096695968118753,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-04-29",
+     "exit_date": "2007-05-11"
+    },
+    {
+     "ret": 0.352122969651502,
+     "hold_months": 19.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": 0.001280294963648343,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-06",
+     "exit_date": "2018-08-08"
+    },
+    {
+     "ret": 0.01613504416380751,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-08-05",
+     "exit_date": "2022-09-14"
+    },
+    {
+     "ret": -0.04150353739206225,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.24387164258792227,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-03-17",
+     "exit_date": "2013-12-03"
+    },
+    {
+     "ret": 0.3343676400845974,
+     "hold_months": 19.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": 0.022866401597892327,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-06",
+     "exit_date": "2018-08-08"
+    },
+    {
+     "ret": 0.12187979197338517,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-08-05",
+     "exit_date": "2022-09-14"
+    },
+    {
+     "ret": 0.079153623462201,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.6242853063636893,
+     "hold_months": 21.666666666666668,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2015-03-03"
+    },
+    {
+     "ret": -0.3518422737241128,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-06",
+     "exit_date": "2018-08-08"
+    },
+    {
+     "ret": 0.7364123213634806,
+     "hold_months": 17.095238095238095,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-01-25"
+    },
+    {
+     "ret": -0.03738551214534436,
+     "hold_months": 31.0,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.41023606865931117,
+     "hold_months": 13.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-03-03"
+    },
+    {
+     "ret": -0.1990934969711481,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-09-02"
+    },
+    {
+     "ret": 0.07288769733188571,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-08-05",
+     "exit_date": "2022-09-14"
+    },
+    {
+     "ret": -0.09147481742474284,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 2.682883661423789,
+     "hold_months": 35.714285714285715,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2022-09-06"
+    },
+    {
+     "ret": 1.1198071364620628,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-02-16"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.03261635053556189,
+     "hold_months": 34.0,
+     "forced": false,
+     "entry_date": "2021-10-27",
+     "exit_date": "2024-10-09"
+    }
+   ]
+  },
+  "lowtier|X20": {
+   "SH000001": [
+    {
+     "ret": 0.2732322453707723,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-17"
+    },
+    {
+     "ret": 0.16497669360051703,
+     "hold_months": 15.380952380952381,
+     "forced": false,
+     "entry_date": "1998-02-23",
+     "exit_date": "1999-06-15"
+    },
+    {
+     "ret": 0.12963767024029527,
+     "hold_months": 15.571428571428571,
+     "forced": false,
+     "entry_date": "2003-02-24",
+     "exit_date": "2006-05-15"
+    },
+    {
+     "ret": -0.05455200540766447,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2010-05-10",
+     "exit_date": "2014-10-15"
+    },
+    {
+     "ret": 0.48521963468970086,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.08356339121672629,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-09-02"
+    },
+    {
+     "ret": 0.0896709334712189,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-08-05",
+     "exit_date": "2022-09-14"
+    },
+    {
+     "ret": 0.0496853101582595,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.9347784345891175,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-18"
+    },
+    {
+     "ret": 0.09981665639380721,
+     "hold_months": 15.380952380952381,
+     "forced": false,
+     "entry_date": "1998-02-23",
+     "exit_date": "1999-06-15"
+    },
+    {
+     "ret": 0.1970981952796098,
+     "hold_months": 15.380952380952381,
+     "forced": false,
+     "entry_date": "2003-02-24",
+     "exit_date": "2006-05-09"
+    },
+    {
+     "ret": -0.2257215461374079,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2010-05-10",
+     "exit_date": "2014-10-15"
+    },
+    {
+     "ret": 0.4471750520845219,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.010286862986968792,
+     "hold_months": 31.047619047619047,
+     "forced": false,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-04-02"
+    },
+    {
+     "ret": 0.29847857044318915,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": -0.05216445243388479,
+     "hold_months": 31.0,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.1096695968118753,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-04-29",
+     "exit_date": "2007-05-11"
+    },
+    {
+     "ret": 0.18437759201032367,
+     "hold_months": 18.80952380952381,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-11-28"
+    },
+    {
+     "ret": 0.001280294963648343,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-06",
+     "exit_date": "2018-08-08"
+    },
+    {
+     "ret": 0.3487842027535848,
+     "hold_months": 16.476190476190474,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-01-06"
+    },
+    {
+     "ret": 0.019442268621294945,
+     "hold_months": 31.0,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.0831861759948126,
+     "hold_months": 26.666666666666668,
+     "forced": false,
+     "entry_date": "2008-03-17",
+     "exit_date": "2013-02-04"
+    },
+    {
+     "ret": 0.19249582795745224,
+     "hold_months": 18.80952380952381,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-11-28"
+    },
+    {
+     "ret": 0.022866401597892327,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-06",
+     "exit_date": "2018-08-08"
+    },
+    {
+     "ret": 0.29178956374680154,
+     "hold_months": 24.523809523809526,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-09-14"
+    },
+    {
+     "ret": 0.079153623462201,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.4238417720376868,
+     "hold_months": 20.61904761904762,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2015-01-23"
+    },
+    {
+     "ret": -0.3518422737241128,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-06",
+     "exit_date": "2018-08-08"
+    },
+    {
+     "ret": 0.3917179544732703,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": 0.021902447410142356,
+     "hold_months": 30.952380952380953,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2024-10-08"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.30067917781136244,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.052674934910990845,
+     "hold_months": 31.047619047619047,
+     "forced": false,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-04-02"
+    },
+    {
+     "ret": 0.28315990895985244,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": -0.08404528906256192,
+     "hold_months": 31.0,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.35421997385197646,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": 1.1198071364620628,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-02-16"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.03091620352420077,
+     "hold_months": 33.95238095238095,
+     "forced": false,
+     "entry_date": "2021-10-27",
+     "exit_date": "2024-10-08"
+    }
+   ]
+  },
+  "lowtier|Xtime": {
+   "SH000001": [
+    {
+     "ret": 0.7617567903718285,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1997-07-02"
+    },
+    {
+     "ret": 0.3681311927503461,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1998-02-23",
+     "exit_date": "2000-03-13"
+    },
+    {
+     "ret": 1.5919988716911848,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2003-02-24",
+     "exit_date": "2007-04-25"
+    },
+    {
+     "ret": -0.06931765818278723,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2010-05-10",
+     "exit_date": "2013-03-22"
+    },
+    {
+     "ret": 0.62206499419889,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-07-31"
+    },
+    {
+     "ret": -0.006923689407013156,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2016-07-27",
+     "exit_date": "2018-02-12"
+    },
+    {
+     "ret": 0.19334429922458618,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-03-01"
+    },
+    {
+     "ret": -0.011698601480951365,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-08-18"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 1.9771258991680267,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1997-07-03"
+    },
+    {
+     "ret": 0.28007352277328823,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1998-02-23",
+     "exit_date": "2000-03-13"
+    },
+    {
+     "ret": 2.142786610255779,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2003-02-24",
+     "exit_date": "2007-04-25"
+    },
+    {
+     "ret": -0.11367864070561295,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2010-05-10",
+     "exit_date": "2013-03-22"
+    },
+    {
+     "ret": 0.530293936856959,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-07-31"
+    },
+    {
+     "ret": -0.034748094835794885,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2016-07-27",
+     "exit_date": "2018-02-12"
+    },
+    {
+     "ret": 0.3862490074974476,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-03-01"
+    },
+    {
+     "ret": -0.09644410837595496,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-08-18"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 0.9665446835717291,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2004-04-29",
+     "exit_date": "2009-03-19"
+    },
+    {
+     "ret": 0.07739450386039048,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-11-06"
+    },
+    {
+     "ret": -0.009194264770159277,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-07-06",
+     "exit_date": "2017-01-20"
+    },
+    {
+     "ret": 0.34946929771086777,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-03-01"
+    },
+    {
+     "ret": -0.06281774525767214,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-08-18"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.16380627786354396,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2008-03-17",
+     "exit_date": "2012-04-26"
+    },
+    {
+     "ret": 0.09987024635564445,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-11-06"
+    },
+    {
+     "ret": 0.033817718907801275,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-07-06",
+     "exit_date": "2017-01-20"
+    },
+    {
+     "ret": 0.028078578896464368,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-03-01"
+    },
+    {
+     "ret": 0.01934650855128628,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-08-18"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.2371945918042162,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-11-06"
+    },
+    {
+     "ret": -0.1897091544439562,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-07-06",
+     "exit_date": "2017-01-20"
+    },
+    {
+     "ret": 0.5272995869081714,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-03-01"
+    },
+    {
+     "ret": -0.14883172339795392,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-08-18"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 5.268631122954065,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-08-04"
+    },
+    {
+     "ret": -0.11178801897254509,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2016-07-27",
+     "exit_date": "2018-02-12"
+    },
+    {
+     "ret": 0.2192688438378414,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-03-01"
+    },
+    {
+     "ret": -0.09405240889733613,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-08-18"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.2123106951549132,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-03-01"
+    },
+    {
+     "ret": 0.8497536368205154,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-08-21"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.08107054035935168,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2021-10-27",
+     "exit_date": "2023-05-19"
+    }
+   ]
+  },
+  "lowtier|Xtarget": {
+   "SH000001": [
+    {
+     "ret": 0.22371712032067337,
+     "hold_months": 12.095238095238095,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-18"
+    },
+    {
+     "ret": 0.2950749626594118,
+     "hold_months": 15.714285714285714,
+     "forced": false,
+     "entry_date": "1998-02-23",
+     "exit_date": "1999-06-24"
+    },
+    {
+     "ret": 0.9520456587456594,
+     "hold_months": 16.238095238095237,
+     "forced": false,
+     "entry_date": "2003-02-24",
+     "exit_date": "2007-03-02"
+    },
+    {
+     "ret": -0.05455200540766447,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2010-05-10",
+     "exit_date": "2014-10-15"
+    },
+    {
+     "ret": 0.48521963468970086,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.08356339121672629,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-09-02"
+    },
+    {
+     "ret": 0.0896709334712189,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-08-05",
+     "exit_date": "2022-09-14"
+    },
+    {
+     "ret": 0.0496853101582595,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.9347784345891175,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-18"
+    },
+    {
+     "ret": 0.2732496294210356,
+     "hold_months": 15.80952380952381,
+     "forced": false,
+     "entry_date": "1998-02-23",
+     "exit_date": "1999-06-28"
+    },
+    {
+     "ret": 1.3060379504719757,
+     "hold_months": 16.238095238095237,
+     "forced": false,
+     "entry_date": "2003-02-24",
+     "exit_date": "2007-03-02"
+    },
+    {
+     "ret": -0.2257215461374079,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2010-05-10",
+     "exit_date": "2014-10-15"
+    },
+    {
+     "ret": 0.4471750520845219,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.09873110107261829,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-09-02"
+    },
+    {
+     "ret": 0.27656513644298086,
+     "hold_months": 12.380952380952381,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-28"
+    },
+    {
+     "ret": -0.08762368177441582,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.1096695968118753,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-04-29",
+     "exit_date": "2007-05-11"
+    },
+    {
+     "ret": 0.2796283996115696,
+     "hold_months": 19.0,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-12-04"
+    },
+    {
+     "ret": 0.294545333979618,
+     "hold_months": 29.761904761904763,
+     "forced": false,
+     "entry_date": "2015-07-06",
+     "exit_date": "2018-01-23"
+    },
+    {
+     "ret": 0.2826700353737468,
+     "hold_months": 16.333333333333332,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-12-31"
+    },
+    {
+     "ret": -0.04150353739206225,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.24387164258792227,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-03-17",
+     "exit_date": "2013-12-03"
+    },
+    {
+     "ret": 0.2704518869602859,
+     "hold_months": 19.0,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-12-04"
+    },
+    {
+     "ret": 0.022866401597892327,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-06",
+     "exit_date": "2018-08-08"
+    },
+    {
+     "ret": 0.12187979197338517,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-08-05",
+     "exit_date": "2022-09-14"
+    },
+    {
+     "ret": 0.079153623462201,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.28194447209297757,
+     "hold_months": 18.952380952380953,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-12-03"
+    },
+    {
+     "ret": -0.3518422737241128,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-07-06",
+     "exit_date": "2018-08-08"
+    },
+    {
+     "ret": 0.3917179544732703,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": -0.14100308679549112,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.30067917781136244,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.1990934969711481,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-09-02"
+    },
+    {
+     "ret": 0.2838487614139982,
+     "hold_months": 21.333333333333332,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2021-06-10"
+    },
+    {
+     "ret": -0.09147481742474284,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-01-25",
+     "exit_date": "2025-03-14"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.35421997385197646,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": 1.1198071364620628,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-02-16"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.10232237800136479,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-10-27",
+     "exit_date": "2024-12-06"
+    }
+   ]
+  },
+  "lowtier|Xheat": {
+   "SH000001": [
+    {
+     "ret": 0.2732322453707723,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-17"
+    },
+    {
+     "ret": 0.03562390445674679,
+     "hold_months": 14.80952380952381,
+     "forced": false,
+     "entry_date": "1998-02-23",
+     "exit_date": "1999-05-28"
+    },
+    {
+     "ret": -0.0991933222322563,
+     "hold_months": 13.047619047619047,
+     "forced": false,
+     "entry_date": "2003-02-24",
+     "exit_date": "2006-02-22"
+    },
+    {
+     "ret": -0.07289982238440873,
+     "hold_months": 16.0,
+     "forced": false,
+     "entry_date": "2010-05-10",
+     "exit_date": "2013-01-15"
+    },
+    {
+     "ret": 0.48521963468970086,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.05748362722035971,
+     "hold_months": 29.857142857142858,
+     "forced": false,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.16397431276930252,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": 0.028555063423817195,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-02-15"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 0.9347784345891175,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-11-29",
+     "exit_date": "1996-12-18"
+    },
+    {
+     "ret": -0.07788110654715674,
+     "hold_months": 14.80952380952381,
+     "forced": false,
+     "entry_date": "1998-02-23",
+     "exit_date": "1999-05-28"
+    },
+    {
+     "ret": -0.006598091113853011,
+     "hold_months": 13.047619047619047,
+     "forced": false,
+     "entry_date": "2003-02-24",
+     "exit_date": "2006-02-22"
+    },
+    {
+     "ret": -0.11237700837713482,
+     "hold_months": 16.0,
+     "forced": false,
+     "entry_date": "2010-05-10",
+     "exit_date": "2013-01-15"
+    },
+    {
+     "ret": 0.4471750520845219,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.12081035288477993,
+     "hold_months": 29.857142857142858,
+     "forced": false,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.29847857044318915,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": 0.028080160863677595,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-02-15"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 2.1096695968118753,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-04-29",
+     "exit_date": "2007-05-11"
+    },
+    {
+     "ret": -0.06717918962819691,
+     "hold_months": 14.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-07-03"
+    },
+    {
+     "ret": -0.026249523538367625,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2015-07-06",
+     "exit_date": "2016-07-18"
+    },
+    {
+     "ret": 0.20308934503971487,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": 0.014065114656139688,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-02-15"
+    }
+   ],
+   "000015": [
+    {
+     "ret": 0.007284751295845826,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2008-03-17",
+     "exit_date": "2011-03-10"
+    },
+    {
+     "ret": -0.05812531685735456,
+     "hold_months": 14.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-07-03"
+    },
+    {
+     "ret": -0.04941779582203232,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2015-07-06",
+     "exit_date": "2016-07-18"
+    },
+    {
+     "ret": 0.055389510683022,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": 0.004629319470716542,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-02-15"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.1604417470102908,
+     "hold_months": 14.047619047619047,
+     "forced": false,
+     "entry_date": "2013-04-15",
+     "exit_date": "2014-07-03"
+    },
+    {
+     "ret": -0.008242318370783375,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2015-07-06",
+     "exit_date": "2016-07-18"
+    },
+    {
+     "ret": 0.3917179544732703,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": 0.0172705569760645,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-02-15"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.30067917781136244,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-13",
+     "exit_date": "2015-01-26"
+    },
+    {
+     "ret": -0.17090110303409922,
+     "hold_months": 29.857142857142858,
+     "forced": false,
+     "entry_date": "2016-07-27",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.28315990895985244,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": -0.028096391804506293,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-02-15"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.35421997385197646,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-05",
+     "exit_date": "2020-08-19"
+    },
+    {
+     "ret": 1.1198071364620628,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-01-25",
+     "exit_date": "2023-02-16"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.0904213489218374,
+     "hold_months": 14.523809523809524,
+     "forced": false,
+     "entry_date": "2021-10-27",
+     "exit_date": "2023-01-31"
+    }
+   ]
+  },
+  "base|X30": {
+   "SH000001": [
+    {
+     "ret": 0.47612817253141326,
+     "hold_months": 12.095238095238095,
+     "forced": false,
+     "entry_date": "1995-10-31",
+     "exit_date": "1996-11-19"
+    },
+    {
+     "ret": 0.26189932767621316,
+     "hold_months": 15.476190476190476,
+     "forced": false,
+     "entry_date": "1998-02-27",
+     "exit_date": "1999-06-23"
+    },
+    {
+     "ret": 0.7809916870762359,
+     "hold_months": 20.714285714285715,
+     "forced": false,
+     "entry_date": "2001-06-27",
+     "exit_date": "2007-03-05"
+    },
+    {
+     "ret": -0.2694168756325842,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-04-30",
+     "exit_date": "2014-01-16"
+    },
+    {
+     "ret": 0.35485018908302357,
+     "hold_months": 21.19047619047619,
+     "forced": false,
+     "entry_date": "2013-01-31",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": -0.09468047261921486,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-04-30",
+     "exit_date": "2018-06-05"
+    },
+    {
+     "ret": 0.061592290743694766,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2017-08-31",
+     "exit_date": "2020-10-15"
+    },
+    {
+     "ret": 0.05309542002356471,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-12-31",
+     "exit_date": "2023-02-16"
+    },
+    {
+     "ret": 0.055417713734414065,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-31",
+     "exit_date": "2025-05-19"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 1.682731009964329,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-10-31",
+     "exit_date": "1996-11-19"
+    },
+    {
+     "ret": 0.16075455111588055,
+     "hold_months": 15.428571428571429,
+     "forced": false,
+     "entry_date": "1998-02-27",
+     "exit_date": "1999-06-22"
+    },
+    {
+     "ret": 0.30866923044899375,
+     "hold_months": 20.047619047619047,
+     "forced": false,
+     "entry_date": "2001-06-27",
+     "exit_date": "2006-05-16"
+    },
+    {
+     "ret": -0.2928039189326924,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-04-30",
+     "exit_date": "2014-01-16"
+    },
+    {
+     "ret": 0.20294788898221272,
+     "hold_months": 21.19047619047619,
+     "forced": false,
+     "entry_date": "2013-01-31",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": -0.12195158100761838,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-04-30",
+     "exit_date": "2018-06-05"
+    },
+    {
+     "ret": 0.31905350850223946,
+     "hold_months": 33.0,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2020-07-10"
+    },
+    {
+     "ret": -0.004734197320498401,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-12-31",
+     "exit_date": "2023-02-16"
+    },
+    {
+     "ret": -0.12352168196586044,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-31",
+     "exit_date": "2025-05-19"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 1.5750445881048685,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-03-31",
+     "exit_date": "2007-04-05"
+    },
+    {
+     "ret": -0.06662385591144637,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2010-05-31",
+     "exit_date": "2014-11-05"
+    },
+    {
+     "ret": 0.48661271340948997,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2013-12-31",
+     "exit_date": "2015-01-14"
+    },
+    {
+     "ret": 0.10365397358388728,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-03-31",
+     "exit_date": "2019-05-10"
+    },
+    {
+     "ret": 0.43509941759854054,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2018-06-29",
+     "exit_date": "2021-08-06"
+    },
+    {
+     "ret": -0.33372879399864286,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2020-10-30",
+     "exit_date": "2023-12-08"
+    },
+    {
+     "ret": 0.2603008132017155,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2023-02-28",
+     "exit_date": "2026-04-14"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.30680771074733426,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2007-04-30",
+     "exit_date": "2013-09-26"
+    },
+    {
+     "ret": 0.27006139287925124,
+     "hold_months": 24.19047619047619,
+     "forced": false,
+     "entry_date": "2012-10-31",
+     "exit_date": "2014-12-05"
+    },
+    {
+     "ret": 0.031954199705410025,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-02-27",
+     "exit_date": "2018-03-30"
+    },
+    {
+     "ret": -0.08869516863769444,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2017-05-31",
+     "exit_date": "2020-07-07"
+    },
+    {
+     "ret": 0.08435017758670527,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-08-30",
+     "exit_date": "2022-10-18"
+    },
+    {
+     "ret": 0.07327207695482563,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-12-31",
+     "exit_date": "2025-02-20"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.4376080260965509,
+     "hold_months": 12.095238095238095,
+     "forced": false,
+     "entry_date": "2012-07-31",
+     "exit_date": "2013-08-20"
+    },
+    {
+     "ret": -0.21433706488500548,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2014-11-28",
+     "exit_date": "2018-01-02"
+    },
+    {
+     "ret": 0.20137984973471745,
+     "hold_months": 33.38095238095238,
+     "forced": false,
+     "entry_date": "2017-03-31",
+     "exit_date": "2020-02-19"
+    },
+    {
+     "ret": 0.7535993942729271,
+     "hold_months": 17.238095238095237,
+     "forced": false,
+     "entry_date": "2019-07-31",
+     "exit_date": "2021-01-25"
+    },
+    {
+     "ret": -0.0751020672057342,
+     "hold_months": 32.857142857142854,
+     "forced": false,
+     "entry_date": "2021-11-30",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.38454139502333984,
+     "hold_months": 12.428571428571429,
+     "forced": false,
+     "entry_date": "2014-01-30",
+     "exit_date": "2015-03-03"
+    },
+    {
+     "ret": -0.20466240596021112,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-05-31",
+     "exit_date": "2019-07-09"
+    },
+    {
+     "ret": 0.4755878082851577,
+     "hold_months": 21.428571428571427,
+     "forced": false,
+     "entry_date": "2018-08-31",
+     "exit_date": "2020-07-14"
+    },
+    {
+     "ret": -0.3022034486451354,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2020-12-31",
+     "exit_date": "2024-02-19"
+    },
+    {
+     "ret": 0.522789537900819,
+     "hold_months": 32.57142857142857,
+     "forced": false,
+     "entry_date": "2023-03-31",
+     "exit_date": "2026-01-26"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.30050415069127445,
+     "hold_months": 33.095238095238095,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2020-07-14"
+    },
+    {
+     "ret": 2.225340033061836,
+     "hold_months": 30.952380952380953,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2022-09-06"
+    },
+    {
+     "ret": 0.5914278382315288,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-31",
+     "exit_date": "2025-05-20"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.05155471800418332,
+     "hold_months": 34.666666666666664,
+     "forced": false,
+     "entry_date": "2021-09-30",
+     "exit_date": "2024-10-09"
+    }
+   ]
+  },
+  "base|X20": {
+   "SH000001": [
+    {
+     "ret": 0.37928548732728906,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-10-31",
+     "exit_date": "1996-11-18"
+    },
+    {
+     "ret": 0.16718078362832034,
+     "hold_months": 15.19047619047619,
+     "forced": false,
+     "entry_date": "1998-02-27",
+     "exit_date": "1999-06-15"
+    },
+    {
+     "ret": 0.0179896357120779,
+     "hold_months": 20.0,
+     "forced": false,
+     "entry_date": "2001-06-27",
+     "exit_date": "2006-05-15"
+    },
+    {
+     "ret": -0.2694168756325842,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-04-30",
+     "exit_date": "2014-01-16"
+    },
+    {
+     "ret": 0.21077809248957724,
+     "hold_months": 20.904761904761905,
+     "forced": false,
+     "entry_date": "2013-01-31",
+     "exit_date": "2014-11-27"
+    },
+    {
+     "ret": -0.09468047261921486,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-04-30",
+     "exit_date": "2018-06-05"
+    },
+    {
+     "ret": 0.061592290743694766,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2017-08-31",
+     "exit_date": "2020-10-15"
+    },
+    {
+     "ret": 0.05309542002356471,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-12-31",
+     "exit_date": "2023-02-16"
+    },
+    {
+     "ret": 0.055417713734414065,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-31",
+     "exit_date": "2025-05-19"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 1.682731009964329,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-10-31",
+     "exit_date": "1996-11-19"
+    },
+    {
+     "ret": 0.10432817454783039,
+     "hold_months": 15.19047619047619,
+     "forced": false,
+     "entry_date": "1998-02-27",
+     "exit_date": "1999-06-15"
+    },
+    {
+     "ret": 0.20656141714913967,
+     "hold_months": 19.80952380952381,
+     "forced": false,
+     "entry_date": "2001-06-27",
+     "exit_date": "2006-05-09"
+    },
+    {
+     "ret": -0.2928039189326924,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-04-30",
+     "exit_date": "2014-01-16"
+    },
+    {
+     "ret": 0.11820885892630217,
+     "hold_months": 21.095238095238095,
+     "forced": false,
+     "entry_date": "2013-01-31",
+     "exit_date": "2014-12-03"
+    },
+    {
+     "ret": -0.12195158100761838,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-04-30",
+     "exit_date": "2018-06-05"
+    },
+    {
+     "ret": -0.004144329637431499,
+     "hold_months": 18.285714285714285,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2019-04-02"
+    },
+    {
+     "ret": 0.2794644670789186,
+     "hold_months": 12.285714285714286,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2021-01-22"
+    },
+    {
+     "ret": -0.03841006680438641,
+     "hold_months": 29.0,
+     "forced": false,
+     "entry_date": "2022-03-31",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 1.5750445881048685,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-03-31",
+     "exit_date": "2007-04-05"
+    },
+    {
+     "ret": -0.06662385591144637,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2010-05-31",
+     "exit_date": "2014-11-05"
+    },
+    {
+     "ret": 0.48661271340948997,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2013-12-31",
+     "exit_date": "2015-01-14"
+    },
+    {
+     "ret": 0.24120628563833924,
+     "hold_months": 35.0,
+     "forced": false,
+     "entry_date": "2016-03-31",
+     "exit_date": "2019-04-08"
+    },
+    {
+     "ret": 0.38488269768241845,
+     "hold_months": 23.428571428571427,
+     "forced": false,
+     "entry_date": "2018-06-29",
+     "exit_date": "2020-07-09"
+    },
+    {
+     "ret": -0.33372879399864286,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2020-10-30",
+     "exit_date": "2023-12-08"
+    },
+    {
+     "ret": 0.12357958927331558,
+     "hold_months": 18.523809523809526,
+     "forced": false,
+     "entry_date": "2023-02-28",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.15575829278493358,
+     "hold_months": 28.714285714285715,
+     "forced": false,
+     "entry_date": "2007-04-30",
+     "exit_date": "2013-02-04"
+    },
+    {
+     "ret": 0.13502670985210474,
+     "hold_months": 23.952380952380953,
+     "forced": false,
+     "entry_date": "2012-10-31",
+     "exit_date": "2014-11-28"
+    },
+    {
+     "ret": 0.031954199705410025,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-02-27",
+     "exit_date": "2018-03-30"
+    },
+    {
+     "ret": -0.08869516863769444,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2017-05-31",
+     "exit_date": "2020-07-07"
+    },
+    {
+     "ret": 0.28967289788714945,
+     "hold_months": 23.61904761904762,
+     "forced": false,
+     "entry_date": "2019-08-30",
+     "exit_date": "2021-09-14"
+    },
+    {
+     "ret": 0.07327207695482563,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-12-31",
+     "exit_date": "2025-02-20"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.38315755724127376,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2012-07-31",
+     "exit_date": "2013-08-19"
+    },
+    {
+     "ret": -0.21433706488500548,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2014-11-28",
+     "exit_date": "2018-01-02"
+    },
+    {
+     "ret": -0.019802185605377276,
+     "hold_months": 22.571428571428573,
+     "forced": false,
+     "entry_date": "2017-03-31",
+     "exit_date": "2019-03-13"
+    },
+    {
+     "ret": 0.3684458840454321,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-07-31",
+     "exit_date": "2020-08-14"
+    },
+    {
+     "ret": -0.01813709116982498,
+     "hold_months": 32.80952380952381,
+     "forced": false,
+     "entry_date": "2021-11-30",
+     "exit_date": "2024-10-08"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.28183300882709905,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-30",
+     "exit_date": "2015-02-12"
+    },
+    {
+     "ret": -0.05136260252887781,
+     "hold_months": 32.904761904761905,
+     "forced": false,
+     "entry_date": "2016-05-31",
+     "exit_date": "2019-04-02"
+    },
+    {
+     "ret": 0.36898937704359946,
+     "hold_months": 21.19047619047619,
+     "forced": false,
+     "entry_date": "2018-08-31",
+     "exit_date": "2020-07-07"
+    },
+    {
+     "ret": -0.3022034486451354,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2020-12-31",
+     "exit_date": "2024-02-19"
+    },
+    {
+     "ret": 0.0497742323928847,
+     "hold_months": 17.428571428571427,
+     "forced": false,
+     "entry_date": "2023-03-31",
+     "exit_date": "2024-10-09"
+    }
+   ],
+   "512100": [
+    {
+     "ret": -0.034097922250400314,
+     "hold_months": 18.285714285714285,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2019-04-02"
+    },
+    {
+     "ret": 2.225340033061836,
+     "hold_months": 30.952380952380953,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2022-09-06"
+    },
+    {
+     "ret": 0.8204525086781325,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-31",
+     "exit_date": "2023-04-18"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.04988785459118539,
+     "hold_months": 34.61904761904762,
+     "forced": false,
+     "entry_date": "2021-09-30",
+     "exit_date": "2024-10-08"
+    }
+   ]
+  },
+  "base|Xtime": {
+   "SH000001": [
+    {
+     "ret": 0.8260013816260252,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1995-10-31",
+     "exit_date": "1997-05-30"
+    },
+    {
+     "ret": 0.2868703611685073,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1998-02-27",
+     "exit_date": "2000-03-17"
+    },
+    {
+     "ret": -0.21572688627685854,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2001-06-27",
+     "exit_date": "2006-03-10"
+    },
+    {
+     "ret": -0.17097260410339643,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2008-04-30",
+     "exit_date": "2012-06-12"
+    },
+    {
+     "ret": 0.02173942451184563,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2013-01-31",
+     "exit_date": "2014-08-27"
+    },
+    {
+     "ret": -0.062287531959789644,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-04-30",
+     "exit_date": "2016-11-17"
+    },
+    {
+     "ret": -0.029028776952019664,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2019-03-26"
+    },
+    {
+     "ret": 0.13533430925387102,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2021-07-26"
+    },
+    {
+     "ret": -0.06357179240970112,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-31",
+     "exit_date": "2023-10-25"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 2.261880430741431,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1995-10-31",
+     "exit_date": "1997-06-02"
+    },
+    {
+     "ret": 0.1851143459720641,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "1998-02-27",
+     "exit_date": "2000-03-17"
+    },
+    {
+     "ret": -0.051746941508941324,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2001-06-27",
+     "exit_date": "2006-03-10"
+    },
+    {
+     "ret": -0.09727001332482799,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2008-04-30",
+     "exit_date": "2012-06-12"
+    },
+    {
+     "ret": -0.07574812669971731,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2013-01-31",
+     "exit_date": "2014-08-27"
+    },
+    {
+     "ret": -0.0596019310530328,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-04-30",
+     "exit_date": "2016-11-17"
+    },
+    {
+     "ret": -0.0583672782652902,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2019-03-26"
+    },
+    {
+     "ret": 0.23606727441464148,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2021-07-26"
+    },
+    {
+     "ret": -0.17501975127701086,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-31",
+     "exit_date": "2023-10-25"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 1.0636307318748153,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2004-03-31",
+     "exit_date": "2009-02-18"
+    },
+    {
+     "ret": -0.10273035650176288,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2010-05-31",
+     "exit_date": "2013-04-16"
+    },
+    {
+     "ret": 0.7342560992028742,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2013-12-31",
+     "exit_date": "2015-07-21"
+    },
+    {
+     "ret": 0.18710716885651757,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2016-03-31",
+     "exit_date": "2017-10-20"
+    },
+    {
+     "ret": 0.21206257871527456,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-06-29",
+     "exit_date": "2020-01-16"
+    },
+    {
+     "ret": -0.2221732287296211,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2020-10-30",
+     "exit_date": "2022-05-25"
+    },
+    {
+     "ret": -0.14864086278374633,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2023-02-28",
+     "exit_date": "2024-09-18"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.24833259678560415,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2007-04-30",
+     "exit_date": "2012-02-22"
+    },
+    {
+     "ret": -0.09563735601074419,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2012-10-31",
+     "exit_date": "2014-05-29"
+    },
+    {
+     "ret": -0.10206626196372659,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2015-02-27",
+     "exit_date": "2016-09-08"
+    },
+    {
+     "ret": -0.14108832656943682,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2017-05-31",
+     "exit_date": "2018-12-13"
+    },
+    {
+     "ret": 0.04777192153318133,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-30",
+     "exit_date": "2021-03-26"
+    },
+    {
+     "ret": 0.022031860480297594,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2021-12-31",
+     "exit_date": "2023-07-27"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.7315315391191783,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2012-07-31",
+     "exit_date": "2014-02-28"
+    },
+    {
+     "ret": -0.05400558419320611,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2014-11-28",
+     "exit_date": "2016-06-20"
+    },
+    {
+     "ret": -0.29623776989785866,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2017-03-31",
+     "exit_date": "2018-10-22"
+    },
+    {
+     "ret": 0.6228047097544263,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-07-31",
+     "exit_date": "2021-02-24"
+    },
+    {
+     "ret": -0.16718321734258101,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2021-11-30",
+     "exit_date": "2023-06-26"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 5.494890153874091,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-30",
+     "exit_date": "2015-08-21"
+    },
+    {
+     "ret": -0.0015781119095932272,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2016-05-31",
+     "exit_date": "2017-12-18"
+    },
+    {
+     "ret": 0.10112665238532559,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2018-08-31",
+     "exit_date": "2020-03-27"
+    },
+    {
+     "ret": -0.053366565237457086,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2020-12-31",
+     "exit_date": "2022-07-27"
+    },
+    {
+     "ret": 0.025271970057609616,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2023-03-31",
+     "exit_date": "2024-10-28"
+    }
+   ],
+   "512100": [
+    {
+     "ret": -0.06415982724125391,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2019-03-26"
+    },
+    {
+     "ret": 0.2629129597346713,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2021-07-26"
+    },
+    {
+     "ret": 0.5111713297844283,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-31",
+     "exit_date": "2023-10-26"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.07072364725365932,
+     "hold_months": 18.047619047619047,
+     "forced": false,
+     "entry_date": "2021-09-30",
+     "exit_date": "2023-04-26"
+    }
+   ]
+  },
+  "base|Xtarget": {
+   "SH000001": [
+    {
+     "ret": 0.37928548732728906,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-10-31",
+     "exit_date": "1996-11-18"
+    },
+    {
+     "ret": 0.29752519348903816,
+     "hold_months": 15.523809523809524,
+     "forced": false,
+     "entry_date": "1998-02-27",
+     "exit_date": "1999-06-24"
+    },
+    {
+     "ret": 0.759114715621275,
+     "hold_months": 20.666666666666668,
+     "forced": false,
+     "entry_date": "2001-06-27",
+     "exit_date": "2007-03-02"
+    },
+    {
+     "ret": -0.2694168756325842,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-04-30",
+     "exit_date": "2014-01-16"
+    },
+    {
+     "ret": 0.2886005238744205,
+     "hold_months": 21.142857142857142,
+     "forced": false,
+     "entry_date": "2013-01-31",
+     "exit_date": "2014-12-04"
+    },
+    {
+     "ret": -0.09468047261921486,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-04-30",
+     "exit_date": "2018-06-05"
+    },
+    {
+     "ret": 0.061592290743694766,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2017-08-31",
+     "exit_date": "2020-10-15"
+    },
+    {
+     "ret": 0.05309542002356471,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-12-31",
+     "exit_date": "2023-02-16"
+    },
+    {
+     "ret": 0.055417713734414065,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-31",
+     "exit_date": "2025-05-19"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 1.682731009964329,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-10-31",
+     "exit_date": "1996-11-19"
+    },
+    {
+     "ret": 0.2784725807050896,
+     "hold_months": 15.619047619047619,
+     "forced": false,
+     "entry_date": "1998-02-27",
+     "exit_date": "1999-06-28"
+    },
+    {
+     "ret": 0.2602236303073602,
+     "hold_months": 20.0,
+     "forced": false,
+     "entry_date": "2001-06-27",
+     "exit_date": "2006-05-15"
+    },
+    {
+     "ret": -0.2928039189326924,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2008-04-30",
+     "exit_date": "2014-01-16"
+    },
+    {
+     "ret": 0.2690718534054355,
+     "hold_months": 22.047619047619047,
+     "forced": false,
+     "entry_date": "2013-01-31",
+     "exit_date": "2014-12-31"
+    },
+    {
+     "ret": -0.12195158100761838,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-04-30",
+     "exit_date": "2018-06-05"
+    },
+    {
+     "ret": 0.2936699244775647,
+     "hold_months": 32.95238095238095,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2020-07-09"
+    },
+    {
+     "ret": 0.29540821399261064,
+     "hold_months": 12.904761904761905,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2021-02-10"
+    },
+    {
+     "ret": -0.12352168196586044,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2022-03-31",
+     "exit_date": "2025-05-19"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 1.5750445881048685,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-03-31",
+     "exit_date": "2007-04-05"
+    },
+    {
+     "ret": -0.06662385591144637,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2010-05-31",
+     "exit_date": "2014-11-05"
+    },
+    {
+     "ret": 0.48661271340948997,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2013-12-31",
+     "exit_date": "2015-01-14"
+    },
+    {
+     "ret": 0.2955483661535798,
+     "hold_months": 21.142857142857142,
+     "forced": false,
+     "entry_date": "2016-03-31",
+     "exit_date": "2018-01-22"
+    },
+    {
+     "ret": 0.2965451564768715,
+     "hold_months": 23.285714285714285,
+     "forced": false,
+     "entry_date": "2018-06-29",
+     "exit_date": "2020-07-06"
+    },
+    {
+     "ret": -0.33372879399864286,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2020-10-30",
+     "exit_date": "2023-12-08"
+    },
+    {
+     "ret": 0.2603008132017155,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2023-02-28",
+     "exit_date": "2026-04-14"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.30680771074733426,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2007-04-30",
+     "exit_date": "2013-09-26"
+    },
+    {
+     "ret": 0.25126399519607756,
+     "hold_months": 24.238095238095237,
+     "forced": false,
+     "entry_date": "2012-10-31",
+     "exit_date": "2014-12-08"
+    },
+    {
+     "ret": 0.031954199705410025,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2015-02-27",
+     "exit_date": "2018-03-30"
+    },
+    {
+     "ret": -0.08869516863769444,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2017-05-31",
+     "exit_date": "2020-07-07"
+    },
+    {
+     "ret": 0.08435017758670527,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2019-08-30",
+     "exit_date": "2022-10-18"
+    },
+    {
+     "ret": 0.07327207695482563,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-12-31",
+     "exit_date": "2025-02-20"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.38315755724127376,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2012-07-31",
+     "exit_date": "2013-08-19"
+    },
+    {
+     "ret": -0.21433706488500548,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2014-11-28",
+     "exit_date": "2018-01-02"
+    },
+    {
+     "ret": 0.16669135164405668,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2017-03-31",
+     "exit_date": "2020-05-12"
+    },
+    {
+     "ret": 0.3684458840454321,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-07-31",
+     "exit_date": "2020-08-14"
+    },
+    {
+     "ret": -0.23525077068355882,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-11-30",
+     "exit_date": "2025-01-10"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.2931551931321965,
+     "hold_months": 12.095238095238095,
+     "forced": false,
+     "entry_date": "2014-01-30",
+     "exit_date": "2015-02-13"
+    },
+    {
+     "ret": -0.20466240596021112,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2016-05-31",
+     "exit_date": "2019-07-09"
+    },
+    {
+     "ret": 0.3031951072113561,
+     "hold_months": 21.142857142857142,
+     "forced": false,
+     "entry_date": "2018-08-31",
+     "exit_date": "2020-07-06"
+    },
+    {
+     "ret": -0.3022034486451354,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2020-12-31",
+     "exit_date": "2024-02-19"
+    },
+    {
+     "ret": 0.29688215466778667,
+     "hold_months": 28.952380952380953,
+     "forced": false,
+     "entry_date": "2023-03-31",
+     "exit_date": "2025-09-30"
+    }
+   ],
+   "512100": [
+    {
+     "ret": 0.23515218331985355,
+     "hold_months": 33.04761904761905,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2020-07-13"
+    },
+    {
+     "ret": 0.29723767935257706,
+     "hold_months": 18.61904761904762,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2021-08-11"
+    },
+    {
+     "ret": 0.8204525086781325,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2022-03-31",
+     "exit_date": "2023-04-18"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.1332310252410812,
+     "hold_months": 36.0,
+     "forced": true,
+     "entry_date": "2021-09-30",
+     "exit_date": "2024-11-18"
+    }
+   ]
+  },
+  "base|Xheat": {
+   "SH000001": [
+    {
+     "ret": 0.37928548732728906,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-10-31",
+     "exit_date": "1996-11-18"
+    },
+    {
+     "ret": 0.03758326410137047,
+     "hold_months": 14.619047619047619,
+     "forced": false,
+     "entry_date": "1998-02-27",
+     "exit_date": "1999-05-28"
+    },
+    {
+     "ret": -0.18822478578221757,
+     "hold_months": 17.476190476190474,
+     "forced": false,
+     "entry_date": "2001-06-27",
+     "exit_date": "2006-02-22"
+    },
+    {
+     "ret": 0.06811196576534306,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2008-04-30",
+     "exit_date": "2011-04-26"
+    },
+    {
+     "ret": -0.061785596430519285,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2013-01-31",
+     "exit_date": "2014-02-26"
+    },
+    {
+     "ret": -0.1043648451817113,
+     "hold_months": 14.095238095238095,
+     "forced": false,
+     "entry_date": "2015-04-30",
+     "exit_date": "2016-07-14"
+    },
+    {
+     "ret": -0.05712082206449265,
+     "hold_months": 17.095238095238095,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.1351096820996318,
+     "hold_months": 19.142857142857142,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2021-08-26"
+    },
+    {
+     "ret": 0.031235070100850804,
+     "hold_months": 15.428571428571429,
+     "forced": false,
+     "entry_date": "2022-03-31",
+     "exit_date": "2023-08-01"
+    }
+   ],
+   "SZ399001": [
+    {
+     "ret": 1.682731009964329,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "1995-10-31",
+     "exit_date": "1996-11-19"
+    },
+    {
+     "ret": -0.07409851596372152,
+     "hold_months": 14.619047619047619,
+     "forced": false,
+     "entry_date": "1998-02-27",
+     "exit_date": "1999-05-28"
+    },
+    {
+     "ret": 0.001254884278201862,
+     "hold_months": 17.476190476190474,
+     "forced": false,
+     "entry_date": "2001-06-27",
+     "exit_date": "2006-02-22"
+    },
+    {
+     "ret": 0.15012461585309045,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2008-04-30",
+     "exit_date": "2011-04-26"
+    },
+    {
+     "ret": -0.13945847257038346,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2013-01-31",
+     "exit_date": "2014-02-26"
+    },
+    {
+     "ret": -0.0688150304183206,
+     "hold_months": 14.095238095238095,
+     "forced": false,
+     "entry_date": "2015-04-30",
+     "exit_date": "2016-07-14"
+    },
+    {
+     "ret": -0.11535377003667113,
+     "hold_months": 17.095238095238095,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.21288700462241605,
+     "hold_months": 19.142857142857142,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2021-08-26"
+    },
+    {
+     "ret": -0.03759022842617277,
+     "hold_months": 15.428571428571429,
+     "forced": false,
+     "entry_date": "2022-03-31",
+     "exit_date": "2023-08-01"
+    }
+   ],
+   "000300": [
+    {
+     "ret": 1.5750445881048685,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2004-03-31",
+     "exit_date": "2007-04-05"
+    },
+    {
+     "ret": -0.04353411926106654,
+     "hold_months": 15.285714285714286,
+     "forced": false,
+     "entry_date": "2010-05-31",
+     "exit_date": "2013-01-15"
+    },
+    {
+     "ret": 0.48661271340948997,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2013-12-31",
+     "exit_date": "2015-01-14"
+    },
+    {
+     "ret": 0.1314190934939199,
+     "hold_months": 33.666666666666664,
+     "forced": false,
+     "entry_date": "2016-03-31",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.10110652289699851,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2018-06-29",
+     "exit_date": "2019-07-15"
+    },
+    {
+     "ret": -0.04309459476896205,
+     "hold_months": 12.19047619047619,
+     "forced": false,
+     "entry_date": "2020-10-30",
+     "exit_date": "2021-11-18"
+    },
+    {
+     "ret": 0.19945544845408159,
+     "hold_months": 18.476190476190474,
+     "forced": false,
+     "entry_date": "2023-02-28",
+     "exit_date": "2024-10-08"
+    }
+   ],
+   "000015": [
+    {
+     "ret": -0.09927102573372326,
+     "hold_months": 13.380952380952381,
+     "forced": false,
+     "entry_date": "2007-04-30",
+     "exit_date": "2011-02-17"
+    },
+    {
+     "ret": -0.028011627525356797,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2012-10-31",
+     "exit_date": "2013-11-21"
+    },
+    {
+     "ret": -0.1437806273082861,
+     "hold_months": 16.142857142857142,
+     "forced": false,
+     "entry_date": "2015-02-27",
+     "exit_date": "2016-07-14"
+    },
+    {
+     "ret": -0.0423907756918116,
+     "hold_months": 20.238095238095237,
+     "forced": false,
+     "entry_date": "2017-05-31",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.0064430201393723685,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-08-30",
+     "exit_date": "2020-09-15"
+    },
+    {
+     "ret": -0.005762123579865386,
+     "hold_months": 12.285714285714286,
+     "forced": false,
+     "entry_date": "2021-12-31",
+     "exit_date": "2023-01-31"
+    }
+   ],
+   "399006": [
+    {
+     "ret": 0.44890031083074167,
+     "hold_months": 12.19047619047619,
+     "forced": false,
+     "entry_date": "2012-07-31",
+     "exit_date": "2013-08-22"
+    },
+    {
+     "ret": 0.019321527143617123,
+     "hold_months": 18.904761904761905,
+     "forced": false,
+     "entry_date": "2014-11-28",
+     "exit_date": "2016-07-14"
+    },
+    {
+     "ret": -0.14183592638526965,
+     "hold_months": 22.047619047619047,
+     "forced": false,
+     "entry_date": "2017-03-31",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.3684458840454321,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2019-07-31",
+     "exit_date": "2020-08-14"
+    },
+    {
+     "ret": -0.0059780329925018805,
+     "hold_months": 13.380952380952381,
+     "forced": false,
+     "entry_date": "2021-11-30",
+     "exit_date": "2023-01-31"
+    }
+   ],
+   "510500": [
+    {
+     "ret": 0.28183300882709905,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2014-01-30",
+     "exit_date": "2015-02-12"
+    },
+    {
+     "ret": -0.1697525497332738,
+     "hold_months": 31.714285714285715,
+     "forced": false,
+     "entry_date": "2016-05-31",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.10307900460586694,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2018-08-31",
+     "exit_date": "2019-09-17"
+    },
+    {
+     "ret": 0.04708980621230929,
+     "hold_months": 12.047619047619047,
+     "forced": false,
+     "entry_date": "2020-12-31",
+     "exit_date": "2022-01-17"
+    },
+    {
+     "ret": 0.14604553263219255,
+     "hold_months": 17.38095238095238,
+     "forced": false,
+     "entry_date": "2023-03-31",
+     "exit_date": "2024-10-08"
+    }
+   ],
+   "512100": [
+    {
+     "ret": -0.15695962090867144,
+     "hold_months": 17.095238095238095,
+     "forced": false,
+     "entry_date": "2017-08-31",
+     "exit_date": "2019-02-26"
+    },
+    {
+     "ret": 0.33037878794917597,
+     "hold_months": 19.142857142857142,
+     "forced": false,
+     "entry_date": "2019-12-31",
+     "exit_date": "2021-08-26"
+    },
+    {
+     "ret": 0.7101813710556935,
+     "hold_months": 15.380952380952381,
+     "forced": false,
+     "entry_date": "2022-03-31",
+     "exit_date": "2023-08-01"
+    }
+   ],
+   "588000": [
+    {
+     "ret": -0.10822807404611234,
+     "hold_months": 15.19047619047619,
+     "forced": false,
+     "entry_date": "2021-09-30",
+     "exit_date": "2023-01-31"
+    }
+   ]
+  }
+ },
+ "summary": {
+  "deep20|X30": {
+   "n": 25,
+   "median": 0.09491669014382897,
+   "mean": 0.24162210317453653,
+   "win": 0.6,
+   "p10": -0.2332266923913463,
+   "p90": 0.6181194240038101,
+   "worst": -0.43039939278667794,
+   "avg_hold_months": 29.055238095238096,
+   "forced_pct": 0.52
+  },
+  "deep20|X20": {
+   "n": 25,
+   "median": 0.06559923616674523,
+   "mean": 0.20693888563064505,
+   "win": 0.68,
+   "p10": -0.19349252079285179,
+   "p90": 0.460523669411322,
+   "worst": -0.43039939278667794,
+   "avg_hold_months": 26.21333333333333,
+   "forced_pct": 0.28
+  },
+  "deep20|Xtime": {
+   "n": 25,
+   "median": 0.01982847999305548,
+   "mean": 0.11976606947772622,
+   "win": 0.56,
+   "p10": -0.20900723850748792,
+   "p90": 0.5400237292722903,
+   "worst": -0.22123275397465725,
+   "avg_hold_months": 18.047619047619047,
+   "forced_pct": 0.0
+  },
+  "deep20|Xtarget": {
+   "n": 25,
+   "median": 0.2704830655891213,
+   "mean": 0.19723647058020713,
+   "win": 0.56,
+   "p10": -0.2354124633115486,
+   "p90": 0.5404303984934291,
+   "worst": -0.43039939278667794,
+   "avg_hold_months": 26.37904761904762,
+   "forced_pct": 0.44
+  },
+  "deep20|Xheat": {
+   "n": 25,
+   "median": 0.023428052634869356,
+   "mean": 0.1606033396562789,
+   "win": 0.64,
+   "p10": -0.09905374986497348,
+   "p90": 0.36874979662103463,
+   "worst": -0.18915423606465642,
+   "avg_hold_months": 14.081904761904761,
+   "forced_pct": 0.0
+  },
+  "bottom|X30": {
+   "n": 39,
+   "median": 0.22589941052694207,
+   "mean": 0.22121768941671802,
+   "win": 0.6923076923076923,
+   "p10": -0.2945738600328106,
+   "p90": 0.6654676662448836,
+   "worst": -0.4350460337925699,
+   "avg_hold_months": 27.67399267399267,
+   "forced_pct": 0.5128205128205128
+  },
+  "bottom|X20": {
+   "n": 39,
+   "median": 0.08451690540488732,
+   "mean": 0.14079830249260997,
+   "win": 0.6923076923076923,
+   "p10": -0.2945738600328106,
+   "p90": 0.36706323707206684,
+   "worst": -0.4350460337925699,
+   "avg_hold_months": 25.47741147741148,
+   "forced_pct": 0.41025641025641024
+  },
+  "bottom|Xtime": {
+   "n": 39,
+   "median": 0.011772487868317194,
+   "mean": 0.14893409762690307,
+   "win": 0.5641025641025641,
+   "p10": -0.21535144386220342,
+   "p90": 0.6265666735845312,
+   "worst": -0.27053402332901655,
+   "avg_hold_months": 18.047619047619044,
+   "forced_pct": 0.0
+  },
+  "bottom|Xtarget": {
+   "n": 39,
+   "median": 0.2707418272320288,
+   "mean": 0.21262192818520104,
+   "win": 0.6923076923076923,
+   "p10": -0.2945738600328106,
+   "p90": 0.7848100354465029,
+   "worst": -0.4350460337925699,
+   "avg_hold_months": 26.714285714285715,
+   "forced_pct": 0.41025641025641024
+  },
+  "bottom|Xheat": {
+   "n": 39,
+   "median": 0.011463554854650226,
+   "mean": 0.11219229100251109,
+   "win": 0.5641025641025641,
+   "p10": -0.14710934900179778,
+   "p90": 0.32645537193563856,
+   "worst": -0.18915423606465642,
+   "avg_hold_months": 14.948717948717949,
+   "forced_pct": 0.0
+  },
+  "lowtier|X30": {
+   "n": 37,
+   "median": 0.0896709334712189,
+   "mean": 0.3129813239358751,
+   "win": 0.6756756756756757,
+   "p10": -0.13887605943203019,
+   "p90": 0.9513958557539567,
+   "worst": -0.3518422737241128,
+   "avg_hold_months": 27.37065637065637,
+   "forced_pct": 0.5135135135135135
+  },
+  "lowtier|X20": {
+   "n": 37,
+   "median": 0.12963767024029527,
+   "mean": 0.22394605415819208,
+   "win": 0.7297297297297297,
+   "p10": -0.08333706208357808,
+   "p90": 0.46239288512659343,
+   "worst": -0.3518422737241128,
+   "avg_hold_months": 23.355212355212355,
+   "forced_pct": 0.24324324324324326
+  },
+  "lowtier|Xtime": {
+   "n": 37,
+   "median": 0.09987024635564445,
+   "mean": 0.44726281657220557,
+   "win": 0.6216216216216216,
+   "p10": -0.11254426766577223,
+   "p90": 1.2167263588195105,
+   "worst": -0.1897091544439562,
+   "avg_hold_months": 18.047619047619047,
+   "forced_pct": 0.0
+  },
+  "lowtier|Xtarget": {
+   "n": 37,
+   "median": 0.2704518869602859,
+   "mean": 0.2649999840655433,
+   "win": 0.6756756756756757,
+   "p10": -0.1642392508657539,
+   "p90": 0.9416853242517342,
+   "worst": -0.3518422737241128,
+   "avg_hold_months": 24.8983268983269,
+   "forced_pct": 0.4594594594594595
+  },
+  "lowtier|Xheat": {
+   "n": 37,
+   "median": 0.0172705569760645,
+   "mean": 0.18028824739070035,
+   "win": 0.5945945945945946,
+   "p10": -0.09393013824600496,
+   "p90": 0.46239288512659343,
+   "worst": -0.17090110303409922,
+   "avg_hold_months": 14.137709137709138,
+   "forced_pct": 0.0
+  },
+  "base|X30": {
+   "n": 45,
+   "median": 0.16075455111588055,
+   "mean": 0.2528985425495823,
+   "win": 0.6666666666666666,
+   "p10": -0.2473849513335527,
+   "p90": 0.688730771856368,
+   "worst": -0.33372879399864286,
+   "avg_hold_months": 29.070899470899477,
+   "forced_pct": 0.5111111111111111
+  },
+  "base|X20": {
+   "n": 45,
+   "median": 0.061592290743694766,
+   "mean": 0.20044080412180412,
+   "win": 0.6222222222222222,
+   "p10": -0.1909055560449767,
+   "p90": 0.4459207071186615,
+   "worst": -0.33372879399864286,
+   "avg_hold_months": 25.247619047619047,
+   "forced_pct": 0.3111111111111111
+  },
+  "base|Xtime": {
+   "n": 45,
+   "median": -0.051746941508941324,
+   "mean": 0.24760693015133867,
+   "win": 0.4444444444444444,
+   "p10": -0.1734008924075651,
+   "p90": 0.7331662751693958,
+   "worst": -0.29623776989785866,
+   "avg_hold_months": 18.047619047619047,
+   "forced_pct": 0.0
+  },
+  "base|Xtarget": {
+   "n": 45,
+   "median": 0.25126399519607756,
+   "mean": 0.19345678864178256,
+   "win": 0.6888888888888889,
+   "p10": -0.25575043365297406,
+   "p90": 0.44523065094220365,
+   "worst": -0.33372879399864286,
+   "avg_hold_months": 27.104761904761908,
+   "forced_pct": 0.4888888888888889
+  },
+  "base|Xheat": {
+   "n": 45,
+   "median": 0.0064430201393723685,
+   "mean": 0.12929485420231712,
+   "win": 0.5333333333333333,
+   "p10": -0.1408849448593152,
+   "p90": 0.42105438142936075,
+   "worst": -0.18822478578221757,
+   "avg_hold_months": 15.567195767195765,
+   "forced_pct": 0.0
+  }
+ }
+}

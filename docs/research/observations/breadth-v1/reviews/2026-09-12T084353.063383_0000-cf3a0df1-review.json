@@ -1,0 +1,64 @@
+{
+  "observed_at": "2026-09-12T08:43:53.063383+00:00",
+  "reviewed_at": "2026-09-12T08:44:30.791451+00:00",
+  "previous_observation": "2026-09-10T09:30:28.651202+00:00",
+  "observation_record": "docs/research/observations/breadth-v1/records/2026-09-12T084353.063383_0000-cf3a0df1.json",
+  "changed_sources": [
+    "source-01",
+    "source-02",
+    "source-03"
+  ],
+  "facts": {
+    "raw_latest_date": "2026-09-11",
+    "raw_rows": 4064505,
+    "columns": [
+      "symbol",
+      "date",
+      "close"
+    ],
+    "symbols": 5216,
+    "member_latest_date_counts": {
+      "2026-08-28": 3,
+      "2026-08-31": 2,
+      "2026-09-03": 1,
+      "2026-09-04": 1,
+      "2026-09-07": 1,
+      "2026-09-08": 1,
+      "2026-09-09": 2,
+      "2026-09-10": 5201,
+      "2026-09-11": 4
+    },
+    "code_date": "2026-09-11",
+    "code_count": 5562,
+    "snapshot": {
+      "as_of": "2026-09-11 16:41",
+      "date": "2026-09-11",
+      "ma20_pct": 45.08448540706605,
+      "ma50_pct": 58.95364493171764,
+      "ma200_pct": 25.49057703516612,
+      "eligible": 5208,
+      "up": 643,
+      "down": 4870,
+      "flat": 49,
+      "total": 5562,
+      "up_pct": 11.560589715929522,
+      "adv_dec_ratio": 0.13203285420944558,
+      "limit_up": 47,
+      "limit_down": 32,
+      "source": "腾讯日K线(本机收盘后预计算)"
+    }
+  },
+  "qualification": {
+    "common_200_denominator": "No matching denominator/coverage evidence in daily snapshot; frozen readiness gap remains",
+    "historical_membership": "Current code list only; effective historical membership and arrival chain not supplied",
+    "etf_nominal_prices_and_actions": "All monitored ETF prices/actions fingerprints unchanged; readiness gaps remain",
+    "availability": "Actual reading time recorded; source as_of not verified acquisition time",
+    "stage": "input_observation_only",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "observation_gap": "No September 11 observation record found. Today is September 12; this record does not backfill September 11. Cause not established.",
+  "decision": "Inputs refreshed but no complete matching input set. No signals or trades generated.",
+  "scope": "Existing frozen observation protocol; no rules, versions, historical results or OKR changed"
+}

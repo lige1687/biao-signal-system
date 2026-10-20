@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>合体组归档 · B9+LEI 终极组合与侧向探索 · 2026-08-31</title>
+<style>
+  :root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--sub:#6b7280;--line:#e5e7eb;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+       background:var(--bg);color:var(--ink);padding:24px;}
+  .wrap{max-width:1320px;margin:0 auto}
+  h1{font-size:22px;margin-bottom:4px}
+  .sub{color:var(--sub);font-size:13px;margin-bottom:6px;line-height:1.7}
+  .grid-kpi{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:16px 0}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .kpi .t{font-size:12px;color:var(--sub)}
+  .kpi .v{font-size:24px;font-weight:700;margin-top:2px}
+  .kpi .d{font-size:12px;color:var(--sub);margin-top:2px}
+  .pos{color:#dc2626}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+        padding:18px;margin-bottom:16px}
+  .card h2{font-size:15px;margin-bottom:12px}
+  .chart{width:100%;height:380px}
+  .chart-sm{width:100%;height:300px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th,td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+  th:first-child,td:first-child{text-align:left}
+  .badge{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600}
+  .pass{background:#dcfce7;color:#166534}.fail{background:#fee2e2;color:#991b1b}
+  .info{background:#e0e7ff;color:#3730a3}
+  .note{font-size:12.5px;color:var(--sub);margin-top:8px;line-height:1.8}
+  .flow{display:flex;gap:0;align-items:stretch;margin-top:6px;flex-wrap:wrap}
+  .step{flex:1;min-width:150px;background:#fafafa;border:1px solid var(--line);
+        border-radius:10px;padding:10px 12px;margin-right:14px}
+  .step:last-child{margin-right:0;border-color:#be123c;background:#fff1f2}
+  .step .n{font-size:11px;color:var(--sub)}
+  .step .a{font-size:17px;font-weight:700;margin:2px 0}
+  .step .c{font-size:12px;color:var(--sub)}
+  pre{background:#0f172a;color:#e2e8f0;font-size:12px;line-height:1.7;
+      padding:14px;border-radius:10px;overflow-x:auto}
+  code.inline{background:#eef2ff;padding:1px 6px;border-radius:4px;font-size:12px}
+  ul.tight{font-size:13px;line-height:1.9;padding-left:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>合体组归档 · B9 + LEI 终极组合与侧向探索（8 实验）</h1>
+  <div class="sub">
+    窗口：主口径 2017-03-24 → 2026-08-18（卫星腿首笔起，含 A 股阴跌+背离市）·
+    费用：组合腿单边 10bp（5% 调仓带）+ 卫星腿 standard 单边 5bp ·
+    时滞：宽度门周频信号 t+1 生效；LEI 信号日收盘生成次日入场 ·
+    全部结论建议级，历史表现不代表未来
+  </div>
+
+  <div class="grid-kpi" id="kpis"></div>
+
+  <div class="card">
+    <h2>七项 KPI 明细（全组合 × 全口径）</h2>
+    <table id="kpi7"></table>
+    <div class="note">对照口径 = 同窗口 9 池等权买入持有（本表第 1 行）；Calmar = 年化 ÷ |最大回撤|；
+    再平衡臂两处口径折让见「已知问题」第 3 条。</div>
+  </div>
+
+  <div class="card">
+    <h2>组件叠加阶梯：从「拿着不动」到「优化后」</h2>
+    <div class="flow" id="flow"></div>
+    <div class="note">优化后 = 终极组合（B9×0.85+黄金×0.15，空仓资金按国债 ETF 计息）×0.70 + LEI 卫星腿 ×0.30，
+    月末再平衡。零新择时参数：黄金/卫星权重与再平衡规则为本轮优化扫描的后验选择（13 臂），引用按七折预期。</div>
+  </div>
+
+  <div class="card">
+    <h2>净值曲线（对数轴，点图例开关）</h2>
+    <div id="eq" class="chart"></div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h2>B200 三档仓位带（周频 t+1）</h2>
+      <div id="tier" class="chart-sm"></div>
+    </div>
+    <div class="card">
+      <h2>回撤曲线</h2>
+      <div id="dd" class="chart-sm"></div>
+    </div>
+  </div>
+
+  <div class="row2">
+    <div class="card">
+      <h2>风险收益平面（本组全部臂）</h2>
+      <div id="scatter" class="chart-sm"></div>
+    </div>
+    <div class="card">
+      <h2>分年收益（%）</h2>
+      <div id="yr" class="chart-sm"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>八实验判定汇总（含证伪）</h2>
+    <table id="tbl"></table>
+  </div>
+
+  <div class="card">
+    <h2>三个必读元发现（元特征扫描，559 笔逐笔）</h2>
+    <ul class="tight">
+      <li><b>利润引擎极度右尾</b>：41+ 天长持单仅 55 笔（9.8%）贡献 +619.6R = 总利润 164%，其余 90% 交易合计为负 → 任何「加快离场/加门槛砍频率」的改动都在砍利润引擎。</li>
+      <li><b>止损穿透是亏损主体</b>：16.5% 的单跳空穿透至 ≤−1.5R（最差 −12.5R），占总亏损 58%；名义 1% 风险实际放大 1.17x → 实盘预算按穿透口径规划。</li>
+      <li><b>纸面盈亏比是右尾选择器</b>：与实现 R 全谱相关仅 0.039；RR≥2 子集 expR +2.47 vs 其余 +0.51 → 手册「RR≥3」按右尾证据引用（组合层加门槛已被本轮证伪）。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>证伪清单（本组新增 6 条，不再重测）</h2>
+    <div style="font-size:13px;line-height:2">
+      A6③ 纯结构止损（无止盈，PF≈0）· B3 双条件退出（三模块全劣）· 黄金宽度闸（风险转换器非收益器）·
+      TRD 股债门（宏观门三连败：sentiment/regime/TRD）· 卫星腿 RR 门槛（组合层 198→47 笔 cumR 近半砍，复利靠笔数）·
+      参数滚动重选（既有 walk-forward 结论，维持冻结）
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>复现命令（PYTHONHASHSEED=0 与 42 双跑哈希一致，见 MANIFEST）</h2>
+<pre>cd /Users/yongbiaoli/Desktop/lei-signal-lab
+PYTHONHASHSEED=0 python3 scripts/run_combined_cert.py      # 合体认证 6/6 PASS   sha d5fcf3a4…
+PYTHONHASHSEED=0 python3 scripts/run_gold_expand.py        # 黄金扩池 G5 FAIL   sha 75e729e6…
+PYTHONHASHSEED=0 python3 scripts/run_cash_leg.py           # 现金腿 +0.76pp     sha 08a44aa0…
+python3 scripts/run_exit_matrix.py                         # 出场矩阵(API 12 run, 约25分钟)
+PYTHONHASHSEED=0 python3 scripts/run_signal_density.py     # 信号密度观察       sha 04c4f253…
+PYTHONHASHSEED=0 python3 scripts/run_meta_scan.py          # 元特征扫描         sha 4b3a7745…
+PYTHONHASHSEED=0 python3 scripts/run_trd_gate.py           # TRD 门实质 FAIL    sha 2ce5db73…
+PYTHONHASHSEED=0 python3 scripts/run_ultimate_combo.py     # 终极组合           sha db47a3cf…
+PYTHONHASHSEED=0 python3 scripts/run_optimize_ultimate.py  # 优化扫描 13 臂     sha 75524d97…
+python3 scripts/render_heiti_archive.py                    # 生成本报告页</pre>
+    <div class="note">依赖说明：以上脚本 import 宽度组的
+    <code class="inline">scripts/run_portfolio_split.py</code>、
+    <code class="inline">src/lei_signal/backtest/*</code> 等未提交 WIP（工作区已还原，归档归属宽度组，
+    见 <code class="inline">docs/experiments/raw/heiti/MANIFEST.json</code>）。
+    原始数据：<code class="inline">docs/experiments/raw/{combined_cert,gold_expand,cash_leg,exit_matrix,signal_density,meta_scan,trd_gate,ultimate}/</code>，
+    逐文件 sha256 在 MANIFEST。</div>
+  </div>
+
+  <div class="card">
+    <h2>已知问题 / 已修 bug 清单（诚实条款）</h2>
+    <ul class="tight">
+      <li><b>已修 ①</b>：黄金闸版对照臂初版实现错误（价格×档位≠持仓模拟，产生 Infinity/NaN）——改为 (1+r×tier).cumprod() 后重跑并重验双跑哈希；bug 版结果未参与任何判定。</li>
+      <li><b>已修 ②</b>：出场矩阵脚本从详情接口读指标字段名不匹配（全 null）——由工作台列表接口回填；12 个 API run 本身无损（run_id 留痕）。</li>
+      <li><b>已修 ③</b>：元扫描 H6 波动率分组的 zip/布尔索引 bug——重写为分组循环，结果双跑稳定。</li>
+      <li><b>未计 ①</b>：再平衡臂未计再平衡换手费用——月末两腿权重漂移约 1-3pp，双边换手 ×10bp ≈ 5bp/年 ≈ −0.05pp 年化，量级可忽略但如实声明。</li>
+      <li><b>未计 ②</b>：再平衡按月末收盘价成交假设——实盘次日开盘执行存在隔夜差异（方向不定）。</li>
+      <li><b>口径 ①</b>：卫星腿为周频曲线 ffill 对齐日频——周内波动被平滑，卫星腿回撤为<b>低估</b>口径。</li>
+      <li><b>口径 ②</b>：TRD 门预注册判定 T1（Calmar 倍数比较）在双负 Calmar 域无鉴别力，形式 PASS ——按实质标准（门须正 Calmar）记 FAIL，未改规则重跑。</li>
+      <li><b>数据弃用</b>：511990 货基 qfq 价格为平线（收益走份额结转）——弃用，主口径常数 1.8% + 国债 ETF 实际序列验证。</li>
+      <li><b>事后选择声明</b>：优化扫描 13 臂中的最优臂（黄金 15% + 卫星 30% + 再平衡）为后验选择——七折引用：年化 12.27% 折让后预期 ≈ 8.5-9%；权重方向单调且再平衡规则无拟合参数是折让的主要缓冲。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>冲突发现（不动他人条目，仅声明）</h2>
+    <div style="font-size:13px;line-height:1.9">
+      <code class="inline">web/public/reports/round-2026-08-31.html</code>（1.1MB）实为<b>本组</b>生成的
+      「LEI 探索回合报告」（&lt;title&gt; 可证，含终极组合/元特征内容），由并行归档流程自 docs/reports/ 迁入；
+      但索引条目 <code class="inline">breadth-round-0831</code>（宽度组）的 oneLine 描述（M1 流动性/融资余额虹吸）
+      与该文件实际内容不符，疑似误登记。本组不动该条目，本报告以
+      <code class="inline">heiti-zhongji-zuhe-2026-08-31.html</code> 独立归档，请汇总方与宽度组核对更正。
+    </div>
+  </div>
+
+  <div class="note" style="margin-bottom:40px">
+    数据来源：lei-signal-lab 本地留痕 raw（双跑 sha256 一致）· 回测不含真实成交滑点 ·
+    原始数据路径见复现节 · 生成脚本 scripts/render_heiti_archive.py · 本页离线自包含（ECharts 内嵌）
+  </div>
+</div>
+
+<script>__ECHARTS__</script>
+<script>
+const D = __DATA__;
+const CN = {"hold":"持有基准(9池等权)","b9":"B9 宽度主仓","b9_cash":"B9+现金腿","main_ult":"主仓终极(金10%)","lei":"LEI 卫星腿(单腿)","combo20":"合体 80/20","ultimate":"★ 终极组合(零新参数)","opt_rebal":"✦ 优化后(再平衡 金15% 卫30%)","opt_rebal10":"优化后(再平衡 金10% 卫30%)"};
+const COLOR = {"hold":"#9aa4b2","b9":"#3b82f6","b9_cash":"#06b6d4","main_ult":"#8b5cf6","lei":"#f59e0b","combo20":"#10b981","ultimate":"#e11d48","opt_rebal":"#be123c","opt_rebal10":"#fb7185"};
+
+const a = D.arms;
+document.getElementById("kpis").innerHTML = ["opt_rebal","ultimate","combo20","b9","hold"].map(k=>{
+  const v=a[k];
+  return `<div class="kpi"><div class="t">${CN[k]}</div>
+    <div class="v">${v.ann_pct.toFixed(2)}%</div>
+    <div class="d">回撤 ${v.maxdd_pct.toFixed(1)}% · Calmar ${v.calmar.toFixed(3)}</div></div>`;
+}).join("");
+
+const steps=[["持有基准",a.hold],["+ 宽度门(B9)",a.b9],["+ 现金腿",a.b9_cash],["+ 黄金/卫星(终极)",a.ultimate],["+ 再平衡·权重",a.opt_rebal]];
+document.getElementById("flow").innerHTML = steps.map(([n,v])=>
+  `<div class="step"><div class="n">${n}</div><div class="a pos">${v.ann_pct.toFixed(2)}%</div>
+   <div class="c">回撤 ${v.maxdd_pct.toFixed(1)}% · Calmar ${v.calmar.toFixed(2)}</div></div>`).join("");
+
+// 七项 KPI 表
+const feeMain="组合10bp/卫星5bp";
+const lagB9="宽度周频t+1";
+const lagSat="信号次日入场";
+const rows7=["hold","b9","b9_cash","main_ult","lei","combo20","ultimate","opt_rebal10","opt_rebal"].map(k=>{
+  const v=a[k];
+  const fee = (k==="hold"||k==="b9"||k==="b9_cash") ? "10bp×换手" : (k==="lei" ? "5bp(standard)" : (k==="main_ult" ? "10bp+零换手腿" : feeMain));
+  const lag = (k==="hold") ? "无信号" : (k==="lei" ? lagSat : (k==="main_ult" ? lagB9+"+持有腿" : lagB9+"+"+lagSat));
+  const base = a.hold;
+  const cmp = `年化差 ${(v.ann_pct-base.ann_pct>=0?"+":"")}${(v.ann_pct-base.ann_pct).toFixed(2)}pp / 回撤差 ${(v.maxdd_pct-base.maxdd_pct).toFixed(1)}pp`;
+  return `<tr><td>${CN[k]}</td><td>${v.ann_pct.toFixed(2)}%</td><td>${v.maxdd_pct.toFixed(1)}%</td>
+    <td>${v.calmar.toFixed(3)}</td><td>${D.window.join(" → ")}</td><td>${fee}</td><td>${lag}</td><td style="text-align:left">${cmp}</td></tr>`;
+}).join("");
+document.getElementById("kpi7").innerHTML =
+  `<tr><th>组合</th><th>年化</th><th>最大回撤</th><th>Calmar</th><th>时间窗口</th><th>费用假设</th><th>信号→执行时滞</th><th style="text-align:left">对照(等权持有)</th></tr>`+rows7;
+
+echarts.init(document.getElementById("eq")).setOption({
+  tooltip:{trigger:"axis",valueFormatter:v=>((v-1)*100).toFixed(0)+"%"},
+  legend:{top:0},
+  grid:{left:56,right:20,top:34,bottom:28},
+  xAxis:{type:"category",data:D.dates,axisLabel:{formatter:s=>s.slice(0,4)}},
+  yAxis:{type:"log",axisLabel:{formatter:v=>((v-1)*100).toFixed(0)+"%"},min:0.5},
+  series:Object.keys(D.series).map(k=>({name:CN[k],type:"line",data:D.series[k],
+    showSymbol:false,lineStyle:{width:(k==="ultimate"||k==="opt_rebal")?3:1.5,color:COLOR[k]},itemStyle:{color:COLOR[k]}}))
+});
+
+echarts.init(document.getElementById("tier")).setOption({
+  tooltip:{trigger:"axis"},
+  grid:{left:40,right:16,top:16,bottom:28},
+  xAxis:{type:"category",data:D.dates,axisLabel:{formatter:s=>s.slice(0,4)}},
+  yAxis:{min:0,max:1,axisLabel:{formatter:v=>(v*100)+"%"}},
+  series:[{name:"B200三档仓位",type:"line",step:"end",data:D.tier,showSymbol:false,
+    lineStyle:{color:"#3b82f6",width:1},areaStyle:{opacity:0.15,color:"#3b82f6"}}]}
+});
+
+echarts.init(document.getElementById("dd")).setOption({
+  tooltip:{trigger:"axis"},legend:{top:0},
+  grid:{left:48,right:16,top:34,bottom:28},
+  xAxis:{type:"category",data:D.dates,axisLabel:{formatter:s=>s.slice(0,4)}},
+  yAxis:{axisLabel:{formatter:"{value}%"}},
+  series:["opt_rebal","ultimate","b9","hold"].map(k=>({name:CN[k],type:"line",data:D.dd[k],
+    showSymbol:false,lineStyle:{width:(k==="opt_rebal")?2.5:1.5,color:COLOR[k]},itemStyle:{color:COLOR[k]}}))
+});
+
+echarts.init(document.getElementById("scatter")).setOption({
+  tooltip:{formatter:p=>`${p.data.name}<br/>年化 ${p.data.y.toFixed(2)}% · 回撤 ${p.data.x.toFixed(1)}%<br/>Calmar ${p.data.calmar}`},
+  grid:{left:56,right:24,top:20,bottom:36},
+  xAxis:{name:"最大回撤%",nameLocation:"middle",nameGap:24},
+  yAxis:{name:"年化%"},
+  series:[{type:"scatter",data:D.points.map(p=>({name:p.name,value:[p.x,p.y],calmar:p.calmar,
+    itemStyle:{color:COLOR[p.key]},symbolSize:v=>10+Math.abs(p.calmar)*26}))}]
+});
+
+echarts.init(document.getElementById("yr")).setOption({
+  tooltip:{trigger:"axis",valueFormatter:v=>v+"%"},legend:{top:0},
+  grid:{left:44,right:16,top:34,bottom:28},
+  xAxis:{type:"category",data:D.years},
+  yAxis:{axisLabel:{formatter:"{value}%"}},
+  series:["hold","b9","lei","ultimate","opt_rebal"].map(k=>({name:CN[k],type:"bar",data:D.years.map(y=>D.yearly[k][y]),
+    itemStyle:{color:COLOR[k]}}))
+});
+
+const rows=[
+ ["合体认证 B9+LEI 分账","6/6 PASS","两腿相关−0.003；起点/留一9/9/安慰剂300次95.0分位(压线)","pass"],
+ ["黄金扩池 518880","G5 FAIL→配置可选","后半窗救星(B9 2.28% vs 金16.9%)，前半窗−1.0pp 拖累","info"],
+ ["现金腿收益增强","机械修正","空仓37.5%×1.8%=+0.76pp，回撤一字不变","pass"],
+ ["出场变体矩阵 12 组合","阴性验证","a6_1 默认站得住；a6_3(PF≈0)/b3 全劣入证伪","info"],
+ ["LEI 信号密度温度计","观察候选","破底翻密度脉冲 9/9 在阶段大底；83月/9事件不足立规","info"],
+ ["元特征大扫描 6 假设","结构发现","右尾164%/穿透58%/RR右尾；双跑一致","pass"],
+ ["TRD 股债门","实质 FAIL","OOS −2.1% vs B200门+2.3%；宏观门三连败；判定缺陷已披露","fail"],
+ ["优化扫描 13 臂","✦ 12.27%/−22.4%","再平衡+权重单调有效；卫星RR门槛组合层证伪","info"],
+];
+document.getElementById("tbl").innerHTML =
+ `<tr><th>实验</th><th>判定</th><th style="text-align:left">一句话（口径）</th></tr>`+
+ rows.map(r=>`<tr><td>${r[0]}</td><td><span class="badge ${r[3]}">${r[1]}</span></td><td style="text-align:left">${r[2]}</td></tr>`).join("");
+
+window.addEventListener("resize",()=>document.querySelectorAll(".chart,.chart-sm")
+  .forEach(el=>echarts.getInstanceByDom(el)&&echarts.getInstanceByDom(el).resize()));
+</script>
+</body>
+</html>

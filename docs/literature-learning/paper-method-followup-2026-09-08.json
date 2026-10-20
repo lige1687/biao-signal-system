@@ -1,0 +1,89 @@
+{
+  "schema_version": "learning-followup/1",
+  "date": "2026-09-08",
+  "merge_policy": "按paper_id关联原文献；新增阅读记录和条目，不回写历史阅读声明；未同步Zotero或原页面数据",
+  "reading_updates": [
+    {
+      "paper_id": "sullivan1999",
+      "read_version": "FMG DP303, October 1998",
+      "reading_level": "方法章节核读，非完整论文复现",
+      "source_locator": "§I印刷4–7；附录B/C印刷32–36",
+      "source_url": "https://www.fmg.ac.uk/sites/default/files/2020-11/dp303.pdf",
+      "zotero_item_key": "TTQ4JK3R"
+    },
+    {
+      "paper_id": "cederburg2020",
+      "read_version": "JFE138(2020)95–117正式排版",
+      "reading_level": "方法章节核读；未取得网络附录；非完整复现",
+      "source_locator": "§2.2、§3、§4.1、§4.3.1–4.3.3",
+      "source_url": "https://www.lehigh.edu/~xuy219/research/COWY.pdf",
+      "zotero_item_key": "9IQMNZPA"
+    }
+  ],
+  "entries": [
+    {
+      "id": "sullivan1999-all-trials-followup-20260908",
+      "paper_id": "sullivan1999",
+      "title": "不只看被选中的赢家",
+      "category": "实验方法",
+      "body_markdown": "文献索引：`sullivan1999`。Sullivan、Timmermann、White，Data-Snooping, Technical Trading Rule Performance, and the Bootstrap。此次阅读的是1998年10月FMG讨论稿的方法§I及附录B/C；不是1999正式期刊排版。出处：[原机构全文](https://www.fmg.ac.uk/sites/default/files/2020-11/dp303.pdf)。\n\n**作者的方法。** 把尝试过的规则放在一起，检查其中最好的表现是否仍可能来自不断试选。比较时各规则共同使用相同的历史日期，保留共同遭遇市场涨跌的关系。方法定位：印刷页5—6、33—36。\n\n**可以学什么。** 每次研究都保存完整候选清单、所有结果和修改记录；失败候选也是判断赢家的必要材料。同一轮行情影响许多持仓，交易条数不能直接当成独立市场经历次数。这些是本库的应用建议，不是作者为本系统设置的通过条件。\n\n**本次应用与限制。** 固定2309个旧机会，并让各方法在月份诊断中共同使用同一组日期。但没有恢复系统历来的全部试选过程，也没有实施作者的完整检验，不能宣称已排除“多试几次碰巧找到好结果”。\n\n学习条目：`sullivan1999-all-trials-followup-20260908`；类别：实验方法。",
+      "method_acceptance": {
+        "origin": "本库应用建议；不是论文给本系统的标准",
+        "paper_numeric_threshold": null,
+        "automatic_adoption": false
+      },
+      "evidence_paths": [
+        "docs/experiments/paper-methods-applied-checks-2026-09-08.md",
+        "docs/experiments/raw/research-seventh-2026-09-08/paper-methods/METHODS.md"
+      ]
+    },
+    {
+      "id": "sullivan1999-shared-time-followup-20260908",
+      "paper_id": "sullivan1999",
+      "title": "重复计算很多次，不等于经历很多次市场",
+      "category": "判断标准",
+      "body_markdown": "文献索引仍为 `sullivan1999`，方法定位同上。\n\n**作者的方法。** 将连续历史片段重新组合，所有候选使用共同时间索引；原论文采用随机长度的交易日片段，并结合对整个候选集合的校正。不能只复制“重抽很多次”这一步，就沿用论文的解释。\n\n**我们实际学到的教训。** 本轮自己设定连续6、12、24个月、各5000次的补充诊断。为避免把历史末尾接回几十年前，选择了不跨首尾的片段；但独立核对发现这样明显降低首尾月份权重。24月档里首月只被抽244次，而中间一月被抽5281次。计算实现符合方案，方案依然有实质限制。\n\n**怎么用于验收。** 后续开发应分别展示“程序是否按定义算对”和“定义是否足以支持结论”。本次只保存生成数值的范围，不把它叫未来获胜概率；不得用区间全为正自动打勾“可采用”。这是本库的检查建议，没有来自论文的本系统数值通过线。\n\n学习条目：`sullivan1999-shared-time-followup-20260908`；类别：判断标准。",
+      "method_acceptance": {
+        "origin": "本库应用建议；不是论文给本系统的标准",
+        "paper_numeric_threshold": null,
+        "automatic_adoption": false
+      },
+      "evidence_paths": [
+        "docs/experiments/paper-methods-applied-checks-2026-09-08.md",
+        "docs/experiments/raw/research-seventh-2026-09-08/paper-methods/METHODS.md"
+      ]
+    },
+    {
+      "id": "cederburg2020-known-at-time-followup-20260908",
+      "paper_id": "cederburg2020",
+      "title": "每次决策只能用那时已经知道的资料",
+      "category": "实验方法",
+      "body_markdown": "文献索引：`cederburg2020`。Cederburg等，On the Performance of Volatility-Managed Portfolios。此次取得JFE正式排版，核读§2.2、§3、§4.1、§4.3.1—4.3.3；网络附录未取得。出处：[作者学校托管全文](https://www.lehigh.edu/~xuy219/research/COWY.pdf)、[正式版本索引](https://doi.org/10.1016/j.jfineco.2020.04.015)。\n\n**作者的方法。** 区分直接比较、用全期资料事后估计的组合，以及投资者当时能形成的组合。后者先积累120个月，再逐月只用更早资料估计。定位：印刷页98、101、105—107、112。120个月属于作者研究设置，不是我们的万能最低要求；某些统计比率对固定缩放不变，也不能把所有事后缩放一概判成错误。\n\n**本系统怎样借鉴。** 把同样资金与同样计划风险分开比较；开盘的判断不能看到当日收盘；历史价格转换只应用那时可用的行动资料。本轮补测确实发现研究接口允许开盘误传当日完整行情，已在隔离研究副本修正。价格转换是我们自己的适配工作，不是复现作者投资组合算法。\n\n**怎么用于验收。** 用截至某日的资料计算，再加入后来的资料，检查那个历史日期的结果是否被改变；检查当日信息是在开盘前还是收盘后可用。仍需另做真实产品费用与完整交易账户验证，不能靠这一项代替。\n\n学习条目：`cederburg2020-known-at-time-followup-20260908`；类别：实验方法。",
+      "method_acceptance": {
+        "origin": "本库应用建议；不是论文给本系统的标准",
+        "paper_numeric_threshold": null,
+        "automatic_adoption": false
+      },
+      "evidence_paths": [
+        "docs/experiments/paper-methods-applied-checks-2026-09-08.md",
+        "docs/experiments/raw/research-seventh-2026-09-08/paper-methods/METHODS.md"
+      ]
+    },
+    {
+      "id": "cederburg2020-exposure-tradeoff-followup-20260908",
+      "paper_id": "cederburg2020",
+      "title": "少亏是因为方法更好，还是因为少买了",
+      "category": "投资启示",
+      "body_markdown": "文献索引仍为 `cederburg2020`。本条是从论文比较方式引出的本地应用，不是作者对我们的退出办法下结论。\n\n**要问的问题。** 将失效位放远，为保持每笔计划亏损金额不变，往往会减少投入；这样少亏不一定来自更会退出，也可能来自买得少。收益、投入和损失要一起看。\n\n**本次证据。** 我们同时保留了同资金、同计划风险两种视角。后者在A/B/C的历史平均结果都下降，不能只挑损失减轻来宣传。年度诊断又发现，同资金A的净改善主要集中在2020、2021、2025三个年份；这值得继续研究，尚不足以正式采用。\n\n**使用边界。** 本次数字来自独立机会预算，不是共享一笔有限资金的账户；当时可成交性、完整产品费用及未来表现仍须另验。是否愿意用少收益交换少波动，属于用户偏好，不由论文或AI替你决定。\n\n学习条目：`cederburg2020-exposure-tradeoff-followup-20260908`；类别：投资启示。",
+      "method_acceptance": {
+        "origin": "本库应用建议；不是论文给本系统的标准",
+        "paper_numeric_threshold": null,
+        "automatic_adoption": false
+      },
+      "evidence_paths": [
+        "docs/experiments/paper-methods-applied-checks-2026-09-08.md",
+        "docs/experiments/raw/research-seventh-2026-09-08/paper-methods/METHODS.md"
+      ]
+    }
+  ]
+}

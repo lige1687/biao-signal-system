@@ -1,0 +1,11 @@
+{
+  "status": "deprecated",
+  "applies_to": [
+    "reentry_diagnostics.csv",
+    "reentry_diagnostics-deprecated.csv"
+  ],
+  "reason": "The inherited simulator ends a diagnostic chain at the next actual sell rather than the first monthly execution reset, so some chains cross a monthly reset.",
+  "use": "Do not use these rows for 5-day or 20-day re-stop rates in this batch.",
+  "core_returns_affected": false,
+  "new_return_run_repeated": false
+}

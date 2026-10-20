@@ -1,0 +1,170 @@
+[
+  {
+    "user_question": "增加道路退出会怎样改变完整账户？",
+    "conclusion": "六对账户已核：A20最大投资跌幅约10.9%降到5.7%，但每组期末少18.46万元；其余四组无差异，不能直接认定升级。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "a-road-exit-account",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/execution/run-lock.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/execution/account-results/summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/independent-review/summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/independent-review/source-integrity-final.json"
+      ],
+      "source_hash": [
+        "a8d3836c190474e8d9d89ca2ae0b8af335167ce22894ca2f2c49b0e94cc54d9e",
+        "5565baf5c0e832a80e19e9ae9ce3ab26ec7993264d6a3691ae12077e0807333f",
+        "35e558c2d2b79bcb1951f28dcd4df17d85c2772f4d30d3d6657e915a654790d4",
+        "08846323703a1f5f944df0dad0d4854b3b852e23eddcf112e20f1d9a9eba67e1",
+        "3faf845402c48fb414e457cd5bd40dd6eea6248b78209f17b8261a78483f45a1"
+      ],
+      "source_version": "research-thirteenth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "six_paired_limited_exit_accounts",
+      "strategy_scope": [],
+      "limitations": "固定原17含重复配置，不是17次独立行情；原历史已看过；不构成未来验证；只比A6①+结构与纯结构；未补A6②、多周期、C/D/B缺项；资料与成交约束继续为第八有限研究近似；独立核账户、EMA与退出；未重新实现A形态和目标选择；独立接收224副本后1旧日志改名、2缓存源清理；接受副本完整、经济/源码221项不变；本批未写生产/真实账户/OKR/Zotero",
+      "compatibility": "unknown",
+      "evidence_id": "a-road-exit-account",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/protocol.md",
+      "strategies": [],
+      "note": "固定原17含重复配置，不是17次独立行情；原历史已看过；不构成未来验证；只比A6①+结构与纯结构；未补A6②、多周期、C/D/B缺项；资料与成交约束继续为第八有限研究近似；独立核账户、EMA与退出；未重新实现A形态和目标选择；独立接收224副本后1旧日志改名、2缓存源清理；接受副本完整、经济/源码221项不变；本批未写生产/真实账户/OKR/Zotero"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "第八名义历史与14已知行动，仍有限成交近似",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "run_lock": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/execution/run-lock.json",
+        "sha256": "5565baf5c0e832a80e19e9ae9ce3ab26ec7993264d6a3691ae12077e0807333f"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§9 A5/A6①③、§3.2、§14/§16/§20；EMA20+20根前收盘退出，原结构保护保留",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-thirteenth-2026-09-08",
+      "status": "limited",
+      "production_adopted": false,
+      "independently_reviewed": true,
+      "independent_market_episodes": null,
+      "review_scope": "全EMA/抵扣价与现金订单退出、固定数量路径；原信号算法复用",
+      "limitations": [
+        "固定原17含重复配置，不是17次独立行情",
+        "原历史已看过；不构成未来验证",
+        "只比A6①+结构与纯结构；未补A6②、多周期、C/D/B缺项",
+        "资料与成交约束继续为第八有限研究近似",
+        "独立核账户、EMA与退出；未重新实现A形态和目标选择",
+        "独立接收224副本后1旧日志改名、2缓存源清理；接受副本完整、经济/源码221项不变",
+        "本批未写生产/真实账户/OKR/Zotero"
+      ]
+    }
+  },
+  {
+    "user_question": "是否只是提前卖出错过了上涨？",
+    "conclusion": "原17买入固定数量的比较有8条退出改变（两组重复同四段行情）；一段提前卖出避免后续损失，三段减少长期上涨参与。完整账户还各新增7次A20买入，仍未补回差额。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "a-road-exit-fixed-entry",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/execution/fixed-17-comparison.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/independent-review/fixed-path-results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/independent-review/comparison-table-results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/supplemental-tests/root-tests.txt",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/paper-methods/METHODS.md"
+      ],
+      "source_hash": [
+        "dbad07e99e2b58e2c61ffacefd8dbfc91f59b268c020cc3717f786c565e325cd",
+        "f6fbd5bf5ecf67a3feba818d8ffae17058646ad580b5889ff4c403b93d8af36f",
+        "c6a01e48ace95cc6ffced690b5bc635a4aa522ccf9fca55d6ab5bb7f287638d9",
+        "6a117e5b46fbfde4c9131b01476ccf75d42f2fd7f985c223f6b7ae9cf2ac8152",
+        "305c07ef81fb3026183232e66ded093bc8777c3bb0716fa4878697122056d33b"
+      ],
+      "source_version": "research-thirteenth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "fixed_original_entries_and_subsequent_reentry_comparison",
+      "strategy_scope": [],
+      "limitations": "固定原17含重复配置，不是17次独立行情；原历史已看过；不构成未来验证；只比A6①+结构与纯结构；未补A6②、多周期、C/D/B缺项；资料与成交约束继续为第八有限研究近似；独立核账户、EMA与退出；未重新实现A形态和目标选择；独立接收224副本后1旧日志改名、2缓存源清理；接受副本完整、经济/源码221项不变；本批未写生产/真实账户/OKR/Zotero",
+      "compatibility": "unknown",
+      "evidence_id": "a-road-exit-fixed-entry",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/execution/fixed-17-comparison.csv",
+      "strategies": [],
+      "note": "固定原17含重复配置，不是17次独立行情；原历史已看过；不构成未来验证；只比A6①+结构与纯结构；未补A6②、多周期、C/D/B缺项；资料与成交约束继续为第八有限研究近似；独立核账户、EMA与退出；未重新实现A形态和目标选择；独立接收224副本后1旧日志改名、2缓存源清理；接受副本完整、经济/源码221项不变；本批未写生产/真实账户/OKR/Zotero"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "第八名义历史与14已知行动，仍有限成交近似",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "run_lock": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/execution/run-lock.json",
+        "sha256": "5565baf5c0e832a80e19e9ae9ce3ab26ec7993264d6a3691ae12077e0807333f"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§9 A5/A6①③、§3.2、§14/§16/§20；EMA20+20根前收盘退出，原结构保护保留",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-thirteenth-2026-09-08",
+      "status": "limited",
+      "production_adopted": false,
+      "independently_reviewed": true,
+      "independent_market_episodes": null,
+      "review_scope": "全EMA/抵扣价与现金订单退出、固定数量路径；原信号算法复用",
+      "limitations": [
+        "固定原17含重复配置，不是17次独立行情",
+        "原历史已看过；不构成未来验证",
+        "只比A6①+结构与纯结构；未补A6②、多周期、C/D/B缺项",
+        "资料与成交约束继续为第八有限研究近似",
+        "独立核账户、EMA与退出；未重新实现A形态和目标选择",
+        "独立接收224副本后1旧日志改名、2缓存源清理；接受副本完整、经济/源码221项不变",
+        "本批未写生产/真实账户/OKR/Zotero"
+      ]
+    }
+  }
+]

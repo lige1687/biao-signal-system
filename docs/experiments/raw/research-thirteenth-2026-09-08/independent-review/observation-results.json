@@ -1,0 +1,56 @@
+{
+  "status": "passed",
+  "observations": 11158,
+  "numeric_values_compared": 33474,
+  "boolean_components_compared": 33474,
+  "action_events": 14,
+  "tolerance": "1E-11",
+  "differences": 0,
+  "coverage": [
+    {
+      "symbol": "sh510300",
+      "all_source_bars": 3273,
+      "first_source_date": "2013-01-04",
+      "last_source_date": "2026-06-30",
+      "research_observations": 2790,
+      "road_exit_closes": 1049,
+      "actions": 13,
+      "max_ema_absolute_difference": "2.912359798202106501475693E-15",
+      "max_cost_absolute_difference": "7.43085433312845728334358E-16"
+    },
+    {
+      "symbol": "sh513100",
+      "all_source_bars": 3189,
+      "first_source_date": "2013-05-15",
+      "last_source_date": "2026-06-30",
+      "research_observations": 2789,
+      "road_exit_closes": 747,
+      "actions": 1,
+      "max_ema_absolute_difference": "2.506181040531247407662099E-15",
+      "max_cost_absolute_difference": "0"
+    },
+    {
+      "symbol": "sh518880",
+      "all_source_bars": 3140,
+      "first_source_date": "2013-07-29",
+      "last_source_date": "2026-06-30",
+      "research_observations": 2790,
+      "road_exit_closes": 860,
+      "actions": 0,
+      "max_ema_absolute_difference": "4.941057221142841883452686E-15",
+      "max_cost_absolute_difference": "0"
+    },
+    {
+      "symbol": "sz159915",
+      "all_source_bars": 3272,
+      "first_source_date": "2013-01-04",
+      "last_source_date": "2026-06-30",
+      "research_observations": 2789,
+      "road_exit_closes": 1140,
+      "actions": 0,
+      "max_ema_absolute_difference": "1.599724639837648034682562E-15",
+      "max_cost_absolute_difference": "0"
+    }
+  ],
+  "method": "40-digit Decimal streaming EMA seeded by first 20 mean, alpha 2/21; only past EMA and last20 closes transformed on each known action date; no imported signal/features/price helper/account engine; all research dates and every component boolean compared"
+}

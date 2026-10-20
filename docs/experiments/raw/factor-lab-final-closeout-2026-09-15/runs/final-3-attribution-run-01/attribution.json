@@ -1,0 +1,113 @@
+{
+  "layer1_capital": {
+    "base": {
+      "account": "base",
+      "contributions": [
+        {
+          "symbol": "100001",
+          "net_sales": 0.0,
+          "gross_purchases": 51.0,
+          "cash_dividends_paid": 2.0,
+          "ending_receivable": 0.0,
+          "ending_market_value": 55.0,
+          "net_contribution": 6.0
+        }
+      ],
+      "reconciliation": {
+        "passed": true,
+        "max_abs_error": 0.0,
+        "ending_equity": 106.0,
+        "initial_cash": 100.0,
+        "sum_contribution": 6.0,
+        "tolerance_cny": 0.01
+      },
+      "tolerance_cny": 0.01,
+      "status": "reconciled",
+      "note": "资金贡献只说明钱在哪里赚到，不能单独证明为什么赚到；缺期末持仓或手续费记录会破坏核对"
+    },
+    "variant_exit_on_d3": {
+      "account": "variant_exit_on_d3",
+      "contributions": [
+        {
+          "symbol": "100001",
+          "net_sales": 54.45,
+          "gross_purchases": 51.0,
+          "cash_dividends_paid": 2.0,
+          "ending_receivable": 0.0,
+          "ending_market_value": 0.0,
+          "net_contribution": 5.450000000000003
+        }
+      ],
+      "reconciliation": {
+        "passed": true,
+        "max_abs_error": 0.0,
+        "ending_equity": 105.45,
+        "initial_cash": 100.0,
+        "sum_contribution": 5.450000000000003,
+        "tolerance_cny": 0.01
+      },
+      "tolerance_cny": 0.01,
+      "status": "reconciled",
+      "note": "资金贡献只说明钱在哪里赚到，不能单独证明为什么赚到；缺期末持仓或手续费记录会破坏核对"
+    },
+    "receivable": {
+      "account": "receivable",
+      "contributions": [
+        {
+          "symbol": "100001",
+          "net_sales": 0.0,
+          "gross_purchases": 51.0,
+          "cash_dividends_paid": 0.0,
+          "ending_receivable": 2.0,
+          "ending_market_value": 55.0,
+          "net_contribution": 6.0
+        }
+      ],
+      "reconciliation": {
+        "passed": true,
+        "max_abs_error": 0.0,
+        "ending_equity": 106.0,
+        "initial_cash": 100.0,
+        "sum_contribution": 6.0,
+        "tolerance_cny": 0.01
+      },
+      "tolerance_cny": 0.01,
+      "status": "reconciled",
+      "note": "资金贡献只说明钱在哪里赚到，不能单独证明为什么赚到；缺期末持仓或手续费记录会破坏核对"
+    }
+  },
+  "layer2_decision_increment": {
+    "declared_action": "exit_on_d3_at_close",
+    "variant": "variant_exit_on_d3",
+    "base": "base",
+    "checks": {
+      "pool_version_equal": true,
+      "pool_entities_equal": true,
+      "period_declared_equal": true,
+      "initial_cash_equal": true,
+      "external_flows_equal": true,
+      "fee_schedule_equal": true,
+      "benchmark_equal": true,
+      "frozen_rules_equal": true,
+      "input_identity_equal": true
+    },
+    "conditions_unknown": [],
+    "differences": {
+      "net_pnl": -0.5499999999999972,
+      "net_return": -0.00550000000000006,
+      "cagr": -565.3863096583925,
+      "max_drawdown": 0.0,
+      "fees": 0.55,
+      "trades": 1
+    },
+    "note": "各维度差额是同一受控比较的描述，不可相加成资金贡献；资金归属见层1。相等指纹只证明材料一致，不证明现实执行正确。本接口消费合成账户结果，合同始终标合成",
+    "status": "attributable_to_declared_action_only",
+    "limitation": "“only”仅指声明动作差异可解释本轮算术差额；不证明现实执行正确，不构成收益能力证据"
+  },
+  "layer3_risk_model": {
+    "status": "not_run",
+    "reason": "no_model_card_provided",
+    "note": "本轮未做风险模型是合法状态；剩余收益不自动叫独特alpha或运气"
+  },
+  "note": "三层分别回答不同的钱的问题；不能相加成伪精确总账"
+}

@@ -1,0 +1,52 @@
+{
+ "fixture": "test_factor_unit_state_description.build_fixture",
+ "expectation_source": "independent arithmetic (no import of module under test)",
+ "A": {
+  "state_true": 4,
+  "state_false": 2,
+  "state_unknown": 41,
+  "true_group": {
+   "n": 3,
+   "mean": 0.07000000000000006,
+   "median": 0.10000000000000009,
+   "up_ratio": 1.0,
+   "aux_mean": -0.046176046176046204,
+   "aux_worst": -0.09090909090909094
+  },
+  "false_group": {
+   "n": 2,
+   "mean": 0.0050000000000000044,
+   "median": 0.0050000000000000044,
+   "up_ratio": 0.5,
+   "aux_mean": -0.030000000000000027,
+   "aux_worst": -0.030000000000000027
+  },
+  "unconditional": {
+   "n": 25,
+   "mean": 0.0030300473525613513,
+   "median": 0.0,
+   "up_ratio": 0.16
+  },
+  "tail_immature": 22,
+  "true_segments": 4,
+  "false_segments": 2,
+  "sparse_slots": [
+   {
+    "session": "2020-01-03",
+    "main": 0.010000000000000009
+   }
+  ]
+ },
+ "D": {
+  "false_evaluable": 9,
+  "target_reasons": {
+   "ok": 9,
+   "e_missing": 1
+  },
+  "false_mean": 0.0
+ },
+ "notes": [
+  "E夹具：单true@2、全上涨路径 → aux_mean=aux_worst=0",
+  "G夹具：删窗口中间行(index10)后t=5主目标仍=110/100-1=0.10（日历定位）"
+ ]
+}

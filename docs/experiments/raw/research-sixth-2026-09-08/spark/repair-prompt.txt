@@ -1,0 +1,1 @@
+请仅修改当前目录 inventory.py 并运行 --self-test。它是JSON文件内容盘点辅助工具，不负责研究判断。已知自测有错：用json.dump写字符串不会制造非法JSON。请修正，并让输入空目录/不存在路径和包含非标量身份或混合类型可预测，不因排序/不可哈希而崩溃。递归候选是含symbol和signal_date的dict，entry_variant/exit_variant缺失或null则报告身份不完整，不能算已证实重复。保留从多个文件收集的记录以支持跨文件重复记录诊断，但把字段名说成duplicate_identity_occurrences，不声称是实际交易重复。每个重复组提供文件路径及JSON路径便于追溯。只用标准库，写自测断言。禁止修改当前目录以外任何文件，不联网、不改OKR和生产。最终简短给修改内容与自测结果。

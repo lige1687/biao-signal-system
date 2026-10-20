@@ -1,0 +1,1234 @@
+{
+  "scope": "default exits on frozen historical opportunities, not regeneration of entries or portfolio backtest",
+  "source_root": "/Users/yongbiaoli/lei-signal-sync",
+  "ledger_path": "/Users/yongbiaoli/lei-signal-sync/configs/rules.v2.yaml",
+  "ledger_version": "2.1.0",
+  "fee_model": {
+    "label": "standard",
+    "per_side_bps": 5.0,
+    "per_share_usd": 0.005
+  },
+  "selection": "lexicographically first symbol in each reference, all its opportunities",
+  "cutoff": "2026-08-25",
+  "data_checks": {
+    "159611.SZ": {
+      "rows": 1122,
+      "start": "2022-01-07 00:00:00",
+      "end": "2026-08-25 00:00:00",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 0,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "reference_opportunities": 12
+    },
+    "000596.SZ": {
+      "rows": 2428,
+      "start": "2016-08-24 00:00:00",
+      "end": "2026-08-25 00:00:00",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 0,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "reference_opportunities": 1
+    },
+    "000568.SZ": {
+      "rows": 2387,
+      "start": "2016-10-26 00:00:00",
+      "end": "2026-08-25 00:00:00",
+      "monotonic": true,
+      "duplicate_dates": 0,
+      "missing_ohlcv": 0,
+      "nonpositive_ohlc": 0,
+      "high_below_low": 0,
+      "reference_opportunities": 3
+    }
+  },
+  "trades": [
+    {
+      "key": "A:159611.SZ:2024-06-12",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "signal_date": "2024-06-12",
+        "entry_date": "2024-06-13",
+        "entry_price": 1.055,
+        "stop_price": 1.036,
+        "target_price": 1.061,
+        "reward_risk": 0.3157894736842124,
+        "exit_date": "2024-06-18",
+        "exit_price": 1.027,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 3,
+        "r_gross": -1.4736842105263244,
+        "r_net": -2.000000000000013,
+        "benchmark_clock_type": 2,
+        "trend_stage": 4,
+        "entry_reason": "SMA20 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=底部构造"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2024-06-12",
+        "entry_date": "2024-06-13",
+        "entry_price": 1.055,
+        "stop_price": 1.036,
+        "target_price": 1.061,
+        "reward_risk": 0.3157894736842124,
+        "exit_date": "2024-06-18",
+        "exit_price": 1.027,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 3,
+        "r_gross": -1.4736842105263244,
+        "r_net": -2.000000000000013,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2024-06-13",
+        "entry_price": 1.055,
+        "exit_date": "2024-06-18",
+        "exit_price": 1.027,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 3,
+        "r_net": -2.000000000000011
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 47.39336492890995
+    },
+    {
+      "key": "A:159611.SZ:2024-07-09",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "signal_date": "2024-07-09",
+        "entry_date": "2024-07-10",
+        "entry_price": 1.079,
+        "stop_price": 1.049,
+        "target_price": null,
+        "reward_risk": null,
+        "exit_date": "2024-07-18",
+        "exit_price": 1.037,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 6,
+        "r_gross": -1.4,
+        "r_net": -1.7333333333333338,
+        "benchmark_clock_type": 2,
+        "trend_stage": 4,
+        "entry_reason": "SMA20 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=底部构造"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2024-07-09",
+        "entry_date": "2024-07-10",
+        "entry_price": 1.079,
+        "stop_price": 1.049,
+        "target_price": null,
+        "reward_risk": null,
+        "exit_date": "2024-07-18",
+        "exit_price": 1.037,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 6,
+        "r_gross": -1.4,
+        "r_net": -1.7333333333333338,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2024-07-10",
+        "entry_price": 1.079,
+        "exit_date": "2024-07-18",
+        "exit_price": 1.037,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 6,
+        "r_net": -1.7333333333333332
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 46.33920296570899
+    },
+    {
+      "key": "A:159611.SZ:2024-07-15",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "signal_date": "2024-07-15",
+        "entry_date": "2024-07-16",
+        "entry_price": 1.053,
+        "stop_price": 1.034,
+        "target_price": 1.081,
+        "reward_risk": 1.2380952380952446,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 11,
+        "r_gross": -0.8947368421052625,
+        "r_net": -1.4210526315789498,
+        "benchmark_clock_type": 2,
+        "trend_stage": 4,
+        "entry_reason": "SMA20 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=EMA20收复"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2024-07-15",
+        "entry_date": "2024-07-16",
+        "entry_price": 1.053,
+        "stop_price": 1.034,
+        "target_price": 1.081,
+        "reward_risk": 1.2380952380952446,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 11,
+        "r_gross": -0.8947368421052625,
+        "r_net": -1.4210526315789498,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2024-07-16",
+        "entry_price": 1.053,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 11,
+        "r_net": -1.4210526315789496
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 47.48338081671416
+    },
+    {
+      "key": "A:159611.SZ:2024-07-16",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 60,
+        "signal_date": "2024-07-16",
+        "entry_date": "2024-07-17",
+        "entry_price": 1.058,
+        "stop_price": 1.034,
+        "target_price": 1.081,
+        "reward_risk": 0.8800000000000039,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 10,
+        "r_gross": -0.9166666666666666,
+        "r_net": -1.333333333333331,
+        "benchmark_clock_type": 2,
+        "trend_stage": 4,
+        "entry_reason": "SMA60 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=EMA20收复"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 60,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2024-07-16",
+        "entry_date": "2024-07-17",
+        "entry_price": 1.058,
+        "stop_price": 1.034,
+        "target_price": 1.081,
+        "reward_risk": 0.8800000000000039,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 10,
+        "r_gross": -0.9166666666666666,
+        "r_net": -1.333333333333331,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2024-07-17",
+        "entry_price": 1.058,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 10,
+        "r_net": -1.333333333333333
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 47.25897920604915
+    },
+    {
+      "key": "A:159611.SZ:2024-07-18",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 60,
+        "signal_date": "2024-07-18",
+        "entry_date": "2024-07-19",
+        "entry_price": 1.056,
+        "stop_price": 1.03,
+        "target_price": 1.081,
+        "reward_risk": 0.8888888888888925,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 8,
+        "r_gross": -0.7692307692307693,
+        "r_net": -1.1538461538461522,
+        "benchmark_clock_type": 2,
+        "trend_stage": 4,
+        "entry_reason": "SMA60 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=EMA20收复"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 60,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2024-07-18",
+        "entry_date": "2024-07-19",
+        "entry_price": 1.056,
+        "stop_price": 1.03,
+        "target_price": 1.081,
+        "reward_risk": 0.8888888888888925,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 8,
+        "r_gross": -0.7692307692307693,
+        "r_net": -1.1538461538461522,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2024-07-19",
+        "entry_price": 1.056,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 8,
+        "r_net": -1.1538461538461535
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 47.34848484848485
+    },
+    {
+      "key": "A:159611.SZ:2024-07-19",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "signal_date": "2024-07-19",
+        "entry_date": "2024-07-22",
+        "entry_price": 1.062,
+        "stop_price": 1.03,
+        "target_price": 1.081,
+        "reward_risk": 0.645161290322583,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 7,
+        "r_gross": -0.8125,
+        "r_net": -1.1250000000000002,
+        "benchmark_clock_type": 2,
+        "trend_stage": 4,
+        "entry_reason": "SMA20 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=EMA20收复"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2024-07-19",
+        "entry_date": "2024-07-22",
+        "entry_price": 1.062,
+        "stop_price": 1.03,
+        "target_price": 1.081,
+        "reward_risk": 0.645161290322583,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 7,
+        "r_gross": -0.8125,
+        "r_net": -1.1250000000000002,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2024-07-22",
+        "entry_price": 1.062,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 7,
+        "r_net": -1.1249999999999998
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 47.080979284369114
+    },
+    {
+      "key": "A:159611.SZ:2024-07-29",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 60,
+        "signal_date": "2024-07-29",
+        "entry_date": "2024-07-30",
+        "entry_price": 1.053,
+        "stop_price": 1.044,
+        "target_price": 1.067,
+        "reward_risk": 1.090909090909102,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 1,
+        "r_gross": -1.8888888888889,
+        "r_net": -3.000000000000025,
+        "benchmark_clock_type": 2,
+        "trend_stage": 1,
+        "entry_reason": "SMA60 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=底部构造"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 60,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2024-07-29",
+        "entry_date": "2024-07-30",
+        "entry_price": 1.053,
+        "stop_price": 1.044,
+        "target_price": 1.067,
+        "reward_risk": 1.090909090909102,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 1,
+        "r_gross": -1.8888888888889,
+        "r_net": -3.000000000000025,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2024-07-30",
+        "entry_price": 1.053,
+        "exit_date": "2024-07-31",
+        "exit_price": 1.036,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 1,
+        "r_net": -3.000000000000024
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 47.48338081671416
+    },
+    {
+      "key": "A:159611.SZ:2025-09-09",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "signal_date": "2025-09-09",
+        "entry_date": "2025-09-10",
+        "entry_price": 1.029,
+        "stop_price": 1.017,
+        "target_price": 1.03,
+        "reward_risk": 0.18181818181818,
+        "exit_date": "2025-09-19",
+        "exit_price": 1.009,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 7,
+        "r_gross": -1.6666666666666667,
+        "r_net": -2.499999999999997,
+        "benchmark_clock_type": 2,
+        "trend_stage": 4,
+        "entry_reason": "SMA20 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=底部构造"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2025-09-09",
+        "entry_date": "2025-09-10",
+        "entry_price": 1.029,
+        "stop_price": 1.017,
+        "target_price": 1.03,
+        "reward_risk": 0.18181818181818,
+        "exit_date": "2025-09-19",
+        "exit_price": 1.009,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 7,
+        "r_gross": -1.6666666666666667,
+        "r_net": -2.499999999999997,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2025-09-10",
+        "entry_price": 1.029,
+        "exit_date": "2025-09-19",
+        "exit_price": 1.009,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 7,
+        "r_net": -2.4999999999999996
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 48.59086491739554
+    },
+    {
+      "key": "A:159611.SZ:2026-04-20",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": true,
+        "ma_period": 60,
+        "signal_date": "2026-04-20",
+        "entry_date": "2026-04-21",
+        "entry_price": 1.11,
+        "stop_price": 1.092,
+        "target_price": 1.21,
+        "reward_risk": 5.9411764705882675,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 32,
+        "r_gross": 1.9999999999999876,
+        "r_net": 1.4444444444444366,
+        "benchmark_clock_type": 3,
+        "trend_stage": 1,
+        "entry_reason": "SMA60 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=底部构造"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": true,
+        "ma_period": 60,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2026-04-20",
+        "entry_date": "2026-04-21",
+        "entry_price": 1.11,
+        "stop_price": 1.092,
+        "target_price": 1.21,
+        "reward_risk": 5.9411764705882675,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 32,
+        "r_gross": 1.9999999999999876,
+        "r_net": 1.4444444444444366,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2026-04-21",
+        "entry_price": 1.11,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 32,
+        "r_net": 1.4444444444444324
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 45.04504504504504
+    },
+    {
+      "key": "A:159611.SZ:2026-05-25",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 60,
+        "signal_date": "2026-05-25",
+        "entry_date": "2026-05-26",
+        "entry_price": 1.167,
+        "stop_price": 1.121,
+        "target_price": 1.225,
+        "reward_risk": 1.08,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 10,
+        "r_gross": -0.4565217391304372,
+        "r_net": -0.673913043478262,
+        "benchmark_clock_type": 3,
+        "trend_stage": 4,
+        "entry_reason": "SMA60 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=EMA20收复"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 60,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2026-05-25",
+        "entry_date": "2026-05-26",
+        "entry_price": 1.167,
+        "stop_price": 1.121,
+        "target_price": 1.225,
+        "reward_risk": 1.08,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 10,
+        "r_gross": -0.4565217391304372,
+        "r_net": -0.673913043478262,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2026-05-26",
+        "entry_price": 1.167,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 10,
+        "r_net": -0.6739130434782631
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 42.84490145672665
+    },
+    {
+      "key": "A:159611.SZ:2026-05-26",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "signal_date": "2026-05-26",
+        "entry_date": "2026-05-27",
+        "entry_price": 1.162,
+        "stop_price": 1.138,
+        "target_price": 1.225,
+        "reward_risk": 1.636363636363631,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 9,
+        "r_gross": -0.6666666666666666,
+        "r_net": -1.083333333333333,
+        "benchmark_clock_type": 3,
+        "trend_stage": 4,
+        "entry_reason": "SMA20 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=底部构造"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 20,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2026-05-26",
+        "entry_date": "2026-05-27",
+        "entry_price": 1.162,
+        "stop_price": 1.138,
+        "target_price": 1.225,
+        "reward_risk": 1.636363636363631,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 9,
+        "r_gross": -0.6666666666666666,
+        "r_net": -1.083333333333333,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2026-05-27",
+        "entry_price": 1.162,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 9,
+        "r_net": -1.083333333333333
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 43.02925989672978
+    },
+    {
+      "key": "A:159611.SZ:2026-05-27",
+      "module": "A",
+      "old": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 60,
+        "signal_date": "2026-05-27",
+        "entry_date": "2026-05-28",
+        "entry_price": 1.185,
+        "stop_price": 1.154,
+        "target_price": 1.225,
+        "reward_risk": 1.3666666666666705,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 8,
+        "r_gross": -1.2580645161290314,
+        "r_net": -1.5806451612903223,
+        "benchmark_clock_type": 3,
+        "trend_stage": 4,
+        "entry_reason": "SMA60 回撤入场（A4 早期版）：close > EMA20 且 EMA20 上行，A3=底部构造"
+      },
+      "current": {
+        "symbol": "159611.SZ",
+        "entry_variant": "early",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 60,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2026-05-27",
+        "entry_date": "2026-05-28",
+        "entry_price": 1.185,
+        "stop_price": 1.154,
+        "target_price": 1.225,
+        "reward_risk": 1.3666666666666705,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 8,
+        "r_gross": -1.2580645161290314,
+        "r_net": -1.5806451612903223,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2026-05-28",
+        "entry_price": 1.185,
+        "exit_date": "2026-06-09",
+        "exit_price": 1.146,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 8,
+        "r_net": -1.5806451612903203
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 42.19409282700422
+    },
+    {
+      "key": "B:000596.SZ:2021-08-16",
+      "module": "B",
+      "old": {
+        "symbol": "000596.SZ",
+        "entry_variant": "breakout",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 0,
+        "signal_date": "2021-08-16",
+        "entry_date": "2021-08-17",
+        "entry_price": 187.9,
+        "stop_price": 156.91,
+        "target_price": 229.59,
+        "reward_risk": 1.3227868328539478,
+        "exit_date": "2021-08-18",
+        "exit_price": 179.9,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 1,
+        "r_gross": -0.25814778960955137,
+        "r_net": -0.2642110358180056,
+        "benchmark_clock_type": 3,
+        "trend_stage": 1,
+        "entry_reason": "密集区突破入场（B2 突破版）：收盘突破密集区上沿，下一根开盘入场；失效 = 跌回密集区且跌破 20 组下弯（B3 两动作齐备）"
+      },
+      "current": {
+        "symbol": "000596.SZ",
+        "entry_variant": "breakout",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 0,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2021-08-16",
+        "entry_date": "2021-08-17",
+        "entry_price": 187.9,
+        "stop_price": 156.91,
+        "target_price": 229.59,
+        "reward_risk": 1.3227868328539478,
+        "exit_date": "2021-08-18",
+        "exit_price": 179.9,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 1,
+        "r_gross": -0.25814778960955137,
+        "r_net": -0.2642110358180056,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2021-08-17",
+        "entry_price": 187.9,
+        "exit_date": "2021-08-18",
+        "exit_price": 179.9,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 1,
+        "r_net": -0.26421103581800576
+      },
+      "independent_differences": {},
+      "historical_differences": {},
+      "entry_price_change_fraction": 0.0,
+      "effective_one_side_cost_bps": 5.0
+    },
+    {
+      "key": "C:000568.SZ:2018-09-21",
+      "module": "C",
+      "old": {
+        "symbol": "000568.SZ",
+        "entry_variant": "v3",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 0,
+        "signal_date": "2018-09-21",
+        "entry_date": "2018-09-25",
+        "entry_price": 21.562,
+        "stop_price": 14.212,
+        "target_price": 24.932,
+        "reward_risk": 0.38680465717981866,
+        "exit_date": "2018-10-11",
+        "exit_price": 14.862,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 7,
+        "r_gross": -0.9115646258503401,
+        "r_net": -0.914498231292517,
+        "benchmark_clock_type": 4,
+        "trend_stage": 2,
+        "entry_reason": "2B/破底翻确认（收回 L1 且 EMA20 与 SMA20 共同向上）：跌破前低 L1(15.3120) 创新低后 1 根内收回上方；失效线 = 假跌破新低 L2(14.2120)"
+      },
+      "current": {
+        "symbol": "000568.SZ",
+        "entry_variant": "v3",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 0,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2018-09-21",
+        "entry_date": "2018-09-25",
+        "entry_price": 17.145,
+        "stop_price": 14.212,
+        "target_price": 24.932,
+        "reward_risk": 0.38680465717981866,
+        "exit_date": "2018-10-12",
+        "exit_price": 11.365,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 8,
+        "r_gross": -1.9706784861916127,
+        "r_net": -1.9765240368223662,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2018-09-25",
+        "entry_price": 17.145,
+        "exit_date": "2018-10-12",
+        "exit_price": 11.365,
+        "exit_reason": "structure_stop_C",
+        "holding_bars": 8,
+        "r_net": -1.9765240368223662
+      },
+      "independent_differences": {},
+      "historical_differences": {
+        "entry_price": {
+          "old": 21.562,
+          "current": 17.145
+        },
+        "exit_date": {
+          "old": "2018-10-11",
+          "current": "2018-10-12"
+        },
+        "exit_price": {
+          "old": 14.862,
+          "current": 11.365
+        },
+        "exit_reason": {
+          "old": "exit_a6_1_costbasis",
+          "current": "structure_stop_C"
+        },
+        "holding_bars": {
+          "old": 7,
+          "current": 8
+        },
+        "r_net": {
+          "old": -0.914498231292517,
+          "current": -1.9765240368223662
+        }
+      },
+      "entry_price_change_fraction": -0.20485112698265473,
+      "effective_one_side_cost_bps": 5.0
+    },
+    {
+      "key": "C:000568.SZ:2018-11-21",
+      "module": "C",
+      "old": {
+        "symbol": "000568.SZ",
+        "entry_variant": "v3",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 0,
+        "signal_date": "2018-11-21",
+        "entry_date": "2018-11-22",
+        "entry_price": 15.812,
+        "stop_price": 9.682,
+        "target_price": 21.462,
+        "reward_risk": 0.9185667752443,
+        "exit_date": "2018-12-21",
+        "exit_price": 15.332,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 21,
+        "r_gross": -0.07830342577487745,
+        "r_net": -0.08088287112561149,
+        "benchmark_clock_type": 4,
+        "trend_stage": 2,
+        "entry_reason": "2B/破底翻确认（收回 L1 且 EMA20 与 SMA20 共同向上）：跌破前低 L1(11.4220) 创新低后 2 根内收回上方；失效线 = 假跌破新低 L2(9.6820)"
+      },
+      "current": {
+        "symbol": "000568.SZ",
+        "entry_variant": "v3",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 0,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2018-11-21",
+        "entry_date": "2018-11-22",
+        "entry_price": 11.395,
+        "stop_price": 9.682,
+        "target_price": 21.462,
+        "reward_risk": 0.9185667752443,
+        "exit_date": "2018-12-21",
+        "exit_price": 10.915,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 21,
+        "r_gross": -0.28021015761821405,
+        "r_net": -0.2868622300058381,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2018-11-22",
+        "entry_price": 11.395,
+        "exit_date": "2018-12-21",
+        "exit_price": 10.915,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 21,
+        "r_net": -0.2868622300058381
+      },
+      "independent_differences": {},
+      "historical_differences": {
+        "entry_price": {
+          "old": 15.812,
+          "current": 11.395
+        },
+        "exit_price": {
+          "old": 15.332,
+          "current": 10.915
+        },
+        "r_net": {
+          "old": -0.08088287112561149,
+          "current": -0.2868622300058381
+        }
+      },
+      "entry_price_change_fraction": -0.27934480141664564,
+      "effective_one_side_cost_bps": 5.0
+    },
+    {
+      "key": "C:000568.SZ:2021-09-01",
+      "module": "C",
+      "old": {
+        "symbol": "000568.SZ",
+        "entry_variant": "v3",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 0,
+        "signal_date": "2021-09-01",
+        "entry_date": "2021-09-02",
+        "entry_price": 162.003,
+        "stop_price": 140.353,
+        "target_price": 175.262,
+        "reward_risk": 0.6124249422632808,
+        "exit_date": "2021-09-16",
+        "exit_price": 150.793,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 10,
+        "r_gross": -0.5177829099307155,
+        "r_net": -0.5252657274826785,
+        "benchmark_clock_type": 3,
+        "trend_stage": 2,
+        "entry_reason": "2B/破底翻确认（收回 L1 且 EMA20 与 SMA20 共同向上）：跌破前低 L1(144.4320) 创新低后 1 根内收回上方；失效线 = 假跌破新低 L2(140.3530)"
+      },
+      "current": {
+        "symbol": "000568.SZ",
+        "entry_variant": "v3",
+        "exit_variant": "a6_1_costbasis",
+        "is_first_touch": false,
+        "ma_period": 0,
+        "clock_type": 0,
+        "weekly_bull_env": false,
+        "signal_date": "2021-09-01",
+        "entry_date": "2021-09-02",
+        "entry_price": 157.586,
+        "stop_price": 140.353,
+        "target_price": 175.262,
+        "reward_risk": 0.6124249422632808,
+        "exit_date": "2021-09-16",
+        "exit_price": 146.376,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 10,
+        "r_gross": -0.6504961411245869,
+        "r_net": -0.6596405733186327,
+        "benchmark_clock_type": 0,
+        "trend_stage": 0,
+        "meta": {
+          "entry_reason": ""
+        }
+      },
+      "independent": {
+        "entry_date": "2021-09-02",
+        "entry_price": 157.586,
+        "exit_date": "2021-09-16",
+        "exit_price": 146.376,
+        "exit_reason": "exit_a6_1_costbasis",
+        "holding_bars": 10,
+        "r_net": -0.6596405733186331
+      },
+      "independent_differences": {},
+      "historical_differences": {
+        "entry_price": {
+          "old": 162.003,
+          "current": 157.586
+        },
+        "exit_price": {
+          "old": 150.793,
+          "current": 146.376
+        },
+        "r_net": {
+          "old": -0.5252657274826785,
+          "current": -0.6596405733186327
+        }
+      },
+      "entry_price_change_fraction": -0.027264927192706123,
+      "effective_one_side_cost_bps": 5.0
+    }
+  ],
+  "summary": {
+    "opportunities": 16,
+    "mapped": 16,
+    "independent_mismatch_trades": 0,
+    "historical_mismatch_trades": 3,
+    "by_module": {
+      "A": {
+        "n": 12,
+        "historical_mismatches": 0,
+        "old_closed_mean_r": -1.3466677121457735,
+        "current_closed_mean_r": -1.3466677121457735
+      },
+      "B": {
+        "n": 1,
+        "historical_mismatches": 0,
+        "old_closed_mean_r": -0.2642110358180056,
+        "current_closed_mean_r": -0.2642110358180056
+      },
+      "C": {
+        "n": 3,
+        "historical_mismatches": 3,
+        "old_closed_mean_r": -0.5068822766336023,
+        "current_closed_mean_r": -0.9743422800489457
+      }
+    },
+    "all_input_hashes_unchanged": true
+  },
+  "inputs": {
+    "/Users/yongbiaoli/lei-signal-sync/configs/rules.v1.yaml": {
+      "sha256": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2",
+      "bytes": 36540
+    },
+    "/Users/yongbiaoli/lei-signal-sync/configs/rules.v2.yaml": {
+      "sha256": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+      "bytes": 83873
+    },
+    "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/domain/rules_config.py": {
+      "sha256": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031",
+      "bytes": 2987
+    },
+    "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/backtest/engine.py": {
+      "sha256": "ca9fe8344aa5580edfa95d14104dc889645cf9d5d389f632bdd9c5417e331d62",
+      "bytes": 18231
+    },
+    "/Users/yongbiaoli/lei-signal-sync/src/lei_signal/features/indicators.py": {
+      "sha256": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26",
+      "bytes": 6733
+    },
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/exits/protocol.md": {
+      "sha256": "843a88c74aaf72a505301778434f9958d7a4c393ce89c463447b067efc894796",
+      "bytes": 1671
+    },
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-first-round-2026-09-08/exits/reproduce.py": {
+      "sha256": "ffb405293f80f7357f28b349f4b1bfcd25d675f11b5d9bbecc5664c677d83fd7",
+      "bytes": 7266
+    },
+    "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/lifecycle_combo/T2_A_ETF_cm05_shrink.json": {
+      "sha256": "31b87f72eb776507478207f1f340ec90cb1641057ee7cad6b22a9d89002dcc61",
+      "bytes": 200072
+    },
+    "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/exit_three_piece/pool/159611.SZ.bars.parquet": {
+      "sha256": "f73bcb99414645bc1097859f01affb9e6e4e57fa89ccadc1fa35ee166e3f1596",
+      "bytes": 33385
+    },
+    "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/exit_three_piece/pool/159611.SZ.bars.meta.json": {
+      "sha256": "0894d633a056175bca9ed85641fa8ddc2d03684cbc2076e9e24f08aea02c1840",
+      "bytes": 215
+    },
+    "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/lifecycle_combo/T1_Bp_a61.json": {
+      "sha256": "8bcef9510da419b050f142e8ac2440daf988f836b9de59df34b8735e3bd0f8fc",
+      "bytes": 117899
+    },
+    "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/exit_three_piece/pool/000596.SZ.bars.parquet": {
+      "sha256": "c697303524bf2399ba2242efd77e80eecb791c42ba38fbc3e86e8ae95f36cf3b",
+      "bytes": 94540
+    },
+    "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/exit_three_piece/pool/000596.SZ.bars.meta.json": {
+      "sha256": "404bf21616f83e476d7f1192b4c36cce03c6b999a224e24343f3b898d7d8ddfb",
+      "bytes": 215
+    },
+    "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/lifecycle_combo/T2_C_stocks_v3_b15.json": {
+      "sha256": "8caba934e5f553072dd67cda71fc9ab0727ca4f75a1a00a360221ad666742ff1",
+      "bytes": 166060
+    },
+    "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/exit_three_piece/pool/000568.SZ.bars.parquet": {
+      "sha256": "14d056520560e336c2e2143e0b46ba516a96fa5802bbb719dc88cc803f277d46",
+      "bytes": 96333
+    },
+    "/Users/yongbiaoli/lei-signal-sync/docs/experiments/raw/exit_three_piece/pool/000568.SZ.bars.meta.json": {
+      "sha256": "579a8c172b23bc1c6eeec04ea0c207a2a75c6a35fae9922a7664a298dc7c9299",
+      "bytes": 215
+    }
+  }
+}

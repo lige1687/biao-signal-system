@@ -1,0 +1,78 @@
+{
+  "principles_version": "1.0.0",
+  "definition_standard_version": "1.0.0",
+  "registry_version": "1.1.0",
+  "registry_file": {
+    "path": "docs/research/definitions.v1.json",
+    "sha256": "d0f9e0038123b61a83699c52d67a80561f2bfe36b24a7c1f25575f5da78c209e"
+  },
+  "standard_file": {
+    "path": "docs/research/definition-standard.md",
+    "sha256": "b12fe66d7b13e41a4e11b17b77c9e2251e98d2655ee00a7b8d53881a3f0c5ade"
+  },
+  "registry_canonical_sha256": "d628e49903a3ad6306f39750c06f798df9534eef5286e6a264c9ec4b65a96c3e",
+  "definition_refs": [
+    "mixed.momentum.raw@1.0.0",
+    "mixed.top3@1.0.0",
+    "trend.sma200@1.0.0"
+  ],
+  "dependency_closure": [
+    "mixed.asset.total_return@1.0.0",
+    "mixed.eligible@1.0.0",
+    "mixed.momentum.rank@1.0.0",
+    "mixed.momentum.raw@1.0.0",
+    "mixed.price.economic@1.0.0",
+    "mixed.rv20@1.0.0",
+    "mixed.rv_percentile@1.0.0",
+    "mixed.top3@1.0.0",
+    "mixed.volatility_allowed@1.0.0",
+    "trend.sma200@1.0.0"
+  ],
+  "codes": [
+    {
+      "path": "scripts/verify_research_definitions.py",
+      "sha256": "79592e307b91decd9364fff7a1cf964cc087b43354cf6d15300f28595a26f1a7"
+    },
+    {
+      "path": "src/lei_signal/research/definitions.py",
+      "sha256": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/prices.csv",
+      "sha256": "de467734be6c2ccbabed6fd39dc04b36fc6b78ee0ab731defd31ded4b83eb850"
+    },
+    {
+      "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+      "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81"
+    },
+    {
+      "path": "docs/experiments/raw/research-factor-library-v0-2026-09-09/breadth-regression-01/mixed-signal-input.csv",
+      "sha256": "f66a948c764cea4f6a3c553133742eff4ae1c1b292359700aa688fb6917cd633"
+    }
+  ],
+  "data_cutoff": "2023-12-29T15:00:00+08:00",
+  "available_at": "2026-09-09T21:09:38.269453+08:00",
+  "decision_at": "2026-09-09T21:09:38.269453+08:00",
+  "protocol": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-protocol.json",
+    "sha256": "21da388351b933b9008381a703017ebc75ec6448ef4eb5edba45ca6d5a84e1f5"
+  },
+  "pool_version": "rotation-reconstructed-full-v1/full14",
+  "quality": "real_frozen_input_formula_comparison; corporate_action_availability_unverified",
+  "production_authorization": "not_authorized",
+  "historical_available_at": "unknown: sources do not certify vendor arrival timestamps",
+  "execution_protocol": "definition replay only; no trades executed",
+  "output_schema": {
+    "date": "observation date",
+    "momentum": "fraction",
+    "sma200": "economic_index",
+    "rv_rank": "fraction",
+    "missing_reason": "empty numeric cells = insufficient valid observations"
+  },
+  "legacy_code": {
+    "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-execution/run.py",
+    "sha256": "b79a61db75eafb4c1944a1f158daeecbc987e61ea66f51eb4e7ca90966a7be26"
+  }
+}

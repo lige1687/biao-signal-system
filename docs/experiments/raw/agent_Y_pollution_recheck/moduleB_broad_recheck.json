@@ -1,0 +1,361 @@
+{
+ "pre_registered_criteria": {
+  "成立": "expR>0 且 ex-512100 平均R>0",
+  "不成立": "expR<=0 或 ex-512100<=0",
+  "证据不足": "数据无法构建或 N<30",
+  "repair_threshold": 0.12,
+  "framework": "execute_run 原框架: B/breakout/b3_dual/vc0/rrNone/fee standard/limit_guard, cb=40 cl=8% (b-adaptation 原参数)"
+ },
+ "engine_code_note": "src 树规则模块为 2026-09-01 回退事故后的旧版（v1 纠缠度口径），且 configs 只有 rules.v1.yaml（cb 默认 120，覆盖锚点不存在）。本复核的最小工程处置：①从 stash@{0} 提取归档时代规则模块注册进本进程（scripts/agent_Y/pre_revert_rules/，与 stop_loss_matrix/pre_revert_modules 独立副本逐字节一致）；②账本指回提交 1a321ce 的 configs/rules.v2.yaml（原样复制到 scripts/agent_Y/）。处置模块: lei_signal.rules.first_ma_pullback, lei_signal.rules.dense_breakout, lei_signal.rules.reward_risk_filter, lei_signal.rules.tradability_gate, lei_signal.rules.two_b_reversal, lei_signal.rules.volume, lei_signal.rules.lei_color",
+ "original_archive": {
+  "N": 37,
+  "expR": 0.9440623764835745,
+  "IS": 0.28089447203379264,
+  "OOS": 2.32566217742062,
+  "ex_top1": 0.5457184526833196,
+  "top1": "512100.SS"
+ },
+ "variants": {
+  "V0_pool_as_is": {
+   "N": 37,
+   "open_count": 0,
+   "expR": 0.944062,
+   "total_R": 34.9303,
+   "win_rate": 0.3783783783783784,
+   "profit_factor": 3.4466549289001405,
+   "IS_expR": 0.28089447203379264,
+   "IS_n": 25,
+   "OOS_expR": 2.32566217742062,
+   "OOS_n": 12,
+   "ex_512100_expR": 0.545718,
+   "ex_512100_n": 35,
+   "by_symbol": {
+    "512100.SS": {
+     "n": 2,
+     "total_r": 15.8302,
+     "expR": 7.915081042988035
+    },
+    "510050.SS": {
+     "n": 7,
+     "total_r": 9.9563,
+     "expR": 1.4223281963905505
+    },
+    "159901.SZ": {
+     "n": 7,
+     "total_r": 4.9602,
+     "expR": 0.7085949258183213
+    },
+    "510500.SS": {
+     "n": 11,
+     "total_r": 2.8376,
+     "expR": 0.25796534344351796
+    },
+    "510300.SS": {
+     "n": 9,
+     "total_r": 2.2627,
+     "expR": 0.2514146530268954
+    },
+    "588000.SS": {
+     "n": 1,
+     "total_r": -0.9167,
+     "expR": -0.9166666666666704
+    }
+   },
+   "trades_512100": [
+    {
+     "signal_date": "2025-06-05",
+     "entry_date": "2025-06-06",
+     "exit_date": "2025-06-09",
+     "exit_reason": "exit_b3_dual",
+     "r_net": -0.1395
+    },
+    {
+     "signal_date": "2025-06-23",
+     "entry_date": "2025-06-24",
+     "exit_date": "2025-12-02",
+     "exit_reason": "exit_b3_dual",
+     "r_net": 15.9697
+    }
+   ],
+   "r512100_share": 0.4532,
+   "data_range": {
+    "start": "2016-08-24",
+    "end": "2026-08-25",
+    "symbols_count": 7,
+    "out_of_sample_start": "2024-08-25"
+   },
+   "funnel": {
+    "touched": 43,
+    "confirmed": 50,
+    "filtered_by_rr": 0,
+    "no_target": 2,
+    "filtered_by_volume": 0,
+    "filtered_by_shrink": 0,
+    "filtered_by_profile": 0,
+    "filtered_by_gap": 0,
+    "filtered_by_bias": 0
+   },
+   "pre_registered_verdict": "45%正收益仍成立",
+   "variant": "V0"
+  },
+  "V1_audit_repair": {
+   "N": 37,
+   "open_count": 0,
+   "expR": 0.944062,
+   "total_R": 34.9303,
+   "win_rate": 0.3783783783783784,
+   "profit_factor": 3.4466549289001405,
+   "IS_expR": 0.28089447203379264,
+   "IS_n": 25,
+   "OOS_expR": 2.32566217742062,
+   "OOS_n": 12,
+   "ex_512100_expR": 0.545718,
+   "ex_512100_n": 35,
+   "by_symbol": {
+    "512100.SS": {
+     "n": 2,
+     "total_r": 15.8302,
+     "expR": 7.915081042988035
+    },
+    "510050.SS": {
+     "n": 7,
+     "total_r": 9.9563,
+     "expR": 1.4223281963905505
+    },
+    "159901.SZ": {
+     "n": 7,
+     "total_r": 4.9602,
+     "expR": 0.7085949258183213
+    },
+    "510500.SS": {
+     "n": 11,
+     "total_r": 2.8376,
+     "expR": 0.25796534344351796
+    },
+    "510300.SS": {
+     "n": 9,
+     "total_r": 2.2627,
+     "expR": 0.2514146530268954
+    },
+    "588000.SS": {
+     "n": 1,
+     "total_r": -0.9167,
+     "expR": -0.9166666666666704
+    }
+   },
+   "trades_512100": [
+    {
+     "signal_date": "2025-06-05",
+     "entry_date": "2025-06-06",
+     "exit_date": "2025-06-09",
+     "exit_reason": "exit_b3_dual",
+     "r_net": -0.1395
+    },
+    {
+     "signal_date": "2025-06-23",
+     "entry_date": "2025-06-24",
+     "exit_date": "2025-12-02",
+     "exit_reason": "exit_b3_dual",
+     "r_net": 15.9697
+    }
+   ],
+   "r512100_share": 0.4532,
+   "data_range": {
+    "start": "2016-08-24",
+    "end": "2026-08-25",
+    "symbols_count": 7,
+    "out_of_sample_start": "2024-08-25"
+   },
+   "funnel": {
+    "touched": 43,
+    "confirmed": 50,
+    "filtered_by_rr": 0,
+    "no_target": 2,
+    "filtered_by_volume": 0,
+    "filtered_by_shrink": 0,
+    "filtered_by_profile": 0,
+    "filtered_by_gap": 0,
+    "filtered_by_bias": 0
+   },
+   "pre_registered_verdict": "45%正收益仍成立",
+   "variant": "V1",
+   "repaired": []
+  },
+  "V2_timing_fixed_ohlc": {
+   "N": 38,
+   "open_count": 0,
+   "expR": 0.858784,
+   "total_R": 32.6338,
+   "win_rate": 0.34210526315789475,
+   "profit_factor": 3.058525640836428,
+   "IS_expR": 0.21948891991372133,
+   "IS_n": 26,
+   "OOS_expR": 2.243922612163068,
+   "OOS_n": 12,
+   "ex_512100_expR": 0.510745,
+   "ex_512100_n": 35,
+   "by_symbol": {
+    "512100.SS": {
+     "n": 3,
+     "total_r": 14.7577,
+     "expR": 4.919233303049007
+    },
+    "510050.SS": {
+     "n": 7,
+     "total_r": 9.9563,
+     "expR": 1.4223281963905505
+    },
+    "159901.SZ": {
+     "n": 7,
+     "total_r": 4.9602,
+     "expR": 0.7085949258183213
+    },
+    "510300.SS": {
+     "n": 9,
+     "total_r": 2.2627,
+     "expR": 0.2514146530268954
+    },
+    "510500.SS": {
+     "n": 11,
+     "total_r": 1.6136,
+     "expR": 0.14668693532082358
+    },
+    "588000.SS": {
+     "n": 1,
+     "total_r": -0.9167,
+     "expR": -0.9166666666666704
+    }
+   },
+   "trades_512100": [
+    {
+     "signal_date": "2021-01-04",
+     "entry_date": "2021-01-05",
+     "exit_date": "2021-01-06",
+     "exit_reason": "exit_b3_dual",
+     "r_net": -0.3333
+    },
+    {
+     "signal_date": "2025-06-05",
+     "entry_date": "2025-06-06",
+     "exit_date": "2025-06-09",
+     "exit_reason": "exit_b3_dual",
+     "r_net": -0.3445
+    },
+    {
+     "signal_date": "2025-06-23",
+     "entry_date": "2025-06-24",
+     "exit_date": "2025-12-02",
+     "exit_reason": "exit_b3_dual",
+     "r_net": 15.4355
+    }
+   ],
+   "r512100_share": 0.4522,
+   "data_range": {
+    "start": "2016-08-24",
+    "end": "2026-08-25",
+    "symbols_count": 7,
+    "out_of_sample_start": "2024-08-25"
+   },
+   "funnel": {
+    "touched": 44,
+    "confirmed": 51,
+    "filtered_by_rr": 0,
+    "no_target": 2,
+    "filtered_by_volume": 0,
+    "filtered_by_shrink": 0,
+    "filtered_by_profile": 0,
+    "filtered_by_gap": 0,
+    "filtered_by_bias": 0
+   },
+   "pre_registered_verdict": "45%正收益仍成立",
+   "variant": "V2",
+   "store_swap": {
+    "512100.SS": {
+     "common_days": 2382,
+     "first": "2016-11-04",
+     "last": "2026-08-25",
+     "returns_corr": 0.999436
+    },
+    "510500.SS": {
+     "common_days": 2427,
+     "first": "2016-08-24",
+     "last": "2026-08-24",
+     "returns_corr": 0.998706
+    }
+   }
+  }
+ },
+ "pool_jump_presence": {
+  "510050.SS": [],
+  "510300.SS": [],
+  "510500.SS": [
+   {
+    "date": "2015-04-15",
+    "in_index": false,
+    "single_day": null,
+    "jump_present": false
+   },
+   {
+    "date": "2022-08-29",
+    "in_index": true,
+    "single_day": -0.000676,
+    "jump_present": false
+   }
+  ],
+  "512100.SS": [
+   {
+    "date": "2022-09-05",
+    "in_index": true,
+    "single_day": 0.010353,
+    "jump_present": false
+   }
+  ],
+  "159901.SZ": [],
+  "159915.SZ": [
+   {
+    "date": "2024-09-30",
+    "single_day": 0.2,
+    "in_audit_list": false,
+    "note": "创业板/科创板ETF ±20% 合法清单核对见报告"
+   },
+   {
+    "date": "2024-10-08",
+    "single_day": 0.199821,
+    "in_audit_list": false,
+    "note": "创业板/科创板ETF ±20% 合法清单核对见报告"
+   },
+   {
+    "date": "2024-10-09",
+    "single_day": -0.162808,
+    "in_audit_list": false,
+    "note": "创业板/科创板ETF ±20% 合法清单核对见报告"
+   },
+   {
+    "date": "2025-04-07",
+    "single_day": -0.124322,
+    "in_audit_list": false,
+    "note": "创业板/科创板ETF ±20% 合法清单核对见报告"
+   }
+  ],
+  "588000.SS": [
+   {
+    "date": "2024-09-30",
+    "single_day": 0.199495,
+    "in_audit_list": false,
+    "note": "创业板/科创板ETF ±20% 合法清单核对见报告"
+   },
+   {
+    "date": "2024-10-08",
+    "single_day": 0.2,
+    "in_audit_list": false,
+    "note": "创业板/科创板ETF ±20% 合法清单核对见报告"
+   },
+   {
+    "date": "2024-10-18",
+    "single_day": 0.12419,
+    "in_audit_list": false,
+    "note": "创业板/科创板ETF ±20% 合法清单核对见报告"
+   }
+  ]
+ }
+}

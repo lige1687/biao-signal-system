@@ -1,0 +1,48 @@
+/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/siphon_detector_20260827.py:51: FutureWarning: The default fill_method='pad' in DataFrame.pct_change is deprecated and will be removed in a future version. Either fill in any non-leading NA values prior to calling pct_change or specify 'fill_method=None' to not fill NA values.
+  ret = wide.pct_change()
+主指标: RS120 > +20.0pp 连续10日 | 全A等权=a_share_klines_full.parquet
+wid     name kind  days  fire_rate  rs_mean
+ F1     中证白酒    F   515       0.45    21.70
+ F2  人工智能ETF    F   878       0.21     8.99
+ F3     国证芯片    F   862       0.13     5.96
+ F4     通信指数    F   462       0.12     5.72
+ F5   计算机ETF    F   462       0.06    -2.49
+ F6     创业板指    F   483       0.25     5.37
+ F7     创业板指    F   462       0.21     6.07
+ F8  科创50ETF    F   462       0.11     7.78
+ F9 中证500ETF    F  3141       0.04     9.80
+ E1     证券指数    E  2616       0.01    -5.25
+ E2    新能车指数    E  2616       0.13     0.54
+ E3   有色金属指数    E  3351       0.09    -4.81
+E4a     创业板指    E   510       0.02    -3.28
+E4b     创业板指    E  2363       0.02    -3.58
+E5a     中证白酒    E   746       0.32    13.03
+E5b     中证白酒    E  1336       0.05   -11.91
+ E6   房地产ETF    E  2038       0.06     3.13
+ E7    旅游ETF    E  1109       0.01    -9.52
+
+失效窗覆盖率(F 均值): 18%  |  有效窗误报率(E 均值): 8%
+通过标准: 覆盖≥80% 且 误报≤20%
+
+灵敏度面（F覆盖率 / E误报率）:
+    N   thr            无持续          持续10日
+   60   15    20%/7%        14%/4%    
+   60   20    14%/5%        10%/3%    
+   60   30     6%/2%         4%/1%    
+  120   15    29%/13%       23%/10%   
+  120   20    22%/10%       18%/8%    
+  120   30    14%/5%        10%/3%    
+  250   15    32%/18%       26%/16%   
+  250   20    26%/16%       23%/14%   
+  250   30    20%/12%       18%/11%   
+
+各标的当前状态（最新日）:
+  创业板指: RS120=+20.0pp → ✓与全场同频
+  证券: RS120=-0.7pp → ✓与全场同频
+  新能车: RS120=-4.3pp → ✓与全场同频
+  有色: RS120=-7.1pp → ✓与全场同频
+  白酒: RS120=-14.1pp → ✓与全场同频
+  国证芯片: RS120=+38.3pp → ⚠️虹吸中·宽度引擎应下岗
+  通信: RS120=+31.3pp → ⚠️虹吸中·宽度引擎应下岗
+  人工智能ETF: RS120=+25.7pp → ⚠️虹吸中·宽度引擎应下岗
+  房地产ETF: RS120=-11.7pp → ✓与全场同频

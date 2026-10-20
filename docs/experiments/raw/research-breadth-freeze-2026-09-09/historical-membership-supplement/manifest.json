@@ -1,0 +1,337 @@
+{
+  "created_at": "2026-09-09T20:45:00+08:00",
+  "scope": "two frozen CSI300 probe intervals; 40 one-shot same-provider date queries; membership only",
+  "sources": [
+    {
+      "path": "docs/research/experiment-backtest-principles.md",
+      "sha256": "9dad4d24d7c3ebe570222342339a3a3f2537b1df5819a6f36fd4cbb8a5cbfa68",
+      "bytes": 17499,
+      "role": "read_only_source"
+    },
+    {
+      "path": "docs/research/definition-standard.md",
+      "sha256": "b12fe66d7b13e41a4e11b17b77c9e2251e98d2655ee00a7b8d53881a3f0c5ade",
+      "bytes": 10067,
+      "role": "read_only_source"
+    },
+    {
+      "path": "docs/research/breadth-freeze-observation-2026-09-09.md",
+      "sha256": "c85ecb8cbc52d6f0ff88a98d1f45373f913f4292b7c3d2819f786b24da6b6c3f",
+      "bytes": 7229,
+      "role": "read_only_source"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-price50-decision-2026-09-09/protocol.md",
+      "sha256": "66f8788594977d126aa8b5c5a40af5ba0be973d1f5e5579c7c447a3a472edea3",
+      "bytes": 3145,
+      "role": "read_only_source"
+    },
+    {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepare_data.py",
+      "sha256": "16e0f937a68c09a70eb672ee76c766a26793aced5a77ba34f0433753a5e12f7b",
+      "bytes": 17731,
+      "role": "read_only_source"
+    },
+    {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet",
+      "sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30",
+      "bytes": 136179,
+      "role": "read_only_source"
+    },
+    {
+      "path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_probe_audit.json",
+      "sha256": "163424317ba3b0b27dd13e37b5c178999c87d8e81b9bc5c3d1f388ae3c854f22",
+      "bytes": 3351,
+      "role": "read_only_source"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/audit.md",
+      "sha256": "f19089e02b3ad7069febdb7c6461c5e0a7dd665b4c33bb996b3b989884ca6d72",
+      "bytes": 2359,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/daily-set-differences.csv",
+      "sha256": "e66b3fc8a0da5ed7a552478f7ad4adc8ae6a1ab6c3e5b0dd81f07cc0655fc109",
+      "bytes": 1564,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/dense-query-changes.csv",
+      "sha256": "32c6f4efcd9c15a7cccc0d2945e6dfcfa01bb79786bd2619dd2903aa28bd9496",
+      "bytes": 734,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/query-plan.json",
+      "sha256": "67ce11f5f68951221bb7cc4d1ef162f480313e9b39723dcc3f2a4607db91583f",
+      "bytes": 897,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/query_daily.py",
+      "sha256": "494dff0c54ca70c47210d4e3abddb765eb229bf36c718394f3f172282e867594",
+      "bytes": 2541,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-06.csv",
+      "sha256": "da6e32fecbad71b0547be0cd74d6ae03de00596672f93d336d7bdecc786011f4",
+      "bytes": 10133,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-07.csv",
+      "sha256": "da6e32fecbad71b0547be0cd74d6ae03de00596672f93d336d7bdecc786011f4",
+      "bytes": 10133,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-10.csv",
+      "sha256": "bf2156e9a43a27acece166943c69b295bdd59704be9a4ac837d4091f3e3ad8f6",
+      "bytes": 10133,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-11.csv",
+      "sha256": "bf2156e9a43a27acece166943c69b295bdd59704be9a4ac837d4091f3e3ad8f6",
+      "bytes": 10133,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-12.csv",
+      "sha256": "bf2156e9a43a27acece166943c69b295bdd59704be9a4ac837d4091f3e3ad8f6",
+      "bytes": 10133,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-13.csv",
+      "sha256": "bf2156e9a43a27acece166943c69b295bdd59704be9a4ac837d4091f3e3ad8f6",
+      "bytes": 10133,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-14.csv",
+      "sha256": "bf2156e9a43a27acece166943c69b295bdd59704be9a4ac837d4091f3e3ad8f6",
+      "bytes": 10133,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-17.csv",
+      "sha256": "b00f1f160af5df099f2518682bc65c9b492f45dfce0f7073b53d5ab19589a80d",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-18.csv",
+      "sha256": "b00f1f160af5df099f2518682bc65c9b492f45dfce0f7073b53d5ab19589a80d",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-19.csv",
+      "sha256": "b00f1f160af5df099f2518682bc65c9b492f45dfce0f7073b53d5ab19589a80d",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-20.csv",
+      "sha256": "b00f1f160af5df099f2518682bc65c9b492f45dfce0f7073b53d5ab19589a80d",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-21.csv",
+      "sha256": "b00f1f160af5df099f2518682bc65c9b492f45dfce0f7073b53d5ab19589a80d",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-24.csv",
+      "sha256": "15355b725347733c82431db31c3b0124e02471dc4a1eba067eed0b608b60eb76",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-25.csv",
+      "sha256": "15355b725347733c82431db31c3b0124e02471dc4a1eba067eed0b608b60eb76",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-26.csv",
+      "sha256": "15355b725347733c82431db31c3b0124e02471dc4a1eba067eed0b608b60eb76",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-27.csv",
+      "sha256": "15355b725347733c82431db31c3b0124e02471dc4a1eba067eed0b608b60eb76",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2018-12-28.csv",
+      "sha256": "15355b725347733c82431db31c3b0124e02471dc4a1eba067eed0b608b60eb76",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-01-02.csv",
+      "sha256": "15355b725347733c82431db31c3b0124e02471dc4a1eba067eed0b608b60eb76",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-01-03.csv",
+      "sha256": "15355b725347733c82431db31c3b0124e02471dc4a1eba067eed0b608b60eb76",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-01-04.csv",
+      "sha256": "15355b725347733c82431db31c3b0124e02471dc4a1eba067eed0b608b60eb76",
+      "bytes": 10134,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-10.csv",
+      "sha256": "de623e8d7efd9451980acd62450fbd5ddfd4cbce0c9c964a9f521718b94c53c6",
+      "bytes": 10124,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-11.csv",
+      "sha256": "de623e8d7efd9451980acd62450fbd5ddfd4cbce0c9c964a9f521718b94c53c6",
+      "bytes": 10124,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-12.csv",
+      "sha256": "de623e8d7efd9451980acd62450fbd5ddfd4cbce0c9c964a9f521718b94c53c6",
+      "bytes": 10124,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-13.csv",
+      "sha256": "de623e8d7efd9451980acd62450fbd5ddfd4cbce0c9c964a9f521718b94c53c6",
+      "bytes": 10124,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-14.csv",
+      "sha256": "de623e8d7efd9451980acd62450fbd5ddfd4cbce0c9c964a9f521718b94c53c6",
+      "bytes": 10124,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-17.csv",
+      "sha256": "2f7af4a990b5588a66d138b1e0d29ac4284ce3bf476329f41fd5c50c81256788",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-18.csv",
+      "sha256": "2f7af4a990b5588a66d138b1e0d29ac4284ce3bf476329f41fd5c50c81256788",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-19.csv",
+      "sha256": "2f7af4a990b5588a66d138b1e0d29ac4284ce3bf476329f41fd5c50c81256788",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-20.csv",
+      "sha256": "2f7af4a990b5588a66d138b1e0d29ac4284ce3bf476329f41fd5c50c81256788",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-21.csv",
+      "sha256": "2f7af4a990b5588a66d138b1e0d29ac4284ce3bf476329f41fd5c50c81256788",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-24.csv",
+      "sha256": "2347f1e03ced2f472fda2cb9e78e331b4e299e861918e53c33ed6f33849b9377",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-25.csv",
+      "sha256": "2347f1e03ced2f472fda2cb9e78e331b4e299e861918e53c33ed6f33849b9377",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-26.csv",
+      "sha256": "2347f1e03ced2f472fda2cb9e78e331b4e299e861918e53c33ed6f33849b9377",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-27.csv",
+      "sha256": "2347f1e03ced2f472fda2cb9e78e331b4e299e861918e53c33ed6f33849b9377",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-06-28.csv",
+      "sha256": "2347f1e03ced2f472fda2cb9e78e331b4e299e861918e53c33ed6f33849b9377",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-07-01.csv",
+      "sha256": "f21b48518295b51395a2a8b7f356f464afc153e905ca06db6b1b0b2431a9f050",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-07-02.csv",
+      "sha256": "f21b48518295b51395a2a8b7f356f464afc153e905ca06db6b1b0b2431a9f050",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-07-03.csv",
+      "sha256": "f21b48518295b51395a2a8b7f356f464afc153e905ca06db6b1b0b2431a9f050",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-07-04.csv",
+      "sha256": "f21b48518295b51395a2a8b7f356f464afc153e905ca06db6b1b0b2431a9f050",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/raw-responses/2019-07-05.csv",
+      "sha256": "f21b48518295b51395a2a8b7f356f464afc153e905ca06db6b1b0b2431a9f050",
+      "bytes": 10125,
+      "role": "supplement_output"
+    },
+    {
+      "path": "docs/experiments/raw/research-breadth-freeze-2026-09-09/historical-membership-supplement/request-log.csv",
+      "sha256": "20ab9eb4793a3323d49246f5a2741a208c2d8fbb98bf00ef54fcc9f50d2edb28",
+      "bytes": 7675,
+      "role": "supplement_output"
+    }
+  ],
+  "result": {
+    "requests": 40,
+    "successful_nonretry_requests": 40,
+    "returned_300": 40,
+    "daily_sets_equal_frozen": 40,
+    "detected_change_dates": [
+      "2018-12-17",
+      "2019-06-17"
+    ],
+    "triggers_recalculation": false
+  }
+}

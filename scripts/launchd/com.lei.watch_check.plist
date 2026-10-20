@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.lei.watch_check</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/python3</string>
+        <string>scripts/watch_check.py</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PYTHONPATH</key>
+        <string>/Users/yongbiaoli/Desktop/lei-signal-lab/src</string>
+    </dict>
+
+    <!-- 14:45 提醒订阅命中检查 (决策 2, 2026-08-08).
+         命中 active -> pending_confirmation, 不弹通知, 由用户在面板确认.
+         v1 只接 kind=price (kind=state 留 TODO).
+         与 com.lei.intraday 错开一分钟避免 IO 抢锁. -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Weekday</key><integer>1</integer>
+            <key>Hour</key><integer>14</integer>
+            <key>Minute</key><integer>46</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>2</integer>
+            <key>Hour</key><integer>14</integer>
+            <key>Minute</key><integer>46</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>3</integer>
+            <key>Hour</key><integer>14</integer>
+            <key>Minute</key><integer>46</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>4</integer>
+            <key>Hour</key><integer>14</integer>
+            <key>Minute</key><integer>46</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>5</integer>
+            <key>Hour</key><integer>14</integer>
+            <key>Minute</key><integer>46</integer>
+        </dict>
+    </array>
+
+    <key>StandardOutPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/watch_check.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/yongbiaoli/Desktop/lei-signal-lab/logs/watch_check.err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>

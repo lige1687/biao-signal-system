@@ -1,0 +1,130 @@
+{
+  "manifest_version": "1.0.0",
+  "job_id": "abf62778-7076-4ea5-88fb-2750016ba03a",
+  "round": 1,
+  "executor": "zcode-delegate / GLM-5.3-Flash",
+  "executed_at": "2026-09-17 (Asia/Shanghai)",
+  "repo_state": {
+    "branch": "codex/factor-unit-research-20260915",
+    "head": "84db4e2d10e38ba0dcdafabf84f57fa6f4d2173b",
+    "head_verified": true,
+    "round1_head": "2b05787f746991a90ec33a06736b61cfdeca6119",
+    "round1_to_round2_delta": "one commit adding two external-delegation design docs; task inputs/implementations unchanged (controller-verified)",
+    "pre_existing_uncommitted_changes_untouched": true
+  },
+  "revision": "round2 (2026-09-17): R1-R4 limited document repair per controller review v1.0.0; round1 originals preserved byte-exact under history-round1/",
+  "frozen_specs": {
+    "docs/research/experiment-backtest-principles.md": {
+      "declared_version": "1.1",
+      "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6",
+      "match": true
+    },
+    "docs/research/ai-execution-contract.md": {
+      "declared_version": "1.0.1",
+      "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962",
+      "match": true
+    },
+    "docs/research/definition-standard.md": {
+      "declared_version": "1.1.0",
+      "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c",
+      "match": true
+    },
+    "docs/research/definitions.v1.json": {
+      "declared_version": "container 1.2.0 (resolved from file)",
+      "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05",
+      "match": true
+    }
+  },
+  "definition_cards_resolved": [
+    "breadth.csi300.b50.common@1.0.0",
+    "breadth.csi300.b200.common@1.0.0",
+    "breadth.csi300.b50.legacy_percent@1.0.0",
+    "breadth.csi300.b200.legacy_percent@1.0.0"
+  ],
+  "audited_experiment": {
+    "root": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09",
+    "frozen_at": "2026-09-09",
+    "protocol_sha_binding": "registry sources.breadth_protocol"
+  },
+  "inputs_verified_2026_09_17": [
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_daily.parquet", "role": "csi300 point-in-time daily membership (registry csi_members)", "sha256": "a45d53bf4e445438f534bd2019ec30ecd911f6bfb09272a9c663c7e01026bc30", "registry_bound": true, "hash_match": true, "structure": "843900 rows = 2813 dates x 300 members, 2014-12-01..2026-06-30, 682 symbols, 31 versions, 0 dup, 0 null"},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/input_fingerprints.json", "role": "experiment input fingerprint ledger (registry breadth_inputs)", "sha256": "be140f67549f3e0073c366ddacb23e3884320e5a4bbe46bcbb541f08ce5aaf0f", "registry_bound": true, "hash_match": true},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/breadth_csi300.parquet", "role": "frozen csi300 breadth series (percent, common denominator)", "sha256": "63fa7f0ef837c161194fb8f1f17140069074812085c8b449b93aa4d5f2998a58", "fingerprint_ledger_match": true, "structure": "2813 rows, valid 2378, b50/b200 NaN 435, coverage min 0.64 median 0.9633, first_valid 2015-02-09"},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/breadth_all_a.parquet", "role": "frozen all-A comparison series", "sha256": "c4c8e32925fb87d1fe39729d2ffb4a357e3537cf84b6c41bf9ae5fa5d0d24ed8", "fingerprint_ledger_match": true},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/csi300_membership_probe_audit.json", "role": "membership probe audit (20-session grid, 272 queries, 30 effective dates, round-trip blind spot)", "sha256": "163424317ba3b0b27dd13e37b5c178999c87d8e81b9bc5c3d1f388ae3c854f22", "fingerprint_ledger_match": true},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/data_quality.json", "role": "quality self-grade (csi300 B first_valid 2015-02-09; all_a B; chinext C chain break 2017-10-09)", "sha256": "f9b3b7889e44d1dad3908ae7542fbc3c65b82effc98247eec6bd342049f91f86", "note": "not pinned by fingerprint ledger; actual recorded"},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/chinext_chain_failure.json", "role": "chinext grade-C failure evidence", "sha256": "8f3e0be1441a297ae31bea87058777d82554da64faf3525a73f42de553dcf4f1", "fingerprint_ledger_match": true},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/chinext_adjustments_candidate.json", "role": "chinext adjustment records", "sha256": "61dc3a092329837602d00e196190fcf27ebba7a310beff7e51356fb550f2788d", "fingerprint_ledger_match": true},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepared/chinext_current_snapshot.csv", "role": "chinext current snapshot", "sha256": "183702cdef60f6e84fc2e63256fa8b398a121a1a8dc8e3d36463906a097a4485", "fingerprint_ledger_match": true},
+    {"path": "~/.lei_signal_lab/cache/a_share_klines_full.parquet", "role": "PRICE BASE for frozen csi300 breadth: akshare sina qfq, current-list backfill (backfill_breadth_full.py:88); NOT the hfq series protocol.md claims", "sha256": "5ad045c518d0bb4394d8c8cb946d207ad9b5b1454e5a776b1a3766c62b475b04", "fingerprint_ledger_match": true, "bytes": 49432584},
+    {"path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/actions.json", "role": "etf trading leg", "sha256": "42803eceab514880d34918dbf4e04b64eac2a90749ccedb791b214e904ff2789", "fingerprint_ledger_match": true},
+    {"path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/dated-restrictions.json", "role": "etf trading leg", "sha256": "06d01e93347bbf7341111d29118e20aeb22d37c5d872c5cb2257dd78404225c7", "fingerprint_ledger_match": true},
+    {"path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/bars/sh510300-nominal.csv", "role": "etf trading leg", "sha256": "d11357f678570ff9698e39799fd4db81ed825c3c05f7bb4c876e895a5c66d0bf", "fingerprint_ledger_match": true},
+    {"path": "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/inputs/bars/sz159915-nominal.csv", "role": "etf trading leg", "sha256": "dc15f1c722114cf0f67d3c63d123b91fce27d60a9c41c4796a058b7b05fdece0", "fingerprint_ledger_match": true},
+    {"path": "~/.lei_signal_lab/cache/a_share_ma_breadth_history.json", "role": "production all-A display series consumed by copilot narrative layer (NOT research-qualified)", "structure": "1268 rows, 2021-06-17..2026-09-16, keys date/ma20_pct/ma50_pct/ma200_pct", "note": "structure stats are ROUND1 observations of then-content; no round1 SHA was taken so round1 content identity is NOT traceable; current SHA in supplemental_sha_added_round2"},
+    {"path": "~/.lei_signal_lab/cache/timing/breadth_csi300.parquet", "role": "ORPHAN production-display csi300 breadth: independent per-window denominators (n50=196 vs n200=190), starts 1990-12-19, producer script NOT found in repo; same filename as frozen research series - misuse hazard; 'current-member back-cast' is an inference compatible with the 1990 start, NOT verified", "structure": "8707 rows, cols b20/b50/b200/n20/n50/n200/ad/ad20, 1990-12-19..2026-08-18 (ROUND1 observations; no round1 SHA taken, round1 content identity NOT traceable; current SHA in supplemental_sha_added_round2)"}
+  ],
+  "supplemental_sha_added_round2": {
+    "statement": "These SHAs were measured during round 2 repair (2026-09-17) as a backfill for traceability; they are NOT round-1 at-open identity. For the two dynamic cache files, round-1 content identity is not traceable (no round-1 SHA was taken).",
+    "src/lei_signal/research/definitions.py": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+    "scripts/verify_research_definitions.py": "79592e307b91decd9364fff7a1cf964cc087b43354cf6d15300f28595a26f1a7",
+    "scripts/backfill_breadth_full.py": "3f4805526e4e7792c5c197b833d9839ab6d569ec8497cc52d02bb007ca7546e3",
+    "scripts/backfill_timing_data.py": "15c2cacb334ccce9f3d1aa46921eaf08dd2ebcecf6064ee5424ba2826552f1a6",
+    "~/.lei_signal_lab/cache/a_share_ma_breadth_history.json": "c6940ca95a601ea9c8ec55cc3809cc265c3f45f61c23d88ab8d3508a120fd1a0",
+    "~/.lei_signal_lab/cache/timing/breadth_csi300.parquet": "0a1fd8b2f9a32c4cd23570495f6dfd5a1c28f7d311b287eacadda4f29d0d2edb"
+  },
+  "code_inspected": [
+    {"path": "src/lei_signal/research/definitions.py", "role": "canonical implementation of .common cards (breadth L395, _valid_price L255, calculate L498)", "note": "not pinned in registry; current SHA in supplemental_sha_added_round2 (round2 backfill)"},
+    {"path": "src/lei_signal/market_context/breadth.py", "role": "Round-4 legacy percent line, INDEPENDENT per-window denominators; registry breadth_legacy", "sha256": "eee72e0a3f07f393f721c2790930e753d0d5b8e1717ceba8729f70cca10405e7", "registry_bound": true, "hash_match": true},
+    {"path": "src/lei_signal/market_context/a_share_breadth.py", "role": "all-A production display line; registry all_a_legacy", "sha256": "1c224f23bdbfd468da4c81af6a4e1eaa856b93c336d200203d80c8ef13fb0f2b", "registry_bound": true, "hash_match": true},
+    {"path": "src/lei_signal/copilot/breadth.py", "role": "narrative read-only consumer", "sha256": "13aeacfecedcd6581dcc6a5e26773884e9aecea70515197666a2b125901f434d"},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/research_engine.py", "role": "frozen engine breadth_from_close_panel (percent, E200 common denominator) - legacy_percent card mapping target; registry breadth_code", "sha256": "3799f05c131179a79916505709d3aff94ced40350ddf10c51704f7ca11215f56", "registry_bound": true, "hash_match": true},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/prepare_data.py", "role": "membership chain builder (baostock 20-session probes + binary search + daily fill) and breadth assembly; contains dead-code fetch_constituent_prices (baostock hfq, never called from main)", "sha256": "16e0f937a68c09a70eb672ee76c766a26793aced5a77ba34f0433753a5e12f7b", "registry_bound": true, "hash_match": true},
+    {"path": "docs/experiments/raw/research-etf-breadth-confirmation-2026-09-09/protocol.md", "role": "frozen protocol; its 'hfq continuous price' claim contradicts the identified qfq generation path for the price base (see F3)", "sha256": "a1b991c102c37a73d491e842e68cf7fe0a3e4ba6e2c83759e78575a480875f8d", "registry_bound": true, "hash_match": true},
+    {"path": "scripts/verify_research_definitions.py", "role": "integrated consumer: binds .common cards to definitions.py, compares vs frozen engine; manifest states historical_available_at unknown", "note": "current SHA in supplemental_sha_added_round2 (round2 backfill)"},
+    {"path": "scripts/backfill_breadth_full.py", "role": "ONE identified generation path for a_share_klines_full.parquet price base (ak.stock_zh_a_daily adjust=qfq, line 88; _fetch_all resumes and SKIPS existing codes); does not prove every cache column came from this path, one fetch date, or one adjustment anchor", "note": "current SHA in supplemental_sha_added_round2 (round2 backfill)"},
+    {"path": "scripts/backfill_timing_data.py", "role": "rebuilds timing cn_all/sp500 breadth; does NOT produce timing breadth_csi300.parquet", "note": "current SHA in supplemental_sha_added_round2 (round2 backfill)"}
+  ],
+  "key_findings": [
+    "F1: conditional formula relation (controller-confirmed premise: finite positive prices, same calendar and membership conventions): frozen engine b50/b200 = common b50/b200 x 100, with common in fraction; parameter binding asserted in calculate L518-526; verify script compares them at 1e-10 on a synthetic set plus a 2-real-day member-change sample. This is NOT an unconditional same-implementation claim: interface differences exist (frozen entry sorts input and zfills 6-digit codes, its _valid_quote_sma only dropna/astype; common entry rejects non-monotonic calendars and requires positive finite prices via _valid_price).",
+    "F2: market_context/breadth.py is a DIFFERENT legacy line (independent denominators, 5-session stale carry-forward, value returned even below coverage) - registry breadth_legacy, consumers not migrated; must not be read as the card implementation.",
+    "F3: price base of the frozen csi300 series is a current-list backfill cache; ONE identified generation path requests sina qfq (backfill_breadth_full.py:88, with resume/skip-existing). This contradicts the protocol/profile 'hfq continuous' claim; the contradiction stands, but per-column price basis is NOT traced (columns may have mixed provenance/dates/anchors). Scale invariance of P>SMA under a common positive constant is a conditional mathematical fact only - it does NOT prove vendor qfq==hfq value-by-value, does NOT prove revision-independence, and does NOT establish 'limited impact'. Delisted members lack prices (coverage min 0.64, per-product causes not verified) and the base table must not be treated as point-in-time prices.",
+    "F4: membership chain was built by a 20-trading-day probe grid + binary search over change intervals + DAILY FILL (272 vendor queries for 2813 days) - NOT day-by-day verification. 682 distinct codes prove membership is non-constant; they do NOT prove per-day correctness or point-in-time availability. 30 detected effective dates are vendor query results (including non-standard-window dates such as 2015-01-26, 2017-02-20, 2023-03-20, 2025-09-08 - unexplained and not explained here); announcement cross-check not done; announcement dates not stored for csi300. Recorded 20-session probe blind spot stands.",
+    "F5: no arrival-time evidence exists for any historical date; verify manifest itself records historical_available_at unknown -> predictive use unverified. Dual-source agreement, if ever obtained, would prove content consistency only, not historical availability.",
+    "F6: orphan same-name file in timing cache (independent per-window denominators, starts 1990-12-19, producer absent from repo) is a live misuse hazard for any future study; 'current-member back-cast' is an unverified inference compatible with its 1990 start, not an established fact."
+  ],
+  "unknowns": [
+    "baostock historical membership query semantics / retroactive revision policy (no vendor certification); correctness of probe-filled membership on unprobed days",
+    "per-column price basis of the backfill cache (path/date/adjustment anchor); suspended-session representation (missing row vs stale value) - not day-verified",
+    "per-product causes of low early coverage (delisting vs new-listing warmup vs other) - not attributed",
+    "historical per-day availability (arrival) times - none exist; not fabricated; dual-source consistency would not supply them",
+    "producer of ~/.lei_signal_lab/cache/timing/breadth_csi300.parquet (not in repo at round2 HEAD 84db4e2d); whether its 1990 start reflects current-member back-cast is unverified"
+  ],
+  "deliverables": {
+    "note": "hashes below are the CURRENT (round2 revised) files; round1 original bytes preserved under history-round1/ with hashes recorded in revision-response.md §0",
+    "run-log.md": {"sha256": "e743429322df64faee4bf12d3028eaa96fa7226632da3baa15a09e8e6dedb9b7"},
+    "definition-implementation-map.csv": {"sha256": "97d53dd1a36168b46699272a8336df3bf16375043b91fb27f9ad25df9ea44445"},
+    "input-qualification.md": {"sha256": "f4f99e69e253e047bcb32028831ee2bd8584251344651401d911cea67e9ce621"},
+    "next-study-request.md": {"sha256": "aefb84767bbcc7e19f4ece0f931cfda4e6b90a1d758805d6242dfbaff1ae9551"},
+    "revision-response.md": {"sha256": "8c39eae258cf6757f4a920b21bdd433c3d101981d5851ac876b7df3206dd3469"},
+    "delivery.md": {"sha256": "e10c058ad0a69bda5fd89a60cb187a32b6369be4172134c9ac122bb37cd6104b", "note": "written after this manifest; hash backfilled in round2 closeout"},
+    "sources-manifest.json": {"note": "self hash excluded by construction"}
+  },
+  "budget_statement": {
+    "round1": {
+      "data_files": "8 content/structure deep-read + 2 hash/existence-only = 10 files touched, all within the 12-file budget under the deep-read counting rule; the earlier 'strictly counted as 10 deep reads' wording was imprecise and is corrected in run-log.md round2 section",
+      "structure_script_executions": "3 (1 invalid-path + 2 valid) vs budget 2 - OVERSPENT BY 1, disclosed in run-log.md; violation stands, acceptance is the controller's call, not the executor's",
+      "doc_format_check_batches": "1 used",
+      "hygiene_runs": 1,
+      "network_or_install_or_real_computation": 0
+    },
+    "round2": {
+      "new_data_deep_reads": 0,
+      "structure_statistics_runs": 0,
+      "combined_check_batch": "1 planned at close (current hashes + JSON/CSV/local links)",
+      "hygiene_runs": "1 planned at close",
+      "network_or_install_or_real_computation": 0,
+      "project_regression": 0
+    }
+  }
+}

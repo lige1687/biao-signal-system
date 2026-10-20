@@ -1,0 +1,19 @@
+{
+  "synthetic_checks": [
+    "pending buy cancelled after accumulation; no late purchase",
+    "cutoff preserves unexecuted buy evidence",
+    "missing deadline open does not create sale",
+    "pending sale executes at first available open",
+    "zero holdings expire as cash-only plan, with legacy zero-value action retained for comparability",
+    "last-close decision cannot execute within cutoff",
+    "52-purchase cap reports remaining schedules as cancelled",
+    "cap cancels on both exact schedule dates even with missing opens"
+  ],
+  "accounts_checked": 64,
+  "all_original_outputs_identical": true,
+  "diagnostic_rows": 732,
+  "status_counts": {
+    "cancelled_buy_cap": 732
+  },
+  "protocol_sha256": "cadfa8d59f62d278c89036c885333e837375754e41288656cd98fc24c2aeaf57"
+}

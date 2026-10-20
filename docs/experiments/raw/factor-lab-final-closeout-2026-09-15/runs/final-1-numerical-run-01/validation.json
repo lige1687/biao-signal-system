@@ -1,0 +1,177 @@
+{
+  "split_findings": [],
+  "overlap_findings": [
+    {
+      "code": "label_crosses_segment_boundary",
+      "segment": "dev",
+      "next_segment": "validation",
+      "boundary": "2018-01-01",
+      "n_pairs": 24,
+      "detail": "标签窗越过下一段起点（边界接触也算）：这些样本的结局部分 发生在validation期间，已从dev段干净样本中剔除",
+      "example_observation_dates": [
+        "2017-12-20",
+        "2017-12-21",
+        "2017-12-22",
+        "2017-12-25",
+        "2017-12-26"
+      ]
+    },
+    {
+      "code": "label_not_mature_by_cutoff",
+      "segment": "dev",
+      "cutoff": "2017-12-29 15:00:00+08:00",
+      "n_pairs": 24,
+      "detail": "标签窗在该段评价截止之后才结束：评价时未成熟，已剔除"
+    },
+    {
+      "code": "label_crosses_segment_boundary",
+      "segment": "validation",
+      "next_segment": "holdout",
+      "boundary": "2018-01-11",
+      "n_pairs": 24,
+      "detail": "标签窗越过下一段起点（边界接触也算）：这些样本的结局部分 发生在holdout期间，已从validation段干净样本中剔除",
+      "example_observation_dates": [
+        "2018-01-01",
+        "2018-01-02",
+        "2018-01-03",
+        "2018-01-04",
+        "2018-01-05"
+      ]
+    },
+    {
+      "code": "label_not_mature_by_cutoff",
+      "segment": "validation",
+      "cutoff": "2018-01-10 15:00:00+08:00",
+      "n_pairs": 24,
+      "detail": "标签窗在该段评价截止之后才结束：评价时未成熟，已剔除"
+    }
+  ],
+  "trial_history_status": "provided",
+  "trial_findings": [
+    {
+      "code": "all_trials_kept",
+      "n_trials": 2,
+      "n_success": 1,
+      "n_failed_or_abandoned": 1,
+      "detail": "保存所有版本，不只存赢家；多次尝试会放大挑到偶然赢家的风险"
+    }
+  ],
+  "trials_kept": [
+    {
+      "trial_id": "t-001",
+      "definition_reference": "mixed.momentum.raw@1.0.0",
+      "parameters": {},
+      "pool": "synthetic-3-entity",
+      "target": "protocol:t22-price-change@1.0.0",
+      "input_identity": {
+        "prices": "numerical_prices_3.csv"
+      },
+      "split_id": "s1",
+      "outcome": "abandoned",
+      "selection_basis": "首轮夹具v1放弃（符号冲突），非结果挑选",
+      "seen_segments": [
+        "dev"
+      ],
+      "run_version": "fixture-v1"
+    },
+    {
+      "trial_id": "t-002",
+      "definition_reference": "mixed.momentum.raw@1.0.0",
+      "parameters": {},
+      "pool": "synthetic-3-entity",
+      "target": "protocol:t22-price-change@1.0.0",
+      "input_identity": {
+        "prices": "numerical_prices_3.csv"
+      },
+      "split_id": "s1",
+      "outcome": "success",
+      "selection_basis": "预注册合成演示；无参数挑选",
+      "seen_segments": [
+        "dev"
+      ],
+      "run_version": "fixture-v2"
+    }
+  ],
+  "sample_counts": {
+    "dev": {
+      "n_pairs": 24,
+      "n_usable_clean": 0,
+      "n_label_crossing_into_next_segment": 24,
+      "n_label_available_unknown": 0,
+      "n_label_not_mature_by_cutoff": 24,
+      "n_label_known_after_cutoff": 0,
+      "n_inherited_exclusion": 0,
+      "n_label_time_inverted": 0,
+      "exclusion_reason_counts": {
+        "label_not_mature_by_cutoff": 24
+      },
+      "segment_cutoff": "2017-12-29 15:00:00+08:00",
+      "distinct_observation_dates": 8,
+      "distinct_entities": 3,
+      "seen_marker": true,
+      "first_date": "2017-12-20",
+      "last_date": "2017-12-29",
+      "max_single_date_share": 0.125,
+      "segment_ic": null
+    },
+    "validation": {
+      "n_pairs": 24,
+      "n_usable_clean": 0,
+      "n_label_crossing_into_next_segment": 24,
+      "n_label_available_unknown": 0,
+      "n_label_not_mature_by_cutoff": 24,
+      "n_label_known_after_cutoff": 0,
+      "n_inherited_exclusion": 0,
+      "n_label_time_inverted": 0,
+      "exclusion_reason_counts": {
+        "label_not_mature_by_cutoff": 24
+      },
+      "segment_cutoff": "2018-01-10 15:00:00+08:00",
+      "distinct_observation_dates": 8,
+      "distinct_entities": 3,
+      "seen_marker": true,
+      "first_date": "2018-01-01",
+      "last_date": "2018-01-10",
+      "max_single_date_share": 0.125,
+      "segment_ic": null
+    },
+    "holdout": {
+      "n_pairs": 30,
+      "n_usable_clean": 30,
+      "n_label_crossing_into_next_segment": 0,
+      "n_label_available_unknown": 0,
+      "n_label_not_mature_by_cutoff": 0,
+      "n_label_known_after_cutoff": 0,
+      "n_inherited_exclusion": 0,
+      "n_label_time_inverted": 0,
+      "exclusion_reason_counts": {},
+      "segment_cutoff": "2018-02-23 15:00:00+08:00",
+      "distinct_observation_dates": 10,
+      "distinct_entities": 3,
+      "seen_marker": false,
+      "first_date": "2018-01-11",
+      "last_date": "2018-01-24",
+      "max_single_date_share": 0.1,
+      "segment_ic": {
+        "n": 30,
+        "ic_pooled_over_segment": 0.9159353348729793,
+        "reason": null,
+        "note": "段内合并相关仅作方向描述；合并跨日样本不是独立证据"
+      }
+    }
+  },
+  "preprocessing": "none",
+  "seen_markers": {
+    "dev": true,
+    "validation": true,
+    "holdout": false
+  },
+  "limitations": [
+    "本审计只识别已声明的结构风险；没有任何测试能简单宣布排除过拟合",
+    "重叠标签与共享状态使有效样本小于表面行数；本输出不提供相关性稳健推断",
+    "未列出的尝试（含其他任务/会话的尝试）无法由本工具发现；历史未知时按 unknown 处理",
+    "已看过的保留段不能靠重命名或换工具恢复为未知"
+  ],
+  "overfit_risk_status": "not_excluded",
+  "note": "本审计生成合法配对与分段诊断，不训练模型，不自动给出通过结论"
+}

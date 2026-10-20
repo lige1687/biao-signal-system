@@ -1,0 +1,12 @@
+{
+  "status": "failed_diagnostic_preserved",
+  "row_failures": 48,
+  "cause": "The independent account began daily output only on the first in-window ETF quote, omitting January 1-4. The protocol requires a complete calendar and valuation from the prior valid close.",
+  "secondary_effects": [
+    "cash_only_days was lower by four in all 12 accounts",
+    "the final breadth signal was independently generated but was not copied to account signals because its execution date followed the period end",
+    "the matching period-end unexecuted rejection was absent"
+  ],
+  "financial_effect": "none; all overlapping daily monetary values, every trade, fees, dividends, ending assets and maximum drawdown matched",
+  "resolution": "Initialize the mark from the last valid pre-window close, emit all calendar days, retain all formed signals, and record period-end unexecuted signals."
+}

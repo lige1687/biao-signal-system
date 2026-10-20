@@ -1,0 +1,80 @@
+{
+ "schema_version": "momentum-research-prototype-manifest/1.0",
+ "generated_at": "2026-09-13T10:59:45.111269+00:00",
+ "generated_at_note": "本次运行时刻，不得当作数据的对外可用时刻",
+ "mode": "historical-diagnostic",
+ "synthetic": false,
+ "historical_reconstruction_only": false,
+ "protocol": {
+  "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/closeout-run-01/historical-mid-window-late/protocol-test.json",
+  "sha256": "d9670b93d91a2edd6e426381f3b51d2201870dc023b5004c0572444351b7bd98",
+  "protocol_id": "momentum-research-prototype-2026-09-13"
+ },
+ "target_id": "protocol:momentum-next-close-21-session@1.0.0",
+ "objects": {
+  "primary": "mixed.momentum.raw@1.0.0",
+  "dependency": "mixed.price.economic@1.0.0",
+  "type": "feature（身份引用，完整卡见协议文件）"
+ },
+ "code_hashes": {
+  "momentum_prototype": "dd0f12c614bb2b4f8a177763535965003e51556e62a113297e4da236306ccb40",
+  "run_momentum_research_prototype": "e70b440fe39c26819861810bb3c69fae922db651988b3a0a8a18392dd729dfec"
+ },
+ "inputs": {
+  "snapshot_dir": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/closeout-run-01/historical-mid-window-late/snapshot",
+   "sha256": "dce7d6e3840202649a93f1a3c7b3ce11d9a86c7d71bbbbba375c1613dd7fa472",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/closeout-run-01/historical-mid-window-late/snapshot/snapshot.json"
+  },
+  "calendar": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/closeout-run-01/historical-mid-window-late/calendar.json",
+   "sha256": "e2b863af5a4c654ecd6f5ee85a7af13e50e5d2f85cc0d2f6f9ac3623e1f9483e",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/closeout-run-01/historical-mid-window-late/calendar.json"
+  },
+  "publication": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/closeout-run-01/historical-mid-window-late/publication.json",
+   "sha256": "39cb3a8bebaf38e671a493505cc44f87130860c9cf18095218e36c6cf728f1d3",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/closeout-run-01/historical-mid-window-late/publication.json"
+  },
+  "actions": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/closeout-run-01/historical-mid-window-late/actions.json",
+   "sha256": "e388f0b0fb767d58425f74e4bdec2fd2f5dd5fe90efc754b8b8cdf036f28e084",
+   "verified_file": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/closeout-run-01/historical-mid-window-late/actions.json"
+  },
+  "registry": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ },
+ "observations": {
+  "count": 12,
+  "first": "2025-02-28",
+  "last": "2026-01-30"
+ },
+ "unknown_available_at": [],
+ "late_available_at": [],
+ "failures": [],
+ "identity_errors": [],
+ "skipped_stages": {
+  "targets": "协议规定历史诊断模式不写真实 targets/rank 结果",
+  "rank-diagnostic": "协议规定历史诊断模式不写真实 targets/rank 结果"
+ },
+ "offline_guard": {
+  "self_check_blocked": true,
+  "blocked_with": "RuntimeError"
+ },
+ "statuses": {
+  "computation_run": true,
+  "research_qualification": "qualified_for_this_mode",
+  "validity": "not_tested_by_this_run",
+  "production": "not_authorized",
+  "policy": "not_applicable_no_account_policy"
+ },
+ "outputs": {
+  "quality.json": "b1ea7a8174793baf791731dfeecf24122a21a976d74b1a89b691433ad2cc982f",
+  "values.csv": "c6328528f31ef19e77e623d3032873e181cbe46cadaa50973f99c626ae4e9db0",
+  "missing.csv": "3d3ba242ac7cc79565cb51e6b1b515ee4f144a0f4a14daec503f9aa0e74e61bf",
+  "skipped-stages.json": "50c7d0ce6c949ff07854c32e5a689997d4717ea2b9dc6ffca122d2110ffe1575",
+  "report.md": "6041e4b169dabb3ab2b9d31542ec2e1966368d0531e67f8f1099842424a92c77"
+ }
+}

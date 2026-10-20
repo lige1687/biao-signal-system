@@ -1,0 +1,93 @@
+{
+ "integrity": {
+  "verified": true,
+  "hash_mismatches": [],
+  "instruments": 2,
+  "rows": 604
+ },
+ "sources_verified": true,
+ "sources_error": null,
+ "uses": {
+  "description": {
+   "verdict": "usable",
+   "declared": true,
+   "default_accepted": true,
+   "reason": ""
+  },
+  "ranking": {
+   "verdict": "usable",
+   "declared": false,
+   "default_accepted": false,
+   "reason": "产物自身声明的允许用途为 ['description']，不含 'ranking'；质量裁决不能覆盖产物的用途声明"
+  },
+  "research_signal": {
+   "verdict": "conditional",
+   "declared": false,
+   "default_accepted": false,
+   "reason": "产物自身声明的允许用途为 ['description']，不含 'research_signal'；质量裁决不能覆盖产物的用途声明"
+  }
+ },
+ "objects": {
+  "mixed.momentum.raw@1.0.0": {
+   "missing_fields": [
+    "economic_index"
+   ],
+   "directly_satisfiable": false
+  },
+  "mixed.price.economic@1.0.0": {
+   "missing_fields": [
+    "economic_index"
+   ],
+   "directly_satisfiable": false
+  }
+ },
+ "coverage": {
+  "complete": true,
+  "missing_months": [],
+  "day_incomplete_months": []
+ },
+ "action_findings": [
+  {
+   "level": "warn",
+   "code": "action_available_at_unknown",
+   "instrument": null,
+   "message": "1/1 条行动缺少 available_at（其中 0 条有 announcement_date 可作「不晚于该日已公布」的下界，1 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知",
+   "evidence": {
+    "without_available_at": 1,
+    "with_announcement_lower_bound": 0,
+    "fully_unknown": 1,
+    "total": 1,
+    "lower_bound_semantics": "announcement_date 只证明不晚于该日已公布，不证明该日之前不可知，也不是带时区的真实到达时刻"
+   }
+  },
+  {
+   "level": "info",
+   "code": "coverage_unproven",
+   "instrument": null,
+   "message": "没有行动记录不等于已证明该期间没有分红、拆分或停牌；本文件缺连续官方「无其他行动」证明",
+   "evidence": {}
+  }
+ ],
+ "identity_errors": [],
+ "input_times": {
+  "snapshot_timing": null,
+  "per_instrument_fetched_at": {
+   "510300.SS": {
+    "fetched_at": null,
+    "first_date": "2025-01-02",
+    "last_date": "2026-02-27"
+   },
+   "159915.SZ": {
+    "fetched_at": null,
+    "first_date": "2025-01-02",
+    "last_date": "2026-02-27"
+   }
+  },
+  "actions_available_at": {
+   "declared": 0,
+   "unknown": 1,
+   "note": "行动原始记录的 available_at 未知条目只能事后重建，不冒充历史可知输入"
+  }
+ },
+ "policy": "not_applicable_no_account_policy"
+}

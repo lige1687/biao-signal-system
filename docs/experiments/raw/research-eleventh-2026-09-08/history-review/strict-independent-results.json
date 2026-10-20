@@ -1,0 +1,118 @@
+{
+  "purpose": "Independent hand-derived expected cases and fixed finite inventory; baseline failures retained.",
+  "results": [
+    {
+      "implementation": "tenth_frozen",
+      "test": "test_contained_tail_deduplicates_old_setup_and_preserves_next_setup",
+      "mirror": false,
+      "status": "failed_assertion"
+    },
+    {
+      "implementation": "tenth_frozen",
+      "test": "test_contained_tail_deduplicates_old_setup_and_preserves_next_setup",
+      "mirror": true,
+      "status": "failed_assertion"
+    },
+    {
+      "implementation": "tenth_frozen",
+      "test": "test_equal_price_levels_on_different_dates_remain_distinct",
+      "mirror": false,
+      "status": "passed"
+    },
+    {
+      "implementation": "tenth_frozen",
+      "test": "test_equal_price_levels_on_different_dates_remain_distinct",
+      "mirror": true,
+      "status": "passed"
+    },
+    {
+      "implementation": "tenth_frozen",
+      "test": "test_fixed_exhaustive_event_history_and_first_extreme_breach",
+      "mirror": null,
+      "status": "failed_assertion"
+    },
+    {
+      "implementation": "tenth_frozen",
+      "test": "test_published_confirmation_can_fail_and_next_structure_can_form",
+      "mirror": false,
+      "status": "failed_assertion"
+    },
+    {
+      "implementation": "tenth_frozen",
+      "test": "test_published_confirmation_can_fail_and_next_structure_can_form",
+      "mirror": true,
+      "status": "failed_assertion"
+    },
+    {
+      "implementation": "tenth_frozen",
+      "test": "test_unconfirmed_candidate_can_be_replaced_by_tail_containment",
+      "mirror": false,
+      "status": "passed"
+    },
+    {
+      "implementation": "tenth_frozen",
+      "test": "test_unconfirmed_candidate_can_be_replaced_by_tail_containment",
+      "mirror": true,
+      "status": "passed"
+    },
+    {
+      "implementation": "eleventh_repair",
+      "test": "test_contained_tail_deduplicates_old_setup_and_preserves_next_setup",
+      "mirror": false,
+      "status": "passed"
+    },
+    {
+      "implementation": "eleventh_repair",
+      "test": "test_contained_tail_deduplicates_old_setup_and_preserves_next_setup",
+      "mirror": true,
+      "status": "passed"
+    },
+    {
+      "implementation": "eleventh_repair",
+      "test": "test_equal_price_levels_on_different_dates_remain_distinct",
+      "mirror": false,
+      "status": "passed"
+    },
+    {
+      "implementation": "eleventh_repair",
+      "test": "test_equal_price_levels_on_different_dates_remain_distinct",
+      "mirror": true,
+      "status": "passed"
+    },
+    {
+      "implementation": "eleventh_repair",
+      "test": "test_fixed_exhaustive_event_history_and_first_extreme_breach",
+      "mirror": null,
+      "status": "passed"
+    },
+    {
+      "implementation": "eleventh_repair",
+      "test": "test_published_confirmation_can_fail_and_next_structure_can_form",
+      "mirror": false,
+      "status": "passed"
+    },
+    {
+      "implementation": "eleventh_repair",
+      "test": "test_published_confirmation_can_fail_and_next_structure_can_form",
+      "mirror": true,
+      "status": "passed"
+    },
+    {
+      "implementation": "eleventh_repair",
+      "test": "test_unconfirmed_candidate_can_be_replaced_by_tail_containment",
+      "mirror": false,
+      "status": "passed"
+    },
+    {
+      "implementation": "eleventh_repair",
+      "test": "test_unconfirmed_candidate_can_be_replaced_by_tail_containment",
+      "mirror": true,
+      "status": "passed"
+    }
+  ],
+  "hashes": {
+    "research-tenth-2026-09-08/research-package/src/lei_signal/rules/strict_structure.py": "0c6be71b91060059bc93b4a99049b2038a8849463b7849b17f91300308825c1b",
+    "research-eleventh-2026-09-08/research-package/src/lei_signal/rules/strict_structure.py": "d37e1c60a9a82d780d6d2e55815782630121dce03053b920f782e6543b187a78",
+    "research-eleventh-2026-09-08/history-review/test_strict_independent.py": "1ab054d403f6c0e07103450bc3572ca38011f4745b6f7d5495a78a5a7d3ef59e"
+  }
+}

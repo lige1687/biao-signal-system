@@ -1,0 +1,85 @@
+{
+  "validation": {
+    "control": {
+      "validated": 11,
+      "rejected": []
+    },
+    "date_changed": {
+      "validated": 10,
+      "rejected": [
+        {
+          "record_id": "512890-official-split",
+          "reasons": [
+            "事实与已核抽取输出不一致：ex_date 记录='2021-10-23' vs 抽取='2021-10-22'；改动后的事实不得作为已核事实消费",
+            "事实指纹与已核登记不一致（产品/日期/金额在核验后被改动）；该记录不得作为已核事实消费"
+          ]
+        }
+      ]
+    },
+    "date_omitted_from_binding": {
+      "validated": 11,
+      "rejected": []
+    },
+    "time_changed": {
+      "validated": 11,
+      "rejected": []
+    }
+  },
+  "synthetic_cli": {
+    "control": {
+      "exit": 0,
+      "check": {
+        "unique_reference_keys": 16,
+        "checked": 16,
+        "mismatch": 0,
+        "duplicate_reference_rows": [],
+        "invalid_reference_values": [],
+        "missing_in_derived": [],
+        "unknown_product_keys": [],
+        "tolerance": "atol=rtol=1e-12（双方均为有限值后才比较）",
+        "complete_consistent": true
+      }
+    },
+    "reference_missing_one": {
+      "exit": 0,
+      "check": {
+        "unique_reference_keys": 15,
+        "checked": 15,
+        "mismatch": 0,
+        "duplicate_reference_rows": [],
+        "invalid_reference_values": [],
+        "missing_in_derived": [],
+        "unknown_product_keys": [],
+        "tolerance": "atol=rtol=1e-12（双方均为有限值后才比较）",
+        "complete_consistent": true
+      }
+    }
+  },
+  "run08": {
+    "outputs_changed": [],
+    "protocol": {
+      "input_path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/protocol-v1.0.3.json",
+      "sha256": "2c06525e31a4f01298201ea95adb1fcd28fcdca71dd388c565b81a34887a0c9c",
+      "protocol_id": "fixed-etf-evidence-integration-2026-09-13",
+      "frozen_copy": {
+        "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/run-08/protocol-frozen.json",
+        "sha256": "2c06525e31a4f01298201ea95adb1fcd28fcdca71dd388c565b81a34887a0c9c"
+      }
+    },
+    "reference_check": {
+      "unique_reference_keys": 772,
+      "checked": 772,
+      "mismatch": 0,
+      "duplicate_reference_rows": [],
+      "invalid_reference_values": [],
+      "missing_in_derived": [],
+      "unknown_product_keys": [],
+      "tolerance": "atol=rtol=1e-12（双方均为有限值后才比较）",
+      "complete_consistent": true
+    }
+  },
+  "protected": {
+    "count": 896,
+    "changed": []
+  }
+}

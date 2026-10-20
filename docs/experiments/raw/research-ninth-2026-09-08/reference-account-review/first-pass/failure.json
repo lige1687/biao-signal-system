@@ -1,0 +1,20 @@
+{
+  "at_utc": "2026-09-08T07:14:37.109801+00:00",
+  "failure": "AssertionError: ('R0', 'max_drawdown')",
+  "source_sha256": "335723f207014344d1969bab1860236f6c8e066c5d9b4ddc3cc95ba3832acfb0",
+  "values": [
+    {
+      "config": "R0",
+      "main_max_drawdown": 0.18614606998061572,
+      "independent_signed_min": -0.1861460699806154,
+      "main_longest_drawdown_days": 1850
+    },
+    {
+      "config": "R1",
+      "main_max_drawdown": 0.1627396115365702,
+      "independent_signed_min": -0.16273961153657066,
+      "main_longest_drawdown_days": 1377
+    }
+  ],
+  "diagnosis": "Checker compared positive loss magnitude in summary with negative signed minimum daily drawdown; full Decimal daily ledger already matched. Check unit/sign convention before correction."
+}

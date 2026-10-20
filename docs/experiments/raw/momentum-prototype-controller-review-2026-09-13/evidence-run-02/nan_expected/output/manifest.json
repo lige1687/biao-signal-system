@@ -1,0 +1,59 @@
+{
+ "schema_version": "fixed-etf-derived-snapshot-manifest/1.0",
+ "generated_at": "2026-09-13T14:10:50.216332+00:00",
+ "protocol": {
+  "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/momentum-prototype-controller-review-2026-09-13/evidence-run-02/nan_expected/protocol-test.json",
+  "sha256": "185f571d9896de0923c88f0dd6fb37a833950fe256000c6b7e64ad1d6c373593",
+  "protocol_id": "momentum-research-prototype-2026-09-13"
+ },
+ "offline_guard": {
+  "self_check_blocked": true,
+  "blocked_with": "RuntimeError"
+ },
+ "result": {
+  "evidence_bundle": {
+   "validated": 1,
+   "unresolved": 0,
+   "conflicts": 0
+  },
+  "econ_stats": {
+   "510300.SS": {
+    "rows": 320,
+    "economic_index_filled": 320,
+    "economic_index_blank": 0,
+    "unknown_available_at_events": [
+     "div-510300-1"
+    ]
+   },
+   "159915.SZ": {
+    "rows": 320,
+    "economic_index_filled": 320,
+    "economic_index_blank": 0,
+    "unknown_available_at_events": []
+   }
+  },
+  "binding": {
+   "mixed.momentum.raw@1.0.0": {
+    "directly_satisfiable": true,
+    "missing_fields": []
+   },
+   "mixed.price.economic@1.0.0": {
+    "directly_satisfiable": true,
+    "missing_fields": []
+   }
+  },
+  "momentum_key_check": {
+   "checked": 6,
+   "mismatch": 0,
+   "run04_unique_keys": 6,
+   "tolerance": "atol=rtol=1e-12"
+  },
+  "observation_cutoff_assumption": "观察/决策截点 15:00 为按收盘设置的保守测试假设，不是已证实的数据到达时间或实盘决策时刻"
+ },
+ "outputs": {
+  "result.json": "34cf03514c95f51bc2ad8ff400f80009a7e2d7a927bbd4f99fa85d4dbd806e19",
+  "snapshot/normalized/159915.SZ.csv": "2fb09399cf1109b52cb1ac1c5e6435036f2bf9dcd3b99fdaff82fd2b57b3f3e9",
+  "snapshot/normalized/510300.SS.csv": "ff18bd55cafe161cfeae9cd935e7abd3f90fdcead52a2eb69b52b398f008e0dc",
+  "snapshot/snapshot.json": "b4b694541075fa556e206a7c5ab8d2a69b91522975b1e4014f52fb938523a674"
+ }
+}

@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "window": [
+    "2015-06-16",
+    "2026-08-18"
+  ],
+  "quote_days": 2716,
+  "assets": [
+    "沪深300",
+    "上证50",
+    "中证白酒",
+    "国证地产",
+    "创业板指",
+    "证券公司",
+    "新能车",
+    "中证医疗",
+    "国证有色"
+  ],
+  "accounts": [
+    {
+      "account": "A_true_buy_once_hold",
+      "daily_rows": 24444,
+      "trade_rows": 9,
+      "daily_failures": 0,
+      "trade_failures": 0,
+      "end_equity": 0.9471601028400449,
+      "ann_pct": -0.5024286681007739,
+      "maxdd_pct": -53.90245671642505,
+      "daily_stability": 0.10549584923877171
+    },
+    {
+      "account": "A_5pp_equal_weight_rebalance",
+      "daily_rows": 24444,
+      "trade_rows": 22,
+      "daily_failures": 0,
+      "trade_failures": 0,
+      "end_equity": 0.9691525262232898,
+      "ann_pct": -0.2902989114026866,
+      "maxdd_pct": -46.917790099076925,
+      "daily_stability": 0.10014181258069459
+    },
+    {
+      "account": "B_breadth_3tier_5pp_rebalance",
+      "daily_rows": 24444,
+      "trade_rows": 851,
+      "daily_failures": 0,
+      "trade_failures": 0,
+      "end_equity": 3.3786970199967534,
+      "ann_pct": 11.95905101400989,
+      "maxdd_pct": -32.953003108537374,
+      "daily_stability": 0.7306676133217824
+    }
+  ],
+  "summary_checks": [
+    {
+      "account": "A_true_buy_once_hold",
+      "end_equity_difference": -2.220446049250313e-16,
+      "ann_difference": 0.0,
+      "maxdd_difference": 0.0,
+      "passed": true
+    },
+    {
+      "account": "A_5pp_equal_weight_rebalance",
+      "end_equity_difference": -2.220446049250313e-16,
+      "ann_difference": 0.0,
+      "maxdd_difference": 0.0,
+      "passed": true
+    },
+    {
+      "account": "B_breadth_3tier_5pp_rebalance",
+      "end_equity_difference": -1.3322676295501878e-15,
+      "ann_difference": 0.0,
+      "maxdd_difference": 6.394884621840902e-14,
+      "passed": true
+    }
+  ],
+  "input_hashes_unchanged": true,
+  "timeline": "review protocol written first; executor result schemas and values were then inspected; this verifier was written and locked before its independent historical calculation. It is not claimed that code was locked before any result inspection.",
+  "scope": "continuous-share arithmetic and frozen breadth mapping; index exercise is not ETF evidence",
+  "environment": {
+    "python": "3.11.7",
+    "pandas": "2.3.3",
+    "numpy": "2.1.1"
+  }
+}

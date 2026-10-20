@@ -1,0 +1,185 @@
+{
+  "task": {
+    "job_id": "1e831595-39f9-4e70-bcf7-1b23980bb8bf",
+    "nonce": "b9d22dc1e2df1dec017d160f11fff2c0",
+    "execution": 2,
+    "stage": "S1",
+    "attempt": "repair",
+    "repair_basis": "主控复核(2026-09-17) R1–R3；修订前六文件原字节存 history-v1/（含 HASHES.txt）；逐条回应见 revision-response.md",
+    "date": "2026-09-17",
+    "status": "待主控复核的提案",
+    "deliverables_dir": "docs/research/proposals/factor-workflow-audit-2026-09-17/",
+    "deliverables": ["README.md", "workflow-map.md", "capability-evidence.csv", "two-worked-mappings.md", "integration-proposal.md", "sources-and-checks.json"]
+  },
+  "environment": {
+    "workspace": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+    "branch": "codex/factor-unit-research-20260915",
+    "head_at_start": "29b150f58b3f6d8c6e558a748c12dac3384af173",
+    "head_at_delivery": "29b150f58b3f6d8c6e558a748c12dac3384af173",
+    "head_drift": "none",
+    "git_operations": "read-only only; no branch switch, no commit, no stash, no reset, no clean",
+    "working_tree_notes": [
+      "多份被引用文档与代码在工作区为未提交修改状态，本台账哈希均为交付时工作区字节",
+      "src/lei_signal/research/factor_evidence/runner.py(SHA 2f85a2b6…)与 stability.py(SHA 59fe10b5…)当前字节与主控 §10 记录的 S1–S3 收口后 SHA 逐字一致——即工作区已含收口后代码；execution 1 台账中'S1–S3 修改未落'的表述有误，已按主控复核更正（根因：当时只哈希未通读该复核文件，§10 当时已在其中）",
+      "docs/research/factor-evidence-reliability-usage.md 为含 2026-09-17 S1 收窄说明的未提交版本",
+      "factor-library-progress-2026-09-16.md 当前字节与主控 v1.1.0 验收 SHA 完全一致（见 cross_checks.progress_doc）"
+    ],
+    "parallel_exclusion": "ZCode 独占 src/lei_signal/research/breadth_description*.py、tests/unit/test_breadth_description.py、docs/experiments/raw/breadth-b200-first-description-2026-09-17；本任务未读其内容、未写入，仅在 capability-evidence.csv 标 in_progress"
+  },
+  "authoritative_docs": [
+    {"path": "docs/trading-spec-v1.md", "version": "V1.0", "sha256": "dd75d70cd22b103e815d3b314b47c36731230aa268d05e42fa447ba55e639798"},
+    {"path": "configs/rules.v1.yaml", "version": "ruleset_version 1.5.0", "sha256": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2"},
+    {"path": ".claude/skills/macd-reading/SKILL.md", "version": "skill 定义（无显式版本号）", "sha256": "4a75dea4cb8f0ad2d1cb450c1d4237d87cc5c5b7f50f3eacda10880164c731ab"},
+    {"path": "docs/plan-sector-trend-page.md", "version": "执行方案 v1", "sha256": "921a483e16081fa975216a6f498a6af8654508df65be4feed64d8d593c24b23d"},
+    {"path": "docs/research/experiment-backtest-principles.md", "version": "v1.1", "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6"},
+    {"path": "docs/research/ai-execution-contract.md", "version": "1.0.1", "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"},
+    {"path": "docs/research/definition-standard.md", "version": "1.1.0", "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c"},
+    {"path": "docs/research/experiment-report-template.md", "version": "v1.1.0", "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e"},
+    {"path": "docs/research/definitions.v1.json", "version": "registry version 1.2.0 / standard_version 1.0.0 / schema_version 1.0.0", "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05", "note": "只读；本轮用 json.load 做结构核查，未运行仓库代码校验器"}
+  ],
+  "deep_verified_inputs": [
+    {"path": "docs/experiments/factor-library-progress-2026-09-16.md", "sha256": "8067bd1712551d1df172662a3d79bea65e790eebf7758ba07d96c6e4ab392f3f", "scope": "全文精读；与主控验收 SHA 交叉一致；§3 能力分层与 §5 缺口为 capability-evidence.csv 主干来源"},
+    {"path": "docs/experiments/factor-library-progress-controller-review-2026-09-16.md", "sha256": "89f111414acd1b9dc9b56c93640c9865618404676821c48582d4f95484851849", "scope": "全文精读（含 2026-09-17 追加 §5 收口裁决与 §3 的 S1–S3 要点）"},
+    {"path": "docs/research/factor-lab-usage.md", "sha256": "4a46172f3dda08ce19ab9a795a9431d7f3a6399655c9c9672a9729e09ce5f148", "scope": "全文精读；CLI/退出码/协议纪律/准入清单来源"},
+    {"path": "docs/research/factor-unit-usage.md", "sha256": "0c7cf4972e67ff24b0f91ab700ff717d784e29fa1da4b76bf01b8715698dd4c7", "scope": "全文精读；数据资格字段与真实目标闸来源"},
+    {"path": "docs/research/factor-evidence-reliability-usage.md", "sha256": "41eb47655e6ecb948764c1810c96f3f181ba30ae10687ee1dfad62a301a07ff8", "scope": "全文精读；真实入口收窄与固定参数来源"},
+    {"path": "docs/research/experiment-backtest-principles.md", "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6", "scope": "全文精读；§6/§7/§8/§13 为流程步 2/3/8 与分流依据"},
+    {"path": "docs/research/definition-standard.md", "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c", "scope": "全文精读；§2 类型、§7 合同与 §7.3 未接入声明来源"},
+    {"path": "docs/research/ai-execution-contract.md", "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962", "scope": "全文精读；§1 绑定、§2 独立预期、§4 书面复核义务来源"}
+  ],
+  "navigation_level_reads": [
+    {"path": "docs/experiments/b1-closeout-controller-2026-09-16.md", "sha256": "7ba4484223b027f3156e0355a1d64a55b19656a7e1fb8b3b987fa86e7e102f64", "scope": "全文"},
+    {"path": "docs/experiments/factor-lab-final-controller-decision-2026-09-15.md", "sha256": "69a545da6a1876652b8865929a9450cdff9e69d8353d0109bb288f7bdc9a90b0", "scope": "全文"},
+    {"path": "docs/experiments/factor-evidence-reliability-v1-2026-09-16.md", "sha256": "b20c1dbd78022ead248062cd7bfadf497b27b87d9a108d0f5f71d189c53f1e28", "scope": "部分（开头至 §4：协议身份、输入限制、主要数字）"},
+    {"path": "docs/experiments/factor-evidence-zcode-dispatch-review-2026-09-17.md", "sha256": "0afcd8d7b1257a98e2066813f9d9cee011b49baa23e244a2ff583993586afcad", "scope": "全文；S1–S3 未完成与执行方式待选择的最新依据"},
+    {"path": "docs/experiments/factor-breadth-readiness-controller-review-2026-09-17.md", "sha256": "71943536d7ed4a5c6dbc0bb43460c96e287a963a13cafc08a3b025d68c01e467", "scope": "全文；宽度资料盘点 Round3 接受范围依据"},
+    {"path": "docs/research/proposals/factor-library-direction-exploration-2026-09-16/README.md", "sha256": "08cccdd87253c8dc8f113a936381c80f2f831a259cf7616d3f49d0c9207f0f56", "scope": "全文；提案格式先例与 C1/C2 候选状态"},
+    {"path": "tests/integration/test_factor_evidence_cli.py", "sha256": "09e5b4b4972f6a5ac502be0b1a4cab88efda564a1be484a5cb6d6c807b2541df", "scope": "开头 60 行；确认 CLI 路径 scripts/run_factor_evidence_reliability.py"},
+    {"path": "docs/experiments/factor-evidence-controller-review-2026-09-16.md", "sha256": "78888ca52e2174e3ac111955863961713565c260c464a42a096369c3c5506add", "scope": "execution 1 仅哈希（失误）；repair 轮已补读 §9.5–§10.3 原文（文件哈希未变，§10 当时已在文中）"},
+    {"path": "docs/experiments/b1-controller-review-2026-09-16.md", "sha256": "62a3e63d22deb41caf58be75f735712832a9505fca2bf39552ab41f4d1631087", "scope": "仅哈希；内容经 b1-closeout 与 progress 转引"},
+    {"path": "docs/experiments/factor-research-workbench-v1-2026-09-14.md", "sha256": "8fa7e36a3384bfa8bff61ed1c24d05cb9322df2c3b596db9af09e684e6382125", "scope": "仅哈希"},
+    {"path": "docs/research/factor-research-roadmap-2026-09-10.md", "sha256": "e1186ba1b86967933faca27974ea29ec37feb1699b187609d73969503bf3abed", "scope": "仅哈希"}
+  ],
+  "code_entries_hashed": {
+    "src/lei_signal/research/definitions.py": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59",
+    "src/lei_signal/research/factor_lab/runner.py": "97b49d9e14d5740a2b7f8e04cbb5a4d18e32d59e819e4a804d1d068f39f23917",
+    "src/lei_signal/research/factor_lab/adapters.py": "27596fd66d918cacf9db7a6ae2cdd11b408d7d46f3c9889ac2d35a42e7748020",
+    "src/lei_signal/research/factor_lab/diagnostics.py": "da84ca7b13502a9669e09d5c0c3b610b75e557a3b939742d8ac400f037b99cc8",
+    "src/lei_signal/research/factor_lab/validation.py": "815769ca7440782f9275167562d81ba6e11baf955b7b5e1ef9f8137f87d290b6",
+    "src/lei_signal/research/factor_lab/attribution.py": "6d9b756cda1dfc8b6d6c9de8f8a12ecbd4adbe1fc28e30eba962e64437f47e93",
+    "src/lei_signal/research/factor_unit/close_state.py": "b0efb324a2ef65d1f415c19be4f50b96ebf25f140da0c31b2b759d68ef04db10",
+    "src/lei_signal/research/factor_unit/study_contract.py": "43d099752d7451c127f7ba138ce254689420209b3d75b6f1ab88d8a0c2cb2c8c",
+    "src/lei_signal/research/factor_unit/state_description.py": "2f0359b5435d08b1f1c3773ee4b185a334ce45ba1c537a3091ba6e93765ecc76",
+    "src/lei_signal/research/factor_evidence/runner.py": "2f85a2b66861d3089ab52626880fc63f8e49e4199da22266d07855f6afcbb82b",
+    "src/lei_signal/research/factor_evidence/observations.py": "5eb79b7e7802a0f65e2fd156571044e616d04db81cc5285aa5c085e0fdda0783",
+    "src/lei_signal/research/factor_evidence/stability.py": "59fe10b5086e75c9123df6bc66ea6ffa2265ffdc947df17f127143ed0e7fe9c1",
+    "src/lei_signal/research/factor_evidence/resampling.py": "7aa68db259d082091d75b74ae912c16ff3c59b01b3a2ba36c22f684dd6243535",
+    "src/lei_signal/research/factor_evidence/contract.py": "20106f89e963d029ff2d00f334603c3b15f742dbb209646bfcb3184655b44f05",
+    "scripts/run_factor_lab.py": "17a7bc63bc97893f24ee72861836d64e65298b18b4d53c67041ef999cc4613d5",
+    "scripts/check_factor_unit_readiness.py": "57b14249c80022726605d0772c29925a4606a10891f224e7e9dd53b7525633a5",
+    "scripts/verify_research_definitions.py": "79592e307b91decd9364fff7a1cf964cc087b43354cf6d15300f28595a26f1a7",
+    "scripts/run_factor_evidence_reliability.py": "4976b6e696281712c33fcf7c4c2b00e8a283986b6001c9709c3fc88e7460141b",
+    "scripts/run_b1_dual_ma_description.py": "cd123dc501d070c01a799c5ce21fb10faead0b04bd356da255292184afeca460"
+  },
+  "cross_checks": {
+    "registry_structure": "json.load 独立清点：objects=81（feature 19 / state_signal 26 / factor_return 2 / risk_metric 4 / benchmark 15 / policy_or_strategy 15）、profiles=2、models=[]、version 1.2.0；usage 文档引用的 8 张卡全部存在；登记表无 dual_ma 条目（候选卡未登记）；手工按 profile 合并语义解析 mixed.momentum.raw@1.0.0 得 15 键，status 五分列齐全",
+    "progress_doc": "当前 SHA-256 = 8067bd17…，与 factor-library-progress-controller-review §5 记录的主控验收 SHA 逐字一致",
+    "cli_existence": "四条 CLI 脚本均存在并已哈希；本轮零执行",
+    "protocol_files": "factor-research-workbench 三份协议、B1 protocol-v1.0.0/v1.0.1、factor-evidence protocol-v1.0.0 均核到存在于各自 raw 目录"
+  },
+  "commands_ledger": [
+    {"cmd": "git rev-parse HEAD && git branch --show-current && git status --porcelain", "exit": 0, "class": "git readonly"},
+    {"cmd": "ls docs/research/proposals/ 及目标目录存在性检查", "exit": 0, "class": "existence", "note": "输出目录不存在，允许创建"},
+    {"cmd": "shasum -a 256 ×9 权威文档", "exit": 0, "class": "结构核查批次 1/3"},
+    {"cmd": "head -25 ×8 权威文档版本头", "exit": 0, "class": "read"},
+    {"cmd": "wc -l + ls research 目录 + rg --files factor", "exit": 0, "class": "结构核查批次 2/3"},
+    {"cmd": "ls factor_lab/factor_unit/factor_evidence/tests/proposals", "exit": 0, "class": "结构核查批次 3/3"},
+    {"cmd": "shasum -a 256 ×5（progress/review/三手册）", "exit": 0, "class": "hash"},
+    {"cmd": "python3 json.load 结构核查 definitions.v1.json", "exit": 0, "class": "JSON结构检查"},
+    {"cmd": "python3 登记表版本/models/profile 合并语义解析", "exit": 0, "class": "JSON结构检查"},
+    {"cmd": "shasum -a 256 ×17 代码入口", "exit": 0, "class": "hash"},
+    {"cmd": "wc -l + shasum ×6 主控报告", "exit": 0, "class": "hash"},
+    {"cmd": "shasum ×4（CLI/test/两报告）", "exit": 0, "class": "hash"},
+    {"cmd": "test -f ×6 + ls ×3 raw 协议目录", "exit": 0, "class": "链接/路径检查"},
+    {"cmd": "shasum ×5 + wc ×2（09-17 复核等）", "exit": 0, "class": "hash"},
+    {"cmd": "git rev-parse HEAD + shasum ×25 关键输入复测", "exit": 0, "class": "漂移检查"},
+    {"cmd": "python3 CSV 结构 + markdown 链接 + 路径抽查", "exit": 0, "class": "CSV结构检查+链接检查", "failures": "发现 2 处相对链接层级错误（../../experiments→../../../experiments），已修复"},
+    {"cmd": "python3 链接复检 + 25 项前后哈希比对", "exit": 0, "class": "链接检查+漂移检查", "note": "链接全通；25 项输入零漂移"},
+    {"cmd": "python3 scripts/check_repo_hygiene.py", "exit": 0, "class": "目录卫生检查 1/1"}
+  ],
+  "budget_accounting": {
+    "structural_check_batches": "3/3（用完）",
+    "repo_hygiene": "1/1（用完）",
+    "deep_verified_files": "8/8（其余为导航级阅读或仅哈希，已在 navigation_level_reads 标注各自范围）",
+    "command_failures_nonzero_exit": 0,
+    "check_findings_unresolved": 0,
+    "note": "失败计数不重置：链接检查首轮发现 2 处失效，修复后复检通过，计入台账"
+  },
+  "repair_round": {
+    "execution": 2,
+    "attempt": "repair",
+    "date": "2026-09-17",
+    "head_at_repair": "29b150f58b3f6d8c6e558a748c12dac3384af173",
+    "head_drift_vs_execution1": "none",
+    "history_v1": {
+      "dir": "docs/research/proposals/factor-workflow-audit-2026-09-17/history-v1/",
+      "hashes_file": "history-v1/HASHES.txt",
+      "files": {
+        "README.md": "d34eb44ebcaebd8973a99490ef0d0a441c43f33d22ca1a9e62b8a0d0e5fe44b6",
+        "capability-evidence.csv": "228a518326544db0a183cd9df19a276f6fd2c04136adb75e8501612a0b05c8d3",
+        "integration-proposal.md": "73f5fd2a2d1eb5b58f66e20e59ed389e370f368c6027f98c3c7cbc732986e64e",
+        "sources-and-checks.json": "bec5f3d9938bcca9edbec06117d342fd8904ed72107cb867c518116e86cb240b",
+        "two-worked-mappings.md": "c2f6fe0c75db1cb36f271ba69e317eb367b9590132f6ace908973cdf66aa3eb2",
+        "workflow-map.md": "1eedaba97cfeb9b640614ff2939d47bcfc850b4a81203228ed17de7cf4beaa00"
+      }
+    },
+    "named_rereads": [
+      {"path": "docs/experiments/factor-evidence-controller-review-2026-09-16.md", "sha256": "78888ca52e2174e3ac111955863961713565c260c464a42a096369c3c5506add", "scope": "§9.5–§10.3（S1–S3 收口裁决）"},
+      {"path": "docs/experiments/breadth-b200-first-description-controller-review-2026-09-17.md", "sha256": "c871b9b5fc8c9b01362eafda863562d8e0ef4c7bfdfd4b4cd1ac43f8036badab", "scope": "全文（首轮阻断复核）"},
+      {"path": "docs/archive/handoffs-plans/2026-09-17-breadth-first-description-execution.md", "sha256": "da6c8b9a666da6bd2d46f44521f5f6e2125e9446f91cbfd2ea30dcb978e97acb", "scope": "前 40 行（身份/授权/输入段）"},
+      {"path": "src/lei_signal/research/factor_unit/b1_description.py", "sha256": "0030e00f57b173ee15862490d008d61e6c8984a3ed87c2f2afef4da6a7060358", "scope": "docstring 与 describe_b1 签名（前 45 行）"},
+      {"path": "src/lei_signal/research/factor_unit/state_description.py", "sha256": "2f0359b5435d08b1f1c3773ee4b185a334ce45ba1c537a3091ba6e93765ecc76", "scope": "docstring（前 30 行，synthetic-only 自述）"},
+      {"path": "docs/research/experiment-report-template.md", "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e", "scope": "全文（确认 T1 派发合同已含任务类型字段）"},
+      {"path": "docs/experiments/factor-lab-final-closeout-2026-09-15.md", "sha256": "640a3c8fa3ac9bd4f973a8d02ee4fb70cfe8748603cbf34d75ab0ceb15569c1a", "scope": "§S1–S3 段与第 122–124 行 CLI"}
+    ],
+    "closeout_json_static_checks": {
+      "protocol-1-numerical.json": "version 1.2.0；code_identity 15 键；data_mode=synthetic；synthetic=true；顶层含 expectation_source/expectations/registry 等键；sha256 前缀 7c7d9d86fcbf8331",
+      "protocol-2-state.json": "version 1.2.0；code_identity 15 键；sha256 前缀 7b3cd8aaa58c3370",
+      "protocol-3-attribution.json": "version 1.2.0；code_identity 15 键；sha256 前缀 955aeb94d419d4ee",
+      "independent-expectations-v2.json": "顶层含 protocol_expectations{numerical;state;attribution}（终版报告 §S2：23/28/11 项，由 derive_expectations_v2.py 独立算术产出）；sha256 前缀 a49dfc6ec59aaa48",
+      "note": "仅 json.load 结构核查，未执行 CLI"
+    },
+    "repair_commands_ledger": [
+      {"cmd": "git rev-parse HEAD && git branch --show-current && git status --porcelain(限定路径)", "exit": 0, "class": "git readonly"},
+      {"cmd": "cp 六文件到 history-v1 && shasum -a 256 history-v1/* | tee HASHES.txt", "exit": 0, "class": "§5 要求的原字节封存"},
+      {"cmd": "shasum -a 256 ×7 主控点名文件 + ls closeout raw 目录", "exit": 0, "class": "点名补读（§5 允许）"},
+      {"cmd": "python3 json.load 三份 closeout 协议（版本/代码键/期望引用）", "exit": 0, "class": "点名文件 JSON 结构核查"},
+      {"cmd": "python3 protocol-1 顶层键 + v2 期望结构 + grep 终版报告引用行", "exit": 0, "class": "点名文件 JSON/grep 核查"}
+    ],
+    "budget": "终检：结构/链接/哈希综合核查 1/1、卫生检查 1/1（额度见文末 final_verification）；点名补读不计入核销；失败即停"
+  },
+  "final_verification": {
+    "combined_check_exit": 0,
+    "csv": "11 行 × 12 列；DictReader 无 None 键/值；新增 status_as_of 与 latest_ruling 两列全填 2026-09-17 及对应主控节号",
+    "json": "sources-and-checks.json 解析通过；repair_round 段在案",
+    "markdown_links": "6 份内容文件共 3 处相对链接全部解析成功，无失效",
+    "closeout_json_hashes": "四份 closeout JSON 已哈希（前缀记入 repair_round.closeout_json_static_checks）",
+    "stale_phrase_scan": "发现 1 处真陈旧（workflow-map §1.3 旧 workbench 协议路径，已修为 closeout 终版绑定+历史备注）；revision-response 中 2 处命中为'旧说法'列有意引用，保留",
+    "drift_at_delivery": "12 项最常被引用输入复测哈希，零漂移；HEAD 全程 29b150f58b3f6d8c6e558a748c12dac3384af173",
+    "hygiene": "python3 scripts/check_repo_hygiene.py 退出 0（见 repair_round 预算 1/1）"
+  },
+  "drift_record": {
+    "inputs_rehashed_at_delivery": 25,
+    "drifted": "none",
+    "head_drift": "none",
+    "action_on_drift": "无漂移，未暂停任何结论"
+  },
+  "limitations": [
+    "本轮零真实因子/目标重算、零回测、零收益统计、零联网、零安装；未导入任何仓库研究代码（仅标准库 json/csv/re/os 读文件）",
+    "所有'主控已验证/接受'均为对主控复核报告原文的转引或哈希交叉核对，不是本任务的独立复算",
+    "execution 1 未直接通读 factor-evidence-controller-review-2026-09-16.md 导致误引旧状态；repair 轮已补读 §9.5–§10.3 原文并更正全部相关断言",
+    "definitions.v1.json 的核查是结构清点（数量/类型/关键卡存在性），未运行仓库 validate_registry 校验器",
+    "宽度在途任务（ZCode 独占）内容未读；capability-evidence.csv 中宽度行仅代表 readiness 主控裁决与任务在途状态",
+    "本提案不进 registry/INDEX/OKR；integration-proposal 中三项后续工作均未授权，本任务不执行"
+  ]
+}

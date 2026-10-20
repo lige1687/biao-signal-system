@@ -1,0 +1,166 @@
+[
+  {
+    "user_question": "后来行情会不会改写当年入场判断？",
+    "conclusion": "四只基金122个固定日期组合、三个模块共366次检查；A在两个日期删除四条确认并新增两条失败。C/D固定日期一致，但受控反例仍未通过。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "acd-history-stability",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/history-diagnostic/run-lock.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/history-diagnostic/summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/history-diagnostic/differences.json.gz",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/history-review/independent-driver-review.md"
+      ],
+      "source_hash": [
+        "23e325c3a324d8944a4731d60da6b7dae2429abbf24920c69f9f4d7f4ba1ff5c",
+        "6dcf75c9c7d17b77d80f5e21793734c5bad1c589323d7922463fae64fcb490fd",
+        "310cbfd068c590f665a95d1db1191f346a7208d3e1686eca54bf59cb7aa5a74c",
+        "1f6fec5e9379f0d1b94f5e06069316ad93ae82cf6ab2f708680589e0a754ab73",
+        "c176dd39c39cb27ca45c310b364d576b73b8ba5a32b5b66f0286ce611938c36d"
+      ],
+      "source_version": "research-tenth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "fixed_historical_event_prefix_diagnostic",
+      "strategy_scope": [],
+      "limitations": "固定历史检查不是所有日期保证，也不是未来行情检验；受控指标反例证明函数路径，不证明真实发生频率；未运行收益或完整资金账户，原始确认不等于合格交易；真实驱动独立审阅为静态核对；主任务反例重跑不是第二套独立算法；本批未新增论文全文阅读，未更新生产或OKR",
+      "compatibility": "unknown",
+      "evidence_id": "acd-history-stability",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/protocol.md",
+      "strategies": [],
+      "note": "固定历史检查不是所有日期保证，也不是未来行情检验；受控指标反例证明函数路径，不证明真实发生频率；未运行收益或完整资金账户，原始确认不等于合格交易；真实驱动独立审阅为静态核对；主任务反例重跑不是第二套独立算法；本批未新增论文全文阅读，未更新生产或OKR"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "第八批名义历史与已知行动；真实交易日历等完整制度未齐",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/history-diagnostic/run-lock.json",
+        "sha256": "6dcf75c9c7d17b77d80f5e21793734c5bad1c589323d7922463fae64fcb490fd"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§3.2/§9A/C/D/§10/§13；A3.0.0、C3.0.0、D2.0.0，未修改参数",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-tenth-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": false,
+      "review_scope": "A与C/D分工核查，历史驱动独立静态审阅，主任务原反例重跑；不冒称独立账户验证",
+      "status": "limited",
+      "limitations": [
+        "固定历史检查不是所有日期保证，也不是未来行情检验",
+        "受控指标反例证明函数路径，不证明真实发生频率",
+        "未运行收益或完整资金账户，原始确认不等于合格交易",
+        "真实驱动独立审阅为静态核对；主任务反例重跑不是第二套独立算法",
+        "本批未新增论文全文阅读，未更新生产或OKR"
+      ]
+    }
+  },
+  {
+    "user_question": "完整账户比较前要修复哪些具体问题？",
+    "conclusion": "保留已发布历史，重检失效底部，遵循最近已确认低点；区分可确定错误与等待期限等缺失定义。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "acd-repair-contract",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/a-contract/contract.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/a-review/review-results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/cd-contract/contract.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/cd-contract/synthetic-results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/repair-acceptance-handoff.md"
+      ],
+      "source_hash": [
+        "780693b4c78a622415309dc5153d56e72b1aed4e121c7396e7cbcdefdaf88b57",
+        "e94846477c633602f2e15c099acd0ac3a27b04218df4fa3baf91d994553ec000",
+        "fda05c1853a5ee592d392a8f2736bd27aba923311f15b9c0779bd50bb78c0258",
+        "ec2b23776359130295af24363c9e2a6f8096d76be26cc43ffa6428e174c6fabe",
+        "dfdbb1b166d50d3506f0bd3f2d78f5c3f6c7795b0e91996e9dc756baaa53ad34"
+      ],
+      "source_version": "research-tenth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "controlled_rule_counterexamples_and_definition_review",
+      "strategy_scope": [],
+      "limitations": "固定历史检查不是所有日期保证，也不是未来行情检验；受控指标反例证明函数路径，不证明真实发生频率；未运行收益或完整资金账户，原始确认不等于合格交易；真实驱动独立审阅为静态核对；主任务反例重跑不是第二套独立算法；本批未新增论文全文阅读，未更新生产或OKR",
+      "compatibility": "unknown",
+      "evidence_id": "acd-repair-contract",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/a-contract/contract.json",
+      "strategies": [],
+      "note": "固定历史检查不是所有日期保证，也不是未来行情检验；受控指标反例证明函数路径，不证明真实发生频率；未运行收益或完整资金账户，原始确认不等于合格交易；真实驱动独立审阅为静态核对；主任务反例重跑不是第二套独立算法；本批未新增论文全文阅读，未更新生产或OKR"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "第八批名义历史与已知行动；真实交易日历等完整制度未齐",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/history-diagnostic/run-lock.json",
+        "sha256": "6dcf75c9c7d17b77d80f5e21793734c5bad1c589323d7922463fae64fcb490fd"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§3.2/§9A/C/D/§10/§13；A3.0.0、C3.0.0、D2.0.0，未修改参数",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-tenth-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": false,
+      "review_scope": "A与C/D分工核查，历史驱动独立静态审阅，主任务原反例重跑；不冒称独立账户验证",
+      "status": "limited",
+      "limitations": [
+        "固定历史检查不是所有日期保证，也不是未来行情检验",
+        "受控指标反例证明函数路径，不证明真实发生频率",
+        "未运行收益或完整资金账户，原始确认不等于合格交易",
+        "真实驱动独立审阅为静态核对；主任务反例重跑不是第二套独立算法",
+        "本批未新增论文全文阅读，未更新生产或OKR"
+      ]
+    }
+  }
+]

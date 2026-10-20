@@ -1,0 +1,77 @@
+{
+ "schema_version": "momentum-research-prototype-manifest/1.0",
+ "generated_at": "2026-09-13T08:39:29.995729+00:00",
+ "generated_at_note": "本次运行时刻，不得当作数据的对外可用时刻",
+ "mode": "qualified-research",
+ "synthetic": false,
+ "historical_reconstruction_only": false,
+ "protocol": {
+  "path": "docs/experiments/raw/research-momentum-prototype-2026-09-13/protocol.json",
+  "sha256": "329666ff8b86fc4a58055fdc47a6927325a71ac7b50dc75a2baa7d0c4daa35de",
+  "protocol_id": "momentum-research-prototype-2026-09-13"
+ },
+ "target_id": "protocol:momentum-next-close-21-session@1.0.0",
+ "objects": {
+  "primary": "mixed.momentum.raw@1.0.0",
+  "dependency": "mixed.price.economic@1.0.0",
+  "type": "feature（身份引用，完整卡见协议文件）"
+ },
+ "code_hashes": {
+  "momentum_prototype": "02366b5c8b683035e431a97c7ade3afbd8520a63f993860b6f953d1c3f0277c8",
+  "run_momentum_research_prototype": "65b932d662273282cda33268037338ad98772aac95b63a68f6f8d74fba48b0b3"
+ },
+ "inputs": {
+  "snapshot_dir": {
+   "path": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2",
+   "sha256": "d4e6518b957d06a50189a574cbd547a98e479bae872a284c0718febff781ce27",
+   "verified_file": "docs/experiments/raw/research-identity-wiring-2026-09-10/canonical-snapshot-v2/snapshot.json"
+  },
+  "calendar": {
+   "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+   "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+   "verified_file": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json"
+  },
+  "publication": {
+   "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json",
+   "sha256": "657ef122c62aefcf8d580e5e20e85beac8b1a0979c399f3529ae30d6b245ef02",
+   "verified_file": "docs/experiments/raw/research-calendar-completion-2026-09-10/publication-evidence.json"
+  },
+  "actions": {
+   "path": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json",
+   "sha256": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81",
+   "verified_file": "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json"
+  },
+  "registry": {
+   "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definitions.v1.json",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ },
+ "observations": {
+  "count": 0,
+  "first": null,
+  "last": null
+ },
+ "unknown_available_at": [],
+ "failures": [],
+ "skipped_stages": {
+  "economic-reconstruction": "研究资格未满足，拒绝运行：排序用途未获允许：starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市；研究信号用途未获允许：zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知；对象字段检查未满足：{'mixed.momentum.raw@1.0.0': ['economic_index'], 'mixed.price.economic@1.0.0': ['economic_index']}",
+  "targets": "研究资格未满足，拒绝运行：排序用途未获允许：starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市；研究信号用途未获允许：zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知；对象字段检查未满足：{'mixed.momentum.raw@1.0.0': ['economic_index'], 'mixed.price.economic@1.0.0': ['economic_index']}",
+  "rank-diagnostic": "研究资格未满足，拒绝运行：排序用途未获允许：starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市; starts_after_window: 首个报价晚于评价期起点；缺少上市资格证据——不得自动判为晚上市；研究信号用途未获允许：zero_volume_days: 存在零成交量日（可能停牌或无成交，本轮不区分——无停牌数据源可核）; action_available_at_unknown: 21/21 条行动缺少 available_at（其中 3 条有 announcement_date 可作「不晚于该日已公布」的下界，18 条完全未知）；下界不等于精确到达时刻，一律不写入 available_at。本批只能用于历史重建，不得声称当时可知；对象字段检查未满足：{'mixed.momentum.raw@1.0.0': ['economic_index'], 'mixed.price.economic@1.0.0': ['economic_index']}"
+ },
+ "offline_guard": {
+  "self_check_blocked": true,
+  "blocked_with": "RuntimeError"
+ },
+ "statuses": {
+  "computation_run": false,
+  "research_qualification": "rejected",
+  "validity": "not_tested_by_this_run",
+  "production": "not_authorized",
+  "policy": "not_applicable_no_account_policy"
+ },
+ "outputs": {
+  "quality.json": "f322b771e69bef8d6ecec5c88cc8c1a83d6a138877fbcf62659fd5ab23ee0bae",
+  "skipped-stages.json": "7e6a79908ed106c47be1e0de5b845811129bbb545b7c97e51e7eff06a1b7554c",
+  "report.md": "ee78fb6671a5889e91f9ad892f2950f0b1353a51280204e4cae77c20caf11102"
+ }
+}

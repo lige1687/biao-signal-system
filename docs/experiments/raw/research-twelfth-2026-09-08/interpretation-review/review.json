@@ -1,0 +1,50 @@
+{
+  "scope": "只读 precision-account-results；不重跑账户",
+  "a20": {
+    "shared_open_positions": [
+      {"symbol": "sh513100", "entry_date": "2016-12-13", "valuation_date": "2026-06-30", "net_pnl": 130997.9394, "dividend_accrued": 0.0},
+      {"symbol": "sh518880", "entry_date": "2024-04-25", "valuation_date": "2026-06-30", "net_pnl": 72176.9925, "dividend_accrued": 0.0},
+      {"symbol": "sh510300", "entry_date": "2025-08-08", "valuation_date": "2026-06-30", "net_pnl": 30963.8712, "dividend_accrued": 4009.8}
+    ],
+    "open_position_net_pnl_sum": 234138.8031,
+    "A20E": {"closed_net_pnl": 322.5259, "open_net_pnl": 234138.8031, "total_net_gain": 234461.329, "open_share_of_total_net_gain": 0.9986244, "closed_dividend": 1108.8, "open_dividend": 4009.8},
+    "A20J": {"closed_net_pnl": 633.9244, "open_net_pnl": 234138.8031, "total_net_gain": 234772.7275, "open_share_of_total_net_gain": 0.9972998, "closed_dividend": 1108.8, "open_dividend": 4009.8},
+    "interpretation": "两组几乎全部净增值来自同三笔尚未卖出的账面涨幅；已卖出部分只是小额净盈利，不能把期末总额说成已实现收益。"
+  },
+  "net_pnl_definition": {
+    "closed": "卖出所得 + 持有期间取得的分红 - 买入金额 - 买入费用 - 卖出费用",
+    "open": "期末市值 + 持有期间已经取得或应取得的分红 - 买入金额 - 买入费用",
+    "dividend_note": "dividend_accrued 进入每笔盈亏；dividend_paid 进入现金。当前相关记录 accrued 与 paid 相等，因此不会漏算，也不会重复计入账户权益。"
+  },
+  "c1": {
+    "completed_positions": 15,
+    "completed_profitable": 0,
+    "completed_net_pnl": -16488.9078,
+    "open_positions": 1,
+    "open_position": {"symbol": "sh518880", "entry_date": "2015-08-04", "valuation_date": "2026-06-30", "net_pnl": 21727.412, "dividend_accrued": 0.0},
+    "total_net_gain": 5238.5042,
+    "interpretation": "15笔已卖出的交易全部亏损；唯一一笔从2015年一直未卖出的黄金基金账面盈利，才把整个C1账户拉到正数。"
+  },
+  "first_touch_split": {
+    "causal_interpretation_allowed": false,
+    "reason": "首次和非首次只是同一账户成交结果的事后分组。它们共享现金、已有持仓和时间顺序；某笔能否成交会受先前交易影响，未分别运行两个独立账户，因此不能解释成首次条件本身造成了多少收益。",
+    "safe_use": "只能描述本次实际成交中，哪些记录带首次标记，以及这些记录当时对应的盈亏。"
+  },
+  "zero_trade_configs": [
+    {"config_id": "A120J", "raw_candidates": 6, "signal_day_accepted": 0},
+    {"config_id": "C3", "raw_candidates": 103, "signal_day_accepted": 0},
+    {"config_id": "D", "raw_candidates": 3, "signal_day_accepted": 0},
+    {"config_id": "REF_BREAKOUT", "raw_candidates": 1082, "signal_day_accepted": 0}
+  ],
+  "a60e_pending_at_end": {
+    "candidate_id": "A60E:first_ma_pullback:c4301c7f544f0f3c327feaca",
+    "symbol": "sh513100",
+    "signal_date": "2026-06-30",
+    "status": "pending_at_end",
+    "signal_ref": 2.204,
+    "stop": 2.147,
+    "target": 2.383,
+    "signal_rr": 3.1403508772,
+    "interpretation": "信号在回测最后一天收盘后形成，按规则只能等下一可用开盘，但研究期已经结束，所以没有成交，也不计入收益。"
+  }
+}

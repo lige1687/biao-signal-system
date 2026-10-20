@@ -1,0 +1,43 @@
+--- frozen
++++ current
+@@ -1020,6 +1020,40 @@
+          WHERE b.record_type = 'display_batch'
+            AND b.batch_members IS NOT NULL
+            AND je.value <> '';
++        """,
++    ),
++    (
++        27,
++        "027_agent_backtest_requests",
++        """
++        -- 03B 按需补测（2026-09-08 总控协议 §3/§5）：讨论内单标的固定配置
++        -- 补测任务的持久绑定——只存任务状态与归属，不算成绩、不取代观察账本。
++        CREATE TABLE IF NOT EXISTS agent_backtest_requests (
++            request_id        TEXT PRIMARY KEY,   -- btr_{hash}
++            client_request_id TEXT NOT NULL,      -- 调用方幂等键
++            session_id        TEXT NOT NULL,      -- agent_sessions.session_id
++            question_id       INTEGER NOT NULL,   -- agent_messages.message_id（原问题）
++            symbol            TEXT NOT NULL,      -- 单标的（多标的/空在此入口拒绝）
++            method            TEXT NOT NULL,      -- 模块/方法标识（A/B/C/D）
++            entry_variant     TEXT,
++            exit_variant      TEXT NOT NULL,
++            canonical_config_json TEXT NOT NULL,  -- 全部实际消费参数（含引擎默认）
++            config_hash       TEXT NOT NULL,      -- 规范化配置摘要
++            ruleset_version   TEXT NOT NULL DEFAULT '',
++            data_cutoff       TEXT NOT NULL DEFAULT '',  -- 送入引擎的数据截止日
++            input_refs_json   TEXT NOT NULL DEFAULT '[]',-- 数据文件路径+内容摘要等
++            run_id            TEXT NOT NULL DEFAULT '',  -- 预留稳定 run_id
++            result_ref        TEXT NOT NULL DEFAULT '',  -- 结果文件路径
++            status            TEXT NOT NULL DEFAULT 'queued'
++                CHECK(status IN ('queued','running','completed','failed','interrupted')),
++            error             TEXT,
++            backfilled        INTEGER NOT NULL DEFAULT 0, -- 完成卡是否已回填原问题
++            created_at        TEXT NOT NULL,
++            updated_at        TEXT NOT NULL,
++            UNIQUE (session_id, client_request_id)
++        );
++        CREATE INDEX IF NOT EXISTS idx_abr_session
++            ON agent_backtest_requests(session_id, created_at);
+         """,
+     ),
+ )

@@ -1,0 +1,37 @@
+个股 82 / ETF 44
+[run] T1_Bp_a61: N=101 (剔基准自身 12 笔) 21.7s oos_start=2024-08-25 data=2016-08-24~2026-08-25
+[run] T1_Bp_b3: N=101 (剔基准自身 12 笔) 13.9s oos_start=2024-08-25 data=2016-08-24~2026-08-25
+
+[任务一] 判定: a6_1 优势为真 = True → B' 定案退出 = a6_1_costbasis
+  B' 正式切 a6_1（建议级）
+[run] T2_A_ETF_cm05_shrink: N=283 (剔基准自身 19 笔) 16.6s oos_start=2024-08-25 data=2016-08-24~2026-08-25
+[run] T2_C_stocks_v3_b15: N=177 (剔基准自身 0 笔) 109.1s oos_start=2024-08-25 data=2016-08-24~2026-08-25
+[run] T2_D_stocks_default: N=2 (剔基准自身 0 笔) 14.5s oos_start=2024-08-25 data=2016-08-24~2026-08-25
+[run] CSV_B_518850_63_10: N=8 (剔基准自身 6 笔) 0.4s oos_start=2024-08-24 data=2016-08-24~2026-08-24
+[run] CSV_B_510300_20_4: N=9 (剔基准自身 19 笔) 0.6s oos_start=2024-08-24 data=2016-08-24~2026-08-24
+[run] CSV_C_518850_v3b15: N=0 (剔基准自身 0 笔) 1.5s oos_start=2024-08-24 data=2016-08-24~2026-08-24
+[run] CSV_C_510300_v3b15: N=0 (剔基准自身 0 笔) 1.3s oos_start=2024-08-24 data=2016-08-24~2026-08-24
+[run] CSV_D_518850_default: N=3 (剔基准自身 0 笔) 0.4s oos_start=2024-08-24 data=2016-08-24~2026-08-24
+[run] CSV_D_510300_default: N=0 (剔基准自身 0 笔) 0.4s oos_start=2024-08-24 data=2016-08-24~2026-08-24
+[csv] trades_518850_lifecycle_allmodule.csv: 42 笔 (A 31 / B 8 / C 0 / D 3)
+[csv] trades_510300_lifecycle_allmodule.csv: 24 笔 (A 15 / B 9 / C 0 / D 0)
+
+===== 任务一：B' 退出四查 =====
+[a6_1] N=100 全池 exp=1.1778 cum=117.781 | 排top1(603993.SS) exp=0.8078 | IS=0.0664(63) OOS=3.0702(37) | 2019-25 113.608 2026 1.264
+[b3_dual] N=100 全池 exp=0.5335 cum=53.347 | 排top1(002371.SZ) exp=0.4098 | IS=0.1811(63) OOS=1.1334(37) | 2019-25 50.848 2026 0.827
+判定: IS_正=True OOS_正=True 排top1_margin_达标=True => B' 正式切 a6_1（建议级）
+
+===== 任务二：生命周期路由 vs 对照 =====
+只做A      N= 283 exp=0.7931 cum=  224.453 IS=1.2561 OOS=0.2998 maxDD=82.222
+只做B'     N= 100 exp=1.1778 cum=  117.781 IS=0.0664 OOS=3.0702 maxDD=15.029
+A+B'轮动   N= 223 exp=1.4615 cum=  325.910 IS=1.5045 OOS=1.4122 maxDD=74.489
+全模块无路由   N= 561 exp=0.6696 cum=  375.670 IS=0.583 OOS=0.8416 maxDD=87.432
+生命周期路由   N= 421 exp=0.6612 cum=  278.369 IS=0.6626 OOS=0.658 maxDD=62.97
+-- 门禁通过率 --
+A   总N= 283 放行N= 236 放行cumR=  240.912 被剔cumR=  -16.459
+B'  总N= 101 放行N=   9 放行cumR=    2.094 被剔cumR=  115.687
+C   总N= 177 放行N= 177 放行cumR=   35.364 被剔cumR=    0.000
+D   总N=   2 放行N=   0 放行cumR=    0.000 被剔cumR=   -1.927
+判定: cum_pass=False (阈值 432.02) yearly_ok=True seg_hist_ok=True seg_2026_ok=True => 未达有效
+
+落盘: /Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/lifecycle_combo/task1_exit_verification.json / task2_lifecycle_summary.json

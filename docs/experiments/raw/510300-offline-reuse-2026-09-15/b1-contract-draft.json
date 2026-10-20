@@ -1,0 +1,84 @@
+{
+  "spec_status": "draft_pending_controller_freeze",
+  "spec_version": "draft-1",
+  "spec_date": "2026-09-15",
+  "consumer_status": "无消费者；本JSON是待实现/待冻结规格，不声称已有实现或运行许可",
+  "object_ref": "candidate:lei.dual_ma.bull_state@draft-1",
+  "candidate_card": {
+    "path": "docs/experiments/raw/factor-research-workbench-v1-2026-09-14/candidate-card-dual-ma-bull-state-draft-1.md",
+    "sha256": "907d17631e27011423bebbf068bcb2bbc6e1b44a184618597cf54f868e066dc1"
+  },
+  "formula_binding": {
+    "module": "src/lei_signal/research/factor_unit/close_state.py",
+    "sha256": "b0efb324a2ef65d1f415c19be4f50b96ebf25f140da0c31b2b759d68ef04db10",
+    "lookback": 20,
+    "ema_seed_sessions": 20,
+    "ema_alpha": "2/21",
+    "warmup_sessions": 20,
+    "note": "输入从2019-09-02开始，不额外用2013历史改变EMA初始条件；前20个交易日状态未知"
+  },
+  "data": {
+    "package": "docs/experiments/raw/510300-offline-reuse-2026-09-15/run-02",
+    "prices_csv_sha256": "bc8582af3ac7b4c2f00a5b51d81754606179347cc3811c911d7579242cb56703",
+    "rows": 1558,
+    "coverage": {"start": "2019-09-02", "end": "2026-02-03"},
+    "price_basis": "vendor_qfq",
+    "extracted_field": "qfqday",
+    "currency": "CNY",
+    "retrieved_at": "继承原件清单（2026-09-08，见run-02/quality.json audit.inputs）",
+    "historical_available_at": null,
+    "adjustment_anchor": "unknown",
+    "data_mode": "real",
+    "historical_reconstruction_only": true
+  },
+  "calendar": {
+    "path": "docs/experiments/raw/research-calendar-completion-2026-09-10/calendar-merged/calendar.json",
+    "sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+    "session_close": "15:00",
+    "timezone": "Asia/Shanghai"
+  },
+  "target_basis": "vendor_adjusted_price_change",
+  "target_basis_note": "与旧total_return_wealth不同：不含分红再投资、不是财富构造，两者不可混榜，旧目标名不沿用",
+  "offsets": {"e_offset": 1, "x_offset": 22},
+  "targets": {
+    "main": "P_vendor(t+22)/P_vendor(t+1) - 1",
+    "aux": "min(0, min(P_vendor(s)/P_vendor(t+1) - 1)), s in t+1..t+22 trading days",
+    "path_note": "仅收盘路径，不是盘中最大损失或账户回撤"
+  },
+  "evaluation_window": {"start": "2019-10-08", "end": "2025-12-31"},
+  "evaluation_window_note": "第一评价日=输入第21个交易日（主控独立定位2019-10-08）；末日标签终点=2025-12-31后第22个交易日=2026-02-03",
+  "maturity_rule": "标签结束日15:00(Asia/Shanghai) <= research_cutoff",
+  "research_cutoff": "2026-02-03T15:00:00+08:00",
+  "knowledge_time_caveat": "输入快照2026-09-08才取回；研究截止是数据截断线不是当时已知线——事后历史描述，绝不声称2026-02-03时已拥有此快照",
+  "sparse": {"anchor_session": "2019-10-08", "step": 23,
+             "rule": "事先固定，看结果后不得挪锚点；与主比较同一合法集合"},
+  "comparison_rules": {
+    "common_legal_set": "状态已知 ∧ 主目标合法 ∧ 标签成熟 ∧ 在评价期内",
+    "reconcile": "n_true + n_false = n_comparison，逐类缺失原因对账",
+    "unknown_state": "单列，不混入真假，不展示成已观察结果",
+    "aux_count": "辅助目标有效数量(aux_n)另列，路径缺失不拖累主目标计数",
+    "by_year": "固定分组，不得挑最好年份叙述",
+    "overlap_note": "相邻日期21日未来窗口互相重叠，不得当作多次独立成功"
+  },
+  "outputs": ["状态覆盖(真/假/未知)", "真假状态后主目标均值/中位数/上涨比例",
+              "辅助下行统计", "固定稀疏视角", "缺失对账", "逐年固定分组"],
+  "no_claims": ["strategy_return", "annualization", "significance", "IC",
+                "alpha", "production_advice", "factor_effective",
+                "total_return_wealth", "point_in_time_verified"],
+  "blockers": [
+    "state_description.describe_states只接受data_mode='synthetic'且结果硬标synthetic",
+    "study_contract.validate_study_contract真实目标一律blocked(manual_target_review_required)"
+  ],
+  "minimal_adaptation_proposal": {
+    "new_files": ["src/lei_signal/research/factor_unit/real_description.py（或主控指定位置）",
+                  "对应单元测试"],
+    "requirements": ["显式接受historical_reconstruction_only=true输入与冻结B1合同",
+                     "复用close_state与同一合法集合判定",
+                     "结果硬标post_hoc_historical_description",
+                     "手算独立期望；既有真实拒绝行为反例保持绿；不得伪造synthetic绕过"],
+    "frozen_untouched": ["close_state.py", "study_contract.py", "state_description.py",
+                         "scripts/check_factor_unit_readiness.py", "factor_lab",
+                         "生产函数/规则"]
+  },
+  "authorization": "实际开发/真实正式运行由主控另行裁决；本草案不自动授予实现或运行权限"
+}

@@ -1,0 +1,104 @@
+{
+  "id": "rotation-reconstructed-full-v1",
+  "frozen_at": "2026-09-09T08:02:13.023546+00:00",
+  "scope": "reconstructed from upstream 17 codes, actual 14 ETFs; exact original E3 identity unavailable; not exact replication",
+  "start": "2020-12-01",
+  "end": "2026-06-30",
+  "warmup_start": "2019-01-01",
+  "pools": {
+    "full14": [
+      "510300",
+      "512400",
+      "515050",
+      "515130",
+      "515300",
+      "518850",
+      "588000",
+      "515170",
+      "516220",
+      "159652",
+      "512890",
+      "515880",
+      "513870",
+      "562590"
+    ],
+    "industry7": [
+      "512400",
+      "515050",
+      "515170",
+      "516220",
+      "159652",
+      "515880",
+      "562590"
+    ]
+  },
+  "excluded_upstream_indices": [
+    "000688",
+    "000300",
+    "000001"
+  ],
+  "costs_by_pool": {
+    "full14": [
+      0.001,
+      0.002
+    ],
+    "industry7": [
+      0.001
+    ]
+  },
+  "configs": [
+    "equal",
+    "momentum_top3",
+    "equal_sma200",
+    "momentum_top3_sma200"
+  ],
+  "initial_cash": 1000000,
+  "lot": 100,
+  "external_flows": 0,
+  "cash_interest": 0,
+  "eligibility": "at least 273 actual valid close observations through decision date, current valid quote; dynamic after listing",
+  "signal_index": "causal economic total return index, cash distributions on ex dates and cumulative splits between valid quotes; stop marking values adjust old last close on split",
+  "momentum": {
+    "long_lag": 252,
+    "skip_lag": 21,
+    "top_n": 3,
+    "negative_allowed": true,
+    "tie_break": "symbol ascending",
+    "volatility_window": 20,
+    "volatility_std_ddof": 1,
+    "rank_window": 756,
+    "rank_min_periods": 252,
+    "rank_method": "average ties inclusive current value, divided by count",
+    "exclude_if_rank_at_least": 0.8,
+    "rank_nan_policy": "does not exclude (upstream behavior)",
+    "fewer_than_three": "allocate equally to available ranked candidates; no candidates all cash"
+  },
+  "equal": "monthly equal among dynamically eligible symbols, no volatility filter",
+  "trend": "SMA200 of causal index; after monthly purchase any close below own mean triggers next executable open liquidation; no extra entry filter; no reentry until next monthly selection",
+  "timing": "complete month-end close decision, next observed union-session open; trades require actual symbol quote and no known block; month boundary stop reconciled into same monthly target, no sell/buy roundtrip",
+  "waiting": "retain original monthly-only reentry; do not test shorter waiting in this batch",
+  "sizing": "opening marked equity target, proportional buy-cost budget then lot floor; actual shares drift; completed one-shot orders do not retry to restore weights",
+  "corporate_actions": "real units and record-date rights; ex-date receivable, pay-date cash; split at market effective day with corresponding marking unit change; nontrade holidays processed",
+  "fee_stress": "same timing and products, no optimization",
+  "metrics": [
+    "calendar CAGR",
+    "maximum drawdown incl initial capital",
+    "yearly returns with first/last partial labels",
+    "product money contribution",
+    "average capital exposure",
+    "fees and actual fill count"
+  ],
+  "qualification": "finite source coverage, not official complete corporate-action and suspension database",
+  "okr_update": false,
+  "research_layer": "independent allocation extension; not formal A/B/C/D or system road replacement",
+  "old_differences": [
+    "exact original pool/date/source/engine missing",
+    "removed 3 nontradable indices",
+    "actual units cash accounting vs unresolved old weights method",
+    "cash0 vs old upstream1.5%",
+    "SMA uses causal continuous economic price index, original price-adjustment status unclear",
+    "reference implementation executes next open, old exact implementation missing",
+    "industry7 deliberately separate product-class diagnostic, not original pool"
+  ],
+  "execution_paths": 12
+}

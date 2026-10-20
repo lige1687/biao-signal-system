@@ -1,0 +1,166 @@
+{
+ "identity": "factor-evidence-reliability@1.0.0",
+ "spec_status": "frozen",
+ "spec_version": "1.0.0",
+ "use": "post_hoc_historical_sensitivity_diagnostic",
+ "object_ref": "candidate:lei.dual_ma.bull_state@draft-1",
+ "analysis_basis": "只消费 B1 已封存观察表（日期、二元状态、未来结果、合法性）；不重算真实状态、标签或未来目标，不读价格序列另造标签",
+ "fixed_params": {
+  "family": "factor-evidence-reliability",
+  "state_kind": "binary_state（首版唯一支持：真布尔或缺失）",
+  "symbol": "510300",
+  "evaluation_window": {
+   "start": "2019-10-08",
+   "end": "2025-12-31"
+  },
+  "schedule_coverage": {
+   "start": "2019-09-02",
+   "end": "2026-02-03",
+   "note": "与 B1 覆盖区间一致；end=标签成熟截止日，用于 e/x 日期与区间身份"
+  },
+  "target_main": "P_vendor(t+22)/P_vendor(t+1) - 1（观察日t后第1个至第22个交易日收盘，21个价格变动区间；直接取观察表 main 列，不重算）",
+  "target_aux": "min(0, min(P_vendor(s)/P_vendor(t+1) - 1)), s∈[t+1,t+22]（原样描述；不据 aux 另选赢家）",
+  "target_basis_note": "供应商调整价变化，未核验作含分红财富；未来目标截止 2026-02-03 15:00+08；原件取得 2026-09-08，历史可得性未知；全部为事后描述",
+  "delta_definition": "delta = mean(main | state=true) - mean(main | state=false)；单位小数变化率，展示×100记作百分点",
+  "legal_set": "flag_state_known ∧ flag_main_legal ∧ flag_mature（B1 共同合法集合）；aux 缺失不删主目标",
+  "year_key": "信号发生年（session 年）；跨年目标归信号发生年，不当独立时期验证",
+  "leave_one_year_out": "2019–2025 七个年份逐一留出后全期 delta；任一组缺失则 null+原因；不挑有利年份",
+  "equal_weight_year_mean": "两组都有值年度差的等权均值，附实际年份键集；只是另一描述视角，不替代全期结果，不是因果校正",
+  "partial_year_note": "2019 为不完整观察年（评价窗自 2019-10-08 起）",
+  "overlap": {
+   "interval_unit": "相邻交易日的价格变动区间，按 (前session, 后session) 相邻对识别；不是共同日期点数",
+   "per_label": "每条合法标签 = 其 (e,x] 覆盖的全部相邻区间（本例 21 个）",
+   "adjacent_audit": "相邻观察（按完整交易日轴位置）共享区间数量与比例；全表总区间引用数与唯一区间数",
+   "reuse_note": "重用比只是描述，不是有效样本数",
+   "sparse_anchor_session": "2019-10-08",
+   "sparse_step": 23,
+   "sparse_policy": "只审计原规则锚点，不扫描其他起点选最好"
+  },
+  "resampling": {
+   "method": "circular_block_bootstrap：固定长度循环区块重抽；首尾相接是计算约定，不是真实行情连接",
+   "block_lengths": [
+    63,
+    126
+   ],
+   "block_length_note": "L=63 与 126 为主控固定研究设定，不是最优参数、不是论文标准；两种L并排完整展示，不取有利一个",
+   "reps": 2000,
+   "seed": 20260916,
+   "rng": "numpy.random.Generator(numpy.random.PCG64(20260916))；每种 L 分别新建",
+   "start_draw": "每重复从整数[0,n)等概率抽 k=ceil(n/L) 个起点；一次性 integers(0, n, size=(reps, k))；起点矩阵全部保存",
+   "index_rule": "(start+j) % n, j=0..L-1，按块拼接后截到 n 行；同一索引用于 state/main/合法性三列，绝不分别抽两组",
+   "axis_rule": "n 为完整评价日期轴长度（日历推导，非压缩后行数）；先保留完整时间轴，再按合法性计入每次统计；不把缺行压缩成连续行情",
+   "null_rule": "每次缺任一组则 delta=null，保存原因与两组实际 n；不额外抽取补足有效值",
+   "min_valid_reps": 1900,
+   "min_valid_note": "有效重复不足 1900/2000 时不输出区间（本轮质量约定，不是学术门槛）",
+   "quantiles": {
+    "lower": 0.025,
+    "upper": 0.975,
+    "method": "linear",
+    "name": "条件性95%重抽范围"
+   },
+   "not_estimable": "单组、空集、n<L、日历不完整时明确 not_estimable",
+   "interpretation": "只作为假设条件下的历史敏感性诊断：不能证明行情机制不变，不能消除资料口径/已见数据/研究选择偏差；不报有效概率、p值、显著通过、独立样本数或已排除过拟合，不用过零作机械采纳判决"
+  }
+ },
+ "standards": [
+  {
+   "path": "docs/research/experiment-backtest-principles.md",
+   "version": "1.1",
+   "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6"
+  },
+  {
+   "path": "docs/research/definition-standard.md",
+   "version": "1.1.0",
+   "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c"
+  },
+  {
+   "path": "docs/research/ai-execution-contract.md",
+   "version": "1.0.1",
+   "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962"
+  },
+  {
+   "path": "docs/research/experiment-report-template.md",
+   "version": "1.1.0",
+   "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e"
+  },
+  {
+   "path": "docs/research/definitions.v1.json",
+   "version": "容器1.2.0（只读）",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ ],
+ "task_book": {
+  "path": "docs/superpowers/plans/2026-09-16-factor-evidence-reliability-v1.md",
+  "sha256": "77fb4152b6e415903bab427a25f823ac1d4b906cedf487ce7f47c01c71a61fc5"
+ },
+ "candidate_card": {
+  "path": "docs/experiments/raw/factor-research-workbench-v1-2026-09-14/candidate-card-dual-ma-bull-state-draft-1.md",
+  "sha256": "907d17631e27011423bebbf068bcb2bbc6e1b44a184618597cf54f868e066dc1"
+ },
+ "input_identity": {
+  "base_dir": "docs/experiments/raw/b1-dual-ma-first-real-description-2026-09-16",
+  "observations_csv_path": "run-02/observations.csv",
+  "observations_csv_sha256": "1dfe4c206212c31809f53f4b66bb40b3dd4ec193b03daf37c1540f8307eb9d5d",
+  "summary_json_path": "run-02/summary.json",
+  "summary_json_sha256": "ce4c51ba5e0d7bb7f7e10630b07fc106a59c98f0d4f57ac290f861164c9bfcf7",
+  "run02_manifest_path": "run-02/manifest.json",
+  "run02_manifest_sha256": "ca7154fc9bdde40c54490a37c8de47acfaaf138911735b1d6dac0c67bf614fde",
+  "calendar_json_path": "run-02/input-package/calendar.json",
+  "calendar_json_sha256": "aa43736b67bbcee04fc21eedf8d510b184b764adf138456c8bce93a3155eb6c1",
+  "supplement_full_file_listing_path": "supplement/full-file-listing.json",
+  "supplement_full_file_listing_sha256": "320f4c3139c8edbb92b812217310d646df68685cbaf10b4a83ff161b9ca8a453",
+  "supplement_manifest_path": "supplement/supplement-manifest.json",
+  "supplement_manifest_sha256": "982baa52667b35c732f39c3007a808a57db96acf977248bb3b834e1ede95c592",
+  "b1_protocol_v101_sha256": "00a16465e5232d3760cedbe9bccb5332b05e4f777f1732e8911ee586974c3af2"
+ },
+ "code_identity": {
+  "src/lei_signal/research/factor_evidence/__init__.py": "54c8ff4ef0af9308ca61a26e1ef7d5fda07b8b3f897a2e01aa7123917fc26cca",
+  "src/lei_signal/research/factor_evidence/contract.py": "e2c6215559d074f81998e7f181ba51ebe6e2ea9935edb4d043a741d8a7a21b91",
+  "src/lei_signal/research/factor_evidence/observations.py": "37d812b2c76e723b9950eac983ecf5d61cecb6ad531164d2de75d2b714cf185c",
+  "src/lei_signal/research/factor_evidence/stability.py": "f54f68be3a517b8c77ef44e781ad130aac3a06fa2bc719976da9b6394fdfa166",
+  "src/lei_signal/research/factor_evidence/resampling.py": "5542d778f1fc5b87505b8b3d1f862e4c1c04f842195bf041e3c1043b70573c94",
+  "src/lei_signal/research/factor_evidence/runner.py": "0695cd902cf759943bfede7d858ebf047fcf38dd1d0175da19dece96a8c7ba6d",
+  "scripts/run_factor_evidence_reliability.py": "4976b6e696281712c33fcf7c4c2b00e8a283986b6001c9709c3fc88e7460141b",
+  "src/lei_signal/research/trading_calendar.py": "4651fa7d0e1e20aeaf3b40d9446f3ea76ec0eac037bbe965c018c3e5ccb6389e"
+ },
+ "tolerance": {
+  "float": 1e-12,
+  "counts_keys_nulls": "严格一致"
+ },
+ "output_fields": [
+  "protocol.source.json",
+  "stability.json",
+  "yearly.csv",
+  "leave-one-year-out.csv",
+  "overlap.json",
+  "resampling-L63-starts.npy",
+  "resampling-L63-replicates.csv",
+  "resampling-L126-starts.npy",
+  "resampling-L126-replicates.csv",
+  "uncertainty.json",
+  "evidence-card.json",
+  "report.md",
+  "manifest.json"
+ ],
+ "no_claims": [
+  "probability_factor_effective",
+  "p_value",
+  "significance_pass",
+  "independent_sample_count",
+  "overfitting_excluded",
+  "regime_invariance_proved",
+  "causal_conclusion",
+  "strategy_return",
+  "production_advice",
+  "point_in_time_verified",
+  "dividend_wealth_equivalence"
+ ],
+ "exit_codes": {
+  "0": "工程完成（不等于结论有效）",
+  "2": "资料/数值不足",
+  "3": "身份/合同错误"
+ },
+ "approval": null,
+ "approval_note": "授权只来自任务书及派发文件的用户授权记录；协议不得自填 approval=true",
+ "frozen_at": "2026-09-16T11:10:10.836728+00:00"
+}

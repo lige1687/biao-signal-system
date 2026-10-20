@@ -1,0 +1,412 @@
+{
+  "mixed.equal@1.0.0": {
+    "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+    "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+    ],
+    "input": {
+      "fields": [
+        "date",
+        "symbol",
+        "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+    },
+    "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "计算按有效报价；月选需当日有报价且累计>=273；当前存续池有选择偏差",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+    },
+    "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+    },
+    "validation": {
+      "method": "协议与执行逐项映射；本轮仅指标/选择复算，完整账户历史结果引用旧封存，未重新跑",
+      "tolerance": {
+        "absolute": 1e-10,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "mapped_legacy非完整迁移；月末输入末行需已结束月份，部分月不能装作完成月"
+    },
+    "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "historical_results_exist_limited_pool_no_new_effectiveness_claim",
+      "production": "not_authorized"
+    },
+    "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "defense_code",
+      "defense_protocol",
+      "defense_results",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+    ],
+    "id": "mixed.equal",
+    "version": "1.0.0",
+    "name": "同池月度平均配置参照",
+    "type": "benchmark",
+    "profile": "mixed",
+    "uses": [
+      "comparison"
+    ],
+    "dependencies": [
+      "mixed.eligible@1.0.0",
+      "cash.zero@1.0.0"
+    ],
+    "definition": {
+      "formula": "完整账户权益=现金+应收+实际份额*名义估值；收益来自该policy执行",
+      "parameters": {
+        "initial": 1000000,
+        "allocation": 1,
+        "fees": [
+          0.001,
+          0.002
+        ]
+      },
+      "endpoints": "含t；有位移时以formula和parameters为准",
+      "unit": "account_path",
+      "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+      "transforms": "无"
+    },
+    "policy": {
+      "selection": "当月全部动态合格产品，不用动量/RV；无SMA入场过滤",
+      "weights": "月度总目标100%，各入选产品1/N，月间漂移；无候选全现金",
+      "cash": "初始1000000 CNY，外部流量0，cash_interest0，现金和应收计权益；分红登记获权/除息应收/支付日开盘前到账近似",
+      "fees": "每边0.001主方案与0.002压力方案；实际成交金额计费，无最低费；整100份含费向下取整；不得混合两费用",
+      "rebalance": "每月输入并集最后收盘；下一并集开盘一次目标；月度目标替换旧待单；完成机会后不逐日补零头",
+      "execution": "full-execution/run.py::simulate或defense_code::simulate；先卖后买，按开盘权益定金额；缺价/零量/单价锁定/已知限制延期；资金不足按比例缩量；期末收盘持仓不虚构清仓",
+      "exit": "只在月调仓减少/删除名单；无日线止损",
+      "reentry": "下次月调仓；无每日买回",
+      "investability": "产品可买，但有限存续池+理想日线开盘+不完整限制资料，仅研究可执行近似"
+    }
+  },
+  "mixed.no_exit_100@1.0.0": {
+    "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+    "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+    ],
+    "input": {
+      "fields": [
+        "date",
+        "symbol",
+        "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+    },
+    "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "计算按有效报价；月选需当日有报价且累计>=273；当前存续池有选择偏差",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+    },
+    "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+    },
+    "validation": {
+      "method": "协议与执行逐项映射；本轮仅指标/选择复算，完整账户历史结果引用旧封存，未重新跑",
+      "tolerance": {
+        "absolute": 1e-10,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "mapped_legacy非完整迁移；月末输入末行需已结束月份，部分月不能装作完成月"
+    },
+    "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "historical_results_exist_limited_pool_no_new_effectiveness_claim",
+      "production": "not_authorized"
+    },
+    "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "defense_code",
+      "defense_protocol",
+      "defense_results",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+    ],
+    "id": "mixed.no_exit_100",
+    "version": "1.0.0",
+    "name": "满额选强参照",
+    "type": "benchmark",
+    "profile": "mixed",
+    "uses": [
+      "comparison"
+    ],
+    "dependencies": [
+      "mixed.top3@1.0.0",
+      "cash.zero@1.0.0"
+    ],
+    "definition": {
+      "formula": "完整账户权益=现金+应收+实际份额*名义估值；收益来自该policy执行",
+      "parameters": {
+        "initial": 1000000,
+        "allocation": 1,
+        "fees": [
+          0.001,
+          0.002
+        ]
+      },
+      "endpoints": "含t；有位移时以formula和parameters为准",
+      "unit": "account_path",
+      "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+      "transforms": "无"
+    },
+    "policy": {
+      "selection": "当月动态273报价资格；动量排序、RV过滤、前三；负分允许，同分代码升序",
+      "weights": "月度总目标100%，各入选产品1/N，月间漂移；无候选全现金",
+      "cash": "初始1000000 CNY，外部流量0，cash_interest0，现金和应收计权益；分红登记获权/除息应收/支付日开盘前到账近似",
+      "fees": "每边0.001主方案与0.002压力方案；实际成交金额计费，无最低费；整100份含费向下取整；不得混合两费用",
+      "rebalance": "每月输入并集最后收盘；下一并集开盘一次目标；月度目标替换旧待单；完成机会后不逐日补零头",
+      "execution": "full-execution/run.py::simulate或defense_code::simulate；先卖后买，按开盘权益定金额；缺价/零量/单价锁定/已知限制延期；资金不足按比例缩量；期末收盘持仓不虚构清仓",
+      "exit": "只在月调仓减少/删除名单；无日线止损",
+      "reentry": "下次月调仓；无每日买回",
+      "investability": "产品可买，但有限存续池+理想日线开盘+不完整限制资料，仅研究可执行近似"
+    }
+  },
+  "mixed.no_exit_75@1.0.0": {
+    "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+    "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+    ],
+    "input": {
+      "fields": [
+        "date",
+        "symbol",
+        "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+    },
+    "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "计算按有效报价；月选需当日有报价且累计>=273；当前存续池有选择偏差",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+    },
+    "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+    },
+    "validation": {
+      "method": "协议与执行逐项映射；本轮仅指标/选择复算，完整账户历史结果引用旧封存，未重新跑",
+      "tolerance": {
+        "absolute": 1e-10,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "mapped_legacy非完整迁移；月末输入末行需已结束月份，部分月不能装作完成月"
+    },
+    "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "historical_results_exist_limited_pool_no_new_effectiveness_claim",
+      "production": "not_authorized"
+    },
+    "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "defense_code",
+      "defense_protocol",
+      "defense_results",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+    ],
+    "id": "mixed.no_exit_75",
+    "version": "1.0.0",
+    "name": "月度75%选强参照",
+    "type": "benchmark",
+    "profile": "mixed",
+    "uses": [
+      "comparison"
+    ],
+    "dependencies": [
+      "mixed.top3@1.0.0",
+      "cash.zero@1.0.0"
+    ],
+    "definition": {
+      "formula": "完整账户权益=现金+应收+实际份额*名义估值；收益来自该policy执行",
+      "parameters": {
+        "initial": 1000000,
+        "allocation": 0.75,
+        "fees": [
+          0.001,
+          0.002
+        ]
+      },
+      "endpoints": "含t；有位移时以formula和parameters为准",
+      "unit": "account_path",
+      "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+      "transforms": "无"
+    },
+    "policy": {
+      "selection": "当月动态273报价资格；动量排序、RV过滤、前三；负分允许，同分代码升序",
+      "weights": "月度总目标75%，各入选产品1/N，月间漂移；无候选全现金",
+      "cash": "初始1000000 CNY，外部流量0，cash_interest0，现金和应收计权益；分红登记获权/除息应收/支付日开盘前到账近似",
+      "fees": "每边0.001主方案与0.002压力方案；实际成交金额计费，无最低费；整100份含费向下取整；不得混合两费用",
+      "rebalance": "每月输入并集最后收盘；下一并集开盘一次目标；月度目标替换旧待单；完成机会后不逐日补零头",
+      "execution": "full-execution/run.py::simulate或defense_code::simulate；先卖后买，按开盘权益定金额；缺价/零量/单价锁定/已知限制延期；资金不足按比例缩量；期末收盘持仓不虚构清仓",
+      "exit": "只在月调仓减少/删除名单；无日线止损",
+      "reentry": "下次月调仓；无每日买回",
+      "investability": "产品可买，但有限存续池+理想日线开盘+不完整限制资料，仅研究可执行近似"
+    }
+  },
+  "mixed.fast_reentry_exit@1.0.0": {
+    "scope": "full14有限现存ETF混合池；含国内宽基、行业、黄金、人民币计价海外ETF，非纯行业",
+    "not_for": [
+      "production_trade",
+      "unique_alpha_claim",
+      "prediction_from_contemporaneous_fit"
+    ],
+    "input": {
+      "fields": [
+        "date",
+        "symbol",
+        "economic_index"
+      ],
+      "price_basis": "名义价+已生效分红/拆分连接的economic_index；首值1，账户用名义价/实际份额",
+      "currency": "CNY；人民币场内海外ETF不另加汇率收益；不是纯海外现货指数",
+      "frequency": "daily_valid_quotes",
+      "calendar": "每产品自身非缺失且close>0的报价行；无前填；月末用全池日期并集"
+    },
+    "universe": {
+      "version": "rotation-reconstructed-full-v1/full14；mixed_pool与mixed_protocol指纹",
+      "eligibility": "计算按有效报价；月选需当日有报价且累计>=273；当前存续池有选择偏差",
+      "warmup": "按每个对象窗口，不以日历天补足",
+      "missing": "旧代码删缺失/非正收盘；本轮适配明确NaN，非正/无穷报错；RV分位NaN的旧放行单独保留",
+      "quality_gate": "有限公司行动/停牌资料；无法证明逐条历史available_at",
+      "degrade": "缺报价不发新信号；未确认资料不得生产"
+    },
+    "time": {
+      "observation_time": "t有效收盘，Asia/Shanghai 15:00（ETF本地交易）",
+      "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+      "decision_at": "不得早于available_at",
+      "execution_at": "最早下一有真实可交易开盘；没有实时成交授权",
+      "timezone": "Asia/Shanghai",
+      "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+    },
+    "validation": {
+      "method": "协议与执行逐项映射；本轮仅指标/选择复算，完整账户历史结果引用旧封存，未重新跑",
+      "tolerance": {
+        "absolute": 1e-10,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "tests/unit/test_research_definitions.py"
+      ],
+      "limitations": "mapped_legacy非完整迁移；月末输入末行需已结束月份，部分月不能装作完成月"
+    },
+    "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "limited_frozen_sources",
+      "implementation": "mapped_legacy_not_migrated",
+      "effectiveness": "historical_results_exist_limited_pool_no_new_effectiveness_claim",
+      "production": "not_authorized"
+    },
+    "sources": [
+      "mixed_code",
+      "mixed_protocol",
+      "defense_code",
+      "defense_protocol",
+      "defense_results",
+      "mixed_prices",
+      "mixed_actions",
+      "mixed_pool"
+    ],
+    "id": "mixed.fast_reentry_exit",
+    "version": "1.0.0",
+    "name": "SMA200退出/快速回补参照",
+    "type": "benchmark",
+    "profile": "mixed",
+    "uses": [
+      "comparison"
+    ],
+    "dependencies": [
+      "mixed.top3@1.0.0",
+      "cash.zero@1.0.0",
+      "trend.sma200@1.0.0",
+      "trend.recovered200@1.0.0"
+    ],
+    "definition": {
+      "formula": "完整账户权益=现金+应收+实际份额*名义估值；收益来自该policy执行",
+      "parameters": {
+        "initial": 1000000,
+        "allocation": 1,
+        "fees": [
+          0.001,
+          0.002
+        ]
+      },
+      "endpoints": "含t；有位移时以formula和parameters为准",
+      "unit": "account_path",
+      "direction": "完整账户资金与风险表现；不得把年化或回撤直接当金额贡献",
+      "transforms": "无"
+    },
+    "policy": {
+      "selection": "当月动态273报价资格；动量排序、RV过滤、前三；负分允许，同分代码升序",
+      "weights": "月度总目标100%，各入选产品1/N，月间漂移；无候选全现金",
+      "cash": "初始1000000 CNY，外部流量0，cash_interest0，现金和应收计权益；分红登记获权/除息应收/支付日开盘前到账近似",
+      "fees": "每边0.001主方案与0.002压力方案；实际成交金额计费，无最低费；整100份含费向下取整；不得混合两费用",
+      "rebalance": "每月输入并集最后收盘；下一并集开盘一次目标；月度目标替换旧待单；完成机会后不逐日补零头",
+      "execution": "full-execution/run.py::simulate或defense_code::simulate；先卖后买，按开盘权益定金额；缺价/零量/单价锁定/已知限制延期；资金不足按比例缩量；期末收盘持仓不虚构清仓",
+      "exit": "持有且economic_index<SMA200有效收盘触发，下一并集日开盘尝试全清；=不卖；月末买入不要求SMA",
+      "reentry": "当月名单内实际SMA全清且净卖款预算>0、当前零持仓；收盘economic_index>=SMA200后下一可执行开盘，用该产品最近一次净卖款含费整百买回；不用其他现金/后续分红；买后清预算；等待又跌破则撤单留预算；月调仓优先清旧预算与队列；无每日重排或新RV过滤",
+      "investability": "产品可买，但有限存续池+理想日线开盘+不完整限制资料，仅研究可执行近似"
+    }
+  }
+}

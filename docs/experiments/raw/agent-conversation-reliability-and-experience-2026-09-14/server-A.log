@@ -1,0 +1,13 @@
+ISO-READY mode=stub db=/var/folders/l3/zrwg12bn3lz_zny9r8sq2yf40000gn/T/lei-iso-3f5m1ufq/case.db
+agent_chat_stream 准备段失败（session=None message='510300 最近怎么看？先说判断，再讲机会和风险，现有依据够不够？'）
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/lei-agent-ux-20260913/src/lei_signal/api/routes/agent.py", line 2330, in _work
+    outcome = _enter_chat(request, body)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/lei-agent-ux-20260913/src/lei_signal/api/routes/agent.py", line 1975, in _enter_chat
+    return enter_chat_request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/lei-agent-ux-20260913/src/lei_signal/copilot/chat_identity.py", line 278, in enter_chat_request
+    conn.execute("BEGIN IMMEDIATE")
+sqlite3.OperationalError: database is locked
+流式请求异常：ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=8031): Max retries exceeded with url: /chat/completions (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=8031): Failed to establish a new connection: [Errno 61] Connection refused"))（model=stub-model）

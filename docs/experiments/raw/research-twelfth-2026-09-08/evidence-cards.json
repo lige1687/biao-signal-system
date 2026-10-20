@@ -1,0 +1,176 @@
+[
+  {
+    "user_question": "修复后的A/C/D连上资金账户后表现怎样？",
+    "conclusion": "12组已核对；A20增长几乎来自三笔未卖出持仓，C1已结束15笔全亏，四组无成交；不能证明完整系统有效。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "acd-limited-accounts",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/precision-account-results/run-lock.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/precision-account-results/summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/precision-account-results/product-contributions.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/interpretation-review/review.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/independent-review/precision-addendum/results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/independent-review/precision-addendum/summary-results.json"
+      ],
+      "source_hash": [
+        "1c4981371113d1e9e9edb6112b315ea38bc4bde52859cce5ed54e240bbc47c90",
+        "7801e23eacbfe01b48f7d294bb34f2689d8ef5a0f0f57cf86ca095a13d8044d2",
+        "be2b1a0280a3302f9a5964f20172da1bcfa0ec1961cd78694ec75ce2796f3b7e",
+        "cb38dcc64e779f17d493b6168921c6dad775eaf2dd5ede66870ffd73de77b34a",
+        "986f8f7a15c89555a19877ad3c4cf640deadf12f463fc3fbe81aa171684e8f58",
+        "1dc79478b1f49b6a34420835d6b93345a9bcb96117334c313d4daeba082a8bbf",
+        "8ea4aebc6869b4fdb5cfb03037b2fbffb81f81fc93e49dcca9dc48f9c9cfd6a1"
+      ],
+      "source_version": "research-twelfth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "fixed_twelve_limited_accounts",
+      "strategy_scope": [],
+      "limitations": "只测初始结构失效退出，盈利保护等完整退出没有测；A小周期、C/D未定义等待、九条纪律缺项未补定；同历史和重叠持仓，不是独立未来验证；行情及开盘限制继承第八有限资料；独立验证来源、资金和执行，没有独立重写信号及目标算法；本批没有新增论文全文阅读；未写生产或Zotero；第十二OKR证据待具体确认",
+      "compatibility": "unknown",
+      "evidence_id": "acd-limited-accounts",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/protocol.md",
+      "strategies": [],
+      "note": "只测初始结构失效退出，盈利保护等完整退出没有测；A小周期、C/D未定义等待、九条纪律缺项未补定；同历史和重叠持仓，不是独立未来验证；行情及开盘限制继承第八有限资料；独立验证来源、资金和执行，没有独立重写信号及目标算法；本批没有新增论文全文阅读；未写生产或Zotero；第十二OKR证据待具体确认"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "第八名义历史与已知公司行动；成交制度仍为有限近似",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "run_lock": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/precision-account-results/run-lock.json",
+        "sha256": "7801e23eacbfe01b48f7d294bb34f2689d8ef5a0f0f57cf86ca095a13d8044d2"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§3.2/§9A/C/D/§10/§13/§16；有限日线入场和初始失效退出；参数未改",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-twelfth-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": true,
+      "review_scope": "完整候选来源/独立日账与订单/汇总/首轮与纠错差异；信号及目标选择未独立重写",
+      "status": "limited",
+      "limitations": [
+        "只测初始结构失效退出，盈利保护等完整退出没有测",
+        "A小周期、C/D未定义等待、九条纪律缺项未补定",
+        "同历史和重叠持仓，不是独立未来验证",
+        "行情及开盘限制继承第八有限资料",
+        "独立验证来源、资金和执行，没有独立重写信号及目标算法",
+        "本批没有新增论文全文阅读；未写生产或Zotero；第十二OKR证据待具体确认"
+      ]
+    }
+  },
+  {
+    "user_question": "恰好达到3倍却被拒绝，修正会不会改变收益？",
+    "conclusion": "两条信号原被小数误差拒绝；保留原结果后按十进制纠错，两条又因次日开盘低于失效价拒绝，51财务文件完全不变。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "acd-numeric-boundary",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/precision-fix/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/precision-fix/candidate-completion.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/precision-fix/comparison.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/precision-fix/root-boundary-tests.txt",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/independent-review/source-results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/independent-review/precision-addendum/source-results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/independent-review/precision-addendum/revision-difference-results.json"
+      ],
+      "source_hash": [
+        "5fd2c696264cc460bee83a17fb858160780c442d07776e00373808947ee84843",
+        "905216bdf50ef768d2c57dfc93838d58477fb056f87bb8448e939b65040ac7a0",
+        "5e1116748f77729cf9ccd42f0cf0f1de3442433751d25af0f12cfc3387ea54bd",
+        "1b9d4b111ca11eaedf02b5a7f04d0c4d4963e583849566bfffcd2c35d075afc3",
+        "32eec06d0aa84c9be1c5e5c928b56d3eac10012e7cddf473d9a895bda92b534a",
+        "e93f00834c609c61f9260db23b8393242797b357be8464870f6fdd003f722fc0",
+        "f7827de1baaf124720a13dedda4de0e152b0712a596e29b3a84eb79a80f2a4de"
+      ],
+      "source_version": "research-twelfth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "documented_after_result_numeric_correction",
+      "strategy_scope": [],
+      "limitations": "只测初始结构失效退出，盈利保护等完整退出没有测；A小周期、C/D未定义等待、九条纪律缺项未补定；同历史和重叠持仓，不是独立未来验证；行情及开盘限制继承第八有限资料；独立验证来源、资金和执行，没有独立重写信号及目标算法；本批没有新增论文全文阅读；未写生产或Zotero；第十二OKR证据待具体确认",
+      "compatibility": "unknown",
+      "evidence_id": "acd-numeric-boundary",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/precision-fix/protocol.md",
+      "strategies": [],
+      "note": "只测初始结构失效退出，盈利保护等完整退出没有测；A小周期、C/D未定义等待、九条纪律缺项未补定；同历史和重叠持仓，不是独立未来验证；行情及开盘限制继承第八有限资料；独立验证来源、资金和执行，没有独立重写信号及目标算法；本批没有新增论文全文阅读；未写生产或Zotero；第十二OKR证据待具体确认"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "第八名义历史与已知公司行动；成交制度仍为有限近似",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "run_lock": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/precision-account-results/run-lock.json",
+        "sha256": "7801e23eacbfe01b48f7d294bb34f2689d8ef5a0f0f57cf86ca095a13d8044d2"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-twelfth-2026-09-08/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§3.2/§9A/C/D/§10/§13/§16；有限日线入场和初始失效退出；参数未改",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-twelfth-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": true,
+      "review_scope": "完整候选来源/独立日账与订单/汇总/首轮与纠错差异；信号及目标选择未独立重写",
+      "status": "limited",
+      "limitations": [
+        "只测初始结构失效退出，盈利保护等完整退出没有测",
+        "A小周期、C/D未定义等待、九条纪律缺项未补定",
+        "同历史和重叠持仓，不是独立未来验证",
+        "行情及开盘限制继承第八有限资料",
+        "独立验证来源、资金和执行，没有独立重写信号及目标算法",
+        "本批没有新增论文全文阅读；未写生产或Zotero；第十二OKR证据待具体确认"
+      ]
+    }
+  }
+]

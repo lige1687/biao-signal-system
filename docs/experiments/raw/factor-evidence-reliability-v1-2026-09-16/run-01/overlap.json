@@ -1,0 +1,26 @@
+{
+ "interval_unit": "相邻交易日的价格变动区间（按日程位置识别的相邻对）；不是共同日期点数",
+ "rows_audited": 1516,
+ "rows_without_interval": 0,
+ "per_label_intervals": 21,
+ "total_interval_refs": 31836,
+ "unique_intervals": 1536,
+ "reuse_ratio": 20.7265625,
+ "reuse_note": "重用比只是描述，不是有效样本数",
+ "adjacent_definition": "相邻观察 = 完整交易日轴位置相差 1",
+ "adjacent_pairs": 1515,
+ "adjacent_shared_mean": 20.0,
+ "adjacent_shared_histogram": {
+  "20": 1515
+ },
+ "adjacent_shared_ratio": 0.9523809523809523,
+ "sparse": {
+  "anchor": "2019-10-08",
+  "step": 23,
+  "grid_points": 66,
+  "grid_policy": "只审计原规则锚点，不扫描其他起点选最好",
+  "adjacent_pairs": 65,
+  "adjacent_shared_max": 0,
+  "note": "锚点步长23的格点标签观察窗口不重叠（区间级）；不重叠不等于统计独立"
+ }
+}

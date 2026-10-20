@@ -1,0 +1,31 @@
+{
+  "review_date": "2026-09-08",
+  "scope": "static_execution_review_only",
+  "full_cash_recalculation_performed": false,
+  "execution_files_modified": false,
+  "verdict": "pass",
+  "open_blocking_findings": [],
+  "checks": {
+    "initial_100000_once_no_weekly_additions": "pass",
+    "default_initial_zero_old_return_object": "pass",
+    "explicit_config_set_exact_acd_ten": "pass",
+    "r0_r1_full_cash_not_one_percent_risk": "pass",
+    "acd_initial_structure_exit_only_via_callback": "pass",
+    "r0_r1_original_ema20_and_cost20_exit": "pass",
+    "single_product_schedule_and_action_filter": "pass",
+    "candidate_source_identity": {"status": "pass", "acd": 379, "diagnostic": 755, "total": 1134},
+    "d_zero_candidate_cash_accounts": {"status": "pass", "accounts": 4, "ending_equity_each": 100000},
+    "unit_tests": {"status": "pass", "count": 7},
+    "source_lock": {"status": "pass", "files": 17, "mismatches": 0},
+    "main_run_completion": {"accounts": 48, "all_input_hashes_unchanged": true}
+  },
+  "clarifications": [
+    "The generic default EMA20/cost20 exit is retained for old behavior; the runner supplies structure_only for A/C/D and no callback for R0/R1.",
+    "The engine schedule is the union of supplied product dates; the runner supplies exactly one product per account."
+  ],
+  "explicit_exclusions": [
+    "No independent daily cash and share reconstruction",
+    "No independent return recomputation",
+    "No investment suitability conclusion"
+  ]
+}

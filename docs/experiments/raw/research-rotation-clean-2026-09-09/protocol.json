@@ -1,0 +1,53 @@
+{
+  "id": "rotation-clean-4etf-v1",
+  "frozen_at": "2026-09-09T07:47:52.544379+00:00",
+  "status": "frozen_before_return_execution",
+  "scope": "new limited allocation experiment; not replication of old E3",
+  "symbols": {
+    "510300": "沪深300ETF",
+    "159915": "创业板ETF",
+    "512400": "有色ETF",
+    "512170": "医疗ETF"
+  },
+  "warmup_start": "2020-07-07",
+  "start": "2021-08-02",
+  "end": "2026-06-30",
+  "initial_cash": 1000000,
+  "external_flows": 0,
+  "cash_interest": 0,
+  "lot": 100,
+  "costs": [
+    0.001,
+    0.002
+  ],
+  "configs": [
+    "equal",
+    "momentum_top3",
+    "equal_sma200",
+    "momentum_top3_sma200"
+  ],
+  "momentum": {
+    "long_lag": 252,
+    "skip_lag": 21,
+    "top_n": 3,
+    "negative_scores_allowed": true,
+    "tie_break": "symbol ascending",
+    "rv_filter": false
+  },
+  "trend": {
+    "window": 200,
+    "entry": "economic_price_index >= mean200",
+    "exit": "economic_price_index < mean200",
+    "reentry": "next completed month-end decision only",
+    "weights": "select list first, allocate 1/N original slots to trend-qualified symbols, unqualified slots cash, no replacement"
+  },
+  "timing": "completed month-end close -> next valid open; daily exit close -> next valid open",
+  "signal_prices": "causal economic price index from nominal close, effective cash distributions and cumulative splits since previous valid quote; no future adjustment",
+  "accounting": "actual units drift; only actual fills charged; record-date dividend entitlement, ex-date receivable, pay-date cash; split units at effectiveness",
+  "execution": "sell before buy; target units computed from opening marked equity, proportionately shrink purchases for fees, round buys to 100; missing/zero volume/known suspension/locked daily limit delay; no same-day resale of purchases",
+  "end_policy": "close mark including receivables, no forced liquidation; future open orders not executed",
+  "metrics": "calendar CAGR365.2425; drawdown includes initial capital; annual return with partial first/last years labelled; average exposure; symbol P&L attribution; fee stress",
+  "selection_limit": "4 currently surviving ETFs chosen for verified nominal data and 2 broad / 2 industry coverage, not historical point-in-time whole ETF universe",
+  "production_changes": false,
+  "okr_update": false
+}

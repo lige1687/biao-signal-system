@@ -1,0 +1,200 @@
+--- docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12/run_accounts.py	2026-09-08 19:59:41
++++ docs/experiments/raw/research-dividend-reinvestment-2026-09-09/execution/run_accounts_attempt02.py	2026-09-09 00:37:11
+@@ -16,11 +16,10 @@
+ sys.dont_write_bytecode = True
+ D = Decimal
+ HERE = Path(__file__).resolve().parent
+-RAW = HERE.parents[1]
+ ROOT = HERE.parents[4]
+ INPUTS = HERE / "inputs"
+-BREADTH = INPUTS / "a_share_breadth_33y_snapshot.json"
+-OUT = HERE / "account-results"
++OUT = HERE / "attempt-02"
++OLD = ROOT / "docs/experiments/raw/research-broad-etf-cash-2026-09-08/first12"
+ 
+ 
+ def load_json(path: Path):
+@@ -237,11 +236,11 @@
+     pending = None
+     signals_out, rejected, trades, daily = [], [], [], []
+     signal_by_day = defaultdict(list)
+-    if method == "hold":
++    if method in ("hold", "hold_dividend_reinvest"):
+         method_signals = []
+     for s in method_signals:
+         signal_by_day[s["eligible_date"]].append(s)
+-    if method == "hold":
++    if method in ("hold", "hold_dividend_reinvest"):
+         first = min(b["date"] for b in run_bars)
+         signal_by_day[first].append({"symbol": symbol, "signal_date": start, "eligible_date": first,
+                                      "target": "1", "reason": "initial_hold_allocation"})
+@@ -258,8 +257,20 @@
+                 dues[action["event_id"]] = amount; receivable += amount
+             elif action["type"] == "split":
+                 units *= D(action["ratio"])
++        paid_sources = []
+         for action in (a for a in actions if a["symbol"] == symbol and a["type"] == "cash_dividend" and a.get("pay_date") == day):
+             amount = dues.pop(action["event_id"], D("0")); receivable -= amount; cash += amount; dividends_received += amount
++            if amount > 0:
++                paid_sources.append({"event_id": action["event_id"], "pay_date": day, "amount": str(amount)})
++        if method == "hold_dividend_reinvest" and paid_sources:
++            if pending is None:
++                pending = {"symbol": symbol, "signal_date": day, "eligible_date": day,
++                           "target": "reinvest_cash", "reason": "dividend_reinvestment",
++                           "payment_sources": paid_sources}
++            elif pending.get("reason") == "dividend_reinvestment":
++                pending["payment_sources"].extend(paid_sources)
++            else:
++                pending.setdefault("payment_sources", []).extend(paid_sources)
+         incoming = signal_by_day.get(day, [])
+         if method == "breadth_three_tier" and pending is not None and week_key(day) != tuple(pending["execution_week"]):
+             rejected.append({"account_id": account_id, "date": day, "signal_date": pending["signal_date"],
+@@ -283,21 +294,39 @@
+             if block:
+                 rejected.append({"account_id": account_id, "date": day, "signal_date": pending["signal_date"], "reason": block})
+             else:
+-                cash2, units2, trade, reason, equity_open, actual = execute_target(
+-                    cash, receivable, units, bar["open"], D(pending["target"]), fee,
+-                    apply_band=(method == "breadth_three_tier"))
++                if pending["reason"] == "dividend_reinvestment":
++                    qty = floor_lot(cash / (bar["open"] * (D("1") + fee)))
++                    equity_open = cash + receivable + units * bar["open"]
++                    actual = units * bar["open"] / equity_open if equity_open else D("0")
++                    if qty <= 0:
++                        cash2, units2, trade, reason = cash, units, None, "reinvestment_below_one_lot"
++                    else:
++                        notional = qty * bar["open"]
++                        cost = notional * fee
++                        cash2, units2 = cash - notional - cost, units + qty
++                        trade, reason = ("buy", qty, notional, cost), None
++                else:
++                    cash2, units2, trade, reason, equity_open, actual = execute_target(
++                        cash, receivable, units, bar["open"], D(pending["target"]), fee,
++                        apply_band=(method == "breadth_three_tier"))
+                 if reason:
+                     rejected.append({"account_id": account_id, "date": day, "signal_date": pending["signal_date"],
+-                                     "reason": reason, "actual_open_weight": float(actual), "target": float(D(pending["target"]))})
++                                     "reason": reason, "actual_open_weight": float(actual),
++                                     "target": pending["target"],
++                                     "payment_sources": pending.get("payment_sources", [])})
+                     pending = None
+                 elif trade:
+                     side, qty, notional, cost = trade
+                     cash, units = cash2, units2; cumulative_fees += cost
+-                    trades.append({"account_id": account_id, "date": day, "signal_date": pending["signal_date"],
+-                                   "side": side, "shares": float(qty), "price": float(bar["open"]),
+-                                   "notional": float(notional), "fee": float(cost), "reason": pending["reason"],
+-                                   "target": float(D(pending["target"])), "equity_open_before_fee": float(equity_open),
+-                                   "actual_open_weight_before": float(actual), "cash_after": float(cash), "units_after": float(units)})
++                    trade_row = {"account_id": account_id, "date": day, "signal_date": pending["signal_date"],
++                                 "side": side, "shares": float(qty), "price": float(bar["open"]),
++                                 "notional": float(notional), "fee": float(cost), "reason": pending["reason"],
++                                 "target": pending["target"] if pending["target"] == "reinvest_cash" else float(D(pending["target"])),
++                                 "equity_open_before_fee": float(equity_open),
++                                 "actual_open_weight_before": float(actual), "cash_after": float(cash), "units_after": float(units)}
++                    if pending.get("payment_sources"):
++                        trade_row["payment_sources"] = pending["payment_sources"]
++                    trades.append(trade_row)
+                     pending = None
+         assert cash >= 0 and receivable >= 0 and units >= 0, (account_id, day, cash, receivable, units)
+         if bar is not None and day not in no_close_mark:
+@@ -314,7 +343,7 @@
+                       "fees": float(cumulative_fees), "dividends_received": float(dividends_received),
+                       "mark_age_days": (date.fromisoformat(day)-date.fromisoformat(mark_date)).days})
+     signals_out = [dict(s, account_id=account_id) for s in method_signals]
+-    if method == "hold":
++    if method in ("hold", "hold_dividend_reinvest"):
+         signals_out = [{"symbol": symbol, "signal_date": start, "eligible_date": min(b["date"] for b in run_bars),
+                         "target": "1", "reason": "initial_hold_allocation", "account_id": account_id}]
+     if pending is not None:
+@@ -343,54 +372,62 @@
+             "summary": summary, "monthly": monthly, "yearly": yearly, "drawdown_recovery": intervals}
+ 
+ 
+-def prepare():
+-    config = load_json(HERE / "config.json")
+-    settings = load_json(INPUTS / "execution-parameters-source.json")
+-    actions = load_json(INPUTS / "actions.json")
+-    helper = load_module(INPUTS / "price-helper/price_basis.py")
+-    bars = {s: read_bars(INPUTS / "bars" / f"{s}-nominal.csv") for s in config["symbols"]}
+-    breadth = build_weekly_breadth(load_json(BREADTH), *config["research_window"])
+-    breakouts = {s: build_breakout_signals(s, bars[s], actions, helper, settings, *config["research_window"]) for s in config["symbols"]}
+-    payload = {"prepared_under_protocol": "2026-09-08", "weekly_breadth": breadth,
+-               "breakout": breakouts, "counts": {"weekly_breadth": len(breadth), **{s: len(v) for s,v in breakouts.items()}}}
+-    save_json(HERE / "prepared-signals.json", payload)
+-    return config, settings, actions, bars, payload
+-
+-
+ def main():
+     parser = argparse.ArgumentParser()
+-    parser.add_argument("--prepare-only", action="store_true")
+     parser.add_argument("--run-main", action="store_true")
++    parser.add_argument("--regress-old-hold", action="store_true")
+     args = parser.parse_args()
+-    if not args.run_main:
+-        config, settings, actions, bars, prepared = prepare()
+-        print(json.dumps({"status": "prepared_only", "counts": prepared["counts"]}, ensure_ascii=False))
+-        return
+     config = load_json(HERE / "config.json")
+     settings = load_json(INPUTS / "execution-parameters-source.json")
+     actions = load_json(INPUTS / "actions.json")
+     bars = {s: read_bars(INPUTS / "bars" / f"{s}-nominal.csv") for s in config["symbols"]}
+-    prepared = load_json(HERE / "prepared-signals.json")
+-    gate = HERE / config["main_run_gate"].split(" with ")[0]
+-    if not gate.exists() or load_json(gate).get("closed") is not True:
+-        raise RuntimeError("main 12 accounts blocked: funding-difference-closed.json closed=true is required")
++    if args.regress_old_hold:
++        regressions = []
++        for symbol in config["symbols"]:
++            for fee_text in config["fees_per_side"]:
++                account_id = f"{symbol}-hold-fee{fee_text}"
++                got = simulate(account_id, symbol, "hold", D(fee_text), bars[symbol], actions, settings, [], *config["research_window"])
++                old_dir = OLD / "account-results" / account_id
++                old_daily = list(csv.DictReader((old_dir / "daily.csv").open()))
++                old_trades = list(csv.DictReader((old_dir / "trades.csv").open()))
++                got_daily = [{k: str(v) for k, v in row.items()} for row in got["daily"]]
++                got_trades = [{k: str(v) for k, v in row.items()} for row in got["trades"]]
++                # Compare serialized values through the same CSV writer to avoid Python str differences.
++                import io
++                def csv_rows(rows):
++                    buf = io.StringIO(); w = csv.DictWriter(buf, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
++                    buf.seek(0); return list(csv.DictReader(buf))
++                ok_daily = csv_rows(got["daily"]) == old_daily
++                ok_trades = csv_rows(got["trades"]) == old_trades
++                regressions.append({"account_id": account_id, "daily_identical": ok_daily, "trades_identical": ok_trades})
++                if not (ok_daily and ok_trades):
++                    raise RuntimeError(f"old hold regression failed: {account_id}")
++        save_json(HERE / "old-hold-regression.json", regressions)
++        print(json.dumps({"status": "old_hold_regression_passed", "accounts": 4}, ensure_ascii=False))
++        return
++    if not args.run_main:
++        parser.error("choose --run-main or --regress-old-hold")
+     if OUT.exists():
+         raise RuntimeError("preserve prior account-results attempt")
+     OUT.mkdir()
+     locked = load_json(HERE / "source-lock.json")
+     for item in locked["files"]:
+-        if sha256(ROOT / item["path"]) != item["sha256"]:
++        if sha256(HERE / item["path"]) != item["sha256"]:
+             raise RuntimeError(f"source changed: {item['path']}")
+-    run_inputs = [HERE/"protocol.md", HERE/"config.json", HERE/"source-lock.json", HERE/"prepared-signals.json", Path(__file__),
++    code_lock = load_json(HERE / "code-lock-attempt-02.json")
++    for path, digest in code_lock["files"].items():
++        if sha256(HERE / path) != digest:
++            raise RuntimeError(f"code changed: {path}")
++    run_inputs = [HERE/"protocol.md", HERE/"config.json", HERE/"source-lock.json", HERE/"code-lock-attempt-02.json", Path(__file__),
+                   INPUTS/"actions.json", INPUTS/"action-coverage.json", INPUTS/"execution-parameters-source.json",
+-                  INPUTS/"dated-restrictions.json", INPUTS/"price-limit-regimes.json", INPUTS/"price-helper/price_basis.py", BREADTH]
++                  INPUTS/"dated-restrictions.json", INPUTS/"price-limit-regimes.json", INPUTS/"price-helper/price_basis.py"]
+     run_inputs += [INPUTS / "bars" / f"{s}-nominal.csv" for s in config["symbols"]]
+     save_json(OUT / "run-lock.json", {"started_at_utc": datetime.now(timezone.utc).isoformat(),
+-              "inputs": {str(path.resolve()): sha256(path) for path in run_inputs}, "gate": load_json(gate)})
++              "inputs": {str(path.resolve()): sha256(path) for path in run_inputs}})
+     summaries = []
+     for symbol in config["symbols"]:
+         for method in config["methods"]:
+-            source = prepared["weekly_breadth"] if method == "breadth_three_tier" else (prepared["breakout"].get(symbol, []) if method == "simple_60_close_breakout" else [])
++            source = []
+             for fee_text in config["fees_per_side"]:
+                 fee = D(fee_text); account_id = f"{symbol}-{method}-fee{fee_text}"
+                 result = simulate(account_id, symbol, method, fee, bars[symbol], actions, settings, source, *config["research_window"])

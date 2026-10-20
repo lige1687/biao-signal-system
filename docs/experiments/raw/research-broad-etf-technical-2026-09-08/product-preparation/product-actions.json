@@ -1,0 +1,116 @@
+{
+  "as_of": "2026-09-08",
+  "scope": "official corporate-action evidence preparation only; no return run",
+  "qualification": "not_yet_eligible_for_complete_cash_backtest",
+  "products": {
+    "510500": {
+      "name": "南方中证500ETF",
+      "specified_breaks": [
+        {
+          "local_break_date": "2015-04-15",
+          "status": "confirmed_real_fund_share_conversion",
+          "event_type": "share_conversion",
+          "record_date": "2015-04-13",
+          "effective_date": "2015-04-14",
+          "resume_date": "2015-04-15",
+          "official_ratio": "0.28032483",
+          "holding_effect": "registered units multiplied by 0.28032483 subject to integer handling; value is intended to remain economically unchanged",
+          "local_close_before": "2.243",
+          "local_close_after": "7.818",
+          "local_price_ratio": "3.485510477039679",
+          "inverse_official_ratio": "3.567290132665023",
+          "warning": "local price ratio is not the official unit ratio",
+          "knowledge_boundary": "Ratio quoted from result notice dated 2015-04-15; earlier announcement and publication time still needed before assigning an as-of action record. Do not invent pre-effective announcement date."
+        },
+        {
+          "local_break_date": "2022-08-29",
+          "status": "confirmed_real_fund_share_split",
+          "event_type": "share_split",
+          "effective_date": "2022-08-26",
+          "resume_date": "2022-08-29",
+          "official_ratio": "1.14539",
+          "rounding": "fractional units rounded upward to one whole unit",
+          "local_close_before": "7.220",
+          "local_close_after": "6.300",
+          "local_price_ratio": "0.872576177285319",
+          "inverse_official_ratio": "0.873065069539633",
+          "effective_phase": "after_close",
+          "first_resumed_trading_date_with_split_units": "2022-08-29",
+          "accounting_warning": "Do not multiply shares before the 2022-08-26 open while using its unsplit nominal price."
+        }
+      ],
+      "official_sources": [
+        {
+          "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2015-04-15/510500_20150415_2.pdf",
+          "announcement_date": "2015-04-15",
+          "role": "2015 conversion result"
+        },
+        {
+          "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2022-08-23/510500_20220823_1_aMMa3ZNB.pdf",
+          "announcement_date": "2022-08-23",
+          "role": "2022 split terms"
+        },
+        {
+          "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2023-02-28/510500_20230228_BD1Z.pdf",
+          "announcement_date": "2023-02-28",
+          "role": "official prospectus disclosure index confirming 2022 notices"
+        }
+      ],
+      "remaining": [
+        "complete 2015-2026 cash dividend and unit-action list",
+        "2022-08-29 result notice original",
+        "continuous nominal OHLCV from 2015",
+        "trading calendar and restrictions"
+      ]
+    },
+    "510050": {
+      "name": "华夏上证50ETF",
+      "confirmed_samples": [
+        {
+          "event_type": "cash_dividend",
+          "announcement_date": "2022-11-24",
+          "cash_per_unit": "0.037",
+          "record_date": "2022-11-30",
+          "ex_date": "2022-12-01",
+          "pay_date": "2022-12-06"
+        },
+        {
+          "event_type": "cash_dividend",
+          "announcement_date": "2024-11-25",
+          "cash_per_unit": "0.055",
+          "record_date": "2024-11-29",
+          "ex_date": "2024-12-02",
+          "pay_date": "2024-12-05"
+        }
+      ],
+      "official_sources": [
+        {
+          "url": "https://www.chinaamc.com/product/publishGgList.do?fundcode=510050",
+          "role": "official product announcement index"
+        },
+        {
+          "url": "https://www.chinaamc.com/c/2022-11-24/678023.shtml",
+          "announcement_date": "2022-11-24",
+          "role": "2022 cash dividend"
+        },
+        {
+          "url": "https://www.chinaamc.com/c/2024-11-25/718094.shtml",
+          "announcement_date": "2024-11-25",
+          "role": "2024 cash dividend"
+        }
+      ],
+      "remaining": [
+        "complete 2015-2026 dividend and unit-action list",
+        "prove whether any in-window split or conversion occurred",
+        "continuous nominal OHLCV from 2015",
+        "trading calendar and restrictions"
+      ]
+    }
+  },
+  "local_inputs_checked": [
+    "docs/experiments/raw/etf_breadth/sh510050_close.parquet",
+    "docs/experiments/raw/etf_breadth/sh510500_close.parquet",
+    "docs/experiments/raw/exit_three_piece/pool/510050.SS.bars.parquet",
+    "docs/experiments/raw/exit_three_piece/pool/510500.SS.bars.parquet"
+  ]
+}

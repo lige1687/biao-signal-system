@@ -1,0 +1,13 @@
+== confirm requests ==
+  >> POST http://127.0.0.1:5174/api/plans/plan_516220_20260913120356_7a07b91b/confirm
+     <- 409 http://127.0.0.1:5174/api/plans/plan_516220_20260913120356_7a07b91b/confirm
+== drawer texts ==
+  监督员 · 计划核对 | 关闭 | 建议项 · 不阻断，自行斟酌 | RR_NOT_COMPUTABLE | ⓘ | 盈亏比未填/不可计算，仅提示 | MODULE_SCENARIO_MISMATCH | ⓘ | 系统检测到的主力场景属模块 C，你选 A；若有理可忽略，否则建议改 C | 系统检测对照 | 模块 = A·稳定上升趋势回调 | 
+  建议项 · 不阻断，自行斟酌 | RR_NOT_COMPUTABLE | ⓘ | 盈亏比未填/不可计算，仅提示 | MODULE_SCENARIO_MISMATCH | ⓘ | 系统检测到的主力场景属模块 C，你选 A；若有理可忽略，否则建议改 C | 系统检测对照 | 模块 = A·稳定上升趋势回调 | 方向 = 做多 | 已确认场景 | 
+  建议项 · 不阻断，自行斟酌 | RR_NOT_COMPUTABLE | ⓘ | 盈亏比未填/不可计算，仅提示 | MODULE_SCENARIO_MISMATCH | ⓘ | 系统检测到的主力场景属模块 C，你选 A；若有理可忽略，否则建议改 C
+  建议项 · 不阻断，自行斟酌
+== conversation draft untouched ==
+review-drawer-open: PASS
+complete-plan-confirmed: FAIL
+conversation-draft-still-draft: PASS(state=draft)
+exit=0

@@ -1,0 +1,33 @@
+{
+  "name": "biao-signal-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "test:structure-controls": "esbuild src/components/klineStructureMarks.ts --bundle --platform=node --format=esm --outfile=/tmp/biao-kline-structure-marks.mjs && node run-structure-regression.mjs",
+    "test:factor-panel": "esbuild src/pages/factorPanelLogic.ts --bundle --platform=node --format=esm --outfile=/tmp/biao-factor-panel-logic.mjs && node run-factor-panel-regression.mjs",
+    "preview": "vite preview",
+    "test:agent-workspace": "esbuild src/pages/agentWorkspaceLogic.ts --bundle --platform=node --format=esm --outfile=/tmp/biao-agent-workspace-logic.mjs && node run-agent-workspace-regression.mjs",
+    "test:agent-prices": "esbuild src/components/agent/priceLinks.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-agent-price-links.mjs && node run-agent-price-regression.mjs",
+    "test:agent-ux": "esbuild src/utils/agentUx.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-agent-ux.mjs && node run-agent-ux-regression.mjs",
+    "test:agent-tasks": "esbuild src/utils/backtestTasks.ts --bundle --platform=node --format=esm --outfile=/tmp/lei-agent-tasks.mjs && node run-agent-tasks-regression.mjs",
+    "test:evidence-card": "node run-evidence-card-regression.mjs"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.59.0",
+    "echarts": "^5.5.1",
+    "marked": "^18.0.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
+  }
+}

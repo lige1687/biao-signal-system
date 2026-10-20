@@ -1,0 +1,35 @@
+{
+  "schema_version": "learning-followup/1",
+  "date": "2026-09-08",
+  "merge_policy": "按paper_id和entry.id增量接入；追加此次方法章节阅读，不覆盖旧的摘要阅读历史；Zotero仅只读核对未写入",
+  "reading_updates": [
+    {
+      "paper_id": "kaminski2014",
+      "read_version": "Journal of Financial Markets 18 (2014) 234–254 正式排版",
+      "reading_level": "方法章节核读；非全文精读，未复现作者计算",
+      "source_locator": "§3.1–3.2印刷238–241；§4.1命题242；§5/§5.1文字246–249；附录与全图表未核完",
+      "source_url": "https://alo.mit.edu/publications/page/13/",
+      "zotero_item_key": "AFXWZZZE",
+      "local_pdf": "docs/experiments/raw/research-thirteenth-2026-09-08/paper-methods/kaminski-lo-2014.pdf"
+    }
+  ],
+  "entries": [
+    {
+      "id": "kaminski2014-exit-and-reentry-20260908",
+      "paper_id": "kaminski2014",
+      "title": "卖出后钱去哪里，什么时候再回来",
+      "category": "实验方法",
+      "body_markdown": "卖出只是完整安排的一步，还要说清楚钱随后放在哪里、什么情况下重新参与。Kaminski与Lo在§3.1把这三件事共同纳入退出策略；§5实证使用股票期货与国债期货，和本系统卖后留现金不同。出处与核读页码见[原文方法记录](../experiments/raw/research-thirteenth-2026-09-08/paper-methods/METHODS.md)。\n\n我们把这个思路落实为两份账：第一份固定原17笔买入的日期、价格和数量，只比较卖出的变化，卖后现金不再买；第二份完整运行相同的A候选，允许卖后再遇到新信号时买入。第一份帮助解释退出时机，第二份体现资金释放、错过和重新参与共同造成的实际效果。\n\n这两份账不能简单相加，也不能把“完整账户差额减逐笔差额”直接称作重新买入的纯贡献：资金数量和机会先后互相影响。原17笔还包括不同配置重复经历同一行情，不是17次独立市场考验。\n\n可借鉴的验收方法由本地研究制定：固定所有原买入，而不只挑大赢家；亏损与仍持有都算；核对分红、费用和卖出后现金；逐笔原结果必须先复现；再列完整账户新增/失去的买入、总财富、最大跌幅和费用。既有入场的3倍与1%资金上限都不是该论文的数值建议。\n\n“卖出减少下跌但少赚”和“多赚但跌得更多”应分别说明，由用户决定实际取舍。有限历史里看到一种结果，不足以宣布退出办法普遍有效；论文中的期货、阈值与再进入机制也没有在这里完整复现。",
+      "method_acceptance": {
+        "origin": "论文退出框架的本地适配；具体17笔/6组与验收由本研究预先固定",
+        "paper_numeric_threshold": null,
+        "automatic_adoption": false
+      },
+      "evidence_paths": [
+        "docs/experiments/raw/research-thirteenth-2026-09-08/protocol.md",
+        "docs/experiments/raw/research-thirteenth-2026-09-08/paper-methods/METHODS.md",
+        "docs/experiments/a-road-exit-account-comparison-2026-09-08.md"
+      ]
+    }
+  ]
+}

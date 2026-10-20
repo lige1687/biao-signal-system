@@ -1,0 +1,79 @@
+{
+ "round": "fixed-etf-evidence-integration R1-R4 集中返修（主控复核 v1.3.0 §11）",
+ "created": "2026-09-13",
+ "note": "修改前冻结：本清单+只读副本在返修动手前保存；旧协议、bundle、run 不覆盖",
+ "protected": {
+  "qualification_bundle": {
+   "path": "src/lei_signal/research/qualification_bundle.py",
+   "sha256": "008c86b2f6d25c103604bd54f8294fd7ca706e5c14ef49e463e772b95ef6e3e0"
+  },
+  "prepare_cli": {
+   "path": "scripts/prepare_momentum_qualified_inputs.py",
+   "sha256": "e039f73abeb31a59592ebf8c6aee73799103b58db6ee0d1c55a612ec9e2619f1"
+  },
+  "momentum_cli": {
+   "path": "scripts/run_momentum_research_prototype.py",
+   "sha256": "21d246a67e334817f574bcf0f5a2c6f206011e62865dffb3d5591f97c700f858"
+  },
+  "momentum_prototype": {
+   "path": "src/lei_signal/research/momentum_prototype.py",
+   "sha256": "5425e4f5494710041ae42816bf259ac7cdc1ed6aaef01986ac1d3d34d90e568f"
+  },
+  "evidence_bundle_v1.0": {
+   "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/evidence-bundle.json",
+   "sha256": "c7b4259f0ea24883b5b7d46880216d57ee123772a126910f12007885a2dce144"
+  },
+  "fixed_etf_protocol_v1.0.1": {
+   "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/protocol-v1.0.1.json",
+   "sha256": "669f956a9b8b5b96e8d8ccd0fd953769733d5c85834b5b68ec21f1d085475dac"
+  },
+  "fixed_etf_protocol_pointer": {
+   "path": "docs/experiments/raw/research-fixed-etf-evidence-integration-2026-09-13/protocol.json",
+   "sha256": "669f956a9b8b5b96e8d8ccd0fd953769733d5c85834b5b68ec21f1d085475dac"
+  },
+  "momentum_protocol_v1.0.7": {
+   "path": "docs/experiments/raw/research-momentum-prototype-2026-09-13/protocol-v1.0.7.json",
+   "sha256": "c42110c1deb2441415eff85669d986378f536c9f83f839c0bf5d300791024a3d"
+  },
+  "momentum_protocol_pointer": {
+   "path": "docs/experiments/raw/research-momentum-prototype-2026-09-13/protocol.json",
+   "sha256": "c42110c1deb2441415eff85669d986378f536c9f83f839c0bf5d300791024a3d"
+  },
+  "momentum_protocol_v1.0.5": {
+   "path": "docs/experiments/raw/research-momentum-prototype-2026-09-13/protocol-v1.0.5.json",
+   "sha256": "03167117d7476efc889014fa7088939c9bcbcc9ce9f6ef2503ea880514fa385b"
+  },
+  "momentum_protocol_v1.0.6": {
+   "path": "docs/experiments/raw/research-momentum-prototype-2026-09-13/protocol-v1.0.6.json",
+   "sha256": "c634ab37537fedca9f9ed6df493ba728e9d488ee499859aa076092d78980c70e"
+  },
+  "test_qualification_bundle": {
+   "path": "tests/unit/test_qualification_bundle.py",
+   "sha256": "3a90f916d8448d0a48ca153a4579edb59037e510f5bfadaf1c82544a6b17a17a"
+  },
+  "test_momentum_qualified_inputs": {
+   "path": "tests/integration/test_momentum_qualified_inputs.py",
+   "sha256": "618597bd27c6a586e992c5d4b26e23c6dedf7eb81cd9ed97763b9d52042b3071"
+  },
+  "test_momentum_prototype_cli": {
+   "path": "tests/integration/test_momentum_prototype_cli.py",
+   "sha256": "f93e99b7b996a3ad0aaa07bb9f0e145ae39f3b528db5c3fe12a0dd3d01267e9e"
+  },
+  "test_momentum_prototype": {
+   "path": "tests/unit/test_momentum_prototype.py",
+   "sha256": "a17d48e0ee88c6b0c01ed5bf76ca02173c98c6a77cee5ccf8f2302c58cc97eae"
+  },
+  "report_evidence_integration": {
+   "path": "docs/experiments/fixed-etf-evidence-integration-2026-09-13.md",
+   "sha256": "0f6965b9314fe73988c34a64002f67acc4af3c532a200010b1a7fd03c78f88dc"
+  },
+  "report_momentum_prototype": {
+   "path": "docs/experiments/momentum-research-prototype-2026-09-13.md",
+   "sha256": "94c06299e2d141d199acae2537ce69333774b8f84ada9f8954a0eb4fd90ca23a"
+  },
+  "registry": {
+   "path": "docs/research/definitions.v1.json",
+   "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05"
+  }
+ }
+}

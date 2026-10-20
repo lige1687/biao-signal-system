@@ -1,0 +1,184 @@
+{
+  "scope": "read-only raw-event comparison; no returns; counts are events, not independent opportunities",
+  "key": [
+    "module",
+    "basis_epoch_start",
+    "basis_epoch_end",
+    "event_id"
+  ],
+  "comparison": {
+    "C": {
+      "old": 1456,
+      "new": 632,
+      "removed": 824,
+      "added": 0,
+      "common": 632,
+      "common_field_changes": 0,
+      "old_confirmed": 881,
+      "new_confirmed": 384,
+      "removed_confirmed": 497,
+      "added_confirmed": 0,
+      "added_event_ids": []
+    },
+    "D": {
+      "old": 16,
+      "new": 11,
+      "removed": 6,
+      "added": 1,
+      "common": 10,
+      "common_field_changes": 0,
+      "old_confirmed": 3,
+      "new_confirmed": 3,
+      "removed_confirmed": 0,
+      "added_confirmed": 0,
+      "added_event_ids": [
+        "module_d_false_breakout:e6857bc4753a2015e1a18dd0"
+      ]
+    }
+  },
+  "removed_confirmed_fixed_samples": [
+    {
+      "module": "C",
+      "event_id": "two_b_reversal:b875551c5e595441d0be7114",
+      "symbol": "sz159915",
+      "available_date": "2015-01-06",
+      "sub_rule": "two_b_reversal_v2_confirmed",
+      "reference_confirmed_date": "2014-12-15",
+      "reference_price": 1.455,
+      "breakdown_date": "2014-12-30",
+      "newer_confirmed_lows_before_breakdown": [
+        {
+          "confirmed_date": "2014-12-26",
+          "pivot_date": "2014-12-23",
+          "price": 1.445
+        }
+      ],
+      "verified_stale_reference": true
+    },
+    {
+      "module": "C",
+      "event_id": "two_b_reversal:0c656fee73487824ad3758a9",
+      "symbol": "sh513100",
+      "available_date": "2020-04-15",
+      "sub_rule": "two_b_reversal_v3_confirmed",
+      "reference_confirmed_date": "2019-11-26",
+      "reference_price": 3.01,
+      "breakdown_date": "2020-03-18",
+      "newer_confirmed_lows_before_breakdown": [
+        {
+          "confirmed_date": "2019-12-09",
+          "pivot_date": "2019-12-04",
+          "price": 3.034
+        },
+        {
+          "confirmed_date": "2020-01-13",
+          "pivot_date": "2020-01-08",
+          "price": 3.194
+        },
+        {
+          "confirmed_date": "2020-02-06",
+          "pivot_date": "2020-02-03",
+          "price": 3.299
+        },
+        {
+          "confirmed_date": "2020-03-04",
+          "pivot_date": "2020-02-28",
+          "price": 3.383
+        }
+      ],
+      "verified_stale_reference": true
+    },
+    {
+      "module": "C",
+      "event_id": "two_b_reversal:c05c10dfcbfc068514c40a6c",
+      "symbol": "sh518880",
+      "available_date": "2026-06-12",
+      "sub_rule": "two_b_reversal_v1_confirmed",
+      "reference_confirmed_date": "2025-11-10",
+      "reference_price": 8.641,
+      "breakdown_date": "2026-06-11",
+      "newer_confirmed_lows_before_breakdown": [
+        {
+          "confirmed_date": "2025-11-21",
+          "pivot_date": "2025-11-18",
+          "price": 8.77
+        },
+        {
+          "confirmed_date": "2025-12-12",
+          "pivot_date": "2025-12-09",
+          "price": 9.026
+        },
+        {
+          "confirmed_date": "2026-01-07",
+          "pivot_date": "2025-12-31",
+          "price": 9.196
+        },
+        {
+          "confirmed_date": "2026-02-05",
+          "pivot_date": "2026-02-02",
+          "price": 9.908
+        },
+        {
+          "confirmed_date": "2026-02-11",
+          "pivot_date": "2026-02-06",
+          "price": 10.05
+        },
+        {
+          "confirmed_date": "2026-02-26",
+          "pivot_date": "2026-02-13",
+          "price": 10.508
+        },
+        {
+          "confirmed_date": "2026-03-12",
+          "pivot_date": "2026-03-09",
+          "price": 10.793
+        },
+        {
+          "confirmed_date": "2026-03-26",
+          "pivot_date": "2026-03-23",
+          "price": 8.906
+        },
+        {
+          "confirmed_date": "2026-05-08",
+          "pivot_date": "2026-04-30",
+          "price": 9.58
+        },
+        {
+          "confirmed_date": "2026-05-25",
+          "pivot_date": "2026-05-20",
+          "price": 9.332
+        },
+        {
+          "confirmed_date": "2026-06-02",
+          "pivot_date": "2026-05-28",
+          "price": 9.108
+        }
+      ],
+      "verified_stale_reference": true
+    }
+  ],
+  "d_added_explanations": [
+    {
+      "event_id": "module_d_false_breakout:e6857bc4753a2015e1a18dd0",
+      "available_date": "2022-07-06",
+      "sub_rule": "module_d_failed",
+      "reference_confirmed_date": "2022-03-21",
+      "legacy_zone_contains_reference": false,
+      "repaired_zone_contains_reference": true,
+      "zone_end_fix_directly_explains_addition": true
+    }
+  ],
+  "diagnose_import": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/diagnose_history.py",
+    "main_executed": false,
+    "functions_used": [
+      "load_inputs",
+      "raw_asof"
+    ]
+  },
+  "source_hashes": {
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tenth-2026-09-08/history-diagnostic/raw-events.json.gz": "05bd72180dac8b9113d9162e516ba8725a4ad132b1de2deb4daca4de52a220a1",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/history-diagnostic/raw-events.json.gz": "74cf89ba3dc6f3bae441201f0e6ab21d9dd7049184de206002b72a8e12ec8ccc",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eleventh-2026-09-08/diagnose_history.py": "20c48a732c7ff15eca6a85e46be1c6a77494d852c460a0c2334a16d6dd8ea0dc"
+  }
+}

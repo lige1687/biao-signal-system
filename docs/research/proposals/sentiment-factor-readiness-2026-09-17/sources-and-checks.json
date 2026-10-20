@@ -1,0 +1,155 @@
+{
+  "task": {
+    "job_id": "32187bb8-4afd-454c-a2fa-17abf7b3e191",
+    "stage": "S1",
+    "executions": ["1/initial", "2/repair"],
+    "date": "2026-09-17",
+    "status": "待主控复核的提案 v2（按主控复核 R1-R3 返修）"
+  },
+  "environment": {
+    "workspace": "/Users/yongbiaoli/Desktop/lei-signal-lab",
+    "branch": "codex/factor-unit-research-20260915",
+    "head_at_start_exec1": "29b150f58b3f6d8c6e558a748c12dac3384af173",
+    "head_at_end_exec2": "29b150f58b3f6d8c6e558a748c12dac3384af173",
+    "head_unchanged": true,
+    "git_actions": "只读（rev-parse/status/log）；未切换、未提交、未暂存、未重置、未清理"
+  },
+  "controller_review_exec1": {
+    "verdict": "部分事实接受，R1-R3 限定文档返修；未接受研究方案，不授权真实统计；G1 部分确认、G2 未过、G3 保留",
+    "independently_confirmed_by_controller": [
+      "15 个非空 SHA 与所列文件一致（主控标准库复算）",
+      "对象 CSV 为表头+4 行×17 列；definitions.v1.json 81 对象",
+      "naaim.csv 127 行（2023-11-20→2026-09-07）、aaii.csv 84 行；available_at 127/127 与 84/84 无显式时区",
+      "_parse_available_at 无时区默认 UTC（代码行为非时区证明）；classify 含 neutral；_compute_percentiles 按此前观察滚动",
+      "主控合成反例：历史 0..51、后续 52..126 单调上升 → 75 个后续点全部处历史排名 100%，证伪『尾带理论上限 7-8 个』"
+    ],
+    "repair_mapping": {
+      "R1": "删除极端样本个位数/尾带上限 7-8 个/单边市段推断；保留 127 行与 52 期预热，可判点改述为理论最多 75 个（顺序/有效性限定），实际带内数量未核算；约 2.3 年改为准确日期区间。落点：README 缺口、object-evidence.csv 证据限制、candidate-review 选择偏差、experiment-proposal §6/§7",
+      "R2": "字段结构与来源证明分层：新增时区/首次发布/许可/值域未核清单；回填时刻规律标【推断】；mtime 不作取得时刻；dossier 差异记为不同输入快照、不宣称旧档案错误；旧政策输赢不作单因子入选/落选依据；复合状态可成为研究对象；无精确发布时间允许明确假设下的受限描述。落点：README 一句话结论与成果 2、CSV 各时点列、candidate-review §一/§二",
+      "R3": "实验规格：拆原始读数/分位状态两候选对象（未登记不写库）；五带互斥分段+unknown 单列对账；主比较=同一合法/成熟/状态可判集合内各带对中性带，预热点只作背景；含自身总体平均之差不作结论依据；撤回持仓 1-3 个月表述；新增美股日历/半日收盘缺口；源时点未核→明确假设下的受限历史描述；prompt 标待裁定不可直接执行。落点：experiment-proposal §2/§4/§6/§10"
+    }
+  },
+  "history_v1_seal": {
+    "dir": "docs/research/proposals/sentiment-factor-readiness-2026-09-17/history-v1/",
+    "manifest": "history-v1/SHA256SUMS.txt",
+    "hashes": {
+      "README.md": "4736357053bb51c62ae0650f572ec90efc92c2d165922539734dd455eccf6f8d",
+      "candidate-review.md": "f348fc2e452fae188c8d1b1d4398c9fe831aa53e826239d9e1882a42a8dcdc43",
+      "experiment-proposal.md": "ebf90cad25a3167120d8cfba004628b94345da20ef29b3c59102b959fc2fc229",
+      "object-evidence.csv": "e487d9eeae64f2efb7b8f3c5b9c8635f8b56ddd30bd47300d339cdc300aec8a5",
+      "sources-and-checks.json": "500635f6f65c2b760411c4328ecbe6d22a267772c077805bca15b3e5d75fba51"
+    },
+    "note": "主控复核前 execution-1 五份交付的原字节封存"
+  },
+  "adopted_norms_reading_status": {
+    "docs/research/experiment-backtest-principles.md": {"version": "v1.1", "sha256": "ac5a676c0635441b66f656c8e1249b69bade36365cc9065ed6341a610b6a53c6", "reading": "导航级实际阅读（版本表行、时点相关条目 grep 核对）；未通读全文"},
+    "docs/research/ai-execution-contract.md": {"version": "v1.0.1（第 3 行版本声明，2026-09-13 生效）", "sha256": "deab6c1ca20505f92d06516ffff943b8501fff2e01f8c6b3928c6626072af962", "reading": "导航级实际阅读（版本行、主控书面复核义务条目）"},
+    "docs/research/definition-standard.md": {"version": "v1.1.0（第 3 行版本声明，2026-09-10 生效）", "sha256": "3406feaea2bbb8d23a91ddc8fa0c85e62ff86437bdf443d459f2c97b0e99cd5c", "reading": "导航级实际阅读（版本行、§5 time 字段口径、§7.1 横截面告诫条目）"},
+    "docs/research/experiment-report-template.md": {"version": "v1.1.0", "sha256": "cae2853f81841de6f424c6bda10e6708dd35574ebb8a325088fe507c5755d54e", "reading": "按任务书与 AGENTS.md 转引版本号；正文未读"},
+    "docs/trading-spec-v1.md": {"sha256": "dd75d70cd22b103e815d3b314b47c36731230aa268d05e42fa447ba55e639798", "reading": "导航级实际检索：『情绪』零命中（确认情绪不在交易规格技术层）；『持仓/个月』检索确认无典型持仓周期直接规定（支撑 v1 表述撤回）"},
+    "configs/rules.v1.yaml": {"version": "ruleset_version 1.5.0", "sha256": "9be26a1626fdf6351478b40b388907e9d8128f74b6bd4aa2b8ff4a850cfdcfd2", "reading": "导航级实际检索：版本行 + sentiment/情绪段名检索（无命中）"},
+    "configs/rules.v2.yaml": {"version": "ruleset_version 2.1.0", "sha256": null, "reading": "导航级实际检索：retail_heat/us_survey_sentiment 段名"},
+    ".claude/skills/macd-reading/SKILL.md": {"sha256": "4a75dea4cb8f0ad2d1cb450c1d4237d87cc5c5b7f50f3eacda10880164c731ab", "reading": "按任务书纳入规范集；本轮与 MACD 无涉，未通读（97 行，仅记录行数与指纹）"},
+    "docs/plan-sector-trend-page.md": {"sha256": "921a483e16081fa975216a6f498a6af8654508df65be4feed64d8d593c24b23d", "reading": "导航级实际阅读（章节标题结构）；板块层方案细节本轮与情绪对象核对无涉"}
+  },
+  "inputs": [
+    {"path": "docs/experiments/raw/factor-unit-readiness-2026-09-15/sentiment-dossier.md", "sha256": "8ca07d2c50cc6b82618c8079b61c9f026197f0e1773255512144191abae27874", "depth": "逐行深读（execution-1，8 个深读名额之一）"},
+    {"path": "docs/experiments/sentiment-four-input-audit-2026-09-08.md", "sha256": "b30b2296a22b5193033ddc763ad1170c67da6070abfe5452959323aed874db82", "depth": "逐行深读"},
+    {"path": "docs/experiments/sentiment-combination-feasibility-review-2026-09-08.md", "sha256": "d6c42a73d1185d0fa0754f4a288f68e6a50a57c976ab50304ec61823fca84836", "depth": "逐行深读"},
+    {"path": "docs/experiments/vix-sentiment-ARCHIVE-2026-09-01.md", "sha256": "56f5ea8166ea86176f08b3aeebfe9a818d68ef41354f346d4a661ca16edbdb58", "depth": "逐行深读"},
+    {"path": "docs/research/proposals/factor-library-direction-exploration-2026-09-16/README.md", "sha256": "08cccdd87253c8dc8f113a936381c80f2f831a259cf7616d3f49d0c9207f0f56", "depth": "逐行深读"},
+    {"path": "docs/research/proposals/factor-library-direction-exploration-2026-09-16/candidate-directions.md", "sha256": "eb56c978555335bcfd50dcb76a15a07a79239d5d84f4b1ae5a5a0805126b321c", "depth": "逐行深读"},
+    {"path": "src/lei_signal/market_context/sentiment.py", "sha256": "b16e3dc8b1063e6a01eba1bbc627ad5c78bf49932bf9c86e38bd8317db97b40b", "depth": "逐行深读（execution-1 loader 合同/资格门；execution-2 补 classify 五带分段、_compute_percentiles 滚动口径、_parse_available_at 时区处理逐段核）"},
+    {"path": "configs/sentiment_evidence.json", "sha256": "cadedcae25f4c193cbcbd186312776ebe7bf89200ac7b4dd08b96650da709254", "depth": "结构深核"},
+    {"path": "data/sentiment/naaim.csv", "sha256": "44a39f542d756f0e1e5b344d747d0abd7176868d58c9fa2157a6ec4ab677a75d", "depth": "结构核查（表头/行数/首末行/来源构成/日期缺口/时区缺失）；git 未跟踪，mtime 2026-09-10 17:05（仅文件元数据）"},
+    {"path": "data/sentiment/aaii.csv", "sha256": "344e6dc41dbe0f3a5376b564adfee0e9c971fbbfe14a59e6fc569fa1e513e9ad", "depth": "结构核查（同上）；84 行中 30 处>10 天缺口"},
+    {"path": "src/lei_signal/market_context/sentiment_signals.py", "sha256": "5d8d6e7b452cc3a40d370cdb56ca5d71c2a18b9e2f423a1431f6e92997a926f4", "depth": "导航+参数段核查"},
+    {"path": "src/lei_signal/market_context/market_mood.py", "sha256": "d5906e7bdaa265ced90417c84c8e23e8411ccc43c0eb00cc30b56999df4bdc78", "depth": "导航+三票合成段核查"},
+    {"path": "src/lei_signal/market_context/retail_heat.py", "sha256": "6311d00aca360b4e9272fbb7b40ab2a8e67f21d1175e024b6d6fd6dfd3a2b086", "depth": "导航（rules.v2 retail_heat 段读取、默认 window20/hot90/cold10）；dossier 所称 rules.v2 v0.4.0 版本号未追溯"},
+    {"path": "src/lei_signal/copilot/sentiment.py", "sha256": "a31c9f607b7671aba5fdf909d6cb2c5eda1983d24070889a40c7e41416c456fe", "depth": "导航"},
+    {"path": "docs/research/definitions.v1.json", "sha256": "c008efb991c40f06bb7fe0236b0892a6902c68a83cb4657ae5c2651e9d270e05", "depth": "结构查询（81 个对象，情绪族零命中）"},
+    {"path": "scripts/sync/export_sync.py", "sha256": null, "depth": "导航（确认 data/sentiment 同步链路注释）"}
+  ],
+  "old_report_claims_review_depth": [
+    {"claim": "情绪族在登记表无对象（dossier 首段）", "review": "本轮独立核验：查询 definitions.v1.json 81 对象，相关正则零命中", "verdict": "属实"},
+    {"claim": "loader 强制 available_at、public_delayed 永不合路、过期不算当前（dossier §1 表）", "review": "本轮独立核验：sentiment.py 必列集合与 _is_current_eligible_at 函数体逐行读", "verdict": "属实"},
+    {"claim": "散户资金流 z 口径 20/120/1.5、前 60 日不计、首判需 140 原始日（dossier §1 表）", "review": "本轮独立核验：sentiment_signals.py 参数字典与文档串", "verdict": "属实（140 日=20+120 推算与审计文档一致）"},
+    {"claim": "cn_mood 三票多数、含价格与资金不是纯情绪（dossier §1 表）", "review": "本轮独立核验：market_mood.py 三成分与 ≥2 票合成行", "verdict": "属实"},
+    {"claim": "本地 CSV 缺 survey_week/available_at 列（dossier §4/§6）", "review": "dossier 所指文件名（aaii_clean/naaim_clean）全树不存在；现行 data/sentiment/*.csv 列结构齐全。未证同一来源生成链", "verdict": "记为不同输入快照的字段结构差异；不宣称旧档案错误或已过时、不视为旧文件已迁移（主控复核 R2 修订）"},
+    {"claim": "dossier §7 下一步=建调查周→发布时点映射表", "review": "现行 CSV 已具该列结构，但生成依据未核", "verdict": "结构已存在；生成链与逐行核证仍为开放缺口（措辞按 R2 收窄）"},
+    {"claim": "美股 AAII/NAAIM 择时七轮全输；A股两融极撤退唯一全面跑赢（dossier §5 转引）", "review": "转引未复验：两轮零回测零收益统计", "verdict": "按原范围转引；不作单因子价值证明或否证"},
+    {"claim": "TS6 证伪、C4 冰点 92% 同向、强热警报降级（dossier §5 转引）", "review": "转引未复验", "verdict": "按原范围转引；不得宣布为已复验结论"},
+    {"claim": "半导体 0 日可算、有色 96 日 0 次四条件同成立（四输入审计）", "review": "转引未复验（原始 JSON 未重开计算）", "verdict": "按原范围转引"},
+    {"claim": "旧 4/4 事件为简化条件观察（可行性审计）", "review": "转引未复验", "verdict": "按原范围转引"},
+    {"claim": "VIX/P-C 三信号主判全负、S1 变体 9/9 为后验（vix 归档）", "review": "转引未复验；遵守其『复活须全新预注册、不复用数字』条款", "verdict": "按原范围转引"}
+  ],
+  "command_ledger": {
+    "note": "execution-1 台账按本轮会话实际记录重建（任务轮次不重置预算）；execution-2 为实时记录。Read 工具读文件 7 次（execution-1 深读）不计入 shell 命令数。",
+    "execution_1": [
+      {"n": 1, "cmd": "git rev-parse --abbrev-ref HEAD && git rev-parse HEAD && git status --porcelain | head -50", "exit": 0},
+      {"n": 2, "cmd": "ls docs/research/proposals/ 及目标目录存在性检查", "exit": 0},
+      {"n": 3, "cmd": "wc -l 八部规范/规格文档", "exit": 0},
+      {"n": 4, "cmd": "ls raw/factor-unit-readiness-2026-09-15 + wc 四份情绪旧文 + ls 方向提案目录", "exit": 0},
+      {"n": 5, "cmd": "grep 数据加载路径（zsh 将裸 === 解释为通配符报错）", "exit": 1, "failure": "eval:1: == not found；随后以引号重跑成功；失败计数不重置"},
+      {"n": 6, "cmd": "wc 五个代码文件 + grep aaii_clean/naaim_clean 引用（无命中）", "exit": 0},
+      {"n": 7, "cmd": "find aaii/naaim 数据文件 + grep survey_week/available_at", "exit": 0},
+      {"n": 8, "cmd": "head/tail/wc data/sentiment 两 CSV", "exit": 0},
+      {"n": 9, "cmd": "grep 分位/z 参数（sentiment.py、sentiment_signals.py、market_mood.py）", "exit": 0},
+      {"n": 10, "cmd": "grep retail_heat/copilot 参数 + python 读 sentiment_evidence.json 键 + grep rules.v2 段名", "exit": 0},
+      {"n": 11, "cmd": "shasum -a 256 ×15 关键输入（首轮指纹）", "exit": 0},
+      {"n": 12, "cmd": "head 研究文档版本行 + git log 数据文件 + stat mtime", "exit": 0},
+      {"n": 13, "cmd": "python CSV 结构核查（行数/来源构成/日期缺口）", "exit": 0},
+      {"n": 14, "cmd": "grep 同步脚本/规范版本 + sed 读资格函数", "exit": 0},
+      {"n": 15, "cmd": "python 读 sentiment_evidence.json signals/falsified/forward_journal", "exit": 0},
+      {"n": 16, "cmd": "grep public_delayed/trading-spec 情绪（零命中）/时点术语", "exit": 0},
+      {"n": 17, "cmd": "sed 读 _is_current_eligible_at + grep definition-standard 时点口径", "exit": 0},
+      {"n": 18, "cmd": "shasum 重哈希（交付前第二轮指纹）", "exit": 0},
+      {"n": 19, "cmd": "diff 两轮指纹 → NO_DRIFT", "exit": 0},
+      {"n": 20, "cmd": "mkdir 提案目录", "exit": 0},
+      {"n": 21, "cmd": "python CSV/JSON 校验", "exit": 1, "failure": "发现 sources-and-checks.json 语法错误（裸字符串缺键），Edit 修复"},
+      {"n": 22, "cmd": "python 复校验（CSV 4×17、JSON 通过）", "exit": 0},
+      {"n": 23, "cmd": "git status 未跟踪项比对（确认本轮仅新增提案目录）", "exit": 0},
+      {"n": 24, "cmd": "git rev-parse HEAD（终核）", "exit": 0}
+    ],
+    "execution_2": [
+      {"n": 1, "cmd": "mkdir history-v1 + cp 五份原文件 + shasum 清单（SHA256SUMS.txt）", "exit": 0},
+      {"n": 2, "cmd": "sed 读 classify_sentiment_percentile/_percentile_label 全段（核五带分段与 neutral/unknown）", "exit": 0},
+      {"n": 3, "cmd": "sed 读 _compute_percentiles（滚动先前观察）与 _parse_available_at（无时区默认 UTC）", "exit": 0},
+      {"n": 4, "cmd": "shasum ×8 规范/规格文档（rules.v1、SKILL、plan-sector、trading-spec、四部研究规范）", "exit": 0},
+      {"n": 5, "cmd": "grep trading-spec 持仓/个月（无典型持仓周期直接规定）+ rules.v1 版本 1.5.0 + plan-sector 章节标题", "exit": 0},
+      {"n": 6, "cmd": "python3 scripts/check_repo_hygiene.py（目录卫生检查，本轮唯一一次）", "exit": 0, "output": "归置自检通过"},
+      {"n": 7, "cmd": "合并结构/链接/文件hash核对（本轮唯一一次；CSV/JSON lint、引用路径存在性、history-v1 哈希复验、15 项关键输入漂移复比）", "exit": 1, "failure_detail": "CSV lint 通过（4 对象×17 列）；JSON lint 通过；34 个引用路径存在性全部通过；15 项关键输入漂移复比 NO_DRIFT；history-v1 哈希复验失败——原因为核对脚本在 history-v1/ 目录内执行 shasum -c，而 SHA256SUMS.txt 条目带 history-v1/ 前缀（双重前缀致文件未找到），属核对命令调用缺陷，非封存字节证据。按复核『失败即停交回』未重跑；正确复验方式（从提案目录执行 shasum -a 256 -c history-v1/SHA256SUMS.txt）留待主控，封存完整性本轮未完成独立复验"}
+    ]
+  },
+  "budget_accounting": {
+    "execution_1": {"structural_check_batches": "3/3", "hygiene_check": "0/1", "deep_read_files": "8/8", "failed_commands": 1},
+    "execution_2_new_allowance": {"merged_check": "1/1", "hygiene_check": "1/1（exit 0，归置自检通过）", "note": "复核新增额度；旧台账未重置；execution-2 其余为只读/哈希/导航命令"},
+    "failure_policy": "失败计数不重置；两轮合计失败命令 2 次（exec1-n5 通配符、exec1-n21 JSON 语法），均已当场修复"
+  },
+  "hash_drift_check": {
+    "execution_1": "核验前后两轮 15 项关键输入逐行 diff：NO_DRIFT",
+    "execution_2": "交付前对同一 15 项再比（含于合并核对）：见 merged_final_check 字段",
+    "head_drift": "无（HEAD 三次读取一致）"
+  },
+  "isolation": {
+    "writes": [
+      "docs/research/proposals/sentiment-factor-readiness-2026-09-17/（现行 5 文件 v2）",
+      "docs/research/proposals/sentiment-factor-readiness-2026-09-17/history-v1/（5 份原字节 + SHA256SUMS.txt）"
+    ],
+    "zcode_exclusive_untouched": ["src/lei_signal/research/breadth_description.py", "src/lei_signal/research/breadth_description_contract.py", "tests/unit/test_breadth_description.py", "docs/experiments/raw/breadth-b200-first-description-2026-09-17/"],
+    "shared_paths_not_written": ["registry.json", "INDEX.md", "OKR", "configs/", "src/", "definitions.v1.json", "docs/experiments/"],
+    "no_network_no_install_no_recompute_no_backtest_no_return_stats": true,
+    "agent_workspace_avoided": "scripts/agents/news-agent-20260917/ 未采信其重复路径"
+  },
+  "merged_final_check": {
+    "executed": true,
+    "exit_code": 1,
+    "parts": {
+      "csv_lint": "PASS（表头+4 对象行，每行 17 列）",
+      "json_lint": "PASS（本文件在核对时语法有效；此后仅经两处定点 Edit 更新本字段与台账 exit 码，Edit 后已做单一 json.load 自检）",
+      "referenced_paths_exist": "PASS（34/34，含 history-v1 六文件与全部规范/代码/数据路径）",
+      "key_input_drift_recheck": "PASS（15 项关键输入对 execution-1 记录值 NO_DRIFT）",
+      "history_v1_hash_verify": "FAIL——核对命令调用缺陷（cwd 与清单前缀叠加），非封存字节证据；按『失败即停交回』未重跑，封存完整性未完成独立复验，留待主控以 shasum -a 256 -c history-v1/SHA256SUMS.txt（提案目录下）复验"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+[
+  {
+    "id": "U1-direct-workspace",
+    "expected": "Open Chinese setup, no module-code instruction",
+    "demandedModule": false,
+    "openedPanel": true,
+    "verdict": "PASS"
+  },
+  {
+    "id": "U1-direct-console",
+    "expected": "Open Chinese setup, no module-code instruction",
+    "demandedModule": false,
+    "openedPanel": true,
+    "verdict": "PASS"
+  },
+  {
+    "id": "U3-late-workspace",
+    "expected": "Old task response must not append into new conversation",
+    "tracked_still_registered": true,
+    "staleAppended": false,
+    "verdict": "PASS"
+  },
+  {
+    "id": "U3-late-console",
+    "expected": "Old task response must not append into new conversation",
+    "tracked_still_registered": true,
+    "staleAppended": false,
+    "verdict": "PASS"
+  },
+  {
+    "id": "U2-invalid-preselection",
+    "expected": "Only valid visible capabilities may be submitted",
+    "button": "<button type=\"button\" class=\"btn primary\" disabled=\"\">创建这次补测</button>",
+    "verdict": "PASS"
+  },
+  {
+    "id": "U2-loading-no-static-fallback",
+    "expected": "No static capability stand-in while loading",
+    "button": "<button type=\"button\" class=\"btn primary\" disabled=\"\">创建这次补测</button>",
+    "staticFallback": false,
+    "verdict": "PASS"
+  },
+  {
+    "id": "U2-malformed-capabilities-no-submit",
+    "expected": "Malformed capability payload must block submit",
+    "button": "<button type=\"button\" class=\"btn primary\" disabled=\"\">创建这次补测</button>",
+    "staticFallbackC": false,
+    "verdict": "PASS"
+  },
+  {
+    "id": "source-integrity",
+    "verdict": "PASS",
+    "hashes": {
+      "web/src/pages/AgentWorkspacePage.tsx": "18a74bd7248693d1f0864e067fbe09bfe153edbd1e803db0c7afbf6f6c9d6209",
+      "web/src/components/AgentConsole.tsx": "31638a9db2ef7792e50b51aeb3a686d7d568117389cd73f578de9b14824eb25b",
+      "web/src/components/agent/BacktestSetupPanel.tsx": "1c9b7933262c16d4c796f7ac9bb7d703e0c1e3ddde1313b75fd5a6f9c475ed30",
+      "web/src/utils/agentUx.ts": "a7cedf3bbb46cf5badc187ebe7e079e1095bb9e6f9029082e37a25c3a51e30a4"
+    }
+  }
+]

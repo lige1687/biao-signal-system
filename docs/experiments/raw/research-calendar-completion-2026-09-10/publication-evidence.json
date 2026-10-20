@@ -1,0 +1,78 @@
+{
+  "schema_version": "research-calendar-publication/1.0",
+  "purpose": "回答「当时是否已经知道后续开休市安排」——与「事后确认某日是否开市」是两个不同问题",
+  "method": "从上交所休市安排栏目取得公告清单与正文；发布日期同时由 URL 命名（c_YYYYMMDD_id）与正文落款两处指示",
+  "caveat": [
+    "本证据来自上海证券交易所；逐日交易标志数据来自深圳证券交易所，两者是不同发布方",
+    "URL 中的日期是命名约定，不是接口声明字段；已用正文落款交叉印证，但仍非机器可读的发布时间字段",
+    "只观察到 2026 年的年度通知；2019—2025 年的年度通知未取得",
+    "只读了一份逐节假日公告（春节），不足以断言所有逐节假日公告都只是转述"
+  ],
+
+  "annual_notices": [
+    {
+      "year": 2026,
+      "title": "关于上海证券交易所2026年部分节假日休市安排的通知",
+      "document_number": "上证公告〔2025〕45号",
+      "publisher": "上海证券交易所",
+      "published_at": "2025-12-22",
+      "published_at_basis": "URL 命名 c_20251222_10802507 + 正文出现 2025年12月22日",
+      "url": "http://www.sse.com.cn/disclosure/announcement/general/c/c_20251222_10802507.shtml",
+      "covers": "2026 年全年部分节假日休市安排"
+    }
+  ],
+
+  "per_holiday_notices": [
+    {
+      "title": "关于2026年春节休市安排的公告",
+      "document_number": "上证公告〔2026〕5号",
+      "published_at": "2026-02-05",
+      "url": "http://www.sse.com.cn/disclosure/announcement/general/c/c_20260205_10808618.shtml",
+      "cites": "上证公告〔2025〕45号",
+      "relationship": "restatement",
+      "relationship_evidence": "正文原句「根据《关于上海证券交易所2026年部分节假日休市安排的通知》（上证公告〔2025〕45号），上海证券交易所现将2026年春节休市安排通知如下」",
+      "stated_arrangement": "2月15日（星期日）至2月23日（星期一）休市，2月24日（星期二）起照常开市；2月14日、2月28日为周末休市"
+    },
+    {
+      "title": "关于2026年清明节休市安排的公告",
+      "published_at": "2026-03-31",
+      "url": "http://www.sse.com.cn/disclosure/announcement/general/c/c_20260331_10813622.shtml",
+      "relationship": "not_read"
+    },
+    {
+      "title": "关于2026年劳动节休市安排的公告",
+      "published_at": "2026-04-23",
+      "url": "http://www.sse.com.cn/disclosure/announcement/general/c/c_20260423_10816345.shtml",
+      "relationship": "not_read"
+    },
+    {
+      "title": "关于2026年端午节休市安排的公告",
+      "published_at": "2026-06-11",
+      "url": "http://www.sse.com.cn/disclosure/announcement/general/c/c_20260611_10821419.shtml",
+      "relationship": "not_read"
+    }
+  ],
+
+  "cross_exchange_check": {
+    "month": "2026-02",
+    "sse_source": "上证公告〔2026〕5号 正文声明的休市安排 + 周末",
+    "szse_source": "深交所 monthList 接口 jybz 标志",
+    "sse_closed_days": 14,
+    "szse_closed_days": 14,
+    "only_in_sse": [],
+    "only_in_szse": [],
+    "verdict": "两所在该月完全一致",
+    "scope_limit": "仅核对 2026-02 一个月；其余月份跨所差异仍未核"
+  },
+
+  "what_this_answers": {
+    "for_2026_dates": "开休市安排自 2025-12-22 起可知（依据上证公告〔2025〕45号）",
+    "for_2019_to_2025_dates": "未知——对应年度通知未取得，不得假设同样提前公布"
+  },
+
+  "what_this_does_not_answer": [
+    "深交所自身的公告发布时间（本证据来自上交所）",
+    "年度通知发布后是否曾被调整（只读了一份逐节假日公告，且它是转述）",
+    "2019—2025 各年的可知时点"
+  ]
+}

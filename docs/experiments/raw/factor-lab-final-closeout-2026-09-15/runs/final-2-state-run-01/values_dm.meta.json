@@ -1,0 +1,161 @@
+{
+  "artifact_id": "dm",
+  "metadata": {
+    "reference": "candidate:lei.dual_ma.bull_state@draft-1",
+    "card": {
+      "id": "candidate:lei.dual_ma.bull_state",
+      "version": "draft-1",
+      "name": "双均线共同确认状态（候选）",
+      "type": "state_signal",
+      "definition": {
+        "formula": "Close>EMA20 且 Close>SMA20，两均线相比前一观察上升，signal_color=green（读取当前状态，不要求同日上穿）",
+        "parameters": {
+          "ema": 20,
+          "sma": 20,
+          "color": "green"
+        },
+        "unit": "boolean"
+      },
+      "card_draft_path": "docs/experiments/raw/factor-research-workbench-v1-2026-09-14/candidate-card-dual-ma-bull-state-draft-1.md",
+      "status": {
+        "definition_clarity": "explicit",
+        "data_qualification": "synthetic_only",
+        "implementation": "bound_to_existing_functions",
+        "effectiveness": "no_evidence",
+        "production": "not_authorized"
+      },
+      "readiness_semantics": "warmup/缺失行原函数输出False；适配层单列 readiness，未就绪行 value=NaN、missing_reason=warmup_not_ready"
+    },
+    "card_kind": "candidate",
+    "type": "state_signal",
+    "unit": "boolean",
+    "purpose": "state_diagnostic",
+    "entity_axis": "instrument",
+    "value_type": "boolean",
+    "protocol": {
+      "protocol_id": "factor-lab-demo-2-state",
+      "version": "1.2.0",
+      "kind": "state_diagnostic",
+      "data_mode": "synthetic",
+      "sha256": "65c5974162c23fc8effc2c5c220c2413ae2cda002c5a41ff041dbffa938e6e8f"
+    },
+    "data_identity": {
+      "inputs": {
+        "bars": {
+          "kind": "dict",
+          "keys": [
+            "dm_a",
+            "dm_b"
+          ]
+        }
+      },
+      "declared_inputs": {
+        "bars_dm_a": {
+          "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_bars_dm_a.csv",
+          "sha256": "824142ed06ee0e9f6b55d0bb599b0f7acdaea6a5076f3133c31147715eb85487",
+          "format": "bars"
+        },
+        "bars_dm_b": {
+          "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_bars_dm_b.csv",
+          "sha256": "cee05419e8e096f27853f6d22ad2234fd7fb1ff6ae4fd522e8f40db8ea072d1d",
+          "format": "bars"
+        },
+        "state_breadth_close": {
+          "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_breadth_close.csv",
+          "sha256": "374da151042a538f4915fd8578c3f205450f3380277aa9d4cca57f42e8f530ca",
+          "format": "wide_prices"
+        },
+        "state_membership": {
+          "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_membership.json",
+          "sha256": "cc18619c78aca9f043adfd81dc44f8ed81fdf86578a3c5c60d5b79e4506523d7",
+          "format": "membership"
+        }
+      },
+      "synthetic": true
+    },
+    "code_identity": {
+      "modules": [
+        {
+          "path": "src/lei_signal/rules/dual_ma.py",
+          "sha256": "5c41da87036e0e318bacab663aa5509d73f99f301f805a76559b016b99aa3f7c"
+        },
+        {
+          "path": "src/lei_signal/rules/lei_color.py",
+          "sha256": "ae6f3a2547cc37dd1ebdfea1bea206f932defdd8cd90d4061630914c0fc9d4d7"
+        },
+        {
+          "path": "src/lei_signal/features/indicators.py",
+          "sha256": "098b931d3527f8b8a9e77961e62402c5a79eefcfce0e91b84bb565e65f5f5c26"
+        },
+        {
+          "path": "src/lei_signal/domain/rules_config.py",
+          "sha256": "05df350a21e5b176f28d95fb99cbabf68dc0bb8c86b9beb0c77d8b8c68256031"
+        },
+        {
+          "path": "src/lei_signal/research/definitions.py",
+          "sha256": "b6d5a35532644c371ffbfc541a21bd52c05114db9fcb1cc3071c1965ed41ad59"
+        }
+      ]
+    },
+    "calendar": {
+      "timezone": "Asia/Shanghai",
+      "note": "合成日历；真实交易日历资格不在本轮范围"
+    },
+    "time_evidence": {
+      "observation_time": "合成交易日收盘",
+      "evaluation_cutoff": "2030-01-01T15:00:00+08:00"
+    },
+    "synthetic": true,
+    "definition_status": "explicit",
+    "data_status": "synthetic_input",
+    "implementation_status": "bound_to_existing_functions",
+    "effectiveness_status": "no_evidence",
+    "production_authorization": "not_authorized"
+  },
+  "findings": [
+    {
+      "code": "entity_readiness",
+      "entity_id": "dm_a",
+      "not_ready_rows": 20,
+      "state_true_rows": 30,
+      "state_false_rows": 15,
+      "detail": "未就绪行不计为有效看空样本（候选卡 readiness 语义）"
+    },
+    {
+      "code": "entity_readiness",
+      "entity_id": "dm_b",
+      "not_ready_rows": 20,
+      "state_true_rows": 0,
+      "state_false_rows": 45,
+      "detail": "未就绪行不计为有效看空样本（候选卡 readiness 语义）"
+    },
+    {
+      "code": "parameter_binding_ok",
+      "detail": "候选只读调用 dual_ma_bull_state/classify_colors/compute_features；未复制公式、未改生产"
+    }
+  ],
+  "declared_inputs": {
+    "bars_dm_a": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_bars_dm_a.csv",
+      "sha256": "824142ed06ee0e9f6b55d0bb599b0f7acdaea6a5076f3133c31147715eb85487"
+    },
+    "bars_dm_b": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_bars_dm_b.csv",
+      "sha256": "cee05419e8e096f27853f6d22ad2234fd7fb1ff6ae4fd522e8f40db8ea072d1d"
+    },
+    "state_breadth_close": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_breadth_close.csv",
+      "sha256": "374da151042a538f4915fd8578c3f205450f3380277aa9d4cca57f42e8f530ca"
+    },
+    "state_membership": {
+      "path": "../factor-research-workbench-v1-2026-09-14/synthetic_inputs/state_membership.json",
+      "sha256": "cc18619c78aca9f043adfd81dc44f8ed81fdf86578a3c5c60d5b79e4506523d7"
+    }
+  },
+  "rows": 130,
+  "missing_reason_counts": {
+    "None": 90,
+    "warmup_not_ready": 40
+  },
+  "quality": "synthetic_only；生产授权无"
+}

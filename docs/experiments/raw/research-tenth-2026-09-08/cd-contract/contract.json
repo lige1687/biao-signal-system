@@ -1,0 +1,181 @@
+{
+  "scope": {
+    "date": "2026-09-08",
+    "strategy_layer": "§9 C/D 入场触发与§2.3/§9 C3,D3 初始结构失效；同时核对§3.2信息何时可用",
+    "production_changed": false,
+    "okr_changed": false,
+    "real_fund_candidates_run": false,
+    "returns_run": false,
+    "parameter_tuning": false,
+    "b_price_box_semantics_confirmed": false
+  },
+  "freeze": {
+    "eighth_package_contains_cd": false,
+    "eighth_dependencies": "../research-eighth-2026-09-08/b-research-fix/research-package（实际绝对路径见source-manifest.json）",
+    "tenth_supplement": "当前 C/D/dual_ma 与既有测试需要的 lei_color/long_trend/volume 原样复制到本目录 research-package；不冒称第八已包含",
+    "effective_ledger": "research-package/configs/rules.v2.yaml，由冻结的rules_config.py加载；v1仅作追溯",
+    "sha_manifest": "source-manifest.json"
+  },
+  "source_authority": {
+    "top": "docs/trading-spec-v1.md §3.2,§9 C/D,§2.3,§14",
+    "old_handbook": "第九 sources/handbook-30-videos-1a321ce.md §2.6、§3.4、§3.5 已在本地保存的原文",
+    "old_v2": "第九 sources/trading-spec-v2-1a321ce.md §9 C/D（历史补全口径，不替代当前最高文档）",
+    "provenance": "均为 research_proxy。最高规格C1细节缺失不等于无源；破前低再收回及D双动作可追溯旧手册。左右3根、5根收复、数值化密集条件是代理参数；本轮保持原值。"
+  },
+  "C": {
+    "rule_version": "3.0.0",
+    "entry_versions_are_not_rule_versions": [
+      "v1",
+      "v2",
+      "v3"
+    ],
+    "inputs": {
+      "declared_required": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "ema20",
+        "ema120",
+        "sma20",
+        "signal_color"
+      ],
+      "pivot": "严格左3右3；available_date = pivot.index+3；仅确认日及以后扫描",
+      "features": "使用已完成日线当日及过去数据；ema20/sma20需前一日。ema120只记录负乖离增强；signal_color为既有Python规则输出",
+      "market_data_requirement": "非退化、口径一致复权OHLCV；真实基金数据资格由根任务独立审计"
+    },
+    "candidate": {
+      "declared_l1": "最后一个已确认摆动低点",
+      "actual_l1": "每个历史摆动低点独立从其确认日扫描到未来，未被后来确认的低点替代",
+      "break": "首次close<L1，L2=当日low；同日不能收回，因为收盘同时小于/大于等于L1不可能",
+      "window": "从breakdown后第1根至第5根（差值1..5）close>=L1；第6根才记超时；参数保持5",
+      "v1": "首次在窗口内收回L1，当日收盘可用",
+      "v2": "收回当日或以后，昨日close<=昨日EMA20、当日close>当日EMA20、当日EMA20>昨日EMA20；这是穿回并上升，不只是正斜率",
+      "v3": "收回当日或以后，当日close>EMA20且>SMA20、两条均线较昨日都上升、signal_color==green；不要求v2先发生",
+      "waiting": "收回事实保留；v2/v3等候无最大期限，不再次要求close>=L1；首次各发一次"
+    },
+    "initial_invalidation": "破位后每根先查close<截至昨日L2则失败，再在尚未收回时用当日low下移L2；收回后L2冻结，各版本事件 stop_price=L2。此先失败再更新顺序在有效账本C3明文存在，不记为实现错误。",
+    "detector_end": "未收回超时/收盘破L2则停止该L1；已收回等待v2/v3直到三版本齐备后停止。若三版本在收回日同时发出，continue后仍多处理下一日再return；不能把failed事件当成完整持仓退出流。",
+    "execution_end": "第八engine以确认日事件转EntrySpec，最早下一根开盘；持仓逐根close<冻结stop_price，下一根开盘退出；末尾无下一根则未执行。执行退出读取价位，不依赖检测器继续发送failed。此处只静态核对，未跑收益。",
+    "eligibility": "可研究原文与信息时点；现行全量事件因旧L1未替换问题，不作已合格收益候选。"
+  },
+  "D": {
+    "rule_version": "2.0.0",
+    "direction": "仅多头；空头并未实现检测事件",
+    "inputs": {
+      "declared_required": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "sma20",
+        "close_lag20"
+      ],
+      "effective_extra": [
+        "ema20",
+        "ema60",
+        "ema120",
+        "sma60",
+        "sma120"
+      ],
+      "context": "clock3与六线带宽依赖全部六线；缺上述有效额外列会报错而非[]",
+      "pivot": "严格左3右3；代码用确认日在密集区区间内，未要求摆动点发生日在区间内"
+    },
+    "zone": {
+      "parameters": {
+        "minimum_consolidation_bars": 126,
+        "cluster_threshold": 0.02,
+        "zone_exit_bars": 20,
+        "reclaim_window": 5
+      },
+      "start": "横盘状态寿命>=126 且当日clock3 且六线max/min-1<0.02",
+      "actual_end": "active连续不成立21根才确认结束，却将区间end倒写为离开首日；未结束时end=len(frame)",
+      "b_relation": "只复用B的带宽和状态寿命函数；D自己重写区间结束规则。B按带宽不成立累计20根、并考虑持有状态；两者完整生命周期并非同一真相源"
+    },
+    "candidate": {
+      "declared_reference": "密集区最近一个已确认波谷",
+      "actual_reference": "遍历所有确认日在最终区间内的波谷，每个独立扫描",
+      "break": "close<valley，false_low=low",
+      "reclaim": "破位后1..5根close>=valley；超时或close<截至昨日false_low失败",
+      "action2": "当前close>SMA20 且close>close_lag20；未保存此前action2成立事实",
+      "confirm": "曾在窗口内收回且当前action2成立；不再要求当前close>=valley；未设等待期限",
+      "stop": "false_low从破位后持续用low取更小值，包含收回后等待均线条件的阶段；事件确认后冻结为stop_price"
+    },
+    "detector_end": "首次确认或失败后停止该波谷；扫描不受zone_end限制，可在密集区结束很久之后才破位/确认。",
+    "execution_end": "与C使用第八engine同一结构失效退出：收盘跌破已锁定stop，下一根开盘；检测器确认后停止不等于持仓没有退出。",
+    "eligibility": "追加未来会删除过去事件，违反§3.2；不具备收益研究资格。先保留输入资格诊断与反例。"
+  },
+  "findings": [
+    {
+      "id": "D-PIT-01",
+      "type": "clear_implementation_defect",
+      "severity": "blocking",
+      "code": "src/lei_signal/rules/module_d_false_breakout.py:148,149,153,279",
+      "plain": "后来长期离开密集状态，会把之前已经出现的确认事件删掉。",
+      "evidence": "synthetic-results.json/d_future_zone_end；d-future-zone-end.csv",
+      "source": "最高规格§3.2不得由后来形成的状态改写过去信号"
+    },
+    {
+      "id": "C-REF-01",
+      "type": "clear_implementation_defect",
+      "severity": "blocking",
+      "code": "src/lei_signal/rules/two_b_reversal.py:305",
+      "plain": "已有更新的前低时，系统还拿旧前低重复产生候选。",
+      "evidence": "c-recent-valley.csv：前低100和101，最新是101；同一天仍产生两组确认",
+      "source": "有效账本C1明确最后一个已确认swing low"
+    },
+    {
+      "id": "D-REF-01",
+      "type": "clear_implementation_defect",
+      "severity": "blocking",
+      "code": "src/lei_signal/rules/module_d_false_breakout.py:277",
+      "plain": "同一密集区内的新旧波谷都被当作最近波谷，各发一次确认。",
+      "evidence": "d-recent-valley.csv：99和99.2，同一天各发一次",
+      "source": "手册§3.5最近一个波峰及对称假跌破、模块说明最近一个波谷；账本reference=dense_zone_recent_swing"
+    },
+    {
+      "id": "CD-DEF-01",
+      "type": "definition_gap",
+      "plain": "收回之后最多等多久、期间再跌回前低下方是否仍能等待确认，尚缺统一说明。",
+      "actual": "C与D都无限等候、保留收回事实；直到结构失效才终止"
+    },
+    {
+      "id": "D-DEF-02",
+      "type": "definition_gap",
+      "plain": "密集状态结束之后，旧波谷是否还允许用于新的假跌破，缺少明确有效期限。",
+      "actual": "扫描可延续到全部数据末尾；当前B价格箱体边界尚待用户确认，不能擅自替代"
+    },
+    {
+      "id": "D-DEF-03",
+      "type": "definition_gap",
+      "plain": "两个动作不分先后，是否代表先满足的均线条件可以保留、还是确认日必须仍成立，需要写清楚。",
+      "actual": "收回事实有记忆；均线条件只看当前，不保留早先成立"
+    },
+    {
+      "id": "D-DEF-04",
+      "type": "definition_gap",
+      "plain": "假跌破最低价是收回日锁定，还是等均线确认才锁定，账本“破位期间”未完全说明。",
+      "actual": "D收回后仍能随当日low下移；C收回后锁定。此差异发生在D入场之前，不能直接指控为亏损后移动止损。"
+    },
+    {
+      "id": "C-PROXY-01",
+      "type": "documented_proxy_choice",
+      "plain": "v2要求重新穿回EMA20并向上，并非只要均线在上升；有效账本已指向该函数，不应擅自放宽。"
+    },
+    {
+      "id": "CD-END-01",
+      "type": "contract_boundary",
+      "plain": "确认检测器会停止跟踪；持仓退出须使用入场时锁定的失效价，不能只等failed事件。",
+      "actual": "冻结engine已有独立逐日价位退出，不能仅凭检测器停止断言系统无止损。"
+    }
+  ],
+  "tests": {
+    "existing": "10 passed，existing-tests.txt；对照未修改既有单测",
+    "synthetic": "4组固定参数输入均完成断言：C新旧前低、D未来删除、D新旧波谷、C版本时点；没有执行收益",
+    "prefix": "C第一夹具27个所有前缀完整事件字段一致；有限合成验证不证明所有真实路径无问题",
+    "inputs_limitation": "新增CSV为隔离规则的预计算指标输入；均线列未由这些OHLC重算。因此可证明函数契约反例，不证明真实行情频率。既有10单测使用真实compute_features从合成OHLC计算。",
+    "import_isolation": "synthetic-results.json/imports全部落在cd-contract/research-package",
+    "real_market_scope": "未运行真实基金候选/持仓/收益"
+  },
+  "disposition": "保留问题与证据，不改生产或冻结代码，不补定义，不调参数；C/D收益研究暂不准入。"
+}

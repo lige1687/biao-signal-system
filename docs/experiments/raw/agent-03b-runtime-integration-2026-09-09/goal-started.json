@@ -1,0 +1,948 @@
+{
+  "title": "03B：接通标的讨论、按需补测与计划草稿",
+  "purpose": "本会话已讨论的工程目标；实施范围以总控任务书为准，不包含研究05—08、真实迁入、收费调用、发布或交易。",
+  "parent_id": "okr-b1ce64d26449",
+  "priority": "high",
+  "owner": "GLM工程执行者",
+  "target_date": null,
+  "next_action": "开发范围已提交用户验收；下一步依raw/integration-plan.md在隔离副本准备向Desktop/lei-signal-lab定向合入，保留运行目录13个提交及未提交修改，核对前置依赖/迁移和两入口。尚未实际合入、启用真实库或切服务。",
+  "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。\n\n2026-09-09 Codex单入口交付独立复验：原p0+u1—u5 6/6、固定20/20、分进程18+23=41回归本次全部通过。新增全局chat500/stream失败；原问题中断恢复借用后续窗口；多个运行仍默认最新；错误类型字符串被恢复completed；顶层/冻结引用损坏丢卡、采用坏区间500。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-single-context-controller-review-2026-09-09.md，同主题raw保留真实HTTP/worker/组件证据。整体mixed；全局回归使c1待补，c2/c3未闭合，c4已验收部分保留。目录角色纠正：Desktop/lei-signal-lab为实际使用/最终集成目录，sync为此次开发工作目录，未自动同步、未合入。生产源码/业务库/研究目标未改。\n\n2026-09-09 Codex所有路径独立复验：原contract6/6、z2—z6全过、全局两入口全过；原固定20/20、分进程18+23=41回归全过。额外2正例（唯一运行采用、真实stream恢复与重放）通过。余3实测缺陷：bool false→true仍恢复completed（后续支持集合已挡，未夸大为支持问题）；明确运行编号未被解析且数字被误作证券，证据卡消失；params.symbols=7在类型检查前遍历毁卡。整体mixed，c1/c4保留完成，c2/c3待补。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-all-paths-controller-review-2026-09-09.md，同主题raw含本次新JSON/JUnit与stream证据。只在sync开发验收，未合入实际使用的Desktop/lei-signal-lab；未动策略、业务库或研究目标。\n2026-09-09 GLM按任务书03B-R3-values-selection-and-validation补d1/d2/d3并独立复验：_type_eq布尔分支改为类型+值同时一致且拒绝字符串伪装（d1已修，翻转gap_momentum仍REJECT、原值ACCETP）；resolve.parse_window_choice新增_RUN_ID_RE/_extract_run_id把真实运行编号传入选择器，api/routes/agent.py按_RUN_ID_RE排除编号片段被误作证券（d2已修，真实worker双运行+真实HTTP正例通过、无编号/非本对象拒绝不丢卡）；backtest_requests.py对params.symbols先于遍历做类型守卫（d3已修，错误类型返回结构化拒绝、保留其他记录不毁卡）。验收：复制总控matrix.py+fixture.py基线→5/5 PASS且source_unchanged True；固定20=boundaries7+additional7+remaining6=20/20；contract.py p0+u1—u5=6/6；z2—z6全过、z1仅999999.SS→502单列（不抹FAIL）；全局两入口全过；分进程18+23=41回归全过。只在sync开发验收，未合入Desktop/lei-signal-lab；未动策略/业务库/研究目标。c2/c3待总控复验确认后落实。\n\n2026-09-09 Codex三项修复复验（实验规范v1.0，仅工程）：matrix5/5、contract6/6、z2—z6、global2/2、真正固定20/20、18+23=41回归均通过；4个实际选择/归属正例通过。d1/d3关闭，d2主流程通过；两项原明文要求仍缺：实际问题快照不保留独立run_id，继承null（source说明仍可追溯，不夸大为全部丢失）；按值全局排除编号片段会误删编号之外用户明确证券（518880碰撞，纯解析函数对照）。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-values-controller-review-2026-09-09.md，同主题raw留新日志、冻结记录和交付报告快照。整体mixed，保留既有c1/c4、c2/c3待两项收尾。只在sync验收，未合入lab、未改策略/业务库/研究目标。\n\n2026-09-09 用户回复“可以”，授权总控直接收尾S1/S2。已在lei-signal-sync修复窗口运行编号冻结/显示/继承/恢复，以及仅遮编号原文位置、保留独立同值证券。固定20/20、两文件41/41、新身份与恢复检查通过。报告：docs/experiments/agent-03b-r3-controller-finalization-2026-09-09.md；原始证据同主题raw。仅开发范围验收通过，运行目录未合入，真实业务库未迁移。",
+  "milestones": [
+    {
+      "id": "c1",
+      "title": "两个入口统一意图和对象上下文",
+      "done": true
+    },
+    {
+      "id": "c2",
+      "title": "引用匹配与未知状态真实展示",
+      "done": true
+    },
+    {
+      "id": "c3",
+      "title": "单标的固定方法任务持久绑定及回填",
+      "done": true
+    },
+    {
+      "id": "c4",
+      "title": "讨论到草稿与14场景隔离验收",
+      "done": true
+    }
+  ],
+  "links": [],
+  "kind": "concrete",
+  "id": "okr-bf3eb75c661f",
+  "version": 32,
+  "status": "in_progress",
+  "created_at": "2026-09-08T02:47:11+00:00",
+  "updated_at": "2026-09-09T12:16:35+00:00",
+  "authorization": {
+    "granted": true,
+    "scope": "按 03B-discussion-backtest-2026-09-08.md 首批实施协议：统一入口解析、两前端入口去旁路、讨论快照、迁移027补测任务绑定与单队列执行、语义状态目录与证据卡、计划草稿衔接；隔离库验收。不含真实库启用/迁移/真实存证接线、收费调用、研究、发布。；2026-09-09 用户在总控提出向lei-signal-lab定向合入后回复“开整”，追加授权本次03B代码及必要前置依赖在隔离验证后合入运行目录、对齐本地服务。仍不授权收益规则采用、收费调用、真实交易、历史观察迁入或自动通知。",
+    "at": "2026-09-09T12:16:35+00:00"
+  },
+  "history": [
+    {
+      "at": "2026-09-08T02:47:11+00:00",
+      "action": "created",
+      "note": "目标已登记，登记不会启动执行。"
+    },
+    {
+      "at": "2026-09-08T06:08:18+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "evidence": "任务书已就绪：/Users/yongbiaoli/lei-signal-sync/docs/glm-prompts/agent-integration-2026-09-07/03B-discussion-backtest-2026-09-08.md\n依据：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-09r-controller-review-2026-09-08.md",
+        "next_action": "交执行者按任务书核对既有聊天授权并登记后推进；当前仅登记后续工程，未执行实现。"
+      },
+      "after": {
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md\n实现后实测：14场景13项测试全绿（真实HTTP+临时库+真实引擎闭环）+218项相关回归；统一解析/resolve两入口去旁路、discussion_v1快照、迁移027补测任务绑定与单队列执行、语义状态目录+证据卡四分区（module_winrate兼容unknown）、完成卡回填原问题链ID互相核对。浏览器端到端未执行；真实库启用/迁移/真实存证接线未执行，待总控复验。",
+        "next_action": "交总控独立复验；复验通过前不接真实观察存证启用、不真实库迁移；浏览器隔离验收另行安排。"
+      }
+    },
+    {
+      "at": "2026-09-08T06:08:41+00:00",
+      "action": "authorize",
+      "note": "用户派发03B任务书（总控已定稿首批实施协议，可立即实施）即为授权范围。",
+      "from_status": "planned",
+      "to_status": "approved",
+      "scope": "按 03B-discussion-backtest-2026-09-08.md 首批实施协议：统一入口解析、两前端入口去旁路、讨论快照、迁移027补测任务绑定与单队列执行、语义状态目录与证据卡、计划草稿衔接；隔离库验收。不含真实库启用/迁移/真实存证接线、收费调用、研究、发布。"
+    },
+    {
+      "at": "2026-09-08T06:08:41+00:00",
+      "action": "start",
+      "note": "开始实现：resolve/快照/迁移027/补测API/语义目录/前端分流。",
+      "from_status": "approved",
+      "to_status": "in_progress",
+      "scope": ""
+    },
+    {
+      "at": "2026-09-08T06:08:41+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md\n实现后实测：14场景13项测试全绿（真实HTTP+临时库+真实引擎闭环）+218项相关回归；统一解析/resolve两入口去旁路、discussion_v1快照、迁移027补测任务绑定与单队列执行、语义状态目录+证据卡四分区（module_winrate兼容unknown）、完成卡回填原问题链ID互相核对。浏览器端到端未执行；真实库启用/迁移/真实存证接线未执行，待总控复验。",
+        "next_action": "交总控独立复验；复验通过前不接真实观察存证启用、不真实库迁移；浏览器隔离验收另行安排。"
+      },
+      "after": {
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md\n实现后实测：14场景13项测试全绿（真实HTTP+临时库+真实引擎闭环）+218项相关回归；统一解析resolve两入口去旁路、discussion_v1快照、迁移027补测任务绑定与单队列执行、语义状态目录+证据卡四分区（module_winrate兼容unknown）、完成卡回填原问题链ID互相核对。浏览器端到端未执行；真实库启用/迁移/真实存证接线未执行。",
+        "next_action": "交总控独立复验；复验通过前不接真实观察存证启用、不真实库迁移；浏览器隔离验收另行安排。"
+      }
+    },
+    {
+      "at": "2026-09-08T06:09:04+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": false
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": false
+          }
+        ]
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-09-08T06:09:04+00:00",
+      "action": "submit_review",
+      "note": "首批协议集成完成并自测通过（14场景13测试+218回归，真实引擎闭环，浏览器端到端未执行）；提交待验收，不等于已部署或收益改善。",
+      "from_status": "in_progress",
+      "to_status": "review",
+      "scope": ""
+    },
+    {
+      "at": "2026-09-08T06:29:54+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "next_action": "交总控独立复验；复验通过前不接真实观察存证启用、不真实库迁移；浏览器隔离验收另行安排。",
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md\n实现后实测：14场景13项测试全绿（真实HTTP+临时库+真实引擎闭环）+218项相关回归；统一解析resolve两入口去旁路、discussion_v1快照、迁移027补测任务绑定与单队列执行、语义状态目录+证据卡四分区（module_winrate兼容unknown）、完成卡回填原问题链ID互相核对。浏览器端到端未执行；真实库启用/迁移/真实存证接线未执行。",
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ]
+      },
+      "after": {
+        "next_action": "GLM按总控定稿03B-R1八项修复，原四项标准尚未闭合；架构不再等待确认。完成真实两入口讨论→依据→固定方法补测→资金讨论→保存待确认草稿后重新提交验收。09R2不重复返修，04B确认校验继续复用；不启用或迁移真实库。",
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md\n实现后实测：14场景13项测试全绿（真实HTTP+临时库+真实引擎闭环）+218项相关回归；统一解析resolve两入口去旁路、discussion_v1快照、迁移027补测任务绑定与单队列执行、语义状态目录+证据卡四分区（module_winrate兼容unknown）、完成卡回填原问题链ID互相核对。浏览器端到端未执行；真实库启用/迁移/真实存证接线未执行。\n\n2026-09-08 Codex独立复验：整体未通过（mixed），报告 docs/experiments/agent-03b-controller-review-2026-09-08.md。11组后端反例和4组真实页面反例未满足接受行为；原13测试在受控隔离调度下10通过/3失败。对象不一致、实际输入截止失效、完成重试重跑、证据快照/动态材料/用户展示、任务恢复与草稿卡等按03B-R1八项返修。仅临时库、合成行情及固定模型，生产代码未改，真实库未启用。保留上方交付者原自测记录，不把它作为独立验收通过。",
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": false
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": false
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-09-08T08:17:03+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": false
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": false
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md\n实现后实测：14场景13项测试全绿（真实HTTP+临时库+真实引擎闭环）+218项相关回归；统一解析resolve两入口去旁路、discussion_v1快照、迁移027补测任务绑定与单队列执行、语义状态目录+证据卡四分区（module_winrate兼容unknown）、完成卡回填原问题链ID互相核对。浏览器端到端未执行；真实库启用/迁移/真实存证接线未执行。\n\n2026-09-08 Codex独立复验：整体未通过（mixed），报告 docs/experiments/agent-03b-controller-review-2026-09-08.md。11组后端反例和4组真实页面反例未满足接受行为；原13测试在受控隔离调度下10通过/3失败。对象不一致、实际输入截止失效、完成重试重跑、证据快照/动态材料/用户展示、任务恢复与草稿卡等按03B-R1八项返修。仅临时库、合成行情及固定模型，生产代码未改，真实库未启用。保留上方交付者原自测记录，不把它作为独立验收通过。",
+        "next_action": "GLM按总控定稿03B-R1八项修复，原四项标准尚未闭合；架构不再等待确认。完成真实两入口讨论→依据→固定方法补测→资金讨论→保存待确认草稿后重新提交验收。09R2不重复返修，04B确认校验继续复用；不启用或迁移真实库。"
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": false
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": false
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。",
+        "next_action": "R1—R8已实现并自测通过，交总控独立复验；通过前真实库启用/迁移/真实存证接线仍不执行。"
+      }
+    },
+    {
+      "at": "2026-09-08T08:30:32+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "next_action": "R1—R8已实现并自测通过，交总控独立复验；通过前真实库启用/迁移/真实存证接线仍不执行。",
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。"
+      },
+      "after": {
+        "next_action": "按总控03B-R2-contract-closeout-2026-09-08.md完成原R1—R8剩余契约；旧15组通过保留。先固定问题/草稿归属及实际输入引用，接通证据和恢复，最后两入口真实隔离全链验收；不改09R2与04B拒绝条件，不扩研究，不启用真实库。",
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。"
+      }
+    },
+    {
+      "at": "2026-09-08T08:42:27+00:00",
+      "action": "note",
+      "note": "接单 03B-R2（总控复验mixed后收尾协议）：总控确认 d1—d11/ui1—ui4 与 18 项测试通过，保留；按 docs/glm-prompts/agent-integration-2026-09-07/03B-R2-contract-closeout-2026-09-08.md 补齐五个剩余契约：①问题/草稿身份固定（cid 事务入口、409 冲突、对象与可用性分离、草稿服务端绑定）②规则与行情依据覆盖全部实际输入（实际启用规则文件哈希、全 OHLCV+顺序+规则内容指纹、ParquetCache 信任复用、原子写）③v1.2 完整证据引用贯通 模型/即时卡/历史 三出口、定投真实适配器、补测结果实际匹配④运行中产物校验恢复、回填原子领取、前端五状态与刷新恢复接线⑤两入口隔离真实链验收（浏览器→真实HTTP→合成行情→真实引擎→证据→草稿）。先跑总控 residual 12 组与 browser 4 组反例留修前基线；不改 09R2/04B 拒绝条件、不扩研究、不启用真实库。raw 基线：docs/experiments/raw/agent-03b-contract-closeout-2026-09-08/。",
+      "from_status": "in_progress",
+      "to_status": "in_progress",
+      "scope": ""
+    },
+    {
+      "at": "2026-09-08T10:55:55+00:00",
+      "action": "note",
+      "note": "03B-R2 五契约收尾完成，交付 docs/experiments/agent-discussion-contract-closeout-2026-09-08.md，raw=docs/experiments/raw/agent-03b-contract-closeout-2026-09-08/。实测结果：①总控修后反例 residual r1—r12 全 PASS（修前基线 12 FAIL）、旧 d1—d11 全 PASS；②页面反例 v1—v4 全 PASS（修前 4 FAIL）、旧 ui1—ui4 全 PASS；③新增22项契约单测（并发首撞一个问题上锁、409矩阵、冷对象、草稿绑定同plan_id、全OHLCV按序指纹、规则内容变化拒绝、副本损坏拒绝、synthetic来源拒绝、运行中产物校验恢复、回填唯一领取、证据卡三出口、matched_runs正反例、预算继承），03B专项18+22=40全绿；④全量回归20文件330 passed 0 failed（另修整4个过时的conformance路由用例：ruleset版本改读实际账本+04B形态对齐，确认边界未放宽）；⑤契约5两入口：浏览器→隔离真实HTTP→合成行情真实引擎→原问题→证据→草稿完整链5/5（真实run 20260908-180106-c771f2，详情页打开原run，刷新重开同plan_id，04B拒绝可见），API入口四条流程12/12（重试只读、完成回原问题、换退出新run不借旧成绩、预算6000跨轮继承）。实现要点：迁移028（agent_chat_requests/agent_plan_draft_bindings/agent_backtest_backfills 精确主键+唯一约束）；chat_identity统一事务入口先裁决后建模；ruleset哈希读实际启用账本并冻结（内容变拒绝执行）；数据指纹全OHLCV按行序哈希+规则内容进缓存身份；ParquetCache信任复用；结果原子写+回读核验；queued/running区分（领取移入worker槽）；v1.2完整refs冻结+同一证据卡贯通模型/即时卡/流式done/历史DTO；定投调真实逐状态适配器；前端EvidenceCardView两页共用+退出方式服务端默认可指定。红线：真实库未启用未迁入（迁移028仅测试库）、研究05—08未动、09R2与04B裁决未改、无通知无发布。下一步：交总控独立复验。",
+      "from_status": "in_progress",
+      "to_status": "in_progress",
+      "scope": ""
+    },
+    {
+      "at": "2026-09-08T10:56:06+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "next_action": "按总控03B-R2-contract-closeout-2026-09-08.md完成原R1—R8剩余契约；旧15组通过保留。先固定问题/草稿归属及实际输入引用，接通证据和恢复，最后两入口真实隔离全链验收；不改09R2与04B拒绝条件，不扩研究，不启用真实库。"
+      },
+      "after": {
+        "next_action": "03B-R2 五契约收尾已交付（报告+raw+registry watch+INDEX），等待总控独立复验；复验通过前保持 in_progress，不自行改裁决。"
+      }
+    },
+    {
+      "at": "2026-09-08T11:35:20+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "next_action": "03B-R2 五契约收尾已交付（报告+raw+registry watch+INDEX），等待总控独立复验；复验通过前保持 in_progress，不自行改裁决。",
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。"
+      },
+      "after": {
+        "next_action": "继续原03B范围，按 docs/glm-prompts/agent-integration-2026-09-07/03B-R3-authoritative-bindings-2026-09-08.md 修原问题回答精确绑定、完整方法证据比较、来源/恢复一致性、系统计划产物与草稿校验，补两个页面流程。旧通过项保留；09R2与研究不重做，真实库未放行。",
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。"
+      }
+    },
+    {
+      "at": "2026-09-08T11:48:01+00:00",
+      "action": "note",
+      "note": "接单 03B-R3（总控R2复验mixed后）：按 docs/glm-prompts/agent-integration-2026-09-07/03B-R3-authoritative-bindings-2026-09-08.md 修六项反例 S1—S6，全部属原五契约遗漏：S1 来源信任缺meta/损坏/unknown一律拒产出可信结果（复用ParquetCache拒读语义，测试注入走显式隔离接口并标记测试输入）；S2 服务端先建本问题完整方法比较配置（用户明确+可证明继承+明示引擎默认，记录来源）再逐项比较（对象/模块/进出场/规则摘要/窗口/费用/过滤），exact/incompatible/unknown用公共引用契约，exact优先不被新记录挤掉；S3 恢复核对运行清单（请求/运行/对象/配置摘要/冻结原始输入摘要/截止后引擎输入摘要/规则摘要，两种摘要不混比），错配不采纳不重跑掩盖；S4 回答按question_id精确绑定（迁移029：agent_messages加列+claim答案状态机），重试不再取'问题后第一条assistant'，未完成明确状态+服务端领取恢复，补测卡标kind+request_id；S5/S6 服务端计划产物（真实suggested_plan+用户明确字段，字段来源逐项记录），保存时服务端核对原问题归属与冻结依据（不信任客户端source_refs），编号绑完整业务摘要（换任何字段409），同事务无孤立草稿。契约5：工作台+标的页控制台两入口实测、模型固定短解释不预制JSON、非零成交合成匹配正例。保留R2已通过31项检查与40项测试。raw基线：docs/experiments/raw/agent-03b-r3-authoritative-bindings-2026-09-08/。",
+      "from_status": "in_progress",
+      "to_status": "in_progress",
+      "scope": ""
+    },
+    {
+      "at": "2026-09-08T15:59:50+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "next_action": "继续原03B范围，按 docs/glm-prompts/agent-integration-2026-09-07/03B-R3-authoritative-bindings-2026-09-08.md 修原问题回答精确绑定、完整方法证据比较、来源/恢复一致性、系统计划产物与草稿校验，补两个页面流程。旧通过项保留；09R2与研究不重做，真实库未放行。",
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。",
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": false
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": false
+          }
+        ]
+      },
+      "after": {
+        "next_action": "仅按 docs/glm-prompts/agent-integration-2026-09-07/03B-R3-final-corrections-2026-09-08.md 补T1—T3：回测区间适用性、实际结果与清单核对、计划产物重试及完整字段。两入口对象上下文已验收，保留通过项，补修后交总控；真实库、09R2、研究线不扩范围。",
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。",
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": false
+          }
+        ]
+      }
+    },
+    {
+      "at": "2026-09-08T16:47:55+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": false
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。",
+        "next_action": "仅按 docs/glm-prompts/agent-integration-2026-09-07/03B-R3-final-corrections-2026-09-08.md 补T1—T3：回测区间适用性、实际结果与清单核对、计划产物重试及完整字段。两入口对象上下文已验收，保留通过项，补修后交总控；真实库、09R2、研究线不扩范围。"
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。",
+        "next_action": "03B-R3 终校 T1—T3 已实现并自测/总控反例通过，交总控独立复验；复验通过前保持 in_progress，不自行标完成。真实库、09R2、研究05—08及宽基ETF专项不扩范围，04B 拒绝条件不变。"
+      }
+    },
+    {
+      "at": "2026-09-09T02:17:50+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。",
+        "next_action": "03B-R3 终校 T1—T3 已实现并自测/总控反例通过，交总控独立复验；复验通过前保持 in_progress，不自行标完成。真实库、09R2、研究05—08及宽基ETF专项不扩范围，04B 拒绝条件不变。"
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": false
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。",
+        "next_action": "按03B-R3-call-chain-closeout-2026-09-09.md只补T1—T3真实调用链；原6探针和新增7组连同必要两入口字段保存验证，交总控复验。不得自行标完成；不扩真实业务库、研究或04B权限。"
+      }
+    },
+    {
+      "at": "2026-09-09T03:00:45+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": false
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。",
+        "next_action": "按03B-R3-call-chain-closeout-2026-09-09.md只补T1—T3真实调用链；原6探针和新增7组连同必要两入口字段保存验证，交总控复验。不得自行标完成；不扩真实业务库、研究或04B权限。"
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。",
+        "next_action": "03B-R3 调用链 T1—T3 已闭合并自测/总控反例通过，交总控独立复验；复验通过前保持 in_progress，不自行标完成。真实库、09R2、研究05—08及宽基ETF专项不扩范围，04B 拒绝条件不变。"
+      }
+    },
+    {
+      "at": "2026-09-09T06:00:43+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。",
+        "next_action": "03B-R3 调用链 T1—T3 已闭合并自测/总控反例通过，交总控独立复验；复验通过前保持 in_progress，不自行标完成。真实库、09R2、研究05—08及宽基ETF专项不扩范围，04B 拒绝条件不变。"
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。",
+        "next_action": "仅按03B-R3-window-source-and-validation-2026-09-09.md补窗口对象/来源/合法日期与缺字段/坏记录处理；保留已通过正常链路和目标价两入口验证，交总控复验。不扩研究、真实业务库或04B权限。"
+      }
+    },
+    {
+      "at": "2026-09-09T06:53:26+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。",
+        "next_action": "仅按03B-R3-window-source-and-validation-2026-09-09.md补窗口对象/来源/合法日期与缺字段/坏记录处理；保留已通过正常链路和目标价两入口验证，交总控复验。不扩研究、真实业务库或04B权限。"
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。",
+        "next_action": "03B-R3 窗口归属与异常资料已补修并自测/总控反例通过，交总控独立复验；复验通过前保持 in_progress，不自行标完成。真实库、09R2、研究05—08及宽基ETF专项不扩范围，04B 拒绝条件不变。"
+      }
+    },
+    {
+      "at": "2026-09-09T07:13:28+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。",
+        "next_action": "03B-R3 窗口归属与异常资料已补修并自测/总控反例通过，交总控独立复验；复验通过前保持 in_progress，不自行标完成。真实库、09R2、研究05—08及宽基ETF专项不扩范围，04B 拒绝条件不变。"
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。",
+        "next_action": "仅按03B-R3-single-context-and-total-validation-2026-09-09.md落实T1一次冻结选择与T2逐字段/结构完整核验、拒绝原因展示；保留旧20项与T3两入口验收。待总控复验，不扩研究、真实业务库、04B或发布范围。"
+      }
+    },
+    {
+      "at": "2026-09-09T08:26:28+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。",
+        "next_action": "仅按03B-R3-single-context-and-total-validation-2026-09-09.md落实T1一次冻结选择与T2逐字段/结构完整核验、拒绝原因展示；保留旧20项与T3两入口验收。待总控复验，不扩研究、真实业务库、04B或发布范围。"
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": false
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。\n\n2026-09-09 Codex单入口交付独立复验：原p0+u1—u5 6/6、固定20/20、分进程18+23=41回归本次全部通过。新增全局chat500/stream失败；原问题中断恢复借用后续窗口；多个运行仍默认最新；错误类型字符串被恢复completed；顶层/冻结引用损坏丢卡、采用坏区间500。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-single-context-controller-review-2026-09-09.md，同主题raw保留真实HTTP/worker/组件证据。整体mixed；全局回归使c1待补，c2/c3未闭合，c4已验收部分保留。目录角色纠正：Desktop/lei-signal-lab为实际使用/最终集成目录，sync为此次开发工作目录，未自动同步、未合入。生产源码/业务库/研究目标未改。",
+        "next_action": "按03B-R3-all-paths-and-types-2026-09-09.md在sync补全局回归、恢复冻结选择、歧义、完整类型及读取隔离；待总控复验。通过后再定向合入实际使用的Desktop/lei-signal-lab，禁止整目录覆盖或先切换服务；不扩研究、真实业务库或04B范围。"
+      }
+    },
+    {
+      "at": "2026-09-09T09:52:49+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。\n\n2026-09-09 Codex单入口交付独立复验：原p0+u1—u5 6/6、固定20/20、分进程18+23=41回归本次全部通过。新增全局chat500/stream失败；原问题中断恢复借用后续窗口；多个运行仍默认最新；错误类型字符串被恢复completed；顶层/冻结引用损坏丢卡、采用坏区间500。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-single-context-controller-review-2026-09-09.md，同主题raw保留真实HTTP/worker/组件证据。整体mixed；全局回归使c1待补，c2/c3未闭合，c4已验收部分保留。目录角色纠正：Desktop/lei-signal-lab为实际使用/最终集成目录，sync为此次开发工作目录，未自动同步、未合入。生产源码/业务库/研究目标未改。",
+        "next_action": "按03B-R3-all-paths-and-types-2026-09-09.md在sync补全局回归、恢复冻结选择、歧义、完整类型及读取隔离；待总控复验。通过后再定向合入实际使用的Desktop/lei-signal-lab，禁止整目录覆盖或先切换服务；不扩研究、真实业务库或04B范围。"
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。\n\n2026-09-09 Codex单入口交付独立复验：原p0+u1—u5 6/6、固定20/20、分进程18+23=41回归本次全部通过。新增全局chat500/stream失败；原问题中断恢复借用后续窗口；多个运行仍默认最新；错误类型字符串被恢复completed；顶层/冻结引用损坏丢卡、采用坏区间500。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-single-context-controller-review-2026-09-09.md，同主题raw保留真实HTTP/worker/组件证据。整体mixed；全局回归使c1待补，c2/c3未闭合，c4已验收部分保留。目录角色纠正：Desktop/lei-signal-lab为实际使用/最终集成目录，sync为此次开发工作目录，未自动同步、未合入。生产源码/业务库/研究目标未改。\n\n2026-09-09 Codex所有路径独立复验：原contract6/6、z2—z6全过、全局两入口全过；原固定20/20、分进程18+23=41回归全过。额外2正例（唯一运行采用、真实stream恢复与重放）通过。余3实测缺陷：bool false→true仍恢复completed（后续支持集合已挡，未夸大为支持问题）；明确运行编号未被解析且数字被误作证券，证据卡消失；params.symbols=7在类型检查前遍历毁卡。整体mixed，c1/c4保留完成，c2/c3待补。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-all-paths-controller-review-2026-09-09.md，同主题raw含本次新JSON/JUnit与stream证据。只在sync开发验收，未合入实际使用的Desktop/lei-signal-lab；未动策略、业务库或研究目标。",
+        "next_action": "仅按03B-R3-values-selection-and-validation-2026-09-09.md补布尔值核对、明确运行编号完整输入链、标的列表核验前遍历三项；保留已过全局/恢复/目标价。按实际套件数量交证据，待总控复验后再定向合入lab，不切服务、不扩研究或真实业务库范围。"
+      }
+    },
+    {
+      "at": "2026-09-09T10:30:57+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。\n\n2026-09-09 Codex单入口交付独立复验：原p0+u1—u5 6/6、固定20/20、分进程18+23=41回归本次全部通过。新增全局chat500/stream失败；原问题中断恢复借用后续窗口；多个运行仍默认最新；错误类型字符串被恢复completed；顶层/冻结引用损坏丢卡、采用坏区间500。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-single-context-controller-review-2026-09-09.md，同主题raw保留真实HTTP/worker/组件证据。整体mixed；全局回归使c1待补，c2/c3未闭合，c4已验收部分保留。目录角色纠正：Desktop/lei-signal-lab为实际使用/最终集成目录，sync为此次开发工作目录，未自动同步、未合入。生产源码/业务库/研究目标未改。\n\n2026-09-09 Codex所有路径独立复验：原contract6/6、z2—z6全过、全局两入口全过；原固定20/20、分进程18+23=41回归全过。额外2正例（唯一运行采用、真实stream恢复与重放）通过。余3实测缺陷：bool false→true仍恢复completed（后续支持集合已挡，未夸大为支持问题）；明确运行编号未被解析且数字被误作证券，证据卡消失；params.symbols=7在类型检查前遍历毁卡。整体mixed，c1/c4保留完成，c2/c3待补。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-all-paths-controller-review-2026-09-09.md，同主题raw含本次新JSON/JUnit与stream证据。只在sync开发验收，未合入实际使用的Desktop/lei-signal-lab；未动策略、业务库或研究目标。"
+      },
+      "after": {
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。\n\n2026-09-09 Codex单入口交付独立复验：原p0+u1—u5 6/6、固定20/20、分进程18+23=41回归本次全部通过。新增全局chat500/stream失败；原问题中断恢复借用后续窗口；多个运行仍默认最新；错误类型字符串被恢复completed；顶层/冻结引用损坏丢卡、采用坏区间500。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-single-context-controller-review-2026-09-09.md，同主题raw保留真实HTTP/worker/组件证据。整体mixed；全局回归使c1待补，c2/c3未闭合，c4已验收部分保留。目录角色纠正：Desktop/lei-signal-lab为实际使用/最终集成目录，sync为此次开发工作目录，未自动同步、未合入。生产源码/业务库/研究目标未改。\n\n2026-09-09 Codex所有路径独立复验：原contract6/6、z2—z6全过、全局两入口全过；原固定20/20、分进程18+23=41回归全过。额外2正例（唯一运行采用、真实stream恢复与重放）通过。余3实测缺陷：bool false→true仍恢复completed（后续支持集合已挡，未夸大为支持问题）；明确运行编号未被解析且数字被误作证券，证据卡消失；params.symbols=7在类型检查前遍历毁卡。整体mixed，c1/c4保留完成，c2/c3待补。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-all-paths-controller-review-2026-09-09.md，同主题raw含本次新JSON/JUnit与stream证据。只在sync开发验收，未合入实际使用的Desktop/lei-signal-lab；未动策略、业务库或研究目标。\n2026-09-09 GLM按任务书03B-R3-values-selection-and-validation补d1/d2/d3并独立复验：_type_eq布尔分支改为类型+值同时一致且拒绝字符串伪装（d1已修，翻转gap_momentum仍REJECT、原值ACCETP）；resolve.parse_window_choice新增_RUN_ID_RE/_extract_run_id把真实运行编号传入选择器，api/routes/agent.py按_RUN_ID_RE排除编号片段被误作证券（d2已修，真实worker双运行+真实HTTP正例通过、无编号/非本对象拒绝不丢卡）；backtest_requests.py对params.symbols先于遍历做类型守卫（d3已修，错误类型返回结构化拒绝、保留其他记录不毁卡）。验收：复制总控matrix.py+fixture.py基线→5/5 PASS且source_unchanged True；固定20=boundaries7+additional7+remaining6=20/20；contract.py p0+u1—u5=6/6；z2—z6全过、z1仅999999.SS→502单列（不抹FAIL）；全局两入口全过；分进程18+23=41回归全过。只在sync开发验收，未合入Desktop/lei-signal-lab；未动策略/业务库/研究目标。c2/c3待总控复验确认后落实。"
+      }
+    },
+    {
+      "at": "2026-09-09T11:30:39+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。\n\n2026-09-09 Codex单入口交付独立复验：原p0+u1—u5 6/6、固定20/20、分进程18+23=41回归本次全部通过。新增全局chat500/stream失败；原问题中断恢复借用后续窗口；多个运行仍默认最新；错误类型字符串被恢复completed；顶层/冻结引用损坏丢卡、采用坏区间500。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-single-context-controller-review-2026-09-09.md，同主题raw保留真实HTTP/worker/组件证据。整体mixed；全局回归使c1待补，c2/c3未闭合，c4已验收部分保留。目录角色纠正：Desktop/lei-signal-lab为实际使用/最终集成目录，sync为此次开发工作目录，未自动同步、未合入。生产源码/业务库/研究目标未改。\n\n2026-09-09 Codex所有路径独立复验：原contract6/6、z2—z6全过、全局两入口全过；原固定20/20、分进程18+23=41回归全过。额外2正例（唯一运行采用、真实stream恢复与重放）通过。余3实测缺陷：bool false→true仍恢复completed（后续支持集合已挡，未夸大为支持问题）；明确运行编号未被解析且数字被误作证券，证据卡消失；params.symbols=7在类型检查前遍历毁卡。整体mixed，c1/c4保留完成，c2/c3待补。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-all-paths-controller-review-2026-09-09.md，同主题raw含本次新JSON/JUnit与stream证据。只在sync开发验收，未合入实际使用的Desktop/lei-signal-lab；未动策略、业务库或研究目标。\n2026-09-09 GLM按任务书03B-R3-values-selection-and-validation补d1/d2/d3并独立复验：_type_eq布尔分支改为类型+值同时一致且拒绝字符串伪装（d1已修，翻转gap_momentum仍REJECT、原值ACCETP）；resolve.parse_window_choice新增_RUN_ID_RE/_extract_run_id把真实运行编号传入选择器，api/routes/agent.py按_RUN_ID_RE排除编号片段被误作证券（d2已修，真实worker双运行+真实HTTP正例通过、无编号/非本对象拒绝不丢卡）；backtest_requests.py对params.symbols先于遍历做类型守卫（d3已修，错误类型返回结构化拒绝、保留其他记录不毁卡）。验收：复制总控matrix.py+fixture.py基线→5/5 PASS且source_unchanged True；固定20=boundaries7+additional7+remaining6=20/20；contract.py p0+u1—u5=6/6；z2—z6全过、z1仅999999.SS→502单列（不抹FAIL）；全局两入口全过；分进程18+23=41回归全过。只在sync开发验收，未合入Desktop/lei-signal-lab；未动策略/业务库/研究目标。c2/c3待总控复验确认后落实。",
+        "next_action": "仅按03B-R3-values-selection-and-validation-2026-09-09.md补布尔值核对、明确运行编号完整输入链、标的列表核验前遍历三项；保留已过全局/恢复/目标价。按实际套件数量交证据，待总控复验后再定向合入lab，不切服务、不扩研究或真实业务库范围。"
+      },
+      "after": {
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。\n\n2026-09-09 Codex单入口交付独立复验：原p0+u1—u5 6/6、固定20/20、分进程18+23=41回归本次全部通过。新增全局chat500/stream失败；原问题中断恢复借用后续窗口；多个运行仍默认最新；错误类型字符串被恢复completed；顶层/冻结引用损坏丢卡、采用坏区间500。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-single-context-controller-review-2026-09-09.md，同主题raw保留真实HTTP/worker/组件证据。整体mixed；全局回归使c1待补，c2/c3未闭合，c4已验收部分保留。目录角色纠正：Desktop/lei-signal-lab为实际使用/最终集成目录，sync为此次开发工作目录，未自动同步、未合入。生产源码/业务库/研究目标未改。\n\n2026-09-09 Codex所有路径独立复验：原contract6/6、z2—z6全过、全局两入口全过；原固定20/20、分进程18+23=41回归全过。额外2正例（唯一运行采用、真实stream恢复与重放）通过。余3实测缺陷：bool false→true仍恢复completed（后续支持集合已挡，未夸大为支持问题）；明确运行编号未被解析且数字被误作证券，证据卡消失；params.symbols=7在类型检查前遍历毁卡。整体mixed，c1/c4保留完成，c2/c3待补。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-all-paths-controller-review-2026-09-09.md，同主题raw含本次新JSON/JUnit与stream证据。只在sync开发验收，未合入实际使用的Desktop/lei-signal-lab；未动策略、业务库或研究目标。\n2026-09-09 GLM按任务书03B-R3-values-selection-and-validation补d1/d2/d3并独立复验：_type_eq布尔分支改为类型+值同时一致且拒绝字符串伪装（d1已修，翻转gap_momentum仍REJECT、原值ACCETP）；resolve.parse_window_choice新增_RUN_ID_RE/_extract_run_id把真实运行编号传入选择器，api/routes/agent.py按_RUN_ID_RE排除编号片段被误作证券（d2已修，真实worker双运行+真实HTTP正例通过、无编号/非本对象拒绝不丢卡）；backtest_requests.py对params.symbols先于遍历做类型守卫（d3已修，错误类型返回结构化拒绝、保留其他记录不毁卡）。验收：复制总控matrix.py+fixture.py基线→5/5 PASS且source_unchanged True；固定20=boundaries7+additional7+remaining6=20/20；contract.py p0+u1—u5=6/6；z2—z6全过、z1仅999999.SS→502单列（不抹FAIL）；全局两入口全过；分进程18+23=41回归全过。只在sync开发验收，未合入Desktop/lei-signal-lab；未动策略/业务库/研究目标。c2/c3待总控复验确认后落实。\n\n2026-09-09 Codex三项修复复验（实验规范v1.0，仅工程）：matrix5/5、contract6/6、z2—z6、global2/2、真正固定20/20、18+23=41回归均通过；4个实际选择/归属正例通过。d1/d3关闭，d2主流程通过；两项原明文要求仍缺：实际问题快照不保留独立run_id，继承null（source说明仍可追溯，不夸大为全部丢失）；按值全局排除编号片段会误删编号之外用户明确证券（518880碰撞，纯解析函数对照）。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-values-controller-review-2026-09-09.md，同主题raw留新日志、冻结记录和交付报告快照。整体mixed，保留既有c1/c4、c2/c3待两项收尾。只在sync验收，未合入lab、未改策略/业务库/研究目标。",
+        "next_action": "仅按03B-R3-run-identity-finalization-2026-09-09.md补运行身份字段在显示/冻结/继承/恢复中保存，以及只遮掉编号原文区间、不全局删同值证券。d1/d3和d2正常主流程保留。完成后交独立复验，再按既定方向做lab定向合入，不提前切服务/写真实业务库。"
+      }
+    },
+    {
+      "at": "2026-09-09T12:02:27+00:00",
+      "action": "edited",
+      "note": "进展已更新。",
+      "before": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": false
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": false
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。\n\n2026-09-09 Codex单入口交付独立复验：原p0+u1—u5 6/6、固定20/20、分进程18+23=41回归本次全部通过。新增全局chat500/stream失败；原问题中断恢复借用后续窗口；多个运行仍默认最新；错误类型字符串被恢复completed；顶层/冻结引用损坏丢卡、采用坏区间500。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-single-context-controller-review-2026-09-09.md，同主题raw保留真实HTTP/worker/组件证据。整体mixed；全局回归使c1待补，c2/c3未闭合，c4已验收部分保留。目录角色纠正：Desktop/lei-signal-lab为实际使用/最终集成目录，sync为此次开发工作目录，未自动同步、未合入。生产源码/业务库/研究目标未改。\n\n2026-09-09 Codex所有路径独立复验：原contract6/6、z2—z6全过、全局两入口全过；原固定20/20、分进程18+23=41回归全过。额外2正例（唯一运行采用、真实stream恢复与重放）通过。余3实测缺陷：bool false→true仍恢复completed（后续支持集合已挡，未夸大为支持问题）；明确运行编号未被解析且数字被误作证券，证据卡消失；params.symbols=7在类型检查前遍历毁卡。整体mixed，c1/c4保留完成，c2/c3待补。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-all-paths-controller-review-2026-09-09.md，同主题raw含本次新JSON/JUnit与stream证据。只在sync开发验收，未合入实际使用的Desktop/lei-signal-lab；未动策略、业务库或研究目标。\n2026-09-09 GLM按任务书03B-R3-values-selection-and-validation补d1/d2/d3并独立复验：_type_eq布尔分支改为类型+值同时一致且拒绝字符串伪装（d1已修，翻转gap_momentum仍REJECT、原值ACCETP）；resolve.parse_window_choice新增_RUN_ID_RE/_extract_run_id把真实运行编号传入选择器，api/routes/agent.py按_RUN_ID_RE排除编号片段被误作证券（d2已修，真实worker双运行+真实HTTP正例通过、无编号/非本对象拒绝不丢卡）；backtest_requests.py对params.symbols先于遍历做类型守卫（d3已修，错误类型返回结构化拒绝、保留其他记录不毁卡）。验收：复制总控matrix.py+fixture.py基线→5/5 PASS且source_unchanged True；固定20=boundaries7+additional7+remaining6=20/20；contract.py p0+u1—u5=6/6；z2—z6全过、z1仅999999.SS→502单列（不抹FAIL）；全局两入口全过；分进程18+23=41回归全过。只在sync开发验收，未合入Desktop/lei-signal-lab；未动策略/业务库/研究目标。c2/c3待总控复验确认后落实。\n\n2026-09-09 Codex三项修复复验（实验规范v1.0，仅工程）：matrix5/5、contract6/6、z2—z6、global2/2、真正固定20/20、18+23=41回归均通过；4个实际选择/归属正例通过。d1/d3关闭，d2主流程通过；两项原明文要求仍缺：实际问题快照不保留独立run_id，继承null（source说明仍可追溯，不夸大为全部丢失）；按值全局排除编号片段会误删编号之外用户明确证券（518880碰撞，纯解析函数对照）。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-values-controller-review-2026-09-09.md，同主题raw留新日志、冻结记录和交付报告快照。整体mixed，保留既有c1/c4、c2/c3待两项收尾。只在sync验收，未合入lab、未改策略/业务库/研究目标。",
+        "next_action": "仅按03B-R3-run-identity-finalization-2026-09-09.md补运行身份字段在显示/冻结/继承/恢复中保存，以及只遮掉编号原文区间、不全局删同值证券。d1/d3和d2正常主流程保留。完成后交独立复验，再按既定方向做lab定向合入，不提前切服务/写真实业务库。"
+      },
+      "after": {
+        "milestones": [
+          {
+            "id": "c1",
+            "title": "两个入口统一意图和对象上下文",
+            "done": true
+          },
+          {
+            "id": "c2",
+            "title": "引用匹配与未知状态真实展示",
+            "done": true
+          },
+          {
+            "id": "c3",
+            "title": "单标的固定方法任务持久绑定及回填",
+            "done": true
+          },
+          {
+            "id": "c4",
+            "title": "讨论到草稿与14场景隔离验收",
+            "done": true
+          }
+        ],
+        "evidence": "GLM集成实现报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-backtest-integration-2026-09-08.md（mixed）\n总控复验：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-controller-review-2026-09-08.md（11后端+4页面反例、3链测试失败）\nGLM返修报告：/Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-discussion-integration-repair-2026-09-08.md\n返修后实测：总控11组后端反例(d1—d11)+4组页面反例(ui1—ui4)全PASS；18项重写测试+238项相关回归全绿。浏览器贯通真实后端与真实库启用未执行，待总控复验。\n\n2026-09-08 Codex复验03B-R1：旧d1—d11及ui1—ui4全部独立通过；18项测试通过。原协议仍未闭合，整体mixed：首次会话/内容重试错归属、未缓存对象回旧标的、历史A草稿保存成B、实际v2规则却记v1摘要、行情高低量未纳入缓存摘要、绕过来源校验、证据未到流式/历史/页面、定投真实状态未加载、产物恢复/并发回填和刷新查询缺口。报告 docs/experiments/agent-03b-r1-controller-review-2026-09-08.md；raw含12组剩余后端反例及4组页面反例。源码未改，真实库未动。\n\n2026-09-08 Codex独立复验03B-R2：同一19文件交付摘要一致；固定31项、专项40项与真实工作台5项通过。总控六项新反例失败：缺来源仍完成、退出改变未识别差异、错误输入摘要/费用恢复完成、原回答失败后重试借下一标的回答、错问题草稿放行、同编号改内容返旧草稿。静态确认计划卡仍依赖模型JSON，第二个标的页未完整验证。整体mixed。报告 docs/experiments/agent-03b-r2-controller-review-2026-09-08.md，raw含独立反例及Sol常规复验。未改源码/真实交易库。\n\nCodex独立验收03B-R3：两入口与夹具窄范围passed（改造契约7项、补充探针24项、真实Chrome两入口7项、两处桩原用例2项独立通过）；整体mixed。仍需T1区间/未知来源不应exact，T2同请求合法清单下费用/输入指纹/多标的矛盾仍恢复completed，T3计划重试丢artifact与字段格式丢值。报告 docs/experiments/agent-03b-r3-controller-review-2026-09-08.md；独立remaining-results.json及Sol执行目录见报告。未重复1930项，不改变历史裁决或研究结论。\n\n03B-R3 终校交付（T1—T3）：报告 docs/experiments/agent-03b-r3-final-corrections-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-final-corrections-2026-09-08/。总控独立反例 remaining.py 6/6 PASS（t1_unknown_window、t1_explicit_window、t2_recovery_params、t2_valid_recovery、t3_plan_retry、t3_field_contract），sources_unchanged=True；改动相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。生产源码未改、真实库未启用。历史 mixed 结论保留。\n\n2026-09-09 Codex独立终校：原6探针与41项相关回归重新通过；新增7组实测2正例通过、5剩余反例失败。仍有窗口选择未冻结导致跨轮丢失、完成结果引用/正常worker未共用完整核验、缺失/错误实际区间仍恢复completed、目标价经前端保存变null。保留c1及已通过局部修复，c2/c3/c4恢复待补，整体mixed。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-final-controller-review-2026-09-09.md，证据同主题raw；验收期间源码未改，真实业务库未接入。\n\n03B-R3 调用链收口（T1—T3 实际调用链闭合）：报告 docs/experiments/agent-03b-r3-call-chain-closeout-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-call-chain-closeout-2026-09-09/。总控新增7组反例 additional.py 复跑 7/7 PASS（n0_exact_window_positive、n1_window_inherited、n2_completed_evidence_validates_input、n3_recovery_actual_range、n4_normal_completion_same_validator、n5_known_fields_survive_frontend_save、n6_plan_replay_preserved），source_unchanged=True；原6组 remaining.py 仍 6/6 PASS；相关回归 test_discussion_backtest_03b.py + test_discussion_contract_r2.py 41 passed。修改工程代码（api/routes/agent.py、copilot/backtest_requests.py、web/src/components/PlanDraftCard.tsx）闭合三处实际调用链，未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex调用链独立验收：原7+6探针及分进程18+23=41项回归全部通过；T3两个入口真实浏览器目标价120展示/保存/临时库一致，工作台刷新及控制台会话经工作台历史重开同plan_id（控制台不自动恢复）。旧五个具体错误关闭。新增原契约边界7组2正例通过5失败：跨对象窗口继承/采用另一对象最新运行、无效日期仍verified、缺stop_atr_buffer仍exact、坏manifest令整卡与其他有效结果消失。整体mixed；c1/c4完成，c2/c3待补，状态不变。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-call-chain-controller-review-2026-09-09.md；证据同主题raw。源码未改、真实业务库和研究目标未动。\n\n03B-R3 窗口归属与异常资料补修（T1/T2 边界）：报告 docs/experiments/agent-03b-r3-window-source-and-validation-2026-09-09.md；raw=docs/experiments/raw/agent-03b-r3-window-source-and-validation-2026-09-09/。总控边界7组 boundaries.py 复跑 7/7 PASS（w0同对象继承、w1换对象不继承、w2采用本对象运行、w3非法日期未核实、v0合法完整结果支持、v1缺字段不exact、v2坏清单不丢卡）；原6组 remaining.py 仍 6/6 PASS；相关回归 41 passed。修改工程代码（copilot/resolve.py 日历校验、api/routes/agent.py 窗口按对象继承+adopt按symbol、copilot/backtest_requests.py run_manifest类型守卫+缺字段检测），未改策略规则数值、未启用真实交易库。历史 mixed 结论保留，仍 in_progress 待总控复验。\n\n2026-09-09 Codex窗口与资料独立复验：旧20固定检查及分进程18+23=41项回归本次全通过；新增原契约检查1正例通过、5组失败。仍有同一问题回答/快照选择不同运行、无效新窗口次轮复活旧值、错误类型空参数恢复completed、params/data_range损坏丢整卡、拒绝原因未进真实页面。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-window-validation-controller-review-2026-09-09.md；同主题raw含真实HTTP/worker、组件渲染与机械回归。整体mixed，保留c1/c4通过，c2/c3待落实原定统一契约。未改源码、真实业务库或研究目标。\n\n2026-09-09 Codex单入口交付独立复验：原p0+u1—u5 6/6、固定20/20、分进程18+23=41回归本次全部通过。新增全局chat500/stream失败；原问题中断恢复借用后续窗口；多个运行仍默认最新；错误类型字符串被恢复completed；顶层/冻结引用损坏丢卡、采用坏区间500。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-single-context-controller-review-2026-09-09.md，同主题raw保留真实HTTP/worker/组件证据。整体mixed；全局回归使c1待补，c2/c3未闭合，c4已验收部分保留。目录角色纠正：Desktop/lei-signal-lab为实际使用/最终集成目录，sync为此次开发工作目录，未自动同步、未合入。生产源码/业务库/研究目标未改。\n\n2026-09-09 Codex所有路径独立复验：原contract6/6、z2—z6全过、全局两入口全过；原固定20/20、分进程18+23=41回归全过。额外2正例（唯一运行采用、真实stream恢复与重放）通过。余3实测缺陷：bool false→true仍恢复completed（后续支持集合已挡，未夸大为支持问题）；明确运行编号未被解析且数字被误作证券，证据卡消失；params.symbols=7在类型检查前遍历毁卡。整体mixed，c1/c4保留完成，c2/c3待补。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-all-paths-controller-review-2026-09-09.md，同主题raw含本次新JSON/JUnit与stream证据。只在sync开发验收，未合入实际使用的Desktop/lei-signal-lab；未动策略、业务库或研究目标。\n2026-09-09 GLM按任务书03B-R3-values-selection-and-validation补d1/d2/d3并独立复验：_type_eq布尔分支改为类型+值同时一致且拒绝字符串伪装（d1已修，翻转gap_momentum仍REJECT、原值ACCETP）；resolve.parse_window_choice新增_RUN_ID_RE/_extract_run_id把真实运行编号传入选择器，api/routes/agent.py按_RUN_ID_RE排除编号片段被误作证券（d2已修，真实worker双运行+真实HTTP正例通过、无编号/非本对象拒绝不丢卡）；backtest_requests.py对params.symbols先于遍历做类型守卫（d3已修，错误类型返回结构化拒绝、保留其他记录不毁卡）。验收：复制总控matrix.py+fixture.py基线→5/5 PASS且source_unchanged True；固定20=boundaries7+additional7+remaining6=20/20；contract.py p0+u1—u5=6/6；z2—z6全过、z1仅999999.SS→502单列（不抹FAIL）；全局两入口全过；分进程18+23=41回归全过。只在sync开发验收，未合入Desktop/lei-signal-lab；未动策略/业务库/研究目标。c2/c3待总控复验确认后落实。\n\n2026-09-09 Codex三项修复复验（实验规范v1.0，仅工程）：matrix5/5、contract6/6、z2—z6、global2/2、真正固定20/20、18+23=41回归均通过；4个实际选择/归属正例通过。d1/d3关闭，d2主流程通过；两项原明文要求仍缺：实际问题快照不保留独立run_id，继承null（source说明仍可追溯，不夸大为全部丢失）；按值全局排除编号片段会误删编号之外用户明确证券（518880碰撞，纯解析函数对照）。报告 /Users/yongbiaoli/lei-signal-sync/docs/experiments/agent-03b-r3-values-controller-review-2026-09-09.md，同主题raw留新日志、冻结记录和交付报告快照。整体mixed，保留既有c1/c4、c2/c3待两项收尾。只在sync验收，未合入lab、未改策略/业务库/研究目标。\n\n2026-09-09 用户回复“可以”，授权总控直接收尾S1/S2。已在lei-signal-sync修复窗口运行编号冻结/显示/继承/恢复，以及仅遮编号原文位置、保留独立同值证券。固定20/20、两文件41/41、新身份与恢复检查通过。报告：docs/experiments/agent-03b-r3-controller-finalization-2026-09-09.md；原始证据同主题raw。仅开发范围验收通过，运行目录未合入，真实业务库未迁移。",
+        "next_action": "开发范围已提交用户验收；下一步依raw/integration-plan.md在隔离副本准备向Desktop/lei-signal-lab定向合入，保留运行目录13个提交及未提交修改，核对前置依赖/迁移和两入口。尚未实际合入、启用真实库或切服务。"
+      }
+    },
+    {
+      "at": "2026-09-09T12:02:27+00:00",
+      "action": "submit_review",
+      "note": "总控直接收尾并集中复验通过，提交开发范围待用户验收；不代表运行目录合入或上线。",
+      "from_status": "in_progress",
+      "to_status": "review",
+      "scope": ""
+    },
+    {
+      "at": "2026-09-09T12:16:35+00:00",
+      "action": "authorize",
+      "note": "用户原话“开整”，执行已提出的定向合入；保留原目标，不重复创建。",
+      "from_status": "review",
+      "to_status": "approved",
+      "scope": "按 03B-discussion-backtest-2026-09-08.md 首批实施协议：统一入口解析、两前端入口去旁路、讨论快照、迁移027补测任务绑定与单队列执行、语义状态目录与证据卡、计划草稿衔接；隔离库验收。不含真实库启用/迁移/真实存证接线、收费调用、研究、发布。；2026-09-09 用户在总控提出向lei-signal-lab定向合入后回复“开整”，追加授权本次03B代码及必要前置依赖在隔离验证后合入运行目录、对齐本地服务。仍不授权收益规则采用、收费调用、真实交易、历史观察迁入或自动通知。"
+    },
+    {
+      "at": "2026-09-09T12:16:35+00:00",
+      "action": "start",
+      "note": "隔离合并树与双方源码备份已建立，后端与前端分范围集成，待联合验证通过后落地。",
+      "from_status": "approved",
+      "to_status": "in_progress",
+      "scope": ""
+    }
+  ],
+  "notes": "\n2026-09-09 单入口选择与完整核验收口：u1-u5 契约全通过，c2/c3 勾完；status 仍 in_progress，待总控独立复验。\n2026-09-09 补齐调用路径+修全局回归：z1(全局)经 global_discussion.py 两路由 PASS、z2 类型契约 PASS、z3/z5/z6 结构隔离与采用入口 PASS、z4 恢复复用冻结窗口 PASS；c1/c2/c3 据证据勾完；41 回归全过。status 仍 in_progress，待总控独立复验。成果在 lei-signal-sync，尚未合入实际使用的 Desktop/lei-signal-lab。"
+}

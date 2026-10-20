@@ -1,0 +1,168 @@
+[
+  {
+    "user_question": "此前普通突破为什么完全不能买入？",
+    "conclusion": "固定其它条件，取消历史目标空间检查后，原普通突破买入由0次变132次，期末92.79万元；简单方向2次变340次、108.07万元。均入金60万元，也承受18.61%/16.27%最大投资净值跌幅；未证明应取消纪律。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "entry-discipline-diagnostic",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/account-results/run-lock.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/account-results/summary.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/account-results/paired-comparisons.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/reference-account-review/results.json",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/execution-checks.json"
+      ],
+      "source_hash": [
+        "6ecbeeac9f301708f7638458804d0bcb284f17bbe01861685cf03e381284fe2e",
+        "74105e141ab0e5b6c120864ed4b13048ef804b49b8713f5b09b83e49d5fb12d5",
+        "af0c43e694031b09c19ff500b418c9dc6aa1de3ac1e56c993d46a2b564d620a8",
+        "8d2332b46ee90d9478aa33015566705e77b4bbdb27c047f8203e235892b89462",
+        "a54544efeec24ebebdb9e332dacd0da2fab6d4b20a7bf61c7c6a3bf2e2a257ee",
+        "eee0e1caf3ade1d458c646c0668511ea0cc0fb89da00199d421b5a4c9c88a27c"
+      ],
+      "source_version": "research-ninth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "limited_entry_filter_diagnostic",
+      "strategy_scope": [],
+      "limitations": "已看过的有限四基金历史，不是未来检验；日线成交近似，真实费用/完整行动和交易日历未齐；R0/R1仅诊断，不自动取消现行纪律；B替代仅旧6日期机械比较，未生成新信号或收益；不同配置和同一市场交易不代表独立经历数",
+      "compatibility": "unknown",
+      "evidence_id": "entry-discipline-diagnostic",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/protocol.md",
+      "strategies": [],
+      "note": "已看过的有限四基金历史，不是未来检验；日线成交近似，真实费用/完整行动和交易日历未齐；R0/R1仅诊断，不自动取消现行纪律；B替代仅旧6日期机械比较，未生成新信号或收益；不同配置和同一市场交易不代表独立经历数"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "第八批已核名义日线与已知公司行动；完整交易制度未齐",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/manifest.json",
+        "sha256": "a7e0bf0d09b682bfa00e19bc017988cb1df9e1c88bee0113bd709ea7527d17c8"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/b-research-fix/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§4.6/§9B/§10/§13；R0/R1仅诊断参照，不符合完整现行纪律；B区间语义未变",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-ninth-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": true,
+      "review_scope": "账户8398日/941成交/全部1742原候选/472次持仓；B仅源文与6旧日期机械复核，不称独立收益验证",
+      "status": "limited",
+      "limitations": [
+        "已看过的有限四基金历史，不是未来检验",
+        "日线成交近似，真实费用/完整行动和交易日历未齐",
+        "R0/R1仅诊断，不自动取消现行纪律",
+        "B替代仅旧6日期机械比较，未生成新信号或收益",
+        "不同配置和同一市场交易不代表独立经历数"
+      ]
+    }
+  },
+  {
+    "user_question": "横盘很久为何失效区间可能只有一天？",
+    "conclusion": "横盘资格与本次观察价格区间独立计时；6个旧B事件中3个仅用1根价格形成区间。原文缺明确起点算法，需澄清结构含义，不能直接称完整B验证或擅改止损。",
+    "evidence_ref": {
+      "schema_version": "provenance/1.2",
+      "id": "b-zone-semantics",
+      "source_path": [
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/protocol.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/README.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/six-events.csv",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/source-table.md",
+        "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/manifest.json"
+      ],
+      "source_hash": [
+        "29cc4bfb6553a09591717d7deb23dd13ba61a13dde967e133aed17ee8115ccff",
+        "5eb5dc4e2b3e7cccc3e792f3b459bb64936af9f0fcb513c0dbe728ca4e9e725a",
+        "4c3c093e1515b8bcef27c99aa6c9c93c3a7abb38809aac2c65bd6a1d0408b879",
+        "13b2ade660782db6d55803d8c4980c7f4f804534b2bdebaa26040a2db7ad5e13",
+        "3c8cc1daa4c2468e6739affeb391594b4fe3d8a1d10622e09abeb9fc55319e98"
+      ],
+      "source_version": "research-ninth/2026-09-08",
+      "status": "mixed",
+      "window": "2015-01-01—2026-06-30",
+      "statistic_kind": "existing_six_event_structure_definition_diagnostic",
+      "strategy_scope": [],
+      "limitations": "已看过的有限四基金历史，不是未来检验；日线成交近似，真实费用/完整行动和交易日历未齐；R0/R1仅诊断，不自动取消现行纪律；B替代仅旧6日期机械比较，未生成新信号或收益；不同配置和同一市场交易不代表独立经历数",
+      "compatibility": "unknown",
+      "evidence_id": "b-zone-semantics",
+      "source": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-ninth-2026-09-08/b-zone-semantics/protocol.md",
+      "strategies": [],
+      "note": "已看过的有限四基金历史，不是未来检验；日线成交近似，真实费用/完整行动和交易日历未齐；R0/R1仅诊断，不自动取消现行纪律；B替代仅旧6日期机械比较，未生成新信号或收益；不同配置和同一市场交易不代表独立经历数"
+    },
+    "market_data_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "source_id": "frozen_four_fund_nominal",
+        "instrument_id": "510300,159915,518880,513100",
+        "market": "CN",
+        "observed_at": null,
+        "available_at": null,
+        "generated_at": null,
+        "last_valid_at": null,
+        "health": "unknown",
+        "reason": "第八批已核名义日线与已知公司行动；完整交易制度未齐",
+        "calendar_ref": null,
+        "as_of_cutoff": null,
+        "source_policy_ref": null,
+        "reference_lag_trading_days": null,
+        "source": "frozen_four_fund_nominal",
+        "completeness": "unknown",
+        "lag_trading_days": null,
+        "input_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/product-qualification/manifest.json",
+        "sha256": "a7e0bf0d09b682bfa00e19bc017988cb1df9e1c88bee0113bd709ea7527d17c8"
+      }
+    ],
+    "rule_refs": [
+      {
+        "schema_version": "provenance/1.2",
+        "rule_id": "__ruleset__",
+        "version": "2.1.0",
+        "config_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-eighth-2026-09-08/b-research-fix/research-package/configs/rules.v2.yaml",
+        "config_hash": "cdab8221bba910221d5b7e7500dd76f9817dbe04e90f970c88a00d95726aad7f",
+        "definition_ref": "策略§4.6/§9B/§10/§13；R0/R1仅诊断参照，不符合完整现行纪律；B区间语义未变",
+        "fallback_note": ""
+      }
+    ],
+    "research": {
+      "run_id": "research-ninth-2026-09-08",
+      "production_adopted": false,
+      "independent_market_episodes": null,
+      "independently_reviewed": false,
+      "review_scope": "账户8398日/941成交/全部1742原候选/472次持仓；B仅源文与6旧日期机械复核，不称独立收益验证",
+      "status": "limited",
+      "limitations": [
+        "已看过的有限四基金历史，不是未来检验",
+        "日线成交近似，真实费用/完整行动和交易日历未齐",
+        "R0/R1仅诊断，不自动取消现行纪律",
+        "B替代仅旧6日期机械比较，未生成新信号或收益",
+        "不同配置和同一市场交易不代表独立经历数"
+      ]
+    }
+  }
+]

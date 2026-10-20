@@ -1,0 +1,168 @@
+{
+ "pre_registered_criteria": {
+  "翻案为值得进一步验证": "修平后无闸三窗超额全>0，且 10bp/1bp 两费用口径布尔一致",
+  "维持判负": "两费用口径下无闸三窗均未全正（任一窗<=0）",
+  "证据不足": "数据无法构建，或三窗全正布尔在两费用口径间不一致",
+  "framework": "30/70 3bands fixed contrarian gamma1 min_trade0.05 cn_all {无闸,+MA200闸} 三窗中点切分（第十四轮协议）",
+  "verdict_note": "即使翻案也仅'值得进一步验证'，非入选结论"
+ },
+ "jumps": [
+  "2015-04-15",
+  "2022-08-29"
+ ],
+ "window": [
+  "2013-03-15",
+  "2026-08-27"
+ ],
+ "audit_reference_10bp": {
+  "raw": {
+   "full_excess": -0.1033,
+   "h1_excess": -0.2367,
+   "h2_excess": 0.0181,
+   "full_bench_cagr": 0.1778
+  },
+  "fixed": {
+   "full_excess": 0.0049,
+   "h1_excess": -0.0084,
+   "h2_excess": 0.0185,
+   "full_bench_cagr": 0.0809
+  }
+ },
+ "runs": {
+  "fee10bp_nogate": {
+   "raw": {
+    "full_excess": -0.1033,
+    "h1_excess": -0.2367,
+    "h2_excess": 0.0181,
+    "all_positive": false,
+    "full_strat_cagr": 0.0744,
+    "full_bench_cagr": 0.1778,
+    "full_strat_mdd": -0.3918,
+    "full_bench_mdd": -0.6327,
+    "window": [
+     "2013-03-15",
+     "2026-08-27"
+    ]
+   },
+   "fixed": {
+    "full_excess": 0.0049,
+    "h1_excess": -0.0084,
+    "h2_excess": 0.0185,
+    "all_positive": false,
+    "full_strat_cagr": 0.0858,
+    "full_bench_cagr": 0.0809,
+    "full_strat_mdd": -0.3918,
+    "full_bench_mdd": -0.6327,
+    "window": [
+     "2013-03-15",
+     "2026-08-27"
+    ]
+   },
+   "delta_full_excess": 0.1082
+  },
+  "fee10bp_gate": {
+   "raw": {
+    "full_excess": -0.1283,
+    "h1_excess": -0.2523,
+    "h2_excess": -0.017,
+    "all_positive": false,
+    "full_strat_cagr": 0.0494,
+    "full_bench_cagr": 0.1778,
+    "full_strat_mdd": -0.2304,
+    "full_bench_mdd": -0.6327,
+    "window": [
+     "2013-03-15",
+     "2026-08-27"
+    ]
+   },
+   "fixed": {
+    "full_excess": -0.0639,
+    "h1_excess": -0.0846,
+    "h2_excess": -0.0431,
+    "all_positive": false,
+    "full_strat_cagr": 0.0171,
+    "full_bench_cagr": 0.0809,
+    "full_strat_mdd": -0.2423,
+    "full_bench_mdd": -0.6327,
+    "window": [
+     "2013-03-15",
+     "2026-08-27"
+    ]
+   },
+   "delta_full_excess": 0.0644
+  },
+  "fee1bp_playbook_nogate": {
+   "raw": {
+    "full_excess": -0.0934,
+    "h1_excess": -0.2262,
+    "h2_excess": 0.0275,
+    "all_positive": false,
+    "full_strat_cagr": 0.0845,
+    "full_bench_cagr": 0.1778,
+    "full_strat_mdd": -0.3918,
+    "full_bench_mdd": -0.6327,
+    "window": [
+     "2013-03-15",
+     "2026-08-27"
+    ]
+   },
+   "fixed": {
+    "full_excess": 0.0149,
+    "h1_excess": 0.0021,
+    "h2_excess": 0.0281,
+    "all_positive": true,
+    "full_strat_cagr": 0.0959,
+    "full_bench_cagr": 0.081,
+    "full_strat_mdd": -0.3918,
+    "full_bench_mdd": -0.6327,
+    "window": [
+     "2013-03-15",
+     "2026-08-27"
+    ]
+   },
+   "delta_full_excess": 0.1083
+  },
+  "fee1bp_playbook_gate": {
+   "raw": {
+    "full_excess": -0.1167,
+    "h1_excess": -0.2397,
+    "h2_excess": -0.0065,
+    "all_positive": false,
+    "full_strat_cagr": 0.0612,
+    "full_bench_cagr": 0.1778,
+    "full_strat_mdd": -0.2297,
+    "full_bench_mdd": -0.6327,
+    "window": [
+     "2013-03-15",
+     "2026-08-27"
+    ]
+   },
+   "fixed": {
+    "full_excess": -0.0514,
+    "h1_excess": -0.0714,
+    "h2_excess": -0.0315,
+    "all_positive": false,
+    "full_strat_cagr": 0.0296,
+    "full_bench_cagr": 0.081,
+    "full_strat_mdd": -0.2375,
+    "full_bench_mdd": -0.6327,
+    "window": [
+     "2013-03-15",
+     "2026-08-27"
+    ]
+   },
+   "delta_full_excess": 0.0653
+  }
+ },
+ "verdict": {
+  "decision": "证据不足（费用口径间三窗全正布尔不一致）",
+  "all_positive_by_fee": {
+   "fee10bp": false,
+   "fee1bp_playbook": true
+  }
+ },
+ "audit_reproduction_check": {
+  "raw_match": true,
+  "fixed_match": true
+ }
+}

@@ -1,0 +1,111 @@
+{
+  "event_count": 4,
+  "meaning": "two cash dividends + one split + one associated secondary-market suspension",
+  "checks": [
+    {
+      "file": "sources/512400-dividend-2024-sse.pdf",
+      "checks": [
+        {
+          "term": "2024 年 9 月 13 日",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "2024 年 9 月 18 日",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "2024 年 9 月 23 日",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "本次分红方案（单位：元/10 份基金份额） 0.1000",
+          "found": false,
+          "found_normalized": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "sources/512400-dividend-2025-sse.pdf",
+      "checks": [
+        {
+          "term": "2025 年 9 月 12 日",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "2025 年 9 月 15 日",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "2025 年 9 月 18 日",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "本次分红方案（单位：元/10 份基金份额） 0.1500",
+          "found": false,
+          "found_normalized": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "sources/512170-split-second-notice-2021-02-23-sse.pdf",
+      "checks": [
+        {
+          "term": "2021 年2 月 23 日",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "2021 年2 月 24 日",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "1:3",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "停牌",
+          "found": true,
+          "found_normalized": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "sources/512170-split-result-2021-02-25-sse.pdf",
+      "checks": [
+        {
+          "term": "2021 年 2 月23 日",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "2021 年 2 月 24 日",
+          "found": false,
+          "found_normalized": true
+        },
+        {
+          "term": "1:3",
+          "found": true,
+          "found_normalized": true
+        },
+        {
+          "term": "2021 年2 月 25 日起恢复交易",
+          "found": true,
+          "found_normalized": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "passed": true
+}

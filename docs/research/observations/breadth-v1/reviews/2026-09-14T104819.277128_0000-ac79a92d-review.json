@@ -1,0 +1,40 @@
+{
+  "reviewed_at": "2026-09-14T10:48:42.814808+00:00",
+  "observation_record": "docs/research/observations/breadth-v1/records/2026-09-14T104819.277128_0000-ac79a92d.json",
+  "facts": [
+    {
+      "id": "source-02",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_codes.json",
+      "data": {
+        "date": "2026-09-14",
+        "codes": 5562
+      }
+    },
+    {
+      "id": "source-09",
+      "path": "/Users/yongbiaoli/.lei_signal_lab/cache/159915.SZ.bars.parquet",
+      "rows": 120,
+      "columns": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume"
+      ],
+      "latest_date": "2022-06-17 00:00:00"
+    }
+  ],
+  "unstable_after_review": [],
+  "retry_history": "First review detected source change after fingerprint recording; preserved original record and took a new real-time record, no overwrite.",
+  "qualification": {
+    "stage": "input_observation_only",
+    "membership": "Current list does not establish historical membership and acquisition chain",
+    "denominator": "No matching common200 denominator and coverage evidence supplied",
+    "etf_and_actions": "Matching nominal prices, action and execution eligibility chain not established; file changes alone insufficient",
+    "availability": "Read times are actual; source dates/mtime do not establish historical availability",
+    "signals": null,
+    "trades": null,
+    "returns": null
+  },
+  "decision": "No actionable readiness improvement. No signal generation or automatic state switch."
+}

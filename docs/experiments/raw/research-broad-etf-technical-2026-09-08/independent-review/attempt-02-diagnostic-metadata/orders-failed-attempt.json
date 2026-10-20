@@ -1,0 +1,4 @@
+{
+  "error": "AssertionError(('R0', 'R0:sh510300:2015-01-05:donchian60', 'source metadata mutated'))",
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/independent-review/verify_orders.py\", line 169, in <module>\n    try:run_orders()\n        ^^^^^^^^^^^^\n  File \"/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-technical-2026-09-08/independent-review/verify_orders.py\", line 103, in run_orders\n    c=cm[o['candidate_id']];s=c['symbol'];d=c['signal_date'];assert o['candidate_metadata']==c,(cfg,c['candidate_id'],'source metadata mutated')\n                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('R0', 'R0:sh510300:2015-01-05:donchian60', 'source metadata mutated')\n"
+}

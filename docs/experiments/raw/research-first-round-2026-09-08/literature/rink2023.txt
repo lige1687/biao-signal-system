@@ -1,0 +1,2358 @@
+
+--- PDF PAGE 1 ---
+Rink, Kevin
+Article  —  Published Version
+The predictive ability of technical trading rules: an
+empirical analysis of developed and emerging equity
+markets
+Financial Markets and Portfolio Management
+Provided in Cooperation with:
+Springer Nature
+Suggested Citation: Rink, Kevin (2023) : The predictive ability of technical trading rules: an empirical
+analysis of developed and emerging equity markets, Financial Markets and Portfolio Management,
+ISSN 2373-8529, Springer US, New York, NY, Vol. 37, Iss. 4, pp. 403-456,
+https://doi.org/10.1007/s11408-023-00433-2
+This Version is available at:
+https://hdl.handle.net/10419/312389
+Standard-Nutzungsbedingungen:
+Die Dokumente auf EconStor dürfen zu eigenen wissenschaftlichen
+Zwecken und zum Privatgebrauch gespeichert und kopiert werden.
+Sie dürfen die Dokumente nicht für öffentliche oder kommerzielle
+Zwecke vervielfältigen, öffentlich ausstellen, öffentlich zugänglich
+machen, vertreiben oder anderweitig nutzen.
+Sofern die Verfasser die Dokumente unter Open-Content-Lizenzen
+(insbesondere CC-Lizenzen) zur Verfügung gestellt haben sollten,
+gelten abweichend von diesen Nutzungsbedingungen die in der dort
+genannten Lizenz gewährten Nutzungsrechte.
+Terms of use:
+Documents in EconStor may be saved and copied for your personal
+and scholarly purposes.
+You are not to copy documents for public or commercial purposes, to
+exhibit the documents publicly, to make them publicly available on the
+internet, or to distribute or otherwise use the documents in public.
+If the documents have been made available under an Open Content
+Licence (especially Creative Commons Licences), you may exercise
+further usage rights as specified in the indicated licence.
+  https://creativecommons.org/licenses/by/4.0/
+
+--- PDF PAGE 2 ---
+Vol.:(0123456789)
+Financial Markets and Portfolio Management (2023) 37:403–456
+https://doi.org/10.1007/s11408-023-00433-2
+1 3
+The predictive ability of technical trading rules: 
+an empirical analysis of developed and emerging equity 
+markets
+Kevin Rink1 
+Accepted: 10 May 2023 / Published online: 12 August 2023 
+© The Author(s) 2023
+Abstract
+We investigate the predictability of leading equity indices of 23 developed 
+and 18 emerging markets with a set of 6406 technical trading rules over up to 
+66 years. Using a state-of-the-art test for superior predictive ability to control 
+for data snooping bias, we find in-sample evidence for technical heuristics with 
+significant outperformance over a simple buy-and-hold strategy in the major -
+ity of markets. The proportion of heuristics with superior performance is much 
+higher among emerging market indices, and the predictability diminishes drasti-
+cally over time in all markets. In particular, markets turn unpredictable in the 
+last years of our sample. Moreover, the results are very sensitive to the intro-
+duction of moderate transaction costs. An out-of-sample analysis shows that the 
+performance of technical rules is not persistent in the sense that recently best-
+performing rules perform significantly worse than simple buy-and-hold strate-
+gies in the future. Overall, our results cast serious doubt on whether investors 
+could have earned any excess profits using the broad range of considered techni-
+cal trading rules.
+Keywords Technical analysis · Predictive ability · Multiple hypothesis testing · Data 
+snooping bias · Market efficiency · Transaction costs
+JEL Classification C12 · C15 · G11 · G14 · G15
+ * Kevin Rink 
+ krink@wiwi.uni-frankfurt.de
+1 Faculty of Economics and Business, Goethe University Frankfurt, Frankfurt, Germany
+
+--- PDF PAGE 3 ---
+404 K. Rink 
+1 3
+1 Introduction
+Whether technical analysis is capable of generating consistent profits is a matter 
+of intense debate, both in research and in practice. According to several academic 
+studies, technical trading rules,1 which generate trading signals solely based on past 
+price and volume information, are popular among professional and retail investors. 2 
+However, proponents of the efficient market hypothesis (Fama 1965, 1970) argue 
+that technical analysis is meaningless, such as Malkiel (1999) who states that “tech-
+nical analysts build their strategies on dreams of castles in the air” (p. 138) and that 
+these investors follow an “abnormally dedicated cult” (p. 119).
+The empirical literature mainly disagrees on whether technical analysis adds 
+value for investors.3 Most of these studies, however, focus exclusively on the lead-
+ing US stock market indices and investigate narrow sets of technical trading heuris-
+tics. In addition to that, the research on technical trading rules generally faces the 
+challenge of an accurate statistical analysis, which is necessary to produce reliable 
+results. Data snooping bias is a major concern when assessing multiple models at 
+the same time, which is often the case in the research of technical trading rules. 4 
+Since the risk of data snooping bias is immense when analyzing large sets of trading 
+rules simultaneously, a statistical procedure to account for data snooping is inevita-
+ble. However, adequately dealing with data snooping is technically challenging, such 
+2 For example, the survey studies by Hoffmann and Shefrin (2014) and Lease et al. (1974) suggest that 
+about one-fourth to one-third of retail investors regularly use technical analysis to come up with trad-
+ing decisions. Menkhoff (2010) shows that fund managers heavily rely on technical analysis to predict 
+prices with a forecast horizon of less than two months. Survey responses analyzed by Cheung and Chinn 
+(2001), Gehrig and Menkhoff (2003, 2004), and Menkhoff (1997) highlight the importance of technical 
+trading for foreign exchange traders.
+3 Research results in favor of the use of simple technical trading heuristics in Western equity markets 
+are provided by Alexander (1961, 1964), Benington and Jensen (1970), Bessembinder and Chan (1995), 
+Brock et al. (1992), Hsu and Kuan (2005), Levy (1967a, 1967b, 1968), Neely et al. (2010), Neftci (1991), 
+and Sullivan et al. (1999), among others. The empirical findings of Allen and Karjalainen (1999), Baj-
+growicz and Scaillet (2012), Blume and Fama (1966), Day and Wang (2002), and Neely (2003) pre-
+sent empirical evidence against the profitability of technical trading rules. In addition, Hsu et al. (2016), 
+Neely et  al. (1997), Neely and Weller (2011), and Sweeney (1986) investigate applications of techni-
+cal analysis in foreign exchange markets and find mixed results. Comprehensive reviews of the technical 
+analysis literature are provided by Farias Nazário et al. (2017) and Irwin and Park (2007). Adekoya et al. 
+(2019) review the literature on stock market predictability based on machine learning techniques, most 
+often combined with technical analysis. A new strand of literature examines whether technical analy -
+sis is beneficial in cryptocurrency markets. Detzel et al. (2020) show theoretically that moving averages 
+can add value for trading assets with hard-to-value fundamentals such as Bitcoin. Empirical support for 
+technical trading in cryptocurrency markets is presented by Ahmed et al. (2019), Bazán-Palomino and 
+Svogun (2022), Cohen (2021), and Hudson and Urquhart (2021). Hackethal et al. (2022) document that 
+individual investors trading structured retail products for cryptocurrencies are also more likely to use 
+moving average heuristics.
+4 Terms such as “p-hacking” or “data dredging” may be more common and are often used as synonyms 
+for “data snooping” (see, for example, Harvey (2017) for a recent discussion of the problem of p-hacking 
+in scientific research). The latter term is commonly used in the literature on technical analysis as well 
+as on multiple hypothesis tests suitable for processing large sets of technical trading rules (e.g., Hansen 
+2005; Romano and Wolf 2005; Sullivan et al. 1999; White 2000). Therefore, we stick to this terminology 
+in this paper as well.
+1 Throughout this paper, we use the terms “technical trading rules,” “technical trading heuristics,” or 
+“technical trading strategies” interchangeably.
+
+--- PDF PAGE 4 ---
+405
+1 3
+The predictive ability of technical trading rules: an empirical…
+that statistical tests that address this problem were not developed until after White 
+(2000) introduced a “Reality Check” for data snooping. Irwin and Park (2007) argue 
+that the technical rigor of previous studies is generally low due to outdated statisti-
+cal procedures and that many of these positive contributions to the literature may be 
+significantly flawed due to problems with data snooping.
+This paper revisits the mixed results found by the previous literature, whose con-
+tributions are mainly limited in at least one of three dimensions: (i) the scope of 
+investigated market data, (ii) the range of considered technical trading rules, and (iii) 
+the adequacy of statistical tests to address concerns of data snooping bias. Our goal 
+is to provide a comprehensive study that does not fall short on any of these points. 
+We investigate the predictability of 23 developed and 18 emerging market indices 
+with a set of 6406 common technical trading rules.5 The sample includes daily close 
+prices spanning up to 66 years. 6 We employ the “Stepwise Superior Predictive Abil-
+ity Test” proposed by Hsu et al. (2010), which is a state-of-the-art multiple hypothe-
+sis test designed to assess the statistical significance of the performance of large sets 
+of trading rules while controlling for data snooping bias. The test combines features 
+of related multiple hypothesis tests of Hansen (2005) and Romano and Wolf (2005), 
+and is able to identify as many predictive technical trading rules as possible in a 
+stepwise procedure.7
+We apply the Stepwise Superior Predictive Ability Test to all stock indices in our 
+sample and find statistically significant outperformance of technical trading rules over 
+simple buy-and-hold strategies in 13 of the 23 developed countries and in 14 of the 18 
+emerging markets based on a Sharpe ratio (Sharpe 1966, 1994) performance meas-
+ure.8 Particularly for developed market indices, the number of rules that outperform 
+the respective index is generally low. We then divide the sample periods into subsam-
+ples of 7 years in length to examine the evolution of predictive ability over time. We 
+find a significant time trend in the predictive power of technical rules, which is high-
+est during the first subperiods and declines sharply thereafter. Almost no developed 
+market is predictable with the considered technical trading rules during the last two 
+5 It is important to note that our study focuses exclusively on the application of time series strategies at 
+the index level and does not consider cross-sectional technical trading approaches such as momentum 
+(Jegadeesh and Titman 1993; Rouwenhorst 1998) or contrarian strategies (Lo and MacKinlay 1990a). 
+However, we include a wide range of moving average trading rules that can be considered a time series 
+equivalent of cross-sectional momentum trading (see Marshall et al. 2017; Moskowitz et al. 2012). The 
+previous literature has extensively covered cross-sectional momentum, with comprehensive reviews on 
+the topic provided by, for example, Subrahmanyam (2018) and Wiest (2023).
+6 The covered sample periods depend on data availability and first stock exchange notation of national 
+stock indices.
+7 A detailed discussion of data snooping and the test procedure to evaluate the performance of technical 
+trading rules is provided in the next section.
+8 In this paper, we refer to technical trading rules whose performance is significantly better than that of 
+a buy-and-hold benchmark strategy as “outperforming rules,” “significantly performing rules,” or “pre-
+dictive rules.” Similarly, we consider stock indices where the benchmark strategy is significantly out-
+performed by at least one technical trading rule as “predictable.” Technical rules that have the highest 
+performance in the entire sample of trading rules are referred to as “best-performing trading rules.” How-
+ever, these rules do not necessarily outperform the benchmark strategy with statistical significance.
+
+--- PDF PAGE 5 ---
+406 K. Rink 
+1 3
+subperiods starting in 2002. In contrast, we still find that half of the emerging markets 
+are predictable, with at least one rule during the period between 2002 and 2008. How-
+ever, in the last subperiod between 2009 and 2016, almost all emerging market indices 
+are unpredictable. These in-sample results are consistent with the predictions of the 
+adaptive market hypothesis of Lo (2004). In contrast to the efficient market hypothesis, 
+the adaptive market hypothesis assumes that markets evolve over time and that effi-
+ciency gradually increases as market participants are subject to a steady learning pro-
+cess. The degree of efficiency and the speed of adjustment depends on the competition 
+among traders and their ability to learn. Consequently, initially superior (proprietary) 
+trading strategies may eventually turn unprofitable due to either changing market envi-
+ronments or excessive competition as more participants adopt these strategies. In line 
+with that, for all markets in our sample, the predictability through technical trading 
+rules vanishes over time, and markets that are assumed to be less competitive generally 
+exhibit higher predictability through technical trading rules.
+Next, we test for the sensitivity of technical trading to transaction costs. In con-
+trast to the previous literature, we refrain from calculating simple break-even trans-
+action costs for technical rules. This approach treats transaction costs as exogenous 
+and, thereby, neglects the impact of these costs on the performance of trading rules 
+relative to each other. 9 We circumvent this issue by running the Stepwise Superior 
+Predictive Ability Test multiple times with steadily increasing single-trip transaction 
+costs. The analysis reveals that the predictive power of many rules is quickly offset 
+by the introduction of low transaction costs. Only 5 of the 23 developed markets and 
+4 of the 18 emerging markets exhibit significantly outperforming trading rules for 
+single-trip transaction costs of at least 20 basis points. The high sensitivity of techni-
+cal trading performance to transaction costs is in line with prior findings in the liter-
+ature (e.g., Allen and Karjalainen 1999; Bajgrowicz and Scaillet 2012; Ready 2002).
+A significant part of this paper is devoted to an out-of-sample analysis on the 
+applicability of technical heuristics in a way that aims to mimics the trading behav -
+ior of a real trader. Most of the previous literature on technical analysis examines 
+only the ex-post performance of technical heuristics and neglects whether these 
+heuristics actually exhibit out-of-sample persistent performance in the future. We 
+identify the best trading rules in 3  year subperiods that are eligible for trading in 
+each subsequent 3 year period. While the in-sample performance in terms of Sharpe 
+ratios of the best trading rules is highly economically and statistically significant, the 
+corresponding out-of-sample performance relative to buying and holding the respec-
+tive index is either insignificant or negative and significant. 10 We also construct 
+three equally weighted portfolios based on the out-of-sample technical trading algo-
+rithm applied to all 41 markets, as well as all developed markets and all emerging 
+markets, respectively. Assuming transaction costs of zero, we find that none of the 
+9 In particular, the performance of technical rules that generate trading signals less frequently tends to be 
+less sensitive to transaction costs. Thus, if transaction costs are high, heuristics with few trading signals 
+may (all else equal) perform better than others that generate more frequent trading signals.
+10 In-sample performance is measured with the trading rule with the highest Sharpe ratio during a 3 year 
+period. In contrast, out-of-sample performance is measured with the Sharpe ratio of the trading rule that 
+had the highest Sharpe ratio during the previous 3 year period.
+
+--- PDF PAGE 6 ---
+407
+1 3
+The predictive ability of technical trading rules: an empirical…
+three portfolios generates a Sharpe ratio that is significantly different from the ones 
+of the equally weighted buy-and-hold portfolios. For positive transaction costs, the 
+technical trading portfolios significantly underperform the buy-and-hold portfolios 
+most of the time. These findings suggest that the performance of best rules is not 
+persistent and technical trading signals can be considered as noise.
+We contribute to the empirical literature with a clear argument against the use-
+fulness of technical trading rules in today’s markets. We consider this contribution 
+significant for several reasons. To the best of our knowledge, this paper is the first 
+broad-based analysis using the powerful and rigorous Stepwise Superior Predictive 
+Ability Test for an analysis of technical trading rules in a comparative analysis of 
+equity markets.11 In addition, we leverage the test procedure to determine the distri-
+bution of rules with superior performance at different transaction cost levels. Unlike 
+existing transaction cost analyses in the literature, we do not perform a pure break-
+even analysis, which may be biased since transaction costs are treated as exogenous. 
+Another contribution is the out-of-sample test for technical trading performance. 
+A similar persistence analysis has only been conducted by Bajgrowicz and Scail-
+let (2012), who apply it to a single time series of daily index data. To the best of 
+our knowledge, our study provides the most comprehensive analysis of a large set 
+of technical trading rules in terms of the number of investigated stock markets, the 
+power of the applied testing procedure, and the rigor of the transaction cost and out-
+of-sample analysis. Given the general disagreement in the academic literature on 
+the predictive ability of technical trading rules, our work aims to shed light on this 
+ongoing debate.
+The remainder of this paper is organized as follows. Section  2 discusses data 
+snooping bias and multiple hypothesis tests in research on technical trading rules. 
+Section  3 introduces the technical trading rules used in the empirical analysis of this 
+paper. Section  4 deals with the performance measurement. Section   5 describes the 
+data. Sections  6 and 7 present the in-sample and out-of-sample results, respectively. 
+Section 8 concludes.
+2  Data snooping bias and research on technical analysis
+In the following, we provide a discussion of data snooping and appropriate testing 
+procedures to cope with it in the context of technical analysis. While this section 
+is mainly nontechnical, Appendix  1 introduces the basic steps required to imple-
+ment the Stepwise Superior Predictive Ability Test by Hsu et al. (2010) used in the 
+empirical part of this paper.
+11 Jiang et al. (2019) use the Stepwise Superior Predictive Ability Test to study technical trading in the 
+Chinese stock market. They report evidence for superior in-sample performance of some rules compared 
+with a buy-and-hold strategy. Furthermore, Chen et  al. (2015) analyze the profitability of candlestick 
+trading strategies applied to stocks listed in the Dow Jones Industrial Average (DJIA) and report positive 
+results. Prior studies, such as the seminal paper by Sullivan et al. (1999) examines a similar set of rules 
+in the US stock market. However, the paper relies on the Reality Check of White (2000), which can only 
+evaluate the statistical significance of the best trading rule from a potentially large set of rules.
+
+--- PDF PAGE 7 ---
+408 K. Rink 
+1 3
+Data snooping becomes a problem if data are used more than once for statistical 
+inference or to assess the applicability of multiple models (White 2000). This occurs 
+frequently in empirical research as prior empirical findings likely motivate research-
+ers to reexamine already investigated data (Lo and MacKinlay 1990b). Thus, data-
+sets that happen to yield “desired” results are likely studied more intensively, while 
+other datasets may be studied less frequently and the corresponding results are rarely 
+published. With respect to that, Merton (1987) stresses the potential for biased 
+results due to an overuse of certain data. He argues that standard statistical tests 
+are inappropriate for these applications as they do not account for potential biases 
+caused by data snooping. In addition, data snooping bias is a concern when multi-
+ple hypotheses are evaluated based on one dataset. One may (unintentionally) over 
+adjust and fine tune the parametrization of technical heuristics based on past infor -
+mation, and succumb to the impression of superior performance. Thus, technical 
+analysis research is highly susceptible to data snooping bias due to the large number 
+of potentially testable trading rules. Bajgrowicz and Scaillet (2012) exemplify the 
+danger of data snooping with the following exaggerated example: “[I]magine you 
+put enough monkeys on type writers and that one of the monkeys writes ‘The Iliad’ 
+in ancient Greek. Because of the sheer size of the sample, you are likely to find a 
+lucky monkey once in a while. Would you bet any money that he is going to write 
+‘The Odyssey’ next?” (p. 474). The essence of data snooping bias is, therefore, that 
+ample search for successful trading rules (or, more generally, for some models) in 
+past data may likely yield superior but spurious results.
+Classical hypothesis testing procedures disregard the impact of search on sta-
+tistical significance in problems involving a high number of models to be evalu-
+ated. Following the argument of Hsu et al. (2016), if one aims to test for statisti-
+cal significance of the maximum element from the vector /u1D703= /parenleft.s1/u1D7031, /u1D7032, … , /u1D703m
+/parenright.s1 (e.g., 
+the highest performance measure from a set of m trading rules), a traditional test 
+setup may simply formulate a null hypothesis based on the maximum element of /u1D703 , 
+/u1D703max = max /braceleft.s1/u1D7031, /u1D7032, … , /u1D703m
+/braceright.s1 . However, according to White (2000), if an extensive 
+specification search is required to identify the best-performing forecasting model, 
+there is a high risk that the performance of this model is spurious. Even if one is 
+only interested in the significance of the best model, the search process involved in 
+identifying such a model implicitly turns the setup into a multiple hypothesis prob-
+lem. That is because weaker models are also evaluated along the search process. As 
+a result, neglecting the specification search and, thus, disregarding worse models in 
+the test procedure of the best model increases the probability of committing a type 
+I error of incorrectly rejecting the null hypothesis. Hence, for large m, one likely 
+overstates the statistical significance of the highest performance in /u1D703 and understates 
+the actual probability of a type I error if the test procedure does not account for data 
+snooping. This concern is particularly pronounced when testing technical trading 
+rules, as the free choice of parameter values typically leads to many different (albeit 
+correlated) models.
+An early and simple approach to account for multiple hypotheses in statistical 
+tests is provided by the popular Bonferroni correction. If one targets an overall sig-
+nificance level (often referred to as familywise error rate) of /u1D6FC while testing m mod-
+els simultaneously, the Bonferroni correction requires that each model is tested with 
+
+--- PDF PAGE 8 ---
+409
+1 3
+The predictive ability of technical trading rules: an empirical…
+a significance level of /u1D6FC∕m . This approach might be suitable for applications where 
+m is small. However, the test becomes very conservative for large m.12 Also, the 
+Bonferroni correction disregards a potentially complex correlation structure of trad-
+ing signals of “related” trading rules. 13 The higher the correlation, the more con-
+servative a Bonferroni test is. In the extreme case of a perfect correlation between all 
+considered trading rules, a multiple hypothesis test is equivalent to a single hypothe-
+sis test. An appropriate test for evaluating the performance of technical trading rules 
+should take this correlation into account.
+White (2000) is the first to propose a joint testing method that considers the 
+dependence structure of individual time series. His Reality Check tests whether the 
+best trading rule from a potentially large set of trading rules shows significant out-
+performance of a benchmark such as a buy-and-hold strategy. White (2000) encoun-
+ters the problem that the distribution of /u1D703max from the vector /u1D703 with correlated ele-
+ments is highly complex or unknown (e.g., if the elements of /u1D703 are correlated normal 
+random variables, the distribution of /u1D703max is unknown). White (2000) shows that a 
+null hypothesis of the form H0 ∶ maxk=1,… ,m /u1D703k ≤ 0 can be tested using the station-
+ary bootstrap of Politis and Romano (1994). According to that, the original data are 
+resampled in blocks of stochastic length to obtain pseudo time series that are used to 
+compute an empirical bootstrap distribution for /u1D703max . The p-value for the best model 
+is then calculated as the proportion of bootstrapped maximum performance meas-
+ures that are larger than the actual sample maximum.
+The Reality Check has two limitations from a statistical and a practical perspec-
+tive. First, as Hansen (2005) notes, the Reality Check has low statistical power if 
+many poorly performing trading rules are tested. This is because an increasing num-
+ber of poor models disguises the good ones, resulting in lower test power.14 Second, 
+the Reality Check only tests for the significance of /u1D703max , such that there is no sta-
+tistical evaluation of all strategies that are inferior to the best strategy. In practice, 
+however, it may not be sufficient to just assess the statistical significance for the best 
+trading rule, since one may be interested in all rules that exhibit real outperformance.
+Both drawbacks of White’s (2000) Reality Check are addressed in advanced ver-
+sions of the test. Hansen (2005) proposes the “Superior Predictive Ability Test,” an 
+improved version of the Reality Check in which bootstrap samples are recentered 
+when models perform particularly poorly, assigning lower weights to those models. 
+Still, the Superior Predictive Ability Test also just tests the single best model, regard-
+less of the total number of considered models. Both Romano and Wolf (2005) and 
+Hsu et al. (2010) introduce stepwise versions of the Reality Check and the Superior 
+14 This effect can be exemplified by the Bonferroni correction as noted by Hsu et al. (2016). If one raises 
+the number of poor models, the familywise error rate declines and the hurdle to reject the null hypothesis 
+for the performance of the best model increases. This makes it less likely that significant outperformance 
+will be detected.
+12 For instance, testing the 6406 trading rules used in our empirical analysis at /u1D6FC= 0.1 yields an indi-
+vidual significance level of less than 0.000016 for each trading rule.
+13 The large number of trading rules used in this studied mainly results from slight parameter variations, 
+so that the generated trading signals typically cluster within short time periods for heuristics with similar 
+parameterization (see Etheber 2014).
+
+--- PDF PAGE 9 ---
+410 K. Rink 
+1 3
+Predictive Ability Test, respectively. These tests extend the existing counterpart by 
+an algorithm that allows to identify all models with statistically significant outper -
+formance in a stepwise procedure that asymptotically controls for the probability of 
+committing a type I error. If the full set of models contains models with superior 
+performance, these are removed from the full set and the procedure is reestimated 
+over the remaining subset. This stepwise procedure terminates as soon as the test 
+no longer identifies a model that exhibits superior performance at the prespecified 
+significance level. For our empirical study, we employ the Stepwise Superior Predic-
+tive Ability Test of Hsu et al. (2010), as it is the most progressive test procedure by 
+combining the Superior Predictive Ability Test of Hansen (2005) with a stepwise 
+algorithm.15
+3  Technical trading rules
+We use a sample of 6406 technical trading rules that are categorized in five major 
+strategy classes. For some rules, we additionally use up to three trading filters. 
+While we briefly introduce these five strategies and three trading filters here, Appen-
+dix 2 provides the technical definitions required to implement them for computer-
+based automated trading.
+The relative strength index is a so-called oscillator, which was first introduced 
+and studied by Levy (1967a, 1967b) and Wilder (1978). It defines a ratio of the sum 
+of positive to the sum of all absolute price changes over a prespecified time period. 
+The frequency and the magnitude of positive price changes raises the relative 
+strength index. Analogously, negative price changes decrease the relative strength 
+index. By definition, the index ranges from 0 to 100. Technical analysts interpret a 
+high relative strength index (usually values of 70 and above are considered high) as 
+an indication of a recently overbought stock that is expected to undergo a downward 
+correction in the near future. A value of 30 or below is usually interpreted in the 
+other direction.
+Filter rules were studied by Alexander (1961, 1964) as well as Blume and Fama 
+(1966). These rules assume that recent trends in stock prices are likely to continue in 
+the future. Trading signals are generated once a stock shows a trend (i.e., positive or 
+negative cumulative price changes of a certain magnitude) during a specific period 
+of time. Adverse price movements indicate the reversal of trends.
+Moving average rules attempt to identify price trends by smoothing the time series 
+of past prices. Trading signals are triggered when two moving averages cross which is 
+perceived as a reversal of a trend. Specifically, once the “slow” moving average (i.e., 
+the smoother moving average due to an inclusion of more historical data) penetrates 
+15 A recent strand of the literature introduces the false discovery rate methodology to evaluate the per -
+formance of portfolios formed with technical trading rules (cf., Bajgrowicz and Scaillet 2012). Intro-
+duced by Benjamini and Hochberg (1995) and first employed for finance applications by Barras et  al. 
+(2010), the technique reduces the number of false positives in multiple hypothesis testing by allowing a 
+small fraction of false discoveries. The false discovery rate approach is a suitable alternative to the data 
+snooping methods presented in this section.
+
+--- PDF PAGE 10 ---
+411
+1 3
+The predictive ability of technical trading rules: an empirical…
+the “fast” moving average from above, the crossover event is interpreted as a bullish 
+signal. Likewise, a penetration from below is interpreted as a bearish signal.
+Support and resistance rules rely on the assumption that the security price has not 
+moved below or above a certain price level several times in the recent past (i.e., the 
+price has formed a “support level” from above or a “resistance level” from below). 
+Once a price breaks through the support level or falls below the resistance level, it is 
+assumed to continue moving in the respective direction.
+Channel breakout rules are based on the idea that a security price moves within 
+the boundaries of a certain price range. More specifically, a channel is defined by 
+two parallel lines between which the price moves back and forth over a specific 
+period of time. A break through the upper (lower) boundary of the channel is inter -
+preted as the beginning of a positive (negative) trend.
+We supplement the trading rules with up to three common trading filters.16 These 
+filters are designed to improve trading results by filtering out “unfavorable” trading 
+signals ex ante.17 First, a band filter sets an additional return by which the price of 
+an asset must move in the desired direction to open a trading position after a trading 
+signal is generated. It is, therefore, designed to prevent the entry into a position if 
+the price movement is not strong enough. Second, a time-delay filter simply delays 
+a trade by a specified time interval after a signal is generated. Third, a fixed-length 
+filter defines a fixed holding period after which a position is automatically liqui-
+dated. Any intermediate trading signals are ignored. This filter aims to close a posi-
+tion before trends flatten out and the security potentially generates negative returns.
+The filter, moving average, support and resistance, and channel breakout rules as 
+well as their parameterizations are adopted from the seminal paper of Sullivan et al. 
+(1999). In contrast to their study, this paper does not use on-balance volume rules 
+(that require daily volume data) because volume data are not available for several 
+indices in our sample. We, furthermore, add the relative strength index rules used by 
+Hsu et al. (2016) to our sample of rules. The parameters of the trading rules are pre-
+sented in Table  1 and Table  2 lists the considered parameter combinations. Overall, 
+we study a total of 6406 trading rules, including 600 relative strength index rules, 
+497 filter rules, 2049 moving average rules, 1220 support and resistance rules, and 
+2040 channel breakout rules.
+4  Performance measurement
+Similar to the prior literature (e.g., Bajgrowicz and Scaillet 2012; Hsu et  al. 2010, 
+2016; Sullivan et al. 1999), we use a Sharpe ratio criterion in all applications of the 
+Stepwise Superior Predictive Ability Test to evaluate the performance of technical 
+trading rules (see Appendix  1  for the implementation of the test procedure based 
+16 To avoid confusion, we note that filter rules are a standalone class of technical trading heuristics, 
+while trading filters are used to refine any type of technical trading rule.
+17 See, for instance, Bajgrowicz and Scaillet (2012), Brock et al. (1992), Hsu et al. (2016), and Sullivan 
+et al. (1999) for applications of trading filters in the empirical literature as well as, for instance, Pring 
+(2014) for a discussion on the topic in the mainstream technical analysis literature.
+
+--- PDF PAGE 11 ---
+412 K. Rink 
+1 3
+on the Sharpe ratio criterion, which is introduced in this section). To formalize the 
+underlying performance measurement, let there be a total of m  trading heuristics to 
+be tested and let rt denote the one-period return of a certain risky asset and rf
+t  denote 
+the risk-free rate in period t, t = 1, … , N . Furthermore, /u1D6FFt−1,k is a signal indicator for 
+heuristic k, k = 1, … , m , which indicates the exposure to the security in period t (i.e., 
+/u1D6FFt−1,k = 1 for a long, /u1D6FFt−1,k = 0 for a neutral, and /u1D6FFt−1,k =− 1 for a short position).
+Trading according to technical sell signals requires closing long positions and/or 
+entering short positions, where the latter may be associated with several constraints 
+such as lending fees, lacking assets to sell short, or governmental or institutional 
+restrictions (see, e.g., Almazan et al. 2004; D’ Avolio 2002; Nagel 2005). Short sale 
+constraints are likely severe for certain markets and time periods in our sample. On 
+the one hand, less-developed equity markets may not be endowed with the institu-
+tional framework for short selling (at reasonable costs). On the other hand, during 
+earlier time periods, short selling was much more expensive than it became more 
+recently (D’ Avolio 2002; Duffie et  al. 2002; Jones and Lamont 2002). Moreover, 
+short selling costs are time varying and tend to increase substantially during periods 
+with a high willingness of investors to short a stock.
+We circumvent the problems associated with true short positions by using the 
+“double-or-out” strategy proposed by Bessembinder and Chan (1995). According to 
+that, whenever /u1D6FFt−1,k = 0 , an investor holds one unit of the asset and earns its return 
+rt . If /u1D6FFt−1,k = 1 , an investor is required to double his or her exposure by borrowing 
+money at the risk-free rate to finance the additional unit of the asset that results in a 
+payoff of 2rt − rf
+t . Finally, whenever /u1D6FFt−1,k =− 1 , the asset is sold and the proceeds 
+are invested in the risk-free security such that the payout is equal to rf
+t  . In summary, 
+the return of trading rule k  in period t under a double-or-out strategy reads as
+and the associated Sharpe ratio is given by
+where ̄𝜋k − ̄rf  is the sample average of excess returns and ̂𝜎k is the corresponding 
+standard deviation.
+We evaluate the performance of technical trading rules against a benchmark. A 
+natural choice for a benchmark model is the null model of staying out of the mar -
+ket (e.g., Brock et al. 1992). However, since active traders usually aim to evaluate 
+their trading performance against a benchmark that is related to the risk–return 
+profile of the traded asset, we chose a simple buy-and-hold strategy as benchmark 
+model. Therefore, we set /u1D70Bt,0 = rt/u1D6FFt,0 , where /u1D6FFt,0 = 1 for all t such that /u1D70Bt,0 = rt.
+Following Sullivan et al. (1999), our final performance measure is the difference 
+between the Sharpe ratios generated by trading rule k and the benchmark,
+(1)/u1D70Bt,k(rt, rf
+t , /u1D6FFt−1, k)=
+⎧
+⎪
+⎨
+⎪⎩
+2rt − rf
+t , /u1D6FFt−1, k = 1,
+rt, /u1D6FFt−1, k = 0,
+rf
+t , /u1D6FFt−1, k =− 1,
+(2)Sk = ̄𝜋k − ̄rf
+̂𝜎k
+,
+
+--- PDF PAGE 12 ---
+413
+1 3
+The predictive ability of technical trading rules: an empirical…
+where ̂𝜎0 is the sample standard deviation of the return series of the benchmark.
+(3)𝜃k = ̄𝜋k − ̄rf
+̂𝜎k
+− ̄r − ̄rf
+̂𝜎0
+,
+Table 1  Parameters of technical trading rules
+This table reports the parameters for the trading rules used in the empirical analysis. Parameter values for 
+relative strength index rules are adopted from Hsu et al. (2016). Parameters for filter rules, moving aver -
+age rules, support and resistance rules, as well as channel breakout rules are adopted from Sullivan et al. 
+(1999)
+Trading rule parameters Parameter values
+Relative strength indices, RSI(n, v, d,fl)
+Moving average in days, n 5, 10, 15, 20, 25, 50, 100, 150, 200, 250
+Deviation from RSI = 50 , v 10, 15, 20, 25
+Minimum number of days in overbought/oversold 
+levels, d
+1, 2, 5
+Fixed holding period in days, fl 1, 5, 10, 25
+Filter rules, FR(x, e, y, fl)
+Filter parameter, x 0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.04, 
+0.045, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.12, 0.14, 
+0.16, 0.18, 0.2, 0.25, 0.3, 0.4, 0.5
+Alternative definition of extrema in days, e 1, 2, 3, 4, 5, 10, 15, 20
+Price deviation required to unwind a position, y 0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 
+0.075, 0.1, 0.15, 0.2
+Fixed holding period in days, fl 5, 10, 25, 50
+Moving averages, MA(ns, nf, fb, fd, fl), ns > nf
+Slow-moving average in days, ns 2, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100, 125, 150, 
+200, 250
+Fast-moving average in days, nf 1, 2, 5, 10, 15, 20, 25, 30, 40, 50, 75, 100, 125, 150, 
+200
+Multiplicative band filter, fb 0.001, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05
+Time-delay filter in days, fd 2, 3, 4, 5
+Fixed holding period in days, fl 5, 10, 25, 50
+Supports and resistances, n, e, fb, fd, fl
+Support and resistance window in days, n 5, 10, 15, 20, 25, 50, 100, 150, 200, 250
+Alternative definition of extrema in days, e 2, 3, 4, 5, 10, 20, 25, 50, 100, 200
+Multiplicative band filter, fb 0.001, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05
+Time-delay filter in days, fd 2, 3, 4, 5
+Fixed holding period in days, fl 5, 10, 25, 50
+Channel breakouts, CB(n, x, fb, fl)
+Channel window in days, n 5, 10, 15, 20, 25, 50, 100, 150, 200, 250
+Multiplicative range of channel, x 0.005, 0.01, 0.02, 0.03, 0.05, 0.075, 0.1, 0.15
+Multiplicative band filter, fb 0.001, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05
+Fixed holding period in days, fl 5, 10, 25, 50
+
+--- PDF PAGE 13 ---
+414 K. Rink 
+1 3
+Table 2  Parameter combinations of technical trading rules
+This table reports the parameter combinations for the trading rules used in the empirical analysis. Heuristics and parameters are defined in Table  1. #a denotes the number 
+of considered parameter values of a parameter a, and a(i) denotes the i-th parameter value of a, where parameter values are sorted in ascending order. 1{⋅} is the indicator 
+function. Since we adopt all trading rules and parameters used by Sullivan et al. (1999) (except for on-balance volume rules), the set of moving average rules covers nine 
+rules which are additionally added (these are all rules with a 1% band filter and a 10 day fixed-length filter applied to all moving average combinations of a 1, 2, and 5 day 
+fast-moving average and a 50, 150, and 200 day slow-moving average). The nine rules are added as Sullivan et al.’s (1999) set of rules is designed to include all rules used 
+by Brock et al. (1992)
+Trading strategy classes Parameter combinations
+Relative strength indices #n ⋅ #v ⋅ #d + #n ⋅ #v ⋅ #d ⋅ #fl = 10 ⋅ 4 ⋅ 3 + 10 ⋅ 4 ⋅ 3 ⋅ 4 = 600
+Filter rules #x + #x ⋅ #e + #x ⋅ #fl + ∑#x
+i=1
+∑#y
+j=1 1{x(i) > y(j)}= 24 + 24 ⋅ 8 + 24 ⋅ 4 + 185 = 497
+Moving averages (1 + #fb + #fd + #fl)⋅ ∑ #ns
+i=1
+∑ #nf
+j=1 1
+�
+ns(i) > nf (j)
+�
++ 9 = (1 + 8 + 4 + 4)⋅ 120 + 9 = 2,049
+Supports and resistances (1+ #fl)⋅ (#n + #e)+ #fb ⋅ (1+ #fl)⋅ (#n + #e)+ #fd ⋅ #fl ⋅ (#n + #e)= (1 + 4)⋅ (10+ 10)+ 8 ⋅ (1+ 4)⋅ (10+ 10)+4 ⋅ 4 ⋅ (10+ 10)= 1, 220
+Channel breakouts (#n ⋅ #x ⋅ #fl)+ #n ⋅ #fl ⋅ ∑ #x
+i= 1
+∑ #fb
+j= 1 1
+�
+x(i) > fb(j)
+�
+=( 10 ⋅ 8 ⋅ 4)+ 10 ⋅ 4 ⋅ 43 = 2,040
+
+--- PDF PAGE 14 ---
+415
+1 3
+The predictive ability of technical trading rules: an empirical…
+Since we do not have interest rate data for most of the investigated markets, we set 
+rf
+t = 0 for all t . Even though this simplification may bias our results, we assume that 
+the impact on the overall outcomes is negligible. First, if a trading rule exhibits more 
+days with long than short exposure, the trading returns may be biased upwards as we 
+disregard longer periods when the investor has to pay rf
+t  for borrowing funds to invest 
+in a second unit of the asset. In turn, the performance could be biased downwards in the 
+opposite case. Second, if costs of borrowing vary systematically between periods with 
+long and short exposure, the performance measure may be biased as well. Third, expres-
+sion (3) shows that the impact of ̄rf  is approximately offset if standard deviations are 
+similar. However, the performance of trading rule k tends to be overestimated if ̂𝜎0 > ̂𝜎k 
+when neglecting ̄rf  . For those reasons, we examine whether the simplification could have 
+a significant impact on the performance measure. We find that the vast majority of inves-
+tigated trading rules are relatively balanced in terms of the time invested in short and 
+long positions. Moreover, the returns from technical trading tend to be more volatile than 
+those of the respective benchmarks (which is mainly due to the characteristics of the 
+double-or-out strategy), suggesting that setting rf
+t = 0 may keep our results rather on the 
+conservative side. Based on these findings, we expect that the likelihood of a significant 
+upward bias should be low.
+5  Data
+The empirical study is based on the daily close prices of the leading stock market indi-
+ces of 23 developed countries and 18 emerging markets. An overview of these mar -
+kets and respective sample periods is provided in Table 3. The longest available time 
+series is for the US S&P 500, which covers the period between January 1950 and May 
+2016, while the shortest is for the Colombian IGBC, which covers the period between 
+July 2001 and May 2016. The index data are retrieved from Datastream and cover the 
+maximum available sample periods ending in May 2016. Markets for which less than 
+14 years of data are available are not included to ensure appropriately long time series 
+and to have at least two subsamples of 7 years each in the subperiod analysis. The clas-
+sification of countries as either “developed” or “emerging” is based on the categoriza-
+tion of the International Monetary Fund (IMF 2016), which applied at the end of the 
+sample period. The 23 developed countries are considered as “advanced economies” 
+by the IMF. Likewise, the 18 emerging markets are categorized as either emerging or 
+developing markets.18 Obviously, some of the markets undergo significant economic 
+development during the sample period in the sense that some countries were not con-
+sidered developed at the beginning of the sample period, but are considered so at the 
+18 The IMF does not differentiate between emerging and developing markets in a stricter sense. How -
+ever, the countries in our list are generally considered as emerging markets by most analyst firms. For 
+instance, Financial Times Stock Exchange (FTSE) Group (2016) lists all countries in our sample except 
+for Argentina (which they have on their watch list as a candidate) as either “advanced emerging,” “sec-
+ondary emerging,” or “frontier” countries in their Annual Country Classification Review from September 
+2016. For simplicity, we refer to all these countries as emerging markets throughout this paper.
+
+--- PDF PAGE 15 ---
+416 K. Rink 
+1 3
+end.19 Clearly, a static classification of markets for longer time periods is not perfectly 
+possible.
+Given that many emerging economies in the sample experienced high levels of 
+inflation in the past, we adjust stock market returns for inflation rates. 20 The annual 
+inflation rates are obtained from World Bank Open Data. We compute inflation-
+adjusted daily returns as radj
+t = runadj
+t − log(1+ iy)∕252 , where runadj
+t  is the unad-
+justed daily index return on day t, and iy is the corresponding discrete inflation rate 
+in year y.
+Table  4 presents basic descriptive statistics for the 41 stock market indices as well 
+as annual inflation rates of the corresponding countries. Not surprisingly, emerg-
+ing market indices in panel B tend to have higher average annualized returns and 
+are more volatile than most developed market indices in panel A. Similarly, with a 
+few exceptions such as Croatia, these countries have much higher inflation rates on 
+average.
+The use of index data is widespread in studies of technical trading rules, which is 
+mainly due to the availability of long time series. A major drawback of such analy -
+ses is the limitation that stock indices cannot be traded directly. Investments that are 
+closely related to the risk and return profile of stock indices are usually only possible 
+through certain derivative instruments or exchange-traded funds. An obvious alter -
+native to conducting our analysis would be to use actual market data for the con-
+stituent stocks of the considered indices, which is, however, not available for many 
+markets in our sample. In the absence of reasonable alternatives, we therefore also 
+rely on index data, but note that a broad analysis of actual stock data could enrich 
+the technical analysis literature.
+The analysis of index data raises additional issues that may lead to an upward bias 
+of results. As shown by Scholes and Williams (1977), nonsynchronous trading of 
+index constituents can lead to measurement error due to spurious serial dependence 
+of index returns. As Ready (2002) notes, especially on days with technical trading 
+signals, there may be systematic differences between the close price and the opening 
+price of a stock index on the next trading day. First, imbalances in buy/sell orders 
+caused by excess buy/sell interest at the close could reappear at the opening of the 
+following trading day and lead to a systematic price movement. Typically, technical 
+signals tend to exploit positive serial dependence since buy (sell) signals are often 
+observed on days with large positive (negative) price movements (Bessembinder and 
+Chan 1995). Moreover, if at least some close prices of the stocks included in the 
+index are stale, partial adjustments on subsequent trading days may result in price 
+changes biased in the same direction as those on previous days. The concern of stale 
+prices is relatively low for very liquid stocks, but it tends to be higher if stocks trade 
+at low volume (Campbell et  al. 1993). Hence, biases induced by nonsynchronous 
+19 For example, Hong Kong and Singapore are classified as developing countries by the United Nations 
+in its 1974 World Economic Survey (United Nations 1975).
+20 Unless otherwise noted, the index returns in this study are always adjusted for inflation. For the sake 
+of simplicity, we will not highlight this at every point.
+
+--- PDF PAGE 16 ---
+417
+1 3
+The predictive ability of technical trading rules: an empirical…
+Table 3  Stock indices and sample periods
+ISO Country Stock market index Sample period
+Panel A: Developed countries
+AUS Australia All ordinaries 03/08/1984–31/05/2016
+AUT Austria ATX 07/01/1986–31/05/2016
+BEL Belgium Bel 20 02/01/1990–31/05/2016
+CAD Canada S&P/TSX Composite Index 01/01/1969–31/05/2016
+CHE Switzerland SMI 30/06/1988–31/05/2016
+DEU Germany DAX 31/12/1964–31/05/2016
+DNK Denmark OMX Copenhagen 20 04/12/1989–31/05/2016
+ESP Spain IBEX 35 05/01/1987–31/05/2016
+FIN Finland OMX Helsinki 25 02/01/1987–31/05/2015
+FRA France CAC 40 09/07/1987–31/05/2016
+GBR UK FTSE 250 Index 31/12/1985–31/05/2016
+GRC Greece Athex Composite Index 01/03/1994–31/05/2016
+HKG Hong Kong Hang Seng Index 21/11/1969–31/05/2016
+ISR Israel TA-100 Index 23/04/1987–31/05/2016
+ITA Italy FTSE MIB 01/01/1998–31/05/2016
+JPN Japan Nikkei 225 03/04/1950–31/05/2016
+KOR South Korea KOSPI 01/01/1975–31/05/2016
+NLD the Netherlands AEX-Index 03/01/1983–31/05/2016
+NOR Norway OBX Index 02/01/1987–31/05/2016
+PRT Portugal PSI 20 01/01/1993–31/05/2016
+SGP Singapore Straits Times Index 31/08/1999–31/05/2016
+SWE Sweden OMX Stockholm 30 02/01/1986–21/04/2016
+USA USA S&P 500 Index 03/01/1950–31/05/2016
+Panel B: Emerging markets
+ARG Argentina MERVAL 02/01/1992–31/05/2016
+BGR Bulgaria SOFIX 20/10/2000–31/05/2016
+BRA Brazil Bovespa Index 11/01/1995–31/05/2016
+CHL Chile IPSA 02/01/1995–31/05/2016
+CHN China SSE Composite Index 19/12/1990–31/05/2016
+COL Colombia IGBC 03/07/2001–31/05/2016
+HRV Croatia CROBEX 02/07/1997–31/05/2016
+IDN Indonesia IDX Composite 02/01/1987–31/05/2016
+IND India BSE Sensex 03/04/1979–31/05/2016
+MEX Mexico Mexico IPC 04/01/1989–31/05/2016
+MYS Malaysia FTSE Bursa Malaysia KLCI 02/01/1980–31/05/2016
+PAK Pakistan KSE 100 Index 29/06/1989–31/05/2016
+PER Peru S&P/BVL Peru General Index 02/01/1992–31/05/2016
+PHL Philippines PSEi 02/01/1986–31/05/2016
+POL Poland WIG 20 02/01/1995–31/05/2016
+RUS Russia RTS Index 01/09/1995–17/12/2015
+SAU Saudi Arabia TASI 19/10/1998–31/05/2016
+ZAF South Africa FTSE/JSE All-Share Index 30/06/1995–31/05/2016
+
+--- PDF PAGE 17 ---
+418 K. Rink 
+1 3
+trading could be problematic for earlier time periods when trading volume used to 
+be lower (e.g., Lo and Wang 2000) or for less liquid markets in the sample.21
+To mitigate concerns of overestimated trading performance, we use the common 
+approach of delaying the actual entry into a position by one day after a signal is trig-
+gered (see, e.g., Bessembinder and Chan 1995; Ready 2002; Sullivan et al. 1999). 
+More specifically, if a technical signal is generated on day t, it is utilized at the close 
+price of day t + 1 . Since order imbalances and partial adjustments of stale prices 
+tend to normalize after one trading day, it is assumed that the close of the following 
+day is the first trading opportunity for investors. Also, assuming that stock prices are 
+equally likely to trade at the bid or the ask price one day after a trade signal occurs, 
+delayed trading corrects for spread-induced trading costs.22
+6  In‑sample results
+6.1  Performance of technical trading rules
+In this section, we present the results of the application of the Stepwise Superior 
+Predictive Ability Test. While we examine subperiods and the impact of transaction 
+costs in later sections, the following analysis addresses full sample periods of all 41 
+market indices under the assumption that trading is free of any costs.
+The results are reported in Table  5, where panel A shows the results for devel-
+oped countries and panel B shows the results for emerging markets, respectively. 
+The column “Full sam.” lists the number of technical trading rules with superior 
+performance against buying and holding the index (i.e., these rules exhibit a p-value 
+of less than 0.1 according to the Stepwise Superior Predictive Ability Test based on 
+the Sharpe ratio criterion). We find that 13 of the 23 developed market indices and 
+14 of the 18 emerging market indices are predictable with at least one technical trad-
+ing rule. The highest degree of predictability among developed country indices in 
+terms of the total number of rules with superior performance is observed for Hong 
+Kong (290 or about 4.5% of all considered heuristics), Portugal (153 or about 2.4%), 
+and Great Britain (101 or about 1.6%). Among the emerging market indices, predict-
+ability is highest for Peru (1700 or about 26.5%), Pakistan (805 or about 12.6%), 
+and Bulgaria (556 or about 8.7%). Thus, while the share of predictable markets is 
+not only higher among the sample of emerging market indices, these markets also 
+Table 3  (continued)
+This table reports the three-letter country abbreviations according to ISO norms, the national stock mar -
+ket indices, and the sample periods for all 23 developed countries (panel A) and 18 emerging markets 
+(panel B), respectively
+21 Previous research suggests that, in particular, emerging equity markets are characterized by rather low 
+trading volume and nonsynchronous prices (e.g., AlKhazali 2011; Camilleri and Green 2014).
+22 For example, Gatev et  al. (2006) postpone trades of a pairs trading strategy by one trading day to 
+reduce the risk of upward biased returns caused by potentially high bid–ask spreads on signal days.
+
+--- PDF PAGE 18 ---
+419
+1 3
+The predictive ability of technical trading rules: an empirical…
+Table 4  Descriptive statistics
+Market Ann. returns (%) Daily returns (%) Annual inflation rates (%)
+Mean Std. dev. Min. P5 Median P95 Max. Mean Min. Median Max.
+Panel A: Developed countries
+AUS 6.36 15.78 −28.71 −1.45 0.05 1.39 6.07 3.40 −0.55 2.57 9.26
+AUT 3.83 21.22 −10.25 −2.12 −0.01 1.91 12.02 1.96 0.26 0.81 3.64
+BEL 3.26 18.20 −8.32 −1.88 0.00 1.69 9.33 1.83 0.48 0.82 3.99
+CAD 5.30 14.50 −11.79 −1.35 0.02 1.28 9.37 3.74 −2.31 3.17 11.09
+CHE 5.85 18.19 −11.11 −1.74 0.03 1.66 10.79 1.07 −1.20 1.57 5.41
+DEU 5.70 19.39 −13.71 −1.85 0.01 1.82 10.80 2.55 −0.49 1.92 7.62
+DNK 8.03 18.57 −11.72 −1.86 0.01 1.81 9.50 4.56 0.25 3.63 13.36
+ESP 4.45 22.09 −13.19 −2.22 0.02 2.11 13.48 3.28 −0.22 2.34 7.33
+FIN 6.82 25.50 −17.40 −2.48 0.00 2.43 14.56 2.26 −0.08 1.86 7.68
+FRA 3.60 22.01 −10.14 −2.19 0.00 2.07 10.59 1.59 0.07 0.84 3.29
+GBR 7.81 14.89 −11.38 −1.45 0.06 1.33 7.46 3.22 −0.07 2.51 11.27
+GRC 2.23 29.65 −17.71 −2.89 0.00 2.90 13.75 3.07 −1.97 3.41 11.18
+HKG 10.17 28.41 −40.54 −2.58 0.02 2.57 17.25 5.19 −6.01 5.32 17.76
+ISR 11.39 22.99 −11.72 −2.26 −0.00 2.21 10.35 6.21 −0.31 5.41 16.88
+ITA −1.95 25.01 −13.33 −2.61 0.01 2.44 10.88 1.91 0.44 0.81 3.27
+JPN 7.53 18.97 −16.14 −1.84 0.00 1.81 13.23 2.70 −1.90 4.68 22.97
+KOR 7.97 23.73 −17.37 −2.24 0.00 2.32 11.28 7.34 −1.23 7.63 30.60
+NLD 6.62 21.02 −12.78 −2.01 0.03 1.88 11.18 1.62 −1.05 1.12 4.18
+NOR 6.50 23.78 −24.00 −2.21 0.02 2.18 11.12 3.52 −5.21 4.28 15.39
+PRT 1.76 18.46 −10.38 −1.86 0.00 1.77 10.20 2.82 −0.39 1.90 7.38
+SGP 1.71 18.42 −8.70 −1.79 0.00 1.77 7.53 0.93 −3.58 2.44 5.92
+SWE 8.66 22.76 −8.80 −2.28 0.02 2.17 11.02 2.74 0.33 2.45 9.47
+USA 7.29 15.44 −22.90 −1.45 0.05 1.44 10.96 3.20 −0.32 2.33 9.46
+Panel B: Emerging markets
+ARG 24.08 44.22 −75.71 −3.95 0.10 3.98 29.02 14.01 −3.56 13.16 41.12
+BGR 9.25 24.17 −20.90 −1.94 −0.01 2.01 21.07 4.41 −0.67 3.12 11.08
+BRA 33.36 36.92 −17.21 −3.33 0.11 3.56 28.83 8.43 4.92 2.89 18.46
+CHL 14.33 17.67 −7.67 −1.60 0.10 1.80 11.80 5.07 −0.05 3.15 12.16
+CHN 13.10 37.20 −17.91 −2.97 0.01 2.92 71.92 5.01 −1.26 5.18 20.62
+COL 14.73 20.22 −11.05 −1.86 0.03 1.88 14.69 4.98 1.91 1.82 7.68
+HVR 4.28 24.03 −13.38 −2.04 0.00 2.08 17.47 2.95 −0.10 1.86 6.01
+IDN 5.53 19.77 −13.96 −1.82 0.02 1.76 9.73 12.33 2.44 12.80 75.27
+IND 14.02 24.42 −13.66 −2.29 0.05 2.46 18.90 7.62 2.28 3.01 15.73
+MEX 20.79 24.06 −14.31 −2.20 0.03 2.35 12.15 12.33 1.53 10.56 38.46
+MYS 5.52 20.96 −24.15 −1.72 0.00 1.76 20.82 3.37 −8.72 3.84 10.39
+PAK 14.94 22.48 −13.21 −2.26 0.00 2.24 12.76 10.00 0.40 7.20 38.51
+PER 24.02 23.34 −13.29 −2.00 0.01 2.34 12.82 9.28 0.11 15.96 69.26
+PHL 13.01 25.37 −15.79 −2.25 0.01 2.37 16.18 6.51 −0.72 4.61 22.38
+POL 8.07 22.80 −10.29 −2.25 0.00 2.27 7.89 5.39 0.30 6.76 27.94
+RUS 10.40 40.62 −21.20 −3.88 0.02 3.78 20.20 17.55 1.97 15.66 72.39
+
+--- PDF PAGE 19 ---
+420 K. Rink 
+1 3
+exhibit a higher degree of predictability in terms of the proportion of rules with 
+superior performance. For instance, 8 of the 13 predictable developed market indi-
+ces have at most 14 outperforming rules, which corresponds to only about 0.2% of 
+the full universe of considered technical trading rules.
+This first analysis suggests that the majority of markets are predictable with techni-
+cal rules, and, in particular, several emerging markets have a significant proportion 
+of rules with superior performance. On the one hand, the high number of predictive 
+rules in emerging markets may be due to lower market efficiency, as the stock mar -
+kets of less developed countries tend to incorporate new information into prices more 
+slowly and lack institutional framework to enhance efficiency (see, e.g., Araújo Lima 
+and Tabak 2004; Bhuyan et al. 2008; Poshakwale 2002; Sharma and Thaker 2015). On 
+the other hand, trading in these markets tends to incur comparatively high transaction 
+costs (Lesmond 2005), which may then be picked up as profits through active trad-
+ing strategies under a zero-trading cost scheme.23 In fact, most technical trading rules 
+generate trading signals very frequently, such that these rules would incur substantial 
+transaction costs if applied to real markets. Later robustness checks will assess the sen-
+sitivity of performance to transaction costs.
+Since investors usually strive for maximum profits, the best-performing techni-
+cal trading rules play an important role among the whole set of examined rules. 
+Therefore, Table   5 also reports basic characteristics for these specific rules for all 
+markets.24 For 23 (15) markets, support and resistance rules (moving average rules) 
+This table reports descriptive statistics for the 23 developed and the 18 emerging market indices (panel 
+A and panel B). Ann. returns (%) shows the mean and standard deviation (std. dev.) of unadjusted daily 
+log returns in percent that are annualized with a factor of 252 and 
+√
+252 , respectively. Daily returns (%) 
+reports the minimum (min.), 5th percentile (P5), median, 95th percentile (P95), and maximum (max.) 
+daily log return in percent. Annual inflation rates (%) provides the mean, minimum, median, and maxi-
+mum annual inflation rate in percent
+Table 4  (continued)
+Market Ann. returns (%) Daily returns (%) Annual inflation rates (%)
+Mean Std. dev. Min. P5 Median P95 Max. Mean Min. Median Max.
+SAU 8.07 23.28 −11.68 −2.21 0.05 1.93 16.40 4.62 −16.91 10.58 20.15
+ZAF 10.92 19.15 −12.69 −1.85 0.03 1.83 7.42 7.32 5.17 1.73 12.21
+24 Note that the summary statistics for time invested, mean return per trade, fraction of winners, number 
+of trades per year, and mean holding period in Table  5 are not computed based on the double-or-out strat-
+egy (which is, however, used to calculate the performance measure) to give an “undistorted” view on the 
+performance of the rules. For example, under the double-or-out scheme, short signals require a market-
+neutral position and result in returns of zero (or the risk-free rate), leading to statistics that are meaning-
+less for evaluating the actual trading characteristics of technical trading rules.
+23 According to Grossman and Stiglitz (1980), capital markets cannot be perfectly information efficient 
+because a compensation for the costs associated with trading and obtaining information is necessary to 
+encourage participation. Otherwise, there would be no incentive to trade. These costs may vary strongly 
+across the markets in our sample.
+
+--- PDF PAGE 20 ---
+421
+1 3
+The predictive ability of technical trading rules: an empirical…
+Table 5  Outperforming technical trading rules
+Market Full sam. Best-performing trading rules
+Outperf. rules Best rule Perf. measure p-Val. Ann. ex. ret Time inv. (%) Mean ret./trade 
+(%)
+Fraction of 
+winners (%)
+Number of 
+trades/year
+Mean holding 
+period
+Lo. Sh. Lo. Sh. Lo. Sh. Lo. Sh.
+Panel A: Developed countries
+AUS 0 FR(0.1, 0, 0.075, 0) 0.478 0.312 10.18 84.8 3.20 1.29 70.5 49.2 2.4 1.8 49.7 50.0
+AUT 10 SR(0, 200, 0, 0, 25) 0.651∗ 0.056 3.70 91.3 5.43 −0.79 83.3 29.4 4.8 4.5 25.0 25.0
+BEL 0 SR(0, 100, 0, 0, 50) 0.409 0.542 2.54 95.3 5.41 −1.59 82.4 35.7 2.6 2.5 50.0 50.0
+CAD 14 MA(100, 1, 0, 0, 0) 0.492∗∗ 0.018 10.26 99.2 1.76 0.58 42.6 31.6 4.4 4.4 35.4 21.7
+CHE 0 SR(0, 100, 0, 2, 50) 0.417 0.870 0.67 96.7 5.60 −5.84 75.0 16.7 2.6 2.4 50.0 50.0
+DEU 1 SR(0, 3, 0.05, 0, 50) 0.270∗ 0.088 4.20 34.2 4.43 1.50 73.3 47.5 0.6 1.1 50.0 50.0
+DNK 0 MA(150, 5, 0.001, 0, 0) 0.449 0.150 13.97 95.1 10.93 2.83 50.0 32.1 1.0 1.0 158.5 77.5
+ESP 0 SR(0, 200, 0, 0, 10) 0.521 0.732 2.52 92.0 1.56 −0.37 78.0 15.0 11.9 11.3 10.0 10.0
+FIN 11 MA(30, 25, 0.005, 0, 0) 0.497∗∗ 0.044 18.27 97.2 3.73 1.21 64.3 46.3 3.8 3.5 30.6 24.0
+FRA 0 SR(0, 4, 0.02, 0, 50) 0.357 0.272 6.31 50.2 5.32 1.48 90.0 48.2 0.7 1.9 50.0 50.0
+GBR 101 SR(0, 10, 0.001, 0, 0) 0.804∗∗∗ 0.008 5.59 77.0 0.32 0.12 54.6 29.0 13.0 11.4 3.0 13.6
+GRC 35 SR(0, 50, 0.01, 0, 0) 0.895∗∗ 0.026 13.75 84.9 1.14 2.25 55.1 25.9 2.1 2.0 52.9 50.2
+HKG 290 MA(10, 1, 0, 0, 0) 0.661∗∗∗ < 0.001 25.93 99.9 1.04 0.45 47.7 38.1 17.4 17.4 8.1 6.4
+ISR 1 CB(20, 0.1, 0, 10) 0.305∗ 0.050 10.85 55.8 1.06 0.27 64.9 50.3 9.0 5.1 10.0 10.0
+ITA 0 SR(0, 25, 0, 2, 25) 0.733 0.468 8.98 99.2 2.49 6.19 72.7 36.8 5.1 5.0 25.0 25.0
+JPN 59 SR(0, 10, 0.02, 0, 0) 0.452∗∗∗ 0.002 2.88 47.9 0.54 0.23 63.5 34.2 3.0 5.3 21.4 21.3
+KOR 1 MA(20, 15, 0.005, 0, 0) 0.379∗ 0.096 13.10 75.0 2.66 0.25 59.4 42.7 4.5 4.8 23.4 17.7
+NLD 0 SR(0, 10, 0, 3, 5) 0.475 0.240 4.34 99.4 0.51 −0.02 64.9 44.8 25.2 24.9 5.0 5.0
+NOR 1 MA(25, 1, 0, 0, 0) 0.470∗ 0.050 15.45 99.7 1.01 0.42 46.8 32.4 10.8 10.8 14.0 9.2
+PRT 153 SR(0, 200, 0.03, 0, 0) 1.294∗∗ 0.014 7.95 76.4 8.42 8.00 47.8 26.1 0.4 0.4 200.6 201.6
+SGP 0 SR(0, 10, 0.01, 0, 50) 0.701 0.284 11.19 51.1 6.96 3.70 88.9 58.3 0.5 2.1 50.0 50.0
+
+--- PDF PAGE 21 ---
+422 K. Rink 
+1 3Table 5  (continued)
+Market Full sam. Best-performing trading rules
+Outperf. rules Best rule Perf. measure p-Val. Ann. ex. ret Time inv. (%) Mean ret./trade 
+(%)
+Fraction of 
+winners (%)
+Number of 
+trades/year
+Mean holding 
+period
+Lo. Sh. Lo. Sh. Lo. Sh. Lo. Sh.
+SWE 0 MA(125, 5, 0, 0, 0) 0.353 0.228 12.05 98.4 5.21 1.16 41.7 30.5 1.9 1.9 85.5 46.0
+USA 2 MA(200, 1, 0, 0, 0) 0.221∗ 0.058 6.81 98.8 2.34 −0.04 46.9 26.2 3.0 2.9 58.7 25.6
+Panel B: Emerging markets
+ARG 0 CB(25, 0.15, 0.02, 50) 0.296 0.230 21.40 60.9 9.70 1.41 64.9 53.6 2.1 1.0 50.0 50.0
+BGR 556 MA(50, 1, 0, 2, 0) 1.056∗∗∗ 0.006 35.13 90.6 5.90 3.97 48.2 44.3 3.4 3.7 36.6 27.4
+BRA 86 SR(15, 0, 0.05, 0, 0) 0.522∗∗ 0.020 34.38 57.3 13.56 1.88 57.7 48.8 2.3 1.8 41.3 27.8
+CHL 30 MA(25, 1, 0, 0, 0) 0.608∗∗∗ 0.002 18.96 99.6 1.84 0.27 41.1 37.2 9.0 9.0 16.2 11.7
+CHN 70 MA(20, 1, 0, 0, 0) 0.601∗∗ 0.014 38.24 99.7 2.51 1.32 43.2 42.8 10.0 10.0 13.2 12.0
+COL 20 MA(5, 1, 0, 0, 0) 0.777∗∗ 0.014 25.92 99.9 0.57 0.15 51.4 44.8 35.8 35.8 4.3 2.7
+HRV 5 SR(0, 50, 0.005, 0, 0) 0.826∗∗ 0.032 8.96 84.0 1.73 1.47 54.0 28.7 1.9 1.8 52.7 50.6
+IDN 0 SR(0, 200, 0.02, 0, 0) 0.566 0.108 0.47 76.3 0.13 0.15 47.4 14.8 1.2 1.0 92.6 94.8
+IND 1 MA(20, 1, 0, 0, 0) 0.324∗ 0.064 16.75 99.8 1.37 0.12 45.3 36.1 11.2 11.2 12.7 9.7
+MEX 12 SR(10, 0, 0, 5, 50) 0.352∗∗ 0.028 18.52 95.3 6.51 0.42 75.3 47.9 2.7 1.6 50.0 50.0
+MYS 366 MA(50, 1, 0.001, 0, 0) 0.819∗∗∗ < 0.001 20.37 91.5 2.81 2.44 41.3 40.1 4.1 3.6 33.4 25.9
+PAK 805 SR(0, 25, 0.015, 0, 0) 1.031∗∗∗ < 0.001 14.22 72.1 1.38 1.70 62.4 38.9 2.3 2.0 43.4 40.5
+PER 1700 SR(0, 20, 0.005, 0, 0) 1.115∗∗∗ < 0.001 17.51 80.7 1.66 0.51 60.8 27.6 4.6 3.4 33.4 27.1
+PHL 35 MA(20, 1, 0, 0, 0) 0.619∗∗ 0.012 25.49 99.7 1.80 0.59 44.2 36.6 10.7 10.6 13.3 10.3
+POL 0 SR(0, 25, 0, 5, 10) 0.480 0.190 6.41 98.6 2.17 −0.39 68.0 29.4 3.4 2.3 10.0 10.0
+RUS 4 SR(10, 0, 0, 0, 0) 0.714∗ 0.097 41.20 99.7 4.12 2.43 47.8 43.4 10.3 10.3 22.5 17.5
+SAU 34 SR(0, 20, 0.001, 0, 0) 1.121∗∗∗ 0.008 13.45 79.0 0.64 0.79 60.5 25.8 4.9 4.2 23.0 20.3
+ZAF 0 SR(0, 25, 0.001, 5, 0) 0.361 0.788 2.96 55.3 0.94 0.07 56.4 45.5 2.5 8.7 10.4 13.2
+
+--- PDF PAGE 22 ---
+423
+1 3
+The predictive ability of technical trading rules: an empirical…
+This table reports the number of outperforming trading rules as well as basic characteristics of best-performing trading rules for each of the 23 developed countries (panel 
+A) and the 18 emerging markets (panel B). Full sam. reports the number of outperforming technical trading rules (outperf. rules) identified by the Stepwise Superior 
+Predictive Ability Test using the whole universe of considered technical trading rules. A rule is regarded as “outperforming” if the estimated performance measure is 
+associated with a p-value of less than 0.1. Best-performing trading rules shows basic characteristics for the technical trading rule with the highest performance in terms of 
+the Sharpe ratio criterion. These rules do not necessarily have to show significant outperformance. The abbreviations for the technical rules and their parameters, which 
+are displayed in the column “Best rule,” are defined in Table  1. A parameter value of 0 indicates that the corresponding parameter is not applicable. Perf. measure is the 
+performance measure computed as the difference between the Sharpe ratio of the best trading rule and the Sharpe ratio of the buy-and-hold benchmark strategy annualized 
+with a factor of 
+√
+252 (cf., equation (3)). p-Val. is the p-value obtained from the Stepwise Superior Predictive Ability Test to indicate the statistical significance of the esti-
+mated performance measure of the best-performing trading rule. Ann. ex. ret. is the annualized return of the best trading rule in excess of the annualized benchmark return 
+(both in percent). Time inv. (%) is the percentage of time the best trading rule is either long or short in the respective index. Mean ret./trade (%) reports the mean return per 
+long (Lo.) and short (Sh.) trade of the best trading rule in percent. Fraction of winners (%) reports the percentage of long and short trades with a positive return generated 
+by the best trading rule. Number of trades/year reports the mean number of long and short trades per year of the best trading rule. Mean holding period reports the mean 
+number of days a long or short position is held when trading the best trading rule. While Perf. measure and Ann. exc. ret. result from the actual double-or-out strategy 
+applied to mitigate short positions, the remainder of characteristics reported for best trading rules are based on the assumption that long (short) positions are associated 
+with a purchase (sale) of one unit of the respective index. The superscripts ∗∗∗ , ∗∗ , and ∗ indicate the significance levels of p < 0.01 , p < 0.05 , and p < 0.1 , respectively
+Table 5  (continued)
+
+--- PDF PAGE 23 ---
+424 K. Rink 
+1 3
+have the best performance in terms of the Sharpe ratio criterion. 25 Moreover, the 
+best-performing rules have significant excess Sharpe ratios of up to 1.29 (Portugal) 
+for developed markets and 1.12 (Saudi Arabia) for emerging markets. These rules, 
+furthermore, produce highly economically significant excess returns, which mainly 
+range from more than 10% to around 40% per year.
+Table  5 also shows that best-performing rules predominately exhibit long or short 
+exposure to the market [i.e., 28 (39) of the 41 best rules are either long or short 
+at least 80% (50%) of the time]. In several cases, the best rules are never market-
+neutral once an initial trading signal is triggered, as a signal converts a long posi-
+tion to a short position and vice versa (e.g., this is the case for all moving average 
+rules without trading filters). For both developed and emerging market indices, best-
+performing trading rules tend to generate higher average returns per trade than short 
+positions, and long signals are more likely to generate winning trades. This is in line 
+with previous research by, for instance, Brock et al. (1992) who report that gains of 
+long–short trading strategies are mainly driven by long positions, which is consist-
+ent with generally upward-trending equity markets in the long run.
+The average number of transactions per year varies significantly among best 
+rules. Many of them, however, generate trading signals very frequently. For exam-
+ple, the best rule for the Colombian market is a 5 day moving average that emits 
+more than 70 trades per year on average with a mean holding period of just 4.3 days 
+on the long side and 2.7 days on the short side. Accordingly, trading such rules may 
+accumulate high transaction costs.
+In the next two sections, we check for the robustness of our in-sample results by 
+examining how the predictive ability of technical trading rules evolves over time, 
+using subperiods of the full sample periods. Thereafter, we explore the impact of 
+transaction costs.
+6.2  Subperiod analysis
+In a further step, we test whether the results for the full sample periods also hold dur-
+ing subperiods of 7 years. 26 Table   6 presents the results for developed country indi-
+ces (panel A) and emerging market indices (panel B). Again, outperforming rules are 
+defined as those rules that have a p -value of less than 0.1 according to the Stepwise 
+Superior Predictive Ability Test using the Sharpe ratio criterion. For comparison pur-
+poses, we report the number of rules with superior performance over the entire sample 
+periods, as already presented in Table 5, in the last column of the table.
+26 The length of the subperiods does not significantly affect the overall results. We choose intervals of 
+7 years to have at least two subperiods per country of approximately equal length and to obtain samples 
+that contain enough observations to have meaningful test power.
+25 This finding is similar to other studies on technical analysis. Sullivan et al. (1999) use an identical set 
+of rules except for relative strength index rules and find that a 5 day moving average exhibits the highest 
+Sharpe ratio based on daily market data of the DJIA. Similarly, Bajgrowicz and Scaillet (2012) report 
+that moving averages and support and resistance rules perform best for the DJIA in several subperiods 
+during 1897 and 2011. Hsu et al. (2010) analyze the predictive ability of 30 currency pairs and find that 
+moving average heuristics perform the best in most cases.
+
+--- PDF PAGE 24 ---
+425
+1 3
+The predictive ability of technical trading rules: an empirical…
+For 20 of the 23 indices for which we find outperforming rules in at least one 
+subperiod, the highest number of outperforming rules is observed in the first sub-
+period. In these cases, the proportion of predictive rules tends to decrease sharply 
+after the first subperiods. Most notably, there are 350 outperforming rules for the 
+Finnish stock market index between 1988 and 1994, 305 outperforming rules for 
+the Bulgarian stock market index between 2002 and 2008, and 103 outperforming 
+rules for the Brazilian stock market index between 1995 and 2001. While these are 
+the results for the first subperiods, for all heuristics in the sample, the three indices 
+become unpredictable during the subsequent subperiods. A decline in technical trad-
+ing performance over time is also found by Kish and Kwon (2002) and LeBaron 
+(2000) for major US stock indices and by Hsu et al. (2016), Neely et al. (2009), and 
+Olsen (2004) for several foreign exchange pairs. Our results, furthermore, show that 
+predictive power drops much earlier in developed markets than in emerging markets. 
+In developed markets, predictive ability of technical trading rules disappears almost 
+completely by the early 2000s. For emerging markets, the sharpest decline in pre-
+dictability is observed between the penultimate (2002–2008) and the most recent 
+(2009–2016) subperiods in terms of the share of predictable markets (see also the 
+last row of the panel). In the last subperiod, no developed market index is predict-
+able anymore and only two emerging market indices are still predictable with only 
+one rule each.
+There are several potential reasons for this negative trend in predictability. As 
+discussed in the previous section, trade-intensive rules may perform particularly 
+well before transaction costs. As trading costs have steadily declined in recent 
+decades (e.g., Jones 2002), rules that earn high profits by exploiting a zero-cost 
+system should, all else equal, be more successful during the early subperiods. 
+Another explanation for our results is different levels of market efficiency over 
+time, which is in line with the adaptive market hypothesis of Lo (2004). Accord-
+ing to that, the first subperiods can be interpreted as “early evolutionary stages,” 
+which are subject to greater market efficiency in the future, for instance, through 
+gradual learning by market participants. Thus, technical trading strategies can 
+generate superior performance over certain periods, and the more proprietary 
+these strategies are, the longer they may yield attractive results. However, even 
+very sophisticated trading strategies may eventually “die out” if market conditions 
+change significantly, such as more intense competition among traders for strategy 
+returns (Timmermann 2008; Timmermann and Granger 2004). 27 Closely related 
+to the notion of growing market efficiency is the rise of institutional investors and 
+27 Moreover, the adaptive market hypothesis allows for cases in which markets can go through cycles of 
+varying efficiency as well as changes in the structure and intensity of competition among market partici-
+pants (Lo 2004). This may be one reason for the rare cases in which the number of outperforming rules 
+rises again after a previous decline (e.g., the number of outperforming rules for Japan’s Nikkei drops to 
+zero between 1960 and 1966 and then rises again to 18 in the subsequent subperiod).
+
+--- PDF PAGE 25 ---
+426 K. Rink 
+1 3Table 6  Outperforming technical trading rules during subperiods
+Market Number of outperforming rules
+1953–1959 1960–1966 1967–1973 1974–1980 1981–1987 1988–1994 1995–2001 2002–2008 2009–2016 Full sample
+Panel A: Developed countries
+AUS – – – – – 0 0 0 0 0
+AUT – – – – – 46 0 1 0 10
+BEL – – – – – – 0 0 0 0
+CAD – – – 8 0 0 0 0 0 14
+CHE – – – – – – 0 0 0 0
+DEU – – 0 0 0 0 0 0 0 1
+DNK – – – – – – 0 0 0 0
+ESP – – – – – 0 0 0 0 0
+FIN – – – – – 350 0 0 0 11
+FRA – – – – – 0 0 0 0 0
+GBR – – – – – 434 69 0 0 101
+GRC – – – – – – 2 0 0 35
+HKG – – – 323 10 0 0 0 0 290
+ISR – – – – – 0 0 0 0 1
+ITA – – – – – – – 0 0 0
+JPN 84 0 18 0 0 0 0 0 0 59
+KOR – – – – 0 0 0 0 0 1
+NLD – – – – – 0 0 0 0 0
+NOR – – – – – 0 0 0 0 1
+PRT – – – – – – 23 33 0 153
+SGP – – – – – – – 0 0 0
+SWE – – – – – 0 0 0 0 0
+USA 0 1 0 0 0 0 0 0 0 2
+Frac. pos. 50.0% 50.0% 33.3% 40.0% 16.7% 18.8% 14.3% 8.7% 0.0% 56.5%
+
+--- PDF PAGE 26 ---
+427
+1 3
+The predictive ability of technical trading rules: an empirical…
+This table reports the number of outperforming trading rules for subperiods of the 23 developed market indices (panel A) and the 18 emerging market indices (panel B). 
+Trading rules are classified as “outperforming” if they exhibit a p-value of, at most, 0.1 according to the Stepwise Superior Predictive Ability Test for the Sharpe ratio 
+criterion. For comparison reasons, Full sample shows the number of outperforming rules identified over the full sample period as reported in Table  5 as well. Frac. pos. 
+reports the fraction of markets with a positive number of outperforming rules during a specific (sub)period for both developed and emerging markets, respectively. Dashes 
+indicate that complete data were not available for the respective markets and subperiods
+Table 6  (continued)
+Market Number of outperforming rules
+1953–1959 1960–1966 1967–1973 1974–1980 1981–1987 1988–1994 1995–2001 2002–2008 2009–2016 Full sample
+Panel B: Emerging markets
+ARG – – – – – – 0 0 0 0
+BGR – – – – – – – 305 0 556
+BRA – – – – – – 103 0 0 86
+CHL – – – – – – 13 1 0 30
+CHN – – – – – – 24 0 0 70
+COL – – – – – – – 25 0 20
+HRV – – – – – – – 1 0 5
+IDN – – – – – 2 0 0 0 0
+IND – – – – 0 0 0 0 0 1
+MEX – – – – – – 0 0 0 12
+MYS – – – – 29 0 1 0 0 366
+PAK – – – – – – 246 126 0 805
+PER – – – – – – 480 661 1 1700
+PHL – – – – – 1 0 0 1 35
+POL – – – – – – 0 0 0 0
+RUS – – – – – – – 4 0 4
+SAU – – – – – – – 48 0 34
+ZAF – – – – – – – 1 0 0
+Frac. pos. – – – – 50.0% 50.0% 50.0% 50.0% 11.1% 77.8%
+
+--- PDF PAGE 27 ---
+428 K. Rink 
+1 3
+professional algorithmic traders. 28 While institutional investors are not necessar -
+ily the better investors, greater competition among these investors can lead to an 
+increase in know-how about trading techniques and drive the speed of processing 
+market data.
+In summary, the declining performance of technical trading rules across markets 
+may not be surprising, as the rules studied in this paper are considered quite simple 
+and were not ahead of their time at the beginning of the sample periods. The ease 
+with which these naive technical trading rules can be copied suggests that initially 
+predictive rules may become unfavorable relatively quickly. While at least some of 
+the trading rules have performed significantly better than buy-and-hold strategies 
+under a zero-transaction cost scheme in early subperiods, they all appear to be use-
+less in current markets.
+6.3  Transaction cost analysis
+In the previous analyses, transaction costs were not taken into account. The supe-
+rior performance found for several technical trading heuristics does not necessarily 
+imply superior returns after transaction costs, since a zero-cost scheme is prone to 
+overestimate the performance of highly trade-intensive heuristics. Transaction costs 
+may also vary substantially across the examined markets (Lesmond 2005). In the 
+following, we relax the strong simplification of trading without costs.
+A proper transaction cost analysis is not trivial since reliable cost estimates for 
+certain markets and time periods are usually not available. Therefore, a common 
+approach in the literature is to calculate break-even transaction costs of the rules 
+with superior performance at zero transaction costs (see, e.g., Bessembinder and 
+Chan 1995, 1998; Hsu et al. 2016). For example, Hsu et al. (2016) simply calculate 
+the break-even costs for the best trading rules they identified in a previous test for 
+superior predictive ability. The drawback of this approach is that it does not reveal 
+the maximum transaction cost per trade up to which a trading rule still exhibits sta-
+tistically significant outperformance. In addition, technical trading rules that emit 
+frequent signals are likely to be more sensitive to transaction costs compared with 
+other rules. Thus, the distribution of rules with significant performance is most 
+likely affected by the introduction or increase of transaction costs (see also Bajgrow-
+icz and Scaillet 2012). To address these issues, we consider transaction costs before 
+testing for statistical significance.
+Our approach is simple, but to the best of our knowledge has not been used in 
+the literature before. We increase the transaction costs in steps of five basis points 
+and use the Stepwise Superior Predictive Ability Test at each transaction cost level 
+28 Friedman (1996) reports that the share of institutional investors in the USA increased from 10% in 
+1950 to about 50% in 1990. Gompers and Metrick (2001) show that the share of large institutional inves-
+tors in the stock market almost doubled between 1980 and 1996. More recently, high-frequency trading 
+has captured a significant share of trading volume. Kaya (2016) reports that the share of high-frequency 
+trading in the European stock market surged from nearly 0% in 2005 to over 50% in 2010. During the 
+same period, high-frequency trading accounted for about 20% and more than 50% of the trading volume 
+in the US stock market.
+
+--- PDF PAGE 28 ---
+429
+1 3
+The predictive ability of technical trading rules: an empirical…
+to test whether technical trading rules have superior performance. As a result, we 
+obtain the number of outperforming rules for each transaction cost level. Once the 
+transaction costs have reached a level where no significant performance can be 
+detected, the algorithm stops.
+Table  7 reports the results of the transaction cost study (the results for zero trans-
+action costs from Table  6 are also reported for ease of comparison). Regarding panel 
+A for developed countries, for 10 of the 23 market indices (i.e., Canada, Finland, 
+Great Britain, Greece, Hong Kong, Israel, Japan, Norway, Portugal, and the USA) 
+at least one trading rule with significant outperformance at positive transaction costs 
+exists. However, for these markets, the number of outperforming rules and the maxi-
+mum level of transaction costs are mostly small. Trading rules with superior per -
+formance at transaction costs of more than ten basis points are only found in five 
+markets. The highest single-trip transaction costs of 200 basis points are estimated 
+for one rule in the Japanese stock market. This is followed by the stock indices from 
+Hong Kong and Portugal, both of which are predictable with one rule for costs of up 
+to 40 basis points per transaction. Of the 18 emerging markets, 11 markets (i.e., Bul-
+garia, Chile, China, Colombia, Croatia, Malaysia, Pakistan, Peru, the Philippines, 
+Russia, and Saudi Arabia) are predictable for positive one-way transaction costs of 
+at least five basis points (see panel B). The Bulgarian, Malaysian, Pakistani, and 
+Peruvian stock market indices have the highest predictability for costs of at least 50 
+basis points per trade. With 112 outperforming rules at the 500 basis point level and 
+four outperforming rules at the 1000 basis point level, the Bulgarian SOFIX exhibits 
+the highest predictability. With a few exceptions, our results are consistent with pre-
+vious findings in the literature that technical trading performance is quickly offset by 
+moderate transaction costs (e.g., Allen and Karjalainen 1999; Bajgrowicz and Scail-
+let 2012; Ready 2002).
+The impact of transaction costs for the full sample of technical trading rules is also 
+shown in Fig.  1 for the US S&P 500 (panel A) and the Peruvian S&P/PVL Peru Gen-
+eral (panel B) as examples for a developed and an emerging market, respectively. 29 
+Both panels plot the Sharpe ratio performance measure for all 6406 technical heuristics 
+at transaction costs of 0 and 25 basis points per transaction. Generally, the impact of 
+transaction costs is quite significant for rules that favor very frequent trading (these are 
+often rules with lower parameter values which are mainly shown further to the left for 
+each of the five classes of heuristics). For example, while the performance measures of 
+all moving average rules before transaction costs range within the interval of [−0.5, 0.3] 
+in the US market, performance suffers significantly when trading costs are added. With 
+single-trip costs of 25 basis points, excess Sharpe ratios of moving average rules are as 
+low as −3.5. Despite the meaningful impact of trading costs on performance, the exam-
+ple of the Peruvian market suggests that a large fraction of rules generate excess Sharpe 
+ratios well above zero, which is not the case in the US market. Again, the higher degree 
+of predictability of the Peruvian market could be due to relatively lower market effi-
+ciency and generally higher transaction costs required to trade in this market in reality.
+29 We choose the US market due to the longest available sample period and as it is the most investigated 
+market in the literature. The Peruvian index is an example of a market that is predictable by compara-
+tively many rules for both zero and moderate transaction costs.
+
+--- PDF PAGE 29 ---
+430 K. Rink 
+1 3Table 7  Outperforming technical trading rules and transaction costs
+Market Single-trip transaction costs (basis points)
+0 5 10 15 20 25 30 40 50 75 100 150 200 300 400 500 1000
+Panel A: Developed countries
+AUS 0
+AUT 10
+BEL 0
+CAD 14 3 1
+CHE 0
+DEU 1
+DNK 0
+ESP 0
+FIN 11 7 2
+FRA 0
+GBR 101 5
+GRC 35 18 6 5 3 1 1
+HKG 290 164 123 57 38 22 8 1
+ISR 1 1
+ITA 0
+JPN 59 16 7 4 2 2 1 1 1 1  1 1 1
+KOR 1
+NLD 0
+NOR 1 1
+PRT 153 74 47 18 14 7 3 1
+SGP 0
+SWE 0
+USA 2 1 1 1 1 1 1
+
+--- PDF PAGE 30 ---
+431
+1 3
+The predictive ability of technical trading rules: an empirical…
+This table reports the number of outperforming technical trading rules at various single-trip transaction cost levels for developed countries (panel A) and emerging markets 
+(panel B). Trading rules are classified as “predictive” if they exhibit a p-value of at most 0.1 according to the Stepwise Superior Predictive Ability Test
+Table 7  (continued)
+Market Single-trip transaction costs (basis points)
+0 5 10 15 20 25 30 40 50 75 100 150 200 300 400 500 1000
+Panel B: Emerging markets
+ARG 0
+BGR 556 465 449 352 335 331 267 195 170 169 159 148 145 144 142 112 4
+BRA 86
+CHL 30 2 1
+CHN 70 25 2 2
+COL 20 4 4 1
+HRV 5 1
+IDN 0
+IND 1
+MEX 12
+MYS 366 19 17 14 10 7 5 3 1
+PAK 805 620 504 421 339 265 195 114 54 1 1
+PER 1700 1498 1367 1129 1054 953 833 692 611 397 289 43 5 5
+PHL 35 18 2 1
+POL 0
+RUS 4 1
+SAU 34 6 1
+ZAF 0
+
+--- PDF PAGE 31 ---
+432 K. Rink 
+1 3
+In most markets, the estimated maximum transaction costs for a single transaction 
+are small compared with what traders would likely have had to pay to trade these mar-
+kets during the sample periods. For example, Chan and Lakonishok (1993) estimate 
+single-trip trading costs of 14 basis points incurred by institutional traders for large US 
+stocks between 1986 and 1988. According to Stoll and Whaley (1983), average trading 
+costs were much higher in the preceding decades. Moreover, the emerging markets in 
+our sample are likely to have much higher transaction costs. For the period from 1991 
+to 2000, Lesmond (2005) estimates variable trade costs of 0.5–1.0% for Malaysia, 
+0.6–0.9% for Poland (both depending on order volume), 0.8–1.05% for China, 1.5% 
+for the Philippines (both for foreign investors), and 1.0% for Indonesia. Given these 
+figures, our analysis casts doubt on whether markets could have been traded profitably 
+with any of the investigated trading rules.
+Next, we investigate the evolution of the average number of trades and average 
+holding periods of outperforming rules at different transaction cost levels. Table  8 
+presents the relative change in the average number of trades for positive transaction 
+costs.30 For each market and transaction cost level, we average the number of trades 
+for all rules with superior performance. To ensure comparability across markets, we 
+normalize the average values for each transaction cost level of a market with the cor-
+responding value when transaction costs are zero. Thus, the table shows changes in the 
+average number of trades relative to the zero-transaction cost scenario (e.g., a value of 
+0.9 implies a 10% decrease in the average number of trades among all outperforming 
+rules at a given transaction cost level compared with the corresponding average num-
+ber of trades of all outperforming rules at zero transaction costs). The results indicate 
+that the average number of trades decreases in transaction costs for most developed 
+and emerging markets. Thus, as conjectured above, the share of outperforming rules 
+with frequent trading signals declines for higher transaction costs. Table 9 presents the 
+results for the average holding period conditional on transaction costs. The reported 
+figures are calculated analogously to those presented in Table 8. According to that, in 
+almost all markets, the average holding periods increase monotonically with transac-
+tion costs compared to the case of zero transaction costs.
+The results from Tables 8 and  9 suggest that the share of outperforming rules with 
+infrequent trading signals and longer average holding periods tends to increase as 
+Fig. 1  Trading costs and the performance of technical trading rules. This figure shows the perfor -
+mance of all 6406 technical trading rules for the USA (panel A) and Peru (panel B) as representatives 
+for the sample of developed countries and emerging markets, respectively. A heuristic’s performance 
+measure is the difference between its Sharpe ratio and the Sharpe ratio of a buy-and-hold benchmark 
+annualized with a factor of 
+√
+252 [cf., Eq. (3)]. Vertical axes represent the indices of technical heuristics. 
+The five heuristic classes are highlighted with alternating gray and white areas, where RSI are relative 
+strength index rules, FR are filter rules, MA are moving average rules, SR are support and resistance 
+rules, and CB are channel breakout rules, respectively. Black (gray) dots indicate the performance meas-
+ures of technical trading rules based on single-trip transaction costs of 0 (25) basis points
+▸
+30 For clarity, the table only reports results for markets that have at least one rule with statistically sig-
+nificant performance at least at the 10% level for single-trip transaction costs of five basis points, as pre-
+sented in Table 7.
+
+--- PDF PAGE 32 ---
+433
+1 3
+The predictive ability of technical trading rules: an empirical…
+transaction costs rise. Based on that, one may expect relatively more outperforming 
+rules which mimic a simple buy-and-hold strategy when transaction costs are high. 
+Panel A USA (S&P 500)
+Panel B Peru (S&P/BVL Peru General)
+
+
+--- PDF PAGE 33 ---
+434 K. Rink 
+1 3
+Table 8  Development of the average number of trades
+This table reports the average number of trades of outperforming trading rules at various single-trip transaction cost levels in developed countries (panel A) and emerging 
+markets (panel B) relative to the base case of zero transaction costs. For reasons of clarity, only markets with at least one technical rule with significant outperformance at 
+single-trip transaction costs of five basis points are considered (cf., Table  7). The number of trades are averaged for all outperforming rules at each transaction cost level 
+and normalized by the corresponding average number of trades of outperforming rules from the scenario with transaction costs of zero
+Market Single-trip transaction costs (in basis points)
+5 10 15 20 25 30 40 50 75 100 150 200 300 400 500 1000
+Panel A: Developed countries
+CAD 1.08 1.01
+FIN 0.82 0.50
+GBR 0.98
+GRC 0.82 0.70 0.55 0.52 0.28 0.28
+HKG 0.48 0.27 0.18 0.17 0.17 0.18 0.10
+ISR 0.61
+JPN 0.75 0.90 0.88 0.87 0.87 0.87 0.87 0.87 0.87 0.87 0.87 0.87
+NOR 1.00
+PRT 0.49 0.45 0.31 0.30 0.29 0.30 0.30
+USA 0.99 0.99 0.99 0.99 0.99 0.99
+Panel B: Emerging markets
+BGR 0.97 0.87 0.97 0.87 0.85 0.54 0.35 0.39 0.34 0.34 0.34 0.31 0.30 0.28 0.24 0.11
+CHL 0.67 0.85
+CHN 0.50 0.27 0.39
+COL 0.61 0.48 0.72
+HRV 0.96
+MYS 0.68 0.43 0.41 0.40 0.40 0.39 0.40 0.33
+PAK 1.03 1.05 1.11 1.21 1.20 1.10 1.05 0.70 0.21 0.11
+PER 0.91 0.90 0.88 0.87 0.79 0.70 0.60 0.61 0.59 0.47 0.43 0.36 0.23
+PHL 0.57 0.85 0.37
+RUS 0.48
+SAU 1.21 0.12
+
+--- PDF PAGE 34 ---
+435
+1 3
+The predictive ability of technical trading rules: an empirical…
+Table 9  Development of the average holding periods
+This table reports the average holding periods of outperforming trading rules at various single-trip transaction cost levels in developed countries (panel A) and emerging 
+markets (panel B) relative to the base case of zero transaction costs. Only markets with at least one technical rule with significant outperformance at single-trip transaction 
+costs of five basis points are considered (cf., Table  7). The holding periods are averaged for all outperforming rules at each transaction cost level and normalized by the 
+corresponding average holding period of outperforming rules from the scenario with transaction costs of zero
+Market Single-trip transaction costs (in basis points)
+5 10 15 20 25 30 40 50 75 100 150 200 300 400 500 1000
+Panel A: Developed countries
+CAD 1.09 1.09
+FIN 1.00 0.99
+GBR 1.03
+GRC 1.01 1.03 1.05 1.05 1.05 1.05
+HKG 1.12 1.15 1.18 1.20 1.21 1.21 1.21
+ISR 1.08
+JPN 1.12 1.17 1.17 1.17 1.17 1.17 1.17 1.17 1.17 1.17 1.17 1.17
+NOR 1.06
+PRT 1.12 1.17 1.18 1.19 1.19 1.19 1.19
+USA 1.00 1.00 1.00 1.00 1.00 1.00
+Panel B: Emerging markets
+BGR 1.15 1.25 1.34 1.43 1.48 1.55 1.64 1.73 1.76 1.77 1.79 1.79 1.80 1.92 1.92 2.27
+CHL 1.05 1.05
+CHN 1.12 1.13 1.14
+COL 1.01 1.13 1.13
+HRV 1.03
+MYS 1.13 1.20 1.21 1.22 1.24 1.25 1.25 1.25
+PAK 1.10 1.14 1.22 1.25 1.28 1.30 1.31 1.32 1.32 1.41
+PER 1.12 1.23 1.34 1.41 1.46 1.57 1.65 1.67 1.70 1.81 1.82 1.98 2.02
+PHL 1.32 1.35 1.38
+RUS 1.13
+SAU 1.06 1.12
+
+--- PDF PAGE 35 ---
+436 K. Rink 
+1 3
+However, this is not the case. Despite the longer average holding periods, we observe a 
+decrease in the average time invested in 17 of the 21 markets for increasing transaction 
+costs. Thus, the outperforming rules tend to exploit very specific price patterns and 
+have longer periods with no exposure to the market when transaction costs are high.
+7  Out‑of‑sample results
+In this section, we address two fundamental problems that arise in analyses of techni-
+cal trading rules over long sample periods. First, using technical trading rules requires 
+active trading, and technical analysis has been shown to be used by amateur and profes-
+sional investors who deliberately engage in active portfolio management (e.g., Faugère 
+et al. 2013, Lease et al. 1980). Thus, the common convention in the literature of testing 
+trading rules over periods of several decades most often diverges from the short-term 
+oriented trading behavior of individuals who may aim to apply heuristics which they 
+find most valuable at a given point in time. Second, backtests (such as those conducted 
+in this paper so far) only provide ex-post information on whether trading rules could 
+have been traded profitably. However, in-sample outperformance does not imply out-of-
+sample outperformance, nor does it give any indication of how to select the best rules 
+to trade in the future. So far, we cannot answer the question whether a trader could have 
+exploited the predictability of some of the investigated markets (at least if trading were 
+free or very cheap) by implementing a profitable trading system based on the studied 
+technical rules. We approach this task by performing an out-of-sample persistence anal-
+ysis of technical trading performance in the following.
+To test out-of-sample performance, we mimic the trading activities of a technical 
+trader, similar to Bajgrowicz and Scaillet (2012). For each market, we divide the sample 
+periods into 36 month subperiods and select the trading rules with the best performance 
+in terms of the highest excess Sharpe ratio (we refer to these 36 month intervals in which 
+in-sample performance of technical trading rules is evaluated as “testing periods”).31 The 
+best-performing rule during a testing period is used for trading during the subsequent 
+36 month period (which we refer to as “trading period”). When a trading signal is gener-
+ated by the selected rule during a trading period, the index is purchased. A potentially 
+open position is automatically closed at the end of a trading period. We apply the double-
+or-out strategy as in the previous analyses to mitigate true short positions.
+Table  10 presents the results based on single-trip transaction costs of 0, 10, 25, 
+and 50 basis points. 32 The reported performance measure is the difference between 
+annualized Sharpe ratios for technical trading returns and the corresponding 
+31 To check for robustness, we also employ excess raw returns as a second performance measure. The 
+corresponding results are discussed later.
+32 These transaction cost estimates are similar to the values considered in previous studies. Allen and 
+Karjalainen (1999), for example, also use 10, 25, and 50 basis points to evaluate the impact of transac-
+tion costs on the performance of technical trading rules applied to the S&P 500 between 1928 and 1995. 
+Ready (2002) uses single-trip trading costs of 13 basis points for the DJIA between 1962 and 1999, and 
+Bajgrowicz and Scaillet (2012) study the DJIA for single-trip trading costs of 12.5 basis points for the 
+period from 1897 to 2011.
+
+--- PDF PAGE 36 ---
+437
+1 3
+The predictive ability of technical trading rules: an empirical…
+buy-and-hold benchmark returns. In addition to the out-of-sample performance, 
+the table also reports the corresponding in-sample performance for each transaction 
+cost level (i.e., the in-sample results are based on the best rules identified during the 
+testing periods, which are used to evaluate the out-of-sample performance during 
+subsequent trading periods). The statistical significance of the performance is evalu-
+ated using a hypothesis test proposed by Bailey and López de Prado (2012), which 
+assesses the null hypothesis that two Sharpe ratios (computed from potentially non-
+normal return distributions) are equal.
+The analysis shows that the in-sample performance is sizable (with excess Sharpe 
+ratios mostly above 1) and highly statistically significant even at single-trip transaction 
+costs of 50 basis points. This may not be surprising since in-sample performance is by 
+construction the result of extensive data snooping. More importantly, the out-of-sam-
+ple performance is mostly insignificant or negative and significant. For higher single-
+trip transaction costs of 25 and 50 basis points, we observe significant out-of-sample 
+underperformance in 14 and 18 markets, respectively, at least at the 10% significance 
+level. The findings imply that best-performing technical trading rules do not gener -
+ate persistent performance over relatively short time horizons, and that such a trading 
+system is detrimental compared with simply buying and holding the respective mar-
+ket index. This impression is confirmed in panel C of Table 10, which reports results 
+for equally weighted portfolios of developed market indices, emerging market indices, 
+and all market indices, respectively. All in-sample performance measures are positive 
+and statistically significant at the 1% level for the four transaction cost scenarios. In 
+contrast, the out-of-sample performance measures are insignificant for single-trip costs 
+of 0 basis points and turn negative and significant at positive transaction costs in most 
+of the considered cases [e.g., for single-trip costs of 50 basis points, the performance 
+measure equals − 0.315 (significant at the 5% level) for the developed markets portfo-
+lio as well as − 0.507 and − 0.385 for the emerging markets and all-markets portfolio 
+(both significant at the 1% level)]. We reestimate the selection algorithm using excess 
+raw returns as an alternative performance measure. The results presented in Table 11 
+in the appendix confirm our baseline findings obtained with the Sharpe ratio criterion.
+Panels A–C in Fig.  2 plot the performance of the three portfolios over the entire 
+sample period for single-trip transaction costs of 0 and 25 basis points. Here, per -
+formance is measured as the in-sample and out-of-sample excess returns (i.e., the 
+daily differences between the equally weighted returns from technical trading and 
+the equally weighted returns from the buy-and-hold benchmark strategy). All three 
+panels show that the in-sample excess returns are substantial and comparatively 
+unaffected by transaction costs. In contrast, out-of-sample performance is regressive 
+most of the time, and all portfolios generate negative returns over the full sample 
+period, even in the absence of transaction costs.
+In summary, the results presented in this section demonstrate that past superior 
+performance of technical trading rules does not persist in the near future. This seri-
+ously calls into question whether the studied rules could have been traded at any profit. 
+Based on our simple selection algorithm for trading rules, technical trading is harmful 
+for investment performance across the broad range of considered markets. Our results 
+corroborate those of Bajgrowicz and Scaillet (2012), who also measure very poor out-
+of-sample performance of simple technical trading rules applied to the DIJA.
+
+--- PDF PAGE 37 ---
+438 K. Rink 
+1 3Table 10  Persistence of performance
+Market Single-trip transaction costs
+0 Basis points 10 Basis points 25 Basis points 50 Basis points
+In-sample Out-of-sample In-sample Out-of-sample In-sample Out-of-sample In-sample Out-of-sample
+Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val
+Panel A: Developed countries
+AUS 1.535*** < 0.001 − 0.094 0.352 1.419*** < 0.001 −0.184 0.245 1.286*** < 0.001 − 0.074 0.369 1.155***< 0.001 − 0.169 0.264
+AUT 1.841*** < 0.001 0.253 0.162 1.739*** < 0.001 0.169 0.266 1.651*** < 0.001 0.154 0.286 1.505***< 0.001 0.159 0.279
+BEL 1.665*** < 0.001 0.106 0.348 1.595*** < 0.001 0.060 0.382 1.498*** < 0.001 0.039 0.392 1.361***< 0.001 −0.174 0.276
+CAD 1.503*** < 0.001 − 0.384** 0.013 1.413*** < 0.001 − 0.555*** < 0.001 1.291*** < 0.001 − 0.609*** < 0.001 1.078***< 0.001 − 0.572*** < 0.001
+CHE 1.403*** < 0.001 − 0.424** 0.038 1.315*** < 0.001 − 0.367* 0.069 1.230*** < 0.001 − 0.373* 0.065 1.128***< 0.001 − 0.334* 0.094
+DEU 1.332*** < 0.001 − 0.310** 0.036 1.247*** < 0.001 − 0.365**0.014 1.151*** < 0.001 − 0.307**0.037 1.054***< 0.001 − 0.276* 0.059
+DNK 1.427*** < 0.001 − 0.054 0.385 1.322*** < 0.001 − 0.670 0.378 0.957*** < 0.001 − 0.263 0.175 0.904***< 0.001 − 0.323 0.113
+ESP 1.625*** < 0.001 − 0.056 0.381 1.560*** < 0.001 − 0.080 0.366 1.553*** < 0.001 0.142 0.302 1.416***< 0.001 0.183 0.252
+FIN 1.607*** < 0.001 − 0.266 0.151 1.582*** < 0.001 − 0.207 0.222 1.513*** < 0.001 − 0.221 0.205 1.360***< 0.001 − 0.438** 0.027
+FRA 1.406*** < 0.001 − 0.186 0.250 1.310*** < 0.001 − 0.239 0.185 1.199*** < 0.001 − 0.406**0.043 0.823***< 0.001 − 0.467** 0.021
+GBR 1.956*** < 0.001 0.429** 0.033 1.828∗∗∗ < 0.001 0.047 0.387 1.660*** < 0.001 −0.118 0.329 1.568***< 0.001 − 0.408** 0.037
+GRC 1.916*** < 0.001 0.354* 0.080 1.881*** < 0.001 0.323 0.105 1.836*** < 0.001 0.350* 0.083 1.745***< 0.001 0.088 0.361
+HKG 1.601*** < 0.001 − 0.057 0.371 1.526*** < 0.001 −0.112 0.302 1.405*** < 0.001 −0.186 0.184 1.319***< 0.001 − 0.260* 0.087
+ISR 1.188*** < 0.001 − 0.135 0.310 1.158*** < 0.001 − 0.252 0.167 1.051*** < 0.001 − 0.357* 0.069 0.841***< 0.001 −0.206 0.226
+ITA 1.687*** < 0.001 − 0.047 0.392 1.600*** < 0.001 −0.287 0.200 1.525*** < 0.001 −0.318 0.170 1.468***< 0.001 −0.328 0.162
+JPN 1.629*** < 0.001 0.172 0.157 1.425*** < 0.001 0.130 0.232 1.332*** < 0.001 0.072 0.338 1.186***< 0.001 −0.075 0.332
+KOR 1.464*** < 0.001 − 0.144 0.263 1.349*** < 0.001 −0.129 0.285 1.305*** < 0.001 −0.141 0.268 1.024***< 0.001 −0.327** 0.047
+NLD 1.534*** < 0.001 0.170 0.256 1.328*** < 0.001 0.105 0.336 1.262*** < 0.001 − 0.089 0.352 1.178***< 0.001 − 0.220 0.186
+NOR 1.518*** < 0.001 0.042 0.389 1.423*** < 0.001 −0.034 0.393 1.312*** < 0.001 − 0.354* 0.070 1.215***< 0.001 − 0.438** 0.027
+PRT 2.108*** < 0.001 1.176*** < 0.0012.008*** < 0.001 1.124***< 0.001 1.913*** < 0.001 0.967***< 0.001 1.785***< 0.001 0.226 0.234
+
+--- PDF PAGE 38 ---
+439
+1 3
+The predictive ability of technical trading rules: an empirical…
+Table 10  (continued)
+Market Single-trip transaction costs
+0 Basis points 10 Basis points 25 Basis points 50 Basis points
+In-sample Out-of-sample In-sample Out-of-sample In-sample Out-of-sample In-sample Out-of-sample
+Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val
+SGP 1.530*** < 0.001 0.106 0.368 1.432*** < 0.001 0.027 0.397 1.273*** < 0.001 −0.223 0.279 1.191***< 0.001 −0.323 0.188
+SWE 1.365*** < 0.001 − 0.066 0.375 1.350*** < 0.001 −0.104 0.341 1.160*** < 0.001 − 0.193 0.234 1.010***< 0.001 − 0.231 0.186
+USA 1.262*** < 0.001 − 0.312** 0.018 1.187*** < 0.001 − 0.389***0.003 1.090*** < 0.001 − 0.280**0.033 0.997***< 0.001 −0.329** 0.013
+Panel B: Emerging markets
+ARG 0.999*** < 0.001 − 0.303 0.132 0.917*** < 0.001 − 0.274 0.161 0.819*** < 0.001 − 0.348* 0.091 0.787***< 0.001 − 0.295 0.138
+BGR 1.634*** < 0.001 0.196 0.309 1.625*** < 0.001 0.347 0.171 1.607*** < 0.001 0.089 0.379 1.544***< 0.001 − 0.014 0.399
+BRA 1.179*** < 0.001 − 0.150 0.319 1.156*** < 0.001 − 0.179 0.291 1.118*** < 0.001 −0.213 0.255 1.067***< 0.001 − 0.262 0.202
+CHL 1.513*** < 0.001 0.040 0.391 1.441*** < 0.001 − 0.242 0.195 1.342*** < 0.001 − 0.397* 0.058 1.164***< 0.001 − 0.327 0.108
+CHN 1.745*** < 0.001 0.123 0.334 1.676*** < 0.001 0.210 0.236 1.584*** < 0.001 0.135 0.323 1.536***< 0.001 − 0.088 0.365
+COL 1.667*** < 0.001 − 0.415 0.137 1.623*** < 0.001 − 0.461 0.107 1.571*** < 0.001 − 0.530* 0.070 1.054***< 0.001 −0.276* 0.059
+HRV 1.833*** < 0.001 0.312 0.183 1.780*** < 0.001 0.348 0.160 1.477*** < 0.001 0.219 0.270 1.370***< 0.001 0.214 0.270
+IDN 1.748*** < 0.001 − 0.072 0.372 1.665*** < 0.001 − 0.138 0.307 1.619*** < 0.001 − 0.015 0.398 1.476***< 0.001 − 0.027 0.395
+IND 1.193*** < 0.001 − 0.398** 0.024 1.117*** < 0.001 − 0.487***0.006 1.051*** < 0.001 − 0.476***0.007 0.991***< 0.001 − 0.379** 0.031
+MEX 1.218*** < 0.001 − 0.766*** < 0.0011.180*** < 0.001 − 0.755*** < 0.001 1.103*** < 0.001 − 0.818*** < 0.001 1.024***< 0.001 − 0.810*** < 0.001
+MYS 1.893*** < 0.001 − 0.097 0.340 1.807*** < 0.001 − 0.005 0.400 1.741*** < 0.001 0.038 0.389 1.592***< 0.001 − 0.140 0.284
+PAK 2.072*** < 0.001 0.209 0.241 1.990*** < 0.001 0.042 0.391 1.856*** < 0.001 − 0.133 0.324 1.726***< 0.001 − 0.431*** 0.041
+PER 1.806*** < 0.001 0.303 0.143 1.685*** < 0.001 0.174 0.283 1.623*** < 0.001 − 0.017 0.398 1.529***< 0.001 − 0.112 0.345
+PHL 1.413*** < 0.001 − 0.223 0.197 1.685*** < 0.001 − 0.305 0.107 1.308*** < 0.001 − 0.346* 0.073 1.285***< 0.001 − 0.348* 0.071
+POL 1.188*** < 0.001 − 0.049 0.390 1.103*** < 0.001 − 0.140 0.331 1.618*** < 0.001 − 0.295 0.173 0.885***< 0.001 − 0.473** 0.046
+RUS 1.710*** < 0.001 − 0.173 0.303 1.650*** < 0.001 − 0.341 0.136 1.618*** < 0.001 − 0.371 0.112 1.564***< 0.001 − 0.421* 0.078
+
+--- PDF PAGE 39 ---
+440 K. Rink 
+1 3Table 10  (continued)
+Market Single-trip transaction costs
+0 Basis points 10 Basis points 25 Basis points 50 Basis points
+In-sample Out-of-sample In-sample Out-of-sample In-sample Out-of-sample In-sample Out-of-sample
+Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val Perf p-Val
+SAU 2.072*** < 0.001 − 0.235 0.263 2.027*** < 0.001 − 0.162 0.328 1.865*** < 0.001 − 0.387 0.125 1.801***< 0.001 − 0.370 0.134
+ZAF 1.431*** < 0.001 − 0.384 0.101 1.316*** < 0.001 − 0.542**0.026 1.211*** < 0.001 − 0.557**0.022 1.039***< 0.001 − 0.395* 0.093
+Panel C: Equally weighted portfolios
+Dev 3.262*** < 0.001 − 0.044 0.375 2.965*** < 0.001 − 0.132 0.228 2.672*** < 0.001 − 0.182 0.138 2.422***< 0.001 − 0.315** 0.016
+Emg 3.372*** < 0.001 − 0.196 0.203 3.412*** < 0.001 − 0.359**0.041 3.232*** < 0.001 − 0.456**0.010 3.120***< 0.001 − 0.507*** 0.004
+All 3.696*** < 0.001 − 0.006 0.399 3.369*** < 0.001 − 0.195 0.118 3.034*** < 0.001 − 0.261**0.045 2.744***< 0.001 − 0.385*** 0.003
+This table reports results for the in-sample and out-of-sample performance of best trading rules for single-trip transaction costs of 0, 10, 25, and 50 basis points. Panel A 
+and panel B show results for developed countries and emerging markets, and panel C shows results for equally weighted portfolios of developed (Dev), emerging (Emg), 
+and all market indices (All). Perf is the performance measure computed as the difference between annualized Sharpe ratios for technical trading returns and buy-and-hold 
+benchmark returns. p-Val denotes the p-value obtained from a statistical test with the null hypothesis that the performance measure is equal to zero (see Bailey and López 
+de Prado 2012). The superscripts ∗∗∗ , ∗∗ , and ∗ indicate the significance levels of p < 0.01 , p < 0.05 , and p < 0.1 , respectively
+
+--- PDF PAGE 40 ---
+441
+1 3
+The predictive ability of technical trading rules: an empirical…
+8  Conclusions
+This paper provides a comprehensive analysis of a broad universe of simple techni-
+cal trading rules applied to a total of 23 developed market indices and 18 emerging 
+market indices using the Stepwise Superior Predictive Ability Test. The novelty of 
+this test is its ability to identify the whole subset of trading rules with superior per -
+formance relative to a buy-and-hold benchmark, while accounting for data snooping 
+bias. To the best of our knowledge, we are the first to apply this powerful statisti-
+cal test to a large set of trading rules in a comparative analysis of multiple stock 
+markets.
+Our in-sample results show that technical trading rules have predictive power in 
+some markets during relatively early periods when transaction costs are ignored. 
+However, in recent years, the investigated technical rules do not have predictive 
+power anymore. To evaluate the impact of transaction costs, we run a stepwise algo-
+rithm to determine the number of outperforming trading rules for different transac-
+tion cost levels. This analysis reveals a high sensitivity of trading performance to 
+moderate single-trip transaction costs. Moreover, an out-of-sample analysis suggests 
+that the performance of the best technical heuristics is generally not persistent over 
+shorter time periods in the future. These in-sample best trading rules tend to signifi-
+cantly underperform out-of-sample even when transaction costs are low.
+The existing literature on the profitability of technical trading rules is relatively 
+comprehensive, but it shows inconclusive results and relies mainly on limited data 
+or outdated statistical tests. We provide extensive empirical evidence that simple 
+technical rules do not achieve data snooping-free outperformance of various stock 
+indices. This is true even for markets that are considered far less information effi-
+cient than the extensively studied US stock market. Overall, our results cast doubt on 
+the economic value of technical trading rules that have been found to generate supe-
+rior performance by several previous studies based on tests with less statistical rigor. 
+The results strongly suggest that the investigated trading signals are noise and that 
+a trading strategy which follows these signals ultimately underperforms the market 
+due to an accumulation of transaction costs.
+Our analysis is limited with respect to several dimensions, so the results of this 
+study should not be generalized beyond the scope of the trading rules and data 
+examined in this paper. Clearly, the examined rules represent only a subset of the 
+potentially testable technical trading rules and are among the simplest used in prac-
+tice. There are several, more subtle technical strategies that are not part of the uni-
+verse tested in this paper. Moreover, the analysis is limited to daily close prices of 
+national stock market indices and does not provide evidence for more detailed data 
+such as intraday stock prices. The boom in high-frequency algorithmic trading in 
+recent years, driven by increasing computational capabilities, may have created 
+highly specialized investors who generate excess returns through technical trading. 
+More recent empirical evidence related to this subject by Batten et al. (2015) and 
+Gebka et  al. (2014) point in this direction. However, the nature, complexity, and 
+trading horizon of these technical approaches drastically differ from the naive heu-
+ristics typically employed by individual investors.
+
+--- PDF PAGE 41 ---
+442 K. Rink 
+1 3
+Despite the poor performance of simple technical rules, they are still widely used 
+by market participants. Future research should investigate whether there may be 
+other, nonmonetary factors that motivate these investors to apply technical analysis. 
+Potential preference-based reasons for trading technical signals and the behavior of 
+technical traders have hardly been addressed in the finance literature.
+Appendix 1: Implementation of the stepwise superior predictive 
+ability test
+In this paper, the objective is to test whether trading according to signals of m 
+technical trading rules outperforms a buy-and-hold strategy. Performance is 
+measured in terms of the Sharpe ratio, such that the performance measure for a 
+trading rule k  is defined as 𝜃k = /parenleft.s1̄𝜋k − ̄rf /parenright.s1∕̂𝜎k − /parenleft.s1̄r − ̄rf /parenright.s1∕̂𝜎0 (cf., equation (3 )). We 
+use the Stepwise Superior Predictive Ability Test introduced by Hsu et al. (2010) 
+to obtain p -values and control for data snooping bias.
+Hsu et  al. (2010) employ the stationary bootstrap by Politis and Romano 
+(1994) to resample original time series. We outline the general procedure of the 
+bootstrap using the matrix Π= /parenleft.s1/u1D70Bt,k
+/parenright.s1
+t = 1, … , N
+k = 1, … , m
+ of strategy returns. The indices 
+of each vector /u1D70Bk =( /u1D70B1,k, /u1D70B2,k, … , /u1D70BN,k)� are resampled yielding a pseudo-time 
+series /u1D70Bb
+k ≡ /u1D70Bk(nt,b) for the b-th bootstrap sample, b = 1, … , B . The indices nt,b 
+result from resampling the original time indices 1, … , N in blocks of stochastic 
+lengths, where the block lengths follows a geometric distribution with parameter 
+q ∈ (0, 1] . Due to the properties of the geometric distribution, blocks have an 
+expected length of 1/q . The resampling of blocks is implemented with two N × B 
+random matrices with independent entries ut,b, vt,b ∼ unif(0, 1] . The indices are 
+initialized by setting
+where ⌈⋅⌉ is the ceiling function that rounds its argument to the nearest integer 
+towards infinity. The indices for t = 2, … , N are then determined by
+(4)n1,b = ⌈Nu1,b⌉,
+(5)nt,b =
+� ⌈Nut,b⌉, vt,b < q,
+1�nt−1,b < N�nt−1,b + 1, vt,b ≥ q,
+Fig. 2  In-sample and out-of-sample performance of technical trading rules. This figure displays 
+the development of the in-sample and out-of-sample performance of technical trading rules for equally 
+weighted portfolios of developed country indices (panel A), emerging market indices (panel B), and all 
+market indices (panel C), respectively. Performance is measured as the returns generated from technical 
+trading in excess of buy-and-hold returns form the corresponding stock index in percent. Solid black 
+(solid gray) lines show the development of in-sample excess returns based on single-trip transaction costs 
+of 0 (25) basis points. Dashed black (dashed gray) lines show the development of out-of-sample excess 
+returns based on single-trip transaction costs of 0 (25) basis points
+▸
+
+--- PDF PAGE 42 ---
+443
+1 3
+The predictive ability of technical trading rules: an empirical…
+where 1{⋅} is the indicator function. Thus, resampled indices are determined 
+recursively, where the realization of the random variable vt,b relative to q 
+Panel A Developed Countries
+Panel B Emerging Markets
+
+
+--- PDF PAGE 43 ---
+444 K. Rink 
+1 3
+determines whether a new block is started, and the start index of a block is deter -
+mined by the random variable ut,b . Finally, we obtain B bootstrapped matrices, 
+Πb = /parenleft.s1/u1D70Bb
+1 , /u1D70Bb
+2 , … , /u1D70Bb
+m
+/parenright.s1
+ , b = 1, … , B , by using the b-th resample of indices to reorder 
+all columns of Π.
+The stationary bootstrap is jointly applied to the time series of trading returns, 
+the risk-free rate, and the benchmark returns, so that we can compute boot-
+strapped versions of /u1D703k of the form
+where ̂𝜎b
+k  and ̂𝜎b
+0 are the standard deviations of resampled strategy returns and bench-
+mark returns based on bootstrap sample b using the bootstrapped variance estimator 
+of Politis and Romano (1994).33 This finally yields B vectors of bootstrapped perfor-
+mance measures, /u1D703b = 
+/parenleft.s1/u1D703b
+1 , /u1D703b
+2 , … , /u1D703b
+m
+/parenright.s1
+.
+To implement the stepwise procedure, the elements of the vector of original perfor-
+mance measures, /u1D703=( /u1D7031, /u1D7032, … , /u1D703m) , are sorted in descending order. Let, moreover, j 
+and mj denote the step of the stepwise test and the number of rejections of the null 
+(6)𝜃b
+k =
+̄𝜋b
+k − ̄rfb
+̂𝜎b
+k
+− ̄rb − ̄rfb
+̂𝜎b
+0
+,
+Panel C All Markets
+Fig. 2  (continued)
+33 Politis and Romano (1994) compute the variance estimator, ̂𝜎2
+k , for model k as /uni0302/u1D70E2
+k = /uni0302/u1D6FE0,k + 2 /uni2211N−i
+i=1 /u1D714n,i /uni0302/u1D6FEi,k with 
+kernel weights under the stationary bootstrap given by /u1D714n,i = N−i
+N (1 − q)i + i
+N (1 − q)N−i , where q is the parameter 
+of the geometric distribution, and with the empirical covariance ̂𝛾i,k = N−1 ∑ N−i
+j=1
+�𝜋 j,k − ̄𝜋k
+��𝜋 j+i,k − ̄𝜋k
+�
+.
+
+--- PDF PAGE 44 ---
+445
+1 3
+The predictive ability of technical trading rules: an empirical…
+hypothesis (i.e., the number of models with true outperformance) at step j. To initialize 
+the first step, let j = 1 and m0 = 0 . We compute an empirical null distribution 
+{/u1D719b
+j }b=1,…, B , where
+with
+Expression (8) formulates a measure to recenter the bootstrapped distribution for 
+models performing particularly bad. 34 We use {/u1D719b
+j }b=1,…, B and compute its (1 − /u1D6FC) 
+quantile, q(/u1D6FC) , with /u1D6FC being the allowed error rate. The subset of models with perfor-
+mance measures satisfying 
+√
+N𝜃k > q(𝛼) , k = mj−1 + 1, … , m , are recorded as sig-
+nificantly outperforming models. If the number of rejected models at this step, mj , is 
+zero, the stepwise procedure terminates. Otherwise, if mj > 0 , we set j = j + 1 and 
+proceed with the next step by recomputing the empirical null distribution based on 
+the new subset of models (i.e., the set of models that does not contain all models that 
+have been identified as outperforming in the previous step).
+The number of bootstraps, B, and the parameter of the geometric distribution deter-
+mining the mean block length, q, are the two exogenous parameters of the stationary 
+bootstrap of Politis and Romano (1994). White (2000) argues that 500 is a sufficiently 
+large number of iterations for the stationary bootstrap. Regarding the parameter of the 
+geometric distribution, Sullivan et al. (1999) show in a sensitivity analysis that the p-val-
+ues computed with the Reality Check almost do not change if q is set to either 0.01, 0.1, 
+or 0.5, respectively. Similarly, Hsu et al. (2016) also report only negligible sensitivity of 
+results to the choice of bootstrap parameters, and Chen et al. (2009) find that the out-
+come of the bootstrap procedure is relatively insensitive to the choice of the two param-
+eters. We, therefore, feel safe to set B = 500 for the number of bootstrap resamples and 
+q = 0.1 as parameter for the geometric distribution in the empirical analysis of this study.
+Appendix 2: Definition of trading filters and technical trading rules
+Trading filters
+Band filters
+Band filters specify a multiplicative value, fb > 0 , which the price of a security is 
+supposed to additionally exceed after a trading signal has been triggered. Thus, if a 
+(7)𝜙 b
+j =
+√
+N max
+k=mj−1+1,…, m
+{𝜃b
+k − 𝜃k + ̂𝜇k}
+(8)̂𝜇k = 𝜃k1
+� √
+N𝜃k
+̂𝜎k
+≤ −
+√
+2 log logN
+�
+.
+34 Hansen (2005) shows that poor models are irrelevant for the asymptotic null distribution. However, 
+they cannot be neglected in finite samples as the impact on the distribution of the test statistic of models 
+being little worse than the benchmark may be huge. Therefore, Hansen (2005) does not exclude any mod-
+els but reduces the influence of the poorest ones. To do so, −
+√
+2 log logN in expression (8) serves as a 
+threshold and is a result of an application of the law of the iterated logarithm.
+
+--- PDF PAGE 45 ---
+446 K. Rink 
+1 3
+technical trading rule generates an unconditional long (short) signal, a long (short) 
+position is only entered when the stock price subsequently increases (decreases) by 
+another 100fb%.
+Time‑delay filters
+Time-delay filters impose a fixed time period, fd ∈ ℕ , by which the entry into a 
+position is delayed. Thus, if a trading signal is generated in period t, a position is 
+actually initiated in period t + fd.
+Fixed‑length filters
+Fixed-length filters define a fixed holding period, fl ∈ ℕ , after which a position is 
+automatically liquidated. More specifically, a position entered in period t will be liq-
+uidated in period t + fl , regardless of intermediate price movements or possible ear -
+lier signals. If a trading rule is not supplemented by a fixed-length filter, and unless 
+otherwise specified, a short signal requires both the liquidation of a long position 
+and the entry into a short position, and vice versa.
+Technical trading rules
+Relative Strength Index The relative strength index, RSIt(n) , in period t is the sum of 
+the upward movements of a security price, Pt , relative to the sum of the upward and 
+absolute downward movements calculated over the last n periods. More formally, we 
+compute the sum of upward and the sum of absolute downward movements as
+Based on these expressions, the relative strength index is introduced as
+Obviously, the RSI ranges from 0 to 100. Securities with extreme high or low rela-
+tive strength index are considered overbought or oversold, respectively. Follow -
+ing Hsu et al. (2016), we consider a security to be oversold if its RSIt(n)≤ 50 − v , 
+where v is a positive integer, for at least d periods. Then, a long signal is triggered 
+when RSIt(n) rises above 50 − v . Short positions are initiated analogously.
+(9)
+Ut(n)=
+n/uni2211.s1
+k=1
+1/braceleft.s1Pt−k +1 − Pt−k > 0/braceright.s1/parenleft.s1Pt−k +1 − Pt−k
+/parenright.s1,
+Dt(n)=−
+n/uni2211.s1
+k=1
+1/braceleft.s1Pt−k +1 − Pt−k < 0/braceright.s1/parenleft.s1Pt−k +1 − Pt−k
+/parenright.s1.
+(10)RSIt(n)= 100 Ut(n)
+Ut(n)+ Dt(n).
+
+--- PDF PAGE 46 ---
+447
+1 3
+The predictive ability of technical trading rules: an empirical…
+Filter rules
+The filter rules used by Sullivan et al. (1999) generate an initial long (short) signal 
+as soon as the price of a security rises (falls) by more than 100x% . Subsequently, a 
+long position is closed and a short position is entered once the price of the asset falls 
+by at least 100x% from the maximum price that occurred while holding that position. 
+Similarly, a short position is closed and a long position is initiated when the price 
+increases by at least 100x% from the minimum price observed during the holding 
+period.
+Let /u1D70F denote the period in which the previous trading signal was triggered. A sub-
+sequent trading signal is generated in period t >𝜏  according to the following rules.
+We also use an alternative definition for maxima and minima as introduced by Sul-
+livan et al. (1999). According to that, a maximum (minimum) is defined as the most 
+recent price that is higher (lower) than the prices of the previous e periods. This 
+results in the following filter rules.
+Both definitions of extrema lead to a permanent exposure to the asset as soon as 
+the first trading signal is generated (i.e., there is no possibility for a market-neutral 
+position). A third specification of the filter rules also allows for intermediate neu-
+tral positions. This is achieved by different percentage thresholds required to open 
+or close a long or short position. While opening a position still requires a 100x% 
+change in the asset price, closing a long (short) position requires a 100y% move 
+below (above) the previous high (low). Let /u1D70F denote the period in which the current 
+position was initiated. The liquidation of this position in period t comes about as 
+follows.
+(11)
+Long signal in t ∶
+/parenleft.s1Pt−1 < min{P𝜏, … , Pt−2 }(1+ x)/parenright.s1∧ /parenleft.s1Pt ≥ min{P𝜏, … , Pt−1 }(1+ x)/parenright.s1
+Short signal in t ∶
+/parenleft.s1Pt−1 > max{P𝜏, … , Pt−2 }(1− x)/parenright.s1∧ /parenleft.s1Pt ≤ max{P𝜏, … , Pt−1 }(1− x)/parenright.s1
+(12)
+Long signal in t ∶
+/parenleft.s3
+Pt−1 < Pmax
+̃t< t− 1 {̃t /uni007C.varP̃t < min {P̃t− e− 1,…, P̃t− 2}}(1 + x)
+/parenright.s3
+∧
+/parenleft.s3
+Pt ≥ Pmax
+̃t< t {̃t /uni007C.varP̃t < min {P̃t− e,…, P̃t− 1}}(1 + x)
+/parenright.s3
+Short signal in t ∶
+/parenleft.s3
+Pt−1 > Pmax
+̃t< t− 1 {̃t /uni007C.varP̃t > max {P̃t− e− 1,…, P̃t− 2}}(1 − x)
+/parenright.s3
+∧
+/parenleft.s3
+Pt ≤ Pmax
+̃t< t {̃t /uni007C.varP̃t > max {P̃t− e,…, P̃t− 1}}(1 − x)
+/parenright.s3
+
+--- PDF PAGE 47 ---
+448 K. Rink 
+1 3Table 11  Persistence of performance based on excess returns
+Market Single-trip transaction costs
+0 Basis points 10 Basis points 25 Basis points 50 Basis points
+In-sample Out-of-sample In-Sample Out-of-sample In-sample Out-of-sample In-sample Out-of-sample
+ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat
+Panel A: Developed countries
+AUS 14.39∗∗∗ 4.14 − 1.93 − 0.52 12.64∗∗∗ 3.66 − 3.00 − 0.76 10.15∗∗∗ 2.99 − 1.50 − 0.38 8.91∗∗∗ 2.63 − 2.80 − 0.71
+AUT 23.08∗∗∗ 5.15 2.62 0.52 22.02∗∗∗ 4.90 1.46 0.29 21.42∗∗∗ 4.73 1.73 0.33 20.13∗∗∗ 4.41 1.62 0.31
+BEL 14.38∗∗∗ 3.49 0.06 0.01 13.71∗∗∗ 3.33 − 0.54 − 0.12 12.89∗∗∗ 3.12 − 0.79 − 0.17 13.23∗∗∗ 3.13 − 3.49 − 0.74
+CAD 11.50∗∗∗ 4.58 − 5.59 ∗∗ − 1.98 11.36∗∗∗ 4.47 − 8.51 ∗∗∗ − 2.58 11.01∗∗∗ 4.27 − 9.43 ∗∗∗ − 2.86 8.32∗∗∗ 3.27 − 8.48 ∗∗∗ − 2.72
+CHE 13.65∗∗∗ 3.37 − 7.72 − 1.53 11.48∗∗∗ 2.88 − 6.55 − 1.44 11.04∗∗∗ 2.75 − 6.59 − 1.49 9.95∗∗ 2.48 − 6.08 − 1.36
+DEU 14.30∗∗∗ 4.53 − 6.08 − 1.63 12.66∗∗∗ 4.05 − 7.02 ∗ − 1.91 12.31∗∗∗ 3.89 − 6.02 ∗ − 1.69 12.82∗∗∗ 3.93 − 5.51 − 1.52
+DNK 9.12∗∗ 2.21 − 4.92 − 1.10 7.63∗ 1.87 − 5.68 − 1.31 7.50∗ 1.74 − 7.35 ∗ − 1.65 13.43∗∗∗ 2.74 − 6.80 − 1.34
+ESP 16.33∗∗∗ 3.48 − 1.47 − 0.25 16.16∗∗∗ 3.44 − 1.93 − 0.33 14.92∗∗∗ 3.20 1.08 0.21 12.85∗∗∗ 2.77 1.35 0.26
+FIN 24.53∗∗∗ 4.19 − 7.14 − 0.95 21.82∗∗∗ 3.81 − 5.43 − 0.72 21.81∗∗∗ 3.77 − 5.83 − 0.79 19.63∗∗∗ 3.38 − 11.68 − 1.62
+FRA 11.20∗∗ 2.47 − 3.79 − 0.72 10.24∗∗ 2.26 − 4.63 − 0.88 6.86 1.56 − 6.78 − 1.34 9.65∗∗ 1.98 − 7.55 − 1.50
+GBR 17.98∗∗∗ 5.57 3.53 1.01 16.41∗∗∗ 5.10 − 1.14 − 0.33 14.72∗∗∗ 4.57 − 2.98 − 0.86 14.62∗∗∗ 4.48 − 6.39 ∗∗ − 1.97
+GRC 33.40∗∗∗ 5.11 8.22 1.14 33.65∗∗∗ 5.12 7.63 1.05 32.01∗∗∗ 4.90 8.21 1.14 33.34∗∗∗ 4.98 2.37 0.33
+HKG 29.02∗∗∗ 5.66 − 3.16 − 0.60 27.52∗∗∗ 5.37 − 4.34 − 0.82 25.15∗∗∗ 4.90 − 5.90 − 1.11 24.23∗∗∗ 4.69 − 7.46 − 1.36
+ISR 15.20∗∗∗ 2.81 − 4.15 − 0.77 13.61∗∗ 2.55 − 6.45 − 1.20 11.56∗∗ 2.18 − 8.41 − 1.59 17.44∗∗∗ 2.87 − 3.72 − 0.61
+ITA 19.35∗∗∗ 3.11 − 0.53 − 0.06 17.29∗∗∗ 2.81 − 3.03 − 0.40 16.54∗∗∗ 2.68 − 3.57 − 0.47 14.57∗∗ 2.40 − 3.69 − 0.49
+JPN 14.99∗∗∗ 5.66 0.95 0.33 15.64∗∗∗ 5.68 0.57 0.20 15.25∗∗∗ 5.48 − 0.00 − 0.00 14.09∗∗∗ 5.00 − 2.10 − 0.69
+KOR 27.33∗∗∗ 5.55 − 4.12 − 0.83 22.39∗∗∗ 4.69 − 3.89 − 0.78 17.66∗∗∗ 3.88 − 4.12 − 0.83 17.95∗∗∗ 3.88 − 7.78 − 1.55
+NLD 15.59∗∗∗ 3.77 0.49 0.11 16.39∗∗∗ 3.80 1.11 0.23 16.30∗∗∗ 3.52 − 2.11 − 0.41 12.94∗∗∗ 3.06 − 4.62 − 0.92
+NOR 18.69∗∗∗ 3.53 − 0.26 − 0.05 17.31∗∗∗ 3.27 − 1.62 − 0.29 16.30∗∗∗ 3.06 − 8.85 − 1.30 15.78∗∗∗ 2.93 − 11.02 − 1.63
+
+--- PDF PAGE 48 ---
+449
+1 3
+The predictive ability of technical trading rules: an empirical…
+Table 11  (continued)
+Market Single-trip transaction costs
+0 Basis points 10 Basis points 25 Basis points 50 Basis points
+In-sample Out-of-sample In-Sample Out-of-sample In-sample Out-of-sample In-sample Out-of-sample
+ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat
+PRT 23.04∗∗∗ 5.06 14.13∗∗∗ 2.86 23.65∗∗∗ 5.09 15.10∗∗∗ 2.95 22.35∗∗∗ 4.81 12.84∗∗ 2.52 18.88∗∗∗ 4.17 2.96 0.58
+SGP 17.67∗∗∗ 3.08 0.69 0.11 16.47∗∗∗ 2.88 − 0.46 − 0.08 15.63∗∗∗ 2.68 − 4.00 − 0.63 17.52∗∗∗ 2.84 − 5.64 − 0.89
+SWE 17.77∗∗∗ 3.63 − 3.14 − 0.60 12.47∗∗∗ 2.70 − 2.81 − 0.49 12.23∗∗∗ 2.68 − 4.66 − 0.81 13.19∗∗∗ 2.66 − 5.32 − 0.89
+USA 8.29∗∗∗ 3.77 − 5.50 ∗∗ − 2.11 7.10∗∗∗ 3.26 − 6.25 ∗∗ − 2.51 8.24∗∗∗ 3.65 − 4.86 ∗ − 1.93 7.53∗∗∗ 3.32 − 5.52 ∗∗ − 2.22
+Panel B: Emerging markets
+ARG 45.10∗∗∗ 3.53 − 10.61 − 1.10 40.75∗∗∗ 3.21 − 9.92 − 1.05 34.54∗∗∗ 2.76 − 12.30 − 1.31 33.16∗∗∗ 2.65 − 10.74 − 1.15
+BGR 34.28∗∗∗ 4.13 2.54 0.41 38.95∗∗∗ 4.46 4.04 0.67 38.80∗∗∗ 4.43 1.07 0.17 37.33∗∗∗ 4.26 − 0.15 − 0.02
+BRA 40.84∗∗∗ 3.55 − 4.83 − 0.46 39.98∗∗∗ 3.48 − 5.79 − 0.55 38.49∗∗∗ 3.35 − 6.80 − 0.63 39.47∗∗∗ 3.37 − 8.50 − 0.79
+CHL 26.28∗∗∗ 5.16 0.01 0.00 17.05∗∗∗ 3.69 − 5.16 − 1.17 15.38∗∗∗ 3.34 − 7.27 ∗ − 1.65 11.98∗∗∗ 2.63 − 6.45 − 1.49
+CHN 19.69∗∗ 2.42 3.54 0.39 18.67∗∗ 2.29 6.24 0.68 19.63∗∗∗ 2.38 4.84 0.50 16.23∗∗ 1.99 − 2.75 − 0.29
+COL 26.42∗∗∗ 3.36 − 8.98 − 1.26 25.74∗∗∗ 3.27 − 9.64 − 1.35 24.73∗∗∗ 3.14 − 10.63 0.14 22.24∗∗∗ 2.83 − 9.30 − 1.30
+HRV 24.97∗∗∗ 3.78 5.47 0.81 23.58∗∗∗ 3.59 5.65 0.85 27.83∗∗∗ 3.84 4.36 0.62 25.17∗∗∗ 3.50 2.84 0.44
+IDN 23.88∗∗∗ 5.18 − 1.86 − 0.38 22.93∗∗∗ 4.96 − 2.90 − 0.58 22.04∗∗∗ 4.78 − 0.73 − 0.15 21.97∗∗∗ 4.64 − 0.62 − 0.12
+IND 17.99∗∗∗ 3.58 − 10.08 ∗ − 1.73 20.33∗∗∗ 3.88 − 12.22 ∗∗ − 2.10 18.67∗∗∗ 3.57 − 12.20 ∗∗ − 2.25 15.96∗∗∗ 3.11 − 10.64 ∗∗ − 2.07
+MEX 13.50∗∗ 2.45 − 17.35 ∗∗∗ − 3.20 12.88∗∗ 2.33 − 17.15 ∗∗∗ − 3.20 13.30∗∗ 2.37 − 18.24 ∗∗∗ − 3.31 15.09∗∗∗ 2.60 − 18.34 ∗∗∗ − 3.19
+MYS 25.14∗∗∗ 6.04 − 2.80 − 0.64 24.57∗∗∗ 5.86 − 1.47 − 0.34 24.79∗∗∗ 5.83 − 0.33 − 0.07 21.75∗∗∗ 5.17 − 3.43 − 0.78
+PAK 43.72∗∗∗ 6.85 3.93 0.62 36.26∗∗∗ 5.95 − 2.18 − 0.37 31.42∗∗∗ 5.25 − 5.75 −  1.00 32.23∗∗∗ 5.23 − 10.54 ∗ − 1.77
+PER 43.65∗∗∗ 6.47 6.48 1.01 37.28∗∗∗ 5.68 3.49 0.55 36.03∗∗∗ 5.48 − 0.39 − 0.06 33.96∗∗∗ 5.16 − 2.48 − 0.39
+PHL 28.51∗∗∗ 4.77 − 5.02 − 0.80 25.77∗∗∗ 4.37 − 6.96 − 1.10 24.90∗∗∗ 4.22 − 7.97 − 1.26 25.53∗∗∗ 4.28 − 8.04 − 1.18
+
+--- PDF PAGE 49 ---
+450 K. Rink 
+1 3Table 11  (continued)
+Market Single-trip transaction costs
+0 Basis points 10 Basis points 25 Basis points 50 Basis points
+In-sample Out-of-sample In-Sample Out-of-sample In-sample Out-of-sample In-sample Out-of-sample
+ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat ΔR t-Stat
+POL 23.51∗∗∗ 3.57 − 1.15 − 0.17 21.75∗∗∗ 3.30 − 3.09 − 0.45 16.81∗∗∗ 2.67 − 6.36 − 0.93 17.09∗∗∗ 2.60 − 10.39 − 1.46
+RUS 51.53∗∗∗ 4.23 − 8.20 − 0.73 54.02∗∗∗ 4.33 − 12.63 − − 
+1.04
+52.87∗∗∗ 4.24 − 13.73 − 1.13 50.97∗∗∗ 4.08 − 15.58 − 1.28
+SAU 22.96∗∗∗ 3.33 − 6.27 − 0.86 23.51∗∗∗ 3.38 − 5.25 − 0.72 19.61∗∗∗ 2.85 − 8.27 − 1.15 16.61∗∗ 2.46 − 8.08 − 1.12
+ZAF 23.11∗∗∗ 3.81 − 6.39 − 0.88 15.93∗∗∗ 2.81 − 10.23 − 1.39 14.37∗∗ 2.54 − 10.62 − 1.46 15.69∗∗∗ 2.62 − 7.30 − 1.09
+Panel C: Equally weighted portfolios
+Dev 17.12∗∗∗ 10.46 − 2.43 ∗∗ − 2.01 16.01∗∗∗ 9.71 − 3.48 ∗∗∗ − 2.91 15.48∗∗∗ 9.25 − 3.64 ∗∗∗ − 3.04 15.19∗∗∗ 8.92 − 4.67 ∗∗∗ − 3.85
+Emg 30.49∗∗∗ 11.20 − 4.20 ∗∗ − 2.25 28.05∗∗∗ 10.53 − 6.02 ∗∗∗ − 3.22 26.70∗∗∗ 10.00 − 6.99 ∗∗∗ − 3.71 24.35∗∗∗ 9.21 − 7.62 ∗∗∗ − 4.03
+All 19.44∗∗∗ 12.69 − 2.71 ∗∗ − 2.48 18.15∗∗∗ 11.76 − 3.89 ∗∗∗ − 3.61 17.58∗∗∗ 11.20 − 4.13 ∗∗∗ − 3.81 17.07∗∗∗ 10.69 − 5.05 ∗∗∗ − 4.60
+This table reports results for the in-sample and out-of-sample performance of best-performing technical trading rules for single-trip transaction costs of 0, 10, 25, and 50 
+basis points. Panel A and panel B show results for developed countries and emerging markets, and panel C shows results for equally weighted portfolios of developed 
+(Dev), emerging (Emg), and all market indices (All). ΔR is the difference between annualized returns from technical trading and from a buy-and-hold benchmark (in per -
+centage points), and t-Stat denotes the test statistic obtained from a two-sided t-test. The superscripts ∗∗∗ , ∗∗ , and ∗ indicate the significance levels of p < 0.01 , p < 0.05 , 
+and p < 0.1 , respectively
+
+--- PDF PAGE 50 ---
+451
+1 3
+The predictive ability of technical trading rules: an empirical…
+Moving Averages Let MAn
+t = n−1 ∑t
+k=t−n+1 Pk be the simple moving average at time 
+t with a rolling window of length n. A long (short) moving average trading signal 
+is generated when the slow moving average, MAns
+t  , crosses the fast moving average, 
+MA
+nf
+t  , with ns > nf ≥ 1 , from above (below):
+Since Sullivan et al. (1999) also consider moving average rules with nf = 1 , the fast 
+moving average in this case becomes MA1
+t = Pt . In this case, we are actually dealing 
+with a single moving average rule, where trading signals are generated by crossovers 
+of the moving average with the asset price.
+Support and Resistance In support and resistance trading rules, the asset is 
+bought (sold short) when the close price Pt in period t  exceeds (falls below) the 
+high (low) price of the previous n  trading days.
+We also employ an alternative specification for extrema. As with the alternative 
+specification used for filter rules, a maximum (minimum) is defined as the most 
+recent price that is higher (lower) than the prices of the previous e periods. Con-
+sequently, trading signals in period t are triggered according to the following rules.
+(13)
+Exit signal for a long position in t ∶
+/parenleft.s1Pt−1 > max{P𝜏, … , Pt−2 }(1− y)/parenright.s1∧ /parenleft.s1Pt ≤ max{P𝜏, … , Pt−1 }(1− y)/parenright.s1
+Exit signal for a short position in t ∶
+/parenleft.s1Pt−1 < min{P𝜏, … , Pt−2 }(1+ y)/parenright.s1∧ /parenleft.s1Pt ≥ min{P𝜏, … , Pt−1 }(1+ y)/parenright.s1
+(14)
+Long signal in t ∶/parenleft.s1MAns
+t−1 ≥ MA
+nf
+t−1
+/parenright.s1∧ /parenleft.s1MAns
+t < MA
+nf
+t
+/parenright.s1
+Short signal in t ∶/parenleft.s1MAns
+t−1 ≤ MA
+nf
+t−1
+/parenright.s1∧ /parenleft.s1MAns
+t > MA
+nf
+t
+/parenright.s1
+(15)
+Long signal in t ∶
+/parenleft.s1Pt−1 ≤ max /braceleft.s1Pt−n−1, … , Pt−2
+/braceright.s1/parenright.s1∧ /parenleft.s1Pt > max /braceleft.s1Pt−n, … , Pt−1
+/braceright.s1/parenright.s1
+Short signal in t ∶
+/parenleft.s1Pt−1 ≥ min /braceleft.s1Pt−n−1, … , Pt−2
+/braceright.s1/parenright.s1∧ /parenleft.s1Pt < min /braceleft.s1Pt−n, … , Pt−1
+/braceright.s1/parenright.s1
+(16)
+Long signal in t ∶
+/parenleft.s3
+Pt−1 ≤ Pmax
+̃t< t− 1 {̃t∣P̃t >max {P̃t− e− 1,…, P̃t− 2}}
+/parenright.s3
+∧
+/parenleft.s3
+Pt > Pmax
+̃t< t {̃t∣P̃t >max {P̃t− e,…, P̃t− 1}}
+/parenright.s3
+Short signal in t ∶
+/parenleft.s3
+Pt−1 ≥ Pmax
+̃t< t− 1 {̃t∣P̃t <min {P̃t− e− 1,…, P̃t− 2}}
+/parenright.s3
+∧
+/parenleft.s3
+Pt < Pmax
+̃t< t {̃t∣P̃t <min {P̃t− e,…, P̃t− 1}}
+/parenright.s3
+
+--- PDF PAGE 51 ---
+452 K. Rink 
+1 3
+Channel breakouts
+Trading channels denote price patterns where the minimum and maximum price 
+of the last n  trading days differ by no more than a fixed multiplicative value, x . 
+A long (short) channel breakout signal is triggered when the price breaks out of 
+the channel with an upward (downward) movement. This results in the following 
+channel breakout rules.
+Acknowledgements The author thanks an anonymous referee as well as the editor, Markus Schmid, for 
+their helpful suggestions.
+Funding Open Access funding enabled and organized by Projekt DEAL.
+Open Access  This article is licensed under a Creative Commons Attribution 4.0 International License, 
+which permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as 
+you give appropriate credit to the original author(s) and the source, provide a link to the Creative Com-
+mons licence, and indicate if changes were made. The images or other third party material in this article 
+are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the 
+material. If material is not included in the article’s Creative Commons licence and your intended use is 
+not permitted by statutory regulation or exceeds the permitted use, you will need to obtain permission 
+directly from the copyright holder. To view a copy of this licence, visit http:// creat iveco mmons. org/ licen 
+ses/ by/4. 0/.
+References
+Adekoya, A.F., Asubam, B.A., Nti, I.K.: A systematic review of fundamental and technical analysis of 
+stock market predictions. Artif. Int. Rev. 53(4), 3007–3057 (2020)
+Ahmed, S., Grobys, K., Sapkota, N.: Technical trading rules in the cryptocurrency market. Finan. Res. 
+Lett. 32, 101396 (2020)
+Alexander, S.: Price movements in speculative markets: trends or random walks. Ind. Manag. Rev. 2(2), 
+7–26 (1961)
+Alexander, S.: Price movements in speculative markets: trends or random walks, number 2. Ind. Manag. 
+Rev. 5(2), 25–46 (1964)
+AlKhazali, O.: Does infrequent trading make a difference on stock market efficiency? Evidence from the 
+gulf cooperation council (GCC) countries. Stud. Econ. Finance 28(2), 96–110 (2011)
+(17)
+Long signal in t ∶
+/parenleft.s1Pt−1 ≤ max /braceleft.s1Pt−n−1, … , Pt−2
+/braceright.s1/parenright.s1
+∧
+/parenleft.s3/parenleft.s1Pt > max /braceleft.s1Pt−n, … , Pt−1
+/braceright.s1/parenright.s1∧
+/parenleft.s4
+max /braceleft.s1Pt−n, … , Pt−1
+/braceright.s1
+min /braceleft.s1Pt−n, … , Pt−1
+/braceright.s1≤ 1 + x
+/parenright.s4/parenright.s3
+Short signal in t ∶
+/parenleft.s1Pt−1 ≥ min /braceleft.s1Pt−n−1, … , Pt−2
+/braceright.s1/parenright.s1
+∧
+/parenleft.s3/parenleft.s1Pt < min /braceleft.s1Pt−n, … , Pt−1
+/braceright.s1/parenright.s1∧
+/parenleft.s4
+max /braceleft.s1Pt−n, … , Pt−1
+/braceright.s1
+min /braceleft.s1Pt−n, … , Pt−1
+/braceright.s1≤ 1 + x
+/parenright.s4/parenright.s3
+
+--- PDF PAGE 52 ---
+453
+1 3
+The predictive ability of technical trading rules: an empirical…
+Allen, F., Karjalainen, R.: Using genetic algorithms to find technical trading rules. J. Finan. Econ. 51(2), 
+245–271 (1999)
+Almazan, A., Brown, K.C., Carlson, M., Chapman, D.A.: Why constrain your mutual fund manager? J. 
+Finan. Econ. 73(2), 289–321 (2004)
+Araújo Lima, E.J., Tabak, B.M.: Tests of the random walk hypothesis for equity markets: evidence from 
+China, Hong Kong and Singapore. Appl. Econ. Lett. 11(4), 255–258 (2004)
+Bailey, D.H., López de Prado, M.: The Sharpe ratio efficient frontier. J. Risk 15(2), 3–44 (2012)
+Bajgrowicz, P., Scaillet, O.: Technical trading revisited: false discoveries, persistence tests, and transac-
+tion costs. J. Finan. Econ. 106(3), 473–491 (2012)
+Barras, L., Scaillet, O., Wermers, R.: False discoveries in mutual fund performance: measuring luck in 
+estimated alphas. J. Finance 65(1), 179–216 (2010)
+Batten, J.A., Lucey, B.M., McGroarty, F., Peat, M., Urquhart, A.: Does technical analysis beat the mar -
+ket? – Evidence From high frequency trading in gold and silver, Working Paper (2015)
+Bazán-Palomino, W., Svogun, D.: Technical analysis in cryptocurrency markets: do transaction costs and 
+bubbles matter? J. Int. Finan. Mark Institut. Money 79, 101601 (2022)
+Benington, G.A., Jensen, M.C.: Random walks and technical theories: some additional evidence. J. 
+Finance 25(2), 469–482 (1970)
+Benjamini, Y., Hochberg, Y.: Controlling the false discovery rate: a practical and powerful approach to 
+multiple testing. J. Royal Stat. Soci., Series B 57(1), 289–300 (1995)
+Bessembinder, H., Chan, K.: The profitability of technical trading rules in the Asian stock markets. 
+Pacif.-Basin Finance J. 3(2–3), 257–284 (1995)
+Bessembinder, H., Chan, K.: Market efficiency and the returns to technical analysis. Finan. Manag. 27(2), 
+5–17 (1998)
+Bhuyan, R., Mobarek, A., Mollah, S.: Market efficiency in emerging stock market: evidence from Bang-
+ladesh. J. Emerg. Market Finance 7(1), 17–41 (2008)
+Blume, M.E., Fama, E.F.: Filter rules and stock-market trading. J. Bus. 39(1), 226–241 (1966)
+Brock, W., Lakonishok, J., LeBaron, B.: Simple technical trading rules and the stochastic properties of 
+stock returns. J. Finance 47(5), 1731–1764 (1992)
+Camilleri, S.J., Green, C.J.: Stock market predictability: non-synchronous trading or inefficient markets? 
+Evidence from the national stock exchange of India. Stud. Econ. Finance 31(4), 354–370 (2014)
+Campbell, J.Y., Grossman, S.J., Wang, J.: Trading volume and serial correlation in stock returns. Quart. J. 
+Econ. 108(4), 905–939 (1993)
+Chan, L. K. C., & Lakonishok, J.: Institutional trades and intraday stock price behavior. J. Financ. Econ. 
+33(2), 173–199 (1993)
+Chen, C.-W., Huang, C.-S., Lai, H.-W.: The impact of data snooping on the testing of technical analysis: 
+an empirical study of Asian Stock markets. J. Asian Econ. 20(5), 580–591 (2009)
+Chen, Y.-C., Hsu, Y.-C., Lu, T.-H.: Trend definition or holding strategy: what determines the profitability 
+of candlestick charting? J. Bank. Finance 61(C), 172–183 (2015)
+Cheung, Y.-W., Chinn, M.D.: Currency traders and exchange rate dynamics: a survey of the US market. J. 
+Int. Money Finance 20(4), 439–471 (2001)
+Cohen, G.: Optimizing candlesticks patterns for bitcoin’s trading systems. Rev. Quantit. Finance Account. 
+57(3), 1155–1167 (2021)
+D’ Avolio, G.: The market for borrowing stock. J. Finan. Econ. 66(2–3), 271–306 (2002)
+Day, T.E., Wang, P.: Dividends, nonsynchronous prices, and the returns from trading the dow jones 
+industrial average. J. Empir. Finance. 9(4), 431–454 (2002)
+Detzel, A., Liu, H., Strauss, J., Zhou, G., Zhu, Y.: Learning and predictability via technical analysis: 
+evidence from bitcoin and stocks with hard-to-value fundamentals. Finan. Manag. 50(1), 107–137 
+(2020)
+Duffie, D., Gârleanu, N., Pedersen, L.H.: Securities lending, shorting, and pricing. J. Finance Econ. 66(2–
+3), 307–339 (2002)
+Etheber, T.: Trading volume effects of moving average heuristics, Working Paper (2014)
+Fama, E.F.: The behavior of stock market prices. J. Bus. 38(1), 34–105 (1965)
+Fama, E.F.: Efficient capital markets, A review of theory and empirical work. J. Finance 25(2), 383–417 
+(1970)
+Farias Nazário, R.T., Kimura, H., Silva, J.L., Sobreiro, V.A.: A literature review of technical analysis on 
+stock markets. Quart. Rev. Econ. Finance 66(C), 115–126 (2017)
+Faugère, C., Smith, D., Wang, Y.: Head and shoulders above the rest? The performance of institutional 
+portfolio managers who use technical analysis, Working Paper (2013)
+
+--- PDF PAGE 53 ---
+454 K. Rink 
+1 3
+Friedman, B.: Economic implications of changing share ownership. J. Portf. Manag. 22(3), 59–70 (1996)
+FTSE Group (2016) FTSE annual country classification review, retrieved from http:// www. ftse. com/ 
+produ cts/ downl oads/ FTSE- Count ry- Class ifica tion- Update_ latest. pdf on October 16, 2019
+Gatev, E., Goetzmann, W.N., Rouwenhorst, K.G.: Pairs trading: performance of a relative-value arbitrage 
+rule. Rev. Financial Stud. 19(3), 797–827 (2006)
+Gebka, B., Hudson, R., Manahov, V.: Does high frequency trading affect technical analysis and market 
+efficiency? And if so, how? J. Int. Financ. Mark., Institut. Money 28(1), 131–157 (2014)
+Gehrig, T., Menkhoff, L.: Technical analysis in foreign exchange - the workhorse gains further ground, 
+Working Paper (2003)
+Gehrig, T., Menkhoff, L.: The use of flow analysis in foreign exchange: exploratory evidence. J. Int. 
+Money Finance 23(4), 573–594 (2004)
+Gompers, P., Metrick, A.: Institutional investors and equity prices. Quart. J. Econ. 116(1), 229–259 
+(2001)
+Grossman, S.J., Stiglitz, J.E.: On the impossibility of informationally efficient markets. Am. Econ. 
+Rev. 70(3), 393–408 (1980)
+Hackethal, A., Hanspal, T., Lammer, D.M., Rink, K.: The characteristics and portfolio behavior of 
+bitcoin investors - evidence from indirect cryptocurrency investments. Rev. Finance 26(4), 855–
+898 (2022)
+Hansen, P.R.: A test for superior predictive ability. J. Bus. & Econ. Stat. 23(4), 365–380 (2005)
+Harvey, C.R.: Presidential address: the scientific outlook in financial economics. J. Finance 72(4), 
+1399–1440 (2017)
+Hoffmann, A.O.I., Shefrin, H.: Technical analysis and individual investors. J. Econ. Behav. Organ. 
+107(4), 487–511 (2014)
+Hsu, P.-H., Hsu, Y.-C., Kuan, C.-M.: Testing the predictive ability of technical analysis using a new 
+stepwise test without data snooping bias. J. Empir. Finance 17(3), 471–484 (2010)
+Hsu, P.-H., Kuan, C.-M.: Reexamining the profitability of technical analysis with data snooping 
+checks. J. Finan. Econ. 3 (4), 606–628 (2005)
+Hsu, P.-H., Taylor, M.P., Wang, Z.: Technical trading: is it still beating the foreign exchange market? 
+J. Int. Econ. 102(C), 188–208 (2016)
+Hudson, R., Urquhart, A.: Technical trading and cryptocurrencies. Ann. Operat. Res. 297(1), 191–220 
+(2021)
+International monetary fund: world economic outlook april: too slow for too long, Washington (2016)
+Irwin, S., Park, C.-H.: What do we know about the profitability of technical analysis? J. Econ. Surv. 
+21(4), 786–826 (2007)
+Jegadeesh, N., Titman: Returns to buying winners and selling losers: implications for stock market 
+efficiency. J. Finance 48(1), 65–91 (1993)
+Jiang, F., Song, G., Tong, G.: Technical Analysis profitability without data snooping bias: evidence 
+from Chinese stock market. Int. Rev. Finance 19(1), 191–206 (2019)
+Jones, C.M.: A century of stock market liquidity and trading costs, Working Paper (2002)
+Jones, C.M., Lamont, O.A.: Short-sale constraints and stock returns. J. Financial Econ. 66(2–3), 207–
+239 (2002)
+Kaya, O.: High-frequency trading: reaching the limits (2016). retrieved from http:// www. dbres earch.  
+com/ PROD/ RPS_ ENPROD/ PROD0 00000 00004 54703/ Resea rch_ Brief ing% 3A_ High- frequ 
+ency_ tradi ng. PDF on June 7, 2022
+Kish, R.J., Kwon, K.-Y.: A comparative study of technical trading strategies and return predictability: 
+an extension of Brock, Lakonishok, and LeBaron (1992) using NYSE and NASDAQ indices. 
+Quart. Rev. Econ. Finance 42(3), 611–631 (2002)
+Lease, R.C., Lewellen, W.G., Schlarbaum, G.G.: The individual investor: attributes and attitudes. J. 
+Finance 29(2), 413–433 (1974)
+Lease, R. C., Lewellen, W. G., & Schlarbaum, G. G.: Portfolio design and portfolio performance: the 
+individual investor. J. Econ. Bus. 32(3), 185–197 (1980)
+LeBaron, B.: The stability of moving average technical trading rules on the Dow Jones index. Deriva-
+tives Use Trad. Regul. 5 (4), 324–338 (2000)
+Lesmond, D.A.: Liquidity of emerging markets. J. Finan. Econ. 77(2), 411–452 (2005)
+Levy, R.A.: Random walks: reality or myth. Finan. Anal. J. 23(6), 69–77 (1967)
+Levy, R.A.: Relative strength as a criterion for investment selection. J. Finance 22(4), 595–610 (1967)
+Levy, R.A.: Random walks: reality or myth - reply. Finan. Anal. J. 24(1), 129–132 (1968)
+Lo, A.W.: The adaptive markets hypothesis. J. Portf. Manag. 30(5), 15–29 (2004)
+
+--- PDF PAGE 54 ---
+455
+1 3
+The predictive ability of technical trading rules: an empirical…
+Lo, A.W., MacKinlay, A.: When are contrarian profits due to stock market overreaction? Rev. Finan-
+cial Stud. 3 (2), 175–205 (1990)
+Lo, A.W., MacKinlay, A.: Data snooping biases in tests of financial asset pricing models. Rev. Finan. 
+Stud. 3(3), 431–467 (1990)
+Lo, A.W., Wang, J.: Trading volume: definitions, data analysis, and implications of portfolio theory. 
+Rev. Finan. Stud. 13(2), 257–300 (2000)
+Malkiel, B.G.: A random walk down wall street, revised edition, United States, New York (1999)
+Marshall, B.R., Nguyen, N., Visaltanachoti, N.: Time-series momentum versus technical analysis. 
+Quantit. Finance 17(3), 405–421 (2017)
+Menkhoff, L.: Examining the use of technical currency analysis. Int. J. Finance Eco. 2 (4), 307–318 
+(1997)
+Menkhoff, L.: The use of technical analysis by fund managers: international evidence. J. Bank. 
+Finance 17(3), 547–564 (2010)
+Merton, R.: On the current state of the stock market rationality hypothesis. In: Dornbusch, R., Fis-
+cher, S., Bossons, J. (eds.) Macroeconomics and finance: essays in honor of Franco Modigliani. 
+United States, Cambridge (1987)
+Moskowitz, T.J., Ooi, Y.H., Pedersen, L.H.: Time series momentum. J. Finan. Econ. 104(2), 228–250 
+(2012)
+Nagel, S.: Short sales, institutional investors and the cross-section of stock returns. J. Finan. Econ. 
+78(2), 277–309 (2005)
+Neely, C.J.: Risk-adjusted, ex ante, optimal technical trading rules in equity markets. Int. Rev. Econ. 
+Finance 12(1), 69–87 (2003)
+Neely, C.J., Dittmar, R., Weller, P.A.: Is technical analysis in the foreign exchange market profitable? 
+A genetic programming approach. J. Finan. Quantit. Anal. 32(4), 405–426 (1997)
+Neely, C. J., Rapach, D. E., Tu, J., Zhou, G.: Out-of-sample equity premium prediction: economic 
+fundamentals vs. moving-average Rules, Federal Reserve Bank of St. Louis, Working Paper 
+(2010)
+Neely, C.J., Weller, P.A.: Technical analysis in the foreign exchange market, federal reserve bank of 
+St. Louis, Working Paper (2011)
+Neely, C.J., Weller, P.A., Ulrich, M.: The adaptive markets hypothesis: evidence from the foreign 
+exchange market. J. Finan. Quantit. Anal. 44(2), 467–488 (2009)
+Neftci, S.N.: Naive trading rules in financial markets and wiener-kolmogorov prediction theory: a 
+study of “technical analysis’’. J. Bus. 64(4), 549–571 (1991)
+Olsen, D.: Have trading rule profits in the currency markets declined over time? J. Bank. Finance 
+28(1), 85–105 (2004)
+Politis, D.N., Romano, J.P.: The stationary bootstrap. J. Am. Stat. Associat. 89(428), 1303–1313 
+(1994)
+Poshakwale, S.: The random walk hypothesis in the emerging Indian stock market. J. Bus. Finance 
+Account. 29(9 & 10), 1275–1299 (2002)
+Pring, M.J.: Technical analysis explained, 5th edn. United States, New York (2014)
+Ready, M.J.: Profits from technical trading rules. Finan. Manag. 31(3), 43–61 (2002)
+Romano, J.P., Wolf, M.: Stepwise multiple testing as formalized data snooping. Econometrica 73(4), 
+1237–1282 (2005)
+Rouwenhorst, K.G.: International momentum strategies. J. Finance 53(1), 267–284 (1998)
+Scholes, M., Williams, J.: Estimating betas from nonsynchronous data. J. Finan. Econ. 5(3), 309–327 
+(1977)
+Sharma, A., Thaker, K.B.: Market efficiency in developed and emerging markets. Afro-Asian J. 
+Finance Account. 5 (4), 311–333 (2015)
+Sharpe, W.F.: Mutual fund performance. J. Bus. 39(1), 119–138 (1966)
+Sharpe, W.F.: The Sharpe ratio. J. Portf. Manag. 21(1), 49–58 (1994)
+Stoll, H.R., Whaley, R.E.: Transaction costs and the small firm effect. J. Finan. Econ. 12(1), 57–79 
+(1983)
+Subrahmanyam, A.: Equity market momentum: a synthesis of the literature and suggestions for future 
+work. Pacific-Basin Finance J. 51, 291–296 (2018)
+Sullivan, R., Timmermann, A., White, H.: Data-snooping, technical trading rule performance, and the 
+bootstrap. J. Finance 54(5), 1647–1691 (1999)
+Sweeney, R.J.: Beating the foreign exchange market. J. Finance 41(1), 163–182 (1986)
+Timmermann, A.: Elusive return predictability. Int. J. Forecast. 24(1), 1–18 (2008)
+
+--- PDF PAGE 55 ---
+456 K. Rink 
+1 3
+Timmermann, A., Granger, C.W.J.: Efficient market theory and forecasting. Int. J. Forecast. 20(1), 
+15–27 (2004)
+United Nations: world economic survey, 1974 - Part One. Mid-term review and appraisal of progress 
+in the implementation of the international development strategy, New York, United States 
+(1975)
+White, H.: A reality check for data snooping. Econometrica 68(5), 1097–1126 (2000)
+Wiest, T.: Momentum: what do we know 30 years after Jegadeesh and Titman’s seminal paper? Finan. 
+Mark. Portf. Manag. 37(1), 95–114 (2023)
+Wilder, J.W.: New concepts in technical trading systems. Greensboro, United States (1978)
+Publisher’s Note Springer Nature remains neutral with regard to jurisdictional claims in published maps 
+and institutional affiliations.
+Kevin Rink is an external researcher at the Faculty of Economics and Business at Goethe University 
+Frankfurt, where he also obtained his doctoral degree in finance. Prior to that, he received a master’s 
+degree in business administration from the University of Mannheim and a master’s degree in quantitative 
+finance from Goethe University Frankfurt. His research interests include financial markets, behavioral 
+finance, and household finance with a special focus on technical trading heuristics and investor behavior 
+in equity and cryptocurrency markets.

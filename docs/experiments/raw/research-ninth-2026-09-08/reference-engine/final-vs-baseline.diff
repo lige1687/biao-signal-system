@@ -1,0 +1,113 @@
+--- engine_baseline.py
++++ engine.py
+@@ -12,7 +12,9 @@
+ def simulate(prices, actions, candidates, exit_observations, *, start, end,
+              weekly_per_symbol=250, fee=.001, config_id, limits,
+              limit_changes=None, blocked_dates=None, exit_rule=None):
+-    if config_id not in ['P'+str(i) for i in range(8)]:raise ValueError('Unknown configuration')
++    diagnostic_configs={'R0','R1'}
++    is_diagnostic_config=config_id in diagnostic_configs
++    if config_id not in ['P'+str(i) for i in range(8)] and not is_diagnostic_config:raise ValueError('Unknown configuration')
+     if start>end or not _finite(fee) or fee<0 or fee>=1:raise ValueError('Invalid window or fee')
+     if not _finite(weekly_per_symbol) or weekly_per_symbol<0:raise ValueError('Invalid funding')
+     syms=sorted(prices);actions=deepcopy(actions);cs=deepcopy(candidates)
+@@ -67,7 +69,9 @@
+ 
+     def order(side,s,d,reason,**extra):
+         o=dict(order_id=f'{config_id}-O{len(orders)+1}',config_id=config_id,side=side,symbol=s,
+-               signal_date=d,reason=reason,status='pending',attempts=[],**extra);orders.append(o);return o
++               signal_date=d,reason=reason,status='pending',attempts=[],**extra);orders.append(o)
++        if is_diagnostic_config:o['diagnostic_reference_only']=True
++        return o
+ 
+     def rejection(o,reason,d=None):
+         o['status']='rejected';o['reason']=reason
+@@ -142,9 +146,12 @@
+             if p is None:
+                 p=dict(position_id=f'{config_id}-{s}-T{len(roundtrips)+1}',config_id=config_id,symbol=s,candidate_id=o.get('candidate_id'),entry_date=d,entry_price=px,entry_notional=0.,buy_fee=0.,sell_fee=0.,exit_notional=0.,dividend_accrued=0.,dividend_paid=0.,closed=False,exit_date=None,stop=o.get('stop'),target=o.get('target'),upper=o.get('upper'),variant=o.get('variant','breakout'),initial_stop=o.get('stop'),initial_target=o.get('target'),initial_upper=o.get('upper'),level_actions=list(o.get('level_actions',[])))
+                 position[s]=p;roundtrips.append(p)
++                if is_diagnostic_config:p['diagnostic_reference_only']=True
+             p['entry_notional']+=notional;p['buy_fee']+=cost;p['shares']=units[s]
+             o.update(status='filled',resolved_date=d,shares=qty,price=px,position_id=p['position_id'])
+-            trades.append(dict(date=d,config_id=config_id,symbol=s,side='buy',shares=qty,price=px,notional=notional,fee=cost,reason=o['reason'],order_id=o['order_id'],position_id=p['position_id'],candidate_id=o.get('candidate_id'),risk_budget=risk_budget,previous_product_equity=risk_reference[s],stop=p['stop'],target=p['target']))
++            trade=dict(date=d,config_id=config_id,symbol=s,side='buy',shares=qty,price=px,notional=notional,fee=cost,reason=o['reason'],order_id=o['order_id'],position_id=p['position_id'],candidate_id=o.get('candidate_id'),risk_budget=risk_budget,previous_product_equity=risk_reference[s],stop=p['stop'],target=p['target'])
++            if is_diagnostic_config:trade['diagnostic_reference_only']=True
++            trades.append(trade)
+ 
+         for s,o in list(pending_sell.items()):
+             if d<=o['signal_date']:continue
+@@ -156,7 +163,9 @@
+             p=position[s];qty=units[s];px=float(bars[s][d]['open']);notional=qty*px;cost=notional*fee
+             cash[s]+=notional-cost;units[s]=0.;fees[s]+=cost;p.update(closed=True,exit_date=d,exit_price=px,exit_notional=notional,sell_fee=cost,shares=0.)
+             o.update(status='filled',resolved_date=d,shares=qty,price=px);sold_today.add(s)
+-            trades.append(dict(date=d,config_id=config_id,symbol=s,side='sell',shares=qty,price=px,notional=notional,fee=cost,reason=o['reason'],order_id=o['order_id'],position_id=p['position_id']))
++            trade=dict(date=d,config_id=config_id,symbol=s,side='sell',shares=qty,price=px,notional=notional,fee=cost,reason=o['reason'],order_id=o['order_id'],position_id=p['position_id'])
++            if is_diagnostic_config:trade['diagnostic_reference_only']=True
++            trades.append(trade)
+             position[s]=None;del pending_sell[s]
+         if config_id=='P6':
+             for s in syms:
+@@ -170,11 +179,16 @@
+                 s=o['symbol'];reason='same_day_sale' if s in sold_today else 'position_exists' if position[s] else unavailable(s)
+                 ep=float(bars[s][d]['open']) if d in bars[s] else None
+                 if not reason:
+-                    if not _finite(o.get('target')) or o['target']<=0:reason='missing_or_invalid_target'
+-                    elif not _finite(o.get('stop')) or o['stop']<=0 or o['stop']>=ep:reason='nonpositive_open_risk'
++                    if is_diagnostic_config:
++                        if not _finite(o.get('stop')) or o['stop']<=0 or o['stop']>=ep:reason='nonpositive_open_risk'
++                        elif _finite(o.get('target')):
++                            o['open_rr']=(o['target']-ep)/(ep-o['stop'])
+                     else:
+-                        o['open_rr']=(o['target']-ep)/(ep-o['stop'])
+-                        if o['open_rr']<3:reason='open_rr_below3'
++                        if not _finite(o.get('target')) or o['target']<=0:reason='missing_or_invalid_target'
++                        elif not _finite(o.get('stop')) or o['stop']<=0 or o['stop']>=ep:reason='nonpositive_open_risk'
++                        else:
++                            o['open_rr']=(o['target']-ep)/(ep-o['stop'])
++                            if o['open_rr']<3:reason='open_rr_below3'
+                 risk_budget=risk_reference[s]*.01 if config_id=='P7' else None
+                 qty=0
+                 if not reason:
+@@ -207,9 +221,32 @@
+         for c in bysignal.get(d,[]):
+             if config_id=='P6':continue
+             s=c['symbol'];planned_index=bisect_right(schedule,d);planned=schedule[planned_index] if planned_index<len(schedule) else None
+-            o=order('buy',s,d,'candidate_entry',planned_date=planned,candidate_metadata=deepcopy(c),**{k:deepcopy(v) for k,v in c.items() if k not in ('symbol','signal_date','config_id','side','reason','status','attempts','planned_date','order_id','candidate_metadata','resolved_date','position_id')})
++            candidate_metadata=deepcopy(c)
++            exclude=('symbol','signal_date','config_id','side','reason','status','attempts','planned_date','order_id','candidate_metadata','resolved_date','position_id')
++            candidate_fields={k:deepcopy(v) for k,v in c.items() if k not in exclude}
++            if is_diagnostic_config:
++                candidate_metadata.setdefault('diagnostic_reference_only',True)
++                candidate_metadata.setdefault('original_candidate_id',c.get('source_candidate_id',c.get('candidate_id')))
++                candidate_metadata.setdefault('original_config_id',c.get('source_config_id','P0' if config_id=='R0' else 'P5'))
++                candidate_fields['original_candidate_id']=candidate_metadata['original_candidate_id']
++                candidate_fields['original_config_id']=candidate_metadata['original_config_id']
++            o=order('buy',s,d,'candidate_entry',planned_date=planned,candidate_metadata=candidate_metadata,**candidate_fields)
+             reason=None
+-            if c.get('signal_accepted') is False:reason=c.get('signal_reject_reason') or 'signal_rejected'
++            if is_diagnostic_config:
++                if c.get('signal_accepted') is False:
++                    reason=c.get('signal_reject_reason') or 'signal_rejected'
++                    if reason in ('target_unavailable','signal_reward_risk_below_3'):reason=None
++                if reason is None:
++                    if d not in bars[s]:
++                        raise ValueError('Candidate without signal close')
++                    elif not _finite(c.get('stop')) or c['stop']<=0:
++                        reason='invalid_stop'
++                    else:
++                        ref=c.get('signal_ref',bars[s][d]['close'])
++                        if not _finite(ref) or ref<=c['stop']:
++                            reason='nonpositive_signal_risk'
++            elif c.get('signal_accepted') is False:
++                reason=c.get('signal_reject_reason') or 'signal_rejected'
+             elif d not in bars[s]:raise ValueError('Candidate without signal close')
+             elif not _finite(c.get('target')) or c['target']<=0:reason='missing_or_invalid_target'
+             elif not _finite(c.get('stop')) or c['stop']<=0:reason='invalid_stop'
+@@ -233,6 +270,7 @@
+         if account_units:nav=equity/account_units
+         peak=max(peak,nav)
+         row=dict(date=d,config_id=config_id,equity=equity,assets=assets,cash=total_cash,receivable=rec,total_funding=sum(funding.values()),deposit=flow,account_units=account_units,nav=nav,drawdown=nav/peak-1,fees=sum(fees.values()),stale_symbols=','.join(s for s in syms if last_date[s]!=d),accounting_difference=equity-assets-total_cash-rec)
++        if is_diagnostic_config:row['diagnostic_reference_only']=True
+         for s in syms:
+             if cash[s]<-1e-7 or units[s]<0:raise AssertionError('Negative account state')
+             previous_equity[s]=cash[s]+units[s]*last[s]+account_receivable(s)

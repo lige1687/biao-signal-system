@@ -1,0 +1,222 @@
+{
+  "products": [
+    {
+      "symbol": "510300",
+      "fund": "华泰柏瑞沪深300ETF",
+      "index_name": "沪深300指数",
+      "index_code": "000300",
+      "listing_date": "2012-05-28",
+      "identity_status": "official_confirmed",
+      "group": "沪深300"
+    },
+    {
+      "symbol": "515130",
+      "fund": "博时沪深300ETF",
+      "index_name": "沪深300指数",
+      "index_code": "000300",
+      "listing_date": "2020-05-11",
+      "identity_status": "official_confirmed",
+      "group": "沪深300"
+    },
+    {
+      "symbol": "515050",
+      "fund": "华夏中证5G通信主题ETF",
+      "index_name": "中证5G通信主题指数",
+      "index_code": "931079",
+      "listing_date": "2019-10-16",
+      "identity_status": "official_confirmed",
+      "group": "通信"
+    },
+    {
+      "symbol": "515880",
+      "fund": "国泰中证全指通信设备ETF",
+      "index_name": "中证全指通信设备指数",
+      "index_code": "931160",
+      "listing_date": "2019-09-06",
+      "identity_status": "official_confirmed",
+      "group": "通信"
+    },
+    {
+      "symbol": "512400",
+      "fund": "南方中证申万有色金属ETF",
+      "index_name": "中证申万有色金属指数",
+      "index_code": "000819",
+      "listing_date": "2017-09-01",
+      "identity_status": "official_confirmed",
+      "group": "有色"
+    },
+    {
+      "symbol": "159652",
+      "fund": "汇添富中证细分有色金属产业主题ETF",
+      "index_name": "中证细分有色金属产业主题指数",
+      "index_code": "000811",
+      "listing_date": "2023-02-08",
+      "identity_status": "official_confirmed",
+      "group": "有色"
+    },
+    {
+      "symbol": "515300",
+      "fund": "嘉实沪深300红利低波动ETF",
+      "index_name": "沪深300红利低波动指数",
+      "index_code": "930740",
+      "listing_date": "2019-09-19",
+      "identity_status": "official_confirmed",
+      "group": "红利低波"
+    },
+    {
+      "symbol": "512890",
+      "fund": "华泰柏瑞中证红利低波动ETF",
+      "index_name": "中证红利低波动100指数",
+      "index_code": "930955",
+      "listing_date": "2019-01-18",
+      "identity_status": "official_confirmed",
+      "group": "红利低波"
+    }
+  ],
+  "comparisons": [
+    {
+      "pair": [
+        "510300",
+        "515130"
+      ],
+      "same_index_code": true,
+      "same_date_top10_overlap": {
+        "status": "not_needed_for_identity",
+        "reason": "same official index code implies the target portfolio is the same index, though ETF tracking deviations may differ"
+      },
+      "fixed_rule": "keep_earliest_listing",
+      "representative": "510300"
+    },
+    {
+      "pair": [
+        "515050",
+        "515880"
+      ],
+      "same_index_code": false,
+      "index_top10_asof": "2026-08-31",
+      "top10_intersection_count": 4,
+      "top10_jaccard": 0.25,
+      "shared_codes": [
+        "300308",
+        "300394",
+        "300502",
+        "601138"
+      ],
+      "evidence_kind": "official index factsheets, not actual ETF holdings",
+      "fixed_rule": "one-direction-tier_keep_earliest_listing",
+      "representative": "515880"
+    },
+    {
+      "pair": [
+        "512400",
+        "159652"
+      ],
+      "same_index_code": false,
+      "index_top10_asof": "2026-08-31",
+      "top10_intersection_count": 9,
+      "top10_jaccard": 0.818182,
+      "shared_codes": [
+        "002460",
+        "600111",
+        "600489",
+        "600547",
+        "600988",
+        "601168",
+        "601600",
+        "601899",
+        "603993"
+      ],
+      "evidence_kind": "official index factsheets, not actual ETF holdings",
+      "fixed_rule": "one-direction-tier_keep_earliest_listing",
+      "representative": "512400"
+    },
+    {
+      "pair": [
+        "515300",
+        "512890"
+      ],
+      "same_index_code": false,
+      "index_top10_asof": "2026-08-31",
+      "top10_intersection_count": 5,
+      "top10_jaccard": 0.333333,
+      "shared_codes": [
+        "000651",
+        "000895",
+        "600941",
+        "601006",
+        "601668"
+      ],
+      "evidence_kind": "official index factsheets, not actual ETF holdings",
+      "fixed_rule": "do_not_merge_in_first_pass",
+      "representative": null
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.sse.com.cn/aboutus/publication/yearly/documents/c/10801255/files/02acb566841a48f0b2ca8941c73f4541.pdf",
+      "supports": [
+        "510300 listing date"
+      ]
+    },
+    {
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2020-08-30/515130_20200831_1.pdf",
+      "supports": [
+        "515130 index identity and listing"
+      ]
+    },
+    {
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2020-04-08/515050_20200409_1.pdf",
+      "supports": [
+        "515050 index identity and listing"
+      ]
+    },
+    {
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/new/2022-03-30/515880_20220330_1_qp25HTI2.pdf",
+      "supports": [
+        "515880 index identity and listing"
+      ]
+    },
+    {
+      "url": "https://www.sse.com.cn/disclosure/fund/announcement/c/2020-10-19/512400_20201019_7.pdf",
+      "supports": [
+        "512400 listing"
+      ]
+    },
+    {
+      "url": "https://www.99fund.com/upload/20230202/202302021675330537971.pdf",
+      "supports": [
+        "159652 listing"
+      ]
+    },
+    {
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/931079factsheet.pdf",
+      "as_of": "2026-08-31",
+      "local": "sources/931079factsheet.pdf"
+    },
+    {
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/931160factsheet.pdf",
+      "as_of": "2026-08-31",
+      "local": "sources/931160factsheet.pdf"
+    },
+    {
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000819factsheet.pdf",
+      "as_of": "2026-08-31",
+      "local": "sources/000819factsheet.pdf"
+    },
+    {
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/000811factsheet.pdf",
+      "as_of": "2026-08-31",
+      "local": "sources/000811factsheet.pdf"
+    },
+    {
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/930740factsheet.pdf",
+      "as_of": "2026-08-31",
+      "local": "sources/930740factsheet.pdf"
+    },
+    {
+      "url": "https://oss-ch.csindex.com.cn/static/html/csindex/public/uploads/indices/detail/files/zh_CN/930955factsheet.pdf",
+      "as_of": "2026-08-31",
+      "local": "sources/930955factsheet.pdf"
+    }
+  ]
+}

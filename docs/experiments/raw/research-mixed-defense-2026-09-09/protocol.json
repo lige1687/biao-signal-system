@@ -1,0 +1,90 @@
+{
+  "id": "mixed-defense-two-controls-v1",
+  "frozen_at": "2026-09-09T08:48:35.693515+00:00",
+  "research_status": "new historical research proposed after seeing previous results; not unknown-market validation",
+  "start": "2020-12-01",
+  "end": "2026-06-30",
+  "symbols": [
+    "510300",
+    "512400",
+    "515050",
+    "515130",
+    "515300",
+    "518850",
+    "588000",
+    "515170",
+    "516220",
+    "159652",
+    "512890",
+    "515880",
+    "513870",
+    "562590"
+  ],
+  "initial_cash": 1000000,
+  "external_flows": 0,
+  "cash_interest": 0,
+  "lot": 100,
+  "fees": [
+    0.001,
+    0.002
+  ],
+  "methods": [
+    "no_exit_100",
+    "monthly_reentry_exit",
+    "fast_reentry_exit",
+    "no_exit_75"
+  ],
+  "accounts": 8,
+  "source_files": {
+    "docs/experiments/raw/research-rotation-clean-2026-09-09/full-protocol.json": "21da388351b933b9008381a703017ebc75ec6448ef4eb5edba45ca6d5a84e1f5",
+    "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/prices.csv": "de467734be6c2ccbabed6fd39dc04b36fc6b78ee0ab731defd31ded4b83eb850",
+    "docs/experiments/raw/research-rotation-clean-2026-09-09/full-pool-preparation/action-sources/normalized-actions.json": "097043b2c622a308b602a961b666129f575a35083a8ede6d7bfa1cf16ea1ce81",
+    "docs/experiments/raw/research-rotation-clean-2026-09-09/full-execution/run.py": "b79a61db75eafb4c1944a1f158daeecbc987e61ea66f51eb4e7ca90966a7be26",
+    "docs/experiments/raw/research-rotation-clean-2026-09-09/full-execution/equity.csv": "f38e5670cc41ed184635b7ac101587f168366b00181bda04b7478361ae1e8ccf",
+    "docs/experiments/raw/research-rotation-clean-2026-09-09/full-execution/trades.csv": "c1af40522aeece2e1810c45892a98c7cf7b5266d80606ec710d2bc449ffe179b",
+    "docs/experiments/raw/research-rotation-clean-2026-09-09/full-execution/summary.json": "99a32de57ab9ab5e1655307829dee7399e1b03df75f4abf99859e68ec970aab7"
+  },
+  "unchanged": "prior full-protocol dynamic 273 real quotes, 252-21 momentum, RV20 ddof1 rank756/min252 exclusion>=.8, monthly top3 list/ties, nextopen orders, nominal prices and corporate actions, actual unit drift, fees/lot sizing, stop close<causal index SMA200",
+  "references": {
+    "no_exit_100": "prior full14-momentum_top3 at same fee",
+    "monthly_reentry_exit": "prior full14-momentum_top3_sma200 at same fee",
+    "acceptance": "equity and actual trades must reproduce exact prior reference at numerical precision"
+  },
+  "no_exit_75": {
+    "monthly_target": "0.75 * opening marked full account equity, divided equally among selected symbols",
+    "remaining_cash": "at least intended25% less marking effects and lot residuals; cash0 interest",
+    "between_months": "no automatic return to75% and no stop, weights drift",
+    "no_candidates": "allcash"
+  },
+  "fast_reentry_exit": {
+    "month_list_validity": "last executed monthly selection remains authoritative through the open before next monthly selection executes; holidays do not create new quotes",
+    "eligible": "selected symbol has zero held units because actual SMA stop sale in current list period generated a positive cash budget",
+    "trigger": "valid close economic_index>=SMA200 after stop sale; earliest execution next union quote-session valid symbol open",
+    "budget": "only most recent actual stop-sale net proceeds for same symbol; no borrowing, leverage, other-symbol cash, or later dividend added; fee inclusive lot floor",
+    "budget_lifecycle": "set on actual full stop liquidation; keep while waiting; after actual reentry consume instruction and discard residual earmark to common cash; next stop establishes new budget",
+    "monthly_priority": "at next monthly open cancel all old reentry queues/budgets, replace list and execute ordinary100% target; reconcile conflicts into monthly target, no same-open roundtrip",
+    "blocked_execution": "missing/invalid open, zero volume, one-price lock or known suspension delay; if new valid close falls below mean while queued cancel queue but retain budget for a later recovery before next monthly reset",
+    "split_and_dividend": "split adjusts units/old marks; monetary budget unchanged; later cash dividends stay common cash until next monthly allocation",
+    "no_extra_changes": "no daily reranking, no fresh RV gate, no daily weight restoring, no reentry for merely unfilled monthly target"
+  },
+  "metrics": [
+    "calendar CAGR/full-window return",
+    "maximum drawdown including initial capital",
+    "annual returns and annual fees",
+    "calendar average exposure",
+    "terminal cash/receivables/units",
+    "actual trade counts and fees",
+    "new daily reentry count and stop-again within5/20actual symbol sessions before next monthly reset (predefined diagnostics, not tuning)",
+    "full-window yearly differences vs original monthly reentry and75% control",
+    "fixed phase2020Dec-2024 and2025-2026Jun with first/lastpartial labels"
+  ],
+  "no_search": [
+    "position fractions beyond75%",
+    "moving average lengths",
+    "sector pool variants",
+    "complex entries",
+    "old34.38 provenance"
+  ],
+  "evidence_limit": "finite currently-surviving14ETF pool, duplicated economic exposures, same qualified old input limits;75% is roughly similar exposure not equal risk",
+  "okr_update": false
+}

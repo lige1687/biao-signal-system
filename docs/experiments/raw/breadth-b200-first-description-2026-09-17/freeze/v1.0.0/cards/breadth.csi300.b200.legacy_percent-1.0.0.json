@@ -1,0 +1,84 @@
+{
+ "scope": "给定日期成员集合的宽度研究，身份须附全A/沪深300/创业板指数及名单版本",
+ "not_for": [
+  "production_trade",
+  "unique_alpha_claim",
+  "prediction_from_contemporaneous_fit"
+ ],
+ "input": {
+  "fields": [
+   "date",
+   "symbol",
+   "P_signal",
+   "membership_by_date"
+  ],
+  "price_basis": "指数成分为冻结后复权连续价；全A为冻结缓存价，供应商旧修订未完全闭合",
+  "currency": "各股票同尺度比值；无量纲，非投资收益",
+  "frequency": "daily",
+  "calendar": "SMA按各股有效报价；宽度输出按显式交易日历，不前填"
+ },
+ "universe": {
+  "version": "etf-confirmation-v1；breadth_inputs及csi_members",
+  "eligibility": "当日成员且当日真实报价且至少200有效收盘；B50/B200共用E200",
+  "warmup": "200有效收盘（包含当日）",
+  "missing": "停牌/缺报价不纳入当日E；新股不足200不合格；全无合格返回缺失原因",
+  "quality_gate": "eligible/当日成员总数>=0.90；等于0.90有效",
+  "degrade": "无名单/无合格/覆盖不足时两个宽度均缺失，不返回0"
+ },
+ "time": {
+  "observation_time": "t股票收盘",
+  "available_at": "收盘数据及相关事件均已取得后；冻结输入缺历史到达时间，不伪造",
+  "decision_at": "不得早于available_at",
+  "execution_at": "下一个允许成交的ETF开盘；周目标与确认各自有时钟",
+  "timezone": "Asia/Shanghai",
+  "effective_from": "2026-09-09登记；历史含义绑定各冻结协议而非追溯授权"
+ },
+ "validation": {
+  "method": "手算边界、合法前缀、冻结旧函数逐值比较；范围以本轮验证报告为准",
+  "tolerance": {
+   "absolute": 1e-10,
+   "relative": 1e-10,
+   "integer": 0
+  },
+  "tests": [
+   "tests/unit/test_research_definitions.py"
+  ],
+  "limitations": "共同分母不消除成员变更影响；输入成员必须当时生效且可知"
+ },
+ "status": {
+  "definition_clarity": "explicit",
+  "data_qualification": "B_limited_historical_membership",
+  "implementation": "legacy_frozen_mapped",
+  "effectiveness": "not_tested_by_normalization",
+  "production": "not_authorized"
+ },
+ "sources": [
+  "breadth_code",
+  "breadth_protocol",
+  "breadth_prepare",
+  "breadth_inputs",
+  "breadth_quality"
+ ],
+ "id": "breadth.csi300.b200.legacy_percent",
+ "version": "1.0.0",
+ "name": "csi300 B200冻结百分数口径",
+ "type": "state_signal",
+ "profile": "breadth",
+ "uses": [
+  "description",
+  "diagnostic"
+ ],
+ "dependencies": [
+  "breadth.csi300.b200.common@1.0.0"
+ ],
+ "definition": {
+  "formula": "100 * fraction B200",
+  "parameters": {
+   "scale": 100
+  },
+  "endpoints": "同common版本；只换单位",
+  "unit": "percent",
+  "direction": "严格高于自身均线比例",
+  "transforms": "乘100，不能再按0至1阈值处理"
+ }
+}

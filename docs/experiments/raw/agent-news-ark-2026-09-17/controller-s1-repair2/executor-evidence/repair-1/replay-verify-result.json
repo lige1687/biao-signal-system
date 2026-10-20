@@ -1,0 +1,47 @@
+{
+  "material": "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/agents/news-agent-20260917/docs/experiments/raw/agent-news-ark-2026-09-17/fed-press-monetary-live-2026-09-17.xml",
+  "db_path": "/tmp/agent-news-s1/repair1-replay.db",
+  "http": 0,
+  "run1": {
+    "status": "ok",
+    "fed": 2,
+    "stages": {
+      "collect": {
+        "status": "ok",
+        "finished_at": "2026-09-17T13:47:32+08:00",
+        "errors": []
+      },
+      "score": {
+        "status": "skipped",
+        "finished_at": null,
+        "errors": [],
+        "reason": "no_llm"
+      },
+      "digest": {
+        "status": "skipped",
+        "finished_at": null,
+        "errors": [],
+        "reason": "no_llm"
+      },
+      "push": {
+        "status": "skipped",
+        "finished_at": null,
+        "errors": [],
+        "reason": "no_llm"
+      }
+    }
+  },
+  "run2_idempotent": true,
+  "event_stages": {
+    "Federal Reserve issues FOMC statement": "official_result",
+    "Federal Reserve Board and Federal Open Market Committee rele": "unknown"
+  },
+  "official_scored6_visible": true,
+  "official_scored6_importance": 6,
+  "score_exception": {
+    "run_finalized": true,
+    "score_stage": "failed",
+    "digest_stage": "skipped",
+    "push_stage": "skipped"
+  }
+}

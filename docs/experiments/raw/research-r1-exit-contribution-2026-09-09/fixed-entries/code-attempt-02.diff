@@ -1,0 +1,64 @@
+--- docs/experiments/raw/research-r1-exit-contribution-2026-09-09/fixed-entries/attempt-01/run_fixed_entries.py	2026-09-09 10:15:15
++++ docs/experiments/raw/research-r1-exit-contribution-2026-09-09/fixed-entries/run_fixed_entries.py	2026-09-09 10:15:16
+@@ -4,7 +4,7 @@
+ from collections import defaultdict
+ import csv,json,gzip,hashlib,statistics
+ getcontext().prec=40
+-HERE=Path(__file__).resolve().parent;ROOT=HERE.parent;IN=ROOT/'execution/inputs';END='2026-06-30'
++HERE=Path(__file__).resolve().parent;ROOT=HERE.parent;IN=ROOT/'execution/inputs';END='2026-06-30';OUT=HERE/'attempt-02'
+ OLD=HERE.parents[1]/'research-broad-etf-technical-2026-09-08/execution/account-results'
+ def jl(p):return json.loads(p.read_text())
+ def rc(p):return list(csv.DictReader(p.open()))
+@@ -55,9 +55,13 @@
+   daily.append({'path_id':f"{rt['position_id']}|{fee}|{method}",'date':day,'shares':shares,'mark':mark,'mark_date':mark_date,'receivable':sum(recv.values(),D(0)),'dividend_accrued':accrued,'dividend_paid':paid,'stop':stop,'sold':sold,'value':value,'net_pnl':value-entry_notional-buy_fee})
+   current+=timedelta(days=1)
+  terminal_market=D(0) if sold else shares*mark;net=exit_notional-sell_fee+terminal_market+accrued-entry_notional-buy_fee;ret=net/(entry_notional+buy_fee)
+- return {'path_id':f"{rt['position_id']}|{fee}|{method}",'source_account_id':buy['account_id'],'position_id':rt['position_id'],'candidate_id':rt['candidate_id'],'symbol':symbol,'fee_per_side':fee,'method':method,'entry_date':entry,'entry_price':dec(buy['price']),'initial_shares':initial_shares,'final_shares':shares,'entry_notional':entry_notional,'buy_fee':buy_fee,'initial_stop':initial_stop,'final_stop':stop,'exit_signal_date':pending['signal_date'] if pending else None,'exit_reason':pending['reason'] if pending else None,'exit_attempts':pending['attempts'] if pending else [],'exit_date':exit_date,'exit_price':exit_price,'exit_notional':exit_notional,'sell_fee':sell_fee,'dividend_accrued':accrued,'dividend_paid':paid,'terminal_market_value':terminal_market,'net_pnl':net,'net_return':ret,'original_exit_date':rt['exit_date'],'original_exit_reason':old_sell['reason'] if old_sell else None,'original_net_pnl':dec(rt['net_pnl']),'original_net_return':dec(rt['net_return']),'events':events},daily
++ peak=entry_notional+buy_fee;worst=D(0)
++ for row in daily:peak=max(peak,row['value']);worst=min(worst,row['value']/peak-1)
++ holding_days=(date.fromisoformat(exit_date or END)-date.fromisoformat(entry)).days+(0 if exit_date else 1)
++ return {'path_id':f"{rt['position_id']}|{fee}|{method}",'source_account_id':buy['account_id'],'position_id':rt['position_id'],'candidate_id':rt['candidate_id'],'symbol':symbol,'fee_per_side':fee,'method':method,'entry_date':entry,'entry_price':dec(buy['price']),'initial_shares':initial_shares,'final_shares':shares,'entry_notional':entry_notional,'buy_fee':buy_fee,'initial_stop':initial_stop,'final_stop':stop,'exit_signal_date':pending['signal_date'] if pending else None,'exit_reason':pending['reason'] if pending else None,'exit_attempts':pending['attempts'] if pending else [],'exit_date':exit_date,'exit_price':exit_price,'exit_notional':exit_notional,'sell_fee':sell_fee,'dividend_accrued':accrued,'dividend_paid':paid,'terminal_market_value':terminal_market,'net_pnl':net,'net_return':ret,'holding_days':holding_days,'max_holding_drawdown':worst,'original_exit_date':rt['exit_date'],'original_exit_reason':old_sell['reason'] if old_sell else None,'original_net_pnl':dec(rt['net_pnl']),'original_net_return':dec(rt['net_return']),'events':events},daily
+ def main():
+- lock=jl(HERE/'run-lock.json')['files']
++ OUT.mkdir(exist_ok=False)
++ lock=jl(HERE/'run-lock-attempt-02.json')['files']
+  for p,h in lock.items():assert sha(p)==h,p
+  cfg=jl(IN/'execution-config.json');actions=jl(IN/'actions.json');obs=json.load(gzip.open(IN/'exit-observations.json.gz','rt'));allp=[];alld=[];recon=[]
+  for folder in sorted(OLD.glob('*-R1-fee*bp')):
+@@ -68,23 +72,28 @@
+     p,d=path(rt,buy,sell,fee,method,bm,actions,obs,cfg);allp.append(p);alld+=d
+    original=allp[-2]; diffs={'exit_date':original['exit_date']==rt['exit_date'],'exit_reason':original['exit_reason']==(sell['reason'] if sell else None),'net_pnl':abs(original['net_pnl']-dec(rt['net_pnl'])),'net_return':abs(original['net_return']-dec(rt['net_return']))}
+    recon.append({'source_account_id':folder.name,'position_id':rt['position_id'],**diffs});assert diffs['exit_date'] and diffs['exit_reason'] and diffs['net_pnl']<D('0.00001') and diffs['net_return']<D('1e-10'),(folder.name,rt['position_id'],diffs)
+- with gzip.open(HERE/'path-daily.csv.gz','wt',newline='') as f:
++ with gzip.open(OUT/'path-daily.csv.gz','wt',newline='') as f:
+   w=csv.DictWriter(f,fieldnames=list(alld[0]));w.writeheader();w.writerows(alld)
+- with (HERE/'path-comparison.csv').open('w',newline='') as f:
++ with (OUT/'path-comparison.csv').open('w',newline='') as f:
+   fields=[k for k in allp[0] if k not in ('events','exit_attempts')];w=csv.DictWriter(f,fieldnames=fields);w.writeheader();w.writerows([{k:p[k] for k in fields} for p in allp])
+- with gzip.open(HERE/'path-events.jsonl.gz','wt') as f:
++ with gzip.open(OUT/'path-events.jsonl.gz','wt') as f:
+   for p in allp:f.write(json.dumps({'path_id':p['path_id'],'exit_attempts':p['exit_attempts'],'events':p['events']},ensure_ascii=False,default=str)+'\n')
+- save(HERE/'original-reconciliation.json',{'paths':len(recon),'all_matched':True,'max_net_pnl_difference':max(x['net_pnl'] for x in recon),'max_net_return_difference':max(x['net_return'] for x in recon),'checks':recon})
++ save(OUT/'original-reconciliation.json',{'paths':len(recon),'all_matched':True,'max_net_pnl_difference':max(x['net_pnl'] for x in recon),'max_net_return_difference':max(x['net_return'] for x in recon),'checks':recon})
+  pairs=[]
+  for i in range(0,len(allp),2):
+-  a,b=allp[i:i+2];pairs.append({'source_account_id':a['source_account_id'],'position_id':a['position_id'],'candidate_id':a['candidate_id'],'symbol':a['symbol'],'fee_per_side':a['fee_per_side'],'entry_date':a['entry_date'],'initial_shares':a['initial_shares'],'original_exit_date':a['exit_date'],'original_exit_reason':a['exit_reason'],'original_net_return':a['net_return'],'structure_exit_date':b['exit_date'],'structure_exit_reason':b['exit_reason'],'structure_net_return':b['net_return'],'structure_minus_original_return':b['net_return']-a['net_return'],'original_holding_days':(date.fromisoformat(a['exit_date'] or END)-date.fromisoformat(a['entry_date'])).days,'structure_holding_days':(date.fromisoformat(b['exit_date'] or END)-date.fromisoformat(b['entry_date'])).days})
+- with (HERE/'paired-comparison.csv').open('w',newline='') as f:w=csv.DictWriter(f,fieldnames=list(pairs[0]));w.writeheader();w.writerows(pairs)
++  a,b=allp[i:i+2];pairs.append({'source_account_id':a['source_account_id'],'position_id':a['position_id'],'candidate_id':a['candidate_id'],'symbol':a['symbol'],'fee_per_side':a['fee_per_side'],'entry_date':a['entry_date'],'initial_shares':a['initial_shares'],'original_exit_date':a['exit_date'],'original_exit_reason':a['exit_reason'],'original_net_return':a['net_return'],'structure_exit_date':b['exit_date'],'structure_exit_reason':b['exit_reason'],'structure_net_return':b['net_return'],'structure_minus_original_return':b['net_return']-a['net_return'],'original_holding_days':a['holding_days'],'structure_holding_days':b['holding_days'],'original_max_holding_drawdown':a['max_holding_drawdown'],'structure_max_holding_drawdown':b['max_holding_drawdown']})
++ with (OUT/'paired-comparison.csv').open('w',newline='') as f:w=csv.DictWriter(f,fieldnames=list(pairs[0]));w.writeheader();w.writerows(pairs)
+  summaries=[]
+  for method in ('road_or_structure','structure_only'):
+   for fee in (D('.001'),D('.002')):
+    for symbol in ('sh510300','sz159915'):
+     xs=[p for p in allp if p['method']==method and p['fee_per_side']==fee and p['symbol']==symbol];rs=[p['net_return'] for p in xs]
+-    summaries.append({'method':method,'fee_per_side':fee,'symbol':symbol,'paths':len(xs),'closed':sum(p['exit_date'] is not None for p in xs),'open':sum(p['exit_date'] is None for p in xs),'mean_net_return':sum(rs,D(0))/len(rs),'median_net_return':statistics.median(rs),'profitable_fraction':D(sum(r>0 for r in rs))/len(rs),'total_holding_days':sum((date.fromisoformat(p['exit_date'] or END)-date.fromisoformat(p['entry_date'])).days for p in xs)})
+- save(HERE/'summary.json',summaries);save(HERE/'completion.json',{'status':'passed','fixed_entries':330,'paths':660,'original_reconciled':330,'all_inputs_unchanged':True,'finished_at':datetime.now(timezone.utc).isoformat()})
++    
++    streak=best=0
++    for r in rs:
++     streak=streak+1 if r<0 else 0;best=max(best,streak)
++    positives=sorted((p['net_pnl'] for p in xs if p['net_pnl']>0),reverse=True);possum=sum(positives,D(0))
++    summaries.append({'method':method,'fee_per_side':fee,'symbol':symbol,'paths':len(xs),'closed':sum(p['exit_date'] is not None for p in xs),'open':sum(p['exit_date'] is None for p in xs),'mean_net_return':sum(rs,D(0))/len(rs),'median_net_return':statistics.median(rs),'profitable_fraction':D(sum(r>0 for r in rs))/len(rs),'total_holding_days':sum(p['holding_days'] for p in xs),'worst_holding_drawdown':min(p['max_holding_drawdown'] for p in xs),'longest_losing_streak':best,'top5_profit_concentration':sum(positives[:5],D(0))/possum if possum else None})
++ save(OUT/'summary.json',summaries);save(OUT/'completion.json',{'status':'passed','fixed_entries':330,'paths':660,'original_reconciled':330,'all_inputs_unchanged':True,'finished_at':datetime.now(timezone.utc).isoformat()})
+  for p,h in lock.items():assert sha(p)==h,p
+ if __name__=='__main__':main()

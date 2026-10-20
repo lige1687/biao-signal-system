@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/execution/run_accounts.py", line 245, in <module>
+    if __name__ == "__main__": main()
+                               ^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/execution/run_accounts.py", line 214, in main
+    observation_sources=accept_independent_observation_check()
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-thirteenth-2026-09-08/execution/run_accounts.py", line 107, in accept_independent_observation_check
+    for path,digest in lock["files"].items(): assert sha(path)==digest,path
+                       ~~~~^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
