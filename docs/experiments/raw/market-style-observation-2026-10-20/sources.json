@@ -1,0 +1,105 @@
+{
+  "checked_date": "2026-10-20",
+  "timezone": "Asia/Shanghai",
+  "mode": "report_only",
+  "new_market_experiments": 0,
+  "paid_data": 0,
+  "provider_full_text_archived": false,
+  "sources": [
+    {
+      "id": "msci-momentum",
+      "url": "https://www.msci.com/documents/10199/255599/msci-world-momentum-index-usd-gross.pdf",
+      "observation_or_publication_date": "2026-09-30",
+      "verified_scope": "primary_pdf_read_parent_and_agent; gross USD; World parent"
+    },
+    {
+      "id": "msci-quality",
+      "url": "https://www.msci.com/documents/10199/255599/msci-world-quality-index.pdf",
+      "observation_or_publication_date": "2026-09-30",
+      "verified_scope": "primary_pdf_read_agent; gross USD"
+    },
+    {
+      "id": "msci-value",
+      "url": "https://www.msci.com/documents/10199/255599/msci-world-value-index.pdf",
+      "observation_or_publication_date": "2026-09-30",
+      "verified_scope": "primary_pdf_read_parent; gross USD; not Enhanced Value"
+    },
+    {
+      "id": "msci-minvol",
+      "url": "https://www.msci.com/documents/10199/255599/msci-world-minimum-volatility-index.pdf",
+      "observation_or_publication_date": "2026-09-30",
+      "verified_scope": "primary_pdf_read_agent; constrained portfolio optimization"
+    },
+    {
+      "id": "msci-terms",
+      "url": "https://www.msci.com/legal/notice-and-disclaimer",
+      "observation_or_publication_date": null,
+      "verified_scope": "official_notice_read; ongoing retrieval/display rights unverified"
+    },
+    {
+      "id": "vix-definition",
+      "url": "https://www.cboe.com/insights/posts/what-the-vix-and-vix-1-d-indices-attempt-to-measure-and-how-they-differ",
+      "observation_or_publication_date": "2023-04-24",
+      "verified_scope": "SPX implied nondirectional constant 30-day annualized volatility"
+    },
+    {
+      "id": "vix-csv",
+      "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv",
+      "observation_or_publication_date": null,
+      "verified_scope": "HTTP200 text/csv; 160 byte sample; no full download"
+    },
+    {
+      "id": "ice-hy-oas",
+      "url": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
+      "observation_or_publication_date": null,
+      "verified_scope": "page read; 3-year limit from April2026; copyright preapproval; CSV read timeout"
+    },
+    {
+      "id": "ice-ig-oas",
+      "url": "https://fred.stlouisfed.org/series/BAMLC0A0CM",
+      "observation_or_publication_date": null,
+      "verified_scope": "search result only plus CSV timeout; optional not fully qualified"
+    },
+    {
+      "id": "nfci",
+      "url": "https://www.chicagofed.org/research/data/nfci/current-data",
+      "observation_or_publication_date": null,
+      "verified_scope": "page read; weekly revision; no current numeric value/CSV verified"
+    },
+    {
+      "id": "nfci-faq",
+      "url": "https://www.chicagofed.org/-/media/publications/nfci/nfci-faqs-pdf.pdf",
+      "observation_or_publication_date": null,
+      "verified_scope": "official FAQ search-read by agent; zero interpretation"
+    },
+    {
+      "id": "fred-api-terms",
+      "url": "https://fred.stlouisfed.org/docs/api/terms_of_use.html",
+      "observation_or_publication_date": null,
+      "verified_scope": "api key and third party license conditions"
+    },
+    {
+      "id": "french",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_Library.html",
+      "observation_or_publication_date": null,
+      "verified_scope": "official catalog reviewed; existing local research reused"
+    },
+    {
+      "id": "aqr",
+      "url": "https://www.aqr.com/insights/datasets",
+      "observation_or_publication_date": null,
+      "verified_scope": "official catalog reviewed; not MSCI index data"
+    }
+  ],
+  "calls": {
+    "msci_web_batches": 3,
+    "risk_web_batches": 2,
+    "parent_web_batches": 1,
+    "risk_search_queries": 9,
+    "risk_page_probes": 3,
+    "risk_csv_probes": 6,
+    "risk_csv_failures": "first3: no determinate returned output; second3: Cboe200; FRED HY/IG 6s read timeouts",
+    "separate_bounded_topic": "new user-requested dashboard source review; no reset of old research budgets"
+  },
+  "model_cost": "unknown"
+}

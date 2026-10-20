@@ -1,3 +1,5 @@
+- 2026-10-20：[市场环境与风格观察面板](market-style-observation-2026-10-20.md)：五问、周观察与月复盘已形成数据要求；复用现有指标，自动许可和策略增量仍待验证。
+
 # docs/experiments 总索引
 
 - 2026-09-23：[开发任务路由改为GPT-6系列](jev-gpt6-skill-routing-2026-09-23.md)：项目级路由与编排Skill改用GPT-6 Luna、Sol、Astra；32项离线检查通过，真实任务效果继续观察。

@@ -1,0 +1,37 @@
+{
+  "checked_at": "2026-10-20T19:49:29.775790+08:00",
+  "report_api_url": "http://127.0.0.1:8000/api/experiments/docs/experiments/market-style-observation-2026-10-20.md",
+  "api_body_exact": true,
+  "report_sha256": "18ffc64a2b0a30bb1a28a0bd4b6695f55e376fcd6a5432c86774dcc5ed011f4b",
+  "registry_category": "宏观与情绪",
+  "registry_verdict": "mixed",
+  "five_questions_present": true,
+  "relative_links_exist": [
+    "docs/experiments/derived-price-integration-2026-10-20.md",
+    "docs/experiments/us-factor-purpose-evaluation-2026-10-20.md",
+    "docs/experiments/factor-strategy-portfolios-2026-10-20.md",
+    "docs/experiments/breadth-volatility-increment-2026-10-20.md"
+  ],
+  "source_example_arithmetic": "3/3 passed",
+  "repo_hygiene": "exit 0 after artifacts and registration",
+  "independent_local_review": "Sol confirmed local evidence and five questions; wording fix adopted",
+  "scope": "report_only; no UI or market-effect tests",
+  "failures": [
+    {
+      "operation": "report detail GET with short slug",
+      "result": "404",
+      "cause": "endpoint expects full repo-relative path from list entry",
+      "resolution": "read listing; correct exact name succeeded; no server change"
+    },
+    {
+      "operation": "risk source probes",
+      "result": "first CSV batch no determinate output; FRED HY/IG read timeouts",
+      "resolution": "retained unavailable; no production integration claimed"
+    }
+  ],
+  "upgrade_id": "okr-f07e0054448a",
+  "upgrade_status": "planned",
+  "production_ui_changed": false,
+  "new_market_experiments": 0,
+  "git_publication": "Exact remote result recorded in publication-receipt.json and coordination task"
+}

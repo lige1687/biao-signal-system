@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-10-20T19:47:13.866445+08:00",
+  "calls": [
+    {
+      "url": "http://127.0.0.1:8000/api/market-context/breadth-history?market_id=CN_ALL_A",
+      "keys": [
+        "market_id",
+        "lookback_days",
+        "history"
+      ],
+      "count": 1282,
+      "first": {
+        "date": "2021-06-17",
+        "breadth_20": 41.624,
+        "breadth_50": 50.671,
+        "breadth_200": 39.5436
+      },
+      "last": {
+        "date": "2026-10-16",
+        "breadth_20": 15.178229206592563,
+        "breadth_50": 18.14337881991159,
+        "breadth_200": 14.812657736361873
+      }
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/market-context/breadth-history?market_id=SP500",
+      "keys": [
+        "market_id",
+        "lookback_days",
+        "history"
+      ],
+      "count": 11694,
+      "first": {
+        "date": "1980-04-14",
+        "breadth_20": 65.1316,
+        "breadth_50": null,
+        "breadth_200": null
+      },
+      "last": {
+        "date": "2026-09-04",
+        "breadth_20": 35.6275,
+        "breadth_50": 47.5709,
+        "breadth_200": 67.004
+      }
+    }
+  ],
+  "strategy_endpoint": {
+    "url": "http://127.0.0.1:8028/api/strategy-portfolios",
+    "keys": [
+      "version",
+      "generated_at",
+      "started_at",
+      "markets",
+      "run",
+      "pending",
+      "sources",
+      "limitations"
+    ],
+    "status": "HTTP200",
+    "response_sha256": "67eb823a70181e2019e58ac5e18ab07628eb2f5e5bcd6fb48993b0ab65d37398",
+    "private_payload_saved": false
+  }
+}
