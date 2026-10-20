@@ -1,3 +1,12 @@
+# 本地观察服务最小接入 2026-10-20T16:59:07.127369+08:00
+
+- status active；scope_released false；checked_coordination_sha=13047277ff5e0fa8bd96a5d90c05e7cfc7860667；checked_at=2026-10-20T16:59:07.127369+08:00。已核COORDINATION及上一段全部task-id，新增读personal-lowfreq-system-audit的16:49/16:52两段；变化仅美股公开分组参考定义，不重叠。
+- 新功能代码正在独立树通过时点与资金反例检查。当前8000主API无reload且主树包含其他任务未发布改动，为避免重启隐式载入他人变更，新增独立localhost:8018前向观察API与它启动的唯一观察子进程；只访问新的仓内活动DB，不接旧账户。该服务不写系统启动配置、不发通知，主机重启后的自动恢复尚未建立；页面明确存活、心跳、错过运行。
+- 增补唯一写范围：web/vite.config.ts 仅增加可选 LEI_FORWARD_PROXY 对 /api/fwd-ledger/strategies 的定向代理；默认仍沿原API，因此其他实例不改变。main和当前5188运行树对应准确文件镜像后，重启该Vite进程带新代理环境。原主API8000及其他实验进程保持。API服务入口仍在已登记 src/lei_signal/forward_observation/。
+- 验证：独立API GET/POST、幂等/重启读回，当前5188完整操作和旧信号入口，宽窄屏；所有新服务仅绑定127.0.0.1，未开放远端。原A/低换手继续显示待补/原owner进行中。
+
+---
+
 # 扩展为完整策略前向观察台 2026-10-20T16:43:37+08:00
 
 - task-id/owner沿下文；status active；scope_released false；checked_coordination_sha=40e048f7fd54c043ab093c34290100ad55088b21；checked_at=2026-10-20T16:43:37+08:00。已读COORDINATION1.1及先前相关任务，新增核research-utility-review最新16:32、pro-advice-process-review最新16:41、personal-lowfreq-system-audit最新16:37、investor-workspace-simplification最新16:15、dot-trade-state-accounting、dot-pro-strategy-definition。
