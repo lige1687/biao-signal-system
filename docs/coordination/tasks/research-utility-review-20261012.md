@@ -1,3 +1,16 @@
+# 绿色候选近期过热研究交付 2026-10-20T16:15:52.939455+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed（本轮有界问题）；scope_released true；checked_coordination_sha=b85e94ecef83c77ba963d20943262b22140e36ce；checked_at=2026-10-20T16:15:52.939455+08:00。已读COORDINATION/self/personal-lowfreq-system-audit最新16:07/pro-advice-process-review最新16:12/investor-workspace-simplification当前两图接入及修正版范围，沿已读gemini/lowfreq-discovery/dispatch；无新冲突、不接管其他题。系统owner独写运行树静态图，root主树研究/报告/登记。
+- 完成新问题：同绿色且相近中期动量的近期1月过热，300股120合格月，60完整月偏冷减全部报价差+0.643pp；必要低波动对手71月差+0.359pp区间跨零且低波动下跌更小；41月25bps费用情景+0.592pp区间跨零。大涨保留46.03%，未知权重/时期/来源限制均保留。旧600有大量微小衔接资格损失，23完整/6费用月，不当成功复验或900股有效。不调参，保留排序研究、暂不硬过滤或生产。
+- 报告docs/experiments/short-reversal-green-selection-2026-10-20.md SHA7887e3fc39fbbe99260aba99738018c6d1d376ec8b231c54dc470abe253fd65c，registry语义组合/mixed，原715条首次追加保持；INDEX本行。源码两个short_reversal模块、两个对应单测；定义3个research.selection.short_reversal@1.0.0和准确来源追加。原策略2指纹、核心合同SHA6732883…与结果20文件核同；后续格式修正执行前代码另存executed快照/AST相同，失败E501/I001及映射见postrun-formatting，不倒改合同/重算效果。
+- 使用core1/1、followup2/3（保存诊断＋低波动一个对手）、公开来源2/6、新行情0；旧家族预算不重置。Sol high实现、Sol medium独立源/结果核、Astra high方法前后审与root原价9特征核。18既有相关测试＋2低波动测试通过，收尾受影响2项复验；格式、归置、准确路径diff通过。实际模型token费用未知。完整资金/ETF/美股/未见时期/旧600来源未完成，不改生产/交易/策略/付费/通知/删除。
+- 低波动独核120月6227权重、最大差<5e-15；600来源诊断5371前收盘中4782≤1e-6，原因仍未知，留source600-diagnostic，不据此放宽阈值。主300的120月缺失压力可翻号，不将完整月份当无偏总体。
+- 系统API报告逐字相同、Agent报告SHA verified未截断；最初Agent参数超限/索引超时已留且纠正后成功。5188两SVG为image/svg+xml且源/HTTP同字节，760px图实际窄窗可读、6表、两图complete；初稿1100px过小保留整改说明。系统owner同源同步，数值不变；主观阅读效果待用户认可。目标okr-ff1e0a86fbac仅note178→179，in_progress/其余字段/旧history保持，无accept。
+- 大输出固定外盘两个本题目录，准确位置与manifest在raw/storage-plan及followup-contract；本机小回执在同raw。state completed/inconclusive/evidence_boundary，necessary pending0。新证据才能重开可执行性/独立来源问题，不在旧历史扫参数。没有后台研究进程。
+- 实际成果仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9本地未提交未推；仅本协调元数据上传，不代表正文跨设备可复现。恢复从本raw/state、contract、followup-contract、independent-audit、lowvol-independent-audit、delivery-validation读取；不重跑已封存效果。
+
+---
+
 # 固定选股完成，必要简单对手补核 2026-10-20T15:54:59.151888+08:00
 
 - task-id/owner沿原，status active，scope_released false；checked_coordination_sha=a67043a2741d017ce67004eab1549a8412abafe4；checked_at=2026-10-20T15:54:59.151888+08:00。本轮fetch发现并发更新，首推被正常保护拒绝；已读self/COORDINATION/personal最新15:42美股与方法文字、pro-advice-process-review新审查、gemini最新12:08/lowfreq-strategy-discovery/dispatch，均无实现重叠。已普通合并完整恢复后的协调树，仅他人2任务有最终净变更。
