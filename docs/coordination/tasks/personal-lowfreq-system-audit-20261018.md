@@ -1,3 +1,13 @@
+# 历史代码价格链有限补证开工 2026-10-20T13:27:06.472178+08:00
+
+- task-id/owner沿原；status active，scope_released false。checked_coordination_sha=fe26b16ec6d171d3aa4b53ab1d2fc9f139e587b6；checked_at=2026-10-20T13:27:06.472178+08:00；已读COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller；旧300池与本600确实零交集，未接管他人来源或研究。
+- 基线成果7d4b28e645364c2154a0387cb3567f16c911fffb。纠正过度审批：原6次为采用技能默认的批次上限，不是用户明确总额度；最新推进全部既有目标及固定名单/请求量补公开资料的授权支持必要有限追加。此前pending10请求不是用户拒绝；原计划和累计原样保留，新增授权裁决单独记，绝不清零旧6/6、P3 4/4和所有其他历史请求。
+- 本次只执行已准备最多10项免费公开旧代码sz.000043取数，准确原计划next-source-request-plan.json；零重试、限流或连续2失败停，40秒超时，原始响应外盘指纹留存。尝试不是必须成功，不换源追结果。收益尝试预算不增加，所有封存结果不重算。成功也只回答一只原股票价格断点，不能声称价值600池齐备。
+- 唯一新增写范围docs/experiments/raw/old-code-source-repair-2026-10-20/及同名报告，原progress/registry本键/INDEX本行；主树仅验收后镜像。root判断/合同/独核，Luna低实现小取数脚本并获root读审后执行，Astra窄审授权边界完成。新外盘32MiB、本机1MiB；只读旧来源/正式工具及策略源，不改生产、交易、通知或账户。
+- 验收：当前外盘/空间和旧输入SHA；请求名单与累计记录；原响应行数/日期/返回代码/调整标记；新旧共同日价格及公司行动因子是否一致，必要未知保留；实际取得/不可用分别说明。
+
+---
+
 # 已存年度价值字段覆盖实核交付 2026-10-20T13:20:22.601941+08:00
 
 - 原task-id/owner；本有界资料提取status completed，整体目标in_progress，scope_released false仅保留本题公开数据资格职责。checked_coordination_sha=3cc059788b4669c5a226e0a5e5cfb14b38b45390；checked_at=2026-10-20T13:20:22.601941+08:00，fresh fetch无变更，已读COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller，未接管他人范围。
