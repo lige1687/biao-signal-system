@@ -1,3 +1,18 @@
+# Pro建议有界审阅完成；最小补充待核心文档原写者合入
+
+- task-id: pro-advice-process-review-20261020；owner: 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status: completed；scope_released: true。
+- checked_coordination_sha: 6fef19257f16f34f4bd14d9e71fee31f521ada67；checked_at: 2026-10-20T15:59:10.854185+08:00。已读task-id：self、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、research-dispatch-controller；前轮其他已读任务与本范围无新增交叉。冲突决定仍不写playbook/AGENTS/低频skill；不接管原研究。
+- 成果 codex/pro-advice-process-review-20261020@667c544572f4a166d3e5b45c74c6778979f38dcb，准确7路径已推并远端ref读回；基于已发布91a93ad2b881fbeed1ee15ae03d4fc3bbff08342，不夹带主树未推提交。报告 docs/experiments/pro-advice-process-review-2026-10-20.md；raw同主题有补充草案、来源manifest、verification；原progress同task-id。
+- 结论：Pro多数原则已覆盖；真正补充行动延迟表和可比报警负担，实际做多组复用已有专门输出。概率校准、大赢家不机械剔除与证据分层已有规范，不能当新缺口。当前优先级按最新已完成研究判断，0重跑。
+- 主树自有报告/raw/registry本键/INDEX本行落地并读回；原713条保持，当前总数不是未来状态。远端成果分支registry只在其基线上加本键；审阅依赖的主树只读资料未整包上传，SHA与位置留manifest。核心规范未合入、未改生产/策略/数据库/其他目标状态，未发跨聊天消息。
+- 实际验证：用户全文、11个来源指纹与桌面2原件批准SHA、关键评价代码独核、最新两报告读回；概率核查扩大至现行规范后收窄缺口。归置检查通过，报告结论/ARCHIVE/登记/导航读回，发布7准确路径无删除。Sol/medium只读助手1名；5/6来源操作（其中1失败已留）、0市场运行/行情或财报下载/付费。token费用未知。
+- 事故透明记录：隔离no-checkout索引未初始化，登记提交916da780b20604617fdf31dbc57df38797eed39d误删除21907远端树路径；追加a67043a2741d017ce67004eab1549a8412abafe4逐对象恢复，远端逐一核原值相同，主工作区文件未删除，无强推或历史改写。恢复push等待后已成功；额外检查看到已恢复，未执行第二push或跳过hook。完整事件见verification.json。后续发布/同步都完整read-tree基线、精确路径集合断言和禁止删除断言。
+- 唯一后续：原核心文档写者若合入，先读新文本去重，草案仅2项细节及做多组复用要求；未来相关已授权任务验证实际输出即可，不为流程验收另开回测。审阅问题已回答，核心整合待办不伪报完成，无后台任务。
+
+---
+
+## 初始范围记录（保留历史）
+
 # Pro建议与现行研究流程有界审阅
 
 - task-id: pro-advice-process-review-20261020
