@@ -1,3 +1,15 @@
+# 因子指标、原文差异与样本审查交付 2026-10-20T12:06:17.760167+08:00
+
+- task-id/owner沿原；status completed仅本轮report_only；scope_released true；checked_coordination_sha=6b658cb2ec79250a5b17330f84af505a00e2c864；checked_at=2026-10-20T12:06:17.760167+08:00。已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新11:50、gemini-strategy-review-20261020最新11:59、lowfreq-strategy-discovery-20261019、research-dispatch-controller，系统沿原展示。Gemini六对象及新独立源码不接管，与本文无冲突。
+- 报告docs/experiments/factor-type-metrics-audit-2026-10-20.md SHA9448660f9342a4a16b995f3b99e269bf54731e691acf8421c8f23937987a49e8，登记方法论与验证/mixed；六份旧报告SHA不变。按用途指标总体合适，但原文/第三方/本地三层与风险/账户/机制不得混用；旧FIP控制涨幅比较已做、应计盈利延续未做、公开原表不能认证逐股流程。作者VME六项舍入相符，第三方三经典均值接近但定义不等同，原版复现缺口保留。
+- 独核保存逐月表：119→108→81→64，后期59→53→50→43；后50月差−0.0246pp，95%范围[-0.4535,+0.4043]，未排除有用改善或损害。早期55评价月缺24，后期53缺3；完整月份选择和共同行情依赖保留。程序36月标记非统计保证，不改估计/阈值/旧合同。
+- 复用原owner月度反转132月IC−0.062779（取反转分数则正），五组不单调、995停牌端点和11未知，非可交易收益。新问题仅收敛为同绿色池/普通动量外的月度反转排序；周反转、异常换手、等待一周各自定义与成本后续独立。没有开新回测或擅自扩财务/ETF斜率任务。
+- 现有factor-discovery-playbook仅加一条具体可比层级/36月与完整月份反例链接，已有按类型选指标与样本规则复用，不另建框架。Sol medium两路只读核指标/原文及分母，root原报告/原文和保存表独核；0新市场效果、0行情下载，6公开来源含NBER PDF失败1，原稿只读范围留source-review，实费未知。未写大结果，本机小记录约32576B，在200KiB预估内。
+- API全文与本地同、Agent指纹核对未截断、5188页面6表与指标/样本/原文/反转段实际可见，归置/准确diff通过；705旧登记保持。目标okr-ff1e0a86fbac仅note177→178，in_progress及旧history/其余字段保持，用户展示待验收。
+- 成果仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9本地未提交未推，协调元数据不代表正文移交。恢复见本raw audit-contract/controller-review/saved-sample-audit/state/delivery-validation；不重跑已完成效果。无生产、交易、通知、删除、付费或后台任务。
+
+---
+
 # 因子类型指标与原文差异审查启动 2026-10-20T11:58:00.431525+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=7b1cf2c055acebc7a84445fadfaf9b3fb68f1557；checked_at=2026-10-20T11:58:00.431525+08:00。已读COORDINATION/self/personal-lowfreq-system-audit-20261018最新11:50、gemini-strategy-review-20261020最新11:50、lowfreq-strategy-discovery-20261019、research-dispatch-controller，系统任务沿原报告展示。对方财务输入恢复与ETF斜率×R²研究不接管，不重跑本题高点。
