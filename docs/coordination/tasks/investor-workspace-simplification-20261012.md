@@ -1,3 +1,11 @@
+# 低换手报价账户三张图静态接入 2026-10-20T17:00:58.218581+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=28971e70d9799e946994d74ee45b5d41ba81b448；checked_at=2026-10-20T17:00:58.218581+08:00。沿原用户系统/因子分工，原因子owner明确委派准确三静态资源；已读COORDINATION（与前次无变）、self、research-utility-review-20261012最新16:32、personal-lowfreq-system-audit-20261018最新16:52、research-dispatch-controller；全任务检索仅原owner声明主树源，运行树无同块写者。
+- root唯一写当前5188实际cwd所在codex/investor-workspace-simplification-20261012树的web/public/research/lowturnover-green-account-20261020/{capital-path.svg,drawdown.svg,buffer-tradeoff.svg}，仅按主树已给定SHA原字节复制；自身docs/archive/handoffs-plans/investor-workspace-simplification-20261012/lowturnover-static-assets-20261020-receipt.json及原work-progress可镜像主树。原报告/源图/研究数字/组件/API/策略不动，报告登记、浏览器独验与研究结论由原因子owner负责。不重跑、不重启、不派他人。
+- 当前三目标不存在；源XML通过、SHA与委派吻合，总146933B；PID15320/cwd已核。验收三方source/target/HTTP字节及SHA一致、200/image/svg+xml，保留小回执，源再核未变。基线e6c4c2e025252c565ba15f05611561ca1ecd5b48＋既有未提交增量，只本协调准确文件提交，不混暂存。报价账户研究未完整复现原策略，接入不代表科学效果通过。
+
+---
+
 # 绿色候选两张图最终版接入验收完成 2026-10-20T16:15:59.420354+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed（仅本次静态附件接入）；scope_released true；checked_coordination_sha=3442ba0a1ab3638961b2626b5c5798fdde6608a6；checked_at=2026-10-20T16:15:59.420354+08:00。交付前fetch已核，沿本轮已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/dispatch，另读pro-advice-process-review最新16:12，均无路径冲突。
