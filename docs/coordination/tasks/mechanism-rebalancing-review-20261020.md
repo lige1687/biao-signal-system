@@ -1,3 +1,13 @@
+# 本轮限定的外部机制研究实现 2026-10-20T18:35:01.349144+08:00
+
+- task-id沿原；active；checked_coordination_sha 2481cc42e9af8290e1a7f89278bc7dadfb8dad6e；已读COORDINATION/self/dispatch/personal-lowfreq-system-audit-20261018/research-utility-review-20261012/technical-factor-sequence/gemini-strategy-review-20261020/strategy-account-bridge-20261020。历史native-workflow-integration非同名task文件，依中控核其保留共享入口范围。
+- 范围增量：仅新增 src/lei_signal/research/month_end_rebalancing.py 和 tests/unit/test_month_end_rebalancing.py（Sol唯一写者，root复核）；root仅在definitions.v1.json追加本题research.rebalancing.calendar_drift_60_40@1.0.0及自身来源，保留其他卡；同题raw独立合同/执行器和既有报告范围不变。不是生产技术规则，不改桌面策略、rules、workflow.py、question_contract.py、scripts/run_factor_lab.py或他人冻结入口。
+- 本题是体系外的股债日历机制适用性提案，不冒充已有LEI技术特征。现有技术信息runner不支持双资产事件/账户，明确不声称已走通该原生入口；采用现行研究规范的独立合同、定义绑定、资料核验、合成检查、冻结与结果复核。研究实现不会从raw导入正式计算。
+- 可用新增公开SPY/IEF原价、分红、调整价（2026-10-20取得），原期货论文全文2025-12-15已读；保存位置和SHA见本题storage-plan/acquisition。先月度事件与简单反转/日历比较，仅在现象和用途支持时再扩执行政策，0市场效果已运行。
+- 冲突：他人US/ETF/账户/技术主入口保留；全局definitions只本对象键，读取并核原值后串行附加；新模块不同于Gemini/低换手。不改既有卡、版本、schema或共享入口，不做历史全量重跑。
+
+---
+
 # 用户授权接续：检验月末股债再平衡的实际策略用途
 
 - task-id mechanism-rebalancing-review-20261020；owner 01a158cd-e0ee-7260-b91f-629930ce779f/root；status active；scope_released false；checked_coordination_sha b4f8b1e8e639a47b040a1b7e5731d9f17a979627；checked_at 2026-10-20T18:28:26.193510+08:00。已读self、personal-lowfreq-system-audit-20261018、lowfreq-strategy-discovery-20261019、research-utility-review-20261012、strategy-account-bridge-20261020、research-dispatch-controller与COORDINATION。
