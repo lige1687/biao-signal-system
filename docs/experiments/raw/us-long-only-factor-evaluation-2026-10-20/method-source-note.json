@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-20T16:54:55.058811+08:00",
+  "official_library": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+  "source_vintage": "202608 CRSP; current CIZ reconstruction; 2025 format migration changes reinvestment timing and can affect historical values",
+  "OP": "NYSE median June market equity splits size; NYSE OP percentiles 30/70; annual prior-year revenue less COGS SG&A interest over book equity; positive book equity and source disclosure eligibility; include NYSE AMEX NASDAQ source stocks",
+  "MOM": "monthly size median NYSE and 30/70 prior months 12 through 2; skip last month; end t-13 price and t-2 good return; not all CRSP missing return codes are dropped by source",
+  "BM": "read exact downloaded header: prior fiscal year-end book / prior December ME, annual June construct, includes utilities and financials; provider unobserved stock membership not locally certified",
+  "not_same_pool": true,
+  "no_cash_benchmark": "No RF series acquired in this bounded question; capital baseline B is full allocation across source groups, not cash-scaled momentum.",
+  "source_refs": [
+    "turn77view0",
+    "turn79view0",
+    "turn79view1"
+  ]
+}

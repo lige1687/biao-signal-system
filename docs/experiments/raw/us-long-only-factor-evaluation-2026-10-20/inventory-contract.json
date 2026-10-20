@@ -1,0 +1,34 @@
+{
+  "mission": "Inventory already saved OSAP buy-side portfolios and US market baselines; no performance computation",
+  "task_scope": [
+    "Read source manifests and bounded filenames; inspect headers and date coverage only",
+    "Locate BM GP Mom12m sorted portfolio CSV and US market monthly return/RF if already saved"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/osap-history-revisions-2026-10-20",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/classic-four-factor-replication-20261019"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/saved-input-inventory.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Exact file paths SHA headers coverage or missing; no market statistics"
+  ],
+  "stop_conditions": [
+    "No recursive content scan of unrelated results",
+    "No downloads or edits of old source",
+    "Missing path report unknown"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

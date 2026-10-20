@@ -264,6 +264,24 @@
     "factor_v0_comparisons": {
       "path": "docs/experiments/raw/research-factor-library-v0-2026-09-09/run-01/decision-comparisons.csv",
       "sha256": "b2f7c5b2f530b935fecf2a76dfc5d135ca2def7ffeb4e10f99d9ca4242c18f69"
+    },
+    "french_longonly_bm_202608": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-sources-20261020/us-long-only-factor-sources-20261020-20261020T163856-9d6c0ca2cda1/result/6_Portfolios_2x3.csv",
+      "sha256": "6b8bb85c67f8ef58baa04c2ae72415ff53a23ec706eedbec71ff4f7a0a19af9c",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/6_Portfolios_2x3_CSV.zip",
+      "vintage": "CRSP 202608 CIZ"
+    },
+    "french_longonly_op_202608": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-sources-20261020/us-long-only-factor-sources-20261020-20261020T163856-9d6c0ca2cda1/result/6_Portfolios_ME_OP_2x3.csv",
+      "sha256": "7a58a3eece5e69eca8c23f06cb393e52b41c9fe17ee27a9cf9f5a572bd5d7c7c",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/6_Portfolios_ME_OP_2x3_CSV.zip",
+      "vintage": "CRSP 202608 CIZ"
+    },
+    "french_longonly_mom_202608": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-sources-20261020/us-long-only-factor-sources-20261020-20261020T163856-9d6c0ca2cda1/result/6_Portfolios_ME_Prior_12_2.csv",
+      "sha256": "0a53513f2e1eb803607619fb1efefa64fe87897fe826d91917041b489f1da898",
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/6_Portfolios_ME_Prior_12_2_CSV.zip",
+      "vintage": "CRSP 202608 CIZ"
     }
   },
   "objects": [
@@ -5034,6 +5052,381 @@
         "factor_v0_run_quality",
         "factor_v0_comparisons"
       ]
+    },
+    {
+      "id": "reference.french.longonly.bm",
+      "version": "1.0.0",
+      "name": "French 规模与账面价值公开只买入分组",
+      "type": "factor_return",
+      "uses": [
+        "comparison",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "prediction",
+        "same_stock_increment",
+        "costed_account"
+      ],
+      "scope": "author-defined US equities USD monthly realized returns",
+      "definition": {
+        "formula": "Source book equity divided by prior December market equity; June annual sort; not OSAP tangible book; L/N/H are source value-weighted monthly portfolio returns; B=(L+N+H)/3 within size",
+        "parameters": {
+          "sorting": "source 2x3",
+          "main_size": "big"
+        },
+        "endpoints": "complete calendar month",
+        "unit": "decimal_return",
+        "direction": "source high-score is H; realized comparison only",
+        "transforms": "source percent / 100 once; no RF subtraction or sign inversion"
+      },
+      "input": {
+        "fields": [
+          "month",
+          "SMALL LoBM",
+          "ME1 BM2",
+          "SMALL HiBM",
+          "BIG LoBM",
+          "ME2 BM2",
+          "BIG HiBM",
+          "Number of Firms in Portfolios"
+        ],
+        "price_basis": "official research portfolio returns; not ETF execution prices",
+        "currency": "USD",
+        "frequency": "monthly",
+        "calendar": "calendar months"
+      },
+      "universe": "French source-defined changing US stock groups; six portfolios by size and signal; not a local historical stock panel",
+      "time": {
+        "observation_time": "month end",
+        "available_at": "unknown historical release time, download not historical availability",
+        "decision_at": "retrospective analysis only",
+        "execution_at": "not applicable",
+        "timezone": "America/New_York",
+        "effective_from": "2026-10-20 local reference registration"
+      },
+      "dependencies": [],
+      "sources": [
+        "french_longonly_bm_202608"
+      ],
+      "validation": {
+        "method": "published rows/strict parser and independent unit checks",
+        "tolerance": {
+          "absolute": 1e-12,
+          "relative": 1e-12,
+          "integer": 0
+        },
+        "tests": [
+          "docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/test_analyze_long_only.py"
+        ],
+        "limitations": "no underlying-security replication"
+      },
+      "status": {
+        "definition_clarity": "source_bound",
+        "data_qualification": "published_realized_returns",
+        "implementation": "synthetic_verified_real_run_pending",
+        "effectiveness": "author_reference_only",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/development-receipt.json"
+        ]
+      },
+      "kind": "factor_return",
+      "external_id": "6_Portfolios_2x3",
+      "implementation": "docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/analyze_long_only.py",
+      "construction": "Source book equity divided by prior December market equity; June annual sort; not OSAP tangible book",
+      "frequency": "monthly",
+      "currency": "USD",
+      "unit": "decimal_return",
+      "inputs": [
+        "official Average Value Weighted Returns -- Monthly",
+        "Number of Firms in Portfolios"
+      ],
+      "historical_availability": "published retrospective CRSP 202608/CIZ reconstruction; PIT arrival and revisions not locally audited",
+      "missing_policy": "reject -99.99/-999, duplicate or missing selected month; no fill",
+      "preprocessing": "divide source percent once; no sign multiplier or RF subtraction",
+      "questions": [
+        "published high-score buy group versus source-matched all-groups and middle group"
+      ],
+      "variant": "external_reference",
+      "local_changes": [
+        "B is equal capital across three source groups within size; official source group weighting unchanged"
+      ],
+      "license_status": "official publicly accessible; full source redistribution not established",
+      "engineering_status": "reference_only",
+      "evidence_status": "not_locally_tested",
+      "output_fields": {
+        "L": "decimal monthly return",
+        "N": "decimal monthly return",
+        "H": "decimal monthly return",
+        "B": "arithmetic mean of three group returns",
+        "counts": "number of stocks per original group"
+      },
+      "source": {
+        "institution": "Kenneth R. French Data Library",
+        "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/6_Portfolios_2x3_CSV.zip",
+        "entry": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+        "authors": [
+          "Eugene Fama",
+          "Kenneth French"
+        ],
+        "read_scope": "official CSV header, current library CIZ notice, official OP and momentum construction pages",
+        "vintage": "202608 CRSP/CIZ, retrieved 2026-10-20"
+      },
+      "object_refs": []
+    },
+    {
+      "id": "reference.french.longonly.op",
+      "version": "1.0.0",
+      "name": "French 规模与经营盈利公开只买入分组",
+      "type": "factor_return",
+      "uses": [
+        "comparison",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "prediction",
+        "same_stock_increment",
+        "costed_account"
+      ],
+      "scope": "author-defined US equities USD monthly realized returns",
+      "definition": {
+        "formula": "Sales minus COGS SG&A interest divided by book equity; annual June; not GP/assets or cashflow/assets; L/N/H are source value-weighted monthly portfolio returns; B=(L+N+H)/3 within size",
+        "parameters": {
+          "sorting": "source 2x3",
+          "main_size": "big"
+        },
+        "endpoints": "complete calendar month",
+        "unit": "decimal_return",
+        "direction": "source high-score is H; realized comparison only",
+        "transforms": "source percent / 100 once; no RF subtraction or sign inversion"
+      },
+      "input": {
+        "fields": [
+          "month",
+          "SMALL LoOP",
+          "ME1 OP2",
+          "SMALL HiOP",
+          "BIG LoOP",
+          "ME2 OP2",
+          "BIG HiOP",
+          "Number of Firms in Portfolios"
+        ],
+        "price_basis": "official research portfolio returns; not ETF execution prices",
+        "currency": "USD",
+        "frequency": "monthly",
+        "calendar": "calendar months"
+      },
+      "universe": "French source-defined changing US stock groups; six portfolios by size and signal; not a local historical stock panel",
+      "time": {
+        "observation_time": "month end",
+        "available_at": "unknown historical release time, download not historical availability",
+        "decision_at": "retrospective analysis only",
+        "execution_at": "not applicable",
+        "timezone": "America/New_York",
+        "effective_from": "2026-10-20 local reference registration"
+      },
+      "dependencies": [],
+      "sources": [
+        "french_longonly_op_202608"
+      ],
+      "validation": {
+        "method": "published rows/strict parser and independent unit checks",
+        "tolerance": {
+          "absolute": 1e-12,
+          "relative": 1e-12,
+          "integer": 0
+        },
+        "tests": [
+          "docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/test_analyze_long_only.py"
+        ],
+        "limitations": "no underlying-security replication"
+      },
+      "status": {
+        "definition_clarity": "source_bound",
+        "data_qualification": "published_realized_returns",
+        "implementation": "synthetic_verified_real_run_pending",
+        "effectiveness": "author_reference_only",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/development-receipt.json"
+        ]
+      },
+      "kind": "factor_return",
+      "external_id": "6_Portfolios_ME_OP_2x3",
+      "implementation": "docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/analyze_long_only.py",
+      "construction": "Sales minus COGS SG&A interest divided by book equity; annual June; not GP/assets or cashflow/assets",
+      "frequency": "monthly",
+      "currency": "USD",
+      "unit": "decimal_return",
+      "inputs": [
+        "official Average Value Weighted Returns -- Monthly",
+        "Number of Firms in Portfolios"
+      ],
+      "historical_availability": "published retrospective CRSP 202608/CIZ reconstruction; PIT arrival and revisions not locally audited",
+      "missing_policy": "reject -99.99/-999, duplicate or missing selected month; no fill",
+      "preprocessing": "divide source percent once; no sign multiplier or RF subtraction",
+      "questions": [
+        "published high-score buy group versus source-matched all-groups and middle group"
+      ],
+      "variant": "external_reference",
+      "local_changes": [
+        "B is equal capital across three source groups within size; official source group weighting unchanged"
+      ],
+      "license_status": "official publicly accessible; full source redistribution not established",
+      "engineering_status": "reference_only",
+      "evidence_status": "not_locally_tested",
+      "output_fields": {
+        "L": "decimal monthly return",
+        "N": "decimal monthly return",
+        "H": "decimal monthly return",
+        "B": "arithmetic mean of three group returns",
+        "counts": "number of stocks per original group"
+      },
+      "source": {
+        "institution": "Kenneth R. French Data Library",
+        "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/6_Portfolios_ME_OP_2x3_CSV.zip",
+        "entry": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+        "authors": [
+          "Eugene Fama",
+          "Kenneth French"
+        ],
+        "read_scope": "official CSV header, current library CIZ notice, official OP and momentum construction pages",
+        "vintage": "202608 CRSP/CIZ, retrieved 2026-10-20"
+      },
+      "object_refs": []
+    },
+    {
+      "id": "reference.french.longonly.mom",
+      "version": "1.0.0",
+      "name": "French 规模与过去涨幅公开只买入分组",
+      "type": "factor_return",
+      "uses": [
+        "comparison",
+        "diagnostic"
+      ],
+      "not_for": [
+        "production_trade",
+        "prediction",
+        "same_stock_increment",
+        "costed_account"
+      ],
+      "scope": "author-defined US equities USD monthly realized returns",
+      "definition": {
+        "formula": "Prior months -12 through -2; monthly sort; not original OSAP holding rule; L/N/H are source value-weighted monthly portfolio returns; B=(L+N+H)/3 within size",
+        "parameters": {
+          "sorting": "source 2x3",
+          "main_size": "big"
+        },
+        "endpoints": "complete calendar month",
+        "unit": "decimal_return",
+        "direction": "source high-score is H; realized comparison only",
+        "transforms": "source percent / 100 once; no RF subtraction or sign inversion"
+      },
+      "input": {
+        "fields": [
+          "month",
+          "SMALL LoPRIOR",
+          "ME1 PRIOR2",
+          "SMALL HiPRIOR",
+          "BIG LoPRIOR",
+          "ME2 PRIOR2",
+          "BIG HiPRIOR",
+          "Number of Firms in Portfolios"
+        ],
+        "price_basis": "official research portfolio returns; not ETF execution prices",
+        "currency": "USD",
+        "frequency": "monthly",
+        "calendar": "calendar months"
+      },
+      "universe": "French source-defined changing US stock groups; six portfolios by size and signal; not a local historical stock panel",
+      "time": {
+        "observation_time": "month end",
+        "available_at": "unknown historical release time, download not historical availability",
+        "decision_at": "retrospective analysis only",
+        "execution_at": "not applicable",
+        "timezone": "America/New_York",
+        "effective_from": "2026-10-20 local reference registration"
+      },
+      "dependencies": [],
+      "sources": [
+        "french_longonly_mom_202608"
+      ],
+      "validation": {
+        "method": "published rows/strict parser and independent unit checks",
+        "tolerance": {
+          "absolute": 1e-12,
+          "relative": 1e-12,
+          "integer": 0
+        },
+        "tests": [
+          "docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/test_analyze_long_only.py"
+        ],
+        "limitations": "no underlying-security replication"
+      },
+      "status": {
+        "definition_clarity": "source_bound",
+        "data_qualification": "published_realized_returns",
+        "implementation": "synthetic_verified_real_run_pending",
+        "effectiveness": "author_reference_only",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/development-receipt.json"
+        ]
+      },
+      "kind": "factor_return",
+      "external_id": "6_Portfolios_ME_Prior_12_2",
+      "implementation": "docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/analyze_long_only.py",
+      "construction": "Prior months -12 through -2; monthly sort; not original OSAP holding rule",
+      "frequency": "monthly",
+      "currency": "USD",
+      "unit": "decimal_return",
+      "inputs": [
+        "official Average Value Weighted Returns -- Monthly",
+        "Number of Firms in Portfolios"
+      ],
+      "historical_availability": "published retrospective CRSP 202608/CIZ reconstruction; PIT arrival and revisions not locally audited",
+      "missing_policy": "reject -99.99/-999, duplicate or missing selected month; no fill",
+      "preprocessing": "divide source percent once; no sign multiplier or RF subtraction",
+      "questions": [
+        "published high-score buy group versus source-matched all-groups and middle group"
+      ],
+      "variant": "external_reference",
+      "local_changes": [
+        "B is equal capital across three source groups within size; official source group weighting unchanged"
+      ],
+      "license_status": "official publicly accessible; full source redistribution not established",
+      "engineering_status": "reference_only",
+      "evidence_status": "not_locally_tested",
+      "output_fields": {
+        "L": "decimal monthly return",
+        "N": "decimal monthly return",
+        "H": "decimal monthly return",
+        "B": "arithmetic mean of three group returns",
+        "counts": "number of stocks per original group"
+      },
+      "source": {
+        "institution": "Kenneth R. French Data Library",
+        "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/6_Portfolios_ME_Prior_12_2_CSV.zip",
+        "entry": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html",
+        "authors": [
+          "Eugene Fama",
+          "Kenneth French"
+        ],
+        "read_scope": "official CSV header, current library CIZ notice, official OP and momentum construction pages",
+        "vintage": "202608 CRSP/CIZ, retrieved 2026-10-20"
+      },
+      "object_refs": []
     }
   ],
   "models": [],

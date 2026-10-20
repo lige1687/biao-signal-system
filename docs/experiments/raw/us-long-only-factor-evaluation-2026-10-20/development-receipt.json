@@ -1,0 +1,59 @@
+{
+  "schema": "us-long-only-development-receipt/1",
+  "status": "implementation_and_synthetic_validation_only",
+  "design_sha256": "f31d13c12267bedb5c506d12cb1cf4c62ab5ce7905ab39050cf0cb68053c7d48",
+  "implementation_contract_sha256": "569d719c4c80d3b3250dfe81abce56a0b9ca81e7c13b74e5491d65ebf05bc914",
+  "runner_sha256": "95d8e9793a347ffa729ccecd79ebfff12363c1685fedf8912f8d23523d3ae9a6",
+  "test_sha256": "b2d3b79e8d0d7bd4ffc48d1453143b68977894b3d1d4c5992f9b5b5a4120d9ab",
+  "synthetic_tests": {
+    "command": "/opt/homebrew/opt/python@3.11/bin/python3.11 -B -m unittest -v test_analyze_long_only.py",
+    "passed": 7,
+    "failed": 0,
+    "coverage": [
+      "monthly value-weighted section isolation from equal-weighted/annual sections",
+      "missing sentinel, duplicate month, count gap rejection",
+      "source SHA drift rejection",
+      "source percent converted to decimal once and paired B identities",
+      "initial wealth one included in first-month drawdown",
+      "B-sign conditions, zero count and deterministic top-month tie",
+      "joint source block indices, empty-conditioned draws and period stability"
+    ]
+  },
+  "cli": {
+    "schema": "us-long-only-run/1",
+    "args": [
+      "--design",
+      "--contract"
+    ],
+    "required_bindings": [
+      "design",
+      "runner",
+      "definitions_snapshot",
+      "source_qualification",
+      "method_review",
+      "storage_plan",
+      "storage_module"
+    ],
+    "sources": [
+      "BM",
+      "OP",
+      "MOM"
+    ],
+    "approved_required": true,
+    "output": "exact design.output on saved external device, create-only",
+    "files": [
+      "monthly.csv",
+      "result.json"
+    ]
+  },
+  "not_run": [
+    "real French CSV performance",
+    "network request",
+    "actual external output"
+  ],
+  "limits": [
+    "A value-weighted French 2x3 reference is not OSAP or a local same-stock strategy.",
+    "B is arithmetic one-third capital in three published long-only groups; paired contrasts are not compounded short portfolios.",
+    "Intervals are pointwise on public historical months; no untouched out-of-sample evidence."
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "schema": "us-long-only-saved-input-inventory/1",
+  "scope": "Read-only inventory of saved US BM/GP/Mom12m portfolio series and market/RF baselines; no return calculations.",
+  "osap_source": {
+    "vintage": "Open Source Asset Pricing October 2025 release, reused 2026-10-20; US monthly published long-short series.",
+    "source_manifest": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/osap-history-revisions-2026-10-20/osap-2025-manifest.json",
+    "manifest_sha256": "26dc99a2df257b97c7eee2ea461fac8543a90243d015ba37c74b306b8e6fe95a",
+    "catalog": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/classic-four-factor-replication-20261019/classic-four-factor-replication-20261019-20261019T235355-bf1f8fc6c7d8/result/osap2025_signaldoc.csv",
+      "sha256": "590a308e40483fa87c0cbb95f73c010d09a61e22a3e2059627d2b3de9b77e0d9",
+      "header": [
+        "Acronym",
+        "Cat.Signal",
+        "Predictability in OP",
+        "Signal Rep Quality",
+        "Authors",
+        "Year",
+        "LongDescription",
+        "Journal",
+        "Cat.Form",
+        "Cat.Data",
+        "Cat.Economic",
+        "SampleStartYear",
+        "SampleEndYear",
+        "Acronym2",
+        "Evidence Summary",
+        "Key Table in OP",
+        "Test in OP",
+        "Sign",
+        "Return",
+        "T-Stat"
+      ],
+      "columns": 28,
+      "rows": 331
+    },
+    "monthly_long_short_returns": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/classic-four-factor-replication-20261019/classic-four-factor-replication-20261019-20261019T235355-bf1f8fc6c7d8/result/osap2025_lsreturns.csv",
+      "sha256": "79aa0896d79924e1efa83f9afe51a3b4ce94137adfd2c5c3fd2d5d350532ee18",
+      "header": "date plus 212 predictor return-series columns, including BM, GP, Mom12m; 213 columns total.",
+      "date_coverage": "1926-01-30 to 2024-12-31; 1188 rows; source return unit percent, published long-short direction.",
+      "qualifies_as_long_only_sorted_group_returns": false
+    }
+  },
+  "saved_factor_comparison": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-factor-purpose-evaluation-20261020/us-factor-purpose-evaluation-20261020-20261020T154625-9494f8fe1748/result/monthly.csv",
+    "sha256": "6cfbb102d388bc7f10cfed0c86c2dbfbb0f6b3bedee2e0773a95db117e28e261",
+    "header": [
+      "period",
+      "month",
+      "date",
+      "M",
+      "halfM",
+      "GP",
+      "BM",
+      "mixGP",
+      "mixBM"
+    ],
+    "rows": 738,
+    "coverage": "Earlier 1963-07 to 2014-12 (618 rows), recent 2015-01 to 2024-12 (120 rows); CSV order is recent then earlier.",
+    "meaning": "Already saved aggregate OSAP long-short series and 50/50 combinations; not sorted long-only quintile/decile returns, not US market or RF benchmark.",
+    "receipt": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/execution-receipt.json",
+    "receipt_sha256": "not independently fingerprinted in this inventory"
+  },
+  "baseline_inventory": {
+    "us_market_monthly_return_series_found": false,
+    "us_risk_free_monthly_series_found": false,
+    "searched_saved_material": "Only contract-bounded OSAP revision raw, US-factor-purpose raw, and classic-four-factor result files/manifests.",
+    "notes": "OSAP lsreturns has factor long-short returns only; no Mkt-RF or RF columns. No saved market return/RF baseline was present in the bounded source manifests/file inventory."
+  },
+  "limitations": [
+    "No raw stock-level signal ranks or sorted long-only portfolio files were found in the bounded saved material.",
+    "No source files or downloads were created, and no return statistics were computed; only this requested inventory file was written."
+  ]
+}

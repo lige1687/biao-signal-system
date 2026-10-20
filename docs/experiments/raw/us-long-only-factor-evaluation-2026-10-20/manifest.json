@@ -1,0 +1,110 @@
+{
+  "schema": "us-long-only-artifact-manifest/1",
+  "created_at": "2026-10-20T17:18:24.703525+08:00",
+  "scope": "stable research evidence; live state/delivery/progress are separate",
+  "files": {
+    "design.json": "f31d13c12267bedb5c506d12cb1cf4c62ab5ce7905ab39050cf0cb68053c7d48",
+    "run-contract.json": "e69801c414cafb19c1ad07f4a8a1c22485fdedc94d59f4565431a99dcbe4bec5",
+    "analyze_long_only.py": "95d8e9793a347ffa729ccecd79ebfff12363c1685fedf8912f8d23523d3ae9a6",
+    "test_analyze_long_only.py": "b2d3b79e8d0d7bd4ffc48d1453143b68977894b3d1d4c5992f9b5b5a4120d9ab",
+    "source-qualification.json": "cefa67b22e20efe0d4bc063f21eaa028e2e5f294b5100f6eba096cf70cecf96b",
+    "source-requests.json": "ebbc927790b31d400319341ffd03130a28b92443782e30785ed89ba03aa3fa2d",
+    "method-review.json": "cedc1d4c8ef9950b7811eb49796ef5e2d422019ed7a3cb957944b21ef3484e05",
+    "scientific-review.json": "7a0d0d31d49b82051e3c2de9239100938e2c156a7a8b947cce12d0abc0be027e",
+    "independent-check.json": "3eedd349f409e67f3b5675b38f115b3991283b6c2c11c418daf11b2fb70bdd3c",
+    "execution-receipt.json": "b23edc3a2e3b1821c85b31fb9d87cf13f5faa8f88c0b4731dd66fbdc5a4d9065",
+    "definitions-binding.json": "a6fa9a6507870e070d78dfae7d479fad0068556dc43d96671f84ffead32a4d56",
+    "new-reference-cards.json": "5ab6883e5517d195b4b02f7c5eab248877315605382de184eb33f73ffdcf14c8",
+    "next-step-readiness.json": "ef8b34a8adf68414345695166a6c64ef3b056192c519a7316e85e34d385a4a89",
+    "controller-conclusion.json": "2a47860f80daa8f3bb40be087173846f5b1ea79825938cae466452fbfd4b8dfb"
+  },
+  "report": {
+    "path": "docs/experiments/us-long-only-factor-evaluation-2026-10-20.md",
+    "sha256": "57bb8b14535a820e6b1d5a7ac99249f2e1fc4e8c86664f46c17ee0ab29e07263"
+  },
+  "external_result": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-evaluation-20261020/us-long-only-factor-evaluation-20261020-20261020T163856-30a711fdbef6/result/result.json",
+    "sha256": "ccd7784e8212bd37d3d1bffee34871fecd5e1e09ab750cd90815c163bb7c044f"
+  },
+  "external_monthly": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-evaluation-20261020/us-long-only-factor-evaluation-20261020-20261020T163856-30a711fdbef6/result/monthly.csv",
+    "sha256": "7479306e004dd65431cab507eb660f3ef65566ce3e0cb4a7ba93d9df27913ba3"
+  },
+  "sources": [
+    {
+      "id": "BM",
+      "reference": "reference.french.longonly.bm@1.0.0",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-sources-20261020/us-long-only-factor-sources-20261020-20261020T163856-9d6c0ca2cda1/result/6_Portfolios_2x3.csv",
+      "sha256": "6b8bb85c67f8ef58baa04c2ae72415ff53a23ec706eedbec71ff4f7a0a19af9c",
+      "headers": [
+        "SMALL LoBM",
+        "ME1 BM2",
+        "SMALL HiBM",
+        "BIG LoBM",
+        "ME2 BM2",
+        "BIG HiBM"
+      ],
+      "small_indices": [
+        0,
+        1,
+        2
+      ],
+      "big_indices": [
+        3,
+        4,
+        5
+      ],
+      "direction": "higher score group is H; no sign multiplier"
+    },
+    {
+      "id": "OP",
+      "reference": "reference.french.longonly.op@1.0.0",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-sources-20261020/us-long-only-factor-sources-20261020-20261020T163856-9d6c0ca2cda1/result/6_Portfolios_ME_OP_2x3.csv",
+      "sha256": "7a58a3eece5e69eca8c23f06cb393e52b41c9fe17ee27a9cf9f5a572bd5d7c7c",
+      "headers": [
+        "SMALL LoOP",
+        "ME1 OP2",
+        "SMALL HiOP",
+        "BIG LoOP",
+        "ME2 OP2",
+        "BIG HiOP"
+      ],
+      "small_indices": [
+        0,
+        1,
+        2
+      ],
+      "big_indices": [
+        3,
+        4,
+        5
+      ],
+      "direction": "higher score group is H; no sign multiplier"
+    },
+    {
+      "id": "MOM",
+      "reference": "reference.french.longonly.mom@1.0.0",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-sources-20261020/us-long-only-factor-sources-20261020-20261020T163856-9d6c0ca2cda1/result/6_Portfolios_ME_Prior_12_2.csv",
+      "sha256": "0a53513f2e1eb803607619fb1efefa64fe87897fe826d91917041b489f1da898",
+      "headers": [
+        "SMALL LoPRIOR",
+        "ME1 PRIOR2",
+        "SMALL HiPRIOR",
+        "BIG LoPRIOR",
+        "ME2 PRIOR2",
+        "BIG HiPRIOR"
+      ],
+      "small_indices": [
+        0,
+        1,
+        2
+      ],
+      "big_indices": [
+        3,
+        4,
+        5
+      ],
+      "direction": "higher score group is H; no sign multiplier"
+    }
+  ]
+}

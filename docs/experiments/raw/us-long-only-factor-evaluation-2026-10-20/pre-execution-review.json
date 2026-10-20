@@ -1,0 +1,35 @@
+{
+  "reviewed_at": "2026-10-20T17:01:57.517812+08:00",
+  "runner_sha256": "95d8e9793a347ffa729ccecd79ebfff12363c1685fedf8912f8d23523d3ae9a6",
+  "tests_sha256": "b2d3b79e8d0d7bd4ffc48d1453143b68977894b3d1d4c5992f9b5b5a4120d9ab",
+  "synthetic_tests": {
+    "count": 7,
+    "exit_code": 0
+  },
+  "issues_found": [
+    {
+      "issue": "draft cards copied unrelated Mkt-RF fields from template",
+      "resolution": "fixed nested definition/input/source/test/time fields before contract freezing; obsolete snapshot preserved",
+      "superseded_snapshot": {
+        "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-sources-20261020/us-long-only-factor-sources-20261020-20261020T163856-9d6c0ca2cda1/result/definitions-snapshot.json",
+        "sha256": "f7a449025b7425598d92509d2debc1bead2457f78560095e6ef9a8d753dc61b9"
+      },
+      "corrected_registry_sha256": "3bd2c7ee7b012bc34f8db580fa4f1bb79ddfe271b66e21e11de4afd6414502f2"
+    },
+    {
+      "issue": "draft snapshot append preflight used source plan which rejects existing output directory",
+      "resolution": "no external write occurred; existing output existence checked; compute new-route validation and same-device identity checked before appending create-only snapshot",
+      "scope": "controller preparation, no core run attempted"
+    }
+  ],
+  "reviewed": [
+    "exact monthly value-weighted section",
+    "single unit conversion",
+    "joint circular draws and missing conditional handling",
+    "full calendar and source hash checks",
+    "H-N middle opponent",
+    "initial wealth drawdown",
+    "create-only external result route"
+  ],
+  "conclusion": "ready_for_one_frozen_execution"
+}

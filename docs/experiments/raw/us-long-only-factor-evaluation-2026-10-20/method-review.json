@@ -1,0 +1,107 @@
+{
+  "schema": "us-long-only-method-review/1",
+  "created_at": "2026-10-20T08:46:00.545596+00:00",
+  "verdict": "conditional_accept_french_source_amendment_before_effects",
+  "plain_conclusion": "French官方规模×价值、经营盈利及动量分组可以回答一个独立且有用的买入端问题：在同一规模层内，高分组合相对三个分组平均分配是否有收益或风险帮助。它不是OSAP缺失文件的等价替代；来源与定义变更须在效果前冻结。",
+  "inputs": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/method-contract.json",
+      "sha256": "6a52eb9d0d387bed58ce0377e3b7da563ded16258b7adcc2cc550b382e1aa83b"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/scope.json",
+      "sha256": "02e5fa16eefc92611b945d850cda1619fb741bead2bd03b66ca3321dbbfec444"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/saved-input-inventory.json",
+      "sha256": "497dc8eb850b35a525bdc0a7457f94eaf18b93782af3b66c12bb17b0b8067458"
+    }
+  ],
+  "review_boundary": {
+    "network_calls": 0,
+    "market_statistics_run": 0,
+    "source_returns_read": false,
+    "new_agents": 0,
+    "writes": [
+      "method-review.json"
+    ],
+    "source_status": "group portfolios not yet qualified; no unconditional execution approval"
+  },
+  "necessary_revisions": [
+    {
+      "id": "R1",
+      "issue": "scope.json asks beyond momentum, while method-contract compares within each original signal sort. Different source universes and weights do not identify increment beyond momentum.",
+      "action": "Freeze the narrower within-sort question in scope and reporting: H versus equal-capital all-groups B for each BM/GP/Mom12m. Mom is a parallel reference, not a common-universe controlled opponent. Do not rank the three H-B values as independent factor superiority.",
+      "acceptance": "Claims explicitly limited to published original-sort buy portfolios; same-stock increment deferred without adding a new experiment."
+    },
+    {
+      "id": "R2",
+      "issue": "Highest/lowest integer portfolios need not be the published LS buy/sell legs.",
+      "action": "For each signal bind vintage, raw ranking direction, integer-group universe, portfolio weighting, formation/rebalance timing and holding-period overlapping-cohort aggregation. Resolve exact H and L group sets and weights from the official construction. If tails contain multiple groups, do not assume equal weighting or a single extreme group. Published LS sign is already oriented; never multiply it by Sign again.",
+      "acceptance": "Before headline effects, freeze the mapping and an output-rounding tolerance justified by source precision. If source LS is exactly these two leg returns, reconcile H-L with LS on every common month. A discrepancy blocks the claimed LS decomposition until construction/version differences are resolved; do not choose tails by best fit. If exact LS replication is structurally unavailable, any separately defined extreme-group comparison must be explicitly refrozen before effects and cannot attribute the earlier published LS outcome."
+    },
+    {
+      "id": "R3",
+      "issue": "B is an artificial group allocation, contains H/L, and may overweight stocks in small groups.",
+      "action": "Define B_t as the arithmetic mean of the K fixed original integer-group return series, equivalent to monthly restoration of equal group capital at the published gross-return level. It is neither the original universe market return nor necessarily equal-stock allocation. Preserve original within-group weights. Define H-B, B-L and H-L on identical dates and verify the arithmetic identity; do not present the two components as independent evidence or report percentage attribution when the denominator is small/oppositely signed.",
+      "acceptance": "Report actual K and available source constituent-count coverage. Unknown holdings overlap, concentration and turnover stay unknown. B-L positive only means L lagged B, not that L lost money. No cash/execution interpretation without additional evidence."
+    },
+    {
+      "id": "R4",
+      "issue": "Uncertainty targets and outcome-defined conditions need exact pre-effect definitions.",
+      "action": "Primary recent interval targets: mean(H-B), SD(H)-SD(B), E[H-B|B<0], and mean(B-L) for the stated decomposition question. H-L mean/identity is reported alongside. Fix sample SD convention. Resample the complete synchronized monthly group vectors with shared circular 12-month indices for 5000 draws, seed 20261020; recompute B, dispersion and conditional means within each draw. Carry original B-negative/positive labels with sampled dates, count repeated dates, leave an empty conditional draw missing. Do not first subset to negative months then draw blocks.",
+      "acceptance": "All recent statistics use exactly 120 fixed common months per qualified signal, preserve zero-B months separately. Report H-B when B>0 and in the largest ceil(0.1*N) B months with date tie-break and positive-count disclosure; no need to add intervals for every descriptive metric. Include H/B/L levels, negative-month share and worst month, not just differences. Different signals have different B-defined conditions and these are not common US market regimes."
+    },
+    {
+      "id": "R5",
+      "issue": "Missing source groups or silent shortening could turn source availability into a selected favorable sample.",
+      "action": "Validate fixed original K groups, unique month/group records, units, special missing codes, raw versus excess return convention and complete planned dates before effects. No zero filling, dropping missing groups and redistributing, or tail substitution. Existing 2015-2024 recent and 1963-2014 background periods remain fixed; recent 2015-2019 and 2020-2024 and yearly contributions are descriptive, not independent confirmation.",
+      "acceptance": "If any planned signal or period lacks qualification, mark the affected comparison blocked and give exact missing support. Any partial deliverable requires an explicit source-driven amendment before outcomes, retains all three planned candidate statuses, and never claims the missing comparison was evaluated."
+    }
+  ],
+  "fairness_and_optional_context": {
+    "necessary_opponents": "Within each published sort H, B and L suffice for the fixed selection/decomposition question. No additional candidate, parameter scan or optimized exposure scaling is required.",
+    "market_and_rf": "Useful context if properly bound within existing source authorization, but not necessary for H-B/B-L. If obtained, distinguish total market return from Mkt-RF; do not subtract raw returns from an excess-return comparator. Missing market/RF prevents market-beating or financing claims, not this within-sort comparison.",
+    "risk_claim_limit": "A lower H volatility or better B-negative-month return is a historical relative-risk characteristic. It does not establish risk-adjusted alpha, dominance over cash scaling, or a new timing rule. Do not automatically add half-B unless the question is explicitly changed to an exposure-control policy.",
+    "costs": "No invented fee or turnover deduction. Positive gross buy-side differences justify a limited further feasibility question, not net implementation approval."
+  },
+  "decision_and_stop": [
+    "If H-B has no supported benefit while B-L is positive, report that this comparison locates more of the spread in avoiding the low group; it does not prove low stocks are shortable or value/profitability is universally ineffective.",
+    "If H-B shows return or risk help, retain only the corresponding use, jointly with positive-B-month opportunity cost, standalone levels and period reversals; no post-hoc pass threshold or selection-adjusted significance claim.",
+    "One fixed run is sufficient after source and definition acceptance. Do not change tails, dates, weighting or candidate list to obtain favorable results. Do not replay other owners LS/AQR/accrual studies.",
+    "Unknown portfolios or construction stop the affected source qualification. All-public already-viewed history remains exploratory, including the recent ten years; long-only source portfolios are not ETF or LEI execution evidence."
+  ],
+  "not_required": [
+    "new platform",
+    "stock-level acquisition for this published-series question",
+    "market-alpha regression",
+    "new sources beyond frozen request budget",
+    "new low-beta candidate",
+    "additional grids or broad candidate scans"
+  ],
+  "controller_action": "Freeze the explicitly changed French scope, definitions, primary big-size comparison and qualified source bindings before one run. This review accepts the amended purpose and bounds, not as-yet-unseen file contents.",
+  "updated_at": "2026-10-20T08:47:04.937351+00:00",
+  "source_change_adjudication": {
+    "authority": "Controller message during this review: OSAP archive and standalone BM files returned quota text and were rejected; stop that source route. Use user-named French official 2x3 portfolios as an explicitly different source-defined question, no new effects viewed.",
+    "review_evidence_limit": "HTTP bodies and French source files were not independently read in this method review; this records design acceptance, not source receipt acceptance.",
+    "supersedes": "R2 OSAP-LS mapping applies only if reviving OSAP; for the newly proposed French comparison use the mapping below. R1/R3/R4/R5 remain applicable. Existing input bindings identify the earlier proposal; freeze and bind the amended scope/design/source files before execution.",
+    "candidate_names": [
+      "French book-to-market",
+      "French operating profitability",
+      "French momentum"
+    ],
+    "definition_boundaries": [
+      "French operating profitability is not GP/assets; bind the exact official revenue/expense/book-equity construction and availability rules. Do not call this a replication of gross profitability.",
+      "French book-to-market is not automatically OSAP tangible book equity/market equity.",
+      "Exact official momentum lookback, lag, breakpoints, eligible securities and reconstitution timing must be recorded; do not inherit OSAP Mom12m holding-period definitions."
+    ],
+    "fixed_source_choice": "Choose the official value-weighted monthly 2x3 return tables before observing effects, if available. Do not compare value/equal weighting versions to choose favorable results. Confirm whether each table is total or excess returns, exclude annual summary sections and source missing sentinels, and convert documented percent units once.",
+    "primary_and_background": "Primary: big-size H/B/L over 2015-01 through 2024-12,120 months. Earlier big-size 1963-07 through 2014-12,618 months is descriptive background. Small-size analogues are separately labelled predeclared background, not an alternative winner if big-size results disappoint.",
+    "group_formula": "Within each fixed size bucket and each signal, B=(low+neutral+high)/3 using the three published value-weighted portfolio returns and fixed equal group capital; H and L use source-verified favorable and unfavorable score categories. This does not equal the capitalization-weighted return of all stocks in that size bucket.",
+    "published_factor_mapping": "Big-size H-L is a within-big spread. Do not force it to match the published HML/RMW/Mom factor. When the exact official factor formula is one half small H-L plus one half big H-L, only that specified combination is the matching object. Verify official formula, direction, version and same-month source before using it for a reconciliation. No published-factor reconciliation is necessary if the new claim remains only within-size H-B/B-L.",
+    "fairness_limit": "Holding size bucket fixed reduces a size-mix difference, but each factor may have a different eligible stock set due to accounting fields and breakpoints. Cross-factor H-B comparisons remain parallel published-sort descriptions, not same-stock increment beyond momentum.",
+    "practicality_limit": "Big-size portfolios are a reasonable predeclared implementation-oriented reference, not evidence of personal tradability or ETF equivalence. Small-size is not synonymous with microcaps. Holdings, turnover, financing and transaction costs remain unmeasured.",
+    "uncertainty_scope": "Retain the planned primary recent big-size intervals and all three candidates. Small-size and earlier history remain descriptive; no additional search or inferential family is required.",
+    "budget_stop": "Record both failed OSAP requests in actual cumulative source use. A changed source name does not reset budget. If French files fail qualification, stop the affected comparison or explicitly amend source-driven partial reporting before effects; no third source family or broader candidate scan is implied."
+  }
+}

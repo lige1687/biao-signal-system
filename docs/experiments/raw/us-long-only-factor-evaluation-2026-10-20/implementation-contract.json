@@ -1,0 +1,40 @@
+{
+  "mission": "Implement fixed French 2x3 long-only comparison and meaningful synthetic boundary tests; no real market run",
+  "task_scope": [
+    "Implement exact design including CSV section isolation, paired statistics, calendar and source qualification, outputs",
+    "CLI --design --contract, frozen contract approved and bindings SHA enforced; storage plan recheck and mounted check via current main output_storage; create-only output"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/design.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/source-qualification.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/method-review.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/analyze_reference.py"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/analyze_long_only.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/test_analyze_long_only.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/development-receipt.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "expected_outputs": [
+    "analyze_long_only.py",
+    "test_analyze_long_only.py",
+    "fresh synthetic test summary and code hashes"
+  ],
+  "stop_conditions": [
+    "Do not run real performance, fit, alter design or old results",
+    "Use numpy installed via /opt/homebrew/opt/python@3.11/bin/python3.11; no installs",
+    "Do not change source or create external output before actual run"
+  ]
+}

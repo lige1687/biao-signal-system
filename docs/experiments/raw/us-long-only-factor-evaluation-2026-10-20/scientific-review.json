@@ -1,0 +1,1257 @@
+{
+  "schema": "us-long-only-scientific-review/1",
+  "created_at": "2026-10-20T09:07:58.684741+00:00",
+  "verdict": "accept_bounded_published_series_question_complete_with_limited_OP_candidate_and_no_adoption",
+  "plain_conclusion": "2015—2024年美国公开大规模股票分组中，高经营盈利相对三个组平均分配有收益和少亏线索，但尚未确认超过中间组，最大账面跌幅与后来20个月均有反例；高账面价值比和高动量未显示更高的主期平均收益。可以结束本轮公开组合比较，不能据此采用策略或宣称超出同池动量。",
+  "contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/post-effect-review-contract.json",
+    "sha256": "14060baedb987198001749a5724a0f1071c829587dbbeb8136a1f5e8220071c4"
+  },
+  "bindings": {
+    "result": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-evaluation-20261020/us-long-only-factor-evaluation-20261020-20261020T163856-30a711fdbef6/result/result.json",
+      "sha256": "ccd7784e8212bd37d3d1bffee34871fecd5e1e09ab750cd90815c163bb7c044f"
+    },
+    "design": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/design.json",
+      "sha256": "f31d13c12267bedb5c506d12cb1cf4c62ab5ce7905ab39050cf0cb68053c7d48"
+    },
+    "contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/run-contract.json",
+      "sha256": "e69801c414cafb19c1ad07f4a8a1c22485fdedc94d59f4565431a99dcbe4bec5"
+    },
+    "numeric_check": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/independent-check.json",
+      "sha256": "3eedd349f409e67f3b5675b38f115b3991283b6c2c11c418daf11b2fb70bdd3c"
+    },
+    "source_note": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/method-source-note.json",
+      "sha256": "c0829615a15aa2db58069539b7a066827680196e17f4d0848226f11d29e7b6ca"
+    },
+    "definition_cards": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/new-reference-cards.json",
+      "sha256": "5ab6883e5517d195b4b02f7c5eab248877315605382de184eb33f73ffdcf14c8"
+    },
+    "method_review": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/method-review.json",
+      "sha256": "cedc1d4c8ef9950b7811eb49796ef5e2d422019ed7a3cb957944b21ef3484e05"
+    }
+  },
+  "binding_hash_checks": {
+    "result": true,
+    "design": true,
+    "contract": true,
+    "numeric_check": true,
+    "source_note": true,
+    "definition_cards": true,
+    "method_review": true
+  },
+  "review_execution": {
+    "network_calls": 0,
+    "new_statistics_runs": 0,
+    "new_agents": 0,
+    "only_unit_conversion_of_saved_statistics": true,
+    "source_csv_recalculation_performed_by_this_reviewer": false,
+    "independent_check_reused": "root checker independently reconstructed 53178 numeric entries and 4548 rows; maximum difference5.551115123125783e-17. This reviewer checked bound result interpretation, not a second statistical execution."
+  },
+  "definition_acceptance": {
+    "source": "French August2026 CRSP/CIZ reconstructed published monthly value-weighted portfolios, not OSAP October2025.",
+    "direction": "Source L/N/H are low/middle/high scores; no new sign multiplication; decimal output to displayed percent or percentage points multiplies100 once.",
+    "OP": "Operating profitability: sales less COGS, SG&A and interest relative to book equity; not gross profitability/assets or cashflow/assets.",
+    "BM": "French book-to-market with source eligibility and June construction, not OSAP tangible book equity.",
+    "MOM": "Source prior months12 through2 with monthly sorting, not inherited OSAP holding-period implementation.",
+    "B": "Equal capital in three source groups within the same size bucket; not equal capital in individual stocks, market cap-weighted universe or cash benchmark.",
+    "reconciliation": "H-L=(H-B)+(B-L) is an arithmetic decomposition of the same monthly returns, not independent proofs. N provides a simpler separate middle-category allocation comparator.",
+    "conditions": "B-negative/positive and strongest B months are outcome-defined; each signal has its own B and eligible stocks, so these dates are not common market regimes or anticipatable timing states.",
+    "paths": "Compounded growth and drawdown are month-end gross published-series paths including initial wealth, not intra-month risk, executable account returns or short-spread wealth."
+  },
+  "evidence": {
+    "BM": {
+      "primary_support": {
+        "months": 120,
+        "first_month": "2015-01",
+        "last_month": "2024-12",
+        "B_negative_months": 43,
+        "B_positive_months": 77,
+        "B_zero_months": 0,
+        "top_B_month_count": 12,
+        "top_B_positive_months": 12
+      },
+      "primary_performance_percent": {
+        "L": {
+          "mean": 1.3620166666666667,
+          "sample_sd": 4.6624498463760435,
+          "worst_month": -10.5996,
+          "negative_month_fraction": 34.166666666666664,
+          "B_negative_month_mean": -3.0214860465116278,
+          "B_positive_month_mean": 3.8099467532467535,
+          "top_B_decile_month_mean": 7.8115749999999995,
+          "monthly_compounded_path_growth": 346.4314061609953,
+          "monthly_compounded_path_drawdown": -27.864451965364378
+        },
+        "N": {
+          "mean": 0.7749125,
+          "sample_sd": 4.6364880194367215,
+          "worst_month": -17.504,
+          "negative_month_fraction": 36.666666666666664,
+          "B_negative_month_mean": -3.7559627906976747,
+          "B_positive_month_mean": 3.3051415584415587,
+          "top_B_decile_month_mean": 8.048683333333333,
+          "monthly_compounded_path_growth": 122.0880473657965,
+          "monthly_compounded_path_drawdown": -27.40983655983269
+        },
+        "H": {
+          "mean": 1.0621358333333333,
+          "sample_sd": 6.181714610161027,
+          "worst_month": -27.2698,
+          "negative_month_fraction": 40.0,
+          "B_negative_month_mean": -4.610090697674419,
+          "B_positive_month_mean": 4.229742857142858,
+          "top_B_decile_month_mean": 11.016108333333333,
+          "monthly_compounded_path_growth": 182.01696569630354,
+          "monthly_compounded_path_drawdown": -38.07564597684967
+        },
+        "B": {
+          "mean": 1.066355,
+          "sample_sd": 4.83317825714256,
+          "worst_month": -17.914099999999998,
+          "negative_month_fraction": 35.833333333333336,
+          "B_negative_month_mean": -3.795846511627907,
+          "B_positive_month_mean": 3.7816103896103894,
+          "top_B_decile_month_mean": 8.95878888888889,
+          "monthly_compounded_path_growth": 210.78418406207268,
+          "monthly_compounded_path_drawdown": -26.803252539388833
+        }
+      },
+      "primary_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": -0.004219166666666663,
+          "sample_sd_of_paired_difference": 2.2287000552723364,
+          "sample_sd_level_difference": 1.3485363530184666,
+          "B_negative_mean_difference": -0.8142441860465116,
+          "B_positive_mean_difference": 0.44813246753246755,
+          "top_B_decile_mean_difference": 2.0573194444444445
+        },
+        "H-N": {
+          "mean_paired_difference": 0.28722333333333333,
+          "sample_sd_of_paired_difference": 2.5208785844626154,
+          "sample_sd_level_difference": 1.545226590724305,
+          "B_negative_mean_difference": -0.8541279069767442,
+          "B_positive_mean_difference": 0.9246012987012987,
+          "top_B_decile_mean_difference": 2.9674249999999995
+        },
+        "B-L": {
+          "mean_paired_difference": -0.29566166666666666,
+          "sample_sd_of_paired_difference": 2.3370643452962714,
+          "sample_sd_level_difference": 0.1707284107665165,
+          "B_negative_mean_difference": -0.774360465116279,
+          "B_positive_mean_difference": -0.02833636363636366,
+          "top_B_decile_mean_difference": 1.1472138888888885
+        },
+        "H-L": {
+          "mean_paired_difference": -0.2998808333333333,
+          "sample_sd_of_paired_difference": 4.462813240703027,
+          "sample_sd_level_difference": 1.5192647637849832,
+          "B_negative_mean_difference": -1.5886046511627905,
+          "B_positive_mean_difference": 0.41979610389610394,
+          "top_B_decile_mean_difference": 3.2045333333333335
+        }
+      },
+      "primary_pointwise_95_percentage_points": {
+        "mean_H_minus_B": {
+          "bounds_95": [
+            -0.40815127777777777,
+            0.3937216597222222
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "mean_H_minus_N": {
+          "bounds_95": [
+            -0.16333252083333336,
+            0.7382371249999997
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "mean_B_minus_L": {
+          "bounds_95": [
+            -0.7326159861111111,
+            0.11681631944444398
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "sd_H_minus_B": {
+          "bounds_95": [
+            0.8892611439557894,
+            1.8120892633157575
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "B_negative_mean_H_minus_B": {
+          "bounds_95": [
+            -1.6508239227642278,
+            -0.04409419106773208
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "B_positive_mean_H_minus_B": {
+          "bounds_95": [
+            0.08309676628592291,
+            0.8274598583111945
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "B_negative_mean_H_minus_N": {
+          "bounds_95": [
+            -1.6970469832317072,
+            -0.02399017099863355
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        }
+      },
+      "firm_counts": {
+        "L": {
+          "min": 382,
+          "median": 419.0,
+          "max": 481
+        },
+        "N": {
+          "min": 294,
+          "median": 317.0,
+          "max": 348
+        },
+        "H": {
+          "min": 102,
+          "median": 140.0,
+          "max": 165
+        },
+        "three_groups_total": {
+          "min": 827,
+          "median": 879.5,
+          "max": 939
+        }
+      },
+      "primary_halves": [
+        {
+          "start": "2015-01",
+          "end": "2019-12",
+          "contrasts_percentage_points": {
+            "H-B": {
+              "mean_paired_difference": -0.14669500000000002,
+              "sample_sd_of_paired_difference": 1.6433401303858355,
+              "sample_sd_level_difference": 0.8861845024853425,
+              "B_negative_mean_difference": -0.9604466666666667,
+              "B_positive_mean_difference": 0.2601808333333333,
+              "top_B_decile_mean_difference": 1.0012444444444444
+            },
+            "H-N": {
+              "mean_paired_difference": -0.020770000000000052,
+              "sample_sd_of_paired_difference": 2.0980709034002913,
+              "sample_sd_level_difference": 1.0623488496648417,
+              "B_negative_mean_difference": -1.21403,
+              "B_positive_mean_difference": 0.5758599999999999,
+              "top_B_decile_mean_difference": 1.1730666666666663
+            },
+            "B-L": {
+              "mean_paired_difference": -0.27262,
+              "sample_sd_of_paired_difference": 1.3554349269145354,
+              "sample_sd_level_difference": 0.15717621826195488,
+              "B_negative_mean_difference": -0.7068633333333333,
+              "B_positive_mean_difference": -0.05549833333333337,
+              "top_B_decile_mean_difference": 0.8294222222222221
+            },
+            "H-L": {
+              "mean_paired_difference": -0.41931500000000005,
+              "sample_sd_of_paired_difference": 2.9422024668965023,
+              "sample_sd_level_difference": 1.0433607207472975,
+              "B_negative_mean_difference": -1.66731,
+              "B_positive_mean_difference": 0.20468249999999996,
+              "top_B_decile_mean_difference": 1.8306666666666667
+            }
+          }
+        },
+        {
+          "start": "2020-01",
+          "end": "2024-12",
+          "contrasts_percentage_points": {
+            "H-B": {
+              "mean_paired_difference": 0.1382566666666667,
+              "sample_sd_of_paired_difference": 2.697506710046476,
+              "sample_sd_level_difference": 1.6978397808776282,
+              "B_negative_mean_difference": -0.6871115942028987,
+              "B_positive_mean_difference": 0.6513234234234235,
+              "top_B_decile_mean_difference": 2.347411111111111
+            },
+            "H-N": {
+              "mean_paired_difference": 0.5952166666666666,
+              "sample_sd_of_paired_difference": 2.8674953786357134,
+              "sample_sd_level_difference": 1.9132766672184567,
+              "B_negative_mean_difference": -0.5411695652173912,
+              "B_positive_mean_difference": 1.301618918918919,
+              "top_B_decile_mean_difference": 3.75165
+            },
+            "B-L": {
+              "mean_paired_difference": -0.3187033333333333,
+              "sample_sd_of_paired_difference": 3.0295263485566304,
+              "sample_sd_level_difference": 0.18862408844847814,
+              "B_negative_mean_difference": -0.8330536231884057,
+              "B_positive_mean_difference": 0.0010279279279279136,
+              "top_B_decile_mean_difference": 0.9431722222222219
+            },
+            "H-L": {
+              "mean_paired_difference": -0.18044666666666662,
+              "sample_sd_of_paired_difference": 5.611185910650885,
+              "sample_sd_level_difference": 1.8864638693261062,
+              "B_negative_mean_difference": -1.520165217391304,
+              "B_positive_mean_difference": 0.6523513513513514,
+              "top_B_decile_mean_difference": 3.2905833333333327
+            }
+          }
+        }
+      ],
+      "leave_one_year_out_mean_percentage_points": {
+        "H-B": {
+          "minimum": -0.1536246913580247,
+          "maximum": 0.09056882716049382
+        },
+        "H-N": {
+          "minimum": 0.18852314814814813,
+          "maximum": 0.39448796296296296
+        },
+        "B-L": {
+          "minimum": -0.49577253086419754,
+          "maximum": -0.14673919753086417
+        },
+        "H-L": {
+          "minimum": -0.6493972222222222,
+          "maximum": -0.05617037037037036
+        }
+      },
+      "earlier_big_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": 0.13994859762675296,
+          "sample_sd_of_paired_difference": 1.5939846971012126,
+          "sample_sd_level_difference": 0.48921200567104,
+          "B_negative_mean_difference": -0.08868133903133901,
+          "B_positive_mean_difference": 0.27926996527777775,
+          "top_B_decile_mean_difference": 0.34865967741935483
+        },
+        "H-N": {
+          "mean_paired_difference": 0.17492766990291264,
+          "sample_sd_of_paired_difference": 2.163138480180067,
+          "sample_sd_level_difference": 0.5322268044981051,
+          "B_negative_mean_difference": -0.28638589743589743,
+          "B_positive_mean_difference": 0.45604062500000003,
+          "top_B_decile_mean_difference": 0.46370806451612917
+        },
+        "B-L": {
+          "mean_paired_difference": 0.10496952535059331,
+          "sample_sd_of_paired_difference": 1.669127888164733,
+          "sample_sd_level_difference": -0.26916769034285165,
+          "B_negative_mean_difference": 0.10902321937321935,
+          "B_positive_mean_difference": 0.10249930555555554,
+          "top_B_decile_mean_difference": 0.2336112903225807
+        },
+        "H-L": {
+          "mean_paired_difference": 0.24491812297734628,
+          "sample_sd_of_paired_difference": 3.0759973117892283,
+          "sample_sd_level_difference": 0.22004431532818836,
+          "B_negative_mean_difference": 0.020341880341880364,
+          "B_positive_mean_difference": 0.38176927083333334,
+          "top_B_decile_mean_difference": 0.5822709677419357
+        }
+      },
+      "latest_20_big_support": {
+        "months": 20,
+        "first_month": "2025-01",
+        "last_month": "2026-08",
+        "B_negative_months": 4,
+        "B_positive_months": 16
+      },
+      "latest_20_big_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": 0.7538316666666668,
+          "sample_sd_of_paired_difference": 1.728250734140031,
+          "sample_sd_level_difference": 0.5934363573554057,
+          "B_negative_mean_difference": 1.0071750000000002,
+          "B_positive_mean_difference": 0.6904958333333335,
+          "top_B_decile_mean_difference": 1.4332833333333337
+        },
+        "H-N": {
+          "mean_paired_difference": 0.8351599999999999,
+          "sample_sd_of_paired_difference": 2.5046665237428103,
+          "sample_sd_level_difference": 1.0347330581663834,
+          "B_negative_mean_difference": 0.8808999999999998,
+          "B_positive_mean_difference": 0.8237249999999999,
+          "top_B_decile_mean_difference": 3.6115499999999994
+        },
+        "B-L": {
+          "mean_paired_difference": 0.6725033333333331,
+          "sample_sd_of_paired_difference": 2.3295563912947506,
+          "sample_sd_level_difference": -1.239387845386037,
+          "B_negative_mean_difference": 1.1334499999999998,
+          "B_positive_mean_difference": 0.5572666666666665,
+          "top_B_decile_mean_difference": -0.7449833333333343
+        },
+        "H-L": {
+          "mean_paired_difference": 1.4263349999999997,
+          "sample_sd_of_paired_difference": 3.7368601891054274,
+          "sample_sd_level_difference": -0.6459514880306314,
+          "B_negative_mean_difference": 2.140625,
+          "B_positive_mean_difference": 1.2477624999999997,
+          "top_B_decile_mean_difference": 0.6882999999999994
+        }
+      },
+      "primary_small_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": -0.011551944444444575,
+          "sample_sd_of_paired_difference": 1.8635165910284257,
+          "sample_sd_level_difference": 0.4382730506292523,
+          "B_negative_mean_difference": -0.2751785185185186,
+          "B_positive_mean_difference": 0.1466239999999999,
+          "top_B_decile_mean_difference": 0.27660555555555516
+        },
+        "H-N": {
+          "mean_paired_difference": 0.029242499999999963,
+          "sample_sd_of_paired_difference": 2.0903091754213876,
+          "sample_sd_level_difference": 0.7324975641804572,
+          "B_negative_mean_difference": -0.5191711111111111,
+          "B_positive_mean_difference": 0.3582906666666667,
+          "top_B_decile_mean_difference": 1.2397416666666663
+        },
+        "B-L": {
+          "mean_paired_difference": -0.052346388888888824,
+          "sample_sd_of_paired_difference": 2.0513913073153907,
+          "sample_sd_level_difference": -0.49124761652306614,
+          "B_negative_mean_difference": -0.031185925925925888,
+          "B_positive_mean_difference": -0.0650426666666666,
+          "top_B_decile_mean_difference": -0.6865305555555555
+        },
+        "H-L": {
+          "mean_paired_difference": -0.06389833333333343,
+          "sample_sd_of_paired_difference": 3.813881942887445,
+          "sample_sd_level_difference": -0.05297456589381383,
+          "B_negative_mean_difference": -0.3063644444444446,
+          "B_positive_mean_difference": 0.08158133333333326,
+          "top_B_decile_mean_difference": -0.4099250000000003
+        }
+      }
+    },
+    "OP": {
+      "primary_support": {
+        "months": 120,
+        "first_month": "2015-01",
+        "last_month": "2024-12",
+        "B_negative_months": 38,
+        "B_positive_months": 82,
+        "B_zero_months": 0,
+        "top_B_month_count": 12,
+        "top_B_positive_months": 12
+      },
+      "primary_performance_percent": {
+        "L": {
+          "mean": 0.8145658333333333,
+          "sample_sd": 5.21503729782735,
+          "worst_month": -17.2331,
+          "negative_month_fraction": 38.333333333333336,
+          "B_negative_month_mean": -4.6983657894736846,
+          "B_positive_month_mean": 3.3693390243902437,
+          "top_B_decile_month_mean": 9.72205,
+          "monthly_compounded_path_growth": 125.29504244421629,
+          "monthly_compounded_path_drawdown": -30.515006828921145
+        },
+        "N": {
+          "mean": 1.0784875,
+          "sample_sd": 4.693420693138813,
+          "worst_month": -14.045,
+          "negative_month_fraction": 35.833333333333336,
+          "B_negative_month_mean": -3.948605263157895,
+          "B_positive_month_mean": 3.4081158536585368,
+          "top_B_decile_month_mean": 8.673408333333334,
+          "monthly_compounded_path_growth": 218.04213964847628,
+          "monthly_compounded_path_drawdown": -22.897770242113445
+        },
+        "H": {
+          "mean": 1.3129133333333332,
+          "sample_sd": 4.5095643108773125,
+          "worst_month": -10.2249,
+          "negative_month_fraction": 32.5,
+          "B_negative_month_mean": -3.770513157894737,
+          "B_positive_month_mean": 3.6686475609756095,
+          "top_B_decile_month_mean": 8.36505,
+          "monthly_compounded_path_growth": 324.61340084993304,
+          "monthly_compounded_path_drawdown": -24.845550982848152
+        },
+        "B": {
+          "mean": 1.0686555555555555,
+          "sample_sd": 4.658212057214464,
+          "worst_month": -13.834333333333332,
+          "negative_month_fraction": 31.666666666666664,
+          "B_negative_month_mean": -4.139161403508772,
+          "B_positive_month_mean": 3.482034146341464,
+          "top_B_decile_month_mean": 8.920169444444443,
+          "monthly_compounded_path_growth": 215.01681452783168,
+          "monthly_compounded_path_drawdown": -24.341918974654508
+        }
+      },
+      "primary_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": 0.2442577777777778,
+          "sample_sd_of_paired_difference": 1.366176895924074,
+          "sample_sd_level_difference": -0.14864774633715147,
+          "B_negative_mean_difference": 0.36864824561403503,
+          "B_positive_mean_difference": 0.18661341463414632,
+          "top_B_decile_mean_difference": -0.5551194444444443
+        },
+        "H-N": {
+          "mean_paired_difference": 0.23442583333333336,
+          "sample_sd_of_paired_difference": 1.8515111961571007,
+          "sample_sd_level_difference": -0.18385638226149983,
+          "B_negative_mean_difference": 0.17809210526315797,
+          "B_positive_mean_difference": 0.26053170731707315,
+          "top_B_decile_mean_difference": -0.3083583333333335
+        },
+        "B-L": {
+          "mean_paired_difference": 0.2540897222222222,
+          "sample_sd_of_paired_difference": 1.3540350881150733,
+          "sample_sd_level_difference": -0.5568252406128862,
+          "B_negative_mean_difference": 0.5592043859649123,
+          "B_positive_mean_difference": 0.11269512195121946,
+          "top_B_decile_mean_difference": -0.8018805555555558
+        },
+        "H-L": {
+          "mean_paired_difference": 0.4983475,
+          "sample_sd_of_paired_difference": 2.5759246122301125,
+          "sample_sd_level_difference": -0.7054729869500377,
+          "B_negative_mean_difference": 0.9278526315789473,
+          "B_positive_mean_difference": 0.2993085365853658,
+          "top_B_decile_mean_difference": -1.357
+        }
+      },
+      "primary_pointwise_95_percentage_points": {
+        "mean_H_minus_B": {
+          "bounds_95": [
+            0.047630597222222223,
+            0.4378521527777778
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "mean_H_minus_N": {
+          "bounds_95": [
+            -0.10462631250000004,
+            0.5939780208333334
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "mean_B_minus_L": {
+          "bounds_95": [
+            0.06790087499999997,
+            0.474290895833333
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "sd_H_minus_B": {
+          "bounds_95": [
+            -0.31957695836373623,
+            0.03784390686751609
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "B_negative_mean_H_minus_B": {
+          "bounds_95": [
+            0.04225314814814816,
+            0.7022517286036034
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "B_positive_mean_H_minus_B": {
+          "bounds_95": [
+            -0.06156548701298707,
+            0.46219839599778406
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "B_negative_mean_H_minus_N": {
+          "bounds_95": [
+            -0.2224302573529411,
+            0.5946660227272716
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        }
+      },
+      "firm_counts": {
+        "L": {
+          "min": 175,
+          "median": 194.0,
+          "max": 263
+        },
+        "N": {
+          "min": 333,
+          "median": 365.0,
+          "max": 423
+        },
+        "H": {
+          "min": 298,
+          "median": 315.0,
+          "max": 347
+        },
+        "three_groups_total": {
+          "min": 840,
+          "median": 889.5,
+          "max": 948
+        }
+      },
+      "primary_halves": [
+        {
+          "start": "2015-01",
+          "end": "2019-12",
+          "contrasts_percentage_points": {
+            "H-B": {
+              "mean_paired_difference": 0.22025277777777777,
+              "sample_sd_of_paired_difference": 0.8734478837044078,
+              "sample_sd_level_difference": -0.11516158858886211,
+              "B_negative_mean_difference": 0.5633882352941177,
+              "B_positive_mean_difference": 0.08459457364341082,
+              "top_B_decile_mean_difference": -0.2575888888888888
+            },
+            "H-N": {
+              "mean_paired_difference": 0.22131333333333336,
+              "sample_sd_of_paired_difference": 1.0853050436560732,
+              "sample_sd_level_difference": -0.012330512362040968,
+              "B_negative_mean_difference": 0.3271764705882354,
+              "B_positive_mean_difference": 0.17946046511627908,
+              "top_B_decile_mean_difference": -0.15178333333333327
+            },
+            "B-L": {
+              "mean_paired_difference": 0.21919222222222212,
+              "sample_sd_of_paired_difference": 0.9221625633445274,
+              "sample_sd_level_difference": -0.4428349631479499,
+              "B_negative_mean_difference": 0.7996,
+              "B_positive_mean_difference": -0.010271317829457456,
+              "top_B_decile_mean_difference": -0.36339444444444485
+            },
+            "H-L": {
+              "mean_paired_difference": 0.43944499999999986,
+              "sample_sd_of_paired_difference": 1.7249248643351671,
+              "sample_sd_level_difference": -0.557996551736812,
+              "B_negative_mean_difference": 1.3629882352941176,
+              "B_positive_mean_difference": 0.07432325581395337,
+              "top_B_decile_mean_difference": -0.6209833333333337
+            }
+          }
+        },
+        {
+          "start": "2020-01",
+          "end": "2024-12",
+          "contrasts_percentage_points": {
+            "H-B": {
+              "mean_paired_difference": 0.26826277777777774,
+              "sample_sd_of_paired_difference": 1.7321749240039486,
+              "sample_sd_level_difference": -0.1784934612028194,
+              "B_negative_mean_difference": 0.21100158730158713,
+              "B_positive_mean_difference": 0.2990957264957265,
+              "top_B_decile_mean_difference": -1.1297499999999996
+            },
+            "H-N": {
+              "mean_paired_difference": 0.2475383333333333,
+              "sample_sd_of_paired_difference": 2.3950060460694123,
+              "sample_sd_level_difference": -0.3040431369335586,
+              "B_negative_mean_difference": 0.05740476190476193,
+              "B_positive_mean_difference": 0.3499179487179487,
+              "top_B_decile_mean_difference": -0.8706666666666668
+            },
+            "B-L": {
+              "mean_paired_difference": 0.28898722222222234,
+              "sample_sd_of_paired_difference": 1.6867234675357001,
+              "sample_sd_level_difference": -0.6570701096925466,
+              "B_negative_mean_difference": 0.3645984126984129,
+              "B_positive_mean_difference": 0.24827350427350428,
+              "top_B_decile_mean_difference": -1.3888333333333334
+            },
+            "H-L": {
+              "mean_paired_difference": 0.55725,
+              "sample_sd_of_paired_difference": 3.2250297681716398,
+              "sample_sd_level_difference": -0.8355635708953659,
+              "B_negative_mean_difference": 0.5756000000000001,
+              "B_positive_mean_difference": 0.5473692307692308,
+              "top_B_decile_mean_difference": -2.5185833333333334
+            }
+          }
+        }
+      ],
+      "leave_one_year_out_mean_percentage_points": {
+        "H-B": {
+          "minimum": 0.2326925925925926,
+          "maximum": 0.276025
+        },
+        "H-N": {
+          "minimum": 0.15888611111111114,
+          "maximum": 0.31652870370370373
+        },
+        "B-L": {
+          "minimum": 0.15217314814814814,
+          "maximum": 0.3168336419753086
+        },
+        "H-L": {
+          "minimum": 0.3865240740740741,
+          "maximum": 0.5620175925925927
+        }
+      },
+      "earlier_big_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": 0.10497448759439051,
+          "sample_sd_of_paired_difference": 1.2574408537225292,
+          "sample_sd_level_difference": -0.09848267961808238,
+          "B_negative_mean_difference": 0.34274508196721315,
+          "B_positive_mean_difference": -0.050148573975044554,
+          "top_B_decile_mean_difference": -0.4447279569892473
+        },
+        "H-N": {
+          "mean_paired_difference": 0.11105922330097089,
+          "sample_sd_of_paired_difference": 1.5901322826905002,
+          "sample_sd_level_difference": 0.05822259890242987,
+          "B_negative_mean_difference": 0.08784098360655739,
+          "B_positive_mean_difference": 0.12620695187165776,
+          "top_B_decile_mean_difference": -0.3175403225806451
+        },
+        "B-L": {
+          "mean_paired_difference": 0.09888975188781016,
+          "sample_sd_of_paired_difference": 1.4087327673196666,
+          "sample_sd_level_difference": -0.6756979354774719,
+          "B_negative_mean_difference": 0.5976491803278688,
+          "B_positive_mean_difference": -0.22650409982174685,
+          "top_B_decile_mean_difference": -0.5719155913978493
+        },
+        "H-L": {
+          "mean_paired_difference": 0.20386423948220064,
+          "sample_sd_of_paired_difference": 2.5408668163019223,
+          "sample_sd_level_difference": -0.7741806150955544,
+          "B_negative_mean_difference": 0.9403942622950819,
+          "B_positive_mean_difference": -0.2766526737967914,
+          "top_B_decile_mean_difference": -1.0166435483870966
+        }
+      },
+      "latest_20_big_support": {
+        "months": 20,
+        "first_month": "2025-01",
+        "last_month": "2026-08",
+        "B_negative_months": 6,
+        "B_positive_months": 14
+      },
+      "latest_20_big_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": -0.36642500000000017,
+          "sample_sd_of_paired_difference": 1.753203228708803,
+          "sample_sd_level_difference": -0.24909760478062648,
+          "B_negative_mean_difference": 0.9113277777777777,
+          "B_positive_mean_difference": -0.9140333333333336,
+          "top_B_decile_mean_difference": -1.2700166666666675
+        },
+        "H-N": {
+          "mean_paired_difference": -0.30817500000000014,
+          "sample_sd_of_paired_difference": 2.4714580765367935,
+          "sample_sd_level_difference": 0.6681324929433587,
+          "B_negative_mean_difference": -0.6564833333333335,
+          "B_positive_mean_difference": -0.15890000000000015,
+          "top_B_decile_mean_difference": 3.2232499999999997
+        },
+        "B-L": {
+          "mean_paired_difference": -0.42467499999999986,
+          "sample_sd_of_paired_difference": 3.246589750680727,
+          "sample_sd_level_difference": -2.5304209840764953,
+          "B_negative_mean_difference": 2.4791388888888886,
+          "B_positive_mean_difference": -1.6691666666666665,
+          "top_B_decile_mean_difference": -5.763283333333333
+        },
+        "H-L": {
+          "mean_paired_difference": -0.7911000000000001,
+          "sample_sd_of_paired_difference": 4.688030469745601,
+          "sample_sd_level_difference": -2.7795185888571217,
+          "B_negative_mean_difference": 3.3904666666666667,
+          "B_positive_mean_difference": -2.5832,
+          "top_B_decile_mean_difference": -7.0333000000000006
+        }
+      },
+      "primary_small_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": 0.06687861111111112,
+          "sample_sd_of_paired_difference": 1.4340180881491853,
+          "sample_sd_level_difference": 0.66746831481138,
+          "B_negative_mean_difference": -0.269957037037037,
+          "B_positive_mean_difference": 0.26898000000000005,
+          "top_B_decile_mean_difference": 0.7867833333333334
+        },
+        "H-N": {
+          "mean_paired_difference": -0.07588583333333337,
+          "sample_sd_of_paired_difference": 2.135926764996373,
+          "sample_sd_level_difference": 1.0223118093317087,
+          "B_negative_mean_difference": -0.7430133333333334,
+          "B_positive_mean_difference": 0.3243906666666666,
+          "top_B_decile_mean_difference": 1.4462583333333334
+        },
+        "B-L": {
+          "mean_paired_difference": 0.20964305555555549,
+          "sample_sd_of_paired_difference": 1.784816676849672,
+          "sample_sd_level_difference": -0.1937768915428406,
+          "B_negative_mean_difference": 0.20309925925925923,
+          "B_positive_mean_difference": 0.21356933333333325,
+          "top_B_decile_mean_difference": 0.12730833333333333
+        },
+        "H-L": {
+          "mean_paired_difference": 0.2765216666666666,
+          "sample_sd_of_paired_difference": 2.943889928928094,
+          "sample_sd_level_difference": 0.47369142326853936,
+          "B_negative_mean_difference": -0.0668577777777778,
+          "B_positive_mean_difference": 0.4825493333333332,
+          "top_B_decile_mean_difference": 0.9140916666666667
+        }
+      }
+    },
+    "MOM": {
+      "primary_support": {
+        "months": 120,
+        "first_month": "2015-01",
+        "last_month": "2024-12",
+        "B_negative_months": 43,
+        "B_positive_months": 77,
+        "B_zero_months": 0,
+        "top_B_month_count": 12,
+        "top_B_positive_months": 12
+      },
+      "primary_performance_percent": {
+        "L": {
+          "mean": 1.1205833333333333,
+          "sample_sd": 6.829457487445772,
+          "worst_month": -24.68,
+          "negative_month_fraction": 41.66666666666667,
+          "B_negative_month_mean": -5.233488372093023,
+          "B_positive_month_mean": 4.668961038961039,
+          "top_B_decile_month_mean": 12.656666666666666,
+          "monthly_compounded_path_growth": 189.58772136858775,
+          "monthly_compounded_path_drawdown": -32.18461364800002
+        },
+        "N": {
+          "mean": 1.1475000000000002,
+          "sample_sd": 4.562946720389056,
+          "worst_month": -12.91,
+          "negative_month_fraction": 31.666666666666664,
+          "B_negative_month_mean": -3.461395348837209,
+          "B_positive_month_mean": 3.7212987012987018,
+          "top_B_decile_month_mean": 8.439166666666665,
+          "monthly_compounded_path_growth": 247.8218074103033,
+          "monthly_compounded_path_drawdown": -25.705114095341763
+        },
+        "H": {
+          "mean": 1.118,
+          "sample_sd": 4.569542867378171,
+          "worst_month": -11.28,
+          "negative_month_fraction": 39.166666666666664,
+          "B_negative_month_mean": -2.989767441860465,
+          "B_positive_month_mean": 3.4119480519480523,
+          "top_B_decile_month_mean": 7.9158333333333335,
+          "monthly_compounded_path_growth": 235.90381646760443,
+          "monthly_compounded_path_drawdown": -24.142692757922113
+        },
+        "B": {
+          "mean": 1.1286944444444444,
+          "sample_sd": 4.97283151499554,
+          "worst_month": -16.290000000000003,
+          "negative_month_fraction": 35.833333333333336,
+          "B_negative_month_mean": -3.8948837209302325,
+          "B_positive_month_mean": 3.9340692640692643,
+          "top_B_decile_month_mean": 9.670555555555556,
+          "monthly_compounded_path_growth": 232.40328966014738,
+          "monthly_compounded_path_drawdown": -25.371722561019904
+        }
+      },
+      "primary_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": -0.010694444444444437,
+          "sample_sd_of_paired_difference": 2.282793916771464,
+          "sample_sd_level_difference": -0.4032886476173683,
+          "B_negative_mean_difference": 0.9051162790697675,
+          "B_positive_mean_difference": -0.5221212121212121,
+          "top_B_decile_mean_difference": -1.7547222222222225
+        },
+        "H-N": {
+          "mean_paired_difference": -0.02949999999999998,
+          "sample_sd_of_paired_difference": 2.4407013904431087,
+          "sample_sd_level_difference": 0.006596146989115009,
+          "B_negative_mean_difference": 0.4716279069767443,
+          "B_positive_mean_difference": -0.3093506493506493,
+          "top_B_decile_mean_difference": -0.5233333333333334
+        },
+        "B-L": {
+          "mean_paired_difference": 0.008111111111111126,
+          "sample_sd_of_paired_difference": 2.729715845344973,
+          "sample_sd_level_difference": -1.8566259724502328,
+          "B_negative_mean_difference": 1.3386046511627907,
+          "B_positive_mean_difference": -0.7348917748917748,
+          "top_B_decile_mean_difference": -2.9861111111111107
+        },
+        "H-L": {
+          "mean_paired_difference": -0.002583333333333307,
+          "sample_sd_of_paired_difference": 4.881798383299137,
+          "sample_sd_level_difference": -2.259914620067601,
+          "B_negative_mean_difference": 2.2437209302325583,
+          "B_positive_mean_difference": -1.257012987012987,
+          "top_B_decile_mean_difference": -4.740833333333334
+        }
+      },
+      "primary_pointwise_95_percentage_points": {
+        "mean_H_minus_B": {
+          "bounds_95": [
+            -0.40043611111111105,
+            0.33839861111111097
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "mean_H_minus_N": {
+          "bounds_95": [
+            -0.4673333333333334,
+            0.36333541666666663
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "mean_B_minus_L": {
+          "bounds_95": [
+            -0.44467916666666674,
+            0.416704861111111
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "sd_H_minus_B": {
+          "bounds_95": [
+            -0.8499990573531319,
+            0.10104475986282342
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "B_negative_mean_H_minus_B": {
+          "bounds_95": [
+            0.3443001778455285,
+            1.4570628663263376
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "B_positive_mean_H_minus_B": {
+          "bounds_95": [
+            -1.1104494751823517,
+            0.009782341269841158
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        },
+        "B_negative_mean_H_minus_N": {
+          "bounds_95": [
+            -0.07020380434782603,
+            0.9759686657681939
+          ],
+          "valid_draws": 5000,
+          "missing_draws": 0
+        }
+      },
+      "firm_counts": {
+        "L": {
+          "min": 92,
+          "median": 177.0,
+          "max": 321
+        },
+        "N": {
+          "min": 366,
+          "median": 411.0,
+          "max": 447
+        },
+        "H": {
+          "min": 211,
+          "median": 335.0,
+          "max": 477
+        },
+        "three_groups_total": {
+          "min": 895,
+          "median": 922.5,
+          "max": 977
+        }
+      },
+      "primary_halves": [
+        {
+          "start": "2015-01",
+          "end": "2019-12",
+          "contrasts_percentage_points": {
+            "H-B": {
+              "mean_paired_difference": 0.01711111111111111,
+              "sample_sd_of_paired_difference": 2.033210653580445,
+              "sample_sd_level_difference": -0.30517321919502766,
+              "B_negative_mean_difference": 1.2564912280701754,
+              "B_positive_mean_difference": -0.5572357723577236,
+              "top_B_decile_mean_difference": -0.8250000000000004
+            },
+            "H-N": {
+              "mean_paired_difference": -0.039333333333333255,
+              "sample_sd_of_paired_difference": 2.1225279672483497,
+              "sample_sd_level_difference": -0.09528599630207121,
+              "B_negative_mean_difference": 0.8989473684210528,
+              "B_positive_mean_difference": -0.4741463414634146,
+              "top_B_decile_mean_difference": -0.07666666666666642
+            },
+            "B-L": {
+              "mean_paired_difference": 0.07355555555555565,
+              "sample_sd_of_paired_difference": 2.3170427176532606,
+              "sample_sd_level_difference": -1.5265818349282285,
+              "B_negative_mean_difference": 1.6140350877192984,
+              "B_positive_mean_difference": -0.6403252032520323,
+              "top_B_decile_mean_difference": -1.5733333333333333
+            },
+            "H-L": {
+              "mean_paired_difference": 0.0906666666666668,
+              "sample_sd_of_paired_difference": 4.266415900116673,
+              "sample_sd_level_difference": -1.8317550541232561,
+              "B_negative_mean_difference": 2.8705263157894736,
+              "B_positive_mean_difference": -1.197560975609756,
+              "top_B_decile_mean_difference": -2.3983333333333334
+            }
+          }
+        },
+        {
+          "start": "2020-01",
+          "end": "2024-12",
+          "contrasts_percentage_points": {
+            "H-B": {
+              "mean_paired_difference": -0.03849999999999998,
+              "sample_sd_of_paired_difference": 2.524896553977262,
+              "sample_sd_level_difference": -0.48367966911134275,
+              "B_negative_mean_difference": 0.6269444444444445,
+              "B_positive_mean_difference": -0.4821296296296297,
+              "top_B_decile_mean_difference": -2.352222222222222
+            },
+            "H-N": {
+              "mean_paired_difference": -0.019666666666666693,
+              "sample_sd_of_paired_difference": 2.7403816180286604,
+              "sample_sd_level_difference": 0.07488920354429898,
+              "B_negative_mean_difference": 0.13333333333333336,
+              "B_positive_mean_difference": -0.12166666666666673,
+              "top_B_decile_mean_difference": -0.5850000000000002
+            },
+            "B-L": {
+              "mean_paired_difference": -0.05733333333333339,
+              "sample_sd_of_paired_difference": 3.106701328581397,
+              "sample_sd_level_difference": -2.1494623483995134,
+              "B_negative_mean_difference": 1.1205555555555553,
+              "B_positive_mean_difference": -0.8425925925925926,
+              "top_B_decile_mean_difference": -4.1194444444444445
+            },
+            "H-L": {
+              "mean_paired_difference": -0.09583333333333341,
+              "sample_sd_of_paired_difference": 5.4633187565945835,
+              "sample_sd_level_difference": -2.633142017510856,
+              "B_negative_mean_difference": 1.7475,
+              "B_positive_mean_difference": -1.3247222222222224,
+              "top_B_decile_mean_difference": -6.471666666666668
+            }
+          }
+        }
+      ],
+      "leave_one_year_out_mean_percentage_points": {
+        "H-B": {
+          "minimum": -0.09169753086419752,
+          "maximum": 0.10191358024691359
+        },
+        "H-N": {
+          "minimum": -0.11870370370370363,
+          "maximum": 0.16768518518518521
+        },
+        "B-L": {
+          "minimum": -0.11283950617283951,
+          "maximum": 0.19574074074074072
+        },
+        "H-L": {
+          "minimum": -0.20453703703703702,
+          "maximum": 0.2940740740740741
+        }
+      },
+      "earlier_big_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": 0.25995145631067956,
+          "sample_sd_of_paired_difference": 2.3478820909033438,
+          "sample_sd_level_difference": 0.2609211784434948,
+          "B_negative_mean_difference": 0.3484528832630098,
+          "B_positive_mean_difference": 0.2048993875765529,
+          "top_B_decile_mean_difference": -1.1903225806451614
+        },
+        "H-N": {
+          "mean_paired_difference": 0.32676375404530744,
+          "sample_sd_of_paired_difference": 2.6994032378230703,
+          "sample_sd_level_difference": 0.5997376978857182,
+          "B_negative_mean_difference": -0.04286919831223626,
+          "B_positive_mean_difference": 0.5566929133858267,
+          "top_B_decile_mean_difference": -0.32983870967741946
+        },
+        "B-L": {
+          "mean_paired_difference": 0.19313915857605177,
+          "sample_sd_of_paired_difference": 2.4716134341392513,
+          "sample_sd_level_difference": -1.275903638896459,
+          "B_negative_mean_difference": 0.739774964838256,
+          "B_positive_mean_difference": -0.1468941382327209,
+          "top_B_decile_mean_difference": -2.050806451612903
+        },
+        "H-L": {
+          "mean_paired_difference": 0.45309061488673136,
+          "sample_sd_of_paired_difference": 4.696548889333057,
+          "sample_sd_level_difference": -1.0149824604529643,
+          "B_negative_mean_difference": 1.0882278481012657,
+          "B_positive_mean_difference": 0.05800524934383201,
+          "top_B_decile_mean_difference": -3.2411290322580646
+        }
+      },
+      "latest_20_big_support": {
+        "months": 20,
+        "first_month": "2025-01",
+        "last_month": "2026-08",
+        "B_negative_months": 7,
+        "B_positive_months": 13
+      },
+      "latest_20_big_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": -0.07999999999999989,
+          "sample_sd_of_paired_difference": 3.6518555725558235,
+          "sample_sd_level_difference": 2.2064600920324695,
+          "B_negative_mean_difference": 0.2414285714285716,
+          "B_positive_mean_difference": -0.253076923076923,
+          "top_B_decile_mean_difference": 3.228333333333334
+        },
+        "H-N": {
+          "mean_paired_difference": -0.22499999999999976,
+          "sample_sd_of_paired_difference": 4.754080241999332,
+          "sample_sd_level_difference": 2.766895423118971,
+          "B_negative_mean_difference": -0.5485714285714284,
+          "B_positive_mean_difference": -0.05076923076923057,
+          "top_B_decile_mean_difference": 4.865000000000001
+        },
+        "B-L": {
+          "mean_paired_difference": 0.06499999999999995,
+          "sample_sd_of_paired_difference": 2.955520852366285,
+          "sample_sd_level_difference": -0.8965722599459415,
+          "B_negative_mean_difference": 1.0314285714285716,
+          "B_positive_mean_difference": -0.4553846153846154,
+          "top_B_decile_mean_difference": 1.5916666666666672
+        },
+        "H-L": {
+          "mean_paired_difference": -0.014999999999999925,
+          "sample_sd_of_paired_difference": 6.466077880593052,
+          "sample_sd_level_difference": 1.309887832086528,
+          "B_negative_mean_difference": 1.2728571428571427,
+          "B_positive_mean_difference": -0.7084615384615384,
+          "top_B_decile_mean_difference": 4.820000000000001
+        }
+      },
+      "primary_small_contrasts_percentage_points": {
+        "H-B": {
+          "mean_paired_difference": 0.20388888888888881,
+          "sample_sd_of_paired_difference": 1.8031677351561055,
+          "sample_sd_level_difference": -0.31606165859686536,
+          "B_negative_mean_difference": 0.8419858156028368,
+          "B_positive_mean_difference": -0.20694063926940642,
+          "top_B_decile_mean_difference": -1.2105555555555556
+        },
+        "H-N": {
+          "mean_paired_difference": 0.17833333333333337,
+          "sample_sd_of_paired_difference": 2.204282056306203,
+          "sample_sd_level_difference": 0.33676863888790487,
+          "B_negative_mean_difference": 0.19744680851063828,
+          "B_positive_mean_difference": 0.16602739726027405,
+          "top_B_decile_mean_difference": 0.005833333333333385
+        },
+        "B-L": {
+          "mean_paired_difference": 0.22944444444444456,
+          "sample_sd_of_paired_difference": 2.20435861139787,
+          "sample_sd_level_difference": -1.500753395378189,
+          "B_negative_mean_difference": 1.4865248226950356,
+          "B_positive_mean_difference": -0.5799086757990867,
+          "top_B_decile_mean_difference": -2.4269444444444437
+        },
+        "H-L": {
+          "mean_paired_difference": 0.4333333333333334,
+          "sample_sd_of_paired_difference": 3.8227748145703226,
+          "sample_sd_level_difference": -1.8168150539750543,
+          "B_negative_mean_difference": 2.3285106382978724,
+          "B_positive_mean_difference": -0.7868493150684931,
+          "top_B_decile_mean_difference": -3.6374999999999993
+        }
+      }
+    }
+  },
+  "purpose_adjudications": {
+    "OP": {
+      "return_selection": "Retain a limited large-size published-series candidate. H-B +0.2443pp/month,95%[+0.0476,+0.4379]; B-L +0.2541pp,[+0.0679,+0.4743], so the positive high-low spread is not only a weak low group. Neither component is causal attribution. H-N +0.2344pp,[-0.1046,+0.5940], so superiority to a middle-group allocation remains unresolved.",
+      "downside_information": "Retain narrowly relative to B: B-negative H-B +0.3686pp,[+0.0423,+0.7023]. Against N the same-condition +0.1781pp has interval[-0.2224,+0.5947]. Do not call this established defensive stock selection beyond the simple middle group.",
+      "risk_and_opportunity_cost": "SD difference H-B -0.1486pp has interval[-0.3196,+0.0378], so lower variance is not established. Worst month H -10.2249% versus B -13.8343% is a favorable descriptive result, but monthly path maximum drawdown H -24.8456% versus B -24.3419% and N -22.8978% is worse. In the top12 B rally months H-B -0.5551pp and H-N -0.3084pp. H negative-month fraction32.5% versus B31.6667% also prevents an all-risk-metrics-improve claim.",
+      "stability": "H-B mean +0.2203pp first60 and +0.2683pp second60; leave-one-year means stay +0.2327 to+0.2760pp. These overlapping diagnostics are not independent confirmations. Latest2025-01 through2026-08 H-B mean -0.3664pp and H-N -0.3082pp; latest B-negative H-B +0.9113pp but H-N -0.6565pp on only6 negative months. Small-size primary H-N -0.0759pp and B-negative H-B -0.2700pp, so do not generalize across size.",
+      "adoption": "Pause production/ETF/account adoption and claims of stable or net alpha. Retention means priority for a qualified common-stock feasibility question, not authority for an unrestricted new backtest."
+    },
+    "BM": {
+      "return_selection": "Pause broad high-BM buy-side superiority. H-B -0.0042pp with95%[-0.4082,+0.3937]; H-N +0.2872pp with[-0.1633,+0.7382]. A positive H-N point estimate cannot supersede the primary B comparator.",
+      "defense": "Not supported in the primary large-size history: SD H-B +1.3485pp,[+0.8893,+1.8121]; B-negative H-B -0.8142pp,[-1.6508,-0.0441], and H-N -0.8541pp,[-1.6970,-0.0240]. Worst month H -27.2698% versus B -17.9141%; monthly path drawdown -38.0756% versus -26.8033%. This is counterevidence to defensive adoption, not proof value is never useful.",
+      "opportunity_and_decomposition": "B-positive H-B +0.4481pp and top12 B months +2.0573pp show stronger participation in rallies, paired with greater downside. H-L mean -0.2999pp and B-L -0.2957pp do not show a weak low-score group generating a positive value spread. No new rally-timing policy follows.",
+      "stability": "H-B mean -0.1467pp first60, +0.1383pp second60; earlier618 months +0.1399pp; latest20 months +0.7538pp with B-negative improvement+1.0072pp on only4 negative months. Preserve these counterexamples to a universal negative claim, but do not select the favorable20months to reverse the predeclared primary decision.",
+      "adoption": "Pause buy-cheap and defensive deployment for this definition. Current results do not disprove different value definitions, joint quality/value selection or other universes."
+    },
+    "MOM": {
+      "return_selection": "No new evidence of buy-high superiority here: H-B -0.0107pp,95%[-0.4004,+0.3384]; H-N -0.0295pp,[-0.4673,+0.3633]. Retain momentum as a predefined comparison benchmark, not a winner certified by this study.",
+      "downside_information": "Retain limited relative-B risk description: B-negative H-B +0.9051pp,[+0.3443,+1.4571]. H-N +0.4716pp has[-0.0702,+0.9760], and SD H-B -0.4033pp has[-0.8500,+0.1010]. Avoiding the volatile low-momentum group competes with a special high-momentum protection explanation.",
+      "opportunity_and_paths": "B-positive H-B -0.5221pp,95%[-1.1104,+0.0098]; top12 B months -1.7547pp, versus N -0.5233pp. Worst month H -11.28% versus B -16.29%; month-end path drawdown H -24.1427% versus B -25.3717% is only a historical description. H has more negative months39.1667% than B35.8333% and N31.6667%.",
+      "stability": "H-B means+0.0171pp and-0.0385pp in the two60-month halves. Earlier618months +0.2600pp is a historical background difference, not rescue of the recent mean. Latest20months H-B -0.0800pp, H-N -0.2250pp, SD H-B +2.2065pp; latest B-negative H-N -0.5486pp on7months. No stable low-volatility claim.",
+      "adoption": "Pause new momentum timing/defensive adoption claims. Preserve the factor as a comparison baseline; this result does not cancel unrelated authorized momentum/ETF research."
+    }
+  },
+  "claim_corrections": [
+    "Use OP/经营盈利 consistently; this run cannot validate the earlier GP/assets candidate.",
+    "The operating-profitability high-low mean difference is not exclusively low-group weakness: both H-B and B-L are positive; however H-N superiority is unresolved. Do not report a precise percentage as causal contribution.",
+    "Better average return in B-negative months is not smaller maximum drawdown, higher win frequency, lower beta or a predictive state rule.",
+    "Do not call latest20months an untouched validation period: the entire current reconstructed source was public and the period was defined for descriptive counterexamples.",
+    "Confidence ranges are exploratory pointwise block ranges across multiple signals/outcomes, not multiplicity-adjusted adoption evidence or probabilities that the mechanism is true.",
+    "Available firm counts do not identify holdings, concentration, membership overlap, investability or common-stock support. BM high group median140 versus low419; OP high315 versus low194; Mom high335 versus low177 demonstrate why equal group capital is not equal stock capital.",
+    "The current CIZ release changes historical construction relative to prior formats. Binding the release makes calculations reproducible but does not prove historical data arrivals or local point-in-time financial correctness.",
+    "Bound reference cards still describe pre-execution implementation state. Preserve the frozen snapshot and attach actual run evidence separately; do not describe published-series analysis as locally replicated constituent-level factor construction."
+  ],
+  "same_stock_increment_identification": {
+    "answer": "No: additional computations on these marginal published-group return series cannot identify same-stock incremental information beyond momentum.",
+    "why": "They omit joint security identities, joint signal ranks and eligibility, within-date portfolio weights and individual forward outcomes. Many different joint holdings/rank arrangements can produce identical marginal group returns. Common calendar dates do not supply the missing joint distribution.",
+    "not_sufficient": [
+      "correlation matrices",
+      "time-series regressions or residualization against the published momentum return",
+      "new50/50 combinations",
+      "more subgroup averages of these same three marginal series",
+      "stock counts without security identities"
+    ],
+    "what_those_could_answer": "Only a separately defined aggregate-return attribution or portfolio-combination question; they cannot establish controlled same-stock selection increment. Do not add them to fill this missing-data question.",
+    "minimum_next_decision_changing_evidence": "First qualify an attainable historical common-stock input route: stable security identities including exits, historical eligible membership, source-aligned OP/BM/Mom definitions and public financial dates/revisions, corporate-action/return and delisting handling, plus positions/weights or reconstructible rules. Preserve missingness. Only then freeze one same-pool comparison against momentum and a simple middle/all-stock allocation with coherent capital and costs. OP is a reasonable limited priority from this run, not an obligation to rerun all candidates.",
+    "stop_condition": "If the joint inputs cannot be qualified under the actual authorized sources/budget, close that qualification step as an evidence boundary; do not claim a same-stock result or substitute a new aggregate-correlation report."
+  },
+  "evidence_levels": {
+    "published_series": "Actual complete published return groups and fixed transformations analyzed; independently checked arithmetic may support the bounded historical comparisons above.",
+    "local_replication": "Underlying US stock assignments, financial public-time data, weights, exits and costs were not reconstructed or audited; no constituent-level local factor replication claimed.",
+    "adoption": "No implementation, trading, production, account or ETF adoption approved; gross published-series help is only a research-priority input."
+  },
+  "completion": "The frozen public long-only question is answered with counterexamples and uncertainty. No additional statistics are required for this bounded conclusion; remaining same-stock increment requires new qualified inputs, not more arithmetic on the current groups.",
+  "files_written": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/scientific-review.json"
+  ]
+}

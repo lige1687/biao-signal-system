@@ -1,0 +1,203 @@
+{
+  "schema": "us-long-only-reference-design/1",
+  "status": "design_before_effects",
+  "frozen_at": "2026-10-20T16:51:46.486816+08:00",
+  "question": "Do purchased high-score portfolios help beyond all-groups and middle-group baselines, with return and downside uses evaluated separately?",
+  "source_family": "French 202608 CRSP CIZ, different definitions and vintage from prior OSAP",
+  "source_selection_before_effects": true,
+  "sources": [
+    {
+      "id": "BM",
+      "reference": "reference.french.longonly.bm@1.0.0",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-sources-20261020/us-long-only-factor-sources-20261020-20261020T163856-9d6c0ca2cda1/result/6_Portfolios_2x3.csv",
+      "sha256": "6b8bb85c67f8ef58baa04c2ae72415ff53a23ec706eedbec71ff4f7a0a19af9c",
+      "headers": [
+        "SMALL LoBM",
+        "ME1 BM2",
+        "SMALL HiBM",
+        "BIG LoBM",
+        "ME2 BM2",
+        "BIG HiBM"
+      ],
+      "small_indices": [
+        0,
+        1,
+        2
+      ],
+      "big_indices": [
+        3,
+        4,
+        5
+      ],
+      "direction": "higher score group is H; no sign multiplier"
+    },
+    {
+      "id": "OP",
+      "reference": "reference.french.longonly.op@1.0.0",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-sources-20261020/us-long-only-factor-sources-20261020-20261020T163856-9d6c0ca2cda1/result/6_Portfolios_ME_OP_2x3.csv",
+      "sha256": "7a58a3eece5e69eca8c23f06cb393e52b41c9fe17ee27a9cf9f5a572bd5d7c7c",
+      "headers": [
+        "SMALL LoOP",
+        "ME1 OP2",
+        "SMALL HiOP",
+        "BIG LoOP",
+        "ME2 OP2",
+        "BIG HiOP"
+      ],
+      "small_indices": [
+        0,
+        1,
+        2
+      ],
+      "big_indices": [
+        3,
+        4,
+        5
+      ],
+      "direction": "higher score group is H; no sign multiplier"
+    },
+    {
+      "id": "MOM",
+      "reference": "reference.french.longonly.mom@1.0.0",
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-sources-20261020/us-long-only-factor-sources-20261020-20261020T163856-9d6c0ca2cda1/result/6_Portfolios_ME_Prior_12_2.csv",
+      "sha256": "0a53513f2e1eb803607619fb1efefa64fe87897fe826d91917041b489f1da898",
+      "headers": [
+        "SMALL LoPRIOR",
+        "ME1 PRIOR2",
+        "SMALL HiPRIOR",
+        "BIG LoPRIOR",
+        "ME2 PRIOR2",
+        "BIG HiPRIOR"
+      ],
+      "small_indices": [
+        0,
+        1,
+        2
+      ],
+      "big_indices": [
+        3,
+        4,
+        5
+      ],
+      "direction": "higher score group is H; no sign multiplier"
+    }
+  ],
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-evaluation-20261020/us-long-only-factor-evaluation-20261020-20261020T163856-30a711fdbef6/result",
+  "storage_plan": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-long-only-factor-evaluation-2026-10-20/storage-plan.json",
+  "periods": [
+    {
+      "id": "primary",
+      "start": "2015-01",
+      "end": "2024-12",
+      "expected_months": 120
+    },
+    {
+      "id": "early",
+      "start": "1963-07",
+      "end": "2014-12",
+      "expected_months": 618
+    },
+    {
+      "id": "recent_public",
+      "start": "2025-01",
+      "end": "2026-08",
+      "expected_months": 20
+    }
+  ],
+  "primary_size": "big",
+  "secondary_size": "small",
+  "returns_section": "Average Value Weighted Returns -- Monthly",
+  "count_section": "Number of Firms in Portfolios",
+  "unit": "published percent divided by 100 once",
+  "missing_codes": [
+    -99.99,
+    -999.0
+  ],
+  "series": {
+    "L": "low column",
+    "N": "middle column",
+    "H": "high column",
+    "B": "(L+N+H)/3; fixed equal capital to published groups every month"
+  },
+  "contrasts": [
+    "H-B",
+    "H-N",
+    "B-L",
+    "H-L"
+  ],
+  "metrics": [
+    "mean",
+    "sample_sd",
+    "worst_month",
+    "negative_month_fraction",
+    "B_negative_month_mean",
+    "B_positive_month_mean",
+    "top_B_decile_month_mean",
+    "monthly_compounded_path_drawdown",
+    "monthly_compounded_path_growth",
+    "stock_count_min_median_max"
+  ],
+  "path_note": "Gross published rebalanced monthly series only. No costs, intra-month drawdowns, local trades or personal-account simulation. Include initial wealth 1 in drawdown peak. No short-spread compounded paths.",
+  "conditions": "B<0, B>0, zero separately. Rank top ceil(0.10*n) B months descending, tie by month ascending. Ex post diagnostics, not actionable regime rules.",
+  "uncertainty": {
+    "period": "primary",
+    "size": "big",
+    "method": "paired circular blocks",
+    "block_months": 12,
+    "draws": 5000,
+    "seed": 20261020,
+    "percentiles": [
+      2.5,
+      97.5
+    ],
+    "statistics": [
+      "mean_H_minus_B",
+      "mean_H_minus_N",
+      "mean_B_minus_L",
+      "sd_H_minus_B",
+      "B_negative_mean_H_minus_B",
+      "B_positive_mean_H_minus_B",
+      "B_negative_mean_H_minus_N"
+    ],
+    "pointwise_only": true,
+    "resample_all_three_sources_jointly": true,
+    "conditions_reapply_to_resampled_B_labels": true
+  },
+  "stability": {
+    "primary_halves": [
+      [
+        "2015-01",
+        "2019-12"
+      ],
+      [
+        "2020-01",
+        "2024-12"
+      ]
+    ],
+    "annual_contrasts": true,
+    "leave_one_calendar_year_out_mean_extrema": true,
+    "largest_absolute_annual_mean_contribution": true
+  },
+  "not_evaluated": [
+    "same-stock increment beyond momentum",
+    "market adjusted alpha",
+    "Rank IC",
+    "position turnover or fees",
+    "holdings concentration/overlap",
+    "ex ante risk prediction",
+    "ETF validity",
+    "actual investability or point-in-time audit"
+  ],
+  "stop": "Reject missing/duplicate months, bad columns, count mismatches, nonfinite values, source hash mismatch, returns<-100pct, wrong mount. No blind rerun; failure retained.",
+  "budget": {
+    "core_max": 1,
+    "followup_max": 3,
+    "new_source_requests_remaining": 0
+  },
+  "definition_notes": {
+    "BM": "Source book equity divided by prior December market equity; June annual sort; not OSAP tangible book",
+    "OP": "Sales minus COGS SG&A interest divided by book equity; annual June; not GP/assets or cashflow/assets",
+    "MOM": "Prior months -12 through -2; monthly sort; not original OSAP holding rule"
+  },
+  "preexisting_history": "All public; previous OSAP outcomes known; no fitting, parameter search or untouched validation claims"
+}
