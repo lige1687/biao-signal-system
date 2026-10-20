@@ -1,3 +1,16 @@
+# 用户授权接续：检验月末股债再平衡的实际策略用途
+
+- task-id mechanism-rebalancing-review-20261020；owner 01a158cd-e0ee-7260-b91f-629930ce779f/root；status active；scope_released false；checked_coordination_sha b4f8b1e8e639a47b040a1b7e5731d9f17a979627；checked_at 2026-10-20T18:28:26.193510+08:00。已读self、personal-lowfreq-system-audit-20261018、lowfreq-strategy-discovery-20261019、research-utility-review-20261012、strategy-account-bridge-20261020、research-dispatch-controller与COORDINATION。
+- 用户本轮原话：能否融入策略是关键，要去探索、实践、测试。授权新候选研究，实际采用/生产/交易与原策略变更仍分开。沿本轮先现象和机制→可推翻假设→资料→统计→用途验证，不追逐正结果。
+- 先核新问题：机构股债配置偏离在月底的价格压力，能否超出普通日历与近期价格解释，并对个人低频调整的执行产生帮助。可行对象/时期/方法在看效果前按来源资格固定，0已启动市场计算。
+- 基线：已有审阅成果codex/mechanism-rebalancing-review-20261020@cd2b634476bad2a2cc67a605aeaee860b9ce2b28，旧报告封存不改。本轮新增 docs/experiments/month-end-rebalancing-pilot-2026-10-20.md 和同名raw目录；原progress追加；registry/INDEX仅本新报告键/行。root唯一写者；研究实现先落新raw，本题确需正式特征时再登记准确新定义/代码范围。其他源码/现有定义/旧实验/生产/技能只读。
+- Sol/medium rebalance_data_audit只读核现有项目数据/元信息/同题研究，不联网、不运行效果、无写权；主控文献/设计/效果核对。后续实现与独核分开委派并明确文件。
+- 已读output-storage及storage：固定外盘身份通过，约504GB余量；新输入/大结果/日志走plan_output绑定目录，不回退内盘。小记录本机预估不超过2MiB，具体计划另留。
+- 不设置收益及格线或人为结束时间，固定一个核心比较并完成会改变判断的必要核查，全部失败/变体累计留账；旧市场运行0、旧来源16次不重置，本轮增量另计。不扩大旧合同或另owner预算，不购买资料。
+- 冲突决定：原LEI/低换手/US质量/前向组合均不接管；其他owner按月恢复权重结果只作复用，不能替代本题机构价格压力。验收为准确原定义/可得时点、原价分红、简单对照、收益风险/等待代价/费用、反例及用途结论。核心资料无法取得则明确受阻项，独立工作仍完成。
+
+---
+
 # 机制研究流程与月末股债再平衡审阅已交付
 
 - task-id: mechanism-rebalancing-review-20261020；owner: 当前/root；status: completed（本轮文献与流程审阅）；scope_released: true。
