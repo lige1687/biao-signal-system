@@ -1,0 +1,31 @@
+.ms-overlap {
+  padding: 10px 0;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: var(--fs-body);
+}
+.ms-overlap-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 18px;
+  min-height: 24px;
+}
+.ms-overlap-heading { display: flex; align-items: baseline; gap: 8px; }
+.ms-overlap-heading h3 { margin: 0; font-size: var(--fs-md); font-weight: 600; }
+.ms-overlap-heading span, .ms-overlap-state { color: var(--text-secondary); font-size: var(--fs-xs); }
+.ms-overlap-state, .ms-overlap-names { margin: 0; }
+.ms-overlap-names span { color: var(--text-muted); }
+.ms-overlap-figures { display: flex; flex-wrap: wrap; gap: 6px 16px; font-variant-numeric: tabular-nums; }
+.ms-overlap-figures span { color: var(--text-secondary); white-space: nowrap; }
+.ms-overlap-figures strong { color: var(--text-primary); font-weight: 650; }
+.ms-overlap-detail { margin-top: 6px; color: var(--text-secondary); font-size: var(--fs-xs); }
+.ms-overlap-detail summary { color: var(--accent); cursor: pointer; width: fit-content; }
+.ms-overlap-detail summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ms-overlap-detail > div { max-width: 780px; line-height: 1.6; }
+.ms-overlap-detail p { margin: 8px 0 0; }
+.ms-overlap-detail a { display: inline-block; color: var(--accent); margin-top: 8px; }
+@media (max-width: 640px) {
+  .ms-overlap-line { gap: 6px 12px; }
+  .ms-overlap-figures { width: 100%; }
+}

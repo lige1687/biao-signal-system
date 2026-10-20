@@ -1,0 +1,108 @@
+{
+  "checked_at": "2026-10-20T20:29:29.465397+08:00",
+  "preview_url": "http://127.0.0.1:5192/fundamentals#fund-sec-market",
+  "result": "preview_verified_pending_user_visual_review",
+  "build": {
+    "command": "npm run build",
+    "cwd": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/market-style-preview-20261020/web",
+    "exit_code": 0,
+    "modules": 826,
+    "warning": "existing bundle size > 500kB"
+  },
+  "ui_checks": {
+    "desktop_1280": {
+      "client_width": 1280,
+      "scroll_width": 1280
+    },
+    "tablet_1024": {
+      "client_width": 1024,
+      "scroll_width": 1024
+    },
+    "mobile_390": {
+      "client_width": 390,
+      "scroll_width": 390
+    },
+    "periods": [
+      "1个月",
+      "3个月",
+      "年初至今",
+      "1年"
+    ],
+    "markets": [
+      "cn",
+      "us"
+    ],
+    "expanded": [
+      "quality details",
+      "sector weights",
+      "top ten holdings",
+      "weekly/monthly guide"
+    ],
+    "report_link": "verified correct full report rendered",
+    "console_errors": 0,
+    "existing_warnings": [
+      "React Router future flags",
+      "ECharts disposed instance from inherited page"
+    ]
+  },
+  "data_readback": {
+    "breadth_50": {
+      "value": 18.14337881991159,
+      "date": "2026-10-16"
+    },
+    "vix": {
+      "value": 18.44,
+      "date": "2026-10-19",
+      "quality": "time_unverified"
+    },
+    "hy_oas": {
+      "value": 3.31,
+      "date": "2026-10-16",
+      "unit": "%",
+      "quality": "time_unverified"
+    },
+    "strategy_CN": {
+      "return_correlation": 0.850734532840183,
+      "target_list_jaccard": 0.14285714285714285
+    },
+    "strategy_US": {
+      "return_correlation": 0.801631,
+      "target_list_jaccard": 0.111111
+    }
+  },
+  "source_arithmetic": "ui-data-checks.json",
+  "render_boundary_checks": "ui-render-checks.json",
+  "independent_review": "Sol found conflated missing history vs fetch failure; fixed and controlled render check passed",
+  "not_completed": [
+    "runtime 5188 integration",
+    "MSCI continuous data licensing and ingestion",
+    "NFCI and local market realized volatility feed",
+    "current factor drawdown and historical valuation percentile",
+    "stock/sector return contribution and full strategy factor exposure"
+  ],
+  "unchanged": [
+    "5188 source checkout",
+    "8000/8028 service source and processes",
+    "system upgrade database beyond previously confirmed planned registration",
+    "trading rules and thresholds"
+  ],
+  "screenshots": [
+    {
+      "path": "ui-desktop-us.jpg",
+      "sha256": "75810b449c62c3cd2a65bcdd8d5753e86a6d47027985de2ee40a20ada7f9830b",
+      "bytes": 75710
+    },
+    {
+      "path": "ui-desktop.jpg",
+      "sha256": "54462b47f404d153172b0da1751b7edc7fb56de3ac29ceaa0b53b045aa280374",
+      "bytes": 72024
+    },
+    {
+      "path": "ui-mobile.jpg",
+      "sha256": "6822248d87c23d1bde7c3b5f8b7d7fe8f556d64a323689d49d829bd687a44a61",
+      "bytes": 42179
+    }
+  ],
+  "checked_coordination_sha": "c40df6c6508e4867deb79828131a9e59aafcc3f9",
+  "publication_failure_and_fix": "Initial git diff --check flagged blank context lines inside saved patch as trailing whitespace. Source unchanged. Saved zero-context patch tied to exact before SHA; apply with --unidiff-zero after verifying SHA. Rechecked reconstruction and staged diff."
+}

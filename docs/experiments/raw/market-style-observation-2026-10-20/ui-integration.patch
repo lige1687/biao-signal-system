@@ -1,0 +1,49 @@
+--- a/web/src/pages/FundamentalsPage.tsx
++++ b/web/src/pages/FundamentalsPage.tsx
+@@ -12,0 +13 @@
++import MarketStylePanel from "../components/market-style/MarketStylePanel";
+@@ -2047 +2048 @@
+-    <div className="page fund-reading-page">
++    <div className={`page fund-reading-page ${activeSection === "fund-sec-market" ? "ms-page" : ""}`}>
+@@ -2051,3 +2052,3 @@
+-          <span className="pg-head-sub">叙事标注层：解释"为什么"，不参与技术判定、不做硬过滤</span>
+-        </div>
+-        <div className="pg-head-kv">
++          <span className="pg-head-sub">{activeSection === "fund-sec-market" ? "理解市场风格与风险条件" : '叙事标注层：解释“为什么”，不参与技术判定、不做硬过滤'}</span>
++        </div>
++        {activeSection !== "fund-sec-market" && <div className="pg-head-kv">
+@@ -2062,2 +2063,2 @@
+-        </div>
+-        <div className="pg-head-actions">
++        </div>}
++        {activeSection !== "fund-sec-market" && <div className="pg-head-actions">
+@@ -2071,5 +2072,5 @@
+-        </div>
+-      </div>
+-
+-      {ov && <div className="legend">{ov.disclaimer_cn}</div>}
+-      {allErrors.length > 0 && (
++        </div>}
++      </div>
++
++      {activeSection !== "fund-sec-market" && ov && <div className="legend">{ov.disclaimer_cn}</div>}
++      {activeSection !== "fund-sec-market" && allErrors.length > 0 && (
+@@ -2081 +2082 @@
+-      {(ovError || ratesError) && (
++      {activeSection !== "fund-sec-market" && (ovError || ratesError) && (
+@@ -2103,4 +2104,3 @@
+-          <div className="observation-market-switch" role="group" aria-label="观察市场">
+-            <button type="button" className={market === "cn" ? "on" : ""} onClick={() => setMarket("cn")} aria-pressed={market === "cn"}>A股</button>
+-            <button type="button" className={market === "us" ? "on" : ""} onClick={() => setMarket("us")} aria-pressed={market === "us"}>美股</button>
+-          </div>
++          <MarketStylePanel market={market} onMarketChange={setMarket} observations={observations} ratesHistory={ratesHist} ratesHistoryFailed={!!ratesHistError} />
++          {observationsError && <p className="fund-errors">{market === "cn" ? "A股" : "美股"}观察资料读取失败；风格事实表仍可查看。</p>}
++          <details className="observation-legacy"><summary>更多市场资料：资金、调查与产品历史</summary>
+@@ -2108,5 +2108,2 @@
+-          {observationsError && <p className="fund-errors">观察资料不可用：{(observationsError as Error).message}</p>}
+-          {(observations || (!observationsLoading && !observationsError)) &&
+-            <MarketObservationCards response={observations} title={`${market === "cn" ? "A股" : "美股"}背景观察`} limit={4}
+-              metricIds={market === "us" ? ["vix", "vxn", "real_yield_10y", "hy_oas"] : undefined} />}
+-          <details className="observation-legacy"><summary>每周调查、已有宽度与产品历史</summary>
++          <MarketObservationCards response={observations} title={`${market === "cn" ? "A股" : "美股"}背景观察`} limit={4}
++            metricIds={market === "us" ? ["vix", "vxn", "real_yield_10y", "hy_oas"] : undefined} />
