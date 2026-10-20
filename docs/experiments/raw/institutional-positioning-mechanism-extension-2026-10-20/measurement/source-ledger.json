@@ -1,0 +1,42 @@
+{
+  "scope": "Measurement semantics and source qualification only; no market outcomes requested or read",
+  "asof": "2026-10-20 Asia/Shanghai",
+  "new_network_calls": 2,
+  "new_direct_downloads": 0,
+  "requests": [
+    {
+      "tool": "web.run open",
+      "urls": [
+        "https://naaim.org/programs/naaim-exposure-index/",
+        "https://www.cftc.gov/idc/groups/public/@commitmentsoftraders/documents/file/tfmexplanatorynotes.pdf"
+      ],
+      "status": "both returned source content",
+      "used_for": "NAAIM respondent and exposure definition; CFTC categories, spreading, changes of classification and backfill"
+    },
+    {
+      "tool": "web.run click",
+      "url": "https://naaim.org/programs/naaim-exposure-index/faqs/",
+      "status": "returned source content",
+      "used_for": "participant eligibility, average and quartile definitions, weekly as-of Wednesday"
+    }
+  ],
+  "reused_sources": [
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/contrarian-market-data-research-20261020/contrarian-market-data-research-20261020-20261020T201641-8db4c9e11062/result/naaim/naaim-official-2026-08-19.xlsx",
+      "sha256_expected": "0adfed48efcc7c86e00aeca9d6632acdf28a6447e5e93e7cd9134ffec181abb1",
+      "source_url": "https://naaim.org/wp-content/uploads/2026/08/USE_Data-since-Inception_2026-08-19.xlsx"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/contrarian-market-data-research-20261020/contrarian-market-data-research-20261020-20261020T201641-8db4c9e11062/result/naaim/naaim-combined-input-only.csv",
+      "sha256_expected": "55cac10316feb490718567a05ca6e05058db262a28bb421cb86c01b40cd9e498",
+      "source_detail": "official Mean/Average through 2026-08-19; eight latest mean-only dates from saved public WinterResearch JSON"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/contrarian-market-data-research-20261020/contrarian-market-data-research-20261020-20261020T201641-8db4c9e11062/result/us-cftc/cftc-tff-futures-only-13874A-snapshot-2026-10-20.csv",
+      "sha256_expected": "7e58691af996974cc7620a09523aceef6e1b0ddc0e1e2c9a443202b8406d2f1e",
+      "source_url": "https://publicreporting.cftc.gov/w/gpe5-46if/default"
+    }
+  ],
+  "network_failures": [],
+  "source_boundary": "Current saved versions and official description pages; no historical first-publication panel or individual trader/respondent records"
+}

@@ -1,0 +1,159 @@
+{
+  "status": "pass",
+  "checked_at": "2026-10-20T23:35:30.774015+08:00",
+  "source_results_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/institutional-positioning-mechanism-extension-20261020/institutional-positioning-mechanism-extension-20261020-20261020T231815-dc4117f06e28/result/implementation/effects-v1/results.json",
+  "source_results_sha256": "82b7156e6491617dc23e7073d360baaa36ddc385f4ee2f3d8395c9427d471e2c",
+  "freeze_file_bindings_actual": 17,
+  "frozen_old_bindings_boolean_only": true,
+  "checks_total": 2504,
+  "checks_failed": [],
+  "independent_parameter_solves": 2,
+  "additional_model_searches": 0,
+  "details": {
+    "naaim": {
+      "prediction_rows": 592,
+      "observation_rows": 1026,
+      "fit_records": 72,
+      "cell_counts": {
+        "trend_1_change_1": 250,
+        "trend_1_change_-1": 258,
+        "trend_-1_change_-1": 41,
+        "trend_-1_change_1": 43
+      },
+      "years": {
+        "2015": 47,
+        "2016": 47,
+        "2017": 52,
+        "2018": 53,
+        "2019": 52,
+        "2020": 52,
+        "2021": 52,
+        "2022": 52,
+        "2023": 52,
+        "2024": 53,
+        "2025": 52,
+        "2026": 28
+      },
+      "raw_samples": [
+        {
+          "report_date": "2014-12-31",
+          "lag_report_date": "2014-12-03",
+          "anchor_date": "2015-01-05",
+          "target_start": "2015-01-06",
+          "target_end": "2015-04-08",
+          "source_values": {
+            "old_mean": 86.06375,
+            "new_mean": 95.86323529411764
+          },
+          "target_return_pct": 4.548312784859787,
+          "target_peak_to_trough_pct": 3.5331926545108416
+        },
+        {
+          "report_date": "2020-01-01",
+          "lag_report_date": "2019-12-04",
+          "anchor_date": "2020-01-06",
+          "target_start": "2020-01-07",
+          "target_end": "2020-04-07",
+          "source_values": {
+            "old_mean": 77.8,
+            "new_mean": 86.99
+          },
+          "target_return_pct": -17.364653012587727,
+          "target_peak_to_trough_pct": 33.717275321149764
+        }
+      ],
+      "independent_solve": {
+        "year": 2020,
+        "model": "context",
+        "train_n": 672,
+        "test_n": 52,
+        "method": "augmented_numpy_lstsq_no_normal_equations",
+        "max_beta_abs_difference": 6.328271240363392e-14
+      },
+      "block26_context_vs_level": {
+        "interval": [
+          -1.7319277082142466,
+          0.2948235744545983
+        ],
+        "draws": 2000
+      }
+    },
+    "cftc": {
+      "prediction_rows": 544,
+      "observation_rows": 730,
+      "fit_records": 72,
+      "cell_counts": {
+        "trend_1_change_1": 253,
+        "trend_1_change_-1": 225,
+        "trend_-1_change_-1": 40,
+        "trend_-1_change_1": 26
+      },
+      "years": {
+        "2015": 52,
+        "2016": 52,
+        "2017": 47,
+        "2018": 52,
+        "2019": 35,
+        "2020": 52,
+        "2021": 52,
+        "2022": 52,
+        "2023": 35,
+        "2024": 53,
+        "2025": 39,
+        "2026": 23
+      },
+      "raw_samples": [
+        {
+          "report_date": "2014-12-30",
+          "lag_report_date": "2014-12-02",
+          "anchor_date": "2015-01-05",
+          "target_start": "2015-01-06",
+          "target_end": "2015-04-08",
+          "source_values": {
+            "old_oi": 3111438.0,
+            "new_oi": 2750182.0,
+            "old_long": 1378844.0,
+            "new_long": 1378656.0,
+            "old_short": 541906.0,
+            "new_short": 465347.0
+          },
+          "target_return_pct": 4.548312784859787,
+          "target_peak_to_trough_pct": 3.5331926545108416
+        },
+        {
+          "report_date": "2019-12-31",
+          "lag_report_date": "2019-12-03",
+          "anchor_date": "2020-01-06",
+          "target_start": "2020-01-07",
+          "target_end": "2020-04-07",
+          "source_values": {
+            "old_oi": 2893602.0,
+            "new_oi": 2720284.0,
+            "old_long": 1423216.0,
+            "new_long": 1518381.0,
+            "old_short": 577580.0,
+            "new_short": 490510.0
+          },
+          "target_return_pct": -17.364653012587727,
+          "target_peak_to_trough_pct": 33.717275321149764
+        }
+      ],
+      "independent_solve": {
+        "year": 2020,
+        "model": "context",
+        "train_n": 411,
+        "test_n": 52,
+        "method": "augmented_numpy_lstsq_no_normal_equations",
+        "max_beta_abs_difference": 3.375077994860476e-14
+      },
+      "block26_context_vs_level": {
+        "interval": [
+          -3.7284601661566272,
+          1.2610538699417886
+        ],
+        "draws": 2000
+      }
+    }
+  },
+  "boundary": "Numerical saved-vintage audit only; missing actual_release_at prevents historical trade-time qualification."
+}

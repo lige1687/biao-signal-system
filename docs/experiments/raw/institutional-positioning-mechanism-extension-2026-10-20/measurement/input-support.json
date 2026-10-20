@@ -1,0 +1,275 @@
+{
+  "asof": "2026-10-20 Asia/Shanghai",
+  "scope": "input-only structural qualification; current saved vintage; no future price, target or return read",
+  "verified_source_sha256": {
+    "naaim-official-2026-08-19.xlsx": "0adfed48efcc7c86e00aeca9d6632acdf28a6447e5e93e7cd9134ffec181abb1",
+    "naaim-combined-input-only.csv": "55cac10316feb490718567a05ca6e05058db262a28bb421cb86c01b40cd9e498",
+    "cftc-tff-futures-only-13874A-snapshot-2026-10-20.csv": "7e58691af996974cc7620a09523aceef6e1b0ddc0e1e2c9a443202b8406d2f1e"
+  },
+  "naaim": {
+    "official_workbook_rows": 1052,
+    "official_unique_dates": 1050,
+    "official_columns": [
+      "Date",
+      "Mean/Average",
+      "Most Bearish Response",
+      "Quart 1 (25% at/below)",
+      "Quart 2 (median)",
+      "Quart 3 (25% at/above)",
+      "Most Bullish Response",
+      "Standard Deviation",
+      "NAAIM Number",
+      "S&P 500"
+    ],
+    "respondent_count_column_present": false,
+    "respondent_id_column_present": false,
+    "official_quartile_order_or_mean_range_violations": 0,
+    "official_number_vs_mean_mismatches": [
+      {
+        "date": "2022-06-22",
+        "mean_average": 19.86,
+        "naaim_number": 18.86,
+        "difference_pp": 1.0
+      },
+      {
+        "date": "2021-04-07",
+        "mean_average": 89.85,
+        "naaim_number": 89.95,
+        "difference_pp": -0.10000000000000853
+      },
+      {
+        "date": "2018-08-08",
+        "mean_average": 87.68,
+        "naaim_number": 87.6,
+        "difference_pp": 0.0800000000000125
+      }
+    ],
+    "combined_unique_weekly_rows": 1058,
+    "removed_identity_anomaly_dates": [
+      "2014-03-18",
+      "2014-03-19"
+    ],
+    "rows_after_identity_cleaning": 1056,
+    "four_week_candidate": "Mean/Average_t - Mean/Average_t-4 in percentage points, from four consecutive weekly source observations with 26-30 calendar days overall and each gap 6-8 days",
+    "possible_t_minus_4_pairs_after_cleaning": 1052,
+    "structurally_valid_four_week_pairs": 1040,
+    "invalid_gap_pairs": 12,
+    "invalid_gap_examples": [
+      {
+        "start": "2014-02-19",
+        "end": "2014-03-26",
+        "weekly_gaps_days": [
+          7,
+          7,
+          7,
+          14
+        ]
+      },
+      {
+        "start": "2014-02-26",
+        "end": "2014-04-02",
+        "weekly_gaps_days": [
+          7,
+          7,
+          14,
+          7
+        ]
+      },
+      {
+        "start": "2014-03-05",
+        "end": "2014-04-09",
+        "weekly_gaps_days": [
+          7,
+          14,
+          7,
+          7
+        ]
+      },
+      {
+        "start": "2014-03-12",
+        "end": "2014-04-16",
+        "weekly_gaps_days": [
+          14,
+          7,
+          7,
+          7
+        ]
+      },
+      {
+        "start": "2015-02-18",
+        "end": "2015-03-25",
+        "weekly_gaps_days": [
+          7,
+          7,
+          7,
+          14
+        ]
+      },
+      {
+        "start": "2015-02-25",
+        "end": "2015-04-01",
+        "weekly_gaps_days": [
+          7,
+          7,
+          14,
+          7
+        ]
+      },
+      {
+        "start": "2015-03-04",
+        "end": "2015-04-08",
+        "weekly_gaps_days": [
+          7,
+          14,
+          7,
+          7
+        ]
+      },
+      {
+        "start": "2015-03-11",
+        "end": "2015-04-15",
+        "weekly_gaps_days": [
+          14,
+          7,
+          7,
+          7
+        ]
+      },
+      {
+        "start": "2015-12-23",
+        "end": "2016-01-27",
+        "weekly_gaps_days": [
+          7,
+          7,
+          7,
+          14
+        ]
+      },
+      {
+        "start": "2015-12-30",
+        "end": "2016-02-03",
+        "weekly_gaps_days": [
+          7,
+          7,
+          14,
+          7
+        ]
+      },
+      {
+        "start": "2016-01-06",
+        "end": "2016-02-10",
+        "weekly_gaps_days": [
+          7,
+          14,
+          7,
+          7
+        ]
+      },
+      {
+        "start": "2016-01-13",
+        "end": "2016-02-17",
+        "weekly_gaps_days": [
+          14,
+          7,
+          7,
+          7
+        ]
+      }
+    ],
+    "pairs_touching_number_mean_mismatch_retained_using_mean_average": 6,
+    "four_week_change_pp": {
+      "min": -77.25999999999999,
+      "p05_nearest_index": -34.335,
+      "median_nearest_index": -0.0808080808080689,
+      "p95_nearest_index": 33.232142857142854,
+      "max": 79.47474747474747,
+      "abs_at_least_40pp_diagnostic_count": 62
+    },
+    "existing_level_extremes_in_combined_input": {
+      "mean_le_40_weeks": 155,
+      "mean_ge_100_weeks": 43
+    },
+    "example_2020": {
+      "start": "2020-02-19",
+      "end": "2020-03-18",
+      "mean_start": 87.91,
+      "mean_end": 10.65,
+      "change_pp": -77.26,
+      "median_start": 99.38,
+      "median_end": 10.0
+    },
+    "latest_pair": {
+      "start": "2026-09-16",
+      "end": "2026-10-14",
+      "mean_change_pp": 2.6099999999999994
+    },
+    "recent_distribution_gap": "last eight 2026-08-26 through 2026-10-14 extension rows provide mean only; no quartiles or respondent counts"
+  },
+  "cftc": {
+    "raw_rows": 1062,
+    "raw_first": "2006-06-13",
+    "raw_last": "2026-10-13",
+    "contract_code": "13874A",
+    "raw_t_minus_4_pairs": 1058,
+    "pairs_starting_2011_or_later": 820,
+    "rejected_calendar_interval_after_2011": 0,
+    "rejected_any_of_five_weeks_in_prior_exception_mask": 76,
+    "structurally_valid_four_week_pairs": 744,
+    "candidate": "100*((asset_mgr_long_t-asset_mgr_short_t)-(asset_mgr_long_t-4-asset_mgr_short_t-4))/open_interest_t-4",
+    "components": "100*(long_t-long_t-4)/OI_t-4 and -100*(short_t-short_t-4)/OI_t-4; keep spreading and OI change as diagnostics",
+    "variables_pp_old_oi": {
+      "delta_long_pp_old_oi": {
+        "min": -13.415428036840584,
+        "p05_nearest_index": -4.254834910357149,
+        "median_nearest_index": 0.034926291109653486,
+        "p95_nearest_index": 3.943940500588815,
+        "max": 8.884784720884197
+      },
+      "delta_short_pp_old_oi": {
+        "min": -9.34849626679196,
+        "p05_nearest_index": -3.7126607401971414,
+        "median_nearest_index": -0.17918246280717925,
+        "p95_nearest_index": 4.405846233168103,
+        "max": 20.70785994103574
+      },
+      "delta_spread_pp_old_oi": {
+        "min": -5.194147597671054,
+        "p05_nearest_index": -1.935102296782787,
+        "median_nearest_index": -0.06514701017401163,
+        "p95_nearest_index": 2.284716408988901,
+        "max": 12.797942625540308
+      },
+      "delta_oi_pp_old_oi": {
+        "min": -27.587016873382208,
+        "p05_nearest_index": -17.110962154100054,
+        "median_nearest_index": 2.1073992790322804,
+        "p95_nearest_index": 16.62264027557587,
+        "max": 60.39476682490728
+      },
+      "delta_net_pp_old_oi": {
+        "min": -27.47543713396073,
+        "p05_nearest_index": -6.960173050006362,
+        "median_nearest_index": 0.09349760706194217,
+        "p95_nearest_index": 6.395494468440405,
+        "max": 13.569581646849409
+      }
+    },
+    "delta_net_abs_at_least_10pp_diagnostic_count": 17,
+    "pairs_where_denominator_component_exceeds_position_component": 269,
+    "pairs_where_current_net_share_change_opposes_old_oi_position_change": 139,
+    "latest_four_week_example": {
+      "start": "2026-09-15",
+      "end": "2026-10-13",
+      "delta_long_pp_old_oi": -1.2953506594471573,
+      "delta_short_pp_old_oi": -1.751141111105207,
+      "delta_spread_pp_old_oi": -3.1544410650397565,
+      "delta_oi_pp_old_oi": -21.046719849713,
+      "delta_net_pp_old_oi": 0.45579045165804966,
+      "net_share_old_pct": 36.978417089750785,
+      "net_share_new_pct": 47.41311250166312,
+      "denominator_effect_pp": 9.978904960254287
+    },
+    "identities_checked_all_eligible_pairs": true
+  },
+  "qualification_boundary": "Counts are input structure, not contemporaneous release qualification, independent trade flows, forced selling, or factor performance; annual source vintage and actual publication clocks remain unproven."
+}

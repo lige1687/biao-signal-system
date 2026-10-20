@@ -1,0 +1,22 @@
+{
+  "task": "independent numerical and time-boundary verification only; no new hypothesis or full grid rerun",
+  "read": [
+    "docs/experiments/raw/institutional-positioning-mechanism-extension-2026-10-20",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/institutional-positioning-mechanism-extension-20261020/institutional-positioning-mechanism-extension-20261020-20261020T231815-dc4117f06e28/result/implementation/effects-v1"
+  ],
+  "write": [
+    "docs/experiments/raw/institutional-positioning-mechanism-extension-2026-10-20/verification"
+  ],
+  "network": false,
+  "no_import_candidate_code": true,
+  "checks": [
+    "original inputs to four-week features/denominator and two price/label paths per source",
+    "all saved prediction errors/six common samples/decomposition/cell counts/periods",
+    "one annual context fit per source independently with QR/lstsq and same fixed objective, max2 parameter verification solves",
+    "blocked intervals independently reproduce main context-vs-level using seed/algorithm from frozen code without importing; no model refit",
+    "actual release unknown/old freeze16? verify actual list counts"
+  ],
+  "delegate": "Sol medium",
+  "scientific_conclusion_owner": "root",
+  "not_run_new_market_search": true
+}

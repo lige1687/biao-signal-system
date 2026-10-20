@@ -1,0 +1,217 @@
+{
+  "mode": "input_only",
+  "future_outcome_values_calculated": false,
+  "actual_release_at": null,
+  "source_vintage": "current_saved_version",
+  "price": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/month-end-rebalancing-pilot-20261020/month-end-rebalancing-pilot-20261020-20261020T183211-dd857eb17284/result/SPY.json",
+    "sha256": "0cf716a2ee85260430d69feb79f972fb9f9a3d1b606c638da43dec8a54e9c9ff",
+    "rows": 6114
+  },
+  "source_files": {
+    "naaim_official": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/contrarian-market-data-research-20261020/contrarian-market-data-research-20261020-20261020T201641-8db4c9e11062/result/naaim/naaim-official-2026-08-19-parsed.csv",
+      "sha256": "aa6662b172f8849dc532ae40551fd5d74758f706e13bffc2388ba7d48a717d97"
+    },
+    "naaim_extension": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/contrarian-market-data-research-20261020/contrarian-market-data-research-20261020-20261020T201641-8db4c9e11062/result/naaim/winterresearch-naaim-parsed.csv",
+      "sha256": "bbda9c994388b4fd72c928b985e7e5f44f813545482c702c1327ae8192721cfa"
+    },
+    "cftc": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/contrarian-market-data-research-20261020/contrarian-market-data-research-20261020-20261020T201641-8db4c9e11062/result/us-cftc/cftc-tff-futures-only-13874A-snapshot-2026-10-20.csv",
+      "sha256": "7e58691af996974cc7620a09523aceef6e1b0ddc0e1e2c9a443202b8406d2f1e"
+    }
+  },
+  "candidates": {
+    "naaim": {
+      "source_rows": 1056,
+      "structural_four_week_pairs": 1040,
+      "price_scheduled_pairs": 1039,
+      "mature_target_endpoints": 1026,
+      "rejected": {
+        "invalid_five_report_window": 12,
+        "anchor_beyond_saved_price": 1
+      },
+      "cell_counts_all_scheduled": {
+        "trend_1_change_1": 427,
+        "trend_1_change_-1": 436,
+        "trend_-1_change_-1": 86,
+        "trend_-1_change_1": 90
+      },
+      "zero_trend": 0,
+      "zero_change": 0,
+      "number_mean_anomaly_windows": 15,
+      "annual_support": {
+        "2015": {
+          "train_n": 421,
+          "eval_n": 47,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2014-12-30"
+        },
+        "2016": {
+          "train_n": 468,
+          "eval_n": 47,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2015-12-29"
+        },
+        "2017": {
+          "train_n": 515,
+          "eval_n": 52,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2016-12-27"
+        },
+        "2018": {
+          "train_n": 567,
+          "eval_n": 53,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2017-12-26"
+        },
+        "2019": {
+          "train_n": 619,
+          "eval_n": 52,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2018-12-26"
+        },
+        "2020": {
+          "train_n": 672,
+          "eval_n": 52,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2019-12-31"
+        },
+        "2021": {
+          "train_n": 724,
+          "eval_n": 52,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2020-12-29"
+        },
+        "2022": {
+          "train_n": 776,
+          "eval_n": 52,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2021-12-28"
+        },
+        "2023": {
+          "train_n": 828,
+          "eval_n": 52,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2022-12-27"
+        },
+        "2024": {
+          "train_n": 880,
+          "eval_n": 53,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2023-12-26"
+        },
+        "2025": {
+          "train_n": 933,
+          "eval_n": 52,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2024-12-31"
+        },
+        "2026": {
+          "train_n": 985,
+          "eval_n": 28,
+          "max_slope_parameters": 9,
+          "latest_train_target_end": "2025-12-30"
+        }
+      },
+      "schedule": "/Volumes/win+mac通用/LeiSignal-新实验结果/institutional-positioning-mechanism-extension-20261020/institutional-positioning-mechanism-extension-20261020-20261020T231815-dc4117f06e28/result/implementation/naaim-schedule.json",
+      "schedule_sha256": "d4ab5faf45fac3bb066ad90b7be4cf4bcd83ea6514c3abb83c7cc4f090e6c24f"
+    },
+    "cftc": {
+      "source_rows": 824,
+      "structural_four_week_pairs": 744,
+      "price_scheduled_pairs": 743,
+      "mature_target_endpoints": 730,
+      "rejected": {
+        "invalid_five_report_window": 76,
+        "anchor_beyond_saved_price": 1
+      },
+      "cell_counts_all_scheduled": {
+        "trend_1_change_-1": 323,
+        "trend_1_change_1": 352,
+        "trend_-1_change_-1": 42,
+        "trend_-1_change_1": 26
+      },
+      "zero_trend": 0,
+      "zero_change": 0,
+      "number_mean_anomaly_windows": 0,
+      "annual_support": {
+        "2015": {
+          "train_n": 173,
+          "eval_n": 52,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2014-12-30"
+        },
+        "2016": {
+          "train_n": 225,
+          "eval_n": 52,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2015-12-29"
+        },
+        "2017": {
+          "train_n": 277,
+          "eval_n": 47,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2016-12-27"
+        },
+        "2018": {
+          "train_n": 324,
+          "eval_n": 52,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2017-12-26"
+        },
+        "2019": {
+          "train_n": 376,
+          "eval_n": 35,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2018-12-26"
+        },
+        "2020": {
+          "train_n": 411,
+          "eval_n": 52,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2019-12-31"
+        },
+        "2021": {
+          "train_n": 463,
+          "eval_n": 52,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2020-12-29"
+        },
+        "2022": {
+          "train_n": 515,
+          "eval_n": 52,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2021-12-28"
+        },
+        "2023": {
+          "train_n": 567,
+          "eval_n": 35,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2022-12-27"
+        },
+        "2024": {
+          "train_n": 602,
+          "eval_n": 53,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2023-12-26"
+        },
+        "2025": {
+          "train_n": 655,
+          "eval_n": 39,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2024-12-31"
+        },
+        "2026": {
+          "train_n": 707,
+          "eval_n": 23,
+          "max_slope_parameters": 10,
+          "latest_train_target_end": "2025-12-30"
+        }
+      },
+      "schedule": "/Volumes/win+mac通用/LeiSignal-新实验结果/institutional-positioning-mechanism-extension-20261020/institutional-positioning-mechanism-extension-20261020-20261020T231815-dc4117f06e28/result/implementation/cftc-schedule.json",
+      "schedule_sha256": "66aac01fec137403bd8f31306701b44198a181d12499c2b079a23fd407e45705"
+    }
+  }
+}

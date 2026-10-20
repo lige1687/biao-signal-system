@@ -1,0 +1,44 @@
+{
+  "mission": "Audit existing NAAIM and CFTC measurements and candidate changes/conditioning; inputs only, no future outcome calculations",
+  "task_scope": [
+    "read existing reports and source inputs",
+    "only own new source and method qualification notes",
+    "no market outcome fitting, paid data, production or shared changes"
+  ],
+  "read_only_paths": [
+    "docs/experiments/raw/contrarian-market-data-research-2026-10-20",
+    "docs/experiments/us-contrarian-positioning-research-2026-10-20.md",
+    "docs/research/current-standards.json",
+    "configs/strategy-documents.v1.json"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-positioning-mechanism-extension-2026-10-20/measurement",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/institutional-positioning-mechanism-extension-20261020/institutional-positioning-mechanism-extension-20261020-20261020T231815-dc4117f06e28/result/measurement"
+  ],
+  "network_allowed": true,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "source or measurement review with definitions and citations",
+    "exact source request ledger and known limitations",
+    "recommend at most one principal use, no threshold search"
+  ],
+  "stop_conditions": [
+    "access denial: no bypass",
+    "no concrete evidence supporting proposed label",
+    "scope ambiguity"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "created_at": "2026-10-20T23:18:15.749062+08:00",
+  "cumulative_old_fits_minimum": 1124,
+  "old_pro_calls_minimum": 4,
+  "no_new_fits_authorized_for_this_delegate": true,
+  "storage_plan": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-positioning-mechanism-extension-2026-10-20/storage-plan.json"
+}
