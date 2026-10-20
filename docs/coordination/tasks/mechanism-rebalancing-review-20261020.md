@@ -1,3 +1,16 @@
+# 月末股债低频适用性检验交付 2026-10-20T18:54:47.214931+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner沿原；status completed（本轮有界适用性检验）；scope_released true；checked_coordination_sha c3aced7add992f7768bebae94e0d4c875ec851c4；checked_at 2026-10-20T18:54:47.214931+08:00。已读COORDINATION/self/dispatch/personal-lowfreq-system-audit-20261018/research-utility-review-20261012/strategy-account-bridge-20261020；后者新个股前向范围保持，无重复或源码冲突。
+- 成果 codex/mechanism-rebalancing-review-20261020@3b3adbee4b22f4546946c024a1d608a915d93faf；核心d9a6ac7a749be7f26b714f6f1795b449bc907908的31准确路径709863字节及最后2回执/进度已普通推送、远端ref/全部字节核同，0删除，无main合并。报告 docs/experiments/month-end-rebalancing-pilot-2026-10-20.md SHA f5c32dc7432ac83a67c8e7319efc67c9590afde34d3b45b28fd606a17ae1f4de；主树报告API全文核同、registry仅本键/INDEX本行、其他723登记值保持。
+- 结果：SPY/IEF 2003-01至2026-09共285月，按机制方向的股债差+0.5035pp/次、下一开盘+0.4463，剔除2008/2020仍+0.3635；2026九月1正8负、-0.7332pp。联合日历额外作用范围跨零；225月过去训练预测对相对涨幅误差少0.4955%，属同价格信息表达改善。保留历史线索，暂不采用本版月末一次信号；完整LEI/实际账户净费用/中国ETF未评价。不是整个机制证伪，不改参数追正。
+- 原论文全文2025-12-15及发行方核对已完成；当前vendor原价/分红6,094共同日，10笔IEF分红/5年回报核同至舍入。历史到达/修订、全交易日历、机构交易因果未证。大来源/结果在固定外盘，raw/storage-plan与attempt绑定；仓外源不入Git，成果旧基线没有output_storage，不宣称干净clone自动取数完整可复现。
+- 新module/tests由Sol medium，6合成检查；Astra medium冻前方法审查补日历控制、后审有限结论；另Sol medium原JSON独核285事件/900预测值/675固定拟合，root主要区间独核，最大误差1.43e-14。1核心+1预定调整价敏感性，0参数扫描/旧研究重跑。来源本轮28项（含Astra7）+此前16=44，新增1资料下载失败，实际token费用未知。26冻结绑定未变，归置/diff通过。
+- 现有单资产技术原生workflow不支持本外部双资产机制，本次独立绑定合同不冒称原生通过。共享主表3个French源额外字段/绝对路径致严格读取失败，未改他人字段/校验器；使用自身已发布分支有效81卡表，只加本卡为82并严格解析，canonical路径已随本分支发布；共享198卡主表未改。新对象research.rebalancing.calendar_drift_60_40@1.0.0仅研究，无生产消费者。
+- 目标okr-1439df888f5b v9 paused为候选执行用途搁置，2/3核查，账户用途false；本轮研究已完成。一次purpose进展写入触发接口撤授权，读回v6后恢复原purpose/原用户授权同范围再搁置，错误历史保留；没有代用户验收。细节见goal-and-report-receipt。
+- 无运行进程/后台观察/通知/交易；原策略与规则SHA不变。当前范围无必需未完成检验；恢复先读保存design/freeze/results-summary/independent-audit，仅新独立时期或明确可核执行问题才重开。不要重复本285月或把方向差称账户收益。
+
+---
+
 # 本轮限定的外部机制研究实现 2026-10-20T18:35:01.349144+08:00
 
 - task-id沿原；active；checked_coordination_sha 2481cc42e9af8290e1a7f89278bc7dadfb8dad6e；已读COORDINATION/self/dispatch/personal-lowfreq-system-audit-20261018/research-utility-review-20261012/technical-factor-sequence/gemini-strategy-review-20261020/strategy-account-bridge-20261020。历史native-workflow-integration非同名task文件，依中控核其保留共享入口范围。
