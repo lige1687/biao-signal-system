@@ -1,3 +1,14 @@
+# 防御输入依赖隔离后再评价 2026-10-20T12:20:16.669718+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=a6a3d1a83a0e4289ad93f8fc5d23ab9285459b0b；checked_at=2026-10-20T12:20:16.669718+08:00。已读COORDINATION/self、research-utility-review-20261012最新12:06指标审计、gemini-strategy-review-20261020最新12:08 ETF真实52月交付；lowfreq-strategy-discovery-20261019/research-dispatch-controller沿本轮已读且无新变更。其他任务成果只复用，不重跑。
+- 前述600股132月直接诊断不放行：本任务先前已知sz.001914返回1560行flag3/2混用，saved面板资格未覆盖。主控于新效果前重读该纠正并fresh inspect_contract核600源1852185行仍为唯一阻断；再映射每eligible月动量两端、vol61日、资格输入以及保留月评价价格端点。原panel不改、旧guard仍阻断整包，新增独立范围隔离并非宣布整包修复。
+- price-dependency-audit.json SHA3e3bac4606ec7ec7b2060783480e0899149bd0b0902d0d4d410216df177b367a：原阻断0、来源共同阻断63、可评价69月（2015—20仅9，2021—25为60）。全132日历保留，所有方法同月缺失，不删除单股后重排、不补现金0；不按收益挑月份。不能称十年合格、代表ETF或完成可交易验证。独立Astra拒绝v2留痕，v3再核明确隔离后只作有限历史取舍。
+- 固定比较/对手/参数及first-cycle预算不变：核心1，跟进现2/3，实际启动用第3及attempt9/10；仅1实际效果和至多1必要修复。来源依赖核验无效果且不消耗新下载额度，0新取数。若隔离后输入/设计仍不支持，停止此真实计算而不弱化检查。
+- 唯一写范围仍financial-input-recovery本报告/raw/本登记和进度。root新增map_price_dependencies.py、price-dependency-audit.json、defensive-design-v3.json、执行合同/外盘计划；Luna只改本raw defensive_diagnostic.py/synthetic和后续单次受约执行收据；Astra唯一新defensive-isolation-review.json。已有各审阅保留，未发生真实效果。
+- 新验收补充：69月支持与缺63明示、原权重精确复核、blocked月所有汇总不计0、同132日期抽样、不放宽执行含义。旧全部阶段结论不重写；旧价格混合问题继续待来源修复。基线成果14f286cbab22c81fd0e64aca89e457fc1a69e6d3，本轮未提交产物仅本地。
+
+---
+
 # 资料修复实核与防御用途接续 2026-10-20T12:06:03.759774+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=6b658cb2ec79250a5b17330f84af505a00e2c864；checked_at=2026-10-20T12:06:03.759774+08:00。已读COORDINATION/self/research-utility-review-20261012最新11:58、gemini-strategy-review-20261020最新11:59、lowfreq-strategy-discovery-20261019/research-dispatch-controller沿前轮；原因子指标审计和ETF斜率×R²分别归原owner，本题不重做、不改共享定义。
