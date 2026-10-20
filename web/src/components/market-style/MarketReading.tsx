@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import "./market-reading.css";
 
 type Source = { id: string; name: string; url: string };
-type ReadingCard = { id: string; topic: string; fact: string; reading: string; watch: string; source_ids: string[]; data_date: string | null; available: boolean };
+type ReadingCard = { id: string; topic: string; title?: string; fact: string; reading: string; watch: string; source_ids: string[]; data_date: string | null; available: boolean };
 type Snapshot = { snapshot_id: string; asof: string; cards: ReadingCard[]; sources: Source[]; limits: string[] };
 type Reading = { generated: true; snapshot_id: string; cards: ReadingCard[]; model: string; generated_at: string; limits: string[]; usage?: Record<string, number> | null; elapsed_ms?: number };
 type Context = { windowDays: number; ruleIds: string[]; priceKey: string; fingerprint: string };
@@ -29,7 +29,8 @@ async function readJson<T>(url: string, options?: RequestInit): Promise<T> {
 export default function MarketReading({ market, context, viewRevision = 0, riskBasis = "" }: {
   market: "cn" | "us"; context: Context; viewRevision?: number; riskBasis?: string;
 }) {
-  const binding = JSON.stringify({ market, context, viewRevision, riskBasis });
+  const [mode, setMode] = useState<"weekly" | "monthly">("weekly");
+  const binding = JSON.stringify({ market, context, viewRevision, riskBasis, mode });
   const bindingRef = useRef(binding);
   bindingRef.current = binding;
   const [pending, setPending] = useState<"facts" | "model" | null>(null);
@@ -48,7 +49,7 @@ export default function MarketReading({ market, context, viewRevision = 0, riskB
     setPending("facts");
     setFailure(null);
     try {
-      const snapshot = await readJson<Snapshot>(`/api/market-style/snapshot?market=${market}&window_days=${context.windowDays}`);
+      const snapshot = await readJson<Snapshot>(`/api/market-style/snapshot?market=${market}&window_days=${context.windowDays}&mode=${mode}`);
       // A context switch while facts load must not start a model call for the old view.
       if (bindingRef.current !== requestedBinding) return;
       setPending("model");
@@ -72,21 +73,29 @@ export default function MarketReading({ market, context, viewRevision = 0, riskB
 
   return <section className="market-reading" aria-label="Agent按需解读">
     <header className="mr-heading">
-      <div><strong>Agent 解读</strong><span>点一次：最近宽度、月末风格与策略重叠。</span></div>
-      <button type="button" className="mr-generate" disabled={pending !== null || !context.fingerprint} onClick={generate}>
-        {pending === "facts" ? "核对资料…" : pending === "model" ? "整理重点…" : visible ? "重新核对解读" : "生成重点解读"}
-      </button>
+      <div><strong>Agent 解读</strong><span>{mode === "monthly" ? "五问逐项核对，保留尚未回答的部分。" : "最近宽度、风险与风格变化的阅读重点。"}</span></div>
+      <div className="mr-actions">
+        <div className="ms-switch" role="group" aria-label="选择周观察或月复盘">
+          <button type="button" aria-pressed={mode === "weekly"} onClick={() => setMode("weekly")}>周观察</button>
+          <button type="button" aria-pressed={mode === "monthly"} onClick={() => setMode("monthly")}>月复盘</button>
+        </div>
+        <button type="button" className="mr-generate" disabled={pending !== null || !context.fingerprint} onClick={generate}>
+          {pending === "facts" ? "核对资料…" : pending === "model" ? "整理重点…" : visible ? "重新核对解读" : mode === "monthly" ? "生成五问复盘" : "生成重点解读"}
+        </button>
+      </div>
     </header>
     {pending && <p className="mr-status" role="status">本次点击正在处理。切换观察对象后，本次旧结果不会展示到新图上。</p>}
     {visibleFailure && <p className="ms-error" role="alert">{visibleFailure} 可再次点击重试。</p>}
     {changed && !pending && <p className="mr-status">图表范围或资料已变化，旧解读已隐藏。需要时再点击生成。</p>}
     {visible && <details className="mr-result" open>
-      <summary>本次解读 · {visible.reading.cards.length}个重点</summary>
-      <p className="mr-scope">{market === "cn" ? "A股" : "美股"}宽度最近一次变化 · 全球风格截至2026-09-30 · 策略历史比较</p>
+      <summary>{mode === "monthly" ? "本次月复盘 · 五问完整列出" : `本次周观察 · ${visible.reading.cards.length}个重点`}</summary>
+      <p className="mr-scope">{mode === "monthly"
+        ? `前四问：全球风格截至2026-09-30 · 第五问：${market === "cn" ? "A股" : "美股"}策略历史与前向记录`
+        : `${market === "cn" ? "A股" : "美股"}宽度最近一次变化 · 全球风格截至2026-09-30 · 策略历史比较`}</p>
       <div className="mr-grid">
         {visible.reading.cards.map((card) => <article key={card.id}>
-          <h3>{TOPICS[card.topic] ?? "观察重点"}<small>{card.data_date ?? (card.available ? card.topic === "strategy" ? "比较数据日未核" : "各项日期见下" : "缺资料")}</small></h3>
-          <p>{card.fact}</p><p className="mr-reading">{card.reading}</p><p className="mr-watch"><span>接着看</span>{card.watch}</p>
+          <h3>{card.title ?? TOPICS[card.topic] ?? "观察重点"}<small>{card.data_date ?? (card.available ? ["strategy", "q5"].includes(card.topic) ? "历史与前向分开" : "各项日期见下" : "缺资料")}</small></h3>
+          <p>{card.fact}</p><p className="mr-reading">{card.reading}</p><p className="mr-watch"><span>{mode === "monthly" ? "未答／边界" : "接着看"}</span>{card.watch}</p>
         </article>)}
       </div>
       <details className="mr-sources">
@@ -99,6 +108,6 @@ export default function MarketReading({ market, context, viewRevision = 0, riskB
           {visible.reading.elapsed_ms != null ? ` · ${(visible.reading.elapsed_ms / 1000).toFixed(1)}秒` : ""} · {visible.reading.usage ? `用量 ${visible.reading.usage.total_tokens ?? ((visible.reading.usage.input_tokens ?? visible.reading.usage.prompt_tokens ?? 0) + (visible.reading.usage.output_tokens ?? visible.reading.usage.completion_tokens ?? 0))} tokens；费用未返回` : "用量与费用未返回"}。相同资料复用已生成结果。</p>
       </details>
     </details>}
-    {!visible && !pending && !visibleFailure && !changed && <p className="mr-idle">仅点击触发；先核日期与缺项，再按MSCI风格比较、宽度参与程度和策略重叠的方法组织阅读。</p>}
+    {!visible && !pending && !visibleFailure && !changed && <p className="mr-idle">仅点击生成才调用模型，切换周/月不触发。周观察挑重点；月复盘必须列齐五问，不把缺资料的问题跳过。</p>}
   </section>;
 }

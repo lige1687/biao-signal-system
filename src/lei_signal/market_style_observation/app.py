@@ -15,6 +15,7 @@ from pydantic import BaseModel, Field
 
 from lei_signal.market_style_observation.evidence import build_evidence
 from lei_signal.market_style_observation.transport import invoke_selection
+from lei_signal.market_style_observation.review import build_review
 from lei_signal.plans import llm
 
 app = FastAPI(title="Market style observation preview")
@@ -24,7 +25,8 @@ _SNAPSHOTS: dict[str, dict] = {}
 _GENERATED: dict[str, dict] = {}
 _IN_FLIGHT: set[str] = set()
 _SNAPSHOT_TIMES: dict[str, float] = {}
-_QUERY_CACHE: dict[tuple[str, int], tuple[float, dict]] = {}
+_QUERY_CACHE: dict[tuple[str, int, str], tuple[float, dict]] = {}
+_REVIEW_CACHE: dict[str, tuple[float, dict]] = {}
 _MODEL_REQUESTS = 0
 _MAX_SNAPSHOTS = 24
 _SNAPSHOT_TTL_SECONDS = 30 * 60
@@ -48,7 +50,7 @@ def _snapshot_id(snapshot: dict) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
-def _select_ids(raw: str, cards: list[dict]) -> list[str] | None:
+def _select_ids(raw: str, cards: list[dict], *, require_all: bool = False) -> list[str] | None:
     """Reject free-form text, invented cards, duplicates and repeated topics."""
     if len(raw) > 2048 or not raw.lstrip().startswith("{"):
         return None
@@ -59,7 +61,8 @@ def _select_ids(raw: str, cards: list[dict]) -> list[str] | None:
     if not isinstance(parsed, dict) or set(parsed) != {"selected_ids"}:
         return None
     selected = parsed["selected_ids"]
-    if not isinstance(selected, list) or len(selected) not in (3, 4):
+    allowed_counts = (len(cards),) if require_all else (3, 4)
+    if not isinstance(selected, list) or len(selected) not in allowed_counts:
         return None
     if any(not isinstance(item, str) for item in selected) or len(set(selected)) != len(selected):
         return None
@@ -94,16 +97,41 @@ def health() -> dict:
                 "in_flight": len(_IN_FLIGHT)}
 
 
+def get_review(market: str) -> dict:
+    with _LOCK:
+        cached = _REVIEW_CACHE.get(market)
+        if cached and cached[0] > time.monotonic():
+            return cached[1]
+    result = build_review(market)
+    with _LOCK:
+        _REVIEW_CACHE[market] = (time.monotonic() + 60, result)
+    return result
+
+
+@app.get("/api/market-style/review")
+def review(market: Literal["cn", "us"]):
+    """Read-only five-question evidence; no model call or persisted account write."""
+    return get_review(market)
+
+
 @app.get("/api/market-style/snapshot")
-def snapshot(market: Literal["cn", "us"], window_days: int = Query(365)):
+def snapshot(market: Literal["cn", "us"], window_days: int = Query(365),
+             mode: Literal["weekly", "monthly"] = "weekly"):
     if window_days not in (365, 1095, 1825):
         return _error(422, "invalid_window")
-    cache_key = (market, window_days)
+    cache_key = (market, window_days, mode)
     with _LOCK:
         cached = _QUERY_CACHE.get(cache_key)
         if cached and cached[0] > time.monotonic():
             return cached[1]
-    result = build_evidence(market, window_days)
+    if mode == "monthly":
+        reviewed = get_review(market)
+        result = {key: reviewed[key] for key in ("asof", "market", "sources")}
+        result.update(cards=reviewed["questions"], window_days=window_days,
+                      review_mode=mode, limits=reviewed["missing"])
+    else:
+        result = build_evidence(market, window_days)
+        result["review_mode"] = mode
     sid = _snapshot_id(result)
     result["snapshot_id"] = sid
     with _LOCK:
@@ -149,7 +177,13 @@ def interpret(body: InterpretRequest):
         with _LOCK:
             _MODEL_REQUESTS += 1
         try:
-            result = invoke_selection(prompt, _PROMPT, config)
+            instruction = (
+                "你为月度完整复盘安排阅读顺序。必须返回给定五张卡的全部ID，各一次；"
+                '严格JSON {"selected_ids":["q1","q2","q3","q4","q5"]}。'
+                "可以调整顺序，但不可遗漏任何问题，不输出解释、数字、交易动作或其他字段。"
+                if current.get("review_mode") == "monthly" else _PROMPT
+            )
+            result = invoke_selection(prompt, instruction, config)
         except Exception:  # provider failures must not expose payloads or become success
             return _error(503, "model_failed")
         raw = result["text"]
@@ -157,7 +191,7 @@ def interpret(body: InterpretRequest):
         elapsed_ms = result["elapsed_ms"]
         if raw is None:
             return _error(503, result["error_code"] or "model_no_text", usage=usage, elapsed_ms=elapsed_ms)
-        selected = _select_ids(raw, current["cards"])
+        selected = _select_ids(raw, current["cards"], require_all=current.get("review_mode") == "monthly")
         if selected is None:
             return _error(422, "invalid_model_selection", usage=usage, elapsed_ms=elapsed_ms)
         by_id = {card["id"]: card for card in current["cards"]}

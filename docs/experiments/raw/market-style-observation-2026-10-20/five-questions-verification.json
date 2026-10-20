@@ -1,0 +1,139 @@
+{
+  "checked_at": "2026-10-21T00:26:10.142191+08:00",
+  "scope": "五问答案与风险/组合曲线，仓内独立预览；整项仍部分完成",
+  "preview_url": "http://127.0.0.1:5192/fundamentals#fund-sec-market",
+  "test": {
+    "result": "17 passed",
+    "seconds": 1.06,
+    "files": [
+      "tests/unit/test_market_style_observation.py",
+      "tests/unit/test_market_style_observation_portfolio.py",
+      "tests/unit/test_market_style_observation_review.py"
+    ]
+  },
+  "build": {
+    "passed": true,
+    "modules": 835,
+    "warning": "existing bundles over 500kB"
+  },
+  "hygiene": "passed",
+  "ui": {
+    "five_question_rows": 5,
+    "viewports": [
+      {
+        "width": 390,
+        "documentWidth": 390
+      },
+      {
+        "width": 1024,
+        "documentWidth": 1024
+      },
+      {
+        "width": 1280,
+        "documentWidth": 1280
+      }
+    ],
+    "console_errors": 0,
+    "checked": [
+      "CN/US five factual answers",
+      "q3 concentration versus attribution disclosure",
+      "quality volatility and official drawdown dates/valuation/industry/top10 entry",
+      "portfolio return to drawdown switch",
+      "joint-loss months and US target symbols",
+      "RV 1y to 3y chart",
+      "NFCI exactly five observations",
+      "actual monthly all five cards",
+      "actual US weekly three cards",
+      "switch invalidates old reading",
+      "repeat uses cached reading"
+    ],
+    "viewport_reset": true,
+    "tab_kept": true
+  },
+  "models": {
+    "this_phase_calls": 3,
+    "this_phase_tokens": 1465,
+    "readings": [
+      {
+        "file": "five-questions-monthly-first.txt",
+        "tokens": 511,
+        "seconds": 1.2
+      },
+      {
+        "file": "five-questions-monthly-final.txt",
+        "tokens": 511,
+        "seconds": 1.1
+      },
+      {
+        "file": "five-questions-weekly-us.txt",
+        "tokens": 443,
+        "seconds": 1.2
+      }
+    ],
+    "all_phases_calls": 6,
+    "all_phases_tokens": null,
+    "cost": null,
+    "automatic_calls": 0
+  },
+  "sources": {
+    "official_pdf_agent_tool_calls": 2,
+    "root_source_actions": 4,
+    "nfci_csv_status": 404,
+    "new_efficacy_experiments": 0,
+    "paid_data": 0
+  },
+  "independent_portfolio_review": {
+    "agent": "five_q_portfolio",
+    "model": "gpt-6-sol",
+    "effort": "medium",
+    "CN": {
+      "valid_days": 2673,
+      "both_down_days": 945,
+      "months": 132,
+      "both_down_months": 54,
+      "combined_dd": -0.52791782
+    },
+    "US": {
+      "valid_days": 1358,
+      "both_down_days": 474,
+      "months": 65,
+      "both_down_months": 27,
+      "combined_dd": -0.151962
+    },
+    "combined_equity_max_difference": 0,
+    "forward_holdings_each": 0
+  },
+  "failures_and_repairs": [
+    "Original phase omitted direct five answers and available drawdown/common-loss facts; this phase filled them, whole request remains partial.",
+    "Independent review found no-data q5 certainty and forward data date ambiguity; fixed conditional answers and explicit forward date.",
+    "First combined test: 3 failed,14 passed. Shared volatility helper drops invalid prices; display now masks any incomplete original window without changing shared rule. Risk availability remains false when VIX/OAS absent even with limited NFCI snapshot. Final17 passed.",
+    "First actual monthly card only pointed to drawdown detail; final monthly includes four drawdowns and exact scope; first output retained.",
+    "UI during resize/navigation was briefly /today with zero question rows, excluded from acceptance; renavigated and verified exact target URL and all five rows.",
+    "Immediate 1024 to1280 canvas resize briefly measured1568 document width; settled screenshot measured1280 and no overflowing descendants.",
+    "NFCI CSV returned404 HTML; only verified five-point public page snapshot used."
+  ],
+  "remaining": [
+    "continuous qualified style returns",
+    "current/common-period style drawdown",
+    "historical component return attribution",
+    "historical valuation position",
+    "actual portfolio style attribution and loss overlap",
+    "ongoing sources and use qualification",
+    "production5188 integration",
+    "investment utility untested"
+  ],
+  "protection": {
+    "main_branch_unchanged": true,
+    "parent_page_sha256": "be4a89f58f4f8c45f77d54cc095db11711541f7a769005a2ddbc9008fc4bc168",
+    "live5188_parent_sha256": "a56ed25549ccdd79895ba6817e0392533790e2441f7b5fe7a386935eef4aba33",
+    "outside_repo_writes": false,
+    "strategy_rule_changes": false,
+    "notifications": false,
+    "upgrade_db_unchanged": "okr-f07e0054448a remains prior planned registration; no new write"
+  },
+  "report_api": {
+    "url": "http://127.0.0.1:8000/api/experiments/docs/experiments/market-style-observation-2026-10-20.md",
+    "exact_content_match": true,
+    "sha256": "913124214fba46355f9fca14f4d505b51b419b40920277c5376369e93f58c147"
+  }
+}

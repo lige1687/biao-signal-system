@@ -1,0 +1,418 @@
+{
+  "before": {
+    "ok": true,
+    "model_requests": 0,
+    "snapshots": 0,
+    "completed": 0,
+    "in_flight": 0
+  },
+  "markets": {
+    "cn": {
+      "asof": "2026-10-20T16:17:55.925200+00:00",
+      "questions": [
+        {
+          "id": "q1",
+          "topic": "q1",
+          "title": "风格自己赚钱了吗？收益、下跌和波动怎样？",
+          "fact": "截至9月末，近1年四类都上涨：动量、质量、价值、最小波动依次+23.83%、+15.27%、+19.28%、+3.13%；近3年年化波动依次17.34%、12.47%、11.27%、9.48%，母指数11.86%。",
+          "reading": "最小波动起伏较小，也少赚；动量近1年涨幅最高，起伏也最大。官方长期最深跌幅已补进风格详情，统计区间不同。",
+          "watch": "当前离高点跌幅、统一期间最大跌幅与恢复时间仍缺连续日/月总回报；不能用年度折线估算。",
+          "data_date": "2026-09-30",
+          "available": true,
+          "coverage": "部分回答",
+          "source_ids": [
+            "msci_momentum",
+            "msci_quality",
+            "msci_value",
+            "msci_minvol"
+          ],
+          "short_answer": "近1年四类均上涨；动量涨幅最高，波动也最大。"
+        },
+        {
+          "id": "q2",
+          "topic": "q2",
+          "title": "有没有跑赢母指数？",
+          "fact": "近1年相对MSCI World（+15.68%），动量、质量、价值、最小波动差额依次+8.15、-0.41、+3.60、-12.55个百分点。",
+          "reading": "这一期间动量、价值领先，质量略落后，最小波动明显落后；近3个月价值领先，而动量落后，期限会改变结论。",
+          "watch": "四种期间的同口径差额已在风格表列齐；周/月连续风格切换仍不能由年度端点判断。",
+          "data_date": "2026-09-30",
+          "available": true,
+          "coverage": "限定月末已回答",
+          "source_ids": [
+            "msci_momentum",
+            "msci_quality",
+            "msci_value",
+            "msci_minvol"
+          ],
+          "short_answer": "近1年动量、价值领先；质量略落后，最小波动明显落后。"
+        },
+        {
+          "id": "q3",
+          "topic": "q3",
+          "title": "集中在哪些行业和股票？收益由谁贡献？",
+          "fact": "动量：信息技术40.18%，前十29.50%；质量：信息技术38.63%，前十39.24%；价值：金融25.12%，前十23.74%；最小波动：信息技术25.68%，前十13.48%。",
+          "reading": "质量的前十集中度最高；这说明当前依赖哪些行业和股票，不能据此断言过去收益由谁贡献。",
+          "watch": "收益贡献仍未回答：缺各期完整成分权重、成分回报与调仓记录；母指数行业权重差额也尚未核齐。",
+          "data_date": "2026-09-30",
+          "available": true,
+          "coverage": "部分回答",
+          "source_ids": [
+            "msci_momentum",
+            "msci_quality",
+            "msci_value",
+            "msci_minvol"
+          ],
+          "short_answer": "质量前十最集中（39.24%）；历史收益贡献仍未回答。"
+        },
+        {
+          "id": "q4",
+          "topic": "q4",
+          "title": "当前表现与估值处在什么位置？",
+          "fact": "同日市盈率：动量、质量、价值、最小波动依次24.48、25.97、18.36、19.82倍，母指数22.69倍；市净率和股息率也已并列。",
+          "reading": "质量、动量的市盈率高于母指数；价值、最小波动低于母指数。这只是当期相对估值，不证明处于自身历史高位或低位。",
+          "watch": "历史估值分位、连续相对走势的位置和当前离高点幅度仍未回答，缺对应历史序列。",
+          "data_date": "2026-09-30",
+          "available": true,
+          "coverage": "部分回答",
+          "source_ids": [
+            "msci_momentum",
+            "msci_quality",
+            "msci_value",
+            "msci_minvol"
+          ],
+          "short_answer": "质量、动量市盈率高于母指数；自身历史位置仍未回答。"
+        },
+        {
+          "id": "q5",
+          "topic": "q5",
+          "title": "我们的策略是否重复承担同一种风险？",
+          "fact": "A股两方案历史日收益相关0.851；2673个共同有效收益日中945日同跌，132个月中54月同跌（2015-01-05至2025-12-31）。",
+          "reading": "两个方案都含低波动选择规则；同跌与相关描述历史共同风险，尚不能分清低波、市场和行业各解释多少。",
+          "watch": "实际持仓权重、行业/风格收益分解与真实账户共同亏损仍未取得；历史模拟、目标名单和实际持仓必须分开。",
+          "data_date": null,
+          "available": true,
+          "coverage": "部分回答",
+          "source_ids": [
+            "strategy_portfolios"
+          ],
+          "short_answer": "历史2673个共同有效收益日中，945日同跌；尚不能确认是否由同一种风格驱动。"
+        }
+      ],
+      "volatility": {
+        "name": "上证指数",
+        "unit": "%",
+        "source_url": "http://127.0.0.1:8000/api/fundamentals/overlay-history?years=20",
+        "available": true,
+        "definition": "每日简单收益的样本标准差 × √252；20/60个日收益，需21/61个收盘价。沿用本系统既有计算。",
+        "limitation": "价格指数的已实现波动，不是未来预测或全市场个股平均；缺值不填补，交易日完整性未另核。",
+        "observation_date": "2026-10-20",
+        "latest20": 12.041167927405892,
+        "latest60": 13.092349181744495
+      },
+      "nfci": {
+        "dates": [
+          "2026-09-11",
+          "2026-09-18",
+          "2026-09-25",
+          "2026-10-02",
+          "2026-10-09"
+        ],
+        "values": [
+          -0.536,
+          -0.527,
+          -0.517,
+          -0.507,
+          -0.499
+        ],
+        "observation_date": "2026-10-09",
+        "published_at": "2026-10-15T12:36:00Z",
+        "verified_at": "2026-10-21",
+        "source_url": "https://fred.stlouisfed.org/series/NFCI",
+        "method_url": "https://www.chicagofed.org/research/data/nfci/current-data",
+        "coverage": "仅已核的最近5周；完整历史与自动更新尚未接通，历史可能修订。",
+        "reading": "仍低于历史平均水平，近四周上升0.037：条件相对平均仍宽松，但向收紧方向移动。"
+      },
+      "history": {
+        "status": "historical_quote_account_proxy",
+        "period_start": "2015-01-05",
+        "period_end": "2025-12-31",
+        "common_curve_days": 2674,
+        "common_valid_return_days": 2673,
+        "initialization_dates_excluded": [
+          "2015-01-05"
+        ],
+        "duplicate_dates_excluded": {
+          "mv": 0,
+          "rv": 0,
+          "combined": 0
+        },
+        "both_down_days": 945,
+        "either_down_days": 1523,
+        "both_down_share_all_valid_days": 0.35353535353535354,
+        "both_down_share_either_down_days": 0.6204858831254104,
+        "return_correlation_recomputed": 0.8507345263583713,
+        "return_correlation_reported": 0.850734532840183,
+        "return_correlation_difference": -6.481811642977675e-09,
+        "targets": {
+          "status": "last_historical_month_targets_only",
+          "count_overlap": 0.14285714285714285,
+          "common_count": null,
+          "weight_overlap": null,
+          "date": null
+        }
+      },
+      "monthly": {
+        "common_months": 132,
+        "both_down_months": 54
+      },
+      "combined": {
+        "cumulative_return": 0.5373811061302509,
+        "max_drawdown": -0.5279178242823337,
+        "cost": 61017.1488370858,
+        "average_exposure": 0.7131697719093062
+      },
+      "forward": {
+        "started_at": "2026-10-20T11:10:07.925266+00:00",
+        "common_recorded_days": 0,
+        "common_valid_return_days": 0,
+        "first_recorded_date": null,
+        "last_recorded_date": null,
+        "both_down_days": null,
+        "both_down_loss_50_50_initial_capital": null,
+        "targets": {
+          "status": "empty",
+          "left_count": 0,
+          "right_count": 0,
+          "common_count": 0,
+          "union_count": 0,
+          "count_overlap": null,
+          "weight_overlap": null,
+          "common_symbols": []
+        },
+        "holdings": {
+          "status": "empty",
+          "left_count": 0,
+          "right_count": 0,
+          "common_count": 0,
+          "union_count": 0,
+          "count_overlap": null,
+          "weight_overlap": null,
+          "common_symbols": []
+        }
+      },
+      "serialized_bytes": 982856
+    },
+    "us": {
+      "asof": "2026-10-20T16:17:56.783760+00:00",
+      "questions": [
+        {
+          "id": "q1",
+          "topic": "q1",
+          "title": "风格自己赚钱了吗？收益、下跌和波动怎样？",
+          "fact": "截至9月末，近1年四类都上涨：动量、质量、价值、最小波动依次+23.83%、+15.27%、+19.28%、+3.13%；近3年年化波动依次17.34%、12.47%、11.27%、9.48%，母指数11.86%。",
+          "reading": "最小波动起伏较小，也少赚；动量近1年涨幅最高，起伏也最大。官方长期最深跌幅已补进风格详情，统计区间不同。",
+          "watch": "当前离高点跌幅、统一期间最大跌幅与恢复时间仍缺连续日/月总回报；不能用年度折线估算。",
+          "data_date": "2026-09-30",
+          "available": true,
+          "coverage": "部分回答",
+          "source_ids": [
+            "msci_momentum",
+            "msci_quality",
+            "msci_value",
+            "msci_minvol"
+          ],
+          "short_answer": "近1年四类均上涨；动量涨幅最高，波动也最大。"
+        },
+        {
+          "id": "q2",
+          "topic": "q2",
+          "title": "有没有跑赢母指数？",
+          "fact": "近1年相对MSCI World（+15.68%），动量、质量、价值、最小波动差额依次+8.15、-0.41、+3.60、-12.55个百分点。",
+          "reading": "这一期间动量、价值领先，质量略落后，最小波动明显落后；近3个月价值领先，而动量落后，期限会改变结论。",
+          "watch": "四种期间的同口径差额已在风格表列齐；周/月连续风格切换仍不能由年度端点判断。",
+          "data_date": "2026-09-30",
+          "available": true,
+          "coverage": "限定月末已回答",
+          "source_ids": [
+            "msci_momentum",
+            "msci_quality",
+            "msci_value",
+            "msci_minvol"
+          ],
+          "short_answer": "近1年动量、价值领先；质量略落后，最小波动明显落后。"
+        },
+        {
+          "id": "q3",
+          "topic": "q3",
+          "title": "集中在哪些行业和股票？收益由谁贡献？",
+          "fact": "动量：信息技术40.18%，前十29.50%；质量：信息技术38.63%，前十39.24%；价值：金融25.12%，前十23.74%；最小波动：信息技术25.68%，前十13.48%。",
+          "reading": "质量的前十集中度最高；这说明当前依赖哪些行业和股票，不能据此断言过去收益由谁贡献。",
+          "watch": "收益贡献仍未回答：缺各期完整成分权重、成分回报与调仓记录；母指数行业权重差额也尚未核齐。",
+          "data_date": "2026-09-30",
+          "available": true,
+          "coverage": "部分回答",
+          "source_ids": [
+            "msci_momentum",
+            "msci_quality",
+            "msci_value",
+            "msci_minvol"
+          ],
+          "short_answer": "质量前十最集中（39.24%）；历史收益贡献仍未回答。"
+        },
+        {
+          "id": "q4",
+          "topic": "q4",
+          "title": "当前表现与估值处在什么位置？",
+          "fact": "同日市盈率：动量、质量、价值、最小波动依次24.48、25.97、18.36、19.82倍，母指数22.69倍；市净率和股息率也已并列。",
+          "reading": "质量、动量的市盈率高于母指数；价值、最小波动低于母指数。这只是当期相对估值，不证明处于自身历史高位或低位。",
+          "watch": "历史估值分位、连续相对走势的位置和当前离高点幅度仍未回答，缺对应历史序列。",
+          "data_date": "2026-09-30",
+          "available": true,
+          "coverage": "部分回答",
+          "source_ids": [
+            "msci_momentum",
+            "msci_quality",
+            "msci_value",
+            "msci_minvol"
+          ],
+          "short_answer": "质量、动量市盈率高于母指数；自身历史位置仍未回答。"
+        },
+        {
+          "id": "q5",
+          "topic": "q5",
+          "title": "我们的策略是否重复承担同一种风险？",
+          "fact": "美股两方案历史日收益相关0.802；1358个共同有效收益日中474日同跌，65个月中27月同跌（2021-02-01至2026-06-30）。",
+          "reading": "两个方案都含低波动选择规则；同跌与相关描述历史共同风险，尚不能分清低波、市场和行业各解释多少。",
+          "watch": "实际持仓权重、行业/风格收益分解与真实账户共同亏损仍未取得；历史模拟、目标名单和实际持仓必须分开。",
+          "data_date": null,
+          "available": true,
+          "coverage": "部分回答",
+          "source_ids": [
+            "strategy_portfolios"
+          ],
+          "short_answer": "历史1358个共同有效收益日中，474日同跌；尚不能确认是否由同一种风格驱动。"
+        }
+      ],
+      "volatility": {
+        "name": "标普500",
+        "unit": "%",
+        "source_url": "http://127.0.0.1:8000/api/fundamentals/overlay-history?years=20",
+        "available": true,
+        "definition": "每日简单收益的样本标准差 × √252；20/60个日收益，需21/61个收盘价。沿用本系统既有计算。",
+        "limitation": "价格指数的已实现波动，不是未来预测或全市场个股平均；缺值不填补，交易日完整性未另核。",
+        "observation_date": "2026-10-19",
+        "latest20": 9.026691137851474,
+        "latest60": 11.017345479124213
+      },
+      "nfci": {
+        "dates": [
+          "2026-09-11",
+          "2026-09-18",
+          "2026-09-25",
+          "2026-10-02",
+          "2026-10-09"
+        ],
+        "values": [
+          -0.536,
+          -0.527,
+          -0.517,
+          -0.507,
+          -0.499
+        ],
+        "observation_date": "2026-10-09",
+        "published_at": "2026-10-15T12:36:00Z",
+        "verified_at": "2026-10-21",
+        "source_url": "https://fred.stlouisfed.org/series/NFCI",
+        "method_url": "https://www.chicagofed.org/research/data/nfci/current-data",
+        "coverage": "仅已核的最近5周；完整历史与自动更新尚未接通，历史可能修订。",
+        "reading": "仍低于历史平均水平，近四周上升0.037：条件相对平均仍宽松，但向收紧方向移动。"
+      },
+      "history": {
+        "status": "historical_quote_account_proxy",
+        "period_start": "2021-02-01",
+        "period_end": "2026-06-30",
+        "common_curve_days": 1359,
+        "common_valid_return_days": 1358,
+        "initialization_dates_excluded": [
+          "2021-02-01"
+        ],
+        "duplicate_dates_excluded": {
+          "mv": 0,
+          "rv": 0,
+          "combined": 0
+        },
+        "both_down_days": 474,
+        "either_down_days": 748,
+        "both_down_share_all_valid_days": 0.3490427098674521,
+        "both_down_share_either_down_days": 0.6336898395721925,
+        "return_correlation_recomputed": 0.8016310999615767,
+        "return_correlation_reported": 0.8016309577412432,
+        "return_correlation_difference": 1.422203335099681e-07,
+        "targets": {
+          "status": "last_historical_month_targets_only",
+          "count_overlap": 0.1111111111111111,
+          "common_count": null,
+          "weight_overlap": null,
+          "date": null
+        }
+      },
+      "monthly": {
+        "common_months": 65,
+        "both_down_months": 27
+      },
+      "combined": {
+        "cumulative_return": 0.18645527256272176,
+        "max_drawdown": -0.15196199995135662,
+        "cost": 10643.324552246602,
+        "average_exposure": 0.7482130793362299
+      },
+      "forward": {
+        "started_at": "2026-10-20T11:10:07.925266+00:00",
+        "common_recorded_days": 0,
+        "common_valid_return_days": 0,
+        "first_recorded_date": null,
+        "last_recorded_date": null,
+        "both_down_days": null,
+        "both_down_loss_50_50_initial_capital": null,
+        "targets": {
+          "status": "available",
+          "left_count": 20,
+          "right_count": 20,
+          "common_count": 9,
+          "union_count": 31,
+          "count_overlap": 0.2903225806451613,
+          "weight_overlap": 0.44999999999999996,
+          "common_symbols": [
+            "DGX",
+            "HSIC",
+            "IEX",
+            "JNJ",
+            "NDSN",
+            "PFE",
+            "TECH",
+            "WAB",
+            "WELL"
+          ]
+        },
+        "holdings": {
+          "status": "empty",
+          "left_count": 0,
+          "right_count": 0,
+          "common_count": 0,
+          "union_count": 0,
+          "count_overlap": null,
+          "weight_overlap": null,
+          "common_symbols": []
+        }
+      },
+      "serialized_bytes": 526637
+    }
+  },
+  "after": {
+    "ok": true,
+    "model_requests": 0,
+    "snapshots": 0,
+    "completed": 0,
+    "in_flight": 0
+  }
+}

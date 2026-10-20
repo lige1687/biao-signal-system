@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { fundamentalsApi } from "../../api/client";
+import { fundamentalsApi, request } from "../../api/client";
 import type { MarketObservation, MarketObservationsResponse, RatesHistoryResponse, RatesHistorySeries } from "../../types";
 import TrendChart from "../trend/TrendChart";
 import StyleComparison from "./StyleComparison";
-import StrategyOverlap from "./StrategyOverlap";
+import PortfolioRiskReview from "./PortfolioRiskReview";
+import ObservationConditions from "./ObservationConditions";
+import FiveQuestionReview, { type MarketReview } from "./FiveQuestionReview";
 import BreadthComparison from "./BreadthComparison";
 import MarketReading from "./MarketReading";
 import "./market-style-panel.css";
@@ -79,7 +81,7 @@ function RiskConditions({ ratesHistory, ratesHistoryFailed, onDataChange }: {
       <p>VIX上升表示期权市场预期起伏更大；信用利差扩大表示企业融资需要更多风险补偿。看各自变化与日期，两图纵轴单位不同，不能直接比较线的高度，也不据此预言涨跌。</p>
       {items.filter((item) => ["vix", "hy_oas"].includes(item.metric_id)).map((item) =>
         <p key={item.metric_id}><a href={item.source_url ?? undefined} target="_blank" rel="noreferrer">{item.source_name} · {item.label}</a>：{item.quality_reason}</p>)}
-      <p>尚缺本地市场波动率与 <a href="https://www.chicagofed.org/research/data/nfci/current-data" target="_blank" rel="noreferrer">NFCI周度金融条件</a>。缺项不作判断。</p>
+      <p>本地市场已实现波动与NFCI在下方单列；NFCI目前只有最近5周已核快照，完整历史与自动更新未接通。</p>
     </details>
   </section>;
 }
@@ -91,6 +93,12 @@ export default function MarketStylePanel(props: {
   const [context, setContext] = useState<BreadthContext>({ windowDays: 365, ruleIds: [], priceKey: "", fingerprint: "" });
   const [viewRevision, setViewRevision] = useState(0);
   const [riskBasis, setRiskBasis] = useState("");
+  const review = useQuery({
+    queryKey: ["marketStyleFiveQuestions", props.market],
+    queryFn: () => request<MarketReview>(`/market-style/review?market=${props.market}`),
+    staleTime: 60_000, retry: false,
+  });
+  const reviewBasis = JSON.stringify(review.data ? { ...review.data, asof: undefined } : null);
   const onContextChange = useCallback((next: BreadthContext) => setContext((previous) =>
     JSON.stringify(previous) === JSON.stringify(next) ? previous : next), []);
   return <div className="market-style-panel" onClickCapture={(event) => {
@@ -104,19 +112,22 @@ export default function MarketStylePanel(props: {
         <button type="button" aria-pressed={props.market === "us"} onClick={() => props.onMarketChange("us")}>美股</button>
       </div>
     </header>
-    <MarketReading market={props.market} context={context} viewRevision={viewRevision} riskBasis={riskBasis} />
+    <MarketReading market={props.market} context={context} viewRevision={viewRevision} riskBasis={riskBasis + reviewBasis} />
+    <FiveQuestionReview data={review.data} loading={review.isPending} error={review.isError} />
     <div className="ms-chart-grid">
       <StyleComparison />
       <BreadthComparison market={props.market} onContextChange={onContextChange} />
     </div>
     <RiskConditions ratesHistory={props.ratesHistory} ratesHistoryFailed={props.ratesHistoryFailed} onDataChange={setRiskBasis} />
-    <StrategyOverlap market={props.market} />
+    <ObservationConditions volatility={review.data?.volatility} nfci={review.data?.nfci}
+      loading={review.isPending} error={review.isError} />
+    <PortfolioRiskReview portfolio={review.data?.portfolio} loading={review.isPending} error={review.isError} />
     <details className="ms-review-guide">
       <summary><span>每周观察 · 每月复盘五问</span><small>自身表现 / 相对表现 / 集中程度 / 估值位置 / 策略重叠</small></summary>
       <div className="ms-review-columns">
         <div><h3>每周看变化</h3><p>先核资料日，再看相对曲线是否转强、参与上涨的股票是否变多、波动与信用条件是否变化。风格仍是旧月末数据时，不把旧排名当作本周切换。</p></div>
         <div><h3>每月看完整</h3><ol><li>自身收益、回撤和波动如何？</li><li>同期有没有跑赢母指数？</li><li>来自哪些行业和少数重仓股？</li><li>表现与估值处于什么位置？</li><li>多个策略是否同时赚钱、同时亏损？</li></ol></div>
-        <div><h3>目前能回答到哪里</h3><p>行业和前十持仓展示集中程度；收益贡献、当前回撤、历史估值位置及完整风格暴露仍缺资料。先把环境看清，再单独检验能否改善选股与风险控制。</p><a href="/library?report=docs%2Fexperiments%2Fmarket-style-observation-2026-10-20.md">完整研究依据 →</a></div>
+        <div><h3>目前能回答到哪里</h3><p>五问答案与未答部分已逐项列在上方。共同亏损和同资金组合效果已补；收益贡献、当前回撤、历史估值位置及完整风格暴露仍有资料缺口。下一阶段再单独检验能否改善选股与风险控制。</p><a href="/library?report=docs%2Fexperiments%2Fmarket-style-observation-2026-10-20.md">完整研究依据 →</a></div>
       </div>
     </details>
   </div>;

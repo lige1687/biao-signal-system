@@ -206,11 +206,13 @@
 .style-detail-figures,
 .style-detail-valuation {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   padding: 12px 0;
   border-bottom: 1px solid var(--border-subtle);
 }
+
+.style-detail-figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.style-detail-valuation { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 .style-detail-figures > span,
 .style-detail-valuation > span {

@@ -123,14 +123,15 @@ function ComparisonDetail({ style, period }: { style: StyleSnapshot; period: Sty
     <div className="style-detail-figures">
       <span>所选期间收益 <b className={directionClass(style.returnsPct[period])}>{pct(style.returnsPct[period], true)}</b> <small>母指数 {pct(parent.returnsPct[period], true)}</small></span>
       <span>近3年年化波动 <b>{pct(style.threeYearAnnualizedVolPct)}</b> <small>母指数 {pct(parent.threeYearAnnualizedVolPct)}</small></span>
-      <span>当前回撤 <b>缺资料</b> <small>这份月末事实表未提供可计算的近期净值序列</small></span>
+      <span>当前离高点跌幅 <b>缺资料</b> <small>未取得近期连续净值，无法判断现在离高点多远</small></span>
+      <span>历史最深下跌 <b>−{pct(style.historicalMaximumDrawdown.lossPct)}</b> <small>{style.historicalMaximumDrawdown.peakDate} 至 {style.historicalMaximumDrawdown.troughDate}；官方统计范围 {style.historicalMaximumDrawdown.observationStartDate} 至 {style.historicalMaximumDrawdown.observationEndDate}</small></span>
     </div>
     <div className="style-detail-valuation" aria-label="月末估值与股息率">
       <span>市盈率 <b>{style.pe.toFixed(2)}</b> <small>母指数 {parent.pe.toFixed(2)}</small></span>
       <span>市净率 <b>{style.pb.toFixed(2)}</b> <small>母指数 {parent.pb.toFixed(2)}</small></span>
       <span>股息率 <b>{pct(style.dividendYieldPct)}</b> <small>母指数 {pct(parent.dividendYieldPct)}</small></span>
     </div>
-    <p className="style-detail-context">{STYLE_RISK_BASIS}，数值越大表示涨跌起伏越大。估值是当期数据，不能据此说历史上处于便宜位置。{style.note ? ` ${style.note}` : ""}</p>
+    <p className="style-detail-context">{STYLE_RISK_BASIS}，数值越大表示涨跌起伏越大。历史最深下跌来自官方事实表，各指数统计起点不同，部分跌幅发生在指数正式发布前；它不代表当前跌幅。估值是当期数据，不能据此说历史上处于便宜位置。{style.note ? ` ${style.note}` : ""}</p>
     <div className="style-detail-groups">
       <details>
         <summary>行业权重 · {STYLE_SNAPSHOT_DATE}</summary>

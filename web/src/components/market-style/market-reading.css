@@ -4,6 +4,7 @@
 .mr-heading span { font-size: 12px; color: var(--text-secondary); margin-left: 12px; }
 .mr-generate { border: 1px solid #cbd6e3; background: #fff; color: var(--accent); padding: 6px 12px; border-radius: 5px; white-space: nowrap; font-size: 12px; cursor: pointer; }
 .mr-generate:disabled { cursor: wait; opacity: .55; }
+.mr-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
 .mr-idle, .mr-status, .mr-scope { color: var(--text-secondary); font-size: 11px; margin: 7px 0 0; line-height: 1.6; }
 .mr-result { margin-top: 10px; }
 .mr-result > summary { cursor: pointer; font-size: 12px; color: var(--text-secondary); }
@@ -19,7 +20,8 @@
 .mr-sources p { margin: 8px 0; }
 .mr-sources div { display: flex; gap: 6px 16px; flex-wrap: wrap; }
 @media (max-width: 560px) {
-  .mr-heading { align-items: start; }
+  .mr-heading { align-items: start; flex-wrap: wrap; }
+  .mr-actions { width: 100%; justify-content: space-between; }
   .mr-heading span { display: block; margin: 5px 0 0; line-height: 1.5; }
   .mr-grid { grid-template-columns: 1fr; }
 }

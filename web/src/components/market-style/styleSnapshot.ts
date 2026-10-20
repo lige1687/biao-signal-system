@@ -6,6 +6,13 @@ export type SectorName =
 
 export type StyleReturns = Record<StylePeriod, number>;
 export type StyleHolding = { name: string; weightPct: number };
+export type HistoricalMaximumDrawdown = {
+  lossPct: number;
+  peakDate: string;
+  troughDate: string;
+  observationStartDate: string;
+  observationEndDate: string;
+};
 export type StyleSnapshot = {
   id: "momentum" | "quality" | "value" | "minimumVolatility";
   name: string;
@@ -14,6 +21,7 @@ export type StyleSnapshot = {
   sourceUrl: string;
   returnsPct: StyleReturns;
   threeYearAnnualizedVolPct: number;
+  historicalMaximumDrawdown: HistoricalMaximumDrawdown;
   pe: number;
   pb: number;
   dividendYieldPct: number;
@@ -47,6 +55,7 @@ export const STYLE_SNAPSHOTS: StyleSnapshot[] = [
     sourceUrl: "https://www.msci.com/documents/10199/255599/msci-world-momentum-index-usd-gross.pdf",
     returnsPct: { oneMonth: 3.64, threeMonths: -4.55, ytd: 22.72, oneYear: 23.83 },
     threeYearAnnualizedVolPct: 17.34, pe: 24.48, pb: 4.08, dividendYieldPct: 1.44,
+    historicalMaximumDrawdown: { lossPct: 55.53, peakDate: "2007-10-29", troughDate: "2009-03-09", observationStartDate: "1994-06-01", observationEndDate: STYLE_SNAPSHOT_DATE },
     topTenTotalPct: 29.50,
     topTen: [
       { name: "Micron Technology", weightPct: 5.55 },
@@ -72,6 +81,7 @@ export const STYLE_SNAPSHOTS: StyleSnapshot[] = [
     sourceUrl: "https://www.msci.com/documents/10199/255599/msci-world-quality-index.pdf",
     returnsPct: { oneMonth: -0.25, threeMonths: 1.03, ytd: 10.72, oneYear: 15.27 },
     threeYearAnnualizedVolPct: 12.47, pe: 25.97, pb: 8.90, dividendYieldPct: 1.20,
+    historicalMaximumDrawdown: { lossPct: 48.01, peakDate: "2007-10-31", troughDate: "2009-03-09", observationStartDate: "1994-06-01", observationEndDate: STYLE_SNAPSHOT_DATE },
     topTenTotalPct: 39.24,
     topTen: [
       { name: "Microsoft Corp", weightPct: 5.90 },
@@ -98,6 +108,7 @@ export const STYLE_SNAPSHOTS: StyleSnapshot[] = [
     sourceUrl: "https://www.msci.com/documents/10199/255599/msci-world-value-index.pdf",
     returnsPct: { oneMonth: -2.21, threeMonths: 3.97, ytd: 15.27, oneYear: 19.28 },
     threeYearAnnualizedVolPct: 11.27, pe: 18.36, pb: 2.75, dividendYieldPct: 2.34,
+    historicalMaximumDrawdown: { lossPct: 60.70, peakDate: "2007-07-13", troughDate: "2009-03-09", observationStartDate: "1974-12-31", observationEndDate: STYLE_SNAPSHOT_DATE },
     topTenTotalPct: 23.74,
     topTen: [
       { name: "Microsoft Corp", weightPct: 8.01 },
@@ -123,6 +134,7 @@ export const STYLE_SNAPSHOTS: StyleSnapshot[] = [
     sourceUrl: "https://www.msci.com/documents/10199/255599/msci-world-minimum-volatility-index.pdf",
     returnsPct: { oneMonth: -3.65, threeMonths: 2.18, ytd: 3.52, oneYear: 3.13 },
     threeYearAnnualizedVolPct: 9.48, pe: 19.82, pb: 3.22, dividendYieldPct: 2.10,
+    historicalMaximumDrawdown: { lossPct: 47.73, peakDate: "2007-10-31", troughDate: "2009-03-09", observationStartDate: "1988-05-31", observationEndDate: STYLE_SNAPSHOT_DATE },
     topTenTotalPct: 13.48,
     topTen: [
       { name: "Johnson & Johnson", weightPct: 1.51 },
@@ -144,3 +156,24 @@ export const STYLE_SNAPSHOTS: StyleSnapshot[] = [
     note: "采用有约束的组合优化来降低整体风险，不等于简单挑出单只波动最低的股票。",
   },
 ];
+
+/** 只汇总同一张月末事实表能直接回答的描述，不推算当前回撤或历史估值位置。 */
+export const STYLE_SUMMARIES = STYLE_SNAPSHOTS.map((style) => ({
+  id: style.id,
+  name: style.name,
+  sourceUrl: style.sourceUrl,
+  observationDate: STYLE_SNAPSHOT_DATE,
+  returnsPct: style.returnsPct,
+  returnDifferencePoints: Object.fromEntries(
+    (Object.keys(WORLD_PARENT.returnsPct) as StylePeriod[]).map((period) => [
+      period, style.returnsPct[period] - WORLD_PARENT.returnsPct[period],
+    ]),
+  ) as StyleReturns,
+  threeYearAnnualizedVolPct: style.threeYearAnnualizedVolPct,
+  historicalMaximumDrawdown: style.historicalMaximumDrawdown,
+  sectorWeightsPct: style.sectorWeightsPct,
+  topTenTotalPct: style.topTenTotalPct,
+  pe: style.pe,
+  pb: style.pb,
+  dividendYieldPct: style.dividendYieldPct,
+}));

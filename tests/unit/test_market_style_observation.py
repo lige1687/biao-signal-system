@@ -36,6 +36,7 @@ def _reset():
         module._IN_FLIGHT.clear()
         module._SNAPSHOT_TIMES.clear()
         module._QUERY_CACHE.clear()
+        module._REVIEW_CACHE.clear()
         module._MODEL_REQUESTS = 0
 
 

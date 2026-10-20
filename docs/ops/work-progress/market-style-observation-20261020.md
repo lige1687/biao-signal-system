@@ -1,3 +1,19 @@
+# 五问返核：可用答案与曲线补齐，整项仍部分完成 2026-10-21T00:26:10.142191+08:00
+
+- task-id market-style-observation-20261020；本轮实现与核验已完成，原完整需求未完成；核心资料缺口见报告第12节，用户视觉待验收。上轮completed仅界面阶段，不代表五问全部解决。
+- checked_coordination_sha a4b6877b7021083a8fabb8946edb7196bfe8e906；checked_at 2026-10-21T00:26:10.142191+08:00。开工已复核COORDINATION/self/dispatch/investor-workspace-simplification/investor-observation-map/portfolio-trends/personal-lowfreq/mechanism/strategy-account-bridge；交付fetch较开工无新增变更。原owner公共服务/规则只读，独立market-style范围无交叉。
+- 可试读 http://127.0.0.1:5192/fundamentals#fund-sec-market；仓内预览18组件逐文件SHA核同；独立8192服务session52254，仅按需读取/点生成。父页不再编辑；共享8000/8028/5188不改，无仓外写、交易、通知。
+- 五行直接答案和展开证据/来源/未答；月复盘必须列齐5问，周观察3—4重点。Q1补四官方长期最大跌幅及范围；Q2四期间差额；Q3行业/前十不冒充归因；Q4当期估值不冒充历史分位；Q5同跌日/月、相关、三账户同资金收益/跌幅、目标与实际持仓分开。
+- 新增上证/SP500的20/60日波动曲线；NFCI5个已核周点明确有限快照。没有伪造连续MSCI净值、历史估值、完整权重或前向交易。全对话逐条验收见原报告§12。
+- 两Sol medium分工style/conditions与portfolio纯计算/UI，root五问/服务/被动周月/整合；独立重算确认CN945/2673日、54/132月，US474/1358日、27/65月；组合资金与原服务逐日误差0。
+- 17测试通过1.06s，835模块构建通过（既有大包warning），归置通过；390/1024/1280最终无横溢、console error0；真实月/周及重复缓存、切换隐藏、详情与图表核过。第一次3失败和修复/首轮月复盘保留。
+- 本轮来源2+4次；0新效力实验/付费。实际模型3次1465 tokens：511/511/443，1.2/1.1/1.2秒；累计6次，前两次用量未知，费用未知。运行进程health2完成2，无飞行请求；首轮1次在重启前单独留痕。
+- 剩余：连续指数历史/许可资格、当前同期间回撤、收益贡献、历史估值、实际持仓风格与共同损失、持续更新、正式运行页接入；均不能由快照或目标名单推算。NFCI CSV404；历史成分等原公开PDF不含，前向账户为空。具体所缺资料及恢复条件写报告；无后台采集/研究继续。
+- 系统目标仍此前okr-f07e0054448a planned，本轮未写仓外DB。后续因子用途与完整策略效力按用户顺序另定义；不因UI验收视为已证明增量。
+- 成果沿codex/market-style-observation-20261020，基线5edea3086d56ac600bf66d3cc3517071b688c378；精确提交和远端读回见本轮five-questions-publication-receipt.json与coordination同task。主树18e64fa不切换/清理/混传；父页沿旧精确补丁，运行壳仍依赖本地基线，不冒称远端整系统可恢复。
+
+---
+
 # 曲线、同期投影与点击解读已可试读 2026-10-20T23:55:07.542318+08:00
 
 - task-id market-style-observation-20261020；本轮仓内预览实施完成，用户视觉待验收。入口 http://127.0.0.1:5192/fundamentals#fund-sec-market，新增独立loopback8192服务；不修改共享8000/8028/5188服务或规则。

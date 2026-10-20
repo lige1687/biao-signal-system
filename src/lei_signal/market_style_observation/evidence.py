@@ -30,6 +30,8 @@ def _sources_for(market: str) -> list[dict]:
     mid = "CN_ALL_A" if market == "cn" else "SP500"
     return [*SOURCES,
             {"id": "lei_breadth", "name": "LeiSignal 已保存的市场宽度", "url": f"http://127.0.0.1:8000/api/market-context/breadth-history?market_id={mid}&lookback_days=1260"},
+            {"id": "index_prices", "name": "LeiSignal 指数价格历史", "url": "http://127.0.0.1:8000/api/fundamentals/overlay-history?years=20"},
+            {"id": "nfci", "name": "Chicago Fed / FRED NFCI", "url": "https://fred.stlouisfed.org/series/NFCI"},
             {"id": "lei_observations", "name": "LeiSignal 美国市场观察与来源", "url": "http://127.0.0.1:8000/api/fundamentals/observations?market=us"}]
 
 
@@ -116,6 +118,17 @@ def _breadth_card(market: str, window_days: int, get_json) -> dict:
 
 def _risk_card(market: str, get_json) -> dict:
     if market == "cn":
+        from .conditions import OVERLAY_URL, market_volatility
+        volatility = market_volatility(get_json(OVERLAY_URL), market)
+        if volatility.get("available"):
+            short = volatility["latest20"]
+            medium = volatility.get("latest60")
+            compare = f"，60日为{medium:.2f}%" if medium is not None else "，60日资料不足"
+            return _card("risk", "risk",
+                         f"上证指数20日年化已实现波动{short:.2f}%{compare}（{volatility['observation_date']}）。",
+                         "它衡量过去价格实际起伏，不预言方向或未来波动；与美国期权预期波动分开读。",
+                         "结合20/50/200日宽度看参与范围，观察起伏与参与程度是否同时变化；不直接调仓。",
+                         ["index_prices"], data_date=volatility["observation_date"])
         return _card("risk", "risk", "尚无合格A股市场指数实际波动率读数。", "个股过去20天的波动和美国金融条件不能代替A股市场风险。", "取得带指数、窗口和资料日的市场波动序列后再比较。", [], available=False)
     observations = get_json("http://127.0.0.1:8000/api/fundamentals/observations?market=us")
     items = observations.get("items", []) if isinstance(observations, dict) else []
@@ -131,15 +144,26 @@ def _risk_card(market: str, get_json) -> dict:
             quality = {"current": "来源已核", "stale": "旧数据", "time_unverified": "可用时点待核"}[item["quality_status"]]
             readings.append(f"{label} {float(item['value']):.2f}{expected_unit}（{item['observation_date']}，{quality}）")
     if not readings:
-        return _card("risk", "risk", "VIX和美国高收益债利差当前读数均未取得；NFCI尚未接入。", "无法据空值判断美国风险条件。", "待已有来源返回有效读数及日期后再读。", ["lei_observations", "cboe_vix", "fred_ice_oas"], available=False)
-    return _card("risk", "risk", "；".join(readings) + "。NFCI尚未接入。",
+        return _card("risk", "risk", "VIX和美国高收益债利差当前读数均未取得；已核NFCI截至10月9日−0.499，较9月11日上升0.037。",
+                     "NFCI相对长期平均仍宽松，近四周向收紧移动；不能补齐缺失的期权波动和信用风险。",
+                     "NFCI仅5周已核快照；等待VIX及信用利差有效读数和日期。",
+                     ["lei_observations", "cboe_vix", "fred_ice_oas", "nfci"], available=False)
+    return _card("risk", "risk", "；".join(readings) + "。已核NFCI最近5周：截至10月9日−0.499，较9月11日上升0.037。",
                  "VIX是标普500期权预期波动，高收益债利差是债券风险补偿；两者单位与对象不同，不能相加或当独立证明。",
-                 "分别核对更新日与变化；NFCI发布后再独立观察周频金融条件。",
-                 ["lei_observations", "cboe_vix", "fred_ice_oas"])
+                 "NFCI仍低于历史平均，近四周向收紧方向移动；仅有限已核快照，完整历史与自动更新未接通。",
+                 ["lei_observations", "cboe_vix", "fred_ice_oas", "nfci"])
 
 
 def _strategy_card(market: str, get_json) -> dict:
     payload = get_json("http://127.0.0.1:8028/api/strategy-portfolios")
+    from .portfolio_review import summarize_portfolio
+    from .review import portfolio_answer
+    portfolio = summarize_portfolio(payload or {}, market)
+    if portfolio.get("available"):
+        return _card("strategy", "strategy", portfolio_answer(portfolio),
+                     "两方案都含低波动规则，同跌与相关说明存在共同依赖，但不能分清市场、行业与风格各贡献多少。",
+                     "月复盘查看共同亏损月份、同资金组合跌幅；目标名单和前向模拟持仓分开，不能当真实账户。",
+                     ["strategy_portfolios"])
     markets = payload.get("markets", []) if isinstance(payload, dict) else []
     selected = next((row for row in markets if isinstance(row, dict) and row.get("id") == market.upper()), None) if isinstance(markets, list) else None
     comparison = selected.get("comparison", {}) if isinstance(selected, dict) else {}
