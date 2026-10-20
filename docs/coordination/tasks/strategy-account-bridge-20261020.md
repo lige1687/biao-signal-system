@@ -1,5 +1,7 @@
 # 用户否定现有组合后的成熟策略来源审查 2026-10-20T23:26:34.827601+08:00
 
+- 并发查重纠正2026-10-20T23:28:16.877239+08:00：首次push非快进失败。已fetch并实际读到f490e5d23be678c9cf1b5df5cc29f85d325c1d8d新增personal-lowfreq-system-audit-20261018的23:25反转适用范围任务；三份旧反转报告汇总及A股原始文献复核归该owner，本方不重复。Sol只读任务已缩至成熟原型资料资格/当前保存结果。新报告只引用其结论并做候选决策，核心新增范围为成熟策略原型、组合设计与审核UI。checked_coordination_sha=f490e5d23be678c9cf1b5df5cc29f85d325c1d8d；其他已读task-id沿上。先前旧报告读取算复用，不声明接管。
+
 - task-id/owner沿原；status active；scope_released false。checked_coordination_sha=f490e5d23be678c9cf1b5df5cc29f85d325c1d8d；checked_at=2026-10-20T23:26:34.827601+08:00；已读COORDINATION及本任务、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、market-style-observation-20261020最新相关段。年度OP已有负向/受限结案，季度EPS资格和机构仓位扩展归原owner；不重复采集和运行。风格5192独立预览不触及本/fwd模块。
 - 用户新要求：现两策略年化/回撤不好，复核A股反转依据；从成熟、有金融含义的策略出发扩大候选，借鉴/修改/组合，并给用户具体审核材料。边界问题：当前方案为何不足，哪些成熟原型提供真实不同来源且值得下一次检验。采用research-closure及lei-lowfreq-research，固定旧结果只读诊断；不靠扫旧参数追正，不将论文买多卖空成绩冒充本地只买账户。
 - 本轮独写范围：docs/experiments/mature-strategy-review-2026-10-20.md及同名raw小证据；自己的progress；registry/INDEX只新增本键/行；web/src/components/strategy-portfolios/StrategyResearchReview.tsx和配套CSS/静态内容、StrategyPortfolios.tsx最小入口与研究状态标签；必要本地5188既授权精确镜像。原配置、7冻结模块、活动账本、旧订单/采集器只读，不改变原规则或实际运行状态。研究服务于独立策略研究选择层，不改桌面原文/LEI生产信号。
