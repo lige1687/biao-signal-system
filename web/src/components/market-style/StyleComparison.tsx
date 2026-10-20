@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import * as echarts from "echarts";
+import { buildStyleWealthHistory, STYLE_HISTORY_BASE_DATE, STYLE_HISTORY_SOURCE_DATE, STYLE_HISTORY_SOURCES, STYLE_HISTORY_IDS, type HistoryStyleId } from "./styleHistory";
 import {
   SECTOR_ORDER, STYLE_RISK_BASIS, STYLE_SNAPSHOT_DATE,
   STYLE_SNAPSHOTS, WORLD_PARENT,
@@ -12,6 +14,69 @@ const PERIODS: { id: StylePeriod; label: string }[] = [
   { id: "ytd", label: "年初至今" },
   { id: "oneYear", label: "1年" },
 ];
+
+type ChartMode = "wealth" | "relative";
+const CHART_STYLES: Record<HistoryStyleId, { name: string; color: string }> = {
+  momentum: { name: "动量", color: "#dc6f36" },
+  quality: { name: "质量", color: "#286db5" },
+  value: { name: "价值", color: "#8c5ba8" },
+  minimumVolatility: { name: "最小波动", color: "#369781" },
+  world: { name: "MSCI World", color: "#657383" },
+};
+
+function StyleHistoryChart({ mode }: { mode: ChartMode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const points = useMemo(buildStyleWealthHistory, []);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const chart = echarts.init(ref.current, undefined, { renderer: "canvas" });
+    const resize = new ResizeObserver(() => chart.resize());
+    resize.observe(ref.current);
+    return () => { resize.disconnect(); chart.dispose(); };
+  }, []);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    const chart = echarts.getInstanceByDom(element);
+    if (!chart) return;
+    const series: echarts.LineSeriesOption[] = STYLE_HISTORY_IDS.map((id) => ({
+      name: CHART_STYLES[id].name,
+      type: "line",
+      data: points.map((point) => mode === "wealth" ? point[id] : point[id] / point.world * 100),
+      showSymbol: true,
+      symbol: "circle",
+      symbolSize: id === "world" ? 5 : 6,
+      smooth: false,
+      connectNulls: false,
+      lineStyle: { width: id === "world" ? 1.5 : 2.2, color: CHART_STYLES[id].color, type: id === "world" && mode === "relative" ? "dashed" : "solid" },
+      itemStyle: { color: CHART_STYLES[id].color },
+      emphasis: { focus: "series" },
+    }));
+    chart.setOption({
+      animation: false,
+      color: STYLE_HISTORY_IDS.map((id) => CHART_STYLES[id].color),
+      tooltip: {
+        trigger: "axis",
+        confine: true,
+        valueFormatter: (value: unknown) => value == null ? "—" : `${Number(value).toFixed(1)}（${mode === "wealth" ? "起点100" : "相对价值比"}）`,
+      },
+      legend: { top: 0, type: "scroll", textStyle: { fontSize: 11 }, data: STYLE_HISTORY_IDS.map((id) => CHART_STYLES[id].name) },
+      grid: { left: 49, right: 17, top: 46, bottom: 48 },
+      xAxis: {
+        type: "category",
+        data: points.map((point) => point.date),
+        boundaryGap: false,
+        axisLabel: { color: "#697685", fontSize: 10, hideOverlap: true, showMinLabel: true, showMaxLabel: true, formatter: (date: string) => date === "2026-09-30" ? "2026·9月" : date.slice(0, 4) },
+      },
+      yAxis: { type: "value", scale: true, axisLabel: { color: "#697685", fontSize: 10 }, splitLine: { lineStyle: { color: "#e8edf1" } } },
+      series,
+    }, true);
+  }, [mode, points]);
+
+  return <div ref={ref} className="style-history-chart" role="img" aria-label={mode === "wealth" ? "四类风格与 MSCI World 的年度累计价值曲线" : "四类风格相对 MSCI World 的年度价值比曲线"} />;
+}
 
 const HOLDING_NAMES: Record<string, string> = {
   "Micron Technology": "美光", "Advanced Micro Devices": "AMD", "Intel Corp": "英特尔",
@@ -88,6 +153,7 @@ function ComparisonDetail({ style, period }: { style: StyleSnapshot; period: Sty
 
 export default function StyleComparison() {
   const [period, setPeriod] = useState<StylePeriod>("threeMonths");
+  const [chartMode, setChartMode] = useState<ChartMode>("relative");
   const [selectedId, setSelectedId] = useState<StyleSnapshot["id"] | null>(null);
   const selected = STYLE_SNAPSHOTS.find((style) => style.id === selectedId);
   const scale = Math.max(...STYLE_SNAPSHOTS.map((style) => Math.abs(style.returnsPct[period] - WORLD_PARENT.returnsPct[period])));
@@ -96,12 +162,32 @@ export default function StyleComparison() {
     <div className="style-comparison-head">
       <div>
         <h2 id="style-comparison-title">全球风格对比</h2>
-        <p>发达市场 · MSCI World 母指数 · 美元，含股息再投<br />月末资料：{STYLE_SNAPSHOT_DATE}</p>
+        <p>MSCI World 的四种全球股票风格 · 美元，含股息再投资<br />官方资料截至 {STYLE_HISTORY_SOURCE_DATE}</p>
       </div>
+    </div>
+    <div className="style-history-header">
+      <div>
+        <h3>{chartMode === "relative" ? "相对 MSCI World，哪类风格走在前面？" : "同一笔起始金额，逐年走到哪里？"}</h3>
+        <p>{chartMode === "relative" ? "向上表示该段跑赢母指数；高于100表示从2013年末起累计领先。" : "统一把2013年末设为100；向上表示自身赚钱，向下表示自身亏损。"}</p>
+      </div>
+      <div className="style-chart-modes" role="group" aria-label="切换图表视角">
+        <button type="button" className={chartMode === "relative" ? "is-active" : ""} aria-pressed={chartMode === "relative"} onClick={() => setChartMode("relative")}>相对母指数</button>
+        <button type="button" className={chartMode === "wealth" ? "is-active" : ""} aria-pressed={chartMode === "wealth"} onClick={() => setChartMode("wealth")}>累计路径</button>
+      </div>
+    </div>
+    <StyleHistoryChart mode={chartMode} />
+    <p className="style-history-note">仅年度观察点，最后一点为2026年截至9月的收益；年内路径未知，暂不能判断近期周/月风格切换。</p>
+    <details className="style-history-method">
+      <summary>数据口径与官方来源</summary>
+      <p>这里看各风格的相对强弱；动量本身是其中一种选股方法，偏向过去价格较强的股票。质量看盈利能力、盈利稳定性与低杠杆；价值看价格相对账面价值、预期盈利和股息；最小波动在约束下优化整个组合的波动。</p>
+      <p>起点 {STYLE_HISTORY_BASE_DATE} 人为设为100；其后按官方公布的年度收益连乘，近似路径受收益四舍五入影响。2014—2025为完整年度，各指数均在此前正式发布；2026末点只到9月。美元毛总回报含股息再投资，未扣实际产品费用和税。相对曲线 = 风格累计价值 ÷ 母指数累计价值 × 100；不是百分比收益率。</p>
+      <p>官方事实表：<a href={STYLE_HISTORY_SOURCES.momentum} target="_blank" rel="noopener noreferrer">动量 ↗</a> · <a href={STYLE_HISTORY_SOURCES.quality} target="_blank" rel="noopener noreferrer">质量 ↗</a> · <a href={STYLE_HISTORY_SOURCES.value} target="_blank" rel="noopener noreferrer">价值 ↗</a> · <a href={STYLE_HISTORY_SOURCES.minimumVolatility} target="_blank" rel="noopener noreferrer">最小波动 ↗</a>。这是固定资料阅读样例，不随市场视图切换；持续取数及展示许可尚待核实。</p>
+    </details>
+    <details className="style-period-details">
+      <summary>查看近 1 个月、3 个月、年初至今及 1 年的收益与详情</summary>
       <div className="style-periods" role="group" aria-label="选择收益期间">
         {PERIODS.map((item) => <button key={item.id} type="button" className={period === item.id ? "is-active" : ""} aria-pressed={period === item.id} onClick={() => setPeriod(item.id)}>{item.label}</button>)}
       </div>
-    </div>
     <div className="style-table" role="table" aria-label="四类全球风格与 MSCI World 收益对比">
       <div className="style-table-header" role="row">
         <span role="columnheader">风格</span><span role="columnheader">自身收益</span><span role="columnheader">较母指数差额</span>
@@ -118,5 +204,6 @@ export default function StyleComparison() {
     </div>
     <p className="style-parent-note">同期母指数收益 {pct(WORLD_PARENT.returnsPct[period], true)}；差额单位为百分点。此表固定为全球指数资料，不随 A 股或美股视图切换。</p>
     {selected && <ComparisonDetail style={selected} period={period} />}
+    </details>
   </section>;
 }

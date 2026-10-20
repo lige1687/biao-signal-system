@@ -1,3 +1,19 @@
+# 曲线、同期投影与点击解读已可试读 2026-10-20T23:55:07.542318+08:00
+
+- task-id market-style-observation-20261020；本轮仓内预览实施完成，用户视觉待验收。入口 http://127.0.0.1:5192/fundamentals#fund-sec-market，新增独立loopback8192服务；不修改共享8000/8028/5188服务或规则。
+- checked_coordination_sha 95168e7ff21792d0a9ae21bd6ada9fcc50cb36eb；checked_at 2026-10-20T23:55:07.542318+08:00；开工登记300606f10c8695b2e1f09611ced2e89e096ef369已推读回；开工已读self/dispatch/investor-workspace-simplification/investor-observation-map/portfolio-trends/personal-lowfreq/mechanism，交付重读三项变化及strategy-account-bridge成熟原型新UI范围。对方仅研究资料与strategy-portfolios组件，本题独立market-style组件/服务无交叉，不接管其实现。
+- 12组件源码与预览SHA逐文件核同；新增独立后端4文件/7测试；父页本轮无变更，5188父页原SHA未变。发布仍仅本任务源码与资料，父页复用上一成果ui-integration.patch，不上传父页他人未提交修改。运行壳仍本地依赖，不冒称远端整套可恢复。
+- 排版：风格/价格宽度桌面并排，窄屏堆叠；VIX/HY成对曲线；明细折叠。风格四类年度与相对母指数；B20/B50/B200及已有六条件按真实同日映射，两图同步留宽度缺口。20日未加入旧六条件，未新增策略阈值。
+- 点击解读：只发已有聚合事实到已配置deepseek-v4-pro[1m]；模型选3—4张已核卡的重点顺序，服务端填事实/读法/来源，拒绝未知/重复/额外输出。同份资料缓存；切换市场/范围/数据或相同日期价格修订后旧阅读隐藏。后台没有自动模型调用、重试或通知。
+- 三Sol medium分别风格、宽度、后端/测试；root布局/风险/按钮和核验。3次实际模型请求，前2次旧传输用量未知且较慢；最后独立请求关闭推理仅选ID，0.9秒、398 tokens；本轮总用量与费用未知。同资料再点击命中缓存，最后进程health model_requests=1，completed=1，in_flight=0。0新效果实验/0付费数据。
+- 最终构建831模块通过（既有大包warning保留），7项测试0.43秒通过；1280/1024/390无横溢；切换、条件、详情、来源与折叠核过；console error0；响应式临时视口已恢复。对应curves-verification/manifest/passive-check/official-history.json及桌面/手机/展开解读截图。
+- 失败与修复：初稿把策略全历史终点当相关比较日，改为未核；风险源质量逐项标注；模型通用传输较慢，改独立有限请求。原始解读不覆盖。VIX实际页面7300日缓存末值18.84，而最新观察17.85（均10/20），另7665探针17.94；同日不同批次已明确显示，不改上游来源，不冒充实时一致。
+- 数据缺口：MSCI仅年度+年初至今端点，周/月切换需连续历史与许可；A宽度10/16、US9/4；NFCI/本地波动/当前回撤/历史估值分位/收益贡献/完整加权持仓及共同有效样本仍缺。后续因子、选股、风险比简单降仓及完整策略增量研究未启动。
+- 最小恢复：复用ui-preview-baseline.json的本机运行壳与上轮父页补丁；复制本任务12组件。预览vite在通用/api代理之前加/api/market-style → http://127.0.0.1:8192。后端用现有.env凭证在进程内load_dotenv('.env', override=False)，关闭lei_signal.plans.llm正文日志，再uvicorn.run('lei_signal.market_style_observation.app:app',host='127.0.0.1',port=8192,log_level='warning',access_log=False)，PYTHONPATH=src。不打印凭证、不改全局模型设置。Vite继续5192；无定时器或后台研究。
+- 已有系统目标okr-f07e0054448a保持此前planned，本轮无仓外DB写入；正式采用、更多历史接入与投资效果分开验收。准确提交/远端读回见curves-publication-receipt.json和本task协调入口；用户试读的下一步只针对实际布局反馈。
+
+---
+
 # 市场环境面板预览已可试读 2026-10-20T20:29:29.465397+08:00
 
 - 本阶段完成仓内交互预览；用户视觉待验收。入口 http://127.0.0.1:5192/fundamentals#fund-sec-market，实际Vite PID6389，工作目录 .codex/market-style-preview-20261020/web。原5188运行树只读，未部署。

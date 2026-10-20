@@ -1,0 +1,141 @@
+{
+  "checked_at": "2026-10-20T23:55:07.542318+08:00",
+  "checked_coordination_sha": "95168e7ff21792d0a9ae21bd6ada9fcc50cb36eb",
+  "start_claim": "300606f10c8695b2e1f09611ced2e89e096ef369",
+  "preview": "http://127.0.0.1:5192/fundamentals#fund-sec-market",
+  "build": {
+    "command": "npm run build",
+    "cwd": ".codex/market-style-preview-20261020/web",
+    "passed": true,
+    "modules": 831,
+    "final_duration_seconds": 2.93,
+    "warning": "Existing chunks above 500 kB; not hidden or changed"
+  },
+  "tests": {
+    "command": "PYTHONPATH=src python3 -m pytest -q tests/unit/test_market_style_observation.py",
+    "passed": 7,
+    "seconds": 0.43,
+    "scope": [
+      "GET never calls model",
+      "successful exact snapshot repeat reuses result",
+      "unknown/invalid/duplicate/extra model output rejected",
+      "missing/nonfinite data remain missing",
+      "risk date/quality/unit qualification",
+      "one bounded DeepSeek Anthropic request",
+      "OpenAI protocol and HTTP error without retries"
+    ],
+    "rerun_after_final_css_only": false
+  },
+  "browser": {
+    "widths": [
+      1280,
+      1024,
+      390
+    ],
+    "horizontal_overflow": false,
+    "final_console_errors": [],
+    "passed": [
+      "relative/cumulative style modes",
+      "CN/US, SP500/Nasdaq price controls",
+      "breadth 1/3/5 years and existing six conditions",
+      "20/50/200 line rendering with matching price date coordinates",
+      "quality detail, sectors/top10 disclosures remain usable",
+      "desktop paired charts and responsive stacked charts",
+      "real explicit model calls in CN/US",
+      "hide old interpretation after market/window/data/view change",
+      "same-date price revision changes fingerprint",
+      "reload and repeated cached request no new model call",
+      "reading collapses without losing charts"
+    ],
+    "final_width": 1280
+  },
+  "data_checks": {
+    "style": "curves-official-history.json; all 13 annual/YTD steps reconstructed and relative endpoints independently checked",
+    "projection": {
+      "cn_one_year_price_dates": 243,
+      "cn_matching_breadth_dates": 231,
+      "cn_bull_bear_days": [
+        118,
+        113
+      ],
+      "us_one_year_price_dates": 251,
+      "us_matching_breadth_dates": 221,
+      "us_bull_bear_days": [
+        214,
+        7
+      ],
+      "marked_days_after_last_breadth": 0
+    },
+    "latest_dates": {
+      "cn_breadth": "2026-10-16",
+      "us_breadth": "2026-09-04",
+      "cn_price": "2026-10-20",
+      "us_price": "2026-10-19",
+      "style": "2026-09-30"
+    },
+    "risk_reconciliation": {
+      "vix_observation": {
+        "date": "2026-10-20",
+        "value": 17.85,
+        "quality_status": "time_unverified"
+      },
+      "vix_actual_ui_history_7300_query": {
+        "date": "2026-10-20",
+        "value": 18.84
+      },
+      "vix_diagnostic_7665_query": {
+        "date": "2026-10-20",
+        "value": 17.94
+      },
+      "hy_observation_and_history": {
+        "date": "2026-10-19",
+        "value": 3.29,
+        "unit": "%"
+      },
+      "resolution": "UI separately labels latest observation and historical endpoint if values/dates differ; upstream per-lookback cache not modified. Do not treat as identical update batch."
+    }
+  },
+  "failures_and_repairs": [
+    "Initial generic model transport slow; final isolated request disables reasoning for ID-only selection, max output 1024, no retry; same configured model/key unchanged. First two usage counts unknown.",
+    "First interpretation displayed strategy full-history endpoint as comparison data day; corrected to date unknown and common effective sample limitation. Raw initial text retained.",
+    "Risk template originally omitted source time qualification; now date, unit and quality checked per value.",
+    "First exact Chinese detail locator missed whitespace; fresh DOM and semantic locator succeeded.",
+    "Final read detected VIX observation/history discrepancy; shown explicitly with endpoint/date.",
+    "Source locator for RATE_LOOKBACK_OPTIONS was imported, not a local declaration; corrected read to zones.ts."
+  ],
+  "scope_limits": [
+    "Annual MSCI endpoints plus final 2026 YTD only; no monthly/daily path, no weekly switching claim",
+    "World developed-market factors, not CN or US-only index",
+    "Six existing condition projections use B50/B200; B20 display only",
+    "Nasdaq price uses explicitly labelled SP500 breadth; no Nasdaq breadth claim",
+    "NFCI/local market volatility/current drawdown/historical valuation percentile not available",
+    "Weights/top10 show concentration, not historical return attribution",
+    "Correlation/common effective date sample and weighted live holdings overlap incomplete",
+    "Model selects priority/order from server facts/method cards; not free-form predictive chart analysis",
+    "No source license confirmation for continuous redistribution",
+    "No effectiveness experiment or strategy/trading/rule change",
+    "Planned upgrade remains previous record; no external SQLite write this phase",
+    "Full runtime shell local only; source branch is incremental, not standalone deployment"
+  ],
+  "artifacts": [
+    "curves-desktop.jpg",
+    "curves-mobile.jpg",
+    "curves-agent-visible.jpg",
+    "curves-agent-final-reading.txt",
+    "curves-agent-us-reading.txt",
+    "curves-agent-first-reading.txt",
+    "curves-manifest.json",
+    "curves-passive-check.json",
+    "curves-official-history.json"
+  ],
+  "models": {
+    "implementation_agents": "3 Sol medium with disjoint ownership",
+    "actual_research_model_cost": null,
+    "source_tool_calls_this_phase": 6,
+    "new_return_experiments": 0
+  },
+  "hygiene": {
+    "command": "python3 scripts/check_repo_hygiene.py",
+    "exit_code": 0
+  }
+}
