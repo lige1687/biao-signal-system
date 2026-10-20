@@ -1,3 +1,14 @@
+# OSAP 接入与历史版本可用性补缺启动 2026-10-20T10:40:52.958706+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status active；scope_released false。checked_coordination_sha=ee5b59c6b6528a4c0f27d308e8a88a9d080ab289；checked_at=2026-10-20T10:40:52.958706+08:00；已读 COORDINATION/self/research-utility-review 最新高点执行复验10:35/theory-workflow-system-increment/external-quant-resources/research-dispatch-controller/lowfreq-strategy-discovery，并检索所有任务的拟写模块。另一个对话继续高点组合与股票执行，本轮不重跑其因子效果。
+- 用户授权：可靠历史数据、工具、数据修订和 OSAP 实际接入。边界为研究资料层，复用已存 OSAP 目录/公开组合、已有版本选择/数据快照工具，完成真实读取、版本差异及时间资格检查；不以它们冒充 A 股个股原始历史或策略收益。已有来源/实验累计预算不重置，本轮不做市场效果计算、不购买数据、不改生产。
+- 唯一写范围：本树 src/lei_signal/research/osap_reference.py、tests/unit/test_osap_reference.py；必要修订适配 src/lei_signal/research/financial_revisions.py、tests/unit/test_financial_revisions.py（先查既有功能，非重建）；docs/research/osap-history-usage.md；docs/experiments/osap-history-revisions-2026-10-20.md 及同名 raw；registry本键/INDEX本行/原progress/目标note。新模块核验后仅在主树同名路径不存在或仍等于本题原指纹时复制，旧共享模块/定义/冻结文件不改。
+- 委派：Luna low 只读盘点真实财报版本及既有工具，Sol medium 仅新 OSAP 模块/测试；root核定义、方向、时间及版本边界。合同与干跑先保存，各路径唯一写者。资料及大型输出复用已核外盘，新增预计32MiB外盘/500KiB本机，实际写入前路线计划；不复制全库。
+- 验收：实际 OSAP CSV/目录指纹、单位及多空方向准确，缺失/重复/篡改拒绝；两版本差异可见且旧证据不变；财报期间/发布/可用/下载时间不混用，缺历史版本明确受阻；已保存真实案例和必要合成边界检查。报告区分工程可用、历史资料资格和未做的收益研究。策略源实际SHA沿已确认两份不变。
+- 基线 codex/personal-lowfreq-system-audit-20261018@fd538be2201cf69d210aca20389c227c6c71c58a。未知事项：RQData实际账户/授权/版本覆盖未核；检索插件未发现明确接口，不猜凭证。现有原始价格与财务映射缺口未因新工具解决。
+
+---
+
 # 研究工具复用审查与准备检索补缺交付 2026-10-20T01:30:59.249953+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431/root；status completed仅本工具审查/检索补缺，历史数据及策略效果仍有阻塞；scope_released true。checked_coordination_sha=5be1d1e032394063dcfb792c16619e42bc0e4ece；checked_at=2026-10-20T01:30:59.249953+08:00；已读COORDINATION/self/research-utility-review最新价值长期反转01:21/lowfreq-strategy-discovery/external-quant-resources/dispatch/theory-workflow-system-increment准备工具与最终发布历史；无新scope重叠，不接管另一对话因子复现。
