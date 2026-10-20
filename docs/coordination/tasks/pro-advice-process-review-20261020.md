@@ -1,3 +1,16 @@
+# Pro三项流程补充已采用并独立核验，用户要求已完成
+
+- task-id: pro-advice-process-review-20261020；owner: 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status: completed；scope_released: true。checked_coordination_sha: 8b0f4a8071985cd973f85d873942d0d53a1c2603；checked_at: 2026-10-20T16:17:16.306494+08:00。已读task-id：self、personal-lowfreq-system-audit-20261018、research-dispatch-controller；原owner已释放核心写范围，仍直接复用其采用成果，无核心文件二次修改或其他冲突。
+- 用户授权“可以啊，完成吧去”已落实。实际买入组、可比报警负担和行动延迟在主工作树playbook第93行；AGENTS→lei-lowfreq-research→用途评价入口存在。3核心文件SHA与原owner采用回执全部一致；回执在已发布e1330a7d8ee4c7f8babef2afe06de34278fce7e9逐字核同。Luna/low只读独核完成；主控核语义、入口及指纹。
+- 本题成果 codex/pro-advice-process-review-20261020@367d2137e296fb826572757c31f5046b4430a98e 已普通push，远端ref同完整SHA、准确6路径内容已核；原667c5445审阅与旧verification/source-manifest及事故记录保留。修改仅本报告、补充状态、新adoption-verification、progress和registry/INDEX自身字段，旧其他登记保留，0删除。
+- 报告与登记现明确“审阅完成、三项文档补充已采用并核验”。实际核心采用来自原owner，本文只验收和关闭旧待合入状态，不重复覆盖核心；细节/指纹/入口及限制见docs/experiments/raw/pro-advice-process-review-2026-10-20/adoption-verification.json。归置检查通过。
+- 本轮新市场运行0、外部方法资料请求0、数据库/生产/交易修改0、跨chat消息0。复用历史累计5/6外部来源与1次失败。真实token费用未知。文档采用不等于全系统程序强制、后续AI行为保证或流程效果已经量化。
+- 本用户要求无剩余必需执行项。后续相关原已授权研究按现行指引执行，不为检查文档另开收益实验；无本任务后台进程。
+
+---
+
+## 本轮开始记录
+
 # 用户已批准完成融合：实际采用核验与本题收尾
 
 - task-id: pro-advice-process-review-20261020；owner: 01a15845-46c2-7d30-8318-cb3662cd6e80/root；status: active；scope_released: false。checked_coordination_sha: 08aa11b701433c12ec1bc70d53e6030f4311e034；checked_at: 2026-10-20T16:12:49.695062+08:00。
