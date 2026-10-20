@@ -460,3 +460,5 @@ Luna low只读核当前定义178对象与本任务旧结果，Astra high挑战�
 - 交付读回：报告API正文SHA654be6129cbdb42fc92c0bcb7bc1ce0717c170b216745fde8936d560d6a7613e与本地一致，main三核心文件SHA再核一致；归置通过。原目标34→36，仅next_action/报告链接/note，旧里程碑4/6、status及旧链接保持，没有accept。goal-before仅本地快照不入Git；本轮core条款以main增量patch和原文/前后SHA交付，旧工作树不整批引入他人规则。
 
 - 收尾fresh coord14b2eef19685760400eb07f5b58f90152b6a5bb7：原因子短反转仍active且范围不重叠；新pro-advice-process-review完成明确不改核心，root已读其补充草案并在本指引合入买入组/可比报警负担/行动延迟三条细化，其他已覆盖项不复制。不改对方任务/报告。最后报告与核心hash详delivery-validation/core-change-receipt；API正文/category/verdict再核。
+
+- 成果首推d4e23e238a12e2658de688e8a90893751af75bef，25路径远端逐字节核同。收尾补披露另一owner新用途600价格衔接资格损失，影响本旧冻结结果尚未知，不接管排查、不将一股纠错当全源认证，US输入独立。当前报告最终SHAbc73eae769c34989a9d5a34b6bc7a85ad2f136db0110f31624aba00631f3bad1，API全文再核；open_in_codex仅queued，不报视觉验收。
