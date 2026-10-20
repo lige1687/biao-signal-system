@@ -1,3 +1,12 @@
+# A股反转应用范围审查已完成，正在读回交付 2026-10-20T23:32:47.748656+08:00
+
+- 沿稳定task-id/owner/工作分支；mode report_only。checked_coordination_sha=1360d5264d4640991aa4d78ed8beacfe3774e3c9；已读 self/research-dispatch-controller/research-utility-review-20261012/strategy-account-bridge-20261020/mechanism-rebalancing-review-20261020/market-style-observation-20261020及COORDINATION。最新策略owner23:26记录已主动避开本范围，其成熟原型/UI归原owner，无重叠实施。
+- 本对话经典600股诊断、因子实现300股条件排序/10只账户、策略owner20只组合全已复用。Luna只读小回执/报告，root独核定义和关键差额；没有新回测、调参或行情下载。正负结果、报价单位/停牌/费用和未知保持。20股rv对v累计多14.5189pp、跌幅少4.3686pp，但4685笔且高费转亏，不全部归反转。
+- 新原文判断：Liu/Stambaugh/Yuan作者2018-12-11稿附录A.2过去20日排序、每日调1/5、每批5日，月度为统计；不能据其证据称月度调仓复现成功。6来源动作（2搜索/2open含1次403/2find）完成，拒绝后未重试。盈利42家3.25%覆盖限制严格同动量判断，补齐不会必然转正。
+- 报告docs/experiments/a-share-reversal-applicability-review-2026-10-20.md，SHA66854c3879ab1ceb6f95bc0b33999ec1cf5bc0463eb47ce4867e325b9e7a1348；同raw保存input-manifest、review-contract、controller-audit、source-ledger。仅新增报告/小证据，registry本键、INDEX本行和自己progress；两主树原记录语义保护已核，未改源码/定义/旧研究/服务/目标库/真实交易/权限。成果提交与远端读回随后记录；本题科学审查已答，完整市场与真实账户仍未证明。
+
+---
+
 # 本轮交付已推送并读回 2026-10-20T21:59:24.148330+08:00
 
 - 精确成果提交 `9cbbb313332ab4217178f2be90adff714d0a8608` 已正常推送到 `codex/personal-lowfreq-system-audit-20261018`，171文件逐字读回；没有推送main/master。协调完成记录 `30596ce3e740c0db64ad4da98bed3b6481e7a214`，checked_coordination_sha `c6bf568a63f7984f58b71ea132b33dfefcbe3e66`；读过的完整task-id及无冲突决定见同名raw/coordination-final-receipt.json。

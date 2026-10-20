@@ -1,0 +1,67 @@
+{
+  "at": "2026-10-20T23:31:23.917747+08:00",
+  "request_limit": 6,
+  "actions_used": 6,
+  "new_market_data_downloads": 0,
+  "actions": [
+    {
+      "n": 1,
+      "action": "search",
+      "query": "China A shares short term reversal monthly returns Liu Stambaugh Yuan 2019 reversal",
+      "status": "returned"
+    },
+    {
+      "n": 2,
+      "action": "search",
+      "query": "short term return reversal China stock market liquidity transaction costs paper authors",
+      "status": "returned"
+    },
+    {
+      "n": 3,
+      "action": "open",
+      "url": "https://doi.org/10.1016/j.pacfin.2021.101607",
+      "status": "403 stopped; no retry or bypass; only search excerpt used"
+    },
+    {
+      "n": 4,
+      "action": "open",
+      "url": "https://rodneywhitecenter.wharton.upenn.edu/wp-content/uploads/2019/04/01-18-Stambaugh.Published.BlumePrize.pdf",
+      "status": "success 56-page author manuscript dated 2018-12-11"
+    },
+    {
+      "n": 5,
+      "action": "find in opened PDF",
+      "pattern": "reversal",
+      "status": "success; detailed holding period Appendix A.2 printed page28 and CH4 page23"
+    },
+    {
+      "n": 6,
+      "action": "find in opened PDF",
+      "pattern": "1.08",
+      "status": "success; not a new dataset"
+    }
+  ],
+  "primary_sources": [
+    {
+      "title": "Size and Value in China",
+      "authors": "Liu, Stambaugh, Yuan",
+      "publication_year": 2019,
+      "read_version_date": "2018-12-11",
+      "url": "https://rodneywhitecenter.wharton.upenn.edu/wp-content/uploads/2019/04/01-18-Stambaugh.Published.BlumePrize.pdf",
+      "scope": "2000-2016; A-shares with stated filters; short-term signal and five-day holdings; no raw data replication"
+    },
+    {
+      "title": "Anomalies in the China A-share market",
+      "authors": "Jansen, Swinkels, Zhou",
+      "publication_year": 2021,
+      "url": "https://doi.org/10.1016/j.pacfin.2021.101607",
+      "scope": "publisher search excerpt only; transaction-cost sensitivity; full open rejected"
+    },
+    {
+      "title": "Is short-term reversal driven by liquidity provision in emerging markets? Evidence from China",
+      "publication_year": 2022,
+      "url": "https://www.sciencedirect.com/science/article/pii/S1544612322004251",
+      "scope": "publisher abstract in search; daily horizon; counterexample, no monthly strategy extrapolation"
+    }
+  ]
+}
