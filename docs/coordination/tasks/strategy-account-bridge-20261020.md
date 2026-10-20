@@ -1,3 +1,17 @@
+# 个股多策略历史比较与前向系统交付 2026-10-20T19:19:52.643726+08:00
+
+- task-id/owner沿原；status completed（本轮固定历史问题与工程交付）；前向按新日期持续记录，效果未证明；scope_released false（冻结运行package不可覆盖）。checked_coordination_sha=783a6b0ddf884cd4693c654d45c189b785d81f09；checked_at=2026-10-20T19:19:52.643726+08:00；已读COORDINATION及strategy-account-bridge-20261020,research-dispatch-controller,research-utility-review-20261012,personal-lowfreq-system-audit-20261018,lowfreq-strategy-discovery-20261019,gemini-strategy-review-20261020,investor-workspace-simplification-20261012,mechanism-rebalancing-review-20261020。查重无文件/问题冲突，未接管原A、盈利资料、机构再平衡或旧四ETF研究。
+- 用户明确扩大到A股和美股个股，已实现mv/rv两模型每市场两实例、完整选股/进出/月调仓/资金约束、单因子与退出/费用对照、同10万各半组合、独立8028 API与/fwd默认个股双策略UI。已有8018/8000服务与原冻结9模块没有改动。scope路径沿18:39登记，具体唯一写者：Sol engine.py+engine测试+raw/run_history；Sol sources.py/collector.py及测试；Sol frontend3文件；root ledger/service/runner/server、config、报告与集成；Luna只读独立核数小JSON；Astra只读关键方法/资金时点。
+- 固定20账户各一次完成，无调参。A股300历史队列2015-25：mv累计+76.92%/最大跌幅54.89%，rv+30.56%/52.97%，v+16.04%/57.33%，各半+53.74%/52.79%；US当前IVV名单504中502有历史、2021-02至2026-06：mv+33.51%/16.43%，rv+3.78%/20.22%，v+51.14%/16.09%，m+342.32%/31.42%，各半+18.65%/15.20%。两主策略相关0.850735/0.801631，不称低相关。A股更高费使rv转亏、美股两主方案未胜v；全部负向对照保留。
+- 当前原件一次804请求：CN280有历史但当日181/300、US503/504最新10-19，原始+快照约232MB在原已核外盘plan路径，未来gzip新批；未替换20只CN/1只US失败对象。历史大结果同run/history，精确定位raw/storage-plan/current-source/history-result；不移动旧输入、不把私人或大数据入Git。
+- 真正冻结2026-10-20T11:10:07.925266+00:00（北京时间19:10）；US两套各20条等待报价模拟订单、0成交/0估值，CN两套资料不足0订单/0估值。自建报价研究单位，不声称真实股数；各市场90%同日覆盖，固定5锚点校准单位，迟到单不补过去成交。实服务PID80609/worker80610已读回心跳，A/US日历并集NY17采集，2026日历有效；无通知、无开机自动恢复，外盘/网络/主机必须可用。
+- 验收：34项Python边界、TypeScript、归置通过；Luna独核净值/回撤/费用/相关/同跌0实质差异；真实API/报告正文逐字一致/冻结hash匹配；浏览器CN/US历史、US名单订单、CN明确等待、无假前向收益、组合、原信号、报告入口；390宽零页面横溢（表格容器内滚动），542默认图484宽。回执raw/delivery-verification.json和strategy-page.jpg。失败与修复包含None资格、输出子目录、字段/费用单位、双市场日历并集、恢复重放、盘中首次初始化，均保留于报告/测试；未用修复改变策略参数。
+- 研究报告docs/experiments/factor-strategy-portfolios-2026-10-20.md已登记组合与仓位/mixed，INDEX补入口；旧strategy-account-bridge和strategy-forward-observation仅追加新范围链接、更新自己SHA。原来“没有两个合格可直接采用策略”的历史判断保留，当前版本是用户新授权的研究观察，不声称跨过资金采用条件。
+- 代码/报告成果仅本地主工作树codex/factor-unit-research-20260915，基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，未自动提交/推送，远端不能完整复现。5188运行树精确镜像4路径及回执，源码冻结备份raw/frozen-runtime-source。协调元数据单独推送；系统待升级仓外库仍未写，已备raw/upgrade-note.md沿前轮待确认边界，不重复请求或扩权。
+- 下一步仅等真实新资料：A股当日覆盖恢复后同冻结策略首配；美股按既定订单记首次真实收到的开盘报价。经营盈利逐股披露资料尚缺，归既有资料owner，不能拿French组合代替。历史问题已回答，不重跑当前参数；UI最终效果待用户验收。恢复先核本记录、活动锁/冻结SHA/原SQLite与latest来源，不重建账户或覆盖冻结源码。新增个股策略后任何规则变化须新版本。
+
+---
+
 # 用户纠偏：A股与美股个股多因子完整策略并行前向 2026-10-20T18:39:57.148465+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=eaff9ff69639eb44688eefb1f317699595901218；checked_at=2026-10-20T18:39:57.148465+08:00。已读COORDINATION/self/dispatch、research-utility-review、personal-lowfreq-system-audit、lowfreq-strategy-discovery、gemini、investor-workspace、mechanism-rebalancing-review最新；机构月末SPY/IEF仍归原owner，不重复。
