@@ -1,3 +1,5 @@
+- 2026-10-20：[机制优先研究与月末股债再平衡](mechanism-rebalancing-review-2026-10-20.md)：核心流程已写入指引，部分程序检查已实现；保留独立候选，本地交易效果未评价。
+
 # docs/experiments 总索引
 
 - 2026-09-17：[外部因子方法复用主控复核](factor-method-reuse-controller-review-2026-09-17.md)：R1–R4限定返修，未验收或批准安装。

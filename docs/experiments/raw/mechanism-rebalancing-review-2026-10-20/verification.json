@@ -1,0 +1,33 @@
+{
+  "report_path": "docs/experiments/mechanism-rebalancing-review-2026-10-20.md",
+  "report_sha256": "ab89a87b9d09a86d9bb208e9dd13a17226f9129b026dcb6d6714582dde77cbe8",
+  "api_markdown_exact_match": true,
+  "registry_old_entries_preserved": 721,
+  "category": "方法论与验证",
+  "verdict": "mixed",
+  "plain_conclusion_section": true,
+  "archive_section": true,
+  "api_archived_flag": false,
+  "api_archived_flag_reason": "现有API只按文件名ARCHIVE标记；本报告按项目约定有正文ARCHIVE段，不改已登记路径",
+  "hygiene": "passed",
+  "diff_check": "passed",
+  "independent_review": "Sol/medium只读审代码及报告，无实质问题；主控独核必填字段、政策拒绝与适配列表",
+  "synthetic_example": "66/106=62.2641509434%; arithmetic only",
+  "new_market_runs": 0,
+  "execution_status": "completed",
+  "local_trading_evidence": "not_evaluated",
+  "completion_reason": "question_answered",
+  "goal_id": "okr-1439df888f5b",
+  "goal_status": "planned",
+  "limitations": [
+    "主论文全文和修订差异未完整核对",
+    "作者课件数据页6223与表格6226未核清",
+    "SSRN最新债券指数论文仅摘要",
+    "未做市场实验或改研究程序"
+  ],
+  "known_failures": [
+    "来源请求6次访问失败，已记录读取边界",
+    "目标首次POST返回409；核无新增后将所有后续里程碑保持false再登记，读回成功",
+    "初查reports.py不存在，实际路由为experiments.py，已按实际路径核验"
+  ]
+}
