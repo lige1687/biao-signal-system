@@ -1,3 +1,14 @@
+# 美股年度经营盈利：历史来源已落盘，收敛会计口径 2026-10-20T20:34:22.260619+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false；checked_coordination_sha e4b86ad42d758cab14e961584186232ca807dcc7；checked_at 2026-10-20T20:34:22.260619+08:00。已读COORDINATION/self/research-dispatch-controller/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/pro-advice-process-review-20261020/strategy-account-bridge-20261020，新增market-style-observation-20261020、mechanism-rebalancing-review-20261020当前范围已核；后两项为风格UI及机构散户资料，与本年度OP无重叠。准备写入前远端变化断言已停止，补读20:32风格预览交付后继续，未覆盖他人。
+- 原注册范围不扩，成果基线008625c1c4eb1b63d82403565799343075b30922。已取得48份SEC季度主表ZIP及固定版本历史S&P500成员/报价/退出候选；2015—2024共120月、716代码标签、60510成员月。不能将来源成功/今日代码映射称历史资格全部通过。
+- Luna执行主表及预热/前身补证、每日资格、年度申报覆盖、退出和18价格差异解释；Astra独立来源/方法审；root核原件/身份/重大差额。52成员月历史CIK更正另表保存，原输入保持；旧COR/Cencora Yahoo分红混入CoreSite记录的具体污染已核，旧收益未覆盖。引用旧502报价的任务需知此限制，本题不改他人成果。
+- 年度候选58341成员月可找到当时申报；12817成员月为四流量及正权益唯一金额候选，尚非OP合格。24修订年报选中但缺流量，涉及269成员月。218指数退出中212为此前月末持有，101缺目标月末同代码报价，不能补0/最后价或直接剔除。
+- 必要动作A：从现有候选按报表结构核费用/R&D/折旧/权益含义后决定局部比较。Luna唯一写新accounting_structure_probe.py及receipt、小结/外盘新目录；root定义裁决，Astra只写accounting-target-ruling.md。缺少全市场100%不是停止依据。新效力core0/1、repair0/1；来源79次含1次SEC403，web读/搜索72动作截至本记录；SEC该host停止，0附注ZIP，不绕过。
+- 新大结果仅已绑定固定外盘us-op-common-history-20261020/...T191922-92db83e55b32/result，源约4.8GB。本机小记录/报告范围原样；0生产/交易/付费/删除/通知。尚未完成OP增量；资格通过才冻结统计，否则准确登记缺证据。当前无需用户再授权已允许的数据处理。
+
+---
+
 # 美股同池经营盈利：历史名单、退出与当时财报补齐 2026-10-20T19:18:44.459419+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha 429b83e3700e3ee865eb9ba1f944dc679e9834d1；checked_at 2026-10-20T19:18:44.459419+08:00；已读COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/research-dispatch-controller/pro-advice-process-review-20261020；前向服务与旧Gemini范围沿上轮只读。新增pro-advice季度盈利变化归该owner，本题年度OP水平与同池动量比较，不重做其微软EPS、低换手或宽度仓位。
