@@ -1,0 +1,116 @@
+{
+  "schema": "purpose-specific-reference/1",
+  "created_at": "2026-10-20T15:46:25.444561+08:00",
+  "status": "design_before_effects",
+  "question": "美国公开组合中，毛利或价值与动量各半的近期分散帮助，是否超出单纯将动量规模减半；同时放弃多少上行。",
+  "primary_use": "公开组合的风险分散线索与后续研究优先级，不是股票排序或可交易账户",
+  "mechanisms": {
+    "GP": "毛利相对资产描述经营能力，可能与追逐既往涨幅出现不同的涨跌；公司和行业权重差异是竞争解释。",
+    "BM": "价格相对账面权益的便宜程度，可能与动量不同步；困境风险、原库有形权益及交易所筛选差异是竞争解释。"
+  },
+  "scope": "US published aggregate long-short reference returns; not same stock universe or ETF",
+  "signals": [
+    "Mom12m",
+    "GP",
+    "BM"
+  ],
+  "combination_weights": {
+    "momentum": 0.5,
+    "candidate": 0.5
+  },
+  "comparators": [
+    "Mom12m",
+    "0.5*Mom12m",
+    "candidate_alone"
+  ],
+  "periods": [
+    {
+      "id": "recent",
+      "start": "2015-01",
+      "end": "2024-12",
+      "expected_months": 120,
+      "role": "主要近期描述，固定十年，与已有公开比较共用日期"
+    },
+    {
+      "id": "earlier",
+      "start": "1963-07",
+      "end": "2014-12",
+      "expected_months": 618,
+      "role": "较早历史背景，不与近期重叠，不叫训练集"
+    }
+  ],
+  "history_status": "所有原表已公开，部分均值及其他同族组合已看过；冻结后首次核本问题不使历史变为独立测试；无拟合、无优化、无训练/测试划分",
+  "primary_metrics": [
+    "monthly_sample_sd",
+    "conditional_mean_difference_when_Mom_negative"
+  ],
+  "required_costs": [
+    "conditional_difference_when_Mom_positive",
+    "difference_in_top_ceil_10pct_Mom_months",
+    "candidate_alone_comparison",
+    "worst_month",
+    "monthly_mean"
+  ],
+  "secondary": [
+    "correlation_with_Mom",
+    "fraction_of_negative_Mom_months_candidate_positive"
+  ],
+  "uncertainty": {
+    "method": "paired_circular_month_blocks",
+    "block_months": 12,
+    "draws": 5000,
+    "seed": 20261020,
+    "level": 0.95,
+    "targets": [
+      "sd_difference",
+      "mean_difference",
+      "conditional_negative_Mom_difference"
+    ],
+    "conditioning": "outcome-defined subsets are descriptive, not ex-ante signals; resample full paired calendar then condition within each draw",
+    "multiplicity": "exploratory pointwise ranges; two candidates and multiple outcomes, no selection-adjusted adoption claim",
+    "interval_periods": [
+      "recent"
+    ]
+  },
+  "unit": "source percent divided by100 once; published sign kept",
+  "not_evaluated": [
+    "Rank IC",
+    "stock-level monotonicity",
+    "market-adjusted alpha",
+    "account CAGR or maximum drawdown",
+    "actual turnover",
+    "fees, short borrow, funding or tax",
+    "stock holdings overlap",
+    "US ETF or LEI decision improvement"
+  ],
+  "source_manifest": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/osap-history-revisions-2026-10-20/osap-2025-manifest.json",
+    "sha256": "26dc99a2df257b97c7eee2ea461fac8543a90243d015ba37c74b306b8e6fe95a"
+  },
+  "loader": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/osap_reference.py",
+    "sha256": "057eaa295883e96ef48964bdd0ef17cb1c5036254a913813ff29a55b21ce0455"
+  },
+  "storage_plan": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/storage-plan.json",
+    "sha256": "b21fc645d0b3336a42ec471061a6f113446c8b1294860a2e770948a54785f4c3"
+  },
+  "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-factor-purpose-evaluation-20261020/us-factor-purpose-evaluation-20261020-20261020T154625-9494f8fe1748/result",
+  "research_budget": {
+    "core_max": 1,
+    "necessary_repair_max": 1,
+    "market_downloads": 0,
+    "method_source_attempts_max": 3,
+    "method_source_attempts_used": 2,
+    "prior_family_budgets": "unchanged; external new-use diagnostic, do not redo author VME or cash profitability core"
+  },
+  "acceptance": "source/months/units checked before compute; all methods same complete months or abort, no zero imputation; synthetic tests then independent direct source calculations; conclusions per use with counterexample and limitations; no minimum return or IC pass line",
+  "gemini_reuse": "2026-10-18 saved Argon high review: distinguish additional information from fewer actions/lower exposure; reject average exposure scaling drawdown and arbitrary thresholds; no new consultation claimed",
+  "stop": "No parameter or weighting search on negative result; unavailable qualified aggregate source stops this comparison without replacing definitions. Stock replication remains missing separately.",
+  "primary_decision_rule": "只有对完整动量及缩半动量的风险比较、上涨代价、候选单用一起解释；不按单个显著数字宣布有效。未预设最小有用幅度，不排除未检出的用途。",
+  "top_momentum_definition": "Each period largest ceil(0.1*N) Mom returns, tie break date ascending; disclose positivity and zero counts, descriptive only.",
+  "source_metadata_notes": [
+    "GP: value weighted high-low quintile, annual June, nonfinancial; BM: equal weighted high-low decile, annual June, exchanges 1/2, tangible book equity versus fiscal-year-end market equity; Mom12m: equal weighted high-low decile with 3-month portfolio period. Exact metadata in source; not same stock universe or weight.",
+    "Beta/BetaFP catalog Sign=1 and RealizedVol denotes CAPM residual volatility; none substituted for low-beta/total volatility."
+  ]
+}

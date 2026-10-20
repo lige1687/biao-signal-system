@@ -446,3 +446,17 @@ Luna low只读核当前定义178对象与本任务旧结果，Astra high挑战�
 - Sol只读接入意见已落实独立wrapper核验：全600源1852185行重新检查，原blocked仍精确保留1560flag问题；新overlay7800pricecell及12480非价字段保持，6错误样例拒绝。旧市场入口尚未接入derivedbasis，0统计调用、0声称恢复月份。下一步是显式研究输入适配，不能把字段硬改2凑绿；可执行工作仍在原目标中，整体active，不标blocked/complete。
 - 报告old-code-source-repair-2026-10-20.md及同名raw、registry/INDEX主树镜像/报告API全文核同、归置通过；本树337→338/主树710→711仅新报告键。原目标next_action实际30→31纠正待批状态，status/4of6/授权/owner/旧历史保持。范围仍为独立低频公开资料和研究工具，原因子/资产扩张/ETF保持他人owner。无付费/生产/交易/通知/删除。
 - 执行前3代码缺陷已修并记录；root一次空值比较失败及过大打印均保留，无多取源/重跑市场。当前所有代理已结束，本题采集无后台进程；成果commit及远端交接由本轮读回记录给出。
+
+
+## 2026-10-20T15:59:19.277954+08:00 按用途核心约定与美股补充比较
+
+- 用户本轮明确“每个因子都有自己的体系和指标，不只看收益”，要求写入核心；main AGENTS/playbook/lowfreq skill已仅新增相关条款，时间披露也补齐。原文件快照、准确增量patch、前后SHA见raw/core-change-receipt；这些当前规则来自主树，未将本旧工作树历史AGENTS当成现行来源。没有声称程序已强制所有研究。
+- 查重读取coord8d5c442234eeae9240dc430fafad2dbb4656e1e6，注册c912ffffce8fbe4bc3ba1db894be7f942f2b1db6。另一对话绿色候选短反转仍active，ETF斜率/资产扩张已交付，均不接管；US旧VME/cash profitability/当前IVV颜色案例只复用。
+- 新有界问题的design/contract冻结、Sol脚本8合成检查，Luna一次真实执行return0，Astra前后科学审阅，root从源CSV独立192项核到2.22e-16。US近期120月+较早618月，0缺月，无训练测试；源2025版止2024-12。原600股month核为进场归属月，末退出2026-01-05；P1/P2前60后72、防御前72后60，不混写后期。
+- 价值混合相对半动量原M亏损月+1.0108pp、95%[+.0700,+2.0121]，但起伏/均值差范围跨0、正M月-.4516且最差月-18.43%略差；保留条件缓冲，未证全面防守。GP混合相对halfM起伏+1.0876、负M差-.0802不定，均值+.5565；更多风险与上涨参与，不否定其他用途。mix-halfM=half candidate不重复算证据。
+- 旧预算均保持，新core1、repair0、来源定位2含404失败1、0行情财报下载；结果SHA044c68f295cfb9ca096a3835f2db7410c96f3230935b53fcfb88d700d65bdc2f，外盘路径见design/output，无大文件Git。报告/registry自身键/INDEX自身行主树镜像，后续交付读回另记。当前尚未提交本轮成果。无生产/交易/付费/通知/删除。
+- 本轮有界用途已回答，不追加统计；本地美股共同股票/历史版本/退出/只买端成本仍未完成，不以公开多空资料代替。下一步需另一具体用途的新资料证据，不自动扩大212候选或重跑600股。
+
+- 交付读回：报告API正文SHA654be6129cbdb42fc92c0bcb7bc1ce0717c170b216745fde8936d560d6a7613e与本地一致，main三核心文件SHA再核一致；归置通过。原目标34→36，仅next_action/报告链接/note，旧里程碑4/6、status及旧链接保持，没有accept。goal-before仅本地快照不入Git；本轮core条款以main增量patch和原文/前后SHA交付，旧工作树不整批引入他人规则。
+
+- 收尾fresh coord14b2eef19685760400eb07f5b58f90152b6a5bb7：原因子短反转仍active且范围不重叠；新pro-advice-process-review完成明确不改核心，root已读其补充草案并在本指引合入买入组/可比报警负担/行动延迟三条细化，其他已覆盖项不复制。不改对方任务/报告。最后报告与核心hash详delivery-validation/core-change-receipt；API正文/category/verdict再核。

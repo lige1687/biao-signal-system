@@ -1,0 +1,77 @@
+{
+  "schema": "us-factor-purpose-execution-receipt/1",
+  "started_at": "2026-10-20T15:52:23.432059+08:00",
+  "ended_at": "2026-10-20T15:52:29.313088+08:00",
+  "elapsed_seconds": 5.881029129,
+  "pid": 20196,
+  "returncode": 0,
+  "status": "execution_succeeded_readback_verified",
+  "actual_model": "gpt-6-luna low",
+  "command": [
+    "/opt/homebrew/opt/python@3.11/bin/python3.11",
+    "-B",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/analyze_reference.py",
+    "--design",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/design.json",
+    "--contract",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/run-contract.json"
+  ],
+  "contract": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/run-contract.json",
+    "sha256": "b6eed2da4b86835090a92e5e7db7a63aece27a98b5b77ff91f515344759e19e7"
+  },
+  "bindings": {
+    "design": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/design.json",
+      "sha256": "5c2351a5e0289a5db63807e14ac706b68fbfc409dac2a91fcb2624042cff563d"
+    },
+    "runner": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/analyze_reference.py",
+      "sha256": "bf660531aa2016a02b9a7b9a9f58f70580a5ea70c3abd6d82214b835b909e8c8"
+    },
+    "loader": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/src/lei_signal/research/osap_reference.py",
+      "sha256": "057eaa295883e96ef48964bdd0ef17cb1c5036254a913813ff29a55b21ce0455"
+    },
+    "source_manifest": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/osap-history-revisions-2026-10-20/osap-2025-manifest.json",
+      "sha256": "26dc99a2df257b97c7eee2ea461fac8543a90243d015ba37c74b306b8e6fe95a"
+    },
+    "storage_plan": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-factor-purpose-evaluation-2026-10-20/storage-plan.json",
+      "sha256": "b21fc645d0b3336a42ec471061a6f113446c8b1294860a2e770948a54785f4c3"
+    },
+    "storage_module": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+      "sha256": "aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95"
+    }
+  },
+  "network_requests": 0,
+  "stdout": "{\"result\": \"/Volumes/win+mac通用/LeiSignal-新实验结果/us-factor-purpose-evaluation-20261020/us-factor-purpose-evaluation-20261020-20261020T154625-9494f8fe1748/result/result.json\", \"sha256\": \"044c68f295cfb9ca096a3835f2db7410c96f3230935b53fcfb88d700d65bdc2f\"}\n",
+  "stderr": "",
+  "logs": {
+    "stdout": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-factor-purpose-evaluation-20261020/us-factor-purpose-evaluation-20261020-20261020T154625-9494f8fe1748/execution.stdout.log",
+      "sha256": "2e7932b283025255849079e6989844a3a838ec6d9f90e63a99cf049abbc9abb5",
+      "bytes": 265
+    },
+    "stderr": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-factor-purpose-evaluation-20261020/us-factor-purpose-evaluation-20261020-20261020T154625-9494f8fe1748/execution.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "result": {
+    "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-factor-purpose-evaluation-20261020/us-factor-purpose-evaluation-20261020-20261020T154625-9494f8fe1748/result/result.json",
+    "sha256": "044c68f295cfb9ca096a3835f2db7410c96f3230935b53fcfb88d700d65bdc2f",
+    "bytes": 23584,
+    "monthly_csv_path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-factor-purpose-evaluation-20261020/us-factor-purpose-evaluation-20261020-20261020T154625-9494f8fe1748/result/monthly.csv",
+    "monthly_csv_sha256": "6cfbb102d388bc7f10cfed0c86c2dbfbb0f6b3bedee2e0773a95db117e28e261",
+    "monthly_csv_bytes": 110357,
+    "monthly_csv_rows_including_header": 739
+  },
+  "notes": [
+    "既存OSAP公开来源；未下载数据。",
+    "本收据核对运行与输出指纹，不作科学结论。"
+  ]
+}
