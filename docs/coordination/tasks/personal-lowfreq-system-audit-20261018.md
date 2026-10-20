@@ -1,3 +1,14 @@
+# 已存年度价值字段覆盖实核交付 2026-10-20T13:20:22.601941+08:00
+
+- 原task-id/owner；本有界资料提取status completed，整体目标in_progress，scope_released false仅保留本题公开数据资格职责。checked_coordination_sha=3cc059788b4669c5a226e0a5e5cfb14b38b45390；checked_at=2026-10-20T13:20:22.601941+08:00，fresh fetch无变更，已读COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller，未接管他人范围。
+- 成果codex/personal-lowfreq-system-audit-20261018@7d4b28e645364c2154a0387cb3567f16c911fffb已push/fetch，30准确文件逐字读回。报告docs/experiments/value-source-coverage-2026-10-20.md SHA e98eb9ccd62120a87629e1ba01228510bbef4af83370fac86ae34869b3a163a9，raw同名；报告/小raw主树镜像、registry/INDEX仅自身条目、API全文/数据与质量/mixed一致、主树归置通过。初次链接验收失败在唯一登记之后，读回并仅修新报告链接到准确旧成果，未重复登记。goal-before私有快照及外盘16.37MB不进Git。
+- 21145索引筛5503既有年度原件，598公司5481公司年；只4315已合格资产表上下文处理，其余1188保留。实际读出3915归母金额/3900公司年/570公司，只有54家公司12年每年读出；173其他权益、622库存股、3476会计股本均为金额候选，普通股份/普通权益/同年原价/修订链尚未整体合格。所有factor_ready=false，估值分数0，新市场效果0。
+- Sol初版6条必修被root拒绝且保留；修后18合成通过。Luna单次真实执行128.199秒exit0/stderr0；rows SHA8b32326958c5da1c19015869abd923e1ddbcf9b88891fb5623e79059c5d558ac。预选12年度原页盲核4字段，21组42金额匹配、21缺失不补、6人工可辨保守拒绝；other_equity预选没有数值，不能被其他字段代验。异常追加2页负other_equity原件吻合，经济分类未知。root独核全部数量/年限/原页、4旧源产物不变。独核多读母表/后续页、错疑元数据页号及两次未启动目录预检中断均保留，未掩盖成全无失败。
+- 新来源请求0、旧累计预算保持；前述10次免费旧代码价格请求仍未获人类回复，未执行。无新市场/生产/交易/通知/安装/删除；费用未知，全部子任务已完成无后台研究进程。目标okr-8830a1f1ec4f仅note29→30、其他字段/旧历史/里程碑/授权不变；不勾整体完成。
+- 下一可改变决定的工作须针对普通权益权利性质、同年末实际普通股份/多类股价及可用版本证据；本次固定范围字段提取已经回答，不循环扩格式刷覆盖，不以读出金额直接启动P3收益。原防御有限结果不重开，原策略与其他owner效果不重做。执行/独核/发布及恢复信息以raw合同回执和原progress为准。
+
+---
+
 # 已保存年报的价值字段覆盖补缺 2026-10-20T13:03:07.425713+08:00
 
 - task-id/owner沿原，status active，scope_released false；checked_coordination_sha=0959f7bbcacdb3804291c98af38e57a793ea9f9a，checked_at=2026-10-20T13:03:07.425713+08:00；已读COORDINATION/self/research-utility-review-20261012/lowfreq-strategy-discovery-20261019/gemini-strategy-review-20261020/research-dispatch-controller本轮最新记录，无重叠；不接管因子实现、资产扩张或ETF研究。
