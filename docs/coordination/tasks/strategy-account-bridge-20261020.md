@@ -1,3 +1,16 @@
+# 成熟策略原型审阅与审核页交付 2026-10-20T23:49:13.113723+08:00
+
+- task-id strategy-account-bridge-20261020，owner沿原；本轮来源/机制/资料资格问题 completed，仓库内UI完成，现用5188同步 pending_user_approval（仓外准确三文件），用户视觉认可待验收；scope_released false（仅保留本轮UI准确路径及旧冻结保护，不占其他候选研究）。checked_coordination_sha=ad07270113ed2b22619876cea6972be373cb5014；checked_at=2026-10-20T23:49:13.113723+08:00；已读COORDINATION、self、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、market-style-observation-20261020。最新反转/机构仓位交付已读；范围无冲突，只引用原owner成果，未接管复跑。
+- 主工作树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；本轮成果未自动提交或推送，协调元数据另推。报告docs/experiments/mature-strategy-review-2026-10-20.md SHA 3f0073e28974a65f456b2044f0b2f1b9d79a47629b4ffbda2a4834d24e67929c；同名raw含来源、旧成交归类、失败代码、冻结保护、UI截图和delivery-verification；registry只本键、INDEX只本行。新增UI StrategyResearchReview.tsx/strategyResearchReview.css与StrategyPortfolios.tsx入口仅仓内；其余旧配置/7模块/账本/订单未改。
+- 结论：现两完整策略不足资金采用，保留研究对照。A股年化5.33%/2.46%、最大跌幅54.89%/52.97%；美股5.49%/0.69%、16.43%/20.22%，不胜简单低波动7.94%/16.09%；两者相关0.851/0.802。已看历史和当前成分回看限制保持。反转原论文每日分批持5日不等于月调；月度低波动行业相对反转有另一原稿依据，不一概判组合错误。
+- 新增只读成交归类1次成功（累计3尝试，前2失败脚本保留）；4旧账户指纹/费用逐项可核，成交4125/4685/1979/2433，平均每月31.25/35.49/30.45/37.43；费用差小于1e-6。原因标签不是独立因果，不能把删规则费用直接加回收益。0新市场回测/拟合/行情下载/寻优。
+- 保留3成熟机制候选：行业相对反转；价值与动量独立再组合；公告信息消化。每项含原型/本地变化、强对手、成本失败、资料缺口。已复用另一owner价值动量原表复算与年度价值共同输入结果、年度OP负结果、季度EPS；不重复公开组合统计或取源。三项都没有合格本地完整账户成绩，不称新有效策略或已前向。
+- 真实浏览器5194/fwd审核卡展开、CN历史、US前向0有效日期、旧账本切换、报告正文与链接可达；390宽无页面溢出，截图strategy-review.jpg。TypeScript exit0、归置exit0、5188报告API逐字一致、8冻结文件SHA不变；UI/API检查不代表策略有效。原5188工作树在仓外，按AGENTS准确确认问题已发，未收到答复前不镜像；旧范围中的“既授权镜像”在本轮改为明确等待，不据其扩大授权。
+- 实际源请求主控6+UI执行者2=8，超默认6请求预算2，委派时漏传剩余额度，已停止新增外部来源并留偏差；另5缓存定位4失败、出版方403均留存。Sol只读资格/Sol UI/Astra方法审阅，模型费用未知。诊断2失败、报告相对链接和登记哈希键修正均保留回执；不靠改旧结果通过。
+- 新增大结果0，本机小产物约0.2MiB。无仓外账本写入/通知/真实交易。K-baseline沿旧待确认目标note边界，不改状态或里程碑。下一步若批准仓外UI同步，按integration-plan校验源与目标前SHA后仅复制3文件、读回5188；新候选须补历史行业/首次公告/真实价值字段，并沿原资料owner接续，当前不得以缺资料回测或重复旧负结果来完成数量。
+
+---
+
 # 用户否定现有组合后的成熟策略来源审查 2026-10-20T23:26:34.827601+08:00
 
 - 并发查重纠正2026-10-20T23:28:16.877239+08:00：首次push非快进失败。已fetch并实际读到f490e5d23be678c9cf1b5df5cc29f85d325c1d8d新增personal-lowfreq-system-audit-20261018的23:25反转适用范围任务；三份旧反转报告汇总及A股原始文献复核归该owner，本方不重复。Sol只读任务已缩至成熟原型资料资格/当前保存结果。新报告只引用其结论并做候选决策，核心新增范围为成熟策略原型、组合设计与审核UI。checked_coordination_sha=f490e5d23be678c9cf1b5df5cc29f85d325c1d8d；其他已读task-id沿上。先前旧报告读取算复用，不声明接管。
