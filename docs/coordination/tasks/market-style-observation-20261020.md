@@ -1,3 +1,16 @@
+# 市场环境阅读面板：仓内独立预览实现 2026-10-20T20:14:48.162067+08:00
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active；scope_released false。
+- checked_coordination_sha 08ba81376081689e82f6c210145b1d63aa258503；checked_at 2026-10-20T20:14:48.162067+08:00；已读 COORDINATION1.1、self、research-dispatch-controller、investor-workspace-simplification-20261012、investor-observation-map、portfolio-trends-20261013、strategy-account-bridge-20261020。沿用报告成果，不重跑研究。
+- 用户本轮授权：“可以的，你看看搞到哪个面板看板合适？考虑到我们可读性哈，信息密度和减法，做出来我们看看”。落点既有 /fundamentals#fund-sec-market；仅市场背景/风格解释，无策略判定、真实交易和自动通知。
+- root唯一改 web/src/pages/FundamentalsPage.tsx 的import/市场分区/本区页头显示；新增 web/src/components/market-style/（结构/样式可分给Sol独写）；原报告raw目录小型UI数据/验证回执及原progress。运行预览拷贝在仓内 .codex/market-style-preview-20261020/web；其它owner运行树（5188）、ERP5190、8000/8028与数据只读。四MSCI9月末少量事实用于本地预览，不把公开可读当持续自动展示授权。
+- 基线主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，FundamentalsPage当前SHA a56ed25549ccdd79895ba6817e0392533790e2441f7b5fe7a386935eef4aba33 与5188一致；壳层从5188当前源码只读复制做预览，不覆盖主树App/导航。成果分支沿codex/market-style-observation-20261020，上一成果963b2bcb790b99a0b826182bcd8273485fa43b51。
+- 冲突决定：原地图、宏观、ERP、策略组合仍归原owner；只新增风格模块并在已有市场分区串联，旧详细卡折叠保留。两Sol只读位置/官方数据已返回，后续写者范围单独限定；不修改仓外文件/目标库，用户此前只准登记planned。
+- 验收：同母指数同日期/币种/回报口径；四风格期间切换、细节展开与来源；现有VIX/信用/宽度/策略重叠复用且日期与不足可见；桌面/390px不横溢、可读真实页面、构建/归置与准确路径版本读回。UI用户视觉待验收；不宣称因子或策略增量已证明。
+- 当前待完成：代码、隔离预览、浏览器验证/截图、交付记录。本次不新建报告/重复目标，不改原已封存结论；0新收益实验/0付费数据。
+
+---
+
 # 资料与五问方案已交付；系统目标待规划 2026-10-20T19:51:42.174257+08:00
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status completed（本轮report_only）；scope_released true（仅本轮自有文档写入）；面板实现和系统效果未完成。
