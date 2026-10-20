@@ -8,6 +8,8 @@
 - API全文与本地同、Agent指纹核对未截断、5188页面6表与指标/样本/原文/反转段实际可见，归置/准确diff通过；705旧登记保持。目标okr-ff1e0a86fbac仅note177→178，in_progress及旧history/其余字段保持，用户展示待验收。
 - 成果仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9本地未提交未推，协调元数据不代表正文移交。恢复见本raw audit-contract/controller-review/saved-sample-audit/state/delivery-validation；不重跑已完成效果。无生产、交易、通知、删除、付费或后台任务。
 
+- 交付推送遇对方并发更新被保护拒绝；已fetch并读personal最新12:06资料修复/低波动防御接续，checked_coordination_sha=3fd61f3b511d4a7b60711622aa6b63ae79662e62，checked_at=2026-10-20T12:07:03.705925+08:00；完整已读任务列表沿上段，新增防御范围不属于本审计，不重复执行。普通合并保留双方，无强推，报告结论范围不变。
+
 ---
 
 # 因子类型指标与原文差异审查启动 2026-10-20T11:58:00.431525+08:00
