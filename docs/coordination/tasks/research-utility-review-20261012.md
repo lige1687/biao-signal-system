@@ -1,3 +1,14 @@
+# 低换手选股实施与资料修复接续 2026-10-20T16:32:37.492344+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=c227bf302446f1c02e81ef182d27d0e430486f1a；checked_at=2026-10-20T16:32:37.492344+08:00。已读COORDINATION/self/personal-lowfreq-system-audit已完成16:07/lowfreq-strategy-discovery已交接完成/research-dispatch-controller/investor-workspace-simplification两图完成记录，其他Gemini/Pro沿原不接管，当前无新路径冲突。用户原话“可以，按你这个思路去推进哈，我要看到成果”，授权从已交付短期反转进入数据/低换手实施/合理组合与非价格资料资格。
+- 主基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，保留既有脏改。新增独占docs/experiments/lowturnover-green-account-2026-10-20.md及同raw、src/lei_signal/research/lowturnover_green_account.py、tests/unit/test_lowturnover_green_account.py。若600源价修复可证，仅本raw生成新派生/探查，不改旧input或原source checker；若需正式新纯适配，仅src/lei_signal/research/lowturnover_source.py及对应tests/unit/test_lowturnover_source.py。定义仅本新research.account.lowturnover对象和来源、registry本报告/INDEX本行、原progress/原目标note；必要静态图仅web/public/research/lowturnover-green-account-20261020/，运行5188仍由系统owner负责。
+- 继承短反转已封存core1/1、followup2/3、source2/6，不重跑或重置；本新问题是连续资金/少换股实施，独立有界新core1、最多3有理由跟进，不扫N/缓冲参数。资料优先现存原件；本新实施最多6次来源请求（含失败），公共原文/盈利资格/600断点最小抽查共享，总请求逐项记账，不能用批次冒充一个请求。600若需全量新下载超当前有限预算，不自动上千请求或修精度放行，先交可证明范围。新大结果256MiB、本机2MiB预估；固定外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9已核available约504GB，本机16GB，写前计划绑定。
+- 先复用旧证据做资格，再冻结账户方法；原策略不改，月度排名/有限持股/缓冲属于用户授权研究实施，不能称原LEI完整复现。现有action仅复权因子，不直接称真实股份/现金分红财富。主检验必须连续资金、已知和未知估值区分、卖不出资金占用、同资金/数量/时点、成本/少赚/集中风险；不把60完整月连乘净值。补唯一简单对手、不事后优化或换用途。
+- 实际并行：沿用Sol medium reversal_data只读600/300输入资格；Astra high reversal_method只读设计/关键资金风险；Sol high reversal_impl只读代码复用与盈利资料去重，等待设计后赋新模块唯一写权。现在0新市场效果/0新网络资料。root唯一冻结/执行/登记/最终数值独核；必要审查与主控书面意见在新raw，不包办机械实现。
+- 验收是性能与增量表、完整/代理/未知边界、源缺口能修的实际修复证据、低换手相对固定对手的收益/风险/大赢家/费用/操作负担、保留或暂停、现有Web图形/API/Agent读回。盈利仅核当时可知资料是否能回答独立问题，复用财务owner旧资格不重跑。无生产/账户实际记录/交易/付费/通知/删除/新用户chat；阶段与结果仍本机，协调仅元数据。
+
+---
+
 # 绿色候选近期过热研究交付 2026-10-20T16:15:52.939455+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed（本轮有界问题）；scope_released true；checked_coordination_sha=b85e94ecef83c77ba963d20943262b22140e36ce；checked_at=2026-10-20T16:15:52.939455+08:00。已读COORDINATION/self/personal-lowfreq-system-audit最新16:07/pro-advice-process-review最新16:12/investor-workspace-simplification当前两图接入及修正版范围，沿已读gemini/lowfreq-discovery/dispatch；无新冲突、不接管其他题。系统owner独写运行树静态图，root主树研究/报告/登记。
