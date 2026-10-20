@@ -1,3 +1,12 @@
+# 高点复验收尾及自身登记格式补正 2026-10-20T11:24:10.171747+08:00
+
+- 原task-id/owner不变，status active，scope_released false；checked_coordination_sha=7a2863bd98d0be5ab3210bfa8ca5777aea344b4e；checked_at=2026-10-20T11:24:10.171747+08:00。已读COORDINATION/self、personal最新11:19、gemini-strategy-review最新11:18、system00:57、dispatch、lowfreq-strategy-discovery。新财务/OSAP及Gemini报告不重复，无行情研究冲突。
+- 新300来源和单次效果已完成，主均差+0.115pp/月、范围跨零，当前不采用固定组合；报告Web/API/Agent已读回，旧600不重跑。准备最终交付记录。
+- 新发现自身上一轮登记缺陷：definitions.v1.json 的 sources.green_momentum_methods_20261020不是要求的path/sha256，六个research.selection动量/高点1.0.0卡缺既定必填说明，阻断全局准备读取器。内存模拟只修source仍报incomplete definition，非他人新OSAP故障。
+- 增补root唯一写范围：definitions.v1.json仅自身上述source和六个既有card的结构性缺字段；旧公式/参数/范围/状态/生产授权不变，原对象其余内容及其他owner完整保留；原source元数据保存本题raw文件并以实际SHA引用，原注册表先存外盘。不得改验证器绕过。验证真实load_registry/resolve及prepare入口，若其他owner字段错误另报不接管；不跑新收益。原冻结合同/结果不倒改，明确登记结构更新与旧完整文件hash不同。随后报告追加修复证据、仅本键SHA更新。
+
+---
+
 # 独立历史队列资料范围具体化 2026-10-20T10:45:11.435790+08:00
 
 - 原任务active，scope_released false；checked_coordination_sha=ee5b59c6b6528a4c0f27d308e8a88a9d080ab289；checked_at=2026-10-20T10:45:11.435790+08:00；已读任务沿本轮启动，无新共享路径冲突。
