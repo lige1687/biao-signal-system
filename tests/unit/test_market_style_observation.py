@@ -3,12 +3,20 @@
 from __future__ import annotations
 
 import json
+import pytest
 
 from fastapi.testclient import TestClient
 
 from lei_signal.market_style_observation import app as module
 from lei_signal.market_style_observation.evidence import build_evidence
 from lei_signal.market_style_observation import transport
+from lei_signal.market_style_observation import daily_history
+
+
+@pytest.fixture(autouse=True)
+def isolate_daily_source(monkeypatch):
+    # These tests cover the preserved monthly fallback, never the local/live cache.
+    monkeypatch.setattr(daily_history, "get_history", lambda: {"available": False})
 
 
 def _upstream(url: str):

@@ -93,6 +93,7 @@ export default function MarketStylePanel(props: {
   const [context, setContext] = useState<BreadthContext>({ windowDays: 365, ruleIds: [], priceKey: "", fingerprint: "" });
   const [viewRevision, setViewRevision] = useState(0);
   const [riskBasis, setRiskBasis] = useState("");
+  const [styleBasis, setStyleBasis] = useState("");
   const review = useQuery({
     queryKey: ["marketStyleFiveQuestions", props.market],
     queryFn: () => request<MarketReview>(`/market-style/review?market=${props.market}`),
@@ -112,10 +113,10 @@ export default function MarketStylePanel(props: {
         <button type="button" aria-pressed={props.market === "us"} onClick={() => props.onMarketChange("us")}>美股</button>
       </div>
     </header>
-    <MarketReading market={props.market} context={context} viewRevision={viewRevision} riskBasis={riskBasis + reviewBasis} />
+    <MarketReading market={props.market} context={context} viewRevision={viewRevision} riskBasis={riskBasis + reviewBasis + styleBasis} />
     <FiveQuestionReview data={review.data} loading={review.isPending} error={review.isError} />
     <div className="ms-chart-grid">
-      <StyleComparison />
+      <StyleComparison onBasisChange={setStyleBasis} />
       <BreadthComparison market={props.market} onContextChange={onContextChange} />
     </div>
     <RiskConditions ratesHistory={props.ratesHistory} ratesHistoryFailed={props.ratesHistoryFailed} onDataChange={setRiskBasis} />
@@ -125,9 +126,9 @@ export default function MarketStylePanel(props: {
     <details className="ms-review-guide">
       <summary><span>每周观察 · 每月复盘五问</span><small>自身表现 / 相对表现 / 集中程度 / 估值位置 / 策略重叠</small></summary>
       <div className="ms-review-columns">
-        <div><h3>每周看变化</h3><p>先核资料日，再看相对曲线是否转强、参与上涨的股票是否变多、波动与信用条件是否变化。风格仍是旧月末数据时，不把旧排名当作本周切换。</p></div>
+        <div><h3>每周看变化</h3><p>先核日线资料日，再看相对曲线是否转强、参与上涨的股票是否变多、波动与信用条件是否变化。行业与估值的月末快照不能当作本周配置变化。</p></div>
         <div><h3>每月看完整</h3><ol><li>自身收益、回撤和波动如何？</li><li>同期有没有跑赢母指数？</li><li>来自哪些行业和少数重仓股？</li><li>表现与估值处于什么位置？</li><li>多个策略是否同时赚钱、同时亏损？</li></ol></div>
-        <div><h3>目前能回答到哪里</h3><p>五问答案与未答部分已逐项列在上方。共同亏损和同资金组合效果已补；收益贡献、当前回撤、历史估值位置及完整风格暴露仍有资料缺口。下一阶段再单独检验能否改善选股与风险控制。</p><a href="/library?report=docs%2Fexperiments%2Fmarket-style-observation-2026-10-20.md">完整研究依据 →</a></div>
+        <div><h3>目前能回答到哪里</h3><p>五问答案与未答部分已逐项列在上方。日线已补同期间收益与回撤、相对母指数变化；收益贡献、完整历史估值位置及持仓风格暴露仍有资料缺口。下一阶段再单独检验能否改善选股与风险控制。</p><a href="/library?report=docs%2Fexperiments%2Fmarket-style-observation-2026-10-20.md">完整研究依据 →</a></div>
       </div>
     </details>
   </div>;

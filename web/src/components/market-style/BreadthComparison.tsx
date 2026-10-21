@@ -92,7 +92,7 @@ function BreadthProjectionChart({ view, priceName }: { view: View; priceName: st
       animation: false,
       grid: [{ left: 40, right: 34, top: 50, height: "32%", containLabel: true }, { left: 40, right: 34, top: "53%", height: "31%", containLabel: true }],
       legend: { type: "scroll", top: 0, left: 0, right: 0, data: [priceName, "20日", "50日", "200日"], textStyle: { fontSize: 12, color: "#344256" } },
-      tooltip: { trigger: "axis", axisPointer: { type: "cross", link: [{ xAxisIndex: [0, 1] }] },
+      tooltip: { trigger: "axis", confine: true, axisPointer: { type: "cross", link: [{ xAxisIndex: [0, 1] }] },
         valueFormatter: (value: unknown) => value == null ? "—" : Number(value).toFixed(1) },
       axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
       xAxis: [

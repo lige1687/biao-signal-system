@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as echarts from "echarts";
+import DailyStyleChart from "./DailyStyleChart";
 import { buildStyleWealthHistory, STYLE_HISTORY_BASE_DATE, STYLE_HISTORY_SOURCE_DATE, STYLE_HISTORY_SOURCES, STYLE_HISTORY_IDS, type HistoryStyleId } from "./styleHistory";
 import {
   SECTOR_ORDER, STYLE_RISK_BASIS, STYLE_SNAPSHOT_DATE,
@@ -123,7 +124,7 @@ function ComparisonDetail({ style, period }: { style: StyleSnapshot; period: Sty
     <div className="style-detail-figures">
       <span>所选期间收益 <b className={directionClass(style.returnsPct[period])}>{pct(style.returnsPct[period], true)}</b> <small>母指数 {pct(parent.returnsPct[period], true)}</small></span>
       <span>近3年年化波动 <b>{pct(style.threeYearAnnualizedVolPct)}</b> <small>母指数 {pct(parent.threeYearAnnualizedVolPct)}</small></span>
-      <span>当前离高点跌幅 <b>缺资料</b> <small>未取得近期连续净值，无法判断现在离高点多远</small></span>
+      <span>近期离高点跌幅 <b>见日线五问</b> <small>上方按近1年内高点计算；这里保留月末事实表口径</small></span>
       <span>历史最深下跌 <b>−{pct(style.historicalMaximumDrawdown.lossPct)}</b> <small>{style.historicalMaximumDrawdown.peakDate} 至 {style.historicalMaximumDrawdown.troughDate}；官方统计范围 {style.historicalMaximumDrawdown.observationStartDate} 至 {style.historicalMaximumDrawdown.observationEndDate}</small></span>
     </div>
     <div className="style-detail-valuation" aria-label="月末估值与股息率">
@@ -152,9 +153,10 @@ function ComparisonDetail({ style, period }: { style: StyleSnapshot; period: Sty
   </div>;
 }
 
-export default function StyleComparison() {
+export default function StyleComparison({ onBasisChange }: { onBasisChange?: (basis: string) => void }) {
   const [period, setPeriod] = useState<StylePeriod>("threeMonths");
   const [chartMode, setChartMode] = useState<ChartMode>("relative");
+  const [annualOpen, setAnnualOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<StyleSnapshot["id"] | null>(null);
   const selected = STYLE_SNAPSHOTS.find((style) => style.id === selectedId);
   const scale = Math.max(...STYLE_SNAPSHOTS.map((style) => Math.abs(style.returnsPct[period] - WORLD_PARENT.returnsPct[period])));
@@ -163,9 +165,11 @@ export default function StyleComparison() {
     <div className="style-comparison-head">
       <div>
         <h2 id="style-comparison-title">全球风格对比</h2>
-        <p>MSCI World 的四种全球股票风格 · 美元，含股息再投资<br />官方资料截至 {STYLE_HISTORY_SOURCE_DATE}</p>
+        <p>MSCI World 的四种全球股票风格 · 美元，含股息再投资<br />主图为日收盘；行业与估值快照另按月末标日</p>
       </div>
     </div>
+    <DailyStyleChart onBasisChange={onBasisChange} />
+    <details className="style-period-details" onToggle={event => setAnnualOpen(event.currentTarget.open)}><summary>长期年度参考 · {STYLE_HISTORY_BASE_DATE} — {STYLE_HISTORY_SOURCE_DATE}</summary>
     <div className="style-history-header">
       <div>
         <h3>{chartMode === "relative" ? "相对 MSCI World，哪类风格走在前面？" : "同一笔起始金额，逐年走到哪里？"}</h3>
@@ -176,16 +180,17 @@ export default function StyleComparison() {
         <button type="button" className={chartMode === "wealth" ? "is-active" : ""} aria-pressed={chartMode === "wealth"} onClick={() => setChartMode("wealth")}>累计路径</button>
       </div>
     </div>
-    <StyleHistoryChart mode={chartMode} />
-    <p className="style-history-note">仅年度观察点，最后一点为2026年截至9月的收益；年内路径未知，暂不能判断近期周/月风格切换。</p>
+    {annualOpen && <StyleHistoryChart mode={chartMode} />}
+    <p className="style-history-note">此折叠参考仅为年度点，最后一点为2026年前9月收益；近期变化请看上方日线。</p>
     <details className="style-history-method">
       <summary>数据口径与官方来源</summary>
       <p>这里看各风格的相对强弱；动量本身是其中一种选股方法，偏向过去价格较强的股票。质量看盈利能力、盈利稳定性与低杠杆；价值看价格相对账面价值、预期盈利和股息；最小波动在约束下优化整个组合的波动。</p>
       <p>起点 {STYLE_HISTORY_BASE_DATE} 人为设为100；其后按官方公布的年度收益连乘，近似路径受收益四舍五入影响。2014—2025为完整年度，各指数均在此前正式发布；2026末点只到9月。美元毛总回报含股息再投资，未扣实际产品费用和税。相对曲线 = 风格累计价值 ÷ 母指数累计价值 × 100；不是百分比收益率。</p>
       <p>官方事实表：<a href={STYLE_HISTORY_SOURCES.momentum} target="_blank" rel="noopener noreferrer">动量 ↗</a> · <a href={STYLE_HISTORY_SOURCES.quality} target="_blank" rel="noopener noreferrer">质量 ↗</a> · <a href={STYLE_HISTORY_SOURCES.value} target="_blank" rel="noopener noreferrer">价值 ↗</a> · <a href={STYLE_HISTORY_SOURCES.minimumVolatility} target="_blank" rel="noopener noreferrer">最小波动 ↗</a>。这是固定资料阅读样例，不随市场视图切换；持续取数及展示许可尚待核实。</p>
     </details>
+    </details>
     <details className="style-period-details">
-      <summary>查看近 1 个月、3 个月、年初至今及 1 年的收益与详情</summary>
+      <summary>月末资料 · {STYLE_SNAPSHOT_DATE} · 收益、估值、行业与前十大持仓</summary>
       <div className="style-periods" role="group" aria-label="选择收益期间">
         {PERIODS.map((item) => <button key={item.id} type="button" className={period === item.id ? "is-active" : ""} aria-pressed={period === item.id} onClick={() => setPeriod(item.id)}>{item.label}</button>)}
       </div>

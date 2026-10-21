@@ -90,8 +90,8 @@ export default function MarketReading({ market, context, viewRevision = 0, riskB
     {visible && <details className="mr-result" open>
       <summary>{mode === "monthly" ? "本次月复盘 · 五问完整列出" : `本次周观察 · ${visible.reading.cards.length}个重点`}</summary>
       <p className="mr-scope">{mode === "monthly"
-        ? `前四问：全球风格截至2026-09-30 · 第五问：${market === "cn" ? "A股" : "美股"}策略历史与前向记录`
-        : `${market === "cn" ? "A股" : "美股"}宽度最近一次变化 · 全球风格截至2026-09-30 · 策略历史比较`}</p>
+        ? `前四问：全球风格，日线与月末资料分别标日 · 第五问：${market === "cn" ? "A股" : "美股"}策略历史与前向记录`
+        : `${market === "cn" ? "A股" : "美股"}宽度最近一次变化 · 全球风格近1年日线 · 策略历史比较`}</p>
       <div className="mr-grid">
         {visible.reading.cards.map((card) => <article key={card.id}>
           <h3>{card.title ?? TOPICS[card.topic] ?? "观察重点"}<small>{card.data_date ?? (card.available ? ["strategy", "q5"].includes(card.topic) ? "历史与前向分开" : "各项日期见下" : "缺资料")}</small></h3>
@@ -101,7 +101,7 @@ export default function MarketReading({ market, context, viewRevision = 0, riskB
       <details className="mr-sources">
         <summary>解读方法、资料与模型</summary>
         <p>Agent依据资料选择重点和顺序，事实、读法与数字由已核规则填入。MSCI与StockCharts提供阅读方法，不代表它们评价了本页当前市场。</p>
-        <p>本次读取各来源最近资料与固定月末风格快照；不解释拖动缩放后的局部走势，也不推断条件色带之后的收益。页面变化后需重新点击。</p>
+        <p>本次风格表现固定比较近1年日线；行业和估值仍使用独立标日的月末资料。不解释拖动缩放后的局部走势，也不推断条件色带之后的收益。页面变化后需重新点击。</p>
         <div>{visible.snapshot.sources.filter((source) => visible.reading.cards.some((card) => card.source_ids.includes(source.id))).map((source) =>
           <a key={source.id} href={source.url} target="_blank" rel="noreferrer">{source.name} ↗</a>)}</div>
         <p>{visible.reading.model} · {new Date(visible.reading.generated_at).toLocaleString("zh-CN")}

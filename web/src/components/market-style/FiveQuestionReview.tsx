@@ -10,6 +10,7 @@ export type ReviewQuestion = {
 type Conditions = ComponentProps<typeof ObservationConditions>;
 export type MarketReview = {
   asof: string; market: string; completion: string; questions: ReviewQuestion[];
+  style_daily_date?: string | null;
   portfolio: PortfolioReview;
   volatility: NonNullable<Conditions["volatility"]>;
   nfci: NonNullable<Conditions["nfci"]>;
@@ -22,7 +23,7 @@ export default function FiveQuestionReview({ data, loading, error }: {
 }) {
   return <section className="mq-review" aria-label="五问当前答案">
     <header><h2>五问当前答案</h2>
-      <p>前四问：全球风格，2026-09-30；第五问：{data?.market === "us" ? "美股" : "A股"}策略历史与前向记录。每行展开看证据。</p>
+      <p>{data?.style_daily_date ? `收益与相对表现：近1年日线至${data.style_daily_date}；行业与估值：2026-09-30。` : "全球风格月末资料：2026-09-30。"}第五问：{data?.market === "us" ? "美股" : "A股"}策略记录。每行展开看证据。</p>
     </header>
     {loading && <p role="status">正在核对五问的已有资料…</p>}
     {error && <p role="alert" className="ms-error">五问资料读取失败，暂不能显示最新核对结果。</p>}

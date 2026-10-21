@@ -14,6 +14,7 @@ _STYLE_DATE = "2026-09-30"
 _STYLE_SOURCE = "https://www.msci.com/documents/10199/255599/msci-world-momentum-index-usd-gross.pdf"
 
 SOURCES = [
+    {"id": "msci_daily", "name": "MSCI 官方日收盘 · USD Gross", "url": "https://app2.msci.com/products/index-data-search/"},
     {"id": "msci_momentum", "name": "MSCI World Momentum 月末事实表", "url": _STYLE_SOURCE},
     {"id": "msci_quality", "name": "MSCI World Quality 月末事实表", "url": "https://www.msci.com/documents/10199/255599/msci-world-quality-index.pdf"},
     {"id": "msci_value", "name": "MSCI World Value 月末事实表", "url": "https://www.msci.com/documents/10199/255599/msci-world-value-index.pdf"},
@@ -74,6 +75,10 @@ def _card(id: str, topic: str, fact: str, reading: str, watch: str, source_ids: 
 
 
 def _style_card() -> dict:
+    from .daily_history import build_window, daily_style_card, get_history
+    daily = daily_style_card(build_window(get_history(), 365))
+    if daily:
+        return daily
     # Fixed, limited 2026-09-30 public facts, never presented as current CN/US performance.
     return _card(
         "world_style", "style",

@@ -63,6 +63,14 @@
 .style-comparison summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .style-history-chart { width: 100%; min-width: 0; height: 340px; }
+.style-daily-chart { width: 100%; min-width: 0; height: 370px; }
+.style-daily-controls { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+.style-daily-date { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: #344256; margin: 12px 0 8px; font-variant-numeric: tabular-nums; }
+.style-daily-date span { color: var(--text-secondary); }
+.style-daily-state { min-height: 120px; display: flex; align-items: center; color: var(--text-secondary); }
+.style-daily-metrics { margin: 12px 0; font-size: 12px; font-variant-numeric: tabular-nums; }
+.style-daily-metrics > div { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 6px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+.style-daily-metrics > div > :not(:first-child) { text-align: right; }
 .style-history-note + .style-history-note { margin-top: 5px; }
 .style-history-method { margin-top: 8px; }
 .style-history-method summary,

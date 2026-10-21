@@ -89,18 +89,50 @@ def question_cards(portfolio: dict, market: str) -> list[dict]:
     return cards
 
 
-def build_review(market: str, *, get_json=_get_json) -> dict:
+def apply_daily_answers(cards: list[dict], daily: dict) -> None:
+    """Update price-based answers only; monthly holdings/valuations stay dated."""
+    if not daily.get("available"):
+        return
+    styles = [s for s in daily["series"] if s["id"] != "world"]
+    parent = next(s for s in daily["series"] if s["id"] == "world")
+    def metric(key, unit):
+        return "、".join(f'{s["name"]}{s[key]:+.2f}{unit}' if s[key] is not None else f'{s["name"]}资料不齐' for s in styles)
+    period = f'{daily["start"]}至{daily["end"]}'
+    warning = " 日线更新失败或日期落后，先核资料日。" if daily.get("stale") or daily.get("refresh_failed") else ""
+    cards[0].update(
+        fact=f'{period}，收益：{metric("return_pct", "%")}；同期间最大下跌：{metric("max_drawdown_pct", "%")}；年化波动：{metric("volatility_pct", "%")}。',
+        reading="统一期间，用每日收盘值比较；波动按252个交易日换算，最大下跌是从期间内某个高点到随后低点的跌幅。",
+        short_answer=f'近1年收益：{metric("return_pct", "%")}。',
+        watch="已答近1年自身收益、期间内回撤和波动；未计算更长历史的恢复时间与真实产品费税。" + warning,
+        coverage="近1年日线已回答", data_date=daily["end"], source_ids=["msci_daily"])
+    cards[1].update(
+        fact=f'{period}，母指数收益{parent["return_pct"]:+.2f}%；风格减母指数的收益差额：{metric("excess_pp", "个百分点")}。',
+        reading="正值表示这一段跑赢，负值表示落后；下方日线可切三个月、一年、三年，观察相对强弱如何变化。",
+        short_answer=f'近1年较母指数：{metric("excess_pp", "个百分点")}。',
+        watch="本行固定近1年；图表所选期间不同，排序可能变化。历史领先不保证继续领先。" + warning,
+        coverage="同期间日线已回答", data_date=daily["end"], source_ids=["msci_daily"])
+    cards[3]["fact"] += f' 日线截至{daily["end"]}，距近1年内已见高点：{metric("current_drawdown_pct", "%")}。'
+    cards[3]["watch"] = "当前相对表现与近1年内高点距离已可观察；完整历史估值分位仍缺资料。近1年高点不是历史最高点。" + warning
+    cards[3]["short_answer"] = "日线可看当前相对表现及近1年高点距离；自身历史估值位置仍未回答。"
+    cards[3]["source_ids"] = [*cards[3]["source_ids"], "msci_daily"]
+    cards[3]["data_date"] = f'日线 {daily["end"]} / 估值 {STYLE_FACTS["asof"]}'
+
+
+def build_review(market: str, *, get_json=_get_json, daily: dict | None = None) -> dict:
     portfolio = summarize_portfolio(get_json("http://127.0.0.1:8028/api/strategy-portfolios") or {}, market)
+    cards = question_cards(portfolio, market)
+    apply_daily_answers(cards, daily or {})
     return {
         "asof": datetime.now(timezone.utc).isoformat(),
         "market": market,
-        "questions": question_cards(portfolio, market),
+        "questions": cards,
+        "style_daily_date": daily.get("end") if daily and daily.get("available") else None,
         "portfolio": portfolio,
         "volatility": market_volatility(get_json(OVERLAY_URL), market),
         "nfci": NFCI,
         "sources": _sources_for(market),
         "completion": "partial",
-        "missing": ["风格连续日/月总回报", "完整历史成分及权重与收益贡献",
+        "missing": ([] if daily and daily.get("available") else ["风格连续日/月总回报"]) + ["完整历史成分及权重与收益贡献",
                     "历史估值分位", "策略实际持仓权重与风格收益分解",
                     "持续自动资料更新与许可资格"],
     }

@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 from lei_signal.market_style_observation.evidence import build_evidence
 from lei_signal.market_style_observation.transport import invoke_selection
 from lei_signal.market_style_observation.review import build_review
+from lei_signal.market_style_observation.daily_history import build_window, get_history
 from lei_signal.plans import llm
 
 app = FastAPI(title="Market style observation preview")
@@ -102,7 +103,7 @@ def get_review(market: str) -> dict:
         cached = _REVIEW_CACHE.get(market)
         if cached and cached[0] > time.monotonic():
             return cached[1]
-    result = build_review(market)
+    result = build_review(market, daily=build_window(get_history(), 365))
     with _LOCK:
         _REVIEW_CACHE[market] = (time.monotonic() + 60, result)
     return result
@@ -112,6 +113,13 @@ def get_review(market: str) -> dict:
 def review(market: Literal["cn", "us"]):
     """Read-only five-question evidence; no model call or persisted account write."""
     return get_review(market)
+
+
+@app.get("/api/market-style/daily-history")
+def daily_history(days: int = Query(365)):
+    if days not in (90, 365, 1095):
+        return _error(422, "invalid_window")
+    return build_window(get_history(), days)
 
 
 @app.get("/api/market-style/snapshot")

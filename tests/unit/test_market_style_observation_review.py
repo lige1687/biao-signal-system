@@ -83,7 +83,8 @@ def test_read_and_monthly_mode_are_passive_and_monthly_cannot_omit(monkeypatch):
                       module._QUERY_CACHE, module._REVIEW_CACHE):
             store.clear()
         module._MODEL_REQUESTS = 0
-    monkeypatch.setattr(module, "build_review", lambda market: build_review(market, get_json=lambda url: None))
+    monkeypatch.setattr(module, "get_history", lambda: {"available": False})
+    monkeypatch.setattr(module, "build_review", lambda market, **kwargs: build_review(market, get_json=lambda url: None, **kwargs))
     calls = []
     def fake_selection(*args):
         calls.append(args)
