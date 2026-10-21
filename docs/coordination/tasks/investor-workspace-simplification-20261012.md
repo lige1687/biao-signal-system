@@ -1,3 +1,12 @@
+# 固定曲线界面追加消费新10指标数据 2026-10-22T00:48:36.750716+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=d8179247772a9c912d2d650d5aa64da74141874f；checked_at=2026-10-22T00:48:36.750716+08:00。交付前相关任务新增段已读，原UI唯一写者分工不变，研究source仍research-utility owner负责。原4因子40相关回归、64组合、宽窄可读性与实际控件已核；修正小屏首屏与百分点单位，继续必要收尾。
+- 原5静态文件接入已完成。新增真实数据由原owner独立运行并给出public-data-receipt，不在此重跑。现在本方只复制该已登记数据目录中的catalog.json更新及新增new-summary.json/new-regimes.json，legacy-summary/regimes保持原SHA；新增这2准确运行树路径，源仍不写。第二dataset fixed2014_300_extension共10指标/204流/119持有月，原批84流与新批独立，不硬编码2015起/133点，风险与简单对手依原字段呈现，科学独核/结案由原owner负责。
+- 对照表可选读取vs_scaled_momentum/vs_lowvol，无原键不显示。市场环境只连续区间高亮与条件表，不拼新账户。当前源新3文件SHA与大小以docs/experiments/raw/factor-curve-library-2026-10-22/public-data-receipt.json为准；首次展示依旧只代表接入不代表科研成立。
+- 系统台账只为本次新增明确的“固定因子资金曲线研究界面（因子×股票池×市场环境）”建一个具体子目标（GET检索未有同题；旧20260930冻结阅读顺序条目不改），归既有okr-cd1a0bd5532c方向。记录本轮明确UI授权、实际验收和范围，最终提交review不代用户accept。自身factor-curves-goal-20261022.json保存API读回及原条目保护；不代改因子owner研究目标。
+
+---
+
 # 曲线UI实际目录接口与环境资料接入 2026-10-22T00:31:12.865179+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=b4dc5b349d1ab53bf02bf3e31201ee1d6712d707；checked_at=2026-10-22T00:31:12.865179+08:00。沿已读COORDINATION/self/研究与个人owner/strategy-account-bridge/dispatch，当前新增变更已读，无UI同块写者。研究owner已给实际catalog，先前其“已落地”后发现未写出及更正实际完成的历史保留；本方首次找不到文件没有造JSON，现实际3文件可读。
