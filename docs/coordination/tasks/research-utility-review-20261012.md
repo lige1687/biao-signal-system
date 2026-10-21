@@ -1,3 +1,12 @@
+# 新增曲线共同资格完成 2026-10-22T00:39:16.515576+08:00
+
+- task-id/owner沿原；active，scope_released false；checked_coordination_sha=ecaf725580a47f6915d2bffc96af6da0dc4f36c8；checked_at=2026-10-22T00:39:16.515576+08:00。已读COORDINATION/self、investor-workspace（00:31实际catalog）、personal（曲线封存）、market-style（自动化独占）、mechanism（四基金）、dispatch沿前轮，无同路径冲突。UI唯一系统owner，主控仅数据/本题定义。
+- 第三次实时容量预检通过，保留前两次失败；绑定外盘run factor-curve-library-20261022-20261022T003408-a1b36a081a36。只运行source准备：300源、35700特征行、119月、102目标表，尚未效果。9个针对测试通过；根冻结执行合同前独立核共同资格。设计/实现/来源指纹留raw，未重跑旧84。
+- 环境投影完成132月75偏强57偏弱19段；root不凭事后环境交易，不拼接资金。新增股票池指数历史仍待资格，固定300不冒充沪深300。原新增路径范围保持。预算core0/1，未来一次固定204报价账户，不调参；无生产、购买、删除、通知。
+- 成果主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加本机未提交，自有代码/本机资料未远端移交；仅本记录同步。
+
+---
+
 # 因子资金曲线固定展示与四类扩展资格 2026-10-22T00:21:42.493596+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=c706260180535bfc9fbba8c7149dad7f6c52fb24；checked_at=2026-10-22T00:21:42.493596+08:00。已读COORDINATION/self、personal-lowfreq-system-audit（00:18曲线已完成/释放）、investor-workspace-simplification（00:16静态已完成）、market-style-observation（宽度修复）、mechanism-rebalancing-review、research-dispatch-controller。原研究owner84流封存，不接管修改或重跑。
