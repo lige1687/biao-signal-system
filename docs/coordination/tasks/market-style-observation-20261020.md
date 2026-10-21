@@ -1,3 +1,15 @@
+# 策略复盘独立页面与中美宽度入口交付 2026-10-22T00:05:35.240145+08:00
+
+- task-id market-style-observation-20261020；owner沿root；本轮placement completed、scope_released true，视觉待用户验收；原完整五问资料缺口仍blocked，未冒称全任务完成。checked_coordination_sha 35717b3d8975e6c27035b1c0c3e23975e49a0490；checked_at 2026-10-22T00:05:35.240145+08:00。已读COORDINATION/self/dispatch/investor-observation-map/strategy-account-bridge，交付补读investor-workspace-simplification、mechanism-rebalancing-review、research-utility-review及personal新五组曲线；皆独立路径，无本组件或Fwd外层同写。
+- 成果codex/market-style-observation-20261020@f892aa7161ecce1ee3319f8304be0b29a8ca1900，base4c11d8487d7a01b73f353af98b1c796f578ecca3；15准确文件正常推送/远端ref/逐字读回已核；placement-publication-receipt.json本机回执。主树/默认索引不切换，无main合并。
+- 市场环境去完整PortfolioRiskReview，第5问留摘要和链接。复用/fwd为“策略跟踪与复盘”，新增默认共同风险页签；前向默认，历史成绩单独切换；原三个页签保留。FwdLedgerPage仅import/标题/外层页签，Git保存精确strategy-page-integration.patch及前后SHA，不混传原owner整页。其他策略组件/后端未动，完整恢复仍依赖既有Fwd与账户基线。
+- 宽度图内直接A股/美股入口；CN上证/沪深300，US标普/纳指，20/50/200与既有6条件投影保留。初步提及其余3旧CN指数，核当前接口无科创50/100/创业板价格，最终不画无资料线。全A宽度与沪深300、标普宽度与纳指范围区别及CN10/16/US9/4旧日期仍明示；原长周期入口实点可达。
+- 验收：市场无策略大表；独立页前向默认历史表0、CN0/US1共同收益日与实际接口一致；历史原数/跌幅、原账户入口、返回市场；沪深/标普/纳指真实曲线和条件、原长周期图；电脑1280和实际542，最终文档542无横溢，console error0。839模块build/归置/源与预览逐字/反向patchcheck通过；0自动模型。0新实验/外部行情/付费/代理/通知/账户写入；计算后端未改，旧测试不重复全跑。
+- 失败留存：仅改hash未触发父页section状态，改完整URL导航后实显；补丁artifact空白上下文触发diffcheck，规范空行后同一反向检查及diffcheck通过，未放宽检查。证据报告§15、placement-verification.json、4截图。
+- 5192当前可用，浏览器保留/fwd?market=cn&phase=forward；8192沿原进程无重启，其他服务/仓外5188/DB/定时只读。原五问历史贡献/估值/实际风格资料、宽度时效和使用资格等不因本轮移页视为解决；无后台新增任务。
+
+---
+
 # 策略复盘移页与中美宽度入口恢复 2026-10-21T23:55:31.574189+08:00
 
 - task-id market-style-observation-20261020；owner沿原root；status active，scope_released false；用户明确要求截图内策略内容放独立页，并找回沪深与美股宽度投影。服务市场环境说明和策略复盘展示层，不变研究/交易语义；策略源两SHA核同原确认。
