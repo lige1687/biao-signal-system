@@ -1,3 +1,15 @@
+# 股票池与牛熊方法独立复核  2026-10-22T00:34:24.913214+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha=ae104150a603a2189666ab201768dd13f2501579；checked_at=2026-10-22T00:34:24.913214+08:00；已读 COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、market-style-observation-20261020、mechanism-rebalancing-review-20261020、research-dispatch-controller 的最新范围。
+- 用户“按这个可以去推全”并要求牛熊依据权威研究。查重发现 research-utility-review 正接因子×池×环境，已产出 csi300 10月均线132月标签与描述表；系统owner正做固定UI。本任务复用两者，不重做排序/账户/环境产出/UI；独立核原文方法与当时可知性、原始指数重算标签、旧统计数值，补相对同池收益差的连续日历不确定性与逐段集中风险，用于审查能否据此切换因子。
+- 本轮限定现有A股固定300股、2015—25已看历史、四因子、两旧池、84旧流只读；原账户/历史结果/定义/预算不改。不把绿池当独立股票池，不冒称补齐历史全市场或ETF。历史规模/行业/流动性资格只做库存，未有合格资料不以今日字段替代。
+- 唯一写者root：docs/experiments/factor-universe-regime-audit-2026-10-22.md、同名raw小审查脚本/合同/核数/来源；registry仅本键、INDEX一行、自身progress追加。分支codex/personal-lowfreq-system-audit-20261018，成果基线4fb595bc00f5fe544f44f62f8301d43501024c6e；工作树personal-audit-coordination-20261018。无生产代码/UI/他人目录写入，无新股池或资金回测。
+- 当前数据库存Luna medium只读已完；Astra high只读审方法在运行，root制定与独核；后续Luna可在自有raw执行单次已保存结果核算。大结果新增0，小审查预计<300KiB。内盘容量曾低于5GiB，因此不启动新大输出入口、不删资料/绕过预检；只推进可复用的小核验。
+- 来源截至登记6次公开学术/作者查询与读原件（首2查询无关，保留失败），未新增行情；Pagan/Sossounov原文§2及附录、Lunde/Timmermann摘要、Faber作者复盘，读到哪里写哪里。当前来源预算6已用6，不重置旧研究预算。保存结果诊断核心至多1批、必要修错留迹；不拟合择时策略、不搜索窗口。
+- 验收：132标签逐一独算/来源SHA/前缀不变性、原状态表数值核同、相同月份同池差额、相邻月份依赖保留、19连续段非独立样本、删段/已看分期反例、现金与缺价并列、股票池缺口明确；归档并远端读回。任何改善均限报价观察，不把工程通过或权威定义等同策略有效。
+
+---
+
 # 五分组连续资金曲线及当前5188展示验收完成 2026-10-22T00:18:27.227747+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（仅本轮报价曲线/记账/展示）；scope_released true；evidence inconclusive（因子可交易有效性及未见验证未证明）。checked_coordination_sha=5680f26c7aa59513266bf920aa13e2d4b7c4121b；checked_at=2026-10-22T00:18:27.227747+08:00；已读 COORDINATION 及 task-id personal-lowfreq-system-audit-20261018, research-utility-review-20261012, research-dispatch-controller, strategy-account-bridge-20261020, mechanism-rebalancing-review-20261020, market-style-observation-20261020, investor-workspace-simplification-20261012。
