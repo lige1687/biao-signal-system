@@ -64,3 +64,14 @@
 - 新大资料/详细结果固定外盘约30MiB预检，本机仅小报告/raw；reg新增自身1键，INDEX1行，已有735项保持。目标库不写，不代用户验收。结果待报告API、归置与准确分支交付回执后收尾；恢复先核freeze/summary/audit，不重跑追正。
 
 - 2026-10-20T23:41:52.245170+08:00：报告API全文及列表唯一核同，735原登记项保持、17本批及22旧冻结绑定未变、归置与准确差异检查通过。37准确路径505715B普通发布到 codex/mechanism-rebalancing-review-20261020@84d40a23eb53eaed960765ca1abcaaa0c9e7ff4e，远端ref及每文件字节一致；未合main、未变共享索引/分支、0删除。交付回执见新raw/delivery-receipt.json；本轮有界研究完成，真实机制缺口明确保留，无本题后台实验。
+
+
+## 主动配置与受约束调整的语义和数据 2026-10-21T23:44:46.194725+08:00
+
+- 本轮report_only完成定义/数据字段问题；无新行情/收益实验、旧至少1268年度拟合/至少4Pro保持。新报告docs/experiments/institutional-intent-pressure-definitions-2026-10-21.md；本机小raw同名；不新建生产因子或数据库。
+- 已读最新协调5222a5191d55c677f0ae815e057eda04eaaee405及self/dispatch/sentiment/market-style/personal-lowfreq/strategy-account/research-utility相关范围；开工600dce12e0ba37ae4a7eb3bc74e726dd4b78fbb1普通推送读回。此前3次并发拒绝均fetch并读新增任务，非原样重试，无本题重叠。
+- 语义以基金×证券×相邻期，分别记录相对配置和真实压力，未知单列；主动倾向不能证明动机/信息优势。SEC NPORT当前官方包2019Oct—2026Sep入口、申赎/资产/现金/日期字段已核，未下载ZIP或构建面板。申报期与公开日分开，现金字段非全现金，ETF实物/指数任务单列。A股只复用原070002单基金5报告，不套用美国。
+- 本轮6公开请求（3空搜索、3官方文档成功），上一轮50加本轮6=56，家族更早总数未知；0付费/生产/交易/主动通知/外盘写入/目标库写入。Astra medium两次只读方法审，无联网/拟合；root来源与字段、报告。最终语义措辞和观察区间两修正已接受。
+- 旧自有报告误把A股5份写5只，已仅纠正该行并加日期说明，生成器同步且逐字生成核同；原A股报告一直正确，旧Git提交和市场结果保持。registry仅新增本键和旧本报告SHA，INDEX本行；其他登记值保持。归置/API与准确发布回执待核后收尾。
+
+- 2026-10-21T23:48:31.473365+08:00：两份报告API全文/列表唯一核同、33份旧raw与e307973逐字不变、归置通过；详细回执见本新raw/verification.json。历史进度中的“中国5基金PDF”同属措辞错误，应读作“嘉实增长单只基金5份PDF”，原件范围未变。交付前checked_coordination_sha=638d7e339fbdfb45a1a0811ad3b027f2a71897db，已读market-style-observation-20261020日线交付、personal-lowfreq-system-audit-20261018反转/TRAE结案，其他已读task-id沿本轮登记；无本题定义/资料同写，不接管其任务。仅本题准确路径发布，策略效果仍未评价。

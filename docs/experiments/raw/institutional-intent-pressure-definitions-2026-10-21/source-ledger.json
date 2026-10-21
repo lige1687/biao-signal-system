@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-10-21T23:43:08.365259+08:00",
+  "requests": [
+    {
+      "operation": "search",
+      "query": "site.sec.gov Form N-PORT monthly sales redemption gross redemptions shares sold Part B 6 flow data sets",
+      "result": "empty"
+    },
+    {
+      "operation": "search",
+      "query": "site.csrc.gov.cn 公开募集证券投资基金 信息披露 内容与格式 准则 季度报告 份额变动 申购 赎回",
+      "result": "empty"
+    },
+    {
+      "operation": "open",
+      "url": "https://www.sec.gov/files/formn-port.pdf",
+      "result": "read fields B1 B2 B6 public-scope; reference version2023-12-11; not proof of2026 deadlines"
+    },
+    {
+      "operation": "open",
+      "url": "https://www.sec.gov/data-research/sec-markets-data/form-n-port-data-sets",
+      "result": "read current page2019Oct-2026Sep,quarterly packages; no ZIP downloaded"
+    },
+    {
+      "operation": "search",
+      "query": "基金季度报告 开放式基金份额变动 总申购份额 总赎回份额",
+      "result": "empty"
+    },
+    {
+      "operation": "click",
+      "url": "https://www.sec.gov/files/nport_readme.pdf",
+      "result": "read table mapping5.1/5.3 and holdings-table relationship; specific flows/assets/cash/times fields"
+    }
+  ],
+  "count": 6,
+  "market_data_downloads": 0,
+  "access_denials": 0,
+  "empty_searches": 3,
+  "as_filed_complete_panel_built": false
+}

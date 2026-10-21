@@ -1,3 +1,5 @@
+- 2026-10-21：[机构主动配置与资金压力的定义和资料](institutional-intent-pressure-definitions-2026-10-21.md)：数量、申赎、现金和约束分别核对；美国官方免费字段可取，真实连续样本和效果尚未评价。
+
 - 2026-10-20：[机构仓位的金融含义与季度回报增量](institutional-positioning-mechanism-extension-2026-10-20.md)：仓位变化和趋势关系未改善本版判断；共同持仓、真实赎回和投资限制分开定义。
 
 - 2026-10-20：[美股机构仓位与散户情绪研究](us-contrarian-positioning-research-2026-10-20.md)：NAAIM免费最新及长历史已取得，两项机构季度风险用途未支持采用，AAII旧证据复用。
