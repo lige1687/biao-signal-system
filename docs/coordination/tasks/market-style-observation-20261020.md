@@ -1,3 +1,15 @@
+# 图表清晰度修复已验证 2026-10-21T22:47:56.824394+08:00
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status blocked（原五问资料缺口维持），本轮图表清晰度修复完成；scope_released true。用户视觉待验收，不把本次完成代替整项完成。
+- checked_coordination_sha 30bf23c8db1e3209bc35e6935014eba0f5669499；checked_at 2026-10-21T22:47:56.824394+08:00。已读COORDINATION、self、research-dispatch-controller、investor-workspace-simplification-20261012、investor-observation-map、portfolio-trends-20261013、strategy-account-bridge-20261020；交付新增读personal-lowfreq-system-audit-20261018，其独立论文/skill范围无本组件冲突。开工登记89517eb04495038f75e09f50fb46d4656710587f已推读回，交付检查没有覆盖其他任务。
+- 成果 codex/market-style-observation-20261020@0fa3337b3d2d778c9aed815c9ba1c3fc774aef71；base3bea8339fb3d514765546f9b514b65105bc8a3fb。17准确路径480500B正常推送并逐字读回，含8源码、原报告/progress增量、前后截图/验证。raw/clarity-publication-receipt.json另存本机；当前主树分支/默认索引不动，不混传父页。
+- 原因：542px实际窗口DPR2而旧canvas按1倍，坐标10/11px。7图改SVG，深色12px以上坐标/图例、清楚单位与完整首尾日期，手机图例换行；Style/Breadth保留原数据点/阈值，另三个调用者仅替换本页renderer。共享TrendChart/父页/规则/数据服务与仓外5188未改。
+- 验收：实际542px/DPR2、390与1280无图表文本裁切、无横溢，7SVG/0canvas；风格两视角、宽度1/3年和B50条件、账户收益/跌幅切换正常。836模块最终build/归置通过，console error0；新进程health model_requests0，未点解读。初稿轴名/图例挤压、末日期裁边、手机图例截断已修并留痕。
+- Luna low仅风格/宽度四文件，root专用renderer/布局/真实浏览器。恢复仓内5192/8192预览，loopback只读事实/按需服务，未增自动化或通知。入口 http://127.0.0.1:5192/fundamentals#fund-sec-market 。无新金融研究/取数付费/规则/交易/仓外写，目标DB仍原planned。
+- 原五问缺口/恢复条件仍见报告§12；图清晰不证明因子增量。下次按用户视觉反馈或合格新资料接续，不重做已核研究。读取成果、clarity-browser-checks.json、clarity-verification.json即可核验；当前无本题后台研究。
+
+---
+
 # 图表清晰度与坐标可读性修复 2026-10-21T22:37:31.076237+08:00
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active（本轮视觉缺陷）；scope_released false。原五问核心资料blocked保持。
