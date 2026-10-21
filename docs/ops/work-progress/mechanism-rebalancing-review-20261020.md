@@ -75,3 +75,5 @@
 - 旧自有报告误把A股5份写5只，已仅纠正该行并加日期说明，生成器同步且逐字生成核同；原A股报告一直正确，旧Git提交和市场结果保持。registry仅新增本键和旧本报告SHA，INDEX本行；其他登记值保持。归置/API与准确发布回执待核后收尾。
 
 - 2026-10-21T23:48:31.473365+08:00：两份报告API全文/列表唯一核同、33份旧raw与e307973逐字不变、归置通过；详细回执见本新raw/verification.json。历史进度中的“中国5基金PDF”同属措辞错误，应读作“嘉实增长单只基金5份PDF”，原件范围未变。交付前checked_coordination_sha=638d7e339fbdfb45a1a0811ad3b027f2a71897db，已读market-style-observation-20261020日线交付、personal-lowfreq-system-audit-20261018反转/TRAE结案，其他已读task-id沿本轮登记；无本题定义/资料同写，不接管其任务。仅本题准确路径发布，策略效果仍未评价。
+
+- 2026-10-21T23:48:59.360601+08:00：12准确路径270544B已普通发布至codex/mechanism-rebalancing-review-20261020@6825eef1f00046c2a558c7d73f6e173587319022，远端ref和各文件SHA核同；0删除/合main/共享索引修改。回执docs/experiments/raw/institutional-intent-pressure-definitions-2026-10-21/delivery-receipt.json，本次后续仅本回执与进度两文件；定义和资料字段问题已答，连续真实样本及策略收益仍未评价。
