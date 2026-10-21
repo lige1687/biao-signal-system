@@ -1,3 +1,12 @@
+# 继续核公开镜像，纠正内部默认额度适用 2026-10-22T00:06:24.117038+08:00
+
+- task-id/owner沿原；status active，scope_released false；checked_coordination_sha=095e9f64cabed28a3d347855884992911b35baee；checked_at=2026-10-22T00:06:24.117038+08:00。已读新增market-style复盘页交付、investor-workspace附件、research-utility诊断，原self/dispatch/sentiment/personal/strategy-account范围保持；无本题同写。
+- 官方HTTP403真实且不绕过；原0/4数据受阻阶段已保存至a38b03582be12580b17dd95d422b07a35593a0c8，不把该阶段当全题结案。用户明确要补资料并优先完整资料，AGENTS要求“预算须对应用户约定、真实额度、时限或工具反馈，不自设停止点”，优先于skill默认6次。此前自设6次不构成用户停工限制；纠正这一适用错误，保留旧记录和成本，不重置累计、不扩大研究对象/付费/计算批次。
+- 已追加2个只读公开索引请求（总8），HuggingFace API列trader298/sec-nport与ZipLime/fund-holdings-nport，GitHub指向ak2k/sec-nport同步器。只是公开镜像候选，不是已验证原件或已取得数据。接着核发布者文档、源追踪、字段/版本/许可及可用连续范围；没有合格镜像就如实受阻，不无限搜索。
+- 写入仍只原新raw/报告/自身progress/registry本键/INDEX本行；新子合同如需Sol仅核/解析镜像，root统计前审，外盘仍同一已核storage-plan目录。不得抹掉403与来源8次累计；镜像和SEC原文不自动等价。
+
+---
+
 # 数据完整性优先的机构资金压力研究 2026-10-21T23:56:55.013148+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=781049d57f4df9989840a921b7f032befb96adc4；checked_at=2026-10-21T23:56:55.013148+08:00。已读COORDINATION/self/dispatch/sentiment、personal-lowfreq最新五分组曲线、market-style最新复盘移页，strategy-account/research-utility沿上轮已读范围。无US基金申赎持仓同写；保留其他owner。首次仅父SHA断言失败，0写入，已补读market-style新范围。
