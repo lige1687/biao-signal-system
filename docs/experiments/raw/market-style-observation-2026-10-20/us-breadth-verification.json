@@ -1,0 +1,88 @@
+{
+  "checked_at": "2026-10-21T16:16:48.061914+00:00",
+  "source": "Yahoo Finance chart API; existing fixed 494-stock observation sample",
+  "old_count": 11694,
+  "new_count": 11725,
+  "added_sessions": 31,
+  "first_added": "2026-09-08",
+  "last_added": "2026-10-20",
+  "calendar_exact_match": true,
+  "historical_rows_unchanged": true,
+  "live_cache_unchanged_before_approval": true,
+  "independent_calculation_matches": true,
+  "latest": {
+    "date": "2026-10-20",
+    "windows": {
+      "20": {
+        "eligible": 492,
+        "above": 357,
+        "pct": 72.561
+      },
+      "50": {
+        "eligible": 492,
+        "above": 262,
+        "pct": 53.252
+      },
+      "200": {
+        "eligible": 492,
+        "above": 274,
+        "pct": 55.6911
+      }
+    }
+  },
+  "missing_recent": {
+    "PSKY": "2026-10-16",
+    "WBD": "2026-10-05"
+  },
+  "first_fetch_failure": "GM TLS EOF; targeted retry succeeded",
+  "candidate_directory": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/market-style-observation-20261020/us-breadth-20261022-complete",
+  "candidate_sha256": "49c970665df85161594fd63173a4ba9a5d6a01f35429b9547a77d0ba91b6fc83",
+  "previous_sha256": "0311f63b151d3315fa9bded4125740852d3adff2a58f3cd56260e0a80241f7ce",
+  "raw_quotes_git": "not published",
+  "tests": "7 passed",
+  "hygiene": "passed",
+  "installed": true,
+  "http_8000": {
+    "status": 200,
+    "count": 11725,
+    "last": {
+      "date": "2026-10-20",
+      "breadth_20": 72.561,
+      "breadth_50": 53.252,
+      "breadth_200": 55.6911
+    }
+  },
+  "http_5192": {
+    "status": 200,
+    "count": 11725,
+    "last": {
+      "date": "2026-10-20",
+      "breadth_20": 72.561,
+      "breadth_50": 53.252,
+      "breadth_200": 55.6911
+    }
+  },
+  "installation": {
+    "installed": true,
+    "target": "/Users/yongbiaoli/.lei_signal_lab/cache/sp500_ma_breadth_history.json",
+    "backup": "/Users/yongbiaoli/.lei_signal_lab/cache/sp500_ma_breadth_history.json.before-20261021T121734822792.bak",
+    "sha256": "49c970665df85161594fd63173a4ba9a5d6a01f35429b9547a77d0ba91b6fc83",
+    "last_date": "2026-10-20"
+  },
+  "authorization": "用户准确确认：确认，备份后更新实际看板。仅该缓存与备份。",
+  "failed_probe": "First HTTP check used /api/symbols/market-context/breadth-history, 404; corrected to client-defined /api/market-context/breadth-history.",
+  "browser": {
+    "url": "http://127.0.0.1:5192/fundamentals",
+    "price_last_date": "2026-10-20",
+    "breadth_last_date": "2026-10-20",
+    "lines": [
+      20,
+      50,
+      200
+    ],
+    "rendered_svg": true,
+    "console_errors": 0,
+    "screenshot": "us-breadth-repaired.png"
+  },
+  "automatic_refresh": "Not scheduled; new prepare/install CLI available. No notification or scheduler restored."
+}

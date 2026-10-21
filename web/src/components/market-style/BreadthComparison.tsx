@@ -166,7 +166,7 @@ export default function BreadthComparison({ market, onMarketChange, onContextCha
           : <><button type="button" aria-pressed={usPrice === "sp500"} onClick={() => setUsPrice("sp500")}>标普500</button><button type="button" aria-pressed={usPrice === "nasdaq"} onClick={() => setUsPrice("nasdaq")}>纳斯达克</button></>}
       </div>
     </div>
-    <p className="bc-scope">{market === "cn" ? `全A股票宽度 × ${PRICE_NAMES[priceKey]}价格` : `标普500成分股宽度 × ${PRICE_NAMES[priceKey]}价格`}</p>
+    <p className="bc-scope">{market === "cn" ? `全A股票宽度 × ${PRICE_NAMES[priceKey]}价格` : `标普500股票样本宽度 × ${PRICE_NAMES[priceKey]}价格`}</p>
     <p className={`bc-dates${breadthBehindPrice ? " bc-stale" : ""}`}>价格截至 {lastPriceDate ?? "未提供"} · 宽度截至 {lastBreadthDate ?? "未提供"}{breadthBehindPrice ? "（宽度后续缺失；图上留白）" : ""}</p>
     {breadth.isPending || overlay.isPending ? <p className="bc-state" role="status">正在读取历史曲线…</p> : null}
     {breadth.isError || overlay.isError ? <p className="bc-state bc-error" role="alert">{breadth.isError ? "宽度历史读取失败。" : "指数价格历史读取失败。"}暂不能显示同期对照。</p> : null}
@@ -178,6 +178,6 @@ export default function BreadthComparison({ market, onMarketChange, onContextCha
     </div>
     <p className="bc-caption">色带把已有宽度条件投影到同期价格，不代表未来走势。沿用本系统图表条件：A股80/20、美股85/15，200日底色按50%划分；20日为短期对照，未纳入现有六条件。</p>
     <p className="bc-caption"><a href="/fundamentals?section=overlay#fund-sec-overlay">原长周期叠加：指数 × 利率／两融／VIX →</a></p>
-    <details className="bc-source"><summary>来源与如何读</summary><p>宽度是股票中有多少比例站在各自20、50或200日均线上方。将指数价格和宽度放在相同日期轴上，可对照价格变化有多少股票一起参与。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源。</p><p>本图价格来自现有指数历史接口，宽度来自现有市场宽度历史接口。两者交易日严格对齐，缺值不连线；全A宽度不是沪深300成分股专属宽度，标普500宽度也不是纳指专属宽度。历史名单、有效股票分母与修订可能不同，当前接口未给出逐日完整覆盖率，不能用这张图直接判定交易或证明未来效果。科创50、科创100与创业板当前接口未提供价格序列，本图暂不显示。</p></details>
+    <details className="bc-source"><summary>来源与如何读</summary><p>宽度是股票中有多少比例站在各自20、50或200日均线上方。将指数价格和宽度放在相同日期轴上，可对照价格变化有多少股票一起参与。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源。</p><p>本图价格来自现有指数历史接口，宽度来自现有市场宽度历史接口。两者交易日严格对齐，缺值不连线；全A宽度不是沪深300成分股专属宽度，美股沿用已有的标普500股票样本名单，并非逐日还原的官方成分股，亦非纳指专属宽度。历史名单、有效股票分母与修订可能不同，当前接口未给出逐日完整覆盖率，不能用这张图直接判定交易或证明未来效果。科创50、科创100与创业板当前接口未提供价格序列，本图暂不显示。</p></details>
   </section>;
 }

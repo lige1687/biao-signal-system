@@ -98,3 +98,12 @@
 - 交付前协调基线56369c2b2b193de70667ed02ed32806fdccbf85f；新增已读mechanism-rebalancing-review-20261020、pro-advice-process-review-20261020。后者新两ETF宽度/波动研究已引用复用，无同文件或同实验写入冲突。
 - 准确小文件提交与远端读回：见raw/publication-receipt.json及本task协调记录的最后提交。只发布本任务资料；部分引用的其他owner报告仅当前工作区可见，本轮未复制上传，独立分支不冒称整套系统可复现。
 - 下一步：当前资料与方案问题交付；未来面板实现先核许可、母指数与源时效，仍由明确owner接续。因子、风险和完整策略按后续独立问题研究，不重跑旧封存。
+
+
+## 美股宽度断档修复 2026-10-22T00:20:00+08:00
+
+- 用户要求美股宽度9月后必须补齐；原scope已在coordination@7d3eb2903f83ec7b3dd9ba01bda748ed173437f3登记。先核172792486571d555820804a162c6922ebf0f6da4及COORDINATION/self/dispatch/investor-workspace-simplification/investor-observation-map；未见本新模块同写者。
+- 修复真实共享缓存断点：31新交易日9/8—10/20；原11,694日保持，最新492/494有效。用户明确确认仓外JSON与备份后执行，原矩阵/冻结研究/交易DB不动；进程8000未重启，5192读回日期与曲线一致。
+- 新us_breadth_refresh.py、7项测试、BreadthComparison来源措辞、报告§16/验证JSON/截图；原一次TLS失败重取成功；第一次HTTP路径404纠正；无model/研究/通知。源码与预览组件同字节。
+- 私有候选存仓内.codex/.../us-breadth-20261022-complete，不上传行情。原字节备份路径和SHA见us-breadth-verification.json；无删除。安装只接受原cache SHA未变且候选保持旧历史的版本。
+- 本次数据补齐完成，用户视觉待验收。日常自动续更未接入；可用prepare/install CLI按授权续更，不冒称永久自动维护。原五问资料缺口维持。
