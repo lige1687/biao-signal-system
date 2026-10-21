@@ -1,3 +1,11 @@
+# 单因子诊断三图静态资源接入 2026-10-21T23:58:04.349453+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=cec572254dbd9f6f181d06555f9410f035f61b23；checked_at=2026-10-21T23:58:04.349453+08:00。沿用户系统/因子展示分工及原因子owner准确委派，已读COORDINATION（前次后无变）、self、research-utility-review-20261012最新23:38、personal-lowfreq-system-audit-20261018最新23:54、research-dispatch-controller。全任务检索只有原owner的主树来源，运行树同块无他人写者；分组资金曲线为另一目录不触及。
+- root唯一写5188实际运行树web/public/research/factor-sorting-diagnostics-20261021/{groups-all.svg,groups-green.svg,incremental-periods.svg}，从主树按给定SHA原字节复制；自身docs/archive/handoffs-plans/investor-workspace-simplification-20261012/factor-sorting-static-assets-20261021-receipt.json、原work-progress，可准确镜像小回执至主树。不改源图、报告/登记/研究数字、React/API/策略，不重跑、不重启。root原因子owner负责报告/浏览器阅读与研究结论，本方只验静态HTTP接入。
+- 三目标均不存在，原XML解析及SHA吻合，总70235B；当前5188 PID48880/cwd确认运行树web。验收源/目标/HTTP逐字SHA一致且200/image/svg+xml，不认HTML fallback；首次失败保留。成果分支codex/investor-workspace-simplification-20261012基线e6c4c2e025252c565ba15f05611561ca1ecd5b48加未提交内容保持。三图为已看历史描述，不是独立测试或扣费账户；接入不代表研究有效。
+
+---
+
 # 低换手账户三图静态接入完成 2026-10-20T17:03:09.176817+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed（仅三静态资源）；scope_released true；checked_coordination_sha=6382fa322262ffa358206fe3db2a42f039d8b708；checked_at=2026-10-20T17:03:09.176817+08:00。沿本轮已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/dispatch，交付前fetch新变更已读，无同块冲突。
