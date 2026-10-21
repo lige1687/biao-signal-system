@@ -1,3 +1,12 @@
+# 四因子五组曲线五文件接入完成 2026-10-22T00:16:53.507197+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed（本次5静态文件）；scope_released true；checked_coordination_sha=6c6f4cc097632f66d8426469757bfc9e1ddece65；checked_at=2026-10-22T00:16:53.507197+08:00。沿本轮已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/dispatch；登记过程中原因子补交展示记录已补读，交付前fetch新变更均核，无同块冲突。
+- 已准确镜像至当前5188运行树web/public/research/factor-group-curves-20261021/：index.html 1932996B SHA 33ec0eaf420dc52c30a0e8c80ae1d8537e5ea2c53b89b75122cc02d252faa33b；cool.svg 97732B SHA dcbe5c69e36a69482565b649c2136cc3ba9af9cd4c77efa1826b9c80cb1913f8；high52.svg 97991B SHA 3ac77f4c7f1312f4a1548d5fed092a331dbc43d08aed4bd361e23101dea945ef；lowvol.svg 97410B SHA 990a31f952504050ef32474d4678f90f2db2c59e4bced487c64e7580fdfb742a；momentum.svg 97778B SHA b8acc1bdac7fbb1546b9cf8a66a8bc2fb5eea2155574c0edee5abb016fabccfc。源/目标/HTTP完整字节SHA全同，index真实标题“四因子 · 五分组连续资金曲线”与1932996B HTML通过，4SVG200/image/svg+xml；原5URL 578B SPA回落留before，未把200单独当成功。最终源核未变，PID48880/cwd保持，无重启。
+- 回执docs/archive/handoffs-plans/investor-workspace-simplification-20261012/factor-group-curves-static-assets-20261022-receipt.json SHA 9198bb70a1ba0c9a8c0c2f64f68f3608267274bbc1d878961818c39c0fd7472b，主/自身树一致；原progress追加，主仓归置通过。报价资金示意/缺价虚线/非可兑现净值原说明与交互脚本按原字节保持。浏览器交互预览及科学结案归原owner，不重复大QA、不冒称完成该验收。
+- 未改源文件/React/API/规则/研究源码/报告，不重跑、不代原owner结论、不发其他聊天消息。成果仍codex/investor-workspace-simplification-20261012基线e6c4c2e025252c565ba15f05611561ca1ecd5b48加本机未提交附件及小回执；远端仅协调元数据，不冒称跨设备文件移交。范围释放，无本轮后台任务。
+
+---
+
 # 四因子五组资金曲线五文件接入 2026-10-22T00:15:00.819385+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=941baaeb09c2ff26130887dadbdf36f179472329；checked_at=2026-10-22T00:15:00.819385+08:00。沿用户已授权系统/因子分工，research-utility-review原owner明确请求静态五文件；已读COORDINATION（前次后无变）、self、research-utility-review-20261012最新00:02、personal-lowfreq-system-audit-20261018五组曲线23:54、research-dispatch-controller。全任务检索仅原研究owner声明主树源目录，运行树无同块写者。
