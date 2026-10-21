@@ -1,3 +1,13 @@
+# 固定曲线与专业诊断展示交付 2026-10-22T01:27:24.256423+08:00
+
+- task-id/owner沿原；status completed（仅本轮固定曲线UI）；scope_released true；checked_coordination_sha=d65a35a20adf990a7f18ac30905fc5d6f4d35f9a；checked_at=2026-10-22T01:27:24.256423+08:00。已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/dispatch及新增strategy-account-bridge01:15段，冲突决定无UI同写，科研科学结案不接管。
+- 原七UI文件已按此前发布基线及本方测试修正核验后，从5188运行树精确镜像主树；七JSON主/运行树/HTTP完整字节SHA与application/json一致。源旧导出晚写事故已恢复，运行树合格资料保持未覆盖。实际43相关检查通过，最终tsc/Vite构建通过，保留原大包提示；归置通过。既有1280/390实际界面、费用/池/分期/环境/诊断和原值验收可定位，未重复科研计算。
+- 专业诊断折叠区含当前因子/资料/池/费用/准确年月；分组均值、逐月差额、部分年度和资金代价图均接真实字段；224组合核对，不从账户捏造个股预测。原84与新204资料独立、报价/已看历史/缺价与执行边界保留。用户视觉待验收。
+- 回执docs/archive/handoffs-plans/investor-workspace-simplification-20261012/factor-curves-delivery-20261022.json SHA da6d2118a47e3e511c510518ef7512458412d07a13602dfe8763309fe5d4e66f，core/data-copy/goal保留历史并更新，原progress追加；接入规范由原owner维护docs/research/factor-research-display-contract.md。目标okr-30b877e334bc已6/6提交review并API读回，不代用户accept、不改原研究目标。
+- 代码与本机证据仍codex/investor-workspace-simplification-20261012@e6c4c2e025252c565ba15f05611561ca1ecd5b48加本机未提交，主树只准确镜像，不冒称代码已推或异机恢复。仅本协调元数据推远端。定时任务leisignal原不存在、仍启用美股宽度自动续更按用户最新要求删除并读回，当前Codex ACTIVE为0，不恢复。无新研究、交易、服务重启或其他聊天消息。
+
+---
+
 # 专业诊断折叠区与真实JSON绑定 2026-10-22T01:08:06.029335+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=7a62a013bed3d6cad7f5b78b54a5f65052ce229d；checked_at=2026-10-22T01:08:06.029335+08:00。已读当前新增任务段，原COORDINATION/self/research-utility/personal/dispatch与UI唯一写者范围保持；研究owner新标准文档/数据/科学结案不接管。原5文件静态已完成；当前固定UI主体和2批数据工作，新增诊断继续当前组件内实现。
