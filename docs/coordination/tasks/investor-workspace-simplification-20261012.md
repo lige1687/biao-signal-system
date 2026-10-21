@@ -1,3 +1,11 @@
+# 四因子五组资金曲线五文件接入 2026-10-22T00:15:00.819385+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=941baaeb09c2ff26130887dadbdf36f179472329；checked_at=2026-10-22T00:15:00.819385+08:00。沿用户已授权系统/因子分工，research-utility-review原owner明确请求静态五文件；已读COORDINATION（前次后无变）、self、research-utility-review-20261012最新00:02、personal-lowfreq-system-audit-20261018五组曲线23:54、research-dispatch-controller。全任务检索仅原研究owner声明主树源目录，运行树无同块写者。
+- 唯一写当前5188运行树web/public/research/factor-group-curves-20261021/{index.html,cool.svg,high52.svg,lowvol.svg,momentum.svg}，镜像主树准确字节。自身docs/archive/handoffs-plans/investor-workspace-simplification-20261012/factor-group-curves-static-assets-20261022-receipt.json、原work-progress可镜像小记录至主树。原源图/HTML、报告、React/API/规则/研究源码不改，不重启、不重跑、不代改原owner记录；其负责科学结案与浏览器预览，不新增跨聊天消息。
+- 五目标不存在；源全部SHA与委派一致，SVG XML通过，HTML真实标题“四因子 · 五分组连续资金曲线”，无外部src/href，保留内嵌脚本和报价/缺价虚线/非可兑现净值说明。总2323907B，作为明确授权静态附件留本机运行目录。PID48880/cwd已核。验收源/目标/HTTP完整字节与SHA一致、HTML标题真实及4SVG image/svg+xml，不把SPA当成功；源复制前和交付前再核。基线e6c4c2e025252c565ba15f05611561ca1ecd5b48＋本地未提交增量，准确元数据推送。
+
+---
+
 # 单因子诊断三图静态接入完成 2026-10-21T23:59:25.720723+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed（仅静态附件接入）；scope_released true；checked_coordination_sha=0615e553b836d50954bfcd00a4b8797f9e2bf07a；checked_at=2026-10-21T23:59:25.720723+08:00。沿本轮已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/dispatch，交付前fetch新变更已核，无同块冲突。
