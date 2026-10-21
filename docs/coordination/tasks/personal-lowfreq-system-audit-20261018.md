@@ -1,3 +1,17 @@
+# 五分组连续资金曲线及当前5188展示验收完成 2026-10-22T00:18:27.227747+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（仅本轮报价曲线/记账/展示）；scope_released true；evidence inconclusive（因子可交易有效性及未见验证未证明）。checked_coordination_sha=5680f26c7aa59513266bf920aa13e2d4b7c4121b；checked_at=2026-10-22T00:18:27.227747+08:00；已读 COORDINATION 及 task-id personal-lowfreq-system-audit-20261018, research-utility-review-20261012, research-dispatch-controller, strategy-account-bridge-20261020, mechanism-rebalancing-review-20261020, market-style-observation-20261020, investor-workspace-simplification-20261012。
+- 冲突决定：复用 research-utility-review 已冻结 groups 5040行/36019股月，不运行其排序研究、不改其文件；复用 investor-workspace owner 已准确接入的5静态文件到5188，本人仓外运行树写入0。其他US宽度/机构/策略任务仍原owner负责。自己源静态文件保持9e480bd6指纹；不因展示同步重算结果。
+- 科学产物commit 9e480bd69d8de47dc2fe6fc812a676148151bf21，最终入口/读回commit 4fb595bc00f5fe544f44f62f8301d43501024c6e，codex/personal-lowfreq-system-audit-20261018已普通push/远端ref读回。28准确产物＋3最终记录；原结果约493.8MiB固定外盘，完整manifest与来源SHA保留，本机为小报告/代码/图。
+- 实际完成：300固定来源A股（沪116/深184；非沪深300成分），132形成月份2014-12—2025-11，资金2015-01—2025-12。42条五组/共同池目标×0及25bps=84报价账户；G1—G5单列，现金、缺价与分期可切换。绿池12个月不足30只的现金约定预先冻结，不按未来完整性删月。
+- Astra方法审阅、Sol纯账引擎、Luna资格及一次核心执行。21合成通过；主控未来字段污染不改变名单；224700日/732655成交/509022月末持仓现金单位独核，现金最大差6.86e-9；30原始开盘价/生效复权锚点独核。新市场请求0，核心1/1，后续0/3，来源0/6，旧实验/预算不重置。
+- 全池含费G5：反转年均6.32%、最大跌幅54.73%；低波动9.27%/55.59%；动量3.38%/62.23%；高点2.07%/58.96%；共同池8.26%/59.07%。反转换手155.77%资产/月，五组非严格递增；低波动在下跌月少亏但上涨月少赚，保留风险用途线索。不将平均分或价格同家族加工当独立信息。
+- 关键边界：缺价沿最后报价只作示意，缺价段虚线；复权断点/退出待核，日线全日限制包含开盘未知信息，非真实成交、非可执行下界。旧2015—2018/2019—2021/2022—2025都是已看复核，独立新验证未完成。无生产/规则/交易/通知变更。
+- 验收：报告 factor-group-curves-2026-10-21.md、registry/INDEX 已镜像主树，5188 API全文/category/verdict一致；5资源HTTP字节/SHA/MIME逐项一致、真实浏览器5188五组曲线可见并保留交付标签，切换测试通过；两树归置通过，准确暂存diff检查通过。早期5188 HTML占位失败与浏览器label不匹配均留记录，临时60930预览服务已停；当前正式入口 http://localhost:5188/research/factor-group-curves-20261021/index.html 。
+- 报价展示问题已回答，后续仅在完整历史池、成交/退出/复权或规则冻结后新资料能改变判断时复验，不重复追正结果。更大系统目标/美股/ETF未冒称全部完成。
+
+---
+
 # 五分组连续资金曲线接入 2026-10-21T23:54:37.403031+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha=b442159ec48f7b8bcfbfa7aec7124d7756f02d85；checked_at=2026-10-21T23:54:37.403031+08:00；已读 COORDINATION 及 task-id personal-lowfreq-system-audit-20261018, research-utility-review-20261012, research-dispatch-controller, strategy-account-bridge-20261020, mechanism-rebalancing-review-20261020, market-style-observation-20261020。
