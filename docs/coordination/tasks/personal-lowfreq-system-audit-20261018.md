@@ -1,3 +1,11 @@
+# 反转研究已核数，补齐本树归置规则 2026-10-21T23:36:51.004095+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active（交付核验）；scope_released false。checked_coordination_sha=e7439557827af731776c3d215bebd8b63f88f4ea；checked_at=2026-10-21T23:36:51.004095+08:00；已读COORDINATION/self/research-dispatch-controller/research-utility-review-20261012/strategy-account-bridge-20261020/mechanism-rebalancing-review-20261020/market-style-observation-20261020。本轮新增仅market-style同口径日线，与本研究无冲突。
+- 原范围及独立worktree不变，增加仅本工作树 scripts/check_repo_hygiene.py 的 ROOT_KEEP_DIRS 中 `.agents` 一项：用户当前AGENTS明确项目技能放此处，主树现行检查器已支持，但旧工作树检查器漏项。保留旧失败证据，不改其他检查或主树脚本；本树现有COORDINATION/docs/coordination由旧规则允许，不用新版全文件替换覆盖。
+- 核心运行1次exit0，root已独核选择/报价/时间/统计及2096组月换手；不追加市场实验。归档和技能验收继续，不接管账户/行业内方案/服务。TRAE安装获用户许可完成但CLI未认证、IDE无可靠回执，未声称模型执行。
+
+---
+
 # 反转完整方法与 Trae 委派可行性  2026-10-21T22:40:33.282476+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha=89517eb04495038f75e09f50fb46d4656710587f；checked_at=2026-10-21T22:40:33.282476+08:00；已读 COORDINATION、self、research-dispatch-controller、research-utility-review-20261012、strategy-account-bridge-20261020、mechanism-rebalancing-review-20261020、market-style-observation-20261020。各旧研究和新行业相对反转策略提案归原owner，本轮不改其源码/结果/服务，不重复原600五组或绿色排序/账户。
