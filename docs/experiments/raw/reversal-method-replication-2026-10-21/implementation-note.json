@@ -1,0 +1,63 @@
+{
+  "schema": "reversal-method-replication-implementation/1",
+  "at": "2026-10-21",
+  "status": "revised_code_ready_synthetic_checks_passed_execution_not_run",
+  "write_scope": [
+    "run.py",
+    "test_method.py",
+    "implementation-note.json"
+  ],
+  "method": {
+    "frozen_design": "design.json; reversal-method-replication/1",
+    "feature_builder": "reuse monthly_features; remove only not_green and green_unknown eligibility reasons; retain every other failure and the full clean 12-month price-history requirement",
+    "portfolio_selection": "pre-outcome features only; Shanghai and Shenzhen separately; require 30 eligible names; k=ceil(n/10); stable code tie-break; equal-weight all, loser, winner, lowvol",
+    "future_outcomes": "generated only after all selections are frozen; lag0 and lag1 use the frozen first-session endpoints and identical selected names",
+    "unknowns": "weighted_month keeps selected unknown weight and never renormalizes known returns; paired comparisons require both complete portfolio returns",
+    "association": "average-rank Spearman and residual association on intercept, momentum rank, and vol60 rank; no group dummies",
+    "inference": "HAC lag 6 over the complete 131-slot monthly axis, retaining missing values; report both planned periods and calendar years",
+    "fees": "0.25 percent per side on gross drift-adjusted L1 turnover plus final liquidation; first qualified month buys 100 percent; unknown later prior turnover stays unknown",
+    "comparisons": "primary gross uses every paired month with both complete portfolio returns; gross_on_net_sample and after_cost_25bps share the narrower month set where both costs are known",
+    "memory": "two source passes: build all feature rows and freeze all selections, release each stock adapter, then reread one stock at a time to calculate outcomes and release it",
+    "source_root": "derive main repository root from design.source_code[0].path and verify each imported helper file is under that root/src",
+    "execution_gate": "--run requires execution-review.json with accepted=true plus exact run.py and design SHA-256; verifies source/helper and strategy-document hashes; rechecks saved output plan before creating the unique output directory"
+  },
+  "synthetic_checks": {
+    "command": "env -u PYTHONPATH PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/opt/python@3.11/bin/python3.11 test_method.py",
+    "result": "passed",
+    "checks": 15,
+    "covers": [
+      "average ranks for ties",
+      "ceil(n/10) and stable tie membership",
+      "selection API has no future-outcome input",
+      "only green failure reasons are removed",
+      "lag 0/1 endpoints",
+      "missing weights are not renormalized",
+      "weighted and paired return arithmetic against hand values",
+      "one-side fee arithmetic and unknown turnover",
+      "unknown prior outcomes remain unknown",
+      "partial rank controls without group dummies",
+      "HAC calendar slot retention",
+      "paired comparison completeness",
+      "gross complete sample stays distinct from the common cost-qualified gross/net sample",
+      "initial purchase counts once while a later missing prior month stays unknown",
+      "runner imports helpers from the design-bound main repository root"
+    ],
+    "market_inputs_read": false,
+    "market_effects_computed": false
+  },
+  "bound_research_helpers": {
+    "high52_revalidation.py": "603f71c0a227cb5a8f3e13240a74235cfa2b657bbf4d65ca51be4312af612ee5",
+    "short_reversal_selection.py": "c495d3ace1177aa314e367b471cf79a99382b7eecb4bdcf7d4dc0a42deeaee0c",
+    "fip.py": "76a8c003822826dd6befff8cfda135e5d9d5a3a7ca0f1d7e9559f5631f7f3c6a",
+    "output_storage.py": "aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95"
+  },
+  "review_notes": [
+    "First synthetic import exposed an incorrect parent-index root calculation that could depend on ambient PYTHONPATH; repaired by resolving the frozen design's bound helper path and asserting imported module locations.",
+    "Primary gross comparison was separated from the narrower after-cost common sample during review repair.",
+    "All 300 source adapters are now processed one at a time in two read-only passes; selections remain fully frozen before the second pass reads future outcomes.",
+    "No core or follow-up market run was performed.",
+    "No root execution-review.json was created or assumed.",
+    "Run and design SHA-256 must be read back into the separate root review before any market execution.",
+    "Quote results remain research proxies and cannot establish real fills, total shareholder wealth, or account performance."
+  ]
+}

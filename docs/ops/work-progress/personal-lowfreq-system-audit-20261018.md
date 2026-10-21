@@ -1,3 +1,20 @@
+# 反转方法检验交付核验通过 2026-10-21T23:39:31.849707+08:00
+
+- API全文/分类/mixed逐字核同；主树仅本新报告/raw/skill及registry本键/INDEX本行镜像，旧6源SHA保持。工作树旧归置器新增已在主树支持的`.agents`目录规则前已登记协调8c68c48937ba7baf90cb0b9f2ca3e35226cbcd28，其他规则不变；两树归置通过。完整暂存空白检查exit2仅PLOS原件及原样文本；为保留原件指纹不修改，其他本任务文件检查通过。失败均留raw，不虚报所有检查绿色。
+- 主控审计另独核2096组月换手、全部同月差额和跳月差额，结果不变。产物约1MiB本机、真实大结果外盘；无新取数/生产/交易/通知。研究有界问题已答，TRAE独立CLI认证与编辑器回执仍未通过。正准备精确提交并推送本codex工作分支，最终commit由协调结案准确指向。
+
+---
+
+# 月度反转方法检验完成、交付核验中 2026-10-21T23:34:49.070567+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；自有工作树/分支沿原；checked_coordination_sha e7439557827af731776c3d215bebd8b63f88f4ea；checked_at 2026-10-21T23:34:49.070567+08:00。已读 COORDINATION/self/research-dispatch-controller/research-utility-review-20261012/strategy-account-bridge-20261020/mechanism-rebalancing-review-20261020/market-style-observation-20261020；本阶段仅market-style新增日线接入，无本研究/skill冲突。先前范围登记30bf23c8已推读回。
+- 本题复用300股合格原件，新增原论文月度方法/跳月比较，不重做600股/转绿/账户或行业内反转负责人范围。Luna执行一次核心 exit0，300源、131形成月、35765合格股月；root独核1048选择、2096组月、524相关、22总体差额、39源端点。排序关联正，但直接买最差组对低波动未确认增益，中途单股跌幅更深约2.7—2.9pp，换股约182%；按用途保留或暂停，不只看收益。
+- 原文全市场1997—2012未复现；完整对全部比较只有64/62月，未知报价与选择性缺失不能伪装11年账户。收益、风险、上涨捕获、四贡献、费用、两时期与反例已写报告；旧结果/source不覆盖。一次核心、0新行情下载；15合成与root审计通过，audit字段结构两次失败留痕。占用的旧route保留，新route仅运行前重绑路径。
+- TRAE官方安装0.209.1成功，CLI未认证；官方当日限制企业旗舰；编辑器命令exit0但未读回输入或答复，不能称已派发完成。repo技能trae-delegate及真实preflight阻塞状态已核，自动模型回调未验证；未购买、未复制令牌或修改旧配置。认证恢复后仅复用公开方法pilot。
+- 报告/raw/skill、registry本键/INDEX本行和本progress为唯一写范围；主树窄镜像及API/Git/最终协调读回接续执行，尚不宣称全部交付。当前无研究计算进程；不自动接管其他任务、生产、交易或通知。
+
+---
+
 # A股反转范围审查交付完成 2026-10-20T23:36:48.052729+08:00
 
 - 成果c57b4dc6a53da87b7a8be05af4aa34f5d500b2a9已普通推送并核11路径字节；协调b7f53089c42c167130c90ec5e757eb401e5da3f2已读回，checked_coordination_sha=1360d5264d4640991aa4d78ed8beacfe3774e3c9，实际已读task-id及无重叠决定沿前段/coordination-start与final。status completed/scope_released true仅本问题。

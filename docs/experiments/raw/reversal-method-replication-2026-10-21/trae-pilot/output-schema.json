@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "paper_signal": {
+      "type": "string"
+    },
+    "paper_universe_period": {
+      "type": "string"
+    },
+    "paper_weighting": {
+      "type": "string"
+    },
+    "skip_test": {
+      "type": "string"
+    },
+    "local_differences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "claims_not_supported": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "paper_signal",
+    "paper_universe_period",
+    "paper_weighting",
+    "skip_test",
+    "local_differences",
+    "claims_not_supported",
+    "source_files"
+  ],
+  "additionalProperties": false
+}

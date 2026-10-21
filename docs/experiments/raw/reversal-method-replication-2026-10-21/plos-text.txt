@@ -1,0 +1,1494 @@
+var siteUrlPrefix = "/plosone/";
+var WombatConfig = WombatConfig || {};
+    WombatConfig.journalKey = "PLoSONE";
+    WombatConfig.journalName = "PLOS One";
+    WombatConfig.figurePath = "/plosone/article/figure/image";
+    WombatConfig.figShareInstitutionString = "plos";
+    WombatConfig.doiResolverPrefix = "https://dx.plos.org/";
+var WombatConfig = WombatConfig || {};
+  WombatConfig.metrics = WombatConfig.metrics || {};
+  WombatConfig.metrics.referenceUrl      = "http://lagotto.io/plos";
+  WombatConfig.metrics.googleScholarUrl  = "https://scholar.google.com/scholar";
+  WombatConfig.metrics.googleScholarCitationUrl  = WombatConfig.metrics.googleScholarUrl + "?hl=en&lr=&q=";
+  WombatConfig.metrics.crossrefUrl  = "https://www.crossref.org";
+var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+  if (window.plosCookieConsent?.hasConsented('advertising')) {
+    (function() {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') +
+          '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+    })();
+  }
+googletag.cmd.push(function() {
+  googletag.defineSlot('/75507958/PONE_728x90_ATF', [728, 90], 'div-gpt-ad-1458247671871-0').addService(googletag.pubads());
+  googletag.defineSlot('/75507958/PONE_160x600_BTF', [160, 600], 'div-gpt-ad-1458247671871-1').addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.enableServices();
+    });
+dataLayer = [{
+    'mobileSite': 'false',
+    'desktopSite': 'true'
+  }];
+Profitability of Contrarian Strategies in the Chinese Stock Market | PLOS One
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TP26BH');
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MQQMGF');
+// from https://developers.hubspot.com/docs/reference/api/analytics-and-events/cookie-banner/cookie-banner-api#example-using-a-third-party-cookie-banner-to-control-hubspot-cookies
+  window.disableHubSpotCookieBanner = true;
+  window._hsp = window._hsp || [];
+  window._hsp.push(['setHubSpotConsent',
+      {
+        analytics: window.plosCookieConsent?.hasConsented('analytics'),
+        advertisement: window.plosCookieConsent?.hasConsented('advertising'),
+        functionality: window.plosCookieConsent?.hasConsented('functionality')
+      }
+    ]);
+;window.NREUM||(NREUM={});NREUM.init={distributed_tracing:{enabled:true},privacy:{cookies_enabled:true},ajax:{deny_list:["bam.nr-data.net"]}};
+  window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o||e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({1:[function(t,e,n){function r(t){try{s.console&&console.log(t)}catch(e){}}var o,i=t("ee"),a=t(32),s={};try{o=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,o.indexOf("dev")!==-1&&(s.dev=!0),o.indexOf("nr_dev")!==-1&&(s.nrDev=!0))}catch(c){}s.nrDev&&i.on("internal-error",function(t){r(t.stack)}),s.dev&&i.on("fn-err",function(t,e,n){r(n.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,e){return t}).join(", ")))},{}],2:[function(t,e,n){function r(t,e,n,r,s){try{l?l-=1:o(s||new UncaughtException(t,e,n),!0)}catch(f){try{i("ierr",[f,c.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function o(t,e){var n=e?null:c.now();i("err",[t,n])}var i=t("handle"),a=t(33),s=t("ee"),c=t("loader"),f=t("gos"),u=window.onerror,d=!1,p="nr@seenError";if(!c.disabled){var l=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(14),t(13),"addEventListener"in window&&t(7),c.xhrWrappable&&t(15),d=!0)}s.on("fn-start",function(t,e,n){d&&(l+=1)}),s.on("fn-err",function(t,e,n){d&&!n[p]&&(f(n,p,function(){return!0}),this.thrown=!0,o(n))}),s.on("fn-end",function(){d&&!this.thrown&&l>0&&(l-=1)}),s.on("internal-error",function(t){i("ierr",[t,c.now(),!0])})}},{}],3:[function(t,e,n){var r=t("loader");r.disabled||(r.features.ins=!0)},{}],4:[function(t,e,n){function r(){U++,L=g.hash,this[u]=y.now()}function o(){U--,g.hash!==L&&i(0,!0);var t=y.now();this[h]=~~this[h]+t-this[u],this[d]=t}function i(t,e){E.emit("newURL",[""+g,e])}function a(t,e){t.on(e,function(){this[e]=y.now()})}var s="-start",c="-end",f="-body",u="fn"+s,d="fn"+c,p="cb"+s,l="cb"+c,h="jsTime",m="fetch",v="addEventListener",w=window,g=w.location,y=t("loader");if(w[v]&&y.xhrWrappable&&!y.disabled){var x=t(11),b=t(12),E=t(9),R=t(7),O=t(14),T=t(8),P=t(15),S=t(10),M=t("ee"),N=M.get("tracer"),C=t(23);t(17),y.features.spa=!0;var L,U=0;M.on(u,r),b.on(p,r),S.on(p,r),M.on(d,o),b.on(l,o),S.on(l,o),M.buffer([u,d,"xhr-resolved"]),R.buffer([u]),O.buffer(["setTimeout"+c,"clearTimeout"+s,u]),P.buffer([u,"new-xhr","send-xhr"+s]),T.buffer([m+s,m+"-done",m+f+s,m+f+c]),E.buffer(["newURL"]),x.buffer([u]),b.buffer(["propagate",p,l,"executor-err","resolve"+s]),N.buffer([u,"no-"+u]),S.buffer(["new-jsonp","cb-start","jsonp-error","jsonp-end"]),a(T,m+s),a(T,m+"-done"),a(S,"new-jsonp"),a(S,"jsonp-end"),a(S,"cb-start"),E.on("pushState-end",i),E.on("replaceState-end",i),w[v]("hashchange",i,C(!0)),w[v]("load",i,C(!0)),w[v]("popstate",function(){i(0,U>1)},C(!0))}},{}],5:[function(t,e,n){function r(){var t=new PerformanceObserver(function(t,e){var n=t.getEntries();s(v,[n])});try{t.observe({entryTypes:["resource"]})}catch(e){}}function o(t){if(s(v,[window.performance.getEntriesByType(w)]),window.performance["c"+p])try{window.performance[h](m,o,!1)}catch(t){}else try{window.performance[h]("webkit"+m,o,!1)}catch(t){}}function i(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var a=t("ee"),s=t("handle"),c=t(14),f=t(13),u=t(6),d=t(23),p="learResourceTimings",l="addEventListener",h="removeEventListener",m="resourcetimingbufferfull",v="bstResource",w="resource",g="-start",y="-end",x="fn"+g,b="fn"+y,E="bstTimer",R="pushState",O=t("loader");if(!O.disabled){O.features.stn=!0,t(9),"addEventListener"in window&&t(7);var T=NREUM.o.EV;a.on(x,function(t,e){var n=t[0];n instanceof T&&(this.bstStart=O.now())}),a.on(b,function(t,e){var n=t[0];n instanceof T&&s("bst",[n,e,this.bstStart,O.now()])}),c.on(x,function(t,e,n){this.bstStart=O.now(),this.bstType=n}),c.on(b,function(t,e){s(E,[e,this.bstStart,O.now(),this.bstType])}),f.on(x,function(){this.bstStart=O.now()}),f.on(b,function(t,e){s(E,[e,this.bstStart,O.now(),"requestAnimationFrame"])}),a.on(R+g,function(t){this.time=O.now(),this.startPath=location.pathname+location.hash}),a.on(R+y,function(t){s("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),u()?(s(v,[window.performance.getEntriesByType("resource")]),r()):l in window.performance&&(window.performance["c"+p]?window.performance[l](m,o,d(!1)):window.performance[l]("webkit"+m,o,d(!1))),document[l]("scroll",i,d(!1)),document[l]("keypress",i,d(!1)),document[l]("click",i,d(!1))}}},{}],6:[function(t,e,n){e.exports=function(){return"PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver}},{}],7:[function(t,e,n){function r(t){for(var e=t;e&&!e.hasOwnProperty(u);)e=Object.getPrototypeOf(e);e&&o(e)}function o(t){s.inPlace(t,[u,d],"-",i)}function i(t,e){return t[1]}var a=t("ee").get("events"),s=t("wrap-function")(a,!0),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";e.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(o(window),o(f.prototype)),a.on(u+"-start",function(t,e){var n=t[1];if(null!==n&&("function"==typeof n||"object"==typeof n)){var r=c(n,"nr@wrapped",function(){function t(){if("function"==typeof n.handleEvent)return n.handleEvent.apply(n,arguments)}var e={object:t,"function":n}[typeof n];return e?s(e,"fn-",null,e.name||"anonymous"):n});this.wrapped=t[1]=r}}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],8:[function(t,e,n){function r(t,e,n){var r=t[e];"function"==typeof r&&(t[e]=function(){var t=i(arguments),e={};o.emit(n+"before-start",[t],e);var a;e[m]&&e[m].dt&&(a=e[m].dt);var s=r.apply(this,t);return o.emit(n+"start",[t,a],s),s.then(function(t){return o.emit(n+"end",[null,t],s),t},function(t){throw o.emit(n+"end",[t],s),t})})}var o=t("ee").get("fetch"),i=t(33),a=t(32);e.exports=o;var s=window,c="fetch-",f=c+"body-",u=["arrayBuffer","blob","json","text","formData"],d=s.Request,p=s.Response,l=s.fetch,h="prototype",m="nr@context";d&&p&&l&&(a(u,function(t,e){r(d[h],e,f),r(p[h],e,f)}),r(s,"fetch",c),o.on(c+"end",function(t,e){var n=this;if(e){var r=e.headers.get("content-length");null!==r&&(n.rxSize=r),o.emit(c+"done",[null,e],n)}else o.emit(c+"done",[t],n)}))},{}],9:[function(t,e,n){var r=t("ee").get("history"),o=t("wrap-function")(r);e.exports=r;var i=window.history&&window.history.constructor&&window.history.constructor.prototype,a=window.history;i&&i.pushState&&i.replaceState&&(a=i),o.inPlace(a,["pushState","replaceState"],"-")},{}],10:[function(t,e,n){function r(t){function e(){f.emit("jsonp-end",[],l),t.removeEventListener("load",e,c(!1)),t.removeEventListener("error",n,c(!1))}function n(){f.emit("jsonp-error",[],l),f.emit("jsonp-end",[],l),t.removeEventListener("load",e,c(!1)),t.removeEventListener("error",n,c(!1))}var r=t&&"string"==typeof t.nodeName&&"script"===t.nodeName.toLowerCase();if(r){var o="function"==typeof t.addEventListener;if(o){var a=i(t.src);if(a){var d=s(a),p="function"==typeof d.parent[d.key];if(p){var l={};u.inPlace(d.parent,[d.key],"cb-",l),t.addEventListener("load",e,c(!1)),t.addEventListener("error",n,c(!1)),f.emit("new-jsonp",[t.src],l)}}}}}function o(){return"addEventListener"in window}function i(t){var e=t.match(d);return e?e[1]:null}function a(t,e){var n=t.match(l),r=n[1],o=n[3];return o?a(o,e[r]):e[r]}function s(t){var e=t.match(p);return e&&e.length>=3?{key:e[2],parent:a(e[1],window)}:{key:t,parent:window}}var c=t(23),f=t("ee").get("jsonp"),u=t("wrap-function")(f);if(e.exports=f,o()){var d=/[?&](?:callback|cb)=([^&#]+)/,p=/(.*)\.([^.]+)/,l=/^(\w+)(\.|$)(.*)$/,h=["appendChild","insertBefore","replaceChild"];Node&&Node.prototype&&Node.prototype.appendChild?u.inPlace(Node.prototype,h,"dom-"):(u.inPlace(HTMLElement.prototype,h,"dom-"),u.inPlace(HTMLHeadElement.prototype,h,"dom-"),u.inPlace(HTMLBodyElement.prototype,h,"dom-")),f.on("dom-start",function(t){r(t[0])})}},{}],11:[function(t,e,n){var r=t("ee").get("mutation"),o=t("wrap-function")(r),i=NREUM.o.MO;e.exports=r,i&&(window.MutationObserver=function(t){return this instanceof i?new i(o(t,"fn-")):i.apply(this,arguments)},MutationObserver.prototype=i.prototype)},{}],12:[function(t,e,n){function r(t){var e=i.context(),n=s(t,"executor-",e,null,!1),r=new f(n);return i.context(r).getCtx=function(){return e},r}var o=t("wrap-function"),i=t("ee").get("promise"),a=t("ee").getOrSetContext,s=o(i),c=t(32),f=NREUM.o.PR;e.exports=i,f&&(window.Promise=r,["all","race"].forEach(function(t){var e=f[t];f[t]=function(n){function r(t){return function(){i.emit("propagate",[null,!o],a,!1,!1),o=o||!t}}var o=!1;c(n,function(e,n){Promise.resolve(n).then(r("all"===t),r(!1))});var a=e.apply(f,arguments),s=f.resolve(a);return s}}),["resolve","reject"].forEach(function(t){var e=f[t];f[t]=function(t){var n=e.apply(f,arguments);return t!==n&&i.emit("propagate",[t,!0],n,!1,!1),n}}),f.prototype["catch"]=function(t){return this.then(null,t)},f.prototype=Object.create(f.prototype,{constructor:{value:r}}),c(Object.getOwnPropertyNames(f),function(t,e){try{r[e]=f[e]}catch(n){}}),o.wrapInPlace(f.prototype,"then",function(t){return function(){var e=this,n=o.argsToArray.apply(this,arguments),r=a(e);r.promise=e,n[0]=s(n[0],"cb-",r,null,!1),n[1]=s(n[1],"cb-",r,null,!1);var c=t.apply(this,n);return r.nextPromise=c,i.emit("propagate",[e,!0],c,!1,!1),c}}),i.on("executor-start",function(t){t[0]=s(t[0],"resolve-",this,null,!1),t[1]=s(t[1],"resolve-",this,null,!1)}),i.on("executor-err",function(t,e,n){t[1](n)}),i.on("cb-end",function(t,e,n){i.emit("propagate",[n,!0],this.nextPromise,!1,!1)}),i.on("propagate",function(t,e,n){this.getCtx&&!e||(this.getCtx=function(){if(t instanceof Promise)var e=i.context(t);return e&&e.getCtx?e.getCtx():this})}),r.toString=function(){return""+f})},{}],13:[function(t,e,n){var r=t("ee").get("raf"),o=t("wrap-function")(r),i="equestAnimationFrame";e.exports=r,o.inPlace(window,["r"+i,"mozR"+i,"webkitR"+i,"msR"+i],"raf-"),r.on("raf-start",function(t){t[0]=o(t[0],"fn-")})},{}],14:[function(t,e,n){function r(t,e,n){t[0]=a(t[0],"fn-",null,n)}function o(t,e,n){this.method=n,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,n)}var i=t("ee").get("timer"),a=t("wrap-function")(i),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";e.exports=i,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),i.on(c+u,r),i.on(s+u,o)},{}],15:[function(t,e,n){function r(t,e){d.inPlace(e,["onreadystatechange"],"fn-",s)}function o(){var t=this,e=u.context(t);t.readyState>3&&!e.resolved&&(e.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,y,"fn-",s)}function i(t){x.push(t),m&&(E?E.then(a):w?w(a):(R=-R,O.data=R))}function a(){for(var t=0;t<x.length;t++)r([],x[t]);x.length&&(x=[])}function s(t,e){return e}function c(t,e){for(var n in t)e[n]=t[n];return e}t(7);var f=t("ee"),u=f.get("xhr"),d=t("wrap-function")(u),p=t(23),l=NREUM.o,h=l.XHR,m=l.MO,v=l.PR,w=l.SI,g="readystatechange",y=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],x=[];e.exports=u;var b=window.XMLHttpRequest=function(t){var e=new h(t);try{u.emit("new-xhr",[e],e),e.addEventListener(g,o,p(!1))}catch(n){try{u.emit("internal-error",[n])}catch(r){}}return e};if(c(h,b),b.prototype=h.prototype,d.inPlace(b.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,e){r(t,e),i(e)}),u.on("open-xhr-start",r),m){var E=v&&v.resolve();if(!w&&!v){var R=1,O=document.createTextNode(R);new m(a).observe(O,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===g||a()})},{}],16:[function(t,e,n){function r(t){if(!s(t))return null;var e=window.NREUM;if(!e.loader_config)return null;var n=(e.loader_config.accountID||"").toString()||null,r=(e.loader_config.agentID||"").toString()||null,f=(e.loader_config.trustKey||"").toString()||null;if(!n||!r)return null;var h=l.generateSpanId(),m=l.generateTraceId(),v=Date.now(),w={spanId:h,traceId:m,timestamp:v};return(t.sameOrigin||c(t)&&p())&&(w.traceContextParentHeader=o(h,m),w.traceContextStateHeader=i(h,v,n,r,f)),(t.sameOrigin&&!u()||!t.sameOrigin&&c(t)&&d())&&(w.newrelicHeader=a(h,m,v,n,r,f)),w}function o(t,e){return"00-"+e+"-"+t+"-01"}function i(t,e,n,r,o){var i=0,a="",s=1,c="",f="";return o+"@nr="+i+"-"+s+"-"+n+"-"+r+"-"+t+"-"+a+"-"+c+"-"+f+"-"+e}function a(t,e,n,r,o,i){var a="btoa"in window&&"function"==typeof window.btoa;if(!a)return null;var s={v:[0,1],d:{ty:"Browser",ac:r,ap:o,id:t,tr:e,ti:n}};return i&&r!==i&&(s.d.tk=i),btoa(JSON.stringify(s))}function s(t){return f()&&c(t)}function c(t){var e=!1,n={};if("init"in NREUM&&"distributed_tracing"in NREUM.init&&(n=NREUM.init.distributed_tracing),t.sameOrigin)e=!0;else if(n.allowed_origins instanceof Array)for(var r=0;r<n.allowed_origins.length;r++){var o=h(n.allowed_origins[r]);if(t.hostname===o.hostname&&t.protocol===o.protocol&&t.port===o.port){e=!0;break}}return e}function f(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.enabled}function u(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.exclude_newrelic_header}function d(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&NREUM.init.distributed_tracing.cors_use_newrelic_header!==!1}function p(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.cors_use_tracecontext_headers}var l=t(29),h=t(18);e.exports={generateTracePayload:r,shouldGenerateTrace:s}},{}],17:[function(t,e,n){function r(t){var e=this.params,n=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<p;r++)t.removeEventListener(d[r],this.listener,!1);e.aborted||(n.duration=a.now()-this.startTime,this.loadCaptureCalled||4!==t.readyState?null==e.status&&(e.status=0):i(this,t),n.cbTime=this.cbTime,s("xhr",[e,n,this.startTime,this.endTime,"xhr"],this))}}function o(t,e){var n=c(e),r=t.params;r.hostname=n.hostname,r.port=n.port,r.protocol=n.protocol,r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.parsedOrigin=n,t.sameOrigin=n.sameOrigin}function i(t,e){t.params.status=e.status;var n=v(e,t.lastSize);if(n&&(t.metrics.rxSize=n),t.sameOrigin){var r=e.getResponseHeader("X-NewRelic-App-Data");r&&(t.params.cat=r.split(", ").pop())}t.loadCaptureCalled=!0}var a=t("loader");if(a.xhrWrappable&&!a.disabled){var s=t("handle"),c=t(18),f=t(16).generateTracePayload,u=t("ee"),d=["load","error","abort","timeout"],p=d.length,l=t("id"),h=t(24),m=t(22),v=t(19),w=t(23),g=NREUM.o.REQ,y=window.XMLHttpRequest;a.features.xhr=!0,t(15),t(8),u.on("new-xhr",function(t){var e=this;e.totalCbs=0,e.called=0,e.cbTime=0,e.end=r,e.ended=!1,e.xhrGuids={},e.lastSize=null,e.loadCaptureCalled=!1,e.params=this.params||{},e.metrics=this.metrics||{},t.addEventListener("load",function(n){i(e,t)},w(!1)),h&&(h>34||h<10)||t.addEventListener("progress",function(t){e.lastSize=t.loaded},w(!1))}),u.on("open-xhr-start",function(t){this.params={method:t[0]},o(this,t[1]),this.metrics={}}),u.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid);var n=f(this.parsedOrigin);if(n){var r=!1;n.newrelicHeader&&(e.setRequestHeader("newrelic",n.newrelicHeader),r=!0),n.traceContextParentHeader&&(e.setRequestHeader("traceparent",n.traceContextParentHeader),n.traceContextStateHeader&&e.setRequestHeader("tracestate",n.traceContextStateHeader),r=!0),r&&(this.dt=n)}}),u.on("send-xhr-start",function(t,e){var n=this.metrics,r=t[0],o=this;if(n&&r){var i=m(r);i&&(n.txSize=i)}this.startTime=a.now(),this.listener=function(t){try{"abort"!==t.type||o.loadCaptureCalled||(o.params.aborted=!0),("load"!==t.type||o.called===o.totalCbs&&(o.onloadCalled||"function"!=typeof e.onload))&&o.end(e)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}};for(var s=0;s<p;s++)e.addEventListener(d[s],this.listener,w(!1))}),u.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),u.on("xhr-load-added",function(t,e){var n=""+l(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),u.on("xhr-load-removed",function(t,e){var n=""+l(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),u.on("xhr-resolved",function(){this.endTime=a.now()}),u.on("addEventListener-end",function(t,e){e instanceof y&&"load"===t[0]&&u.emit("xhr-load-added",[t[1],t[2]],e)}),u.on("removeEventListener-end",function(t,e){e instanceof y&&"load"===t[0]&&u.emit("xhr-load-removed",[t[1],t[2]],e)}),u.on("fn-start",function(t,e,n){e instanceof y&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=a.now()))}),u.on("fn-end",function(t,e){this.xhrCbStart&&u.emit("xhr-cb-time",[a.now()-this.xhrCbStart,this.onload,e],e)}),u.on("fetch-before-start",function(t){function e(t,e){var n=!1;return e.newrelicHeader&&(t.set("newrelic",e.newrelicHeader),n=!0),e.traceContextParentHeader&&(t.set("traceparent",e.traceContextParentHeader),e.traceContextStateHeader&&t.set("tracestate",e.traceContextStateHeader),n=!0),n}var n,r=t[1]||{};"string"==typeof t[0]?n=t[0]:t[0]&&t[0].url?n=t[0].url:window.URL&&t[0]&&t[0]instanceof URL&&(n=t[0].href),n&&(this.parsedOrigin=c(n),this.sameOrigin=this.parsedOrigin.sameOrigin);var o=f(this.parsedOrigin);if(o&&(o.newrelicHeader||o.traceContextParentHeader))if("string"==typeof t[0]||window.URL&&t[0]&&t[0]instanceof URL){var i={};for(var a in r)i[a]=r[a];i.headers=new Headers(r.headers||{}),e(i.headers,o)&&(this.dt=o),t.length>1?t[1]=i:t.push(i)}else t[0]&&t[0].headers&&e(t[0].headers,o)&&(this.dt=o)}),u.on("fetch-start",function(t,e){this.params={},this.metrics={},this.startTime=a.now(),this.dt=e,t.length>=1&&(this.target=t[0]),t.length>=2&&(this.opts=t[1]);var n,r=this.opts||{},i=this.target;"string"==typeof i?n=i:"object"==typeof i&&i instanceof g?n=i.url:window.URL&&"object"==typeof i&&i instanceof URL&&(n=i.href),o(this,n);var s=(""+(i&&i instanceof g&&i.method||r.method||"GET")).toUpperCase();this.params.method=s,this.txSize=m(r.body)||0}),u.on("fetch-done",function(t,e){this.endTime=a.now(),this.params||(this.params={}),this.params.status=e?e.status:0;var n;"string"==typeof this.rxSize&&this.rxSize.length>0&&(n=+this.rxSize);var r={txSize:this.txSize,rxSize:n,duration:a.now()-this.startTime};s("xhr",[this.params,r,this.startTime,this.endTime,"fetch"],this)})}},{}],18:[function(t,e,n){var r={};e.exports=function(t){if(t in r)return r[t];var e=document.createElement("a"),n=window.location,o={};e.href=t,o.port=e.port;var i=e.href.split("://");!o.port&&i[1]&&(o.port=i[1].split("/")[0].split("@").pop().split(":")[1]),o.port&&"0"!==o.port||(o.port="https"===i[0]?"443":"80"),o.hostname=e.hostname||n.hostname,o.pathname=e.pathname,o.protocol=i[0],"/"!==o.pathname.charAt(0)&&(o.pathname="/"+o.pathname);var a=!e.protocol||":"===e.protocol||e.protocol===n.protocol,s=e.hostname===document.domain&&e.port===n.port;return o.sameOrigin=a&&(!e.hostname||s),"/"===o.pathname&&(r[t]=o),o}},{}],19:[function(t,e,n){function r(t,e){var n=t.responseType;return"json"===n&&null!==e?e:"arraybuffer"===n||"blob"===n||"json"===n?o(t.response):"text"===n||""===n||void 0===n?o(t.responseText):void 0}var o=t(22);e.exports=r},{}],20:[function(t,e,n){function r(){}function o(t,e,n,r){return function(){return u.recordSupportability("API/"+e+"/called"),i(t+e,[f.now()].concat(s(arguments)),n?null:this,r),n?void 0:this}}var i=t("handle"),a=t(32),s=t(33),c=t("ee").get("tracer"),f=t("loader"),u=t(25),d=NREUM;"undefined"==typeof window.newrelic&&(newrelic=d);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",h=l+"ixn-";a(p,function(t,e){d[e]=o(l,e,!0,"api")}),d.addPageAction=o(l,"addPageAction",!0),d.setCurrentRouteName=o(l,"routeName",!0),e.exports=newrelic,d.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(t,e){var n={},r=this,o="function"==typeof e;return i(h+"tracer",[f.now(),t,n],r),function(){if(c.emit((o?"":"no-")+"fn-start",[f.now(),r,o],n),o)try{return e.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],n),t}finally{c.emit("fn-end",[f.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){m[e]=o(h,e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),u.recordSupportability("API/noticeError/called"),i("err",[t,f.now(),!1,e])}},{}],21:[function(t,e,n){function r(t){if(NREUM.init){for(var e=NREUM.init,n=t.split("."),r=0;r<n.length-1;r++)if(e=e[n[r]],"object"!=typeof e)return;return e=e[n[n.length-1]]}}e.exports={getConfiguration:r}},{}],22:[function(t,e,n){e.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(e){return}}}},{}],23:[function(t,e,n){var r=!1;try{var o=Object.defineProperty({},"passive",{get:function(){r=!0}});window.addEventListener("testPassive",null,o),window.removeEventListener("testPassive",null,o)}catch(i){}e.exports=function(t){return r?{passive:!0,capture:!!t}:!!t}},{}],24:[function(t,e,n){var r=0,o=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);o&&(r=+o[1]),e.exports=r},{}],25:[function(t,e,n){function r(t,e){var n=[a,t,{name:t},e];return i("storeMetric",n,null,"api"),n}function o(t,e){var n=[s,t,{name:t},e];return i("storeEventMetrics",n,null,"api"),n}var i=t("handle"),a="sm",s="cm";e.exports={constants:{SUPPORTABILITY_METRIC:a,CUSTOM_METRIC:s},recordSupportability:r,recordCustom:o}},{}],26:[function(t,e,n){function r(){return s.exists&&performance.now?Math.round(performance.now()):(i=Math.max((new Date).getTime(),i))-a}function o(){return i}var i=(new Date).getTime(),a=i,s=t(34);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=o},{}],27:[function(t,e,n){function r(t){return!(!t||!t.protocol||"file:"===t.protocol)}e.exports=r},{}],28:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?p("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&p("timing",["fcp",Math.floor(t.startTime)])})}function o(t,e){var n=t.getEntries();if(n.length>0){var r=n[n.length-1];if(c&&c<r.startTime)return;p("lcp",[r])}}function i(t){t.getEntries().forEach(function(t){t.hadRecentInput||p("cls",[t])})}function a(t){if(t instanceof v&&!g){var e=Math.round(t.timeStamp),n={type:t.type};e<=l.now()?n.fid=l.now()-e:e>l.offset&&e<=Date.now()?(e-=l.offset,n.fid=l.now()-e):e=l.now(),g=!0,p("timing",["fi",e,n])}}function s(t){"hidden"===t&&(c=l.now(),p("pageHide",[c]))}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var c,f,u,d,p=t("handle"),l=t("loader"),h=t(31),m=t(23),v=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){f=new PerformanceObserver(r);try{f.observe({entryTypes:["paint"]})}catch(w){}u=new PerformanceObserver(o);try{u.observe({entryTypes:["largest-contentful-paint"]})}catch(w){}d=new PerformanceObserver(i);try{d.observe({type:"layout-shift",buffered:!0})}catch(w){}}if("addEventListener"in document){var g=!1,y=["click","keydown","mousedown","pointerdown","touchstart"];y.forEach(function(t){document.addEventListener(t,a,m(!1))})}h(s)}},{}],29:[function(t,e,n){function r(){function t(){return e?15&e[n++]:16*Math.random()|0}var e=null,n=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&(e=r.getRandomValues(new Uint8Array(31)));for(var o,i="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",a="",s=0;s<i.length;s++)o=i[s],"x"===o?a+=t().toString(16):"y"===o?(o=3&t()|8,a+=o.toString(16)):a+=o;return a}function o(){return a(16)}function i(){return a(32)}function a(t){function e(){return n?15&n[r++]:16*Math.random()|0}var n=null,r=0,o=window.crypto||window.msCrypto;o&&o.getRandomValues&&Uint8Array&&(n=o.getRandomValues(new Uint8Array(31)));for(var i=[],a=0;a<t;a++)i.push(e().toString(16));return i.join("")}e.exports={generateUuid:r,generateSpanId:o,generateTraceId:i}},{}],30:[function(t,e,n){function r(t,e){if(!o)return!1;if(t!==o)return!1;if(!e)return!0;if(!i)return!1;for(var n=i.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var s=navigator.userAgent,c=s.match(a);c&&s.indexOf("Chrome")===-1&&s.indexOf("Chromium")===-1&&(o="Safari",i=c[1])}e.exports={agent:o,version:i,match:r}},{}],31:[function(t,e,n){function r(t){function e(){t(s&&document[s]?document[s]:document[i]?"hidden":"visible")}"addEventListener"in document&&a&&document.addEventListener(a,e,o(!1))}var o=t(23);e.exports=r;var i,a,s;"undefined"!=typeof document.hidden?(i="hidden",a="visibilitychange",s="visibilityState"):"undefined"!=typeof document.msHidden?(i="msHidden",a="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(i="webkitHidden",a="webkitvisibilitychange",s="webkitVisibilityState")},{}],32:[function(t,e,n){function r(t,e){var n=[],r="",i=0;for(r in t)o.call(t,r)&&(n[i]=e(r,t[r]),i+=1);return n}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],33:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(o<0?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=r},{}],34:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function o(t){function e(t){return t&&t instanceof r?t:t?f(t,c,a):a()}function n(n,r,o,i,a){if(a!==!1&&(a=!0),!l.aborted||i){t&&a&&t(n,r,o);for(var s=e(o),c=m(n),f=c.length,u=0;u<f;u++)c[u].apply(s,r);var p=d[y[n]];return p&&p.push([x,n,r,s]),s}}function i(t,e){g[t]=m(t).concat(e)}function h(t,e){var n=g[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function m(t){return g[t]||[]}function v(t){return p[t]=p[t]||o(n)}function w(t,e){l.aborted||u(t,function(t,n){e=e||"feature",y[n]=e,e in d||(d[e]=[])})}var g={},y={},x={on:i,addEventListener:i,removeEventListener:h,emit:n,get:v,listeners:m,context:e,buffer:w,abort:s,aborted:!1};return x}function i(t){return f(t,c,a)}function a(){return new r}function s(){(d.api||d.feature)&&(l.aborted=!0,d=l.backlog={})}var c="nr@context",f=t("gos"),u=t(32),d={},p={},l=e.exports=o();e.exports.getOrSetContext=i,l.backlog=d},{}],gos:[function(t,e,n){function r(t,e,n){if(o.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return t[e]=r,r}var o=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){o.buffer([t],r),o.emit(t,e,n)}var o=t("ee").get("handle");e.exports=r,r.ee=o},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,i,function(){return o++})}var o=1,i="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!P++){var t=T.info=NREUM.info,e=v.getElementsByTagName("script")[0];if(setTimeout(f.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return f.abort();c(R,function(e,n){t[e]||(t[e]=n)});var n=a();s("mark",["onload",n+T.offset],null,"api"),s("timing",["load",n]);var r=v.createElement("script");0===t.agent.indexOf("http://")||0===t.agent.indexOf("https://")?r.src=t.agent:r.src=h+"://"+t.agent,e.parentNode.insertBefore(r,e)}}function o(){"complete"===v.readyState&&i()}function i(){s("mark",["domContent",a()+T.offset],null,"api")}var a=t(26),s=t("handle"),c=t(32),f=t("ee"),u=t(30),d=t(27),p=t(21),l=t(23),h=p.getConfiguration("ssl")===!1?"http":"https",m=window,v=m.document,w="addEventListener",g="attachEvent",y=m.XMLHttpRequest,x=y&&y.prototype,b=!d(m.location);NREUM.o={ST:setTimeout,SI:m.setImmediate,CT:clearTimeout,XHR:y,REQ:m.Request,EV:m.Event,PR:m.Promise,MO:m.MutationObserver};var E=""+location,R={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-spa-1212.min.js"},O=y&&x&&x[w]&&!/CriOS/.test(navigator.userAgent),T=e.exports={offset:a.getLastTimestamp(),now:a,origin:E,features:{},xhrWrappable:O,userAgent:u,disabled:b};if(!b){t(20),t(28),v[w]?(v[w]("DOMContentLoaded",i,l(!1)),m[w]("load",r,l(!1))):(v[g]("onreadystatechange",o),m[g]("onload",r)),s("mark",["firstbyte",a.getLastTimestamp()],null,"api");var P=0}},{}],"wrap-function":[function(t,e,n){function r(t,e){function n(e,n,r,c,f){function nrWrapper(){var i,a,u,p;try{a=this,i=d(arguments),u="function"==typeof r?r(i,a):r||{}}catch(l){o([l,"",[i,a,c],u],t)}s(n+"start",[i,a,c],u,f);try{return p=e.apply(a,i)}catch(h){throw s(n+"err",[i,a,h],u,f),h}finally{s(n+"end",[i,a,p],u,f)}}return a(e)?e:(n||(n=""),nrWrapper[p]=e,i(e,nrWrapper,t),nrWrapper)}function r(t,e,r,o,i){r||(r="");var s,c,f,u="-"===r.charAt(0);for(f=0;f<e.length;f++)c=e[f],s=t[c],a(s)||(t[c]=n(s,u?c+r:r,o,c,i))}function s(n,r,i,a){if(!h||e){var s=h;h=!0;try{t.emit(n,r,i,e,a)}catch(c){o([c,n,r,i],t)}h=s}}return t||(t=u),n.inPlace=r,n.flag=p,n}function o(t,e){e||(e=u);try{e.emit("internal-error",t)}catch(n){}}function i(t,e,n){if(Object.defineProperty&&Object.keys)try{var r=Object.keys(t);return r.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(i){o([i],n)}for(var a in t)l.call(t,a)&&(e[a]=t[a]);return e}function a(t){return!(t&&t instanceof Function&&t.apply&&!t[p])}function s(t,e){var n=e(t);return n[p]=t,i(t,n,u),n}function c(t,e,n){var r=t[e];t[e]=s(r,n)}function f(){for(var t=arguments.length,e=new Array(t),n=0;n<t;++n)e[n]=arguments[n];return e}var u=t("ee"),d=t(33),p="nr@original",l=Object.prototype.hasOwnProperty,h=!1;e.exports=r,e.exports.wrapFunction=s,e.exports.wrapInPlace=c,e.exports.argsToArray=f},{}]},{},["loader",2,17,5,3,4]);
+  ;NREUM.loader_config={accountID:"804283",trustKey:"804283",agentID:"402703674",licenseKey:"cf99e8d2a3",applicationID:"402703674"}
+  ;NREUM.info={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",licenseKey:"cf99e8d2a3",
+    // Modified this value from the generated script, to pass prod vs dev
+    applicationID: window.location.hostname.includes('journals.plos.org') ? "402703674" : "402694889",
+    sa:1}
+Skip to main content
+Advertisement
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1458247671871-0'); });
+PLOS One
+Publish
+Submissions
+Getting Started
+Submission Guidelines
+Figures
+Tables
+Supporting Information
+LaTeX
+What We Publish
+Preprints
+Revising Your Manuscript
+Submit Now
+Calls for Papers
+Policies
+Best Practices in Research Reporting
+Human Subjects Research
+Animal Research
+Competing Interests
+Disclosure of Funding Sources
+Licenses and Copyright
+Data Availability
+Complementary Research
+Materials, Software and Code Sharing
+Ethical Publishing Practice
+Authorship
+Corrections, Expressions of Concern, and Retractions
+Manuscript Review and Publication
+Criteria for Publication
+Editorial and Peer Review Process
+Editor Center
+Guidelines for Reviewers
+Accepted Manuscripts
+Comments
+Submit Your Manuscript
+Discover a faster, simpler path to publishing in a high-quality journal.
+PLOS ONE
+promises fair, rigorous peer review,
+  broad scope, and wide readership – a perfect fit for your research every time.
+Learn More
+Submit Now
+About
+Why Publish with PLOS ONE
+Journal Information
+Staff Editors
+Editorial Board
+Section Editors
+Advisory Groups
+Find and Read Articles
+Publishing Information
+Publication Fees
+Press and Media
+Contact
+Browse
+Search
+Search
+advanced search
+Browse Subject Areas
+?
+Click through the PLOS taxonomy to find articles in your field.
+For more information about PLOS Subject Areas, click
+here
+.
+Loading metrics
+<li id="metricsError">Article metrics are unavailable at this time. Please try again later.</li>
+<li></li><li></li><li id="tooSoon">Article metrics are unavailable for recently published articles.</li>
+<li id="almSaves">
+      <%= s.numberFormat(saveCount, 0) %>
+      <div class="tools" data-js-tooltip-hover="trigger">
+        <a class="metric-term" href="/plosone/article/metrics?id=10.1371/journal.pone.0137892#savedHeader">Save</a>
+        <p class="saves-tip" data-js-tooltip-hover="target"><a href="/plosone/article/metrics?id=10.1371/journal.pone.0137892#savedHeader">Total Mendeley and Citeulike bookmarks.</a></p>
+      </div>
+    </li>
+
+    <li id="almCitations">
+      <%= s.numberFormat(citationCount, 0) %>
+      <div class="tools" data-js-tooltip-hover="trigger">
+        <a class="metric-term" href="/plosone/article/metrics?id=10.1371/journal.pone.0137892#citedHeader">Citation</a>
+        <p class="citations-tip" data-js-tooltip-hover="target"><a href="/plosone/article/metrics?id=10.1371/journal.pone.0137892#citedHeader">Paper's citation count computed by Dimensions.</a></p>
+      </div>
+    </li>
+
+    <li id="almViews">
+      <%= s.numberFormat(viewCount, 0) %>
+      <div class="tools" data-js-tooltip-hover="trigger">
+        <a class="metric-term" href="/plosone/article/metrics?id=10.1371/journal.pone.0137892#viewedHeader">View</a>
+        <p class="views-tip" data-js-tooltip-hover="target"><a href="/plosone/article/metrics?id=10.1371/journal.pone.0137892#viewedHeader">PLOS views and downloads.</a></p>
+      </div>
+    </li>
+
+    <li id="almShares">
+      <%= s.numberFormat(shareCount, 0) %>
+      <div class="tools" data-js-tooltip-hover="trigger">
+        <a class="metric-term" href="/plosone/article/metrics?id=10.1371/journal.pone.0137892#discussedHeader">Share</a>
+        <p class="shares-tip" data-js-tooltip-hover="target"><a href="/plosone/article/metrics?id=10.1371/journal.pone.0137892#discussedHeader">Sum of Facebook, Twitter, Reddit and Wikipedia activity.</a></p>
+      </div>
+    </li>
+Open Access
+Peer-reviewed
+Research Article
+Profitability of Contrarian Strategies in the Chinese Stock Market
+Huai-Long Shi,
+Affiliations
+Department of Finance, School of Business, East China University of Science and Technology, Shanghai 200237, China, 
+    Research Center for Econophysics, East China University of Science and Technology, Shanghai 300237, China
+⨯
+Zhi-Qiang Jiang,
+Affiliations
+Department of Finance, School of Business, East China University of Science and Technology, Shanghai 200237, China, 
+    Research Center for Econophysics, East China University of Science and Technology, Shanghai 300237, China
+⨯
+Wei-Xing Zhou
+* E-mail:
+wxzhou@ecust.edu.cn
+Affiliations
+Department of Finance, School of Business, East China University of Science and Technology, Shanghai 200237, China, 
+    Research Center for Econophysics, East China University of Science and Technology, Shanghai 300237, China, 
+    Department of Mathematics, School of Science, East China University of Science and Technology, Shanghai 300237, China
+⨯
+Profitability of Contrarian Strategies in the Chinese Stock Market
+Huai-Long Shi,
+Zhi-Qiang Jiang,
+Wei-Xing Zhou
+x
+Published: September 14, 2015
+https://doi.org/10.1371/journal.pone.0137892
+Article
+Authors
+Metrics
+Comments
+Media Coverage
+Reader Comments
+Figures
+<div id="figure-lightbox" class="reveal-modal full" data-reveal aria-hidden="true"
+       role="dialog">
+    <div class="lb-header">
+      <h1 id="lb-title"><%= articleTitle %></h1>
+
+      <div id="lb-authors">
+            <span>Huai-Long Shi</span>
+            <span>Zhi-Qiang Jiang</span>
+            <span>Wei-Xing Zhou</span>
+      </div>
+
+      <div class="lb-close" title="close">&nbsp;</div>
+    </div>
+    <div class="img-container">
+      <div class="loader"> <i class="fa-spinner"></i> </div>
+      <img class="main-lightbox-image" src=""/>
+      <aside id="figures-list">
+        <% figureList.each(function (ix, figure) { %>
+        <div class="change-img" data-doi="<%= figure.getAttribute('data-doi') %>">
+          <img class="aside-figure" src="/plosone/article/figure/image?size=inline&id=<%= figure.getAttribute('data-doi') %>" />
+        </div>
+        <% }) %>
+        <div class="dummy-figure">
+        </div>
+      </aside>
+    </div>
+    <div id="lightbox-footer">
+
+      <div id="btns-container" class="lightbox-row <% if(figureList.length <= 1) { print('one-figure-only') } %>">
+        <div class="fig-btns-container reset-zoom-wrapper left">
+          <span class="fig-btn reset-zoom-btn">Reset zoom</span>
+        </div>
+        <div class="zoom-slider-container">
+          <div class="range-slider-container">
+            <span id="lb-zoom-min"></span>
+            <div class="range-slider round" data-slider data-options="start: 20; end: 200; initial: 20;">
+              <span class="range-slider-handle" role="slider" tabindex="0"></span>
+              <span class="range-slider-active-segment"></span>
+              <input type="hidden">
+            </div>
+            <span id="lb-zoom-max"></span>
+          </div>
+        </div>
+        <% if(figureList.length > 1) { %>
+        <div class="fig-btns-container">
+          <span class="fig-btn all-fig-btn"><i class="icon icon-all"></i> All Figures</span>
+          <span class="fig-btn next-fig-btn"><i class="icon icon-next"></i> Next</span>
+          <span class="fig-btn prev-fig-btn"><i class="icon icon-prev"></i> Previous</span>
+        </div>
+        <% } %>
+      </div>
+      <div id="image-context">
+      </div>
+    </div>
+  </div>
+<div class="footer-text">
+    <div id="figure-description-wrapper">
+      <div id="view-more-wrapper" style="<% descriptionExpanded? print('display:none;') : '' %>">
+        <span id="figure-title"><%= title %></span>
+        <p id="figure-description">
+          <%= description %>&nbsp;&nbsp;
+        </p>
+        <span id="view-more">show more<i class="icon-arrow-right"></i></span>
+
+      </div>
+      <div id="view-less-wrapper" style="<% descriptionExpanded? print('display:inline-block;') : '' %>" >
+        <span id="figure-title"><%= title %></span>
+        <p id="full-figure-description">
+          <%= description %>&nbsp;&nbsp;
+          <span id="view-less">show less<i class="icon-arrow-left"></i></span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="show-context-container">
+    <a class="btn show-context" href="<%= showInContext(strippedDoi) %>">Show in Context</a>
+  </div>
+  <div id="download-buttons">
+    <h3>Download:</h3>
+    <div class="item">
+      <a href="/plosone/article/figure/image?size=original&download=&id=<%= doi %>" title="original image">
+        <span class="download-btn">TIFF</span>
+      </a>
+      <span class="file-size"><%= fileSizes.original %></span>
+    </div>
+    <div class="item">
+      <a href="/plosone/article/figure/image?size=large&download=&id=<%= doi %>" title="large image">
+        <span class="download-btn">PNG</span>
+      </a>
+      <span class="file-size"><%= fileSizes.large %></span>
+    </div>
+
+  </div>
+Figures
+Abstract
+This paper reexamines the profitability of loser, winner and contrarian portfolios in the Chinese stock market using monthly data of all stocks traded on the Shanghai Stock Exchange and Shenzhen Stock Exchange covering the period from January 1997 to December 2012. We find evidence of short-term and long-term contrarian profitability in the whole sample period when the estimation and holding horizons are 1 month or longer than 12 months and the annualized return of contrarian portfolios increases with the estimation and holding horizons. We perform subperiod analysis and find that the long-term contrarian effect is significant in both bullish and bearish states, while the short-term contrarian effect disappears in bullish states. We compare the performance of contrarian portfolios based on different grouping manners in the estimation period and unveil that decile grouping outperforms quintile grouping and tertile grouping, which is more evident and robust in the long run. Generally, loser portfolios and winner portfolios have positive returns and loser portfolios perform much better than winner portfolios. Both loser and winner portfolios in bullish states perform better than those in the whole sample period. In contrast, loser and winner portfolios have smaller returns in bearish states, in which loser portfolio returns are significant only in the long term and winner portfolio returns become insignificant. These results are robust to the one-month skipping between the estimation and holding periods and for the two stock exchanges. Our findings show that the Chinese stock market is not efficient in the weak form. These findings also have obvious practical implications for financial practitioners.
+Citation:
+Shi H-L, Jiang Z-Q, Zhou W-X (2015) Profitability of Contrarian Strategies in the Chinese Stock Market. PLoS ONE 10(9):
+           e0137892.
+        
+        https://doi.org/10.1371/journal.pone.0137892
+Editor:
+Alejandro Raul Hernandez Montoya, 
+Universidad Veracruzana, MEXICO
+Received:
+May 2, 2015;
+Accepted:
+August 24, 2015;
+Published:
+September 14, 2015
+Copyright:
+© 2015 Shi et al. This is an open access article distributed under the terms of the
+Creative Commons Attribution License
+, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited
+Data Availability:
+Data used in this study are owned by RESSET. Access to the data can be obtained by sending a request to
+resset@resset.cn
+and paying the fee for data access.
+Funding:
+This work was supported by National Natural Science Foundation of China under grant No. 71131007 (WXZ) (
+http://www.nsfc.gov.cn/
+), Shanghai “Chen Guang” Project under grant No. 2012CG34 (ZQJ) (
+http://www.shmec.gov.cn/web/xxgk/rows_list.php?node_code = 41212
+), and Fundamental Research Funds for the Central Universities (WXZ ZQJ). The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
+Competing interests:
+The authors have declared that no competing interests exist.
+Introduction
+The Efficient Markets Hypothesis is a cornerstone of modern finance [
+1
+,
+2
+]. However, there is accumulating evidence for the presence of market anomalies, such as the momentum effect and the contrarian effect. The momentum effect describes the empirically observed tendency for rising asset prices to rise further and falling prices to keep falling, while the contrarian effect describes the price reversal phenomenon stating that stocks that perform the best (worst) in the past tend to reverse to perform well (poorly) over the subsequent periods. The momentum and contrarian effects have attracted wide attention in the academic community and in the financial industry as well in the past two decades.
+Jegadeesh and Iitman conduct the first research on the momentum effect [
+3
+]. By setting 16 combinations of different estimation and holding horizons, investors would get abnormal returns in the holding period through purchasing the best performing stock (winner) portfolio and selling the worst performing stock (loser) portfolio in the estimation period. They find that 15 out of the 16 arbitrage portfolios yield statistically significant returns in the next 3 to 12 months, which also confirms the existence of the intermediate-term momentum effect. The research on the contrarian effect was initially conducted in Ref. [
+4
+]. They use monthly data of hundreds of individual stocks listed on the New York Stock Exchange from 1926 to 1982, and construct the winner portfolio of 35 best performed stocks in the past 3 years and the loser portfolio of 35 worst performed stocks in the past 3 years. They find empirical evidence that in the next three years, the loser portfolio performs better than the winner portfolio with a 25% higher average cumulative return, which indicates the existence of a long-term contrarian effect.
+Early investigations of momentum and contrarian effects focused on the US market. These two anomalies have also been found in other markets later. Rouwenhorst investigates 12 European stock markets from 1980 to 1995 and reports that the winner portfolio results in an average monthly return 1% higher than the loser portfolio [
+5
+]. Chan et al. [
+6
+] and Chou et al. [
+7
+] find the short-horizon contrarian effect in the Japanese market. Baytas and Cakici report the presence of a long-term contrarian effect in seven non-US markets [
+8
+]. Hameed and Ting find the price reversal in the Malaysian market [
+9
+]. Kang et al. reveal that there was a short-term contrarian effect and an intermediate-term momentum effect in the Chinese market [
+10
+]. Naughton et al. also find the momentum effect in China [
+11
+]. Additionally, the momentum and contrarian effects have been discovered in the markets of different financial products. Grinblatt et al. utilize the data of 155 mutual fund companies from 1975 to 1984 and find that about 77% mutual funds that applied momentum strategy gained statistically significant higher returns than the rest [
+12
+]. Asness et al. investigate the correlation between the value and momentum effects in international markets, and discover a universal momentum effect in different regions and different asset classes [
+13
+]. The research in Ref. [
+14
+] draws similar conclusions.
+The original momentum and contrarian effects were based on cross-sectional prices or returns of assets, also called “price momentum” [
+3
+,
+7
+,
+10
+]. More and more kinds of momentum or contrarian effects were explored in a body of further studies about market anomalies, which in turn partially explained the presence of momentum and contrarian effects. On the basis of price momentum, various factors containing firm-specific information were taken into consideration. Investors can construct zero-cost arbitrage portfolios in terms of more information and get higher profits. These factors include firm capitalization [
+3
+,
+5
+], stock price [
+15
+,
+16
+], book-to-market ratio [
+17
+], trading volume [
+11
+,
+18
+], and so on. Moreover, the assets could be divided into portfolios with different styles according to these firm-specific information factors and the momentum or contrarian effect about style portfolio (style investing) also attracted wide attention as well [
+19
+,
+20
+]. Studies on specific industrial sectors unveil that the momentum and contrarian effects can obtain much more profits in industrial sectors [
+21
+,
+22
+]. Note that the results about the momentum and contrarian effects vary with changing market states [
+23
+] and seasonality [
+24
+]. There are also studies on individual stocks and stock market indexes [
+25
+], which is beyond the scope of this work.
+With the increasing importance of China in the world economy, more and more related researches have been carried out on the Chinese stock market. It has been shown that the Chinese stock market and the US stock market are uncorrelated [
+26
+] and even negatively correlated in some periods [
+10
+]. In early 1990s, two stock exchanges, the Shanghai Stock Exchange (SHSE) and the Shenzhen Stock Exchange (SZSE), were established in China. Compared with other mature financial markets, the data size of the Chinese market is relatively smaller, which may lead to imprecise results. The trading mechanisms of the Chinese market differ from other markets and keep self-improving. In the Chinese market, the majority of investors are retail investors, causing larger irrational and speculative behaviors. These situations may contribute differently to some anomaly phenomena. It is not surprising that studies about the momentum and contrarian effects in the Chinese stock market report mixed results. The conclusions of momentum and contrarian effects are often associated with the length of the estimation and holding periods and the sample periods under investigation. In general, the horizons can be divided into short term (3 months or less), intermediate term (3 to 12 months) and long term (more than 12 months).
+Most studies report that there is a long-term contrarian effect in the Chinese stock market. Using monthly data of 53 individual stocks listed on the SHSE and the SZSE from January 1993 to December 2000, Wang and Zhao discover a statistically significant contrarian effect with the estimation period ranging from 1 to 3 years and the holding period from 1 to 5 years [
+27
+]. Li and Li investigate A-shares on the SHSE and the SZSE from January 1996 to December 2002 and reveal that the market exhibits a contrarian effect in horizons more than 1 year [
+28
+]. Using monthly data of A-shares traded on the SHSE and the SZSE from January 1995 to December 2002, Luo and Wang also draw the similar conclusion [
+29
+]. Similar results can be found in later studies [
+30
+–
+37
+].
+In the short term and intermediate term, the conclusions are mixed. For example, Kang et al. use the data of individual stocks from 1993 to 2000 and find the existence of a short-term (1, 2, 4, 8, and 12 weeks) contrarian effect and a statistically significant momentum effect in the intermediate term (12, 16, 20, and 26 weeks) [
+10
+]. Based on A-share data in the SHSE and the SZSE from January 1995 to December 2001, Zhu et al. verify the presence of a significant momentum effect with both estimation and holding periods less than 4 weeks [
+38
+]. Zhu et al. find a statistically significant contrarian effect with the estimation and holding periods less than 5 days [
+39
+]. Liu and Qin use monthly data of constituent stocks of the SHSE 180 Index from July 2002 to September 2005 and report the presence of a momentum effect with the horizons less than 12 months [
+40
+]. Pan et al. find the existence of a momentum effect in weekly returns and a contrarian effect in monthly returns [
+37
+,
+41
+]. There are also studies finding no significant momentum or contrarian effects in the short term or in the intermediate term [
+27
+,
+31
+,
+35
+].
+The different conclusions in the above-mentioned studies can be attributed to the following factors. (1) Different data samples. Some studies use part of the individual stocks listed on the SHSE and the SZSE [
+27
+], while others use data of all A-shares [
+34
+,
+35
+,
+38
+]. (2) Different sample periods. For example, Wang and Zhao [
+27
+] and Kang et al. [
+10
+] use the sample period from 1993 to 2000, Zhu et al. [
+39
+] study the period from 1996 to 2001, Lu and Zou [
+34
+] investigate the period from 1998 to 2005, and Naughton et al. [
+11
+] consider the period from 1995 to 2005. (3) Different sampling frequencies. Some researchers use monthly data [
+3
+,
+11
+], while some others adopt daily and weekly data [
+10
+,
+38
+,
+39
+,
+41
+]. (4) Other factors. It is found that the bid-ask spread, non-synchronous trading as well as the lack of liquidity would enlarge the momentum and contrarian effects [
+42
+–
+44
+]. To avoid these, the common approach is to skip certain time intervals between the estimation period and the holding period [
+3
+,
+38
+]. Studies that do not adopt this interval-skipping approach may lead to different results [
+27
+,
+34
+].
+With more data available, it is worth to re-examine the contrarian and momentum effects in the Chinese stock market. We use monthly return data of all A-shares listed on the SHSE and the SZSE from January 1997 to December 2012 to construct the winner and loser portfolios, forming zero-cost arbitrage portfolios. In the estimation period for stock ranking, one needs to determine the number of stock groups. Different studies on the momentum and contrarian effects have adopted different grouping ways, including decile grouping, quintile grouping and tertile grouping [
+3
+,
+10
+,
+13
+,
+27
+,
+41
+]. For various markets, different grouping ways may lead to significantly different results. This paper will take into account these three grouping ways for comparison. Most of the previous studies about the Chinese market take the A-share market as a whole. Since the features of A-shares listed on these two stock exchanges are not similar, we investigate the momentum and contrarian effects in the SHSE and the SZSE independently. For instance, the A-share stocks listed on the SHSE generally have higher market capitalization compared with those in the SZSE. However, empirical analysis in this study fails to verify any significant differences between the results of the two exchanges.
+Materials and Methods
+Data
+There are two stock exchanges—Shanghai Stock Exchange (SHSE) and Shenzhen Stock Exchange (SZSE)—in mainland China, and the Chinese stock market contains an A-share market and a B-share market. Most stocks are traded only in the A-share market, while a small proportion of stocks are traded in both markets. At the end of 2012, there are 944 A-share stocks and 54 B-share stocks in the SHSE and 1528 A-share stocks and 53 B-share stocks in the SZSE (
+Table 1
+). Different from A-share stocks, B-shares were not accessible to domestic investors until February 2001, and the B-share stock market has lower liquidity and market value. As described in
+Table 1
+, by the end of 2012, the B-share stocks accounted for 5.41% and 3.35% in the SHSE and the SZSE, the market value of B-share stocks only accounted for 0.5% and 1.11% in the SHSE and the SZSE, the trading value of B-share stocks took up 0.25% in the SHSE and 0.30% in the SZSE, and the A-share market had larger number of investors and higher turnover rate. Therefore, our analysis is carried out upon the Chinese A-share stock market, which can be representative of the Chinese domestic investment environment. Because the average market capitalizations of SHSE stocks (16.73 billion CNY per stock) and SZSE stocks (4.64 billion CNY per stock) are significantly different, we shall investigate separately the A-share stocks in the two exchanges for comparison.
+Download:
+PNG
+larger image
+TIFF
+original image
+Table 1.
+Basic information about Chinese stock market by the end of 2012.
+The data are retrieved from the annual reports released by the SHSE and the SZSE
+https://doi.org/10.1371/journal.pone.0137892.t001
+We use monthly data of all A-share stocks listed on the SHSE and the SZSE retrieved from the RESSET database (
+http://www.resset.cn
+). The data mainly contain the monthly adjusted returns of individual stocks, covering the period from January 1991 to December 2012. Very often, stock price jumps occur during the IPO month, which is attributed to the price determination of China Securities Regulatory Commission (CSRC), and it results in abnormal first-month returns for individual stocks. Therefore, the first-month return data of individual stocks are excluded from our analysis. During the early years after the establishment of the two exchanges, only a few stocks were available to investors, as shown in
+Fig 1
+. There were less than 200 stocks listed on each exchange by the end of 1995 and the number of stocks increased steadily. The mature price limit trading rules became effective since December 1996, requiring that the maximum daily price fluctuation with respect to the last closing price is ±10% for common stocks. Although there were also other price limit trading rules in the Chinese stock market for some periods before then, the implementation time periods were short. Combining these factors, we exclude the data before 1997 and consider the period from January 1997 to December 2012 in the empirical analysis.
+Download:
+PNG
+larger image
+TIFF
+original image
+Fig 1.
+The evolution of stock amounts on the SHSE and the SZSE.
+https://doi.org/10.1371/journal.pone.0137892.g001
+Method
+Like most studies about the cross-sectional momentum or contrarian effect [
+11
+,
+41
+], we follow the procedure proposed by [
+3
+] to construct
+J
+−
+K
+portfolios. For a given “current” month
+t
+= 0, all the stocks are sorted according to their returns in the past
+J
+months from
+t
+= −
+J
+to
+t
+= 0 (
+Fig 2
+). We divide the stocks into several groups. For comparison, decile grouping, quintile grouping and tertile grouping are adopted. The group of stocks with the worst performance in the estimation is called loser portfolio LOS(
+J
+,
+K
+) and the group with best performance is called winner portfolio WIN(
+J
+,
+K
+). One then adopts the contrarian strategy by buying the loser portfolio and selling the winner portfolio. The contrarian portfolio CON(
+J
+,
+K
+) is held for
+K
+months. We examine the equal-weighted average returns per annum of the loser portfolio, the winner portfolio, and the contrarian portfolio during the holding period, denoted by
+L
+J
+,
+K
+,
+W
+J
+,
+K
+and
+C
+J
+,
+K
+respectively. The contrarian effect is verified if the time series of returns for contrarian portfolios turn out to be statistically positive. Conversely, there would be the momentum effect.
+Download:
+PNG
+larger image
+TIFF
+original image
+Fig 2.
+The estimation and holding periods.
+The estimation period is
+J
+months and the holding period is
+K
+months.
+https://doi.org/10.1371/journal.pone.0137892.g002
+Empirical results
+The case of identical estimation and holding horizons (
+J
+=
+K
+)
+We study the performance of the three portfolios in the whole period (1997–2012) with same estimation period and holding period for the three ranking groupings. The periods range from one month to four years:
+J
+=
+K
+∈ {
+J
+,
+K
+∣1,6,12,18,24,30,36,42,48}.
+Table 2
+reports the equal-weighted average annual returns for the loser, winner and contrarian portfolios by taking a long position of each portfolio in the holding period. Comparing the two panels, we find that the results are qualitatively similar with minor differences.
+Download:
+PNG
+larger image
+TIFF
+original image
+Table 2.
+The annualized returns of the loser, winner, and contrarian portfolios formed based on decile grouping with
+J
+=
+K
+for the whole sample period 1997–2012.
+https://doi.org/10.1371/journal.pone.0137892.t002
+The returns of all the portfolios are positive. This finding is not surprising because the Chinese market has an overall rise. The returns of the loser portfolios are larger than those of the winner portfolios, indicating the presence of investor overreaction [
+4
+,
+45
+,
+46
+]. The performance of the contrarian strategy is worse than the simple strategy of buying loser portfolio. The positive returns of winner portfolios indicate that the contrarian strategy profits mainly come from the loser portfolio.
+Nearly all the strategy portfolios could gain the statistically significant positive return when the holding horizons are beyond about 18 months or equal to 1 month. When the horizon is 6 or 12 months, there is no significant evidence for the presence of the contrarian effect or the momentum effect. The finding of long-term contrarian effect is consistent with most literature about the Chinese stock market. The short-term contrarian effect may be due to no time gap between the estimation and holding period, which could exaggerate the contrarian effect because of some measurement errors. We will discuss further in the rest of the paper.
+A close scrutiny unveils that the return
+C
+J
+,
+K
+of contrarian portfolios decreases at first and then rises up with the horizon
+J
+or
+K
+, which can be characterized as a U-shape relation. For example, on the basis of decile grouping for SHSE stocks, the CON(1,1) portfolio produces an annual return of 12.8%, the return of the CON(6,6) portfolio decreases to 1.1%, and the profit of the contrarian portfolios keep rising to 19.7% for CON(48,48) with increasing horizon
+J
+. It is worthy noting that [
+7
+] report a similar and more general U-shape relationship between the returns and the horizons when investigating the contrarian effect in the Japanese market.
+Table 2
+also shows the impact of different grouping methods. The annualized return of loser portfolios on both exchanges decreases with the number of groups from tertile to decile for small
+J
+and increases for long horizons
+J
+. For the winner portfolios on both exchanges, the annualized return is smaller when there are more groups. Combining these observations, the trend of returns of the contrarian portfolios on short horizons is mixed; however, on long horizons, the return increases with the number of groups.
+The case of varying
+J
+and
+K
+We now perform more comprehensive analysis with varying
+J
+and
+K
+for decile, quintile and tertile groupings. The results of decile grouping are presented in
+Table 3
+for SHSE stocks and in
+Table 4
+for SZSE stocks. The values of estimation horizons
+J
+and holding horizons
+K
+range from one month to four years. Panels A, B and C report the results for loser portfolios, winner portfolios, and contrarian portfolios, respectively. The results based on quintile grouping and tertile grouping for the two exchanges are similar to the case of decile grouping and shown in
+S1 Table
+for quintile grouping of SHSE stocks,
+S2 Table
+for quintile grouping of SZSE stocks,
+S3 Table
+for tertile grouping of SHSE stocks, and
+S4 Table
+for tertile grouping of SZSE stocks.
+Download:
+PNG
+larger image
+TIFF
+original image
+Table 3.
+The annualized returns of the loser, winner, and contrarian portfolios on the SHSE formed based on decile grouping with varying
+J
+and
+K
+for the whole sample period 1997–2012.
+https://doi.org/10.1371/journal.pone.0137892.t003
+Download:
+PNG
+larger image
+TIFF
+original image
+Table 4.
+The annualized returns of the loser, winner, and contrarian portfolios on the SZSE formed based on decile grouping with varying
+J
+and
+K
+for the whole sample period 1997–2012.
+https://doi.org/10.1371/journal.pone.0137892.t004
+According to
+Table 3
+and
+Table 4
+, the most intriguing feature is that all annualized returns are positive. Panel A illustrates that, for both exchanges, all the loser portfolios result in positive returns across all estimation and holding horizons, and all the returns are statistically significant at the 5% level except for a few portfolios at small horizons. The profits of winner portfolios on both exchanges, as shown in panel B, are also positive for all combinations of
+J
+and
+K
+, which suggests that the profits of contrarian portfolios are mainly contributed by the loser portfolios. The significance of results for winner portfolios differ by the holding horizons
+K
+. No returns of the winner portfolios are significant at the 5% level when
+K
+≤ 6, while all returns are significantly positive when
+K
+≥ 30. The contrarian portfolios are formed by selling the winner portfolios and buying the loser portfolios. Panel C shows that all the contrarian portfolios yield positive returns, which implies the absence of the momentum effect on both exchanges during the whole sample period. All the returns are significantly positive when the holding horizon
+K
+= 1, except for CON(12,1) on the SHSE, which indicates the presence of the short-term contrarian effect, consistent with the most previous literatures such as [
+10
+] and [
+34
+] on shorter sample periods. When the estimation horizon
+J
+is larger than one year, most returns are significantly positive despite of the holding periods, suggesting the presence of both short-term and long-term contrarian effects, which is again consistent with other works such as [
+27
+,
+28
+,
+47
+], and [
+35
+] for shorter sample periods.
+Table 3
+and
+Table 4
+show that the average annualized returns depend on the values of
+J
+and
+K
+. To better explore this dependence, we illustrate the contours of returns based on decile grouping in
+Fig 3
+. We also show the results in
+S1 Fig
+for quintile grouping and in
+S2 Fig
+for tertile grouping. The values of
+J
+and
+K
+are 1 month and multiples of 3 months up to 4 years. Similar results are obtained for quintile grouping and tertile grouping. The top panel is for the SHSE stocks and the bottom panel is for the SZSE stocks. The corresponding contour patterns are roughly similar for the same type of portfolio. However, different types of portfolio exhibit very different contour patterns.
+Download:
+PNG
+larger image
+TIFF
+original image
+Fig 3.
+Contour plots of the average annualized returns based on decile grouping with varying estimation and holding horizons.
+The left panel is for loser portfolios, the middle panel is for winner portfolios, and the right panel is for contrarian portfolios. The top panel is for the SHSE stocks and the bottom is for the SZSE stocks.
+https://doi.org/10.1371/journal.pone.0137892.g003
+For the loser portfolios, the return
+L
+J
+,
+K
+increases roughly with
+J
+and
+K
+. A closer scrutiny unveils more details. There is a valley around
+J
+= 9 and
+K
+= 6, which are the portfolios with the worst performance. The best performance is achieved if one ranks the stocks according to their profits in the past four years and holds the loser portfolio for two years (SZSE) or longer (SHSE). The highest annualized return is 36.2% for the LOS(48,36) portfolio on the SHSE and 36.9% for the LOS(48,24) and LOS(42,30) portfolios on the SZSE.
+When the holding horizon
+K
+is short, say no longer than 1 year, the annualized returns of the winner portfolios are almost independent of the holding horizon
+J
+. When the holding horizon is longer than 1 year, the winner returns decrease with increasing estimation horizon. When the estimation horizon
+J
+is fixed, the winner portfolio return increases first and decreases with the holding horizon
+K
+. When the estimation horizon is very short (say,
+J
+= 1) and the holding horizon is around 2 years, the winner portfolio return is the highest.
+The annualized returns of contrarian portfolios depend more on the estimation horizon
+J
+than on the holding horizon
+K
+. A evident trend is that
+C
+J
+,
+K
+increases with
+J
+for fixed
+K
+. For fixed
+J
+, the return
+C
+J
+,
+K
+decreases first and then increases, showing a V-shape pattern. Hence, the best performance is achieved for portfolios formed on long estimation horizons and held for very short (1–3 months) and especially for very long (3–4 years) horizons. Under these conditions, the profits are very significant. For instance, the CON(48,1) portfolio provide an average annualized return of 20.9% for the SHSE stocks and 21.1% for the SZSE stocks.
+The relative profits of contrarian portfolios with different ranking groups
+In the literature, three grouping methods are adopted in the formation of portfolios, including decile grouping [
+3
+,
+27
+], quintile grouping [
+10
+,
+41
+], and tertile grouping [
+13
+]. For the Chinese stock market, the results are qualitatively similar for different grouping methods. We now investigate the relative performances of these grouping methods. For each of the three grouping methods, we form winner, loser and contrarian portfolios based on different combinations of estimation and holding horizons with
+J
+and
+K
+belonging to {1,6,12,18,24,30,36,42,48}. For each portfolio, say WIN(
+J
+,
+K
+), we obtain the return time series
+W
+J
+,
+K
+,
+g
+(
+t
+) for each grouping
+g
+and determine the averages of return differences between different
+g
+’s, ⟨
+W
+J
+,
+K
+,
+g
+1
+(
+t
+)−
+W
+J
+,
+K
+,
+g
+2
+(
+t
+)⟩
+t
+. The resulting average return differences and the associated t-statistics of the winner, loser and contrarian portfolios for the two exchanges are presented in
+S5
+–
+S10
+Tables.
+Table 5
+shows the results for
+J
+=
+K
+.
+Download:
+PNG
+larger image
+TIFF
+original image
+Table 5.
+Relative performance of different grouping methods based on the same strategy of portfolios with
+J
+=
+K
+for the whole sample period 1997–2012.
+https://doi.org/10.1371/journal.pone.0137892.t005
+Panel A of
+Table 5
+reports the average return differences for the loser portfolios with
+J
+=
+K
+in the two exchanges. Most of the return differences are negative for short horizons and positive for long horizons. For short horizons, some of return differences are significantly negative while other are insignificant. For long horizons, especially when
+J
+=
+K
+≥ 30 for SHSE stocks and
+J
+=
+K
+≥ 24 for SZSE stocks, all return differences are significantly positive. This panel suggests that, if one buys loser portfolios, she should adopt long horizons and use the decile grouping to form her portfolios to obtain high and robust profits. These findings also hold when the estimation horizon and the holding horizon are not fixed identical.
+Panel B of
+Table 5
+reports the average return differences for the winner portfolios with
+J
+=
+K
+in the two exchanges. The most significant feature is that all return differences are negative. The negative return difference is more likely to be significant if the horizons are longer. When
+J
+is not necessary equal to
+K
+, the results have only slight differences, as shown in
+S7 Table
+and
+S8 Table
+. For the comparison of quintile grouping and tertile grouping (
+G
+5
+−
+G
+3
+), all 81 combinations of
+J
+and
+K
+have negative return differences for the SHSE stocks, and only 3 out of the 81 combinations (WIN(12,1), WIN(30,1) and WIN(42,1)) have positive return differences for the SZSE stocks which are however not significant. For the comparison of decile grouping and quintile grouping (
+G
+10
+−
+G
+5
+), only 2 combinations (WIN(1,42) and WIN(1,48)) have positive return differences for the SHSE stocks which are insignificant, and there are 14 combinations have positive return differences for the SZSE stocks with one (WIN(42,6)) being significant at the 5% level. For the comparison of decile grouping and tertile grouping (
+G
+10
+−
+G
+3
+), all 81 combinations have negative return differences for the SHSE stocks, and there are 3 combinations have positive return differences for the SZSE stocks which are not significant at the 5% level. Therefore, if one adopts the strategy to buy winner portfolios, it is better to use tertile grouping and long estimation and holding horizons.
+Panel C of
+Table 5
+reports the average return differences for the contrarian portfolios with
+J
+=
+K
+in the two exchanges. There are positive and negative return differences. All negative return differences are not significant at the 5% level and the corresponding horizons are not longer than one year. For horizons longer than one year, all the return differences are positive and most are significant at the 1% level. If we do not fix
+J
+=
+K
+, the results are similar. Therefore, if an investor wants to adopt the contrarian strategy, she should use decile grouping and long-term lagged returns to rank stocks to construct her portfolio and hold it for a long period.
+The profits of contrarian portfolios in different exchanges
+As mentioned in Materials and Methods, the SHSE and the SZSE have different features, such as market value per stock, which may lead to different results in the two exchanges. However, the results resented so far are qualitatively similar for both exchanges. Now we intend to investigate quantitatively the contrarian return differences between the SHSE and the SZSE. We first obtain the time series of returns difference for each contrarian portfolio with the stocks listed on different exchanges, and then calculate their averages. The results are reported in the
+Table 6
+.
+Download:
+PNG
+larger image
+TIFF
+original image
+Table 6.
+Comparison of the performance of contrarian portfolios in the two exchanges for the whole sample period 1997–2012.
+https://doi.org/10.1371/journal.pone.0137892.t006
+Panel A shows the results for contrarian portfolios based on decile grouping. There are three contrarian portfolios (CON(12,30), CON(18,30) and CON(24,30)) having negative return differences that are significant at the 5% level and four portfolios (CON(30,48), CON(36,48), CON(42,48), CON(48,48)) with significant positive return differences (three at the 1% level and one at the 5% level). The remaining 74 portfolios do not exhibit significant differences between the two exchanges.
+Panel B presents the results for contrarian portfolios based on quintile grouping. There are 17 contrarian portfolios showing significant differences between the two exchanges, in which 4 are negative and 13 are positive. The remaining 64 portfolios do not exhibit significant differences between the two exchanges.
+Panel C depicts the results for contrarian portfolios based on tertile grouping. There are 26 contrarian portfolios that have significant differences between the two exchanges in which 3 are negative and 23 are positive, while the other 55 portfolios do not exhibit significant differences. The portfolios with positive return differences between the two exchanges concentrate mainly at the right-bottom corner of the panel, showing that contrarian portfolios with long-term estimation and holding horizons have significantly different average annualized returns on the two exchanges and they are more profitable on the SHSE that have large-cap stocks on average.
+Robustness check
+In this section, two approaches are adopted to check the robustness of the findings. First, we perform subperiod analysis through dividing the whole sample period into two subperiods delimited by the onset of the largest and most infamous crash in the history of China’s stock market. One subperiod is from January 1997 to September 2007 and the other is from October 2007 to December 2012. Second, the case of skipping one month between the estimation and holding periods is considered to avoid possible measurement errors.
+Subperiod analysis
+Fig 4
+illustrates the evolution of daily closing prices of the Shanghai Stock Exchange Composite Index. The SHSE composite index was merely 99.98 on 19 December 1990, which is the first day when SHSE took into operation. By the end of 1996, the index reached 917.02, about ten times of the initial index. The market then experienced bulls and bears and kept climbing to the peak about 6092.06 on 16 October 2007. The historical intraday high was 6124.04 on the same day. Afterwards, the index declined sharply, and entered the long-term adjustment stage. In 2009, the market experienced a bubble [
+48
+]. However, the index is far lower than the historical high. At the end of 2012, the index was 2269.13.
+Download:
+PNG
+larger image
+TIFF
+original image
+Fig 4.
+Evolution of the Shanghai Stock Exchange Composite Index from December 1990 to December 2012.
+https://doi.org/10.1371/journal.pone.0137892.g004
+It is thus necessary to check the robustness of our findings during subperiods. Subperiod analysis is frequently-used in literatures [
+3
+,
+7
+,
+41
+]. We divide the whole sample period (1997–2012) into two subperiods, January 1997 to September 2007 and October 2007 to December 2012. The former period represents a long-term rising stage of the market, while the latter one represents an adjustment stage. The results are presented in
+Table 7
+for the SHSE stocks and
+Table 8
+for SZSE stocks, in which all portfolios are formed with identical estimation and holding horizons, that is,
+J
+=
+K
+.
+Download:
+PNG
+larger image
+TIFF
+original image
+Table 7.
+The annualized returns of the loser, winner and contrarian portfolios formed based on
+J
+-month lagged returns and held for
+K
+months with
+J
+=
+K
+for SHSE stocks in two subperiods.
+https://doi.org/10.1371/journal.pone.0137892.t007
+Download:
+PNG
+larger image
+TIFF
+original image
+Table 8.
+The annualized returns of the loser, winner and contrarian portfolios formed based on
+J
+-month lagged returns and held for
+K
+months with
+J
+=
+K
+for SZSE stocks in two subperiods.
+https://doi.org/10.1371/journal.pone.0137892.t008
+For the loser portfolios in the first subperiod (Panel A of both tables), almost all annualized returns are significantly positive at the 5% level for the SHSE stocks except for two LOS(6,6) portfolios based on decile grouping and quintile grouping, while almost all annualized returns are significantly positive for the SZSE stocks. For the loser portfolios in the second subperiod (Panel B of both tables), the annualized returns are positive but not significant when
+J
+≤ 24 and significantly positive when
+J
+≥ 30 for the SHSE stocks, while the annualized returns for the SZSE stocks are significantly positive only when
+J
+≥ 24. A loser portfolio results in significantly higher profits in the first subperiod that is bullish on average. However, despite the market status, strategies of buying loser portfolios are unlikely to incur losses and are very likely to earn money. We also observe that loser portfolios have better performances if the horizons are longer. For the winner portfolios in the first subperiod, all the annualized returns are positive for both exchanges. Moreover, winner portfolios with
+K
+≥ 30 give significant positive returns at the 5% level and other portfolios with shorter horizons may have significant and insignificant positive returns. In contrast, although most annualized returns in the second subperiod are positive, no return is significantly positive nor negative. These observations have a simple intuitive explanation. When the market is bullish, loser portfolios will rebound to rise and winner portfolios will continue to rise. When the market is bearish, loser portfolios will reverse with a higher probability, while winner portfolios will bear pressure to continue rising.
+We now turn to the contrarian portfolios. In the first subperiod, the returns with
+J
+≥ 18 are significantly positive and that with
+J
+≤ 12 are insignificant for SHSE stocks, and the returns with
+J
+≥ 24 are significantly positive and those with
+J
+≤ 18 are insignificant for SZSE stocks. In addition, a given portfolio performs better in the SHSE than in the SZSE. We also find that contrarian portfolios based on more groups have higher annualized returns than portfolios based on less groups. For instance, the annualized return of CON(48,48) based on decile grouping is greater than that on tertile grouping by 0.102 on the SHSE and by 0.083 on the SZSE. In the second subperiod, almost all annualized returns are significantly positive, except for the two CON(18,18) portfolios based on decile grouping and quintile grouping on the SHSE and for CON(6,6) based on decile, quintile and tertile groupings on the SZSE. A given portfolio performs better in the SZSE than in the SHSE. Again, portfolios based on more groups result in higher returns. For instance, the annualized return of CON(48,48) based on decile grouping is greater than that on tertile grouping by 0.087 on the SHSE and by 0.157 on the SZSE. Hence, when an investor adopts contrarian strategies, it is better to invest in SHSE stocks during bullish states and in SZSE stocks during bearish periods.
+We also study the relationship between the returns of contrarian portfolios based on varying
+J
+and
+K
+in the two subperiods. The results are illustrated in
+S3 Fig
+for the first subperiod and in
+S4 Fig
+for the second subperiod. The main findings are qualitatively the same as in Tables
+7
+and
+8
+. The contour plots provide more information. It is evident that the returns of the cases based on three different grouping ways co-move positively with
+J
+. The dependence of the returns on the holding horizon
+K
+differ in different subperiods. Specifically, during the first subperiod, the relation between contrarian returns and
+K
+can be depicted as a U-shape, that is, the returns reduce at first and then increase with
+K
+. However, during the second subperiod, the relationship can be depicted as an L-shape, which suggests that the returns would decrease at first and then become steady with increasing
+K
+.
+Robustness to measurement
+We have observed significant short-term contrarian effect when
+J
+=
+K
+= 1 in the full period 1997–2012 and in the bearish subperiod 2007–2012, but not in the bullish subperiod 1997–2007. The short-term contrarian effect might be attributed to some factors such as bid-ask bounce and lagged reaction [
+42
+,
+49
+]. In order to avoid measurement errors caused by these factors, a common approach is to skip some time interval between the estimation period and the holding period [
+7
+,
+10
+]. We use one month as the skipping interval and perform the analysis on the whole sample period for loser, winner and contrarian portfolios with
+J
+=
+K
+. The results are reported in
+Table 9
+, which are compared with
+Table 2
+.
+Download:
+PNG
+larger image
+TIFF
+original image
+Table 9.
+The results for skipping one month between
+J
+and
+K
+for the whole sample period 1997–2012.
+https://doi.org/10.1371/journal.pone.0137892.t009
+For the loser portfolios on the SHSE (Panel A of
+Table 9
+), most of the returns reduce after the one-month skipping. The most remarkable reduction is happened for the LOS(6,6) portfolios (0.019 for decile grouping, 0.014 for quintile grouping and 0.012 for the tertile grouping). The reduction of returns for LOS(1,1) portfolios based on the quintile and tertile groupings is slightly lower. For other loser portfolios, the return reduction is minor. For the loser portfolios on the SZSE (Panel B of
+Table 9
+), we observe slightly different behaviors. After skipping one month, the returns of LOS(1,1) portfolios increase slightly and the returns of LOS(6,6) portfolios decrease mildly. For other loser portfolios, both increase and decrease in the annualized returns are observed; However, the degree of change is minor. Overall, skipping one month does not change the significance of the annualized returns of loser portfolios. For the winner portfolios, most of the annualized returns increase after skipping one month. When
+K
+≥ 12, the differences are ignorable. When
+J
+= 1 and
+J
+= 6, we observe a large increase. However, the returns are still insignificant.
+For the contrarian portfolios, the returns with
+J
+≥ 12 after skipping one month change slightly of order 0.001 and are thus not significant. However, the returns of CON(1,1) and CON(6,6) reduce remarkably. For instance, in the case of decile grouping for SHSE stocks, the average annual returns of CON(1,1) and CON(6,6) in
+Table 2
+are 0.128 and 0.011, while in the case of skipping one month, the average annual returns of CON(1,1) and CON(6,6) decrease to 0.108 and −0.022, respectively. Meanwhile, CON(1,1) still has statistically significant return, which indicates that there is no measurement errors. The reduction of contrarian returns is mainly due to the higher profits of winner portfolios after skipping one month. It is clear that the short-term contrarian effect still exists though the average returns of contrarian portfolios reduce. It is trivial that skipping one month will not impact the profitability of trading strategies on the long run so that the long-term contrarian effect also exist.
+It is also interesting to investigate the return differences of contrarian portfolios based on the three different grouping ways. In the short run, there is evidence showing that quintile grouping performs better than tertile grouping at the 5% significance level. However, no significant difference is observed between decile grouping and other two groupings. In the long run, decile grouping outperforms quintile grouping and quintile grouping outperforms tertile grouping. We also study the relationship between returns of the contrarian portfolios with varying
+J
+and
+K
+in the case of one-month skipping (
+S5 Fig
+). We find that, the returns of contrarian portfolios increase with the estimation horizon
+J
+. The patterns with respect to the holding horizon
+K
+are more complicated and similar to those for the original strategies without one-month skipping.
+Conclusion
+Following the seminal work of Jegadeesh and Titman [
+3
+], we investigate the performance of loser portfolios, winner portfolios and contrarian portfolios in the Chinese stock market. The analysis is performed on the monthly returns of all A-share stocks listed on the Shanghai Stock Exchange and the Shenzhen Stock Exchanges. The two samples of SHSE stocks and SZSE stocks cover the period from January 1997 to December 2012.
+We find the presence of the contrarian effect in both exchanges across short, intermediate and long horizons. The profits of portfolios depend on the estimation and holding horizons. Especially, longer estimation and holding horizons lead to more profitable contrarian portfolios. When adding one-month time interval between the estimation and holding periods, the results still suggest the existence of significant short-term and long-term contrarian effects even though the profits are decreasing substantially when
+J
+=
+K
+= 1. We also conduct subperiod analysis. The long-term contrarian effect is very robust to the subperiods analysis, while the results for short estimation and holding horizons vary with different market states. The short-term contrarian effect is more explicit when the market is in a bearish stage.
+Additionally, we study the impact of grouping ways on the performance of portfolios. Specifically, decile, quintile and tertile groupings are adopted. We find that the contrarian portfolios based on decile grouping are more profitable than those based on quintile and tertile groupings. This conclusion is more explicit when the estimation and holding horizons are longer than 12 months. These findings remain valid to the robustness checks based on subperiod analysis and one-month skipping.
+Supporting Information
+S1 Fig.
+Contour plots of the average annualized returns based on quintile grouping with varying estimation and holding horizons.
+https://doi.org/10.1371/journal.pone.0137892.s001
+(PDF)
+S2 Fig.
+Contour plots of the average annualized returns based on tertile grouping with varying estimation and holding horizons.
+https://doi.org/10.1371/journal.pone.0137892.s002
+(PDF)
+S3 Fig.
+Contour plots of the average annualized returns of contrarian portfolios in subperiod January 1997 to September 2007 with varying estimation and holding horizons.
+https://doi.org/10.1371/journal.pone.0137892.s003
+(PDF)
+S4 Fig.
+Contour plots of the average annualized returns of contrarian portfolios in subperiod October 2007 to December 2012 with varying estimation and holding horizons.
+https://doi.org/10.1371/journal.pone.0137892.s004
+(PDF)
+S5 Fig.
+Contour plots of the average annualized returns of contrarian portfolios with a one-month skipping between the estimation and holding periods.
+https://doi.org/10.1371/journal.pone.0137892.s005
+(PDF)
+S1 Table.
+The annualized returns of the loser, winner, and contrarian portfolios on the SHSE formed based on quintile grouping for the whole sample period 1997–2012.
+https://doi.org/10.1371/journal.pone.0137892.s006
+(PDF)
+S2 Table.
+The annualized returns of the loser, winner, and contrarian portfolios on the SZSE formed based on quintile grouping for the whole sample period 1997–2012.
+https://doi.org/10.1371/journal.pone.0137892.s007
+(PDF)
+S3 Table.
+The annualized returns of the loser, winner, and contrarian portfolios on the SHSE formed based on tertile grouping for the whole sample period 1997–2012.
+https://doi.org/10.1371/journal.pone.0137892.s008
+(PDF)
+S4 Table.
+The annualized returns of the loser, winner, and contrarian portfolios on the SZSE formed based on tertile grouping for the whole sample period 1997–2012.
+https://doi.org/10.1371/journal.pone.0137892.s009
+(PDF)
+S5 Table.
+The return difference of loser portfolios formed based on different grouping ways of the SHSE stocks.
+https://doi.org/10.1371/journal.pone.0137892.s010
+(PDF)
+S6 Table.
+The return difference of loser portfolios formed based on different grouping ways of the SZSE stocks.
+https://doi.org/10.1371/journal.pone.0137892.s011
+(PDF)
+S7 Table.
+The return difference of winner portfolios formed based on different grouping ways of the SHSE stocks.
+https://doi.org/10.1371/journal.pone.0137892.s012
+(PDF)
+S8 Table.
+The return difference of winner portfolios formed based on different grouping ways of the SHSE stocks.
+https://doi.org/10.1371/journal.pone.0137892.s013
+(PDF)
+S9 Table.
+The return difference of contrarian portfolios formed based on different grouping ways of the SHSE stocks.
+https://doi.org/10.1371/journal.pone.0137892.s014
+(PDF)
+S10 Table.
+The return difference of contrarian portfolios formed based on different grouping ways of the SHSE stocks.
+https://doi.org/10.1371/journal.pone.0137892.s015
+(PDF)
+Author Contributions
+Conceived and designed the experiments: WXZ. Performed the experiments: HLS. Analyzed the data: HLS ZQJ WXZ. Contributed reagents/materials/analysis tools: HLS ZQJ. Wrote the paper: HLS WXZ.
+References
+1.
+Fama EF. Efficient capital markets: A review of theory and empirical work. J Finance. 1970;25(2):383–423.
+View Article
+Google Scholar
+2.
+Fama EF. Efficient capital markets: II. J Finance. 1991;46(5):1575–1617.
+View Article
+Google Scholar
+3.
+Jegadeesh N, Titman S. Returns to buying winners and selling losers: Implications for stock market efficiency. J Finance. 1993;48(1):65–91.
+View Article
+Google Scholar
+4.
+De Bondt WFM, Thaler RH. Does the stock-market overreact? J Finance. 1985;40(3):793–805.
+View Article
+Google Scholar
+5.
+Rouwenhorst KG. International momentum strategies. J Finance. 1998;53(1):267–284.
+View Article
+Google Scholar
+6.
+Chan LK, Jegadeesh N, Lakonishok J. Momentum strategies. J Finance. 1996;51(5):1681–1713.
+View Article
+Google Scholar
+7.
+Chou PH, Wei KC, Chung H. Sources of contrarian profits in the Japanese stock market. J Emp Finance. 2007;14(3):261–286.
+View Article
+Google Scholar
+8.
+Baytas A, Cakici N. Do markets overreact: international evidence. J Bank Finance. 1999;23(7):1121–1144.
+View Article
+Google Scholar
+9.
+Hameed A, Ting S. Trading volume and short-horizon contrarian profits: Evidence from the Malaysian market. Pacific-Basin Finance J. 2000;8(1):67–84.
+View Article
+Google Scholar
+10.
+Kang J, Liu MH, Ni SXY. Contrarian and momentum strategies in the China stock market: 1993–2000. Pacific-Basin Finance J. 2002;10(3):243–265.
+View Article
+Google Scholar
+11.
+Naughton T, Truong C, Veeraraghavan M. Momentum strategies and stock returns: Chinese evidence. Pacific-Basin Finance J. 2008;16(4):476–492.
+View Article
+Google Scholar
+12.
+Grinblatt M, Titman S, Wermers R. Momentum investment strategies, portfolio performance, and herding: A study of mutual fund behavior. Amer Econ Rev. 1995;8(1):1088–1105.
+View Article
+Google Scholar
+13.
+Asness CS, Moskowitz TJ, Pedersen LH. Value and momentum everywhere. J Finance. 2013;68(3):929–985.
+View Article
+Google Scholar
+14.
+Novy-Marx R. Is momentum really momentum? J Financial Econ. 2012;103(3):429–453.
+View Article
+Google Scholar
+15.
+Lesmond DA, Schill MJ, Zhou CS. The illusory nature of momentum profits. J Financial Econ. 2004;71(2):349–380.
+View Article
+Google Scholar
+16.
+George TJ, Hwang CY. The 52-week high and momentum investing. J Finance. 2004;59(5):2145–2176.
+View Article
+Google Scholar
+17.
+Daniel K, Titman S. Market efficiency in an irrational world. National bureau of economic research; 2000.
+18.
+Lee C, Swaminathan B. Price momentum and trading volume. J Finance. 2000;55(5):2017–2069.
+View Article
+Google Scholar
+19.
+Chen HL, De Bondt W. Style momentum within the S&P-500 index. J Emp Finance. 2004;11(4):483–507.
+View Article
+Google Scholar
+20.
+Levis M, Liodakis M. The profitability of style rotation strategies in the United Kingdom. J Portf Manag. 1999;26(1):73–86.
+View Article
+Google Scholar
+21.
+Moskowitz TJ, Grinblatt M. Do industries explain momentum? J Finance. 1999;54(4):1249–1290.
+View Article
+Google Scholar
+22.
+Lewellen J. Momentum and autocorrelation in stock returns. Rev Financ Stud. 2002;15(2):533–564.
+View Article
+Google Scholar
+23.
+Cooper MJ, Gutierrez RC, Hameed A. Market states and momentum. J Finance. 2004;59(3):1345–1365.
+View Article
+Google Scholar
+24.
+Yao Y. Momentum, contrarian, and the January seasonality. J Bank Finance. 2012;36(10):2757–2769.
+View Article
+Google Scholar
+25.
+He XZ, Li K. Profitability of time series momentum. J Bank Finance. 2015;53:140–157.
+View Article
+Google Scholar
+26.
+Zhou WX, Sornette D. Antibubble and prediction of China’s stock market and real-estate. Physica A. 2004;337:243–268.
+View Article
+Google Scholar
+27.
+Wang YH, Zhao XJ. Case Study of Consistent and Reverted Strategies of China Stock Market. Securities Market Herald (in Chinese). 2001;2001(6):28–33.
+View Article
+Google Scholar
+28.
+Li SL, Li Y. Study on overreaction effect in the Shanghai and Shenzhen stock markets. Manag Rev (in Chinese). 2003;15(6):28–35.
+View Article
+Google Scholar
+29.
+Luo HL, Wang HC. Profitability of momentum strategies and contrarian strategies in China stock markets. Systems Engineering Theory Methology Application (in Chinese). 2004;13(6):495–499,503.
+View Article
+Google Scholar
+30.
+Wang CY, Chin S. Profitability of return and volume-based investment strategies in China’s stock market. Pacific-Basin Finance J. 2004;12(5):541–564.
+View Article
+Google Scholar
+31.
+Yang X, Chen ZH. Empirical studies of momentum and contrarian strategies in the Chinese stock market. J Tsinghua Univ (Sci Technol) (in Chinese). 2004;44(6):758–761.
+View Article
+Google Scholar
+32.
+Ma CQ, Zhang H. Empirical research of price momentum and contrarian and risk compensation in Chinese stock market. J Industrial Engin Engin Manag (in Chinese). 2005;19(2):64–69.
+View Article
+Google Scholar
+33.
+Shao XY, Su JQ, Yu SR. An empirical research on the “reversal effect” and the “momentum effect” for Shanghai stock market. Contemp Econ Manag (in Chinese). 2005;27(2):96–101.
+View Article
+Google Scholar
+34.
+Lu Z, Zou HF. Momentum and reversal in China stock market. Econ Res J (in Chinese). 2007;9(13):145–155.
+View Article
+Google Scholar
+35.
+Liu B, Pi TL. Momentum and contrarian strategies: The new evidence from the stock market in Shanghai and Shenzhen in China. J Financial Res (in Chinese). 2007;326(8A):154–166.
+View Article
+Google Scholar
+36.
+Wu LL. Study on the profitability of contrarian and momentum strategies based on China’s stock market. South China Fin (in Chinese). 2008;2008(8):47–50.
+View Article
+Google Scholar
+37.
+Pan L, Xu JG. Price continuation and reversal in China’s A-share market: A comprehensive examination. J Financial Res (in Chinese). 2011;1(11):149–166.
+View Article
+Google Scholar
+38.
+Zhu ZY, Wu CF, Wang CW. Price momentum profitability in the China stock market during different testing periods. J World Econ (in Chinese). 2003;26(8):62–67.
+View Article
+Google Scholar
+39.
+Zhu ZY, Wu CF, Xiao H. Daily contrariant profit in China’s stock market. J Shanghai Jiaotong Univ (in Chinese). 2005;39(3):442–447.
+View Article
+Google Scholar
+40.
+Liu C, Qin XZ. Who is winner?-Empirical test of winner-loser effects in China stock market using Shangzheng 180 index. J Sys Manag (in Chinese). 2007;16(6):612–617.
+View Article
+Google Scholar
+41.
+Pan L, Tang Y, Xu JG. Weekly momentum by return interval ranking. Pacific-Basin Finance J. 2013;21(1):1191–1208.
+View Article
+Google Scholar
+42.
+Lehmann B. Fads, martingales, and market efficiency. Quart J Econ. 1990;105(1):1–28.
+View Article
+Google Scholar
+43.
+Conrad J, Gultekin MN, Kaul G. Profitability of short-term contrarian strategies: Implications for market efficiency. J Bus Econ Stat. 1997;15(3):379–386.
+View Article
+Google Scholar
+44.
+Ball R, Kothari S, Wasley CE. Can we implement research on stock trading rules? J Portf Manag. 1995;21(2):54–63.
+View Article
+Google Scholar
+45.
+De Bondt WFM, Thaler RH. Further evidence on investor overreaction and stock market seasonality. J Finance. 1987;42(3):557–581.
+View Article
+Google Scholar
+46.
+Thaler RH. The winners curse. J Econ Persp. 1988;2(1):191–202.
+View Article
+Google Scholar
+47.
+Zou XF, Qian Y. Medium and Long-term returns overreaction in domestic stock market. Appl Stat Manag (in Chinese). 2003;22(6):9–14,35.
+View Article
+Google Scholar
+48.
+Jiang ZQ, Zhou WX, Sornette D, Woodard R, Bastiaensen K, Cauwels P. Bubble diagnosis and prediction of the 2005–2007 and 2008–2009 Chinese stock market bubbles. J Econ Behav Org. 2010;74:149–162.
+View Article
+Google Scholar
+49.
+Jegadeesh N. Evidence of predictable behavior of security returns. J Finance. 1990;45:881–898.
+View Article
+Google Scholar
+Download PDF
+Citation
+XML
+Print
+Share
+Reddit
+Facebook
+LinkedIn
+Mendeley
+Bluesky
+Email
+Advertisement
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1458247671871-1'); });
+Subject Areas
+?
+For more information about PLOS Subject Areas, click
+here
+.
+We want your feedback.
+Do these Subject Areas make sense for this article? Click the target next to the incorrect Subject Area and let us know. Thanks for your help!
+Stock markets
+Is the Subject Area
+"Stock markets"
+applicable to this article?
+Yes
+No
+Thanks for your feedback.
+Autocorrelation
+Is the Subject Area
+"Autocorrelation"
+applicable to this article?
+Yes
+No
+Thanks for your feedback.
+Finance
+Is the Subject Area
+"Finance"
+applicable to this article?
+Yes
+No
+Thanks for your feedback.
+Statistical data
+Is the Subject Area
+"Statistical data"
+applicable to this article?
+Yes
+No
+Thanks for your feedback.
+China
+Is the Subject Area
+"China"
+applicable to this article?
+Yes
+No
+Thanks for your feedback.
+Financial markets
+Is the Subject Area
+"Financial markets"
+applicable to this article?
+Yes
+No
+Thanks for your feedback.
+Money supply and banking
+Is the Subject Area
+"Money supply and banking"
+applicable to this article?
+Yes
+No
+Thanks for your feedback.
+Resource management
+Is the Subject Area
+"Resource management"
+applicable to this article?
+Yes
+No
+Thanks for your feedback.
+Publications
+PLOS Aging and Health
+PLOS Biology
+PLOS Climate
+PLOS Complex Systems
+PLOS Computational Biology
+PLOS Digital Health
+PLOS Ecosystems
+PLOS Genetics
+PLOS Global Public Health
+PLOS Medicine
+PLOS Mental Health
+PLOS Neglected Tropical Diseases
+PLOS One
+PLOS Pathogens
+PLOS Sustainability and Transformation
+PLOS Water
+Home
+Blogs
+Collections
+Give feedback
+LOCKSS
+Privacy Policy
+Terms of Use
+Advertise
+Media Inquiries
+Contact
+PLOS is a nonprofit 501(c)(3) corporation, #C2354500, based in California, US
+var ArticleData = {
+    doi: '10.1371/journal.pone.0137892',
+    title: '<article-title xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">Profitability of Contrarian Strategies in the Chinese Stock Market<\/article-title>',
+    date: 'Sep 14, 2015'
+  };
+MathJax.Hub.Config({
+  "HTML-CSS": {
+    scale: 100,
+    availableFonts: ["STIX","TeX"],
+    preferredFont: "STIX",
+    webFont: "STIX-Web",
+    linebreaks: { automatic: false }
+  },
+  jax: ["input/MathML", "output/HTML-CSS"]
+});

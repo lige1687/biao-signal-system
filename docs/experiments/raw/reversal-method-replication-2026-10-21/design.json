@@ -1,0 +1,100 @@
+{
+  "schema": "reversal-method-replication/1",
+  "at": "2026-10-21T22:42:41.085444+08:00",
+  "state": "design_frozen_execution_pending_review",
+  "question": "Does recent-month reversal on existing fixed CN300 persist after one skipped month, by exchange, and does loser selection help versus all eligible and low-volatility selection?",
+  "paper": "Shi Jiang Zhou 2015 doi10.1371/journal.pone.0137892; local-method replication not original population or execution",
+  "first_month": "2014-12",
+  "last_month": "2025-10",
+  "sources": {
+    "new_source_manifest": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/high52-execution-revalidation-20261020/high52-execution-revalidation-20261020-20261020T103838-98db6d9bfda6/result/acquisition-v1/new_source_manifest.json",
+      "sha256": "5f3bd55994025442b5d7af416a8bd316f347b73ad61dcf134ac6040c9597cca6"
+    },
+    "cohort": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/cohort.json",
+      "sha256": "2ac169c90bff72aa77dd180f324dfd27753766bfedb48fb9f4fea87843e1aaba"
+    },
+    "calendar": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/probe/trade_dates.json",
+      "sha256": "258f8a99213aed75b5515a22a4d36a79dd5e4350febdb434f9bf6e6357a0c05e"
+    }
+  },
+  "source_code": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/high52_revalidation.py",
+      "sha256": "603f71c0a227cb5a8f3e13240a74235cfa2b657bbf4d65ca51be4312af612ee5"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/short_reversal_selection.py",
+      "sha256": "c495d3ace1177aa314e367b471cf79a99382b7eecb4bdcf7d4dc0a42deeaee0c"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/fip.py",
+      "sha256": "76a8c003822826dd6befff8cfda135e5d9d5a3a7ca0f1d7e9559f5631f7f3c6a"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+      "sha256": "aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95"
+    }
+  ],
+  "strategy_sources": [
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "feature_definition": "reuse research.selection.short_reversal.month_return@1.0.0; negative recent month return is higher reversal; existing momentum/vol60 formulas unchanged",
+  "eligible": "reuse monthly_features qualification excluding ONLY not_green and green_unknown reasons; 12 full calendar months prices, clean adjustment chain, decision traded non-ST positive volume, momentum and vol60 available; not future-label-dependent",
+  "groups": "separate sh/sz; n>=30 eligible per exchange-month; k=ceil(n/10); stable sort ties by code; loser lowest hot, winner highest hot, lowvol lowest vol60, all equal weight; no green/trend filter",
+  "lags": [
+    0,
+    1
+  ],
+  "outcomes": "same signal selections frozen at T. lag0 first trading day T+1 open to first trading day T+2 open. lag1 first day T+2 open to first T+3 open. reuse adjusted_future_outcome; no changing eligibility with future status; unknown weight kept, not filled or reweighted. All scheduled future months must be complete in source; last exit January2026 first day.",
+  "comparison": "per exchange/lag same-month candidate-minus-all/winner/lowvol complete paired quote results; additionally decay lag0-minus-lag1 on common complete loser-winner months. Report full 131 axis and unknown weight in every portfolio. No complete-only zero replacement.",
+  "metrics": [
+    "known contribution and unknown weight",
+    "complete monthly return and comparisons",
+    "mean individual entry-to-subsequent-close low (not portfolio drawdown)",
+    "future top-decile and >=20% winners retained; known outcome denominator",
+    "gross target drift-adjusted rebalance turnover and 0.25% per side approximation, both common-sample gross/net; final liquidation",
+    "four contribution pieces versus all/lowvol: added gains/losses, avoided losses/foregone gains",
+    "raw rank IC, partial ranked association controlling momentum and vol60; no dummy groups and not tradable alpha"
+  ],
+  "inference": {
+    "method": "HAC/Bartlett lag6 keeping missing calendar slots; 95% normal approximation, not independent new evidence",
+    "periods": [
+      [
+        "2014-12",
+        "2019-11"
+      ],
+      [
+        "2019-12",
+        "2025-10"
+      ]
+    ],
+    "yearly": true,
+    "no_scan": true
+  },
+  "execution_sensitivity": "upward one-price entry/downward one-price exit -> unknown, from existing outcome helper; compare using original fixed selections",
+  "budget": {
+    "core": 1,
+    "followup_max": 3,
+    "literature_requests_max": 6,
+    "literature_requests_used": 6,
+    "new_market_downloads": 0,
+    "old_study_budgets": "unchanged; old history already seen"
+  },
+  "mechanism_boundary": "lag decay consistent with temporary effects but cannot identify forced selling vs bad news; size/industry/ownership/borrow/real fills unavailable",
+  "stop": "No parameter or universe optimization; report negative/mixed; errors repair retained. Exact full-market paper reproduction blocked by original period/universe/totalreturns; no production or trading.",
+  "storage_plan": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/reversal-method-replication-2026-10-21/storage-plan.json",
+    "sha256": "9aaabb358949dbfa59774ac3d699dd6f8c6292a7cbf5e4b03a2ed72a9c5c9b13"
+  },
+  "root_review_required_before_effects": true
+}
