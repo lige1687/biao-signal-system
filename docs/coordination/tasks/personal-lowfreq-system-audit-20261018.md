@@ -1,3 +1,14 @@
+# 五分组连续资金曲线接入 2026-10-21T23:54:37.403031+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha=b442159ec48f7b8bcfbfa7aec7124d7756f02d85；checked_at=2026-10-21T23:54:37.403031+08:00；已读 COORDINATION 及 task-id personal-lowfreq-system-audit-20261018, research-utility-review-20261012, research-dispatch-controller, strategy-account-bridge-20261020, mechanism-rebalancing-review-20261020, market-style-observation-20261020。
+- 用户本轮“可以哈，开始做吧ok”明确批准上轮每因子G1—G5曲线、同一基准、成本/风险和时间区分。复用 research-utility-review 的 factor-sorting-diagnostics 分组名单；不运行/改写其分组、收益诊断、结果、合同或报告。本人仅新增连续资金记账与图表这一已授权不同问题，不重跑旧反转方法/账户成果。
+- 独占路径：src/lei_signal/research/factor_group_curves.py；tests/unit/test_factor_group_curves.py；docs/experiments/factor-group-curves-2026-10-21.md；同名 raw/；web/public/research/factor-group-curves-20261021/；本报告 registry 键/INDEX 一行、自己的 work-progress 追加。分支 codex/personal-lowfreq-system-audit-20261018，基线 d25df3e46112c03780377d264187600d24db60b6；独立工作树 personal-audit-coordination-20261018。不接管生产UI或其他owner文件，主树仅准确同路径小产物集成。
+- 方法：已冻结月末名单/方向，下一交易日开盘模拟、每日持有资金连续累计，G1—G5及共同全池，费用0/25bps单边；不择优参数。缺失价格/停牌/退出单独暴露，称报价模拟而非实盘可实现净值。2015—2018、2019—2021、2022—2025仅已看历史分期，独立未来验证尚未开始。具体记账由主控审阅后冻结。
+- 验收：输入名单/来源指纹不变、现金持仓费用恒等、无未来入选、阻塞成交/缺失估值反例、逐日与月末衔接、五组和基准曲线完整且含不确定性、用户可见页面与数据一致。core 至多1批；本轮新市场请求0、来源请求0；必要纠错留旧失败不改参数。新大结果经固定外盘预检，小报告本机。
+- 分工：Astra只读方法审阅；Sol实现复杂资金账与测试；Luna限定资料/执行；主控冻结与独核。无交易、通知、自动继续或策略原件改动。
+
+---
+
 # 月度反转方法检验完成，TRAE渠道限制留存 2026-10-21T23:41:44.662123+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（仅本轮有界方法问题）；scope_released true。TRAE渠道 blocked_authentication_and_unverified_ide_receipt，不代表所有研究目标完成。checked_coordination_sha=600dce12e0ba37ae4a7eb3bc74e726dd4b78fbb1；checked_at=2026-10-21T23:41:44.662123+08:00；已读COORDINATION及task-id：personal-lowfreq-system-audit-20261018, research-dispatch-controller, research-utility-review-20261012, strategy-account-bridge-20261020, mechanism-rebalancing-review-20261020, market-style-observation-20261020。新增单因子五分组、机构语义、风格日线回归分别归原owner，无本研究/skill同写；不接管重复。
