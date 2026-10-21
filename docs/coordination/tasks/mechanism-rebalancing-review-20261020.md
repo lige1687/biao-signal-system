@@ -1,3 +1,15 @@
+# 主动配置与资金压力定义及数据入口已交付 2026-10-21T23:49:50.478346+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner 01a158cd-e0ee-7260-b91f-629930ce779f/root；status completed（本轮定义/资料字段问题）；scope_released true。连续真实基金资料及新因子效果未评价，不宣称整个机构研究完成。
+- checked_coordination_sha=638d7e339fbdfb45a1a0811ad3b027f2a71897db；checked_at=2026-10-21T23:49:50.478346+08:00。已读COORDINATION及self、research-dispatch-controller、sentiment-factor-research、market-style-observation-20261020、personal-lowfreq-system-audit-20261018、strategy-account-bridge-20261020、research-utility-review-20261012。补读风格日线交付和反转/TRAE结案；与本报告/资料映射无重叠，其他owner范围保留。
+- 成果codex/mechanism-rebalancing-review-20261020@6d4047be5a05c82eeba43284ca7ffdbafcb7d6b1（核心6825eef1f00046c2a558c7d73f6e173587319022）；12准确路径270544B核心普通push、远端ref/各文件SHA核同，后续2路径仅回执和自身进度。新报告docs/experiments/institutional-intent-pressure-definitions-2026-10-21.md及同名raw；registry自身新键/旧报告SHA和INDEX一行，无他人条目改写、删除、合main或共享索引切换。
+- 以同一基金×证券×可比相邻期，分别记录相对配置和资金/规则压力，四种情况及未知保留；相对数量不证明经理动机或行业信息优势。SEC免费NPORT申赎/资产/持仓/日期原字段已核，2019Oct—2026Sep官方数据包入口存在，未下载/拼全；局部现金不作全现金、申报期不作公开日、实物申赎另列。
+- A股复用嘉实增长070002单基金5报告/286行，季报前十缺位不当清仓、申赎对齐完整持仓观察区间。旧自有机制报告及生成器的“5只”误写已带日期更正，生成器逐字再现；原A股证据始终单基金，33份旧美国raw与e307973逐字不变，未触碰旧冻结/市场输入或计算。历史progress相同措辞已附勘误。
+- Astra medium两次只读方法审，root核官方字段/原A股资料/API；定义动机措辞和区间对齐两修正接受。2报告API全文及列表唯一、归置、准确diff通过，详细receipt见raw。6公开源动作（3空搜索/3SEC官方资料），0新行情/拟合/付费/生产/交易/自动通知/外盘输出/仓外DB写入；旧至少1268拟合/4Pro保留，无后台实验。
+- 本题已答：先确认压力与真实调仓行为关联，再评价价格及策略。连续资料/首次公开时间尚未取得，后续新市场问题须先完成这些资格；不重扫NAAIM阈值，不把定义文档当有效因子，不代用户验收原系统目标。
+
+---
+
 # 主动配置与受约束调整：语义、定义和数据映射 2026-10-21T23:36:54.384768+08:00
 
 - task-id/owner沿原；status active；scope_released false。checked_coordination_sha=f3f212bb5e6d390e7e431a796a7332a8a25f1c4b；checked_at=2026-10-21T23:36:54.384768+08:00；已读COORDINATION/self/dispatch/sentiment-factor-research、market-style-observation-20261020最新日线任务、personal-lowfreq-system-audit-20261018反转复现/Trae、strategy-account-bridge-20261020成熟策略交付；无本题定义文档同写，不接管原owner。
