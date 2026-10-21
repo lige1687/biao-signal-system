@@ -1,3 +1,16 @@
+# 股票池与牛熊定义独立复核交付 2026-10-22T00:47:03.163309+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（仅已有结果的方法/环境/范围复核）；scope_released true。checked_coordination_sha=c39b43c0cf03cea15ffa5c013912083a7c4094c6；checked_at=2026-10-22T00:47:03.163309+08:00；已读COORDINATION/self/dispatch及research-utility-review、investor-workspace-simplification、market-style-observation、mechanism-rebalancing最新段。研究数据/新增204账户/UI/宽度/机构各归原owner，本人未重复执行。原持续目标不冒称全部完成。
+- 成果codex/personal-lowfreq-system-audit-20261018@fefe31dd88041fa89ba84348368dd75c031b9c71，13准确路径普通push且远端ref同SHA；docs/experiments/factor-universe-regime-audit-2026-10-22.md、同名raw、registry本键/INDEX本行/原progress。主树准确镜像，5188报告API全文、category方法论与验证、verdict mixed读回；两树归置通过。open文件返回queued，不声称实际浏览器已打开。
+- 权威方法：Pagan/Sossounov前后窗口峰谷只供后验分期，本轮未声称实装完整算法；Faber作者10月均线可借鉴为当时价格可计算的趋势状态。本地沪深300价格指数与原文总回报/交易条件不同，保留“偏强/偏弱”而非唯一牛熊。原LEI语义/生产不改。
+- Luna medium一次旧结果审查；Astra high只读设计/结论复核；root独立24项均值/HAC逐项影响量复算最大差6.94e-18；132标签/截断不变、1008格9072字段一致，19段/19次排除全部保留；另核300原日线SHA、932813行及1338指数交集最大差.005。缺市值/行业/完整历史成员，不把绿池当独立市场。
+- 含费全池反转弱状态相对池月均+.104pp范围跨0，实际下跌月多亏.724pp；低波动弱状态在同池下跌月少亏1.755pp、上涨月少赚1.193pp，保留风险用途线索。高点弱状态落后1.355pp，各历史分期/删段维持负向，仍不是环境过滤策略已有效。绿色反转弱状态对池+.757pp但自身约-.025%，防止少亏误称赚钱。
+- 最终独审修4处：可计算不等于历史到达已证实、条件差不称因果、绿色弱三分期是相对差非自身赚钱、删段数据与原段现金/缺价范围不混称；已逐项修正文并读回。全部2015—25已看，无未见验证；旧全日成交限制/缺价报价边界未修复。
+- 本轮6公开请求含2无关检索、新行情0/新账户0、旧结果诊断1、生产/交易/通知/仓外运行树写入0；小报告/raw约0.4MB，原预估0.3MB偏低已记录，无新大产物/预算扩张。研究代码拒覆盖原结果，不重跑84流。初期磁盘预检不足保持历史，原owner00:39实时预检已恢复并准备新曲线资料，不能当永久卡点。
+- 当前本题无后台。后续历史成员/市值行业/成交估值修复或新独立资料可重开；历史成交额存在但本轮未测流动性条件效果，只有另冻具体问题才扩展。所有报告、用途评价和来源与不确定性见原产物，不能靠新增标签代替资料资格。
+
+---
+
 # 股票池与牛熊方法独立复核  2026-10-22T00:34:24.913214+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha=ae104150a603a2189666ab201768dd13f2501579；checked_at=2026-10-22T00:34:24.913214+08:00；已读 COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、market-style-observation-20261020、mechanism-rebalancing-review-20261020、research-dispatch-controller 的最新范围。
