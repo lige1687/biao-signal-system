@@ -1,3 +1,15 @@
+# 四因子独立分组与时期诊断交付 2026-10-22T00:02:32.159975+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed（仅本次单因子诊断）；scope_released true；checked_coordination_sha=d5fb5fce1f7089717796c892c0ab1c9082c3cbba；checked_at=2026-10-22T00:02:32.159975+08:00。已读COORDINATION/self、personal-lowfreq-system-audit-20261018最新23:54另做分组连续资金（复用本题不重跑）、investor-workspace-simplification-20261012最新23:59三图交付、market-style-observation-20261020最新23:55、mechanism-rebalancing-review-20261020最新23:56、research-dispatch-controller；启动还读strategy-account-bridge/pro-advice-process-review/lowfreq-strategy-discovery。无同文件冲突，不接管对方连续资金/机构/盈利/环境与系统。
+- 用户本轮要单因子值→排序→分组→分期收益：1次固定核心对比普通动量/52周高点/近期偏冷/低波动。300历史固定A股，132持有月2015—2025，36019股月；复用12968绿标签，仅新增23051非绿同口径标签和早期高点。35118旧高点值精确相同。全体共同完整月43（2019—2025）、绿色120人数合格/60完整（早期5）；缺失525条/未知权重不补0，完整月选择偏差和所有历史已见明示，不能称独立测试。
+- 同绿色粗略5档动量分层取偏好半数，偏冷－全体+0.643pp/月（0.219至1.068），偏冷－低波+0.246pp（-0.214至0.705）；低波下探少1.487pp，非账户回撤。高点－全体-0.113pp范围跨0。保留偏冷排序和低波风险线索，前者换组频繁、后者少抓大涨；不采用交易规则，不推翻旧资金负结果，不调参追正值。
+- 报告docs/experiments/factor-sorting-diagnostics-2026-10-21.md SHA 2248dcb956b5d199a35b6ade2506ca38e1f3492aca17a44d93655e21a6448b19；registry只新增本键mixed/方法论与验证，738旧条目保持；INDEX本行。新模块factor_sorting_diagnostics和9项合成测试；独立全部分组/权重/复用标签/分期HAC数值相符，最大差1.03e-15；检查确认实现一致，非科学有效证明。方法审修orderedcalendar和foreAdjustFactor后才core，资格版本原字节保存在qualification-run-source；审计计数范围假失败另存纠正史。
+- API全文/Agent SHA verified且未截断；3SVG系统owner原字节接入5188，HTTP MIME/hash一致。root实际浏览器9表/3图解码与各图视觉核对，542px页面无整页横溢，表内横向阅读保留。截图web-groups-all/green、web-increment及preview；页面markDeliverable，用户视觉待验。不改React/生产策略，不重启服务；初次图未复制时0像素及刷新后成功留痕。
+- core1/1、followup0/3、0新行情；方法来源实际8/上限6（最后find批误计导致超2，偏差保留并停止进一步网络），不倒改预算，旧累计保持。大输出约40.04MB在固定外盘，storage-plan定位；本机小记录/图和代码在预算内。两策略源及核心绑定未变、归置通过；无交易、通知、购买、删除或后台实验。仓外目标数据库保持未写，不冒称更新进展；原研究目标继续未完成。
+- 主成果codex/factor-unit-research-20260915基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9＋本机未提交新路径；仅协调元数据推远端，源码与外盘资料不是远端已交付。恢复入口本raw/state、contract、manifest路径、controller-review、independent-audit、delivery-validation。边界问题已回答；后续真正未见时期/其他合格市场/实际成本仍未验证，不为同旧图换名再跑。连续资金图由personal owner独立完成，本题不重复。
+
+---
+
 # 单因子分组与分期研究启动 2026-10-21T23:38:06.203313+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=e7439557827af731776c3d215bebd8b63f88f4ea；checked_at=2026-10-21T23:38:06.203313+08:00。已读COORDINATION/self/personal-lowfreq-system-audit（10/21 22:40反转论文月度复现）、lowfreq-strategy-discovery/investor-workspace-simplification/strategy-account-bridge（成熟策略UI）/research-dispatch-controller/pro-advice-process-review（盈利季度资料已查）。本题复用已保存new300特征/标签，新的四排序共同样本五分组和分期增量展示；不接管600原论文/跳月、行业反转、盈利采集、账户或前向服务。
