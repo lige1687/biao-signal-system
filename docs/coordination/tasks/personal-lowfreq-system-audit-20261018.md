@@ -1,3 +1,13 @@
+# 反转完整方法与 Trae 委派可行性  2026-10-21T22:40:33.282476+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha=89517eb04495038f75e09f50fb46d4656710587f；checked_at=2026-10-21T22:40:33.282476+08:00；已读 COORDINATION、self、research-dispatch-controller、research-utility-review-20261012、strategy-account-bridge-20261020、mechanism-rebalancing-review-20261020、market-style-observation-20261020。各旧研究和新行业相对反转策略提案归原owner，本轮不改其源码/结果/服务，不重复原600五组或绿色排序/账户。
+- 用户明确要求继续扩大研究，弄清反转金融原因/完整做法/能否复现，并试 Trae CLI 派发、主控计划验收、沉淀skill。独立增量问题：月度原论文定义及跳过1月敏感性是否可用现有合格历史数据作有边界复现；先核可行性，再冻结执行。不是扩大市场或把旧已见历史当未见验证。金融解释与机制识别分开。
+- 基线 codex/personal-lowfreq-system-audit-20261018@828a3fbef4a949a79dc93c617286e05f0a3db68b。新写范围仅 docs/experiments/reversal-method-replication-2026-10-21.md、同名raw（脚本/合同/小回执）、.agents/skills/trae-delegate/，registry本键、INDEX本行、自己progress。必要本轮纯研究适配器独立位于raw，不改正式规则或旧适配器。先文献/字段核查与合成核验；收益运行须另冻结定义和实际输入。主控负责选择/审核，Luna只读原件库存，Trae能否真实执行先核可用性，不冒称派发成功。
+- 默认有界新问题预算：1核心批，最多3有理由跟进，6公开文献动作（目前搜索1、PMC拒绝1、PLOS打开1；旧昨日6保持），工程工具核查另6（搜索2、官方页1、安装脚本只读1）。0新行情取数/0重跑。安装会写仓外，已明确问用户，未获答不执行；公开资料不授予安装/迁移/付费。
+- 预计本机小记录/skill <1MiB，新大原文/数据计算约100MiB只写合格外盘；已核固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9、可用496893034496字节，本机9149935616字节。先plan_output后写。验收为准确方法对照、可执行检查及性能/增量/范围、Trae真实失败或成功回执、skill可验证、输入不变/报告登记/远端读回。未测明确保留；不改生产/交易/通知/目标库状态。
+
+---
+
 # A股短期反转适用范围：只读审查交付 2026-10-20T23:36:05.379706+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（仅本轮适用范围问题）；scope_released true（本轮新报告/小记录，旧结果仍冻结）。checked_coordination_sha=1360d5264d4640991aa4d78ed8beacfe3774e3c9；checked_at=2026-10-20T23:36:05.379706+08:00；已读COORDINATION及self、research-dispatch-controller、research-utility-review-20261012、strategy-account-bridge-20261020、mechanism-rebalancing-review-20261020、market-style-observation-20261020。策略owner23:26成熟原型/UI审查已明确避让本反转资料汇总，本方不接管其实施/前向。
