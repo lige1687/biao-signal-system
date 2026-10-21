@@ -1,3 +1,13 @@
+# 新账户核验与规范展示增量 2026-10-22T00:51:08.062547+08:00
+
+- task-id/owner沿原；active，scope_released false；checked_coordination_sha=9d72a9314904e24e75d82f9e9366a39be6054995；checked_at=2026-10-22T00:51:08.062547+08:00。已读self/COORDINATION/系统新10因子消费、personal00:47独核交付、mechanism00:42完成、market-style自动化范围及dispatch；无同块冲突。personal的原84环境审查直接引用，不重复。
+- 新204账户一次已退出0；Sol独核204文件/491844日/816时期指标和8组差额，0失败。老84原SHA保持。新数据已根写new-summary/new-regimes、catalog第二dataset，系统owner准确镜像与UI验收。10指标×2池，119持有月67偏强/52偏弱；现金/未知及历史已见局限不变，不能当可交易净值。
+- 用户新增：认可系统页面，先完成当前任务，再规范其他AI接入及专业研究所需图，不只收益。新增根范围：docs/research/factor-research-display-contract.md；factor-discovery-playbook.md只追加本入口引用；已有raw内诊断汇总脚本/验收、新公开diagnostics JSON及本catalog可选字段（仍根单写）。只从保存账户/汇总派生必要展示，非重跑/新因子/新选股；系统UI仍原owner。本次需官方展示方法来源，Astra新增只读查阅并累计原6次，不把AI自定次数当真实停工预算。
+- 因子指标须按用途分：报价账户分组不伪称纯因子IC；缺个股未来标签的排序预测指标明确未评价，不用0填。收益、回撤、分组差、年度稳定、换手/现金/缺价有既有原数可展示。新增JSON小约2MiB内，原大输出1.2GiB外盘保持；不新增账户、不改冻结/生产/通知/预算权限。
+- 主成果仍主工作分支基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加本机未提交；状态和来源/失败/方法留本题raw。仅协调记录远端同步，其他内容不冒称已推。
+
+---
+
 # 新增曲线共同资格完成 2026-10-22T00:39:16.515576+08:00
 
 - task-id/owner沿原；active，scope_released false；checked_coordination_sha=ecaf725580a47f6915d2bffc96af6da0dc4f36c8；checked_at=2026-10-22T00:39:16.515576+08:00。已读COORDINATION/self、investor-workspace（00:31实际catalog）、personal（曲线封存）、market-style（自动化独占）、mechanism（四基金）、dispatch沿前轮，无同路径冲突。UI唯一系统owner，主控仅数据/本题定义。
