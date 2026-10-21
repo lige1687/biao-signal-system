@@ -88,3 +88,5 @@
 - 无访问绕过/付费/策略/生产/交易/通知/仓外DB更改，旧报告/冻结未变。恢复需正常可访问原件并保留本轮请求预算/失败，先资格再冻结；当前无后台下载。新报告本键/INDEX本行、raw/自身progress待API归置和准确Git读回；不是效果完成。
 
 - 2026-10-22T00:04:02.579620+08:00：报告API全文/唯一列表/分类核同，739个原登记项保持；两份HTTP错误原件SHA与3850B核同，原始ZIP确为0；归置通过。核查证明受阻状态准确，不证明因子效果。准确发布路径见交付回执。
+
+- 2026-10-22T00:04:46.828383+08:00：15准确路径215111B已普通发布至codex/mechanism-rebalancing-review-20261020@25fa4dc50bd49052899feef8d4b2e1163dbe673c，远端ref与全部文件SHA核同，0删除/合main/共享索引改动。研究仍blocked，回执docs/experiments/raw/institutional-flow-holdings-pilot-2026-10-21/delivery-receipt.json；后续仅回执/进度两文件。
