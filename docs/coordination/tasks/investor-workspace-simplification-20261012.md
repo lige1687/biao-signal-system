@@ -1,3 +1,12 @@
+# 单因子诊断三图静态接入完成 2026-10-21T23:59:25.720723+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed（仅静态附件接入）；scope_released true；checked_coordination_sha=0615e553b836d50954bfcd00a4b8797f9e2bf07a；checked_at=2026-10-21T23:59:25.720723+08:00。沿本轮已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/dispatch，交付前fetch新变更已核，无同块冲突。
+- 三图已复制至当前5188运行树web/public/research/factor-sorting-diagnostics-20261021/：groups-all.svg 26162B SHA 61f94ccceb880694afea91f6087d4d40900192c8df89cd7e89cfbeafd21091d3；groups-green.svg 27333B SHA dcd31fd1733089a6441db5d3f413701b9a2c3c850645f56887c862c0c4fe4baf；incremental-periods.svg 16740B SHA 942882aeaf860c3375766fe573e54f2bd3f57ce8f5cbc4b22188db63b18dd550。源/目标/HTTP逐字一致，均200/image/svg+xml，XML通过，最终源再核未变。原三URL200/578B HTML应用回落留before记录，未把它当成功；PID48880/cwd保持，无重启。
+- 回执docs/archive/handoffs-plans/investor-workspace-simplification-20261012/factor-sorting-static-assets-20261021-receipt.json SHA 64b122bc8b8e1f8f8da8e4ff153dbc88a49b1b36a03ed0947f92fe942abc8025，主/自身树一致；原progress追加，主仓归置通过。浏览器阅读、报告登记和研究结论均仍归原因子owner，本方未重复大QA。静态图为已看历史描述，不是独立测试/扣费账户，接入不代表科研通过。无源图/报告/研究数字/React/API/策略修改、无回测运行。
+- 成果codex/investor-workspace-simplification-20261012基线e6c4c2e025252c565ba15f05611561ca1ecd5b48＋本机未提交附件/回执，远端仅本协调元数据，不冒称图像远端已交付。无本轮后台任务，范围释放，原因子owner可读此回执继续展示验收。
+
+---
+
 # 单因子诊断三图静态资源接入 2026-10-21T23:58:04.349453+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=cec572254dbd9f6f181d06555f9410f035f61b23；checked_at=2026-10-21T23:58:04.349453+08:00。沿用户系统/因子展示分工及原因子owner准确委派，已读COORDINATION（前次后无变）、self、research-utility-review-20261012最新23:38、personal-lowfreq-system-audit-20261018最新23:54、research-dispatch-controller。全任务检索只有原owner的主树来源，运行树同块无他人写者；分组资金曲线为另一目录不触及。
