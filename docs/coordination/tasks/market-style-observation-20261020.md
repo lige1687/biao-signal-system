@@ -1,3 +1,14 @@
+# 同口径日线接入与电脑页面修正 2026-10-21T22:57:33.169576+08:00
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active（日线数据接入），scope_released false；原五问其他数据缺口维持。
+- checked_coordination_sha 56b2a29f0dd70d1a5e94ea2b5059b3f1ed95e782；checked_at 2026-10-21T22:57:33.169576+08:00。fetch后与上轮已读COORDINATION/self、research-dispatch-controller、investor-workspace-simplification-20261012、investor-observation-map、portfolio-trends-20261013、strategy-account-bridge-20261020、personal-lowfreq-system-audit-20261018无新变化，复用记录；无独立market-style组件/服务同写冲突。
+- 用户明确要日线、电脑使用并要求继续。目标为四种同定义World风格及母指数的USD同分红口径日线，默认近一年，三个月/三年可切；相对与累计表现均从所选共同日期起点比较。年度资料仅历史参考，不插值或默换ETF。周/月仅总结频率。
+- 当前成果base0fa3337b3d2d778c9aed815c9ba1c3fc774aef71。唯一写者root；范围为web/src/components/market-style/及仓内5192副本、src/lei_signal/market_style_observation/、tests/unit/test_market_style_daily_history.py、自有报告/raw/progress。共享父页/TrendChart/策略/服务/5188/升级DB只读。只恢复自己的8192进程，不动他人进程；0新效果实验/0付费/0模型调用/0通知。
+- 数据资格沿lei-data-availability；两策略源SHA实际核同，服务市场观察说明层。优先官方旧日末工具公开页面所调用接口，先小范围证明响应/代码/币种/GRTR、日期连续和匹配月末收益；官方新页面读取超时、直接HTTP仅JS壳（上轮失败保留）。公开网页可访问不冒充完整再分发许可；数据仅个人本地观察，不将完整指数日线上传Git。
+- 验收：至少真实完整三年所需日线（如源覆盖不足则明确范围），5序列同日期/币种/回报，缺口不填造，接口错误/过期可见，当前日期可更新、被动读数不调用模型；电脑实际窗口与桌面布局/曲线切换/build/针对计算测试；不继续手机专项设计。新增来源/失败记入本题小记录，必要资格或可用数据真正缺失时明确阻塞，不用接口说明冒充接入。
+
+---
+
 # 图表清晰度修复已验证 2026-10-21T22:47:56.824394+08:00
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status blocked（原五问资料缺口维持），本轮图表清晰度修复完成；scope_released true。用户视觉待验收，不把本次完成代替整项完成。
