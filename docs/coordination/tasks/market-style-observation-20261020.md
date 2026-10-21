@@ -1,3 +1,17 @@
+# 官方日线已交付，原五问仍有资料缺口 2026-10-21T23:46:49.844027+08:00
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status blocked（原完整五问还缺历史收益贡献/历史估值/实际账户风格资料）；本轮日线范围 completed，scope_released true。没有未结束的取数、模型或研究任务；预览服务留给用户查看。
+- checked_coordination_sha 45d049ddfa462aa168eeb781c20e58ca310b7c56；checked_at 2026-10-21T23:46:49.844027+08:00。已读COORDINATION、自有任务、dispatch/investor-workspace-simplification/investor-observation-map/portfolio-trends/strategy-account-bridge；交付补读有变化的mechanism-rebalancing-review-20261020、personal-lowfreq-system-audit-20261018、research-utility-review-20261012最新范围，无本服务/组件同写。前次测试补充中“其他无变化”概括不准确：8c68c489新增personal阶段记录，随后已读且无冲突；本次明确修正，未覆盖其资料。
+- 成果 codex/market-style-observation-20261020@4c11d8487d7a01b73f353af98b1c796f578ecca3（base0fa3337b3d2d778c9aed815c9ba1c3fc774aef71），20准确路径416190字节，正常push/远端ref/逐文件字节均核；主树分支/默认索引未切换。daily-publication-receipt.json为本机补存读回记录。报告§14、daily-verification.json及两张电脑截图可复核。
+- 官方旧日末工具实际导出5个原定义指数USD Gross每日值，783共同日，2023-10-20至2026-10-20；请求截至10/21不冒称资料日。5项9月末YTD与事实表差均<0.005pp。源XLS152064B、SHA152358853b260b9cf87588f00de3309d0ac806b9671fee9410e717b9033590d7；原件/全序列仅本机.codex缓存，不上传Git；持续展示许可与历史首次到达时点未知。
+- 默认近1年262日，可切近3个月65日/近3年782日、累计与相对母指数。日线SVG/12px完整日期，年度折叠；Q1收益/跌幅/波动、Q2差额、Q4距近1年高点已更新。行业/持仓/估值仍9/30单列，完整历史估值与收益贡献不冒充已答。五问/Agent固定近1年，与图控区间区分。
+- 已验实际电脑542侧栏及1280双栏、曲线/日期/来源/五问/周月切换；没有新增手机工作。旧宽度tooltip调整窗口后8px溢出已confine，最终542/542；console error0。30测试1.53秒、837模块构建（旧大包提示）、归置通过；源码/仓内预览副本逐字核同。保留首轮2旧测试失败及一次复制cwd错误和修正，不删断言。
+- 8192仅重启本任务旧PID23096→36702，5192原预览可用；共享8000/8028/5188/父页/策略只读。读取/图控/周月切换后health model_requests0。日线按UTC日期在读取时每天一次成功更新，失败标旧资料+5分钟冷却；无定时任务/通知。依赖xlrd已在本机，独立requirements-preview.txt登记，不改共享pyproject。
+- 0新效果实验/0模型/0付费/0交易，2次指数数据导出（5日探针、完整3年）。没有重启封存研究，没有仓外DB状态写；原okr-f07e0054448a仍planned授权边界。本次没有把“指数能画图”作为策略有效证据。
+- 余缺与恢复：历史成分/时点权重/收益/调仓→收益贡献；历史估值→自身位置；实际账户记录→资金和风格重叠；完整NFCI周历史/部分宽度旧日期/使用资格保持明示。日线缺口本次已解决，不应继续笼统写缺连续指数历史。下一次复用本报告§14与回执，按具体新资料推进，勿重新做手机或年度主图。视觉效果待用户验收。
+
+---
+
 # 日线回归测试范围补充 2026-10-21T23:37:55.396789+08:00
 
 - checked_coordination_sha 8c68c48937ba7baf90cb0b9f2ca3e35226cbcd28；checked_at 2026-10-21T23:37:55.396789+08:00；已读COORDINATION及本任务，其他相关记录沿上一登记且本次fetch无其他新变化；无同文件冲突。
