@@ -1,3 +1,14 @@
+# 月度反转方法检验完成，TRAE渠道限制留存 2026-10-21T23:41:44.662123+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（仅本轮有界方法问题）；scope_released true。TRAE渠道 blocked_authentication_and_unverified_ide_receipt，不代表所有研究目标完成。checked_coordination_sha=600dce12e0ba37ae4a7eb3bc74e726dd4b78fbb1；checked_at=2026-10-21T23:41:44.662123+08:00；已读COORDINATION及task-id：personal-lowfreq-system-audit-20261018, research-dispatch-controller, research-utility-review-20261012, strategy-account-bridge-20261020, mechanism-rebalancing-review-20261020, market-style-observation-20261020。新增单因子五分组、机构语义、风格日线回归分别归原owner，无本研究/skill同写；不接管重复。
+- 成果codex/personal-lowfreq-system-audit-20261018@2a5aef92d92580d380584bcbd09aa600e3d6eb90普通push且远端ref/40路径字节读回；报告reversal-method-replication-2026-10-21.md、repo技能trae-delegate与raw。主树窄镜像/API全文分类mixed核同，旧6源SHA保持。
+- Luna一次核心exit0，300股（沪116/深184）、形成2014-12—2025-10共131月、35765合格股月，0新行情。反转排序+.0628/+.0666，扣动量/波动后+.0572/+.0571；跳月变弱。最差组对低波动月差沪+.142pp/深-.345pp均范围跨0；中途单股跌幅更深2.851/2.737pp，买卖金额每月约182%。保留排序研究/体检，暂不直接买跌或替代防守。
+- 对全部组合完整仅64/62月、费用共同47/48；早段缺口重，不能冒充11年全程账户或1997—2012全市场复现。root独核1048选择、2096组合及换手、524相关、22差额、39原价端点；15合成通过。PLOS原件空白使完整diff-check退出2，保留原件；其他任务文件diff检查及两树归置通过，不虚报全绿。
+- TRAE已获用户许可官方安装0.209.1，但CLI未认证；官方当日限企业旗舰，账号权限未证实。IDE命令exit0但无有效答复；真实preflight准确报阻塞，技能格式通过，未称模型回调成功。未购买/迁移旧配置/复制令牌。恢复认证后仅复用公开小pilot，不重跑反转。
+- 无运行进程/新行情/调参/生产/交易/通知。完整市场、账户、ETF和因果机制未证明。后续只因改善历史池、市值/行业、成交/退出的新证据恢复，先复用其他owner研究。文献6/工程资料6、安装内部请求数与token费用未知。后续receipt小提交只补读回证据。
+
+---
+
 # 反转研究已核数，补齐本树归置规则 2026-10-21T23:36:51.004095+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status active（交付核验）；scope_released false。checked_coordination_sha=e7439557827af731776c3d215bebd8b63f88f4ea；checked_at=2026-10-21T23:36:51.004095+08:00；已读COORDINATION/self/research-dispatch-controller/research-utility-review-20261012/strategy-account-bridge-20261020/mechanism-rebalancing-review-20261020/market-style-observation-20261020。本轮新增仅market-style同口径日线，与本研究无冲突。
