@@ -1,3 +1,15 @@
+# 固定因子曲线与专业诊断研究交付 2026-10-22T01:31:31.672712+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed（仅本轮固定因子曲线、数据诊断和接入规范）；scope_released true（本轮独占写入释放，已冻结材料仍不可覆盖）；checked_coordination_sha=5c2ed67cc2cece274fb33388fbe904ea056ff7a3；checked_at=2026-10-22T01:31:31.672712+08:00。已读 COORDINATION/self、investor-workspace 最新 01:27 完成段、personal-lowfreq-system-audit、research-dispatch-controller、mechanism-rebalancing-review、market-style-observation、strategy-account-bridge 最新 01:15；无同路径冲突，系统 UI 科研数据各自一写者。
+- 新204报价账户一次完成并独核491844日/816指标/8组差额，旧84直接复用、重跑0；119持有月、固定2014年300源A股，非沪深300历史成员、非未见测试。诊断独核1120分组均值、7876月、660年及9个原始月抽核一致。9研究检查和系统43相关检查、最终构建通过，保留大包提示；实际浏览器因子/池/费用/分期/环境/诊断切换通过，7JSON源/HTTP指纹和7UI主/运行树指纹一致。
+- 固定 /factors?tab=curves 已展示五组与同池基准连续资金/每日回撤、分组柱图、逐月差额热图、年度表、换手/现金/缺价；环境仅显示条件差异，不拼不连续月份账户。个股预测关系缺资料明确未评价。标准 docs/research/factor-research-display-contract.md 和 playbook 入口已落地，技术字段只引用系统唯一接口。
+- 报告 docs/experiments/factor-curve-library-2026-10-22.md SHA 2e167a200b679b7be3642d9e1680c6e87290b5a5484bcf14c5ddeee1b04c5e21，方法论与验证/mixed；API正文同指纹。最终 raw/delivery-validation.json 绑定所有独核、失败、浏览器和截图。系统交付回执 SHA da6d2118a47e3e511c510518ef7512458412d07a13602dfe8763309fe5d4e66f；展示目标 okr-30b877e334bc 6/6 已提交 review，用户视觉待验收。
+- 科学结论：复杂残差/下行波动未证实胜过简单对手；低波有少亏线索但也少赚，绿色低波不计费年化+2.8824%，0.25%每次买卖后-1.4858%，月均买卖金额/资产143.747%。缺价最高占比重大、报价成交与历史来源局限保持，不声称实际净值、完整LEI策略或可采用优势。股票池指数历史、ETF/美股和新逐股预测诊断仍未完成，不将展示齐全当科研有效。
+- 第一版诊断错误与旧生成器晚写覆盖均已留失败回执；晚写后恢复准确验收SHA并复核，运行树从未采用坏版本，旧会话结束，无后台研究写者。截图JPEG最初误名png已保留原件并提供准确jpg。没有重跑账户、扫参数、交易、删除、购买、模型/通知修改。
+- 主成果 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 加本机未提交。大结果约1.2GiB位于 storage-plan.json 绑定外盘 run factor-curve-library-20261022-20261022T003408-a1b36a081a36；源码/数据未远端移交，不宣称可异机恢复。仅本协调元数据推远端。预算1核心批次、15方法请求（含失败）、0新行情、0旧账户重跑；原其他研究额度不重置。恢复读本raw/state、delivery-validation、合同和独核，问题已回答无需自动续跑。
+
+---
+
 # 新账户核验与规范展示增量 2026-10-22T00:51:08.062547+08:00
 
 - task-id/owner沿原；active，scope_released false；checked_coordination_sha=9d72a9314904e24e75d82f9e9366a39be6054995；checked_at=2026-10-22T00:51:08.062547+08:00。已读self/COORDINATION/系统新10因子消费、personal00:47独核交付、mechanism00:42完成、market-style自动化范围及dispatch；无同块冲突。personal的原84环境审查直接引用，不重复。
