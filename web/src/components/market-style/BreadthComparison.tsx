@@ -129,9 +129,9 @@ export default function BreadthComparison({ market, onMarketChange, onContextCha
   const priceKey: PriceKey = market === "cn" ? cnPrice : usPrice;
   const breadthId = market === "cn" ? "CN_ALL_A" : "SP500";
   const breadth = useQuery({ queryKey: ["overlayBreadth", breadthId, 1260],
-    queryFn: () => api.marketContextBreadthHistory(breadthId, 1260), staleTime: 12 * 3600_000 });
+    queryFn: () => api.marketContextBreadthHistory(breadthId, 1260), staleTime: 5 * 60_000, refetchInterval: 5 * 60_000 });
   const overlay = useQuery({ queryKey: ["fundOverlay", 20],
-    queryFn: () => fundamentalsApi.overlayHistory(20), staleTime: 12 * 3600_000 });
+    queryFn: () => fundamentalsApi.overlayHistory(20), staleTime: 5 * 60_000, refetchInterval: 5 * 60_000 });
   const priceSeries = overlay.data?.series[priceKey];
   const points = breadth.data?.history ?? EMPTY_BREADTH;
   const view = useMemo(() => viewFor(priceSeries, points, windowDays, active, market), [priceSeries, points, windowDays, active, market]);

@@ -1,0 +1,38 @@
+{
+  "automation": {
+    "version": 1,
+    "id": "automation",
+    "kind": "heartbeat",
+    "name": "美股宽度自动续更",
+    "status": "ACTIVE",
+    "rrule": "FREQ=WEEKLY;BYDAY=TU,WE,TH,FR,SA;BYHOUR=8;BYMINUTE=0;BYSECOND=0",
+    "notification_policy": "failed_runs_only",
+    "target_thread_id": "01a15915-cdaf-7873-8755-d5f5320fbfa9",
+    "created_at": 1792599877021,
+    "updated_at": 1792599877021
+  },
+  "prompt_sha256": "40632aeaf13556b3fba9e8f8321d251b14e2530bd30a7d04d7a6ab625acac8e5",
+  "timezone": "Asia/Shanghai",
+  "first_scheduled_at": "2026-10-22T08:00:00+08:00",
+  "scheduled_execution_verified": false,
+  "manual_preflight": {
+    "expected_closed_session": "2026-10-20",
+    "cache_last_date": "2026-10-20",
+    "action": "already_current_skip_constituent_fetch_and_write",
+    "source_sha_unchanged": true
+  },
+  "served_query_refresh_minutes": 5,
+  "agent_health": {
+    "ok": true,
+    "model_requests": 0,
+    "snapshots": 2,
+    "completed": 0,
+    "in_flight": 0
+  },
+  "failures": [
+    "First coordination push rejected after concurrent remote change; fetched/reviewed and rebased own record, normal push succeeded.",
+    "First create lacked destination=thread and was rejected without creation; corrected create succeeded.",
+    "Initial edit command used preview cwd with root-relative path and failed before editing; corrected absolute paths then post-edit typecheck."
+  ],
+  "checked_at": "2026-10-21T16:25:44.568069+00:00"
+}

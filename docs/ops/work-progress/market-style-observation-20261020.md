@@ -107,3 +107,12 @@
 - 新us_breadth_refresh.py、7项测试、BreadthComparison来源措辞、报告§16/验证JSON/截图；原一次TLS失败重取成功；第一次HTTP路径404纠正；无model/研究/通知。源码与预览组件同字节。
 - 私有候选存仓内.codex/.../us-breadth-20261022-complete，不上传行情。原字节备份路径和SHA见us-breadth-verification.json；无删除。安装只接受原cache SHA未变且候选保持旧历史的版本。
 - 本次数据补齐完成，用户视觉待验收。日常自动续更未接入；可用prepare/install CLI按授权续更，不冒称永久自动维护。原五问资料缺口维持。
+
+
+## 自动续更启用 2026-10-22T00:26:22.508032+08:00
+
+- 用户准确要求自动化免反复提醒，持续授权同一live JSON和备份。automation工具创建heartbeat id=automation，ACTIVE；本线程01a15915-cdaf-7873-8755-d5f5320fbfa9，Asia/Shanghai周二至六08:00，正常静默失败通知。view和配置读回已核；旧9自动化全保持暂停。
+- 稳定task-id与scope登记ae7c50267baf524d03c18a4cdc838e0d8183b4e8；新scope含自有BreadthComparison两查询5分钟刷新、仓内镜像。无模型自动调用，HTTP源码已核，post-edit tsc和归置通过；原839模块build通过但最初编辑路径错误，单独补post-edit tsc，不把早期build作为唯一本轮证据。
+- 立即最小只读预检：指数已收盘10/20，cache10/20，按无新交易日跳过取494股和写入，原SHA保持。首次定时预期10/22 08:00尚未执行。失败不会装入坏候选；离线后下次实际运行补齐。
+- 初次协调推送被并发更新拒绝，fetch/读新scope后普通推送成功；首次create缺destination被拒，修正为thread后唯一创建成功；首次相对路径编辑因cwd错误未写入，改绝对路径修好。回执保留，无删除/交易/新实验。
+- 报告§17替代§16的“未接自动续更”当前状态；原五问资料缺口不变。证据us-breadth-automation-verification.json，后续按既有更新模块和同授权运行，不重新问用户是否继续。
