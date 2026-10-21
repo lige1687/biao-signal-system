@@ -1,3 +1,12 @@
+# 组合用途与执行分工补充 2026-10-22T01:01:36.001859+08:00
+
+- task-id strategy-account-bridge-20261020；status active。checked_coordination_sha=d3346e45d005875215c4e3c1ddb3376096c64ebc；checked_at=2026-10-22T01:01:36.001859+08:00；重新fetch确认无新任务变化，已读task-id沿下段10项，冲突决定不变。
+- 用户新增明确金融价值、共同亏损、跨阶段、股票范围与市场环境适用。主比较all_qualified初始各半动量/短反转不变，预先加入同规则green_only作为唯一目的性跟进，股票自身资格不冒充市场牛熊。只读复用原84账户；0重跑/权重搜索。两池所有对手完整交付，不挑胜者。HAC固定12个月；费用/缺价/现金/分期/共同下跌与少赚均检查。原市场环境诊断只引用原owner。
+- 冻结合同 docs/experiments/raw/mature-strategy-followthrough-2026-10-22/combination-contract.json SHA 03668c2366b004340acb71c803389dbf4e4449d58c686f0ba265b9f9eaab87cb；效果尚未计算。1核心+1跟进（原约定至多3目的性跟进未扩）；来源已用6/6停止新增请求。
+- 唯一写者补充：沿现有Sol medium mature_strategy_local_audit仅在本方raw写analyze.py与combination-summary.json，内存读取冻结账户并产小摘要；root其余文件/原始证据/报告，Astra high方法只读。没有接管其他任务任何文件和运行；大结果0。
+
+---
+
 # 三方向接续与固定组合增量核查 2026-10-22T00:53:23.244262+08:00
 
 - task-id strategy-account-bridge-20261020，owner原root；status active，scope_released false。checked_coordination_sha=d09ad91d6fd617d2b8d032243cdeae8eaeba4eb6；checked_at=2026-10-22T00:53:23.244262+08:00；已读COORDINATION/self、research-dispatch-controller、research-utility-review-20261012（00:51新204/诊断）、personal-lowfreq-system-audit-20261018（00:47环境及10/21反转/84曲线）、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、investor-workspace-simplification-20261012（00:48新10指标消费）、mechanism-rebalancing-review-20261020（00:42）、market-style-observation-20261020（00:27）。冲突决定：单因子84/204账户、分组/环境与固定因子UI均原owner；本方不重算、不改其数据/代码/UI。
