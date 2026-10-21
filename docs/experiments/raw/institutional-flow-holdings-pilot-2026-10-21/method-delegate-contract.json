@@ -1,0 +1,29 @@
+{
+  "mission": "Review a bounded fund-flow versus holdings behavior design from local documents; no new source or market calculation",
+  "task_scope": [
+    "review universe eligibility, denominator/time alignment, fund type/cash/corporate action risks, fair behavior baseline and whether enough data supports running"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/institutional-intent-pressure-definitions-2026-10-21.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-holdings-pilot-2026-10-21/brief.json"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "concise admissible core comparison and mandatory blockers, <=700 Chinese characters"
+  ],
+  "stop_conditions": [
+    "data missing: mark conditional; do not assume schema",
+    "no new experiments/source fetch"
+  ],
+  "executor": {
+    "model": "gpt-6-astra",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

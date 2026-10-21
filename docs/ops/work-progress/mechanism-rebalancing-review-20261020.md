@@ -77,3 +77,14 @@
 - 2026-10-21T23:48:31.473365+08:00：两份报告API全文/列表唯一核同、33份旧raw与e307973逐字不变、归置通过；详细回执见本新raw/verification.json。历史进度中的“中国5基金PDF”同属措辞错误，应读作“嘉实增长单只基金5份PDF”，原件范围未变。交付前checked_coordination_sha=638d7e339fbdfb45a1a0811ad3b027f2a71897db，已读market-style-observation-20261020日线交付、personal-lowfreq-system-audit-20261018反转/TRAE结案，其他已读task-id沿本轮登记；无本题定义/资料同写，不接管其任务。仅本题准确路径发布，策略效果仍未评价。
 
 - 2026-10-21T23:48:59.360601+08:00：12准确路径270544B已普通发布至codex/mechanism-rebalancing-review-20261020@6825eef1f00046c2a558c7d73f6e173587319022，远端ref和各文件SHA核同；0删除/合main/共享索引修改。回执docs/experiments/raw/institutional-intent-pressure-definitions-2026-10-21/delivery-receipt.json，本次后续仅本回执与进度两文件；定义和资料字段问题已答，连续真实样本及策略收益仍未评价。
+
+
+## 数据完整性优先取数：核心研究受阻 2026-10-22T00:03:24.654534+08:00
+
+- 用户“数据全的优先做”授权后优先US NPORT；报告docs/experiments/institutional-flow-holdings-pilot-2026-10-21.md。execution blocked/core_data_unavailable，资料筛查完成、核心行为比较未运行，未宣称研究完成/因子无效。
+- 开工checked_coordination_sha=781049d57f4df9989840a921b7f032befb96adc4，cec572254dbd9f6f181d06555f9410f035f61b23推送读回；交付核35717b3d8975e6c27035b1c0c3e23975e49a0490，已读self/dispatch/sentiment、personal-lowfreq五分组曲线、market-style移页、investor-workspace静态附件、research-utility诊断交付，strategy-account沿已有范围，无本题同写。
+- 外盘output_storage预检12GiB/本机2MiB，实际只保存2份HTTP错误应答3850B，0ZIP/0原始基金记录；storage-plan绑定准确目录。1官方目录可读、1目录HTTP403、1ZIP网页工具类型不支持、1ZIP HTTP403、2搜索空；源请求6/6，上两阶段56+6=62，更早家族总数未知。0市场运行，旧>=1268年度拟合/4Pro保持。
+- Astra medium原代理只读定义/方法审，0联网写入；root实际取数/核失败/写资料表。没有Sol市场执行，未伪称派发。US基金类型、现金完整性、公司行动/申赎区间均未核真实样本，不执行核心。A股原一基金5报告与NAAIM/CFTC不替代。
+- 无访问绕过/付费/策略/生产/交易/通知/仓外DB更改，旧报告/冻结未变。恢复需正常可访问原件并保留本轮请求预算/失败，先资格再冻结；当前无后台下载。新报告本键/INDEX本行、raw/自身progress待API归置和准确Git读回；不是效果完成。
+
+- 2026-10-22T00:04:02.579620+08:00：报告API全文/唯一列表/分类核同，739个原登记项保持；两份HTTP错误原件SHA与3850B核同，原始ZIP确为0；归置通过。核查证明受阻状态准确，不证明因子效果。准确发布路径见交付回执。

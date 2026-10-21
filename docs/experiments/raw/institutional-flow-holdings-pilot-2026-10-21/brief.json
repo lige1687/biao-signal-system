@@ -1,0 +1,60 @@
+{
+  "created_at": "2026-10-21T23:57:46.832444+08:00",
+  "question": "Do reported fund outflows correspond to net common-stock reductions beyond same-security and same-period peers, conditional on data qualification?",
+  "mode": "research",
+  "decision_use": "decide whether funding-pressure mechanism merits further low-frequency risk/contrarian study; no trading use yet",
+  "sources": [
+    {
+      "path": "docs/experiments/institutional-intent-pressure-definitions-2026-10-21.md",
+      "sha256": "1932579f11fa374b12477f5b12f660a303dff6a571be6fd249b40f20613bd8ab"
+    },
+    {
+      "path": "docs/research/current-standards.json",
+      "sha256": "d1293a6c4536b0b440f8260d91e5a8d8d1485a0ccbd0fc3801d478baec68ce71"
+    },
+    {
+      "path": "docs/research/factor-discovery-playbook.md",
+      "sha256": "26d4eb80641279f2a3622faeb3895079f646e31903b91edd648337493196fe36"
+    },
+    {
+      "path": "configs/strategy-documents.v1.json",
+      "sha256": "2e931d72814e096546c9a54dcc41c415fea5ad0042587deaf5cb87293133266b"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+    }
+  ],
+  "data_priority": "US NPORT 2025 complete filing year preferred over incomplete one-fund A-share sample; exact economic periods and universe pending actual qualification",
+  "mechanism": "outflows may require adjustment; cash/liquidity/index mandates/underlying outlook compete with forced sale interpretation",
+  "baseline": "same security and period peer holdings change, with initial holdings/cash and prior fund performance where actually available",
+  "planned_data": "four 2025 quarterly official bulk packages, no effect-based selection",
+  "budget": {
+    "core_batches_max": 1,
+    "purposeful_followups_max": 3,
+    "public_source_requests_max": 6,
+    "public_source_requests_actual": 6,
+    "prior_family_annual_fits_min": 1268,
+    "prior_pro_min": 4,
+    "prior_two_stage_source_requests": 56
+  },
+  "allowed": [
+    "public free source acquisition",
+    "new isolated research scripts and artifacts",
+    "one frozen behavioral comparison if qualified"
+  ],
+  "disallowed": [
+    "paid data",
+    "old frozen rewrites",
+    "production/strategy/rules/trades",
+    "outside repository configuration/db changes",
+    "notifications"
+  ],
+  "data_time": "retrospective mechanism qualification; not real-time prediction; filing/public-time unknowns retained",
+  "completion": "blocked: actual archive data not acquired; no market test",
+  "storage_plan": "storage-plan.json"
+}

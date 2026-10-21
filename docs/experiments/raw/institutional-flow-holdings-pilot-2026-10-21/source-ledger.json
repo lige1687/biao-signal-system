@@ -1,0 +1,49 @@
+{
+  "updated_at": "2026-10-22T00:02:28.348842+08:00",
+  "attempts": [
+    {
+      "id": 1,
+      "operation": "web open SEC NPORT data catalogue",
+      "url": "https://www.sec.gov/data-research/sec-markets-data/form-n-port-data-sets",
+      "result": "success; catalogue only, no raw records"
+    },
+    {
+      "id": 2,
+      "operation": "standard HTTP catalogue for direct archive links",
+      "result": "HTTP 403 SEC automated-access policy page",
+      "receipt": "acquisition-page.json"
+    },
+    {
+      "id": 3,
+      "operation": "web click official 2025Q1 archive",
+      "url": "https://www.sec.gov/files/dera/data/form-n-port-data-sets/2025q1_nport.zip",
+      "result": "tool cannot handle application/octet-stream; official exact URL resolved, no bytes acquired"
+    },
+    {
+      "id": 4,
+      "operation": "standard HTTP exact 2025Q1 archive",
+      "result": "HTTP 403 SEC automated-access policy page; zero ZIP bytes",
+      "receipt": "acquisition-q1.json"
+    },
+    {
+      "id": 5,
+      "operation": "search public NPORT dataset with original-source provenance",
+      "query": "SEC NPORT dataset download parquet github 2025 holdings fund flows",
+      "result": "empty results; no claim alternatives do not exist"
+    },
+    {
+      "id": 6,
+      "operation": "search public NPORT holdings and cash-flow download",
+      "query": "\"N-PORT\" \"dataset\" \"download\" holdings cash flow open data",
+      "result": "empty results; no verified alternate dataset"
+    }
+  ],
+  "source_requests_actual": 6,
+  "source_budget": 6,
+  "prior_two_stage_requests": 56,
+  "cumulative_these_stages": 62,
+  "older_family_source_total": "unknown",
+  "no_access_bypass": true,
+  "data_downloads_successful": 0,
+  "new_market_fits": 0
+}
