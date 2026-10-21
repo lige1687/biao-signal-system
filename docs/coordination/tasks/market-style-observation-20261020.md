@@ -1,3 +1,13 @@
+# 美股宽度自动续更登记 2026-10-22T00:22:45.096133+08:00
+
+- task-id market-style-observation-20261020；owner原root；status active；scope_released false。用户明确“这个搞成自动化的哈不要我反复提醒”，授权将上一轮已核美股宽度补齐流程持续自动运行；同一live JSON与备份成为本任务周期写入范围，不要求用户逐次提醒。
+- checked_coordination_sha cc4b57a0db5e336b0f7f91570d33417a797c27e3；checked_at 2026-10-22T00:22:45.096133+08:00；已读COORDINATION/self/dispatch/research-utility最新曲线接入，补读系统静态入口与mechanism新范围，皆无冲突，沿前轮系统与地图边界，无同自动化任务。已查9个自动化均暂停，无US breadth同类，不恢复旧日报/提醒。
+- 范围root唯一：通过Codex automation工具在本线程创建heartbeat，北京时间周二至六08:00；仅调用已验收us_breadth_refresh，先只读判断新已收盘交易日再取数，成功候选经校验备份安装到已授权JSON；不改研究/原矩阵/规则/交易，不新增后台服务。自身原报告/progress/raw回执记录，另改自有BreadthComparison.tsx两条只读查询刷新间隔为5分钟，仓内5192镜像同改；避免服务更新后页面仍复用12小时旧值，不自动触发Agent模型。
+- 基线codex/market-style-observation-20261020@73dffc57abe19afb790093ed626b94cbde95ada8；验收工具create及view读回ACTIVE/日程/当前线程/准确路径与失败策略，真实取数写入复用上一轮已通过7测试/HTTP/浏览器证据；尚未到首次日程，不把配置成功冒充定时执行成功。
+- 正常更新与无变化静默，失败提示，notificationPolicy failed_runs_only；保留原有效缓存，不伪造日期或覆盖历史。无需单独批准每次同范围写入。机器/应用离线不能保证执行，恢复后按真实缺口补齐。
+
+---
+
 # 美股宽度断档实际补齐 2026-10-22T00:20:49.844579+08:00
 
 - task-id market-style-observation-20261020；owner原root；本轮repair completed、scope_released true；原完整五问资料缺口维持。checked_coordination_sha c706260180535bfc9fbba8c7149dad7f6c52fb24；checked_at 2026-10-22T00:20:49.844579+08:00。开始已读COORDINATION/self/dispatch/investor-workspace-simplification/investor-observation-map，交付补读系统静态五组图、personal五组曲线、research-utility展示最新记录，均无同模块冲突。
