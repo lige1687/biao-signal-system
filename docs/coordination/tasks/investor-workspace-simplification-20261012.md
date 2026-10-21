@@ -1,3 +1,13 @@
+# 专业诊断折叠区与真实JSON绑定 2026-10-22T01:08:06.029335+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=7a62a013bed3d6cad7f5b78b54a5f65052ce229d；checked_at=2026-10-22T01:08:06.029335+08:00。已读当前新增任务段，原COORDINATION/self/research-utility/personal/dispatch与UI唯一写者范围保持；研究owner新标准文档/数据/科学结案不接管。原5文件静态已完成；当前固定UI主体和2批数据工作，新增诊断继续当前组件内实现。
+- 用户最新明确标准化及专业诊断；source owner已独核最终诊断（首次绿池基准等错误由其修复并留痕，未接入本UI）。准确新增运行树web/public/research/factor-curve-library-20261022/{legacy-diagnostics.json,new-diagnostics.json}及catalog更新，源目录仍研究owner单写。按public-data-receipt及catalog sha逐字复制，不修改诊断计算。旧summary/环境原SHA保持。
+- 原FactorCurves.tsx/model/CSS/test范围内可选diagnostics dataUrl+sha，核datasetId/sourceSummarySha256；折叠显示5组月均柱图、G5相对同池同费用基准逐月差额热图、原年度表、月度买卖/现金/缺价toggle；无个股预测资料就明示未评价，不从账户曲线伪造。部分年度不年化；按分期只筛原月份/完整覆盖的原年度，不拼账户。主曲线/条件统计保持。
+- 已实际新增本轮具体展示目标okr-30b877e334bc（旧20260930冻结阅读目标不改）；仅按用户明确UI授权登记，当前in_progress、4/6，诊断和最终验收未冒称完成。真实API回执自身factor-curves-goal-20261022.json。新增其他AI规范入口由研究owner维护docs/research/factor-research-display-contract.md，本方只更新原一份技术接口，不另立字段标准。
+- own核心回执factor-curves-core-20261022.json保留初次环境mock测试10/1与过早标11通过的更正、旧未带dataset的curves URL遇新批默认切换的实际失败；已限定旧链接匹配原源、所有新控件显式写dataset并新增回归。随后12项受影响检查通过，继续真实诊断和最终回归。无数据重算/交易/服务重启/通知/其他聊天发消息。
+
+---
+
 # 固定曲线界面追加消费新10指标数据 2026-10-22T00:48:36.750716+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=d8179247772a9c912d2d650d5aa64da74141874f；checked_at=2026-10-22T00:48:36.750716+08:00。交付前相关任务新增段已读，原UI唯一写者分工不变，研究source仍research-utility owner负责。原4因子40相关回归、64组合、宽窄可读性与实际控件已核；修正小屏首屏与百分点单位，继续必要收尾。
