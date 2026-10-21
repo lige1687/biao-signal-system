@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import TrendChart, { type LineSeries } from "../trend/TrendChart";
+import TrendChart, { type LineSeries } from "./MarketTrendChart";
 import "./observation-conditions.css";
 
 export type LocalVolatilityObservation = {

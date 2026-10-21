@@ -62,7 +62,7 @@
 .style-periods button:focus-visible,
 .style-comparison summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.style-history-chart { width: 100%; height: 340px; }
+.style-history-chart { width: 100%; min-width: 0; height: 340px; }
 .style-history-note + .style-history-note { margin-top: 5px; }
 .style-history-method { margin-top: 8px; }
 .style-history-method summary,
@@ -253,7 +253,7 @@
 
 @media (max-width: 700px) {
   .style-history-header { align-items: flex-start; flex-direction: column; }
-  .style-history-chart { height: 300px; }
+  .style-history-chart { height: 320px; }
   .style-comparison-head { align-items: flex-start; flex-direction: column; }
   .style-table-header,
   .style-table-row { grid-template-columns: minmax(96px, 1fr) minmax(74px, .7fr) minmax(156px, 1.6fr); gap: 4px; }
@@ -261,6 +261,12 @@
   .style-detail-figures,
   .style-detail-valuation { grid-template-columns: 1fr; gap: 6px; }
   .style-detail-groups { grid-template-columns: 1fr; gap: 12px; }
+}
+
+@media (max-width: 430px) {
+  .style-history-chart { height: 340px; }
+  .style-chart-modes { max-width: 100%; }
+  .style-chart-modes button { padding: 6px 8px; }
 }
 
 @media (max-width: 430px) {

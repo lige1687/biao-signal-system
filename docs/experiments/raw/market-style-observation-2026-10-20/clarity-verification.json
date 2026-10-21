@@ -1,0 +1,81 @@
+{
+  "checked_at": "2026-10-21T22:46:32.549249+08:00",
+  "coordination_sha": "30bf23c8db1e3209bc35e6935014eba0f5669499",
+  "source_files": [
+    {
+      "path": "web/src/components/market-style/StyleComparison.tsx",
+      "bytes": 14221,
+      "sha256": "3db0abccd1557963e92cf4afab5e6f2cef5dc2b2152bdf4a788d4dde7751457f",
+      "preview_matches": true
+    },
+    {
+      "path": "web/src/components/market-style/style-comparison.css",
+      "bytes": 8229,
+      "sha256": "13b327e30d411ab85f9e749803e985d9d369f87174e5b51b8b49bb7d5991981b",
+      "preview_matches": true
+    },
+    {
+      "path": "web/src/components/market-style/BreadthComparison.tsx",
+      "bytes": 13319,
+      "sha256": "cd0fe59770fbff7c19b9fe0ae71f110794d5019648e02b9e5d70641a2dbeb8fa",
+      "preview_matches": true
+    },
+    {
+      "path": "web/src/components/market-style/breadth-comparison.css",
+      "bytes": 2328,
+      "sha256": "4ef678be740a6fbb0ac517b3ecdeaaa4642fe775ce699ccf063f16bcb5458145",
+      "preview_matches": true
+    },
+    {
+      "path": "web/src/components/market-style/MarketTrendChart.tsx",
+      "bytes": 3078,
+      "sha256": "f78ea29ebbc65e51e830a4b62a1f27da12e6e49e9cf3072fa9890968241e32dc",
+      "preview_matches": true
+    },
+    {
+      "path": "web/src/components/market-style/MarketStylePanel.tsx",
+      "bytes": 9982,
+      "sha256": "e5035bbda627ad3e91d3cd309ff935ed9a8616a55e329f608c848a534cfe28f3",
+      "preview_matches": true
+    },
+    {
+      "path": "web/src/components/market-style/ObservationConditions.tsx",
+      "bytes": 6590,
+      "sha256": "983cf556db13a63526de6bbf1d337d632cd86d4bf2774a350827ba967434feb5",
+      "preview_matches": true
+    },
+    {
+      "path": "web/src/components/market-style/PortfolioRiskReview.tsx",
+      "bytes": 11189,
+      "sha256": "77f08fe7bde2446e177370b6a1bd3e305e57ffe64da62a198b020e07765d6db6",
+      "preview_matches": true
+    }
+  ],
+  "financial_change_audit": {
+    "three_callers_import_only": true,
+    "style_history_and_snapshot_identical": true,
+    "style_breadth_diff_review": "Renderer, typography, lines and layout only; series values, dates, rules and transformations unchanged"
+  },
+  "build": {
+    "result": "passed",
+    "modules": 836,
+    "warning": "existing chunks above 500 kB"
+  },
+  "repo_hygiene": "passed",
+  "passive_health": {
+    "ok": true,
+    "model_requests": 0,
+    "snapshots": 0,
+    "completed": 0,
+    "in_flight": 0
+  },
+  "limitations": [
+    "Visual appearance awaits user acceptance",
+    "Original five-question data gaps remain as report section 12"
+  ],
+  "repairs": [
+    "Initial vector pass had axis-name/legend collision and final date edge; corrected spacing before acceptance",
+    "Mobile scrolling legend hid full names; changed style/portfolio to wrap",
+    "Read-only DOM probe parseFloat unavailable; replaced with Number; no application issue"
+  ]
+}

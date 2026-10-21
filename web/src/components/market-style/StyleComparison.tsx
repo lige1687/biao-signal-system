@@ -30,7 +30,7 @@ function StyleHistoryChart({ mode }: { mode: ChartMode }) {
 
   useEffect(() => {
     if (!ref.current) return;
-    const chart = echarts.init(ref.current, undefined, { renderer: "canvas" });
+    const chart = echarts.init(ref.current, undefined, { renderer: "svg" });
     const resize = new ResizeObserver(() => chart.resize());
     resize.observe(ref.current);
     return () => { resize.disconnect(); chart.dispose(); };
@@ -62,15 +62,15 @@ function StyleHistoryChart({ mode }: { mode: ChartMode }) {
         confine: true,
         valueFormatter: (value: unknown) => value == null ? "—" : `${Number(value).toFixed(1)}（${mode === "wealth" ? "起点100" : "相对价值比"}）`,
       },
-      legend: { top: 0, type: "scroll", textStyle: { fontSize: 11 }, data: STYLE_HISTORY_IDS.map((id) => CHART_STYLES[id].name) },
-      grid: { left: 49, right: 17, top: 46, bottom: 48 },
+      legend: { top: 0, type: "plain", textStyle: { fontSize: 12, color: "#344256" }, data: STYLE_HISTORY_IDS.map((id) => CHART_STYLES[id].name) },
+      grid: { left: 40, right: 42, top: 66, bottom: 36, containLabel: true },
       xAxis: {
         type: "category",
         data: points.map((point) => point.date),
         boundaryGap: false,
-        axisLabel: { color: "#697685", fontSize: 10, hideOverlap: true, showMinLabel: true, showMaxLabel: true, formatter: (date: string) => date === "2026-09-30" ? "2026·9月" : date.slice(0, 4) },
+        axisLabel: { color: "#344256", fontSize: 12, hideOverlap: true, showMinLabel: true, showMaxLabel: true, formatter: (date: string) => date === "2026-09-30" ? "2026·9月" : date.slice(0, 4) },
       },
-      yAxis: { type: "value", scale: true, axisLabel: { color: "#697685", fontSize: 10 }, splitLine: { lineStyle: { color: "#e8edf1" } } },
+      yAxis: { type: "value", scale: true, name: mode === "wealth" ? "累计价值（起点=100）" : "相对价值比（起点=100）", nameTextStyle: { color: "#344256", fontSize: 12, align: "left" }, axisLabel: { color: "#344256", fontSize: 12 }, splitLine: { lineStyle: { color: "#e2e8f0", width: 1 } } },
       series,
     }, true);
   }, [mode, points]);

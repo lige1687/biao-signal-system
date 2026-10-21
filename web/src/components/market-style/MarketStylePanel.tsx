@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fundamentalsApi, request } from "../../api/client";
 import type { MarketObservation, MarketObservationsResponse, RatesHistoryResponse, RatesHistorySeries } from "../../types";
-import TrendChart from "../trend/TrendChart";
+import TrendChart from "./MarketTrendChart";
 import StyleComparison from "./StyleComparison";
 import PortfolioRiskReview from "./PortfolioRiskReview";
 import ObservationConditions from "./ObservationConditions";

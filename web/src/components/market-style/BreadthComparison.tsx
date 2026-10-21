@@ -79,7 +79,7 @@ function BreadthProjectionChart({ view, priceName }: { view: View; priceName: st
   const chart = useRef<echarts.ECharts | null>(null);
   useEffect(() => {
     if (!node.current) return;
-    const instance = echarts.init(node.current, undefined, { renderer: "canvas" });
+    const instance = echarts.init(node.current, undefined, { renderer: "svg" });
     chart.current = instance;
     const resize = new ResizeObserver(() => instance.resize());
     resize.observe(node.current);
@@ -90,25 +90,25 @@ function BreadthProjectionChart({ view, priceName }: { view: View; priceName: st
     const marks = shade(view.bands);
     chart.current.setOption({
       animation: false,
-      grid: [{ left: 52, right: 18, top: 28, height: "36%" }, { left: 52, right: 18, top: "52%", height: "34%" }],
-      legend: { top: 0, left: 50, data: [priceName, "20日", "50日", "200日"], textStyle: { fontSize: 11 } },
+      grid: [{ left: 40, right: 34, top: 50, height: "32%", containLabel: true }, { left: 40, right: 34, top: "53%", height: "31%", containLabel: true }],
+      legend: { type: "scroll", top: 0, left: 0, right: 0, data: [priceName, "20日", "50日", "200日"], textStyle: { fontSize: 12, color: "#344256" } },
       tooltip: { trigger: "axis", axisPointer: { type: "cross", link: [{ xAxisIndex: [0, 1] }] },
         valueFormatter: (value: unknown) => value == null ? "—" : Number(value).toFixed(1) },
       axisPointer: { link: [{ xAxisIndex: [0, 1] }] },
       xAxis: [
-        { type: "category", gridIndex: 0, data: view.dates, boundaryGap: false, axisLabel: { show: false } },
-        { type: "category", gridIndex: 1, data: view.dates, boundaryGap: false, axisLabel: { fontSize: 11, hideOverlap: true } },
+        { type: "category", gridIndex: 0, data: view.dates, boundaryGap: false, axisLabel: { show: false }, axisLine: { lineStyle: { color: "#64748b", width: 1.2 } } },
+        { type: "category", gridIndex: 1, data: view.dates, boundaryGap: false, axisLabel: { color: "#344256", fontSize: 12, hideOverlap: true, showMinLabel: true, showMaxLabel: true, formatter: (date: string) => date.slice(0, 7) }, axisLine: { lineStyle: { color: "#64748b", width: 1.2 } } },
       ],
       yAxis: [
-        { type: "value", gridIndex: 0, scale: true, name: "指数点位", nameTextStyle: { fontSize: 11 }, axisLabel: { fontSize: 11 } },
-        { type: "value", gridIndex: 1, min: 0, max: 100, name: "宽度 %", nameTextStyle: { fontSize: 11 }, axisLabel: { fontSize: 11, formatter: "{value}%" } },
+        { type: "value", gridIndex: 0, scale: true, name: "指数点位", nameTextStyle: { color: "#26364b", fontSize: 12, padding: [0, 0, 4, 0] }, axisLabel: { color: "#344256", fontSize: 12 }, axisLine: { show: true, lineStyle: { color: "#64748b", width: 1.2 } }, splitLine: { lineStyle: { color: "#cbd3dd" } } },
+        { type: "value", gridIndex: 1, min: 0, max: 100, name: "宽度（%）", nameTextStyle: { color: "#26364b", fontSize: 12, padding: [0, 0, 4, 0] }, axisLabel: { color: "#344256", fontSize: 12, formatter: "{value}%" }, axisLine: { show: true, lineStyle: { color: "#64748b", width: 1.2 } }, splitLine: { lineStyle: { color: "#cbd3dd" } } },
       ],
       dataZoom: [{ type: "inside", xAxisIndex: [0, 1], start: 0, end: 100 }, { type: "slider", xAxisIndex: [0, 1], start: 0, end: 100, bottom: 6, height: 18 }],
       series: [
-        { name: priceName, type: "line", xAxisIndex: 0, yAxisIndex: 0, data: view.price, showSymbol: false, connectNulls: false, lineStyle: { width: 2, color: "#334e75" }, itemStyle: { color: "#334e75" } },
+        { name: priceName, type: "line", xAxisIndex: 0, yAxisIndex: 0, data: view.price, showSymbol: false, connectNulls: false, lineStyle: { width: 2.6, color: "#243d61" }, itemStyle: { color: "#243d61" } },
         ...view.breadth.map((values, index) => ({ name: BREADTH_LINES[index].name, type: "line" as const,
           xAxisIndex: 1, yAxisIndex: 1, data: values, showSymbol: false, connectNulls: false,
-          lineStyle: { width: index === 1 ? 2 : 1.2, color: BREADTH_LINES[index].color, opacity: index === 1 ? 1 : 0.75 }, itemStyle: { color: BREADTH_LINES[index].color } })),
+          lineStyle: { width: index === 1 ? 2.6 : 1.8, color: BREADTH_LINES[index].color, opacity: 1 }, itemStyle: { color: BREADTH_LINES[index].color } })),
         { name: "__price_conditions", type: "line", xAxisIndex: 0, yAxisIndex: 0, data: [], silent: true, tooltip: { show: false }, lineStyle: { opacity: 0 }, ...marks },
         { name: "__breadth_conditions", type: "line", xAxisIndex: 1, yAxisIndex: 1, data: [], silent: true, tooltip: { show: false }, lineStyle: { opacity: 0 }, ...marks },
       ],

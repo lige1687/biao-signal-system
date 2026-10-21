@@ -1,3 +1,14 @@
+# 图表清晰度修复已验证 2026-10-21T22:46:32.549249+08:00
+
+- 本轮视觉缺陷修复完成，用户视觉待验收；原五问核心资料仍缺，不改整项目标结论。
+- checked_coordination_sha 30bf23c8db1e3209bc35e6935014eba0f5669499；checked_at 2026-10-21T22:46:32.549249+08:00。开工读self、dispatch、investor-workspace-simplification、investor-observation-map、portfolio-trends、strategy-account-bridge；交付新增读 personal-lowfreq-system-audit-20261018，新增范围不触及本组件，无同写冲突。
+- 当前窗口DPR2而旧canvas仅1倍；10/11px坐标。7图统一SVG、12px以上深色坐标、单位与端点留白，窄屏图例完整换行；金融算法/数据/规则未改。独立MarketTrendChart只给本页面用，共享TrendChart/父页/5188只读。
+- 542px真实窗口、390/1280检查无越界/横溢；风格、宽度条件与范围、账户收益/跌幅切换通过；836模块最终build、归置通过，console error0，health model_requests0。精确8源码与预览同SHA。初稿遮挡/裁边已修，记录在clarity-verification.json。
+- 分工Luna low四个样式/曲线文件、root专用renderer与整合浏览器。预览5192及只读8192重新启动；没有自动模型/研究/通知。API首次错误探针/api/market-style/health返回404，正确/health为200；未重复启动服务。
+- 本轮成果沿codex/market-style-observation-20261020，base3bea8339fb3d514765546f9b514b65105bc8a3fb；准确提交/readback见clarity-publication-receipt.json。共享主树分支/默认索引不改，旧资料保留。
+
+---
+
 # 五问返核：可用答案与曲线补齐，整项仍部分完成 2026-10-21T00:26:10.142191+08:00
 
 - task-id market-style-observation-20261020；本轮实现与核验已完成，原完整需求未完成；核心资料缺口见报告第12节，用户视觉待验收。上轮completed仅界面阶段，不代表五问全部解决。

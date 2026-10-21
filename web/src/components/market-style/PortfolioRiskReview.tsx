@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TrendChart, { type LineSeries } from "../trend/TrendChart";
+import TrendChart, { type LineSeries } from "./MarketTrendChart";
 import "./portfolio-risk-review.css";
 
 type CurvePoint = { date: string; nav: number | null; equity: number | null; drawdown: number | null };
