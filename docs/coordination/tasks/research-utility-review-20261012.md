@@ -1,3 +1,15 @@
+# 因子资金曲线固定展示与四类扩展资格 2026-10-22T00:21:42.493596+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=c706260180535bfc9fbba8c7149dad7f6c52fb24；checked_at=2026-10-22T00:21:42.493596+08:00。已读COORDINATION/self、personal-lowfreq-system-audit（00:18曲线已完成/释放）、investor-workspace-simplification（00:16静态已完成）、market-style-observation（宽度修复）、mechanism-rebalancing-review、research-dispatch-controller。原研究owner84流封存，不接管修改或重跑。
+- 用户新增明确要求：截图20/60/120日动量、双均线距离/PPO、残差动量、波动率/下行风险也做资金曲线；固定规范系统界面，并考虑因子×股票池×市场环境与权威牛熊定义。根任务负责研究数据和定义；系统前端组件已按既有明确授权派给系统实现owner。UI源码、服务、原owner结果不在根任务写范围。
+- 增量问题：同一预先合格股票池/日期/资金和费用下，这些已研究信息的分组账户路径是否支持排序或风险用途，改善与少赚/费用/缺价代价是什么。不是重启原预测模型或把全新股票名单假作原样本；只对暂无连续账户的必要项补记账。旧低波/12减1等84流直接引用；新池或必要基准变化须说明原因并先冻结，不为优胜调参。
+- 新独占范围 docs/experiments/factor-curve-library-2026-10-22.md、同名raw小合同/记录/回执；src/lei_signal/research/factor_curve_extension.py、tests/unit/test_factor_curve_extension.py；web/public/research/factor-curve-library-20261022/ 仅小结构化数据；definitions.v1.json仅本题新增研究对象、registry本键/INDEX本行、自己的progress。上轮本报告曲线导航范围保持。大结果按外盘绑定；现内盘7.4GB/外盘495GB，通过后才运行；不改旧冻结数据。
+- 当前仅读库存：60日低波已有账户线；20/60/120、PPO/距离/下行风险需派生新分数/分组，残差有2016—25新300既有分数，2015预热不足。未冻结前不接收益；历史均已看。拟复用factor_group_curves纯simulate，旧runner不重用/不改。
+- Sol data只读库存、Sol impl只读接口复用；Astra method只读原始方法（≤6来源请求/无收益运行），root冻结/独核；两个只读Sol已完成。新效果0，具体账户批次在定义/资格核清后登记。原策略层为选股研究与风险观察，PPO强度不代表买卖点，未知历史成员不伪装完整指数。新增市场环境仅预先可知状态，不拼接选中月份成虚构资金线；没有合格范围就明确缺口。
+- 禁止交易/改规则阈值/生产模型/购买/通知/删除/自动后台。完成是实际固定系统页面能显示真实线、来源/用法/费用/风险/范围、性能与差额及条件解释；科学有效性独立判断。
+
+---
+
 # 补交收益曲线入口与实际页面验收 2026-10-22T00:14:44.458284+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active（仅展示补交）；scope_released false；checked_coordination_sha=7d3eb2903f83ec7b3dd9ba01bda748ed173437f3；checked_at=2026-10-22T00:14:44.458284+08:00。已读 COORDINATION/self、personal-lowfreq-system-audit-20261018（五组连续账户在做）、investor-workspace-simplification-20261012（三图已接）、market-style-observation-20261020（宽度修复）、mechanism-rebalancing-review-20261020、research-dispatch-controller。无文件同写；新资金研究与其结案仍归 personal owner。
