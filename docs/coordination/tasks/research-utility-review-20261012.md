@@ -1,3 +1,13 @@
+# 单因子分组与分期研究启动 2026-10-21T23:38:06.203313+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=e7439557827af731776c3d215bebd8b63f88f4ea；checked_at=2026-10-21T23:38:06.203313+08:00。已读COORDINATION/self/personal-lowfreq-system-audit（10/21 22:40反转论文月度复现）、lowfreq-strategy-discovery/investor-workspace-simplification/strategy-account-bridge（成熟策略UI）/research-dispatch-controller/pro-advice-process-review（盈利季度资料已查）。本题复用已保存new300特征/标签，新的四排序共同样本五分组和分期增量展示；不接管600原论文/跳月、行业反转、盈利采集、账户或前向服务。
+- 用户明确要求“想看单独因子：计算值、分组、排序，再验证/测试，目前有线索的几个做一下”；新增问题是分组单调性/排序信息及简单基准增量，旧资金负结果保持。暂定已有普通动量、52周高点、近期偏冷、低波动；FIP与残差既有弱结果只复用，不加参数或重跑旧账户。最终准确定义/同样资料/分期/缺失处理/用途在效果前冻结；所有2015—25已经看过，只能历史分期复核，不能改称未见测试。
+- 独占新路径 docs/experiments/factor-sorting-diagnostics-2026-10-21.md、同名raw/、src/lei_signal/research/factor_sorting_diagnostics.py、tests/unit/test_factor_sorting_diagnostics.py、web/public/research/factor-sorting-diagnostics-20261021/；registry本键/INDEX本行、原progress/原目标仅研究note（写入再核当前许可）；若仅方法不新因子则不增定义。原策略与旧输入/代码/冻结合同不改。现用5188静态资源继续请求系统owner按准确路径采用，不代改其UI。
+- 本有界新增汇总1核心、最多3必要跟进、最多6公开方法请求；0新行情下载/0新参数网格；旧账户core1/1、source3/6，短反转core1/1/followup2/3/source2/6保持。计划复用已核来源原价/因子与保存标签，原价资格优先，不凭漂亮结果筛股票/月份。新大结果预估64MiB、本机小记录2MiB，固定外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9已核可用496.9GB，本机10.4GB。数据及代码绑定后才能统计；适配器不支持分组时采用独立冻结方法并如实标明，不强行改成预测拟合。
+- 主工作树codex/factor-unit-research-20260915基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，保留脏树。计划Sol medium只读数据/去重、Astra high方法审阅、Sol实现明确新模块，主控冻结/执行/独立核数/交付，每项一写者。验收为实际因子值、五组图、按时期的表现、相对已有信息增量及缺失/不确定范围，实际系统图文可读；不以代码检查代表有效，不改生产交易或仓外资料。
+
+---
+
 # 低换手绿色选股账户：有界检验交付 2026-10-20T17:11:50.472625+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed（仅本轮低换手账户问题）；scope_released true；checked_coordination_sha=59d04372ab4d214e569a323c055f0b23432d8366；checked_at=2026-10-20T17:11:50.472625+08:00。已读COORDINATION/self、personal-lowfreq-system-audit-20261018（16:52美股参考定义，原owner）、lowfreq-strategy-discovery-20261019、research-dispatch-controller、investor-workspace-simplification-20261012（17:03三图交付）、strategy-account-bridge-20261020（17:08前向观察接入，无重复研究）、pro-advice-process-review-20261020（17:05次开盘比较交付）；无同路径冲突，不接管其研究或服务。
