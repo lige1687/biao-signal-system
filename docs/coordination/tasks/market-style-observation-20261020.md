@@ -1,3 +1,16 @@
+# 美股宽度断档实际补齐 2026-10-22T00:20:49.844579+08:00
+
+- task-id market-style-observation-20261020；owner原root；本轮repair completed、scope_released true；原完整五问资料缺口维持。checked_coordination_sha c706260180535bfc9fbba8c7149dad7f6c52fb24；checked_at 2026-10-22T00:20:49.844579+08:00。开始已读COORDINATION/self/dispatch/investor-workspace-simplification/investor-observation-map，交付补读系统静态五组图、personal五组曲线、research-utility展示最新记录，均无同模块冲突。
+- 成果codex/market-style-observation-20261020@73dffc57abe19afb790093ed626b94cbde95ada8，base f892aa7161ecce1ee3319f8304be0b29a8ca1900；7准确文件正常推送、远端ref及逐blob字节核同。主共享分支/索引不切换，无main合入。
+- 原因：sp500行情矩阵/宽度JSON均止9/4，旧读取永远复用缓存，旧补尾脚本已归档且未查到日常调用。新安全prepare/install工具独立计算近期复权完整窗口，对齐实际指数交易日，校验有效股票覆盖和旧源指纹，保留旧记录。
+- 用户准确确认“确认，备份后更新实际看板”后，仅更新 ~/.lei_signal_lab/cache/sp500_ma_breadth_history.json 并留同目录before时间戳备份，SHA/准确路径在us-breadth-verification.json。原行情矩阵/研究冻结/数据库/定时不改；8000未重启。
+- 已追加31交易日9/8—10/20，原11,694日全留，现11,725日；当前492/494有效，PSKY/WBD缺近期报价不填造。固定旧观察名单非逐日官方成分，美股也非纳指自身宽度，UI措辞已改。10/21盘中排除。
+- 7测试、31日×3组独立逐股核数、交易日期完整匹配、旧历史保持、归置通过。8000和5192 HTTP200日期数值一致；真实浏览器价格和宽度截至10/20，SVG三线/轴可见，console error0；截图us-breadth-repaired.png。GM首次TLS EOF单只重取成功；首次错误HTTP路径404依client纠正，失败留回执。
+- 私有近两年行情/候选约数MB留仓内.codex/.../us-breadth-20261022-complete，不上传股票行情；新旧JSON备份已核。本轮约498次公开行情请求（探针1、494股、指数2、GM重试1），0模型/付费/新收益实验/通知/代理。日常自动续更尚未接入；可用手动prepare/install工具继续，未冒称永久自动维护。
+- 证据报告§16、原progress、us-breadth-verification.json、截图、us-breadth-publication-receipt.json（本机小回执）。本次实际数据已生效，视觉待用户验收；若后续需要日常续更须承接现有更新入口和准确仓外写入权限，不重跑本轮历史。
+
+---
+
 # 美股宽度 9 月断档修复 2026-10-22T00:11:33.731571+08:00
 
 - task-id market-style-observation-20261020；owner原root；status active；scope_released false。用户本轮明确要求查清美股宽度9月后截断并补齐；服务市场环境观察数据层，不改变策略或研究定义。
