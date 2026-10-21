@@ -1,0 +1,295 @@
+{
+  "as_of": "2026-10-22",
+  "scope": "public source qualification only; no market statistics, SEC bulk download, login, or bypass",
+  "counting_rule": "Count each searched query, opened URL, click target, find target, or direct HTTP request as one attempted source request, including failures. Web search results are only leads until an original source is read.",
+  "requests_total": 144,
+  "batches": [
+    {
+      "id": 1,
+      "count": 2,
+      "surface": "web search",
+      "targets": [
+        "N-CEN data sets 2025 series ID ETF open end fund csv SEC",
+        "sec ncen bulk structured data monthly series id ETF index mutual fund github"
+      ],
+      "result": "found secondary parser guide, not classifications"
+    },
+    {
+      "id": 2,
+      "count": 3,
+      "surface": "web search",
+      "targets": [
+        "site:sec.gov/files/dera/data/form-n-cen-data-sets N-CEN data sets",
+        "site:sec.gov Form N-CEN Data Sets",
+        "2025 ncen zip github sec form ncen bulk"
+      ],
+      "result": "no usable original data"
+    },
+    {
+      "id": 3,
+      "count": 3,
+      "surface": "web search",
+      "targets": [
+        "2025 Fidelity Contrafund prospectus Series S000 active",
+        "2025 Fidelity Blue Chip Growth Fund prospectus S000 series id actively managed",
+        "2025 Vanguard Windsor II fund prospectus S000 series active"
+      ],
+      "result": "empty search; no identity inferred"
+    },
+    {
+      "id": 4,
+      "count": 1,
+      "surface": "GitHub repository API",
+      "targets": [
+        "https://api.github.com/search/repositories?q=ncen+in:name,description&per_page=20"
+      ],
+      "result": "results irrelevant or ambiguous"
+    },
+    {
+      "id": 5,
+      "count": 1,
+      "surface": "GitHub repository API",
+      "targets": [
+        "https://api.github.com/search/repositories?q=%22N-CEN%22+SEC+fund&per_page=30"
+      ],
+      "result": "found bensacc/nport-mcp source code, no classification data"
+    },
+    {
+      "id": 6,
+      "count": 4,
+      "surface": "GitHub raw public files",
+      "targets": [
+        "https://raw.githubusercontent.com/bensacc/nport-mcp/main/README.md",
+        "https://raw.githubusercontent.com/bensacc/nport-mcp/main/src/nport/ingest/sources/ncen.py",
+        "https://raw.githubusercontent.com/bensacc/nport-mcp/main/docs/data-notes.md",
+        "https://raw.githubusercontent.com/bensacc/nport-mcp/main/src/nport/ingest/sources/sec.py"
+      ],
+      "result": "identified official dataset path and annual filing versus quarterly release distinction; third-party evidence only"
+    },
+    {
+      "id": 7,
+      "count": 1,
+      "surface": "GitHub repository API",
+      "targets": [
+        "https://api.github.com/search/repositories?q=%22form+n-cen%22+data&per_page=30"
+      ],
+      "result": "HTTP 403 GitHub rate limit; no retry"
+    },
+    {
+      "id": 8,
+      "count": 2,
+      "surface": "web open",
+      "targets": [
+        "https://www.sec.gov/data-research/sec-markets-data/form-n-cen-data-sets",
+        "https://github.com/dgunning/edgartools/blob/main/docs/guides/fundcensus-data-object-guide.md"
+      ],
+      "result": "official SEC index confirms datasets; secondary guide does not replace original flags"
+    },
+    {
+      "id": 9,
+      "count": 1,
+      "surface": "web click",
+      "targets": [
+        "https://www.sec.gov/files/ncen_readme.pdf"
+      ],
+      "result": "official readme available"
+    },
+    {
+      "id": 10,
+      "count": 4,
+      "surface": "web find in SEC readme",
+      "targets": [
+        "FUND_TYPE",
+        "INDEX",
+        "5.16 FUND_REPORTED_INFO",
+        "5.44 ETF"
+      ],
+      "result": "identified series-level flags and keys"
+    },
+    {
+      "id": 11,
+      "count": 2,
+      "surface": "web open page positions",
+      "targets": [
+        "SEC N-CEN readme around FUND_REPORTED_INFO",
+        "SEC N-CEN index around 2025 links"
+      ],
+      "result": "read primary fields and four quarterly links"
+    },
+    {
+      "id": 12,
+      "count": 4,
+      "surface": "web click SEC ZIP links",
+      "targets": [
+        "https://www.sec.gov/files/dera/data/form-n-cen-data-sets/2025q1_ncen_0.zip",
+        "https://www.sec.gov/files/dera/data/form-n-cen-data-sets/2025q2_ncen_0.zip",
+        "https://www.sec.gov/files/dera/data/form-n-cen-data-sets/2025q3_ncen.zip",
+        "https://www.sec.gov/files/dera/data/form-n-cen-data-sets/2025q4_ncen.zip"
+      ],
+      "result": "web reader reported unsupported application/octet-stream; no archive downloaded; no direct SEC HTTP retry"
+    },
+    {
+      "id": 13,
+      "count": 2,
+      "surface": "web search",
+      "targets": [
+        "SEC Form N-CEN Item B.6 type of investment company open-end management investment company item C3 index fund exchange traded",
+        "site:sec.gov INVESTMENT_COMPANY_TYPE open-end N-CEN"
+      ],
+      "result": "empty search; used original form instead"
+    },
+    {
+      "id": 14,
+      "count": 1,
+      "surface": "web open",
+      "targets": [
+        "https://www.sec.gov/files/formn-cen.pdf"
+      ],
+      "result": "original form explains registrant/series distinction"
+    },
+    {
+      "id": 15,
+      "count": 3,
+      "surface": "web search",
+      "targets": [
+        "site:fidelity.com Fidelity Contrafund 2025 prospectus investment strategy",
+        "site:institutional.fidelity.com Contrafund 2025 prospectus",
+        "Fidelity Contrafund S000 SEC"
+      ],
+      "result": "empty search; no fund identity classified"
+    },
+    {
+      "id": 16,
+      "count": 1,
+      "surface": "Hugging Face public API",
+      "targets": [
+        "https://huggingface.co/api/datasets?search=n-cen&limit=30"
+      ],
+      "result": "unrelated datasets only"
+    },
+    {
+      "id": 17,
+      "count": 3,
+      "surface": "web search",
+      "targets": [
+        "github 2025q1_ncen",
+        "github ncen FUND_REPORTED_INFO.tsv 2025",
+        "huggingface N-CEN dataset SEC 2025"
+      ],
+      "result": "empty search"
+    },
+    {
+      "id": 18,
+      "count": 1,
+      "surface": "web open",
+      "targets": [
+        "https://www.sec.gov/developer"
+      ],
+      "result": "redirect to official developer resources; read fair-access guidance"
+    },
+    {
+      "id": 19,
+      "count": 1,
+      "surface": "web click",
+      "targets": [
+        "https://www.sec.gov/os/webmaster-faq"
+      ],
+      "result": "official FAQ available"
+    },
+    {
+      "id": 20,
+      "count": 3,
+      "surface": "web find in SEC FAQ",
+      "targets": [
+        "How do I declare my user agent?",
+        "company name",
+        "email address"
+      ],
+      "result": "FAQ sample user-agent includes real contact address; none supplied in this task"
+    },
+    {
+      "id": 21,
+      "count": 1,
+      "surface": "Hugging Face public API",
+      "targets": [
+        "https://huggingface.co/api/datasets?search=sec-ncen&limit=30"
+      ],
+      "result": "no matching dataset"
+    },
+    {
+      "id": 22,
+      "count": 1,
+      "surface": "web open",
+      "targets": [
+        "https://github.com/search?q=%22N-CEN%22+data&type=repositories"
+      ],
+      "result": "reader rejected restricted URL; no data accessed"
+    },
+    {
+      "id": 23,
+      "count": 1,
+      "surface": "Hugging Face public API",
+      "targets": [
+        "https://huggingface.co/api/datasets?search=fund-census&limit=30"
+      ],
+      "result": "no matching dataset"
+    },
+    {
+      "id": 24,
+      "count": 35,
+      "surface": "web targeted search/open/find before session compaction",
+      "targets": [
+        "2025 sponsor and SEC original prospectuses for five named candidate series",
+        "SEC original N-PORT index pages for four aligned candidates",
+        "2025 Fidelity Contrafund original prospectus strategy and class mapping"
+      ],
+      "result": "mapped four candidates to SEC N-PORT IDs; found Contrafund 2025 original; no source request was market-statistic analysis"
+    },
+    {
+      "id": 25,
+      "count": 32,
+      "surface": "web targeted search",
+      "targets": [
+        "four 2025 original prospectuses",
+        "four 2024 original prospectuses",
+        "exact series/account mapping and validity dates"
+      ],
+      "result": "located 2024 and 2025 original 497K summaries for four aligned series; some searches empty"
+    },
+    {
+      "id": 26,
+      "count": 21,
+      "surface": "web open",
+      "targets": [
+        "SEC original 497K documents 2024/2025 for four funds",
+        "SEC N-PORT filing indexes for four funds",
+        "SEC 2024 Magellan 497K index",
+        "two unsuccessful guessed SEC URL opens"
+      ],
+      "result": "read dates, strategy, redemption and exact series mappings; counted failed opens"
+    },
+    {
+      "id": 27,
+      "count": 9,
+      "surface": "web find",
+      "targets": [
+        "principal investment strategies",
+        "individual stock selection",
+        "FCNTX share class",
+        "2025 Dodge strategy",
+        "other targeted words"
+      ],
+      "result": "read or confirmed passages; counted no-match finds"
+    },
+    {
+      "id": 28,
+      "count": 1,
+      "surface": "web click",
+      "targets": [
+        "2024 Magellan 497K primary document from its SEC filing index"
+      ],
+      "result": "original May 30 2024 summary prospectus read"
+    }
+  ],
+  "previous_root_requests_excluded": "Root's earlier SEC 403, HF ncen and ZipLime requests are not counted again here."
+}

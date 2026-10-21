@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-22T00:24:26.222367+08:00",
+  "sources": [
+    {
+      "url": "https://www.sec.gov/files/formn-port.pdf",
+      "version": "effective 2023-12-11",
+      "uses": [
+        "B6 sales excludes reinvestment; reinvestment distinct; mergers included in sales; liquidation included redemptions",
+        "PartC permits aggregate miscellaneous holdings under conditions; disappearance from named list is not certain sale"
+      ]
+    },
+    {
+      "url": "https://www.sec.gov/files/nport_readme.pdf",
+      "uses": [
+        "ASSET_CAT field C4a",
+        "PAYOFF_PROFILE long short NA",
+        "INVESTMENT_COUNTRY is issuer organization country; US filter not full US exchange listing universe",
+        "CURRENCY_VALUE reported USD; NS quantity"
+      ]
+    },
+    {
+      "url": "https://www.sec.gov/Archives/edgar/data/1905379/000119312526239358/xslFormNPORT-P_X01/primary_doc.xml",
+      "uses": [
+        "filing explanatory notes state EC Equity-Common and NS Number of Shares"
+      ],
+      "scope": "primary filing corroboration of code semantics, not candidate-fund source proof"
+    }
+  ],
+  "important_limit": "Named-position absence can reflect miscellaneous reporting, identifier or corporate action; label exit-from-observed-eligible-list, not confirmed complete sale."
+}

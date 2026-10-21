@@ -1,0 +1,135 @@
+# How this dataset is built
+
+Every step is in [`recipe/`](recipe/), at the same revision as the data.
+
+## What could not be built, and why it matters
+
+The first job was finding out what is actually reachable. The answer is
+narrower than the name "corporate actions" suggests, and worth stating plainly
+because everything else follows from it.
+
+SEC's Financial Statement Data Sets carry `num.txt` — **numeric facts only**.
+Dividend dates are typed as dates in XBRL, so they are in the filings and not
+in the bulk data. The XBRL API is not a way around it: a request for
+`DividendsPayableDateOfRecordDayMonthAndYear` returns 404, because that
+endpoint serves unit-bearing facts and a date has no unit.
+
+So there are no ex-dates, no record dates, no pay dates here. There is no free
+structured source for them. What remains is still worth having: per-share
+amounts by fiscal period, and split ratios.
+
+## Dividends
+
+Six tags carry per-share dividends, and they mean different things.
+`CommonStockDividendsPerShareDeclared` is a decision; `…CashPaid` is a cash
+movement; the preferred variants are a claim that ranks ahead of the common
+holder. They are kept apart rather than coalesced into one number.
+
+Facts from both the consolidated and the dimensional tables are read. The
+dimensional ones matter: a dividend declared after the period closed is tagged
+`SubsequentEventType=SubsequentEvent`, which makes it the one dividend fact
+that is not history — the declaration is already public when the filing is.
+
+`period_start` is derived from `period_end` and the fact's own `quarters`. A
+per-share dividend dated to an instant is a filer error and is dropped rather
+than assigned a day it did not cover.
+
+## Splits: the trace, not the event
+
+There is no free feed of US stock splits. There is, in a dataset that never
+overwrites what a filing said, the trace a split leaves: it forces the company
+to restate every earlier per-share figure by the ratio. Two filings covering
+the same quarter, one before the split and one after, differ by exactly that
+factor.
+
+This is stronger than the signal most people reach for. A jump in shares
+outstanding looks identical for a two-for-one split and for an equity raise
+that doubled the count. Only a split reaches back and rewrites the past.
+
+Three sources are combined and each is labelled:
+
+| Method | Filers | Standing |
+|---|---|---|
+| `xbrl_tag` | 514 rows | the filer tagged the conversion ratio — authority |
+| `eps_restatement` | 5 105 rows | inferred from restated per-share figures |
+| `share_count` | — | never used alone; cannot tell a split from an issuance |
+
+Validated against the tagged ratios: **73% of the companies with a tagged ratio
+also have the same ratio inferred**, and the inferred method reaches seven
+times as many companies.
+
+### Four things this got wrong first
+
+**The ratio list was handwritten and incomplete.** It had 2:1 through 20:1 and
+a few m:n forms, and no 6:1 — so Deckers' 2024 split, the very case this
+dataset exists to fix, was invisible. The evidence was all there; the ratio
+simply was not in the table.
+
+**Generating the list instead was worse.** Every simple fraction with small
+numerator and denominator gives 144 ratios, thirteen of whose tolerance bands
+overlap, and an ordinary 1.83× restatement then resolved to "eleven-for-six".
+The list is written out again, completed, and nothing between 0.85 and 1.18 is
+admitted at all: a five percent stock dividend and a five percent restatement
+leave the same trace.
+
+**One restated period is not evidence.** A single figure that happens to land
+on a clean ratio produced a four-for-one Tesla split in 2020 that never
+happened. Two is the floor; four or more earns `medium`; the count grades the
+claim rather than gating it, because a real split restates every prior period a
+filing shows — Apple's 2020 split left 36 of them.
+
+**Extreme ratios need more.** Earnings of minus two cents restated to minus
+forty dollars is a genuine one-for-a-thousand consolidation, and it is also
+what a rounding change looks like on a company whose EPS never left the third
+decimal. Ratios past 50× or under 0.02 now require the stronger evidence
+threshold.
+
+### The detection window
+
+A split gets a window, never a date. `detected_after` is the acceptance of the
+last filing that still used the old figures; `detected_before` the first that
+used the new. Deckers lands in 2024-08-01 → 2024-10-31, and the split was
+2024-09-16.
+
+Combining windows across restated periods takes their intersection, which is
+tighter. The intersection can be empty, and when it is, that is not an
+arithmetic slip — it means the evidence spans two events at the same ratio, a
+company that split two-for-one twice. The union is used then, a window that
+certainly contains them, rather than publishing one that ends before it starts.
+
+## The adjustment factor
+
+The table the rest of it is for. Walking the splits backwards from today gives,
+for every span, the product of every split that happened after it: Apple is
+28.0 before 2014, 4.0 between, 1.0 now. Multiply an as-filed share count by it,
+or divide an as-filed EPS, and the figure lines up with a split-adjusted price
+series.
+
+The gate checks that the newest span of every filer has a factor of exactly
+one. Anything else means the walk started from the wrong end, and the whole
+company's history would be off by a constant.
+
+## Verification
+
+[`quality.py`](recipe/quality.py) gates publication. Beyond the usual null and
+range checks: every published ratio must be one companies actually declare
+(1.83 is a restatement that slipped through, not a split), detection windows
+must not end before they start, and the agreement between the tagged and
+inferred methods must stay above 65% — a drop means the restatement signal has
+started picking up something that is not a split.
+
+## Schedule
+
+A Hugging Face Job runs weekly on Monday at 08:10 UTC, half an hour after the
+fundamentals rebuild it reads. Nothing else is fetched: this dataset has no
+source of its own.
+
+## What is not done
+
+* **No dates for dividends.** See the top of this document.
+* **No splits before 2009.** The restatement trace needs XBRL.
+* **No separation of special from regular dividends.** The filings usually do
+  not distinguish them either.
+* **No stock dividends under 18%.** Indistinguishable from a restatement.
+* **`share_count` is computed but not published as a method.** It corroborates;
+  it cannot stand alone.

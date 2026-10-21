@@ -1,0 +1,41 @@
+{
+  "mission": "Find a defensible free source mapping NPORT SERIES_ID to active/open-end/ETF/index fund type during2025, or a small exact historically documented active open-end equity fund subset",
+  "task_scope": [
+    "source qualification only; no returns or flow/holdings behavioral statistics",
+    "prefer existing N-CEN metadata or original dated fund prospectuses; verify exact identities and applicability",
+    "do not infer type from name as truth"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-holdings-pilot-2026-10-21/mirror-qualification",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-holdings-pilot-2026-10-21/brief.json"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-holdings-pilot-2026-10-21/fund-type-sources"
+  ],
+  "network_allowed": true,
+  "network_scope": [
+    "public SEC/fund sponsor documents",
+    "public GitHub/HuggingFace metadata, no login/private/paid"
+  ],
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "expected_outputs": [
+    "sources.md with actual read scope, exact URL/date, applicability and genuine gaps",
+    "source-ledger.json counting each request/failure",
+    "small local notes only; no large downloads"
+  ],
+  "stop_conditions": [
+    "pay/login/access restriction: no bypass",
+    "bounded same question; no broad finance data construction",
+    "do not use current classification as historical without evidence"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "existing_findings": "NPORT INFO no reliable fund type; valid SERIES_ID may be used, LEI/N/A not unique. HF ncen search returned unrelated dataset. ZipLime author datasets do not have N-CEN, but corporate-actions/security-master exist; root handles these and mirror pipeline. Official SEC automated HTTP403, do not repeat download."
+}

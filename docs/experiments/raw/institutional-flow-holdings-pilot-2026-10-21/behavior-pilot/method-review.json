@@ -1,0 +1,19 @@
+{
+  "reviewer": "gpt-6-astra medium",
+  "reviewed_at": "2026-10-22T00:20:48.407604+08:00",
+  "decision": "descriptive 12-row pilot admissible conditionally; no predictive increment or significant-effect claims",
+  "design": "log(q1/q0) minus mean log quantity change of other eligible funds in same CUSIP and exact interval; at least 2 funds; report exp(mean_difference)-1 as relative multiplicative adjustment",
+  "requirements": [
+    "Fund type qualification before effects",
+    "Sum compatible duplicates; no arbitrary amendment selection",
+    "Track exits and omissions and opening equity coverage",
+    "Every fund-period equal status",
+    "No fitting or significance screening"
+  ],
+  "not_run": [
+    "leave-fund-out MAE",
+    "significance",
+    "threshold search",
+    "return reversal"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "mission": "Acquire and structurally qualify 2025 SEC NPORT raw-table public mirror, no behavior or return statistics",
+  "task_scope": [
+    "Read first two small tables across four 2025 filing quarters; verify actual schemas and report-period completeness",
+    "If metadata genuinely supports paired fund/holding work, acquire FUND_REPORTED_HOLDING and MONTHLY_TOTAL_RETURN same four quarters and report coverage",
+    "No test of flow vs quantity, no market outcome/strategy comparison; main controller freezes next"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-holdings-pilot-2026-10-21/brief.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-holdings-pilot-2026-10-21/storage-plan.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/institutional-intent-pressure-definitions-2026-10-21.md"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-holdings-pilot-2026-10-21/mirror-qualification",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/mechanism-rebalancing-review-20261020/mechanism-rebalancing-review-20261020-20261021T235746-99163d862723/result/mirror-trader298"
+  ],
+  "network_allowed": true,
+  "network_scope": [
+    "https://huggingface.co/datasets/trader298/sec-nport/resolve/d8db5addd8261a422aa2df269b764d746b7ceb54/",
+    "HuggingFace CDN redirect for these exact public files"
+  ],
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "expected_outputs": [
+    "immutable per-request/actual-byte/SHA manifest; all failures retained",
+    "small coverage/schema/status JSON and readable qualification.md",
+    "all large tables/logs only exact external path",
+    "small reusable acquisition/qualification script in own raw child directory"
+  ],
+  "stop_conditions": [
+    "fixed external disk mount or device differs",
+    "file requires login, pay or access bypass",
+    "metadata says needed source-quarter table unavailable",
+    "16 listed file downloads are initial planned work, no arbitrary additional markets/years; ask controller for necessary scope change"
+  ],
+  "controller_review": {
+    "required": true
+  },
+  "data_revision": "d8db5addd8261a422aa2df269b764d746b7ceb54",
+  "tables": [
+    "SUBMISSION",
+    "FUND_REPORTED_INFO",
+    "FUND_REPORTED_HOLDING",
+    "MONTHLY_TOTAL_RETURN"
+  ],
+  "year": 2025,
+  "quarters": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "request_count_policy": "count each metadata/download/failure; user AGENTS forbids stopping merely at skill default6; original6+rootmirror6=12 source actions before delegate; no budget reset",
+  "storage_guard": {
+    "mount": "/Volumes/win+mac通用",
+    "device": 16777238,
+    "max_planned_external_bytes": 12884901888,
+    "internal_small_artifacts_bytes": 2097152
+  },
+  "no_install": true,
+  "runtime": "system python3 already has pandas pyarrow numpy scipy; do not pip install",
+  "no_semantic_assumptions": [
+    "series identity not registrant",
+    "source quarter not report quarter",
+    "null flows not zero",
+    "partial cash not total",
+    "no ETF/fund-type inference from name as proven truth",
+    "no corporate-action-adjusted claim"
+  ]
+}

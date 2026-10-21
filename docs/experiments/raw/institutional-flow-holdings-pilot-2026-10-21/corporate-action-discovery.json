@@ -1,0 +1,100 @@
+{
+  "id": 20,
+  "url": "https://huggingface.co/api/datasets/ZipLime/corporate-actions",
+  "sha": "0c335966ee7fc9ed415983d7d843aefba04e6d3f",
+  "lastModified": "2026-10-19T08:11:17.000Z",
+  "cardData": {
+    "license": "apache-2.0",
+    "language": [
+      "en"
+    ],
+    "pretty_name": "US Corporate Actions — dividends and splits, point-in-time",
+    "size_categories": [
+      "100K<n<1M"
+    ],
+    "task_categories": [
+      "tabular-regression",
+      "time-series-forecasting"
+    ],
+    "tags": [
+      "finance",
+      "sec",
+      "edgar",
+      "xbrl",
+      "dividends",
+      "stock-splits",
+      "corporate-actions",
+      "point-in-time",
+      "ziplime"
+    ],
+    "configs": [
+      {
+        "config_name": "dividends",
+        "data_files": [
+          {
+            "split": "train",
+            "path": "data/dividends/*.parquet"
+          }
+        ]
+      },
+      {
+        "config_name": "splits",
+        "data_files": [
+          {
+            "split": "train",
+            "path": "data/splits/*.parquet"
+          }
+        ]
+      },
+      {
+        "config_name": "adjustment_factors",
+        "data_files": [
+          {
+            "split": "train",
+            "path": "data/adjustment_factors/*.parquet"
+          }
+        ]
+      },
+      {
+        "config_name": "pit",
+        "data_files": [
+          {
+            "split": "train",
+            "path": "data/pit/*.parquet"
+          }
+        ]
+      }
+    ]
+  },
+  "files": [
+    ".gitattributes",
+    "LICENSE",
+    "NOTICE",
+    "PIPELINE.md",
+    "README.md",
+    "data/adjustment_factors/part-00000.parquet",
+    "data/dividends/part-00000.parquet",
+    "data/pit/corporate_actions.delta/_delta_log/00000000000000000000.json",
+    "data/pit/corporate_actions.delta/part-00000-1243037a-048a-4e0d-967e-8386160deabc-c000.snappy.parquet",
+    "data/pit/part-00000.parquet",
+    "data/splits/part-00000.parquet",
+    "jobs/run.py",
+    "manifest.json",
+    "pyproject.toml",
+    "recipe/__init__.py",
+    "recipe/build.py",
+    "recipe/cli.py",
+    "recipe/config.py",
+    "recipe/dividends.py",
+    "recipe/hf_jobs.py",
+    "recipe/manifest.py",
+    "recipe/publish.py",
+    "recipe/quality.py",
+    "recipe/schema.py",
+    "recipe/splits.py",
+    "recipe/store.py",
+    "tests/conftest.py",
+    "tests/test_corporate_actions.py",
+    "tests/test_docs_and_jobs.py"
+  ]
+}

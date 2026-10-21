@@ -1,0 +1,135 @@
+{
+  "same_accessions": 12774,
+  "checks": {
+    "SERIES_ID": {
+      "compared": 12774,
+      "mismatch": 0
+    },
+    "SERIES_NAME": {
+      "compared": 12774,
+      "mismatch": 75
+    },
+    "REPORT_DATE": {
+      "compared": 12774,
+      "mismatch": 0
+    },
+    "FILING_DATE": {
+      "compared": 12774,
+      "mismatch": 0
+    },
+    "NET_ASSETS": {
+      "both_nonnull": 12774,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "TOTAL_ASSETS": {
+      "both_nonnull": 12774,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "CASH_NOT_RPTD_IN_C_OR_D": {
+      "both_nonnull": 11900,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "SALES_FLOW_MON1": {
+      "rows": 12725,
+      "both_nonnull": 12700,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "REINVESTMENT_FLOW_MON1": {
+      "rows": 12725,
+      "both_nonnull": 12694,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "REDEMPTION_FLOW_MON1": {
+      "rows": 12725,
+      "both_nonnull": 12701,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "SALES_FLOW_MON2": {
+      "rows": 12751,
+      "both_nonnull": 12734,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "REINVESTMENT_FLOW_MON2": {
+      "rows": 12751,
+      "both_nonnull": 12728,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "REDEMPTION_FLOW_MON2": {
+      "rows": 12751,
+      "both_nonnull": 12735,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "SALES_FLOW_MON3": {
+      "rows": 12774,
+      "both_nonnull": 12772,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "REINVESTMENT_FLOW_MON3": {
+      "rows": 12774,
+      "both_nonnull": 12771,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    },
+    "REDEMPTION_FLOW_MON3": {
+      "rows": 12774,
+      "both_nonnull": 12773,
+      "null_mismatch": 0,
+      "max_abs_difference": 0.0,
+      "close_mismatch": 0
+    }
+  },
+  "boundary": "two transformed mirrors agree on common as-filed fields only; not direct official original validation or historical availability proof",
+  "name_difference_diagnostic": {
+    "raw_mismatches": 75,
+    "html_unescape_strip_remaining": 0,
+    "examples": [
+      {
+        "SERIES_NAME": "Ocean Park Tactical Municipal Fund ",
+        "series_name": "Ocean Park Tactical Municipal Fund"
+      },
+      {
+        "SERIES_NAME": "JNL/WCM Focused International Equity Fund  ",
+        "series_name": "JNL/WCM Focused International Equity Fund"
+      },
+      {
+        "SERIES_NAME": "Bancreek U.S. Large Cap ETF ",
+        "series_name": "Bancreek U.S. Large Cap ETF"
+      },
+      {
+        "SERIES_NAME": "Destra Multi-Alternative Fund ",
+        "series_name": "Destra Multi-Alternative Fund"
+      },
+      {
+        "SERIES_NAME": "Baird Strategic Municipal Bond Fund ",
+        "series_name": "Baird Strategic Municipal Bond Fund"
+      },
+      {
+        "SERIES_NAME": "Amplify Bloomberg AI Value Chain ETF ",
+        "series_name": "Amplify Bloomberg AI Value Chain ETF"
+      }
+    ],
+    "identity_key": "ACCESSION_NUMBER/SERIES_ID, not normalized name"
+  },
+  "source_transformation_boundary": "ZipLime omits some all-null monthly flow rows; use raw-table mirror and retain missingness. HTML entities/name spelling differences must not change fund identities."
+}

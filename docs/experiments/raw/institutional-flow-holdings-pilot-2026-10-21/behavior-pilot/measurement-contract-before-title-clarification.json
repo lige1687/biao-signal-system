@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-10-22T00:20:48.407604+08:00",
+  "status": "frozen_before_effects_pending_fund_type_qualification",
+  "question": "Within four documented active open-end US equity funds, do intervals of net outflow coincide with relative reductions of retained common holdings versus other funds in the same securities and exact dates?",
+  "series_ids": [
+    "S000000856",
+    "S000006037",
+    "S000007112",
+    "S000011202"
+  ],
+  "report_dates": [
+    "2024-12-31",
+    "2025-03-31",
+    "2025-06-30",
+    "2025-09-30"
+  ],
+  "selection_reason": "Named candidate funds selected before inspecting flows or holdings changes; shared exact reporting dates; not representative universe",
+  "source_revision": "d8db5addd8261a422aa2df269b764d746b7ceb54",
+  "fund_type_required": true,
+  "filings": "NPORT-P; exactly one accession per series-date; stop on ambiguity rather than arbitrary last",
+  "eligible_holdings": {
+    "ASSET_CAT": "EC",
+    "UNIT": "NS",
+    "CURRENCY_CODE": "USD",
+    "INVESTMENT_COUNTRY": "US",
+    "PAYOFF_PROFILE": "Long",
+    "quantity": "finite positive",
+    "cusip": "9 alphanumeric format; identifier validity not fully proven",
+    "duplicate_rows": "aggregate same accession+CUSIP+unit+currency only when issuer identity fields agree; otherwise exclude as ambiguous",
+    "identity": "equal CUSIP, unit, currency across dates; exclude known issuer LEI/title conflict; name whitespace normalization allowed",
+    "IS_RESTRICTED_SECURITY": "N",
+    "FAIR_VALUE_LEVEL": "1",
+    "DERIVATIVE_CAT": "missing or N/A only"
+  },
+  "outcome": "log(q1/q0) minus mean log quantity change of other eligible funds in same CUSIP and exact interval; at least 2 funds; report exp(mean_difference)-1 as relative multiplicative adjustment",
+  "fund_interval_summary": "equal-weight securities inside fund interval; 12 equal-status rows, no pooled stock-count significance",
+  "flow": "sum across current filing 3 months(sales-redemptions)/prior filing net assets; reinvestment displayed separately; missing fields never zero",
+  "coverage": "matched securities count and opening eligible equity value share; entries/exits/identity-conflicts/retained without peers separately; no absent holding imputation",
+  "baseline": "other funds same-security same-interval mean quantity change; each target excluded from own baseline",
+  "performance_and_increment": "behavior direction/magnitude and counterexamples only; return/risk/trading-cost value unassessed",
+  "disallowed": [
+    "effect-threshold fitting",
+    "significance claims with 4 funds 3 periods",
+    "returns/reversal tests",
+    "leave-fund-out predictive MAE",
+    "cash treated as total liquidity",
+    "causal forced-selling claims",
+    "production or trading"
+  ],
+  "unknowns": [
+    "retained-holding selection omits complete exits",
+    "common multiplicative split cancels but nonuniform corporate actions remain",
+    "fund outflows endogenous and portfolio outlook confounded",
+    "two transformed mirrors not direct official original verification",
+    "historical public time not verified"
+  ],
+  "stop_conditions": [
+    "any fund type unverified",
+    "missing required periods or monthly flows",
+    "no same-security peers",
+    "identity ambiguity destroys comparison"
+  ],
+  "output_policy": "large/intermediate results only saved storage-plan output/behavior-pilot; small reports and scripts in this subdir",
+  "pre_effect_amendment": {
+    "time": "2026-10-22T00:22:06.600011+08:00",
+    "reason": "Listed ordinary equity behavior focus: initial schema/value inventory shows restricted securities and nonquoted valuation; require level 1 unrestricted non-derivative before inspecting any change/flow outcomes. Preserve exclusion counts."
+  }
+}
