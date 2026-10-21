@@ -1,3 +1,11 @@
+# 日线回归测试范围补充 2026-10-21T23:37:55.396789+08:00
+
+- checked_coordination_sha 8c68c48937ba7baf90cb0b9f2ca3e35226cbcd28；checked_at 2026-10-21T23:37:55.396789+08:00；已读COORDINATION及本任务，其他相关记录沿上一登记且本次fetch无其他新变化；无同文件冲突。
+- 原日线范围不变，补充自有 tests/unit/test_market_style_observation.py 和 tests/unit/test_market_style_observation_review.py：修复旧测试读到真实日线缓存、旧mock未接新增daily参数，保留月末降级断言与被动模型调用断言；不放宽产品验收。
+- status active；唯一写者root；验收继续日线公式/缺失/缓存/五问/被动解读及电脑预览。未改仓外记录。
+
+---
+
 # 同口径日线接入与电脑页面修正 2026-10-21T22:57:33.169576+08:00
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active（日线数据接入），scope_released false；原五问其他数据缺口维持。
