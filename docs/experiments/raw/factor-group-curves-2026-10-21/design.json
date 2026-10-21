@@ -1,0 +1,114 @@
+{
+  "schema": "factor-group-curves-design/1",
+  "question": "在同一批已冻结分组名单下，五组资金逐日怎样变化，费用、缺价、风险和现金是否改变直观比较？",
+  "authorization": "用户批准每个G展示曲线及测试/验证时间区分；不改变原策略",
+  "strategy_layer": "独立研究展示与连续资金核算，不参与LEI技术判定",
+  "source_coordination": "b48e7e5a80371b03598ef3f481ef06f111e96704",
+  "reuse": "只读 factor-sorting-diagnostics 原分组/名单/定义，不重算排序和月度诊断",
+  "question_type": "account_quote_simulation",
+  "native_prediction_contract_applicable": false,
+  "effects_authorized": false,
+  "market": "A股固定300股来源样本；不代表沪深300指数成分或完整历史全市场；沪116/深184；不作ETF证据",
+  "holding_period": [
+    "2015-01-05",
+    "2025-12-31"
+  ],
+  "initial_date": "2014-12-31",
+  "formation_months": [
+    "2014-12",
+    "2025-11"
+  ],
+  "initial_cash": 100000,
+  "universes": [
+    "all_qualified",
+    "green_only"
+  ],
+  "factors": [
+    "momentum",
+    "high52",
+    "cool",
+    "lowvol"
+  ],
+  "groups": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "cost_bps_per_side": [
+    0,
+    25
+  ],
+  "pool_baseline_once_per_universe_cost": true,
+  "streams": 84,
+  "source_requests": 0,
+  "new_market_requests": 0,
+  "financial_meanings": {
+    "momentum": "中期价格延续，作为已有简单对手",
+    "cool": "上月相对弱势可能回补短期价格压力；也可能反映持续坏消息",
+    "lowvol": "波动较小可能降低持有波动与回撤；可能错过反弹",
+    "high52": "接近一年高点可能反映趋势延续；与动量重叠且可能追高"
+  },
+  "primary_metrics": {
+    "returns": [
+      "daily_quote_nav",
+      "period_return",
+      "g5_minus_common_pool",
+      "g5_minus_momentum_g5"
+    ],
+    "risk": [
+      "quote_drawdown",
+      "daily_volatility",
+      "loss_months",
+      "down_month_difference"
+    ],
+    "other": [
+      "cash_fraction",
+      "fee_amount",
+      "actual_gross_turnover",
+      "missed_up_months",
+      "unknown_fraction",
+      "failed_orders",
+      "target_deviation"
+    ]
+  },
+  "account_rules": [
+    "T月末收盘固定名单；T+1开盘按组内等份目标差额调仓一次；整月不重排不替补不追单，失败订单当月到期。",
+    "共同池由五组成员并集构建，每股1/N；每个pool/fee只算一次。资格不足30的已知月份目标现金，月历不断；缺少输入行报错。",
+    "开盘估值用当日有效open，缺失held用最后mark；先卖超额，再按现金与买费统一缩减买入缺额，再检查单股能否成交，失败买预算不重新分给其他股。",
+    "日线约束用当天tradestatus/volume/open/isST/high/low/preclose判成交；oneprice上涨拒买/下跌拒卖。含开盘时尚不可知的全日数据，只是事后日线约束的报价模拟，不称可执行下界。",
+    "每日close估值，缺价沿上次有效价但单独显示unknown；basisbreak在已持仓单位上永久停止标价更新/成交；未持仓股票未来freshbasis不自动全局排除。",
+    "复权可分割报价单位不等于实际股数，现金零息；不另加分红；无借款/外流入/做空；费用仅成功买卖金额×单边费率。",
+    "期末2025-12-31收盘保留未平仓及未解决退出，不假清算；缺价持仓归零仅冲击假设不是上下界。",
+    "成功买卖后剩余持仓先以成交开盘报价标记；当天缺close仍归unknown。"
+  ],
+  "periods": {
+    "early": [
+      "2015-01",
+      "2018-12"
+    ],
+    "middle": [
+      "2019-01",
+      "2021-12"
+    ],
+    "late": [
+      "2022-01",
+      "2025-12"
+    ]
+  },
+  "time_status": "所有2015—2025历史已经看过：已看历史复核，不是独立最终验证；新前向资料尚未产生，不用未来日期填结果。",
+  "no_training_or_tuning": true,
+  "no_unseen_test_claim": true,
+  "attempt_budget": {
+    "core_max": 1,
+    "core_used": 0,
+    "followup_max": 3,
+    "followup_used": 0,
+    "sources_max": 6,
+    "sources_used": 0
+  },
+  "adoption": false,
+  "stop_reopen": "完成固定曲线/账目与可见性验收即收敛。效果仅报价示意；缺完整历史池、成交/退出/分红与未见验证时不得资金采用。不因曲线不好看调参。",
+  "created_at": "2026-10-21T23:57:48.100094+08:00"
+}

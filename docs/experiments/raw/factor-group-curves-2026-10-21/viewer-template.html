@@ -1,0 +1,48 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>四因子 · 五分组连续资金曲线</title>
+<style>
+:root{color-scheme:light;--ink:#182a38;--muted:#59646b;--line:#d7ded8;--paper:#f7f5ef}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}main{max-width:1240px;margin:auto;padding:32px 28px}header{border-bottom:1px solid var(--line);padding-bottom:20px}small,.sub{color:var(--muted)}h1{font-size:32px;margin:6px 0 12px;letter-spacing:-.8px}h2{font-size:20px;margin:0}p{margin:9px 0}.eyebrow{font-size:12px;letter-spacing:2px;color:#386d68}.warn{background:#f0e4d5;border-left:3px solid #a66b32;padding:13px 17px;margin:18px 0}.controls{display:flex;gap:16px;flex-wrap:wrap;margin:22px 0}label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted)}select{background:white;color:var(--ink);border:1px solid #bcc9c2;border-radius:5px;font:inherit;font-size:15px;padding:10px 28px 10px 10px;min-width:160px}.card{background:#fffefb;border:1px solid var(--line);border-radius:9px;margin:18px 0;padding:20px}.legend{display:flex;gap:19px;flex-wrap:wrap;margin:10px 0;font-weight:600}.chart{width:100%;height:auto;display:block}#hover{min-height:28px;font-size:13px;font-variant-numeric:tabular-nums}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:13px;white-space:nowrap}td,th{text-align:right;padding:10px 12px;border-bottom:1px solid #e4e8e2;font-variant-numeric:tabular-nums}td:first-child,th:first-child{text-align:left}th{font-weight:500;color:var(--muted)}.meta{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:14px}.muted{color:var(--muted)}.nav-note{font-size:13px;color:#745438}.good{color:#156e58}.negative{color:#a04f3f}footer{padding:22px 0;font-size:13px;color:var(--muted)}@media(max-width:600px){main{padding:18px 12px}h1{font-size:25px}.card{padding:14px}.controls{gap:10px}select{min-width:145px}.meta{grid-template-columns:1fr}.legend{gap:12px;font-size:13px}}
+</style>
+<main><header><div class="eyebrow">LEISIGNAL · 因子研究 / 连续资金</div><h1>看见五组资金，怎样走过十一年</h1><p>每月按同一个因子排序，分为五组；各组独立持有、按月调整，逐日记账。G1 是原定偏好较低的一组，G5 是较高的一组。</p><small>固定 300 只 A 股来源样本（沪 116 / 深 184），并非沪深300指数成分 · 2015—2025 · 日度记账、月末采样</small></header>
+<div class="warn"><strong>这是报价资金示意，不能当作可兑现净值。</strong> 缺价持仓沿用最后报价，相关线段用虚线；复权关系中断的持仓保留为未知。成交限制含当日完整日线，开盘时尚不可全部知道。所有历史都已看过，分期展示不构成独立新验证。</div>
+<div class="controls">
+<label>因子<select id="factor"><option value="cool">短期反转</option><option value="momentum">中期动量</option><option value="lowvol">低波动</option><option value="high52">接近一年高点</option></select></label>
+<label>股票池<select id="universe"><option value="all_qualified">全体合格股票</option><option value="green_only">趋势为绿的合格股票</option></select></label>
+<label>每次买或卖的费用<select id="cost"><option value="25">0.25% / 单边</option><option value="0">不计费用</option></select></label>
+<label>历史分期<select id="period"><option value="all">2015—2025 全段</option><option value="early">2015—2018 前段</option><option value="middle">2019—2021 中段</option><option value="late">2022—2025 后段</option></select></label></div>
+<p id="meaning"></p><p class="nav-note" id="poolnote"></p>
+<section class="card"><h2>每组资金曲线 <small>所选区间起点 = 1</small></h2><div class="legend" id="legend"></div><svg id="nav" class="chart" viewBox="0 0 1120 350" role="img" aria-label="五组资金和共同池基准曲线"></svg><div id="hover">将鼠标移到图上，查看当月各组资金。</div><small>分期只改变显示起点；持仓与现金沿用同一条连续账户，没有分期重新选股或重新投入资金。</small></section>
+<section class="card"><h2>这些曲线，有多少依赖缺价估值？</h2><p class="sub">每月最高缺价持仓比例。0 表示该月每天都有合格收盘报价；不代表真实成交已被验证。</p><svg id="unknown" class="chart" viewBox="0 0 1120 180" role="img" aria-label="每月最高缺价持仓占比"></svg></section>
+<section class="card"><h2>有多少资金在等待？</h2><p class="sub">月末现金比例。无法买入的预算留在现金；绿池不足 30 只的月份尝试退出，卖不出的股票继续持有。</p><svg id="cash" class="chart" viewBox="0 0 1120 180" role="img" aria-label="每月末现金占比"></svg></section>
+<section class="card"><h2>收益、风险与代价，分组看</h2><p class="sub">最大跌幅按每日资金计算；平均现金和缺价比例也按每日计算。全部是报价示意指标。</p><div class="table-wrap"><table><thead><tr><th>组别</th><th>累计变化</th><th>年均变化</th><th>最大跌幅</th><th>日变动幅度 / 年化</th><th>平均现金</th><th>平均缺价</th><th>每月买卖金额 / 资产</th></tr></thead><tbody id="metrics"></tbody></table></div></section>
+<section class="card"><h2>G5 比简单方法多了什么？</h2><p class="sub">下表固定含每次买卖 0.25% 费用，与共同池、动量 G5 各自的完整账户比较；只是差额，不等于独立的新信息。</p><div class="table-wrap"><table><thead><tr><th>对手</th><th>每月平均差额</th><th>历史误差参考范围</th><th>对手上涨月差额</th><th>对手下跌月差额</th><th>最大跌幅改善</th></tr></thead><tbody id="increments"></tbody></table></div><small>正的下跌月差额表示该类月份少亏或多赚，负的上涨月差额表示错过了部分上涨。误差范围考虑相邻月份的关联，仍未包含缺价、选池和反复查看历史带来的偏差。</small></section>
+<div class="meta"><section class="card"><h2>分组与记账</h2><p>完全复用另一项研究保存的分组名单。月末收盘形成目标，下月首个交易日开盘模拟一次差额调仓；先卖后买，资金不足时按同一比例缩减买单。失败订单不补买、不替换。</p><p>共同池每只等份，四因子共用。各账户初始 10 万，现金不计息，无借款、无外部投入，期末保留未平仓。复权报价单位不是实际股数，也没有另加分红现金。</p></section><section class="card"><h2>时间与适用范围</h2><p>2015—2018、2019—2021、2022—2025 是已看历史的稳定性复核。研究没有训练模型、没有重新挑选最优参数。</p><p><strong>独立新验证：尚未完成。</strong> 需要规则冻结后尚未参与研究的新数据。个股样本不能代替 ETF 或完整 A 股市场证据，也不能仅凭曲线领先就认定可投入实盘。</p></section></div>
+<footer>资料沿用冻结原件 · 结果生成于 2026-10-22 · 研究开题 2026-10-21 · 生产策略、交易与通知均未启用。</footer></main>
+<script>
+const DATA=__DATA__;
+const COLORS=['#b34a39','#c88836','#a6a285','#41988d','#264ed0','#182a38'];
+const $=id=>document.getElementById(id), pct=x=>(x*100).toFixed(2)+'%', pp=x=>(x>=0?'+':'')+(x*100).toFixed(2)+' 个百分点';
+const MEANINGS={cool:'短期反转：G5 是上月表现较弱的一组。看是否回补短期价格压力，同时检查持续坏消息、交易费用与上涨机会的代价。',momentum:'中期动量：G5 是中期涨势较强的一组。它是已有的简单参照，用来检查别的价格指标究竟增加了多少帮助。',lowvol:'低波动：G5 是过去波动较小的一组。先看最大跌幅和资金波动，同时看少参与上涨、现金和费用的代价。',high52:'接近一年高点：G5 更接近过去一年的最高收盘价。看趋势延续，也要检查与中期动量的重复及追高代价。'};
+let current=[];
+function path(points,fx,fy){return points.map((p,i)=>(i?'L':'M')+fx(i).toFixed(2)+' '+fy(p).toFixed(2)).join(' ')}
+function chart(id,series,field,height,ratio=false){
+ const svg=$(id),left=65,right=1090,top=15,bottom=height-34,n=series[0].points.length;
+ const max=ratio?1:Math.max(...series.flatMap(s=>s.points.map(p=>p[field])))*1.05;
+ const fx=i=>left+i/(n-1)*(right-left), fy=p=>bottom-p[field]/max*(bottom-top);
+ let out='';for(let k=0;k<=4;k++){let yy=bottom-(bottom-top)*k/4;out+=`<path d="M${left} ${yy}H${right}" stroke="#dce2dc"/><text x="52" y="${yy+4}" text-anchor="end" fill="#65716c" font-size="12">${ratio?(k*25+'%'):(max*k/4).toFixed(1)}</text>`}
+ for(let k=0;k<5;k++){let i=Math.round((n-1)*k/4);out+=`<text x="${fx(i)}" y="${height-8}" text-anchor="middle" fill="#65716c" font-size="12">${series[0].points[i][0].slice(0,7)}</text>`}
+ series.forEach((s,j)=>{if(id==='nav'){for(let i=1;i<n;i++){const dash=s.points[i][5]>1e-12||s.points[i-1][5]>1e-12?'stroke-dasharray="5 4"':'';out+=`<path d="M${fx(i-1)} ${fy(s.points[i-1])}L${fx(i)} ${fy(s.points[i])}" stroke="${COLORS[j]}" fill="none" stroke-width="${j===5?2.6:1.9}" ${dash}/>`}}else out+=`<path d="${path(s.points,fx,fy)}" stroke="${COLORS[j]}" fill="none" stroke-width="1.8"/>`});
+ if(id==='nav'){out+='<line id="cross" y1="15" y2="316" stroke="#64766c" stroke-dasharray="3 3" visibility="hidden"/>';svg.onpointermove=e=>{const box=svg.getBoundingClientRect(),xx=(e.clientX-box.left)*1120/box.width,i=Math.max(0,Math.min(n-1,Math.round((xx-left)/(right-left)*(n-1))));const c=$('cross');c.setAttribute('x1',fx(i));c.setAttribute('x2',fx(i));c.setAttribute('visibility','visible');$('hover').innerHTML=series[0].points[i][0]+'　'+series.map((s,j)=>`<span style="color:${COLORS[j]}">${s.label} ${s.points[i][1].toFixed(3)}</span>`).join('　')}}
+ svg.innerHTML=out;
+}
+function draw(){let f=$('factor').value,u=$('universe').value,c=$('cost').value,p=$('period').value,[start,end]=DATA.periods[p];
+ const keys=[1,2,3,4,5].map(g=>`${u}__${f}__G${g}__fee${c}`).concat(`${u}__pool__fee${c}`);
+ current=keys.map((key,j)=>{let stream=DATA.streams[key],pts=stream.points,prior=pts.filter(r=>r[0].slice(0,7)<start).at(-1),selected=[prior,...pts.filter(r=>r[0].slice(0,7)>=start&&r[0].slice(0,7)<=end)];return{...stream,label:j<5?'G'+(j+1):'共同池',points:selected.map(row=>row.map((v,i)=>i===1?v/prior[1]:v))}});
+ $('meaning').textContent=MEANINGS[f];$('poolnote').textContent=u==='green_only'?'趋势绿池有12个形成月份不足30只。空目标处理会改变现金和风险，不能把全部改善归功于因子。':'全体合格股票池132个月均可分五组；每月名单只用当时形成的资格，不因后来价格是否完整而删股票。';
+ $('legend').innerHTML=current.map((s,j)=>`<span style="color:${COLORS[j]}">● ${s.label}</span>`).join('');
+ chart('nav',current,1,350);chart('unknown',current,5,180,true);chart('cash',current,3,180,true);
+ $('metrics').innerHTML=current.map((s,j)=>{let a=s.period[p];return`<tr><td style="color:${COLORS[j]}">${s.label}</td>${['return','cagr','max_drawdown','volatility','cash_mean','unknown_mean','gross_turnover_monthly'].map(k=>`<td>${pct(a[k])}</td>`).join('')}</tr>`}).join('');
+ $('increments').innerHTML=['pool','momentum'].map(b=>{const a=DATA.increments[`${u}__${f}__${p}__vs_${b}`];return`<tr><td>${b==='pool'?'共同池':'动量 G5'}</td><td>${pp(a.mean)}</td><td>${pp(a.descriptive95[0])} ～ ${pp(a.descriptive95[1])}</td><td>${a.up_month_difference===null?'未评价':pp(a.up_month_difference)}</td><td>${a.down_month_difference===null?'未评价':pp(a.down_month_difference)}</td><td>${pp(a.drawdown_difference)}</td></tr>`}).join('');$('hover').textContent='将鼠标移到图上，查看当月各组资金。';
+}
+for(const id of ['factor','universe','cost','period'])$(id).addEventListener('change',draw);draw();
+</script></html>

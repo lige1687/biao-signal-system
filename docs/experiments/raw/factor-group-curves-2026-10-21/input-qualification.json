@@ -1,0 +1,504 @@
+{
+  "schema": "factor-group-curves-input-qualification/1",
+  "created_at": "2026-10-21T23:59:38+08:00",
+  "scope": "Read-only input/group qualification audit; no account simulation, return/adverse field use, effect summary, or network access.",
+  "storage_recheck": {
+    "available": true,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "mount": "/Volumes/win+mac通用",
+    "status": "ok",
+    "free_bytes": 496815833088,
+    "checked_at": "2026-10-21T23:58:16.900616+08:00"
+  },
+  "date_range": {
+    "formation_months": [
+      "2014-12",
+      "2025-11"
+    ],
+    "month_count": 132,
+    "holding_months": [
+      "2015-01",
+      "2025-12"
+    ]
+  },
+  "counts": {
+    "input_rows": 36019,
+    "monthly_rows": 1056,
+    "expected_monthly_rows": 1056,
+    "groups_rows": 5040,
+    "qualified_monthly_pools": 1008,
+    "qualified_partitions_checked": 1008,
+    "unqualified_by_universe": {
+      "all_qualified": [],
+      "green_only": [
+        {
+          "month": "2015-06",
+          "n": 17,
+          "reported_n": 17,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2015-08",
+          "n": 7,
+          "reported_n": 7,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2016-01",
+          "n": 3,
+          "reported_n": 3,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2016-02",
+          "n": 20,
+          "reported_n": 20,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2018-06",
+          "n": 26,
+          "reported_n": 26,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2019-09",
+          "n": 23,
+          "reported_n": 23,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2020-09",
+          "n": 25,
+          "reported_n": 25,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2022-01",
+          "n": 23,
+          "reported_n": 23,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2022-04",
+          "n": 22,
+          "reported_n": 22,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2022-09",
+          "n": 18,
+          "reported_n": 18,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2024-01",
+          "n": 17,
+          "reported_n": 17,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        },
+        {
+          "month": "2024-06",
+          "n": 28,
+          "reported_n": 28,
+          "group_n": 0,
+          "reason": "unqualified_month"
+        }
+      ]
+    }
+  },
+  "checks": [
+    {
+      "name": "132-month x 2-universe x 4-factor monthly roster",
+      "status": "pass",
+      "checked_count": 1056,
+      "detail": null
+    },
+    {
+      "name": "group row uniqueness",
+      "status": "pass",
+      "checked_count": 5040,
+      "detail": null
+    },
+    {
+      "name": "group rows exactly cover qualified monthly rows only",
+      "status": "pass",
+      "checked_count": 5040,
+      "detail": null
+    },
+    {
+      "name": "monthly pool n equals whitelist-derived eligible pool",
+      "status": "pass",
+      "checked_count": 1056,
+      "detail": null
+    },
+    {
+      "name": "qualified pools partition and balance",
+      "status": "pass",
+      "checked_count": 1008,
+      "detail": null
+    },
+    {
+      "name": "oriented score order and deterministic tie-break",
+      "status": "pass",
+      "checked_count": 1008,
+      "detail": null
+    },
+    {
+      "name": "result manifest file sizes and SHA-256",
+      "status": "pass",
+      "checked_count": 14,
+      "detail": null
+    },
+    {
+      "name": "contract-bound source and strategy fingerprints match",
+      "status": "pass",
+      "checked_count": 13,
+      "detail": null
+    },
+    {
+      "name": "run receipt binds actual source contract hash",
+      "status": "pass",
+      "checked_count": 1,
+      "detail": null
+    }
+  ],
+  "checked_count": 14236,
+  "failed": [],
+  "input_fingerprints": [
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-sorting-diagnostics-20261021/factor-sorting-diagnostics-20261021-20261021T234103-cd02ad51cb16/result/results.json",
+      "bytes": 15907967,
+      "sha256": "fdc578b8087c84904feb1bed401b9eb7c665ecd00ebcb70626a29c7133e060c3"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-sorting-diagnostics-20261021/factor-sorting-diagnostics-20261021-20261021T234103-cd02ad51cb16/result/manifest.json",
+      "bytes": 1960,
+      "sha256": "d93e618da3a0afba3ef527fe73e1d4d2d5aca41b2ac50e7e103a32ab93661f60"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-sorting-diagnostics-20261021/factor-sorting-diagnostics-20261021-20261021T234103-cd02ad51cb16/result/run-receipt.json",
+      "bytes": 478,
+      "sha256": "449c2a895c6c696ed0d23876c58d6942f05d95ae7a1dd9aca5ea44937696e9cc"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-sorting-diagnostics-2026-10-21/contract.json",
+      "bytes": 4290,
+      "sha256": "5ca038bac99bd05835d7c760fb75c4aa3a6b6abc1b6aa4ad0946971c5c63d342"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/factor-sorting-diagnostics-20261021/factor-sorting-diagnostics-20261021-20261021T234103-cd02ad51cb16/result/input-rows.json",
+      "bytes": 19061367,
+      "sha256": "c4fe87cfd5374ef57cb11bc5a2192f9f4b3555ef9bf8647f1e1cddad9a89f7db"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/high52-execution-revalidation-20261020/high52-execution-revalidation-20261020-20261020T103838-98db6d9bfda6/result/acquisition-v1/new_source_manifest.json",
+      "bytes": 266305,
+      "sha256": "5f3bd55994025442b5d7af416a8bd316f347b73ad61dcf134ac6040c9597cca6",
+      "expected_sha256": "5f3bd55994025442b5d7af416a8bd316f347b73ad61dcf134ac6040c9597cca6",
+      "matches": true,
+      "label": "source_manifest"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/probe/trade_dates.json",
+      "bytes": 204935,
+      "sha256": "258f8a99213aed75b5515a22a4d36a79dd5e4350febdb434f9bf6e6357a0c05e",
+      "expected_sha256": "258f8a99213aed75b5515a22a4d36a79dd5e4350febdb434f9bf6e6357a0c05e",
+      "matches": true,
+      "label": "calendar"
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/lowfreq-expanded-discovery-20261019/lowfreq-expanded-discovery-20261019-20261019T013345-d1a1ec5ca080/result/cohort.json",
+      "bytes": 301955,
+      "sha256": "2ac169c90bff72aa77dd180f324dfd27753766bfedb48fb9f4fea87843e1aaba",
+      "expected_sha256": "2ac169c90bff72aa77dd180f324dfd27753766bfedb48fb9f4fea87843e1aaba",
+      "matches": true,
+      "label": "cohort"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/high52_revalidation.py",
+      "bytes": 27699,
+      "sha256": "603f71c0a227cb5a8f3e13240a74235cfa2b657bbf4d65ca51be4312af612ee5",
+      "expected_sha256": "603f71c0a227cb5a8f3e13240a74235cfa2b657bbf4d65ca51be4312af612ee5",
+      "matches": true,
+      "label": "high52_revalidation.py"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/fip.py",
+      "bytes": 17668,
+      "sha256": "76a8c003822826dd6befff8cfda135e5d9d5a3a7ca0f1d7e9559f5631f7f3c6a",
+      "expected_sha256": "76a8c003822826dd6befff8cfda135e5d9d5a3a7ca0f1d7e9559f5631f7f3c6a",
+      "matches": true,
+      "label": "fip.py"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/research/output_storage.py",
+      "bytes": 13049,
+      "sha256": "aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95",
+      "expected_sha256": "aa722aa7641ea472231fa027fa53edcb78400615294410f256902834bc88ff95",
+      "matches": true,
+      "label": "output_storage.py"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md",
+      "bytes": 65786,
+      "sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "expected_sha256": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+      "matches": true,
+      "label": "strategy_source"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md",
+      "bytes": 36427,
+      "sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "expected_sha256": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903",
+      "matches": true,
+      "label": "strategy_source"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-sorting-diagnostics-2026-10-21/qualification.json",
+      "bytes": 12038,
+      "sha256": "f0c0c08d1f32899eab78efd9257110d9afeb6e05c40955a5ab3878b5dd92e7fa",
+      "label": "qualification.json"
+    },
+    {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-sorting-diagnostics-2026-10-21/qualification-contract.json",
+      "bytes": 3093,
+      "sha256": "63948e06e626d953d5244314f03c6e48fed3a766871789d3b5f193944672ce12",
+      "label": "qualification-contract.json"
+    }
+  ],
+  "result_manifest_files": {
+    "._eligibility.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+        "bytes": 4096
+      },
+      "actual": {
+        "bytes": 4096,
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb"
+      },
+      "matches": true,
+      "metadata_only": true
+    },
+    "._input-rows.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+        "bytes": 4096
+      },
+      "actual": {
+        "bytes": 4096,
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb"
+      },
+      "matches": true,
+      "metadata_only": true
+    },
+    "._preparation-receipt.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+        "bytes": 4096
+      },
+      "actual": {
+        "bytes": 4096,
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb"
+      },
+      "matches": true,
+      "metadata_only": true
+    },
+    "._progress.log": {
+      "exists": true,
+      "expected": {
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+        "bytes": 4096
+      },
+      "actual": {
+        "bytes": 4096,
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb"
+      },
+      "matches": true,
+      "metadata_only": true
+    },
+    "._results.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+        "bytes": 4096
+      },
+      "actual": {
+        "bytes": 4096,
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb"
+      },
+      "matches": true,
+      "metadata_only": true
+    },
+    "._run-receipt.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+        "bytes": 4096
+      },
+      "actual": {
+        "bytes": 4096,
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb"
+      },
+      "matches": true,
+      "metadata_only": true
+    },
+    "._source-audit.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb",
+        "bytes": 4096
+      },
+      "actual": {
+        "bytes": 4096,
+        "sha256": "5f9f5fea643c2548a198b68621f665f32275d99d5ba54e3de388f3c5397df5cb"
+      },
+      "matches": true,
+      "metadata_only": true
+    },
+    "eligibility.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "941338cd2a40429f1eddf36f33005ef2ca6e5e0cfa0d6e0af8dea174de105375",
+        "bytes": 4968256
+      },
+      "actual": {
+        "bytes": 4968256,
+        "sha256": "941338cd2a40429f1eddf36f33005ef2ca6e5e0cfa0d6e0af8dea174de105375"
+      },
+      "matches": true,
+      "metadata_only": false
+    },
+    "input-rows.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "c4fe87cfd5374ef57cb11bc5a2192f9f4b3555ef9bf8647f1e1cddad9a89f7db",
+        "bytes": 19061367
+      },
+      "actual": {
+        "bytes": 19061367,
+        "sha256": "c4fe87cfd5374ef57cb11bc5a2192f9f4b3555ef9bf8647f1e1cddad9a89f7db"
+      },
+      "matches": true,
+      "metadata_only": false
+    },
+    "preparation-receipt.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "3e850b23d2b640496a7f2cf81321cd3047796c14ce342ca3acc27e997f2d5566",
+        "bytes": 319
+      },
+      "actual": {
+        "bytes": 319,
+        "sha256": "3e850b23d2b640496a7f2cf81321cd3047796c14ce342ca3acc27e997f2d5566"
+      },
+      "matches": true,
+      "metadata_only": false
+    },
+    "progress.log": {
+      "exists": true,
+      "expected": {
+        "sha256": "18c4464eb2eee601dc9be441dea92c841097ae919b363b48b91715a316b83f66",
+        "bytes": 191
+      },
+      "actual": {
+        "bytes": 191,
+        "sha256": "18c4464eb2eee601dc9be441dea92c841097ae919b363b48b91715a316b83f66"
+      },
+      "matches": true,
+      "metadata_only": false
+    },
+    "results.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "fdc578b8087c84904feb1bed401b9eb7c665ecd00ebcb70626a29c7133e060c3",
+        "bytes": 15907967
+      },
+      "actual": {
+        "bytes": 15907967,
+        "sha256": "fdc578b8087c84904feb1bed401b9eb7c665ecd00ebcb70626a29c7133e060c3"
+      },
+      "matches": true,
+      "metadata_only": false
+    },
+    "run-receipt.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "449c2a895c6c696ed0d23876c58d6942f05d95ae7a1dd9aca5ea44937696e9cc",
+        "bytes": 478
+      },
+      "actual": {
+        "bytes": 478,
+        "sha256": "449c2a895c6c696ed0d23876c58d6942f05d95ae7a1dd9aca5ea44937696e9cc"
+      },
+      "matches": true,
+      "metadata_only": false
+    },
+    "source-audit.json": {
+      "exists": true,
+      "expected": {
+        "sha256": "cde8b9940e9ed432980ffa26800e75a8d0788bfafd81e6068b74949e30041d89",
+        "bytes": 69414
+      },
+      "actual": {
+        "bytes": 69414,
+        "sha256": "cde8b9940e9ed432980ffa26800e75a8d0788bfafd81e6068b74949e30041d89"
+      },
+      "matches": true,
+      "metadata_only": false
+    }
+  },
+  "scope_limits": {
+    "future_fields_read": false,
+    "results_fields_used": [
+      "monthly.month",
+      "holding_month",
+      "universe",
+      "factor",
+      "qualified",
+      "n",
+      "group_n",
+      "spearman_reason",
+      "groups.month",
+      "universe",
+      "factor",
+      "group",
+      "codes",
+      "n"
+    ],
+    "input_rows_fields_used": [
+      "code",
+      "month",
+      "holding_month",
+      "green",
+      "momentum",
+      "hot",
+      "vol60",
+      "high52"
+    ],
+    "unqualified_not_missing_rows": true,
+    "source_quotes": "价格代理标签仅用于固定输入背景，不表示可成交价格或真实交易。未新增行情、未联网、未读取账户收益。主合同 no_future_value_use=false；本收据仅核结构、资格样本与排序分组，不对未来效果作推断。",
+    "limitations": [
+      "原资格记录保留5处来源中断，本核对未修复。",
+      "研究资料查询额度在已有状态记录中超限2次；未追加外部访问。",
+      "全部历史已被查看，不构成新的独立验证。",
+      "冻结记录显示36019条合格特征，原计划39600条；此处保留既有筛选口径。"
+    ]
+  },
+  "outcome": "pass"
+}
