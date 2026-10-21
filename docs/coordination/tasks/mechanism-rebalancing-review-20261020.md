@@ -1,3 +1,15 @@
+# 美股资料接通与有界行为试点交付 2026-10-22T00:42:47.316758+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner原root；status completed（数据优先级与四基金描述性试点），scope_released true；完整机构研究/稳定预测/策略采用不宣称完成。checked_coordination_sha=529749b51ed3ad09f268a7748a61cbddd5a5259b；checked_at=2026-10-22T00:42:47.316758+08:00。已读self/COORDINATION/dispatch/sentiment/strategy-account及新增investor-workspace实际catalog、personal牛熊方法复核、market-style自动续更、research-utility共同资格；末次fetch无再变，无本题目录冲突，不接管他人研究。
+- 成果codex/mechanism-rebalancing-review-20261020@ae63de1f6dc4201d564507aa27f9664f1645e997，核心756a38b623abde5b6329649959f29dfa1c0c6325，基线a38b03582be12580b17dd95d422b07a35593a0c8；65准确路径552769B核心及2小回执路径正常push。核心fetch后逐文件SHA核同，5188列表唯一/category/verdict/报告全文一致，归置及diff检查通过；0删除/合main/共享索引切换。
+- 官方403断点保留，正常公开固定镜像16文件937243865B取得；另镜像Q1关键数一致，仍非官方原数值全核。四基金当年招募书及series原索引核实，2024-12-31至2025-09-30三共同区间；N-CEN全市场分类原值缺口明确。
+- 主控实际冻结后一次核心12基金季度、373同股票比较；净流量全负，相对数量5正7负。只支持可分别记录，不识别主动意图/被迫卖出；相对差居中、无净流入对照、共同管理与短时期依赖、42.65%-78.83%合格权益覆盖、退出/公司行动/披露时点限制均保留。未报收益风险或交易增量。
+- Sol medium两项资料/实现，Astra medium方法及结果解释审；root独核官方身份、数据、关键实现和原始数值。初版跨基金标题字符串误拦截在0效果时依同CUSIP/LEI修正，失败及旧合同保留。14合成检查、不同脚本重读全373数量及12流量/覆盖汇总一致。
+- 来源当前205（root45+数据16+分类144），上两轮56累计已知261；错误默认6停工适用已纠正且不抹账。核心1、收益拟合0，旧>=1268年度拟合/4Pro保持。大资料只留原storage-plan外盘，小报告/raw/registry本键/INDEX本行/自身progress入仓；无生产/规则/交易/付费/通知/后台。
+- 交付docs/experiments/institutional-flow-holdings-pilot-2026-10-21.md；关键回执raw/.../final-verification.json、behavior-pilot/independent-check.json、mirror-pilot-delivery-receipt.json。后续只有更广类型、兼有流入流出与更长共同区间、退出/公司行动/实际公开时间及用途对手等新证据才重开，不在12行上拟合追正。A股单基金不完整范围保持。
+
+---
+
 # 连续镜像到齐，四基金行为小样本冻结 2026-10-22T00:23:09.768584+08:00
 
 - task-id/owner沿原，status active，scope_released false；checked_coordination_sha=b9b6783260b6ffe6c0ffa280a008e39eba16498e；checked_at=2026-10-22T00:23:09.768584+08:00。已补读investor-workspace五静态文件交付、personal五组账户结案、market-style宽度修复、research-utility曲线扩展，COORDINATION及self/dispatch/sentiment/strategy-account沿原；本题目录独占，无冲突。
