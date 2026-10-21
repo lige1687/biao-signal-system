@@ -1,3 +1,14 @@
+# 美股宽度 9 月断档修复 2026-10-22T00:11:33.731571+08:00
+
+- task-id market-style-observation-20261020；owner原root；status active；scope_released false。用户本轮明确要求查清美股宽度9月后截断并补齐；服务市场环境观察数据层，不改变策略或研究定义。
+- checked_coordination_sha 172792486571d555820804a162c6922ebf0f6da4；checked_at 2026-10-22T00:11:33.731571+08:00；已读COORDINATION1.1、self、research-dispatch-controller、investor-workspace-simplification-20261012、investor-observation-map；全任务检索us_breadth/sp500缓存未见同写者。已有父页/账户/研究冻结仍不动。
+- 基线成果codex/market-style-observation-20261020@f892aa7161ecce1ee3319f8304be0b29a8ca1900。已核共享8000进程读取仓外cache，JSON与494列行情皆停2026-09-04。旧刷新脚本已归档，无查到现有定时调用；旧读取不检查时效。
+- 唯一写者root：新src/lei_signal/market_context/us_breadth_refresh.py及tests/unit/test_us_breadth_refresh.py、自有报告/raw/progress、仓内私有候选缓存。必要自有market-style展示/服务可改。先只读旧缓存、取真实收盘、核资格、生成可审阅候选；仓外原JSON/行情仅在用户对具体落点确认后备份及更新，当前未授权，不执行。共享API不重启，原研究数据不改，不新增定时任务。
+- 验收：追到真实源断点；同一494股观察名单，20/50/200均线有完整近期历史，明确日期/分母/成分范围；排除未收盘当日，不补零/前填/混合复权；保留旧JSON/指纹，新增日与基准交易日期一致；HTTP读回和实际页面曲线日期连续；相关测试、归置、远端回执。0新收益实验、0付费/模型/通知。
+- 当前Yahoo AAPL只读探针200，可到10/21盘中；本轮补齐目标为最近已收盘10/20，随后核每股覆盖与公式。新增为运行缓存候选及小验收，不产生大实验结果。失败与缺失如实保留，不用少量股票冒充完整标普宽度。
+
+---
+
 # 策略复盘独立页面与中美宽度入口交付 2026-10-22T00:05:35.240145+08:00
 
 - task-id market-style-observation-20261020；owner沿root；本轮placement completed、scope_released true，视觉待用户验收；原完整五问资料缺口仍blocked，未冒称全任务完成。checked_coordination_sha 35717b3d8975e6c27035b1c0c3e23975e49a0490；checked_at 2026-10-22T00:05:35.240145+08:00。已读COORDINATION/self/dispatch/investor-observation-map/strategy-account-bridge，交付补读investor-workspace-simplification、mechanism-rebalancing-review、research-utility-review及personal新五组曲线；皆独立路径，无本组件或Fwd外层同写。
