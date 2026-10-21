@@ -1,3 +1,18 @@
+# 主动配置与受约束调整：语义、定义和数据映射 2026-10-21T23:36:54.384768+08:00
+
+- task-id/owner沿原；status active；scope_released false。checked_coordination_sha=f3f212bb5e6d390e7e431a796a7332a8a25f1c4b；checked_at=2026-10-21T23:36:54.384768+08:00；已读COORDINATION/self/dispatch/sentiment-factor-research、market-style-observation-20261020最新日线任务、personal-lowfreq-system-audit-20261018反转复现/Trae、strategy-account-bridge-20261020成熟策略交付；无本题定义文档同写，不接管原owner。
+- 用户追问“关键咋区分，语义如何研究，定义和数据呢”。本轮report_only：回答可观察行为与压力如何分别定义、需要何种字段、何种对照才能支持判断；不新增收益/风险实验，不重跑旧封存。重点US基金×证券×报告期；A股复用独立已核原件，不套用US结论。
+- 已读原论文方法笔记，复用Astra medium简短只读审阅（无写入/联网/拟合）；root公开字段核查6项上限已用6（3查询空结果、SEC表格/数据页/说明3成功），0原始市场数据下载。旧至少1268拟合/4Pro保持，上一轮50源动作加本轮6=56，整个更早家族来源总数未知。
+- 唯一新增 docs/experiments/institutional-intent-pressure-definitions-2026-10-21.md及raw同名小证据，原progress追加，registry本新键/INDEX本行。另发现自有旧报告及生成器误写“A股5只基金”，原证据实际是嘉实增长一只基金5份报告：只修这处事实并加日期更正、更新本旧报告登记SHA，保留原Git提交/冻结/结果，不改旧数据与方法。
+- 成果基线codex/mechanism-rebalancing-review-20261020@e30797304630190a479d27ca0a361d67adccc223；主共享树/索引不切换。预计本机小记录<150KiB，0新外盘输出/0服务或策略代码/0生产交易/0目标库写入。验收：行为/动机/景气证据层次清楚、可执行字段与分母/时点/反例/未知并列、SEC免费入口只声称字段可取而非已拼全、A股范围准确、报告API/归置/准确发布读回。
+
+- 推送并发修正：初次因远端personal-lowfreq-system-audit-20261018新23:36核验记录前进被拒；已fetch并读该记录，原反转研究/仅其树归置修改无重叠，按最新父提交保留所有他人文件后普通推送。实际重核时间 2026-10-21T23:38:19.587693+08:00。
+
+- 第二次普通push并发拒绝后补读market-style23:37自有测试范围，仍无重叠；实际最新重核 2026-10-21T23:39:18.688761+08:00，checked_coordination_sha=f3f212bb5e6d390e7e431a796a7332a8a25f1c4b。
+
+- 第三次普通push并发拒绝后已补读research-utility-review-20261012新单因子分组范围；无本题机构语义/资料同写。最终开工checked_coordination_sha=5222a5191d55c677f0ae815e057eda04eaaee405，checked_at=2026-10-21T23:40:20.964840+08:00；以上旧核对为阶段历史。
+
+---
 # 机构仓位金融含义扩展与季度回报判断：有界检验交付 2026-10-20T23:43:20.448332+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner 01a158cd-e0ee-7260-b91f-629930ce779f/root；status completed（本轮新定义与两项美国季度回报用途）；scope_released true（仅本轮新路径，冻结原件不可覆盖）。真实赎回、共同持仓、行业景气及A股效果仍未评价，不宣称整方向完成。
