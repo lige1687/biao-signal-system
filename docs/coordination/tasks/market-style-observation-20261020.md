@@ -1,3 +1,14 @@
+# 图表清晰度与坐标可读性修复 2026-10-21T22:37:31.076237+08:00
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active（本轮视觉缺陷）；scope_released false。原五问核心资料blocked保持。
+- checked_coordination_sha 445c4261b085a0f569fd0dc520776d256310fea5；checked_at 2026-10-21T22:37:31.076237+08:00；本轮读COORDINATION及self、research-dispatch-controller、investor-workspace-simplification-20261012、investor-observation-map、portfolio-trends-20261013、strategy-account-bridge-20261020；较上一阶段没有新更改，独立组件无同写冲突。
+- 用户反馈图模糊、横纵轴不清。当前浏览器DPR2而canvas476×300对应CSS476×300，仅1倍位图；坐标10/11px。服务市场观察展示层，原两策略指纹未变。
+- 基线成果3bea8339fb3d514765546f9b514b65105bc8a3fb。范围仅web/src/components/market-style/显示代码、仓内5192副本、自有raw/报告/progress。共享TrendChart/父页/规则/数据服务/仓外5188不改；当前自己的5192/8192进程已退出，可恢复原服务，不新增自动化/模型调用。
+- 方案：本页图表SVG、坐标12px以上且深色、日期稀疏但完整可辨、单位和留白明确；数据/阈值不变。并行root负责本页趋势图/整合与浏览器，Luna可独写StyleComparison/BreadthComparison视觉参数（下发后才开始）。
+- 验收：原生当前窄窗+390/1280实际SVG文本清晰，坐标字号/单位/端点无裁切；切换/缩放/条件仍有效，构建与归置、截图前后、数据公式差异审查；0新收益实验/模型请求。
+
+---
+
 # 五问直接答案和完整需求返核；整项缺核心资料 2026-10-21T00:28:55.452115+08:00
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status blocked（原五问完整目标仍缺连续历史/时点权重/历史估值/实际账户记录）；本轮可用答案与UI实施已验收，scope_released true（本轮自有组件/服务/资料写范围）。不再用界面completed代替整项完成；无后台研究/采集。
