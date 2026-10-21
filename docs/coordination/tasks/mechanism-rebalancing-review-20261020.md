@@ -1,3 +1,12 @@
+# 连续镜像到齐，四基金行为小样本冻结 2026-10-22T00:23:09.768584+08:00
+
+- task-id/owner沿原，status active，scope_released false；checked_coordination_sha=b9b6783260b6ffe6c0ffa280a008e39eba16498e；checked_at=2026-10-22T00:23:09.768584+08:00。已补读investor-workspace五静态文件交付、personal五组账户结案、market-style宽度修复、research-utility曲线扩展，COORDINATION及self/dispatch/sentiment/strategy-account沿原；本题目录独占，无冲突。
+- trader298固定revision四表四季16文件937243865B已取外盘并逐SHA读回；52795申报、22489592持仓仅结构基础。另一ZipLime独立转换Q1申报/资产/申赎逐数相同，非官方原件验证。SEC403旧断点保留，不再代表当前没有数据。
+- 类型资格另由Sol定向核四基金2025文件：Parnassus Core Equity、Fidelity Contrafund、Fidelity Magellan、Dodge&Cox Stock；选名与共同报告期在看申赎/数量变化前固定。2024-12-31至2025-09-30三个共同区间。冻结新raw/behavior-pilot/measurement-contract.json；Astra审限定12行描述性比较，基准同证券同期其他基金相对数量；拆股共同倍数抵消，退出/遗漏单列。仅在类型资格通过后一次核心，0收益/显著性/阈值/生产。
+- Sol仅新raw/behavior-pilot和已核外盘同子目录实现prepare/synthetic，暂未授权真实效果；root独核后执行。字段口径预先加入非受限、一级估值、非衍生普通权益；未看效果。追加源请求留账，不以skill默认6人为停止；其他计算预算保持。
+
+---
+
 # 继续核公开镜像，纠正内部默认额度适用 2026-10-22T00:06:24.117038+08:00
 
 - task-id/owner沿原；status active，scope_released false；checked_coordination_sha=095e9f64cabed28a3d347855884992911b35baee；checked_at=2026-10-22T00:06:24.117038+08:00。已读新增market-style复盘页交付、investor-workspace附件、research-utility诊断，原self/dispatch/sentiment/personal/strategy-account范围保持；无本题同写。
