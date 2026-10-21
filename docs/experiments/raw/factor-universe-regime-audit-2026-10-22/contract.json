@@ -1,0 +1,113 @@
+{
+  "schema": "saved-factor-universe-regime-audit/1",
+  "frozen_at": "2026-10-22T00:35:36.923942+08:00",
+  "question": "Does the prior-known index trend explain material differences in saved factor-versus-same-pool results, and are those differences sufficiently stable to motivate factor timing research?",
+  "decision": "retain conditional description or pause timing use; no optimized switching or production",
+  "sources": {
+    "index": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-broad-etf-plan-2026-09-08/legacy-baseline/inputs/portfolio_split/sh000300_close.parquet",
+      "sha256": "e8f51bfc53f3fac3a9c53d9b942949c368041ea7649a7c0b404766949e9d7863"
+    },
+    "crosscheck": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/research-tools-correction-2026-09-29/data-acquisition/sh000300/bars.csv",
+      "sha256": "2a2990243e965d6d682202ca16b30a65e32d3a4cb0ec51a1354268de6670eb26"
+    },
+    "summary": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-group-curves-2026-10-21/summary.json",
+      "sha256": "99f74440908714d9e14b12ecedb387819b77759023205f4a76c58a0c8c8b14f1"
+    },
+    "regimes": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/web/public/research/factor-curve-library-20261022/legacy-regimes.json",
+      "sha256": "07f98c9f420c71cc619913038599ebf13ff6b35f1fb04b01337937bc1bbff525"
+    },
+    "environment_contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-curve-library-2026-10-22/environment-contract.json",
+      "sha256": "d711c34108d559547ad9d67bf2e48ea46ba721999a130b466762126e7567592b"
+    },
+    "environment_code": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-curve-library-2026-10-22/environment.py",
+      "sha256": "ccbb6ff2a9ea573476cc3495e701aa13ea78e813deb153034d57f5a3f3008926"
+    },
+    "prior_contract": {
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/factor-group-curves-2026-10-21/contract.json",
+      "sha256": "e8c2253c53f6c9a86860c06fd4f8e5ad96af68f75b768f82895ade11e0347efc"
+    }
+  },
+  "factors": [
+    "momentum",
+    "cool",
+    "lowvol",
+    "high52"
+  ],
+  "universes": [
+    "all_qualified",
+    "green_only"
+  ],
+  "preferred_group": "G5",
+  "primary_cost_bps_per_side": 25,
+  "secondary_cost_bps_per_side": 0,
+  "months": [
+    "2015-01",
+    "2025-12"
+  ],
+  "periods": {
+    "early": [
+      "2015-01",
+      "2018-12"
+    ],
+    "middle": [
+      "2019-01",
+      "2021-12"
+    ],
+    "late": [
+      "2022-01",
+      "2025-12"
+    ]
+  },
+  "new_validation": false,
+  "independence": "all history previously examined; pools overlap, 19 state episodes not independent trials",
+  "definition": {
+    "id": "audit.csi300_price_sma10_prior_month@1.0.0",
+    "source": "existing local environment contract, Faber-inspired trend state, not PS cycle replication",
+    "formula": "C_t > mean(C_t,...,C_t-9) => strong, else weak; exact10 consecutive exchange monthends; unknown if invalid; holding month t+1",
+    "cutoff": "t monthend close; retrospective vintage availability not verified",
+    "do_not_backdate": true
+  },
+  "statistics": {
+    "paired_monthly_difference": "G5 net quote return - same universe pool net quote return, same fee",
+    "HAC": "OLS y on [Istrong,Iweak], no intercept, chronological132 months, Bartlett L=3, unscaled sandwich (XTX)^-1 S (XTX)^-1, normal1.96 descriptive only; strong-minus-weak contrast covariance included",
+    "cells": "levels, differences, loss frequency, baseline up/down tradeoffs, monthend cash/unknown, average monthly peak unknown; zero fee sensitivity separately",
+    "episodes": "all19 contiguous runs, means and contributions only; delete each run without rerunning portfolio and report range/sign changes in state means and strong-weak contrast; no compressed-month NAV",
+    "time_support": "three existing seen-history subperiods, no training/test claim",
+    "multiplicity": "16 primary cells and8 contrasts together exploratory, no significance/pass threshold"
+  },
+  "qualification": [
+    "132 complete months and calendar alignment",
+    "independent recompute132 states against raw index",
+    "prefix-only invariance all132, equal price weak, missing month unknown",
+    "reference hashes",
+    "every84x4x3 old aggregation cell reconciliation",
+    "G5 paired means reconcile weighted states",
+    "fee25 main and fee0 sensitivity",
+    "retain source and portfolio execution limitations"
+  ],
+  "scope_exclusions": [
+    "new accounts",
+    "new factor group sorting",
+    "new universe returns",
+    "liquidity size industry effect claims without historical data",
+    "original LEI signal changes",
+    "production/UI changes",
+    "cross-thread messaging"
+  ],
+  "budgets": {
+    "source_requests_limit": 6,
+    "source_requests_used": 6,
+    "new_market_requests": 0,
+    "new_account_runs": 0,
+    "saved_output_core_limit": 1,
+    "new_big_output_bytes": 0,
+    "internal_small_artifact_estimate_bytes": 300000
+  },
+  "ownership": "root report/contract; Luna audit.py audit-result.json only; Astra read-only method review; existing curve/library owners unchanged"
+}
