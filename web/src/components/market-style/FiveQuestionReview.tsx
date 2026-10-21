@@ -36,11 +36,12 @@ export default function FiveQuestionReview({ data, loading, error }: {
           <p><b>证据</b>{question.fact}</p>
           <p><b>怎么理解</b>{question.reading}</p>
           <p className="mq-gap"><b>{question.id === "q2" ? "适用边界" : "仍未回答"}</b>{question.watch}</p>
+          {question.id === "q5" && <p><a href={`/fwd?market=${data.market}&phase=forward`}>到策略跟踪与复盘查看前向记录、历史对照 →</a></p>}
           <div className="mq-sources">{data.sources.filter(s => question.source_ids.includes(s.id)).map(source =>
             <a key={source.id} href={source.url} target="_blank" rel="noreferrer">{source.name} ↗</a>)}</div>
         </div>
       </details>
     )}</div>}
-    <p className="mq-boundary">五问整体尚未全部答完。收益贡献、历史估值位置与实际资金持仓风险有核心资料缺口；下方曲线和已核数字不替代这些答案。</p>
+    <p className="mq-boundary">五问整体尚未全部答完。收益贡献、历史估值位置与实际资金持仓风险仍缺资料。 <a href={`/fwd?market=${data?.market ?? "cn"}&phase=forward`}>策略跟踪与复盘 →</a></p>
   </section>;
 }

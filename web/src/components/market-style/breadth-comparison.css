@@ -7,6 +7,8 @@
 .bc-controls button, .bc-rules button { border: 0; border-radius: var(--radius-sm); padding: 5px 8px; background: transparent; color: var(--text-secondary); cursor: pointer; }
 .bc-controls button[aria-pressed="true"], .bc-rules button[aria-pressed="true"] { background: var(--bg-card-hover); color: var(--text-primary); font-weight: 600; }
 .bc-controls button:hover, .bc-rules button:hover { color: var(--accent); }
+.bc-market-controls { margin: 12px 0 8px; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px solid var(--border-subtle); }
+.bc-market-controls > div:first-child { background: var(--bg); border-radius: var(--radius-sm); padding: 2px; }
 .bc-controls button:focus-visible, .bc-rules button:focus-visible, .bc-source summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .bc-chart { width: 100%; min-width: 0; height: 450px; margin-top: 8px; }
 .bc-dates { font-variant-numeric: tabular-nums; }

@@ -64,8 +64,8 @@ function curveData(history: NonNullable<PortfolioReview["history"]>, mode: "retu
   return { dates, series };
 }
 
-export default function PortfolioRiskReview({ portfolio, loading, error }: {
-  portfolio?: PortfolioReview; loading: boolean; error: boolean;
+export default function PortfolioRiskReview({ portfolio, loading, error, phase = "history" }: {
+  portfolio?: PortfolioReview; loading: boolean; error: boolean; phase?: "forward" | "history";
 }) {
   const [mode, setMode] = useState<"return" | "drawdown">("return");
   const history = !loading && !error && portfolio?.available ? portfolio.history : undefined;
@@ -80,13 +80,30 @@ export default function PortfolioRiskReview({ portfolio, loading, error }: {
 
   return <section className="ms-portfolio-risk" aria-label={`${sourceLabel}多策略共同风险`}>
     <header className="ms-portfolio-risk__head">
-      <div><h2>两套策略会一起亏吗？</h2><p>{sourceLabel} · 个股策略历史报价模拟 · {history?.period_start ?? "日期未取得"} 至 {history?.period_end ?? "日期未取得"}</p></div>
-      {history && <span className="ms-portfolio-risk__source">前向选股资料日 {portfolio?.source_date ?? "未取得"}</span>}
+      <div><h2>{phase === "forward" ? "从启动日起的前向跟踪" : "历史对照：两套策略会一起亏吗？"}</h2><p>{phase === "forward" ? `${sourceLabel} · 启动后逐日记录的报价模拟；未记录的成绩保持空白` : `${sourceLabel} · 过去行情模拟 · ${history?.period_start ?? "日期未取得"} 至 ${history?.period_end ?? "日期未取得"}`}</p></div>
+      {phase === "forward" && forward && <span className="ms-portfolio-risk__source">选股资料日 {portfolio?.source_date ?? "未取得"}</span>}
     </header>
     {loading && <p role="status" className="ms-portfolio-risk__state">正在读取策略比较…</p>}
     {error && <p role="alert" className="ms-portfolio-risk__state">策略比较读取失败，暂不能判断共同风险。</p>}
     {!loading && !error && !history && <p className="ms-portfolio-risk__state">{portfolio?.reason ?? "两套主策略的可比资料尚未取得。"}</p>}
-    {history && <>
+    {phase === "forward" && forward && <>
+      <div className="ms-portfolio-risk__keyfacts">
+        <div><span>启动日期</span><strong>{forward.started_at?.slice(0, 10) ?? "未取得"}</strong></div>
+        <div><span>共同有效收益日</span><strong>{forward.common_valid_return_days} 日</strong></div>
+        <div><span>共同下跌日</span><strong>{forward.both_down_days == null ? "尚无可比收益" : `${forward.both_down_days} 日`}</strong></div>
+      </div>
+      <div className="ms-portfolio-risk__forward">
+        <strong>{forward?.started_at?.slice(0, 10) ?? "开始日期未取得"}起的新记录</strong>
+        {targetReady ? <p>两套目标名单各 {targets?.left_count} / {targets?.right_count} 只，共选 {targets?.common_count} 只；占合并去重名单 {pct(targets?.count_overlap)}，目标资金权重重合 {pct(targets?.weight_overlap)}。这些只是计划选入的股票。</p>
+          : <p>两套前向目标名单尚未齐全，不能计算共同选股。</p>}
+        <p>{holdingsReady ? `模拟持仓已有记录；共同持仓权重 ${pct(forward?.holdings.weight_overlap)}。`
+          : forward?.holdings.status === "empty" ? "目前两套模拟持仓均为空，实际持仓资金重合尚无法计算。"
+            : "目前没有两套均可核对的模拟持仓，实际持仓资金重合仍无法判断。"} {forward?.common_valid_return_days ? `已有 ${forward.common_valid_return_days} 个共同收益日。` : "目前没有可比的前向收益。"}这是报价模拟，不代表真实账户持仓或交易。</p>
+      </div>
+      {targetReady && <details className="ms-portfolio-risk__details"><summary>查看共同候选代码</summary><p>{targets?.common_symbols.join("、") || "无共同候选"}</p><p>这些是计划名单，不表示已持有。</p></details>}
+    </>}
+    {phase === "forward" && !loading && !error && !forward && <p className="ms-portfolio-risk__state">前向记录尚未取得，暂不以历史收益替代。</p>}
+    {phase === "history" && history && <>
       <div className="ms-portfolio-risk__keyfacts">
         <div><span>同一天都亏</span><strong>{history.common_valid_return_days ? `${history.both_down_days} / ${history.common_valid_return_days} 日` : "无可比收益"}</strong></div>
         <div><span>同一月都亏</span><strong>{history.monthly.common_months ? `${history.monthly.both_down_months} / ${history.monthly.common_months} 月` : "无可比月份"}</strong></div>
@@ -114,14 +131,6 @@ export default function PortfolioRiskReview({ portfolio, loading, error }: {
       </div>
       {chart && chart.dates.length > 1 ? <TrendChart dates={chart.dates} series={chart.series} unit="%" height={285} />
         : <p className="ms-portfolio-risk__state">账户曲线日期不足，暂不能画图。</p>}
-      <div className="ms-portfolio-risk__forward">
-        <strong>{forward?.started_at?.slice(0, 10) ?? "开始日期未取得"}起的新记录</strong>
-        {targetReady ? <p>两套目标名单各 {targets?.left_count} / {targets?.right_count} 只，共选 {targets?.common_count} 只；占合并去重名单 {pct(targets?.count_overlap)}，目标资金权重重合 {pct(targets?.weight_overlap)}。这些只是计划选入的股票。</p>
-          : <p>两套前向目标名单尚未齐全，不能计算共同选股。</p>}
-        <p>{holdingsReady ? `模拟持仓已有记录；共同持仓权重 ${pct(forward?.holdings.weight_overlap)}。`
-          : forward?.holdings.status === "empty" ? "目前两套模拟持仓均为空，实际持仓资金重合尚无法计算。"
-            : "目前没有两套均可核对的模拟持仓，实际持仓资金重合仍无法判断。"} {forward?.common_valid_return_days ? `已有 ${forward.common_valid_return_days} 个共同收益日。` : "目前没有可比的前向收益。"}这是报价模拟，不代表真实账户持仓或交易。</p>
-      </div>
       <details className="ms-portfolio-risk__details">
         <summary>查看共同亏损月份、名单与计算口径</summary>
         <div className="ms-portfolio-risk__detail-grid">
@@ -132,8 +141,7 @@ export default function PortfolioRiskReview({ portfolio, loading, error }: {
           </div>
           <div><h3>名单与持仓各是什么</h3>
             <p>最后一个历史调仓月，目标名单重合 {pct(history.targets.count_overlap)}；原资料未提供该名单的准确日期、实际持仓权重。</p>
-            {targetReady && <p>当前前向目标名单共同代码：{targets?.common_symbols.slice(0, 9).join("、") || "无"}。代码仅代表计划选入，没有公司名资料时不补写。</p>}
-            <p>前向模拟持仓：{holdingsReady ? "有两套持仓记录" : "未齐全"}；目标名单重合与模拟持仓重合不能合并为一个数。</p>
+            <p>启动后的候选和持仓记录在“前向跟踪”页签查看；目标名单重合与持仓重合不能合并为一个数。</p>
           </div>
           <div><h3>怎样理解这些数</h3>
             <p>日收益只比较两方案都有有效收益的相同日期；首个未投入资金的零收益记录未算入。共同下跌日还占至少一套下跌的 {pct(history.both_down_share_either_down_days)}。</p>

@@ -4,7 +4,6 @@ import { fundamentalsApi, request } from "../../api/client";
 import type { MarketObservation, MarketObservationsResponse, RatesHistoryResponse, RatesHistorySeries } from "../../types";
 import TrendChart from "./MarketTrendChart";
 import StyleComparison from "./StyleComparison";
-import PortfolioRiskReview from "./PortfolioRiskReview";
 import ObservationConditions from "./ObservationConditions";
 import FiveQuestionReview, { type MarketReview } from "./FiveQuestionReview";
 import BreadthComparison from "./BreadthComparison";
@@ -107,7 +106,7 @@ export default function MarketStylePanel(props: {
     if (target.closest("button") && !target.closest(".market-reading")) setViewRevision((value) => value + 1);
   }}>
     <header className="ms-reading-heading">
-      <div><strong>市场环境观察</strong><span>风格表现 → 市场参与 → 风险与策略重叠</span></div>
+      <div><strong>市场环境观察</strong><span>风格表现 → 市场参与 → 风险条件</span></div>
       <div className="ms-switch" role="group" aria-label="宽度与策略观察市场">
         <button type="button" aria-pressed={props.market === "cn"} onClick={() => props.onMarketChange("cn")}>A股</button>
         <button type="button" aria-pressed={props.market === "us"} onClick={() => props.onMarketChange("us")}>美股</button>
@@ -117,12 +116,11 @@ export default function MarketStylePanel(props: {
     <FiveQuestionReview data={review.data} loading={review.isPending} error={review.isError} />
     <div className="ms-chart-grid">
       <StyleComparison onBasisChange={setStyleBasis} />
-      <BreadthComparison market={props.market} onContextChange={onContextChange} />
+      <BreadthComparison market={props.market} onMarketChange={props.onMarketChange} onContextChange={onContextChange} />
     </div>
     <RiskConditions ratesHistory={props.ratesHistory} ratesHistoryFailed={props.ratesHistoryFailed} onDataChange={setRiskBasis} />
     <ObservationConditions volatility={review.data?.volatility} nfci={review.data?.nfci}
       loading={review.isPending} error={review.isError} />
-    <PortfolioRiskReview portfolio={review.data?.portfolio} loading={review.isPending} error={review.isError} />
     <details className="ms-review-guide">
       <summary><span>每周观察 · 每月复盘五问</span><small>自身表现 / 相对表现 / 集中程度 / 估值位置 / 策略重叠</small></summary>
       <div className="ms-review-columns">

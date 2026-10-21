@@ -1,0 +1,88 @@
+{
+  "checked_at": "2026-10-22T00:02:32.635354+08:00",
+  "scope": "Move the comparison into existing /fwd, distinguish forward/history, restore visible CN and US breadth projections",
+  "shared_page_integration": {
+    "path": "web/src/pages/FwdLedgerPage.tsx",
+    "patch": "docs/experiments/raw/market-style-observation-2026-10-20/strategy-page-integration.patch",
+    "before_sha256": "a077baf6fea693dcbdd624bb52a27d75766ad5affc562fe00e155c84b1cf99a6",
+    "after_sha256": "201a7af58cd4a72a92c1bb88c41a9ecd241e84ff1332e46c2968da3a02f3af1c",
+    "reverse_patch_check": "passed",
+    "publication": "narrow patch only; original Fwd page and owner strategy components remain local integration dependencies"
+  },
+  "ui": {
+    "market_page_large_portfolio_card": false,
+    "fifth_question_summary_and_link": true,
+    "strategy_page": "/fwd?market=cn&phase=forward",
+    "default": "forward; historical result table absent",
+    "forward_cn": {
+      "started_at": "2026-10-20",
+      "common_valid_return_days": 0,
+      "holdings": "empty"
+    },
+    "forward_us": {
+      "started_at": "2026-10-20",
+      "common_valid_return_days": 1,
+      "holdings": "available"
+    },
+    "history": "CN 2015-01-05 to 2025-12-31 and original totals retained; drawdown switch verified",
+    "original_account_tab": "visible and available; owner implementation unchanged",
+    "projection_controls": [
+      "A股投影",
+      "美股投影",
+      "上证指数",
+      "沪深300",
+      "标普500",
+      "纳斯达克"
+    ],
+    "projection_verified": [
+      "hs300+CN_ALL_A 20/50/200 with same-date bands",
+      "sp500+SP500 breadth",
+      "nasdaq+SP500 breadth; not Nasdaq-exclusive coverage"
+    ],
+    "cn_dates": {
+      "price": "2026-10-21",
+      "breadth": "2026-10-16"
+    },
+    "us_dates": {
+      "price": "2026-10-20",
+      "breadth": "2026-09-04"
+    },
+    "other_original_cn_prices": "kc50/kc100/cybz absent in current endpoint; no fabricated lines or buttons",
+    "legacy_overlay": "actual rendered A股×10Y and existing original shared controls through new link",
+    "desktop_1280": "checked and screenshots saved",
+    "actual_desktop_542": {
+      "viewport": 542,
+      "document": 542,
+      "default_history_tables": 0
+    },
+    "mobile_tests": false,
+    "console_errors": []
+  },
+  "failures": [
+    {
+      "issue": "same-document hash-only link changed URL but not the parent section state",
+      "resolution": "use full document navigation with section query and original hash; actual old section render verified"
+    },
+    {
+      "issue": "publication diff-check flagged two space-only context lines inside the saved patch artifact",
+      "resolution": "normalized blank context lines; original reverse git apply check still passes; no source lines or checks weakened"
+    }
+  ],
+  "validation": {
+    "build": "839 modules passed; existing bundle-size warning",
+    "hygiene": "passed",
+    "source_preview_equal": true,
+    "backend_tests": "not rerun; no computation or backend modifications; prior 30 daily/regression checks remain valid",
+    "health": {
+      "ok": true,
+      "model_requests": 0,
+      "snapshots": 2,
+      "completed": 0,
+      "in_flight": 0
+    }
+  },
+  "new_model_calls": 0,
+  "new_experiments": 0,
+  "new_ledger_writes": 0,
+  "new_external_source_requests": 0
+}

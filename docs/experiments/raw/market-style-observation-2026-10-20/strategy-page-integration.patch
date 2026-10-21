@@ -1,0 +1,31 @@
+--- a/web/src/pages/FwdLedgerPage.tsx
++++ b/web/src/pages/FwdLedgerPage.tsx
+@@ -3,6 +3,7 @@
+ import { request } from "../api/client";
+ import StrategyForward from "../components/strategy-forward/StrategyForward";
+ import StrategyPortfolios from "../components/strategy-portfolios/StrategyPortfolios";
++import StrategyRiskWorkspace from "../components/market-style/StrategyRiskWorkspace";
+
+ type FwdBucketStat = { n: number; winRatePct?: number; meanPct?: number };
+ type FwdLedgerResponse = {
+@@ -161,15 +162,16 @@
+ }
+
+ export default function FwdLedgerPage() {
+-  const [tab, setTab] = useState<"portfolios" | "strategy" | "signal">("portfolios");
++  const [tab, setTab] = useState<"comparison" | "portfolios" | "strategy" | "signal">("comparison");
+   return <div className="fwd-tabs-page">
+-    <div className="page"><div className="header"><h1>策略前向观察</h1><span className="generated">个股双策略、原完整策略与原信号分别查看</span></div>
++    <div className="page"><div className="header"><h1>策略跟踪与复盘</h1><span className="generated">前向新记录与过去行情的历史对照分开查看</span></div>
+       <div className="sf-page-tabs" role="tablist" aria-label="前向记录类型">
+-        <button type="button" role="tab" aria-selected={tab === "portfolios"} onClick={() => setTab("portfolios")}>个股双策略</button>
++        <button type="button" role="tab" aria-selected={tab === "comparison"} onClick={() => setTab("comparison")}>共同风险复盘</button>
++        <button type="button" role="tab" aria-selected={tab === "portfolios"} onClick={() => setTab("portfolios")}>个股双策略账户</button>
+         <button type="button" role="tab" aria-selected={tab === "strategy"} onClick={() => setTab("strategy")}>原完整策略参照</button>
+         <button type="button" role="tab" aria-selected={tab === "signal"} onClick={() => setTab("signal")}>原信号记录</button>
+       </div>
+-      <div role="tabpanel">{tab === "portfolios" ? <StrategyPortfolios /> : tab === "strategy" ? <StrategyForward /> : <OriginalSignalLedger />}</div>
++      <div role="tabpanel">{tab === "comparison" ? <StrategyRiskWorkspace /> : tab === "portfolios" ? <StrategyPortfolios /> : tab === "strategy" ? <StrategyForward /> : <OriginalSignalLedger />}</div>
+     </div>
+   </div>;
+ }

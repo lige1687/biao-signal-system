@@ -7,7 +7,7 @@ import { BREADTH_HIGHLIGHT_RULES, BREADTH_LINES, computeHighlightBands, type Hig
 import "./breadth-comparison.css";
 
 type Market = "cn" | "us";
-type PriceKey = "sse" | "sp500" | "nasdaq";
+type PriceKey = "sse" | "hs300" | "sp500" | "nasdaq";
 type View = { dates: string[]; price: (number | null)[]; breadth: (number | null)[][]; bands: HighlightBand[] };
 const EMPTY_BREADTH: BreadthHistoryPoint[] = [];
 
@@ -16,7 +16,7 @@ const WINDOWS = [
   { label: "3年", days: 1095 },
   { label: "5年", days: 1825 },
 ] as const;
-const PRICE_NAMES: Record<PriceKey, string> = { sse: "上证指数", sp500: "标普500", nasdaq: "纳斯达克综合指数" };
+const PRICE_NAMES: Record<PriceKey, string> = { sse: "上证指数", hs300: "沪深300", sp500: "标普500", nasdaq: "纳斯达克综合指数" };
 const exists = (value: number | null | undefined): value is number => typeof value === "number" && Number.isFinite(value);
 
 /** A compact version key for the exact facts visible in this window, including same-date revisions. */
@@ -117,14 +117,16 @@ function BreadthProjectionChart({ view, priceName }: { view: View; priceName: st
   return <div ref={node} className="bc-chart" role="img" aria-label={`${priceName}价格与同日20、50、200日市场宽度曲线，条件色带同步标在两图；详情可用鼠标或触屏查看`} />;
 }
 
-export default function BreadthComparison({ market, onContextChange }: {
+export default function BreadthComparison({ market, onMarketChange, onContextChange }: {
   market: Market;
+  onMarketChange: (market: Market) => void;
   onContextChange?: (context: { windowDays: number; ruleIds: string[]; priceKey: string; fingerprint: string }) => void;
 }) {
   const [windowDays, setWindowDays] = useState<number>(365);
+  const [cnPrice, setCnPrice] = useState<"sse" | "hs300">("sse");
   const [usPrice, setUsPrice] = useState<"sp500" | "nasdaq">("sp500");
   const [active, setActive] = useState<ReadonlySet<string>>(() => new Set(["bull_base", "bear_base"]));
-  const priceKey: PriceKey = market === "cn" ? "sse" : usPrice;
+  const priceKey: PriceKey = market === "cn" ? cnPrice : usPrice;
   const breadthId = market === "cn" ? "CN_ALL_A" : "SP500";
   const breadth = useQuery({ queryKey: ["overlayBreadth", breadthId, 1260],
     queryFn: () => api.marketContextBreadthHistory(breadthId, 1260), staleTime: 12 * 3600_000 });
@@ -152,13 +154,19 @@ export default function BreadthComparison({ market, onContextChange }: {
 
   return <section className="breadth-comparison" aria-labelledby="bc-title">
     <header className="bc-heading">
-      <div><h2 id="bc-title">价格与市场宽度</h2><p>同日曲线与条件标注 · 历史观察</p></div>
+      <div><h2 id="bc-title">价格与市场宽度投影</h2><p>同日曲线与条件标注 · 历史观察</p></div>
       <div className="bc-controls" role="group" aria-label="价格范围与期间">
-        {market === "us" && <span className="bc-price-switch"><button type="button" aria-pressed={usPrice === "sp500"} onClick={() => setUsPrice("sp500")}>标普500</button><button type="button" aria-pressed={usPrice === "nasdaq"} onClick={() => setUsPrice("nasdaq")}>纳斯达克</button></span>}
         <span className="bc-window-switch">{WINDOWS.map((window) => <button key={window.days} type="button" aria-pressed={windowDays === window.days} onClick={() => setWindowDays(window.days)}>{window.label}</button>)}</span>
       </div>
     </header>
-    <p className="bc-scope">{market === "cn" ? "全A股票宽度 × 上证指数价格" : `标普500成分股宽度 × ${PRICE_NAMES[priceKey]}价格`}</p>
+    <div className="bc-controls bc-market-controls">
+      <div className="bc-price-switch" role="group" aria-label="宽度投影市场"><button type="button" aria-pressed={market === "cn"} onClick={() => onMarketChange("cn")}>A股投影</button><button type="button" aria-pressed={market === "us"} onClick={() => onMarketChange("us")}>美股投影</button></div>
+      <div className="bc-price-switch" role="group" aria-label="宽度投影价格指数">
+        {market === "cn" ? <><button type="button" aria-pressed={cnPrice === "sse"} onClick={() => setCnPrice("sse")}>上证指数</button><button type="button" aria-pressed={cnPrice === "hs300"} onClick={() => setCnPrice("hs300")}>沪深300</button></>
+          : <><button type="button" aria-pressed={usPrice === "sp500"} onClick={() => setUsPrice("sp500")}>标普500</button><button type="button" aria-pressed={usPrice === "nasdaq"} onClick={() => setUsPrice("nasdaq")}>纳斯达克</button></>}
+      </div>
+    </div>
+    <p className="bc-scope">{market === "cn" ? `全A股票宽度 × ${PRICE_NAMES[priceKey]}价格` : `标普500成分股宽度 × ${PRICE_NAMES[priceKey]}价格`}</p>
     <p className={`bc-dates${breadthBehindPrice ? " bc-stale" : ""}`}>价格截至 {lastPriceDate ?? "未提供"} · 宽度截至 {lastBreadthDate ?? "未提供"}{breadthBehindPrice ? "（宽度后续缺失；图上留白）" : ""}</p>
     {breadth.isPending || overlay.isPending ? <p className="bc-state" role="status">正在读取历史曲线…</p> : null}
     {breadth.isError || overlay.isError ? <p className="bc-state bc-error" role="alert">{breadth.isError ? "宽度历史读取失败。" : "指数价格历史读取失败。"}暂不能显示同期对照。</p> : null}
@@ -169,6 +177,7 @@ export default function BreadthComparison({ market, onContextChange }: {
       <span>同期条件：</span>{BREADTH_HIGHLIGHT_RULES.map((rule) => <button key={rule.key} type="button" aria-pressed={active.has(rule.key)} onClick={() => toggle(rule.key)} title={rule.full}><span className="bc-rule-dot" style={{ background: rule.color }} aria-hidden="true" />{rule.short}</button>)}
     </div>
     <p className="bc-caption">色带把已有宽度条件投影到同期价格，不代表未来走势。沿用本系统图表条件：A股80/20、美股85/15，200日底色按50%划分；20日为短期对照，未纳入现有六条件。</p>
-    <details className="bc-source"><summary>来源与如何读</summary><p>宽度是股票中有多少比例站在各自20、50或200日均线上方。将指数价格和宽度放在相同日期轴上，可对照价格变化有多少股票一起参与。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源。</p><p>本图价格来自现有指数历史接口，宽度来自现有市场宽度历史接口。两者交易日严格对齐，缺值不连线；全A与上证、标普500宽度与纳指都不是同一股票范围。历史名单、有效股票分母与修订可能不同，当前接口未给出逐日完整覆盖率，不能用这张图直接判定交易或证明未来效果。</p></details>
+    <p className="bc-caption"><a href="/fundamentals?section=overlay#fund-sec-overlay">原长周期叠加：指数 × 利率／两融／VIX →</a></p>
+    <details className="bc-source"><summary>来源与如何读</summary><p>宽度是股票中有多少比例站在各自20、50或200日均线上方。将指数价格和宽度放在相同日期轴上，可对照价格变化有多少股票一起参与。<a href="https://chartschool.stockcharts.com/table-of-contents/market-indicators/percent-above-moving-average" target="_blank" rel="noreferrer">StockCharts 指标定义</a>仅供解释，不是本系统数据来源。</p><p>本图价格来自现有指数历史接口，宽度来自现有市场宽度历史接口。两者交易日严格对齐，缺值不连线；全A宽度不是沪深300成分股专属宽度，标普500宽度也不是纳指专属宽度。历史名单、有效股票分母与修订可能不同，当前接口未给出逐日完整覆盖率，不能用这张图直接判定交易或证明未来效果。科创50、科创100与创业板当前接口未提供价格序列，本图暂不显示。</p></details>
   </section>;
 }
