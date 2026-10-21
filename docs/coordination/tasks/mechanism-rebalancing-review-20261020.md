@@ -1,3 +1,14 @@
+# 数据完整性优先的机构资金压力研究 2026-10-21T23:56:55.013148+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=781049d57f4df9989840a921b7f032befb96adc4；checked_at=2026-10-21T23:56:55.013148+08:00。已读COORDINATION/self/dispatch/sentiment、personal-lowfreq最新五分组曲线、market-style最新复盘移页，strategy-account/research-utility沿上轮已读范围。无US基金申赎持仓同写；保留其他owner。首次仅父SHA断言失败，0写入，已补读market-style新范围。
+- 用户授权“可以去看看，数据全的优先做”。mode research：优先资格完整资料，实际取数核同一基金相邻持仓和资金流；合格后执行资金压力是否对应减持的有界行为比较。先定样本资格、再冻统计；不预设反向有效，不重跑旧NAAIM/CFTC/AAII，不改LEI规则。
+- 新写docs/experiments/institutional-flow-holdings-pilot-2026-10-21.md及同名raw；自身progress追加、registry新键/INDEX本行。root主控/原Astra只读方法审；Sol按后续合同仅写独立raw子目录和外盘明确输出，1writer/path。正式定义/共享runner/生产只读，基金机制不强塞技术入口。
+- 成果基线codex/mechanism-rebalancing-review-20261020@6d4047be5a05c82eeba43284ca7ffdbafcb7d6b1。新有界问题预算1核心批、最多3必要跟进、6公开源请求（已1SEC页），失败同计。拟先2025完整申报年度四季官方包，选期因最新完整年，不看效果择时；申报年不等于经济报告年。继承旧>=1268拟合/4Pro、上两轮累计56源动作，不重置旧账。
+- 外盘身份已核约496GB、内盘约9GB；新大原件/派生/日志只在output_storage预检的固定外盘，预计<=12GiB，本机小记录<=2MiB。0付费/原策略更改/交易/通知/仓外DB写；保留旧冻结。
+- 验收：实际覆盖、基金证券身份、申赎与持仓区间、现金完整性/ETF实物申赎/修订/公开时间；合格行为比较须同证券同期、简单参照、依赖与反例。缺核心字段限定受阻用途，不编造指标。报告含性能和增量或不能计算原因、API/归置/准确Git读回。0市场结果已执行；无资料就记录真实阻塞和恢复条件。
+
+---
+
 # 主动配置与资金压力定义及数据入口已交付 2026-10-21T23:49:50.478346+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner 01a158cd-e0ee-7260-b91f-629930ce779f/root；status completed（本轮定义/资料字段问题）；scope_released true。连续真实基金资料及新因子效果未评价，不宣称整个机构研究完成。
