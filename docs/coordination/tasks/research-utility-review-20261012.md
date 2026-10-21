@@ -1,3 +1,12 @@
+# 补交收益曲线入口与实际页面验收 2026-10-22T00:14:44.458284+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active（仅展示补交）；scope_released false；checked_coordination_sha=7d3eb2903f83ec7b3dd9ba01bda748ed173437f3；checked_at=2026-10-22T00:14:44.458284+08:00。已读 COORDINATION/self、personal-lowfreq-system-audit-20261018（五组连续账户在做）、investor-workspace-simplification-20261012（三图已接）、market-style-observation-20261020（宽度修复）、mechanism-rebalancing-review-20261020、research-dispatch-controller。无文件同写；新资金研究与其结案仍归 personal owner。
+- 用户明确“最想看的收益曲线还没给我”“曲线更直观”。复用 personal owner 已生成的 factor-group-curves-20261021，不再计算或重跑任何实验，不改其代码、数据、图或报告。主控已委派 Sol 只读核输入名单绑定/完整日历/五组与基准/缺价披露；系统静态接入沿用户既有授权交给系统实现聊天，仅5文件准确复制到5188，无服务重启。
+- 唯一新增修改范围：本任务 docs/experiments/factor-sorting-diagnostics-2026-10-21.md 的曲线入口说明（原数值不变）、对应 registry 本键 report_sha256、同名raw内 curve-delivery 小回执及截图、自己的 progress 追加。基线主树 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9＋前轮未提交产物；协调树当前7d3eb290。不会将报价示意称成可兑现净值或未见验证，owner待验收则明示。
+- 验收：5188返回真实图表而非SPA、源与镜像字节一致、切换因子/池/费用/时期更新五组和基准、截图直观看到曲线、原报告与数据绑定保留。新实验0/新市场请求0，无交易、删除、付费、原策略修改或后台研究。
+
+---
+
 # 四因子独立分组与时期诊断交付 2026-10-22T00:02:32.159975+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed（仅本次单因子诊断）；scope_released true；checked_coordination_sha=d5fb5fce1f7089717796c892c0ab1c9082c3cbba；checked_at=2026-10-22T00:02:32.159975+08:00。已读COORDINATION/self、personal-lowfreq-system-audit-20261018最新23:54另做分组连续资金（复用本题不重跑）、investor-workspace-simplification-20261012最新23:59三图交付、market-style-observation-20261020最新23:55、mechanism-rebalancing-review-20261020最新23:56、research-dispatch-controller；启动还读strategy-account-bridge/pro-advice-process-review/lowfreq-strategy-discovery。无同文件冲突，不接管对方连续资金/机构/盈利/环境与系统。
