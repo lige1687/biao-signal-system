@@ -1,3 +1,13 @@
+# 固定因子资金曲线页签实现 2026-10-22T00:22:37.008438+08:00
+
+- task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=cbc634e2a639188e7c624a755a762f664133ed5a；checked_at=2026-10-22T00:22:37.008438+08:00。已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/strategy-account-bridge/dispatch，及检索命中mechanism-rebalancing/sentiment当前段；本轮UI路径无其他当前写者。用户新增明确要求固定规范研究界面、曲线优先；原5文件静态接入已完成，不重跑研究。研究定义/新数据由原因子owner准备，本方唯一UI写者。
+- 唯一写当前5188树web/src/pages/factor-research/新增FactorCurves.tsx、factorCurvesModel.ts、factor-curves.css、factorCurves.test.mjs，原FactorResearchPage.tsx、overviewModel.ts和overview.test.mjs的曲线页签/默认入口/深链接小增量；主树仅准确同路径UI镜像（原文件基线相同才镜像），不动不同基线FactorPanelPage.tsx。复用ECharts、现有/factors与报告链接；无React共享组件/API/Python/策略/研究结果修改。可准确复制研究owner给出的web/public/research/factor-group-curves-20261021/data.v1.json至5188同路径，只消费不代写源数据。
+- 小方案/接口/验收回执仅自身docs/archive/handoffs-plans/investor-workspace-simplification-20261012/factor-curves-*20261022*及原progress，主/成果树镜像。设计：现有白底深色文字与绿/灰/黑重点，左侧研究对象，主栏累计变化及跌幅，样本/费用/已看历史/缺价贴图，完整指标和来源折叠；手机单列。首版只接有真实连续资金数据的四因子，20/60/120日动量/PPO/残差/下行风险没有对应资金线则显示待接入，不造图、不把现有12-1当20/60/120。
+- 稳定接口拟兼容原summary的streams/periods/increments，不从长HTML抽内部变量；最小JSON元数据和列语义由研究owner提供。接口文件将写入自身factor-curves-interface-20261022.md供原owner读取。关键要求：准确因子公式/排序方向、股票池、单边费用单位、日期/同池基准、月末报价/现金/区间缺价，以及回撤点的明确高点基准，区间指标由研究层给出，UI不从稀疏月点重算日度风险。
+- 验收：真实84曲线记录消费、控制切换与源数值/空缺一致，费用/时期/股票池与共同基准同时变化；虚线缺价、无资金线/404/格式错误/日期空窗不造图；原catalog精确版本/深链接保持；相关模型回归/TS/build、真实宽窄页面曲线/按钮/键盘及归置。两策略源SHA与确认值相同，服务层仅研究展示。不请求模型/行情/市场计算、不改交易/后台/通知，不恢复已删leisignal定时任务。成果沿e6c4c2e025252c565ba15f05611561ca1ecd5b48加本机未提交增量。
+
+---
+
 # 四因子五组曲线五文件接入完成 2026-10-22T00:16:53.507197+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status completed（本次5静态文件）；scope_released true；checked_coordination_sha=6c6f4cc097632f66d8426469757bfc9e1ddece65；checked_at=2026-10-22T00:16:53.507197+08:00。沿本轮已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/dispatch；登记过程中原因子补交展示记录已补读，交付前fetch新变更均核，无同块冲突。
