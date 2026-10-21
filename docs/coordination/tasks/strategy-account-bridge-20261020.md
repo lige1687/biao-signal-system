@@ -1,3 +1,16 @@
+# 固定组合及三方向资料接续交付 2026-10-22T01:15:49.711164+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed（本轮保存路径问题与资料资格，不是整体策略发现目标完成），scope_released false（原冻结服务/账本及本方原记录保护）；checked_coordination_sha=175e6754aaf2f9eb38b884d0dc8c92ae062b08b1；checked_at=2026-10-22T01:15:49.711164+08:00。已读COORDINATION/self、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、market-style-observation-20261020；最新investor01:08诊断UI段已复核，冲突决定无新增：单因子/新204/环境/UI仍原owner，未重跑或修改。
+- 一次主组合+一次预先固定股票范围跟进完成，使用8份已存账户，不重跑行情/引擎、不扫权重。全部合格池初始各半M/R年复合4.9527%、最大跌幅58.0878%，低波动9.2651%/55.5904%；组合相对低波月均−0.2471pp，描述范围−0.7780至+0.2839。M/R月相关0.8883，池下跌64月共同亏51月。绿色范围各半年复合0.0201%/跌幅69.5888%，相关0.7707；相关下降仍无足够账户帮助。全部历史已看，不升级新前向/资金采用，不把弱结果外推全市场或完整LEI。
+- 两池最高未知估值68.46%/45.88%，严重限制风险解释；原引擎全日日线约束开盘/可分割报价单位等边界完整保留。两账户交易次数相加不减半，缺价归零仅压力描述，绿色压力跌幅反而较浅来自高点同时降低，不称下界。
+- 三方向资料增量：6/6外部请求（2搜索4官方原件读取）定位CSRC2014Q4/2020Q4分类与实际发布2015-01-22/2021-01-25，7只首表股票能接旧账户、2例两期分类明确；未完成连续行业序列，也未伪造PDF SHA。价值原作者序列和逐股缺件复用原owner，未复算。微软2原公告SHA再次匹配；电话会时刻不等于首公告、62申报季度不等于62首公告，沿最终revision-5，未重复采集。新204报告无足够新机制理由，不追加第三组合。
+- 主报告 docs/experiments/mature-strategy-followthrough-2026-10-22.md SHA 6d08db4cf84510ec38f943f695fbcd90b39fe1d51f0295d47842201b44bb07c1；raw同名内含合同、输入指纹、主控方法审阅、analyze/summary、独立验算、两资料资格、图及API/readback/delivery。registry仅自身新键、INDEX仅自身行，其他743条登记内容保持。5188报告API正文逐字匹配，真实浏览器报告标题、结论及性能表已显示；科研静态图已视觉核。没有UI源码/仓外运行树复制、服务重启、通知/自动化/真实交易。
+- Sol medium实现两独占小文件；Astra high效果前后方法审阅；root从8原日表用独立算术核334项一致，不导入执行实现。原8前向配置/模块与上轮封存SHA逐项一致；归置通过；没有为本轮文档改动重跑全仓测试。失败均留attempt-log/summary：错误工作目录暂存、单行JSON输出过多、读取层级错误、图字体路径不存在，均不改变效果或金融参数。
+- 成果仅主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，本轮未自动提交/推代码；仅协调元数据单独推送。新小产物约0.75MiB，新增大输出0；内盘起始3.62GiB低于新大结果要求，未清理/迁移；外盘身份合格。整体后续仍需准确历史输入与源预算/存储条件，当前不重新回测弱组合；季度/年度原资料owner归属不变。系统待升级仓外库仍未写，原确认边界保持。
+- 下一可改变取舍的证据：连续、按发布时点使用的历史行业归属；同一合格证券池的价值与价格资料；首次季度公告及可比会计口径。之后固定强对手及完整资金规则，环境调配另单独检验当时可知定义/切换成本/漏赚，不从已见优胜格子直接切换。报告当前已交付，用户呈现验收自定。
+
+---
+
 # 组合用途与执行分工补充 2026-10-22T01:01:36.001859+08:00
 
 - task-id strategy-account-bridge-20261020；status active。checked_coordination_sha=d3346e45d005875215c4e3c1ddb3376096c64ebc；checked_at=2026-10-22T01:01:36.001859+08:00；重新fetch确认无新任务变化，已读task-id沿下段10项，冲突决定不变。
