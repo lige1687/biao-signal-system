@@ -1,3 +1,15 @@
+# 三方向接续与固定组合增量核查 2026-10-22T00:53:23.244262+08:00
+
+- task-id strategy-account-bridge-20261020，owner原root；status active，scope_released false。checked_coordination_sha=d09ad91d6fd617d2b8d032243cdeae8eaeba4eb6；checked_at=2026-10-22T00:53:23.244262+08:00；已读COORDINATION/self、research-dispatch-controller、research-utility-review-20261012（00:51新204/诊断）、personal-lowfreq-system-audit-20261018（00:47环境及10/21反转/84曲线）、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、investor-workspace-simplification-20261012（00:48新10指标消费）、mechanism-rebalancing-review-20261020（00:42）、market-style-observation-20261020（00:27）。冲突决定：单因子84/204账户、分组/环境与固定因子UI均原owner；本方不重算、不改其数据/代码/UI。
+- 用户2026-10-22明确同意行业相对反转、价值与动量、公告信息消化三方向继续，并允许值得查的因子组合，强调去重。本轮问题：哪些关键资料与单项证据可直接接续；在已有同口径独立账户上，固定分配给中期动量与短期反转能否改善全资金相对单项、低波动及简单降低投入。这里只在规则/共同轴核齐后做1次保存路径描述，不重跑单因子/扫描权重；0新逐股选择和市场拟合。三方向缺件分别核实际来源/原owner，不能重复抄旧缺口作交付。
+- 准确新范围：docs/experiments/mature-strategy-followthrough-2026-10-22.md及同名raw小记录/只读分析脚本；自己的progress追加；registry只本键、INDEX只本行。必要审核内容仅既有web/src/components/strategy-portfolios/StrategyResearchReview.tsx，其他UI/3原配置/冻结后端/账本保持。当前5188运行树仓外未触及，不把本轮方向许可自动当三文件复制确认。
+- 基线主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，成果仅本机未提交。实际8来源旧偏差保留，不重复旧8请求；本次新问题外部请求至多6、只root可用，助手0联网/0取数，使用前逐次记账；最多1核心保存路径诊断+必要纠错，旧市场运行不重置。科学比较在新brief冻结后才读结果。
+- 分工：沿现有Sol medium mature_strategy_local_audit只读本地行业/公告资格和最新证据；Astra high mature_strategy_method_review只读固定组合方法/价值原型资格，均不写/不联网/不再委派。root来源预算、精确关键资料检查、冻结比较、原始路径独核和报告；若有必要实现另登记唯一写者。
+- 当前空间实测内置3891367936字节不足5GiB、外盘494203568128字节且UUID匹配；不启动需外盘路由的新大结果/新行情批次，不删除清理。继续小报告、既存文件只读和内存摘要；若必要实验必须新大结果则标该分支真实存储阻塞，不把默认次数当无新证据停工理由。无生产/交易/付费/主动通知/自动化。
+- 验收：三个方向准确新证据/原owner/剩余缺口；固定组合同资金同日期费用、不重算/优化、单项和简单低波/减投入强对手、同时下跌/分期/现金缺价/不能解释的部分；资料不足不报账户收益；归档/API可见和核查回执。组合不是行业相对反转或价值、事件策略已完成，也不能证明完整LEI。
+
+---
+
 # 成熟策略原型审阅与审核页交付 2026-10-20T23:49:13.113723+08:00
 
 - task-id strategy-account-bridge-20261020，owner沿原；本轮来源/机制/资料资格问题 completed，仓库内UI完成，现用5188同步 pending_user_approval（仓外准确三文件），用户视觉认可待验收；scope_released false（仅保留本轮UI准确路径及旧冻结保护，不占其他候选研究）。checked_coordination_sha=ad07270113ed2b22619876cea6972be373cb5014；checked_at=2026-10-20T23:49:13.113723+08:00；已读COORDINATION、self、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、market-style-observation-20261020。最新反转/机构仓位交付已读；范围无冲突，只引用原owner成果，未接管复跑。
