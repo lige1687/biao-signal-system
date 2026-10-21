@@ -1,3 +1,12 @@
+# 曲线UI实际目录接口与环境资料接入 2026-10-22T00:31:12.865179+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=b4dc5b349d1ab53bf02bf3e31201ee1d6712d707；checked_at=2026-10-22T00:31:12.865179+08:00。沿已读COORDINATION/self/研究与个人owner/strategy-account-bridge/dispatch，当前新增变更已读，无UI同块写者。研究owner已给实际catalog，先前其“已落地”后发现未写出及更正实际完成的历史保留；本方首次找不到文件没有造JSON，现实际3文件可读。
+- 正式消费实际`/research/factor-curve-library-20261022/catalog.json`（schemaVersion1）及其dataUrl的legacy-summary.json/legacy-regimes.json，只精确镜像主树这3文件至5188同目录，新增该准确目标路径。主树数据目录由研究owner单写，本方不改；原建议/research/factor-curves/data.v1.json不采用、不新增。接口文档将补实际catalog适配，保留最初建议为历史。
+- 实际summary84流/4因子/2池原字节；环境132月75偏强57偏弱、19段由研究层提供。UI只高亮连续月份区间与读原条件表，不改主线/不拼环境账户/不计算牛熊。首dataset固定300源样本非沪深300，环境参照沪深30010月均线是另一个对象，不把样本改名；环境原来源与历史到达局限留详情。
+- 原新增React/model/CSS/tests和页签3文件范围保持，研究数据/计算不接管。按hash读取summary/regime，HTML回落/数据格式/指纹失败明确报错；未有资金线的7因子/4历史成员池只显示待接，不借用旧12-1代替。
+
+---
+
 # 固定因子资金曲线页签实现 2026-10-22T00:22:37.008438+08:00
 
 - task-id investor-workspace-simplification-20261012；owner 01a123fc-553b-7b81-9952-36e1acb11dcc/root；status active；scope_released false；checked_coordination_sha=cbc634e2a639188e7c624a755a762f664133ed5a；checked_at=2026-10-22T00:22:37.008438+08:00。已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/strategy-account-bridge/dispatch，及检索命中mechanism-rebalancing/sentiment当前段；本轮UI路径无其他当前写者。用户新增明确要求固定规范研究界面、曲线优先；原5文件静态接入已完成，不重跑研究。研究定义/新数据由原因子owner准备，本方唯一UI写者。
