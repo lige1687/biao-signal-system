@@ -1,3 +1,13 @@
+# 策略复盘移页与中美宽度入口恢复 2026-10-21T23:55:31.574189+08:00
+
+- task-id market-style-observation-20261020；owner沿原root；status active，scope_released false；用户明确要求截图内策略内容放独立页，并找回沪深与美股宽度投影。服务市场环境说明和策略复盘展示层，不变研究/交易语义；策略源两SHA核同原确认。
+- checked_coordination_sha b48e7e5a80371b03598ef3f481ef06f111e96704；checked_at 2026-10-21T23:55:31.574189+08:00；已读COORDINATION及self、investor-workspace-simplification-20261012、investor-observation-map、strategy-account-bridge-20261020、research-dispatch-controller。现有/fwd已有账户与前向页；复用，不新建另一套账本。原宽度长周期页含上证/沪深300/科创50/科创100/创业板、标普/纳指，新组件只接上证，入口需补齐。
+- 唯一写者root：自有web/src/components/market-style/、仓内5192副本、自有报告/raw/progress；仅对web/src/pages/FwdLedgerPage.tsx与仓内预览对应文件做wrapper块的新增“共同风险复盘”页签/import/标题，其他三个原页签和内容保留，原owner的StrategyPortfolios/StrategyResearchReview/后端不修改。公共父页/App/TopNav/指标公式/8000/8028/仓外5188/数据库只读。FwdLedger增量以准确patch保存，不混传整份其他owner已有代码。
+- 页面：市场环境去完整PortfolioRiskReview，只留第5问摘要与/fwd入口；已有/fwd改标题策略跟踪与复盘，新增默认共同风险页签，前向跟踪（默认）和历史对照明确分开。宽度图内可见A股/美股入口，CN补原已有5指数可选，US标普/纳指沿已有数据，明示全A/标普宽度与非同范围指数的边界。
+- 验收：市场页无策略大表和账户曲线；链接直达独立/fwd；前向默认不出现2015—2025收益，历史页签保留原数据；沪深300/美股标普/纳指有真价格与20/50/200宽度同期投影和条件；原长周期入口可达；电脑页面实点、构建/归置、0自动模型调用。0新研究/取数预算/付费/通知/新代理，不修改账户记录或恢复定时。
+
+---
+
 # 官方日线已交付，原五问仍有资料缺口 2026-10-21T23:46:49.844027+08:00
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status blocked（原完整五问还缺历史收益贡献/历史估值/实际账户风格资料）；本轮日线范围 completed，scope_released true。没有未结束的取数、模型或研究任务；预览服务留给用户查看。
