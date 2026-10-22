@@ -1,3 +1,13 @@
+# 免费及付费数据入口核查 2026-10-22T11:31:02.791378+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner原root；status active；scope_released false。checked_coordination_sha=59c391e1eeecc89d26ac2b993537e81daa8b9208；checked_at=2026-10-22T11:31:02.791378+08:00；已读COORDINATION、self、research-dispatch-controller、sentiment-factor-research、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、strategy-account-bridge-20261020最新段。其他研究/UI及冻结文件只读，本题新目录无冲突。
+- 用户授权“看看数据获取，比如huggingface、开源数据源、不行付费接口”。有界问题：哪些来源能实际补足美股基金历史类型/申赎持仓/证券身份和A股完整持仓/份额/披露时间，免费能取得什么、付费买到什么。复用已取16份NPORT及四基金试点，不重跑效果，不购买/注册/联络厂商。
+- 成果基线codex/mechanism-rebalancing-review-20261020@ae63de1f6dc4201d564507aa27f9664f1645e997。仅root写新docs/experiments/institutional-data-sources-2026-10-22.md及同名raw、自己的progress、registry本键/INDEX本行；不改生产、定义或其他任务。无新代理，无旧收益计算。
+- 验收：公开官方文档/版本/字段/历史范围/更新频率/许可/实际样本与响应；付费价格必须对应目标接口权限；未登录未实测分开。小元数据留仓，若需要大数据先走存储预检，已知他人内盘低于保留线，不绕过。缺历史时点或原始字段不得用代理充数。
+- 累计旧来源已知261及>=1268年度拟合/4Pro保持；本轮逐请求留账，不用skill默认6设停止预算。数据源核查结案不等于机构研究已有效。无支付、账户创建、私人信息上传、交易、通知或后台执行。
+
+---
+
 # 美股资料接通与有界行为试点交付 2026-10-22T00:42:47.316758+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner原root；status completed（数据优先级与四基金描述性试点），scope_released true；完整机构研究/稳定预测/策略采用不宣称完成。checked_coordination_sha=529749b51ed3ad09f268a7748a61cbddd5a5259b；checked_at=2026-10-22T00:42:47.316758+08:00。已读self/COORDINATION/dispatch/sentiment/strategy-account及新增investor-workspace实际catalog、personal牛熊方法复核、market-style自动续更、research-utility共同资格；末次fetch无再变，无本题目录冲突，不接管他人研究。
