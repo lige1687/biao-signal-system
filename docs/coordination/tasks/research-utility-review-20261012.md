@@ -1,3 +1,12 @@
+# 补齐十因子 RankIC 与历史池缺口 2026-10-22T17:07:09.822451+08:00
+
+- task-id/owner沿原；status in_progress（实现/资料核验），真实新效果仍storage_paused。checked_coordination_sha=304034da3eea9366fdd20529fa3671c027293abb；checked_at=2026-10-22T17:07:09.822451+08:00；已读COORDINATION/self/investor-workspace-simplification/personal-lowfreq-system-audit/research-dispatch-controller最新记录。无同文件冲突，系统UI仍由系统owner负责。
+- 用户最新“那你继续补齐这些吧”授权补十因子RankIC及历史股票池资格；旧账户/分数不重算。新增准确范围 src/lei_signal/research/factor_curve_rank_diagnostics.py、tests/unit/test_factor_curve_rank_diagnostics.py、原momentum-three-universe raw内backfill_rankic.py/补指标合同与核验、原报告/progress/state、公用new-assessment.json及catalog对应指纹；未经合格数据不解锁历史池。沿用既有研究范围/不接管他人US公开曲线。
+- 新统计拟80条（10因子×2池×4时段），资格以旧frozen-targets并集验证，119形成月保持空月，未来未知保留；末标签成熟到2026-01首交易日与账户月底终点分开。费用不重复算IC。已看历史只补诊断，不称独立验证。
+- 当前内盘仅276074496B，外盘身份正确；有限闲置目录盘点未发现够大且可安全迁移项，活跃缓存/环境/交换文件不碰。代码/小记录/合成核查可继续，真实新统计须原5GiB预检，不重命名绕过。Sol负责独立新计算模块，Astra只读方法审阅，root负责来源/存储及数据集成；UI交唯一owner。
+
+---
+
 # 首图指标交付、授权迁移已验，新效果仍暂停 2026-10-22T11:46:58.949736+08:00
 
 - task-id/owner沿原；status paused（仅新市场效果受实际存储阻塞；页面与本批输入适配完成）；scope_released false（原研究源码/数据单一写者保持）；checked_coordination_sha=59525f0ab8bb9c07b523109734aa14b8e62caa11；checked_at=2026-10-22T11:46:58.949736+08:00。读self/COORDINATION与系统11:40布局完成，原storage两个负责人及dispatch沿本轮已读；无同块冲突，无后台研究写者。
