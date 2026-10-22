@@ -1,3 +1,15 @@
+# 三类股票池动量增量与固定预测诊断启动 2026-10-22T10:34:04.253581+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=ad30b9e9f881278a88ea51b6ee670b5f4465d158；checked_at=2026-10-22T10:34:04.253581+08:00。已读COORDINATION、自身、personal-lowfreq-system-audit、lowfreq-strategy-discovery、strategy-account-bridge 10:21最新（仅原账户母指数比较）、investor-workspace-simplification、market-style-observation、pro-advice-process-review、research-dispatch-controller；无计算同题冲突，旧204和84不重跑，系统UI仍交原owner。
+- 用户明确授权：ETF、美股、A股3类分别检查三周期/多期动量vs单期、剔除最近20/21日、行业相对、波动调整、回归残差、价值×动量在已有信息之后的增量；复用旧研究补缺，固定页展示可计算RankIC、夏普及必要指标。服务选对象/排序研究，不更改原LEI入场退出、基本面硬过滤或生产规则。三周期措辞先核现有定义，20/60/120组合与分钟/日/周共振分开。
+- 本轮root写：docs/experiments/momentum-three-universe-increment-2026-10-22.md 与同名raw/；src/lei_signal/research/momentum_increment_diagnostics.py、tests/unit/test_momentum_increment_diagnostics.py（必要时）；web/public/research/momentum-three-universe-20261022/ 新资料，既有curve catalog仅新增本dataset/可选诊断；definitions本新增对象、registry本键/INDEX本行、原progress；fixed-display-contract只补本指标规范。UI技术字段/组件由系统原owner单写。不覆盖旧冻结结果。
+- 先复用现行规范/定义和资料资格；Sol medium只读3类库存、Astra high只读语义和方法，皆0网络/0效果/0写入；root统一方法请求和方案冻结，已有归档直接引用。预算继承所有旧题使用量，本题新增比较记录为1预先枚举核心批次，必要有理由跟进至多3，外部请求首轮6（含失败，数据与方法同记），不以新名字重置旧额度；不调参搜最佳、无付费/后台。
+- 当前新效果0；10:32本机可用4468248576字节低于5GiB，外盘身份合格约494GB，可只读复用。新增大结果需真实preflight通过，未通过不得启动，继续独立定义/代码/已有结果和UI指标工作；不降低阈值、不自动删除或改仓外配置。输出预计128MiB外盘，本机小记录8MiB，最终计划按实际输入调整并先冻结。
+- 验收：3类资料资格及未覆盖分支具体说明；因子值/未来标签同日同池、排名关系及分组表现；控制已知动量/波动/行业等的差额与时间依赖不确定范围；Sharpe的频率/RF口径明确；已有账户直接派生不重跑，实际固定页读回数值和缺失态。报告性能/增量表与继续/暂停理由，不将当前幸存名单冒充历史指数或已看资料冒充独立验证。
+- 主树 codex/factor-unit-research-20260915 基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9＋未提交共享成果保持。仅协调元数据远端；本轮新代码/数据未执行未提交，原完成结论保留。
+
+---
+
 # 固定因子曲线与专业诊断研究交付 2026-10-22T01:31:31.672712+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status completed（仅本轮固定因子曲线、数据诊断和接入规范）；scope_released true（本轮独占写入释放，已冻结材料仍不可覆盖）；checked_coordination_sha=5c2ed67cc2cece274fb33388fbe904ea056ff7a3；checked_at=2026-10-22T01:31:31.672712+08:00。已读 COORDINATION/self、investor-workspace 最新 01:27 完成段、personal-lowfreq-system-audit、research-dispatch-controller、mechanism-rebalancing-review、market-style-observation、strategy-account-bridge 最新 01:15；无同路径冲突，系统 UI 科研数据各自一写者。
