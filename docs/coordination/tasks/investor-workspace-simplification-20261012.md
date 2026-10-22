@@ -1,3 +1,10 @@
+# 研究端最终目录statusLabel兼容接入 2026-10-22T17:16:33.138958+08:00
+
+- task-id/owner沿原；active；checked_coordination_sha=fe04c9e6928b49e6e205383d10040fa4c43f8582；checked_at=2026-10-22T17:16:33.138958+08:00。已收研究owner最终catalog并核raw/universe-status-update.json，SHA4ca33758b984f8b82b1a1baecc65d4e18970c3b26761c03cc7845200db0377a8，仅4个unavailableUniverses变更，datasets保持，80IC仍未运行。源owner单写不变。
+- 源选择增加可选statusLabel（已有候选，待核验），本轮准确追加原factorCurvesModel.ts的可选文字透传和factorCurves.test.mjs的字段兼容/不解锁检查，不改金融逻辑；组件下拉/就近dt显示此文字，无字段回退资料未接入。原接口补说明，其他范围不变。准确只镜像运行树原catalog，旧八JSON不变；最终宽窄文字/禁用/原数值验收再结案。
+
+---
+
 # 历史成员资料缺口就近说明 2026-10-22T17:10:30.372016+08:00
 
 - task-id/owner沿原；active；scope_released false；checked_coordination_sha=f3c7efe9c8b1b1c339f61439d37669511f148f76；checked_at=2026-10-22T17:10:30.372016+08:00。已读COORDINATION/self/research-utility17:07及新增personal/mechanism，原UI唯一写者不变；真实userMessage01a162d4-df2b-7760-b967-438b19f28a0b已read_thread读回，授权补缺。科研/成员资格由研究owner负责，不在UI补算或解锁。
