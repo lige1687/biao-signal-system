@@ -1,3 +1,11 @@
+# RankIC与夏普提到主图旁 2026-10-22T11:35:18.467535+08:00
+
+- task-id/owner沿原；active；scope_released false；checked_coordination_sha=a349b1f312b95ce7c04277c85c18e1d476d1e5bd；checked_at=2026-10-22T11:35:18.467535+08:00。已读COORDINATION/self/research-utility11:03新段及personal/mechanism新增段，无UI同块写者；原策略账户等沿前轮。已read_thread核真正userMessage 01a161ab-ee4d-7173-86dd-d19153e2978d，要求夏普/RankIC靠前或与首个分组图并列。
+- 小范围只写原FactorCurves.tsx/factor-curves.css及主/5188同路径准确镜像；自身factor-curves-*layout*回执/截图与原progress。复用既有assessmentView与真实文件，桌面主图右侧直接可见RankIC和G5/共同基准夏普摘要，窄屏紧随主图；完整逐期/口径仍折叠并可从摘要直接展开定位。无新数据、计算、阈值、研究、模型或定时任务。缺失仍未评价，形成/结果、费用/RF边界和原来源保持。
+- 验收1280桌面摘要与主图同屏；390/768无整页横溢且摘要紧随首图；点详细诊断展开原区，因子/池/费用/分期原值一致；构建/相关最小核查及真实截图。当前两代码基线为前轮已验收主/运行树一致的未提交版本，其他owner脏改动不碰。
+
+---
+
 # 真实RankIC与夏普展示交付 2026-10-22T11:00:40.215817+08:00
 
 - task-id/owner沿原；status completed（本轮指标展示接入）；scope_released true；checked_coordination_sha=1e9341e438988ce633819410899683777007f622；checked_at=2026-10-22T11:00:40.215817+08:00。本轮fetch确认无其他新增变更，已读COORDINATION/self/research-utility三类池及既有相关任务，冲突决定无同块写者。科研结论仍原owner。
