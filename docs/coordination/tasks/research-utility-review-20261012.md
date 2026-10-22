@@ -1,3 +1,15 @@
+# 三类动量研究新效果暂停、固定指标交付 2026-10-22T11:03:08.932286+08:00
+
+- task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status paused（新效果受真实存储/资料阻塞，固定指标已交）；scope_released false（新研究文件保留唯一owner）；checked_coordination_sha=fabdd880ada99aa9c7629308e41ed26ec2c7aa8f；checked_at=2026-10-22T11:03:08.932286+08:00。已读COORDINATION/self/系统11:00完成段；10:34已读personal-lowfreq、lowfreq-strategy、strategy-account-bridge、market-style、pro-advice、dispatch无本轮新变更。系统已释放本展示范围，研究无同题冲突，旧实验继续冻结。
+- 用户本轮三类ETF/US/CN、三期/skip20/21/行业/缩波/残差/价值增量已具体收敛design-draft；新效果0、旧账户重跑0、方法请求6含失败、0新行情。来源库存实际核完整SHA；ETF6有预热，CN固定历史300非CSI300，US重建成员身份候选及退出权利待核，行业与价值同池历史字段缺。未将草案、12合成检查当成真实效果或完整原版策略。
+- 已独立交付：旧32RankIC＋两批1152分期夏普，存量数据只导出不重跑；固定页读回数值、分期/费用/池切换，所有1152独算及32有效人数核验一致。系统49相关检查/构建通过；3JSON源/5188 HTTP SHA/MIME一致，旧六文件不变；用户视觉待验。新十项RankIC未算明确未评价，不借旧值。显示标准v1.1.0，技术接口仍系统唯一文档。
+- 精确源：legacy-assessment SHA1e6e15a8dcfd09b5aaf52bd09928cda3b365fd59ddcdb7eb3a2afe10b5c19df3；new-assessment SHA0e3951aa11d51422fdea10159789895b078127dc32ddb989e04751da4cb14908；catalog SHA023a211649d3141b892bd2eb4952bd62f78e0213b5046bd3edfa38d826451f8b。报告docs/experiments/momentum-three-universe-increment-2026-10-22.md及同名raw/state/source-inventory/design-draft/controller-review/independent-assessment-audit/browser-readback/delivery-validation为恢复入口；registry/INDEX只本条，明确partial而非科研完成。
+- 失败保留与修复：n=1月份HAC单点区间改null；旧导出有效人数误用候选人数20min/28median共32条受影响，系统拒绝后全数修复；语法/目录/lint失败见回执。未删失败版记录、不改收益/旧来源。
+- 当前确切卡点：2026-10-22T11:01:49+08:00真实preflight失败，内盘可用3441799168B约3.2GiB，低于5GiB+8MiB小记录；外盘身份正确但不豁免内盘保留。已询问恢复空间，未获得新删除/迁移授权；不绕过/降阈值/回退内盘，无后台研究写者。恢复约2GiB后先重验容量，再冻结CN/ETF输入定义及适配、真实运行；US/行业/价值资格各自补齐。
+- 代码/小数据及报告在本机未提交，主分支codex/factor-unit-research-20260915基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9＋共享未提交修改。仅本协调记录远端；不称完整移交，不改原策略/生产/交易/通知/模型，全部原预算保持。
+
+---
+
 # 三类股票池动量增量与固定预测诊断启动 2026-10-22T10:34:04.253581+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status active；scope_released false；checked_coordination_sha=ad30b9e9f881278a88ea51b6ee670b5f4465d158；checked_at=2026-10-22T10:34:04.253581+08:00。已读COORDINATION、自身、personal-lowfreq-system-audit、lowfreq-strategy-discovery、strategy-account-bridge 10:21最新（仅原账户母指数比较）、investor-workspace-simplification、market-style-observation、pro-advice-process-review、research-dispatch-controller；无计算同题冲突，旧204和84不重跑，系统UI仍交原owner。
