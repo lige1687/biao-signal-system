@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-10-22T11:42:56.616704+08:00",
+  "report": "docs/experiments/institutional-data-sources-2026-10-22.md",
+  "report_sha256": "56069afbbfe131c1bf44e413c5f08aff757f39809dc4737977e9e2abac2af20c",
+  "api_port": 5188,
+  "api_listing_unique": true,
+  "api_category_verdict_match": true,
+  "api_markdown_exact": true,
+  "repository_hygiene": "passed",
+  "source_check": "sample-quality.json",
+  "prior_pilot_report_unchanged": true,
+  "publication_scope": "metadata/summary/scripts only; downloaded third-party responses and complete parsed rows local only",
+  "local_diagnostics": [
+    {
+      "issue": "Initial SEC-API HTTP bodies decoded as text before decompression",
+      "resolution": "Detected gzip magic, preserved raw bytes and decoded separate files; no re-download"
+    },
+    {
+      "issue": "Initial read attempted body for failed Eastmoney404",
+      "resolution": "Failure receipt preserved; ordinary public referencing-page headers yielded200; no missing body treated as success"
+    },
+    {
+      "issue": "Lookup expected API route research/reports.py",
+      "resolution": "Located experiments.py and verified actual API schema; no code edits"
+    }
+  ]
+}

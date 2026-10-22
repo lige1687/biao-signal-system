@@ -1,0 +1,93 @@
+{
+  "status": "passed_source_reconciliation_not_factor_validity",
+  "http_requests": 28,
+  "http_successes": 26,
+  "http_failures": [
+    {
+      "name": "cn-070002-flow-response",
+      "status": 404,
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "name": "leeway-no-token",
+      "status": 401,
+      "error": "HTTP Error 401: Unauthorized"
+    }
+  ],
+  "response_hashes_verified": 26,
+  "hf": [
+    {
+      "dataset": "trader298/sec-nport",
+      "revision": "d8db5addd8261a422aa2df269b764d746b7ceb54",
+      "last_modified": "2026-07-10T10:33:18.000Z",
+      "files": 830
+    },
+    {
+      "dataset": "ZipLime/fund-holdings-nport",
+      "revision": "b7f84eabd044d3bd302f759137e10bffb2b1c41b",
+      "last_modified": "2026-10-19T08:44:04.000Z",
+      "files": 319
+    }
+  ],
+  "fund_flow_rows": {
+    "cn-070002-flow-with-referer": 93,
+    "cn-000001-flow": 99,
+    "cn-110011-flow": 82
+  },
+  "holdings_2025_rows_Q4_Q3_Q2_Q1": {
+    "cn-070002-holdings-2025": [
+      72,
+      10,
+      52,
+      10
+    ],
+    "cn-000001-holdings-2025": [
+      100,
+      10,
+      100,
+      10
+    ],
+    "cn-110011-holdings-2025": [
+      54,
+      10,
+      49,
+      10
+    ]
+  },
+  "excluded_from_pure_A_share_sample": [
+    "110011: observed QDII fund title and HK positions; historic mandate not qualified"
+  ],
+  "earlier_pdf_spotcheck": {
+    "source": "docs/experiments/a-share-contrarian-positioning-research-2026-10-20.md",
+    "period": "2023-12-31",
+    "prior_original_values": {
+      "subscription": "2744551.62",
+      "redemption": "3746991.14",
+      "end_shares": "158693101.13"
+    },
+    "rounded_web_values": [
+      "0.03",
+      "0.04",
+      "1.59"
+    ],
+    "matched": true,
+    "independent_reopening_original_this_turn": false
+  },
+  "cap_check": {
+    "fund": "070002",
+    "period": "2021-12-31",
+    "prior_original_report_rows": 187,
+    "topline100_rows": 100,
+    "topline1000_rows": 10,
+    "conclusion": "Default wrapper truncates known long portfolio; larger undocumented value falls back and does not solve it"
+  },
+  "missing_for_research": [
+    "Historical announcement time and revisions in Eastmoney samples",
+    "Historical fund universe including merged/liquidated funds",
+    "Consistent full holdings and exact shares/flows from original reports",
+    "N-CEN raw or parsed access still absent; paid docs do not equal receipt",
+    "Split demo validates only AAPL example, not portfolio-wide identifier history"
+  ],
+  "new_effect_runs": 0,
+  "paid_spending": 0
+}

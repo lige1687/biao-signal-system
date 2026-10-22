@@ -101,3 +101,11 @@
 - 主报告/registry本键/INDEX本行已更新；仅小记录入仓，大原件与373行派生只留外盘同storage-plan目录。现API/最终Git读回待验，未改生产/规则/交易/后台。
 
 - 最终验收：5188列表唯一、category/verdict及报告全文逐字一致；归置与准确差异检查通过。成果分支codex/mechanism-rebalancing-review-20261020核心756a38b623abde5b6329649959f29dfa1c0c6325，65准确路径552769B普通推送，fetch后逐文件SHA读回一致；没有共享索引切换、删除或main合入。小回执与本段另作收尾提交。
+
+
+## 免费及付费资料入口核查 2026-10-22T11:41:45.979939+08:00
+
+- 用户授权核HuggingFace、开源与必要付费来源；本轮source_qualification_only，旧16份NPORT及四基金行为试点复用不重跑。HF两版本当日API与旧固定revision一致；新国内三基金274日期及487持仓行，110011 QDII排除纯A股样本；100条截断与原年报187条核对，topline1000返回10条失败保留。
+- SEC-API结构化NPORT/NCEN需Business，年付2388USD；原件下载另档需实测。EODHD公开AAPL拆股demo成功；Tushare500元/年持仓、200元/年份额文档及精度范围核实；NAAIM公开页已延迟三个月，Leeway最新周度API19.95EUR/月，未登录实测401。无采购、注册、联系人信息发送或生产更改。
+- 28HTTP含26成功/2失败；源合计89，累计已知350；旧至少1268拟合/4Pro保持，本轮新效果0。只root无代理。样本与合同见 docs/experiments/raw/institutional-data-sources-2026-10-22；第三方网页/完整数据响应只在本机，Git仅小摘要、来源指纹和复现脚本。
+- 开工checked_coordination_sha=59c391e1eeecc89d26ac2b993537e81daa8b9208，登记d952dfec47f539f3fc8090bee3318e28266cbaa9已远端核实；自己的报告/目录无同写。其他owner及冻结原报告保持。数据取得不等于反向交易有效；本轮交付前API/归置/准确成果分支待核。
