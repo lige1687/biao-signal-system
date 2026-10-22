@@ -1,3 +1,15 @@
+# 首图指标交付、授权迁移已验，新效果仍暂停 2026-10-22T11:46:58.949736+08:00
+
+- task-id/owner沿原；status paused（仅新市场效果受实际存储阻塞；页面与本批输入适配完成）；scope_released false（原研究源码/数据单一写者保持）；checked_coordination_sha=59525f0ab8bb9c07b523109734aa14b8e62caa11；checked_at=2026-10-22T11:46:58.949736+08:00。读self/COORDINATION与系统11:40布局完成，原storage两个负责人及dispatch沿本轮已读；无同块冲突，无后台研究写者。
+- 用户追加首图位置已交系统owner并完成：1280主图右侧RankIC/夏普摘要，390/768紧接主图，原详细诊断展开；root真实页面核cool绿色RankIC.092/120期/覆盖98.19%、夏普.238/−.018，主/运行两UI SHA一致、viewport恢复。系统构建/响应式/旧数据不变回执factor-curves-layout-20261022.json；root原raw/first-chart-layout-readback.json。用户视觉待验。
+- 用户授权合适资料迁外盘已落实精确微信DMG：空闲正常卸载，dittoZIP含资源元数据，源与ZIP成员完整SHA、源未变、无占用二次验后移除原件；实际立即可用增加531566592B。外盘个人资料归档/LeiSignal-内盘余量-20261022-01a12bbb，ZIP SHA279d8f819c6b9e387e992770fbe4f9f4c96684a48a5a85c4f7342cfdafd02e24；private-storage-recovery仅本机/外盘不Git。保留ZIP最初成员路径误判失败，原件当时未动，后按真实Desktop前缀核完。TRAE21进程从镜像运行保留，Chrome/Codex活跃缓存/DB/环境/会话/工作树/冻结raw未动。
+- 真实新预检2026-10-22T11:42:24+08:00失败：内盘2795200512B约2.6GiB，仍低于5GiB+8MiB；固定外盘身份正常。有限普通下载/旧备份核查无其他够大且合格闲置项，旧12批已移除不重复计腾空间；内存交换使用约23GiB，仅观察不动。执行paused而非科研完成，不降低门槛/内盘回退/退出他人应用。
+- 输入适配已实现CN旧green/日期/形成交易资格及ETF6只完整日历/固定+21未来未知保留；11合成检查root重验通过，Ruff/归置/空白检查通过，原12统计检查复用。两文件inputs.py SHA9da5ef993169d8f05dcb57fea4b627dd3b598d13dbac3c297fc6a6e8dec77376、test SHAde26c891e1efe12d076be72d15d906746271104d9f95914772cc65870085f72b。Astra发现并修正日期未核/资格未分离，draft明确旧252合格池继承、各组共同完整月份及ETF不自造green；不把合成通过当市场效果。
+- US只读审核缩小真实缺口：可准备重建历史ticker价格比较，不必等全部财报CIK；但股票身份冲突/行动影响窗口必须精确隔离，未来退出仍保留未知，拟止2024-11形成。行业/价值仍缺历史同池字段；新研究实际0、旧重跑0、来源请求累计6（本次0新增网络）。
+- 证据原report/raw/state/design-draft/source-and-adapter-review-continuation/storage-after-migration及原progress。所有代码/小数据只本机未提交，主分支基线18e64fa仍加共享未提交；仅本协调metadata远端，不称异机可恢复。唯一恢复顺序：真实内盘余量达标→冻结准确来源/定义/代码与输出计划→执行原核心批次；不因暂停重启旧实验。
+
+---
+
 # 准确迁移与源适配范围  2026-10-22T11:37:35.850038+08:00
 
 - task-id/owner沿原；active；scope_released false；checked_coordination_sha=47b8a82c837a7e3ffbfb09ab15cb919d9394ca46；checked_at=2026-10-22T11:37:35.850038+08:00。复用本轮已读相关任务，系统仅首图指标布局。
