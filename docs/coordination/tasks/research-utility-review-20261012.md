@@ -1,3 +1,15 @@
+# 补指标准备与历史池状态已交付，真统计仍存储阻塞 2026-10-22T17:25:30.850640+08:00
+
+- task-id/owner沿原；status paused（仅真实统计/新数据执行）；scope_released false保留原研究单一写者。checked_coordination_sha=1634987b90dce2ab21fe27301933259a10f312ec；checked_at=2026-10-22T17:25:30.850640+08:00。已读self/COORDINATION、system最新17:19交付、personal11:48及dispatch原段；无重叠，UI仍系统owner。无后台实验或自动恢复。
+- 十因子RankIC纯模块15合成例、runner恢复3例通过；18源SHA核过，32775旧标签与交易日历一致，末2026-01-05。仅补80条排序记录，原816Sharpe不变、旧账户重跑0；Astra复核后修失本机receipt会重跑的恢复风险，旧合同v1保留，新v2 SHA d19bd61b8c18868912872bc356a55a4b55f20392bd79195da7c38c1b6132b150。原导出器加拒绝抹除新IC保护。
+- 真实--run在5GiB容量检查失败，未创建外盘结果/未进统计；现内盘439263232B。只读安装/缓存检查无够大的安全闲置项；用户正常退出Chrome/TRAE的确认待答，未退出/强杀/再删其他资料。先前微信包准确归档不重复计空间，冻结raw/运行环境/活跃DB/会话/交换文件不动。
+- 新公开历史候选固定commit a5afa8919b48d882a419b6d09b153286aa3ad4f2，CSI3001224/CSI5001097/NDX313区间；月末人数/结构核查非名单资格。原CSI300139月末仅9直接快照，纠正月频不必全部每日链；合并后继代码、日期含义/身份/报价及退出仍缺。具体来源/请求失败/哈希见raw/universe-candidate-intake.json；未安装执行外来代码，未保存包，0收益。原方法6请求累计保持，新资料查询另记。
+- 四池catalog状态改为候选待核验+具体原因，SHA4ca33758b984f8b82b1a1baecc65d4e18970c3b26761c03cc7845200db0377a8；系统owner18相关测试/类型检查/390实际页完成，root用户原PPO绿色tab9核四池展开且disabled，RankIC仍未评价，旧Sharpe-.546/-.212；HTTP字节相同。系统receipt factor-curves-universe-status-20261022.json及真实截图，用户视觉待验。
+- 原报告追加结果与未完成，registry只改自己的摘要，API全文相同SHA6b5bf561e108ac28d1cf03e9d91308458df5f0e73bf7a3d68602f61cb2bcbfe8。旧性能/增量表复用。okr-ff1e0a86fbac只note180→181，原状态/授权/里程碑等保护字段及旧history读回不变。原raw/rankic-controller-review.json、rankic-and-universe-web-readback.json与progress可接续；归置/Ruff/空白检查通过。
+- 准确源码/小资料仍主树18e64fa基线+本机未提交，UI归系统owner；仅协调metadata远端，不称代码异机可恢复。恢复先真实容量与源hash检查→冻结v2脚本一次计算→独立数值核验→只发布新assessment→页面验收；股票池另外逐形成日资格核验，不自动解锁。总研究未完成，不能把测试/候选找到视为因子有效。
+
+---
+
 # 补齐十因子 RankIC 与历史池缺口 2026-10-22T17:07:09.822451+08:00
 
 - task-id/owner沿原；status in_progress（实现/资料核验），真实新效果仍storage_paused。checked_coordination_sha=304034da3eea9366fdd20529fa3671c027293abb；checked_at=2026-10-22T17:07:09.822451+08:00；已读COORDINATION/self/investor-workspace-simplification/personal-lowfreq-system-audit/research-dispatch-controller最新记录。无同文件冲突，系统UI仍由系统owner负责。
