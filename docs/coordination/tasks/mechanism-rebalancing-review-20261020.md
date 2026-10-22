@@ -1,3 +1,14 @@
+# 免费及付费数据来源核查交付 2026-10-22T11:44:53.470225+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner原root；status completed（本轮来源实测/采购优先级）；scope_released true。完整机构因子与交易价值未宣称完成。checked_coordination_sha=b5f9dfc1f3e4401581f1c0ec981696558d3b815a；checked_at=2026-10-22T11:44:53.470225+08:00；已读COORDINATION/self/dispatch/sentiment及investor-workspace11:40布局、personal11:33美股存量曲线、research-utility11:37源适配/迁移、strategy-account10:33；末次fetch无新变，独立目录无冲突，不接管他人。
+- 成果codex/mechanism-rebalancing-review-20261020@9f30a51420cfdba089b18750a530e3ee3b981d65，核心23c2d41912e21129f1d53c8571952098856b0b48；18准确安全路径261747B核心+2小回执普通push、远端ref及逐文件核同。主树/5188报告全文SHA56069afbbfe131c1bf44e413c5f08aff757f39809dc4737977e9e2abac2af20c、唯一登记数据与质量/mixed核同，归置通过；不切分支/共享索引、不合main、无删除。
+- 两HF固定版本当日读回与旧同，复用16份NPORT不重下。新国内三个基金274历史日期、2025持仓487行取得；110011实际QDII排除纯A股，000001/070002仅来源样本。070002原2021年报187条对公开topline100只有100条，改1000降为10，证明默认不能当完整；网页申赎亿份两位精度、公告时点和历史身份缺口保留。三项旧原报告金额与网页取整一致，非本轮重开原件。
+- SEC-API Business年付2388USD才含NPORT/NCEN结构化，Personal原件下载另列未实测；EODHD AAPL四次拆股demo实取，19.99USD/月候选；Tushare持仓500元/年档、ETF份额200元/年档文档核；NAAIM官方免费三月延迟，Leeway19.95EUR/月最新周度路径，未认证真实请求401。未购买/注册/发信或输入私人联系方式。
+- 28HTTP=26成功/2失败，重新核全部字节SHA；DOM与独立标签计数一致，日期唯一。网页61操作，合89，累计已知350；旧>=1268拟合/4Pro保持，新效果0，root单人无代理。原始第三方网页/完整解析行仅本机新raw，不上Git；远端含小摘要/请求manifest/复现脚本，不称原响应异机可恢复。原外盘材料不移不重下，内盘小源记录约5MB，无新大市场输出。
+- 报告docs/experiments/institutional-data-sources-2026-10-22.md；关键raw/sample-quality.json、verification.json、delivery-receipt.json。最小后续：若继续用同题数据，先补完整持仓/历史类型与公告日，付费先核样本再选择；不重跑封存因子，不把有数据当反向有效。无生产/策略/账户DB/通知/后台变化。
+
+---
+
 # 免费及付费数据入口核查 2026-10-22T11:31:02.791378+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner原root；status active；scope_released false。checked_coordination_sha=59c391e1eeecc89d26ac2b993537e81daa8b9208；checked_at=2026-10-22T11:31:02.791378+08:00；已读COORDINATION、self、research-dispatch-controller、sentiment-factor-research、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、strategy-account-bridge-20261020最新段。其他研究/UI及冻结文件只读，本题新目录无冲突。
