@@ -1,3 +1,16 @@
+# 美股公开曲线与环境方法交付，新实测存储阻塞 2026-10-22T11:48:07.229871+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status blocked（新逐股/环境效果）；completed_scope 公开存量曲线/文献；scope_released true仅本次展示和报告。checked_coordination_sha=6c27b8cdcf225951e35fdb464463bab394d443ee；checked_at=2026-10-22T11:48:07.229871+08:00；读COORDINATION/self及research-utility11:46、investor-workspace11:40，market-style/mechanism/dispatch沿本轮已读。原三类动量含US新逐股及正式UI不接管/重跑；存储迁移授权与执行属于原owner，本人未清理。
+- 成果codex/personal-lowfreq-system-audit-20261018@0b9514b0e8dffe735267f05487ee5280b0ebb210，19准确路径约1.04MB含原registry/progress，正常push且远端ref同SHA；报告us-factor-reference-curves-2026-10-22.md及raw、独立web/public/research/us-factor-reference-curves-20261022/。主树准确镜像，5188报告API全文/category美股与跨市场/verdictmixed一致；两树归置/diff检查通过。不是5188正式catalog已纳入的新数据集。
+- 实际可看 http://localhost:5173/research/us-factor-reference-curves-20261022/index.html 。Luna以旧French202608 monthly4548行渲染3因子×2规模×3原时期×4线共72路径；不假造5分组或逐股回测。股票数/组内市值权重、三组基准、未扣个人费用/月末风险、全部已见历史、短期20月限制随图。Root独CSV核72旧统计最大差0，全部绘图点最大差1.00e-11，3因子/两规模/三时期控件实测；默认OP大规模2015—24四条polyline/121点含2014-12初始100，1280无横溢出，交付tab7保留。源HTML/JSON/PNG逐HTTP字节SHA/MIME核同。PNG是旧曲线的静态图，非UI截图。
+- 主控发现并修：初版NAV仅6位、未有可见期初100点、y刻度过密；初回执原字节保留，完整float和初始点后再次展示渲染通过，不放宽1e-10。两次为同一旧结果展示执行，旧统计/科学runner重跑0。Vite文件监视初期HTML回落与首次错误查path而非polyline均保留。MPL可重建缓存只在自有raw未入Git；无仓外写入。
+- 方法6公开请求含作者PDF404，Astra只读复核：Fidelity ADX14低于20无明显趋势/高于25强趋势，DI另判方向、灰区保留；KaufmanER只测净位移/路径折返，与窄幅/低波动不等；MMS四状态只核摘要/引言不称全文复现；PS/LT未实装。现有clock三态阈值为本地约定，无新阈值搜索、拟合、环境效果/生产过滤。
+- 已有主十年盈利高组累计324.61%对三组215.02%，月差+.244pp但2025—2026-08变-.366pp；动量下跌月少亏.905pp、上涨月少赚.522pp。均复用10/20旧结论，不能拿曲线当新验证或只看收益。价值/OP/MOM池不同、ETF/个人账户未评价、短反转LS不冒充买入组。
+- 新实测真实plan_output失败：内盘在预检时约3.2GiB，末次2772094976B约2.58GiB，低于5GiB+metadata；外盘身份正确。新市场请求0、新回测0/新环境实测0/新大结果0，未降低门槛/回退内盘/删资料/退出他人应用。局部展示/资料完成不等于整个用户美股测试目标完成；无后台自动恢复。
+- 恢复：内盘>=5GiB+预计记录、固定外盘预检通过，再核同池/状态来源并冻结必要问题。原US新逐股资格沿research-utility-review11:46准确ticker/退出边界继续，本人不另做重复全市场链。若只做公开组合新环境比较，同样先冻结代理/时点/方向/折返/波动的定义，不凭后验状态交易。实际token费用未知。
+
+---
+
 # 美股存量曲线与环境方法扩展 2026-10-22T11:33:08.513794+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status active（存量展示/文献），new_effect blocked_storage；scope_released false。checked_coordination_sha=d952dfec47f539f3fc8090bee3318e28266cbaa9；checked_at=2026-10-22T11:33:08.513794+08:00；已读COORDINATION/self/research-utility-review11:03、investor-workspace11:00、market-style、mechanism最新及原dispatch。研究owner三类动量含US新逐股资格仍其独占，不接管或重复跑；本题仅自己旧French公开分组曲线与其他市场状态方法。
