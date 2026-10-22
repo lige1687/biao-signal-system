@@ -1,3 +1,10 @@
+# 真实assessment接入核验 2026-10-22T10:51:37.996545+08:00
+
+- task-id/owner沿原；active；scope_released false；checked_coordination_sha=2011d1879c14967602d574a6337f29db197fae73；checked_at=2026-10-22T10:51:37.996545+08:00；已读COORDINATION/self/research-utility新研究段，唯一写者不变。准确增加运行树web/public/research/momentum-three-universe-20261022/{legacy-assessment.json,new-assessment.json}和原catalog.json链接镜像范围；源仅研究owner写，复制前核完整SHA及旧6文件不变。源数据修正只等owner，不代改。
+- 首轮真实核对发现旧RankIC汇总minAssets/medianAssets和points有效数冲突：如momentum/all_qualified/all min237但points最小224；20条min冲突，详见主树自身factor-curves-assessment-input-issue-20261022.json。未放宽检查或修改科研数据；旧RankIC验收需source owner修正。可继续验证新816夏普及真实页面缺IC态。原新实验存储暂停不冒称完成。
+
+---
+
 # 可选RankIC与夏普展示已就绪，真实资料待接 2026-10-22T10:44:44.414969+08:00
 
 - task-id/owner沿原；status paused（仅待研究owner的合格assessment JSON，UI独立可做部分已完成）；scope_released false（代码唯一写者保持）；checked_coordination_sha=d0e1c11fea66e122c1642827817a2deddb68aaa4；checked_at=2026-10-22T10:44:44.414969+08:00。已读self/research-utility三类池10:34及策略账户补充，冲突决定原分工不变。
