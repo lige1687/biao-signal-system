@@ -1,3 +1,13 @@
+# 恢复存储与首图指标布局  2026-10-22T11:35:22.663695+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=a349b1f312b95ce7c04277c85c18e1d476d1e5bd；checked_at=2026-10-22T11:35:22.663695+08:00。已读COORDINATION/self/系统实现/storage-headroom-20261015/mac-local-storage-cleanup/dispatch最新相关段。旧空间清理已完成，不覆盖其记录；UI仍系统唯一实现者，本root只研究资料及独立验收。
+- 用户明确授权“你看着能放到外盘的放到外盘吧目前”；仅用于核实闲置、无依赖、可恢复普通文件，精确范围另补后复制、读回SHA/源未变/无占用核验再移除本机。禁止动活动DB/环境/会话/工作树/冻结raw/系统快照；不把旧缓存授权扩大成关闭浏览器。当前仅只读盘点未迁移删除。外盘固定UUID合格，内盘约3.2GiB。
+- 用户追加夏普和RankIC前置或与第一分组收益图并列；已发原系统实现聊天，桌面并列、窄屏紧随图；只布局不改计算，真实宽窄屏读回。
+- 本轮小记录沿原raw/state和进度，新增private-storage-recovery.json仅本地不入Git；研究源/输出范围不变。只读两agent分别普通下载候选和既有归档依赖；root迁移唯一写者。累计新市场实验0/旧重跑0/来源请求6保留。
+- 空间恢复后继续原合同准备与真实新比较，不把可执行后续止于建议；新效果仍待输入/定义/执行冻结。主树原分支/基线及共享未提交保护；仅本协调元数据推远端。
+
+---
+
 # 三类动量研究新效果暂停、固定指标交付 2026-10-22T11:03:08.932286+08:00
 
 - task-id research-utility-review-20261012；owner 01a12bbb-44f2-7c22-a0a9-defd4f1640bc/root；status paused（新效果受真实存储/资料阻塞，固定指标已交）；scope_released false（新研究文件保留唯一owner）；checked_coordination_sha=fabdd880ada99aa9c7629308e41ed26ec2c7aa8f；checked_at=2026-10-22T11:03:08.932286+08:00。已读COORDINATION/self/系统11:00完成段；10:34已读personal-lowfreq、lowfreq-strategy、strategy-account-bridge、market-style、pro-advice、dispatch无本轮新变更。系统已释放本展示范围，研究无同题冲突，旧实验继续冻结。
