@@ -1,3 +1,12 @@
+# 准确迁移与源适配范围  2026-10-22T11:37:35.850038+08:00
+
+- task-id/owner沿原；active；scope_released false；checked_coordination_sha=47b8a82c837a7e3ffbfb09ab15cb919d9394ca46；checked_at=2026-10-22T11:37:35.850038+08:00。复用本轮已读相关任务，系统仅首图指标布局。
+- 精确迁移源仅 /Users/yongbiaoli/Desktop/WeChatMac_4.1.15.dmg（逻辑531873259B，分配536977408B）。它目前挂载/Volumes/微信 WeChat，但全量lsof无输出无错误，进程无此挂载路径/WeChat；将正常不强制卸载该空闲镜像，外盘独立目录个人资料归档/LeiSignal-内盘余量-20261022-01a12bbb 归档为带资源元数据ZIP，内容SHA读回、源稳定、二次无占用后只移除该源。本地小receipt留原raw，私人路径和归档本体不上传。TRAE镜像查出21个运行进程，明确保留，不退出。Chrome/Codex缓存活跃，保留。
+- 新增独立小代码范围 src/lei_signal/research/momentum_increment_inputs.py、tests/unit/test_momentum_increment_inputs.py，Sol唯一写者，root独审；仅CN/ETF已授权输入适配与合成检查，0真实市场效果、0新网络。原diagnostics/真实研究冻结和存储预检不绕过。
+- 成果仍本机未提交；仅协调元数据远端；失败记录保留前次同步拒绝已合并他人独立任务并成功读回47b8a82c。
+
+---
+
 # 恢复存储与首图指标布局  2026-10-22T11:35:22.663695+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=a349b1f312b95ce7c04277c85c18e1d476d1e5bd；checked_at=2026-10-22T11:35:22.663695+08:00。已读COORDINATION/self/系统实现/storage-headroom-20261015/mac-local-storage-cleanup/dispatch最新相关段。旧空间清理已完成，不覆盖其记录；UI仍系统唯一实现者，本root只研究资料及独立验收。
