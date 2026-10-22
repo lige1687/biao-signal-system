@@ -1,3 +1,14 @@
+# 真实RankIC与夏普展示交付 2026-10-22T11:00:40.215817+08:00
+
+- task-id/owner沿原；status completed（本轮指标展示接入）；scope_released true；checked_coordination_sha=1e9341e438988ce633819410899683777007f622；checked_at=2026-10-22T11:00:40.215817+08:00。本轮fetch确认无其他新增变更，已读COORDINATION/self/research-utility三类池及既有相关任务，冲突决定无同块写者。科研结论仍原owner。
+- source owner修正旧有效人数后，legacy-assessment SHA1e6e15a8dcfd09b5aaf52bd09928cda3b365fd59ddcdb7eb3a2afe10b5c19df3（32RankIC、336Sharpe）、new-assessment SHA0e3951aa11d51422fdea10159789895b078127dc32ddb989e04751da4cb14908（816Sharpe、RankIC空）精确镜像5188；catalog SHA023a211649d3141b892bd2eb4952bd62f78e0213b5046bd3edfa38d826451f8b。三JSON源/运行树/HTTP完整SHA/MIME一致，原六summary/环境/诊断SHA未变。
+- 首版旧人数错误保留factor-curves-assessment-input-issue-20261022.json：20最小人数错、32条任一人数汇总不符；源owner修正，本UI新校验逐期非空有效对数min/median，未放宽验证。17曲线受影响检查+其他32=49相关检查通过；旧64和新160真实组合的精确池/费用/期间匹配通过；最终运行树TS/Vite构建通过，保留原大包提示，归置通过。
+- 真实浏览器：旧中期动量全期RankIC−.015/132期/min224/覆盖98.54%，G5夏普.257对共同池.435；旧低波绿色不计费早期RankIC.137/43期/min34，形成2014-12..2018-11与结果2015-01..2018-12分离，夏普.129对−.120；新20日全期计费−.339对.409，新绿色低波晚期不计费.376对−.007；缺RankIC仍未评价。390页面宽390、真实RankIC画布可见、控制切换和费用/口径更新、console无error。RF=0/月收益/√12及未修正连续相关与未知估值限制保留，不升级金融结论。
+- 最终自身factor-curves-assessment-20261022.json SHA07aa21447fc1ae0df0ff546ffb2a06f1cdcc9d31a9dfb3e4184de08afca72535；HTTP回执factor-curves-assessment-http-20261022.json，rankic/live及mobile四截图，原progress追加。原core/data-copy/goal保留历史并指向最新扩展。目标okr-30b877e334bc已7/7提交review并读回，视觉待用户验收。
+- 主/运行树三UI及接口一致，本机未提交代码仍原codex工作分支基线加未提交成果，不冒称代码远端移交。仅本协调元数据远端；不代其他聊天发消息。三类新科研受存储/资料边界尚未完成，本轮0重跑/0交易/0删除/0定时恢复/0服务重启。范围释放，无本轮后台写者。
+
+---
+
 # 真实assessment接入核验 2026-10-22T10:51:37.996545+08:00
 
 - task-id/owner沿原；active；scope_released false；checked_coordination_sha=2011d1879c14967602d574a6337f29db197fae73；checked_at=2026-10-22T10:51:37.996545+08:00；已读COORDINATION/self/research-utility新研究段，唯一写者不变。准确增加运行树web/public/research/momentum-three-universe-20261022/{legacy-assessment.json,new-assessment.json}和原catalog.json链接镜像范围；源仅研究owner写，复制前核完整SHA及旧6文件不变。源数据修正只等owner，不代改。
