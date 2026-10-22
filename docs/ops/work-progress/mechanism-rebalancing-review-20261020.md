@@ -109,3 +109,5 @@
 - SEC-API结构化NPORT/NCEN需Business，年付2388USD；原件下载另档需实测。EODHD公开AAPL拆股demo成功；Tushare500元/年持仓、200元/年份额文档及精度范围核实；NAAIM公开页已延迟三个月，Leeway最新周度API19.95EUR/月，未登录实测401。无采购、注册、联系人信息发送或生产更改。
 - 28HTTP含26成功/2失败；源合计89，累计已知350；旧至少1268拟合/4Pro保持，本轮新效果0。只root无代理。样本与合同见 docs/experiments/raw/institutional-data-sources-2026-10-22；第三方网页/完整数据响应只在本机，Git仅小摘要、来源指纹和复现脚本。
 - 开工checked_coordination_sha=59c391e1eeecc89d26ac2b993537e81daa8b9208，登记d952dfec47f539f3fc8090bee3318e28266cbaa9已远端核实；自己的报告/目录无同写。其他owner及冻结原报告保持。数据取得不等于反向交易有效；本轮交付前API/归置/准确成果分支待核。
+
+- 2026-10-22资料核查交付：18准确安全路径261747B普通发布codex/mechanism-rebalancing-review-20261020@23c2d41912e21129f1d53c8571952098856b0b48，远端ref及逐文件字节核同；5188报告全文/登记唯一/分类核同，归置通过。报告56069afbbfe131c1bf44e413c5f08aff757f39809dc4737977e9e2abac2af20c；完整第三方应答与解析行仅本机。无后台实验、采购或新策略采用；后续凭资料资格而非已有小样拟合重开。
