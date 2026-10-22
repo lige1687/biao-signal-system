@@ -1,3 +1,14 @@
+# 中美策略曲线与指数比较交付 2026-10-22T10:33:43.340138+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed（本次保存账户指数比较）；scope_released false（原冻结服务及自己的记录保持保护）；checked_coordination_sha=7a359d459166cc8a44a6f84000d4a32bbbc5d85b；checked_at=2026-10-22T10:33:43.340138+08:00。已重fetch无新增协调，已读self/COORDINATION、research-utility-review-20261012、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller及原相关10任务；冲突决定不变，只读复用未重跑原owner账户/UI。
+- 原报告mature-strategy-followthrough-2026-10-22.md已补4张资金/相对财富/日跌幅图，中美完整绩效、相对参照差额、逐年、现金与缺价、市场涨跌×多赚少赚四格。报告SHA f7cd03a4681f5a996774c2501a813acfd3590cdc229ad8064b883d9f3246f9fd；raw新增benchmark-supplement/；summary SHA45fece8489cf009d166adc4dff5d605ed9d70bad2a08bba0fd97e67cfcd49b9c。registry仅自身hash/oneLiner/补充次数，其他条目保持；旧合同/摘要未改。
+- A股固定300不能叫沪深300成分。全池组合年复合4.95%对沪深300价格2.49%，DD58.09%对46.70%，最高未知估值68.46%；仅价格参照优势，不认定可实现超额。美股旧20只带均线资格/退出不同于A股G5，组合3.21%对SPY调整参照15.08%，DD15.20%对24.50%，平均现金25.18%；对标普500价格13.54%也明显落后。单独动量31.65%领先但2026H1+122.54%且当前名单偏差，保留反例不升级采用。
+- 一次存量比较、两次必要实施纠错（组合未知比例按金额、年末周末不标残缺/四格补齐），0行情下载/引擎重跑/寻优。独立4646数值和19输入SHA通过；8原运行配置/模块、原组合合同SHA不变；API正文精确、真实5188四SVG和美股图显示已核、无横溢；归置通过。仅成果本机未提交代码，远端只协调元数据，未改main。
+- Sol medium执行、Astra high只读方法前后审阅、root独立算术/来源/图与报告；源工具2次（2搜索查询及2页面打开），Yahoo正文429未重试，引用范围保留官方搜索摘录。预算未动上轮6/6；新独立问题无须追加研究。本机约1.95MB小图/报告记录，0新大输出，未清理/仓外运行树复制/通知/交易/仓外目标库写入。
+- 本题完成：用户可以直接核美股与A股保存账户及指数差额；不是前向收益已成立、同一策略跨市场成立或整体策略发现完成。后续仍沿原三方向合格历史输入的具体证据条件，不依本轮弱组合追加调参。完整回执raw/benchmark-supplement/delivery.json，原progress追加。
+
+---
+
 # 中美策略曲线与指数比较补充 2026-10-22T10:21:08.235689+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false；checked_coordination_sha=0cb5ddd0c1b99e1ac13a9dd7500d9c14dfeb12ae；checked_at=2026-10-22T10:21:08.235689+08:00。已读COORDINATION/self、research-utility-review-20261012、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller及原相关任务；最新因子与UI均完成释放，本方只读消费，不重复新204账户/行业研究或UI。
