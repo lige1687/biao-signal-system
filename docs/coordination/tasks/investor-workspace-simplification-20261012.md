@@ -1,3 +1,14 @@
+# 主图旁RankIC与夏普摘要布局完成 2026-10-22T11:40:45.874454+08:00
+
+- task-id/owner沿原；status completed（本轮布局）；scope_released true；checked_coordination_sha=de2395dd0674ee5440e21fe4bac1344bca006abc；checked_at=2026-10-22T11:40:45.874454+08:00。已读COORDINATION/self/research-utility新增存储/源适配11:37段，personal/mechanism最新沿开工；冲突决定无UI同块写者，科研及存储root继续，本方不接管。
+- 仅原FactorCurves.tsx与factor-curves.css准确主/运行树镜像：桌面主图右侧直接显示RankIC均值/有效期/人数覆盖/不确定范围及G5与同池夏普；原逐期曲线/来源/口径区保留折叠，从摘要链接可直接展开定位。900以下摘要紧随整个主图区、在完整风险表前；未添加金融计算、修改模型/研究数据。
+- 1280×720真实首屏：原中期动量RankIC−.015，夏普.257/.435与主累计图同屏；主图x264/摘要x989，页面宽1280。390×844主图底1058.92/摘要顶1068.92/风险表顶1421.11，页面宽390；768页宽768，图与摘要同列。摘要入口native details实测true→手动false→点链接true；手机换新批仍RankIC未评价/夏普−.339/.409。console error空，临时viewport已恢复。
+- 最终运行树tsc/Vite构建通过，保留已有大包提示；归置与差异空白检查通过。模型和测试源SHA与前轮49通过版本一致，九JSON来源/运行树SHA未变，未无理由重跑金融或模型检查。资料日期、费用、RF与缺资料说明保持。
+- 回执docs/archive/handoffs-plans/investor-workspace-simplification-20261012/factor-curves-layout-20261022.json SHA b1be2290e69481e2d63d70149ff3de33cf30f70833b26b76a1c582534e4dd588；同目录factor-curves-layout-desktop-20261022.jpg与factor-curves-layout-mobile-20261022.jpg为真实截图；原progress主/运行树追加。目标okr-30b877e334bc仅追加布局验收note并读回，review/7of7保持，不代用户接受。
+- 成果仍原codex工作分支基线加本机未提交，主树只准确2文件镜像，未推源码或跨设备移交。仅本协调元数据远端；用户视觉待验。无科研/数据/策略/交易/定时/清理/服务重启或其他聊天消息，本轮范围释放。
+
+---
+
 # RankIC与夏普提到主图旁 2026-10-22T11:35:18.467535+08:00
 
 - task-id/owner沿原；active；scope_released false；checked_coordination_sha=a349b1f312b95ce7c04277c85c18e1d476d1e5bd；checked_at=2026-10-22T11:35:18.467535+08:00。已读COORDINATION/self/research-utility11:03新段及personal/mechanism新增段，无UI同块写者；原策略账户等沿前轮。已read_thread核真正userMessage 01a161ab-ee4d-7173-86dd-d19153e2978d，要求夏普/RankIC靠前或与首个分组图并列。
