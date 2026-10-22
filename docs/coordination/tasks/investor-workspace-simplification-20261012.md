@@ -1,3 +1,14 @@
+# 历史成员候选与缺口说明交付 2026-10-22T17:20:42.922418+08:00
+
+- task-id/owner沿原；status completed（本轮资料状态UI）；scope_released true；checked_coordination_sha=c5f6a0222384432594b54033dfd8c43d137cf9be；checked_at=2026-10-22T17:20:42.922418+08:00。本轮最终fetch无其他新增任务变更；已读COORDINATION/self/research-utility17:07、personal/mechanism新增段，冲突决定仍系统单写UI、研究单写目录/科学结果，无接管。
+- 准确修改原FactorCurves.tsx/CSS与model可选文字透传/test：研究样本旁折叠4项reason，目录新增statusLabel已有候选待核验显示于选项及逐项标题，缺字段回退资料未接入；始终disabled。沪深3001224、中证5001097、NDX313来源区间只是候选来源描述，未生成对应结果，不将French参考组当指数成分回测。原接口文档补可选字段，不要求复杂新contract。
+- 研究端最终catalog SHA4ca33758b984f8b82b1a1baecc65d4e18970c3b26761c03cc7845200db0377a8，主/5188/HTTP完整字节SHA及application/json一致；可用datasets未变，其他8JSON含new-assessment原0e3951不变，新80RankIC未执行未发布。18项受影响检查通过，运行树tsc --noEmit exit0，归置通过。此小文字/适配不重跑无关研究或全套构建。
+- 真实页面：4条原reason逐字可读、4候选标签和4disabled核对；native summary键盘false/true通过；390页面宽390且4行可见于文档，viewport恢复；原扩展RankIC未评价和夏普−.339/.409保持；console error空。浏览器旧runtime丢句柄/连接超时失败保留，重新建立预览完成实际核验。
+- 最终自身docs/archive/handoffs-plans/investor-workspace-simplification-20261012/factor-curves-universe-status-20261022.json SHA7a30d11d986297da673d90cd32c3806b6eebdfa7208c09d4c54c471853e030c2，desktop/mobile同前缀jpg为真实截图；原progress主/运行树追加。目标okr-30b877e334bc只追加实际note并读回review，7项及用户视觉待验保持，不代接受。
+- 成果只本机原codex分支基线加未提交，4准确UI/测试文件和接口主/运行一致，catalog只精确同步；未推源码或声称异机恢复。只有协调元数据远端，无科研统计/交易/清理/定时恢复/服务重启或其他聊天消息。本轮范围释放；后续真实80诊断与历史成员资格仍研究owner按存储/数据条件推进。
+
+---
+
 # 研究端最终目录statusLabel兼容接入 2026-10-22T17:16:33.138958+08:00
 
 - task-id/owner沿原；active；checked_coordination_sha=fe04c9e6928b49e6e205383d10040fa4c43f8582；checked_at=2026-10-22T17:16:33.138958+08:00。已收研究owner最终catalog并核raw/universe-status-update.json，SHA4ca33758b984f8b82b1a1baecc65d4e18970c3b26761c03cc7845200db0377a8，仅4个unavailableUniverses变更，datasets保持，80IC仍未运行。源owner单写不变。
