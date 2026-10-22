@@ -1,3 +1,15 @@
+# 美股存量曲线与环境方法扩展 2026-10-22T11:33:08.513794+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status active（存量展示/文献），new_effect blocked_storage；scope_released false。checked_coordination_sha=d952dfec47f539f3fc8090bee3318e28266cbaa9；checked_at=2026-10-22T11:33:08.513794+08:00；已读COORDINATION/self/research-utility-review11:03、investor-workspace11:00、market-style、mechanism最新及原dispatch。研究owner三类动量含US新逐股资格仍其独占，不接管或重复跑；本题仅自己旧French公开分组曲线与其他市场状态方法。
+- 用户要求美股测试/收益曲线及其他牛熊、震荡定义。已核French202608/CIZ旧monthly4548行与旧result统计绑定：价值/盈利/动量×大小规模，1963-07—2026-08；主2015—24。L/N/H是真实三个源分组，不伪造G1—G5。OSAP短反转是多空差，不能替代买入端曲线；低波动本批无公开分组。
+- 独占docs/experiments/us-factor-reference-curves-2026-10-22.md及同名raw小来源/展示/状态、web/public/research/us-factor-reference-curves-20261022/小静态展示文件；registry仅本键、INDEX一行、原progress追加。基线fefe31dd88041fa89ba84348368dd75c031b9c71，codex/personal-lowfreq-system-audit-20261018；不改系统UI/catalog/服务或他人目录，运行树仓外写入0。主树同路径准确镜像，使用主树5173若服务可用。
+- Root负责方法/验收；Luna只读US库存已完、后可只在自有raw/web做存量结果展示；Sol只读既有环境定义库存已完。存量旧结果连乘绘图仅可视化，不改旧统计/股票规则/拟合，不称新增美股逐股回测。只有来源与原统计复算一致才交付。
+- 当前真实plan_output失败OutputStorageError insufficient internal capacity for metadata and5GiBreserve；内盘约3.2GiB，外盘UUID正确/约460GiB可用。0新大输出，0新效果/账户运行，不降低预检/删数据/绕过gate；独立小报告/存量展示继续（预计<1MiB）。新US逐股和环境有效性实测blocked，恢复>=5GiB+所需小记录后原owner按合同推进。
+- 新方法来源6次含作者PDF404；MMS四状态用于区别牛市回调/熊市反弹（未拟合），FidelityADX为方向强度（<20无明显趋势、20—25灰区），KaufmanER为净变动/总路径（窗口与切点需本地明确，非权威唯一）。同时复用原系统已有clock三态，横盘不等于低波动，不强制一个中性桶。原Pagan与Faber学习沿旧源，不重置其预算。
+- 验收：旧源/月收益/SHA与结果绑定；24原组合曲线路径终值/最大月末跌幅核同；L/N/H/B逐条展示、时间与股数/规模/未扣费/已见身份；真实页面切换与读回；新方法对照含时点/训练/历史修订和未实测状态。无生产/交易/通知/安装/新后台。
+
+---
+
 # 股票池与牛熊定义独立复核交付 2026-10-22T00:47:03.163309+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（仅已有结果的方法/环境/范围复核）；scope_released true。checked_coordination_sha=c39b43c0cf03cea15ffa5c013912083a7c4094c6；checked_at=2026-10-22T00:47:03.163309+08:00；已读COORDINATION/self/dispatch及research-utility-review、investor-workspace-simplification、market-style-observation、mechanism-rebalancing最新段。研究数据/新增204账户/UI/宽度/机构各归原owner，本人未重复执行。原持续目标不冒称全部完成。
