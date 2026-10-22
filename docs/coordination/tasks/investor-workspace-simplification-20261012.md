@@ -1,3 +1,13 @@
+# 可选RankIC与夏普展示已就绪，真实资料待接 2026-10-22T10:44:44.414969+08:00
+
+- task-id/owner沿原；status paused（仅待研究owner的合格assessment JSON，UI独立可做部分已完成）；scope_released false（代码唯一写者保持）；checked_coordination_sha=d0e1c11fea66e122c1642827817a2deddb68aaa4；checked_at=2026-10-22T10:44:44.414969+08:00。已读self/research-utility三类池10:34及策略账户补充，冲突决定原分工不变。
+- 原model/组件/test与唯一接口追加catalog.assessment的SHA/MIME/dataset/summary绑定；RankIC按形成日/期限/池及evaluationRange精确匹配账户期间，保留形成月份，不改成结果月份；夏普只读预计算且含频率/RF=0或来源/费用。缺资料和附加文件错误只显示未评价，不影响原曲线。旧capability缺项在本组合真实RankIC接入后不再重复报缺。
+- 主/5188树3代码及接口字节一致；15项受影响检查通过（旧组合和错误态保留）、此前46组合检查通过、最终运行树TS/Vite构建通过并保留原大包提示、归置通过；真实1280/390页面展开显示两项未评价，小屏整页宽390，截图保留。测试合成值未对公众数据写入，不当科研数据。
+- 准确接口docs/archive/handoffs-plans/investor-workspace-simplification-20261012/factor-curves-interface-20261022.md的可选扩展与形成/结果补注已实现。回执factor-curves-assessment-20261022.json SHA 2d513b219c071a495b65e6282573995da7325e041c1aa70d4ace2c6a44dd0f00，含错误工作目录与DOM定位失败修正历史。goal原6项交付保留、新7项真实数值验收未完成；按read_thread人类明确范围补登记授权，当前in_progress6/7；未冒称review全部通过。
+- 恢复：研究owner发布catalog.assessment与真实JSON完整SHA后，核源指纹与数据身份，登记准确运行树路径再复制并验数；当前没有可据以展示的真实RankIC/Sharpe，不造数。独立无账户ETF预测资料不借用A股资金线，后续据真实dataset适配。无科研重算/清理/交易/通知或其他聊天消息。成果仍本机未提交，只有协调元数据远端；原定时任务保持删除。
+
+---
+
 # 固定预测关系与风险收益指标展示 2026-10-22T10:36:44.101460+08:00
 
 - task-id/owner沿原；active；scope_released false；checked_coordination_sha=5319ab09551de55c9ddcb1950e37bf04c81d0fc6；checked_at=2026-10-22T10:36:44.101460+08:00。已读COORDINATION及self/research-utility新三类池范围，既有其他任务沿前轮，唯一UI写者无变化。已read_thread读回真正userMessage 01a16172-aeb6-7991-b185-e70c2a5fc765：三类池研究及固定显示RankIC、夏普。研究root负责数据/科学，本方只消费展示。
