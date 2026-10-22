@@ -1,3 +1,11 @@
+# 历史成员资料缺口就近说明 2026-10-22T17:10:30.372016+08:00
+
+- task-id/owner沿原；active；scope_released false；checked_coordination_sha=f3c7efe9c8b1b1c339f61439d37669511f148f76；checked_at=2026-10-22T17:10:30.372016+08:00。已读COORDINATION/self/research-utility17:07及新增personal/mechanism，原UI唯一写者不变；真实userMessage01a162d4-df2b-7760-b967-438b19f28a0b已read_thread读回，授权补缺。科研/成员资格由研究owner负责，不在UI补算或解锁。
+- 准确写原FactorCurves.tsx/factor-curves.css及主/5188镜像、唯一接口文档就reason说明、自身factor-curves-universe-status*小回执/截图和progress。研究样本下拉旁新增折叠资料状态，逐个显示现有unavailableUniverses.reason；选项保留disabled，统一尾注改暂不可选，不把候选当合格。无需新statusLabel字段，候选/待核/未取得由源reason准确说明。
+- 源catalog由研究owner单写，收到最终准确SHA后只镜像运行树catalog及其明确新增小文件；此前九JSON不改，十因子IC尚未统计不冒称补齐。验收折叠展开四理由、不可选、宽窄无溢出及旧数值/原接口保持；小UI类型与构建/归置核，不新统计/清理/定时或其他聊天消息。已知磁盘紧张只增加必要小代码/回执，不启动研究大输出。
+
+---
+
 # 主图旁RankIC与夏普摘要布局完成 2026-10-22T11:40:45.874454+08:00
 
 - task-id/owner沿原；status completed（本轮布局）；scope_released true；checked_coordination_sha=de2395dd0674ee5440e21fe4bac1344bca006abc；checked_at=2026-10-22T11:40:45.874454+08:00。已读COORDINATION/self/research-utility新增存储/源适配11:37段，personal/mechanism最新沿开工；冲突决定无UI同块写者，科研及存储root继续，本方不接管。
