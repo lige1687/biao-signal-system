@@ -1,3 +1,11 @@
+# 固定预测关系与风险收益指标展示 2026-10-22T10:36:44.101460+08:00
+
+- task-id/owner沿原；active；scope_released false；checked_coordination_sha=5319ab09551de55c9ddcb1950e37bf04c81d0fc6；checked_at=2026-10-22T10:36:44.101460+08:00。已读COORDINATION及self/research-utility新三类池范围，既有其他任务沿前轮，唯一UI写者无变化。已read_thread读回真正userMessage 01a16172-aeb6-7991-b185-e70c2a5fc765：三类池研究及固定显示RankIC、夏普。研究root负责数据/科学，本方只消费展示。
+- 准确写原七UI文件（必要改model/component/CSS/test）和自身factor-curves-interface-20261022.md追加向后兼容的可选assessment sidecar字段、自己的factor-curves-*回执和progress。原七公开JSON不改，研究root单写catalog/新数据/标准；接入到运行树需真实源SHA与范围确认。无预测资料显示未评价；RankIC按形成日/期限/池读取原聚合，Sharpe读预计算含频率/RF/已扣费说明；不从曲线反推或在UI重新计算。
+- 验收旧资料仍可用、空缺与错误可见、模拟新字段有明确测试且不当真实科研、组合精确绑定、时间分期不混算、真实页面缺资料态和宽窄可读。相关测试/构建按变更核；不新实验、清理、交易、定时器、模型或其他聊天消息。基线仍原成果树e6c4c2e加未提交已验收增量。
+
+---
+
 # 固定曲线与专业诊断展示交付 2026-10-22T01:27:24.256423+08:00
 
 - task-id/owner沿原；status completed（仅本轮固定曲线UI）；scope_released true；checked_coordination_sha=d65a35a20adf990a7f18ac30905fc5d6f4d35f9a；checked_at=2026-10-22T01:27:24.256423+08:00。已读COORDINATION/self/research-utility-review/personal-lowfreq-system-audit/dispatch及新增strategy-account-bridge01:15段，冲突决定无UI同写，科研科学结案不接管。
