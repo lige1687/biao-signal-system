@@ -1,3 +1,14 @@
+# 中美策略曲线与指数比较补充 2026-10-22T10:21:08.235689+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false；checked_coordination_sha=0cb5ddd0c1b99e1ac13a9dd7500d9c14dfeb12ae；checked_at=2026-10-22T10:21:08.235689+08:00。已读COORDINATION/self、research-utility-review-20261012、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller及原相关任务；最新因子与UI均完成释放，本方只读消费，不重复新204账户/行业研究或UI。
+- 用户明确要求补美股、收益曲线、相对母指数优势；本轮只回答已存A股组合与US完整策略相对市场参照的同日实际差额。A股固定300只不是沪深300成员，US旧20股带均线退出不同于本轮G5；据实分别列出，0重跑行情/策略/权重搜索。
+- root写范围：原mature-strategy-followthrough-2026-10-22.md追加本轮补充与图、同raw新增benchmark-supplement/小合同/汇总/图/代码/证据；registry仅自身hash/摘要、原progress追加。旧combination-contract/summary不改，render_report.py仅加入补充片段读取以防以后漏掉；无UI/服务/仓外运行树/原始输入/真实账本写入。新较大中间输出仅已授权外盘新实验结果目录，按输出计划；本机小报告与图记录预计2MiB。
+- 分工：沿Sol medium mature_strategy_local_audit完成只读资料资格，后续唯一编写新benchmark-supplement/analyze.py与summary.json；Astra high mature_strategy_method_review只读比较方法与最终关键口径；root冻结合同、原件独核、图与报告/API浏览器验收。原SPY/CSI300/SP500缓存覆盖全部日期，复用不下载。
+- 预算按用户本次新补充独立登记：1次保存账户-指数描述计算和必要纠错，0拟合/新回测。新来源请求至多6，目前1次搜索含2查询，核官方SPY与Yahoo调整价定义；不改上轮6/6来源已封存预算。对照期初资金与首日日期预先固定，不按结果挑区间；费用、分红、缺价、现金与幸存偏差随结果列出。
+- 验收：CN/US各自实际日期可追溯曲线、逐日跌幅、母指数或市场参照准确身份、年度与累计/年复合差额及相对财富曲线；独立核关键数值、报告API读回和实际浏览器看到图、归置。暂未计算/宣称指数优势；系统待升级仓外写和旧三文件运行树复制仍不在本次范围。
+
+---
+
 # 固定组合及三方向资料接续交付 2026-10-22T01:15:49.711164+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed（本轮保存路径问题与资料资格，不是整体策略发现目标完成），scope_released false（原冻结服务/账本及本方原记录保护）；checked_coordination_sha=175e6754aaf2f9eb38b884d0dc8c92ae062b08b1；checked_at=2026-10-22T01:15:49.711164+08:00。已读COORDINATION/self、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、gemini-strategy-review-20261020、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、market-style-observation-20261020；最新investor01:08诊断UI段已复核，冲突决定无新增：单因子/新204/环境/UI仍原owner，未重跑或修改。
