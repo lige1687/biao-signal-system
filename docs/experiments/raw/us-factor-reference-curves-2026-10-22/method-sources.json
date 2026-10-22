@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-10-22T11:35:36.643710+08:00",
+  "source_requests": 6,
+  "failed": 1,
+  "requests": "2initial searches+1authorPDFopen404+2ADX/ERsearches+1DMIopen",
+  "sources": [
+    {
+      "method": "ADX/DMI",
+      "url": "https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/DMI",
+      "read_scope": "full Calculation and Interpretation sections",
+      "finding": "ADX strength not direction; typically above25strong below20trendless; 14period Wilder smoothing;20to25not force label",
+      "provenance": "institutional education, not peerreviewed universal cutoff"
+    },
+    {
+      "method": "Kaufman Efficiency Ratio",
+      "url": "https://kaufmansignals.com/matching-the-markets-to-the-strategy/",
+      "read_scope": "author article surfaced with full formula, noise/volatility discussion and experimental caveats",
+      "finding": "abs(net change)/sum(abs changes);N matters; no universal threshold; author notes meanreversion outcomes not shown",
+      "provenance": "author primary source, method/interpretation only"
+    },
+    {
+      "method": "MMS fourstate",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1939486",
+      "read_scope": "authorposted abstract and indexed introduction; attempted author PDF404",
+      "finding": "bull, bullcorrection, bear, bearrally; states and params uncertain, requires estimation. Not an automatic sideways label",
+      "provenance": "peerreviewed JBES2012 doi10.1080/07350015.2012.680412; fullmethod not reviewed in this turn"
+    },
+    {
+      "method": "existing clock three-state",
+      "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/src/lei_signal/rules/clock_classifier.py",
+      "read_scope": "actual local implementation inventory",
+      "finding": "slopeflat is own proxy, mayinclude large price swings; not already empirical USfactor improvement",
+      "sha256": "3ce68b924292fdc5977df12a0f70ae3480db2d01d6bd3a9f4ba9845e5c2e84af"
+    },
+    {
+      "method": "PS/LT retrospective dating",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/jae.664",
+      "read_scope": "previous turn retained Section2, threshold method summary from MMS indexed workingpaper",
+      "finding": "original PS already reviewed, no repeated download; LT not fully reproduced, backdating peaks invalid for realtime"
+    }
+  ]
+}

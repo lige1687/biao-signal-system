@@ -1,0 +1,38 @@
+{
+  "schema": "us-factor-reference-curves-render-receipt/1",
+  "command": "python3 docs/experiments/raw/us-factor-reference-curves-2026-10-22/render.py",
+  "inputs": {
+    "monthly": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-evaluation-20261020/us-long-only-factor-evaluation-20261020-20261020T163856-30a711fdbef6/result/monthly.csv",
+      "sha256": "7479306e004dd65431cab507eb660f3ef65566ce3e0cb4a7ba93d9df27913ba3"
+    },
+    "result": {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-long-only-factor-evaluation-20261020/us-long-only-factor-evaluation-20261020-20261020T163856-30a711fdbef6/result/result.json",
+      "sha256": "ccd7784e8212bd37d3d1bffee34871fecd5e1e09ab750cd90815c163bb7c044f"
+    }
+  },
+  "counts": {
+    "input_rows": 4548,
+    "datasets": 18,
+    "group_paths_checked": 72
+  },
+  "validation": {
+    "period_endpoints_months_unique_and_contiguous": true,
+    "old_growth_and_month_end_drawdown_paths_match": true,
+    "tolerance": 1e-10,
+    "max_absolute_difference": 9.094947017729282e-12,
+    "new_returns_or_condition_effects_calculated": false
+  },
+  "outputs": {
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/web/public/research/us-factor-reference-curves-20261022/data.json": {
+      "bytes": 424203,
+      "sha256": "823ba68e2dcd20e857d2431791332af09aa69efbf16808dd3a760485bb39846b"
+    },
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/web/public/research/us-factor-reference-curves-20261022/index.html": {
+      "bytes": 9204,
+      "sha256": "e04e74a6bb872bb263c0c9a03e50dec014f34e8e535c5349e5d504bfc58715c6"
+    }
+  },
+  "total_output_bytes": 433407,
+  "browser_visual_verification": "not performed; root owner to verify"
+}
