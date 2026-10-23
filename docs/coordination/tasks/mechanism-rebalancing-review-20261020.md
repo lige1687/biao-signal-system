@@ -1,3 +1,17 @@
+# A股28份报告与跨期申赎效果已交付 2026-10-23T19:52:41.857480+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner原root；status completed（本轮两基金公开后半年价格增强问题）；scope_released true仅本轮新增路径，冻结源继续保护。checked_coordination_sha=a26716ee0eaad5e6b3e4657f6b4197230e7b8e40；checked_at=2026-10-23T19:52:41.857480+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/research-utility-review-20261012/personal-lowfreq-system-audit-20261018/strategy-account-bridge-20261020/investor-workspace-simplification-20261012/downside-sensitivity-universe-20261023/market-style-observation-20261020，交付补读personal19:40活跃分层完成；末次fetch无再变，其他owner价格/ETF/组合/UI保持无冲突，本题不接管。
+- 科学成果codex/mechanism-rebalancing-review-20261020@2353deda444b031d9ff02d3cfc996a5e24f3e154，65准确路径828754B；回执/验收/进度fbf32153c2c7d7c4398eefea251a71144d48ffe7。均普通push，远端ref和逐文件字节核同，0删除/合main/共享索引切换。报告docs/experiments/a-share-institutional-flow-qualification-2026-10-23.md SHA7172e51825b05f84981630e14c2beb800c543a6f6b0862b7b0f1ef66e75d27d0。
+- 两管理人各14份2019–2025中报年报全部合计/份额/金额/12跨年NAV桥接通过，3347持股行。本轮先新华夏2份，历史阶段再新23份，合计新25/复用此前嘉实3；阶段新23/复用5包含本轮先取得的2，不能重复计。免费来源实取，无购买/注册。
+- 1固定矩阵0拟合/参数搜索，13形成期2689股票期/1388代码，2453已知236未知。2022两半年双净申购无排序，2025H2目标2026-10-01已过去但保存价格/日历源不覆盖，219未知，非尚未成熟。共同10期：报表IC0.0489/高组9.06%，条件扣再投IC0.0262/高组8.88%，同池8.40%。只是已知重建前复权价格变化，非含息、净、可交易账户收益。
+- 条件扣再投较固定嘉实+0.6146、固定华夏+0.3993个百分点/半年；后者3正2负5同，去任一期范围−0.9519至+1.4048个百分点，去2024H1转负。华夏再投包含于申购为会计结构推断；两定义在2019H2/2021H2换序，不能择优。未证明稳定新增帮助或超出价格/行业/LEI；暂停该具体收益增强用途，保留整类机构研究可能性。
+- Sol medium独立从原价/日历核52组指标10756权重6端点、12绑定，数值无差；Astra high审阅机制/反例。冻结summary direction标签17行错填调整版，实际分数权重正确，corrections.json附52行映射；原件/代码/结果未改，不重跑。原单期Decimal14伪值独核精确11，源获取/解析/准备和首个API错误URL失败保留。
+- 归置通过，原755登记项保持，仅本新键/INDEX一行；8000/5173/5188列表唯一和全文SHA核同；两策略源28PDF15冻结绑定一致。完整资料及结果37738474B仅本轮外盘计划固定UUID，容量复查通过，小raw约0.60MB。异机材料恢复未验，不把Git当大PDF移交。
+- 旧US0.0735/6.71澄清为B已有组合，共同17期同池4.34/简单动量5.70；加赎回6.39。旧US/AAII/NAAIM/CFTC未重跑。累计旧至少1268年度拟合/51季度拟合/4Pro等账保留，本轮完整请求总数和token成本未知。研究、方法和发布回执在新raw；仓外目标DB未写、无生产/规则/交易/通知改变。
+- 本轮有界问题完成，没有本题后台或必需待算项；整个机构研究/ETF/账户未宣称完成。恢复需实际出售与现金缓冲、更及时且有历史公布时间的数据或有代表性历史基金总体等可改变判断的新证据，先资格再新合同，不换方向/期限/名单追正。已知价格口径、退市停牌、费用、母指数及LEI完整增量未评价。
+
+---
+
 # A股28份历史原件已核，限定价格关联冻结
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=d636b2255a60450b4e0c2f2c6859cd7b09b157e9；checked_at=2026-10-23T19:37:00+08:00。已读原COORDINATION及本轮task清单，追加utility19:23续采、personal19:25反转和downside19:22完成；各自数据/效果/页面保持无冲突。
