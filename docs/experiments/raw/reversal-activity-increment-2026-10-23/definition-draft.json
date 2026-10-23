@@ -1,0 +1,337 @@
+{
+  "schema_version": "1.0.0",
+  "version": "1.6.15",
+  "standard": "docs/research/definition-standard.md",
+  "standard_version": "1.0.0",
+  "profiles": {},
+  "sources": {
+    "activity_reversal_design_20261023": {
+      "path": "docs/experiments/raw/reversal-activity-increment-2026-10-23/design.json",
+      "sha256": "4b0d96217b223c5d79db571eb444ae941a5245c37bf940ec5314df790293fe7c"
+    }
+  },
+  "objects": [
+    {
+      "version": "1.0.0",
+      "type": "feature",
+      "uses": [
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "live_predictive_claim",
+        "complete_LEI_strategy",
+        "original_US_replication"
+      ],
+      "scope": "Fixed300 original36019 eligible observations,2015-2025; independent activity-conditioned comparison",
+      "spec_layer": "research_extension_candidate_ranking_not_technical_gate",
+      "implementation": "src/lei_signal/research/reversal_activity.py",
+      "dependencies": [],
+      "sources": [
+        "activity_reversal_design_20261023"
+      ],
+      "time": {
+        "decision_at": "T monthend close",
+        "available_at": "retrospective2026 vendor snapshots; original arrival/revisions unknown",
+        "execution_at": "nextmonth open quote assumption with postopen audit isolated",
+        "timezone": "Asia/Shanghai",
+        "observation_time": "All feature inputs at/before T monthend; same-date ranks only",
+        "effective_from": "2026-10-23 registration only"
+      },
+      "input": {
+        "price_basis": "rawCNY amount; adjusted conditional price units",
+        "calendar": "bound exchange trade calendar, noffill",
+        "fields": [
+          "date",
+          "code",
+          "amount",
+          "tradestatus",
+          "open",
+          "preclose",
+          "close",
+          "isST",
+          "effective_factor",
+          "hot",
+          "vol60",
+          "momentum"
+        ],
+        "currency": "CNY price quotes; returns dimensionless",
+        "frequency": "daily input, month-end monthly selection"
+      },
+      "universe": {
+        "version": "2014-fixed300-common-eligible",
+        "eligibility": "previously eligible plus finite nonnegative amount records, no future results used",
+        "missing": "unknown remains missing, retain selectedweight atoutcome",
+        "warmup": "original score eligibility and60scheduled amount rows including explicit suspendedzero",
+        "quality_gate": "unknown rejected with reason; perstratum minimum30",
+        "degrade": "Do not substitute a smaller score set, fill missing observations, replace failed stocks, or reweight unknown selected outcomes."
+      },
+      "validation": {
+        "tests": [
+          "tests/unit/test_reversal_activity.py"
+        ],
+        "method": "prefix/future mutation and independent numerical checks",
+        "tolerance": {
+          "absolute": 1e-12,
+          "relative": 1e-06,
+          "integer": 0
+        },
+        "limitations": "Original historical publication timing, actual fills, delisting wealth and total-return equivalence unverified; conditional local adaptation only."
+      },
+      "status": {
+        "definition_clarity": "explicit_adaptation",
+        "data_qualification": "pending_source_only",
+        "implementation": "pending_synthetic_tests",
+        "effectiveness": "not_evaluated_before_core",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/experiments/raw/reversal-activity-increment-2026-10-23/design.json"
+        ],
+        "verification_scope": "registration only; independent result receipts govern acceptance"
+      },
+      "research_owner": "personal-lowfreq-system-audit-20261018",
+      "id": "research.selection.activity.amount60",
+      "name": "形成日前60个市场交易日日均成交金额",
+      "definition": {
+        "formula": "mean(raw amount across60scheduled dates through T), three monthly near-equal count strata",
+        "parameters": {
+          "sessions": 60,
+          "partitions": 3,
+          "ties": "code"
+        },
+        "unit": "CNY per trading day",
+        "direction": "comparison only",
+        "endpoints": "formation monthend and nextmonth opening quote",
+        "transforms": "frozen design",
+        "nan_policy": "retain unknown; no future filtering"
+      }
+    },
+    {
+      "version": "1.0.0",
+      "type": "policy/strategy",
+      "uses": [
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "live_predictive_claim",
+        "complete_LEI_strategy",
+        "original_US_replication"
+      ],
+      "scope": "Fixed300 original36019 eligible observations,2015-2025; independent activity-conditioned comparison",
+      "spec_layer": "research_extension_candidate_ranking_not_technical_gate",
+      "implementation": "src/lei_signal/research/reversal_activity.py",
+      "dependencies": [],
+      "sources": [
+        "activity_reversal_design_20261023"
+      ],
+      "time": {
+        "decision_at": "T monthend close",
+        "available_at": "retrospective2026 vendor snapshots; original arrival/revisions unknown",
+        "execution_at": "nextmonth open quote assumption with postopen audit isolated",
+        "timezone": "Asia/Shanghai",
+        "observation_time": "All feature inputs at/before T monthend; same-date ranks only",
+        "effective_from": "2026-10-23 registration only"
+      },
+      "input": {
+        "price_basis": "rawCNY amount; adjusted conditional price units",
+        "calendar": "bound exchange trade calendar, noffill",
+        "fields": [
+          "date",
+          "code",
+          "amount",
+          "tradestatus",
+          "open",
+          "preclose",
+          "close",
+          "isST",
+          "effective_factor",
+          "hot",
+          "vol60",
+          "momentum"
+        ],
+        "currency": "CNY price quotes; returns dimensionless",
+        "frequency": "daily input, month-end monthly selection"
+      },
+      "universe": {
+        "version": "2014-fixed300-common-eligible",
+        "eligibility": "previously eligible plus finite nonnegative amount records, no future results used",
+        "missing": "unknown remains missing, retain selectedweight atoutcome",
+        "warmup": "original score eligibility and60scheduled amount rows including explicit suspendedzero",
+        "quality_gate": "unknown rejected with reason; perstratum minimum30",
+        "degrade": "Do not substitute a smaller score set, fill missing observations, replace failed stocks, or reweight unknown selected outcomes."
+      },
+      "validation": {
+        "tests": [
+          "tests/unit/test_reversal_activity.py"
+        ],
+        "method": "prefix/future mutation and independent numerical checks",
+        "tolerance": {
+          "absolute": 1e-12,
+          "relative": 1e-06,
+          "integer": 0
+        },
+        "limitations": "Original historical publication timing, actual fills, delisting wealth and total-return equivalence unverified; conditional local adaptation only."
+      },
+      "status": {
+        "definition_clarity": "explicit_adaptation",
+        "data_qualification": "pending_source_only",
+        "implementation": "pending_synthetic_tests",
+        "effectiveness": "not_evaluated_before_core",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/experiments/raw/reversal-activity-increment-2026-10-23/design.json"
+        ],
+        "verification_scope": "registration only; independent result receipts govern acceptance"
+      },
+      "research_owner": "personal-lowfreq-system-audit-20261018",
+      "id": "research.selection.activity.reversal_volbalanced",
+      "name": "相近波动分层后的反转选择",
+      "definition": {
+        "formula": "Within amount stratum split vol60 into2halves, select top floor(n_half/5) -hot per half retaining n_half/N weight",
+        "parameters": {
+          "volatility_halves": 2,
+          "fraction": 0.2
+        },
+        "unit": "target weights",
+        "direction": "comparison only",
+        "endpoints": "formation monthend and nextmonth opening quote",
+        "transforms": "frozen design",
+        "nan_policy": "retain unknown; no future filtering"
+      },
+      "policy": {
+        "selection": "Formation at month-end using only prior/current formation data; 3 amount strata; five oriented reversal groups, matched-count lowvol, all eligible pool, and within-volatility-half reversal.",
+        "weights": "Equal weights in each target group; volatility-controlled reversal retains each volatility half original n_half/N capital weight.",
+        "cash": "Zero cash interest. Failed buys retain cash; failed sells remain held; no redistribution to successful stocks.",
+        "fees": "0 and25 bps each side on actually simulated traded value. Assumed scenario only; personal schedule unknown.",
+        "rebalance": "Monthly targets after T close, one rebalance at next scheduled exchange-day open.",
+        "execution": "Opening fields and prior breaks only; closing audit after orders. Hypothetical opening-quote fractional units, not verified fills.",
+        "exit": "Target reductions sold only when qualified opening quote exists; failed sell held; no terminal forced liquidation.",
+        "reentry": "Only next scheduled monthly target; no daily retries.",
+        "investability": "Fixed2014 cohort conditional adjusted-price quote account; queue, actual auction fills, round lots, delisting cash and dividend accounting not fully qualified."
+      }
+    },
+    {
+      "version": "1.0.0",
+      "type": "policy/strategy",
+      "uses": [
+        "description",
+        "comparison"
+      ],
+      "not_for": [
+        "production_trade",
+        "live_predictive_claim",
+        "complete_LEI_strategy",
+        "original_US_replication"
+      ],
+      "scope": "Fixed300 original36019 eligible observations,2015-2025; independent activity-conditioned comparison",
+      "spec_layer": "research_extension_candidate_ranking_not_technical_gate",
+      "implementation": "src/lei_signal/research/reversal_activity.py",
+      "dependencies": [],
+      "sources": [
+        "activity_reversal_design_20261023"
+      ],
+      "time": {
+        "decision_at": "T monthend close",
+        "available_at": "retrospective2026 vendor snapshots; original arrival/revisions unknown",
+        "execution_at": "nextmonth open quote assumption with postopen audit isolated",
+        "timezone": "Asia/Shanghai",
+        "observation_time": "All feature inputs at/before T monthend; same-date ranks only",
+        "effective_from": "2026-10-23 registration only"
+      },
+      "input": {
+        "price_basis": "rawCNY amount; adjusted conditional price units",
+        "calendar": "bound exchange trade calendar, noffill",
+        "fields": [
+          "date",
+          "code",
+          "amount",
+          "tradestatus",
+          "open",
+          "preclose",
+          "close",
+          "isST",
+          "effective_factor",
+          "hot",
+          "vol60",
+          "momentum"
+        ],
+        "currency": "CNY price quotes; returns dimensionless",
+        "frequency": "daily input, month-end monthly selection"
+      },
+      "universe": {
+        "version": "2014-fixed300-common-eligible",
+        "eligibility": "previously eligible plus finite nonnegative amount records, no future results used",
+        "missing": "unknown remains missing, retain selectedweight atoutcome",
+        "warmup": "original score eligibility and60scheduled amount rows including explicit suspendedzero",
+        "quality_gate": "unknown rejected with reason; perstratum minimum30",
+        "degrade": "Do not substitute a smaller score set, fill missing observations, replace failed stocks, or reweight unknown selected outcomes."
+      },
+      "validation": {
+        "tests": [
+          "tests/unit/test_reversal_activity.py"
+        ],
+        "method": "prefix/future mutation and independent numerical checks",
+        "tolerance": {
+          "absolute": 1e-12,
+          "relative": 1e-06,
+          "integer": 0
+        },
+        "limitations": "Original historical publication timing, actual fills, delisting wealth and total-return equivalence unverified; conditional local adaptation only."
+      },
+      "status": {
+        "definition_clarity": "explicit_adaptation",
+        "data_qualification": "pending_source_only",
+        "implementation": "pending_synthetic_tests",
+        "effectiveness": "not_evaluated_before_core",
+        "production": "not_authorized"
+      },
+      "lifecycle": {
+        "state": "exists",
+        "basis": [
+          "docs/experiments/raw/reversal-activity-increment-2026-10-23/design.json"
+        ],
+        "verification_scope": "registration only; independent result receipts govern acceptance"
+      },
+      "research_owner": "personal-lowfreq-system-audit-20261018",
+      "id": "research.selection.activity.open_quote_policy",
+      "name": "开盘报价与收盘审计隔离研究账户",
+      "definition": {
+        "formula": "Prior-month targets; open_valid and prior failures only at opening; close audit happens after orders; fixed cash and proportional costs",
+        "parameters": {
+          "initial_cash": 100000,
+          "fee_bps": [
+            0,
+            25
+          ],
+          "terminal_sale": false
+        },
+        "unit": "CNY adjusted quote wealth",
+        "direction": "comparison only",
+        "endpoints": "formation monthend and nextmonth opening quote",
+        "transforms": "frozen design",
+        "nan_policy": "retain unknown; no future filtering"
+      },
+      "policy": {
+        "selection": "Formation at month-end using only prior/current formation data; 3 amount strata; five oriented reversal groups, matched-count lowvol, all eligible pool, and within-volatility-half reversal.",
+        "weights": "Equal weights in each target group; volatility-controlled reversal retains each volatility half original n_half/N capital weight.",
+        "cash": "Zero cash interest. Failed buys retain cash; failed sells remain held; no redistribution to successful stocks.",
+        "fees": "0 and25 bps each side on actually simulated traded value. Assumed scenario only; personal schedule unknown.",
+        "rebalance": "Monthly targets after T close, one rebalance at next scheduled exchange-day open.",
+        "execution": "Opening fields and prior breaks only; closing audit after orders. Hypothetical opening-quote fractional units, not verified fills.",
+        "exit": "Target reductions sold only when qualified opening quote exists; failed sell held; no terminal forced liquidation.",
+        "reentry": "Only next scheduled monthly target; no daily retries.",
+        "investability": "Fixed2014 cohort conditional adjusted-price quote account; queue, actual auction fills, round lots, delisting cash and dividend accounting not fully qualified."
+      }
+    }
+  ],
+  "models": []
+}

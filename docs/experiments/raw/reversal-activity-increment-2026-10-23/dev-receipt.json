@@ -1,0 +1,39 @@
+{
+  "status": "synthetic_verified_real_not_run",
+  "date": "2026-10-23",
+  "scope": "bounded retrospective 300-stock activity-stratified research tool",
+  "account_count": 48,
+  "formation_months": 132,
+  "engine_sha256": "8518320c29e4d28a1b91f38b3c39ec71454248e3de0173819a5b81d5256e48e6",
+  "runner_sha256": "3d892b4169132497ae0055961864ffb88d372483cbf4145794857b2099365dd7",
+  "tests": {
+    "command": "PYTHONPATH=src python3 -m pytest tests/unit/test_reversal_activity.py -q",
+    "result": "13 passed",
+    "runner_synthetic": "synthetic formation: PASS; no real source opened",
+    "py_compile": "passed",
+    "repo_hygiene": "passed"
+  },
+  "defect_corrected_before_real_run": "Initial group ordering and volatility-balanced choice had opposite reversal direction; G5 now contains the lowest hot scores, with a signed fixture covering both selections. Amount window now checks trading status and permits suspended zero only.",
+  "second_review_corrections": [
+    "Suspension, no opening quote, and a wholly missing source day are now stale or unfilled states, without automatic permanent basis lock. The next observed day checks price continuity against the most recent observed raw close.",
+    "Every held position with a valid opening quote updates its mark before order sizing; unknown close retains this mark even without rebalance.",
+    "The cross-activity comparison is explicitly low-activity increment minus high-activity increment, with a signed fixture.",
+    "The runner recomputes the frozen SHA-256 code selection from the 2595-code historical cohort after excluding the fixed old 600 codes, verifies the exact 300 selected codes against the acquisition contract and manifest, and records sparse opportunity coverage."
+  ],
+  "final_source_uncertainty_correction": "Blank, nonpositive or invalid numeric fields and calendar gaps alone no longer permanently lock a holding. The closing mark remains unknown. Missing previous close or current preclose makes opening continuity unverified and blocks opening orders. Confirmed adjusted-preclose mismatch or mixed definite contradictions retain the permanent break.",
+  "real_run_gate": {
+    "effects_authorized": true,
+    "exact_runner_sha256": "runner file digest",
+    "exact_engine_sha256": "engine file digest",
+    "bindings": "list of path/sha256 objects covering all frozen code, definitions and source references",
+    "storage_plan": "path/sha256 object for verified external output plan, at least 250 MiB estimated",
+    "input_refs": "path/sha256 object for input-refs.json, which must include acquisition_contract path/sha256"
+  },
+  "real_market_reads": 0,
+  "real_effect_computations": 0,
+  "limitations": [
+    "Daily opening prices are historical quote proxies, not actual order-book fills.",
+    "Factor arrival time is not established by this tool.",
+    "This implementation has no market-wide tradable-index excess return until separately bound reference data is qualified."
+  ]
+}

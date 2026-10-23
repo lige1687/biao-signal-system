@@ -1,0 +1,122 @@
+{
+  "schema": "reversal-activity-design/1",
+  "mode": "research",
+  "question": "Monthly reversal selection within prior-traded-amount strata: does it improve return/risk or add information after coarse historical-volatility control?",
+  "financial_hypothesis": "Temporary demand/supply pressure may reverse; historical traded amount stratifies activity. Low activity can instead mean stale quotes, bad information, wide spreads and large trading friction. No small-cap/retail/causal claim.",
+  "decision": "retain specific monthly selection use or pause; do not adopt trading",
+  "financial_scope": "Independent stock research extension; no LEI signal/rule changes; stock evidence not ETF evidence",
+  "input_universe": "Fixed2014 historical300 cohort; reuse original36019 all-four-score-qualified code-month rows. Current index members not used. Four index populations and separate downside-risk work owned by other chats.",
+  "formation_months": [
+    "2014-12",
+    "2025-11"
+  ],
+  "holding_months": [
+    "2015-01",
+    "2025-12"
+  ],
+  "periods": {
+    "all": [
+      "2015-01",
+      "2025-12"
+    ],
+    "early": [
+      "2015-01",
+      "2018-12"
+    ],
+    "middle": [
+      "2019-01",
+      "2021-12"
+    ],
+    "late": [
+      "2022-01",
+      "2025-12"
+    ]
+  },
+  "period_status": "All seen history; no fit/tuning/untouched validation",
+  "amount": {
+    "days": 60,
+    "end": "formation date inclusive",
+    "unit": "CNY unadjusted traded amount",
+    "rule": "mean over last60 scheduled market dates; all60 raw rows required; explicit suspended zero included; missing/blank/nonfinite/negative/unknown status rejected with reason",
+    "partition": "three near-equal count partitions ascending amount then code, separately each month, no future outcomes",
+    "minimum_names_per_stratum": 30
+  },
+  "definitions": {
+    "reversal": "research.selection.short_reversal.month_return@1.0.0 oriented -hot",
+    "lowvol": "research.selection.short_reversal.vol60@1.0.0 oriented -vol60",
+    "amount": "research.selection.activity.amount60@1.0.0",
+    "volbalanced": "research.selection.activity.reversal_volbalanced@1.0.0",
+    "open_account": "research.selection.activity.open_quote_policy@1.0.0"
+  },
+  "portfolios": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "lowvol",
+    "pool",
+    "rev_volbalanced"
+  ],
+  "selection": "Within each amount stratum five reversal score groups sorted ascending -hot then code; lowvol same name count as G5. rev_volbalanced splits ascending vol60/code into two near-equal halves, each selects max(1,floor(n_half/5)) highest -hot/code; each half retains n_half/N capital weight; selected equal within half.",
+  "conditional_claim": "G5 vs lowvol is choice substitution, not information independence. rev_volbalanced vs pool tests coarse volatility-controlled increment only; report realized vol60/momentum exposures, no exact neutrality.",
+  "cost_bps_per_side": [
+    0,
+    25
+  ],
+  "main_cost_bps": 25,
+  "personal_actual_fee_evaluation": "not_evaluated",
+  "accounts": 48,
+  "initial_cash_cny": 100000,
+  "cash_interest": 0,
+  "terminal_forced_sale": false,
+  "account": "Independent open-only quote scenario; month-end targets executed at next market date open, prior holdings bear overnight prices; sell before buy with cash scaling and no reallocation of failed buys. Fractional adjusted quote units; no real lot/call-auction queue/cash dividend claim.",
+  "timing": "open validity uses current raw open/preclose/effective foreAdjustFactor and prior-day confirmed basis, assumed open-known status; never uses same-day high/low/volume/close/pctChg/whole-day source_valid. Same-day closing audit marks broken at close, cannot cancel old opening trade. Missing/open failure keeps cash or old holding. Unknown valuation remains visible plus zero-unknown value sensitivity, not worst-case-path proof.",
+  "primary_benchmark": "same amount stratum monthly rebalanced full eligible pool, same cost scenario; not parent index",
+  "market_reference": {
+    "identity": "CSI300 price index only, not total-return mother index for fixed300",
+    "use": "context only, no costed index excess alpha claim"
+  },
+  "metrics": {
+    "selection": [
+      "monthly rankIC with knownpairs/unknowncoverage",
+      "five group outcomes on shared complete months and known contribution separately",
+      "G5 vs lowvol and volbalanced vs pool",
+      "retained known >=20pct future winners; not cash PnL"
+    ],
+    "account": [
+      "daily quote CAGR/cumulative/maxDD",
+      "monthly paired excess HAC3",
+      "up/down passive months with opportunity costs",
+      "cash/unknown fraction; fees/traded gross/ntrades",
+      "early/middle/late, 0cost vs25bps",
+      "same-month low-minus-high increment contrast"
+    ]
+  },
+  "uncertainty": "paired calendar HAC3; retain calendar slots with missing not compress gaps; intervals descriptive, no probability of truth or invented meaningful threshold. Report all groups and periods, not select a favorable universe.",
+  "essential_checks": [
+    "input source hashes and 60-date coverage",
+    "future columns never affect targets",
+    "same-day postopen fields cannot affect open orders",
+    "same capital/fees/execution/unknown rules",
+    "independent main differences/date counts/account identities",
+    "period contradiction and leave-one-year mean increment diagnostic without rerunning accounts"
+  ],
+  "method_route": "Native prediction-ridge/binary workflow does not implement conditional sorting/account question. Reuse frozen project inputs and existing accounting structure in separately scoped new research adapter; not claim native prediction certification.",
+  "budgets": {
+    "core_max": 1,
+    "core_used": 0,
+    "followup_max": 3,
+    "followup_used": 0,
+    "source_max": 6,
+    "source_used": 6,
+    "new_market_requests": 0
+  },
+  "family_history": "Existing short-reversal/300 sorting/84 quote account/time-regime and SPY results reused, not rerun; all prior attempts remain. This new question changes ex-ante activity strata and explicitly separates opening from closing audit; not a parameter rescue.",
+  "execution_authorized": false,
+  "frozen_at": "2026-10-23T19:03:58.855383+08:00",
+  "strategy_sources": {
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术交易体系.md": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "/Users/yongbiaoli/Desktop/lei signal doc/LEI 技术实现.md": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  }
+}
