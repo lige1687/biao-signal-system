@@ -1,3 +1,17 @@
+# 常见13指数资料有界交付 2026-10-24T02:33:38.129366+08:00
+
+- task-id/owner沿原；status completed（仅本批可得原件、派生与核验），完整历史13池仍未完成；scope_released false保护原件。checked_coordination_sha 2fae6f8b14cb498cbd7f03b7e2a0f7525da56f8c；checked_at 2026-10-24T02:33:38.129366+08:00；已读COORDINATION/self、utility02:24/02:29官方事件增量、dispatch及此前investor/market-style/mechanism/strategy-account新增。原4池官方多年事件仍归utility，本题不抢或宣称对方完成。
+- A7官方当前名单2026-10-23共4000行/3812代码；新增5池价格+全收益和原300/500价格复用、新H00300/H00905各3350日。全收益官方代码与净收益区分，原件→派生逐日核；2013-01-01/2018-06-18休市异常仅派生排除。原日历止2026-01-15，184晚期日期未独立日历认证，CSI TR自身首发/个人税费未核。
+- 上证50BaoStock132个月×50已实际存取，无缺请求；独核官方2022-12-09收市后5换5，在2022-12/2023-01/02供应商全漏，3月才反映。原档保留，不合格为完整历史。utility随后独核300/500分别15/50换股也同3月失真，root直接核10份月原件代码与其官方事件表；原owner正补多年度事件，不改其旧封存报告。
+- US4价格候选至2026-10-22，原10/23盘中行保留但派生剔除；RUTTR3459行缺14，其他3TR为0完成日，毛净版本仍候选。IWB/IWM/IWV计划396基金月份，377实际有效（126/125/126），18个2017上半年空表+IWM2018-06 HTTP400；全部有效asof=请求月末。731618源Equity+1843其他资产行、15原字段/原行号全量独核通过；577无ticker、100个基金月份有重复ticker，CVR/现金权益/非挂牌不冒称普通股票。不是官方Russell历史成员。
+- 报告docs/experiments/common-universe-acquisition-2026-10-24.md SHA d685eafcad22e451858eb00f8d92f18261cb512dcdb7b6d598b1815efd1937ce；同raw/coverage-manifest.json SHA d4f5f918d04255e92a30820f94d217862b303308b55f8e79e6b705fd29067c81逐13池绑定来源及缺口；closure.json含全源/脚本/复核位置，controller-peer-cn-event-readback记录跨任务原件复核。
+- 存储固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9、device16777238复核，外盘本新计划673文件334219959B（不含最终清单），本地小raw约1.13MB；内剩17.76GB、外477.93GB。482次有结果HTTP台账、另2US HTTPS读取中断服务端收到未知、132BaoStock查询；网页发现另计，不称精确全部网络请求。0付费、0新效果；旧2核心/5来源预算不变，真实模型费用未知。
+- Sol执行、Astra只读方法与两母指数独核、root全来源/月度字段读回。保存接口伪历史、HTTP失败/空表、盘中行、特殊权益、首次数值/路径审阅失败及修正。归置退出0；registry本键/INDEX本行，其他原条目保持；8000列表pending=false、最终正文SHA一致、本地相对链接全部存在。open_in_codex返回queued，不声称用户实际打开。
+- 本机主树codex/factor-unit-research-20260915基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加未提交成果；源码和资料未自动push，远端仅本协调元数据。原待升级okr-8830a1f1ec4f继续关联，0仓外DB写；无生产/交易/删除/自动化。progress沿docs/ops/work-progress/downside-sensitivity-universe-20261023.md。
+- 接续：成功对象不重下，按source catalog核正式成员生效和证券身份；中证1000/2000/创业板/科创50与美国正式历史成员缺口、US3历史TR、19基金缺月均保留。下载完成不代表全部可回测；本批执行结束，不保证进程退出后自动运行。
+
+---
+
 # 常见池采集中间增量 2026-10-24T02:12:45.519465+08:00
 
 - task-id/owner沿原；status active，scope_released false。checked_coordination_sha 869b1c83c9e7372eb83e3040665568f0f8464993；checked_at 2026-10-24T02:12:45.519465+08:00；已读COORDINATION/self、utility当前、dispatch及investor/market-style/strategy-account新增范围，无本题路径同写。
