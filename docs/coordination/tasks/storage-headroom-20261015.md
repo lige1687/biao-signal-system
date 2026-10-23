@@ -89,3 +89,10 @@
 - Luna/low只读盘点已返回，write_paths=[]/network=false；root独立排除了被挂载的TRAE候选。实际委派合同v3，v1检查器绝对路径拒绝、v2因Downloads子串误判网络拒绝，均0派发；v3仅改路径表达与误判措辞，权限未扩大，检查ready后才派发，保留3合同。实际token费用未知。
 
 - 准确白名单登记首次非快进拒绝；已fetch/read新增strategy-account-bridge-20261020，仅对比成交/研究边界，无缓存冲突，正常merge保留其他记录。checked_coordination_sha f08b40224cdd53dd99cc13081b07dfcb1bddd844；checked_at 2026-10-23T17:07:43.464544+08:00。未强推。
+
+## 人类已批准完整日志归档 2026-10-23T17:13:13.738659+08:00
+- checked_coordination_sha 94c2579226718be41429142db5793adbeecac25d；已读personal-lowfreq-system-audit新增存量学习页/权限范围，其他已读任务沿用；无日志/缓存冲突，正常merge保留其记录。
+- 人类直接选择“允许完整归档并保留后续日志（推荐）”。准确源仅/Users/yongbiaoli/.openclaw/logs/gateway.log和gateway.err.log，既有内容归档外盘，保留同一原路径供新日志写入，不改配置、不强停服务、不截断未备份内容、不扩其他日志/会话/环境。
+- 外盘准备位置：个人资料归档/LeiSignal-内盘整理-20261023-01a13f90/openclaw-log-archive/，只读前缀复制已完成4029550042B+1351123790B并逐字节hash读回，原源保留；前缀副本state明确不可移除，未把增长中源当完整副本。
+- 已批动作：逐文件先按原inode原子改名本任务holding；立即保留/建立原路径新普通日志（O_EXCL不覆盖任何新写入）；holding无句柄且稳定后，补齐归档副本剩余尾部并核完整SHA/大小/模式/源稳定，再移除holding。若仍占用/变化/核验失败，保留holding与新日志、失败回执，不丢旧内容。
+- 闲置缓存阶段：npm和Homebrew下载缓存已完整归档TAR690350080B，SHA44fa21bca8af44882cd312d40c8f26ab7da435433df3be0d1595a4178b4265bf，移除前后净增664776704B；pip改名后根com.apple.provenance变化，0pip文件删除，原路径恢复，失败保留，不重删成功项。
