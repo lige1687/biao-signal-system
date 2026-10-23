@@ -1,3 +1,16 @@
+# 因子总工作台审查与方案交付 2026-10-23T19:15:26.597749+08:00
+
+- task-id market-style-observation-20261020；owner原root；status completed（仅report_only/plan_only），scope_released true；工作台实现未开始、原五问资料缺口未关闭。
+- checked_coordination_sha dbfd20c6f94113f6bdf0edd6446195741ed2dcc0；checked_at 2026-10-23T19:15:26.597749+08:00；已读COORDINATION/self、investor-workspace/research-utility/dispatch/downside/personal；交付补读investor四池窄接入、downside Amihud、mechanism A股机构资料、strategy-account机制交付和personal冻结前核查。原负责人继续单写；本方只原报告§18、raw方案/审计/草案/回执及progress，不动UI/数据/规范/其他任务。
+- 方案 docs/experiments/raw/market-style-observation-2026-10-20/factor-workbench-plan-20261023.md，SHA256 387e9c63e88435fa177381652e6d3415fc16278326b9df1721e0a974243560d9；金融含义/用途→定义时钟→数据资格→按用途检验→简单对手增量代价→稳健与新资料→前向取舍；五问逐项映射，四桌面视图，Agent被动点击。复用已有目录/曲线/登记/账户，不造总分或新平台，不重跑已封存研究。
+- 实查5192/5188/8192/8028离线，8000宽度CN至10/16、US样本至10/20；据新协调补核5173曲线/概览实际可用，超额/排序/四池待核可见，概览仍10/12的68对象70版本6实验（仅接入范围）。当前资金图日度记账月末采样，日路径需真实记录，不插值。未重启服务或诊断自动化执行日志。
+- 1 Sol medium只读audit，root独核精确版本join/source SHA/规范及实际UI。0新收益/付费数据/Agent解读/账户/通知；外部3查询3open仅方法核对，实际代理费用未知。两次协调非快进拒绝正常恢复；报告补丁上下文首失败后核原文修复；错误报告短名纠正，均保留回执。
+- 文档七步/五问、JSON、旧报告前缀保持、归置通过；未作无关全UI回归。raw/workbench-audit-20261023.json、workbench-review-20261023.json、workbench-verification-20261023.json及原progress可复核。
+- 自有报告/方案仅本机待审阅，未自动提交或推送成果；原已发布成果基线codex/market-style-observation-20261020@186d0ad4d6164f1f8dce8e50e7e248f2bc6461da。这里只同步本task协调状态，不宣称远端有新报告。
+- 系统目标已查重，workbench-upgrade-proposal-20261023.json准备新增具体目标于原方向；仓外DB登记询问待答，原goal未改。登记不等于实现/研究启动。后续实现先按精确范围协调现有owner，用户审阅方案，不自动接管其文件。
+
+---
+
 # 因子总工作台现状审查与方案 2026-10-23T18:59:59.487652+08:00
 
 - task-id沿market-style-observation-20261020；owner原root；status active；scope_released false。用户问现有面板缺口、研究者总控中台如何搭建，本轮report_only/plan_only：核当前页面/接口/原规范和已有负责人，不启动因子效力实验，不改生产UI/数据/自动化。
