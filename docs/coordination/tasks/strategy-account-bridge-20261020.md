@@ -1,5 +1,6 @@
 # 中美股票范围与金融机制接续 2026-10-23T19:00:39.190188+08:00
 
+- 重推前已读新增downside并行范围；首次非快进拒绝，普通合并保留他人记录；checked_coordination_sha=041523adefac4dd16908c502c469128adafb316a；checked_at=2026-10-23T19:01:07.496466+08:00；无范围冲突。
 - task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false。checked_coordination_sha=041523adefac4dd16908c502c469128adafb316a；checked_at=2026-10-23T19:00:39.190188+08:00。已读COORDINATION/self、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、mechanism-rebalancing-review-20261020、market-style-observation-20261020、investor-workspace-simplification-20261012、research-dispatch-controller及新增downside-sensitivity-universe-20261023。冲突决定：四历史指数取数、A股成交活跃分层、小盘资格与下跌敏感度分别原owner，不重复运行或下载。
 - 用户最新“是否区分universe和A股美股，争议必须从金融含义出发”及“继续呢”。本次限定资料研究与既有结果复核：把金融机制、股票资格、市场制度/期限差异、竞争解释、强对手、现有证据及准入条件接入本方已有组合报告及skill参考。此为独立扩展研究选择层，不改LEI技术判定或生产规则。现有收益复用不重跑，不将分池事后优胜当因果。
 - root唯一写docs/experiments/strategy-combination-expansion-2026-10-23.md的有日期补充、同raw/universe-mechanisms/小来源/合同/读回记录、.agents/skills/lei-lowfreq-research/references/strategy-combinations.md本题机制段、registry仅本键及INDEX本行、自己progress追加。原冻结contract/manifest/results/renderer/定义/共享playbook/UI/其他报告不改；报告补充插在renderer保留区。小增量预计<100KiB，0新大结果、0取数或安装、0仓外写/交易/通知/目标DB。
