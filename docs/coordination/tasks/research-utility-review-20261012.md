@@ -1,3 +1,13 @@
+# 四股票池续采与多来源核对 2026-10-23T18:57:51.354555+08:00
+
+- task-id/owner沿原；status active，scope_released false；checked_coordination_sha=426db658d1a2558536136aae57f061ef5416ac4e；checked_at=2026-10-23T18:57:51.354555+08:00；已读COORDINATION/self、investor-workspace、personal-lowfreq最新及原storage/dispatch，无数据同写。用户继续要求各universe取数并“确保数据准确，从各个来源拉”。
+- 精确范围沿本轮raw/universe-data-completion-2026-10-23、报告/登记本键/catalog仅状态；增量独立cross_source_*脚本和回执。根核源口径/母指数；CN只cn_*，US只us_*；原owner已结束的代理由新受托执行者接续，先核实际进程及文件，不重复下载。系统UI仍原owner。
+- 内盘实测36.43GiB，固定外盘身份仍须每个入口预检；CN历史查询上次进程仍在，仅监测并接续；已有3母指数源已存，不重复取。US18成功原件/22请求复用。新原件/临时/日志均外盘，累计2GiB预算保持，各失败至多1次重试/429停源，无付费或环境安装。
+- 多来源要求按同身份/日期/币种/复权对齐：各池代表标的与异常事件分层核对，同源转载不算独立；冲突保留原件及未知，不以多数票或文件数量判合格。官方历史成员/公司事件优先，无权利与日期证据不准入完整研究。无因子重跑/交易/规则更改。
+- 现有小报告与catalog阶段计数已滞后，完成采集后更新实际值再交系统owner接入。代码本机codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加未提交，仅协调元数据远端；原研究累计不重置。
+
+---
+
 # 四历史指数股票池资料补齐与外盘归档 2026-10-23T17:46:36.777815+08:00
 
 - task-id/owner沿原；status active；scope_released false。checked_coordination_sha=f1e67d2d73b8fdd3d7e7adcdd4609d90b0cd185c；checked_at=2026-10-23T17:46:36.777815+08:00；已读COORDINATION/self、investor-workspace、personal-lowfreq和dispatch最新；前轮strategy/mechanism无本题数据同写。用户本轮明确“其他universe数据也补齐，搞到外盘”。原两策略SHA仍一致，此次服务低频研究输入层，不改策略规则/已冻结结果，不重跑收益。
