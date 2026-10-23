@@ -1,4 +1,50 @@
-# 双均线研究内盘余量恢复
+# 2026-10-23 内盘整理结果（本轮完成）
+
+用户要求“清理一下内盘吧，能移动到外盘的就搞一下”，并对两份当前日志准确选择“允许完整归档并保留后续日志”。本轮已迁移确认合适的下载缓存和旧日志，所有移除内容均有外盘可核副本。当前环境、数据库、会话、工作树、冻结研究材料、正在使用的TRAE镜像保留。没有关闭应用、停服务或改任何服务配置。
+
+- 开工16:59内盘2468376576B（2.30GiB）。2026-10-23T17:16:07.457290+08:00实测可用7473958912B（6.961GiB / 7.47GB），净增5005582336B（约5.01GB）；其他进程持续写入/系统回收使净变化不等于源文件内容量。
+- 实际迁移后移除的普通文件内容合计6042590835B（约6.04GB）：下载缓存661763817B，两份旧日志5380827018B。
+- 原plan_output真实通过：外盘结果/日志预算1GiB、本机小记录1MiB；内盘5GiB和外盘10GiB保留不变。只生成计划JSON，execution_authorized=false，未创建结果目录或启动研究。
+- 固定外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9、真实挂载/可写/外盘设备均核准；可用487369080832B（约487GB），四项登记资源available。归置检查通过。
+
+## 本轮准确处理清单
+
+| 原源 | 本轮结果 | 外盘恢复证据 |
+|---|---|---|
+| /Users/yongbiaoli/.npm/_cacache | 完整核验后移除，当前运行依赖保留 | idle-download-caches TAR中的npm-cacache |
+| /Users/yongbiaoli/Library/Caches/Homebrew/downloads | 完整核验后移除，仅下载包与链接 | 同TAR的homebrew-downloads |
+| /Users/yongbiaoli/.openclaw/logs/gateway.log | 4029550042B旧内容完整归档，原路径新普通日志保留 | openclaw-log-archive/gateway.log.preserved |
+| /Users/yongbiaoli/.openclaw/logs/gateway.err.log | 1351276976B旧内容完整归档，包含复制后新增153186B；原路径继续写新日志 | openclaw-log-archive/gateway.err.log.preserved |
+| /Users/yongbiaoli/Library/Caches/pip | 改名后的根扩展属性变化，0文件删除，已恢复原路径 | 同TAR有当时副本，不能覆盖当前目录 |
+
+外盘归档根：`/Volumes/win+mac通用/个人资料归档/LeiSignal-内盘整理-20261023-01a13f90/`。
+
+下载缓存TAR 690350080B，SHA-256 `44fa21bca8af44882cd312d40c8f26ab7da435433df3be0d1595a4178b4265bf`；内含三份当时清单，实际只移除npm/Homebrew两份。每个普通文件SHA、目录/文件/链接类型、权限、链接目标完整TAR读回通过，扩展属性以base64另存manifest。精确源未变/无占用后按清单移除，总690条源条目，环境与node_modules未迁移。两个源与本任务holding均不存在。
+
+旧日志SHA-256：gateway.log `bff3f156e60e399123c50d34ce9bb3fc59a080269280ee0bdd33ec3f503374c9`；gateway.err.log `2d7a665424c2e317e381dfaddb6880e44519c43d388e723dcbaf1392a75321d0`。完整源先改本任务holding并保留原路径新文件，holding无句柄/稳定后补齐尾部，源/外盘完整大小与SHA相同，最后才移除holding。模式均0600保留，原路径保持普通文件，未改配置或进程；未来日志仍按原配置写本机，并未设置保留期限或自动迁移。
+
+17:15:37新错误日志13068B，17:16:07已32670B，inode103077506相同，证明新路径实际继续记录；普通输出日志当时0B，不虚构两种日志都发生新事件，也不把写日志解释成OpenClaw业务健康。两份holding均已移除。
+
+## 恢复方式与未处理对象
+
+- 每批外盘同目录有manifest和`恢复说明.md`。缓存先核TAR总SHA后在新空目录解包、逐文件核清单与元数据，原路径无新内容且无占用才恢复；也可让包管理器按需重新下载。
+- 旧日志先核各完整SHA，再复制到新空目录查阅。原路径已记录新日志，禁止直接覆盖。需要合并恢复原路径时须先正常停止对应写入者并保存新日志，再由用户确认处理；本任务没有执行合并或恢复旧日志。
+- TRAE_CN-darwin-arm64.dmg仍挂载且约21进程从其运行，保留；语雀约1GB包含个人加密数据库/备份，保留；所有活跃DB/运行依赖/会话/工作树/冻结raw、swap、系统快照、Trash均未处理。
+- Codex/浏览器运行缓存、WorkBuddy跟踪/快照、当前日志之外的历史应用环境用途未知，未按体积盲删。无需为达到15GiB建议值扩大到这些对象。
+
+## 本轮验证、失败与协作
+
+- 首份委派合同绝对路径被检查器拒绝；第二份的Downloads字样被误判为联网。均未派发。v3仅以home为根的相对表达、去误判措辞，权限相同，ready后实际Luna/low只读盘点1次，无写入/联网/下级代理。Root独立识别TRAE是运行中的安装镜像，未采用其初步可迁移候选。费用未知。
+- pip在同盘改名后仅根`com.apple.provenance`值变化，严格稳定检查停止；npm/Homebrew已成功移除不重跑，pip原inode恢复到原路径，零pip文件删除。初次失败保留，不将其记为已清理。
+- 旧日志初次复制明确为不可移除的前缀备份；人类批准后才轮换，增量尾部完整补齐；没有用初次副本冒充增长源完整归档。
+- 本机完整私有证据和操作脚本：`data/cache/storage-headroom-20261023/`，包括idle-cache-summary、pip-stability-failure、log-precopy-summary、gateway-log-summary、final-storage-check。完整私有恢复清单在外盘，不提交日志正文、账号资料、大包或凭证。
+- 本轮checked_coordination_sha `d2f6f84fd6bd70e79f3c6746dea52fa9caa476a6`；已读COORDINATION1.1、自身、mac-local-storage-cleanup、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、investor-workspace-simplification-20261012、strategy-account-bridge-20261020相关当前范围。只维护自身记录/进度，其他任务内容保留。
+- 新缓存与日志范围普通push有两次并发非快进拒绝，fetch/read后正常merge保留他人新增研究/UI记录，未强推。仅本进度小文档推codex/storage-headroom-20261015，协调摘要推coordination/lei；共享主索引/HEAD和1778脏路径保持原安排。
+- 本轮status completed：合适对象及获批日志处理已实际验证、恢复记录齐全，原5GiB预检恢复。没有待删对象、后台迁移、定时器或长期监控；不向其他聊天发送消息。研究负责人须用自己真实估计/合同再预检，不能把本轮存储通过当科研授权或永久空间保证。
+
+---
+
+# 2026-10-15 整理历史记录
 
 更新时间：2026-10-15T20:45:49.390165+08:00。设备：本地Mac。负责人：01a13f90-f5ca-7111-ac4f-4afd655b71f3。
 
