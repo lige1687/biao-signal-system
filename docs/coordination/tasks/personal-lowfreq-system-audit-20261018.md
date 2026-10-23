@@ -1,3 +1,11 @@
+# 当前资料资格最后补查 2026-10-23T17:31:52.353804+08:00
+
+- task-id/owner沿原；active；checked_coordination_sha=387a7997fec1ad5028829758cb6ead66e90dc723；checked_at=2026-10-23T17:31:52.353804+08:00；已读self/COORDINATION、research-utility17:22、investor17:25、strategy-account17:18与dispatch。其80RankIC/正式超额UI/盈利加动量固定组合均各自owner，不接管。
+- 原19小文件成果70098223d709295dcb3072f715b58777d4a55f4a已正常推送并读回。为避免仅列资料缺口，当前在已通过外盘计划下，限1次既有Yahoo公开chart来源请求补当前SPY资料，0重试，429/失败即保存边界；只资格与当下快照，不计算历史收益、不伪造历史可得、不运行账户、无个人信息传出。新原件/响应外盘，仓内只小回执及本新报告/自己进度补事实；预定规则不调参，不创建后台。
+- 若成功仍须分别核月末完成和来源版本，当前实际收到资料只能从当前接收时点起可用；不得补成过去已知。个人费用/母指数资格不因取到价格自动通过。若不合格，保留实际失败并结束本次边界，不扩请求预算。
+
+---
+
 # 范围增量：universe金融含义与最新存储恢复核查 2026-10-23T17:20:17.739780+08:00
 
 - task-id/owner沿原；status active；checked_coordination_sha=28e0a794a2232c365988f184a20bb48d23c100ac；checked_at=2026-10-23T17:20:17.739780+08:00；已读COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、strategy-account-bridge-20261020、research-dispatch-controller最新段。因子owner17:17已通过容量并自行恢复80RankIC，原owner保持；本轮不接管其统计/目录/正式UI/资料采集。
