@@ -1,3 +1,12 @@
+# 四池成员生效事件核查增量 2026-10-24T02:24:35.308879+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=3c2172250275447d44b76cf29ea839a7f9b0aabb；checked_at=2026-10-24T02:24:35.308879+08:00。已读COORDINATION/self、downside、investor、dispatch最新范围。downside提供上证50于2022-12调整延迟反例；此为线索，不自动推论沪深300/中证500错误。两池原月度源只读，无BaoStock新登录/请求，与其9池采集无冲突。
+- 沿人类继续各universe、多源确保准确的授权，仅回答CSI300/500同次2022-12调整是否在旧月末名单及时反映。原2577/82等封存数据与报告不改、不重跑收益。主基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加本地既有文件，成果未提交。
+- 唯一新写范围：docs/experiments/raw/cn-membership-event-audit-2026-10-24/；docs/experiments/cn-membership-event-audit-2026-10-24.md；registry仅此新键/INDEX仅此新行；本任务原progress。root官方公告/附件来源绑定及报告，Sol只monthly-readback.json与核对脚本，独审只audit-review.md。外盘沿原root64MiB计划新子目录membership-event-20261024，实际写前重新核设备容量；本机小增量约200KiB，累计原2GiB预算不重置。所有原件/临时/日志外盘。
+- 目标：官方变更代码、生效日与旧月末源逐项比对，列受影响月份及局限；成功来源不重下、失败原件保留、不绕付费/权限。此处不修改生产输入/成员历史；如发现错误，仅阻止当成合格历史池，并发布日期化纠正证据。必要系统展示仍唯一原实现者负责；不给未获人类授权的聊天发回消息。
+
+---
+
 # 四池来源补齐阶段与系统验收交付 2026-10-24T02:11:49.434776+08:00
 
 - task-id/owner沿原；status completed（仅本轮有界资料获取、核验与展示），完整历史池资格未完成；scope_released true仅本轮新增资料，冻结原件/旧实验继续保护。checked_coordination_sha=869b1c83c9e7372eb83e3040665568f0f8464993；checked_at=2026-10-24T02:11:49.434776+08:00。已读COORDINATION/self、downside新9池、investor02:09完成、dispatch、personal、mechanism02:06结案、market-style及strategy-account新定义范围，无同写。四池本方，9新池原downside；不重复下载或BaoStock登录。
