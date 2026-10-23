@@ -1,3 +1,10 @@
+# 官方名单报告窄接入 2026-10-24T02:53:33.752096+08:00
+
+- 原task/owner；active；checked_coordination_sha=2d53e16bdb06c91e476d01b1b85f5d04081484d7；checked_at=2026-10-24T02:53:33.752096+08:00；已读COORDINATION/self/研究utility最新及dispatch沿原，唯一源owner与5188镜像写者分离无同写。
+- 仅新报告cn-membership-event-audit-2026-10-24.md、registry该键、INDEX该行、catalog仅csi300/csi500 statusLabel/reason和指定3个小raw镜像；自身回执沿原目录。不改旧报告/曲线/计算/数据库/定时/组件，四池保持disabled。验收源/运行/HTTP完整SHA，页面标题/53/8及disabled。
+
+---
+
 # 四池最终资料状态接入验收 2026-10-24T02:09:07.397409+08:00
 
 - task-id/owner沿原；本轮completed；scope_released true；checked_coordination_sha=f62226f1fc8ddba45e31fe66b17e46c7ecd7277c；checked_at=2026-10-24T02:09:07.397409+08:00；已读COORDINATION/self/research-utility/dispatch，无同写。22个源文件准确镜像，registry仅本键、INDEX仅本行；catalog仅四池状态，其余字段一致。
