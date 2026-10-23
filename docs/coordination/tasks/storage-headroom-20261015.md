@@ -2,7 +2,7 @@
 
 - task-id: storage-headroom-20261015
 - owner: 01a13f90-f5ca-7111-ac4f-4afd655b71f3 / root
-- status: completed（草稿已保存，Chrome正常退出，两缓存清理，固定预检恢复）
+- status: active（2026-10-23新一轮闲置文件迁移）
 - updated_at: 2026-10-15T20:39:17.224401+08:00
 - checked_coordination_sha: 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3
 - read_task_ids: mac-local-storage-cleanup, daily-trading-system-audit, research-utility-review-20261012, research-dispatch-controller, investor-workspace-simplification-20261012
@@ -79,3 +79,11 @@
 - 只读委派合同data/cache/storage-headroom-20261023/ordinary-files-contract.json已冻结；Luna/low最多1助手、write_paths=[]/network=false，仅Downloads和Desktop非项目普通文件盘点，不读正文/凭证、不修改不删除；root独立核依赖和执行。
 - 既有20261015归档/缓存清理结果复用，不重做旧条目；当前浏览器/应用新内容须重新核占用。旧Chrome退出许可不泛化为丢弃新未保存内容，遇变化先保全。
 - 成果分支沿codex/storage-headroom-20261015，既有23dc9cfe430d24bc847de8e6c9116c8d99bbdc07；共享脏区1778路径保留、原索引/HEAD不操作。无新研究、自动化或跨聊天消息。
+
+## 本轮准确缓存白名单 2026-10-23T17:07:15.328047+08:00
+- checked_coordination_sha: f08b40224cdd53dd99cc13081b07dfcb1bddd844；已读原3任务及personal-lowfreq-system-audit-20261018、research-utility-review-20261012、investor-workspace-simplification-20261012最新相关范围；后者只读UI/研究，无缓存路径写入重叠。唯一写者root。
+- 新准确可迁移源：/Users/yongbiaoli/.npm/_cacache；/Users/yongbiaoli/Library/Caches/Homebrew/downloads；/Users/yongbiaoli/Library/Caches/pip。均为可重新下载的闲置普通缓存，lsof完整无句柄，复制逐文件读回/源未变/无占用后移除。运行中的npm run dev不删/移动其node_modules或环境，三缓存无读取句柄。
+- 恢复位置：/Volumes/win+mac通用/个人资料归档/LeiSignal-内盘整理-20261023-01a13f90/idle-download-caches/。TAR保留内容/类型/权限/链接，manifest另存扩展属性，准确源清单与SHA、移除回执本机小摘要。不动外盘已有资料。
+- 用户桌面TRAE_CN-darwin-arm64.dmg虽480MB，但当前已挂载且TRAE正从/Volumes/TRAE CN运行，明确保留；其他普通候选不足0.2GB且交付用途未知，不盲移。Yuque约1GB含个人加密DB/备份，不动；项目worktree约26GB、当前DB约6.5GB及所有raw/环境/会话均保留。
+- OpenClaw gateway.log4029550042B及gateway.err.log1350838472B为当前日志，后者持续增长；当前只读盘点，已向人类请求完整归档/保留后续日志的准确许可，回复前不改这两个源、不停服务、不改配置、不截断或删日志。
+- Luna/low只读盘点已返回，write_paths=[]/network=false；root独立排除了被挂载的TRAE候选。实际委派合同v3，v1检查器绝对路径拒绝、v2因Downloads子串误判网络拒绝，均0派发；v3仅改路径表达与误判措辞，权限未扩大，检查ready后才派发，保留3合同。实际token费用未知。
