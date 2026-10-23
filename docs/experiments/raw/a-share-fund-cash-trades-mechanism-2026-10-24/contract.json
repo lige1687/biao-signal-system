@@ -1,0 +1,92 @@
+{
+  "version": "fund-trades-mechanism/1.0",
+  "at": "2026-10-24T01:52:39.016494+08:00",
+  "mode": "research",
+  "question": "Do net-redemption fund half-years coincide with net stock selling, and does beginning book bank money plus settlement reserve further distinguish those cases?",
+  "decision_use": "qualify or reject the interpretation of reported redemptions as stock-selling pressure before considering any new low-frequency return study; no trading action",
+  "strategy_layer": "external institutional narrative/research, no LEI technical rule or hard filter",
+  "universe": {
+    "funds": [
+      "070002 嘉实增长",
+      "000001 华夏成长"
+    ],
+    "periods": "2019H1 through 2025H2, 14 half-years x 2 existing funds",
+    "selection": "same two already chosen continuing funds; not industry representative or independent untouched evidence",
+    "no_new_funds": true
+  },
+  "new_information": "all-stock buy and sell transaction totals and comparable beginning bank/monetary-fund plus settlement-reserve balance, each from original financial statements",
+  "definitions": {
+    "N": "sell_total_cny - buy_total_cny; retain signed value, no clipping; transaction amount excluding fees, not settled cash",
+    "D_report": "red_amount - sub_amount, signed CNY",
+    "D_adjusted": "D_report + reinvest_cny; Huaxia inclusion in subscription amount remains accounting-structure inference",
+    "C0": "beginning bank/monetary funds plus beginning settlement reserve; both components saved; no claim unrestricted available cash",
+    "G": "D - C0, signed difference only, no compulsory-selling label",
+    "scale": "divide each signed measure by same beginning net assets; also preserve CNY amounts",
+    "half_year_derivation": "H1 totals directly; H2=FY-H1 cumulative trade totals; H2 opening balance=H1 ending balance; H1 opening balance=original prior-year-end comparison column"
+  },
+  "time_semantics": "retrospective same-half behavior; flows and transaction totals only public after period end; even beginning balances may only be disclosed later; no contemporaneous prediction claim",
+  "main_comparison": "For each fund and both fixed D definitions, compare N>0 counts and signed N/NAV median in D>0 versus D<=0 periods; all 28 rows retained",
+  "cash_increment": "Only among each fund D>0 cases, compare D>C0 and D<=C0 counts and signed N/NAV medians against all same-fund D>0 cases, retain all raw period rows and the range of D/NAV in each cell",
+  "increment_identification": "if groups absent or redemption-size ranges do not overlap, explicitly cannot distinguish cash extra explanation; no model, matching, threshold change or added fund to rescue identification",
+  "counterexamples": "D>0 with N<=0 directly rejects necessity of aggregate net selling, but does not exclude some individual forced sales; same 14 half-years show both funds side-by-side, show by fund/year and all reversals",
+  "uncertainty": "descriptive counts, exact amounts, coverage and per-year cases; 2 funds and 14 shared periods not 28 independent trials, no significance or probability-generalization claim",
+  "missing": "no zero fill; source missing blocks dependent calculation; both trade totals and C0/NAV require original verification",
+  "required_qualification": [
+    "full total section not top-20 or above-2pct list",
+    "gross transactions excluding fees and CNY",
+    "period/date and announcement identity",
+    "cash components aligned and current sum matches asset summary",
+    "FY-H1 nonnegative buys/sells",
+    "H1 and FY prior-end balances same; precedingFY continuity; accounting-classification changes kept not forced"
+  ],
+  "preinspection": "Five original reports per fund seen before full design, including trade totals; this is openly exploratory history, not unseen validation",
+  "financial_hypothesis": "redemptions may require asset sales when liquid resources limited; competing portfolio rearrangement, bonds/repo, fund distributions, accrued receivables/payables and intra-half cash timing can break this association",
+  "literature": {
+    "Coval_Stafford": "prior read source retained; NBER fetch 2026-10-24 returned403, not new full-text verification",
+    "Wardlaw_2020": "author abstract live read; warns mechanically embedding contemporaneous stock return in pressure measurements; no replication claim"
+  },
+  "execution": "one fixed descriptive matrix, zero fits, zero price or return/IC runs; necessary extraction and independent numerical audit only; no parameters optimized",
+  "stop": "close bounded behavior question after qualified comparison and independent reconciliation; no automatic reopening sealed return uses; genuinely identifying new timing/cash/trade evidence required for further causality",
+  "allowed": [
+    "read original PDFs",
+    "new research-only scripts/reports in new raw and report path",
+    "external ordinary outputs via fixed storage plan",
+    "own registry/INDEX/progress and coordination exact updates"
+  ],
+  "forbidden": [
+    "modify old frozen evidence",
+    "current trading rules or production",
+    "paid acquisition or signup",
+    "other agents files or raw",
+    "delete files",
+    "force push",
+    "outside-repo configuration or target database"
+  ],
+  "prior_inputs": {
+    "docs/experiments/raw/a-share-institutional-flow-qualification-2026-10-23/history-comparison.json": "7b234cb8842045dd4d6202e3c7f2943f65ecb8e3221e2ad7e5df6cea54f51e07",
+    "docs/experiments/raw/a-share-institutional-flow-qualification-2026-10-23/adjusted-history-comparison.json": "dfa3e88d8bbb89cae01e88000ca08a9355ad36f4a15fb13d2aa4175c784833fe",
+    "docs/experiments/raw/a-share-institutional-flow-qualification-2026-10-23/jiashi-history/source-manifest.json": "495ab77fd57ba9ad750a837982e4806db00bd90fc4a71ff2090d47d7b64644cc",
+    "docs/experiments/raw/a-share-institutional-flow-qualification-2026-10-23/huaxia-history/manifest.json": "a04138b600ded660d74e6cc87c2e5fa9cff73de89bfe9e42a13dd1cbcaa390bb"
+  },
+  "delegation": {
+    "cn_source_feasibility": {
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "write": "new raw/huaxia only",
+      "network": false
+    },
+    "cn_price_reuse": {
+      "model": "gpt-6-sol",
+      "effort": "medium",
+      "write": "new raw/jiashi only",
+      "network": false
+    },
+    "cn_method_gate": {
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "write": null,
+      "network": false
+    }
+  },
+  "state": "source extraction active; no grouped behavior calculations yet"
+}
