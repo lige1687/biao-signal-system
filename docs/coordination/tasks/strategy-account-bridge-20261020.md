@@ -1,3 +1,15 @@
+# 31.65%核账与公开经营盈利＋动量固定比较交付 2026-10-23T17:35:08.144434+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed（本轮有边界核账和一项组合问题），scope_released false（原冻结服务/数据、本方报告保护）；checked_coordination_sha=a96b0bc1365142541b83b5a527a92dc5fe254648；checked_at=2026-10-23T17:35:08.144434+08:00。已读COORDINATION/self、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、market-style-observation-20261020、lowfreq-strategy-discovery-20261019、storage-headroom-20261015。交付新增80RankIC/超额UI、universe/前向资格、机构收益研究仍各owner；没有重跑其工作或同文件写。
+- 新报告docs/experiments/us-momentum-audit-combination-2026-10-23.md SHAd3692e0e8e5e1f0fb5a3db3e76b1d8daee90a45f88e3a90951c84e4263d9f97e，同raw含归因/主控核验/新固定合同/计划/失败/方法审阅/locator/5306点独核和交付；自己的两旧报告加日期提示与登记SHA，INDEX仅新行。研究结果本机未提交（基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9），远端只有协调元数据，不冒称源码已发布。进度docs/ops/work-progress/strategy-account-bridge-20261020.md已追加准确证据。
+- 31.65%在保存原价/成交/现金/净值内核对一致；到2025年末15.01%对SPY14.46%，2026H1贡献全期美元利润71.15%，MU/SNDK/WDC/STX/BE占H1利润45.90%。34原件逐一匹配原attempts SHA；145成交=调整开盘、下一保存交易日、费用10bps；root不同路径复核0金额残差。两个价格端点公开印证仅有限独立性，历史现有成员回看与实际股份/权益资格仍缺，不把31.65当稳定收益。
+- 17:05真存储失败保留；17:17恢复真预检后新公开组合1核心+2预定时期完成，758个月、不调参。主期高盈利+动量年化毛14.29%、月末跌幅23.28%；比普通盈利+动量年化+1.71pp但跌幅深0.37pp，近期-2.33pp，早期vs动量-0.81pp；相关主.924/参考不涨月.893，同时亏损35/120与普通组相同。历史月均差不确定范围跨0；净费用/母指数/逐股可交易增量未评价。未找到稳定低相关帮助，不增加前向或生产版本。
+- 执行遗漏OP_B由主控独立补齐；原基准自比浮点误分胜负只留errata、报告排除；原归因最差日排序与最低12只标题错误已修且保留失败。原候选数据/参数不因结论改动。2 Matplotlib图分别以相对SPY和相对普通盈利组合收益差为主，原手工图留痕未覆盖。
+- 验收：5306资金点及相关独核、8冻结策略源码/配置SHA不变；报告API逐字一致/registry匹配；真实5188正文/新四格/共同亏损与2SVG646.88x590.90可见、0横溢，PNG视觉通过；归置和窄diff检查通过。没有UI源/仓外运行树/DB/交易/通知/自动化写。新外盘结果947810B、本机raw约121KB与报告235KB，source6/6含2错误URL失败，真实模型费用未知；Sol执行、Astra方法、root独核与交付。
+- 结论范围完成，不表示整体策略发现完成。继续条件是新的历史成员/退出权益与合格逐股财报/费用证据，不以相同输入反复调权重凑正。用户审核入口已打开；最终呈现待用户验收。
+
+---
+
 # 存储恢复后固定一项不同信息组合 2026-10-23T17:18:12.060787+08:00
 
 - task-id strategy-account-bridge-20261020；status active；scope_released false；checked_coordination_sha=c3b84ea2be7d8245ae633be73a58fbd96ea6066c；checked_at=2026-10-23T17:18:12.060787+08:00。重读self/COORDINATION及新增research-utility17:07、personal17:08、investor17:12、storage新归档；三方分别负责规范/原单因子及环境/默认超额UI，本方只读复用French原单组月度资料，独立经营盈利H加动量H初始各半的固定组合问题，无同写/不重跑原单因子研究。
