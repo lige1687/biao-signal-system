@@ -2,7 +2,7 @@
 
 - task-id: storage-headroom-20261015
 - owner: 01a13f90-f5ca-7111-ac4f-4afd655b71f3 / root
-- status: active（2026-10-23新一轮闲置文件迁移）
+- status: completed（2026-10-23已归档约6.04GB，实际容量与预检恢复）
 - updated_at: 2026-10-15T20:39:17.224401+08:00
 - checked_coordination_sha: 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3
 - read_task_ids: mac-local-storage-cleanup, daily-trading-system-audit, research-utility-review-20261012, research-dispatch-controller, investor-workspace-simplification-20261012
@@ -96,3 +96,14 @@
 - 外盘准备位置：个人资料归档/LeiSignal-内盘整理-20261023-01a13f90/openclaw-log-archive/，只读前缀复制已完成4029550042B+1351123790B并逐字节hash读回，原源保留；前缀副本state明确不可移除，未把增长中源当完整副本。
 - 已批动作：逐文件先按原inode原子改名本任务holding；立即保留/建立原路径新普通日志（O_EXCL不覆盖任何新写入）；holding无句柄且稳定后，补齐归档副本剩余尾部并核完整SHA/大小/模式/源稳定，再移除holding。若仍占用/变化/核验失败，保留holding与新日志、失败回执，不丢旧内容。
 - 闲置缓存阶段：npm和Homebrew下载缓存已完整归档TAR690350080B，SHA44fa21bca8af44882cd312d40c8f26ab7da435433df3be0d1595a4178b4265bf，移除前后净增664776704B；pip改名后根com.apple.provenance变化，0pip文件删除，原路径恢复，失败保留，不重删成功项。
+
+## 2026-10-23 本轮完成 2026-10-23T17:19:31.034547+08:00
+- checked_coordination_sha: 371cc392cf5daee1db14b8400636d883781d57be；已fetch/read COORDINATION/self、mac-local-storage-cleanup、research-dispatch-controller及research-utility-review-20261012/personal-lowfreq-system-audit-20261018/investor-workspace-simplification-20261012/strategy-account-bridge-20261020相关最新记录；最后两个owner仅研究/文档推进，不动缓存或日志，与本任务无冲突。正常merge保留全部记录，唯一写者root。
+- 用户闲置迁移授权及“允许完整归档并保留后续日志”准确授权均执行。实际移除源内容6042590835B：npm+Homebrew下载缓存661763817B，旧gateway.log4029550042B及gateway.err.log1351276976B。大包与日志正文不Git，外盘归档根个人资料归档/LeiSignal-内盘整理-20261023-01a13f90/。
+- 缓存TAR690350080B SHA44fa21bca8af44882cd312d40c8f26ab7da435433df3be0d1595a4178b4265bf，逐文件完整类型/模式/链接/内容、元数据另存清单通过。仅npm/Homebrew690条目移除；pip根com.apple.provenance同盘改名后变化触发停止，零pip文件删除，原路径恢复。失败和两个已成功项保留，不重删不冒充pip通过。
+- 旧日志先复制完整前缀并读回，获批后按原inode旋转至holding，原路径立即保留新普通文件O_EXCL不覆盖已有写入；holding无句柄/稳定后补153186B错误日志尾部，再核源和外盘完整SHA/大小后移除holding。gateway.log SHAbff3f156e60e399123c50d34ce9bb3fc59a080269280ee0bdd33ec3f503374c9；err SHA2d7a665424c2e317e381dfaddb6880e44519c43d388e723dcbaf1392a75321d0。两holding均不存在，原新日志模式0600；未停服务或改配置。错误日志真实13068→32670B同inode新增，普通日志0B保留，不将写日志等同OpenClaw业务健康。
+- 17:16:07+08:00内盘7473958912B（6.961GiB/7.47GB），对16:59开工2468376576B净增5005582336B约5.01GB；其他进程持续写入/回收，净增不同于迁移内容量。两操作窗口净增664776704B与5423149056B保留，不当作隔离归因。外盘487369080832B、固定UUID/4资源available。
+- 原plan_output实际通过：外盘预计1GiB、本机小记录1MiB，内盘5368709120B及外盘10GiB保留线不变。execution_authorized=false、结果目录未创建、0新研究/交易/下载。主研究须按自己的真实合同/估计再预检；本任务不替其开实验，不向其他聊天发送消息。
+- 当前DB/持仓、冻结raw、当前运行环境、会话、工作树、TRAE挂载镜像与新日志保留，未关应用、动系统快照/swap/Trash。旧日志及缓存都有恢复说明，恢复到新目录核SHA后查阅，不覆盖原路径新日志/新缓存。无需达到15GiB建议值而盲删未核依赖材料。
+- 小成果codex/storage-headroom-20261015@ede3d0bc1e3f52d3dd955025dab60237d9cf6e05，唯一docs/ops/work-progress/storage-headroom-20261015.md；远端完整commit与文件字节已核同。完整操作清单/失败/恢复证据仅本机data/cache/storage-headroom-20261023/与外盘，归置检查通过。Luna/low只读盘点1次，controller独核；实际token费用未知。
+- status completed；scope_released=true仅本轮准确整理范围，恢复记录持续保护。无待删单元、必要后续、后台任务/定时器或监控；其他来源用途未知不自动移动。未来容量仍会变化，不能把本次预检当永久承诺。
