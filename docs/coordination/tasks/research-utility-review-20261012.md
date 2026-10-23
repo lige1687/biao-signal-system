@@ -1,3 +1,12 @@
+# RankIC实算独核通过，发布新版本展示包 2026-10-23T17:22:42.693171+08:00
+
+- status active；checked_coordination_sha=3409719c34cbaf5ec6796b161a440e76c06cec0e；checked_at=2026-10-23T17:22:42.693171+08:00；已读最新self/system及storage，COORDINATION/其他任务沿本轮已读，无同写变化。单一研究/系统写者保持。
+- 冻结v2真实1次成功，结果外盘factor-curve-rankic-completion-20261022/…20261023T171812-15416687bb70/result/new-assessment.json SHA0069959946ce5c681c12fc8f0e10bee9516fbed3ba16cde86b8fc2fd0db4c5f0。80记录，816Sharpe不变、0账户重跑。独立标准库排名/均值/覆盖/HAC3全4760点/58283数值最大差2.78e-17；独核首次合同重序列化副本哈希误判已修并保留，非结果修正。
+- 发布路径作防误覆盖调整：旧web/public/research/momentum-three-universe-20261022/new-assessment.json是冻结源，保留原字节；只新增同目录new-assessment-rankic-20261023.json，并更新原catalog中extension.assessment的URL和SHA，其他字段不变。这样原合同/验证脚本仍可重复读取旧基线，不把发布写回冻结输入。小公开汇总约891KB，外盘原件不动。
+- 发布前root已核result SHA、80唯一键及全部非RankIC字段原样；发布后system精确同步两个路径，实际PPO/低波首屏及详情读回，四历史池仍不解锁。用户持久MD/记忆已写，默认超额UI正在验收。股票池扩展与三市场新效应仍未完成，不能把此补指标算全部研究完成。
+
+---
+
 # 固定十因子RankIC补算恢复 2026-10-23T17:17:59.533921+08:00
 
 - task-id/owner沿原；active；checked_coordination_sha=d2f6f84fd6bd70e79f3c6746dea52fa9caa476a6；checked_at=2026-10-23T17:17:59.533921+08:00；已读self、system17:12及storage17:13最新，COORDINATION/个人审查/dispatch沿本轮已读。无同文件冲突，清理归storage owner，UI归system owner。
