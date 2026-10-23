@@ -1,3 +1,12 @@
+# 范围增量：universe金融含义与最新存储恢复核查 2026-10-23T17:20:17.739780+08:00
+
+- task-id/owner沿原；status active；checked_coordination_sha=28e0a794a2232c365988f184a20bb48d23c100ac；checked_at=2026-10-23T17:20:17.739780+08:00；已读COORDINATION、自身、research-utility-review-20261012、investor-workspace-simplification-20261012、strategy-account-bridge-20261020、research-dispatch-controller最新段。因子owner17:17已通过容量并自行恢复80RankIC，原owner保持；本轮不接管其统计/目录/正式UI/资料采集。
+- 用户追加：股票池定义要纳入金融解释，反转可能中证1000更强，大盘股未必；这些一起做。本轮扩充原自有净超额/前向小报告及playbook已登记小节，记录机制假设、当期成员、规模/流动性对照与反例；不把固定300候选改称沪深300或中证1000，不从表现挑池。Luna只读盘点已有证据，root公开原始资料查证；不新建其他MD标准或改他人接口。
+- 存储此前真实失败但远端发现同机17:17恢复，马上做本题独立live预检，不能继续用旧失败当当前阻塞。必要新增本题raw/storage回执；仅若本题资料/执行资格也通过才冻结有界实测，不借容量自动扩大原合同。原French数值、data.json/PNG及旧raw不变。
+- 范围仅原净超额/前向需求小报告及raw、playbook精确小节、个人用户授权记忆增量和本方已有独立参考HTML；原业主研究核心不重复，不代写FactorCurves、cost接口/官方展示合同。验收保留净超额未知、实际前向与公式时点检查区别，新增宇宙可用/缺失证据。
+
+---
+
 # 用户固定净超额与前向环境要求 2026-10-23T17:08:59.161853+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status active（持久化/展示纠偏/可用性预检）；real_effect blocked_storage；scope_released false。checked_coordination_sha=836840fa05cc731a7c1aaa0b048239039000ad30；checked_at=2026-10-23T17:08:59.161853+08:00；已读COORDINATION/self、research-utility17:25、investor-workspace17:20、strategy-account-bridge10/23 17:03、market-style和原dispatch。原US三动量/股池/31.65审核/正式FactorCurves与接口仍原owner，不改或重跑。
