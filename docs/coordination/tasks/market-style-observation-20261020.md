@@ -1,3 +1,12 @@
+# 因子工作台指标与外部AI建议审查 2026-10-24 / 2026-10-24T01:49:29.678223+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha 58f574b41a0c4c884f92b7102f8cef13fbe64070；checked_at 2026-10-24T01:49:29.678223+08:00。已读COORDINATION/self、investor-workspace-simplification、research-utility-review、research-dispatch-controller。其他owner曲线/四池资料只读，本方不接管共享实现。
+- 用户要求体现IR/IC并审查所贴AI方案，主思路沿原工作台。模式report_only/plan_only；0新金融实验、0自动挖掘、0自动化/交易/数据库写入。本轮把指标定义、用途、图表、阈值/过拟合/组合边际/前向等建议逐项取舍并写回原方案。
+- root唯一写原报告§19、原raw/factor-workbench-plan-20261023.md追加、raw/workbench-ai-review-20261024*与原progress；可追加待登记草案的指标验收，不写实际goal。1 Sol medium只读factor页面/model/public summary，0联网0写；root有限6来源请求核原始文档/论文。基线已发布186d0ad4d6164f1f8dce8e50e7e248f2bc6461da，上一方案仅本地，保留原文。
+- 验收IC/RankIC/ICIR/组合IR分别定义，适用用途/目标期限/有效期数/不确定性/年化假设有字段；每条参考建议有采纳/修改/暂缓及理由，不把高相关/低IC/短观察一刀切，不批准GP/RL或生产模型和券商。只读核已有能力与缺口，不伪造收益或模型运行。
+
+---
+
 # 因子总工作台审查与方案交付 2026-10-23T19:15:26.597749+08:00
 
 - task-id market-style-observation-20261020；owner原root；status completed（仅report_only/plan_only），scope_released true；工作台实现未开始、原五问资料缺口未关闭。
