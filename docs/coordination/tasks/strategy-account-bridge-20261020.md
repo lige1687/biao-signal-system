@@ -1,3 +1,11 @@
+# 存储恢复后固定一项不同信息组合 2026-10-23T17:18:12.060787+08:00
+
+- task-id strategy-account-bridge-20261020；status active；scope_released false；checked_coordination_sha=c3b84ea2be7d8245ae633be73a58fbd96ea6066c；checked_at=2026-10-23T17:18:12.060787+08:00。重读self/COORDINATION及新增research-utility17:07、personal17:08、investor17:12、storage新归档；三方分别负责规范/原单因子及环境/默认超额UI，本方只读复用French原单组月度资料，独立经营盈利H加动量H初始各半的固定组合问题，无同写/不重跑原单因子研究。
+- 17:16内盘7469899776bytes，外盘身份正确；17:17新plan_output通过，旧17:05失败保留。新组合仅1核心2015-24加2固定已见历史对照1963-2014、2025-2026/08，起始各半不重配；同结构普通盈利N加动量H/各自单组/半现金比较，MOM_B固定分期参照并明确非母指数。费用资料缺失，净超额仍未评价，公开毛收益只作是否值得补资料的参考，不能换名字冒充个人净值或生产策略。
+- 主控已冻结combination-contract.json与storage-plan.json；Sol独写新raw/combine.py与小result-locator.json、新外盘计划唯一目录中的摘要/曲线/日志；Astra只读方法审阅。原文件及French原统计不写。报告、registry、INDEX和自身progress原独占范围不扩；无前端/仓外运行树写。原来源6/6，不再联网；3段历史都已看过，不标新前向。
+
+---
+
 # 美股31.65%核查与有金融理由的组合接续 2026-10-23T17:03:47.923347+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false；checked_coordination_sha=ae56d90fed51cdfef4732e6d038d3305dde073a8；checked_at=2026-10-23T17:03:47.923347+08:00。已读COORDINATION/self、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、lowfreq-strategy-discovery-20261019、mechanism-rebalancing-review-20261020、market-style-observation-20261020、investor-workspace-simplification-20261012最新。原historical universe/RankIC/US三动量归research-utility；French原统计/环境归personal；清理归当前storage owner，不接管/不重复。
