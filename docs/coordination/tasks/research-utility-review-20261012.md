@@ -1,3 +1,12 @@
+# 多年度官方来源核验与展示范围 2026-10-24T02:38:54.335914+08:00
+
+- active，原task/owner；checked_coordination_sha=a05ecefb2bfdbd12b0e049f43f581e9b008bb620；checked_at=2026-10-24T02:38:54.335914+08:00；补读downside13池结案，self/investor/dispatch范围不变。另一批13池报告归原owner，本方只引用，不改写/代完成。
+- 当前33官方公告、32附件绑定（31新+1他方原件复用），79次有结果HTTP均200，新原件18026860B外盘逐SHA读回。索引SHA9a492b67999694baa8d3257432817cbeca9aa75e901f629936bd8683ad7d076a已另存不可变副本。已对2021-06、2021-12及2022-12核实具体历史成员冲突，2018/2022-06有正面对照；独审强调只拒绝错误snapshot与未经核准整池，不推论所有历史或旧效果失效。
+- 新增准确展示写范围：主web/public/research/factor-curve-library-20261022/catalog.json仅csi300/csi500的statusLabel/reason（继续unavailable，不改dataset/收益/其他池）；system运行树仍由investor唯一写者窄同步。日期化新报告/本键登记/本行INDEX及原progress沿前段。大明细本方运行中产物改外盘准确保存+小位置记录，不动冻结旧件。
+- 余下：附件完整表对首个生效后月末的对照完成后汇总、主控关键独核、报告正文/API/实际Web及归置验收。当前尚未宣称整池或所有月份合格，0新因子效果/生产/交易。
+
+---
+
 # 官方多年度成员事件增量 2026-10-24T02:29:17.588105+08:00
 
 - 沿同task/owner；active；checked_coordination_sha=36f90b2a53919e17e69c9dfe5365cde0bfc9caa1；checked_at=2026-10-24T02:29:17.588105+08:00；再fetch无他方新差异，已读范围沿本轮。官方14497完整15/50表与Sol独审确证：2022-12/2023-01/02两池名单全留调出、全缺调入，3月增删与公告完全相等。原报告未改，不将vendor metadata当公告时点。
