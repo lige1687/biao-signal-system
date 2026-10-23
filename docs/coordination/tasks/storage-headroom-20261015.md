@@ -2,7 +2,7 @@
 
 - task-id: storage-headroom-20261015
 - owner: 01a13f90-f5ca-7111-ac4f-4afd655b71f3 / root
-- status: active（2026-10-23 18:29容量再次不足，限定追加新闲置对象）
+- status: blocked（18:40追加归档完成，但实际余量仍低5GiB；无获准的大候选）
 - updated_at: 2026-10-15T20:39:17.224401+08:00
 - checked_coordination_sha: 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3
 - read_task_ids: mac-local-storage-cleanup, daily-trading-system-audit, research-utility-review-20261012, research-dispatch-controller, investor-workspace-simplification-20261012
@@ -119,3 +119,12 @@
 - 追加核验前保留一次停止：round2两源TAR358973440B已逐文件读回，但WorkBuddy根目录同盘改名后com.apple.provenance从AQIArPMNCSfeasU=变为AQIAsVJeL5dBC54=，0新文件删除。主控完整重核全部392条目，唯一差异正是根的系统来源标记，其内容/类型/权限/大小/mtime/inode/链接及所有子项扩展属性全同；新标记与当前npm根一致，属于本次改名的来源标注，不是日志内容变化。
 - 恢复执行只允许这一精确根com.apple.provenance变更，原值与新值同时写恢复清单；其他字段/任何子项差异仍停止，不忽略内容或权限。外盘整包SHA再核且源全内容再核后，按原准确清单移除holding。WorkBuddy原sandbox路径保留新空普通目录供将来诊断日志，若已有新内容不覆盖；npm按原缓存方式处理。不触及会话/traces/运行包，也不关闭应用。失败和纠正记录均保留。
 - checked_coordination_sha d0dffdb3d2fd2b0a291b79f4fc1a871d9e082176；checked_at 2026-10-23T18:35:59.044282+08:00；本轮最新scope未扩，两源仍root唯一写者。
+
+## 18:29续检已完成可迁移部分，实际容量仍受阻 2026-10-23T18:41:14.661611+08:00
+- checked_coordination_sha bc55a2bd031b43d453487dc2c23b7fdb1d0a6eb0；已fetch/read COORDINATION/self及research-utility-review四历史池新范围；本轮mac/dispatch与其他相关owner已读记录复用，最新fetch无新增他人变动。唯一root写本记录/自有progress，未接管研究或扩大权限。
+- 新增准确两源已完成：旧WorkBuddy logs/sandbox 230700103B、18:21后新生成npm下载缓存127501621B，共358201724B/462条目；不重做原6.04GB。TAR358973440B、SHA3bce65f8314329dc8bb301857da4be605a59f15ff8598cbb7e5f326a0912ed1d，外盘原归档根/round2-idle-caches-1829/，完整逐文件内容/类型/模式/链接/无占用通过。WorkBuddy原路径新目录inode103108558保留供新日志，不触及traces/会话/项目/运行包。所有holding已移除，npm旧副本不在。
+- 改名后唯一根com.apple.provenance变化完整独核，原新值同时留清单，其他字段/子项仍严检；原停止0文件删除。接续首次设备预检误引用已改名路径，删除前停止，改用现存本机目录比较设备，源holding inode/device仍核；两失败与恢复记录保留，最终归档状态COMPLETED，不涂掉失败。
+- 容量目标未达：18:29:40内5232480256B；精确移除窗口4240748544→4235575296B，净变化-5173248B，未观测正释放。2026-10-23T18:40:16.897654+08:00最终3457372160B（3.220GiB），原plan_output（预计外2GiB/本机4MiB，5GiB/10GiB保留）实际仍拒绝，0结果目录/0科研启动。外盘UUID/4资源正常，18:37可用479718670336B。
+- 18:30:52 Time Machine本地快照存在，swap分配27GiB；各自影响与其他写入未隔离，不用源文件大小冒称物理释放。不改快照/swap/阈值、不停应用或服务，原DB/环境/会话/工作树/冻结资料继续保留。字体缓存有Python目录句柄，Corepack是运行包，TRAE镜像仍在运行；其余已知小缓存不足弥补当前约1.9GB缺口，不反复搬小项凑量。
+- 当前检查范围内没有可安全再迁移并恢复5GiB的大候选，状态blocked。恢复条件：其他写入/内存占用自然释放后重新预检，或用户明确给出另一个可退休对象；本消息不要求/不授权关闭应用、移动活动DB或会话。不自动恢复研究、不创建监控、不发其他聊天消息，原负责人读取本状态即可。
+- 成果codex/storage-headroom-20261015@1b903008945dda50a0ee91ea19c92cfed4730193，唯一progress已远端SHA及内容读回一致；本机私有data/cache/storage-headroom-20261023/round2/与外盘恢复说明可定位。归置通过；旧成功项和恢复副本保留，无待删单元/后台清理。
