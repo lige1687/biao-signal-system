@@ -87,3 +87,5 @@
 - 用户桌面TRAE_CN-darwin-arm64.dmg虽480MB，但当前已挂载且TRAE正从/Volumes/TRAE CN运行，明确保留；其他普通候选不足0.2GB且交付用途未知，不盲移。Yuque约1GB含个人加密DB/备份，不动；项目worktree约26GB、当前DB约6.5GB及所有raw/环境/会话均保留。
 - OpenClaw gateway.log4029550042B及gateway.err.log1350838472B为当前日志，后者持续增长；当前只读盘点，已向人类请求完整归档/保留后续日志的准确许可，回复前不改这两个源、不停服务、不改配置、不截断或删日志。
 - Luna/low只读盘点已返回，write_paths=[]/network=false；root独立排除了被挂载的TRAE候选。实际委派合同v3，v1检查器绝对路径拒绝、v2因Downloads子串误判网络拒绝，均0派发；v3仅改路径表达与误判措辞，权限未扩大，检查ready后才派发，保留3合同。实际token费用未知。
+
+- 准确白名单登记首次非快进拒绝；已fetch/read新增strategy-account-bridge-20261020，仅对比成交/研究边界，无缓存冲突，正常merge保留其他记录。checked_coordination_sha f08b40224cdd53dd99cc13081b07dfcb1bddd844；checked_at 2026-10-23T17:07:43.464544+08:00。未强推。
