@@ -1,3 +1,14 @@
+# 继续拓展：反转的成交活跃范围与简单防御对手 2026-10-23T18:59:37.442471+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=63f2ec936337c58561eac743b0e75255667f485f；checked_at=2026-10-23T18:59:37.442471+08:00；已读COORDINATION/self、research-utility-review-20261012、strategy-account-bridge-20261020、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、lowfreq-strategy-discovery-20261019、research-dispatch-controller。用户继续拓展策略收益/有金融含义因子，并提醒另一AI负责universe。四指数历史成员采集由utility负责，French组合/机构申赎已交付复用，不重复其数据或效果。
+- 新问题：原固定300A股完整机会按事前成交活跃程度分3档，月度短期反转的收益/风险是否随档改变，是否超过同档低波动简单对手。成交金额不是市值/散户占比，不能命名CSI1000或大盘池。临时供需压力与流动性供给为待证假说，坏消息/价差/换手成本为竞争解释。旧家族负结果保持，不调参追正。
+- 基线codex/personal-lowfreq-system-audit-20261018@1479482825228521b5e5cafab829df5f19677a1a。新增docs/experiments/reversal-activity-increment-2026-10-23.md及同名raw小合同/脚本/来源/验收/摘要；必要新研究适配src/lei_signal/research/reversal_activity.py及tests/unit/test_reversal_activity.py；定义仅本题新卡/来源/profile，旧对象不动；registry本键/INDEX本行/自身progress/原okr-8830a1f1ec4f仅note。不新建UI/改正式catalog，用报告静态图及数据交付。
+- 实际4来源动作（2查询+2open含NBER403），无行情下载；新有界问题1核心+3必要跟进/6来源，不重置旧预算。Luna只读盘点已回无重复；Astra只读审时点/对手，主控冻结后Luna执行、主控独核。复用36019完整input与300原件，原筛选outcomes不替全体；旧输入/结果只读。
+- 开工storage18:57内39.1GB/外479.7GB，UUID核同；预计外盘250MiB/本机1MiB，执行前plan/recheck。候选/费用/执行/未来未知方式在统计前冻结。旧engine当日H/L/全天量限制为后验约束，不能直接复用称真实前向，先审合格路径。
+- root唯一写报告/合同/登记/定义/进度，实施agent独写新research模块/测试/runner；无他人同写。验收时间隔离/SHA/全部机会/缺失/同人数对手/费用风险机会代价/分期不确定性与可见报告。全部已见历史，不冒充新验证/真实个人净收益；无生产/交易/新权限/删除/后台。
+
+---
+
 # SPY固定月度趋势有界检验与曲线已交付 2026-10-23T18:28:05.950518+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（本轮SPY固定规则历史情景），scope_released true仅本次展示/报告交付；原冻结输入及结果仍保护。checked_coordination_sha=d702c59d870d4c300d81ef65fd8693c7a5de9592；checked_at=2026-10-23T18:28:05.950518+08:00；已读COORDINATION/self、research-utility-review-20261012、strategy-account-bridge-20261020、investor-workspace-simplification-20261012、storage-headroom-20261015、research-dispatch-controller；最新无范围变化，四指数资料/French六格/正式UI各owner，不重跑。
