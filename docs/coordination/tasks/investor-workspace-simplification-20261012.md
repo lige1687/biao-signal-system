@@ -1,3 +1,11 @@
+# 官方名单报告接入验收 2026-10-24T02:54:35.980110+08:00
+
+- 原task/owner；本轮completed；scope_released true；checked_coordination_sha=aabbc83103ffc6edbaae576e88ae0f7dbdc6bfee；checked_at=2026-10-24T02:54:35.980110+08:00；已读COORDINATION/self/research-utility最新、dispatch沿原；无同写。5文件源/运行树逐字一致，registry仅新增本键、INDEX仅本行，catalog严格比较只有csi300/csi500标签与reason变化。
+- HTTP200 application/json完整读回：报告SHA42dbe786c4a33be9e8ad4af25cf3a4afc422e6625b3e6284f98f2cb2419e95f7；catalog SHA7f7c30aaae1027e6ca3af2f4609d6e00aecf12dd24cb924f38e9beaab1f37ae4。浏览器标题/53项/8冲突/中国能建可见，四池disabled，两CN标签历史名单已发现错配。归置通过。
+- 回执docs/archive/handoffs-plans/investor-workspace-simplification-20261012/cn-membership-intake-20261024.json及同目录cn-membership-report-20261024.jpg主/运行树镜像。相对证据链接仍未验可服务；原组件不改。本轮无服务重启/计算/旧曲线/数据库/定时/交易/外盘复制；仅本地未提交，无远端代码交付声明。
+
+---
+
 # 官方名单报告窄接入 2026-10-24T02:53:33.752096+08:00
 
 - 原task/owner；active；checked_coordination_sha=2d53e16bdb06c91e476d01b1b85f5d04081484d7；checked_at=2026-10-24T02:53:33.752096+08:00；已读COORDINATION/self/研究utility最新及dispatch沿原，唯一源owner与5188镜像写者分离无同写。
