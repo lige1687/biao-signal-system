@@ -1,3 +1,14 @@
+# 常见A股美股Universe实际补采 2026-10-24T01:48:44.692640+08:00
+
+- stable task-id/owner沿原；status active；scope_released false。checked_coordination_sha 084bdb564e77284e7c9200aec7e9696a350f428a；checked_at 2026-10-24T01:48:44.692640+08:00；已读COORDINATION、self、utility、dispatch及上轮personal/strategy/mechanism/investor范围，当前四池由utility原owner持有。用户2026-10-24明确“还没拉完所有的universe吗？常见的a美的，拉哇”，授权继续实际常见池取数；这是新的数据采集增量，不重置旧2核心实验账。
+- 常见范围：A股上证50/沪深300/中证500/中证1000/中证2000/创业板指/科创50；美股SP500/NDX/DJIA/Russell1000/2000/3000。四既有池原owner已收到续采消息，保持其raw和BaoStock独占会话；本题新增其余9池资料并只读汇总全13池。当前成员、历史生效成员、母指数价格/含分红、ETF代理分开，不冒充完整历史。
+- 唯一写者：root新docs/experiments/common-universe-acquisition-2026-10-24.md、同名raw/的contract/storage-plan/state/controller*及汇总、registry本键/INDEX本行、自己原progress；Sol policy_executor独占新raw/cn/及外盘cn/（5新增A池）；Sol universe_sources独占新raw/us/及外盘us/（DJIA及3Russell）；Astra method_review只读来源/身份审核。旧报告/冻结/共享cache/catalog/定义/生产只读。不得重登BaoStock影响原采集。
+- 完成目标：实际保存可免费公开取得的名单、调整/生效证据与母指数日线，准确记录每池资料层级、日期、行数、缺口、来源时间及SHA；复用既有数值，明确历史缺口，不只留下载建议。历史成分补齐后逐股价格优先复用原owner；需新增批量价格以去重名单另留清单，不抢共享写权。
+- 数据请求按本轮公开有限指数/资料清单逐件计数；一次成功不重下，失败保留且同操作初次+最多一次有理由修复，反机器人/收费/权限要求不绕过。公开数据0付费、不注册新服务，0新收益实验/调参。此前5来源/2核心账保持。新增普通结果和日志预计3GiB、内盘小记录4MiB，plan_output核盘后唯一目录；内盘已核20.59GB/外盘478.45GB。
+- 服务研究输入层，策略源保持原SHA，不变规则。调用research-closure、lei-lowfreq-research、lei-data-availability及委派技能；基线主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加本地既有成果，源码不自动提交/推送。等待真实采集回执并独核，不把dispatch当完成，不开自动化、不保证进程退出后接续。
+
+---
+
 # 两项ETF研究与策略证据身份交付 2026-10-23T19:22:15.598859+08:00
 
 - task-id downside-sensitivity-universe-20261023；owner 01a1680e-6717-7ce2-9ecb-372a228c1118/root；status completed（仅两项有限ETF问题与六类策略证据审查）；scope_released false（冻结证据保护）。checked_coordination_sha bc961a0ad78b63bc16fd36a5d364a3b889be6dca；checked_at 2026-10-23T19:22:15.598859+08:00。本轮已读COORDINATION/self、dispatch、utility、classic、technical、lowfreq、personal、strategy-account；交付追加market-style/investor/mechanism差异。冲突决定：四历史池、原A、活跃分层反转、机构流量及工作台均原owner，本题无同写/重复下载。
