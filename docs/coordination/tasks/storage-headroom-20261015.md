@@ -115,3 +115,7 @@
 - 恢复目录：已核外盘个人资料归档/LeiSignal-内盘整理-20261023-01a13f90/round2-idle-caches-1829/。私有小回执在data/cache/storage-headroom-20261023/round2/；本机文档仅自身原progress，唯一root执行。
 - 明确保留字体缓存：lsof查到Python37702读目录句柄，不以仅目录占用为理由跳过；pip前轮元数据变化原位保留；Corepack实际是pnpm/yarn运行包，非普通下载缓存，保留；TRAE镜像仍属挂载环境，所有活动源与原新日志保留。无关闭应用/服务、配置修改、快照/swap操作。
 - 目标为真实plan_output恢复而非凑清理量，若核验失败源保留并如实给边界；不保证其他写入者之后不消耗余量。
+
+- 追加核验前保留一次停止：round2两源TAR358973440B已逐文件读回，但WorkBuddy根目录同盘改名后com.apple.provenance从AQIArPMNCSfeasU=变为AQIAsVJeL5dBC54=，0新文件删除。主控完整重核全部392条目，唯一差异正是根的系统来源标记，其内容/类型/权限/大小/mtime/inode/链接及所有子项扩展属性全同；新标记与当前npm根一致，属于本次改名的来源标注，不是日志内容变化。
+- 恢复执行只允许这一精确根com.apple.provenance变更，原值与新值同时写恢复清单；其他字段/任何子项差异仍停止，不忽略内容或权限。外盘整包SHA再核且源全内容再核后，按原准确清单移除holding。WorkBuddy原sandbox路径保留新空普通目录供将来诊断日志，若已有新内容不覆盖；npm按原缓存方式处理。不触及会话/traces/运行包，也不关闭应用。失败和纠正记录均保留。
+- checked_coordination_sha d0dffdb3d2fd2b0a291b79f4fc1a871d9e082176；checked_at 2026-10-23T18:35:59.044282+08:00；本轮最新scope未扩，两源仍root唯一写者。
