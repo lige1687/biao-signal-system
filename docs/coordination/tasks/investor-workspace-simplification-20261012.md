@@ -1,3 +1,10 @@
+# 报告链接修正接入完成 2026-10-24T02:55:57.785913+08:00
+
+- 原task/owner；本轮completed；scope_released true；checked_coordination_sha=e42dbf2efb70143339badcb2cf65f0768f7eb9a9；checked_at=2026-10-24T02:55:57.785913+08:00；已读范围同本轮，无新同写。源/运行/API正文SHA29b3168a11571a437b8f7146d80e54bd762a4cd79d16edc3a52aa3cf7d552b06，HTTP200；registry仅本键report_sha256变化。catalog仍7f7c30aaae1027e6ca3af2f4609d6e00aecf12dd24cb924f38e9beaab1f37ae4。
+- 浏览器实际2个跨报告href为/library?report，3个raw改文件文本；数值与此前disabled验收复用不重跑。更新原cn-membership-intake-20261024.json中的link_correction，旧检查保留；无组件/研究/定时/服务变更，源码仍本机未提交。
+
+---
+
 # 官方名单报告链接修正窄同步 2026-10-24T02:55:29.661705+08:00
 
 - 原task/owner；active；checked_coordination_sha=c45df8ac24b38722e61fc2b86a3c164f0d7686d9；checked_at=2026-10-24T02:55:29.661705+08:00；已读self/utility最新，COORDINATION/dispatch沿本轮，无同写。只同步本报告29b3168a及registry本键report_sha256，差异为2处跨报告URL及3处raw文本，数值结论不变；catalog保持7f7c30aa。验收实际源/运行/API全文与页面链接，不重跑研究或已通过数值检查。
