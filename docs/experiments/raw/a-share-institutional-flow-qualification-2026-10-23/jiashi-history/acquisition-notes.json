@@ -1,0 +1,28 @@
+{
+  "scope": "070002 official 2019-2025 H1/FY report acquisition and content qualification; no returns",
+  "acquisition_attempts": [
+    {
+      "period": "2020H1",
+      "initial_outcome": "requests.exceptions.ChunkedEncodingError: Response ended prematurely",
+      "resolution": "A single subsequent request to the official attachment endpoint returned a complete PDF; PDF signature and SHA-256 were checked."
+    }
+  ],
+  "initial_parser_failures": [
+    {
+      "periods": ["2019H1", "2020H1"],
+      "cause": "PDF cover split 半年度报告 or 中期报告 across text lines; first strict string check failed.",
+      "resolution": "Allow whitespace between title terms and confirm the cover sent date against the official announcement date."
+    },
+    {
+      "periods": ["2023H1", "2023FY", "2024H1", "2025H1"],
+      "cause": "PDF table split 股票代码 across text lines; first strict header check failed.",
+      "resolution": "Anchor the section by 股票代 and separately require complete rank sequence and holdings sum equal the disclosed stock-asset amount."
+    },
+    {
+      "periods": ["all"],
+      "cause": "The first page locator could point at a table-of-contents mention or another occurrence of a balance amount.",
+      "resolution": "Bind page numbers to the exact body-text match offset; read-back confirmed every reported heading, first holding row, share-flow, balance-sheet and transaction page."
+    }
+  ],
+  "final_outcome": "14 of 14 reports qualified after the above corrections; no missing report remains."
+}

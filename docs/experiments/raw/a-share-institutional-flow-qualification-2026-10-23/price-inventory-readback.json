@@ -1,0 +1,26 @@
+{
+  "verified_by": "Sol read-only current cache and prior source manifests",
+  "path": "/Users/yongbiaoli/.lei_signal_lab/cache/a_share_klines_full.parquet",
+  "sha256": "5ad045c518d0bb4394d8c8cb946d207ad9b5b1454e5a776b1a3766c62b475b04",
+  "bytes": 49432584,
+  "rows": 8714,
+  "stock_columns": 5211,
+  "range": [
+    "1990-12-19",
+    "2026-08-27"
+  ],
+  "source": "Sina via AkShare qfq reconstructed close",
+  "FY39_endpoint_coverage": {
+    "start": "2025-03-31",
+    "end": "2025-09-30",
+    "positive_both": 39
+  },
+  "limitation": [
+    "original adjustment factors and per-stock retrieval timestamp absent",
+    "trading status and delisting terminal value absent",
+    "another Tencent qfq cache overlaps 9 FY39; same-day price ratio not constant",
+    "matrix column coverage not historical security population qualification"
+  ],
+  "no_effects_computed": true,
+  "source_manifest": "docs/experiments/raw/stock-large-exploration-qualification-2026-10-07/source-manifest.json"
+}

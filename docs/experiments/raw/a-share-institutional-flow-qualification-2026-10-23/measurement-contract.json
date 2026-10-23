@@ -1,0 +1,25 @@
+{
+  "recorded_at": "2026-10-23T19:12:34.373114+08:00",
+  "question": "Can two fund managers and one adjacent reporting interval separate stock redemption exposure from manager ownership, and what quantity comparison is observable?",
+  "mode": "data_qualification_and_descriptive_mechanism",
+  "funds": [
+    "070002",
+    "000001"
+  ],
+  "period_start": "2024-06-30",
+  "period_end": "2024-12-31",
+  "inputs": "complete original semiannual and annual fund reports; first public announcement dates; existing price source metadata only",
+  "flow_definition": "(H2 redeemed units - H2 subscribed units) / beginning H2 units; H2 gross flows = FY gross - H1 gross; cannot label net cash or forced selling",
+  "pressure_definition": "X_i = sum(begin_holdings_value_fi * max(net_unit_redemption_rate_f,0))/sum(begin_holdings_value_fi)",
+  "simple_opponent": "fund ownership proportions at interval start; with two funds one interval pressure is exactly affine in ownership fraction",
+  "core": "reconcile all original holding totals and unit bridges; compute initial union/intersection and end/entry/exit; algebraic identifiability check, not return test",
+  "optional_comparison": "for securities present at all four fund-date observations, log((end_shares_A/start_shares_A)/(end_shares_B/start_shares_B)); common proportional mandatory share changes cancel; differential corporate events and intentions remain unqualified",
+  "future_returns_read": false,
+  "market_effect_runs": 0,
+  "fit_runs": 0,
+  "threshold_search": 0,
+  "scope_limit": "two selected existing products, no generalization to all funds or ETF/account effectiveness",
+  "stop_condition": "this one-interval signal is mathematically redundant with same-date ownership, so no IC or return fitting is warranted; finish qualification and observable mechanism comparison",
+  "reopen_condition": "same historical funds over varying flow dates with both flow directions and qualified lagged holdings, cash buffer and corporate-event identity; or independent contemporaneous forced-sale evidence; explain incremental identifying information before expansion",
+  "new_entry": "external fund report qualification outside native technical feature runner; no claim of native workflow acceptance"
+}

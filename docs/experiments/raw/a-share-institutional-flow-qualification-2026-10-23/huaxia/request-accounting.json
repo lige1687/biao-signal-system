@@ -1,0 +1,27 @@
+{
+  "source_requests_this_continuation": {
+    "official_pdf_full_get": 2,
+    "official_announcement_list_post": 4,
+    "http_failures": 0,
+    "full_pdf_downloaded": 2,
+    "historical_pdf_downloaded": 0
+  },
+  "prior_readonly_probe_in_same_delegated_work": {
+    "official_small_http_get_post_head": 10,
+    "http_failures": 0,
+    "web_search_batches": 8,
+    "web_search_queries": 21,
+    "web_pdf_read_failures": [
+      "official application/octet-stream rejected by web parser",
+      "annual mirrored PDF timed out",
+      "semiannual CNINFO mirrored PDF timed out"
+    ]
+  },
+  "parser_attempts": {
+    "failed": 1,
+    "failure": "first parser treated the asset row's percentage as a second currency amount; narrowed asset extraction to its first number",
+    "successful_after_fix": 1,
+    "failed_attempt_did_not_write_any_csv_or_fields": true
+  },
+  "note": "Only the two official PDF full GET records have exact request times and SHA-256 in source-request-ledger.json. Earlier read-only probes and list queries were counted from their command output; exact times were not captured."
+}

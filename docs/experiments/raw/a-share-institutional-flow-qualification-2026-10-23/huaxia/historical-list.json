@@ -1,0 +1,29 @@
+{
+  "method": "ChinaAMC product announcement POST search by fundcode and title; list entries only, no historical PDFs downloaded",
+  "endpoint": "https://www.chinaamc.com/product/publishGgList.do",
+  "fund_code": "000001",
+  "fund_name": "华夏成长证券投资基金",
+  "queries": [
+    {"title": "年度报告", "begin_date": "2019-01-01", "end_date": "2025-12-31", "http_status": 200, "result_count": 6},
+    {"title": "中期报告", "begin_date": "2019-01-01", "end_date": "2025-12-31", "http_status": 200, "result_count": 6},
+    {"title": "2019年半年度报告", "http_status": 200, "result_count": 1},
+    {"title": "2025年年度报告", "http_status": 200, "result_count": 1}
+  ],
+  "reports": [
+    {"year": 2019, "type": "H1", "announcement_date": "2019-08-29", "page": "https://www.chinaamc.com/c/2019-08-29/537152.shtml", "title_note": "半年度报告及摘要; full PDF not checked"},
+    {"year": 2019, "type": "FY", "announcement_date": "2020-04-09", "page": "https://www.chinaamc.com/c/2020-04-09/537144.shtml"},
+    {"year": 2020, "type": "H1", "announcement_date": "2020-08-29", "page": "https://www.chinaamc.com/c/2020-08-29/537141.shtml"},
+    {"year": 2020, "type": "FY", "announcement_date": "2021-03-30", "page": "https://www.chinaamc.com/c/2021-03-30/537129.shtml"},
+    {"year": 2021, "type": "H1", "announcement_date": "2021-08-30", "page": "https://www.chinaamc.com/c/2021-08-30/537124.shtml"},
+    {"year": 2021, "type": "FY", "announcement_date": "2022-03-30", "page": "https://www.chinaamc.com/c/2022-03-30/537115.shtml"},
+    {"year": 2022, "type": "H1", "announcement_date": "2022-08-30", "page": "https://www.chinaamc.com/c/2022-08-30/537106.shtml"},
+    {"year": 2022, "type": "FY", "announcement_date": "2023-03-30", "page": "https://www.chinaamc.com/c/2023-03-30/682066.shtml"},
+    {"year": 2023, "type": "H1", "announcement_date": "2023-08-30", "page": "https://www.chinaamc.com/c/2023-08-30/682064.shtml"},
+    {"year": 2023, "type": "FY", "announcement_date": "2024-03-28", "page": "https://www.chinaamc.com/c/2024-03-28/682063.shtml"},
+    {"year": 2024, "type": "H1", "announcement_date": "2024-08-30", "page": "https://www.chinaamc.com/c/2024-08-30/682062.shtml", "full_pdf_qualified": true},
+    {"year": 2024, "type": "FY", "announcement_date": "2025-03-31", "page": "https://www.chinaamc.com/c/2025-03-31/10000442391.shtml", "full_pdf_qualified": true},
+    {"year": 2025, "type": "H1", "announcement_date": "2025-08-30", "page": "https://www.chinaamc.com/c/2025-08-30/10000462905.shtml"},
+    {"year": 2025, "type": "FY", "announcement_date": "2026-03-31", "page": "https://www.chinaamc.com/c/2026-03-31/930479.shtml"}
+  ],
+  "coverage_verdict": "14 of 14 year and half-year report announcement entries found; only 2024 H1 and FY original PDFs content-qualified"
+}

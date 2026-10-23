@@ -1,0 +1,15 @@
+[
+  {
+    "at": "2026-10-23T19:29:27.487446+08:00",
+    "stage": "price endpoint availability before returns",
+    "error": "IndexError on final period target beyond available verified calendar",
+    "files_written_before_failure": false,
+    "fix": "Preserve requested exit target; actual trading exit unknown when calendar lacks coverage, do not invent a day or drop the period"
+  },
+  {
+    "at": "2026-10-23T19:29:39.285495+08:00",
+    "stage": "price endpoint availability before returns",
+    "error": "Pandas restored parquet date column as existing index; redundant set_index rejected",
+    "fix": "Use existing date index; exact date name assertion; no outcome or output written"
+  }
+]

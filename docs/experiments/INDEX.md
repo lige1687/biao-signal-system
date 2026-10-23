@@ -50,6 +50,8 @@
 
 ## 1. 任务编号总账（任务书 → 执行归档）
 
+- 2026-10-23：[A股机构申赎完整报告与半年价格检验](a-share-institutional-flow-qualification-2026-10-23.md)：28份原件、10共同期；条件调整IC0.026，较固定华夏高0.40个百分点但依赖个别时期，暂停该收益增强版本。
+
 - INSTITUTIONAL-FLOW-20261023：[基金赎回信息的美股收益与IC](institutional-flow-return-study-2026-10-23.md)：26季原始IC近零，同17季加入已有信息后高组回报少0.317个百分点；A股补相邻完整报告，效果未评价。
 
 - 2026-10-20：[机构持仓与散户情绪的中美反向因子设计](institutional-crowding-retail-contrarian-design-2026-10-20.md)：分别定义拥挤与预期、核公开时点、复用旧负结果；完成设计，未新增有效性回测。

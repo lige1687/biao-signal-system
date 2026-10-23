@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-23T19:37:30.674589+08:00",
+  "question": "Do reported net redemptions after public release help choose between the same two managers historical holdings more than fixed fund identity?",
+  "financial_hypothesis": "Higher previous redemption pressure may leave temporary selling effects which subsequently recover; delayed publication or persistent selling can remove or reverse this association",
+  "main_conditional_definition": "redemption - subscription + dividend reinvestment, /beginning NAV, clipped at zero; Huaxia reinvestment inclusion is accounting-structure inference",
+  "required_definition_sensitivity": "raw report redemption - subscription, /beginning NAV, clipped at zero; report both, no winner selection",
+  "fixed_opponents": [
+    "lagged Jiashi share of covered holding value",
+    "negative of same Jiashi share; symmetric diagnostic, no ex-post choice"
+  ],
+  "universe": "all securities in union of both complete beginning-half holdings; final holdings not required; current missing symbols retained",
+  "calendar": "SZSE official saved calendar, after max actual report publication, six calendar months later first verified trading day; final calendar/source coverage absent is unknown",
+  "horizon_months": 6,
+  "group_fraction": 0.3,
+  "ties": "equal fractional membership at the boundary, never arbitrary code tie-break",
+  "formation_counts": 2689,
+  "periods_available_lag_holdings": 13,
+  "periods_price_source_covers": 12,
+  "periods_both_funds_no_redemption": 2,
+  "expected_paired_rankable_periods": 10,
+  "metrics": [
+    "Spearman rank correlation, not win rate",
+    "selected known-slice qfq price change minus same-pool known price change",
+    "paired differences vs both fixed identities",
+    "per-period results and unknown selection weights",
+    "leave-one-period-out paired mean, descriptive not confidence interval"
+  ],
+  "no_score_periods": "IC and selection unavailable; not cash or zero returns",
+  "unknown_future": "preserve formation and predetermined selection weights; no zero fill; known-slice means explicitly conditional",
+  "known_limits": [
+    "later reconstructed qfq, no total-return or personal fee claim",
+    "no securities trading-status or terminal-property qualification",
+    "possible adjacent horizon overlap; no independent significance claim",
+    "no full control for prices, industry, size or existing LEI strategy",
+    "two selected surviving funds, not historical fund market population"
+  ],
+  "effect_budget": "one fixed descriptive matrix, zero fits and no parameter search; both definitions predeclared necessary semantic check",
+  "public_source_gate": "28 original reports complete, full stocks and unit/NAV bridges; source schema qualification only",
+  "controls": "do not change LEI, definitions, production, trading, or sealed US study"
+}
