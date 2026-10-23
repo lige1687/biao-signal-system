@@ -1,3 +1,12 @@
+# 成交活跃分层已运行及窄图表交付范围 2026-10-23T19:25:20.805312+08:00
+
+- status active；checked_coordination_sha=732218c34abf07629457213575d48e88673f9a7f；checked_at=2026-10-23T19:25:20.805312+08:00；已读本轮原清单并补读downside19:22两项ETF完成、market-style19:15仅方案交付、mechanism19:18两基金历史资格、utility19:23四池续采仍未准入。首次写前断言因utility推进而停，读差异后继续。四历史池/小指数/机构/工作台各归原owner，本题只固定300活跃分层，无重复取数/同写。
+- 原核心1次在数据计算前因主控先建日志父目录与存储不存在性保护冲突而失败；原合同/路径/日志保留。必要修复1/3新plan及contract-v2/run-v2（仅合同文件名变化），先runner检查再写日志，退出0；真实效果仅1批48账户，规则参数与引擎不变。Luna执行/408项manifest读回，root独核48资金、128352日、256854笔、96差额及396分层通过，非实盘资格。
+- 窄增加静态资产范围 web/public/research/reversal-activity-increment-20261023/excess-curves.svg 和 absolute-curves.svg（两树同路径）；不建页面、不改UI源码/catalog。报告默认同档全体累计收益差，绝对图另列。准确报告/raw/registry本键/INDEX本行/自己progress、原goal note沿前范围。
+- 结果审核中；全部已见历史，300非指数，0/25基点费用假设，未知持仓/真实成交/母指数未齐披露。只必要核验及归档，不挑G3或改期限追正。
+
+---
+
 # 成交活跃分层反转方法冻结前核查 2026-10-23T19:12:13.482938+08:00
 
 - task-id/owner沿原；status active，scope_released false。checked_coordination_sha=d9fcea1de2458d447e3b173e58f54bfb2f5c7cf0；checked_at=2026-10-23T19:12:13.482938+08:00；已读本轮COORDINATION/self及research-utility-review-20261012、research-dispatch-controller、strategy-account-bridge-20261020、mechanism-rebalancing-review-20261020、investor-workspace-simplification-20261012、market-style-observation-20261020、downside-sensitivity-universe-20261023、lowfreq-strategy-discovery-20261019和storage。追加读432fef1后的5任务差异；下跌敏感/Amihud四ETF和小指数池、A股机构、总工作台保持原owner，本方只固定300股月度成交金额条件反转，无重复取数或同写。
