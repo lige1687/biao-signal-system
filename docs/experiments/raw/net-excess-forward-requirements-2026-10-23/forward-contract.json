@@ -1,7 +1,7 @@
 {
   "schema": "forward-regime-net-excess-design/1",
   "created_at": "2026-10-23T17:11:06.809361+08:00",
-  "status": "blocked_input_and_cost_qualification",
+  "status": "blocked_storage_and_input_cost_qualification",
   "allowed_real_run": false,
   "user_requirement": "net excess against corresponding benchmark with personal trading costs; strictly forward available information",
   "main_method": {
@@ -65,6 +65,7 @@
     "no_return_difference_compounding": true
   },
   "blockers": [
+    "latest route recheck refuses insufficient internal reserve; no source request issued",
     "French return groups lack individual executed turnover and personal fee profile",
     "no unique parent/passive benchmark bound to French group use",
     "existing SPY adjusted history is retrospective with no verified historical source versions/arrival times",
@@ -74,8 +75,8 @@
     "new_market_requests": 0,
     "effect_runs": 0,
     "source_requests": 7,
-    "preflight_attempt": 2
+    "preflight_attempt": 3
   },
   "scope": "design, actual input qualification and presentation only; no empirical performance claim, no production/trading",
-  "storage_current": "independent live preflight passed after earlier failure; no longer current blocker"
+  "storage_current": "17:20 independent plan passed; 17:32 route recheck failed 5GiB reserve before any network request"
 }
