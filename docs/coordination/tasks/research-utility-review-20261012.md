@@ -1,3 +1,14 @@
+# 四历史指数股票池资料补齐与外盘归档 2026-10-23T17:46:36.777815+08:00
+
+- task-id/owner沿原；status active；scope_released false。checked_coordination_sha=f1e67d2d73b8fdd3d7e7adcdd4609d90b0cd185c；checked_at=2026-10-23T17:46:36.777815+08:00；已读COORDINATION/self、investor-workspace、personal-lowfreq和dispatch最新；前轮strategy/mechanism无本题数据同写。用户本轮明确“其他universe数据也补齐，搞到外盘”。原两策略SHA仍一致，此次服务低频研究输入层，不改策略规则/已冻结结果，不重跑收益。
+- 本轮边界：沪深300/中证500/标普500/纳斯达克100历史成员候选、逐股日线/复权/停牌与退出缺口、对应基准索引；优先2015—2025形成日及必要2013起预热，已有资料直接复用，不用当前成员回填。ETF既有六只源在统一本轮来源清单复用，不伪称全ETF市场。获取不等于合格，改名/合并/日期语义/来源权利不清单列。
+- 准确新增docs/experiments/universe-data-completion-2026-10-23.md与同名raw（小脚本/合同/manifest摘要/失败/独核），自身progress和原momentum-three-universe/state仅加接续指针，registry本键/INDEX本行；必要catalog只更新资料状态，不直接解锁无效果dataset。UI继续原system owner单写，无他人工作树/活动DB/冻结路径迁移。
+- 分工拟Sol-CN单写raw/cn_*及其新外盘子目录；Sol-US单写raw/us_*及其新外盘子目录；root唯一写共有合同/成员原件/基准/总清单和报告，Astra只读关键资格复核后写独立review。每个agent先复用旧10/15、10/20、10/22清单再补缺；不复制整份旧实验。新大原件/下载/临时/日志走固定外盘唯一plan，live内6278651904B/外485847203840B并核UUID，具体启动仍重新预检。
+- 验收每池成员日期/计数/重复与身份异常、逐股覆盖/缺口/文件SHA/来源日期/退市保留、母指数价格或含分红身份、可定位外盘manifest及原件读回；四池分开结论，不靠下载成功冒称完整可回测。预算范围为用户要求的四池一次缺失数据补齐/必要来源核验，逐请求留账、限单对象一次重试，429即停该供应商，不购买/注册/提权；旧核心0、方法6、RankIC1不重置且不消耗为新效果。
+- 成果仍本机codex/factor-unit-research-20260915基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加本地改动；协调元数据先推并读回后实际写研究资料。新结果预计外盘总计2GiB、本机小文件4MiB，运行前plan按各独立来源分配；不迁移现有被冻结文件，不自动清理/交易/通知。
+
+---
+
 # 80条RankIC与默认超额收益有界交付 2026-10-23T17:38:06.501709+08:00
 
 - task-id/owner沿原；status completed（仅本轮80诊断、超额展示与持久规范），三市场新比较未完成；scope_released true仅上述交付，本任务冻结输入和研究资料不交他人改写。checked_coordination_sha=c8a26a80203379a1babe96fa49fbfb97a500a7f8；checked_at=2026-10-23T17:38:06.501709+08:00；已读COORDINATION/self、investor-workspace、storage、personal-lowfreq、strategy-account、mechanism最新段及本轮dispatch；最终新增系统17:37交付段已读，系统范围已释放，无同写冲突。首次push因系统新提交正常拒绝，审阅后普通合并，不强推。
