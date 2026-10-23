@@ -1,0 +1,11 @@
+# 下跌市场敏感度与新增小盘研究范围
+- task-id: downside-sensitivity-universe-20261023；owner: 01a1680e-6717-7ce2-9ecb-372a228c1118/root；status: active；scope_released: false。
+- checked_coordination_sha: 5f82d41f6250f535656b3e34213fcf7576bbfc0a；checked_at: 2026-10-23T18:59:06.337419+08:00；已读 COORDINATION、research-dispatch-controller、research-utility-review-20261012、classic-factor-research、technical-factor-sequence、lowfreq-strategy-discovery-20261019。
+- 用户授权：继续研究下行市场敏感度，universe补齐与另一任务并行，因子研究扩大；ETF/A股/美股/母指数分别确认，收益对母指数。不授权交易、生产、收费资料或改变原策略。
+- 冲突决定：research-utility owner继续沪深300/中证500/标普500/纳指100资料；本题只读复用。已向“因子实现+收益图展示4”发范围消息。本题新增中证1000/2000、Russell1000/2000/3000资料资格；先复用六ETF开展一个风险增量问题，不能用资料未合格冒充扩大成功。
+- 唯一写者 root，助手准确子范围后续在此补。主树分支 codex/factor-unit-research-20260915，基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，脏工作区其他修改不碰；自己的raw/docs仅本地，尚无推送成果。
+- 允许新路径 docs/experiments/raw/downside-sensitivity-universe-2026-10-23/、docs/experiments/downside-sensitivity-universe-2026-10-23.md、docs/ops/work-progress/downside-sensitivity-universe-20261023.md；registry仅本键、INDEX仅本行（收尾前重新核对其他写者）。共享代码、定义、UI/其他raw只读，若需adapter先另登记准确路径。
+- 标准 current-standards.json 现行索引；research-closure、lei-lowfreq-research、lei-gpt-zcode-orchestrator；策略源实际SHA在本题manifest留存。
+- 验收：每池历史名单/生效日期/退市/公司行动/母指数收益身份；已合格范围固定定义与简单对手、资料时间、性能及增量、依赖与不确定性、少亏少赚代价、独立核数、归档。没有历史成员的指数可读指数序列，但不称逐股证据。
+- 本题预算：新问题1核心+至多3必要跟进；6外部来源请求（失败计入），0付费；资料资格先限定公开入口及既有资产，不批量全市场下载。本地预计小记录2MiB，新外盘结果/资料100MiB，均plan_output核身份容量。此前两回合仅选题来源查询，不含新效果；旧研究预算不变。
+- 本轮已完成：旧报告与协调只读核查，发协作信息。正在做方法审阅和来源资格；新科学运行0/1，来源0/6。当前未验证因子有效；未确认阻塞。下一步登记子任务文件范围、保存资料/方法合同后执行合格范围。
