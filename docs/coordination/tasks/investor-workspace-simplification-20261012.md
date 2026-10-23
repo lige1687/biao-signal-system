@@ -1,3 +1,15 @@
+# 默认同池超额与新版80排序诊断交付 2026-10-23T17:37:37.174833+08:00
+
+- task-id/owner沿原；status completed（本轮显示转换及诊断接入）；scope_released true；checked_coordination_sha=4d351bbe5ed5a1e070e656f29b546d9c3dc642a8；checked_at=2026-10-23T17:37:37.174833+08:00。最终fetch新增personal当前资格/阻塞段和mechanism机构研究段已读，COORDINATION/self/research-utility17:22、storage/strategy-account沿本轮已读；无UI同写，不代管其他科研/清理。
+- 默认returnView=excess，同池共同基准且明示无唯一母指数；绝对模式可切换/键盘/URL保留。双方同一归一化起点，显示累计收益差百分点，保留两方绝对收益和零线；不连乘月差、不是回归alpha。日期/值缺失留断，双方同时缺月不跨接；起点月末未知或缺价说明null整段继承虚线。原账户回撤/风险/RankIC/Sharpe不从超额重算。四历史指数池保持disabled，不把环境沪深300冒充收益母指数。
+- 主/5188准确4代码和接口镜像，56相关检查通过；224真实选择的未舍入NAV差与原回撤一致；正常组涨20/基准15=5pp、缺锚点拒绝、null/缺月/未知传播均测。最终Vite/TS构建通过，原大包提示保留；最后仅caption细化后tsc再核exit0，归置通过。宽屏上半曲线分配适配首屏，窄屏resize重排；原G5/同池夏普固定左右顺序，数值不变。
+- 新80RankIC发布包new-assessment-rankic-20261023.json SHA0069959946ce5c681c12fc8f0e10bee9516fbed3ba16cde86b8fc2fd0db4c5f0，catalog SHA bc1ab0c91bde574579eae3ecf829e9f00c6258e90a85a3610a1c1ed442fa3133，只extension.assessment指向新版；冻结旧new-assessment0e3951保留，非RankIC字段/816Sharpe逐项一致。10公开JSON主/运行/HTTP完整SHA及application/json相同，研究大结果外盘仍原owner。系统无金融统计/账户/旧导出器重跑。
+- 真实页面：PPO绿色计费全段自身−80.77%/基准−44.43%/超额−36.34pp，late−50.04%/−22.22%/−27.82pp；低波绿色计费自身仍−13.80%但超额+30.64pp；PPO不计费−71.29%/−19.44%/−51.85pp。PPO全段RankIC−.083/108期/min30/覆盖98.99%，低波+.134；late−.103与相应夏普不串值。绝对模式前后G5风险行逐字相同；390页宽390、模式/费用实测，viewport已恢复，console error空。
+- 自身docs/archive/handoffs-plans/investor-workspace-simplification-20261012/factor-curves-excess-20261023.json SHA ab3e5676789f3bfd22e5f2a3b7592fd128559f78c6a152fd4d89ddee3f1e8cb7，desktop/mobile/readout三jpg为真实截图；原progress主/运行追加；持久标准仍研究owner的display-contract第8节，本方唯一技术接口说明已更新。goal okr-30b877e334bc追加实际验收note并读回review/7of7，用户视觉待验。
+- 限制：当前只能同池超额，真实母指数绑定/其他市场新效果仍未完成；80排序补诊断是已看历史，不当独立新验证或可采用策略。源码/小资料仅原codex分支本机未提交，只有协调元数据远端，不称跨设备交付。不改策略、交易、模型配置、定时、数据删除或服务；没有对其他聊天发消息。本轮范围释放，无本方后台写者。
+
+---
+
 # 新80排序诊断版本只读接入范围 2026-10-23T17:25:29.242352+08:00
 
 - task-id/owner沿原；active；checked_coordination_sha=3f99123c69a3f0ce8c4bd48036d43f5ad273ef8f；checked_at=2026-10-23T17:25:29.242352+08:00。已读research-utility17:22真实补算独核/发布及17:17恢复，storage/其他任务本轮新增无UI同写，唯一区域分工保持。延续用户补齐诊断授权，仍不在系统端重算金融统计。
