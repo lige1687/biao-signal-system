@@ -1,0 +1,175 @@
+{
+  "stage": "effects",
+  "effect_run_count": 1,
+  "design_sha256": "8b0fc999965a82477eb50d21337782eae3c26ac78efc384041ec271d8c1c9c41",
+  "events_sha256": "55ddf20348cb12ed68f340436fa0a5cf2c83db0372f941e8d157b2b0385d2ce3",
+  "formation_sha256": "5a39fe15a5b0bf20e04644bf8b0649e7c3244de3eb747bb81fc426160269f859",
+  "date_count": 26,
+  "model_summary": {
+    "raw_X": {
+      "ic_n": 26,
+      "ic_mean": 0.0021495403073512292,
+      "ic_median": -0.02431801455469186,
+      "ic_positive_fraction": 0.4230769230769231,
+      "upper_minus_whole_mean": 0.0024237572646538556,
+      "ic_block95": [
+        -0.053994323863918135,
+        0.05517194915600226
+      ],
+      "upper_minus_whole_block95": [
+        -0.012063217274850387,
+        0.01939272040679171
+      ]
+    },
+    "momentum_12_1": {
+      "ic_n": 26,
+      "ic_mean": 0.01725355288526919,
+      "ic_median": 0.026364540956750112,
+      "ic_positive_fraction": 0.5769230769230769,
+      "upper_minus_whole_mean": 0.008122646967251334,
+      "ic_block95": [
+        -0.05745070966954447,
+        0.08923367369966279
+      ],
+      "upper_minus_whole_block95": [
+        -0.00594301218369673,
+        0.0230874280258367
+      ]
+    },
+    "B": {
+      "ic_n": 17,
+      "ic_mean": 0.07352402887685505,
+      "ic_median": 0.0507795639209907,
+      "ic_positive_fraction": 0.5882352941176471,
+      "upper_minus_whole_mean": 0.0236640556338947,
+      "ic_block95": [
+        0.025296502529773095,
+        0.12889400923012426
+      ],
+      "upper_minus_whole_block95": [
+        0.008899281118443098,
+        0.044714786261960196
+      ]
+    },
+    "fitted_X": {
+      "ic_n": 17,
+      "ic_mean": -0.012040551861300302,
+      "ic_median": -0.026317776078180168,
+      "ic_positive_fraction": 0.4117647058823529,
+      "upper_minus_whole_mean": -0.005113898355584806,
+      "ic_block95": [
+        -0.08212105704447378,
+        0.05818168910038141
+      ],
+      "upper_minus_whole_block95": [
+        -0.0199434120376145,
+        0.008178643293349214
+      ]
+    },
+    "B_plus_X": {
+      "ic_n": 17,
+      "ic_mean": 0.06371328965426863,
+      "ic_median": 0.028456702004293507,
+      "ic_positive_fraction": 0.6470588235294118,
+      "upper_minus_whole_mean": 0.020491575215360852,
+      "ic_block95": [
+        0.02295768256386887,
+        0.11581048093451511
+      ],
+      "upper_minus_whole_block95": [
+        0.007472927022537795,
+        0.041841411414731126
+      ]
+    }
+  },
+  "paired_B_plus_X_minus_B": {
+    "ic": {
+      "n": 17,
+      "mean": -0.009810739222586419,
+      "block95": [
+        -0.05137171886439843,
+        0.02446811657278815
+      ]
+    },
+    "upper_observed_return": {
+      "n": 17,
+      "mean": -0.003172480418533848,
+      "block95": [
+        -0.011328820907484811,
+        0.004093375042375329
+      ]
+    }
+  },
+  "early_late_ic": {
+    "early_2020_2022": {
+      "B": 0.06807564217844624,
+      "B_plus_X": 0.09404395078585648,
+      "fitted_X": 0.11196049702119688,
+      "momentum_12_1": -0.05693847785463662,
+      "raw_X": 0.04978865181117704
+    },
+    "late_2023_2026": {
+      "B": 0.07469154031222835,
+      "B_plus_X": 0.05721386226892837,
+      "fitted_X": -0.03861220519326398,
+      "momentum_12_1": 0.08084672209090273,
+      "raw_X": -0.03868398383878518
+    }
+  },
+  "leave_one_quarter": {
+    "B": {
+      "leave_one_range": [
+        0.05203919990030641,
+        0.08564825732811757
+      ],
+      "most_influential_date": "2025-03-31"
+    },
+    "B_plus_X": {
+      "leave_one_range": [
+        0.049144960179339156,
+        0.08067953428356286
+      ],
+      "most_influential_date": "2025-06-30"
+    },
+    "fitted_X": {
+      "leave_one_range": [
+        -0.025419436165328553,
+        -0.0021109766080193958
+      ],
+      "most_influential_date": "2022-06-30"
+    },
+    "momentum_12_1": {
+      "leave_one_range": [
+        0.003488307773821164,
+        0.03542551959444606
+      ],
+      "most_influential_date": "2020-12-31"
+    },
+    "raw_X": {
+      "leave_one_range": [
+        -0.012633905782415878,
+        0.009100751163568592
+      ],
+      "most_influential_date": "2020-09-30"
+    }
+  },
+  "formation_count": 7163,
+  "no_fidelity_sensitivity": {
+    "formation_dates": 26,
+    "ic_mean": 0.03471539872687012,
+    "signal_known_rows": 1919
+  },
+  "target_status_counts": {
+    "observed_candidate": 5038,
+    "feature_unavailable": 2105,
+    "future_manual_action_unverified": 12,
+    "future_quote_missing_or_nontrade": 8
+  },
+  "outputs_sha256": {
+    "forecast-rows.parquet": "c978bb31f1714a8307ca933ce4be627a16911fd89763ac57275f66219ea58621",
+    "per-date-metrics.csv": "1ae7318fa4f300a31c159a01ec8a0b31cb473c2bb19426137ef3fd470dee2447",
+    "four-cells.csv": "6a5605203f1155fd5cfdf0741a3463ca24e8a81ed82c54e85374eee99b672243",
+    "sensitivity-no-fidelity.csv": "09e3fb91a153418315cc6a93bf87f2a2a3e09dc1c64739190812d611104ec43a",
+    "fit-ledger.csv": "2d3a6bf174b207c85a1dd1fe23313c1932f33358dccefcf4376d48d5f69e28bd"
+  }
+}

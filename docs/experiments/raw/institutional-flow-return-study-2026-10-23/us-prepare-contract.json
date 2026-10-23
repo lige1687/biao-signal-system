@@ -1,0 +1,49 @@
+{
+  "network_allowed": false,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "Missing access or permission",
+    "Method ambiguity to controller",
+    "No effect measurement before frozen design"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "read_only_paths": [
+    "docs/experiments/",
+    "data/",
+    "configs/",
+    "src/",
+    "external prior storage-plan paths after live storage verification",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/institutional-flow-return-study-20261023/institutional-flow-return-study-20261023-20261023T172814-06ef305d60d5/result/nport",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/institutional-flow-return-study-20261023/institutional-flow-return-study-20261023-20261023T172814-06ef305d60d5/result/prepared/four-fund-all-filings.parquet"
+  ],
+  "expected_outputs": [
+    "prepare.py and synthetic arithmetic/time/identitychecks",
+    "Qualification tables and compact prepared holdings/flows/identifier matches with exclusion reasons",
+    "Exact source hashes, selected amendment decisions and all missedrawcases"
+  ],
+  "actual_task_registration": {
+    "checked_coordination_sha": "29ba0bcba5f5e6bfc9eeaf3e222b15f2b073a5ee",
+    "registration_commit": "387a7997fec1ad5028829758cb6ead66e90dc723",
+    "time": "2026-10-23T17:27:30.562906+08:00",
+    "task": "mechanism-rebalancing-review-20261020"
+  },
+  "mission": "Build four-fund historical NPORT holdings and contemporaneous CUSIP ticker identity input preparation, no return effects",
+  "task_scope": [
+    "Implement preparation streaming downloaded NPORT partitions and reuse 2025 frozenfiles",
+    "Select first original and amendments as-of fixed calendarquarterend decisions, hold at precedingperiodstart; preserve provenance",
+    "Create historical sameCUSIP peer identifiers with filingdates and reportdates; qualify ticker/ISIN ambiguity; no target returns or IC"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-return-study-2026-10-23/us-prepare",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/institutional-flow-return-study-20261023/institutional-flow-return-study-20261023-20261023T172814-06ef305d60d5/result/us-prepared"
+  ],
+  "storage_plan": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-return-study-2026-10-23/storage-plan.json"
+}

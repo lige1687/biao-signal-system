@@ -1,0 +1,92 @@
+{
+  "schema": "institutional-holder-pressure-study/1",
+  "definition_id": "local:us-four-fund-holder-redemption-pressure@1.0.0",
+  "status": "design_fixed_before_effects_inputs_pending",
+  "fixed_at": "2026-10-23T17:58:08.157914+08:00",
+  "question": "Do publicly available fund redemptions improve next-quarter stock-return ranking beyond known price history and the four-fund ownership mix?",
+  "primary_signal": "X_i = sum_f(H_lag_fi * max(sum3months(redemption-sales)/lag_NAV,0))/sum_f(H_lag_fi)",
+  "meaning": "Holdings-weighted net redemption rate of the covered holders; not actual forced sales, marketwide ownership or liquidity-normalized pressure",
+  "choice_reason": "Matched raw price and volume split units not yet qualified; select documented minimum holder-pressure definition BEFORE effects. Liquidity alternative will not be run or selected by results.",
+  "funds": [
+    "S000000856",
+    "S000006037",
+    "S000007112",
+    "S000011202"
+  ],
+  "fund_scope": "Four previously selected surviving named funds, three manager organizations; not representative of all institutions. No outcome-based selection this round.",
+  "decisions": {
+    "start": "2020-03-31",
+    "end": "2026-06-30",
+    "frequency": "calendar quarter-end",
+    "flow_period": "exact previous calendar quarter",
+    "holding_period": "exact quarter before flow period",
+    "filings": "latest unique original/amendment with filing date strictly before decision, no same-day ambiguity",
+    "entry": "first US trading day after decision, close",
+    "exit": "first US trading day after next calendar quarter end, close"
+  },
+  "universe": "All eligible lag holdings meeting preparation screen, without requiring current-end holdings or future quotes. Historical identifiers from same-report-date filings as-of decision. Exact price ticker plus dot/dash formatting only; no merger/rename chaining.",
+  "outcome": "adj_close exit / adj_close entry - 1, source-reconstructed total return; incomplete/contaminated outcome unknown not zero",
+  "features_B": [
+    "12-minus-1-month total return using 252 and 21 trading-day lags",
+    "last21tradingday total return",
+    "63-tradingday daily total-return standard deviation",
+    "log covered lag holding USD",
+    "ownership fraction of Parnassus",
+    "ownership fraction of Contrafund",
+    "ownership fraction of Magellan"
+  ],
+  "feature_note": "Dodge fraction is reference; risk, dollar holdings and owner fractions are not industry or market-cap controls. Missing required past history makes predictor unavailable, independent of future outcome.",
+  "models": [
+    "raw_X_fixed_positive_rebound_hypothesis",
+    "momentum_12_1_fixed_positive",
+    "B",
+    "fitted_X",
+    "B_plus_X"
+  ],
+  "model_rule": {
+    "minimum_mature_training_dates": 8,
+    "training": "expanding prior dates with target exit strictly before current decision",
+    "features": "same-date population mean/std normalization using features only; constant column zero; preserve original alpha values before normalization",
+    "target": "subtract each training-date observed mean return; no target rescaling",
+    "weights": "each training date total weight 1",
+    "fit": "ridge with penalty 1 on all feature coefficients; no intercept after demeaning",
+    "selection": "no grid, no parameter tuning, no direction flip of raw X after effects",
+    "objective": "sum_date (1/n_date)*sum_i (demeaned_y - standardized_features @ beta)^2 + 1 * sum(beta^2); no further division by number of dates"
+  },
+  "groups": "Rank average ties on full feature-eligible formation set, using (rank-1)/(n-1): lower<=1/3, upper>=2/3. Middle otherwise. Constant score has no upper/lower group. Do not split ties by ticker.",
+  "metrics": [
+    "date-equal-weight Spearman IC, median, positive fraction",
+    "upper/lower/whole eligible observed quarterly total returns and upper-minus-whole",
+    "same-date/same-evaluation-row B+X-minus-B IC and upper-group observed return difference",
+    "four decision cells: selected both, B+X only, B only, neither, counts and observed returns",
+    "coverage counts and holding USD, unknown selected outcome fractions by date",
+    "descriptive per-date observed group median return and positive-return fraction; no separate efficacy claim"
+  ],
+  "minimum_per_date_IC": 10,
+  "costs": "Gross forward group results primary. Illustrative full round-trip deduction 0.20pp and0.50pp scenarios applied equally to every method, not factual cost bounds. Difference unchanged by equal deductions. No annualized account or executable net-return claim with incomplete outcomes.",
+  "uncertainty": {
+    "unit": "whole quarterly date crosssection",
+    "method": "circular moving-block resampling 4 adjacent quarters,2000 draws seed20261023,95% empirical range",
+    "applies": "IC means, incremental IC, upper-minus-whole and B+X-minus-B upper differences; paired dates",
+    "limits": "26 descriptive quarters at most and fewer trained-model quarters; stocks and overlapping managers are dependent; range is exploratory not causal significance"
+  },
+  "checks": [
+    "predefined early2020-2022 vs late2023-2026",
+    "leave-one-quarter-out range and most influential quarter",
+    "remove both Fidelity contributions from raw signal while keeping original formation pool; absent remaining covered holdings means unknown not zero; sensitivity only, no retune",
+    "known corporate-action/ticker ambiguity exclusions frozen before outcome use"
+  ],
+  "conclusion_bounds": [
+    "Historical exploration; time-correct does not mean a fresh unseen sample",
+    "No minimum economically meaningful effect predetermined; report magnitude and uncertainty, do not claim useful effect excluded solely because significance absent",
+    "ETF/A-share/marketwide/causal efficacy not established by US stock results"
+  ],
+  "strategy_sha256": {
+    "technical_system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "technical_implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  },
+  "prices_sha256": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563",
+  "no_effects_computed": true,
+  "price_ambiguity_policy": "Past price/identity ambiguity makes features unavailable as-of; future corporate-action/ticker/quote ambiguity marks target unknown and preserves formation membership. Never remove formation row using future problems.",
+  "feature_timing": "last common US trading close ON/BEFORE decision; never feature at next-day entry close"
+}

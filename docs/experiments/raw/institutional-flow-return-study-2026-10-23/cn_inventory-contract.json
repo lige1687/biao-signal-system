@@ -1,0 +1,44 @@
+{
+  "network_allowed": false,
+  "max_agents": 2,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "Missing access or permission",
+    "Method ambiguity to controller",
+    "No effect measurement before frozen design"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "read_only_paths": [
+    "docs/experiments/",
+    "data/",
+    "configs/",
+    "src/",
+    "external prior storage-plan paths after live storage verification"
+  ],
+  "expected_outputs": [
+    "Exact available input paths, versions, dates and missing fields",
+    "Feasible minimal data acquisition and return/IC measurement units; no effect fits yet",
+    "Evidence and limitations"
+  ],
+  "actual_task_registration": {
+    "checked_coordination_sha": "29ba0bcba5f5e6bfc9eeaf3e222b15f2b073a5ee",
+    "registration_commit": "387a7997fec1ad5028829758cb6ead66e90dc723",
+    "time": "2026-10-23T17:27:30.562906+08:00",
+    "task": "mechanism-rebalancing-review-20261020"
+  },
+  "mission": "Inventory A-share exact original holdings/flow/disclosure and existing return data; identify lowest-cost qualified research population beyond top-ten summaries",
+  "task_scope": [
+    "Inventory A-share exact original holdings/flow/disclosure and existing return data; identify lowest-cost qualified research population beyond top-ten summaries",
+    "Read only existing materials, source documentation locally; no downloads, fits or shared file changes"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-return-study-2026-10-23/cn_inventory.md"
+  ]
+}

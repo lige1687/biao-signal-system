@@ -1,0 +1,1128 @@
+{
+  "schema_version": 1,
+  "purpose": "pre-effect price and identity contamination inventory, not verified legal corporate-action truth",
+  "generated_on": "2026-10-23",
+  "network_requests": 0,
+  "source_root": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-op-common-history-20261020/us-op-common-history-20261020-20261020T191922-92db83e55b32/result/sources",
+  "source_sha256": {
+    "prices.parquet": "31193f4a6bb0885ccba6ced1e5956f968a8a81e5c2959b1fe535637a743a0563",
+    "johnbrick-corporate_action_overrides.csv": "ebed89ded2ff749133447f910fe9e4e75b27922e760cc1e6c49a6397f44017c5",
+    "johnbrick-spinoffs.csv": "af7eb38d1d428bed6b9dd6f66118b2c0f7a12c63e19eef4cfa5887f6925944b6",
+    "johnbrick-dividend_rescale.csv": "942c0ddeef804c383e21c06a5a439cf07a9e7ab646272ba6320d9a23615d7597",
+    "renames.csv": "e571766f6f362e38d61d7c24d16e5d99db3776b7faea1b94d0c7b0e202d327a0",
+    "no_trade_days.csv": "e6ce9efaeea91b3e3e8198a6a3b20bf56d217e82fe83c83b133fab27492de2f1",
+    "exit_gaps.csv": "7fd978df63316793d0b9c7497ba13aa48789f71c02b2db919e884fb0f215364a",
+    "johnbrick-compute_adjusted.py": "cb5aa6a6f935b131116eb947b9d4ef8230a1d1e32b9968a694e4aa7e442cbc98",
+    "johnbrick-README.md": "2650e119b7e3fa4f9756d1a5995aada5e8b7628177d5d98b7a039aca5fa6e2e2"
+  },
+  "price_start": "1968-01-02",
+  "price_end": "2026-10-16",
+  "event_inventory_start": "2018-09-01",
+  "event_inventory_end": "2026-10-16",
+  "event_filter_reason": "2019Q4 formations may need prior-year feature history; only pre-effect inventory, not full source chronology",
+  "events": [
+    {
+      "type": "manual_override",
+      "ticker": "ACN",
+      "event_date": "2025-10-10",
+      "split_factor": null,
+      "dividend": "1.63",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $1.63 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "ACN",
+      "event_date": "2026-01-13",
+      "split_factor": null,
+      "dividend": "1.63",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $1.63 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "AIV",
+      "event_date": "2019-02-21",
+      "split_factor": null,
+      "dividend": "0.105902",
+      "note": "Aimco's Q1 2019 dividend: the vendor's amount is half of what CRSP's RET implies on the series' basis: CRSP's RET implies 0.1059 on the series' basis (ours 0.051993). Found by the full CRSP check's drift report (accuracy pass 2026-10-16).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "AIV",
+      "event_date": "2020-12-15",
+      "spinco": "AIRC",
+      "ratio": "1",
+      "cash": null,
+      "note": "Aimco spun off Apartment Income REIT 1:1 (AIR 8-K 2020-12-15). S&P: AIRC sat in the S&P 500 until it moved to the MidCap 400 before the 2020-12-21 open, when Tesla replaced AIV (S&P DJI 2020-12-11).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "ALLE",
+      "event_date": "2025-09-15",
+      "split_factor": null,
+      "dividend": "0.51",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.51 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "ALLE",
+      "event_date": "2025-12-16",
+      "split_factor": null,
+      "dividend": "0.51",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.51 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "no_trade_day",
+      "ticker": "ANSS",
+      "event_date": "2025-07-17",
+      "note": "vendor no-trade bar kept at the end of a membership",
+      "source_file": "no_trade_days.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "AON",
+      "event_date": "2025-11-03",
+      "split_factor": null,
+      "dividend": "0.745",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.745 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "AON",
+      "event_date": "2026-02-02",
+      "split_factor": null,
+      "dividend": "0.745",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.745 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "APA",
+      "event_date": "2021-10-21",
+      "split_factor": null,
+      "dividend": "0.0625",
+      "note": "APA declared $0.0625 a share (Tiingo); Yahoo rounds it to $0.063.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "APTV",
+      "event_date": "2018-11-06",
+      "split_factor": null,
+      "dividend": "0.22",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.22 on this ex-date (audit_dividends.py). Also missing from the Dec-2021 snapshot comparison.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "APTV",
+      "event_date": "2026-04-01",
+      "spinco": "VGNT",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "Aptiv spun off Versigent, 1 per 3 (Aptiv release). Yahoo recorded nothing, so the data showed a -10.58% day; the holder gained 2.78%. Aptiv closes = Tiingo; Versigent close: Tiingo = Nasdaq. Versigent moved to the SmallCap 600 before the 2026-04-02 open (S&P DJI 2026-03-30).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "BBWI",
+      "event_date": "2021-08-03",
+      "spinco": "VSCO",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); L Brands (renamed Bath & Body Works) spun off Victoria's Secret, 1 per 3. VSCO close from Tiingo; MidCap 400 before the 2021-08-04 open (S&P DJI 2021-07-27). Tiingo books the spin as a 15.33 dividend; replaced.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "BDX",
+      "event_date": "2022-04-01",
+      "spinco": "EMBC",
+      "ratio": "0.2",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); BD spun off Embecta, 1 per 5. EMBC close from Nasdaq; SmallCap 600 before the 2022-04-04 open (S&P DJI 2022-03-25).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "BDX",
+      "event_date": "2026-02-10",
+      "spinco": "WAT",
+      "ratio": "0.135343148384084",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); BD spun off its biosciences and diagnostics business, which merged into Waters: 0.135343148384084 WAT per BDX share (Waters 8-K). WAT was already in the S&P 500.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "BNY",
+      "event_date": "2026-01-20",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not BNY Mellon's: a monthly fund distribution (~$0.051) from the former holder of the BNY symbol; BNY Mellon paid $0.53 on 2026-01-23. Tiingo has no such payment.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "BNY",
+      "event_date": "2026-02-06",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not BNY Mellon's: a monthly fund distribution (~$0.051) from the former holder of the BNY symbol; BNY Mellon paid $0.53 on 2026-01-23. Tiingo has no such payment.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "BWA",
+      "event_date": "2023-07-05",
+      "spinco": "PHIN",
+      "ratio": "0.2",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); BorgWarner spun off PHINIA, 1 per 5 (8-K). PHIN close from Nasdaq; SmallCap 600 before the 2023-07-06 open (S&P DJI 2023-06-28).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "CB",
+      "event_date": "2025-09-12",
+      "split_factor": null,
+      "dividend": "0.97",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.97 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "CB",
+      "event_date": "2025-12-12",
+      "split_factor": null,
+      "dividend": "0.97",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.97 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "CBOE",
+      "event_date": "2025-08-29",
+      "split_factor": null,
+      "dividend": "0.72",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.72 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "CBOE",
+      "event_date": "2025-11-28",
+      "split_factor": null,
+      "dividend": "0.72",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.72 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "CMCSA",
+      "event_date": "2026-01-05",
+      "spinco": "VSNT",
+      "ratio": "0.04",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Comcast spun off Versant Media, 1 per 25. VSNT close from Nasdaq; SmallCap 600 before the 2026-01-06 open (S&P DJI 2025-12-23).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2019-03-28",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2019-06-27",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2019-09-27",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2019-12-30",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2020-03-30",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2020-06-29",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2020-09-29",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2020-12-30",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2021-03-30",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2021-06-29",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2021-09-29",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "COR",
+      "event_date": "2021-12-01",
+      "split_factor": null,
+      "dividend": "0.0",
+      "note": "Not Cencora's: CoreSite Realty's dividend (CoreSite used the COR ticker until its 2021 sale). Yahoo and Tiingo carry it in Cencora's history; Cencora (then AmerisourceBergen, ABC) paid $0.40-0.46 a quarter on other dates, as the Dec-2021 snapshot and the Apr-2020 archive show.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "CTRA",
+      "event_date": "2022-03-04",
+      "split_factor": null,
+      "dividend": "0.56",
+      "note": "Coterra's Q4 2021 payment was the base plus the variable dividend; the vendor has the base only: CRSP's RET implies 0.5600 on the series' basis (ours 0.15). Found by the full CRSP check's drift report (accuracy pass 2026-10-16).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "CTVA",
+      "event_date": "2026-10-01",
+      "spinco": "VYLR",
+      "ratio": "1",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Corteva spun off its seed business as Vylor 1:1. VYLR joined the S&P 500 that day and replaced Corteva, which moved to the MidCap 400 before the 2026-10-06 open (S&P DJI 2026-10-01).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "no_trade_day",
+      "ticker": "CTXS",
+      "event_date": "2022-09-30",
+      "note": "vendor no-trade bar kept at the end of a membership",
+      "source_file": "no_trade_days.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "DD",
+      "event_date": "2019-04-02",
+      "spinco": "DOW",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "DowDuPont spun off Dow Inc.: 1 per 3 shares. Dow's first regular-way day; it replaced Brighthouse in the S&P 500 the same day. DowDuPont closes: Tiingo raw; Dow close = Tiingo = Nasdaq.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "DD",
+      "event_date": "2019-06-03",
+      "spinco": "CTVA",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "DowDuPont spun off Corteva (1 per 3 shares) and then did a 1-for-3 reverse split, both on 2019-06-01 (DuPont Form 8937): each old share became 1/3 DuPont + 1/3 Corteva. DuPont's 76.10 close (= that day's high) is the same at Tiingo and Nasdaq; the 8937's June 4 high-low averages ($74.94, $26.15) match our June 4 bars.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "DD",
+      "event_date": "2025-11-03",
+      "spinco": "Q",
+      "ratio": "0.5",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); DuPont spun off Qnity Electronics, 1 per 2 (8-K). Q joined the S&P 500 that day (S&P DJI 2025-10-27). Tiingo books the spin as a 47.50 dividend.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "DHR",
+      "event_date": "2023-10-02",
+      "spinco": "VLTO",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Danaher spun off Veralto, 1 per 3. VLTO joined the S&P 500 that day (S&P DJI 2023-09-28); its first close is the Tiingo bar in price_patches.csv.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "DISH",
+      "event_date": "2019-11-25",
+      "split_factor": null,
+      "dividend": "0.11",
+      "note": "DISH's rights offering (subscription rights distributed to holders; CRSP's RET values them): CRSP's RET implies 0.1099 on the series' basis that day (ours -0.30pp from CRSP with none booked; no offsetting move the next day). Found by the full CRSP check's drift report (accuracy pass 2026-10-16).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "DTE",
+      "event_date": "2021-07-01",
+      "spinco": "DTM",
+      "ratio": "0.5",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); DTE spun off DT Midstream, 1 per 2. DTM close from Nasdaq; MidCap 400 before the 2021-07-02 open (S&P DJI 2021-06-28).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "EG",
+      "event_date": "2018-11-27",
+      "split_factor": null,
+      "dividend": "1.4",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $1.4 on this ex-date (audit_dividends.py). Also missing from the Dec-2021 snapshot comparison.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "EG",
+      "event_date": "2025-09-03",
+      "split_factor": null,
+      "dividend": "2.0",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $2 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "EG",
+      "event_date": "2025-11-26",
+      "split_factor": null,
+      "dividend": "2.0",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $2 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "EQT-202212",
+      "event_date": "2018-11-13",
+      "split_factor": "1.900431",
+      "dividend": null,
+      "note": "A distribution or reorganization CRSP's RET values at 1.900431 (permno 24328): booked as that factor so the adjusted series keeps CRSP's total return (pre-1996 extension 2026-10-16; not itemized)",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "ETN",
+      "event_date": "2018-11-01",
+      "split_factor": null,
+      "dividend": "0.66",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.66 on this ex-date (audit_dividends.py). Also missing from the Dec-2021 snapshot comparison.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "ETN",
+      "event_date": "2020-05-13",
+      "split_factor": null,
+      "dividend": "0.73",
+      "note": "Eaton paid $0.73 a share; Yahoo and Tiingo both record $0.073 (a decimal slip). The Dec-2021 snapshot has $0.73, as do Eaton's other 2020 quarters.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "EXC",
+      "event_date": "2022-02-02",
+      "spinco": "CEG",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Exelon spun off Constellation Energy, 1 per 3. CEG joined the S&P 500 that day (S&P DJI 2022-01-26).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "FBIN",
+      "event_date": "2022-12-15",
+      "spinco": "MBC",
+      "ratio": "1",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Fortune Brands spun off MasterBrand 1:1. MBC was in the S&P 500 on 12-15 and 12-16, then moved to the SmallCap 600 before the 2022-12-19 open (S&P DJI 2022-12-12).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "FDX",
+      "event_date": "2026-06-01",
+      "spinco": "FDXF",
+      "ratio": "0.5",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); FedEx spun off FedEx Freight, 1 per 2. FDXF joined the S&P 500 that day (S&P DJI 2026-05-27).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "FMC",
+      "event_date": "2019-03-04",
+      "spinco": "LTHM",
+      "ratio": "0.935301",
+      "cash": null,
+      "note": "FMC distributed its Livent stake: 0.935301 Livent per FMC share (FMC 8-K 2019-03-01). Livent moved to the SmallCap 600 before the 2019-03-05 open (S&P DJI 2019-02-26). FMC closes: Tiingo raw = Nasdaq on the ex-date.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "FOX-201903",
+      "event_date": "2019-03-19",
+      "spinco": "FOX",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "21st Century Fox Class B, same terms (1/3 Fox Corp Class B).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "FOXA-201903",
+      "event_date": "2019-03-19",
+      "spinco": "FOXA",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "21st Century Fox (Class A) before Disney bought it: on 2019-03-19 0.263183 of each share was exchanged for 1/3 Fox Corp Class A share and holders kept 0.736817 shares, which became Disney consideration the next day (Disney/21CF release 2019-03-19). TFCFA closes from Tiingo; its 49.69 = 0.4517 x Disney's 110.00 close. S&P added Fox Corp before the 3/19 open and removed 21CF before the 3/20 open (S&P DJI 2019-03-14).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "no_trade_day",
+      "ticker": "FRC",
+      "event_date": "2023-05-02",
+      "note": "vendor no-trade bar kept at the end of a membership",
+      "source_file": "no_trade_days.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "FTV",
+      "event_date": "2020-10-09",
+      "spinco": "VNT",
+      "ratio": "0.4",
+      "cash": null,
+      "note": "Fortive spun off Vontier: 0.4 per share (Fortive kept 19.9%). Vontier close 28.11 = Tiingo = Nasdaq (Yahoo's 28.28 is patched, see price_patches.csv).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "FTV",
+      "event_date": "2025-06-30",
+      "spinco": "RAL",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Fortive spun off Ralliant, 1 per 3. RAL close from Nasdaq; SmallCap 600 before the 2025-07-01 open (S&P DJI 2025-06-25).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "GAP",
+      "event_date": "2021-04-06",
+      "split_factor": null,
+      "dividend": "0.2425",
+      "note": "Gap's deferred Q1 fiscal 2020 dividend: $0.2425 to holders of record 4/7/2021 (Gap's release); Yahoo rounds it to 0.243 (accuracy pass 2026-10-16; second round).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "GE",
+      "event_date": "2019-02-26",
+      "spinco": "WAB",
+      "ratio": "0.005371",
+      "cash": null,
+      "note": "GE Transportation spun off and merged into Wabtec: 0.005371 Wabtec per GE share (GE release 2019-02-25). GE closes from Tiingo raw; Wabtec close = Tiingo = Nasdaq. Wabtec joined the S&P 500 on 2019-02-27.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "GE",
+      "event_date": "2023-01-04",
+      "spinco": "GEHC",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); GE spun off GE HealthCare, 1 per 3 (Form 8937). GEHC joined the S&P 500 that day (S&P DJI 2022-12-28).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "GE",
+      "event_date": "2024-04-02",
+      "spinco": "GEV",
+      "ratio": "0.25",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); GE spun off GE Vernova, 1 per 4 (Form 8937). GEV joined the S&P 500 that day (S&P DJI 2024-03-27).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "HON",
+      "event_date": "2018-10-01",
+      "spinco": "GTX",
+      "ratio": "0.1",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Honeywell spun off Garrett Motion, 1 per 10 (8-K). Garrett close: Tiingo = Nasdaq; SmallCap 600 before the 2018-10-02 open (S&P DJI 2018-09-25).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "HON",
+      "event_date": "2018-10-29",
+      "spinco": "REZI",
+      "ratio": "0.166667",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Honeywell spun off Resideo, 1 per 6 (8-K). Resideo first regular-way close from Tiingo (Nasdaq's history is rescaled); MidCap 400 before the 2018-10-30 open (S&P DJI 2018-10-23).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "HON",
+      "event_date": "2025-10-30",
+      "spinco": "SOLS",
+      "ratio": "0.25",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Honeywell spun off Solstice Advanced Materials, 1 per 4. SOLS joined the S&P 500 that day and left in the Dec 2025 rebalance (S&P DJI 2025-10-27, 2025-12-05).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "HON",
+      "event_date": "2026-06-29",
+      "spinco": "HONA",
+      "ratio": "0.5",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Honeywell spun off Honeywell Aerospace (0.5 HONA per old share) and then did a 1-for-2 reverse split the same morning, so each old share became 1/2 new HON + 1/2 HONA (8-K, OCC). Yahoo merged both into one 0.9535 factor. HONA joined the S&P 500 that day (S&P DJI 2026-06-23).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "HSIC",
+      "event_date": "2019-02-08",
+      "spinco": "CVET",
+      "ratio": "0.4",
+      "cash": null,
+      "note": "Henry Schein spun off Covetrus: 0.4 per share (Henry Schein release). Covetrus' first regular-way day; S&P moved it to the MidCap 400 before the 2019-02-11 open (S&P DJI 2019-02-05), so it left the S&P 500 at that first close. Closes: Tiingo raw; Nasdaq agrees on the ex-date.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "HWM",
+      "event_date": "2020-04-01",
+      "spinco": "ARNC-202308",
+      "ratio": "0.25",
+      "cash": null,
+      "note": "Arconic Inc. (now Howmet, HWM) spun off Arconic Corp: 1 share per 4 (Arconic Corp information statement). Arconic Corp sat in the S&P 500 at zero price from the 2020-03-31 close until it moved to the SmallCap 600 before the 2020-04-06 open (S&P DJI 2020-04-01).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "IBM",
+      "event_date": "2021-11-04",
+      "spinco": "KD",
+      "ratio": "0.2",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); IBM spun off Kyndryl, 1 per 5. KD close from Nasdaq; MidCap 400 before the 2021-11-05 open (S&P DJI 2021-11-01).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "IP",
+      "event_date": "2021-10-01",
+      "spinco": "SLVM",
+      "ratio": "0.090909",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); International Paper spun off Sylvamo, 1 per 11. SLVM close from Nasdaq; SmallCap 600 before the 2021-10-04 open (S&P DJI 2021-09-28).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "J",
+      "event_date": "2024-09-30",
+      "spinco": "AMTM",
+      "ratio": "1",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Jacobs spun off its government business, which merged with Amentum: 1 AMTM per J share (8-K). AMTM joined the S&P 500 that day and left in the Dec 2024 rebalance (S&P DJI 2024-09-24, 2024-12-06).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "J",
+      "event_date": "2025-05-16",
+      "spinco": "AMTM",
+      "ratio": "0.060835",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Jacobs paid out its last 7,299,065 Amentum shares as a dividend: 0.060835 AMTM per J share, NYSE ex-date 2025-05-16 (Jacobs release; OCC). AMTM close = Nasdaq.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "JCI",
+      "event_date": "2025-09-22",
+      "split_factor": null,
+      "dividend": "0.4",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.4 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "JCI",
+      "event_date": "2025-12-22",
+      "split_factor": null,
+      "dividend": "0.4",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.4 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "K",
+      "event_date": "2023-10-02",
+      "spinco": "KLG",
+      "ratio": "0.25",
+      "cash": null,
+      "note": "Kellogg (renamed Kellanova) spun off WK Kellogg, 1 per 4. Tiingo booked this spin twice (split factor 1.065 AND a 3.67 dividend), which showed +0.52%; the holder lost 6.17%. KLG close from Tiingo; SmallCap 600 before the 2023-10-03 open (S&P DJI 2023-09-28).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "LEN",
+      "event_date": "2025-01-21",
+      "spinco": "MRP",
+      "ratio": "0.5",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Lennar spun off Millrose Properties, 1 per 2; NYSE set the ex-date at the record date, but Millrose only began regular-way trading 2025-02-07. With no price on the ex-date, the distribution is valued at Millrose's first regular-way close (26.74, Nasdaq). Yahoo's factor implied only ~$4.67 per Lennar share. MRP went to the SmallCap 600 before the 2025-02-10 open (S&P DJI 2025-02-05).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "LH",
+      "event_date": "2023-07-03",
+      "spinco": "FTRE",
+      "ratio": "1",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Labcorp spun off Fortrea 1:1. FTRE close from Nasdaq; S&P held it on 7/3 and 7/5 and moved it to the SmallCap 600 before the 2023-07-06 open (S&P DJI 2023-06-28).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "MAA",
+      "event_date": "2021-09-14",
+      "split_factor": null,
+      "dividend": "1.062454",
+      "note": "Mid-America Apartment's Q3 2021 dividend is missing from the vendor's record: CRSP's RET implies 1.0625 on the series' basis (ours 0). Found by the full CRSP check's drift report (accuracy pass 2026-10-16).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "MDT",
+      "event_date": "2018-09-27",
+      "split_factor": null,
+      "dividend": "0.5",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.5 on this ex-date (audit_dividends.py). Also missing from the Dec-2021 snapshot comparison.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "MKTX",
+      "event_date": "2024-08-12",
+      "split_factor": null,
+      "dividend": "0.74",
+      "note": "a dividend missing from the vendor's record: CRSP's RET implies 0.7401 on the series' basis that day (ours -0.31pp from CRSP with none booked; no offsetting move the next day). Found by the full CRSP check's drift report (accuracy pass 2026-10-16).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "MMM",
+      "event_date": "2024-04-01",
+      "spinco": "SOLV",
+      "ratio": "0.25",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); 3M spun off Solventum, 1 per 4 (8-K). SOLV joined the S&P 500 that day (S&P DJI 2024-03-27).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "MRK",
+      "event_date": "2021-06-03",
+      "spinco": "OGN",
+      "ratio": "0.1",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Merck spun off Organon, 1 per 10 (Form 8937). Organon joined the S&P 500 that day (S&P DJI 2021-05-27).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "NBL",
+      "event_date": "2018-11-02",
+      "split_factor": null,
+      "dividend": "0.11",
+      "note": "Noble Energy: Tiingo (our price source) has no dividend record. Amount and ex-date read from the Apr-2020 Yahoo archive's adjusted close (jacksoncrow; the Aug-2018 archive agrees from 2013-08 on), put on Tiingo's unadjusted basis (x2 before the 2013-05-29 2-for-1 split).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "NBL",
+      "event_date": "2019-02-08",
+      "split_factor": null,
+      "dividend": "0.11",
+      "note": "Noble Energy: Tiingo (our price source) has no dividend record. Amount and ex-date read from the Apr-2020 Yahoo archive's adjusted close (jacksoncrow; the Aug-2018 archive agrees from 2013-08 on), put on Tiingo's unadjusted basis (x2 before the 2013-05-29 2-for-1 split).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "NBL",
+      "event_date": "2019-05-03",
+      "split_factor": null,
+      "dividend": "0.12",
+      "note": "Noble Energy: Tiingo (our price source) has no dividend record. Amount and ex-date read from the Apr-2020 Yahoo archive's adjusted close (jacksoncrow; the Aug-2018 archive agrees from 2013-08 on), put on Tiingo's unadjusted basis (x2 before the 2013-05-29 2-for-1 split).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "NBL",
+      "event_date": "2019-08-02",
+      "split_factor": null,
+      "dividend": "0.12",
+      "note": "Noble Energy: Tiingo (our price source) has no dividend record. Amount and ex-date read from the Apr-2020 Yahoo archive's adjusted close (jacksoncrow; the Aug-2018 archive agrees from 2013-08 on), put on Tiingo's unadjusted basis (x2 before the 2013-05-29 2-for-1 split).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "NBL",
+      "event_date": "2019-11-01",
+      "split_factor": null,
+      "dividend": "0.12",
+      "note": "Noble Energy: Tiingo (our price source) has no dividend record. Amount and ex-date read from the Apr-2020 Yahoo archive's adjusted close (jacksoncrow; the Aug-2018 archive agrees from 2013-08 on), put on Tiingo's unadjusted basis (x2 before the 2013-05-29 2-for-1 split).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "NBL",
+      "event_date": "2020-02-07",
+      "split_factor": null,
+      "dividend": "0.12",
+      "note": "Noble Energy: Tiingo (our price source) has no dividend record. Amount and ex-date read from the Apr-2020 Yahoo archive's adjusted close (jacksoncrow; the Aug-2018 archive agrees from 2013-08 on), put on Tiingo's unadjusted basis (x2 before the 2013-05-29 2-for-1 split).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "NBL",
+      "event_date": "2020-05-08",
+      "split_factor": null,
+      "dividend": "0.02",
+      "note": "a dividend missing from the vendor's record: CRSP's RET implies 0.0200 on the series' basis that day (ours -0.23pp from CRSP with none booked; no offsetting move the next day). Found by the full CRSP check's drift report (accuracy pass 2026-10-16).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "NBL",
+      "event_date": "2020-08-07",
+      "split_factor": null,
+      "dividend": "0.02",
+      "note": "a dividend missing from the vendor's record: CRSP's RET implies 0.0200 on the series' basis that day (ours -0.19pp from CRSP with none booked; no offsetting move the next day). Found by the full CRSP check's drift report (accuracy pass 2026-10-16).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "no_trade_day",
+      "ticker": "NBL",
+      "event_date": "2020-10-05",
+      "note": "vendor no-trade bar kept at the end of a membership",
+      "source_file": "no_trade_days.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "O",
+      "event_date": "2021-11-15",
+      "spinco": "ONL",
+      "ratio": "0.1",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Realty Income spun off Orion Office REIT, 1 per 10. ONL close from Nasdaq; SmallCap 600 before the 2021-11-16 open (S&P DJI 2021-11-09).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "PFE",
+      "event_date": "2020-11-17",
+      "spinco": "VTRS",
+      "ratio": "0.124079",
+      "cash": null,
+      "note": "Pfizer spun off Upjohn, which merged with Mylan to form Viatris the same day: ~0.124079 Viatris per Pfizer share (Pfizer release 2020-11-16); Viatris' first regular-way day and Pfizer's ex-date 2020-11-17.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "ROL",
+      "event_date": "2018-11-08",
+      "split_factor": null,
+      "dividend": "0.062222",
+      "note": "Rollins declared $0.14 a share (record 2018-11-09; Tiingo); Yahoo records $0.187.",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "RTX",
+      "event_date": "2020-04-03",
+      "spinco": "CARR",
+      "ratio": "1",
+      "cash": null,
+      "note": "United Technologies (now RTX) spun off Carrier (1 per share) and Otis (0.5 per share) the day it merged with Raytheon. UTX close 2020-04-02 from Tiingo raw; ex-date closes agree Tiingo = Nasdaq.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "RTX",
+      "event_date": "2020-04-03",
+      "spinco": "OTIS",
+      "ratio": "0.5",
+      "cash": null,
+      "note": "see above",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "exit_gap",
+      "ticker": "SBNY",
+      "last_trade": "2023-03-10",
+      "next_trade": "2023-03-28",
+      "removed": "2023-03-15",
+      "source_file": "exit_gaps.csv"
+    },
+    {
+      "type": "no_trade_day",
+      "ticker": "SBNY",
+      "event_date": "2023-03-14",
+      "note": "vendor no-trade bar kept at the end of a membership",
+      "source_file": "no_trade_days.csv"
+    },
+    {
+      "type": "exit_gap",
+      "ticker": "SIVB",
+      "last_trade": "2023-03-09",
+      "next_trade": "2023-03-28",
+      "removed": "2023-03-15",
+      "source_file": "exit_gaps.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "SKYD",
+      "event_date": "2026-10-14",
+      "spinco": "SKYD.WS",
+      "ratio": "1",
+      "cash": null,
+      "note": "Skydance (Paramount Skydance) distributed one warrant (SKYD.WS; exercise price the 20-day VWAP within $12.00-16.02) per Class B share held by public stockholders: record 10/5/2026; ex-date 10/14 (Skydance's release; OCC memo 59906). Valued at the warrants' official when-issued close on 10/13; $2.20 - the basis Skydance and the NYSE/OCC used for the adjustment (no regular-way close from a second source yet; reported last trades on 10/14 were near $2.39). Nasdaq's adjusted history shows the same event. Without it the day read -23.8% (accuracy pass 2026-10-16; second round).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "SPGI",
+      "event_date": "2026-07-01",
+      "spinco": "MBGL",
+      "ratio": "1",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); S&P Global spun off Mobility Global 1:1. MBGL close from Nasdaq; SmallCap 600 before the 2026-07-02 open (S&P DJI 2026-06-26).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "STE",
+      "event_date": "2025-11-18",
+      "split_factor": null,
+      "dividend": "0.63",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.63 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "SW",
+      "event_date": "2025-11-14",
+      "split_factor": null,
+      "dividend": "0.4308",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.4308 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "T",
+      "event_date": "2022-04-11",
+      "spinco": "WBD",
+      "ratio": "0.241917",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); AT&T spun off WarnerMedia, which merged with Discovery: 0.241917 Warner Bros. Discovery per AT&T share (AT&T 8-K). WBD was already in the S&P 500 (S&P DJI 2022-04-07).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "TEL",
+      "event_date": "2025-11-21",
+      "split_factor": null,
+      "dividend": "0.71",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.71 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "TMUS",
+      "event_date": "2020-06-24",
+      "split_factor": null,
+      "dividend": "0.36998",
+      "note": "T-Mobile's rights offering to existing holders (record 6/25/2020; transferable rights traded on Nasdaq from 6/24 - T-Mobile's 2020-06-22 release): a distribution to every holder; valued at what CRSP's RET implies (accuracy pass 2026-10-16; second round).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "TT",
+      "event_date": "2020-03-02",
+      "spinco": "IR",
+      "ratio": "0.8824",
+      "cash": null,
+      "note": "Ingersoll-Rand plc (now TT) spun its industrial arm into Gardner Denver (renamed Ingersoll Rand Inc., IR): 1 HoldCo share per share x 0.8824 merger ratio (Trane Form 8937). Closes: Tiingo raw, Nasdaq agrees on both ex-date closes.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "TT",
+      "event_date": "2025-12-05",
+      "split_factor": null,
+      "dividend": "0.94",
+      "note": "Dividend missing from Yahoo's record; Tiingo has $0.94 on this ex-date (audit_dividends.py).",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "no_trade_day",
+      "ticker": "VAR",
+      "event_date": "2021-04-15",
+      "note": "vendor no-trade bar kept at the end of a membership",
+      "source_file": "no_trade_days.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "VFC",
+      "event_date": "2019-05-23",
+      "spinco": "KTB",
+      "ratio": "0.142857",
+      "cash": null,
+      "note": "V.F. spun off Kontoor Brands: 1 per 7 shares. Kontoor moved to the SmallCap 600 before the 2019-05-24 open (S&P DJI 2019-05-20). Closes: Tiingo raw = Nasdaq on the ex-date.",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "manual_override",
+      "ticker": "VHI-197209",
+      "event_date": "2020-06-02",
+      "split_factor": "0.083333",
+      "dividend": null,
+      "note": "A distribution or reorganization CRSP's RET values at 0.083333 (permno 45225): booked as that factor so the adjusted series keeps CRSP's total return (pre-1996 extension 2026-10-16; not itemized)",
+      "source_file": "johnbrick-corporate_action_overrides.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "WDC",
+      "event_date": "2025-02-24",
+      "spinco": "SNDK",
+      "ratio": "0.333333",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Western Digital spun off Sandisk, 1 per 3 (8-K). SNDK close = Nasdaq; SmallCap 600 before the 2025-02-25 open (S&P DJI 2025-02-19). Sandisk later joined the S&P 500 on its own (2025-11-28).",
+      "source_file": "johnbrick-spinoffs.csv"
+    },
+    {
+      "type": "no_trade_day",
+      "ticker": "XL-201809",
+      "event_date": "2018-09-12",
+      "note": "vendor no-trade bar kept at the end of a membership",
+      "source_file": "no_trade_days.csv"
+    },
+    {
+      "type": "spin_off",
+      "ticker": "ZBH",
+      "event_date": "2022-03-01",
+      "spinco": "ZIMV",
+      "ratio": "0.1",
+      "cash": null,
+      "note": "Tiingo raw closes for the parent (= ours); Zimmer Biomet spun off ZimVie, 1 per 10. ZIMV close from Tiingo; SmallCap 600 before the 2022-03-02 open (S&P DJI 2022-02-23).",
+      "source_file": "johnbrick-spinoffs.csv"
+    }
+  ],
+  "interval_hazards": [
+    {
+      "type": "vendor_dividend_basis_rescale",
+      "ticker": "T",
+      "before": "2022-04-11",
+      "divide_by": "1.324",
+      "source_file": "johnbrick-dividend_rescale.csv",
+      "meaning": "vendor prior dividend basis manually rescaled, check any return interval crossing affected dividend dates"
+    },
+    {
+      "type": "ticker_reuse_identity",
+      "ticker": "COR",
+      "source_file": "johnbrick-corporate_action_overrides.csv",
+      "meaning": "same Yahoo ticker history had CoreSite dividends on Cencora/AmerisourceBergen prices; exact ticker alone cannot establish issuer identity"
+    },
+    {
+      "type": "ticker_reuse_identity",
+      "ticker": "STI",
+      "source_file": "johnbrick-README.md",
+      "meaning": "documented SunTrust/other-company ticker reuse; exact ticker alone cannot establish issuer identity"
+    }
+  ],
+  "non_joinable_reference": [
+    {
+      "source_file": "renames.csv",
+      "rows": 44,
+      "policy": "not an automatic NPORT-to-price mapping; requires historical issuer/CUSIP/event adjudication before any use"
+    }
+  ],
+  "event_window_policy": {
+    "historical_feature": "if a lookback return interval (prior_endpoint, formation_endpoint] intersects an unverified manual_override or spin_off for same exact ticker, feature is unqualified; no_trade_day cannot be an endpoint",
+    "future_label": "retain formation row; if (formation_endpoint, target_endpoint] intersects unverified manual_override or spin_off, label unknown pending rights/price adjudication; no_trade_day cannot be endpoint; dates strictly inside exit_gap (last_trade,next_trade) are untradeable; merger/exit rights remain unknown even with later quote",
+    "identity": "exact historical ticker plus only dot/dash notation formatting allowed; COR/STI reuse hazards require issuer-level check; do not autoapply renames.csv"
+  }
+}

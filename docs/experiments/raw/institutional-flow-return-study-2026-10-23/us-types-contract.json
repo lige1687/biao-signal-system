@@ -1,0 +1,45 @@
+{
+  "network_allowed": true,
+  "max_agents": 3,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "stop_conditions": [
+    "Missing access or permission",
+    "Method ambiguity to controller",
+    "No effect measurement before frozen design"
+  ],
+  "executor": {
+    "model": "gpt-6-sol",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "read_only_paths": [
+    "docs/experiments/",
+    "data/",
+    "configs/",
+    "src/",
+    "external prior storage-plan paths after live storage verification"
+  ],
+  "expected_outputs": [
+    "Fundseries/class/prospectus historicalcoverageevidencewithofficialURLs and exactdates",
+    "Actualsourcequeriesincludingfailed inledger",
+    "Limits ofclassification/firstpublictiming and unchangedtypeinference explicit"
+  ],
+  "actual_task_registration": {
+    "checked_coordination_sha": "29ba0bcba5f5e6bfc9eeaf3e222b15f2b073a5ee",
+    "registration_commit": "387a7997fec1ad5028829758cb6ead66e90dc723",
+    "time": "2026-10-23T17:27:30.562906+08:00",
+    "task": "mechanism-rebalancing-review-20261020"
+  },
+  "mission": "Qualify historical active US equity mandate and SEC first-public filing examples for the four preselected fund series",
+  "task_scope": [
+    "Public official issuer/SEC original prospectuses for four already selected fund series, older2019/2020 and intermediateperiods tosupport2019–2026history",
+    "Official SEC NPORT-P filing-index examples link period/accession/FILING_DATE/acceptedtime; document actualpublic rule",
+    "No effects/prices/selectionbasedreturns or subscriptions"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/institutional-flow-return-study-2026-10-23/us-fund-type-qualification"
+  ]
+}
