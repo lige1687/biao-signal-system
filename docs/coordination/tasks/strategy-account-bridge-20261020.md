@@ -1,3 +1,14 @@
+# 美股31.65%核查与有金融理由的组合接续 2026-10-23T17:03:47.923347+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false；checked_coordination_sha=ae56d90fed51cdfef4732e6d038d3305dde073a8；checked_at=2026-10-23T17:03:47.923347+08:00。已读COORDINATION/self、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、lowfreq-strategy-discovery-20261019、mechanism-rebalancing-review-20261020、market-style-observation-20261020、investor-workspace-simplification-20261012最新。原historical universe/RankIC/US三动量归research-utility；French原统计/环境归personal；清理归当前storage owner，不接管/不重复。
+- 用户明确质疑年化31.65%，要求重点复核，并找低相关且有金融理由的其他组合/外部因子及适用股票池增量。本题先审旧US/m完整资金、2026H1单股/日期贡献、复权拆股身份与信号成交时点；不是只重复CAGR。保存历史按旧定义不追正，不以低相关本身采纳。
+- 新独占小报告docs/experiments/us-momentum-audit-combination-2026-10-23.md及同raw诊断脚本/摘要/合同/源记录，registry仅新键与自身两旧报告键，INDEX自身一行，原progress追加；必要对本方factor-strategy-portfolios-2026-10-20及mature-strategy-followthrough-2026-10-22只加有日期纠正/结论入口，原冻结数据/合同/源码只读，不覆盖历史。0生产/真实交易/账本/通知/仓外运行树写。
+- root唯一主写/来源请求；沿Sol medium mature_strategy_local_audit只读盈利归因，Astra high mature_strategy_method_review只读实现/设计，后续若写新隔离脚本明确单文件授权。旧31.65已经看过，不冒充未见验证。新问题预算1核心溯源核账+至多3目的性跟进、来源6请求含失败，前轮预算不改。新策略效果须先冻结金融理由、同资金简单对手与真实存储预检，不泛扫相关矩阵挑赢家。
+- 17:01+08当前内盘3604979712字节(<5GiB)，外盘UUID核准可用493443350528字节；新组合/新市场运行尚未启动，不绕存储检查。不依赖它的旧账重建、来源与合同/小报告继续；不替storage owner删资料或退出应用。小记录预计<500KiB。
+- 验收：31.65的金额、单股贡献/极端日/时期依赖，原始价格与实际公司行动/当时名单及必要原件复核、代码时点和资金不重计；任何错报更正到可见报告。组合提出不同机制/准确Universe与可执行定义，资料/存储合格则固定有界实测，否则保留具体已尝试阻塞与可推进资料。性能/增量/不确定性与全部失败留账、API读回/归置，不以工程成功当策略有效。
+
+---
+
 # 中美策略曲线与指数比较交付 2026-10-22T10:33:43.340138+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed（本次保存账户指数比较）；scope_released false（原冻结服务及自己的记录保持保护）；checked_coordination_sha=7a359d459166cc8a44a6f84000d4a32bbbc5d85b；checked_at=2026-10-22T10:33:43.340138+08:00。已重fetch无新增协调，已读self/COORDINATION、research-utility-review-20261012、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller及原相关10任务；冲突决定不变，只读复用未重跑原owner账户/UI。
