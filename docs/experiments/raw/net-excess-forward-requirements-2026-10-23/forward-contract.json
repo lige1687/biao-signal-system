@@ -1,0 +1,81 @@
+{
+  "schema": "forward-regime-net-excess-design/1",
+  "created_at": "2026-10-23T17:11:06.809361+08:00",
+  "status": "blocked_input_and_cost_qualification",
+  "allowed_real_run": false,
+  "user_requirement": "net excess against corresponding benchmark with personal trading costs; strictly forward available information",
+  "main_method": {
+    "formula": "formation monthend close > inclusive10monthend arithmetic mean =>strong; otherwiseweak; requires10consecutive qualified closes; missing or not available at decision =>unknown",
+    "pre_registered": false,
+    "tuning": false,
+    "clock_three_state": "candidate_not_run",
+    "design_label": "sma10_forward_fixed_design_20261023",
+    "definition_registry_status": "not_registered; design_only_not_an_executable_native_adapter",
+    "fixed_before_any_effect_evaluation": true
+  },
+  "time_chain": {
+    "source_cutoff": "completed formation monthend, actual publication/availability <=decision_at",
+    "decision_at": "after required source records are available",
+    "action_at": "next tradable open strictly after decision_at; no same-close assumption",
+    "labels": "next holding interval from actual action, no realised up/down filtering as input",
+    "future_addition": "past state invariant including revised past records with later availability",
+    "live_start": "first eligible future formation snapshot after source/fee/storage qualification; no ongoing process created",
+    "available_at_definition": "earliest time this research could actually use the exact version; no earlier than both publication and actual acquisition; do not backdate late-acquired history",
+    "upstream_assumptions_unverified": [
+      "actual exchange last trading close per month",
+      "each price matches qualified monthly close",
+      "truth of publication/acquisition/version fields",
+      "actual next executable open/calendar"
+    ]
+  },
+  "benchmark": {
+    "id": null,
+    "status": "not_bound",
+    "requirements": [
+      "corresponding targetmarket/universe/currency",
+      "totalreturn vsprice",
+      "samewindow",
+      "marketindex or tradablepassive explicitly distinguished"
+    ],
+    "current_French_B": "same-group allocation only, not motherindex"
+  },
+  "cost_profile": {
+    "personal_fee_status": "missing",
+    "required": [
+      "buy/sell fee schedule andminimums",
+      "tax/FX ifapplicable",
+      "executedgross andturnover",
+      "slippage/spread estimatedseparately",
+      "initial andterminal liquidation policy"
+    ],
+    "legacy25bps": "researchscenario_only; cannot classify aspersonalactual",
+    "currentFrench_net_return": null
+  },
+  "comparison": {
+    "primary": "samecapital fixedpassiveholding before changing position",
+    "secondary": "fixedfactor allocation if later integrating factor timing",
+    "metrics": [
+      "netexcess",
+      "relativewealth",
+      "avoidedlosses",
+      "foregonegains",
+      "drawdown/recovery",
+      "turnover fees cash unknown"
+    ],
+    "no_return_difference_compounding": true
+  },
+  "blockers": [
+    "French return groups lack individual executed turnover and personal fee profile",
+    "no unique parent/passive benchmark bound to French group use",
+    "existing SPY adjusted history is retrospective with no verified historical source versions/arrival times",
+    "close-only file lacks next-open execution; older OHLC sample provenance and complete later formation month unavailable"
+  ],
+  "attempts": {
+    "new_market_requests": 0,
+    "effect_runs": 0,
+    "source_requests": 7,
+    "preflight_attempt": 2
+  },
+  "scope": "design, actual input qualification and presentation only; no empirical performance claim, no production/trading",
+  "storage_current": "independent live preflight passed after earlier failure; no longer current blocker"
+}
