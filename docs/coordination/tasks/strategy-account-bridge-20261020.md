@@ -1,3 +1,15 @@
+# 其他组合扩样与外部方法接入交付 2026-10-23T18:21:49.760110+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed（本轮5新增组合范围与方法接入），scope_released false（本方原冻结/报告与新结果保护）。checked_coordination_sha=d75e87308424e3e798bacf70d5a647b13bfabc13；checked_at=2026-10-23T18:21:49.760110+08:00。已读COORDINATION/self、research-utility-review-20261012、personal-lowfreq-system-audit-20261018最新17:58、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、research-dispatch-controller、lowfreq-strategy-discovery-20261019、storage；冲突决定不变，四指数取数、SPY环境账户和机构研究各owner，无同写/重复运行。
+- 报告docs/experiments/strategy-combination-expansion-2026-10-23.md SHA9e28615b2fa3b9481af6b8d4049c554c82a192fd133b82655d9d7a6aa490cd8d，同raw合同/执行/来源/独核/图locator及delivery；已登记组合与仓位/mixed与INDEX本行，旧自有us-momentum-audit-combination只接续notice及本keySHA，其他登记保留。原progress追加。成果基线主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加本地未提交；只有协调元数据推送，不称源码跨设备发布。
+- 固定OP+MOM/BM+MOM/BM+OP×大小规模：5新增1复用、主2015—24与早/近两预定时期，1批次0寻优。主期大BM+MOM11.94%/月末跌26.58%不及单MOM12.88%/24.14%；大BM+OP13.45%/25.84%不及单OP15.56%/24.85%。大BM+OP相对差额相关-.639、共同亏28月vs普通38月，但43个共同参照不涨月29月落后来源参照。小规模跌38.96—46.33%，主要十年取舍未改善。早期月末跌46—59%，近期20月高年化不当新稳定优势。未找到可采用新组合；净成本/母指数/逐股联合信息仍未评价。
+- 18:00真实预留失败，18:07:56内6,328,127,488B恢复，root/执行者原plan独立复核后完成，未改预留/删除/合同。外盘summary9fd40953bd53f4155aaac1b0e708e8c5882d88ddae41a08b2ec6eca3af97cada、monthly9514e0505ca99579430d318990e8cc7206fa4d0e59f997bd5f93bec2ed04aad8，4548行，旧bigOPMOM3时期4方案主要指标差0。root独核83268数值、4SVG+4PNG，新外盘总3196716B，小raw约79051B、报告232107B；失败/预审/显示宽度纠错均保留。
+- 已接.agents/skills/lei-lowfreq-research/references/strategy-combinations.md和SKILL按需链接：分清资金分配/联合选股/当时可判断环境，AQR/Novy-Marx/RD-Agent原文条件映射、来源差异与失败反馈，复用现有方法卡/合同。6新来源请求、0行情下载/外部引擎安装。Sol执行、Astra设计与方法审、root来源/独核/呈现；实际费用未知。
+- API全文与registryhash读回、真实5188报告/性能与增量/四SVG646.88x687.31适配宽度无横溢、归置与窄diff通过。显示源SVG原件保持，只报告响应宽度修复。无正式UI源码/仓外运行树/目标库/交易/通知/前向版本变更。
+- 此有界问题完成，后续优先核大规模同池价值/经营支撑财报时点、行业持仓与换手以检验联合选股；聚合月表无法回答，原历史指数资料owner继续，不重复补数。不在同样月表上调权追漂亮结果；不宣称整个策略发现目标完成。用户效果呈现待验收。
+
+---
+
 # 其他经济机制组合与外部方法接入 2026-10-23T17:54:46.271545+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false。checked_coordination_sha=3149f2af75cbcd59de8cfa9c77d1d9a862f21558；checked_at=2026-10-23T17:54:46.271545+08:00。本轮已读COORDINATION/self、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、research-dispatch-controller、lowfreq-strategy-discovery-20261019和storage。冲突决定：四历史指数池补数、SPY固定SMA10时点/费用、机构信息、正式因子UI均归原owner；本方不重复下载/运行/同文件修改。
