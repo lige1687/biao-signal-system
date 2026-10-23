@@ -1,3 +1,14 @@
+# 继续：固定前向规则的历史逐步检验与股票池资格 2026-10-23T17:51:26.298254+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha=4a86f2fdacc1d52a7930a20428c27183c9fbc5fa；checked_at=2026-10-23T17:51:26.298254+08:00；已读COORDINATION/self、research-utility-review-20261012、investor-workspace-simplification-20261012、strategy-account-bridge-20261020、storage-headroom-20261015、research-dispatch-controller最新段。80RankIC、正式曲线、French盈利+动量组合均复用结论，不接管重跑。
+- 用户继续原净超额/前向/股票池研究。基线工作分支codex/personal-lowfreq-system-audit-20261018@ae516dc163a4a91aa344a7b7fe9436f22a961386。内盘当前6.26GB恢复，但每次写新结果前仍独立核固定外盘/容量。
+- 本轮补未完成的1次SPY公开当前资料请求（之前实际0次，0重试），新回执不覆盖旧失败；旧来源请求7次/效果0保持，不重置。主要有界问题：固定SMA10月度信息、下一交易开盘执行，对比同资本SPY持有及事前固定50%参与，历史顺序检验收益/风险/错过上涨/成本敏感性。最多1核心运行及必要实现核验，不调参或泛扫。旧历史已见，供应商历史版本未知，不称真实前向观察或个人实际净收益；个人费用未齐可做明确费用情景，不能冒充已验。
+- 自有写范围：新docs/experiments/us-spy-forward-net-2026-10-23.md及同名raw/小合同代码回执；新web/public/research/us-spy-forward-net-20261023/；旧net-excess raw仅新增resume回执；registry仅本键、INDEX本行、自身progress。主树只精确镜像；不改原French数据/旧冻结/他人UI。外盘新输出须plan并绑定。
+- root负责合同/结论和独核，Luna只读盘点A股流动性匹配可用数据（不重跑反转、不写其他报告），Astra只读核历史顺序/复权/执行及成本假设，具体执行另冻结唯一写者。最多2并行helpers，各无网络无写路径，不建用户侧chat。
+- 验收：时间链逐笔可追、同日期同初值双方费用及现金一致、基准明确、只用过去信息的计算检查、真实成本未齐保持未评价；收益/风险/其他用途分别结论。分期保留旧已见身份。新结论曲线默认相对明确被动对手，原未知不改成已通过。无生产/交易/安装/清理/通知。
+
+---
+
 # 净超额、前向与股票池资格核查交付 2026-10-23T17:35:30.065240+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner沿原；status completed（持久规范/展示修正/本次资格审查）；真实前向净效果仍blocked_storage_and_input_cost_qualification；scope_released true仅本次小规范/静态页修正，旧冻结范围保持。checked_coordination_sha=17cfc3a6af9463460392bcfac1e070c4d92b2bf3；checked_at=2026-10-23T17:35:30.065240+08:00；已读COORDINATION、自身、research-utility17:22、investor17:25、strategy-account17:18与dispatch；已知80RankIC补算、正式超额UI和French盈利+动量组合各归原owner，本轮未重复。
