@@ -1,3 +1,11 @@
+# 新80排序诊断版本只读接入范围 2026-10-23T17:25:29.242352+08:00
+
+- task-id/owner沿原；active；checked_coordination_sha=3f99123c69a3f0ce8c4bd48036d43f5ad273ef8f；checked_at=2026-10-23T17:25:29.242352+08:00。已读research-utility17:22真实补算独核/发布及17:17恢复，storage/其他任务本轮新增无UI同写，唯一区域分工保持。延续用户补齐诊断授权，仍不在系统端重算金融统计。
+- 准确新增运行树web/public/research/momentum-three-universe-20261022/new-assessment-rankic-20261023.json，SHA0069959946ce5c681c12fc8f0e10bee9516fbed3ba16cde86b8fc2fd0db4c5f0；只同步原catalog extension.assessment链接与SHA（catalog bc1ab0c91bde574579eae3ecf829e9f00c6258e90a85a3610a1c1ed442fa3133），旧new-assessment冻结原0e3951不覆盖，其他8旧数据不变。源80/4760点已研究owner独核，非RankIC字段与原816夏普逐项相同，本方复核身份/字段与实际展示。
+- 原factorCurves.test.mjs适配新版展示的80条实际源，旧无RankIC状态仍用冻结旧文件单独检查，不删失败或放宽绑定；新增真实PPO/低波/期池切换读回，与本轮默认超额同批验收。其余UI/技术接口/回执范围不变，四历史池仍disabled。新3市场效果不冒称完成，无新账户/研究/行情/交易/定时。
+
+---
+
 # 默认相对同池基准超额视图 2026-10-23T17:12:59.753871+08:00
 
 - task-id/owner沿原；active；scope_released false；checked_coordination_sha=94c2579226718be41429142db5793adbeecac25d；checked_at=2026-10-23T17:12:59.753871+08:00。已读COORDINATION/self/research-utility10/23 17:07、personal17:08、strategy-account17:03与storage当前白名单新增段，无UI同写；研究/清理各归原owner。真正userMessage01a16802-16a3-7d31-949a-229026356a33已read_thread核对，要求相对母指数/超额并持久MD。权威两策略源实际SHA仍与确认值一致，本次只研究展示层，不改交易语义。
