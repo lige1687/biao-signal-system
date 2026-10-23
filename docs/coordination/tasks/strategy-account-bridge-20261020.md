@@ -1,3 +1,14 @@
+# 中美股票范围与金融机制接续交付 2026-10-23T19:08:21.068789+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed（本轮机制/适用范围资料问题）；scope_released false仅自身冻结保护。checked_coordination_sha=38c20ceeadc6de0abcc31f5778fff9276024b448；checked_at=2026-10-23T19:08:21.068789+08:00；已读COORDINATION/self、utility、personal、mechanism、investor、dispatch、market-style及downside，含最新ETF/Amihud政策和总工作台方案范围。冲突决定：四池取数、A股活跃反转、小盘/下跌政策和总台方案各归原owner，无重复运行或同写。
+- 已补原docs/experiments/strategy-combination-expansion-2026-10-23.md的中美金融理由、竞争解释、股票资格/会计/期限/费用、同池对手与母指数，以及现有结果和去重接续；SHA018b31165cec34bf50b509caf981371dce66fa14419492467bda6a1fa198bdc3。原六格和4图逐字保持，移除本轮补充可恢复旧SHA。registry只本键、INDEX本行、自己progress已更新；skill参考strategy-combinations.md增加事前股票范围机制检查，非程序硬拦截。
+- raw/strategy-combination-expansion-2026-10-23/universe-mechanisms含supplement/review-record/sources/verification约18.5KB；原contract/manifest/renderer/verification/result-locator SHA不变。旧数字复核：A股反转对低波动费用共同沪98/深75月差−.479/−.523pp（非毛差113/92月）；US大价值盈利13.45%/月末跌25.84%仍不及单盈利15.56%/24.85%。不是同定义中美比较，个人净费/母指数及同股联合信息未评价。
+- Sol medium只读六报告，Astra high只读机制/比较审查；主控源核/关键表/接入与读回。累计6来源含3失败（两PDFtimeout、DOI不可读）保留；新实际原稿仅Jones2021摘要/引言/资料至印刷12页，LSZ/NovyMarx复用先前已核阅读范围。0新效果/下载/寻优/前向版本，不因国家或规模标签宣称原因。原组合预算不重置。
+- 8000API与5173代理正文/登记SHA一致；真实5173页新增标题/机制/费用月份与原4SVG可见、无横溢；归置/窄diff通过。原5188无监听、旧页Failed to fetch，改读当前运行5173，不重启服务。范围登记两次非快进拒绝后读新差异普通合并成功，交付保留失败；未改他人20未登记报告。
+- 完成的是股票范围与金融依据判断；历史财务/行业共同逐股资格仍缺，不能用公开月表证明联合选股。资料合格后原负责人结果可接续，不承诺后台推进、不宣称总策略目标完成。本方源码/报告仍主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加本地未提交；仅协调元数据推送。无生产/仓外配置/目标库/交易/通知/删除。
+
+---
+
 # 中美股票范围与金融机制接续 2026-10-23T19:00:39.190188+08:00
 
 - 第二次非快进后已读downside的ETF月度政策独立范围；checked_coordination_sha=2488a1104161ad7abb1c4b596f14e055da4397a6；checked_at=2026-10-23T19:01:33.029227+08:00；本方不做ETF政策，冲突决定不变。
