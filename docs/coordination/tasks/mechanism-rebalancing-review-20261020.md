@@ -1,3 +1,13 @@
+# 两基金跨期申赎资格接续
+
+- task-id/owner沿原，status active；scope_released false。checked_coordination_sha=8455d746c6e76b376233d27de0af6c32a54f4a6a；checked_at=2026-10-23T19:18:00+08:00。已读本轮COORDINATION/self/dispatch/sentiment/utility/personal/strategy/investor/downside，追加market-style工作台方案与personal冻结前核查；价格/组合/UI/ETF政策保持原owner，无同写或重复效果。
+- 完成当前一期资格：新增000001 2024H1/FY官方PDF完整174/175股票，金额及份额桥接同；与070002期初并234交9、期末并198交16、共同四观察5股。Astra审与Sol独核确认单期压力完全由持有比例决定，0未来收益/拟合。主程序有限Decimal计数14伪差，Fraction独核准确11并保留原失败，不影响机制判断。
+- 用户继续授权内的必要下一增量：固定原两基金，不增挑基金，以官网2019—2025中期/年报14条/基金的历史，核相同基金压力是否变化、相对次序是否交换；如果没有不同信息不为IC凑股票。新history-qualification-contract独立于原单期冻结，保留原件和已算结果。
+- Sol medium cn_source_feasibility唯一写raw/a-share-institutional-flow-qualification-2026-10-23/huaxia-history/；Sol medium cn_price_reuse唯一写同raw/jiashi-history/；同storage-plan外盘对应子目录原件/全CSV。两者均复用已取原件，只补缺、核完整性/历史身份/份额类别/公告日，不跑收益。根唯一写cross-period摘要、合同、报告/自身progress/登记。Astra只读方法审。预计分别60/80MiB，仍在原总200MiB外盘/2MiB本机计划，不扩付费或运行权限。
+- 新来源/失败累计记录；旧US研究封存，原预算不重置。当前跨期资格正在做，不声称收益IC已完成或A股有效。净资产变动表若能取得申赎金额可补充，但份额交易权益金额不自动冒充现金。资料核完后再决定是否有必要且合格的效果比较，不能先跑挑结果。
+
+---
+
 # A股多基金公开资料与机构压力研究接续 2026-10-23T19:09:09.064886+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner原root；status active；scope_released false。checked_coordination_sha=789643c42ce324059a0b60d2b99c8f06b2ea8cc0；checked_at=2026-10-23T19:09:09.064886+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/research-utility-review-20261012/personal-lowfreq-system-audit-20261018/strategy-account-bridge-20261020/investor-workspace-simplification-20261012/downside-sensitivity-universe-20261023。四指数价格由utility续采，成交活跃反转、ETF政策、小盘资格各原owner；均只读复用不重跑。首次前置基线断言因另一owner推进而停，未写入；已核新增范围无冲突。
