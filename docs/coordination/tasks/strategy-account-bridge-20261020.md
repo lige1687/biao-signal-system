@@ -1,3 +1,13 @@
+# 其他经济机制组合与外部方法接入 2026-10-23T17:54:46.271545+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false。checked_coordination_sha=3149f2af75cbcd59de8cfa9c77d1d9a862f21558；checked_at=2026-10-23T17:54:46.271545+08:00。本轮已读COORDINATION/self、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、research-dispatch-controller、lowfreq-strategy-discovery-20261019和storage。冲突决定：四历史指数池补数、SPY固定SMA10时点/费用、机构信息、正式因子UI均归原owner；本方不重复下载/运行/同文件修改。
+- 用户本轮“这个可以继续扩大测测，其他策略组合呢，专业策略挖掘经验和skill或者流程能否接入，外部能参考的”授权新的有界问题。复用既有French月度原件及大规模OP+MOM，预先固定OP+MOM、BM+MOM、BM+OP两种规模，共6格含1旧格；新增5格、不挑相关低者才呈现。主要时期2015—24，早期1963—2014与近期2025—2026/08两个固定目的性对照；全部已见历史。初始各半后独立持有；比较单组/普通组/来源组参照，数据与设计先核后计算，无调权/搜索/生产采用。
+- 独占新增docs/experiments/strategy-combination-expansion-2026-10-23.md及同名raw小合同/代码/摘要/来源/核验；新外盘唯一结果目录走plan_output；registry仅本新键、INDEX本新行、原progress追加。本方旧us-momentum-audit-combination报告仅追加新接续链接及该登记hash。拟将外部方法的最小增量写入.agents/skills/lei-lowfreq-research/references/strategy-combinations.md，SKILL.md只加按需链接，不改共享playbook/definition/原技术策略。已有AQR/QuantConnect方法卡复用，不另建框架、不安装第三方工具、不改用户全局skill。
+- root唯一冻结合同/公开来源/skill/报告，Sol mature_strategy_local_audit按后续精确文件分配写新runner/locator，Astra mature_strategy_method_review只读方法及结果。预算为一次有限pair/size批次+两固定时期对照及必要实施纠错；公开来源计划6请求(目前2搜索，必要新证据增加须留理由及全部失败)，无参数寻优，不重置前轮累计6来源/1核心2跟进。原公开序列不能补成个人净收益，实际母指数/费用未评价；同池联合筛选仍依历史逐股资料，不以分组序列伪造。
+- 验收完整性能与增量表、分期反例/共同下跌与机会代价、两规模曲线、独立算术核验、来源及外部接入边界、API/实际页面读回/归置。新效果先重新核存储与输入SHA。主工作分支仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加本地改动；本机小代码/报告预计2MiB，外盘新结果预计8MiB，无删除/通知/交易/仓外配置。
+
+---
+
 # 31.65%核账与公开经营盈利＋动量固定比较交付 2026-10-23T17:35:08.144434+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed（本轮有边界核账和一项组合问题），scope_released false（原冻结服务/数据、本方报告保护）；checked_coordination_sha=a96b0bc1365142541b83b5a527a92dc5fe254648；checked_at=2026-10-23T17:35:08.144434+08:00。已读COORDINATION/self、research-dispatch-controller、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、market-style-observation-20261020、lowfreq-strategy-discovery-20261019、storage-headroom-20261015。交付新增80RankIC/超额UI、universe/前向资格、机构收益研究仍各owner；没有重跑其工作或同文件写。
