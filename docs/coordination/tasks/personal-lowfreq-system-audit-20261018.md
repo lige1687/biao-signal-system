@@ -1,3 +1,12 @@
+# 成交活跃分层反转方法冻结前核查 2026-10-23T19:12:13.482938+08:00
+
+- task-id/owner沿原；status active，scope_released false。checked_coordination_sha=d9fcea1de2458d447e3b173e58f54bfb2f5c7cf0；checked_at=2026-10-23T19:12:13.482938+08:00；已读本轮COORDINATION/self及research-utility-review-20261012、research-dispatch-controller、strategy-account-bridge-20261020、mechanism-rebalancing-review-20261020、investor-workspace-simplification-20261012、market-style-observation-20261020、downside-sensitivity-universe-20261023、lowfreq-strategy-discovery-20261019和storage。追加读432fef1后的5任务差异；下跌敏感/Amihud四ETF和小指数池、A股机构、总工作台保持原owner，本方只固定300股月度成交金额条件反转，无重复取数或同写。
+- 准确范围沿前段：本题3研究定义卡、独立reversal_activity.py/test、raw/run.py和合同/回执/报告/本键登记；主树仅窄镜像。设计已先于新效果冻结，48账户（3金额层×8名单×2费用）；新增同波动两半内反转对照用于粗控制，不冒充独立信息或精确中性。
+- 开跑前发现初稿G5方向反、开盘可能误用后验字段/缺报价永久冻结；已留失败并修合成，尚0次真实效果。Sol实现，Astra方法审、Luna后续一次执行，root冻结/独核。名单原36019行/2015-25已见历史；真实母指数、真实个人费表/历史到达/实际成交未合格。
+- 预算不变：1核心、至多3必要跟进、6来源（已用6含2失败）、0行情下载；外盘同绑定plan估250MiB，本机1MiB。3定义独立校验通过；先前三次schema/lifecycle失败留存，不称完整库全部通过。最终代码SHA与合同批准后才运行；不改旧冻结、生产、策略源或其他AI任务。
+
+---
+
 # 继续拓展：反转的成交活跃范围与简单防御对手 2026-10-23T18:59:37.442471+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=63f2ec936337c58561eac743b0e75255667f485f；checked_at=2026-10-23T18:59:37.442471+08:00；已读COORDINATION/self、research-utility-review-20261012、strategy-account-bridge-20261020、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、lowfreq-strategy-discovery-20261019、research-dispatch-controller。用户继续拓展策略收益/有金融含义因子，并提醒另一AI负责universe。四指数历史成员采集由utility负责，French组合/机构申赎已交付复用，不重复其数据或效果。
