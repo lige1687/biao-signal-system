@@ -1,3 +1,13 @@
+# 中美股票范围与金融机制接续 2026-10-23T19:00:39.190188+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false。checked_coordination_sha=041523adefac4dd16908c502c469128adafb316a；checked_at=2026-10-23T19:00:39.190188+08:00。已读COORDINATION/self、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、mechanism-rebalancing-review-20261020、market-style-observation-20261020、investor-workspace-simplification-20261012、research-dispatch-controller及新增downside-sensitivity-universe-20261023。冲突决定：四历史指数取数、A股成交活跃分层、小盘资格与下跌敏感度分别原owner，不重复运行或下载。
+- 用户最新“是否区分universe和A股美股，争议必须从金融含义出发”及“继续呢”。本次限定资料研究与既有结果复核：把金融机制、股票资格、市场制度/期限差异、竞争解释、强对手、现有证据及准入条件接入本方已有组合报告及skill参考。此为独立扩展研究选择层，不改LEI技术判定或生产规则。现有收益复用不重跑，不将分池事后优胜当因果。
+- root唯一写docs/experiments/strategy-combination-expansion-2026-10-23.md的有日期补充、同raw/universe-mechanisms/小来源/合同/读回记录、.agents/skills/lei-lowfreq-research/references/strategy-combinations.md本题机制段、registry仅本键及INDEX本行、自己progress追加。原冻结contract/manifest/results/renderer/定义/共享playbook/UI/其他报告不改；报告补充插在renderer保留区。小增量预计<100KiB，0新大结果、0取数或安装、0仓外写/交易/通知/目标DB。
+- Sol medium universe_evidence_inventory只读六本地报告，0联网/编辑/再委派，已回；必要Astra只读机制复核，root统一来源预算。本次中断接续累计6来源请求（2搜索+4open，其中3读取失败），原组合上轮6来源与一固定批次不重置；不再新增来源，实际阅读范围明确，未读全文不装作复现。研究机制判断可由已读原稿和旧证据完成，不以预算耗尽判因子无效。
+- 验收：中美/规模/行业/持有期分清，金融假说与竞争解释并列、同池母指数及费用边界、关键旧数字准确，原六格曲线与数值不改；报告正文/API/hash与实际页面可见、归置检查。主工作树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加本地改动；成果未提交/远端不可复现，仅协调元数据推送。
+
+---
+
 # 其他组合扩样与外部方法接入交付 2026-10-23T18:21:49.760110+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed（本轮5新增组合范围与方法接入），scope_released false（本方原冻结/报告与新结果保护）。checked_coordination_sha=d75e87308424e3e798bacf70d5a647b13bfabc13；checked_at=2026-10-23T18:21:49.760110+08:00。已读COORDINATION/self、research-utility-review-20261012、personal-lowfreq-system-audit-20261018最新17:58、investor-workspace-simplification-20261012、mechanism-rebalancing-review-20261020、research-dispatch-controller、lowfreq-strategy-discovery-20261019、storage；冲突决定不变，四指数取数、SPY环境账户和机构研究各owner，无同写/重复运行。
