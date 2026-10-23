@@ -1,3 +1,12 @@
+# 常见池采集中间增量 2026-10-24T02:12:45.519465+08:00
+
+- task-id/owner沿原；status active，scope_released false。checked_coordination_sha 869b1c83c9e7372eb83e3040665568f0f8464993；checked_at 2026-10-24T02:12:45.519465+08:00；已读COORDINATION/self、utility当前、dispatch及investor/market-style/strategy-account新增范围，无本题路径同写。
+- 新A5当前官方成员及价格/全收益日线已存且root独核原值/代码/日历，历史名单仍缺。四池owner最新CN2577已全部取完，旧567检查点不再引用；其BaoStock原批不运行，现由本方policy_executor补上证50公开历史月末132对象，单会话，不重复300/500。美国3只iSharesETF历史持仓已核旧日原件非伪历史，按132月×3补采；代理名单与正式指数明确分开，空月份保留，不补未来。
+- 增量范围：root将在本题raw/controller_cn_parent_*及独立外盘result/controller-cn-parent/补官方H00300/H00905全收益与两事实单（4有限对象），已消息通知原utility owner避免重复；对方原raw/报告保持只读，届时回传来源。所有新增在原13指数数据授权及3GiB/4MiB存储估算内，不扩科学实验。
+- Astra原件审阅发现ETF同ticker多行/无ticker权益/CVR/现金应计，US执行者修派生保留15原字段+行号，不把基金Equity直接当普通可交易股票池。root核US盘中10/23原行排除，新完成日表止10/22。当前没有全13历史合格或收益结论；仍等待实际采集、独核及归档。
+
+---
+
 # 常见A股美股Universe实际补采 2026-10-24T01:48:44.692640+08:00
 
 - stable task-id/owner沿原；status active；scope_released false。checked_coordination_sha 084bdb564e77284e7c9200aec7e9696a350f428a；checked_at 2026-10-24T01:48:44.692640+08:00；已读COORDINATION、self、utility、dispatch及上轮personal/strategy/mechanism/investor范围，当前四池由utility原owner持有。用户2026-10-24明确“还没拉完所有的universe吗？常见的a美的，拉哇”，授权继续实际常见池取数；这是新的数据采集增量，不重置旧2核心实验账。
