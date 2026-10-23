@@ -1,0 +1,134 @@
+{
+  "schema": "bounded-account-scenario/1",
+  "created_at": "2026-10-23T09:56:22.313845+00:00",
+  "question": "Monthly SMA10 state versus SPY passive and fixed 50 percent exposure: net scenario returns, risk and missed gains",
+  "research_identity": "historical sequential current-vintage replay; NOT historical vintage reconstruction, unseen validation, live tracking or personal net account",
+  "prior_design": "docs/experiments/raw/net-excess-forward-requirements-2026-10-23/forward-contract.json",
+  "prior_effect_runs": 0,
+  "max_new_core_runs": 1,
+  "no_tuning": true,
+  "universe": {
+    "symbol": "SPY",
+    "asset": "single US large-cap equity ETF, USD",
+    "selection": "chosen today as broad US market proxy; no stock selection or CSI1000 inference"
+  },
+  "input": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/agent_BC/pool/SPY.bars.parquet",
+    "sha256": "c82530e2faf76dd956789ccd47e1d9959bf35d023cfad318c17202385a112112",
+    "basis": "Yahoo adjusted OHLC total-return approximation; do not add dividend cash again",
+    "calendar_check_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/agent_BC/pool/^GSPC.bars.parquet",
+    "calendar_status": "same-vendor observed broad-market quote dates, must match exact full daily date set; not official independent exchange calendar",
+    "vintage": "unknown; stored September 2026 copy",
+    "prefix_crosscheck_path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/sentiment-aaii-risk-2026-09-29/inputs/px_SPY.csv"
+  },
+  "signal": {
+    "window_months": 10,
+    "formula": "last completed calendar-month final observed adjusted close > arithmetic mean of inclusive last 10 consecutive month final closes",
+    "equality": "weak",
+    "missing": "fail affected scope; no forwardfill",
+    "decision": "formation last quote close, hypothetical after-close availability; actual historical arrival unknown",
+    "execution": "first observed next-month open after prior-close decision, conditional observed calendar matched"
+  },
+  "account": {
+    "initial_usd": 100000.0,
+    "start": "1994-01-01",
+    "end": "2026-08-31",
+    "continuous": true,
+    "warmup": "1993 through December 1993",
+    "cash_interest": 0,
+    "fractional_adjusted_units": true,
+    "position_targets": {
+      "sma10": "100% strong; 0% weak",
+      "hold": "100% first opening only, then fixed adjusted units",
+      "fixed50": "50% post-fee NAV at each month first open"
+    },
+    "fees_each_side": [
+      0.0,
+      0.001,
+      0.0025
+    ],
+    "main_fee": 0.001,
+    "fee_label": "hypothetical all-in proportional friction, no minimums/tax/FX; NOT verified personal broker fees",
+    "terminal": "mark to final close; no forced liquidation or terminal sale cost",
+    "daily_order": "mark previous position at open incl overnight, rebalance subtract fee from traded notional, mark at close",
+    "target_solver": "post-fee target w; buy notional=(w*N-S)/(1+w*f); sell notional=(S-w*N)/(1-w*f); no negative cash",
+    "baseline": "same-cost SPY buy-and-hold total-return proxy, not official SP500 index",
+    "cash_opportunity_limitation": "zero interest common to all; no risk-free or brokerage credit assumption"
+  },
+  "periods": {
+    "early": {
+      "first": "1994-01",
+      "last": "2014-12",
+      "months": 252,
+      "identity": "seen historical background"
+    },
+    "primary": {
+      "first": "2015-01",
+      "last": "2024-12",
+      "months": 120,
+      "identity": "seen historical main comparison"
+    },
+    "recent": {
+      "first": "2025-01",
+      "last": "2026-08",
+      "months": 20,
+      "identity": "seen short recent check"
+    }
+  },
+  "period_account_rule": "slice one continuous daily account; use preceding last close as denominator; first period initial cash; do not reset holdings/charge new entry at boundaries",
+  "metrics": [
+    "total_return",
+    "CAGR with exact fixed month count",
+    "close-to-close maximum drawdown including start anchor",
+    "trading-day longest underwater duration and recovered flag",
+    "average exposure",
+    "trade count buy/sell",
+    "sum fee dollars and fee/nav at trades",
+    "monthly returns and difference to hold",
+    "relative wealth = normalizedNAV/normalizedHoldNAV-1",
+    "same-period cumulative return difference in percentage points",
+    "state-held open-to-next-open return decomposition: skipped positive vs negative months, not cash attribution",
+    "largest missed and avoided months",
+    "paired monthly mean difference and Newey-West 3-lag descriptive 95percent interval"
+  ],
+  "policy": "no LEI production rule replacement; independent research annotation/action scenario",
+  "sources": {
+    "faber": "https://mebfaber.com/2017/12/13/episode-86-quantitative-approach-tactical-asset-allocation/",
+    "read_scope": "reuse prior saved author discussion, no new source request; next-open and zero-cash-interest are local adaptations"
+  },
+  "output": {
+    "schema_version": 1,
+    "task_id": "us-spy-forward-net-20261023",
+    "run_id": "us-spy-forward-net-20261023-20261023T175622-63dd798efd16",
+    "run_directory": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-spy-forward-net-20261023/us-spy-forward-net-20261023-20261023T175622-63dd798efd16",
+    "output": "/Volumes/win+mac通用/LeiSignal-新实验结果/us-spy-forward-net-20261023/us-spy-forward-net-20261023-20261023T175622-63dd798efd16/result",
+    "external_mount": "/Volumes/win+mac通用",
+    "external_device": 16777238,
+    "external_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9",
+    "estimated_bytes": 26214400,
+    "internal_metadata_bytes": 1048576,
+    "external_reserve_bytes": 10737418240,
+    "internal_reserve_bytes": 5368709120,
+    "execution_authorized": false,
+    "quota_enforced": false
+  },
+  "budget": {
+    "prior_method_source_requests": 7,
+    "current_market_request_used": 1,
+    "current_market_request_remaining": 0,
+    "effect_runs_before": 0,
+    "this_core_max": 1,
+    "parameter_search": 0
+  },
+  "checks": [
+    "calendar dates same as broad-index source and every month consecutive",
+    "past states invariant to future rows and uniform positive scaling",
+    "overnight return assigned before trade",
+    "fee proportional to actual notional; cash plus assets equals NAV; no overdraw",
+    "period decomposition reproduces continuous path; both baselines same dates/cost scenario"
+  ],
+  "strategy_source_hashes": {
+    "technical-system": "df92d85b3b04ed3ab71d56bc108d0effe8eb31051b7a1531eda59edcbf0aab20",
+    "technical-implementation": "85e0e3270ff96fe85247756805c58c650a0e83b21ea15c9feccea84d31aaf903"
+  }
+}

@@ -1,0 +1,409 @@
+{
+  "research.spy_sma10_20261023.state@1.0.0": {
+    "scope": "SPY USD adjusted-price historical sequential scenario, 1994-01 to 2026-08",
+    "not_for": [
+      "production_trade",
+      "historical_vintage_reconstruction",
+      "personal_actual_cost_account"
+    ],
+    "uses": [
+      "comparison",
+      "diagnostic"
+    ],
+    "input": {
+      "fields": [
+        "open",
+        "close",
+        "volume",
+        "date"
+      ],
+      "price_basis": "same-vintage adjusted OHLC total-return approximation; no extra dividends",
+      "currency": "USD",
+      "frequency": "daily valuation, monthly decision",
+      "calendar": "SPY dates equal stored GSPC dates; independent official calendar unverified"
+    },
+    "universe": {
+      "version": "fixed SPY chosen today, hash-bound input",
+      "eligibility": "finite positive OHLC, positive volume, matching market quote dates",
+      "warmup": "ten consecutive complete month closes in 1993",
+      "missing": "fail affected scope, no fill",
+      "quality_gate": "conditional current-vintage replay; historical arrival unknown",
+      "degrade": "no actual point-in-time or live claims"
+    },
+    "time": {
+      "observation_time": "completed formation month last quote close",
+      "available_at": "historical actual delivery unknown; assumed after close",
+      "decision_at": "after formation close under simulation assumption",
+      "execution_at": "next month first observed open; mark old position first",
+      "timezone": "America/New_York",
+      "effective_from": "2026-10-23 research only"
+    },
+    "dependencies": [],
+    "sources": [
+      "spy_sma10_20261023_contract",
+      "spy_sma10_20261023_inputcheck"
+    ],
+    "validation": {
+      "method": "prefix/scaling, observed calendar, hand arithmetic and independent reconstruction",
+      "tolerance": {
+        "absolute": 1e-08,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "docs/experiments/raw/us-spy-forward-net-2026-10-23/runner.py"
+      ],
+      "limitations": "actual checking separately receipted; historical versions/official calendar/real dividend cash unknown"
+    },
+    "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "conditional_current_vintage_proxy",
+      "implementation": "pending_controller_review",
+      "effectiveness": "not_yet_run",
+      "production": "not_authorized"
+    },
+    "lifecycle": {
+      "state": "exists",
+      "basis": [
+        "docs/research/definitions.v1.json",
+        "docs/experiments/raw/us-spy-forward-net-2026-10-23/contract.json"
+      ],
+      "verification_scope": "registration only; result receipts govern validation"
+    },
+    "id": "research.spy_sma10_20261023.state",
+    "version": "1.0.0",
+    "name": "SPY固定月度研究 state",
+    "type": "state_signal",
+    "profile": "research.spy_sma10_20261023",
+    "definition": {
+      "formula": "strong iff last completed month close > mean of inclusive last ten consecutive month final closes; equality weak",
+      "parameters": {
+        "sma_months": 10,
+        "fees": [
+          0,
+          0.001,
+          0.0025
+        ],
+        "main_fee": 0.001
+      },
+      "endpoints": "continuous 1994-01 to 2026-08; no period restart",
+      "unit": "state",
+      "direction": "separate return/risk evaluation; not predictive certainty",
+      "transforms": "only declared monthly mean and account policy"
+    }
+  },
+  "research.spy_sma10_20261023.hold@1.0.0": {
+    "scope": "SPY USD adjusted-price historical sequential scenario, 1994-01 to 2026-08",
+    "not_for": [
+      "production_trade",
+      "historical_vintage_reconstruction",
+      "personal_actual_cost_account"
+    ],
+    "uses": [
+      "comparison",
+      "diagnostic"
+    ],
+    "input": {
+      "fields": [
+        "open",
+        "close",
+        "volume",
+        "date"
+      ],
+      "price_basis": "same-vintage adjusted OHLC total-return approximation; no extra dividends",
+      "currency": "USD",
+      "frequency": "daily valuation, monthly decision",
+      "calendar": "SPY dates equal stored GSPC dates; independent official calendar unverified"
+    },
+    "universe": {
+      "version": "fixed SPY chosen today, hash-bound input",
+      "eligibility": "finite positive OHLC, positive volume, matching market quote dates",
+      "warmup": "ten consecutive complete month closes in 1993",
+      "missing": "fail affected scope, no fill",
+      "quality_gate": "conditional current-vintage replay; historical arrival unknown",
+      "degrade": "no actual point-in-time or live claims"
+    },
+    "time": {
+      "observation_time": "completed formation month last quote close",
+      "available_at": "historical actual delivery unknown; assumed after close",
+      "decision_at": "after formation close under simulation assumption",
+      "execution_at": "next month first observed open; mark old position first",
+      "timezone": "America/New_York",
+      "effective_from": "2026-10-23 research only"
+    },
+    "dependencies": [],
+    "sources": [
+      "spy_sma10_20261023_contract",
+      "spy_sma10_20261023_inputcheck"
+    ],
+    "validation": {
+      "method": "prefix/scaling, observed calendar, hand arithmetic and independent reconstruction",
+      "tolerance": {
+        "absolute": 1e-08,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "docs/experiments/raw/us-spy-forward-net-2026-10-23/runner.py"
+      ],
+      "limitations": "actual checking separately receipted; historical versions/official calendar/real dividend cash unknown"
+    },
+    "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "conditional_current_vintage_proxy",
+      "implementation": "pending_controller_review",
+      "effectiveness": "not_yet_run",
+      "production": "not_authorized"
+    },
+    "lifecycle": {
+      "state": "exists",
+      "basis": [
+        "docs/research/definitions.v1.json",
+        "docs/experiments/raw/us-spy-forward-net-2026-10-23/contract.json"
+      ],
+      "verification_scope": "registration only; result receipts govern validation"
+    },
+    "id": "research.spy_sma10_20261023.hold",
+    "version": "1.0.0",
+    "name": "SPY固定月度研究 hold",
+    "type": "benchmark",
+    "profile": "research.spy_sma10_20261023",
+    "definition": {
+      "formula": "initial affordable purchase then unchanged adjusted units",
+      "parameters": {
+        "sma_months": 10,
+        "fees": [
+          0,
+          0.001,
+          0.0025
+        ],
+        "main_fee": 0.001
+      },
+      "endpoints": "continuous 1994-01 to 2026-08; no period restart",
+      "unit": "USD_account_proxy",
+      "direction": "separate return/risk evaluation; not predictive certainty",
+      "transforms": "only declared monthly mean and account policy"
+    },
+    "policy": {
+      "selection": "fixed SPY",
+      "weights": "initial affordable purchase then unchanged adjusted units",
+      "cash": "USD100000, zero interest/no flows/borrowing; fractional adjusted units",
+      "fees": "each buy/sell notional times 0/0.001/0.0025 hypothetical friction; no minimum/tax/FX; not personal fee schedule",
+      "rebalance": "first observed monthly open when applicable",
+      "execution": "mark old units at open then solve post-fee target, close valuation",
+      "exit": "target change only, no terminal sale",
+      "reentry": "monthly target only",
+      "investability": "adjusted quote proxy; no actual dividend cash, broker or capacity verification"
+    }
+  },
+  "research.spy_sma10_20261023.fixed50@1.0.0": {
+    "scope": "SPY USD adjusted-price historical sequential scenario, 1994-01 to 2026-08",
+    "not_for": [
+      "production_trade",
+      "historical_vintage_reconstruction",
+      "personal_actual_cost_account"
+    ],
+    "uses": [
+      "comparison",
+      "diagnostic"
+    ],
+    "input": {
+      "fields": [
+        "open",
+        "close",
+        "volume",
+        "date"
+      ],
+      "price_basis": "same-vintage adjusted OHLC total-return approximation; no extra dividends",
+      "currency": "USD",
+      "frequency": "daily valuation, monthly decision",
+      "calendar": "SPY dates equal stored GSPC dates; independent official calendar unverified"
+    },
+    "universe": {
+      "version": "fixed SPY chosen today, hash-bound input",
+      "eligibility": "finite positive OHLC, positive volume, matching market quote dates",
+      "warmup": "ten consecutive complete month closes in 1993",
+      "missing": "fail affected scope, no fill",
+      "quality_gate": "conditional current-vintage replay; historical arrival unknown",
+      "degrade": "no actual point-in-time or live claims"
+    },
+    "time": {
+      "observation_time": "completed formation month last quote close",
+      "available_at": "historical actual delivery unknown; assumed after close",
+      "decision_at": "after formation close under simulation assumption",
+      "execution_at": "next month first observed open; mark old position first",
+      "timezone": "America/New_York",
+      "effective_from": "2026-10-23 research only"
+    },
+    "dependencies": [],
+    "sources": [
+      "spy_sma10_20261023_contract",
+      "spy_sma10_20261023_inputcheck"
+    ],
+    "validation": {
+      "method": "prefix/scaling, observed calendar, hand arithmetic and independent reconstruction",
+      "tolerance": {
+        "absolute": 1e-08,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "docs/experiments/raw/us-spy-forward-net-2026-10-23/runner.py"
+      ],
+      "limitations": "actual checking separately receipted; historical versions/official calendar/real dividend cash unknown"
+    },
+    "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "conditional_current_vintage_proxy",
+      "implementation": "pending_controller_review",
+      "effectiveness": "not_yet_run",
+      "production": "not_authorized"
+    },
+    "lifecycle": {
+      "state": "exists",
+      "basis": [
+        "docs/research/definitions.v1.json",
+        "docs/experiments/raw/us-spy-forward-net-2026-10-23/contract.json"
+      ],
+      "verification_scope": "registration only; result receipts govern validation"
+    },
+    "id": "research.spy_sma10_20261023.fixed50",
+    "version": "1.0.0",
+    "name": "SPY固定月度研究 fixed50",
+    "type": "benchmark",
+    "profile": "research.spy_sma10_20261023",
+    "definition": {
+      "formula": "restore stock to 50 percent post-fee NAV each first-month open",
+      "parameters": {
+        "sma_months": 10,
+        "fees": [
+          0,
+          0.001,
+          0.0025
+        ],
+        "main_fee": 0.001
+      },
+      "endpoints": "continuous 1994-01 to 2026-08; no period restart",
+      "unit": "USD_account_proxy",
+      "direction": "separate return/risk evaluation; not predictive certainty",
+      "transforms": "only declared monthly mean and account policy"
+    },
+    "policy": {
+      "selection": "fixed SPY",
+      "weights": "restore stock to 50 percent post-fee NAV each first-month open",
+      "cash": "USD100000, zero interest/no flows/borrowing; fractional adjusted units",
+      "fees": "each buy/sell notional times 0/0.001/0.0025 hypothetical friction; no minimum/tax/FX; not personal fee schedule",
+      "rebalance": "first observed monthly open when applicable",
+      "execution": "mark old units at open then solve post-fee target, close valuation",
+      "exit": "target change only, no terminal sale",
+      "reentry": "monthly target only",
+      "investability": "adjusted quote proxy; no actual dividend cash, broker or capacity verification"
+    }
+  },
+  "research.spy_sma10_20261023.policy@1.0.0": {
+    "scope": "SPY USD adjusted-price historical sequential scenario, 1994-01 to 2026-08",
+    "not_for": [
+      "production_trade",
+      "historical_vintage_reconstruction",
+      "personal_actual_cost_account"
+    ],
+    "uses": [
+      "comparison",
+      "diagnostic"
+    ],
+    "input": {
+      "fields": [
+        "open",
+        "close",
+        "volume",
+        "date"
+      ],
+      "price_basis": "same-vintage adjusted OHLC total-return approximation; no extra dividends",
+      "currency": "USD",
+      "frequency": "daily valuation, monthly decision",
+      "calendar": "SPY dates equal stored GSPC dates; independent official calendar unverified"
+    },
+    "universe": {
+      "version": "fixed SPY chosen today, hash-bound input",
+      "eligibility": "finite positive OHLC, positive volume, matching market quote dates",
+      "warmup": "ten consecutive complete month closes in 1993",
+      "missing": "fail affected scope, no fill",
+      "quality_gate": "conditional current-vintage replay; historical arrival unknown",
+      "degrade": "no actual point-in-time or live claims"
+    },
+    "time": {
+      "observation_time": "completed formation month last quote close",
+      "available_at": "historical actual delivery unknown; assumed after close",
+      "decision_at": "after formation close under simulation assumption",
+      "execution_at": "next month first observed open; mark old position first",
+      "timezone": "America/New_York",
+      "effective_from": "2026-10-23 research only"
+    },
+    "dependencies": [
+      "research.spy_sma10_20261023.state@1.0.0"
+    ],
+    "sources": [
+      "spy_sma10_20261023_contract",
+      "spy_sma10_20261023_inputcheck"
+    ],
+    "validation": {
+      "method": "prefix/scaling, observed calendar, hand arithmetic and independent reconstruction",
+      "tolerance": {
+        "absolute": 1e-08,
+        "relative": 1e-10,
+        "integer": 0
+      },
+      "tests": [
+        "docs/experiments/raw/us-spy-forward-net-2026-10-23/runner.py"
+      ],
+      "limitations": "actual checking separately receipted; historical versions/official calendar/real dividend cash unknown"
+    },
+    "status": {
+      "definition_clarity": "explicit",
+      "data_qualification": "conditional_current_vintage_proxy",
+      "implementation": "pending_controller_review",
+      "effectiveness": "not_yet_run",
+      "production": "not_authorized"
+    },
+    "lifecycle": {
+      "state": "exists",
+      "basis": [
+        "docs/research/definitions.v1.json",
+        "docs/experiments/raw/us-spy-forward-net-2026-10-23/contract.json"
+      ],
+      "verification_scope": "registration only; result receipts govern validation"
+    },
+    "id": "research.spy_sma10_20261023.policy",
+    "version": "1.0.0",
+    "name": "SPY固定月度研究 policy",
+    "type": "policy/strategy",
+    "profile": "research.spy_sma10_20261023",
+    "definition": {
+      "formula": "100 percent for prior strong state, zero for weak, next first-month open",
+      "parameters": {
+        "sma_months": 10,
+        "fees": [
+          0,
+          0.001,
+          0.0025
+        ],
+        "main_fee": 0.001
+      },
+      "endpoints": "continuous 1994-01 to 2026-08; no period restart",
+      "unit": "USD_account_proxy",
+      "direction": "separate return/risk evaluation; not predictive certainty",
+      "transforms": "only declared monthly mean and account policy"
+    },
+    "policy": {
+      "selection": "fixed SPY",
+      "weights": "100 percent for prior strong state, zero for weak, next first-month open",
+      "cash": "USD100000, zero interest/no flows/borrowing; fractional adjusted units",
+      "fees": "each buy/sell notional times 0/0.001/0.0025 hypothetical friction; no minimum/tax/FX; not personal fee schedule",
+      "rebalance": "first observed monthly open when applicable",
+      "execution": "mark old units at open then solve post-fee target, close valuation",
+      "exit": "target change only, no terminal sale",
+      "reentry": "monthly target only",
+      "investability": "adjusted quote proxy; no actual dividend cash, broker or capacity verification"
+    }
+  }
+}

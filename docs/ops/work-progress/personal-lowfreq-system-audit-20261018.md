@@ -1,3 +1,16 @@
+# SPY月度趋势固定比较已完成 2026-10-23T18:24:39.628152+08:00
+
+- 本轮已完成一只SPY的历史顺序账户比较，1994-01至2026-08连续392个月；主段2015—2024、早段1994—2014、近段2025—2026/08都为已见历史。SMA10月末形成、下月首个保存交易开盘执行；持续持有与每月恢复半仓对手；单边0/0.10%/0.25%情景、现金零息，不称用户真实净收益或未见验证。
+- 主要十年0.10%：趋势年化6.28%/最大跌幅26.08%，持有13.00%/33.72%，半仓6.65%/17.71%。相对持有少跌7.64个百分点但少收益6.72个百分点/年；相对半仓收益略低、跌幅深8.36个百分点，暂不采用固定全进全出。早段正结果和2020少亏/少赚并列保留，不调参追正。
+- Luna实现/展示，Astra方法审阅，主控独立重建主费用三条日路径与392条状态，最大相对数值差1.91e-14；8人造时点/账户案例通过。另一次Luna只读交付核对无新可行动错误。实际浏览器默认主段/10bps/超额，近期归一及25bps切换核对；日收盘风险和月曲线区分。
+- 当前源1/1请求已成功，501条至10/22；实际18:07存储预检恢复后核心1次运行成功。旧容量失败、原历史版本未知、旧定义库3条来源额外字段检查失败均保留。4新研究卡单独合格，不称全库绿色。没有重复旧核心/改生产/交易/清理/通知。
+- 新报告docs/experiments/us-spy-forward-net-2026-10-23.md；同名raw与独立页面web/public/research/us-spy-forward-net-20261023/。大结果约23.6MB在已登记外盘，摘要SHA87fe63a83113bd064ae3cdda2c1ebd8a3fac0ec591292f5c399d60dc8bff2d8c；源、路径、失败、独核详见run-receipt/controller-result-review/delivery-validation。
+- A股仅资料资格核对：固定300股932813日线含金额，原short-reversal筛选outcomes缺完整集合23051个候选月份；后续应复用既有36019行完整机会，不是CSI1000/沪深300历史池。金额分层效果未评价。四指数资料仍research-utility owner；French六格组合由strategy-account owner已完成，本轮不重复。
+- checked_coordination_sha=b7c7e7fed84ac05c8ca7ba2a47d4ef77ee7c3dc2；已读self/research-utility/strategy-account/investor-workspace/storage/research-dispatch-controller与COORDINATION，时间同本段；无文件冲突。工作分支codex/personal-lowfreq-system-audit-20261018，基线ae516dc163a4a91aa344a7b7fe9436f22a961386；准确成果commit由最终协调记录引用，不以旧SHA冒充新成果。
+- 有界SPY问题已答；个人实际费表/现金收益、独立未来及A股金额效果未完成。下次仅接完整滞后金额或合格历史成员以改变反转适用范围判断，不重跑本次SMA核心。无后台执行承诺。
+
+---
+
 # 当前来源补查的真实阻塞 2026-10-23T17:32+08:00
 
 为免只列资料缺口，范围追加1次现有Yahoo公开源资格请求（coord a96b0bc1365142541b83b5a527a92dc5fe254648），旧计划17:20已通过但17:32实际recheck_saved_plan再次拒绝5GiB保留。网络请求0、重试0、新外盘目录0、效果0；失败及容量读回见本新raw/current-source-attempt.json。前一阶段“当前不再storage blocked”只代表17:20快照，现在已失效；原记录保留，报告/contract/登记更新为最新storage及input_cost blocked。所有不依赖新取数的小规范/页面/现有资料核验已交付，实际前向效果未完成。没有绕线、删除或降低要求。

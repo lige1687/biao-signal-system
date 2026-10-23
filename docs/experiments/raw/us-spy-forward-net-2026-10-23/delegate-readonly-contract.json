@@ -1,0 +1,43 @@
+{
+  "mission": "Read-only bounded evidence audit for resumed regime/universe research",
+  "task_scope": [
+    "A-share liquidity input inventory",
+    "SPY historical sequential method review"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/src",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/scripts/archive",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 2,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "exact evidence paths",
+    "feasible next test or blocking reason",
+    "limitations"
+  ],
+  "stop_conditions": [
+    "missing permission",
+    "scope ambiguity",
+    "unsafe action"
+  ],
+  "executor": {
+    "models": {
+      "inventory": "gpt-6-luna",
+      "method": "gpt-6-astra"
+    },
+    "reasoning_effort": {
+      "inventory": "medium",
+      "method": "high"
+    }
+  },
+  "controller_review": {
+    "required": true
+  },
+  "checked_coordination_sha": "4a86f2fdacc1d52a7930a20428c27183c9fbc5fa",
+  "coordination_commit": "3149f2af75cbcd59de8cfa9c77d1d9a862f21558"
+}

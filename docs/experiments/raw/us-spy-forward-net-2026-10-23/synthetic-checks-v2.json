@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "kind": "synthetic_engine_checks_only",
+  "status": "pass",
+  "real_market_data_read": false,
+  "real_market_statistics_run": false,
+  "checks": [
+    {
+      "name": "post_fee_half_target_buy",
+      "status": "pass",
+      "detail": "buy notional uses (w*N-S)/(1+w*f); post-fee invested weight is 50%"
+    },
+    {
+      "name": "post_fee_full_exit",
+      "status": "pass",
+      "detail": "full exit sells only existing units and deducts fee from notional"
+    },
+    {
+      "name": "simulated_overnight_before_month2_exit",
+      "status": "pass",
+      "detail": "simulated month-1 strong to month-2 weak path marks old units at the higher month-2 open before applying the sell fee"
+    },
+    {
+      "name": "continuous_account_boundary",
+      "status": "pass",
+      "detail": "a new calendar period does not reset units or create a boundary-only trade"
+    },
+    {
+      "name": "positive_scale_signal_invariance",
+      "status": "pass",
+      "detail": "uniform positive price scaling leaves the ten-month state unchanged"
+    },
+    {
+      "name": "whole_account_uniform_scale_path",
+      "status": "pass",
+      "detail": "scaling every price and starting cash by the same positive factor preserves the full simulated NAV-return path"
+    },
+    {
+      "name": "past_state_future_row_invariance",
+      "status": "pass",
+      "detail": "altering post-formation prices cannot change an already formed signal"
+    },
+    {
+      "name": "terminal_mark_without_sale",
+      "status": "pass",
+      "detail": "last observed close marks the remaining units; no terminal sale or fee"
+    }
+  ],
+  "limitation": "These deterministic cases test implementation arithmetic and information timing only; they are not historical SPY validation."
+}

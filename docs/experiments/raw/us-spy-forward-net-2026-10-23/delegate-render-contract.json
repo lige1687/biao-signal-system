@@ -1,0 +1,34 @@
+{
+  "mission": "Render saved SPY scenario curves with explicit benchmark and hypothetical costs",
+  "task_scope": [
+    "static chart and stats display only; no market recomputation"
+  ],
+  "read_only_paths": [
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/us-spy-forward-net-20261023/us-spy-forward-net-20261023-20261023T175622-63dd798efd16/result/summary.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-spy-forward-net-2026-10-23/controller-result-review.json"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/web/public/research/us-spy-forward-net-20261023/index.html",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/web/public/research/us-spy-forward-net-20261023/data.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "working responsive page",
+    "correct period anchors and excess arithmetic",
+    "source-bound JSON copy"
+  ],
+  "stop_conditions": [
+    "missing inputs",
+    "scope ambiguity"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}

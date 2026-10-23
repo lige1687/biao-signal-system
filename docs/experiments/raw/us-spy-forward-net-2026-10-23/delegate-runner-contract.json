@@ -1,0 +1,37 @@
+{
+  "mission": "Implement frozen SPY historical sequential scenario without executing real-market effects",
+  "task_scope": [
+    "Write runner.py matching contract.json",
+    "synthetic-only checks"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-spy-forward-net-2026-10-23/contract.json",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/experiment-backtest-principles.md",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/research/definition-standard.md"
+  ],
+  "write_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-spy-forward-net-2026-10-23/runner.py",
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/.codex/worktrees/personal-audit-coordination-20261018/docs/experiments/raw/us-spy-forward-net-2026-10-23/synthetic-checks.json"
+  ],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "runner.py",
+    "synthetic validation",
+    "limitations"
+  ],
+  "stop_conditions": [
+    "ambiguity",
+    "missing input",
+    "real-market execution requires controller"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "medium"
+  },
+  "controller_review": {
+    "required": true
+  }
+}
