@@ -1,3 +1,13 @@
+# 四池最终原件复核及美股续源 2026-10-24T01:49:50.923367+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=58f574b41a0c4c884f92b7102f8cef13fbe64070；checked_at=2026-10-24T01:49:50.923367+08:00。已读COORDINATION/self、downside/investor/dispatch/personal/mechanism最新，前轮其他范围不变；第一次写前断言发现downside登记新常见池，未写，读后接续。四池本方，新小盘及其他常见池归原downside owner，BaoStock不并发。
+- 延续人类此前继续拉各universe及多源准确性授权。实物确认CN昨晚21:12已完成2577/2577新价格来源，0剩余，2581请求含4旧会话错误/2独立修复，429490225B外盘。旧resume停567、总报告仍运行中属于未回收完成状态，本轮必须修正，不重复取数。
+- root只写原raw/controller_*、resume-status/总清单、报告/registry本键/INDEX本行/catalog四池status/reason及原progress；Sol独核CN只controller_cn_final_*；Sol美股新来源只us_sina_*及原外盘新子目录。系统页面仍原owner单写。当前代码主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加未提交，只有协调元数据远端。
+- 验收CN全部原件SHA/去重/字段日期数值及旧130+267复用定位；US原缺口中用已验证新浪接口先3只探针，成功才续有限清单，单对象至多1次重试、429/验证码停源。无重复Yahoo/Stooq、安装/注册/付费/研究效果。2GiB预算保留，本机20.56GB/外478.45GB固定UUID当前通过；所有新原件/临时/日志外盘。
+- 四池收益入口保持disabled，取得资料与生效/身份/退出/复权资格分别说明。完成可执行核查、实际原件/余缺与Web读回后交付；不把启动或已下载当资格通过。其他聊天仅协调文档读状态，不因代理来信直接回发消息。
+
+---
+
 # 多来源独核阶段与A股续采 2026-10-23T19:23:31.521474+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=ee72f0c698b27fab9b87e4f2ab91a64492202b61；checked_at=2026-10-23T19:23:31.521474+08:00；已读COORDINATION/self、investor-workspace、downside-sensitivity、personal-lowfreq、strategy-account、mechanism、market-style新增段，dispatch/storage沿前轮。无同写，四池数据仍本方，其他任务只读复用。第一次写前基线断言发现其他任务推进，未写；读差异并快进后接续。
