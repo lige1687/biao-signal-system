@@ -1,3 +1,16 @@
+# 净超额、前向与股票池资格核查交付 2026-10-23T17:35:30.065240+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner沿原；status completed（持久规范/展示修正/本次资格审查）；真实前向净效果仍blocked_storage_and_input_cost_qualification；scope_released true仅本次小规范/静态页修正，旧冻结范围保持。checked_coordination_sha=17cfc3a6af9463460392bcfac1e070c4d92b2bf3；checked_at=2026-10-23T17:35:30.065240+08:00；已读COORDINATION、自身、research-utility17:22、investor17:25、strategy-account17:18与dispatch；已知80RankIC补算、正式超额UI和French盈利+动量组合各归原owner，本轮未重复。
+- 成果分支codex/personal-lowfreq-system-audit-20261018@ae516dc163a4a91aa344a7b7fe9436f22a961386，前阶段70098223d709295dcb3072f715b58777d4a55f4a；20准确小文件共387307B，正常推送、fetch完整SHA与全部文件字节读回。报告docs/experiments/net-excess-forward-requirements-2026-10-23.md，raw同名；registry本键方法论与验证/mixed、INDEX本行，自己的progress阶段保留。主共享树只精确小增量镜像，无覆盖他人段落；用户明确要求的memory扩展位于~/.codex/memories/extensions/ad_hoc/notes/20261023T171106-net-excess-forward-only.md（仓外本机，不入Git、主memory未改）。
+- 实际完成：playbook新增个人成本/对应基准/差额口径/前向可得及universe机制要求；French独立静态页首屏净超额未评价，公开毛收益折叠保留，B不是母指数。浏览器实际4polyline、因子/时期切换与关闭/默认恢复；HTTP MIME/全字节/报告API全文、JS语法、两树归置通过。旧data.json、PNG和raw22逐字未改，未扩官方曲线接口。
+- 12个人造时间案例通过，晚版本追加等只验证传入时间字段；真实月末日历、字段真实性、供应商历史版本及下一开盘成交均未证明，Astra窄审边界已写清。Luna只读核明固定300/600反转不是CSI1000/大盘分层，原低波动比较无稳定优势，规模/行业/流动性仍未排除；新报告明确对应待验证问题与反例，不宣称小盘必强。
+- 真实输入检查：SPY收盘8,456行截至2026-09-02，旧OHLC8,457行截至09-03；缺完整9月形成月与历史可用版本，个人费表/成交换手及适用母指数也未齐。无当前市场判断或数值个人净超额。
+- 存储变化必须按时点保留：最初约2.35GiB拒绝；17:20独立plan通过（内6,425,214,976B、外487,366,459,392B）；17:32准备唯一当前资料来源补查时recheck_saved_plan再次拒绝5GiB保留，容量读回4,549,148,672B，0网络请求/重试/新外盘目录。当前不是继续沿用旧失败，而是新真实拒绝；没有绕线/删除/降阈值。具体current-source-attempt.json与storage-preflight-current.json均保留。
+- 实际累计：7公开方法工具动作=2查询+5打开，3正文失败；新行情请求0、真实效果0、生产/交易/提醒/自动恢复0；本题存储预检3次含一次通过，实际模型费用未知。状态设计不冒充原生可运行合同/注册适配器；无后台进程。
+- 下次最小动作：容量恢复后先重检，同时复用原owner当期历史成员/退出与成交资格，不重复采集；补对应基准、个人费用与完整可得/行动时点后才冻结必要原生比较。只拿当前回溯版时降为明确历史模拟用途，不补成严格前向。当前有界审查已交付，原更大实测目标未冒称完成。
+
+---
+
 # 当前资料资格最后补查 2026-10-23T17:31:52.353804+08:00
 
 - task-id/owner沿原；active；checked_coordination_sha=387a7997fec1ad5028829758cb6ead66e90dc723；checked_at=2026-10-23T17:31:52.353804+08:00；已读self/COORDINATION、research-utility17:22、investor17:25、strategy-account17:18与dispatch。其80RankIC/正式超额UI/盈利加动量固定组合均各自owner，不接管。
