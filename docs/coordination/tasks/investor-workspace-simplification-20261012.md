@@ -1,3 +1,9 @@
+# 官方名单报告链接修正窄同步 2026-10-24T02:55:29.661705+08:00
+
+- 原task/owner；active；checked_coordination_sha=c45df8ac24b38722e61fc2b86a3c164f0d7686d9；checked_at=2026-10-24T02:55:29.661705+08:00；已读self/utility最新，COORDINATION/dispatch沿本轮，无同写。只同步本报告29b3168a及registry本键report_sha256，差异为2处跨报告URL及3处raw文本，数值结论不变；catalog保持7f7c30aa。验收实际源/运行/API全文与页面链接，不重跑研究或已通过数值检查。
+
+---
+
 # 官方名单报告接入验收 2026-10-24T02:54:35.980110+08:00
 
 - 原task/owner；本轮completed；scope_released true；checked_coordination_sha=aabbc83103ffc6edbaae576e88ae0f7dbdc6bfee；checked_at=2026-10-24T02:54:35.980110+08:00；已读COORDINATION/self/research-utility最新、dispatch沿原；无同写。5文件源/运行树逐字一致，registry仅新增本键、INDEX仅本行，catalog严格比较只有csi300/csi500标签与reason变化。
