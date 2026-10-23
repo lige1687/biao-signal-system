@@ -1,3 +1,16 @@
+# 成交活跃分层反转研究已交付 2026-10-23T19:40:51.902275+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（本轮固定300股活跃分层问题）；scope_released true仅本轮新增范围，旧冻结资料继续保护。checked_coordination_sha=bde7d47fe9af2315cda81897d58c09699ecf5543；checked_at=2026-10-23T19:40:51.902275+08:00。已读COORDINATION/self及research-utility-review-20261012、research-dispatch-controller、strategy-account-bridge-20261020、mechanism-rebalancing-review-20261020、investor-workspace-simplification-20261012、market-style-observation-20261020、downside-sensitivity-universe-20261023、lowfreq-strategy-discovery-20261019、storage；交付前补读mechanism19:37，28份历史资料/新跨期价格关联仍归其owner。本题未取新行情，不接管四历史指数池、机构或正式UI。
+- 科学成果codex/personal-lowfreq-system-audit-20261018@8003f1626ad5d699e8ae2bed63dbb7f07c61a31b；交付回执/进度f8f8fc1ee2fcb3f0c82fe7b638b2dc04cff631c4，均正常push并fetch核同。45准确成果文件逐字节读回；报告docs/experiments/reversal-activity-increment-2026-10-23.md SHA256 ecaace6cf98d5af59d4e7755c8fc23f143b0b0fe3c7c63f91a9afe60e58fc56f。两树窄镜像、registry本键、INDEX本行、两张静态SVG已核；未改正式catalog/页面代码。
+- 复用固定300历史A股，2015—2025共132月、35850合格股月、每月237—292只，3金额档×8名单×两费用48账户。单边0.25%报价情景G5年均10.67/4.59/2.70%，同档全体17.65/4.40/1.55%，同数量低波动11.98/5.19/5.13%。低档反转相对全体月均−.490pp，高档+.157pp；低减高−.647pp，95%范围[−1.220,−.073]。没有支持低成交额更适合反转；非CSI300/CSI1000，不能推断市值/散户机制。
+- 相对低波动三档长期年均都较低，排名关联虽正但五组不稳定递增；2022—25三档都落后低波动。反转多留上涨机会也多承受大跌，每年买卖金额19—20倍、成本影响显著。暂停直接月度最弱20%作为通用新买入规则，保留高档粗控制波动及排序/机会线索，不挑G3/改期限追正。
+- Sol实现、Astra方法/结果限定审、Luna执行及55源端点核、root独立48资金/128352日/256854笔/96差额/396档月和18原件金额锚点均通过；13合成、归置、准确差异空白、实际HTTP/报告API/真实浏览器图像解码通过。排名关联明确为全档，旧标签明确次月首开盘至再下月首开盘。原0效果启动失败保留，必要修复1/3成功；总真实效果1批，来源6/6含2失败，行情0，无拟合调参。
+- 限制：全部已见历史，真实费表/母指数/历史到达版本/实际成交/完整分红现金未合格。未知估值平均6.31/3.37/2.47%、峰值67—71%；55持仓源核指向2015停牌，不当风险保护。大结果约39MB在已登记外盘，定位及408manifest在raw/result-locator；小结果超初估已记storage-actual，保留5GiB本机储备，无删除或回退大结果到内盘。
+- 目标okr-8830a1f1ec4f仅追加结果note v41→42并读回，status in_progress/4of6保持，不代用户验收整体目标。报告与曲线http://localhost:5173/library?report=docs%2Fexperiments%2Freversal-activity-increment-2026-10-23.md；默认同档全体超额，绝对图另列。当前无本轮运行进程/后台/通知/生产/交易变更。
+- 后续仅在历史标准池/行业等资格带来新证据时冻结新的问题：优先核共同市场或行业涨跌扣除后的反转是否有增量；原方法与数据先资格检查，不重复本轮核心，不用已有历史冒充新验证。宽基ETF决策为主、个股用于支持验证的原则保持。本轮有界问题完成，整个长期策略研究未宣称完成。
+
+---
+
 # 成交活跃分层已运行及窄图表交付范围 2026-10-23T19:25:20.805312+08:00
 
 - status active；checked_coordination_sha=732218c34abf07629457213575d48e88673f9a7f；checked_at=2026-10-23T19:25:20.805312+08:00；已读本轮原清单并补读downside19:22两项ETF完成、market-style19:15仅方案交付、mechanism19:18两基金历史资格、utility19:23四池续采仍未准入。首次写前断言因utility推进而停，读差异后继续。四历史池/小指数/机构/工作台各归原owner，本题只固定300活跃分层，无重复取数/同写。
