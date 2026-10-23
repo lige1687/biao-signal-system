@@ -1,3 +1,17 @@
+# 盈利与资产增长联合组合交付 2026-10-24T02:11:41.466076+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed（本轮公开联合组合问题）；scope_released true本轮新增路径，原冻结证据继续保护。checked_coordination_sha=f8c250354c16d9698d2d767dc10012d834db849c；checked_at=2026-10-24T02:11:41.466076+08:00。已读COORDINATION/self、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、mechanism-rebalancing-review-20261020、downside-sensitivity-universe-20261023、investor-workspace-simplification-20261012、market-style-observation-20261020及research-dispatch-controller；补读mechanism02:06与investor02:09交付，无重复取数/运行/同写。
+- 新docs/experiments/profitability-investment-combinations-2026-10-24.md SHA19eec835f958b8ad235a2839ba101c4da8a5932954c1a302ccf72af36cadc280及同raw完整。1新家族、2条件、2规模、3事前时期；1核心、0追加效果/调参/前向版本。French真实32格同时条件公开收益，758月完整，作者组内市值权重；跨组参照等金额每月重配，不能叫官方单条件组合或母指数。
+- 主期2015—24大强盈利慢增长17.262%毛年化/月末跌24.651%，单盈利14.459%/23.420%；小13.322%/41.156%对10.393%/44.162%。主期两规模月差范围均跨0，普通相关0.893/0.938仍高；早大12.235%落后单慢增长12.756%，近20月两规模又落后最强简单对手。保留慢增长逐股核验候选；快增长通用用途暂停。无净费/母指数/行业调整/可交易证明。
+- 唯一source french_joint_op_inv_202608与object reference.french.joint.op_inv@1.0.0登记，其他原条目保持。新卡针对性结构校验通过；旧全表外部source格式不兼容旧校验器，未改他人或声称全表绿。方法/代码修复在真实效果前，02:02:34最终冻结后1次真实成功；来源6请求含ZIP网页失败，原ZIP直接下载成功，0再搜索或引擎安装。
+- Sol medium唯一analyze/synthetic执行（11合成检查），Astra high前后方法与结论只读，独立第二Sol medium不读执行脚本从原CSV核所有14组合月路径、252主要指标、12月差区间与4数量统计，浮点误差内一致。root源资格/关键数/图/展示与读回。失败账保留，实际token/费用未知。
+- 2图共6面板含绝对和相对盈利/全部组曲线，2PNG视觉核；5173实际报告/表/2SVG569x512无横溢，8000/5173最终正文逐字一致。registry新键/旧自身键SHA和INDEX新行，旧本报告原SHA018b3116的全部字节前缀保持，仅追加日期链接。归置与窄diff通过。
+- 固定外盘约4,582,433B，本地小raw/报告约235,554B；02:01UUID/设备/容量合格，原plan绑定，未删除/迁移/回退内盘。新报告接原owner反转48账户负结果和机构24净赎回期7整体净买最新反例；历史指数采集、5188镜像及UI不接管。
+- 主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加本地未提交；源码/报告未自动推送，仅协调元数据发布。自己的progress及delivery/manifest位置可复核；仓外目标数据库沿原确认边界只读，未写种子冒充更新。
+- 有界研究完成，整体策略发现未完成；下一改变判断的证据为实际披露版本财报/历史资格、持仓行业与换手费用、准确母指数，才新开逐股检验。不追加同表权重搜索或把历史收益当新前向；没有后台运行/通知/生产/交易授权。
+
+---
+
 # 联合分组定义登记范围补充 2026-10-24T02:00:11.263844+08:00
 
 - task-id strategy-account-bridge-20261020；status active；checked_coordination_sha=c4308ddd686cf39c798cd0d00935e59b2c8e3f99；checked_at=2026-10-24T02:00:11.263844+08:00。已读COORDINATION/self、utility、personal、mechanism、downside、investor、market-style及dispatch，补读market-style01:57结案变化，无同写冲突。
