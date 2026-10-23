@@ -1,3 +1,17 @@
+# 两池官方历史事件多源核验与系统交付 2026-10-24T02:59:12.911417+08:00
+
+- task-id research-utility-review-20261012，owner沿原；status completed（本轮有界资料核查），完整历史池未合格；scope_released true仅本轮新资料，原件/失败/冻结保护不变。checked_coordination_sha=54dc9bd26919ae4e4a6d1110886bab2929bd804e；checked_at=2026-10-24T02:59:12.911417+08:00；已读COORDINATION、自身、investor最新02:57完成、downside02:33的其他9池、dispatch；无新同写，不接管其他9池或运行树。
+- 本轮保存33中证公告、32附件、7交易所/公司日期原件；86有结果请求24647397B外盘（含页面索引，不冒称86独立来源），使用原64MiB计划/同设备，原总体2GiB预算不重置。复用264个2015–2025月末源、0 BaoStock新登录、0报价重下、0因子回测。去重后53公告×指数项：45反映所宣布变更，8冲突（300/500各4）；不是全历史准确率。2015May两退市日期补核为5/20、18换18等正例保留。
+- 明确冲突：2015Dec300招商地产→招商蛇口；2021Jun30025/50050全部未换，2021Dec28/50全部未换，2022Dec15/50未换且Jan/Feb同错、March集合相同；2021Sep500缺中国能建601868。不得把vendor updateDate当真实发布/生效时刻，也不由March状态推断实际供应商迟报时长。
+- 自身重要失败：代码解析漏掉附件12524/13420中“-＋名称”的两笔调入，第一版错误解释499；32附件逐条独审仅2例，分别由官方公告绑定601598/601868。最终53项据修正结果，v1错误产物保留，旧原件未覆盖。10/8旧候选已有2022同类反例；收尾核13官方原件可复用且字节相同，本轮重复下载可避免，prior-source-reuse-review.json如实留账，不称全部新发现。
+- 最终报告docs/experiments/cn-membership-event-audit-2026-10-24.md SHA8261ae44001c9358c9c8e6990d1c6346fbd9885608e583313c80d526f0194fd2，registry仅本键/INDEX本行。raw/controller-final-summary.json SHA29ea362de9f33a1a955b57e74b3271f3faf7a8b6c33391251ff23f9432785011；controller-acceptance.json SHAaf37ebdc83c8cabe8d1549b734a5d26f3912c37f6c62745ca5269ee7513264b8，含180直接证据绑定与86原件指纹、两缺码全部有来源、源/运行/API一致及原报告a2ab04f8不变。
+- 完整明细在原固定外盘universe-data-completion-20261023/...20261023T174722-64e02fe6da9a/result/membership-event-20261024/，小摘要记录准确路径SHA；source-index当前86条版与旧79/84条版快照均留外盘，不拿变动sources.json冒充旧指纹。新本机raw约0.6MiB，当前资料未进Git。原策略两文件SHA仍df92d85b...b20、85e0e327...903，无规则修改。
+- 主控已实际浏览器读53/45/8、错误表和中国能建；系统owner单写运行树并验四池disabled，catalog只300/500 statusLabel/reason为“历史名单已发现错配”，SHA7f7c30aaae1027e6ca3af2f4609d6e00aecf12dd24cb924f38e9beaab1f37ae4。最终报告/registry补注与HTTP全文SHA均一致，API200；跨报告链接修成/library查询，raw写文件位置而非伪HTTP链接。system回执cn-membership-intake-20261024.json SHAd70dda93eaf41cfe31a7a006a5a4c222cfe8c80c9603821d15fd921c40660e59；归置退出0。没有组件/数据库/定时/服务/交易或其他AI模型设置变动。
+- 工作基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，加本机准确未提交；本轮只推协调元数据，源码与外盘不称远端可复现。Sol medium执行/独核、Astra high方法与条件日期复核，真实模型成本未知。无后台持续任务/主动通知。
+- 仍缺2015Jun500准确官方表、完整起点和全部临时事件覆盖、复权/分红/退出用途；美股候选748/3349及身份缺口沿前阶段不变。恢复先读本final摘要和10/8旧来源，按URL+指纹复用，独立新派生成员不得覆盖冻结；完整资格足够后才新收益。来源已获取不等于可回测，本阶段不宣称所有universe已齐。
+
+---
+
 # 多年度官方来源核验与展示范围 2026-10-24T02:38:54.335914+08:00
 
 - active，原task/owner；checked_coordination_sha=a05ecefb2bfdbd12b0e049f43f581e9b008bb620；checked_at=2026-10-24T02:38:54.335914+08:00；补读downside13池结案，self/investor/dispatch范围不变。另一批13池报告归原owner，本方只引用，不改写/代完成。
