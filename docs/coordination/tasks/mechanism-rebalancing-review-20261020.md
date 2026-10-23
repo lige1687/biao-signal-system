@@ -1,3 +1,15 @@
+# 净赎回、股票实际成交与期初账面流动资产核验开工 2026-10-24T01:49:34.634390+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner原root；status active；scope_released false。checked_coordination_sha=b19558c3af72d5d1721d3a5f9e69ed0b21fbaf52；checked_at=2026-10-24T01:49:34.634390+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/research-utility-review-20261012/personal-lowfreq-system-audit-20261018/strategy-account-bridge-20261020/investor-workspace-simplification-20261012/market-style-observation-20261020/downside-sensitivity-universe-20261023。首次普通push非快进拒绝，fetch后补读downside01:48新增9池资料与market-style01:49指标方案；各自独立范围保持，四池/活跃反转/ETF/正式UI仍原owner；本题新原件字段不与之重叠。
+- 用户本轮“可以的，继续做吧”授权已有机构研究继续。新的有界问题：在原两基金2019–2025完整报告中，净赎回与股票净成交卖出是否同时发生，加入同范围期初银行/货币资金和结算备付金后是否减少误贴资金压力标签。低频用途为机构信息解释资格；不拟合收益、不重跑昨天两基金半年或US/NAAIM/AAII/CFTC封存研究。
+- 原成果基线codex/mechanism-rebalancing-review-20261020@fbf32153c2c7d7c4398eefea251a71144d48ffe7。原28PDF/报告时点/申赎与再投原数据只读。新增源字段是全期股票买入/卖出成交总额及两家统一余额分项，FY减H1得H2。不能把嘉实旧银行值与华夏旧银行加结算合计混用，不能用期末冒充期初，不能把账面余额当期间可动用资金。
+- 唯一写范围：root新docs/experiments/a-share-fund-cash-trades-mechanism-2026-10-24.md、同名raw主合同/摘要/脚本/方法/核验/回执、原work-progress、registry本键/INDEX本行；Sol cn_source_feasibility仅新raw/huaxia，Sol cn_price_reuse仅新raw/jiashi；Astra cn_method_gate只读方法审。先只读核各5原件可行性，样例金额已见，全部研究标探索历史核验，非独立未见验证。
+- 当前资料支持完整成交金额核验，需逐份核14+14总额范围/货币/费用和期初余额口径。以报告净赎回及条件扣再投两解释并列，不择优。后续冻结同批基金半年比较、连续金额/方向与反例；现金缺口只作账面诊断，不贴强制出售/无风险标签。只做必要比较，缺核心源先独立推进；不能用规模、换方向/期限/基金追正。
+- 新大明细/普通临时/日志按既有plan_output新唯一外盘目录，预计10MiB外盘/2MiB小本机。storage实核available及UUID相符，内约20.55GB、外478.45GB，运行前再核；不改旧原件/删除/迁移/仓外配置/目标DB。原两策略SHA及current-standards绑定本合同，原生技术workflow不覆盖基金行为描述，不冒称通过。
+- 必需验收：28原件逐项页码/费用口径/时点；年减半年及跨年余额桥接；同批基线/新增信息表现与各基金/年份反例；独立原文和金额重算；全部失败/已见样例/累计尝试保留；归档/API/准确文件Git读回。统计只此固定比较、0拟合/参数搜索；旧>=1268年度拟合/51季度拟合/4Pro与昨1矩阵不归零。源请求完整累计及token费用未知；本轮先2论文页请求含NBER403一次，不原样重试。无付费/注册/生产/交易/通知或后台授权。
+
+---
+
 # A股28份报告与跨期申赎效果已交付 2026-10-23T19:52:41.857480+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner原root；status completed（本轮两基金公开后半年价格增强问题）；scope_released true仅本轮新增路径，冻结源继续保护。checked_coordination_sha=a26716ee0eaad5e6b3e4657f6b4197230e7b8e40；checked_at=2026-10-23T19:52:41.857480+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/research-utility-review-20261012/personal-lowfreq-system-audit-20261018/strategy-account-bridge-20261020/investor-workspace-simplification-20261012/downside-sensitivity-universe-20261023/market-style-observation-20261020，交付补读personal19:40活跃分层完成；末次fetch无再变，其他owner价格/ETF/组合/UI保持无冲突，本题不接管。
