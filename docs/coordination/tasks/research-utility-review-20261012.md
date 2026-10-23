@@ -1,3 +1,12 @@
+# 固定十因子RankIC补算恢复 2026-10-23T17:17:59.533921+08:00
+
+- task-id/owner沿原；active；checked_coordination_sha=d2f6f84fd6bd70e79f3c6746dea52fa9caa476a6；checked_at=2026-10-23T17:17:59.533921+08:00；已读self、system17:12及storage17:13最新，COORDINATION/个人审查/dispatch沿本轮已读。无同文件冲突，清理归storage owner，UI归system owner。
+- 独立live plan_output已通过固定盘身份/内5GiB及外10GiB余量，当前内盘7511875584B。18冻结源全部SHA仍一致；按v2合同d19bd61b8c18868912872bc356a55a4b55f20392bd79195da7c38c1b6132b150仅恢复一次80RankIC补算，原816Sharpe和旧账户不变，新结果外盘。read-only预检路径未创建，真实runner自行计划唯一目录并存plan。
+- 原raw专属内新增独立复核脚本verify_rankic_completion.py，由原Astra reviewer只写该小文件准备，尚不运行真实结果；主控执行/核收。成功后独立排名/均值/覆盖核查，再由原system owner接入assessment与catalog并实页验收。当前计算还未启动，不能写通过。
+- 超额规范已落display-contract1.2第8节及playbook/template；用户明确授权的记忆extension已写回读一致。UI转换开发中，不改变旧统计。只读旧NAV差额核验5例留excess-display-readback-20261023.json，非新实验；原source6/core0预算不变，补指标单独合同1成功/至多3修复尝试沿用。
+
+---
+
 # 用户固定超额收益展示要求并恢复续接 2026-10-23T17:07:36.692877+08:00
 
 - task-id/owner沿原；status active（文档、存量展示与资料核验）；真实新统计仍storage_blocked。checked_coordination_sha=f08b40224cdd53dd99cc13081b07dfcb1bddd844；checked_at=2026-10-23T17:07:36.692877+08:00；已读COORDINATION、自身、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller最新段。
