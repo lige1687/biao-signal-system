@@ -69,3 +69,13 @@
 - scope_released=true（本轮准确整理完成）；原恢复/操作记录保持。本任务无待决定/运行中清理/必要后续，主研究负责人自行读取结果继续，不发其他聊天消息。未来容量会变化，当前通过不担保永久余量。
 
 - 交付同步非快进失败保留：fetch后核新增investor-workspace-simplification-20261012机会质量范围，无Chrome缓存或本记录冲突；正常merge保留对方完整记录。checked_coordination_sha: 97c8d02b5f55e4418628e7d4fb59c7fee0d82276；checked_at: 2026-10-15T21:00:42.527046+08:00。未强推，成果与已验空间状态保持。
+
+## 2026-10-23 用户再次授权内盘整理
+- status: active；scope_released=false（仅本轮准确新范围）；updated_at: 2026-10-23T17:00:14.732359+08:00
+- checked_coordination_sha: 47085d8901d9e7bde5772c1f1df795092377f2a7；已读COORDINATION1.1、自身、mac-local-storage-cleanup、research-dispatch-controller；最新其他任务源码范围不接管。
+- 用户原话：“清理一下内盘吧，能移动到外盘的就搞一下”。在现有授权内检查并迁移确认闲置、无依赖、可恢复的普通文件；复制逐文件核验/源未变/无占用后才移除内盘副本。不扩为删除研究原件、当前环境、DB、会话、工作树、系统快照或swap。
+- 基线16:59内盘2468376576B，外盘493447544832B，固定UUID/挂载/4资源路径可用。目标实测提高内盘余量，优先争取超过15GiB建议值，合格对象不足则不按体积盲删。
+- 本轮写范围：仅自己的docs/ops/work-progress/storage-headroom-20261015.md、data/cache/storage-headroom-20261023/私有小回执、外盘个人资料归档下20261023独立恢复目录及后续列出的精确闲置源；普通文件完整清单后另登记。本任务根唯一写者，其他owner记录/代码/规则不动。
+- 只读委派合同data/cache/storage-headroom-20261023/ordinary-files-contract.json已冻结；Luna/low最多1助手、write_paths=[]/network=false，仅Downloads和Desktop非项目普通文件盘点，不读正文/凭证、不修改不删除；root独立核依赖和执行。
+- 既有20261015归档/缓存清理结果复用，不重做旧条目；当前浏览器/应用新内容须重新核占用。旧Chrome退出许可不泛化为丢弃新未保存内容，遇变化先保全。
+- 成果分支沿codex/storage-headroom-20261015，既有23dc9cfe430d24bc847de8e6c9116c8d99bbdc07；共享脏区1778路径保留、原索引/HEAD不操作。无新研究、自动化或跨聊天消息。
