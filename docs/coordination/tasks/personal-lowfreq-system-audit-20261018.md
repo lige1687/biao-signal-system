@@ -1,3 +1,12 @@
+# 实施绑定补充 2026-10-23T17:58:25.891444+08:00
+
+- task-id/owner沿原，status active；checked_coordination_sha=f7556a70fec495432ad3386bc3e085cbc173c9f6；checked_at=2026-10-23T17:58:25.891444+08:00；已读原COORDINATION、自身及research-utility17:46、strategy-account17:54、investor17:37、storage和dispatch。四指数资料补齐由research-utility负责，French六格组合由strategy-account负责；无重叠。
+- 只新增本题research.spy_sma10_20261023定义profile、状态/持有/半仓/趋势账户四个准确对象@1.0.0及本题来源key到docs/research/definitions.v1.json；root唯一写者，主树和自身树分别保留原对象不整表覆盖。旧cash.zero/ETF宽度对象币种与执行不同，只作参考不冒用其ID。原技术文档SHA不变，新增独立研究定义不改生产。
+- 已冻结新raw/contract.json SHA199c7e5ce972ca6ecff45d17531a6f58fec89de740e25079c6fb9fee2c7d12d9。一次连续SPY账户1994-01—2026-08；原早/主/近期252/120/20月切片不重开仓；0/10/25bps成本情景、月度恢复50%对照、期末不卖、零息现金。全部已见历史，不称个人真实净收益或真正新验证。Luna唯一写runner.py和合成回执，root审后单次运行；Astra方法意见已回。
+- 当前SPY公开请求1/1已成功（此前0），501条至2026-10-22，54,538B，原件外盘SHAf2d140ab5485cece9f42d55ea62c9c068b73474bee4f624168fb08eab86b9b13；不合并旧输入或倒填可得。历史SPY和GSPC逐日日期全同，两份SPY收益最大差0.000002156，不能充作独立供应商校验。A股只读盘点结束，现有金额字段可支持另冻分层，尚无新金额效果结论。
+
+---
+
 # 继续：固定前向规则的历史逐步检验与股票池资格 2026-10-23T17:51:26.298254+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status active；scope_released false。checked_coordination_sha=4a86f2fdacc1d52a7930a20428c27183c9fbc5fa；checked_at=2026-10-23T17:51:26.298254+08:00；已读COORDINATION/self、research-utility-review-20261012、investor-workspace-simplification-20261012、strategy-account-bridge-20261020、storage-headroom-20261015、research-dispatch-controller最新段。80RankIC、正式曲线、French盈利+动量组合均复用结论，不接管重跑。
