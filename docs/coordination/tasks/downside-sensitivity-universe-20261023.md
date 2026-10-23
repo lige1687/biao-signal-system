@@ -1,3 +1,16 @@
+# 两项ETF研究与策略证据身份交付 2026-10-23T19:22:15.598859+08:00
+
+- task-id downside-sensitivity-universe-20261023；owner 01a1680e-6717-7ce2-9ecb-372a228c1118/root；status completed（仅两项有限ETF问题与六类策略证据审查）；scope_released false（冻结证据保护）。checked_coordination_sha bc961a0ad78b63bc16fd36a5d364a3b889be6dca；checked_at 2026-10-23T19:22:15.598859+08:00。本轮已读COORDINATION/self、dispatch、utility、classic、technical、lowfreq、personal、strategy-account；交付追加market-style/investor/mechanism差异。冲突决定：四历史池、原A、活跃分层反转、机构流量及工作台均原owner，本题无同写/重复下载。
+- 结果报告 docs/experiments/downside-sensitivity-universe-2026-10-23.md SHA 9656c26f881f519bf43ab4d8e48c0ce337d2ff0a7e8241c4ef2eb7a5a4b6a776；同raw/closure.json含源码/合同/原件及结果全长指纹、费用与独核。0.1%单边：下跌敏感度16.48%/回撤43.25%，低波28.26%/26.58%；成交额候选18.65%/28.03%，同池半投入26.30%/17.82%。均未支持纳入当前用途；保留局部正反例，不调参救结果。母指数含分红净超额未评价。
+- 策略六类金融含义/用途/反例/证据映射在 strategy-audit.md。B旧40根8%且无RR门槛不同于现半年2%及事前目标要求；7国内ETF37笔、15A股98有效笔（99行含1无效风险行）、8美国ETF197笔不混称。旧输入表不足以证明现全部条件，当前合格数未知非0；不改旧归档、不重跑37笔、不改原策略。
+- 五新增指数池定义/代码核查及本地数值清单已保存；CSI1000旧收盘与IWM旧行情不等于合格母指数全收益，历史成员仍缺。另一聊天最新快照仍active且未开放完整股票池；本题不抢四池数据所有权、不将当前名单回填历史。
+- 预算实耗2核心、0追加效果、5外部来源含1次403；旧预算不重置，实际代理费用未知。Sol执行两项，Astra方法/策略只读审，root独核。下跌核数已过；成交额独立53选择与两费用14924日资金/费用/回撤/月收益核数误差低于5e-16。初稿路径错误及API短名404修正留存；无需科学重跑。
+- 存储同原计划外盘约8.12MB，本地小文件约0.134MB（完整manifest见closure）；设备16777238读回，内盘约39.9GB、外盘约479GB可用。报告已登记本键/INDEX本行，8000列表pending=false，正文SHA与本地一致；API archived标志按文件名为false，正文含ARCHIVE且三件套已齐，未搬动改名。归置通过。
+- 成果仍为主树 codex/factor-unit-research-20260915 基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9上的本地未提交；未自动提交/推送报告源码，仅本协调元数据推送。原目标okr-8830a1f1ec4f只关联，无仓外目标DB修改。无生产/交易/通知/删除。
+- 恢复：标准池须历史成员及母指数收益合格；完整A/B须依原owner绑定可执行定义。已有两用途历史问题可结案，整体授权未宣称全部完成；不承诺退出后继续后台运行。阶段证据 docs/ops/work-progress/downside-sensitivity-universe-20261023.md。
+
+---
+
 # 下跌市场敏感度与新增小盘研究范围
 - task-id: downside-sensitivity-universe-20261023；owner: 01a1680e-6717-7ce2-9ecb-372a228c1118/root；status: active；scope_released: false。
 - checked_coordination_sha: 5f82d41f6250f535656b3e34213fcf7576bbfc0a；checked_at: 2026-10-23T18:59:06.337419+08:00；已读 COORDINATION、research-dispatch-controller、research-utility-review-20261012、classic-factor-research、technical-factor-sequence、lowfreq-strategy-discovery-20261019。
