@@ -2,7 +2,7 @@
 
 - task-id: storage-headroom-20261015
 - owner: 01a13f90-f5ca-7111-ac4f-4afd655b71f3 / root
-- status: completed（2026-10-23已归档约6.04GB，实际容量与预检恢复）
+- status: active（2026-10-23 18:29容量再次不足，限定追加新闲置对象）
 - updated_at: 2026-10-15T20:39:17.224401+08:00
 - checked_coordination_sha: 971cffd8c0f0d0bf233764ffe1d41a0c3f9db8f3
 - read_task_ids: mac-local-storage-cleanup, daily-trading-system-audit, research-utility-review-20261012, research-dispatch-controller, investor-workspace-simplification-20261012
@@ -107,3 +107,11 @@
 - 当前DB/持仓、冻结raw、当前运行环境、会话、工作树、TRAE挂载镜像与新日志保留，未关应用、动系统快照/swap/Trash。旧日志及缓存都有恢复说明，恢复到新目录核SHA后查阅，不覆盖原路径新日志/新缓存。无需达到15GiB建议值而盲删未核依赖材料。
 - 小成果codex/storage-headroom-20261015@ede3d0bc1e3f52d3dd955025dab60237d9cf6e05，唯一docs/ops/work-progress/storage-headroom-20261015.md；远端完整commit与文件字节已核同。完整操作清单/失败/恢复证据仅本机data/cache/storage-headroom-20261023/与外盘，归置检查通过。Luna/low只读盘点1次，controller独核；实际token费用未知。
 - status completed；scope_released=true仅本轮准确整理范围，恢复记录持续保护。无待删单元、必要后续、后台任务/定时器或监控；其他来源用途未知不自动移动。未来容量仍会变化，不能把本次预检当永久承诺。
+
+## 18:29 后限定恢复余量 2026-10-23T18:32:36.791179+08:00
+- checked_coordination_sha b987bd324e1be620b2df45a0d30ecf7c5e52f571；已读COORDINATION规则沿本轮未变、自身最新6.04GB结案及research-utility-review-20261012四历史池新合同；原mac/dispatch与其他owner已读记录复用。只维护本任务，无同源写入冲突。
+- 原研究对话按用户已授权范围要求继续，明确不关应用、不动DB/环境/会话/冻结原件、不扩大删除或改5GiB线。18:29:40实测内盘5232480256B，外盘固定身份正确可用480078725120B。先前6.04GB已成功归档，不重新复制/删除。
+- 新准确范围：/Users/yongbiaoli/.workbuddy/logs/sandbox（368个老诊断日志/日志缓冲文件，218个.log/150个.mmap3，最新写入2026-10-04，lsof完整无句柄；不触及WorkBuddy traces/projects/会话/环境）；/Users/yongbiaoli/.npm/_cacache（清理后再生成22文件，最新18:21:13，lsof完整无句柄，非原被删除的那份源）。只有逐文件SHA/类型/模式/链接与恢复清单、源稳定/无占用均核过才移除本机副本。
+- 恢复目录：已核外盘个人资料归档/LeiSignal-内盘整理-20261023-01a13f90/round2-idle-caches-1829/。私有小回执在data/cache/storage-headroom-20261023/round2/；本机文档仅自身原progress，唯一root执行。
+- 明确保留字体缓存：lsof查到Python37702读目录句柄，不以仅目录占用为理由跳过；pip前轮元数据变化原位保留；Corepack实际是pnpm/yarn运行包，非普通下载缓存，保留；TRAE镜像仍属挂载环境，所有活动源与原新日志保留。无关闭应用/服务、配置修改、快照/swap操作。
+- 目标为真实plan_output恢复而非凑清理量，若核验失败源保留并如实给边界；不保证其他写入者之后不消耗余量。
