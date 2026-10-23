@@ -1,3 +1,14 @@
+# 多来源独核阶段与A股续采 2026-10-23T19:23:31.521474+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=ee72f0c698b27fab9b87e4f2ab91a64492202b61；checked_at=2026-10-23T19:23:31.521474+08:00；已读COORDINATION/self、investor-workspace、downside-sensitivity、personal-lowfreq、strategy-account、mechanism、market-style新增段，dispatch/storage沿前轮。无同写，四池数据仍本方，其他任务只读复用。第一次写前基线断言发现其他任务推进，未写；读差异并快进后接续。
+- 264份CN月末名单原件已齐，263人数完整+1份499待核；1552代码、130完整复用、267补早期、1155补全价及行动。2577固定来源对象仍单会话运行，主日志401条至2026-10-23T19:23:26.825645+08:00，不是完成。并发登录疑似导致4次10001001已保留；2对象新会话修复，同源其他会话全部停止，后续未登录即停源。公司行动查询1990—2026年初宽于价格窗口，后续不可当历史当时已知。
+- 美股新56候选；独核SP原缺51832中Yahoo5996+旧Tiingo/WIKI25046，无重复，20790仍无候选；NDX48302中31369+4957，无重复，11976仍无候选。身份/调整/退出未准入，不填冻结面板。既有独立退市行情服务能力检查无已安装可调用项，0额外市场请求。3母指数取得，六ETF复用；raw/shared-input-locator.json给其他已授权任务只读，避免再下。
+- 跨源11原件及7证券日期独核：CN4×485原价一致；US3×502天可见差异AAPL1/MSFT2/ARM1，最大约0.01/0.15/0.05美元。先按分舍入造成ARM假冲突，独核拒收并保留失败，修原精度+本窗口0.0001美元技术容差。量/复权/上游独立性未核准。不能外推全池准确。
+- 报告universe-data-completion-2026-10-23.md当前SHA5637a7c057c9622c5287fa0f9062bc6ad8b4f031c708dbfbac932bc5a8110f38；旧阶段全文保留raw/report-stage-before-cross-source-review.md。registry仅本键；catalog仍281318d0c454a5e80d3ae188e477679f272c6a9998c16ac5ec4da307200c2edd，四池disabled。系统owner已恢复5188并验旧阶段，最新修正版窄同步待回执。归置通过，0新因子效果/旧账户重跑/交易/付费/通知。
+- 全新原件/临时/日志外盘，2GiB预算与设备容量检查保持。源码/小资料在本机codex/factor-unit-research-20260915基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加未提交；只协调元数据远端，不能据此跨机复现。接续先读resume-status和cn_price_gap_plan_v2；等待当前实际结果再核全批原价/行动，更新覆盖与明确缺口。
+
+---
+
 # 四股票池续采与多来源核对 2026-10-23T18:57:51.354555+08:00
 
 - task-id/owner沿原；status active，scope_released false；checked_coordination_sha=426db658d1a2558536136aae57f061ef5416ac4e；checked_at=2026-10-23T18:57:51.354555+08:00；已读COORDINATION/self、investor-workspace、personal-lowfreq最新及原storage/dispatch，无数据同写。用户继续要求各universe取数并“确保数据准确，从各个来源拉”。
