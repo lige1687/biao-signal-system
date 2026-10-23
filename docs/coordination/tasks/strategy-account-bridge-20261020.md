@@ -1,3 +1,14 @@
+# 盈利与扩张速度联合组合开题 2026-10-24T01:52:08.191472+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false。checked_coordination_sha=0c30ddee821c8cc527949a752752d4e6d5e0480a；checked_at=2026-10-24T01:52:08.191472+08:00。已读COORDINATION/self、utility、personal最新反转分层结案、mechanism最新A股申赎结案、downside10/24常见13池补数、investor、market-style、dispatch。不重复四池/九新增池取数、反转/ETF政策/机构研究或UI。
+- 用户“其他策略组合呢”接续授权。本次独立扩展研究问题：French同股联合分组中，强盈利且低资产增长是否比强盈利单项、低增长单项及简单各半更有用；强盈利且高资产增长为金融竞争解释，大小规模并列。仅公开毛收益路径，不改LEI基本面叙事边界、不称本地逐股交易。原价值/动量组合与已看历史保持。
+- 新独占docs/experiments/profitability-investment-combinations-2026-10-24.md及同raw，registry本新键/INDEX一行、自己的progress；旧本方组合报告只追加日期链接及本键SHA。共享定义、playbook、skill、UI、其他raw保持只读。新外盘路径由plan_output绑定，预计20MiB、本机2MiB；存储live内20.49GB/外478.45GB身份合格，执行前重核。
+- 计划一个固定核心矩阵，主2015–24、早1963/07–2014/12及近2025/01–2026/08两固定对照；规则/指标/源列资格核后且效果前冻结，不选最优参数。每规模OP4×Inv1为主，OP4×Inv4竞争候选；公开单组、同格边际、各半、半现金和中间组对手。同来源原月度数据只读，真实个人费用、历史成员逐股资格/行业和对应母指数未评价。0新前向/生产/交易。
+- 主控唯一来源/冻结/报告，拟Sol medium新raw/analyze.py唯一写者（后续合同准确派发），Astra high只读方法/结论。来源默认6请求：已2搜索、1官方目录、1方法页、1ZIP浏览失败(不支持类型)，剩1原ZIP直接取得，旧来源账不重置。新家族1核心+最多3必要跟进，无无界搜索/安装/付费。其他方向只复用最新原owner成果。
+- 验收真实联合分组定义/权重与当时信息边界、四种条件/原单项/同资金对手、收益/风险/少亏少赚/共同下跌与不确定性、分期反例、曲线/API正文/归置、独立数核。主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加脏区，仅准确新路径写入；源码结果不自动提交，协调元数据单推。
+
+---
+
 # 中美股票范围与金融机制接续交付 2026-10-23T19:08:21.068789+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed（本轮机制/适用范围资料问题）；scope_released false仅自身冻结保护。checked_coordination_sha=38c20ceeadc6de0abcc31f5778fff9276024b448；checked_at=2026-10-23T19:08:21.068789+08:00；已读COORDINATION/self、utility、personal、mechanism、investor、dispatch、market-style及downside，含最新ETF/Amihud政策和总工作台方案范围。冲突决定：四池取数、A股活跃反转、小盘/下跌政策和总台方案各归原owner，无重复运行或同写。
