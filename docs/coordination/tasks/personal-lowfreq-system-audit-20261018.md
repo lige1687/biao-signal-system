@@ -1,3 +1,15 @@
+# 用户固定净超额与前向环境要求 2026-10-23T17:08:59.161853+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status active（持久化/展示纠偏/可用性预检）；real_effect blocked_storage；scope_released false。checked_coordination_sha=836840fa05cc731a7c1aaa0b048239039000ad30；checked_at=2026-10-23T17:08:59.161853+08:00；已读COORDINATION/self、research-utility17:25、investor-workspace17:20、strategy-account-bridge10/23 17:03、market-style和原dispatch。原US三动量/股池/31.65审核/正式FactorCurves与接口仍原owner，不改或重跑。
+- 用户原话：收益展示相对母指数/超额，肯定扣个人交易费用，固定到持久化md记忆；牛熊一定前向，不能后验。本轮将此写入自有factor-discovery-playbook的用途规则（只新增小节，保留主树其他新增），用户级memory仅按授权新增extensions/ad_hoc/notes一份小md，引用规则来源；不编辑memory主文件。当前display-contract为另一owner已有规范，本轮不复制整文件/不改接口。
+- 自有写范围：docs/experiments/net-excess-forward-requirements-2026-10-23.md与同raw小前向合同/来源及失败/显示修订脚本；web/public/research/us-factor-reference-curves-20261022/index.html仅在原参考图上加净超额缺口首屏、旧毛收益折叠/准确标签；原data.json/旧raw22/source/returns/PNG不变。registry本键、INDEX一行、自身progress追加。主树准确同路径小镜像；不写仓外运行UI。
+- 缺口：French组无逐次成交/换手与个人费用，B仅三组分配基准非母指数，不能从月收益统一扣0.25%伪造净值。fee25旧A股是逐成交金额扣单边.25%的研究假设，不冒充个人真实费用。缺母指数绑定与费用时默认净超额未评价，可留有出处毛收益参考。
+- 前向主方法先SMA10，clock仅候选；定义/数据可得版本/截止、生效时点与费用均冻结，再比较未来完整日期，不回填峰谷、不全期调参；已见历史仍历史复核，真正今后跟踪另记。用户许可研究不等于生产/交易。
+- root写规范和结论；Luna只读费用/基准库存完成，Astra只读方法审阅完成。真实plan_output再次因5GiB内盘保留失败，当前约2.35GiB；不绕过执行、不新增市场回测/大结果，不替storage owner清理。无新网络，公开原文/现有规范复用。验收为实际持久化读回、精确差异、页面默认状态/展开/切换和原数据SHA不变、前向所需资格与未运行明确；新效果仍待恢复条件，不把文档或演练算成功。
+- 基线codex/personal-lowfreq-system-audit-20261018@0b9514b0e8dffe735267f05487ee5280b0ebb210；继续隔离树personal-audit-coordination-20261018。本轮小产物预计<250KiB，memory仅约1KiB；模型实际费用未知。
+
+---
+
 # 美股公开曲线与环境方法交付，新实测存储阻塞 2026-10-22T11:48:07.229871+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status blocked（新逐股/环境效果）；completed_scope 公开存量曲线/文献；scope_released true仅本次展示和报告。checked_coordination_sha=6c27b8cdcf225951e35fdb464463bab394d443ee；checked_at=2026-10-22T11:48:07.229871+08:00；读COORDINATION/self及research-utility11:46、investor-workspace11:40，market-style/mechanism/dispatch沿本轮已读。原三类动量含US新逐股及正式UI不接管/重跑；存储迁移授权与执行属于原owner，本人未清理。
