@@ -1,3 +1,13 @@
+# 因子总工作台现状审查与方案 2026-10-23T18:59:59.487652+08:00
+
+- task-id沿market-style-observation-20261020；owner原root；status active；scope_released false。用户问现有面板缺口、研究者总控中台如何搭建，本轮report_only/plan_only：核当前页面/接口/原规范和已有负责人，不启动因子效力实验，不改生产UI/数据/自动化。
+- checked_coordination_sha 4e2bbf1d5b4d994ab5c4534f6d1577a80dad5d12；checked_at 2026-10-23T18:59:59.487652+08:00；已读COORDINATION/self、investor-workspace-simplification最新10/23超额曲线、research-utility最新四池资料补齐；dispatch与此前负责人规则复用；补读downside-sensitivity-universe与personal最新资格，无本文件同写。现factor曲线UI/研究补数据各有owner，不接管，不新造同类平台。
+- 唯一写root本任务原报告§18、raw下workbench-audit/plan/只读代理合同及原progress；最多1 Sol medium只读web/src/pages/factor-research、definitions/registry/实验接续映射，不写文件不联网，返回精确证据和缺口。root核实际5192和5188页面、源健康、有限原始方法文档，0新金融实验。
+- 基线成果codex/market-style-observation-20261020@186d0ad4d6164f1f8dce8e50e7e248f2bc6461da；共享脏区保留。验收实际已有/未接入/真缺失区分，五问与研究用途/成本/前向/重叠映射，桌面信息层次、复用数据身份及分阶段验收。系统目标仅只读查重并准备准确待登记内容，仓外新写未授权不执行。
+- 当前5192多数据请求失败，须核服务状态而非当所有数据从未实现；不擅自恢复他人服务。工作台建议服务低频宽基/ETF优先，股票结果不转称ETF效果；不构造统一因子总分。
+
+---
+
 # 自动续更已启用并读回 2026-10-22T00:27:20.032613+08:00
 
 - task-id market-style-observation-20261020；owner原root；本轮配置completed、代码scope_released true；自动化ACTIVE等待首次定时。checked_coordination_sha ae7c50267baf524d03c18a4cdc838e0d8183b4e8；checked_at 2026-10-22T00:27:20.032613+08:00；已读COORDINATION/self/dispatch/research-utility、补读investor-workspace与mechanism最新范围，无同模块冲突；交付前fetch无新变更。
