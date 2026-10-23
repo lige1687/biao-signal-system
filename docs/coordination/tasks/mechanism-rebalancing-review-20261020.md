@@ -1,3 +1,13 @@
+# A股28份历史原件已核，限定价格关联冻结
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=d636b2255a60450b4e0c2f2c6859cd7b09b157e9；checked_at=2026-10-23T19:37:00+08:00。已读原COORDINATION及本轮task清单，追加utility19:23续采、personal19:25反转和downside19:22完成；各自数据/效果/页面保持无冲突。
+- 两管理人2019–2025中期/年度28份全部完整持仓/金额/份额桥接及12跨年NAV桥接通过；复用旧5份，新23份(嘉实11/华夏12)，不重新下载旧源。14半年金额/单位及红利再投/现金分红逐期有原件证据。嘉实再投计入申购注释明确；华夏仅会计结构推断，两口径预定并列，不择优。
+- 一期与持有比例重合的结论保留；跨期相对压力确有交换，因此进入新的有界问题。主合同history-effect-contract.json和12输入/代码SHA已在0未来价格变化时冻结。固定a与−a两对手；报表金额与条件扣再投两个版本；实际最晚公告后首交易日起6个月；30%边界同分等比例，未知先保留形成和选择权重。
+- 13形成期2689股票观察，12期源价有覆盖，2025H2终点日历/价格源未覆盖不补；2022两半年双净申购无排序保留，预计10共同有排序期。指标是重建前复权价格变化关联/IC，不能称含息/净收益/成交/全策略增量。期初证券身份/退市/停牌限制及已知部分比较全部披露，不加仓/交易。
+- 根唯一写原raw内新history_effect.py/合同/输出小摘要；大明细同外盘新history-effect子目录，执行前实时设备与容量复查。1固定矩阵、0拟合/参数搜索；Astra方法审，Sol后续独核，不改原单期freeze或US已封存研究。准备曾因日历末端/Parquet已还原index失败，均0效果并留记录修正，不伪称科学变体。
+
+---
+
 # 两基金跨期申赎资格接续
 
 - task-id/owner沿原，status active；scope_released false。checked_coordination_sha=8455d746c6e76b376233d27de0af6c32a54f4a6a；checked_at=2026-10-23T19:18:00+08:00。已读本轮COORDINATION/self/dispatch/sentiment/utility/personal/strategy/investor/downside，追加market-style工作台方案与personal冻结前核查；价格/组合/UI/ETF政策保持原owner，无同写或重复效果。
