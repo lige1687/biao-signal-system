@@ -1,3 +1,14 @@
+# 工作台指标与参考AI方案审查交付 2026-10-24T01:57:55.790772+08:00
+
+- task-id/owner沿原；status completed（仅方法审查/方案补充）；scope_released true。checked_coordination_sha 70e5ae94de4817e2fcb3381bc0f5c0b2bbc10042；checked_at 2026-10-24T01:57:55.790772+08:00。已读COORDINATION/self/investor-workspace/utility/dispatch，并补读downside常见池、mechanism现金成交、utility最终原件和strategy-account盈利增长。仍不接管原曲线/研究/数据owner。
+- 28条参考建议已逐项取舍，原方案§11及报告§19追加；raw/workbench-ai-review-20261024.md/.json及verification可复核。IC/RankIC、ICIR和组合IR各有定义/图/覆盖/不确定性/费用与年化要求；风险用途不强制收益IC，未算不造数。
+- 当前代码/两JSON核RankIC32/80记录和夏普已接，ICIR/组合IR尚未接入。1 Sol medium只读，root独核JSON SHA及方法；4搜索+2页面共6来源请求，未安装/复现RD-Agent/AlphaGen，未采用宣传收益成本。0新效果/模型解读/自动化/交易/通知/实际DB写。
+- 采纳过程/组合增量/反证；改固定阈值、相关性否决、严格单调、1—3月和60日万能观察、半衰期/残差alpha误读；暂缓大量自动挖掘/生产合成/券商。沿四视图和七步主线，关键数字配曲线，不强制深色与一屏挤满。
+- 当前仅本地成果，未自动commit/push报告代码，已发布基线186d0ad4d6164f1f8dce8e50e7e248f2bc6461da不代表此轮新报告。旧报告/方案前缀保持、JSON/覆盖/归置通过；未跑UI回归或金融实验。原仓外goal确认待答，草案加两验收项，未写数据库。
+- 开工ref并发变化084b→58f已补读新增范围后才写实质文件；无覆盖他人。后续实施需原研究owner给合格ICIR/IR输出并由原系统owner窄接入，本轮不冒称实现或研究效力完成。
+
+---
+
 # 因子工作台指标与外部AI建议审查 2026-10-24 / 2026-10-24T01:49:29.678223+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha 58f574b41a0c4c884f92b7102f8cef13fbe64070；checked_at 2026-10-24T01:49:29.678223+08:00。已读COORDINATION/self、investor-workspace-simplification、research-utility-review、research-dispatch-controller。其他owner曲线/四池资料只读，本方不接管共享实现。
