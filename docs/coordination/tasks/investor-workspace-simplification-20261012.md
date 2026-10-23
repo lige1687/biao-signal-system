@@ -1,3 +1,12 @@
+# 默认相对同池基准超额视图 2026-10-23T17:12:59.753871+08:00
+
+- task-id/owner沿原；active；scope_released false；checked_coordination_sha=94c2579226718be41429142db5793adbeecac25d；checked_at=2026-10-23T17:12:59.753871+08:00。已读COORDINATION/self/research-utility10/23 17:07、personal17:08、strategy-account17:03与storage当前白名单新增段，无UI同写；研究/清理各归原owner。真正userMessage01a16802-16a3-7d31-949a-229026356a33已read_thread核对，要求相对母指数/超额并持久MD。权威两策略源实际SHA仍与确认值一致，本次只研究展示层，不改交易语义。
+- 准确写原FactorCurves.tsx/factorCurvesModel.ts/factor-curves.css/factorCurves.test.mjs及主/5188镜像；唯一接口文档补显示变换与缺口，自身factor-curves-excess-20261023*回执/截图及progress。默认相对同池基准累计收益差（百分点），显式无唯一母指数；保留绝对模式、基准绝对收益、原账户回撤/RankIC/Sharpe，不改冻结数据/统计。
+- 双方同一起始日，已归一收益差等价原NAV比值相减，不连乘逐月差。日期精确匹配，任一缺值留断、任一估值未知继承虚线；锚点日期不同拒绝该比较，不自动换起点/指数。基准零线仅在原基准实际有报价的日期存在。四历史池仍disabled，环境沪深300不充收益基准。规范8由研究owner维护，本方只实现与写技术接口。
+- 验收合成已知数例/缺日期与缺锚点/基准未知/真实64+160组合末点、绝对值及回撤不变；默认/绝对切换、费用/分期/池联动、实际宽窄屏与读数、类型/构建/归置。无新研究、行情、费用推断、后台/交易/定时或其他聊天消息。小UI产物本机，源大数据不写、不重跑导出器。
+
+---
+
 # 历史成员候选与缺口说明交付 2026-10-22T17:20:42.922418+08:00
 
 - task-id/owner沿原；status completed（本轮资料状态UI）；scope_released true；checked_coordination_sha=c5f6a0222384432594b54033dfd8c43d137cf9be；checked_at=2026-10-22T17:20:42.922418+08:00。本轮最终fetch无其他新增任务变更；已读COORDINATION/self/research-utility17:07、personal/mechanism新增段，冲突决定仍系统单写UI、研究单写目录/科学结果，无接管。
