@@ -1,3 +1,16 @@
+# 股票实际成交与期初余额机制核验交付 2026-10-24T02:06:48.755313+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner原root；status completed（仅两基金半年实际行为解释问题）；scope_released true仅本轮新增路径，冻结输入及旧证据继续保护。checked_coordination_sha=edc6c5f32a81759487ce930d7b0fb736d5b2c7a1；checked_at=2026-10-24T02:06:48.755313+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/research-utility-review-20261012/personal-lowfreq-system-audit-20261018/strategy-account-bridge-20261020/investor-workspace-simplification-20261012/market-style-observation-20261020/downside-sensitivity-universe-20261023。交付补读utility原件收齐、strategy盈利扩张新题与唯一定义键、market-style指标方案交付；末次fetch无变化，无同写/重复研究，不接管其他owner。
+- 成果分支codex/mechanism-rebalancing-review-20261020：核心c22c14ab84f1f17c3c811ce30ad4828a12f0da8b（30准确路径558593B），交付回执/verification/进度091b6737f12fc2ceadd54b939cd9358e63a3e4fd（3路径）。普通push，远端ref和逐文件字节/SHA核同；0删除/强推/合main/共享索引或工作树切换。报告docs/experiments/a-share-fund-cash-trades-mechanism-2026-10-24.md SHA01a95e763c9f482c4c9cc8c7844517e32c6572f156407c77ccd288a001b0257f。
+- 28原PDF复用，0新增下载；两基金14共同半年。新增全部股票买卖总额、期初银行/货币资金与结算备付金统一提取；14同年余额一致、24跨年分项差0。源格式失败至少3次保留。13新绑定/15昨日绑定/28原PDF/两策略SHA均未变；2018期初取2019中报比较列，未冒称另核2018年报。
+- 净赎回24条里17整体净卖、7整体净买；非净赎回4条里1净卖，4条均在2022年，不能声称赎回的独立作用。嘉实加余额分类4/6对5/6方向相反；华夏条件版6/7对2/5，但赎回占规模范围无重叠，无法分离现金作用。嘉实2025H1报表净赎回8471万元、条件8571万元均超过期初账面2528万元，仍整体净买796万元。只否定必然整体净卖，不否定部分股票被迫出售。
+- 保留真实买卖与申赎描述；暂停半年净赎回或超过期初账面余额直接作为出售压力标签，未证明可分离、跨基金稳定新增解释。不重开昨日收益增强，不外推US、ETF或LEI/个人账户；本轮0新收益IC/拟合/调参，1固定描述矩阵。需实际可用现金及出售时序、独立压力来源等新证据才改变问题，不换参数追正。
+- Sol medium两源提取及独立28行/20组/14年项重建，Astra high前后方法审；root独核嘉实3原件，Sol另核华夏3原件，数值差0。归置通过，原756登记项保持仅本键/INDEX本行；8000/5173列表唯一及全文SHA一致，5188连接拒绝未重启，不能写全端口通过。
+- 新外盘结果90852B、原PDF仍旧外盘路径；固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9/设备/容量核同，小raw约0.33MB。无删除迁移/内盘回退/付费注册/生产交易/通知/仓外目标数据库写入，异机完整恢复未验。旧成本链不归零，新2网页请求含NBER403一次、0PDF下载，1矩阵1独核；全部解析运行总数与token成本未知。
+- 本轮有界问题及归档交付完成，整个机构因子研究未宣称完成；本题无后台或必需待算项。研究账本、closure、verification、delivery-receipt在同名raw，累积失败与冻结结论可接续。
+
+---
+
 # 净赎回、股票实际成交与期初账面流动资产核验开工 2026-10-24T01:49:34.634390+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner原root；status active；scope_released false。checked_coordination_sha=b19558c3af72d5d1721d3a5f9e69ed0b21fbaf52；checked_at=2026-10-24T01:49:34.634390+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/research-utility-review-20261012/personal-lowfreq-system-audit-20261018/strategy-account-bridge-20261020/investor-workspace-simplification-20261012/market-style-observation-20261020/downside-sensitivity-universe-20261023。首次普通push非快进拒绝，fetch后补读downside01:48新增9池资料与market-style01:49指标方案；各自独立范围保持，四池/活跃反转/ETF/正式UI仍原owner；本题新原件字段不与之重叠。
