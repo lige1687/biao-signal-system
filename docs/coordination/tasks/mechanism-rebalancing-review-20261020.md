@@ -1,3 +1,14 @@
+# A股多基金公开资料与机构压力研究接续 2026-10-23T19:09:09.064886+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner原root；status active；scope_released false。checked_coordination_sha=789643c42ce324059a0b60d2b99c8f06b2ea8cc0；checked_at=2026-10-23T19:09:09.064886+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/research-utility-review-20261012/personal-lowfreq-system-audit-20261018/strategy-account-bridge-20261020/investor-workspace-simplification-20261012/downside-sensitivity-universe-20261023。四指数价格由utility续采，成交活跃反转、ETF政策、小盘资格各原owner；均只读复用不重跑。首次前置基线断言因另一owner推进而停，未写入；已核新增范围无冲突。
+- 用户最新“0.07和6看着有点厉害，其他方向继续做”。旧B的0.0735/6.71%是17季度可观察股票排序/毛回报，非赎回增量或账户收益；旧四基金US版本封存。本轮问题：A股多基金完整持仓、份额申赎和公开日期，能否支持区分共同资金压力与主动配置，并进入有时点约束的收益增量检验。
+- 成果基线codex/mechanism-rebalancing-review-20261020@477c35eddd6cad04bd6d142f6c89191b572bc469。先资格再冻结必要比较；单基金或少量时期不能报稳定IC。优先旧070002加其他管理人同期完整报告；首发日期之后使用，份额不冒充现金，季度前十不当全持仓；价格先复用在采owner。
+- root唯一写新docs/experiments/a-share-institutional-flow-qualification-2026-10-23.md及同名raw、小合同/来源/脚本/结果、原progress追加、registry本键/INDEX本行；代理按精确子目录合同。Sol medium两项只读资料及价格核查；必要Astra方法审。旧报告/源码/定义/共享runner/技能/生产/目标库均不改。
+- 内盘37.11GB/外479.60GB固定UUID核同；新原件/日志预计200MiB、小记录2MiB，plan_output后只新外盘目录。全部尝试/失败累计，旧至少1268年度拟合/51季度拟合及独核和旧来源保持。本轮0效果开始；不删除/付费/注册/交易/通知。
+- 验收：跨管理人完整金额/份额桥接、时点/身份、价格覆盖；资格足够才冻前方法审和收益/IC/同池对照。核心缺失则明确暂停依赖项并完成可执行资格，不把缺数称无效。US旧0.07/6的解释只读复核，不重跑调参。
+
+---
+
 # 美国机构赎回信息收益检验交付与A股资格边界 2026-10-23T18:29:19.648443+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner原root；status completed（仅四基金美股收益/IC与A股相邻原件资格）；scope_released false（冻结证据保护）。checked_coordination_sha=457491ae03ff0994b780bc0f77ea155522006139；checked_at=2026-10-23T18:29:19.648443+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/personal-lowfreq-system-audit-20261018/research-utility-review-20261012/investor-workspace-simplification-20261012/strategy-account-bridge-20261020；最终补读personal18:28、strategy18:21。四指数补数/SPY/French组合保留原owner，无同写或重复实验。首次收尾断言发现其他owner新增提交，在任何写入前停止，读新增状态后本次接续，不强推。
