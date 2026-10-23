@@ -1,3 +1,15 @@
+# 美国机构赎回信息收益检验交付与A股资格边界 2026-10-23T18:29:19.648443+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner原root；status completed（仅四基金美股收益/IC与A股相邻原件资格）；scope_released false（冻结证据保护）。checked_coordination_sha=457491ae03ff0994b780bc0f77ea155522006139；checked_at=2026-10-23T18:29:19.648443+08:00。已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/personal-lowfreq-system-audit-20261018/research-utility-review-20261012/investor-workspace-simplification-20261012/strategy-account-bridge-20261020；最终补读personal18:28、strategy18:21。四指数补数/SPY/French组合保留原owner，无同写或重复实验。首次收尾断言发现其他owner新增提交，在任何写入前停止，读新增状态后本次接续，不强推。
+- 成果codex/mechanism-rebalancing-review-20261020@477c35eddd6cad04bd6d142f6c89191b572bc469；核心8798df6cf67570b144e2c4ef547a82359a50881d的53准确小文件614164B及3收尾文件普通push、远端ref/全部文件SHA读回。报告docs/experiments/institutional-flow-return-study-2026-10-23.md与同名raw，登记美股与跨市场/mixed，旧751项保持、INDEX本行；5188列表唯一/全文读回、归置/准确diff通过。无共享索引/分支切换、删除/合main。
+- 四已选基金/3管理机构，26季度104基金观察；7163股票季度、5058特征合格、5038可见未来结果，20未来未知保留分组。1次正式效果/51季度拟合、0寻优。原始26期IC0.00214954；同17期B0.073524→BX0.063713，增量−0.009811；高组季度回报6.71057%→6.39332%，少0.317248个百分点，95%季度块重复范围−1.13288至+0.40934。当前未支持稳定增量，暂停精确版本；不是账户净收益、因果或ETF证据。早晚方向/四种选择结果/Fidelity共同覆盖均保留，不换参数追正。
+- Sol medium资格/执行，另一Sol独立核51拟合、压力、分组/主差值及6源价端点，0数值差异；Astra high方法/代码/结论审，root核数字/来源/API，9冻结绑定不变。96新增源+12复用，98HTTP含2传输失败及各1次修复；US后缀、历史退出、算术波动、基金名单和来源负索引修复均在效果前，旧版本保留。内盘不足时暂停新增步骤，恢复并重检后执行，未删除或降门槛。
+- A股新增070002年报39全持股，与旧中报69只完整报告衔接，金额/份额桥接核对；只有单基金相邻区间，多基金同期历史/对应行情仍缺，收益IC未评价，不以美股替代。风险、宽基/ETF、真实卖出原因、完整账户未测。无生产/策略/采购/交易/通知/目标数据库写入。
+- 新原件约7.01GB、逐行结果和失败现场在已核外盘storage-plan目录，正式us-effects/v2；Git只小记录/脚本/摘要/来源指纹，不含大原件或完整解析样本，异机恢复未验。原至少1268年度拟合/4Pro/已知350源动作不归零，新51季度拟合/51独核分列；完整源动作与token费用未知。无旧NAAIM/CFTC/AAII重跑。
+- 本轮有界问题已回答，无本题后台进程或必需待算项；A股整体研究未声称完成。恢复先读freeze/results-summary/独核与报告；新历史基金总体、现金或实际出售、更及时资料等能改变判断时才重开，不能更换期限/方向/名单追正。A股下一资料单位是多基金同期完整报告与披露时间。
+
+---
+
 # 按资料优先级开展机构因子收益与排序效果研究 2026-10-23T17:27:30.562906+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner原root；status active；scope_released false。checked_coordination_sha=29ba0bcba5f5e6bfc9eeaf3e222b15f2b073a5ee；checked_at=2026-10-23T17:27:30.562906+08:00；已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/personal-lowfreq-system-audit-20261018/research-utility-review-20261012/investor-workspace-simplification-20261012/strategy-account-bridge-20261020最新段。其他owner动量、反转、French、80RankIC和正式UI保持；本题独立机构申赎持仓问题无同写。
