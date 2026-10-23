@@ -1,3 +1,16 @@
+# SPY固定月度趋势有界检验与曲线已交付 2026-10-23T18:28:05.950518+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（本轮SPY固定规则历史情景），scope_released true仅本次展示/报告交付；原冻结输入及结果仍保护。checked_coordination_sha=d702c59d870d4c300d81ef65fd8693c7a5de9592；checked_at=2026-10-23T18:28:05.950518+08:00；已读COORDINATION/self、research-utility-review-20261012、strategy-account-bridge-20261020、investor-workspace-simplification-20261012、storage-headroom-20261015、research-dispatch-controller；最新无范围变化，四指数资料/French六格/正式UI各owner，不重跑。
+- 成果codex/personal-lowfreq-system-audit-20261018@1479482825228521b5e5cafab829df5f19677a1a已正常推送、fetch及31准确文件字节读回一致；主树仅本报告/raw/新静态目录、定义4新卡/2来源/1profile、登记本键/INDEX本行/自身progress，其他项保留。报告docs/experiments/us-spy-forward-net-2026-10-23.md，曲线http://localhost:5173/research/us-spy-forward-net-20261023/index.html。数据SHA87fe63a83113bd064ae3cdda2c1ebd8a3fac0ec591292f5c399d60dc8bff2d8c，真实HTTP application/json与页面/报告API全文核同。独立页未接管正式5188 catalog。
+- 实际一次固定矩阵：一只SPY，1994-01—2026-08连续392月，原252/120/20月分段不重启。10月均线、次月首开盘、0/10/25bps、零息现金、无终点强卖，已见历史且历史版本/真实分红现金未证。主2015—24的10bps趋势年化6.28%/累计83.90%/最大跌幅26.08%，持有13.00%/239.39%/33.72%，半仓6.65%/90.45%/17.71%。相对半仓年化低0.37pp且跌幅深8.36pp，不支持直接采用全进全出；早段10.39%对9.30%正例完整保留。退出21完整区间5跌16涨，少亏/少赚均展示，不调参救结果。
+- Luna代码/展示，Astra方法审查，root独立重建3主费用日路径及392状态，数值差1.91e-14；8合成检查、成交费用/现金/隔夜核对通过。真实浏览器默认主期10bps超额、近期NAV100同起点、25bps切换与恢复通过，1280无横溢，截图已看，未声称手机测试。两树归置/准确暂存空白/JS检查通过；完整旧定义库3French来源额外字段失败保留，4新卡子集通过，不称全库全绿。
+- 旧存储拒绝后18:07真实恢复并重新预检才执行；大结果约23.6MB在已登记外盘us-spy-forward-net-20261023路径，小回执可定位；无删除/降保护线/内盘大结果回退。当前SPY1/1公开请求成功至10/22，重试0，不补成9月当时可得、不混旧核心输入。实际模型费用未知。
+- A股资格查明原筛选outcomes漏完整合格集合23051股票月份，应复用旧36019行input-rows.json及300份932813日线的滞后成交金额；未计算新分层效果，不叫CSI1000/沪深300、不证明散户低效机制。四池历史成员仍utility负责且不含CSI1000。
+- 原系统目标okr-8830a1f1ec4f仅note v40→41已独立读回；status in_progress、4/6、授权/owner/next_action/旧历史保护字段不变，不代用户验收。全过程证据在新raw/goal-progress-note.json及delivery-validation.json。
+- 个人真实费表/现金利息、独立新时期、完整指数成员可交易性和A股金额条件仍未评价。下次先复用完整机会和合格历史成员，再固定一项可改变反转适用范围判断的分层；不重复此核心、泛扫均线或接管其他owner。当前无计算/取数/后台进程，无生产/交易/安装/通知，视觉效果待用户查看，不宣称整个低频系统研究已完成。
+
+---
+
 # SPY固定比较交付核验与原目标留痕 2026-10-23T18:25:49.454913+08:00
 
 - task-id/owner沿原；status active（仅交付保存）。checked_coordination_sha=b7c7e7fed84ac05c8ca7ba2a47d4ef77ee7c3dc2；checked_at=2026-10-23T18:25:49.454913+08:00；已读COORDINATION/self、research-utility-review-20261012、strategy-account-bridge-20261020、investor-workspace-simplification-20261012、storage-headroom-20261015、research-dispatch-controller。strategy新六格已完成，四指数资料仍原owner；本SPY范围无冲突，不重跑其他结果。
