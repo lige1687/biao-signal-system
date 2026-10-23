@@ -1,3 +1,12 @@
+# SPY固定比较交付核验与原目标留痕 2026-10-23T18:25:49.454913+08:00
+
+- task-id/owner沿原；status active（仅交付保存）。checked_coordination_sha=b7c7e7fed84ac05c8ca7ba2a47d4ef77ee7c3dc2；checked_at=2026-10-23T18:25:49.454913+08:00；已读COORDINATION/self、research-utility-review-20261012、strategy-account-bridge-20261020、investor-workspace-simplification-20261012、storage-headroom-20261015、research-dispatch-controller。strategy新六格已完成，四指数资料仍原owner；本SPY范围无冲突，不重跑其他结果。
+- 单次SPY固定矩阵已完成且主控独核通过；主要十年趋势6.28%/跌26.08%，持有13.00%/33.72%，半仓6.65%/17.71%，均为0.10%情景。暂不采用全进全出，早段正例保留。实际浏览器/HTTP/API/两树归置通过；整个旧定义库3French来源格式失败保留，4新卡单独合格。个人真实费用及A股金额分层仍未评价。
+- 在已有原目标okr-8830a1f1ec4f仅追加本轮防御用途结果note，root唯一写者；保留status/owner/授权/4of6/next_action及旧历史，不代用户验收，不建新目标。原note范围不授予生产/交易。新小goal回执进本新raw，其他文件范围不变。
+- 成果仍待本轮准确提交，基线ae516dc163a4a91aa344a7b7fe9436f22a961386；运行和输入路径见新报告/小回执，当前无执行进程。最终commit与远端读回随后记录；不以启动或暂存冒充发布。
+
+---
+
 # 实施绑定补充 2026-10-23T17:58:25.891444+08:00
 
 - task-id/owner沿原，status active；checked_coordination_sha=f7556a70fec495432ad3386bc3e085cbc173c9f6；checked_at=2026-10-23T17:58:25.891444+08:00；已读原COORDINATION、自身及research-utility17:46、strategy-account17:54、investor17:37、storage和dispatch。四指数资料补齐由research-utility负责，French六格组合由strategy-account负责；无重叠。
