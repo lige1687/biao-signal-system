@@ -1,6 +1,6 @@
 # 四池来源补齐阶段与系统验收交付 2026-10-24T02:11:49.434776+08:00
 
-- task-id/owner沿原；status completed（仅本轮有界资料获取、核验与展示），完整历史池资格未完成；scope_released true仅本轮新增资料，冻结原件/旧实验继续保护。checked_coordination_sha=f8c250354c16d9698d2d767dc10012d834db849c；checked_at=2026-10-24T02:11:49.434776+08:00。已读COORDINATION/self、downside新9池、investor02:09完成、dispatch、personal、mechanism02:06结案、market-style及strategy-account新定义范围，无同写。四池本方，9新池原downside；不重复下载或BaoStock登录。
+- task-id/owner沿原；status completed（仅本轮有界资料获取、核验与展示），完整历史池资格未完成；scope_released true仅本轮新增资料，冻结原件/旧实验继续保护。checked_coordination_sha=869b1c83c9e7372eb83e3040665568f0f8464993；checked_at=2026-10-24T02:11:49.434776+08:00。已读COORDINATION/self、downside新9池、investor02:09完成、dispatch、personal、mechanism02:06结案、market-style及strategy-account新定义范围，无同写。四池本方，9新池原downside；不重复下载或BaoStock登录。
 - CN2577/2577、2581尝试、429490225B外盘；旧总进度567过时已纠正，实际10/23 21:12完成。Sol medium全原件和794旧引用指纹通过，3402975目标窗日线/112845停牌/21500条2026排除。官方PDF+10402可比调整事件：10397一致到0.1%内、5异常、13前后因子比例变化；价格连续性不等于实际分红收益，未改异常。
 - US Sol medium新增新浪84代码86请求82解码、3974478B；Astra high独核56Yahoo和12286868行旧parquet。旧v2漏已有4302/1356候选，SP20790−4302−15740=748，NDX11976−1356−7271=3349。新浪新增跨池21645中250零量+6OHLC异常=256精确日期；其余21389也未准入身份/交易。多源仍无候选跨池4095；代码复用/退出/长静价待核，未回填面板。
 - 当前官方CSI300/CSI500完整XLS成功，20261023快照300/500无重叠，仅当前。首次www主站返回HTML两失败保留，改实际oss-ch公开文件域取得。定位原raw/controller_recent_sources_official.json和controller_recent_source_readback.json（含外盘绝对路径SHA）；另Yahoo ^SP500TR 2013–25 3270日参考在controller_recent_sources.json，非官方总回报准入。新3成功+2失败请求，所有原件/日志/PDF/XLS外盘，0安装/付费。
@@ -8,6 +8,8 @@
 - 报告SHA a2ab04f8e94d07279aa7e4bfdbd70be3a3c4751162d97ed0343d6c19b2c6b1fc；catalogSHA fbd89952a92b344546ddcf71cf73fa8cbc7efb1f6f92eb1011f5e7cfe2d03be6仅四条status/reason；registry本键/INDEX本行。系统owner准确22文件镜像及原Vite恢复后HTTP200；root源/运行树/HTTP全文SHA相同，真实浏览器报告2577/82/256/748/3349与未合格说明可见，四池disabled引用owner验收。root本轮初始连接拒绝及错误页阻断保留，恢复后新正常报告页已展示。原raw相对链接不声称已可服务。
 - 系统回执docs/archive/handoffs-plans/investor-workspace-simplification-20261012/universe-final-intake-20261024.json SHA5c88339a1ce79b3329a5a445507a0befcb93d1f5f6ac7d2bc7ed2ddd3a073866；root最终raw/controller_delivery_20261024.json。归置通过，无新效果/旧账户重跑/生产/交易/通知或后台继续。后续针对成员生效、身份/退出与异常事件补证，不用再次堆同源报价替代。
 - 主资料仍本机codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加未提交，只协调元数据远端，不称可异机完整恢复。本轮两次ref变化断言阻止写入后补读system开工/结案；此前2非快进正常合并无强推。最新容量02:04内19.57GB/外478.34GB，固定UUID身份通过。
+
+- 交付普通push因strategy-account新结案非快进拒绝，已补读其02:11结果并普通合并，无重叠；checked_at=2026-10-24T02:12:33.025236+08:00。
 
 ---
 
