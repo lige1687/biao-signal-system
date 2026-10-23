@@ -1,3 +1,11 @@
+# 联合分组定义登记范围补充 2026-10-24T02:00:11.263844+08:00
+
+- task-id strategy-account-bridge-20261020；status active；checked_coordination_sha=c4308ddd686cf39c798cd0d00935e59b2c8e3f99；checked_at=2026-10-24T02:00:11.263844+08:00。已读COORDINATION/self、utility、personal、mechanism、downside、investor、market-style及dispatch，补读market-style01:57结案变化，无同写冲突。
+- 为新32格公开联合组合准确绑定对象，范围增加docs/research/definitions.v1.json内唯一source french_joint_op_inv_202608与object reference.french.joint.op_inv@1.0.0；保留其他内容，不改已有OP2x3定义、生产适配器或共享框架。新增仅公开月收益比较卡，不等于逐股时点资格或策略有效。冻结效果之前完成。
+- 本轮其他范围、预算、独占路径和验收沿前段；Sol仅新analyze.py及合成检查，Astra只读，主控唯一登记。定义文件已有他人本地改动将逐项保留。
+
+---
+
 # 盈利与扩张速度联合组合开题 2026-10-24T01:52:08.191472+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false。checked_coordination_sha=0c30ddee821c8cc527949a752752d4e6d5e0480a；checked_at=2026-10-24T01:52:08.191472+08:00。已读COORDINATION/self、utility、personal最新反转分层结案、mechanism最新A股申赎结案、downside10/24常见13池补数、investor、market-style、dispatch。不重复四池/九新增池取数、反转/ETF政策/机构研究或UI。
