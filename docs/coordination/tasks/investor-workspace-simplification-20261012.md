@@ -1,3 +1,10 @@
+# 复用审查补注接入完成 2026-10-24T02:57:11.077491+08:00
+
+- 原task/owner；本轮completed；scope_released true；checked_coordination_sha=a9856994df0f7b0b375ac5e410045e43d2c47d43；checked_at=2026-10-24T02:57:11.077491+08:00；检查范围同上，无新增同写。报告源/运行/API全文SHA8261ae44001c9358c9c8e6990d1c6346fbd9885608e583313c80d526f0194fd2一致，HTTP200；registry严格只改该键report_sha256。
+- 原回执cn-membership-intake-20261024.json追加provenance_addendum，保留旧验收。旧反例与13重复下载如实记录；53/45/8、四池disabled、catalog和组件无变化，复用先前通过证据，无新研究/页面重验/服务/定时/交易。仅本地未提交，协调元数据单独远端。
+
+---
+
 # 复用审查准确性补注窄同步 2026-10-24T02:56:58.320116+08:00
 
 - 原task/owner；active；checked_coordination_sha=060ce12e868b25d08f8a65b8f9efe165fcfaef3b；checked_at=2026-10-24T02:56:58.320116+08:00；已读最新utility/self，其他本轮范围沿原无同写。仅报告追加旧反例/13重复原件补注，目标SHA8261ae44001c9358c9c8e6990d1c6346fbd9885608e583313c80d526f0194fd2；registry仅本键SHA字段。只核源/运行/API全文，不重做有效页面/数值检查，不动catalog及raw。
