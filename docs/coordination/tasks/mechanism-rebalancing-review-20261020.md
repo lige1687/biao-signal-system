@@ -1,3 +1,14 @@
+# 按资料优先级开展机构因子收益与排序效果研究 2026-10-23T17:27:30.562906+08:00
+
+- task-id mechanism-rebalancing-review-20261020；owner原root；status active；scope_released false。checked_coordination_sha=29ba0bcba5f5e6bfc9eeaf3e222b15f2b073a5ee；checked_at=2026-10-23T17:27:30.562906+08:00；已读COORDINATION/self/research-dispatch-controller/sentiment-factor-research/personal-lowfreq-system-audit-20261018/research-utility-review-20261012/investor-workspace-simplification-20261012/strategy-account-bridge-20261020最新段。其他owner动量、反转、French、80RankIC和正式UI保持；本题独立机构申赎持仓问题无同写。
+- 用户2026-10-23明确“可以，按优先级做吧，做完后看看因子效果，收益IC啥的”。先复用四表16份NPORT及源核查，补合格基金类型/公开时点/证券身份/共同价格；美股优先、A股独立补原始完整持仓和公告，不把A股缺口用美股结果代替。金融理由为申赎压力与主动配置区分；实际可用数据决定可评价对象，统计前冻结版本、同样本价格对手、未来季度收益/排序能力及成本/反例。
+- 基线成果codex/mechanism-rebalancing-review-20261020@9f30a51420cfdba089b18750a530e3ee3b981d65。唯一root写新docs/experiments/institutional-flow-return-study-2026-10-23.md、同名raw合同/汇总/实现/来源、原progress追加、registry本键与INDEX本行。拟Sol medium两项独立资料资格库存，Astra方法审，具体单文件合同后派发；不改旧冻结/共享runner/策略定义/UI/目标库。
+- 新大资料和结果仅新外盘plan_output唯一目录，2026-10-23 live固定设备身份正确、内约5.82GiB可用/外约454GiB；实际运行前再预检。小报告和代码本机；不重下已取输入、不删除/仓外配置，不采购/注册/交易/通知。
+- 验收：先数据时点与身份覆盖，冻结后才检验；性能表、相对已有价格信息增量表、跨时期/集中度反例、依赖下的不确定性，独立重核主数字和来源。不能用仅12基金季度强报IC；若核心资料仍缺如实阻塞具体分支并完成其他可执行部分，不把无法评价当无效。
+- 既有至少1268年度拟合/4Pro及已知350来源动作保持；本轮所有新来源/尝试追加账，不以skill默认6停止，不重跑NAAIM/CFTC/AAII封存负结果。授权为研究，不包含付费接口购买/生产采用。
+
+---
+
 # 免费及付费数据来源核查交付 2026-10-22T11:44:53.470225+08:00
 
 - task-id mechanism-rebalancing-review-20261020；owner原root；status completed（本轮来源实测/采购优先级）；scope_released true。完整机构因子与交易价值未宣称完成。checked_coordination_sha=b5f9dfc1f3e4401581f1c0ec981696558d3b815a；checked_at=2026-10-22T11:44:53.470225+08:00；已读COORDINATION/self/dispatch/sentiment及investor-workspace11:40布局、personal11:33美股存量曲线、research-utility11:37源适配/迁移、strategy-account10:33；末次fetch无新变，独立目录无冲突，不接管他人。
