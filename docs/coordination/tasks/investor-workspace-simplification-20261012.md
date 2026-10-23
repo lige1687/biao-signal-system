@@ -1,3 +1,9 @@
+# 复用审查准确性补注窄同步 2026-10-24T02:56:58.320116+08:00
+
+- 原task/owner；active；checked_coordination_sha=060ce12e868b25d08f8a65b8f9efe165fcfaef3b；checked_at=2026-10-24T02:56:58.320116+08:00；已读最新utility/self，其他本轮范围沿原无同写。仅报告追加旧反例/13重复原件补注，目标SHA8261ae44001c9358c9c8e6990d1c6346fbd9885608e583313c80d526f0194fd2；registry仅本键SHA字段。只核源/运行/API全文，不重做有效页面/数值检查，不动catalog及raw。
+
+---
+
 # 报告链接修正接入完成 2026-10-24T02:55:57.785913+08:00
 
 - 原task/owner；本轮completed；scope_released true；checked_coordination_sha=e42dbf2efb70143339badcb2cf65f0768f7eb9a9；checked_at=2026-10-24T02:55:57.785913+08:00；已读范围同本轮，无新同写。源/运行/API正文SHA29b3168a11571a437b8f7146d80e54bd762a4cd79d16edc3a52aa3cf7d552b06，HTTP200；registry仅本键report_sha256变化。catalog仍7f7c30aaae1027e6ca3af2f4609d6e00aecf12dd24cb924f38e9beaab1f37ae4。
