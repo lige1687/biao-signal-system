@@ -1,3 +1,13 @@
+# 用户固定超额收益展示要求并恢复续接 2026-10-23T17:07:36.692877+08:00
+
+- task-id/owner沿原；status active（文档、存量展示与资料核验）；真实新统计仍storage_blocked。checked_coordination_sha=f08b40224cdd53dd99cc13081b07dfcb1bddd844；checked_at=2026-10-23T17:07:36.692877+08:00；已读COORDINATION、自身、investor-workspace-simplification-20261012、personal-lowfreq-system-audit-20261018、research-dispatch-controller最新段。
+- 用户2026-10-23：已清理，继续，数据优先外盘；收益要展示相对母指数或超额并固定持久MD/记忆。当前内盘2490347520B，外盘身份正确493443350528B；不降5GiB线，不重跑旧账户。并行reversal_data只读已授权存储候选；本人唯一变更自己资料、规范与结果。
+- 本轮准确范围：docs/research/factor-research-display-contract.md、factor-discovery-playbook.md及原模板的必要引用；自身momentum-three-universe原raw/state/report/progress、现有catalog和assessment仅合格数据补齐；按用户明确授权新增用户记忆extension小文件。系统UI及接口文档由系统owner单写，需发送要求后对接，不抢写。
+- 验收：区分母指数、同池基准、市场参考及无风险基准；主图优先明确基准的累计超额，净收益/基准/回撤仍可查；收益差百分点与相对财富比清楚，不把月差连乘当账户，不将固定抽样300只冒称沪深300成分。仅存量展示转换不构成新因子证据；新RankIC仍按冻结v2通过真实空间检查后才运行。新大数据和日志外盘、旧冻结路径不动，活动环境与数据库本机。
+- 预计成果尚未执行；基线主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9+原本地修改。恢复计数原core0/source6/oldrerun0；新增显示不重置预算。仅协调元数据推送，源文件仍本地。
+
+---
+
 # 补指标准备与历史池状态已交付，真统计仍存储阻塞 2026-10-22T17:25:30.850640+08:00
 
 - task-id/owner沿原；status paused（仅真实统计/新数据执行）；scope_released false保留原研究单一写者。checked_coordination_sha=1634987b90dce2ab21fe27301933259a10f312ec；checked_at=2026-10-22T17:25:30.850640+08:00。已读self/COORDINATION、system最新17:19交付、personal11:48及dispatch原段；无重叠，UI仍系统owner。无后台实验或自动恢复。
