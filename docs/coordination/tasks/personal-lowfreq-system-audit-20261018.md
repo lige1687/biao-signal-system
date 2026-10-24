@@ -1,3 +1,13 @@
+# 中证1000/2000月度反转复验准入 2026-10-24T09:11:31.917695+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha=47bb14a6f8af201d749dfb92ecf3cecb474121a2；checked_at=2026-10-24T09:11:31.917695+08:00。已读COORDINATION、自身、downside-sensitivity-universe-20261023 02:33及09:10新名录范围、research-utility-review-20261012 02:59、investor-workspace-simplification-20261012 02:57、strategy-account-bridge-20261020 09:09及research-dispatch-controller。首次ref变化断言在写入前停止，补读后继续。用户本轮要在中证1000/2000测试；不接管原downside历史名单/新池取数，不重复utility四池。
+- 唯一新增docs/experiments/csi-smallcap-reversal-admission-2026-10-24.md、同raw、registry本键、INDEX本行和原progress；root写者，Luna只读核现有名单/日期/指纹并返回消息由root归档。基线f8f8fc1ee2fcb3f0c82fe7b638b2dc04cff631c4。代码、来源原件、旧冻结、catalog/UI只读；先验资格，若可运行再登记完整效果合同/新增代码准确范围。
+- 低频问题：小盘范围能否改善既定月度反转相对同池全体、同数量低波动及对应全收益母指数的收益/风险/机会/成本。暂时供需压力为假说，不把小盘/低额当散户机制证明。前月收益取负、五组/月末形成次日执行沿旧定义，必须历史逐时成员，不将2026快照回填2015。现catalog有当前名单与指数日线、历史成员缺口待实物确认。
+- 现行规范、研究闭环/低频/委派已采用，策略两源SHA核同。新有界问题1核心+3必要跟进、最多6来源，资格未通过不得计新效果；旧预算不重置。当前新效果0。预计小记录≤256KiB，旧外盘只读，storage09:09固定UUID核同内13.5GB/外477.9GB。若核心成员缺失则回测blocked，不另改问题跑指数择时或当前幸存名单。
+- 验收两池实际源/派生SHA、日期与数量、历史事件覆盖、首发与回溯、可用的完整月份、定义/评价/时期和具体阻塞；真实费表与成交缺口保留。无生产/交易/删除/通知/新服务。
+
+---
+
 # 成交活跃分层反转研究已交付 2026-10-23T19:40:51.902275+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner 01a14d90-0f4a-7931-bfcd-519ec9395431；status completed（本轮固定300股活跃分层问题）；scope_released true仅本轮新增范围，旧冻结资料继续保护。checked_coordination_sha=bde7d47fe9af2315cda81897d58c09699ecf5543；checked_at=2026-10-23T19:40:51.902275+08:00。已读COORDINATION/self及research-utility-review-20261012、research-dispatch-controller、strategy-account-bridge-20261020、mechanism-rebalancing-review-20261020、investor-workspace-simplification-20261012、market-style-observation-20261020、downside-sensitivity-universe-20261023、lowfreq-strategy-discovery-20261019、storage；交付前补读mechanism19:37，28份历史资料/新跨期价格关联仍归其owner。本题未取新行情，不接管四历史指数池、机构或正式UI。
