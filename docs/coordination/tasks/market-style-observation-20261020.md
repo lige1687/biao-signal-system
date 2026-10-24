@@ -1,3 +1,13 @@
+# 用户批准因子工作台实施 2026-10-24T09:08:50.965326+08:00
+
+- task-id market-style-observation-20261020；owner root；status active；scope_released false。checked_coordination_sha 6d93ec2963ce3f208f8fc3ff6112da25419750d2；checked_at 2026-10-24T09:08:50.965326+08:00。已读 COORDINATION/self/investor-workspace-simplification/research-utility-review/research-dispatch-controller；两相邻负责人最新范围均 released，四个历史成分池仍禁用。
+- 用户“其他的都认可…批量挖掘先暂缓列To-Do…自动进入试盘不适合…其他的你做吧”批准原方案实施与目标登记。服务研究审阅层，不改交易规则、不挖新因子、不启动新效力实验、不自动试盘/交易/主动通知。
+- root 写 web/src/pages/FactorPanelPage.tsx 最小入口、web/vite.config.ts 专用API代理、src/lei_signal/factor_workbench/、本任务原报告/raw/progress及准确目标DB；前端 Sol 唯一写 web/src/pages/factor-workbench/；指标 Sol 唯一写 src/lei_signal/research/workbench_metrics.py、tests/unit/test_workbench_metrics.py、web/public/research/factor-workbench-20261024/。必要旧 FactorCurves.tsx 仅 root 最小展示复用/SVG，不改旧数据/定义/结论。子代理实际派发后补记，未派发不称运行。
+- 接入既有冻结数据生成可追溯 RankIC/ICIR/报价模拟 IR 及曲线，不把同池基准称母指数，不把缺价报价收益称可成交净收益。未测相关性/残差/持仓与当前组合边际明确未评价。桌面四视图、七步研究过程、按需 Agent，旧页面深链可用。批量挖掘待办暂缓，人工研究记录不触发试盘。
+- 验收 Python 独核与相关回归、TS/build、真实桌面页面/筛选/图轴/空态/被动解读、目标写入读回、来源指纹/原数据未改和归置。共享工作区脏改保留，不切分支不自动提交实现；已有发布基线186d0ad4仅旧成果。当前8000/5173在运行，5192预览离线，必要只新增自有预览服务。
+
+---
+
 # 工作台指标与参考AI方案审查交付 2026-10-24T01:57:55.790772+08:00
 
 - task-id/owner沿原；status completed（仅方法审查/方案补充）；scope_released true。checked_coordination_sha 70e5ae94de4817e2fcb3381bc0f5c0b2bbc10042；checked_at 2026-10-24T01:57:55.790772+08:00。已读COORDINATION/self/investor-workspace/utility/dispatch，并补读downside常见池、mechanism现金成交、utility最终原件和strategy-account盈利增长。仍不接管原曲线/研究/数据owner。
