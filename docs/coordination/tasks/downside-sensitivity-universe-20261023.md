@@ -1,3 +1,13 @@
+# 其他常用研究Universe增量采集 2026-10-24T09:10:07.680912+08:00
+
+- task-id/owner沿原；status active；scope_released false。checked_coordination_sha 6d93ec2963ce3f208f8fc3ff6112da25419750d2；checked_at 2026-10-24T09:10:07.680912+08:00；已读COORDINATION/self、dispatch、utility最新10/24官方事件结案、investor-workspace、market-style及前轮相关task。原13池/事件原件只读复用，不接管原owner，也不复测旧收益。
+- 用户新授权“看看还有其他研究可能会需要的Universe，拉全拉准”。服务研究输入层，优先中美当前ETF名录/生命周期来源、行业、红利低波、黄金/债券/现金/跨境分类；补CN全指/800/A500/上证180/深证100/北证50与一个明确版本的全指一级行业、红利/红利低波，US SP400/600/1500及11行业、红利/低波/总市场/微盘身份目录。每项区分官方成员、基金持仓代理、当前可选与真实历史，母指数价格/含分红分别绑定；不额外全市场逐股价格。
+- 新独立路径docs/experiments/raw/research-universe-expansion-2026-10-24/及同名报告；root唯一汇总contract/storage-plan/state/controller*、etf/、registry仅本键/INDEX仅本行和原progress；Sol policy_executor独写新raw/cn/及新外盘cn/，Sol universe_sources独写newraw/us/及新外盘us/；Astra method_review只读范围/来源审核。新外盘结果计划3GiB，本机小记录4MiB；plan_output验设备后绑定，旧成果不改。
+- 网络按预列有限产品/名录/方法/收益资料清单逐件计数；成功复用，同对象初次+至多一次有诊断依据重试；403/429/付费/权限不绕过。0新收益实验/付费/生产/交易/删除/自动化，旧科学预算不变。命名目录完整不代表历史合格；当可公开取得的必要资料已保存和核验、剩余确需受限历史来源时如实交付缺口。
+- 主树基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有未提交；只推协调元数据。验收原件SHA、日期/身份/数量完整性、字段/代理不混用、旧13池来源复用、当前ETF目录终止遗漏声明、全清单与实际失败、报告归档/API读回。目标沿okr-8830a1f1ec4f，无仓外DB写。
+
+---
+
 # 常见13指数资料有界交付 2026-10-24T02:33:38.129366+08:00
 
 - task-id/owner沿原；status completed（仅本批可得原件、派生与核验），完整历史13池仍未完成；scope_released false保护原件。checked_coordination_sha 2fae6f8b14cb498cbd7f03b7e2a0f7525da56f8c；checked_at 2026-10-24T02:33:38.129366+08:00；已读COORDINATION/self、utility02:24/02:29官方事件增量、dispatch及此前investor/market-style/mechanism/strategy-account新增。原4池官方多年事件仍归utility，本题不抢或宣称对方完成。
