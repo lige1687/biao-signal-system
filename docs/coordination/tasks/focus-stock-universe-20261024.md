@@ -1,3 +1,14 @@
+# 当前：来源已找到，归档原模型核验及中美观察范围
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false仅本轮自有条目；updated_at 2026-10-24T13:39:33.990517+08:00。
+- checked_coordination_sha 4367807a021d13407dd08556ff1eddff04313097；已读 COORDINATION/self/research-dispatch-controller/market-observation/sentiment-factor-research/market-style-observation-20261020/downside-sensitivity-universe-20261023/investor-observation-map；最新strategy-account-bridge仅已有因子组合，不接管彼此。准备同步时远端引用已变，首次基线断言停止无写入；已读差异后恢复。冲突决定：root唯一写本题来源报告及登记键，不改其他任务数据/报告/生产。
+- 范围：docs/experiments/focus-stock-momentum-source-review-2026-10-24.md、raw/focus-stock-momentum-source-review-2026-10-24/小清单、registry.json仅本报告键、INDEX.md仅本报告行；自身progress和输出计划。验收：准确原出处+日期、ASR/画面/评论核验、解释事后圈点、A美范围和观察增量边界、归档读回/归置。
+- 原视频 https://www.douyin.com/video/7699879945107016969 ，量化舵，页面发布时间2026-10-23 23:06，111.27秒。原片/ASR/20帧已读，作者拒绝完整公式披露；评论成交量与画面成交额有歧义，不编造参数。旧blocked身份问题已解决，原公式复现和预测仍未成立。采用research-closure/lei-lowfreq-research/current-standards；没有新技术定义、收益实验、拟合、交易规则或生产改动。
+- 外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9核对通过，64MiB计划、1MiB本地预算；资料在 /Volumes/win+mac通用/LeiSignal-新实验结果/focus-stock-universe-20261024/focus-stock-universe-20261024-20261024T133543-24c706c99401/result/ 。视频专用API forbidden不重试，实际页面媒体+本地已装ASR读取成功，无安装/权重下载。
+- 工作分支codex/factor-unit-research-20260915，基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；研究成果仅本地未提交/推送，只推协调元数据。两Sol只读证据助手结束，root独立核关键帧；效果运行0。下一步完成来源报告及两表，释放自有归档范围。
+
+## 历史（以下旧阻塞已被本轮来源发现解除）
+
 # 焦点股模型：中美股票范围与观察用途核对
 
 - task-id：focus-stock-universe-20261024；owner：01a16bd6-3661-7cd3-a2ff-5cadfa181605 / root。
