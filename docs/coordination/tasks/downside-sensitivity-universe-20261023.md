@@ -1,3 +1,12 @@
+# 历史原件验收与中证2000事件链接续 2026-10-24T10:11:39.347555+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha 713437a0f953f05f74b3eef522542a5d0a974480；checked_at 2026-10-24T10:11:39.347555+08:00。已读 COORDINATION、自有记录及新增 market-style 09:57 展示结案；此前 utility/personal/strategy-account/investor/dispatch 记录沿已审阅，未见同写。本次精确 SHA 快进，避免共享 origin 引用在审阅后变化。
+- 本新 history 范围不变：CN24对象39早段共65306值与48旧来源SHA独核通过；root另2母指数已核。中证1000官方49事件倒推断在15044/603083，取消公告正确保留；Astra最后独立复核中。中证2000已有官方完整初始2000名与现行锚点，继续有限差集补公开定期/临时事件附件并前推，不能只列“缺链”提前退出；不重复已存通用附件。原两个研究目标窗口不改，0新效果。
+- US日线独核是50个新增来源对象合计97076有效值（已包括9个跨资产对象），更正本地09:59进度的“50+9”重复计数。IWB/IWM/IWV缺段月档完成；IWC完成、USMV最后月份采集中。三只SPDR历史母指数切换已取官方Sep2026 PDF，不能以当前S&P400/600/1500覆盖全基金历史。验收全源/派生仍待全部落盘。
+- root独核脚本首次将CNI字段位置5误写为current，断言失败无原件变化；读真实schema后证实位置1=current、5=close且三序列全相等，修正后通过。失败保留，未改变科学值。原5GiB外盘/8MiB内盘计划、边界和唯一写者保持。源码/报告仍仅本机未提交，只有协调元数据推送。
+
+---
+
 # 两原母指数早段补齐及成员事件深核 2026-10-24T09:52:53.527174+08:00
 
 - status active；checked_coordination_sha 52ae91ec0dfa76c7766f8f5f9ea35be96f66bc82；checked_at 2026-10-24T09:52:53.527174+08:00。已补读a8501ea2内strategy-account09:44工具交付（上一轮共享origin在merge时更新，现已明确审阅）；其范围不重叠。其余已读任务沿前。
