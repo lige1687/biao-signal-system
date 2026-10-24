@@ -1,3 +1,13 @@
+# 当前：焦点股动量来源与中美观察用途调研结案
+
+- task-id/owner沿原；status completed仅本轮source_review；scope_released=true仅本题归档项。updated_at 2026-10-24T13:44:03.438620+08:00；checked_coordination_sha 01b71f2366c5e8a96a9644685ba7ea56b12a8bfe；已读COORDINATION/self及已登记六相关task、strategy-account-bridge新增范围，最后fetch无增量，无同写冲突。
+- 原来源 https://www.douyin.com/video/7699879945107016969 ，量化舵，2026-10-23 23:06发布；111.27秒原片、完整本地ASR、20关键帧及作者评论已核。作者未公开参数，画面成交额/评论成交量差异保留；逐段最低日圈点属事后选择，98%是同期历史表现比较而非预测胜率。支持保留热门股降温观察，预测/美股迁移/账户改善未验证。
+- 本地报告 docs/experiments/focus-stock-momentum-source-review-2026-10-24.md，SHA a808f0dde2e3ad4cec32a86cb2733286e8e0ce9fb4c5653bf4dd4e5acec227f4；同名raw/source-manifest.json列原件/指纹/失败/验收；registry只加本键且保留旧项，INDEX只加本行，progress沿原。两表分别记录原声称性能及相对已有信息未测增量，给中美范围建议和反例。
+- 归置exit0，报告/registry/manifest哈希读回一致；PNG首次断言因macOS ._说明文件计入40而失败，排除说明文件后20张通过，未删除。Codex open仅queued。媒体/转录/抽帧约12.67MB在已核外盘，无下载权重/付费/生产/交易/真实收益实验，已关闭本次搜索页。
+- 工作分支/base沿原；源码报告未提交/推送，成果仅本地、远端不可复现，协调分支仅本摘要。原身份阻塞已解除；原版完整复现仍需完整定义/逐日底表，自定算法须另立定义，不能冒充复现。无待运行后台，无重跑封存实验。
+
+## 本轮开工与此前历史
+
 # 当前：来源已找到，归档原模型核验及中美观察范围
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false仅本轮自有条目；updated_at 2026-10-24T13:39:33.990517+08:00。
