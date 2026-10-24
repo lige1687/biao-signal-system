@@ -1,3 +1,13 @@
+# 真实研究进度与卡点展示 2026-10-24T09:42:04.563338+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha 9fff663bbb4d5c32cef3c261e9d03cce3c6bc034；checked_at 2026-10-24T09:42:04.563338+08:00。已读COORDINATION及self/strategy-account/investor/utility/downside/dispatch，较上一轮无变化；原组合工具与历史池补采owner不接管。
+- 用户要求结合真实研究过程展示因子研究卡点和进展。本轮report_only证据核查加既有工作台展示实施，0新金融实验/付费来源/指标寻优。服务研究审阅层，不改技术判定、冻结合同或研究状态权威。验收真实对象/版本/用途/范围绑定，执行进展与结论分开，已封存负结果不写待跑；卡点具体到资料或验证证据，下一动作/依赖/资料日期可读，状态失效可见。
+- root唯一写src/lei_signal/factor_workbench/app.py接口集成、web/src/pages/factor-workbench/FactorWorkbench.tsx容器、原报告/计划/progress及原raw新workflow-progress-*；Sol拟只读两类证据后分工：progress.py与tests/unit/test_factor_workbench_progress.py、前端WorkflowProgress.tsx/workflowProgress.ts/workflow-progress.css/workflowProgress.test.mjs，互不重叠。已有源报告、definitions、catalog、冻结raw、其他owner代码只读。不写仓外/目标库/自动化/真实交易。
+- 基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加原未提交；两策略原件上一轮核SHA未变化，本轮仅研究证据展示。复用research-closure report_only、lei-lowfreq及frontend-design；先核记录再写有证据的流程实例，不凭文件存在或测试通过推断有效。预计小源码与状态映射<1MiB，无新大结果。
+- 验收后端来源变更/缺失降级、同名不同版本隔离、前端阶段/缺口/链接/选择和旧页面回归，TS与归置、实际桌面页面。只推协调元数据，源码本机，不自动提交。
+
+---
+
 # 八步流程及第七步母指数对照已补充 2026-10-24T09:39:48.130584+08:00
 
 - 本轮通用说明修改completed；scope_released true；对象级真实流程仍待实现。checked_coordination_sha ed80ab6714c5d933ca1b89f8a280238858474e05；checked_at 2026-10-24T09:39:48.130584+08:00；已读self/strategy-account/investor/utility/downside/dispatch及COORDINATION，交付fetch无新变化，无同写冲突。
