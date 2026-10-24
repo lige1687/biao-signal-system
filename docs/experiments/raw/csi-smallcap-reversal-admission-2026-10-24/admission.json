@@ -1,0 +1,216 @@
+{
+  "schema": "smallcap-reversal-input-admission/1",
+  "checked_at": "2026-10-24T09:14:12.454757+08:00",
+  "source_cutoff": "2026-10-23",
+  "catalog": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/common-universe-acquisition-2026-10-24/coverage-manifest.json",
+    "sha256": "d4f5f918d04255e92a30820f94d217862b303308b55f8e79e6b705fd29067c81"
+  },
+  "history_receipt": {
+    "path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/common-universe-acquisition-2026-10-24/cn/history-coverage.json",
+    "sha256": "07aae8270734a9b38e1257d5d8687d9e2946af44054a6be80805179f184210f5"
+  },
+  "pools": [
+    {
+      "index_id": "000852",
+      "name": "中证1000",
+      "snapshot_date": "2026-10-23",
+      "snapshot_rows": 1000,
+      "unique_codes": 1000,
+      "exchanges": {
+        "深圳证券交易所": 529,
+        "上海证券交易所": 471
+      },
+      "parent_launch": "2014-10-17",
+      "benchmarks": {
+        "parent_price": {
+          "rows": 3350,
+          "first": "2013-01-04",
+          "last": "2026-10-23",
+          "pre_parent_launch_rows": 429,
+          "series_code": "000852",
+          "own_series_publication_verified": true
+        },
+        "parent_full_return": {
+          "rows": 3350,
+          "first": "2013-01-04",
+          "last": "2026-10-23",
+          "pre_parent_launch_rows": 429,
+          "series_code": "H00852",
+          "own_series_publication_verified": false
+        }
+      },
+      "bound_history_notice_count": 2,
+      "notices": [
+        {
+          "date": "2025-11-28",
+          "effective_date": null,
+          "scope": "Partial constituent changes; effective date not in attachment",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_20251128_adjustment_attachment.pdf"
+        },
+        {
+          "date": "2026-05-29",
+          "effective_date": null,
+          "scope": "Partial constituent changes; effective date not in attachment",
+          "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_20260529_adjustment_attachment.pdf"
+        }
+      ],
+      "verified_continuous_historical_formation_months": 0,
+      "monthly_reversal_effects_computed": 0,
+      "can_run_requested_constituent_backtest": false,
+      "reason": "Only one current complete snapshot. Historical start/member transitions and exact effective dates do not form a qualified continuous chain in this delivered bundle. No mature forward period follows the current snapshot at cutoff.",
+      "planned_holding_window_if_membership_qualified": [
+        "2015-01",
+        "2025-12"
+      ]
+    },
+    {
+      "index_id": "932000",
+      "name": "中证2000",
+      "snapshot_date": "2026-10-23",
+      "snapshot_rows": 2000,
+      "unique_codes": 2000,
+      "exchanges": {
+        "深圳证券交易所": 1208,
+        "上海证券交易所": 753,
+        "北京证券交易所": 39
+      },
+      "parent_launch": "2023-08-11",
+      "benchmarks": {
+        "parent_price": {
+          "rows": 3113,
+          "first": "2013-12-31",
+          "last": "2026-10-23",
+          "pre_parent_launch_rows": 2340,
+          "series_code": "932000",
+          "own_series_publication_verified": true
+        },
+        "parent_full_return": {
+          "rows": 3113,
+          "first": "2013-12-31",
+          "last": "2026-10-23",
+          "pre_parent_launch_rows": 2340,
+          "series_code": "932000CNY010",
+          "own_series_publication_verified": false
+        }
+      },
+      "bound_history_notice_count": 0,
+      "notices": [],
+      "verified_continuous_historical_formation_months": 0,
+      "monthly_reversal_effects_computed": 0,
+      "can_run_requested_constituent_backtest": false,
+      "reason": "Only one current complete snapshot. Historical start/member transitions and exact effective dates do not form a qualified continuous chain in this delivered bundle. No mature forward period follows the current snapshot at cutoff.",
+      "planned_holding_window_if_membership_qualified": [
+        "2023-09",
+        "2025-12"
+      ]
+    }
+  ],
+  "current_pool_overlap": 0,
+  "source_checks": [
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_000852_cons.xls",
+      "sha256": "a65243dd6b2d3547f80e650fb23eda9c60c824fcea18feac015843686a4ab244",
+      "bytes": 213504,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/parsed/000852_constituents_snapshot.csv",
+      "sha256": "f69213eb2aac90e3f3ed4b1acd78f7e70b99ac54356db739249cdad81c9c6278",
+      "bytes": 32691,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_000852_price_2013_2026.json",
+      "sha256": "1592702d5db114df27920dd8fa4191d7a54736310cc5fb32c7aa2467f0563d73",
+      "bytes": 1143401,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/parsed/000852_price_daily_close.csv",
+      "sha256": "9b70fc1b00d60d6052cb29c38c66517e54bec4a1534ee2320ab3af84778ecfa4",
+      "bytes": 66818,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_H00852_total_return_2013_2026.json",
+      "sha256": "3a95ab40575b9658f7f2f3f80d47c0ef3372cd4a699128d4793055c0d36a4850",
+      "bytes": 1237408,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/parsed/000852_total_return_daily_close.csv",
+      "sha256": "45cc143164b59c661acdf66d42b9ca82a30ef4c5770bfd2a545fdf9a5d8943e7",
+      "bytes": 66841,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_000852_factsheet.pdf",
+      "sha256": "6d8885c93597a609260cc11385a9b8aaec33593d164d492120018d2b2e914551",
+      "bytes": 449831,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_20251128_adjustment_attachment.pdf",
+      "sha256": "e8d0279d40e5e351d16a5e95a7cd177651d7704fe588c318e1af4bd5ac87e268",
+      "bytes": 149868,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_20260529_adjustment_attachment.pdf",
+      "sha256": "63301b60a2a2040c4bdd97c7db5021afc8425e1f0473b96dc0b472a39ba25d32",
+      "bytes": 149582,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_932000_cons.xls",
+      "sha256": "df3bd64d2501e3fc06b89327bb89198189cb64ed67382e1ac91b42208c597739",
+      "bytes": 423424,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/parsed/932000_constituents_snapshot.csv",
+      "sha256": "6e294ef75a76e32c23102649e1e018a9455ecd4d74f8f9f87678929ee5f872ba",
+      "bytes": 65179,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_932000_price_2013_2026.json",
+      "sha256": "cadfa581ebcdea55bb6d80c7ac329c2158ec90caa221ec5ef0f25e6f5b2638f8",
+      "bytes": 1056484,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/parsed/932000_price_daily_close.csv",
+      "sha256": "fcca86629ba1e50c47206245dac3351d085d042018f8f1a16b471fcde8ec56e9",
+      "bytes": 61968,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_932000CNY010_total_return_2013_2026.json",
+      "sha256": "70a4184422dc9192b4c1f5a4c22c677ff40da31c0b6fd9f4c3fb4fb524a256fb",
+      "bytes": 1157030,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/parsed/932000_total_return_daily_close.csv",
+      "sha256": "01d53674af8e0122821b323730f2006ca2b1187bc356957831ada0bb8f6c4a84",
+      "bytes": 61945,
+      "match": true
+    },
+    {
+      "path": "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/original/csi_932000_factsheet.pdf",
+      "sha256": "e8439f7c3843096dc82ca4a2b79c0a46821b0a734c992900c6a4d8c37fc89923",
+      "bytes": 449567,
+      "match": true
+    }
+  ],
+  "checks_passed": 16,
+  "factor_study_execution_status": "blocked",
+  "evidence_status": "not_evaluated",
+  "blocking_reason": "historical_point_in_time_membership_missing",
+  "source_requests": 2,
+  "new_market_downloads": 0,
+  "core_effect_attempts": 0,
+  "scope": "Readback of specified delivered bundle, not a proof that no public historical source exists. No index timing experiment substituted for stock selection."
+}

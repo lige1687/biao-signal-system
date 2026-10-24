@@ -1,0 +1,37 @@
+{
+  "mission": "Independently verify existing CSI1000 and CSI2000 membership and benchmark inputs; no factor effects",
+  "task_scope": [
+    "Inspect two entries from current coverage manifest",
+    "Verify source and parsed bytes hashes, snapshot dates and unique member counts",
+    "Check actual saved official factsheet launch dates and historical member coverage",
+    "Return exact permitted performance window or blocked cause"
+  ],
+  "read_only_paths": [
+    "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/common-universe-acquisition-2026-10-24",
+    "/Volumes/win+mac通用/LeiSignal-新实验结果/downside-sensitivity-universe-20261023-common-20261024/downside-sensitivity-universe-20261023-common-20261024-20261024T014918-913e7c83a1cd/result/cn/"
+  ],
+  "write_paths": [],
+  "network_allowed": false,
+  "max_agents": 1,
+  "one_writer_per_file": true,
+  "preserve_dirty_worktree": true,
+  "expected_outputs": [
+    "Message with source SHA checks and member dates/counts",
+    "Historical membership gaps vs mere benchmark availability",
+    "No writes/no runs statement and limits"
+  ],
+  "stop_conditions": [
+    "missing input",
+    "scope ambiguity",
+    "do not infer old membership from current list"
+  ],
+  "executor": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "controller_review": {
+    "required": true
+  },
+  "storage_identity_checked_at": "2026-10-24T09:09:56+08:00",
+  "storage_uuid": "DEBA1C85-6059-3865-B50A-A8EE1F80E4D9"
+}
