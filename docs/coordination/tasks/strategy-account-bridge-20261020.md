@@ -1,3 +1,17 @@
+# 统一因子组合工具与首轮关系流程完成 2026-10-24T09:44:36.341216+08:00
+
+- task-id沿原。checked_coordination_sha=93e33104c49c0100476a3dba435ca3e673c39c3c；checked_at=2026-10-24T09:44:36.341216+08:00。已读COORDINATION、自身、market-style-observation-20261020、downside-sensitivity-universe-20261023、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller。交付新增工作台真实流程展示归原owner，历史池补采归downside、反转复验归personal；本轮无UI/API/其数据同写。
+- 新factor_combinations模块+7测试、8准确对象属性、使用说明与原skill组合参考实际入口；统一573记录=213对象+29参考+331OSAP，不称全库有效因子。原definitions/生产判定不变。
+- 一批真实关系诊断，0新策略收益回测/寻优/下载/安装。US单盈利与慢增长相关.8927、共同亏33/120；价值动量.7246、32/120。CN三档评分.0406/.0442/.0131、保存资金重叠13.55/12.41/11.58%，但收益相关.9024/.8181/.7668；保存报价未知估值可能平滑收益，不证明真实风险分散。
+- 所有性能/增量复用旧封存。盈利慢增长保留候选；固定价值动量不采用；一般反转买入仍暂停。三审查blocked_inputs且forward_eligible=false，完整历史资格、财报时点、费用与母指数缺件不是工具通过能替代。
+- 报告docs/experiments/factor-combination-workflow-2026-10-24.md SHA 089f22d179956f61462639900d750e51f2c0dc0fbf70cbe65d9c91a512599d59；raw同名含合同/设计/冻结/21输入/实际结果位置/独立验算/CLI/归档/API/交付。外盘新增6154666B，UUID身份与存储plan已核，无迁移删除或内盘回退。Sol medium唯一代码执行、另一Sol medium只读代码/独立10数值源与报告审阅、Astra high方法审。21输入前后hash一致属于执行证据；独立算术最大误差4.44e-16。
+- 7针对测试、CLI32命中10限量及3审查完整读回、归置/窄diff通过。8000/5173全文逐字一致；实际页面9表无横溢、旧曲线深链已修。registry只增本键，其他763项内容保持；INDEX只加本行。失败保留绝对路径预检、3输入边界修复、CLI额外来源字段比较误报和报告相对链接修复。
+- 主树codex/factor-unit-research-20260915基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9+本地修改；未自动提交推送源码，仅协调元数据。工具首轮completed，完整策略仍待上述真实输入；没有新增前向版本/交易/通知/仓外目标数据库改动。报告展示待用户验收，当前无本题后台研究。
+
+- 本轮status completed；scope_released true仅新增工具/使用说明可由后续明确owner接续，旧冻结报告/raw仍保护。完整策略研究不标完成。工作台可消费factor_combinations函数、profiles候选及result-locator输出，未替其部署接线。
+
+---
+
 # 统一因子组合流程实施 2026-10-24T09:21:58.684192+08:00
 
 - task-id沿原；status active；scope_released false。用户授权“可以，我理解项目工具已经全了？不全可以补充，然后去做这套流程”。checked_coordination_sha=72f122eb69a89954eae4cb749915313ecfa374b8；checked_at=2026-10-24T09:21:58.684192+08:00；已读COORDINATION/self/market-style/utility/downside/personal/investor/dispatch及上轮后新增记录。工作台UI/metrics/API仍归market-style，不同写；历史池资料与小盘反转仍归原owner。
