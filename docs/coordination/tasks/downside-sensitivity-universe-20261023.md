@@ -1,3 +1,12 @@
+# 成员部分准入与缺价去重补采 2026-10-24T10:47:20.523840+08:00
+
+- task-id/owner沿原，status active，scope_released false；checked_coordination_sha 12ff2a0d489e5d9519f114ad063928fd0e5c370e；checked_at 2026-10-24T10:47:20.523840+08:00。已读COORDINATION/self及沿前utility/personal/strategy-account/investor/dispatch/market-style；本次fetch无新增。价格原owner已结案，进程检查未见其他BaoStock采集；旧原件/缓存只读，无同写。
+- 新增3006227官方合并调整解释原603083/603680断点。Astra独算批准CSI1000目标36/132月（2022-12..2025-11），更早96月卡在2022两次调出000931；CSI2000初始仅批准2023-08..10三月，11月002866升入1000的2000处置不明，28目标余25不放行。root controller-membership-admission.json统一裁定并保存42000成员月，不改executor候选与旧审阅快照。仅成员资格，不是回测全输入。
+- 本地已有调整收盘表及外盘旧原价逐项复用后，原候选462条缺口有155条两端已存原价，43端明确不交易，2端旧查询内无行不重取。余48证券316精确日期上限，Sol universe_sources先按root已准月份再缩小，准备controller-stock-gap-plan及外盘controller-stock-gap-acquisition/；不取未准2000十一月，不重复已存字段/日期，不重登录干扰他人。准备不等于运行，根负责人核计划后启动有限原价/交易状态和缺失调整因子；不运行收益。
+- Sol policy_executor已停止写cn，另独占controller-us-identity-reconciliation*及外盘controller-us-identity/：从官方SEC解释VTI于2026-07-29基准改名及SPMD历史ticker；已存原件复用、旧ticker最多各一次缺早段免费探针，排除同名他物。Astra只读成员审阅完毕；root独写汇总/报告/registry本键/INDEX本行/自己progress。所有追加在原59目录、5GiB外盘/8MiB小记录和0效果合同内，无收费/生产/交易/删除/自动化；源码未提交，仅协调元数据推送。
+
+---
+
 # 历史原件验收与中证2000事件链接续 2026-10-24T10:11:39.347555+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha 713437a0f953f05f74b3eef522542a5d0a974480；checked_at 2026-10-24T10:11:39.347555+08:00。已读 COORDINATION、自有记录及新增 market-style 09:57 展示结案；此前 utility/personal/strategy-account/investor/dispatch 记录沿已审阅，未见同写。本次精确 SHA 快进，避免共享 origin 引用在审阅后变化。
