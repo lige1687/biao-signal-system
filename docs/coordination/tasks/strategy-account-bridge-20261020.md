@@ -1,3 +1,15 @@
+# 现有因子的新组合探索 2026-10-24T13:37:13.399425+08:00
+
+- task-id/owner沿原；status active，scope_released false。用户授权“策略再多探索探索，目前已有的因子”。checked_coordination_sha=fdbc2f67c4d53d6b47cddc4ddd17e50b09033da9；checked_at=2026-10-24T13:37:13.399425+08:00。已读COORDINATION/self/market-style/downside/personal/utility/investor/dispatch及新增focus-stock。历史池补采已结案但完整资格未齐（1000成员36月、2000成员3月不能当完整收益输入）；小盘反转仍personal，工作台目录/流程仍market-style，本轮不接管或重复。
+- 问题：既有中美因子中，不同经营信息合用或年度财务与动量配置，是否改善强单项的收益/少亏/漏涨/名单代价。研究层独立扩展；不改LEI判定、规则、定义登记、旧冻结、生产/交易。已核两桌面源SHA仍df92d85b...b20/85e0e327...903。
+- 固定一个核心批次含两个问题，所有结果前冻结：CN原600历史股共同GP/CFO财务池，0.5动量排名+0.25毛利资产排名+0.25经营现金资产排名，沿原行业配置/20%选择，与两种单财务+动量、纯动量、低波及75%动量现金比较；US原盈利慢增长联合公开组+动量初始各半不再跨账户调配，两规模和原3时期，与联合单项/动量单项/半现金及同32格单盈利+动量比较。均已看历史；CN仅报价选择研究、US公开组毛收益资金路径，不称实际净账户或三条件同股。若输入资格不支撑，只阻塞相应分支。
+- CN旧合同明确当时不做第三财务混合，旧结果/预算不改；本次是用户新授权后独立提出的新问题，不改名重跑旧单项。旧单项用于共同条件的必要对照，禁止窗口/比例/方向寻优。US旧OP+M失败保留，必须同32格单盈利控制低增长新增作用。无新因子取数/行情/安装，来源复用；最多6必要原始来源核查，当前0。研究闭环默认1核心+最多3有理由跟进，总预算共享不按agent重置，不为正结果追加。
+- 唯一新路径docs/experiments/existing-factor-strategy-expansion-2026-10-24.md及同名raw/；Sol profit_investment_executor独写其中cn_compare.py/test_cn_compare.py（冻结后才执行）；root写合同、输入资格、US适配/运行、结果位置、图/报告/registry本键/INDEX本行/自身progress；Sol verify只读独核，Astra method只读金融设计与结论。不改factor_combinations模块、任何web/API/工作台、他人材料。
+- 输入复用P2价格纠正stock_weights、P1逐股月表、French32格与6动量组；先核SHA/共同股票/期间与单位/公告严格早于决定；后续缺报价不能删形成股票。主表仅完整共同期，全部月未知/停牌权重与不利情景保留，不连乘缺失成净值。报告必须有性能/增量、范围、真实母指数缺口、曲线与反例。
+- 存储13:34固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9核同，内12.33GB外477.12GB；新结果/日志独立外盘计划预计64MiB，本机源码小记录2MiB，原件只读。主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加原修改，不自动提交/推源码，仅协调元数据。
+
+---
+
 # 统一因子组合工具与首轮关系流程完成 2026-10-24T09:44:36.341216+08:00
 
 - task-id沿原。checked_coordination_sha=93e33104c49c0100476a3dba435ca3e673c39c3c；checked_at=2026-10-24T09:44:36.341216+08:00。已读COORDINATION、自身、market-style-observation-20261020、downside-sensitivity-universe-20261023、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller。交付新增工作台真实流程展示归原owner，历史池补采归downside、反转复验归personal；本轮无UI/API/其数据同写。
