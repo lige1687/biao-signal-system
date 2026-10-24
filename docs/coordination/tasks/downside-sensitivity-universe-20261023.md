@@ -1,3 +1,15 @@
+# 近20年资料去重补采有界结案 2026-10-24T11:00:44.872127+08:00
+
+- task-id/owner沿原；status completed（本批公开源补采与核验）；完整20年/59池历史仍未完成，scope_released false保护原件。checked_coordination_sha 623b195bb4cd28c17a4170c365b650d3b3778875；checked_at 2026-10-24T11:00:44.872127+08:00。已读COORDINATION/self及utility/personal/strategy-account/investor/dispatch，新增market-style10:53全目录工作台范围：其不取行情、不接管本资料，双方无同写。本轮准确SHA快进。
+- 报告docs/experiments/universe-history-completion-2026-10-24.md SHA24e644979614e1fd0663f1c22876c83b6ad878d0769ba9c4db84e549d3cba89e，raw同名closure/coverage-manifest/成员裁定/来源及独核链完整。registry本键/INDEX本行、API列表pending=false分类数据与质量mixed及全文SHA、27本地链接、归置均通过；open工具仅queued。新批外盘1508文件238037920B，UUID沿原；本地小记录约7.23MB，旧原件只读不搬不删。
+- A股新增43段官方70449日值，原300/500TR各5052日2006-01-04..2026-10-23；US50个日线来源97076有效值含9跨资产，无重复“50+9”。iShares新增736+旧377=1113有效基金月，1176目标剩63（32早期+31其后），不填空。Yahoo/BaoStock明确供应商候选，不冒充官方指数成员或统一回报序列。
+- 成员核心增量：漏掉的跨指数3006227补齐后，1000独算通过2022-12..2025-11的36/132月；较早96月保留2022两次调出000931矛盾。2000初始仅准2023-08/09/10三月，11月002866调入1000后的2000处置不明；后续完整定调仍缺，共25/28未准。42000成员月已存可读CSV，准入仅经济成员归属，不放行收益输入。旧49事件/旧失败快照及主控裁定分列，不能继续读旧qualified=[]误报当前全0。
+- 原价先复用再精确差集：47股299日期实查264可交易、33不交易、2空；47调整因子472行，346查询各一次无重试，BaoStock已退出；root全346原件身份/日期/数值及440/341/99残缺复算通过。未准2000十一月22条剔除，停牌/旧查询无行不重取，不虚构退出回报。
+- VTI官方品牌更名解释消除早期名称/代码误判；7/29限定基金名称更新，指数品牌准确改名日未核。SPMD EMM→RSCO→SMD有NYSE原件，SMD→SPMD为SEC网页摘录；EMM启用起点不倒填2005。SEC403后只停直接HTTP，web读取单列；3旧ticker请求未得早价。A500两日定点官方data=[]保持缺口。US身份独核的日期/原件层级限定已应用。
+- 当前source分支codex/factor-unit-research-20260915/base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有未提交。只推本协调元数据，未提交/推源码报告；无仓外目标DB写。0新收益/调参/生产/交易/付费/自动化/删除。新来源批结案不改变前两ETF用途的历史否定结果，也不宣称广义因子研究全部完成。恢复依对应正式事件/完整名单/旧价、悬停退出规则，不承诺回合后运行。
+
+---
+
 # 成员部分准入与缺价去重补采 2026-10-24T10:47:20.523840+08:00
 
 - task-id/owner沿原，status active，scope_released false；checked_coordination_sha 12ff2a0d489e5d9519f114ad063928fd0e5c370e；checked_at 2026-10-24T10:47:20.523840+08:00。已读COORDINATION/self及沿前utility/personal/strategy-account/investor/dispatch/market-style；本次fetch无新增。价格原owner已结案，进程检查未见其他BaoStock采集；旧原件/缓存只读，无同写。
