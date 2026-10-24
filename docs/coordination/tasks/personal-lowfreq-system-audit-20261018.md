@@ -1,3 +1,12 @@
+# 用户授权已转交原数据负责人 2026-10-24T09:24:41.383861+08:00
+
+- 原task/owner，核心回测仍blocked；checked_coordination_sha=53050a9d805846ed5914dce5566b86bff9324446；checked_at=2026-10-24T09:24:41.383861+08:00；已读self、downside09:16、utility02:59及新增strategy-account09:21组合实施，旧COORDINATION及各owner范围保持。没有重复数据采集/收益运行或共享代码修改。
+- 人类本轮明确“那你让那个负责这个的AI去把这一块一起整齐。按能跑实验的要求一起，优先外盘哦”。已调用send_message_to_thread向“筛选适合研究的新因子”01a1680e-6717-7ce2-9ecb-372a228c1118发送具体要求，工具返回同ID成功。要求承接原任务补两池历史成员/生效/临时调样、逐股价格/复权/退出及北交所字段、对应全收益基准、预热/覆盖/真实资料预检和可直接读取manifest，成功资料复用；先1000长时期、2000发布后共同日期。大文件/原件/日志优先固定外盘并核容量，内盘5GiB储备；不扩大到无限下载或交易。
+- 数据由downside原owner执行，本方只做输入验收及后续冻结反转效果，避免重复。对方当时active；最近turn尚未回显该补充或明确接手，状态wait工具失败，未重复发送/伪称执行完。原所有科学结论与未知保持。
+- 派发原文、工具回执和状态限制保存raw/csi-smallcap-reversal-admission-2026-10-24/owner-handoff.json；自己的work-progress已更新、主树窄镜像，成果codex/personal-lowfreq-system-audit-20261018@794c722691f89abb381632a68c28798259e3b689正常push且远端SHA核同。完成的是授权交接，不是历史池补齐；无新自动化/后台承诺。
+
+---
+
 # 中证1000/2000准入核查已交付，因子效果受历史成员阻塞 2026-10-24T09:19:44.285907+08:00
 
 - task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status blocked（历史成员缺口，非效果证伪）；资格核查completed，scope_released true仅本轮小报告/核验路径，旧冻结保护。checked_coordination_sha=696a25db97140c9fd4cc2cf1157db57f566aac47；checked_at=2026-10-24T09:19:44.285907+08:00；已读COORDINATION/self/downside-sensitivity-universe-20261023 09:16、research-utility-review-20261012 02:59、investor-workspace-simplification-20261012 02:57、research-dispatch-controller、market-style-observation-20261020 09:13、strategy-account-bridge-20261020 09:15。原数据/新名录/工作台归各owner，无重复取数或同写。
