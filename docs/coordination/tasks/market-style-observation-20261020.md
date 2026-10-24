@@ -1,3 +1,11 @@
+# 八步研究展示与母指数对照补充 2026-10-24T09:37:01.616786+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha 40cddbefedf8de6be3167e78f158821a66c4af0e；checked_at 2026-10-24T09:37:01.616786+08:00。已读COORDINATION（上一轮同版本）、self、strategy-account、investor、utility、downside、dispatch；新增downside只写数据目录，与本轮无同写。
+- 用户确认对象/版本/用途分开、研究完成与有效性分开、策略不继承因子有效性，并补充第七步相对母指数（有明确母指数时）。本轮窄改研究审阅展示层：web/src/pages/factor-workbench/FactorWorkbench.tsx通用流程升级八步并补双重对照；原raw/factor-workbench-plan-20261023.md追加已确认设计；原progress追加验证。root唯一写者，0新研究/数据/模型/数据库/策略或交易改动。
+- 基线主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加原脏改；两原策略源SHA与确认值相同。本轮只写说明，不冒称对象级流程实例或全生命周期已实现。验收八步顺序、母指数/同池/原方法身份不混、无虚构通过状态、TS/归置及真实页面读回。仅推协调元数据，不自动提交源码。
+
+---
+
 # 因子工作台实施交付 2026-10-24T09:28:02.352511+08:00
 
 - task-id/owner沿原；本轮implementation completed，视觉待用户验收，scope_released true；完整研究目标未完成。checked_coordination_sha a7c1be5ac97c464c4d26f4c5d25ebb3f2d5b7369；checked_at 2026-10-24T09:28:02.352511+08:00。已读COORDINATION/self/investor/utility/dispatch；收尾补读strategy-account09:21统一组合工具、downside09:16目录、personal09:24资料交接，均明确不写本工作台，无同写冲突。
