@@ -1,3 +1,15 @@
+# 统一因子组合流程实施 2026-10-24T09:21:58.684192+08:00
+
+- task-id沿原；status active；scope_released false。用户授权“可以，我理解项目工具已经全了？不全可以补充，然后去做这套流程”。checked_coordination_sha=72f122eb69a89954eae4cb749915313ecfa374b8；checked_at=2026-10-24T09:21:58.684192+08:00；已读COORDINATION/self/market-style/utility/downside/personal/investor/dispatch及上轮后新增记录。工作台UI/metrics/API仍归market-style，不同写；历史池资料与小盘反转仍归原owner。
+- 问题：用既有唯一登记及OSAP外部目录，能否按金融属性查找准确对象、分别检查信息/持仓/收益关系，并把有理由的少量组合走到已有证据复用或完整策略资料准入。研究工具层，不修改技术规则、生产交易和桌面原文。两原文SHA已核与确认值相同。
+- 唯一新增src/lei_signal/research/factor_combinations.py与tests/unit/test_factor_combinations.py由Sol medium实施；root写docs/research/factor-combination-profiles.v1.json（准确ref的附加属性/案例注释，不替代definitions）、docs/research/factor-combination-workflow.md、docs/experiments/factor-combination-workflow-2026-10-24.md及同raw，原低频skill组合reference仅追加实际调用说明/入口。registry仅新本键/INDEX本行/自身progress；不改definitions、workbench_metrics、factor_workbench/app.py、任何web/文件或他人源报告。
+- root冻结输入/适配已有结果/调用/独核；Sol执行实现与合成反例，原Sol verify仅只读现状已交；Astra拟只读关键方法与结果，不得同写。先推本范围再委派写入，所有输入绑定来源指纹和已看历史身份。新目录汇总可覆盖登记对象和外部目录，未映射历史原件明确不等于全系统完整。
+- 首轮固定三案例：美股盈利+低资产增长联合条件、美股价值+动量资金组合、A股反转与低波对手。复用封存性能，不重跑旧收益、不调权或扫描两两效果。允许1批新增关系诊断（共同日期收益/共同下跌；有准确逐股资料才核评分/持仓），0新行情/新收益回测/自动挖掘/试盘/交易。现资料不合格时真实输出原因，不能仅凭低相关批准策略。来源优先全部复用，本轮上限6个请求当前0；合成修复有限且保留失败。
+- 验收精确对象/来源/属性未知可见、同名不误合并、跨市场/池/频率/币种和费用不混算、缺失不填0、低相关不自动通过、旧负结果不重开；实际查询/三例评审与旧性能表/增量表、来源不变及API报告读回。需要的新调用入口复用现有研究合同/存储/归档，不新建平台。
+- 存储09:19固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9核同，内约12GB/外477GB；新派生结果/日志走独立storage plan预计10MiB，本机源码/报告/记录约1MiB，旧原件只读。主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有未提交；只推协调元数据，不自动提交源码。
+
+---
+
 # 因子目录与组合方法核查交付 2026-10-24T09:15:53.991986+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed（本轮方法核查）；scope_released true本轮新增方法路径，历史冻结材料保持保护。checked_coordination_sha=fd9d27926914380461bc08745959906d3b65c927；checked_at=2026-10-24T09:15:53.991986+08:00。已读COORDINATION/self、market-style-observation-20261020、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller，并补读downside-sensitivity-universe-20261023与personal-lowfreq-system-audit-20261018新增范围，无同写冲突。
