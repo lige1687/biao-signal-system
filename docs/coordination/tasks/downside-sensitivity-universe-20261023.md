@@ -1,3 +1,11 @@
+# 两原母指数早段补齐及成员事件深核 2026-10-24T09:52:53.527174+08:00
+
+- status active；checked_coordination_sha 52ae91ec0dfa76c7766f8f5f9ea35be96f66bc82；checked_at 2026-10-24T09:52:53.527174+08:00。已补读a8501ea2内strategy-account09:44工具交付（上一轮共享origin在merge时更新，现已明确审阅）；其范围不重叠。其余已读任务沿前。
+- root沿此前controller-cn-parent职责，在新history raw/controller-cn-parent*和外盘controller-cn-parent/补原H00300/H00905的2006-12缺段（2013后、事实单与母指数绑定直接复用）；CSI300旧长价及当前cache至10/23不重取，CSI500旧价仅2013起且后段到08/25，先核其他既存候选，再仅补真实缺段。CN agent新24池不含原300/500，已消息明确不重取，原utility原件/报告不改。有限不超过4条完整缺段对象，0效果。
+- 000852历史链仍有可公开取得的未读事件，CN继续差集补全详情附件并核2026，纳旧generic漏项14497/14796/3006000、15044真实附件及12466撤销13334；不能只因无2014独立初始表停止可执行倒推。Astra只读发现、原文件复用，成员月数当前0只是阶段状态。其他边界与5GiB/8MiB计划保持。
+
+---
+
 # 目录交付、历史去重补采进行中 2026-10-24T09:45:08.072434+08:00
 
 - task-id/owner沿原；status active；checked_coordination_sha 93e33104c49c0100476a3dba435ca3e673c39c3c；checked_at 2026-10-24T09:45:08.072434+08:00；已读原self/COORDINATION/utility/personal/strategy-account/investor/dispatch及market-style09:37/09:39/09:42真实进度展示新增。原UI和组合工具归原owner，本方只数据源与本报告；无同写。
