@@ -1,3 +1,13 @@
+# 全目录因子接入研究工作台 2026-10-24T10:53:27.096648+08:00
+
+- task-id/owner沿原；status active；scope_released false；checked_coordination_sha 57597169dd597b7b84516c124f037d6030704706；checked_at 2026-10-24T10:53:27.096648+08:00。已读COORDINATION（沿前同版）、self/strategy-account/downside/personal/utility/investor/dispatch；新增downside只补外盘源/成员与缺价，本方不接管。原组合目录工具已释放并只读复用，无同写冲突。
+- 用户要求目前因子都引入。上一版20真实记录保留；本轮覆盖当前唯一登记表所有对象/版本及已收录外部参考，按对象类型和证据身份分开，完整列入不等于已实验或有效。已有准确研究关联到原20卡及旧已核研究快照；未接证据明确待核，不按同名、文件存在或测试通过虚构进度。不做新行情、收益实验、挖掘、试盘、模型调用或仓外DB写。
+- root唯一写app.py/progress.py接口接线、FactorWorkbench.tsx顶栏、原报告/方案/progress与raw/workflow-catalog-*。Sol后端仅新src/lei_signal/factor_workbench/catalog_progress.py及tests/unit/test_factor_workbench_catalog_progress.py；Sol前端仅ResearchWorkflowProgress.tsx/workflowProgress.ts/workflow-progress.css/workflowProgress.test.mjs；第三Sol只读目录与旧快照证据覆盖，互不交写。definitions、组合工具、旧源及冻结材料只读。
+- 两权威策略SHA实核仍df92d85b…b20/85e0e327…903；本题服务研究审阅层。当前登记213对象（含策略/基准等）+29参考，OSAP已登记目录另核，不能称全为有效选股因子。外盘身份/容量10:52已核可读；只读既有清单不加载不必需的大收益矩阵，不下载或迁移。新小源码/目录映射预计<3MiB，内部剩余15.49GB；大输出0。
+- 主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有脏区保留。按research-closure report_only与codex-delegate限定3位Sol medium；复用前端设计，不重开批准。验收全ID/版本集合与源一致、无静默遗漏、旧结论保留/精确关联、来源失败/资料未绑定可见、搜索分页/类型与证据筛选及真实桌面路径。仅协调元数据推送；源码不自动提交。
+
+---
+
 # 真实研究进度与卡点展示已实现 2026-10-24T09:57:15.505668+08:00
 
 - task-id/owner沿原；status completed（本轮展示及核验）；scope_released true；用户视觉待反馈，因子有效性和完整研究目标未标完成。checked_coordination_sha 4da8645fb18b34ad3d25698ffb469f587fab3a6f；checked_at 2026-10-24T09:57:15.505668+08:00。已读COORDINATION/self/strategy-account-bridge-20261020/downside-sensitivity-universe-20261023/investor-workspace-simplification-20261012/research-utility-review-20261012/research-dispatch-controller；收尾补读strategy-account09:44工具结案与downside09:45/09:52母指数缺段范围，无同写冲突、不接管原研究。
