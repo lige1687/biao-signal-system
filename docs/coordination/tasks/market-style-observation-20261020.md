@@ -1,3 +1,11 @@
+# 工作台实施与验证范围补记 2026-10-24T09:13:26.808098+08:00
+
+- active/scope_released false；checked_coordination_sha 96e35126ddc8feb2a8c655adeaaf576f79013d4f；checked_at 2026-10-24T09:13:26.808098+08:00。补读新增downside名录、personal小盘准入、strategy-account方法审查，均不写本UI/指标；原self/investor/utility/dispatch已核，无同写冲突。
+- 两Sol medium分别完成新指标与实施新前端；第三Sol medium仅独核公式/来源/API，不写文件。root追加 tests/unit/test_factor_workbench.py 的明确范围，验POST只点选、错误/缓存/来源过期，和新模块原有范围一致；不修改共享API或旧实验。
+- 新指标112条RankIC/224条报价IR/32组收益相关，生成器校验7来源SHA。0新收益回测；旧历史样本缺价峰值高，UI/API保留报价限制。当前新因子工作台目标okr-fcfa601e3791已登记/授权/开始，v3读回；批量挖掘暂缓/自动试盘不纳入。实现尚未验收，不宣称完成。
+
+---
+
 # 用户批准因子工作台实施 2026-10-24T09:08:50.965326+08:00
 
 - task-id market-style-observation-20261020；owner root；status active；scope_released false。checked_coordination_sha 6d93ec2963ce3f208f8fc3ff6112da25419750d2；checked_at 2026-10-24T09:08:50.965326+08:00。已读 COORDINATION/self/investor-workspace-simplification/research-utility-review/research-dispatch-controller；两相邻负责人最新范围均 released，四个历史成分池仍禁用。
