@@ -1,3 +1,15 @@
+# 全登记目录接入已验证 2026-10-24T11:10:32.192143+08:00
+
+- task-id/owner沿原；status completed（本轮目录与已有证据展示）；scope_released true。用户视觉待反馈，完整研究有效性与目标数据库未标完成。checked_coordination_sha d897a68ecfe5acba4af368b18e4a4e0f9fdbc12a；checked_at 2026-10-24T11:10:32.192143+08:00；已读COORDINATION/self/strategy-account/downside/personal/utility/investor/dispatch，收尾补读focus-stock新身份阻塞和downside11:00补采结案。其各自原件/研究归原owner，本方不接管，无同写冲突。
+- /factors?wb=progress 完整接入当前213登记对象+29参考+既有OSAP331公开目录=573目录；原20已审阅研究另列，共593可查记录。按展示类型164因子/状态/风险、30策略、19基准、360参考；OSAP212作者候选/114对照/5弃用，不冒称有效因子。原21来源SHA与20研究内容、旧progress证据均未改。
+- 13登记对象精确关联原研究，13组object/reference同编号分开。旧70档案中的20历史摘要和1计算检查保留，旧3来源变化明确告知，未继承为当前验证。每项八阶段、来源/缺口、类型/证据筛选、精确搜索、20条分页；第七步含母指数（适用时）。未知保留待核对，不把登记/测试通过当金融有效。
+- 主控独核全242 native/331 external精确ID集合、哈希与旧摘要，29Python+36前端通过；最终小改后6目录/7解析再通过，TS与812模块构建通过（既有大包提示）、归置通过。真实1280x720原研究流程底707px、关联目录底692px，八阶段13px无横溢；分类/分页/末项/同名隔离/准确诊断/旧档案/来源问题与第七步实点，console error0。新JSON来源仅列位置指纹，不造不受支持的Markdown报告链接。
+- 3位Sol medium分别后端、前端、只读覆盖审计；root独核、集成、实际页面修整，token与费用未知。初次pytest误路径未运行、total含研究重复计数、目录阶段/旧摘要漏显、长定义占首屏均已定位修好并保留失败记录。两类源材料/definitions/注册表只读；0新收益实验/行情下载/模型请求/数据库/自动化/试盘/交易/通知。
+- 成果原报告§22、原方案§14、raw/workflow-catalog-OSAP小目录与manifest、workflow-catalog-verification-20261024.json及本文。原始目录通过storage已核外盘UUID只读，未读取大收益；新源码和目录小文件约228KB，不移动冻结材料。实际前端5192/session13862、只读8193 PID29459/session44942；无新增启动项，不保证进程常驻。
+- 基线仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享脏区，仅本机源码/报告，未自动提交或推源码。仅本协调元数据普通推送并读回。后续新报告仍需准确关联与内容审阅，不能凭目录刷新自动升级结论；本轮所有登记项都可查，不宣称所有资料已完成科学复核。
+
+---
+
 # 全目录因子接入研究工作台 2026-10-24T10:53:27.096648+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha 57597169dd597b7b84516c124f037d6030704706；checked_at 2026-10-24T10:53:27.096648+08:00。已读COORDINATION（沿前同版）、self/strategy-account/downside/personal/utility/investor/dispatch；新增downside只补外盘源/成员与缺价，本方不接管。原组合目录工具已释放并只读复用，无同写冲突。
