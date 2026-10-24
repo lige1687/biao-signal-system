@@ -1,3 +1,14 @@
+# 目录交付、历史去重补采进行中 2026-10-24T09:45:08.072434+08:00
+
+- task-id/owner沿原；status active；checked_coordination_sha 93e33104c49c0100476a3dba435ca3e673c39c3c；checked_at 2026-10-24T09:45:08.072434+08:00；已读原self/COORDINATION/utility/personal/strategy-account/investor/dispatch及market-style09:37/09:39/09:42真实进度展示新增。原UI和组合工具归原owner，本方只数据源与本报告；无同写。
+- 当前目录批报告docs/experiments/research-universe-expansion-2026-10-24.md SHA ba33650c43179d0ca3022ec33a36d843c497b8aa62307bfb94b4be792e887589，59项目录/241外盘文件107857847B；A19新增官方名单，US18代理/身份，跨资产9，国内1714产品/美国5781ETF标记产品（含54明确ETN）。registry本键/INDEX本行、API正文逐字/pending=false、归置通过。VTI身份冲突/历史成员/北交所完整挂牌缺口保留。仅本批当前来源核验完成，近20年历史整体未完。
+- 新history路径合同已执行missing-only：盘点514US逐股长价、5211列A股旧收盘宽表、外盘1422原价对象及旧多批，SHA/实际日期复用。独核发现^GSPC/XLK最新cache遗漏，在请求前移除重复；A股50/300/创业板旧长价撤整段，短官方核值保留精度和少数差异。不因换供应商重下已有价，前复权价与分红事件分字段。
+- CSI2000已取得官方2023-08-10公告14883附件2000唯一代码，2023-08-11初始锚点；当前代码交1315、两端各独有685，不称累计换股。初始方法沪深与当前BJ39版本变化待核，历史全变更链仍缺，不能插值月名单。CSI1000官方发布公告已存无初始附件；新2006-12母指数缺段实取后标2014前回算。原1000/2000基准2013后复用，0新反转效果。
+- 美国原缺2006-12指数价/TR及FRED源片段已实取；FRED4传输失败经换客户端一次诊断修复成功，全部保留账。原377份RussellETF月度持仓复用，新2006-09至2014-12及2026-01至09的发行人缺月采集中，2006-08探针空表留缺。IWC/USMV仅两项已命名范围追加同官方存档先探针再逐月差集，不扩大其他ETF所有持仓；仍是基金代理，非官方指数成员。跨资产8缺失基金日线及GLD仅尾段已保存待全量解析。
+- Sol CN/US执行，Astra只读缓存/去重/2000锚点独核，root验收与汇总；新大原件全部独立已核外盘。新raw/controller-source-readback尚待所有文件就绪后最终执行；启动/HTTP200不算完整。0付费/新效果/生产/交易/删除/自动化，源码和数据不自动提交，下一步完成有限缺月/母指数原件核对与可消费覆盖清单。
+
+---
+
 # 去重与近20年历史补齐 2026-10-24T09:32:24.585298+08:00
 
 - task-id/owner沿原，status active，scope_released false。checked_coordination_sha 81e8b77a9b38bca12022bb5d98e10856c6959584；checked_at 2026-10-24T09:32:24.585298+08:00。已读COORDINATION/self、utility、dispatch、investor及新增personal09:24授权交接、strategy-account09:21组合工具、market-style09:28工作台交付。数据由本owner继续，personal只验输入及后续反转，其他共享源码不写；无同写冲突。
