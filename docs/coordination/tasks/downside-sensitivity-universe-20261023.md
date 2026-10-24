@@ -1,3 +1,11 @@
+# 当前目录覆盖范围补充 2026-10-24T09:16:49.477851+08:00
+
+- 沿本轮active，checked_coordination_sha f9ea9c781f9d88f16f770cedeb72e571c58c826c；checked_at 2026-10-24T09:16:49.477851+08:00。已读本轮基线后market-style工作台实施、personal资金分配只读、strategy-account方法交付及f20a7600两任务新增；无同写或资料下载重叠。
+- root在本新raw/etf及外盘etf中补沪主板/科创、深A、北交所当前挂牌股票名录，以区别中证全指与全市场挂牌目录；美国全证券原件已随ETF目录保存，直接复用不重下。不采全部逐股行情、不称历史成员。Astra已按新只读源任务6次web交生命周期/跨资产身份核查，0写/效果；所用原件由root保存，6source累计保留。
+- ETF官方目录当前已取：SSE924 ETF+24交易货币、SZ766 ETF，两份SZ名单集合相同；US5781非测试ETF标记产品与nasdaqtraded合并目录精确集合相同，其中54名称明确ETN，不称纯ETF。完整历史和全部产品属性保持未齐。
+
+---
+
 # 其他常用研究Universe增量采集 2026-10-24T09:10:07.680912+08:00
 
 - task-id/owner沿原；status active；scope_released false。checked_coordination_sha 6d93ec2963ce3f208f8fc3ff6112da25419750d2；checked_at 2026-10-24T09:10:07.680912+08:00；已读COORDINATION/self、dispatch、utility最新10/24官方事件结案、investor-workspace、market-style及前轮相关task。原13池/事件原件只读复用，不接管原owner，也不复测旧收益。
