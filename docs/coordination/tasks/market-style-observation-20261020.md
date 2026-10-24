@@ -1,3 +1,16 @@
+# 因子工作台实施交付 2026-10-24T09:28:02.352511+08:00
+
+- task-id/owner沿原；本轮implementation completed，视觉待用户验收，scope_released true；完整研究目标未完成。checked_coordination_sha a7c1be5ac97c464c4d26f4c5d25ebb3f2d5b7369；checked_at 2026-10-24T09:28:02.352511+08:00。已读COORDINATION/self/investor/utility/dispatch；收尾补读strategy-account09:21统一组合工具、downside09:16目录、personal09:24资料交接，均明确不写本工作台，无同写冲突。
+- /factors默认四桌面视图；页首共用选择，真实因子指标表、RankIC/ICIR/IR滚动SVG、旧五组/超额/回撤、有限简单对手、G5月收益相关、五问缺口、六对象版本及七份合同/运行/复核指纹、浏览器草稿和原目录/报告/独立前向入口。原深链不变。14因子×样本配置、12不同本地id，不当独立研究数量；无新收益实验。
+- 指标工具src/lei_signal/research/workbench_metrics.py，新静态workbench-20261024/metrics+manifest；112RankIC、224报价IR、32相关矩阵、7原来源指纹。ICIR不年化，IR月差÷样本sd×√12，缺月留空；原指标不覆盖。最高缺价约68.64%明确报价限制，不称母指数/ETF/可成交净收益。前端验派生SHA与最新目录，API重算逐字段核派生。
+- root专用src/lei_signal/factor_workbench/app.py与5接口测试，8193只接受显式POST；模型仅排序已核5卡，缓存相同证据，来源与方法分开。首次UI模型降级且未捕获具体错误；诊断探针/第二次完整请求成功，共3真实调用、实际费用未知。final仅修来源链接后重启自有8193，health0属新进程，非整轮0。原8000/其他服务未重启，未增启动项/通知。
+- 13Python、29前端/旧曲线、TS/build、归置通过；既有大包警告保留。1280×720实际四页、切样本、SVG轴12px无横溢、草稿保存刷新并还原QA空稿、0console error；Agent真实成功/缓存/失败模板核。独核RankIC −.0149508309、ICIR −.0926235814、IR .3701793705一致。方法审阅修复派生完整性及数字来源链接，无重复全实验。
+- 主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加原脏改，新增成果只本机，无自动commit/push源码。两Sol medium分UI/指标，一Sol medium只读独核，root集成；本轮准确新文件见raw/workbench-implementation-verification-20261024.json，报告§20与原progress保留旧前缀。
+- 用户本轮“其他认可/你做吧”涵盖原待登记方案，实际目标okr-fcfa601e3791 v5 in_progress，5项已满足/3项完整研究与用户验收未齐；批量挖掘待办okr-28c527055f04 v2 paused未授权运行，读回JSON留证。不自动试盘。仍缺真实组合边际、行业前10/估值/多期限/完整新资料监控及全量生命周期绑定；strategy-account工具完成后可复用其准确输出，不接管其未完工作。
+- 当前5192预览和原5173已读同源码，专用API8193在跑；运行方式及静态重生成见原报告§20。服务退出不保证后台自启，不伪称部署或永久监控。用户可在已保留浏览器查看/factors?wb=study。
+
+---
+
 # 工作台实施与验证范围补记 2026-10-24T09:13:26.808098+08:00
 
 - active/scope_released false；checked_coordination_sha 96e35126ddc8feb2a8c655adeaaf576f79013d4f；checked_at 2026-10-24T09:13:26.808098+08:00。补读新增downside名录、personal小盘准入、strategy-account方法审查，均不写本UI/指标；原self/investor/utility/dispatch已核，无同写冲突。
