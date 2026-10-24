@@ -1,3 +1,13 @@
+# 统一因子目录与组合方法核查 2026-10-24T09:09:30.459795+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status active；checked_coordination_sha=6d93ec2963ce3f208f8fc3ff6112da25419750d2；checked_at=2026-10-24T09:09:30.459795+08:00。已读COORDINATION/self、market-style、utility、investor及dispatch。原总工作台方案与数据负责人范围保持，本轮只读核能力，不接管实现。
+- 用户询问统一内部外部因子、按属性及低相关组成策略的方法/开源项目/skill。本轮report_only方法比较，无新收益实验/安装/全库扫描寻优/生产UI。复用既有definitions、references、技能与前向模块，推荐增量而非新平台。
+- root唯一新增docs/experiments/factor-catalog-combination-methods-2026-10-24.md及同raw小合同/来源/本地核查回执，registry本键/INDEX一行、自己progress。现有定义/skill/UI/其他报告只读。Sol medium原profit_investment_verify仅只读限定目录/API/工作台方案，不联网、不写文件、不计算效果。
+- 新方法问题最多6来源请求，已执行6原始项目页/README读取（Qlib主页及raw、RD-Agent、Alphalens-reloaded、Riskfolio、OpenSourceAP），不扩大搜索；0数据下载/软件安装/引擎运行。验收区分外部可见能力与本地已实现，金融属性/四类相关/两个组合层次/完整执行规则/留后期检验与成本有具体路径；资料未验证不冒称有效。
+- 小文档预计<120KiB，0大结果/仓外写/DB/真实交易；当前成果仅本地未提交，协调元数据单独推送。
+
+---
+
 # 盈利与资产增长联合组合交付 2026-10-24T02:11:41.466076+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed（本轮公开联合组合问题）；scope_released true本轮新增路径，原冻结证据继续保护。checked_coordination_sha=f8c250354c16d9698d2d767dc10012d834db849c；checked_at=2026-10-24T02:11:41.466076+08:00。已读COORDINATION/self、research-utility-review-20261012、personal-lowfreq-system-audit-20261018、mechanism-rebalancing-review-20261020、downside-sensitivity-universe-20261023、investor-workspace-simplification-20261012、market-style-observation-20261020及research-dispatch-controller；补读mechanism02:06与investor02:09交付，无重复取数/运行/同写。
