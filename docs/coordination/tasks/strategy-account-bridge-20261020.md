@@ -1,3 +1,13 @@
+# 因子目录与组合方法核查交付 2026-10-24T09:15:53.991986+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed（本轮方法核查）；scope_released true本轮新增方法路径，历史冻结材料保持保护。checked_coordination_sha=fd9d27926914380461bc08745959906d3b65c927；checked_at=2026-10-24T09:15:53.991986+08:00。已读COORDINATION/self、market-style-observation-20261020、research-utility-review-20261012、investor-workspace-simplification-20261012、research-dispatch-controller，并补读downside-sensitivity-universe-20261023与personal-lowfreq-system-audit-20261018新增范围，无同写冲突。
+- 新报告docs/experiments/factor-catalog-combination-methods-2026-10-24.md SHA13e686887ba856a30f788dc7b1e12608fed10a42710c43c968df46d7ab836b8d，同raw保存report_only合同/6官方来源/局部代码核查/验证。统一准确身份和金融属性，分别核评分、持仓、收益与共同损失，再比较完整策略增量；OpenSourceAP/Alphalens/Qlib/Riskfolio/RD-Agent定位各环节，未安装或承诺效果。
+- Sol medium原profit_investment_verify只读本地能力；root独核benchmarks/model/工作台计划和最新协调记录。0收益实验/行情下载/参数搜索/生产修改。09:13market-style已有32组收益相关等指标正在验证，本报告明确这是owner报告而非本轮独立重算；不将全库关系或组合增量误写已实现，也不接管其UI/服务/指标/目标库。
+- registry只写自身键、INDEX本行、自己progress；8000/5173报告正文逐字和登记类别/结论通过，归置及窄diff通过。成果仍主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9本地未提交；仅协调元数据推送，不声称源码已远端交付。
+- 本轮方法问题完成；实现补充沿原工作台“比较与组合”，通用Skill不能代替数值程序/历史资格，批量挖掘沿原任务暂缓。股票池/小盘反转保持原owner；0后台/交易/通知/仓外DB写。用户展示效果待验收。
+
+---
+
 # 统一因子目录与组合方法核查 2026-10-24T09:09:30.459795+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status active；checked_coordination_sha=6d93ec2963ce3f208f8fc3ff6112da25419750d2；checked_at=2026-10-24T09:09:30.459795+08:00。已读COORDINATION/self、market-style、utility、investor及dispatch。原总工作台方案与数据负责人范围保持，本轮只读核能力，不接管实现。
