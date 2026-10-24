@@ -1,3 +1,15 @@
+# 真实研究进度与卡点展示已实现 2026-10-24T09:57:15.505668+08:00
+
+- task-id/owner沿原；status completed（本轮展示及核验）；scope_released true；用户视觉待反馈，因子有效性和完整研究目标未标完成。checked_coordination_sha 4da8645fb18b34ad3d25698ffb469f587fab3a6f；checked_at 2026-10-24T09:57:15.505668+08:00。已读COORDINATION/self/strategy-account-bridge-20261020/downside-sensitivity-universe-20261023/investor-workspace-simplification-20261012/research-utility-review-20261012/research-dispatch-controller；收尾补读strategy-account09:44工具结案与downside09:45/09:52母指数缺段范围，无同写冲突、不接管原研究。
+- /factors?wb=progress 新增第五视图，接20条记录/21来源：两批旧研究14配置、四资料依赖、后续反转一项及完整原A规则一项。八阶段按对象/版本/用途/范围绑定，分执行完成与用途结论、当前受阻与扩大用途待补；每阶段可核证据/缺口/动作/条件/日期。第七步含母指数（适用时）及已有方法，当前无唯一母指数明确未评价。14配置不等于14独立实验，未实时监控或自动识别新报告。
+- 新只读progress.py及GET每次核来源SHA；变更/缺失降级相关卡片，不把文件存在或代码通过当有效。前端ResearchWorkflowProgress.tsx/workflowProgress.ts/workflow-progress.css/workflowProgress.test.mjs；组件原计划名WorkflowProgress.tsx与解析器近似导致TS解析错误，仅本轮新文件更名后修复。Sol交付后root唯一整合app.py/FactorWorkbench.tsx与密度修正。21源报告/配置/冻结记录均未改。
+- 23Python（含原5接口）、33前端/原曲线、TS及812模块build、归置通过；构建既有大包提示。真实1280×720首屏八阶段完整且无横溢，数据/策略/负结果/搜索/空结果/刷新/跨数据集同名诊断选择/来源原报告正文通过。主控API读回20条全verified、21来源全verified、原报告API全文逐字一致。来源失效使用合成测试，未篡改真实文件。
+- 独立Sol复核真实阻塞和因子身份无实质错误；初误引旧catalog-update已按当前132月与601868纠正。pytest临时父目录缺失首轮setup错误，建仓内目录并换新basetemp后23通过；一次误列不存在的前端测试路径不计入覆盖，准确原曲线文件24项补核。初屏流程越界已压缩重复元信息、折叠版本修好。失败不删除。
+- 0新金融实验/下载/模型解读/目标库/自动化/试盘/交易/通知。3位Sol medium限定两类证据核查与前后端实施，root独核来源和实际页面；实际token/费用未知。原自有8193重启到PID5700/session68823，5192现有Vite保持；共享8000不改、无启动项，进程常驻未保证。
+- 成果原报告§21、原方案§13、raw/workflow-progress-evidence-20261024.json及workflow-progress-verification-20261024.json、本文。源码/报告仅本机codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加脏区，未自动提交，不冒称远端可复现。仅本协调元数据推送读回；DB目标不改。后续新报告须显式接入并审阅，不靠刷新指纹自动升级。
+
+---
+
 # 真实研究进度与卡点展示 2026-10-24T09:42:04.563338+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha 9fff663bbb4d5c32cef3c261e9d03cce3c6bc034；checked_at 2026-10-24T09:42:04.563338+08:00。已读COORDINATION及self/strategy-account/investor/utility/downside/dispatch，较上一轮无变化；原组合工具与历史池补采owner不接管。
