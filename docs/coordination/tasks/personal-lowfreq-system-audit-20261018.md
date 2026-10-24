@@ -1,3 +1,12 @@
+# 小盘反转输入资格已核，原目标仅追加说明 2026-10-24T09:18:16.498937+08:00
+
+- status active（交付保存），核心反转回测blocked/not_evaluated；原owner/task沿前。checked_coordination_sha=3ff423d0ce6aa1f9fa345e1c3cc750e9463e9555；checked_at=2026-10-24T09:18:16.498937+08:00；已读原COORDINATION/self/downside/utility/investor/dispatch，补market-style09:13、strategy-account09:15、downside09:16；新名录与工作台归原owner，无同写或下载重叠。
+- Luna与主控独核16源SHA，当前20261023两名单1000/2000，互不重叠，2000含北交所39。完整历史成员月尚0合格，1000绑定2局部附件/2000无完整链，0新效果。不将当前名单/回溯指数用于伪历史选择，不把1000/2000效用写成否定。
+- 新报告/原始小核验记录、registry本键、INDEX本行、自己progress已保存，API全文SHA cbd8ba2845579310dddccc10d5b50e5e6b1f9887048112b27db2787338522915核同，分类/pending=false，两树归置通过。代码/旧资料/catalog/生产不变。
+- 窄补写范围：原目标okr-8830a1f1ec4f只追加本轮缺口与恢复条件note，root唯一写；版本当前42，status in_progress/4of6/owner/授权/原milestones不改，不代验收。回执仅本题raw，精确提交/远端读回后再记最终commit。新效果0、来源2/6/行情0不变，无后台/交易。
+
+---
+
 # 中证1000/2000月度反转复验准入 2026-10-24T09:11:31.917695+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha=47bb14a6f8af201d749dfb92ecf3cecb474121a2；checked_at=2026-10-24T09:11:31.917695+08:00。已读COORDINATION、自身、downside-sensitivity-universe-20261023 02:33及09:10新名录范围、research-utility-review-20261012 02:59、investor-workspace-simplification-20261012 02:57、strategy-account-bridge-20261020 09:09及research-dispatch-controller。首次ref变化断言在写入前停止，补读后继续。用户本轮要在中证1000/2000测试；不接管原downside历史名单/新池取数，不重复utility四池。
