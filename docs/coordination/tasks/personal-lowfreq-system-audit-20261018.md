@@ -1,3 +1,15 @@
+# 中证1000/2000准入核查已交付，因子效果受历史成员阻塞 2026-10-24T09:19:44.285907+08:00
+
+- task-id personal-lowfreq-system-audit-20261018；owner01a14d90-0f4a-7931-bfcd-519ec9395431；status blocked（历史成员缺口，非效果证伪）；资格核查completed，scope_released true仅本轮小报告/核验路径，旧冻结保护。checked_coordination_sha=696a25db97140c9fd4cc2cf1157db57f566aac47；checked_at=2026-10-24T09:19:44.285907+08:00；已读COORDINATION/self/downside-sensitivity-universe-20261023 09:16、research-utility-review-20261012 02:59、investor-workspace-simplification-20261012 02:57、research-dispatch-controller、market-style-observation-20261020 09:13、strategy-account-bridge-20261020 09:15。原数据/新名录/工作台归各owner，无重复取数或同写。
+- 成果codex/personal-lowfreq-system-audit-20261018@68076be74d9b2915d4d1e932b424689d166fea4f已正常push，fetch后15准确文件远端blob逐字读回一致；报告docs/experiments/csi-smallcap-reversal-admission-2026-10-24.md SHA cbd8ba2845579310dddccc10d5b50e5e6b1f9887048112b27db2787338522915。两树小镜像、registry仅本键/INDEX本行/progress已核；API正文逐字/分类数据与质量/pending=false通过，两树归置及窄diff通过。open_in_codex queued，不声称已在用户前台显示。
+- Luna low只读核与root独核16项源/派生SHA；当前2026-10-23名单1000/2000只且无重叠，2000含39北交所股票。完整历史形成月合格0；绑定包1000两份局部变更/2000无完整链，不能当前名单回填旧年，未跑新因子效果或收益曲线。现指数总回报/价格可作对应描述，不能替代历史股名；2000于2023-08-11发布，之前2340日期回溯身份保留。
+- 预定恢复范围1000持有2015-01—2025-12，2000正式发布后2023-09—2025-12同日期对照；0拟合/调参，2026未计算因子效果且不擅称独立留出。公式复用旧短反/低波，旧卡固定300/600范围不冒用；名单合格后另绑新范围与资金/母指数/个人费表/执行。收益、风险、排序、机会和相对低波增量皆未评价，未以输入缺失否定因子。
+- 原目标okr-8830a1f1ec4f只note v42→43，status/owner/里程碑/授权/progress原字段核同、4/6保持；未代用户验收。回执在本raw/goal-note-receipt.json。两次非科学失败留存：委派路径格式预检拒绝后同权限规范表示通过；API列表误用path字段后按实际name读回通过；失败未开效果或改变旧源。
+- 本轮实际2/6官方事实单来源、0行情、0/1核心效果、0/3必要跟进；原预算不重置。新小报告/记录约55KiB每树，大结果0，原外盘只读，存储身份和余量已核。无运行进程/生产/交易/删除/通知/后台。
+- 核心下一步：原data owner交付完整历史起点和全部定期/临时变更生效链，或验证过的逐期完整成员；本方再核逐股身份/退出/交易与基准，冻结后运行预定反转比较。当前没有可替代的合格历史月份；不换成指数择时、当前名单或ETF持仓来冒充完成。整体研究未完成，无需用户重复确认既有范围。
+
+---
+
 # 小盘反转输入资格已核，原目标仅追加说明 2026-10-24T09:18:16.498937+08:00
 
 - status active（交付保存），核心反转回测blocked/not_evaluated；原owner/task沿前。checked_coordination_sha=3ff423d0ce6aa1f9fa345e1c3cc750e9463e9555；checked_at=2026-10-24T09:18:16.498937+08:00；已读原COORDINATION/self/downside/utility/investor/dispatch，补market-style09:13、strategy-account09:15、downside09:16；新名录与工作台归原owner，无同写或下载重叠。
