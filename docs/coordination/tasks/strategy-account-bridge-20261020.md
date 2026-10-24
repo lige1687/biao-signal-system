@@ -1,3 +1,15 @@
+# 现有因子两项新组合比较已交付 2026-10-24T13:58:46.322517+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed仅本轮两个有边界问题，scope_released true仅自有新增路径接续，冻结输入/报告仍保护。checked_coordination_sha=305f7be09f41880fc601c4188d603dd35381b593，checked_at=2026-10-24T13:58:46.322517+08:00。已读COORDINATION/self/market-style-observation-20261020/downside-sensitivity-universe-20261023/personal-lowfreq-system-audit-20261018/research-utility-review-20261012/investor-workspace-simplification-20261012/research-dispatch-controller/focus-stock-universe-20261024；末次新增仅focus-stock来源已核结案，无冲突。本题不接管其资料、UI或反转。
+- 本轮按用户“目前已有的因子”新增两比较，不增加因子或重复旧单项发现。CN原600共同财务562股/132月/30752键，127月全池报价完整；动量50%+GP25%+CFO25%评分月均1.3426%，对M+.1425pp，对简单混合+.0494pp区间跨0，最差月更差；2021–25输低波。US盈利低资产增长公开组+动量初始各半不调配，主期大15.258%/小12.614%毛年化，vs同32格盈利+动量+1.563/+1.464pp但低于联合单项，近期小盘反例。收益相关仍高；保留有限线索，暂停继续调比例，不新增前向。
+- 报告docs/experiments/existing-factor-strategy-expansion-2026-10-24.md SHA b5451fe30295ab1d7b3a67922eb686d86056baddfc4ff024f3657e1c6355a819；同raw合同/设计/15输入/冻结10文件/结果索引/独核/3图与完整性能增量表。母指数净优势、真实费用、逐股退出/容量未评价。CN旧合同禁止第三混合仍保留，本次用户新授权后另立合同，未冒充旧预注册或独立新历史。
+- 1核心、0效果追加、4原始来源核查含2失败URL、0新行情/安装/调参。Sol medium唯一CN实现、另一Sol medium原输入独核、Astra high方法前后复核，root US/运行/归档。10合成测试，CN逐股权重误差≤1.01e-16、收益≤3e-15，US指标≤1e-9pp，机会264行相加/两缺失情景恒等式通过；15输入及10冻结文件SHA前后不变。
+- 输出独立外盘 /Volumes/win+mac通用/LeiSignal-新实验结果/existing-factor-strategy-expansion-20261024/existing-factor-strategy-expansion-20261024-20261024T134246-c82447b6601e/result；固定UUID核验/64MiB计划，实际普通文件8547974B，本机小代码报告<2MiB。未删除迁移/内盘大结果回退。首次字体/固定SVG宽度显示问题已在本报告内修复且中间结果保留，非效果重跑。
+- 8000/5173报告全文一致、registry新键类别/结论正确且旧766项保持、INDEX本行；实际浏览器三SVG响应式646.88px=父宽，图表无横溢，归置/窄diff通过。K-baseline12仅只读，仓外DB未更新，原授权范围保持。无后台/通知/交易或生产改动。
+- 工作分支codex/factor-unit-research-20260915，基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享本地修改；源码/报告未提交推送，仅本地且远端不可复现，本分支只推协调摘要。进度docs/ops/work-progress/strategy-account-bridge-20261020.md与completion.json可接续。整体策略发现仍未完成；下一有价值证据为原owner补足历史资格/退出和个人成本后的冻结对照，禁止无理由调旧样本比例。展示待用户验收。
+
+---
+
 # 现有因子的新组合探索 2026-10-24T13:37:13.399425+08:00
 
 - task-id/owner沿原；status active，scope_released false。用户授权“策略再多探索探索，目前已有的因子”。checked_coordination_sha=fdbc2f67c4d53d6b47cddc4ddd17e50b09033da9；checked_at=2026-10-24T13:37:13.399425+08:00。已读COORDINATION/self/market-style/downside/personal/utility/investor/dispatch及新增focus-stock。历史池补采已结案但完整资格未齐（1000成员36月、2000成员3月不能当完整收益输入）；小盘反转仍personal，工作台目录/流程仍market-style，本轮不接管或重复。
