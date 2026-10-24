@@ -1,3 +1,12 @@
+# 八步流程及第七步母指数对照已补充 2026-10-24T09:39:48.130584+08:00
+
+- 本轮通用说明修改completed；scope_released true；对象级真实流程仍待实现。checked_coordination_sha ed80ab6714c5d933ca1b89f8a280238858474e05；checked_at 2026-10-24T09:39:48.130584+08:00；已读self/strategy-account/investor/utility/downside/dispatch及COORDINATION，交付fetch无新变化，无同写冲突。
+- FactorWorkbench.tsx通用说明升级八步，第七步分相对母指数（有明确绑定时）与原方法/组合增量，固定期间/币种/分红并注明费用。保留同池基准真实身份、原数据和曲线。通用条目全部标核对项，不虚构当前对象进度；末步人工处置，不自动试盘。原方案§12追加用户确认及对象/版本/用途、负结果可完成、策略独立验证三项规则，不改前文历史方案。
+- npx tsc --noEmit、check_repo_hygiene通过；浏览器真实展开八步并读回第七步完整文本。原预览已退出，首读是旧页面缓存；重新启动本任务5192与8193，HTTP200。旧错误页无法直接导航，按浏览器文档在同一IAB新建标签3核验成功，未改其他服务或启动项。前端会话26394/API8700，本轮0模型请求；未宣称常驻自动启动。
+- 仅本地源码/文档未提交；root唯一写web/src/pages/factor-workbench/FactorWorkbench.tsx、原raw/factor-workbench-plan-20261023.md和本progress。0新实验、行情获取、目标数据库变更、交易或自动挖掘。完整对象流程、母指数数据接入不冒称已完成。
+
+---
+
 # 八步研究展示与母指数对照补充 2026-10-24T09:37:01.616786+08:00
 
 - task-id/owner沿原；status active；scope_released false；checked_coordination_sha 40cddbefedf8de6be3167e78f158821a66c4af0e；checked_at 2026-10-24T09:37:01.616786+08:00。已读COORDINATION（上一轮同版本）、self、strategy-account、investor、utility、downside、dispatch；新增downside只写数据目录，与本轮无同写。
