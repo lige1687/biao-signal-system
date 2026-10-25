@@ -1,3 +1,13 @@
+# 四分片连接错误后的单会话恢复 2026-10-25T17:37:29.492780+08:00
+
+- task-id/owner沿原，active；checked_coordination_sha 64435529875c47744a9e058c6b334be6b9f411d5；checked_at 2026-10-25T17:37:29.492780+08:00；fetch无新增，相邻已读任务和唯一写者范围保持，无冲突。
+- v3新326成功/308062行原价已逐源核验，4在途请求同时接收错误，源错后启动0。旧v2成功316，合计642；各原件、4账本与stop SHA冻结。90秒报警也会被包统一映射10002007，只能定传输失败，未证服务端/IP/本地故障，不把错误当空价。
+- 新v4原范围精确差集2375=四错误各一次最后修复+2371未触碰。root独算与3017旧原请求逐项相同、642成功交集0；plan SHA76fcf51ed1b068896f38ecc57b6bf58be215440d372721a4e13486b642f1879e；collect SHA3e4c3aa20901e1ca859ba148c4ca9a0b12381e05f770e3d5819b35b7fceb1541。单匿名连接、每100成功或300秒后正常轮换、1秒查询起点、任何源错停；只是获准修复，不宣称根因已定，不加预算/源/效果。
+- 国内七ETF20283行与原件121698数值独核一致，但同源不等于经济收益资格；元数据v2已纠正默认true。SPMD83分配日含8次资本利得、2010仅3行，完整性未证、不得重复加至Yahoo调整价。0新收益。
+- WorkBuddy此前输入通路失效，正常退出保留窗口并恢复原会话后已实际发出四项公开资料实查，17:36显示正在准备环境；无敏感上传/安装/新账号/授权/支付。root保留controller-workbuddy*回执。所有实际源/报告仍本地未提交，仅协调元数据push，完整20年总目标未完成。
+
+---
+
 # 公开源继续、WorkBuddy实查与价格分片  2026-10-25T17:17:55.872849+08:00
 
 - task-id/owner不变，status active。checked_coordination_sha 7bf5634bfb5f500383d98fcbb8a175d198ccb4d9；checked_at 2026-10-25T17:17:55.872849+08:00；本轮fetch无新增，已读COORDINATION/self及沿前dispatch/utility/focus/market-style/strategy-account/personal/investor，没有其他新共享写者。
