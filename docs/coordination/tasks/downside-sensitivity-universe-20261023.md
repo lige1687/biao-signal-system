@@ -1,3 +1,12 @@
+# 公开源继续、WorkBuddy实查与价格分片  2026-10-25T17:17:55.872849+08:00
+
+- task-id/owner不变，status active。checked_coordination_sha 7bf5634bfb5f500383d98fcbb8a175d198ccb4d9；checked_at 2026-10-25T17:17:55.872849+08:00；本轮fetch无新增，已读COORDINATION/self及沿前dispatch/utility/focus/market-style/strategy-account/personal/investor，没有其他新共享写者。
+- 用户明确没有现成授权，先补公开数据；另授权电脑操作WorkBuddy并与其AI聊天和公开资料核查。root仅只读UI、公开金融小查询，新增本raw/controller-workbuddy*记录；不上传仓库/隐私、不开新授权/账号/安装/支付、不改变应用权限，不改他人任务。当前截图清单仅待查声明，不能当真实历史库存。
+- 中国3017缺段原计划保持不变，v2自然批边界已成功316键、所有原件保存，旧顺序父调度器已停止。v3静态余2701键四片676/675/675/675，root独算逐项相等、交集0、并集原计划减316；独立进程和账本，全局每秒至多启动1次查询、错误停新请求、无自动重试。原计划SHA79ea5f...，新分片SHA174d4e0fcb1d07c0a2de80e50f99ae861fd377834d62f6192af00d617adb6cf9。policy_executor仍唯一cn写者，v3需root准确脚本/计划指纹GO，不扩源或科学范围。
+- 国内7ETF实际七字段文件已取得，当前coverage指针待root核数；159915早段供应商/近期官方拼接仅资料，连续收益资格未准。另取得SPMD官方分红XLSX待核。US33历史表保持价格拆股调整资格说明；全20年成员及退市总目标仍未完成。0新收益、交易、付费、生产、删除或自动化；仅推协调元数据。
+
+---
+
 # 二十年实际行情已补与中国股票批量进行 2026-10-25T16:57:24.974479+08:00
 
 - task-id/owner沿原，status active；checked_coordination_sha 8e4bb4e45a2788b13431db69bbb064250e11741d；checked_at 2026-10-25T16:57:24.974479+08:00；最新fetch无新增，COORDINATION/self/dispatch/utility及focus/market-style/strategy-account/personal/investor沿前已读，无共享写冲突。完整20年总目标仍未完成，不用旧source批completed状态替代。
