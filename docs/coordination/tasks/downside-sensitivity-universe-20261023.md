@@ -1,3 +1,15 @@
+# 本轮二十年公开源实际数据补采交付 2026-10-25T18:55:13.203082+08:00
+
+- task-id downside-sensitivity-universe-20261023；owner 01a1680e-6717-7ce2-9ecb-372a228c1118/root；status completed仅本有界公开源补采；完整二十年资料总目标未完成，scope_released false仅保护原件。checked_coordination_sha 87d739aa1a6fafc9843896a0f2ceaa998d43f1a4；checked_at 2026-10-25T18:55:13.203082+08:00；已读COORDINATION/self/dispatch及focus-stock展示收尾增量、沿前相关任务，最新fetch无新差异，无同写。
+- 报告docs/experiments/twenty-year-universe-data-2026-10-25.md SHA69a0c1e9c0919e1c9730c7264c455202b5f4f53f8b680411daedde16d00f3416；registry本键/INDEX本行保留所有旧项，8000列表pending=false数据与质量/mixed、全文逐字和SHA同、18本地链接存在、归置exit0。open工具仅queued，不冒称窗口已展示。59读取清单raw同名coverage-manifest.json和closure.json为本批交付入口。
+- CN3017唯一报价对象全部完成，3022实际调用=3017+5失败留痕修复；新增1676405原始日行、合并旧源5913633不同股票-日期，范围1552码而非全A；454空、143无原始日与非交易状态保留，5698757日期供应商交易状态/正OHLC合法、唯一停牌空close。旧源交叠46848行只在计数去重，不删除或重拉成功对象。337新供应商成员0失败、93100行，三指数250/250/238期，旧499人/滞后不放行官方资格。报价及成员进程均正常退出/logout0，cn/final-source-layer-receipt.json f2d58e15...及root两独核回执可追。
+- WorkBuddy三轮实查新增正式14234修订，Astra全新旧原表与50事件/121月及2026九月独核通过；root新裁定接受中证1000 2022May..2026Sep53完整月，实际53000行SHA5e1a38496661e393ab7394e88b2ac93a7503fee7ca256fd720060130a0da2a29。旧目标43=36+7，当前额外10；早77仅候选、旧目标12无候选，初始2014Oct/Nov也未补。中证2000原3月、美国1113基金月/63缺月不变；正式指数成员与ETF实际持仓分开。
+- US33基金154407价/3299事件、国内7ETF20283日线和CN26年表已逐来源核；Yahoo拆分/分红调整口径、SPMD1890早期成交价缺、部分官方母指数TR/国内公司行动/历史成员不完整均未弱化。本轮0收益实验/调参/生产/交易/安装/新账号权限/付费/删除/自动化；WorkBuddy搜索错位数据未纳入研究。
+- 固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9容量核通过；新外盘3559文件571022290B全部逐SHA（总清单创建前计数，含失败/空/旧版，不是合格输入数），清单本体1224922B另存delivery；本机小记录约10.67MB<16MiB。旧原件不搬不改。主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有脏区，报告代码未自动提交，远端不可复现；仅本协调元数据push。
+- 恢复条件：早期正式成员与修订/退市及退出/公司行动原件、美国63缺月与SPMD早价和官方母指数。用户确认无现成授权、公开源优先；不为已有0配额/403/空源无依据重试。53月成员资料资格不改旧冻结研究范围或授权收益。无本题采集进程，不保证退出后后台继续；原进度docs/ops/work-progress/downside-sensitivity-universe-20261023.md保留完整失败与阶段证据。
+
+---
+
 # 3017价格补采与53月中证1000成员资料验收 2026-10-25T18:46:20.591984+08:00
 
 - task-id/owner沿原，active仅最后337供应商成员与总归档；checked_coordination_sha 1cd4bda64b9fea96dd491f5d7bd03e46fb60b49a；checked_at 2026-10-25T18:46:20.591984+08:00。已读COORDINATION/self/dispatch及focus-stock-universe展示收尾增量；其不取本轮数据，目录归置由原owner已修，无同写。原source分支/base沿前，资料/代码仍本地未提交、远端不可复现。
