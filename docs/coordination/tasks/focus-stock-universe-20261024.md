@@ -1,3 +1,14 @@
+# 总览指标解释与样本身份补充 2026-10-25T23:26:46.853421+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false仅本轮明确范围。checked_coordination_sha 5ae490e0c9b5c8afe58fcc8c4f20e44a91525d02；checked_at 2026-10-25T23:26:46.853421+08:00。
+- 已读COORDINATION1.1、self、market-style-observation-20261020、investor-workspace-simplification-20261012、research-utility-review-20261012、investor-observation-map、research-dispatch-controller。market-style工作台范围明确释放；其他现状无本轮同块活跃写者。root集成、助手只读文献及指标口径，保留既有脏区。
+- 用户要求研究总览ICIR/RankIC参考与20日动量universe清楚；追加原抖音是否对齐、是否权威有效、外部情绪模型增量。服务研究解释层；report_only核既有来源，不新回测、改模型参数或策略、不宣称原模型复现。
+- root写web/src/pages/factor-workbench/FactorWorkbench.tsx、该目录新增metric-reference组件及样式与必要纯函数；自己的docs/archive/handoffs-plans/focus-momentum-display-20261025/metric-reference/、原progress；新docs/experiments/factor-metric-reference-2026-10-25.md、registry本键及INDEX本行。现有静态数据、后端、源报告/冻结研究全部只读；UI不创造评级阈值。
+- 验收已选dataset/pool/公式/未来收益期与静态来源一致，Spearman和不年化标明；数值参照不冒充学术及格线；区间与样本数可见，定义来源可点。检查两池切换、单因子、移动端和原观察入口，构建、相关测试、归置；仅本机代码，未自动提交/部署。
+- 两原策略文件SHA沿已核df92d85b…b20/85e0e327…903且本轮实核未变。内部余16GiB，小代码/回执预计<2MiB，无大结果。阈值资料代理实报5调用16请求条目，超默认6，原样留账并停止该分支搜索；新增情绪模型问题最多6来源条目、复用先行。
+
+---
+
 # 当前：价格投影纠正与阶段顶底有界检验交付 2026-10-25T23:14:39.122374+08:00
 
 - task-id/owner沿原；status completed仅本次自有UI与三A股目标历史用途；scope_released true。US独立focus/板块自身模型核心输入、原作者公式及真正未来验证仍未完成，未伪造效果。checked_coordination_sha d2fae4903a892316ce869a8c9f0740f96dec757a，最后fetch无他人增量。
