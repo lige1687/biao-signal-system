@@ -1,3 +1,16 @@
+# 当前：焦点动量首页直读与A股效果映射接入完成（本地） 2026-10-25T18:36:34.227175+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed 仅本轮已具数据的展示；scope_released true。美股映射/当前日数据仍未完成，原因是缺合格输入，不假称全市场实时观察。
+- 用户明确纠正首页要直接看模型值，并要求横轴为模型值的A股/美股映射及金融含义。已将初始工具栏入口替换为首页“市场与情绪观察”数值卡；历史9.83%、零线上方、前日变化及同池/上涨比例/集中度，与历史2025-12-31、今日未知同屏。因子工作台有总览摘要与市场观察视图，默认数值映射，可切时间走势。
+- A股映射复用冻结weekly表：沪深300/中证1000全收益各560共同周，横轴focus、纵轴后20交易日涨跌；共同窗口2015-01-09至2025-12-12、最晚结局2026-01-13；同频总体均值金线为+0.64%/+0.79%，保持相同坐标；未拟合/调参/新增效果实验。美股缺逐股历史池、成交额及复权价格，明确空状态，未拿现今巨头/ETF/A股替代。
+- checked_coordination_sha 9a71b79f46bd0cb927cd5a4e9c85bf62a4599108；checked_at 2026-10-25T18:36:34.227175+08:00。增量downside-sensitivity-universe在自身14234成员链范围，与本任务展示无冲突；既有工作台/首页owner未新增范围。唯一写者与文件沿开工声明，新增mapping.tsx仍在自有组件目录。导出脚本最终路径scripts/archive/export_focus_momentum_observation_20261025.py（归置要求）；无scripts/research留存。
+- 实际验证：4后端+4前端测试通过、最终tsc/Vite构建exit0（原有大chunk提示保留）、归置exit0；HTTP包与本地SHA一致，原daily/summary/weekly三份SHA未变。真实浏览器首页直读/因子摘要/两目标映射/US空状态/历史范围/报告/金融含义/375px无横向溢出验证；两助手独立只读复核无实质问题。
+- 产物：docs/archive/handoffs-plans/focus-momentum-display-20261025/verification.json（命令完整输出、12个代码/数据文件SHA、来源核验、截图、相对开工快照精确diff）；progress沿原。静态资产1017813字节、SHA4a14051bd1ac5b40a94ae957a3982dfbe6110c18b0a360307eb0b0eeb1106f77。
+- 边界：固定300股独立定义，原式/全A/实时/美股/账户效果未升格；观察不接入道路/买卖/情绪灯。0新增取数/新实验/新自动化/费用/删除，无8000重启或8193服务接管。金融含义说明分开价格强弱、参与面与成交集中，集中度不是净流入。
+- 当前工作分支codex/factor-unit-research-20260915及base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有脏区；源码仅本地未提交/推送，远端不可复现。此提交仅本任务协调摘要，不包含其他任务或代码。
+
+---
+
 # 当前：焦点动量接入日常看盘与因子工作台 2026-10-25T18:13:38.072085+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false仅下述新增展示范围。
