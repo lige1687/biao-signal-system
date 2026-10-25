@@ -1,3 +1,13 @@
+# 3017价格补采与53月中证1000成员资料验收 2026-10-25T18:46:20.591984+08:00
+
+- task-id/owner沿原，active仅最后337供应商成员与总归档；checked_coordination_sha 1cd4bda64b9fea96dd491f5d7bd03e46fb60b49a；checked_at 2026-10-25T18:46:20.591984+08:00。已读COORDINATION/self/dispatch及focus-stock-universe展示收尾增量；其不取本轮数据，目录归置由原owner已修，无同写。原source分支/base沿前，资料/代码仍本地未提交、远端不可复现。
+- 报价3017唯一对象全部真实完成：316+326+2375成功源，454空响应单列；新增1676405源日行、合并旧源5913633个代码-日期记录。root独核分组精确并集/成功无重取/四修复及七原件/1552唯一代码日期union，controller-cn-price-independent-receipt.json；完整源核验a74333c2...另有实际字段审计92799696...，含状态0与1、唯一空close和旧源重叠，不能把所有原始日行叫可成交正价。报价会话正常退出，337成员随后单会话执行中。
+- 官方14234修订独核后新成员资料准入：53完整月2022May..2026Sep，每月1000，新固定53000行表SHA5e1a38496661e393ab7394e88b2ac93a7503fee7ca256fd720060130a0da2a29，root controller-membership-admission.json SHA18d786081ebc4e4c898c76b708ca08da6f7a88bc7c3a16ec5e8981b87c4dfb3a。旧132研究目标内43=原36+新7，其外10满足当前数据目标；更早77仍候选、12无候选。Astra独核a6b04ba928595c215bcb02a9f0af2ed27ae9b8e43f48f801c90c604f2bd5894b。只承认官方变更事后重建实际成员，不证明所有输入发布时刻/完整二十年，不解锁旧冻结收益研究。
+- 中证2000仍原3月。300/500价格各5052日已保存目标值固定表，vendor/mixed分开，CN consumer v3 SHA8135ffdea6d0f8eb5f69d7d78a52f080ed3ebba09dac71345d283dc8eb52b513；root59对象读取manifest叠加新成员裁定，旧consumer历史字段不冒充当前主控准入。US33/国内7ETF独核仍复用；WorkBuddy3轮、2新修订原件和3公告原件已验。
+- 全二十年总目标false，0新收益/收费/交易/生产/权限/账号/删除/自动化。下一步等337实际收尾、限定源字段/年度表验收、报告登记/API读回/归置与最终协调；不停止其他任务，不承诺退出后后台继续。
+
+---
+
 # 官方14234修订支持的新派生成员链检查 2026-10-25T18:28:48.079024+08:00
 
 - task-id/owner沿原，active；checked_coordination_sha 1f30c029fc2d192cbc0fb58205cf3c022d68c1bc；checked_at 2026-10-25T18:28:48.079024+08:00。fetch无新任务变化，COORDINATION/self/dispatch/focus及沿前相邻范围已读，无同写。source仍原base加脏区，本轮成果仅本地未提交、远端不可复现。
