@@ -1,3 +1,13 @@
+# WorkBuddy三轮实查与未取修订原件补查 2026-10-25T18:23:21.346533+08:00
+
+- task-id/owner沿原，active；checked_coordination_sha f40723073502350d6e6dc65a50dfe38d078641b3；checked_at 2026-10-25T18:23:21.346533+08:00。已读COORDINATION1.1/self、dispatch当前收尾段及focus-stock-universe新增展示范围，其只读旧冻结数据，不占本轮行情/成员；其scripts/research目录归置不由本题代改。其余沿前相关已读任务无新变动，无同写冲突。
+- 成员337请求复核差异已解释：此前少16个2022修复原件绑定，逐SHA读回并补入查重引用。controller-cn-member-gap-rootcheck.json已条件GO，精确旧404键与新337交集0；仍须报价会话全部正常关闭后单会话运行，不提升官方历史资格，2021-09-30既存499个不重取。CN v4实际1520/2375、0失败继续；US33与国内7ETF已独核。000300/000905旧价格各5052日实际齐，新增只修consumer索引。
+- WorkBuddy三轮实际公开查询已结束。搜源有用但历史预期未合格：CATL上市前港股/交易日/调整单位错误均保留纠错，未录入研究输入。新浪21原页692行通过独核，表中止于2010且筛选规则未知，不能当完整历史。2份510050原公告每单位0.024/0.037元及沪深300 2006生效14对调样原件已保存。
+- 新小补查：14234官方更新公告目录旧已发现、详情附件从未请求/应用，不能当查过；Sol universe_sources唯一新增local raw/controller-workbuddy-revision/及同bound外盘controller-workbuddy-revision/（root从controller*排除此prefix）。仅官方id14234一次详情，实际返回的相关修订附件最多3件；先写真实URL差集计划后取，403/429停，错误初次+至多一次有诊断修复。验收是否影响000852/000931及修订谱系，不自动解除旧成员冲突或跑收益；旧所有原件只读。
+- SEC公共早期候选：2006Jan31申报正文未见目标Russell基金，不能采为IWM；2005Dec31 accession042678官方目录确列IWM/IWB/IWV/IWC，但正文大页浏览超时、未保存，尚非已取得名单，不减少63缺月。0新收益/付费/权限/账号/生产/交易/删除/自动化。资料和代码仍本地未提交、远端不可复现，仅协调元数据推送。
+
+---
+
 # WorkBuddy实际能力与供应商历史表小探 2026-10-25T17:47:27.973689+08:00
 
 - active，task-id/owner沿原。checked_coordination_sha 2328c82aec55534d8da2101d8a6966015a7e529a；checked_at 2026-10-25T17:47:27.973689+08:00；fetch无新增，已读COORDINATION/self和沿前相关task，无同写冲突。
