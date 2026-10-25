@@ -1,3 +1,14 @@
+# 恢复近二十年实际数据交付 2026-10-25T15:47:05.872220+08:00
+
+- task-id/owner沿原；status active，scope_released false。checked_coordination_sha e4d90b99a1f5b97f8cf73b684a2d99f5db85f822；checked_at 2026-10-25T15:47:05.872220+08:00；已读COORDINATION/self/dispatch/utility及新增focus-stock、market-style11:10与strategy-account13:58完成记录，personal/investor沿已审阅。全部相邻任务只读使用数据、不采本轮行情；旧源及封存报告不改，无同写。
+- 用户纠正‘我要的就是二十年的数据啊兄弟’，本轮验收是2006-01-01至2026-10-23（最近完整交易日）实际数据的逐年可用性；以59命名范围承接，不再把目录覆盖或几个成员月替代交付。晚成立从真实生命周期起，指数发布前回算单列。旧源成功对象/字段/日期直接引用，错误/空结果不无理由重发；不能用今日成员回填历史。
+- 新准确路径 docs/experiments/twenty-year-universe-data-2026-10-25.md、同名raw/。root独占contract/storage/controller*/汇总报告、registry仅本键/INDEX仅本行及原progress；既有Sol policy_executor独写新cn/及新外盘cn/，Sol universe_sources独写新us/及新外盘us/，Astra method_review只读旧资料并单写新controller-method-review*.json。此前三位已派只读盘点，未写/未联网；合同/外盘路径后再发采集GO。
+- 本轮数据范围为年度价格/量额、调整/分红、历史成员及生命周期，服务后续宽基/ETF低频研究输入，不运行因子效果、不改LEI策略/生产/交易/源码入口。核已连服务能力与本地既有凭证是否存在，不输出凭证，不新账户/购买收费或扩大权限。联网须先列有限missing-only请求差集；初次+一次诊断修复，403/429停止该入口；旧失败无新依据不重试。
+- 存储15:45核内14.22GB/外477.08GB、UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9正确；拟新外盘8GiB/本机小记录6MiB，后续plan_output核通过才写，不回退内盘，不挪删旧资料。source仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有脏区，只推协调元数据。
+- 旧10/24 source批结果与未完成事实保留：CN43段/US50来源/1113基金月、成员1000的36月/2000的3月不算二十年全库。新轮先按实际CSV/Parquet日期/字段生成年度缺口，再执行可得缺段与来源能力验证；真遇不可公开取得的核心成员历史，具体说明资料/权限而非把整体标完成。0新增收益实验/付费/删除/自动化。
+
+---
+
 # 近20年资料去重补采有界结案 2026-10-24T11:00:44.872127+08:00
 
 - task-id/owner沿原；status completed（本批公开源补采与核验）；完整20年/59池历史仍未完成，scope_released false保护原件。checked_coordination_sha 623b195bb4cd28c17a4170c365b650d3b3778875；checked_at 2026-10-24T11:00:44.872127+08:00。已读COORDINATION/self及utility/personal/strategy-account/investor/dispatch，新增market-style10:53全目录工作台范围：其不取行情、不接管本资料，双方无同写。本轮准确SHA快进。
