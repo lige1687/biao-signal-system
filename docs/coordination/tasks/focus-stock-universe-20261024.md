@@ -1,3 +1,13 @@
+# 研究总览指标参考与模型身份交付 2026-10-25T23:35:56.764861+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed本轮有界解释/展示；scope_released true。checked_coordination_sha b3b9eb4c5e1828f8d538c35cdd6a101a6c05d220；checked_at 2026-10-25T23:35:56.764861+08:00；最后fetch无其他增量，已读任务集合与冲突决定沿本轮scope。
+- 新MetricReference.tsx/css、FactorWorkbench.tsx窄集成：样本与pool、公式、未来持有月、有效119/108期、覆盖与RankIC均值区间、精确版本及来源；Spearman与ICIR逐月不年化写清，0.05/0.5/1只解释算术无统一及格线。public原件及策略/后端未改。
+- 原抖音完整参数未知，不称原版复现/权威有效模型；独立focus只支持观察定位。外部VIX/OAS已有，FSI/VVIX今日已做描述性对照复用，旧PCR/期限结构反例保留；0新金融实验、大下载、后台采集或交易。
+- 29前端测试、最终tsc/Vite及归置exit0；真实页面两池/批次/单因子/原投影、375px无溢出及fresh console0，截图和失败记录在原handoff/metric-reference/verification.json。报告SHA 24dca238124e34f79321febdac0af964e4c82f04cf42fdd9b3b87881d5bb8566，registry本键逐字核验，INDEX本行及原progress更新。
+- 文献代理阈值分支16来源条目超默认6、实现者再核3来源如实记账并停止；新增情绪问题6/6来源条目。来源超额不隐瞒；不调参数、不增金融实验预算。源码仅本地codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加准确脏区，未自动提交/推代码。
+
+---
+
 # 总览指标解释与样本身份补充 2026-10-25T23:26:46.853421+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false仅本轮明确范围。checked_coordination_sha 5ae490e0c9b5c8afe58fcc8c4f20e44a91525d02；checked_at 2026-10-25T23:26:46.853421+08:00。
