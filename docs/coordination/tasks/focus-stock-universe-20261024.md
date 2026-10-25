@@ -1,3 +1,17 @@
+# 当前：焦点动量接入日常看盘与因子工作台 2026-10-25T18:13:38.072085+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false仅下述新增展示范围。
+- 用户本轮明确提出把焦点动量做到平常主要看板和因子看板；采用现有研究结果作为独立市场状态观察，不改买卖/情绪灯/策略。主看盘紧凑入口，因子工作台独立市场观察视图，共用冻结数据展示包；今日值未知、固定历史300股、截至2025-12-31与美股未评价必须可见。
+- checked_coordination_sha 9f1993e84776778a8e867a345dc660c4236f35be；checked_at 2026-10-25T18:13:38.072085+08:00；已读COORDINATION1.1/self/research-dispatch-controller/research-utility-review-20261012/investor-workspace-simplification-20261012/market-style-observation-20261020/sentiment-factor-research相关当前记录。market-style与investor最近范围已释放；只在WorkspacePage顶部和FactorWorkbench导航/新视图插入，不动旧判断/曲线/进度接口，未发现同块活跃写者。
+- 主仓codex/factor-unit-research-20260915，base 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有脏区。此次结果仅本地未提交、远端不可复现；不拿基线代表工作区。
+- 具体写范围：新src/lei_signal/market_context/focus_momentum.py、scripts/research/export_focus_momentum.py、tests/unit/test_focus_momentum_observation.py、web/public/research/focus-momentum/、web/src/components/focus-momentum/；主控仅web/src/pages/WorkspacePage.tsx与web/src/pages/factor-workbench/FactorWorkbench.tsx插入及同工作台必要样式。自己的docs/archive/handoffs-plans/focus-momentum-display-20261025/与原progress。现有factors/sentiment API、App、vite、交易策略、原冻结研究全部不改。
+- 预计分工：子代理universe_evidence写新导出器/测试/JSON；root写新组件和上述两个页面；model_source_hunt只读UI验收。后续按此范围真正派发，不把准备视为实现。
+- 验收：源CSV/summary指纹绑定、空缺/篡改/日期语义测试、TypeScript与构建、真实主看盘到市场观察链接/图/日期/报告与移动宽度，来源冻结不变。静态展示包不依赖重启8000或新常驻服务。
+- 上一研究已完成：docs/experiments/focus-stock-momentum-evaluation-2026-10-25.md；1冻结核心批次/1独立审计/6文献请求，固定300股独立版本未见稳定正预测增量；原式、全市场、美股与账户效果不升格。本轮0新效果实验/调参/行情下载；复用已冻结证据。
+- 依赖：当前全市场实时资料未合格，展示历史状态不伪装今日监测。内盘余量16503504896字节，小产物预计<10MiB；仓外与外盘只读，不删除、不启动自动化、不改目标数据库。
+
+---
+
 # 当前：焦点股动量来源与中美观察用途调研结案
 
 - task-id/owner沿原；status completed仅本轮source_review；scope_released=true仅本题归档项。updated_at 2026-10-24T13:44:03.438620+08:00；checked_coordination_sha 01b71f2366c5e8a96a9644685ba7ea56b12a8bfe；已读COORDINATION/self及已登记六相关task、strategy-account-bridge新增范围，最后fetch无增量，无同写冲突。
