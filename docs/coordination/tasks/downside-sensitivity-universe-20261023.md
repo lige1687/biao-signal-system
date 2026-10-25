@@ -1,3 +1,13 @@
+# 二十年实际行情已补与中国股票批量进行 2026-10-25T16:57:24.974479+08:00
+
+- task-id/owner沿原，status active；checked_coordination_sha 8e4bb4e45a2788b13431db69bbb064250e11741d；checked_at 2026-10-25T16:57:24.974479+08:00；最新fetch无新增，COORDINATION/self/dispatch/utility及focus/market-style/strategy-account/personal/investor沿前已读，无共享写冲突。完整20年总目标仍未完成，不用旧source批completed状态替代。
+- US33基金已合并154407日线、3299事件，15缺段下载+1SSGA官方NAV5269行取得。Astra全原件字段独核通过并纠正Yahoo含拆股调整的价格语义，不称历史名义原价；首报价日与正式上市日分开、SPMD仍缺1890早期成交价，NAV单列。新us/coverage_v2及externalconsumer_v2为当前索引，旧v1和过渡v2快照保留；原件/数值未改。
+- 中国旧1552观测股票1852原价成功源按实际日期合并后，新3017请求与旧同字段/日期交集为0：1552早段+1465逐码尾段，废弃v1统一Feb起会重复299码的计划。root逐项独算后批准，单会话BaoStock已实际启动，约115成功后首网络接收超时停并保存错误；执行者诊断一次修复再续，成功键绝不重取。成员新337次候选查询另在该会话结束后运行，供应商滞后问题保留，不提升官方资格。
+- 本轮必要补入七国内ETF实际价量额：510050/510300/510500/512100/563300/159915/588000。仍为七已命名指数代理而非扩1714产品；旧SSE/Tencent/timing源先逐字段复用，SSE缺早段和尾段按真实分页补。Sol universe_sources新独占local raw/controller-domestic-etf/与external controller-domestic-etf/；root从controller*排除该前缀，其余cn/us唯一写者不变。controller-domestic-etf-scope-amendment.json记录此界。
+- 小记录保留审计版本实际约9.3MB，原6MiB为容量预估非用户硬预算；已按16MiB重新容量预检通过，同原bound8GiB外盘、旧planSHA不动，后续大差集均外盘，不删迁旧证据。Longbridge实际历史配额0已保存响应；已异步问用户是否有现成20年成员/退市数据授权，免费可执行补采继续。0收益/付费/生产/交易/删除/自动化，代码资料不自动提交，仅此协调摘要push。
+
+---
+
 # 恢复近二十年实际数据交付 2026-10-25T15:47:05.872220+08:00
 
 - task-id/owner沿原；status active，scope_released false。checked_coordination_sha e4d90b99a1f5b97f8cf73b684a2d99f5db85f822；checked_at 2026-10-25T15:47:05.872220+08:00；已读COORDINATION/self/dispatch/utility及新增focus-stock、market-style11:10与strategy-account13:58完成记录，personal/investor沿已审阅。全部相邻任务只读使用数据、不采本轮行情；旧源及封存报告不改，无同写。
