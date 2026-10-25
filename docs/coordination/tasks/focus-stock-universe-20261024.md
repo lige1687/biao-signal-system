@@ -1,3 +1,14 @@
+# 当前：按用户澄清改为同期价格上下投影 2026-10-25T22:40:48.942300+08:00
+
+- task-id/owner沿原；status active；scope_released false仅web/src/components/focus-momentum/与原docs/archive/handoffs-plans/focus-momentum-display-20261025/、原progress；不触及其他组件、基本面原页或策略/API。
+- 用户已明确选择“与宽度一致：日期横轴，上方价格、下方模型值”，并说“继续哈”；此前横轴模型值散点不是这次所需主图。默认改为同日价格和焦点动量上下曲线、联动光标，零下日同步投影；既有预测结果只作次级研究依据，不冒充价格。
+- checked_coordination_sha 1d7e6d632f292e86bf67d15cbe5c669a984c759c；checked_at 2026-10-25T22:40:48.942300+08:00；已读COORDINATION1.1/self/market-style-observation-20261020/investor-workspace-simplification-20261012/research-dispatch-controller，远端其他改动仅downside成员/数据交付。现有BreadthComparison只读复用图形口径，原owner范围无同写。根策略文档SHA与此前确认相同，服务独立市场叙事展示层。
+- 实现采用基本面已有overlayHistory价格接口（普通价格指数），严格按同日和模型覆盖对照，来源/资料期分别写清；不把已有全收益研究点位或未来收益当普通价格。数据可用性读回中，缺口显式。美股自身模型缺口保持，不将A模型代用美股。
+- root唯一写view.tsx接线和原记录；实现代理只获新price-projection.tsx/data.ts/test路径及本组件CSS（派发后按精确新文件细分）；review代理只读。预期小产物<5MiB，内盘12434915328字节；无新行情采集/效果实验/规则/账户/外写/定时/删除/生产提交，外盘仍只读。
+- 验收：日期轴、价格点位/动量百分比、严格对日缺值断线、同期阴影无前视、历史日期不冒今日、1/3/5年与全期、真实桌面/窄屏、相关测试/构建/归置。工作分支/base沿原加既有脏区，仅本地代码，远端不可复现。上轮验证保留，新更正另存回执不覆盖旧验收。
+
+---
+
 # 当前：焦点动量首页直读与A股效果映射接入完成（本地） 2026-10-25T18:36:34.227175+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed 仅本轮已具数据的展示；scope_released true。美股映射/当前日数据仍未完成，原因是缺合格输入，不假称全市场实时观察。
