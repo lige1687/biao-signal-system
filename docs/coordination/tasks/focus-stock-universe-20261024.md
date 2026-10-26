@@ -1,3 +1,16 @@
+# 统一价格与观察指标对照 — active 2026-10-26T21:47:03.602808+08:00
+
+- task-id: focus-stock-universe-20261024；owner: 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root。
+- 本轮用户授权将宽度、Baker及有合格历史的观察指标放在同一可切换价格投影卡；日期横轴，上价格下指标；金融叙事观察层，无新收益实验或交易规则改变。
+- branch: codex/factor-unit-research-20260915；base: 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；源代码仅本地共享脏区，未推成果。
+- checked_coordination_sha: 1062b9dc10b5d1d5ecc41f723597bb57de23e90c；checked_at: 2026-10-26T21:47:03.602808+08:00；已读 COORDINATION/self/downside/market-style/investor-map/external-resources/research-dispatch-controller。与前读1062b9dc无远端增量；不触及既有其他owner的IndexComparison及基本面overlay块。
+- 范围：web/src/components/observation-library/ 下 projection*.ts/tsx/css/test.mjs（新）；BakerReading.tsx、ObservationMetric.tsx 仅增加统一图入口；market-style/MarketStylePanel.tsx 仅替换BreadthComparison插槽；market-style/BreadthComparison.tsx 可选嵌入标题；自身progress及raw/observation-library-baker-2026-10-26/price-projection/新回执。
+- 唯一写者root负责组件和接线；子agent只写明确分配的新纯函数/适配器文件。旧观测资产和冻结报告不覆盖。
+- 验收：频率对齐/缺值断线/无未来周价格单测；tsc/Vite；真实页面宽度、Baker及其他指标切换、价格切换、缩放、窄屏及来源日期；归置检查。当前未开始写代码、未运行新检查。
+- 原价格API仅SP500/NASDAQCOM/SSE/HS300；缺道指/纳指100，禁止冒名。VXN与融资余额同口径历史缺，不画替代。研究预算本轮0新增。
+
+---
+
 # Baker读图精简与历史参考带完成
 
 - status completed；scope_released true；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；仅本次图可读性纠正。原表未改，2次作者资料查验，0金融实验。
