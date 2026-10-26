@@ -1,3 +1,15 @@
+# 继续补全后续研究数据 2026-10-26T14:54:21.488920+00:00
+
+- task-id downside-sensitivity-universe-20261023；owner01a1680e-6717-7ce2-9ecb-372a228c1118；status active。用户再次明确“继续继续，后续我们可能会用到的补全为止”，保持免费公开/真实/去重/外盘/登记的原要求，不把前轮完成当总体达标。
+- checked_coordination_sha:628468be6470d629899e41f2053bcc204cbabc4b；已读COORDINATION、本任务、research-dispatch-controller、mac-local-storage-cleanup；自bc7fe43a相关文件无变化，无owner重叠。工作分支codex/factor-unit-research-20260915，HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；仅协调摘要推送，资料未自动提交Git。
+- 基线1131/1176缺45US基金月、CSI1000/2000正式53/3、SPMD1890早日价、A500两日；上一轮v4分层19808行且456名称未核实隔离，全部strategy_ready=false。承接当日123次来源请求及全部旧失败，不重置试错史。
+- 本轮分工：us-months只补精确缺月及周末日期口径；cn-members只新官方完整成员事件链；etf-history只SPMD早期价格/同期母指数；root controller/综合报告/catalog自身条目/INDEX一行及现有目录的其他研究缺项判别。每项源计划先登记，禁止重下已成功同字段同窗口、重试原样失败；403/429停止。
+- 新raw docs/experiments/raw/public-universe-deep-completion-2026-10-26；新外盘/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-deep-completion-20261026/public-universe-deep-completion-20261026-20261026T225421-69a3af262800/result；固定UUID/容量核实，预估2GiB外/16MiB内，内盘5GiB预留保持。仅新输出，旧金融资料/冻结/生产/数据库不动，不删除、不改权限、不买数据、不新建自动化。
+- 按research-closure及lei-lowfreq-research复用既有规范：服务宽基ETF低频研究真实历史输入，准确月份/证券身份/首发时点/母指数和价格口径分别验；不跑因子收益。可推进的独立工作继续，无法取得的数据要有具体来源边界，不以文件存在或当前成员冒充补全。
+
+
+---
+
 ## 2026-10-26：继续公开缺口与证券身份批次已完成有界验收
 
 owner: 01a1680e-6717-7ce2-9ecb-372a228c1118；本条接续本轮start和method-review/A500计划增补。范围内写者为root controller/report/catalog、us-identity、cn-members、method-review，均已完成。全二十年历史输入目标仍未通过，不表示所有缺口补齐。
