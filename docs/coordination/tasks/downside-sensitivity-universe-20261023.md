@@ -1,3 +1,23 @@
+# 2026-10-26 数据到位审查与存储维护完成
+
+- task_id: downside-sensitivity-universe-20261023
+- checked_at: 2026-10-26T06:55:15.550061+00:00
+- status: completed_bounded_readiness_review_and_cache_cleanup
+- 本轮用户要求核数据准备标准并允许本机/外盘Lei金融清理。完整二十年中美历史股票池未到位；按对象/用途/字段/区间验收，不升级旧资料准入。
+- 主报告: docs/experiments/data-readiness-and-storage-cleanup-2026-10-26.md
+- 原始证据: docs/experiments/raw/data-readiness-and-storage-cleanup-2026-10-26
+- 8金融原件SHA一致；12关键文件已读；大原件未全量重哈。CSI1000正式53月，CSI2000仅3月，美国基金持仓缺63月且非正式指数成员。
+- 已归档并逐文件读回452个闲置cache文件35,587,416字节，然后移除三处精确本机目录。npm runtime、HMM venv 8,286项前后快照一致；API health前后200。外盘金融原件删除0，CleanMyMac删除0。
+- 外盘归档: /Volumes/win+mac通用/LeiSignal-新实验结果/data-readiness-storage-cleanup-20261026/data-readiness-storage-cleanup-20261026-20261026T144608-87fea8fe5e63/result
+- 收据SHA256: 6467d8a7465bdaee9800030cc9152e191f6cd80db22c33ec591d1e9333876ce1
+- 数据目录已补readiness_review/storage_maintenance，原8金融对象和既有批次内容保留；只新增自己的registry/INDEX条目，API reader正文与文件SHA一致，pending=false。
+- 只读复核在独占子目录内完成；没有改生产、下载新源、运行新因子或复制既有universe。
+- 本轮开始推送回执实际时间为2026-10-26T06:32:07.399504+00:00；前段手填时间以该回执为准。
+- 后续: 使用现有范围前按具体问题验证成员/首次可得/公司行动/母指数；本次完成不表示20年总体数据任务完成。旧冻结源与恢复档案保留。
+
+
+---
+
 # 数据到位标准与Lei金融存储清理 2026-10-26
 
 - task-id downside-sensitivity-universe-20261023；owner 01a1680e-6717-7ce2-9ecb-372a228c1118/root；status active，仅本轮数据资格复核及用户授权的合适存储清理。完整二十年数据仍未齐，不重跑因子或收益。
