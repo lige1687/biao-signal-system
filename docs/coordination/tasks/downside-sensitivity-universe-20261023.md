@@ -1,3 +1,20 @@
+## 2026-10-26T16:51:43.942628+00:00 — accepted public-universe evidence registered; long queue active
+
+Owner remains 01a1680e-6717-7ce2-9ecb-372a228c1118; task downside-sensitivity-universe-20261023.
+
+Root and independent acceptance: CSI1000 105 continuous ex-post months2018-01..2026-09 (52 added), 105000 rows; no PIT/publication or full20year claim. BSE current353-row/18page DOM directory observed Asia/Shanghai2026-10-27 00:00..00:09, 248v3 dated code mappings (6May6/242Oct9), and two official delisting events (9206802026-01-05,9203052026-07-30). No exit-price claim. Existing300/500 official originals produced12index-month/4800row specific-event correction candidates; independent review accepts local deltas only, not full months or132-month history.
+
+Report docs/experiments/public-universe-deep-completion-2026-10-26.md SHA fb7badccf5a7ce6d62ba8d82ad3930fd418d1174a90494ecabc50a61f2f63b61; RAW4coverage-manifest SHA 6c5e8a95ab8a3cf5f12683bfa637aecac204fd131863b8ed3b4655d925d42b1f. Catalog added5evidence entries+1candidate; old12financial records/8bundle records/3continuations preserved. Seven local/external copies SHA checked. Local report API exact Markdown, pending=false,15local links and health passed. Production/UI/trading inputs unchanged.
+
+Current batch479logical source HTTP request objects (602 including prior3batches); browser/search/redirect exchanges/BaoStock protocol separate. This registration adds0sources.
+
+All-knownSH/SZ price/factor collector v4 remains RUNNING INCOMPLETE, fixed2006-01-01..2026-10-23, originalOUT4/cn-all-equity only. USreview passed socket/date-coverage semantics. The single controller-interrupted600726 recovery and ten next objects passed; finite12020continuation queue still active in session9843/PID24891 as recorded in cn-all-equity-plan/runtime-handoff-v4.json. Do NOT launch a second source session or label allA complete. Preserve old source originals/repair ledgers; stopped source errors require bounded diagnosis. Current original8outDate boundary gaps have no existing official evidence; read-only official source discovery underway before any new exact-URL plan.
+
+Storage fresh verified same UUID/device/mount, local metadata estimate corrected16MiB->32MiB, external estimate2GiB unchanged; fresh plan_output generated paths not used. Scope remains own task/report/raw/catalog/registry/INDEX, no deletions, no automatic scheduler.
+
+
+---
+
 # 单页采集 v4 日期覆盖口径与中断恢复 2026-10-26T16:31:00.480820+00:00
 
 同task/owner，已读协调 80fd3f0d22c6c7b5cab15e47eaf9634d6756139c。独立审阅确认socket None被拦截，但价格少尾1日/中缺/空响应仍可能被ok掩盖；已在本地离线复核原始574、修复4、续跑51共629价格原件，排除2份被替代旧错误/截断后627有效原件：619日期集合齐，8供应商outDate当天无行且语义未知。v3新51/51齐；不能用ok总数冒充齐全。
