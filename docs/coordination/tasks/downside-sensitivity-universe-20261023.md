@@ -1,3 +1,12 @@
+# 本轮root补充：NFCI已有数据缺口
+
+- status active；owner/task沿原；checked_coordination_sha e719127975e0f45dca03e49522209fc5da0994af；2026-10-26T14:59:00+00:00；补读market-style-observation-20261020与focus-stock-universe-20261024原owner记录。其UI及生产数据不改，新增本批controller-nfci小脚本和外盘新nfci原件，无同写。
+- 原系统NFCI仅2026-09-11..10-09五点，旧FRED CSV404，ALFRED先前只读需key API文档。此次官方公开HTML表和ALFRED网页下载表单为新路线，精确计划controller-nfci-plan.json。先核全文历史、源日期和历史修订版，若同一个官方文件含ANFCI/分项保留字段语义；不将今天修订值当当年可知，不声称20年PIT完整。
+- 用户金融压力及后续有用公开数据的原授权覆盖；不改阈值、不取密钥/账号、不新付费/权限、不部署更新、不跑金融效果。先获取真实原件再登记，此摘要不是已取得证明。
+
+
+---
+
 # 继续补全后续研究数据 2026-10-26T14:54:21.488920+00:00
 
 - task-id downside-sensitivity-universe-20261023；owner01a1680e-6717-7ce2-9ecb-372a228c1118；status active。用户再次明确“继续继续，后续我们可能会用到的补全为止”，保持免费公开/真实/去重/外盘/登记的原要求，不把前轮完成当总体达标。
