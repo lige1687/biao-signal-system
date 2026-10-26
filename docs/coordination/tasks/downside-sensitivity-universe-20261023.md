@@ -1,3 +1,16 @@
+# 用户再次要求继续补齐：公开缺口第二轮 2026-10-26T13:14:19.115404+00:00
+
+- task_id: downside-sensitivity-universe-20261023；owner:01a1680e-6717-7ce2-9ecb-372a228c1118；status:active。
+- checked_coordination_sha:ac4c28a0131166028974341fa4ac1a393cc8a3be；checked_at:2026-10-26T13:14:19.115404+00:00；已读COORDINATION/self/research-dispatch-controller/mac-local-storage-cleanup（相关文件与上轮读取内容未变）；无owner冲突。
+- 本轮人类明确“继续补齐缺口”。基线为上轮coverage：US1131/1176缺45月，CSI1000/2000正式53/3月，A股74第三方价候选。只探索未尝试且可改变准入的新公开精确来源；旧失败和结果保留，不重下成功原件。
+- 唯一写者：root controller/新报告/catalog/registry本项/INDEX本行；CN members助手仅cn-members，US助手仅us-months，CN quote助手仅cn-quotes。
+- 新raw: docs/experiments/raw/public-universe-gap-second-pass-2026-10-26；新外盘:/Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-gap-second-pass-20261026/public-universe-gap-second-pass-20261026-20261026T211418-224d714dec7f/result。已新核固定UUID/容量，估计1GiB外盘/16MiB本机。
+- 不修改旧冻结、不跑收益、不付费或扩大权限、不删除、不重扫CleanMyMac。源计划先登记，403/429停止，至多一次有诊断修复。结果、准入/候选差额及公开来源边界读回后登记。
+- 本地共享HEAD不切换；尚无新原件取得，计划与小合同仅本机，非Git成果发布。此前本轮完成记录仅上一批，不是完整20年验收。
+
+
+---
+
 # 公开Universe补缺与外盘扫描本轮完成 2026-10-26T13:06:40.111962+00:00
 
 - task_id: downside-sensitivity-universe-20261023；owner: 01a1680e-6717-7ce2-9ecb-372a228c1118；status: completed（本轮公开资料补采与核查）；完整二十年历史池仍不完整。
