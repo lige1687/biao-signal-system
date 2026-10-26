@@ -1,3 +1,14 @@
+# 单页采集 v4 日期覆盖口径与中断恢复 2026-10-26T16:31:00.480820+00:00
+
+同task/owner，已读协调 80fd3f0d22c6c7b5cab15e47eaf9634d6756139c。独立审阅确认socket None被拦截，但价格少尾1日/中缺/空响应仍可能被ok掩盖；已在本地离线复核原始574、修复4、续跑51共629价格原件，排除2份被替代旧错误/截断后627有效原件：619日期集合齐，8供应商outDate当天无行且语义未知。v3新51/51齐；不能用ok总数冒充齐全。
+
+v4 addendum docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/continuation-v4-addendum.json SHA 047756c6a26e3b3ce992d5fa78713bccf901ed75fa13eec02a4b63a305a214d6；仅新增一次控制器中断恢复 docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/controller-recovery-plan-v4.jsonl SHA 93405028250930ea2f5f9eb31301ada8a813d1e8b669652a7f5159246d68389f，精确sh.600726 2006-01-04..2012-12-31。旧started无terminal且原件/.tmp均不存在，原因是控制器暂停检查时终止进程；追加controller_interrupted_unpersisted保留原账，不标来源拒绝或成功。给此对象一次明示恢复，其余读v3尚未执行集合，已成功原件复用。
+
+新字段分transport_success与target_date_coverage_complete；按日历比全日期集合并检重复/顺序，未知缺日仅记录，不自动重取/填价，也不将停牌或outDate当已证可交易。未执行队列范围与v3不变，错误仍留原件并停，单会话与原存储/节流边界不变。独立审阅负责确认夹具少尾/中缺/空窗不会被标完整，完成后继续已授权有限队列。
+
+
+---
+
 # 北交所两项目录缺席的生命周期原文 2026-10-26T16:27:19.767297+00:00
 
 同task/owner，checked_coordination_sha 634102764cf8fd54c7f5b402f8e46448387644be。当前353目录与2025年248存量映射对比，920680/920305未见。为防把缺席直接判退市，archive_universe_inventory独占raw/bse-lifecycle与同外盘目录，仅取两公司官方终止上市与最终摘牌原文，具体5个URL/字段/窗口见 docs/experiments/raw/public-universe-deep-completion-2026-10-26/bse-lifecycle/lifecycle-source-plan.json，SHA 585ee391acf5d64ceb25e94cdfca2e8e64fc94f2fc874e74f77945f9ee5e092e；最大5次HTTP，每对象1次、无盲重试、403/429停源，预算沿用2GiB外/16MiB内。不扩大到107个非存量映射代码，不补价格/退出收益、不改生产。网页搜索仅定位并单独计数；原件保存核哈希后才接受日期/原因。
