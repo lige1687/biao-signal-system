@@ -1,3 +1,18 @@
+## 2026-10-26T17:18:21.284749+00:00 — v5 postprocess correction and seven official delisting dates accepted
+
+Same owner01a1680e-6717-7ce2-9ecb-372a228c1118/task. Registered docs/experiments/cn-price-integrity-and-delisting-dates-2026-10-27.md SHA 2de6d9e60845ebfbe94113188437401ff32186837e3aaa69d6e15e2136ab2346 and price-integrity-coverage-manifest SHA bb3fdf354e282528b729f297f5073d41ca3de34ffe02a3d2f145b04db1e63c50; API exactMarkdown/pendingfalse/health/scopedhygiene passed. Catalog now has latest active_acquisition_jobs pointer to runtime-handoff-v5.json. Prior financial12/universe14/continuations4 records preserved, new2entries (dateoverlay+parentreadingindex),13externalcopiesSHAreadback.
+
+7of8original outDate gaps have official delisting dates accepted for statusonly. RAW4/controller-outdate-admission.json points to OUT4/controller-outdate-admission/date-status-overlay.csv. 600193 unverified: HTTP200botdenial, notPDF. Stopdefectrecord retained: three later scheduledSSEURLs still fetched before semanticdenialnoticed; SSEpathnowstopped, no retry/bypass.8newlogicalHTTPobjects, currentbatch487/prior3inclusive610, notwireHTTProundtripcount. Price/exitcash/returnincrement0.
+
+Read-indexv4 is obsolete: incorrectly dropped600689valid2000dateprefix. v5 has explicitvalidslice+two675rowtails covering3350dates, originalfullrequeststillincomplete; exactoriginalpriceplan9592622slots conserved across7251effectivewindows, no overlap/loss. Independentaffectedreview passed then-terminal1185objects only, not full queue acceptance. Use build_read_index_v5.py SHA2007265a74737614f41ceebe3d79c016b0f78853599465db96deaaa12bb00a4d only after entirev4collector fullyterminal and alloriginalsrehash. Previous627statuscount is not unioncompleteness. No newnetworkfix forold2000rows.
+
+Parentbenchmarkv2 finalSHA8de1bfdd25cb600234572e1a6092cdb1ab1dc86498bf47d1f5c18c294f251b4b indexes59objects/86series/134refs and7domesticcurrentETFbindings, no newquotes.2mutablecacheshashesdrifted; oldbyteversionsnotfoundwithinreviewedpaths, do not use asstablefrozeninputs. 7ETFmanifestselectorsvsnumericpaths andSPMDhistoricalregimes independentlyreviewed; unknowngross/net/tax preserved.
+
+Collector stillRUNNING in samePID24891/session9843 (rootcheckedprocessduringregistration), not restarted; oneowner monitors. No secondsourceprocess. No completedfullAinput/indexclaim. WorkBuddyGUIfollowupblockedbylockedMac; no newmessages, no packageinstall, no permissionchanges. No scheduler/deletion/production/trading changes.
+
+
+---
+
 ## 2026-10-26T16:53:45.419829+00:00 — eight exact official outDate lifecycle originals
 
 Same owner/task. Existing8effective price objects have exactly one missing supplieroutDate; zeroof8were explainedbyoldofficialbundles. Authorized public-source boundary extension is8exactofficialSSE/CNINFOURLs,8GETattemptsmax,1MiBperobject/8MiBtotalwithinexisting2GiBexternalbudget. Plan cn-outdate-official-source-plan.json SHA b9203d75a9d6e536cecd033aae9ddfa6f36b5b2c8f23023a930460a198ea7b23; execution contract controller-cn-outdate-execution-contract.json; output fixed oldOUT4/cn-outdate-official. Discovery54websearchqueries+1officiallistingopen,0directoriginalGETsofar.
