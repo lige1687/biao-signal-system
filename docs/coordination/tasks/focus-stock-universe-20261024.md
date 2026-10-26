@@ -1,3 +1,16 @@
+# 观察库与Baker历史展示验收完成 2026-10-26T21:01:35.883962+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed，仅本轮可收纳展示和Baker来源核验；scope_released true。
+- checked_coordination_sha e80b2b1b0bab3b0fa370a2b47d4e4b62640df46e；checked_at 2026-10-26T21:01:35.883962+08:00；已核相对52f71fbea28df41e79c8de66d677bb1d458882cb仅downside任务增量，继续外盘Universe和生命周期缺口，与本轮页面/报告无同写；沿开题已读COORDINATION和各相关owner。
+- 首页及基本面新增同一观察库，默认收起/0固定，24家族33唯一项；15项真实可看读数，18项资料待接。支持按名称/市场/状态搜索、放首页/收回、刷新与跨标签同步；固定样本焦点原强制首页卡已替换，无重复ID。只改两页必要导入/接线和新组件/小静态资产。
+- Baker作者HTML及工作簿实际2请求，2026-03修订五代理版，SENT726月/SENT_ORTH725有效，2025-10空，末2025-12分别0.12571176886558533/0.06564764678478241；不显示差分、不冒充当时可知或今日模型。XML独立核全部值，FSI/FINRA复用值与NFCI五周原件独核。
+- 口径纠错：融资余额不画两融合计；CAPE所属月/转发表来源、沪深300乐咕via akshare准确；missing/空日期禁有效读数，保留真0。当前旧market-style/review404，观察库NFCI复用已核快照，未改旧页面/后端。
+- 最终8测试、tsc/Vite、归置exit0、diff检查通过；实际15读数、Baker切换、固定/刷新/跨tab收回、科创缺资料禁用、375px无横溢出通过，console error0。临时15固定已全部收回，viewport已复位，临时浏览器标签已关。
+- 报告 docs/experiments/observation-library-baker-2026-10-26.md SHA 3f5dec2c21d7cad8327a6d0bffe624e3f2e9e224c50327b2e8626d47ef08c775；raw同名目录含原件、合同、独核、截图、validation、API逐字SHA/4本地链接。registry仅新键且旧条目全保留，INDEX仅一行，progress更新。
+- 当前代码与报告只在codex/factor-unit-research-20260915共享脏区，未提交/部署；仅自身协调元数据push。0新金融收益实验/规则改动/自动采集。金融有效性未升级；18项数值与历史资格仍待资料，当前展示功能交用户体验验收。
+
+---
+
 # 可收纳观察库与首页自选、Baker数据核验 2026-10-26T20:33:41.874143+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active。用户已明确实现按优先级收纳、首页可放出/收回，并查看Baker模型与各大盘指数估值。
