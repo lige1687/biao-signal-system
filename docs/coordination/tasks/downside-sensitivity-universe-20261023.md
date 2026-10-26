@@ -1,3 +1,26 @@
+## 2026-10-26T19:27:20.512858+00:00 — ALFRED versions registered; exact transport recovery authorized
+
+Same owner01a1680e-6717-7ce2-9ecb-372a228c1118,task active. Branch codex/factor-unit-research-20260915 HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 unchanged. Checked coordination ef691b729c37de87eff74d4fee3c68cca3dc9e2b; read COORDINATION, own/dispatch/utility, no ownership conflict. Root owns catalogs/reports; stock solecollector/index; cn quality/final verifier; method interior collector. Only coordination metadata pushed, all data/reports remain local/external.
+
+ALFRED same-indicator supplement acquired: QUSPAM770A/QCNPAM770A exact BIS source codes,40vintages each2016-06-06..2026-06-15;17074nonempty+1886blank cells independently matched to originalZIP. Review SHA5d52559f7cfd0698ad6dd0717bb879e292a15fc698edc54360197706d7565660. US313quarters/CN161; CN2023Q3 229.5→201.3 in2024Mar→Jun versions verified, causeunknown. Newer2026BIS LGFV methodology doesnotprove causeof2024revision. LatestALFRED vsBIS US6/313,CN7/161 differ0.1pp; original values preserved.80country-vintage pairs supplement2existing indicators,financial groups stays15. Report bis-credit-vintage-history-2026-10-27 SHA c3676c800b984b5d21d6b31d0e19c59d1e0049b4dfeb25a8522f3b6ded4644ce; API exactMarkdown/pendingfalse/healthok,scoped diff/repo hygiene pass;12metadata copies readback receipt97509f295491052ab63050b6b91164e63f8bb259b00d0bfddc4b45b6e9747cc0.2formGET+2POST,0retry/repair,logicalHTTP501/withprior3=624;7webactions separate. NoPIT/trading admission or scheduled collector.
+
+MainPID24891 exited2026-10-27 03:15+08 after50s network timeout,not403/429. Exact sz.002840 raw3 window2017-01-10..2024-06-11|v3,0partial/no responsefile; error history preserved. Frozen continuation prefix7543412B SHA5740fa545ab62574bcf1758d0e6936fe9c613254dabd79adf82b2deaaedcd7e2; source-stop receiptSHA4ca93901555268a1dba02b8c58cde7463df422c4fdf4d1c18cfb02140e3e068b. Catalog latestcopy OUT4/controller/catalog-transport-stop-002840/acquired-data-catalog.json reflects stopped, not currently running.
+
+Root source recovery authorization: exactly1 attempt of that1800-session raw3 window with independent key suffix|transport-recovery1 and transport-recovery-attempts.jsonl, then only7803never-attempted fixedobjects(2396price/5407factor) if identity/calendar/doubleSHA pass. Max7804newprotocol objects,0automaticretry,50stimeout,minimum1Hz,single source session; any source/write/space/integrityfailure stops. No old successful object requery. Runtime source receipt issued only after this push/readback. Root reviewed v4→v5 changes/complete revisedguards and independently verified4frozenSHA; stock dryrun checked all oldsourceSHA/set0network.
+
+Frozen files in RAW4/cn-all-equity-plan:
+- collect_continuation_v5.py SHA 544b63c28724825bfd58eab2bfc5815840b04134ea0b2035796cd78edd77038b
+- transport-recovery-contract-v1.json SHA 64e999961d73dbb08af22cba5265d23de67c25ef7cb463d613aa3bf370bdb54a
+- transport-recovery-budget-reader-addendum-v1.json SHA 6bed46a9286bd3e59398fc7041e9ace93ff912d489c12de400a9758b3652072d
+- continuation-remaining-after-sz002840-v1.jsonl SHA 20e497d99b9e27bd3e5673c1a8f23eb98d708c55a74b40acf11170f875769f5d
+
+Entire OUT4 logical2GiB cap unchanged; source guard includes existing tree, conservative new source/log envelope and periodic actual scans, notallocatedbytes. UUIDDEBA1C85-6059-3865-B50A-A8EE1F80E4D9/device16777238. External10GiB/internal5GiB reserves; currentOUT4~304MB,externalfree~473GB/internalfree~13.3GB. WholeRAW4 local metadata 26311768B<32MiB. Root pauses all other OUT4 source/derived writes while v5runs. No deletion/paid/auth/production/tradingchanges.
+
+Afterqueuecomplete: incrementalquality-v2→newindex-v7→independentfinal-verifier-v7→separate248interiorwindows/4711targets. Expected12663terminals incl2knownerrors and12661effective sources(7251price/5410factor),2separate recoveries. Older indexv6/v5/v4 and finalv6-verifier-v2 cannot accept thisnewmapping; preservefrozen. Indexv7/quality/final/interior gates are preparing and subjecttoindependentreview, nofinaldataexecutionoracceptance yet. WorkBuddy OS-lock remainspendinguserunlock. All20yearresearchinputs stillincomplete.
+
+
+---
+
 ## 2026-10-26T18:40:28.656545+00:00 — six BIS CN/US long histories and existing volatility references registered
 
 Same owner 01a1680e-6717-7ce2-9ecb-372a228c1118/task active. Coordination checked 58f90c4f79586504519808eec02f36404420f72a; read COORDINATION, own task, dispatch and utility. No shared production/source-code ownership change; root writes own RAW4/OUT4 metadata, catalog and report entries. Reports/data remain local/external, only this coordination metadata pushed.
