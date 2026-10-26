@@ -1,3 +1,14 @@
+# 同范围单页续采 v3 2026-10-26T16:20:43.024304+00:00
+
+- 同task/owner，已读协调 c11e7d916de1d847410d91f19fa4cf40b2ad1b00。原 v2 队列、误ok/失败原件保留；修复4/4成功且精确首末日/行数/SHA已读回。
+- 实装SDK每页2000条，旧修复文案1000为误述并留addendum；4窗均小于1000，结果不受影响。发现ResultData.next会把socket None/超时当False但保留错误码0，续采显式检测socket返回/超时，并将仅未执行长窗拆为最多1800目标交易日的单页。
+- v3合同 docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/continuation-contract-v3.json SHA f3c34cf21889d5e3a15bd2ae7208c59eaa75554376ecf765b523e63055b195e1。已执行原价574+因子3，其中两异常已一次修复；剩余4811原价窗中的1863长窗拆开，剩余6674价+5407因子=12081协议对象。范围仍是原代码/原缺失日期槽位；不重复已成功日期、不增加新日期、字段或身份。
+- 精确文件及SHA：{"continuation-price-v3.jsonl": {"path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/continuation-price-v3.jsonl", "sha256": "e45d68f039a1194794ea72b7cd61f9e83b39afde841dcf282b0e6a6eefacc4d5"}, "continuation-factor-v3.jsonl": {"path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/continuation-factor-v3.jsonl", "sha256": "501811e60560000d7881b1447790c8fa4b0fa611674174204c909eb033eb0162"}, "continuation-map-v3.jsonl": {"path": "/Users/yongbiaoli/Desktop/lei-signal-lab/docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/continuation-map-v3.jsonl", "sha256": "f0a9f2e8f65210e59332df2a08a184e477223806c393ec37964b87be38474bec"}}。
+- root继续承担目录/登记；stock_lifecycle_gap独占采集器与外盘cn-all-equity。单会话串行、至少1秒请求间隔、每20次或60秒空间检查、同2GiB外/16MiB内估计及5GiB内/10GiB外保留。任何新源错误保留原件并停，不盲重试；不因数量增长降低完整性检查。
+
+
+---
+
 # 全沪深数据完整性修复与北交所目录进展 2026-10-26T16:13:43.156796+00:00
 
 - 同 task downside-sensitivity-universe-20261023 / owner 01a1680e-6717-7ce2-9ecb-372a228c1118，已读协调 da27cc64fe09d9e76791cf15bf3731363bb20a2e；独占文件范围不变。
