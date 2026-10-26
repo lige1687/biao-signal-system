@@ -1,3 +1,12 @@
+# 价格尾窗修订及金融条件可知时点补充 2026-10-26T15:26:38.573093+00:00
+
+- checked_coordination_sha 32ab8b194c9e73518908afe7a2604fa9f9b83353；同一task、owner与写者范围。原价格5385计划不变；因子5410计划修订v2 SHA 011c3e3f65d0ce5fa70bbbeb60ae52e208e0d888b4060a764553ed62b795ce1f，逐条核旧请求截止后仅两只lowfreq尾窗从2026-02-01改2026-01-16，避免漏半月；原合同/计划留审计。此修订实际执行合同为controller-all-equity-execution-contract-v2.json。
+- NFCI已经取得801真实发布版本、1975576个非空日期版本单元，最新2911点与Chicago CSV一致。补充ANFCI的历史发布版本用于区分金融条件与经济活动混合影响；同官方ALFRED公开下载表单，先精确表单读取确认vintage清单，再依实列分批（每40版、每个源窗口只取一次），不再尝试失败的all-real-time-periods形式。另取已发现官方FAQ/技术说明用于核贡献语义，避免把源模型贡献冒充105条原始可交易因子。
+- 新增根目录controller-anfci小脚本、外盘controller-anfci源文件，root唯一写；仍同2GiB外/16MiB内计划。实际请求逐条计账，403/429停、单一诊断修复，不取密钥/账户、不改UI/阈值/生产、不跑收益。该范围延续用户明确的金融压力与后续有用公开资料补齐授权。
+
+
+---
+
 # 本轮已知沪深股票报价差集执行 2026-10-26T15:21:07.094392+00:00
 
 - task/owner沿原；status active；checked_coordination_sha b0452ae18445d0c015d6a02b7b487d058057278b，相关总协调/dispatch/storage自NFCI登记无变化。本轮 stock_lifecycle_gap 独占新raw/cn-all-equity-plan与cn-all-equity、新外盘result/cn-all-equity；root合同/登记；CN成员与NFCI写者边界不变。
