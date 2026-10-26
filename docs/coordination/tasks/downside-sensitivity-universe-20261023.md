@@ -1,3 +1,18 @@
+# 公开历史缺口第二轮已核验归档 2026-10-26T13:47:57.508838+00:00
+
+- task_id: downside-sensitivity-universe-20261023；owner:01a1680e-6717-7ce2-9ecb-372a228c1118；status:completed（本轮新来源与资格问题）；完整二十年目标仍未通过。
+- checked_coordination_sha:b478053f6e23ca8d398298e03be7ddfdb6ea0439；checked_at:2026-10-26T13:47:57.508838+00:00。相关COORDINATION/self/research-dispatch-controller/mac-local-storage-cleanup与本轮已读版本差异0；期间其他任务写focus-stock-universe，不占用本轮数据路径。
+- 唯一写者范围保持：cn-members、us-months、cn-quotes各助手；root controller/报告/catalog/registry本项/INDEX本行。root原计划补SPMD既有1890日缺口，已与US助手明确去重；公司行动延伸只在cn-quotes/extension，均先有各自源计划。
+- 74A股候选日两源名义OHLC逐值一致，量72/74一致、2日各差1手；600636窗口72日含1锚点名义与qfq全同，旧31调整因子窗内0事件，新增年报/股东会支持年度不分配。后披露不倒灌、非交易所全行动完备证据，未准入收益/执行退出。旧143账本与69无交易分类不改。
+- CSI1000/2000正式仍53/3月，US基金1131/1176仍缺45，无新增正式月。美国新日期参数接口实返当前日期/元数据，IWM2017-06原差120美元未擅改。SPMD补4段母指数回溯身份，90个月标签价格仅候选，454近期溢折价不补早期1890每日价。
+- 本轮26次HTTP（4+4+8+5+5），搜索单列；403停止、验证HTML不执行，失败重取留账。0收益、付费、生产、删除、自动化；CleanMyMac本轮未重扫。
+- 报告 docs/experiments/public-universe-gap-second-pass-2026-10-26.md SHA1fff773a084eb291729120b5df315cd28b3d2aeab45987fc754934202c432225；raw同名目录。acquired-data-catalog的latest_coverage_review及外盘快照已更新，旧段保留。
+- 外盘固定UUID复核通过，manifest快照81文件/2883068B（含失败响应和小记录，不是合格数据集数）；主控25唯一路径/74原价重算和PDF独核，SPMD9原件独核，最终口径审阅通过。API报告字节一致、pending=false、health=ok、hygiene与diff通过。
+- 共享HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9未切换，源码/报告只在本机和外盘未自动提交Git；此推送仅协调摘要。恢复须准确历史成员事件/准确缺月文件或早期交易价与完整调整依据，不用季度插值/当前成员/净值接价，不承诺回合结束后自行运行。
+
+
+---
+
 # 用户再次要求继续补齐：公开缺口第二轮 2026-10-26T13:14:19.115404+00:00
 
 - task_id: downside-sensitivity-universe-20261023；owner:01a1680e-6717-7ce2-9ecb-372a228c1118；status:active。
