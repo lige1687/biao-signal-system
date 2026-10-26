@@ -1,3 +1,16 @@
+# 统一价格与指标对照 — completed（本地显示） 2026-10-26T22:08:05.215615+08:00
+
+- task-id: focus-stock-universe-20261024；owner: 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root。
+- checked_coordination_sha: ff11b54128925a76f60f02ebe91f4e02fd9dca72；checked_at: 2026-10-26T22:08:05.215615+08:00。完成前fetch增量仅downside-sensitivity-universe-20261023公开历史缺口第二轮结案，已读diff，无前端路径冲突；COORDINATION及其他已读任务未变。
+- 用户要求已落地：基本面原宽度位置统一选择宽度和13项历史模型，四个现有股指；上价格下指标、日期联动、缩放、分位条件投影。宽度原条件沿用；观察库详情可直达并正确选择。首页固定0项未改变。
+- 模块：observation-library/projectionView.tsx、projection.css、projectionSources.ts、projectionAlignment.ts及test；BakerReading/ObservationMetric仅加入口；MarketStylePanel仅插槽换统一组件。未改其他owner文件、旧资产、后端和交易规则。
+- 20/20测试、最终tsc/Vite、归置、diff通过；真实14项、价格/版本切换、上下缩放光标、范围保持、详情跳转、375px、console error0均核。截图final-screen.png及verification.json在docs/experiments/raw/observation-library-baker-2026-10-26/price-projection/。
+- 保留失败与修复：Array.at与目标不兼容已改；月底null不退前；历史分位改标已加载窗口；URL同步防错项；clip截图无效保留，最终用普通截图。独审NFCI缺失误报已对照实际5点撤回。
+- Baker历史截至2025-12；NFCI仅5周。无道指/纳指100价格、VXN历史、A股融资余额历史新接。旧风格/五问接口404未改。本轮0新金融实验/自动采集/交易或部署。
+- branch codex/factor-unit-research-20260915；base 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9。源码、回执和自身progress仅本地未提交，远端不可复现；此推送只自身协调元数据。已释放本轮写入范围。下一步仅用户体验反馈，无后台续跑。
+
+---
+
 # 统一价格与观察指标对照 — active 2026-10-26T21:47:03.602808+08:00
 
 - task-id: focus-stock-universe-20261024；owner: 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root。
