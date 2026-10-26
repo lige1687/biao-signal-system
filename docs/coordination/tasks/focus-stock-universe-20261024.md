@@ -1,3 +1,14 @@
+# 可收纳观察库与首页自选、Baker数据核验 2026-10-26T20:33:41.874143+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active。用户已明确实现按优先级收纳、首页可放出/收回，并查看Baker模型与各大盘指数估值。
+- checked_coordination_sha 72d22ba11d5c0b3c250795d2febc02efcdf287fe；checked_at 2026-10-26T20:33:41.874143+08:00；已读COORDINATION/self/最新downside/investor-observation-map/market-style/沿前dispatch。downside正补外盘Universe，避开其原件；investor只拥有IndexComparison与overlay具体块，本轮不触碰；market-style已scope_released，复用宽度/风险不重算，无同写。
+- 界面服务叙事观察层，权威策略两SHA实核不变。root只改WorkspacePage.tsx、FundamentalsPage.tsx必要导入接线，必要MarketStylePanel插槽；新web/src/components/observation-library/唯一分工后分别UI/数据。静态资产web/public/research/observation-library-20261026/仅小型可核既有和新Baker数据。旧宽度/指标来源/交易规则不改。
+- 新资料核验仅Baker，作者页面/原数据/README等至多6次来源请求含失败；先查重，允许作者公开小表≤2MiB，未授权付费/账户/大行情，0新金融收益实验。已有FSI/FINRA原件只读再利用。预计新增本机源码/静态/小记录≤8MiB，剩16GiB，不动旧冻结与外盘资料。
+- root写docs/experiments/observation-library-baker-2026-10-26.md与同名raw、registry本键/INDEX本行及原progress。UI默认收起、新首页选择默认空，稳定ID去重，放首页/收回双向且持久化；有值按来源与日期展示，缺输入保留说明不能虚构曲线。估值须沪深300PE与美国Shiller CAPE准确身份，其他指数缺口单列。
+- 验收：所有原24类候选可查且不重复，优先级及状态清楚；首页增删/刷新/跨tab、坏偏好/保存失败、空态、日期和来源、窄屏、相关测试/build/hygiene；Baker解析及末行独核、真实数值而非仅链接。源码仍在18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享脏区，成果未自动提交，仅自身协调元数据push。
+
+---
+
 # 宽度伴随观察发现交付完成 2026-10-26T14:48:39.751232+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed，仅本有界观察资料发现；scope_released true。
