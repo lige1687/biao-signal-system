@@ -1,3 +1,13 @@
+# 本轮已知沪深股票报价差集执行 2026-10-26T15:21:07.094392+00:00
+
+- task/owner沿原；status active；checked_coordination_sha b0452ae18445d0c015d6a02b7b487d058057278b，相关总协调/dispatch/storage自NFCI登记无变化。本轮 stock_lifecycle_gap 独占新raw/cn-all-equity-plan与cn-all-equity、新外盘result/cn-all-equity；root合同/登记；CN成员与NFCI写者边界不变。
+- 只读核算旧1552之外3975有目标期代码，219复用531840日期，9597351无已存原价生命周期槽位，不保证均有成交。精确价计划5385对象SHA a82c21927407dd521f860a2bd6a6cd84ce43a0f2d4f388f13aaad5c5cdf1bfeb；因子5410对象SHA b953a661b5035e94218d9d736d37a1f9be37dda80571849d77122ec5f7584a67，合10795 BaoStock协议对象，与HTTP分记。248内部断档只诊断。
+- 用户已授权公开资料补齐、去重及外盘保存；先核旧因子查询截止、冻结修订计划，试跑核字段/日期/身份/源状态后继续精确队列。一个限速会话，逐请求持久化、断点跳过成功SHA、错误保留并停批诊断、至多一次修复；不得重复整个历史窗口。
+- 同2GiB外/16MiB内预算复核UUID/容量通过；不复制旧大联合表，保存读取索引。超过预计停止重核，不买数据/取账号/部署采集/跑收益/修改生产/删除。北交所和官方历史身份/成员仍不算齐。
+
+
+---
+
 # 本轮root补充：NFCI已有数据缺口
 
 - status active；owner/task沿原；checked_coordination_sha e719127975e0f45dca03e49522209fc5da0994af；2026-10-26T14:59:00+00:00；补读market-style-observation-20261020与focus-stock-universe-20261024原owner记录。其UI及生产数据不改，新增本批controller-nfci小脚本和外盘新nfci原件，无同写。
