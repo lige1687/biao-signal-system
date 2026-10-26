@@ -1,3 +1,12 @@
+## 2026-10-26T16:53:45.419829+00:00 — eight exact official outDate lifecycle originals
+
+Same owner/task. Existing8effective price objects have exactly one missing supplieroutDate; zeroof8were explainedbyoldofficialbundles. Authorized public-source boundary extension is8exactofficialSSE/CNINFOURLs,8GETattemptsmax,1MiBperobject/8MiBtotalwithinexisting2GiBexternalbudget. Plan cn-outdate-official-source-plan.json SHA b9203d75a9d6e536cecd033aae9ddfa6f36b5b2c8f23023a930460a198ea7b23; execution contract controller-cn-outdate-execution-contract.json; output fixed oldOUT4/cn-outdate-official. Discovery54websearchqueries+1officiallistingopen,0directoriginalGETsofar.
+
+Save response original/headers/status/hash including failures, readcodeanddatesfromoriginal, stop source403/429 withnoalternateidentity/domain/repeatedrefusedendpoint. No quote source calls or expansionto new601028case inthis8objectplan. Closing exactnontrading/delistingday doesnotcloseexitpriceorreturns. Keep oldmissingledgerunchanged; appenddatedevidence. BaoStockv4finitecollector remainsactive single session9843/PID24891; donotinterruptorlaunchduplicate.
+
+
+---
+
 ## 2026-10-26T16:51:43.942628+00:00 — accepted public-universe evidence registered; long queue active
 
 Owner remains 01a1680e-6717-7ce2-9ecb-372a228c1118; task downside-sensitivity-universe-20261023.
