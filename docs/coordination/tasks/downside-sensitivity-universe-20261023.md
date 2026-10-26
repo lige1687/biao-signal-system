@@ -1,3 +1,10 @@
+# 北交所两项目录缺席的生命周期原文 2026-10-26T16:27:19.767297+00:00
+
+同task/owner，checked_coordination_sha 634102764cf8fd54c7f5b402f8e46448387644be。当前353目录与2025年248存量映射对比，920680/920305未见。为防把缺席直接判退市，archive_universe_inventory独占raw/bse-lifecycle与同外盘目录，仅取两公司官方终止上市与最终摘牌原文，具体5个URL/字段/窗口见 docs/experiments/raw/public-universe-deep-completion-2026-10-26/bse-lifecycle/lifecycle-source-plan.json，SHA 585ee391acf5d64ceb25e94cdfca2e8e64fc94f2fc874e74f77945f9ee5e092e；最大5次HTTP，每对象1次、无盲重试、403/429停源，预算沿用2GiB外/16MiB内。不扩大到107个非存量映射代码，不补价格/退出收益、不改生产。网页搜索仅定位并单独计数；原件保存核哈希后才接受日期/原因。
+
+
+---
+
 # 同范围单页续采 v3 2026-10-26T16:20:43.024304+00:00
 
 - 同task/owner，已读协调 c11e7d916de1d847410d91f19fa4cf40b2ad1b00。原 v2 队列、误ok/失败原件保留；修复4/4成功且精确首末日/行数/SHA已读回。
