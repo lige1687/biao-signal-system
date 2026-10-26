@@ -1,3 +1,13 @@
+# Baker读图精简与历史参考带完成
+
+- status completed；scope_released true；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；仅本次图可读性纠正。原表未改，2次作者资料查验，0金融实验。
+- 默认SENT_ORTH历史20/80分位为-0.610619/0.673934，当前历史值0.065648、54.55%中秩、中间区间；原版独立分位及切换均已核。仅回看位置参考，不称官方买卖/顶底阈值。
+- Baker首屏短定义、当前数值/所属月/区间、偏冷/偏热线和色带；长来源折叠。只改observation-library内部，其他指标/共享图/交易规则不变。
+- 12测试、tsc/Vite、hygiene、scoped diff、两版UI/375px通过；主控Python独核分位；console error0，偏好0固定保留，viewport复位，临时tab关闭。raw reading-thresholds/含前版、独核、截图final.png与verification.json；旧报告与manifest保留。
+- 当前源码仅本地未提交；本协调摘要已读回后交付，不做后台继续。
+
+---
+
 # Baker图可读性与历史参考带修正
 
 - status active；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root。用户明确要求减少图旁废话、解释是什么/代表啥/咋看并提供风险机会参考。
