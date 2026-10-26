@@ -1,3 +1,15 @@
+# 数据到位标准与Lei金融存储清理 2026-10-26
+
+- task-id downside-sensitivity-universe-20261023；owner 01a1680e-6717-7ce2-9ecb-372a228c1118/root；status active，仅本轮数据资格复核及用户授权的合适存储清理。完整二十年数据仍未齐，不重跑因子或收益。
+- checked_coordination_sha 895286f7fb9b0f24d184123c178c8b7d46fdcf82；checked_at 2026-10-26T14:29:00+08:00；已读COORDINATION/self/storage-headroom-20261015/mac-local-storage-cleanup/research-dispatch-controller。旧存储负责人完成/阻塞的恢复副本只读保留，不接管旧任务、旧源码和恢复清单。
+- 用户本轮明确允许本机合适材料放外盘、外盘Lei/金融可清理项删除，并结合CleanMyMac。控制者先核准确路径、内容、引用、占用及可恢复性；独立子代理只读盘点，不执行移动/删除。旧冻结原件、活动DB/环境/代码/会话/工作树、唯一本体和重要恢复副本仍保留。新清理白名单在本轮raw中先行记录，未核项不执行。
+- 唯一root写本轮docs/experiments/data-readiness-and-storage-cleanup-2026-10-26.md、同名raw中的controller/closure/manifest、registry本键/INDEX本行及acquired-data-catalog本轮状态链接；readiness与storage-inventory子目录各唯一助手。无其他任务源码、策略、数据库、旧报告变更。
+- 已完成前轮8金融对象104文件5.23MB外盘归档、6既有universe批次和16机构数据文件原位索引；入口docs/ops/acquired-data-catalog.md/json、AGENTS及docs导航。前轮新报告/代码仅本机未提交，不能把本协调摘要当远端已有原件。
+- 本轮验证：按用途给出到位矩阵，核关键清单；盘点后执行有证据的安全处理、保留逐文件回执和真实容量变化；报告登记/API读回/归置。新source下载、效果实验、后台采集、交易均0。CleanMyMac只先查看，初始2.6GB清理结果不是本轮成果。
+
+
+---
+
 # 本轮二十年公开源实际数据补采交付 2026-10-25T18:55:13.203082+08:00
 
 - task-id downside-sensitivity-universe-20261023；owner 01a1680e-6717-7ce2-9ecb-372a228c1118/root；status completed仅本有界公开源补采；完整二十年资料总目标未完成，scope_released false仅保护原件。checked_coordination_sha 87d739aa1a6fafc9843896a0f2ceaa998d43f1a4；checked_at 2026-10-25T18:55:13.203082+08:00；已读COORDINATION/self/dispatch及focus-stock展示收尾增量、沿前相关任务，最新fetch无新差异，无同写。
