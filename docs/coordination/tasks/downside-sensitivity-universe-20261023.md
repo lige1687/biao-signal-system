@@ -1,3 +1,18 @@
+## 2026-10-26T17:30:58.513572+00:00 — old-source integrity registered; interior-date supplement prepared offline
+
+Same task downside-sensitivity-universe-20261023 / owner 01a1680e-6717-7ce2-9ecb-372a228c1118, active. checked_coordination_sha fd3fba13e2756c98be094be62363e6ad3e825726; reread COORDINATION, self, research-dispatch-controller, research-utility-review-20261012. No other-owner conflict; current original collector remains solely stock_lifecycle_gap. Shared HEAD remains 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9; data/report changes local, not remote reproducible.
+
+Registered qualification_addenda cn-legacy-source-and-interior-date-audits-20261027 in docs/ops/acquired-data-catalog.json/md; preserved financial12, universe16, continuation5 and latest report. Six external copies SHA readback; receipt RAW4/controller-source-audits-registration-receipt.json. 2238 v5 nested old JSON pointers exist and match fileSHA, 67676619 bytes read; this is not old price-union content qualification. cn_gap_completion now checks only missing offline content/identity/calendar constraints in cn-legacy-union-content-qualification outputs, no source requests.
+
+Interior audit independently confirmed 46codes/248windows/4729 calendar slots, zero intersection with original5385 raw3 windows and previous296 relevant exact-day attempts. 641 have oldadjustflag2 status1,18 status0,4070 lack reviewed continuous daily source. Audit cff19182718b0d23764df5afcc5e6de6a3bde63dfe880d6d2bcd522cfee3b104 includes proposed248smallwindows/4711dates after excluding18suppliernontradingdates; adjustment basis and unknowns remain explicit.
+
+us_gap_completion owns only RAW4/cn-interior-supplement-plan/ preparation and OUT4/cn-interior-supplement/ future execution output, no current network authorization or automatic scheduler. Scope: original2006..20261023 missing raw3 basis, publicBaoStock, max248one-shot objects,0retry, max22sessions/window; no currentcollectorchange/secondlogin. Before execution require root acceptance, originalPIDexit + entire12080v3terminal/1recovery complete withoutsourceerror, re-dedup against exactsource dates and freshfixedUUID/reserves/budget. A duplicate or missing prerequisites aborts. Source-normal missing remains unknown;18status0 not fabricatedraw3quotes. Overall2GiBexternal/32MiBmetadata bounds unchanged. HTTP487batch/610priorinclusive unchanged; proposedBaoStockobjects not yet attempted.
+
+No fulltwentyyeardata completion, effects/backtests, production, trading, deletion, paidservices, authchanges or scheduledtasks. Frozenreports/sources remain unchanged. Main finite collection PID24891/session9843 still active at observed 2026-10-26T17:30:58.513572+00:00; postprocess remainsv5 only after original queue completion, then independently qualify union and new supplement separately.
+
+
+---
+
 ## 2026-10-26T17:18:21.284749+00:00 — v5 postprocess correction and seven official delisting dates accepted
 
 Same owner01a1680e-6717-7ce2-9ecb-372a228c1118/task. Registered docs/experiments/cn-price-integrity-and-delisting-dates-2026-10-27.md SHA 2de6d9e60845ebfbe94113188437401ff32186837e3aaa69d6e15e2136ab2346 and price-integrity-coverage-manifest SHA bb3fdf354e282528b729f297f5073d41ca3de34ffe02a3d2f145b04db1e63c50; API exactMarkdown/pendingfalse/health/scopedhygiene passed. Catalog now has latest active_acquisition_jobs pointer to runtime-handoff-v5.json. Prior financial12/universe14/continuations4 records preserved, new2entries (dateoverlay+parentreadingindex),13externalcopiesSHAreadback.
