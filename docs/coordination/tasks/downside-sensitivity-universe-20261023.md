@@ -1,3 +1,24 @@
+# 2026-10-26 公开Universe缺口继续补齐与外盘扫描
+
+- task_id: downside-sensitivity-universe-20261023
+- owner: 01a1680e-6717-7ce2-9ecb-372a228c1118
+- status: active
+- checked_at: 2026-10-26T12:25:39.147796+00:00
+- checked_coordination_sha: 4881f8c45d2660322f87a0dc6a111f8284df990c
+- 实读: COORDINATION.md、本任务、research-dispatch-controller、mac-local-storage-cleanup；既有53月/3月/美国63缺月结论保留。
+- 用户授权继续补缺口，核实CleanMyMac外接盘扫描。沿用旧59对象、近20年真实生命周期范围与免费公开来源，不重下已有资料。
+- 本轮问题: CN正式成员及已登记价/调整缺口，US持仓缺月及SPMD早价，外盘扫描候选是否有可核实金融重复。
+- 唯一写者: root controller与报告/目录自己的增量；CN子任务仅cn；US子任务仅us；数据大文件仅外盘分配目录。
+- 新本地目录: docs/experiments/raw/public-universe-gap-completion-2026-10-26
+- 新外盘目录: /Volumes/win+mac通用/LeiSignal-新实验结果/public-universe-gap-completion-20261026/public-universe-gap-completion-20261026-20261026T202539-2095632ae60b/result
+- 基线: data-readiness-and-storage-cleanup-2026-10-26与acquired-data-catalog。
+- 不改旧冻结、不动活动环境/数据库，不跑新因子收益、不接付费服务、不扩大权限。CleanMyMac先只读扫描，不能把扫描候选视为删除许可。
+- 完成条件: 真正新增原件与记录的前后差额、SHA、来源/当时可得/剩余缺口；公开无法补的准确边界。旧尝试账本累计保留。
+- 当前成果仅新合同与存储预检，尚未取新数据；研究产物未提交/推送，协调状态单独同步。
+
+
+---
+
 # 2026-10-26 数据到位审查与存储维护完成
 
 - task_id: downside-sensitivity-universe-20261023
