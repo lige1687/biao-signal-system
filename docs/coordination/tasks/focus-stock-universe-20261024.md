@@ -1,3 +1,13 @@
+# 宽度伴随观察模型的有界发现 2026-10-26T14:42:57.556202+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active，仅当前用户要求的市场/基本面观察资料广泛查找和取舍。
+- checked_coordination_sha 6c9fab08026e0e9ad2f3b96f856668cb99de1727；checked_at 2026-10-26T14:42:57.556202+08:00；已读 COORDINATION/self/downside-sensitivity-universe-20261023/market-style-observation-20261020/investor-observation-map/external-quant-resources/research-dispatch-controller。downside新任务只读数据资格及存储清理，本轮不碰数据目录/数据目录索引/源码；无同写。旧投资者50组地图与市场环境更新仅复用，不接管旧负责人。
+- 唯一root写 docs/experiments/breadth-companion-observation-discovery-2026-10-26.md、同名raw中小记录、registry仅本键/INDEX仅本行、原progress；三个既有子代理只读分别盘点市场内部/基本面/现有接入，均0网络/0写入。
+- 原目标是能与宽度一起日常解释市场的独立信息，不将权威定义视为预测有效。不做新收益实验、下载大数据、产品改动、生产/交易或自动采集。复用现有50组图谱与昨日FSI/VVIX、FINRA等原件；本新问题最多6次外部原始资料请求含失败，0实验，新增本机小记录上限2MiB，已核18GiB剩余。
+- 基线为已有价格/宽度、VIX/HY OAS、估值/宏观与MSCI风格。验收为金融含义/数据频率/新增信息/反例/真实接入与资格状态齐全、形成常驻优先清单及完整候选表、来源账与独立核查、报告登记读回及归置通过。结果仍留当前工作分支18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有脏区，不自动提交成果；仅协调元数据push。
+
+---
+
 # 研究总览指标参考与模型身份交付 2026-10-25T23:35:56.764861+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed本轮有界解释/展示；scope_released true。checked_coordination_sha b3b9eb4c5e1828f8d538c35cdd6a101a6c05d220；checked_at 2026-10-25T23:35:56.764861+08:00；最后fetch无其他增量，已读任务集合与冲突决定沿本轮scope。
