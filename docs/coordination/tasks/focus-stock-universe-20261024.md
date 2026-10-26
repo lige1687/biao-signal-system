@@ -1,3 +1,16 @@
+# 机会风险阈值依据审计与历史窗口修正 — active 2026-10-26T22:24:19.163940+08:00
+
+- task-id: focus-stock-universe-20261024；owner: 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active。
+- checked_coordination_sha: 834a1f3d481d560b1f4958dbb77e1f77f6c27f79；checked_at: 2026-10-26T22:24:19.163940+08:00。已读COORDINATION/self/downside/investor-observation-map/market-style/research-dispatch-controller，增量仅downside公开历史取数，无同写；investor保留IndexComparison及其overlay具体块，本次避开。
+- 用户要求所有机会/风险/阶段顶底值有支持该用途的机构来源或数据证据；取消自定义20/80机会暗示，纠正Baker月频用途，VIX开放已得长历史、HY真实三年限制。服务基本面叙事层，不改技术判定/规则账本。
+- 范围：observation-library/projectionView.tsx、BakerReading.tsx、projectionSources.ts、catalog.ts、metricData.ts及本组件必要样式/依据文件；market-style/MarketStylePanel.tsx风险历史；trend/zones.ts共享叙事阈值定义及直接消费者中相关文案（BreadthComparison、MacroSnapshotPanel、MarketBreadthSnapshotPanel、FundamentalsPage仅自身旧阈值文案）；不得改IndexComparison及其他owner图表块。
+- 分工：root统一投影/Baker/依据报告；universe_evidence只MarketStylePanel风险历史；turning_point_compute只zones及BreadthComparison相关阈值/描述；model_source_hunt只独立查漏与只读复核，后续明确分配前不写。root最后处理首页重复定义。
+- 资料：已复用原研究/作者README，5次公开来源核查CBOE/S&P/FRED/原论文含重复；0新金融回测/寻优，原冻结负结果保留。FRED2026-04起HY公开源限制3年，不能靠UI虚构历史。审计新产物docs/experiments/observation-threshold-evidence-2026-10-26.md及同名raw；registry仅自身键/INDEX仅自身行；自身progress追加。
+- 验收：每个保留参考的定义/对象/单位/来源/用途可查；无无据机会/风险/顶底线或色带；VIX全历史可切换、HY范围明确、Baker月频说明；相关单测/tsc/Vite/归置/真实桌面窄屏截图。
+- branch codex/factor-unit-research-20260915；base 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享脏区。源码仅本地未提交；本轮不重启后端、不部署、不删资料、仓外不写。内部空余12GiB，预估新小产物<8MiB。
+
+---
+
 # 统一价格与指标对照 — completed（本地显示） 2026-10-26T22:08:05.215615+08:00
 
 - task-id: focus-stock-universe-20261024；owner: 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root。
