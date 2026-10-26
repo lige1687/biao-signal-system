@@ -1,3 +1,14 @@
+# 全沪深数据完整性修复与北交所目录进展 2026-10-26T16:13:43.156796+00:00
+
+- 同 task downside-sensitivity-universe-20261023 / owner 01a1680e-6717-7ce2-9ecb-372a228c1118，已读协调 da27cc64fe09d9e76791cf15bf3731363bb20a2e；独占文件范围不变。
+- 长队列已因 BaoStock10002007 停止并正常logout。离线核567终态，sh.600689被SDK吞掉分页超时后返回2000行且错误码0，原ok应追加incomplete/superseded；原件/账目保留。7个其他尾日短恰等于供应商outDate，仅标边界未知。
+- 一次诊断修复：精确4子窗见 docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/repair-request-plan-v2-20261027.jsonl，SHA 5d0723448c45fe7db682525361ea516fa78f93affd2bde8fedc0a02f608c864f；合同 docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/repair-contract-v2-20261027.json，SHA 189ff7fc7b8be9bbe4fb98e75d8a98f7c4227f48f54ac443edeedbe7e790af3e；完整性审计 docs/experiments/raw/public-universe-deep-completion-2026-10-26/cn-all-equity-plan/source-integrity-audit-20261027.json，SHA 2e68055fac805e9197674e4f20da192506f0454606f9692334c7ab282fc24b3d。600689仅补缺尾段，分675/675个交易日；600691原失败窗分973/729。旧3窗草案保留但不执行。
+- 修复使用全新独立登录；每对象不超过1000交易日，捕获SDK静默分页失败与末日差异；任一修复失败停，不盲重试。验证后才允许有证据续跑未执行剩余对象，成功/失败/疑似截断分别计数。没有因子/生产变动。
+- 北交所正常浏览器产品页目录已读18页353唯一代码，当前快照而非历史PIT；代码切换v3已独核248条（6试点5月6日、242其余10月9日）。浏览器操作另账，不冒充已精确计数HTTP。数据正在外盘保存，登记尚未完成。
+
+
+---
+
 # 北交所目录与代码连续性新入口 2026-10-26T15:42:37.207199+00:00
 
 - checked_coordination_sha 33957cd86c30e851c1c9050bd9574c06de33b048；同task/owner。archive_universe_inventory已完成ANFCI，独占新增raw/bse-directory与同外盘result/bse-directory，root登记；不与全沪深行情及中证离线审阅混写。
