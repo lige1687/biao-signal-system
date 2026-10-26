@@ -1,3 +1,17 @@
+# 机会风险阈值依据审计与显示修正 — completed 2026-10-26T22:51:54.725378+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed；scope_released true（仅本轮）。
+- checked_coordination_sha bc7fe43a0dc53b7ebeb7aff2cb2eabb13c8ecff1；checked_at 2026-10-26T22:51:54.725378+08:00。交付fetch新增downside公开身份批次验收，已读diff，与本轮14个前端路径无冲突；沿本轮已读COORDINATION/self/investor/market-style/dispatch等记录。
+- 用户要求已落地：统一投影/Baker撤掉无据20/80色带；VIX/HY/估值/利率/融资旧机会危险线撤回，宽度仅按需数值查询默认关闭。定义线含明确用途及来源，原技术数值规则不改。Baker月度背景，未称顶底模型。
+- VIX默认5年可选至全部，实页2006-10-31—2026-10-26共5029点；HY786点2023-10-24—2026-10-22，明确FRED2026-04开始三年公开限制。显示范围/可用范围分开。无新后台数据或插值。
+- 额外必要纠错：共享zones、旧Snapshot（当前未挂载）重复经验阈值清除；Fundamentals本页旧描述/硬编码线按新依据改，未改IndexComparison及其图表实现。旧ERP建议转中性既有审阅入口；旧HY API >6%警戒三个消费点用已核说明替换，后端未动。
+- 报告 docs/experiments/observation-threshold-evidence-2026-10-26.md，SHA 9d20a9e7d99df01d398bd4719b73ed6dfd87bdab7dad6b175ade375ac3629a07；同名raw含修改前源码、6源核查账、3本地API字节与SHA、code-manifest、17tests/tsc/Vite、实际页面/375px/截图。registry只自身键、INDEX只自身行读回旧项未丢。
+- 独立复核完成，17tests、build exit0、归置及限定diff通过；六模型/Baker两版/纳斯达克全期间/PMI来源/宽度默认关闭/旧叠图和利率页面实核；首页0固定保持。原风格/五问/本地波动API404保留未修；2Router提醒与1ECharts disposed提醒记录。失败（错误tsc目录、未引用旧卡、shell回执变量、旧HY说明漏改、导航误落）均保留及纠正，未降低验收。
+- 0新金融回测/寻优/交易/自动采集/部署；6次明确外部网页查询，API底层源请求未知不计0。原Baker/reused资产SHA未变。主树codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；源码报告raw仅本地未提交，远端不可复现，只推本task协调元数据。raw2.2MB；无删除/仓外写入，原冻结保留。
+- 后续仅按用户新反馈/相符新证据恢复特定用途，本轮结论不等于全市场所有模型无效；没有后台续跑。
+
+---
+
 # 机会风险阈值依据审计与历史窗口修正 — active 2026-10-26T22:24:19.163940+08:00
 
 - task-id: focus-stock-universe-20261024；owner: 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active。
