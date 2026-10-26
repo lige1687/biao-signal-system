@@ -1,3 +1,12 @@
+# Baker图可读性与历史参考带修正
+
+- status active；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root。用户明确要求减少图旁废话、解释是什么/代表啥/咋看并提供风险机会参考。
+- 本轮仅observation-library目录中Baker局部展示、新threshold helper/chart和必要view精简；不改共享MarketTrendChart、后台、其他页/数据原件/交易规则。已读协调增量仅downside外盘采集，无同写。
+- 已核两策略SHA未变；沿前次UI权限服务叙事观察层。官方阈值依据只读原件+2次来源，0新收益实验。若作者无可用固定交易线，以当前版本全历史20/80分位作回看高低参考，不能标为经验证机会/风险信号；明示日期、范围、分位规则。
+- 验收为短文案、实际读数+当前位置、两条有数值的高低参考线、切换版本同步、空值/真0/缩放不改阈值、原pin不破坏、浏览器截图。新回执追加原raw下reading-thresholds/，不覆盖前轮报告与manifest。
+
+---
+
 # 观察库与Baker历史展示验收完成 2026-10-26T21:01:35.883962+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed，仅本轮可收纳展示和Baker来源核验；scope_released true。
