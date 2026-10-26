@@ -1,3 +1,12 @@
+# 北交所目录与代码连续性新入口 2026-10-26T15:42:37.207199+00:00
+
+- checked_coordination_sha 33957cd86c30e851c1c9050bd9574c06de33b048；同task/owner。archive_universe_inventory已完成ANFCI，独占新增raw/bse-directory与同外盘result/bse-directory，root登记；不与全沪深行情及中证离线审阅混写。
+- 已存沪深5224目录无北交全表；CSI2000内39个现行920码与北证50有25交集，但没有新旧代码crosswalk。仅研究缺失的全目录及2025代码变更连续性，不重复旧BSE POST307失败。精确两新请求见controller-bse-scope-plan.json：CNINFO官方公开公司页、CICC公开转载代码变更提示PDF。后者只作转载证据，不称交易所全目录。
+- 若公开页声明更多数据/JS路径，先存精确计划、核重复再执行少量必要请求；403/429停止对应源，不绕挑战、付费或账号。新对象仍同2GiB外16MiB内；已有39/50名单仅复用，不伪造旧代码，不新增自动任务。
+
+
+---
+
 # 价格尾窗修订及金融条件可知时点补充 2026-10-26T15:26:38.573093+00:00
 
 - checked_coordination_sha 32ab8b194c9e73518908afe7a2604fa9f9b83353；同一task、owner与写者范围。原价格5385计划不变；因子5410计划修订v2 SHA 011c3e3f65d0ce5fa70bbbeb60ae52e208e0d888b4060a764553ed62b795ce1f，逐条核旧请求截止后仅两只lowfreq尾窗从2026-02-01改2026-01-16，避免漏半月；原合同/计划留审计。此修订实际执行合同为controller-all-equity-execution-contract-v2.json。
