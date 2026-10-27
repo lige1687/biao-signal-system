@@ -1,3 +1,18 @@
+## 因子请求中断后一次性恢复授权（2026-10-27）
+
+唯一任务/owner保持 downside-sensitivity-universe-20261023 / 01a1680e-6717-7ce2-9ecb-372a228c1118。原v5在2026-10-27 05:14:02启动sz.000716调整因子后遇连接超时/reset，终态写入被储备检查拦截；无该对象原件/.tmp。continuation冻结8441终态、五旧账均已独立核SHA，两个历史started-only分别是已恢复600726与本次000716。不能从事后free推断当时哪个盘触发储备门槛。
+
+同一外盘VolumeUUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9、同实际OUT4路径，运行设备号16777238→16777239已重核，storage addendum SHA078a788f810e740c2542c29d085ef374d718a13cb9f832575b7a17c2e62859f3。旧storage-plan不改；整个OUT4总逻辑上限2GiB、本机RAW4小元数据32MiB、内外储备5/10GiB不扩。没有删除或重拉成功源。
+
+根依据用户继续补齐授权，本次仅授权唯一one-shot入口 controller-launch-factor-recovery-v6-once.py SHA5975b3ed7fbbc5f08649a3abbb43e76ec5dcd68c6e915326aeb4ef41f162537c 固定一次 --max-new 3639。入口以独占start marker禁止重复启动，最多一个新源会话；底层v6直接/分批运行不在授权内。先一个000716 factor-recovery1独立账本，成功才继续3638从未started的固定因子对象。1Hz/50s/0自动重试，任何新异常停；只在外盘身份/储备/预算仍合格时保存已启动请求的小终态，内盘低不得启动后续请求。
+
+v6采集器SHA5a45280b57dff94bf2b115befbe767fb5d812fbee40fb67b6b8146e0b1b0962b；contract SHA217722dd1194b088ccd067ce5d808d506b5b79954b63b523d97f57e8b89051d4；3638清单SHA1c60e0769186c714fd12046313d0e998986ebc004e81f46558f5541cbd9d495b。独审源f7a11c3a45c271f39729b5d6086af1df0a9032e6b52aeb787d69403629c1c36d、launcher6b1516ddce630b98ee57628a16b0f57cb3472d1d7ad70fd85c7d47a330cdb7c0。根仅启动这一次入口；collector运行期间仍唯一外盘写者，不另取源/写派生。
+
+最终须新六账本审计/索引/独立v8验收，当前不得执行旧v7或错误的初版verify_v8；后验收修正版正在独立复核，未提升研究资格。248个内部补段、BIS5序列仍在后续队列。SEC53个新ZIP仅发现/提案0下载，5GiB总预算已问用户尚待答，不将其混入当前2GiB授权。WorkBuddy已解锁但输入自动化仍失败，本轮0新问题/0数据；不绕过权限。没有生产/收益实验/付费/自动化/强推/金融数据删除。
+
+
+---
+
 ## 2026-10-26T19:27:20.512858+00:00 — ALFRED versions registered; exact transport recovery authorized
 
 Same owner01a1680e-6717-7ce2-9ecb-372a228c1118,task active. Branch codex/factor-unit-research-20260915 HEAD18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 unchanged. Checked coordination ef691b729c37de87eff74d4fee3c68cca3dc9e2b; read COORDINATION, own/dispatch/utility, no ownership conflict. Root owns catalogs/reports; stock solecollector/index; cn quality/final verifier; method interior collector. Only coordination metadata pushed, all data/reports remain local/external.
