@@ -1,3 +1,14 @@
+# 沪深300头部ETF规模占流通市值候选 — active 2026-10-27T12:54:51.958389+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；checked_coordination_sha 6d8c610239100cccd172a2687936940c1b61d1a2；checked_at 2026-10-27T12:54:51.958389+08:00。已读COORDINATION/self/investor-observation-map/market-style/downside/dispatch；downside当前股票和BIS采集及目录，不触其路径/成果；investor保留ETF费用、IndexComparison等原范围，此轮只读复用单份原报告，不修改该任务的文件或接管份额研究。
+- 用户确认目标是跟踪沪深300的头部ETF基金；拟以头部基金净资产合计÷同期沪深300成分股流通市值作观察，具体头部选取规则和连续资料不足须明确，不误写自由流通市值/实际持股占比或资金流；与原ETF份额分开但同属C13，收纳观察库而非强加现有对照图。
+- 服务叙事观察层，不改技术策略/规则/后台/用户首页选择。现有合格数据不足画曲线，不构造假值；先新增资料待接候选，标两端缺口与不可固定首页，保留现有候选。
+- 唯一写者root：web/src/components/observation-library/catalog.ts只追加本条与阅读排序；docs/experiments/csi300-etf-float-cap-qualification-2026-10-27.md及同名raw小记录；registry仅本键、INDEX仅本行、focus自身progress。其他agent只读。避开IndexComparison、etf-relations、数据目录及其余owner块。
+- 来源预算：最多6次公开来源查询/打开含失败（本轮已用6，具体账保存）；复用510300已存官方报告及研究，无新金融回测/外盘写入/安装/付费/交易/采集。两策略源已读SHA与确认值一致；内盘可用约9.43GB，预计新小文件<0.5MiB。
+- 验收：对象准确、计算口径/风险说明、缺真实资料明确不可画图/不可冒充当前值、与ETF份额区别；目录入口与搜索、不可置顶、首页既有偏好不变；相关测试、构建与实际页面读回。源码未提交未推送。问题因核心历史缺口仅可完成资料资格和待接展示，不称曲线已完成。
+
+---
+
 # 机会风险阈值依据审计与显示修正 — completed 2026-10-26T22:51:54.725378+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed；scope_released true（仅本轮）。
