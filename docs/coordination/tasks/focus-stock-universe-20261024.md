@@ -1,3 +1,16 @@
+# 沪深300头部ETF规模占比 — paused 2026-10-27T12:59:09.150212+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；execution paused / source budget exceeded, evidence inconclusive；UI占位已验收，真实比例与曲线未完成。scope_released true。
+- checked_coordination_sha 07fb7373da94414daed4ba4ca99ffa646d414208；checked_at 2026-10-27T12:59:09.150212+08:00；交付前fetch与登记07fb7373相同，无新增冲突。沿登记已读COORDINATION/self/investor/market-style/downside/dispatch；避开对方ETF及数据目录文件。
+- 用户确认跟踪沪深300的头部ETF。独立候选沪深300头部ETF规模占比已进观察库C13、readable=false、不能置顶；含义是所选ETF净资产合计相对指数成分普通流通市值，不等同实际持股/净流入。缺历史名单、净资产序列及同期指数流通市值合计，无法计算；不画虚值，不标顶底线。
+- 复用510300 2024Q2官方PDF，SHA 83f876b4bc0eaea24f4f95944a423e6d5d51c4b3876c54a12912cd52749d2d53：单只净资产2118.19亿，股票投资2091.89亿；并非头部组合。中证PDF正文打开超时、上交所两动态页面正文无数据，搜索索引单日值未冒称核实；未证明合法批量历史或穷尽。
+- 预算纠正：原登记错误把批量搜索/打开合并计数，本轮实际5次web工具调用，12个单独查询或打开操作，超过默认6次预算6次；1次失败。已停止外部查询，未重置预算。逐项/source-ledger及state在raw/csi300-etf-float-cap-qualification-2026-10-27/。
+- 报告 docs/experiments/csi300-etf-float-cap-qualification-2026-10-27.md SHA 310a42b82168b8879df391ba82d07e60949af7aac62a344a872be7c8eebed61e；registry本键/INDEX本行读回旧键保留，自身progress追加。唯一源码变更是catalog.ts一条未就绪项，未改数据API/技术规则或首页偏好；无新金融数据下载、回测、仓外写入、部署。
+- 4项定向测试、tsc/Vite、归置通过；浏览器真实搜索、展开、待接与首页按钮禁用核对、截图pending-item.png。首次新测试目标不存在按预期失败，添加后通过；2Router warning+1 ECharts disposed warning已记录。
+- 代码报告raw均仅本机未提交；branch codex/factor-unit-research-20260915 @18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享脏区；只推自身协调元数据。恢复需明确授权增加来源预算，并取得可核基金集合/净资产历史与同日期流通市值；已有12操作不清零，无后台续跑。
+
+---
+
 # 沪深300头部ETF规模占流通市值候选 — active 2026-10-27T12:54:51.958389+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；checked_coordination_sha 6d8c610239100cccd172a2687936940c1b61d1a2；checked_at 2026-10-27T12:54:51.958389+08:00。已读COORDINATION/self/investor-observation-map/market-style/downside/dispatch；downside当前股票和BIS采集及目录，不触其路径/成果；investor保留ETF费用、IndexComparison等原范围，此轮只读复用单份原报告，不修改该任务的文件或接管份额研究。
