@@ -1,3 +1,14 @@
+# 市场观察排序与前端密度 — completed 2026-10-31T00:22:30.654733+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed仅本轮UI；scope_released true。原ETF数据资格仍paused/inconclusive，12次来源操作不清零，本轮0新增外部研究查询。
+- checked_coordination_sha 9b09b9a35dc87bcdbe41d9081d7c3cb869c85352；checked_at 2026-10-31T00:22:30.654733+08:00；交付前新增downside-sensitivity-universe-20261023仅资料质量复核，已读，无UI同写。已读范围沿开工及补注，避开research-method-practice的OverlaySection与其余owner代码。
+- 常用/周度/慢周期/历史参考与待接入分组，目录、首页、对照菜单一致；34条全保留/15可读；沪深300ETF占比待接首项、不可pin。主图前置，背景复盘按需挂载；精简行文、保留市场标签/日期/依据、手机跳转不遮标题。排序不声称预测能力，不新增金融阈值。
+- 6源码文件SHA/差异/前版本、截图与验收在docs/archive/handoffs-plans/focus-momentum-display-20261025/ui-priority-20261031/verification.json及README.md；原focus progress追加。源码仍仅本机未提交/部署，base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享脏区，协调元数据不代表源码交付。
+- 15已有定向tests、最终tsc/Vite836模块、归置与限定diff通过；原chunk-size warning。实测1280桌面/390手机无横溢、搜索/市场筛选/缺数据禁pin、首页Baker先pin后VIX仍统一顺序、刷新保留、收回恢复原0项、指标切换保留价格选择、背景展开。Luna low独立只读复核无实质回归，浏览器console error0。
+- 两次UI选择器定位失败已用新DOM纠正；协调补注首次前置断言识别他方新增记录，读取无冲突后基于新SHA正常推送。原五问/本地波动/NFCI等后台请求失败仍在，展示明确保留；本任务不修服务或重新研究。用户视觉待反馈。
+
+---
+
 # 展示整理范围补注 — active 2026-10-31T00:19:02.090141+08:00
 
 - task/owner沿原。checked_coordination_sha 579843c8b056515e35e3d06cd4a899fcd58edab6；checked_at 2026-10-31T00:19:02.090141+08:00；fetch增量已读research-method-practice-20261031与strategy-account-bridge-20261020，明确避开自身路径，无同写；其余读取/冲突决定沿本轮。
