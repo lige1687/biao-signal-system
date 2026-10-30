@@ -380,3 +380,10 @@
 - 系统待升级已GET83条，尚无同名风格/环境面板；先准备准确登记内容，数据库若在仓外按用户边界待确认，不擅自修改。无定时器/主动通知/交易。
 - 冲突决定：复用旧VIX/宽度/信用与新策略组合历史/前向成果；新报告及本键无已登记同写重叠。不改他人任务、不将本轮来源核查当旧任务恢复预算。
 - 当前：官方资料与本地核查完成汇总中。下一步：完成统一报告/需求覆盖、登记与必要验证，保留未验证取数/许可。
+
+
+## 2026-10-31 前端修复集成增补
+- 原任务持续执行，唯一写者分配明确：root新增只读研究路由接线 src/lei_signal/api/research_surfaces.py、factor_workbench/intake.py、market_style_observation/evidence.py只替换组合读源，Ops已有接口带组合快照日期（copilot/ops.py、api/schemas.py、web/src/types.ts）及对应回归。
+- reports代理原文件已交回；第二批唯一写PortfolioPage/PortfolioToday/FwdLedgerPage及局部URL/缺口分组helper已交回root。危机代理补只读strategy_portfolios/readonly.py及对应测试，原冻结service/server/ledger源码不改。导航代理补自己的supervisorAvailability测试夹具后交回root。
+- FactorWorkbench.tsx另一owner的证据卡仍保持独占，不交写；已准备研究条件和密度修复待其释放后串行集成。其ResearchUseReview不移动/不改判。
+- 已通过当前相关单测/类型初检，真实页面验收进行中，未标完成。没有发起新金融实验、模型解读、交易或仓外数据库修改；主服务受控重载采用原有com.lei.backend启动配置，不新增启动项。
