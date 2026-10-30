@@ -11,3 +11,5 @@
 - 验收：真实旧尝试只读返回/缺项与已见历史不升级；账户缺字段拒绝推断、同现金不可重复使用；估值同对象配对日期与失效边界；10/24原证据逐数对应；相关单元/CLI/真实页面、归置及源指纹读回。
 - 当前完成只读能力盘点；代码未改，未跑新市场试验；0新源请求/拟合/交易。原预算封存。小代码/证据预计<4MiB，存储fresh>5GiB；大结果0。
 - 下一步：登记读回后实施上述有限增量，独立验证、原报告归档和剩余依赖记录。仓外OKR DB若位置不在repo则只准备更新内容，不越权写。
+
+- 范围增补（实现必要回归）：tests/unit/test_fundamentals.py仅test_overlay_history_merges_sources_with_degradation补估值mock，由evidence_gaps唯一写；避免旧测试意外联网。已核strategy-account-bridge最新strategy-construction-netting-2026-10-31研究资金/评分与对向订单净额，本方不重复。focus-stock截至051293c8的观察UI范围已完成释放，仍不改其文件。
