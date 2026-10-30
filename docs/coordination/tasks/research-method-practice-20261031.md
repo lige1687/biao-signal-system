@@ -1,3 +1,15 @@
+# 首批有界实施完成，源码范围释放 — 2026-10-31
+
+- task-id research-method-practice-20261031；owner原root；status completed_bounded_implementation；scope_released true。FactorWorkbench.tsx本轮仅新增ResearchUseReview import与比较区一行，已完成验收，market-style可串行继续其已授权容器接线；请保留证据卡和其SHA绑定。不是整个六方向/五操作研究结案。
+- checked_coordination_sha 074300e1；已读market-style最新只读研究路由/前端修复增补、strategy-account本轮组合净额结案、downside数据审计结案及ETF收益链启动；无同写。没有给其他线程发送消息，协调元数据仅本任务追加。
+- 最终新增attempt_review.py/account_input_review.py及对应tests、ResearchUseReview.tsx与FactorWorkbench两行接线、workflow usage及新report/raw。观察页已有PE/CAPE被真实UI核实，新增重复叠图移到handoff原型留痕；service.py/FundamentalsPage.tsx/preparation.py恢复本轮前SHA。没有重建已有能力或重跑其他owner实验。
+- 定向Python73通过；账户格式后25通过；证据卡来源5例、既有投影8例通过；Ruff E/F/I、TypeScript/Vite845模块、归置通过；原报告SHA/真实UI/资料库API已核。独立审查的缺头/来源不完整/估算账户绕过/卖出来源/重验旧缓存均已修正。
+- 既有preparation严格source schema对French url/vintage拒绝，13失败/1通过，已单列；新CLI不依赖该路径。真实29项估值快照缺确认现金/可卖份额与结算，不能当可执行账户。0新金融效果实验/参数搜索/交易，原策略文件未改。
+- 报告docs/experiments/research-method-practice-2026-10-31.md已registry/INDEX/API逐字验收；源码仅本地未推，base18e64fa6加共享脏区。证据指纹与测试见同名raw/verification.json，主工作区未切分支。
+- 最后待办追加库在仓外，按用户明确新要求已准备3条具体note并请求许可，未经许可不写；不变更目标状态。若后续许可，仅原OKR三项追加。未启动后台工作或自动跟进。
+
+---
+
 # 研究方法与实际操作补强
 
 - task-id: research-method-practice-20261031；owner: 01a178be-0af9-7801-b956-dcc39a312850/root；status active；scope_released false。
