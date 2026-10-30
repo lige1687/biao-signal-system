@@ -1,3 +1,11 @@
+# 展示整理范围补注 — active 2026-10-31T00:19:02.090141+08:00
+
+- task/owner沿原。checked_coordination_sha 579843c8b056515e35e3d06cd4a899fcd58edab6；checked_at 2026-10-31T00:19:02.090141+08:00；fetch增量已读research-method-practice-20261031与strategy-account-bridge-20261020，明确避开自身路径，无同写；其余读取/冲突决定沿本轮。
+- 手机390px无横溢；图表跳转标题被导航遮挡，新增唯一样式路径web/src/components/observation-library/projection.css，仅窄屏滚动留白与独立宽度卡嵌入布局。此前误列market-style.css实际不修改；准确变更6个源码文件（原5加projection.css）。
+- 已验库排序、待接搜索展开/禁pin、首页逆序置顶按统一顺序显示、刷新保留及收回恢复0项。15现有测试/TypeScript/Vite/归置通过；Luna只读复核无回归。下一步仅修窄屏、验收背景折叠和完成记录。
+
+---
+
 # 市场观察展示排序与密度 — active 2026-10-31T00:12:31.661452+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。
