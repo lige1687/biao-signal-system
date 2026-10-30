@@ -1,3 +1,11 @@
+# 集成验收增补 — 2026-10-31
+
+- research-method-practice-20261031 已在远端 f23b98b33246f470d84097e1045955c4114f7225 明确 scope_released true，FactorWorkbench 容器按原计划串行接入，保留 ResearchUseReview 原卡与证据绑定。
+- 浏览器发现首页 MarketBreadthBadge 在无合格宽度时仍显示“平”，本方 root 补只读未知状态，与本轮危机资格修复一致；并压缩 CrisisBanner 重复日期说明，不改阈值和数据。root 可写该 badge 与已有危机组件；其余唯一写入分工沿原。
+- 3.13 浮点尾差通过固定原 metrics SHA 与仅相关矩阵末位比较兼容，冻结文件/manifest未改。组合只读路由的真实进程超时仍在定点诊断，未宣称完成。无仓外数据或启动项改写。
+
+---
+
 # 前端审查问题按用户批准实施 — 2026-10-31
 
 - task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active；scope_released false。用户批准“可以，按你优先级去做”。基线仍 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 加现有未提交修改，保留他人工作。
