@@ -1,3 +1,13 @@
+# 宽基ETF收益与母指数资料链补齐开始（2026-10-31）
+
+- task-id=downside-sensitivity-universe-20261023；owner=01a1680e-6717-7ce2-9ecb-372a228c1118；status=active / etf_return_chain_qualification。人类已明确“按优先级去做，优先外盘”，并强调来源不限、高质量准确最优先。checked_coordination_sha=63993cefa555173ec16862f63a31fb881547b637。先补P0宽基ETF实际存续期的公司行动、价格、历史母指数和含分红比较链，510300/SPY为首两个锚点，复用既有7境内ETF绑定及美股宽基资料；不恢复旧队列、不改旧收益实验。
+- 唯一root写报告etf-return-chain-qualification-2026-10-31.md、registry/INDEX/catalog及本任务work-progress；CN/US两代理分别仅写raw/public-universe-deep-completion-2026-10-26/etf-return-chain-20261031下对应文件及将绑定的外盘独立子目录。先离线去重，后准确来源请求；另一代理独核数值/资格。最新目录与旧终验复用，来源原件不重复复制。
+- 新输出采用plan_output的etf-return-chain-20261031绑定路径；与原OUT4合计仍2GiB、RAW4仍32MiB，新增预计128MiB外盘/512KiB本机。固定UUID重新核验；无付费、无删数据、无权限变更、无交易生产变更；SEC53扩容仍未批准。全部实际源请求/失败累计记账，不重置旧耗尽源预算。
+- 验收逐件原始内容、分红折算单位/时点、价种与母指数分段、日期唯一性和数值对账，来源冲突保留。某具体区间准入不推断整20年、全部指数或账户效果。开题及来源指纹见该raw子目录brief.json，主工作区不切换。
+
+
+---
+
 # 数据可用性与质量复核结案（2026-10-31）
 
 - task-id=downside-sensitivity-universe-20261023；owner=01a1680e-6717-7ce2-9ecb-372a228c1118；status=completed / bounded_readiness_quality_audit；scope_released=true。checked_coordination_sha=696f3993a71dd1ca6f54ff47234b55867273bd02。本轮只回答数据是否支持后续研究及优先缺口，未宣布全部数据建设完成。
