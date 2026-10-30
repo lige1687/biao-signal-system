@@ -1,3 +1,15 @@
+# 市场观察展示排序与密度 — active 2026-10-31T00:12:31.661452+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。
+- 用户授权：指标放合适位置、按优先级排序、改善前端美观与信息密度。本轮是有界UI整理；0外部金融查询/新研究，沪深300ETF比例资料资格仍暂停，旧12次来源预算不重置。
+- checked_coordination_sha 9193fe9b0a7a3f0d2878f7005fdd411e5e37e67c；checked_at 2026-10-31T00:12:31.661452+08:00；已读COORDINATION/self/research-dispatch-controller/market-style-observation-20261020/investor-workspace-simplification-20261012/investor-observation-map及相关路径grep。无其他同块活跃写者；避开IndexComparison/etf-relations/后端/数据/所有研究结论。
+- 基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有共享脏区；原文件保留，源码仅本地。本轮唯一写者root，Luna low子代理observation_ui_review只读布局复核。
+- 准确写范围：web/src/components/observation-library/catalog.ts、view.tsx、observation-library.css、projectionView.tsx；web/src/components/market-style/MarketStylePanel.tsx、market-style.css仅页面布局；自身docs/archive/handoffs-plans/focus-momentum-display-20261025/ui-priority-20261031/小记录与自身progress。无新依赖/仓外写入/生产变更。
+- 方案：常看风险与情绪在前、周度调查及月度背景在后；历史样本和待接条目单独标识；待接折叠且可搜索，沪深300ETF占比优先置于待接资金项；库/首页/对照菜单顺序一致。保留首页用户选择，不擅自置顶。先主图再长复盘说明，不加机会风险线。
+- 验收：搜索/筛选/展开、缺资料不可置顶、首页放出收回及原偏好保留、对照选择和原日期语义；现有定向测试、构建、真实桌面及窄屏核验。成果供用户视觉验收，顺序不宣称预测能力。
+
+---
+
 # 沪深300头部ETF规模占比 — paused 2026-10-27T12:59:09.150212+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；execution paused / source budget exceeded, evidence inconclusive；UI占位已验收，真实比例与曲线未完成。scope_released true。
