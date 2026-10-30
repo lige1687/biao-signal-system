@@ -1,3 +1,15 @@
+# 中美ETF来源补件、公司行动与母指数口径交付（2026-10-31）
+
+- task-id=downside-sensitivity-universe-20261023；owner=01a1680e-6717-7ce2-9ecb-372a228c1118；status=completed / bounded_etf_source_qualification；scope_released=true。checked_coordination_sha=60d95e6e6149a12535b27275460d3c02f5ce494c。仅本轮有界补件与读取包完成，P0完整收益链及二十年PIT未宣称完成。
+- 来源优先核准确：新增23原始响应8,172,463B（含发现JSON/HTML），全存固定外盘；24直接HTTP=23成功+1已停403，沿旧637计661；网页发现14搜索工具/43query/2open失败另计。没有重启旧队列、重置旧研究预算或重复下载既有原件。SPY136发行人分配1993起、NAV5768日2003起；同源额外15ETF1641分配零GET；51030014现金事件、2012上市前折算、2012—2025年度目标字段；7国内母指数原代码和方法规则核对，H00300早于2006-04-03的56条标回溯；三已知份额变动接完整行情。
+- 真实冲突保留：SPY20211217分配金额1.636431与1.633美元；510300两日报价；2018年报整篇完整性、2026Q4无折算证据及价格复权依据仍缺。SPY支付日再投/应收模型有可解释差异，不能冒充官方算法；NAV/收盘价/报价中点/税后账户收益不混用。return_series_ready=false。
+- 结果 docs/experiments/etf-return-chain-qualification-2026-10-31.md SHA 74ca38bde8752238a60b16386ff31ed84922cb2f0ecd3c5970c549367cb621b8；数据入口 /Volumes/win+mac通用/LeiSignal-新实验结果/etf-return-chain-20261031/etf-return-chain-20261031-20261031T003948-204b5ceb09d0/result/data-package.json SHA 621cef27e1ba7ca869c4a0fc69f8770831fb30fb0c2cedb1cc6d23ef48cd33d5。独立核验3份，含1641行逐行原件映射、三期现金账重算和CN3273日比较；最终验证 /Volumes/win+mac通用/LeiSignal-新实验结果/etf-return-chain-20261031/etf-return-chain-20261031-20261031T003948-204b5ceb09d0/result/controller/final-validation.json SHA 91c8a786a4435bdb2f110448f997a007364e6a87497fc93aef80656b27ffe691。真实报告读取器1条/pending=false/完整正文一致，hygiene及scoped diff通过。
+- registry/INDEX/工作进度/数据目录已增量登记，最新ETF入口latest_etf_data_qualification；目录SHA 034dd254456c68bcd7de9d4f6952cae9fe875bc6a639deffc53421e7e73e5796 与外盘catalog-final副本字节一致，11小元数据副本读回。旧金融15组/重叠universe束16/接续5保留，另增本ETF资料包，不虚增完整池。旧原件及旧审计未改；只本协调任务元数据正常推送，报告/数据仍本机及外盘，未推成果分支。
+- 外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，dev 16777238；本批含快照约10.5MB，旧批加本批约484MB（包含文件系统附属文件），RAW4约30.22MB，原2GiB/32MiB不扩。定时刷新未部署，SEC53仍0下载，0因子/生产/用户数据删除/付费/权限改动。最新获取路径与按来源分版本刷新方法已登记，不承诺退出后后台继续。
+
+
+---
+
 # 宽基ETF收益与母指数资料链补齐开始（2026-10-31）
 
 - task-id=downside-sensitivity-universe-20261023；owner=01a1680e-6717-7ce2-9ecb-372a228c1118；status=active / etf_return_chain_qualification。人类已明确“按优先级去做，优先外盘”，并强调来源不限、高质量准确最优先。checked_coordination_sha=63993cefa555173ec16862f63a31fb881547b637。先补P0宽基ETF实际存续期的公司行动、价格、历史母指数和含分红比较链，510300/SPY为首两个锚点，复用既有7境内ETF绑定及美股宽基资料；不恢复旧队列、不改旧收益实验。
