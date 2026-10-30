@@ -1,3 +1,14 @@
+# 前端审查修复已验收，源码范围释放 — 2026-10-31
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status completed_bounded_frontend_fixes；scope_released true；视觉效果待用户反馈。本轮是已批准前端审查修复，不是全部金融研究或数据补齐完成。
+- 成果 docs/ops/frontend-user-experience-fixes-2026-10-31.md、docs/ops/frontend-ux-20261031/factor-overview.jpg、原work-progress最新段；基线18e64fa6及共享脏区保留，源码仅本地未自动提交/推送。checked_coordination_commit 3e4c84be；其他owner已释放f23b98b3后串行修改FactorWorkbench，ResearchUseReview原卡保留。
+- 两项报告错标、危机资料日期/资格、历史备注、主5173/8000集成、研究URL条件、20记录/573目录/37待关联、卡点草稿、标的绑定、持仓缺口分组、五入口与桌面首表及基础操作已落实。真实桌面路径与原报告逐项验收，首表约482px、无横溢。
+- 运行兼容：Python3.13相关矩阵尾差由固定原metrics SHA加仅矩阵末位容差处理，原文件/manifest不改；策略接口线程栈定位外盘open阻塞，7.12MB同SHA展示副本只读核验后使用，缺损降级、不回退外盘，原策略/账本业务内容不改。HTTP组合200/0.96s，五问200/5.73s，MSCI日线至10/29。诊断代码已移除、产物留存。
+- 验证：3.13整批66通过，副本最终相关20通过；readonly10例双版本通过；前端25加报告/持仓回归、TS、847模块build、归置通过，既有大包提示保留。因子health模型请求0；无交易、自动试盘/挖掘、真实计划提交或新增仓外启动项。
+- 未冒充完成：A股宽度仍10/16、NFCI旧5周、组合心跳过期、三项目录来源问题、行业收益归因/估值分位/真实账户增量及完整任务绑定。卡点交接可复制但不是已派发。当前已有授权前端范围完成，原数据/研究归原owner，不扩大本任务。
+
+---
+
 # 集成验收增补 — 2026-10-31
 
 - research-method-practice-20261031 已在远端 f23b98b33246f470d84097e1045955c4114f7225 明确 scope_released true，FactorWorkbench 容器按原计划串行接入，保留 ResearchUseReview 原卡与证据绑定。
