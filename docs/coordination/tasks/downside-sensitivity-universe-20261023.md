@@ -1,3 +1,13 @@
+# 数据可研究性与质量复核开始（2026-10-31）
+
+- task-id=downside-sensitivity-universe-20261023；owner=01a1680e-6717-7ce2-9ecb-372a228c1118；status=active / bounded_readiness_quality_audit。人类本轮要求检查后续研究数据缺口与已有数据质量；本轮仅报告与现有证据核验，不扩大下载预算、不恢复旧队列、不运行策略。
+- 已读 COORDINATION、本任务及 research-dispatch-controller；checked_coordination_sha=c2bff039856c0fadabde2fdf66a320ec910166f2。唯一写者root负责自己的报告 docs/experiments/data-readiness-and-quality-review-2026-10-31.md、raw/public-universe-deep-completion-2026-10-26/readiness-review-20261031、本任务work-progress及该报告registry/INDEX/既有 acquired-data-catalog 增量登记。两名原子代理各自只写该审计子目录的coverage/integrity文件。
+- 复用10月27日冻结终验，不重拉原始数据；按用途审查ETF/母指数、历史股票池、时点和更新可持续性。允许外盘仅小审计归档，沿用OUT4总2GiB / RAW4元数据32MiB、核实固定UUID后操作；SEC53包5GiB扩容未获批准，继续不执行。无删除、生产变更、定时器、付费或交易。
+- 接受标准：当前目录与固定小样本实际读回；正确区分主终验与分段质量manifest；限定母指数清单与2个可变cache现场哈希；现状、未验项、优先级写入可发现报告和目录并读回。不能用文件量证明完整20年PIT、收益口径或因子有效。
+
+
+---
+
 ## 2026-10-27 — 已验收主批/内部补数与11份新摘牌公告，SEC预算待决定
 
 Owner: 01a1680e-6717-7ce2-9ecb-372a228c1118。当前机器Mac/root，唯一写者；所有本轮采集进程退出，禁止重跑旧队列。
