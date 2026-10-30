@@ -1,3 +1,14 @@
+# 前端审查问题按用户批准实施 — 2026-10-31
+
+- task-id market-style-observation-20261020；owner 01a15915-cdaf-7873-8755-d5f5320fbfa9/root；status active；scope_released false。用户批准“可以，按你优先级去做”。基线仍 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 加现有未提交修改，保留他人工作。
+- checked_coordination_sha 1e15784dce3e93d586740a8c49b6f458ce18ed0f；checked_at 2026-10-31T00:27:16+08:00；通过 GitHub connector 实时读取原task、COORDINATION、research-method-practice-20261031、strategy-account-bridge、investor-workspace、market-observation、personal-lowfreq、dispatch。SSH失败/HTTPS超时，不把本地缓存当最新；connector远端commit及原文件SHA核实。
+- 范围：按 docs/ops/frontend-user-experience-audit-2026-10-31.md 修正展示可信性、日期资格、上下文、工作流、导航与桌面密度；不更改技术交易规则/阈值/定义、冻结实验或自动交易；不新采行情、不运行金融研究、不调用模型解读。
+- 写者分工：trust agent仅 market_context/crisis_events.py、CrisisBanner.tsx及本区新样式、test_crisis_events.py；reports agent仅 api/experiment_reports.py、ReportsLibraryPage.tsx及独立样式、test_experiment_reports.py，registry只修RS26及接刀两项由root串行；navigation agent仅 TopNav.tsx、AgentConsole.tsx、WorkspacePage.tsx、SupervisorPage.tsx和新独立工具/样式/测试，App.tsx仅需要时与root串行。root唯一 OpsPage、PortfolioPage、FwdLedgerPage、factor_workbench/app.py/progress.py/catalog_progress.py、workflowProgress.ts/ResearchWorkflowProgress.tsx/CSS/test、api/app.py集成与vite.config、仓内运行脚本、审查报告和原work-progress。必要类型新字段只root统一集成。
+- 重叠决定：research-method-practice仍写 FactorWorkbench.tsx证据卡接线及其本区样式，当前避开此文件，不替其写；本方因子主容器修改先备补丁并等释放，独立组件/CSS和后端可先行。其FundamentalsPage OverlaySection与service.py不改；strategy-account仅独立研究本方只读复用；旧其他UI范围已释放。报告registry仅两个精确键，保留其他owner追加。原UI/图表/公开指标数据和个人账户原件不改。
+- 验收：过期/异步/资格失效不产生当前警示；历史备注不列今日待办；两条结论状态和筛选一致；主入口/研究接口可读；跨页保留研究条件；AI显式绑定对象；报告可深链返回；桌面首屏证据前移、空态不占大块；相关单测、TS/build、实际浏览器读回和归置。仅本地应用改动，未自动提交源码或修改仓外数据库/启动项。
+
+---
+
 # 全登记目录接入已验证 2026-10-24T11:10:32.192143+08:00
 
 - task-id/owner沿原；status completed（本轮目录与已有证据展示）；scope_released true。用户视觉待反馈，完整研究有效性与目标数据库未标完成。checked_coordination_sha d897a68ecfe5acba4af368b18e4a4e0f9fdbc12a；checked_at 2026-10-24T11:10:32.192143+08:00；已读COORDINATION/self/strategy-account/downside/personal/utility/investor/dispatch，收尾补读focus-stock新身份阻塞和downside11:00补采结案。其各自原件/研究归原owner，本方不接管，无同写冲突。
