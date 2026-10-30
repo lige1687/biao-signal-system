@@ -1,3 +1,14 @@
+# 现有完整策略账户的构建方式与订单净额核验 — active 2026-10-31T00:16:40.537475+08:00
+
+- 用户2026-10-31授权继续探索现有策略组合及专业实践；本轮独立问题是策略级资本组合与分数级组合、同一股票相反订单的执行成本差别，不重跑10/24盈利现金流/动量权重试验。
+- checked_coordination_sha cdc45d39d3eb37b496a2ea475fea12c134c7b7dc；checked_at 2026-10-31T00:16:40.537475+08:00；已读COORDINATION、自身、market-style-observation-20261020、downside-sensitivity-universe-20261023、personal-lowfreq-system-audit-20261018、lowfreq-strategy-discovery-20261019、research-dispatch-controller、research-utility-review-20261012、focus-stock-universe-20261024。焦点股owner在做观察展示；数据owner保留采集与退出价格补充；本轮不接管。
+- 唯一新增 docs/experiments/strategy-construction-netting-2026-10-31.md 及同名raw/；root唯一合同/冻结/报告/registry本键/INDEX本行与自身记录写者；Sol profit_investment_executor仅run.py/test_run.py，其他子代理只读。无web/API/生产/旧策略源码/旧结果写入。
+- 预算1核心批0寻优；CN/US分开，固定M+V/M+R/R+V初始50/50随后浮动，各市场同源单项、分数集成mv/rv、equal参照；先核源SHA与账户恒等关系，再运行。报价账户不能称真实成交或母指数超额，US当前名单偏差显式保留；所有历史已见。订单净额仅同日同股票同执行时点相反订单且价格一致，可省假定费用单独保留现金，不复投、不改变虚拟子账户。
+- 来源预算6/6（4查询2打开，其中1PDF404），停止外部请求。核心执行待设计独审/代码测试与仓外新增结果写入确认。最新用户要求仓外修改先确认：仓内源码/小报告获授权，外盘只读复用；准备精确新路径及不超8MiB输出后单独询问，不先写外盘。
+- 内盘可用14.6GiB，外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9已只读核验；不删除、不强推、不自动提交成果源码。仅协调元数据正常推送及读回。
+
+---
+
 # 现有因子两项新组合比较已交付 2026-10-24T13:58:46.322517+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed仅本轮两个有边界问题，scope_released true仅自有新增路径接续，冻结输入/报告仍保护。checked_coordination_sha=305f7be09f41880fc601c4188d603dd35381b593，checked_at=2026-10-24T13:58:46.322517+08:00。已读COORDINATION/self/market-style-observation-20261020/downside-sensitivity-universe-20261023/personal-lowfreq-system-audit-20261018/research-utility-review-20261012/investor-workspace-simplification-20261012/research-dispatch-controller/focus-stock-universe-20261024；末次新增仅focus-stock来源已核结案，无冲突。本题不接管其资料、UI或反转。
