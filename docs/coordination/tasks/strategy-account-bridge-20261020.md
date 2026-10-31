@@ -1,3 +1,16 @@
+# 相对超额与金融机制审查实施 — active 2026-10-31T11:26:56.758148+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false仅下列窄范围。用户已明确批准吸收落实上轮方法调研，核心相对谁的超额及来源。工程落实及既有案例审查，不开新收益实验或参数搜索。
+- checked_coordination_sha 5705fb4dfe3f4907f5b553fe2d9e3856998c3a08；checked_at 2026-10-31T11:26:56.758148+08:00；已读COORDINATION/self、research-method-practice-20261031、market-style-observation-20261020、downside-sensitivity-universe-20261023、personal-lowfreq-system-audit-20261018、research-utility-review-20261012、mechanism-rebalancing-review-20261020、research-dispatch-controller。方法工具/前端已释放，仍不重做其功能；playbook/共享合同runner/正式schema/既有定义/数据/旧冻结不改。
+- 实现唯一写者Sol medium复用profit_investment_executor，仅src/lei_signal/research/mechanism_review.py（新增）、factor_combinations.py（可选审查与CLI）、preparation.py（PROMPTS提问文本）、tests/unit/test_mechanism_review.py（新增）、test_factor_combinations.py（兼容回归）。根不同时改这些文件；mechanism_workflow_audit仅只读方法和最后审阅。
+- root只写docs/research/factor-combination-workflow.md、research-workflow-usage.md窄追加接线说明、.agents/skills/lei-lowfreq-research/references/strategy-combinations.md窄入口、docs/experiments/relative-excess-mechanism-implementation-2026-10-31.md及同raw、registry本键/INDEX本行/自身progress。无UI/API/主策略、旧profile/报告改写。
+- 新附件绑定准确候选/组件/池、相对基准、币种分红成本及可投资依据、收益来源与参与者约束、代理与竞争预测、反例、创建时点/已见历史、来源SHA和引用。仅结构/一致性/来源身份核查，不认证科学因果或alpha。
+- 旧三参数调用旧state保留，机制缺件显式not_checked；新review --require-mechanism必须缺件非零，独立mechanism-review复用同checker。附件通过只complete_for_manual_review；机制/alpha/前向授权始终未证明。draft沿现有sources与controller_review.source_refs绑定，不改freeze/runner。
+- 预算0新外部资料、0金融实验/下载/寻优/交易；合成反例测试及2旧案例CLI只读演练。新代码小记录预计<=1MiB，内盘fresh9582848KiB>5GiB；外盘新增0、不沿用旧8MiB扩大写入。基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9+共享修改，源码不自动提交推送，仅协调元数据推。
+- 验收旧调用兼容、SHA漂移/外根路径/身份错配/毛参照冒充个人净超额被标出、未知不升级、完整附件仍须科学审阅；2真实旧例显示实际缺口，不制造新收益。定向测试/CLI/归档读回/输入保护与独审后结案。
+
+---
+
 # 金融机制优先的方法调研 completed 2026-10-31T09:58:08.944846+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed_bounded_method_survey；scope_released true仅本轮方法报告可引用，旧/新研究证据仍保护。本轮无后台任务。
