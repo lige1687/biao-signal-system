@@ -1,3 +1,15 @@
+# 金融机制优先的AI策略研究方法调研 — active 2026-10-31T09:51:10.835964+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false仅以下本轮新增文件。
+- 用户本轮限定先调研研究方法/流程/最佳实践，重点金融规律、收益从何而来、谁承担风险/成本、机制与适用universe。新问题为文献与本地只读能力比较；0收益实验、0参数搜索、0行情取数、0安装、0生产/前向改动。不重开原组合比较。
+- checked_coordination_sha 8856a2bb45faad312d7baeb1fa92a9d310f37e98；checked_at 2026-10-31T09:51:10.835964+08:00；已读COORDINATION、自身、research-method-practice-20261031、market-style-observation-20261020、downside-sensitivity-universe-20261023、lowfreq-strategy-discovery-20261019、research-dispatch-controller。方法工具和前端近期已结案且释放，但本轮仍只读其文件；数据资格归原owner，不接管。
+- root唯一写 docs/experiments/mechanism-first-strategy-research-2026-10-31.md及同名raw小合同/来源/方法卡/审阅回执；registry仅本键、INDEX仅本行、自身work-progress。只读子agent mechanism_workflow_audit无写入/联网/实验权限。共享playbook/skill/CLI/UI/API不改。
+- 新方法调查来源上限6请求（4查询+2打开，已6/6，0失败），采用research-closure和lei-lowfreq-research；旧研究预算封存不借用。现有证据足以方法映射，下一步写有界调研报告并做来源/本地缺口/归档独审。
+- 验收：区分增长现金流、风险补偿、流动性服务、约束与信息修正；解释不冒充因果，反例/机制鉴别/事前universe/强基准/多重尝试/独立验证可追踪。至少两张完整示例卡，明确未运行市场实验；外部框架能力与缺口对应本地既有入口。
+- 小文档预算<256KiB，内盘fresh可用10094664KiB>5GiB；外盘新增0，不扩大旧8MiB授权。源码成果仅本地未推，基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；仅本协调元数据正常推送。
+
+---
+
 # 策略构建与订单净额比较 completed 2026-10-30T16:37:17.775673+00:00
 
 - task-id strategy-account-bridge-20261020；owner原root；scope_released true仅本轮非冻结可复用入口，旧/新冻结证据仍保护。用户已明确确认本轮外盘8MiB写入，不再pending许可。
