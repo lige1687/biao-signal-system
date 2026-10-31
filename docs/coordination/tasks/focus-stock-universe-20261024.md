@@ -1,3 +1,14 @@
+# 量化舵截图模型与其他视频：重叠、来源和接入判断 — active 2026-10-31T20:23:53.581533+08:00
+
+- task-id/owner沿原；status active；scope_released false。用户新证据两图：第4集自然月成交额前5%股票占沪深成交额（不含北交所）/45%参考线/3次样本；第2集股债利差与沪深300价格/上下轨/2025.04事件；另授权查看该作者其他模型是否有帮助。
+- checked_coordination_sha ccf6a20a9dfbc2a25e8e06aec4e5763965fbb3c1；checked_at 2026-10-31T20:23:53.581533+08:00；已读COORDINATION沿前、self/downside/market-style/research-method-practice最新段与dispatch沿前。downsideETF及market-style前端有限交付已释放；其数据/旧研究只读复用，不接管既有建设或重复旧300股预测实验。
+- 模式research：优先两图定义/来源/重复关系，额外作者模型做筛选。新截图问题最多6次逐条来源请求含失败，不按工具调用批次计；如资料合格最多1核心描述/复核批，先冻结具体范围/简单对手/输入。原旧focus6源及ETF比例12源预算保留，不重置/不寻优45%/不做交易策略/不扩下载。
+- root唯一写docs/experiments/douyin-observation-models-overlap-2026-10-31.md及raw同名、自身progress、registry本键/INDEX本行；有明确增量才窄接observation-library内自身目录与关联测试，具体方案另记。既有同名因子不另造重复卡。
+- Sol medium crowding_input_audit只读数据目录/存储资格/旧实现；Luna low equity_bond_overlap只读股债利差实现/既有证据。代理均无外网/写入/实验；root持6源预算。两原策略SHA已核一致。本机小代码/报告<2MiB，剩余9.37GiB；不写仓外、不改旧资料/冻结研究/生产。
+- 验收：截图与现有/来源公式及universe逐项比较；参考线证据和可得日期；复核旧结果数值与增量；现有数据能否支持增量计算及边界。有用才实现、重复直接复用，报告登记读回和必要检查。
+
+---
+
 # 市场观察排序与前端密度 — completed 2026-10-31T00:22:30.654733+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed仅本轮UI；scope_released true。原ETF数据资格仍paused/inconclusive，12次来源操作不清零，本轮0新增外部研究查询。
