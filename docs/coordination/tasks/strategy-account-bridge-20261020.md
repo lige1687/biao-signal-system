@@ -1,3 +1,14 @@
+# 相对超额与金融机制审查落实 completed 2026-10-31T11:40:34.558692+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed_bounded_method_implementation；scope_released true仅本轮非冻结可复用实现/文档。无后台任务；用户批准的方法落实完成，非新收益实验。
+- checked_coordination_sha 9bad7f5bb9b43a072063f5926815c63f0bc93dfb；checked_at 2026-10-31T11:40:34.558692+08:00；本轮登记后无远端增量，无同写冲突。未接管其他AI的UI、资料资格、正式合同或runner。
+- 已实现src/lei_signal/research/mechanism_review.py、factor_combinations.py可选/强制审查、preparation.py三条PROMPTS；两定向测试文件；组合工作流/研究用法及lei-lowfreq-research参考窄追加。来源SHA/候选组件与范围/同池身份/净口径缺件明确；字段齐全仅complete_for_manual_review，机制/alpha/独立验证/前向始终不认证。
+- 15项最终主控测试通过；2既有中美候选6次CLI审查均准确缺件；旧字段与修改前一致，9保护输入SHA不变。同池ID P1与独立CLI缺件退出码修复，独审读回接受。
+- 报告docs/experiments/relative-excess-mechanism-implementation-2026-10-31.md SHA 0332c7b62da1ac7bbc4aae7a3b73d383d23ce26d16500fc10b2e2c064fc1826a；同raw保留before快照、合同/设计修订、两真实附件、acceptance-02最终回执、独审/测试/范围/交付核验。API8000/5173正文逐字一致，旧796registry键保持，INDEX本行，归置/窄diff/链接通过；浏览器打开queued，不冒称视觉验收。
+- 0新增外部资料/金融实验/行情/寻优/安装/前向/生产；仓外新增0，未扩大旧8MiB授权。成果源码仅本地codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9及共享修改，未自动提交推送；本提交只同步协调元数据。后续真实研究须沿原owner与合格输入，明确一项未决机制，不靠附件升级旧历史。
+
+---
+
 # 相对超额与金融机制审查实施 — active 2026-10-31T11:26:56.758148+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false仅下列窄范围。用户已明确批准吸收落实上轮方法调研，核心相对谁的超额及来源。工程落实及既有案例审查，不开新收益实验或参数搜索。
