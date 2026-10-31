@@ -1,3 +1,14 @@
+# 作者其他视频候选筛选 — active 2026-11-01
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户再次要求看量化舵其他视频中的因子/模型，给出对系统有帮助的候选列表。只做来源核实与去重/用途筛选，无回测/生产更改。
+- checked_coordination_sha 207682e078e4c40eaa35eef8900e5a38322c2c8f；checked_at 2026-11-01T00:12:14.033794+08:00；已读COORDINATION/self/dispatch/market-style/research-method-practice。仅本方报告与新raw子目录，避开全部UI/他人代码和已封存研究。保留共享脏区，工作分支18e64fa基线仅作身份，旧local成果已核。
+- 当前AGENTS执行规约明确预算须对应用户约定/真实额度/时限/工具反馈，不自设停止点；前轮自设6次边界是历史记录，不再用它阻止本轮明确授权的必要查阅。累计6+6旧来源与1+1核心/1定向不重置；本轮实际来源逐条记账，限定为既有候选中的6种代表性原视频及必要原始出处核实，不做无限扩展、付费调用/安装/大媒体下载。
+- root唯一写 docs/experiments/douyin-author-candidates-2026-11-01.md、原raw/video-review-20261101/控制记录、原state追加阶段、registry本新键/INDEX本行及自身progress。原model_source_hunt唯一写video-review-20261101/videos/提取；equity_bond_overlap只读本地已有定义/报告给重叠证据，无网络/写入。最多同时2个助手，保留原模型/思考强度。
+- 来源代理优先企业回报VS资金成本、财报超预期、STR，再动量路径、低波动、小盘换手。当前可正常读取的native Chrome抖音页由来源代理独占；root不操作该UI。不得同操作重试失败API；真实访问障碍即说明并继续独立题目。
+- 验收：至少优先3类原视频能读到的定义/变量/市场/期限/引用/断言及准确链接，其他类别按读到范围标识；与系统真实实现/已研究/待接候选区分；名单给优先级、金融含义、可补信息、成本/限制，不用标题臆造公式，不将个股选股证据当大盘顶底。候选筛选回答即可完成，不新增测试或金融参数试验。
+
+---
+
 # 两优先模型本地接入完成；其他原片提取暂停 — 2026-10-31T21:04:13.912134+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed仅两优先模型本地UI与有限视频去重；其他原片提取paused/source_budget_exhausted；scope_released true。用户两图所需观察项落实，不以预测有效作为观察准入；原始模型/预测资格不冒称通过。
