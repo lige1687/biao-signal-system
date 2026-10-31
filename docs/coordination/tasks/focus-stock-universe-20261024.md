@@ -1,3 +1,14 @@
+# 用户要求两指标系统落实与单独视频提取 — active 2026-10-31T20:45:37.847334+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户本轮明确要求继续落实两个优先截图到系统、查重，并单独派AI提取该博主其他视频。目标是可靠的观察入口；不以预测有效作为观察项准入前提。
+- checked_coordination_sha b2c74105f0a4335ab14eeed739c2ad94fd949b1e；checked_at 2026-10-31T20:45:37.847334+08:00；已读COORDINATION、self、market-style、dispatch；downside/research-method-practice等相对上轮无变动，复用同SHA读取与已释放结论。工作分支base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享脏区，保留全部他人修改。
+- 用户本轮新授权为续做实施与提取，预算扩展记在原state的implementation_v2，不重置原6源/1核心/1定向复验与旧focus6、ETF12。新增最多6逐条来源（视频代理4，数据语义2），最多1次有新依据的纠正聚合；无预测/交易/参数寻优。先新语义证据与v2规范，旧结果不改。普通前端工程验证不算金融试验。
+- root唯一写观察库catalog/metricData/ObservationMetric/projectionSources/projectionView与新浓度适配器/关联测试、web/public/research/turnover-concentration/快照；ERP复用现有API/定义，统一入口可收藏，不重复计算/创建独立预测证据。数据不合格则具体未知，不造值/轨道。
+- 代理crowding_input_audit唯一写同题raw/implementation-v2/concentration/，限定官方字段语义核查及必要纠正计算；model_source_hunt唯一写同题raw/implementation-v2/videos/，仅公开作者内容提取与来源账本。代理无生产写；root独占报告增补、原state、registry本键/INDEX本行、progress与web。其他路径只读，不写仓外、不安装工具、不下载大视频。
+- 验收：两模型是否同名同义可查；复用公式/接口，目录/首页pin/价格日期图联动可用；缺值保留与日期清楚，无强套机会风险。原始视频信息逐条标内容可读程度、公式/来源/预测断言，未读不冒充。预期小输出<2MiB，本机余9.3GiB。
+
+---
+
 # 量化舵两图重叠评估交付／新曲线资格失败 — bounded completed 2026-10-31T20:41:10.664916+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root。status completed仅有界定义/重叠/资料检验；scope_released true。新月度接入与其他视频完整公式仍paused/inconclusive，不是已完成作者所有模型研究。
