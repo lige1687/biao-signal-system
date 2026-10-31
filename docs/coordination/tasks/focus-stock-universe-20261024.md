@@ -1,3 +1,15 @@
+# 两优先模型本地接入完成；其他原片提取暂停 — 2026-10-31T21:04:13.912134+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed仅两优先模型本地UI与有限视频去重；其他原片提取paused/source_budget_exhausted；scope_released true。用户两图所需观察项落实，不以预测有效作为观察准入；原始模型/预测资格不冒称通过。
+- checked_coordination_sha 6cca68a0889a1bf191cb2da1a708526214ffafc0；checked_at 2026-10-31T21:04:13.912134+08:00；结束fetch无他方增量，COORDINATION/self/market-style/dispatch与无变动downside/research-method读取沿开工登记。当前源码仍在codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享脏区，未提交源码、未部署，保留他方工作。
+- 观察库原34项保留，新增3市场入口后37项/18可读；成交额集中度仍C04、沪深300/标普500ERP仍C21；ERP完全复用现有ratesHistory不重算。默认收起，可pin首页/收回，上价格下指标共用日期，集中度直达默认10年、切换保留窗口。没有45%线/未知窗口轨道或风险机会区。
+- v2先取得BaoStock官方停牌字段说明再冻结规范并纠正聚合1次；15,052条明确status0空量额按报告停牌零额、无行仍未知。129月/84可用/45null；最近完整月2026-09=42.16%，供应商覆盖而非官方完整全A，2026-10未完整、无今日值/自动更新。H00300日历在2019-09—2026-06与已存官方SZSE1652日期吻合，外期边界明示。monthly SHA25f1c9b1e52594717e09df3efa3b93cce612d890e1603a3850d885c559b8f83b；public SHA06fb34672dfb6ceea0f9470c63a5917efe273ae0f3b92680de5852d5e7e6fc42。旧失败result/validation/报告哈希未改，v2独立display-decision仅接受历史描述。
+- 独立视频AI第2集原片10关键帧确认E/P减国债、滚动均值±2σ；债券期限/窗口未披露。第1集+19其他标题本地去重，财报超预期/企业回报VS资金成本优先，其他原片未读，不能当完整提取。新增6来源全用(官方2/视频4)，保留原6来源/1核心/1定向与旧focus6/ETF12；无新预测试验，恢复剩余视频须新来源预算。
+- 26定向tests/最终tsc与Vite/归置/限定diff通过；原chunk大包提示。真实桌面1280/手机390 body390 chart336、CN/US切换读数日期、月度断线、pin刷新保留/收回恢复原0项、期间切换保留、console error0；独立只读审查无阻断。源码10路径SHA、before diff、截图、served JSON byte一致、旧结果不变、报告/registry SHA绑定均在raw/implementation-v2/verification.json。新增产物约371KiB，无新大下载或仓外写。
+- 报告 docs/experiments/douyin-observation-models-overlap-2026-10-31.md SHA2aceaaf5db9e75639507e230eff5d5e5521a3150bd50b5d160577a31ef87b3af；INDEX本行/registry本键、own progress/state已读回。该研究当前总体paused仅因其他原片提取预算，优先两模型UI已完成。交付用户视觉查看；无后台自动继续、无源代码推送或交易授权。
+
+---
+
 # 用户要求两指标系统落实与单独视频提取 — active 2026-10-31T20:45:37.847334+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户本轮明确要求继续落实两个优先截图到系统、查重，并单独派AI提取该博主其他视频。目标是可靠的观察入口；不以预测有效作为观察项准入前提。
