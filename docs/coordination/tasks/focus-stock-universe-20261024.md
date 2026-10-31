@@ -1,3 +1,15 @@
+# 量化舵两图重叠评估交付／新曲线资格失败 — bounded completed 2026-10-31T20:41:10.664916+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root。status completed仅有界定义/重叠/资料检验；scope_released true。新月度接入与其他视频完整公式仍paused/inconclusive，不是已完成作者所有模型研究。
+- checked_coordination_sha 0bdee3c26656008e14311b59c04efa4513b04312；checked_at 2026-10-31T20:41:10.664916+08:00；交付fetch相对本轮登记无他方变动；COORDINATION/self/downside/market-style/research-method-practice/dispatch读取与冲突决定沿开工，无重叠写入。研究成果仅本机工作区，未提交/部署；工作分支base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，报告SHA 8a30814e1017ec61949aa8980632d6c35091c11cd7303f3a7f5d02689deaa5ee。
+- 报告 `docs/experiments/douyin-observation-models-overlap-2026-10-31.md`、同名raw、INDEX本行/registry本键和自身progress已读回；既有registry条目保留，归置检查通过。新小型研究产物约138KiB；无仓外写入、无新下载、无生产/前端更改。
+- 来源预算6/6含失败；1/1完整描述核心，首次解析在第一股完成前失败并修复字段名；额外1次必要定向原件复验，未二次聚合或调参。旧focus6及ETF比值12来源预算保留不重置。
+- 原聚合129月中85非空/44空；独立复核发现status0量额缺值未按冻结规范标异常。定向复读11054044行，15052条停牌字段缺失影响71个原非空月，原最新值/相关/极值等汇总全部撤回。剩14月也无官方完整历史名录/独立交易所日历资格。原resultSHA746924608b12354069339081635955bcbaa5578198ccf5df85fa54b44c526aa1保留；display-decision明确false/current null；不发布预览或接图。
+- 第4集与已有成交额集中度同维度、不同池/自然月；第2集与既有E/P减10Y概念重叠，复用已有图，不复制未知轨道；第3集原式仍未公开；第1集仅核目录标题。45%只追到券商原件首页/索引，未核视频同口径，不增阈值。
+- 旧固定300预测结果哈希/数值复核：沪深300全收益MAE4.033→4.221、中证1000全收益5.001→5.279，不能代替新月度检验。Luna独立最终读报告与display-decision，无残留已撤回数值被当结论。恢复须补停牌字段语义/生命周期、正式名录和交易日历/作者原式；保留预算，不自动再跑。
+
+---
+
 # 新月度集中度描述性批次 — active 2026-10-31T20:32:23.524591+08:00
 
 - checked_coordination_sha 3d1868deb29d009056652673a08a07a6ff293ad9；checked_at 2026-10-31T20:32:23.524591+08:00；最新fetch无他方增量，已读task范围与冲突决定沿本轮开工记录。
