@@ -1,3 +1,14 @@
+# 金融机制优先的方法调研 completed 2026-10-31T09:58:08.944846+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed_bounded_method_survey；scope_released true仅本轮方法报告可引用，旧/新研究证据仍保护。本轮无后台任务。
+- checked_coordination_sha 6f5f9e90a138448f61cbc6eb110429fee9e91f20；checked_at 2026-10-31T09:58:08.944846+08:00。与范围登记时所读COORDINATION、自身、research-method-practice、market-style、downside-universe、lowfreq-discovery及dispatch记录相比无新范围变化；root唯一报告/raw/registry本键/INDEX本行/自身progress写者，其他工具、数据和UI均只读。
+- 已交付docs/experiments/mechanism-first-strategy-research-2026-10-31.md SHA 4c3be606014d097857083a090ee5ad43e2dd95901013fc4e774ecd6be64afef3。已有研究循环可复用，增量是收益来源/参与者约束/持续原因/适用池/竞争预测的证据附件和两张示例。无金融机制自动认证或策略有效性宣称。
+- 累计6/6来源（4query+2open），0失败/金融试验/行情下载/安装/新前向/生产改动。两项方法P1修正并读回；17输入SHA无变化，API8000/5173正文逐字一致、旧795registry键保持、归置/窄diff通过。浏览器打开请求queued，不冒称视觉验收。
+- 新报告/raw36069B，小记录留本机，外盘新增0；旧8MiB授权未扩。报告和raw仅本地未自动提交推送，base18e64fa6加既有共享修改；本提交只协调元数据。所有证据在同名raw的brief/sources/inputs/method-review/verification/completion。
+- 下一实际市场问题须先指明一个可改变判断的机制未知，复用原owner与合格universe/资料合同；本次仅完成用户指定的方法调研，不自动重跑旧结果。
+
+---
+
 # 金融机制优先的AI策略研究方法调研 — active 2026-10-31T09:51:10.835964+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false仅以下本轮新增文件。
