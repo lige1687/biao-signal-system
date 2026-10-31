@@ -1,3 +1,14 @@
+# 有新增观察信息的候选模型接入 — active 2026-11-01T00:55:34.273482+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户授权“落实一下，看着有增量的，能观察模型的都可以接入看看”。服务市场环境/基本面观察层：合格真实读数、历史、价格日期对照、默认收起、可pin，不以未证明收益阻止描述性观察，也不冒称顶底预测或加无据阈值。
+- checked_coordination_sha bf86e45768754234879000a3e9ed6244b49ab86b；checked_at 2026-11-01T00:55:34.273482+08:00；已读COORDINATION/self/research-dispatch-controller/market-style-observation-20261020/research-method-practice-20261031/downside-sensitivity-universe-20261023；相对上阶段无远端变化。相邻前端/研究范围已释放；本方仅观察库和独立新计算组件，不改他人策略/工作台/账户，保留共享脏区。branch codex/factor-unit-research-20260915@18e64fa加共享未提交。
+- 当前6候选逐项资格：下跌价格冲击、盈利加速、行业相对价值、STR、市值×换手、长期企业全收益/资金成本。先复用已获取清单/原公式/已存字段，只在实际可得定义和数据上生成展示；重复家族并入原项、缺口具体标明，不能只建空卡冒称已接数。全收益蓝线未定义，不自造。原26源审查和负结论、预算封存不重跑。
+- root唯一写 web/src/components/observation-library/ 下catalog/metricData/ObservationMetric/projectionSources/projectionView及本区新data/reading/test组件、必要同区CSS；web/public/research/observation-candidates/ 新小展示JSON；新独立 src/lei_signal/research/observation_candidates.py 与 tests/unit/test_observation_candidates.py 分派计算代理后独占该二文件；不改原策略规则/原数据/冻结指标。root独占新报告 docs/experiments/observation-candidates-integration-2026-11-01.md、原raw下observation-integration-20261101/小证据、原state阶段、registry本新键/INDEX本行、自身progress。后续确需新增路径先本task追加。
+- 两原助手沿实际模型/effort：equity_bond_overlap只读财报/行业数据资格不联网，model_source_hunt只读STR精确公式必要公开来源核查不写。可另派Sol medium独立新计算组件及合成验证，先定义再描述性计算；根代理持科学/展示验收。来源实际记账，不用自设次数停任务；不收费安装、批量新采、仓外写入、大结果下载或复跑旧金融效果。大型输出若必要另守真实存储/权限边界；本机小代码/资料预计<5MiB，新曲线输出<1MiB，不写外盘。
+- 验收：每个候选有接入/合并/具体缺口处置；可接者数值、单位、日期、股票范围、缺值/历史状态与来源可核；同日期上下价格图、切换保留、收藏/收回、桌面手机密度验证。有计算则独立算例/缺值处理和源指纹验证，不把工程通过说成科学有效。策略源当前SHA记录在stage contract；内盘fresh12.4GB、外盘UUID核实可读。
+
+---
+
 # 量化舵全部公开作品逐条审查完成 — 2026-11-01T00:49:09.276154+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed仅当前全目录内容/重叠/候选清单；scope_released true。用户明确“每一个都看”，主页26作品=25视频+1六页图文全部逐条审查，无只按标题认定原片已读。第1条复用前轮10原帧阅读；本轮134可用原片帧、图文6页；不是完整音频转录。原参数未知和未独核效果明示。
