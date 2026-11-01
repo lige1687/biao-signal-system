@@ -1,3 +1,14 @@
+# 首页常驻市场提醒（股债与宽度） — active 2026-11-02T00:07:39.481934+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户要求打开首页第一屏常驻上下穿时机提醒，可纳入宽度机会/风险观察。实现站内观察提醒，不自动外部推送或改交易规则。
+- checked_coordination_sha 7f849cf212027f17693364d178e1e8ab361ada34；已读COORDINATION/self/dispatch/investor-workspace最新及breadth-reading-aid、ai-quant新范围。宽度owner正改market-style图背景，本方只读其API/type、不写该目录；首页旧改造范围已释放，唯一写者如下。主树18e64fa+共享脏区，策略两SHA与前阶段不变。
+- 新web/src/components/market-observation-alerts/模型/组件/样式/测试；web/src/pages/WorkspacePage.tsx仅替换旧MarketBreadthBadge入口和插入首页常驻模块。原ERP定义、cn-reference、效果报告、宽度后台及图只读。docs/ops/market-alerts-home-20261101/小合同/QA/验收，own progress/原state追加工程阶段。不写共享registry，不重跑已冻结金融实验。
+- 主控定义/数据适配/UI/验收；observation_compute仅新目录model.ts与model.test.mjs状态/新变化去重纯函数；model_source_hunt只读查重已完成。复用ERP周轨道和宽度后端P10/P90事件，不照搬80/20大概率顶底；上下轨数值明确金融方向。提醒分首次越轨/持续/回轨，原数据日期/请求失败/缺值/过期显式。ERP历史快照不能当当前提醒；宽度>7自然日只按运维时效提示待更新，不是金融机会风险阈值。
+- 首页始终显示简短三对象状态，宽度20/50/200可选，点击跳既有图；新数据到达才标变化，同日修订不冒新穿越，已读本机记忆/刷新和跨tab同步可核。无新数据时不假称实时监测已齐；0参数搜索/新预测实验/行情写入/后台任务/服务重启/交易。站内query仅页面存续时刷新。
+- Fresh内盘15.7GB，小文件预计<5MiB。验收真实首页首次进入、读数/轨道、持续不重复、退出/缺值/历史与陈旧抑制、修订、刷新/本地已读、图跳转、移动390和TS/build/归置。保留所有原件及他方改动，源码本地，协调元数据正常推后读回。
+
+---
+
 # 股债轨道历史效果与穿轨双图 — completed 2026-11-01T13:21:05.289110+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed_local_historical_evaluation_and_display；scope_released true。用户本轮的效果检验、完整历史与视频式穿轨展示已落实；金融证据仍为当前版本已见历史条件关联，不代表视频日频原版完整复刻或可交易。
