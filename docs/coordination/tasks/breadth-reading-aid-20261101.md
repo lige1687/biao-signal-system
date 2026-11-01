@@ -1,3 +1,16 @@
+# 图表与WorkBuddy复核完成，缓存写入等待用户确认 — 2026-11-02T00:33:36.122267+08:00
+
+- task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status blocked（仅正式数据安装等待仓外写入确认）；scope_released false（保留本4显示文件和补数据候选；无后台运行）。前端与有界旧结果复核已完成，不冒称全A补缺完成。
+- checked_coordination_sha be47e3d1047befde0d1509a1c2f1aaebc52ac804；checked_at 2026-11-02T00:33:36.122267+08:00；已读自身与focus最新标题“首页提醒路由补充 — active 2026-11-02T00:19:09.666418+08:00”，其首页/ERP继续避开。共享HEAD18e64fa与所有其他脏区保持，源码/候选仅本地，未推代码或行情。
+- 默认所选周期历史P10/P90区间底色上下图同步，可切参与升降；低位/高位及修复回落文字可见，缺测灰带/日期清单保持，不连接缺值。真实拖动及开关保留zoom；23前端回归、最终TS/Vite864模块、归置通过，1280/390无溢出、浏览器error0。两红绿缺陷与截图在acceptance-v3.json；原Python与7未改源码SHA一致。
+- WorkBuddy已读原对话和实际源码产物；23来源SHA一致，2批独立核算，0阈值搜索。12.1/75.1/95全样本后见、首日箭头未来筛选已识别；原宽度组合较MA200年化-3.27pp、回撤加深15.68pp。借鉴描述图，未搬交易标签。docs/experiments/workbuddy-breadth-threshold-review-2026-11-02.md及唯一registry键已归档；细证据原QA workbuddy-review-v3.md/json。
+- US仓内候选：原11725条全保留，新增8日10/21—10/30，495请求全成功、每周期最低492/494=99.60%；CN仓内候选：原1282全保留，仅恢复08/20、21、24、25、26、27六旧点，共1288，1254共有日逐值相同，qualification未升级。两正式cache SHA仍与准备时相同，installed=false。用户“仓外修改先确认”要求触发最终准确两JSON+备份确认卡，尚未收到回复。
+- CN剩余14缺日输入边界：本地同日覆盖不足、源尾部停更、复权修订不可拼接；官方列表证明部分IPO不足200日、BSE旧代码历史衔接未核、某停牌标签语义未核。6样本+4名单共28 HTTP，不降低门槛或插值，不把当前部分样本当全A。名单cache被并发过程仅刷新日期，原live/qfq未变，audit已记；本方无仓外写入。
+- 产物 docs/ops/breadth-reading-aid-20261101/acceptance-v3.json、source-manifest-v3.json、scoped-source-v3.patch、desktop-background-v3.jpg、desktop-phases-v3.jpg、mobile-background-v3.jpg、cn-repair-v3.json；进度原work-progress；操作候选 .codex/breadth-reading-coordination-20261101/{cn-repair-candidate-20261102,us-tail-candidate-20261102}。
+- 恢复最小动作：用户准许上述仓外写入后，重新核live/candidate SHA，带原字节备份原子安装两候选，API和页面逐值读回/更新截图，记录安装与剩余14缺日；对剩余CN只在来源身份/完整历史可核后继续，未获完整资格不得装入。无交易、新自动化、源码发布/删除或未停止进程。
+
+---
+
 # WorkBuddy复核归档范围增补 — active 2026-11-02T00:29:02.857410+08:00
 
 - 同一task/owner；checked_coordination_sha 4d3a66421a4c9c4c9236951250c4e4c4c262c9f0；自身及focus最新范围无同文件冲突。用户已要求核验已有检验信息，本轮结果仍是观察研究复核，不改技术体系或生产规则。
