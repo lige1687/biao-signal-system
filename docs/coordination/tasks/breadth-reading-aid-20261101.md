@@ -1,3 +1,11 @@
+# WorkBuddy复核归档范围增补 — active 2026-11-02T00:29:02.857410+08:00
+
+- 同一task/owner；checked_coordination_sha 4d3a66421a4c9c4c9236951250c4e4c4c262c9f0；自身及focus最新范围无同文件冲突。用户已要求核验已有检验信息，本轮结果仍是观察研究复核，不改技术体系或生产规则。
+- 新增本题报告 docs/experiments/workbuddy-breadth-threshold-review-2026-11-02.md；registry.json仅追加该同名entry，保留其他owner条目。细证据继续原QA/workbuddy-review-v3.md/json。root唯一写这两归档路径，不新建研究控制器。
+- 已复算两批原结果与必要成本/延迟敏感性；23源SHA一致，无参数搜索、新收益数据下载0。描述图已复用，未来区段筛选/全样本阈值与交易推论未移植。US刷新prepare单独属运维修复，候选8日、494股票请求全成功；CN备份6日候选已核；正式仓外安装等待用户明确确认（已给准确路径/范围）。
+
+---
+
 # 宽度图与缺测修复、WorkBuddy成果核验 — active 2026-11-02T00:15:40.782830+08:00
 
 - task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status active；scope_released false。用户追加“缺测你就去补啊”，要求检查WorkBuddy《A股市场宽度指标阈值解读》的图和已有检验结果，可用成果直接复用。
