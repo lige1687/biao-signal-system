@@ -1,3 +1,16 @@
+# 股债轨道历史效果与穿轨双图 — completed 2026-11-01T13:21:05.289110+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed_local_historical_evaluation_and_display；scope_released true。用户本轮的效果检验、完整历史与视频式穿轨展示已落实；金融证据仍为当前版本已见历史条件关联，不代表视频日频原版完整复刻或可交易。
+- checked_coordination_sha b1a83bb5a641d5534521f3d74021c6939478931e；已核breadth-reading-aid最新completed-local及相邻范围，只改observation-library和本题研究，未覆盖他人。共享脏区codex/factor-unit-research-20260915@18e64fa保留，源码/数据只在本地，协调元数据单独普通推送。
+- 沪深300固定3自然年均值±2总体sigma，周ERP1071点、920有效轨道；主63交易日完整906周，首次越轨17(上7/下10)，次交易日收盘起算。上轨原始均涨20.5939%、7涨0跌，对相同价格状态多18.9673pp，簇区间[8.988,31.549]；下轨均涨7.2745%、6涨4跌，原始涨幅差+6.0795pp（预期下跌方向−6.0795），未支持可靠顶部。上仅6个两年簇、下3簇；上轨反弹线索保留，不能7/7当未来必涨。
+- 21/63/126预声明期限、分期、同侧冷却、逐簇剔除和路径均完成；2011上轨后仍先跌9.71%，2015下轨后最高再涨44.47%。独核17事件与51路径、数值/增量一致；旧轨道舍入差max1.29e−7。PIT/每日原版未知、无ETF账户/分红成本/交易信号升级。
+- ERP专用上方利差三轨、下方金价，共享日期/光标/缩放；默认2005-11—2026-10全历史，轨道2008-11起。真实穿轨两图点标，17日期可选并局部放大、淡色连续竖带、距轨具体值、三个月逐事件结果与两侧效果简表/折叠增量。原C21/收藏/其他指标不添重复，Baker普通路径回归通过。
+- 40前端测试、3计算测试、TS/Vite、归置/diff通过；桌面及390pxiframe无横溢出，1年裁剪数值不变、完整历史恢复、上下轨案例与报告入口通过，preference原null保持，JSerror0，自建tab已关。旧replication验收所有已存哈希除意图改动projectionView外相同。
+- 新报告docs/experiments/equity-bond-bands-effect-2026-11-01.md SHA8b70933c439dbae76a3ba77427e277310d950ae1bd6e0e91a699f185170d1ea6；raw docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-effect-display-20261101，acceptance SHA1f8c8dfb21e580193840e9f16da1461ecb67535fbb9abadd5b24aeb1992fffb1。registry802旧条保留只增本条→803；INDEX本行、原state新stage、own progress；API报告逐字、两publicJSON字节通过。
+- 本阶段1核心批3实际执行（日期补列、seed纠错），0参数搜索、0新行情下载，1原始研究来源搜索。±63未来事件对照在运算前撤销留合同；误seed+H旧结果保留后按合同纠正；ES.at/初始JSON未就绪/手机轴标签和只读路径错误留痕。约3.3MB仓内，旧累计账保留，无仓外写/删除/安装/付费/后台/服务重启/生产部署/交易。
+
+---
+
 # 股债轨道历史效果检验与穿轨对照读图 — active 2026-11-01T13:06:14.931108+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户追加要求检验阶段顶底效果、完整历史、对照视频的上下轨穿越及股价展示。本阶段复用已冻结周频ERP机构参照，不冒称日频原版，不调整原3年±2σ参数追求成功。
