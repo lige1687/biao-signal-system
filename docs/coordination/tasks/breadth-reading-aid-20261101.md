@@ -1,3 +1,18 @@
+# 宽度读图辅助与上下轨 — completed-local
+
+- updated_at 2026-11-01T13:07:20.962018+08:00；task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status completed；scope_released true。本轮观察性阅读层完成；不代表预测效力或交易采用。
+- 已接入20/50/200单周期历史10/50/90分位轨道、固定参考／关闭与三线对照、同日回看／光标联动，以及后端参与延续／回落／修复描述。1260有效记录窗口、最少252；5条记录变化；不存在100日输入不补造。
+- 可选API只在include_observation时附加结果，完整历史仍参与计算，返回阅读字段裁至请求数量。真实原history逐字规范化SHA不变：CN1282行、US11725行；未启用时接口结构保持。前端最多取1825条阅读结果以覆盖五年。
+- 验收：后端82 tests、前端14、TS/Vite、ruff、归置通过；两P2日期和重合轨道缺陷已修并独核关闭。桌面1280／手机390无横向溢出；历史回落/修复、未更新日期留白、91/252预热及图表光标实测。浏览器error0，既有大包warning保留。
+- 对应产物在共享本地：docs/ops/work-progress/breadth-reading-aid-20261101.md；docs/ops/breadth-reading-aid-20261101/acceptance.json、source-manifest.json、scoped-source.patch及两截图。新9个源码路径与登记范围一致（web/src/types.ts未改，使用局部扩展类型）。小产物总约0.4MB。
+- 股债利差只读复用：focus-stock-universe另一owner已完成CN周频三年均值±2σ；真实页面核出CN有轨道／US尚无方法核验。未写observation-library／ERP资料包。A股宽度截至10月16日、美股10月20日，页面日期明确，非当前实时市场判断。
+- 源码仅共享本地codex/factor-unit-research-20260915@18e64fa加既有脏区，保留其他所有改动；无源码提交或推送。按运维手册执行一次biao restart-backend使可选API生效，未手起新服务；前端HMR。新金融实验0、行情下载0、交易改动0、无仓外/外盘写入/删除。无后台继续任务。
+- 本协调提交只改本task文件，基于85d86d7bec1a2d9030df8edca5787051f51f1cee；下方保留登记时范围与预算。
+
+---
+
+## 原登记记录（历史）
+
 # 宽度读图辅助与上下轨 — active
 
 - task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status active；scope_released false，仅以下准确路径。
