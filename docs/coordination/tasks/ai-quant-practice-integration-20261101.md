@@ -1,3 +1,11 @@
+# 许可后的单条进度追加完成 — 2026-11-01T13:03:05.578054+08:00
+
+- 原task/owner，status completed_bounded_implementation_and_source_review；scope_released=true。checked_coordination_sha df7dc8cfe037f7190bef609acb326cab78af6925；只读核自身/中控最新记录，自己文件无他人变动，本次不占其他源码或共享登记。
+- 用户明确“允许追加这一条进度”。实际仅POST原研究体系okr-cd1a0bd5532c一条note，version 35→36，GET读回准确原文只1条；status planned、授权、完成标准、其余保护字段和旧history全部保持。不是将研究体系标完成或追加其他目标。
+- 准确回执docs/experiments/raw/ai-quant-practice-integration-2026-11-01/upgrade-note-receipt.json；pending-upgrade-note.json标submitted并链接回执，自有work-progress追加读回事实。前述等待仓外许可状态已解除，原90项工程验收/报告结论不变，无新研究或后台动作。
+
+---
+
 # 两项实践本地接入完成 — 2026-11-01T12:53:42.176901+08:00
 
 - task-id ai-quant-practice-integration-20261101；owner本轮root；status completed_bounded_implementation_and_source_review；scope_released=true（源码/技能/用法/registry自身键/INDEX窗口）。仓外进度登记等待用户确认，不代表完整原研究体系完成。
