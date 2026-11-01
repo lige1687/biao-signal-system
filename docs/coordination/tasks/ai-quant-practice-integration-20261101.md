@@ -1,3 +1,16 @@
+# 两项LLM输出检查完成并释放范围 — completed 2026-11-02T00:22:12.758010+08:00
+
+- task-id ai-quant-practice-integration-20261101；owner本轮root；status completed_bounded_engineering；scope_released=true，覆盖本阶段3新模块/3测试、preparation与原入口测试窄改、项目技能/用法、registry自键/INDEX自身行。两个实现助手已停止写，原金融研究状态不变。
+- checked_coordination_sha f2e415d8adcef472c7d56fba56d9fcde126075cb；已读COORDINATION/self/dispatch与两项邻近任务增量，最新focus仅首页深链、breadth仅图表及候选资料准备；无本阶段同写。主树仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享脏区，源码/报告仅本地未提交，远端不能据HEAD复现；仅协调元数据推送。
+- 实际增量：preparation --llm-review-file可选入口；微扰必须与原输入重复对照并列、真实/合成分组、空扰动/自对照/来源漂移拒绝；时点复用financial_revisions分提前引用/旧期/旧版本/未知，值单位错另列、重复不加分母、同响应冲突整组未知。不调用模型或变交易权限，不认证抽取/独立性/覆盖。
+- 验证：193定向通过，Ruff/归置通过，原5保护文件指纹保持；独审4项P2及主控未知身份占位词均经红绿修复并复核，全部历史失败保留。合成1对微扰+6时点声明实际CLI核通过；真实旧S4-2只有降级提示、缺原答和对照，两诊断阻塞。真实模型敏感性/错误率/金融效果未评价。
+- 报告docs/experiments/llm-output-diagnostics-2026-11-02.md SHA c130f69511139e87e48926403f9d2ace03d24b9f35bf8700fa49dd76f9272fd7；registry803→804仅自键/INDEX仅自新行、他项完整保留。8000/5173 API全文与本地逐字/SHA一致。raw同名含final-tests-02、source-manifest-final、final-acceptance、registration-receipt、api-readback、合成与旧材料准入结果；原任务phase2/controller-review.md与work-progress已追加。
+- 范围和成本：本阶段来源0累计17，模型API/金融实验/行情/交易/付费/安装0；代理实际费用未知。代码文档约124KB，小raw约百KB，保留失败测试夹具约13MB（初始<2MiB为小报告估算，夹具另计）；初始根临时夹具仓内改名归档，无删除。旧定义登记13失败只引用此前回执、不放宽/不重跑。
+- 前次仓外单条note许可已使用，本阶段仓外DB写0，未改目标状态。归档note非本阶段验收必要项，不新申请泛化权限。本轮无待跑模型/金融实验或后台任务；后续真实研究须在明确用途和原授权内先保存合格原答、身份、来源及对照。本阶段工程问题已回答，不以缺真实效果材料无限扩项。
+- 一次元数据普通push遇non-fast-forward；fetch读他方增量后正常merge推送，无强推/覆盖。报告登记前认领提交e8ae858eaf02fc82033c0b6d3940e6d5bd97665a已远端读回；本条推后再次核远端自身文件。
+
+---
+
 # 两项检查已验证，报告登记窄窗口 — active 2026-11-02T00:15:43.338491+08:00
 
 - 沿用task/owner，status active；scope_released=false。checked_coordination_sha bbccf481f69570e204a21fd9c93022efb1ca8b94；已读COORDINATION/self/research-dispatch-controller及新增breadth-reading-aid、focus-stock-universe变化，二者写UI且未占本报告登记键；无范围冲突。
