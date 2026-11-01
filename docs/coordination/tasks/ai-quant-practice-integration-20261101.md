@@ -1,3 +1,12 @@
+# 两项检查已验证，报告登记窄窗口 — active 2026-11-02T00:15:43.338491+08:00
+
+- 沿用task/owner，status active；scope_released=false。checked_coordination_sha bbccf481f69570e204a21fd9c93022efb1ca8b94；已读COORDINATION/self/research-dispatch-controller及新增breadth-reading-aid、focus-stock-universe变化，二者写UI且未占本报告登记键；无范围冲突。
+- 日期纠正：上一条初始范围中的新报告/raw日期2026-11-01为跨午夜沿用旧日期，实际本轮为docs/experiments/llm-output-diagnostics-2026-11-02.md及raw/llm-output-diagnostics-2026-11-02/，task-id继续不变，旧报告不改。
+- root现独占registry.json中上述新报告键、INDEX.md自身单行的追加窗口，写前现场读回保留全部他项；不改已有报告/分类。两个实现助手停止写入，独审4项P2已修并逐项复核关闭；178项定向检查通过，合成CLI与旧S4-2缺件拒绝均验证，工程结果不代表真实模型或金融效果。
+- 后续仅完成本地报告/窄登记/API读回/归置/自己的进度及范围释放。前阶段仓外note许可已使用，本轮不追加数据库或改其状态。源码/报告仍仅本地未推；累计17来源请求，本轮0来源/模型API/金融实验。
+
+---
+
 # 追加两项LLM输出检查 — active 2026-11-02T00:00:17.756182+08:00
 
 - 沿用task-id/owner；用户本轮“其他可行借鉴的呢，也可以搞一下”批准前述数字微扰与资料双向时点核查；status active，scope_released=false仅下列新范围，旧阶段保持封存。
