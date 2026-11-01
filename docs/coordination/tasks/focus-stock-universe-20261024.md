@@ -1,3 +1,14 @@
+# 股债利差上下轨复现与原片对照 — active 2026-11-01T12:31:11.339153+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false仅以下路径。用户要求完整复现，原片或外部原始资料明确上中下轨算法，做一版并检验与视频效果是否一致。不是继续只保留ERP一条线。以原画面同日期形状/触轨为主验收，来源原版和有据替代版明确区分；没有原参数时不以拟合视频伪装完全复刻。
+- checked_coordination_sha c082a888db650b12904e44ef72ebb2a0b4590ded；checked_at 2026-11-01T12:31:11.339153+08:00；已读COORDINATION/self/research-dispatch-controller/market-style-observation-20261020/research-method-practice-20261031，较上轮无远端变化且相邻已释放。基础branch codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享脏区，保留全部他方/本方原冻结，不推源码。
+- 用途为宽基股债相对估值与历史偏离观察，不改道路/信号/策略/交易。采用research-closure及lowfreq当前规范，策略桌面两SHA重核与已批准相同（df92d85b…/85e0e327…）。先核原片、官方原始研究窗口/符号/频率、现有ERP输入版本与日期；依核实定义冻结后计算，并列视频指定2024-09、2025-04等例与不一致处。需要的可执行反例/同日期对照自主做，不用自设六次来源上限停任务，实际请求/失败留账；不网格调参追图、不更换未来数据冒充当时可知。
+- root唯一写现有web/src/components/observation-library/相关ERP读数、投影组件、数据纯函数与测试、必要同区CSS；新web/public/research/erp-bands/小展示；原raw下erp-bands-replication-20261101/的contract/data/analysis/acceptance和新报告docs/experiments/equity-bond-bands-replication-2026-11-01.md，registry仅新键、INDEX仅本行、原state新stage、own progress。原API/production cache只读，不改共享服务。如数据管道必须纠错先追加准确范围。
+- equity_bond_overlap沿原模型/effort专查第2集原片、字幕/说明/评论，独占新raw/video/；model_source_hunt沿原模型/effort专查机构原始股债轨道定义，独占newraw/literature/。原片10帧可复用，但本轮须补完整公开定义可见范围，不重复只看标题。必要再派独立已冻结计算，限定raw/analysis/不改前端。根代理保留方法与验收。
+- 授权公开来源查阅和必要小文本/图片原件、已存资料/本地API只读、本地曲线实施；不绕登录/验证码、不发博主私信、不安装/付费/外盘新写/下载大视频/重启服务。内部21.6GB余量已核，新增小产物预计<10MiB；超出大型媒体需求先按现有存储权限处理。结束验证公式算例、无未来窗口、缺值、源与API字段、上下轨/距离显示、同日期价格图和移动密度；完整复现未成立必须明确缺什么，不能因有轨道就声称可按其交易。
+
+---
+
 # 非重复候选观察接入完成（本地） — 2026-11-01T01:32:10.754131+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed仅本轮合格观察接入与6候选处置；scope_released true。用户授权“有增量、能观察的接入”；2历史+1快照已显示，3项核心资料/定义仍缺，未说全部模型已复刻或预测有效。
