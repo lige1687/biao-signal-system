@@ -1,3 +1,10 @@
+# 首页提醒路由补充 — active 2026-11-02T00:19:09.666418+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。checked_coordination_sha e8ae858eaf02fc82033c0b6d3940e6d5bd97665a；已读新增breadth-reading-aid缺测修复范围，无同写。
+- 原登记范围外仅追加 web/src/components/observation-library/projectionView.tsx 的宽度CN/US深链读取；不写market-style或其他首页文件。防止美股提醒点击却进入全A图。首页先用两市场同一50日周期，直达既有图默认50日；20/200仍在图内查看，避免提醒与跳转周期不一致。宽度owner正准备数据候选，本方只消费已安装API，不重抓或写cache。
+
+---
+
 # 首页常驻市场提醒（股债与宽度） — active 2026-11-02T00:07:39.481934+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户要求打开首页第一屏常驻上下穿时机提醒，可纳入宽度机会/风险观察。实现站内观察提醒，不自动外部推送或改交易规则。
