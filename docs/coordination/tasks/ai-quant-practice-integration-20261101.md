@@ -1,3 +1,17 @@
+# 追加两项LLM输出检查 — active 2026-11-02T00:00:17.756182+08:00
+
+- 沿用task-id/owner；用户本轮“其他可行借鉴的呢，也可以搞一下”批准前述数字微扰与资料双向时点核查；status active，scope_released=false仅下列新范围，旧阶段保持封存。
+- checked_coordination_sha 2c2bb9d623149389bc2c4a6cf63c0e177fd9d4c1；已读COORDINATION、自身、research-dispatch-controller、research-method-practice-20261031、strategy-account-bridge-20261020、theory-workflow-system-increment、personal-lowfreq-system-audit-20261018、investor-workspace-simplification-20261012、research-utility-review-20261012；精确路径查重无新重叠。旧preparation/技能范围已释放；financial_revisions.py原owner文件只读复用。
+- 基线主树18e64fa632dba5dbad0e5fcae09b4ccc75f119a9+巨大共享脏区，不切换/不重置；源码仍仅本地未推。两权威策略SHA与原确认一致，服务研究资料/模型输出核查，不改原策略含义。
+- root唯一写src/lei_signal/research/llm_output_review.py与tests/unit/test_llm_output_review.py；preparation.py可选llm-review-file接线、tests/unit/test_research_practice_preparation.py新集成用例；.agents/skills/lei-lowfreq-research/SKILL.md与docs/research/research-workflow-usage.md窄用法。
+- 两实现助手分别独占新增src/lei_signal/research/llm_perturbation_review.py+tests/unit/test_llm_perturbation_review.py，新增src/lei_signal/research/llm_timing_review.py+tests/unit/test_llm_timing_review.py。只读助手核现有材料；不改grounding、问答生产、模型客户端、金融版本选择器、旧冻结输入/结果。
+- 本轮自有报告docs/experiments/llm-output-diagnostics-2026-11-01.md、同名raw小证据、docs/archive/handoffs-plans/ai-quant-practice-integration-20261101/phase2/及原自有work-progress追加。registry只新报告键/INDEX自行拟收尾重核串行登记，当前未占该写窗口。
+- 验收：同模型/提示/设置、精确输入变化与重复原输入对照；不足不归因记忆；复用financial_revisions核准确期间/最新期回答，提前引用/旧期/旧版本/未知分别计数，日期精度不造时刻；来源SHA/字段位置/时点/覆盖/缺件有反例，真实旧材料只作准入审查。
+- 预算：沿累计17外部来源请求，本轮0新网络来源、0模型API/金融效果实验/行情/付费/安装/生产/交易。小代码报告预计<2MiB，fresh内盘约15GiB；不新增大结果。无完整真实成对模型答案时明示未评价，不用合成回执冒充真实效果。TDD/独审与小本地工程验收不重跑旧金融研究。
+- 前一轮仓外SQLite许可仅准确单条note，已使用；不泛化为本轮新增仓外写。本轮若需登记先备具体note，沿用户权限边界处理。
+
+---
+
 # 许可后的单条进度追加完成 — 2026-11-01T13:03:05.578054+08:00
 
 - 原task/owner，status completed_bounded_implementation_and_source_review；scope_released=true。checked_coordination_sha df7dc8cfe037f7190bef609acb326cab78af6925；只读核自身/中控最新记录，自己文件无他人变动，本次不占其他源码或共享登记。
