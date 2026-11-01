@@ -1,3 +1,13 @@
+# 股债轨道历史效果检验与穿轨对照读图 — active 2026-11-01T13:06:14.931108+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户追加要求检验阶段顶底效果、完整历史、对照视频的上下轨穿越及股价展示。本阶段复用已冻结周频ERP机构参照，不冒称日频原版，不调整原3年±2σ参数追求成功。
+- checked_coordination_sha 7c0796db366c311234e1d7872f829e05314ca032；已读较df7dc8c新增ai-quant完成记录及breadth-reading-aid范围。双方目录互斥，本方不写market-style/BreadthComparison或共享types。共享脏区保留，源码仅本地；本次仅自身协调记录正常推送。
+- 独占web/src/components/observation-library/内ERP专用图表/事件/必要测试及projectionView窄接线；web/public/research/erp-bands/新增evaluation.json，既有cn-reference.json冻结只读。新raw目录docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-effect-display-20261101/（合同、计算、审核、UI验收）；新报告docs/experiments/equity-bond-bands-effect-2026-11-01.md；registry仅新键、INDEX仅本行、原state追加阶段和自有progress。旧replication原件和报告不改。
+- root冻结方法与接线/验收；observation_compute独占新raw/compute/研究代码结果，明确合同后派发；UI执行代理仅observation-library新ERP文件与projectionView；独立审查仅新raw/review/。同任务累计账保留，1核心计算批+必要审核修正，禁止参数搜索；主63交易日、21/126作为预声明期限检查。复用周PE+日价格，次交易日收盘起算，仅当前版本历史关联非PIT交易回测。
+- 读取已有真实周频2005—2026数据，不再为展示重复日频来源搜索。前端默认完整历史，ERP在上价格在下，实际首次越轨标记双图同日期，对选中事件局部放大；不凭事后涨跌画假买卖箭头。公开研究来源和用户截图只读；内部17.4GB余量，小产物预计<10MiB；无安装/付费/仓外写/删除/后台/服务重启/交易。
+
+---
+
 # 沪深300股债上下轨机构参照与原片对照 — completed 2026-11-01T12:59:53.141139+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed_institutional_reference_and_comparison；scope_released true。本轮已完成用户允许的外部资料有据参照版和原片对照；exact_video_replication false，原片窗口／精确输入／合格日频仍缺，不称全部复刻成功或可交易。
