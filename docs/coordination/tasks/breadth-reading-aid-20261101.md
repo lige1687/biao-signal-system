@@ -1,3 +1,14 @@
+# 宽度图与缺测修复、WorkBuddy成果核验 — active 2026-11-02T00:15:40.782830+08:00
+
+- task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status active；scope_released false。用户追加“缺测你就去补啊”，要求检查WorkBuddy《A股市场宽度指标阈值解读》的图和已有检验结果，可用成果直接复用。
+- checked_coordination_sha bbccf481f69570e204a21fd9c93022efb1ca8b94；checked_at 2026-11-02T00:15:40.782830+08:00；已读COORDINATION/self/market-style-observation/market-observation/focus-stock-universe/dispatch。focus新首页提醒只读宽度backend；本方不改其首页/ERP/observation-library。原市场数据修复模块已释放，历史US续更与候选安装机制优先复用。原共享HEAD18e64fa与脏区保留，源码不自动提交。
+- 前端范围沿前条：4个market-style显示文件与原QA/progress。阶段背景图、准确灰缺口已实显；背景开关缩放保持由breadth_sources独占BreadthComparison.tsx及breadthChartDisplay.test.mjs修复。root不并写两文件。
+- 新数据范围先prepare：只读现有cache/备份/资格/日志，复用us_breadth_refresh.prepare，必要新增自有QA目录下repair候选/脚本/manifest和测试，不运行旧覆盖全史backfill，不动原研究矩阵/DB。root独占候选生成/安装；审计agent只读。正式cache在仓外，按用户“仓外修改先确认”要求，候选准备和验收全部完成后才合并提出准确写入确认，不提前阻塞可推进工作。无删除、强推、交易或放松数据资格。
+- 候选操作预算：一次US既有494样本+日历获取（现有4并发、429即停），必要最多一次失败重试；CN先复用离线及小样核因，不盲抓全市场。内盘新检查12GiB可用，保留5GiB，活动候选上限250MiB；新大研究结果另按外盘规则。金融实验暂0；WorkBuddy旧结果只读复核，若新增检验先绑定原口径与累计账本，不照搬结论。
+- 产物继续docs/ops/breadth-reading-aid-20261101/和.codex/breadth-reading-coordination-20261101/；验收原值保持、日期/覆盖/复权证据、候选校验、真实图表桌面/390/缩放、相关tests/build/归置。当前无后台自动续接承诺。
+
+---
+
 # 宽度图背景与缺口可读性修正 — active 2026-11-02T00:00:42.014152+08:00
 
 - task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status active；scope_released false。用户明确反馈图上信息不明显，请求背景颜色并核查断线。
