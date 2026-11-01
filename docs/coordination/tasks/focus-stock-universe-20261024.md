@@ -1,3 +1,15 @@
+# 首页市场提醒完成，实时资料尚未齐备 — completed 2026-11-02T00:36:36.035068+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed_local_observation_alert_mechanism；scope_released true。首页常驻站内机制完成；当前ERP历史、宽度陈旧，live-alert-input-ready=false，不称实时机会/风险提醒已启用。
+- checked_coordination_sha c7555d0bb359fe379dc54aeb967e978656c277b0；已读自上次f2e415d8后ai-quant完成、breadth WorkBuddy归档及缓存安装待用户确认全新增段，无同写。未介入相邻market-style/源cache/准入，源码仍共享18e64fa加脏区，仅本地，协调元数据正常推后读回。
+- 3对象：沪深300原周ERP三年±2σ、全A B50、标普500 B50。数值/上下界/末日常显，首次穿越/回轨标新、持续不重报；原卡和已有价格图复用。首页移除旧固定80/20徽标入口；3链接逐一核对对象和默认50日。20/200仍留既有宽度图，不重复另一图。
+- 质量拦截：历史包/未来/乱序/缺值/相位冲突/过期/请求失败（含旧缓存）不报新；同日修订不当新事件。本机已读按日期/方法去重，常规跨tab同步；极端并发localStorage覆盖可能丢已读，低影响已记录。宽度7日仅资料时效，不是金融阈值。ERP动态边界和宽度P10/P90均不升级买卖规则。
+- 实际末日ERP2026-10-30 historicalOnly、CN10-16、US10-20，所以新提醒0且显式待更新。宽度补数据候选与准确仓外写入确认由breadth-reading-aid持有，本方未重复请求或自行安装。无站外推送/后台服务，页面存续时5分钟重读。
+- 14单测、TS/Vite、归置/diff过；真实首屏/3图跳转/刷新和桌面1710、手机390过，error0。移动固定高度裁切已修并数值/截图读回；seen/pins保持原null。活跃新事件的真人UI点击因资料均旧未现场演练，状态/ack重载由单测+独审覆盖，不夸验证范围。
+- 新产物docs/ops/market-alerts-home-20261101/合同/manifest/API摘要/浏览器QA/acceptance（SHA fa16e07f5a0d593f0608cdcc53d288f64d2ae8f87c985db8ed33f7061dbda596）；原state仅新增home_alerts_20261102，自有progress前置。所有旧金融研究/冻结输入不改，3冻结SHA一致，0新金融实验/行情下载/源数据写/仓外写/删除/安装/服务重启/源码提交/生产部署/交易。两工具及手机失败修复保留验收记录。验收后agent和自建tab已收尾，无后台任务。
+
+---
+
 # 首页提醒路由补充 — active 2026-11-02T00:19:09.666418+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。checked_coordination_sha e8ae858eaf02fc82033c0b6d3940e6d5bd97665a；已读新增breadth-reading-aid缺测修复范围，无同写。
