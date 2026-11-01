@@ -1,3 +1,16 @@
+# 沪深300股债上下轨机构参照与原片对照 — completed 2026-11-01T12:59:53.141139+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed_institutional_reference_and_comparison；scope_released true。本轮已完成用户允许的外部资料有据参照版和原片对照；exact_video_replication false，原片窗口／精确输入／合格日频仍缺，不称全部复刻成功或可交易。
+- checked_coordination_sha 3f86ccd57802cdd09f9e792de45267b1fa72c496；checked_at 2026-11-01T12:59:53.141139+08:00；已读新增ai-quant-practice-integration-20261101和breadth-reading-aid-20261101全相关段，后者明确不写observation-library，双方无同写。沿原COORDINATION/self/dispatch/market-style/research-method-practice，保留所有他方修改和远端记录。
+- 原C21沪深300ERP卡片及价格投影接入三年均值±2sigma、距上下轨和历史位置；方法取国信2025第9.4节／图163，同一原文对象方向窗口，独立明确自然年(t-3Y,t]含当日/ddof0。未复现原报告成分调仓盈利对齐；未给美股套A股阈值，不添重复卡片，42项／21可读。
+- 旧API/AKShare实际月末不可当日频。具名股叉叉周PE1100点，原日期+1由交易日历1100/1100及另源52周最大PE差0.0001784支持，仅推断、sourceDate保留。与同日10Y/价格配对1071个交易周2005-11-11—2026-10-30，无缺周，920有效轨道。末值6.123209／中5.898239／上7.020768／下4.775711。历史快照非自动更新，不做PIT回测。
+- 原片2024-09有1/5周上轨突破，2025-04为0/5且maxZ1.2813，因此示例未完整复现；不调窗口追图，不把周数据推断为没有日内信号。预测、策略、账户实验0；金融有效性未升级。原视频HVC1、作者参数、日频来源失败全记录，未绕登录/付费/安装/大视频下载。
+- 报告docs/experiments/equity-bond-bands-replication-2026-11-01.md SHA d0dd66847ee542bbaa24b421aab64ff1fd504cc58e176820e442c4cb34c802f9；raw docs/experiments/raw/douyin-observation-models-overlap-2026-10-31/erp-bands-replication-20261101。public JSON SHA2065067faa2144a88487af14da64e2af3f4e3c7ef83e48d136c8fcbc3b46724f。registry原801条保留仅新键、INDEX本行、原state新stage、own progress；API全文逐字/4本地链接及静态JSON哈希通过。
+- 37观察库测试、TS/Vite、归置/diff通过；Python/TS逐行1071复算最大差1.09e-14；独立来源/数据/实现复核无未解决P1/P2。桌面五条SVG线、390pxiframe无溢出、切1年轨道不变、首页放出刷新收回恢复原null，JSerror0。类型/cwd/QA变量/API短路径404等首次失败及修正留痕。acceptance SHA2056cf34d7ab6ad64e5aad9280fae74d2e407919f782d9508fb256a0d4e4a747。
+- 主树codex/factor-unit-research-20260915@18e64fa加共享脏区，源码与成果仅本地未提交／未推；此提交仅自身协调task。无生产部署/服务重启/交易/删除/仓外新写，原策略两SHA不变。新raw约8.4MB仓内，来源实际/部分近似次数各账保留，旧阶段预算不重置；无本任务后台续跑。
+
+---
+
 # 股债利差上下轨复现与原片对照 — active 2026-11-01T12:31:11.339153+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false仅以下路径。用户要求完整复现，原片或外部原始资料明确上中下轨算法，做一版并检验与视频效果是否一致。不是继续只保留ERP一条线。以原画面同日期形状/触轨为主验收，来源原版和有据替代版明确区分；没有原参数时不以拟合视频伪装完全复刻。
