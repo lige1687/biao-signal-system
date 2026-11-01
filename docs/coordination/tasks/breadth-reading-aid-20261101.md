@@ -1,3 +1,14 @@
+# 宽度图背景与缺口可读性修正 — active 2026-11-02T00:00:42.014152+08:00
+
+- task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status active；scope_released false。用户明确反馈图上信息不明显，请求背景颜色并核查断线。
+- checked_coordination_sha b318ee042d111e77ca30b6b4209d4051a26affbe；checked_at 2026-11-02T00:00:42.014152+08:00；已读COORDINATION、breadth-reading-aid、market-style-observation、focus-stock-universe、research-dispatch-controller相关最新记录。相邻ERP新阶段已完成且未改本方market-style，唯一写者仍按本条限定。
+- 原9源码SHA与上一轮全部一致。主仓仍codex/factor-unit-research-20260915@18e64fa加既有脏区。只改web/src/components/market-style/BreadthComparison.tsx、breadth-comparison.css；新增同目录breadthChartDisplay.ts及breadthChartDisplay.test.mjs用于既有后端状态到色带的显示映射和缺口汇总；如需拆组件仍限同名新helper。原Python判读、阈值和数据只读，不做行情更新、历史填补或股票池研究。
+- 本轮效果：默认上下图同步背景色展示既有参与回升／收缩，单独显出低位修复／高位回落；中性/分歧不染色。无宽度的日期用灰带与图内缺测标记，列准确区间，线不跨缺口连接；有色图例可关闭阶段背景。仅映射后端code，不在前端新增金融判定。
+- 断点审计agent只读API/本地JSON/日志/资格sidecar；可写原QA目录gap-audit-v2.json。root保存现有页面日期轴和v2验收。新helper独占执行agent；root图接线/CSS；必要只读审查各自独立。
+- 必要验收：缺口/单日/跨缺口状态断开与分组测试；真实CN/US及时间/周期切换；图上背景/灰缺测/转折标签、缩放、桌面390无溢出；构建与归置。本轮新金融实验0、行情数据写0/下载0、不改ERP路径，源码仅本地不推共享脏区。旧证据/失败与预算保留；复用progress与QA目录，不新建研究任务。
+
+---
+
 # 宽度读图辅助与上下轨 — completed-local
 
 - updated_at 2026-11-01T13:07:20.962018+08:00；task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status completed；scope_released true。本轮观察性阅读层完成；不代表预测效力或交易采用。
