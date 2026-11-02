@@ -1,3 +1,14 @@
+# 已装入补数，继续三指标增量与美股对话复核 — active 2026-11-02T12:43:02.008364+08:00
+
+- 同一task/owner；status active_increment_review_and_cn_remaining_inputs；scope_released false；checked_coordination_sha 59e4b41eab5d64a1adcecb93e139f274e7c57d87。已核自身与相邻首页owner，未扩写首页/ERP生产组件。
+- 前次批准两缓存已完成：CN1282→1288恢复6点，US11725→11733追加8日至10/30；两个原字节备份、所有既有记录保留、全部API值一致，真实页面CN缺20→14、US缺口0。installation-v3.json与desktop-cn-restored-v3.jpg / desktop-us-refreshed-v3.jpg留证。
+- 用户本轮新增要求：比较宽度、股债利差和年线单独/组合的增量信息，查看WorkBuddy“美股市场情绪指标探讨”，继续补缺。复用既有研究；新问题限历史信息用途、无需交易或生产规则变更。按research-closure和lei-lowfreq-research执行，小合同与累计预算附原QA目录，不重跑旧A股原结果。
+- 追加只写自身docs/ops/breadth-reading-aid-20261101/*v4*、原work-progress、必要研究报告 docs/experiments/breadth-erp-ma200-increment-review-2026-11-02.md及registry唯一同名键；root负责小研究合同/核验/结果，cn_remaining_inputs仅写cn-remaining-inputs-v4.md，increment_inputs只读。源码/所有WorkBuddy源/其他owner不改。
+- 默认有界新比较预算1核心+最多3必要后续批、6外部研究来源请求；旧A复核2批保留，不冒称未见数据。A股补数沿原运维输入路径，先查已登记现成原始资料与备份，再确定必要采集；正式仓外新写超出已批准两候选的范围时须带具体候选再确认。
+- WorkBuddy当前也在回应用户的严格验证/ERP问题，源可能并发变化；只读已保存版本并标时点，不向WorkBuddy发送消息、不执行其脚本或同步未完成结论。
+
+---
+
 # 两份补数据缓存获准安装 — active 2026-11-02T12:39:48.236907+08:00
 
 - task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status active_approved_cache_install；scope_released false。
