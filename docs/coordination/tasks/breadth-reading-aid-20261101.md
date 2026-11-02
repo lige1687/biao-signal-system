@@ -1,3 +1,13 @@
+# A股更正已安装；用户要求提高观察入口优先级 — active 2026-11-02T14:39:50.051694+08:00
+
+- 同一task/owner；checked_coordination_sha b762685a88f733e5c316575e54e0834559fb0a39；已读focus-stock-universe-20261024最新首页提醒完成/scope_released true，无同写。无新金融实验或重复研究。
+- 用户已批准47日更正，installation-v4.json记录备份与安装；live1302条/SHA1d01810654c1e0e680de22c286639b7ae566f411ef7a57785e3eb009909527b8，14缺测补齐、33更正、其他1255保留。独立API全部3906值一致、243日轴缺测0，US未改。root继续真实页面验收。
+- 用户新增明确要求：取消任务内仓外文件修改逐次确认，并把宽度、股债利差/越轨观察等有用信息前置。已准确修改 ~/.codex/AGENTS.md 的对应句及项目AGENTS仓外确认沿用句；保留删除/强推等原约束，不改安全设置或记忆文件。
+- UI只复用现有市场提醒、价格投影和研究结论。新增唯一写范围：web/src/pages/FundamentalsPage.tsx（市场页先显示已有3项提醒）、market-observation-alerts/index.tsx与style.css（标题/重点样式/日期与事件可见）、observation-library/projectionView.tsx与projection.css（宽度/股债快捷按钮）、catalog.ts（股债观察排序），BreadthComparison.tsx（显示已重建区间口径）。数据计算/阈值/自动交易/ERP原件/已读与pin偏好不改。
+- root写Fundamentals/提醒组件与样式/宽度口径；子代理可仅写projectionView/projection.css/catalog三个路径。自身QA v5小快照、报告/进度/registry唯一原键。基本验收TS/build+相关既有模型测试与真实A/美快捷入口、ERP越轨/历史状态、宽度缺测0、390/桌面，不制造重复图或未验证的买卖评分。
+
+---
+
 # 三指标复核完成，A股47日更正候选等待明确授权 — awaiting_approval 2026-11-02T13:25:47.959666+08:00
 
 - 同一task/owner；checked_coordination_sha aa746c6e14cc59f08453ac7abc695ea6a44efeaf；研究完成，运维安装等待用户具体决定，无后台续跑。最新问题已经有界回答，未扩展新交易/阈值实验。
