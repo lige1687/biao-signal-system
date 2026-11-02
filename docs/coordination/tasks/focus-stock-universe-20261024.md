@@ -1,3 +1,14 @@
+# 市场首页补充模型小卡与详情大卡 — active 2026-11-02T18:54:12.473134+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户要求核既有模型的日常观察帮助，市场观察首页用小卡看直观信息、点击大卡详情；只桌面，沿web/AGENTS。
+- checked_coordination_sha 5d3062e0c555d6ac003050bbf520d9d17cb8b54e；已读COORDINATION/self、breadth-reading-aid最新v8 active、market-style-observation、market-observation归档、investor-observation-map与workspace已释放范围。最新breadth owner重开market-observation-alerts/index.tsx与style.css，本方全部避开，只读复用MiniTrend；原三卡和跳原有大图路径不改、不重复生成ERP卡。首次登记前旧base断言发现并行变更已安全停止，未产生源码改动。
+- root唯一写web/src/components/observation-library/内新增HomeObservationCards/ObservationDetailDialog/homeCardModel及必要测试/样式；窄改view.tsx/preferences.ts（null偏好默认少量，显式空列表保留）与projectionView.tsx导出既有详情供弹层复用。其他目录/主Workspace/三旧卡/宽度图/后端/公共数据冻结只读。策略两SHA与旧记录一致，层级独立叙事观察，不改交易规则。
+- 产物docs/ops/market-alerts-home-20261101/cards-20261102/；新docs/experiments/market-sentiment-observation-cards-2026-11-02.md，registry仅该新键/INDEX本行，原state和own progress追加。report_only复用已有证据；原始来源核对至多6次，0新金融实验/参数搜索/数据下载/源cache写/后台/交易。内盘10.45GiB，新增小产物<5MiB并保留5GiB。
+- 只读Sol/medium助手仅可写本stage evidence-review.md，核用途/增量维度/重叠/日期限制；root源码与验收。只有4-6常用项默认，其余按用户选放/收回；旧显式偏好保留，所有readable有入口。慢月度与历史资料明示，无来源阈值不硬画，图内缺值不连线。
+- 验收：重复检查、值/日期/单位与源一致、旧固定样本不冒当前；桌面原三卡及新增小卡，点击同页大卡/曲线市场一致、Esc关闭和焦点归还、偏好保存；定向边界tests、TS/build、归置及读回。共享dirty18e64fa保持，源码不提交，只有协调元数据正常推送。工程展示不等于预测效果。
+
+---
+
 # 首页市场提醒完成，实时资料尚未齐备 — completed 2026-11-02T00:36:36.035068+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed_local_observation_alert_mechanism；scope_released true。首页常驻站内机制完成；当前ERP历史、宽度陈旧，live-alert-input-ready=false，不称实时机会/风险提醒已启用。
