@@ -1,3 +1,14 @@
+# 行业间横截面观察数据链补齐 — active
+
+- 原task-id market-increment-map-20261102 / owner 01a19ce6-5541-7071-9f17-f78b42235a0c/root；status active；scope_released false；updated_at 2026-11-03T00:15:17.753237+08:00。
+- 用户2026-11-03追加明确授权：主动寻找完整同口径数据，推进横截面共动/离散度观察。沿原历史与预算，新取得范围限定A股行业指数/美股行业ETF日线公开源，不付费、不交易、不改现有策略。
+- checked_coordination_sha 6cd4ed7533928876dca502f2ad9196152acf52fa；checked_at 2026-11-03T00:15:17.753237+08:00；已读COORDINATION/self/sector-crowding-advice-review/cross-market-risk-context/research-dispatch-controller。sector任务已进入行业内部拥挤效力比较，本线只行业间描述与资料更新；cross-market正改首页展示，本线不写其文件；互不重做。
+- 写范围：本任务raw下continuation-20261103、原独立HTML备份后更新、原报告追加续篇、registry仅本键、专属外盘新run；root主写，inventory代理只source-inventory.md。原行情缓存/旧冻结/其他报告只读。现分支codex/factor-unit-research-20260915，基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；共享脏树保留，成果仅本地未推。
+- 新阶段上限6来源发现/3公开获取批次100HTTP（每操作最多1重试）/2描述批次；0拟合/收益回测/付费；原6来源与2描述尝试不归零。预算为本轮取数边界，不用预算耗尽冒充数据无效。
+- 验收：源身份/调整/日期/共同交易日覆盖、无静默换源或拼接；20日相关与5日离散独核、同日宽度/幅度的描述增量、图的日期与来源清楚可读、旧版备份/报告/API/协调读回。尚未取得数据，不虚称实时链已完成。
+
+---
+
 # 采用审查与历史单图已交付；当前数据仍有边界
 
 - task-id market-increment-map-20261102；owner 01a19ce6-5541-7071-9f17-f78b42235a0c/root；status completed_bounded_adoption_review；scope_released true；updated_at 2026-11-03T00:03:03.907797+08:00。
