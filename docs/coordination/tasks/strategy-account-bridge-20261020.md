@@ -1,3 +1,16 @@
+# 中期强度与近期偏冷联合选股：有界研究完成 2026-11-03T00:50:10.285225+08:00
+
+- task-id strategy-account-bridge-20261020，owner原root；status completed_bounded_question；scope_released=true仅本轮非冻结报告/分析实现；原策略代码/配置/源资料和冻结结果保护保持。用户授权的本轮完整账户与组合增量问题已回答，未把整个策略发现工程宣称完成。
+- checked_coordination_sha ec65c3db7e70f0385672b03daade9a26bf35a74a；已读最新market-increment-map、cross-market-risk-context及sector-crowding 00:49有界完成记录，结合原COORDINATION/self/dispatch/utility/personal-lowfreq，未发现同题同写。残差动量、行业条件、原财务因子数据仍沿原owner，不重复。
+- 新MR是中期动量与上月反向收益各半排名的20槽账户，并非严格回撤交集；先冻结定义再计算。CN历史固定300的2015—2025年化−2.83%/最大回撤65.07%；US当前IVV504回看的2021-02—2026-06年化−0.23%/34.76%。CN落后原MV，US落后原V；两市场费用压力均更差，不能按金融故事认定流动性补偿。
+- 必要后续检验低相关用途：US MR/V日收益相关0.3577，但初始各半资金年化4.21%/最大回撤15.74%，不如V/现金各半4.30%/9.22%。没有足够增量，两项新构造均不接前向；原四真实行情模拟账户冻结保持，00:30读回心跳正常、尚无成交及前向收益。
+- 1核心批共4新报价账户（中美各基础/压力费），复用旧同日单项账；1资金组合后续，无额外个股回测/参数搜索/行情下载。5来源请求含1失败，预算未用完但无剩余必要核心检验。9合成边界测试与26组独立核数通过，逐次选股/资金/费用/回撤/配对区间复核；已见历史，不称未见样本外，保留US当前成分偏差、真实成交及母指数全收益缺口。
+- 报告docs/experiments/trend-pullback-combination-2026-11-03.md SHA 1a25290dea76ee104fc0839094690ed291bfb9ff3b113fffe252329379ce3a88；同raw保存设计/合同/来源/两阶段/失败修复/独审/定位/completion/delivery-final。两市场资金、相对财富与回撤图已嵌报告，8000/5173正文逐字读回、其余817登记项保留，归置通过。
+- 外盘独立trend-pullback-combination-20261103/trend-pullback-combination-20261103-20261103T002248-e0f6bdac2517/result共11880799B<64MiB；UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9核验，内盘实测12.21GB>5GiB。原研究/前向engine/config字节保持，无删除/真实交易/券商/通知。新源码及研究仅本地共享脏树base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，不自动提交推送；仅自身协调元数据正常推送。
+- 下一项不同证据仍是已保留的US盈利与保守投资、CN动量与现金流逐股时点及可交易输入，沿资料owner补资格；本轮不以公开分组毛收益伪造当前选股，不把新MR负结果推广到所有动量或反转。
+
+---
+
 # 趋势内回撤联合选股增量 — active 2026-11-03T00:21:24.815306+08:00
 
 - 原task strategy-account-bridge-20261020；owner原root；status active；scope_released=false仅本轮新研究范围。用户继续授权从金融机制出发研究组合、有增量且可执行者才前向；真实行情模拟账户，不是真实资金。
