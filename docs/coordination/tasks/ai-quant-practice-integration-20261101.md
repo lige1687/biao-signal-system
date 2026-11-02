@@ -1,3 +1,14 @@
+# 共用交接与接续流程实施 — active 2026-11-02T14:55:33.024409+08:00
+
+- 同task/owner；用户明确批准借鉴、沿用、优化并沉淀共用流程。status active/scope_released=false。checked_coordination_sha 6e1707aeb3cd3997998dc697a259ae70d5b1d6ca；fresh fetch同SHA，已核相关owner，无同写。沿已读SuperAgent4文档，不新联网研究，不安装DS服务。
+- 通用唯一owner core助手新增 ~/.codex/skills/codex-delegate/scripts/handoff.py 和tests/test_handoff.py（用户允许本任务必要仓外修改，原技能/root脚本先备份）；root仅改其SKILL.md、scripts/dry_run.py、tests/test_dry_run.py及新增references/handoff-workflow.md。通用层为文件绑定/接收核对/有界回执，不另建研究或预算平台。
+- 项目适配唯一owner adapter助手新增src/lei_signal/research/delegation_context.py及tests/unit/test_delegation_context.py；root仅preparation.py可选参数、tests/unit/test_research_practice_preparation.py、orchestrator/低频研究技能与工作流/agent-workflow窄接线。既有模型路由、研究账本、冻结结果只读。
+- root自有docs/experiments/reusable-agent-handoff-2026-11-02.md、同名raw与原handoff/phase3、原progress；registry唯一该键/INDEX自身行拟收尾重核后登记。单写范围各异，独审只读。
+- 验收：关键研究事实/unknown/truncation/errors完整绑定且来源改动拒绝；接收实际读回；持久化reserve/dispatch/receipt/callback/review/continuation按任务阶段身份去重、同ID异内容拒绝，预留后中断须核实际运行、不自动重派。普通任务旧dry_run兼容，真实旧研究只读演练；实际小型跨代理readback、合成重启/重复回调及独审。源码/工程通过不证明模型理解或收益改善。
+- 当前服务研究执行与证据层，不改交易语义；两权威策略SHA保持原确认。0新外部来源累计23、0付费模型API/金融实验/行情/安装/生产。小源码/报告预计<1MiB、保留测试夹具另计，fresh内盘13GiB。无新后台监听或自动化，状态附件保存在现有任务目录，未声称整个平台exactly-once或退出后自动续做。
+
+---
+
 # SuperAgent只读评估已归档 — completed 2026-11-02T14:44:56.499783+08:00
 
 - 同一task/owner；status completed_report_only；scope_released=true（本轮报告/raw/registry唯一键/INDEX自一行/progress）。checked_coordination_sha 44819e028c8281fbd37c2b8612cd7238079276e6；fresh fetch无新任务增量，前条相关owner已核。
