@@ -1,3 +1,12 @@
+# 小图点击切换参考 — active 2026-11-02T19:40:14.680738+08:00
+
+- 同task/owner；scope_released=false，checked_coordination_sha 7ec56a5e9b7963f4c6a60eb3b6fd9617c70b22a9；已读COORDINATION、自身、focus-stock与research-dispatch-controller。相邻首页卡任务completed且释放，MiniTrend本轮只读，不影响其复用。
+- 用户明确要求点选参考直接改变小图。唯一写market-observation-alerts/index.tsx、style.css、market-style/BreadthInstitutionalReference.tsx及自身QA/进度。主控单写；这是边界清楚的局部交互，不增加代理/设计批准/研究实验。
+- 三项参考：本地动态50日P10/P90、StockCharts固定50日30/70、200日50%半数线；点选后曲线强调、轨道/背景、读法同步。200日不制造上下轨，三个原始序列与日期保留；来源详情不重复堆数，ERP/大图/后端告警/缓存/用户seen和pins不改。仅桌面验证，两市各自选择；无需新增网络源或金融检验。
+- 基线共享dirty codex/factor-unit-research-20260915@18e64fa，前轮源码本地已验；source-before-v9存三文件精确基线，两份策略源指纹未变，改动只服务叙事观察层。只推协调元数据，源码不提交。验收真实点击三模式、数值/图形及两卡隔离、必要TS/build和归置；原研究累计11次来源/其他预算保持。
+
+---
+
 # 外部固定参考与动态分位同屏完成 — completed 2026-11-02T19:07:32.379473+08:00
 
 - 同task/owner；scope_released=true，释放本轮6源码及自有报告/进度/registry原键与QA，checked_coordination_sha 6b994d7e7379e395fbe47615fc65c66d40c5d650。已读相邻focus-stock最新active范围，其避开本路径并只读MiniTrend，无同写。
