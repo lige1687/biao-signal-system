@@ -1,3 +1,14 @@
+# 市场首页补充模型小卡与详情 — completed 2026-11-02T19:23:45.700340+08:00
+
+- task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed_local_desktop_observation_cards；scope_released true。首页补充模型小卡、同页大卡、可选收回已本地实现。
+- checked_coordination_sha bc4f5d05ab38e2ffae72a4f8d57c566a5fc64953；已读登记后breadth v8完成段，其原三卡/图范围释放，但本方仍全程避开market-observation-alerts/market-style，仅只读MiniTrend。共享dirty18e64fa保留，源码未提交。
+- observation-library新增4默认卡（融资、VIX、HY、月度历史集中度），20项可选；另ERP原卡无重复。原值/实际日期/变化/趋势/简短读法；标题/底部开同页dialog，价格上下图复用原MetricProjection；融资无同口径历史只给读数。Baker不算相邻月差，历史/陈旧/空值显式，不造机会风险线；默认仅null偏好生效，显式[]和旧选择保留。
+- Sol/medium只读评审实际派发回收，root独核主源/本地资料/UI。44定向检查、TS/Vite、归置/diff通过；桌面1710无横溢，4默认及AAII/Baker详情可用，全部20卡无JS错误；UI添加/收回/刷新/空列表过，pins/seen复原null。native modal/cancel事件/焦点返还核验；CLI Enter/Escape缺虚拟键码、Mac锁定，未称真人Esc已演练；未改源码迎合工具。
+- 报告docs/experiments/market-sentiment-observation-cards-2026-11-02.md；registry仅新键、808旧条保留，INDEX本行，原state只加home_observation_cards_20261102，own progress前置。证据docs/ops/market-alerts-home-20261101/cards-20261102/含合同/评审/主源/读回/QA/截图/acceptance/source-manifest。
+- 0新金融实验，6/6公开来源操作，0新行情抓取/后端缓存写/交易/生产部署，旧ERP轨道/效果JSON/报告3 SHA不变，预测结论不升级。构建复制public后产物约32.7MiB，超原5MiB估计，全留未删除；最新盘内10.55GiB>5GiB。工具失败/限制留验收。只桌面、无后台；协调元数据正常push并读回。
+
+---
+
 # 市场首页补充模型小卡与详情大卡 — active 2026-11-02T18:54:12.473134+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户要求核既有模型的日常观察帮助，市场观察首页用小卡看直观信息、点击大卡详情；只桌面，沿web/AGENTS。
