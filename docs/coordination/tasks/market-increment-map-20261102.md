@@ -1,3 +1,17 @@
+# 横截面观察已补近期完整收盘资料并更新单图 — completed selected scope
+
+- 原task-id market-increment-map-20261102 / owner 01a19ce6-5541-7071-9f17-f78b42235a0c/root；status completed_selected_panel_observation；scope_released=true；updated_at 2026-11-03T00:37:29.445672+08:00。
+- checked_coordination_sha da87a511625dd198efe685ce66a4709e2e16155b；checked_at 2026-11-03T00:37:29.445672+08:00；交付前重读self/sector-crowding-advice-review/cross-market-risk-context，前者仍行业内部效力在做、后者已完成展示维护；不重跑其研究、不接管主页。此前数据目录owner与报告库owner已释放；本轮追加目录自身键。
+- 实际交付：独立图原URL更新，沪深300十行业2024-03-12—2026-11-02共640价格日/620合格20日窗；美11只真实Sector SPDR ETF2024-11-04—2026-10-30共499日/479窗，11/2盘中排除。CN rho0.157172、disp5 1.971641pp、5/10涨；US rho0.156223、disp5 1.077335pp、8/11涨。相对此前252日分位及前5日变化一起展示。
+- 资格边界：A股申万31官方源访问失败，改用明确标识的沪深300大盘十行业独立观察，不拼接原31合成；US旧图曾把合成线误标ETF，旧版保留、当前改真实ETF。CN价格指数、US拆分调整收盘价均不含现金分红；US分红调整敏感性最新无差、历史rho最大差0.0328。不同池不比绝对值；当前成员/版本/PIT资格不扩展。
+- 描述增量：同样上涨家数组内相关性中间一半跨度的中位CN0.166、US0.222，显示与上涨家数汇总不等价；是价格压缩描述，不是预测或账户增量。CFTC仍10/20旧历史持仓，未刷新或识别今日买方。0模型拟合/0收益实验/0交易。
+- 产物：原报告新增2026-11-03续篇；同raw/continuation-20261103含source ledger、定义、代码、独立核验、前版备份、图模板/render、state；web/public/research/market-increment-map-2026-11-02/index.html；registry仅自身键；acquired-data-catalog.json/md新增latest_cross_section_observation小入口并保留所有旧内容。外盘新run market-increment-map-20261102-20261103T001645-6461aa2fb48e，固定UUID核验，data-package与源原件有SHA。
+- 验收：640x10、499x11无缺价，独核首中末6窗、缺价影响21窗、美国未收盘排除、五次拆分无机械跳价；主控HTTP200、CN/US切换及120日显示、展开来源无可见路径/哈希、0页面错误、报告全文API读回；归置及精确diff检查通过。代理修复render硬编码/图读法后主控验收。
+- 累计旧阶段6网页来源/2描述尝试仍保留。本阶段4搜索query+2open（含1失败），直接HTTP31（含失败/HEAD），3取得批次，1描述批次含CN/US及US分红敏感性；0付费。两SW证书失败、curl502/508、中证全指两空日线拒绝、一次合同路径冲突均留账。
+- 代码/报告仍共享本地及外盘，未推成果分支；本协调只同步元数据，远端不能独立复现。没有数据删除/强推/策略改动、生产缓存更新、首页接入或后台每日刷新。31申万完整范围、身份和交易效力明确未完成；本次选定面板观察问题已回答。
+
+---
+
 # 横截面新数据已取得，验算与图更新中 — active
 
 - 原task/owner不变；checked_coordination_sha 8eb1274928d3f1bdf9f051c3677a1cbe17aa4a3b；checked_at 2026-11-03T00:29:26.664093+08:00；补读downside-sensitivity-universe-20261023与research-evidence-catalog/report-library-integration-20261008，原数据目录写范围已释放。
