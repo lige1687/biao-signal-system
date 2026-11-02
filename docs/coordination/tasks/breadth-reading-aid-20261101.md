@@ -1,3 +1,14 @@
+# 47日更正与重点观察入口已完成 — completed 2026-11-02T14:58:26.294647+08:00
+
+- task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status completed_bounded_engineering；scope_released=true（本轮7个UI路径、两个AGENTS对应句、自身QA/报告/进度/registry原唯一键）。checked_coordination_sha 8ba5307abfdc4b068a9103546a1a72ee6f232c09；已读self、focus-stock-universe-20261024、ai-quant-practice-integration-20261101最新接续流程认领，无同写；共享源码仍仅本地，未提交/推送，不以HEAD冒充可复现成果。
+- 明确批准后安装A股47交易日：14新增、33更正、1255其他原记录exact保留；正式1302条/SHA1d01810654c1e0e680de22c286639b7ae566f411ef7a57785e3eb009909527b8。完整原字节备份SHA8a6c051b14988759a7240cf61c50d16f3aaf66a956fe3ecfb6798cf2719d88ff。独立全部3906个API值一致，截止10/30的243日轴缺口14→0；浏览器验收时11/02盘中新增点仅当日待更新。US本轮SHA未变。installation-v4/api-install-verification-v4留证。
+- 用户规则已准确改 ~/.codex/AGENTS.md:13与项目AGENTS仓外沿用句：任务内必要仓外写无需因路径再确认，核目标/必要备份/读回；保留删除/强推约束，不改安全设置或记忆。
+- 复用已有三卡：首页和基本面市场顶部显示宽度/ERP位置、上下界、同日宽度参与方向/B50近5条变化、最近历史穿越日期。快捷breadth/ERP及US VIX/HY入口、股债排序、CN修复口径完成；独审发现市场toggle URL遗留已修，默认入口/两组开关/刷新真实核验。原阈值、ERP资料、交易模型、pin/seen不改，未创建US轨道或综合买卖评分。
+- TS/Vite最终build、17/17既有alert/adapters/preferences、归置通过；桌面1280/手机390、首页/市场真实截图、console error空，无横向溢出，viewport已恢复。独立review同日趋势/历史ERP边界通过。acceptance-v5、source-manifest-v5、scoped-source-v5.patch和5图记录7文件实际改动；基线priority-source-before-v5.json而非共享dirty HEAD。
+- 报告与registry原键已更新安装/入口状态，其他条目保留；原研究结论/预算不变，无新金融实验、搜参、行情采集、交易或后台运行。当前来源重建仍非历史PIT/strict-all，不认证长历史分位。范围内已授权工作完成，无待用户决定。
+
+---
+
 # A股更正已安装；用户要求提高观察入口优先级 — active 2026-11-02T14:39:50.051694+08:00
 
 - 同一task/owner；checked_coordination_sha b762685a88f733e5c316575e54e0834559fb0a39；已读focus-stock-universe-20261024最新首页提醒完成/scope_released true，无同写。无新金融实验或重复研究。
