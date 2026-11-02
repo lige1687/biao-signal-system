@@ -1,3 +1,14 @@
+# 焦点续接包与股债检验显示 — active
+
+- 同owner、scope_released=false，已读最新协调差异；原范围继续。明确新增仅本任务小型衍生显示数据：web/public/research/focus-momentum/continuation.v1.json 与 web/public/research/erp-bands/sensitivity.v1.json。原 observation.v1、cn-reference、evaluation 及冻结报告保持只读。
+- 原固定300重叠23/23完全一致，新增193有效日止10/23；末端六日两次供应商登录失败，保留未知。原错误adjustflag3已订正为不复权，原因子版本不被其他旧vintage覆盖。
+- ERP同输入3档计算主控完成；原2σ结果结构完全一致，额外条件增量在当时仍在2σ内＋相同价格状态比较，公开页可切图而不改首页提醒。主控审核数据后接线；独立只读review helper仅erp-review.md，无源码同写。
+
+---
+
+
+---
+
 # 焦点动量续接与零线、股债灵敏度 — active
 
 - 原 owner/任务继续，scope_released=false。已读 breadth-reading-aid 最新明确 scope_released=true，保留其 v9 三种参考切换。新增唯一写 market-observation-alerts/index.tsx、style.css；MiniTrend仍只读。
