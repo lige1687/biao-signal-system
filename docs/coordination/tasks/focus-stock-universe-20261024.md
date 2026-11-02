@@ -1,6 +1,17 @@
 # 原焦点卡大图与缺日核查 — active 2026-11-02
 
 - task-id/owner沿用focus-stock-universe-20261024 / 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；scope_released=false，仅以下准确范围。来源会话01a19c57-958b-7f80-b71c-7932e5dcbe4f明确转达用户要求原负责人修首页焦点卡打开大图、补当前缺日；其自己负责首页分栏/候选/多维解释。
+- checked_coordination_sha 38ddbe1cf77f82460256405c134eb36cf92b53c4；旧base断言安全停止后已读来源任务明确认领父容器、留焦点给原owner，无同写。已读COORDINATION/self/cross-market-risk-context/breadth-reading-aid/research-dispatch-controller。仅本方写web/src/components/focus-momentum/、新focus_gap_fetch.py及test、docs/ops/focus-live-and-erp-thresholds-20261102/reopen-home-20261102与原自身work-progress。原供应商新六日600份SHA原件已回；追加认领src/lei_signal/research/focus_recent.py、tests/unit/test_focus_recent.py及web/public/research/focus-momentum/continuation.v1.json：主控仅接入六日补量，旧包备份，必须全193旧日逐字段一致、原23日冻结重叠一致；不改observation.v1.json和旧报告。一次新续接，必要纠错最多2次保留全部尝试；复权冲突继续原适配器隔离，不为覆盖率改公式。其他共享UI/registry本轮不写，父组件如需onOpen给兼容可选接口。
+- 保留固定300股/20日平均金额前5%/原调整版本；0线不升级买点。旧ERP研究全部只读，不重跑。数据沿原4次续接/2次登录失败账本；新用户要求恢复工程缺口，新增最多2次15秒登录，成功后<=600单次原300股六日日线与新调整事件查询，连续3错误停止；只免费原供应商，不自动换口径。原件<=100MB外盘新目录，内部源码/记录与截图预计<5MB，5GiB保留线/UUID重核。
+- root唯一写焦点UI与收尾；原Sol/medium助手仅新增fetch工具/测试及本轮data目录，先预检后实际恢复；不能发布public包。root独立核源/图/点击及缺测状态后才接入。首次检查发现现有图和数值无点击入口，footer需要实际验证，不先宣称故障复现。
+- 验收：小图/数值/显式按钮点击、键盘打开/关闭回焦点、大图价格/零线/日期；兼容父组件和不变小图；定向数据资格/覆盖率/缺值/原件SHA、实际HTTP读取与日期。无后台任务/删除/付费/交易/部署/重启，原共享18e64fa脏区保留。
+
+
+---
+
+# 原焦点卡大图与缺日核查 — active 2026-11-02
+
+- task-id/owner沿用focus-stock-universe-20261024 / 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；scope_released=false，仅以下准确范围。来源会话01a19c57-958b-7f80-b71c-7932e5dcbe4f明确转达用户要求原负责人修首页焦点卡打开大图、补当前缺日；其自己负责首页分栏/候选/多维解释。
 - checked_coordination_sha ecac1eeaab74bc492107b316ff415523e2921853；旧base断言安全停止后已读来源任务明确认领父容器、留焦点给原owner，无同写。已读COORDINATION/self/cross-market-risk-context/breadth-reading-aid/research-dispatch-controller。仅本方写web/src/components/focus-momentum/、新focus_gap_fetch.py及test、docs/ops/focus-live-and-erp-thresholds-20261102/reopen-home-20261102与原自身work-progress。旧focus_recent/public资料只读，合格新数据回来后再登记最小更新。其他共享UI/registry本轮不写，父组件如需onOpen给兼容可选接口。
 - 保留固定300股/20日平均金额前5%/原调整版本；0线不升级买点。旧ERP研究全部只读，不重跑。数据沿原4次续接/2次登录失败账本；新用户要求恢复工程缺口，新增最多2次15秒登录，成功后<=600单次原300股六日日线与新调整事件查询，连续3错误停止；只免费原供应商，不自动换口径。原件<=100MB外盘新目录，内部源码/记录与截图预计<5MB，5GiB保留线/UUID重核。
 - root唯一写焦点UI与收尾；原Sol/medium助手仅新增fetch工具/测试及本轮data目录，先预检后实际恢复；不能发布public包。root独立核源/图/点击及缺测状态后才接入。首次检查发现现有图和数值无点击入口，footer需要实际验证，不先宣称故障复现。
