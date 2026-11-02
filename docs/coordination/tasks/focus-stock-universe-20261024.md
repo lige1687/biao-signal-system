@@ -1,3 +1,15 @@
+# 原焦点卡入口及六日补量 — completed local / scope released 2026-11-02
+
+- 原task focus-stock-universe-20261024，owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；scope_released=true。来源cross-market-risk-context-20261102委托的焦点UI/原数据链本阶段已验收，所有本方新增写权交回；首页父组件/分栏/候选/解释仍属来源负责人。本轮未改market-observation-alerts、Workspace、CrossMarketObservation/MarketStylePanel、observation-library父层。
+- 焦点数值、小图与footer均可打开原大图；保持原小图和0线。兼容可选onOpen；同文件导出FocusMomentumDetailDialog({onClose})供父级统一管理。价格和模型共同截止2026-11-02，默认一年23处穿零点/负值阴影，0不升级买点。
+- 六日已补，不再受旧供应商失败卡住：新1次登录成功/600queries/600原件SHA核验，固定300，无换样本。最新-11.44299549%，256合格/13focus；原193日逐字段不变、23日冻结重叠一致、13成员独立原价与复权端点核算通过。新packetSHA027f531f16668b8f792a9de193c1a2aa0473ceba2389b27ce75cc6532276dc4f，旧包备份保留。无新效果实验或自动日更；全部ERP和旧研究报告只读。
+- 原续接4次+本阶段1失败(日历旧端点)+1成功=6次；旧2次登录失败保留。本次首次.venv启动错误未起进程，改用已有python3；旧cutoff测试断言更新为已验收新packet，全部15前端/15Python通过；tsc/Vite/hygiene通过。浏览器DOM命中打开、关闭/cancel处理/回焦点和HTTP读回通过；桌面click/press工具未派发实际输入，硬件鼠标及Enter/Escape未独立确认。旧父层HMR6条错误仅在reload前，之后无新增。owned QA tab已关闭。
+- 详情及工程交接docs/ops/focus-live-and-erp-thresholds-20261102/reopen-home-20261102/{completion.json,handoff.md,ui-acceptance.json,endpoint-review.json,run-attempts.json}；原work-progress已追加。内盘9.19GiB余量，阶段约1.56MB，原件185KB独立外盘目录有UUID绑定。共享18e64fa脏区未清理、未源代码提交/部署/重启，全部本地可读。
+- checked_coordination_sha 5f0e101b8a40cfb66f8521b3ff143c6ae5c48f64，已fetch无增量。普通推送只改自己协调任务文件，完整读回后在本轮completion记录实际commit。
+
+
+---
+
 # 原焦点卡大图与缺日核查 — active 2026-11-02
 
 - task-id/owner沿用focus-stock-universe-20261024 / 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；scope_released=false，仅以下准确范围。来源会话01a19c57-958b-7f80-b71c-7932e5dcbe4f明确转达用户要求原负责人修首页焦点卡打开大图、补当前缺日；其自己负责首页分栏/候选/多维解释。
