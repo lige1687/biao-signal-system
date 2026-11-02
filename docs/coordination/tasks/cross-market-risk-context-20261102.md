@@ -1,3 +1,14 @@
+# 用户可见信息统一准则与因子页清理 — active 2026-11-03T00:11:20.771256+08:00
+
+- 原task/owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；checked_coordination_sha af9c7cde603f7252027d350246e1b90643001d3f；在原visual-clarity阶段追加用户明确扩围。最新要求：无用户用途的开发信息不在任何界面渲染，不是移入详情。
+- 已读自身、中控、ai-quant-practice-integration、market-style-observation、investor-workspace-simplification、research-utility-review及相关原记录。规则/前端相关最近写者已明确scope_released；不修改他人任务与研究事实。
+- root唯一写新增范围：AGENTS.md、web/AGENTS.md、docs/research/factor-research-display-contract.md；原市场卡片root范围保持。
+- earnings唯一写下一合同限定4组件：web/src/pages/factor-research/FactorResearchPage.tsx、StudyConclusion.tsx、web/src/pages/factor-workbench/FactorWorkbench.tsx、ResearchWorkflowProgress.tsx；仅用户文案和来源呈现，不改数据/归因/校验/路由/研究状态。frontend两组件写权已释放。
+- 本轮为展示维护：移除UI路径/指纹/内部编号/开发交接，保留人可读报告链接、日期、收益对照、费用、失败和重要缺项。原研究证据和数据不删；未声称全站每句逐一验收。验证为类型检查、现有适用检查和桌面实际页面。0新金融实验/取数/付费模型。
+- 本地代码未提交未推送，保留脏树；不删除/强推/部署/交易，scope_released=false。
+
+---
+
 # 小卡颜色与阅读层级 — active
 
 - 同task/owner；status active；scope_released false；checked_coordination_sha c11e8383ab87e881ee8471fdd485280c86198325；checked_at 2026-11-03T00:00:50.967613+08:00。已读COORDINATION/self/focus/controller，本方和焦点原owner此前均释放；沿原共享脏区，不接管其他数据/研究。
