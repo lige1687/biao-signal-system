@@ -1,3 +1,14 @@
+# 外部固定参考与动态分位同屏完成 — completed 2026-11-02T19:07:32.379473+08:00
+
+- 同task/owner；scope_released=true，释放本轮6源码及自有报告/进度/registry原键与QA，checked_coordination_sha 6b994d7e7379e395fbe47615fc65c66d40c5d650。已读相邻focus-stock最新active范围，其避开本路径并只读MiniTrend，无同写。
+- 公开一手参考：StockCharts 50日<30%/>70%为传统低/高，200日50%为多数参与中线；Charles Schwab标普500上涨中约80%是强参与、下跌中<10%不确认结束。Fidelity承载嘉宾讨论未作官方共识采用；未为20/100/200制造一组机构极值。
+- 两市小图和大图紧凑显示固定参考；动态标题明确P10/P90性质，详细来源折叠。全A紧邻可见美股经验未验证，US可见高位不等于顶部。20日明确暂无已核实固定值，200日只突出半数线；固定值未进入告警/交易计算，MiniTrend SHA与v7完全一致。
+- 仅桌面1280实页、展开来源、20/200/50切换、无横溢/console error通过，临时viewport已恢复；alert/adapters14项与最终TS/Vite通过，既有大包提示；归置通过。source-manifest-v8/scoped-source-v8.patch/acceptance-v8/overview-v8在原QA目录。报告和registry只更新原键，其余项相等。
+- 来源新增4次（2定向检索+2原文）、累计11次，本阶段上限6；StockCharts复用已读原文。0金融实验/搜参/行情下载或缓存写入。独立助手只复核保存事实语义，主控核原文与页面，未声称独立原文审查或预测有效。内盘12.74GiB；小产物未扩大采集。
+- cwd重复前缀读失败、AX角色不匹配、registry只读类型假设失败均已纠正，未误写或扩大权限。共享dirty codex/factor-unit-research-20260915@18e64fa仍本地，未源码提交/推送或部署。只同步本协调元数据；无后台续跑或交易，有界来源/工程完成。
+
+---
+
 # 外部宽度参考值与动态分位同屏 — active 2026-11-02T18:51:56.917230+08:00
 
 - 同task/owner，scope_released=false；checked_coordination_sha 2e553a8803982fb85c3ad84af985be43ef937479，已读本task及相邻规则任务completed，无UI同写。用户新增要求同步提供机构/其他机构对几十日、几百日宽度的参考值。本轮是原观察问题的来源扩展与授权展示，不重跑账户研究。
