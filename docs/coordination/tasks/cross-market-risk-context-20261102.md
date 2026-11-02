@@ -1,3 +1,16 @@
+# 首页速览与参考线 — completed bounded local / scope released
+
+- task-id cross-market-risk-context-20261102；owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；status completed；scope_released true。checked_coordination_sha f4845a2d54fe615fb33b990e68258ed0834b4f9a；checked_at 2026-11-02T23:01:35.359521+08:00。沿原COORDINATION、research-dispatch-controller与原focus已完成段核验；未接管其他任务。
+- 已完成首页市场速览A/美两栏、原卡样式、新旧候选统一可选并持久保存、原pins迁移、同页大图；旧基本面独立新板块导向首页。四层真实数据解释与五候选支持/反证/缺项，不加总分，不改技术/仓位/止损/交易。
+- 用户阈值补充已落地：CN原三年2σ保留并直接链接国信方法；US股债收益差、本地HV20/HV60分列及实际P15/P85曲线/数值；NFCI官方0定义，VIX/Cboe和HV/Fidelity用途/本地方法分清。没有核得机构通用交易阈值，不造固定机会买卖值。
+- 原focus聊天交付六日续至11/2 −11.44%、256合格13入选固定300；本方HTTP SHA与实际小图点击/Escape回焦点读回。父按钮通用CSS遮住焦点图的整合问题已在本方parentCSS修复、截图核明，未修改owner组件。
+- 验收：33定向Node、tsc、Vite write:false887模块、hygiene、独立PythonHV/分位与ERP数值、1215桌面无溢出、添加AAII刷新/移除及HV隐藏不移除解释、原ERP/宽度与新详情。最终刷新无新console错误；旧HMR/定位失败保留。没有手机测试。
+- 数据仍部分：连续DR007/政策参照、同池换手融资分母、市场盈利修正PIT缺失，最新宽度/原趋势组合资格亦未补成完整。新增补数据实际18/16超限2；用户新增阈值来源10/10，前轮6网页+4获取尝试继承；0付费/新金融回测/自动跟进/部署。
+- 报告 docs/experiments/market-overview-linked-context-2026-11-02.md 已登记且保留原813项；证据 raw/cross-market-risk-context-2026-11-02/home-integration/acceptance.json；工作树接续 docs/ops/work-progress/cross-market-risk-context-20261102.md。所有本方范围与助手写权均释放。原策略SHA不变；内盘实测>5GiB。
+- 共享基础仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有脏区；无源码提交/推送/删除/重启/强推。仅此单项协调元数据普通推送，读回以阶段receipt为准；真实源码及证据仅本地，远端不可复现。
+
+---
+
 # 用户补充：小卡参考线与权威来源 — active
 
 - 同task/owner与原写范围。checked_coordination_sha d700e5dccb44aa479450ba926633743b74bfcb0d；checked_at 2026-11-02T22:42:19.304842+08:00；已读COORDINATION/self/research-dispatch-controller/focus-stock-universe最新段。原焦点owner已交付并释放，仅本地，其六日资料与小图打开由本方读回。
