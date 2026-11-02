@@ -1,6 +1,6 @@
-# 双市场观察栏与多维风险解释 — active
+# 双市场观察栏与多维风险解释 — bounded completion
 
-- task-id cross-market-risk-context-20261102；owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；status active；scope_released false。
+- task-id cross-market-risk-context-20261102；owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；status completed_bounded_audit_display；scope_released true。
 - 用户2026-11-02要求先查已有系统与外盘、补可靠数据、A股和美股同时两栏小图点开大图；基础补齐后交组合解释方案审核，暂不接组合交易规则。
 - checked_coordination_sha e6952ee940cd7951283b3bba280384c53ecbb8a0；checked_at 2026-11-02T21:08:23.150922+08:00；已读 COORDINATION、research-dispatch-controller、market-style-observation-20261020、breadth-reading-aid-20261101、focus-stock-universe-20261024、investor-observation-map、market-observation。
 - 既有前端owner均已释放相关范围；只复用宽度与ERP组件/资料，不修改其原定义和已冻结研究。股债/宽度/趋势、条件源各自日期与范围保持。
@@ -14,3 +14,12 @@
 ## 最小布局增补
 
 - 主控独占 web/src/pages/FundamentalsPage.tsx 的市场环境段一行：移除此页重复的MarketObservationAlerts挂载，首页原速览与组件完全保留。双市场栏已承担本页同项图；否则旧四卡位于双栏之上，用户仍需翻页。checked_coordination_sha 0cef9fc1f8902b976ad767b6156e8d5ce0a37cbc；checked_at 2026-11-02T21:29:23.336076+08:00。五个frontend代理文件仍独占且只观察，组合规则留方案审核。
+
+## 2026-11-02 本轮交付与释放
+
+- checked_coordination_sha d71f7183e1680753178532b6139d5f03c17059a0；checked_at 2026-11-02T21:49:42.053935+08:00。主控复核前端与来源结果后释放所有本任务源码和记录写入范围；frontend/data执行者均完成。
+- 已完成本地A股/美股同时两栏，各六张小图/状态卡，可打开宽度、股债轨道、HV、融资、资金详情；复用原定义。HV新增20/60比值及此前756日中秩位置。仅移除基本面页重复速览挂载及其闲置import，首页原组件保留。主控接回前端写者后修正占比标签、小数格式、缺值文案。
+- 外盘NFCI全2911周原件/归一资料核对，近十年520周展示；FINRA已有357月不重采。DR007仅取得官方2026-11-02 17:00当前快照；连续DR007/OMO、同池自由流通换手/融资买入分母及市场盈利修正历史尚缺。数据补齐分支因本轮来源预算停止，不能宣称全部数据完成。
+- 三份Gemini建议整合入 docs/experiments/cross-market-risk-context-2026-11-02.md；组合解释及条件草案 plan_only / awaiting_user_review，金融效力 not_evaluated。未改仓位、止损、买卖规则，0新金融回测/付费/定时任务/部署。
+- 主控独立核Python真实HV/分位、原件SHA、HTTP展示字节；TS及不写盘构建通过，桌面1440双栏/详情/日期缺项/Escape回焦点通过，console无error；归置检查通过。acceptance.json和桌面截图在同名raw，报告registry/INDEX只增本项并保留旧项。
+- 来源累计6次网页工具+4次明确公开源获取尝试，失败尝试保留；没有后台继续。源码仍在原共享工作树，仅本地修改，未commit/push源码；只有本协调项元数据提交。
