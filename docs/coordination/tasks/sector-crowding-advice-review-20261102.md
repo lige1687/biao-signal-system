@@ -1,3 +1,15 @@
+# 多期限实际比较 completed bounded historical scope — 2026-11-03T00:49:51.146272+08:00
+
+- 原task/owner延续；status completed_bounded_historical_comparison；scope_released=true仅本次非冻结报告登记/进度；新协议/代码/输入/结果均已冻结不得覆盖。checked_coordination_sha 9ee3713fe69dff31442c5c1a18708efc01cf42a0；交付前补读cross-market-risk-context、market-increment-map、strategy-account最新范围；自身内部拥挤效力与行业之间共动/账户选股不混，无同写。
+- 用户新增实际试验且不能只看10日：完成5/10/20/60/120/252日、共同一年成熟起点、跨年/行业、条件内对照、年度purged ridge和假设现金份额账。20行业指数、31一级与125/130二级当前成分代理分开。
+- 旧二级强热60日平均最差跌幅17.61%对12.38%，51行业日/36日期；控制趋势/波动/高宽度后仅12行业日/11日期，风险增量区间跨零。指数活跃六期限风险关联，但半仓年化8.54%对买持10.51%，回撤32.33%对34.11%；未优于EMA20/匹配暴露。新SCI未支持重建；完整原版PIT流通市值/ETF全收益/独立验证仍未评价。
+- 可信度纠正：旧dict同日行业覆盖、不同基准预热、缺日填平、名义价格均值、B200分母问题均独核；新研究纠正，旧冻结/生产不改、不把所有旧结论一并判无效。
+- 成果 docs/experiments/sector-sentiment-comparative-evaluation-2026-11-02.md SHA 10a88d3546346ec99919c9538cfdbaefb6a4010071468796d84718468a7c37e1；同名raw三协议/代码/账本/复核/回执及外盘绑定。registry819项读回，原818完整保留；进度自身文件追加；原系统目标okr-6d9177bc89ff仅note v20→21读回，owner/status/授权/下一动作/里程碑未变。
+- 3市场批321拟合；旧至少1028与前审6来源不重置，本阶段4来源含2失败、0新行情下载/付费。两次特征构建首轮仅源meta刷新，未跑该版结果；外盘冻结源v2后无变。独验手算/逐预测/现金份额/旧L2条件组均通过，归置/diff通过。当前可算P0无待做，下一步须新合格资料，不能改阈值追正结果。
+- 工作分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9保留共享脏区；报告/源码/源数据仅本地及固定外盘，未推研究成果，远端不可独立复现；本次仅协调状态。无运行研究进程/后台继续/生产采用或交易。
+
+---
+
 # 实际比较研究接续 active（用户新增授权）
 
 - 原task-id/owner延续；status active；scope_released false；updated_at 2026-11-03T00:06:33.432291+08:00；checked_coordination_sha 4cf54b2bad9841a1ecb85dfcf17c5e8d35a8359e。已读COORDINATION、self、sentiment-factor-research、dispatch、market-increment-map、cross-market、strategy-account最新范围；各自原成果只读，无同写。
