@@ -1,3 +1,14 @@
+# A股剩余补数找到可用专用源，准备同源候选 — active 2026-11-02T12:59:53.212683+08:00
+
+- 同一task/owner；checked_coordination_sha 37d5ed6d39a481f7644a91a4b58abcc1fc44d2b7；status active_cn_source_prepare。研究复核已形成有界报告，运维补缺继续，不能停在方案。
+- 原获准CN6/US8安装及备份/API/图表核验完成。外盘九缺日沪深候选已重建，但北交所缺和源复权差异使其不能冒充全A装入。
+- 东方财富普通代理/直连均在连接层失败；root随后使用用户现有westock-data技能专用CLI，bj920000取得300日，混合6股批查6成功。此入口与先前腾讯fqkline输出不同，北交所旧史与新股/停牌有实际可核返回。
+- 新运维增量：仅仓内准备当前5577代码名单的300日同源前复权小候选包，截止10/30，排11/02未收盘。原文按20代码批gzip保存，合计计划<100MiB、至少5GiB内盘reserve；现成CLI包仅在自身仓内npm-cache，未改全局安装/网络代理。
+- increment_inputs唯一写 docs/ops/breadth-reading-aid-20261101/prepare-cn-westock-v4.py 和 .codex/breadth-reading-coordination-20261101/cn-westock-candidate-v4/；root核真实代码/日期/复权/IPO/停牌/0量/覆盖和原记录保留，拟14缺日不静默改历史。每批超时45秒、最多一次有理由重试、连续两批失败停存证。其余所有仓外源/生产cache/其他owner不写。
+- 此准备响应用户“宽度缺测就去加”，不开展阈值搜参或资金回测。任何超出原已批准6/8点的正式缓存安装，要在具体候选核完后按仓外写入规则处理，不预先泛化批准。
+
+---
+
 # 已装入补数，继续三指标增量与美股对话复核 — active 2026-11-02T12:43:02.008364+08:00
 
 - 同一task/owner；status active_increment_review_and_cn_remaining_inputs；scope_released false；checked_coordination_sha 59e4b41eab5d64a1adcecb93e139f274e7c57d87。已核自身与相邻首页owner，未扩写首页/ERP生产组件。
