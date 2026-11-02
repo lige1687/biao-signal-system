@@ -1,3 +1,13 @@
+# 回复密度与Skill路由落实 — active 2026-11-02T16:55:07.944251+08:00
+
+- 同task/owner；用户明确要求一并实现面向用户的回复规范、信息密度和通过Skill调用代理，已纠正“SQL”为“skill”。本轮为规则/技能维护，不新开研究或恢复前次额度暂停的冷代理验收。
+- checked_coordination_sha 7189400224664110a4289b94c1f2b7b2e9ebe254；已读自身/中控/focus-stock/breadth最新范围与COORDINATION。breadth当前仅UI和自有归档，无本轮规则同写。主树共享dirty保持。
+- root唯一写：用户级 ~/.codex/AGENTS.md 新增主会话总控/回复及委派Skill路由；~/.agents/skills/concise-output/SKILL.md 结果和用途优先；~/.codex/skills/codex-delegate/SKILL.md 明确总控身份与面向用户回报职责。项目AGENTS.md窄入口、.agents/skills/lei-gpt-zcode-orchestrator/SKILL.md职责、docs/ops/agent-workflow.md按需说明与旧仓外确认句更新。只备份与读回这些路径，不改脚本/策略/旧预算/模型路由/记忆。
+- 自有phase4小归档与原work-progress追加；本轮不占registry/INDEX、不新建重复研究报告。规范为默认结果→实际帮助→必要依据/边界，按问题详略，不用测试数/哈希/代理日志替代成果；研究必须表格和未知不能因简短删去。代理通过既有Skill预检再实际工具调用，简单问答不强制派发，角色不冒充全局后台总控。
+- 验证采用备份、精确差异、引用/技能frontmatter检查、少量人工回复场景核对与读回；不跑无关代码测试或模型评测。源请求/金融实验/代理调用0。已授权必要仓外修改按最新用户要求可执行，删除/强推仍需确认。
+
+---
+
 # 共用交接本地实现交付；真实代理验收暂停 — paused 2026-11-02T15:53:29.177268+08:00
 
 - 同task/owner，implementation_status=completed_local，real_agent_acceptance=paused/provider_quota；scope_released=true（全部源码、技能、说明、报告、registry自身键/INDEX写窗口），保留原恢复材料但无执行者在跑。checked_coordination_sha b4ca87348e81a77ce46470dfbd97a659f1fc3f33，已读self/中控/COORDINATION及最新breadth日常目标调整；无本轮同写。
