@@ -1,3 +1,12 @@
+# 外部宽度参考值与动态分位同屏 — active 2026-11-02T18:51:56.917230+08:00
+
+- 同task/owner，scope_released=false；checked_coordination_sha 2e553a8803982fb85c3ad84af985be43ef937479，已读本task及相邻规则任务completed，无UI同写。用户新增要求同步提供机构/其他机构对几十日、几百日宽度的参考值。本轮是原观察问题的来源扩展与授权展示，不重跑账户研究。
+- 唯一写范围：market-observation-alerts/index.tsx、style.css；market-style/BreadthComparison.tsx、breadth-comparison.css及新BreadthInstitutionalReference.tsx、breadthInstitutionalReferences.ts与必要针对性test。若无需改小图SVG则MiniTrend保持只读。自身QA、原报告/进度/registry原键。来源复核助手仅institutional-review-v8.md，其他数据/策略/原阈值算法/用户pins与seen保持。
+- 只做桌面。默认不堆叠多组轨道，以紧凑外部固定参考行与动态历史分位区别呈现；原文的市场、周期、条件、来源、验证状态绑定，不从某年市场观察倒推通用阈值，不移植非同口径指标。
+- 来源新子问题上限6次请求，继承之前累计7次（v6累计6＋上轮阈值解释再次打开StockCharts1次）；0金融实验/参数搜索/数据采集。优先复用刚核StockCharts，再找官方机构一手材料，证据边界即停。预算不计工程构建/本地API，禁止为凑来源重复搜索。
+
+---
+
 # 桌面熵减与小图观察阈值完成 — completed 2026-11-02T17:05:37.026681+08:00
 
 - task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true，释放v6的8源码、v7项目web/AGENTS.md与自有报告/QA/进度/registry原键。checked_coordination_sha c09232acc029e4389f74985a161eb3278c79cfb4，已读相邻规则任务完成，无本轮同写。
