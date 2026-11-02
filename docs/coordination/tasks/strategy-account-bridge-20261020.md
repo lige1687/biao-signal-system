@@ -1,3 +1,14 @@
+# 真实行情模拟账户恢复与新观察准入 — active 2026-11-02T23:30:53.929151+08:00
+
+- 原task strategy-account-bridge-20261020 / owner原root；status active；scope_released=false仅下列范围。用户明确选择真实行情模拟账户，授权从实际启动起持续观察；不是真实资金/券商交易。
+- checked_coordination_sha 8ba65619067cd7e64c91cdd1b9f09d137fba4e16；checked_at 2026-11-02T23:30:53.929151+08:00；已读COORDINATION/self/dispatch/focus-stock-universe/breadth-reading-aid/personal-lowfreq-system-audit/research-utility-review/downside-sensitivity-universe最新。焦点已补11/02数据且释放；本方不改其包、宽度、历史PIT资格或其他队列。旧前向属于本task，当前worker已退出，无同写。
+- 问题：旧账户停在10/22，规则代码绑定仍一致，10/21曾因内盘5GiB失败；保留旧账和缺失日期，查安全恢复并启动实际收盘采集。新候选逐股规则/资料齐备才能冻结；French格收益不直接转为选股，旧负结果不翻案。准入审核先读，不开收益回测/寻优。
+- 独占本轮 docs/experiments/strategy-paper-live-start-2026-11-02.md、同名raw/，data/strategy-portfolios/恢复运行记录、新版本data/strategy-paper-live/；必要新增src/lei_signal/strategy_portfolios/paper_live.py、tests/unit/test_strategy_paper_live.py、configs/strategy-paper-live.v1.json。旧engine/ledger/sources/service/collector/runner及旧config保持冻结字节。前端只在原自有web/src/components/strategy-portfolios/新增PaperLive/最小入口；如果需API路由/共享入口，先确认范围再写。registry本键/INDEX本行/自身progress。所有源码仅本地，不自动提交部署。
+- root负责准入与运行/读回；一个Sol只读审核只写同raw/agent-audit.md；实现另合同后委派，单写者。恢复数据同旧冻结CN300/US504，每批最多804请求、原限流1秒、429/连败停；先小探针，成功才扩，新增原件压缩外盘，单批预计400MiB，内盘小记录2MiB。新独立storage-plan核UUID及5GiB内盘/10GiB外盘储备；旧授权预算/原件不覆盖。实时持续收盘采集按用户本次授权，非无限研究搜索。
+- 验收：旧冻结/历史账备份及不倒填、实际当前源日期/覆盖、未来开盘订单、现金费用/未成交/母指数或缺口分列、独立账户对照及真实心跳/UI读回。新冻结时点不能提前，短期年化/夏普不显示；不以进程存活冒充数据成功或策略有效。下一步先核probe/当前资料与candidate准入，再实际启用并验收。
+
+---
+
 # 价值与盈利联合选股 completed 2026-11-02T20:43:40.145924+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed_bounded_public_group_comparison；scope_released=true仅本轮非冻结可复用新代码/报告，源/合同/冻结结果保持。无后台任务。
