@@ -1,3 +1,15 @@
+# 焦点动量续接与零线、股债灵敏度 — active
+
+- 原 owner/任务继续，scope_released=false。已读 breadth-reading-aid 最新明确 scope_released=true，保留其 v9 三种参考切换。新增唯一写 market-observation-alerts/index.tsx、style.css；MiniTrend仍只读。
+- 焦点原固定300样本优先续接，避免把更大供应商池悄然拼入原模型。复用外盘 v8 对应300股，定向补齐末端6个交易日及复权事件；独立数据包不覆盖冻结历史研究，验证重叠窗口。广覆盖池待单独版本不冒充原模型。
+- price-projection三文件临时委派原 focus_data_audit worker 按 zero-contract 新阶段独占；其余主控。ERP worker 因provider capacity失败，已检查无产物；主控按原方法预算直接完成，不切换执行器。
+- 授权六日取数为用户明确补齐请求，估计原池最多600条逐股行情/因子请求和2日历请求，失败最多一次重试；先单股探测，网络失败即停采集，离线可用部分继续。外盘输出走既有UUID/容量检查。保持所有冻结原件。
+
+---
+
+
+---
+
 # 焦点动量接通/第四卡/零线价格标记；ERP轨道敏感性 — active 2026-11-02T19:48:00+08:00
 
 - 同task/owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户要复用外盘并补缺、焦点作为原三卡旁第四卡，0线上下读法与价格首次跌破标记；并行ERP 1σ/1.5σ相对原2σ的效果/来源比较，全部继续。
