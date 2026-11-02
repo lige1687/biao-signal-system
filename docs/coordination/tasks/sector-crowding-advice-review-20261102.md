@@ -1,7 +1,7 @@
 # 采用审查完成；SCI完整效力仍未评价
 
 - task-id sector-crowding-advice-review-20261102；owner 01a19cde-a99b-7ad0-adbc-99471b24208d/root；status completed_bounded_adoption_review；scope_released true；updated_at 2026-11-02T23:44:14.214134+08:00。
-- checked_coordination_sha e76c38139c45f3bf10d675d26a6593c63d40fc97；checked_at 2026-11-02T23:44:14.214134+08:00；已核开工以来远端无其他任务变化，沿用已读sentiment-factor-research/research-dispatch-controller/market-style-observation/cross-market-risk-context范围。
+- checked_coordination_sha e76c38139c45f3bf10d675d26a6593c63d40fc97；checked_at 2026-11-02T23:44:14.214134+08:00；交付前新增market-increment-map-20261102于e76c3813登记，已补读全文：该线做行业之间的共动/分化及CFTC观察，本线核行业内部成分共动建议与旧SCI效力，两者定义不同；各自报告/registry键，无源码同写。不重复其描述计算。原已读sentiment-factor-research/research-dispatch-controller/market-style-observation/cross-market-risk-context范围保持。
 - 结论：不重建总分系统；旧静态热度无稳健预警、TS6扩行业消失、强热2026H1反向；冰点只保留有限线索。相对换手和残差共动可作候选，SCI分位和行业强制卖出无已验证增量。
 - 当前快照行情10/15、生成11/2；信号腾讯源末日9/4，订单档另一源已至11/2，不能互代。当前成员/历史流通市值/同口径总成交/SCI权重等资格不齐；完整SCI效力blocked，非零增量判定。
 - 本地成果 docs/experiments/sector-crowding-advice-review-2026-11-02.md（sha256 5edad19d6d60ef7d828a405d6b3ec09b655ea661aa0f2d5aa506054559dfa8e5）、同名raw及registry自身键。源码、旧冻结、策略、行情均未修改。最新已推工作成果无：仅本地，远端不能复现研究产物；本协调提交仅状态。
@@ -24,3 +24,5 @@
 - 重叠决定：供给既有owner的证据复核，不占用源/页面；registry仅串行新增本键，读取最新内容并保留全表。新专属报告/raw无已登记同写；登记非锁。
 - 数据：仅小型派生元数据和出处，原始数据/持仓/凭据不上传。缺当时成分、流通市值及完整SCI权重时，完整效果保留未评价。
 - 下一步：完成本有界采用审查；不启动后台服务或另建新系统。
+
+补记：普通推送被并行账户任务推进拒绝，无覆盖；已fetch并读strategy-account-bridge-20261020新增纸账户范围，无重叠。重试基于 cc95654cca5cf15409bd19b90a87e012ab3e86fe，保留其全部内容。
