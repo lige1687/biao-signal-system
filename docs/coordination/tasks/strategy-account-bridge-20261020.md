@@ -1,3 +1,14 @@
+# 趋势内回撤联合选股增量 — active 2026-11-03T00:21:24.815306+08:00
+
+- 原task strategy-account-bridge-20261020；owner原root；status active；scope_released=false仅本轮新研究范围。用户继续授权从金融机制出发研究组合、有增量且可执行者才前向；真实行情模拟账户，不是真实资金。
+- checked_coordination_sha f87627bfc01cd5eb65085a6257f5e94e39259a5f；已读COORDINATION/self/dispatch/research-utility-review/personal-lowfreq/market-increment-map/sector-crowding/focus-stock。残差动量原owner待续范围不重做；盈利现金/盈利投资/价值盈利与10/31资金组合旧结论预算原样保留。
+- 新未决问题：同一趋势资格/20槽账户中，中期动量与上月反转的等权排名联合选股，能否优于相同单项及50/50独立资金组合；CN历史固定300与US当前IVV504分别，含强低波对手与费用、缺价、早/晚反例。短期卖压修复仅机制假说，无行业/现金流冲击数据不能证明流动性溢价。原LEI不改。
+- 写范围 docs/experiments/trend-pullback-combination-2026-11-03.md及同名raw/、registry本键/INDEX本行/自身progress；独立外盘新run预计64MiB，本地2MiB，写前UUID和5GiB储备。root写设计/合同/报告和运行；一个Sol只新raw分析代码/小测试，必要只读独核另合同。旧engine/config/活跃DB/前向冻结字节保持，本轮先不写新前向。
+- 新问题1核心+最多3有必要后续，6来源请求（目前5含1失败：残差PDF1、反转检索2、NYFed成功/NBER403各1），不扫阈值。原10/31资本比较只读复用，不重跑；MR账户新算两市场基准与压力费；同日期对照原保存完整账，行情0新增。所有历史已见，非独立样本外。
+- 验收收益曲线、母指数或明确市场参照、强单项/资金混合增量、不确定性、成交数量/现金/集中/未知估值、独核核心数；若必要输入不足则限于报价研究，不伪造采用。当前准备未执行新收益。源码仅本地18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享脏树，协调正常推送不代表代码远端。
+
+---
+
 # 真实行情模拟账户启动已验收 2026-11-03T00:01:40.451052+08:00
 
 - 原task/owner；status completed_startup / forward_effect_not_evaluated；scope_released=true仅本轮非冻结UI/报告；新paper_live.py/config已经与独立新账SHA冻结，改动必须新版本。采集worker继续运行，不把本次启动完成当未来效果完成。
