@@ -1,3 +1,16 @@
+# 采用审查完成；SCI完整效力仍未评价
+
+- task-id sector-crowding-advice-review-20261102；owner 01a19cde-a99b-7ad0-adbc-99471b24208d/root；status completed_bounded_adoption_review；scope_released true；updated_at 2026-11-02T23:44:14.214134+08:00。
+- checked_coordination_sha e76c38139c45f3bf10d675d26a6593c63d40fc97；checked_at 2026-11-02T23:44:14.214134+08:00；已核开工以来远端无其他任务变化，沿用已读sentiment-factor-research/research-dispatch-controller/market-style-observation/cross-market-risk-context范围。
+- 结论：不重建总分系统；旧静态热度无稳健预警、TS6扩行业消失、强热2026H1反向；冰点只保留有限线索。相对换手和残差共动可作候选，SCI分位和行业强制卖出无已验证增量。
+- 当前快照行情10/15、生成11/2；信号腾讯源末日9/4，订单档另一源已至11/2，不能互代。当前成员/历史流通市值/同口径总成交/SCI权重等资格不齐；完整SCI效力blocked，非零增量判定。
+- 本地成果 docs/experiments/sector-crowding-advice-review-2026-11-02.md（sha256 5edad19d6d60ef7d828a405d6b3ec09b655ea661aa0f2d5aa506054559dfa8e5）、同名raw及registry自身键。源码、旧冻结、策略、行情均未修改。最新已推工作成果无：仅本地，远端不能复现研究产物；本协调提交仅状态。
+- 真实验证：旧末次修订/当前代码/6缓存元数据交叉核；数理反例通过；registry原条目完整保留；归置与diff检查exit0。1 Sol medium只读回执已由root验收。
+- 累计本轮来源6/6、真实市场实验/拟合/下载0、付费0；1数学分支2次执行（首次重复字典键漏字段，v1保留后纠正）；派发前两次合同格式失败保留。旧至少1028拟合及参数扫描不重置。
+- 下一动作依赖新合格历史链与可计算定义，当前无运行进程/后台继续。不接管旧情绪owner，不替其他线改UI文案。
+
+---
+
 # 行业情绪与Gemini拥挤度建议核查
 
 - task-id: sector-crowding-advice-review-20261102; owner: 01a19cde-a99b-7ad0-adbc-99471b24208d/root; status: active; updated_at: 2026-11-02T23:33:50.530522+08:00.
