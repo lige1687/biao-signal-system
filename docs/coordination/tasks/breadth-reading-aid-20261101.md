@@ -1,3 +1,14 @@
+# 联合大图与精简小图 — completed 2026-11-02T20:42:36.860568+08:00
+
+- 同task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status completed_local_desktop_display；scope_released=true，释放本轮大图两文件、小图index/style及两既有展示测试写范围。checked_coordination_sha 7d86317cdc99a6a94866a167753b205e8a6c6787；已读COORDINATION/self/focus-stock-universe/research-dispatch-controller，focus最新全部释放，本方保留其第四卡及全部原改动。
+- 小图待其6e6c78c明确释放后，以2699444认领推送读回再修改。已去200日半数线选项，保留动态50日及StockCharts50日30/70两选项、20/50/200原曲线；两市点击和边界实显，原三条SVG路径不变，卡片选择相互独立，第四焦点卡与刷新入口保留。
+- 大图前置双低/双高：CN≤20/≥80、US≤15/≥85，沿用AND含等号；同日价格色带和区段起点圆点；50/200缺任一灰带、无价格不挪点。关闭联合恢复原分位，旧条件与联合互斥而双条件可并开。未把数值查询升级为顶底。BofA索引摘录和NDR模式无法为这两市场当前固定阈值背书，详情保留明确未知。
+- 验收：25局部tests、最终TS/Vite内存构建、归置通过；两市桌面1280、切换恢复/互斥、阈值、第四卡、原曲线、无横溢已核，临时视口复原。独审1处缺测文案误述已修并读回；后续日志有旧MarketSection重复SP500 key警告1条（12:27 UTC），非本轮文件，未宣称全页零日志或越界修改。无手机检查。
+- 原QA目录acceptance-v10/source-manifest-v10/scoped-source-v10.patch/desktop-ui-v10/mini-desktop-ui-v10/joint-cn-v10.png/mini-v10.png完整留证，6最终源码SHA重读一致，本阶段小产物约0.44MB。原报告sha980b3d5845dec61784df6a57f637ac2e958b982c38ebe1bf59cae439b0976377；registry只本键，其他811条保持，旧历史与等待记录不覆盖。
+- 新来源本轮6（含官方过期和截图失败）、累计17；新金融实验/参数搜索/行情采集/缓存写0。原三指标增量未评价结论不变。源码仅本地共享dirty18e64fa，未提交源码/部署/重启；只同步本协调元数据，无后台续跑。本次授权显示与来源问题已到证据边界，无剩余小图待办。
+
+---
+
 # 邻任务已释放，小图移除半数线选项 — active 2026-11-02T20:37:24.080372+08:00
 
 - 同task/owner；checked_coordination_sha 6e6c78c28989a4ff3b0495de61cb9527f68feaf9，已读COORDINATION/self/focus-stock-universe/research-dispatch-controller。focus最新明确释放market-observation-alerts/index.tsx与style.css，此后本轮不再写；该两路径现在由本root唯一写。本方不动其focus或observation-library模块。
