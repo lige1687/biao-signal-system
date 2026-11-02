@@ -1,3 +1,13 @@
+# 联合宽度来源与大图条件 — active 2026-11-02T20:13:36.304887+08:00
+
+- 同task/owner；scope_released=false，checked_coordination_sha 891ca7a7260a2b55b52ba4dc08f58a6c419b053a。已读COORDINATION/self/focus-stock/research-dispatch-controller及最新focus续接显示段。首次旧base断言安全停止，无写入；现已更新基线。
+- 用户要求查B50与B200同时低/高的机构依据，保留大图同日价格标记；小图不需200日半数线。用户明确“等它改完后再处理小图”，当前不写邻任务独占index.tsx/style.css，不发跨会话消息；待显式释放后再登记。
+- 本轮唯一写market-style/BreadthComparison.tsx与breadth-comparison.css、大图相关既有测试及自身QA/原报告/registry原键/进度。仅改条件入口与展示，沿用谓词；MiniTrend、行情缓存、告警与策略不改。verify_install_inputs仅写joint-display-review-v10.md，其余只读，合同dry_run ready；原Sol/medium继续，主控独验。
+- report_only来源核查：joint-breadth-contract-v10；原累计11，本轮最多6请求，现6次含BofA官方过期页与NDR截图失败。0金融实验/搜参/行情取数。公开报告对象/阈值与本地股票宽度分别核定，不套用国家指数规则，不升级本地20/80、15/85为买卖线。
+- 两源文件准确基线source-before-v10；共享dirty18e64fa，源码仅本地。只桌面；验收AND、缺测、同步价格投影和入口/背景不混淆。协调只用显式完整SHA普通push并读回，禁止空替换refspec，原事故保留。小图待邻任务释放仍是本轮剩余工作。
+
+---
+
 # 小图切换完成；协调分支误删已恢复 — completed 2026-11-02T19:48:57.015227+08:00
 
 - scope_released=true，代码交互/桌面验收完成状态同下段。checked_coordination_sha b21c4ae07578007fd9b5d2a28852804162a985c1；原已读自身/focus-stock/research-dispatch-controller范围保持，其他任务未改。
