@@ -1,3 +1,15 @@
+# 桌面熵减与小图观察阈值完成 — completed 2026-11-02T17:05:37.026681+08:00
+
+- task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true，释放v6的8源码、v7项目web/AGENTS.md与自有报告/QA/进度/registry原键。checked_coordination_sha c09232acc029e4389f74985a161eb3278c79cfb4，已读相邻规则任务完成，无本轮同写。
+- 桌面左图右判读，日期选择/图中光标联动；默认5年与全部可用共同历史，CN全史2021-06-17、US按现有价格2016-10-31起。顶部3缩略图展示两市参与方向与ERP估值；重复说明/修复资料折叠，宽度轨道默认off，图内高低底色为历史位置。
+- 最新小图50日P10/P90阈值/淡色区：CN18.63/78.14、US26.57/78.41（2026-10-30）。写明低位回升时看机会、高位转弱时看风险；首屏同时显示历史参考·非买卖线，未把分位效力升格。历史每点按日期对齐，不以最新阈值回填历史；ERP高/低颜色保持。
+- 用户纠正不要手机，已写项目web/AGENTS.md，只桌面、不得主动移动适配和验证；根AGENTS当时另一owner独占故避开。v6手机验证为范围偏差、保留旧记录，v7未再做移动检查。原AGENTS仓外授权保持。
+- 验收：v6针对性40项、v7 alert/adapters14项与SSR缺口/孤点/ERP方向检查通过；最终TS/Vite通过、既有大包warning。桌面1280真实数值/小图/左右布局/全史/历史缺测回看已核，console error空；viewport已恢复。原预检、错误cwd、旧base断言与末次协调模板括号NameError均在真实执行记录，修正后完成，未扩大权限。
+- v6/v7验收、差异、源指纹、overview-v7与desktop-layout-v6在docs/ops/breadth-reading-aid-20261101/；原报告和registry原键更新并核其他项一致，归置通过。源码共享dirty codex/factor-unit-research-20260915@18e64fa，仅本地未提交推送，远端不可复现；本提交只协调元数据。
+- 图2聊天已读并复用既有ERP，不复制其他无合格大盘阈值模型；evidence-review-v6保留性能/增量/反例。0新金融实验或数据写入，1次原文来源复核累计6，原重建/研究预算与边界保持，无后台或交易操作。有界工程完成，无待用户决定。
+
+---
+
 # 小图显示机会风险观察区；仅桌面 — active 2026-11-02T16:59:10.133115+08:00
 
 - 同task/owner，scope_released=false；checked_coordination_sha 1c8f88eecd69c53acd95efe0bb8011c404441b88。用户明确不要手机适配/验证，要求写入项目md，小宽度图必须看见机会/风险阈值。停止手机检查，原偏差验收记录保留。
