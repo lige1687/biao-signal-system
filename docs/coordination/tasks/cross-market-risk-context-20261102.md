@@ -1,3 +1,13 @@
+# 指标水平与组合读法改进 — active
+
+- task-id cross-market-risk-context-20261102；owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；status active；scope_released false。checked_coordination_sha 7ac3f4b0fb87c6bc494f3e66081c0a9dbcefd527；checked_at 2026-11-02T23:27:15.026877+08:00。已读COORDINATION、自身、research-dispatch-controller、focus-stock-universe、market-style-observation；相关owner均已明确释放，本轮不接管原数据和研究。
+- 用户要求融资占比有高低和变化幅度、焦点一句话区间读法、组合解释有帮助；询问DeepSeek预设规则解释。复用现有服务只读审计，不实际调用付费模型、不发送账户资料。
+- Root唯一写market-observation-alerts/index.tsx、conditionalReading.ts/test、style.css及本任务报告、账本和registry自身条目；frontend计划唯一写CrossMarketObservation.tsx、新indicatorReading.ts/test、focus-momentum/overview.tsx/css仅文案/历史描述；旧数据包、技术策略、预计算和接口只读。具体派发前冻结合同，原focus scope已释放。
+- inventory/earnings只读资料，各仅写本任务reading-context内review。复用历史数据做描述性算术，0新金融效力回测，0新数据抓取；必要定义网页核验最多4项，不重置旧6+4、18/16超限和10/10账本。
+- 验收融资百分比与百分点分清/此前历史分位/缺值与短史/小图参考数值；焦点零线不升格机会线；组合先结论、依据、反证和下一项观察。桌面图与实际数据独核、定向测试及TS，保留所有无关脏区。源码仍仅本地，不部署/重启/删除/强推。
+
+---
+
 # 首页速览与参考线 — completed bounded local / scope released
 
 - task-id cross-market-risk-context-20261102；owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；status completed；scope_released true。checked_coordination_sha f4845a2d54fe615fb33b990e68258ed0834b4f9a；checked_at 2026-11-02T23:01:35.359521+08:00。沿原COORDINATION、research-dispatch-controller与原focus已完成段核验；未接管其他任务。
