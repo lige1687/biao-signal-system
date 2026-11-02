@@ -1,3 +1,16 @@
+# 真实行情模拟账户启动已验收 2026-11-03T00:01:40.451052+08:00
+
+- 原task/owner；status completed_startup / forward_effect_not_evaluated；scope_released=true仅本轮非冻结UI/报告；新paper_live.py/config已经与独立新账SHA冻结，改动必须新版本。采集worker继续运行，不把本次启动完成当未来效果完成。
+- checked_coordination_sha 84e59566edfd2be35c89c44f41ea1bf2200c982f；checked_at 2026-11-03T00:01:40.451052+08:00；原已读owners，另核最新cross-market-risk-context与sector-crowding-advice两任务，无同题同写；旧代码和其他AI工作保持。
+- 实际冻结2026-11-02T23:47:34.768489+08:00，新US m/mv/v/equal各10万USD，0持股/订单/前向估值；501/504完整10/30收盘、301合格股票。预计11/03 06:00采11/02收盘、最早11/03 22:30下一开盘报价模拟，条件性计划，尚无成交。
+- 804源请求/781成功/21HTTP/2网络错误，781原件存储/内容SHA独核。A股11/02仅217/300覆盖，继续等待；原CN空仓状态保留。旧US估值追加实际接收10/30，10/23两卖单未成交、无历史补成交；旧frozen/events/runs逐行保留。
+- 同池比较与四条未来曲线已接/fwd?tab=portfolios新tab；缺值保持空白，母指数全收益未接入，财务两候选当前逐股字段缺口展示。新模块和25定向测试/TS/归置、当前只读API/报告API/桌面及名单展开验收通过；原冻结9文件SHA保持。
+- login LaunchAgent实际启动失败EX_CONFIG78/Operation not permitted，原plist备份，已bootout并Disabled/RunAtLoad false/KeepAlive false，不改系统权限。转当前用户独立worker27967/API27968（8029仅localhost），真实双心跳持续更新，已脱离本次命令存活。开机自启、断网/休眠恢复无保证，页面写明；旧com.lei.paper.daily不变、无通知/券商。
+- 报告docs/experiments/strategy-paper-live-start-2026-11-02.md SHA 2fe3a36acc12f7d255c113dc45b12b44d80e2fc8ec88132f6b34d6763af11e2c；同raw冻结/代理独审/替换授权/失败/独立验收/current-source/runtime-processes；report在5173API逐字一致且pending=false，registry其他815项保留。外盘独立run结果约38.63MB，内盘raw约7.97MB（保留的DB备份与合成测试fixture令原2MB估计偏低，非用户硬配额；储备实测13.45GB），旧结果不覆盖、不删除；DB/备份不进Git。
+- 源码仅本地共享dirty分支18e64fa，无源码提交/推送/部署。只推本协调元数据。无新收益回测/参数搜索。研究准入：单动量为候选非赢家；OP×低扩张和A动量×CFO保持输入待补，BM×OP不晋升；不能用公开组毛收益造个股账户。
+
+---
+
 # 纸账户范围细化与执行模型替换 2026-11-02T23:44:45.592899+08:00
 
 - 原task/owner active；checked_coordination_sha 62df0ea8b5922e9413e0e534bbba6c43c82c6aff，checked_at 2026-11-02T23:44:45.592899+08:00；相关owner已读同前，无同写。新增US独立四账户m/mv/v/equal；CN旧版继续原规则，财务组合当下逐股输入缺失不伪装运行。初始804行情批正在采，根唯一运行者，旧输入不改。
