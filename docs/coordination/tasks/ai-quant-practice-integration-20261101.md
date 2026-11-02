@@ -1,3 +1,15 @@
+# 共用交接本地实现交付；真实代理验收暂停 — paused 2026-11-02T15:53:29.177268+08:00
+
+- 同task/owner，implementation_status=completed_local，real_agent_acceptance=paused/provider_quota；scope_released=true（全部源码、技能、说明、报告、registry自身键/INDEX写窗口），保留原恢复材料但无执行者在跑。checked_coordination_sha b4ca87348e81a77ce46470dfbd97a659f1fc3f33，已读self/中控/COORDINATION及最新breadth日常目标调整；无本轮同写。
+- 已接入用户级codex-delegate通用handoff.py、dry_run可选packet和共用说明；LeiSignal delegation_context与preparation --handoff-contract接线，原技能/工作流窄引用。来源/合同一致、state_path固定、重复回调和续阶段预留去重、接收与独立复核分离；不新增预算账本/后台服务/自动交易。
+- 项目227+通用50通过，跨进程合成parser回放通过；真实旧研究截断阻塞、原人工研究负结论/预算/已看史保留。独审发现合同错配后额度中断，root红测复现修正并完成代码/产物复核；未假称独立模型全审或AI理解通过。
+- cold-packet与cold-state仅预留，worker_id/receipt/result为空，主控明确未spawn。恢复条件：原provider可用后核原packet/state及真实执行，再按原Sol medium只读合同完成实际receive与复核；不重置预算、不重跑旧研究、不自动换模型。恢复点raw/reusable-agent-handoff-2026-11-02/checkpoint.json；无后台自动接续。
+- 报告docs/experiments/reusable-agent-handoff-2026-11-02.md SHAb0f56789a726ac6af64dde1020179a7c0ffd7d826e65c4492a87d2c6dcf86d00；registry807→808只自键/INDEX只自单行；8000/5173 API全文准确读回。初始备份、最终14路径快照/hash、保护模块SHA、277测试/静态/归置/16链接回执在raw；phase3/controller-review和原work-progress更新。
+- 本轮研究来源0累计23，金融实验/模型API/行情/安装/付费数据/交易0；代理费用未知、效率收益未测。源码说明193057B、raw约1.13MB、保留全部失败测试夹具约30.72MB，内盘剩余13.40GB。仓外技能按最新用户授权修改且备份回读，记忆未改；无删除、强推、生产修改或DB追加。
+- 主树共享脏区仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；源码/技能/报告仅本地未提交或推送。仅本协调元数据普通推送读回，不以旧HEAD证明最新代码可复现。本地实现阶段交付不代表整个原研究体系完成；未完成的真实代理验收明确暂停。
+
+---
+
 # 共用交接流程本地验证与登记窄窗口 — active 2026-11-02T15:46:05.859772+08:00
 
 - 同task/owner；checked_coordination_sha 9eeef153eba39af5201396fe6e820d4bd3ab0be3，已读COORDINATION、自身、中控和breadth-reading-aid最新释放范围；无同写。沿原共享脏区基线，代码/技能/报告仅本地未推，不切主树。
