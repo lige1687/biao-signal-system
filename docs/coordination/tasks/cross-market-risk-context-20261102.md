@@ -1,3 +1,12 @@
+# 用户补充：小卡参考线与权威来源 — active
+
+- 同task/owner与原写范围。checked_coordination_sha d700e5dccb44aa479450ba926633743b74bfcb0d；checked_at 2026-11-02T22:42:19.304842+08:00；已读COORDINATION/self/research-dispatch-controller/focus-stock-universe最新段。原焦点owner已交付并释放，仅本地，其六日资料与小图打开由本方读回。
+- 用户新指出美股ERP、20/60波动小卡缺少参考线及权威阈值来源，明确要求落实。新增threshold-sources合同10项来源核验（来源助手9、主控1），旧补数据18/16超限保留；不是重置预算或恢复历史数据抓取。无付费/效力回测/交易/策略变化。
+- 新小卡显示机构定义线、本系统历史P15/P85等独立身份；无机构通用交易值不伪造。前端继续原独占范围，增加referenceBands.ts/test于原market-observation-alerts目录；资料助手已释放threshold-sources目录，主控核源及账本。
+- 焦点最新11/2、固定300、256合格13入选，前端点击及Escape回焦点本方实测通过；候选添加/持久化/移除/恢复与隐藏不移除解释输入通过。阈值曲线最终视觉与数值独核进行中，尚未交付。
+
+---
+
 # 首页市场速览统一与组合解释 — active
 
 - 同task/owner；status active；scope_released false；checked_coordination_sha 990ddae936b1ebf7ddd4c294009dfc056ae9c14b；checked_at 2026-11-02T22:14:03.533684+08:00。用户新批准按前轮分工落地，指定首页市场速览截图样式，A/美分栏、可选候选、补数据，焦点问题交原对话。
