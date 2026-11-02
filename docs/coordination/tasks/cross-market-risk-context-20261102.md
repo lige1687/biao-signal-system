@@ -1,3 +1,13 @@
+# 首页市场速览统一与组合解释 — active
+
+- 同task/owner；status active；scope_released false；checked_coordination_sha 990ddae936b1ebf7ddd4c294009dfc056ae9c14b；checked_at 2026-11-02T22:14:03.533684+08:00。用户新批准按前轮分工落地，指定首页市场速览截图样式，A/美分栏、可选候选、补数据，焦点问题交原对话。
+- 主控已读旧任务和focus最新released；已实际message原“完善冰点焦点模型选股与观测”续接焦点专属组件/数据，明确本方不写focus-momentum/，其不写本方市场速览容器。
+- frontend唯一写：market-observation-alerts/，market-style/CrossMarketObservation.tsx与MarketStylePanel.tsx，pages/WorkspacePage.tsx，observation-library/view.tsx。Context唯一写：新web/src/components/market-context/；Data唯一写：新supplement-v2.json和home-integration/data/及已核外盘新目录。Root独占新报告和本stage账本。具体合同见raw/cross-market-risk-context-2026-11-02/home-integration/*-contract.json；registry/INDEX只追加本项且写前复核。
+- 只服务叙事观察层；多指标串联输出事实、支持/反证/缺项，不改买卖/仓位/止损；不声称已验证预测。前阶段6+4来源累计保留，此用户续接新增补数据16次来源操作上限，不重采NFCI/FINRA，0付费和新金融效力回测。小记录源码估计10MiB，外盘新原件100MiB上限；内盘余量10.17GiB。
+- 共享脏工作树完整保存；无代码提交/部署/重启/删除/强推授权。验收桌面双栏/选择持久化/同页大图/组合缺项与时点/原提醒不变/真实数据核算/TS与内存build。
+
+---
+
 # 双市场观察栏与多维风险解释 — bounded completion
 
 - task-id cross-market-risk-context-20261102；owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；status completed_bounded_audit_display；scope_released true。
