@@ -1,0 +1,12 @@
+# 双市场观察栏与多维风险解释 — active
+
+- task-id cross-market-risk-context-20261102；owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；status active；scope_released false。
+- 用户2026-11-02要求先查已有系统与外盘、补可靠数据、A股和美股同时两栏小图点开大图；基础补齐后交组合解释方案审核，暂不接组合交易规则。
+- checked_coordination_sha e6952ee940cd7951283b3bba280384c53ecbb8a0；checked_at 2026-11-02T21:08:23.150922+08:00；已读 COORDINATION、research-dispatch-controller、market-style-observation-20261020、breadth-reading-aid-20261101、focus-stock-universe-20261024、investor-observation-map、market-observation。
+- 既有前端owner均已释放相关范围；只复用宽度与ERP组件/资料，不修改其原定义和已冻结研究。股债/宽度/趋势、条件源各自日期与范围保持。
+- 基线共享 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 加既有脏区；保留旧改动，不提交共享源码。最近成果commit暂无，仅本地准备；协调单项元数据单独提交。
+- 前端唯一写者Sol：web/src/components/market-style/MarketStylePanel.tsx、新 CrossMarketObservation.tsx、cross-market-observation.css、marketRiskMetrics.ts、marketRiskMetrics.test.ts。root独占 docs/experiments/cross-market-risk-context-2026-11-02.md、raw/cross-market-risk-context-2026-11-02/（合同另分给只读助手）；web/public/research/cross-market-risk-context-20261102/ 派生只读展示包。registry/INDEX只追加本项，写前核最新。无src/生产规则/账户修改。
+- 验收：现有数据逐项范围/日期/源核对；外盘UUID/SHA；同屏A美小图、展开详情、来源/阈值身份、未知显式、桌面测试与TS/build；HV20/HV60及历史分位防未来/缺值/零分母核；方案含金融角色、反例、证据缺口与原策略边界。
+- 来源预算：当前新研究6次web调用上限（助手2、root4），新的基础补齐最多4次精确数据来源尝试、每源最多初次+1重试；0新金融效力回测/参数搜索/付费。本机小记录/源码预计<5MiB，外盘大输出按已核storage；内盘>5GiB。
+- 完成已有代码/记录盘点，当前官方来源核对与基础前端实施；本轮只做观察信息，不自动仓位/止损/过滤。组合方案待用户审核，不以季度观察代替有效性验证。
+- 没有背景进程、自动通知、删除、强推或部署授权。交付后记录失败/不齐资料及范围释放。
