@@ -1,3 +1,14 @@
+# 小图点选参考完成 — completed 2026-11-02T19:47:18.617993+08:00
+
+- 同task/owner；scope_released=true，释放market-observation-alerts/index.tsx、style.css与market-style/BreadthInstitutionalReference.tsx。本轮checked_coordination_sha 4ddf1c7e869bdb074632e970fc1ff44ead873e66，已读最新focus-stock active：其等待本范围释放后再认领第四卡接线，无同写；本完成记录即明确释放，保留本轮交互成果。
+- 三个可点击选项已落地：动态50日、StockCharts50日30/70、StockCharts200日50%半数线。按钮突出选中，图内阈值/背景/曲线强调及位置说明同步；各卡独立选择。200日只有50%中线和紫线强调，保留三周期原始曲线，不造200日高低轨。静态重复数值收掉，出处和A股迁移边界仍在详情。
+- 仅三文件本地改动，MiniTrend SHA与v7保持，其他卡复用不变；大图默认来源行不变。后端告警/seen/pins/数据/金融模型未改。此为显示切换，不新增效果证据；0新研究源/实验/取数，累计研究来源11沿用。
+- 验收：两市桌面1280实页点击及SVG核值，动态CN18.6/78.1、US26.6/78.4；固定50日30/70；200日50中线且无高低底色；原始曲线路径不变、两卡隔离、无横溢/console error。TS/Vite与归置通过，既有大包提示。临时viewport已恢复，原桌面用户tab保留；没有移动适配/移动验收。
+- docs/ops/breadth-reading-aid-20261101/下acceptance-v9、desktop-ui-v9、overview-v9、source-manifest-v9、scoped-source-v9.patch及build/hygiene日志；work-progress追加，原研究报告/registry不重写。初次滚动坐标超出当前应用窗，读尺寸后按桌面1280核验，未盲重试。三个最终SHA读回一致。
+- 共享dirty codex/factor-unit-research-20260915@18e64fa源码仍本地、未提交或部署；只普通同步本协调元数据，无后台续跑/交易。本有界交互完成，无需用户决定。
+
+---
+
 # 小图点击切换参考 — active 2026-11-02T19:40:14.680738+08:00
 
 - 同task/owner；scope_released=false，checked_coordination_sha 7ec56a5e9b7963f4c6a60eb3b6fd9617c70b22a9；已读COORDINATION、自身、focus-stock与research-dispatch-controller。相邻首页卡任务completed且释放，MiniTrend本轮只读，不影响其复用。
