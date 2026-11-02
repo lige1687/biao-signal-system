@@ -1,3 +1,13 @@
+# 熵减读图：小趋势图与右侧判读 — active 2026-11-02T15:52:31.179727+08:00
+
+- 同task/owner；checked_coordination_sha bf272e87ce70ca4e81f7f26a47f7fa85f1e8fd2c；已读COORDINATION/self/focus-stock最新scope_released true，ai-quant接续层不涉及本UI；scope_released=false。本轮用户连续反馈要求减少信息、首屏小走势图/有效含义、扩大宽度历史，右侧简洁卡联动图中日期；无需新增确认。
+- 唯一写范围：root market-observation-alerts/index.tsx/style.css及新MiniTrend.tsx；chart助手仅market-style/BreadthComparison.tsx、BreadthReading.tsx、breadth-comparison.css、breadthInterpretation.ts及其test。root自身v6 QA/原报告进度/registry原唯一键；证据助手仅自身evidence-review-v6.md。其他源码、cache、ERP冻结资料、旧研究、用户seen/pins保持。
+- 图2对话已实际读取《完善冰点焦点模型选股与观测》，其股债轨道/提醒已在现有组件，复用不重复。P10/P90只描述位置，不升级有效买卖线；默认优先参与变化，历史分位退为按需资料。50%为半数股票定义参考；ERP上下轨沿用现有证据，不改算法。
+- 原research合同预算累计继承：本轮仅1次StockCharts原文复核，累计6来源；0新金融实验/搜参/行情采集/数据安装。reading-priority-contract-v6为有界资料复用+工程验收，不重开旧回测。
+- 基线共享dirty codex/factor-unit-research-20260915@18e64fa，source-before-v6保存精确5文件；新文件独占。验收同日/缺测/浅显含义、真实可用历史、desktop图右卡/mobile图下卡、缩略趋势、ERP历史与用途边界、TS/build/既有必要测试/真实页面。源码仅本地；小产物不扩数据预算。
+
+---
+
 # 47日更正与重点观察入口已完成 — completed 2026-11-02T14:58:26.294647+08:00
 
 - task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status completed_bounded_engineering；scope_released=true（本轮7个UI路径、两个AGENTS对应句、自身QA/报告/进度/registry原唯一键）。checked_coordination_sha 8ba5307abfdc4b068a9103546a1a72ee6f232c09；已读self、focus-stock-universe-20261024、ai-quant-practice-integration-20261101最新接续流程认领，无同写；共享源码仍仅本地，未提交/推送，不以HEAD冒充可复现成果。
