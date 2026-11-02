@@ -1,3 +1,14 @@
+# 用户可见信息与图例清理完成 — completed local 2026-11-03T00:31:16.511032+08:00
+
+- 同task/owner；status completed（本轮展示维护），scope_released=true（本轮14个源码/规范及自有记录）。checked_coordination_sha 0caa97c82f76194a190d807936221b92a008d848；最新自身记录一致，沿本轮已读COORDINATION和相关已释放owner范围，未修改他人文件/任务。基础分支与源码提交仍18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，本轮源码仅共享本地，未提交/推送/部署。
+- 用户最终要求覆盖此前“方法移详情”措辞：开发信息不进入任何用户界面。根AGENTS、web/AGENTS、因子展示合同1.3.0统一；市场小图图例与曲线/参考线配色对应，HV20/60分蓝紫、20/60比和年化单位保留；金融含义、变化日期与数值清楚，删除重复四层工程明细。阈值算法/原资料/交易不变。
+- 四个因子公共组件去掉路径、哈希、内部编号、原始JSON资料入口和开发交接，定义页复用已有读法；保留报告链接、负结论、费用、基准、更正和资料缺口。代理释放后root实际页面发现版本slug/原始JSON及定义工程字段残留，已修并读回。未声称所有历史页面已逐页清理。
+- 最终TS、Vite内存build(write=false)、31现有相关检查、归置通过；桌面12卡无横向溢出，刷新后0新console error，融资/焦点大图开关和因子资料/进度/目录/定义详情实际验证。未改底层计算与研究事实，0新金融实验/来源请求/付费模型。旧18/16来源超限与累计预算不重置。
+- 证据 docs/experiments/raw/cross-market-risk-context-2026-11-02/visual-clarity/acceptance.json、scoped-changes.patch、browser-proof.json及截图；初次patch上下文、cwd、最后unused import失败及修复全部保留。最终report SHA 52228737c29568f52494fdf2897eac01faedf07647670c667db72c771cd94a5c，registry仅自身条目更新，817条当时读回。原工作进度已追加。
+- 当前数据缺口/DeepSeek仅草案状态沿旧记录，没冒称补齐或接入。后续新展示遵守有用才展示；修改历史页面先核owner和实际字段，不动原证据。无后台进程或待用户决策；释放本轮范围。
+
+---
+
 # 用户可见信息统一准则与因子页清理 — active 2026-11-03T00:11:20.771256+08:00
 
 - 原task/owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；checked_coordination_sha af9c7cde603f7252027d350246e1b90643001d3f；在原visual-clarity阶段追加用户明确扩围。最新要求：无用户用途的开发信息不在任何界面渲染，不是移入详情。
