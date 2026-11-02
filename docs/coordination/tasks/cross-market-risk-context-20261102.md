@@ -1,3 +1,12 @@
+# 小卡颜色与阅读层级 — active
+
+- 同task/owner；status active；scope_released false；checked_coordination_sha c11e8383ab87e881ee8471fdd485280c86198325；checked_at 2026-11-03T00:00:50.967613+08:00。已读COORDINATION/self/focus/controller，本方和焦点原owner此前均释放；沿原共享脏区，不接管其他数据/研究。
+- 用户指出新增卡片颜色/阈值/解释混在金棕色，方法字占主视图；要求像宽度卡一眼看清。纯展示更正：逐线图例、主线/副线/高低阈值与重点解读分层；方法文字移详情，具体数值/日期/缺项保留。0研究/取数/模型/交易变化。
+- frontend唯一写CrossMarketObservation.tsx、ExtraCandidateCard.tsx；root唯一写market-observation-alerts/ChartLegend.tsx、MiniTrend.tsx、index.tsx、style.css、focus-momentum/overview.tsx及本任务记录。未碰数据包、阈值算法、来源或策略。
+- 验收桌面实图逐线颜色/图例一致，HV小图只主HV20高低轨，HV60为紫实线；默认卡无756/P15P85/本系统等方法长句，详情保留；TS/构建/大图交互和原单位数值不变。原来源预算失败账继承，不新增来源操作。
+
+---
+
 # 指标水平与组合读法 — completed local / scope released
 
 - task-id cross-market-risk-context-20261102；owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；status completed；scope_released true。checked_coordination_sha a1bc4ba5cf42f59a40f5b8e724e6e80e0272b1ed；checked_at 2026-11-02T23:50:04.603858+08:00；延用本轮已读COORDINATION/self/controller/focus/market-style，未接管其数据或服务端。
