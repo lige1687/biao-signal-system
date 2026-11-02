@@ -1,3 +1,15 @@
+# 焦点动量接通/第四卡/零线价格标记；ERP轨道敏感性 — active 2026-11-02T19:48:00+08:00
+
+- 同task/owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status active；scope_released false。用户要复用外盘并补缺、焦点作为原三卡旁第四卡，0线上下读法与价格首次跌破标记；并行ERP 1σ/1.5σ相对原2σ的效果/来源比较，全部继续。
+- checked_coordination_sha ebdaca564ec65ea3f49c66af45788cfe40db9df7；已读COORDINATION、自身、breadth-reading-aid v9 active、research-dispatch-controller。首次旧base断言安全失败，尚未改共享源码。breadth owner当前index.tsx/style.css/BreadthInstitutionalReference本方只读避开，第四卡新增组件先在自有focus-momentum目录完成，待其显式释放后再登记父组件接线；不抢写。原Workspace/market-style均不改。
+- root写src/lei_signal/market_context/新增focus_momentum模块、src/lei_signal/research/新增focus_observation与独立测试；api/routes/sentiment.py必要窄接口；web/src/components/focus-momentum/新增近期读数与第四卡/详细图及样式，observation-library仅焦点适配/目录/对照接线/去重与必要测试。旧固定300股包/研究冻结不变，新供应商覆盖池另版本，不拼成同模型。原三卡index/style暂不写。
+- 策略两源SHA沿用同任务已核，叙事观察层；共享dirty18e64fa不清理不覆盖。外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9已核可读；只读登记原件按SHA，现有全A/宽度缓存优先。补缺按实际缺口预登记最小近期批；新原件/大结果落外盘新目录，不覆盖冻结/旧缓存，不付费/删数据/新定时/交易。源请求预算与研究预算分开，禁止盲抓全史。
+- 新docs/ops/focus-live-and-erp-thresholds-20261102/为过程与QA；新reports及registry仅自身键/INDEX本行、原state/progress追加。焦点0为过去收益正负界，不造抄底阈值，图标首次跌破/回零而非事后最低点。ERP保留原2σ，固定3年窗口/原周样本/原事件定义/63主期21与126敏感期，只比较1/1.5/2，一核心批+最多2纠错重跑，最多6公开来源；0搜参/账户策略升级。
+- 最多2助手：Sol/medium只读查已存资料路径覆盖，写data-review.md；Sol/medium独占erp-comparison子目录，冻结后计算与公开来源，不改UI。root独立核源/算术/覆盖/时点/图。验收近期日期、对象单位、正负/零值/缺测/首次下穿与股价点，第四卡去重、桌面及定向测试；ERP同频基准、增量新增事件、反例/区间，结果归档。构建在内存不复制public。
+
+
+---
+
 # 市场首页补充模型小卡与详情 — completed 2026-11-02T19:23:45.700340+08:00
 
 - task-id focus-stock-universe-20261024；owner 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；status completed_local_desktop_observation_cards；scope_released true。首页补充模型小卡、同页大卡、可选收回已本地实现。
