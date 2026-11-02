@@ -1,3 +1,13 @@
+# 横截面新数据已取得，验算与图更新中 — active
+
+- 原task/owner不变；checked_coordination_sha 8eb1274928d3f1bdf9f051c3677a1cbe17aa4a3b；checked_at 2026-11-03T00:29:26.664093+08:00；补读downside-sensitivity-universe-20261023与research-evidence-catalog/report-library-integration-20261008，原数据目录写范围已释放。
+- 资料决定：申万官方证书/上游访问失败；中证全指金融/地产候选无日线且版本不明确，未拼接。独立取沪深300十行业640共同交易日至11/2、美11行业ETF499完整日到10/30；11/2美股盘中被排除。只观察大盘股结构，不冒充原31申万或整个A/美市场。
+- root追加唯一写范围docs/ops/acquired-data-catalog.json/md的本次小资料入口（备份后增量、旧内容保留），避免将已取资料再次重复采集；不改原资格/旧计数。原raw/report/registry本键保持。inventory代理新合同仅HTML、chart-template、render与回执，外盘新run两个截图；无并写。
+- root独验首/中/末六窗、缺价传播与美国未收盘排除通过；图更新尚未验收。旧6来源/2描述保留，本轮来源发现6、直接HTTP截至此31含失败/HEAD，批次3；具体流水以source ledger为准。0预测/收益实验/付费。
+- A31尚未取得；本轮替代对象对比只能评描述，不能把当前rho低或离散高变成信号。成果仍仅本机和外盘，未推成果分支。
+
+---
+
 # 行业间横截面观察数据链补齐 — active
 
 - 原task-id market-increment-map-20261102 / owner 01a19ce6-5541-7071-9f17-f78b42235a0c/root；status active；scope_released false；updated_at 2026-11-03T00:15:17.753237+08:00。
