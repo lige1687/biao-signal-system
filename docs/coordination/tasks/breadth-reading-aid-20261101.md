@@ -1,3 +1,12 @@
+# 两份补数据缓存获准安装 — active 2026-11-02T12:39:48.236907+08:00
+
+- task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status active_approved_cache_install；scope_released false。
+- 用户已明确回复“允许写入并保留备份”，本轮“继续”。范围仅原CN6日恢复、US8日追加两个候选写入对应 ~/.lei_signal_lab/cache/ JSON，保留原字节备份；不重复请求确认、不扩展到其他缓存或覆盖现有日期。
+- checked_coordination_sha 2915e2453625ab8790f1fd636d345b5a630f7b3f；已读自身与focus最新“首页市场提醒完成，实时资料尚未齐备”，无同写。两候选及两live SHA均重新核对与准备时一致，root唯一安装；独立只读agent核候选与installer。
+- 下一步：原子安装并核备份/读回SHA、原记录、API逐值、实际页面日期/缺口和截图，补进度与收尾记录。CN另14缺日保留缺测；未满足输入资格前不补造。
+
+---
+
 # 图表与WorkBuddy复核完成，缓存写入等待用户确认 — 2026-11-02T00:33:36.122267+08:00
 
 - task-id breadth-reading-aid-20261101；owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status blocked（仅正式数据安装等待仓外写入确认）；scope_released false（保留本4显示文件和补数据候选；无后台运行）。前端与有界旧结果复核已完成，不冒称全A补缺完成。
