@@ -1,3 +1,12 @@
+# 纸账户范围细化与执行模型替换 2026-11-02T23:44:45.592899+08:00
+
+- 原task/owner active；checked_coordination_sha 62df0ea8b5922e9413e0e534bbba6c43c82c6aff，checked_at 2026-11-02T23:44:45.592899+08:00；相关owner已读同前，无同写。新增US独立四账户m/mv/v/equal；CN旧版继续原规则，财务组合当下逐股输入缺失不伪装运行。初始804行情批正在采，根唯一运行者，旧输入不改。
+- 原Sol连续两次capacity错误、无receive/source/test写入；用户明确允许gpt-6.1-sol完成同范围。新executor_v2单写paper_live.py/新tests及独立v3packet/result，旧失败与state保留不改绑；root配置/前端/启动及验收。
+- API改动限新增paper_live.py只读localhost8029/CORS本机5173；不改共享8000/旧service冻结代码，不重启Vite。前端新增PaperLive.tsx并最小接入StrategyPortfolios.tsx，desktop only。
+- 运行保活新增且只管理 ~/Library/LaunchAgents/com.lei.strategy-paper-live.worker.plist 与 com.lei.strategy-paper-live.api.plist；原com.lei.paper.daily属于旧信号纸账户、不同DB，保持不动。本次持续模拟授权用于自身日终采集/只读服务，先完整测试再实际加载，双锁与容量/设备预检，日志独立外盘，断网/休眠/断盘显式失败、不补成交、不恢复通知；不是保证24小时数据在线。两个目标不存在，写前核对读回；不删除或覆盖旧配置。
+
+---
+
 # 真实行情模拟账户恢复与新观察准入 — active 2026-11-02T23:30:53.929151+08:00
 
 - 原task strategy-account-bridge-20261020 / owner原root；status active；scope_released=false仅下列范围。用户明确选择真实行情模拟账户，授权从实际启动起持续观察；不是真实资金/券商交易。
