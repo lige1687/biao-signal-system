@@ -1,3 +1,12 @@
+# 小图显示机会风险观察区；仅桌面 — active 2026-11-02T16:59:10.133115+08:00
+
+- 同task/owner，scope_released=false；checked_coordination_sha 1c8f88eecd69c53acd95efe0bb8011c404441b88。用户明确不要手机适配/验证，要求写入项目md，小宽度图必须看见机会/风险阈值。停止手机检查，原偏差验收记录保留。
+- 已审相邻ai-quant规则任务独占根AGENTS.md等；避开该路径，本任务新增项目web/AGENTS.md记录仅桌面偏好（对所有前端生效），不修改别人的规则入口。其余沿v6已登记8源码、自有报告/QA/进度/registry原键。
+- 小宽度图显示已有50日P10/P90数值和低/高淡色区域，说明低位看修复机会、高位看回落风险，配既有参与方向；不称已验证买卖线，不改阈值算法。验证只做桌面与数值/缺测边界。
+- 0新来源、金融实验、行情写入；v6成果保留，最新用户纠正继续落实。
+
+---
+
 # 熵减读图：小趋势图与右侧判读 — active 2026-11-02T15:52:31.179727+08:00
 
 - 同task/owner；checked_coordination_sha bf272e87ce70ca4e81f7f26a47f7fa85f1e8fd2c；已读COORDINATION/self/focus-stock最新scope_released true，ai-quant接续层不涉及本UI；scope_released=false。本轮用户连续反馈要求减少信息、首屏小走势图/有效含义、扩大宽度历史，右侧简洁卡联动图中日期；无需新增确认。
