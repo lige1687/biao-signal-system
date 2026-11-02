@@ -1,3 +1,13 @@
+# 实际比较研究接续 active（用户新增授权）
+
+- 原task-id/owner延续；status active；scope_released false；updated_at 2026-11-03T00:06:33.432291+08:00；checked_coordination_sha 4cf54b2bad9841a1ecb85dfcf17c5e8d35a8359e。已读COORDINATION、self、sentiment-factor-research、dispatch、market-increment-map、cross-market、strategy-account最新范围；各自原成果只读，无同写。
+- 用户明确实际比较旧指标/新候选且不只10日，本阶段固定5/10/20/60/120/252日、主60日风险，跨行业/年份、简单趋势波动对照和成本/错过上涨。旧至少1028拟合和旧6来源不重置；本阶段新来源4/6，新市场批0/4，付费/下载0。
+- 写范围只新 docs/experiments/sector-sentiment-comparative-evaluation-2026-11-02.md、同名raw、registry自身新键及本任务progress；生产/旧冻结/他人代码不改。Root唯一报告/登记写者；Sol panel独写build_panels.py、Sol evaluation独写evaluate.py，合同后派发，root独立验收。
+- 新结果外盘固定UUID和余量已核，plan位于新raw。当前31行业成分代理/20行业真实指数分开；流通市值PIT和ETF全收益缺失不冒充合格。旧报告计算漏洞仅新文件纠正复算，旧原件保留。
+- 工作分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享脏区保持；全部研究仅本地未推；本次只同步协调元数据。旧采用审查已完成范围保持，本新效力阶段running，不把完成前审当研究完成。
+
+---
+
 # 采用审查完成；SCI完整效力仍未评价
 
 - task-id sector-crowding-advice-review-20261102；owner 01a19cde-a99b-7ad0-adbc-99471b24208d/root；status completed_bounded_adoption_review；scope_released true；updated_at 2026-11-02T23:44:14.214134+08:00。
