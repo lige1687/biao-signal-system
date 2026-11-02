@@ -1,3 +1,14 @@
+# 价值与盈利能力联合选股：新有界问题 active 2026-11-02T20:06:36.940342+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false仅本轮新报告/raw及自有记录。用户11/02授权继续有金融理由的因子组合和选股收益研究；主问题为便宜且经营盈利高的联合选择，是否优于同池单价值、单盈利及简单资金混合。不是重跑10/23两个不同来源资金组混合。
+- checked_coordination_sha 8ea9559bca4b1c49819a091ee312a2236b9a58ea；checked_at 2026-11-02T20:06:36.940342+08:00。已读COORDINATION/self、dispatch、downside-universe、personal-lowfreq、research-method-practice、lowfreq-strategy-discovery、research-utility。A股完整历史成员/退出及ETF收益链仍按原owner证据边界，本轮不接管采集/旧反转；共享工具/UI/生产不改。
+- 主树base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加既有共享修改，成果仅本地；唯一新报告docs/experiments/us-value-profitability-joint-selection-2026-11-02.md及同名raw/；registry仅本键、INDEX本行、自身work-progress。root负责合同/来源/冻结/报告，Sol一位执行者仅本raw的run.py/test_run.py，具体合同预检后派发；原定义/旧结果只读。
+- 准入使用French官方32组ME×BEME×OP共同分组，大小规模分开；源方法已打开，需原始文件及列/时期/单位核验。主2015—2024，早1963-07—2014-12，近2025-01—2026-08，与已看历史一致，不追最新赢月。当前版本修订不伪装旧时可见；逐股/行业/个人成本未评价，母指数不可替代则明确空缺。
+- 新问题预算1核心+最多3项必要跟进、6来源请求（已2：官方构造成功、原稿PDF超时），0网格/付费/生产/新前向。金融现象先验与全部比较在收益计算前冻结，不因结果换参数。外盘新独立run由output_storage规划核UUID，预计<=16MiB；本机小合同/代码/报告<=1MiB且先核5GiB储备。新用户规则允许已授权任务必要仓外新增，保留旧物，无删/强推。
+- 验收同32格/同日期/同权重边界、单项/交互/简单资金对手、收益/回撤/相关/风险/不确定性与反例、关键数独核、曲线/报告登记读回；失败和所有尝试留账。不能把公开格收益当真实可执行账户，不能以非空机制文字认定alpha。
+
+---
+
 # 相对超额与金融机制审查落实 completed 2026-10-31T11:40:34.558692+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status completed_bounded_method_implementation；scope_released true仅本轮非冻结可复用实现/文档。无后台任务；用户批准的方法落实完成，非新收益实验。
