@@ -1,3 +1,11 @@
+# 邻任务已释放，小图移除半数线选项 — active 2026-11-02T20:37:24.080372+08:00
+
+- 同task/owner；checked_coordination_sha 6e6c78c28989a4ff3b0495de61cb9527f68feaf9，已读COORDINATION/self/focus-stock-universe/research-dispatch-controller。focus最新明确释放market-observation-alerts/index.tsx与style.css，此后本轮不再写；该两路径现在由本root唯一写。本方不动其focus或observation-library模块。
+- 用户已授权等待后移除小图200日50%半数线选项；本轮仅此两文件局部精简为动态50与StockCharts50日30/70，保留原三曲线、原告警/ERP、第四卡与刷新入口。预备修改已在QA独立编译，原文件与proposal.before逐字一致，待登记读回后应用。
+- 大图v10已完成，原源码权限保持至收尾；验收只桌面，核两种点击／阈值与底色同步／第四卡保留／无报错，TS构建与最终SHA读回。金融实验、来源请求、数据写入不增加；累计17来源。scope_released=false，源码仅本地dirty18e64fa，协调只自身元数据显式SHA普通推送。
+
+---
+
 # 联合大图完成，小图等待相邻范围释放 — active 2026-11-02T20:30:15.975409+08:00
 
 - 同task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false。checked_coordination_sha 279e72692d9b43bae7055b76a743b10b297849e8；已读COORDINATION/self/focus-stock-universe/research-dispatch-controller，focus仍active独占小图index/style；遵照用户“等它改完后再处理小图”，不写这两文件、不发跨会话消息。
