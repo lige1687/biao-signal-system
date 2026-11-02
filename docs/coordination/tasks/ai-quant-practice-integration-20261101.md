@@ -1,3 +1,13 @@
+# 共用交接流程本地验证与登记窄窗口 — active 2026-11-02T15:46:05.859772+08:00
+
+- 同task/owner；checked_coordination_sha 9eeef153eba39af5201396fe6e820d4bd3ab0be3，已读COORDINATION、自身、中控和breadth-reading-aid最新释放范围；无同写。沿原共享脏区基线，代码/技能/报告仅本地未推，不切主树。
+- 两实现助手完成且停止写入，root接管其新core/adapter的必要审查修复。独审提出context旧合同与新packet合同错配，最小红测复现后收紧；指针类型、CLI来源数边界和非有限合同值亦有回归。模型路径未改，旧账本/冻结资料未重跑。
+- 独审代理触发provider usage limit后停止；没有替换模型或重试。真实冷代理packet/预留已就绪，但没有实际spawn、worker receipt或金融实验；该行为验收待原provider可用后恢复。已用本地独立进程合成回放完成状态恢复、重复回调/下一阶段去重等机械验证，不能替代真实AI理解。
+- 现root唯一追加registry键 docs/experiments/reusable-agent-handoff-2026-11-02.md 和INDEX自身单行；写前读回全部他项，范围不含已有登记。完成当前报告、入口说明、原进度和恢复点后释放源码/登记窗口。
+- 本阶段新研究来源0累计23、金融实验/模型API/安装/付费/行情/交易0。代理实际费用未知；未删除数据/未强推/未添加后台服务或通知。
+
+---
+
 # 共用交接与接续流程实施 — active 2026-11-02T14:55:33.024409+08:00
 
 - 同task/owner；用户明确批准借鉴、沿用、优化并沉淀共用流程。status active/scope_released=false。checked_coordination_sha 6e1707aeb3cd3997998dc697a259ae70d5b1d6ca；fresh fetch同SHA，已核相关owner，无同写。沿已读SuperAgent4文档，不新联网研究，不安装DS服务。
