@@ -1,3 +1,15 @@
+# 指标水平与组合读法 — completed local / scope released
+
+- task-id cross-market-risk-context-20261102；owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；status completed；scope_released true。checked_coordination_sha a1bc4ba5cf42f59a40f5b8e724e6e80e0272b1ed；checked_at 2026-11-02T23:50:04.603858+08:00；延用本轮已读COORDINATION/self/controller/focus/market-style，未接管其数据或服务端。
+- 用户追加问题已落地：融资2.63%自身历史位置87.30%、P15/P85 2.18/2.62、较20条−0.02pp，余额−11.22%分开；焦点−11.44%、历史位置3.97%、P15/P85−2.97/+18.74和−4.19pp。只有描述性参考，无机构统一买卖阈值背书。
+- 组合改为主要结构、证据、关键冲突与下一观察：A股参与面低迷/融资收缩，US参与面回升/估值缓冲薄/信用走阔。各日期/股票池保留。HY实际API已更新到10/30 3.44%、20条+34bp，旧快照不冒充当前。
+- 原DeepSeek接口只排卡ID；已复用审计并交接入草案，未修改服务端/调用模型/后台任务。原配置未读凭证，不声称实际模型即DS。
+- 验收18定向测试、TS、Vite write:false889模块、归置、独立算术/当前API、1215桌面/焦点与融资大图/Escape、刷新后0新console错误。原策略SHA一致。全部8源码写路径及3助手范围释放；源代码未提交/部署/重启，均仅本地。
+- 报告仍docs/experiments/market-overview-linked-context-2026-11-02.md；新证据raw/cross-market-risk-context-2026-11-02/reading-context/acceptance.json；registry只改本项，当前815项全部保留。新来源3/4、0历史抓取/付费模型/新金融回测，继承旧6+4、18/16超限、10/10。失败预检/patch/定位/构建目录留账。DR007连续历史、同池融资分母、盈利修正PIT未完成。
+- 下一步若讨论模型接入，读deepseek-reading-proposal.md；当前只是草案，不虚称AI已上线。当前本轮所有已授权展示与解释任务验收完毕。
+
+---
+
 # 指标水平与组合读法改进 — active
 
 - task-id cross-market-risk-context-20261102；owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；status active；scope_released false。checked_coordination_sha 7ac3f4b0fb87c6bc494f3e66081c0a9dbcefd527；checked_at 2026-11-02T23:27:15.026877+08:00。已读COORDINATION、自身、research-dispatch-controller、focus-stock-universe、market-style-observation；相关owner均已明确释放，本轮不接管原数据和研究。
