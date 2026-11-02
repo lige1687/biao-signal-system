@@ -1,3 +1,13 @@
+# 联合大图完成，小图等待相邻范围释放 — active 2026-11-02T20:30:15.975409+08:00
+
+- 同task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false。checked_coordination_sha 279e72692d9b43bae7055b76a743b10b297849e8；已读COORDINATION/self/focus-stock-universe/research-dispatch-controller，focus仍active独占小图index/style；遵照用户“等它改完后再处理小图”，不写这两文件、不发跨会话消息。
+- 大图双低双高按钮前置；原AND与等号保持，同日价格色带与区段起点，任一50/200缺测标灰；关闭联合恢复原底色，其他数值条件与联合互斥。两市桌面1280点击、关闭恢复、模式切换实显；25定向tests、TS/Vite内存构建、归置通过。独审唯一文案问题已修读回。
+- source-manifest-v10/scoped-source-v10.patch/acceptance-v10/joint-cn-v10及desktop-ui-v10均在本地原QA目录；原报告与registry仅自身键已更新，其他808条保持。共同脏工作区18e64fa源码不提交、不推送，不能视作远端已有UI。
+- BofA仅原报告索引摘录（官方页过期）、NDR模式阈值未核（截图失败），不转用其市场指数规则；本地20/80与15/85仍为数值查询。新增来源6、累计17，金融实验/行情采集/缓存写0，无手机检查。
+- 未完成仅小图移除200日半数线选项，待focus明确释放后重新登记。原200日曲线和长期参与含义保留；不改其第四张卡。范围内后续仍继续，本记录不是整项完成。
+
+---
+
 # 联合宽度来源与大图条件 — active 2026-11-02T20:13:36.304887+08:00
 
 - 同task/owner；scope_released=false，checked_coordination_sha 891ca7a7260a2b55b52ba4dc08f58a6c419b053a。已读COORDINATION/self/focus-stock/research-dispatch-controller及最新focus续接显示段。首次旧base断言安全停止，无写入；现已更新基线。
