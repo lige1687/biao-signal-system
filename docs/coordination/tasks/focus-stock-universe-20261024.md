@@ -1,3 +1,13 @@
+# 第四卡与零线显示已完成；释放共享首页文件 — active
+
+- 同task/owner，剩余仅报告/验收收尾；立即释放 web/src/components/market-observation-alerts/index.tsx 与 style.css，此后本轮不再写。原三个宽度/ERP卡的参考按钮完整保留，新增第四焦点卡已实际打开；邻 breadth-reading-aid 可继续自身小图任务。
+- 其他焦点/observation-library文件本方仍持有至收尾；未写 breadth 大图。checked_coordination_sha d5a512bd19732830360fa74be5da905d49b45dfc，首个旧base断言安全停止后已读其最新完成大图、等待小图范围声明；已读其v10仅自身大图范围及等待共享文件声明。
+- 必须更正原过程记录：ERP helper容量失败前已留下run.py、method.json、results.json，不是无产物。总控未充分核对便覆盖前两文件并重算，已从准确工具调用恢复原脚本/方法语义，原结果始终保留；原时间戳未恢复。累计初次+2修复+总控重算，超过原修复上限，账本明确保留；没有重置预算或继续参数实验。验收显示使用独立复核后的sigma子目录，2σ逐字节复现冻结结果。
+- 焦点23日重叠一致、193日续至10/23，13股端点原件独立均值核对一致；最新六日两次登录失败不补值。ERP三档页面实际36/24/17个穿轨，与Python一致；2σ首页不受切换影响。当前仅本地，未部署。
+
+
+---
+
 # 焦点续接包与股债检验显示 — active
 
 - 同owner、scope_released=false，已读最新协调差异；原范围继续。明确新增仅本任务小型衍生显示数据：web/public/research/focus-momentum/continuation.v1.json 与 web/public/research/erp-bands/sensitivity.v1.json。原 observation.v1、cn-reference、evaluation 及冻结报告保持只读。
