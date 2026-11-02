@@ -1,3 +1,15 @@
+# 价值与盈利联合选股 completed 2026-11-02T20:43:40.145924+08:00
+
+- task-id strategy-account-bridge-20261020；owner原root；status completed_bounded_public_group_comparison；scope_released=true仅本轮非冻结可复用新代码/报告，源/合同/冻结结果保持。无后台任务。
+- checked_coordination_sha c2e23be010bf0ea6c0410f4c990a2ddeb3f98cae；checked_at 2026-11-02T20:43:40.145924+08:00；已读focus与breadth最新段，结合原COORDINATION/self/dispatch/downside/lowfreq/method/utility，均无同题或同写；本方不改其小图、数据、技术规则。
+- 本轮新金融问题为同French32格BM×OP联合选择对同池单项和简单资金混合；先跑最高四分位交集，因大规模中位仅5公司及已核尾部做唯一上半区分散诊断。所有候选、时期和失败留存，旧OP×INV和A股试验不重跑。
+- 主要2015—2024上半区联合大规模年化6.61%/月末回撤−46.55%，同池单盈利10.73%/−27.90%；小规模7.69%/−61.46%，单盈利9.92%/−49.75%。全部公开毛收益；更早优势不稳定、近期20月非独立；本版降优先级，不新增前向。PIT个股、真实费用、行业与母指数净超额仍缺。
+- 报告docs/experiments/us-value-profitability-joint-selection-2026-11-02.md SHA 2b7ca5afc33566605a1cbbfb94964db2921839abc613fda11bea1a01cda0a163；同raw设计/两冻结/ledger/源绑定/独核/机制incomplete/定位/交付回执。外盘value-profitability-joint-20261102/value-profitability-joint-20261102-20261102T200819-c24b05233621/result，7651853B<16MiB，UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9。新授权按现行用户仓外规则核盘/新建/读回，旧8MiB范围与原件不变。
+- 来源6/6含PDF1失败，TXT本地精度初检查失败保留并按2位/4位规则验证；1核心+1必要后续，另独立核算；无网格/付费/生产/交易。72策略面板独核、16主期区间、全部公司数一致，6保护输入SHA不变。图日期修正到月末的plots-v2，旧图保留；API8000/5173正文逐字、library pending=false、旧811registry键保留、归置/窄diff通过。
+- 主工作树base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享修改；源码/报告仅本地未自动提交推送，远端不可据本提交完整复现；本次只协调元数据。下一必要证据是原owner的合格逐股版本与执行成本，不在同历史继续改阈值。
+
+---
+
 # 价值与盈利能力联合选股：新有界问题 active 2026-11-02T20:06:36.940342+08:00
 
 - task-id strategy-account-bridge-20261020；owner原root；status active；scope_released false仅本轮新报告/raw及自有记录。用户11/02授权继续有金融理由的因子组合和选股收益研究；主问题为便宜且经营盈利高的联合选择，是否优于同池单价值、单盈利及简单资金混合。不是重跑10/23两个不同来源资金组混合。
