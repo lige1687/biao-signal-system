@@ -1,3 +1,11 @@
+# 小图切换完成；协调分支误删已恢复 — completed 2026-11-02T19:48:57.015227+08:00
+
+- scope_released=true，代码交互/桌面验收完成状态同下段。checked_coordination_sha b21c4ae07578007fd9b5d2a28852804162a985c1；原已读自身/focus-stock/research-dispatch-controller范围保持，其他任务未改。
+- 必须保留的操作事故：收尾把无引用commit-tree提交用git log --all查找，空命令替换误生成删除refspec，实际误删coordination/lei远端分支，非授权行为。已立即用显式完整SHA b21c4ae07578007fd9b5d2a28852804162a985c1普通push恢复，fetch逐字读回一致；4ddf1c7e869bdb074632e970fc1ff44ead873e66为其完整祖先，diff仅自身task，其他任务文件及历史均保留，源码和数据未删除。已主动告知用户。不是声称仅未遂或安全拦截。
+- 事故与恢复证据在原QA sync-incident-v9.json / acceptance-v9.json及work-progress。后续push必须显式非空完整SHA、准确目的引用，禁止未校验shell替换生成refspec。本补充只自己的协作记录，不触发新工程/研究任务。
+
+---
+
 # 小图点选参考完成 — completed 2026-11-02T19:47:18.617993+08:00
 
 - 同task/owner；scope_released=true，释放market-observation-alerts/index.tsx、style.css与market-style/BreadthInstitutionalReference.tsx。本轮checked_coordination_sha 4ddf1c7e869bdb074632e970fc1ff44ead873e66，已读最新focus-stock active：其等待本范围释放后再认领第四卡接线，无同写；本完成记录即明确释放，保留本轮交互成果。
