@@ -1,3 +1,11 @@
+# 官方行情接通范围补充 — active 2026-11-03T23:27:44.748516+08:00
+
+- checked_coordination_sha 94b795f88da9a6e5d280bb4686e42d7a4cd89413；已fetch/read自身与cross-market/market-increment，沿本轮COORDINATION/controller/sentiment范围，无同写。SSE官网页面及所引JS真实核到dayk接口，512480已得999日日线至11/3。原6搜索全耗用但不足资格判断，故先记录有界实际接口检查扩展：root最多8官方页面/脚本/样例请求（已6），核成功后余8只沪市各1请求；原Sol深市159611最多8页面/脚本/样例操作，0继续搜索/付费/绕授权。全部累计不重置。
+- root唯一增加 web/public/data/sector-etf-sentiment/official-*.json 9沪市新快照及可能159611，仅合格源生成；原10文件/catalog不改。上交所官网实际收盘/成交量，未知历史调整明确未复权，不用净值替代报价。新快照指标同旧定义、行业旧值仅原日期对齐不补造，默认ETF自身活跃。总览官方可核项正式分类，深市不足单列。helper两UI路径不变，schema多dataFile可选绑定同官方图。
+- 外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9刚核available/identity_ok，480GB余量；原图表run result新official-quotes-v1子目录保存原响应预计1MiB，运行JSON预计2MiB本机。沿原输出计划，不迁移/覆盖冻结输入。新展示派生1批，0金融拟合/策略/后台。
+
+---
+
 # ETF冷热总览与来源核验 — active 2026-11-03T23:23:33.783536+08:00
 
 - 原 task/owner 延续；scope_released=false；checked_coordination_sha 1a72663424349ac110e3b2e19a78438f7a0d3ad4；已读 COORDINATION/self/cross-market-risk-context/market-increment-map/research-dispatch-controller/sentiment-factor，其他当前前端均释放或独立目录，无同写。
