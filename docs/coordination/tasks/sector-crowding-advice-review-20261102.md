@@ -1,3 +1,14 @@
+# EMA20满空底盘上的条件EMA10收紧检验 — active 2026-11-03T10:28:54.949387+08:00
+
+- 原task-id/owner延续，用户明确新增规则检验；status active，scope_released=false。checked_coordination_sha 26e1adb0e9677f0cc142a11e584b12ec49439c3b；已读self/dispatch/sentiment/market-increment/cross-market/strategy-account最新范围，各原源码与报告只读，无同写。
+- 新问题：纯EMA20满仓/空仓 vs EMA20硬底线且活跃/旧强热时EMA10收紧；原报告其实含半仓版tighten，保留不覆写。固定周频主检/日频敏感性、10bp与20bp、恒EMA10简单对手；不选择旧12个赢家行业，不调阈值，不新增预测拟合。
+- 新写 docs/experiments/sector-sentiment-ema-overlay-2026-11-03.md、同名raw、registry本键、本任务progress；root唯一报告/登记写者，原Sol仅独写新overlay_eval.py，另一Sol独写审计文件。合同预检后才派发。
+- 冻结外盘旧feature-panels与L2 panel只读；20行业指数和旧当前成分代理分开，缺流量日不当正常，不跨缺口拼接年化。大结果固定UUID外盘新路径，内盘小记录预计2MB。
+- 仅新1核心政策批（含预定频率/成本敏感性），最多2个必要纠错/诊断补批；旧3批/321拟合及旧至少1028、总10来源请求全保留；本新分支0拟合/0取数/0付费。已见历史不当样本外，生产/交易不改。
+- 工作分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享脏区保持；研究仅本地及外盘，元数据独立index普通推送并读回。验收现金份额/执行滞后/热信号未知/净收益回撤及行业反例；待实际运行。
+
+---
+
 # 多期限实际比较 completed bounded historical scope — 2026-11-03T00:49:51.146272+08:00
 
 - 原task/owner延续；status completed_bounded_historical_comparison；scope_released=true仅本次非冻结报告登记/进度；新协议/代码/输入/结果均已冻结不得覆盖。checked_coordination_sha 9ee3713fe69dff31442c5c1a18708efc01cf42a0；交付前补读cross-market-risk-context、market-increment-map、strategy-account最新范围；自身内部拥挤效力与行业之间共动/账户选股不混，无同写。
