@@ -1,3 +1,12 @@
+# V2盈利规则、过滤与迟滞有界检验 — active 2026-11-04T00:34:50.552868+08:00
+
+- 原task/root；用户已采纳四项修改并在本轮明确批准内盘低于5GiB时≤1MiB小记录例外。所有结果/图/临时/日志写原核验外盘，固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9；新V2结果估计≤16MiB，无删除。全局存储规则保持，仅本次记录用户例外。
+- checked_coordination_sha 622f2a1c9c4a75070651f3263d9227fc5aa32844；唯一变化breadth-reading-aid首页叙事，无范围重叠。scope_released=false仅原raw/v2-construction-20261104、新cn-profitability-risk-v2-construction-2026-11-04报告及registry自身/INDEX自身行、原critique报告有日期入口、原progress；不改旧冻结结果、数据源、标准、前向与生产。
+- 三层对照：原细行业keep-all、细行业统一ceil20%、CSRC首字母门类统一ceil20%，同池n/N预算。固定30%全池/门类内筛选×无缓冲/70-85缓冲；10/15/20/25/30/35/40七档仅门类内无缓冲敏感性，全部预先登记，不择优调参。补同暴露/筛后等权对照、持仓漂移费用、分年/时期、分段回撤和区间。旧1核心+3跟进保持；新增用户授权一批固定比较，非新独立样本。
+- 原Sol6.1 medium将以精确合同实现新适配器，root冻结和独立验收；新金融效果尚未执行。127共同完整月保留，5缺月不填0，历史分类仍代理。例外不补足公司行动/可成交/母指数资格，无自动前向升级。
+
+---
+
 # Gemini四项V2建议方法审查 — completed 2026-11-04T00:20:46.261562+08:00
 
 - 原task/root；status completed_bounded_method_review；mode report_only，scope_released=true仅本轮非冻结说明。checked_coordination_sha bb542b9452cee60732ba55b8231e45e7207f6fae；已核最新breadth-reading-aid仅首页1.5/2σ叙事范围，无重叠。旧1核心+3跟进及来源失败不重置。
