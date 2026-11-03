@@ -1,3 +1,11 @@
+# 同task研究续篇登记范围补充 — active
+
+- checked_coordination_sha 20f0edb537868087f93a6d8512b180981d0416df；checked_at 2026-11-03T20:50:24.156037+08:00；沿本轮已读COORDINATION、自身/原前端/中控/报告登记owner范围；无同写变化。
+- root唯一补充 docs/experiments/registry.json 的原报告key和新增续篇key docs/experiments/market-increment-three-modules-2026-11-03.md，以及docs/experiments/INDEX.md的一条续篇导航。其他条目原样保留、写前备份、读回验证；为已完成同task研究的归档规约，不新增实验或任务。新增报告raw仍指向原task three-modules目录。
+- 前端两卡继续由原owner实现，尚待其实际交付，本方不碰源码。
+
+---
+
 # 三模块研究已核验，真实机构披露交现有首页接入 — active UI acceptance
 
 - 原task/owner不变；status active；research completed_bounded；scope_released=false；checked_coordination_sha 7d56c62ac74bfa7f24e12ec707e1509aebb96d65；checked_at 2026-11-03T20:49:07.796902+08:00。本轮读COORDINATION1.1/self/cross-market-risk-context/controller/research-evidence-catalog/report-library-integration/research-method-practice/sentiment-factor。共享registry只改原报告自身key，原全局登记owner明确scope_released=true。
