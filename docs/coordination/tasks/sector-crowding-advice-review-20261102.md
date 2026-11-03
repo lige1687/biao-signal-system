@@ -1,3 +1,14 @@
+# ETF价格与行业情绪上下对照图 — active 2026-11-03T20:13:41.843156+08:00
+
+- 原task/owner延续，scope_released=false；checked_coordination_sha 605fadec536d611e7938295691689065cbfe0b1c，已读COORDINATION/self/cross-market-risk-context/market-increment-map/sentiment-factor-research/research-dispatch-controller最新范围。其他前端owner已释放，本次不接管首页；在情绪页新增独立ETF观测组件。
+- 用户明确授权把真实ETF价格与行业情绪放在同一图上下，可切换ETF，适用口径不同要标明。本阶段是已有证据可视化与数据对齐，不新增效力/资金回测、不调指标、自动仓位或交易。图上轴同日联动、缩放联动、保留缺口/资料日期/行业代理映射，跨行业红利不强套单行业。
+- 写范围：web/src/components/etf-sentiment/新目录（唯一frontend helper）；web/public/data/sector-etf-sentiment/新快照、web/src/pages/SentimentPage.tsx仅插入组件（root）；新docs/experiments/sector-etf-sentiment-chart-2026-11-03.md及同名raw、registry自身键、原progress（root）。冻结原源/原报告、旧图、所有交易及服务代码只读。
+- 数据先复用已登记/本机合格来源ETF缓存与冻结行业指标，核源及内容指纹；若需补缺先限定对象/小预算，不重启采集器。最多1个展示数据派生批、0市场效果拟合/政策批；必要官方映射查核至多6来源，0付费，原6批/321拟合/至少1028家族拟合/10来源保留另记。
+- 两个原Sol同任务继续：数据覆盖只读审计写独立清单，前端只写新组件；root数值对齐/源核/接入/真浏览器验收。图表不等于效力证明。小运行快照预计<5MB、元数据20MB，外盘大源只读；实际新大输出按固定UUID计划。
+- 主工作区共享dirty18e64fa6保留；源码/产品快照本地，不推部署。协调独立index仅此文件普通推送读回后实施。
+
+---
+
 # 行业情绪观测价值完成 — completed 2026-11-03T15:28:09.199485+08:00
 
 - 原task-id sector-crowding-advice-review-20261102 / owner 01a19cde-a99b-7ad0-adbc-99471b24208d/root；status completed_bounded_observation_question；scope_released=true；checked_coordination_sha 098e58f06b807d2c888cfc205c173f66cd0e8105；checked_at 2026-11-03T15:28:09.199485+08:00。已读self/research-dispatch-controller/sentiment-factor-research/market-increment-map-20261102/cross-market-risk-context-20261102，无同写或接管；首页归原owner。
