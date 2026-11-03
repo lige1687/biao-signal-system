@@ -1,3 +1,11 @@
+# 用户纠正：市场速览小卡配色 — active 2026-11-03T12:58:17.840966+08:00
+
+- 原task/owner不变，scope_released=false；checked_coordination_sha dcf2b92b3d09da531cb1dbfef56786f197b8af58，已fetch并读COORDINATION/self/research-dispatch-controller；本任务前阶段写权已释放，root唯一写3文件：web/src/components/market-observation-alerts/ChartLegend.tsx, web/src/components/market-observation-alerts/style.css, web/src/components/market-style/CrossMarketObservation.tsx。简单有界配色修正直接执行，无代理。
+- 用户明确指小卡HV20/60与VIX的亮蓝数值/曲线/解释；先前改大图对象错了。改小卡统一调色：大数值与正文炭灰，主线低饱和灰绿、对照灰紫，参考低位青绿、高位赭色，曲线与图例一致；原数据、阈值、解释、范围、布局与交易语义不改。市场小卡通用正文/按钮/背景统一柔和中性，宽度已有多周期线色保留辨别性。
+- 验收实际A/US小卡截图、计算颜色/图例曲线一致和值/阈值不变；不新建测试镜像、不研究或取数。源码本地18e64fa632dba5dbad0e5fcae09b4ccc75f119a9脏区保留，无源码提交/部署/删除。复用上阶段隔离Git索引，小证据预计<1MiB；旧预算及阶段记录保留。
+
+---
+
 # 焦点图定位与中性配色 — completed local 2026-11-03T11:20:06.997491+08:00
 
 - 原task cross-market-risk-context-20261102/owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root 不变；status completed，scope_released=true。checked_coordination_sha dcfd6b9164b8019ac98027b87835eca8f0d7300b；checked_at 2026-11-03T11:20:06.997491+08:00，交付前已fetch，沿本轮COORDINATION/self/focus-stock-universe/research-dispatch-controller核范围；无他人写入冲突，earnings只读审阅已释放，root四文件及自身记录写权释放。
