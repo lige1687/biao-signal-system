@@ -1,3 +1,15 @@
+# 行业独立栏与焦点缩放／机构读法 — completed local 2026-11-03T10:44:32.210490+08:00
+
+- 原task/owner不变；status completed；scope_released=true；checked_coordination_sha 64a39593f877f902b13202e7cfb619d8cc3c5048；checked_at 2026-11-03T10:44:32.210490+08:00。最新自身仍本方active，已沿本轮COORDINATION/self/market-increment-map/focus-stock-universe/research-dispatch-controller核范围；两代理完成释放后root独立核验，不修改他人任务。
+- 首页市场速览A股指标区下已接原生行业独立栏：沪深300十行业（金融地产合一，非全A/申万31），相关性和每日涨跌离散度5日均值、历史位置/5日变化、20日涨跌排行和同页大图。620行2024-04-11—2026-11-02逐字段及HTTP包字节与来源核同，原件SHA仍e0a49136d598349a6a5ab1a1ff9cff45d266ca20cb285c1e999104f7cb665814；日期/非每日更新/价格不含分红显式。不重复研究或取价。
+- 焦点保留默认1年与1/3/5/all，全部2015-01-05—2026-11-02。价格密集点移至独立穿零带，长史细线/局部三角，紫色动量负值仅下方浅填充；显式放大缩小/左右移/还原，实际滚轮、图面拖动、滑块均核。root修分类轴边界日期舍入、末端文字和无意义事件Y坐标；原穿零/数据/计算不变。
+- 权威用法report_only：Fidelity支持0作为过去涨跌正负，MSCI6/12月及标普中国A6月的波动调整/相对排名不可套作本20日活跃均值买卖值。已有负结果复用，0不升格机会风险线；小卡与大图短读法及可打开来源已接。新来源3/6次web（含1个StockCharts超时未用），0金融实验/行情采集/付费模型/交易/自动日更。旧所有预算含18/16超限保留。
+- 验收：15相关检查，最终tsc与Vite write=false6产物通过；1215桌面焦点默认/全史/缩放/tooltip、行业大图/Escape回焦点，0溢出、刷新后0console错误。真值与图交互均root独核，未将工程通过当效力证据。策略SHA核同。
+- 证据 docs/experiments/raw/cross-market-risk-context-2026-11-02/industry-focus-20261103/{acceptance.json,scoped-changes.patch,industry-data-root-review.json,threshold-source-review.md,browser-proof.json,focus-zoom-final.png,industry-large.png}；acceptance SHA 0fe67d3805825f4631c32d2528f030e5bdb09d241906cff4591cf04fbbf9c127。原工作进度已追加，registry未改（本轮维护和原证据复核，无新金融实验报告）。全部11源码/数据展示路径及自有记录写权释放。
+- 共享基础codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，源码仍仅本地，未commit/push/deploy/restart，外部结果只读；无删除/强推/后台任务。内盘实测5.48GiB；未迁移/清理他人数据。下一阶段如扩更新须原授权内核数据owner与实际来源，不把旧快照当最新。
+
+---
+
 # 行业独立栏接入与焦点图可读性 — active 2026-11-03T10:25:08.674114+08:00
 
 - 原task/owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=false。checked_coordination_sha f5a081df031e6d959669b015516cd599bcd8f012；checked_at 2026-11-03T10:25:08.674114+08:00；已读COORDINATION/self/market-increment-map-20261102/focus-stock-universe-20261024/research-dispatch-controller；相关实现者均明确释放。本地基础 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，共享脏区保留，不源码提交/部署。
