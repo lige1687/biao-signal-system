@@ -1,3 +1,14 @@
+# 时段差值中性与正向读法 — completed local 2026-11-03T23:41:41.969040+08:00
+
+- 原task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=true；checked_coordination_sha dd24e9eb518af46ea292438c2908cc9f215eaaef；checked_at 2026-11-03T23:41:41.969040+08:00。已fetch/read COORDINATION1.1/self/market-increment-map/breadth-reading-aid/controller；仅自己三文件写权释放。
+- 当前两段均跌：隔夜−5.84、日内−1.77；差+4.07统一中性灰，小卡/详情读数rgb107,107,107及大图真实差曲线#6b6b6b实际核对。四种组合只描述涨跌，零和缺失分列；详情0线改基准线并就近说明两段正负看涨跌、差值正负看相对强弱。极小数格式保留正负号，原计算/资料/策略未改。
+- 三路径web/src/components/market-observation-alerts下incrementObservationData.ts/IncrementObservationCards.tsx/incrementObservationData.test.mjs。独立只读positive_copy_review沿原合同续接，提出两处边缘读图问题后root修复独验，无新helper/无代理写源码。原正向用途文案阶段复用，当前组合事实→联合含义→后续观察实页核明，根/web规范已存在；未冒称全站逐句验收。
+- 4定向检查/修复后最终TS通过；原hygiene检查复用。初期邻owner尚未写UsErpCard导致Vite遮罩失败图原样保留；其自行补齐后root重新实看最终card-final.png/detail-final.png均无遮罩，无溢出，Escape回焦点。原owner独立可见性核验回调亦通过；未改其任何文件。
+- 原public v2 SHA83d5c265edb04d6207abbcb17d591d842e3181d49ef5d0e775a98340527d48d4不变，外部v2 SHA d34dc0de460e2889fe80220048a6a3880279f13657e6a2f8b042adb4e880d830沿用；机构39股与原日期保持。证据raw/cross-market-risk-context-2026-11-02/session-neutral-20261103/acceptance.json SHA cf96eb3ca9a7ab83b558814f49e3b0866de6c90d0dd14c8f0da0c38e37f30cd1，失败图/pre-recovery证明及review同目录。
+- 共享codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9脏区保留，源代码与证据仅本地，远端不可复现。0新研究/数据抓取/交易/付费/部署/重启/删除/强推；仅此准确协调路径正常推送并读回。限定UI工作完成，无本方运行中后台工作。
+
+---
+
 # 时段差值中性呈现 — active 2026-11-03T23:33:13.554093+08:00
 
 - 原task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=false；checked_coordination_sha 5a4f14ec38767407c1f874b451d9e8f7743b75da；checked_at 2026-11-03T23:33:13.554093+08:00。已fetch并读COORDINATION1.1/self/market-increment-map-20261102/controller；原owner传达用户Gemini审查，资金/ETF来源另归其负责。root唯一前端写者。
