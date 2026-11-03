@@ -1,3 +1,12 @@
+# 收起候选区与组合解释 — active 2026-11-03T13:33:39.998647+08:00
+
+- task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root 不变，scope_released=false；checked_coordination_sha 0c5c687b210d41091dd96cef98bb959ae28cc1df；checked_at 2026-11-03T13:33:39.998647+08:00；已fetch并读COORDINATION/self/research-dispatch-controller，前阶段均释放。用户已授权候选缩放恢复及登录Gemini4咨询组合读法。
+- 基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；共享脏区保留。frontend唯一写：web/src/components/market-observation-alerts/index.tsx, web/src/components/market-observation-alerts/selection.ts, web/src/components/market-observation-alerts/useSelection.ts, web/src/components/market-observation-alerts/selection.test.mjs, web/src/components/market-observation-alerts/ExtraCandidateCard.tsx, web/src/components/market-observation-alerts/style.css, web/src/components/market-style/CrossMarketObservation.tsx, web/src/components/focus-momentum/overview.tsx, web/src/components/market-observation-alerts/CandidateShelf.tsx, web/src/components/market-observation-alerts/candidate-shelf.css；root唯一写：web/src/components/market-observation-alerts/conditionalReading.ts, web/src/components/market-observation-alerts/conditionalReading.test.mjs, web/src/components/market-observation-alerts/CombinationReading.tsx, web/src/components/market-observation-alerts/combination-reading.css及自身证据/进度。index和style先归frontend，释放后root仅接组合展示。单文件单写者；代理合同预检后恢复，未派发前不称运行。
+- Gemini通过已登录Chrome做一次有界解释复核，已核模型菜单4 Argon；仅公开市场案例/解释规则，不含账户数据。root审核其推断再实现，不新实验/数据抓取/自动仓位/交易。核心验收A/US卡收起为小候选、恢复和刷新保持；明确现象叠加、结论和下一确认，缺数不默认为正常、不同日期不冒称同步。桌面实测、相关测试和tsc。
+- 小证据预估<2MiB，复用既有索引，不生成大构建/金融数据；旧预算/失败/成果保留。源码仅本地，未提交/部署/重启；不删除。
+
+---
+
 # 市场速览小卡配色 — completed local 2026-11-03T13:00:32.477666+08:00
 
 - 原task/owner不变；scope_released=true；checked_coordination_sha 5b2fdaf9a8f8d79da51063949bc0ec7e204b516a，checked_at 2026-11-03T13:00:32.477666+08:00；交付前已fetch核自身，沿本轮COORDINATION/self/controller范围，root唯一写3文件完成，无代理或重叠写入。
