@@ -1,3 +1,9 @@
+# 正向用途文案范围补充 — active 2026-11-03T20:18:26.484611+08:00
+
+- 原task/owner不变；root唯一写；scope_released=false；checked_coordination_sha 85f21f1b72d725a2e01bdfb96b1e967699bc8025；已读取原相关宽度/观察负责人完成状态。浏览器核出宽度卡可见残留“高位不等于顶部”，故本轮增加精确路径 web/src/components/market-style/BreadthInstitutionalReference.tsx，仅改用途文案，固定参考数值、来源、负结果保持。其他范围沿下段，助手只读完成。无数据/策略/新研究。
+
+---
+
 # 正向用途文案 — active 2026-11-03T20:14:15.689627+08:00
 
 - task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=false；checked_coordination_sha fc237a40531bdeb9c34b6b4d33542b82439fcd7a；checked_at 2026-11-03T20:14:15.689627+08:00。已fetch并读COORDINATION/self/controller；当前相关完成范围已释放，其他含AGENTS引用任务仅规则引用/旧采用/存储，不重叠本次用途文案。root唯一写共享源码，Sol助手只读审查。
