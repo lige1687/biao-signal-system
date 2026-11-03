@@ -1,3 +1,12 @@
+# Gemini四项V2建议方法审查 — active 2026-11-04T00:13:54.252007+08:00
+
+- 原task/root；scope_released=false仅新增方法说明和本轮证据。用户问“这是Gemini给的建议，你看看呢”，mode report_only，核四项方案的定义、增量理由和未支持预期，不执行七档新回测或变更前向。旧1核心+3跟进及已看历史保持封存。
+- checked_coordination_sha 8fb98ecf70365f24c0851ceac44cb98234f8fe4a；已读COORDINATION/self/中控及factor-method-standards-increment的新缓冲标准，沿已有方法不重复建设。root唯一写当前cn-profitability-risk-critique-review-2026-11-03.md追加有日期方法审阅、registry仅本键、progress；新证据仅原raw/gemini-v2-method-review-20261104/。旧实验代码/结果只读。
+- 一位原Sol单次只读核现有选股/费用语义和四建议歧义，无网/计算新收益/写源。root查原始机构方法和过拟合研究，限4次新来源调用，0金融效果试验/取行情/付费。新增本机小记录<256KiB，不写大结果或外盘。
+- 验收区分31.32%未筛选权重与损害归因、70/85缓冲完整状态、行业筛选/基准权重/TE关系、七档敏感性与不确定性。不得承诺保住Alpha或TE<4%。只审查和归档，无自动策略修改/源码推送。
+
+---
+
 # A股组合批评复核 — completed 2026-11-04T00:06:02.442551+08:00
 
 - 原task strategy-account-bridge-20261020 / owner 01a1585f-53de-7883-a5cb-d9c5be52902c/root；status completed_bounded_critique_review，evidence inconclusive；scope_released=true仅本轮非冻结报告与研究代码，旧源/冻结输出保护保持。checked_coordination_sha db834a02960e97ade957771ac4cd711ed8e81cce；交付已读COORDINATION/self/中控与前列相关owner，增量核factor-method-standards-increment、market-increment-map、breadth-reading-aid，未重复其标准或ETF研究。
