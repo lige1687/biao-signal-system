@@ -1,3 +1,9 @@
+# 行业联动图文件名调整 — active
+
+原root独占纯配置文件industryTimeline.ts改为industryTimelineOptions.ts，避免mac大小写不敏感使同basename组件IndustryTimeline.tsx导入到错误文件；仍为原五文件范围，仅新helper改名。Sol两文件范围与不改数据边界不变。checked_coordination_sha 05682c38b0922e1f4b244a42fd9a4170df9d8dc7；本轮首次tsc命中大小写导入错误，保留回执后修复。
+
+---
+
 # 行业栏四项可读性修复 — active 2026-11-03T20:25:37.119859+08:00
 
 - 原task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=false；checked_coordination_sha 4fd3083504db1917ab3f13b01560216b0f1d1c57；checked_at 2026-11-03T20:25:37.119859+08:00。fetch并读self/controller/market-increment-map-20261102及本轮已读COORDINATION1.1。原owner真实消息传达用户已确认四项修改，根仍唯一UI整合者；买方数据归原owner，禁止重复获取。
