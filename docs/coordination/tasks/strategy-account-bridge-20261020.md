@@ -1,3 +1,15 @@
+# 经营盈利与低波风险组合有界检验完成 2026-11-03T20:58:34.886183+08:00
+
+- 原task strategy-account-bridge-20261020/root；status completed_bounded_opportunity_question，evidence inconclusive；完整策略/母指数净收益blocked，EP与条件反转效果not_evaluated。scope_released=true仅新增非冻结报告/代码，冻结设计与原件保持。checked_coordination_sha f3aa7cb9bcdc9f5e8e073b3385b20fe6af54ebbf；沿self/dispatch/personal-lowfreq/utility/downside，交付再核远端变化，无同题/同写。
+- 真正执行7固定方法，旧GP池2015—2025共132月/127完整月，累计563股/31872股月；G收益月均1.253%、GR1.199%、同股票仓位GC1.189%、GV1.203%。GR−GC仅+0.0100503pp/月CI[-0.0230963,+0.0584750]；自身最差10%月份均值差+0.078798pp亦跨零。平均7.166%现金解释大部分防守；最大上涨13月GR比G少赚1.115pp/月。
+- 因子行业排名相关0.165799，但G/V收益0.983335、共同下跌期0.960503；两阶段强者互换，未证普遍分散。25/50bp目标变动费用代理差只+0.0055/+0.0009pp/月，不冒充真实净费；5缺月保留空缺及132月0/-100情景，不拼年化。原资格含15789非正动量股月，无正动量过滤。
+- 新报告docs/experiments/cn-profitability-risk-combination-2026-11-03.md SHA 538f056e97aa57e3ad5531f5f1b7b7eb1db6b9247d0a25c8cdacc872e31df610；同名raw存设计/输入/代码/七组权重定位/独核/原始失败/完成；外盘cn-profitability-risk-combination-20261103/20261103T204747共6651712B<16MiB，原UUID核实；本机raw约0.65MiB且留5GiB。8000/5173逐字正文、实际浏览器标题和曲线均核实，824旧登记保留，hygiene/窄diff通过。
+- 1核心批，0追加效应批/新行情/调参；来源3含2全文403，主文只引用索引摘要；旧实验预算不重置。一位GPT-6.1 Sol medium先输入缺件后另冻合同独核全部132权重/收益/区间；root独算headline与机会归因接受，原来源/生产/前向不写。一个预检把禁止network字样误判，保留v1后将同禁令移至stop条件，v2通过；UI两次绑定失败后修复并实际验证。
+- EP还需准确盈利归属/披露版本及名义市值股份链；条件反转还需真实压力/换手和坏消息标记，不用金额冒充，不重复原小盘反转与资料owner。当前可答范围完成，新增全账户仍受成交/退出/公司行动/基准链限制；无新增前向、部署或后台承诺。
+- 源码研究仅本机共享dirty base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，未源码提交推送；仅本人协调元数据正常推送。恢复先读completion和result-locator，新的信息才重开，不重跑已完成批或改比例追正结果。
+
+---
+
 # A股经营选股与风险控制有界检验开始 2026-11-03T20:45:36.048972+08:00
 
 - 原task/owner；status active；用户明确继续上一轮三个机制方向。checked_coordination_sha 6fde7193c993c6188752d64207aa5b9360c1cc90；已读COORDINATION/self/dispatch/personal-lowfreq/utility/downside。残差动量/小盘反转/资料补件仍属原owner，不接管或重跑。
