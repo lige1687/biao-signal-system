@@ -1,3 +1,15 @@
+# ETF价格与情绪联动图 — completed local 2026-11-03T20:35:46.644014+08:00
+
+- 原task sector-crowding-advice-review-20261102 / owner 01a19cde-a99b-7ad0-adbc-99471b24208d/root；status completed_local_fixed_snapshot_visualization；scope_released=true。checked_coordination_sha 32373a3ab3b5e3f31c9c8e6ec34a5eb226f4c66f；checked_at 2026-11-03T20:35:46.644014+08:00；交付前fetch/read self、cross-market-risk-context、market-increment-map、sentiment-factor-research、research-dispatch-controller，沿已读COORDINATION。其他owner目前改首页industry-structure/IndustryTimeline与自有研究，本方仅情绪页新组件/自身数据与报告，无同写。
+- 用户请求真实ETF价格在上、行业情绪在下同图观察。已在 /sentiment#etf-price-sentiment 接入10只ETF、分项选择、1年/3年/全部、同日指针及共同缩放。红利低波只用ETF自身两项；半导体旧流量无同日资料显式不可用；缺口不补值。未增加仓位/交易/效力模型。
+- 固定展示快照：ETF价格11/3、指数指标11/2、一级/旧流量9/4；前复权与未复权分别标记，历史有限及当前成员代理/主题映射可见。刷新页面不会自动补新日。原源/旧报告及共享行情缓存保持，未拼接不同复权版本。
+- 报告 docs/experiments/sector-etf-sentiment-chart-2026-11-03.md SHA 2c244f03b6f21308cdb04a820e8ac37a0b692713ee21ef90358d9e0f1750836a；同名raw含报价账、构建/独验、真实浏览器截图和最终验收。89,569格核对、42,344缺失保留、18,574自身指标独算一致；tsc/归置/scoped diff通过，浏览器切换/红利特例/电力缺口/滑条/同日缺失读数通过、console无warn/error。主页面仅导入+插入组件，原版本对照无其它变化。
+- registry仅本键822→823，旧822完整保留；原progress追加本阶段，未改系统目标/别的研究。外盘原响应和chart约1.79MB，运行JSON约847KB，raw完成前约5.47MB，内盘剩余8.15GB。当前问题完成，无研究进程或后台刷新。
+- 新1展示派生批、0效力拟合/政策模拟/付费；6官方查询（上限6），10报价请求全成功（上限12），失败操作/原合同预检回执保留。原6研究批/321拟合/家族至少1028拟合/10来源不重置。图形不是新增效力证据。
+- 工作分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享dirty保持；源码/快照/报告仅本地与固定外盘，未推源码/部署。此独立index提交仅自身协调状态。
+
+---
+
 # ETF价格与行业情绪上下对照图 — active 2026-11-03T20:13:41.843156+08:00
 
 - 原task/owner延续，scope_released=false；checked_coordination_sha 605fadec536d611e7938295691689065cbfe0b1c，已读COORDINATION/self/cross-market-risk-context/market-increment-map/sentiment-factor-research/research-dispatch-controller最新范围。其他前端owner已释放，本次不接管首页；在情绪页新增独立ETF观测组件。
