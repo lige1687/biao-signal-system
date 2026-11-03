@@ -1,3 +1,16 @@
+# A股组合选题纠偏完成 2026-11-03T10:28:27.538312+08:00
+
+- 原task strategy-account-bridge-20261020 / root；status completed_bounded_priority_review，scope_released=true仅本轮非冻结报告与审查产物；新候选效果not_evaluated。用户要求从现有因子的金融含义选组合，本轮没有新增收益试验，不冒称发现有效策略。
+- checked_coordination_sha 79645a94b8d5692c7c022270ff82f769cfbe230c；已读COORDINATION/self/dispatch/utility/personal-lowfreq/market-style，后补cross-market-risk-context 10:25与market-increment-map 10:19。其首页行业/焦点UI范围无冲突；原残差动量、小盘反转及数据资格不接管、不重跑。
+- 研究取舍纠正：普通中期动量不再作为本任务A股默认底座，原动量现金流优先级下调；不否定残差动量等不同对象。优先E/P与经营盈利；现有字段可准备经营选股与低波风险作用，必须面对单项和固定少投入；反转只保留真正新增卖压/坏消息信息，成交金额不能替代换手。
+- 实际核中央EP/BP/ROE仍未实现合格逐股；原GP/CFO准确设计、财务权重、价格月表和源manifest四项与旧SHA一致。公开/本地定义不自动等于完整账户资格。原三项组合只比简单各半多0.049pp/月、区间[-0.035,+0.181]；三档反转成本后仍落后低波，负结果保留。
+- 新报告docs/experiments/cn-mechanism-combination-priorities-2026-11-03.md SHA4ee2129a0356bcd653266c8d702b2b51d53e966e52cb8dc90e338053a64c3232；同raw保存来源、准确输入读回、catalog-audit、独立验收和delivery。8000/5173正文逐字一致、旧819登记项及INDEX旧字节保留，归置通过。
+- 来源5/6含全文403一次；一次搜索未命中目标如实记录。0新市场回测/行情下载/安装/前向/交易；两次委派预检绝对路径失败后读校验器改相对边界，成功派GPT-6.1 Sol medium一次目录核对，root独立验收。原模型任务不替换；旧来源/冻结/预算不重置。
+- 新报告/raw约0.7MiB，内盘>5GiB，外盘只读无新增；原engine/config/paper_live与旧报告绑定不变。源码及研究仅本地共享dirty base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，不自动源码提交部署；仅本协调元数据正常推送。
+- 完成边界为金融机制与现有证据优先级，不是新候选收益。E/P历史股份/披露版本、压力识别资料仍缺；经营×风险可另冻一个准确风险用途比较，当前还没有共同资格/完整账户证据。本轮无后台研究或自动派发其他聊天。
+
+---
+
 # A股金融机制与现有因子组合优先级纠偏 active 2026-11-03T10:15:10.301489+08:00
 
 - 原task strategy-account-bridge-20261020 / root；用户指出A股普通动量默认选题不当，要求从现有因子的金融含义挑组合。本轮问题是校正动量/反转边界，核现有因子、旧负结果及可用资料，选少量有互补理由且未重复的候选；不是继续MR寻优。
