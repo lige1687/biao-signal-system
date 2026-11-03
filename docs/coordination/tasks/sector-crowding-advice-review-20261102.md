@@ -1,3 +1,15 @@
+# 情绪指标读法与旧行业入口取舍 — completed local 2026-11-03T20:51:49.163466+08:00
+
+- 原task/owner延续，scope_released=true；checked_coordination_sha b4c9036fa7e02bddf8cccc0ec608296f60169efc；交付前已fetch/read self/cross-market-risk-context/market-increment-map，沿本轮已读四相关历史owner及COORDINATION。当前另一前端写IncrementObservationCards等自身目录，无同写。
+- 用户两张截图问题已完成：原ETF图旁增加10项分项读法、当前/光标值解释、P88/P90高低比较对象及全部指标说明表；保留价格偏离正负/滞涨组合分/旧热横截面/z/0或1区别。虚线改成交易偏热/偏离偏高/高同步等直白标签；数据和阈值原值不变。
+- /sectors旧页来源本地git首增2200eaa6，2026-08-16，作者身份不冒充具体AI。旧资料10/15且刷新只重读，已按用户意图撤出主导航与情绪页当前引导；路由默认历史入口，旧表按需展开，按钮改重读历史快照。数据/后端/收藏/原报告全部保留，未删除。
+- root精确6文件：etf-sentiment三文件、TopNav.tsx仅一入口、SentimentPage.tsx两处引导、SectorsPage.tsx历史门页和刷新文案。原dirty逐一备份，未覆盖别的改动。两原Sol只读审核已完成，root真实浏览器及源公式复核验收。指标切换/读法表/高低/缺失与历史展开收起/导航通过；tsc最终exit0、归置/scoped diff和8刻度边界通过。
+- 本轮raw为原图表raw/reading-guide，acceptance SHA 73b50d3765c92c3132addf060bf44bfa0cc53742fda119c977174b19a3492ee9；2实际截图、精确patch/备份、独审结论及来源读回保存。中途他人增量卡HMR与缺模块报错保留，原owner修好后重载通过，本方未改其文件；React Router未来选项警告仍在。
+- 协调首次普通推送因他人登记续篇先行推进而拒绝；已fetch并读原market-increment范围补充，无同写变化，保留其条目后基于最新提交重试。
+- 0新金融实验/行情下载/来源/付费，原预算全保留；源码/页面仅本地，无部署或源码推送。原冻结报告与23项展示/报告指纹未变，不新增因子有效性结论。当前两项有界UI需求完成，无后台工作。
+
+---
+
 # 范围追加：行业旧页撤出当前看盘 — active 2026-11-03T20:45:02.116582+08:00
 
 - 用户新增截图明确“没有帮助可以删”；只读审计已完成，2026-08-16提交2200eaa6首次加入SectorsPage，git身份不能证明具体AI。原价格快照10/15、生成11/2，刷新仅重读文件，当前看盘用途不足；旧阶段/成分映射仍可保留历史查询。
