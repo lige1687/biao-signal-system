@@ -1,3 +1,14 @@
+# 三模块增量检验与买方含义核验 — active
+
+- 原task/owner不变；status active；scope_released=false；checked_coordination_sha fda3de49c879d5ffaa0e5f171450e678b0509c07；checked_at 2026-11-03T20:27:11.545799+08:00。本轮fetch并读COORDINATION沿上轮版本、self/cross-market-risk-context/research-dispatch-controller；前三者最新相关状态已核，保留共享脏区。
+- 用户明确续授权：同步四个可读性问题，获取买方数据，随后指定隔夜/日内、截面相关性/离散度、三层连续仓位引擎三块做出来并验证帮助。原前端chat唯一整合首页；本方发送四项反馈并负责有界数据/效力研究，不写其源码。
+- 本方唯一写：docs/experiments/raw/market-increment-map-2026-11-02/three-modules-20261103/、原report追加、原registry自身项（如需先再核写者），外盘唯一run market-increment-map-20261102-20261103T202711-28845531da9e。旧raw/数据/冻结不覆盖；acquired目录暂不写。
+- 先查旧隔夜负结果、vol-target/defense既有研究及合格OHLC/总收益，能复用不重跑。新比较仅研究观察/模拟账户，不改原LEI定义/生产/仓位/交易。个人宽基ETF为主，行业只辅助。原三层乘数并非明确可执行规格，必要默认要先冻结标研究版，不能伪装原文。
+- 新源操作初始上限18（每题6；包含失败），固定核心批最多3/目的明确跟进最多3；0付费/参数搜索。原6网页+2描述、续篇4搜索2open31HTTP+1描述累计保留；本阶段尚0新源和运行。外盘估80MiB、本机3MiB，storage固定UUID与余量通过。
+- 验收：真实同口径资料、公式/时点、主基准/简单对手/费用/少亏少赚/分期反例、独核、用户可读结论及准确接入状态；买方身份不可由价格/订单大小冒充。不另建网页、后台任务、删除或强推。
+
+---
+
 # 首页接入按用户指定交原前端会话实施
 
 - 原task/owner不变；status completed_data_handoff_ui_owned_by_other_task；scope_released=true；updated_at 2026-11-03T10:19:07.564950+08:00；checked_coordination_sha 70a4b384b65634043405268d1ff28a5f5c772ea8；checked_at 2026-11-03T10:19:07.564950+08:00。本轮已读self/cross-market-risk-context/sector-crowding最新状态。
