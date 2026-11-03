@@ -1,3 +1,12 @@
+# 正向用途文案 — active 2026-11-03T20:14:15.689627+08:00
+
+- task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=false；checked_coordination_sha fc237a40531bdeb9c34b6b4d33542b82439fcd7a；checked_at 2026-11-03T20:14:15.689627+08:00。已fetch并读COORDINATION/self/controller；当前相关完成范围已释放，其他含AGENTS引用任务仅规则引用/旧采用/存储，不重叠本次用途文案。root唯一写共享源码，Sol助手只读审查。
+- 用户要求直接说明可以看作什么、有何信息用途；将市场速览与组合解释改为事实→金融含义→后续观察，保留真实缺数、日期及历史负结果。此前候选收起恢复/配色不变。不更改计算、阈值或交易规则，不新研究/数据获取/付费/后台。
+- 精确写入：AGENTS.md, web/AGENTS.md, web/src/components/market-observation-alerts/conditionalReading.ts, web/src/components/market-observation-alerts/conditionalReading.test.mjs, web/src/components/market-observation-alerts/CombinationReading.tsx, web/src/components/market-observation-alerts/index.tsx, web/src/components/market-style/CrossMarketObservation.tsx, web/src/components/focus-momentum/overview.tsx；仅root自有raw/positive-reading-20261103和work-progress追加。基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，脏区保留，源码仅本地未推。
+- 验收：检查正向用途措辞与证据含义一致；原组合分支测试、tsc、桌面真实呈现。小证据预算<2MiB。无阻塞；无删除/部署/重启/手机适配。
+
+---
+
 # 收起候选区与组合解释 — completed local 2026-11-03T13:49:09.769500+08:00
 
 - 原task cross-market-risk-context-20261102/owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=true；checked_coordination_sha 5a5c518da5eddcea2c7592e1be9177fa8629daac；checked_at 2026-11-03T13:49:09.769500+08:00；交付前fetch并核自身/controller，COORDINATION沿本轮已读。frontend释放后root独验并修，全部路径释放，无他人文件或任务覆盖。
