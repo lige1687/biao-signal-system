@@ -1,3 +1,14 @@
+# 行业栏四项可读性修复 — completed local 2026-11-03T20:41:10.986832+08:00
+
+- task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=true；checked_coordination_sha a99516070ac76800c01be995c14aaa9e2db2a60b；checked_at 2026-11-03T20:41:10.986832+08:00。收尾fetch并读self/research-dispatch-controller/market-increment-map-20261102最新记录，沿本轮COORDINATION1.1；原owner已传达用户四项确认并独占新数据/研究，本方只UI整合。
+- 已落实默认120交易日、60日/全部选择；上下两曲线共享时间轴/缩放/滑块，任一曲线拖动均联动；关键文字>=13px；首页曲线与完整十行业排行并列，高约653px，大图约637px且1280×720首屏全部可见。行业名称无截断，日期/单位/5日比较直接可读。
+- 本阶段5精确源码文件见scope/acceptance；新增联动组件IndustryTimeline.tsx及industryTimelineOptions.ts、测试，其余IndustryStructure.tsx/industry-structure.css。源数据SHA不变；无买方资料重复获取/金融效力实验/策略改动。静态资料截止日及更新状态保留。
+- Root独立验收：6定向测试、tsc、归置全部通过；实际60/120/全部、上图/下图/滑块各自拖动双图联动、Escape回焦点、名称/字体/无溢出、全部曲线排行可见；浏览器最终无新警告错误，视口恢复1215×917。首次大小写文件导入/Vite缓存故障和修复保留review。
+- 证据docs/experiments/raw/cross-market-risk-context-2026-11-02/industry-layout-20261103/；acceptance SHA256 749d3674d1ab927434fc9e5307a7a639c9510bca1421e016973ff4e896e598b5；实际homepage-final.png/dialog-final.png及browser-proof.json、窄patch已读回。原work-progress已追加。
+- Root与Sol已完成，本阶段全部写范围释放；共享脏区保留，源码仅本地；未提交/推送源码、部署、重启、删除数据或强推。仅本条协调元数据正常推送。
+
+---
+
 # 行业联动图文件名调整 — active
 
 原root独占纯配置文件industryTimeline.ts改为industryTimelineOptions.ts，避免mac大小写不敏感使同basename组件IndustryTimeline.tsx导入到错误文件；仍为原五文件范围，仅新helper改名。Sol两文件范围与不改数据边界不变。checked_coordination_sha 05682c38b0922e1f4b244a42fd9a4170df9d8dc7；本轮首次tsc命中大小写导入错误，保留回执后修复。
