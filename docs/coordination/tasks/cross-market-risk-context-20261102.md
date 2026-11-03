@@ -1,3 +1,15 @@
+# 隔夜日内与机构披露两卡接入 — completed local 2026-11-03T20:59:38.188970+08:00
+
+- task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=true；checked_coordination_sha 09213de663ac7742d763b370cef26ebfc4a9d961；checked_at 2026-11-03T20:59:38.188970+08:00。完成前fetch并读self/market-increment-map-20261102/controller，沿本轮COORDINATION1.1；原数据/研究owner边界不变。
+- A股市场速览已原生增加两卡/详情及候选收起恢复、刷新保存。旧用户选择保留，本用户实际通过候选加入；新用户默认两卡。隔夜/日内620历史逐点同源，11/2两段−5.84/−1.77，差+4.07百分点，近20日差变化+7.29；先读两段都跌再看相对强弱。小图两线/零线匹配，大图120/252/全部及滑块缩放实测。
+- 最终采用原owner v2源SHA d34dc0de460e2889fe80220048a6a3880279f13657e6a2f8b042adb4e880d830；机构11/3本快照覆盖39只上榜股票，买25.64亿/卖45.16亿/净卖19.52亿。57−1可转债−15多日−2重复=39，原38股金额逐条未变。v1包/验收/截图保留，最终页面无旧38表述。机构来源Choice、逐席位待核、全A和散户未知保留；上交所链接明确仅沪市。原数据未改，0重复取数。
+- root精确文件index.tsx/selection.ts/selection.test.mjs/incrementObservationData.ts/incrementObservationData.test.mjs；Sol两文件IncrementObservationCards.tsx/increment-observation.css释放后由root修字体/零线/措辞；静态包web/public/research/market-increment-observations/cn.v1.json。源码8路径见scope，报告/行业原区/策略不改。仓位和指标研究链接原owner新报告market-increment-three-modules-2026-11-03，实际资料库正文已开。
+- 验收：v2全部620点/39股/金额/源SHA及HTTP字节一致；7定向测试、tsc、归置通过；1215×917两卡完整可见/无溢出、13px关键字/22px数值/30px净额；收起恢复刷新/来源排行/大图缩放/关闭回焦点实测。仅已有Router未来提示，无新页面错误。原绝对路径预检与初稿语法失败、一次DOM未匹配已保留review。
+- 证据docs/experiments/raw/cross-market-risk-context-2026-11-02/increment-cards-20261103/{acceptance.json,source-verification.json,browser-proof.json,cards-closeup.png,session-detail.png,institution-detail.png,review.md,scoped-changes.patch}；验收SHA 5e09decab0f0fb570d786b04ae6148c1026c1139da295c4183fad4776f176164；work-progress追加v2纠正。源数据和全部研究继续由原owner维护。
+- 本阶段root/Sol全部路径释放；源码仅本地，未源码提交/推送、部署、服务重启、删除或强推；仅协调元数据正常推送。无金融实验、付费、新自动更新或后台任务。
+
+---
+
 # 隔夜日内与机构披露两卡接入 — active 2026-11-03T20:45:27.025996+08:00
 
 - task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=false；checked_coordination_sha 91c6ebaa8fa62092816e1f9c31e2c6e13f5790bd；checked_at 2026-11-03T20:45:27.025996+08:00。已fetch并读COORDINATION1.1/self/controller/market-increment-map-20261102。原数据owner明确传达用户续授权并请求现有首页原生接入；前端唯一root，原数据/研究归原owner。
