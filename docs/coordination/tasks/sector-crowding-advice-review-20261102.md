@@ -1,3 +1,14 @@
+# 用途纠偏：行业情绪观测增量 — active 2026-11-03T15:07:27.793927+08:00
+
+- 原task/owner延续。用户明确只要观测效果，未要求自动仓位；原政策比较保留为辅助证据，不能用其负结果否定观察用途。本轮无交易/生产/前端改动，不接管首页。
+- checked_coordination_sha e0711558295fda9c4709afd78c81c25ed8edfe92；已读self/dispatch/sentiment/market-increment/cross-market最新范围，无同写。写范围只新 docs/experiments/sector-sentiment-observation-value-2026-11-03.md、同名raw、registry自身键、原progress；root主报告/登记，Sol唯一新observation_checks.py，另Sol只读清单审计。
+- 复用全部5/10/20/60/120/252日风险/机会与条件增量。唯一新描述批补60日首次跨入状态的下跌/上涨双侧结果、命中/未发生预设风险比例、首次触及时间，及提案五档分数的观测校准。固定原指标阈值，不调参；热度分位不是下跌概率，原始相关不是买家身份。
+- 沿预算：此前3批321拟合+2政策批、旧至少1028拟合、10来源继续；本轮用剩余1个必要补批（合计6历史研究批），0新拟合/联网来源/下载/付费。代理只合成自测，root执行与独验；已有成果不重算。
+- 源为固定外盘旧快照；输出新固定UUID外盘计划50MB，本机元数据估20MB。旧完整SCI所需PIT成分/流通市值不足单列，不能以“尚不能自动化”判断观测价值。
+- 工作分支共享dirty18e64fa6保持；源码/报告仅本地与外盘，协调仅元数据普通推送读回。验收：每指标金融含义、实际观测增量、跨期/行业反例、样本与不可解释项，最后一次性交付。
+
+---
+
 # EMA20硬底线+条件EMA10补检 completed — 2026-11-03T10:49:51.476195+08:00
 
 - 原task-id/owner延续；status completed_bounded_overlay_comparison，scope_released=true仅可追加进度/登记，原新报告/输入/代码/结果冻结不覆写。checked_coordination_sha fb85ecf72ad3f52c7c887230abb6835ea61579f3；交付前读self/dispatch/market-increment/cross-market/strategy-account最新范围，前端与其他机制研究保持原owner，无同写。
