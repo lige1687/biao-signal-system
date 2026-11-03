@@ -1,3 +1,15 @@
+# 美股价格主图与穿轨降密度 — completed local 2026-11-04T00:28:18.499203+08:00
+
+- task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true；checked_coordination_sha b1ba8413140fa461efa355aed344513709a1ebd1；checked_at 2026-11-04T00:28:18.499203+08:00。交付前fetch/read COORDINATION1.1/self/cross-market-risk-context-20261102/focus-stock-universe-20261024/research-dispatch-controller；相关邻范围均明确释放。释放本阶段四个源码及自己报告/registry键/QA写权，无接管其他会话。
+- US价格上方主图、利差与1.5σ/2σ下方辅图，默认3年；1280×900桌面价格绘图区约108→236px。近三年11次穿轨合并为4处，标“估值偏贵/偏便宜×次数”；代表最早日期，同日双档取较高σ，所有原成员保留。点图中组或日期选项展开穿轨前三个月至组尾后六个月的原点与价格；返回先前期间，可显示每次穿轨。不得把组数用于统计胜率，未按未来价格筛选，更未确认价格顶底。
+- 只改observation-library的ErpCrossChart.tsx、erpCrossChart.css，新增usErpMarkerGroups.ts及test；原轨道/数据算法和CN原布局保持。独立助手按合同实现纯分组后只读集成审查，唯一ARIA开关文案问题已由root修复并桌面读回；root独立读完整函数与窄差异。
+- 27项针对性测试、TS和Vite内存构建、归置通过。桌面首页打开/合并与原点/1.5与2开关/最后一档保护/直接价格点点击/日期选择/返回3年/CN6.12和原边界实验收。两张截图、browser-proof、root-review、4源SHA与窄patch见docs/ops/breadth-reading-aid-20261101/us-chart-readability-v14；临时viewport已恢复，无手机。QA约0.49MB。
+- 原报告追加v14，report SHA d7d37335518f120221b0113c81464ae29fabef30a313e565f6d5447370ddfe63；registry只自身键、其他826条保持；原progress追加。0新金融实验/研究来源/搜参，累计来源34不变，旧他owner6另列；本阶段仅显示修正，旧负结果和sigma效力未评价边界保留。
+- 首次旧协调base断言安全停止、dry-run负向词network误判后缩窄措辞、AX/DOM定位差异均留root-review。开工5.15GiB，末段系统余量观察4.1GiB低于5GiB预留，停止新增生成/下载/构建，仅写小结案记录；未删除清理，不为磁盘下降推断来源。
+- 共享codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9脏区完整保留；成果仅本地远端不可复现，未源码提交/部署/重启/交易/缓存定义写/删除/强推。普通UI可使用现有API TTL，不声称整个系统无请求。限定修复已完成，无运行中助手或后台续接；仅当前协调文件元数据普通推送读回。
+
+---
+
 # 美股价格图去密与放大 — active 2026-11-04T00:15:20.959435+08:00
 
 - task/owner沿原breadth-reading-aid-20261101 / 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false；checked_coordination_sha ebb010e924d2f8309453e2bc66318ce5b954dcf5，已fetch/read self/cross-market/focus/controller，沿COORDINATION1.1，相关范围明确释放。用户反馈上一截图点过密、价格太扁，无法观察转折。本阶段仅显示修复，不新增金融研究或顶底规则。首次旧base断言安全停止、无源写入，重新读取后继续。
