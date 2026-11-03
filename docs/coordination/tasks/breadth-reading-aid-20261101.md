@@ -1,3 +1,13 @@
+# 美股股债收益差依据复核 — completed report-only 2026-11-03T23:27:17.730426+08:00
+
+- 同task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true；checked_coordination_sha 0bb79ab70ddbbce3c8308f89338aaf959f939fb1；checked_at 2026-11-03T23:27:17.730426+08:00。交付前已fetch并读self/cross-market/focus/controller最新段，沿COORDINATION1.1。释放仅本轮报告/registry自身键/progress/QA，不涉及UI或数据范围。
+- 已核当前TTM盈利收益率月表减名义10Y（日频沿用月值），小图此前756有效日P15/P85，美股资料库原值。State Street确用同类差值看相对估值，AQR反证其长期实际回报预测，Damodaran区分简单差值与增长/现金流隐含ERP；未核得同口径1.5/2σ机会风险规则。本轮不移植CN效果或新增模型。
+- 旧US研究是月频扩张30/70，非当前P15/P85或sigma。原便宜/昂贵机械标签反转，报告追加按经济义高ERP相对低ERP60日−0.92pp、90%区间−2.65至+0.80、p=.355，未确认加仓增量；冻结原件不改。旧用例未确认不等于所有轨道无效。
+- 原综合报告增加v12、registry只自身键且其他824条保持、hash读回一致；work-progress更新。QA docs/ops/breadth-reading-aid-20261101/us-erp-v12含contract/review-receipt。只读Sol助手完成，root独验公式/算法/旧符号及一手原文；无需工程tests/UI验收，因为源码未变。来源6次含失败，累计28，旧他owner6次另列；0新金融实验/参数搜索/行情/缓存/策略/手机/部署/删除/强推。
+- 当前源/报告仅共享dirty18e64fa本地，未提交成果代码或发布；协调仅本task精确元数据正常推送读回。已完成这次限定来源与既有证据问题，无未结束后台工作；不是完整美股sigmarail效力验证。
+
+---
+
 # 美股股债收益差依据复核 — active 2026-11-03T23:24:29.799675+08:00
 
 - 同task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false；checked_coordination_sha 023cd20af9a7b516bf7cf31ca92734461cd9fd60；已读COORDINATION1.1/self/cross-market-risk-context-20261102/focus-stock-universe-20261024/research-dispatch-controller，邻任务相关范围已明确释放。本轮report_only，未改源码或页面。
