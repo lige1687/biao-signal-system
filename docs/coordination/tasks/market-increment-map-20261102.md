@@ -1,3 +1,13 @@
+# 首页接入按用户指定交原前端会话实施
+
+- 原task/owner不变；status completed_data_handoff_ui_owned_by_other_task；scope_released=true；updated_at 2026-11-03T10:19:07.564950+08:00；checked_coordination_sha 70a4b384b65634043405268d1ff28a5f5c772ea8；checked_at 2026-11-03T10:19:07.564950+08:00。本轮已读self/cross-market-risk-context/sector-crowding最新状态。
+- 用户明确指定《梳理雷系统风险与机会指标+前端整理》（01a19c57-958b-7f80-b71c-7932e5dcbe4f）来接系统，并逐句指定：A股下看行业分类、单独一栏、首页市场速览。本方于此前仅检查结构/缓存，未修改首页/情绪页/板块/API，没有并行实现。
+- send_message_to_thread已成功返回目标ID，wait_threads核目标新turn 01a19f33-3f70-7fa0-8604-ea67f4ddbc21 为inProgress。交给其唯一负责原生组件接入及版面；当前只是移交成功，不能声称首页已加好。
+- 完整原始用户要求、已验数据路径/哈希、A股十行业范围、日期/缺失/更新状态、原生单栏与图表验收在 docs/experiments/raw/market-increment-map-2026-11-02/homepage-integration-handoff-20261103.md。原源报告/数据/图不重复计算，0新增研究/取数。
+- 当前结果JSON刚核SHA e0a49136d598349a6a5ab1a1ff9cff45d266ca20cb285c1e999104f7cb665814；A股640完整日/620观察窗仍截至11/2。首页实际接入进展以对方自己的协调与用户可见交付为准。交接小记录仅本地，本协调元数据可远端读回；无后台监控或新建聊天。
+
+---
+
 # 横截面观察已补近期完整收盘资料并更新单图 — completed selected scope
 
 - 原task-id market-increment-map-20261102 / owner 01a19ce6-5541-7071-9f17-f78b42235a0c/root；status completed_selected_panel_observation；scope_released=true；updated_at 2026-11-03T00:37:29.445672+08:00。
