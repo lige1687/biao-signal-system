@@ -1,3 +1,13 @@
+# ETF冷热总览与来源核验 — active 2026-11-03T23:23:33.783536+08:00
+
+- 原 task/owner 延续；scope_released=false；checked_coordination_sha 1a72663424349ac110e3b2e19a78438f7a0d3ad4；已读 COORDINATION/self/cross-market-risk-context/market-increment-map/research-dispatch-controller/sentiment-factor，其他当前前端均释放或独立目录，无同写。
+- 用户明确先全体ETF冷热总览，再单只上下图；去掉计算/读法教程；数据权威。仅观测展示及来源资格，不新增SCI/收益实验/自动仓位。
+- 唯一写者原Sol UI仅 etf-sentiment/EtfSentimentComparison.tsx 与 etf-sentiment.css；root仅该public目录新增 overview.json、本raw/overview-authority、原progress与本协调条目。现有10快照和catalog冻结保留，必要官方合格新快照另外命名并记录来源后再扩范围。另一原Sol来源只读至多4请求，root2查询已用；本新阶段6来源预算，0付费/市场拟合，原所有预算不重置。
+- 冻结观察档位采用ETF自身活跃高88/低15，仅便于总览；没有当期合格来源或完整窗口的ETF列待核验，不冒充常态。公式和开发记录留raw，不进产品。验收全10不漏不重、来源及日期门槛、点击同ETF同指标、旧图和缺口保持、桌面浏览器/tsc/归置。
+- 共享dirty分支 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 保留，逐文件备份；源代码仅本地，普通协调push不部署。新小型元数据及UI预计<3MiB，未删除任何数据或启动后台。
+
+---
+
 # 情绪指标读法与旧行业入口取舍 — completed local 2026-11-03T20:51:49.163466+08:00
 
 - 原task/owner延续，scope_released=true；checked_coordination_sha b4c9036fa7e02bddf8cccc0ec608296f60169efc；交付前已fetch/read self/cross-market-risk-context/market-increment-map，沿本轮已读四相关历史owner及COORDINATION。当前另一前端写IncrementObservationCards等自身目录，无同写。
