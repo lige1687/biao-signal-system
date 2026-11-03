@@ -1,3 +1,12 @@
+# 行业栏四项可读性修复 — active 2026-11-03T20:25:37.119859+08:00
+
+- 原task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=false；checked_coordination_sha 4fd3083504db1917ab3f13b01560216b0f1d1c57；checked_at 2026-11-03T20:25:37.119859+08:00。fetch并读self/controller/market-increment-map-20261102及本轮已读COORDINATION1.1。原owner真实消息传达用户已确认四项修改，根仍唯一UI整合者；买方数据归原owner，禁止重复获取。
+- 原问题已在真实首页复核：620日全历史、两图独立缩放、11px文字、图排行纵排过长。保持A股下独立栏，默认120交易日，60/全历史可选，两轴共用时间范围；桌面字体与紧凑排行、大图同屏修复。
+- 唯一写者：Sol前端助手 web/src/components/market-observation-alerts/IndustryStructure.tsx, web/src/components/market-observation-alerts/industry-structure.css；root web/src/components/market-observation-alerts/IndustryTimeline.tsx, web/src/components/market-observation-alerts/industryTimeline.ts, web/src/components/market-observation-alerts/industryTimeline.test.mjs，及自有raw/industry-layout-20261103/work-progress。基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，共享脏区保留；不改通用MarketTrendChart/数据包/原研究/买方数据。
+- 验收：近期默认日期、60/全部、任一图缩放/共同滑块联动、真实桌面1280×720首页与弹窗完整排行可见/文字>=13px/无溢出、Escape回焦点、图初始化零尺寸警告、相关测试/tsc。0金融实验/数据抓取/付费/手机适配/部署/删除，小证据<3MiB。源码仅本地。
+
+---
+
 # 正向用途文案 — completed local 2026-11-03T20:20:26.461807+08:00
 
 - task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=true；checked_coordination_sha 0c03668e21cc52c4d6ce3f44c97c1cfcc8f84f06；checked_at 2026-11-03T20:20:26.461807+08:00。交付前fetch并核self/controller，沿本轮已读COORDINATION及宽度/观察owner释放记录；root唯一写，Sol两轮只读审查完成，无范围冲突。
