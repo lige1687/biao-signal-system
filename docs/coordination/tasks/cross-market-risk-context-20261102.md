@@ -1,3 +1,12 @@
+# 市场速览小卡配色 — completed local 2026-11-03T13:00:32.477666+08:00
+
+- 原task/owner不变；scope_released=true；checked_coordination_sha 5b2fdaf9a8f8d79da51063949bc0ec7e204b516a，checked_at 2026-11-03T13:00:32.477666+08:00；交付前已fetch核自身，沿本轮COORDINATION/self/controller范围，root唯一写3文件完成，无代理或重叠写入。
+- 用户澄清目标为小卡而非上阶段焦点大图；已将市场速览大数值/正文炭灰，主曲线灰绿、对照灰紫、参考低青绿高赭色，卡底/按钮柔和中性；全体8补充卡大数值已实核，A/US HV和VIX目标小卡截图已核。宽度周期区分保留。只改ChartLegend.tsx、market-observation-alerts/style.css、CrossMarketObservation.tsx，不改布局/数据/阈值/计算。
+- tsc通过；浏览器HV12.76%与10.14%、VIX21.15及原阈值未变，图例颜色与SVG实线/虚线逐一匹配；5图例色相对卡底对比度均>=4.5。无镜像新测试/新金融研究/取数/手机适配。
+- 证据docs/experiments/raw/cross-market-risk-context-2026-11-02/mini-card-palette-20261103/{acceptance.json,scoped-changes.patch,browser-proof.json,mini-cards-final.png}，acceptance SHA facdb6f49e303ba248c293f7fc2e667a8152d161831161bb19253d1e889805c9。work-progress已追加。仍基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享脏区，仅本地，未源码提交/部署/重启；无删除、无后台任务，旧预算/失败/前阶段成果保留。写权释放。
+
+---
+
 # 用户纠正：市场速览小卡配色 — active 2026-11-03T12:58:17.840966+08:00
 
 - 原task/owner不变，scope_released=false；checked_coordination_sha dcf2b92b3d09da531cb1dbfef56786f197b8af58，已fetch并读COORDINATION/self/research-dispatch-controller；本任务前阶段写权已释放，root唯一写3文件：web/src/components/market-observation-alerts/ChartLegend.tsx, web/src/components/market-observation-alerts/style.css, web/src/components/market-style/CrossMarketObservation.tsx。简单有界配色修正直接执行，无代理。
