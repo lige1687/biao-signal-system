@@ -1,3 +1,9 @@
+# 双轨收尾文案一致性 — active
+
+- 同task/owner，scope_released=false；checked_coordination_sha 0c02026ef99c2e05f0549134476f682c3188cf06。沿当前已认领六源码及QA范围，另认领web/src/components/observation-library/ErpSensitivitySummary.tsx，仅修“首页仍用2σ”为“首页历史变化仍按2σ”，以符合小图已显示两档的实际行为；相关owner仍已释放。无其他范围扩大。来源5次/新金融实验0不变，当前31定向测试通过；桌面实际双轨/同周价格点/1σ切换/两指数/期间/历史展开已核。
+
+---
+
 # 邻范围释放后同步ERP小图 — active 2026-11-03T21:01:30.337481+08:00
 
 - 同task/owner；scope_released=false，checked_coordination_sha a14415b74a4738718bbbdb3a16d2e44843c8de77。cross-market最新20:59:38明确全部释放。现root额外独占web/src/components/market-observation-alerts/index.tsx与style.css，仅ERP卡局部；保留刚落地39股机构卡/隔夜日内/候选等全部邻改。既有ERP大图四文件范围保持。
