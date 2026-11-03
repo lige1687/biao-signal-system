@@ -1,3 +1,13 @@
+# 正向用途文案 — completed local 2026-11-03T20:20:26.461807+08:00
+
+- task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=true；checked_coordination_sha 0c03668e21cc52c4d6ce3f44c97c1cfcc8f84f06；checked_at 2026-11-03T20:20:26.461807+08:00。交付前fetch并核self/controller，沿本轮已读COORDINATION及宽度/观察owner释放记录；root唯一写，Sol两轮只读审查完成，无范围冲突。
+- 市场速览、组合解释、焦点动量及宽度来源读法改为“可以看作什么/有何信息/下一步看什么”；组合明确事实+事实→含义。融资看相对负担及余额增减，波动看起伏幅度，缺项交代补齐后用途。根/web展示原则同步。历史负结果49.0% vs54.5%保留，计算/阈值/交易分支不变，未夸称全站逐页验收。
+- 9精确文件局部源码和规则已完成；14原组合测试、tsc、归置通过；1215桌面实际主卡/组合文案无重复否定提醒、无横溢。真实新日期自动数据按各指标日期显示，本轮0取数/金融实验/付费。
+- 证据docs/experiments/raw/cross-market-risk-context-2026-11-02/positive-reading-20261103/{acceptance.json,browser-proof.json,positive-reading.png,review.md,scoped-changes.patch}；acceptance SHA 865cfe00346262c9fb9e6d8428fb0d7bfb6fd920b26a15df6700c5ceb760e87d。原work-progress已追加，前阶段及旧失败保留。
+- 基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；源码仅本地，未commit/push源码/部署/重启/删除。所有本阶段路径释放。行业结构owner新反馈已留在review，尚未实施该独立交互范围；不冒称完成。
+
+---
+
 # 正向用途文案范围补充 — active 2026-11-03T20:18:26.484611+08:00
 
 - 原task/owner不变；root唯一写；scope_released=false；checked_coordination_sha 85f21f1b72d725a2e01bdfb96b1e967699bc8025；已读取原相关宽度/观察负责人完成状态。浏览器核出宽度卡可见残留“高位不等于顶部”，故本轮增加精确路径 web/src/components/market-style/BreadthInstitutionalReference.tsx，仅改用途文案，固定参考数值、来源、负结果保持。其他范围沿下段，助手只读完成。无数据/策略/新研究。
