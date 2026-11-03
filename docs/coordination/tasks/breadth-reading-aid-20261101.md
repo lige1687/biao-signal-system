@@ -1,3 +1,11 @@
+# 邻范围释放后同步ERP小图 — active 2026-11-03T21:01:30.337481+08:00
+
+- 同task/owner；scope_released=false，checked_coordination_sha a14415b74a4738718bbbdb3a16d2e44843c8de77。cross-market最新20:59:38明确全部释放。现root额外独占web/src/components/market-observation-alerts/index.tsx与style.css，仅ERP卡局部；保留刚落地39股机构卡/隔夜日内/候选等全部邻改。既有ERP大图四文件范围保持。
+- 小图同一组2σ边界派生1.5σ，不另算窗口；两档具体上下值和内外轨同时可读，告警规则仍2σ。MiniTrend不用改。source helper已完；独审helper仅code-review.md已完，root负责最终代码与桌面验收。5来源调用、0新金融实验不变。
+
+
+---
+
 # 股债1.5σ和2σ同图 — active 2026-11-03T20:49:14.869425+08:00
 
 - task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false；checked_coordination_sha b39ce7bcb4cb110af4b0e40160f580cd41244285。已读COORDINATION/self/focus/cross-market/controller。cross-market当前独占小图index，等待其明确释放，不写该路径、不发跨会话消息。
