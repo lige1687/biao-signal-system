@@ -1,3 +1,12 @@
+# 股债1.5σ和2σ同图 — active 2026-11-03T20:49:14.869425+08:00
+
+- task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false；checked_coordination_sha b39ce7bcb4cb110af4b0e40160f580cd41244285。已读COORDINATION/self/focus/cross-market/controller。cross-market当前独占小图index，等待其明确释放，不写该路径、不发跨会话消息。
+- root本轮唯一写ErpCrossChart.tsx、erpCrossChart.css及新增erpComparisonDisplay.ts/.test.mjs，均在web/src/components/observation-library/；另写本任务sigma-overlay-v11 QA、原研究报告、registry仅自身键及work-progress。helper仅source-review.md/source-ledger.json。
+- 用户要求1.5/2同时可见并映射价格，1可选；复用冻结ERP比较，不重测不搜参，不改原2σ告警。来源本阶段最多6请求（helper4/root2），0金融实验/行情取数/缓存写，产物<=5MB，内盘保留5GiB。仅桌面，不搞手机。
+- 同日不同σ事件保留独立标识；缺值不补造价格。共享dirty18e64fa保留，不提交源码/部署。协调仅精确本task、显式完整SHA普通push后读回。
+
+---
+
 # 联合大图与精简小图 — completed 2026-11-02T20:42:36.860568+08:00
 
 - 同task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；status completed_local_desktop_display；scope_released=true，释放本轮大图两文件、小图index/style及两既有展示测试写范围。checked_coordination_sha 7d86317cdc99a6a94866a167753b205e8a6c6787；已读COORDINATION/self/focus-stock-universe/research-dispatch-controller，focus最新全部释放，本方保留其第四卡及全部原改动。
