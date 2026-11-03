@@ -1,3 +1,12 @@
+# A股经营选股与风险控制有界检验开始 2026-11-03T20:45:36.048972+08:00
+
+- 原task/owner；status active；用户明确继续上一轮三个机制方向。checked_coordination_sha 6fde7193c993c6188752d64207aa5b9360c1cc90；已读COORDINATION/self/dispatch/personal-lowfreq/utility/downside。残差动量/小盘反转/资料补件仍属原owner，不接管或重跑。
+- 本轮新问题：经营盈利选择企业后，按过去波动缩减高风险股票，是否优于经营单项、低波单项、同股票仓位现金对照和简单各半？先锁准确规则，既有gp样本2015—2025仅报价月度资料；未知回报不得删除后拼成年化。估值与压力反转仅审现有资料新可用性，不补造代理。
+- 唯一新写 docs/experiments/cn-profitability-risk-combination-2026-11-03.md、同名raw、registry仅本键/INDEX仅本行/原progress。root实验与报告；GPT-6.1 Sol medium只写raw/data-gap-audit.json，后续独核另冻单一输出。旧定义/生产/前向/冻结报告不动。
+- 新问题限1核心批+至多3必要跟进、6来源请求含失败；0新市场数据下载。内盘新写<2MiB并留5GiB；外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9新独立目录<16MiB。旧实验预算不重置。新研究属独立选股研究，不改原LEI技术判定或模拟账户。源码成果仅本地共享dirty，不自动源码提交。
+
+---
+
 # A股组合选题纠偏完成 2026-11-03T10:28:27.538312+08:00
 
 - 原task strategy-account-bridge-20261020 / root；status completed_bounded_priority_review，scope_released=true仅本轮非冻结报告与审查产物；新候选效果not_evaluated。用户要求从现有因子的金融含义选组合，本轮没有新增收益试验，不冒称发现有效策略。
