@@ -1,3 +1,16 @@
+# 三模块有界验证及首页原生观察接入已验收 — completed local
+
+- 原task market-increment-map-20261102 / owner 01a19ce6-5541-7071-9f17-f78b42235a0c/root；status completed_bounded_question；scope_released=true；checked_coordination_sha 1edc208394b8d792d4220d58c678fedb88df58ab；checked_at 2026-11-03T21:01:31.417237+08:00；交付前fetch并读self/cross-market-risk-context/controller，沿本轮COORDINATION1.1与报告登记已释放范围。未接管他线。
+- 已完成三块有界实证与独立验收，结论不改：SmartDiff精确算术新增后风险预测RMSE3.8371→3.8466；横截面四项预测均不胜简单持续值，保留结构观察；两ETF月度15%EWMA×账户回撤缓冲含费用／分红账已完成，少亏也少赚，完整Mregime未定义/未验证。不能宣称EMA20重仓或行业选择收益得到验证。
+- 原前端owner已把两新卡原生接首页A股速览，root实际看到620点时段图、120/全部切换、零线，机构卡39股/买25.64亿/卖45.16亿/净卖19.52亿与前五明细；已明确本快照、Choice、散户未知、沪市来源入口、日期及不自动更新。旧行业四项修复复核通过，图和10行业排名首屏可读。UI owner7定向测试/tsc/归置通过，root8源码SHA/HTTP/全点全股/实际截图独核。
+- 机构单位追到本页脚本NEW接口：原111条全匹配，NEW额外1股1可转债；v1保留，v2最新57条排1债15多日、去2重复→39股。最终包 SHA d34dc0de460e2889fe80220048a6a3880279f13657e6a2f8b042adb4e880d830；外盘原run result/observation-package-v2.json。初始全集一致断言失败原因及source记录保留；不把两API宇宙说成相同。
+- 产物：docs/experiments/market-increment-three-modules-2026-11-03.md，原report顶部续篇导航、registry原/续篇2自身条目、INDEX1条；同raw three-modules目录contract/code/summary-corrected/controller-verification/ui-acceptance/final-manifest。报告API全文与SHA一致、其他登记和旧报告历史保留。截图homepage-new-cards-crop.jpg、session-detail/institution-detail/industry-updated同目录。
+- 累计本阶段19来源请求（初始18，单位接口闭合前记录+1必要操作）；3核心批；session8实际fits含输出前失败、sector8fits、account16实际路径含4错误买持保留并仅重算4修正路径，8有效动态账复制核SHA未重跑。此前所有预算与负结论保留；无参数搜索/付费/交易/自动采集。实际外盘约4.9MiB、本地元数据约11.7MiB（保留隔离索引/备份超过估计），两盘余量均满足预留。
+- 原LEI/生产仓位未改。完整全A31、全市场散户身份、多输入状态得分及其账户效果明确尚未回答，不能用此次限定结论外推。此次有边界问题已到证据边界，无后台进程或自主后续。
+- 成果源码、研究账及截图仅共享本机/外盘，未推成果分支、未部署；远端仅协调元数据，不能独立重现。下一次先读冻结合同和本报告，独立新证据才重开，不重跑已封存基准追正值。
+
+---
+
 # 同task研究续篇登记范围补充 — active
 
 - checked_coordination_sha 20f0edb537868087f93a6d8512b180981d0416df；checked_at 2026-11-03T20:50:24.156037+08:00；沿本轮已读COORDINATION、自身/原前端/中控/报告登记owner范围；无同写变化。
