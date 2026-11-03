@@ -1,3 +1,13 @@
+# 股债双轨与价格对照 — completed local 2026-11-03T21:11:07.070692+08:00
+
+- task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true；checked_coordination_sha f6f4fc91b1ed8bd4284807553672bfd0677d4d6b，沿COORDINATION1.1及self/focus/cross-market/controller读取。释放本阶段7源码：observation-library下ErpCrossChart.tsx/erpCrossChart.css/erpComparisonDisplay.ts及test/ErpSensitivitySummary.tsx；market-observation-alerts下index.tsx/style.css。所有源码仅本地共享dirty18e64fa。
+- 大图默认1.5σ+2σ，1σ可选，明确两档上下数值、同周价格穿轨点、同轴光标缩放；sigma/date/kind复合身份、缺价不挪、缺ERP不造。小图等邻owner20:59:38明确释放再认领，只改ERP局部，原39股机构/隔夜日内/宽度/候选保留。原2σ告警不变。
+- 1.5σ是本地候选；机构ERP1/2σ、价格Bollinger10/1.9、20/2、50/2.1、宽度30/70分开解释。复用旧15次上轨+6.98pp条件增量及反例/原事故，无新金融检验或搜参。来源本阶段5、累计22，旧ERPowner6次单列复用；0行情取数/缓存写/交易。
+- 31局部checks、最终TS/Vite内存构建/归置通过；仅桌面1280×900，轨道切换/两指数/期间/价格点点击/同周放大/历史展开/小图实显验证，视口复原。初始化零尺寸警告已修，修后无新warning/error，旧日志保留。初次写路径、TS at兼容、dry_run词匹配、普通push非快进均审计，未强推/删除。
+- QA sigma-overlay-v11下acceptance/browser-proof/截图/窄patch/7源SHA读回一致，产物约0.44MB，内盘余5.48GiB。原研究报告更新、registry只自身键，其他824条保持；work-progress追加。完成授权展示和来源问题，未宣称策略有效；没有剩余后台运行/手机验收/源码提交部署。
+
+---
+
 # 双轨收尾文案一致性 — active
 
 - 同task/owner，scope_released=false；checked_coordination_sha 0c02026ef99c2e05f0549134476f682c3188cf06。沿当前已认领六源码及QA范围，另认领web/src/components/observation-library/ErpSensitivitySummary.tsx，仅修“首页仍用2σ”为“首页历史变化仍按2σ”，以符合小图已显示两档的实际行为；相关owner仍已释放。无其他范围扩大。来源5次/新金融实验0不变，当前31定向测试通过；桌面实际双轨/同周价格点/1σ切换/两指数/期间/历史展开已核。
