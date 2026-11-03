@@ -1,3 +1,13 @@
+# Gemini四项V2建议方法审查 — completed 2026-11-04T00:20:46.261562+08:00
+
+- 原task/root；status completed_bounded_method_review；mode report_only，scope_released=true仅本轮非冻结说明。checked_coordination_sha bb542b9452cee60732ba55b8231e45e7207f6fae；已核最新breadth-reading-aid仅首页1.5/2σ叙事范围，无重叠。旧1核心+3跟进及来源失败不重置。
+- 四建议接受为改进方向但修正承诺：小行业是冻结定义与高盈利解释不一致，非违背设计代码bug；31.32%为未筛选权重，未证明全属拖累；ceil20%仍有singleton/集中。70/85需盈利资格/名额/持仓/未成交完整语义，目标变动费用不是实成交。全池筛后原有非空行业配额，行业内过滤不保证TE<4；七档/逐年补充区间，不寻历史最高IR。
+- 现有cn-profitability-risk-critique-review-2026-11-03报告追加§7、旧正文保持；SHA8a046979ca309e519cff826d08ebd641f9c11a894da0edee8b1fe020b68fbed8。registry仅自身指纹/时间，826其他键保持；8000/5173正文逐字、真实浏览器§7和四小节、归置/窄diff通过。root独读原design/code，与原同模型Sol单次只读审查一致。冻结来源指纹保持。
+- 新raw原目录/gemini-v2-method-review-20261104约164KiB<256KiB，保存brief/合同/原报告备份/source3-4/independent-review/completion。新来源4工具调用含3query/7open，MSCI2025两次定位读取超时，最终只引已读2014机构buffer/sector段落和Bailey2015引言；不称新版全文已核。金融效果试验0，行情下载0，外盘新写0。
+- 本次方法问题已答，V2/迟滞/行业筛选/七档收益未评价；提议执行顺序不冒称已冻结或启动。无生产/前向/源码提交部署/后台续跑。源与报告仍仅本地共享codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，远端只有本协调摘要，不改其他owner标准。
+
+---
+
 # Gemini四项V2建议方法审查 — active 2026-11-04T00:13:54.252007+08:00
 
 - 原task/root；scope_released=false仅新增方法说明和本轮证据。用户问“这是Gemini给的建议，你看看呢”，mode report_only，核四项方案的定义、增量理由和未支持预期，不执行七档新回测或变更前向。旧1核心+3跟进及已看历史保持封存。
