@@ -1,3 +1,13 @@
+# 收起候选区与组合解释 — completed local 2026-11-03T13:49:09.769500+08:00
+
+- 原task cross-market-risk-context-20261102/owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=true；checked_coordination_sha 5a5c518da5eddcea2c7592e1be9177fa8629daac；checked_at 2026-11-03T13:49:09.769500+08:00；交付前fetch并核自身/controller，COORDINATION沿本轮已读。frontend释放后root独验并修，全部路径释放，无他人文件或任务覆盖。
+- 卡片收起为A/美紧凑候选、保留读数日期、恢复、搜索新增、独立持久化；原主展示保留。组合事实A+事实B→联合解释，再给改善/警惕条件；新增VIX与HV预期/已实现区分，不称方向预测或出清。历史参考和数据/交易计算不改。
+- Gemini4 Argon高思考菜单核实，首轮实际收到；root拒绝分母原因/阴跌放量/超前预测等过度推断；纠正追问已发后Chrome读取超时，修正版未读，不称共识。Cboe/FRED定义另核1次web含2页。无新增金融实验/付费接口/数据下载/仓位规则，原预算失败保留。
+- 17定向测试、最终tsc、归置通过；1215桌面收起/恢复/刷新保留/键盘焦点/搜索新增/数据读数与单位真实核，无横溢出与console error。证据docs/experiments/raw/cross-market-risk-context-2026-11-02/candidates-combination-20261103/{acceptance.json,browser-proof.json,review.md,scoped-changes.patch,combination-final.png,candidate-shelf-final.png}，acceptance SHA 0feefd4688c8769b4471f2a6e121d2938b0f1a53577f8030454094f43847a9d4。work-progress已追加。
+- 基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，源码13文件仅共享本地未commit/push/deploy/restart；没有删除、手机适配或后台任务。
+
+---
+
 # 收起候选区与组合解释 — active 2026-11-03T13:33:39.998647+08:00
 
 - task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root 不变，scope_released=false；checked_coordination_sha 0c5c687b210d41091dd96cef98bb959ae28cc1df；checked_at 2026-11-03T13:33:39.998647+08:00；已fetch并读COORDINATION/self/research-dispatch-controller，前阶段均释放。用户已授权候选缩放恢复及登录Gemini4咨询组合读法。
