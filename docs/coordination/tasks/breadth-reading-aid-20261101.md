@@ -1,3 +1,12 @@
+# 美股价格图去密与放大 — active 2026-11-04T00:15:20.959435+08:00
+
+- task/owner沿原breadth-reading-aid-20261101 / 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false；checked_coordination_sha ebb010e924d2f8309453e2bc66318ce5b954dcf5，已fetch/read self/cross-market/focus/controller，沿COORDINATION1.1，相关范围明确释放。用户反馈上一截图点过密、价格太扁，无法观察转折。本阶段仅显示修复，不新增金融研究或顶底规则。首次旧base断言安全停止、无源写入，重新读取后继续。
+- root唯一写web/src/components/observation-library/ErpCrossChart.tsx与erpCrossChart.css，目标US价格上方主图、利差下方辅图、密集同向穿轨合并可展开、默认3年，原同日值/1.5与2阈值及CN保持；root还写原report/registry自身键/progress和us-chart-readability-v14 QA。助手us_sigma_math_v13仅写新增usErpMarkerGroups.ts及其test，具体分组按冻结合同，不得挑后验最优点。
+- 分组只按日期轴上同方向相近事件合并，保留全部原始成员，点组可放大并查看原点；仅改变显示密度，不能把估值点改名顶底或暗示预测。原v13来源和效力边界保持。补必要回归，桌面实际截图与点击验收，不做手机。
+- 当前dirty分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9保留，0外部来源/金融实验/采集/策略/缓存写/部署/删除/强推。新QA预计<2MiB，现内盘5.15GiB，保留5GiB；只小文件与内存构建，不安装依赖或拉大资料。不是重开实验，未改旧冻结。
+
+---
+
 # 美股双轨与国债期限观察 — completed local 2026-11-03T23:54:04.790354+08:00
 
 - task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true。checked_coordination_sha 7be0881aa0f5ad9a1a972063003dbff67d72d554；checked_at 2026-11-03T23:54:04.790354+08:00；交付前已fetch/read COORDINATION1.1/self/cross-market/focus/controller，邻范围均明确释放，保留其余全部修改。释放本轮认领源码/报告自身键/QA，无接管其他会话。
