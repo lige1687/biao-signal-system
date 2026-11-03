@@ -1,3 +1,14 @@
+# ETF冷热总览已验收，官方资料覆盖9/10 — completed local 2026-11-03T23:37:42.363491+08:00
+
+- 原task sector-crowding-advice-review-20261102 / owner 01a19cde-a99b-7ad0-adbc-99471b24208d/root；scope_released=true；checked_coordination_sha 99aed9150d16949a1f0516cd1451b9990a215e9e；交付前fetch/read self/cross-market-risk-context/market-increment-map/breadth-reading-aid，沿本轮COORDINATION/controller/sentiment，其他owner三类UI/来源路径不同，无同写。
+- 用户要先总览后个图、权威来源、撤下读法和算法。已在原/sentiment页集中显示全部10只，热/冷/常态/待核验；点击选同ETF及自身活跃上下图，1年/3年/全部保持。教程卡/计算表/冗长口径details撤下，日期/来源和影响判断缺项保留；旧行业列历史参考。
+- root沿上交所真实页面及引用JS接通官方dayk，9沪市各999日(2022-09-15—2026-11-03)，原报价与SHA存原图表外盘run/result/official-quotes-v1，新增9个official-*.json及overview。11/3热：通信国泰93.75、红利低波90.873；常态7、冷0。电力159611官方504日历史未核准，单列待核验且原腾讯图明示来源，绝不冒称10只全官方。来源缺口部分未完成，当前无后台采集。
+- root/原Sol精确两组件文件，新增运行10JSON；原catalog/10腾讯快照及既有研究保留。官方源独核8991价格/4419有效活跃、9边界、HTTP10文件、旧行业原日数值与11原SHA通过；实际浏览器10卡/无教程、红利/通信/电力联动与长历史、整页刷新通过。tsc最终exit0、组件定向编译/归置/scoped diff通过。另owner UsErpCard中途缺模块已由其补齐，错误留账、本方未碰。
+- 证据 docs/experiments/raw/sector-etf-sentiment-chart-2026-11-03/overview-authority/{review-and-decision.md,official-quote-ledger.json,official-build-manifest.json,data-acceptance.json,browser-proof.json,heat-overview.jpg,official-chart.jpg,acceptance.json}；验收SHA b294b17be7ed478aac0bbae5e57ab9a91787a5ebd96c30839567d8755d8c265f。progress原条追加、所有原历史保留。新来源28操作(6搜索+6root官方入口样例+8其余沪市+8Sol深市含404)，新增1展示派生批、0金融拟合/付费；以前预算不重置、不新增金融有效性结论。
+- 共享dirty工作分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9保持，源码/数据仅本机和固定UUID外盘；无源码推送/部署/策略改动/自动仓位/删除。此协调仅自身元数据。下一次只补159611权威连续历史或按用户要求更新当期，不重跑封存因子研究。
+
+---
+
 # 官方行情接通范围补充 — active 2026-11-03T23:27:44.748516+08:00
 
 - checked_coordination_sha 94b795f88da9a6e5d280bb4686e42d7a4cd89413；已fetch/read自身与cross-market/market-increment，沿本轮COORDINATION/controller/sentiment范围，无同写。SSE官网页面及所引JS真实核到dayk接口，512480已得999日日线至11/3。原6搜索全耗用但不足资格判断，故先记录有界实际接口检查扩展：root最多8官方页面/脚本/样例请求（已6），核成功后余8只沪市各1请求；原Sol深市159611最多8页面/脚本/样例操作，0继续搜索/付费/绕授权。全部累计不重置。
