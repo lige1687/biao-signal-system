@@ -1,3 +1,12 @@
+# 隔夜日内与机构披露两卡接入 — active 2026-11-03T20:45:27.025996+08:00
+
+- task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=false；checked_coordination_sha 91c6ebaa8fa62092816e1f9c31e2c6e13f5790bd；checked_at 2026-11-03T20:45:27.025996+08:00。已fetch并读COORDINATION1.1/self/controller/market-increment-map-20261102。原数据owner明确传达用户续授权并请求现有首页原生接入；前端唯一root，原数据/研究归原owner。
+- 本轮仅新增两张A股观察卡和详情：沪深300隔夜/日内20日简单收益和（非复合）、龙虎榜单日38股已披露机构席位买卖。复用包SHA7eba7a880fbea16ce795cd4314f90fd8e7d54846d76484e5d5d81ba5eaabb537，外盘UUID/容量已核。服务叙事观察层，不改技术/仓位/策略/原始数据。机构范围/散户未知、Choice来源/逐席位未复核、静态日期清楚保留；正向用途不堆否定提醒。
+- 唯一写者：Sol限定IncrementObservationCards.tsx/increment-observation.css；root限定同目录index.tsx/selection.ts/selection.test.mjs/incrementObservationData.ts/incrementObservationData.test.mjs，web/public/research/market-increment-observations/cn.v1.json，及本任务raw/increment-cards-20261103、work-progress。旧行业区/全局catalog/原研究/其他数据不改。共享脏区保留。
+- 验收：源SHA和620序列/38股合计逐项核对；拒绝错日期/重复股/算术不符；实卡读数/图例/零线、详情缩放、买卖排行及来源链接；候选收起/恢复/刷新保持，桌面无溢出/Escape回焦点。既有选择保持，新卡通过候选加入；新用户默认两卡可见。0新取数/金融实验/付费/自动刷新/部署，源码仅本地，证据预计<3MiB。
+
+---
+
 # 行业栏四项可读性修复 — completed local 2026-11-03T20:41:10.986832+08:00
 
 - task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=true；checked_coordination_sha a99516070ac76800c01be995c14aaa9e2db2a60b；checked_at 2026-11-03T20:41:10.986832+08:00。收尾fetch并读self/research-dispatch-controller/market-increment-map-20261102最新记录，沿本轮COORDINATION1.1；原owner已传达用户四项确认并独占新数据/研究，本方只UI整合。
