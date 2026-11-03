@@ -1,3 +1,13 @@
+# A股组合批评复核与条件过滤 — active 2026-11-03T23:44:18.708257+08:00
+
+- 原task strategy-account-bridge-20261020/root，scope_released=false仅本轮报告与新raw；checked_coordination_sha 9da9a2fac1d396202e355157c04b9c6d4f6047a6，已读COORDINATION/self/controller/personal-lowfreq/utility/downside/market-increment-map最新。ETF仓位/宽度归market-increment-map，不重复；旧600股基础来源只读，不接管数据owner。
+- 用户明确要求127完整月超额矩阵、最高总波动20%/30%剔除后盈利选股、5日/60日金额比率条件反转，并要求追5缺月和可核数据源。冻结后3个有界追加批（旧指标、2个指定阈值与强对手、固定代理条件检验），不扩大寻优。沿原1核心+最多3追加，总体旧尝试不归零；旧方法来源5/6（含2失败），本次明确补源单列最多6请求及失败。
+- root唯一写原cn-profitability-risk-combination报告的有日期纠正导航，新cn-profitability-risk-critique-review-2026-11-03报告、原raw内critique-review-20261103子目录、registry自身2键/INDEX自身1行/progress。一个既有Sol仅新提取器/代理特征及原始缺口审计，另合同只读复核。原design/compare/results冻结，不改引擎/配置/前向/生产。
+- 复用16MiB外盘与2MiB本机研究额度（此前6.65MB/.68MB），追加新目录且压缩权重；写前UUID/容量复核。所有历史已见，缺月不拼连续净值。原行业内选股保持；全池剔除另有行业权重保持对照；总波动不冒充IVOL，金额异常不冒充真实换手或卖压。
+- 验收含127月active/TE/IR，完整片段相对财富回撤与持续期，筛选增量/成本代理/时期反例，5源缺口及代理数值独核。分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享脏树保留，结果仅本地；源码不自动提交。当前未执行新效果，研究和前向分离。
+
+---
+
 # 经营盈利与低波风险组合有界检验完成 2026-11-03T20:58:34.886183+08:00
 
 - 原task strategy-account-bridge-20261020/root；status completed_bounded_opportunity_question，evidence inconclusive；完整策略/母指数净收益blocked，EP与条件反转效果not_evaluated。scope_released=true仅新增非冻结报告/代码，冻结设计与原件保持。checked_coordination_sha f3aa7cb9bcdc9f5e8e073b3385b20fe6af54ebbf；沿self/dispatch/personal-lowfreq/utility/downside，交付再核远端变化，无同题/同写。
