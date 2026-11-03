@@ -1,3 +1,16 @@
+# A股组合批评复核 — completed 2026-11-04T00:06:02.442551+08:00
+
+- 原task strategy-account-bridge-20261020 / owner 01a1585f-53de-7883-a5cb-d9c5be52902c/root；status completed_bounded_critique_review，evidence inconclusive；scope_released=true仅本轮非冻结报告与研究代码，旧源/冻结输出保护保持。checked_coordination_sha db834a02960e97ade957771ac4cd711ed8e81cce；交付已读COORDINATION/self/中控与前列相关owner，增量核factor-method-standards-increment、market-increment-map、breadth-reading-aid，未重复其标准或ETF研究。
+- 127共同完整月：G/V总相关0.98333、主动相关0.28224，纠正原高相关否定分散。原50/50降低TE4.203→3.644%，但IR0.215→0.084。S20/S30相对G分别−0.01284/+0.06379pp月、区间均跨零；S30毛IR0.329，25bp目标变动费用代理后0.123低于G0.132，超额增量仅+0.00556pp月。六完整片段相对财富DD不冒称十一年连续DD。
+- 固定5日/60日成交额代理31872行可算，原G池下跌组中行业/跌幅分层放量减缩量+0.07408pp月，123月CI[-0.87781,+0.54067]，前后期异号。没有证实稳定反转增量。原G平均31.32%权重来自不足5股行业全保留，不能把它全部称严格高盈利池；总波动不冒称IVOL，金额不冒称换手或确认卖压。
+- 五缺月追原源均退出行缺失，四退市一吸收合并，非ETL漏行；原公告/SSE/CNINFO及披露镜像已定位，连续可执行收益仍未填。完整132月账户、真实费用、IVOL、市值中性、日周目标仓位未评价；无新增前向、生产修改或后台工作。
+- 报告docs/experiments/cn-profitability-risk-critique-review-2026-11-03.md SHA1478ec27263ff57de7b2fd4cd22ee9ac13b215c0b3ee17b92bffaad8781bab45；旧cn-profitability-risk-combination报告顶端有日期纠正与实际可点新入口，旧正文备份/原结果SHA保持。raw/cn-profitability-risk-combination-2026-11-03/critique-review-20261103含design/ledger/controller-acceptance/result-verification/manifest。独核SHA c41140fe16ca30386a9d9e4086ae8c75771dfb1339e3b5dc5100fee798b49812，全132权重/127月风险/片段DD/代理分组及区间通过；root另核相关和IR、原件与HTTP。
+- registry仅自身两键、825其他键保持；INDEX自身行、progress已更新；API逐字、浏览器9表2张864×768曲线和旧入口跳转、归置/窄diff通过。初始输入例断言、准备CSV误读、公告访问描述及相对链接修正均留痕，无新效应寻优。旧核心1＋本次3跟进；旧方法来源6含2失败，新补源6工具调用含15query/8open/2open失败，0新行情API。
+- 外盘固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，LeiSignal-新实验结果/cn-profitability-risk-combination-20261103/critique-review-20261103为新输出；原加新家族9443635B<16MiB，本机原raw家族1381669B<2MiB。源码/报告/证据仅本地与外盘，远端不可复现；共享codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9脏区保留；仅本协调元数据正常推送。
+- 当前指定问题已回答，无待用户决定。恢复须先读本轮completed账本；公司行动完整账户或严格高盈利/真正IVOL是需要新资格的新问题，不重跑本历史改阈值追正结果，不用本轮直接升级前向。
+
+---
+
 # A股组合批评复核与条件过滤 — active 2026-11-03T23:44:18.708257+08:00
 
 - 原task strategy-account-bridge-20261020/root，scope_released=false仅本轮报告与新raw；checked_coordination_sha 9da9a2fac1d396202e355157c04b9c6d4f6047a6，已读COORDINATION/self/controller/personal-lowfreq/utility/downside/market-increment-map最新。ETF仓位/宽度归market-increment-map，不重复；旧600股基础来源只读，不接管数据owner。
