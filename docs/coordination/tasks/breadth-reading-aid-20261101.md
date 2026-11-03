@@ -1,3 +1,11 @@
+# 美股股债收益差依据复核 — active 2026-11-03T23:24:29.799675+08:00
+
+- 同task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false；checked_coordination_sha 023cd20af9a7b516bf7cf31ca92734461cd9fd60；已读COORDINATION1.1/self/cross-market-risk-context-20261102/focus-stock-universe-20261024/research-dispatch-controller，邻任务相关范围已明确释放。本轮report_only，未改源码或页面。
+- root仅写原报告docs/experiments/breadth-erp-ma200-increment-review-2026-11-02.md、registry自身报告键、原work-progress及us-erp-v12小QA。助手us_erp_inputs_v12只读实现与旧研究，无写权/网络/实验。其他报告、UI、数据、策略只读；共享dirty18e64fa保留。
+- 问题：当前标普500盈利收益率减10年国债的专业依据、轨道适用性、已知增量；对照普通估值信息/原MA200研究。最多6次新来源请求含失败，0新金融实验/搜参/行情取数/缓存写/部署；旧累计22保留。合同已dry_run ready。验证公式及实际轨道、原论文与用途边界、旧实验同口径资格后归档收尾。
+
+---
+
 # 股债双轨与价格对照 — completed local 2026-11-03T21:11:07.070692+08:00
 
 - task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true；checked_coordination_sha f6f4fc91b1ed8bd4284807553672bfd0677d4d6b，沿COORDINATION1.1及self/focus/cross-market/controller读取。释放本阶段7源码：observation-library下ErpCrossChart.tsx/erpCrossChart.css/erpComparisonDisplay.ts及test/ErpSensitivitySummary.tsx；market-observation-alerts下index.tsx/style.css。所有源码仅本地共享dirty18e64fa。
