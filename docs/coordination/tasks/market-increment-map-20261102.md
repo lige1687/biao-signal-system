@@ -1,3 +1,15 @@
+# 三模块研究已核验，真实机构披露交现有首页接入 — active UI acceptance
+
+- 原task/owner不变；status active；research completed_bounded；scope_released=false；checked_coordination_sha 7d56c62ac74bfa7f24e12ec707e1509aebb96d65；checked_at 2026-11-03T20:49:07.796902+08:00。本轮读COORDINATION1.1/self/cross-market-risk-context/controller/research-evidence-catalog/report-library-integration/research-method-practice/sentiment-factor。共享registry只改原报告自身key，原全局登记owner明确scope_released=true。
+- root新增自己的详细报告 docs/experiments/market-increment-three-modules-2026-11-03.md，原报告追加导航与结论；原raw three-modules子目录、唯一外盘run范围不变。新报告为同task续篇，不重开研究；不改他人旧证据/前端。
+- 完成精确算术SmartDiff信息敏感性，951 heldout预测旧baseline精确复现，RMSE3.8371→3.8466，无增量；CN10/US11未来结构/波动四项均未胜简单持续值。两ETF含分红现金账V15/V15DD完毕；10bp年化沪深3005.45%/0.59%、创业板9.69%/4.56%，回撤缓冲回撤仍15.17%/16.68%；Mregime=1，仅两层消融，完整权重未定义，不部署仓位。
+- 新增真实资料：腾讯沪深300OHLC640日，620个20日窗至11/2；隔夜−5.84、日内−1.77、差+4.07pp，双方皆弱，不推机构身份。Choice11/3机构龙虎榜55披露排除15多日、2相同金额重复，单日38股买24.93亿/卖44.46亿/净卖19.53亿，仅披露席位，普通营业部不算散户。
+- 研究与数据已独验，controller-verification.json及完整报告/账本。外盘原run result/observation-package.json SHA 7eba7a880fbea16ce795cd4314f90fd8e7d54846d76484e5d5d81ba5eaabb537。四项图表修改实看通过；原前端chat已接收两卡数据包并active，唯一UI writer仍它，root待实际页面读回，不宣称两卡已上线。
+- 实际新增预算：14source requests含失败；3核心批；session2运行8实际fits（首次输出前失败保留）、sector8fits、account16实际路径（4错误买持保留，8有效动态路径复制复用，4修正买持）。无调参、付费、自动采集、策略/原定义改动。老预算保留。
+- 详细代码与报告只在共享本机与外盘，未推成果分支，远端不能重现；本次仅协调元数据普通push。待完成：原生新卡可见性和图表验收、报告登记读回；不重跑冻结研究。
+
+---
+
 # 三模块增量检验与买方含义核验 — active
 
 - 原task/owner不变；status active；scope_released=false；checked_coordination_sha fda3de49c879d5ffaa0e5f171450e678b0509c07；checked_at 2026-11-03T20:27:11.545799+08:00。本轮fetch并读COORDINATION沿上轮版本、self/cross-market-risk-context/research-dispatch-controller；前三者最新相关状态已核，保留共享脏区。
