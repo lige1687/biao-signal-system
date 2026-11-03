@@ -1,3 +1,12 @@
+# 焦点图定位与中性配色修正 — active 2026-11-03T11:09:27.631913+08:00
+
+- 原task cross-market-risk-context-20261102/owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root 不变；scope_released=false。checked_coordination_sha 77a224dff6428f1540c88ad1c5702fea381f16b5；已读COORDINATION、自身、focus-stock-universe-20261024、research-dispatch-controller最新记录；原前端与焦点代理均完成释放。唯一root写下列4文件及自身证据进度，earnings只读审阅并写自己review.json，无他人写权重叠。
+- 用户拒绝中间孤立细条，5年图不能定位，并要求减少蓝色线字：移除独立事件条；用可选择日期、转正/转负文字、同日上下曲线定位和附近时间缩放直接解释位置；价格石墨/动量低饱和紫/正文炭灰，事件青绿赭橙。范围：web/src/components/focus-momentum/price-projection.tsx, web/src/components/focus-momentum/price-projection.css, web/src/components/focus-momentum/chart-navigation.ts, web/src/components/focus-momentum/chart-navigation.test.mjs。
+- 保留数据、20日定义、0仅过去正负、原阈值和研究结论、1/3/5/all、平移缩放，不改行业、市场父层、策略和后台，不取数/回测/交易。桌面真实5年图验收含事件选择、上下点和日期一致、缩放平移与对比。当前分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，全部源码仅本地。
+- 本阶段纯前端维护，不运行新实验输出入口；内盘3.33GiB，低于新研究输出保留线，因此不产生研究数据/构建目录/大日志；必要源码和小证据预计<2MiB，不清理任何数据。0新研究预算，所有旧失败和预算原记录保留。
+
+---
+
 # 行业独立栏与焦点缩放／机构读法 — completed local 2026-11-03T10:44:32.210490+08:00
 
 - 原task/owner不变；status completed；scope_released=true；checked_coordination_sha 64a39593f877f902b13202e7cfb619d8cc3c5048；checked_at 2026-11-03T10:44:32.210490+08:00。最新自身仍本方active，已沿本轮COORDINATION/self/market-increment-map/focus-stock-universe/research-dispatch-controller核范围；两代理完成释放后root独立核验，不修改他人任务。
