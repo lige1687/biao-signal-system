@@ -1,3 +1,15 @@
+# 美股双轨与国债期限观察 — completed local 2026-11-03T23:54:04.790354+08:00
+
+- task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true。checked_coordination_sha 7be0881aa0f5ad9a1a972063003dbff67d72d554；checked_at 2026-11-03T23:54:04.790354+08:00；交付前已fetch/read COORDINATION1.1/self/cross-market/focus/controller，邻范围均明确释放，保留其余全部修改。释放本轮认领源码/报告自身键/QA，无接管其他会话。
+- 首页美股ERP小卡显示1.5σ/2σ具体阈值和开关，大图同日对应标普500价格、可点击穿轨位置回看；CN计算与原6.12/两档边界保持。美股此前3自然年排除当期、总体σ，500工程覆盖门槛；是本地观察参考，未核得同口径机构买卖规则。E/P月频沿用，原修订/可得时点限制保留；不改变原2σ告警或交易。
+- 5Y/10Y同一EY差额恰好是10Y−5Y；详情直接展示2026-11-02的4.70%/4.91%/+21bp，未另加重复5Y机会轨道。Damodaran期限匹配/Fed TIPS通胀补偿已核；名义/实际/通胀拆分仅解释，本轮未采新序列或证明投资增量。v12旧负结果保留。
+- 独立审查四问题已修复并再次只读验收；主控独立Python核748条窗口与JS误差<1e-12。21定向测试、最终TS/Vite内存构建/归置通过；桌面实际小图/大图开关、2020双事件、点价格2026-10-23回看、国债读数、CN回归/Escape/重载确认。0新error、两Router既有警告；临时viewport已恢复，无手机。初期缺组件HMR及QA模块/定位失败在root-review中保留。
+- 10源SHA/窄patch/原快照/三截图/验收位于docs/ops/breadth-reading-aid-20261101/us-sigma-yields-v13；原研究报告追加v13，SHA554a989d4380969d64138df576995ff860a52aeee6015c4a833c236f21043f6e；registry仅自身键、其他824条逐项保持；work-progress更新。QA约2.37MB，最终记录磁盘5.18GiB余量。
+- 本轮来源6/6（source4/root2），本任务累计34，旧其他owner6单列；0新金融实验/搜参/强制回填/缓存定义写/策略/付费/手机/重启/删除/强推。复用现有API，普通TTL可能自动刷新，不声称系统零网络。限定显示与用途问题完成，无运行中助手或后台续接；sigma收益与账户增量未评价。
+- 共享codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9脏区保持，源码与证据仅本地，远端不可复现，未部署。仅此协调文件普通推送并读回，不上传行情快照或改main。
+
+---
+
 # 美股双轨首页与国债期限观察 — active 2026-11-03T23:31:38.539941+08:00
 
 - 同task/owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false；checked_coordination_sha 99cdca3729881af8005852446eb79866405d68f1；已读COORDINATION1.1/self/cross-market/focus/controller，相关范围已释放。用户已明确授权美股1.5σ/2σ展示首页和价格对照，并沿专业研究探索5年/10年国债用途。服务观察/估值背景层，策略原件SHA一致，不改交易规则。
