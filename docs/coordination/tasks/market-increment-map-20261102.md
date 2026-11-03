@@ -1,3 +1,18 @@
+# Gemini建议有界复核 — completed local 2026-11-03T23:55:32.822017+08:00
+
+- 原task market-increment-map-20261102 / owner 01a19ce6-5541-7071-9f17-f78b42235a0c/root；status completed（本轮限定复核）；scope_released=true。checked_coordination_sha 6b2e777db9f313bb7144e6274cb407befdd73d97；checked_at 2026-11-03T23:55:32.822017+08:00。已读COORDINATION1.1/self/cross-market-risk-context/controller/investor-observation-map及最新factor-method-standards-increment、breadth-reading-aid；无同写或接管。
+- 长期最低回撤乘数连续50/43个月属实；并非永久锁死，末值0.363/0.965，gamma1在DD8%即触底。旧0.59%是原政策结果，Mregime1组件边界保持；滚动高点是新风险政策。
+- 两新增覆盖仅原宽度周度/等待确认时点乘0.5/1，不加每日事件。10bp创业板原宽度年化18.77%/回撤32.40%/Sharpe1.004；EMA14.86/24.65/.956；下行P9015.69/34.30/.900；始终半宽度9.49/17.56/.976。沪深300对应7.69/26.89/.638，4.60/18.33/.551，6.19/26.43/.554，4.04/14.09/.646。两费率均未改善原宽度或半宽度Sharpe；不采用，不推日频信息用尽。
+- ETF份额支持产品需求方向，实物申赎/套利/最终持有人边界使其不能称机构或散户资金；日披露不消除产品选择偏差。官方入口未补齐连续多ETF份额/NAV链，未新增卡或替换龙虎榜。旧investor-observation-map/C13保留，不重复采集。
+- 原前端owner完成三源码局部中性灰和四种纯描述状态，主控实看首页/详情rgb107,107,107、原数据SHA不变、无错误遮罩/溢出和回焦点。邻组件中间态Vite遮罩失败截图保留，恢复后验收；未写他人源码。
+- 本轮raw/gemini-review-20261103的brief/attempt-ledger/controller-final-verification/report-http-verification为入口；协议SHA480e09e464d46fd6aaebe1a2ec052561fd8eaa2e2d6d033d8f97dca64a484b83，独审verification SHAbdb86291b28d281e8f3b8b4d1ac2c0e430e61ec9090c48caea26b864e43323d5。原three-modules报告追加§6，旧13611字节保留，当前SHA8024f1cecdf9c73e9b0fa414a01f303b30b14d12c13b5dfb20be0cc7a461d7d5；资料库HTTP200全文核同，归置exit0。
+- 实际来源6/6、旧账诊断1、新账户批1含先4一致性及12新路径累计16、独审1、另6人工runner状态边界；0调参/付费/交易。48输入85输出SHA、16保存日账重建差0元；新特征/时点/全部年度/固定阶段独核一致。旧全部预算及失败保留，不重开本批追正结果。
+- 最初4一致性运行未预存源码SHA、后版为重建，最终original复用旧账，不能夸成4瞬时模拟原件完整独存。新12代码与回执SHA一致。合成卖出沿用delayed_bought标签但side正确，真实路径无该情形，数值不受影响。核算器year/period首失败、两合同绝对路径预检失败、一次协调引用并发推进导致写前断言停止，均保留；无额外市场路径或强推。
+- 外盘固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9，LeiSignal-新实验结果/market-increment-map-20261102/market-increment-map-20261102-20261103T233018-5b72c55de6a9/result/account见storage-plan。保留历史选择/成分/实际到达与成交限制；未测完整Mregime/滚动HWM/独立下行目标/每日EMA退出。
+- codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享脏区保持。源码/报告/证据仅本地与外盘，远端不可独立复现；仅本状态元数据正常推送读回。无部署/自动刷新/策略变动/删除/强推。本轮限定问题已答，无本批后台工作或必需未完检查。
+
+---
+
 # Gemini建议有界复核 — active
 
 - 原task market-increment-map-20261102 / owner 01a19ce6-5541-7071-9f17-f78b42235a0c/root；scope_released=false；checked_coordination_sha 26ba1320906c70dcbb5d122d4ac27e10b23b7083；checked_at 2026-11-03T23:30:18.438712+08:00；已读COORDINATION1.1/self/cross-market-risk-context/research-dispatch-controller/investor-observation-map，ETF份额旧来源仅季度，未接管他线。
