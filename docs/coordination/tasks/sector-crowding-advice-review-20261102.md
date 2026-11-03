@@ -1,3 +1,12 @@
+# ETF情绪图读法补齐 — active 2026-11-03T20:39:32.792288+08:00
+
+- 原task/owner延续，scope_released=false；checked_coordination_sha 85f693c700f9f8cbe00df393d42948fe077ec374；已读自身、cross-market-risk-context、market-increment-map最新范围，沿此前COORDINATION及controller/sentiment记录；仅本组件无同写，不改首页其他owner路径。
+- 用户反馈P88及菜单指标未解释：本轮在图旁展示数值所属比较、越线与线下含义、各分项用途和当前读法；把P88明示为近1/2年平均历史分位的高活跃/偏离参考，不称通用拥挤或买卖线。高低解释依指标区分，旧热度排名/z/状态分开。
+- root唯一写 web/src/components/etf-sentiment/{EtfSentimentComparison.tsx,etf-sentiment.css,metricReading.ts}，本raw/reading-guide及原progress。一名原Sol只读审核源公式与解释，无文件写；已留合同预检。所有数据、指标公式、阈值、原报告及交易保持。
+- 小型桌面UI补修，0新研究/行情/联网来源/付费，沿累计预算；已有验证只针对受影响解释与布局重验。源码仅本地，协调只自身元数据。
+
+---
+
 # ETF价格与情绪联动图 — completed local 2026-11-03T20:35:46.644014+08:00
 
 - 原task sector-crowding-advice-review-20261102 / owner 01a19cde-a99b-7ad0-adbc-99471b24208d/root；status completed_local_fixed_snapshot_visualization；scope_released=true。checked_coordination_sha 32373a3ab3b5e3f31c9c8e6ec34a5eb226f4c66f；checked_at 2026-11-03T20:35:46.644014+08:00；交付前fetch/read self、cross-market-risk-context、market-increment-map、sentiment-factor-research、research-dispatch-controller，沿已读COORDINATION。其他owner目前改首页industry-structure/IndustryTimeline与自有研究，本方仅情绪页新组件/自身数据与报告，无同写。
