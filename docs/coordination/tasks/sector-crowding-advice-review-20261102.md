@@ -1,3 +1,11 @@
+# 范围追加：行业旧页撤出当前看盘 — active 2026-11-03T20:45:02.116582+08:00
+
+- 用户新增截图明确“没有帮助可以删”；只读审计已完成，2026-08-16提交2200eaa6首次加入SectorsPage，git身份不能证明具体AI。原价格快照10/15、生成11/2，刷新仅重读文件，当前看盘用途不足；旧阶段/成分映射仍可保留历史查询。
+- checked_coordination_sha 4937ba5f5425e1e62df218af494f3db6040ad48d；已读investor-observation-map（10/4已发布入口块）、lei-technical-reader-research（暂停）、market-observation（归档）、market-style-observation（10/31释放），当前cross-market仅行业结构组件，不同写。此轮root唯一增加TopNav.tsx仅移除/sectors入口、SectorsPage.tsx默认历史入口及旧表按需展开/刷新改重读、SentimentPage.tsx移除当前引导且历史链接准确命名。逐文件备份现存dirty，不整文件覆盖，不改他人首页块。
+- 原情绪读法范围继续。无数据删除、后端/策略改动、研究重跑或新联网来源；旧路由保留防断链。两原Sol只读小问题均完成，root负责实现与验收；源码仅本地。
+
+---
+
 # ETF情绪图读法补齐 — active 2026-11-03T20:39:32.792288+08:00
 
 - 原task/owner延续，scope_released=false；checked_coordination_sha 85f693c700f9f8cbe00df393d42948fe077ec374；已读自身、cross-market-risk-context、market-increment-map最新范围，沿此前COORDINATION及controller/sentiment记录；仅本组件无同写，不改首页其他owner路径。
