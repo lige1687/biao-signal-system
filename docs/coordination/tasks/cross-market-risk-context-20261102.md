@@ -1,3 +1,11 @@
+# 时段差值中性呈现 — active 2026-11-03T23:33:13.554093+08:00
+
+- 原task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=false；checked_coordination_sha 5a4f14ec38767407c1f874b451d9e8f7743b75da；checked_at 2026-11-03T23:33:13.554093+08:00。已fetch并读COORDINATION1.1/self/market-increment-map-20261102/controller；原owner传达用户Gemini审查，资金/ETF来源另归其负责。root唯一前端写者。
+- 仅三路径同目录incrementObservationData.ts/IncrementObservationCards.tsx/incrementObservationData.test.mjs，及本任务raw/session-neutral-20261103和work-progress。差值统一中性灰，双负正差不暗示机会；四象限只描述两段涨跌，零/缺失中性。原准确标题可保持。小图读数/大图差曲线统一，v2包及时间、机构卡不动，不新增份额卡。
+- 局部验收四正负组合/零/缺失文案与中性呈现，当前+4.07卡和详情实际颜色、来源SHA不变；相关检查/tsc。无新研究/取数/付费/策略/部署/删除；小改root直接完成，无新代理。基线原codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9及既有脏区保留，源码仅本地。
+
+---
+
 # 隔夜日内与机构披露两卡接入 — completed local 2026-11-03T20:59:38.188970+08:00
 
 - task cross-market-risk-context-20261102 / owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=true；checked_coordination_sha 09213de663ac7742d763b370cef26ebfc4a9d961；checked_at 2026-11-03T20:59:38.188970+08:00。完成前fetch并读self/market-increment-map-20261102/controller，沿本轮COORDINATION1.1；原数据/研究owner边界不变。
