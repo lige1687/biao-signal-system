@@ -1,3 +1,13 @@
+# 行业独立栏接入与焦点图可读性 — active 2026-11-03T10:25:08.674114+08:00
+
+- 原task/owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root；scope_released=false。checked_coordination_sha f5a081df031e6d959669b015516cd599bcd8f012；checked_at 2026-11-03T10:25:08.674114+08:00；已读COORDINATION/self/market-increment-map-20261102/focus-stock-universe-20261024/research-dispatch-controller；相关实现者均明确释放。本地基础 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，共享脏区保留，不源码提交/部署。
+- 已获用户指定首页市场速览A股下行业独立栏，来源任务明确交接十行业核验数据，不重做研究/取价。原生图表、排名、日期/范围/非每日更新状态，系统内大图；不加美股/CFTC、不用iframe。root写market-observation-alerts/index.tsx/style.css和本任务记录；frontend唯一写新IndustryStructure.tsx、industry-structure.css、industryStructureData.ts、industryStructureData.test.mjs与web/public/research/industry-structure/cn.v1.json。
+- 用户最新修正焦点不需延长数据；要求缩放与替代密集点，并核机会/风险是否以0为界、机构读法。earnings唯一写focus-momentum/price-projection.tsx/css及新chart交互helper/test，root唯一写focus-momentum/overview.tsx。本轮保留默认一年与1/3/5/all，支持明确缩放操作与独立事件标记；不改20日、前5%、股票范围、数据/阈值/交易。原focus源只读。
+- root核机构用法为report_only，复用原焦点实证负结论；本次用户新增来源核对最多6次web工具（含失败），0新实验/收费/数据采集。旧6+4、18/16超限、10/10、3/4各阶段累计不重置。
+- 代理合同在industry-focus-20261103，各自唯一写者，max_agents=2；root独立核数据字节/图表交互/日期/来源/TS。小产物预计<5MiB；只读已核UUID外盘原件；不删除/强推/重启/自动刷新任务。
+
+---
+
 # 用户可见信息与图例清理完成 — completed local 2026-11-03T00:31:16.511032+08:00
 
 - 同task/owner；status completed（本轮展示维护），scope_released=true（本轮14个源码/规范及自有记录）。checked_coordination_sha 0caa97c82f76194a190d807936221b92a008d848；最新自身记录一致，沿本轮已读COORDINATION和相关已释放owner范围，未修改他人文件/任务。基础分支与源码提交仍18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，本轮源码仅共享本地，未提交/推送/部署。
