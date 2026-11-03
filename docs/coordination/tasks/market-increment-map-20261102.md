@@ -1,3 +1,13 @@
+# Gemini建议有界复核 — active
+
+- 原task market-increment-map-20261102 / owner 01a19ce6-5541-7071-9f17-f78b42235a0c/root；scope_released=false；checked_coordination_sha 26ba1320906c70dcbb5d122d4ac27e10b23b7083；checked_at 2026-11-03T23:30:18.438712+08:00；已读COORDINATION1.1/self/cross-market-risk-context/research-dispatch-controller/investor-observation-map，ETF份额旧来源仅季度，未接管他线。
+- 用户提供Gemini反驳要求看看，沿已授权三模块研究核旧账因果解释、两项宽度半仓覆盖及ETF来源语义；生产策略不改。前端只请求原owner把双负差值中性灰及四象限纯时段文案，不接受吸筹/寻底推断。
+- root唯一新raw/gemini-review-20261103及原three-modules报告附录；Sol只新diagnostic，Astra只新method，实际账户执行另冻合同；旧原件/封存账只读。根分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，dirty保留；成果仅本地，远端不可复现。
+- 新阶段6来源上限、1账户批次最多16路径(2覆盖+固定半宽度+原基准核验×2ETF×2费)、1旧账诊断、1独立复核；0调参/付费/交易/自动更新/部署；前阶段19来源/8sessionfits/8sectorfits/16accountpaths不归零。
+- 输出由本stage/storage-plan定位，固定UUID已核，预计外盘64MiB、本机8MiB；验收待执行，不冒称纠正旧回测。
+
+---
+
 # 三模块有界验证及首页原生观察接入已验收 — completed local
 
 - 原task market-increment-map-20261102 / owner 01a19ce6-5541-7071-9f17-f78b42235a0c/root；status completed_bounded_question；scope_released=true；checked_coordination_sha 1edc208394b8d792d4220d58c678fedb88df58ab；checked_at 2026-11-03T21:01:31.417237+08:00；交付前fetch并读self/cross-market-risk-context/controller，沿本轮COORDINATION1.1与报告登记已释放范围。未接管他线。
