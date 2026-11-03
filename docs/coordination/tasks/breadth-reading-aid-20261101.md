@@ -1,3 +1,12 @@
+# 美股双轨首页与国债期限观察 — active 2026-11-03T23:31:38.539941+08:00
+
+- 同task/owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false；checked_coordination_sha 99cdca3729881af8005852446eb79866405d68f1；已读COORDINATION1.1/self/cross-market/focus/controller，相关范围已释放。用户已明确授权美股1.5σ/2σ展示首页和价格对照，并沿专业研究探索5年/10年国债用途。服务观察/估值背景层，策略原件SHA一致，不改交易规则。
+- root唯一写web/src/components/observation-library/ErpCrossChart.tsx、projectionView.tsx、metricData.ts、catalog.ts、erpCrossChart.css；market-style/CrossMarketObservation.tsx；market-observation-alerts下新增UsErpCard.tsx/us-erp-card.css及index.tsx。若不必要不修改。math助手只新增observation-library/usErpBands.ts及usErpBands.test.mjs；source助手只写us-sigma-yields-v13/yield-source-review.md与yield-source-ledger.json。无写权交叉。
+- root另写原综合报告、registry自身键、work-progress及v13 QA。历史资料复用原ERP与价格请求；不改现有CN计算/原2σalert/数据缓存定义。美股单独明确本地此前3自然年均值/总体标准差，仅1.5/2固定候选；具体缺测、同日价格和不含未来测试。桌面首页小图阈值/同页大图价格同步和选择回归验收。
+- 新来源最多6请求（source4/root2）含失败，0新收益实验/搜参/付费；旧28累计保留。5年/10年先研究信息用途与本地可用性，禁止无理由叠加重复指标。共享dirty18e64fa保留，源码不提交部署；新产物小于5MiB，保留内盘5GiB，无手机/删除/强推。
+
+---
+
 # 美股股债收益差依据复核 — completed report-only 2026-11-03T23:27:17.730426+08:00
 
 - 同task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true；checked_coordination_sha 0bb79ab70ddbbce3c8308f89338aaf959f939fb1；checked_at 2026-11-03T23:27:17.730426+08:00。交付前已fetch并读self/cross-market/focus/controller最新段，沿COORDINATION1.1。释放仅本轮报告/registry自身键/progress/QA，不涉及UI或数据范围。
