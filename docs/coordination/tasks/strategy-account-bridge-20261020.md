@@ -1,3 +1,13 @@
+# A股金融机制与现有因子组合优先级纠偏 active 2026-11-03T10:15:10.301489+08:00
+
+- 原task strategy-account-bridge-20261020 / root；用户指出A股普通动量默认选题不当，要求从现有因子的金融含义挑组合。本轮问题是校正动量/反转边界，核现有因子、旧负结果及可用资料，选少量有互补理由且未重复的候选；不是继续MR寻优。
+- checked_coordination_sha 92a6a388c68785dd513267cd4fffaafd9829375b；已读COORDINATION/self/dispatch/research-utility-review/personal-lowfreq/market-style。小盘反转、残差动量和各资料owner范围保持；不接管或重跑。源码共享dirty base18e64fa632dba5dbad0e5fcae09b4ccc75f119a9不重置，仅自身协调正常推送。
+- 唯一新写 docs/experiments/cn-mechanism-combination-priorities-2026-11-03.md、同名raw、registry本键、INDEX本行、自身progress。root写报告/小记录；一位GPT-6.1 Sol medium只读定义/报告/资料实现，写raw/catalog-audit.json；一文件一写者。原定义登记/组合profile/生产/前向/冻结结果全部只读。
+- 先完成金融理由与现有证据的选题审查：最多6来源请求（已2query），不新增行情/安装/交易；本轮0预定市场回测，不为证明方向有意义强跑资料不合格或旧负结果。若发现真正可执行、能改变当前排序的必要新检验，另在原记录中冻结其准确范围后执行，累计预算不重置。报告小记录预计<1MiB，内盘>5GiB，外盘新写0。
+- 验收准确的A股动量边界、金融机制/反例/因子真实身份、已有表现与最强简单对手、组合提供什么新信息、适合/不适合的池、当前能做及具体缺件；不由论文故事或因子数量推断有效，不自动新增前向。
+
+---
+
 # 中期强度与近期偏冷联合选股：有界研究完成 2026-11-03T00:50:10.285225+08:00
 
 - task-id strategy-account-bridge-20261020，owner原root；status completed_bounded_question；scope_released=true仅本轮非冻结报告/分析实现；原策略代码/配置/源资料和冻结结果保护保持。用户授权的本轮完整账户与组合增量问题已回答，未把整个策略发现工程宣称完成。
