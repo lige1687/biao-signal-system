@@ -1,3 +1,13 @@
+# 焦点图定位与中性配色 — completed local 2026-11-03T11:20:06.997491+08:00
+
+- 原task cross-market-risk-context-20261102/owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root 不变；status completed，scope_released=true。checked_coordination_sha dcfd6b9164b8019ac98027b87835eca8f0d7300b；checked_at 2026-11-03T11:20:06.997491+08:00，交付前已fetch，沿本轮COORDINATION/self/focus-stock-universe/research-dispatch-controller核范围；无他人写入冲突，earnings只读审阅已释放，root四文件及自身记录写权释放。
+- 用户拒绝的悬空事件短线已移除：5年/全史突出一个选中日期，两图同日竖虚线/圆环及明确日期、价格、动量读数；下拉/前后事件和附近约60个交易日可定位，短窗保留可点其他穿零三角。空事件窗口可前后跳最近事件，滚轮/连续拖动保留。正文炭灰、价格石墨、动量灰紫、控件淡橄榄，正负事件青绿/赭橙；只改焦点大图，未冒称全站改色。
+- 14定向测试和最终tsc通过；root桌面1215实验五年/局部/空事件窗跳转/滚轮/连续平移与冷载入，0新增console错误、0横向溢出。实例2024-09-19上下同日，沪深3003196.04点/动量0.33%；单步平移完整移动区间。保留开发失败：预检绝对路径拒绝后改相对路径ready；Array.at不兼容修正；HMR引用及初始化错误已修；拖动重建dataZoom改为仅更新标注，冷载入复核。独立review原发现空窗按钮问题已修。
+- 证据 docs/experiments/raw/cross-market-risk-context-2026-11-02/focus-event-reading-20261103/{acceptance.json,review.json,scoped-changes.patch,browser-proof.json,final-browser-check.json,focus-five-year-final.png}；acceptance SHA a4a4b062cc55b2db31e482df02da6217f4a93aaf2707c3c762e50353871ebf40。工作进度已追加；源码4文件仍仅本地，基础分支/commit沿前版，未源码提交、部署或重启。
+- 数据/20日公式/0正负语义/阈值/原研究结论/行业页面不改；0新研究/取数/交易/手机检查，旧预算全部保留。纯UI小证据现约3.8MiB（主要隔离Git索引，较预估2MiB增大），复用该索引完成协调，不另建构建目录、不删除资料。无后台任务。
+
+---
+
 # 焦点图定位与中性配色修正 — active 2026-11-03T11:09:27.631913+08:00
 
 - 原task cross-market-risk-context-20261102/owner 01a19c57-958b-7f80-b71c-7932e5dcbe4f/root 不变；scope_released=false。checked_coordination_sha 77a224dff6428f1540c88ad1c5702fea381f16b5；已读COORDINATION、自身、focus-stock-universe-20261024、research-dispatch-controller最新记录；原前端与焦点代理均完成释放。唯一root写下列4文件及自身证据进度，earnings只读审阅并写自己review.json，无他人写权重叠。
