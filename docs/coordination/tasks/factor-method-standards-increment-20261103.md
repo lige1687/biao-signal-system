@@ -1,3 +1,13 @@
+# AI账户研究证据预检增量 — active 2026-11-04T22:21:15.302016+08:00
+
+- 同task/owner root；scope_released=false，仅本轮新文件与既有入口窄接线。用户要求有用规范后续AI复用，并问哪些可落实；沿授权补一项只读检查，不重跑金融实验。
+- checked_coordination_sha=2acf328315585273c74fb7304bd242b3c119baaa；已读COORDINATION、本任务、strategy-account-bridge-20261020、research-dispatch-controller、ai-quant-practice-integration-20261101、research-method-practice-20261031、gemini-factor-fit-20261104；相关范围均释放，本轮无同写。共享dirty与分支codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9保持。
+- 新范围：src/lei_signal/research/research_account_evidence_review.py、tests/unit/test_research_account_evidence_review.py由Sol唯一写；root唯一写preparation.py可选参数接线、playbook新增工程审阅段、lei-lowfreq-research/references/failure-cases.md、docs/experiments/ai-quant-account-evidence-review-2026-11-04.md及同名raw、registry自身键/INDEX自身行、原progress。旧冻结原件、引擎/真实账户/生产与策略文档不动。
+- 预检仅核明确月历与共同收益覆盖、声明简化费用恒等式、异常分支覆盖；缺月禁止完整连续指标并给片段，固定比例不作通用门槛。原试验史/样本已见账继续复用，不新建锁箱权限平台。不授予执行、独立样本或科学有效资格。
+- 验收：合成正常/缺月/错费/缺证/目录越界案例；可选准备入口实际输出及旧行为相关回归；输入指纹、范围/链接/报告读回。严格定义source schema已知13失败保留，不扩大修复。源查询与旧预算累计保留，0新金融实验/下载/付费/交易；小代码与记录本机，5.7GiB可用，预估新增低于512KiB；源码仅本地未提交推送。
+
+---
+
 # 因子研究标准增量整合 — completed 2026-11-04T00:00:33.437622+08:00
 
 - 同task/owner；status completed_bounded_method_integration；scope_released=true（本次三处非冻结新增段及自有登记）。checked_coordination_sha 93091e164acb1bfc9b39141e16aa7bc9a46bfcce，重读最新coordination差异仅breadth-reading-aid与market-increment-map自身范围，无同写。
