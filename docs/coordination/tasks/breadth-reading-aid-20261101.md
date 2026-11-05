@@ -1,3 +1,16 @@
+# v15资料更新/v16美股σ检验/v17机构参照 — completed bounded with source gap 2026-11-05T19:47:58.727764+08:00
+
+- task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true，仅本阶段登记路径。checked_coordination_sha 8f7c6b9fc0b2004d0141be53cf0969a1c84b066d；已fetch/read self/focus/cross-market/controller最新段，focus已completed，不碰其源/报告；原controller completed不接管。
+- 四项历史补齐并在本机运行：CN11/2—5新增4点、旧1302全保留，US11/2—4新增3点、旧11733全保留；CN独立原始批次×窗口复算accepted。两市ERP同定义新运行副本到11/4（5.7449/−.94），CN51锚点、每周一个最新已公开点，旧mcw周史不与月频PE拼接。实际前端轮询与backend路由已生效，新launchd com.lei.market.observations真实2次up_to_date退出0，30分钟检查/失败4小时重试；保留旧jobs、备份、技术资格。scripts最终归现有scripts/launchd/，无白名单修改。
+- 两市ERP每日价格主图/可见纵轴/清晰双轨；US手动slider放大2019-12—2020-10，双图同日上穿原点可见，切1.5/2保持缩放且日期刻度随时间轴变密。共用宽度/投影/小曲线参考线增强，实际桌面1280×900；临时viewport恢复，无手机。首页PE/集中度两卡已实际加入，阈值、来源、日期/集中度待核直显，原报告链接实点读取v15/v16/v17后回首页。QA/root-review/sourceSHA/browser-proof及截图在v15/v17。
+- v16固定核心1批、0新源/0搜参，不复跑。91生产TS/Python事件身份一致，主控独立63日标签/分组/均值/价格基准及期间最差损失一致。上1.5/2各3次+5.83/+4.57%，对同价格状态+3.57%，差+2.26/+0.99pp，事件仅2日历块不能给稳健区间；下1.5为9次差−3.50pp且区间跨零，下2为6次差−.04pp。2020反例期间−25.50%。不足以升格可靠择时；PIT和账户效果未评价，旧负结果保持。
+- v17机构原文支持PE历史封闭期P25/P95配置方法，前端明确本地2006-11起月频代理、非原阈值复刻；集中度BOC反对机械45%变盘，需结合总成交额。本地月频P10/P90只称集中程度。新增文献7次（含失败），旧34合计41，旧其他owner6另列。
+- 集中度补数据**未完成**：离线补136股票日后仍12只46股票日未知，12次源请求全部失败；旧129月84有效45空值保持，未追加10月、未填0或删退市股票。运行副本只加真实待核状态，10月来源缺口是明确边界。本有界文献/资格问题结束，不把源失败包装为模型有效或全部缺测修完。v17provider capacity失败后核部分路径并由root直接继续，未换执行器/模型。
+- 55后端定向、32前端函数检查、最终TS/Ruff/归置通过，Vite内存构建通过；原报告SHA a610f0ecac70ae2dc033d4d1240732adef0e4133a258c3cf3ea9ffaedd75035a、registry只自身键（833其他项保护）、progress已追加。源与产物仍在共享dirty18e64fa本地，未源码提交/部署/交易/通知，远端不能复现本地成果；本次只推本task协调元数据。无运行中助手，授权资料job真实保留运行，不声称所有市场组件自动更新。
+- 存储按Nov5已授权闲置可再生cache先核源未变/lsof/外盘SHA副本再移除；没有删会话/应用/环境/冻结/持仓数据。即时余量变化不等于名义移除字节；最后实测8.10GB且下一更新预检ready，原件/恢复回执保留。原始资料与结果在固定UUID外盘，失败/尝试/版本记录不覆盖。
+
+---
+
 # 首页指定两指标阈值接线 — active 2026-11-05
 
 - 同task/owner/scope_released=false；checked_coordination_sha f0ed01135fa5a88c423d1772267a4a272581d83f。root追加唯一写web/src/components/market-observation-alerts/ExtraCandidateCard.tsx：实际首页候选卡使用此组件，不经过ObservationMetric；复用v17同一阈值helper与来源，不另算不同阈值。其他卡行为保持。
