@@ -22,3 +22,12 @@
 - blockers: none; storage plan required before output.
 - source results: external cn-profitability-risk-v2-20261104/20261104T003628/fine-result, read-only with new hashes bound before comparison.
 - next: implement bounded reusable review, reconcile saved evidence, archive quantitative result.
+
+## 2026-11-05 continuation and storage policy authorization
+
+- checked_coordination_sha: f8e4a60e5a13257f463440aa30c4a82e69583de8; checked_at: 2026-11-05T18:34:11.899743+08:00
+- read_tasks: previous four plus mac-local-storage-cleanup and storage-headroom-20261015. Prior storage task completed; no active code writer declared. User now explicitly authorizes changing project policy and bounded cleanup when below5GiB. Historical frozen scripts remain untouched; source change is an explicit new output_storage version.
+- added write_paths: AGENTS.md; docs/ops/research-output-storage.md; docs/ops/codex-storage-management.md; configs/research-output-policy.v1.json; src/lei_signal/research/output_storage.py; tests/unit/test_research_output_storage.py; src/lei_signal/research/factor_combinations.py; docs/literature-learning/learning-seed.json; docs/literature-learning/READING.md; docs/literature-learning/buy-side-learning-sources-2026-11-05.md. Own report filename now buy-side-method-increment-2026-11-05.md.
+- unique writers: helper owns incremental_portfolio_review.py and its new test; root owns all other listed paths. No concurrent changes to helper paths by root after dispatch.
+- storage behavior: below5GiB prompts agent to reclaim verified reproducible idle caches or archive verified inactive recoverable products to fixed external disk, then recheck and continue. Do not stop at capacity error or ask again within authorized cleanup scope. Preserve datasets, frozen evidence, databases, sessions, environments and uncommitted work. Plan-only remains read-only; errors expose recovery action instead of silently deleting. No daemon.
+- fresh capacity: about7.9GiB internal and445GiB external; no cleanup necessary now; no claiming space freed. Prior blocked plan and read-only computation preserved. Budget remains one saved-data batch, no holdings/backtests, external10MiB/internal2MiB.
