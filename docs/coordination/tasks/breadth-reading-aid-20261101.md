@@ -1,3 +1,13 @@
+# 四项市场资料自动更新与共性读图修复 — active 2026-11-05T18:41:11.721847+08:00
+
+- 沿原task/owner breadth-reading-aid-20261101 / 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false；checked_coordination_sha cccaa11431f576a9b23585502d56663ffc2fb993；已fetch/read COORDINATION1.1/self/cross-market/focus/market-increment/controller及全记录相关路径检索，相关源范围已释放。用户明确要求A/美股债利差、两市宽度自动续更，并修放大后价格太平、参考虚线太淡的共性问题。本阶段是资料服务与桌面显示工程，不重开收益研究，不改交易规则。
+- 根因已核：CN ERP静态周史截至10/30且Infinity query；US ERP后端至11/03前端无轮询，历史TTL24h；两市宽度皆止10/30。CN每日16:30任务有运行却因同日覆盖/复权变更/IPO与停牌资格要求失败不写；US候选续更工具未安装定时。CN旧周PE与一般rates日PE存在定义/源差，不盲拼新源。
+- root独占fundamentals下service.py/sources.py及新erp_refresh.py、api/routes/fundamentals.py、api/preheat.py；market_context/us_breadth_refresh.py及新observation_refresh.py；新scripts/refresh_market_observations.py与scripts/install_market_observations_launchd.py和对应tests；web的erpReferenceData.ts/projectionSources.ts、market-observation-alerts/index.tsx及adapters.ts等仅live接线。允许必要读取并有备份追加 ~/.lei_signal_lab/cache 四项运行资料、runtime状态和Library/LaunchAgents/com.lei.market.observations.plist，保留旧原件及服务。若旧CN任务运行中不杀任务或并发覆盖，另新模块与独立cache，安装前核无竞争。
+- 计划助手CN唯一写新src/lei_signal/market_context/cn_breadth_refresh.py与tests/unit/test_cn_breadth_refresh.py；UI唯一写ErpCrossChart.tsx/erpCrossChart.css、projectionView.tsx/projection.css、market-style/BreadthComparison.tsx、market-observation-alerts/MiniTrend.tsx，必要新增局部pure helper/test须先登记。主控不写助手文件至交回。精确合同另存本task live-refresh-v15。
+- root写原progress及v15 QA；本轮不改原金融研究报告/registry、不覆盖冻结raw/static参照。已有公开源取数续更是用户授权必要工作；新长表与原文走固定UUID外盘新目录，内盘小记录预算<=5MiB，当前6.43GiB，外盘445GiB可用已核。只追加合格已收盘日、保留所有既有记录；失败明示，后台重试受限速与单飞保护。0策略/通知/新收益实验/手机/源码发布/删除/强推。
+
+---
+
 # 美股价格主图与穿轨降密度 — completed local 2026-11-04T00:28:18.499203+08:00
 
 - task breadth-reading-aid-20261101 / owner 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=true；checked_coordination_sha b1ba8413140fa461efa355aed344513709a1ebd1；checked_at 2026-11-04T00:28:18.499203+08:00。交付前fetch/read COORDINATION1.1/self/cross-market-risk-context-20261102/focus-stock-universe-20261024/research-dispatch-controller；相关邻范围均明确释放。释放本阶段四个源码及自己报告/registry键/QA写权，无接管其他会话。
