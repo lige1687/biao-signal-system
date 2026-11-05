@@ -1,3 +1,18 @@
+# 买方方法接入与低余量主动恢复已完成
+
+- task-id: buy-side-method-increment-20261104；owner: root / chat01a1a6ef-35ef-7b02-8681-2dd40a202f89；status: completed_bounded_integration；scope_released: true（只限本轮源码/文档；冻结结果仍保护）。
+- checked_coordination_sha: 1db43be46f75ac7927442bf3257315e6bdb98466；checked_at: 2026-11-05T18:49:31.910654+08:00；已读此前所列任务及gemini-factor-fit、breadth-reading-aid新增范围，均无本轮同写重叠。
+- 用户11月5日要求低于5GiB先清理再继续，外盘优先，已改AGENTS/存储规范与machine-readable recovery动作；只读plan不静默删除，由当前AI核闲置/归档/复查。没有后台删除或自动通知。当前任务曾触发4.96GiB，盘点缓存后移除前恢复5.94GiB，0删除并继续，无重复确认。
+- 当前组合入口portfolio-review与23项边界检查落地；采用当前JKP/Tidy口径卡和AQR/Robeco/FactorBench限定方法，复用文献库24资料/33条/4路线，旧23/31保持。
+- 独立验收：31,872GP股票月值/身份映射一致，233零收益与5未知分开；9组保存比较最大差1.78e-15，5,124费用单元恒等式误差0，最终CLI输出一致。83相关测试、62整合通过；1外盘FIFO环境失败在本机重验通过；格式修正后23模块测试、Ruff/归置通过。测试集合有重叠，不把总次数当增量。
+- 金融决定：0新选股/回测/寻优/行情下载；FH30对G1既有25bp净增量+0.06025pp/月，旧95%区间[-0.109,+0.228]，仍不确定；不把旧收益归因新接入。未补完整PIT/成交/母指数，未改生产交易/前向账户。
+- 报告: docs/experiments/buy-side-method-increment-2026-11-05.md；SHA256:8012d4324c612662255140214db936fe3c1f4a24b8af85c994e599bd63670182。附件docs/experiments/raw/buy-side-method-increment-20261104含state、预算、inputs、verification、completion、限定diff；本机8000/5173报告及学习API读回一致，831旧报告条目保持。
+- 外盘固定UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9；结果LeiSignal-新实验结果/buy-side-method-increment-20261104/buy-side-method-increment-20261104-20261105T183446-ff6b74f3b3d6/result；<10MiB外盘和<2MiB本机新增预算通过。
+- 工作分支仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；源码/报告当前仅本地未提交，远端不能据此复现；只本协调记录推送。没有操作共享索引/强推/部署。
+- 范围内无待执行动作或用户决定；需要新合格证据时沿已有研究预算恢复。历史首次容量失败和所有测试/来源失败保留。
+
+---
+
 # Buy-side method increment 20261104
 
 - task-id: buy-side-method-increment-20261104
