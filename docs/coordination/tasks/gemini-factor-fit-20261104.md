@@ -26,7 +26,7 @@
 
 ## 2026-11-05 本轮资格已交付，效力研究资料阻塞
 
-- checked_coordination_sha: 6b407be1ca78fc62c4c395370f583f35354b732e；checked_at/updated_at: 2026-11-05T18:49:56.862093+08:00；交付前fetch成功，与本阶段开工后任务差异为空；相关任务读取与范围决定沿上节，未新增重叠。
+- checked_coordination_sha: 6b407be1ca78fc62c4c395370f583f35354b732e；checked_at/updated_at: 2026-11-05T18:49:56.862093+08:00；交付前fetch成功，本任务记录未被其他写者修改；远端另有breadth-reading-aid-20261101及buy-side-method-increment-20261104更新，已补读当前范围，两者仅各自实现/报告与登记键，无本轮研究同写。
 - 资格阶段completed，完整因子与账户增量blocked/not_evaluated；本阶段范围释放，无后台运行。原因是共同历史财报/预测版本缺失，不是因子被证明无效，也不是工程脚本通过等于策略成功。
 - 已交付 docs/experiments/earnings-candidate-readiness-2026-11-05.md、同名raw的contract/qualify/verify/summary/状态指针与ledger、registry本键/INDEX本行、docs/ops/work-progress/gemini-factor-fit-20261104.md。
 - 复算340 EPS事实/212季度行/70季终点/62当期同比对/39机械SUE；起始日漂移隔离后30期（其中9期有修订申报窗口），样例区间2011-09至2021-03。主控原件重建与只读代理、旧配对证据一致。
@@ -35,3 +35,5 @@
 - 累计本阶段6来源请求/3核算批/0收益实验/1只读代理/0付费，旧审查预算完整保留。外盘输出gemini-earnings-20261105-20261105T183624-b5e6ec6350e4/result；source-manifest.json绑定指纹。
 - 恢复条件：提供同财政目标/同会计口径的历史预期版本和发布时间、合格机构分母；或完整可比季度原件及共同历史池/价格。现有可执行资格核查已完成，不重跑旧审查、不调参追正。
 - 成果仍仅本地，未提交推送成果分支，远端只同步本任务协调文件，不能完整复现。
+
+- 协调摘要纠正：上一提交误写全部任务差异为空，实际另有上述两个任务更新；本次已读当前范围并纠正，原提交留在历史。
