@@ -1,3 +1,14 @@
+# 两项可选观察补数据和专业参照 — active 2026-11-05T19:01:55.757271+08:00
+
+- 同原task/owner，scope_released=false；checked_coordination_sha ba97cbd7de180e01b4e73dc94ee02abdad6ac2d1；已重读focus/cross-market/self，focus现在active只写focus-momentum/overview.tsx等自己的焦点范围，不冲突，本任务不碰该路径。前v15自动更新、共性图表和v16美股sigma检查全部继续；用户新指定成交集中度、沪深300 PE补资料和机构参照，新增v17有界问题。根因和旧负结果不丢。
+- 沿原报告定位：集中度为量化舵作者启发、本地BaoStock月度前5%成交额比率，84/129月有效、末09/2026；PE来自既有乐咕TTM接口，不由本任务发明。先复用旧v2聚合与缺口审计，不凭市盈率源名拼口径。
+- 新助手唯一写src/lei_signal/fundamentals/valuation_context.py和tests/unit/test_valuation_context.py；web/observation-library下ObservationMetric.tsx、concentrationData.ts、metricData.ts、projectionReference.ts、projectionView.tsx及新增marketReferenceBands.ts/.test.mjs，先接收已完成v15 UI写权，再只补这两指标资料和参考。root继续专有projectionSources.ts/route/service/refreshjob/index，避开助手路径；允许root只补新APIroute调用。原concentration静态参照和旧研究raw不改，合格新月候选供root核后独立livecache。缺日的真实状态、源差/不可比不得用0填或放松标准。
+- v17助手只读原作者报告、v2源索引和正在采集v15新WeStock原文，优先复用10月输入做连续新月候选；缺旧月要按原名单/状态/成交额精度核，不能以当前名单冒充完整全市场。候选不自动安装、无新预测实验。root核后可安装至 ~/.lei_signal_lab/cache/turnover_concentration_live.json 并读回。
+- 两个新问题各最多6文献来源请求：root已各3（共3搜索+3打开，含BOC过大/JPM404失败；同页find为已存内容定位），各剩3含重试。候选中银证券2026/6/7报告的前5%占45%日频观察、华泰紫金招募说明书历史封闭期PE全史P25/P95；必须核正文/频率/阶段，不以搜索摘录冒充通用有效阈值。专业参照与本地描述分位分别标注；不在月度图硬套日频45%或把低集中度当买点。v16来源0不变，既有累计34不重置；新两问题来源另计。
+- 输出v17小记录同task institutional-context-v17，原文/月份大结果v15固定UUID外盘新子目录。现内盘闲置更新包/HTTP与编译cache已先归档核SHA/无占用/源未变再仅移除精确缓存，当前8.45GB，原资料/环境/会话保留；回执在v15。0交易/通知/手机/生产阈值变更/源码发布/强推。
+
+---
+
 # 自动更新/读图修复附加美股σ观察效力核验 — active 2026-11-05T18:46:03.864454+08:00
 
 - 同task/owner，scope_released=false；checked_coordination_sha 3c4b5bb717259d79200dfeb1593ad250f8a51a66；相关负责人当前已读且无新增同写。此前v15根源与显示修复范围继续，本次用户新增“美股上穿不标点、预测/观察准确度”，沿原任务增加有界研究，不取消自动更新。策略叙事层用途，不能把价格图上的转折外观当预测；采用research-closure research和项目current-standards现版本，原旧冻结保持。
