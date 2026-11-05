@@ -1,6 +1,6 @@
 # Gemini中美因子适用性审查
 
-- task-id: gemini-factor-fit-20261104；owner: root/01a1a584-2813-7b42-8cd6-f181e79f1f8c；status: completed；scope_released: true。
+- task-id: gemini-factor-fit-20261104；owner: root/01a1a584-2813-7b42-8cd6-f181e79f1f8c；status: active；scope_released: false。
 - updated_at: 2026-11-04T16:02:00+08:00；checked_coordination_sha: 7ea670559f127b4c2baf24fe9dad556315bac91a；checked_at: 2026-11-04T16:02:00+08:00。交付前已fetch核对，已读COORDINATION、classic-factor-research、research-dispatch-controller、market-increment-map-20261102及本任务；没有新增同写。
 - 用户问题：Gemini所列中美因子是否已有、能否复刻、对个人低频宽基/ETF系统是否有增量。范围为七项资料/代码/旧证据审查；没有新行情下载、金融回测、生产或交易改动。
 - 基线：codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，共享脏区保留。研究产物仅本地，未提交/推成果分支，远端不可完整复现；本记录仅为协调状态。
@@ -13,3 +13,13 @@
 - 失败留痕：预检绝对路径两次拒绝、否定network关键词一次拒绝，改为相对路径/明确local-only后ready才派发；FIP旧域跳转失败后作者新域成功；T&F/SSRN完整页403，没有冒称全文已读；猜测summary路径不存在，改读已存在原产物。
 - 依赖：新效力研究仍需对应PIT财报/预测/名单/分钟数据和完整执行规则；本次采用问题已回答，无待执行必要核验，不存在后台任务。
 - 历史：初始登记7ea670559f127b4c2baf24fe9dad556315bac91a已逐字读回；初始00:00日期占位在本版改为交付时点。本地状态含准确工具时间和来源指纹；没有上传用户附件或金融原件。
+
+## 2026-11-05 盈利数据与候选接续
+
+- checked_coordination_sha: 27aa9b5d689e78c98b3e09913eba7c726688671e；checked_at/updated_at: 2026-11-05T18:41:53.040488+08:00。已读COORDINATION、gemini-factor-fit-20261104、pro-advice-process-review-20261020、lowfreq-strategy-discovery-20261019、classic-factor-research、research-dispatch-controller。
+- 授权：用户“可以的，开始吧”，接续盈利超预期与分析师预期修正的数据资格和可算候选；不改生产、交易或旧冻结。原审查仍为completed，本阶段active。
+- 基线 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；脏区保留，成果尚未提交或推送，仅本地。
+- 唯一写者root：docs/experiments/earnings-candidate-readiness-2026-11-05.md；docs/experiments/raw/earnings-candidate-readiness-2026-11-05/**；registry.json仅本键；INDEX.md仅本行；docs/ops/work-progress/gemini-factor-fit-20261104.md。仓外原任务earnings-stage-20261105和独立外盘输出属本任务。
+- 重叠决定：季度财报旧负责人已完成释放；复用原件和验收，不改旧产物。唯一Sol只读原财报，network=false、write_paths=[]；不与其他研究重复运行。
+- 验收：来源指纹、连续八个先前季度分母、同申报配对和保守SEC时点、预测财政期/历史版本/机构分母资格；可算和可回测分开；绩效与增量缺失明示；登记及归置读回。
+- 新阶段预算6次来源工具请求、4批有目的核算、1名代理、0付费；旧阶段4来源/1合成/0收益实验保留，未重置。外盘身份已核；原件与新JSON留外盘，内盘小报告。
