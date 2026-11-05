@@ -1,3 +1,11 @@
+# 首页指定两指标阈值接线 — active 2026-11-05
+
+- 同task/owner/scope_released=false；checked_coordination_sha f0ed01135fa5a88c423d1772267a4a272581d83f。root追加唯一写web/src/components/market-observation-alerts/ExtraCandidateCard.tsx：实际首页候选卡使用此组件，不经过ObservationMetric；复用v17同一阈值helper与来源，不另算不同阈值。其他卡行为保持。
+- 两个新后台脚本最终归置scripts/launchd/refresh_market_observations.py及install_market_observations_launchd.py；scripts/runtime不在既有目录白名单，已将本任务新脚本再归置现有launchd目录，不改白名单/他人脚本。launchd新job已实际up_to_date并保留plist备份。
+- 集中度10月离线复用补136股票日后仍12股46股票日未知，12次定点源请求全部失败（含1次超时），保留原件/失败，不编造新月份。仅在独立live文件中保留旧129点并新增真实待核状态，原45缺月不填0。PE机构方法只作为本地月频分位参考。
+
+---
+
 # v15/v17主控继续与路径归置 — active 2026-11-05
 
 - 同task/owner，scope_released=false；checked_coordination_sha dba58e0746099bd20e267a84299796e56519a03e；已fetch并核self/focus，焦点新price-projection独写，无冲突。v17助手provider capacity失败，核新模块/测试/外盘产物未创建，现有允许路径纳入root接收核查；主控直接继续原授权，不更换助手/模型。原合同/失败保留。
