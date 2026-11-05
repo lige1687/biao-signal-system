@@ -1,3 +1,11 @@
+# v15/v17主控继续与路径归置 — active 2026-11-05
+
+- 同task/owner，scope_released=false；checked_coordination_sha dba58e0746099bd20e267a84299796e56519a03e；已fetch并核self/focus，焦点新price-projection独写，无冲突。v17助手provider capacity失败，核新模块/测试/外盘产物未创建，现有允许路径纳入root接收核查；主控直接继续原授权，不更换助手/模型。原合同/失败保留。
+- root接收原v17全部已登记写权，root继续原v15/16；两个新脚本归置到scripts/runtime/refresh_market_observations.py、scripts/runtime/install_market_observations_launchd.py并改相对根目录，原scripts根下本任务新脚本移动；不为绕过归置规则加白。新增原UI UsErpCard.tsx只补本次已验sigma结论链接与短说明。
+- CN刷新助手进入新只读独立验收合同contract-cn-acceptance.json，仅写live-refresh-v15/cn-independent-acceptance.json，无网络/安装；上次全量采集已ready4日。其他助手已完成；主控负责新候选安装和实际后台/桌面验收，不重开金融核心批或扩来源预算。
+
+---
+
 # 两项可选观察补数据和专业参照 — active 2026-11-05T19:01:55.757271+08:00
 
 - 同原task/owner，scope_released=false；checked_coordination_sha ba97cbd7de180e01b4e73dc94ee02abdad6ac2d1；已重读focus/cross-market/self，focus现在active只写focus-momentum/overview.tsx等自己的焦点范围，不冲突，本任务不碰该路径。前v15自动更新、共性图表和v16美股sigma检查全部继续；用户新指定成交集中度、沪深300 PE补资料和机构参照，新增v17有界问题。根因和旧负结果不丢。
