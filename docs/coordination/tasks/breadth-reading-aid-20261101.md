@@ -1,3 +1,13 @@
+# 自动更新/读图修复附加美股σ观察效力核验 — active 2026-11-05T18:46:03.864454+08:00
+
+- 同task/owner，scope_released=false；checked_coordination_sha 3c4b5bb717259d79200dfeb1593ad250f8a51a66；相关负责人当前已读且无新增同写。此前v15根源与显示修复范围继续，本次用户新增“美股上穿不标点、预测/观察准确度”，沿原任务增加有界研究，不取消自动更新。策略叙事层用途，不能把价格图上的转折外观当预测；采用research-closure research和项目current-standards现版本，原旧冻结保持。
+- UI助手新增唯一写web/src/components/observation-library/erpVisibleMarkers.ts及.test.mjs，合同另存新阶段；用可见日期选原始事件，修手动缩放后组代表在区间外导致真实穿轨无点，并在上下两图同日标记。root不写其路径。原六UI写权仍归同助手。
+- root增加原报告docs/experiments/breadth-erp-ma200-increment-review-2026-11-02.md与registry自身键、v15/progress；研究助手唯一写新src/lei_signal/research/us_erp_sigma_observation.py、tests/unit/test_us_erp_sigma_observation.py及本task/us-sigma-efficacy-v16小代码/合同/报告（大逐日/事件输出用v15已核外盘新子目录）。不改原usErpBands算法或历史数据。root保留最终核数与注册。
+- 固定一次核心批，0新研究来源，复用v13 rates/overlay原快照及现行1.5/2σ此前3自然年排当期总体σ。主问题63交易日（辅助21/126），upper后上涨/low后下跌的条件关联；原始事件及63日不重叠保留组并列，全部同资格日为基准，条件对照仅当时价格是否高于MA200和过去63日涨跌状态。下一交易日收盘为标签起点，报告上涨率/均值/中位/从起点最差跌幅，事件数与未成熟、条件增量/重叠不确定性、2016—2019/2020—2022/2023以后稳定性与具体反例。无收益交易策略/费用账户，不能称实盘准确率或PIT；已见历史为探索，sigma收益此前未测，旧30/70负向结果不能冒充本题。
+- 冻结前助手先回方法/字段核查，root验收后才核心执行。预算1核心批+最多1必要纠错重跑（非搜参），6研究来源旧预算不重置，本次0；0参数寻优/生产采用/手机/通知。证据不足或负向均可关闭。临时曲线/定时采集工程继续，不占金融检验次数。
+
+---
+
 # 四项市场资料自动更新与共性读图修复 — active 2026-11-05T18:41:11.721847+08:00
 
 - 沿原task/owner breadth-reading-aid-20261101 / 01a19564-4987-7ed3-a08e-efa86bf7e4b7/root；scope_released=false；checked_coordination_sha cccaa11431f576a9b23585502d56663ffc2fb993；已fetch/read COORDINATION1.1/self/cross-market/focus/market-increment/controller及全记录相关路径检索，相关源范围已释放。用户明确要求A/美股债利差、两市宽度自动续更，并修放大后价格太平、参考虚线太淡的共性问题。本阶段是资料服务与桌面显示工程，不重开收益研究，不改交易规则。
