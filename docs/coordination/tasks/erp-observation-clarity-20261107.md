@@ -7,3 +7,7 @@
 - root 唯一写者 web/src/components/market-observation-alerts/index.tsx, web/src/components/market-observation-alerts/style.css, web/src/components/market-observation-alerts/UsErpCard.tsx, web/src/components/market-observation-alerts/us-erp-card.css, web/src/components/market-observation-alerts/CombinationReading.tsx, web/src/components/market-observation-alerts/combination-reading.css, web/src/components/market-observation-alerts/conditionalReading.ts, web/src/components/observation-library/ObservationMetric.tsx, web/src/components/observation-library/erpReferenceData.ts, web/src/components/observation-library/erpBands.ts, web/src/components/observation-library/usErpBands.ts, web/src/components/observation-library/erpCrossChart.css, web/src/components/observation-library/ErpCrossChart.tsx。执行代理仅 web/src/pages/FundamentalsPage.tsx, web/src/components/observation-library/ErpReferenceCard.tsx，尚待合同预检与真实派发。自身 QA 与本任务协调记录同 root 维护。
 - 完成目标为各 ERP 可见入口共用观测来源/日期/单位，组合解读前置且短读可用，重复解释收紧，重要样本与来源限制可查。数据原件、研究、后台、阈值、交易只读。8000静态资源差异已核，若更新仅安装经验证的本地前端构建并保留旧构建备份。
 - 验收对应源接线读回、TypeScript/Vite构建、相关既有回归、真实桌面卡片/大图/日期/缺测/展开与收起、跨入口数值一致。当前还未修改源码，验收未运行。
+
+## 用户追加的研究范围（2026-11-07）
+
+用户明确要求Gemini建议全部制作并测试验证。新增独立研究 docs/experiments/raw/erp-trend-matrix-2026-11-07/**、报告 docs/experiments/erp-trend-matrix-2026-11-07.md；root维护protocol/state/报告与独立验收，唯一Sol执行者只写compute子目录。原型/状态展示限上述已登记前端文件。报告完成时精确新增registry.json/INDEX.md一项（写前再核并发）。仅研究模拟，不改生产策略、两份权威源、参数账本、真实交易或原ERP阈值。已有ERP已看历史与失败尝试保留；新决策为完整仓位路径比较，固定合同后运行。
