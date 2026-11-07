@@ -13,3 +13,9 @@
 用户明确要求Gemini建议全部制作并测试验证。新增独立研究 docs/experiments/raw/erp-trend-matrix-2026-11-07/**、报告 docs/experiments/erp-trend-matrix-2026-11-07.md；root维护protocol/state/报告与独立验收，唯一Sol执行者只写compute子目录。原型/状态展示限上述已登记前端文件。报告完成时精确新增registry.json/INDEX.md一项（写前再核并发）。仅研究模拟，不改生产策略、两份权威源、参数账本、真实交易或原ERP阈值。已有ERP已看历史与失败尝试保留；新决策为完整仓位路径比较，固定合同后运行。
 
 追加精确前端范围：root唯一写者 web/src/components/trend/OverlayChart.tsx, web/src/components/observation-library/erpTrendObservation.ts, web/src/components/observation-library/erpTrendObservation.test.mjs。用于同一ERP研究观察数字的纯函数与有意义的边界测试，并修复周频散点被大图lttb采样丢掉的可视问题；不改阈值或交易。各原文件已做实际字节备份。
+
+## 第3次运行的存储修正
+
+新增 root 唯一输出范围：/Volumes/win+mac通用/LeiSignal-新实验结果/erp-trend-matrix-20261107/erp-trend-matrix-20261107-20261107T183134-80bdc9e883ca/**。已用项目 plan_output 核验外置盘 UUID、设备与剩余容量，代码/小型登记仍在现有 raw 范围。前两次结果已在本地形成，这属于输出路线未及时落实的偏差，保留原路径与字节；不迁移或删除旧结果。第3次及图表/日志写新外置目录，冻结输入继续只读。
+
+对前条图表诊断作更正：代码中没有 lttb 采样，实际问题是稀疏周频数据在自动符号显示下被隐藏；修复为不跨缺口的稀疏序列显式显示观测点，并修复共同坐标轴重复叠放。
