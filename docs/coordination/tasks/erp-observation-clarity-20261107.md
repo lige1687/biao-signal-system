@@ -11,3 +11,5 @@
 ## 用户追加的研究范围（2026-11-07）
 
 用户明确要求Gemini建议全部制作并测试验证。新增独立研究 docs/experiments/raw/erp-trend-matrix-2026-11-07/**、报告 docs/experiments/erp-trend-matrix-2026-11-07.md；root维护protocol/state/报告与独立验收，唯一Sol执行者只写compute子目录。原型/状态展示限上述已登记前端文件。报告完成时精确新增registry.json/INDEX.md一项（写前再核并发）。仅研究模拟，不改生产策略、两份权威源、参数账本、真实交易或原ERP阈值。已有ERP已看历史与失败尝试保留；新决策为完整仓位路径比较，固定合同后运行。
+
+追加精确前端范围：root唯一写者 web/src/components/trend/OverlayChart.tsx, web/src/components/observation-library/erpTrendObservation.ts, web/src/components/observation-library/erpTrendObservation.test.mjs。用于同一ERP研究观察数字的纯函数与有意义的边界测试，并修复周频散点被大图lttb采样丢掉的可视问题；不改阈值或交易。各原文件已做实际字节备份。
