@@ -1,3 +1,17 @@
+# 新阶段：ERP × 宽度 × 趋势增量检验 — active 2026-11-08T20:14:05.616535+08:00
+
+- 稳定task-id erp-breadth-integration-review-20261108；owner 01a1b55e-b30e-7a72-98bc-103222ea9ee5/root；status active；scope_released=false。本阶段研究id erp-breadth-trend-increment-20261108，旧review已完、旧ERP22政策及宽度负结果保持封存。
+- 用户新增明确授权“继续把ERP和宽度、趋势结合起来做一下测试验证，缺的数据能补就补，看看有没有实际增量，有用的再接到看板里”，以及不同宽基ERP口径、相对EY补充。主问题固定沪深300ERP×趋势后宽度的资金/风险增量；跨指数先核同口径资料，避免混入主测试。
+- checked_coordination_sha=667ae1f54768ee72f92d3b79052125ad4215c0a4；checked_at=2026-11-08T20:14:05.616535+08:00。已读COORDINATION和原self、erp-observation-clarity、breadth-reading-aid、market-increment-map、cross-market-risk-context、trae-observation-integration、microstructure-observations、investor-observation-map、research-dispatch-controller。当前trae/microstructure阶段完成释放；不接管其他数据/布局。
+- 基线 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 加共享dirty；只保留准确新路径。root写 docs/experiments/erp-breadth-trend-increment-2026-11-08.md、同名raw/**、registry唯一新键、INDEX一行、本协调记录。初期两只读代理各写自己的/tmp/lei-erp-breadth-20261108/*-audit.md。新运行大结果走已核外盘、旧输入不动。
+- 未来仅若有明确用途证据，接本轮结果至已存在ErpCrossChart详情/新独立研究摘要；实际共享源码修改前再次登记准确路径。此时无UI写权占用，不改首页布局、生产规则、两份原策略、真实交易、定时采集或其他研究。
+- 规范采用current-standards所列现行版本，research-closure+lei-lowfreq-research；政策/account属于独立research runner，非强行套技术ridge。数据先复用已获取清单及冻结ERP/宽度历史；修订史/成员和首发时点缺口明确披露。
+- 新问题预算上限核心1批+必要跟进3批（每批1个预登记尝试），来源请求6次含失败，每操作至多1重试；旧研究预算不重置，不搜参。代码/合成验证另记，不充当市场证据。小记录预计5MiB，新数据/结果100MiB走外盘。
+- 验收：同期间同资金同成本的嵌套比较与宽度独立对照；投入匹配、费用/滞后、分期/遗漏大行情、相关日期不确定性；关键数字独立重算和来源时间检查，结果足以改变判断才进入观察板。无数据/证据不足为真实边界，不将界面完成当金融效果。
+- 当前数据与runner只读审计已真实派发，正式协议待输入可用期确定后冻结；尚未执行市场回测/补数据请求。本阶段代码和产物仅本地，协调元数据已推后读回才算同步。
+
+---
+
 # ERP与多指标组合能力复核 — completed 2026-11-08T19:24:32+08:00
 
 - task-id `erp-breadth-integration-review-20261108`; owner `01a1b55e-b30e-7a72-98bc-103222ea9ee5/root`; status `completed`; scope_released=true。checked_coordination_sha=`7f2815d49146005b1a02fb7e6113fb6ad2093689`; checked_at=`2026-11-08T19:24:32+08:00` Asia/Shanghai。
