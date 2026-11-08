@@ -1,3 +1,15 @@
+# 成交额集中度补齐 · completed
+- task-id: microstructure-observations-20261108; owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root; status: complete; scope_released: true; updated_at: 2026-11-08T13:02:11.231600+00:00.
+- current coordination parent: c5ea33c5194efa76915c04a1b0fe5588b7ad66dd; 只改本任务元数据，其他任务记录保留。
+- 日频31/33→43/43，9/1—11/6；月频84/129→128/130，2016-01—2026-10，仅2016-05与2020-06留空。旧84个有效月不变；10/22旧名录漏上市日新股301718，已逐股独立核明修订。6条正成交额状态冲突只接受精确code/date/原件SHA且第二来源数值见证的例外，通用规则不放宽。
+- public equity SHA256 8dd8f8d6132e719cbc1cb15313bbc27fb0abbf7c5ee31dda6a5339f770e11694；65张equity卡，其他62卡及unavailable不变。新增cn-monthly-amount-top5。布局owner已独立核全池日/月算术、84月、6条异常和实页；单一集中度入口已接日/月及大图。本任务未改UI/catalog/index/API。
+- 交付docs/ops/microstructure-observations-20261108/concentration-refresh/README.md、accepted.json、publication.json、independent-arithmetic.json、positive-amount-witnesses.json、final-source-accounting.json。新原件和派生run1/run2均在验证外盘UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9的本任务目录，旧冻结月文件SHA不变。
+- 工程取数预算由布局主控基于用户补齐请求确认：累计5600来源操作/50MiB响应/30分钟/4连接。实用5360操作，已计19,243,807响应字节，root网页工具传输字节未暴露（已预留2MiB，非实测）；所有新增源查询在20:55:41前停止，早于21:00:46截止。精确分项见final-source-accounting.json。
+- 内部最初5MiB估算低估了8.5MB备份和9.17MB失败诊断，实际约20MiB，已告知主控；原件/重建在外盘，无删除。失败诊断及首次旧值不变断言/测试cwd失败均保留并有根因，不算通过。
+- 定向Python6项、前端解析6项、实际本地服务字节、仓库归置通过。范围释放：microstructure_equity.py、test_microstructure_equity.py、equity.json及本任务ops/work-progress。无源码提交/部署/生产策略改动/自动采集/删除/强推。
+
+--- 历史记录，当前状态以上段为准 ---
+
 # 成交额集中度增量补齐 · active
 - task-id: microstructure-observations-20261108; owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root; status: active; scope_released: false; updated_at: 2026-11-08T20:24:24.417256+08:00.
 - 用户在布局会话01a1ba4c-f7c4-7de2-b51d-9552681be8c4明确要求补齐截图成交额集中度；read_thread已核直接人类消息。用户原跨会话协作授权保留，布局owner负责去重/小图，本会话只负责数据工程。
