@@ -1,3 +1,15 @@
+# 成交额集中度增量补齐 · active
+- task-id: microstructure-observations-20261108; owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root; status: active; scope_released: false; updated_at: 2026-11-08T20:24:24.417256+08:00.
+- 用户在布局会话01a1ba4c-f7c4-7de2-b51d-9552681be8c4明确要求补齐截图成交额集中度；read_thread已核直接人类消息。用户原跨会话协作授权保留，布局owner负责去重/小图，本会话只负责数据工程。
+- checked_coordination_sha: cbd34018a26e8bf139ac65ae22eef9169dec6ee2; 已读COORDINATION、自身、trae-observation-integration-20261108、research-dispatch-controller、breadth-reading-aid-20261101。已核布局owner接管目录，其他研究未接管。基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 +共享dirty，原验收保留。
+- 唯一候选修改范围：src/lei_signal/market_context/microstructure_equity.py、tests/unit/test_microstructure_equity.py、web/public/research/microstructure-observations-20261108/equity.json、本任务ops/equity与concentration-refresh/**、本任务work-progress。不写任何首页UI/indicatorCatalog/API/旧月度冻结资料。不扩大融资/相关性/行业/衍生品指标。
+- 正在做：本地逐股缺口诊断，原Sol代理只写diagnosis.json/md；root核原始源、外盘身份及取数最小方案。先诊断后记录有界工程获取预算，无新收益实验。
+- 验收：9/1—11/6每日上市生命周期股票集合、缺股/停牌/冲突、排序与分母独立核算；top5/top10同批一致。完整10月如可得只提供资格和派生月值，绝不覆写旧冻结产物。源实际缺失即真实留空。
+- 存储20:23核：固定外盘UUID有效、约470.9GB空闲；内部仅325MB，新增本地限定5MiB，原件/日志仅外盘新目录，源不删不覆盖。已用上一轮工程请求保留，不重跑旧收益研究/批次。
+- 下一步：收到本地诊断，向布局owner回方案/成本并完成合理授权增量，独立验收后交包。当前只有诊断派发，未发生新源采集。
+
+---
+
 # 当前状态 · 本地有界实施已验收
 - task-id: microstructure-observations-20261108
 - owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root
