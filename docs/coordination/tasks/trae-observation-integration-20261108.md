@@ -1,3 +1,16 @@
+# 首页分类与常看指标已完成 — 2026-11-08T19:19:44.532954+08:00
+
+- task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；status completed；scope_released=true。布局源码9个精确路径及分类证据目录已验收释放；无运行写者。
+- checked_coordination_sha 206c7a23e191b205dbcd1a7307ca4b14f70ed2b8；最终fetch/read自身、microstructure-observations-20261108及新erp-breadth-integration-review-20261108；后者纯文档复核无代码重叠。用户明确授权跨会话协调并指定本会话负责首页布局分类；microstructure已释放共享首页写权，仅保留数据独立组件。
+- 首页默认ERP-cn/breadth-cn/ERP-us/breadth-us四张，六类按用途浏览，市场筛选/名称和ETF搜索/同页预览原卡及大图/加入移出/撤销/恢复核心四项。行业结构可选，组合观察按需展开。保留旧存储原值；已知旧默认集迁移，显式额外pin及自定义子集/空列表/收起意图保留。
+- 接入对方独立核验的derivatives 10项到indicatorCatalog.ts的MICRO_INDICATORS；selection从同一目录派生，逐id渲染MicrostructureObservations。不自动置顶新数据。equity/funding仍由对方继续验收；已授权其在本次释放后追加已核准注册项，不改首页布局或默认四项。
+- 根主控真实验收13目录/迁移测试、TypeScript、write:false Vite（923模块）、归置全部通过。1710px桌面核心4卡各400px且无溢出；SMH预览/大图/加入刷新/移出、空首页/撤销/恢复、双标签同步、广度搜索/市场过滤/待接入禁用、PCR加入、行业图、VXN/小盘快照入口均通过。最终浏览器error为空。独立代理只读末审无阻塞。
+- 证据 docs/ops/trae-observation-integration-20261108/classification/README.md、acceptance.json、scoped-changes.patch、homepage-core.png、category-style.png、accepted-microstructure.json；写前原字节备份保留。原四相对图快照SHA仍1da2f06102a43eb8721ea376cefa724960b0786561f6f94b2daf1b80b85e9c64。
+- 保留限制：v1无逐项来源，局部自定义旧列表不强行抹掉；用户可一键恢复四项。历史数据仍按日期阅读，本次没有新增金融预测/收益有效性证据。只改观察展示层，0新行情采集/金融实验/策略变更/付费/删除/强推。
+- 基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；源仅本地未提交、远端不可复现；localhost5173已生效，无8000 dist替换或远端部署。此提交仅本task协调元数据，保留共享index和所有既有脏区。
+
+---
+
 # 用户要求分类浏览与精简首页 — active 2026-11-08T19:01:41.421648+08:00
 
 - 原task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=false；用户明确要求首页只放常看ERP/宽度，其他指标按用途分类，按需加入首页。属于市场环境展示组织，不做金融实验/规则调整。
