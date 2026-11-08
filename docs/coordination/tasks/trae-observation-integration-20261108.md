@@ -1,3 +1,14 @@
+# 用户要求分类浏览与精简首页 — active 2026-11-08T19:01:41.421648+08:00
+
+- 原task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=false；用户明确要求首页只放常看ERP/宽度，其他指标按用途分类，按需加入首页。属于市场环境展示组织，不做金融实验/规则调整。
+- checked_coordination_sha cd4004a827dd50e8963f9ab163c1dcdef736361d；本轮fetch/read COORDINATION1.1、self、cross-market-risk-context、erp-observation-clarity、research-dispatch-controller；相关前端已释放，复用本会话已读策略源/根web规范。原四卡数据与审查结论保持。
+- root唯一写 web/src/components/market-observation-alerts/index.tsx, web/src/components/market-observation-alerts/style.css, web/src/components/market-observation-alerts/selection.ts, web/src/components/market-observation-alerts/useSelection.ts, web/src/components/market-observation-alerts/selection.test.mjs 及 docs/ops/trae-observation-integration-20261108/classification/**；worker唯一写 web/src/components/market-observation-alerts/IndicatorBrowser.tsx, web/src/components/market-observation-alerts/indicator-browser.css, web/src/components/market-observation-alerts/indicatorCatalog.ts, web/src/components/market-observation-alerts/indicatorCatalog.test.mjs。不修改observation-library原catalog及他人组件；从既有catalog读取含义/可查看状态，补本首页独有项与行业结构入口。先按实际字节备份，保留共享脏区。
+- 目标：首页默认四张ERP/宽度；已知旧自动默认集迁移为四张并保留显式额外选择，自定义子集与收起意图保留，v1原值不覆盖；六类按用途浏览可预览原卡/大图、按市场筛选和搜索、加入/移出首页/恢复核心四项。行业结构改为可选。未接资料项可查看缺项，不能加入空卡。
+- 验收：分类完整且唯一/市场和宽度别名；新旧存储/空选择/损坏存储/跨标签/加入后刷新/移出恢复；原数据日期口径/旧弹窗；桌面实际核心四卡/分类/预览/勾选和布局，TypeScript、内存build和归置。当前待执行。
+- 当前基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；前阶段源码仅本地，远端不可复现；本轮无新成果commit。仅协调元数据正常同步。0金融实验/取数/付费/策略/删除/强推/远端部署；下一步合同预检后真实派发独立分类组件，root做首页集成与存储。
+
+---
+
 # 首页四项观察接入已完成 — 2026-11-08T17:46:27.265650+08:00
 
 - task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；status completed；scope_released=true。
