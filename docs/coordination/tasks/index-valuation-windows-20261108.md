@@ -1,3 +1,10 @@
+# 宽基估值观察窗口 · 本地验收完成
+- task-id index-valuation-windows-20261108；owner 当前Codex用户请求/root；status completed；scope_released=true；checked_coordination_sha ed3f2a456e93475dd3992fbcdb5a90261b0c8ef5；checked_at 2026-11-08T20:43:09+0800。
+- 交付前读COORDINATION、原记录和相对开工更新的focus-stock-universe-20261024、erp-breadth-integration-review-20261108；保留其他报告新登记及当前分类/集中度路径。任务写权已释放；无运行中代理、预览服务或采集任务。
+- 本地市场观察卡、基本面利率卡和大图同一滚动参照：各指数近120个月P20/P80、P10/P90和近180月复核，不含当月；完整来源P95只作读数背景。旧P25/P95=11.20/34.96复现，12个达到旧上轨的月份为2007年10个/2008年2个。
+- 验收：本机首页缩略图/预览与两张基本面大图、5年切10年校验；完整来源端点及隔离桌面P95 34.89/32.65验证；32后端与17前端定向、TS、Vite内存构建、归置通过。当前共享8000进程未重载，本机界面按实际覆盖标注截尾历史；未部署。
+- 证据 docs/experiments/index-valuation-windows-2026-11-08.md SHA256 a9267f66b7fa31da3e02c890b4a02535696a76c5d7661d6f483af4311189f8bc；同名raw/comparison.json、contract.md、acceptance.md；registry/INDEX只新增本报告一项。两次描述性计算，未验证收益与交易；纳指已显示2026-09-30公开35.09倍快照，连续月频缺失、未接分位，获得同口径合格月表再启用。无生产/交易/OKR/定时采集修改。
+- 源码和报告位于原共享本机脏基线 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，无源码提交/推送，远端不可复现。只同步此任务协调元数据。
 # 宽基估值观察窗口 · active
 - task-id index-valuation-windows-20261108；owner 当前Codex用户请求/root；status active；scope_released=false；checked_coordination_sha 78de51b6d0aa2b17c1432ec05046a7e5471a7295；checked_at 2026-11-08T20:29:05+0800。
 - 已读 COORDINATION 1.1、research-dispatch-controller、breadth-reading-aid-20261101、erp-observation-clarity-20261107、erp-breadth-integration-review-20261108、storage-autonomy-and-valuation-review-20261107、trae-observation-integration-20261108、microstructure-observations-20261108、market-observation、investor-observation-map、cross-market-risk-context-20261102、market-increment-map-20261102、focus-stock-universe-20261024。原估值卡和原ERP显示范围已释放；分类、集中度及其它研究写者保留，排除其现行精确路径。
