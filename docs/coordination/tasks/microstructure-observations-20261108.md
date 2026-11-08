@@ -1,3 +1,13 @@
+# 行业换手率归并与细分补齐 · completed
+- task-id: microstructure-observations-20261108; owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root; status: completed; scope_released: true; updated_at: 2026-11-09T00:49:29.423367+08:00.
+- checked_coordination_sha: 0900b8c321ef778b393050bb28b8832e1bd748ac；已读COORDINATION、自身、trae-observation-integration-20261108最新段、trae-sector-observation-20261108、research-dispatch-controller。完成释放本阶段八个精确前端文件、microstructure_equity.py、equity.json、本任务证据和阶段进度。布局主控提出集中度长日频增量，已确认另行登记且交接前只读。
+- 候选与收藏入口各仅一张「行业换手率」，下拉仅通信设备、半导体设备、半导体材料、有色金属、电力、电网设备。旧逐行业与高换手占比收藏合并；逐行业折叠记录不会误隐藏整个新组。
+- 新接BK1326、BK1325各930日，2023-01-03至2026-11-06，独立核原值和此前756日分位。公开查询2次/171373字节。equity共67卡，之前65卡（含集中度三条）、unavailable逐字典保留，包SHA256=4ac6df72bc3c9c8e9390d1e932b9f4689e5513c55599d7aaf496a75586137e0a。
+- 定向前端28、Python6、TS、Vite内存构建与归置通过；独立桌面测试逐个切换六项，打开历史分位，收藏4→5→刷新5→撤回4，无浏览器error。原56板块汇总口径保留，重建读已绑定两条细分原件。
+- 本地证据docs/ops/microstructure-observations-20261108/industry-turnover-picker/README.md、focused-source-ledger.json、packet-acceptance.json及原件。共享工作区基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，源码与快照仅本地未提交，远端只同步协调。无新收益实验或策略变更。
+
+--- 历史记录 ---
+
 # 行业换手候选归并及细分补齐 · active
 - task-id: microstructure-observations-20261108; owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root; status: active; scope_released: false; updated_at: 2026-11-09T00:44:58.517228+08:00.
 - checked_coordination_sha: d760642bbd480e24f2aedd80b3013bcd2baeb502。已读COORDINATION、自身、集中度布局最新完成释放段、ETF量价完成段、research-dispatch-controller；无活跃重叠。仍避开集中度参考线及公共组件。
