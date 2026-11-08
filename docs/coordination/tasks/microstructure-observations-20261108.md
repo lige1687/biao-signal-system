@@ -1,3 +1,6 @@
+# 图轴范围补充 2026-11-08T19:39:17.089652+08:00
+- 实际UI验收发现历史分位图自动缩放到0—18会弱化其0—100绝对含义。追加唯一写MarketTrendChart.tsx可选valueBounds参数，默认undefined保持既有图行为，仅Microstructure分位图传[0,100]。备份当前文件字节；不改首页默认项/布局。
+
 # 范围追加 2026-11-08T19:22:50.656758+08:00
 - 首页分类负责人已完成并明确释放，本任务仅追加indicatorCatalog.ts中MICRO_INDICATORS已验收条目；不改变默认四卡、选择持久化、index布局。初始catalog备份在本任务before/。
 - root已独立复核derivatives10卡与equity64卡：源hash、同日算术、完整性门禁、复权后逐股相关独立公式、行业56个此前756日分位。融资当前21日仍验收。
