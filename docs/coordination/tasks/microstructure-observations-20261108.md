@@ -1,3 +1,18 @@
+# 当前状态 · 本地有界实施已验收
+- task-id: microstructure-observations-20261108
+- owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root
+- status: complete
+- scope_released: true
+- updated_at: 2026-11-08T19:47:31.588797+08:00
+- 基于最新协调分支 2654643d1941a741e2b0ced5dd7f26bf317df20b，仅更新本任务记录。以下旧记录保留为过程证据，当前状态以本段为准。
+- 成果：76张有数据观察卡 + 1项明确unavailable；三数据包/计算器/测试、独立组件、已释放的indicatorCatalog条目追加、分位轴可选[0,100]。VIX期限复用已有。首页默认四项和分类布局仍由trae-observation-integration-20261108统一负责。
+- 验收：融资271日/1117原件独立重算，逐股相关离散及56行业分位独立复核，衍生品来源与算术复核；Python21项、前端19项、最终TS及内存build、仓库归置全通过；实际浏览器搜索/预览/图表/收藏持久化验证，测试新增项已移除恢复原四项。
+- 资料边界：静态带日期快照，未接新交易日采集；中国逐股截止10-23、集中度末日缺1股；行业为供应商56板块子集，完整行业独立自由流通分母不可得；成员是当前固定池。美国PCR仅1日、期指基差仅5日固定2611合约。未证实顶底阈值/交易效力。
+- 交付：docs/ops/microstructure-observations-20261108/README.md、acceptance.json、handoff.json；docs/ops/work-progress/microstructure-observations-20261108.md。
+- 无源码提交/部署/生产策略变更/删除/强推；只推本协调元数据。相关写范围全部释放。
+
+---
+
 # 图轴范围补充 2026-11-08T19:39:17.089652+08:00
 - 实际UI验收发现历史分位图自动缩放到0—18会弱化其0—100绝对含义。追加唯一写MarketTrendChart.tsx可选valueBounds参数，默认undefined保持既有图行为，仅Microstructure分位图传[0,100]。备份当前文件字节；不改首页默认项/布局。
 
