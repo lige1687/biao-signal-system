@@ -1,3 +1,13 @@
+# 高收益债信用利差小卡 · completed
+
+- task-id: hy-oas-card-20261109；owner: 本次「高收益债信用利差」卡片重构请求 / root；status: completed；scope_released: true；updated_at: 2026-11-09T00:52:39+0800。
+- checked_coordination_sha: ad820ea704b6ba9c06135b24085449038a6d4666。沿用开工所读 COORDINATION 1.1 与同模块任务，交付前读回本记录、行业换手已完成、离散度新范围及集中度历史回填新范围；四个本地精确源文件与活动登记无重叠，全部释放。
+- 交付：高收益债卡片折线首尾、日期、两条虚线共用全宽绘图区；右侧独立标签栏、浅绿参考区、超上轨橙色、基点变动及信息按钮。保留原约三年参考带；近一年状态独立按同源第20／80分位，较长窗口报告实际同源历史覆盖，5／10年不报缺失分位。只改展示，不改源数据、策略、交易或生产。
+- 源码仅本地、未提交、未部署；远端无法复现改动。共享工作基线 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；准确源路径 web/src/components/market-style/{CrossMarketObservation.tsx,cross-market-observation.css,HyOasCard.tsx,hyOasReading.ts}。证据在本地 /tmp/lei-hy-oas-card-20261109，含原文件、前后截图、浏览器几何和窗口复核脚本。
+- 两种桌面宽度实页几何、交互、开关大图和无溢出通过；定向既有回归、同源数据复算和缺值/下降/无足够历史分支通过；TypeScript 与 Vite 内存构建通过。基线对齐失败已复现。初次提示验证需失焦后再聚焦，邻卡即时计数需等渲染，修正测试前提后通过。无新金融研究、源数据发布、交易或部署。可在本地开发首页查看。
+
+---
+
 # 高收益债信用利差小卡 · active
 
 - task-id: hy-oas-card-20261109；owner: 本次「高收益债信用利差」卡片重构请求 / root；status: active；scope_released: false；updated_at: 2026-11-09T00:44:26+0800。
