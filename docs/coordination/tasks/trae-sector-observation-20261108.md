@@ -1,3 +1,13 @@
+# 观察数据完成、界面集成验收 — active 2026-11-08T23:32:56.362329+08:00
+
+- task-id trae-sector-observation-20261108；owner不变，status active，scope_released=false；checked_coordination_sha de456e4057b4d22e0c7e46d4040055330cf293d1，本次fetch/read自身及既有释放记录（上版列明），无范围冲突。
+- 五个源缓存SHA匹配原审计且未修改；四ETF逐日热度、活跃、换手等对原公式差异0；两段前缀无未来数据、缺同日分母拒绝。新金融实验0，原4批预算不重启。静态包1.72MB。
+- 分工阶段变更：同任务baseline_review在ready合同integration-ui-contract.json下仅创建4新文件EtfPriceHeatObservation.tsx、etfPriceHeatData.ts、etfPriceHeatData.test.mjs、etf-price-heat.css；原共享文件一直root唯一写。该worker已结束并释放4文件，root现独立接收验收和必要修复，不存在同时同文件写者。
+- root已接分类/首页按需/情绪页；代理解析3检查通过。首次主控tsc发现unknown日期类型错误，保留失败并正在修复；实际桌面/内存build尚未验收。来源/复权未全资格，现只观察，不能升级可靠预测信号。
+- 根主控唯一继续原登记全部路径。独立可检查产物docs/ops/etf-price-heat-observation-20261108/README.md、data-checks.json、formula-verification.json；源代码仍本地未提交未部署。
+
+---
+
 # ETF量价热度观察接入 — active
 
 - task-id: trae-sector-observation-20261108；owner: 01a1bb25-a628-7242-8a66-504aaf9d08e3/root；status active；scope_released=false。updated_at 2026-11-08T23:27:32.026137+08:00。
