@@ -1,3 +1,12 @@
+# 集中度日频历史回填 — active 2026-11-09T00:51:57.498346+08:00
+
+- task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=false；checked_coordination_sha 5a88e0d6798ad5f8a0de0e4c1ef2064eb6e130f4。读取 COORDINATION1.1、自身、microstructure、member-dispersion、hy-oas、中控。行业原owner于3b0fd796结案并明确交接数据/构建器；成员离散度独占MicrostructureObservations.tsx、IndicatorBrowser.tsx，本轮避开。其余无重叠，保留18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享本地。
+- 唯一写范围 src/lei_signal/market_context/microstructure_equity.py, web/public/research/microstructure-observations-20261108/equity.json, docs/ops/microstructure-observations-20261108/concentration-daily-history/accepted.json, web/src/components/market-observation-alerts/ConcentrationObservationCard.tsx, web/src/components/market-observation-alerts/concentrationDisplay.ts；任务证据 docs/ops/trae-observation-integration-20261108/concentration-daily-history/**；派生只写预检外盘新目录。旧回执、月频和其他65卡保留，验收后用新增SHA绑定回执支持未来复建。
+- 用户指出9月之前日频缺失、MA20半途出现。已完成一次同源只读重放，将起点从2026-09-01前移到2016-01-01，结果2631/2633有效，两个缺日保留空值，旧43日与130个月结果完全一致。独立复核正在做；写入前备份当前67卡包和精确源码。
+- 验收：日5/10新历史和均线在小图从窗口起点可读，详情全部可见，缺日不断言为0；其他卡及月频逐字典原样、复建器读新绑定、原件不改。0新行情查询/收益实验/策略部署。
+
+---
+
 # 成交额集中度参考线 — completed 2026-11-09T00:42:53.178973+08:00
 
 - task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=true。交付前checked_coordination_sha 882fe8cff891e940d9e55f0d59fe68f678c5f8f4，重新读新行业换手归并登记；其唯一写者明确避开本轮五文件，精确SHA未变。已读COORDINATION1.1、自身、microstructure、ETF量价、估值窗口、ERP宽度及中控。worker交还，root验收释放。
