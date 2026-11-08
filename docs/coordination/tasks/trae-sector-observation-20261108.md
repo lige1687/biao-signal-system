@@ -1,3 +1,15 @@
+# ETF量价观察接入已验收 — completed 2026-11-08T23:39:27.374904+08:00
+
+- task-id trae-sector-observation-20261108；owner 01a1bb25-a628-7242-8a66-504aaf9d08e3/root；status completed；scope_released=true。所有本轮准确路径释放，无运行worker或后台写者。checked_coordination_sha 297b22c406f5016de2dcae4389d98d8c47af5a80；交付前fetch/read自身及trae-observation-integration-20261108最新段，其他本轮已读关联任务无范围变化；保留其他负责人结果。
+- 本地新增「ETF · 量价热度与分歧」：半导体/通信/创业板/沪深300四ETF可切换，分类真实小图/读数/日期，详情价格与热度分图、原始量能、公式、事件日期与既有历史依据；可加入/移出首页，原默认四核心和用户其他选择保持；情绪页同入口。
+- 最新2026-11-06热度51.8/46.5/57.4/56.0，逐日公式对既有审计一致，缺项预热保留、同日分母不前填，原五缓存SHA首尾一致。来源/复权链待完整复核、历史快照未自动按日更新常显。仅观察，不宣称可靠顶底或改交易。
+- TS、19项解析/目录/选择定向检查、write:false内存Vite930模块、归置通过；桌面1280实际四ETF/历史120与全部/原始量能切换/依据、收藏4→5→刷新5→移除4、情绪页均核；浏览器error为空。首次TS类型错误及定位失败保留，已修复，不以测试通过替代预测有效。
+- 证据 docs/ops/etf-price-heat-observation-20261108/README.md、state.json、acceptance.json、data-checks.json、formula-verification.json、source-manifest.json、shared-file-changes.patch、home-card.png；公共小快照web/public/research/etf-price-heat-20261108/data.json。原仓外四批审计全部保留，本阶段0新金融实验/0联网采数/0参数搜索。
+- 基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，源仅本地未提交，远端不可复现。localhost5173已验，未改8000 dist/未部署/未合并/未改生产策略或OKR。仅本task协调元数据正常推送。
+- 本轮有界观察用途与工程接入完成；信号效力仍inconclusive。原触发日期重叠、按20日间隔每只仅5–7次且历史已用于选规则，未来独立样本和完整来源链仍是升级条件；不将重复旧研究列为自动下一步。
+
+---
+
 # 观察数据完成、界面集成验收 — active 2026-11-08T23:32:56.362329+08:00
 
 - task-id trae-sector-observation-20261108；owner不变，status active，scope_released=false；checked_coordination_sha de456e4057b4d22e0c7e46d4040055330cf293d1，本次fetch/read自身及既有释放记录（上版列明），无范围冲突。
