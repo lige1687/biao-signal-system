@@ -1,3 +1,10 @@
+# 范围更新 2026-11-08T19:05:46.876786+08:00
+- 仍 active，数据与独立组件验收继续；根据用户在首页布局会话的明确协调授权，index.tsx/selection.ts/CandidateShelf.tsx/useSelection.ts/style.css写入权释放给trae-observation-integration-20261108（01a1ba4c-f7c4-7de2-b51d-9552681be8c4）。自己加的index两行已精确撤去，与本任务起点备份相同；未触碰他人修改。
+- 本任务只保留MicrostructureObservations/microstructureData/microstructure.css/测试，新3分支数据及后端builder/测试、自己的ops文档；组件提供selectedIds可选过滤。分类/默认首页由指定会话统一集成。
+- 工程取数预算调整：equity最多100个公开HTTP对象/50MiB（行业板块多项历史），funding最多130对象/50MiB（必要时SZ单日分页），derivatives仍30对象/50MiB；无收益研究预算扩大。原件只增不删。
+
+---
+
 # 微观结构观察补齐
 - task-id microstructure-observations-20261108; owner 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root; status active; updated_at 2026-11-08T18:56:36.602952+08:00; scope_released=false.
 - 用户明确要求补齐前轮全部辅助观察。服务市场背景层：融资股票占比、换手分位、日集中度、期权IV/PCR、期指年化基差、逐股相关离散；VIX期限直接复用。无交易规则/资金动作/付费/删除/强推。
