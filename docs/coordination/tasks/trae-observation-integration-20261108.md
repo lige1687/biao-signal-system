@@ -1,3 +1,11 @@
+# 成交额集中度参考线 — active 2026-11-09T00:35:46.774627+08:00
+
+- task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=false；checked_coordination_sha dbac61ad042dcff5df5cdb5137bd359158182c17。已读COORDINATION、自身、microstructure-observations-20261108、index-valuation-windows-20261108、trae-sector-observation-20261108、erp-breadth-integration-review-20261108、research-dispatch-controller。相关owner均释放精确路径，保留共享脏基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9。
+- 用户希望审核研报阈值并接到小图，做同源观察参照，不做收益或联合提醒。root唯一写 web/src/components/market-observation-alerts/MicrostructureObservations.tsx, web/src/components/market-observation-alerts/indicatorThumbnailData.ts, web/src/components/market-observation-alerts/concentrationDisplay.ts；worker唯一写 web/src/components/market-observation-alerts/concentrationReferenceMath.ts, web/src/components/market-observation-alerts/concentrationReferenceMath.test.mjs。证据 docs/ops/trae-observation-integration-20261108/concentration-references/**。包/策略/API/目录布局只读。
+- 验收：月频排除当月、空月，近10年P80/P90/P95与5年对照，图线标当期口径；日5原值/MA20/同频46%出处，日10不套线。真实桌面三口径、定向算术、TS及归置。4研报仅公开原文核验，0收益实验/下载行情/生产改动。当前仅计划，预检后实际派发。
+
+---
+
 # 分类小图与成交额集中度合并补齐 — completed 2026-11-08T21:06:36.940414+08:00
 
 - task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；status completed；scope_released=true。本阶段12个精确前端路径（source-manifest.json）与classification-charts证据已验收释放，适配器worker已结束，无运行写者。
