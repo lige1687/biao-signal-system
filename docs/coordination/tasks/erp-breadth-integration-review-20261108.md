@@ -1,3 +1,17 @@
+# ERP × 宽度 × 趋势实测与同源估值补齐 — completed 2026-11-08T20:41:04.289465+08:00
+
+- task-id erp-breadth-integration-review-20261108；owner 01a1b55e-b30e-7a72-98bc-103222ea9ee5/root；status completed；scope_released=true。本阶段research-id erp-breadth-trend-increment-20261108，旧review/ERP研究不改。
+- checked_coordination_sha=ca2c3c803b633ff401c26e0fbbdef9fe8d6dead0，checked_at=2026-11-08T20:41:04.289465+08:00；已fetch/read自身、trae-observation-integration和microstructure最新阶段（两者又active，均未触碰），沿用本轮已读规则/controller/相关旧研究。无UI、生产或他人数据范围写入。
+- 用户授权的新有界问题已答：固定B50<50且20日下降时目标减半，在沪深300ERP×连续趋势基准上未显示稳定增量。主2018-08-10—2026-06-30、1910价格日/387共同周，原年化2.64%/回撤16.85%，CSI300宽度0.98%/18.63%、全A1.28%/18.73%；始终减半1.55%/9.72%。费用、延迟、2020/2024错失、2022少亏均保留。
+- 同窗重置2021-07-16—2026-06-30、1199日/251周，3源年化增量−0.93/−0.10/+0.09pp，参考范围均跨零。只限制这条固定弱B50减半用途，不声称全部ERP/宽度理论无效；未接建议仓位卡，现有分别观察保留。
+- 追加4公共HTTP补300/500/1000同源addTtmPe共645点，另有两搜索累计6/6。新300ERP6.2964与canonical5.8319差0.4645pp；独立算术核对但供应商口径/日期/修订差未解决，不覆盖原ERP或混源排名。2000/A500同口径连续估值未取得，风格轮动收益未评价。
+- 市场尝试累计3/4：1因延迟成交节假日待单冲突失败，旧代码/日志保留；2修正完成54路径，3固定同窗复核21路径。无搜参。独立核1799信号、117087行资金账，输入/费用/未来扰动/时点/共同样本与区间已核。图实际看过；报告HTTP200全文/分类精确读回；仓库归置通过。P0无剩余。
+- 报告 docs/experiments/erp-breadth-trend-increment-2026-11-08.md SHA256 aa517205ee2cbfe3277e41ed15772fb369e48bd3764973128a440fa0bfaee50d；raw同名目录含protocol/state/attempts/manifest/controller-audit及source补充。registry仅新1key、原837条逐项保留，INDEX仅加1行，旧字节备份在本raw/before。
+- 新外盘结果约29.3MB，固定卷UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9；位置见storage-plan.json。输出/原响应/日志只在外盘，原件不移动；本地小记录约0.7MB。无删除/强推/付费/部署/真实交易/定时采集。
+- 基线仍codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享dirty，源码和新报告仅本地，远端无法独立复现；只推本协调元数据。本有限研究完成，状态completed + not_supported_within_scope，非预算用尽暂停。下一次如有新PIT资料/另定义B20修复用途需沿新问题进入，不能重跑旧阈值找正结果。
+
+---
+
 # 新阶段：ERP × 宽度 × 趋势增量检验 — active 2026-11-08T20:14:05.616535+08:00
 
 - 稳定task-id erp-breadth-integration-review-20261108；owner 01a1b55e-b30e-7a72-98bc-103222ea9ee5/root；status active；scope_released=false。本阶段研究id erp-breadth-trend-increment-20261108，旧review已完、旧ERP22政策及宽度负结果保持封存。
