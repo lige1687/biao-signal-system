@@ -1,3 +1,16 @@
+# 焦点动量三类阈值同口径检验 — active 2026-11-08T20:23:43.858154+08:00
+
+- 原task/owner focus-stock-universe-20261024 / 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；本阶段focus-threshold-three-20261108，scope_released=false。checked_coordination_sha=905d0f4c06609520c120f9d4d2db85c909020ea3，已读COORDINATION/self/breadth/controller及最新ERP宽度趋势独立阶段；原策略SHA一致，沿用current-standards与research-closure。HEAD 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享dirty，成果仅本地。
+- 用户明确要求0、±2保持、先前756日P20/P80同日比较，状态/穿越分开，20/60、尾损、少量邻值和分期；参考老固定池/动态池、已封存H00300和2026续接。冻结1批主效应+已登记敏感性，不调参；1公开Bailey来源核，0新行情/代理/费用。协议/路径/预算在docs/experiments/raw/focus-threshold-three-2026-11-08/。
+- 原有ERP＋宽度＋趋势账户尚无合格完整组合基线，相关owner正做独立增量研究；本轮不碰其数据、代码、报告或抢基线，不把ERP图的数值拼成仓位。第一层只做时间对齐条件结果及缓冲滞后和去反转；账户与真正后续留出单独记录就绪缺项。
+- root唯一写新docs/experiments/raw/focus-threshold-three-2026-11-08/**、同名报告、原progress；归档时再核共享registry/INDEX的单键/单行窗口；其他研究/策略/UI只读。已核外盘UUID，32MiB预算；本机3MiB小记录可容纳，5GiB仅建议。新结果走登记外盘，不覆盖旧。
+- 验收：冻结后一次执行、逐日阈值与标签独立数值检查、两张表/不确定性和反例、分期及邻值、报告归置并读回。尚未跑市场效应，不声称完整账户或真正前向已验证。
+
+- 首次登记因远端新增trae分类/集中度展示安全停止，已读更新、无共同写路径，按新基线普通推送。原冻结研究协议保留其实际首次核对SHA。
+
+
+---
+
 # 焦点图遮线与总览/局部阅读 — completed local 2026-11-05T19:29:56.238748+08:00
 
 - 原task/owner沿用，scope_released=true仅本轮5自有文件：focus-momentum/price-projection.tsx、price-projection.css、chart-navigation.ts/.test.mjs、crossing-markers.ts及自身QA/progress。checked_coordination_sha=af6b85ce89c24fbf37a0998b9e60624ec4279284；已读breadth最新首页两指标与launchd归置更新，无交叉写；主控/原策略批准SHA不变。原金融研究和其他任务不被宣告完成。
