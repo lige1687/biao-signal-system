@@ -1,3 +1,12 @@
+# 行业换手候选归并及细分补齐 · active
+- task-id: microstructure-observations-20261108; owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root; status: active; scope_released: false; updated_at: 2026-11-09T00:44:58.517228+08:00.
+- checked_coordination_sha: d760642bbd480e24f2aedd80b3013bcd2baeb502。已读COORDINATION、自身、集中度布局最新完成释放段、ETF量价完成段、research-dispatch-controller；无活跃重叠。仍避开集中度参考线及公共组件。
+- 原八项前端范围持续归本会话；追加唯一写者范围 src/lei_signal/market_context/microstructure_equity.py, web/public/research/microstructure-observations-20261108/equity.json。只给原股票包加两条指定细分，原65卡与原始证据保留。复建沿用已有供应商换手率、756日严格前窗分位；原56板块统计的样本口径保持。
+- 本地原包只有半导体总类。限定两次同源公开历史查询、每次不超过256KiB，已取得BK1326及BK1325各930点，逐日日期与原行业快照完全吻合；原件和SHA保存在本任务industry-turnover-picker。无其他新增市场数据请求。
+- 验收新增两条原件身份、量额字段位置/单位与分位、原卡字典完整性、选择器六项、唯一候选、旧收藏迁移、桌面实页和定向回归。基线共享本地18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；仅本地。
+ 
+--- 历史记录 ---
+
 # 行业换手候选归并 · active
 - task-id: microstructure-observations-20261108; owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root; status: active; scope_released: false; updated_at: 2026-11-09T00:42:02.641020+08:00.
 - checked_coordination_sha: 057b8e9e7c1e289bfc89cc668f99f71abb139e61; 已读COORDINATION、自身、trae-observation-integration-20261108、trae-sector-observation-20261108、research-dispatch-controller。布局主控仍拥有集中度参考线文件，本轮避开 MicrostructureObservations.tsx、indicatorThumbnailData.ts、concentrationDisplay.ts 和参考线文件；只复用既有组件，不碰快照和策略。ETF量价阶段已释放。
