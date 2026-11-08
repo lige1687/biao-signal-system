@@ -1,3 +1,17 @@
+# 首页四项观察接入已完成 — 2026-11-08T17:46:27.265650+08:00
+
+- task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；status completed；scope_released=true。
+- checked_coordination_sha 06c7ea44d5825a8e110726d4a1604ed0cfa8a76a；交付前fetch/read自身原范围，前轮相关任务无变化。root验收后释放全部本轮准确源码和资料路径，无并行写者或后台任务。
+- 新增A股512100/510300、美股SMH/QQQ与RSP/SPY、VIX/VIX3M四张小图，同页120/252/全部大图、收起摘要恢复、原卡片选择保持。资料截至11月6日，明确静态未自动按日更新。读数0.6426/0.7071/0.2938/1.042倍，20共同交易日变化-3.14/-11.95/+7.38/+24.81%。
+- A股两端重新取得同源新浪原始收盘，其他6系列复用已审Trae缓存；4组2836点独立与原输入核同，60日仅向后，同日内连接。无Trae未来清洗、价格填充、仓位阈值。股债/宽度/真实交易不变，不声称金融收益增量。
+- 前端代理gpt-6.1-sol/medium按预检合同完成4路径并释放，root独审差异与实际fixture，追加标的身份和未来日期校验。实际17定向检查、tsc、内存Vite构建、归置通过；HTTP源SHA相符。桌面1710x947四卡/四详情、历史窗口、A股收起刷新恢复、美股收起恢复、Escape回焦点/无溢出/最终无浏览器error已验收。
+- 证据 docs/ops/trae-observation-integration-20261108/README.md、manifest.json、data-acceptance.json、acceptance.json、scoped-changes.patch及3张实页图。public快照SHA 1da2f06102a43eb8721ea376cefa724960b0786561f6f94b2daf1b80b85e9c64；输入8条SHA在manifest。仓外原audit/contract/源码写前备份继续保留。
+- 失败保留：初次新浪接口名无效，依项目已有provider改正确接口成功；UI组件写入前临时导入失败，待代理就绪再接入；root日期校验一次TS闭包窄化错误，修正后最终全通过。没有降低检查标准。
+- 本轮3次公共行情HTTP请求（含失败1）、0金融实验/调参/付费/删除/强推。快照不自动更新，其他ATR/QVIX/流动性候选维持原审阅分级。现有已保存选择不强改，可在添加其他卡加入；本次Chrome实际入口四卡已默认出现。
+- 共享codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；仅本地，远端不可复现；无源提交/远端部署/8000dist替换，5173当前入口已生效。仅此协调元数据正常推送。恢复先读README与当前manifest，核源新日期后再确定是否刷新。
+
+---
+
 # Trae观察补齐与首页接入
 
 - task-id: trae-observation-integration-20261108; owner: 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root; status: active; scope_released=false; updated_at: 2026-11-08T17:34:12.630666+08:00。
