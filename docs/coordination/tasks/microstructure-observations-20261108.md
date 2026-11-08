@@ -1,3 +1,12 @@
+# 行业换手候选归并 · active
+- task-id: microstructure-observations-20261108; owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root; status: active; scope_released: false; updated_at: 2026-11-09T00:42:02.641020+08:00.
+- checked_coordination_sha: 057b8e9e7c1e289bfc89cc668f99f71abb139e61; 已读COORDINATION、自身、trae-observation-integration-20261108、trae-sector-observation-20261108、research-dispatch-controller。布局主控仍拥有集中度参考线文件，本轮避开 MicrostructureObservations.tsx、indicatorThumbnailData.ts、concentrationDisplay.ts 和参考线文件；只复用既有组件，不碰快照和策略。ETF量价阶段已释放。
+- 工作基线 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 加共享本地已有改动。用户指定把截图中的行业换手卡合成一个可选入口，首批只放点名行业。服务于市场观察层的行业成交活跃展示。
+- 主控唯一写者：web/src/components/market-observation-alerts/indicatorCatalog.ts, web/src/components/market-observation-alerts/indicatorCatalog.test.mjs, web/src/components/market-observation-alerts/selection.ts, web/src/components/market-observation-alerts/selection.test.mjs, web/src/components/market-observation-alerts/IndicatorThumbnail.tsx, web/src/components/market-observation-alerts/index.tsx, web/src/components/market-observation-alerts/IndustryTurnoverObservationCard.tsx, web/src/components/market-observation-alerts/industryTurnoverOptions.ts；本任务industry-turnover-picker证据、work-progress/microstructure-observations-20261108.md。只读代理核本地细分数据，不取新行情、无写权。
+- 验收：行业换手候选唯一、关注行业可切换且曲线对应原卡、缺资料按真实覆盖、旧首页重复收藏收敛、其他收藏保留、桌面实页、定向回归及仓库归置。当前仅登记，源码尚未改动，远端只含协调信息。
+
+--- 历史记录 ---
+
 # 成交额集中度补齐 · completed
 - task-id: microstructure-observations-20261108; owner: 01a1ba80-0b9f-77e2-ab15-bc940cb3d22d/root; status: complete; scope_released: true; updated_at: 2026-11-08T13:02:11.231600+00:00.
 - current coordination parent: c5ea33c5194efa76915c04a1b0fe5588b7ad66dd; 只改本任务元数据，其他任务记录保留。
