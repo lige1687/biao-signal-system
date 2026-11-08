@@ -1,3 +1,14 @@
+# 分类直接显示小图与集中度入口去重 — active 2026-11-08T20:22:57.591549+08:00
+
+- task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=false。用户要求分类中未加入首页的指标也直接显示小图；追加成交额集中度数据不齐需补齐，并明确重复指标只留一个。市场环境观察展示/有界数据工程，不做预测实验。
+- checked_coordination_sha 7bdd8852ce53a341f9798db1bd80697ba188fa7b；fetch/read COORDINATION1.1、自身、microstructure-observations-20261108、research-dispatch-controller、investor-observation-map，复用本任务已读两策略源/根web规范；保留共享dirty基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9。scope overlap：microstructure明确已释放，本轮继续请其原owner负责原equity builder/packet/测试范围的数据补齐，不写本首页文件。原目录写权由本会话回收。
+- root唯一写 web/src/components/market-observation-alerts/IndicatorBrowser.tsx、indicator-browser.css、index.tsx、style.css、indicatorCatalog.ts、indicatorCatalog.test.mjs、selection.ts、selection.test.mjs、新ConcentrationObservationCard.tsx及本classification-charts/**证据目录；worker唯一写新增IndicatorThumbnail.tsx、indicatorThumbnailData.ts、indicatorThumbnailData.test.mjs。其他页面/API/数据包只读；不覆原冻结月度证据。
+- 设计：每张可读指标直接显示当前读数/日期/真实历史小图，缺历史保留具体说明；按可见/分组按需加载控制大量图表。新增小图只复用既有源及算法。集中度一个turnover-concentration入口，日频5%/10%、月频5%为卡内选项；月先按股累计再排名，非日值均值。旧日频收藏迁移到统一ID，去掉独立重复目录项，保持其他选择和默认核心四项。
+- 验收：分类未收藏的真实SVG和读数、搜索/筛选/收藏互不干扰、大图可用、无假连线/无历史项说明、唯一集中度入口与旧收藏去重，TS/内存build/定向必要检查/桌面实页。数据补齐验收由原owner先核、root独立抽查原件算术与覆盖；新金融实验0，付费/删除/强推/策略变更0。
+- 当前已核日/月定义和用户截图缺口；下一步真实派发小图适配器，root做分类接线和集中度合并，等原数据owner回最低取数预算后继续。仅本地未提交、远端不可复现，未部署。
+
+---
+
 # 首页分类与常看指标已完成 — 2026-11-08T19:19:44.532954+08:00
 
 - task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；status completed；scope_released=true。布局源码9个精确路径及分类证据目录已验收释放；无运行写者。
