@@ -1,3 +1,16 @@
+# 分类小图与成交额集中度合并补齐 — completed 2026-11-08T21:06:36.940414+08:00
+
+- task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；status completed；scope_released=true。本阶段12个精确前端路径（source-manifest.json）与classification-charts证据已验收释放，适配器worker已结束，无运行写者。
+- checked_coordination_sha 3487797eb36335062ded51e8de01964c8ee3a2a9；交付前fetch/read COORDINATION1.1、自身、microstructure-observations-20261108、index-valuation-windows-20261108、erp-breadth-integration-review-20261108、research-dispatch-controller；后三项已完成释放，无改他人范围。用户授权跨聊天协作持续有效，原microstructure owner负责equity补数，本会话独立验收并接线。
+- 分类未收藏指标直接显示读数/日期/真实历史小图，六类按需加载；单值/缺项如实显示，无假历史。集中度仅保留一个turnover-concentration目录/收藏入口，旧日5/10收藏合并；卡内切换日5%、日10%、月5%。原用户五项常看保留，默认核心四项不改。
+- 补数日频31/33→43/43（9/1—11/6），月频84/129→128/130（2016-01—2026-10）；原84月不变，剩2016-05/2020-06留空且首屏说明。11/6日5%=43.5509%、日10%=58.2639%，10月月5%=40.0023%。10/22补入旧名录遗漏的新上市301718，6条历史状态冲突仅接受逐行双源数值见证，不放宽缺行门禁。
+- 根主控独立核全池10/19、10/22、10/23、11/6排序/分母/双口径，10月17日逐股累计再排名，6条BaoStock/东方财富原件SHA与量额/OHLC，原84月与冻结月文件、其他62卡不变。public equity SHA256 8dd8f8d6132e719cbc1cb15313bbc27fb0abbf7c5ee31dda6a5339f770e11694。外盘源/取得5360操作账由原数据owner保存，未重复联网。
+- 验收20项定向前端、TS、write:false内存Vite927模块、归置通过；桌面未收藏小图、快照/缺项、唯一搜索、加入移出保留原选择、三口径与月频大图、缺月说明均实际核。最终完整刷新后无新浏览器error。并行估值HMR hook不匹配已用完整刷新解决；截屏方向键触发原标的切换已恢复000001.SS并读回，改用实际卡片clip截图。未掩盖失败记录。
+- 证据 docs/ops/trae-observation-integration-20261108/classification-charts/README.md、acceptance.json、data-arithmetic-acceptance.json、source-manifest.json、scoped-changes.patch及实际页面PNG。来源仍是供应商历史快照，不是官方完整PIT主表，也未自动按新交易日更新；无新收益/预测实验。
+- 基线codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；源码仅本地未提交，远端不可复现。localhost5173已生效；无8000dist替换/部署/生产策略/删除/强推。本次只正常推送自身协调元数据。后续有新源时沿原owner数据流程更新，不复跑封存收益研究。
+
+---
+
 # 分类直接显示小图与集中度入口去重 — active 2026-11-08T20:22:57.591549+08:00
 
 - task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=false。用户要求分类中未加入首页的指标也直接显示小图；追加成交额集中度数据不齐需补齐，并明确重复指标只留一个。市场环境观察展示/有界数据工程，不做预测实验。
