@@ -1,3 +1,13 @@
+# 焦点三种阈值历史核验 — completed historical local 2026-11-08T20:44:35.046127+08:00
+
+- 原task/owner focus-stock-universe-20261024 / 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；scope_released=true，本阶段自有路径释放。checked_coordination_sha=dc19aea2cb325e75143fd96c779969ef521270e3；已读其他owner的ERP组合和估值窗口最新完成段，以及既有分类/集中度范围，无同写。基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享dirty，成果仅本地未源码提交/部署，远端只协调摘要。
+- 一次冻结比较：固定/动态1856日（2018-02-06—2025-09-29）、20/60日、九个事前配置与时段，2026另132日已见历史。固定166→76翻转、102→19快反，35次晚到中位1日，17/45被跳过上穿后仍涨；0以下20日+0.23%，新下穿−0.44%。动态池下穿0与入P20条件差偏负，固定区间跨零及非重叠反例保留。只作观察和降噪，不升交易规则。
+- docs/experiments/focus-threshold-three-2026-11-08.md SHA ea31dcfcc6ace28f293b3740a95c357a028ab0ae693137e0e21fc149e742d449，宏观与情绪/mixed，只自有登记键和INDEX一行；其余项保留。8000/5173逐字200、归置通过。标准库独核3844×9、160组统计、310配对。协议、回执和协调前置失败在docs/experiments/raw/focus-threshold-three-2026-11-08；summary SHA d9b40988b0a6d06222f8e11b06f60e42c3d2bbca4773494da9318c6e20b181dc，大结果固定UUID外盘。1市场批、0重跑/行情/搜参/代理、1Bailey原文；原冻结保持。
+- 真正前向等待锁定后的新资料成熟。收尾复核新ERP＋宽度＋趋势试验：指数代理、弱B50减半无稳定增量、无已接受ETF账户、PIT/实际执行仍不齐；未跑焦点账户。历史可做项已完成，待接续读protocol/state/account-readiness。无后台或交易行为。
+
+
+---
+
 # 三类焦点阈值已核数，登记报告 — active 2026-11-08T20:38:46.572121+08:00
 
 - 原task/owner及写边界延续，checked_coordination_sha=f0e506aa9125e5b6244a59f4a206ce465461bb72；已读新增index-valuation-windows与microstructure，前者只预留自己估值报告键、后者仅集中度；无共享源码写，本次串行短窗口只新增focus-threshold-three-2026-11-08报告自己的registry键及INDEX一行，保护所有其余条目及原内容。
