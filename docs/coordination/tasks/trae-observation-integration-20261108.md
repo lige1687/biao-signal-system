@@ -1,3 +1,13 @@
+# 集中度日频历史回填 — completed 2026-11-09T00:56:12.579324+08:00
+
+- task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=true；checked_coordination_sha fd00d7d2d32da1acb3b149b0180d66204e1f16a1。交付前复核新增HY完成段，无写范围重叠；延用已读COORDINATION、自身、microstructure交接、成员离散度及中控。原成员离散度共享组件范围未动。五个精确路径与证据全部释放，独立worker已结束。
+- 原43日扩大为2016-01-04—2026-11-06的2633日，2631有效，新增2588日。仅2016-05-12/2020-06-17留空。8/31日5/10为44.7348%/59.0129%，原43日逐值、130月及其余65卡逐字典保留。两小图从2026-05-14开始且MA20从左端可画，详情全部历史可读。
+- 逐件核12587+5307原件、校验新旧同口径；一次离线重放，0新取数/回测/交易。新accepted回执SHA绑定精确三卡，原回执保留；复建读取结果与当前包一致。新包SHA256 e6f6598ef1cb8741b484c7cb5ee7d5082e5d537cbfc31f54b00ee4335e57291d，备份、派生与日志在验证外盘，工程报告列路径和预算。
+- 根与只读代理独立核结果，Python6项/前端17项/TS/归置及Chrome实际两口径、小图原值/均线起点、全部历史通过。IAB无法控制已改用Chrome，不影响页面资料。证据 docs/ops/trae-observation-integration-20261108/concentration-daily-history/README.md、publication.json、source-manifest.json、daily-top10.png。
+- 原共享基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；本地5173已生效，源码未提交、未部署，远端仅正常推送协调元数据。
+
+---
+
 # 集中度日频历史回填 — active 2026-11-09T00:51:57.498346+08:00
 
 - task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=false；checked_coordination_sha 5a88e0d6798ad5f8a0de0e4c1ef2064eb6e130f4。读取 COORDINATION1.1、自身、microstructure、member-dispersion、hy-oas、中控。行业原owner于3b0fd796结案并明确交接数据/构建器；成员离散度独占MicrostructureObservations.tsx、IndicatorBrowser.tsx，本轮避开。其余无重叠，保留18e64fa632dba5dbad0e5fcae09b4ccc75f119a9共享本地。
