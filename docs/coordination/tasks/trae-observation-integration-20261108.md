@@ -1,3 +1,12 @@
+# 成交额集中度参考线 — completed 2026-11-09T00:42:53.178973+08:00
+
+- task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=true。交付前checked_coordination_sha 882fe8cff891e940d9e55f0d59fe68f678c5f8f4，重新读新行业换手归并登记；其唯一写者明确避开本轮五文件，精确SHA未变。已读COORDINATION1.1、自身、microstructure、ETF量价、估值窗口、ERP宽度及中控。worker交还，root验收释放。
+- 月频小图119/120有效月，40.00%高于76.5%历史月份，P80/P90/P95=40.61%/42.65%/44.64%；排除当月与缺值，虚线只作最新月参照。大图附5年对照及同月宽度/日均成交读法。日5原值+MA20+中金Wind日频46%参考；日10显示自身MA20，43日暂不报长期分位。45%与50%已核原文口径差异，未画成统一门槛。
+- Python独立复算、17项定向、TS、write:false Vite932模块、归置及实际桌面页面三口径/小图与大图通过。刷新后无新增error，临时HMR、定位歧义及超时记在报告。equity包SHA未变。首次结案提交准备因同步点已推进退出，未推写；读回新owner范围后使用最新父提交。
+- 证据 docs/ops/trae-observation-integration-20261108/concentration-references/README.md、scope.json、source-manifest.json、monthly-reference.png。4公开原文核验、1描述性校准、0收益实验/行情采集/联合提醒/部署/交易变更。基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，共享本地未提交，仅协调元数据正常推送。
+
+---
+
 # 成交额集中度参考线 — active 2026-11-09T00:35:46.774627+08:00
 
 - task-id trae-observation-integration-20261108；owner 01a1ba4c-f7c4-7de2-b51d-9552681be8c4/root；scope_released=false；checked_coordination_sha dbac61ad042dcff5df5cdb5137bd359158182c17。已读COORDINATION、自身、microstructure-observations-20261108、index-valuation-windows-20261108、trae-sector-observation-20261108、erp-breadth-integration-review-20261108、research-dispatch-controller。相关owner均释放精确路径，保留共享脏基线18e64fa632dba5dbad0e5fcae09b4ccc75f119a9。
