@@ -1,3 +1,12 @@
+# 三类焦点阈值已核数，登记报告 — active 2026-11-08T20:38:46.572121+08:00
+
+- 原task/owner及写边界延续，checked_coordination_sha=f0e506aa9125e5b6244a59f4a206ce465461bb72；已读新增index-valuation-windows与microstructure，前者只预留自己估值报告键、后者仅集中度；无共享源码写，本次串行短窗口只新增focus-threshold-three-2026-11-08报告自己的registry键及INDEX一行，保护所有其余条目及原内容。
+- 冻结批次已完成1/1，固定/动态共同1856日、独立复算3844条逐日×9规则、160组统计、310配对。固定池166→76少54.2%，5日来回102→19；已完成历史表现、下行、条件增量、相邻值及2026顺序检查。账户仍待ERP/宽度/趋势合格基线，真前向未成熟。已有冻结、UI及策略均未改。
+- 当前只收口报告登记及读回，不重跑市场。新大结果/日志已在固定外盘；初次协调base变化安全停，无远端覆盖，已检查并登记。新源核对1，0新行情、0付费、0代理。
+
+
+---
+
 # 焦点动量三类阈值同口径检验 — active 2026-11-08T20:23:43.858154+08:00
 
 - 原task/owner focus-stock-universe-20261024 / 01a16bd6-3661-7cd3-a2ff-5cadfa181605/root；本阶段focus-threshold-three-20261108，scope_released=false。checked_coordination_sha=905d0f4c06609520c120f9d4d2db85c909020ea3，已读COORDINATION/self/breadth/controller及最新ERP宽度趋势独立阶段；原策略SHA一致，沿用current-standards与research-closure。HEAD 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享dirty，成果仅本地。
