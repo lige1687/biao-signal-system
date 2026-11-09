@@ -1,3 +1,13 @@
+# 市场观察面板三层重构 · 本地开发验收
+
+- task-id market-observation-panel-v2-20261109；owner 01a1c061-147b-7dc0-a226-ebc780c63117/root；status completed；scope_released=true；updated_at 2026-11-09T21:34:52+0800。
+- checked_coordination_sha 97a024c740f261a242d628e9f41e51f2b1c32e01。交付前重新获取并读回本任务与上一同步点；相邻任务范围无变化。全部写者结束，本次阶段记录 docs/ops/work-progress/market-observation-panel-v2-20261109.md。
+- 25张观察卡与三组诊断本地读回；四期指490日、A股PCR 271日到11/09，美股PCR 279日到11/06，NFCI 200周，焦点股/下跌冲击/STR/当前成员相关均至11/06。BW作者历史至2025-12，代理到11/09。510300 IV 仅8日，A股全截面11/09原件待取得，NAAIM近三周公开图表估读。
+- 验收：独立统计复算、HTTP本地数据字节一致、真实桌面组合状态及小图/弹窗、Python/TS/Vite/归置通过。数据包SHA256 9ee8fe304262c7afa75db6c17e5ee489f51614e86515e47aad196f75c6922101；外盘固定UUID已核并保存114项小型证据。
+- 基础18e64fa632dba5dbad0e5fcae09b4ccc75f119a9加共享本地改动。最近已推送本任务代码成果：无。本轮远端写入仅本任务协调元数据。用途是市场环境观察；原策略、交易和冻结研究源未修改。
+
+---
+
 # 市场观察面板三层重构
 
 - task-id market-observation-panel-v2-20261109；owner 01a1c061-147b-7dc0-a226-ebc780c63117/root；status active；scope_released=false；updated_at 2026-11-09T20:58:01+0800。
