@@ -1,6 +1,6 @@
 # 抖音羊驼神研究与科创50/100宽度观察试做
 
-- task-id: douyin-yangtuoshen-20261113；owner: 01a1d305-954b-7ed2-9dc6-430491131d6c/root；status: blocked / core_source_access；scope_released: true；updated_at: 2026-11-13 Asia/Shanghai。
+- task-id: douyin-yangtuoshen-20261113；owner: 01a1d305-954b-7ed2-9dc6-430491131d6c/root；status: active；scope_released: false；updated_at: 2026-11-13 Asia/Shanghai。
 - 目标：按用户澄清只逐条看作者与投资模型、顶底及观察有关的视频；并制作科创50与科创100内部均线宽度的本地观察试做。复用已有快照、保留独立因子研究和生产/实盘边界。
 - checked_coordination_sha: 6d05c778b9e4e96364b0c125abf3d275582e5584；已读 COORDINATION、research-dispatch-controller、market-observation-panel-v2-20261109、breadth-reading-aid-20261101、trae-observation-integration-20261108。相关已登记前端阶段均已释放；不接管其他任务。
 - 工作树 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，叠共享本地未提交修改；成果尚未提交，远端无法复现。
@@ -15,3 +15,7 @@
 - 完整相关视频音视频和字幕未取得：详情接口拒绝访问，当前平台摘要不可当原文。后续需要可访问视频或字幕，方可完成逐条整理与模型定义核对。
 - Gemini 4 Argon高的两份复核请求仍在生成/搜索，尚无可用答复；旧回答高胜率和固定阈值缺核验证据，不予采纳。
 - 本轮路径写入结束并释放；共享工作树其他未提交内容保留。未变更策略、账户、生产、OKR或外部发布。
+
+## 用户要求接续
+
+只读查旧视频完整转写方法、继续尝试其他相关视频和 Gemini 4 Argon 高。允许写入本任务既有研究与进度文档，尤其更正待核实的来源归属；不改其他路径。
