@@ -1,6 +1,6 @@
 # 抖音羊驼神研究与科创50/100宽度观察试做
 
-- task-id: douyin-yangtuoshen-20261113；owner: 01a1d305-954b-7ed2-9dc6-430491131d6c/root；status: active；scope_released: false；updated_at: 2026-11-13 Asia/Shanghai。
+- task-id: douyin-yangtuoshen-20261113；owner: 01a1d305-954b-7ed2-9dc6-430491131d6c/root；status: blocked / partial_sources；scope_released: true；updated_at: 2026-11-13 Asia/Shanghai。
 - 目标：按用户澄清只逐条看作者与投资模型、顶底及观察有关的视频；并制作科创50与科创100内部均线宽度的本地观察试做。复用已有快照、保留独立因子研究和生产/实盘边界。
 - checked_coordination_sha: 6d05c778b9e4e96364b0c125abf3d275582e5584；已读 COORDINATION、research-dispatch-controller、market-observation-panel-v2-20261109、breadth-reading-aid-20261101、trae-observation-integration-20261108。相关已登记前端阶段均已释放；不接管其他任务。
 - 工作树 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，叠共享本地未提交修改；成果尚未提交，远端无法复现。
@@ -31,3 +31,9 @@
 - 用户扩展到量化舵及其他博主，重用已有完整音频与冻结研究，核实一条可访问完整音轨的其他博主视频，并继续 Gemini 4 Argon 高。checked_coordination_sha: 9b2e95531a97b510fe870980db03889535496c12；已读 COORDINATION、research-dispatch-controller、本任务及旧量化舵/维克/HMM研究；相同课题旧结果仅复用。
 - 本轮唯一写者root，仅写新报告 docs/experiments/douyin-multicreator-models-2026-11-13.md 和自己的进度 docs/ops/work-progress/douyin-yangtuoshen-20261113.md；不修改共享前端/策略、生产和他人任务。媒体临时文件仅用于已授权来源研究，保留来源及时长。
 - 羊驼神源音轨仍受403阻塞，已显示504个作者作品并粗筛，作品主页显示509，差额未知；标题筛选不代替内容完整审查。已有Gemini答复须独立核对。
+
+## 三次接续交接及释放
+
+- 新报告 docs/experiments/douyin-multicreator-models-2026-11-13.md 保存系统对照、旧研究增量和来源限制；B站两条完整音轨转写及抽帧已校验与外盘备份，同名抖音账号身份未经证实。完整相关抖音视频依然受媒体接口拒绝而未完成。
+- 沪深供应商历史十日严格同向描述2016-01-15—2026-10-23，共2614个有效日期，输出及复核账本保存在 /Volumes/win+mac通用/LeiSignal-新实验结果/douyin-ten-day-streak-20261113/douyin-ten-day-streak-20261113-20261113T235122-42fa026b9f0e/；事后生命周期非PIT，未验证预测增量。
+- Gemini 4 Argon高一轮得到回答并由本地数据核正其中两项过度推断，其他追问未取得可用回答；最新复核仍待页面结果。所有源码仅本地未部署，未修改策略、资金或生产；报告与自身进度完成写入并释放。
