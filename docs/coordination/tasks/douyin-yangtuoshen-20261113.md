@@ -1,6 +1,6 @@
 # 抖音羊驼神研究与科创50/100宽度观察试做
 
-- task-id: douyin-yangtuoshen-20261113；owner: 01a1d305-954b-7ed2-9dc6-430491131d6c/root；status: blocked / core_source_access；scope_released: true；updated_at: 2026-11-13 Asia/Shanghai。
+- task-id: douyin-yangtuoshen-20261113；owner: 01a1d305-954b-7ed2-9dc6-430491131d6c/root；status: active；scope_released: false；updated_at: 2026-11-13 Asia/Shanghai。
 - 目标：按用户澄清只逐条看作者与投资模型、顶底及观察有关的视频；并制作科创50与科创100内部均线宽度的本地观察试做。复用已有快照、保留独立因子研究和生产/实盘边界。
 - checked_coordination_sha: 6d05c778b9e4e96364b0c125abf3d275582e5584；已读 COORDINATION、research-dispatch-controller、market-observation-panel-v2-20261109、breadth-reading-aid-20261101、trae-observation-integration-20261108。相关已登记前端阶段均已释放；不接管其他任务。
 - 工作树 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，叠共享本地未提交修改；成果尚未提交，远端无法复现。
@@ -25,3 +25,9 @@
 - 核实旧维克26条为完整音频转写，旧CDN修复发生于取得媒体URL之后；本次三条不同作品的详情解析均为403。用户澄清范围内仍未完成逐条完整观看，需要可访问音视频或字幕。
 - 更正雪球jalp文章与抖音博主的身份归属未经证实，文章与视频模型也不能假定一致。又查看一条科创收藏视频的局部画面和评论，未取得完整内容。
 - 两项 Gemini 4 Argon高重新提交后长时间生成且页面消失，未获取可用答复；研究文档保存错误来源与恢复状态。本轮文件修改结束并释放。
+
+## 三次接续：多博主研究
+
+- 用户扩展到量化舵及其他博主，重用已有完整音频与冻结研究，核实一条可访问完整音轨的其他博主视频，并继续 Gemini 4 Argon 高。checked_coordination_sha: 9b2e95531a97b510fe870980db03889535496c12；已读 COORDINATION、research-dispatch-controller、本任务及旧量化舵/维克/HMM研究；相同课题旧结果仅复用。
+- 本轮唯一写者root，仅写新报告 docs/experiments/douyin-multicreator-models-2026-11-13.md 和自己的进度 docs/ops/work-progress/douyin-yangtuoshen-20261113.md；不修改共享前端/策略、生产和他人任务。媒体临时文件仅用于已授权来源研究，保留来源及时长。
+- 羊驼神源音轨仍受403阻塞，已显示504个作者作品并粗筛，作品主页显示509，差额未知；标题筛选不代替内容完整审查。已有Gemini答复须独立核对。
