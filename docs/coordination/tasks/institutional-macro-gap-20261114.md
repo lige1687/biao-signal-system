@@ -1,6 +1,6 @@
 # 机构宏观与择时公开框架及系统缺口
 
-- task-id: institutional-macro-gap-20261114；owner: 01a1d305-954b-7ed2-9dc6-430491131d6c/root；status: completed / bounded_evidence；scope_released: true；updated_at: 2026-11-14 Asia/Shanghai。
+- task-id: institutional-macro-gap-20261114；owner: 01a1d305-954b-7ed2-9dc6-430491131d6c/root；status: active / iterative_research；scope_released: false；updated_at: 2026-11-14 Asia/Shanghai。
 - checked_coordination_sha: c7e990649d7f247768cc6db7199cfdb5278ec513；已读COORDINATION、research-dispatch-controller、cross-market-risk-context-20261102、market-increment-map-20261102、gemini-factor-fit-20261104、market-observation-panel-v2-20261109；旧成果及预算封存不重跑。
 - 目标：以机构公开材料对照系统现有宏观、压力、趋势及宽度，判断缺口及已知交易证据；针对已存ALFRED两个金融条件历史发布版本，只做NFCI与ANFCI可观察差异的描述性资格比较。无资金操作和预测回测，已有策略研究只引用。
 - 数据与实验合同：2011-05-25—2026-10-21已存两个历史发布版本，单版本选最新共有观察周，同周零线之上/以下及最近4周变化符号比较，0单列，缺历史时排除；日级发布版本，至少次交易日后可得，不认定盘中。四周变化使用同一版本内相差28自然日的历史观察；不读预测标签、不根据结果选阈值。保留年份与连段，相关仅同期描述，非预测增量或交易。先写合同，再一次计算。
@@ -17,3 +17,9 @@
 - 801发布版本同期描述：水平异向117次共17段，四周变化异向180次、57次至少一侧零；只描述不同，不是预测增量。
 - SPY已见历史固定季度回报预测：2015-01-02—2026-07-16，600个评价日，价格+NFCI MSE 56.693，加ANFCI 61.056，均值对手47.025。增量−4.363百分点平方，26周块经验范围[−9.690,−0.118]，7年改善5年变差；非独立未来证据，不是账户交易效益。完整合同、结果、源指纹、逐行目标与抽样模型独立审阅见 /Volumes/win+mac通用/LeiSignal-新实验结果/institutional-macro-gap-20261114/institutional-macro-gap-20261114T000951-8c2541e0a5b5/。
 - 两次Gemini 4 Argon高请求均未取得正文，其中一次刷新回到空白对话；不宣称有效回复。累计公开来源6次，描述1批、预测1批，无新行情、账户、生产、交易、删除或强推。实验路径与报告写入结束并释放；缺盈利预期完整版本、中国信用口径及未研究风险用途保留为边界。
+
+## 用户要求Gemini多轮联合研究：接续登记
+
+用户明确要求以批次交由 Gemini 4 Argon 高深度探索、返回建议与下一方向、由主控核原始证据并继续研究、再交回复核。已向此前有可读回答的网页对话实际提交第一批问题；上两轮无正文失败保留。优先核盈利预期变化和中国信用结构的现存资料及此前研究；旧6次来源、描述批和预测批账本不清零，旧研究结果不重跑。研究任务必须等待Gemini实际答复才声称跨模型完成。
+
+主控唯一写：现有报告 docs/experiments/institutional-macro-gap-2026-11-14.md 的新增接续章节和自己的 docs/ops/work-progress/institutional-macro-gap-20261114.md；隔离只读资料代理一名。先查当前版本、来源、预算和旧冻结；新增实证须另登记合同、消耗与产权。不得把姓名、账号、持仓、敏感数据和凭证交给外部服务，不改资金、策略、生产、部署或共享代码；需使用新公开来源时先确定独立子问题与本题累计预算，不能改名重置旧研究。checked_coordination_sha: c933a3ae5e48c3bfaefac93288da1bb575b77570，已读COORDINATION、自身及相关旧任务；唯一范围与他人无写入重叠。
