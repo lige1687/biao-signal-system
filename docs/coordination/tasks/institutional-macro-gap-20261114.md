@@ -44,3 +44,9 @@
 - checked_coordination_sha=1487de332d80bc759cf7056f850719ae1a80d694；继续唯一写者 root。用户已要求把首页截图交给 GPT 审阅，增加本地验收截图 docs/ops/institutional-macro-gap-20261114/home-overview.jpg；只读连接器可读取该图，不上传仓库、账户数据或凭据。
 - 实页核对发现 COR3M 预览简介将对象笼统称为标普成分股；增加 web/src/components/market-observation-alerts/indicatorCatalog.ts 与 web/src/components/market-observation-panel/model.ts 的准确表述范围，写明 Cboe 以市值选出的50只成分股与指数期权定价，原数据和规则不变。两文件所属前述 owner 记录均已释放，先备份原字节。
 - 本次其余范围、数据预算和无生产交易边界不变；当前总览及五项缺口仍在验收，未声明完成。
+
+
+## 验收备份范围 2026-11-15T09:45:59+08:00
+
+- checked_coordination_sha=f507aa1e3502ebf444a9b2e63904c7f52486eadc；增加本任务自有本地证据路径 docs/ops/institutional-macro-gap-20261114/before/**，仅存本轮实际修改前的字节副本与校验清单，root唯一写者。其余范围不变。
+- 首页四图、原自选、25卡及数据入口已实页核；Pro完成文字复核但未见截图。新增数据预算请求已交用户，结果尚未收到；不预支来源调用或批量行情。
