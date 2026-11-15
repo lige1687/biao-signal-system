@@ -4,14 +4,15 @@
 - owner: Codex当前chat 01a1de33-42bb-7ce3-b34a-241079e8452d（/root）
 - status: active
 - scope_released: false
-- updated_at: 2026-11-15T23:25:54.226405+08:00
-- checked_coordination_sha: 933039534bdcfca4128e379d81181584755e115c
+- updated_at: 2026-11-15T23:37:46.708185+08:00
+- checked_coordination_sha: 891bcad95b9ba49c2e8eb4711158885ed98ffd49
 - 已读task-id: 自身、market-observation-panel-v2-20261109、microstructure-observations-20261108、trae-observation-integration-20261108；沿用本轮已读COORDINATION1.1、research-dispatch-controller及institutional-macro/douyin相关记录。
 - 最新用户授权: 继续找半导体/通信内部宽度、行业融资占比和盈利修正历史，能补先补/已有尽量更新；科创过多文字改图；截图指定沿首页常看样式，把首页常看放首位默认、不再强推中美总览；双均线另对话不处理；延续前轮本机部署授权。
 - 目标/用途: 日常低频宽基/行业ETF观察参与结构、交易活跃和预测变化；当前基线是科创固定池数量曲线、10-30单日权重和行业换手11-06快照。新补数据只改善观察覆盖与读图负担，不新设仓位/买卖规则，不评价收益增量。
 - 分支/基线: codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 + dirty原样保存；上阶段8000部署回执已核。产品未提交。
 - 冲突决定: panel-v2协调旧active未释放，但实际App线程01a1c061-147b-7dc0-a226-ebc780c63117已读status notLoaded、最后turn completed，11-09已有独立验收；本轮用户明确新布局请求只续改列明前端，不修改其记录/后端。microstructure旧数据不覆盖原件，只发布核通过的新取得版本并留备份。root总控登记，各写者不重叠。
 - UI代理唯一写: ["web/src/components/market-style/StarBreadthSnapshot.tsx", "web/src/components/market-style/StarWeightedBreadthSnapshot.tsx", "web/src/components/market-style/star-breadth.css", "web/src/components/market-style/observation-snapshots.test.mjs", "web/src/components/market-observation-alerts/index.tsx", "web/src/components/market-observation-alerts/indicatorCatalog.ts", "web/src/components/market-observation-alerts/CompactOverview.test.mjs"]。
+- root再追加唯一写: web/src/components/market-observation-alerts/EarningsRevisionSampleCard.tsx、web/src/components/market-style/EarningsCoverageSnapshot.tsx（仅缩短重复文字/区分聚合覆盖与研报样例）、web/public/research/earnings-revisions-20261115.json；复用root的sector-structure.css样式。
 - root追加唯一写: web/src/components/market-observation-alerts/SectorStructureCard.tsx、web/src/components/market-observation-alerts/sector-structure.css、web/src/components/market-observation-alerts/sectorStructureData.test.mjs；docs/experiments/market-structure-data-refresh-2026-11-15.md、docs/experiments/registry.json（仅新增本报告条目，保留所有既有dirty内容）、docs/experiments/INDEX.md（仅本报告行）；根范围不与代理7文件重叠。
 - root唯一写: ["web/src/components/market-observation-alerts/selection.ts", "web/public/research/sector-structure-20261115.json", "web/public/research/earnings-revisions-20261115.json", "web/public/research/star-breadth-20261115.json", "web/public/research/star-weighted-breadth-20261030.json", "web/public/research/microstructure-observations-20261108/equity.json", "web/public/research/microstructure-observations-20261108/funding.json", "web/dist/**"]；必要新增SectorStructureCard.tsx/sector-structure.css仅root在核数据协议后实现（不与代理重叠）；报告/元数据登记先保留本阶段产物，不动他人封存结论。
 - 数据代理仅写各自已核外盘目录/Volumes/win+mac通用/LeiSignal-新实验结果/market-observation-refresh-charts-20261115/market-observation-refresh-charts-20261115-20261115T232047-981386133af6/sector、/Volumes/win+mac通用/LeiSignal-新实验结果/market-observation-refresh-charts-20261115/market-observation-refresh-charts-20261115-20261115T232047-981386133af6/earnings和仓外本阶段sector/earnings小证据；不写产品/共享清单，root独立验收后发布。UI代理不联网。
