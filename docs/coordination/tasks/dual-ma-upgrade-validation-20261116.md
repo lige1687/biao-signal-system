@@ -1,3 +1,24 @@
+# 双均线确认/ATR有限验证已交付
+
+- task-id: dual-ma-upgrade-validation-20261116
+- owner: Codex chat 01a1dfb9-3446-7962-9386-a21fde746f84 /root
+- status: completed
+- scope_released: true
+- updated_at: 2026-11-16T00:44:17.512166+08:00
+- checked_coordination_sha: 724a133ff4cd7d5db7c86f5d091325e5ab4315e4
+- checked task-id: 本任务、research-dispatch-controller、market-observation-weighted-compact-20261115及COORDINATION1.1；前轮读classic-factor-research/technical-factor-sequence分工保留。冲突决定：只写自己的报告/raw/进度，registry只新增本报告并逐条核旧项完整；无其他owner同项修改，现已释放窗口。
+- 本轮实际2批20候选账户、60纠错基准只读、0封存重跑。固定2022-01-01至2026-06-30、每账户10万元、基础每次0.1%/压力0.2%。X20删除SMA斜率六只3正3负；A20 ATR四只2正2负，少44–66次单边买卖但3只回撤更深。稳健收益增量证据不足；保留少操作候选，不改生产。
+- 报告：docs/experiments/dual-ma-upgrade-validation-2026-11-16.md；raw同名；进度docs/ops/work-progress/dual-ma-upgrade-validation-20261116.md。报告registry单项新增已读回；当前研究成果仅本地未提交，远端不可复现数据，不用协调提交冒称源码成果。
+- 分支/工作基础：codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，所有他人dirty保留，不动默认index。最近已推成果commit不适用（本地研究）；本协调元数据普通push另核SHA。
+- 外盘运行索引：LeiSignal-新实验结果/dual-ma-upgrade-validation-20261116/dual-ma-upgrade-validation-20261116-20261116T002507-ee8ef9943ce9/result；设备UUID DEBA1C85-6059-3865-B50A-A8EE1F80E4D9。
+- 验收：168来源/117成果指纹再核，8项合成检查；root重算80账户和20候选32840自然日桥；gpt-6-sol/medium只读独立核费用/分红/年度/次日执行，无P0；归置检查退出0。生产、真实交易、独立未来验证未运行；新下载/付费/调参/Gemini发送0。
+- 失败保持：原CSV仅换行漂移，外盘恢复精确旧SHA且不改原件；ENOSPC→新运行外盘；用户明确同意才删本轮3,790,407字节临时索引，先留恢复副本，无其他删除；后处理半仓全进全出断言失败改为不适用，无金融重跑；代理绝对路径预检失败后精确边界修正。
+- 预算新金融2/4尝试，核心1/后续1；旧审查0金融/1数学/8公共请求（旧上限超2）及旧研究全部累计账不重置。独立新时期、70/30分层和其他贴文模块未评价，不冒称本题覆盖。
+- 原双均线系统目标仅追加成果历史，version24→25，原status/owner/next_action保持；目标未勾完成。无后台运行。
+- 下一动作：本有界历史问题已回答，交付结论；新独立合格资料或不同具体用途才重开，不换阈值追正。不接管其他市场观察/技术/经典负责人。
+
+## 开工记录（历史状态）
+
 # 双均线补充规则验证
 
 - task-id: dual-ma-upgrade-validation-20261116
