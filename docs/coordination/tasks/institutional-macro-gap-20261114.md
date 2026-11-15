@@ -50,3 +50,12 @@
 
 - checked_coordination_sha=f507aa1e3502ebf444a9b2e63904c7f52486eadc；增加本任务自有本地证据路径 docs/ops/institutional-macro-gap-20261114/before/**，仅存本轮实际修改前的字节副本与校验清单，root唯一写者。其余范围不变。
 - 首页四图、原自选、25卡及数据入口已实页核；Pro完成文字复核但未见截图。新增数据预算请求已交用户，结果尚未收到；不预支来源调用或批量行情。
+
+
+## 首页首批验收，补数等待额度 2026-11-15T09:47:11+08:00
+
+- task-id/owner不变；status=paused / awaiting_user_source_budget；scope_released=true，仅本轮前端与文档写范围释放。checked_coordination_sha=15449691e3526ef0a1f3d26555e3f5ab52761f7e。后续恢复前重新fetch并核对路径占用和当前本地改动。
+- 用户已认可五项，首页已在本地5173显示四张中美真实历史小图，原5项自选刷新后保留，三层25卡、四项大图/回焦点、科创固定快照及联读入口实页核；截图 docs/ops/institutional-macro-gap-20261114/home-overview.jpg。COR3M已有、显示2026-11-06，口径补充为50只大市值成分股与指数期权。
+- Pro原对话新增三轮实际文字复核；其未看到截图、未操作页面，连接器read_image报内部错误。按意见调整12px日期/图例、轨道实虚线、大图直达、异期联读说明；CN与US三年滚动轨道含当期口径不同已核。
+- NODE_ENV=production针对性25项通过，TypeScript通过，Vite write:false 946模块通过；浏览器错误0，1280×720及1440×900页面检查。真实源码/截图与报告仅在共享本地脏区，未提交或部署；备份和SHA清单 docs/ops/institutional-macro-gap-20261114/before/。协调推送不是产品上线。
+- 五项未全部补齐：科创仅11-12固定名单试算；盈利修正及社融未接入；RSP/SPY为代理，不是合格同池收益及权重。已向用户请求追加最多12次免费来源核查（含失败）和两份名单、最多150只科创成分行情；尚未收到决定，0新增来源请求、0新增金融实验、0交易。前两阶段各6/6及失败不重置。
