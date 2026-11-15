@@ -27,3 +27,13 @@
 ## 用户更新：研究建议与指标联动
 
 用户最新明确只做资料研究、与 Gemini / 网页 GPT 多轮讨论和建议清单，提交用户审议；停止新增实验、回测和指标实现，不更改生产、策略或交易。此前已完成结果只作受限历史证据。唯一写入仍为原报告和进度；只读代理核查现有指标及组合反例。已用原阶段公开来源 6/6、来源资格阶段 6/6，分别保留账本。网页 GPT 页面读取超时，尚未获取正文；Gemini 两轮有正文，第三轮已提交但未读到结果。任务保持 active，待跨模型迭代及建议审议材料。
+
+
+## 用户批准观察补充及首页紧凑图：开始首批实现 2026-11-15T09:17:16+08:00
+
+- task-id/owner沿用 institutional-macro-gap-20261114 / 01a1d305-954b-7ed2-9dc6-430491131d6c/root；status active，scope_released=false；checked_coordination_sha=c742eabf50609656d6bb5c8f637c712d2807d8d9。已读 COORDINATION、research-dispatch-controller、原任务、market-observation-panel-v2、douyin-yangtuoshen、breadth-reading-aid、cross-market-risk-context、microstructure、trae-observation-integration、trae-sector、erp-observation-clarity、focus-stock-universe 最新相关记录；涉及路径已释放，不覆盖他人已有改动。
+- 用户认可五项候选、紧凑中美总览必须保留真实小图，并要求 GPT Pro 重新判断 COR3M 位置；原会话本轮回复已实际获得。用户授权观察层补充和首页布局；不授权新回测、交易、生产策略改动、部署、删除或强推。之前文献/来源预算和封存结论不清零。
+- 本批唯一写者 root：web/src/components/market-observation-alerts/index.tsx、style.css、IndicatorThumbnail.tsx、MiniTrend.tsx、CompactOverview.tsx、compact-overview.css、CompactOverview.test.mjs；docs/superpowers/plans/2026-11-15-market-overview-compact.md；docs/experiments/market-homepage-review-2026-11-14.md 追加本轮评审；docs/ops/work-progress/institutional-macro-gap-20261114.md 追加进度。相关未列路径只读；若需新增写入先更新本记录。
+- 现状：源码基线 codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 加共享脏区；5173 为本地开发服务，既有文件先按字节备份并保护；仅本地未部署，远端无本任务源码成果。
+- 本批目标：增加中美四项核心紧凑历史图总览，保留现有用户自选及完整25项入口；真实末值、日期、参考线、缺项和股票池清楚呈现。科创仅标既存 2026-11-12 固定名单快照，盈利修正未合格保持未知；COR3M 已存在，按实际数据日期呈现并可进详情。五项其余缺失数据另分阶段，不以占位冒充已补。
+- 验收：有意义的用户选择/缺失数据测试先红后绿，相关既有回归、TypeScript与不覆盖dist的构建；内置浏览器桌面页面核对1280宽下图表和切换、原自选不被重置。先登记推送并读回，再动共享前端；不做金融效益实验或新增数据下载。
