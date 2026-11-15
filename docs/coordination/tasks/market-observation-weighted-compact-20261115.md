@@ -1,3 +1,26 @@
+# 市场观察：继续补数、常看优先和科创图形化（当前阶段）
+
+- task-id: market-observation-weighted-compact-20261115
+- owner: Codex当前chat 01a1de33-42bb-7ce3-b34a-241079e8452d（/root）
+- status: active
+- scope_released: false
+- updated_at: 2026-11-15T23:22:16.218421+08:00
+- checked_coordination_sha: 03f992fb11ec2f81de531a4f5ffab6e7a89e4e2c
+- 已读task-id: 自身、market-observation-panel-v2-20261109、microstructure-observations-20261108、trae-observation-integration-20261108；沿用本轮已读COORDINATION1.1、research-dispatch-controller及institutional-macro/douyin相关记录。
+- 最新用户授权: 继续找半导体/通信内部宽度、行业融资占比和盈利修正历史，能补先补/已有尽量更新；科创过多文字改图；截图指定沿首页常看样式，把首页常看放首位默认、不再强推中美总览；双均线另对话不处理；延续前轮本机部署授权。
+- 目标/用途: 日常低频宽基/行业ETF观察参与结构、交易活跃和预测变化；当前基线是科创固定池数量曲线、10-30单日权重和行业换手11-06快照。新补数据只改善观察覆盖与读图负担，不新设仓位/买卖规则，不评价收益增量。
+- 分支/基线: codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9 + dirty原样保存；上阶段8000部署回执已核。产品未提交。
+- 冲突决定: panel-v2协调旧active未释放，但实际App线程01a1c061-147b-7dc0-a226-ebc780c63117已读status notLoaded、最后turn completed，11-09已有独立验收；本轮用户明确新布局请求只续改列明前端，不修改其记录/后端。microstructure旧数据不覆盖原件，只发布核通过的新取得版本并留备份。root总控登记，各写者不重叠。
+- UI代理唯一写: ["web/src/components/market-style/StarBreadthSnapshot.tsx", "web/src/components/market-style/StarWeightedBreadthSnapshot.tsx", "web/src/components/market-style/star-breadth.css", "web/src/components/market-style/observation-snapshots.test.mjs", "web/src/components/market-observation-alerts/index.tsx", "web/src/components/market-observation-alerts/indicatorCatalog.ts", "web/src/components/market-observation-alerts/CompactOverview.test.mjs"]。
+- root唯一写: ["web/src/components/market-observation-alerts/selection.ts", "web/public/research/sector-structure-20261115.json", "web/public/research/earnings-revisions-20261115.json", "web/public/research/star-breadth-20261115.json", "web/public/research/star-weighted-breadth-20261030.json", "web/public/research/microstructure-observations-20261108/equity.json", "web/public/research/microstructure-observations-20261108/funding.json", "web/dist/**"]；必要新增SectorStructureCard.tsx/sector-structure.css仅root在核数据协议后实现（不与代理重叠）；报告/元数据登记先保留本阶段产物，不动他人封存结论。
+- 数据代理仅写各自已核外盘目录/Volumes/win+mac通用/LeiSignal-新实验结果/market-observation-refresh-charts-20261115/market-observation-refresh-charts-20261115-20261115T232047-981386133af6/sector、/Volumes/win+mac通用/LeiSignal-新实验结果/market-observation-refresh-charts-20261115/market-observation-refresh-charts-20261115-20261115T232047-981386133af6/earnings和仓外本阶段sector/earnings小证据；不写产品/共享清单，root独立验收后发布。UI代理不联网。
+- 新补数预算: 原institutional-macro public-138/既有6+6、长桥2/价格150及失败保持，不重置。此新用户补数请求单独计账：sector最初能力/成员/融资/更新元数据不超过30来源对象、价格补采最多350股票对象/300MiB；earnings最多30公开/已连接工具对象；每项最多一次必要重试，429/403不绕过不重复失败来源；0收益实验/付费/交易。若有新有效路线需超出，先按剩余必要性登记增量，不假称数据永久不存在。
+- 存储: plan_output实际计划run=market-observation-refresh-charts-20261115-20261115T232047-981386133af6；固定UUID可用，外盘约468GB；本机约0.8GB足够本轮小记录10MiB和增量部署<100MiB。所有原始/日志/构建/临时大产物走外盘；原件不移不改。计划不是科研/交易权限。
+- 验收: 来源原件/哈希/目标期与成员日期，价格和融资同日分母/缺失记录，不把当前名单当历史成员；修正只统计同目标且可比记录，字段全0不当无修正。页面默认首页常看且已有选择字节保持；新增卡可加入/移出并有图；科创数量0—100%趋势与单日权重0—100%并排图，不补造权重历史；文字仅保留影响阅读的日期/有效覆盖及一句用途；完整工程证据不进产品。测试/TS/build/8000HTTP/桌面操作读回后交付。
+- 产物: /Users/yongbiaoli/Documents/ChatGPT/在做中/research-notes/leisignal-market-observation-review-2026-11-15/gemini-followup/refresh-charts-20261115；同一task沿用前阶段历史如下。
+
+## 已封存前阶段记录
+
 # 市场观察本地正式版部署及建议去重（当前阶段）
 
 - task-id: market-observation-weighted-compact-20261115
