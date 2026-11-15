@@ -4,17 +4,19 @@
 - owner: Codex当前chat 01a1de33-42bb-7ce3-b34a-241079e8452d（/root）
 - status: active
 - scope_released: false
-- updated_at: 2026-11-15T23:01:18.787822+08:00
-- checked_coordination_sha: 398be95ef16967c4e9946516c5c84b2d1818edcc
+- updated_at: 2026-11-15T23:06:10.272885+08:00
+- checked_coordination_sha: 29315ab106379d1bd79f53fc7b9c148f6c26157d
 - 已读task-id: 自身、research-dispatch-controller、institutional-macro-gap-20261114、douyin-yangtuoshen-20261113、market-observation-panel-v2-20261109、cross-market-risk-context-20261102、microstructure-observations-20261108、trae-observation-integration-20261108、trae-sector-observation-20261108；已读COORDINATION、AGENTS、web/AGENTS。
 - 本轮授权: 用户明确要求“改动在本地没部署，感觉你部署了我看看”，并要求查所说盈利完整历史、有可用数据先做；另贴Quant建议要求去重借鉴。本阶段授权本机现有看板正式版更新，不是公网发布或策略采用。
 - 基线: codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，共享dirty原样保留；源代码仍未提交，只有协调元数据push。前阶段10文件after-manifest指纹重核一致；当前8000静态版为11-09旧build，5173为当前开发版。
-- 当前唯一共享写范围: web/dist/**（仅root执行构建产物复制及入口切换；原部署文件完整备份，旧哈希assets保留）；不修改其他owner的源码/任务、服务脚本、API、策略/参数、数据原件或默认Git index。只读代理无共享写范围。
+- 当前唯一共享写范围: web/src/components/market-observation-alerts/CompactOverview.tsx（仅新增行业换手率紧凑入口，调用现成cn-industry-turnover，不改其他卡和计算）；web/dist/**（仅root执行构建产物复制及入口切换；原部署文件完整备份，旧哈希assets保留）；不修改其他owner的源码/任务、服务脚本、API、策略/参数、数据原件或默认Git index。只读代理无共享写范围。
 - 冲突决定: panel-v2与microstructure旧记录仍active，本文不占用其源文件、不宣告其完成；只读取现有快照编译，构建前后核全部输入指纹防并发漂移。其余邻接已有释放记录。本轮无第二写者、无源码覆盖、无需重启backend。
 - 验收: 备份/读回旧dist清单；当前生产构建和相关检查；复制时assets与资料先就位、index最后原子替换；HTTP8000入口新hash、所引assets、两份JSON逐字一致和API健康；桌面实际页面展开加权/社融、检查既有自选入口。当前数据资格沿前阶段，不把部署当预测验证。
-- 问题分工: evidence_review只读查既存盈利文件；quant_advice_review只读现有模块与必要原始方法资料；root独立复核及部署。若要新增产品再登记准确范围，现阶段不新增技术阈值/交易动作。
+- 问题分工: evidence_review只读查既存盈利文件；quant_advice_review只读现有模块与必要原始方法资料；root独立复核及部署。若要新增产品再登记准确范围，本次仅增加现有行业换手率入口，不新增技术阈值/交易动作。
 - 存储/代价: 22:57固定外盘identity_ok=true、available=true、约468GB free；内盘约2.5GB足够本轮预计小记录<5MiB、正式dist新增<100MiB。外盘部署备份/构建预计<250MiB，均核登记新结果目录。无删除、强推、付费、交易、新收益回测、追加行情或重置旧预算。
 - 产物: /Users/yongbiaoli/Documents/ChatGPT/在做中/research-notes/leisignal-market-observation-review-2026-11-15/gemini-followup/deployment-20261115；外盘待核后记录精确部署目录。上阶段原始证据、失败和封存结论保留下文历史。
+
+- 新增范围依据: 用户最新附件明确聚焦内部结构和拥挤度、双均线另一个对话负责。现有行业换手率已含通信设备/半导体设备/材料，复用原组件，不把它称为行业成交额份额或全半导体宽度。
 
 ## 已封存前阶段记录（下列“未部署”等表述对应前阶段）
 
