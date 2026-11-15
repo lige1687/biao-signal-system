@@ -2,10 +2,10 @@
 
 - task-id: market-observation-weighted-compact-20261115
 - owner: Codex当前chat 01a1de33-42bb-7ce3-b34a-241079e8452d（/root）
-- status: active
-- scope_released: false
-- updated_at: 2026-11-15T23:58:25.728419+08:00
-- checked_coordination_sha: a71ea84e76f2d4c223fbc20fcda34da6df327653
+- status: completed
+- scope_released: true
+- updated_at: 2026-11-16T00:19:13.080785+08:00
+- checked_coordination_sha: 2865b1f925afda32aac0c25f083f7f38f0f8c0ea
 - 已读task-id: 自身、market-observation-panel-v2-20261109、microstructure-observations-20261108、trae-observation-integration-20261108；沿用本轮已读COORDINATION1.1、research-dispatch-controller及institutional-macro/douyin相关记录。
 - 最新用户授权: 继续找半导体/通信内部宽度、行业融资占比和盈利修正历史，能补先补/已有尽量更新；科创过多文字改图；截图指定沿首页常看样式，把首页常看放首位默认、不再强推中美总览；双均线另对话不处理；延续前轮本机部署授权。
 - 目标/用途: 日常低频宽基/行业ETF观察参与结构、交易活跃和预测变化；当前基线是科创固定池数量曲线、10-30单日权重和行业换手11-06快照。新补数据只改善观察覆盖与读图负担，不新设仓位/买卖规则，不评价收益增量。
@@ -22,6 +22,18 @@
 - 存储: plan_output实际计划run=market-observation-refresh-charts-20261115-20261115T232047-981386133af6；固定UUID可用，外盘约468GB；本机约0.8GB足够本轮小记录10MiB和增量部署<100MiB。所有原始/日志/构建/临时大产物走外盘；原件不移不改。计划不是科研/交易权限。
 - 验收: 来源原件/哈希/目标期与成员日期，价格和融资同日分母/缺失记录，不把当前名单当历史成员；修正只统计同目标且可比记录，字段全0不当无修正。页面默认首页常看且已有选择字节保持；新增卡可加入/移出并有图；科创数量0—100%趋势与单日权重0—100%并排图，不补造权重历史；文字仅保留影响阅读的日期/有效覆盖及一句用途；完整工程证据不进产品。测试/TS/build/8000HTTP/桌面操作读回后交付。
 - 产物: /Users/yongbiaoli/Documents/ChatGPT/在做中/research-notes/leisignal-market-observation-review-2026-11-15/gemini-followup/refresh-charts-20261115；同一task沿用前阶段历史如下。
+
+## 本阶段实际完成与释放
+
+- 用户新补数与常看图形化要求已在本机8000正式版部署；默认首页常看首位，原ERP/全A/标普宽度卡保留。旧用户选择不重置，当前IAB预览经原UI加入五新卡，9项刷新保持；加入/移出/撤销、行业/公司切换、权重20/50/200键盘切换均核读。桌面1440实页及截图，临时viewport已恢复；没有手机验收。
+- 科创数量曲线+有效数量；权重10-30单日四条小图默认50日，可切20/200。宽度配色/标尺与原卡一致；内层两列挤压及分类暂无历史误报已修，重复长文删除。两日/两池不混标。
+- 新取行业当前成员269只（半导体183、通信86）、补价212并复用57，11-13末日60交易日宽度，root独立原件SHA及360窗口复算一致。融资只保留10-26至11-05共9日双所已披露分子/269股完整成交额分母，18行Decimal独算；未列示12/15股身份未知，不称完整行业融资。
+- 三行业换手全段新版至11-13，935点/严格此前756分位独算；材料原11-06未动。新旧历史修订920/6/0条保留，不拼尾。
+- 盈利新取科创50/100目录304/440条、49/50与81/100公司有报告；4股9PDF、5次同团队2027E比较，源内股本矛盾保留。root核PDF/源SHA和目标/EPS文字、算术与目录覆盖。全指数修正广度及首次可得时间继续未知。此前错误候选股本变化3次说法已撤回，当前2次及源内矛盾单列；原件不改。
+- 新源累计行业18/30元数据对象+212/350股票对象、盈利25/30公开对象；旧public-138/两阶段6+6/LB2/150股及失败不重置。新增回测/交易/付费/双均线/计划任务均0。原institutional-macro未完成项仍由原任务负责。
+- 相关工程检查、TS、production build及9项HTTP字节读回通过，517构建输入稳定。从前一部署版本只变本任务17路径，无其他owner增量混入；产品源未提交、远端不可复现，协调push仅元数据。部署备份与旧hash assets保留，不重启服务。
+- 内盘ENOSPC造成截图与一次源写入失败，源未被截断；root按已有storage-recovery授权核无占用，11个npm下载缓存文件47,852,805B先外盘逐SHA备份后移除，仅_cacache，不动_npx/node_modules/环境/raw/源码。小写入恢复，后续截图/构建走外盘。备份/恢复manifest见本轮外盘storage-recovery-npm/manifest.json。
+- 报告docs/experiments/market-structure-data-refresh-2026-11-15.md已在registry数据与质量/mixed登记，仅新增本条并核原entries逐项保持。完整合同/备份/源账本/独算/验证/部署/截图/交付见仓外refresh-charts-20261115/delivery.md、stage-state.json、deployment-receipt.json；原始新源与最终候选在其storage-plan固定外盘run。全部本阶段写范围释放，无后台任务。
 
 ## 已封存前阶段记录
 
