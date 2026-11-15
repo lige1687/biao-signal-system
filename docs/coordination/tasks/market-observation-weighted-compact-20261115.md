@@ -2,10 +2,10 @@
 
 - task-id: market-observation-weighted-compact-20261115
 - owner: Codex当前chat 01a1de33-42bb-7ce3-b34a-241079e8452d（/root）
-- status: active
-- scope_released: false
-- updated_at: 2026-11-15T16:27:36.108242+08:00
-- checked_coordination_sha: ceac502ecaa68c66be05094b187b0e03cc081ce7
+- status: completed
+- scope_released: true
+- updated_at: 2026-11-15T16:46:15.892739+08:00
+- checked_coordination_sha: c7cc0202ae58abc2a5557735e9109f05e2c199c4
 - 已读task-id: institutional-macro-gap-20261114、douyin-yangtuoshen-20261113；已读COORDINATION.md及AGENTS.md、web/AGENTS.md。
 - 冲突决定: 原institutional-macro已明确scope_released=true；douyin最新阶段仅研究文档且已释放。不修改这些原任务记录、冻结研究及其预算。此为用户当前明确委托的本地展示后续，独立小记录在仓外，仅本地产品改动。
 - 工作分支: codex/factor-unit-research-20260915；基础完整commit 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9；当前大量未提交改动，逐文件备份后只修改清单路径，不reset/clean/stash。不提交产品、不部署，最近成果提交不适用（仅本地）。
@@ -28,6 +28,14 @@
 - 原始证据: /Volumes/win+mac通用/LeiSignal-新实验结果/institutional-macro-gap-20261114/source-continuation-20261115-101905-a691db69（只读）。新小记录/合同/报告: /Users/yongbiaoli/Documents/ChatGPT/在做中/research-notes/leisignal-market-observation-review-2026-11-15/gemini-followup。
 - 待完成: 取得Gemini完整新答并由主控复核→把本记录改active并核远端→备份准确文件并实现最小展示→相关验证与桌面查看→交付并释放范围。Gemini若有实质异议先核证，不照单执行；缺数据的项保留未知，不扩展收益研究。
 
-## Gemini有效审阅后启用本地写范围
+## 完成与释放
 
-原对话已得到完整新答，当前4 Argon/高（最高可选等级）由菜单确认；Gemini明确“当前方案不存在阻止Codex开展本地最小展示的实质性障碍”，认可10-30权重对照和分母限定、三层盈利能力。主控采纳全部行显示有效权重/站上者原始权重、盈利覆盖下沉；不采用新设99%阈值、未核沪深300同日B50、对资金身份/均线排列/免费来源不存在的过度断言，已回告Gemini继续简短复核。四核心图不改计算，所有数据只复用已存合格结果。
+- status: completed；scope_released: true。已完成用户当前授权的Gemini讨论、真实数据能力核查、最小本地展示与桌面验收；不宣称原institutional-macro其他未完成研究已完成。
+- Gemini4 Argon/高（最高可选）两轮有效完整回复；第二轮明确认可收窄范围。最终三入口、盈利下钻、六组单日权重双分母与社融1—10月小图一致。
+- 原始盈利142条核验、50/50及92/100覆盖；指数历史修正广度继续未知。原资料/预算/失败保持；本阶段新增金融来源0、行情0、新收益回测0。
+- 产品实际改10个已列路径（8个前端文件、2个新显示JSON）；6个旧文件有字节备份。主控按前后差异与原始数据独立验收；两句口径修订后主控仅移除社融重复标题/孤立CSS，无新增范围。
+- 相关Node检查、TypeScript、不覆盖dist的Vite构建、仓库归置均通过；旧SSR路由警告保留。实际桌面检查首屏、科创权重表、盈利覆盖及社融零起轴/空月。没有手机验收。
+- 成果仍仅本地未提交产品、未部署；沿用codex/factor-unit-research-20260915工作区。协调提交不代表可在远端重现本地未提交UI。
+- 新小记录及最终交付：/Users/yongbiaoli/Documents/ChatGPT/在做中/research-notes/leisignal-market-observation-review-2026-11-15/gemini-followup/delivery.md；同目录有Gemini意见、数据能力、合同、before/after指纹、product-diff.patch与verification.json。
+- 当前无剩余必需工作。真实历史成员/连续权重、盈利修正完整版本和预测/账户增量未评价，需新的合格资料或新用途问题，不在本轮继续换参数或追加收益实验。
+
