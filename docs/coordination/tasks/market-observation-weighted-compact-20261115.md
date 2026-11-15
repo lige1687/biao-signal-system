@@ -2,10 +2,10 @@
 
 - task-id: market-observation-weighted-compact-20261115
 - owner: Codex当前chat 01a1de33-42bb-7ce3-b34a-241079e8452d（/root）
-- status: active
-- scope_released: false
-- updated_at: 2026-11-15T23:06:42.518309+08:00
-- checked_coordination_sha: 50b9a88ddd7933cb52f997cb34bfa8e7b77055bf
+- status: completed
+- scope_released: true
+- updated_at: 2026-11-15T23:14:12.808140+08:00
+- checked_coordination_sha: 8915c082f220824725b6d9ce8976c66d65b63ffa
 - 已读task-id: 自身、research-dispatch-controller、institutional-macro-gap-20261114、douyin-yangtuoshen-20261113、market-observation-panel-v2-20261109、cross-market-risk-context-20261102、microstructure-observations-20261108、trae-observation-integration-20261108、trae-sector-observation-20261108；已读COORDINATION、AGENTS、web/AGENTS。
 - 本轮授权: 用户明确要求“改动在本地没部署，感觉你部署了我看看”，并要求查所说盈利完整历史、有可用数据先做；另贴Quant建议要求去重借鉴。本阶段授权本机现有看板正式版更新，不是公网发布或策略采用。
 - 基线: codex/factor-unit-research-20260915@18e64fa632dba5dbad0e5fcae09b4ccc75f119a9，共享dirty原样保留；源代码仍未提交，只有协调元数据push。前阶段10文件after-manifest指纹重核一致；当前8000静态版为11-09旧build，5173为当前开发版。
@@ -17,6 +17,14 @@
 - 产物: /Users/yongbiaoli/Documents/ChatGPT/在做中/research-notes/leisignal-market-observation-review-2026-11-15/gemini-followup/deployment-20261115；外盘待核后记录精确部署目录。上阶段原始证据、失败和封存结论保留下文历史。
 
 - 新增范围依据: 用户最新附件明确聚焦内部结构和拥挤度、双均线另一个对话负责。现有行业换手率已含通信设备/半导体设备/材料，复用原组件，不把它称为行业成交额份额或全半导体宽度。
+
+## 本阶段完成与释放
+
+- 实际已部署本机现有8000静态站；入口index-DrXQ25Tn.js/index-DK6VL8WG.css。9个资源/接口请求200且与文件逐字一致；原110个部署文件完整备份并核SHA，旧hash assets保留，入口最后原子替换。无需重启服务。
+- 最后增加2个小变更：行业换手率直达及已有半导体BK1036下拉选项；没有改双均线或任何交易参数。相关15项检查、TS、真实生产构建、归置通过。511个构建输入前后指纹未变。
+- 实际桌面8000验收四核心、科创六组加权/有效分母、社融5.24%及缺月、新入口打开行业卡并切到半导体3.63%/82.4%；恢复首页总览，IAB验收页保留供用户看。截图和deployment-receipt.json在本阶段目录。
+- 盈利新完整历史仍未找到；用户也不知文件。微软347段缺目标期且三机构计数全零，继续只展示覆盖与修正未知。半导体/通信真正同池宽度、行业成交占比/融资占比缺资料；静态行业换手不能替代。
+- 外部建议重复对照、关键纠错、已有负结果与增量边界在quant-sector-review.md。策略、交易、回测、自动更新均无变更。产品源与最终清单仍仅本地未提交；协调push不代表源可远端复现。全部本阶段写范围释放。
 
 ## 已封存前阶段记录（下列“未部署”等表述对应前阶段）
 
