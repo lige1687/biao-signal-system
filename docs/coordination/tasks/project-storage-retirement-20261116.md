@@ -1,3 +1,17 @@
+# 已归档并退役5个历史协调副本 — completed
+
+- task-id project-storage-retirement-20261116；owner原root；status completed；scope_released=true（仅本批5个准确路径）。checked_coordination_sha d5d001bd10d983794ca9a1b3b27385b9606a6186；checked_at 2026-11-16T19:45:55.426810+08:00。交付前重新fetch，已读COORDINATION、自身、原5研究owner及mac/storage/dispatch当前段，本轮没有其他人变更；未接管旧研究或代改其状态。
+- 用户明确批准后，5项移除前重新核完整archive SHA、每个源文件SHA/类型/权限/原inode/时间/扩展属性、无新增/ignored、HEAD与远端祖先、同固定外盘、全lsof无句柄；全部通过。仅正常git worktree remove，无force，5项返回0、源目录及注册均消失。外盘5个完整tar/manifest/恢复说明持续保留。
+- 精确本机目录原统计10083401728B（约9.39GiB）。5个移除窗口可用空间净增合计10268688384B（约9.56GiB），包含其他进程并行变化，不能当隔离归因。整轮基线748642304B→12025278464B，19:45:11+08:00复核11992940544B（约11.17GiB）；报告准确测值，不把所有自然回收归因本次。外盘身份正确，4登记资源available。
+- 主HEAD 18e64fa632dba5dbad0e5fcae09b4ccc75f119a9、主index SHA6b819c0137dccd3c77178ec5e86fc9a7880f7d5e969499582849ea043b89771d及主tracked status逐字不变；其余53个工作树注册/HEAD/分支逐项保持。主项目web HTTP200、/api/health HTTP200且status ok；未重启服务、改数据库、生产、参数、源码或依赖。
+- 恢复证据仅外盘个人资料归档/LeiSignal-项目副本整理-20261116-193141：backup-receipts.json、5 manifests、RESTORE.txt、removal-baseline/removal-receipts/removal-summary、controller-verification、授权和原阶段备份。初期备份的元数据API/类型位比对停止、协调发布的相对index路径停止均保留历史；停止时未移除源，修正核验后才执行。
+- 恢复需先核同UUID/完整SHA及本机余量，重新建立worktree再排除旧.git指针解包；需要继续旧任务时恢复到本机。此处只核完整档案内容和元数据，未在本机全量解包演练，不承诺其他电脑现成可运行。
+- 当前没有待删单元或后台进程。其余含未提交代码、冻结研究、环境、会话、活动DB或用途未知对象保持，不为扩大清理量继续处理。无研究/费用预算重置、市场实验、交易、部署、通知或定时任务。无源码成果提交，唯一远端写入为本协调元数据；大包和私人原件不Git。
+
+---
+
+## 开始记录（保留）
+
 # LeiSignal历史协调副本归档与本机退役
 
 - task-id: project-storage-retirement-20261116；owner: 本用户对话 01a1e41b-e681-70e0-ab99-177ed8708f91/root；status: active；scope_released: false。
