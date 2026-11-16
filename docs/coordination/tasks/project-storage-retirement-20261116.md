@@ -1,3 +1,19 @@
+# 第二批内外盘整理完成 — completed
+
+- 同task-id project-storage-retirement-20261116/原root；status completed；scope_released=true仅本轮已列精确对象。checked_coordination_sha 79ebdcbf96b586e5accc31730e53055c91739e18；checked_at 2026-11-16T20:10:12.940677+08:00。交付前fetch/read自身、原相关owner沿本轮已读，远端没有其他新变更。0接管原研究。
+- 内盘：4个闲置开发checkout仅排除与主项目同路径逐文件SHA完全相同且可从原HEAD逐字重建的raw子目录，重复内容7604694218B。risk-shape/lei-setup各214目录，publish/handoff各216目录；后两者9/10个不同或唯一目录保留。四者Git status clean，HEAD/源码与其他tracked文件内容保持，lei-setup两pyc原inode保持。主Git HEAD/index/config/tracked status不变；全部Git alternate链的4个仓库仍能读取HEAD对象。不整仓删，不挪Git对象或冻结主路径。恢复用各目录git sparse-checkout disable；完整Git archive恢复流全部内容已经逐文件验过，不是只检查对象存在。
+- 外盘：自建5恢复tar共10052392960B→tar.zst共2156264083B，省7896128877B。每个压缩包完整解压读取后tar SHA与原已验tar相同，压缩包SHA再核；核源未变/无句柄后才删原tar。5个恢复包和全部manifests保留，原RESTORE.txt、plan与索引改为当前压缩路径，旧记录备份留round2-cleanup/before-zstd-*。
+- 外盘精确重复安装缓存：已各保留一份，移除643626938B和630758836B两项，共1274385774B；主控独立核原收据、四SHA相同组、无占用/源稳定，删除后保留件再核SHA。旧位置旁新增.duplicate-removed.json说明精确替代路径，不改原历史收据。合计名义减9170514651B，本轮外盘净空间实际变化见final-summary.json；其他进程可能同时写盘，不做隔离归因。
+- 主控新鲜验收：5个压缩包文件SHA、2个保留包SHA、4个源tree clean/代码保护、main index/config/HEAD/status、Git alternate对象读取、web HTTP200和/api/health ok、固定UUID及4资源available均通过。内盘可用25677492224 B，外盘可用466730090496 B（各自为2026-11-16T20:10:12.940677+08:00时附近快照）。
+- 一次补充rsync目录检查发生UTF8输出解码失败，后续单文件对已缩减源的查询因文件已收掉失败；另一个未处理baseline的rsync dry-run提示传输，但独立SHA实际相同，故rsync未作为删除依据。所有删除依据均是逐文件SHA、原Git恢复流、状态与占用检查。失败/诊断保留，不标绿。
+- 同一个Luna/low只读助手盘点已完成，write_paths=[]，无网络/写入；其两组重复包回调由主控重核。v1合同路径预检失败0派发；v2规范相对文件系统路径后ready、1次实际派发，1次同助手交付补齐；未替换模型。真实费用未知。
+- 唯一私人微信3个TAR、41.4GiB原始研究资料大包、约36GiB视频库、冻结失败和原件、活动环境/DB/会话、所有未提交或未知副本保持。原失败微信ZIP已在旧任务处理，不重删。无新金融实验/交易/部署/付费工具安装/云上传/后台任务；无源码变更。
+- 产物：私有归档根round2-cleanup/final-summary.json、thin/压缩/重复包回执、逐文件重复计划、恢复指令、controller-final-check；本轮仅协调元数据上Git。当前没有待执行删除单元或后台进程。
+
+---
+
+## 第二批开始与第一批历史
+
 # 内外盘第二批安全整理 — active
 
 - 同task-id project-storage-retirement-20261116/原root；status active；scope_released=false仅本轮新范围。用户追加“还有其他可迁移或者删除的吗”“外盘也是看看有能删的删一下”“可以借助一些外部优秀工具哈”，确认无用冗余可清理的授权延续；不扩到唯一资料/冻结原件/活动环境。
