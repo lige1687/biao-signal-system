@@ -1,3 +1,19 @@
+# 内外盘第二批安全整理 — active
+
+- 同task-id project-storage-retirement-20261116/原root；status active；scope_released=false仅本轮新范围。用户追加“还有其他可迁移或者删除的吗”“外盘也是看看有能删的删一下”“可以借助一些外部优秀工具哈”，确认无用冗余可清理的授权延续；不扩到唯一资料/冻结原件/活动环境。
+- checked_coordination_sha 76880cb2bdf620095272bf0a54ced07c62081b36；checked_at 2026-11-16T20:00:08.087385+08:00。已读自身及lei-coordination-bootstrap、risk-shape-information、remote-core-review当前段，原五研究owner、storage和dispatch沿本轮已读。原remote-core-review仍paused，不恢复研究。
+- 本轮唯一写入候选：自有归档根round2-cleanup的工具/计划/回执；本轮自建5个tar在同盘压缩为tar.zst（完整解压SHA与原tar SHA相同后才删原tar，并更新自有恢复索引）；外盘两组已精确hash相同的闲置Trae更新包各移除1份、保留另1份并写原目录精确替代位置说明；内盘下列4个闲置checkout只收掉与主项目权威路径逐文件相同的已提交raw目录，通过Git sparse-checkout保留所有源码、Git对象/alternate依赖、非重复资料与配置。当前仅盘点，具体目录清单和字节/恢复方式必须在执行前落盘和核验。
+- 内盘候选：.codex/worktrees/risk-shape-coordination、.codex/worktrees/lei-coordination-setup、.biao/remote-astra-acceptance-20261002/publish、同前缀handoff。四者clean；lei-setup仅2个可再生pyc，其余ignored=0。发现publish/handoff及coordination通过Git alternate互相依赖，因此不整仓删除、不搬.git、不处理未提交checkout/restore等目录。只有逐目录确认所有普通文件与主树同路径字节相同才排除；任何唯一/修改/不明文件保留，保留公共依赖和精确恢复指令。
+- 外盘重复组A：个人资料归档/breadth-idle-update-cache-20261105T194320下0-update.zip与1-TRAE_CN-darwin-arm64.zip，各643626938B SHA5a3bbe67084f31a6d9515288203a7fde3a63f4be56467ba97a8ffec5ed384991。组B：focus-space-recovery-20261104T2218/Trae-CN-3.4.14-duplicate-update.zip与breadth-refresh-space-20261105T185457/Trae-CN-update.zip，各630758836B SHAa754e35948f616b7b3cc339286676bde6e5a0d75a868e58799851f1ccc324cc3。主控须独立重核收据和hash，不能仅据助手回调删除。
+- 助手external_storage_inventory实际gpt-6-luna/low，合同v2 dry_run ready，write_paths=[]/network=false；只读盘点完成。v1绝对路径检查拒绝、0派发；v2明示文件系统根的相对路径表，权限不变后才实际派发。同一助手一次交付补齐全路径/完整SHA。主控独立验收并执行所有写入，无其他代理写者。
+- 验收：固定UUID、路径/源稳定、全句柄检查；内容保持、原包或对应唯一副本保护；压缩解压hash；内盘main HEAD/index/脏改不变、其余Git对象与alternate可读、来源代码hash不变、排除目录全能从原HEAD无网恢复；内外盘实测容量，web/API和4资源检查。仅存储操作，无新研究、交易、生产部署、付费工具安装或云上传。
+- 保护：约41.4GiB lowfreq bulk来源PDF/研究证据、约36GiB视频库、微信/个人唯一恢复TAR及冻结科研失败材料一律不动。失败partial微信ZIP已由原任务删除，不重删。仅已有zstd/rsync/系统工具，无后台清理。
+- 下一步：本范围普通push读回后执行上述授权内必要核验和处理，保存具体前后量与恢复说明，随后结案。
+
+---
+
+## 第一批完成记录
+
 # 已归档并退役5个历史协调副本 — completed
 
 - task-id project-storage-retirement-20261116；owner原root；status completed；scope_released=true（仅本批5个准确路径）。checked_coordination_sha d5d001bd10d983794ca9a1b3b27385b9606a6186；checked_at 2026-11-16T19:45:55.426810+08:00。交付前重新fetch，已读COORDINATION、自身、原5研究owner及mac/storage/dispatch当前段，本轮没有其他人变更；未接管旧研究或代改其状态。
